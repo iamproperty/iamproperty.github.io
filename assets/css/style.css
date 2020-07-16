@@ -1,0 +1,19 @@
+@font-face {
+  font-family: 'qanelasmedium';
+  src: url("../fonts/radomir_tinkov_-_qanelas-medium-webfont.eot");
+  src: url("../fonts/radomir_tinkov_-_qanelas-medium-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/radomir_tinkov_-_qanelas-medium-webfont.woff2") format("woff2"), url("../fonts/radomir_tinkov_-_qanelas-medium-webfont.woff") format("woff"), url("../fonts/radomir_tinkov_-_qanelas-medium-webfont.svg#qanelasmedium") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'qanelas_softextrabold';
+  src: url("../fonts/radomir_tinkov_-_qanelassoft-extrabold-webfont.eot");
+  src: url("../fonts/radomir_tinkov_-_qanelassoft-extrabold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/radomir_tinkov_-_qanelassoft-extrabold-webfont.woff2") format("woff2"), url("../fonts/radomir_tinkov_-_qanelassoft-extrabold-webfont.woff") format("woff"), url("../fonts/radomir_tinkov_-_qanelassoft-extrabold-webfont.svg#qanelas_softextrabold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+h1 {
+  font-family: 'qanelas_softextrabold'; }
+
+h2 {
+  font-family: 'qanelasmedium'; }
