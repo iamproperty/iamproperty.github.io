@@ -1,0 +1,58 @@
+*,
+*::before,
+*::after {
+    margin:0;
+    padding:0;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body{
+    box-sizing: border-box;
+    font-size: 1.6rem;
+    line-height: 1.7;
+    font-family: 'qanelasmedium';
+}
+
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    display: flex;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.deep-slate-bg {
+    background-color: $deep-slate;
+}
+
+.soft-green-bg {
+    background-color: $soft-green;
+}
+
+.homely-aubergine-bg {
+    background-color: $homely-aubergine;
+}
+
+.soft-pink-bg {
+    background-color: $soft-pink;
+}
+
+.grey-70-bg {
+    background-color: $grey-70;
+}
+
+.grey-50-bg {
+    background-color: $grey-50;
+}
+
+.fresh-blue-bg {
+    background-color: $fresh-blue;
+}
+
+.punchy-mustard-bg {
+    background-color: $punchy-mustard;
+}

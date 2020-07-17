@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/dracula-prism/css/dracula-prism.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/vendor/prism.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <title>I Am Property Component Library</title>
 </head>
@@ -13,22 +15,22 @@
     </header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col">
-                <h3>Foundations</h3>
+            <div class="col-sm-3 col-md-3">
+                <h4>Foundations</h4>
                 <nav>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Colour</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Grid System</a>
+                            <a class="nav-link" href="#color-section">Colour</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#type-section">Typography</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Grid System</a>
+                        </li>
                     </ul>
                 </nav>
-                <h3>Components</h3>
+                <h4>Components</h4>
                 <nav>
                     <ul class="nav flex-column">
                         <li class="nav-item">
@@ -58,17 +60,128 @@
                     </ul>
                 </nav>
             </div>
-            <div class="col-9">
+            <div class="col-sm-9 col-md-9">
                 <!-- Begin Colour -->
-                <section class="colour-section">
-                    <h2>Colour</h2>
-                </section>
-                <!-- End Colour -->
-                <!-- Begin Grid System -->
-                <section class="grid-system-section">
-                    <h2>Grid System</h2>
-                </section>
-                <!-- End Grid System -->
+                <section class="colour-section" id="color-section">
+                    <h4>Colour</h4>
+                    <p>Our colour palette will help us create a distinctive identity and plays an 
+                        important part in building brand recognition. It should be used within all
+                        designs and communications.
+                    </p>
+                    <p>A combination of these colours should be used on every application although
+                        it is not necessary for all colours to appear on every piece of communication.
+                    </p>
+                    <p>
+                        White is an important part of our palette too. it creates the space for our 
+                        communications to breathe and a canvas where our colours come to life.
+                    </p>
+                    <div class="row">
+                        <div class="col d-flex">
+                            <div class="circle deep-slate-bg">
+
+                            </div>
+                            <div class="colour-description">
+                                <h5>Deep slate</h5>
+                                <ul class="list-unstyled">
+                                    <li>$deep-slate</li>
+                                    <li>#00313C</li>
+                                    <li>RGB(0,49,60)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col d-flex">
+                            <div class="circle soft-green-bg">
+
+                            </div>
+                            <div class="colour-description">
+                                <h5>Soft green</h5>
+                                <ul class="list-unstyled">
+                                    <li>$soft-green</li>
+                                    <li>#b4e6a5</li>
+                                    <li>RGB(180,230,165)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col d-flex">
+                            <div class="circle homely-aubergine-bg">
+
+                            </div>
+                            <div class="colour-description">
+                                <h5>Homely aubergine</h5>
+                                <ul class="list-unstyled">
+                                    <li>$homely-aubergine</li>
+                                    <li>#46003C</li>
+                                    <li>RGB(70,0,60)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col d-flex">
+                            <div class="circle soft-pink-bg">
+
+                            </div>
+                            <div class="colour-description">
+                                <h5>Soft pink</h5>
+                                <ul class="list-unstyled">
+                                    <li>$soft-pink</li>
+                                    <li>#ffd2d2</li>
+                                    <li>RGB(255,210,210)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col d-flex">
+                            <div class="circle grey-70-bg">
+
+                            </div>
+                            <div class="colour-description">
+                                <h5>70% Grey</h5>
+                                <ul class="list-unstyled">
+                                    <li>$grey-70/li>
+                                    <li>#6f6f6f</li>
+                                    <li>RGB(111,111,111)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col d-flex">
+                            <div class="circle grey-50-bg">
+
+                            </div>
+                            <div class="colour-description">
+                                <h5>50% Grey</h5>
+                                <ul class="list-unstyled">
+                                    <li>$grey-50</li>
+                                    <li>#9d9d9d</li>
+                                    <li>RGB(157,157,157)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col d-flex">
+                            <div class="circle fresh-blue-bg">
+
+                            </div>
+                            <div class="colour-description">
+                                <h5>Fresh blue</h5>
+                                <ul class="list-unstyled">
+                                    <li>$fresh-blue</li>
+                                    <li>#1ebee6</li>
+                                    <li>RGB(30,190,230)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col d-flex">
+                            <div class="circle punchy-mustard-bg">
+
+                            </div>
+                            <div class="colour-description">
+                                <h5>Punchy mustard</h5>
+                                <ul class="list-unstyled">
+                                    <li>$punchy-mustard</li>
+                                    <li>#ffa500</li>
+                                    <li>RGB(255,165,0)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section> <!-- End Colour -->
                 <!-- Begin Typography -->
                 <section class="typography-section" id="type-section">
                     
@@ -90,9 +203,18 @@
                         <h3>Paragraphs</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati corporis vero consequuntur numquam officia. Fugiat unde distinctio, soluta perferendis magnam ullam veniam, fugit iure, beatae dolorum accusantium delectus nemo dolores!</p>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, temporibus tenetur! Deserunt suscipit officiis fugit eveniet cupiditate ex voluptas eius, id aperiam corrupti error ducimus cum architecto nesciunt, alias voluptatum.</p>
+                        <pre><code class="language-css">p { color: red }
+
+
+
+                        </code></pre>
                     </div> 
+                </section> <!-- End Typography -->
+                <!-- Begin Grid System -->
+                <section class="grid-system-section">
+                    <h2>Grid System</h2>
                 </section>
-                <!-- End Typography -->
+                <!-- End Grid System -->
                 <!-- Begin Buttons -->
                 <section class="buttons-section" id="btn-section">
                     <h2>Buttons</h2>
@@ -140,5 +262,89 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <script src="assets/js/vendor/prism.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+
+    <script>
+    
+    (function(){
+	if (typeof self === 'undefined' || !self.Prism || !self.document) {
+		return;
+	}
+
+	if (!Prism.plugins.toolbar) {
+		console.warn('Copy to Clipboard plugin loaded before Toolbar plugin.');
+
+		return;
+	}
+
+	var ClipboardJS = window.ClipboardJS || undefined;
+
+	if (!ClipboardJS && typeof require === 'function') {
+		ClipboardJS = require('clipboard');
+	}
+
+	var callbacks = [];
+
+	if (!ClipboardJS) {
+		var script = document.createElement('script');
+		var head = document.querySelector('head');
+
+		script.onload = function() {
+			ClipboardJS = window.ClipboardJS;
+
+			if (ClipboardJS) {
+				while (callbacks.length) {
+					callbacks.pop()();
+				}
+			}
+		};
+
+		script.src = 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js';
+		head.appendChild(script);
+	}
+
+	Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (env) {
+		var linkCopy = document.createElement('button');
+		linkCopy.textContent = 'Copy';
+
+		var element = env.element;
+
+		if (!ClipboardJS) {
+			callbacks.push(registerClipboard);
+		} else {
+			registerClipboard();
+		}
+
+		return linkCopy;
+
+		function registerClipboard() {
+			var clip = new ClipboardJS(linkCopy, {
+				'text': function () {
+					return element.textContent;
+				}
+			});
+
+			clip.on('success', function() {
+				linkCopy.textContent = 'Copied!';
+
+				resetText();
+			});
+			clip.on('error', function () {
+				linkCopy.textContent = 'Press Ctrl+C to copy';
+
+				resetText();
+			});
+		}
+
+		function resetText() {
+			setTimeout(function () {
+				linkCopy.textContent = 'Copy';
+			}, 5000);
+		}
+	});
+})();
+    </script>
 </body>
 </html>
