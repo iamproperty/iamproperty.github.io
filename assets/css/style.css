@@ -10,8 +10,8 @@ html {
 
 body {
   box-sizing: border-box;
-  font-size: 1.6rem;
-  line-height: 1.5;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
   font-family: 'qanelasmedium';
   color: #6f6f6f; }
 
@@ -62,8 +62,37 @@ body {
   font-style: normal; }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "qanelas_softextrabold";
+  font-family: "qanelas_softextrabold"; }
+
+h1 {
+  font-size: 10rem; }
+
+h2 {
+  font-size: 6rem; }
+
+h3 {
+  font-size: 4.2rem; }
+
+h4 {
+  font-size: 2.8rem; }
+
+h5 {
+  font-size: 1.8rem; }
+
+a {
+  color: #1ebee6; }
+
+a:hover {
+  color: #46003C; }
+
+section h3 {
+  color: #b4e6a5; }
+
+.colour-description h5 {
   color: #00313C; }
+
+.small {
+  font-size: 1.4rem; }
 
 .mb3 {
   margin-bottom: 3rem; }
