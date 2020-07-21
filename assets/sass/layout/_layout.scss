@@ -1,10 +1,24 @@
 header {
     position: relative;
 }
+.paragraph-wrap {
+    margin: 30px 0;
+}
+
+.nav-links {
+    
+
+    .nav-item {
+        a:hover {
+            background-color: $fresh-blue;
+            color: white;
+        }
+    }
+}
 
 .section-nav {
     margin-bottom: 2rem;
-    border-bottom: 1px solid $grey-50;
+
 }
 .sub-section {
     margin-bottom: 5rem;
@@ -43,6 +57,13 @@ header {
 }
 .hamburger > div:after {
     top:10px;
+}
+.copy-item {
+    margin: 4rem 0;
+    &__copy-data {
+        color: $soft-green;
+        
+    }
 }
 
 @media only screen and (max-width:767px) {
