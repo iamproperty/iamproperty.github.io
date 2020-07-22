@@ -1,14 +1,18 @@
 header {
     position: relative;
+
+    span {
+        font-family: $header-font;
+    }
 }
 .paragraph-wrap {
     margin: 30px 0;
 }
 
 .nav-links {
-    
-
     .nav-item {
+        margin-bottom: 5px;
+
         a:hover {
             background-color: $fresh-blue;
             color: white;
@@ -19,10 +23,19 @@ header {
 .section-nav {
     margin-bottom: 2rem;
 
+    .nav-item {
+
+        a:hover {
+            color: $punchy-mustard;
+        }
+
+    }
 }
+
 .sub-section {
     margin-bottom: 5rem;
 }
+
 .hamburger {
     display: none;
     position: absolute;
@@ -45,6 +58,7 @@ header {
     background-color: $grey-50;    
     cursor: pointer;
 }
+
 .hamburger > div:before,
 .hamburger > div:after {
     content: '';
@@ -55,9 +69,11 @@ header {
     background-color: $grey-50;
     width: 100%;
 }
+
 .hamburger > div:after {
     top:10px;
 }
+
 .copy-item {
     margin: 4rem 0;
     &__copy-data {
@@ -67,13 +83,16 @@ header {
 }
 
 @media only screen and (max-width:767px) {
+
     .nav-links {
         height: 0;
         overflow: hidden;
     }
+
     .show-nav-links {
         height: auto;
     }
+
     .hamburger {
         display: flex;
     }

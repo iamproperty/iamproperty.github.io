@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/dracula-prism/css/dracula-prism.css">
     <link rel="stylesheet" type="text/css" href="assets/css/vendor/prism.css" />
@@ -10,8 +11,9 @@
     <title>I Am Property Component Library</title>
 </head>
 <body>
-    <header>
+    <header class="d-flex align-items-center">
         <img src="assets/img/logo.png" alt="I Am Property" width="" height="120" />
+        <span> Style Library</span>
         <div class="hamburger"><div></div></div>
     </header>
     <div class="container-fluid">
@@ -202,16 +204,18 @@
                         <li class="nav-item"><a class="nav-link" href="#paragraphs">Paragraphs</a></li>
                     </uL>
                     <div class="sub-section" id="intro">
-                        <h5>Introduction</h5>
-                        <p>Setting a tone through our typographic styling. The form of our letters says a lot about who we are. </p>    
+                        <h4>Introduction</h4>
+                        <p class="mb5">Setting a tone through our typographic styling. The form of our letters says a lot about who we are. </p>    
                     
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3>Headlines</h3>
-                                <p>A confident but welcoming typeface with subtle rounded corners making it more approachable.</p>
+                        <div class="row mb5">
+                            <div class="col-md-6 d-flex flex-column justify-content-center">
+                                
+                                <h4>Headlines</h4>
+                                <h5 class="soft-green">A confident but welcoming typeface with subtle rounded corners making it more approachable.</h5>
                             </div>
                             <div class="col-md-6">
-                                <h3>Qanelas Soft</h3>
+                                <h4>Qanelas Soft</h4>
+                                <h1>abcde</h1>
                                 <h5>ABCDEFGHIJKLMANOPQRSTUVWXYZ</h5>
                                 <h5>abcdefghijklmnopqrstuvwxyz</h5>
                                 <h5>1234567890!@£$%^&*()</h5>
@@ -219,21 +223,22 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <h3>Body Copy</h3>
-                                <p>A slimmer highly legible typeface for the body copy. It has a graphical tie back to the headline display face creating cohesion on the page. </p>
+                            <div class="col-md-6 d-flex flex-column justify-content-center">
+                                <h4>Body Copy</h4>
+                                <h5 class="soft-green">A slimmer highly legible typeface for the body copy. It has a graphical tie back to the headline display face creating cohesion on the page. </h5>
                             </div>
                             <div class="col-md-6">
-                                <h3>Qanelas Medium</h3>
-                                <h5>ABCDEFGHIJKLMANOPQRSTUVWXYZ</h5>
-                                <h5>abcdefghijklmnopqrstuvwxyz</h5>
-                                <h5>1234567890!@£$%^&*()</h5>
+                                <h4 class="alt-header-font">Qanelas Medium</h4>
+                                <h1 class="alt-header-font">abcde</h1>
+                                <h5 class="alt-header-font">ABCDEFGHIJKLMANOPQRSTUVWXYZ</h5>
+                                <h5 class="alt-header-font">abcdefghijklmnopqrstuvwxyz</h5>
+                                <h5 class="alt-header-font">1234567890!@£$%^&*()</h5>
                             </div>
                         </div>
                     
                     </div>
                     <div class="sub-section" id="type-scale">
-                        <h5>Type Scale</h5>
+                        <h4>Type Scale</h4>
                         
                         <div class="copy-item">
                             <p class="small">Body copy small</p>
@@ -301,87 +306,6 @@
     
     <script src="assets/js/vendor/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
-
-    <script>
-    
-    (function(){
-	if (typeof self === 'undefined' || !self.Prism || !self.document) {
-		return;
-	}
-
-	if (!Prism.plugins.toolbar) {
-		console.warn('Copy to Clipboard plugin loaded before Toolbar plugin.');
-
-		return;
-	}
-
-	var ClipboardJS = window.ClipboardJS || undefined;
-
-	if (!ClipboardJS && typeof require === 'function') {
-		ClipboardJS = require('clipboard');
-	}
-
-	var callbacks = [];
-
-	if (!ClipboardJS) {
-		var script = document.createElement('script');
-		var head = document.querySelector('head');
-
-		script.onload = function() {
-			ClipboardJS = window.ClipboardJS;
-
-			if (ClipboardJS) {
-				while (callbacks.length) {
-					callbacks.pop()();
-				}
-			}
-		};
-
-		script.src = 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js';
-		head.appendChild(script);
-	}
-
-	Prism.plugins.toolbar.registerButton('copy-to-clipboard', function (env) {
-		var linkCopy = document.createElement('button');
-		linkCopy.textContent = 'Copy';
-
-		var element = env.element;
-
-		if (!ClipboardJS) {
-			callbacks.push(registerClipboard);
-		} else {
-			registerClipboard();
-		}
-
-		return linkCopy;
-
-		function registerClipboard() {
-			var clip = new ClipboardJS(linkCopy, {
-				'text': function () {
-					return element.textContent;
-				}
-			});
-
-			clip.on('success', function() {
-				linkCopy.textContent = 'Copied!';
-
-				resetText();
-			});
-			clip.on('error', function () {
-				linkCopy.textContent = 'Press Ctrl+C to copy';
-
-				resetText();
-			});
-		}
-
-		function resetText() {
-			setTimeout(function () {
-				linkCopy.textContent = 'Copy';
-			}, 5000);
-		}
-	});
-})();
-    </script>
     <script src="assets/js/main.js"></script>
 </body>
 </html>

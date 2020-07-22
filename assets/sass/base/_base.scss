@@ -14,7 +14,7 @@ body{
     box-sizing: border-box;
     font-size: 1.8rem;
     line-height: 2.4rem;
-    font-family: 'qanelasmedium';
+    font-family: 'qanelasmedium', Arial, sans-serif;
     color: $body-font-color;
 }
 
@@ -26,35 +26,73 @@ body{
     flex-shrink: 0;
     margin-right: 20px;
 }
+.deep-slate {
+    color: $deep-slate;;
+}
 
 .deep-slate-bg {
     background-color: $deep-slate;
+}
+
+.soft-green {
+    color: $soft-green;
 }
 
 .soft-green-bg {
     background-color: $soft-green;
 }
 
+.homely-aubergine {
+    color: $homely-aubergine;
+}
+
 .homely-aubergine-bg {
     background-color: $homely-aubergine;
+}
+
+.soft-pink {
+    color: $soft-pink;
 }
 
 .soft-pink-bg {
     background-color: $soft-pink;
 }
 
+.grey-70 {
+    color: $grey-70;
+}
+
 .grey-70-bg {
     background-color: $grey-70;
+}
+
+.grey-50 {
+    color: $grey-50;
 }
 
 .grey-50-bg {
     background-color: $grey-50;
 }
 
+.fresh-blue {
+    color: $fresh-blue;
+}
+
 .fresh-blue-bg {
     background-color: $fresh-blue;
 }
 
+.punchy-mustard {
+    color: $punchy-mustard;
+}
+
 .punchy-mustard-bg {
     background-color: $punchy-mustard;
+}
+
+@media screen and (min-width: 768px) and (max-width:932px) {
+    .circle {
+        width: 70px;
+        height: 70px;
+    }
 }
