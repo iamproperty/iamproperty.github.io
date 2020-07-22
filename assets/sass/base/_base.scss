@@ -12,7 +12,7 @@ html {
 
 body{
     box-sizing: border-box;
-    font-size: 1.8rem;
+    font-size: $body-font-size;
     line-height: 2.4rem;
     font-family: 'qanelasmedium', Arial, sans-serif;
     color: $body-font-color;

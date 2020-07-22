@@ -149,6 +149,53 @@ section > h3 {
 .mb6 {
   margin-bottom: 6rem; }
 
+.btn {
+  font-size: 1.8rem;
+  padding: 1rem 2rem;
+  color: #ffa500;
+  border-radius: 5px; }
+  .btn:hover {
+    background-color: #ffa500;
+    color: #fff; }
+  .btn:active {
+    border: 2px solid #b4e6a5;
+    background-color: #b4e6a5;
+    color: #fff; }
+
+.btn-outline-primary {
+  border: 2px solid #ffa500;
+  /* below modifiers only for example buttons */ }
+  .btn-outline-primary:hover {
+    border: 2px solid #ffa500; }
+  .btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active {
+    border: 2px solid #b4e6a5;
+    background-color: #b4e6a5;
+    color: #fff; }
+  .btn-outline-primary:disabled, .btn-outline-primary.disabled {
+    border: 2px solid #9d9d9d;
+    color: #9d9d9d;
+    background-color: #fff; }
+  .btn-outline-primary--no-hover {
+    border: 2px solid #ffa500;
+    color: #ffa500;
+    background-color: #fff; }
+    .btn-outline-primary--no-hover:hover {
+      border: 2px solid #ffa500;
+      background-color: #fff;
+      color: #ffa500; }
+  .btn-outline-primary--hover {
+    border: 2px solid #ffa500;
+    background-color: #ffa500;
+    color: #fff; }
+  .btn-outline-primary--active {
+    border: 2px solid #b4e6a5;
+    background-color: #b4e6a5;
+    color: #fff; }
+    .btn-outline-primary--active:hover {
+      border: 2px solid #b4e6a5;
+      background-color: #b4e6a5;
+      color: #fff; }
+
 header {
   position: relative; }
   header span {
@@ -209,6 +256,9 @@ header {
   margin: 4rem 0; }
   .copy-item__copy-data {
     color: #b4e6a5; }
+
+footer {
+  padding-bottom: 50px; }
 
 @media only screen and (max-width: 767px) {
   .nav-links {

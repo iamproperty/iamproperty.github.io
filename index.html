@@ -65,7 +65,7 @@
                     </ul>
                 </nav>
             </div>
-            </div>
+            </div> <!-- end column sidebar -->
             <div class="col-sm-12 col-md-9">
                 <!-- Begin Colour -->
                 <section class="colour-section mb5" id="color-section">
@@ -277,28 +277,51 @@
                         <h3>Paragraphs</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati corporis vero consequuntur numquam officia. Fugiat unde distinctio, soluta perferendis magnam ullam veniam, fugit iure, beatae dolorum accusantium delectus nemo dolores!</p>
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, temporibus tenetur! Deserunt suscipit officiis fugit eveniet cupiditate ex voluptas eius, id aperiam corrupti error ducimus cum architecto nesciunt, alias voluptatum.</p>
-                        <pre><code class="language-css">p { color: red }
-
-
-
-                        </code></pre>
                     </div> 
                 </section> <!-- End Typography -->
-                <!-- Begin Grid System -->
-                <section class="grid-system-section">
-                    <h3>Grid System</h3>
-                    <hr>
-                </section>
-                <!-- End Grid System -->
                 <!-- Begin Buttons -->
                 <section class="buttons-section" id="btn-section">
                     <h3>Buttons</h3>
-                </section>
-                <!-- End Buttons -->
-                
-            </div>
-        </div>
-    </div>
+                    <hr>
+                    <h5>Primary button states</h5>
+                    <div class="row mb3">
+                        <div class="col-sm-6 col-md-3">
+                            <button type="button" class="btn btn-outline-primary--no-hover">Find out more</button>
+                            <p class="small soft-green">Normal</p>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <button type="button" class="btn btn-outline-primary--hover">Find out more</button>
+                            <p class="small soft-green">Roll over</p>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <button type="button" class="btn btn-outline-primary--active">Find out more</button>
+                            <p class="small soft-green">Active</p>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <button disabled type="button" class="btn btn-outline-primary">Find out more</button>
+                            <p class="small soft-green">Disabled</p>
+                        </div>
+                    </div>
+                    <h5>Example usage</h5>
+                </section><!-- End Buttons -->
+                <pre><code class="language-markup">&lt;button type="button" class="btn btn-outline-primary">
+    Find out more
+&lt;/button>
+
+&lt;!-- with disabled attribute -->
+&lt;button type="button" class="btn btn-outline-primary" disabled>
+    Find out more
+&lt;/button></code></pre>
+            <button type="button" class="btn btn-outline-primary">Find out more</button>
+            <button type="button" class="btn btn-outline-primary" disabled>Find out more</button>
+            </div> <!-- end column main -->
+        </div> <!-- end row -->
+        
+    </div> <!-- end container -->
+    <footer>
+        
+
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

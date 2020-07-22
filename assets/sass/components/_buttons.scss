@@ -1,0 +1,60 @@
+.btn {
+    font-size: $body-font-size;
+    padding: 1rem 2rem;
+    color: $punchy-mustard;
+    border-radius: 5px;
+
+    &:hover {
+        background-color: $punchy-mustard;
+        color: #fff;
+    }
+    &:active {
+        border: 2px solid $soft-green;
+        background-color: $soft-green;
+        color: #fff;
+    }
+}
+.btn-outline-primary {
+    border: 2px solid $punchy-mustard;
+
+    &:hover {
+        border: 2px solid $punchy-mustard;
+    }
+    &:not(:disabled):not(.disabled):active, &:not(:disabled):not(.disabled).active {
+        border: 2px solid $soft-green;
+        background-color: $soft-green;
+        color: #fff;
+    }
+    &:disabled, &.disabled {
+        border: 2px solid $grey-50;
+        color: $grey-50;
+        background-color: #fff;
+    }
+    /* below modifiers only for example buttons */
+    &--no-hover {
+        border: 2px solid $punchy-mustard;
+        color: $punchy-mustard;
+        background-color: #fff;
+        &:hover {
+            border: 2px solid $punchy-mustard;
+            background-color: #fff;
+            color: $punchy-mustard;
+        }
+    }
+    &--hover {
+        border: 2px solid $punchy-mustard;
+        background-color: $punchy-mustard;
+        color: #fff;
+    }
+    &--active {
+        border: 2px solid $soft-green;
+        background-color: $soft-green;
+        color: #fff;
+
+        &:hover {
+            border: 2px solid $soft-green;
+            background-color: $soft-green;
+            color: #fff;
+        }
+    }
+}
