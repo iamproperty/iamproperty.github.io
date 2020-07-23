@@ -90,6 +90,26 @@ body{
     background-color: $punchy-mustard;
 }
 
+a {
+    color: $punchy-mustard;
+    &:hover {
+        text-decoration: underline;
+        color: $punchy-mustard;
+    }
+    &:active {
+        color: $soft-green;
+    }
+    &.disabled {
+        color: $grey-50;
+        cursor: default;
+        
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+
 @media screen and (min-width: 768px) and (max-width:932px) {
     .circle {
         width: 70px;
