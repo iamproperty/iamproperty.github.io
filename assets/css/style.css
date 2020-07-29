@@ -203,6 +203,10 @@ section > h3 {
       background-color: #9CCD86;
       color: #fff; }
 
+.icon-image {
+  width: 5rem;
+  height: 5rem; }
+
 header {
   position: relative; }
   header span {
