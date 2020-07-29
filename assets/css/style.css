@@ -156,11 +156,16 @@ section > h3 {
 .mb6 {
   margin-bottom: 6rem; }
 
+button {
+  background-color: #fff;
+  border: 2px solid #ffa500; }
+
 .btn {
   font-size: 1.8rem;
   padding: 1rem 2rem;
   color: #ffa500;
-  border-radius: 5px; }
+  border-radius: 5px;
+  border: none; }
   .btn:hover {
     background-color: #ffa500;
     color: #fff; }
@@ -203,9 +208,14 @@ section > h3 {
       background-color: #9CCD86;
       color: #fff; }
 
+.icon-wrap {
+  margin: 3rem; }
+
 .icon-image {
   width: 5rem;
-  height: 5rem; }
+  height: 5rem;
+  display: block;
+  margin: 0 auto; }
 
 header {
   position: relative; }

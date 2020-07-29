@@ -1,8 +1,13 @@
+button {
+    background-color: #fff;
+    border: 2px solid $punchy-mustard;
+}
 .btn {
     font-size: $body-font-size;
     padding: 1rem 2rem;
     color: $punchy-mustard;
     border-radius: 5px;
+    border:none;
 
     &:hover {
         background-color: $punchy-mustard;
