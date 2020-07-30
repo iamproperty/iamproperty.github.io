@@ -63,3 +63,13 @@ button {
         }
     }
 }
+.btn-primary {
+    background-color: $punchy-mustard;
+    color: #fff;
+    &:hover {
+        background-color: #ffc55c;
+    }
+    &:not(:disabled):not(.disabled):active, &:not(:disabled):not(.disabled).active {
+        background-color: $soft-green;
+    }
+}

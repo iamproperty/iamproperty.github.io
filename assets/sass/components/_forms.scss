@@ -1,0 +1,28 @@
+input.form-control {
+    font-size: $body-font-size;
+    padding: 1rem;
+}
+select.form-control {
+    padding: 1rem;
+    font-size: $body-font-size;
+    height: auto !important;
+}
+.form-group {
+
+    margin-bottom:2rem;
+    color: $grey-70;
+
+    select.form-control, select {
+        height: auto;
+        line-height: 3rem;
+    }
+}
+.form-wrapper {
+    background: #f7f7f7;
+    padding: 1rem;
+
+    &--width-600 {
+        max-width: 600px;
+        margin: 0 auto;
+    }
+}

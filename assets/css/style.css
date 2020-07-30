@@ -208,6 +208,37 @@ button {
       background-color: #9CCD86;
       color: #fff; }
 
+.btn-primary {
+  background-color: #ffa500;
+  color: #fff; }
+  .btn-primary:hover {
+    background-color: #ffc55c; }
+  .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active {
+    background-color: #9CCD86; }
+
+input.form-control {
+  font-size: 1.8rem;
+  padding: 1rem; }
+
+select.form-control {
+  padding: 1rem;
+  font-size: 1.8rem;
+  height: auto !important; }
+
+.form-group {
+  margin-bottom: 2rem;
+  color: #6f6f6f; }
+  .form-group select.form-control, .form-group select {
+    height: auto;
+    line-height: 3rem; }
+
+.form-wrapper {
+  background: #f7f7f7;
+  padding: 1rem; }
+  .form-wrapper--width-600 {
+    max-width: 600px;
+    margin: 0 auto; }
+
 .icon-wrap {
   margin: 3rem; }
 
