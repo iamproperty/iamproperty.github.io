@@ -223,14 +223,15 @@ input.form-control {
 select.form-control {
   padding: 1rem;
   font-size: 1.8rem;
-  height: auto !important; }
+  height: auto !important;
+  background: #fff url("../img/dropdown_arrow@1.5x.svg") no-repeat 98% 50%;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none; }
 
 .form-group {
   margin-bottom: 2rem;
   color: #6f6f6f; }
-  .form-group select.form-control, .form-group select {
-    height: auto;
-    line-height: 3rem; }
 
 .form-wrapper {
   background: #f7f7f7;

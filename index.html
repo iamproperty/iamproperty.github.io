@@ -271,6 +271,25 @@
                     <h5>Primary button states</h5>
                     <div class="row mb3">
                         <div class="col-sm-6 col-md-3">
+                            <button type="button" class="btn btn-primary">Find out more</button>
+                            <p class="small soft-green">Normal</p>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <button type="button" class="btn btn-primary" style="background-color: #ffc55c;">Find out more</button>
+                            <p class="small soft-green">Roll over</p>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <button type="button" class="btn btn-primary" style="background-color: #9CCD86;">Find out more</button>
+                            <p class="small soft-green">Active</p>
+                        </div>
+                        <div class="col-sm-6 col-md-3">
+                            <button disabled type="button" class="btn btn-primary" style="background-color: #9d9d9d;">Find out more</button>
+                            <p class="small soft-green">Disabled</p>
+                        </div>
+                    </div>
+                    <h5>Primary button outline states</h5>
+                    <div class="row mb3">
+                        <div class="col-sm-6 col-md-3">
                             <button type="button" class="btn btn-outline-primary--no-hover">Find out more</button>
                             <p class="small soft-green">Normal</p>
                         </div>
@@ -328,12 +347,12 @@
                                 <div class="form-group">
                                   <label for="title">Title</label>
                                   <select class="form-control" id="title">
-                                    <option>Please select</option>
-                                    <option>Mr</option>
-                                    <option>Mrs</option>
-                                    <option>Ms</option>
-                                    <option>Miss</option>
-                                    <option>Dr</option>
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="Mr" >Mr</option>
+                                    <option value="Mrs" >Mrs</option>
+                                    <option value="Ms">Ms</option>
+                                    <option value="Miss">Miss</option>
+                                    <option value="Dr">Dr</option>
                                   </select>
                                 </div>
                                 <div class="form-row">
@@ -348,7 +367,7 @@
                                                 <input type="text" class="form-control">
                                             </div>
                                             <div class="form-group">
-                                                <label for="first-name">D.O.B *</label>
+                                                <label for="date-of-birth">D.O.B *</label>
                                                 <input type="text" class="form-control">
                                             </div>
                                         </div>
@@ -356,24 +375,25 @@
                                     <div class="col-md-6">
                                         <div class="ml-sm-0 ml-md-4">
                                     <div class="form-group">
-                                        <label for="first-name">Telephone Number *</label>
+                                        <label for="telephone">Telephone Number *</label>
                                         <input type="text" class="form-control">
                                     </div>
                                     <div class="form-group">
-                                        <label for="first-name">Email Address *</label>
+                                        <label for="email-address">Email Address *</label>
                                         <input type="text" class="form-control">
                                     </div>
                                 
                                     <div class="form-group">
-                                        <label for="first-name">Occupation *</label>
+                                        <label for="occupation">Occupation *</label>
                                         <input type="text" class="form-control">
                                     </div>
                                 </div>
                                 </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="first-name">Correspondance address *</label>
+                                    <label for="correspondance-address">Correspondance address *</label>
                                     <input type="text" class="form-control">
+                                    <p class="small">or enter address manually</small>
                                 </div>
 
                                 <div class="form-group">

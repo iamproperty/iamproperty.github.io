@@ -6,16 +6,16 @@ select.form-control {
     padding: 1rem;
     font-size: $body-font-size;
     height: auto !important;
+    background: #fff url('../img/dropdown_arrow@1.5x.svg') no-repeat 98% 50%;
+    -moz-appearance: none;
+   -webkit-appearance: none;
+   appearance: none;
 }
 .form-group {
 
     margin-bottom:2rem;
     color: $grey-70;
 
-    select.form-control, select {
-        height: auto;
-        line-height: 3rem;
-    }
 }
 .form-wrapper {
     background: #f7f7f7;
