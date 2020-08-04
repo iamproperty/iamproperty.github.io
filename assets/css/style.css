@@ -218,7 +218,8 @@ button {
 
 input.form-control {
   font-size: 1.8rem;
-  padding: 1rem; }
+  padding: 1rem;
+  border: 2px solid #ddd; }
 
 select.form-control {
   padding: 1rem;
@@ -234,10 +235,10 @@ select.form-control {
   color: #6f6f6f; }
 
 .form-wrapper {
-  background: #f7f7f7;
-  padding: 1rem; }
+  background: #f4f4f4;
+  padding: 2rem;
+  border: 2px solid #ddd; }
   .form-wrapper--width-600 {
-    max-width: 600px;
     margin: 0 auto; }
 
 .icon-wrap {
@@ -313,7 +314,15 @@ header {
 footer {
   padding-bottom: 50px; }
 
+.fixed-menu {
+  position: fixed;
+  padding-top: 2rem;
+  top: 0; }
+
 @media only screen and (max-width: 767px) {
+  .fixed-menu {
+    position: relative;
+    padding: 0; }
   .nav-links {
     height: 0;
     overflow: hidden; }

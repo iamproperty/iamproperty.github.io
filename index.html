@@ -338,11 +338,70 @@
                         </div>
                     </div>
                     <!-- begin form section -->
-                    <section class="form-elements mb5" id="form-section">
+                    <section class="form-elements mb-5" id="form-section">
                         <h3>Form elements</h3>
-                        <hr> 
+                        <hr>
+                        <h5>Input fields</h5>
+                        <form>
+                            <div class="row">
+                              <div class="col">
+                                <input type="text" class="form-control" placeholder="First name">
+                              </div>
+                              <div class="col">
+                                <input type="text" class="form-control" placeholder="Last name">
+                              </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="telephone">Email</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </form>
+                          
+                        <h5 class="mt-3">Radio boxes</h5>
+                        <form>
+                            <fieldset class="form-group">
+                                <div class="row">
+                                  <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+                                  <div class="col-sm-10">
+                                    <div class="form-check d-flex align-items-baseline">
+                                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+                                      <label class="form-check-label ml-2" for="gridRadios1">
+                                        First radio
+                                      </label>
+                                    </div>
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+                                      <label class="form-check-label ml-2" for="gridRadios2">
+                                        Second radio
+                                      </label>
+                                    </div>
+                                    <div class="form-check disabled">
+                                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
+                                      <label class="form-check-label ml-2" for="gridRadios3">
+                                        Third disabled radio
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </fieldset>
+                        </form>
+                        <h5 class="mt-3">Check boxes</h5>
+                        <form>
+                            <div class="form-group row">
+                                <div class="col-sm-2">Checkbox</div>
+                                <div class="col-sm-10">
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="gridCheck1">
+                                    <label class="form-check-label ml-2" for="gridCheck1">
+                                      Example checkbox
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                        </form>
+                        <h5>Form example</h5> 
                             <h5 class="form-wrapper--width-600">Your Details</h5>
-                            <div class="form-wrapper form-wrapper--width-600">
+                            <div class="form-wrapper form-wrapper--width-600 mb-5">
                             <form>
                                 <div class="form-group">
                                   <label for="title">Title</label>
@@ -374,32 +433,33 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="ml-sm-0 ml-md-4">
-                                    <div class="form-group">
-                                        <label for="telephone">Telephone Number *</label>
-                                        <input type="text" class="form-control">
+                                            <div class="form-group">
+                                                <label for="telephone">Telephone Number *</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email-address">Email Address *</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="occupation">Occupation *</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="email-address">Email Address *</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                
-                                    <div class="form-group">
-                                        <label for="occupation">Occupation *</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                                </div>
-                                </div>
+                                </div> <!-- end form row -->
                                 <div class="form-group">
                                     <label for="correspondance-address">Correspondance address *</label>
-                                    <input type="text" class="form-control">
-                                    <p class="small">or enter address manually</small>
+                                    <select class="form-control">
+                                        <option value="" disabled selected>Postcode search</option>
+                                    </select>
+                                    <a href="#" class="small">or enter address manually</a>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="first-name">About You *</label>
                                     <select class="form-control" id="title">
-                                        <option>Please select</option>
+                                        <option value="" disabled selected>Please select</option>
                                         <option>option 1</option>
                                         <option>option 2</option>
                                         <option>option 3</option>
@@ -412,6 +472,76 @@
                                 <button class="btn btn-primary btn-block">Change security question</button>
                             </form>
                         </div>
+                        <!--form example code-->
+                        <pre><code class="language-markup">&lt;form>
+    &lt;div class="form-group">
+        &lt;label for="title">Title&lt;/label>
+        &lt;select class="form-control" id="title">
+            &lt;option value="" disabled selected>Please select&lt;/option>
+            &lt;option value="Mr">Mr&lt;/option>
+            &lt;option value="Mrs">Mrs&lt;/option>
+            &lt;option value="Ms">Ms&lt;/option>
+            &lt;option value="Miss">Miss&lt;/option>
+            &lt;option value="Dr">Dr&lt;/option>
+        &lt;/select>
+    &lt;/div>
+    &lt;div class="form-row">
+        &lt;div class="col-md-6">
+            &lt;div class="mr-sm-0 mr-md-4">
+                &lt;div class="form-group">
+                    &lt;label for="first-name">First name *&lt;/label>
+                    &lt;input type="text" class="form-control">
+                &lt;/div>
+                &lt;div class="form-group">
+                    &lt;label for="last-name">Surname *&lt;/label>
+                    &lt;input type="text" class="form-control">
+                &lt;/div>
+                &lt;div class="form-group">
+                    &lt;label for="date-of-birth">D.O.B *&lt;/label>
+                    &lt;input type="text" class="form-control">
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+        &lt;div class="col-md-6">
+            &lt;div class="ml-sm-0 ml-md-4">
+                &lt;div class="form-group">
+                    &lt;label for="telephon">Telephone Number *&lt;/label>
+                    &lt;input type="text" class="form-control">
+                &lt;/div>
+                &lt;div class="form-group">
+                    &lt;label for="email-address">Email Address *&lt;/label>
+                    &lt;input type="text" class="form-control">
+                &lt;div>
+                &lt;div class="form-group">
+                    &lt;label for="occupation">Occupation *&lt;/label>
+                    &lt;input type="text" class="form-control">
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div> <!-- end form row -->
+    &lt;div class="form-group">
+        &lt;label for="correspondance-address">Correspondance address *&lt;/label>
+        &lt;select class="form-control">
+            &lt;option value="" disabled selected>Postcode search&lt;/option>
+        &lt;/select>
+        &lt;a href="#" class="small">or enter address manually</a>
+    &lt;/div>
+    &lt;div class="form-group">
+        &lt;label for="first-name">About You *&lt;/label>
+        &lt;select class="form-control" id="title">
+            &lt;option value="" disabled selected>Please select&lt;/option>
+            &lt;option>option 1&lt;/option>
+            &lt;option>option 2&lt;/option>
+            &lt;option>option 3&lt;/option>
+            &lt;option>option 4&lt;/option>
+            &lt;option>option 5&lt;/option>
+        &lt;/select>
+    &lt;/div>
+    &lt;button type="submit" class="btn btn-primary btn-block mb-3">Change password&lt;/button>
+    &lt;button class="btn btn-primary btn-block">Change security question&lt;/button>
+&lt;/form>
+                        
+                        </code></pre> <!-- end form example code -->
                         
                     </section> <!-- end form section -->
                     <!-- begin icon section -->

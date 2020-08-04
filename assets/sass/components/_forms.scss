@@ -1,6 +1,7 @@
 input.form-control {
     font-size: $body-font-size;
     padding: 1rem;
+    border: 2px solid #ddd;
 }
 select.form-control {
     padding: 1rem;
@@ -18,11 +19,12 @@ select.form-control {
 
 }
 .form-wrapper {
-    background: #f7f7f7;
-    padding: 1rem;
+    background: #f4f4f4;
+    padding: 2rem;
+    border: 2px solid #ddd;
 
     &--width-600 {
-        max-width: 600px;
+        
         margin: 0 auto;
     }
 }

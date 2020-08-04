@@ -86,7 +86,19 @@ footer {
     padding-bottom: 50px;
 }
 
+.fixed-menu {
+    position: fixed;
+    padding-top: 2rem;
+    top:0;
+}
+
 @media only screen and (max-width:767px) {
+
+    .fixed-menu {
+        position: relative;
+        padding: 0;
+
+    }
 
     .nav-links {
         height: 0;

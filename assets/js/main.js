@@ -83,3 +83,23 @@ hamburgerToggle.addEventListener('click', function() {
 		}
 	});
 })();
+
+window.onscroll = function() {
+	scrollFunction()
+};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+	document.querySelector(".nav-links").classList.add('fixed-menu');
+  } else {
+    document.querySelector(".nav-links").classList.remove('fixed-menu');
+  }
+}
+
+let intViewportWidth = window.innerWidth;
+
+function reportWindowSize() {
+	return window.innerWidth;
+}
+
+window.onresize = reportWindowSize;
