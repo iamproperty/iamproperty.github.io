@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/dracula-prism/css/dracula-prism.css">
     <link rel="stylesheet" type="text/css" href="assets/css/vendor/prism.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" />
+
+
+
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-VhBcF/php0Z/P5ZxlxaEx1GwqTQVIBu4G4giRWxTKOCjTxsPFETUDdVL5B6vYvOt" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     <title>I Am Property Component Library</title>
 </head>
@@ -19,7 +25,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-md-2">
-                <div class="nav-links">
+                <div class="nav-links fixed-width">
                 <p>Foundations</p>
                 <nav>
                     <ul class="nav flex-column">
@@ -363,7 +369,7 @@
                                 <div class="row">
                                   <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
                                   <div class="col-sm-10">
-                                    <div class="form-check d-flex align-items-baseline">
+                                    <div class="form-check">
                                       <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
                                       <label class="form-check-label ml-2" for="gridRadios1">
                                         First radio
@@ -400,8 +406,8 @@
                               </div>
                         </form>
                         <h5>Form example</h5> 
-                            <h5 class="form-wrapper--width-600">Your Details</h5>
-                            <div class="form-wrapper form-wrapper--width-600 mb-5">
+                            <h5>Your Details</h5>
+                            <div class="form-wrapper mb-5">
                             <form>
                                 <div class="form-group">
                                   <label for="title">Title</label>
@@ -427,7 +433,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="date-of-birth">D.O.B *</label>
-                                                <input type="text" class="form-control">
+                                                <input type="text" class="form-control date-picker" value="12-02-2012">
                                             </div>
                                         </div>
                                     </div>
@@ -1030,6 +1036,77 @@
                                 </div>
                             </div>
                         </div>
+                        <h5>Font Awesome Icons</h5>
+                        <div class="row">
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-user"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-user-edit"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-file-upload"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-home"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-check-circle"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-question-circle"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-user-minus"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-file"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-comment-alt"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-phone"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-gavel"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-exclamation-circle"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-check"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-file-check"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-exclamation-triangle"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6 col-sm-3 col-md-3">
+                                <i class="fal fa-search-plus"></i>
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                
+                            </div>
+                            <div class="col-6 col-sm-3 col-md-3">
+                                
+                            </div>
+                        </div>
                     </section> <!-- end icon section -->
             </div> <!-- end column main -->
         </div> <!-- end row -->
@@ -1043,9 +1120,16 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    
+    <script src="assets/js/bootstrap-datepicker.min.js"></script>
+
     <script src="assets/js/vendor/prism.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script>
+        $('.date-picker').datepicker({
+            format: 'dd/mm/yyyy',
+            
+        });
+    </script>
 </body>
 </html>

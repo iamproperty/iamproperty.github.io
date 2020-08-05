@@ -230,6 +230,9 @@ select.form-control {
   -webkit-appearance: none;
   appearance: none; }
 
+select.form-control::-ms-expand {
+  display: none; }
+
 .form-group {
   margin-bottom: 2rem;
   color: #6f6f6f; }
@@ -239,6 +242,7 @@ select.form-control {
   padding: 2rem;
   border: 2px solid #ddd; }
   .form-wrapper--width-600 {
+    max-width: 600px;
     margin: 0 auto; }
 
 .icon-wrap {
@@ -250,10 +254,20 @@ select.form-control {
   display: block;
   margin: 0 auto; }
 
+.icon-section i {
+  font-size: 5rem;
+  display: block;
+  text-align: center;
+  margin: 3rem; }
+
 header {
   position: relative; }
   header span {
     font-family: "qanelas_softextrabold"; }
+
+.container-fluid {
+  max-width: 1600px;
+  margin: 0 auto; }
 
 .paragraph-wrap {
   margin: 30px 0; }

@@ -9,14 +9,15 @@ select.form-control {
     height: auto !important;
     background: #fff url('../img/dropdown_arrow@1.5x.svg') no-repeat 98% 50%;
     -moz-appearance: none;
-   -webkit-appearance: none;
-   appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+select.form-control::-ms-expand {
+    display: none;
 }
 .form-group {
-
     margin-bottom:2rem;
     color: $grey-70;
-
 }
 .form-wrapper {
     background: #f4f4f4;
@@ -24,7 +25,7 @@ select.form-control {
     border: 2px solid #ddd;
 
     &--width-600 {
-        
+        max-width: 600px;
         margin: 0 auto;
     }
 }
