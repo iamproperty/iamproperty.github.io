@@ -1,18 +1,49 @@
 {
   "name": "iamp-component-library",
   "version": "1.0.0",
+  "private": true,
   "description": "Component library for I Am Property",
-  "main": "index.html",
+  "author": {
+    "name": "Michael White"
+  },
   "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
     "compile:sass": "node-sass assets/sass/main.scss assets/css/style.css -w"
   },
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap": "^4.5.2",
+    "bootstrap-vue": "^2.16.0",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.12",
+    "vue-router": "^3.2.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "@vue/test-utils": "^1.0.3",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.14.1",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "_id": "iamp-component-library@1.0.0",
+  "license": "ISC",
+  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git@codebasehq.com:isg/isg-marketplace-intelligent-compliance/iamp-component-library.git"
-  },
-  "author": "Michael White",
-  "license": "ISC",
-  "devDependencies": {
-    "node-sass": "^4.14.1"
   }
 }
