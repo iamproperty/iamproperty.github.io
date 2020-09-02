@@ -6,14 +6,15 @@
   "author": {
     "name": "Michael White"
   },
+  "license": "unlicensed",
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve docs/main.js",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "compile:sass": "node-sass assets/sass/main.scss assets/css/style.css -w"
   },
-  "main": "index.html",
+  "module": "src/index.js",
   "dependencies": {
     "bootstrap": "^4.5.2",
     "bootstrap-vue": "^2.16.0",
@@ -40,8 +41,6 @@
     "vue-template-compiler": "^2.6.11"
   },
   "_id": "iamp-component-library@1.0.0",
-  "license": "ISC",
-  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git@codebasehq.com:isg/isg-marketplace-intelligent-compliance/iamp-component-library.git"
