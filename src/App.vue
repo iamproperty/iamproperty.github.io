@@ -7,7 +7,7 @@
         </div>
         <div id="nav" class="justify-content-between">
           <router-link to="/">Foundations</router-link> |
-          <router-link to="/about">Components</router-link>
+          <router-link to="/components">Components</router-link>
         </div>
     </header>
     <div class="container-fluid">

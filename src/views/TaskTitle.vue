@@ -5,22 +5,32 @@
         <side-bar></side-bar>
       </div>
       <div class="col-sm-12 col-md-9">
-        <section class="colour-section mb5" id="color-section">
+        <section class="mb5">
               <h3>Task Title</h3>
               <hr>
               <div class="paragraph-wrap">
-              <p>Our colour palette will help us create a distinctive identity and plays an
-                  important part in building brand recognition. It should be used within all
-                  designs and communications.
-              </p>
-              <p>A combination of these colours should be used on every application although
-                  it is not necessary for all colours to appear on every piece of communication.
-              </p>
-              <p>
-                  White is an important part of our palette too. it creates the space for our
-                  communications to breathe and a canvas where our colours come to life.
+              <p>A reusable Task Title component with various combinations of brand colours to choose from.
               </p>
               </div>
+              <task-title variant="punchy-mustard-bg" title="I am an even bigger heading"></task-title>
+              <task-title variant="homely-aubergine" title="I Am A Heading"></task-title>
+              <task-title variant="fresh-blue" title="Vendor Contact Task"></task-title>
+              <task-title variant="deep-slate" title="Vendor contact task"></task-title>
+              <div class="row">
+                <div class="col-md-6">
+                  <task-title variant="soft-green" title="Vendor contact task"></task-title>
+                  <task-title variant="soft-pink" title="Vendor contact task"></task-title>
+                </div>
+                <div class="col-md-6">
+                  <task-title variant="grey-50" title="Vendor contact task"></task-title>
+                  <task-title variant="grey-70" title="Vendor contact task"></task-title>
+                </div>
+              </div>
+              <br>
+              <h4>Usage</h4>
+<pre v-highlightjs><code class="javascript">&lt;task-title variant="punchy-mustard" title="I am an even bigger heading">&lt;/task-title>
+&lt;task-title variant="grey-50" title="Vendor contact task">&lt;/task-title></code></pre>
+
           </section> <!-- End Task Title component -->
       </div>
     </div>
@@ -30,11 +40,11 @@
 <script>
 
 import SideBar from '@/components/SideBar.vue'
+import TaskTitle from '@/components/TaskTitle.vue'
 
 export default {
-  name: 'task-title',
   components: {
-    SideBar
+    SideBar, TaskTitle
   }
 }
 
