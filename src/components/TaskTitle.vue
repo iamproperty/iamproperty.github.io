@@ -7,7 +7,18 @@
 <script>
 export default {
   name: 'TaskTitle',
-  props: ['title', 'variant']
+  props: {
+    title: {
+      required: true,
+      type: String,
+      default: 'Title text goes here'
+    },
+    variant: {
+      required: true,
+      type: String,
+      default: 'punchy-mustard-bg'
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -21,49 +32,49 @@ export default {
             font-weight:normal;
         }
     }
-    .punchy-mustard-bg {
+    .task-punchy-mustard {
         background-color: $punchy-mustard;
         h4 {
             color: #000;
         }
     }
-    .homely-aubergine {
+    .task-homely-aubergine {
         background-color: $homely-aubergine;
         h4 {
             color: #fff;
         }
     }
-    .fresh-blue {
+    .task-fresh-blue {
         background-color: $fresh-blue;
         h4 {
             color: #fff;
         }
     }
-    .deep-slate {
+    .task-deep-slate {
         background-color: $deep-slate;
         h4 {
             color: #fff;
         }
     }
-    .soft-green {
+    .task-soft-green {
         background-color: $soft-green;
         h4 {
             color: #000;
         }
     }
-    .soft-pink {
+    .task-soft-pink {
         background-color: $soft-pink;
         h4 {
             color: #000;
         }
     }
-    .grey-50 {
+    .task-grey-50 {
         background-color: $grey-50;
         h4 {
             color: #000;
         }
     }
-    .grey-70 {
+    .task-grey-70 {
         background-color: $grey-70;
         h4 {
             color: #fff;

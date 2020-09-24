@@ -17,20 +17,7 @@
 </template>
 
 <style lang="scss">
-
-$deep-slate: #00313C;
-$soft-green: /*#b4e6a5*/ #9CCD86;
-$homely-aubergine: #46003C;
-$soft-pink: #ffd2d2;
-$grey-70: #6f6f6f;
-$grey-50: #9d9d9d;
-$fresh-blue: #1ebee6;
-$punchy-mustard: #ffa500;
-
-$body-font: 'qanelasmedium';
-$body-font-size: 1.8rem;
-$header-font: 'qanelas_softextrabold';
-$body-font-color: #111;
+@import "@/assets/scss/_variables.scss";
 
 #app {
   font-family: 'qanelasmedium', sans-serif;
