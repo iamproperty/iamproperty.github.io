@@ -8,6 +8,16 @@
         <section class="mb5">
               <h3>Component table of contents</h3>
               <hr>
+              <ul class="component-contents">
+                <li>
+                  <router-link to="/components/task-title">Task Title</router-link>
+                  - The task title component has a number of choices for background colours
+                </li>
+                <li>
+                  <router-link to="/components/key-stats">Key Fact Group</router-link>
+                  - Group a series of key facts together in a responsive grid
+                </li>
+              </ul>
           </section>
       </div>
     </div>
@@ -25,3 +35,10 @@ export default {
 }
 
 </script>
+
+<style scoped>
+  .component-contents li {
+    display:block;
+    margin-bottom: 10px;
+  }
+</style>

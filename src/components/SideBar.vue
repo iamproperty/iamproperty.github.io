@@ -5,7 +5,10 @@
           <nav>
               <ul class="nav flex-column">
                 <li class="nav-item">
-                      <router-link class="nav-link" to="/task-title">Task Title</router-link>
+                      <router-link class="nav-link" to="/components/task-title">Task Title</router-link>
+                  </li>
+                  <li class="nav-item">
+                      <router-link class="nav-link" to="/components/key-stats">Key Fact Group</router-link>
                   </li>
               </ul>
           </nav>

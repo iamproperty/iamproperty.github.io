@@ -16,7 +16,7 @@
             </p>
             <p>The component requires the colour variables to exist in the project</p>
           </div>
-          <task-title></task-title>
+          <task-title title="Task title goes here"></task-title>
           <task-title
             variant="task-homely-aubergine"
             title="Add new property alert"

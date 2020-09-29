@@ -9,14 +9,13 @@ export default {
   name: 'TaskTitle',
   props: {
     title: {
-      required: true,
-      type: String,
-      default: 'Title text goes here'
+      required: false,
+      type: String
     },
     variant: {
-      required: true,
+      required: false,
       type: String,
-      default: 'punchy-mustard-bg'
+      default: 'task-punchy-mustard'
     }
   }
 }

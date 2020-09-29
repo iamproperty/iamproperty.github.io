@@ -7,7 +7,7 @@
         </div>
         <div id="nav" class="justify-content-between">
           <router-link to="/">Foundations</router-link> |
-          <router-link to="/components">Components</router-link>
+          <router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link>
         </div>
     </header>
     <div class="container-fluid">
@@ -15,7 +15,18 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  methods: {
+    subIsActive (input) {
+      const paths = Array.isArray(input) ? input : [input]
+      return paths.some(path => {
+        return this.$route.path.indexOf(path) === 0 // current path starts with this path string
+      })
+    }
+  }
+}
+</script>
 <style lang="scss">
 @import "@/assets/scss/_variables.scss";
 
@@ -35,7 +46,7 @@
   color: #000;
 }
 
-#nav a.router-link-exact-active {
+#nav a.router-link-exact-active, #nav .router-link-sub-active {
   color: $punchy-mustard;
 }
 </style>
