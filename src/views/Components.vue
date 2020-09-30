@@ -17,6 +17,10 @@
                   <router-link to="/components/key-stats">Key Fact Group</router-link>
                   - Group a series of key facts together in a responsive grid
                 </li>
+                <li>
+                  <router-link to="/components/property-task-intro">Property Task Intro</router-link>
+                  - todo
+                </li>
               </ul>
           </section>
       </div>

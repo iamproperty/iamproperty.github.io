@@ -27,6 +27,11 @@ const routes = [
     path: '/components/key-stats',
     name: 'Key Stats',
     component: () => import('../views/KeyStats.vue')
+  },
+  {
+    path: '/components/property-task-intro',
+    name: 'Property Task Intro',
+    component: () => import('../views/PropertyTaskIntro.vue')
   }
 ]
 
