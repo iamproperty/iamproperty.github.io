@@ -19,7 +19,8 @@
                 </li>
                 <li>
                   <router-link to="/components/property-task-intro">Property Task Intro</router-link>
-                  - todo
+                  - Group of property data including: address, starting bid, auction start, auction end date
+                  and branch details
                 </li>
               </ul>
           </section>
