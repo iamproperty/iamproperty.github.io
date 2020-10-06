@@ -1,19 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <header class="d-flex align-items-center justify-content-between">
+        <div class="d-flex logo-section align-items-center">
+          <img src="@/assets/img/logo.png" alt="I Am Property" width="" height="120" />
+          <span> Style Library</span>
+        </div>
+        <div id="nav" class="justify-content-between">
+          <router-link to="/">Foundations</router-link> |
+          <router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link>
+        </div>
+    </header>
+    <div class="container-fluid">
+      <router-view />
     </div>
-    <router-view/>
   </div>
 </template>
+<script>
+export default {
+  methods: {
+    subIsActive (input) {
+      const paths = Array.isArray(input) ? input : [input]
+      return paths.some(path => {
+        return this.$route.path.indexOf(path) === 0 // current path starts with this path string
+      })
+    }
+  }
+}
+</script>
+<style lang="scss">
+@import "@/assets/scss/_variables.scss";
 
-<style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'qanelasmedium', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
@@ -23,10 +43,10 @@
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #000;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+#nav a.router-link-exact-active, #nav .router-link-sub-active {
+  color: $punchy-mustard;
 }
 </style>
