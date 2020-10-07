@@ -28,38 +28,29 @@
       <tbody>
         <tr>
           <td>
-            <code class="text-nowrap" translate="no">positive</code>
-          </td>
-          <td>Boolean</td>
-          <td>
-            If property is false, <code>statValue</code> is assigned a red colour
-          </td>
-        </tr>
-        <tr>
-          <td>
             <code class="text-nowrap" translate="no">keyfacts</code>
           </td>
-          <td>Array</td>
+          <td>Object</td>
           <td>
-            An array of key fact objects.
+            Up to 6 keyfact objects can be displayed.
           </td>
         </tr>
         <tr>
           <td>
-            <code class="text-nowrap" translate="no">statValue</code>
+            <code class="text-nowrap" translate="no">value</code>
           </td>
           <td>Number</td>
           <td>
-            This value is passed into the key fact component from the <code>keyfacts</code> array
+            This value is passed into the key fact component from the <code>keyfacts</code> object
           </td>
         </tr>
         <tr>
           <td>
-            <code class="text-nowrap" translate="no">statLabel</code>
+            <code class="text-nowrap" translate="no">label</code>
           </td>
           <td>String</td>
           <td>
-            This value is passed into the key fact component from the <code>keyfacts</code> array
+            This value is passed into the key fact component from the <code>keyfacts</code> object
           </td>
         </tr>
       </tbody>

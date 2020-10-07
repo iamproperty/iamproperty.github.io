@@ -10,40 +10,49 @@
       </p>
       <p>The component requires the colour variables to exist in the project</p>
     </div>
-    <task-title title="Task title goes here"></task-title>
+    <task-title>
+      Insert task title here
+    </task-title>
     <task-title
       variant="task-homely-aubergine"
-      title="Add new property alert"
-    ></task-title>
+    >
+      Add new property alert
+    </task-title>
     <task-title
       variant="task-fresh-blue"
-      title="Create a contract"
-    ></task-title>
+    >
+      Create a contract
+    </task-title>
     <task-title
       variant="task-deep-slate"
-      title="Create a property note"
-    ></task-title>
+    >
+      Create a property note
+    </task-title>
     <task-title
       variant="task-soft-green"
-      title="Vendor contact task"
-    ></task-title>
+    >
+      Vendor contact task
+    </task-title>
     <task-title
       variant="task-soft-pink"
-      title="Link directors (area or managing) with other agencies"
-    ></task-title>
+    >
+      Link directors (area or managing) with other agencies
+    </task-title>
     <task-title
       variant="task-grey-50"
-      title="Add a new agent to the iamsold system"
-    ></task-title>
+    >
+      Add a new agent to the iamsold system
+    </task-title>
     <task-title
       variant="task-grey-70"
-      title="Manage Agency Branch Levels"
-    ></task-title>
+    >
+      Manage Agency Branch Levels
+    </task-title>
     <br />
     <h4>Usage</h4>
     <pre
       v-highlightjs
-    ><code class="javascript">&lt;task-title variant="task-soft-green" title="Vendor contact task">&lt;/task-title>
+    ><code class="javascript">&lt;task-title variant="task-soft-green" >Manage Agency Branch Levels&lt;/task-title>
 </code></pre>
     <br>
     <table
@@ -57,15 +66,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>
-            <code class="text-nowrap" translate="no">title</code>
-          </td>
-          <td>String</td>
-          <td>
-            Banner title
-          </td>
-        </tr>
         <tr>
           <td>
             <code class="text-nowrap" translate="no">variant</code>

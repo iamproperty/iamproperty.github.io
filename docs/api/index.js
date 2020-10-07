@@ -16,3 +16,37 @@ export const fetchProperty = () => {
     }
   }
 }
+export const fetchStats = () => {
+  return {
+    1: {
+      id: 1,
+      value: 0,
+      label: 'upcoming views'
+    },
+    2: {
+      id: 2,
+      value: 7,
+      label: 'viewings completed'
+    },
+    3: {
+      id: 3,
+      value: 0,
+      label: 'viewings in past 14 days'
+    },
+    4: {
+      id: 4,
+      value: 1,
+      label: 'total bids'
+    },
+    5: {
+      id: 5,
+      value: 0,
+      label: 'bids in past 14 days'
+    },
+    6: {
+      id: 6,
+      value: 0,
+      label: 'price reductions'
+    }
+  }
+}

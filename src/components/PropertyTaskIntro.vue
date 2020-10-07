@@ -9,8 +9,8 @@
       </ul>
       <ul class="branch-info d-sm-flex">
         <li><strong>{{property.branchName}}</strong></li>
-        <li>Telephone: <a :href="`tel:` + property.branchTelephone">{{property.branchTelephone}}</a></li>
-        <li>Email: <a :href="`mailto:` + property.branchEmail">{{property.branchEmail}}</a></li>
+        <li>Telephone: <a :href="`tel: ${property.branchTelephone}`">{{property.branchTelephone}}</a></li>
+        <li>Email: <a :href="`mailto:  ${property.branchEmail}`">{{property.branchEmail}}</a></li>
       </ul>
   </div>
 </template>

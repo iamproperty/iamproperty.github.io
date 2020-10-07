@@ -1,8 +1,8 @@
-<template>
-    <div class="key-fact">
+<template functional>
+    <div class="key-fact col-6 col-sm-4 col-lg-2">
         <ul>
-            <li :class="{nil: isZero}" class="fact-value">{{statValue}}</li>
-            <li class="fact-label">{{statLabel}}</li>
+            <li :class="{nil: props.keyfact.value == 0}" class="fact-value">{{ props.keyfact.value }}</li>
+            <li class="fact-label">{{ props.keyfact.label }}</li>
         </ul>
     </div>
 </template>
@@ -10,27 +10,9 @@
 <script>
 export default {
   props: {
-    statValue: {
-      required: false,
-      type: Number
-    },
-    statLabel: {
-      required: false,
-      type: String
-    }
-  },
-  data () {
-    return {
-      zero: true
-    }
-  },
-  computed: {
-    isZero () {
-      if (this.statValue === 0) {
-        return this.zero === true
-      } else {
-        return this.zero === false
-      }
+    keyfact: {
+      type: Object,
+      required: true
     }
   }
 }
