@@ -11,7 +11,7 @@
       <p>The component requires the colour variables to exist in the project</p>
     </div>
     <task-title>
-      Insert task title here
+      <slot>Insert task title here</slot>
     </task-title>
     <task-title
       variant="task-homely-aubergine"

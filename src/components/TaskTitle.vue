@@ -31,7 +31,7 @@ export default {
     );
     /* For each key in the map, create it's own class */
     @each $name, $value in $brand-colors {
-        @if $value == $homely-aubergine or $value == $deep-slate {
+        @if $value == $homely-aubergine or $value == $deep-slate or $value == $grey-70 {
             .task-#{$name} {
                 background-color: $value;
                 h4 {
