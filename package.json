@@ -2,19 +2,21 @@
   "name": "@iamproperty/components",
   "version": "1.0.1-0",
   "private": false,
-  "description": "Component library for I Am Property",
+  "description": "Component library for iamproperty",
   "author": {
     "name": "Michael White"
   },
-  "license": "unlicensed",
+  "license": "UNLICENSED",
   "scripts": {
     "serve": "vue-cli-service serve docs/main.js",
     "build": "vue-cli-service build --target lib src/index.js",
+    "build:docs": "vue-cli-service build docs/main.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "compile:sass": "node-sass assets/sass/main.scss assets/css/style.css -w"
+    "compile:sass": "node-sass assets/sass/main.scss assets/css/style.css -w",
+    "prepack": "npm run build"
   },
-  "module": "src/index.js",
+  "main": "dist/components.umd.js",
   "dependencies": {
     "bootstrap": "^4.5.2",
     "bootstrap-vue": "^2.17.3",
@@ -47,5 +49,9 @@
   "repository": {
     "type": "git",
     "url": "git@codebasehq.com:isg/isg-marketplace-intelligent-compliance/iamp-component-library.git"
-  }
+  },
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ]
 }
