@@ -37,7 +37,7 @@
 
 <script>
 import { fetchProperty } from '~/api'
-import PropertyTaskIntro from '@/components/PropertyTaskIntro.vue'
+import PropertyTaskIntro from '@/components/PropertyTaskIntro/PropertyTaskIntro.vue'
 
 export default {
   components: {

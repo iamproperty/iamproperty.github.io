@@ -17,7 +17,16 @@ export default {
 }
 </script>
 <style lang="scss">
-    @import "@/assets/scss/_variables.scss";
+
+    $deep-slate: #00313C;
+    $soft-green: /*#b4e6a5*/ #9CCD86;
+    $homely-aubergine: #46003C;
+    $soft-pink: #ffd2d2;
+    $grey-70: #6f6f6f;
+    $grey-50: #9d9d9d;
+    $fresh-blue: #1ebee6;
+    $punchy-mustard: #ffa500;
+
     /* Define the Sass Map $brand-colors */
     $brand-colors: (
         punchy-mustard: $punchy-mustard,

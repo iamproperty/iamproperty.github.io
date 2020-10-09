@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import KeyFactGroup from '@/components/KeyFactGroup.vue'
+import KeyFactGroup from '@/components/KeyFacts/KeyFactGroup.vue'
 
 export default {
   components: {

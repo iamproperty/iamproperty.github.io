@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import TaskTitle from '@/components/TaskTitle.vue'
+import TaskTitle from '@/components/TaskTitle/TaskTitle.vue'
 
 export default {
   components: {

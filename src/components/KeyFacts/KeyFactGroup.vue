@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import KeyFact from '@/components/KeyFact'
+import KeyFact from '@/components/KeyFacts/KeyFact'
 import { fetchStats } from '~/api'
 
 export default {
@@ -34,10 +34,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/_variables.scss";
 
 .key-fact-group {
-    background-color: $homely-aubergine;
+    background-color: #46003C;
     color:white;
     padding: 10px;
     border-radius:3px;

@@ -27,12 +27,14 @@ export default {
 }
 </script>
 <style lang="scss">
-    @import "@/assets/scss/_variables.scss";
 
     .property-task-intro {
         span {
             color:red;
             padding-left: 10px;
+        }
+        a {
+          color: #ffa500;
         }
     }
 

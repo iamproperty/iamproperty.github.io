@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install
+npm install --save @iamproperty/components
 ```
 
 ### Compiles and hot-reloads for development
