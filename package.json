@@ -49,9 +49,5 @@
   "repository": {
     "type": "git",
     "url": "git@codebasehq.com:isg/isg-marketplace-intelligent-compliance/iamp-component-library.git"
-  },
-  "sideEffects": [
-    "*.css",
-    "*.scss"
-  ]
+  }
 }
