@@ -1,6 +1,6 @@
 <template>
   <div class="task-title" :class="variant">
-    <h4><slot></slot></h4>
+    <slot></slot>
   </div>
 </template>
 

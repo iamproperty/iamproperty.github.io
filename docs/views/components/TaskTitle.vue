@@ -11,48 +11,48 @@
       <p>The component requires the colour variables to exist in the project</p>
     </div>
     <task-title>
-      <slot>Insert task title here</slot>
+      <h4>Insert task title here</h4>
     </task-title>
     <task-title
       variant="task-homely-aubergine"
     >
-      Add new property alert
+      <h4>Add new property alert</h4>
     </task-title>
     <task-title
       variant="task-fresh-blue"
     >
-      Create a contract
+      <h4>Create a contract</h4>
     </task-title>
     <task-title
       variant="task-deep-slate"
     >
-      Create a property note
+      <h4>Create a property note</h4>
     </task-title>
     <task-title
       variant="task-soft-green"
     >
-      Vendor contact task
+      <h4>Vendor contact task</h4>
     </task-title>
     <task-title
       variant="task-soft-pink"
     >
-      Link directors (area or managing) with other agencies
+      <h4>Link directors (area or managing) with other agencies</h4>
     </task-title>
     <task-title
       variant="task-grey-50"
     >
-      Add a new agent to the iamsold system
+      <h4>Add a new agent to the iamsold system</h4>
     </task-title>
     <task-title
       variant="task-grey-70"
     >
-      Manage Agency Branch Levels
+      <h4>Manage Agency Branch Levels</h4>
     </task-title>
     <br />
     <h4>Usage</h4>
     <pre
       v-highlightjs
-    ><code class="javascript">&lt;task-title variant="task-soft-green" >Manage Agency Branch Levels&lt;/task-title>
+    ><code class="javascript">&lt;task-title variant="task-soft-green" >&lt;h4>Manage Agency Branch Levels&lt;/h4>&lt;/task-title>
 </code></pre>
     <br>
     <table
