@@ -45,7 +45,7 @@ export default {
     branch: {
       type: Boolean,
       default: false
-    },
+    }
   }
 }
 </script>
