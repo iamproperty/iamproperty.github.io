@@ -1,6 +1,6 @@
 {
   "name": "@iamproperty/components",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "private": false,
   "description": "Component library for iamproperty",
   "author": {
@@ -9,7 +9,8 @@
   "license": "UNLICENSED",
   "scripts": {
     "serve": "vue-cli-service serve docs/main.js",
-    "build": "vue-cli-service build --target lib src/index.js",
+    "build": "vue-cli-service build docs/main.js",
+    "build-bundle": "vue-cli-service build --target lib --name components ./src/index.js",
     "build:docs": "vue-cli-service build docs/main.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
