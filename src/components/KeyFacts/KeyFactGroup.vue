@@ -1,45 +1,42 @@
 <template>
     <div>
         <div>
-          <div class="key-fact-group">
-            <div class="row">
-                <key-fact
-                    v-for="keyfact in keyfacts"
-                    :key="keyfact.id"
-                    :keyfact="keyfact">
-                </key-fact>
+            <div class="key-fact-group">
+                <div class="row">
+                    <key-fact
+                            v-for="keyfact in keyfacts"
+                            :key="keyfact.id"
+                            :keyfact="keyfact">
+                    </key-fact>
+                </div>
             </div>
-          </div>
         </div>
     </div>
 </template>
 
 <script>
-import KeyFact from '@/components/KeyFacts/KeyFact'
-import { fetchStats } from '~/api'
+import { KeyFact } from '@/components/KeyFacts/KeyFact'
 
 export default {
-  components: {
-    KeyFact
-  },
-  data () {
-    return {
-      keyfacts: {}
+  props: {
+    keyfacts: {
+      type: Array,
+      required: true
     }
   },
-  created () {
-    this.keyfacts = fetchStats()
+  components: {
+    KeyFact
   }
 }
 </script>
 
 <style lang="scss" scoped>
 
-.key-fact-group {
-    background-color: #46003C;
-    color:white;
-    padding: 10px;
-    border-radius:3px;
-}
+    .key-fact-group {
+        background-color: #46003C;
+        color:white;
+        padding: 10px;
+        border-radius:3px;
+    }
 
 </style>
