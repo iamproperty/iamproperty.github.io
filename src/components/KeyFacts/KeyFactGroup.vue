@@ -18,6 +18,7 @@
 import { KeyFact } from '@/components/KeyFacts/KeyFact'
 
 export default {
+  name: 'KeyFactGroup',
   props: {
     keyfacts: {
       type: Array,

@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'KeyFact',
   props: {
     keyfact: {
       type: Object,
