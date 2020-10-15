@@ -1,6 +1,6 @@
 {
   "name": "@iamproperty/components",
-  "version": "1.0.7-0",
+  "version": "1.0.8-0",
   "private": false,
   "description": "Component library for iamproperty",
   "author": {
@@ -49,5 +49,10 @@
   "repository": {
     "type": "git",
     "url": "git@codebasehq.com:isg/isg-marketplace-intelligent-compliance/iamp-component-library.git"
-  }
+  },
+  "files": [
+    "assets/*",
+    "dist/*",
+    "src/*"
+  ]
 }
