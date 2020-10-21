@@ -16,6 +16,10 @@
         - Group of property data including: address, starting bid, auction start, auction end date
         and branch details
       </li>
+      <li>
+        <router-link to="/components/vendor-table">Vendor Table</router-link>
+        - Flexible table component for displaying vendor information
+      </li>
     </ul>
   </section>
 </template>

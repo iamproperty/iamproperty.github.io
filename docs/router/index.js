@@ -37,6 +37,11 @@ const routes = [
         path: 'property-task-intro',
         name: 'Property Task Intro',
         component: () => import('../views/components/PropertyTaskIntro.vue')
+      },
+      {
+        path: 'vendor-table',
+        name: 'Vendor Table',
+        component: () => import('../views/components/VendorTable.vue')
       }
     ]
   }

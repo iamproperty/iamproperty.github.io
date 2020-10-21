@@ -13,6 +13,9 @@
                   <li class="nav-item">
                       <router-link class="nav-link" to="/components/property-task-intro">Property Task Intro</router-link>
                   </li>
+                  <li class="nav-item">
+                      <router-link class="nav-link" to="/components/vendor-table">Vendor Table</router-link>
+                  </li>
               </ul>
           </nav>
     </div>
