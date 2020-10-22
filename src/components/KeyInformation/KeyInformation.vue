@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="row mb-2" v-for="(value, name) in items">
+        <div class="row mb-2" :key="name" v-for="(value, name) in items">
             <div class="col-md-3 font-weight-bold">
                 {{ name }}:
             </div>
@@ -12,12 +12,12 @@
 </template>
 <script>
 export default {
-    name: "KeyInformation",
-    props: {
-        items: {
-            type: Object,
-            required: true,
-        },
-    },
+  name: 'KeyInformation',
+  props: {
+    items: {
+      type: Object,
+      required: true
+    }
+  }
 }
 </script>

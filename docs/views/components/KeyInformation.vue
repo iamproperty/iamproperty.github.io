@@ -20,11 +20,11 @@ export default {
   data () {
     return {
       items: {
-        "Full Name": "Mr Richard Branson",
-        "Legal Capacity": "Legal Owner",
-        "Mobile Number": "07411882800",
-        "Full Address": "Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom",
-        "Website Link": "<a href=\"https://www.branson-towers.co.uk\" target=\"_blank\">Branson Towers</a>"
+        'Full Name': 'Mr Richard Branson',
+        'Legal Capacity': 'Legal Owner',
+        'Mobile Number': '07411882800',
+        'Full Address': 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+        'Website Link': '<a href="https://www.branson-towers.co.uk" target="_blank">Branson Towers</a>'
       }
     }
   }
