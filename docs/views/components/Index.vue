@@ -20,6 +20,10 @@
         <router-link to="/components/vendor-table">Vendor Table</router-link>
         - Flexible table component for displaying vendor information
       </li>
+      <li>
+        <router-link to="/components/key-information">Key Information</router-link>
+        - Group key information as key/value in responsive columns
+      </li>
     </ul>
   </section>
 </template>

@@ -42,6 +42,11 @@ const routes = [
         path: 'vendor-table',
         name: 'Vendor Table',
         component: () => import('../views/components/VendorTable.vue')
+      },
+      {
+        path: 'key-information',
+        name: 'Key Information',
+        component: () => import('../views/components/KeyInformation.vue')
       }
     ]
   }
