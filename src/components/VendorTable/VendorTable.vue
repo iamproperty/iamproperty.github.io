@@ -28,22 +28,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-
-  .vendor-table {
-    font-size: 1.4rem;
-
-    .table {
-      thead {
-        background-color: #f7f7f7;
-        text-transform: lowercase;
-        div::first-letter {
-          text-transform: uppercase;
-        }
-      }
-      tbody {
-        background-color: #f4f4f4;
-      }
-    }
-  }
-</style>
