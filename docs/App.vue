@@ -1,22 +1,56 @@
 <template>
   <div id="app">
-    <header class="d-flex align-items-center justify-content-between">
-        <div class="d-flex logo-section align-items-center">
-          <img src="@/assets/img/logo.png" alt="I Am Property" width="" height="120" />
-          <span> Style Library</span>
+
+    <SVGLogo class="d-none" />
+
+    <nav class="pt-3 pb-3">
+      <div class="container">
+        <div class="row">
+          <div class="col mw-fit-content">
+            <router-link :class="{'text-decoration-none text-body router-link-sub-active': subIsActive('/')}" to="/">
+              <div class="brand brand--key">
+                <svg>
+                  <title>iam Key</title>
+                  <use xlink:href="#logo-key"></use>
+                </svg>
+                <span>Design system<br/>&amp; framework</span>
+              </div>
+            </router-link>
+          </div>
+
+          <div class="col mw-fit-content ms-auto d-none d-sm-flex flex-row align-items-center">
+            <ul class="list-unstyled list-inline ms-auto d-block mb-0">
+              <li class="list-inline-item"><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
+              <li class="list-inline-item"><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
+              <li class="list-inline-item"><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
+              <li class="list-inline-item"><router-link :class="{'router-link-sub-active': subIsActive('/patterns')}" to="/patterns">Patterns</router-link></li>
+            </ul>
+
+          </div>
         </div>
-        <div id="nav" class="justify-content-between">
-          <router-link to="/">Foundations</router-link> |
-          <router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link>
-        </div>
-    </header>
-    <div class="container-fluid">
-      <router-view />
-    </div>
+      </div>
+    </nav>
+    <router-view />
+    <footer class="bg-dark">
+      <div class="container pt-4">
+        <p>Version: {{version}}</p>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
+import SVGLogo from '../assets/svg/logo.svg?inline'
+import pkg from '../package.json'
+
 export default {
+  data () {
+    return {
+      version: pkg.version
+    }
+  },
+  components: {
+    SVGLogo
+  },
   methods: {
     subIsActive (input) {
       const paths = Array.isArray(input) ? input : [input]

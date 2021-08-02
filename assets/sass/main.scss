@@ -1,18 +1,25 @@
-// #region Bootstrap 5 files
-// Load Boostrap 5 sass files from node module
+@charset "UTF-8";
+$compatible: 'false';
 
 // Configuration
 @import "../../node_modules/bootstrap/scss/functions";
+@import "_functions/functions";
 @import "../../node_modules/bootstrap/scss/variables";
+@import "_functions/variables";
 @import "../../node_modules/bootstrap/scss/mixins";
+@import "_functions/mixins";
 @import "../../node_modules/bootstrap/scss/utilities";
 
 // Layout & components
 @import "../../node_modules/bootstrap/scss/root";
+@import "_foundations/root.scss";
 @import "../../node_modules/bootstrap/scss/reboot";
+@import "_foundations/reboot.scss";
+@import "_foundations/brand.scss";
 @import "../../node_modules/bootstrap/scss/type";
 @import "../../node_modules/bootstrap/scss/images";
-@import "../../node_modules/bootstrap/scss/containers";
+//@import "../../node_modules/bootstrap/scss/containers";
+@import "_elements/container.scss";
 @import "../../node_modules/bootstrap/scss/grid";
 @import "../../node_modules/bootstrap/scss/tables";
 @import "../../node_modules/bootstrap/scss/forms";
@@ -45,19 +52,3 @@
 // Utilities
 @import "../../node_modules/bootstrap/scss/utilities/api";
 // #endregion:Bootstrap 5
-
-@import "abstracts/functions";
-@import "abstracts/mixins";
-@import "abstracts/variables";
-
-@import "base/animations";
-@import "base/base";
-@import "base/typography";
-@import "base/utilities";
-
-@import "components/buttons";
-@import "components/forms";
-@import "components/icons";
-
-
-@import "layout/layout";
