@@ -3,12 +3,12 @@
     <table>
       <thead>
         <tr>
-          <th :key="value.key" v-for="(value) in fields">{{ value.key.charAt(0).toUpperCase() + value.key.replaceAll("_"," ").slice(1) }}</th>
+          <th :key="value.key" v-for="(value) in fields">{{ cellHeading(value.key) }}</th>
         </tr>
       </thead>
       <tbody>
         <tr :key="index" v-for="(value,index) in items">
-          <td :key="cellIndex" v-for="(cellValue,cellIndex) in value" v-html="cellValue" :data-label="cellIndex.charAt(0).toUpperCase()+cellIndex.replaceAll('_',' ').slice(1)"></td>
+          <td :key="cellIndex" v-for="(cellValue,cellIndex) in value" v-html="cellValue" :data-label="cellHeading(cellIndex)"></td>
         </tr>
       </tbody>
     </table>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { ucwords, unsnake } from '../../helpers/strings'
+
 export default {
   name: 'VendorTable',
   props: {
@@ -30,6 +32,13 @@ export default {
     small: {
       type: Boolean,
       required: false
+    }
+  },
+  computed: {
+    cellHeading () {
+      return (heading) => {
+        return `${ucwords(unsnake(heading))}`
+      }
     }
   }
 }
