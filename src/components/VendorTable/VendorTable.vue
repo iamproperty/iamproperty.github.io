@@ -1,15 +1,21 @@
 <template>
   <div class="vendor-table">
-    <b-table stacked="sm" :small="small" :items="items" :fields="fields">
-      <template #cell()="data">
-        <span v-html="data.value"></span>
-      </template>
-    </b-table>
+    <table>
+      <thead>
+        <tr>
+          <th :key="value.key" v-for="(value) in fields">{{ value.key.charAt(0).toUpperCase() + value.key.replaceAll("_"," ").slice(1) }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr :key="index" v-for="(value,index) in items">
+          <td :key="cellIndex" v-for="(cellValue,cellIndex) in value" v-html="cellValue" :data-label="cellIndex.charAt(0).toUpperCase()+cellIndex.replaceAll('_',' ').slice(1)"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'VendorTable',
   props: {

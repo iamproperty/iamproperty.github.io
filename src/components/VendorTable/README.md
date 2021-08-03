@@ -50,14 +50,4 @@ data () {
 | small | Boolean | `false` | Removes cell padding |
 
 ### Component Description
-The vendor table component is a flexible table based on `<b-table>` from the bootstrap vue component library.
-
-The table adapts to however many column items are needed to show various vendor information. fields define the order of the columns, and which columns to display.
-
-The vendor table component accepts html tags so links, buttons etc will display correctly.
-
-Table columns will stack on smaller viewports.
-
-More information on the `<b-table>` component can be found at:
-
-https://bootstrap-vue.org/docs/components/table
+TBC
