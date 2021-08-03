@@ -1,0 +1,40 @@
+:root {
+  // Custom variable values only support SassScript inside `#{}`.
+  @each $var, $value in $vars {
+    #{$var}: #{$value};
+  }
+
+  // Default container spacing
+  --bg-colour: var(--colour-white);
+
+  // Default container spacing
+  --spacing-container: var(--spacing-xs);
+
+  @include media-breakpoint-up(sm) {
+    --spacing-container: var(--spacing-sm);
+  }
+
+  @include media-breakpoint-up(md) {
+    --spacing-container: var(--spacing-md);
+  }  
+  
+  // Default type spacing
+  --spacing-type: var(--spacing-xs);
+
+  @include media-breakpoint-up(md) {
+    --spacing-type: var(--spacing-sm); // Using $spacing-sm is not a mistake
+  }
+
+  
+}
+
+
+/* Override the colours when on a drark background */
+.bg-primary,
+.bg-dark,
+.bg-danger {
+  --colour-link: white;
+  --colour-hover: white;
+  --colour-active: white;
+  color: white;;
+}

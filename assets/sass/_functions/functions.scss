@@ -1,0 +1,95 @@
+@use "sass:math";
+
+@function pow($x, $n) {
+  $ret: 1;
+    
+  @if $n >= 0 {
+    @for $i from 1 through $n {
+      $ret: $ret * $x;
+    } 
+  } @else {
+    @for $i from $n to 0 {
+      $ret: $ret/$x;
+    }
+  }
+  
+  @return $ret;
+}
+
+@function to-fixed($float, $digits: 2) {
+  $sass-precision: 5;
+  
+  @if $digits > $sass-precision {
+    @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
+    + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
+    + "See https://github.com/sass/sass/issues/1122 for further informations.";
+  }
+  
+  $pow: pow(10, $digits);
+  @return round($float * $pow)/$pow;
+}
+
+
+// converts pixels to em (context sets the current size of the font)
+@function em($pixels, $context: 16)
+{
+	@return #{$pixels/$context}em;
+}
+
+@function rem($pixels, $context: 16)
+{
+	@return #{$pixels/$context}rem;
+}
+
+@function vw($pixels, $context: 16)
+{
+	$size: 16/$pixels * 100;
+	@return #{to-fixed($size,5)}vw;
+}
+
+@function strip-px($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number/ ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+// prevent colours being changed via sass functions
+@function darken($colour, $percent)
+{
+	@return $colour;
+}
+
+@function lighten($colour, $percent)
+{
+	@return $colour;
+}
+
+@function saturate($colour, $percent)
+{
+	@return $colour;
+}
+@function desaturate($colour, $percent)
+{
+	@return $colour;
+}
+
+@function adjust-hue($colour, $percent)
+{
+	@return $colour;
+}
+
+@function tint($colour, $percent)
+{
+	@return $colour;
+}
+@function shade($colour, $percent)
+{
+	@return $colour;
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints), null);
+}

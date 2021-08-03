@@ -1,0 +1,66 @@
+/* Reset & Defaults - Most of the resets/normailization stuff is done by Bootstrap */
+html {
+
+
+  -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  font-size: vw($device-xs-width);
+  font-variation-settings: 'wght' 300;
+  
+  @include media-breakpoint-up(sm) {
+    font-size: vw($device-sm-width);
+  }
+  @include media-breakpoint-up(md) {
+    font-size: vw($device-md-width);
+  }
+  @media (min-width: #{em(1440)}) {
+      font-size: 100%;
+  }
+  
+  /*
+  @media (min-width: #{em(1440)}) {
+    font-size: vw(1440);
+  }
+  @media (min-width: #{em(1600)}) {
+    font-size: 111.11%;
+  }
+  @media (min-width: #{em(1800)}) {
+    font-size: 125%;
+  }
+  */
+}
+
+body {
+
+  font-family: 'qanelasmedium', arial, sans-serif;
+  @include var(color,--colour-body);
+  width: 100%;
+}
+
+address {
+  margin: 0;
+}
+
+button:focus {
+  border-radius: initial;
+  outline: 2px auto -webkit-focus-ring-color;
+}
+
+hr {
+  border: 0;
+  color: transparent;
+  margin: 0;
+  border-bottom: none;
+  background-color: currentColor;
+  opacity: 1;
+
+  &:after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+}
+

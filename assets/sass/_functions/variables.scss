@@ -1,0 +1,29 @@
+// Declare global vars variable
+$vars: ();
+
+// #region Grid Breakpoints 
+$grid-breakpoints: (
+  xs: 0,
+  sm: 36em, /* 576 */
+  md: 62em  /* 992 */
+);
+
+@each $bp, $value in $grid-breakpoints {
+
+  $vars: map-merge((
+    --breakpoint-#{$bp}: #{$value}
+  ), $vars);
+}
+
+$device-xs-width: 375;
+$device-sm-width: 768;
+$device-md-width: 1440;
+
+$container-max-widths: (
+  sm: 0,
+  md: 80em
+);
+
+$grid-columns: 12;
+$grid-gutter-width: 1rem; // 15px
+// #endregion
