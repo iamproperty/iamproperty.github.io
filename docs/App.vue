@@ -42,10 +42,13 @@
 import SVGLogo from '../assets/svg/logo.svg?inline'
 import pkg from '../package.json'
 
+import sassVars from './assets/styles.scss'
+
 export default {
   data () {
     return {
-      version: pkg.version
+      version: pkg.version,
+      sassVars: sassVars
     }
   },
   components: {

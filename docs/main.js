@@ -6,7 +6,6 @@ import VueHighlightJS from 'vue-highlightjs'
 
 // import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import '../assets/sass/main.scss'
 import '@/assets/css/default.css'
 
 Vue.use(BootstrapVue)
