@@ -7,8 +7,16 @@ module.exports = {
     'plugin:vue/essential',
     '@vue/standard'
   ],
+  parser: '@babel/eslint-parser',
   parserOptions: {
-    parser: 'babel-eslint'
+    sourceType: 'module',
+    allowImportExportEverywhere: false,
+    ecmaFeatures: {
+      globalReturn: false
+    },
+    babelOptions: {
+      configFile: './babel.config.js'
+    }
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
