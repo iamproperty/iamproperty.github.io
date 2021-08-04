@@ -3,9 +3,9 @@ const path = require('path')
 
 module.exports = {
   chainWebpack: (config) => {
-    const svgRule = config.module.rule('svg');
+    const svgRule = config.module.rule('svg')
 
-    svgRule.uses.clear();
+    svgRule.uses.clear()
 
     svgRule
       .use('babel-loader')
@@ -16,11 +16,13 @@ module.exports = {
       .options({
         svgo: {
           plugins: [
-            { cleanupIDs: false,
-              mergePaths: false },
-          ],
-        },
-      });
+            {
+              cleanupIDs: false,
+              mergePaths: false
+            }
+          ]
+        }
+      })
   },
   configureWebpack: {
     resolve: {
