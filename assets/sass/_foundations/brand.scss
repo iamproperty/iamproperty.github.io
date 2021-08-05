@@ -10,10 +10,13 @@
     --svg-width: #{em(228,130)};
   }
 
-
   &--compliance,
   &--movebutler {
     --svg-width: #{em(740,130)};
+  }
+
+  &--medwaylaw {
+    --svg-width: #{em(465,130)};
   }
 
   display: inline-flex;
