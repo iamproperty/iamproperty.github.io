@@ -1,0 +1,11 @@
+// Load the SCSS framework
+@import '../../assets/sass/main.scss';
+
+// Export the SCSS vars
+:export {
+  @each $var, $value in $vars {
+    #{$var}: #{$value};
+  }
+}
+
+// Bespoke SCSS for the docs

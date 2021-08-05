@@ -3,7 +3,6 @@ import App from './App.vue'
 import router from './router'
 import VueHighlightJS from 'vue-highlightjs'
 
-import '../assets/sass/main.scss'
 import '@/assets/css/default.css'
 
 Vue.use(VueHighlightJS)
