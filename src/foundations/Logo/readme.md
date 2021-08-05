@@ -1,12 +1,20 @@
-## HTML Example
-
-## How to use with Vue
+### Usage
 
 ```
-<Logo id="sold" desc="Description string"></Logo>
+<Logo id="property" desc="the founders<br/>of iamsold"></Logo>
 ```
+
+### Properties
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
-| id | String | property | This property declares which logo to choose from. Values to choose from are; sold, medwaylaw, compliance and movebutler. |
-| desc  | | | engine to be used for processing templates. Handlebars is the default. |
+| id | String | property | This property declares which logo to choose from. |
+| desc | String | | Optional description will be added to the right of logo. For eaxmple 'the founders of iamsold' can be added to the right of the IAM property logo. |
+
+### ID Options
+- property
+- sold
+- medwaylaw
+- compliance
+- movebutler
+- key
