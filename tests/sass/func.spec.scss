@@ -1,0 +1,16 @@
+@import '../../node_modules/sass-true/sass/true';
+@import '../../assets/sass/main.scss';
+
+@include describe('rem [func]') {
+  @include it('rem function returns the correct rem size') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        font-size: rem(16);
+      }
+      @include expect {
+        font-size: 1rem;
+      }
+    }
+  }
+}
