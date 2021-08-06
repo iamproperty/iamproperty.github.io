@@ -7,7 +7,10 @@ module.exports = {
     'plugin:vue/essential',
     '@vue/standard'
   ],
-  parser: '@babel/eslint-parser',
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+     "parser": "@babel/eslint-parser"
+  },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'

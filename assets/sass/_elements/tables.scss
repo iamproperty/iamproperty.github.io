@@ -1,0 +1,62 @@
+// #region Default table
+table {
+  width: 100%;
+  font-size: rem(16);
+  border: none;
+  margin-bottom: rem(32);
+  overflow: auto;
+}
+
+td,th {
+  padding: rem(16);
+  font-weight: normal;
+  text-align: left;
+  vertical-align: top;
+  border: none;
+  font-size: rem(16);
+  line-height: rem(24);
+}
+
+th {
+  font-weight: bold;
+}
+
+tr {
+  border-bottom: 1px solid currentColor;
+  @include var(border-color,--colour-border);
+
+  &:last-child {
+    border-bottom: 2px solid currentColor;
+    @include var(border-color,--colour-border);
+  }
+}
+
+thead {
+  tr:first-child {
+    border-top: 2px solid currentColor;
+    @include var(border-color,--colour-border);
+  }
+
+  th {
+    font-size: rem(16);
+    line-height: rem(24);
+    padding-bottom: rem(24);
+    color: inherit;
+  
+    @include media-breakpoint-up(sm) {
+  
+      font-size: rem(18);
+    }
+
+    font-weight: bold;
+    vertical-align: bottom;
+  }
+}
+
+tbody:first-child{
+  tr:first-child {
+    border-top: 2px solid currentColor;
+    @include var(border-color,--colour-border);
+  }
+}
+// #endregion

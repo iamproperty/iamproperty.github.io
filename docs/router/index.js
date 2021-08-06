@@ -15,16 +15,23 @@ const routes = [
   },
   {
     path: '/foundations',
-    name: 'Foundations',
-    component: () => import(/* webpackChunkName: "components" */ '../views/Foundations.vue'),
+    component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
     children: [
       {
         path: '',
-        name: 'Index',
+        name: 'Foundations',
         meta: {
           title: 'Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Index.vue')
+      },
+      {
+        path: 'logos',
+        name: 'Logos',
+        meta: {
+          title: 'Logos | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Logos.vue')
       }
     ]
   },

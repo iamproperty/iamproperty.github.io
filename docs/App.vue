@@ -7,14 +7,8 @@
       <div class="container">
         <div class="row">
           <div class="col mw-fit-content">
-            <router-link :class="{'text-decoration-none text-body router-link-sub-active': subIsActive('/')}" to="/">
-              <div class="brand brand--key">
-                <svg>
-                  <title>iam Key</title>
-                  <use xlink:href="#logo-key"></use>
-                </svg>
-                <span>Design system<br/>&amp; framework</span>
-              </div>
+            <router-link :class="{'text-decoration-none router-link-sub-active': subIsActive('/')}" to="/">
+              <Logo id="key" desc="Design system<br/>&amp; framework"></Logo>
             </router-link>
           </div>
 
@@ -40,6 +34,7 @@
 </template>
 <script>
 import SVGLogo from '../assets/svg/logo.svg?inline'
+import Logo from '@/foundations/Logo/Logo.vue'
 import pkg from '../package.json'
 
 import sassVars from './assets/styles.scss'
@@ -52,7 +47,8 @@ export default {
     }
   },
   components: {
-    SVGLogo
+    SVGLogo,
+    Logo
   },
   methods: {
     subIsActive (input) {

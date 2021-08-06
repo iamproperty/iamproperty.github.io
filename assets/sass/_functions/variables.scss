@@ -27,3 +27,98 @@ $container-max-widths: (
 $grid-columns: 12;
 $grid-gutter-width: 1rem; // 15px
 // #endregion
+
+// #region Colours
+// Default Bootstrap Theme vars
+$primary:       #00313C;
+$secondary:     #9CCD86;
+$success:       #9CCD86;
+$info:          #1ebee6;
+$warning:       #fdaa29;
+$danger:        #46003C;
+$light:         #ffd2d2;
+$dark:          #002e38;
+
+
+
+// Functional/state variables 
+$colour-body: #000000;
+$colour-muted: #9d9d9d;
+$colour-border: #6f6f6f;
+$colour-link: #ffa500;
+$colour-focus: #9d9d9d;
+$colour-hover: #9d9d9d;
+$colour-active: #6f6f6f;
+
+$colour-selected: $colour-active;
+$colour-disabled: tbd;
+$colour-heading: $primary;
+
+
+$theme-colors: ();
+$theme-colors: map-merge((
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+), $theme-colors);
+
+@each $color, $value in $theme-colors {
+
+  $vars: map-merge((
+    --colour-#{$color}: #{$value}
+  ), $vars);
+}
+
+// Colours that we want setting but not used for Bootstraps mixins, i.e. .text-primary, .bg-muted
+$non-theme-colors: ();
+$non-theme-colors: map-merge((
+  "muted":      $colour-muted,
+  "body":             $colour-body,
+  "border":           $colour-border,
+  "link":             $colour-link,
+  "focus":            $colour-focus,
+  "hover":            $colour-hover,
+  "active":           $colour-active,
+  "selected":         $colour-selected,
+  "input": #FFFFFF,
+  "white": #FFFFFF,
+  "heading": $colour-heading
+), $non-theme-colors);
+
+@each $color, $value in $non-theme-colors {
+
+  $vars: map-merge((
+    --colour-#{$color}: #{$value}
+  ), $vars);
+}
+
+$white:    #ffffff;
+$gray-100: $light;
+$gray-200: $light;
+$gray-300: $colour-border;
+$gray-400: $colour-border;
+$gray-500: $colour-muted;
+$gray-600: $colour-muted;
+$gray-700: $colour-body;
+$gray-800: $colour-body;
+$gray-900: $colour-body;
+$black: $colour-body;
+
+$grays: ();
+$grays: map-merge((
+  "100": $gray-100,
+  "200": $gray-200,
+  "300": $gray-300,
+  "400": $gray-400,
+  "500": $gray-500,
+  "600": $gray-600,
+  "700": $gray-700,
+  "800": $gray-800,
+  "900": $gray-900
+), $grays);
+// #endregion
