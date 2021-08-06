@@ -1,14 +1,12 @@
 /* Reset & Defaults - Most of the resets/normailization stuff is done by Bootstrap */
 html {
 
-
   -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
   overflow: hidden;
   overflow-x: hidden;
   overflow-y: scroll;
 
   font-size: vw($device-xs-width);
-  font-variation-settings: 'wght' 300;
   
   @include media-breakpoint-up(sm) {
     font-size: vw($device-sm-width);

@@ -6,6 +6,7 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/foundations/logos">Logos</router-link>
           <router-link class="nav-link" to="/foundations/colours">Colours</router-link>
+          <router-link class="nav-link" to="/foundations/fonts">Fonts</router-link>
         </li>
       </ul>
     </nav>

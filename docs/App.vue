@@ -58,25 +58,7 @@ export default {
 }
 </script>
 <style lang="scss">
-@import "@/assets/scss/_variables.scss";
-
-#app {
-  font-family: 'qanelasmedium', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #000;
-}
-
 #nav a.router-link-exact-active, #nav .router-link-sub-active {
-  color: $punchy-mustard;
+  color: red;
 }
 </style>
