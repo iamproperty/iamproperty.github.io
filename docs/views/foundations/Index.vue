@@ -5,6 +5,7 @@
       <ul class="nav flex-column">
         <li class="nav-item">
           <router-link class="nav-link" to="/foundations/logos">Logos</router-link>
+          <router-link class="nav-link" to="/foundations/colours">Colours</router-link>
         </li>
       </ul>
     </nav>

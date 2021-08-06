@@ -3,8 +3,11 @@
 
 // Export the SCSS vars
 :export {
-  @each $var, $value in $vars {
-    #{$var}: #{$value};
+  @each $color, $value in $theme-colors {
+    themeColour-#{$color}: #{$value}
+  }
+  @each $color, $value in $non-theme-colors {
+    nonThemeColour-#{$color}: #{$value}
   }
 }
 
