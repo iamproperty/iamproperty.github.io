@@ -2,27 +2,21 @@
 $compatible: 'false';
 
 // Configuration
-@import "../../node_modules/bootstrap/scss/functions";
-@import "_functions/functions";
-@import "../../node_modules/bootstrap/scss/variables";
-@import "_functions/variables";
-@import "../../node_modules/bootstrap/scss/mixins";
-@import "_functions/mixins";
-@import "../../node_modules/bootstrap/scss/utilities";
+@import "_func";
 
 // Layout & components
 @import "../../node_modules/bootstrap/scss/root";
-@import "_foundations/root.scss";
+@import "foundations/root.scss";
 @import "../../node_modules/bootstrap/scss/reboot";
-@import "_foundations/reboot.scss";
-@import "_foundations/brand.scss";
+@import "foundations/reboot.scss";
+@import "foundations/brand.scss";
 @import "../../node_modules/bootstrap/scss/type";
 @import "../../node_modules/bootstrap/scss/images";
 // @import "../../node_modules/bootstrap/scss/containers";
-@import "_elements/container.scss";
+@import "elements/container.scss";
 @import "../../node_modules/bootstrap/scss/grid";
 // @import "../../node_modules/bootstrap/scss/tables";
-@import "_elements/tables.scss";
+@import "elements/tables.scss";
 @import "../../node_modules/bootstrap/scss/forms";
 @import "../../node_modules/bootstrap/scss/buttons";
 @import "../../node_modules/bootstrap/scss/transitions";

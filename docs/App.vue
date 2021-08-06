@@ -25,7 +25,7 @@
       </div>
     </nav>
     <router-view />
-    <footer class="bg-dark">
+    <footer class="bg-primary">
       <div class="container pt-4">
         <p>Version: {{version}}</p>
       </div>
@@ -37,13 +37,10 @@ import SVGLogo from '../assets/svg/logo.svg?inline'
 import Logo from '@/foundations/Logo/Logo.vue'
 import pkg from '../package.json'
 
-import sassVars from './assets/styles.scss'
-
 export default {
   data () {
     return {
-      version: pkg.version,
-      sassVars: sassVars
+      version: pkg.version
     }
   },
   components: {
