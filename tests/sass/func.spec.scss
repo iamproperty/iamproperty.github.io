@@ -1,5 +1,5 @@
 @import '../../node_modules/sass-true/sass/true';
-@import '../../assets/sass/main.scss';
+@import '../../assets/sass/_func.scss';
 
 @include describe('rem [func]') {
   @include it('rem function returns the correct rem size') {

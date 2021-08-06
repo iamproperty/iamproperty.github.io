@@ -32,6 +32,14 @@ const routes = [
           title: 'Logos | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Logos.vue')
+      },
+      {
+        path: 'colours',
+        name: 'Colours',
+        meta: {
+          title: 'Colours | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Colours.vue')
       }
     ]
   },
