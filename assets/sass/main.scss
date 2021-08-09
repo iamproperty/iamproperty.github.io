@@ -5,12 +5,14 @@ $compatible: 'false';
 @import "_func";
 
 // Layout & components
+@import "foundations/fonts.scss";
 @import "../../node_modules/bootstrap/scss/root";
 @import "foundations/root.scss";
 @import "../../node_modules/bootstrap/scss/reboot";
 @import "foundations/reboot.scss";
 @import "foundations/brand.scss";
 @import "../../node_modules/bootstrap/scss/type";
+@import "elements/headings.scss";
 @import "../../node_modules/bootstrap/scss/images";
 // @import "../../node_modules/bootstrap/scss/containers";
 @import "elements/container.scss";
@@ -43,6 +45,7 @@ $compatible: 'false';
 
 // Helpers
 @import "../../node_modules/bootstrap/scss/helpers";
+@import "helpers/general.scss";
 
 // Utilities
 @import "../../node_modules/bootstrap/scss/utilities/api";

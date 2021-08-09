@@ -89,3 +89,30 @@ $non-theme-colors: map-merge((
   ), $vars);
 }
 // #endregion
+
+// #region fonts
+
+$font-body: 'qanelasmedium', arial, sans-serif;
+$font-heading: 'qanelas_softextrabold', arial, sans-serif;
+
+$fonts: ();
+$fonts: map-merge((
+  "heading":   $font-heading,
+  "body":   $font-body
+), $fonts);
+
+
+@each $font, $value in $fonts {
+
+  $vars: map-merge((
+    --font-#{$font}: #{$value}
+  ), $vars);
+}
+
+$headings-font-weight: 700;
+
+$vars: map-merge((
+  --heading-weight: $headings-font-weight
+), $vars);
+
+// #endregion
