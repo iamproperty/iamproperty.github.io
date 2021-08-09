@@ -1,0 +1,43 @@
+
+.navbar {
+  padding: rem(16) 0 rem(16) 0;
+
+  .container {
+    padding-bottom: 0;
+  }
+
+  .brand {
+    font-size: rem(48);
+
+    @include media-breakpoint-up(sm) {
+      font-size: rem(60);
+    }
+  }
+
+  li a {
+    text-decoration: none;
+    @include var(color,--colour-primary,!important);
+    display: block;
+    padding: rem(8) 0 rem(8) 0;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      width: 0;
+      height: 4px;
+      @include var(background-color,--colour-secondary);
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      transform: translateX(-50%);
+      -webkit-transition: .3s ease-in;
+      transition: .3s ease-in;
+    }
+
+    &:hover:after {
+      width: 100%;
+    }
+  }
+}

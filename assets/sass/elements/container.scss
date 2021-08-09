@@ -3,9 +3,14 @@
 
   margin-left: auto;
   margin-right: auto;
-  padding: 0 rem(16) rem(16) rem(16);
-  max-width: rem(1440);
+  padding: 0 rem(20) rem(16) rem(20);
+  width: 100%;
+  max-width: rem(1360);
   
+  @include media-breakpoint-up(md) {
+    padding: 0 rem(60) rem(16) rem(60);
+  }
+
   .container {
     padding-left: 0;
     padding-right: 0;
