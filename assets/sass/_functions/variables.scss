@@ -109,10 +109,55 @@ $fonts: map-merge((
   ), $vars);
 }
 
-$headings-font-weight: 700;
+// #endregion
+
+// #region Type
+$h1-font-size:                $font-size-base * 2;
+$h2-font-size:                $font-size-base * 1.5;
+$h3-font-size:                $font-size-base * 1.5;
+$h4-font-size:                $font-size-base * 1.25;
+$h5-font-size:                $font-size-base * 1.125;
+$h6-font-size:                $font-size-base * 1.125;
+// scss-docs-end font-variables
+
+// scss-docs-start font-sizes
+$font-sizes: (
+  1: $h1-font-size,
+  2: $h2-font-size,
+  3: $h3-font-size,
+  4: $h4-font-size,
+  5: $h5-font-size,
+  6: $h6-font-size
+);
+
+@each $size, $value in $font-sizes {
+
+  $vars: map-merge((
+    --fs-#{$size}: #{$value}
+  ), $vars);
+}
+
+$headings-margin-bottom: 0.5em;
+$headings-font-style: normal;
+$headings-line-height: 1.2;
+
+
+@if $compatible == 'true' {
+  $headings-font-family: $font-heading;
+  $headings-font-weight: 700;
+  $headings-color: $primary;
+}
+@else {
+  $headings-font-family: var(--font-heading);
+  $headings-font-weight: var(--heading-weight);
+  $headings-color: var(--colour-primary);
+}
+
 
 $vars: map-merge((
-  --heading-weight: $headings-font-weight
+  --heading-weight: 700
 ), $vars);
 
-// #endregion
+$paragraph-margin-bottom: 1rem;
+
+// #endregion 

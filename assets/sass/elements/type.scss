@@ -1,3 +1,4 @@
+// #region headings
 %heading {
   clear: both;
   @include var(font-weight,--heading-weight);
@@ -9,9 +10,15 @@
 h1,
 .h1,
 h2,
-.h2,
+.h2 {
+  @extend %heading;
+}
 h3,
-.h3,
+.h3 {
+  @extend %heading;
+  @include var(font-family, --font-body);
+  font-weight: normal;
+}
 h4,
 .h4,
 h5,
@@ -22,7 +29,20 @@ h6,
   @extend %heading;
 }
 
+// #endregion
+
+p {
+  max-width: rem(820);
+}
+
 .strapline {
   @include var(font-family, --font-heading);
   font-weight: 600;
+}
+
+.lead {
+  @include var(font-size,--fs-3);
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  @include var(color,--colour-primary);
 }

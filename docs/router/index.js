@@ -52,6 +52,28 @@ const routes = [
     ]
   },
   {
+    path: '/elements',
+    component: () => import(/* webpackChunkName: "elements" */ '../views/Elements.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Elements',
+        meta: {
+          title: 'Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Index.vue')
+      },
+      {
+        path: 'type',
+        name: 'Type',
+        meta: {
+          title: 'Typography | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Type.vue')
+      }
+    ]
+  },
+  {
     path: '/components',
     name: 'Components',
     meta: {

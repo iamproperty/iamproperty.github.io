@@ -28,7 +28,8 @@
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/_func";
+$compatible: 'false';
+@import "../../../assets/sass/_functions/_func";
 .colour-blocks {
   display: flex;
   flex-wrap: wrap;

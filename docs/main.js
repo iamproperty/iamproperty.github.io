@@ -33,7 +33,8 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
 
 const shared = {
   themeColours: themeColours,
-  nonThemeColours: nonThemeColours
+  nonThemeColours: nonThemeColours,
+  cssVars: cssVars
 }
 
 shared.install = function () {
