@@ -35,14 +35,53 @@ p {
   max-width: rem(820);
 }
 
+p + p {
+  margin-top: rem(-16);
+}
+
 .strapline {
+  @include var(font-size,--fs-4);
   @include var(font-family, --font-heading);
+  @include var(color,--colour-secondary);
   font-weight: 600;
+
+  h1 + &,
+  .h1 + & {
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
 }
 
 .lead {
   @include var(font-size,--fs-3);
   line-height: 1.2;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   @include var(color,--colour-primary);
+}
+
+blockquote {
+
+  quotes: "“" "”" "‘" "’";
+  margin-bottom: 1rem;
+
+  p {
+    @include var(font-size,--fs-4);
+    @include var(color,--colour-primary);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  & p:first-child:before {
+    content: open-quote;
+  }
+  & p:last-of-type:after {
+    content: close-quote;
+  }
+
+  cite {
+    @include var(font-size,--fs-5);
+    @include var(color,--colour-primary);
+    font-style: normal;
+    font-weight: bold;
+  }
 }
