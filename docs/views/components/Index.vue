@@ -1,8 +1,9 @@
 <template>
-  <section class="mb5">
-    <h3>Component table of contents</h3>
+  <main>
+    <div class="container">
+    <h1>Component table of contents</h1>
     <hr>
-    <ul class="component-contents">
+    <ul>
       <li>
         <router-link to="/components/task-title">Task Title</router-link>
         - The task title component has a number of choices for background colours
@@ -25,7 +26,8 @@
         - Group key information as key/value in responsive columns
       </li>
     </ul>
-  </section>
+    </div>
+  </main>
 </template>
 
 <style scoped>

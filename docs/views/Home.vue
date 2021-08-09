@@ -9,13 +9,37 @@
       </div>
       <img src="../assets/code.jpeg" alt="" />
     </div>
-    <div class="container">
-      <ul class="list-unstyled">
-        <li><router-link to="/foundations">Foundations</router-link></li>
-        <li><router-link to="/elements">Elements</router-link></li>
-        <li><router-link to="/components">Components</router-link></li>
-        <li><router-link to="/patterns">Patterns</router-link></li>
-      </ul>
+    <div class="container pb-5 pt-3">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title">Foundations</h2>
+              <p class="card-text">Core variables and principles that are used through out the framework.</p>
+              <router-link to="/foundations" class="btn btn-secondary">Foundations</router-link>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title">Elements</h2>
+              <p class="card-text">Small re-usable parts that are commonly used within components.</p>
+              <router-link to="/elements" class="btn btn-secondary">Elements</router-link>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h2 class="card-title">Components</h2>
+              <p class="card-text">Configurable re-usable parts that build up a page.</p>
+              <router-link to="/components" class="btn btn-secondary">Components</router-link>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 </template>
