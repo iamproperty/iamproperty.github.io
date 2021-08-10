@@ -1,0 +1,18 @@
+a {
+  @include var (color, --colour-link);
+  
+  &:not(:hover):not(:focus):not(:active){
+
+    text-decoration: none;
+  }
+  
+
+  &:hover,
+  &:focus {
+    @include var (color, --colour-hover);
+  }
+
+  &:active {
+    @include var (color, --colour-active);
+  }
+}
