@@ -161,3 +161,24 @@ $vars: map-merge((
 $paragraph-margin-bottom: 2rem;
 
 // #endregion 
+
+// #region Buttons
+$btn-border-radius: 1rem;
+$btn-border-radius-sm:        1rem;
+$btn-border-radius-lg:        1rem;
+
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1.5rem;
+$btn-padding-y-sm: $btn-padding-y;
+$btn-padding-x-sm: $btn-padding-x;
+$btn-padding-y-md: $btn-padding-y;
+$btn-padding-x-md: $btn-padding-x;
+
+// #endregion
+
+// #region Cards
+$card-border-width:                 0;
+$card-border-radius:                rem(10);
+$card-spacer-y: rem(24);
+$card-spacer-x: rem(28);
+// #endregion card-variables

@@ -3,10 +3,10 @@
 
     <SVGLogo class="d-none" />
 
-    <nav class="pt-3 pb-3">
+    <nav class="navbar">
       <div class="container">
         <div class="row">
-          <div class="col mw-fit-content">
+          <div class="col col-sm-4 mw-fit-content">
             <router-link :class="{'text-decoration-none router-link-sub-active': subIsActive('/')}" to="/">
               <Logo id="key" desc="Design system<br/>&amp; framework"></Logo>
             </router-link>
@@ -14,18 +14,22 @@
 
           <div class="col mw-fit-content ms-auto d-none d-sm-flex flex-row align-items-center">
             <ul class="list-unstyled list-inline ms-auto d-block mb-0">
-              <li class="list-inline-item"><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
-              <li class="list-inline-item"><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
-              <li class="list-inline-item"><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
-              <li class="list-inline-item"><router-link :class="{'router-link-sub-active': subIsActive('/patterns')}" to="/patterns">Patterns</router-link></li>
+              <li class="list-inline-item ms-4 me-0"><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
+              <li class="list-inline-item ms-4 me-0"><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
+              <li class="list-inline-item ms-4 me-0"><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
             </ul>
-
           </div>
         </div>
       </div>
     </nav>
     <router-view />
     <footer class="bg-primary">
+
+      <div class="container pt-4">
+        <ul class="list-unstyled list-inline ms-auto d-block mb-0">
+          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/changelog')}" to="/changelog">Changelog</router-link></li>
+        </ul>
+      </div>
       <div class="container pt-4">
         <p>Version: {{version}}</p>
       </div>
@@ -58,7 +62,7 @@ export default {
 }
 </script>
 <style lang="scss">
-#nav a.router-link-exact-active, #nav .router-link-sub-active {
-  color: red;
+.navbar .router-link-active:after {
+  width: 100%;
 }
 </style>

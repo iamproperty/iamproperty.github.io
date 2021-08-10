@@ -1,0 +1,41 @@
+.header {
+  background: linear-gradient(180deg,var(--colour-secondary) 0, var(--colour-info) 100%);
+  margin-bottom: rem(32);
+  position: relative;
+
+  > .container {
+    padding-bottom: 0;
+  }
+
+  &__inner {
+    background: white;
+    padding: rem(32);
+    margin: rem(30) 0;
+    position: relative;
+    z-index: 2;
+    @include media-breakpoint-up(md) {
+      max-width: rem(600);
+      margin: rem(112) 0 rem(80) 0;
+      padding: rem(56) rem(64);
+    }
+    > *:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  > img {
+    display: none;
+    @include media-breakpoint-up(md) {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 40%;
+      height: 100%;
+      object-fit: cover;
+      width: 60%;
+      max-width: rem((1440/100)*60);
+      pointer-events: none;
+    }
+  }
+}
