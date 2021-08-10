@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import VueHighlightJS from 'vue-highlightjs'
 
-import '@/assets/css/default.css'
+// import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import cssVars from './assets/styles.scss'
 
 Vue.use(VueHighlightJS)
@@ -30,7 +31,8 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
 
 const shared = {
   themeColours: themeColours,
-  nonThemeColours: nonThemeColours
+  nonThemeColours: nonThemeColours,
+  cssVars: cssVars
 }
 
 shared.install = function () {

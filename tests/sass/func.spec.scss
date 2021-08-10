@@ -1,6 +1,23 @@
 @import '../../node_modules/sass-true/sass/true';
-@import '../../assets/sass/_func.scss';
+@import '../../assets/sass/_functions/_func.scss';
 
+/*#region em*/
+@include describe('em [func]') {
+  @include it('em function returns the correct em size') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        font-size: em(16);
+      }
+      @include expect {
+        font-size: 1em;
+      }
+    }
+  }
+}
+/*#endregion*/
+
+/*#region rem*/
 @include describe('rem [func]') {
   @include it('rem function returns the correct rem size') {
     // Assert the expected results
@@ -14,3 +31,203 @@
     }
   }
 }
+/*#endregion*/
+
+/*#region rem*/
+@include describe('rem [func]') {
+  @include it('rem function returns the correct rem size') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        font-size: rem(16);
+      }
+      @include expect {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+/*#endregion*/
+
+/*#region vw*/
+@include describe('vw [func]') {
+  @include it('vw function returns the correct vw size') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        font-size: vw(375);
+      }
+      @include expect {
+        font-size: 4.26667vw;
+      }
+    }
+    @include assert {
+      @include output {
+        font-size: vw(768);
+      }
+      @include expect {
+        font-size: 2.08333vw;
+      }
+    }
+    @include assert {
+      @include output {
+        font-size: vw(1280);
+      }
+      @include expect {
+        font-size: 1.25vw;
+      }
+    }
+  }
+}
+/*#endregion*/
+
+
+/*#region vw*/
+@include describe('vw [func]') {
+  @include it('vw function returns the correct vw size') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        font-size: vw(375);
+      }
+      @include expect {
+        font-size: 4.26667vw;
+      }
+    }
+    @include assert {
+      @include output {
+        font-size: vw(768);
+      }
+      @include expect {
+        font-size: 2.08333vw;
+      }
+    }
+    @include assert {
+      @include output {
+        font-size: vw(1280);
+      }
+      @include expect {
+        font-size: 1.25vw;
+      }
+    }
+  }
+}
+/*#endregion*/
+
+/*#region boostrap color functions*/
+@include describe('Bootstrap colour functions dont do anything [func]') {
+  @include it('darken function returns the input without change') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        color: darken(#ffffff, 50);
+      }
+      @include expect {
+        color: #ffffff;
+      }
+    }
+  }
+  @include it('lighten function returns the input without change') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        color: lighten(#ffffff, 50);
+      }
+      @include expect {
+        color: #ffffff;
+      }
+    }
+  }
+  @include it('saturate function returns the input without change') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        color: saturate(#ffffff, 50);
+      }
+      @include expect {
+        color: #ffffff;
+      }
+    }
+  }
+  @include it('desaturate function returns the input without change') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        color: desaturate(#ffffff, 50);
+      }
+      @include expect {
+        color: #ffffff;
+      }
+    }
+  }
+  @include it('adjust-hue function returns the input without change') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        color: adjust-hue(#ffffff, 50);
+      }
+      @include expect {
+        color: #ffffff;
+      }
+    }
+  }
+  @include it('tint function returns the input without change') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        color: tint(#ffffff, 50);
+      }
+      @include expect {
+        color: #ffffff;
+      }
+    }
+  }
+  @include it('shade function returns the input without change') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        color: shade(#ffffff, 50);
+      }
+      @include expect {
+        color: #ffffff;
+      }
+    }
+  }
+}
+/*#endregion*/
+
+/*#region breakpoint-max*/
+@include describe('breakpoint-max [func]') {
+  @include it('breakpoint-max func creates a max-width media query') {
+    // Assert the expected results
+    @include assert {
+      @include output {
+        $name: 'sm';
+        $max: breakpoint-max($name);
+        @media (max-width: $max) {
+          color: red;
+        }
+      }
+      @include expect {
+        @media (max-width: 35.98em) {
+          color: red;
+        }
+      }
+    }
+    @include assert {
+      @include output {
+        $name: 'md';
+        $max: breakpoint-max($name);
+        @media (max-width: $max) {
+          color: red;
+        }
+      }
+      @include expect {
+        @media (max-width: 61.98em) {
+          color: red;
+        }
+      }
+    }
+  }
+}
+/*#endregion*/

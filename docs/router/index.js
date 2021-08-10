@@ -40,6 +40,36 @@ const routes = [
           title: 'Colours | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Colours.vue')
+      },
+      {
+        path: 'fonts',
+        name: 'Fonts',
+        meta: {
+          title: 'Fonts | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Fonts.vue')
+      }
+    ]
+  },
+  {
+    path: '/elements',
+    component: () => import(/* webpackChunkName: "elements" */ '../views/Elements.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Elements',
+        meta: {
+          title: 'Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Index.vue')
+      },
+      {
+        path: 'type',
+        name: 'Type',
+        meta: {
+          title: 'Typography | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Type.vue')
       }
     ]
   },

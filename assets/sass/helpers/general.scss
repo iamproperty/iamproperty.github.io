@@ -1,0 +1,7 @@
+.font-body { 
+  
+  @include var(font-family,--font-body);
+}
+.font-weight-normal {
+  font-weight: 400 !important;
+}

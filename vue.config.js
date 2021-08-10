@@ -34,6 +34,7 @@ module.exports = {
         raw: true
       })
   },
+  css: {sourceMap: true},
   configureWebpack: {
     resolve: {
       alias: {
