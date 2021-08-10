@@ -5,6 +5,8 @@
       <p>All of our typographic elements should be sized using relative units to its font size. This will reduce the amount of bespoke CSS for each header and created more robost elements.</p>
       <p>Our base font size is 16px or 1rem and any other rem values are calculated by multiplying the base font size. Em values are different as these are multiplied by the font-size of the element they are being applied too. So a margin bottom of 0.5em on a heading element with the font size of 32px will work out to be 16px.</p>
       <h2>Scale</h2>
+    </div>
+    <div class="container visualtest">
       <table>
         <thead>
           <tr>
@@ -68,7 +70,7 @@
         </tbody>
       </table>
     </div>
-    <div class="container">
+    <div class="container visualtest">
       <h2>Body Text</h2>
       <h3>Default</h3>
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>

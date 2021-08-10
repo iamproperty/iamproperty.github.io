@@ -4,7 +4,7 @@
       <h1>Fonts</h1>
       <p class="strapline">Setting a tone through our typographic styling. The form of our letters says a lot about who we are.</p>
     </div>
-    <div class="container visual-test">
+    <div class="container visualtest">
       <div class="row pb-5">
         <div class="col-sm-6">
           <h2 class="h1 font-heading">Qanelas Soft</h2>
