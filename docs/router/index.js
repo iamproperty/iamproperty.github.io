@@ -14,6 +14,14 @@ const routes = [
     }
   },
   {
+    path: '/changelog',
+    component: () => import('../views/Changelog.vue'),
+    name: 'Changelog',
+    meta: {
+      title: 'Changelog | IAM Key'
+    }
+  },
+  {
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
     children: [

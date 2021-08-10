@@ -24,6 +24,12 @@
     </nav>
     <router-view />
     <footer class="bg-primary">
+
+      <div class="container pt-4">
+        <ul class="list-unstyled list-inline ms-auto d-block mb-0">
+          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/changelog')}" to="/changelog">Changelog</router-link></li>
+        </ul>
+      </div>
       <div class="container pt-4">
         <p>Version: {{version}}</p>
       </div>
