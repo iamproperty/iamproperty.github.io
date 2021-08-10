@@ -2,17 +2,17 @@
 $compatible: 'false';
 
 // Configuration
-@import "_func";
+@import "_functions/_func";
 
 // Layout & components
 @import "foundations/fonts.scss";
-@import "../../node_modules/bootstrap/scss/root";
+//@import "../../node_modules/bootstrap/scss/root";
 @import "foundations/root.scss";
 @import "../../node_modules/bootstrap/scss/reboot";
 @import "foundations/reboot.scss";
 @import "foundations/brand.scss";
 @import "../../node_modules/bootstrap/scss/type";
-@import "elements/headings.scss";
+@import "elements/type.scss";
 @import "../../node_modules/bootstrap/scss/images";
 // @import "../../node_modules/bootstrap/scss/containers";
 @import "elements/container.scss";

@@ -1,10 +1,29 @@
-@mixin bg-variant($parent, $color, $ignore-warning: false) {
-  #{$parent} {
 
-    --bg-colour: var(--colour-#{str-replace($parent,'.bg-','')});
-    --bg-colour-tint: var(--colour-#{str-replace($parent,'.bg-','')}-tint);
-    
-    @include var(background-color,--colour-#{str-replace($parent,'.bg-','')},!important);
+// Example: @include prefix(transition, transform 1.5s, webkit ms o);
+@mixin prefix($property, $value, $prefixes: (webkit ms o))
+{
+	@each $prefix in $prefixes
+	{
+		#{'-' + $prefix + '-' + $property}: $value;
+	}
+	
+	// Output standard non-prefixed declaration
+	#{$property}: $value;
+}
+
+// Used to make it possible to use css properties but still support IE11
+@mixin var($property, $varName, $important:"", $compatible:$compatible) {
+
+  @if $compatible == 'true' {
+    #{$property}: map-get($vars, $varName) #{$important};
+  }
+  @else if $compatible == 'fallback' {
+      
+    #{$property}: map-get($vars, $varName) #{$important};
+    #{$property}: var(#{$varName}) #{$important};
+  }
+  @else {
+  #{$property}: var(#{$varName}) #{$important};
   }
 }
 
@@ -42,6 +61,15 @@
   }
 }
 
+@mixin bg-variant($parent, $color, $ignore-warning: false) {
+  #{$parent} {
+
+    --bg-colour: var(--colour-#{str-replace($parent,'.bg-','')});
+    --bg-colour-tint: var(--colour-#{str-replace($parent,'.bg-','')}-tint);
+    
+    @include var(background-color,--colour-#{str-replace($parent,'.bg-','')},!important);
+  }
+}
 @mixin text-emphasis-variant($parent, $color, $ignore-warning: false) {
   #{$parent} {
 
@@ -49,184 +77,16 @@
   }
 }
 
-@mixin var($property, $varName, $important:"", $compatible:$compatible) {
-
-  @if $compatible == 'true' {
-    #{$property}: map-get($vars, $varName) #{$important};
-  }
-  @else if $compatible == 'fallback' {
-      
-    #{$property}: map-get($vars, $varName) #{$important};
-    #{$property}: var(#{$varName}) #{$important};
-  }
-  @else {
-  #{$property}: var(#{$varName}) #{$important};
-  }
-}
-
-
-@mixin container-spacing($property, $compatible:$compatible) {
+@mixin font-size($value, $compatible:$compatible) {
   
   @if $compatible == 'true' {
-  
-    #{$property}: $spacing-xs;
-
-    @include media-breakpoint-up(sm) {
-      #{$property}: $spacing-sm;
-    }
-  
-    @include media-breakpoint-up(md) {
-      #{$property}: $spacing-md;
-    }
-    
+    font-size: $value;
   }
   @else {
-  
-    #{$property}: var(--spacing-container);
-  }
-}
+    @each $size, $subvalue in $font-sizes {
 
-@mixin type-spacing($property, $compatible:$compatible) {
-
-  @if $compatible == 'true' {
-  
-    #{$property}: $spacing-xs;
-    
-    @include media-breakpoint-up(md) {
-      #{$property}: $spacing-sm; // $spacing-sm is used on purpose
-    }
-    
-  }
-  @else {
-  
-    #{$property}: var(--spacing-type);
-  }
-}
-
-// Example: @include prefix(transition, transform 1.5s, webkit ms o);
-@mixin prefix($property, $value, $prefixes: (webkit ms o))
-{
-	@each $prefix in $prefixes
-	{
-		#{'-' + $prefix + '-' + $property}: $value;
-	}
-	
-	// Output standard non-prefixed declaration
-	#{$property}: $value;
-}
-
-
-@mixin btn-colours-states()
-{ 
-
-  color: var(--btn-colour);
-  background: var(--btn-bg);
-  border-color: var(--btn-border);
-
-  &:hover:not(:active),
-  &:focus:not(:active) {
-    color: var(--btn-colour-hover);
-    background: var(--btn-bg-hover);
-    border-color: var(--btn-border-hover);
-  }
-
-  &:active,
-  &.active,
-  .js-enabled &[data-toggle='collapse']:not(.collapsed) {
-    color: var(--btn-colour-active);
-    background: var(--btn-bg-active);
-    border-color: var(--btn-border-active);
-  }
-}
-
-@mixin btn-colours($colour, $bg, $border, $state:'default',$important:'',$compatible:$compatible)
-{ 
-
-  // Determine the var names
-  $var-colour: '--btn-colour';
-  $var-bg: '--btn-bg';
-  $var-border: '--btn-border';
-
-  @if $state == 'hover' {
-
-    $var-colour: '--btn-colour-hover';
-    $var-bg: '--btn-bg-hover';
-    $var-border: '--btn-border-hover';
-  }
-  @else if $state == 'active' {
-
-    $var-colour: '--btn-colour-active';
-    $var-bg: '--btn-bg-active';
-    $var-border: '--btn-border-active';
-  }
-
-  // Set vars
-  #{$var-colour}: var(#{$colour});
-
-  @if $bg == transparent {
-    #{$var-bg}: transparent;
-  }
-  @else {
-    #{$var-bg}: var(#{$bg});
-  }
-  @if $border == currentColor {
-    #{$var-border}: currentColor;
-  }
-  @else {
-    #{$var-border}: var(#{$border});
-  }
-
-
-  // Compatible
-  @if $compatible == 'true' and $state == 'default' {
-
-    color: map-get($vars, $colour)#{$important};
-    @if $bg == transparent {
-      background: transparent#{$important};
-    }
-    @else {
-      background: map-get($vars, $bg)#{$important};
-    }
-    @if $border == currentColor {
-      border-color: currentColor;
-    }
-    @else {
-      border-color: map-get($vars, $border)#{$important};
-    }
-  }
-  @if $compatible == 'true' and $state == 'hover' {
-    &:hover:not(:active),
-    &:focus:not(:active) {
-      color: map-get($vars, $colour)#{$important};
-      @if $bg == transparent {
-        background: transparent#{$important};
-      }
-      @else {
-        background: map-get($vars, $bg)#{$important};
-      }
-      @if $border == currentColor {
-        border-color: currentColor;
-      }
-      @else {
-        border-color: map-get($vars, $border)#{$important};
-      }
-    }
-  }
-  @if $compatible == 'true' and $state == 'active' {
-    &:active,
-    .js-enabled &[data-toggle='collapse']:not(.collapsed)  {
-      color: map-get($vars, $colour)#{$important};
-      @if $bg == transparent {
-        background: transparent#{$important};
-      }
-      @else {
-        background: map-get($vars, $bg)#{$important};
-      }
-      @if $border == currentColor {
-        border-color: currentColor;
-      }
-      @else {
-        border-color: map-get($vars, $border)#{$important};
+      @if($value == $subvalue){
+        font-size: var(--fs-#{$size});
       }
     }
   }

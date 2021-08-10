@@ -4,28 +4,9 @@
     #{$var}: #{$value};
   }
 
-  // Default container spacing
-  --bg-colour: var(--colour-white);
-
-  // Default container spacing
-  --spacing-container: var(--spacing-xs);
-
-  @include media-breakpoint-up(sm) {
-    --spacing-container: var(--spacing-sm);
-  }
-
   @include media-breakpoint-up(md) {
-    --spacing-container: var(--spacing-md);
-  }  
-  
-  // Default type spacing
-  --spacing-type: var(--spacing-xs);
-
-  @include media-breakpoint-up(md) {
-    --spacing-type: var(--spacing-sm); // Using $spacing-sm is not a mistake
+    --fs-1: 2.5rem;
   }
-
-  
 }
 
 

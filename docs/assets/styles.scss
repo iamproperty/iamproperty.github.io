@@ -10,6 +10,10 @@ $fontPath: '/fonts/';
   @each $color, $value in $non-theme-colors {
     nonThemeColour-#{$color}: #{$value}
   }
+  @each $var, $value in $vars {
+    #{str-replace($var,'-','_')}: #{$value};
+  }
+  heading_lh: $headings-line-height;
 }
 
 // Bespoke SCSS for the docs
