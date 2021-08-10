@@ -1,20 +1,28 @@
 
 describe(`Logos page`, () => {
   
-  it(`It should render correctly.`, async (done) => {
+  it(`It should render correctly.`, async(done) => {
 
-    jest.setTimeout(120000)
     const puppeteer = require('puppeteer')
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     const { toMatchImageSnapshot } = require('jest-image-snapshot');
     expect.extend({ toMatchImageSnapshot });
 
-    await page.goto('http://localhost:8080/foundations/logos')
+    await page.goto('http://localhost:8080/foundations/logos#visualtest')
+    
+    await page.setViewport({ width: 370, height: 800 })
+    const mobileImage = await page.screenshot({ fullPage: true });
+    expect(mobileImage).toMatchImageSnapshot();
 
-    const image = await page.screenshot({ fullPage: true });
+    await page.setViewport({ width: 768, height: 800 })
+    const tabletImage = await page.screenshot({ fullPage: true });
+    expect(tabletImage).toMatchImageSnapshot();
 
-    expect(image).toMatchImageSnapshot();
+    await page.setViewport({ width: 1440, height: 800 })
+    const desktopImage = await page.screenshot({ fullPage: true });
+    expect(desktopImage).toMatchImageSnapshot();
+
     done()
   });
 });
