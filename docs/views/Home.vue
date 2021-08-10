@@ -17,7 +17,7 @@
             <div class="card-body">
               <h2 class="card-title">Foundations</h2>
               <p class="card-text">Core variables and principles that are used through out the framework.</p>
-              <router-link to="/foundations" class="btn btn-secondary">Foundations</router-link>
+              <router-link to="/foundations" class="btn btn-secondary">Find out more<span class="visually-hidden"> about foundations</span></router-link>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="card-body">
               <h2 class="card-title">Elements</h2>
               <p class="card-text">Small re-usable parts that are commonly used within components.</p>
-              <router-link to="/elements" class="btn btn-secondary">Elements</router-link>
+              <router-link to="/elements" class="btn btn-secondary">Find out more<span class="visually-hidden"> about elements</span></router-link>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
             <div class="card-body">
               <h2 class="card-title">Components</h2>
               <p class="card-text">Configurable re-usable parts that build up a page.</p>
-              <router-link to="/components" class="btn btn-secondary">Components</router-link>
+              <router-link to="/components" class="btn btn-secondary">Find out more<span class="visually-hidden"> about components</span></router-link>
             </div>
           </div>
         </div>
