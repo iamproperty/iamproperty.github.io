@@ -59,7 +59,8 @@ export default {
 .navbar .router-link-active:after {
   width: 100%;
 }
-#visualtest:target ~ *:not(main) {
-  display: none;
+#visualtest:target ~ *:not(main),
+#visualtest:target ~ main > *:not(.visualtest){
+  display: none!important;
 }
 </style>

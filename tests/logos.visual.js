@@ -11,7 +11,7 @@ describe(`Logos page`, () => {
 
     await page.goto('http://localhost:8080/foundations/logos#visualtest')
     
-    await page.setViewport({ width: 370, height: 800 })
+    await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
     expect(mobileImage).toMatchImageSnapshot();
 
