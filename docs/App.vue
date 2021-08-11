@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-
+    <div id="visualtest"></div>
     <SVGLogo class="d-none" />
 
     <nav class="navbar">
@@ -64,5 +64,9 @@ export default {
 <style lang="scss">
 .navbar .router-link-active:after {
   width: 100%;
+}
+#visualtest:target ~ *:not(main),
+#visualtest:target ~ main > *:not(.visualtest){
+  display: none!important;
 }
 </style>
