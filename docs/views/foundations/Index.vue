@@ -6,6 +6,7 @@
         <li><router-link to="/foundations/logos">Logos</router-link></li>
         <li><router-link to="/foundations/colours">Colours</router-link></li>
         <li><router-link to="/foundations/fonts">Fonts</router-link></li>
+        <li><router-link to="/foundations/icons">Icons</router-link></li>
       </ul>
     </nav>
   </div>
