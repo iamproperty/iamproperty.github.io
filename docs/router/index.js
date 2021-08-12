@@ -56,6 +56,14 @@ const routes = [
           title: 'Fonts | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Fonts.vue')
+      },
+      {
+        path: 'icons',
+        name: 'Icons',
+        meta: {
+          title: 'Icons | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Icons.vue')
       }
     ]
   },

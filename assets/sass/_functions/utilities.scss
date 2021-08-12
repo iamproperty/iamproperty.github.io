@@ -1,0 +1,17 @@
+// #region Sizing
+/* Enhance the max width utility to include fit-content which can come in handy for flex-box based layouts. */
+$utilities: map-merge(
+  $utilities,
+  (
+    "max-width": (
+      responsive: true,
+      property: max-width,
+      class: mw,
+      values: (
+        100: 100%,
+        fit-content: fit-content
+      )
+    )
+  )
+);
+//  #endregion
