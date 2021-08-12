@@ -15,8 +15,9 @@
     "test:visual": "TEST_MODE=visual vue-cli-service test:unit --forceExit --detectOpenHandles",
     "test:approve": "TEST_MODE=visual vue-cli-service test:unit --forceExit --detectOpenHandles --updateSnapshot",
     "lint": "vue-cli-service lint",
-    "compile:sass": "sass assets/sass/main.scss assets/css/style.css --style=compressed",
-    "prepack": "npm run build"
+    "compile:sass": "sass assets/sass/main.scss assets/css/style.css --style=compressed && sass assets/sass/core.scss assets/css/core.css --style=compressed",
+    "prepack": "npm run build",
+    "audit": "node local_modules/audit.js"
   },
   "main": "dist/components.umd.js",
   "dependencies": {

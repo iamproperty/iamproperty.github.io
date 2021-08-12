@@ -31,11 +31,16 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
   return arr
 }, {})
 
+import audit from '../audit.json';
+
 const shared = {
   themeColours: themeColours,
   nonThemeColours: nonThemeColours,
-  cssVars: cssVars
+  cssVars: cssVars,
+  audit: audit
 }
+
+console.log(shared)
 
 shared.install = function () {
   Object.defineProperty(Vue.prototype, '$shared', {

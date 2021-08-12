@@ -14,6 +14,14 @@ const routes = [
     }
   },
   {
+    path: '/audit',
+    component: () => import('../views/Audit.vue'),
+    name: 'Audit',
+    meta: {
+      title: 'Audit | IAM Key'
+    }
+  },
+  {
     path: '/changelog',
     component: () => import('../views/Changelog.vue'),
     name: 'Changelog',
