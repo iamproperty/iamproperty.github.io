@@ -42,6 +42,12 @@
             <td>-</td>
             <td>{{$shared.audit.img_count}} file{{$shared.audit.img_count > 1 ? 's':''}}</td>
           </tr>
+          <tr>
+            <th>Fonts</th>
+            <td>{{$shared.audit.fonts_size}}</td>
+            <td>-</td>
+            <td>{{$shared.audit.fonts_count}} file{{$shared.audit.fonts_count > 1 ? 's':''}}</td>
+          </tr>
         </tbody>
       </table>
     </div>

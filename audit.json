@@ -4,5 +4,7 @@
   "logo_size": "18kb",
   "icons_size": "8kb",
   "img_size": "9kb",
-  "img_count": 1
+  "img_count": 1,
+  "fonts_size": "45kb",
+  "fonts_count": 2
 }

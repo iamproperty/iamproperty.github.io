@@ -43,4 +43,25 @@ summary['img_size'] = assets_size;
 summary['img_count'] = asset_count;
 console.log("- Images("+asset_count+"): "+assets_size);
 
+
+// Font files
+var fonts_size = 0;
+var fonts_count = 0;
+
+var filenames = fs.readdirSync('./assets/fonts', function(err, filenames) { return filenames; });
+
+filenames.forEach(function(filename) {
+
+  if(filename.endsWith('.woff2')){
+    var file_stat = fs.statSync(path.join('./assets/fonts',filename));
+    fonts_size = fonts_size + file_stat.size;
+    fonts_count++;
+  }
+});
+
+fonts_size = formatBytes(fonts_size);
+summary['fonts_size'] = fonts_size;
+summary['fonts_count'] = fonts_count;
+console.log("- Fonts("+fonts_count+"): "+fonts_size);
+
 fs.writeFile('audit.json', JSON.stringify(summary,null,2), (err) => {  if (err) throw err; });
