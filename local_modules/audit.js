@@ -6,12 +6,12 @@ function formatBytes(a,b){if(0==a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","
 var summary = {};
 console.log("Files size: ");
 
-var cssStat = fs.statSync(path.join('./assets/css/style.css'));
+var cssStat = fs.statSync(path.join('./assets/css/style.min.css'));
 var cssSize = formatBytes(cssStat.size);
 summary['css_size'] = cssSize;
 console.log("- CSS: "+cssSize);
 
-var cssStatCore = fs.statSync(path.join('./assets/css/core.css'));
+var cssStatCore = fs.statSync(path.join('./assets/css/core.min.css'));
 var cssCoreSize = formatBytes(cssStatCore.size);
 summary['css_core_size'] = cssCoreSize;
 console.log("- Core CSS: "+cssCoreSize);
