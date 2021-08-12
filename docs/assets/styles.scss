@@ -1,6 +1,13 @@
 // Load the SCSS framework
 $fontPath: '/fonts/';
-@import '../../assets/sass/main.scss';
+@import '../../assets/sass/critical.scss';
+
+// Temp files for homepage until components created
+@import "../../node_modules/bootstrap/scss/nav";
+@import "../../assets/sass/components/navbar.scss";
+@import "../../assets/sass/components/header.scss";
+@import "../../node_modules/bootstrap/scss/card";
+@import "../../assets/sass/components/card.scss";
 
 // Export the SCSS vars
 :export {
