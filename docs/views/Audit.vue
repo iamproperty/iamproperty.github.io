@@ -8,18 +8,39 @@
             <th></th>
             <th>Size</th>
             <th>Previous</th>
+            <th>Notes</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>CSS</td>
+            <th>CSS</th>
             <td>{{$shared.audit.css_size}}</td>
             <td>-</td>
+            <td>All the CSS available in the framework.</td>
           </tr>
           <tr>
-            <td>Core CSS</td>
+            <th>Core CSS</th>
             <td>{{$shared.audit.css_core_size}}</td>
             <td>-</td>
+            <td>All the CSS available excluding the components.</td>
+          </tr>
+          <tr>
+            <th>Logos SVG</th>
+            <td>{{$shared.audit.logo_size}}</td>
+            <td>-</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Icons SVG</th>
+            <td>{{$shared.audit.icons_size}}</td>
+            <td>-</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>Images</th>
+            <td>{{$shared.audit.img_size}}</td>
+            <td>-</td>
+            <td>{{$shared.audit.img_count}} file{{$shared.audit.img_count > 1 ? 's':''}}</td>
           </tr>
         </tbody>
       </table>
