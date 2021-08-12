@@ -40,8 +40,6 @@ const shared = {
   audit: audit
 }
 
-console.log(shared)
-
 shared.install = function () {
   Object.defineProperty(Vue.prototype, '$shared', {
     get () { return shared }
