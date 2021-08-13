@@ -6,6 +6,7 @@ function formatBytes(a,b){if(0==a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","
 var summary = {};
 console.log("Files size: ");
 
+// CSS
 var cssStat = fs.statSync(path.join('./assets/css/style.min.css'));
 var cssSize = formatBytes(cssStat.size);
 summary['css_size'] = cssSize;
@@ -16,6 +17,13 @@ var cssCoreSize = formatBytes(cssStatCore.size);
 summary['css_core_size'] = cssCoreSize;
 console.log("- Core CSS: "+cssCoreSize);
 
+// JS
+var jsStat = fs.statSync(path.join('./assets/js/scripts.bundle.min.js'));
+var jsSize = formatBytes(jsStat.size);
+summary['js_size'] = jsSize;
+console.log("- JS: "+jsSize);
+
+//SVGs
 var logoStat = fs.statSync(path.join('./assets/svg/logo.svg'));
 var logoSize = formatBytes(logoStat.size);
 summary['logo_size'] = logoSize;

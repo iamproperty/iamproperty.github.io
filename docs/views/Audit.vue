@@ -25,6 +25,12 @@
             <td>All the CSS available excluding the components.</td>
           </tr>
           <tr>
+            <th>JS</th>
+            <td>{{$shared.audit.js_size}}</td>
+            <td>-</td>
+            <td>All the JS available in the framework.</td>
+          </tr>
+          <tr>
             <th>Logos SVG</th>
             <td>{{$shared.audit.logo_size}}</td>
             <td>-</td>

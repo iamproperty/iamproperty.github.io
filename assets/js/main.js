@@ -19,5 +19,6 @@ import navbar from './modules/navbar'
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
 
+	navbar();
   console.log('test.js');
 });
