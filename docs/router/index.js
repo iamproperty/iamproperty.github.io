@@ -72,6 +72,22 @@ export const routes = [
           title: 'Circles | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Circles.vue')
+      },
+      {
+        path: 'breakpoints',
+        name: 'Breakpoints',
+        meta: {
+          title: 'Breakpoints | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Breakpoints.vue')
+      },
+      {
+        path: 'grid',
+        name: 'Grid',
+        meta: {
+          title: 'Grid | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Grid.vue')
       }
     ]
   },
