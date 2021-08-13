@@ -1,7 +1,8 @@
 <template>
   <div id="app">
-
+    <div id="visualtest"></div>
     <SVGLogo class="d-none" />
+    <SVGIcons class="d-none" />
 
     <nav class="navbar">
       <div class="container">
@@ -38,6 +39,7 @@
 </template>
 <script>
 import SVGLogo from '../assets/svg/logo.svg?inline'
+import SVGIcons from '../assets/svg/icons.svg?inline'
 import Logo from '@/foundations/Logo/Logo.vue'
 import pkg from '../package.json'
 
@@ -49,6 +51,7 @@ export default {
   },
   components: {
     SVGLogo,
+    SVGIcons,
     Logo
   },
   methods: {
@@ -64,5 +67,9 @@ export default {
 <style lang="scss">
 .navbar .router-link-active:after {
   width: 100%;
+}
+#visualtest:target ~ *:not(main),
+#visualtest:target ~ main > *:not(.visualtest){
+  display: none!important;
 }
 </style>

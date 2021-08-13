@@ -1,0 +1,30 @@
+.icon {
+  fill: transparent;
+  stroke: transparent;
+  @include var(color,--colour-primary);
+  width: rem(64);
+  height: rem(64);
+  display: inline-block;
+
+  .icon__bg {
+    fill: #ffffff;
+  }
+  .icon__fill {
+    @include var(fill,--colour-secondary);
+  }
+  .icon__outline {
+    stroke-width: 3px;
+    stroke: currentColor;
+  }
+  a & {
+    width: 1em;
+    height: 1em;
+    vertical-align: text-top;
+    margin-top: 0.15em;
+    margin-inline: 0.25em;
+  }
+
+  & + .icon {
+    margin-inline-start: 1rem;
+  }
+}

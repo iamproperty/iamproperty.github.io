@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'Home',
@@ -56,6 +56,22 @@ const routes = [
           title: 'Fonts | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Fonts.vue')
+      },
+      {
+        path: 'icons',
+        name: 'Icons',
+        meta: {
+          title: 'Icons | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Icons.vue')
+      },
+      {
+        path: 'circles',
+        name: 'Circles',
+        meta: {
+          title: 'Circles | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Circles.vue')
       }
     ]
   },
