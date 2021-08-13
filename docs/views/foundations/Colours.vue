@@ -35,7 +35,7 @@
 
 <style lang="scss">
 $compatible: 'false';
-@import "../../../assets/sass/_functions/_func";
+@import "../../../assets/sass/_func";
 .colour-blocks {
   display: flex;
   flex-wrap: wrap;

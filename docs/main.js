@@ -4,6 +4,10 @@ import router from './router'
 import { BootstrapVue } from 'bootstrap-vue'
 import VueHighlightJS from 'vue-highlightjs'
 
+import navbar from '../assets/js/modules/navbar'
+
+navbar()
+
 // import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import cssVars from './assets/styles.scss'
@@ -31,10 +35,13 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
   return arr
 }, {})
 
+import audit from '../audit.json';
+
 const shared = {
   themeColours: themeColours,
   nonThemeColours: nonThemeColours,
-  cssVars: cssVars
+  cssVars: cssVars,
+  audit: audit
 }
 
 shared.install = function () {
