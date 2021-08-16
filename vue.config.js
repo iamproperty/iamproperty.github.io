@@ -35,7 +35,8 @@ module.exports = {
           plugins: [
             {
               cleanupIDs: false,
-              mergePaths: false
+              mergePaths: false,
+              inlineStyles: false
             }
           ]
         }
