@@ -35,24 +35,6 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
   return arr
 }, {})
 
-// Filters the CSS vars object to pull out the non-theme colours
-const utClasses = Object.keys(cssVars).reduce(function (arr, key) {
-  if (key.startsWith('--ut-')) {
-    let updateKey = key.replace('--ut-', '')
-    updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
-    arr[updateKey] = cssVars[key].substring(0, cssVars[key].length - 1).substring(1);
-  }
-  return arr
-}, {})
-
-
-const ordered = Object.keys(utClasses).sort().reduce(
-  (obj, key) => { 
-    obj[key] = utClasses[key]; 
-    return obj;
-  }, 
-  {}
-);
 
 
 import audit from '../audit.json';
@@ -61,7 +43,6 @@ const shared = {
   themeColours: themeColours,
   nonThemeColours: nonThemeColours,
   cssVars: cssVars,
-  utClasses: ordered,
   audit: audit
 }
 

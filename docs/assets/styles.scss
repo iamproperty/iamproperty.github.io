@@ -62,15 +62,15 @@ $fontPath: '/fonts/';
       
       $string: '';
       @each $property in $properties {
-        $string: $string+#{$property}+': '+$value+if($enable-important-utilities, '!important', '');
+        $string: $string+#{$property}+': '+$value+if($enable-important-utilities, '!important;\\n', ';\\n');
       }
-      --ut-#{$property-class + $infix + $property-class-modifier}: '#{$string}; ';
+      --ut-#{$property-class + $infix + $property-class-modifier}: '#{$string}';
 
       @each $pseudo in $state {
 
         $string: '';
         @each $property in $properties {
-          $string: $string+#{$property}+': '+$value+if($enable-important-utilities, '!important', '');
+          $string: $string+#{$property}+': '+$value+if($enable-important-utilities, '!important;\\n', ';\\n');
         }
         --ut-#{$property-class + $infix + $property-class-modifier}-#{$pseudo}: '#{$string}; ';
       }
