@@ -110,6 +110,14 @@ export const routes = [
           title: 'Typography | Elements | IAM Key'
         },
         component: () => import('../views/elements/Type.vue')
+      },
+      {
+        path: 'buttons',
+        name: 'Buttons',
+        meta: {
+          title: 'Buttons | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Buttons.vue')
       }
     ]
   },
