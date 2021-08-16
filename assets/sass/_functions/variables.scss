@@ -158,6 +158,7 @@ $vars: map-merge((
   --heading-weight: 700
 ), $vars);
 
+$content-max-width: rem(820);
 $paragraph-margin-bottom: 2rem;
 
 // #endregion 
