@@ -32,7 +32,7 @@ h6,
 // #endregion
 
 p {
-  max-width: rem(820);
+  max-width: $content-max-width;
 }
 
 p + p {
