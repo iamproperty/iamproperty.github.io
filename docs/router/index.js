@@ -80,6 +80,14 @@ export const routes = [
           title: 'Circles | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Circles.vue')
+      },
+      {
+        path: 'utilities',
+        name: 'Utility Classes',
+        meta: {
+          title: 'Utility Classes | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Utilities.vue')
       }
     ]
   },
