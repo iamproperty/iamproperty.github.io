@@ -84,6 +84,7 @@ sizingClass.forEach(function (classsName){
 utClasses['mw-fit-content'] = {'name': 'mw-fit-content', 'value':utClasses['mw-fit-content']['value'], 'added': 'true'}
 utClasses['mw-sm-fit-content'] = {'name': 'mw-sm-fit-content', 'value':utClasses['mw-sm-fit-content']['value'], 'added': 'true'}
 utClasses['mw-md-fit-content'] = {'name': 'mw-md-fit-content', 'value':utClasses['mw-md-fit-content']['value'], 'added': 'true'}
+utClasses['font-body'] = {'name': 'font-body', 'value':utClasses['font-body']['value'], 'added': 'true'}
 
 const ordered = Object.keys(utClasses).sort().reduce(
   (obj, key) => { 
