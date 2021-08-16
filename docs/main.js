@@ -8,7 +8,6 @@ import navbar from '../assets/js/modules/navbar'
 navbar()
 
 // import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 import cssVars from './assets/styles.scss'
 
 Vue.use(VueHighlightJS)
