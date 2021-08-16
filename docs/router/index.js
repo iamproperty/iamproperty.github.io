@@ -14,6 +14,14 @@ export const routes = [
     }
   },
   {
+    path: '/audit',
+    component: () => import('../views/Audit.vue'),
+    name: 'Audit',
+    meta: {
+      title: 'Audit | IAM Key'
+    }
+  },
+  {
     path: '/changelog',
     component: () => import('../views/Changelog.vue'),
     name: 'Changelog',
@@ -64,6 +72,14 @@ export const routes = [
           title: 'Icons | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Icons.vue')
+      },
+      {
+        path: 'illustrations',
+        name: 'Illustrations',
+        meta: {
+          title: 'Illustrations | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Illustrations.vue')
       },
       {
         path: 'circles',
