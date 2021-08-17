@@ -3,7 +3,8 @@
   clear: both;
   @include var(font-weight,--heading-weight);
   @include var(font-family, --font-heading);
-  @include var(color,--colour-primary);
+  @include var(color,--colour-heading);
+  color: var(--colour-heading,var(--colour-primary));
   display: block;
 }
 

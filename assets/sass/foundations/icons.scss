@@ -16,6 +16,7 @@
     stroke-width: 3px;
     stroke: currentColor;
   }
+
   a & {
     width: 1em;
     height: 1em;
@@ -24,7 +25,18 @@
     margin-inline: 0.25em;
   }
 
+
   & + .icon {
     margin-inline-start: 1rem;
+  }
+}
+
+@include inline-text(){
+  .icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: text-top;
+    margin-top: 0.15em;
+    margin-inline: 0.25em;
   }
 }

@@ -129,9 +129,9 @@ export const routes = [
       },
       {
         path: 'buttons',
-        name: 'Buttons',
+        name: 'Buttons & links',
         meta: {
-          title: 'Buttons | Elements | IAM Key'
+          title: 'Buttons & links | Elements | IAM Key'
         },
         component: () => import('../views/elements/Buttons.vue')
       }
