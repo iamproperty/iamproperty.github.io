@@ -104,6 +104,15 @@ export const routes = [
           title: 'Grid | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Grid.vue')
+
+      },
+      {
+        path: 'utilities',
+        name: 'Utility Classes',
+        meta: {
+          title: 'Utility Classes | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Utilities.vue')
       }
     ]
   },
