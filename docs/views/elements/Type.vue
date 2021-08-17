@@ -20,7 +20,7 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="h1 text-nowrap">heading 1</span></td>
+            <td><span class="h1 text-nowrap" data-test="test1">heading 1</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td><span>{{$shared.cssVars.__fs_1}}</span>/<span>2.5rem</span></td>
@@ -28,7 +28,7 @@
             <td>0.5em</td>
           </tr>
           <tr>
-            <td><span class="h2">heading 2</span></td>
+            <td><span class="h2" data-test="test2">heading 2</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td>{{$shared.cssVars.__fs_2}}</td>
@@ -36,7 +36,7 @@
             <td>0.5em</td>
           </tr>
           <tr>
-            <td><span class="h3">heading 3</span></td>
+            <td><span class="h3" data-test="test3">heading 3</span></td>
             <td>{{$shared.cssVars.__font_body}}</td>
             <td>normal</td>
             <td>{{$shared.cssVars.__fs_3}}</td>
@@ -44,7 +44,7 @@
             <td>0.5em</td>
           </tr>
           <tr>
-            <td><span class="h4">heading 4</span></td>
+            <td><span class="h4" data-test="test4">heading 4</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td>{{$shared.cssVars.__fs_4}}</td>
@@ -52,7 +52,7 @@
             <td>0.5em</td>
           </tr>
           <tr>
-            <td><span class="h5">heading 5</span></td>
+            <td><span class="h5" data-test="test5">heading 5</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td>{{$shared.cssVars.__fs_5}}</td>
@@ -60,7 +60,7 @@
             <td>0.5em</td>
           </tr>
           <tr>
-            <td><span class="font-weight-normal">Body text</span></td>
+            <td><span class="font-weight-normal" data-test="test6">Body text</span></td>
             <td>{{$shared.cssVars.__font_body}}</td>
             <td>normal</td>
             <td>1rem</td>
