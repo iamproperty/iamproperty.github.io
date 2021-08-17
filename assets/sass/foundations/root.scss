@@ -7,6 +7,7 @@
   @include media-breakpoint-up(md) {
     --fs-1: 2.5rem;
   }
+  --colour-underline: var(--colour-secondary)
 }
 
 
@@ -17,5 +18,7 @@
   --colour-link: white;
   --colour-hover: white;
   --colour-active: white;
-  color: white;;
+  --colour-heading: white;
+  --colour-underline: white;
+  color: white;
 }
