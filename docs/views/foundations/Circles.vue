@@ -68,6 +68,9 @@
 <script>
 
 export default {
+  mounted(){
+    hljs.highlightAll();
+  },
   data () {
     return {
       htmlUsage: `<span class="circle circle--cross text-primary"></span>`

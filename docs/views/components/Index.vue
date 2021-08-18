@@ -1,38 +1,40 @@
 <template>
-  <main>
-    <div class="container">
-    <h1>Component table of contents</h1>
-    <hr>
-    <ul>
-      <li>
-        <router-link to="/components/task-title">Task Title</router-link>
-        - The task title component has a number of choices for background colours
-      </li>
-      <li>
-        <router-link to="/components/key-stats">Key Fact Group</router-link>
-        - Group a series of key facts together in a responsive grid
-      </li>
-      <li>
-        <router-link to="/components/property-task-intro">Property Task Intro</router-link>
-        - Group of property data including: address, starting bid, auction start, auction end date
-        and branch details
-      </li>
-      <li>
-        <router-link to="/components/vendor-table">Vendor Table</router-link>
-        - Flexible table component for displaying vendor information
-      </li>
-      <li>
-        <router-link to="/components/key-information">Key Information</router-link>
-        - Group key information as key/value in responsive columns
-      </li>
-    </ul>
-    </div>
-  </main>
+  <div class="container">
+    <h1>Components</h1>
+    <p>Configurable re-usable parts that build up a page.</p>
+    <nav>
+      <ul>
+        <li v-for="(page) in pages" :key="page.path"><router-link :to="'/components/'+page.path">{{page.name}}</router-link></li>
+      </ul>
+    </nav>
+  </div>
 </template>
+<script>
+import {routes} from '../../router/index.js';
 
-<style scoped>
-.component-contents li {
-  display: block;
-  margin-bottom: 10px;
+const components = routes.reduce(function (arr, route) {
+  // Find the correct group
+  if (route.path === "/components") {
+    arr = route.children;
+
+    const children = route.children.reduce(function (acc, route) {
+      // Remove the index
+      if (route.path) {
+        acc.push(route);
+      }
+      return acc
+    }, [])
+
+    arr = children
+  }
+  return arr
+}, {})
+
+export default {
+  data () {
+    return {
+      pages: components
+    }
+  }
 }
-</style>
+</script>

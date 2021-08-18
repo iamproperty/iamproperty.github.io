@@ -54,6 +54,9 @@ export default {
     Icon,
     Readme
   },
+  mounted(){
+    hljs.highlightAll();
+  },
   data () {
     return {
       icons: ['email','pin','chat'],
