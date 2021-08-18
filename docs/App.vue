@@ -66,7 +66,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.navbar .router-link-active:after {
+.navbar .router-link-active:not(.text-decoration-none):not(.btn):before {
   width: 100%;
 }
 #visualtest:target ~ *:not(main),

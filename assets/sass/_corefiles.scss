@@ -6,6 +6,7 @@
 @import "foundations/reboot.scss";
 @import "foundations/brand.scss";
 @import "foundations/icons.scss";
+@import "foundations/circles.scss";
 @import "../../node_modules/bootstrap/scss/type";
 @import "elements/type.scss";
 @import "../../node_modules/bootstrap/scss/images";
@@ -15,7 +16,8 @@
 // @import "../../node_modules/bootstrap/scss/tables";
 @import "elements/tables.scss";
 @import "../../node_modules/bootstrap/scss/forms";
-@import "../../node_modules/bootstrap/scss/buttons";
+//@import "../../node_modules/bootstrap/scss/buttons";
+@import "elements/buttons";
 @import "elements/links.scss";
 @import "../../node_modules/bootstrap/scss/transitions";
 @import "../../node_modules/bootstrap/scss/dropdown";

@@ -1,11 +1,29 @@
 a {
   @include var (color, --colour-link);
+  display: inline-block;
+  min-height: em(28);
+  margin-bottom: rem(16);
+  position: relative;
+  text-decoration: none;
   
-  &:not(:hover):not(:focus):not(:active){
-
-    text-decoration: none;
+  &:not(.text-decoration-none):not(.btn):before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 100%;
+    height: 3px;
+    @include var(background-color,--colour-underline);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-transition: .3s ease-in;
+    transition: .3s ease-in;
   }
-  
+
+  &:not(.text-decoration-none):not(.btn):hover:before {
+    width: 0%;
+  }
 
   &:hover,
   &:focus {
@@ -14,5 +32,57 @@ a {
 
   &:active {
     @include var (color, --colour-active);
+  }
+
+  &[target="_blank"]:after {
+    
+    content: "";
+    height: 1em;    
+    width: 1em;
+    margin-left: 0.5em;
+    margin-right: -0.2em;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-bottom: -0.15em;
+
+    mask-image: var(--icon-blank);
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-position: 0 0;
+  
+    -webkit-mask-image: var(--icon-blank);
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 0 0;
+    background-color: currentColor;
+  }
+  
+}
+@include inline-text(){
+  a {
+    min-height: none;
+    display: inline;
+    margin-bottom: 0;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--colour-underline);
+
+    &:hover,
+    &:focus,
+    &:active{
+
+      text-decoration: none;
+    }
+  
+    &:before {
+
+      display: none;
+    }
+
+    &[target="_blank"]:after {
+      margin-left: 0.25em;
+      margin-right: 0.2em;
+    }
   }
 }
