@@ -25,6 +25,8 @@
     "bootstrap": "^5.0.2",
     "bootstrap-vue": "^2.21.2",
     "glob": "^7.1.7",
+    "sass": "^1.37.5",
+    "sass-loader": "^10.2.0",
     "vue": "^2.6.14",
     "vue-markdown-loader": "^2.4.1",
     "vue-router": "^3.5.2"
@@ -62,8 +64,6 @@
     "puppeteer": "^10.2.0",
     "rollup": "^2.52.2",
     "rollup-plugin-istanbul": "^3.0.0",
-    "sass": "^1.37.5",
-    "sass-loader": "^10.2.0",
     "sass-true": "^6.0.1",
     "serve": "^12.0.0",
     "terser": "5.1.0",
