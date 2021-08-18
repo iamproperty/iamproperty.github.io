@@ -73,9 +73,6 @@ export default {
     Logo,
     Readme
   },
-  mounted(){
-    hljs.highlightAll();
-  },
   data () {
     return {
       htmlUsage: `<div class="brand brand--property">
