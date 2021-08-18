@@ -1,9 +1,18 @@
-# iamp-component-library
+# Getting started with the iam key design system and framework
 
-## Project setup
+## Install
 ```
 npm install --save @iamproperty/components
 ```
+
+## Usage
+
+usage notes
+
+
+## Contributing to iam key
+
+
 
 ### Compiles and hot-reloads for development
 ```
@@ -20,10 +29,3 @@ npm run build
 npm run test:unit
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
