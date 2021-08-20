@@ -25,6 +25,20 @@
       <Table :fields="fields" :items="items" class="table-striped table-hover"></Table>
     </div>
 
+    <div class="container pb-0 bg-dark pt-5">
+      <h2>Tables on a dark background</h2>
+    </div>
+
+    <div class="container bg-dark visualtest mb-5 pb-5">
+      <Table :fields="fields" :items="items" class="table-striped table-hover"></Table>
+    </div>
+
+
+    <div class="container">
+      <h2>HTML code examples</h2>
+      <pre v-highlightjs><code class="javascript">{{htmlUsage}}</code></pre>
+    </div>
+
 
     <div class="container">
       <h2>Vue Table component reference</h2>
@@ -49,7 +63,36 @@ export default {
   },
   data () {
     return {
-      htmlUsage: ``,
+      htmlUsage: `<table>
+  <thead>
+    <tr>
+      <th>Column 1</th>
+      <th>Column 2</th>
+      <th>Column 3</th>
+      <th>Column 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Row 1</td>
+      <td>Row 1</td>
+      <td>Row 1</td>
+      <td>Row 1</td>
+    </tr>
+    <tr>
+      <td>Row 2</td>
+      <td>Row 2</td>
+      <td>Row 2</td>
+      <td>Row 2</td>
+    </tr>
+    <tr>
+      <td>Row 3</td>
+      <td>Row 3</td>
+      <td>Row 3</td>
+      <td>Row 3</td>
+    </tr>
+  </tbody>
+</table>`,
       fields: [
         { key: 'basic_details' },
         { key: 'capacity' },

@@ -13,12 +13,15 @@ import Toast from '../../node_modules/bootstrap/js/src/toast'
 //import Tooltip from '../../node_modules/bootstrap/js/src/tooltip'
 
 // Modules
+import * as helpers from './modules/helpers'
 import navbar from './modules/navbar'
 
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
 
+  helpers.addBodyClasses(document.body);
+  helpers.checkElements(document.body);
 	navbar();
   console.log('test.js');
 });
