@@ -82,7 +82,7 @@ tbody:first-child{
 
 // #region Tables are only stacked on mobile
 @media (max-width: 36em) {
-  .table__wrapper:not(.table--fullwidth) {
+  .table__wrapper:not(.table-fullwidth) {
     thead {
       display: none;
     }
@@ -116,6 +116,28 @@ tbody:first-child{
         margin: 0;
       }
     }
+  }
+}
+// #endregion
+
+
+// #region Table striped
+.table-striped tbody tr:nth-of-type(odd) {
+
+  background-color: #eeeeee;
+
+  .bg-light & {
+
+    @include var(background-color,--colour-white);
+  }
+}
+// #endregion
+
+// #region Table hover
+.table-hover tbody tr {
+  &:hover,
+  &:focus {
+    background-color: #dddddd;
   }
 }
 // #endregion
