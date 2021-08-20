@@ -8,7 +8,7 @@ table {
 }
 
 td,th {
-  padding: rem(16);
+  padding: rem(16) rem(32) rem(16) 0;
   font-weight: normal;
   text-align: left;
   vertical-align: top;
@@ -19,6 +19,7 @@ td,th {
 
 th {
   font-weight: bold;
+  @include var(color,--colour-heading);
 }
 
 tr {
@@ -41,8 +42,7 @@ thead {
     font-size: rem(16);
     line-height: rem(24);
     padding-bottom: rem(24);
-    color: inherit;
-  
+
     @include media-breakpoint-up(sm) {
   
       font-size: rem(18);
@@ -50,6 +50,7 @@ thead {
 
     font-weight: bold;
     vertical-align: bottom;
+    white-space: nowrap;
   }
 }
 
@@ -57,6 +58,64 @@ tbody:first-child{
   tr:first-child {
     border-top: 2px solid currentColor;
     @include var(border-color,--colour-border);
+  }
+}
+// #endregion
+
+// #region Table wrapper - Add via JS if needed, provides a safe space to scroll
+.table__wrapper {
+  display: block;
+  width: calc(100% + 1rem);
+  padding-right: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
+  margin-bottom: rem(32);
+
+  table {
+    margin-bottom: 0;
+    display: table;
+    overflow: hidden;
+  }
+}
+// #endregion
+
+// #region Tables are only stacked on mobile
+@media (max-width: 36em) {
+  .table__wrapper:not(.table--fullwidth) {
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+      border-top: 2px solid currentColor;
+      @include var(border-color,--colour-border);
+    }
+
+    tr {
+      display: block;
+      position: relative;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    td,
+    th {
+      display: block;
+      padding-right: 0;
+      padding-top: 0;
+
+      &[data-label]:before {
+        content: attr(data-label);
+        color: var(--colour-heading);
+        padding: 0;
+        margin-bottom: 0;
+        display: block;
+        font-weight: bold;
+        margin: 0;
+      }
+    }
   }
 }
 // #endregion

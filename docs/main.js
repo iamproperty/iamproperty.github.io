@@ -5,8 +5,12 @@ import { BootstrapVue } from 'bootstrap-vue'
 import VueHighlightJS from 'vue-highlightjs'
 
 import navbar from '../assets/js/modules/navbar'
+import * as helpers from '../assets/js/modules/helpers'
 
 navbar()
+
+helpers.addBodyClasses(document.body);
+helpers.checkElements(document.body);
 
 // import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
