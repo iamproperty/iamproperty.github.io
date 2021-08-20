@@ -152,3 +152,39 @@ tbody:first-child{
   }
 }
 // #endregion
+
+
+
+[data-sortable] {
+
+  cursor: pointer;
+  position: relative;
+}
+[data-sortable]:after {
+
+  content: "";
+  position: absolute;
+  top:0;
+  right: 0;
+  width: 4rem;
+  height: 100%;
+  display: block;
+  mask-image: var(--icon-sort);
+  mask-size: 1rem 1rem;
+  mask-repeat: no-repeat;
+  mask-position: calc(100% - 1.5rem) calc(50% - 0.25rem);
+
+  -webkit-mask-image: var(--icon-sort);
+  -webkit-mask-size: 1rem 1rem;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: calc(100% - 1.5rem) calc(50% - 0.25rem);
+  background-color: currentColor;
+}
+
+[data-sortable][aria-sort=ascending]:after {
+  --icon-sort: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' preserveAspectRatio='none'%3E%3Cpath d='M51 1l25 23 24 22H1l25-22z'/%3E%3Cpath opacity='.3' d='M51 101l25-23 24-22H1l25 22z'/%3E%3C/svg%3E");
+}
+
+[data-sortable][aria-sort=descending]:after {
+  --icon-sort: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' preserveAspectRatio='none'%3E%3Cpath opacity='.3' d='M51 1l25 23 24 22H1l25-22z'/%3E%3Cpath d='M51 101l25-23 24-22H1l25 22z'/%3E%3C/svg%3E");
+}
