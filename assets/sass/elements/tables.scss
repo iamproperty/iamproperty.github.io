@@ -122,7 +122,7 @@ tbody:first-child{
       }
     }
 
-    tr:not(:hover) {
+    &.table-minify tr:not(:hover) {
       td:not(:first-child){
         display: none;
       }
@@ -159,6 +159,12 @@ tbody:first-child{
 
   cursor: pointer;
   position: relative;
+  user-select: none;
+  padding-right: 3.5rem;
+
+  &:hover {
+    color: var(--colour-hover);
+  }
 }
 [data-sortable]:after {
 
@@ -166,16 +172,16 @@ tbody:first-child{
   position: absolute;
   top:0;
   right: 0;
-  width: 4rem;
-  height: 100%;
+  width: 3.5rem;
+  height: 4rem;
   display: block;
   mask-image: var(--icon-sort);
-  mask-size: 1rem 1rem;
+  mask-size: 0.6rem 0.8rem;
   mask-repeat: no-repeat;
   mask-position: calc(100% - 1.5rem) calc(50% - 0.25rem);
 
   -webkit-mask-image: var(--icon-sort);
-  -webkit-mask-size: 1rem 1rem;
+  -webkit-mask-size: 0.6rem 0.8rem;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: calc(100% - 1.5rem) calc(50% - 0.25rem);
   background-color: currentColor;

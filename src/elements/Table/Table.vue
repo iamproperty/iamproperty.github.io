@@ -1,5 +1,5 @@
 <template>
-  <div class="table__wrapper" ref="wrapper" :data-sortBy="sortBy">
+  <div class="table__wrapper" ref="wrapper" :data-sortBy="sortBy" :data-sort="sort">
     <table>
       <thead v-if="fields">
         <tr>
@@ -26,6 +26,10 @@ export default {
       type: String,
       required: false
     },
+    sort: {
+      type: String,
+      required: false
+    },
     items: {
       type: Array,
       required: true
@@ -44,9 +48,13 @@ export default {
   },
   mounted(){
 
-    console.log(this.$el)
-
     let advancedTable = new table(this.$el);
+
+    // Listen for the event.
+    this.$el.addEventListener('updated', function (e) { 
+      
+      console.log('Table updated')
+    }, false);
   }
 }
 </script>

@@ -2,17 +2,21 @@
   <main>
     <div class="container pb-0">
       <h1>Advanced tables</h1>
-      <p>-</p>
+      <p>Tables can be given extra functionality to help make the data easier to understand or process.</p>
+      <h2>Sortable</h2>
+      <p>Re-organise the data in the table in ascending or descending order.</p>
     </div>
 
     <div class="container visualtest">
-      <Table :fields="sortable_fields" :items="items" sortBy="Job"></Table>
+      <Table :fields="sortable_fields" :items="items" sortBy="Job" sort="ascending" class="table-fullwidth"></Table>
     </div>
 
 
     <div class="container">
-      <h2>HTML code examples</h2>
-      <pre v-highlightjs><code class="javascript">{{htmlUsage}}</code></pre>
+      <h3>Add data attribute to column</h3>
+      <pre v-highlightjs><code class="javascript">{{htmlColumn}}</code></pre>
+      <h3>Add data attribute to table</h3>
+      <pre v-highlightjs><code class="javascript">{{htmlTable}}</code></pre>
     </div>
 
 
@@ -39,7 +43,8 @@ export default {
   },
   data () {
     return {
-      htmlUsage: ``,
+      htmlTable: `<th data-sortable="true">Name</th>`,
+      htmlColumn: `<div data-sortby="Job" data-sort="ascending" class="table__wrapper table-fullwidth">`,
       sortable_fields: [
         { 
           key: 'name',
@@ -101,7 +106,7 @@ export default {
         },
         {
           name: 'Sharon',
-          job: 'Plumber',
+          job: 'Actor',
           address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
           emergency_contact: 'Susan',
           actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'

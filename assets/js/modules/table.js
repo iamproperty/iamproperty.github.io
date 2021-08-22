@@ -23,6 +23,12 @@ class table {
           let tbody = table.querySelector('tbody');
 
           tbody.innerHTML = sortTable(tbody, target.innerText, sort);
+
+
+          const event = new Event('updated');
+          // Dispatch the event.
+          table.dispatchEvent(event);
+
           break;
         }
       }
@@ -30,8 +36,11 @@ class table {
 
     if(table.getAttribute('data-sortBy')){
 
+      let sort = table.getAttribute('data-sort') == "ascending" ? "descending" : "ascending";
+
       Array.from(table.querySelectorAll('[data-sortable]')).forEach((col, index) => {
         if(col.innerText == table.getAttribute('data-sortBy')){
+          col.setAttribute('aria-sort',sort)
           col.click();
         }
       });
