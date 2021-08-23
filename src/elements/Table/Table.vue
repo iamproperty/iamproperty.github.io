@@ -3,7 +3,7 @@
     <table>
       <thead v-if="fields">
         <tr>
-          <th v-for="(field) in fields" :key="field.key" :data-sortable="field.sortable" >{{ cellHeading(field.key) }}</th>
+          <th v-for="(field) in fields" :key="field.key" :data-sortable="field.sortable" :data-filterable="field.filterable">{{ cellHeading(field.key) }}</th>
         </tr>
       </thead>
       <tbody v-if="items">
@@ -48,7 +48,7 @@ export default {
   },
   mounted(){
 
-    let advancedTable = new table(this.$el);
+    table(this.$el);
 
     // Listen for the event.
     this.$el.addEventListener('updated', function (e) { 

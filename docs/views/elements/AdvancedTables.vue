@@ -20,6 +20,18 @@
     </div>
 
 
+
+    <div class="container pb-0">
+      <h2>Filter</h2>
+      <p>-</p>
+    </div>
+
+    <div class="container visualtest">
+      <Table :fields="filter_fields" :items="items" class="table-fullwidth"></Table>
+    </div>
+
+
+
     <div class="container">
       <h2>Vue Table component reference</h2>
       <Readme></Readme>
@@ -59,13 +71,6 @@ export default {
           key: 'emergency_contact',
           sortable: true 
         },
-        { key: 'actions' }
-      ],
-      fields: [
-        { key: 'name' },
-        { key: 'job' },
-        { key: 'address' },
-        { key: 'emergency_contact' },
         { key: 'actions' }
       ],
       items: [
@@ -111,6 +116,23 @@ export default {
           emergency_contact: 'Susan',
           actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
         }
+      ],
+      filter_fields: [
+        { 
+          key: 'name',
+          filterable: true,
+          sortable: true
+        },
+        { 
+          key: 'job',
+          filterable: true 
+        },
+        { key: 'address' },
+        { 
+          key: 'emergency_contact',
+          filterable: true 
+        },
+        { key: 'actions' }
       ]
     }
   }
