@@ -56,6 +56,9 @@ export default {
     SVGIcons,
     Logo
   },
+  updated(){
+    hljs.highlightAll();
+  },
   methods: {
     subIsActive (input) {
       const paths = Array.isArray(input) ? input : [input]

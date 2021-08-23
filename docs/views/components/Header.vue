@@ -39,9 +39,6 @@ export default {
     Header,
     Readme
   },
-  mounted(){
-    hljs.highlightAll();
-  },
   data () {
     return {
       htmlUsage: `<header class="header">
