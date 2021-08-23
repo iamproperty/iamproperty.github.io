@@ -116,9 +116,6 @@ export default {
   components: {
     Icon
   },
-  mounted(){
-    hljs.highlightAll();
-  },
   data () {
     return {
       htmlUsage: `<a href="/button" class="btn">Button</a>

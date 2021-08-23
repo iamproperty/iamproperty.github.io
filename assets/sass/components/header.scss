@@ -2,14 +2,9 @@
   background: linear-gradient(180deg,var(--colour-secondary) 0, var(--colour-info) 100%);
   margin-bottom: rem(32);
   position: relative;
-  overflow: hidden;
-  @include media-breakpoint-up(md) {
-    min-height: rem(470);
-  }
 
   > .container {
     padding-bottom: 0;
-    position: relative;
   }
 
   &__inner {
@@ -29,29 +24,18 @@
     }
   }
 
-  > picture img {
+  > img {
     display: none;
     @include media-breakpoint-up(md) {
       display: block;
       position: absolute;
-      top: -0.5%;
+      top: 0;
       left: 40%;
-      height: 101%;
+      height: 100%;
       object-fit: cover;
       width: 60%;
+      max-width: rem((1440/100)*60);
       pointer-events: none;
-    }
-  }
-
-  > .container > .breadcrumb {
-    
-    margin-top: rem(24);
-    margin-bottom: -0.5rem;
-
-    @include media-breakpoint-up(md) {
-      position: absolute;
-      top: 0;
-      left: rem(60);
     }
   }
 }

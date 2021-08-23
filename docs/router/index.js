@@ -163,14 +163,6 @@ export const routes = [
         component: () => import('../views/components/Index.vue')
       },
       {
-        path: 'header',
-        name: 'Header',
-        meta: {
-          title: 'Header | Components | IAM Key'
-        },
-        component: () => import('../views/components/Header.vue')
-      },
-      {
         path: 'task-title',
         name: 'Task Title',
         component: () => import('../views/components/TaskTitle.vue')
