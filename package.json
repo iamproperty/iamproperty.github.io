@@ -13,7 +13,7 @@
     "build:docs": "vue-cli-service build docs/main.js",
     "test:unit": "vue-cli-service test:unit",
     "test:visual": "cross-env TEST_MODE=visual vue-cli-service test:unit --forceExit --detectOpenHandles",
-    "test:approve": "TEST_MODE=visual vue-cli-service test:unit --forceExit --detectOpenHandles --updateSnapshot",
+    "test:approve": "cross-env TEST_MODE=visual vue-cli-service test:unit --forceExit --detectOpenHandles --updateSnapshot",
     "lint": "vue-cli-service lint",
     "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
