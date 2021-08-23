@@ -102,6 +102,8 @@ npm run serve
 
 Unit tests should be ran after changing any code to make sure it has no unwanted side effects.
 
+The visual regression tests may differ greatly if the tests are running on a windows when the the snapshots where created on Mac.
+
 ```
 npm run test
 ```
