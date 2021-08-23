@@ -1,0 +1,21 @@
+.breadcrumb {
+
+  font-size: rem(14);
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    display: inline-block;
+
+    &:not(:first-child):before {
+      content: "\00A0/\00A0";
+      font-weight: bold;
+      color: var(--colour-link);
+    }
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  }
+}
