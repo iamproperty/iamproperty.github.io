@@ -1,13 +1,13 @@
+const puppeteer = require('puppeteer')
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
+expect.extend({ toMatchImageSnapshot });
 
 describe(`Colours page`, () => {
   
   it(`It should render correctly.`, async(done) => {
 
-    const puppeteer = require('puppeteer')
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    const { toMatchImageSnapshot } = require('jest-image-snapshot');
-    expect.extend({ toMatchImageSnapshot });
 
     await page.goto('http://localhost:8080/foundations/colours#visualtest')
     
