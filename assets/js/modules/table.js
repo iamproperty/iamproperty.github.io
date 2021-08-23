@@ -30,79 +30,44 @@ function table(tableElement) {
 
   const createFilters = function(count){
 
-    // Create form
     const form = document.createElement("div");
     form.classList.add('row');
     form.classList.add('pb-5');
-    tableElement.prepend(form)
 
-    // Create row
-    const col1 = document.createElement("div");
-    col1.classList.add('col-6');
-    form.appendChild(col1);
+    const randID = Math.random().toString(36).substr(2, 9);
 
-    // Create search input
-    const searchWrapper = document.createElement("div");
-    searchWrapper.classList.add('form-control__wrapper');
-    searchWrapper.classList.add('form-control-inline');
-    col1.appendChild(searchWrapper)
+    const filterColumns = Array.from(tableElement.querySelectorAll('th[data-filterable]'));
 
-    // - Label
-    const searchLabel = document.createElement("label");
-    searchLabel.setAttribute('for','filter')
-    searchLabel.innerText = 'Filter';
-    searchWrapper.appendChild(searchLabel)
+console.log(filterColumns.length)
 
-    // - Input
-    const searchInput = document.createElement("input");
-    searchInput.setAttribute('id','filter')
-    searchInput.setAttribute('name','filter')
-    searchInput.setAttribute('type','text')
-    searchInput.setAttribute('placeholder','Search term')
-    searchInput.classList.add('form-control')
-    searchWrapper.appendChild(searchInput)
-
-    
-/*
-<form class="row">
-
-<div class="col-6">
-
+    form.innerHTML = `<div class="col-6">
   <div class="form-control__wrapper form-control-inline">
-    <label for="filter">Filter by Name:</label>
-    <input type="search" name="filter" id="filter" class="form-control" placeholder="" />
+    <label for="${randID}_filter">Filter by Name:</label>
+    <input type="search" name="${randID}_filter" id="${randID}_filter" class="form-control" placeholder="" />
   </div>
 </div>
 <div class="col-6">
+  ${filterColumns.length > 1 ? `<span>Filter by: </span>` + filterColumns.map(column => `<div class="form-check"><input class="form-check-input" type="checkbox" id="${randID}_${column.innerText.replace(' ','_').toLowerCase()}" checked="checked" /><label class="form-check-label" for="${randID}_${column.innerText.replace(' ','_').toLowerCase()}">${column.innerText}</label></div>`).join("") : ``}
+</div>`;
 
-  <span>Filter by: </span>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-      Default checkbox
-    </label>
-  </div>
-</div>
-
-</form>
-*/
-
+    tableElement.prepend(form)
   }
 
   const filterTable = function(searchTerm){
 
     let filterBy = 'Name';
 
-    
     let tableArr = [];
-
+    
     Array.from(storedData.querySelectorAll('tr')).forEach((tableRow, index) => {
 
-      let searchString = tableRow.querySelector('td[data-label="'+filterBy+'"]').innerText;
+      let searchString = '';
+      Array.from(tableElement.querySelectorAll('[type="checkbox"]:checked + label')).forEach((label, index) => {
+
+        searchString += tableRow.querySelector('td[data-label="'+label.innerText+'"]').innerText+' | ';
+      });
 
       if(searchString.indexOf(searchTerm) >= 0){
-
-        console.log(searchString)
 
         const dataRow = {
           row: tableRow
@@ -177,9 +142,22 @@ function table(tableElement) {
 
     tableElement.addEventListener('keyup', function(e){
       for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('input[type="text"]')) {
+        if (target.matches('input[type="search"]')) {
 
           const searchTerm = target.value;
+          filterTable(searchTerm)
+        }
+      }
+    });
+
+    tableElement.addEventListener('change', function(e){
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('input[type="checkbox"]')) {
+
+          const searchTerm = tableElement.querySelector('input[type="search"]').value;
+
+          console.log(searchTerm)
+
           filterTable(searchTerm)
         }
       }

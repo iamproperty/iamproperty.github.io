@@ -125,7 +125,8 @@ export default {
         },
         { 
           key: 'job',
-          filterable: true 
+          filterable: true,
+          sortable: true
         },
         { key: 'address' },
         { 
