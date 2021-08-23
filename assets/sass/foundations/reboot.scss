@@ -1,6 +1,7 @@
 /* Reset & Defaults - Most of the resets/normailization stuff is done by Bootstrap */
 html {
 
+  -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
   overflow: hidden;
   overflow-x: hidden;
   overflow-y: scroll;
