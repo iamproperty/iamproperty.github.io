@@ -1,4 +1,4 @@
-export { default as KeyFact } from './components/KeyFacts/KeyFact.vue'
+export { default as Header } from './components/Header/Header.vue'
 export { default as KeyFactGroup } from './components/KeyFacts/KeyFactGroup.vue'
 export { default as KeyInformation } from './components/KeyInformation/KeyInformation.vue'
 export { default as PropertyTaskIntro } from './components/PropertyTaskIntro/PropertyTaskIntro.vue'

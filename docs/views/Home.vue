@@ -1,14 +1,8 @@
 <template>
   <main>
-    <div class="header">
-      <div class="container">
-        <div class="header__inner">
-          <h1>Design system <span class="text-nowrap">& framework</span></h1>
-          <p>The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great products.</p>
-        </div>
-      </div>
-      <img src="../assets/code.jpeg" alt="" />
-    </div>
+    <Header title="Design system <span class='text-nowrap'>& framework</span>" :image="require('../assets/code.jpeg')">
+      <p>The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great products.</p>
+    </Header>
     <div class="container pb-5 pt-3">
 
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
@@ -45,13 +39,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import Header from '@/components/Header/Header.vue'
 
 export default {
   name: 'Home',
   components: {
-    // HelloWorld
+    Header
   }
 }
 </script>
