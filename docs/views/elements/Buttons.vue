@@ -47,7 +47,7 @@
     
     <div class="container">
       <h2>HTML code examples</h2>
-      <pre v-highlightjs><code class="javascript">{{htmlUsage}}</code></pre>
+      <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
 
 

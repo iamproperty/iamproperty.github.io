@@ -36,7 +36,7 @@
     </div>
     <div class="container">
       <h2>HTML code example</h2>
-      <pre v-highlightjs><code class="javascript">{{htmlUsage}}</code></pre>
+      <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
     <div class="container">
       <h2>Vue Icon component reference</h2>
