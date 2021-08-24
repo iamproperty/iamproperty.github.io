@@ -159,6 +159,14 @@ export const routes = [
           title: 'Tables | Elements | IAM Key'
         },
         component: () => import('../views/elements/Tables.vue')
+      },
+      {
+        path: 'advanced-tables',
+        name: 'Advanced Tables',
+        meta: {
+          title: 'Advanced Tables | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/AdvancedTables.vue')
       }
     ]
   },
