@@ -16,7 +16,7 @@
 
 <script>
 
-import KeyFact from '@/components/KeyFacts/KeyFact.vue'
+import KeyFact from './KeyFact.vue'
 
 export default {
   name: 'KeyFactGroup',

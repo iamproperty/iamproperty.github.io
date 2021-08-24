@@ -4,7 +4,7 @@
   "private": false,
   "description": "Component library for iamproperty",
   "author": {
-    "name": "Michael White"
+    "name": "iamproperty"
   },
   "license": "UNLICENSED",
   "scripts": {
@@ -14,24 +14,22 @@
     "test:unit": "vue-cli-service test:unit",
     "test:visual": "cross-env TEST_MODE=visual vue-cli-service test:unit --forceExit --detectOpenHandles",
     "test:approve": "cross-env TEST_MODE=visual vue-cli-service test:unit --forceExit --detectOpenHandles --updateSnapshot",
+    "test": "npm run test:unit && npm run test:visual",
     "lint": "vue-cli-service lint",
     "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
     "prepack": "npm run build",
-    "audit": "node local_modules/audit.js"
+    "audit": "node local_modules/audit.js",
+    "pull-request": "npm run test:unit && npm run test:approve && npm run compile:sass && npm run compile:js && npm run audit"
   },
   "main": "dist/components.umd.js",
   "dependencies": {
+    "@vue/eslint-config-standard": "^6.1.0",
     "bootstrap": "^5.0.2",
     "glob": "^7.1.7",
-    "jest-environment-puppeteer": "^5.0.4",
-    "jest-puppeteer": "^5.0.4",
-    "jest-puppeteer-preset": "^5.0.4",
-    "puppeteer": "^10.2.0",
-    "sass-true": "^6.0.1",
-    "serve": "^12.0.0",
+    "sass": "^1.37.5",
+    "sass-loader": "^10.2.0",
     "vue": "^2.6.14",
-    "vue-highlightjs": "^1.3.3",
     "vue-markdown-loader": "^2.4.1",
     "vue-router": "^3.5.2"
   },
@@ -50,7 +48,6 @@
     "@vue/cli-plugin-router": "^4.5.13",
     "@vue/cli-plugin-unit-jest": "^4.5.13",
     "@vue/cli-service": "^4.5.13",
-    "@vue/eslint-config-standard": "^6.1.0",
     "@vue/test-utils": "^1.2.2",
     "babel-jest": "^27.0.6",
     "cross-env": "^7.0.3",
@@ -61,12 +58,16 @@
     "eslint-plugin-standard": "^4.1.0",
     "eslint-plugin-vue": "^7.15.1",
     "html-loader": "^2.1.2",
+    "jest-environment-puppeteer": "^5.0.4",
+    "jest-puppeteer": "^5.0.4",
+    "jest-puppeteer-preset": "^5.0.4",
     "jest-image-snapshot": "^4.5.1",
     "markdown-loader": "^6.0.0",
+    "puppeteer": "^10.2.0",
     "rollup": "^2.52.2",
     "rollup-plugin-istanbul": "^3.0.0",
-    "sass": "^1.37.5",
-    "sass-loader": "^10.2.0",
+    "sass-true": "^6.0.1",
+    "serve": "^12.0.0",
     "terser": "5.1.0",
     "vue-loader": "^15.9.8",
     "vue-svg-loader": "^0.16.0",
@@ -78,6 +79,7 @@
     "url": "git@codebasehq.com:isg/isg-marketplace-intelligent-compliance/iamp-component-library.git"
   },
   "files": [
+    "assets/*",
     "dist/*",
     "src/*"
   ]

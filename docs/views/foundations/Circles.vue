@@ -60,7 +60,7 @@
     </div>
     <div class="container">
       <h2>HTML code example</h2>
-      <pre v-highlightjs><code class="javascript">{{htmlUsage}}</code></pre>
+      <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
   </main>
 </template>
