@@ -1,14 +1,22 @@
 <template>
   <div class="vendor-table">
-    <b-table stacked="sm" :small="small" :items="items" :fields="fields">
-      <template #cell()="data">
-        <span v-html="data.value"></span>
-      </template>
-    </b-table>
+    <table>
+      <thead>
+        <tr>
+          <th :key="value.key" v-for="(value) in fields">{{ cellHeading(value.key) }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr :key="index" v-for="(value,index) in items">
+          <td :key="cellIndex" v-for="(cellValue,cellIndex) in value" v-html="cellValue" :data-label="cellHeading(cellIndex)"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
+import { ucwords, unsnake } from '../../helpers/strings'
 
 export default {
   name: 'VendorTable',
@@ -24,6 +32,13 @@ export default {
     small: {
       type: Boolean,
       required: false
+    }
+  },
+  computed: {
+    cellHeading () {
+      return (heading) => {
+        return `${ucwords(unsnake(heading))}`
+      }
     }
   }
 }
