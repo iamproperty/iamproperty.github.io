@@ -57,9 +57,6 @@ export default {
     SVGIcons,
     Logo
   },
-  updated(){
-    hljs.highlightAll();
-  },
   methods: {
     subIsActive (input) {
       const paths = Array.isArray(input) ? input : [input]
@@ -71,6 +68,8 @@ export default {
   updated(){
     if(document.querySelector('main'))
       helpers.checkElements(document.querySelector('main'));
+
+    hljs.highlightAll();
   }
 }
 </script>

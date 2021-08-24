@@ -14,9 +14,9 @@
 
     <div class="container">
       <h3>Add data attribute to column</h3>
-      <pre v-highlightjs><code class="javascript">{{htmlColumn}}</code></pre>
+      <pre><code class="javascript">{{htmlColumn}}</code></pre>
       <h3>Add data attribute to table</h3>
-      <pre v-highlightjs><code class="javascript">{{htmlTable}}</code></pre>
+      <pre><code class="javascript">{{htmlTable}}</code></pre>
     </div>
 
 
