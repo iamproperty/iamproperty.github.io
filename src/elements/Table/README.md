@@ -18,7 +18,7 @@
 
 - **.table-fullwidth** - Prevents the table from stacking on mobile
 - **.table-striped** - Add zebra-striping to the table
-- **.table-hover** - Enable a hover state on table rows within a <tbody>
+- **.table-hover** - Enable a hover state on table rows within a &lt;tbody&gt;
 
 ### Custom JavaScript Event 
 

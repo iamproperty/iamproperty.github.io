@@ -78,7 +78,6 @@ export default {
           contact_details: '<a href="tel:07411882800">07411882800</a> (Mobile)<br> <a href="tel:07411882800">07411882800</a> (Main)',
           address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
           point_of_contact: 'None set',
-          verification_checklist: '',
           compliance_details: 'Risk level: medium<br>Last compliance note: ',
           actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
         },
@@ -88,7 +87,6 @@ export default {
           contact_details: '<a href="tel:07729797870">07729797870</a> (Main)<br> <a href="tel:07729797870">07729797870</a> (Mobile)',
           address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
           point_of_contact: 'None set',
-          verification_checklist: '',
           compliance_details: 'Risk level: medium<br>Last compliance note: ',
           actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
         }
