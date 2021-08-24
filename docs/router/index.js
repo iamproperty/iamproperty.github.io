@@ -22,6 +22,14 @@ export const routes = [
     }
   },
   {
+    path: '/get-started',
+    component: () => import('../views/GetStarted.vue'),
+    name: 'Get started',
+    meta: {
+      title: 'Get started | IAM Key'
+    }
+  },
+  {
     path: '/changelog',
     component: () => import('../views/Changelog.vue'),
     name: 'Changelog',
