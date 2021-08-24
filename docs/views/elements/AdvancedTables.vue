@@ -131,7 +131,8 @@ export default {
         { key: 'address' },
         { 
           key: 'emergency_contact',
-          filterable: true 
+          filterable: true,
+          sortable: true
         },
         { key: 'actions' }
       ]

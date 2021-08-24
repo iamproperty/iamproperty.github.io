@@ -32,22 +32,35 @@ function table(tableElement) {
 
     const form = document.createElement("div");
     form.classList.add('row');
-    form.classList.add('pb-5');
+    form.classList.add('pt-1');
+    form.classList.add('pb-3');
 
     const randID = Math.random().toString(36).substr(2, 9);
 
     const filterColumns = Array.from(tableElement.querySelectorAll('th[data-filterable]'));
 
-console.log(filterColumns.length)
+    let searchableTerms = {};
+    filterColumns.forEach((columnHeading, index) => {
+      Array.from(tableElement.querySelectorAll('td[data-label="'+columnHeading.innerText+'"]')).forEach((label, index) => {
 
-    form.innerHTML = `<div class="col-6">
+        searchableTerms[label.innerText] = label.innerText;
+      });
+    });
+
+
+
+
+    form.innerHTML = `<div class="col-sm-6 col-md-4 pb-3">
   <div class="form-control__wrapper form-control-inline">
     <label for="${randID}_filter">Filter by Name:</label>
-    <input type="search" name="${randID}_filter" id="${randID}_filter" class="form-control" placeholder="" />
+    <input type="search" name="${randID}_filter" id="${randID}_filter" class="form-control" placeholder="" list="${randID}_list" />
   </div>
+  <datalist id="${randID}_list">
+    ${Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("")}
+  </datalist>
 </div>
-<div class="col-6">
-  ${filterColumns.length > 1 ? `<span>Filter by: </span>` + filterColumns.map(column => `<div class="form-check"><input class="form-check-input" type="checkbox" id="${randID}_${column.innerText.replace(' ','_').toLowerCase()}" checked="checked" /><label class="form-check-label" for="${randID}_${column.innerText.replace(' ','_').toLowerCase()}">${column.innerText}</label></div>`).join("") : ``}
+<div class="col-md-8 d-sm-flex align-items-center pb-3">
+  ${filterColumns.length > 1 ? `<span class="pe-3 text-nowrap">Filter by: </span>` + filterColumns.map(column => `<div class="form-check pe-3"><input class="form-check-input" type="checkbox" id="${randID}_${column.innerText.replace(' ','_').toLowerCase()}" checked="checked" /><label class="form-check-label text-nowrap" for="${randID}_${column.innerText.replace(' ','_').toLowerCase()}">${column.innerText}</label></div>`).join("") : ``}
 </div>`;
 
     tableElement.prepend(form)
