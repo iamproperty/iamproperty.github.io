@@ -2,7 +2,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import { BootstrapVue } from 'bootstrap-vue'
-import VueHighlightJS from 'vue-highlightjs'
 
 import navbar from '../assets/js/modules/navbar'
 import * as helpers from '../assets/js/modules/helpers'
@@ -17,7 +16,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import cssVars from './assets/styles.scss'
 
 Vue.use(BootstrapVue)
-Vue.use(VueHighlightJS)
 
 // Filters the CSS vars object to pull out the theme colours
 const themeColours = Object.keys(cssVars).reduce(function (arr, key) {

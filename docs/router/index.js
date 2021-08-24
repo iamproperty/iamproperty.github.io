@@ -22,6 +22,14 @@ export const routes = [
     }
   },
   {
+    path: '/get-started',
+    component: () => import('../views/GetStarted.vue'),
+    name: 'Get started',
+    meta: {
+      title: 'Get started | IAM Key'
+    }
+  },
+  {
     path: '/changelog',
     component: () => import('../views/Changelog.vue'),
     name: 'Changelog',
@@ -177,6 +185,14 @@ export const routes = [
         path: '',
         name: 'Index',
         component: () => import('../views/components/Index.vue')
+      },
+      {
+        path: 'header',
+        name: 'Header',
+        meta: {
+          title: 'Header | Components | IAM Key'
+        },
+        component: () => import('../views/components/Header.vue')
       },
       {
         path: 'task-title',
