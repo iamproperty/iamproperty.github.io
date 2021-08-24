@@ -151,6 +151,14 @@ export const routes = [
           title: 'Buttons & links | Elements | IAM Key'
         },
         component: () => import('../views/elements/Buttons.vue')
+      },
+      {
+        path: 'tables',
+        name: 'Tables',
+        meta: {
+          title: 'Tables | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Tables.vue')
       }
     ]
   },

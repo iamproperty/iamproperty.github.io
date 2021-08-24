@@ -44,6 +44,7 @@ import SVGLogo from '../assets/svg/logo.svg?inline'
 import SVGIcons from '../assets/svg/icons.svg?inline'
 import Logo from '@/foundations/Logo/Logo.vue'
 import pkg from '../package.json'
+import * as helpers from '../assets/js/modules/helpers'
 
 export default {
   data () {
@@ -66,6 +67,10 @@ export default {
         return this.$route.path.indexOf(path) === 0 // current path starts with this path string
       })
     }
+  },
+  updated(){
+    if(document.querySelector('main'))
+      helpers.checkElements(document.querySelector('main'));
   }
 }
 </script>

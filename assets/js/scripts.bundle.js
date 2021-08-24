@@ -3096,6 +3096,134 @@
 
   defineJQueryPlugin(Toast);
 
+  var global = require('../internals/global');
+  var DOMIterables = require('../internals/dom-iterables');
+  var forEach = require('../internals/array-for-each');
+  var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+
+  for (var COLLECTION_NAME in DOMIterables) {
+    var Collection = global[COLLECTION_NAME];
+    var CollectionPrototype = Collection && Collection.prototype;
+    // some Chrome versions have non-configurable methods on DOMTokenList
+    if (CollectionPrototype && CollectionPrototype.forEach !== forEach) try {
+      createNonEnumerableProperty(CollectionPrototype, 'forEach', forEach);
+    } catch (error) {
+      CollectionPrototype.forEach = forEach;
+    }
+  }
+
+  var $ = require('../internals/export');
+  var from = require('../internals/array-from');
+  var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
+
+  var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function (iterable) {
+    // eslint-disable-next-line es/no-array-from -- required for testing
+    Array.from(iterable);
+  });
+
+  // `Array.from` method
+  // https://tc39.es/ecma262/#sec-array.from
+  $({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
+    from: from
+  });
+
+  var charAt = require('../internals/string-multibyte').charAt;
+  var toString = require('../internals/to-string');
+  var InternalStateModule = require('../internals/internal-state');
+  var defineIterator = require('../internals/define-iterator');
+
+  var STRING_ITERATOR = 'String Iterator';
+  var setInternalState = InternalStateModule.set;
+  var getInternalState = InternalStateModule.getterFor(STRING_ITERATOR);
+
+  // `String.prototype[@@iterator]` method
+  // https://tc39.es/ecma262/#sec-string.prototype-@@iterator
+  defineIterator(String, 'String', function (iterated) {
+    setInternalState(this, {
+      type: STRING_ITERATOR,
+      string: toString(iterated),
+      index: 0
+    });
+  // `%StringIteratorPrototype%.next` method
+  // https://tc39.es/ecma262/#sec-%stringiteratorprototype%.next
+  }, function next() {
+    var state = getInternalState(this);
+    var string = state.string;
+    var index = state.index;
+    var point;
+    if (index >= string.length) return { value: undefined, done: true };
+    point = charAt(string, index);
+    state.index += point.length;
+    return { value: point, done: false };
+  });
+
+  /** 
+   * Global helper functions to help maintain and enhance framework elements.
+   * @module Helpers 
+   */
+
+  /**
+   * Add global classes used by the CSS and later JavaScript.
+   * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
+   */
+  var addBodyClasses = function addBodyClasses(body) {
+    body.classList.add("js-enabled");
+
+    if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
+      body.classList.add("ie");
+    }
+
+    return null;
+  };
+  /**
+   * Check if an element contains certain elements that needs enhancing with the JavaScript helpers, it is recommended to do this on the page body after the dom is loaded. Elements that are loaded via ajax should also run this function. 
+   * @param {HTMLElement} element Dom element, this doesn't have to be the body but it is recommended.
+   */
+
+
+  var checkElements = function checkElements(element) {
+    // Tables
+    Array.from(element.querySelectorAll('table')).forEach(function (table, index) {
+      tableStacked(table);
+      tableWrap(table);
+    });
+  };
+  /**
+   * Wrap tables with a table wrapper div to help maintain its responsive design.
+   * @param {HTMLElement} table Dom table element
+   */
+
+
+  var tableWrap = function tableWrap(table) {
+    if (!table.parentNode.classList.contains('table__wrapper')) {
+      var tableHTML = table.outerHTML;
+      table.outerHTML = "<div class=\"table__wrapper\">".concat(tableHTML, "</div>");
+    }
+  };
+  /**
+   * Creates data attributes to be used by the CSS for mobile views.
+   * @param {HTMLElement} table Dom table element
+   */
+
+
+  var tableStacked = function tableStacked(table) {
+    var colHeadings = Array.from(table.querySelectorAll('thead th'));
+    var colRows = Array.from(table.querySelectorAll('tbody tr'));
+    colRows.forEach(function (row, index) {
+      var cells = Array.from(row.querySelectorAll('th, td'));
+      cells.forEach(function (cell, cellIndex) {
+        var heading = colHeadings[cellIndex];
+
+        if (typeof heading != "undefined") {
+          var tempDiv = document.createElement("div");
+          tempDiv.innerHTML = heading.innerHTML;
+          var headingText = tempDiv.textContent || tempDiv.innerText || "";
+          cell.setAttribute('data-label', headingText);
+        }
+      });
+    });
+  };
+
   var navbar = function navbar() {
     console.log('navbar');
   };
@@ -3103,6 +3231,8 @@
   // Bootstrap modules
 
   document.addEventListener("DOMContentLoaded", function () {
+    addBodyClasses(document.body);
+    checkElements(document.body);
     navbar();
     console.log('test.js');
   });
