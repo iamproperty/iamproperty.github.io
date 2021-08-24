@@ -26,8 +26,6 @@
   "dependencies": {
     "@vue/eslint-config-standard": "^6.1.0",
     "bootstrap": "^5.0.2",
-    "bootstrap-vue": "^2.21.2",
-    "eslint": "^7.32.0",
     "glob": "^7.1.7",
     "sass": "^1.37.5",
     "sass-loader": "^10.2.0",
