@@ -8,7 +8,7 @@
     <div class="container visualtest">
       <div class="row">
         <div class="col-sm-6 col-md-4 mb-5">
-          <Logo></Logo>
+          <Logo data-test="test1"></Logo>
         </div>
         <div class="col-sm-6 col-md-4 mb-5">
           <Logo id="sold"></Logo>

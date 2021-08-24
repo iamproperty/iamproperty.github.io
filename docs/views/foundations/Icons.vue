@@ -8,7 +8,7 @@
       <div class="row">
 
         <div class="col text-center mw-fit-content" v-for="(icon) in icons" :key="icon">
-          <Icon :id="icon"></Icon>
+          <div :id="'icon-'+icon"><Icon :id="icon"></Icon></div>
           <span class="d-block">{{icon}}</span>
         </div>
       </div>

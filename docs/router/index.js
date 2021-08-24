@@ -74,6 +74,14 @@ export const routes = [
         component: () => import('../views/foundations/Icons.vue')
       },
       {
+        path: 'illustrations',
+        name: 'Illustrations',
+        meta: {
+          title: 'Illustrations | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Illustrations.vue')
+      },
+      {
         path: 'circles',
         name: 'Circles',
         meta: {
@@ -82,12 +90,29 @@ export const routes = [
         component: () => import('../views/foundations/Circles.vue')
       },
       {
-        path: 'illustrations',
-        name: 'Illustrations',
+        path: 'breakpoints',
+        name: 'Breakpoints',
         meta: {
-          title: 'Illustrations | Foundations | IAM Key'
+          title: 'Breakpoints | Foundations | IAM Key'
         },
-        component: () => import('../views/foundations/Illustrations.vue')
+        component: () => import('../views/foundations/Breakpoints.vue')
+      },
+      {
+        path: 'grid',
+        name: 'Grid',
+        meta: {
+          title: 'Grid | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Grid.vue')
+
+      },
+      {
+        path: 'utilities',
+        name: 'Utility Classes',
+        meta: {
+          title: 'Utility Classes | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Utilities.vue')
       }
     ]
   },
@@ -110,6 +135,14 @@ export const routes = [
           title: 'Typography | Elements | IAM Key'
         },
         component: () => import('../views/elements/Type.vue')
+      },
+      {
+        path: 'buttons',
+        name: 'Buttons & links',
+        meta: {
+          title: 'Buttons & links | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Buttons.vue')
       }
     ]
   },
@@ -128,6 +161,14 @@ export const routes = [
         path: '',
         name: 'Index',
         component: () => import('../views/components/Index.vue')
+      },
+      {
+        path: 'header',
+        name: 'Header',
+        meta: {
+          title: 'Header | Components | IAM Key'
+        },
+        component: () => import('../views/components/Header.vue')
       },
       {
         path: 'task-title',

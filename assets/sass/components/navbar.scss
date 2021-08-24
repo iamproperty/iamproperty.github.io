@@ -14,29 +14,23 @@
     }
   }
 
-  li a {
+  li a:not(.text-decoration-none):not(.btn) {
     text-decoration: none;
     @include var(color,--colour-primary,!important);
     display: block;
     padding: rem(8) 0 rem(8) 0;
     position: relative;
 
-    &:after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: 0;
+    &:before {
+      display: block;
       width: 0;
       height: 4px;
-      @include var(background-color,--colour-secondary);
-      -webkit-transform: translateX(-50%);
-      -ms-transform: translateX(-50%);
-      transform: translateX(-50%);
-      -webkit-transition: .3s ease-in;
-      transition: .3s ease-in;
     }
 
-    &:hover:after {
+    &:hover:before,
+    &:focus:before,
+    &:active:before,
+    &.active:before {
       width: 100%;
     }
   }

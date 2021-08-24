@@ -38,6 +38,14 @@
   }
 }
 
+@mixin invert-colours(){
+  [class*="bg-"].bg-dark &,
+  [class*="bg-"].bg-danger &,
+  [class*="bg-"].bg-primary & {
+    @content;
+  }
+}
+
 @mixin headers($includeClasses: 'false'){
   h1,
   h2,

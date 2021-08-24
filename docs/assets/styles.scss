@@ -5,9 +5,82 @@ $fontPath: '/fonts/';
 // Temp files for homepage until components created
 @import "../../node_modules/bootstrap/scss/nav";
 @import "../../assets/sass/components/navbar.scss";
-@import "../../assets/sass/components/header.scss";
 @import "../../node_modules/bootstrap/scss/card";
 @import "../../assets/sass/components/card.scss";
+
+
+// Utility generator
+// Used to generate utilities & print utilities
+@mixin print-utility($utility, $infix, $is-rfs-media-query: false) {
+  $values: map-get($utility, values);
+
+  // If the values are a list or string, convert it into a map
+  @if type-of($values) == "string" or type-of(nth($values, 1)) != "list" {
+    $values: zip($values, $values);
+  }
+
+  @each $key, $value in $values {
+    $properties: map-get($utility, property);
+
+    // Multiple properties are possible, for example with vertical or horizontal margins or paddings
+    @if type-of($properties) == "string" {
+      $properties: append((), $properties);
+    }
+
+    // Use custom class if present
+    $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
+    $property-class: if($property-class == null, "", $property-class);
+
+    // State params to generate pseudo-classes
+    $state: if(map-has-key($utility, state), map-get($utility, state), ());
+
+    $infix: if($property-class == "" and str-slice($infix, 1, 1) == "-", str-slice($infix, 2), $infix);
+
+    // Don't prefix if value key is null (eg. with shadow class)
+    $property-class-modifier: if($key, if($property-class == "" and $infix == "", "", "-") + $key, "");
+
+    @if map-get($utility, rfs) {
+      // Inside the media query
+      @if $is-rfs-media-query {
+        $val: rfs-value($value);
+
+        // Do not render anything if fluid and non fluid values are the same
+        $value: if($val == rfs-fluid-value($value), null, $val);
+      }
+      @else {
+        $value: rfs-fluid-value($value);
+      }
+    }
+
+    $is-rtl: map-get($utility, rtl);
+
+    @if $value != null {
+      @if $is-rtl == false {
+        /* rtl:begin:remove */
+      }
+      
+      $string: '';
+      @each $property in $properties {
+        $string: $string+#{$property}+': '+$value+if($enable-important-utilities, '!important;\\n', ';\\n');
+      }
+      --ut-#{$property-class + $infix + $property-class-modifier}: '#{$string}';
+
+      @each $pseudo in $state {
+
+        $string: '';
+        @each $property in $properties {
+          $string: $string+#{$property}+': '+$value+if($enable-important-utilities, '!important;\\n', ';\\n');
+        }
+        --ut-#{$property-class + $infix + $property-class-modifier}-#{$pseudo}: '#{$string}; ';
+      }
+      
+      @if $is-rtl == false {
+        /* rtl:end:remove */
+      }
+    }
+  }
+}
+
 
 // Export the SCSS vars
 :export {
@@ -21,98 +94,26 @@ $fontPath: '/fonts/';
     #{str-replace($var,'-','_')}: #{$value};
   }
   heading_lh: $headings-line-height;
+  @each $breakpoint in map-keys($grid-breakpoints) {
+
+    // Generate media query if needed
+
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  
+      // Loop over each utility property
+      @each $key, $utility in $utilities {
+        // The utility can be disabled with `false`, thus check if the utility is a map first
+        // Only proceed if responsive media queries are enabled or if it's the base media query
+        @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "") {
+          @include print-utility($utility, $infix);
+        }
+      }
+    
+  }
 }
 
-// Bespoke SCSS for the docs
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
-.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background: #F0F0F0;
-}
-
-/* Base color: saturation 0; */
-.hljs,
-.hljs-subst {
-  color: #444;
-}
-
-.hljs-comment {
-  color: #888888;
-}
-
-.hljs-keyword,
-.hljs-attribute,
-.hljs-selector-tag,
-.hljs-meta-keyword,
-.hljs-doctag,
-.hljs-name {
-  font-weight: bold;
-}
-
-
-/* User color: hue: 0 */
-
-.hljs-type,
-.hljs-string,
-.hljs-number,
-.hljs-selector-id,
-.hljs-selector-class,
-.hljs-quote,
-.hljs-template-tag,
-.hljs-deletion {
-  color: #880000;
-}
-
-.hljs-title,
-.hljs-section {
-  color: #880000;
-  font-weight: bold;
-}
-
-.hljs-regexp,
-.hljs-symbol,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-link,
-.hljs-selector-attr,
-.hljs-selector-pseudo {
-  color: #BC6060;
-}
-
-
-/* Language color: hue: 90; */
-
-.hljs-literal {
-  color: #78A960;
-}
-
-.hljs-built_in,
-.hljs-bullet,
-.hljs-code,
-.hljs-addition {
-  color: #397300;
-}
-
-
-/* Meta color: hue: 200 */
-
-.hljs-meta {
-  color: #1f7199;
-}
-
-.hljs-meta-string {
-  color: #4d99bf;
-}
-
-
-/* Misc effects */
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: bold;
+code {
+  font-family: 'Source Code Pro', monospace;
 }

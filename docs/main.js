@@ -32,6 +32,8 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
   return arr
 }, {})
 
+
+
 import audit from '../audit.json';
 
 const shared = {
@@ -55,3 +57,5 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
+
+export {shared}
