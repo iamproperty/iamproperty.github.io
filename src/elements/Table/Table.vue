@@ -48,12 +48,17 @@ export default {
   },
   mounted(){
 
-    table(this.$el);
+    table(this.$refs.wrapper);
 
     // Listen for the event.
-    this.$el.addEventListener('updated', function (e) { 
+    this.$el.addEventListener('sorted', function (e) { 
       
-      console.log('Table updated')
+      console.log('Table sorted')
+    }, false);
+
+    this.$el.addEventListener('filtered', function (e) { 
+      
+      console.log('Table filtered')
     }, false);
   }
 }

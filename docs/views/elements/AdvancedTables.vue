@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container pb-0">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/elements">Elements</a></li>
+      </ul>
       <h1>Advanced tables</h1>
       <p>Tables can be given extra functionality to help make the data easier to understand or process.</p>
       <h2>Sortable</h2>
@@ -11,26 +14,34 @@
       <Table :fields="sortable_fields" :items="items" sortBy="Job" sort="ascending" class="table-fullwidth"></Table>
     </div>
 
-
     <div class="container">
       <h3>Add data attribute to column</h3>
-      <pre><code class="javascript">{{htmlColumn}}</code></pre>
+      <p>To make a column sortable a data attribute is needed to be added to the column cell.</p>
+      <pre><code class="javascript">{{htmlSortableColumn}}</code></pre>
       <h3>Add data attribute to table</h3>
-      <pre><code class="javascript">{{htmlTable}}</code></pre>
+      <p>Attributes can be added to the table to make the column the default sortable setting.</p>
+      <pre><code class="javascript">{{htmlSortableTable}}</code></pre>
     </div>
-
-
 
     <div class="container pb-0">
       <h2>Filter</h2>
-      <p>-</p>
+      <p>Reduce the number of rows by filtering what we want to get displayed.</p>
     </div>
 
     <div class="container visualtest">
       <Table :fields="filter_fields" :items="items" class="table-fullwidth"></Table>
     </div>
 
+    <div class="container">
+      <h3>Add data attribute to column</h3>
+      <p>To make a column filterable a data attribute needs to be added to the table cell.</p>
+      <pre><code class="javascript">{{htmlFilterableColumn}}</code></pre>
+    </div>
 
+    <div class="container">
+      <h3>Advanced filters</h3>
+      <p>The above is the default way of adding a simple filter that matches strings. To have something more complicated the table element will have to be combined with an additional form with bespoke JavaScript logic.</p>
+    </div>
 
     <div class="container">
       <h2>Vue Table component reference</h2>
@@ -55,8 +66,9 @@ export default {
   },
   data () {
     return {
-      htmlTable: `<th data-sortable="true">Name</th>`,
-      htmlColumn: `<div data-sortby="Job" data-sort="ascending" class="table__wrapper table-fullwidth">`,
+      htmlSortableTable: `<div data-sortby="Job" data-sort="ascending" class="table__wrapper table-fullwidth">`,
+      htmlSortableColumn: `<th data-sortable="true">Name</th>`,
+      htmlFilterableColumn: `<th data-filterable="true">Name</th>`,
       sortable_fields: [
         { 
           key: 'name',
