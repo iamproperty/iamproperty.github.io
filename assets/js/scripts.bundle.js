@@ -3716,6 +3716,26 @@
       tbody.innerHTML = strTbody; // Dispatch the filter event.
 
       tableElement.dispatchEvent(filteredEvent);
+    };
+
+    var createFilterList = function createFilterList() {
+      // Check which options are checked
+      var filterOptions = [];
+      Array.from(tableElement.querySelectorAll('[type="checkbox"]:checked + label')).forEach(function (label, index) {
+        filterOptions.push(label.textContent);
+      }); // Build up the list of searchable terms
+
+      var searchableTerms = [];
+      filterOptions.forEach(function (option, index) {
+        Array.from(tableElement.querySelectorAll('td[data-label="' + option + '"]')).forEach(function (label, index) {
+          searchableTerms[label.textContent] = label.textContent;
+        });
+      }); // Rebuild the list
+
+      var dataList = tableElement.querySelector('datalist');
+      dataList.innerHTML = Object.keys(searchableTerms).map(function (term) {
+        return "<option value=\"".concat(term, "\"></option>");
+      }).join("");
     }; // Declare event handlers
 
 
@@ -3776,6 +3796,7 @@
           if (target.matches('input[type="checkbox"]')) {
             var searchTerm = tableElement.querySelector('input[type="search"]').value;
             filterTable(searchTerm);
+            createFilterList();
           }
         }
       });

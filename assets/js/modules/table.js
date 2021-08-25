@@ -112,6 +112,27 @@ function table(tableElement) {
     tableElement.dispatchEvent(filteredEvent);
   }
 
+  const createFilterList = function(){
+
+    // Check which options are checked
+    let filterOptions = [];
+    Array.from(tableElement.querySelectorAll('[type="checkbox"]:checked + label')).forEach((label, index) => {
+      filterOptions.push(label.textContent);
+    });
+
+    // Build up the list of searchable terms
+    let searchableTerms = [];
+    filterOptions.forEach((option, index) => {
+      Array.from(tableElement.querySelectorAll('td[data-label="'+option+'"]')).forEach((label, index) => {
+        searchableTerms[label.textContent] = label.textContent;
+      });
+    });
+
+    // Rebuild the list
+    let dataList = tableElement.querySelector('datalist');
+    dataList.innerHTML = Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("");
+  }
+
   // Declare event handlers
   tableElement.addEventListener('click', function(e){
     for (var target = e.target; target && target != this; target = target.parentNode) {
@@ -186,6 +207,7 @@ function table(tableElement) {
 
           const searchTerm = tableElement.querySelector('input[type="search"]').value;
           filterTable(searchTerm)
+          createFilterList()
         }
       }
     });
