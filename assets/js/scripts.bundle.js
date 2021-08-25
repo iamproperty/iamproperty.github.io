@@ -8,6 +8,67 @@
   factory();
 }((function () { 'use strict';
 
+  var global = require('../internals/global');
+  var DOMIterables = require('../internals/dom-iterables');
+  var forEach = require('../internals/array-for-each');
+  var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
+
+  for (var COLLECTION_NAME in DOMIterables) {
+    var Collection = global[COLLECTION_NAME];
+    var CollectionPrototype = Collection && Collection.prototype;
+    // some Chrome versions have non-configurable methods on DOMTokenList
+    if (CollectionPrototype && CollectionPrototype.forEach !== forEach) try {
+      createNonEnumerableProperty(CollectionPrototype, 'forEach', forEach);
+    } catch (error) {
+      CollectionPrototype.forEach = forEach;
+    }
+  }
+
+  var $$6 = require('../internals/export');
+  var from = require('../internals/array-from');
+  var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
+
+  var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function (iterable) {
+    // eslint-disable-next-line es/no-array-from -- required for testing
+    Array.from(iterable);
+  });
+
+  // `Array.from` method
+  // https://tc39.es/ecma262/#sec-array.from
+  $$6({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
+    from: from
+  });
+
+  var charAt = require('../internals/string-multibyte').charAt;
+  var toString$3 = require('../internals/to-string');
+  var InternalStateModule = require('../internals/internal-state');
+  var defineIterator = require('../internals/define-iterator');
+
+  var STRING_ITERATOR = 'String Iterator';
+  var setInternalState = InternalStateModule.set;
+  var getInternalState = InternalStateModule.getterFor(STRING_ITERATOR);
+
+  // `String.prototype[@@iterator]` method
+  // https://tc39.es/ecma262/#sec-string.prototype-@@iterator
+  defineIterator(String, 'String', function (iterated) {
+    setInternalState(this, {
+      type: STRING_ITERATOR,
+      string: toString$3(iterated),
+      index: 0
+    });
+  // `%StringIteratorPrototype%.next` method
+  // https://tc39.es/ecma262/#sec-%stringiteratorprototype%.next
+  }, function next() {
+    var state = getInternalState(this);
+    var string = state.string;
+    var index = state.index;
+    var point;
+    if (index >= string.length) return { value: undefined, done: true };
+    point = charAt(string, index);
+    state.index += point.length;
+    return { value: point, done: false };
+  });
+
   /**
    * --------------------------------------------------------------------------
    * Bootstrap (v5.0.2): dom/selector-engine.js
@@ -3096,67 +3157,6 @@
 
   defineJQueryPlugin(Toast);
 
-  var global = require('../internals/global');
-  var DOMIterables = require('../internals/dom-iterables');
-  var forEach = require('../internals/array-for-each');
-  var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
-
-  for (var COLLECTION_NAME in DOMIterables) {
-    var Collection = global[COLLECTION_NAME];
-    var CollectionPrototype = Collection && Collection.prototype;
-    // some Chrome versions have non-configurable methods on DOMTokenList
-    if (CollectionPrototype && CollectionPrototype.forEach !== forEach) try {
-      createNonEnumerableProperty(CollectionPrototype, 'forEach', forEach);
-    } catch (error) {
-      CollectionPrototype.forEach = forEach;
-    }
-  }
-
-  var $ = require('../internals/export');
-  var from = require('../internals/array-from');
-  var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
-
-  var INCORRECT_ITERATION = !checkCorrectnessOfIteration(function (iterable) {
-    // eslint-disable-next-line es/no-array-from -- required for testing
-    Array.from(iterable);
-  });
-
-  // `Array.from` method
-  // https://tc39.es/ecma262/#sec-array.from
-  $({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
-    from: from
-  });
-
-  var charAt = require('../internals/string-multibyte').charAt;
-  var toString = require('../internals/to-string');
-  var InternalStateModule = require('../internals/internal-state');
-  var defineIterator = require('../internals/define-iterator');
-
-  var STRING_ITERATOR = 'String Iterator';
-  var setInternalState = InternalStateModule.set;
-  var getInternalState = InternalStateModule.getterFor(STRING_ITERATOR);
-
-  // `String.prototype[@@iterator]` method
-  // https://tc39.es/ecma262/#sec-string.prototype-@@iterator
-  defineIterator(String, 'String', function (iterated) {
-    setInternalState(this, {
-      type: STRING_ITERATOR,
-      string: toString(iterated),
-      index: 0
-    });
-  // `%StringIteratorPrototype%.next` method
-  // https://tc39.es/ecma262/#sec-%stringiteratorprototype%.next
-  }, function next() {
-    var state = getInternalState(this);
-    var string = state.string;
-    var index = state.index;
-    var point;
-    if (index >= string.length) return { value: undefined, done: true };
-    point = charAt(string, index);
-    state.index += point.length;
-    return { value: point, done: false };
-  });
-
   /** 
    * Global helper functions to help maintain and enhance framework elements.
    * @module Helpers 
@@ -3228,13 +3228,574 @@
     console.log('navbar');
   };
 
-  // Bootstrap modules
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function _typeof(obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function _typeof(obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  var $$5 = require('../internals/export');
+  var aFunction = require('../internals/a-function');
+  var toObject$2 = require('../internals/to-object');
+  var toLength$2 = require('../internals/to-length');
+  var toString$2 = require('../internals/to-string');
+  var fails$4 = require('../internals/fails');
+  var internalSort = require('../internals/array-sort');
+  var arrayMethodIsStrict$1 = require('../internals/array-method-is-strict');
+  var FF = require('../internals/engine-ff-version');
+  var IE_OR_EDGE = require('../internals/engine-is-ie-or-edge');
+  var V8 = require('../internals/engine-v8-version');
+  var WEBKIT = require('../internals/engine-webkit-version');
+
+  var test = [];
+  var nativeSort = test.sort;
+
+  // IE8-
+  var FAILS_ON_UNDEFINED = fails$4(function () {
+    test.sort(undefined);
+  });
+  // V8 bug
+  var FAILS_ON_NULL = fails$4(function () {
+    test.sort(null);
+  });
+  // Old WebKit
+  var STRICT_METHOD$1 = arrayMethodIsStrict$1('sort');
+
+  var STABLE_SORT = !fails$4(function () {
+    // feature detection can be too slow, so check engines versions
+    if (V8) return V8 < 70;
+    if (FF && FF > 3) return;
+    if (IE_OR_EDGE) return true;
+    if (WEBKIT) return WEBKIT < 603;
+
+    var result = '';
+    var code, chr, value, index;
+
+    // generate an array with more 512 elements (Chakra and old V8 fails only in this case)
+    for (code = 65; code < 76; code++) {
+      chr = String.fromCharCode(code);
+
+      switch (code) {
+        case 66: case 69: case 70: case 72: value = 3; break;
+        case 68: case 71: value = 4; break;
+        default: value = 2;
+      }
+
+      for (index = 0; index < 47; index++) {
+        test.push({ k: chr + index, v: value });
+      }
+    }
+
+    test.sort(function (a, b) { return b.v - a.v; });
+
+    for (index = 0; index < test.length; index++) {
+      chr = test[index].k.charAt(0);
+      if (result.charAt(result.length - 1) !== chr) result += chr;
+    }
+
+    return result !== 'DGBEFHACIJK';
+  });
+
+  var FORCED$1 = FAILS_ON_UNDEFINED || !FAILS_ON_NULL || !STRICT_METHOD$1 || !STABLE_SORT;
+
+  var getSortCompare = function (comparefn) {
+    return function (x, y) {
+      if (y === undefined) return -1;
+      if (x === undefined) return 1;
+      if (comparefn !== undefined) return +comparefn(x, y) || 0;
+      return toString$2(x) > toString$2(y) ? 1 : -1;
+    };
+  };
+
+  // `Array.prototype.sort` method
+  // https://tc39.es/ecma262/#sec-array.prototype.sort
+  $$5({ target: 'Array', proto: true, forced: FORCED$1 }, {
+    sort: function sort(comparefn) {
+      if (comparefn !== undefined) aFunction(comparefn);
+
+      var array = toObject$2(this);
+
+      if (STABLE_SORT) return comparefn === undefined ? nativeSort.call(array) : nativeSort.call(array, comparefn);
+
+      var items = [];
+      var arrayLength = toLength$2(array.length);
+      var itemsLength, index;
+
+      for (index = 0; index < arrayLength; index++) {
+        if (index in array) items.push(array[index]);
+      }
+
+      items = internalSort(items, getSortCompare(comparefn));
+      itemsLength = items.length;
+      index = 0;
+
+      while (index < itemsLength) array[index] = items[index++];
+      while (index < arrayLength) delete array[index++];
+
+      return array;
+    }
+  });
+
+  var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
+  var redefine$1 = require('../internals/redefine');
+  var toString$1 = require('../internals/object-to-string');
+
+  // `Object.prototype.toString` method
+  // https://tc39.es/ecma262/#sec-object.prototype.tostring
+  if (!TO_STRING_TAG_SUPPORT) {
+    redefine$1(Object.prototype, 'toString', toString$1, { unsafe: true });
+  }
+
+  var redefine = require('../internals/redefine');
+  var anObject$1 = require('../internals/an-object');
+  var $toString = require('../internals/to-string');
+  var fails$3 = require('../internals/fails');
+  var flags = require('../internals/regexp-flags');
+
+  var TO_STRING = 'toString';
+  var RegExpPrototype = RegExp.prototype;
+  var nativeToString = RegExpPrototype[TO_STRING];
+
+  var NOT_GENERIC = fails$3(function () { return nativeToString.call({ source: 'a', flags: 'b' }) != '/a/b'; });
+  // FF44- RegExp#toString has a wrong name
+  var INCORRECT_NAME = nativeToString.name != TO_STRING;
+
+  // `RegExp.prototype.toString` method
+  // https://tc39.es/ecma262/#sec-regexp.prototype.tostring
+  if (NOT_GENERIC || INCORRECT_NAME) {
+    redefine(RegExp.prototype, TO_STRING, function toString() {
+      var R = anObject$1(this);
+      var p = $toString(R.source);
+      var rf = R.flags;
+      var f = $toString(rf === undefined && R instanceof RegExp && !('flags' in RegExpPrototype) ? flags.call(R) : rf);
+      return '/' + p + '/' + f;
+    }, { unsafe: true });
+  }
+
+  var $$4 = require('../internals/export');
+  var fails$2 = require('../internals/fails');
+  var isArray = require('../internals/is-array');
+  var isObject = require('../internals/is-object');
+  var toObject$1 = require('../internals/to-object');
+  var toLength$1 = require('../internals/to-length');
+  var createProperty = require('../internals/create-property');
+  var arraySpeciesCreate = require('../internals/array-species-create');
+  var arrayMethodHasSpeciesSupport$1 = require('../internals/array-method-has-species-support');
+  var wellKnownSymbol$1 = require('../internals/well-known-symbol');
+  var V8_VERSION = require('../internals/engine-v8-version');
+
+  var IS_CONCAT_SPREADABLE = wellKnownSymbol$1('isConcatSpreadable');
+  var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF;
+  var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded';
+
+  // We can't use this feature detection in V8 since it causes
+  // deoptimization and serious performance degradation
+  // https://github.com/zloirock/core-js/issues/679
+  var IS_CONCAT_SPREADABLE_SUPPORT = V8_VERSION >= 51 || !fails$2(function () {
+    var array = [];
+    array[IS_CONCAT_SPREADABLE] = false;
+    return array.concat()[0] !== array;
+  });
+
+  var SPECIES_SUPPORT = arrayMethodHasSpeciesSupport$1('concat');
+
+  var isConcatSpreadable = function (O) {
+    if (!isObject(O)) return false;
+    var spreadable = O[IS_CONCAT_SPREADABLE];
+    return spreadable !== undefined ? !!spreadable : isArray(O);
+  };
+
+  var FORCED = !IS_CONCAT_SPREADABLE_SUPPORT || !SPECIES_SUPPORT;
+
+  // `Array.prototype.concat` method
+  // https://tc39.es/ecma262/#sec-array.prototype.concat
+  // with adding support of @@isConcatSpreadable and @@species
+  $$4({ target: 'Array', proto: true, forced: FORCED }, {
+    // eslint-disable-next-line no-unused-vars -- required for `.length`
+    concat: function concat(arg) {
+      var O = toObject$1(this);
+      var A = arraySpeciesCreate(O, 0);
+      var n = 0;
+      var i, k, length, len, E;
+      for (i = -1, length = arguments.length; i < length; i++) {
+        E = i === -1 ? O : arguments[i];
+        if (isConcatSpreadable(E)) {
+          len = toLength$1(E.length);
+          if (n + len > MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+          for (k = 0; k < len; k++, n++) if (k in E) createProperty(A, n, E[k]);
+        } else {
+          if (n >= MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+          createProperty(A, n++, E);
+        }
+      }
+      A.length = n;
+      return A;
+    }
+  });
+
+  var $$3 = require('../internals/export');
+  var IndexedObject = require('../internals/indexed-object');
+  var toIndexedObject = require('../internals/to-indexed-object');
+  var arrayMethodIsStrict = require('../internals/array-method-is-strict');
+
+  var nativeJoin = [].join;
+
+  var ES3_STRINGS = IndexedObject != Object;
+  var STRICT_METHOD = arrayMethodIsStrict('join', ',');
+
+  // `Array.prototype.join` method
+  // https://tc39.es/ecma262/#sec-array.prototype.join
+  $$3({ target: 'Array', proto: true, forced: ES3_STRINGS || !STRICT_METHOD }, {
+    join: function join(separator) {
+      return nativeJoin.call(toIndexedObject(this), separator === undefined ? ',' : separator);
+    }
+  });
+
+  var $$2 = require('../internals/export');
+  var $map = require('../internals/array-iteration').map;
+  var arrayMethodHasSpeciesSupport = require('../internals/array-method-has-species-support');
+
+  var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('map');
+
+  // `Array.prototype.map` method
+  // https://tc39.es/ecma262/#sec-array.prototype.map
+  // with adding support of @@species
+  $$2({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT }, {
+    map: function map(callbackfn /* , thisArg */) {
+      return $map(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
+    }
+  });
+
+  var $$1 = require('../internals/export');
+  var toObject = require('../internals/to-object');
+  var nativeKeys = require('../internals/object-keys');
+  var fails$1 = require('../internals/fails');
+
+  var FAILS_ON_PRIMITIVES = fails$1(function () { nativeKeys(1); });
+
+  // `Object.keys` method
+  // https://tc39.es/ecma262/#sec-object.keys
+  $$1({ target: 'Object', stat: true, forced: FAILS_ON_PRIMITIVES }, {
+    keys: function keys(it) {
+      return nativeKeys(toObject(it));
+    }
+  });
+
+  var $ = require('../internals/export');
+  var exec = require('../internals/regexp-exec');
+
+  // `RegExp.prototype.exec` method
+  // https://tc39.es/ecma262/#sec-regexp.prototype.exec
+  $({ target: 'RegExp', proto: true, forced: /./.exec !== exec }, {
+    exec: exec
+  });
+
+  var fixRegExpWellKnownSymbolLogic = require('../internals/fix-regexp-well-known-symbol-logic');
+  var fails = require('../internals/fails');
+  var anObject = require('../internals/an-object');
+  var toInteger = require('../internals/to-integer');
+  var toLength = require('../internals/to-length');
+  var toString = require('../internals/to-string');
+  var requireObjectCoercible = require('../internals/require-object-coercible');
+  var advanceStringIndex = require('../internals/advance-string-index');
+  var getSubstitution = require('../internals/get-substitution');
+  var regExpExec = require('../internals/regexp-exec-abstract');
+  var wellKnownSymbol = require('../internals/well-known-symbol');
+
+  var REPLACE = wellKnownSymbol('replace');
+  var max = Math.max;
+  var min = Math.min;
+
+  var maybeToString = function (it) {
+    return it === undefined ? it : String(it);
+  };
+
+  // IE <= 11 replaces $0 with the whole match, as if it was $&
+  // https://stackoverflow.com/questions/6024666/getting-ie-to-replace-a-regex-with-the-literal-string-0
+  var REPLACE_KEEPS_$0 = (function () {
+    // eslint-disable-next-line regexp/prefer-escape-replacement-dollar-char -- required for testing
+    return 'a'.replace(/./, '$0') === '$0';
+  })();
+
+  // Safari <= 13.0.3(?) substitutes nth capture where n>m with an empty string
+  var REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE = (function () {
+    if (/./[REPLACE]) {
+      return /./[REPLACE]('a', '$0') === '';
+    }
+    return false;
+  })();
+
+  var REPLACE_SUPPORTS_NAMED_GROUPS = !fails(function () {
+    var re = /./;
+    re.exec = function () {
+      var result = [];
+      result.groups = { a: '7' };
+      return result;
+    };
+    return ''.replace(re, '$<a>') !== '7';
+  });
+
+  // @@replace logic
+  fixRegExpWellKnownSymbolLogic('replace', function (_, nativeReplace, maybeCallNative) {
+    var UNSAFE_SUBSTITUTE = REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE ? '$' : '$0';
+
+    return [
+      // `String.prototype.replace` method
+      // https://tc39.es/ecma262/#sec-string.prototype.replace
+      function replace(searchValue, replaceValue) {
+        var O = requireObjectCoercible(this);
+        var replacer = searchValue == undefined ? undefined : searchValue[REPLACE];
+        return replacer !== undefined
+          ? replacer.call(searchValue, O, replaceValue)
+          : nativeReplace.call(toString(O), searchValue, replaceValue);
+      },
+      // `RegExp.prototype[@@replace]` method
+      // https://tc39.es/ecma262/#sec-regexp.prototype-@@replace
+      function (string, replaceValue) {
+        var rx = anObject(this);
+        var S = toString(string);
+
+        if (
+          typeof replaceValue === 'string' &&
+          replaceValue.indexOf(UNSAFE_SUBSTITUTE) === -1 &&
+          replaceValue.indexOf('$<') === -1
+        ) {
+          var res = maybeCallNative(nativeReplace, rx, S, replaceValue);
+          if (res.done) return res.value;
+        }
+
+        var functionalReplace = typeof replaceValue === 'function';
+        if (!functionalReplace) replaceValue = toString(replaceValue);
+
+        var global = rx.global;
+        if (global) {
+          var fullUnicode = rx.unicode;
+          rx.lastIndex = 0;
+        }
+        var results = [];
+        while (true) {
+          var result = regExpExec(rx, S);
+          if (result === null) break;
+
+          results.push(result);
+          if (!global) break;
+
+          var matchStr = toString(result[0]);
+          if (matchStr === '') rx.lastIndex = advanceStringIndex(S, toLength(rx.lastIndex), fullUnicode);
+        }
+
+        var accumulatedResult = '';
+        var nextSourcePosition = 0;
+        for (var i = 0; i < results.length; i++) {
+          result = results[i];
+
+          var matched = toString(result[0]);
+          var position = max(min(toInteger(result.index), S.length), 0);
+          var captures = [];
+          // NOTE: This is equivalent to
+          //   captures = result.slice(1).map(maybeToString)
+          // but for some reason `nativeSlice.call(result, 1, result.length)` (called in
+          // the slice polyfill when slicing native arrays) "doesn't work" in safari 9 and
+          // causes a crash (https://pastebin.com/N21QzeQA) when trying to debug it.
+          for (var j = 1; j < result.length; j++) captures.push(maybeToString(result[j]));
+          var namedCaptures = result.groups;
+          if (functionalReplace) {
+            var replacerArgs = [matched].concat(captures, position, S);
+            if (namedCaptures !== undefined) replacerArgs.push(namedCaptures);
+            var replacement = toString(replaceValue.apply(undefined, replacerArgs));
+          } else {
+            replacement = getSubstitution(matched, S, position, captures, namedCaptures, replaceValue);
+          }
+          if (position >= nextSourcePosition) {
+            accumulatedResult += S.slice(nextSourcePosition, position) + replacement;
+            nextSourcePosition = position + matched.length;
+          }
+        }
+        return accumulatedResult + S.slice(nextSourcePosition);
+      }
+    ];
+  }, !REPLACE_SUPPORTS_NAMED_GROUPS || !REPLACE_KEEPS_$0 || REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE);
+
+  function table(tableElement) {
+    if (_typeof(tableElement) != "object") return false;
+    var tbody = tableElement.querySelector('tbody');
+    var storedData = tbody.cloneNode(true);
+    var sortedEvent = new Event('updated');
+    var filteredEvent = new Event('filtered');
+
+    var sortTable = function sortTable(sortBy, sort) {
+      // Create an array from the table rows, the index created is then used to sort the array
+      var tableArr = [];
+      Array.from(tbody.querySelectorAll('tr')).forEach(function (tableRow, index) {
+        var dataRow = {
+          index: tableRow.querySelector('td[data-label="' + sortBy + '"]').textContent,
+          row: tableRow
+        };
+        tableArr.push(dataRow);
+      }); // Sort array
+
+      tableArr.sort(function (a, b) {
+        return a.index > b.index ? 1 : -1;
+      }); // Reverse if descending
+
+      if (sort == "descending") tableArr = tableArr.reverse(); // Create a string to return and populate the tbody
+
+      var strTbody = '';
+      tableArr.forEach(function (tableRow, index) {
+        strTbody += tableRow.row.outerHTML;
+      });
+      tbody.innerHTML = strTbody; // Dispatch the sortable event
+
+      tableElement.dispatchEvent(sortedEvent);
+    };
+
+    var createFilterForm = function createFilterForm(count) {
+      // Create wrapper div
+      var form = document.createElement("div");
+      form.classList.add('table__filters');
+      form.classList.add('row');
+      form.classList.add('pt-1');
+      form.classList.add('pb-3'); // Create the filter options array
+
+      var filterColumns = Array.from(tableElement.querySelectorAll('th[data-filterable]')); // Populate a list of searchable terms from the cells of the columns that could be used as a filter
+
+      var searchableTerms = {};
+      filterColumns.forEach(function (columnHeading, index) {
+        Array.from(tableElement.querySelectorAll('td[data-label="' + columnHeading.textContent + '"]')).forEach(function (label, index) {
+          searchableTerms[label.textContent] = label.textContent;
+        });
+      }); // Create the form
+
+      var randID = Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
+
+      var filterTitle = filterColumns.length == 1 ? "Filter by " + filterColumns[0].textContent : "Filter"; // Update title if only one filter is chosen
+
+      var checkboxClass = filterColumns.length == 1 ? "d-none" : "d-sm-flex"; // Hide controls when only one filter is chosen
+
+      form.innerHTML = "<div class=\"col-sm-6 col-md-4 pb-3\">\n  <div class=\"form-control__wrapper form-control-inline\">\n    <label for=\"".concat(randID, "_filter\">").concat(filterTitle, ":</label>\n    <input type=\"search\" name=\"").concat(randID, "_filter\" id=\"").concat(randID, "_filter\" class=\"form-control\" placeholder=\"\" list=\"").concat(randID, "_list\" />\n  </div>\n  <datalist id=\"").concat(randID, "_list\">\n    ").concat(Object.keys(searchableTerms).map(function (term) {
+        return "<option value=\"".concat(term, "\"></option>");
+      }).join(""), "\n  </datalist>\n</div>\n<div class=\"col-md-8 align-items-center pb-3 ").concat(checkboxClass, "\">\n  ").concat("<span class=\"pe-3 text-nowrap\">Filter by: </span>" + filterColumns.map(function (column) {
+        return "<div class=\"form-check pe-3\"><input class=\"form-check-input\" type=\"checkbox\" id=\"".concat(randID, "_").concat(column.textContent.replace(' ', '_').toLowerCase(), "\" checked=\"checked\" /><label class=\"form-check-label text-nowrap\" for=\"").concat(randID, "_").concat(column.textContent.replace(' ', '_').toLowerCase(), "\">").concat(column.textContent, "</label></div>");
+      }).join(""), "\n</div>"); // Add before the actual table
+
+      tableElement.prepend(form);
+    };
+
+    var filterTable = function filterTable(searchTerm) {
+      // Create an array of rows that match the search term
+      var tableArr = [];
+      Array.from(storedData.querySelectorAll('tr')).forEach(function (tableRow, index) {
+        // We want one long search string per row including each filterable table cell
+        var rowSearchString = '';
+        Array.from(tableElement.querySelectorAll('[type="checkbox"]:checked + label')).forEach(function (label, index) {
+          rowSearchString += tableRow.querySelector('td[data-label="' + label.textContent + '"]').textContent + ' | ';
+        }); // Check if the table row search string contains the search term
+
+        if (rowSearchString.indexOf(searchTerm) >= 0) {
+          var dataRow = {
+            row: tableRow
+          };
+          tableArr.push(dataRow);
+        }
+      }); // Create a string to return and populate the tbody
+
+      var strTbody = '';
+      tableArr.forEach(function (tableRow, index) {
+        strTbody += tableRow.row.outerHTML;
+      });
+      tbody.innerHTML = strTbody; // Dispatch the filter event.
+
+      tableElement.dispatchEvent(filteredEvent);
+    }; // Declare event handlers
+
+
+    tableElement.addEventListener('click', function (e) {
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-sortable]')) {
+          // Get current sort order
+          var sort = target.getAttribute('aria-sort') == "ascending" ? "descending" : "ascending"; // unset sort attributes
+
+          Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach(function (col, index) {
+            col.setAttribute('aria-sort', 'none');
+          }); // Set the sort order attribute
+
+          target.setAttribute('aria-sort', sort); // Save the sort options on the table element so that it can be re-sorted later
+
+          tableElement.setAttribute('data-sort', sort);
+          tableElement.setAttribute('data-sortBy', target.textContent); // Sort the table
+
+          sortTable(target.textContent, sort);
+          break;
+        }
+      }
+    }, false); // On page load check if the table should be pre-sorted, if so trigger a click
+
+    if (tableElement.getAttribute('data-sortBy')) {
+      var sort = tableElement.getAttribute('data-sort') == "ascending" ? "descending" : "ascending";
+      Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach(function (col, index) {
+        if (col.textContent == tableElement.getAttribute('data-sortBy')) {
+          col.setAttribute('aria-sort', sort);
+          col.click();
+        }
+      });
+    } // On page load check if filters are needed
+
+
+    if (Array.from(tableElement.querySelectorAll('[data-filterable]')).length) {
+      // Create the filter options
+      createFilterForm(tableElement, Array.from(tableElement.querySelectorAll('[data-filterable]')).length); // Add event handlers for the filter options
+
+      tableElement.addEventListener('keyup', function (e) {
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('input[type="search"]')) {
+            var searchTerm = target.value;
+            filterTable(searchTerm);
+          }
+        }
+      });
+      tableElement.addEventListener('change', function (e) {
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('input[type="search"]')) {
+            var searchTerm = target.value;
+            filterTable(searchTerm);
+          }
+        }
+      });
+      tableElement.addEventListener('change', function (e) {
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('input[type="checkbox"]')) {
+            var searchTerm = tableElement.querySelector('input[type="search"]').value;
+            filterTable(searchTerm);
+          }
+        }
+      });
+    } // Watch for the filterable event and re-sort the tbody
+
+
+    tableElement.addEventListener('filtered', function (e) {
+      if (tableElement.getAttribute('data-sortBy') && tableElement.getAttribute('data-sort')) sortTable(tableElement.getAttribute('data-sortBy'), tableElement.getAttribute('data-sort'));
+    }, false);
+  }
 
   document.addEventListener("DOMContentLoaded", function () {
     addBodyClasses(document.body);
     checkElements(document.body);
     navbar();
-    console.log('test.js');
+    console.log('test.js'); // Advanced tables
+
+    Array.from(document.querySelectorAll('.table__wrapper')).forEach(function (arrayElement, index) {
+      table(arrayElement);
+    });
   });
 
 })));
