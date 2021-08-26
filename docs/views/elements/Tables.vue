@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container pb-0">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/elements">Elements</a></li>
+      </ul>
       <h1>Tables</h1>
       <p>Used to arrange data into the tabular design; rows and columns. An HTML table is a great way to display things such as financial data, calendars, pricing, feature comparison, the nutrition facts information panel, bowling scores, and many other tabular data.</p>
     </div>
@@ -36,7 +39,7 @@
 
     <div class="container">
       <h2>HTML code examples</h2>
-      <pre v-highlightjs><code class="javascript">{{htmlUsage}}</code></pre>
+      <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
 
 

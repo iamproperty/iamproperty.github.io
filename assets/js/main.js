@@ -15,6 +15,7 @@ import Toast from '../../node_modules/bootstrap/js/src/toast'
 // Modules
 import * as helpers from './modules/helpers'
 import navbar from './modules/navbar'
+import table from './modules/table'
 
 
 // Attach classes to dom elements
@@ -24,4 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.checkElements(document.body);
 	navbar();
   console.log('test.js');
+
+  // Advanced tables
+  Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement, index) => {
+    table(arrayElement);
+  });
 });
