@@ -23,7 +23,7 @@ export default {
   name: 'Table',
   props: {
     page: {
-      type: String,
+      type: Number,
       required: false
     },
     show: {

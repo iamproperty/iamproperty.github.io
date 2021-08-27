@@ -281,9 +281,12 @@ function table(tableElement) {
   const createPaginationButttons = function(show,page,totalRows){
 
     const paginationButtonsWrapper = document.getElementById(randID+'_paginationBtns')
+
+    if(paginationButtonsWrapper == null)
+      return false;
+
     const numberPages = Math.ceil(totalRows / show)
 
-    
     if(numberPages == 1){ // Remore the buttons or dont display any if we dont need them
       paginationButtonsWrapper.innerHTML = '';
     }
