@@ -220,6 +220,14 @@ export const routes = [
         component: () => import('../views/components/KeyInformation.vue')
       }
     ]
+  },
+  {
+    path: '*',
+    name: 'Page not found',
+    component: () => import('../views/PageNotFound.vue'),
+    meta: {
+      title: 'Page not Found | IAM Key'
+    }
   }
 ]
 
