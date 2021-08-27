@@ -3244,12 +3244,48 @@
     return _typeof(obj);
   }
 
+  var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
+  var redefine$1 = require('../internals/redefine');
+  var toString$2 = require('../internals/object-to-string');
+
+  // `Object.prototype.toString` method
+  // https://tc39.es/ecma262/#sec-object.prototype.tostring
+  if (!TO_STRING_TAG_SUPPORT) {
+    redefine$1(Object.prototype, 'toString', toString$2, { unsafe: true });
+  }
+
+  var redefine = require('../internals/redefine');
+  var anObject$1 = require('../internals/an-object');
+  var $toString = require('../internals/to-string');
+  var fails$4 = require('../internals/fails');
+  var flags = require('../internals/regexp-flags');
+
+  var TO_STRING = 'toString';
+  var RegExpPrototype = RegExp.prototype;
+  var nativeToString = RegExpPrototype[TO_STRING];
+
+  var NOT_GENERIC = fails$4(function () { return nativeToString.call({ source: 'a', flags: 'b' }) != '/a/b'; });
+  // FF44- RegExp#toString has a wrong name
+  var INCORRECT_NAME = nativeToString.name != TO_STRING;
+
+  // `RegExp.prototype.toString` method
+  // https://tc39.es/ecma262/#sec-regexp.prototype.tostring
+  if (NOT_GENERIC || INCORRECT_NAME) {
+    redefine(RegExp.prototype, TO_STRING, function toString() {
+      var R = anObject$1(this);
+      var p = $toString(R.source);
+      var rf = R.flags;
+      var f = $toString(rf === undefined && R instanceof RegExp && !('flags' in RegExpPrototype) ? flags.call(R) : rf);
+      return '/' + p + '/' + f;
+    }, { unsafe: true });
+  }
+
   var $$5 = require('../internals/export');
   var aFunction = require('../internals/a-function');
   var toObject$2 = require('../internals/to-object');
   var toLength$2 = require('../internals/to-length');
-  var toString$2 = require('../internals/to-string');
-  var fails$4 = require('../internals/fails');
+  var toString$1 = require('../internals/to-string');
+  var fails$3 = require('../internals/fails');
   var internalSort = require('../internals/array-sort');
   var arrayMethodIsStrict$1 = require('../internals/array-method-is-strict');
   var FF = require('../internals/engine-ff-version');
@@ -3261,17 +3297,17 @@
   var nativeSort = test.sort;
 
   // IE8-
-  var FAILS_ON_UNDEFINED = fails$4(function () {
+  var FAILS_ON_UNDEFINED = fails$3(function () {
     test.sort(undefined);
   });
   // V8 bug
-  var FAILS_ON_NULL = fails$4(function () {
+  var FAILS_ON_NULL = fails$3(function () {
     test.sort(null);
   });
   // Old WebKit
   var STRICT_METHOD$1 = arrayMethodIsStrict$1('sort');
 
-  var STABLE_SORT = !fails$4(function () {
+  var STABLE_SORT = !fails$3(function () {
     // feature detection can be too slow, so check engines versions
     if (V8) return V8 < 70;
     if (FF && FF > 3) return;
@@ -3313,7 +3349,7 @@
       if (y === undefined) return -1;
       if (x === undefined) return 1;
       if (comparefn !== undefined) return +comparefn(x, y) || 0;
-      return toString$2(x) > toString$2(y) ? 1 : -1;
+      return toString$1(x) > toString$1(y) ? 1 : -1;
     };
   };
 
@@ -3345,42 +3381,6 @@
       return array;
     }
   });
-
-  var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
-  var redefine$1 = require('../internals/redefine');
-  var toString$1 = require('../internals/object-to-string');
-
-  // `Object.prototype.toString` method
-  // https://tc39.es/ecma262/#sec-object.prototype.tostring
-  if (!TO_STRING_TAG_SUPPORT) {
-    redefine$1(Object.prototype, 'toString', toString$1, { unsafe: true });
-  }
-
-  var redefine = require('../internals/redefine');
-  var anObject$1 = require('../internals/an-object');
-  var $toString = require('../internals/to-string');
-  var fails$3 = require('../internals/fails');
-  var flags = require('../internals/regexp-flags');
-
-  var TO_STRING = 'toString';
-  var RegExpPrototype = RegExp.prototype;
-  var nativeToString = RegExpPrototype[TO_STRING];
-
-  var NOT_GENERIC = fails$3(function () { return nativeToString.call({ source: 'a', flags: 'b' }) != '/a/b'; });
-  // FF44- RegExp#toString has a wrong name
-  var INCORRECT_NAME = nativeToString.name != TO_STRING;
-
-  // `RegExp.prototype.toString` method
-  // https://tc39.es/ecma262/#sec-regexp.prototype.tostring
-  if (NOT_GENERIC || INCORRECT_NAME) {
-    redefine(RegExp.prototype, TO_STRING, function toString() {
-      var R = anObject$1(this);
-      var p = $toString(R.source);
-      var rf = R.flags;
-      var f = $toString(rf === undefined && R instanceof RegExp && !('flags' in RegExpPrototype) ? flags.call(R) : rf);
-      return '/' + p + '/' + f;
-    }, { unsafe: true });
-  }
 
   var $$4 = require('../internals/export');
   var fails$2 = require('../internals/fails');
@@ -3632,6 +3632,9 @@
     var storedData = tbody.cloneNode(true);
     var sortedEvent = new Event('updated');
     var filteredEvent = new Event('filtered');
+    var randID = 'tabe_' + Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
+
+    tableElement.setAttribute('id', randID); // #region Sortable
 
     var sortTable = function sortTable(sortBy, sort) {
       // Create an array from the table rows, the index created is then used to sort the array
@@ -3657,7 +3660,41 @@
       tbody.innerHTML = strTbody; // Dispatch the sortable event
 
       tableElement.dispatchEvent(sortedEvent);
-    };
+    }; // Declare event handlers
+
+
+    tableElement.addEventListener('click', function (e) {
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-sortable]')) {
+          // Get current sort order
+          var sort = target.getAttribute('aria-sort') == "ascending" ? "descending" : "ascending"; // unset sort attributes
+
+          Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach(function (col, index) {
+            col.setAttribute('aria-sort', 'none');
+          }); // Set the sort order attribute
+
+          target.setAttribute('aria-sort', sort); // Save the sort options on the table element so that it can be re-sorted later
+
+          tableElement.setAttribute('data-sort', sort);
+          tableElement.setAttribute('data-sortBy', target.textContent); // Sort the table
+
+          sortTable(target.textContent, sort);
+          break;
+        }
+      }
+    }, false); // On page load check if the table should be pre-sorted, if so trigger a click
+
+    if (tableElement.getAttribute('data-sortBy')) {
+      var sort = tableElement.getAttribute('data-sort') == "ascending" ? "descending" : "ascending";
+      Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach(function (col, index) {
+        if (col.textContent == tableElement.getAttribute('data-sortBy')) {
+          col.setAttribute('aria-sort', sort);
+          col.click();
+        }
+      });
+    } // #endregion Sortable
+    // #region Filters
+
 
     var createFilterForm = function createFilterForm(count) {
       // Create wrapper div
@@ -3675,8 +3712,6 @@
           searchableTerms[label.textContent] = label.textContent;
         });
       }); // Create the form
-
-      var randID = Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
 
       var filterTitle = filterColumns.length == 1 ? "Filter by " + filterColumns[0].textContent : "Filter"; // Update title if only one filter is chosen
 
@@ -3736,39 +3771,7 @@
       dataList.innerHTML = Object.keys(searchableTerms).map(function (term) {
         return "<option value=\"".concat(term, "\"></option>");
       }).join("");
-    }; // Declare event handlers
-
-
-    tableElement.addEventListener('click', function (e) {
-      for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('[data-sortable]')) {
-          // Get current sort order
-          var sort = target.getAttribute('aria-sort') == "ascending" ? "descending" : "ascending"; // unset sort attributes
-
-          Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach(function (col, index) {
-            col.setAttribute('aria-sort', 'none');
-          }); // Set the sort order attribute
-
-          target.setAttribute('aria-sort', sort); // Save the sort options on the table element so that it can be re-sorted later
-
-          tableElement.setAttribute('data-sort', sort);
-          tableElement.setAttribute('data-sortBy', target.textContent); // Sort the table
-
-          sortTable(target.textContent, sort);
-          break;
-        }
-      }
-    }, false); // On page load check if the table should be pre-sorted, if so trigger a click
-
-    if (tableElement.getAttribute('data-sortBy')) {
-      var sort = tableElement.getAttribute('data-sort') == "ascending" ? "descending" : "ascending";
-      Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach(function (col, index) {
-        if (col.textContent == tableElement.getAttribute('data-sortBy')) {
-          col.setAttribute('aria-sort', sort);
-          col.click();
-        }
-      });
-    } // On page load check if filters are needed
+    }; // On page load check if filters are needed
 
 
     if (Array.from(tableElement.querySelectorAll('[data-filterable]')).length) {
@@ -3800,11 +3803,122 @@
           }
         }
       });
-    } // Watch for the filterable event and re-sort the tbody
+    } // #endregion Filters
+    // #region Pagination
+
+
+    var paginateRows = function paginateRows(show, page) {
+      // Create some inline CSS to control what is viewed on the table, unline the filters we are just hiding the rable rows not removing them from the DOM.
+      var style = document.getElementById(randID + '_style');
+
+      if (style == null) {
+        style = document.createElement("style");
+        style.setAttribute('id', randID + '_style');
+      }
+
+      var startShowing = show * (page - 1) + 1;
+      var stopShowing = show * page;
+      style.innerHTML = "\n    #".concat(randID, " tbody tr {\n      display: none;\n    }\n    #").concat(randID, " tbody tr:nth-child(").concat(startShowing, "),\n    #").concat(randID, " tbody tr:nth-child(").concat(startShowing, ") ~ tr{\n      display: table-row;\n    }\n    #").concat(randID, " tbody tr:nth-child(").concat(stopShowing, ") ~ tr{\n      display: none;\n    }\n    ");
+      tableElement.append(style);
+    };
+
+    var createPaginationForm = function createPaginationForm(show, page, totalRows) {
+      var form = document.createElement("div");
+      form.classList.add('table__pagination');
+      form.classList.add('row');
+      form.classList.add('pt-3');
+      form.classList.add('pb-3'); // Create the form and create a container div to hold the pagination buttons
+
+      form.innerHTML = "<div class=\"col-6 col-sm-3 col-md-2 mb-3\">\n  <div class=\"form-control__wrapper form-control-inline\">\n    <label for=\"".concat(randID, "_showing\">Showing:</label>\n    <input type=\"number\" name=\"").concat(randID, "_showing\" id=\"").concat(randID, "_showing\" class=\"form-control\" placeholder=\"\" list=\"").concat(randID, "_pagination\" value=\"").concat(show, "\" min=\"1\" max=\"").concat(totalRows, "\" />\n  </div>\n  <datalist id=\"").concat(randID, "_pagination\">\n  <option value=\"5\">5</option>\n  ").concat(totalRows > 10 ? "<option value=\"10\">10</option>" : '', "\n  ").concat(totalRows > 20 ? "<option value=\"20\">20</option>" : '', "\n  <option value=\"").concat(totalRows, "\">").concat(totalRows, "</option>\n  </datalist>\n</div>\n<div class=\"col-6 col-sm-2 col-md-2 d-flex align-items-center mb-3\"><span class=\"label\">per page</span></div>\n<div class=\"col-sm-7 col-md-8 d-sm-flex justify-content-end align-items-center mb-3\" id=\"").concat(randID, "_paginationBtns\"></div>"); // Add after the actual table
+
+      tableElement.append(form);
+    };
+
+    var createPaginationButttons = function createPaginationButttons(show, page, totalRows) {
+      var paginationButtonsWrapper = document.getElementById(randID + '_paginationBtns');
+      if (paginationButtonsWrapper == null) return false;
+      var numberPages = Math.ceil(totalRows / show);
+
+      if (numberPages == 1) {
+        // Remore the buttons or dont display any if we dont need them
+        paginationButtonsWrapper.innerHTML = '';
+      } else if (numberPages < 5) {
+        // If less than 5 pages (which fits comfortably on mobile) we display buttons
+        var strButtons = '';
+
+        for (var i = 1; i <= numberPages; i++) {
+          if (i == page) strButtons += "<li class=\"page-item active\" aria-current=\"page\"><span class=\"page-link\">".concat(i, "</span></li>");else strButtons += "<li class=\"page-item\"><button class=\"page-link\" data-page=\"".concat(i, "\">").concat(i, "</button></li>");
+        }
+
+        paginationButtonsWrapper.innerHTML = "<span class=\"pe-2\">Page: </span><ul class=\"pagination mb-0\">\n        ".concat(page == 1 ? "<li class=\"page-item disabled\"><span class=\"page-link\">Previous</span></li>" : "<li class=\"page-item\"><button class=\"page-link\" data-page=\"".concat(parseInt(page) - 1, "\">Previous</button></li>"), "\n        ").concat(strButtons, "\n        ").concat(page == numberPages ? "<li class=\"page-item disabled\"><span class=\"page-link\">Next</span></li>" : "<li class=\"page-item\"><button class=\"page-link\" data-page=\"".concat(parseInt(page) + 1, "\">Next</button></li>"), "\n      </ul>");
+      } else {
+        // If more than 5 lets show a select field instead so that we dont have loads and loads of buttons
+        var strOptions = '';
+
+        for (var _i = 1; _i <= numberPages; _i++) {
+          if (_i == page) strOptions += "<option value=\"".concat(_i, "\" selected>Page ").concat(_i, "</option>");else strOptions += "<option value=\"".concat(_i, "\">Page ").concat(_i, "</option>");
+        }
+
+        paginationButtonsWrapper.innerHTML = "\n<select class=\"form-select mb-3\">\n  ".concat(strOptions, "\n</select>\n      ");
+      }
+    }; // On page load check if the table should be paginated
+
+
+    if (tableElement.getAttribute('data-show')) {
+      var show = parseInt(tableElement.getAttribute('data-show'));
+      var page = parseInt(tableElement.getAttribute('data-page')) ? parseInt(tableElement.getAttribute('data-page')) : 1;
+      var totalRows = tableElement.querySelectorAll('tbody tr').length;
+
+      if (show < totalRows) {
+        paginateRows(show, page);
+        createPaginationForm(show, page, totalRows);
+        createPaginationButttons(show, page, totalRows);
+        tableElement.addEventListener('change', function (e) {
+          for (var target = e.target; target && target != this; target = target.parentNode) {
+            if (target.matches('.table__pagination input[type="number"]')) {
+              paginateRows(target.value, page);
+              createPaginationButttons(target.value, page, totalRows);
+              tableElement.setAttribute('data-show', target.value);
+            }
+          }
+        });
+        tableElement.addEventListener('click', function (e) {
+          for (var target = e.target; target && target != this; target = target.parentNode) {
+            if (target.matches('.page-item:not(.active):not(.disabled) .page-link')) {
+              paginateRows(tableElement.getAttribute('data-show'), target.getAttribute('data-page'));
+              createPaginationButttons(tableElement.getAttribute('data-show'), target.getAttribute('data-page'), totalRows);
+            }
+          }
+        }, false);
+        tableElement.addEventListener('change', function (e) {
+          for (var target = e.target; target && target != this; target = target.parentNode) {
+            if (target.matches('.table__pagination select')) {
+              paginateRows(tableElement.getAttribute('data-show'), target.value);
+              createPaginationButttons(tableElement.getAttribute('data-show'), target.value, totalRows);
+            }
+          }
+        });
+      }
+    } // #endregion Pagination
+    // Watch for the filterable event and re-sort the tbody
 
 
     tableElement.addEventListener('filtered', function (e) {
       if (tableElement.getAttribute('data-sortBy') && tableElement.getAttribute('data-sort')) sortTable(tableElement.getAttribute('data-sortBy'), tableElement.getAttribute('data-sort'));
+
+      if (tableElement.getAttribute('data-show')) {
+        var _show = parseInt(tableElement.getAttribute('data-show'));
+
+        var _totalRows = tableElement.querySelectorAll('tbody tr').length;
+        var tablePagination = tableElement.querySelector('.table__pagination');
+        if (tablePagination != null) tablePagination.remove();
+
+        if (_show < _totalRows) {
+          paginateRows(_show, 1);
+          createPaginationForm(_show, 1, _totalRows);
+          createPaginationButttons(_show, 1, _totalRows);
+        }
+      }
     }, false);
   }
 

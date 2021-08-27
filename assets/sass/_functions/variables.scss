@@ -193,3 +193,28 @@ $vars: map-merge((
   --icon-sort: #{$icon-sort}
 ), $vars);
 // #endregion
+
+// #region pagination
+// Default
+$pagination-color: var(--colour-primary);
+$pagination-disabled-color: var(--colour-muted);
+$pagination-bg: transparent;
+$pagination-border-width: 1px;
+$pagination-border-color: var(--colour-border);
+
+// Hover and focus
+$pagination-hover-color: var(--colour-primary);
+$pagination-hover-bg: var(--colour-muted);
+$pagination-hover-border-color: var(--colour-border);
+$pagination-focus-color: var(--colour-primary);
+$pagination-focus-bg: var(--colour-muted);
+
+// Active
+$pagination-active-color: white;
+$pagination-active-bg: var(--colour-primary);
+$pagination-active-border-color: var(--colour-primary);
+
+// Disabled
+$pagination-disabled-bg: $pagination-bg;
+$pagination-disabled-border-color: $pagination-border-color;
+// #endregion

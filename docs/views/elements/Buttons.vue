@@ -24,7 +24,7 @@
     <div class="container visualtest">
       <h2 class="h4">button, .btn</h2>
       <input type="submit" class="btn" value="Find out more" />
-      <button disabled>Find out more</button>
+      <button class="btn" disabled>Find out more</button>
       <a href="https://bbc.com" class="btn" target="_blank">Find out more</a>
       <a href="/elements/buttons" class="btn pe-3">Email<Icon id="email"></Icon></a>
       <a href="/elements/buttons" class="btn ps-3"><Icon id="pin"></Icon>Locate on a map</a>
@@ -56,7 +56,7 @@
       <p>Buttons on a light background should default to the primary colour to maintain colour contrast.</p>
     </div>
     <div class="container bg-light visualtest">
-      <button>Find out more</button>
+      <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-tertiary">Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
@@ -64,7 +64,7 @@
     </div>
     <div class="container bg-info visualtest">
       
-      <button>Find out more</button>
+      <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-tertiary">Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
@@ -72,7 +72,7 @@
     </div>
     <div class="container bg-secondary visualtest">
       
-      <button>Find out more</button>
+      <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-tertiary">Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
@@ -86,21 +86,21 @@
     </div>
 
     <div class="container bg-primary visualtest">
-      <button>Find out more</button>
+      <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-tertiary">Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
       <a href="https://bbc.com" class="btn btn-tertiary ps-3"><Icon id="email"></Icon>Email</a>
     </div>
     <div class="container bg-danger visualtest">
-      <button>Find out more</button>
+      <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-tertiary">Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
       <a href="https://bbc.com" class="btn btn-tertiary ps-3"><Icon id="email"></Icon>Email</a>
     </div>
     <div class="container bg-dark visualtest">
-      <button>Find out more</button>
+      <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-tertiary">Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
