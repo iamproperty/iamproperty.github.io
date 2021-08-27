@@ -201,3 +201,12 @@ tbody:first-child{
   max-width: rem(240);
 }
 // #endregion
+
+// #region Reorderable
+
+[data-reorder] tr {
+  
+  cursor: move;
+}
+
+// #endregion

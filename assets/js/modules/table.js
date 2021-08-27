@@ -3,6 +3,7 @@ function table(tableElement) {
   if(typeof tableElement != "object")
     return false;
 
+  const thead = tableElement.querySelector('thead');
   const tbody = tableElement.querySelector('tbody');
   const storedData = tbody.cloneNode(true);
   const sortedEvent = new Event('updated');
@@ -374,6 +375,112 @@ function table(tableElement) {
     }
   }
   // #endregion Pagination
+
+  // #region Reorderable
+
+
+  if(tableElement.getAttribute('data-reorder')){
+
+    console.log('hi');
+
+    var draggedRow;
+
+    function dragstart_handler(ev) {
+      // Add the target element's id to the data transfer object
+      ev.dataTransfer.setData("text/plain", ev.target.id);
+      draggedRow = ev.target;
+
+      ev.target.classList.add('bg-light');
+    }
+
+    function dragover_handler(ev) {
+      ev.preventDefault();
+      ev.dataTransfer.dropEffect = "move";
+    }
+
+    function drop_handler(ev) {
+      ev.preventDefault();
+      // Get the id of the target and add the moved element to the target's DOM
+      const data = ev.dataTransfer.getData("text/plain");
+      ev.target.appendChild(document.getElementById(data));
+    }
+
+    const orderHeading = document.createElement('th');
+    orderHeading.innerHTML = '#';
+    thead.querySelector('tr').prepend(orderHeading);
+
+    Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
+      const orderColumn = document.createElement('th');
+      orderColumn.innerHTML = index + 1;
+      tableRow.prepend(orderColumn);
+
+      tableRow.setAttribute('id',randID+'_row_'+(index+1));
+      tableRow.setAttribute('data-order',index+1);
+      tableRow.setAttribute('draggable','true');
+      tableRow.addEventListener("dragstart", dragstart_handler);
+    });
+
+
+    document.addEventListener("dragover", function( e ) {
+      // prevent default to allow drop
+      e.preventDefault();
+    }, false);
+
+    document.addEventListener("dragenter", function( e ) {
+      // prevent default to allow drop
+      e.preventDefault();
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-reorder] tbody tr')) { 
+
+          target.classList.add('bg-primary')
+        }
+      }
+    }, false);
+
+    document.addEventListener("dragleave", function( e ) {
+      // prevent default to allow drop
+      e.preventDefault();
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-reorder] tbody tr')) { 
+
+          target.classList.remove('bg-primary')
+        }
+      }
+    }, false);
+
+    document.addEventListener("drop", function(e) {
+
+      e.preventDefault();
+
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-reorder] tbody tr')) { 
+  
+          if(target.parentNode != null && draggedRow.parentNode != null && target != draggedRow){
+
+            draggedRow.parentNode.removeChild( draggedRow );
+
+            if(draggedRow.getAttribute('data-order') > target.getAttribute('data-order'))
+              target.parentNode.insertBefore(draggedRow, target);
+            else
+              target.parentNode.insertBefore(draggedRow, target.nextElementSibling);
+
+            // Re label the rows
+            Array.from(tbody.querySelectorAll('tr')).forEach((tableRowOrder, index) => { 
+              tableRowOrder.classList.remove('bg-light')
+              tableRowOrder.classList.remove('bg-primary')
+              tableRowOrder.querySelector('th').innerHTML = index + 1;
+              tableRowOrder.setAttribute('data-order',index+1);
+            });
+          }
+
+      
+          break;
+        }
+      }
+    }, false);
+
+  }
+  // #endregion Reorderable
 
   // Watch for the filterable event and re-sort the tbody
   tableElement.addEventListener('filtered', function (e) { 
