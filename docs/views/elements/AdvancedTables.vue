@@ -43,6 +43,16 @@
       <p>The above is the default way of adding a simple filter that matches strings. To have something more complicated the table element will have to be combined with an additional form with bespoke JavaScript logic.</p>
     </div>
 
+
+    <div class="container pb-0">
+      <h2>Pagination</h2>
+      <p>Limit the number of items displayed on the screen to make it more manageable.</p>
+    </div>
+
+    <div class="container visualtest">
+      <Table :fields="filter_fields" :items="more_items" class="table-fullwidth" :show="5"></Table>
+    </div>
+
     <div class="container">
       <h2>Vue Table component reference</h2>
       <Readme></Readme>
@@ -147,7 +157,93 @@ export default {
           sortable: true
         },
         { key: 'actions' }
-      ]
+      ],
+      more_items: [
+        {
+          name: 'Derrick',
+          job: 'Electrician',
+          address: '5 King Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Andrew2',
+          job: 'Plumber',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Rachel',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Simon',
+          job: 'Plumber',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Derrick Gordan',
+          job: 'Plumber',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Ross',
+          job: 'Plumber',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'James',
+          job: 'Actor',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Sandra',
+          job: 'Plumber',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Rachel',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Katharine',
+          job: 'Plumber',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Bob',
+          job: 'Plumber',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Harry',
+          job: 'Plumber',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'James L',
+          job: 'Actor',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        },
+        {
+          name: 'Matt',
+          job: 'Actor',
+          address: '123 Royal Street<br> London<br> London<br> SW20 0AL<br> United Kingdom',
+          emergency_contact: 'Susan',
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+        }
+      ],
     }
   }
 }

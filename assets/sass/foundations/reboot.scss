@@ -43,6 +43,10 @@ address {
   margin: 0;
 }
 
+button {
+  font-size: inherit;
+}
+
 button:focus {
   border-radius: initial;
   outline: 2px auto -webkit-focus-ring-color;
