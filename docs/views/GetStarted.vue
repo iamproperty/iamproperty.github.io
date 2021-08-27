@@ -12,10 +12,6 @@ import Readme from '../../README.md'
 export default {
   components: {
     Readme
-  },
-  mounted(){
-
-    hljs.highlightAll();
   }
 }
 </script>
