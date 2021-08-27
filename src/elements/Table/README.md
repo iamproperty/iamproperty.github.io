@@ -12,6 +12,8 @@
 | fields | Array | - | Table header titles  |
 | sort   | string | - | Choose from ascending or descending |
 | sortBy | string | - | Needs to match a column name and will trigger sorting via that column on page load |
+| show | number | - | Limits the number of results shown and will create pagination controls. |
+| page | number | - | Starting page for the pagination. |
 
 ### Class modifiers
 

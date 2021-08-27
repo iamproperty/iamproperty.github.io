@@ -7,7 +7,11 @@ function table(tableElement) {
   const storedData = tbody.cloneNode(true);
   const sortedEvent = new Event('updated');
   const filteredEvent = new Event('filtered');
+  const randID = 'tabe_'+Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
+  
+  tableElement.setAttribute('id',randID)
 
+  // #region Sortable
   const sortTable = function(sortBy,sort){
 
     // Create an array from the table rows, the index created is then used to sort the array
@@ -38,6 +42,50 @@ function table(tableElement) {
     tableElement.dispatchEvent(sortedEvent);
   }
 
+  // Declare event handlers
+  tableElement.addEventListener('click', function(e){
+    for (var target = e.target; target && target != this; target = target.parentNode) {
+      if (target.matches('[data-sortable]')) { 
+
+        // Get current sort order
+        let sort = target.getAttribute('aria-sort') == "ascending" ? "descending" : "ascending";
+
+        // unset sort attributes
+        Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
+          col.setAttribute('aria-sort','none');
+        });
+
+        // Set the sort order attribute
+        target.setAttribute('aria-sort', sort);
+
+        // Save the sort options on the table element so that it can be re-sorted later
+        tableElement.setAttribute('data-sort', sort);
+        tableElement.setAttribute('data-sortBy', target.textContent);
+
+        // Sort the table
+        sortTable(target.textContent, sort);
+
+        break;
+      }
+    }
+  }, false);
+
+  // On page load check if the table should be pre-sorted, if so trigger a click
+  if(tableElement.getAttribute('data-sortBy')){
+
+    let sort = tableElement.getAttribute('data-sort') == "ascending" ? "descending" : "ascending";
+
+    Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
+      if(col.textContent == tableElement.getAttribute('data-sortBy')){
+        col.setAttribute('aria-sort',sort)
+        col.click();
+      }
+    });
+  }
+
+  // #endregion Sortable
+
+  // #region Filters
   const createFilterForm = function(count){
 
     // Create wrapper div
@@ -60,7 +108,6 @@ function table(tableElement) {
     });
 
     // Create the form
-    const randID = Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
     const filterTitle = filterColumns.length == 1 ? "Filter by "+filterColumns[0].textContent : "Filter"; // Update title if only one filter is chosen
     const checkboxClass = filterColumns.length == 1 ? "d-none" : "d-sm-flex"; // Hide controls when only one filter is chosen
 
@@ -133,47 +180,6 @@ function table(tableElement) {
     dataList.innerHTML = Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("");
   }
 
-  // Declare event handlers
-  tableElement.addEventListener('click', function(e){
-    for (var target = e.target; target && target != this; target = target.parentNode) {
-      if (target.matches('[data-sortable]')) { 
-
-        // Get current sort order
-        let sort = target.getAttribute('aria-sort') == "ascending" ? "descending" : "ascending";
-
-        // unset sort attributes
-        Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
-          col.setAttribute('aria-sort','none');
-        });
-
-        // Set the sort order attribute
-        target.setAttribute('aria-sort', sort);
-
-        // Save the sort options on the table element so that it can be re-sorted later
-        tableElement.setAttribute('data-sort', sort);
-        tableElement.setAttribute('data-sortBy', target.textContent);
-
-        // Sort the table
-        sortTable(target.textContent, sort);
-
-        break;
-      }
-    }
-  }, false);
-
-  // On page load check if the table should be pre-sorted, if so trigger a click
-  if(tableElement.getAttribute('data-sortBy')){
-
-    let sort = tableElement.getAttribute('data-sort') == "ascending" ? "descending" : "ascending";
-
-    Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
-      if(col.textContent == tableElement.getAttribute('data-sortBy')){
-        col.setAttribute('aria-sort',sort)
-        col.click();
-      }
-    });
-  }
-
   // On page load check if filters are needed
   if(Array.from(tableElement.querySelectorAll('[data-filterable]')).length){
 
@@ -212,12 +218,183 @@ function table(tableElement) {
       }
     });
   }
+  // #endregion Filters
+
+  // #region Pagination
+  const paginateRows = function(show, page){
+
+    // Create some inline CSS to control what is viewed on the table, unline the filters we are just hiding the rable rows not removing them from the DOM.
+    let style = document.getElementById(randID+'_style');
+
+    if(style == null){
+      style = document.createElement("style");
+      style.setAttribute('id',randID+'_style')
+    }
+
+    const startShowing = (show*(page-1))+1;
+    const stopShowing = show*(page);
+
+    style.innerHTML = `
+    #${randID} tbody tr {
+      display: none;
+    }
+    #${randID} tbody tr:nth-child(${startShowing}),
+    #${randID} tbody tr:nth-child(${startShowing}) ~ tr{
+      display: table-row;
+    }
+    #${randID} tbody tr:nth-child(${stopShowing}) ~ tr{
+      display: none;
+    }
+    `;
+
+    tableElement.append(style);
+  }
+
+  const createPaginationForm = function(show,page,totalRows){
+
+    const form = document.createElement("div");
+    form.classList.add('table__pagination');
+    form.classList.add('row');
+    form.classList.add('pt-3');
+    form.classList.add('pb-3');
+
+    // Create the form and create a container div to hold the pagination buttons
+    form.innerHTML = `<div class="col-6 col-sm-3 col-md-2 mb-3">
+  <div class="form-control__wrapper form-control-inline">
+    <label for="${randID}_showing">Showing:</label>
+    <input type="number" name="${randID}_showing" id="${randID}_showing" class="form-control" placeholder="" list="${randID}_pagination" value="${show}" min="1" max="${totalRows}" />
+  </div>
+  <datalist id="${randID}_pagination">
+  <option value="5">5</option>
+  ${totalRows > 10 ? `<option value="10">10</option>` : ''}
+  ${totalRows > 20 ? `<option value="20">20</option>` : ''}
+  <option value="${totalRows}">${totalRows}</option>
+  </datalist>
+</div>
+<div class="col-6 col-sm-2 col-md-2 d-flex align-items-center mb-3"><span class="label">per page</span></div>
+<div class="col-sm-7 col-md-8 d-sm-flex justify-content-end align-items-center mb-3" id="${randID}_paginationBtns"></div>`;
+
+    // Add after the actual table
+    tableElement.append(form)
+  }
+
+  const createPaginationButttons = function(show,page,totalRows){
+
+    const paginationButtonsWrapper = document.getElementById(randID+'_paginationBtns')
+    const numberPages = Math.ceil(totalRows / show)
+
+    
+    if(numberPages == 1){ // Remore the buttons or dont display any if we dont need them
+      paginationButtonsWrapper.innerHTML = '';
+    }
+    else if(numberPages < 5){ // If less than 5 pages (which fits comfortably on mobile) we display buttons
+
+      let strButtons = '';
+
+      for (let i = 1; i <= numberPages; i++) {
+
+        if(i == page)
+          strButtons += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`;
+        else
+          strButtons += `<li class="page-item"><button class="page-link" data-page="${i}">${i}</button></li>`;
+      }
+
+      paginationButtonsWrapper.innerHTML = `<span class="pe-2">Page: </span><ul class="pagination mb-0">
+        ${page == 1 ? `<li class="page-item disabled"><span class="page-link">Previous</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)-1}">Previous</button></li>`}
+        ${strButtons}
+        ${page == numberPages ? `<li class="page-item disabled"><span class="page-link">Next</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)+1}">Next</button></li>`}
+      </ul>`;
+
+    }
+    else { // If more than 5 lets show a select field instead so that we dont have loads and loads of buttons
+
+      let strOptions = '';
+
+      for (let i = 1; i <= numberPages; i++) {
+
+        if(i == page)
+          strOptions += `<option value="${i}" selected>Page ${i}</option>`;
+        else
+          strOptions += `<option value="${i}">Page ${i}</option>`;
+      }
+
+      paginationButtonsWrapper.innerHTML = `
+<select class="form-select mb-3">
+  ${strOptions}
+</select>
+      `;
+    }
+  }
+
+  // On page load check if the table should be paginated
+  if(tableElement.getAttribute('data-show')){
+
+    const show = parseInt(tableElement.getAttribute('data-show'));
+    const page = parseInt(tableElement.getAttribute('data-page')) ? parseInt(tableElement.getAttribute('data-page')) : 1;
+    const totalRows = tableElement.querySelectorAll('tbody tr').length;
+
+    if(show < totalRows){
+      paginateRows(show,page);
+      createPaginationForm(show,page,totalRows);
+      createPaginationButttons(show,page,totalRows);
+
+      tableElement.addEventListener('change', function(e){
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('.table__pagination input[type="number"]')) {
+  
+            paginateRows(target.value,page);
+            createPaginationButttons(target.value,page,totalRows);
+            tableElement.setAttribute('data-show',target.value)
+          }
+        }
+      });
+
+      tableElement.addEventListener('click', function(e){
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('.page-item:not(.active):not(.disabled) .page-link')) { 
+    
+            paginateRows(tableElement.getAttribute('data-show'),target.getAttribute('data-page'));
+            createPaginationButttons(tableElement.getAttribute('data-show'),target.getAttribute('data-page'),totalRows);
+          }
+        }
+      }, false);
+
+      tableElement.addEventListener('change', function(e){
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('.table__pagination select')) {
+  
+            paginateRows(tableElement.getAttribute('data-show'),target.value);
+            createPaginationButttons(tableElement.getAttribute('data-show'),target.value,totalRows);
+          }
+        }
+      });
+    }
+  }
+  // #endregion Pagination
 
   // Watch for the filterable event and re-sort the tbody
   tableElement.addEventListener('filtered', function (e) { 
     
     if(tableElement.getAttribute('data-sortBy') && tableElement.getAttribute('data-sort'))
       sortTable(tableElement.getAttribute('data-sortBy'), tableElement.getAttribute('data-sort'));
+
+    if(tableElement.getAttribute('data-show')){
+
+      const show = parseInt(tableElement.getAttribute('data-show'));
+      const totalRows = tableElement.querySelectorAll('tbody tr').length;
+      const tablePagination = tableElement.querySelector('.table__pagination');
+
+      if(tablePagination != null)
+        tablePagination.remove();
+
+      if(show < totalRows){
+
+        paginateRows(show,1);
+        createPaginationForm(show,1,totalRows);
+        createPaginationButttons(show,1,totalRows);
+      }
+    }
+
   }, false);
 }
 
