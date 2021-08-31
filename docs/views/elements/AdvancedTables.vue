@@ -65,7 +65,7 @@
     </div>
 
     <div class="container visualtest">
-      <Table :fields="fields" :items="items" class="table-fullwidth" :reorder="true"></Table>
+      <Table :fields="filter_fields" :items="items" class="table-fullwidth" :reorder="true" :show="2"></Table>
     </div>
 
     <div class="container">
