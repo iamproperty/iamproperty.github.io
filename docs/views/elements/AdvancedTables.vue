@@ -6,7 +6,14 @@
       </ul>
       <h1>Advanced tables</h1>
       <p>Tables can be given extra functionality to help make the data easier to understand or process.</p>
-      <h2>Sortable</h2>
+      <ul>
+        <li><a href="#sortable">Sortable</a></li>
+        <li><a href="#filterable">Filterable</a></li>
+        <li><a href="#pagination">Pagination</a></li>
+        <li><a href="#reorderable">Reorderable</a></li>
+      </ul>
+
+      <h2 id="sortable">Sortable</h2>
       <p>Re-organise the data in the table in ascending or descending order.</p>
     </div>
 
@@ -24,7 +31,7 @@
     </div>
 
     <div class="container pb-0">
-      <h2>Filter</h2>
+      <h2 id="filterable">Filterable</h2>
       <p>Reduce the number of rows by filtering what we want to get displayed.</p>
     </div>
 
@@ -45,12 +52,20 @@
 
 
     <div class="container pb-0">
-      <h2>Pagination</h2>
+      <h2 id="pagination">Pagination</h2>
       <p>Limit the number of items displayed on the screen to make it more manageable.</p>
     </div>
 
     <div class="container visualtest">
       <Table :fields="filter_fields" :items="more_items" class="table-fullwidth" :show="5"></Table>
+    </div>
+    <div class="container pb-0">
+      <h2 id="reorderable">Reorderable</h2>
+      <p>Allow for the table to be reordered by dragging and dropping.</p>
+    </div>
+
+    <div class="container visualtest">
+      <Table :fields="filter_fields" :items="items" class="table-fullwidth" :reorder="true" :show="5"></Table>
     </div>
 
     <div class="container">
@@ -155,6 +170,19 @@ export default {
           key: 'emergency_contact',
           filterable: true,
           sortable: true
+        },
+        { key: 'actions' }
+      ],
+      fields: [
+        { 
+          key: 'name'
+        },
+        { 
+          key: 'job'
+        },
+        { key: 'address' },
+        { 
+          key: 'emergency_contact'
         },
         { key: 'actions' }
       ],

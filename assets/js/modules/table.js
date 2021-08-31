@@ -1,14 +1,18 @@
+import { zeroPad, isNumeric } from "./helpers";
+
 function table(tableElement) {
 
   if(typeof tableElement != "object")
     return false;
 
+  const thead = tableElement.querySelector('thead');
   const tbody = tableElement.querySelector('tbody');
   const storedData = tbody.cloneNode(true);
-  const sortedEvent = new Event('updated');
+  const sortedEvent = new Event('sorted');
   const filteredEvent = new Event('filtered');
   const randID = 'tabe_'+Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
-  
+  let draggedRow;
+
   tableElement.setAttribute('id',randID)
 
   // #region Sortable
@@ -17,8 +21,14 @@ function table(tableElement) {
     // Create an array from the table rows, the index created is then used to sort the array
     let tableArr = [];
     Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
+      
+      let rowIndex = tableRow.querySelector('td[data-label="'+sortBy+'"], th[data-label="'+sortBy+'"]').textContent;
+
+      if(isNumeric(rowIndex))
+        rowIndex = zeroPad(rowIndex,10)
+
       const dataRow = {
-        index: tableRow.querySelector('td[data-label="'+sortBy+'"]').textContent,
+        index: rowIndex,
         row: tableRow
       }
       tableArr.push(dataRow);
@@ -65,6 +75,10 @@ function table(tableElement) {
         // Sort the table
         sortTable(target.textContent, sort);
 
+        Array.from(tableElement.querySelectorAll('tr[draggable]')).forEach((tableRow, index) => {
+      
+          tableRow.removeAttribute('draggable');
+        });
         break;
       }
     }
@@ -375,6 +389,135 @@ function table(tableElement) {
   }
   // #endregion Pagination
 
+  // #region Reorderable
+  // Set the row thats being dragged and copy the row
+  function setDraggedRow(e) {
+    e.dataTransfer.setData("text/plain", e.target.id);
+    draggedRow = e.target;
+    e.target.classList.add('tr--dragging');
+  }
+
+  // Create the order column and event handler for rows
+  const setReorderRows = function(){
+
+    Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
+
+      // Create column if not already created
+      if(tableRow.querySelector('[data-label="Order"]') == null){
+
+        const orderColumn = document.createElement('th');
+        orderColumn.innerHTML = index + 1;
+        orderColumn.setAttribute('data-label','Order');
+        tableRow.prepend(orderColumn);
+      }
+
+      // Make draggable
+      tableRow.setAttribute('id',randID+'_row_'+(index+1));
+      tableRow.setAttribute('data-order',index+1);
+      tableRow.setAttribute('draggable','true');
+      tableRow.addEventListener("dragstart", setDraggedRow);
+    });
+  }
+
+  if(tableElement.getAttribute('data-reorder')){
+
+    // Add column heading
+    const orderHeading = document.createElement('th');
+    orderHeading.innerHTML = 'Order';
+    orderHeading.classList.add('table-order-reset');
+    thead.querySelector('tr').prepend(orderHeading);
+
+    setReorderRows();
+
+    // Reset order button
+    tableElement.addEventListener('click', function(e){
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('.table-order-reset')) { 
+  
+          // unset sort attributes
+          Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
+            col.setAttribute('aria-sort','none');
+          });
+  
+          // Save the sort options on the table element so that it can be re-sorted later
+          tableElement.removeAttribute('data-sort');
+          tableElement.removeAttribute('data-sortBy');
+  
+          // Sort the table
+          sortTable('Order', 'ascending');
+  
+          Array.from(tableElement.querySelectorAll('tbody tr')).forEach((tableRow, index) => {
+      
+            tableRow.setAttribute('draggable','true');
+          });
+
+          break;
+        }
+      }
+    }, false);
+
+    
+    document.addEventListener("dragover", function( e ) {
+      // prevent default to allow drop
+      e.preventDefault();
+    }, false);
+
+    document.addEventListener("dragenter", function( e ) {
+      // prevent default to allow drop
+      e.preventDefault();
+      e.dataTransfer.dropEffect = "move";
+
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-reorder] tbody tr')) { 
+
+          target.classList.add('tr--dropable')
+        }
+      }
+    }, false);
+
+    document.addEventListener("dragleave", function( e ) {
+      // prevent default to allow drop
+      e.preventDefault();
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-reorder] tbody tr')) { 
+
+          target.classList.remove('tr--dropable')
+        }
+      }
+    }, false);
+
+    document.addEventListener("drop", function(e) {
+
+      e.preventDefault();
+
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-reorder] tbody tr')) { 
+  
+          if(target.parentNode != null && draggedRow.parentNode != null && target != draggedRow){
+
+            draggedRow.parentNode.removeChild( draggedRow );
+
+            if(draggedRow.getAttribute('data-order') > target.getAttribute('data-order'))
+              target.parentNode.insertBefore(draggedRow, target);
+            else
+              target.parentNode.insertBefore(draggedRow, target.nextElementSibling);
+
+            // Re label the rows
+            Array.from(tbody.querySelectorAll('tr')).forEach((tableRowOrder, index) => { 
+              tableRowOrder.classList.remove('tr--dragging')
+              tableRowOrder.classList.remove('tr--dropable')
+              tableRowOrder.querySelector('th').innerHTML = index + 1;
+              tableRowOrder.setAttribute('data-order',index+1);
+            });
+          }
+          break;
+        }
+      }
+    }, false);
+
+  }
+  // #endregion Reorderable
+
   // Watch for the filterable event and re-sort the tbody
   tableElement.addEventListener('filtered', function (e) { 
     
@@ -398,6 +541,18 @@ function table(tableElement) {
       }
     }
 
+    if(tableElement.getAttribute('data-reorder')){
+
+      setReorderRows();
+    }
+  }, false);
+
+  tableElement.addEventListener('sorted', function (e) { 
+
+    if(tableElement.getAttribute('data-reorder')){
+
+      setReorderRows();
+    }
   }, false);
 }
 

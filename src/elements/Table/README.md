@@ -14,6 +14,7 @@
 | sortBy | string | - | Needs to match a column name and will trigger sorting via that column on page load |
 | show | number | - | Limits the number of results shown and will create pagination controls. |
 | page | number | - | Starting page for the pagination. |
+| reorder | bool | - | Create an order column and allow for the table rows to be reordered |
 
 ### Class modifiers
 

@@ -201,3 +201,47 @@ tbody:first-child{
   max-width: rem(240);
 }
 // #endregion
+
+// #region Reorderable
+.table-order-reset {
+
+  cursor: pointer;
+  position: relative;
+  width: 1rem;
+
+  &:hover {
+    color: var(--colour-hover);
+  }
+
+  overflow: hidden;
+  text-indent: -200%;
+
+  &:after {
+    content: "#";
+    position: absolute;
+    left: 0.5rem;
+    top: 1rem;
+    text-indent: 0;
+  }
+}
+
+[data-reorder] tr[draggable] {
+  
+  cursor: move;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &.tr--dragging {
+    background: var(--colour-muted);
+  }
+
+  &.tr--dropable {
+
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+// #endregion

@@ -24,7 +24,7 @@
     }
   }
 
-  var $$6 = require('../internals/export');
+  var $$7 = require('../internals/export');
   var from = require('../internals/array-from');
   var checkCorrectnessOfIteration = require('../internals/check-correctness-of-iteration');
 
@@ -35,7 +35,7 @@
 
   // `Array.from` method
   // https://tc39.es/ecma262/#sec-array.from
-  $$6({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
+  $$7({ target: 'Array', stat: true, forced: INCORRECT_ITERATION }, {
     from: from
   });
 
@@ -3178,6 +3178,18 @@
 
   defineJQueryPlugin(Toast);
 
+  var $$6 = require('../internals/export');
+  var $padStart = require('../internals/string-pad').start;
+  var WEBKIT_BUG = require('../internals/string-pad-webkit-bug');
+
+  // `String.prototype.padStart` method
+  // https://tc39.es/ecma262/#sec-string.prototype.padstart
+  $$6({ target: 'String', proto: true, forced: WEBKIT_BUG }, {
+    padStart: function padStart(maxLength /* , fillString = ' ' */) {
+      return $padStart(this, maxLength, arguments.length > 1 ? arguments[1] : undefined);
+    }
+  });
+
   /** 
    * Global helper functions to help maintain and enhance framework elements.
    * @module Helpers 
@@ -3243,6 +3255,17 @@
         }
       });
     });
+  };
+
+  var isNumeric = function isNumeric(str) {
+    if (typeof str != "string") return false; // we only process strings!  
+
+    return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+    !isNaN(parseFloat(str)); // ...and ensure strings of whitespace fail
+  };
+
+  var zeroPad = function zeroPad(num, places) {
+    return String(num).padStart(places, '0');
   };
 
   var navbar = function navbar() {
@@ -3649,20 +3672,24 @@
 
   function table(tableElement) {
     if (_typeof(tableElement) != "object") return false;
+    var thead = tableElement.querySelector('thead');
     var tbody = tableElement.querySelector('tbody');
     var storedData = tbody.cloneNode(true);
-    var sortedEvent = new Event('updated');
+    var sortedEvent = new Event('sorted');
     var filteredEvent = new Event('filtered');
     var randID = 'tabe_' + Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
 
+    var draggedRow;
     tableElement.setAttribute('id', randID); // #region Sortable
 
     var sortTable = function sortTable(sortBy, sort) {
       // Create an array from the table rows, the index created is then used to sort the array
       var tableArr = [];
       Array.from(tbody.querySelectorAll('tr')).forEach(function (tableRow, index) {
+        var rowIndex = tableRow.querySelector('td[data-label="' + sortBy + '"], th[data-label="' + sortBy + '"]').textContent;
+        if (isNumeric(rowIndex)) rowIndex = zeroPad(rowIndex, 10);
         var dataRow = {
-          index: tableRow.querySelector('td[data-label="' + sortBy + '"]').textContent,
+          index: rowIndex,
           row: tableRow
         };
         tableArr.push(dataRow);
@@ -3700,6 +3727,9 @@
           tableElement.setAttribute('data-sortBy', target.textContent); // Sort the table
 
           sortTable(target.textContent, sort);
+          Array.from(tableElement.querySelectorAll('tr[draggable]')).forEach(function (tableRow, index) {
+            tableRow.removeAttribute('draggable');
+          });
           break;
         }
       }
@@ -3921,6 +3951,109 @@
         });
       }
     } // #endregion Pagination
+    // #region Reorderable
+    // Set the row thats being dragged and copy the row
+
+
+    function setDraggedRow(e) {
+      e.dataTransfer.setData("text/plain", e.target.id);
+      draggedRow = e.target;
+      e.target.classList.add('tr--dragging');
+    } // Create the order column and event handler for rows
+
+
+    var setReorderRows = function setReorderRows() {
+      Array.from(tbody.querySelectorAll('tr')).forEach(function (tableRow, index) {
+        // Create column if not already created
+        if (tableRow.querySelector('[data-label="Order"]') == null) {
+          var orderColumn = document.createElement('th');
+          orderColumn.innerHTML = index + 1;
+          orderColumn.setAttribute('data-label', 'Order');
+          tableRow.prepend(orderColumn);
+        } // Make draggable
+
+
+        tableRow.setAttribute('id', randID + '_row_' + (index + 1));
+        tableRow.setAttribute('data-order', index + 1);
+        tableRow.setAttribute('draggable', 'true');
+        tableRow.addEventListener("dragstart", setDraggedRow);
+      });
+    };
+
+    if (tableElement.getAttribute('data-reorder')) {
+      // Add column heading
+      var orderHeading = document.createElement('th');
+      orderHeading.innerHTML = 'Order';
+      orderHeading.classList.add('table-order-reset');
+      thead.querySelector('tr').prepend(orderHeading);
+      setReorderRows(); // Reset order button
+
+      tableElement.addEventListener('click', function (e) {
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('.table-order-reset')) {
+            // unset sort attributes
+            Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach(function (col, index) {
+              col.setAttribute('aria-sort', 'none');
+            }); // Save the sort options on the table element so that it can be re-sorted later
+
+            tableElement.removeAttribute('data-sort');
+            tableElement.removeAttribute('data-sortBy'); // Sort the table
+
+            sortTable('Order', 'ascending');
+            Array.from(tableElement.querySelectorAll('tbody tr')).forEach(function (tableRow, index) {
+              tableRow.setAttribute('draggable', 'true');
+            });
+            break;
+          }
+        }
+      }, false);
+      document.addEventListener("dragover", function (e) {
+        // prevent default to allow drop
+        e.preventDefault();
+      }, false);
+      document.addEventListener("dragenter", function (e) {
+        // prevent default to allow drop
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('[data-reorder] tbody tr')) {
+            target.classList.add('tr--dropable');
+          }
+        }
+      }, false);
+      document.addEventListener("dragleave", function (e) {
+        // prevent default to allow drop
+        e.preventDefault();
+
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('[data-reorder] tbody tr')) {
+            target.classList.remove('tr--dropable');
+          }
+        }
+      }, false);
+      document.addEventListener("drop", function (e) {
+        e.preventDefault();
+
+        for (var target = e.target; target && target != this; target = target.parentNode) {
+          if (target.matches('[data-reorder] tbody tr')) {
+            if (target.parentNode != null && draggedRow.parentNode != null && target != draggedRow) {
+              draggedRow.parentNode.removeChild(draggedRow);
+              if (draggedRow.getAttribute('data-order') > target.getAttribute('data-order')) target.parentNode.insertBefore(draggedRow, target);else target.parentNode.insertBefore(draggedRow, target.nextElementSibling); // Re label the rows
+
+              Array.from(tbody.querySelectorAll('tr')).forEach(function (tableRowOrder, index) {
+                tableRowOrder.classList.remove('tr--dragging');
+                tableRowOrder.classList.remove('tr--dropable');
+                tableRowOrder.querySelector('th').innerHTML = index + 1;
+                tableRowOrder.setAttribute('data-order', index + 1);
+              });
+            }
+
+            break;
+          }
+        }
+      }, false);
+    } // #endregion Reorderable
     // Watch for the filterable event and re-sort the tbody
 
 
@@ -3939,6 +4072,15 @@
           createPaginationForm(_show, 1, _totalRows);
           createPaginationButttons(_show, 1, _totalRows);
         }
+      }
+
+      if (tableElement.getAttribute('data-reorder')) {
+        setReorderRows();
+      }
+    }, false);
+    tableElement.addEventListener('sorted', function (e) {
+      if (tableElement.getAttribute('data-reorder')) {
+        setReorderRows();
       }
     }, false);
   }

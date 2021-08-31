@@ -1,5 +1,5 @@
 <template>
-  <div class="table__wrapper" ref="wrapper" :data-sortBy="sortBy" :data-sort="sort" :data-show="show" :data-page="page">
+  <div class="table__wrapper" ref="wrapper" :data-sortBy="sortBy" :data-sort="sort" :data-show="show" :data-page="page" :data-reorder="reorder">
     <table>
       <thead v-if="fields">
         <tr>
@@ -22,6 +22,10 @@ import table from '../../../assets/js/modules/table.js'
 export default {
   name: 'Table',
   props: {
+    reorder: {
+      type: Boolean,
+      required: false
+    },
     page: {
       type: Number,
       required: false
