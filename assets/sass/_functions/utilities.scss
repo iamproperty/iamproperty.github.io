@@ -14,6 +14,20 @@ $utilities: map-merge(
     )
   )
 );
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "object-fit": (
+      property: object-fit,
+      class: object,
+      values: (
+        cover: cover,
+        contain: contain
+      )
+    )
+  )
+);
 //  #endregion
 
 // #region Remove Border colour utitlity classes
