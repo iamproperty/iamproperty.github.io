@@ -4085,6 +4085,35 @@
     }, false);
   }
 
+  function accordion(accordionElement) {
+    // Fetch all the details element.
+    var details = accordionElement.querySelectorAll("details"); // Add the onclick listeners.
+
+    details.forEach(function (targetDetail) {
+      targetDetail.addEventListener("click", function () {
+        // Close all the details that are not targetDetail.
+        details.forEach(function (detail) {
+          if (detail !== targetDetail) {
+            detail.removeAttribute("open");
+          }
+        });
+      });
+    });
+
+    if (window.location.hash && document.querySelector(window.location.hash + ':not([open]) summary')) {
+      var detail = document.querySelector(window.location.hash + ' summary');
+      detail.click();
+    }
+
+    window.addEventListener('hashchange', function () {
+      if (window.location.hash && document.querySelector(window.location.hash + ' summary')) {
+        var _detail = document.querySelector(window.location.hash + ' summary');
+
+        _detail.click();
+      }
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     addBodyClasses(document.body);
     checkElements(document.body);
@@ -4093,6 +4122,10 @@
 
     Array.from(document.querySelectorAll('.table__wrapper')).forEach(function (arrayElement, index) {
       table(arrayElement);
+    }); // Accordions
+
+    Array.from(document.querySelectorAll('.accordion')).forEach(function (arrayElement, index) {
+      accordion(arrayElement);
     });
   });
 

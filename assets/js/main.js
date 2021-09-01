@@ -16,6 +16,7 @@ import Toast from '../../node_modules/bootstrap/js/src/toast'
 import * as helpers from './modules/helpers'
 import navbar from './modules/navbar'
 import table from './modules/table'
+import accordion from './modules/accordion'
 
 
 // Attach classes to dom elements
@@ -29,5 +30,10 @@ document.addEventListener("DOMContentLoaded", function() {
   // Advanced tables
   Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement, index) => {
     table(arrayElement);
+  });
+
+  // Accordions
+  Array.from(document.querySelectorAll('.accordion')).forEach((arrayElement, index) => {
+    accordion(arrayElement);
   });
 });
