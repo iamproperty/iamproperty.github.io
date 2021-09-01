@@ -195,6 +195,14 @@ export const routes = [
         component: () => import('../views/components/Accordion.vue')
       },
       {
+        path: 'banner',
+        name: 'Banner',
+        meta: {
+          title: 'Banner | Components | IAM Key'
+        },
+        component: () => import('../views/components/BannerDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {

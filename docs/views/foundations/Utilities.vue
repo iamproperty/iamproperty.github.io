@@ -85,6 +85,8 @@ utClasses['mw-fit-content'] = {'name': 'mw-fit-content', 'value':utClasses['mw-f
 utClasses['mw-sm-fit-content'] = {'name': 'mw-sm-fit-content', 'value':utClasses['mw-sm-fit-content']['value'], 'added': 'true'}
 utClasses['mw-md-fit-content'] = {'name': 'mw-md-fit-content', 'value':utClasses['mw-md-fit-content']['value'], 'added': 'true'}
 utClasses['font-body'] = {'name': 'font-body', 'value':utClasses['font-body']['value'], 'added': 'true'}
+utClasses['object-contain'] = {'name': 'object-fit', 'value':utClasses['object-contain']['value'], 'added': 'true'}
+utClasses['object-cover'] = {'name': 'object-fit', 'value':utClasses['object-cover']['value'], 'added': 'true'}
 
 const ordered = Object.keys(utClasses).sort().reduce(
   (obj, key) => { 
