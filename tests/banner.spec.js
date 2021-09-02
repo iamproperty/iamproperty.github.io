@@ -14,7 +14,7 @@ describe('Banner component', () => {
   })
 
   it('renders the banner title', () => {
-    expect(test.html()).toContain('<h2 class="text-dark">Banner title</h2>')
+    expect(test.html()).toContain('<h2>Banner title</h2>')
   })
 
   it('renders the banner content', () => {
