@@ -1,13 +1,21 @@
 function testimonial(testimonialElement) {
 
   var scrollTimeout;
-  let imagesCarousel = testimonialElement.querySelector('.testimonial__images');
-  let itemCount = imagesCarousel.querySelectorAll('img').length;
+  const imagesCarousel = testimonialElement.querySelector('.testimonial__images');
+  const itemCount = imagesCarousel.querySelectorAll('img').length;
 
-  let nextButton = testimonialElement.querySelector('.testimonial__next');
-  let prevButton = testimonialElement.querySelector('.testimonial__prev');
+  // If we only have 1 item lets not bother doing anything else
+  if(itemCount == 1){
+    return false;
+  }
 
+  testimonialElement.classList.add('testimonial--multi')
+
+  // Set where the buttons go to
   const setButtons = function(scrollTo){
+
+    const nextButton = testimonialElement.querySelector('.testimonial__next');
+    const prevButton = testimonialElement.querySelector('.testimonial__prev');
 
     nextButton.setAttribute('data-go',scrollTo+1);
     prevButton.setAttribute('data-go',scrollTo-1);
@@ -20,7 +28,7 @@ function testimonial(testimonialElement) {
       nextButton.setAttribute('disabled',true);
   }
 
-
+  // On scroll we need to make sure the buttons get corrected and the next testimonial is shown
   imagesCarousel.addEventListener('scroll', function(e){
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(function(){ 
@@ -31,10 +39,9 @@ function testimonial(testimonialElement) {
       let scrollDown = imagesCarousel.scrollTop;
       let scrollTo = Math.round((scrollLeft / scrollWidth) * itemCount) + 1;
 
-      if(scrollLeft == 0 && scrollDown != 0){
-
+      // Change in scroll direction
+      if(scrollLeft == 0 && scrollDown != 0)
         scrollTo = Math.round((scrollDown / scrollHeight) * itemCount) + 1;
-      }
 
       testimonialElement.setAttribute('data-show',scrollTo)
       setButtons(scrollTo);
@@ -42,9 +49,9 @@ function testimonial(testimonialElement) {
 
   }, false);
 
-
+  // when the buttons are used we need to make sure the carousel scrolls to the correct place
   testimonialElement.addEventListener('click', function(e){
-    // loop parent nodes from the target to the delegation node
+
     for (var target = e.target; target && target != this; target = target.parentNode) {
 
       if (target.matches('[data-go]')) {
@@ -55,15 +62,12 @@ function testimonial(testimonialElement) {
         let scrollWidth = imagesCarousel.scrollWidth;
         let scrollHeight = imagesCarousel.scrollHeight;
         
-        if(scrollWidth > scrollHeight){
-
+        if(scrollWidth > scrollHeight)
           scrollLeft = Math.floor(scrollWidth * ((scrollTo-1) / itemCount))
-        }
-        else {
-
+        else 
           scrollDown = Math.floor(scrollHeight * ((scrollTo-1) / itemCount))
-        }
-
+        
+        // Trigger the scroll
         imagesCarousel.scroll({
           top: scrollDown,
           left: scrollLeft, 
@@ -74,9 +78,6 @@ function testimonial(testimonialElement) {
       }
     }
   }, false);
-
-
-
 }
 
 export default testimonial

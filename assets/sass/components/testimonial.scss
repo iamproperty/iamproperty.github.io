@@ -1,7 +1,16 @@
 .testimonial {
+
+  --testimonial-padding: 1rem;
+  --testimonial-spacing: 1rem;
+
+  @include media-breakpoint-up(md) {
+    --testimonial-padding: 4rem;
+    --testimonial-spacing: 2rem;
+  }
+
+  // Circle
   > div:first-child {
-    
-    
+
     position: relative;
     overflow: hidden;
   }
@@ -15,30 +24,24 @@
     border-width: 4px;
   }
 
-  h2 {
-    padding-top: 3rem;
-    @include media-breakpoint-up(md) {
-      padding-top: 6rem;
-    }
-  }
-
-  
-  @for $i from 1 through 3 {
-
-    &[data-show="#{$i}"] blockquote:not(:nth-child(#{$i})) {
-      display: none;
-    }
-  }
-
-  .testimonial__images {
-    height: 100%;
+  &__images {
     overflow: auto;
     scroll-snap-type: x mandatory;
     display: flex;
+    user-select: none;
+    touch-action: pan-x;
+    height: rem(230);
 
+    @include media-breakpoint-up(sm) {
+
+      height: rem(340);
+    }
     @include media-breakpoint-up(md) {
+
+      min-height: 100%;
       scroll-snap-type: y mandatory;
       flex-direction: column;
+      touch-action: pan-y;
     }
 
     img {
@@ -49,9 +52,120 @@
       flex-shrink: 0;
     }
   }
+
+  .testimonial__controls {
+    display: none;
+  }
+
+  &.testimonial--multi .testimonial__controls {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 50%);
+
+    @include media-breakpoint-up(md) {
+      left: auto;
+      bottom: auto;
+      right: 0;
+      top: 50%;
+      transform: rotate(90deg) translate(0,-120%);
+      transform-origin: center;
+    }
+    button {
+      --marker-bg: var(--colour-secondary);
+      text-indent: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      background: var(--marker-bg);
+      border-radius: 100%;
+      width: rem(48);
+      height: rem(48);
+      text-indent: -300rem;
+      overflow: hidden;
+      border: none;
+      position: relative;
+      margin: 0 rem(8);
+
+      &:disabled {
+        opacity: 0.8;
+        pointer-events: none;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        background: currentColor;
+        mask-image: escape-svg($accordion-button-icon);
+        mask-size: 50%;
+        mask-repeat: no-repeat;
+        mask-position: 50% 60%;
+        -webkit-mask-image: escape-svg($accordion-button-icon);
+        -webkit-mask-size: 50%;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: 55% 50%;
+        transform: rotate(0deg);
+      }
+
+      &:hover,
+      &:focus {
+
+        --marker-bg: var(--colour-warning);
+        color: var(--colour-hover);
+      }
+
+      &.testimonial__prev:after {
+
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  // Make space for the circle
+  h2 {
+    padding: 3rem var(--testimonial-padding) 0 var(--testimonial-padding);
+
+    @include media-breakpoint-up(md) {
+      padding-top: 9rem;
+    }
+  }
+
+  &__content {
+
+    --display-none: none;
+    margin: 0 var(--testimonial-padding) var(--testimonial-spacing) var(--testimonial-padding);
+    position: relative;
+
+    @include media-breakpoint-up(md) {
+      --display-none: block;
+
+      blockquote:not(.largest) {
+        position: absolute;
+        top: 0;
+      }
+    }
+  }
+
+  // Only show 1 blockquote at a time
+  @for $i from 1 through 10 {
+
+    &[data-show="#{$i}"] blockquote:not(:nth-child(#{$i})) {
+      display: var(--display-none);
+      opacity: 0;
+      user-select: none;
+      pointer-events: none;
+    }
+  }
+
+  &__after {
+
+    padding: 1rem var(--testimonial-padding) var(--testimonial-spacing) var(--testimonial-padding);
+  }
 }
-
-
 
 /* Hide scrollbar for Chrome, Safari and Opera */
 .testimonial__images::-webkit-scrollbar {
@@ -62,12 +176,4 @@
 .testimonial__images {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
-}
-
-
-.testimonial__controls {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

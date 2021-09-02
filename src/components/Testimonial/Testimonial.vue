@@ -1,26 +1,28 @@
 <template>
   <div class="container testimonial mb-5" data-show="1" ref="wrapper">
-    <div class="bg-light">
+    <div :class="'bg-'+background">
       <div class="row">
-        <div class="col-sm-4 position-relative">
+        <div class="col-md-5 position-relative">
           <div class="testimonial__images">
-            <img v-for="(value,index) in items" :key="index" :src="value.image" alt="" class="h-100 w-100 object-cover" />
+            <img v-for="(value,index) in items" :key="index" :src="value.image ? value.image : 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='" alt="" :class="'h-100 w-100 object-cover' + (value.image ? '' : ' opacity-0')" />
           </div>
           <div class="testimonial__controls">
             <button data-go="0" disabled class="testimonial__prev">Previous</button>
             <button data-go="2" class="testimonial__next">Next</button>
           </div>
         </div>
-        <div class="col-sm-7 col-md-6 pb-4 px-2">
+        <div class="col-md-7">
           <h2>What our customers think…</h2>
           <div class="testimonial__content">
 
-            <blockquote v-for="(value,index) in items" :key="index">
+            <blockquote v-for="(value,index) in items" :key="index" :class="value.class">
               <div v-html="value.quote"></div>
               <cite v-html="value.cite"></cite>
             </blockquote>
           </div>
-          <slot></slot>
+          <div class="testimonial__after">
+            <slot></slot>
+          </div>
         </div>
       </div>
       <span class="circle circle--dots d-none d-md-block"></span>
@@ -43,6 +45,11 @@ export default {
     items: {
       type: Array,
       required: true
+    },
+    background: {
+      type: String,
+      default: 'light',
+      required: false
     }
   },
   mounted(){
