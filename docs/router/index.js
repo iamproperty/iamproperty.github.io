@@ -246,6 +246,28 @@ export const routes = [
     ]
   },
   {
+    path: '/examples',
+    name: 'Examples',
+    meta: {
+      title: 'Examples | IAM Key'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "examples" */ '../views/Examples.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/examples/Index.vue')
+      },
+      {
+        path: 'filter-by-age',
+        component: () => import('../views/examples/FilterByAge.vue')
+      }
+    ]
+  },
+  {
     path: '*',
     name: 'Page not found',
     component: () => import('../views/PageNotFound.vue'),
