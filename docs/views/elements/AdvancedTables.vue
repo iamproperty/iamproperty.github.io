@@ -48,6 +48,7 @@
     <div class="container">
       <h3>Advanced filters</h3>
       <p>The above is the default way of adding a simple filter that matches strings. To have something more complicated the table element will have to be combined with an additional form with bespoke JavaScript logic.</p>
+      <a href="/examples#tables" class="btn btn-secondary">See table examples</a>
     </div>
 
 
