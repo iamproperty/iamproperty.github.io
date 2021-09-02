@@ -117,3 +117,13 @@ $fontPath: '/fonts/';
 code {
   font-family: 'Source Code Pro', monospace;
 }
+
+.note {
+  border-left: 2px solid var(--colour-danger);
+  padding: 1rem 0.5rem 1rem 0.5rem;
+  background: rgba(0,0,0,0.05);
+
+  strong:first-child {
+    color: var(--colour-danger);
+  }
+}
