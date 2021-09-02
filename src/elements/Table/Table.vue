@@ -60,18 +60,39 @@ export default {
   },
   mounted(){
 
-    table(this.$refs.wrapper);
-
-    // Listen for the event.
-    this.$el.addEventListener('sorted', function (e) { 
+    this.$nextTick(function () {
       
-      console.log('Table sorted')
-    }, false);
+      table(this.$refs.wrapper);
 
-    this.$el.addEventListener('filtered', function (e) { 
-      
-      console.log('Table filtered')
-    }, false);
+      // Listen for the event.
+      this.$el.addEventListener('sorted', function (e) { 
+        
+        console.log('Table sorted')
+      }, false);
+
+      this.$el.addEventListener('filtered', function (e) { 
+        
+        console.log('Table filtered')
+      }, false);
+
+    })
+  },
+  updated(){
+    this.$nextTick(function () {
+
+      // If the data gets updated we may need to recreate the tbody as it get detached when sorted in the table.js
+      let tbody = this.$refs.wrapper.querySelector('tbody');
+
+      let tbodyHTML = '';
+      this.items.forEach((row, index) => {
+        tbodyHTML += `<tr>${ Object.keys(row).map(col =>  `<td data-label="${ucfirst(unsnake(col))}">${row[col]}</td>` ).join("") }</tr>`;
+      });
+      tbody.innerHTML = tbodyHTML;
+
+      // Tell the framework that the table has been filtered so that it can re-sort it etc
+      const updatedEvent = new Event('filtered');
+      this.$refs.wrapper.dispatchEvent(updatedEvent);
+    })
   }
 }
 </script>
