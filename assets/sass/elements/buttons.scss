@@ -120,4 +120,22 @@
       --btn-text-hover:  var(--colour-primary);
     }
   }
+
+  [class*="bg-"].bg-light & {
+    
+    --btn-bg: #ffffff;
+    --btn-bg-hover: transparent;
+    --btn-outline: #ffffff;
+    --btn-outline-hover: var(--colour-dark);
+    --btn-text-hover: var(--colour-dark);
+    --btn-text: var(--colour-dark);
+
+    &.btn-tertiary {
+
+      --btn-bg: transparent;
+      --btn-bg-hover: #ffffff;
+      --btn-text:  #ffffff;
+      --btn-text-hover:  var(--colour-primary);
+    }
+  }
 }

@@ -66,8 +66,8 @@ blockquote {
   margin-bottom: 1rem;
 
   p {
-    @include var(font-size,--fs-4);
-    @include var(color,--colour-primary);
+    @include var(font-size,--fs-3);
+    @include var(color,--colour-heading);
     margin-top: 0;
     margin-bottom: 1rem;
   }
@@ -81,7 +81,7 @@ blockquote {
 
   cite {
     @include var(font-size,--fs-5);
-    @include var(color,--colour-primary);
+    @include var(color,--colour-heading);
     font-style: normal;
     font-weight: bold;
   }

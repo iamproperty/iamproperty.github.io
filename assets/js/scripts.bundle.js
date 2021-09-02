@@ -4114,6 +4114,64 @@
     });
   }
 
+  function testimonial(testimonialElement) {
+    var scrollTimeout;
+    var imagesCarousel = testimonialElement.querySelector('.testimonial__images');
+    var itemCount = imagesCarousel.querySelectorAll('img').length; // If we only have 1 item lets not bother doing anything else
+
+    if (itemCount == 1) {
+      return false;
+    }
+
+    testimonialElement.classList.add('testimonial--multi'); // Set where the buttons go to
+
+    var setButtons = function setButtons(scrollTo) {
+      var nextButton = testimonialElement.querySelector('.testimonial__next');
+      var prevButton = testimonialElement.querySelector('.testimonial__prev');
+      nextButton.setAttribute('data-go', scrollTo + 1);
+      prevButton.setAttribute('data-go', scrollTo - 1);
+      nextButton.removeAttribute('disabled');
+      prevButton.removeAttribute('disabled');
+      if (scrollTo == 1) prevButton.setAttribute('disabled', true);else if (scrollTo == itemCount) nextButton.setAttribute('disabled', true);
+    }; // On scroll we need to make sure the buttons get corrected and the next testimonial is shown
+
+
+    imagesCarousel.addEventListener('scroll', function (e) {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function () {
+        var scrollWidth = imagesCarousel.scrollWidth;
+        var scrollHeight = imagesCarousel.scrollHeight;
+        var scrollLeft = imagesCarousel.scrollLeft;
+        var scrollDown = imagesCarousel.scrollTop;
+        var scrollTo = Math.round(scrollLeft / scrollWidth * itemCount) + 1; // Change in scroll direction
+
+        if (scrollLeft == 0 && scrollDown != 0) scrollTo = Math.round(scrollDown / scrollHeight * itemCount) + 1;
+        testimonialElement.setAttribute('data-show', scrollTo);
+        setButtons(scrollTo);
+      }, 300);
+    }, false); // when the buttons are used we need to make sure the carousel scrolls to the correct place
+
+    testimonialElement.addEventListener('click', function (e) {
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-go]')) {
+          var scrollTo = parseInt(target.getAttribute('data-go'));
+          var scrollDown = 0;
+          var scrollLeft = 0;
+          var scrollWidth = imagesCarousel.scrollWidth;
+          var scrollHeight = imagesCarousel.scrollHeight;
+          if (scrollWidth > scrollHeight) scrollLeft = Math.floor(scrollWidth * ((scrollTo - 1) / itemCount));else scrollDown = Math.floor(scrollHeight * ((scrollTo - 1) / itemCount)); // Trigger the scroll
+
+          imagesCarousel.scroll({
+            top: scrollDown,
+            left: scrollLeft,
+            behavior: 'smooth'
+          });
+          break;
+        }
+      }
+    }, false);
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     addBodyClasses(document.body);
     checkElements(document.body);
@@ -4126,6 +4184,10 @@
 
     Array.from(document.querySelectorAll('.accordion')).forEach(function (arrayElement, index) {
       accordion(arrayElement);
+    }); // Testimonial
+
+    Array.from(document.querySelectorAll('.testimonial')).forEach(function (arrayElement, index) {
+      testimonial(arrayElement);
     });
   });
 

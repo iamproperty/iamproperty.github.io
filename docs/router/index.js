@@ -211,6 +211,14 @@ export const routes = [
         component: () => import('../views/components/Header.vue')
       },
       {
+        path: 'testimonial',
+        name: 'Testimonial',
+        meta: {
+          title: 'Testimonial | Components | IAM Key'
+        },
+        component: () => import('../views/components/TestimonialDoc.vue')
+      },
+      {
         path: 'task-title',
         name: 'Task Title',
         component: () => import('../views/components/TaskTitle.vue')

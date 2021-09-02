@@ -17,6 +17,7 @@ import * as helpers from './modules/helpers'
 import navbar from './modules/navbar'
 import table from './modules/table'
 import accordion from './modules/accordion'
+import testimonial from './modules/testimonial'
 
 
 // Attach classes to dom elements
@@ -35,5 +36,10 @@ document.addEventListener("DOMContentLoaded", function() {
   // Accordions
   Array.from(document.querySelectorAll('.accordion')).forEach((arrayElement, index) => {
     accordion(arrayElement);
+  });
+  
+  // Testimonial
+  Array.from(document.querySelectorAll('.testimonial')).forEach((arrayElement, index) => {
+    testimonial(arrayElement);
   });
 });
