@@ -24,3 +24,8 @@
   --colour-border: white;
   color: white;
 }
+
+.bg-light {
+  --colour-heading: var(--colour-dark);
+  color: var(--colour-dark);
+}

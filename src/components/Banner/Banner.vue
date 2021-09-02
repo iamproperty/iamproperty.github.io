@@ -3,8 +3,8 @@
     <div :class="'bg-'+background+' mb-4'">
       <div class="row">
         <div class="col-sm-6">
-          <div :class="'pt-5 pb-3 px-4 text-'+colour">
-            <h2 :class="'text-'+colour">{{title}}</h2>
+          <div class="pt-5 pb-3 px-4">
+            <h2>{{title}}</h2>
             <slot></slot>
           </div>
         </div>
@@ -31,11 +31,6 @@ export default {
     background: {
       type: String,
       default: 'light',
-      required: false
-    },
-    colour: {
-      type: String,
-      default: 'dark',
       required: false
     }
   }

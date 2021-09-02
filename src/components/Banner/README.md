@@ -14,7 +14,6 @@
 | title | String | - | Required |
 | image | String | - | Optional image url to display in the background |
 | background | String | light | The background colour can be overwritten if need be |
-| colour | String | dark | The text colour can be overwritten if need be |
 
 
 
