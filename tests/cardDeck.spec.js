@@ -41,7 +41,7 @@ describe('Card Deck component', () => {
   it('renders the card title', () => {
     expect(test.html()).toContain('<h2 class="card-title">Card 1</h2>')
     expect(test.html()).toContain('<h2 class="card-title">Card 2</h2>')
-    expect(test.html()).toContain('<h2 class="card-title">Card </h2>')
+    expect(test.html()).toContain('<h2 class="card-title">Card 3</h2>')
   })
 
   it('renders the correct number of cards', () => {
