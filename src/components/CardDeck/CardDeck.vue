@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container card-deck" :data-card-type="cardType">
       <slot></slot>
       <div :class="`row row-cols-${cols} row-cols-sm-${smCols} row-cols-md-${mdCols} ${gap ? `g-${gap}`: ``}`">
         <div class="col" v-for="(value,index) in items" :key="index">

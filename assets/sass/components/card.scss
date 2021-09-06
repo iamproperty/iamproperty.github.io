@@ -41,7 +41,6 @@ a.card {
 // Fix the vertical flow of the card deck
 .row[class*="g-"] .card {
 
-  margin-top: calc(var(--bs-gutter-y) * -1);
   margin-bottom: var(--bs-gutter-y);
 }
 
@@ -60,5 +59,11 @@ a.card {
     padding-left: 0;
     padding-right: 0;
   }
+}
+// #endregion
+
+// #region Card Deck
+.card-deck.container:not([data-card-type="simple"]) {
+  padding-bottom: 3rem;
 }
 // #endregion

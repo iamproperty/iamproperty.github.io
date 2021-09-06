@@ -7,7 +7,7 @@
       <h1>Card deck</h1>
       <p>Need a set of equal width and height cards that aren’t attached to one another? Use card decks.</p>
     </div>
-    <CardDeck :items="items" class="visualtest"></CardDeck>
+    <CardDeck :items="items" class="visualtest" data-test="test1"></CardDeck>
     
     <div class="container">
       <h2>Simple card</h2>
