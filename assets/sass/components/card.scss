@@ -1,8 +1,64 @@
+a.card {
+
+  &:before {
+    display: none;
+  }
+}
+
 .card {
-  box-shadow: 0 2px #{rem(12)} 0 rgba(154,154,154,0.25);
+  --spread: #{rem(12)};
+  box-shadow: 0 2px var(--spread) 0 rgba(154,154,154,0.25);
+  min-height: 100%;
+
+  &:hover,
+  &:focus {
+    --spread: #{rem(6)};
+  }
+
+  &:active {
+    --spread: #{rem(3)};
+  }
+}
+
+.card-body {
+
+  color: var(--colour-body);
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.card-footer {
+  padding-top: 0;
 }
 
 .row:not([class*="g-"]) .card {
 
   margin-bottom: 1rem;
 }
+
+// Fix the vertical flow of the card deck
+.row[class*="g-"] .card {
+
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-bottom: var(--bs-gutter-y);
+}
+
+
+// #region Simple card
+[data-type="simple"]{
+
+  box-shadow: none;
+  min-height: 0;
+  
+  .card-body {
+    padding-top: 0;
+  }
+  .card-body,
+  .card-footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+// #endregion
