@@ -16,6 +16,18 @@
     <CardDeck :items="items" cardType="simple" :gap="0" class="visualtest"></CardDeck>
     
     <div class="container">
+      <h2>Property card</h2>
+      <p>A more complex card with lots of key information but is still made using the same component.</p>
+    </div>
+    <CardDeck :items="properties" :smCols="2" :mdCols="4" btnType="link" class="visualtest" titleClass="h6"></CardDeck>
+    
+    <div class="container">
+      <h2>Property Listing card</h2>
+      <p>Property cards by default shift the image to the left on cards when given more space.</p>
+    </div>
+    <CardDeck :items="propertyListing" :smCols="1" :mdCols="1" btnType="link" class="visualtest" titleClass="h6"></CardDeck>
+    
+    <div class="container">
       <h2>HTML code example</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
@@ -78,6 +90,90 @@ export default {
           link: '/components/card-deck',
           title: 'Card 3',
           content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur.</p>`
+        }
+      ],
+      properties: [
+        {
+          link: '/components/card-deck',
+          content: `<p>Reservation fee applies</p>`,
+          image: require('../../assets/house.jpeg'),
+          title: '4 bed semi-detached',
+          subTitle: 'Burt terrace, Newcastle upon tyne',
+          details: {
+            tags: ['Modern method','Freehold'],
+            guidePrice: '£90,000.00',
+            auctionTime: '19 days',
+            status: 'Live now',
+            images: 5,
+            videos: 2,
+            logo: require('../../assets/logo.jpg')
+          }
+        },
+        {
+          link: '/components/card-deck',
+          image: require('../../assets/house.jpeg'),
+          title: '4 bed semi-detached',
+          subTitle: 'Burt terrace, Newcastle upon tyne',
+          content: `<p>Reservation fee applies</p>`,
+          details: {
+            tags: ['Traditional method','Freehold'],
+            guidePrice: '£90,000.00',
+            auctionTime: '19 days',
+            status: 'Sold',
+            images: 5,
+            videos: 2,
+            logo: require('../../assets/logo.jpg')
+          }
+        },
+        {
+          link: '/components/card-deck',
+          image: require('../../assets/house.jpeg'),
+          title: '4 bed semi-detached',
+          subTitle: 'Burt terrace, Newcastle upon tyne',
+          content: `<p>Reservation fee applies</p>`,
+          details: {
+            tags: ['Traditional method','Freehold'],
+            guidePrice: '£90,000.00',
+            auctionTime: '19 days',
+            status: 'Sold',
+            images: 5,
+            videos: 2,
+            logo: require('../../assets/logo.jpg')
+          }
+        },
+        {
+          link: '/components/card-deck',
+          image: require('../../assets/house.jpeg'),
+          title: '4 bed semi-detached',
+          subTitle: 'Burt terrace, Newcastle upon tyne',
+          content: `<p>Reservation fee applies</p>`,
+          details: {
+            tags: ['Modern method','Freehold'],
+            guidePrice: '£90,000.00',
+            auctionTime: '19 days',
+            status: 'Sold',
+            images: 5,
+            videos: 2,
+            logo: require('../../assets/logo.jpg')
+          }
+        }
+      ],
+      propertyListing: [
+        {
+          link: '/components/card-deck',
+          content: `<p>Reservation fee applies</p>`,
+          image: require('../../assets/house.jpeg'),
+          title: '4 bed semi-detached',
+          subTitle: 'Burt terrace, Newcastle upon tyne',
+          details: {
+            tags: ['Modern method','Freehold'],
+            guidePrice: '£90,000.00',
+            auctionTime: '19 days',
+            status: 'Live now',
+            images: 5,
+            videos: 2,
+            logo: require('../../assets/logo.jpg')
+          }
         }
       ]
     }

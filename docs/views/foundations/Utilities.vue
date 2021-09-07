@@ -80,6 +80,10 @@ sizingClass.forEach(function (classsName){
   utClasses[cn] = {'name': cn, 'value':'Removed', 'class': 'text-danger'}
 });
 
+utClasses['lh-sm'] = {'name': 'lh-sm', 'value':'Removed', 'class': 'text-danger'}
+utClasses['lh-base'] = {'name': 'lh-sm', 'value':'Removed', 'class': 'text-danger'}
+utClasses['lh-lg'] = {'name': 'lh-sm', 'value':'Removed', 'class': 'text-danger'}
+
 // Added classes
 utClasses['mw-fit-content'] = {'name': 'mw-fit-content', 'value':utClasses['mw-fit-content']['value'], 'added': 'true'}
 utClasses['mw-sm-fit-content'] = {'name': 'mw-sm-fit-content', 'value':utClasses['mw-sm-fit-content']['value'], 'added': 'true'}
@@ -87,6 +91,7 @@ utClasses['mw-md-fit-content'] = {'name': 'mw-md-fit-content', 'value':utClasses
 utClasses['font-body'] = {'name': 'font-body', 'value':utClasses['font-body']['value'], 'added': 'true'}
 utClasses['object-contain'] = {'name': 'object-fit', 'value':utClasses['object-contain']['value'], 'added': 'true'}
 utClasses['object-cover'] = {'name': 'object-fit', 'value':utClasses['object-cover']['value'], 'added': 'true'}
+utClasses['lh-0'] = {'name': 'line height 0', 'value':utClasses['lh-0']['value'], 'added': 'true'}
 
 const ordered = Object.keys(utClasses).sort().reduce(
   (obj, key) => { 

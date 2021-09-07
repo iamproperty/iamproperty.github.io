@@ -6,6 +6,7 @@
   @include var(color,--colour-heading);
   color: var(--colour-heading,var(--colour-primary));
   display: block;
+  margin-bottom: 1rem;
 }
 
 h1,
