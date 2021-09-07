@@ -97,13 +97,7 @@ $non-theme-colors: map-merge((
   "focus":            $colour-focus,
   "hover":            $colour-hover,
   "active":           $colour-active,
-  "selected":         $colour-selected,
-  "body-rgb":             to-rgb($colour-body),
-  "white-rgb": to-rgb(#ffffff),
-  "black-rgb": to-rgb(#000000),
-  "body":  rgba(var(--colour-body-rgb),var(--alpha,1)),
-  "white": rgba(var(--colour-white-rgb),var(--alpha,1)),
-  "black": rgba(var(--colour-black-rgb),var(--alpha,1))
+  "selected":         $colour-selected
 ), $non-theme-colors);
 
 @each $color, $value in $non-theme-colors {
@@ -112,7 +106,19 @@ $non-theme-colors: map-merge((
     --colour-#{$color}: #{$value}
   ), $vars);
 }
+
+$vars: map-merge((
+  "body-rgb": to-rgb($colour-body),
+  "white-rgb": to-rgb(#ffffff),
+  "black-rgb": to-rgb(#000000),
+  "body":  rgba(var(--colour-body-rgb),var(--alpha,1)),
+  "white": rgba(var(--colour-white-rgb),var(--alpha,1)),
+  "black": rgba(var(--colour-black-rgb),var(--alpha,1))
+), $vars);
+
 // #endregion
+
+
 
 // #region fonts
 
