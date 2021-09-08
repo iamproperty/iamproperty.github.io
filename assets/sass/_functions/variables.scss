@@ -108,12 +108,12 @@ $non-theme-colors: map-merge((
 }
 
 $vars: map-merge((
-  "body-rgb": to-rgb($colour-body),
-  "white-rgb": to-rgb(#ffffff),
-  "black-rgb": to-rgb(#000000),
-  "body":  rgba(var(--colour-body-rgb),var(--alpha,1)),
-  "white": rgba(var(--colour-white-rgb),var(--alpha,1)),
-  "black": rgba(var(--colour-black-rgb),var(--alpha,1))
+  "--colour-body-rgb": to-rgb($colour-body),
+  "--colour-white-rgb": to-rgb(#ffffff),
+  "--colour-black-rgb": to-rgb(#000000),
+  "--colour-body":  rgba(var(--colour-body-rgb),var(--alpha,1)),
+  "--colour-white": rgba(var(--colour-white-rgb),var(--alpha,1)),
+  "--colour-black": rgba(var(--colour-black-rgb),var(--alpha,1))
 ), $vars);
 
 // #endregion

@@ -272,6 +272,10 @@ export const routes = [
       {
         path: 'filter-by-age',
         component: () => import('../views/examples/FilterByAge.vue')
+      },
+      {
+        path: 'related-cards',
+        component: () => import('../views/examples/RelatedCards.vue')
       }
     ]
   },

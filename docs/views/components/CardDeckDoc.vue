@@ -28,6 +28,12 @@
     <CardDeck :items="propertyListing" :smCols="1" :mdCols="1" btnType="link" class="visualtest" titleClass="h6"></CardDeck>
     
     <div class="container">
+      <h2>Card deck examples</h2>
+      <p>This component can be configured in various ways with different types of cards alongside changing background of the container.</p>
+      <a href="/examples#card-decks" class="btn btn-secondary">See card deck examples</a>
+    </div>
+
+    <div class="container">
       <h2>HTML code example</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>

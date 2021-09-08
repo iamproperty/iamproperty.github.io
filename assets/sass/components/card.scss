@@ -108,6 +108,10 @@ a.card {
 // #region Card Deck
 .card-deck.container:not([data-card-type="simple"]) {
   padding-bottom: 3rem;
+
+  &[class*="bg-"] {
+    padding-bottom: 5rem;
+  }
 }
 // #endregion
 
