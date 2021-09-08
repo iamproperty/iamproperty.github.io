@@ -25,6 +25,9 @@
     margin-inline: 0.25em;
   }
 
+  &[class*="text-"]{
+    fill: currentColor;
+  }
 
   & + .icon {
     margin-inline-start: 1rem;

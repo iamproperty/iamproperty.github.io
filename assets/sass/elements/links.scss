@@ -1,4 +1,5 @@
-a {
+a,
+.link {
   @include var (color, --colour-link);
   display: inline-block;
   min-height: em(28);
@@ -21,16 +22,20 @@ a {
     transition: .3s ease-in;
   }
 
-  &:not(.text-decoration-none):not(.btn):hover:before {
+  &:not(.text-decoration-none):not(.btn):hover:before,
+  .card:hover &:before {
     width: 0%;
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  .card:hover &,
+  .card:focus &  {
     @include var (color, --colour-hover);
   }
 
-  &:active {
+  &:active,
+  .card:active & {
     @include var (color, --colour-active);
   }
 

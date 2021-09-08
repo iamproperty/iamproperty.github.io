@@ -68,22 +68,30 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
-    --colour-#{$color}: rgba(#{$value},var(--alpha,1))
+    --colour-#{$color}-rgb: #{$value}
+  ), $vars);
+}
+@each $color, $value in $theme-colors-rgb {
+
+  $vars: map-merge((
+    --colour-#{$color}: rgba(var(--colour-#{$color}-rgb),var(--alpha,1))
   ), $vars);
 }
 
 //  RGB Theme colours
 @function show-css-var($identifier) {
-  @return var(--colour-#{$identifier});
+  @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-bg-opacity,1));
+}
+@function show-css-var-text($identifier) {
+  @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-text-opacity,1));
 }
 $utilities-bg-colors: map-loop($utilities-colors, show-css-var, "$key");
-$utilities-text-colors: map-loop($utilities-colors, show-css-var, "$key");
+$utilities-text-colors: map-loop($utilities-colors, show-css-var-text, "$key");
 
 // Colours that we want setting but not used for Bootstraps mixins, i.e. .text-primary, .bg-muted
 $non-theme-colors: ();
 $non-theme-colors: map-merge((
   "muted":      $colour-muted,
-  "body":             $colour-body,
   "border":           $colour-border,
   "link":             $colour-link,
   "focus":            $colour-focus,
@@ -98,7 +106,19 @@ $non-theme-colors: map-merge((
     --colour-#{$color}: #{$value}
   ), $vars);
 }
+
+$vars: map-merge((
+  "body-rgb": to-rgb($colour-body),
+  "white-rgb": to-rgb(#ffffff),
+  "black-rgb": to-rgb(#000000),
+  "body":  rgba(var(--colour-body-rgb),var(--alpha,1)),
+  "white": rgba(var(--colour-white-rgb),var(--alpha,1)),
+  "black": rgba(var(--colour-black-rgb),var(--alpha,1))
+), $vars);
+
 // #endregion
+
+
 
 // #region fonts
 
@@ -137,7 +157,8 @@ $font-sizes: (
   3: $h3-font-size,
   4: $h4-font-size,
   5: $h5-font-size,
-  6: $h6-font-size
+  6: $h6-font-size,
+  'badge': $badge-font-size
 );
 
 @each $size, $value in $font-sizes {
@@ -190,12 +211,12 @@ $btn-padding-x-md: $btn-padding-x;
 // #region Cards
 $card-border-width:                 0;
 $card-border-radius:                rem(10);
-$card-spacer-y: rem(24);
-$card-spacer-x: rem(28);
+$card-spacer-y: 1.5rem;
+$card-spacer-x: 1.25rem;
 
 
 $card-cap-padding-y: 1.5rem;
-$card-cap-padding-x: 1.75rem;
+$card-cap-padding-x: 1.25rem;
 
 
 
@@ -210,7 +231,7 @@ $icon-arrow: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' wid
 $vars: map-merge((
   --icon-blank: #{escape-svg($icon-blank)},
   --icon-sort: #{$icon-sort},
-  --icon-arrow: #{escape-svg($icon-arrow)}
+  --icon-arrow: #{escape-svg($icon-arrow)},
 ), $vars);
 // #endregion
 
