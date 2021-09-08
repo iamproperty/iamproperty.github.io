@@ -105,9 +105,62 @@ a.card {
 }
 // #endregion
 
+// #region Quick link card
+[data-type="quick"]{
+  
+  .card-header,
+  .card-footer,
+  .card-body > *:not(.card-title) {
+    display: none;
+  }
+
+  .card-title {
+    margin-bottom: 0;
+    padding-left: 2em;
+    position: relative;
+
+    &:before,
+    &:after {
+
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.2em;
+      height: 1.2em;
+    }
+    &:before  {
+
+      left: 0.05em;
+      background: currentColor;
+      mask-image: escape-svg($accordion-button-icon);
+      mask-size: 50%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+    
+      -webkit-mask-image: escape-svg($accordion-button-icon);
+      -webkit-mask-size: 50%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
+
+    &:after {
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+
+  }
+}
+// #endregion
+
 // #region Card Deck
 .card-deck.container:not([data-card-type="simple"]) {
+
   padding-bottom: 3rem;
+
+  > .row:first-child {
+    padding-top: 0.5rem;
+  }
 
   &[class*="bg-"] {
     padding-bottom: 5rem;
