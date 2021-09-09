@@ -84,7 +84,7 @@
     --btn-text-hover:  #ffffff;
   }
 
-  [class*="bg-"] & {
+  [class*="bg-"]:not(.prevent-invert) & {
 
     --btn-bg: var(--colour-primary);
     --btn-bg-hover: transparent;

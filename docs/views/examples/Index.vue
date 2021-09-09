@@ -6,5 +6,9 @@
     <ul>
       <li><a href="/examples/filter-by-age">Filter by age</a></li>
     </ul>
+    <h2 id="card-decks">Card decks</h2>
+    <ul>
+      <li><a href="/examples/related-cards">Related cards</a></li>
+    </ul>
   </div>
 </template>

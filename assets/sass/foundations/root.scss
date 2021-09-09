@@ -14,9 +14,9 @@
 
 
 /* Override the colours when on a drark background */
-.bg-primary,
-.bg-dark,
-.bg-danger {
+.bg-primary:not(.prevent-invert),
+.bg-dark:not(.prevent-invert),
+.bg-danger:not(.prevent-invert) {
   --colour-link: white;
   --colour-hover: white;
   --colour-active: white;
@@ -26,7 +26,7 @@
   color: white;
 }
 
-.bg-light {
+.bg-light:not(.prevent-invert) {
   --colour-heading: var(--colour-dark);
   color: var(--colour-dark);
 }

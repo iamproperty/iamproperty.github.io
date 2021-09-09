@@ -9,13 +9,13 @@
     <div class="container visualtest">
       <div class="row">
         <div class="col mw-fit-content pb-4">
-          <span class="circle"></span>
+          <span class="circle circle-example"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle text-info"></span>
+          <span class="circle circle-example text-info"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle text-info border-2"></span>
+          <span class="circle circle-example text-info border-2"></span>
         </div>
       </div>
     </div>
@@ -26,22 +26,22 @@
     <div class="container visualtest">
       <div class="row">
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle--stripe"></span>
+          <span class="circle circle-example circle--stripe"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle--cross text-primary"></span>
+          <span class="circle circle-example circle--cross text-primary"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle--plus text-danger"></span>
+          <span class="circle circle-example circle--plus text-danger"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle--dots text-info"></span>
+          <span class="circle circle-example circle--dots text-info"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle--gradient"></span>
+          <span class="circle circle-example circle--gradient"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle--stripe border-0"></span>
+          <span class="circle circle-example circle--stripe border-0"></span>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
       
       <div class="row">
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle--cross text-primary mb-1" style="font-size: 18.75rem;"></span>
+          <span class="circle circle-example circle--cross text-primary mb-1" style="font-size: 18.75rem;"></span>
           <span class="d-block">font-size: 300px;</span>
           <span class="d-block">height: 1em;</span>
           <span class="d-block">width: 1em;</span>
@@ -61,6 +61,21 @@
     <div class="container">
       <h2>HTML code example</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
+    </div>
+    <div class="container">
+      <h2>Circle patterns</h2>
+      <p>Circles can be added to the container element and they will automatically be positioned depending upon the container class.</p>
+    </div>
+    <div class="container circle-pattern bg-dark visualtest">
+      <span class="h2 text-center mx-auto">Default pattern</span>
+      <span class="circle circle--stripe text-light opacity-50"></span>
+      <span class="circle circle--cross text-white opacity-75"></span>
+    </div>
+    <div class="container circle-pattern-2 bg-light visualtest">
+      <span class="h2 text-center mx-auto">Pattern 2</span>
+      <p class="text-center mx-auto">Add <strong>.circle-pattern-2</strong> class to the container.</p>
+      <span class="circle circle--stripe text-dark"></span>
+      <span class="circle circle--cross text-white"></span>
     </div>
   </main>
 </template>
@@ -77,12 +92,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.circle {
+.circle-example {
   font-size: 6rem;
 }
 @media (min-width: 62em){
-  .circle {
+  .circle-example {
     font-size: 12.5rem;
   }
+}
+
+[class*="circle-pattern"] {
+  min-height: 40rem;
 }
 </style>
