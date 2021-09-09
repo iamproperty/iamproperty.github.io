@@ -1,7 +1,7 @@
 .icon {
   fill: transparent;
   stroke: transparent;
-  @include var(color,--colour-primary);
+  @include var(color,--colour-primary-theme);
   width: rem(64);
   height: rem(64);
   display: inline-block;
@@ -10,7 +10,7 @@
     fill: #ffffff;
   }
   .icon__fill {
-    @include var(fill,--colour-secondary);
+    @include var(fill,--colour-secondary-theme);
   }
   .icon__outline {
     stroke-width: 3px;
