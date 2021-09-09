@@ -203,6 +203,14 @@ export const routes = [
         component: () => import('../views/components/BannerDoc.vue')
       },
       {
+        path: 'card',
+        name: 'Card',
+        meta: {
+          title: 'Card | Components | IAM Key'
+        },
+        component: () => import('../views/components/CardDoc.vue')
+      },
+      {
         path: 'card-deck',
         name: 'Card Deck',
         meta: {
@@ -276,6 +284,10 @@ export const routes = [
       {
         path: 'related-cards',
         component: () => import('../views/examples/RelatedCards.vue')
+      },
+      {
+        path: 'insight-cards',
+        component: () => import('../views/examples/InsightCards.vue')
       }
     ]
   },
