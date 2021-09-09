@@ -28,6 +28,12 @@
     <CardDeck :items="propertyListing" :smCols="1" :mdCols="1" btnType="link" class="visualtest" titleClass="h6"></CardDeck>
     
     <div class="container">
+      <h2>Quick link card</h2>
+      <p>A very simple card to just show the card title.</p>
+    </div>
+    <CardDeck :items="items" cardType="quick" class="bg-dark visualtest"></CardDeck>
+    
+    <div class="container">
       <h2>Card deck examples</h2>
       <p>This component can be configured in various ways with different types of cards alongside changing background of the container.</p>
       <a href="/examples#card-decks" class="btn btn-secondary">See card deck examples</a>
