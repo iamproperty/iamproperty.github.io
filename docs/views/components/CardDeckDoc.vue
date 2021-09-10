@@ -8,31 +8,7 @@
       <p>Need a set of equal width and height cards that aren’t attached to one another? Use card decks.</p>
     </div>
     <CardDeck :items="items" class="visualtest" data-test="test1"></CardDeck>
-    
-    <div class="container">
-      <h2>Simple card</h2>
-      <p>A reduced version of the card without a border or extra padding.</p>
-    </div>
-    <CardDeck :items="items" cardType="simple" :gap="0" class="visualtest"></CardDeck>
-    
-    <div class="container">
-      <h2>Property card</h2>
-      <p>A more complex card with lots of key information but is still made using the same component.</p>
-    </div>
-    <CardDeck :items="properties" :smCols="2" :mdCols="4" btnType="link" class="visualtest" titleClass="h6"></CardDeck>
-    
-    <div class="container">
-      <h2>Property Listing card</h2>
-      <p>Property cards by default shift the image to the left on cards when given more space.</p>
-    </div>
-    <CardDeck :items="propertyListing" :smCols="1" :mdCols="1" btnType="link" class="visualtest" titleClass="h6"></CardDeck>
-    
-    <div class="container">
-      <h2>Quick link card</h2>
-      <p>A very simple card to just show the card title.</p>
-    </div>
-    <CardDeck :items="items" cardType="quick" class="bg-dark visualtest"></CardDeck>
-    
+
     <div class="container">
       <h2>Card deck examples</h2>
       <p>This component can be configured in various ways with different types of cards alongside changing background of the container.</p>

@@ -15,6 +15,10 @@ a.card {
   &:hover,
   &:focus {
     --spread: #{rem(6)};
+
+    .card-body *:not(.badge) {
+      color: var(--colour-hover)!important;
+    }
   }
 
   &:active {
@@ -94,6 +98,12 @@ a.card {
   box-shadow: none;
   min-height: 0;
   
+  .card-header__wrapper {
+
+    @include border-radius($card-border-radius);
+    margin-bottom: 1rem;
+  }
+
   .card-body {
     padding-top: 0;
   }
@@ -171,39 +181,33 @@ a.card {
 
 // #region Fake container query
 
-@include media-breakpoint-up(sm) {
+@mixin vertical-card(){
+  .card-header__wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45.8%;
+    height: 100%;
+    padding: 0;
+  }
+  .card-header__wrapper ~ .card-body,
+  .card-header__wrapper ~ .card-footer {
+    padding-left: calc(45.8% + #{$card-spacer-x + $card-spacer-x});
+  }
+}
+
+@media screen and (min-width: 36em) and (max-width: 61.99em) {
 
   .row-cols-sm-1 {
-    .card-header__wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 45.8%;
-      height: 100%;
-      padding: 0;
-    }
-    .card-header__wrapper ~ .card-body,
-    .card-header__wrapper ~ .card-footer {
-      padding-left: calc(45.8% + #{$card-spacer-x + $card-spacer-x});
-    }
+    @include vertical-card();
   }
 }
 
 @include media-breakpoint-up(md) {
 
   .row-cols-md-1 {
-    .card-header__wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 45.8%;
-      height: 100%;
-      padding: 0;
-    }
-    .card-header__wrapper ~ .card-body,
-    .card-header__wrapper ~ .card-footer {
-      padding-left: calc(45.8% + #{$card-spacer-x + $card-spacer-x});
-    }
+    
+    @include vertical-card();
   }
 }
 

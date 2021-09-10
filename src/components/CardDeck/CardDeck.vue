@@ -3,7 +3,7 @@
       <slot></slot>
       <div :class="`row row-cols-${cols} row-cols-sm-${smCols} row-cols-md-${mdCols} ${gap ? `g-${gap}`: ``}`">
         <div class="col" v-for="(value,index) in items" :key="index">
-          <Card :title="value.title" :subTitle="value.subTitle" :content="value.content" :details="value.details" :link="value.link" :type="cardType" :btnType="btnType" :image="value.image" :titleClass="titleClass"></Card>
+          <Card :class="cardClass" :title="value.title" :subTitle="value.subTitle" :content="value.content" :details="value.details" :link="value.link" :type="cardType" :btnType="btnType" :image="value.image" :titleClass="titleClass" :ctaText="ctaText"></Card>
         </div>
       </div>
       <slot name="after"></slot>
@@ -47,11 +47,19 @@ export default {
       type: String,
       required: false
     },
+    cardClass: {
+      type: String,
+      required: false
+    },
     btnType: {
       type: String,
       required: false
     },
     titleClass: {
+      type: String,
+      required: false
+    },
+    ctaText: {
       type: String,
       required: false
     }

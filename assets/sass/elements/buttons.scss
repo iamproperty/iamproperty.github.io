@@ -115,14 +115,14 @@
     --btn-outline: #ffffff;
     --btn-outline-hover: #ffffff;
     --btn-text-hover:  #ffffff;
-    --btn-text:  var(--colour-primary);
+    --btn-text:  var(--colour-primary-theme);
 
     &.btn-tertiary {
 
       --btn-bg: transparent;
       --btn-bg-hover: #ffffff;
       --btn-text:  #ffffff;
-      --btn-text-hover:  var(--colour-primary);
+      --btn-text-hover:  var(--colour-primary-theme);
     }
   }
 
@@ -131,16 +131,18 @@
     --btn-bg: #ffffff;
     --btn-bg-hover: transparent;
     --btn-outline: #ffffff;
-    --btn-outline-hover: var(--colour-dark);
-    --btn-text-hover: var(--colour-dark);
-    --btn-text: var(--colour-dark);
+    --btn-outline-hover: var(--colour-dark-theme);
+    --btn-text-hover: var(--colour-dark-theme);
+    --btn-text: var(--colour-dark-theme);
 
     &.btn-tertiary {
 
       --btn-bg: transparent;
       --btn-bg-hover: #ffffff;
-      --btn-text:  #ffffff;
-      --btn-text-hover:  var(--colour-primary);
+      --btn-text:  var(--colour-dark-theme);
+      --btn-outline:  var(--colour-dark-theme);
+      --btn-outline-hover: #ffffff;
+      --btn-text-hover:  var(--colour-dark-theme);
     }
   }
 }

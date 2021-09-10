@@ -17,6 +17,14 @@
 .bg-primary:not(.prevent-invert),
 .bg-dark:not(.prevent-invert),
 .bg-danger:not(.prevent-invert) {
+  > * {
+
+    --colour-secondary-rgb: 255,255,255;
+    --colour-primary-rgb: 255,255,255;
+    --colour-secondary: white;
+    --colour-primary: white;
+  }
+  --colour-body: white;
   --colour-link: white;
   --colour-hover: white;
   --colour-active: white;

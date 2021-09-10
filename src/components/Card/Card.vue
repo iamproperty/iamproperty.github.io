@@ -3,14 +3,14 @@
     <div class="card-header__wrapper" v-if="image">
       <img :src="image" alt="" loading="lazy" class="card-image" />
       <div class="card-header">
-        <span class="badge bg-primary p-2 me-2" v-if="this.details.status" v-html="cardStatus()"></span>
-        <span class="badge bg-black bg-opacity-50 p-2 align-self-end" v-if="this.details.images || this.details.videos" v-html="cardMedia()"></span>
+        <span class="badge bg-primary p-2 me-2" v-if="this.details && this.details.status" v-html="cardStatus()"></span>
+        <span class="badge bg-black bg-opacity-50 p-2 align-self-end" v-if="this.details && (this.details.images || this.details.videos)" v-html="cardMedia()"></span>
       </div>
       <img v-if="details && details.logo" :src="details.logo" alt="" loading="lazy" class="card-logo" />
     </div>
     <div class="card-body" v-html="cardContent()"></div>
     <div class="card-footer">
-      <span :class="`${btnType == 'link' ? `link` : `btn btn-${btnType}`} mb-0`">Find out more<span class="visually-hidden"> about {{title}}</span></span>
+      <span :class="`${btnType == 'link' ? `link` : `btn btn-${btnType}`} mb-0`">{{ctaText}}<span class="visually-hidden"> about {{title}}</span></span>
     </div>
   </a>
 </template>
@@ -55,6 +55,11 @@ export default {
       required: false,
       default: 'secondary'
     },
+    ctaText: {
+      type: String,
+      required: false,
+      default: 'Find out more'
+    },
     image: {
       type: String,
       required: false
@@ -94,6 +99,7 @@ export default {
         const details = `
         ${this.details && this.details.guidePrice ? `<span class="d-block h6 text-dark mb-1">Price guide: ${this.details.guidePrice}</span>` : ``}
         ${this.details && this.details.auctionTime ? `<span class="d-block h6 text-primary mb-4">Auction time left: ${this.details.auctionTime}</span>` : ``}
+        ${this.details && this.details.readTime ? `<span class="d-block h6 text-primary mb-4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="23" viewBox="0 0 22 23" class="icon ms-0 me-2"><path d="M11 1.63c-5.176 0-9.37 4.194-9.37 9.37 0 5.176 4.194 9.37 9.37 9.37 5.176 0 9.37-4.194 9.37-9.37 0-5.176-4.194-9.37-9.37-9.37M11 0c6.075 0 11 4.925 11 11s-4.925 11-11 11S0 17.075 0 11 4.925 0 11 0" fill="var(--colour-secondary)" /><path d="M9.62 5.39c0-.473.368-.856.82-.856.454 0 .822.383.822.855v6.27l3.25 1.898c.395.23.536.75.314 1.16-.22.412-.72.558-1.115.328l-4.09-2.39V5.39z" fill="var(--colour-primary)"/></svg>${this.details.readTime}</span>` : ``}
         `;
 
         return `${tags}${title}${details}${this.content}`;
