@@ -1,3 +1,5 @@
+// #region Defaul Card
+// Reset the link
 a.card {
 
   &:before {
@@ -25,7 +27,6 @@ a.card {
     --spread: #{rem(3)};
   }
 }
-
 
 .card-header__wrapper {
   padding-bottom: 0;
@@ -72,8 +73,6 @@ a.card {
   }
 }
 
-
-
 .card-body {
 
   color: var(--colour-body);
@@ -87,13 +86,15 @@ a.card {
   padding-top: 0;
 }
 
+// Add a default margin bottom
 .row:not([class*="g-"]) .card {
 
   margin-bottom: 1rem;
 }
+// #endregion
 
-// #region Simple card
-[data-type="simple"]{
+// #region Simple card variant
+.card--simple {
 
   box-shadow: none;
   min-height: 0;
@@ -116,7 +117,7 @@ a.card {
 // #endregion
 
 // #region Quick link card
-[data-type="quick"]{
+.card--quick{
   
   .card-header,
   .card-footer,
@@ -178,9 +179,7 @@ a.card {
 }
 // #endregion
 
-
-// #region Fake container query
-
+// #region Fake container query that transforms the card into a vertical card
 @mixin vertical-card(){
   .card-header__wrapper {
     position: absolute;
@@ -210,12 +209,9 @@ a.card {
     @include vertical-card();
   }
 }
-
 // #endregion
 
-
-
-
+// #region Featured Card deck
 .card-deck--featured {
 
   > .row > .col:nth-child(4) ~ .col {
@@ -273,3 +269,4 @@ a.card {
 
   }
 }
+// #endregion
