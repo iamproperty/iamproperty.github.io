@@ -9,6 +9,15 @@
     </div>
     <CardDeck :items="items" class="visualtest" data-test="test1"></CardDeck>
 
+
+
+    <div class="container pb-0">
+      <h2>Card deck featured</h2>
+      <p>...</p>
+    </div>
+    <CardDeck :items="items2" class="card-deck--featured visualtest"></CardDeck>
+
+
     <div class="container">
       <h2>Card deck examples</h2>
       <p>This component can be configured in various ways with different types of cards alongside changing background of the container.</p>
@@ -77,6 +86,44 @@ export default {
         {
           link: '/components/card-deck',
           title: 'Card 3',
+          content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur.</p>`
+        }
+      ],
+      items2: [
+        {
+          image: require('../../assets/house.jpeg'),
+          link: '/components/card-deck',
+          title: 'Card 1',
+          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
+        },
+        {
+          image: require('../../assets/house.jpeg'),
+          link: '/components/card-deck',
+          title: 'Card 2',
+          content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p>`
+        },
+        {
+          image: require('../../assets/house.jpeg'),
+          link: '/components/card-deck',
+          title: 'Card 3',
+          content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p>`
+        },
+        {
+          image: require('../../assets/house.jpeg'),
+          link: '/components/card-deck',
+          title: 'Card 4',
+          content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p>`
+        },
+        {
+          image: require('../../assets/house.jpeg'),
+          link: '/components/card-deck',
+          title: 'Card 5',
+          content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur.</p>`
+        },
+        {
+          image: require('../../assets/house.jpeg'),
+          link: '/components/card-deck',
+          title: 'Card 6',
           content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur.</p>`
         }
       ],

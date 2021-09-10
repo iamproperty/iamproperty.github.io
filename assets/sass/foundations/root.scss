@@ -10,6 +10,7 @@
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
   --alpha: var(--bs-bg-opacity);
+  --#{$variable-prefix}gradient: #{$gradient};
 }
 
 

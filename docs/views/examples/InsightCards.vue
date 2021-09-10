@@ -4,14 +4,12 @@
       <ul class="breadcrumb mb-0">
         <li><a href="/examples">Examples</a></li>
       </ul>
-      <h1>Insight cards</h1>
-      <p>A simple card type with a link at the bottom instead of a button and a read time detail set.</p>
+      <h1>Featured Insights</h1>
     </div>
 
-    <CardDeck :items="items" :smCols="2" :mdCols="4" cardType="simple" btnType="link" ctaText="Read more" titleClass="h6 fw-normal font-body text-uppercase">
-    </CardDeck>
-
-    <CardDeck class="bg-dark" :items="items" :smCols="2" :mdCols="4" cardType="simple" cardClass="bg-dark" btnType="link" ctaText="Read more" titleClass="text-primary text-uppercase">
+    <CardDeck class="card-deck--featured bg-gradient circle-pattern-2" :items="items" :smCols="1" ctaText="Read more" titleClass="text-primary text-uppercase">
+      <span class="circle circle--cross text-primary"></span>
+      <span class="circle circle--stripe text-primary opacity-25"></span>
     </CardDeck>
 
     <div class="container">
@@ -30,7 +28,7 @@ export default {
   },
   data () {
     return {
-      htmlUsage: `<CardDeck :items="items" :smCols="2" :mdCols="4" cardType="simple" btnType="link" ctaText="Read more" titleClass="h6 fw-normal font-body text-uppercase"></CardDeck>`,
+      htmlUsage: `<CardDeck class="card-deck--featured bg-gradient" :items="items" :smCols="1" ctaText="Read more" titleClass="text-primary text-uppercase"></CardDeck>`,
       items: [
         {
           image: require('../../assets/house.jpeg'),

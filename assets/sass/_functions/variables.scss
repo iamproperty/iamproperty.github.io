@@ -95,6 +95,8 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 $utilities-bg-colors: map-loop($utilities-colors, show-css-var, "$key");
 $utilities-text-colors: map-loop($utilities-colors, show-css-var-text, "$key");
 
+
+
 // Colours that we want setting but not used for Bootstraps mixins, i.e. .text-primary, .bg-muted
 $non-theme-colors: ();
 $non-theme-colors: map-merge((
@@ -122,6 +124,8 @@ $vars: map-merge((
   "--colour-white": rgba(var(--colour-white-rgb),var(--alpha,1)),
   "--colour-black": rgba(var(--colour-black-rgb),var(--alpha,1))
 ), $vars);
+
+$gradient: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info) 100%);
 
 // #endregion
 
