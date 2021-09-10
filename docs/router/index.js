@@ -219,6 +219,14 @@ export const routes = [
         component: () => import('../views/components/CardDeckDoc.vue')
       },
       {
+        path: 'carousel',
+        name: 'Carousel',
+        meta: {
+          title: 'Carousel | Components | IAM Key'
+        },
+        component: () => import('../views/components/CarouselDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {

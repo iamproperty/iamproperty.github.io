@@ -18,7 +18,7 @@ import navbar from './modules/navbar'
 import table from './modules/table'
 import accordion from './modules/accordion'
 import testimonial from './modules/testimonial'
-
+import carousel from './modules/carousel'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -41,5 +41,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // Testimonial
   Array.from(document.querySelectorAll('.testimonial')).forEach((arrayElement, index) => {
     testimonial(arrayElement);
+  });
+  // Carousel
+  Array.from(document.querySelectorAll('.carousel')).forEach((arrayElement, index) => {
+    carousel(arrayElement);
   });
 });

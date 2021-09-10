@@ -1,0 +1,129 @@
+.carousel {
+  padding-bottom: 3rem;
+
+  .carousel__inner {
+
+    --bs-gutter-x: #{$grid-gutter-width};
+    overflow: auto;
+    scroll-snap-type: x mandatory;
+    margin-right: calc(var(--bs-gutter-x) * -.5);
+    margin-left: calc(var(--bs-gutter-x) * -.5);
+
+    > .row {
+      flex-wrap: nowrap;
+      margin: 0;
+
+      > .col {
+        padding-top: rem(36);
+        padding-bottom: rem(24);
+        scroll-snap-align: start;
+        scroll-padding: calc(var(--bs-gutter-x) * -1);
+      }
+    }
+  } 
+}
+
+
+.carousel .carousel__controls {
+  text-align: center;
+  margin-left: -1rem;
+  margin-right: -1rem;
+
+  a {
+    width: 1rem;
+    height: 1rem;
+    min-height: 1rem;
+    border-radius: 50%;
+    text-indent: -300%;
+    overflow: hidden;
+    background: currentColor;
+    padding: 0;
+    margin: 0 0.5rem 0.5rem 0.5rem;
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+.carousel .carousel__controls > a:nth-child(10) ~ a {
+
+  display: none;
+}
+
+
+.carousel .carousel__inner > .row > .col:first-child {
+  margin-left: 0!important;
+}
+
+@include media-breakpoint-up(sm) {
+
+  .carousel .carousel__controls > a:nth-child(10) ~ a {
+
+    display: inline-block;
+  }
+
+  .carousel .carousel__inner > .row[class*="row-cols-sm-"] > .col{
+    scroll-snap-align: unset;
+  }
+
+  .carousel .carousel__inner > .row-cols-sm-2 > .col:nth-child(odd),
+  .carousel .carousel__inner > .row-cols-sm-3 > .col:nth-child(3n+1),
+  .carousel .carousel__inner > .row-cols-sm-4 > .col:nth-child(4n+1),
+  .carousel .carousel__inner > .row-cols-sm-5 > .col:nth-child(5n+1),
+  .carousel .carousel__inner > .row-cols-sm-6 > .col:nth-child(6n+1) {
+    scroll-snap-align: start;
+
+    body:not(.js-enabled) & {
+      margin-left: 4rem;
+    }
+  }
+
+  .carousel .carousel__controls.cols-sm-2 > a:not(:nth-child(odd)),
+  .carousel .carousel__controls.cols-sm-3 > a:not(:nth-child(3n+1)),
+  .carousel .carousel__controls.cols-sm-4 > a:not(:nth-child(4n+1)),
+  .carousel .carousel__controls.cols-sm-5 > a:not(:nth-child(5n+1)),
+  .carousel .carousel__controls.cols-sm-6 > a:not(:nth-child(6n+1)) {
+    display: none;
+  }
+}
+
+@include media-breakpoint-up(md) {
+
+  .carousel .carousel__inner > .row[class*="row-cols-md-"] > .col{
+    scroll-snap-align: unset;
+    margin-left: 0;
+  }
+  
+  .carousel .carousel__inner > .row-cols-md-2 > .col:nth-child(odd),
+  .carousel .carousel__inner > .row-cols-md-3 > .col:nth-child(3n+1),
+  .carousel .carousel__inner > .row-cols-md-4 > .col:nth-child(4n+1),
+  .carousel .carousel__inner > .row-cols-md-5 > .col:nth-child(5n+1),
+  .carousel .carousel__inner > .row-cols-md-6 > .col:nth-child(6n+1) {
+    scroll-snap-align: start;
+    
+    body:not(.js-enabled) & {
+
+      margin-left: calc(50vw);
+    }
+  }
+
+  .carousel .carousel__controls.cols-md-2 > a:not(:nth-child(odd)),
+  .carousel .carousel__controls.cols-md-3 > a:not(:nth-child(3n+1)),
+  .carousel .carousel__controls.cols-md-4 > a:not(:nth-child(4n+1)),
+  .carousel .carousel__controls.cols-md-5 > a:not(:nth-child(5n+1)),
+  .carousel .carousel__controls.cols-md-6 > a:not(:nth-child(6n+1)) {
+    display: none;
+  }
+}
+
+body.js-enabled .carousel__inner {
+  // FireFox
+  scrollbar-width: none;
+  // IE10+
+  -ms-overflow-style: none;
+}
+body.js-enabled .carousel__inner::-webkit-scrollbar {
+  // Chrome, Safari, Edge
+  display: none;
+}
