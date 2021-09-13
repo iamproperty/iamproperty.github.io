@@ -241,31 +241,6 @@ export const routes = [
           title: 'Testimonial | Components | IAM Key'
         },
         component: () => import('../views/components/TestimonialDoc.vue')
-      },
-      {
-        path: 'task-title',
-        name: 'Task Title',
-        component: () => import('../views/components/TaskTitle.vue')
-      },
-      {
-        path: 'key-stats',
-        name: 'Key Stats',
-        component: () => import('../views/components/KeyStats.vue')
-      },
-      {
-        path: 'property-task-intro',
-        name: 'Property Task Intro',
-        component: () => import('../views/components/PropertyTaskIntro.vue')
-      },
-      {
-        path: 'vendor-table',
-        name: 'Vendor Table',
-        component: () => import('../views/components/VendorTable.vue')
-      },
-      {
-        path: 'key-information',
-        name: 'Key Information',
-        component: () => import('../views/components/KeyInformation.vue')
       }
     ]
   },
