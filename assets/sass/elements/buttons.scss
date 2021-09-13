@@ -146,3 +146,73 @@
     }
   }
 }
+
+
+// #region Direction button
+.btn-next, 
+.btn-prev {
+  --marker-bg: var(--colour-secondary);
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background: var(--marker-bg);
+  border-radius: 100%;
+  width: rem(36);
+  height: rem(36);
+
+  @include media-breakpoint-up(md) {
+
+    width: rem(48);
+    height: rem(48);
+  }
+  text-indent: -300rem;
+  overflow: hidden;
+  border: none;
+  position: relative;
+  margin: 0 rem(8);
+  padding: 0;
+
+  &:disabled {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: currentColor;
+    mask-image: escape-svg($accordion-button-icon);
+    mask-size: 50%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 60%;
+    -webkit-mask-image: escape-svg($accordion-button-icon);
+    -webkit-mask-size: 50%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 55% 50%;
+    transform: rotate(0deg);
+  }
+
+  &:hover,
+  &:focus {
+
+    background: var(--colour-warning);
+    color: var(--colour-hover);
+    border-radius: 100%;
+  }
+
+  &:active {
+    border-radius: 100%;
+  }
+}
+
+.btn-prev {
+  &:after {
+
+    transform: rotate(180deg);
+  }
+}
+// #endregion

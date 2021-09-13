@@ -7,8 +7,8 @@
             <img v-for="(value,index) in items" :key="index" :src="value.image ? value.image : 'data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='" alt="" :class="'h-100 w-100 object-cover' + (value.image ? '' : ' opacity-0')" />
           </div>
           <div class="testimonial__controls">
-            <button data-go="0" disabled class="testimonial__prev">Previous</button>
-            <button data-go="2" class="testimonial__next">Next</button>
+            <button data-go="0" disabled class="btn-prev">Previous</button>
+            <button data-go="2" class="btn-next">Next</button>
           </div>
         </div>
         <div class="col-md-7">

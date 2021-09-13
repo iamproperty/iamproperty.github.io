@@ -72,63 +72,15 @@
       transform: rotate(90deg) translate(0,-120%);
       transform-origin: center;
     }
-    button {
-      --marker-bg: var(--colour-secondary);
-      text-indent: 100%;
-      white-space: nowrap;
-      overflow: hidden;
-      background: var(--marker-bg);
-      border-radius: 100%;
-      width: rem(48);
-      height: rem(48);
-      text-indent: -300rem;
-      overflow: hidden;
-      border: none;
-      position: relative;
-      margin: 0 rem(8);
-
-      &:disabled {
-        opacity: 0.8;
-        pointer-events: none;
-      }
-
-      &:after {
-        content: "";
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        background: currentColor;
-        mask-image: escape-svg($accordion-button-icon);
-        mask-size: 50%;
-        mask-repeat: no-repeat;
-        mask-position: 50% 60%;
-        -webkit-mask-image: escape-svg($accordion-button-icon);
-        -webkit-mask-size: 50%;
-        -webkit-mask-repeat: no-repeat;
-        -webkit-mask-position: 55% 50%;
-        transform: rotate(0deg);
-      }
-
-      &:hover,
-      &:focus {
-
-        --marker-bg: var(--colour-warning);
-        color: var(--colour-hover);
-      }
-
-      &.testimonial__prev:after {
-
-        transform: rotate(180deg);
-      }
-    }
   }
 
   // Make space for the circle
   h2 {
-    padding: 3rem var(--testimonial-padding) 0 var(--testimonial-padding);
+    padding: 2rem var(--testimonial-padding) 0 var(--testimonial-padding);
 
+    @include media-breakpoint-up(sm) {
+      padding-top: 3rem;
+    }
     @include media-breakpoint-up(md) {
       padding-top: 9rem;
     }

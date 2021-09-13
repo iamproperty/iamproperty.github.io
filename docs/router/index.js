@@ -296,6 +296,14 @@ export const routes = [
       {
         path: 'insight-cards',
         component: () => import('../views/examples/InsightCards.vue')
+      },
+      {
+        path: 'news-promo-cards',
+        component: () => import('../views/examples/NewsPromoCards.vue')
+      },
+      {
+        path: 'logo-carousel',
+        component: () => import('../views/examples/LogoCarousel.vue')
       }
     ]
   },

@@ -10,6 +10,12 @@
     <ul>
       <li><a href="/examples/related-cards">Related cards</a></li>
       <li><a href="/examples/insight-cards">Featured insights</a></li>
+      <li><a href="/examples/news-promo-cards">News promo cards</a></li>
+    </ul>
+    <h2 id="carousels">Carousels</h2>
+    <ul>
+      <li><a href="/examples/news-promo-cards">News promo cards</a></li>
+      <li><a href="/examples/logo-carousel">Logo carousel</a></li>
     </ul>
   </div>
 </template>
