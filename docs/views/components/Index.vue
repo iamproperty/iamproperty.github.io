@@ -1,16 +1,14 @@
 <template>
-  <div class="container">
-    <h1>Components</h1>
-    <p>Configurable re-usable parts that build up a page.</p>
-    <nav>
-      <ul>
-        <li v-for="(page) in pages" :key="page.path"><router-link :to="'/components/'+page.path">{{page.name}}</router-link></li>
-      </ul>
-    </nav>
-  </div>
+  <main>
+    <CardDeck :items="pages" cardType="quick">
+      <h1>Components</h1>
+      <p>Configurable re-usable parts that build up a page.</p>
+    </CardDeck>
+  </main>
 </template>
 
 <script>
+import CardDeck from '@/components/CardDeck/CardDeck.vue'
 import {routes} from '../../router/index.js';
 
 const components = routes.reduce(function (arr, route) {
@@ -21,6 +19,9 @@ const components = routes.reduce(function (arr, route) {
     const children = route.children.reduce(function (acc, route) {
       // Remove the index
       if (route.path) {
+        route.link = '/components/'+route.path;
+        route.title = route.name;
+        route.content = '';
         acc.push(route);
       }
       return acc
@@ -32,6 +33,9 @@ const components = routes.reduce(function (arr, route) {
 }, {})
 
 export default {
+  components: {
+    CardDeck
+  },
   data () {
     return {
       pages: components
