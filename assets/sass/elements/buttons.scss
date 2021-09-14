@@ -126,7 +126,7 @@
     }
   }
 
-  [class*="bg-"].bg-light & {
+  [class*="bg-"].bg-light:not(.prevent-invert) & {
     
     --btn-bg: #ffffff;
     --btn-bg-hover: transparent;

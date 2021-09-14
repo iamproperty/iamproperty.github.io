@@ -9,7 +9,7 @@
     <h2 id="card-decks">Card decks</h2>
     <ul>
       <li><a href="/examples/related-cards">Related cards</a></li>
-      <li><a href="/examples/insight-cards">Insight cards</a></li>
+      <li><a href="/examples/insight-cards">Featured insights</a></li>
     </ul>
   </div>
 </template>

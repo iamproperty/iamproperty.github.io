@@ -1,3 +1,5 @@
+// #region Defaul Card
+// Reset the link
 a.card {
 
   &:before {
@@ -25,7 +27,6 @@ a.card {
     --spread: #{rem(3)};
   }
 }
-
 
 .card-header__wrapper {
   padding-bottom: 0;
@@ -72,8 +73,6 @@ a.card {
   }
 }
 
-
-
 .card-body {
 
   color: var(--colour-body);
@@ -87,13 +86,15 @@ a.card {
   padding-top: 0;
 }
 
+// Add a default margin bottom
 .row:not([class*="g-"]) .card {
 
   margin-bottom: 1rem;
 }
+// #endregion
 
-// #region Simple card
-[data-type="simple"]{
+// #region Simple card variant
+.card--simple {
 
   box-shadow: none;
   min-height: 0;
@@ -116,7 +117,7 @@ a.card {
 // #endregion
 
 // #region Quick link card
-[data-type="quick"]{
+.card--quick{
   
   .card-header,
   .card-footer,
@@ -178,9 +179,7 @@ a.card {
 }
 // #endregion
 
-
-// #region Fake container query
-
+// #region Fake container query that transforms the card into a vertical card
 @mixin vertical-card(){
   .card-header__wrapper {
     position: absolute;
@@ -198,17 +197,76 @@ a.card {
 
 @media screen and (min-width: 36em) and (max-width: 61.99em) {
 
-  .row-cols-sm-1 {
+  .card-deck .row-cols-sm-1 {
     @include vertical-card();
   }
 }
 
 @include media-breakpoint-up(md) {
 
-  .row-cols-md-1 {
+  .card-deck:not(.card-deck--featured) .row-cols-md-1 {
     
     @include vertical-card();
   }
 }
+// #endregion
 
+// #region Featured Card deck
+.card-deck--featured {
+
+  > .row > .col:nth-child(4) ~ .col {
+    display: none;
+  }
+
+  > .row > .col:not(:first-child) .card-header__wrapper {
+    display: none;
+  }
+
+  .row-cols-sm-1 > .col:not(:first-child) .card-header__wrapper ~ .card-body {
+    padding-left: 1.5rem;
+  }
+
+  .card-footer {
+    display: none;
+  }
+
+  @include media-breakpoint-up(md) {
+
+    > .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 41.66666667%; 
+      grid-template-rows: auto auto auto; 
+      gap: var(--bs-gutter-y) var(--bs-gutter-x); 
+      grid-template-areas: 
+        "featured featured card2"
+        "featured featured card3"
+        "featured featured card4";
+      margin-top:0;
+    }
+    > .row > .col:first-child {
+      grid-area: featured;
+    }
+    > .row > .col:not(:first-child) {
+      min-height: 0;
+    }
+
+    > .row > .col:nth-child(2) {
+      grid-area: card2;
+    }
+
+    > .row > .col:nth-child(3) {
+      grid-area: card3;
+    }
+
+    > .row > .col:nth-child(4) {
+      grid-area: card4;
+    }
+
+    > .row > .col {
+      width: 100%;
+      margin-top:0;
+    }
+
+  }
+}
 // #endregion

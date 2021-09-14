@@ -1,5 +1,5 @@
 <template>
-  <a :href="link" class="card" :data-type="type" :title="'Find out more: '+title+(subTitle ? ' - '+subTitle:'')">
+  <a :href="link" :class="'card'+(type?' card--'+type:'')" :title="'Find out more: '+title+(subTitle ? ' - '+subTitle:'')">
     <div class="card-header__wrapper" v-if="image">
       <img :src="image" alt="" loading="lazy" class="card-image" />
       <div class="card-header">

@@ -101,7 +101,10 @@
   }
 
   &.circle-pattern-2 > .circle ~ .circle {
-    display: none;
+    font-size: rem(450);
+    top: auto;
+    bottom: rem(-50);
+    left: rem(-175);
   }
 
   @include media-breakpoint-up(sm) {
@@ -109,6 +112,11 @@
       font-size: rem(450);
       top: rem(-75);
       right: rem(-200);
+    }
+    &.circle-pattern-2 > .circle ~ .circle {
+      font-size: rem(500);
+      bottom: rem(-75);
+      left: rem(-200);
     }
   }
 
