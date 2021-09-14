@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/foundations">Foundations</a></li>
+      </ul>
       <h1>Colours</h1>
       <p class="strapline">Our colour palette will help us create a distinctive identity and plays an important part in building brand recognition. It should be used within all designs and communications.</p>
       <h2>Theme Colours</h2>

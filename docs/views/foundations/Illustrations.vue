@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/foundations">Foundations</a></li>
+      </ul>
       <h1>Illustrations</h1>
       <p class="strapline">Illustrations create an approachable and engaging visual element on comms, aloowing us to present complex services in a simplified and understandable way. They also provide an alternative option to photography when the subject matter makes it difficult to find a stock image.</p>
       <p>Illustrations should also be loaded as SVGs rather than a raster image to maintain the crisp lines and sharpness. The characters and imagery can be composed either before hand as one whole new SVG file or via CSS. Using CSS alongside existing SVG assets while reduce the need for a new asset and encourage re-usability.</p>

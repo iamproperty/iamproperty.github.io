@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container pb-0">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/elements">Elements</a></li>
+      </ul>
       <h1>Buttons & links</h1>
     </div>
 

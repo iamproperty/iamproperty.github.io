@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container ">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/foundations">Foundations</a></li>
+      </ul>
       <h1>Grid</h1>
 
 
