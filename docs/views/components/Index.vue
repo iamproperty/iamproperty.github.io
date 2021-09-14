@@ -1,6 +1,6 @@
 <template>
   <main>
-    <CardDeck :items="pages" cardType="quick">
+    <CardDeck :items="pages" cardType="quick" :smCols="2">
       <h1>Components</h1>
       <p>Configurable re-usable parts that build up a page.</p>
     </CardDeck>
