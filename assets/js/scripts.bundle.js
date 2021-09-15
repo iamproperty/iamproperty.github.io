@@ -823,12 +823,12 @@
    * ------------------------------------------------------------------------
    */
 
-  const NAME$9 = 'alert';
-  const DATA_KEY$8 = 'bs.alert';
-  const EVENT_KEY$8 = `.${DATA_KEY$8}`;
+  const NAME$8 = 'alert';
+  const DATA_KEY$7 = 'bs.alert';
+  const EVENT_KEY$7 = `.${DATA_KEY$7}`;
 
-  const EVENT_CLOSE = `close${EVENT_KEY$8}`;
-  const EVENT_CLOSED = `closed${EVENT_KEY$8}`;
+  const EVENT_CLOSE = `close${EVENT_KEY$7}`;
+  const EVENT_CLOSED = `closed${EVENT_KEY$7}`;
   const CLASS_NAME_FADE$4 = 'fade';
   const CLASS_NAME_SHOW$6 = 'show';
 
@@ -842,7 +842,7 @@
     // Getters
 
     static get NAME() {
-      return NAME$9
+      return NAME$8
     }
 
     // Public
@@ -901,87 +901,6 @@
    */
 
   defineJQueryPlugin(Alert);
-
-  /**
-   * --------------------------------------------------------------------------
-   * Bootstrap (v5.1.0): button.js
-   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
-   * --------------------------------------------------------------------------
-   */
-
-  /**
-   * ------------------------------------------------------------------------
-   * Constants
-   * ------------------------------------------------------------------------
-   */
-
-  const NAME$8 = 'button';
-  const DATA_KEY$7 = 'bs.button';
-  const EVENT_KEY$7 = `.${DATA_KEY$7}`;
-  const DATA_API_KEY$5 = '.data-api';
-
-  const CLASS_NAME_ACTIVE$2 = 'active';
-
-  const SELECTOR_DATA_TOGGLE$4 = '[data-bs-toggle="button"]';
-
-  const EVENT_CLICK_DATA_API$4 = `click${EVENT_KEY$7}${DATA_API_KEY$5}`;
-
-  /**
-   * ------------------------------------------------------------------------
-   * Class Definition
-   * ------------------------------------------------------------------------
-   */
-
-  class Button extends BaseComponent {
-    // Getters
-
-    static get NAME() {
-      return NAME$8
-    }
-
-    // Public
-
-    toggle() {
-      // Toggle class and sync the `aria-pressed` attribute with the return value of the `.toggle()` method
-      this._element.setAttribute('aria-pressed', this._element.classList.toggle(CLASS_NAME_ACTIVE$2));
-    }
-
-    // Static
-
-    static jQueryInterface(config) {
-      return this.each(function () {
-        const data = Button.getOrCreateInstance(this);
-
-        if (config === 'toggle') {
-          data[config]();
-        }
-      })
-    }
-  }
-
-  /**
-   * ------------------------------------------------------------------------
-   * Data Api implementation
-   * ------------------------------------------------------------------------
-   */
-
-  EventHandler.on(document, EVENT_CLICK_DATA_API$4, SELECTOR_DATA_TOGGLE$4, event => {
-    event.preventDefault();
-
-    const button = event.target.closest(SELECTOR_DATA_TOGGLE$4);
-    const data = Button.getOrCreateInstance(button);
-
-    data.toggle();
-  });
-
-  /**
-   * ------------------------------------------------------------------------
-   * jQuery
-   * ------------------------------------------------------------------------
-   * add .Button to jQuery only if jQuery is present
-   */
-
-  defineJQueryPlugin(Button);
 
   /**
    * --------------------------------------------------------------------------
@@ -3768,7 +3687,7 @@
 
       var checkboxClass = filterColumns.length == 1 ? "d-none" : "d-sm-flex"; // Hide controls when only one filter is chosen
 
-      form.innerHTML = "<div class=\"col-sm-6 col-md-4 pb-3\">\n  <div class=\"form-control__wrapper form-control-inline\">\n    <label for=\"".concat(randID, "_filter\">").concat(filterTitle, ":</label>\n    <input type=\"search\" name=\"").concat(randID, "_filter\" id=\"").concat(randID, "_filter\" class=\"form-control\" placeholder=\"\" list=\"").concat(randID, "_list\" />\n  </div>\n  <datalist id=\"").concat(randID, "_list\">\n    ").concat(Object.keys(searchableTerms).map(function (term) {
+      form.innerHTML = "<div class=\"col-sm-6 col-md-4 pb-3\">\n  <div class=\"form-control__wrapper form-control-inline mb-0\">\n    <label for=\"".concat(randID, "_filter\" class=\"form-label\">").concat(filterTitle, ":</label>\n    <input type=\"search\" name=\"").concat(randID, "_filter\" id=\"").concat(randID, "_filter\" class=\"form-control form-control-sm\" placeholder=\"\" list=\"").concat(randID, "_list\" />\n  </div>\n  <datalist id=\"").concat(randID, "_list\">\n    ").concat(Object.keys(searchableTerms).map(function (term) {
         return "<option value=\"".concat(term, "\"></option>");
       }).join(""), "\n  </datalist>\n</div>\n<div class=\"col-md-8 align-items-center pb-3 ").concat(checkboxClass, "\">\n  ").concat("<span class=\"pe-3 text-nowrap\">Filter by: </span>" + filterColumns.map(function (column) {
         return "<div class=\"form-check pe-3\"><input class=\"form-check-input\" type=\"checkbox\" id=\"".concat(randID, "_").concat(column.textContent.replace(' ', '_').toLowerCase(), "\" checked=\"checked\" /><label class=\"form-check-label text-nowrap\" for=\"").concat(randID, "_").concat(column.textContent.replace(' ', '_').toLowerCase(), "\">").concat(column.textContent, "</label></div>");
@@ -3880,7 +3799,7 @@
       form.classList.add('pt-3');
       form.classList.add('pb-3'); // Create the form and create a container div to hold the pagination buttons
 
-      form.innerHTML = "<div class=\"col-6 col-sm-3 col-md-2 mb-3\">\n  <div class=\"form-control__wrapper form-control-inline\">\n    <label for=\"".concat(randID, "_showing\">Showing:</label>\n    <input type=\"number\" name=\"").concat(randID, "_showing\" id=\"").concat(randID, "_showing\" class=\"form-control\" placeholder=\"\" list=\"").concat(randID, "_pagination\" value=\"").concat(show, "\" min=\"1\" max=\"").concat(totalRows, "\" />\n  </div>\n  <datalist id=\"").concat(randID, "_pagination\">\n  <option value=\"5\">5</option>\n  ").concat(totalRows > 10 ? "<option value=\"10\">10</option>" : '', "\n  ").concat(totalRows > 20 ? "<option value=\"20\">20</option>" : '', "\n  <option value=\"").concat(totalRows, "\">").concat(totalRows, "</option>\n  </datalist>\n</div>\n<div class=\"col-6 col-sm-2 col-md-2 d-flex align-items-center mb-3\"><span class=\"label\">per page</span></div>\n<div class=\"col-sm-7 col-md-8 d-sm-flex justify-content-end align-items-center mb-3\" id=\"").concat(randID, "_paginationBtns\"></div>"); // Add after the actual table
+      form.innerHTML = "<div class=\"col-6 col-sm-3 col-md-2 mb-3\">\n  <div class=\"form-control__wrapper form-control-inline mb-0\">\n    <label for=\"".concat(randID, "_showing\" class=\"form-label\">Showing:</label>\n    <input type=\"number\" name=\"").concat(randID, "_showing\" id=\"").concat(randID, "_showing\" class=\"form-control form-control-sm\" placeholder=\"\" list=\"").concat(randID, "_pagination\" value=\"").concat(show, "\" min=\"1\" max=\"").concat(totalRows, "\" />\n  </div>\n  <datalist id=\"").concat(randID, "_pagination\">\n  <option value=\"5\">5</option>\n  ").concat(totalRows > 10 ? "<option value=\"10\">10</option>" : '', "\n  ").concat(totalRows > 20 ? "<option value=\"20\">20</option>" : '', "\n  <option value=\"").concat(totalRows, "\">").concat(totalRows, "</option>\n  </datalist>\n</div>\n<div class=\"col-6 col-sm-2 col-md-2 d-flex align-items-center mb-3\"><span class=\"label\">per page</span></div>\n<div class=\"col-sm-7 col-md-8 d-sm-flex justify-content-end align-items-center mb-3\" id=\"").concat(randID, "_paginationBtns\"></div>"); // Add after the actual table
 
       tableElement.append(form);
     };
