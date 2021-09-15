@@ -12,15 +12,15 @@ describe(`Form input page`, () => {
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
-    expect(mobileImage).toMatchImageSnapshot();
+    expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 768, height: 800 })
     const tabletImage = await page.screenshot({ fullPage: true });
-    expect(tabletImage).toMatchImageSnapshot();
+    expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 1440, height: 800 })
     const desktopImage = await page.screenshot({ fullPage: true });
-    expect(desktopImage).toMatchImageSnapshot();
+    expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     done()
   });
@@ -36,15 +36,15 @@ describe(`Form input types page`, () => {
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
-    expect(mobileImage).toMatchImageSnapshot();
+    expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 768, height: 800 })
     const tabletImage = await page.screenshot({ fullPage: true });
-    expect(tabletImage).toMatchImageSnapshot();
+    expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 1440, height: 800 })
     const desktopImage = await page.screenshot({ fullPage: true });
-    expect(desktopImage).toMatchImageSnapshot();
+    expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     done()
   });
@@ -60,15 +60,15 @@ describe(`Form textarea page`, () => {
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
-    expect(mobileImage).toMatchImageSnapshot();
+    expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 768, height: 800 })
     const tabletImage = await page.screenshot({ fullPage: true });
-    expect(tabletImage).toMatchImageSnapshot();
+    expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 1440, height: 800 })
     const desktopImage = await page.screenshot({ fullPage: true });
-    expect(desktopImage).toMatchImageSnapshot();
+    expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     done()
   });
@@ -84,15 +84,15 @@ describe(`Form date page`, () => {
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
-    expect(mobileImage).toMatchImageSnapshot();
+    expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 768, height: 800 })
     const tabletImage = await page.screenshot({ fullPage: true });
-    expect(tabletImage).toMatchImageSnapshot();
+    expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 1440, height: 800 })
     const desktopImage = await page.screenshot({ fullPage: true });
-    expect(desktopImage).toMatchImageSnapshot();
+    expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     done()
   });
@@ -108,15 +108,15 @@ describe(`Form range page`, () => {
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
-    expect(mobileImage).toMatchImageSnapshot();
+    expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 768, height: 800 })
     const tabletImage = await page.screenshot({ fullPage: true });
-    expect(tabletImage).toMatchImageSnapshot();
+    expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 1440, height: 800 })
     const desktopImage = await page.screenshot({ fullPage: true });
-    expect(desktopImage).toMatchImageSnapshot();
+    expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     done()
   });
@@ -132,15 +132,15 @@ describe(`Form file upload page`, () => {
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
-    expect(mobileImage).toMatchImageSnapshot();
+    expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 768, height: 800 })
     const tabletImage = await page.screenshot({ fullPage: true });
-    expect(tabletImage).toMatchImageSnapshot();
+    expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 1440, height: 800 })
     const desktopImage = await page.screenshot({ fullPage: true });
-    expect(desktopImage).toMatchImageSnapshot();
+    expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     done()
   });
@@ -156,15 +156,15 @@ describe(`Form validation page`, () => {
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
-    expect(mobileImage).toMatchImageSnapshot();
+    expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 768, height: 800 })
     const tabletImage = await page.screenshot({ fullPage: true });
-    expect(tabletImage).toMatchImageSnapshot();
+    expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     await page.setViewport({ width: 1440, height: 800 })
     const desktopImage = await page.screenshot({ fullPage: true });
-    expect(desktopImage).toMatchImageSnapshot();
+    expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
     done()
   });
