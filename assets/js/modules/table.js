@@ -126,9 +126,9 @@ function table(tableElement) {
     const checkboxClass = filterColumns.length == 1 ? "d-none" : "d-sm-flex"; // Hide controls when only one filter is chosen
 
     form.innerHTML = `<div class="col-sm-6 col-md-4 pb-3">
-  <div class="form-control__wrapper form-control-inline">
-    <label for="${randID}_filter">${filterTitle}:</label>
-    <input type="search" name="${randID}_filter" id="${randID}_filter" class="form-control" placeholder="" list="${randID}_list" />
+  <div class="form-control__wrapper form-control-inline mb-0">
+    <label for="${randID}_filter" class="form-label">${filterTitle}:</label>
+    <input type="search" name="${randID}_filter" id="${randID}_filter" class="form-control form-control-sm" placeholder="" list="${randID}_list" />
   </div>
   <datalist id="${randID}_list">
     ${Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("")}
@@ -274,9 +274,9 @@ function table(tableElement) {
 
     // Create the form and create a container div to hold the pagination buttons
     form.innerHTML = `<div class="col-6 col-sm-3 col-md-2 mb-3">
-  <div class="form-control__wrapper form-control-inline">
-    <label for="${randID}_showing">Showing:</label>
-    <input type="number" name="${randID}_showing" id="${randID}_showing" class="form-control" placeholder="" list="${randID}_pagination" value="${show}" min="1" max="${totalRows}" />
+  <div class="form-control__wrapper form-control-inline mb-0">
+    <label for="${randID}_showing" class="form-label">Showing:</label>
+    <input type="number" name="${randID}_showing" id="${randID}_showing" class="form-control form-control-sm" placeholder="" list="${randID}_pagination" value="${show}" min="1" max="${totalRows}" />
   </div>
   <datalist id="${randID}_pagination">
   <option value="5">5</option>
