@@ -2,22 +2,22 @@
   <div class="form-control__wrapper">
     <label :class="`form-label${labelClass?` ${labelClass}`:''}`" :for="id">{{label}}</label>
     
-    
     <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" v-bind="$attrs" />
-
+    
     <textarea v-if="type=='textarea'" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" v-bind="$attrs"></textarea>
-
+    
     <div class="input-group" v-if="type=='range'">
       <input v-model="inputVal" :class="`form-range${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" v-bind="$attrs" oninput="this.nextElementSibling.value=this.value;" />
       <output class="input-group-text border-0 col-2 col-sm-1 px-0">{{value}}</output>
     </div>
-
+    
     <div class="input-group" v-if="type=='color'">
       <input v-model="inputVal" :class="`form-control form-control-color${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" v-bind="$attrs" oninput="this.nextElementSibling.value=this.value;" />
       <output class="input-group-text flex-fill">{{value?vale:'#000000'}}</output>
     </div>
-
+    
     <p v-if="errorMsg" class="invalid-feedback mb-0" v-html="errorMsg"></p>
+    <slot></slot>
   </div>
 </template>
 

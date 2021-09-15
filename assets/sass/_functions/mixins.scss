@@ -100,9 +100,9 @@
         $found: true;
       }
     }
+    @if $found == false {
+      font-size: $value;
+    }
   }
 
-  @if $found == false {
-    font-size: $value;
-  }
 }
