@@ -86,4 +86,8 @@ export default {
 #visualtest:target ~ main > .d-none.visualtest{
   display: block!important;
 }
+#visualtest:target ~ main > .visualtest .visualtest-hide,
+#visualtest:target ~ main > .visualtest pre {
+  display: none!important;
+}
 </style>
