@@ -3,12 +3,17 @@
       <slot></slot>
       <div :class="`row row-cols-${cols} row-cols-sm-${smCols} row-cols-md-${mdCols} ${gap ? `g-${gap}`: ``}`">
         <div class="col" v-for="(value,index) in items" :key="index">
-          <Card :class="cardClass" :title="value.title" :subTitle="value.subTitle" :content="value.content" :details="value.details" :link="value.link" :type="cardType" :btnType="btnType" :image="value.image" :titleClass="titleClass" :ctaText="ctaText"></Card>
+          <Card v-bind="value" :class="cardClass" :type="cardType" :btnType="btnType" :titleClass="titleClass" :ctaText="ctaText"></Card>
         </div>
       </div>
       <slot name="after"></slot>
   </div>
 </template>
+
+<style lang="scss">
+@import "../../../assets/sass/_func.scss";
+@import "../../../assets/sass/components/cardDeck.scss";
+</style>
 
 <script>
 import Card from '../Card/Card.vue'

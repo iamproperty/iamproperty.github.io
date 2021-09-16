@@ -14,8 +14,8 @@ function testimonial(testimonialElement) {
   // Set where the buttons go to
   const setButtons = function(scrollTo){
 
-    const nextButton = testimonialElement.querySelector('.testimonial__next');
-    const prevButton = testimonialElement.querySelector('.testimonial__prev');
+    const nextButton = testimonialElement.querySelector('.btn-next');
+    const prevButton = testimonialElement.querySelector('.btn-prev');
 
     nextButton.setAttribute('data-go',scrollTo+1);
     prevButton.setAttribute('data-go',scrollTo-1);

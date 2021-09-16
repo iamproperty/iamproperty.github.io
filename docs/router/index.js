@@ -219,6 +219,14 @@ export const routes = [
         component: () => import('../views/components/CardDeckDoc.vue')
       },
       {
+        path: 'carousel',
+        name: 'Carousel',
+        meta: {
+          title: 'Carousel | Components | IAM Key'
+        },
+        component: () => import('../views/components/CarouselDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {
@@ -288,6 +296,14 @@ export const routes = [
       {
         path: 'insight-cards',
         component: () => import('../views/examples/InsightCards.vue')
+      },
+      {
+        path: 'news-promo-cards',
+        component: () => import('../views/examples/NewsPromoCards.vue')
+      },
+      {
+        path: 'logo-carousel',
+        component: () => import('../views/examples/LogoCarousel.vue')
       }
     ]
   },
