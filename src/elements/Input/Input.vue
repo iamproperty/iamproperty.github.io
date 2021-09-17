@@ -121,7 +121,7 @@ export default {
       get() {
 
         // Default to the first options if no value set for select field
-        if(this.value == undefined && this.type =="select"){
+        if(this.value == undefined && this.options != undefined && this.type =="select"){
 
           return this.options[0].value;
         }
