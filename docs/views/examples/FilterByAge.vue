@@ -34,11 +34,11 @@ const initialData = () => ({
   filterAge: '',
   filterType: '==',
   filters: [
-    { value: '==', name: 'Equal to'},
-    { value: '>', name: 'Greater than'},
-    { value: '<', name: 'Less than'},
-    { value: '>=', name: 'Greater than or equal to'},
-    { value: '<=', name: 'Less than or equal to'}
+    { value: '==', display: 'Equal to'},
+    { value: '>', display: 'Greater than'},
+    { value: '<', display: 'Less than'},
+    { value: '>=', display: 'Greater than or equal to'},
+    { value: '<=', display: 'Less than or equal to'}
   ],
   fields: [
     { 
