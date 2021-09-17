@@ -2,13 +2,15 @@ const puppeteer = require('puppeteer')
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
+const pkg = require('../package.json');
+
 describe(`Headings`, () => {
   
   it(`should have the correct size`, async(done) => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    await page.goto('http://localhost:8080/elements/type#visualtest')
+    await page.goto(pkg.localURL+'/elements/type#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
 
@@ -60,7 +62,7 @@ describe(`Typography page`, () => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    await page.goto('http://localhost:8080/elements/type#visualtest')
+    await page.goto(pkg.localURL+'/elements/type#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });

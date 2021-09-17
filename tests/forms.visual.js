@@ -2,13 +2,15 @@ const puppeteer = require('puppeteer')
 const { toMatchImageSnapshot } = require('jest-image-snapshot')
 expect.extend({ toMatchImageSnapshot })
 
+const pkg = require('../package.json');
+
 describe(`Form input page`, () => {
 
   it(`It should render correctly.`, async(done) => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto('http://localhost:8080/elements/form/inputs#visualtest')
+    await page.goto(pkg.localURL+'/elements/form/inputs#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
@@ -32,7 +34,7 @@ describe(`Form input types page`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto('http://localhost:8080/elements/form/input-types#visualtest')
+    await page.goto(pkg.localURL+'/elements/form/input-types#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
@@ -56,7 +58,7 @@ describe(`Form textarea page`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto('http://localhost:8080/elements/form/textarea#visualtest')
+    await page.goto(pkg.localURL+'/elements/form/textarea#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
@@ -80,7 +82,7 @@ describe(`Form date page`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto('http://localhost:8080/elements/form/date#visualtest')
+    await page.goto(pkg.localURL+'/elements/form/date#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
@@ -104,7 +106,7 @@ describe(`Form range page`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto('http://localhost:8080/elements/form/range#visualtest')
+    await page.goto(pkg.localURL+'/elements/form/range#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
@@ -128,7 +130,7 @@ describe(`Form file upload page`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto('http://localhost:8080/elements/form/file#visualtest')
+    await page.goto(pkg.localURL+'/elements/form/file#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
@@ -152,7 +154,7 @@ describe(`Form validation page`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto('http://localhost:8080/elements/form/validation#visualtest')
+    await page.goto(pkg.localURL+'/elements/form/validation#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });

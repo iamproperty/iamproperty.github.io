@@ -82,5 +82,6 @@
     "assets/*",
     "dist/*",
     "src/*"
-  ]
+  ],
+  "localURL": "http://localhost:8081"
 }
