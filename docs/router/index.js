@@ -230,6 +230,14 @@ export const routes = [
             component: () => import('../views/elements/form/File.vue')
           },
           {
+            path: 'select',
+            name: 'Form select field',
+            meta: {
+              title: 'Form select field | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Select.vue')
+          },
+          {
             path: 'validation',
             name: 'Form validation',
             meta: {

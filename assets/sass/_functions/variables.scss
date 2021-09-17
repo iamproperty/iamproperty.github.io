@@ -253,6 +253,15 @@ $input-group-addon-bg: white;
 $input-group-addon-border-color: var(--colour-border);
 
 
+
+// Select 
+$form-select-padding-y: $input-padding-y;
+//$form-select-indicator-padding
+$form-select-padding-x: #{$input-padding-x};
+$form-select-border-color: var(--colour-border);
+$form-select-border-radius: $input-border-radius;
+
+
 // #endregion
 
 // #region Cards
