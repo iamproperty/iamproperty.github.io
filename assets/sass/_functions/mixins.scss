@@ -87,15 +87,22 @@
 
 @mixin font-size($value, $compatible:$compatible) {
   
+  $found: false;
+
   @if $compatible == 'true' {
     font-size: $value;
   }
   @else {
     @each $size, $subvalue in $font-sizes {
 
-      @if($value == $subvalue){
+      @if($value == $subvalue and $found == false){
         font-size: var(--fs-#{$size});
+        $found: true;
       }
     }
+    @if $found == false {
+      font-size: $value;
+    }
   }
+
 }

@@ -1,9 +1,52 @@
+.form-control__wrapper {
+  margin-bottom: 1.5rem;
+  max-width: $content-max-width;
+
+  label {
+    display: block;
+  }
+}
+
+
 .form-control-inline {
   display: flex;
-    align-items: center;
+  align-items: center;
 
-    label {
-      white-space: nowrap;
-      padding-right: 1rem;
-    }
+  label {
+    white-space: nowrap;
+    padding-right: 1rem;
+  }
+}
+
+.form-control-color {
+  width: $form-color-width;
+  height: $form-color-width; // Override fixed browser height
+  overflow: hidden;
+  padding: 0;
+
+  .input-group > & {
+
+    flex: 0 0 3rem;
+  }
+
+  &::-moz-color-swatch {
+    height: $form-color-width;
+    border-radius: 0;
+    border: none;
+  }
+
+  &::-webkit-color-swatch {
+    height: $form-color-width;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+
+.input-group {
+  .form-range {
+    flex: 1 1 0;
+    height: auto;
+    margin-right: 1rem;
+  }
 }

@@ -167,7 +167,79 @@ export const routes = [
           title: 'Advanced Tables | Elements | IAM Key'
         },
         component: () => import('../views/elements/AdvancedTables.vue')
-      }
+      },
+      {
+        path: 'form',
+        name: 'Form elements',
+        component: () => import('../views/elements/Form.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Form',
+            meta: {
+              title: 'Form elements | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/FormIndex.vue')
+          },
+          {
+            path: 'inputs',
+            name: 'Form input field',
+            meta: {
+              title: 'Form input fields | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Input.vue')
+          },
+          {
+            path: 'input-types',
+            name: 'Form basic input types',
+            meta: {
+              title: 'Form basic input types | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/InputTypes.vue')
+          },
+          {
+            path: 'textarea',
+            name: 'Form textarea',
+            meta: {
+              title: 'Form textarea | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Textarea.vue')
+          },
+          {
+            path: 'date',
+            name: 'Form date and time pickers',
+            meta: {
+              title: 'Form date and time pickers | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Date.vue')
+          },
+          {
+            path: 'range',
+            name: 'Form range field',
+            meta: {
+              title: 'Form range field | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Range.vue')
+          },
+          {
+            path: 'file',
+            name: 'Form file upload field',
+            meta: {
+              title: 'Form file upload field | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/File.vue')
+          },
+          {
+            path: 'validation',
+            name: 'Form validation',
+            meta: {
+              title: 'Form validation | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Validation.vue')
+          }
+        ]
+      },
+      
     ]
   },
   {

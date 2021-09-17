@@ -219,6 +219,42 @@ $btn-padding-x-md: $btn-padding-x;
 
 // #endregion
 
+// #region Forms
+// label
+$form-label-font-size: $h5-font-size;
+$form-label-font-weight: bold;
+$form-label-color: var(--colour-heading);
+$form-label-margin-bottom: 0.25rem;
+// input field
+$input-font-size: 1rem;
+$input-font-weight: normal;
+$input-line-height: 1.5;
+$input-padding-y: 0.75em;
+$input-padding-x: 1em;
+$input-border-radius: rem(10);
+$input-border-color: var(--colour-border);
+
+// sm
+$input-height-sm: null;
+$input-font-size-sm: #{rem(14)};
+$input-border-radius-sm: null; // Inherit default value
+$input-padding-y-sm: null;
+$input-padding-x-sm: null;
+
+// lg
+$input-height-lg: null;
+$input-font-size-lg: #{rem(24)};
+$input-border-radius-lg: false; // Inherit default value
+$input-padding-y-lg: null;
+$input-padding-x-lg: null;
+
+// Input group
+$input-group-addon-bg: white;
+$input-group-addon-border-color: var(--colour-border);
+
+
+// #endregion
+
 // #region Cards
 $card-border-width:                 0;
 $card-border-radius:                rem(10);

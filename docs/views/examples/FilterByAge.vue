@@ -7,10 +7,8 @@
     <p>Built in table filters only compare strings. More complex evaluations like greater than or less than a bespoke form with its own method will be needed. The table component has been created so that it can handle outside filtering and still be sortable and pageable.</p>
     <form class="mb-2 row" @submit="filterTable">
       <div class="col-sm-4 pb-3">
-        <div class="form-control-inline">
-          <label for="filterAge" class="form-label">Filter by age</label>
-          <input type="number" min="5" max="60" name="filterAge" v-model="filterAge" id="filterAge" class="form-control" required />
-        </div>
+        
+        <Input id="filterAge" label="Filter by age" type="number" min="5" max="60" required v-model="filterAge" class="mb-0 form-control-inline"></Input>
       </div>
       <div class="col-sm-4 pb-3">
 
@@ -34,6 +32,7 @@
 
 <script>
 import Table from '@/elements/Table/Table.vue'
+import Input from '@/elements/Input/Input.vue'
 
 const initialData = () => ({
   filterAge: '',
@@ -78,7 +77,8 @@ const initialData = () => ({
 
 export default {
   components: {
-    Table
+    Table,
+    Input
   },
   methods:{
     filterTable: function (e) {
