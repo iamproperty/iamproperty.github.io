@@ -1,6 +1,6 @@
 // Bootstrap modules
 import Alert from '../../node_modules/bootstrap/js/src/alert'
-import Button from '../../node_modules/bootstrap/js/src/button'
+//import Button from '../../node_modules/bootstrap/js/src/button'
 //import Carousel from '../../node_modules/bootstrap/js/src/carousel'
 import Collapse from '../../node_modules/bootstrap/js/src/collapse'
 //import Dropdown from '../../node_modules/bootstrap/js/src/dropdown'

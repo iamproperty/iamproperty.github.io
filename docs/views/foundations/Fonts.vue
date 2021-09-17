@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container ">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/foundations">Foundations</a></li>
+      </ul>
       <h1>Fonts</h1>
       <p class="strapline">Setting a tone through our typographic styling. The form of our letters says a lot about who we are.</p>
     </div>

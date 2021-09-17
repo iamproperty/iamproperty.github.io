@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container pb-0">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/foundations">Foundations</a></li>
+      </ul>
       <h1>Icons</h1>
       <p>Our icons are created using SVG sprites to reduce the number network calls and improve the ease of use.</p>
     </div>

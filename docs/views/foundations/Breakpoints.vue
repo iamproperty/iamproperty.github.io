@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container ">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/foundations">Foundations</a></li>
+      </ul>
       <h1>Breakpoints & scaling</h1>
       <p><a href="https://getbootstrap.com/docs/5.1/layout/breakpoints/" rel="nofollow" target="_blank">Bootstrap offers 5 breakpoints</a> as part of its grid system and uses a t-shirt sizing naming convention that are mapped against various device types (extra-small, small, medium, large and extra-large). This seemed a little excessive given the simplicity of our latest design style, so we have adjusted and reduced the default Bootstrap breakpoints to the following:</p>
       <p><strong>Extra Small (xs) – up to 576px</strong> <br>This is the default breakpoint that will be visible on mobile devices.</p>

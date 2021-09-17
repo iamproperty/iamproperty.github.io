@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/elements">Elements</a></li>
+      </ul>
       <h1>Typography</h1>
       <p>All of our typographic elements should be sized using relative units to its font size. This will reduce the amount of bespoke CSS for each header and created more robost elements.</p>
       <p>Our base font size is 16px or 1rem and any other rem values are calculated by multiplying the base font size. Em values are different as these are multiplied by the font-size of the element they are being applied too. So a margin bottom of 0.5em on a heading element with the font size of 32px will work out to be 16px.</p>

@@ -1,6 +1,9 @@
 <template>
   <main>
     <div class="container pb-0">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/foundations">Foundations</a></li>
+      </ul>
       <h1>Circles</h1>
       <p>Circles are used as little bits of flair to help highlight our brand. Not elements in their own rights but re-used across multiple different elements and components.</p>
       <h2>Basic circle</h2>
