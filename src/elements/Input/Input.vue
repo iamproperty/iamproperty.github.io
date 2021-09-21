@@ -1,6 +1,6 @@
 <template>
-  <div class="form-control__wrapper">
-    <label :class="`form-label${labelClass?` ${labelClass}`:''}`" :for="id">{{label}}</label>
+  <div :class="wrapperClass()">
+    <label v-if="needsLabel()" :class="`form-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
     
     <!-- Standard input field -->
     <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" />
@@ -25,10 +25,18 @@
       <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.display ? value.display : value.value}}</option>
     </select>
 
-
-    <datalist v-if="type!='select'" :id="id+'-list'">
+    <datalist v-if="type!='select'&&type!='checkbox'" :id="id+'-list'">
       <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.value}}</option>
     </datalist>
+
+    <!-- Checkbox -->
+    <input v-if="type=='checkbox'" class="form-check-input" type="checkbox" :name="id" :id="id" v-bind="$attrs" />
+    <label v-if="type=='checkbox'" :class="`form-label form-check-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
+
+    <!-- Checkbox Button -->
+    <input v-if="type=='checkbox-btn'" class="btn-check" type="checkbox" autocomplete="off" :name="id" :id="id" v-bind="$attrs" />
+    <label v-if="type=='checkbox-btn'" :class="`btn${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
+
 
     <!-- Error message -->
     <p v-if="errorMsg" class="invalid-feedback mb-0" v-html="errorMsg"></p>
@@ -80,6 +88,19 @@ export default {
     }
   },
   computed: {
+    wrapperClass () {
+      return () => {
+        switch(this.type) {
+          case 'radio':
+          case 'checkbox':
+            return 'form-check'
+          case 'checkbox-btn':
+            return ''
+          default:
+            return 'form-control__wrapper'
+        }
+      }
+    },
     needPattern () {
       return () => {
 
@@ -95,6 +116,18 @@ export default {
         return false
       }
     },
+    needsLabel () {
+      return () => {
+        switch(this.type) {
+          case 'radio':
+          case 'checkbox':
+          case 'checkbox-btn':
+            return false
+          default:
+            return true
+        }
+      }
+    },
     isInput () {
       return () => {
         switch(this.type) {
@@ -102,6 +135,7 @@ export default {
           case 'select':
           case 'radio':
           case 'checkbox':
+          case 'checkbox-btn':
           case 'range':
           case 'color':
             return false

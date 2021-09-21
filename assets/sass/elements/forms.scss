@@ -4,6 +4,7 @@
 
   label {
     display: block;
+
   }
 }
 
@@ -50,3 +51,37 @@
     margin-right: 1rem;
   }
 }
+
+// #region checkbox
+.form-check {
+
+  input,
+  label {
+    cursor: pointer;
+  }
+
+  label:hover,
+  input:hover + label,
+  input:focus + label {
+
+    color: var(--colour-hover);
+    border-color: var(--colour-hover);
+  }
+}
+.form-check + .form-check {
+  margin-top: -0.5rem;
+}
+// #endregion
+
+// #region Conditional reveal
+
+.conditional {
+  display: none;
+}
+
+input:checked + .conditional,
+input:checked + label + .conditional {
+  display: block;
+}
+
+// #endregion
