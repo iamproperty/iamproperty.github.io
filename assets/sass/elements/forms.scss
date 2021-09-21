@@ -93,6 +93,7 @@
 input:checked + .conditional,
 input:checked + label + .conditional {
   display: block;
+  clear: both;
 }
 
 input:nth-of-type(1):checked ~ .conditional-1,
@@ -101,6 +102,7 @@ input:nth-of-type(3):checked ~ .conditional-3,
 input:nth-of-type(4):checked ~ .conditional-4,
 input:nth-of-type(5):checked ~ .conditional-5 {
   display: block;
+  clear: both;
 }
 
 // #endregion
