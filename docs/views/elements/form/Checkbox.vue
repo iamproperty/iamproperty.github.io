@@ -57,15 +57,13 @@
       <h2>Toggle buttons</h2>
       <p class="visualtest-hide">We can create toggle buttons by using a combination of checkboxes and button classes.</p>
       <Input type="checkbox-btn" id="test8" label="Label"></Input>
-      <pre><code>&lt;div class="">
-  &lt;input type="checkbox" autocomplete="off" name="test8" id="test8" class="btn-check">
-  &lt;label for="test8" class="btn">Label&lt;/label>
-&lt;/div></code></pre>
+      <pre><code>&lt;input type="checkbox" autocomplete="off" name="test8" id="test8" class="btn-check">
+&lt;label for="test8" class="btn">Label&lt;/label></code></pre>
     </div>
     
     <div class="container">
       <h2>Vue Input component reference</h2>
-      <p>The checkbox input field using the same Vue component as the input field, the type just needs to be set to 'checkbox'.</p>
+      <p>The checkbox input field uses the same Vue component as the input field, the type just needs to be set to 'checkbox'.</p>
       <Readme></Readme>
     </div>
   </main>

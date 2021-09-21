@@ -1,22 +1,22 @@
 <template>
-  <div :class="wrapperClass()">
+  <div :class="wrapperClass()" ref="wrapper">
     <label v-if="needsLabel()" :class="`form-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
     
     <!-- Standard input field -->
-    <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" />
+    <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" />
     
     <!-- Textarea -->
-    <textarea v-if="type=='textarea'" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" v-bind="$attrs"></textarea>
+    <textarea v-if="type=='textarea'" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" v-bind="$attrs"></textarea>
     
     <!-- Range -->
     <div class="input-group" v-if="type=='range'">
-      <input v-model="inputVal" :class="`form-range${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" oninput="this.nextElementSibling.value=this.value;" />
+      <input v-model="inputVal" :class="`form-range${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" oninput="this.nextElementSibling.value=this.value;" />
       <output class="input-group-text border-0 col-2 col-sm-1 px-0">{{value}}</output>
     </div>
     
     <!-- Color picker -->
     <div class="input-group" v-if="type=='color'">
-      <input v-model="inputVal" :class="`form-control form-control-color${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" oninput="this.nextElementSibling.value=this.value;" />
+      <input v-model="inputVal" :class="`form-control form-control-color${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" oninput="this.nextElementSibling.value=this.value;" />
       <output class="input-group-text flex-fill">{{value?vale:'#000000'}}</output>
     </div>
     
@@ -25,18 +25,17 @@
       <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.display ? value.display : value.value}}</option>
     </select>
 
-    <datalist v-if="type!='select'&&type!='checkbox'" :id="id+'-list'">
+    <datalist v-if="allowDatalist()" :id="id+'-list'">
       <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.value}}</option>
     </datalist>
 
     <!-- Checkbox -->
-    <input v-if="type=='checkbox'" class="form-check-input" type="checkbox" :name="id" :id="id" v-bind="$attrs" />
-    <label v-if="type=='checkbox'" :class="`form-label form-check-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
+    <input v-if="type=='checkbox'||type=='radio'" class="form-check-input" :type="type" :name="name?name:id" :id="id" v-bind="$attrs" />
+    <label v-if="type=='checkbox'||type=='radio'" :class="`form-label form-check-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
 
     <!-- Checkbox Button -->
-    <input v-if="type=='checkbox-btn'" class="btn-check" type="checkbox" autocomplete="off" :name="id" :id="id" v-bind="$attrs" />
-    <label v-if="type=='checkbox-btn'" :class="`btn${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
-
+    <input v-if="type=='checkbox-btn'||type=='radio-btn'" class="btn-check" :type="type.replace('-btn','')" autocomplete="off" :name="name?name:id" :id="id" v-bind="$attrs" />
+    <label v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
 
     <!-- Error message -->
     <p v-if="errorMsg" class="invalid-feedback mb-0" v-html="errorMsg"></p>
@@ -56,6 +55,10 @@ export default {
     id: {
       type: String,
       required: true
+    },
+    name: {
+      type: String,
+      required: false
     },
     label: {
       type: String,
@@ -94,8 +97,9 @@ export default {
           case 'radio':
           case 'checkbox':
             return 'form-check'
+          case 'radio-btn':
           case 'checkbox-btn':
-            return ''
+            return false
           default:
             return 'form-control__wrapper'
         }
@@ -120,6 +124,7 @@ export default {
       return () => {
         switch(this.type) {
           case 'radio':
+          case 'radio-btn':
           case 'checkbox':
           case 'checkbox-btn':
             return false
@@ -134,10 +139,25 @@ export default {
           case 'textarea':
           case 'select':
           case 'radio':
+          case 'radio-btn':
           case 'checkbox':
           case 'checkbox-btn':
           case 'range':
           case 'color':
+            return false
+          default:
+            return true
+        }
+      }
+    },
+    allowDatalist () {
+      return () => {
+        switch(this.type) {
+          case 'select':
+          case 'radio':
+          case 'radio-btn':
+          case 'checkbox':
+          case 'checkbox-btn':
             return false
           default:
             return true
@@ -166,6 +186,22 @@ export default {
         this.$emit('input', val);
       }
     }
+  },
+  mounted(){
+
+    this.$nextTick(function () {
+      
+      let element = this.$refs.wrapper;
+
+      // Remove unnecessary divs that may get in the way of our CSS sibling selectors working
+      if(element.parentNode.classList.contains('form-check') || element.classList.length == 0){
+
+        const fragment = document.createDocumentFragment();
+      	Array.from(element.childNodes).forEach(child => fragment.appendChild(child));
+        element.parentNode.insertBefore(fragment, element);
+        element.parentNode.removeChild(element);
+      }
+    })
   }
 }
 </script>

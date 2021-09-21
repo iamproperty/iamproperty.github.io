@@ -246,6 +246,14 @@ export const routes = [
             component: () => import('../views/elements/form/Checkbox.vue')
           },
           {
+            path: 'radio',
+            name: 'Radio field',
+            meta: {
+              title: 'Radio field | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Radio.vue')
+          },
+          {
             path: 'validation',
             name: 'Form validation',
             meta: {
