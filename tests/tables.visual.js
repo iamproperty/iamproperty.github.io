@@ -2,6 +2,8 @@ const puppeteer = require('puppeteer')
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
+const pkg = require('../package.json');
+
 describe(`Tables page`, () => {
   
   it(`It should render correctly.`, async(done) => {
@@ -9,7 +11,7 @@ describe(`Tables page`, () => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    await page.goto('http://localhost:8080/elements/tables#visualtest')
+    await page.goto(pkg.localURL+'/elements/tables#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
@@ -34,7 +36,7 @@ describe(`Advanced Tables page`, () => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    await page.goto('http://localhost:8080/elements/advanced-tables#visualtest')
+    await page.goto(pkg.localURL+'/elements/advanced-tables#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });

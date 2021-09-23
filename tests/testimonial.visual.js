@@ -2,6 +2,8 @@ const puppeteer = require('puppeteer')
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
+const pkg = require('../package.json');
+
 describe(`Testimonial page`, () => {
   
   it(`It should render correctly.`, async(done) => {
@@ -9,7 +11,7 @@ describe(`Testimonial page`, () => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    await page.goto('http://localhost:8080/components/testimonial#visualtest')
+    await page.goto(pkg.localURL+'/components/testimonial#visualtest')
     
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });

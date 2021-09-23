@@ -9,16 +9,12 @@
       <div class="col-sm-4 pb-3">
         
         <Input id="filterAge" label="Filter by age" type="number" min="5" max="60" required v-model="filterAge" class="mb-0 form-control-inline"></Input>
+     
       </div>
       <div class="col-sm-4 pb-3">
 
-        <select class="form-select" id="filterType" name="filterType" v-model="filterType">
-          <option value="==">Equal to</option>
-          <option value=">">Greater than</option>
-          <option value="<">Less than</option>
-          <option value=">=">Greater than or equal to</option>
-          <option value="<=">Less than or equal to</option>
-        </select>
+        <Input id="filterType" label="Is" :options="filters" type="select" required v-model="filterType" class="mb-0 form-control-inline"></Input>
+     
       </div>
       <div class="col-sm-4 pb-3">
         <button class="btn btn-tertiary mb-0">Filter</button>
@@ -37,6 +33,13 @@ import Input from '@/elements/Input/Input.vue'
 const initialData = () => ({
   filterAge: '',
   filterType: '==',
+  filters: [
+    { value: '==', display: 'Equal to'},
+    { value: '>', display: 'Greater than'},
+    { value: '<', display: 'Less than'},
+    { value: '>=', display: 'Greater than or equal to'},
+    { value: '<=', display: 'Less than or equal to'}
+  ],
   fields: [
     { 
       key: 'name',

@@ -15,3 +15,4 @@
 | type | String | text | Assign different types to the input fields like number, email and date. |
 | size | String | - | Choose from either 'sm' and 'lg' |
 | errorMsg | String | - | Error message thats shown when the field fails form validation. |
+| options | Array | - | Used for the select type input field to populate the dropdown. Can also be used to create a datalist when used in conjuction of any other input type than select. |

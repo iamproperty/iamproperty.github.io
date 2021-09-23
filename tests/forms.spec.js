@@ -55,3 +55,19 @@ describe('Textarea component', () => {
 
 })
 
+
+describe('Select component', () => {
+
+  const test = shallowMount(Input, {
+    propsData: { 
+      id: 'input1',
+      label: 'Label',
+      type: 'select'
+    }
+  })
+
+  it('writes out a select field instead of an input', () => {
+    expect(test.findAll('input').length).toBe(0)
+    expect(test.findAll('select').length).toBe(1)
+  })
+})
