@@ -238,6 +238,14 @@ export const routes = [
             component: () => import('../views/elements/form/Select.vue')
           },
           {
+            path: 'checkbox',
+            name: 'Checkbox field',
+            meta: {
+              title: 'Checkbox field | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Checkbox.vue')
+          },
+          {
             path: 'validation',
             name: 'Form validation',
             meta: {

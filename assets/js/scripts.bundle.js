@@ -3689,8 +3689,8 @@
 
       form.innerHTML = "<div class=\"col-sm-6 col-md-4 pb-3\">\n  <div class=\"form-control__wrapper form-control-inline mb-0\">\n    <label for=\"".concat(randID, "_filter\" class=\"form-label\">").concat(filterTitle, ":</label>\n    <input type=\"search\" name=\"").concat(randID, "_filter\" id=\"").concat(randID, "_filter\" class=\"form-control form-control-sm\" placeholder=\"\" list=\"").concat(randID, "_list\" />\n  </div>\n  <datalist id=\"").concat(randID, "_list\">\n    ").concat(Object.keys(searchableTerms).map(function (term) {
         return "<option value=\"".concat(term, "\"></option>");
-      }).join(""), "\n  </datalist>\n</div>\n<div class=\"col-md-8 align-items-center pb-3 ").concat(checkboxClass, "\">\n  ").concat("<span class=\"pe-3 text-nowrap\">Filter by: </span>" + filterColumns.map(function (column) {
-        return "<div class=\"form-check pe-3\"><input class=\"form-check-input\" type=\"checkbox\" id=\"".concat(randID, "_").concat(column.textContent.replace(' ', '_').toLowerCase(), "\" checked=\"checked\" /><label class=\"form-check-label text-nowrap\" for=\"").concat(randID, "_").concat(column.textContent.replace(' ', '_').toLowerCase(), "\">").concat(column.textContent, "</label></div>");
+      }).join(""), "\n  </datalist>\n</div>\n<div class=\"col-md-8 align-items-center pb-3 ").concat(checkboxClass, "\">\n  ").concat("<span class=\"pe-3 text-nowrap h5 mb-0\">Filter by: </span>" + filterColumns.map(function (column) {
+        return "<div class=\"form-check pe-3 mt-0 mb-0\"><input class=\"form-check-input\" type=\"checkbox\" id=\"".concat(randID, "_").concat(column.textContent.replace(' ', '_').toLowerCase(), "\" checked=\"checked\" /><label class=\"form-check-label text-nowrap\" for=\"").concat(randID, "_").concat(column.textContent.replace(' ', '_').toLowerCase(), "\">").concat(column.textContent, "</label></div>");
       }).join(""), "\n</div>"); // Add before the actual table
 
       tableElement.prepend(form);

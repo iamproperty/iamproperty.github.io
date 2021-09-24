@@ -47,7 +47,8 @@
   a:active &,
   a.active &,
   &:active,
-  &.active {
+  &.active,
+  *:checked + & {
     --btn-colour: var(--btn-active-colour);
     @include box-shadow($btn-active-box-shadow);
     border-radius: rem(20);

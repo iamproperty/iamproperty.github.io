@@ -135,7 +135,7 @@ function table(tableElement) {
   </datalist>
 </div>
 <div class="col-md-8 align-items-center pb-3 ${checkboxClass}">
-  ${`<span class="pe-3 text-nowrap">Filter by: </span>` + filterColumns.map(column => `<div class="form-check pe-3"><input class="form-check-input" type="checkbox" id="${randID}_${column.textContent.replace(' ','_').toLowerCase()}" checked="checked" /><label class="form-check-label text-nowrap" for="${randID}_${column.textContent.replace(' ','_').toLowerCase()}">${column.textContent}</label></div>`).join("")}
+  ${`<span class="pe-3 text-nowrap h5 mb-0">Filter by: </span>` + filterColumns.map(column => `<div class="form-check pe-3 mt-0 mb-0"><input class="form-check-input" type="checkbox" id="${randID}_${column.textContent.replace(' ','_').toLowerCase()}" checked="checked" /><label class="form-check-label text-nowrap" for="${randID}_${column.textContent.replace(' ','_').toLowerCase()}">${column.textContent}</label></div>`).join("")}
 </div>`;
 
     // Add before the actual table
