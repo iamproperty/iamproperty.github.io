@@ -80,9 +80,11 @@
 
     --btn-bg: transparent;
     --btn-bg-hover: var(--colour-primary);
+    --btn-bg-active: var(--colour-primary);
     --btn-outline: var(--colour-primary);
     --btn-outline-hover: var(--colour-primary);
     --btn-text-hover:  #ffffff;
+    --btn-text-active: #ffffff;
   }
 
   [class*="bg-"]:not(.prevent-invert) & {
@@ -216,4 +218,28 @@
     transform: rotate(180deg);
   }
 }
+// #endregion
+
+
+// #region button group 
+.btn-group {
+
+  flex-wrap: wrap;
+
+  > .btn {
+    margin-right: 0;
+    padding: 0.75rem;
+  }
+
+  > .btn:last-of-type {
+
+    border-top-right-radius: rem(20)!important;
+    border-bottom-right-radius: rem(20)!important;
+  }
+
+  > *:not(.btn) {
+    width: 100%;
+  }
+}
+
 // #endregion

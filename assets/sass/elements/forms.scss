@@ -60,9 +60,9 @@
     cursor: pointer;
   }
 
-  label:hover,
-  input:hover + label,
-  input:focus + label {
+  input:not([disabled]) + label:hover,
+  input:not([disabled]):hover + label,
+  input:not([disabled]):focus + label {
 
     color: var(--colour-hover);
     border-color: var(--colour-hover);
@@ -71,6 +71,17 @@
 .form-check + .form-check {
   margin-top: -0.5rem;
 }
+
+.form-check-label {
+  float: left;
+}
+
+.form-check-label + .form-check-input {
+
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
 // #endregion
 
 // #region Conditional reveal
@@ -82,6 +93,16 @@
 input:checked + .conditional,
 input:checked + label + .conditional {
   display: block;
+  clear: both;
+}
+
+input:nth-of-type(1):checked ~ .conditional-1,
+input:nth-of-type(2):checked ~ .conditional-2,
+input:nth-of-type(3):checked ~ .conditional-3,
+input:nth-of-type(4):checked ~ .conditional-4,
+input:nth-of-type(5):checked ~ .conditional-5 {
+  display: block;
+  clear: both;
 }
 
 // #endregion

@@ -283,6 +283,9 @@ $form-switch-bg-image:    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/
 $form-switch-focus-bg-image:    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$colour-focus}'/></svg>");
 $form-switch-checked-bg-image:    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$primary}'/></svg>");
 
+$form-check-radio-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$primary}'/></svg>");
+
+
 // #endregion
 
 // #region Cards
