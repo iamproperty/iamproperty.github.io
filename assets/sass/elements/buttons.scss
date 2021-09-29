@@ -76,7 +76,8 @@
     --btn-outline-hover: var(--colour-secondary);
   }
 
-  &.btn-tertiary {
+  &.btn-tertiary,
+  &.btn-tag:not(.btn-primary):not(.btn-secondary) {
 
     --btn-bg: transparent;
     --btn-bg-hover: var(--colour-primary);
@@ -96,7 +97,8 @@
     --btn-text-hover:  var(--colour-primary);
     --btn-text:  #ffffff;
 
-    &.btn-tertiary {
+    &.btn-tertiary,
+    &.btn-tag:not(.btn-primary):not(.btn-secondary) {
 
       --btn-bg: transparent;
       --btn-bg-hover: var(--colour-primary);
@@ -120,7 +122,8 @@
     --btn-text-hover:  #ffffff;
     --btn-text:  var(--colour-primary-theme);
 
-    &.btn-tertiary {
+    &.btn-tertiary,
+    &.btn-tag:not(.btn-primary):not(.btn-secondary) {
 
       --btn-bg: transparent;
       --btn-bg-hover: #ffffff;
@@ -138,7 +141,8 @@
     --btn-text-hover: var(--colour-dark-theme);
     --btn-text: var(--colour-dark-theme);
 
-    &.btn-tertiary {
+    &.btn-tertiary,
+    &.btn-tag:not(.btn-primary):not(.btn-secondary) {
 
       --btn-bg: transparent;
       --btn-bg-hover: #ffffff;
@@ -150,6 +154,19 @@
   }
 }
 
+// #region button small and tag
+.btn-sm {
+
+  padding: em(6) em(12);
+}
+
+.btn-tag {
+  // btn tag also uses the styles of btn-tertiary by default, see above
+  padding: em(6) em(12);
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+}
+// #endregion
 
 // #region Direction button
 .btn-next, 
@@ -219,7 +236,6 @@
   }
 }
 // #endregion
-
 
 // #region button group 
 .btn-group {

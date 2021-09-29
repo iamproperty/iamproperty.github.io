@@ -254,6 +254,14 @@ export const routes = [
             component: () => import('../views/elements/form/Radio.vue')
           },
           {
+            path: 'tags',
+            name: 'Pill tags',
+            meta: {
+              title: 'Pill tags | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Tags.vue')
+          },
+          {
             path: 'validation',
             name: 'Form validation',
             meta: {
