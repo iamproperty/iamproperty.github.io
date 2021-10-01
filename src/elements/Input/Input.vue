@@ -34,8 +34,8 @@
     <label v-if="type=='checkbox'||type=='radio'" :class="`form-label form-check-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
 
     <!-- Checkbox Button -->
-    <input v-if="type=='checkbox-btn'||type=='radio-btn'" class="btn-check" :type="type.replace('-btn','')" autocomplete="off" :name="name?name:id" :id="id" v-bind="$attrs" />
-    <label v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
+    <input v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn-check${inputClass?` ${inputClass}`:``}`" :type="type.replace('-btn','')" autocomplete="off" :name="name?name:id" :id="id" v-bind="$attrs" />
+    <label v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label" @click="clickEvent"></label>
 
     <!-- Error message -->
     <p v-if="errorMsg" class="invalid-feedback mb-0" v-html="errorMsg"></p>
@@ -208,7 +208,6 @@ export default {
     this.$nextTick(function () {
       
       let element = this.$refs.wrapper;
-
       // Remove unnecessary divs that may get in the way of our CSS sibling selectors working
       if(element.parentNode.classList.contains('form-check') || element.classList.length == 0){
 
@@ -218,6 +217,11 @@ export default {
         element.parentNode.removeChild(element);
       }
     })
+  },
+  methods: {
+    clickEvent(){
+      this.$emit('bus');
+    }
   }
 }
 </script>

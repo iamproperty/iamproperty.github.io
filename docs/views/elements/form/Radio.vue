@@ -67,25 +67,6 @@
   &lt;div class="conditional conditional-2">&lt;p class="mb-2">Content 2.&lt;/p>&lt;/div>
 &lt;/div></code></pre>
 
-      <h2>Toggle buttons</h2>
-      <p class="visualtest-hide">We can create toggle buttons by using a combination of radio fields and button classes.</p>
-      
-      <div class="btn-group d-block col-md-8">
-        <Input type="radio-btn" id="test8" name="radio5" label="Option 1" labelClass="btn-tertiary col-4" checked="checked"></Input>
-        <Input type="radio-btn" id="test8a" name="radio5" label="Option 2" labelClass="btn-tertiary col-4"></Input>
-        <Input type="radio-btn" id="test8b" name="radio5" label="Option 3" labelClass="btn-tertiary col-4"></Input>
-        <hr/>
-        <div class="conditional conditional-1">
-          <p>Content 1.</p>
-        </div>
-        <div class="conditional conditional-2">
-          <p>Content 2.</p>
-        </div>
-        <div class="conditional conditional-3">
-          <p>Content 3.</p>
-        </div>
-      </div>
-
       <pre><code>&lt;&lt;div class="btn-group d-block col-md-8">
   &lt;input type="radio" autocomplete="off" name="radio5" id="test8" class="btn-check">
   &lt;label for="test8" class="btn btn-tertiary col-4">Option 1&lt;/label>
