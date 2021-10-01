@@ -8,6 +8,7 @@
   },
   "license": "UNLICENSED",
   "scripts": {
+    "dev": "npm run serve",
     "serve": "vue-cli-service serve docs/main.js",
     "build": "vue-cli-service build --target lib src/index.js",
     "build:docs": "vue-cli-service build docs/main.js",
@@ -83,5 +84,5 @@
     "dist/*",
     "src/*"
   ],
-  "localURL": "http://localhost:8080"
+  "localURL": "http://localhost:8082"
 }

@@ -11,7 +11,7 @@
     </div>
     <div class="container visualtest">
 
-      <Input type="select" id="test1" label="Label" :options="[{display:'One',value:'1'},{display:'Two',value:'2'}]"></Input>
+      <Input type="select" id="test1" label="Label" :options="[{display:'One',value:'1'},{display:'Two',value:'2'}]" ></Input>
       
       <pre><code>&lt;div class="form-control__wrapper">
   &lt;label for="test1" class="form-label">Label&lt;/label>
@@ -21,8 +21,11 @@
   &lt;/select>
 &lt;/div></code></pre>
 
-      <h2>Inline input</h2>
-      <Input type="select" id="test1" label="Label" :options="[{display:'One',value:'1'},{display:'Two',value:'2'}]" class="form-control-inline"></Input>
+      <h2>Inline select</h2>
+      <Input type="select" id="test2" label="Label" :options="[{display:'One',value:'1'},{display:'Two',value:'2'}]" class="form-control-inline"></Input>
+      
+      <h2>Multi select</h2>
+      <Input type="select" id="test3" label="Label" :options="[{display:'One',value:'1'},{display:'Two',value:'2'},{display:'Three',value:'3'},{display:'Four',value:'4'},{display:'Five',value:'5'},{display:'Six',value:'6'},{display:'Seven',value:'7'},{display:'Eight',value:'8'},{display:'Nine',value:'9'},{display:'Ten',value:'10'}]" multiple="multiple"></Input>
       
     </div>
     

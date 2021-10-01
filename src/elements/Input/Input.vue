@@ -1,6 +1,6 @@
 <template>
   <div :class="wrapperClass()" ref="wrapper">
-    <label v-if="needsLabel()" :class="`form-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
+    <label v-if="needsLabel()" :class="`form-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="displayLabel()"></label>
     
     <!-- Standard input field -->
     <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" v-on:keyup="inputKeyup" />
@@ -24,7 +24,7 @@
     <select v-if="type=='select'" v-model="inputVal" :class="`form-select${size?` form-select-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="id" :id="id" :pattern="needPattern()" v-bind="$attrs">
       <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.display ? value.display : value.value}}</option>
     </select>
-
+    
     <datalist v-if="allowDatalist()" :id="id+'-list'">
       <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.value}}</option>
     </datalist>
@@ -34,8 +34,8 @@
     <label v-if="type=='checkbox'||type=='radio'" :class="`form-label form-check-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
 
     <!-- Checkbox Button -->
-    <input v-if="type=='checkbox-btn'||type=='radio-btn'" class="btn-check" :type="type.replace('-btn','')" autocomplete="off" :name="name?name:id" :id="id" v-bind="$attrs" />
-    <label v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
+    <input v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn-check${inputClass?` ${inputClass}`:``}`" :type="type.replace('-btn','')" autocomplete="off" :name="name?name:id" :id="id" v-bind="$attrs" />
+    <label v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label" @click="clickEvent"></label>
 
     <!-- Error message -->
     <p v-if="errorMsg" class="invalid-feedback mb-0" v-html="errorMsg"></p>
@@ -91,6 +91,16 @@ export default {
     }
   },
   computed: {
+    displayLabel() {
+      return () => {
+
+        if(this.$attrs.multiple){
+          return this.label+`<span class="small d-block text-body font-body fw-normal">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</span>`
+        }
+
+        return this.label;
+      }
+    },
     wrapperClass () {
       return () => {
         switch(this.type) {
@@ -174,11 +184,17 @@ export default {
     inputVal: {
       get() {
 
+        console.log(this.$attrs.multiple)
         // Default to the first options if no value set for select field
         if(this.value == undefined && this.options != undefined && this.type =="select"){
 
+          // Return an empty array if muliple attribute is set
+          if(this.$attrs.multiple){
+            return [];
+          }
           return this.options[0].value;
         }
+
 
         return this.value;
       },
@@ -193,7 +209,6 @@ export default {
     this.$nextTick(function () {
       
       let element = this.$refs.wrapper;
-
       // Remove unnecessary divs that may get in the way of our CSS sibling selectors working
       if(element.parentNode.classList.contains('form-check') || element.classList.length == 0){
 
@@ -207,6 +222,9 @@ export default {
   methods: {
     inputKeyup(event){
       this.$emit('keyupEvent',event);
+    },
+    clickEvent(){
+      this.$emit('bus');
     }
   }
 }

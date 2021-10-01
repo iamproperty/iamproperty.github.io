@@ -54,11 +54,6 @@
   &lt;/div>
 &lt;/div></code></pre>
 
-      <h2>Toggle buttons</h2>
-      <p class="visualtest-hide">We can create toggle buttons by using a combination of checkboxes and button classes.</p>
-      <Input type="checkbox-btn" id="test8" label="Label"></Input>
-      <pre><code>&lt;input type="checkbox" autocomplete="off" name="test8" id="test8" class="btn-check">
-&lt;label for="test8" class="btn">Label&lt;/label></code></pre>
     </div>
     
     <div class="container">
