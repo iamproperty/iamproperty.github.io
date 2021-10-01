@@ -46,12 +46,16 @@
 
     .form-control,
     .form-select {
-      padding: 0.5rem 0 0.5rem 0.5rem;
+      padding: 0.5rem 1.5rem 0.5rem 0.5rem;
     }
 
-    .input--locations {
-      padding-right: 5.5rem;
+    .form-select {
+      background-position: right 0.5rem center;
     }
+  }
+
+  .input--locations {
+    padding-right: 5.5rem;
   }
 
   .select--miles {
@@ -86,6 +90,8 @@
 
     @include media-breakpoint-up(md) {
       margin: 0;
+      padding-left: 3.5rem;
+      padding-right: 3.5rem;
     }
   }
 }
@@ -117,6 +123,11 @@
       border: none;
       padding-top: 0.25rem;
       padding-bottom: 0.25rem;
+    }
+
+    .form-select {
+      background-position: right 0rem center;
+      padding-right: 1rem;
     }
 
     .property-searchbar__btn {

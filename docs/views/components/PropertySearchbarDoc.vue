@@ -8,15 +8,15 @@
       <p>A set series of input fields to help the user search for thier desired property.</p>
     </div>
 
-    <PropertySearchbar :location="location" class="visualtest bg-secondary pt-4" :locations="locations" @locationKeyup="datalist(...arguments)"></PropertySearchbar>
+    <PropertySearchbar class="visualtest bg-secondary pt-4" v-model="location" :locations="locations" @locationKeyup="datalist(...arguments)"></PropertySearchbar>
     
     <div class="container">
-      <h2>Hero Property Searchvar</h2>
+      <h2>Hero Property Searchbar</h2>
       <p>The searchbar maybe embedded into a more decorative container and will need to be made more visual.</p>
       <a href="/standalone/iamsold-homepage">Iamsold homepage example</a>
     </div>
 
-    <PropertySearchbar class="visualtest bg-primary prevent-invert property-searchbar--hero"></PropertySearchbar>
+    <PropertySearchbar id="search2" class="visualtest bg-primary prevent-invert property-searchbar--hero"></PropertySearchbar>
     
 
     <div class="container">
@@ -38,14 +38,14 @@ export default {
   data () {
     return {
       htmlUsage: ``,
-      location: 'Sunderland',
-      locations: [
-        {'value': 'Newcastle'}
-      ]
+      location: '',
+      locations: null
     }
   },
   methods: {
     datalist: function (event) {
+
+      console.log(this.location);
 
       this.locations =  [
         {'value': 'London'},

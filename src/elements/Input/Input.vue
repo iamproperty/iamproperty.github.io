@@ -183,8 +183,6 @@ export default {
     },
     inputVal: {
       get() {
-
-        console.log(this.$attrs.multiple)
         // Default to the first options if no value set for select field
         if(this.value == undefined && this.options != undefined && this.type =="select"){
 
@@ -194,7 +192,6 @@ export default {
           }
           return this.options[0].value;
         }
-
 
         return this.value;
       },

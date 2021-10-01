@@ -4,7 +4,7 @@
     <div class="property-searchbar">
       <form class="row" :action="formAction" :method="formMethod">
         <fieldset class="col-12 col-md-3">
-          <Input inputClass="input--locations" v-model="locationSet" label="Location" id="location" :options="locations" required placeholder="i.e. Newcastle or NE1"  @keyupEvent="locationKeyup(...arguments)"></Input>
+          <Input inputClass="input--locations" v-model="locationSet" label="Location" id="location" :options="locationsList()" required placeholder="i.e. Newcastle or NE1"  @keyupEvent="locationKeyup(...arguments)" ref="search"></Input>
           <Input class="select--miles" label="Miles" id="miles" type="select" :options="distances"></Input>
         </fieldset>
         <fieldset class="col-12 col-md">
@@ -21,10 +21,10 @@
             <Input class="col-6" label="Maximum beds" id="beds-max" data-max="true" type="select" :options="bedsMax"></Input>
           </div>
         </fieldset>
-        <fieldset class="col-12 col-md">
+        <fieldset class="col-12 col-md-2">
           <Input label="Property type" id="property-type" type="select" :options="propertyTypes"></Input>
         </fieldset>
-        <div class="col-12 col-md-2 d-flex property-searchbar__btn">
+        <div class="col-12 col-md mw-md-fit-content d-flex property-searchbar__btn">
           <button class="btn w-100 me-0" type="submit" value="submit">Search</button>
         </div>
       </form>
@@ -58,7 +58,7 @@ export default {
     },
     location: {
       type: String,
-      rewuired: false
+      required: false
     },
     locations: {
       type: Array,
@@ -85,12 +85,12 @@ export default {
       default() {
         return [
           {'value':'0','display':'No min'},
-          {'value':'50000','display':'£50k'},
-          {'value':'75000','display':'£75k'},
-          {'value':'100000','display':'£100k'},
-          {'value':'150000','display':'£150k'},
-          {'value':'200000','display':'£200k'},
-          {'value':'250000','display':'£250k'}
+          {'value':'50000','display':'£50k min'},
+          {'value':'75000','display':'£75k min'},
+          {'value':'100000','display':'£100k min'},
+          {'value':'150000','display':'£150k min'},
+          {'value':'200000','display':'£200k min'},
+          {'value':'250000','display':'£250k min'}
         ];
       }
     },
@@ -100,12 +100,12 @@ export default {
       default() {
         return [
           {'value':'any','display':'No max'},
-          {'value':'50000','display':'£50k'},
-          {'value':'75000','display':'£75k'},
-          {'value':'100000','display':'£100k'},
-          {'value':'150000','display':'£150k'},
-          {'value':'200000','display':'£200k'},
-          {'value':'250000','display':'£250k'}
+          {'value':'50000','display':'£50k max'},
+          {'value':'75000','display':'£75k max'},
+          {'value':'100000','display':'£100k max'},
+          {'value':'150000','display':'£150k max'},
+          {'value':'200000','display':'£200k max'},
+          {'value':'250000','display':'£250k max'}
         ];
       }
     },
@@ -115,13 +115,13 @@ export default {
       default() {
         return [
           {'value':'any','display':'No min'},
-          {'value':'0','display':'Studio'},
-          {'value':'1','display':'1 bed'},
-          {'value':'2','display':'2 beds'},
-          {'value':'3','display':'3 beds'},
-          {'value':'4','display':'4 beds'},
-          {'value':'5','display':'5 beds'},
-          {'value':'6','display':'6 beds'}
+          {'value':'0','display':'Studio min'},
+          {'value':'1','display':'1 bed min'},
+          {'value':'2','display':'2 beds min'},
+          {'value':'3','display':'3 beds min'},
+          {'value':'4','display':'4 beds min'},
+          {'value':'5','display':'5 beds min'},
+          {'value':'6','display':'6 beds min'}
         ];
       }
     },
@@ -131,13 +131,13 @@ export default {
       default() {
         return [
           {'value':'any','display':'No max'},
-          {'value':'0','display':'Studio'},
-          {'value':'1','display':'1 bed'},
-          {'value':'2','display':'2 beds'},
-          {'value':'3','display':'3 beds'},
-          {'value':'4','display':'4 beds'},
-          {'value':'5','display':'5 beds'},
-          {'value':'6','display':'6 beds'}
+          {'value':'0','display':'Studio max'},
+          {'value':'1','display':'1 bed max'},
+          {'value':'2','display':'2 beds max'},
+          {'value':'3','display':'3 beds max'},
+          {'value':'4','display':'4 beds max'},
+          {'value':'5','display':'5 beds max'},
+          {'value':'6','display':'6 beds max'}
         ];
       }
     },
@@ -165,13 +165,41 @@ export default {
   },
   data () {
     return {
-      locationSet: this.location ? this.location : ''
+      locationSave: ''
     }
   },
   methods: {
     locationKeyup: function(event){
 
       this.$emit('locationKeyup',event);
+    }
+  },
+  computed: {
+    locationSet: {
+      get() {
+
+        if(this.locationSave)
+          return this.locationSave;
+
+        return this.location;
+      },
+      set(val) {
+        
+        this.locationSave = val;
+        this.$emit('input', val);
+      }
+    },
+    locationsList() {
+      return () => {
+        
+        if(this.locations){
+          return this.locations
+        }
+
+        return [
+          {'value': 'Newcastle'}
+        ];
+      }
     }
   }
 }
