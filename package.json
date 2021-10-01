@@ -84,5 +84,5 @@
     "dist/*",
     "src/*"
   ],
-  "localURL": "http://localhost:8080"
+  "localURL": "http://localhost:8082"
 }

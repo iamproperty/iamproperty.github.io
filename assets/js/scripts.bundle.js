@@ -4002,6 +4002,15 @@
         setReorderRows();
       }
     }, false);
+    tableElement.addEventListener('populated', function (e) {
+      var tableFilter = tableElement.querySelector('.table__filters');
+      tableFilter.remove();
+      var tablePagination = tableElement.querySelector('.table__pagination');
+      tablePagination.remove();
+      var newTable = tableElement.cloneNode(true);
+      tableElement.parentNode.replaceChild(newTable, tableElement);
+      table(newTable);
+    }, false);
   }
 
   function accordion(accordionElement) {

@@ -85,7 +85,6 @@
 // #endregion
 
 // #region Conditional reveal
-
 .conditional {
   display: none;
 }
@@ -109,5 +108,21 @@ input.conditional-input-5:checked ~ .conditional-5 {
   display: block;
   clear: both;
 }
+// #endregion
 
+// #region Multi-select
+select[multiple] {
+  border-radius: 0.35rem;
+}
+select[multiple]::-webkit-scrollbar {
+  width: 0.7rem; // manage scrollbar width here
+}
+select[multiple]::-webkit-scrollbar * {
+  background-color:transparent; // manage scrollbar background color here
+}
+select[multiple]::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  //background-color:#000000!important; // manage scrollbar thumb background color here
+  border-radius: 0.35rem;
+}
 // #endregion
