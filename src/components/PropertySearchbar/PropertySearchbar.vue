@@ -35,7 +35,7 @@
 
 <style lang="scss">
 @import "../../../assets/sass/_func.scss";
-@import "../../../assets/sass/components/propertySearchbar.scss";
+@import "../../../assets/sass/components/property-searchbar.scss";
 
 </style>
 
@@ -191,7 +191,7 @@ export default {
     },
     locationsList() {
       return () => {
-        
+
         if(this.locations){
           return this.locations
         }
