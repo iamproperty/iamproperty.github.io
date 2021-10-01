@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
+import Standalone from './Standalone.vue'
 import router from './router'
 
 import navbar from '../assets/js/modules/navbar'
@@ -54,9 +55,11 @@ Vue.use(shared)
 
 Vue.config.productionTip = false
 
+let template = window.location.pathname.startsWith('/standalone') ? Standalone : App;
+
 new Vue({
   router,
-  render: h => h(App)
+  render: h => h(template)
 }).$mount('#app')
 
 export {shared}

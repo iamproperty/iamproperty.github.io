@@ -1,0 +1,127 @@
+// #region Property searchbar
+.property-searchbar {
+
+  fieldset {
+    position: relative;
+
+    @include media-breakpoint-up(md) {
+      position: relative;
+      padding-right: 1.5rem;
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0.5rem;
+        display: block;
+        height: 100%;
+        width: 1px;
+        background-color: var(--colour-muted);
+        opacity: 0.25;
+      }
+    }
+  }
+
+  .form-control__wrapper {
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-label,
+  label {
+    font-size: rem(14);
+    text-transform: uppercase;
+  }
+
+  @include media-breakpoint-up(md) {
+
+    .row .row {
+      .form-label {
+        display: none;
+      }
+    }
+
+    .form-control,
+    .form-select {
+      padding: 0.5rem 0 0.5rem 0.5rem;
+    }
+
+    .input--locations {
+      padding-right: 5.5rem;
+    }
+  }
+
+  .select--miles {
+    position: absolute;
+    bottom: 0rem;
+    right: 0.5rem;
+    width: 5rem;
+
+    @include media-breakpoint-up(md) {
+      right: 1.5rem;
+    }
+
+    label {
+      display: none;
+    }
+
+    select {
+      background-color: transparent;
+      border-color: transparent;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .property-searchbar__btn {
+      align-items: flex-end;
+    }
+  }
+
+  button {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    @include media-breakpoint-up(md) {
+      margin: 0;
+    }
+  }
+}
+// #endregion
+
+// #region Heror searchbar
+.property-searchbar--hero .property-searchbar {
+  padding: 1rem;
+  background-color: #fff;
+  width: 100%;
+  border-radius: rem(10);
+  -webkit-box-shadow: 0 2px 4px 0 rgb(0 0 0 / 24%);
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 24%);
+  position: relative;
+
+  @include media-breakpoint-up(md) {
+
+    border-radius: rem(48);
+    padding: 1.5rem 2.5rem;
+
+    .form-label,
+    label {
+      margin-bottom: 0;
+    }
+
+    .form-control,
+    .form-select {
+      margin-left: -0.5rem; // Add a negative margin too keep text inline but also allow for a padding left so that the focus state looks presentable
+      border: none;
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .property-searchbar__btn {
+      align-items: center;
+    }
+  }
+}
+// #endregion

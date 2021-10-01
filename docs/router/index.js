@@ -331,6 +331,14 @@ export const routes = [
         component: () => import('../views/components/Header.vue')
       },
       {
+        path: 'property-searchbar',
+        name: 'Property Searchbar',
+        meta: {
+          title: 'Property Searchbar | Components | IAM Key'
+        },
+        component: () => import('../views/components/PropertySearchbarDoc.vue')
+      },
+      {
         path: 'testimonial',
         name: 'Testimonial',
         meta: {
@@ -375,6 +383,29 @@ export const routes = [
       {
         path: 'logo-carousel',
         component: () => import('../views/examples/LogoCarousel.vue')
+      }
+    ]
+  },
+  {
+    path: '/standalone',
+    name: 'Standalone',
+    meta: {
+      title: 'Standalone | IAM Key'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "examples" */ '../views/Standalone.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/standalone/Index.vue')
+      },
+      {
+        path: 'iamsold-homepage',
+        name: "iam sold homepage",
+        component: () => import('../views/standalone/IamsoldHomepage.vue')
       }
     ]
   },

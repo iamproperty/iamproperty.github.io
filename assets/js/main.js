@@ -19,6 +19,7 @@ import table from './modules/table'
 import accordion from './modules/accordion'
 import testimonial from './modules/testimonial'
 import carousel from './modules/carousel'
+import form from './modules/form'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -45,5 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // Carousel
   Array.from(document.querySelectorAll('.carousel')).forEach((arrayElement, index) => {
     carousel(arrayElement);
+  });
+  // Form
+  Array.from(document.querySelectorAll('form')).forEach((arrayElement, index) => {
+    form(arrayElement);
   });
 });

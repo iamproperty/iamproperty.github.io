@@ -3,7 +3,7 @@
     <label v-if="needsLabel()" :class="`form-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="label"></label>
     
     <!-- Standard input field -->
-    <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" />
+    <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" v-on:keyup="inputKeyup" />
     
     <!-- Textarea -->
     <textarea v-if="type=='textarea'" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" v-bind="$attrs"></textarea>
@@ -183,6 +183,7 @@ export default {
         return this.value;
       },
       set(val) {
+        
         this.$emit('input', val);
       }
     }
@@ -202,6 +203,11 @@ export default {
         element.parentNode.removeChild(element);
       }
     })
+  },
+  methods: {
+    inputKeyup(event){
+      this.$emit('keyupEvent',event);
+    }
   }
 }
 </script>
