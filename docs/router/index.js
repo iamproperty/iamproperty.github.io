@@ -254,6 +254,14 @@ export const routes = [
             component: () => import('../views/elements/form/Radio.vue')
           },
           {
+            path: 'toggle',
+            name: 'Toggle buttons',
+            meta: {
+              title: 'Toggle buttons | Elements | IAM Key'
+            },
+            component: () => import('../views/elements/form/Toggle.vue')
+          },
+          {
             path: 'tags',
             name: 'Pill tags',
             meta: {
