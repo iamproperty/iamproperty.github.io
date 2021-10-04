@@ -41,7 +41,8 @@
 @mixin invert-colours(){
   [class*="bg-"].bg-dark:not(.prevent-invert) &,
   [class*="bg-"].bg-danger:not(.prevent-invert) &,
-  [class*="bg-"].bg-primary:not(.prevent-invert) & {
+  [class*="bg-"].bg-primary:not(.prevent-invert) &,
+  .invert-colours & {
     @content;
   }
 }

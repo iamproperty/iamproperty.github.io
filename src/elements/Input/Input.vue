@@ -3,7 +3,7 @@
     <label v-if="needsLabel()" :class="`form-label${labelClass?` ${labelClass}`:''}`" :for="id" v-html="displayLabel()"></label>
     
     <!-- Standard input field -->
-    <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" />
+    <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" v-on:keyup="inputKeyup" />
     
     <!-- Textarea -->
     <textarea v-if="type=='textarea'" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputClass?` ${inputClass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" v-bind="$attrs"></textarea>
@@ -183,8 +183,6 @@ export default {
     },
     inputVal: {
       get() {
-
-        console.log(this.$attrs.multiple)
         // Default to the first options if no value set for select field
         if(this.value == undefined && this.options != undefined && this.type =="select"){
 
@@ -195,10 +193,10 @@ export default {
           return this.options[0].value;
         }
 
-
         return this.value;
       },
       set(val) {
+        
         this.$emit('input', val);
       }
     }
@@ -219,6 +217,9 @@ export default {
     })
   },
   methods: {
+    inputKeyup(event){
+      this.$emit('keyupEvent',event);
+    },
     clickEvent(){
       this.$emit('bus');
     }

@@ -46,6 +46,7 @@ import SVGIcons from '../assets/svg/icons.svg?inline'
 import Logo from '@/foundations/Logo/Logo.vue'
 import pkg from '../package.json'
 import * as helpers from '../assets/js/modules/helpers'
+import form from '../assets/js/modules/form'
 
 export default {
   data () {
@@ -69,6 +70,10 @@ export default {
   updated(){
     if(document.querySelector('main'))
       helpers.checkElements(document.querySelector('main'));
+
+    Array.from(document.querySelectorAll('form')).forEach((arrayElement, index) => {
+      form(arrayElement);
+    });
 
     hljs.highlightAll();
   }

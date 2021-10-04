@@ -17,7 +17,8 @@
 /* Override the colours when on a drark background */
 .bg-primary:not(.prevent-invert),
 .bg-dark:not(.prevent-invert),
-.bg-danger:not(.prevent-invert) {
+.bg-danger:not(.prevent-invert),
+.invert-colours {
   > * {
 
     --colour-secondary-rgb: 255,255,255;
