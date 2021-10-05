@@ -347,6 +347,14 @@ export const routes = [
         component: () => import('../views/components/Header.vue')
       },
       {
+        path: 'nav',
+        name: 'Nav',
+        meta: {
+          title: 'Nav | Components | IAM Key'
+        },
+        component: () => import('../views/components/NavDoc.vue')
+      },
+      {
         path: 'property-searchbar',
         name: 'Property Searchbar',
         meta: {
@@ -421,7 +429,18 @@ export const routes = [
       {
         path: 'iamsold-homepage',
         name: "iam sold homepage",
+        meta: {
+          title: 'iam sold | IAM Key'
+        },
         component: () => import('../views/standalone/IamsoldHomepage.vue')
+      },
+      {
+        path: 'iamsold-admin',
+        name: "iam sold admin",
+        meta: {
+          title: 'iam sold | IAM Key'
+        },
+        component: () => import('../views/standalone/IamsoldAdmin.vue')
       }
     ]
   },

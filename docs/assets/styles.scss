@@ -2,10 +2,6 @@
 $fontPath: '/fonts/';
 @import '../../assets/sass/core.scss';
 
-// Temp files for homepage until components created
-@import "../../node_modules/bootstrap/scss/nav";
-@import "../../assets/sass/components/navbar.scss";
-
 // Utility generator
 // Used to generate utilities & print utilities
 @mixin print-utility($utility, $infix, $is-rfs-media-query: false) {
