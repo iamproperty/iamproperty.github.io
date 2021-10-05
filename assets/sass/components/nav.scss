@@ -1,0 +1,311 @@
+
+.nav {
+
+  background: white;
+
+  &__inner {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow: auto;
+
+    > .container {
+
+      padding-top: rem(16);
+      padding-bottom: 1rem;
+      flex-shrink: 0;
+    }
+  }
+
+  &__menu {
+    padding-bottom: rem(16);
+  }
+
+  .brand {
+    font-size: rem(48);
+
+    @include media-breakpoint-up(sm) {
+      font-size: rem(60);
+    }
+  }
+
+
+
+
+  .nav__search-btn,
+  .nav__menu-btn {
+
+    display: flex;
+
+    label {
+      height: rem(26);
+      width: rem(30);
+      text-indent: -300%;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+
+      color: var(--colour-link);
+
+      &:hover,
+      &:focus {
+
+        color: var(--colour-hover);
+      }
+
+      &:active {
+
+        color: var(--colour-active);
+      }
+
+      &:before,
+      &:after {
+        content: "";
+        position: absolute;
+        width: 0%;
+        height: 2px;
+        top: calc(50% - 1px);
+        left: 0;
+        background: currentColor;
+        transform-origin: 50% 50%;
+        transition: transform 0.5s, width 0.5s;
+      }
+    }
+  }
+  .nav__search-btn {
+
+    label {
+      text-indent: 0;
+      overflow: visible;
+    }
+    .icon {
+      height: rem(32);
+      width: rem(32);
+      margin-top: rem(-3);
+      margin-left: rem(-1);
+      transition: opacity 0.5s;
+      color: inherit;
+
+      &__outline {
+
+        stroke-width: 2px;
+        stroke: currentColor;
+      }
+    }
+  }
+
+  .nav__menu-btn {
+    display: flex;
+
+    label {
+
+      border-top: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      
+      &:before,
+      &:after {
+        width: 70%;
+      }
+    }
+  }
+
+  .list-unstyled {
+    padding-top: 1rem;
+  }
+
+  &__menu li a:not(.text-decoration-none):not(.btn) {
+    text-decoration: none;
+    @include var(color,--colour-primary,!important);
+    display: inline-block;
+    padding: rem(8) 0 rem(8) 0;
+    position: relative;
+
+    &:before {
+      display: block;
+      width: 0;
+      height: rem(4);
+    }
+
+    &:hover:before,
+    &:focus:before,
+    &:active:before,
+    &.active:before {
+      width: 100%;
+    }
+  }
+}
+
+
+.nav--small {
+  .brand {
+    font-size: rem(32);
+
+    @include media-breakpoint-up(md) {
+      font-size: rem(40);
+    }
+  }
+  .nav__logo {
+
+    height: 2rem;
+
+    @include media-breakpoint-up(md) {
+    
+      height: 2.5rem;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .nav__btn .btn {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+}
+
+// #region Secondary nav
+.nav__menu--secondary {
+  flex-grow: 1;
+
+  a {
+    display: inline-block;
+    padding: rem(8) 0 rem(8) 0;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: 1px solid currentColor!important;
+  }
+}
+
+// #endregion
+
+// #region Sticky nav
+.nav {
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99999;
+  -webkit-box-shadow: 0 4px 20px -10px rgba(51,51,51,0.25);
+  box-shadow: 0 4px 20px -10px rgba(51,51,51,0.25);
+}
+
+nav + main > *:first-child {
+  padding-top: 2rem;
+}
+
+@include media-breakpoint-up(md) {
+  .nav.has-secondary {
+
+    top: rem(-40);
+
+    .nav__inner {
+
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 99999;
+    }
+  }
+}
+// #endregion
+
+// #region Show/hide
+.nav__menu,
+.nav__btn,
+.nav__menu--secondary,
+.nav__menu--search {
+
+  display: none;
+}
+
+#showMenu:checked ~ .nav__inner {
+
+  height: 100vh;
+}
+
+#showMenu:checked ~ div .nav__menu,
+#showMenu:checked ~ div .nav__btn,
+#showMenu:checked ~ div .nav__menu--secondary,
+#showMenu:not(:checked) ~ #showSearch:checked ~ div .nav__menu--search {
+  display: block;
+}
+
+
+
+#showMenu:checked ~ div .nav__menu-btn label,
+#showSearch:checked ~ div .nav__search-btn label {
+  
+  border: 0;
+  
+  .icon {
+    opacity: 0;
+  }
+  &:before {
+    width: 100%;
+    transform: rotate(45deg);
+  }
+  &:after {
+
+    width: 100%;
+    transform: rotate(-45deg);
+  }
+}
+// #endregion
+
+// #region Desktop nav
+@include media-breakpoint-up(md) {
+
+  .nav__logo {
+    height: rem(64);
+  }
+  .nav__inner > .container {
+    order: 1;
+  }
+  .nav__menu {
+    display: flex;
+    padding-bottom: 0;
+  }
+
+  .nav__btn,
+  .nav__menu--secondary {
+    display: flex;
+  }
+
+  .nav__menu--secondary {
+    order: 0;
+
+    .container {
+      padding-bottom: 0;
+    }
+  }
+
+  .nav__search-btn,
+  .nav__btn {
+    order: 2;
+    margin-left: 1rem;
+  }
+
+  .nav .list-unstyled {
+    margin-left: -1.5rem!important;
+    margin-right: -1.5rem!important;
+    width: calc(100% + 3rem);
+    margin-bottom: 0;
+    text-align: right;
+    padding-top: 0;
+
+    li {
+      display: inline-block;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  .nav__menu--secondary .list-unstyled {
+    font-size: rem(15);
+  }
+}
+// #endregion

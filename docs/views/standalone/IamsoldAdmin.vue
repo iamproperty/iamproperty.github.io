@@ -1,33 +1,20 @@
 <template>
   <div>
-    <Nav logo="sold" btnLink="/account" btnText="Login / register">
+    <Nav logo="sold"  btnLink="/admin/logout" btnText="Logout" class="bg-primary navbar--small">
       <ul class="list-unstyled">
-        <li class=""><a href="/props">Propery Auctions Explained</a></li>
-        <li class=""><a href="/props">Buying at Auction</a></li>
-        <li class=""><a href="/props">Selling at Auction</a></li>
+        <li class=""><a href="/props" title="View your profile details">Hello Michelle Main (Level 1)</a></li>
+        <li class=""><a href="/props">Dashboard</a></li>
+        <li class=""><a href="https://iamproperty.atlassian.net/servicedesk/customer/portal/11">Support Ticket</a></li>
       </ul>
-      <template v-slot:secondary>
-        <ul class="list-unstyled">
-        <li class=""><a href="/props">Stories</a></li>
-        <li class=""><a href="/props">Insight</a></li>
-        <li class=""><a href="/props">About us</a></li>
-        <li class=""><a href="/props">Careers</a></li>
-        <li class=""><a href="/props">Contact us</a></li>
-        <li class=""><a href="tel:03456460302"> 0345 646 0302</a></li>
-      </ul>
-      </template>
     </Nav>
     <main>
-      <div class="container bg-primary prevent-invert">
-        <div class="invert-colours text-center">
-          <h1>Changing the perception of property auction</h1>
-          <p class="strapline mw-100">80% of our customers rated us "Excellent".</p>
-        </div>
-        <PropertySearchbar class="property-searchbar--hero"></PropertySearchbar>
-        
-      </div>
+      
+      
       <div class="container pt-4">
-        <h1>Iamsold homepage (work in progress)</h1>
+        <h1>Welcome to your dashboard <span class="text-secondary">Michelle Main</span></h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>

@@ -4,25 +4,13 @@
     <SVGLogo class="d-none" />
     <SVGIcons class="d-none" />
 
-    <nav class="navbar">
-      <div class="container">
-        <div class="row">
-          <div class="col col-sm-4 mw-fit-content">
-            <router-link :class="{'text-decoration-none router-link-sub-active': subIsActive('/')}" to="/">
-              <Logo id="key" desc="Design system<br/>&amp; framework"></Logo>
-            </router-link>
-          </div>
-
-          <div class="col mw-fit-content ms-auto d-none d-sm-flex flex-row align-items-center">
-            <ul class="list-unstyled list-inline ms-auto d-block mb-0">
-              <li class="list-inline-item ms-4 me-0"><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
-              <li class="list-inline-item ms-4 me-0"><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
-              <li class="list-inline-item ms-4 me-0"><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
+    <Nav logo="key" logoText="Design system<br/>&amp; framework">
+      <ul class="list-unstyled">
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
+      </ul>
+    </Nav>
     <router-view />
     <footer class="bg-primary">
 
@@ -48,6 +36,8 @@ import pkg from '../package.json'
 import * as helpers from '../assets/js/modules/helpers'
 import form from '../assets/js/modules/form'
 
+import Nav from '@/components/Nav/Nav.vue'
+
 export default {
   data () {
     return {
@@ -57,7 +47,8 @@ export default {
   components: {
     SVGLogo,
     SVGIcons,
-    Logo
+    Logo,
+    Nav
   },
   methods: {
     subIsActive (input) {
