@@ -9,6 +9,7 @@
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | logo | String | property | Update which logo is shown |
+| logoText | String | - | Optional logo text |
 | btnLink | String | - | Optional button can be added, used mainly for links relating to user accounts. |
 | btnText | String | - | Text used within the above button |
 
