@@ -59,17 +59,15 @@
     </div>
 
     <div class="container pb-0">
-      <h2>Inline search field</h2>
-      <p>Allow for sublinks to be shown within the navigation but also really highlight the section and have additional supportive content.</p>
-    </div>
-    
-    <div class="container pb-0">
-      <h2>Featured search area</h2>
-      <p>Allow for sublinks to be shown within the navigation but also really highlight the section and have additional supportive content.</p>
+      <h2>Add search form</h2>
+      <p>Integrate search functionality by adding a form to the nav and add the class <strong>.nav--inline-search</strong> to the nav. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
+ 
+      <h3>Featured search area</h3>
+      <p>Or create a real feature by adding a div with the class of <strong>.nav__menu--search</strong> and a search button wrappped in a div with the class <strong>.nav__search-btn</strong>. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
     </div>
     
     <div class="container">
-      <h2>Vue Header component reference</h2>
+      <h2>Vue Nav component reference</h2>
       <Readme></Readme>
     </div>
   </main>

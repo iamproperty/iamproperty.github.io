@@ -1,12 +1,27 @@
 <template>
   <div>
-    <Nav logo="sold"  btnLink="/admin/logout" btnText="Logout" class="bg-primary nav--small">
+    <Nav logo="sold"  btnLink="/admin/logout" btnText="Logout" class="bg-primary nav--small nav--inline-search">
       <ul class="list-unstyled">
-        <li class=""><a href="/props" title="View your profile details">Hello Michelle Main (Level 1)</a></li>
+        <li class=""><a href="/props" title="View your profile details">Hello <strong>Michelle Main</strong> (Level 1)</a></li>
         <li class=""><a href="/props">Dashboard</a></li>
-        <li class=""><a href="https://iamproperty.atlassian.net/servicedesk/customer/portal/11">Support Ticket</a></li>
+        <li class=""><a href="https://iamproperty.atlassian.net/servicedesk/customer/portal/11" target="_blank">Support Ticket</a></li>
       </ul>
+      <form>
+        <Input id="search" type="search" v-model="searchTermGen" placeholder="Keyword, property pr ap ref" label="Search" class="form-control-sm" list="search-terms" @keyupEvent="inputKeyup(...arguments)"></Input>
+        <button class="btn btn-search">
+          <svg class="icon" viewBox="0 0 32 32">
+            <title>Search</title>
+            <ellipse cx="14.92" cy="13.81" rx="11.92" ry="11.81" class="icon__outline" />
+            <line x1="22.68" y1="22.75" x2="30" y2="30" class="icon__outline" />
+          </svg>
+        </button>
+      </form>
     </Nav>
+    <datalist id="search-terms">
+      <option v-for="(value,index) in searchTerms" :key="index" :data-link="value.url">{{value.display ? value.display : value.value}}</option>
+    </datalist>
+
+
     <main>
       
       
@@ -33,11 +48,60 @@
 <script>
 import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue'
 import Nav from '@/components/Nav/Nav.vue'
+import Input from '@/elements/Input/Input.vue'
 
 export default {
   components: {
     PropertySearchbar,
-    Nav
+    Nav,
+    Input
   },
+  props: {
+    searchTerm: {
+      type: String,
+      required: false
+    }
+  },
+  data () {
+    return {
+      savedSearchTerm: '',
+      searchTerms: [
+        {
+          'url': '/london',
+          'value': 'London'
+        }
+      ]
+    }
+  },
+  computed: {
+    searchTermGen: {
+      get() {
+
+        if(this.savedSearchTerm)
+          return this.savedSearchTerm;
+
+        return this.searchTerm;
+      },
+      set(val) {
+        
+        this.savedSearchTerm = val;
+        this.$emit('input', val);
+      }
+    }
+  },
+  methods: {
+    inputKeyup(event){
+      this.searchTerms =  [
+        {
+          'url': '/london',
+          'value': 'London'
+        },
+        {
+          'url': '/leicester',
+          'value': 'Leicester'
+        }
+      ];
+    }
+  }
 }
 </script>

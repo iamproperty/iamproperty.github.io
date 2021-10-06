@@ -133,6 +133,22 @@
       width: 100%;
     }
   }
+
+
+  .nav__menu--search {
+    order: 2;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+
+    background: rgba(0,0,0,.6);
+    height: calc(100vh - 5rem);
+
+    > div:first-child {
+      
+    }
+  }
 }
 
 // #region Smal nav (used for admin sites)
@@ -279,6 +295,7 @@ nav + main > *:first-child {
     display: flex;
   }
 
+
   .nav__menu--secondary {
     order: 0;
 
@@ -312,6 +329,7 @@ nav + main > *:first-child {
   .nav__menu--secondary > .list-unstyled {
     font-size: rem(15);
   }
+
 }
 // #endregion
 
@@ -500,3 +518,60 @@ nav + main > *:first-child {
 }
 // #endregion
 
+// #region inline search
+.nav--inline-search {
+
+  .nav__menu form {
+    position: relative;
+    .form-control__wrapper .form-control {
+      padding-right: 3rem;
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      z-index: 1;
+      border-color: transparent;
+      background: transparent;
+      padding: 0.85rem 0rem;
+
+      .icon {
+        stroke: currentColor;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .nav__menu > .list-unstyled {
+      text-align: left;
+      margin-right: 0!important;
+    }
+
+    .nav__menu form {
+      min-width: rem(350);
+      position: relative;
+
+      .form-control__wrapper {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+
+        label {
+          white-space: nowrap;
+          padding-right: 1rem;
+        }
+
+        .form-control {
+          padding: rem(7) 3rem rem(7) 1rem;
+        }
+      }
+
+      button {
+        padding: rem(8) 0rem;
+      }
+    }
+  }
+}
+// #endregion

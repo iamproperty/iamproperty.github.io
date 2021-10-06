@@ -13,7 +13,7 @@
             </a>
           </div>
 
-          <div class="col mw-fit-content nav__search-btn flex-row align-items-center" v-if="search">
+          <div class="col mw-fit-content nav__search-btn flex-row align-items-center" v-if="hasSearchSlot">
             <label for="showSearch">
               <svg class="icon" viewBox="0 0 32 32">
                 <title>Search</title>
@@ -43,10 +43,11 @@
           <slot name="secondary"></slot>
         </div>
       </div>
-      <div class="nav__menu--search bg-primary" v-if="search">
-        <div class="container">
-
-          search
+      <div class="nav__menu--search" v-if="hasSearchSlot">
+        <div class="bg-gradient pt-4">
+          <div class="container">
+            <slot name="search"></slot>
+          </div>
         </div>
       </div>
     </div>
@@ -108,6 +109,9 @@ export default {
   computed: {
     hasSecondarySlot() {
       return !!this.$slots.secondary
+    },
+    hasSearchSlot() {
+      return !!this.$slots.search
     }
   },
   mounted(){

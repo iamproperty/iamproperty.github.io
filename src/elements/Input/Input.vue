@@ -60,6 +60,10 @@ export default {
       type: String,
       required: false
     },
+    list: {
+      type: String,
+      required: false
+    },
     label: {
       type: String,
       required: true
@@ -176,6 +180,10 @@ export default {
     },
     hasOptions() {
       return () => {
+
+        if(this.list)
+          return this.list;
+
         if(this.options) {
           return this.id+'-list'
         }

@@ -51,9 +51,12 @@
 // #region Circles
 .container {
   position: relative;
-  overflow: hidden;
   z-index: 1;
 
+
+  &[class*="circle-pattern-"] {
+    overflow: hidden;
+  }
 
   > .circle {
 

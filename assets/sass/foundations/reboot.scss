@@ -68,6 +68,15 @@ hr {
   }
 }
 
+input[type="search" i]::-webkit-search-cancel-button {
+
+  appearance: none;
+}
+
+[list]::-webkit-calendar-picker-indicator {
+  display: none!important;
+}
+
 img {
   max-width: 100%;
 }

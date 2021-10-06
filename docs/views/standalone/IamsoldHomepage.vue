@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav logo="sold" btnLink="/account" btnText="Login / register">
+    <Nav logo="sold" btnLink="/account" btnText="Login / register" search="true">
       <ul class="list-unstyled">
         <li>
           <details class="nav__mega-menu">
@@ -29,13 +29,29 @@
       </ul>
       <template v-slot:secondary>
         <ul class="list-unstyled">
-        <li class=""><a href="/props">Stories</a></li>
-        <li class=""><a href="/props">Insight</a></li>
-        <li class=""><a href="/props">About us</a></li>
-        <li class=""><a href="/props">Careers</a></li>
-        <li class=""><a href="/props">Contact us</a></li>
-        <li class=""><a href="tel:03456460302"> 0345 646 0302</a></li>
-      </ul>
+          <li class=""><a href="/props">Stories</a></li>
+          <li class=""><a href="/props">Insight</a></li>
+          <li class=""><a href="/props">About us</a></li>
+          <li class=""><a href="/props">Careers</a></li>
+          <li class=""><a href="/props">Contact us</a></li>
+          <li class=""><a href="tel:03456460302"> 0345 646 0302</a></li>
+        </ul>
+      </template>
+      <template v-slot:search>
+        <form class="pt-4 row">
+          <div class="col-12 col-md-7">
+
+          <Input id="search" class="form-control-inline" type="search" placeholder="Keyword, property pr ap ref" label="Search"></Input>
+          
+          </div>
+          <div class="col col-md-4">
+            <button class="btn btn-search">Search</button>
+          </div>
+        </form>
+        <span class="h2 mt-3 mb-0">Popular Searches:</span>
+        <ul class="list-unstyled">
+          <li><a href="/buying">Buying houses</a></li>
+        </ul>
       </template>
     </Nav>
     <main>
@@ -67,11 +83,13 @@
 <script>
 import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue'
 import Nav from '@/components/Nav/Nav.vue'
+import Input from '@/elements/Input/Input.vue'
 
 export default {
   components: {
     PropertySearchbar,
-    Nav
+    Nav,
+    Input
   },
 }
 </script>
