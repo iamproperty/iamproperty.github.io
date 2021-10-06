@@ -3,10 +3,7 @@ import App from './App.vue'
 import Standalone from './Standalone.vue'
 import router from './router'
 
-import navbar from '../assets/js/modules/navbar'
 import * as helpers from '../assets/js/modules/helpers'
-
-navbar()
 
 helpers.addBodyClasses(document.body);
 helpers.checkElements(document.body);

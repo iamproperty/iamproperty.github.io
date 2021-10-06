@@ -159,8 +159,15 @@
     return String(num).padStart(places, '0');
   };
 
-  var navbar = function navbar() {
-    console.log('navbar');
+  var navbar = function navbar(element) {
+    Array.from(element.querySelectorAll('details')).forEach(function (detail, index) {
+      detail.addEventListener('mouseenter', function (e) {
+        if (window.matchMedia('(min-width: 62em)').matches) detail.setAttribute('open', 'true');
+      }, false);
+      detail.addEventListener('mouseleave', function (e) {
+        if (window.matchMedia('(min-width: 62em)').matches) detail.removeAttribute('open');
+      }, false);
+    });
   };
 
   function _typeof(obj) {
@@ -1165,8 +1172,11 @@
   document.addEventListener("DOMContentLoaded", function () {
     addBodyClasses(document.body);
     checkElements(document.body);
-    navbar();
-    console.log('test.js'); // Advanced tables
+    console.log('test.js'); // ANav
+
+    Array.from(document.querySelectorAll('.nav')).forEach(function (arrayElement, index) {
+      navbar(arrayElement);
+    }); // Advanced tables
 
     Array.from(document.querySelectorAll('.table__wrapper')).forEach(function (arrayElement, index) {
       table(arrayElement);

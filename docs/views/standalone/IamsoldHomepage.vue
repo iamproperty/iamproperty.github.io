@@ -2,7 +2,28 @@
   <div>
     <Nav logo="sold" btnLink="/account" btnText="Login / register">
       <ul class="list-unstyled">
-        <li class=""><a href="/props">Propery Auctions Explained</a></li>
+        <li>
+          <details class="nav__mega-menu">
+            <summary><span class="link">Propery Auctions Explained</span></summary>
+            <div class="inner">
+              <div class="container">
+                
+                <div class="bg-secondary col-md-8">
+                  <ul class="list-unstyled">
+                    <li><a href="/" class="link--featured">Propery Auctions Explained</a></li>
+                    <li><a href="/">Buying at Auction Explained</a></li>
+                    <li><a href="/">Selling Auctions Explained</a></li>
+                    <li><a href="/">FAQs</a></li>
+                  </ul>
+                </div>
+
+                <div class="bg-dark d-none d-md-block col-md-4">
+                  promotional content
+                </div>
+              </div>
+            </div>
+          </details>
+        </li>
         <li class=""><a href="/props">Buying at Auction</a></li>
         <li class=""><a href="/props">Selling at Auction</a></li>
       </ul>
