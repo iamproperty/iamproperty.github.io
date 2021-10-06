@@ -52,6 +52,23 @@
     </Nav>
 
     <div class="container">
+      <h2>Sub navigation</h2>
+      <p>Allow for sublinks to be shown within the navigation so that users don't have to navigate to a landing page. See the <a href="/standalone/navbar" target="_blank">navbvar example page</a> to see it better in action.</p>
+      <h3>Mega menu</h3>
+      <p>Add a class of <strong>.nav__mega-menu</strong> to the details element to really highlight the section and have additional supportive content. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
+    </div>
+
+    <div class="container pb-0">
+      <h2>Inline search field</h2>
+      <p>Allow for sublinks to be shown within the navigation but also really highlight the section and have additional supportive content.</p>
+    </div>
+    
+    <div class="container pb-0">
+      <h2>Featured search area</h2>
+      <p>Allow for sublinks to be shown within the navigation but also really highlight the section and have additional supportive content.</p>
+    </div>
+    
+    <div class="container">
       <h2>Vue Header component reference</h2>
       <Readme></Readme>
     </div>

@@ -1,5 +1,5 @@
 <template>
-  <nav :class="`nav${hasSecondarySlot?` has-secondary`:''}`">
+  <nav :class="`nav${hasSecondarySlot?` has-secondary`:''}`" ref="wrapper">
 
     <input type="checkbox" name="showMenu" id="showMenu" class="d-none" />
     <input type="checkbox" name="showSearch" id="showSearch" class="d-none" />
@@ -62,6 +62,7 @@
 </style>
 
 <script>
+import nav from '../../../assets/js/modules/nav.js'
 import Logo from '../../foundations/Logo/Logo.vue'
 
 export default {
@@ -108,6 +109,13 @@ export default {
     hasSecondarySlot() {
       return !!this.$slots.secondary
     }
+  },
+  mounted(){
+
+    this.$nextTick(function () {
+      
+      nav(this.$refs.wrapper);
+    })
   }
 }
 </script>

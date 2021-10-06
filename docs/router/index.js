@@ -427,6 +427,14 @@ export const routes = [
         component: () => import('../views/standalone/Index.vue')
       },
       {
+        path: 'navbar',
+        name: "navbar example",
+        meta: {
+          title: 'Navbar example| IAM Key'
+        },
+        component: () => import('../views/standalone/Navbar.vue')
+      },
+      {
         path: 'iamsold-homepage',
         name: "iam sold homepage",
         meta: {

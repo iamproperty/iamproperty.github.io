@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav logo="sold"  btnLink="/admin/logout" btnText="Logout" class="bg-primary navbar--small">
+    <Nav logo="sold"  btnLink="/admin/logout" btnText="Logout" class="bg-primary nav--small">
       <ul class="list-unstyled">
         <li class=""><a href="/props" title="View your profile details">Hello Michelle Main (Level 1)</a></li>
         <li class=""><a href="/props">Dashboard</a></li>

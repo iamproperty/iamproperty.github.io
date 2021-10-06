@@ -14,7 +14,7 @@
 
 // Modules
 import * as helpers from './modules/helpers'
-import navbar from './modules/navbar'
+import nav from './modules/nav'
 import table from './modules/table'
 import accordion from './modules/accordion'
 import testimonial from './modules/testimonial'
@@ -26,8 +26,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   helpers.addBodyClasses(document.body);
   helpers.checkElements(document.body);
-	navbar();
   console.log('test.js');
+
+  // ANav
+  Array.from(document.querySelectorAll('.nav')).forEach((arrayElement, index) => {
+    nav(arrayElement);
+  });
 
   // Advanced tables
   Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement, index) => {
