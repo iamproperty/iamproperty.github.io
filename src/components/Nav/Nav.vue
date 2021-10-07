@@ -32,7 +32,7 @@
           </div>
 
           <div class="col-12 col-md nav__btn mw-md-fit-content flex-row align-items-center" v-if="btnLink">
-            <a href="/signout" class="btn me-0 mb-0" v-html="btnText"></a>
+            <a href="/signout" class="btn me-0" v-html="btnText"></a>
           </div>
 
 

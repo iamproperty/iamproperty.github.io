@@ -40,15 +40,22 @@
 
     <div class="container pb-0">
       <h2>Admin navigation</h2>
-      <p>To transform the navigation to look more like an admin bar the classes <strong>.bg-primary</strong> and <strong>.nav--small</strong> can be added. These will change the background colour and also condense it down. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
+      <p>To transform the navigation to look more like an admin bar with the classes <strong>.bg-primary</strong> and <strong>.nav--admin</strong> can be added. These will change the background colour, condense it down and move the optional secondary nav to the bottom on desktop. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
     </div>
     
-    <Nav class="visualtest mb-5 bg-primary nav--small" btnLink="/account" btnText="Signout">
+    <Nav class="visualtest mb-5 bg-primary nav--admin" btnLink="/account" btnText="Signout">
       <ul class="list-unstyled">
         <li><a href="/">Link 1</a></li>
         <li><a href="/">Link 2</a></li>
         <li><a href="/">Link 3</a></li>
       </ul>
+      <template v-slot:secondary>
+        <ul class="list-unstyled">
+        <li class=""><a href="/props">Secondary link 1</a></li>
+        <li class=""><a href="/props">Secondary link 2</a></li>
+        <li class=""><a href="/props">Secondary link 3</a></li>
+      </ul>
+      </template>
     </Nav>
 
     <div class="container">

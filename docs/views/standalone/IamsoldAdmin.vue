@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav logo="sold"  btnLink="/admin/logout" btnText="Logout" class="bg-primary nav--small nav--inline-search">
+    <Nav logo="sold"  btnLink="/admin/logout" btnText="Logout" class="bg-primary nav--admin nav--inline-search">
       <ul class="list-unstyled">
         <li class=""><a href="/props" title="View your profile details">Hello <strong>Michelle Main</strong> (Level 1)</a></li>
         <li class=""><a href="/props">Dashboard</a></li>
@@ -16,6 +16,26 @@
           </svg>
         </button>
       </form>
+
+      <template v-slot:secondary>
+        <ul class="list-unstyled">
+          <li class=""><a href="/props">Properties</a></li>
+          <li class=""><a href="/props">Agents</a></li>
+          <li class=""><a href="/props">Customer Profiles</a></li>
+          <li class=""><a href="/props">Agents League</a></li>
+          <li class=""><a href="/props">Staff</a></li>
+          <li class=""><a href="/props">Reports</a></li>
+          <li class=""><a href="/props">Documents</a></li>
+          <li class=""><a href="/props">Archive</a></li>
+          <li class=""><a href="/props">Regions</a></li>
+          <li class=""><a href="/props">Investigation</a></li>
+          <li class=""><a href="/props">Websites</a></li>
+          <li class=""><a href="/props">Marketing Library</a></li>
+          <li class=""><a href="/props">API</a></li>
+          <li class=""><a href="/props">Emails</a></li>
+          <li class=""><a href="/props">iamvalued Awards</a></li>
+        </ul>
+      </template>
     </Nav>
     <datalist id="search-terms">
       <option v-for="(value,index) in searchTerms" :key="index" :data-link="value.url">{{value.display ? value.display : value.value}}</option>
