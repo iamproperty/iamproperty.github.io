@@ -133,10 +133,55 @@
       width: 100%;
     }
   }
+
+
+  .nav__menu--search {
+    order: 2;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+
+    background: rgba(0,0,0,.6);
+    height: calc(100vh - 5rem);
+
+    > div:first-child {
+      
+    }
+  }
 }
 
-// #region Smal nav (used for admin sites)
-.nav--small {
+// Nav with background colour applied
+.nav[class*="bg-"] {
+
+  .nav__menu--secondary.bg-primary {
+    background-color: white!important;
+
+    --colour-link: var(--colour-link-theme);
+    --colour-hover: var(--colour-hover-theme);
+    --colour-active: var(--colour-active-theme);
+  }
+}
+
+// #region Secondary nav
+.nav__menu--secondary {
+  flex-grow: 1;
+
+  a {
+    display: inline-block;
+    padding: rem(8) 0 rem(8) 0;
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus {
+    text-decoration: underline!important;
+  }
+}
+// #endregion
+
+// #region Admin Nav
+.nav--admin {
   .brand {
     font-size: rem(32);
 
@@ -163,23 +208,6 @@
 }
 // #endregion
 
-// #region Secondary nav
-.nav__menu--secondary {
-  flex-grow: 1;
-
-  a {
-    display: inline-block;
-    padding: rem(8) 0 rem(8) 0;
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: 1px solid currentColor!important;
-  }
-}
-
-// #endregion
-
 // #region Sticky nav
 .nav {
 
@@ -197,12 +225,11 @@ nav + main > *:first-child {
 }
 
 @include media-breakpoint-up(md) {
-  .nav.has-secondary {
+  .nav.has-secondary:not(.nav--admin) {
 
     top: rem(-40);
 
     .nav__inner {
-
       position: sticky;
       top: 0;
       left: 0;
@@ -265,9 +292,6 @@ nav + main > *:first-child {
   .nav__inner {
     overflow: visible;
   }
-  .nav__inner > .container {
-    order: 1;
-  }
 
   .nav .nav__menu {
     display: flex;
@@ -279,22 +303,31 @@ nav + main > *:first-child {
     display: flex;
   }
 
-  .nav__menu--secondary {
-    order: 0;
+  .nav:not(.nav--admin) {
 
-    .container {
-      padding-bottom: 0;
+    .nav__inner > .container {
+      order: 1;
+    }
+    .nav__menu--secondary {
+      order: 0;
+
+      .container {
+        padding-bottom: 0;
+      }
     }
   }
-
+  
   .nav__search-btn,
   .nav__btn {
     order: 2;
     margin-left: 1rem;
+
+    .btn {
+      margin-bottom: 0;
+    }
   }
 
-  .nav__menu > .list-unstyled,
-  .nav__menu--secondary .list-unstyled {
+  .nav__menu > .list-unstyled {
     margin-left: -1.5rem!important;
     margin-right: -1.5rem!important;
     width: calc(100% + 3rem);
@@ -309,9 +342,30 @@ nav + main > *:first-child {
     }
   }
 
-  .nav__menu--secondary > .list-unstyled {
-    font-size: rem(15);
+  .nav__menu--secondary .list-unstyled {
+    margin-left: -1.5rem!important;
+    margin-right: -1.5rem!important;
+    width: calc(100% + 3rem);
+    margin-bottom: 0;
+    text-align: right;
+
+    > li {
+      display: inline-block;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
   }
+
+
+  .nav:not(.nav--admin) .nav__menu--secondary .list-unstyled {
+    font-size: rem(15);
+    padding-top: 0;
+  }
+
+  .nav.nav--admin .nav__menu--secondary .list-unstyled {
+    text-align: left;
+  }
+
 }
 // #endregion
 
@@ -500,3 +554,60 @@ nav + main > *:first-child {
 }
 // #endregion
 
+// #region inline search
+.nav--inline-search {
+
+  .nav__menu form {
+    position: relative;
+    .form-control__wrapper .form-control {
+      padding-right: 3rem;
+    }
+
+    button {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      margin: 0;
+      z-index: 1;
+      border-color: transparent;
+      background: transparent;
+      padding: 0.85rem 0rem;
+
+      .icon {
+        stroke: currentColor;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .nav__menu > .list-unstyled {
+      text-align: left;
+      margin-right: 0!important;
+    }
+
+    .nav__menu form {
+      min-width: rem(350);
+      position: relative;
+
+      .form-control__wrapper {
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+
+        label {
+          white-space: nowrap;
+          padding-right: 1rem;
+        }
+
+        .form-control {
+          padding: rem(7) 3rem rem(7) 1rem;
+        }
+      }
+
+      button {
+        padding: rem(8) 0rem;
+      }
+    }
+  }
+}
+// #endregion

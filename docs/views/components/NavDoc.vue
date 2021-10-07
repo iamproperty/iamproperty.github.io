@@ -40,15 +40,22 @@
 
     <div class="container pb-0">
       <h2>Admin navigation</h2>
-      <p>To transform the navigation to look more like an admin bar the classes <strong>.bg-primary</strong> and <strong>.nav--small</strong> can be added. These will change the background colour and also condense it down. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
+      <p>To transform the navigation to look more like an admin bar with the classes <strong>.bg-primary</strong> and <strong>.nav--admin</strong> can be added. These will change the background colour, condense it down and move the optional secondary nav to the bottom on desktop. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
     </div>
     
-    <Nav class="visualtest mb-5 bg-primary nav--small" btnLink="/account" btnText="Signout">
+    <Nav class="visualtest mb-5 bg-primary nav--admin" btnLink="/account" btnText="Signout">
       <ul class="list-unstyled">
         <li><a href="/">Link 1</a></li>
         <li><a href="/">Link 2</a></li>
         <li><a href="/">Link 3</a></li>
       </ul>
+      <template v-slot:secondary>
+        <ul class="list-unstyled">
+        <li class=""><a href="/props">Secondary link 1</a></li>
+        <li class=""><a href="/props">Secondary link 2</a></li>
+        <li class=""><a href="/props">Secondary link 3</a></li>
+      </ul>
+      </template>
     </Nav>
 
     <div class="container">
@@ -59,17 +66,15 @@
     </div>
 
     <div class="container pb-0">
-      <h2>Inline search field</h2>
-      <p>Allow for sublinks to be shown within the navigation but also really highlight the section and have additional supportive content.</p>
-    </div>
-    
-    <div class="container pb-0">
-      <h2>Featured search area</h2>
-      <p>Allow for sublinks to be shown within the navigation but also really highlight the section and have additional supportive content.</p>
+      <h2>Add search form</h2>
+      <p>Integrate search functionality by adding a form to the nav and add the class <strong>.nav--inline-search</strong> to the nav. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
+ 
+      <h3>Featured search area</h3>
+      <p>Or create a real feature by adding a div with the class of <strong>.nav__menu--search</strong> and a search button wrappped in a div with the class <strong>.nav__search-btn</strong>. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
     </div>
     
     <div class="container">
-      <h2>Vue Header component reference</h2>
+      <h2>Vue Nav component reference</h2>
       <Readme></Readme>
     </div>
   </main>

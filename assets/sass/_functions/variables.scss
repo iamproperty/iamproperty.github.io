@@ -112,7 +112,8 @@ $non-theme-colors: map-merge((
 @each $color, $value in $non-theme-colors {
 
   $vars: map-merge((
-    --colour-#{$color}: #{$value}
+    --colour-#{$color}-theme: #{$value},
+    --colour-#{$color}: #{'var(--colour-'+$color+'-theme)'}
   ), $vars);
 }
 
