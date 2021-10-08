@@ -2,6 +2,8 @@
 $fontPath: '/fonts/';
 @import '../../assets/sass/core.scss';
 
+@import '../../assets/sass/components/drawer.scss';
+
 // Utility generator
 // Used to generate utilities & print utilities
 @mixin print-utility($utility, $infix, $is-rfs-media-query: false) {

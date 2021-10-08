@@ -3,11 +3,11 @@
   --btn-outline: var(--colour-warning);
   --btn-text: var(--colour-primary);
 
-  --btn-bg-hover: transparent;
+  --btn-bg-hover: white;
   --btn-outline-hover: var(--colour-warning);
   --btn-text-hover: var(--colour-primary);
 
-  --btn-bg-active: transparent;
+  --btn-bg-active: white;
   --btn-outline-active: var(--colour-primary);
   --btn-text-active: var(--colour-primary);
 
@@ -92,6 +92,7 @@
 
     --btn-bg: var(--colour-primary);
     --btn-bg-hover: transparent;
+    --btn-bg-active: transparent;
     --btn-outline: var(--colour-primary);
     --btn-outline-hover: var(--colour-primary);
     --btn-text-hover:  var(--colour-primary);

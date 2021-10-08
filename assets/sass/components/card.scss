@@ -2,6 +2,8 @@
 // Reset the link
 a.card {
 
+  cursor: pointer;
+  
   &:before {
     display: none;
   }

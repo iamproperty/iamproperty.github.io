@@ -9,7 +9,7 @@
       <img v-if="details && details.logo" :src="details.logo" alt="" loading="lazy" class="card-logo" />
     </div>
     <div class="card-body" v-html="cardContent()"></div>
-    <div class="card-footer">
+    <div class="card-footer" v-if="hideCtaText == false">
       <span :class="`${btnType == 'link' ? `link` : `btn btn-${btnType}`} mb-0`">{{ctaText}}<span class="visually-hidden"> about {{title}}</span></span>
     </div>
   </a>
@@ -59,6 +59,11 @@ export default {
       type: String,
       required: false,
       default: 'Find out more'
+    },
+    hideCtaText: {
+      type: Boolean,
+      required: false,
+      default: false
     },
     image: {
       type: String,

@@ -47,6 +47,10 @@
       
       <div class="container pt-4">
         <h1>Welcome to your dashboard <span class="text-secondary">Michelle Main</span></h1>
+
+        <h2>Your snapshot</h2>
+        <Table :fields="[{key: 'Property valuations'},{key: 'Pre-approval valuations'}, {key: 'PAM properties'}]" :items="[]"></Table>
+
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
@@ -61,7 +65,32 @@
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
       </div>
+
+      <input type="checkbox" name="showDrawer" id="showDrawer" class="d-none">
+      <div class="drawer__btn pb-0">
+        <div class="container text-end pb-0">
+          <label for="showDrawer" class="btn btn-secondary me-0">Actions</label>
+        </div>
+      </div>
+      <div class="drawer" id="actions">
+        <div class="container text-end pb-0">
+          <label for="showDrawer" class="btn btn-close me-0">Close</label>
+        </div>
+        <Carousel :items="actions" type="card" btnType="link" :hideCtaText="true">
+          <template v:slot="before">
+            <h2 class="mb-0 mx-auto text-center">Actions</h2>
+          </template>
+        </Carousel>
+        
+      </div>
+
     </main>
+    <footer class="bg-primary pt-4">
+      <div class="container">
+        <p>© Copyright iamsold 2021 - All rights reserved</p>
+        <p>172.19.0.5</p>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -69,12 +98,16 @@
 import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue'
 import Nav from '@/components/Nav/Nav.vue'
 import Input from '@/elements/Input/Input.vue'
+import Carousel from '@/components/Carousel/Carousel.vue'
+import Table from '@/elements/Table/Table.vue'
 
 export default {
   components: {
     PropertySearchbar,
     Nav,
-    Input
+    Input,
+    Carousel,
+    Table
   },
   props: {
     searchTerm: {
@@ -90,7 +123,45 @@ export default {
           'url': '/london',
           'value': 'London'
         }
+      ],
+      actions: [
+        {
+          title: "Add a valuation to the database",
+          url: "http://www.iamsold.test/admin/properties/create.html",
+          content: `<p>Create a new property record, assign it to an agent and an auction team co-ordinator.</p>`
+        },
+        {
+          title: "Create a ValPal Referral",
+          url: "http://www.iamsold.test/admin/properties/create/create-valpal-referral.html",
+          content: `<p>Create a new ValPal referral.</p>`
+        },
+        {
+          title: "Add a new admin record to the database",
+          url: "http://www.iamsold.test/admin/auth/staff/create.html",
+          content: `<p>Create a new admin record, assign it to an agent and an auction team co-ordinator.</p>`
+        },
+        {
+          title: "Add a document to the database",
+          url: "http://www.iamsold.test/admin/documents/create.html",
+          content: `<p>It's easy to add a document to the system.</p>`
+        },
+        {
+          title: "Delete incorrect Surveys",
+          url: "http://www.iamsold.test/admin/surveys.html",
+          content: `<p>Delete Surveys from the system that have been submitted incorrectly.</p>`
+        },
+        {
+          title: "See Marketing Requests",
+          url: "http://www.iamsold.test/admin/marketing-library.html",
+          content: `<p>See a list of outstanding Marketing Requests and mark them as complete</p>`
+        },
+        {
+          title: "Task Manager",
+          url: "http://www.iamsold.test/admin/calendar/task-manager.html",
+          content: `<p>Manage all system tasks by user.</p>`
+        }
       ]
+
     }
   },
   computed: {
