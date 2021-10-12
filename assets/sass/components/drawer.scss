@@ -5,7 +5,6 @@
   left: 0;
   width: 100%;
   z-index: 5;
-
   margin-bottom: -6rem;
 
   .btn {
@@ -13,23 +12,21 @@
   }
 }
 
-
 .drawer {
-
 
   > .container:first-child {
     display: none;
-    margin-bottom: -3rem;
+    margin-bottom: -2rem;
     position: relative;
     z-index: 2;
   }
 
-  padding-top: 4rem;
+  margin-top: 1rem;
+  padding-top: 2rem;
   position: relative;
   z-index: 15;
-  background: white;
   background: rgb(255,255,255);
-  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,255,255,1) 3rem, rgba(255,255,255,1) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(255,255,255,1) 1.5rem, rgba(255,255,255,1) 100%);
 }
 
 #showDrawer:checked ~ .drawer {
@@ -38,6 +35,9 @@
   bottom: 0;
   left: 0;
   width: 100%;
+  background: rgb(255,255,255);
+  //border-top: 1px solid var(--colour-border);
+  box-shadow: 0 -1px 20px -10px rgb(51 51 51 / 25%);
 
   > .container:first-child {
     display: block;
