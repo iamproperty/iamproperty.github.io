@@ -159,6 +159,67 @@
     return String(num).padStart(places, '0');
   };
 
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+    if (_i == null) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+
+    var _s, _e;
+
+    try {
+      for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
   var navbar = function navbar(element) {
     Array.from(element.querySelectorAll('details')).forEach(function (detail, index) {
       detail.addEventListener('mouseenter', function (e) {
@@ -168,6 +229,15 @@
         if (window.matchMedia('(min-width: 62em)').matches) detail.removeAttribute('open');
       }, false);
     });
+    var observer = new IntersectionObserver(function (_ref) {
+      var _ref2 = _slicedToArray(_ref, 1),
+          e = _ref2[0];
+
+      return e.target.classList.toggle("is-stuck", e.intersectionRatio < 1);
+    }, {
+      threshold: [1]
+    });
+    observer.observe(element);
   };
 
   function _typeof(obj) {
@@ -1083,6 +1153,9 @@
     var scrollTimeout;
     var carouselInner = carouselElement.querySelector('.carousel__inner');
     var itemCount = carouselElement.querySelectorAll('.carousel__item').length;
+    carouselElement.getAttribute('data-cols');
+    var smCols = carouselElement.getAttribute('data-sm-cols');
+    var mdCols = carouselElement.getAttribute('data-md-cols');
     carouselElement.querySelector('.carousel__controls a').classList.add('active'); // On scroll we need to make sure the buttons get corrected and the next testimonial is shown
 
     carouselInner.addEventListener('scroll', function (e) {
@@ -1135,7 +1208,11 @@
           break;
         }
       }
-    }, false);
+    }, false); // Add responsive hide button classes
+
+    if (itemCount == 1) carouselElement.classList.add('hide-btns');
+    if (smCols >= itemCount) carouselElement.classList.add('hide-sm-btns');
+    if (mdCols >= itemCount) carouselElement.classList.add('hide-md-btns');
   }
 
   // Create a link between two input/selects with one acting as setting a minimum value and the second a maximum
