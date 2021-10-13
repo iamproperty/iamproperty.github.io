@@ -4,6 +4,9 @@ function carousel(carouselElement) {
 
   let carouselInner = carouselElement.querySelector('.carousel__inner');
   let itemCount = carouselElement.querySelectorAll('.carousel__item').length;
+  let cols = carouselElement.getAttribute('data-cols');
+  let smCols = carouselElement.getAttribute('data-sm-cols');
+  let mdCols = carouselElement.getAttribute('data-md-cols');
 
   carouselElement.querySelector('.carousel__controls a').classList.add('active');
 
@@ -83,6 +86,17 @@ function carousel(carouselElement) {
       }
     }
   }, false);
+
+
+  // Add responsive hide button classes
+  if(itemCount == 1)
+    carouselElement.classList.add('hide-btns');
+
+  if(smCols >= itemCount)
+    carouselElement.classList.add('hide-sm-btns');
+
+  if(mdCols >= itemCount)
+    carouselElement.classList.add('hide-md-btns');
 }
 
 export default carousel
