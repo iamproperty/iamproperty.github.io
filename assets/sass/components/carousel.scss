@@ -83,6 +83,10 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
       display: none;
     }
   }
+
+  a:first-child:last-child {
+    display: none;
+  }
 }
 
 
@@ -131,6 +135,8 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
     margin-right: -1rem;
   }
 }
+
+
 // #endregion
 
 .carousel .carousel__inner > .row > .col:first-child {
@@ -167,6 +173,36 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
   .carousel .carousel__controls.cols-sm-6 > a:not(:nth-child(6n+1)) {
     display: none;
   }
+
+  // Make sure that we dont just have one pip showing
+  .carousel .carousel__controls.cols-sm-2 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-sm-3 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-sm-3 > a:first-child:nth-last-child(3),
+  .carousel .carousel__controls.cols-sm-4 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-sm-4 > a:first-child:nth-last-child(3),
+  .carousel .carousel__controls.cols-sm-4 > a:first-child:nth-last-child(4),
+  .carousel .carousel__controls.cols-sm-5 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-sm-5 > a:first-child:nth-last-child(3),
+  .carousel .carousel__controls.cols-sm-5 > a:first-child:nth-last-child(4),
+  .carousel .carousel__controls.cols-sm-5 > a:first-child:nth-last-child(5),
+  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(3),
+  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(4),
+  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(5),
+  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(6) {
+    display: none;
+  }
+
+  // Hide buttons if not needed
+  .carousel.hide-sm-btns .carousel__wrapper > .btn {
+    display: none;
+  }
+
+  .carousel.hide-sm-btns .carousel__inner {
+
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 @include media-breakpoint-up(md) {
@@ -195,5 +231,35 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
   .carousel .carousel__controls.cols-md-5 > a:not(:nth-child(5n+1)),
   .carousel .carousel__controls.cols-md-6 > a:not(:nth-child(6n+1)) {
     display: none;
+  }
+
+  // Make sure that we dont just have one pip showing
+  .carousel .carousel__controls.cols-md-2 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-md-3 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-md-3 > a:first-child:nth-last-child(3),
+  .carousel .carousel__controls.cols-md-4 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-md-4 > a:first-child:nth-last-child(3),
+  .carousel .carousel__controls.cols-md-4 > a:first-child:nth-last-child(4),
+  .carousel .carousel__controls.cols-md-5 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-md-5 > a:first-child:nth-last-child(3),
+  .carousel .carousel__controls.cols-md-5 > a:first-child:nth-last-child(4),
+  .carousel .carousel__controls.cols-md-5 > a:first-child:nth-last-child(5),
+  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(2),
+  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(3),
+  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(4),
+  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(5),
+  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(6) {
+    display: none;
+  }
+
+  // Hide buttons when not needed
+  .carousel.hide-md-btns .carousel__wrapper > .btn {
+    display: none;
+  }
+
+  .carousel.hide-md-btns .carousel__inner {
+
+    margin-left: 0;
+    margin-right: 0;
   }
 }

@@ -17,6 +17,7 @@
       <ul>
         <li><a href="/examples/news-promo-cards">News promo cards</a></li>
         <li><a href="/examples/logo-carousel">Logo carousel</a></li>
+        <li><a href="/examples/stats-carousel">Stats carousel</a></li>
       </ul>
     </div>
     <div class="container">
