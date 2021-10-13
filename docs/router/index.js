@@ -415,6 +415,10 @@ export const routes = [
       {
         path: 'logo-carousel',
         component: () => import('../views/examples/LogoCarousel.vue')
+      },
+      {
+        path: 'stats-carousel',
+        component: () => import('../views/examples/StatCarousel.vue')
       }
     ]
   },
