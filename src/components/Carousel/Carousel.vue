@@ -1,12 +1,12 @@
 <template>
-  <div class="container carousel" :id="'carousel'+id" ref="wrapper">
+  <div class="container carousel" :id="'carousel'+id" ref="wrapper" :data-cols="cols" :data-sm-cols="smCols" :data-md-cols="mdCols">
     <slot><!-- Use for titles etc --></slot>
     <div class="carousel__wrapper">
       <div class="carousel__inner">
 
         <div v-if="type == 'card'" :class="`row row-cols-${cols} row-cols-sm-${smCols} row-cols-md-${mdCols} ${gap ? `g-${gap}`: ``}`">
           <div :class="`col carousel__item${colClass?` ${colClass}`:''}`" v-for="(value,index) in items" :key="index" :id="'carousel'+id+'slide'+(index+1)">
-            <Card v-bind="value" :class="cardClass" :type="cardType" :btnType="btnType" :titleClass="titleClass" :ctaText="ctaText"></Card>
+            <Card v-bind="value" :class="cardClass" :type="cardType" :btnType="btnType" :titleClass="titleClass" :ctaText="ctaText" :hideCtaText="hideCtaText"></Card>
           </div>
         </div>
         <div v-if="type != 'card'" :class="`row row-cols-${cols} row-cols-sm-${smCols} row-cols-md-${mdCols} ${gap ? `g-${gap}`: ``}`">
