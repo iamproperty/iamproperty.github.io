@@ -65,7 +65,7 @@
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
       <a href="https://bbc.com" class="btn btn-tertiary ps-3"><Icon id="email"></Icon>Email</a>
     </div>
-    <div class="container bg-info visualtest">
+    <div class="container bg-info">
       
       <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
@@ -95,19 +95,27 @@
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
       <a href="https://bbc.com" class="btn btn-tertiary ps-3"><Icon id="email"></Icon>Email</a>
     </div>
-    <div class="container bg-danger visualtest">
+    <div class="container bg-danger">
       <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-tertiary">Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
       <a href="https://bbc.com" class="btn btn-tertiary ps-3"><Icon id="email"></Icon>Email</a>
     </div>
-    <div class="container bg-dark visualtest">
+    <div class="container bg-dark">
       <button class="btn">Find out more</button>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-tertiary">Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
       <a href="https://bbc.com" class="btn btn-tertiary ps-3"><Icon id="email"></Icon>Email</a>
+    </div>
+    <div class="container">
+      <h2>Collapsible content</h2>
+      <p>Hide away some content but keep it retrievable quickly.</p>
+      <details>
+        <summary class="link">Reveal content</summary>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+      </details>
     </div>
   </main>
 </template>
