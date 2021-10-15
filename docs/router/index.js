@@ -355,6 +355,14 @@ export const routes = [
         component: () => import('../views/components/Header.vue')
       },
       {
+        path: 'modal',
+        name: 'Modal',
+        meta: {
+          title: 'Modal | Components | IAM Key'
+        },
+        component: () => import('../views/components/ModalDoc.vue')
+      },
+      {
         path: 'nav',
         name: 'Nav',
         meta: {
