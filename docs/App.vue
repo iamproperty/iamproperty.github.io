@@ -59,6 +59,9 @@ export default {
     }
   },
   updated(){
+
+    document.getElementById('showMenu').checked = false;
+
     if(document.querySelector('main'))
       helpers.checkElements(document.querySelector('main'));
 
@@ -71,7 +74,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.navbar .router-link-active:not(.text-decoration-none):not(.btn):before {
+.nav .router-link-active:not(.text-decoration-none):not(.btn):before {
   width: 100%;
 }
 #visualtest:target ~ *:not(main),
