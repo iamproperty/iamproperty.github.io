@@ -86,6 +86,19 @@
 <style lang="scss">
 @import "../../../assets/sass/_func.scss";
 
+html {
+
+  @include media-breakpoint-up(md) {
+    font-size: 1vw;
+  }
+  @media (min-width: #{em(1440)}) {
+      font-size: 1vw;
+  }
+  @media (min-width: #{em(1600)}) {
+      font-size: 100%;
+  }
+}
+
 body {
 
   background-image: repeating-linear-gradient(-45deg,#d3e2c2, #d3e2c2 25px, #eef7e6 25px, #eef7e6 50px);
@@ -96,7 +109,7 @@ main {
 
     margin-top: 1rem;
     width: calc(100% - 2rem);
-    max-width: 86rem;
+    max-width: 96rem;
     margin: 1rem auto;
     padding-top: 1rem;
     padding-bottom: 2rem;
@@ -118,6 +131,10 @@ main {
   }
   #showDrawer:checked ~ .drawer {
     max-width: none;
+  }
+  .container {
+    padding: 0 rem(28) rem(16) rem(28);
+    max-width: rem(1600 - 28 - 28);
   }
 }
 </style>
