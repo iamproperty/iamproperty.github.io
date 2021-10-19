@@ -23,7 +23,8 @@ a,
   }
 
   &:not(.text-decoration-none):not(.btn):hover:before,
-  .card:hover &:before {
+  .card:hover &:before,
+  details[open] &:not(.text-decoration-none):not(.btn):before {
     width: 0%;
   }
 
