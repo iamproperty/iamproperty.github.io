@@ -379,6 +379,14 @@ export const routes = [
         component: () => import('../views/components/PropertySearchbarDoc.vue')
       },
       {
+        path: 'tabs',
+        name: 'Tabs',
+        meta: {
+          title: 'Tabs | Components | IAM Key'
+        },
+        component: () => import('../views/components/TabsDoc.vue')
+      },
+      {
         path: 'testimonial',
         name: 'Testimonial',
         meta: {
