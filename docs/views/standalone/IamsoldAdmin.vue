@@ -125,7 +125,7 @@ main {
   .drawer {
 
     width: calc(100% - 2rem);
-    max-width: 86rem;
+    max-width: 96rem;
     margin: -2rem auto 2rem auto;
     border-radius: 0.5rem;
   }
@@ -135,6 +135,11 @@ main {
   .container {
     padding: 0 rem(28) rem(16) rem(28);
     max-width: rem(1600 - 28 - 28);
+  }
+  .carousel.container {
+
+    padding-left: rem(48);
+    padding-right: rem(48);
   }
 }
 </style>
