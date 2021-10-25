@@ -2,7 +2,7 @@
   <div :class="className">
     <svg>
       <title>iam {{id}}</title>
-      <use :xlink:href="src"></use>
+      <use :xlink:href="path+src"></use>
     </svg>
     <span v-if="desc" v-html="desc"></span>
   </div>
@@ -15,6 +15,11 @@ export default {
       type: String,
       required: false,
       default: 'property'
+    },
+    path: {
+      type: String,
+      required: false,
+      default: ''
     },
     desc: {
       type: String

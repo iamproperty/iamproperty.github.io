@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col mw-md-fit-content nav__logo">
             <a href="/" class="text-decoration-none mb-0">
-              <Logo :id="logo" :desc="logoText"></Logo>
+              <Logo :id="logo" :path="logopath" :desc="logotext"></Logo>
             </a>
           </div>
 
@@ -31,8 +31,8 @@
             <slot></slot>
           </div>
 
-          <div class="col-12 col-md nav__btn mw-md-fit-content flex-row align-items-center" v-if="btnLink">
-            <a href="/signout" class="btn me-0" v-html="btnText"></a>
+          <div class="col-12 col-md nav__btn mw-md-fit-content flex-row align-items-center" v-if="btnlink">
+            <a :href="btnlink" class="btn me-0" v-html="btntext"></a>
           </div>
 
 
@@ -76,7 +76,11 @@ export default {
       type: String,
       required: false
     },
-    logoText: {
+    logotext: {
+      type: String,
+      required: false
+    },
+    logopath: {
       type: String,
       required: false
     },
@@ -84,11 +88,11 @@ export default {
       type: String,
       required: false
     },
-    btnLink: {
+    btnlink: {
       type: String,
       required: false
     },
-    btnText: {
+    btntext: {
       type: String,
       required: false
     }
