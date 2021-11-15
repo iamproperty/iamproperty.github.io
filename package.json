@@ -1,6 +1,6 @@
 {
   "name": "@iamproperty/components",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": false,
   "description": "Component library for iamproperty",
   "author": {
@@ -74,10 +74,10 @@
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.14"
   },
-  "_id": "iamp-component-library@2.0.0",
+  "registry-url": "https://registry.npmjs.com",
   "repository": {
     "type": "git",
-    "url": "git@codebasehq.com:isg/isg-marketplace-intelligent-compliance/iamp-component-library.git"
+    "url": "git://github.com/iamproperty/iamproperty-vue-component-library.git"
   },
   "files": [
     "assets/*",
