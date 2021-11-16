@@ -7,8 +7,9 @@ module.exports = {
     'plugin:vue/essential',
     '@vue/standard'
   ],
-  parserOptions: {
-    parser: 'babel-eslint'
+  "parser": "vue-eslint-parser",
+  "parserOptions": {
+     "parser": "@babel/eslint-parser"
   },
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -24,5 +25,11 @@ module.exports = {
         jest: true
       }
     }
-  ]
+  ],
+  globals: {
+    page: true,
+    browser: true,
+    context: true,
+    jestPuppeteer: true,
+  }
 }

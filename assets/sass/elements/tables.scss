@@ -1,0 +1,247 @@
+// #region Default table
+table {
+  width: 100%;
+  font-size: rem(16);
+  border: none;
+  margin-bottom: rem(32);
+  overflow: auto;
+}
+
+td,th {
+  padding: rem(16) rem(32) rem(16) 0;
+  font-weight: normal;
+  text-align: left;
+  vertical-align: top;
+  border: none;
+  font-size: rem(16);
+  line-height: rem(24);
+
+  &:first-child {
+    padding-left: rem(8);
+  }
+}
+
+th {
+  font-weight: bold;
+  @include var(color,--colour-heading);
+}
+
+tr {
+  border-bottom: 1px solid currentColor;
+  @include var(border-color,--colour-border);
+
+  &:last-child {
+    border-bottom: 2px solid currentColor;
+    @include var(border-color,--colour-border);
+  }
+}
+
+thead {
+  tr:first-child {
+    border-top: 2px solid currentColor;
+    @include var(border-color,--colour-border);
+  }
+
+  th {
+    font-size: rem(16);
+    line-height: rem(24);
+    padding-bottom: rem(24);
+
+    @include media-breakpoint-up(sm) {
+  
+      font-size: rem(18);
+    }
+
+    font-weight: bold;
+    vertical-align: bottom;
+    white-space: nowrap;
+  }
+}
+
+tbody:first-child{
+  tr:first-child {
+    border-top: 2px solid currentColor;
+    @include var(border-color,--colour-border);
+  }
+}
+// #endregion
+
+// #region Table wrapper - Add via JS if needed, provides a safe space to scroll
+.table__wrapper {
+  display: block;
+  width: calc(100% + 1rem);
+  padding-right: 1rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
+  margin-bottom: rem(32);
+
+  table {
+    margin-bottom: 0;
+    display: table;
+    overflow: hidden;
+  }
+}
+// #endregion
+
+// #region Tables are only stacked on mobile
+@media (max-width: 36em) {
+  .table__wrapper:not(.table-fullwidth) {
+    thead {
+      display: none;
+    }
+
+    tbody {
+      display: block;
+      border-top: 2px solid currentColor;
+      @include var(border-color,--colour-border);
+    }
+
+    tr {
+      display: block;
+      position: relative;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    td,
+    th {
+      display: block;
+      padding-right: 0;
+      padding-top: 0;
+      padding-left: rem(8);
+
+      &[data-label]:before {
+        content: attr(data-label);
+        color: var(--colour-heading);
+        padding: 0;
+        margin-bottom: 0;
+        display: block;
+        font-weight: bold;
+        margin: 0;
+      }
+    }
+
+    &.table-minify tr:not(:hover) {
+      td:not(:first-child){
+        display: none;
+      }
+    }
+  }
+}
+// #endregion
+
+
+// #region Table striped
+.table-striped tbody tr:nth-of-type(odd) {
+
+  background-color: rgba(0, 0, 0, 0.1);
+
+  .bg-light & {
+
+    @include var(background-color,--colour-white);
+  }
+}
+// #endregion
+
+// #region Table hover
+.table-hover tbody tr {
+  &:hover,
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+// #endregion
+
+
+// #region Sortable
+[data-sortable] {
+
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  padding-right: 3.5rem;
+
+  &:hover {
+    color: var(--colour-hover);
+  }
+}
+[data-sortable]:after {
+
+  content: "";
+  position: absolute;
+  top:0;
+  right: 0;
+  width: 3.5rem;
+  height: 4rem;
+  display: block;
+  mask-image: var(--icon-sort);
+  mask-size: 0.6rem 0.8rem;
+  mask-repeat: no-repeat;
+  mask-position: calc(100% - 1.5rem) calc(50% - 0.25rem);
+
+  -webkit-mask-image: var(--icon-sort);
+  -webkit-mask-size: 0.6rem 0.8rem;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: calc(100% - 1.5rem) calc(50% - 0.25rem);
+  background-color: currentColor;
+}
+
+[data-sortable][aria-sort=ascending]:after {
+  --icon-sort: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' preserveAspectRatio='none'%3E%3Cpath d='M51 1l25 23 24 22H1l25-22z'/%3E%3Cpath opacity='.3' d='M51 101l25-23 24-22H1l25 22z'/%3E%3C/svg%3E");
+}
+
+[data-sortable][aria-sort=descending]:after {
+  --icon-sort: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' preserveAspectRatio='none'%3E%3Cpath opacity='.3' d='M51 1l25 23 24 22H1l25-22z'/%3E%3Cpath d='M51 101l25-23 24-22H1l25 22z'/%3E%3C/svg%3E");
+}
+// #endregion
+
+// #region Pagination
+.table__pagination select {
+  max-width: rem(240);
+}
+// #endregion
+
+// #region Reorderable
+.table-order-reset {
+
+  cursor: pointer;
+  position: relative;
+  width: 1rem;
+
+  &:hover {
+    color: var(--colour-hover);
+  }
+
+  overflow: hidden;
+  text-indent: -200%;
+
+  &:after {
+    content: "#";
+    position: absolute;
+    left: 0.5rem;
+    top: 1rem;
+    text-indent: 0;
+  }
+}
+
+[data-reorder] tr[draggable] {
+  
+  cursor: move;
+
+  &:hover,
+  &:focus {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &.tr--dragging {
+    background: var(--colour-muted);
+  }
+
+  &.tr--dropable {
+
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+// #endregion

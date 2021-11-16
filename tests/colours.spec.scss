@@ -1,0 +1,45 @@
+@import '../node_modules/sass-true/sass/true';
+@import '../assets/sass/_func.scss';
+
+$test_colors: ();
+$test_colors: map-merge((
+  "primary": rgba(var(--colour-primary-rgb), var(--alpha, 1)),
+  "secondary": rgba(var(--colour-secondary-rgb), var(--alpha, 1)),
+  "success": rgba(var(--colour-success-rgb), var(--alpha, 1)),
+  "info": rgba(var(--colour-info-rgb), var(--alpha, 1)),
+  "warning": rgba(var(--colour-warning-rgb), var(--alpha, 1)),
+  "danger": rgba(var(--colour-danger-rgb), var(--alpha, 1)),
+  "light": rgba(var(--colour-light-rgb), var(--alpha, 1)),
+  "dark": rgba(var(--colour-dark-rgb), var(--alpha, 1)),
+  "muted-theme": #9d9d9d,
+  "muted": var(--colour-muted-theme),
+  "border-theme": #6f6f6f,
+  "border": var(--colour-border-theme),
+  "link-theme": #00313c,
+  "link": var(--colour-link-theme),
+  "focus-theme": #000000,
+  "focus": var(--colour-focus-theme),
+  "hover-theme": #000000,
+  "hover": var(--colour-hover-theme),
+  "active-theme": #b4e6a5,
+  "active": var(--colour-active-theme),
+  "selected-theme": #b4e6a5,
+  "selected": var(--colour-selected-theme)
+), $test_colors);
+
+
+@include describe('Colour variables are added to the global var array [Variable]') {
+  @each $color, $value in $test_colors {
+
+    @include it($color+' colour variable is added to the global var array with the correct hex code') {
+      @include assert {
+        @include output {
+          color: map-get($vars, --colour-#{$color});
+        }
+        @include expect {
+          color: $value;
+        }
+      }
+    }
+  }
+}

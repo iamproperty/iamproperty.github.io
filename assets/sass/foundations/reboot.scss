@@ -1,0 +1,98 @@
+/* Reset & Defaults - Most of the resets/normailization stuff is done by Bootstrap */
+html {
+
+  -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  font-size: vw($device-xs-width);
+  
+  @include media-breakpoint-up(sm) {
+    font-size: vw($device-sm-width);
+  }
+  @include media-breakpoint-up(md) {
+    font-size: vw($device-md-width);
+  }
+  @media (min-width: #{em(1440)}) {
+      font-size: 100%;
+  }
+  
+  /*
+  @media (min-width: #{em(1440)}) {
+    font-size: vw(1440);
+  }
+  @media (min-width: #{em(1600)}) {
+    font-size: 111.11%;
+  }
+  @media (min-width: #{em(1800)}) {
+    font-size: 125%;
+  }
+  */
+}
+
+body {
+
+  font-family: 'qanelasmedium', arial, sans-serif;
+  @include var(color,--colour-body);
+  width: 100%;
+  line-height: 1.5;
+}
+
+address {
+  margin: 0;
+}
+
+button {
+  font-size: inherit;
+}
+
+button:focus {
+  border-radius: initial;
+  outline: 2px auto -webkit-focus-ring-color;
+}
+
+hr {
+  border: 0;
+  color: transparent;
+  margin: 0;
+  border-bottom: none;
+  background-color: currentColor;
+  opacity: 1;
+  clear:both;
+
+  &:after {
+    display: table;
+    clear: both;
+    content: "";
+  }
+}
+
+input[type="search" i]::-webkit-search-cancel-button {
+
+  appearance: none;
+}
+
+[list]::-webkit-calendar-picker-indicator {
+  display: none!important;
+}
+
+img {
+  max-width: 100%;
+}
+
+// Details reset
+summary {list-style: none}
+summary::-webkit-details-marker {display: none; }
+
+details summary { 
+  cursor: pointer;
+}
+
+details summary > * {
+  display: inline;
+}
+
+details {
+  width: 100%;
+}

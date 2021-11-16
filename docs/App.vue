@@ -1,22 +1,55 @@
 <template>
   <div id="app">
-    <header class="d-flex align-items-center justify-content-between">
-        <div class="d-flex logo-section align-items-center">
-          <img src="@/assets/img/logo.png" alt="I Am Property" width="" height="120" />
-          <span> Style Library</span>
-        </div>
-        <div id="nav" class="justify-content-between">
-          <router-link to="/">Foundations</router-link> |
-          <router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link>
-        </div>
-    </header>
-    <div class="container-fluid">
-      <router-view />
-    </div>
+    <div id="visualtest"></div>
+    <SVGLogo class="d-none" />
+    <SVGIcons class="d-none" />
+
+    <Nav logo="key" logoText="Design system<br/>&amp; framework">
+      <ul class="list-unstyled">
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
+      </ul>
+    </Nav>
+    <router-view />
+    <footer class="bg-primary">
+
+      <div class="container pt-4">
+        <ul class="list-unstyled list-inline ms-auto d-block mb-0">
+          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/get-started')}" to="/get-started">Get started</router-link></li>
+          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/examples')}" to="/examples">Examples</router-link></li>
+          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/audit')}" to="/audit">Audit</router-link></li>
+          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/changelog')}" to="/changelog">Changelog</router-link></li>
+        </ul>
+      </div>
+      <div class="container pt-4">
+        <p>Version: {{version}}</p>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
+import SVGLogo from '../assets/svg/logo.svg?inline'
+import SVGIcons from '../assets/svg/icons.svg?inline'
+import Logo from '@/foundations/Logo/Logo.vue'
+import pkg from '../package.json'
+import * as helpers from '../assets/js/modules/helpers'
+import form from '../assets/js/modules/form'
+
+import Nav from '@/components/Nav/Nav.vue'
+
 export default {
+  data () {
+    return {
+      version: pkg.version
+    }
+  },
+  components: {
+    SVGLogo,
+    SVGIcons,
+    Logo,
+    Nav
+  },
   methods: {
     subIsActive (input) {
       const paths = Array.isArray(input) ? input : [input]
@@ -24,29 +57,36 @@ export default {
         return this.$route.path.indexOf(path) === 0 // current path starts with this path string
       })
     }
+  },
+  updated(){
+
+    document.getElementById('showMenu').checked = false;
+
+    if(document.querySelector('main'))
+      helpers.checkElements(document.querySelector('main'));
+
+    Array.from(document.querySelectorAll('form')).forEach((arrayElement, index) => {
+      form(arrayElement);
+    });
+
+    hljs.highlightAll();
   }
 }
 </script>
 <style lang="scss">
-@import "@/assets/scss/_variables.scss";
-
-#app {
-  font-family: 'qanelasmedium', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+.nav .router-link-active:not(.text-decoration-none):not(.btn):before {
+  width: 100%;
+}
+#visualtest:target ~ *:not(main),
+#visualtest:target ~ main > *:not(.visualtest){
+  display: none!important;
 }
 
-#nav {
-  padding: 30px;
+#visualtest:target ~ main > .d-none.visualtest{
+  display: block!important;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #000;
-}
-
-#nav a.router-link-exact-active, #nav .router-link-sub-active {
-  color: $punchy-mustard;
+#visualtest:target ~ main > .visualtest .visualtest-hide,
+#visualtest:target ~ main > .visualtest pre {
+  display: none!important;
 }
 </style>

@@ -1,0 +1,57 @@
+.header {
+  background: linear-gradient(180deg,var(--colour-secondary) 0, var(--colour-info) 100%);
+  margin-bottom: rem(32);
+  position: relative;
+  overflow: hidden;
+  @include media-breakpoint-up(md) {
+    min-height: rem(470);
+  }
+
+  > .container {
+    padding-bottom: 0;
+    position: relative;
+  }
+
+  &__inner {
+    background: white;
+    padding: rem(32);
+    margin: rem(30) 0;
+    position: relative;
+    z-index: 2;
+    @include media-breakpoint-up(md) {
+      max-width: rem(600);
+      margin: rem(112) 0 rem(80) 0;
+      padding: rem(56) rem(64);
+    }
+    > *:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  > picture img {
+    display: none;
+    @include media-breakpoint-up(md) {
+      display: block;
+      position: absolute;
+      top: -0.5%;
+      left: 40%;
+      height: 101%;
+      object-fit: cover;
+      width: 60%;
+      pointer-events: none;
+    }
+  }
+
+  > .container > .breadcrumb {
+    
+    margin-top: rem(24);
+    margin-bottom: -0.5rem;
+
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: 0;
+      left: rem(60);
+    }
+  }
+}

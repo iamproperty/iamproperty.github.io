@@ -1,15 +1,5 @@
-@import "abstracts/functions";
-@import "abstracts/mixins";
-@import "abstracts/variables";
+@charset "UTF-8";
 
-@import "base/animations";
-@import "base/base";
-@import "base/typography";
-@import "base/utilities";
-
-@import "components/buttons";
-@import "components/forms";
-@import "components/icons";
-
-
-@import "layout/layout";
+@import "_func";
+@import "_corefiles";
+@import "_components";

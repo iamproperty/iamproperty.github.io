@@ -1,36 +1,45 @@
 <template>
-  <section class="mb5">
-    <h3>Component table of contents</h3>
-    <hr>
-    <ul class="component-contents">
-      <li>
-        <router-link to="/components/task-title">Task Title</router-link>
-        - The task title component has a number of choices for background colours
-      </li>
-      <li>
-        <router-link to="/components/key-stats">Key Fact Group</router-link>
-        - Group a series of key facts together in a responsive grid
-      </li>
-      <li>
-        <router-link to="/components/property-task-intro">Property Task Intro</router-link>
-        - Group of property data including: address, starting bid, auction start, auction end date
-        and branch details
-      </li>
-      <li>
-        <router-link to="/components/vendor-table">Vendor Table</router-link>
-        - Flexible table component for displaying vendor information
-      </li>
-      <li>
-        <router-link to="/components/key-information">Key Information</router-link>
-        - Group key information as key/value in responsive columns
-      </li>
-    </ul>
-  </section>
+  <main>
+    <CardDeck :items="pages" cardType="quick" :smCols="2">
+      <h1>Components</h1>
+      <p>Configurable re-usable parts that build up a page.</p>
+    </CardDeck>
+  </main>
 </template>
 
-<style scoped>
-.component-contents li {
-  display: block;
-  margin-bottom: 10px;
+<script>
+import CardDeck from '@/components/CardDeck/CardDeck.vue'
+import {routes} from '../../router/index.js';
+
+const components = routes.reduce(function (arr, route) {
+  // Find the correct group
+  if (route.path === "/components") {
+    arr = route.children;
+
+    const children = route.children.reduce(function (acc, route) {
+      // Remove the index
+      if (route.path) {
+        route.link = '/components/'+route.path;
+        route.title = route.name;
+        route.content = '';
+        acc.push(route);
+      }
+      return acc
+    }, [])
+
+    arr = children
+  }
+  return arr
+}, {})
+
+export default {
+  components: {
+    CardDeck
+  },
+  data () {
+    return {
+      pages: components
+    }
+  }
 }
-</style>
+</script>

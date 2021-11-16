@@ -1,224 +1,42 @@
 <template>
-  <div class="home">
-    <div class="row">
-      <div class="col-sm-12 col-md-2">
-          <div class="nav-links fixed-width">
-          <p>Foundations</p>
-          <nav>
-              <ul class="nav flex-column">
-                  <li class="nav-item">
-                      <a class="nav-link" href="#color-section">Colour</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#type-section">Typography</a>
-                  </li>
-              </ul>
-          </nav>
-      </div>
-      </div> <!-- end column sidebar -->
-      <div class="col-sm-12 col-md-9">
-        <!-- Begin Colour -->
-          <section class="colour-section mb5" id="color-section">
-              <h3>Colour</h3>
-              <hr>
-              <div class="paragraph-wrap">
-              <p>Our colour palette will help us create a distinctive identity and plays an
-                  important part in building brand recognition. It should be used within all
-                  designs and communications.
-              </p>
-              <p>A combination of these colours should be used on every application although
-                  it is not necessary for all colours to appear on every piece of communication.
-              </p>
-              <p>
-                  White is an important part of our palette too. it creates the space for our
-                  communications to breathe and a canvas where our colours come to life.
-              </p>
-              </div>
-              <div class="row">
-                  <div class="col-sm-6 col-md-4 d-flex">
-                      <div class="circle deep-slate-bg"></div>
-                      <div class="colour-description mb3">
-                          <h5>Deep slate</h5>
-                          <ul class="list-unstyled small">
-                              <li>$deep-slate</li>
-                              <li>#00313C</li>
-                              <li>RGB(0,49,60)</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 d-flex">
-                      <div class="circle soft-green-bg"></div>
-                      <div class="colour-description mb3">
-                          <h5>Soft green</h5>
-                          <ul class="list-unstyled small">
-                              <li>$soft-green</li>
-                              <li>#9CCD86</li>
-                              <li>RGB(156,205,154)</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 d-flex">
-                      <div class="circle homely-aubergine-bg"></div>
-                      <div class="colour-description mb3">
-                          <h5>Homely aubergine</h5>
-                          <ul class="list-unstyled small">
-                              <li>$homely-aubergine</li>
-                              <li>#46003C</li>
-                              <li>RGB(70,0,60)</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 d-flex">
-                      <div class="circle soft-pink-bg"></div>
-                      <div class="colour-description mb3">
-                          <h5>Soft pink</h5>
-                          <ul class="list-unstyled small">
-                              <li>$soft-pink</li>
-                              <li>#ffd2d2</li>
-                              <li>RGB(255,210,210)</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 d-flex">
-                      <div class="circle grey-70-bg"></div>
-                      <div class="colour-description mb3">
-                          <h5>70% Grey</h5>
-                          <ul class="list-unstyled small">
-                              <li>$grey-70</li>
-                              <li>#6f6f6f</li>
-                              <li>RGB(111,111,111)</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 d-flex">
-                      <div class="circle grey-50-bg"></div>
-                      <div class="colour-description mb3">
-                          <h5>50% Grey</h5>
-                          <ul class="list-unstyled small">
-                              <li>$grey-50</li>
-                              <li>#9d9d9d</li>
-                              <li>RGB(157,157,157)</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 d-flex">
-                      <div class="circle fresh-blue-bg"></div>
-                      <div class="colour-description mb3">
-                          <h5>Fresh blue</h5>
-                          <ul class="list-unstyled small">
-                              <li>$fresh-blue</li>
-                              <li>#1ebee6</li>
-                              <li>RGB(30,190,230)</li>
-                          </ul>
-                      </div>
-                  </div>
-                  <div class="col-sm-6 col-md-4 d-flex">
-                      <div class="circle punchy-mustard-bg"></div>
-                      <div class="colour-description mb3">
-                          <h5>Punchy mustard</h5>
-                          <ul class="list-unstyled small">
-                              <li>$punchy-mustard</li>
-                              <li>#ffa500</li>
-                              <li>RGB(255,165,0)</li>
-                          </ul>
-                      </div>
-                  </div>
-              </div>
-          </section> <!-- End Colour -->
-          <!-- Begin Typography -->
-          <section class="typography-section" id="type-section">
-              <h3>Typography</h3>
-              <hr>
-              <ul class="section-nav nav">
-                  <li class="nav-item"><a class="nav-link" href="#intro">Introduction</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#type-scale">Type Scale</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#paragraphs">Paragraphs</a></li>
-              </ul>
-              <div class="sub-section" id="intro">
-                  <h4>Introduction</h4>
-                  <p class="mb5">Setting a tone through our typographic styling. The form of our letters says a lot about who we are. </p>
-                  <div class="row mb5">
-                      <div class="col-md-6 d-flex flex-column justify-content-center">
-                          <h4>Headlines</h4>
-                          <h5 class="soft-green">A confident but welcoming typeface with subtle rounded corners making it more approachable.</h5>
-                      </div>
-                      <div class="col-md-6">
-                          <h4>Qanelas Soft</h4>
-                          <h1>abcde</h1>
-                          <h5>ABCDEFGHIJKLMANOPQRSTUVWXYZ</h5>
-                          <h5>abcdefghijklmnopqrstuvwxyz</h5>
-                          <h5>1234567890!@£$%^&*()</h5>
-                      </div>
-                  </div>
-                  <div class="row">
-                      <div class="col-md-6 d-flex flex-column justify-content-center">
-                          <h4>Body Copy</h4>
-                          <h5 class="soft-green">A slimmer highly legible typeface for the body copy. It has a graphical tie back to the headline display face creating cohesion on the page. </h5>
-                      </div>
-                      <div class="col-md-6">
-                          <h4 class="alt-header-font">Qanelas Medium</h4>
-                          <h1 class="alt-header-font">abcde</h1>
-                          <h5 class="alt-header-font">ABCDEFGHIJKLMANOPQRSTUVWXYZ</h5>
-                          <h5 class="alt-header-font">abcdefghijklmnopqrstuvwxyz</h5>
-                          <h5 class="alt-header-font">1234567890!@£$%^&*()</h5>
-                      </div>
-                  </div>
-              </div>
-              <div class="sub-section" id="type-scale">
-                  <h4>Type Scale</h4>
-                  <div class="copy-item">
-                      <p class="small">Body copy small</p>
-                      <p class="small copy-item__copy-data">Text size: 1.4rem / 14px | Line height: 1.8rem / 18px</p>
-                  </div>
-                  <div class="copy-item">
-                      <p>Regular body copy</p>
-                      <p class="small copy-item__copy-data">Text size: 1.8rem / 18px | Line height: 2.4rem / 24px</p>
-                  </div>
-                  <div class="copy-item">
-                      <p class="intro">Intro body copy</p>
-                      <p class="small copy-item__copy-data">Text size: 3.2rem / 32px | Line height: 3.8rem / 38px</p>
-                  </div>
-                  <div class="copy-item">
-                      <h5>Heading Five</h5>
-                      <p class="small copy-item__copy-data">Text size: 1.8rem / 18px | Line height: 2.4rem / 24px</p>
-                  </div>
-                  <div class="copy-item">
-                      <h4>Heading Four</h4>
-                      <p class="small copy-item__copy-data">Text size: 2.8rem / 28px | Line height: 3.4rem / 34px</p>
-                  </div>
-                  <div class="copy-item">
-                      <h3>Heading Three</h3>
-                      <p class="small copy-item__copy-data">Text size: 4.2rem / 42px | Line height: 4.8rem / 48px</p>
-                  </div>
-                  <div class="copy-item">
-                      <h2>Heading Two</h2>
-                      <p class="small copy-item__copy-data">Text size: 6rem / 60px | Line height: 6rem / 60px</p>
-                  </div>
-                  <div class="copy-item">
-                      <h1>Heading One</h1>
-                      <p class="small copy-item__copy-data">Text size: 10rem / 100px | Line height: 10rem / 100px</p>
-                  </div>
-              </div>
-              <div class="sub-section" id="paragraphs">
-                  <h4>Paragraph Example</h4>
-                  <p class="intro">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet, doloribus vel?</p>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati corporis vero consequuntur numquam officia. Fugiat unde distinctio, soluta perferendis magnam ullam veniam, fugit iure, beatae <a href="#">dolorum accusantium</a> delectus nemo dolores!</p>
-                  <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, temporibus tenetur! Deserunt suscipit officiis fugit eveniet cupiditate ex voluptas eius, id aperiam corrupti error ducimus cum architecto nesciunt, alias voluptatum.</p>
-              </div>
-          </section> <!-- End Typography -->
-      </div>
-    </div>
-  </div>
+  <main>
+    <Header title="Design system <span class='text-nowrap'>& framework</span>" :image="require('../assets/code.jpeg')">
+      <p>The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great products.</p>
+    </Header>
+    <CardDeck :items="items" class="pb-5 pt-5"></CardDeck>
+  </main>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+import Header from '@/components/Header/Header.vue'
+import CardDeck from '@/components/CardDeck/CardDeck.vue'
 
 export default {
   name: 'Home',
   components: {
-    // HelloWorld
+    Header,
+    CardDeck
+  },
+  data () {
+    return {
+      items: [
+        {
+          link: '/foundations',
+          title: 'Foundations',
+          content: `<p>Core variables and principles that are used through out the framework.</p>`
+        },
+        {
+          link: '/elements',
+          title: 'Elements',
+          content: `<p>Small re-usable parts that are commonly used within components.</p>`
+        },
+        {
+          link: '/components',
+          title: 'Components',
+          content: `<p>Configurable re-usable parts that build up a page.</p>`
+        }
+      ]
+    }
   }
 }
 </script>

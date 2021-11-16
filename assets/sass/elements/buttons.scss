@@ -1,0 +1,263 @@
+.btn {
+  --btn-bg: var(--colour-warning);
+  --btn-outline: var(--colour-warning);
+  --btn-text: var(--colour-primary);
+
+  --btn-bg-hover: white;
+  --btn-outline-hover: var(--colour-warning);
+  --btn-text-hover: var(--colour-primary);
+
+  --btn-bg-active: white;
+  --btn-outline-active: var(--colour-primary);
+  --btn-text-active: var(--colour-primary);
+
+  display: inline-block;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background: var(--btn-bg);
+  border: 2px solid var(--btn-outline);
+  color: var(--btn-text);
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  line-height: 1.25;
+  padding: em(12) em(28);
+  border-radius: rem(20);
+  margin-bottom: rem(24);
+  margin-right: rem(16);
+  transition: .5s;
+  height: auto;
+
+  a:hover &,
+  a:focus &,
+  &:hover,
+  &:focus {
+    outline: 0;
+    text-decoration: none;
+    border-radius: rem(20);
+    
+    background: var(--btn-bg-hover);
+    border-color: var(--btn-outline-hover);
+    color: var(--btn-text-hover);
+  }
+
+  a:active &,
+  a.active &,
+  &:active,
+  &.active,
+  *:checked + &,
+  details[open] & {
+    --btn-colour: var(--btn-active-colour);
+    @include box-shadow($btn-active-box-shadow);
+    border-radius: rem(20);
+    transition: 0s;
+
+    background: var(--btn-bg-active);
+    border-color: var(--btn-outline-active);
+    color: var(--btn-text-active);
+
+    &:focus {
+      @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+    }
+  }
+
+  a:disabled &,
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  &.btn-secondary {
+
+    --btn-bg: var(--colour-secondary);
+    --btn-outline: var(--colour-secondary);
+    --btn-outline-hover: var(--colour-secondary);
+  }
+
+  &.btn-tertiary,
+  &.btn-tag:not(.btn-primary):not(.btn-secondary) {
+
+    --btn-bg: transparent;
+    --btn-bg-hover: var(--colour-primary);
+    --btn-bg-active: var(--colour-primary);
+    --btn-outline: var(--colour-primary);
+    --btn-outline-hover: var(--colour-primary);
+    --btn-text-hover:  #ffffff;
+    --btn-text-active: #ffffff;
+  }
+
+  [class*="bg-"]:not(.prevent-invert) & {
+
+    --btn-bg: var(--colour-primary);
+    --btn-bg-hover: transparent;
+    --btn-bg-active: transparent;
+    --btn-outline: var(--colour-primary);
+    --btn-outline-hover: var(--colour-primary);
+    --btn-text-hover:  var(--colour-primary);
+    --btn-text:  #ffffff;
+
+    &.btn-tertiary,
+    &.btn-tag:not(.btn-primary):not(.btn-secondary) {
+
+      --btn-bg: transparent;
+      --btn-bg-hover: var(--colour-primary);
+      --btn-text:  var(--colour-primary);
+      --btn-text-hover:  #ffffff;
+    }
+  }
+
+  > .icon {
+    display: inline-block;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+  }
+
+  @include invert-colours {
+    
+    --btn-bg: #ffffff;
+    --btn-bg-hover: transparent;
+    --btn-outline: #ffffff;
+    --btn-outline-hover: #ffffff;
+    --btn-text-hover:  #ffffff;
+    --btn-text:  var(--colour-primary-theme);
+
+    &.btn-tertiary,
+    &.btn-tag:not(.btn-primary):not(.btn-secondary) {
+
+      --btn-bg: transparent;
+      --btn-bg-hover: #ffffff;
+      --btn-text:  #ffffff;
+      --btn-text-hover:  var(--colour-primary-theme);
+    }
+  }
+
+  [class*="bg-"].bg-light:not(.prevent-invert) & {
+    
+    --btn-bg: #ffffff;
+    --btn-bg-hover: transparent;
+    --btn-outline: #ffffff;
+    --btn-outline-hover: var(--colour-dark-theme);
+    --btn-text-hover: var(--colour-dark-theme);
+    --btn-text: var(--colour-dark-theme);
+
+    &.btn-tertiary,
+    &.btn-tag:not(.btn-primary):not(.btn-secondary) {
+
+      --btn-bg: transparent;
+      --btn-bg-hover: #ffffff;
+      --btn-text:  var(--colour-dark-theme);
+      --btn-outline:  var(--colour-dark-theme);
+      --btn-outline-hover: #ffffff;
+      --btn-text-hover:  var(--colour-dark-theme);
+    }
+  }
+}
+
+// #region button small and tag
+.btn-sm {
+
+  padding: em(6) em(12);
+}
+
+.btn-tag {
+  // btn tag also uses the styles of btn-tertiary by default, see above
+  padding: em(6) em(12);
+  margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+}
+// #endregion
+
+// #region Direction button
+.btn-next, 
+.btn-prev {
+  --marker-bg: var(--colour-secondary);
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background: var(--marker-bg);
+  border-radius: 100%;
+  width: rem(36);
+  height: rem(36);
+
+  @include media-breakpoint-up(md) {
+
+    width: rem(48);
+    height: rem(48);
+  }
+  text-indent: -300rem;
+  overflow: hidden;
+  border: none;
+  position: relative;
+  margin: 0 rem(8);
+  padding: 0;
+
+  &:disabled {
+    opacity: 0.8;
+    pointer-events: none;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: currentColor;
+    mask-image: escape-svg($accordion-button-icon);
+    mask-size: 50%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 60%;
+    -webkit-mask-image: escape-svg($accordion-button-icon);
+    -webkit-mask-size: 50%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 55% 50%;
+    transform: rotate(0deg);
+  }
+
+  &:hover,
+  &:focus {
+
+    background: var(--colour-warning);
+    color: var(--colour-hover);
+    border-radius: 100%;
+  }
+
+  &:active {
+    border-radius: 100%;
+  }
+}
+
+.btn-prev {
+  &:after {
+
+    transform: rotate(180deg);
+  }
+}
+// #endregion
+
+// #region button group 
+.btn-group {
+
+  flex-wrap: wrap;
+
+  > .btn {
+    margin-right: 0;
+    padding: 0.75rem;
+  }
+
+  > .btn:last-of-type {
+
+    border-top-right-radius: rem(20)!important;
+    border-bottom-right-radius: rem(20)!important;
+  }
+
+  > *:not(.btn) {
+    width: 100%;
+  }
+}
+
+// #endregion

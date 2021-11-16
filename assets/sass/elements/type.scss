@@ -1,0 +1,99 @@
+// #region headings
+%heading {
+  clear: both;
+  @include var(font-weight,--heading-weight);
+  @include var(font-family, --font-heading);
+  @include var(color,--colour-heading);
+  color: var(--colour-heading,var(--colour-primary));
+  display: block;
+  margin-bottom: 1rem;
+}
+
+h1,
+.h1,
+h2,
+.h2 {
+  @extend %heading;
+}
+h3,
+.h3 {
+  @extend %heading;
+  @include var(font-family, --font-body);
+  font-weight: normal;
+}
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6  {
+  
+  @extend %heading;
+}
+
+// #endregion
+
+p {
+  max-width: $content-max-width;
+}
+
+p + p {
+  margin-top: rem(-16);
+}
+
+.strapline {
+  @include var(font-size,--fs-4);
+  @include var(font-family, --font-heading);
+  @include var(color,--colour-secondary);
+  font-weight: 600;
+
+  h1 + &,
+  .h1 + & {
+    margin-top: -0.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.lead {
+  @include var(font-size,--fs-3);
+  line-height: 1.2;
+  margin-bottom: 3rem;
+  @include var(color,--colour-primary);
+}
+
+blockquote {
+
+  quotes: "“" "”" "‘" "’";
+  margin-bottom: 1rem;
+
+  p {
+    @include var(font-size,--fs-3);
+    @include var(color,--colour-heading);
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+
+  & p:first-child:before {
+    content: open-quote;
+  }
+  & p:last-of-type:after {
+    content: close-quote;
+  }
+
+  cite {
+    @include var(font-size,--fs-5);
+    @include var(color,--colour-heading);
+    font-style: normal;
+    font-weight: bold;
+  }
+}
+
+.stat {
+  font-size: rem(48);
+  @extend %heading;
+  text-decoration: underline;
+  text-underline-offset: 1rem;
+  text-decoration-color: var(--colour-secondary-theme);
+  text-decoration-thickness: 0.4rem;
+  margin-bottom: 2rem;
+}

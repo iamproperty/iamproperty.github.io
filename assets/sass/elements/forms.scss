@@ -1,0 +1,128 @@
+.form-control__wrapper {
+  margin-bottom: 1.5rem;
+  max-width: $content-max-width;
+
+  label {
+    display: block;
+
+  }
+}
+
+
+.form-control-inline {
+  display: flex;
+  align-items: center;
+
+  label {
+    white-space: nowrap;
+    padding-right: 1rem;
+  }
+}
+
+.form-control-color {
+  width: $form-color-width;
+  height: $form-color-width; // Override fixed browser height
+  overflow: hidden;
+  padding: 0;
+
+  .input-group > & {
+
+    flex: 0 0 3rem;
+  }
+
+  &::-moz-color-swatch {
+    height: $form-color-width;
+    border-radius: 0;
+    border: none;
+  }
+
+  &::-webkit-color-swatch {
+    height: $form-color-width;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+
+.input-group {
+  .form-range {
+    flex: 1 1 0;
+    height: auto;
+    margin-right: 1rem;
+  }
+}
+
+// #region checkbox
+.form-check {
+
+  input,
+  label {
+    cursor: pointer;
+  }
+
+  input:not([disabled]) + label:hover,
+  input:not([disabled]):hover + label,
+  input:not([disabled]):focus + label {
+
+    color: var(--colour-hover);
+    border-color: var(--colour-hover);
+  }
+}
+.form-check + .form-check {
+  margin-top: -0.5rem;
+}
+
+.form-check-label {
+  float: left;
+}
+
+.form-check-label + .form-check-input {
+
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
+// #endregion
+
+// #region Conditional reveal
+.conditional {
+  display: none;
+}
+
+input:checked + .conditional,
+input:checked + label + .conditional {
+  display: block;
+  clear: both;
+}
+
+input:not([class*="conditional-input-"]):nth-of-type(1):checked ~ .conditional-1,
+input:not([class*="conditional-input-"]):nth-of-type(2):checked ~ .conditional-2,
+input:not([class*="conditional-input-"]):nth-of-type(3):checked ~ .conditional-3,
+input:not([class*="conditional-input-"]):nth-of-type(4):checked ~ .conditional-4,
+input:not([class*="conditional-input-"]):nth-of-type(5):checked ~ .conditional-5,
+input.conditional-input-1:checked ~ .conditional-1,
+input.conditional-input-2:checked ~ .conditional-2,
+input.conditional-input-3:checked ~ .conditional-3,
+input.conditional-input-4:checked ~ .conditional-4,
+input.conditional-input-5:checked ~ .conditional-5 {
+  display: block;
+  clear: both;
+}
+// #endregion
+
+// #region Multi-select
+select[multiple] {
+  border-radius: 0.35rem;
+}
+select[multiple]::-webkit-scrollbar {
+  width: 0.7rem; // manage scrollbar width here
+}
+select[multiple]::-webkit-scrollbar * {
+  background-color:transparent; // manage scrollbar background color here
+}
+select[multiple]::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  //background-color:#000000!important; // manage scrollbar thumb background color here
+  border-radius: 0.35rem;
+}
+// #endregion

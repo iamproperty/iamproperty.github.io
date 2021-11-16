@@ -1,0 +1,46 @@
+.tabs__container {
+
+  .tabs__links {
+    padding-bottom: 1.5rem;
+    overflow: hidden;
+
+    .link:not(.text-decoration-none):not(.btn) {
+      font-weight: bold;
+      font-family: var(--font-heading);
+      font-size: rem(18);
+      cursor: pointer;
+      margin: 0 0 0.5rem 0;
+      float: left;
+      clear: both;
+
+      @include media-breakpoint-up(sm) {
+        clear: none;
+        margin-bottom: 0;
+        margin-right: 2rem;
+      }
+
+      &:before {
+        width: 0;
+      }
+
+      &:hover:before,
+      &:focus:before {
+        width: 100%;
+      }
+    }
+  }
+
+  .tab {
+    display: none;
+  }
+
+  @for $i from 1 through 10 {
+    input:checked:nth-child(#{$i}) ~ .tabs__links .link:not(.text-decoration-none):not(.btn):nth-child(#{$i}):before {
+      width: 100%;
+    }
+    input:checked:nth-child(#{$i}) ~ .tabs .tab:nth-child(#{$i}){
+      display: block;
+    }
+  }
+}
+
