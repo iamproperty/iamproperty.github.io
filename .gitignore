@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # Testing files
 __diff_output__
+
+# Compiled filed
+*.min.css
+*.min.css.map
+*.bundle.js
+*.bundle.js.map
