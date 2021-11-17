@@ -215,7 +215,7 @@ export default {
       
       let element = this.$refs.wrapper;
       // Remove unnecessary divs that may get in the way of our CSS sibling selectors working
-      if(element.parentNode.classList.contains('form-check') || element.classList.length == 0){
+      if(element.parentNode && element.parentNode.classList.contains('form-check') || element.classList.length == 0){
 
         const fragment = document.createDocumentFragment();
       	Array.from(element.childNodes).forEach(child => fragment.appendChild(child));
