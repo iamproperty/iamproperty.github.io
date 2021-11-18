@@ -1,28 +1,45 @@
 /*!
-  * Bootstrap v2.0.0
+  * Bootstrap v2.1.0
   * Copyright 2011-2021 [object Object]
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
   factory();
-}((function () { 'use strict';
+})((function () { 'use strict';
 
-  var global = require('../internals/global');
+  var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
+  var redefine$1 = require('../internals/redefine');
+  var toString$3 = require('../internals/object-to-string');
+
+  // `Object.prototype.toString` method
+  // https://tc39.es/ecma262/#sec-object.prototype.tostring
+  if (!TO_STRING_TAG_SUPPORT) {
+    redefine$1(Object.prototype, 'toString', toString$3, { unsafe: true });
+  }
+
+  var global$1 = require('../internals/global');
   var DOMIterables = require('../internals/dom-iterables');
+  var DOMTokenListPrototype = require('../internals/dom-token-list-prototype');
   var forEach = require('../internals/array-for-each');
   var createNonEnumerableProperty = require('../internals/create-non-enumerable-property');
 
-  for (var COLLECTION_NAME in DOMIterables) {
-    var Collection = global[COLLECTION_NAME];
-    var CollectionPrototype = Collection && Collection.prototype;
+  var handlePrototype = function (CollectionPrototype) {
     // some Chrome versions have non-configurable methods on DOMTokenList
     if (CollectionPrototype && CollectionPrototype.forEach !== forEach) try {
       createNonEnumerableProperty(CollectionPrototype, 'forEach', forEach);
     } catch (error) {
       CollectionPrototype.forEach = forEach;
     }
+  };
+
+  for (var COLLECTION_NAME in DOMIterables) {
+    if (DOMIterables[COLLECTION_NAME]) {
+      handlePrototype(global$1[COLLECTION_NAME] && global$1[COLLECTION_NAME].prototype);
+    }
   }
+
+  handlePrototype(DOMTokenListPrototype);
 
   var $$7 = require('../internals/export');
   var from = require('../internals/array-from');
@@ -40,7 +57,7 @@
   });
 
   var charAt = require('../internals/string-multibyte').charAt;
-  var toString$3 = require('../internals/to-string');
+  var toString$2 = require('../internals/to-string');
   var InternalStateModule = require('../internals/internal-state');
   var defineIterator = require('../internals/define-iterator');
 
@@ -53,7 +70,7 @@
   defineIterator(String, 'String', function (iterated) {
     setInternalState(this, {
       type: STRING_ITERATOR,
-      string: toString$3(iterated),
+      string: toString$2(iterated),
       index: 0
     });
   // `%StringIteratorPrototype%.next` method
@@ -256,29 +273,23 @@
     return _typeof(obj);
   }
 
-  var TO_STRING_TAG_SUPPORT = require('../internals/to-string-tag-support');
-  var redefine$1 = require('../internals/redefine');
-  var toString$2 = require('../internals/object-to-string');
-
-  // `Object.prototype.toString` method
-  // https://tc39.es/ecma262/#sec-object.prototype.tostring
-  if (!TO_STRING_TAG_SUPPORT) {
-    redefine$1(Object.prototype, 'toString', toString$2, { unsafe: true });
-  }
-
+  var uncurryThis$3 = require('../internals/function-uncurry-this');
+  var PROPER_FUNCTION_NAME = require('../internals/function-name').PROPER;
   var redefine = require('../internals/redefine');
   var anObject$1 = require('../internals/an-object');
+  var isPrototypeOf = require('../internals/object-is-prototype-of');
   var $toString = require('../internals/to-string');
   var fails$4 = require('../internals/fails');
-  var flags = require('../internals/regexp-flags');
+  var regExpFlags = require('../internals/regexp-flags');
 
   var TO_STRING = 'toString';
   var RegExpPrototype = RegExp.prototype;
-  var nativeToString = RegExpPrototype[TO_STRING];
+  var n$ToString = RegExpPrototype[TO_STRING];
+  var getFlags = uncurryThis$3(regExpFlags);
 
-  var NOT_GENERIC = fails$4(function () { return nativeToString.call({ source: 'a', flags: 'b' }) != '/a/b'; });
+  var NOT_GENERIC = fails$4(function () { return n$ToString.call({ source: 'a', flags: 'b' }) != '/a/b'; });
   // FF44- RegExp#toString has a wrong name
-  var INCORRECT_NAME = nativeToString.name != TO_STRING;
+  var INCORRECT_NAME = PROPER_FUNCTION_NAME && n$ToString.name != TO_STRING;
 
   // `RegExp.prototype.toString` method
   // https://tc39.es/ecma262/#sec-regexp.prototype.tostring
@@ -287,15 +298,16 @@
       var R = anObject$1(this);
       var p = $toString(R.source);
       var rf = R.flags;
-      var f = $toString(rf === undefined && R instanceof RegExp && !('flags' in RegExpPrototype) ? flags.call(R) : rf);
+      var f = $toString(rf === undefined && isPrototypeOf(RegExpPrototype, R) && !('flags' in RegExpPrototype) ? getFlags(R) : rf);
       return '/' + p + '/' + f;
     }, { unsafe: true });
   }
 
   var $$5 = require('../internals/export');
-  var aFunction = require('../internals/a-function');
+  var uncurryThis$2 = require('../internals/function-uncurry-this');
+  var aCallable = require('../internals/a-callable');
   var toObject$2 = require('../internals/to-object');
-  var toLength$2 = require('../internals/to-length');
+  var lengthOfArrayLike$1 = require('../internals/length-of-array-like');
   var toString$1 = require('../internals/to-string');
   var fails$3 = require('../internals/fails');
   var internalSort = require('../internals/array-sort');
@@ -306,7 +318,8 @@
   var WEBKIT = require('../internals/engine-webkit-version');
 
   var test = [];
-  var nativeSort = test.sort;
+  var un$Sort = uncurryThis$2(test.sort);
+  var push$1 = uncurryThis$2(test.push);
 
   // IE8-
   var FAILS_ON_UNDEFINED = fails$3(function () {
@@ -369,21 +382,22 @@
   // https://tc39.es/ecma262/#sec-array.prototype.sort
   $$5({ target: 'Array', proto: true, forced: FORCED$1 }, {
     sort: function sort(comparefn) {
-      if (comparefn !== undefined) aFunction(comparefn);
+      if (comparefn !== undefined) aCallable(comparefn);
 
       var array = toObject$2(this);
 
-      if (STABLE_SORT) return comparefn === undefined ? nativeSort.call(array) : nativeSort.call(array, comparefn);
+      if (STABLE_SORT) return comparefn === undefined ? un$Sort(array) : un$Sort(array, comparefn);
 
       var items = [];
-      var arrayLength = toLength$2(array.length);
+      var arrayLength = lengthOfArrayLike$1(array);
       var itemsLength, index;
 
       for (index = 0; index < arrayLength; index++) {
-        if (index in array) items.push(array[index]);
+        if (index in array) push$1(items, array[index]);
       }
 
-      items = internalSort(items, getSortCompare(comparefn));
+      internalSort(items, getSortCompare(comparefn));
+
       itemsLength = items.length;
       index = 0;
 
@@ -395,11 +409,12 @@
   });
 
   var $$4 = require('../internals/export');
+  var global = require('../internals/global');
   var fails$2 = require('../internals/fails');
   var isArray = require('../internals/is-array');
   var isObject = require('../internals/is-object');
   var toObject$1 = require('../internals/to-object');
-  var toLength$1 = require('../internals/to-length');
+  var lengthOfArrayLike = require('../internals/length-of-array-like');
   var createProperty = require('../internals/create-property');
   var arraySpeciesCreate = require('../internals/array-species-create');
   var arrayMethodHasSpeciesSupport$1 = require('../internals/array-method-has-species-support');
@@ -409,6 +424,7 @@
   var IS_CONCAT_SPREADABLE = wellKnownSymbol$1('isConcatSpreadable');
   var MAX_SAFE_INTEGER = 0x1FFFFFFFFFFFFF;
   var MAXIMUM_ALLOWED_INDEX_EXCEEDED = 'Maximum allowed index exceeded';
+  var TypeError$1 = global.TypeError;
 
   // We can't use this feature detection in V8 since it causes
   // deoptimization and serious performance degradation
@@ -442,11 +458,11 @@
       for (i = -1, length = arguments.length; i < length; i++) {
         E = i === -1 ? O : arguments[i];
         if (isConcatSpreadable(E)) {
-          len = toLength$1(E.length);
-          if (n + len > MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+          len = lengthOfArrayLike(E);
+          if (n + len > MAX_SAFE_INTEGER) throw TypeError$1(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
           for (k = 0; k < len; k++, n++) if (k in E) createProperty(A, n, E[k]);
         } else {
-          if (n >= MAX_SAFE_INTEGER) throw TypeError(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
+          if (n >= MAX_SAFE_INTEGER) throw TypeError$1(MAXIMUM_ALLOWED_INDEX_EXCEEDED);
           createProperty(A, n++, E);
         }
       }
@@ -456,11 +472,12 @@
   });
 
   var $$3 = require('../internals/export');
+  var uncurryThis$1 = require('../internals/function-uncurry-this');
   var IndexedObject = require('../internals/indexed-object');
   var toIndexedObject = require('../internals/to-indexed-object');
   var arrayMethodIsStrict = require('../internals/array-method-is-strict');
 
-  var nativeJoin = [].join;
+  var un$Join = uncurryThis$1([].join);
 
   var ES3_STRINGS = IndexedObject != Object;
   var STRICT_METHOD = arrayMethodIsStrict('join', ',');
@@ -469,7 +486,7 @@
   // https://tc39.es/ecma262/#sec-array.prototype.join
   $$3({ target: 'Array', proto: true, forced: ES3_STRINGS || !STRICT_METHOD }, {
     join: function join(separator) {
-      return nativeJoin.call(toIndexedObject(this), separator === undefined ? ',' : separator);
+      return un$Join(toIndexedObject(this), separator === undefined ? ',' : separator);
     }
   });
 
@@ -512,14 +529,19 @@
     exec: exec
   });
 
+  var apply = require('../internals/function-apply');
+  var call = require('../internals/function-call');
+  var uncurryThis = require('../internals/function-uncurry-this');
   var fixRegExpWellKnownSymbolLogic = require('../internals/fix-regexp-well-known-symbol-logic');
   var fails = require('../internals/fails');
   var anObject = require('../internals/an-object');
-  var toInteger = require('../internals/to-integer');
+  var isCallable = require('../internals/is-callable');
+  var toIntegerOrInfinity = require('../internals/to-integer-or-infinity');
   var toLength = require('../internals/to-length');
   var toString = require('../internals/to-string');
   var requireObjectCoercible = require('../internals/require-object-coercible');
   var advanceStringIndex = require('../internals/advance-string-index');
+  var getMethod = require('../internals/get-method');
   var getSubstitution = require('../internals/get-substitution');
   var regExpExec = require('../internals/regexp-exec-abstract');
   var wellKnownSymbol = require('../internals/well-known-symbol');
@@ -527,6 +549,10 @@
   var REPLACE = wellKnownSymbol('replace');
   var max = Math.max;
   var min = Math.min;
+  var concat = uncurryThis([].concat);
+  var push = uncurryThis([].push);
+  var stringIndexOf = uncurryThis(''.indexOf);
+  var stringSlice = uncurryThis(''.slice);
 
   var maybeToString = function (it) {
     return it === undefined ? it : String(it);
@@ -554,6 +580,7 @@
       result.groups = { a: '7' };
       return result;
     };
+    // eslint-disable-next-line regexp/no-useless-dollar-replacements -- false positive
     return ''.replace(re, '$<a>') !== '7';
   });
 
@@ -566,10 +593,10 @@
       // https://tc39.es/ecma262/#sec-string.prototype.replace
       function replace(searchValue, replaceValue) {
         var O = requireObjectCoercible(this);
-        var replacer = searchValue == undefined ? undefined : searchValue[REPLACE];
-        return replacer !== undefined
-          ? replacer.call(searchValue, O, replaceValue)
-          : nativeReplace.call(toString(O), searchValue, replaceValue);
+        var replacer = searchValue == undefined ? undefined : getMethod(searchValue, REPLACE);
+        return replacer
+          ? call(replacer, searchValue, O, replaceValue)
+          : call(nativeReplace, toString(O), searchValue, replaceValue);
       },
       // `RegExp.prototype[@@replace]` method
       // https://tc39.es/ecma262/#sec-regexp.prototype-@@replace
@@ -578,15 +605,15 @@
         var S = toString(string);
 
         if (
-          typeof replaceValue === 'string' &&
-          replaceValue.indexOf(UNSAFE_SUBSTITUTE) === -1 &&
-          replaceValue.indexOf('$<') === -1
+          typeof replaceValue == 'string' &&
+          stringIndexOf(replaceValue, UNSAFE_SUBSTITUTE) === -1 &&
+          stringIndexOf(replaceValue, '$<') === -1
         ) {
           var res = maybeCallNative(nativeReplace, rx, S, replaceValue);
           if (res.done) return res.value;
         }
 
-        var functionalReplace = typeof replaceValue === 'function';
+        var functionalReplace = isCallable(replaceValue);
         if (!functionalReplace) replaceValue = toString(replaceValue);
 
         var global = rx.global;
@@ -599,7 +626,7 @@
           var result = regExpExec(rx, S);
           if (result === null) break;
 
-          results.push(result);
+          push(results, result);
           if (!global) break;
 
           var matchStr = toString(result[0]);
@@ -612,28 +639,28 @@
           result = results[i];
 
           var matched = toString(result[0]);
-          var position = max(min(toInteger(result.index), S.length), 0);
+          var position = max(min(toIntegerOrInfinity(result.index), S.length), 0);
           var captures = [];
           // NOTE: This is equivalent to
           //   captures = result.slice(1).map(maybeToString)
           // but for some reason `nativeSlice.call(result, 1, result.length)` (called in
           // the slice polyfill when slicing native arrays) "doesn't work" in safari 9 and
           // causes a crash (https://pastebin.com/N21QzeQA) when trying to debug it.
-          for (var j = 1; j < result.length; j++) captures.push(maybeToString(result[j]));
+          for (var j = 1; j < result.length; j++) push(captures, maybeToString(result[j]));
           var namedCaptures = result.groups;
           if (functionalReplace) {
-            var replacerArgs = [matched].concat(captures, position, S);
-            if (namedCaptures !== undefined) replacerArgs.push(namedCaptures);
-            var replacement = toString(replaceValue.apply(undefined, replacerArgs));
+            var replacerArgs = concat([matched], captures, position, S);
+            if (namedCaptures !== undefined) push(replacerArgs, namedCaptures);
+            var replacement = toString(apply(replaceValue, undefined, replacerArgs));
           } else {
             replacement = getSubstitution(matched, S, position, captures, namedCaptures, replaceValue);
           }
           if (position >= nextSourcePosition) {
-            accumulatedResult += S.slice(nextSourcePosition, position) + replacement;
+            accumulatedResult += stringSlice(S, nextSourcePosition, position) + replacement;
             nextSourcePosition = position + matched.length;
           }
         }
-        return accumulatedResult + S.slice(nextSourcePosition);
+        return accumulatedResult + stringSlice(S, nextSourcePosition);
       }
     ];
   }, !REPLACE_SUPPORTS_NAMED_GROUPS || !REPLACE_KEEPS_$0 || REGEXP_REPLACE_SUBSTITUTES_UNDEFINED_CAPTURE);
@@ -1273,8 +1300,12 @@
 
     Array.from(document.querySelectorAll('form')).forEach(function (arrayElement, index) {
       form(arrayElement);
+    }); // Modal
+
+    Array.from(document.querySelectorAll('.modal')).forEach(function (arrayElement, index) {
+      modal(arrayElement);
     });
   });
 
-})));
+}));
 //# sourceMappingURL=scripts.bundle.js.map

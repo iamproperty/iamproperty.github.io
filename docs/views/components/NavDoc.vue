@@ -9,7 +9,7 @@
     </div>
     
     
-    <Nav class="mb-5 visualtest" btnLink="/account" btnText="Account">
+    <Nav class="mb-5 visualtest" btnlink="/account" btntext="Account">
       <ul class="list-unstyled">
         <li><a href="/">Link 1</a></li>
         <li><a href="/">Link 2</a></li>
@@ -22,7 +22,7 @@
       <p>A secondary navigation can be added to include links that are not as important to the main user journeys but are relevant to the user. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
     </div>
     
-    <Nav class="visualtest mb-5" btnLink="/account" btnText="Signout">
+    <Nav class="visualtest mb-5" btnlink="/account" btntext="Signout">
       <ul class="list-unstyled">
         <li><a href="/">Link 1</a></li>
         <li><a href="/">Link 2</a></li>
@@ -43,7 +43,7 @@
       <p>To transform the navigation to look more like an admin bar with the classes <strong>.bg-primary</strong> and <strong>.nav--admin</strong> can be added. These will change the background colour, condense it down and move the optional secondary nav to the bottom on desktop. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
     </div>
     
-    <Nav class="visualtest mb-5 bg-primary nav--admin" btnLink="/account" btnText="Signout">
+    <Nav class="visualtest mb-5 bg-primary nav--admin" btnlink="/account" btntext="Signout">
       <ul class="list-unstyled">
         <li><a href="/">Link 1</a></li>
         <li><a href="/">Link 2</a></li>
