@@ -5,6 +5,7 @@ html {
   overflow: hidden;
   overflow-x: hidden;
   overflow-y: scroll;
+  height: 100%;
 
   font-size: vw($device-xs-width);
   
@@ -37,6 +38,17 @@ body {
   @include var(color,--colour-body);
   width: 100%;
   line-height: 1.5;
+  height: 100%;
+}
+
+#app {
+  min-height: 100%;
+}
+
+body > footer,
+body > #app > footer {
+  position: sticky;
+  top: 100vh;
 }
 
 address {

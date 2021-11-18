@@ -28,7 +28,7 @@
   border-radius: rem(20);
   margin-bottom: rem(24);
   margin-right: rem(16);
-  transition: .5s;
+  transition: background-color .5s, color .5s;
   height: auto;
 
   a:hover &,

@@ -55,4 +55,8 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('form')).forEach((arrayElement, index) => {
     form(arrayElement);
   });
+  // Modal
+  Array.from(document.querySelectorAll('.modal')).forEach((arrayElement, index) => {
+    modal(arrayElement);
+  });
 });
