@@ -1,5 +1,5 @@
 <template>
-  <a :href="link" :class="'card'+(type?' card--'+type:'')" :title="'Find out more: '+title+(subTitle ? ' - '+subTitle:'')">
+  <a :href="link" :class="'card'+(type?' card--'+type:'')" :title="'Find out more: '+title+(subtitle ? ' - '+subtitle:'')">
     <div class="card-header__wrapper" v-if="image">
       <img :src="image" alt="" loading="lazy" class="card-image" />
       <div class="card-header">
@@ -9,8 +9,8 @@
       <img v-if="details && details.logo" :src="details.logo" alt="" loading="lazy" class="card-logo" />
     </div>
     <div class="card-body" v-html="cardContent()"></div>
-    <div class="card-footer" v-if="hideCtaText == false">
-      <span :class="`${btnType == 'link' ? `link` : `btn btn-${btnType}`} mb-0`">{{ctaText}}<span class="visually-hidden"> about {{title}}</span></span>
+    <div class="card-footer" v-if="hidectatext == false">
+      <span :class="`${btntype == 'link' ? `link` : `btn btn-${btntype}`} mb-0`">{{ctatext}}<span class="visually-hidden"> about {{title}}</span></span>
     </div>
   </a>
 </template>
@@ -29,7 +29,7 @@ export default {
       type: String,
       required: false
     },
-    titleClass: {
+    titleclass: {
       type: String,
       required: false,
       default: 'h2'
@@ -38,7 +38,7 @@ export default {
       type: String,
       required: false
     },
-    subTitle: {
+    subtitle: {
       type: String,
       required: false
     },
@@ -50,17 +50,17 @@ export default {
       type: String,
       required: false
     },
-    btnType: {
+    btntype: {
       type: String,
       required: false,
       default: 'secondary'
     },
-    ctaText: {
+    ctatext: {
       type: String,
       required: false,
       default: 'Find out more'
     },
-    hideCtaText: {
+    hidectatext: {
       type: Boolean,
       required: false,
       default: false
@@ -99,12 +99,12 @@ export default {
         }
 
         const tags = this.details && this.details.tags ? this.details.tags.map(tag =>  `<span class="badge rounded-pill py-2 px-3 mb-3 me-2 ${tagClass(tag)}">${tag}</span>` ).join(""): '';
-        const title = this.title ? `<span class="card-title d-block ${this.titleClass}">${this.title}${this.subTitle ? ` <span class="d-block fw-normal font-body text-body small">${this.subTitle}</span>` : ''}</span>` : ``;
+        const title = this.title ? `<span class="card-title d-block ${this.titleclass}">${this.title}${this.subtitle ? ` <span class="d-block fw-normal font-body text-body small">${this.subtitle}</span>` : ''}</span>` : ``;
 
         const details = `
-        ${this.details && this.details.guidePrice ? `<span class="d-block h6 text-dark mb-1">Price guide: ${this.details.guidePrice}</span>` : ``}
-        ${this.details && this.details.auctionTime ? `<span class="d-block h6 text-primary mb-4">Auction time left: ${this.details.auctionTime}</span>` : ``}
-        ${this.details && this.details.readTime ? `<span class="d-block h6 text-primary mb-4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="23" viewBox="0 0 22 23" class="icon ms-0 me-2"><path d="M11 1.63c-5.176 0-9.37 4.194-9.37 9.37 0 5.176 4.194 9.37 9.37 9.37 5.176 0 9.37-4.194 9.37-9.37 0-5.176-4.194-9.37-9.37-9.37M11 0c6.075 0 11 4.925 11 11s-4.925 11-11 11S0 17.075 0 11 4.925 0 11 0" fill="var(--colour-secondary)" /><path d="M9.62 5.39c0-.473.368-.856.82-.856.454 0 .822.383.822.855v6.27l3.25 1.898c.395.23.536.75.314 1.16-.22.412-.72.558-1.115.328l-4.09-2.39V5.39z" fill="var(--colour-primary)"/></svg>${this.details.readTime}</span>` : ``}
+        ${this.details && this.details.guideprice ? `<span class="d-block h6 text-dark mb-1">Price guide: ${this.details.guideprice}</span>` : ``}
+        ${this.details && this.details.auctiontime ? `<span class="d-block h6 text-primary mb-4">Auction time left: ${this.details.auctiontime}</span>` : ``}
+        ${this.details && this.details.readtime ? `<span class="d-block h6 text-primary mb-4"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="23" viewBox="0 0 22 23" class="icon ms-0 me-2"><path d="M11 1.63c-5.176 0-9.37 4.194-9.37 9.37 0 5.176 4.194 9.37 9.37 9.37 5.176 0 9.37-4.194 9.37-9.37 0-5.176-4.194-9.37-9.37-9.37M11 0c6.075 0 11 4.925 11 11s-4.925 11-11 11S0 17.075 0 11 4.925 0 11 0" fill="var(--colour-secondary)" /><path d="M9.62 5.39c0-.473.368-.856.82-.856.454 0 .822.383.822.855v6.27l3.25 1.898c.395.23.536.75.314 1.16-.22.412-.72.558-1.115.328l-4.09-2.39V5.39z" fill="var(--colour-primary)"/></svg>${this.details.readtime}</span>` : ``}
         `;
 
         return `${tags}${title}${details}${this.content}`;

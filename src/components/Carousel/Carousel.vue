@@ -57,7 +57,7 @@ export default {
   },
   props: {
     ...cardDeckProps,
-    colClass: {
+    colclass: {
       type: String,
       required: false
     },

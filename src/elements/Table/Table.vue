@@ -1,5 +1,5 @@
 <template>
-  <div class="table__wrapper" ref="wrapper" :data-sortBy="sortBy" :data-sort="sort" :data-show="show" :data-page="page" :data-reorder="reorder">
+  <div class="table__wrapper" ref="wrapper" :data-sortby="sortby" :data-sort="sort" :data-show="show" :data-page="page" :data-reorder="reorder">
     <table>
       <thead v-if="fields">
         <tr>
@@ -34,7 +34,7 @@ export default {
       type: Number,
       required: false
     },
-    sortBy: {
+    sortby: {
       type: String,
       required: false
     },

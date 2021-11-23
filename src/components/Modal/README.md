@@ -11,6 +11,7 @@
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | id | String | - | Required |
+| returnid | String | close | Override the default id so that it will anchor to a specific location on the page. |
 
 ### Slots
 

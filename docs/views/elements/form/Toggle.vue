@@ -29,9 +29,9 @@
       <p class="visualtest-hide">We can create toggle buttons with more than one option by using a combination of radio fields and button classes.</p>
       
       <div class="btn-group d-block col-md-8">
-        <Input type="radio-btn" id="test9" name="radio5" label="Option 1" labelClass="btn-tertiary col-4" checked="checked"></Input>
-        <Input type="radio-btn" id="test9a" name="radio5" label="Option 2" labelClass="btn-tertiary col-4"></Input>
-        <Input type="radio-btn" id="test9b" name="radio5" label="Option 3" labelClass="btn-tertiary col-4"></Input>
+        <Input type="radio-btn" id="test9" name="radio5" label="Option 1" labelclass="btn-tertiary col-4" checked="checked"></Input>
+        <Input type="radio-btn" id="test9a" name="radio5" label="Option 2" labelclass="btn-tertiary col-4"></Input>
+        <Input type="radio-btn" id="test9b" name="radio5" label="Option 3" labelclass="btn-tertiary col-4"></Input>
         <hr/>
         <div class="conditional conditional-1">
           <p>Content 1.</p>

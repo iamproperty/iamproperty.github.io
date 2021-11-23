@@ -11,7 +11,7 @@
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | type  | String | - | Can be used to indicate that cards should be displayed in the carousel by giving the value 'card'  |
-| colClass  | String | - | Pass utility classes to the columns in the carousel. For example 'd-flex align-items-center' will align the items n the middle. |
+| colclass  | String | - | Pass utility classes to the columns in the carousel. For example 'd-flex align-items-center' will align the items n the middle. |
 
 ### Slots
 

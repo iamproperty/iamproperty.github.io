@@ -18,7 +18,7 @@
     </div>
 
     <div class="container visualtest">
-      <Table :fields="sortable_fields" :items="items" sortBy="Job" sort="ascending" class="table-fullwidth"></Table>
+      <Table :fields="sortable_fields" :items="items" sortby="Job" sort="ascending" class="table-fullwidth"></Table>
     </div>
 
     <div class="container">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav btnLink="/account" btnText="Account">
+    <Nav btnlink="/account" btntext="Account">
       <ul class="list-unstyled">
         <li>
           <details>

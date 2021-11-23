@@ -1,9 +1,9 @@
 <template>
-  <div class="container card-deck prevent-invert" :data-card-type="cardType">
+  <div class="container card-deck prevent-invert" :data-card-type="cardtype">
       <slot></slot>
-      <div :class="`row row-cols-${cols} row-cols-sm-${smCols} row-cols-md-${mdCols} ${gap ? `g-${gap}`: ``}`">
+      <div :class="`row row-cols-${cols} row-cols-sm-${smcols} row-cols-md-${mdcols} ${gap ? `g-${gap}`: ``}`">
         <div class="col" v-for="(value,index) in items" :key="index">
-          <Card v-bind="value" :class="cardClass" :type="cardType" :btnType="btnType" :titleClass="titleClass" :ctaText="ctaText" :hideCtaText="hideCtaText"></Card>
+          <Card v-bind="value" :class="cardclass" :type="cardtype" :btntype="btntype" :titleclass="titleclass" :ctatext="ctatext" :hidectatext="hidectatext"></Card>
         </div>
       </div>
       <slot name="after"></slot>
@@ -33,12 +33,12 @@ export default {
       required: false,
       default: 1
     },
-    smCols: {
+    smcols: {
       type: Number,
       required: false,
       default: 1
     },
-    mdCols: {
+    mdcols: {
       type: Number,
       required: false,
       default: 3
@@ -48,27 +48,27 @@ export default {
       required: false,
       default: 4
     },
-    cardType: {
+    cardtype: {
       type: String,
       required: false
     },
-    cardClass: {
+    cardclass: {
       type: String,
       required: false
     },
-    btnType: {
+    btntype: {
       type: String,
       required: false
     },
-    titleClass: {
+    titleclass: {
       type: String,
       required: false
     },
-    ctaText: {
+    ctatext: {
       type: String,
       required: false
     },
-    hideCtaText: {
+    hidectatext: {
       type: Boolean,
       required: false,
       default: false

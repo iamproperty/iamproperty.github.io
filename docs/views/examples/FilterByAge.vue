@@ -21,7 +21,7 @@
       </div>
     </form>
     
-    <Table :fields="fields" :items="items" sortBy="Age" sort="ascending" class="table-fullwidth" :show="5"></Table>
+    <Table :fields="fields" :items="items" sortby="Age" sort="ascending" class="table-fullwidth" :show="5"></Table>
     
   </div>
 </template>

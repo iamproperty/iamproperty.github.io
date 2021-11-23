@@ -8,7 +8,7 @@
       <p>...</p>
     </div>
 
-    <Carousel class="hide-controls" :items="items" :smCols="3" :mdCols="5" colClass="d-flex align-items-center">
+    <Carousel class="hide-controls" :items="items" :smcols="3" :mdcols="5" colclass="d-flex align-items-center">
       <h2 class="mx-auto text-center">We're already working with thousands of agents across the UK</h2>
     </Carousel>
 

@@ -9,9 +9,9 @@
     </div>
 
     <div class="container visualtest">
-      <Input id="test8" label="Label" required errorMsg="This field is required"></Input>
-      <Input id="test9" label="Label" required inputClass="is-invalid" errorMsg="This field is required"></Input>
-      <Input id="test10" label="Label" required inputClass="is-valid" value="Some value" errorMsg="This field is required"></Input>
+      <Input id="test8" label="Label" required errormsg="This field is required"></Input>
+      <Input id="test9" label="Label" required inputclass="is-invalid" errormsg="This field is required"></Input>
+      <Input id="test10" label="Label" required inputclass="is-valid" value="Some value" errormsg="This field is required"></Input>
     </div>
 
   </main>

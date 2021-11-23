@@ -60,6 +60,17 @@ export default {
   },
   updated(){
 
+    // Remove weird markdown component behavior
+    let element = document.querySelector('#app html');
+    if(element){
+
+      const fragment = document.createDocumentFragment();
+      Array.from(element.querySelector('body').childNodes).forEach(child => fragment.appendChild(child));
+      element.parentNode.insertBefore(fragment, element);
+      element.parentNode.removeChild(element);
+    }
+    // end
+
     document.getElementById('showMenu').checked = false;
 
     if(document.querySelector('main'))
