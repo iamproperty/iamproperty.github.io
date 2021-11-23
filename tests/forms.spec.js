@@ -8,7 +8,7 @@ describe('Input component', () => {
       id: 'input1',
       label: 'Label',
       size: 'sm',
-      errorMsg: 'Error'
+      errormsg: 'Error'
     },
     scopedSlots: {
       default: '<p>Hello</p>'

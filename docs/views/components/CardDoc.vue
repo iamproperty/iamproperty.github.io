@@ -41,7 +41,7 @@
       <p>A simple card type with a link at the bottom instead of a button and a read time detail set.</p>
     </div>
 
-    <CardDeck :items="insightCards" :smcols="2" :mdcols="4" cardtype="simple" btntype="link" ctaText="Read more" titleclass="h6 fw-normal font-body text-uppercase" class="visualtest">
+    <CardDeck :items="insightCards" :smcols="2" :mdcols="4" cardtype="simple" btntype="link" ctatext="Read more" titleclass="h6 fw-normal font-body text-uppercase" class="visualtest">
     </CardDeck>
 
     <div class="container">
@@ -125,11 +125,11 @@ export default {
           content: `<p>Reservation fee applies</p>`,
           image: require('../../assets/house.jpeg'),
           title: '4 bed semi-detached',
-          subTitle: 'Burt terrace, Newcastle upon tyne',
+          subtitle: 'Burt terrace, Newcastle upon tyne',
           details: {
             tags: ['Modern method','Freehold'],
-            guidePrice: '£90,000.00',
-            auctionTime: '19 days',
+            guideprice: '£90,000.00',
+            auctiontime: '19 days',
             status: 'Live now',
             images: 5,
             videos: 2,
@@ -143,7 +143,7 @@ export default {
           link: '/examples/related-cards',
           title: 'News - 24 March 2021',
           details: {
-            readTime: '10mins'
+            readtime: '10mins'
           },
           content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`
         }
