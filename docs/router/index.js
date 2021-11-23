@@ -169,6 +169,14 @@ export const routes = [
         component: () => import('../views/elements/AdvancedTables.vue')
       },
       {
+        path: 'tooltips',
+        name: 'Tooltips',
+        meta: {
+          title: 'Tooltips | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/TooltipsDoc.vue')
+      },
+      {
         path: 'form',
         name: 'Form elements',
         component: () => import('../views/elements/Form.vue'),
