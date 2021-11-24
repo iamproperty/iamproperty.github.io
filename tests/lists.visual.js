@@ -9,7 +9,7 @@ describe(`Lists page`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto(pkg.localURL+'/foundations/lists#visualtest')
+    await page.goto(pkg.localURL+'/elements/lists#visualtest')
 
     await page.setViewport({ width: 375, height: 800 })
     const mobileImage = await page.screenshot({ fullPage: true });
