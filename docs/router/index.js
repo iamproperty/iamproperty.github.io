@@ -401,6 +401,14 @@ export const routes = [
           title: 'Testimonial | Components | IAM Key'
         },
         component: () => import('../views/components/TestimonialDoc.vue')
+      },
+      {
+        path: 'timeline',
+        name: 'Timeline',
+        meta: {
+          title: 'Timeline | Components | IAM Key'
+        },
+        component: () => import('../views/components/TimelineDoc.vue')
       }
     ]
   },
