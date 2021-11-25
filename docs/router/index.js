@@ -145,6 +145,14 @@ export const routes = [
         component: () => import('../views/elements/Type.vue')
       },
       {
+        path: 'lists',
+        name: 'Lists',
+        meta: {
+          title: 'Lists | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Lists.vue')
+      },
+      {
         path: 'buttons',
         name: 'Buttons & links',
         meta: {
