@@ -1,0 +1,558 @@
+// #region Chart Colours
+$chart-colors: ();
+$chart-colors: map-merge((
+  1: --colour-primary,
+  2: --colour-secondary,
+  3: --colour-info,
+  4: --colour-warning,
+  5: --colour-dark,
+  6: --colour-light,
+  7: --colour-primary,
+  8: --colour-secondary,
+  9: --colour-info,
+  10: --colour-warning,
+), $chart-colors);
+
+html {
+  
+  @each $index, $value in $chart-colors {
+    --colour-chart-#{$index}: var(#{$value});
+  }
+}
+// #endregion
+
+// #region Apply colours
+@for $i from 1 to 10 {
+
+  .chart__key .key:not(:first-child):nth-child(#{$i+1}):before,
+  .chart:not(.chart--none):not(.chart--pie) table tbody tr td:not(:first-child):nth-child(#{$i+1}) {
+    background: var(#{'--colour-chart-'+$i});
+  }
+  .chart.chart--line:not(.chart--none):not(.chart--pie) .line:nth-child(#{$i}) {
+    stroke: var(#{'--colour-chart-'+$i});
+    z-index: #{10 - $i};
+  }
+  .chart.chart--pie .pie path:nth-child(#{$i}) {
+    fill: var(#{'--colour-chart-'+$i});
+  }
+}
+// #endregion
+
+// #region caption
+.chart__wrapper {
+  figcaption {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    display: block;
+  }
+}
+// #endregion
+
+// #region Chart key
+.chart__key {
+
+  padding-bottom: 2rem;
+  margin-bottom: 0;
+
+  &:before {
+    content: "Key: ";
+    display: inline-block;
+    padding-right: 1.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+
+    @include media-breakpoint-up(sm) {
+
+      width: auto;
+    }
+  }
+
+  .key {
+    display: inline-block;
+    padding-right: 1.5rem;
+    margin-bottom: 1rem;
+
+    &:before {
+      content: "";
+      height: 1em;
+      width: 1em;
+      margin-right: 0.25em;
+      background: red;
+      display: inline-block;
+      vertical-align: middle;
+      margin-bottom: 0.2em;
+    }
+
+    &:first-child {
+      display: none;
+    }
+  }
+}
+// #endregion
+
+// #region Default bar chart (Also applies to line chart)
+.chart:not(.chart--none):not(.chart--pie) {
+
+  --label-size: #{rem(12)};
+  --chart-ratio: 56.25%;
+
+  @include media-breakpoint-up(sm) {
+  
+    --chart-ratio: 42.86%; // 21:9 ratio
+  }
+
+  @include media-breakpoint-up(md) {
+
+    --label-size: #{rem(14)};
+  }
+
+  display: flex;
+  position: relative;
+  margin-bottom: 2rem;
+
+  .chart__yaxis {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column-reverse;
+    z-index: 2;
+    width: 0;
+
+    .axis__point {
+      
+      bottom: var(--percent);
+      position: relative;
+      height: 0;
+
+      &:not(:last-child){
+        display: none;
+      }
+
+      span {
+        display: block;
+        transform: translate(0,-50%);
+        padding-right: 0.25rem;
+        text-align: right;
+        font-size: var(--label-size);
+      }
+
+      &:last-child span {
+
+        transform: translate(0,-100%);
+      }
+    }
+
+    @include media-breakpoint-up(sm) {
+
+      width: auto;
+
+      .axis__point {
+
+        &:not(:last-child){
+          display: block;
+        }
+
+        &:last-child span {
+  
+          transform: translate(0,-50%);
+        }
+      }
+    }
+  }
+
+  .chart__guidelines {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 2rem);
+    margin-bottom: 2rem;
+    z-index: -1;
+    display: flex;
+    flex-direction: column-reverse;
+
+    .guideline {
+
+      bottom: var(--percent);
+      height: 0;
+
+      position: absolute;
+      right: 0;
+      background: #eeeeee;
+      width: 100%;
+      height: 1px;
+      margin-bottom: -1px;
+
+      &:first-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+
+  .table__wrapper {
+
+    padding-bottom: 2rem;
+    padding-right: 0;
+    margin: 0;
+    overflow-x: visible;
+    position: relative;
+
+    table{
+      overflow: visible;
+    }
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    padding-top: var(--chart-ratio); // 16:9 ratio
+    position: relative;
+    margin-bottom: 0;
+    border-bottom: 1px solid black;
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+
+      display: flex;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      flex-direction: row;
+      border: none;
+    }
+    
+    tbody tr {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: flex-end;
+      border: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 0 5%;
+
+      td:first-child {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%,0);
+        width: auto;
+        padding: 0;
+        white-space: nowrap;
+        max-width: 120%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: var(--label-size);
+        display: none;
+
+        @include media-breakpoint-up(md) {
+          display: block;
+          max-width: 95%;
+        }
+      }
+
+      &:first-child td:first-child,
+      &:last-child td:first-child {
+
+        display: block;
+      }
+
+      td:not(:first-child) {
+        height: 100%;
+        height: var(--percent, 0%);
+        bottom: var(--bottom,0%);
+        width: 50%;
+        max-width: 10rem;
+        position: relative;
+        background: green;
+        padding: 0;
+
+        &[data-label]:before {
+          display: none;
+        }
+
+        span {
+          position: absolute;
+          bottom: 100%;
+          left: 50%;
+          font-size: var(--label-size);
+          line-height: 1.2;
+          transform: translate(-50%,0);
+          background: var(--colour-info);
+          opacity: 0;
+          pointer-events: none;
+          padding: 0.5rem;
+          border-radius: 0.5rem;
+          margin-bottom: 0.25rem;
+          color: white;
+          white-space: pre;
+          text-align: center;
+
+          &::before {
+            content: attr(data-group) '\A' attr(data-label) ': ';
+          }
+        }
+
+        &:hover {
+          z-index: 1;
+        }
+        &:hover span {
+          opacity: 1;
+          z-index: 99;
+        }
+      }
+
+      &:first-child td:not(:first-child) span {
+
+        left: -20%;
+        transform: translate(0%,0);
+      }
+
+      &:last-child td:not(:first-child) span {
+          
+        left: 120%;
+        transform: translate(-100%,0);
+      }
+
+      @include media-breakpoint-up(sm) {
+
+        &:first-child td:not(:first-child) span,
+        &:last-child td:not(:first-child) span {
+          
+          left: 50%;
+          transform: translate(-50%,0);
+        }
+      }
+
+      td:first-child {
+        &[data-label]:before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .line,
+  .pie {
+    display: none;
+  }
+}
+// #endregion
+
+// #region Stacked bar chart
+.chart:not(.chart--none):not(.chart--pie).chart--stacked {
+  table tbody tr {
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}
+// #endregion
+
+// #region Line chart
+.chart.chart--line:not(.chart--none):not(.chart--pie) {
+
+  --line-thickness: 1px;
+
+  @include media-breakpoint-up(sm) {
+
+    --line-thickness: 0.8px;
+  }
+  @include media-breakpoint-up(md) {
+
+    --line-thickness: 0.5px;
+  }
+
+  table tbody {
+    justify-content: space-between;
+
+    tr {
+      width: 4rem;
+      margin-left: -2rem;
+      margin-right: -2rem;
+      padding: 0;
+
+
+      &:first-child td:first-child {
+
+        transform: translate(0,0);
+        display: block;
+      }
+      &:last-child td:first-child {
+
+        left: 100%;
+        transform: translate(-100%,0);
+        display: block;
+      }
+
+      td:first-child {
+        left: 50%!important;
+      }
+
+      td:not(:first-child) {
+        position: absolute;
+        left: 50%;
+        bottom: var(--percent);
+        height: 6px;
+        width: 6px;
+        margin-bottom: -3px;
+        margin-left: -3px;
+        border-radius: 3px;
+        opacity: 0;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &:hover {
+        &:before {
+          content: "";
+          border-left: 1px dashed #eeeeee;
+
+          height: 100%;
+          width: 0;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          height: 100%;
+          margin-left: -1px;
+          z-index: 0;
+        }
+      }
+    }
+  }
+
+  .line {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    stroke-width: var(--line-thickness);
+    width: 100%;
+    height: calc(100% - 2rem);
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  .pie {
+    display: none;
+  }
+}
+// #endregion
+
+// #region Pie chart
+.chart.chart--pie {
+
+  margin-bottom: 2rem;
+
+  .chart__yaxis,
+  .line {
+    display: none;
+  }
+  .table__wrapper {
+    display: none;
+  }
+
+  .pies {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .pie {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-width: rem(200);
+    flex: 1 1 auto;
+    display: inline-block;
+    
+    @include media-breakpoint-up(sm) {
+
+      max-width: calc(33.333% - 1.4rem);
+    }
+    @include media-breakpoint-up(md) {
+
+      max-width: calc(25% - 1.5rem);
+    }
+
+
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .pie svg {
+    width: 100%;
+    height: 100%;
+
+    path:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .pie foreignObject {
+    background: white;
+    border-radius: 50%;
+    z-index: 100;
+    pointer-events: none;
+    display: none;
+    padding: 1rem;
+
+    div {
+      display: flex;
+      justify-content: center;
+    align-items: center;
+      height: 100%;
+    }
+    span {
+      text-align: center;
+      display: block;
+    }
+  }
+  
+  .pie {
+    foreignObject:nth-of-type(1) {
+      display: block;
+    }
+    path:hover ~ foreignObject:nth-of-type(1) {
+      display: none;
+    }
+    path:nth-child(1):hover ~ foreignObject:nth-of-type(2),
+    path:nth-child(2):hover ~ foreignObject:nth-of-type(3),
+    path:nth-child(3):hover ~ foreignObject:nth-of-type(4),
+    path:nth-child(4):hover ~ foreignObject:nth-of-type(5),
+    path:nth-child(5):hover ~ foreignObject:nth-of-type(6),
+    path:nth-child(6):hover ~ foreignObject:nth-of-type(7),
+    path:nth-child(7):hover ~ foreignObject:nth-of-type(8),
+    path:nth-child(8):hover ~ foreignObject:nth-of-type(9){
+      display: block;
+    }
+  }
+}
+// #endregion
+
+// #region Reverted back into a table
+.chart__key.chart__key--none{
+  display: none;
+}
+.chart.chart--none {
+
+  .chart__yaxis,
+  .line,
+  .pie {
+    display: none;
+  }
+}
+// #endregion

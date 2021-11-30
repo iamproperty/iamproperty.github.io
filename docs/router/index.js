@@ -355,6 +355,14 @@ export const routes = [
         component: () => import('../views/components/DrawerDoc.vue')
       },
       {
+        path: 'charts',
+        name: 'Charts',
+        meta: {
+          title: 'Charts | Components | IAM Key'
+        },
+        component: () => import('../views/components/ChartsDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {
