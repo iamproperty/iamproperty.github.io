@@ -28,6 +28,10 @@
 
 
     <div class="container">
+      <h2>More examples</h2>
+      <a href="/examples/charts" class="btn btn-primary">Chart examples</a>
+    </div>
+    <div class="container">
       <h2>HTML code example</h2>
       <pre><code class="language-html">{{htmlUsage}}</code></pre>
     </div>

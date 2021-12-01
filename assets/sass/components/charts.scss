@@ -122,6 +122,7 @@ html {
       bottom: var(--percent);
       position: relative;
       height: 0;
+      white-space: nowrap;
 
       &:not(:last-child){
         display: none;
@@ -174,17 +175,20 @@ html {
     .guideline {
 
       bottom: var(--percent);
-      height: 0;
-
       position: absolute;
       right: 0;
-      background: #eeeeee;
       width: 100%;
-      height: 1px;
+      height: 0px;
       margin-bottom: -1px;
+      border-bottom: 1px dashed #eeeeee;
+    }
 
-      &:first-child {
-        margin-bottom: 0px;
+    [data-value="0"] {
+      border-bottom: 1px solid var(--colour-primary);
+
+      &:not(:first-child){
+
+        border-bottom: 1px dashed var(--colour-primary);
       }
     }
   }
@@ -208,7 +212,7 @@ html {
     padding-top: var(--chart-ratio); // 16:9 ratio
     position: relative;
     margin-bottom: 0;
-    border-bottom: 1px solid black;
+    //border-bottom: 1px solid black;
 
     thead {
       display: none;
@@ -300,7 +304,7 @@ html {
         }
 
         &:hover {
-          z-index: 1;
+          //z-index: 1;
         }
         &:hover span {
           opacity: 1;

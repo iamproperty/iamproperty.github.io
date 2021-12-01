@@ -17,7 +17,7 @@
       <Table v-bind="$props">
 
         <div class="chart__guidelines" role="presentation">
-          <div :key="index" v-for="(point,index) in yaxis" :style="`--percent:${((point.value-min)/(max-min))*100}%;`" class="guideline">
+          <div :key="index" v-for="(point,index) in yaxis" :data-value="point.value" :style="`--percent:${((point.value-min)/(max-min))*100}%;`" class="guideline">
           </div>
         </div>
         <span v-html="drawLines()" class="lines" v-if="type == 'line'"></span>
@@ -58,7 +58,8 @@ export default {
     },
     min: {
       type: Number,
-      required: true
+      required: false,
+      default: 0
     },
     yaxis: {
       type: Array,
@@ -222,7 +223,7 @@ export default {
         Array.from(tr.querySelectorAll('td[data-numeric]:not([data-numeric="0"]):not(:first-child)')).forEach((td, index) => {
           
           const value = Number.parseFloat(td.getAttribute('data-numeric'));
-          let percent = ((value)/(max)) * 100;
+          let percent = ((value - this.min)/(max)) * 100;
           const content = td.innerHTML;
           const label = td.getAttribute('data-label');
           let bottom = 0;
@@ -231,7 +232,6 @@ export default {
           if(this.min < 0){
             bottom = Math.abs((this.min)/(max)*100);
             if(value < 0){
-              percent = ((value - this.min)/(max)) * 100;
               bottom = bottom - percent;
             }
           }
