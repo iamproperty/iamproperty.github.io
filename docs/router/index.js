@@ -145,6 +145,14 @@ export const routes = [
         component: () => import('../views/elements/Type.vue')
       },
       {
+        path: 'lists',
+        name: 'Lists',
+        meta: {
+          title: 'Lists | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Lists.vue')
+      },
+      {
         path: 'buttons',
         name: 'Buttons & links',
         meta: {
@@ -409,6 +417,14 @@ export const routes = [
           title: 'Testimonial | Components | IAM Key'
         },
         component: () => import('../views/components/TestimonialDoc.vue')
+      },
+      {
+        path: 'timeline',
+        name: 'Timeline',
+        meta: {
+          title: 'Timeline | Components | IAM Key'
+        },
+        component: () => import('../views/components/TimelineDoc.vue')
       }
     ]
   },

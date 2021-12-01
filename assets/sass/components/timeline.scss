@@ -1,0 +1,93 @@
+.timeline {
+
+  --breakpoint:(100% - #{rem(992)});
+  --pl: clamp(0rem, var(--breakpoint) * -1000, 4rem);
+  --line-pos: clamp(1rem, var(--breakpoint) * 1000, 50%);
+  --circle-pos: 1rem;
+  --line-length: 100%;
+  --img-order: 1;
+
+
+  position: relative;
+  padding-top: rem(4);
+  padding-left: var(--pl);
+  padding-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  .timeline__container:not(.timeline--simple) & {
+
+    align-items: center;
+
+    @include media-breakpoint-up(md) {
+      --img-order: 0;
+      --circle-pos: 50%;
+      --line-length: 50%;
+    }
+  }
+
+  &:before {
+    content: " ";
+    display: block;
+    background: black;
+    width: 4px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: var(--line-pos);
+  }
+
+  &:after {
+    content: " ";
+    display: block;
+    background: white;
+    width: 2rem;
+    height: 2rem;
+    margin-top: -1rem;
+    position: absolute;
+    top: var(--circle-pos);
+    left: var(--line-pos);
+    margin-left: calc(-1rem + 2px);
+    border: 4px solid black;
+    border-radius: 50%;
+  }
+
+  > * {
+    max-width: rem((1320 / 2) - 96);
+    order: 1;
+  }
+
+  > img {
+    max-width: min(100%, #{rem((1320 / 2) - 96)});
+    margin-bottom: 2rem;
+  }
+
+  &:nth-child(even) > img {
+    order: var(--img-order);
+  }
+
+  &:first-child {
+
+    &:before {
+      top: var(--circle-pos);
+      height: var(--line-length);
+    }
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+    margin-bottom: 2rem;
+
+    &:before {
+      height: var(--line-length);
+    }
+
+    > img {
+      margin-bottom: 0;
+    }
+  }
+}
