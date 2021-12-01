@@ -363,6 +363,14 @@ export const routes = [
         component: () => import('../views/components/DrawerDoc.vue')
       },
       {
+        path: 'charts',
+        name: 'Charts',
+        meta: {
+          title: 'Charts | Components | IAM Key'
+        },
+        component: () => import('../views/components/ChartsDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {
@@ -441,6 +449,10 @@ export const routes = [
         component: () => import('../views/examples/FilterByAge.vue')
       },
       {
+        path: 'charts',
+        component: () => import('../views/examples/Charts.vue')
+      },
+      {
         path: 'related-cards',
         component: () => import('../views/examples/RelatedCards.vue')
       },
@@ -501,6 +513,32 @@ export const routes = [
           title: 'iam sold | IAM Key'
         },
         component: () => import('../views/standalone/IamsoldAdmin.vue')
+      }
+    ]
+  },
+  {
+    path: '/articles',
+    name: 'Articles',
+    meta: {
+      title: 'Articles | IAM Key'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "articles" */ '../views/Articles.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/articles/Index.vue')
+      },
+      {
+        path: 'flexbox-charts',
+        name: "Flexbox Charts",
+        meta: {
+          title: 'Navbar example| IAM Key'
+        },
+        component: () => import('../views/articles/FlexboxCharts.vue')
       }
     ]
   },

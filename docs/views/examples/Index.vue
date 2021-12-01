@@ -6,6 +6,7 @@
       <h2 id="tables">Advanced Tables</h2>
       <ul>
         <li><a href="/examples/filter-by-age">Filter by age</a></li>
+        <li><a href="/examples/charts">Charts</a></li>
       </ul>
       <h2 id="card-decks">Card decks</h2>
       <ul>
