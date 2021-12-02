@@ -7,6 +7,7 @@
         <li>Updated modal component with focus entrapment feature and the ability to dock the modal left or right.</li>
         <li>Updated reboot CSS to make the footer sticky.</li>
         <li>Add tooltip CSS</li>
+        <li>Add Chart components</li>
       </ul>
       <!--
       <h3>Breaking changes</h3>

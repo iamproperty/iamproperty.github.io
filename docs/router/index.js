@@ -536,7 +536,7 @@ export const routes = [
         path: 'flexbox-charts',
         name: "Flexbox Charts",
         meta: {
-          title: 'Navbar example| IAM Key'
+          title: 'Flexbox Charts | IAM Key'
         },
         component: () => import('../views/articles/FlexboxCharts.vue')
       }
