@@ -320,7 +320,7 @@ export const routes = [
         meta: {
           title: 'Accordion | Components | IAM Key'
         },
-        component: () => import('../views/components/Accordion.vue')
+        component: () => import('../views/components/AccordionDoc.vue')
       },
       {
         path: 'banner',
