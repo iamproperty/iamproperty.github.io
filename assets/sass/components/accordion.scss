@@ -28,6 +28,13 @@
   cursor: pointer;
   position: relative;
 
+  .badge {
+    vertical-align: bottom;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+
+
   &:before,
   &:after {
 
