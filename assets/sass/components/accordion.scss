@@ -1,13 +1,13 @@
 // Accordion
 .accordion {
-  --accordion-indent: 0;
+  --accordion-indent: 0.75rem;
   --accordion-right-padding: 3rem;
   --accordion-y-padding: 1rem;
   --accordion-icon-size: #{rem(30)};
   --accordion-icon-top: #{rem(12)};
 
   @include media-breakpoint-up(md) {
-    --accordion-indent: 0.5rem;
+    //--accordion-indent: 1rem;
     --accordion-right-padding: 6rem;
     --accordion-y-padding: 2rem;
     --accordion-icon-size: #{rem(48)};
@@ -27,6 +27,13 @@
   --marker-bg: var(--colour-secondary);
   cursor: pointer;
   position: relative;
+
+  .badge {
+    vertical-align: bottom;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+  }
+
 
   &:before,
   &:after {
@@ -83,7 +90,7 @@
     box-shadow: $accordion-button-focus-box-shadow;
   }
 
-  [open] & {
+  [open] > summary > & {
     color: $accordion-button-active-color;
     background-color: $accordion-button-active-bg;
     
@@ -93,6 +100,28 @@
     }
   }
 }
+
+// #region Coloured summary
+summary[class*="bg-"] {
+
+  .accordion-button {
+
+
+    &:before {
+      background: none!important;
+    }
+  }
+
+  &:hover .accordion-button {
+    opacity: 0.8;
+  }
+
+  & + .accordion-body {
+
+    padding-top: 2rem;
+  }
+}
+// #endregion
 
 .accordion-header {
   margin-bottom: 0;
@@ -116,3 +145,34 @@
   text-align: left;
   padding: 0 $accordion-body-padding-x;
 }
+
+
+// #region Child accordion
+.accordion .accordion {
+
+  &:first-child {
+
+    padding-top: 1rem;
+  }
+
+  &:last-child {
+
+    padding-bottom: 2rem;
+  }
+
+  .accordion-button {
+    padding: 1rem 3rem 1rem var(--accordion-indent);
+
+    &:before,
+    &:after {
+      top: 0.75rem;
+      height: 2rem;
+      width: 2rem;
+      right: 0.5rem;
+    }
+    &:before {
+      background-color: var(--colour-light);
+    }
+  }
+}
+// #endregion

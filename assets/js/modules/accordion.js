@@ -1,19 +1,22 @@
 function accordion(accordionElement) {
   
   // Fetch all the details element.
-  const details = accordionElement.querySelectorAll("details");
+  if(!accordionElement.classList.contains('accordion--keep-open')){
 
-  // Add the onclick listeners.
-  details.forEach((targetDetail) => {
-    targetDetail.addEventListener("click", () => {
-      // Close all the details that are not targetDetail.
-      details.forEach((detail) => {
-        if (detail !== targetDetail) {
-          detail.removeAttribute("open");
-        }
+    const details = accordionElement.querySelectorAll(":scope > details");
+
+    // Add the onclick listeners.
+    details.forEach((targetDetail) => {
+      targetDetail.addEventListener("click", () => {
+        // Close all the details that are not targetDetail.
+        details.forEach((detail) => {
+          if (detail !== targetDetail) {
+            detail.removeAttribute("open");
+          }
+        });
       });
     });
-  });
+  }
 
   if(window.location.hash && document.querySelector(window.location.hash+':not([open]) summary')) {
 
