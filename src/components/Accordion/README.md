@@ -14,6 +14,7 @@
 ### Class modifiers
 
 - Adding a class of **.accordion--keep-open** to the accordion will stop the items from closing when another one is opened.
+- Adding a class of **.accordion--straight** to the accordion will remove the slight indentation of the accordion.
 
 
 ### Accordion item Properties

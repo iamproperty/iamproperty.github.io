@@ -403,6 +403,14 @@ export const routes = [
         component: () => import('../views/components/PropertySearchbarDoc.vue')
       },
       {
+        path: 'snapshot',
+        name: 'Snapshot',
+        meta: {
+          title: 'Snapshot | Components | IAM Key'
+        },
+        component: () => import('../views/components/SnapshotDoc.vue')
+      },
+      {
         path: 'tabs',
         name: 'Tabs',
         meta: {
@@ -513,6 +521,14 @@ export const routes = [
           title: 'iam sold | IAM Key'
         },
         component: () => import('../views/standalone/IamsoldAdmin.vue')
+      },
+      {
+        path: 'completions-dashboard',
+        name: "Completions dashboard",
+        meta: {
+          title: 'Completions dashboard | IAM Key'
+        },
+        component: () => import('../views/standalone/CompletionsDashboard.vue')
       }
     ]
   },
