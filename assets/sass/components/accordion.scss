@@ -106,6 +106,8 @@ summary[class*="bg-"] {
 
   .accordion-button {
 
+    border-bottom: 1px solid var(--colour-border);
+    margin-bottom: -1px;
 
     &:before {
       background: none!important;
@@ -122,6 +124,8 @@ summary[class*="bg-"] {
   }
 }
 // #endregion
+
+
 
 .accordion-header {
   margin-bottom: 0;
@@ -146,6 +150,18 @@ summary[class*="bg-"] {
   padding: 0 $accordion-body-padding-x;
 }
 
+// #region Straight edge
+.accordion--straight {
+  > details > summary:not([class*="bg-"]) > .accordion-button,
+  > details > .accordion-body {
+    padding-left: 0!important;
+  }
+
+  > details > .accordion-body {
+    padding-right: 0!important;
+  }
+}
+// #endregion
 
 // #region Child accordion
 .accordion .accordion {
