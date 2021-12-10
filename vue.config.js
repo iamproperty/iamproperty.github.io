@@ -52,6 +52,13 @@ module.exports = {
       .options({
         raw: true
       })
+
+    config.module.rule('files')
+    .test(/\.(png|jpg|gif|pdf)$/)
+    .use('file-loader')
+    .loader('file-loader')
+    .end()
+
   },
   css: {sourceMap: true},
   configureWebpack: {
