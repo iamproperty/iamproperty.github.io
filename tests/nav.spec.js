@@ -8,7 +8,7 @@ describe('Nav component', () => {
       propsData: { }
     })
     
-    expect(test.html()).toContain('<logo-stub id="property" path=\"\"></logo-stub>')
+    expect(test.html()).toContain('<logo-stub id="property" path=\"\" class=\"pb-0\"></logo-stub>')
   })
 
   it('renders the correct logo when a logo id is passed', () => {
@@ -18,7 +18,7 @@ describe('Nav component', () => {
       }
     })
     
-    expect(test.html()).toContain('<logo-stub id="sold" path=\"\"></logo-stub>')
+    expect(test.html()).toContain('<logo-stub id="sold" path=\"\" class=\"pb-0\"></logo-stub>')
   })
 
   /* Menu button */
