@@ -9,7 +9,7 @@
         <div class="row">
           <div class="col mw-md-fit-content nav__logo">
             <a href="/" class="text-decoration-none mb-0">
-              <Logo :id="logo" :path="logopath" :desc="logotext"></Logo>
+              <Logo :id="logo" :path="logopath" :desc="logotext" class="pb-0"></Logo>
             </a>
           </div>
 
