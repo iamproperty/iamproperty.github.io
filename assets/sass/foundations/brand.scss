@@ -24,10 +24,20 @@
   flex-wrap: nowrap;
   align-items: center;
   padding-right: rem(16);
+  padding-bottom: rem(16);
   min-width: 100%;
   min-width: Min(100%, var(--svg-width));
   font-size: rem(64);
   @include var(color,--colour-primary);
+
+  /* Restrict the logo colours so that only text-secondary can be defined */
+  &[class*="text-"]:not(.text-secondary){
+    color: inherit!important;
+  }
+
+  &[class*="text-"].text-secondary{
+    color: var(--colour-secondary-theme)!important;
+  }
 
   svg {
     fill: currentColor;
