@@ -87,7 +87,11 @@ $fontPath: '/fonts/';
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};
   }
+  @each $var, $value in $varsMD {
+    #{str-replace($var,'-','_')}_md: #{$value};
+  }
   heading_lh: $headings-line-height;
+  heading_mb: $headings-margin-bottom;
   @each $breakpoint in map-keys($grid-breakpoints) {
 
     // Generate media query if needed
