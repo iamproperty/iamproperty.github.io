@@ -23,11 +23,11 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="h1 display-1 text-nowrap" data-test="test1">Display 1</span></td>
+            <td><span class="h1 display-1 text-nowrap">Display 1</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
-            <td><span>{{$shared.cssVars.__display_1}}</span><span>{{$shared.cssVars.__fs_display_md?"/"+$shared.cssVars.__fs_display_md:''}}</span></td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
+            <td><span>{{$shared.cssVars.__fs_display}}</span><span>{{$shared.cssVars.__fs_display_md?"/"+$shared.cssVars.__fs_display_md:''}}</span></td>
+            <td>1em</td>
             <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
@@ -35,7 +35,7 @@
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td><span>{{$shared.cssVars.__fs_1}}</span><span>{{$shared.cssVars.__fs_1_md?"/"+$shared.cssVars.__fs_1_md:''}}</span></td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
+            <td>1em</td>
             <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
@@ -43,7 +43,7 @@
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td><span>{{$shared.cssVars.__fs_2}}</span><span>{{$shared.cssVars.__fs_2_md?"/"+$shared.cssVars.__fs_2_md:''}}</span></td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
+            <td>1.2em/1em</td>
             <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
@@ -51,7 +51,7 @@
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td><span>{{$shared.cssVars.__fs_3}}</span><span>{{$shared.cssVars.__fs_3_md?"/"+$shared.cssVars.__fs_3_md:''}}</span></td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
+            <td>1.2em</td>
             <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
@@ -59,7 +59,7 @@
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td><span>{{$shared.cssVars.__fs_4}}</span><span>{{$shared.cssVars.__fs_4_md?"/"+$shared.cssVars.__fs_4_md:''}}</span></td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
+            <td>1.5em/1.2em</td>
             <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
@@ -67,7 +67,7 @@
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
             <td><span>{{$shared.cssVars.__fs_5}}</span><span>{{$shared.cssVars.__fs_5_md?"/"+$shared.cssVars.__fs_5_md:''}}</span></td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
+            <td>1.5rem</td>
             <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
@@ -75,11 +75,12 @@
             <td>{{$shared.cssVars.__font_body}}</td>
             <td>normal</td>
             <td>1rem</td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
+            <td>1.5</td>
             <td>0.5em</td>
           </tr>
         </tbody>
       </table>
+      <p>The line height for headings is calculated using the following clamp rule <strong>'{{$shared.cssVars.heading_lh}}'</strong>.</p>
     </div>
     <div class="container visualtest">
       <h2>Body Text</h2>
