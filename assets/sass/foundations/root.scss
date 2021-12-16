@@ -5,7 +5,10 @@
   }
 
   @include media-breakpoint-up(md) {
-    --fs-1: 2.5rem;
+    
+    @each $var, $value in $varsMD {
+      #{$var}: #{$value};
+    }
   }
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
