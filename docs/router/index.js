@@ -46,6 +46,14 @@ export const routes = [
     }
   },
   {
+    path: '/accessibility',
+    component: () => import('../views/Accessibility.vue'),
+    name: 'Accessibility',
+    meta: {
+      title: 'Accessibility | IAM Key'
+    }
+  },
+  {
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
     children: [

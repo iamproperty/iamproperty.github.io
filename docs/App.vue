@@ -21,6 +21,7 @@
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/get-started')}" to="/get-started">Get started</router-link></li>
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/examples')}" to="/examples">Examples</router-link></li>
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/articles')}" to="/articles">Articles</router-link></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/accessibility')}" to="/accessibility">Accessibility</router-link></li>
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/audit')}" to="/audit">Audit</router-link></li>
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/changelog')}" to="/changelog">Changelog</router-link></li>
         </ul>
