@@ -12,10 +12,10 @@
     <div class="container visualtest">
       <div class="row">
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle-example"></span>
+          <span class="circle circle-example bg-secondary"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle-example text-info"></span>
+          <span class="circle circle-example text-info bg-info"></span>
         </div>
         <div class="col mw-fit-content pb-4">
           <span class="circle circle-example text-info border-2"></span>
@@ -24,7 +24,7 @@
     </div>
     <div class="container pb-0">
       <h2>Variants</h2>
-      <p>The circles can be upgraded by adding a pattern or a gradient to them. The class <strong>.circle--gradient</strong> adds a green to blue gradient while the class <strong>.circle--cross</strong> adds a repeated cross pattern. Colours on the patterned circles can be changed by using the <strong>.text-{colour}</strong> classes. The border can also be removed by using the <strong>.border-0</strong> class.</p>
+      <p>The circles can be upgraded by adding a pattern or a gradient to them. The class <strong>.gradient-secondary</strong> adds a green gradient while the class <strong>.circle--cross</strong> adds a repeated cross pattern. Colours on the patterned circles can be changed by using the <strong>.text-{colour}</strong> classes. The border can also be removed by using the <strong>.border-0</strong> class.</p>
     </div>
     <div class="container visualtest">
       <div class="row">
@@ -41,7 +41,7 @@
           <span class="circle circle-example circle--dots text-info"></span>
         </div>
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle-example circle--gradient"></span>
+          <span class="circle circle-example text-info gradient-secondary"></span>
         </div>
         <div class="col mw-fit-content pb-4">
           <span class="circle circle-example circle--stripe border-0"></span>

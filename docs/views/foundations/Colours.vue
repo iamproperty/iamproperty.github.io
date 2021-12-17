@@ -13,7 +13,7 @@
       <div class="colour-blocks">
         <div class="colour-block" :style="'background: '+colour+';'" v-for="(colour, name) in $shared.themeColours" :key="name">
           <div class="details">
-            <h3 class="h5">{{ name }}</h3>
+            <h3 class="h5 mb-0">{{ name }}</h3>
             <span>{{ colour }}</span>
           </div>
         </div>
@@ -27,8 +27,60 @@
       <div class="colour-blocks">
         <div class="colour-block" :style="'background: '+colour+';'" v-for="(colour, name) in $shared.nonThemeColours" :key="name">
           <div class="details">
-            <h3 class="h5">{{ name }}</h3>
+            <h3 class="h5 mb-0">{{ name }}</h3>
             <span>{{ colour }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>Gradients</h2>
+      <p>Gradients can be used to help convey technological eepertise and innovation.</p>
+    </div>
+    <div class="container visualtest">
+      <div class="colour-blocks">
+        <div class="colour-block bg-info gradient-secondary">
+          <div class="details">
+            <h3 class="h5 mb-0">Secondary on info</h3>
+          </div>
+        </div>
+        <div class="colour-block bg-info gradient-primary">
+          <div class="details">
+            <h3 class="h5 mb-0">Primary on info</h3>
+          </div>
+        </div>
+        <div class="colour-block bg-secondary gradient-primary">
+          <div class="details">
+            <h3 class="h5 mb-0">Primary on secondary</h3>
+          </div>
+        </div>
+        <div class="colour-block gradient-info">
+          <div class="details">
+            <h3 class="h5 mb-0">Info</h3>
+          </div>
+        </div>
+      </div>
+      <h3>Gradient direction</h3>
+      <p>The direction of the gradient can be changed by adding another gradient class.</p>
+      <div class="colour-blocks">
+        <div class="colour-block bg-info gradient-secondary">
+          <div class="details">
+            <h3 class="h5 mb-0">Default</h3>
+          </div>
+        </div>
+        <div class="colour-block bg-info gradient-secondary gradient-direction-left">
+          <div class="details">
+            <h3 class="h5 mb-0">Left</h3>
+          </div>
+        </div>
+        <div class="colour-block bg-info gradient-secondary gradient-direction-right">
+          <div class="details">
+            <h3 class="h5 mb-0">Right</h3>
+          </div>
+        </div>
+        <div class="colour-block bg-info gradient-secondary gradient-direction-up">
+          <div class="details">
+            <h3 class="h5 mb-0">Up</h3>
           </div>
         </div>
       </div>
@@ -61,6 +113,9 @@ $compatible: 'false';
   border-radius: 0.5rem;
   box-shadow: 0px 0px 10px 1px rgba(111,111,111,0.1);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   .details {
     background: white;
     padding: 0.5rem;

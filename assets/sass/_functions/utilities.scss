@@ -72,7 +72,7 @@ $utilities: map-merge(
     "float": null
   )
 );
-// #region
+// #endregion
 
 // #region Remove the responsive classes for the spacing utilities
 /*
@@ -196,3 +196,43 @@ $utilities: map-merge(
   )
 );
 //  #endregion
+
+// #region Gradient colours 
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "gradient-color": (
+      property: background-image,
+      class: gradient,
+      local-vars: (
+        "gradient-direction": 180deg
+      ),
+      values:
+      (
+        "secondary": linear-gradient(var(--bs-gradient-direction), var(--colour-secondary) 0, transparent 100%),
+        "primary": linear-gradient(var(--bs-gradient-direction), var(--colour-primary) 0, transparent 100%),
+        "info": linear-gradient(var(--bs-gradient-direction), var(--colour-info) 0, transparent 100%)
+      )
+    )
+  )
+);
+$utilities: map-merge(
+  $utilities,
+  (
+    "gradient-direction": (
+      css-var: true,
+      class: gradient-direction,
+      values:
+      (
+        "left": 90deg,
+        "right": -90deg,
+        "up": 360deg
+      )
+    )
+  )
+);
+
+
+
+// #endregion
