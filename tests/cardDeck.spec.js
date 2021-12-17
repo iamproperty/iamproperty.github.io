@@ -39,9 +39,9 @@ describe('Card Deck component', () => {
   })
 
   it('renders the card title', () => {
-    expect(test.html()).toContain('<span class="card-title d-block h2">Card 1</span>')
-    expect(test.html()).toContain('<span class="card-title d-block h2">Card 2</span>')
-    expect(test.html()).toContain('<span class="card-title d-block h2">Card 3</span>')
+    expect(test.html()).toContain('<span class="card-title d-block h4">Card 1</span>')
+    expect(test.html()).toContain('<span class="card-title d-block h4">Card 2</span>')
+    expect(test.html()).toContain('<span class="card-title d-block h4">Card 3</span>')
   })
 
   it('renders the correct number of cards', () => {
@@ -78,7 +78,7 @@ describe('Property Card component', () => {
 
 
   it('renders the property card title', () => {
-    expect(test.html()).toContain('<span class="card-title d-block h2">4 bed semi-detached <span class="d-block fw-normal font-body text-body small">Burt terrace, Newcastle upon tyne</span></span>')
+    expect(test.html()).toContain('<span class="card-title d-block h4">4 bed semi-detached <span class="d-block fw-normal font-body text-body small">Burt terrace, Newcastle upon tyne</span></span>')
   
   })
 

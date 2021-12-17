@@ -18,7 +18,7 @@
     background-color: currentColor;
   }
 
-  &:before {
+  &:not([class*="gradient-"]):before {
     content: "";
     display: block;
     position: absolute;
@@ -34,7 +34,6 @@
     -webkit-mask-size: rem(34);
     -webkit-mask-repeat: repeat;
     -webkit-mask-position: 50% 51%;
-    z-index: -1;
   }
 
   &--cross:before,
