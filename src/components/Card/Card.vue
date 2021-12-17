@@ -32,7 +32,7 @@ export default {
     titleclass: {
       type: String,
       required: false,
-      default: 'h2'
+      default: 'h4'
     },
     title: {
       type: String,
