@@ -1,3 +1,8 @@
+ol li,
+ul li{
+  max-width: $content-max-width;
+}
+
 .breadcrumb {
 
   font-size: rem(14);

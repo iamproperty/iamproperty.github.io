@@ -38,6 +38,14 @@ export const routes = [
     }
   },
   {
+    path: '/principles',
+    component: () => import('../views/Principles.vue'),
+    name: 'Principles',
+    meta: {
+      title: 'Principles | IAM Key'
+    }
+  },
+  {
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
     children: [

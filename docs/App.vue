@@ -6,6 +6,7 @@
 
     <Nav logo="key" logoText="Design system<br/>&amp; framework">
       <ul class="list-unstyled">
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/principles')}" to="/principles">Principles</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
