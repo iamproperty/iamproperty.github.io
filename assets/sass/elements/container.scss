@@ -193,14 +193,6 @@
   }
 }
 
-[class*="container--curve"] {
-
-  position: relative;
-
-  @media (min-width: #{em(1440)}) {
-    margin-left: auto;
-  }
-}
 
 .container--curve {
 
@@ -217,5 +209,14 @@
 .container--curve--down {
 
   @include curve(0,90,90,0,16);
+}
+
+[class*="container--curve"] {
+
+  position: relative;
+
+  @media (min-width: #{em(1440)}) {
+    margin-left: auto;
+  }
 }
 // #endregion
