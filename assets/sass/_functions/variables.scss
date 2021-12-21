@@ -2,7 +2,7 @@
 $vars: ();
 $varsMD: ();
 
-// #region Grid Breakpoints 
+// #region Grid Breakpoints, layouts
 $grid-breakpoints: (
   xs: 0,
   sm: 36em, /* 576 */
@@ -27,6 +27,25 @@ $container-max-widths: (
 
 $grid-columns: 12;
 $grid-gutter-width: 1rem; // 15px
+
+$container-padding-x: 20;
+$container-padding-x-md: 60;
+$container-padding: var(--container-padding-top) rem($container-padding-x) var(--container-padding-bottom) rem($container-padding-x);
+$container-padding-md: var(--container-padding-top) rem($container-padding-x-md) var(--container-padding-bottom) rem($container-padding-x-md);
+
+$vars: map-merge((
+  "--container-padding-top": 0,
+  "--container-padding-bottom": #{rem(16)},
+  "--container-padding-x": #{rem($container-padding-x)},
+  "--container-padding-x-md": #{rem($container-padding-x-md)},
+  "--container-padding": $container-padding,
+  "--container-padding-md": $container-padding-md
+), $vars);
+
+$varsMD: map-merge((
+  "--container-padding": var(--container-padding-md),
+  "--container-padding-x": var(--container-padding-x-md)
+), $varsMD);
 // #endregion
 
 // #region Colours
