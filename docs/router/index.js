@@ -153,6 +153,14 @@ export const routes = [
         component: () => import('../views/elements/Index.vue')
       },
       {
+        path: 'container',
+        name: 'Container',
+        meta: {
+          title: 'Container | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Container.vue')
+      },
+      {
         path: 'type',
         name: 'Type',
         meta: {

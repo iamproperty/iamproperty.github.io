@@ -65,21 +65,7 @@
       <h2>HTML code example</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
-    <div class="container">
-      <h2>Circle patterns</h2>
-      <p>Circles can be added to the container element and they will automatically be positioned depending upon the container class.</p>
-    </div>
-    <div class="container circle-pattern bg-dark visualtest">
-      <span class="h2 text-center mx-auto">Default pattern</span>
-      <span class="circle circle--stripe text-light opacity-50"></span>
-      <span class="circle circle--cross text-white opacity-75"></span>
-    </div>
-    <div class="container circle-pattern-2 bg-light visualtest">
-      <span class="h2 text-center mx-auto">Pattern 2</span>
-      <p class="text-center mx-auto">Add <strong>.circle-pattern-2</strong> class to the container.</p>
-      <span class="circle circle--stripe text-dark"></span>
-      <span class="circle circle--cross text-white"></span>
-    </div>
+    
   </main>
 </template>
 
@@ -102,9 +88,5 @@ export default {
   .circle-example {
     font-size: 12.5rem;
   }
-}
-
-[class*="circle-pattern"] {
-  min-height: 40rem;
 }
 </style>
