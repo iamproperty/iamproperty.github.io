@@ -14,15 +14,15 @@ describe(`Header`, () => {
     
     await page.setViewport({ width: 1440, height: 800 })
     const breadcrumbPosition = await page.$eval(
-      '.header .breadcrumb',
+      '.header-banner .breadcrumb',
       (el) => window.getComputedStyle(el).getPropertyValue("position")
     )
     const imgPosition = await page.$eval(
-      '.header > picture > img',
+      '.header-banner > picture > img',
       (el) => window.getComputedStyle(el).getPropertyValue("position")
     )
     const minHeight = await page.$eval(
-      '.header',
+      '.header-banner',
       (el) => parseInt(window.getComputedStyle(el).getPropertyValue("min-height"))
     )
     expect(breadcrumbPosition).toBe('absolute');

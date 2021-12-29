@@ -1,9 +1,9 @@
 <template>
-  <header class="header">
+  <header class="header-banner">
     <div class="container">
       <!-- Space for a breadcrumb trail -->
       <slot name="breadcrumb"></slot>
-      <div class="header__inner">
+      <div class="header-banner__inner">
         <h1 v-html="title"></h1>
         <slot></slot>
       </div>

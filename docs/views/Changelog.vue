@@ -3,17 +3,23 @@
     <div class="container">
       <h1>Changelog</h1>
       <!--
-      <h2>V2.2.0 <span>(Future version)</span></h2>
+      <h2>V2.3.0 <span>(Future version)</span></h2>
       <ul>
-        <li>Updated modal component with focus entrapment feature and the ability to dock the modal left or right.</li>
-        <li>Updated reboot CSS to make the footer sticky.</li>
-        <li>Add tooltip CSS</li>
-        <li>Add Chart components</li>
-        <li>Update accordion component</li>
-        <li>Add snapshot component</li>
+        <li></li>
       </ul>
       -->
-      <h2>V2.1.0 <span>(Current latest version)</span></h2>
+      <h2>V2.2.0 <span>(Current latest version)</span></h2>
+      <ul>
+        <li>Documentation update</li>
+        <li>Curved background CSS</li>
+      </ul>
+      
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Update the type rules, the type scale has been increased on the headings which will possibly cause breaking layout changes.</li>
+      </ul>
+      
+      <h2>V2.1.0</h2>
       <ul>
         <li>Updated modal component with focus entrapment feature and the ability to dock the modal left or right.</li>
         <li>Updated reboot CSS to make the footer sticky.</li>
