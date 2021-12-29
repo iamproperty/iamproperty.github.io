@@ -122,6 +122,16 @@ npm run pull-request
 
 You will not have the ability to commit changes directly to the main branch and a pull request will have to be created. This pull request should follow the format dictated in the .github/pull_request_template.md file.
 
-### Create release
+## Create release
 
-TBD
+Before creating a release you will need to make sure you are logged into the npm registry by running the below command. You will also need to make sure you have access to create releases to the <a href="https://www.npmjs.com/package/@iamproperty/components" target="_blank">npm registry package</a>.
+
+```
+npm login
+```
+
+After you are logged in then can publish but remember to increase the package version if the package.json file.
+
+```
+npm publish
+```

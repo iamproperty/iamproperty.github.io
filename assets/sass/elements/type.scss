@@ -6,7 +6,10 @@
   @include var(color,--colour-heading);
   color: var(--colour-heading,var(--colour-primary));
   display: block;
-  margin-bottom: 1rem;
+  //margin-bottom: clamp(1rem,0.5em,0.5em);
+  //line-height: clamp(2.5rem,1em,1.2em);
+  text-indent: -0.04em;
+  letter-spacing: -0.01em;
 }
 
 h1,
@@ -18,8 +21,6 @@ h2,
 h3,
 .h3 {
   @extend %heading;
-  @include var(font-family, --font-body);
-  font-weight: normal;
 }
 h4,
 .h4,
@@ -29,6 +30,15 @@ h6,
 .h6  {
   
   @extend %heading;
+}
+
+.display-1,
+.display-2,
+.display-3,
+.display-4 {
+
+  @extend %heading;
+  font-size: var(--fs-display);
 }
 
 // #endregion
@@ -42,10 +52,13 @@ p + p {
 }
 
 .strapline {
-  @include var(font-size,--fs-4);
+  @include var(font-size,--fs-strapline);
   @include var(font-family, --font-heading);
   @include var(color,--colour-secondary);
-  font-weight: 600;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: clamp(1rem,0.5em,0.5em);
+  //text-shadow: ;
 
   h1 + &,
   .h1 + & {
@@ -55,7 +68,9 @@ p + p {
 }
 
 .lead {
-  @include var(font-size,--fs-3);
+  @include var(font-size,--fs-strapline);
+  @include var(font-family, --font-heading);
+  font-weight: 700;
   line-height: 1.2;
   margin-bottom: 3rem;
   @include var(color,--colour-primary);
@@ -67,7 +82,7 @@ blockquote {
   margin-bottom: 1rem;
 
   p {
-    @include var(font-size,--fs-3);
+    @include var(font-size,--fs-4);
     @include var(color,--colour-heading);
     margin-top: 0;
     margin-bottom: 1rem;

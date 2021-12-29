@@ -23,55 +23,64 @@
         </thead>
         <tbody>
           <tr>
+            <td><span class="h1 display-1 text-nowrap">Display 1</span></td>
+            <td>{{$shared.cssVars.__font_heading}}</td>
+            <td>{{$shared.cssVars.__heading_weight}}</td>
+            <td><span>{{$shared.cssVars.__fs_display}}</span><span>{{$shared.cssVars.__fs_display_md?"/"+$shared.cssVars.__fs_display_md:''}}</span></td>
+            <td>1em</td>
+            <td>{{$shared.cssVars.heading_mb}}</td>
+          </tr>
+          <tr>
             <td><span class="h1 text-nowrap" data-test="test1">heading 1</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
-            <td><span>{{$shared.cssVars.__fs_1}}</span>/<span>2.5rem</span></td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
-            <td>0.5em</td>
+            <td><span>{{$shared.cssVars.__fs_1}}</span><span>{{$shared.cssVars.__fs_1_md?"/"+$shared.cssVars.__fs_1_md:''}}</span></td>
+            <td>1em</td>
+            <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
             <td><span class="h2" data-test="test2">heading 2</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
-            <td>{{$shared.cssVars.__fs_2}}</td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
-            <td>0.5em</td>
+            <td><span>{{$shared.cssVars.__fs_2}}</span><span>{{$shared.cssVars.__fs_2_md?"/"+$shared.cssVars.__fs_2_md:''}}</span></td>
+            <td>1.2em/1em</td>
+            <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
             <td><span class="h3" data-test="test3">heading 3</span></td>
-            <td>{{$shared.cssVars.__font_body}}</td>
-            <td>normal</td>
-            <td>{{$shared.cssVars.__fs_3}}</td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
-            <td>0.5em</td>
+            <td>{{$shared.cssVars.__font_heading}}</td>
+            <td>{{$shared.cssVars.__heading_weight}}</td>
+            <td><span>{{$shared.cssVars.__fs_3}}</span><span>{{$shared.cssVars.__fs_3_md?"/"+$shared.cssVars.__fs_3_md:''}}</span></td>
+            <td>1.2em</td>
+            <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
             <td><span class="h4" data-test="test4">heading 4</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
-            <td>{{$shared.cssVars.__fs_4}}</td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
-            <td>0.5em</td>
+            <td><span>{{$shared.cssVars.__fs_4}}</span><span>{{$shared.cssVars.__fs_4_md?"/"+$shared.cssVars.__fs_4_md:''}}</span></td>
+            <td>1.5em/1.2em</td>
+            <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
             <td><span class="h5" data-test="test5">heading 5</span></td>
             <td>{{$shared.cssVars.__font_heading}}</td>
             <td>{{$shared.cssVars.__heading_weight}}</td>
-            <td>{{$shared.cssVars.__fs_5}}</td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
-            <td>0.5em</td>
+            <td><span>{{$shared.cssVars.__fs_5}}</span><span>{{$shared.cssVars.__fs_5_md?"/"+$shared.cssVars.__fs_5_md:''}}</span></td>
+            <td>1.5rem</td>
+            <td>{{$shared.cssVars.heading_mb}}</td>
           </tr>
           <tr>
             <td><span class="font-weight-normal" data-test="test6">Body text</span></td>
             <td>{{$shared.cssVars.__font_body}}</td>
             <td>normal</td>
             <td>1rem</td>
-            <td>{{$shared.cssVars.heading_lh}}</td>
+            <td>1.5</td>
             <td>0.5em</td>
           </tr>
         </tbody>
       </table>
+      <p>The line height for headings is calculated using the following clamp rule <strong>'{{$shared.cssVars.heading_lh}}'</strong>.</p>
     </div>
     <div class="container visualtest">
       <h2>Body Text</h2>

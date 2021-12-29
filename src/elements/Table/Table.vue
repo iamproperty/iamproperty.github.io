@@ -1,5 +1,5 @@
 <template>
-  <div class="table__wrapper" ref="wrapper" :data-sortBy="sortBy" :data-sort="sort" :data-show="show" :data-page="page" :data-reorder="reorder">
+  <div class="table__wrapper" ref="wrapper" :data-sortby="sortby" :data-sort="sort" :data-show="show" :data-page="page" :data-reorder="reorder">
     <table>
       <thead v-if="fields">
         <tr>
@@ -8,10 +8,11 @@
       </thead>
       <tbody v-if="items">
         <tr v-for="(value,index) in items" :key="index">
-          <td :key="cellIndex" v-for="(cellValue,cellIndex) in value" v-html="cellValue" :data-label="cellHeading(cellIndex)"></td>
+          <td :key="cellIndex" v-for="(cellValue,cellIndex) in value" v-html="cellValue" :data-label="cellHeading(cellIndex)" :data-numeric="numericValue(cellValue)"></td>
         </tr>
       </tbody>
     </table>
+    <slot></slot>
   </div>
 </template>
 
@@ -34,7 +35,7 @@ export default {
       type: Number,
       required: false
     },
-    sortBy: {
+    sortby: {
       type: String,
       required: false
     },
@@ -55,6 +56,19 @@ export default {
     cellHeading () {
       return (heading) => {
         return `${ucfirst(unsnake(heading))}`
+      }
+    },
+    numericValue () {
+      return (value) => {
+
+        value = value.replace('£','')
+        value = value.replace('%','')
+
+        if (Number.isNaN(Number.parseFloat(value))) {
+          return 0;
+        }
+
+        return Number.parseFloat(value)
       }
     }
   },

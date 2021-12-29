@@ -6,6 +6,7 @@
 
     <Nav logo="key" logoText="Design system<br/>&amp; framework">
       <ul class="list-unstyled">
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/principles')}" to="/principles">Principles</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
@@ -16,13 +17,16 @@
 
       <div class="container pt-4">
         <ul class="list-unstyled list-inline ms-auto d-block mb-0">
-          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/get-started')}" to="/get-started">Get started</router-link></li>
-          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/examples')}" to="/examples">Examples</router-link></li>
-          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/audit')}" to="/audit">Audit</router-link></li>
-          <li class="list-inline-item me-4 ms-0"><router-link :class="{'router-link-sub-active': subIsActive('/changelog')}" to="/changelog">Changelog</router-link></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><a :href="require('./assets/brand-guidelines.pdf')" target="_blank">Brand guidelines</a></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/get-started')}" to="/get-started">Get started</router-link></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/accessibility')}" to="/accessibility">Accessibility</router-link></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/examples')}" to="/examples">Examples</router-link></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/articles')}" to="/articles">Articles</router-link></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/audit')}" to="/audit">Audit</router-link></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/changelog')}" to="/changelog">Changelog</router-link></li>
         </ul>
       </div>
-      <div class="container pt-4">
+      <div class="container pt-3">
         <p>Version: {{version}}</p>
       </div>
     </footer>
@@ -59,6 +63,17 @@ export default {
     }
   },
   updated(){
+
+    // Remove weird markdown component behavior
+    let element = document.querySelector('#app html');
+    if(element){
+
+      const fragment = document.createDocumentFragment();
+      Array.from(element.querySelector('body').childNodes).forEach(child => fragment.appendChild(child));
+      element.parentNode.insertBefore(fragment, element);
+      element.parentNode.removeChild(element);
+    }
+    // end
 
     document.getElementById('showMenu').checked = false;
 

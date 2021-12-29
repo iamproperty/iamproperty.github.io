@@ -8,7 +8,7 @@
       <p>...</p>
     </div>
 
-    <Carousel :items="items" class="bg-dark circle-pattern-2 visualtest hide-btns" type="card" cardType="simple" btnType="link" :smCols="2" :mdCols="4" ctaText="Read more" titleClass="text-primary text-uppercase">
+    <Carousel :items="items" class="bg-dark circle-pattern-2 visualtest hide-btns" type="card" cardtype="simple" btntype="link" :smcols="2" :mdcols="4" ctatext="Read more" titleclass="text-primary text-uppercase">
       <span class="circle circle--stripe text-light opacity-50"></span>
       <h2 class="text-white">Keep up to date with the latest property news</h2>
     </Carousel>

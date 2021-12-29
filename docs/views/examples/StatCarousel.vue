@@ -8,7 +8,7 @@
       <p>...</p>
     </div>
 
-    <Carousel class="hide-btns bg-dark" :items="items" :smCols="2" :mdCols="4" colClass="text-center align-items-center"></Carousel>
+    <Carousel class="hide-btns bg-dark" :items="items" :smcols="2" :mdcols="4" colclass="text-center align-items-center"></Carousel>
 
     <div class="container">
       <h2>Vue code example</h2>

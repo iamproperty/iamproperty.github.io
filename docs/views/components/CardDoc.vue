@@ -20,7 +20,7 @@
       <h2>Simple card</h2>
       <p>A reduced version of the card without a border or extra padding.</p>
     </div>
-    <CardDeck :items="items" cardType="simple" :gap="0" class="visualtest"></CardDeck>
+    <CardDeck :items="items" cardtype="simple" :gap="0" class="visualtest"></CardDeck>
     <div class="container">
       <p>The card element needs a data attribute set which will set bespoke CSS.</p>
       <pre><code class="javascript">{{`&lt;a href="/link" data-type="simple">...&lt;/a>`}}</code></pre>
@@ -30,7 +30,7 @@
       <h2>Quick link card</h2>
       <p>A very simple card to just show the card title.</p>
     </div>
-    <CardDeck :items="items" cardType="quick" class="bg-dark visualtest"></CardDeck>
+    <CardDeck :items="items" cardtype="quick" class="bg-dark visualtest"></CardDeck>
     <div class="container">
       <p>The card element needs a data attribute set which will set bespoke CSS.</p>
       <pre><code class="javascript">{{`&lt;a href="/link" data-type="quick">...&lt;/a>`}}</code></pre>
@@ -41,14 +41,14 @@
       <p>A simple card type with a link at the bottom instead of a button and a read time detail set.</p>
     </div>
 
-    <CardDeck :items="insightCards" :smCols="2" :mdCols="4" cardType="simple" btnType="link" ctaText="Read more" titleClass="h6 fw-normal font-body text-uppercase" class="visualtest">
+    <CardDeck :items="insightCards" :smcols="2" :mdcols="4" cardtype="simple" btntype="link" ctatext="Read more" titleclass="h6 fw-normal font-body text-uppercase" class="visualtest">
     </CardDeck>
 
     <div class="container">
       <h2>Property card</h2>
       <p>A more complex card with lots of key information but is still made using the same component.</p>
     </div>
-    <CardDeck :items="propertyListing" :smCols="2" :mdCols="4" btnType="link" class="visualtest" titleClass="h6"></CardDeck>
+    <CardDeck :items="propertyListing" :smcols="2" :mdcols="4" btntype="link" class="visualtest" titleclass="h6"></CardDeck>
     <div class="container">
       <p>No data attribute is needed and can be built up by adding</p>
       <pre><code class="javascript">{{htmlProperty}}</code></pre>
@@ -59,7 +59,7 @@
       <h2>Property Listing card</h2>
       <p>Property cards by default shift the image to the left on cards when given more space. This is done by putting the card into a card deck with only one column per row on tablet or desktop (<strong>.row-cols-sm-1</strong>).</p>
     </div>
-    <CardDeck :items="propertyListing" :smCols="1" :mdCols="1" btnType="link" class="visualtest" titleClass="h6"></CardDeck>
+    <CardDeck :items="propertyListing" :smcols="1" :mdcols="1" btntype="link" class="visualtest" titleclass="h6"></CardDeck>
     <div class="container">
       <p></p>
     </div>
@@ -125,11 +125,11 @@ export default {
           content: `<p>Reservation fee applies</p>`,
           image: require('../../assets/house.jpeg'),
           title: '4 bed semi-detached',
-          subTitle: 'Burt terrace, Newcastle upon tyne',
+          subtitle: 'Burt terrace, Newcastle upon tyne',
           details: {
             tags: ['Modern method','Freehold'],
-            guidePrice: '£90,000.00',
-            auctionTime: '19 days',
+            guideprice: '£90,000.00',
+            auctiontime: '19 days',
             status: 'Live now',
             images: 5,
             videos: 2,
@@ -143,7 +143,7 @@ export default {
           link: '/examples/related-cards',
           title: 'News - 24 March 2021',
           details: {
-            readTime: '10mins'
+            readtime: '10mins'
           },
           content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`
         }

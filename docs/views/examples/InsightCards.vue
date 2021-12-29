@@ -7,7 +7,7 @@
       <h1>Featured Insights</h1>
     </div>
 
-    <CardDeck class="card-deck--featured bg-gradient circle-pattern-2" :items="items" :smCols="1" ctaText="Read more" titleClass="text-primary text-uppercase">
+    <CardDeck class="card-deck--featured bg-gradient circle-pattern-2" :items="items" :smcols="1" ctatext="Read more" titleclass="text-primary text-uppercase">
       <span class="circle circle--cross text-primary"></span>
       <span class="circle circle--stripe text-primary opacity-25"></span>
     </CardDeck>

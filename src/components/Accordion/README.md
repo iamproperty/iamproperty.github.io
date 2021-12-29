@@ -1,21 +1,34 @@
 ### Usage
 
 ```
-<Accordion :items="items"></Accordion>
+<Accordion>
+  <AccordionItem title="Question 1">
+    <p>Accordion item content</p>
+  </AccordionItem>
+  <AccordionItem title="Question 2">
+    <p>Accordion item content</p>
+  </AccordionItem>
+</Accordion>
 ```
 
-### Properties
+### Class modifiers
+
+- Adding a class of **.accordion--keep-open** to the accordion will stop the items from closing when another one is opened.
+- Adding a class of **.accordion--straight** to the accordion will remove the slight indentation of the accordion.
+
+
+### Accordion item Properties
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
-| items  | Array | - | Table row data passed |
-|  - item.summary | String | - | A question or statement |
-|  - item.detail | HTML | - | An answer to a question or a detailed explanation of a statement.
+| title | String | - | A question or statement |
+| titlecolour | String | - | Apply a colour the the accordion item title |
+| badge | String | - | Add a highlighted badge/tag to the accordion item title |
+| badgecolour | String | light | Apply a colour the badge |
 
 
-### Slots
+### Accordion item Slots
 
 | Option | Default Value | Description |
 | ------ | ------------- | ----------- |
-| default | - | Will display before the accordion items |
-| after | - | Will display after the accordion items |
+| default | - | This is the content of the accordion item |

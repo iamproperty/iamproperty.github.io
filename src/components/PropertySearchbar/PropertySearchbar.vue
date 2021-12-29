@@ -2,7 +2,7 @@
   <div class="container" ref="wrapper">
     <slot></slot>
     <div class="property-searchbar">
-      <form class="row" :action="formAction" :method="formMethod">
+      <form class="row" :action="formaction" :method="formmethod">
         <fieldset class="col-12 col-md-3">
           <Input inputClass="input--locations" v-model="locationSet" label="Location" id="location" :options="locationsList()" required placeholder="i.e. Newcastle or NE1"  @keyupEvent="locationKeyup(...arguments)" ref="search"></Input>
           <Input class="select--miles" label="Miles" id="miles" type="select" :options="distances"></Input>
@@ -10,19 +10,19 @@
         <fieldset class="col-12 col-md">
           <span class="form-label d-none d-md-block">Price range</span>
           <div class="row" data-input-range>
-            <Input class="col-6" label="Minimum price" id="price-min" data-min="true" type="select" :options="priceMin"></Input>
-            <Input class="col-6" label="Maximum price" id="price-max" data-max="true" type="select" :options="priceMax"></Input>
+            <Input class="col-6" label="Minimum price" id="price-min" data-min="true" type="select" :options="pricemin"></Input>
+            <Input class="col-6" label="Maximum price" id="price-max" data-max="true" type="select" :options="pricemax"></Input>
           </div>
         </fieldset>
         <fieldset class="col-12 col-md">
           <span class="form-label d-none d-md-block">Number of beds</span>
           <div class="row" data-input-range>
-            <Input class="col-6" label="Minimum beds" id="beds-min" data-min="true" type="select" :options="bedsMin"></Input>
-            <Input class="col-6" label="Maximum beds" id="beds-max" data-max="true" type="select" :options="bedsMax"></Input>
+            <Input class="col-6" label="Minimum beds" id="beds-min" data-min="true" type="select" :options="bedsmin"></Input>
+            <Input class="col-6" label="Maximum beds" id="beds-max" data-max="true" type="select" :options="bedsmax"></Input>
           </div>
         </fieldset>
         <fieldset class="col-12 col-md-2">
-          <Input label="Property type" id="property-type" type="select" :options="propertyTypes"></Input>
+          <Input label="Property type" id="property-type" type="select" :options="propertytypes"></Input>
         </fieldset>
         <div class="col-12 col-md mw-md-fit-content d-flex property-searchbar__btn">
           <button class="btn w-100 me-0" type="submit" value="submit">Search</button>
@@ -48,11 +48,11 @@ export default {
   },
   name: 'PropertySearchbar',
   props: {
-    formAction: {
+    formaction: {
       type: String,
       required: false
     },
-    formMethod: {
+    formmethod: {
       type: String,
       required: false
     },
@@ -79,7 +79,7 @@ export default {
         ];
       } 
     },
-    priceMin: {
+    pricemin: {
       type: Array,
       required: false,
       default() {
@@ -94,7 +94,7 @@ export default {
         ];
       }
     },
-    priceMax: {
+    pricemax: {
       type: Array,
       required: false,
       default() {
@@ -109,7 +109,7 @@ export default {
         ];
       }
     },
-    bedsMin: {
+    bedsmin: {
       type: Array,
       required: false,
       default() {
@@ -125,7 +125,7 @@ export default {
         ];
       }
     },
-    bedsMax: {
+    bedsmax: {
       type: Array,
       required: false,
       default() {
@@ -141,7 +141,7 @@ export default {
         ];
       }
     },
-    propertyTypes: {
+    propertytypes: {
       type: Array,
       required: false,
       default() {

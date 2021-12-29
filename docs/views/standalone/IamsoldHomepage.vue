@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav logo="sold" btnLink="/account" btnText="Login / register" search="true">
+    <Nav logo="sold" btnlink="/account" btntext="Login / register" search="true">
       <ul class="list-unstyled">
         <li>
           <details class="nav__mega-menu">

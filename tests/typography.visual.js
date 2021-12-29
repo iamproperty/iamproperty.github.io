@@ -18,31 +18,31 @@ describe(`Headings`, () => {
       '[data-test="test1"]',
       (el) => parseInt(window.getComputedStyle(el).getPropertyValue("font-size"))
     )
-    expect(fontSize1).toBe(32);
+    expect(fontSize1).toBe(40);
 
     const fontSize2 = await page.$eval(
       '[data-test="test2"]',
       (el) => parseInt(window.getComputedStyle(el).getPropertyValue("font-size"))
     )
-    expect(fontSize2).toBe(24);
+    expect(fontSize2).toBe(32);
 
     const fontSize3 = await page.$eval(
       '[data-test="test3"]',
       (el) => parseInt(window.getComputedStyle(el).getPropertyValue("font-size"))
     )
-    expect(fontSize3).toBe(24);
+    expect(fontSize3).toBe(28);
 
     const fontSize4 = await page.$eval(
       '[data-test="test4"]',
       (el) => parseInt(window.getComputedStyle(el).getPropertyValue("font-size"))
     )
-    expect(fontSize4).toBe(20);
+    expect(fontSize4).toBe(16);
 
     const fontSize5 = await page.$eval(
       '[data-test="test5"]',
       (el) => parseInt(window.getComputedStyle(el).getPropertyValue("font-size"))
     )
-    expect(fontSize5).toBe(18);
+    expect(fontSize5).toBe(16);
 
     const fontSize6 = await page.$eval(
       '[data-test="test6"]',

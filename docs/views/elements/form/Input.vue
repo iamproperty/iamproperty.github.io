@@ -54,7 +54,7 @@
       
     </div>
     <div class="container visualtest">
-      <Input id="test6" label="Form input" labelClass="col-5 col-sm-4" class="form-control-inline col-md-6"></Input>
+      <Input id="test6" label="Form input" labelclass="col-5 col-sm-4" class="form-control-inline col-md-6"></Input>
     </div>
     <div class="container">
       <h2>Data binding</h2>

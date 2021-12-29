@@ -1,6 +1,6 @@
 <template>
   <main>
-    <CardDeck :items="pages" cardType="quick" :smCols="2">
+    <CardDeck :items="pages" cardtype="quick" :smcols="2">
       <h1>Foundations</h1>
     </CardDeck>
   </main>

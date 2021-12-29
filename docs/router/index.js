@@ -38,6 +38,22 @@ export const routes = [
     }
   },
   {
+    path: '/principles',
+    component: () => import('../views/Principles.vue'),
+    name: 'Principles',
+    meta: {
+      title: 'Principles | IAM Key'
+    }
+  },
+  {
+    path: '/accessibility',
+    component: () => import('../views/Accessibility.vue'),
+    name: 'Accessibility',
+    meta: {
+      title: 'Accessibility | IAM Key'
+    }
+  },
+  {
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
     children: [
@@ -137,12 +153,28 @@ export const routes = [
         component: () => import('../views/elements/Index.vue')
       },
       {
+        path: 'container',
+        name: 'Container',
+        meta: {
+          title: 'Container | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Container.vue')
+      },
+      {
         path: 'type',
         name: 'Type',
         meta: {
           title: 'Typography | Elements | IAM Key'
         },
         component: () => import('../views/elements/Type.vue')
+      },
+      {
+        path: 'lists',
+        name: 'Lists',
+        meta: {
+          title: 'Lists | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/Lists.vue')
       },
       {
         path: 'buttons',
@@ -167,6 +199,14 @@ export const routes = [
           title: 'Advanced Tables | Elements | IAM Key'
         },
         component: () => import('../views/elements/AdvancedTables.vue')
+      },
+      {
+        path: 'tooltips',
+        name: 'Tooltips',
+        meta: {
+          title: 'Tooltips | Elements | IAM Key'
+        },
+        component: () => import('../views/elements/TooltipsDoc.vue')
       },
       {
         path: 'form',
@@ -304,7 +344,7 @@ export const routes = [
         meta: {
           title: 'Accordion | Components | IAM Key'
         },
-        component: () => import('../views/components/Accordion.vue')
+        component: () => import('../views/components/AccordionDoc.vue')
       },
       {
         path: 'banner',
@@ -347,6 +387,14 @@ export const routes = [
         component: () => import('../views/components/DrawerDoc.vue')
       },
       {
+        path: 'charts',
+        name: 'Charts',
+        meta: {
+          title: 'Charts | Components | IAM Key'
+        },
+        component: () => import('../views/components/ChartsDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {
@@ -379,6 +427,14 @@ export const routes = [
         component: () => import('../views/components/PropertySearchbarDoc.vue')
       },
       {
+        path: 'snapshot',
+        name: 'Snapshot',
+        meta: {
+          title: 'Snapshot | Components | IAM Key'
+        },
+        component: () => import('../views/components/SnapshotDoc.vue')
+      },
+      {
         path: 'tabs',
         name: 'Tabs',
         meta: {
@@ -393,6 +449,14 @@ export const routes = [
           title: 'Testimonial | Components | IAM Key'
         },
         component: () => import('../views/components/TestimonialDoc.vue')
+      },
+      {
+        path: 'timeline',
+        name: 'Timeline',
+        meta: {
+          title: 'Timeline | Components | IAM Key'
+        },
+        component: () => import('../views/components/TimelineDoc.vue')
       }
     ]
   },
@@ -415,6 +479,10 @@ export const routes = [
       {
         path: 'filter-by-age',
         component: () => import('../views/examples/FilterByAge.vue')
+      },
+      {
+        path: 'charts',
+        component: () => import('../views/examples/Charts.vue')
       },
       {
         path: 'related-cards',
@@ -477,6 +545,40 @@ export const routes = [
           title: 'iam sold | IAM Key'
         },
         component: () => import('../views/standalone/IamsoldAdmin.vue')
+      },
+      {
+        path: 'completions-dashboard',
+        name: "Completions dashboard",
+        meta: {
+          title: 'Completions dashboard | IAM Key'
+        },
+        component: () => import('../views/standalone/CompletionsDashboard.vue')
+      }
+    ]
+  },
+  {
+    path: '/articles',
+    name: 'Articles',
+    meta: {
+      title: 'Articles | IAM Key'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "articles" */ '../views/Articles.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/articles/Index.vue')
+      },
+      {
+        path: 'flexbox-charts',
+        name: "Flexbox Charts",
+        meta: {
+          title: 'Flexbox Charts | IAM Key'
+        },
+        component: () => import('../views/articles/FlexboxCharts.vue')
       }
     ]
   },

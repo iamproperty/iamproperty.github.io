@@ -1,7 +1,8 @@
 // Declare global vars variable
 $vars: ();
+$varsMD: ();
 
-// #region Grid Breakpoints 
+// #region Grid Breakpoints, layouts
 $grid-breakpoints: (
   xs: 0,
   sm: 36em, /* 576 */
@@ -26,6 +27,25 @@ $container-max-widths: (
 
 $grid-columns: 12;
 $grid-gutter-width: 1rem; // 15px
+
+$container-padding-x: 20;
+$container-padding-x-md: 60;
+$container-padding: var(--container-padding-top) rem($container-padding-x) var(--container-padding-bottom) rem($container-padding-x);
+$container-padding-md: var(--container-padding-top) rem($container-padding-x-md) var(--container-padding-bottom) rem($container-padding-x-md);
+
+$vars: map-merge((
+  "--container-padding-top": 0,
+  "--container-padding-bottom": #{rem(16)},
+  "--container-padding-x": #{rem($container-padding-x)},
+  "--container-padding-x-md": #{rem($container-padding-x-md)},
+  "--container-padding": $container-padding,
+  "--container-padding-md": $container-padding-md
+), $vars);
+
+$varsMD: map-merge((
+  "--container-padding": var(--container-padding-md),
+  "--container-padding-x": var(--container-padding-x-md)
+), $varsMD);
 // #endregion
 
 // #region Colours
@@ -154,23 +174,34 @@ $fonts: map-merge((
 // #endregion
 
 // #region Type
-$h1-font-size:                $font-size-base * 2;
-$h2-font-size:                $font-size-base * 1.5;
-$h3-font-size:                $font-size-base * 1.5;
-$h4-font-size:                $font-size-base * 1.25;
-$h5-font-size:                $font-size-base * 1.125;
-$h6-font-size:                $font-size-base * 1.125;
-// scss-docs-end font-variables
 
-// scss-docs-start font-sizes
+$type-scale-1: #{rem(100)};
+$type-scale-2: #{rem(60)};
+$type-scale-3: #{rem(40)};
+$type-scale-4: #{rem(32)};
+$type-scale-5: #{rem(28)};
+$type-scale-6: #{rem(16)};
+$type-scale-7: #{rem(14)};
+
+
+$h1-font-size: var(--fs-1);
+$h2-font-size: var(--fs-2);
+$h3-font-size: var(--fs-3);
+$h4-font-size: var(--fs-4);
+$h5-font-size: var(--fs-5);
+$h6-font-size: var(--fs-6);
+
 $font-sizes: (
-  1: $h1-font-size,
-  2: $h2-font-size,
-  3: $h3-font-size,
-  4: $h4-font-size,
-  5: $h5-font-size,
-  6: $h6-font-size,
-  'badge': $badge-font-size
+  'display': $type-scale-3,
+  1: $type-scale-3,
+  2: $type-scale-4,
+  3: $type-scale-5,
+  4: $type-scale-6,
+  5: $type-scale-6,
+  6: $type-scale-6,
+  'badge': $badge-font-size,
+  'small': $type-scale-7,
+  'strapline': $type-scale-6
 );
 
 @each $size, $value in $font-sizes {
@@ -180,10 +211,10 @@ $font-sizes: (
   ), $vars);
 }
 
-$headings-margin-bottom: 0.5em;
+$headings-margin-bottom: clamp(1rem,0.5em,0.5em);
 $headings-font-style: normal;
-$headings-line-height: 1.2;
-
+$headings-line-height: clamp(1em,2.5rem,clamp(1.5em,1rem,1.2em));
+$display-line-height: $headings-line-height;
 
 @if $compatible == 'true' {
   $headings-font-family: $font-heading;
@@ -196,6 +227,21 @@ $headings-line-height: 1.2;
   $headings-color: var(--colour-primary);
 }
 
+$font-md-sizes: (
+  'display': $type-scale-1,
+  1: $type-scale-2,
+  2: $type-scale-3,
+  3: $type-scale-4,
+  4: $type-scale-5,
+  'strapline': $type-scale-5
+);
+
+@each $size, $value in $font-md-sizes {
+
+  $varsMD: map-merge((
+    --fs-#{$size}: #{$value}
+  ), $varsMD);
+}
 
 $vars: map-merge((
   --heading-weight: 700

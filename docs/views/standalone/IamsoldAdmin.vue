@@ -68,7 +68,7 @@
       
     </main>
       <Drawer label="Actions">
-        <Carousel :items="actions" type="card" btnType="link" :hideCtaText="true">
+        <Carousel :items="actions" type="card" btntype="link" :hidectatext="true">
           <template v:slot="before">
             <h2 class="mb-0 mx-auto text-center">Actions</h2>
           </template>

@@ -1,6 +1,5 @@
 .circle {
   position: relative;
-  border: 2px solid currentColor;
   border-radius: 50%;
   height: 1em;
   width: 1em;
@@ -9,12 +8,17 @@
   overflow: hidden;
   @include var(color,--colour-secondary);
 
+  &:not([class*="gradient-"]){
+
+    border: 2px solid currentColor;
+  }
+
   &:not([class*="border-"]):before{
 
     background-color: currentColor;
   }
 
-  &:before {
+  &:not([class*="gradient-"]):before {
     content: "";
     display: block;
     position: absolute;
@@ -23,13 +27,13 @@
     width: 100%;
     height: 100%;
     mask-image: var(--icon-bg);
-    mask-size: 17%;
+    mask-size: rem(34);
     mask-repeat: repeat;
     mask-position: 50% 50%;
     -webkit-mask-image: var(--icon-bg);
-    -webkit-mask-size: 17%;
+    -webkit-mask-size: rem(34);
     -webkit-mask-repeat: repeat;
-    -webkit-mask-position: 50% 50%;
+    -webkit-mask-position: 50% 51%;
   }
 
   &--cross:before,
@@ -41,7 +45,7 @@
 
   &--plus:before {
 
-    transform: rotate(45deg);
+    transform: rotate(46deg);
   }
   
   &--stripe:before {
@@ -55,12 +59,5 @@
 
     background-color: currentColor;
     --icon-bg: url("data:image/svg+xml,%3Csvg width='34' height='34' viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='17' r='3' /%3E%3Ccircle cy='17' r='3' /%3E%3Ccircle cx='34' cy='17' r='3' /%3E%3Ccircle cx='17' cy='34' r='3' /%3E%3C/svg%3E");
-  }
-
-  &--gradient {
-    border: none!important;
-  }
-  &--gradient:before {
-    background: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info) 100%);
   }
 }
