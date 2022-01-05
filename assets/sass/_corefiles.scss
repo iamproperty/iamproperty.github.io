@@ -7,11 +7,11 @@
 @import "foundations/brand.scss";
 @import "foundations/icons.scss";
 @import "foundations/circles.scss";
+@import "foundations/media.scss";
 @import "../../node_modules/bootstrap/scss/type";
 @import "elements/type.scss";
 @import "elements/lists.scss";
 @import "elements/tooltips.scss";
-@import "elements/media.scss";
 @import "../../node_modules/bootstrap/scss/images";
 // @import "../../node_modules/bootstrap/scss/containers";
 @import "elements/container.scss";
@@ -44,7 +44,7 @@
 //@import "../../node_modules/bootstrap/scss/helpers";
 @import "../../node_modules/bootstrap/scss/helpers/clearfix";
 //@import "../../node_modules/bootstrap/scss/helpers/colored-links";
-//@import "../../node_modules/bootstrap/scss/helpers/ratio";
+@import "../../node_modules/bootstrap/scss/helpers/ratio";
 @import "../../node_modules/bootstrap/scss/helpers/position";
 @import "../../node_modules/bootstrap/scss/helpers/stacks";
 @import "../../node_modules/bootstrap/scss/helpers/visually-hidden";

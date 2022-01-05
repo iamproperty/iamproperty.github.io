@@ -31,6 +31,15 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
   return arr
 }, {})
 
+// Filters the CSS vars object to pull out the aspect ratios
+const aspectRatios = Object.keys(cssVars).reduce(function (arr, key) {
+  if (key.startsWith('aspect-ratio-')) {
+    let updateKey = key.replace('aspect-ratio-', '')
+    updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
+    arr[updateKey] = cssVars[key]
+  }
+  return arr
+}, {})
 
 
 import audit from '../audit.json';
@@ -38,6 +47,7 @@ import audit from '../audit.json';
 const shared = {
   themeColours: themeColours,
   nonThemeColours: nonThemeColours,
+  aspectRatios: aspectRatios,
   cssVars: cssVars,
   audit: audit
 }

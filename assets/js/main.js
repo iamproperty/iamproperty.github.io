@@ -20,6 +20,7 @@ import accordion from './modules/accordion'
 import testimonial from './modules/testimonial'
 import carousel from './modules/carousel'
 import form from './modules/form'
+import youtubeVideo from './modules/youtubevideo'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -58,5 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
   // Modal
   Array.from(document.querySelectorAll('.modal')).forEach((arrayElement, index) => {
     modal(arrayElement);
+  });
+  // YouTube videos
+  Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement, index) => {
+    new youtubeVideo(arrayElement);
   });
 });

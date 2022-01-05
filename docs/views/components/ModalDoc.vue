@@ -32,6 +32,22 @@
       </div>
     </Modal>
     
+
+    <div class="container">
+      <ul class="breadcrumb mb-0 d-sm-none">
+        <li><a href="/components">Components</a></li>
+      </ul>
+      <h2>YouTube video Modal</h2>
+      <p>We can add a YouTube video to a modal which would play/load once the modal is opened.</p>
+      <a href="#youtubewrapper" class="btn btn-secondary">Open YouTube video modal</a>
+    </div>
+    
+
+    <Modal id="youtubewrapper">
+      <YoutubeVideo video="fXyAMkQzDls"></YoutubeVideo>
+    </Modal>
+    
+
     <div class="container" id="return">
       <h2>HTML code examples</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
@@ -45,12 +61,14 @@
 </template>
 
 <script>
+import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
 import Modal from '@/components/Modal/Modal.vue'
 import Readme from '@/components/Modal/README.md'
 
 export default {
   components: {
     Modal,
+    YoutubeVideo,
     Readme
   },
   data () {

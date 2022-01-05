@@ -3,12 +3,17 @@ const modal = (element) => {
   const links = element.querySelectorAll('.modal__outer a, .modal__outer button');
   const firstLink = links[0]
   const lastLink = links[links.length - 1]
+  const modalID = element.getAttribute('id');
 
   const closeModal = function(){
     const button = document.querySelector('[href="'+window.location.hash+'"]');
     button.focus();
     window.location.hash = "close";
     history.replaceState("", document.title, window.location.pathname + window.location.search);
+
+    // If there is more than one video lets make sure there is only one playing at a time.
+    if(typeof window.player != "undefined" && typeof window.player.pauseVideo == "function")
+      window.player.pauseVideo();
   }
 
   // Trap the tab focus inside
@@ -35,7 +40,7 @@ const modal = (element) => {
   element.addEventListener('click', function(e){
     for (var target = e.target; target && target != this; target = target.parentNode) {
 
-      // Close links will close the model by default but we wont to remove the hash link
+      // Close links will close the model by default but we want to remove the hash link also
       if (target.matches('[href="#close"]')) {
         
         e.preventDefault();
@@ -67,6 +72,19 @@ const modal = (element) => {
     }
   });
 
+  function locationHashChanged() {
+    if (location.hash === '#'+modalID) {
+      console.log("Modal is now open");
+      const videoButton = document.querySelector('.modal:target .modal__inner > .youtube-embed:first-child:last-child a');
+
+      console.log(videoButton)
+      if (videoButton){
+        videoButton.click();
+      }
+        
+    }
+  }
+  window.onhashchange = locationHashChanged;
 }
 
 export default modal
