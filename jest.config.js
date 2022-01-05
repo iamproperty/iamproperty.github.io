@@ -17,7 +17,7 @@ module.exports = {
     `vue`,
   ],
   preset: PUPPETEER_MODE ? `jest-puppeteer` : '@vue/cli-plugin-unit-jest',
-  testEnvironment: PUPPETEER_MODE ? 'node' : 'jsdom',
+  testEnvironment: PUPPETEER_MODE ? 'jsdom' : 'jsdom',
   moduleNameMapper: {
     '~/(.*)$': '<rootDir>/docs/$1',
     '@/(.*)$': '<rootDir>/src/$1'
