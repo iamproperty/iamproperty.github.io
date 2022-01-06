@@ -150,7 +150,14 @@ $gradient: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info)
 
 // #endregion
 
-
+// #region aspect ratios
+$aspect-ratios: (
+  "1x1": 100%,
+  "4x3": calc(3 / 4 * 100%),
+  "16x9": calc(9 / 16 * 100%),
+  "21x9": calc(9 / 21 * 100%)
+);
+// #endregion
 
 // #region fonts
 
