@@ -114,6 +114,14 @@ export const routes = [
         component: () => import('../views/foundations/Circles.vue')
       },
       {
+        path: 'media',
+        name: 'Media',
+        meta: {
+          title: 'Media | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Media.vue')
+      },
+      {
         path: 'breakpoints',
         name: 'Breakpoints',
         meta: {

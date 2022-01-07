@@ -36,15 +36,19 @@ export default {
 
         for (const [key, value] of Object.entries(this.$slots.default)) {
           
-          let tabTitle = value.componentOptions.propsData.title;
+          // Check if the value in the object is actually a tab and has the correct data
+          if(value.componentOptions && value.componentOptions.propsData && value.componentOptions.propsData.title){
+            
+            let tabTitle = value.componentOptions.propsData.title;
+            
+            let tab = {
+              name: this.tabsID,
+              id: this.tabsID+"_tab"+i++,
+              tabTitle: tabTitle
+            }
 
-          let tab = {
-            name: this.tabsID,
-            id: this.tabsID+"_tab"+i++,
-            tabTitle: tabTitle
+            tabLinks.push(tab);
           }
-
-          tabLinks.push(tab);
         }
 
         return tabLinks;

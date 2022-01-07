@@ -1,10 +1,13 @@
 module.exports = {
   presets: [
     [
-      '@vue/cli-plugin-babel/preset',
+      "@babel/preset-env",
       {
-        "useBuiltins": false
+        targets: {
+          esmodules: true,
+        }
       }
     ]
-  ]
+  ],
+  "plugins": ["@babel/plugin-transform-runtime"]
 }
