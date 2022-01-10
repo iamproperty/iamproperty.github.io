@@ -3,13 +3,18 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.3.0 <span>(Future version)</span></h2>
+      <h2>V2.3.1 <span>(Current latest version)</span></h2>
+      <ul>
+        <li>Accordion component hotfix</li>
+      </ul>
+      
+      <h2>V2.3.0</h2>
       <ul>
         <li>Inline YouTube video support</li>
         <li>Fix for tabs component</li>
       </ul>
 
-      <h2>V2.2.0 <span>(Current latest version)</span></h2>
+      <h2>V2.2.0</h2>
       <ul>
         <li>Documentation update</li>
         <li>Curved background CSS</li>
