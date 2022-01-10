@@ -12,7 +12,7 @@
 import { safeID } from '../../helpers/strings'
 
 export default {
-  name: 'Accordion',
+  name: 'AccordionItem',
   props: {
     title: {
       type: String,
