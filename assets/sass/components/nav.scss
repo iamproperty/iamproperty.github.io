@@ -154,7 +154,7 @@
 // Nav with background colour applied
 .nav[class*="bg-"] {
 
-  .nav__menu--secondary.bg-primary {
+  .nav__menu--secondary {
     background-color: white!important;
 
     --colour-link: var(--colour-link-theme);
@@ -166,6 +166,19 @@
 // #region Secondary nav
 .nav__menu--secondary {
   flex-grow: 1;
+
+  background: var(--colour-primary);
+  
+  > .container > .list-unstyled > li > a,
+  > .container > .list-unstyled > li > details > summary .link {
+    --colour-body: white;
+    --colour-link: white;
+    --colour-hover: white;
+    --colour-active: white;
+    --colour-heading: white;
+    --colour-underline: white;
+    --colour-border: white;
+  }
 
   a {
     display: inline-block;
@@ -348,7 +361,7 @@ nav + main > *:first-child {
     }
   }
 
-  .nav__menu--secondary .list-unstyled {
+  .nav__menu--secondary > .container > .list-unstyled {
     margin-left: -1rem!important;
     margin-right: -1rem!important;
     width: calc(100% + 2rem);
@@ -363,12 +376,12 @@ nav + main > *:first-child {
   }
 
 
-  .nav:not(.nav--admin) .nav__menu--secondary .list-unstyled {
+  .nav:not(.nav--admin) .nav__menu--secondary > .container > .list-unstyled {
     font-size: rem(15);
     padding-top: 0;
   }
 
-  .nav.nav--admin .nav__menu--secondary .list-unstyled {
+  .nav.nav--admin .nav__menu--secondary > .container > .list-unstyled {
     text-align: left;
   }
 
@@ -377,7 +390,7 @@ nav + main > *:first-child {
 
 // #region Drop down links
 
-.nav__menu .list-unstyled {
+.nav .list-unstyled {
 
   > li {
 
@@ -409,7 +422,6 @@ nav + main > *:first-child {
     .link:not(.text-decoration-none):not(.btn) {
       padding: 0.5rem 1.5rem 0.5rem 0;
       display: inline-block;
-      color: var(--colour-primary);
       cursor: pointer;
       position: relative;
       
@@ -506,7 +518,7 @@ nav + main > *:first-child {
 // #endregion
 
 // #region Mega menu
-.nav__menu .list-unstyled > li  details.nav__mega-menu {
+.nav .list-unstyled > li details.nav__mega-menu {
 
   @include media-breakpoint-up(md) {
 
@@ -533,7 +545,8 @@ nav + main > *:first-child {
       position: absolute;
       top: 100%;
       left: 50%;
-      width: 100vw;
+      width: 100vw!important;
+      max-width: 100vw!important;
       -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
       transform: translateX(-50%);

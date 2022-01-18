@@ -561,6 +561,30 @@ export const routes = [
           title: 'Completions dashboard | IAM Key'
         },
         component: () => import('../views/standalone/CompletionsDashboard.vue')
+      },
+      {
+        path: 'marketplace',
+        name: "Marketplace",
+        meta: {
+          title: 'Marketplace | IAM Key'
+        },
+        component: () => import('../views/standalone/Marketplace.vue')
+      },
+      {
+        path: 'movebutler',
+        name: "Movebutler",
+        meta: {
+          title: 'Movebutler | IAM Key'
+        },
+        component: () => import('../views/standalone/Movebutler.vue')
+      },
+      {
+        path: 'agent',
+        name: "Agent Platform",
+        meta: {
+          title: 'Agent Platform | IAM Key'
+        },
+        component: () => import('../views/standalone/Agent.vue')
       }
     ]
   },

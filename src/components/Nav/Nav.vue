@@ -38,7 +38,7 @@
 
         </div>
       </div>
-      <div class="nav__menu--secondary bg-primary" v-if="hasSecondarySlot">
+      <div class="nav__menu--secondary" v-if="hasSecondarySlot">
         <div class="container">
           <slot name="secondary"></slot>
         </div>
