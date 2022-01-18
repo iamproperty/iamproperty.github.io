@@ -3,7 +3,12 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.3.1 <span>(Current latest version)</span></h2>
+      <h2>V2.3.2 <span>(Current latest version)</span></h2>
+      <ul>
+        <li>Table component hotfix - Create a re-ordered event that gets dispatched when the user successfully re-orders a table.</li>
+      </ul>
+
+      <h2>V2.3.1</h2>
       <ul>
         <li>Accordion component hotfix</li>
       </ul>
