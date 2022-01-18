@@ -23,7 +23,7 @@ export default {
       required: false
     },
     badge: {
-      type: String,
+      type: [Number, String],
       required: false
     },
     badgecolour: {
