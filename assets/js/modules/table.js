@@ -10,6 +10,7 @@ function table(tableElement) {
   const storedData = tbody.cloneNode(true);
   const sortedEvent = new Event('sorted');
   const filteredEvent = new Event('filtered');
+  const reorderedEvent = new Event('reordered');
   const randID = 'tabe_'+Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
   let draggedRow;
 
@@ -424,6 +425,7 @@ function table(tableElement) {
     // Add column heading
     const orderHeading = document.createElement('th');
     orderHeading.innerHTML = 'Order';
+    orderHeading.title = 'Click here to enable re-ordering via drag and drop';
     orderHeading.classList.add('table-order-reset');
     thead.querySelector('tr').prepend(orderHeading);
 
@@ -509,6 +511,8 @@ function table(tableElement) {
               tableRowOrder.querySelector('th').innerHTML = index + 1;
               tableRowOrder.setAttribute('data-order',index+1);
             });
+
+            tableElement.dispatchEvent(reorderedEvent);
           }
           break;
         }
