@@ -145,6 +145,14 @@ export const routes = [
           title: 'Utility Classes | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Utilities.vue')
+      },
+      {
+        path: 'animation',
+        name: 'Animation',
+        meta: {
+          title: 'Animation | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Animation.vue')
       }
     ]
   },

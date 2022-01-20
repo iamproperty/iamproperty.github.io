@@ -106,6 +106,7 @@ export default {
       ],
       items: [
         {
+          rowid: 'test',
           basic_details: 'mr Richard Branson<br> (Mr Richard Branson)',
           capacity: 'Legal owner',
           contact_details: '<a href="tel:07411882800">07411882800</a> (Mobile)<br> <a href="tel:07411882800">07411882800</a> (Main)',
