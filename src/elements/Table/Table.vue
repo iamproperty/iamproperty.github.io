@@ -7,8 +7,8 @@
         </tr>
       </thead>
       <tbody v-if="items">
-        <tr v-for="(value,index) in items" :key="index">
-          <td :key="cellIndex" v-for="(cellValue,cellIndex) in value" v-html="cellValue" :data-label="cellHeading(cellIndex)" :data-numeric="numericValue(cellValue)"></td>
+        <tr v-for="(value,index) in items" :key="index" :data-row-id="value['rowid']">
+          <td :key="cellIndex" v-for="(cellValue,cellIndex) in Object.fromEntries(Object.entries(value).filter(([key]) => key !== 'rowid'))" v-html="cellValue" :data-label="cellHeading(cellIndex)" :data-numeric="numericValue(cellValue)"></td>
         </tr>
       </tbody>
     </table>
