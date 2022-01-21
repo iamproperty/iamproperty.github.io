@@ -16,7 +16,7 @@
     </Stepper>
     <div class="container pb-0">
       <p class="note"><strong>Note: </strong>The number of steps is not restricted but it is recommended to keep it less than 5. If there is a large amount of steps or long titles the step progress bar may become scrollable.</p>
-      <h2>Step status'</h2>
+      <h2>Step status</h2>
       <p>Each step can have a status to highlight to the user whether the step was completed correctly.</p>
     </div>
     
