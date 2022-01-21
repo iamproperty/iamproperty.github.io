@@ -58,7 +58,7 @@ export default {
       <span class="h6">Client progress</span>
       <ol class="list-unstyled">
          <li><a class="bg-success undefined"><span>Customer due diligence</span></a></li>
-         <li><a href="/step" class="bg-success undefined"><span>Legal Preperation</span></a></li>
+         <li><a href="/step" class="bg-success undefined"><span>Legal Preparation</span></a></li>
          <li><a href="/step" class="current string"><span>Financial Preparation</span></a></li>
          <li href="/step"><a class=" undefined"><span>Surveys</span></a></li>
       </ol>
