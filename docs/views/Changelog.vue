@@ -3,7 +3,12 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.3.3 <span>(Current latest version)</span></h2>
+      <h2>V2.4.0<span>(Current latest version)</span></h2>
+      <ul>
+        <li>New stepper component</li>
+      </ul>
+
+      <h2>V2.3.3</h2>
       <ul>
         <li>Table component hotfix - Add the ability to add id's to table rows so that the vue component can connect to external JS.</li>
       </ul>

@@ -1,0 +1,34 @@
+<template>
+  <div class="container">
+    <div class="stepper">
+      <span class="h6 stepper__start" v-if="label">{{label}}</span>
+      <ol class="list-unstyled">
+        <slot><!-- Use for titles etc --></slot>
+      </ol>
+      <span class="h6 stepper__end">{{endlabel}}</span>
+    </div>
+  </div>
+</template>
+
+
+<style lang="scss">
+@import "../../../assets/sass/_func.scss";
+@import "../../../assets/sass/components/stepper.scss";
+</style>
+
+<script>
+export default {
+  name: 'Stepper',
+  props: {
+    label: {
+      type: String,
+      required: false
+    },
+    endlabel: {
+      type: String,
+      required: false,
+      default: "Complete"
+    }
+  }
+}
+</script>

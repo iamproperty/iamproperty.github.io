@@ -1,0 +1,162 @@
+.stepper {
+  background: #f0f0f0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  border: 1px solid white;
+  overflow: hidden;
+
+  @include media-breakpoint-up(md) {
+      
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  ol {
+    margin: 0;
+    z-index: 1;
+    background: white;
+    counter-reset: section;
+    width: 100%;
+    overflow: auto;
+
+    @include media-breakpoint-up(sm) {
+
+      display: flex;
+      flex-grow: 1;
+      padding-right: calc(2rem + 1px);
+      margin-top: -1px;
+      margin-bottom: -1px;
+      margin-right: calc(-2rem + -2px);
+      clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 50%, calc(100% - 2rem) 100%, 0 100%);
+    }
+
+    @include media-breakpoint-up(md) {
+      overflow: initial;
+    }
+
+    li {
+      width: 100%;
+      max-width: 100%;
+      background: white;
+      padding: 1px;
+
+      @include media-breakpoint-up(sm) {
+        &:first-child a{
+          padding-left: 1rem;
+          clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 50%, calc(100% - 2rem) 100%, 0 100%);
+        }
+      }
+
+      @include media-breakpoint-up(md) {
+        &:first-child a{
+          padding-left: 2rem;
+        }
+      }
+      
+      a {
+        display: block;
+        padding: 1rem;
+        text-decoration: none;
+        position: relative;
+        background: var(--colour-muted);
+        line-height: 1;
+        position: relative;
+
+        @include media-breakpoint-up(sm) {
+
+          margin-right: -2rem;
+          padding: 2rem 3rem 2rem 3rem;
+          clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 50%, calc(100% - 2rem) 100%, 0 100%, 2rem 50%);
+          display: flex;
+          height: 100%;
+          vertical-align: baseline;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        span {
+          position: relative;
+          display: inline;
+          padding-left: 2.25rem;
+
+          &:before {
+            counter-increment: section; 
+            content: counter(section);
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translate(0,-50%);
+            margin-right: 0.5rem;
+            font-size: 0.75em;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            height: 1.5rem;
+            line-height: 1.3rem;
+            width: 1.5rem;
+            font-family: var(--font-heading);
+            text-align: center;
+          }
+        }
+
+        &.bg-warning span:before,
+        &.bg-danger span:before {
+          content: "!";
+        }
+
+        &.bg-success span:before {
+          content: "\2713";
+          text-indent: -0.1em;
+        }
+
+        &.current {
+          background: var(--colour-primary);
+          color: white;
+          pointer-events: none;
+        }
+
+        &:not([href]){
+          pointer-events: none;
+        }
+
+        &[href]:hover {
+          background: var(--colour-hover-theme)!important;
+          color: white;
+        }
+        &[href]:active {
+          background: var(--colour-active-theme)!important;
+          color: var(--colour-link-theme);
+        }
+      }
+    }
+  }
+
+
+  > span {
+
+    width: 100%;
+    display: flex;
+    padding: 1rem;
+    flex-shrink: 0;
+    margin: 0;
+    position: relative;
+    z-index: 0;
+    align-items: center;
+
+    &.stepper__end {
+      display: none;
+    }
+      
+    @include media-breakpoint-up(md) {
+        
+      width: max-content;
+      padding: 2rem 2rem;
+      
+      &.stepper__end {
+        padding-left: 3.5rem;
+        display: flex;
+      }
+    }
+  }
+}

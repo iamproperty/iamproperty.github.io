@@ -451,6 +451,14 @@ export const routes = [
         component: () => import('../views/components/SnapshotDoc.vue')
       },
       {
+        path: 'stepper',
+        name: 'Stepper',
+        meta: {
+          title: 'Stepper | Components | IAM Key'
+        },
+        component: () => import('../views/components/StepperDoc.vue')
+      },
+      {
         path: 'tabs',
         name: 'Tabs',
         meta: {

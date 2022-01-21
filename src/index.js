@@ -18,5 +18,7 @@ export { default as Nav } from './components/Nav/Nav.vue'
 export { default as Drawer } from './components/Drawer/Drawer.vue'
 export { default as Modal } from './components/Modal/Modal.vue'
 
+export { default as Tabs } from './components/Stepper/Stepper.vue'
+export { default as Tabs } from './components/Stepper/Step.vue'
 export { default as Tabs } from './components/Tabs/Tabs.vue'
 export { default as Tab } from './components/Tabs/Tab.vue'
