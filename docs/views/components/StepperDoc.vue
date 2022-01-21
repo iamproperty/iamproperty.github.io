@@ -10,7 +10,7 @@
 
     <Stepper label="Client progress" endlabel="Onboarding complete" class="visualtest">
       <Step status="success">Customer due diligence</Step>
-      <Step url="/step" status="success">Legal Preperation</Step>
+      <Step url="/step" status="success">Legal Preparation</Step>
       <Step url="/step" current>Financial Preparation</Step>
       <Step url="/step">Surveys</Step>
     </Stepper>
