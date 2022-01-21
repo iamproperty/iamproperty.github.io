@@ -1,6 +1,6 @@
 {
   "name": "@iamproperty/components",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "private": false,
   "description": "Component library for iamproperty",
   "author": {
@@ -81,7 +81,7 @@
     "webpack": "^4.46.0"
   },
   "license": "UNLICENSED",
-  "localURL": "http://localhost:8080",
+  "localURL": "http://localhost:8081",
   "registry-url": "https://registry.npmjs.com",
   "repository": {
     "type": "git",
