@@ -5,7 +5,7 @@
       
       <h2>V2.4.1</h2>
       <ul>
-        <li>Add the ability to add a 'lazy' attribute to the Tab component, allowing for the content to then be lazy loaded.</li>
+        <li>Add the ability to add a 'lazy' attribute to the Tab and accordion components, allowing for the content to then be lazy loaded.</li>
       </ul>
 
       <h2>V2.4.0</h2>
