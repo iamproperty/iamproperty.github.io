@@ -17,9 +17,22 @@
         <h2>Tab content 2</h2>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
       </Tab>
-      <Tab title="Online auctions">
+      <Tab title="Online auctions" lazy>
         <h2>Tab content 3</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <p>Lazy loaded table</p>
+        <Table 
+        :fields="[
+          { key: 'column_1' },
+          { key: 'column_2' },
+          { key: 'column_3' }
+        ]" 
+        :items="[
+        {
+          column_1: 'row 1',
+          column_2: 'row 1',
+          column_4: 'row 1',
+        }
+        ]"></Table>
       </Tab>
     </Tabs>
 
@@ -39,12 +52,14 @@
 import Tabs from '@/components/Tabs/Tabs.vue'
 import Tab from '@/components/Tabs/Tab.vue'
 import Readme from '@/components/Tabs/README.md'
+import Table from '@/elements/Table/Table.vue'
 
 export default {
   components: {
     Tabs,
     Tab,
-    Readme
+    Readme,
+    Table
   },
   data () {
     return {

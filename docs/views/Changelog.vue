@@ -3,7 +3,12 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.4.0<span>(Current latest version)</span></h2>
+      <h2>V2.4.1</h2>
+      <ul>
+        <li>Add the ability to add a 'lazy' attribute to the Tab and accordion components, allowing for the content to then be lazy loaded.</li>
+      </ul>
+
+      <h2>V2.4.0</h2>
       <ul>
         <li>New stepper component</li>
       </ul>

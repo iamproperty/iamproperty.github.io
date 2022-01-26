@@ -19,6 +19,7 @@
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | title  | String | - | Used for the heading of the component |
+| lazy  | Boolean | - | If set the content of the tab will not loaded intially and will be loaded after the user has clicked on the tab link. |
 
 ### Slots
 
