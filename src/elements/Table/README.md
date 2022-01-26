@@ -52,7 +52,6 @@ this.$el.addEventListener('sorted', function (e) {
       
   console.log('Table sorted')
 }, false);
-```
 
 // Re-ordered via drag and drop
 this.$el.addEventListener('reordered', function (e) { 
