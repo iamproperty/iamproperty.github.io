@@ -54,16 +54,16 @@ export default {
   data () {
     return {
       htmlUsage: `<div class="container">
-   <div class="stepper">
+   <nav class="stepper" aria-label="Progress">
       <span class="h6">Client progress</span>
       <ol class="list-unstyled">
-         <li><a class="bg-success undefined"><span>Customer due diligence</span></a></li>
-         <li><a href="/step" class="bg-success undefined"><span>Legal Preparation</span></a></li>
-         <li><a href="/step" class="current string"><span>Financial Preparation</span></a></li>
-         <li href="/step"><a class=" undefined"><span>Surveys</span></a></li>
+         <li><a class="bg-success"><span>Customer due diligence</span><em class="visually-hidden"> - status: success</em></a></li>
+         <li><a href="/step" class="bg-success"><span>Legal Preparation</span><em class="visually-hidden"> - status: success</em></a></li>
+         <li><a href="/step" class="current" aria-active><span>Financial Preparation</span></a></li>
+         <li><a href="/step"><span>Surveys</span></a></li>
       </ol>
       <span class="h6 stepper__end">Onboarding complete</span>
-   </div>
+   </nav>
 </div>`
     }
   }
