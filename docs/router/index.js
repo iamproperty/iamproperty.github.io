@@ -363,6 +363,14 @@ export const routes = [
         component: () => import('../views/components/AccordionDoc.vue')
       },
       {
+        path: 'alert',
+        name: 'Alert',
+        meta: {
+          title: 'Alert | Components | IAM Key'
+        },
+        component: () => import('../views/components/AlertDoc.vue')
+      },
+      {
         path: 'banner',
         name: 'Banner',
         meta: {
