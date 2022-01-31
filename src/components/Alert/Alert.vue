@@ -19,7 +19,7 @@ export default {
   name: 'Alert',
   props: {
     dismissible: {
-      type: Boolean,
+      type: String,
       required: false,
       default: false
     },
