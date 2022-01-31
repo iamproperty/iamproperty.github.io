@@ -1,29 +1,19 @@
 .icon {
-  fill: transparent;
+  fill: currentColor;
   stroke: transparent;
   @include var(color,--colour-primary-theme);
   width: rem(64);
   height: rem(64);
   display: inline-block;
 
-  .icon__bg {
-    fill: #ffffff;
-  }
-  .icon__fill {
-    @include var(fill,--colour-secondary-theme);
-  }
-  .icon__outline {
-    stroke-width: 3px;
-    stroke: currentColor;
-  }
-
   button &,
   a & {
-    width: 1em;
-    height: 1em;
+    width: 1.5em;
+    height: 1.5em;
     vertical-align: text-top;
-    margin-top: 0.15em;
+    margin-top: -0.15em;
     margin-inline: 0.25em;
+    color: inherit;
   }
 
   &[class*="text-"]{
@@ -42,5 +32,40 @@
     vertical-align: text-top;
     margin-top: 0.15em;
     margin-inline: 0.25em;
+  }
+}
+
+// Font awesome support
+[class*="fa-"]:not(.far) {
+  font-size: rem(64 - 16);
+  height: rem(64);
+  padding: 0.5rem;
+  @include var(color,--colour-primary-theme);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 300;
+  width: auto;
+
+  button &,
+  a & {
+    font-size: 1em;
+    height: 1em;
+    padding: 0;
+    vertical-align: text-top;
+    margin-top: 0.15em;
+    margin-inline: 0.25em;
+  }
+}
+
+@include inline-text(){
+  [class*="fa-"] {
+    font-size: 1em;
+    color: inherit;
   }
 }
