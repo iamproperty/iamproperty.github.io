@@ -3,8 +3,10 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.4.1</h2>
+      <h2>V2.5.0</h2>
       <ul>
+        <li>Update icons and add font awesome support</li>
+        <li>Alert component</li>
         <li>Add the ability to add a 'lazy' attribute to the Tab and accordion components, allowing for the content to then be lazy loaded.</li>
       </ul>
 
