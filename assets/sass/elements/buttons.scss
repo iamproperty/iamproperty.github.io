@@ -49,7 +49,7 @@
   &:active,
   &.active,
   *:checked + &,
-  details[open] & {
+  details[open] > &:is(summary):first-child {
     --btn-colour: var(--btn-active-colour);
     @include box-shadow($btn-active-box-shadow);
     border-radius: rem(20);
