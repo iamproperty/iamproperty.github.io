@@ -1,5 +1,10 @@
 <template>
-  <li><a :href="url" :class="`${status?'bg-'+status:''}${typeof current != 'undefined'?'current':''} ${typeof current}`"><span><slot></slot></span></a></li>
+  <li>
+    <a :href="url" :class="`${status?'bg-'+status:''}${typeof current != 'undefined'?'current':''}`" :aria-current="typeof current != 'undefined'?true:false">
+      <span><slot></slot></span>
+      <em class="visually-hidden" v-if="status"> - status: {{status}}</em>
+    </a>
+  </li>
 </template>
 
 <script>

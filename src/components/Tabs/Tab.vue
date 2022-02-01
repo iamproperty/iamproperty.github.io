@@ -1,5 +1,5 @@
 <template>
-  <div class="tab">
+  <div class="tab" v-if="show">
     <slot></slot>
   </div>
 </template>
@@ -11,6 +11,15 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    lazy: {
+      type: Boolean,
+      required: false
+    }
+  },
+  data() {
+    return {
+      show: this.lazy ? false : true
     }
   }
 }

@@ -14,7 +14,7 @@
     <div class="container visualtest">
       <a href="/elements/buttons" class="me-3">Find out more</a>
       <a href="https://bbc.com" target="_blank" class="me-3">Find out more</a>
-      <a href="/elements/buttons" class="me-3">Email<Icon id="email" class="me-0"></Icon></a>
+      <a href="/elements/buttons" class="me-3">Email<i class="icon fa-envelope me-0"></i></a>
       <hr />
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the <a href="/elements/buttons">industry's standard</a> dummy text ever since the 1500s, when an <a href="/elements/buttons"><Icon id="email"></Icon>unknown printer</a> took a galley of type and <a href="/elements/buttons" target="_blank">scrambled</a> it to make a type specimen book. </p>
     </div>
@@ -29,23 +29,23 @@
       <input type="submit" class="btn" value="Find out more" />
       <button class="btn" disabled>Find out more</button>
       <a href="https://bbc.com" class="btn" target="_blank">Find out more</a>
-      <a href="/elements/buttons" class="btn pe-3">Email<Icon id="email"></Icon></a>
-      <a href="/elements/buttons" class="btn ps-3"><Icon id="pin"></Icon>Locate on a map</a>
+      <a href="/elements/buttons" class="btn pe-3">Email<i class="icon fa-envelope"></i></a>
+      <a href="/elements/buttons" class="btn ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
 
       <hr class="hr--clear" />
       <h2 class="h4">.btn-secondary</h2>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-secondary" disabled>Find out more</button>
       <a href="https://bbc.com" class="btn btn-secondary" target="_blank">Find out more</a>
-      <a href="/elements/buttons" class="btn btn-secondary pe-3">Email<Icon id="email"></Icon></a>
-      <a href="/elements/buttons" class="btn btn-secondary ps-3"><Icon id="pin"></Icon>Locate on a map</a>
+      <a href="/elements/buttons" class="btn btn-secondary pe-3">Email<i class="icon fa-envelope"></i></a>
+      <a href="/elements/buttons" class="btn btn-secondary ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
       <hr class="hr--clear" />
       <h2 class="h4">.btn-tertiary</h2>
       <button class="btn btn-tertiary">Find out more</button>
       <button class="btn btn-tertiary" disabled>Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
-      <a href="/elements/buttons" class="btn btn-tertiary pe-3">Email<Icon id="email"></Icon></a>
-      <a href="/elements/buttons" class="btn btn-tertiary ps-3"><Icon id="pin"></Icon>Locate on a map</a>
+      <a href="/elements/buttons" class="btn btn-tertiary pe-3">Email<i class="icon fa-envelope"></i></a>
+      <a href="/elements/buttons" class="btn btn-tertiary ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
     </div>
     
     <div class="container">

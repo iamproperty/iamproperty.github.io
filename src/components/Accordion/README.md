@@ -25,6 +25,7 @@
 | titlecolour | String | - | Apply a colour the the accordion item title |
 | badge | String | - | Add a highlighted badge/tag to the accordion item title |
 | badgecolour | String | light | Apply a colour the badge |
+| lazy  | Boolean | - | If set the content of the tab will not loaded intially and will be loaded after the user has clicked on the accordion link. |
 
 
 ### Accordion item Slots

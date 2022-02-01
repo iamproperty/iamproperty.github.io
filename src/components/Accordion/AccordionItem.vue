@@ -1,8 +1,8 @@
 <template>
 
   <details class="accordion-item" :id="createID(title)">
-    <summary :class="`${titlecolour?`bg-${titlecolour}`:''}`"><span class="accordion-header accordion-button h4">{{title}}<span v-if="badge" :class="`badge bg-${badgecolour}`">{{badge}}</span></span></summary>
-    <div class="accordion-body">
+    <summary :class="`${titlecolour?`bg-${titlecolour}`:''}`" v-on:click="show = true"><span class="accordion-header accordion-button h4">{{title}}<span v-if="badge" :class="`badge bg-${badgecolour}`">{{badge}}</span></span></summary>
+    <div class="accordion-body" v-if="show">
       <slot></slot>
     </div>
   </details>
@@ -30,6 +30,10 @@ export default {
       type: String,
       required: false,
       default: 'light'
+    },
+    lazy: {
+      type: Boolean,
+      required: false
     }
   },
   computed: {
@@ -37,6 +41,11 @@ export default {
       return (summary) => {
         return `${safeID(summary)}`
       }
+    }
+  },
+  data() {
+    return {
+      show: this.lazy ? false : true
     }
   }
 }
