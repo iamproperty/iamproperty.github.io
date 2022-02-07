@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
       
+      <h2>V2.6.0</h2>
+      <ul>
+        <li>Print stylesheet</li>
+      </ul>
+
       <h2>V2.5.1</h2>
       <ul>
         <li>Button selector fix</li>

@@ -2,7 +2,7 @@
   <div class="table__wrapper" ref="wrapper" :data-sortby="sortby" :data-sort="sort" :data-show="show" :data-page="page" :data-reorder="reorder">
     <table>
       <thead v-if="fields">
-        <tr>
+        <tr :class="headingclass">
           <th v-for="(field) in fields" :key="field.key" :data-sortable="field.sortable" :data-filterable="field.filterable">{{ cellHeading(field.key) }}</th>
         </tr>
       </thead>
@@ -40,6 +40,10 @@ export default {
       required: false
     },
     sort: {
+      type: String,
+      required: false
+    },
+    headingclass: {
       type: String,
       required: false
     },
