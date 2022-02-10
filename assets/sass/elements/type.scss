@@ -44,7 +44,7 @@ h6,
 // #endregion
 
 p {
-  max-width: $content-max-width;
+  max-width: var(--content-max-width);
 }
 
 p + p {
