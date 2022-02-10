@@ -1,3 +1,13 @@
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media screen and (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
 
 // Example: @include prefix(transition, transform 1.5s, webkit ms o);
 @mixin prefix($property, $value, $prefixes: (webkit ms o))
