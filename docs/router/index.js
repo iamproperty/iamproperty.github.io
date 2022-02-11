@@ -153,6 +153,14 @@ export const routes = [
           title: 'Animation | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Animation.vue')
+      },
+      {
+        path: 'print',
+        name: 'Print',
+        meta: {
+          title: 'Print | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Print.vue')
       }
     ]
   },
@@ -361,6 +369,14 @@ export const routes = [
           title: 'Accordion | Components | IAM Key'
         },
         component: () => import('../views/components/AccordionDoc.vue')
+      },
+      {
+        path: 'alert',
+        name: 'Alert',
+        meta: {
+          title: 'Alert | Components | IAM Key'
+        },
+        component: () => import('../views/components/AlertDoc.vue')
       },
       {
         path: 'banner',
@@ -577,6 +593,22 @@ export const routes = [
           title: 'Completions dashboard | IAM Key'
         },
         component: () => import('../views/standalone/CompletionsDashboard.vue')
+      },
+      {
+        path: 'print',
+        name: "Print",
+        meta: {
+          title: 'Print | IAM Key'
+        },
+        component: () => import('../views/standalone/PrintExample.vue')
+      },
+      {
+        path: 'print-single',
+        name: "Single page Print",
+        meta: {
+          title: 'Single page Print | IAM Key'
+        },
+        component: () => import('../views/standalone/PrintExampleSingle.vue')
       }
     ]
   },

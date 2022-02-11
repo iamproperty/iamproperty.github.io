@@ -8,9 +8,7 @@ describe('Icon component', () => {
     })
     
     expect(test.html()).toContain('<title>email</title>')
-    expect(test.html()).toContain('<use xlink:href="#icon-email-bg" class="icon__bg"></use>')
-    expect(test.html()).toContain('<use xlink:href="#icon-email-fill" class="icon__fill"></use>')
-    expect(test.html()).toContain('<use xlink:href="#icon-email-outline" class="icon__outline"></use>')
+    expect(test.html()).toContain('<use xlink:href="#icon-email"></use>')
   })
 
   it('renders the correct logo when an ID is passed', () => {
@@ -21,8 +19,6 @@ describe('Icon component', () => {
     })
     
     expect(test.html()).toContain('<title>pin</title>')
-    expect(test.html()).toContain('<use xlink:href="#icon-pin-bg" class="icon__bg"></use>')
-    expect(test.html()).toContain('<use xlink:href="#icon-pin-fill" class="icon__fill"></use>')
-    expect(test.html()).toContain('<use xlink:href="#icon-pin-outline" class="icon__outline"></use>')
+    expect(test.html()).toContain('<use xlink:href="#icon-pin"></use>')
   })
 })
