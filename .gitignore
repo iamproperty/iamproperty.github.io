@@ -35,3 +35,6 @@ assets/js/scripts.bundle.js
 assets/js/scripts.bundle.js.map
 assets/js/scripts.bundle.min.js
 assets/js/scripts.bundle.min.js.map
+
+# Composer
+vendor/
