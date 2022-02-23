@@ -3,6 +3,10 @@
     <div class="container">
       <h1>Changelog</h1>
       
+      <h2>V2.6.1</h2>
+      <ul>
+        <li>Update stepper hover states</li>
+      </ul>
       <h2>V2.6.0</h2>
       <ul>
         <li>Print stylesheet</li>
