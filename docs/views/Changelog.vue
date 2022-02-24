@@ -3,6 +3,10 @@
     <div class="container">
       <h1>Changelog</h1>
       
+      <h2>V2.6.2</h2>
+      <ul>
+        <li>Update the default font awesome selector so it doesn't break older/existing font awesome usage.</li>
+      </ul>
       <h2>V2.6.1</h2>
       <ul>
         <li>Update stepper hover states</li>
