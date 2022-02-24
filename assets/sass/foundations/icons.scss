@@ -36,7 +36,7 @@
 }
 
 // Font awesome support
-[class*="fa-"]:not(.far) {
+.icon[class*="fa-"]:not(.far) {
   font-size: rem(64 - 16);
   height: rem(64);
   padding: 0.5rem;
