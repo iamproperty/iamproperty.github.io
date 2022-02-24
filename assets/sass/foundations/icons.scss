@@ -64,7 +64,7 @@
 }
 
 @include inline-text(){
-  [class*="fa-"] {
+  .icon[class*="fa-"] {
     font-size: 1em;
     color: inherit;
   }
