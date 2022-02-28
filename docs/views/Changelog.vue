@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.6.4</h2>
+      <h2>V2.7.0</h2>
       <ul>
         <li>Email templates and email specific CSS</li>
       </ul>
