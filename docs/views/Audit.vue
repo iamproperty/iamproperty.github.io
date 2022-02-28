@@ -25,12 +25,6 @@
             <td>All the CSS available excluding the components.</td>
           </tr>
           <tr>
-            <th>Email CSS</th>
-            <td>{{$shared.audit.css_email_size}}</td>
-            <td>-</td>
-            <td>Email specific file</td>
-          </tr>
-          <tr>
             <th>JS</th>
             <td>{{$shared.audit.js_size}}</td>
             <td>-</td>

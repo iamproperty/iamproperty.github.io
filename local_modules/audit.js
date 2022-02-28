@@ -17,11 +17,6 @@ var cssCoreSize = formatBytes(cssStatCore.size);
 summary['css_core_size'] = cssCoreSize;
 console.log("- Core CSS: "+cssCoreSize);
 
-var cssStatEmail = fs.statSync(path.join('./assets/css/email.min.css'));
-var cssEmailSize = formatBytes(cssStatEmail.size);
-summary['css_email_size'] = cssEmailSize;
-console.log("- Email CSS: "+cssEmailSize);
-
 // JS
 var jsStat = fs.statSync(path.join('./assets/js/scripts.bundle.min.js'));
 var jsSize = formatBytes(jsStat.size);

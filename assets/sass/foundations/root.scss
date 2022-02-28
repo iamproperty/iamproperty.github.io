@@ -23,23 +23,21 @@
   .bg-dark:not(.prevent-invert),
   .bg-danger:not(.prevent-invert),
   .invert-colours {
-    @if $compatible != "true" {
         
-      > * {
+    > * {
 
-        --colour-secondary-rgb: 255,255,255;
-        --colour-primary-rgb: 255,255,255;
-        --colour-secondary: white;
-        --colour-primary: white;
-      }
-      --colour-body: white;
-      --colour-link: white;
-      --colour-hover: white;
-      --colour-active: white;
-      --colour-heading: white;
-      --colour-underline: white;
-      --colour-border: white;
+      --colour-secondary-rgb: 255,255,255;
+      --colour-primary-rgb: 255,255,255;
+      --colour-secondary: white;
+      --colour-primary: white;
     }
+    --colour-body: white;
+    --colour-link: white;
+    --colour-hover: white;
+    --colour-active: white;
+    --colour-heading: white;
+    --colour-underline: white;
+    --colour-border: white;
     color: white;
   }
 

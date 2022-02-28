@@ -45,7 +45,7 @@
   ol,
   dd,
   .body,
-  td {
+  table:not(.table--email) td {
     @content;
   }
 }
@@ -103,7 +103,6 @@
   $found: false;
 
   @if $compatible == "true" {
-    color:$value;
     font-size: $value;
   }
   @else {

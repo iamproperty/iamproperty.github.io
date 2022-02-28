@@ -27,22 +27,20 @@ $default-curve-width: 600;
 
 html {
 
-
-
   @media (min-width: #{em(600)}) {
     font-size: 100%;
   }
 }
 
-body > * {
+.content-wrapper > * {
   max-width: 600px;
   margin-inline: auto;
 }
 
 .container:not(.container-fluid) {
   max-width: 600px;
-  padding-left: #{rem(66)};
-  padding-right: #{rem(66)};
+  padding-left: #{rem(48)};
+  padding-right: #{rem(48)};
 }
 
 .table--email,
@@ -54,4 +52,13 @@ body > * {
 }
 .table--email td + td {
   padding-left: 1rem;
+}
+
+/* card */
+.card {
+  min-height: auto;
+}
+/* utilities */
+.text-white {
+  color: white;;
 }

@@ -633,14 +633,6 @@ export const routes = [
           title: 'Single page Print | IAM Key'
         },
         component: () => import('../views/standalone/PrintExampleSingle.vue')
-      },
-      {
-        path: 'email',
-        name: "Email",
-        meta: {
-          title: 'Email | IAM Key'
-        },
-        component: () => import('../views/standalone/Email.vue')
       }
     ]
   },
