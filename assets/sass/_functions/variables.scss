@@ -90,14 +90,14 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
-    --colour-#{$color}: rgba(var(--colour-#{$color}-rgb),var(--alpha))
+    --colour-#{$color}: rgba(var(--colour-#{$color}-rgb),var(--alpha, 1))
   ), $vars);
 }
 
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
-    --colour-#{$color}-theme: rgba(var(--colour-#{$color}-rgb),var(--alpha))
+    --colour-#{$color}-theme: rgba(var(--colour-#{$color}-rgb),var(--alpha, 1))
   ), $vars);
 }
 
