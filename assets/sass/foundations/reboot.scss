@@ -15,14 +15,16 @@ html {
   @include media-breakpoint-up(md) {
     font-size: vw($device-md-width);
   }
-  @media (min-width: #{em(1440)}) {
-      font-size: 100%;
-  }
 
-  @media print {
-    font-size: 16px;
+  @if $mobileOnly != "true" {
+    @media (min-width: #{em(1440)}) {
+        font-size: 100%;
+    }
+
+    @media print {
+      font-size: 16px;
+    }
   }
-  
   /*
   @media (min-width: #{em(1440)}) {
     font-size: vw(1440);

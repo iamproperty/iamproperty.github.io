@@ -1,4 +1,10 @@
 $compatible: 'false'!default;
+$mobileOnly: 'false'!default;
+
+// Declare global vars variable
+$vars: ();
+$varsMD: ();
+
 @import "../../node_modules/bootstrap/scss/functions";
 @import "_functions/functions";
 @import "../../node_modules/bootstrap/scss/variables";

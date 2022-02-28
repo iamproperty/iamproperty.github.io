@@ -130,6 +130,7 @@
 
 
 // #region Curve
+$default-curve-width: 576!default;
 @mixin curve($start: 10, $point-1: 20, $point-2: 95, $end: 70, $padding-top:16)
 {
   // Constant rules
@@ -137,7 +138,7 @@
   
   // Let vars
   $height: 100;
-  $width: 576;
+  $width: $default-curve-width;
   $middle-x: $width/2;
   $edge: 2;
   $modify: 1;
@@ -148,6 +149,8 @@
   margin-top: -#{($height*$modify)}px;
   margin-left: calc(-#{($width/2)}px + 50vw);
   clip-path: path('#{'M0,'+($start*$modify)+' L'+($edge)+','+($start*$modify)+' C'+$middle-x+','+($point-1*$modify)+' '+$middle-x+','+($point-2*$modify)+' '+($width - $edge)+','+($end*$modify)+' L'+($width + $edge)+','+($end * $modify)+' L'+$width+',5000 L0,5000 Z'}');
+
+  padding-inline: calc((#{($width/2)}px - 50vw) + var(--container-padding-x));
 
   @include media-breakpoint-up(sm) {
 
@@ -181,42 +184,45 @@
   }
 }
 
-.container--curve-below {
+@if $mobileOnly != "true" {
 
-  padding-bottom: calc(100px + #{rem(16)});
+  .container--curve-below {
 
-  @include media-breakpoint-up(sm) {
-    padding-bottom: calc(150px + #{rem(16)});
+    padding-bottom: calc(100px + #{rem(16)});
+
+    @include media-breakpoint-up(sm) {
+      padding-bottom: calc(150px + #{rem(16)});
+    }
+    @include media-breakpoint-up(md) {
+      padding-bottom: calc(200px + #{rem(16)});
+    }
   }
-  @include media-breakpoint-up(md) {
-    padding-bottom: calc(200px + #{rem(16)});
+
+  .container--curve {
+
+    @include curve();
   }
-}
+  .container--curve--right {
 
+    @include curve(70, 95, 20, 10);
+  }
+  .container--curve--up {
 
-.container--curve {
+    @include curve(90,0,0,90,-16);
+  }
+  .container--curve--down {
 
-  @include curve();
-}
-.container--curve--right {
+    @include curve(0,90,90,0,16);
+  }
 
-  @include curve(70, 95, 20, 10);
-}
-.container--curve--up {
+  [class*="container--curve"] {
 
-  @include curve(90,0,0,90,-16);
-}
-.container--curve--down {
+    position: relative;
 
-  @include curve(0,90,90,0,16);
-}
-
-[class*="container--curve"] {
-
-  position: relative;
-
-  @media (min-width: #{em(1440)}) {
-    margin-left: auto;
+    @media (min-width: #{em($device-md-width)}) {
+      margin-left: auto;
+      padding-inline: var(--container-padding-x);
+    }
   }
 }
 // #endregion

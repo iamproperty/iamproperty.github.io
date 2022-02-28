@@ -32,7 +32,7 @@
 
 
 <script>
-import Card from '../Card/Card.vue'
+import Card from '../../elements/Card/Card.vue'
 import CardDeck from '../CardDeck/CardDeck.vue'
 import carousel from '../../../assets/js/modules/carousel.js'
 

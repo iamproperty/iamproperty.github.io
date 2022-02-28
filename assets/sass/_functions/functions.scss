@@ -30,6 +30,23 @@
 }
 
 
+// hijack the vars function to add in backwards compatibility for email and ie support
+@function var($var, $default: '', $compatible: $compatible)
+{
+  @if $compatible == "true" and map-get($vars, $var) {
+    
+    @return #{map-get($vars, $var)};
+  }
+  @else if $default != '' {
+
+    @return #{'var('+$var+','+$default+')'};
+  }
+  @else {
+
+    @return #{'var('+$var+')'};
+  }
+}
+
 // converts pixels to em (context sets the current size of the font)
 @function em($pixels, $context: 16)
 {

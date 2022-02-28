@@ -17,19 +17,6 @@
 @import "../../node_modules/bootstrap/scss/grid";
 // @import "../../node_modules/bootstrap/scss/tables";
 @import "elements/tables.scss";
-// #region Forms
-//@import "../../node_modules/bootstrap/scss/forms";
-@import "../../node_modules/bootstrap/scss/forms/labels";
-//@import "../../node_modules/bootstrap/scss/forms/form-text";
-@import "../../node_modules/bootstrap/scss/forms/form-control";
-@import "../../node_modules/bootstrap/scss/forms/form-select";
-@import "../../node_modules/bootstrap/scss/forms/form-check";
-@import "../../node_modules/bootstrap/scss/forms/form-range";
-//@import "../../node_modules/bootstrap/scss/forms/floating-labels";
-@import "../../node_modules/bootstrap/scss/forms/input-group";
-@import "../../node_modules/bootstrap/scss/forms/validation";
-@import "elements/forms.scss";
-// #endregion
 //@import "../../node_modules/bootstrap/scss/buttons";
 @import "elements/buttons";
 @import "elements/links.scss";
@@ -38,6 +25,8 @@
 @import "../../node_modules/bootstrap/scss/button-group";
 @import "../../node_modules/bootstrap/scss/pagination";
 @import "../../node_modules/bootstrap/scss/badge";
+@import "../../node_modules/bootstrap/scss/card";
+@import "elements/card.scss";
 
 // Helpers
 //@import "../../node_modules/bootstrap/scss/helpers";

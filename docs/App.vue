@@ -10,6 +10,7 @@
         <li><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/templates')}" to="/templates">Templates</router-link></li>
       </ul>
     </Nav>
     <router-view />

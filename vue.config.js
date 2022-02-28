@@ -54,7 +54,7 @@ module.exports = {
       })
 
     config.module.rule('files')
-    .test(/\.(png|jpg|gif|pdf)$/)
+    .test(/\.(pdf)$/)
     .use('file-loader')
     .loader('file-loader')
     .end()

@@ -18,7 +18,7 @@
 <style lang="scss">
 @import "../../../assets/sass/_func.scss";
 @import "../../../node_modules/bootstrap/scss/_card";
-@import "../../../assets/sass/components/card";
+@import "../../../assets/sass/elements/card";
 </style>
 
 <script>
