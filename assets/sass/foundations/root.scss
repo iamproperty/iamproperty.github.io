@@ -12,7 +12,7 @@
   }
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
-  --alpha: var(--bs-bg-opacity);
+  --alpha: var(--bs-bg-opacity,1);
   --#{$variable-prefix}gradient: #{$gradient};
   --content-max-width: #{$content-max-width};
 }
@@ -23,6 +23,7 @@
   .bg-dark:not(.prevent-invert),
   .bg-danger:not(.prevent-invert),
   .invert-colours {
+        
     > * {
 
       --colour-secondary-rgb: 255,255,255;

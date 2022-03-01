@@ -29,7 +29,6 @@
   @return round($float * $pow)/$pow;
 }
 
-
 // converts pixels to em (context sets the current size of the font)
 @function em($pixels, $context: 16)
 {

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -8,7 +7,7 @@ export const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('../views/Home.vue'),
     meta: {
       title: 'IAM Key Design system and framework'
     }
@@ -153,14 +152,6 @@ export const routes = [
           title: 'Animation | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Animation.vue')
-      },
-      {
-        path: 'print',
-        name: 'Print',
-        meta: {
-          title: 'Print | Foundations | IAM Key'
-        },
-        component: () => import('../views/foundations/Print.vue')
       }
     ]
   },
@@ -343,7 +334,14 @@ export const routes = [
           }
         ]
       },
-      
+      {
+        path: 'card',
+        name: 'Card',
+        meta: {
+          title: 'Card | Components | IAM Key'
+        },
+        component: () => import('../views/elements/CardDoc.vue')
+      }
     ]
   },
   {
@@ -385,14 +383,6 @@ export const routes = [
           title: 'Banner | Components | IAM Key'
         },
         component: () => import('../views/components/BannerDoc.vue')
-      },
-      {
-        path: 'card',
-        name: 'Card',
-        meta: {
-          title: 'Card | Components | IAM Key'
-        },
-        component: () => import('../views/components/CardDoc.vue')
       },
       {
         path: 'card-deck',
@@ -497,6 +487,40 @@ export const routes = [
           title: 'Timeline | Components | IAM Key'
         },
         component: () => import('../views/components/TimelineDoc.vue')
+      }
+    ]
+  },
+  {
+    path: '/templates',
+    name: 'Templates',
+    meta: {
+      title: 'Templates | IAM Key'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "templates" */ '../views/Templates.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/templates/Index.vue')
+      },
+      {
+        path: 'email',
+        name: 'Email Template',
+        meta: {
+          title: 'Email Template | Components | IAM Key'
+        },
+        component: () => import('../views/templates/EmailDoc.vue')
+      },
+      {
+        path: 'print',
+        name: 'Print Template',
+        meta: {
+          title: 'Print Template | Components | IAM Key'
+        },
+        component: () => import('../views/templates/PrintDoc.vue')
       }
     ]
   },

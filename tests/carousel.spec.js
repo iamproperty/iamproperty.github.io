@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import Carousel from '@/components/Carousel/Carousel.vue'
-import Card from '@/components/Card/Card.vue'
+import Card from '@/elements/Card/Card.vue'
 
 describe('Carousel component', () => {
 

@@ -3,6 +3,15 @@
     <div class="container">
       <h1>Changelog</h1>
       
+      <h2>V2.7.0</h2>
+      <ul>
+        <li>Email templates and email specific CSS</li>
+      </ul>
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>The way sass gets imported has changed to seperate out the forms files so that they dont have to be included into the email CSS.</li>
+      </ul>
+
       <h2>V2.6.3</h2>
       <ul>
         <li>Update the default font awesome selector so it doesn't break older/existing font awesome usage.</li>

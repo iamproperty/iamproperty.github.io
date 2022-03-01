@@ -1,7 +1,3 @@
-// Declare global vars variable
-$vars: ();
-$varsMD: ();
-
 // #region Grid Breakpoints, layouts
 $grid-breakpoints: (
   xs: 0,
@@ -94,22 +90,32 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
-    --colour-#{$color}: rgba(var(--colour-#{$color}-rgb),var(--alpha,1))
+    --colour-#{$color}: rgba(var(--colour-#{$color}-rgb),var(--alpha, 1))
   ), $vars);
 }
 
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
-    --colour-#{$color}-theme: rgba(var(--colour-#{$color}-rgb),var(--alpha,1))
+    --colour-#{$color}-theme: rgba(var(--colour-#{$color}-rgb),var(--alpha, 1))
   ), $vars);
 }
 
 //  RGB Theme colours
 @function show-css-var($identifier) {
+
+  @if $compatible == "true" {
+    @return #{map-get($theme-colors, #{$identifier})};
+  }
+
   @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-bg-opacity,1));
 }
 @function show-css-var-text($identifier) {
+
+  @if $compatible == "true" {
+    @return #{map-get($theme-colors, #{$identifier})};
+  }
+
   @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-text-opacity,1));
 }
 $utilities-bg-colors: map-loop($utilities-colors, show-css-var, "$key");
@@ -190,14 +196,6 @@ $type-scale-5: #{rem(28)};
 $type-scale-6: #{rem(16)};
 $type-scale-7: #{rem(14)};
 
-
-$h1-font-size: var(--fs-1);
-$h2-font-size: var(--fs-2);
-$h3-font-size: var(--fs-3);
-$h4-font-size: var(--fs-4);
-$h5-font-size: var(--fs-5);
-$h6-font-size: var(--fs-6);
-
 $font-sizes: (
   'display': $type-scale-3,
   1: $type-scale-3,
@@ -217,6 +215,14 @@ $font-sizes: (
     --fs-#{$size}: #{$value}
   ), $vars);
 }
+
+
+$h1-font-size: var(--fs-1);
+$h2-font-size: var(--fs-2);
+$h3-font-size: var(--fs-3);
+$h4-font-size: var(--fs-4);
+$h5-font-size: var(--fs-5);
+$h6-font-size: var(--fs-6);
 
 $headings-margin-bottom: clamp(1rem,0.5em,0.5em);
 $headings-font-style: normal;

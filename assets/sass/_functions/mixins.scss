@@ -1,12 +1,19 @@
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
-  $min: breakpoint-min($name, $breakpoints);
-  @if $min {
-    @media screen and (min-width: $min) {
-      @content;
+  
+    $min: breakpoint-min($name, $breakpoints);
+    @if $min {
+      @media screen and (min-width: $min) {
+        @content;
+      }
     }
-  } @else {
-    @content;
-  }
+    @else if $name =='xs' {
+      @content;
+    } 
+    @else {
+      @if $mobileOnly != "true" {
+      @content;
+      }
+    }
 }
 
 // Example: @include prefix(transition, transform 1.5s, webkit ms o);
@@ -24,16 +31,11 @@
 // Used to make it possible to use css properties but still support IE11
 @mixin var($property, $varName, $important:"", $compatible:$compatible) {
 
-  @if $compatible == 'true' {
+  @if $compatible == "true" {
     #{$property}: map-get($vars, $varName) #{$important};
-  }
-  @else if $compatible == 'fallback' {
-      
-    #{$property}: map-get($vars, $varName) #{$important};
-    #{$property}: var(#{$varName}) #{$important};
   }
   @else {
-  #{$property}: var(#{$varName}) #{$important};
+    #{$property}: var(#{$varName}) #{$important};
   }
 }
 
@@ -43,7 +45,7 @@
   ol,
   dd,
   .body,
-  td {
+  table:not(.table--email) td {
     @content;
   }
 }
@@ -100,7 +102,7 @@
   
   $found: false;
 
-  @if $compatible == 'true' {
+  @if $compatible == "true" {
     font-size: $value;
   }
   @else {
