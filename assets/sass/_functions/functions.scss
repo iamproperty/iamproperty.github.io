@@ -1,5 +1,7 @@
 @use "sass:math";
 
+@import "../../../node_modules/bootstrap/scss/_functions.scss";
+
 @function pow($x, $n) {
   $ret: 1;
     

@@ -13,7 +13,7 @@
     "audit": "node local_modules/audit.js",
     "build:docs": "vue-cli-service build docs/main.js",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
-    "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/email.scss assets/css/email.min.css --style=compressed",
+    "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed",
     "compile:email": "sass assets/sass/email.scss assets/css/email.min.css --style=compressed && node local_modules/email-css.js",
     "dev": "npm run serve",
     "prepack": "npm run build",

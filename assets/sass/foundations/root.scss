@@ -1,3 +1,5 @@
+@use "../func" as *;
+
 :root {
   // Custom variable values only support SassScript inside `#{}`.
   @each $var, $value in $vars {

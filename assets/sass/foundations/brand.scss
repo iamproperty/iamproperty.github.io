@@ -1,3 +1,5 @@
+@use "../_func" as *;
+
 .brand {
 
   --svg-width: #{em(380,130)};

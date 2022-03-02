@@ -1,3 +1,5 @@
+@use "../_func.scss" as *;
+
 .btn {
   --btn-bg: var(--colour-warning);
   --btn-outline: var(--colour-warning);
@@ -253,5 +255,6 @@
     width: 100%;
   }
 }
-
 // #endregion
+
+@import "../../../node_modules/bootstrap/scss/_button-group.scss";

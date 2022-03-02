@@ -1,3 +1,5 @@
+@import "../../../node_modules/bootstrap/scss/mixins";
+
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   
     $min: breakpoint-min($name, $breakpoints);
