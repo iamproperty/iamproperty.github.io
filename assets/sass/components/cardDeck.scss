@@ -1,3 +1,4 @@
+@use "../_func" as *;
 
 // #region Card Deck
 .card-deck.container:not([data-card-type="simple"]) {
