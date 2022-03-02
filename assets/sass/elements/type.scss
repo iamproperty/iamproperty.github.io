@@ -21,10 +21,13 @@ small {
   @include var(color,--colour-heading);
   color: var(--colour-heading,var(--colour-primary));
   display: block;
-  //margin-bottom: clamp(1rem,0.5em,0.5em);
-  //line-height: clamp(2.5rem,1em,1.2em);
   text-indent: -0.04em;
   letter-spacing: -0.01em;
+
+  margin-top: 0; // 1
+  margin-bottom: $headings-margin-bottom;
+  font-style: $headings-font-style;
+  line-height: $headings-line-height;
 }
 
 .h1 {
