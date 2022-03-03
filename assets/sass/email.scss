@@ -1,9 +1,11 @@
 @charset "UTF-8";
 
 // Set mobile only variable so that the media query mixin doesn't print out non mobile rules
+
+@use "_func" as *;
+
 $mobileOnly: "true";
 $compatible: "true";
-@import "_func";
 
 // Update the breakpoints to just one to remove some utility classes
 $grid-breakpoints: (
