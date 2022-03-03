@@ -1,3 +1,7 @@
+@use "../_func.scss" as *;
+
+@import "../../../node_modules/bootstrap/scss/_card.scss";
+
 // #region Defaul Card
 // Reset the link
 a.card {

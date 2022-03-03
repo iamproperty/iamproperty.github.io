@@ -1,3 +1,5 @@
+@use "_func" as *;
+
 @import "../../node_modules/bootstrap/scss/forms/labels";
 @import "../../node_modules/bootstrap/scss/forms/form-control";
 @import "../../node_modules/bootstrap/scss/forms/form-select";

@@ -1,35 +1,14 @@
-
-//@import "../../node_modules/bootstrap/scss/nav";
-//@import "../../node_modules/bootstrap/scss/navbar";
-@import "components/nav.scss";
-
-@import "components/header.scss";
-@import "components/testimonial.scss";
-@import "components/cardDeck.scss";
-//@import "../../node_modules/bootstrap/scss/accordion";
-@import "components/accordion.scss";
-//@import "../../node_modules/bootstrap/scss/breadcrumb";
-@import "../../node_modules/bootstrap/scss/pagination";
-//@import "../../node_modules/bootstrap/scss/alert";
-@import "components/alert";
-@import "../../node_modules/bootstrap/scss/progress";
-@import "../../node_modules/bootstrap/scss/list-group";
-@import "../../node_modules/bootstrap/scss/close";
-@import "../../node_modules/bootstrap/scss/toasts";
-@import "../../node_modules/bootstrap/scss/modal";
-@import "../../node_modules/bootstrap/scss/tooltip";
-@import "../../node_modules/bootstrap/scss/popover";
-//@import "../../node_modules/bootstrap/scss/carousel";
-@import "components/carousel.scss";
-@import "../../node_modules/bootstrap/scss/spinners";
-@import "../../node_modules/bootstrap/scss/offcanvas";
-
-
-@import "components/property-searchbar.scss";
-@import "components/tabs.scss";
-@import "components/modal.scss";
-
-@import "components/charts.scss";
-@import "components/timeline.scss";
-@import "components/snapshot.scss";
-@import "components/stepper.scss";
+@use "components/nav.scss";
+@use "components/header.scss";
+@use "components/testimonial.scss";
+@use "components/cardDeck.scss";
+@use "components/accordion.scss";
+@use "components/alert";
+@use "components/carousel.scss";
+@use "components/property-searchbar.scss";
+@use "components/tabs.scss";
+@use "components/modal.scss";
+@use "components/charts.scss";
+@use "components/timeline.scss";
+@use "components/snapshot.scss";
+@use "components/stepper.scss";

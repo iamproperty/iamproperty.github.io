@@ -1,3 +1,5 @@
+@use "../_func.scss" as *;
+
 ol li,
 ul li{
   max-width: $content-max-width;

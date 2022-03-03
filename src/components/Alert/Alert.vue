@@ -8,7 +8,6 @@
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/_func.scss";
 @import "../../../assets/sass/components/alert.scss";
 </style>
 
