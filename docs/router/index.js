@@ -521,6 +521,14 @@ export const routes = [
           title: 'Print Template | Components | IAM Key'
         },
         component: () => import('../views/templates/PrintDoc.vue')
+      },
+      {
+        path: 'error-pages',
+        name: 'Error page templates',
+        meta: {
+          title: 'Error page templates | Template | IAM Key'
+        },
+        component: () => import('../views/templates/ErrorDoc.vue')
       }
     ]
   },

@@ -121,13 +121,23 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
   @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-text-opacity,1));
 }
 $utilities-bg-colors: map-loop($utilities-colors, show-css-var, "$key");
-$utilities-text-colors: map-loop($utilities-colors, show-css-var-text, "$key");
+
+$utilities-text: map-merge(
+  $utilities-colors,
+  (
+    "black": to-rgb($black),
+    "white": to-rgb($white),
+    "body": to-rgb($body-color)
+  )
+) !default;
+$utilities-text-colors: map-loop($utilities-text, show-css-var-text, "$key");
 
 
 
 // Colours that we want setting but not used for Bootstraps mixins, i.e. .text-primary, .bg-muted
 $non-theme-colors: ();
 $non-theme-colors: map-merge((
+  "white":      #ffffff,
   "muted":      $colour-muted,
   "border":           $colour-border,
   "link":             $colour-link,

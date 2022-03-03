@@ -11,10 +11,12 @@ var newcss = postcss([
   
 ]).process(mycss).css;
 
+
+fs.writeFile("public/email/css/all.min.css", newcss, (err) => {  if (err) throw err; });
+
 // Default template
 postcss([
   // Then process any CSS variables
-  cssvariables(/*options*/),
   purgecss({
     content: ['public/email/index.html']
   })
@@ -26,7 +28,6 @@ postcss([
 // Marketing template
 postcss([
   // Then process any CSS variables
-  cssvariables(/*options*/),
   purgecss({
     content: ['public/email/marketing.html']
   })

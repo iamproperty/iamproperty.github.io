@@ -3,6 +3,10 @@
     <div class="container">
       <h1>Changelog</h1>
       
+      <h2>V2.8.0</h2>
+      <ul>
+        <li>Error page templates and error specific CSS</li>
+      </ul>
       <h2>V2.7.0</h2>
       <ul>
         <li>Email templates and email specific CSS</li>
