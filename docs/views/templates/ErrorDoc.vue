@@ -11,7 +11,7 @@
 
       <p>The standalone error pages are developed locally as static html pages within the public folder but can be served using the <code>npm run dev</code> command. The CSS is generated using the iamkey SASS files but are further processed with PostCSS. PostCSS is used to purge un-used CSS from the final file. It's worth noting that each template will have its own CSS file as the purging of un-used CSS relies upon reviewing the HTML template.</p>
       
-      <p>The logo's are added to the page using an inline SVG with all logo's present. So to change the logo on the template its just a matter of updating the SVG tag to grab the right symbol and update the size. Un-used symbols can be removed from the file if the file size needs to be reduced for any reason.</p>
+      <p>The logos are added to the page using an inline SVG with all logos present. So to change the logo on the template its just a matter of updating the SVG tag to grab the right symbol and update the size. Unused symbols can be removed from the file if the file size needs to be reduced for any reason.</p>
 
       <h3>Templates</h3>
       <ul>
