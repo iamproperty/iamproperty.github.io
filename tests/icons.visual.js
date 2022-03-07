@@ -56,22 +56,12 @@ describe(`Icon`, () => {
       return stichTogether(r, g, b); 
     }
 
-    const iconBg = await page.$eval(
-      '#icon-email .icon .icon__bg',
-      (el) => window.getComputedStyle(el).getPropertyValue("fill")
-    )
-    const iconOutline = await page.$eval(
-      '#icon-email .icon .icon__outline',
-      (el) => window.getComputedStyle(el).getPropertyValue("stroke")
-    )
     const iconFill = await page.$eval(
-      '#icon-email .icon .icon__fill',
+      '#icon-email .icon use',
       (el) => window.getComputedStyle(el).getPropertyValue("fill")
     )
     
-    expect(rgbToHex(iconBg)).toBe('#ffffff');
-    expect(rgbToHex(iconOutline)).toBe('#00313c');
-    expect(rgbToHex(iconFill)).toBe('#b4e6a5');
+    expect(rgbToHex(iconFill)).toBe('#00313c');
 
     await browser.close()
   });

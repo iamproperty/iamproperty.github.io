@@ -1,6 +1,11 @@
+
+@use '../../assets/sass/_func.scss' as *;
+
 // Load the SCSS framework
 $fontPath: '/fonts/';
-@import '../../assets/sass/core.scss';
+@import "../../assets/sass/_fonts.scss";
+@import '../../assets/sass/_corefiles.scss';
+@import "../../assets/sass/_forms";
 
 
 // Utility generator
@@ -104,6 +109,9 @@ $fontPath: '/fonts/';
         // Only proceed if responsive media queries are enabled or if it's the base media query
         @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "") {
           @include print-utility($utility, $infix);
+        }
+        @if type-of($utility) == "map" and map-get($utility, print) == true {
+          @include print-utility($utility, "-print");
         }
       }
     

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -8,7 +7,7 @@ export const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('../views/Home.vue'),
     meta: {
       title: 'IAM Key Design system and framework'
     }
@@ -145,6 +144,14 @@ export const routes = [
           title: 'Utility Classes | Foundations | IAM Key'
         },
         component: () => import('../views/foundations/Utilities.vue')
+      },
+      {
+        path: 'animation',
+        name: 'Animation',
+        meta: {
+          title: 'Animation | Foundations | IAM Key'
+        },
+        component: () => import('../views/foundations/Animation.vue')
       }
     ]
   },
@@ -327,7 +334,14 @@ export const routes = [
           }
         ]
       },
-      
+      {
+        path: 'card',
+        name: 'Card',
+        meta: {
+          title: 'Card | Components | IAM Key'
+        },
+        component: () => import('../views/elements/CardDoc.vue')
+      }
     ]
   },
   {
@@ -355,20 +369,20 @@ export const routes = [
         component: () => import('../views/components/AccordionDoc.vue')
       },
       {
+        path: 'alert',
+        name: 'Alert',
+        meta: {
+          title: 'Alert | Components | IAM Key'
+        },
+        component: () => import('../views/components/AlertDoc.vue')
+      },
+      {
         path: 'banner',
         name: 'Banner',
         meta: {
           title: 'Banner | Components | IAM Key'
         },
         component: () => import('../views/components/BannerDoc.vue')
-      },
-      {
-        path: 'card',
-        name: 'Card',
-        meta: {
-          title: 'Card | Components | IAM Key'
-        },
-        component: () => import('../views/components/CardDoc.vue')
       },
       {
         path: 'card-deck',
@@ -443,6 +457,14 @@ export const routes = [
         component: () => import('../views/components/SnapshotDoc.vue')
       },
       {
+        path: 'stepper',
+        name: 'Stepper',
+        meta: {
+          title: 'Stepper | Components | IAM Key'
+        },
+        component: () => import('../views/components/StepperDoc.vue')
+      },
+      {
         path: 'tabs',
         name: 'Tabs',
         meta: {
@@ -465,6 +487,48 @@ export const routes = [
           title: 'Timeline | Components | IAM Key'
         },
         component: () => import('../views/components/TimelineDoc.vue')
+      }
+    ]
+  },
+  {
+    path: '/templates',
+    name: 'Templates',
+    meta: {
+      title: 'Templates | IAM Key'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "templates" */ '../views/Templates.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/templates/Index.vue')
+      },
+      {
+        path: 'email',
+        name: 'Email Template',
+        meta: {
+          title: 'Email Template | Components | IAM Key'
+        },
+        component: () => import('../views/templates/EmailDoc.vue')
+      },
+      {
+        path: 'print',
+        name: 'Print Template',
+        meta: {
+          title: 'Print Template | Components | IAM Key'
+        },
+        component: () => import('../views/templates/PrintDoc.vue')
+      },
+      {
+        path: 'error-pages',
+        name: 'Error page templates',
+        meta: {
+          title: 'Error page templates | Template | IAM Key'
+        },
+        component: () => import('../views/templates/ErrorDoc.vue')
       }
     ]
   },
@@ -585,6 +649,22 @@ export const routes = [
           title: 'Agent Platform | IAM Key'
         },
         component: () => import('../views/standalone/Agent.vue')
+      },
+      {
+        path: 'print',
+        name: "Print",
+        meta: {
+          title: 'Print | IAM Key'
+        },
+        component: () => import('../views/standalone/PrintExample.vue')
+      },
+      {
+        path: 'print-single',
+        name: "Single page Print",
+        meta: {
+          title: 'Single page Print | IAM Key'
+        },
+        component: () => import('../views/standalone/PrintExampleSingle.vue')
       }
     ]
   },

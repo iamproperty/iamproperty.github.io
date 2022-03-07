@@ -10,12 +10,13 @@
         <li><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
+        <li><router-link :class="{'router-link-sub-active': subIsActive('/templates')}" to="/templates">Templates</router-link></li>
       </ul>
     </Nav>
     <router-view />
     <footer class="bg-primary">
 
-      <div class="container pt-4">
+      <div class="container pt-4 d-print-none">
         <ul class="list-unstyled list-inline ms-auto d-block mb-0">
           <li class="list-inline-item me-4 ms-0 mb-2"><a :href="require('./assets/brand-guidelines.pdf')" target="_blank">Brand guidelines</a></li>
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/get-started')}" to="/get-started">Get started</router-link></li>

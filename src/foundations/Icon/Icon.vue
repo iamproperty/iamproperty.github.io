@@ -1,9 +1,7 @@
 <template>
   <svg class="icon">
     <title>{{id}}</title>
-    <use :xlink:href="'#icon-'+id+'-bg'" class="icon__bg"></use>
-    <use :xlink:href="'#icon-'+id+'-fill'" class="icon__fill"></use>
-    <use :xlink:href="'#icon-'+id+'-outline'" class="icon__outline"></use>
+    <use :xlink:href="'#icon-'+id"></use>
   </svg>
 </template>
 

@@ -1,3 +1,5 @@
+@use "../_func.scss" as *;
+
 .btn {
   --btn-bg: var(--colour-warning);
   --btn-outline: var(--colour-warning);
@@ -49,7 +51,7 @@
   &:active,
   &.active,
   *:checked + &,
-  details[open] & {
+  details[open] > &:is(summary):first-child {
     --btn-colour: var(--btn-active-colour);
     @include box-shadow($btn-active-box-shadow);
     border-radius: rem(20);
@@ -107,12 +109,6 @@
       --btn-text:  var(--colour-primary);
       --btn-text-hover:  #ffffff;
     }
-  }
-
-  > .icon {
-    display: inline-block;
-    margin-right: 0.5em;
-    margin-left: 0.5em;
   }
 
   @include invert-colours {
@@ -259,5 +255,6 @@
     width: 100%;
   }
 }
-
 // #endregion
+
+@import "../../../node_modules/bootstrap/scss/_button-group.scss";

@@ -2,13 +2,13 @@
   <div class="table__wrapper" ref="wrapper" :data-sortby="sortby" :data-sort="sort" :data-show="show" :data-page="page" :data-reorder="reorder">
     <table>
       <thead v-if="fields">
-        <tr>
+        <tr :class="headingclass">
           <th v-for="(field) in fields" :key="field.key" :data-sortable="field.sortable" :data-filterable="field.filterable">{{ cellHeading(field.key) }}</th>
         </tr>
       </thead>
       <tbody v-if="items">
-        <tr v-for="(value,index) in items" :key="index">
-          <td :key="cellIndex" v-for="(cellValue,cellIndex) in value" v-html="cellValue" :data-label="cellHeading(cellIndex)" :data-numeric="numericValue(cellValue)"></td>
+        <tr v-for="(value,index) in items" :key="index" :data-row-id="value['rowid']">
+          <td :key="cellIndex" v-for="(cellValue,cellIndex) in Object.fromEntries(Object.entries(value).filter(([key]) => key !== 'rowid'))" v-html="cellValue" :data-label="cellHeading(cellIndex)" :data-numeric="numericValue(cellValue)"></td>
         </tr>
       </tbody>
     </table>
@@ -40,6 +40,10 @@ export default {
       required: false
     },
     sort: {
+      type: String,
+      required: false
+    },
+    headingclass: {
       type: String,
       required: false
     },

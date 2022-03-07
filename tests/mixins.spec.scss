@@ -64,7 +64,7 @@
         ol,
         dd,
         .body,
-        td{
+        table:not(.table--email) td{
           color: purple;
           background: green;
         }

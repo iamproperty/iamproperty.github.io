@@ -1,5 +1,9 @@
+@use "../_func.scss" as *;
+
 // #region Default table
 table {
+  --border-width: 2px;
+  --inner-border-width: 1px;
   width: 100%;
   font-size: rem(16);
   border: none;
@@ -27,18 +31,18 @@ th {
 }
 
 tr {
-  border-bottom: 1px solid currentColor;
+  border-bottom: var(--inner-border-width) solid currentColor;
   @include var(border-color,--colour-border);
 
   &:last-child {
-    border-bottom: 2px solid currentColor;
+    border-bottom: var(--border-width) solid currentColor;
     @include var(border-color,--colour-border);
   }
 }
 
 thead {
   tr:first-child {
-    border-top: 2px solid currentColor;
+    border-top: var(--border-width) solid currentColor;
     @include var(border-color,--colour-border);
   }
 
@@ -50,20 +54,28 @@ thead {
     @include media-breakpoint-up(sm) {
   
       font-size: rem(18);
+      white-space: nowrap;
     }
 
     font-weight: bold;
     vertical-align: bottom;
-    white-space: nowrap;
   }
 }
 
 tbody:first-child{
   tr:first-child {
-    border-top: 2px solid currentColor;
+    border-top: var(--border-width) solid currentColor;
     @include var(border-color,--colour-border);
   }
 }
+
+.table__wrapper.border-0 table,
+table.border-0 {
+
+  --border-width: 0px;
+  --inner-border-width: 0px;
+}
+
 // #endregion
 
 // #region Table wrapper - Add via JS if needed, provides a safe space to scroll
@@ -85,7 +97,7 @@ tbody:first-child{
 // #endregion
 
 // #region Tables are only stacked on mobile
-@media (max-width: 36em) {
+@media screen and (max-width: 36em) {
   .table__wrapper:not(.table-fullwidth) {
     thead {
       display: none;

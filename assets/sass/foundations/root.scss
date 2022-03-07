@@ -1,3 +1,5 @@
+@use "../func" as *;
+
 :root {
   // Custom variable values only support SassScript inside `#{}`.
   @each $var, $value in $vars {
@@ -12,34 +14,39 @@
   }
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
-  --alpha: var(--bs-bg-opacity);
+  --alpha: var(--bs-bg-opacity,1);
   --#{$variable-prefix}gradient: #{$gradient};
+  --content-max-width: #{$content-max-width};
 }
 
+@media screen {
+  /* Override the colours when on a drark background */
+  .bg-primary:not(.prevent-invert),
+  .bg-dark:not(.prevent-invert),
+  .bg-danger:not(.prevent-invert),
+  .invert-colours {
+    
+    @if $compatible != "true" {
+      > * {
 
-/* Override the colours when on a drark background */
-.bg-primary:not(.prevent-invert),
-.bg-dark:not(.prevent-invert),
-.bg-danger:not(.prevent-invert),
-.invert-colours {
-  > * {
-
-    --colour-secondary-rgb: 255,255,255;
-    --colour-primary-rgb: 255,255,255;
-    --colour-secondary: white;
-    --colour-primary: white;
+        --colour-secondary-rgb: 255,255,255;
+        --colour-primary-rgb: 255,255,255;
+        --colour-secondary: white;
+        --colour-primary: white;
+      }
+      --colour-body: white;
+      --colour-link: white;
+      --colour-hover: white;
+      --colour-active: white;
+      --colour-heading: white;
+      --colour-underline: white;
+      --colour-border: white;
+    }
+    color: white;
   }
-  --colour-body: white;
-  --colour-link: white;
-  --colour-hover: white;
-  --colour-active: white;
-  --colour-heading: white;
-  --colour-underline: white;
-  --colour-border: white;
-  color: white;
-}
 
-.bg-light:not(.prevent-invert) {
-  --colour-heading: var(--colour-dark);
-  color: var(--colour-dark);
+  .bg-light:not(.prevent-invert) {
+    --colour-heading: var(--colour-dark);
+    color: var(--colour-dark);
+  }
 }

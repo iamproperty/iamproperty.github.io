@@ -1,0 +1,62 @@
+@use "_func" as *;
+
+$printMedia: print!default;
+@media #{$printMedia} {
+  :root {
+  --content-max-width: 100%;
+  }
+  html {
+    font-size: 11pt;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    body {
+      background: white;
+      height: auto;
+      min-height: 100%;
+    }
+  }
+  .container {
+    padding-left: 0;
+    padding-right: 0;
+    overflow: hidden;
+  }
+  .print-header {
+    background-image: linear-gradient(45deg, var(--colour-secondary) 0%, transparent 80%) !important;
+  }
+  p a[href^=http]:after,
+  p a[href^=mailto]:after,
+  a.youtube-embed:after {
+    content: " (" attr(href) ")";
+    display: inline!important;
+    color: inherit;
+    mask: none;
+    -webkit-mask: none;
+    background: none;
+  }
+
+  // Nav fixes 
+  .nav {
+    position: relative;
+    box-shadow: none!important;
+  }
+  .nav [class*="col"]:not(.nav__logo){
+    display: none;
+  }
+  nav + main > *:first-child {
+    padding-top: 0;
+  }
+}
+@media print {
+  
+  html {
+    padding: 0;
+  }
+  
+  tr, img, svg, li {
+    break-inside: avoid;
+  }
+  [class*="bg-"]:not(.print-header) {
+    background: none!important;
+  }
+}

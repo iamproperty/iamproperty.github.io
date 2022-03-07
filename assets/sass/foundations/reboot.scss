@@ -1,3 +1,7 @@
+@use "../_func" as *;
+
+@import "../../../node_modules/bootstrap/scss/_reboot.scss";
+
 /* Reset & Defaults - Most of the resets/normailization stuff is done by Bootstrap */
 html {
 
@@ -15,10 +19,16 @@ html {
   @include media-breakpoint-up(md) {
     font-size: vw($device-md-width);
   }
-  @media (min-width: #{em(1440)}) {
-      font-size: 100%;
+
+  @if $mobileOnly != "true" {
+    @media (min-width: #{em(1440)}) {
+        font-size: 100%;
+    }
+
+    @media print {
+      font-size: 16px;
+    }
   }
-  
   /*
   @media (min-width: #{em(1440)}) {
     font-size: vw(1440);

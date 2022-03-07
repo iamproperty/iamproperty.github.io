@@ -3,7 +3,59 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.3.2 <span>(Current latest version)</span></h2>
+      <h2>V2.8.0</h2>
+      <ul>
+        <li>Error page templates and error specific CSS</li>
+      </ul>
+      <h2>V2.7.0</h2>
+      <ul>
+        <li>Email templates and email specific CSS</li>
+      </ul>
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>The way sass gets imported has changed to seperate out the forms files so that they dont have to be included into the email CSS.</li>
+      </ul>
+
+      <h2>V2.6.3</h2>
+      <ul>
+        <li>Update the default font awesome selector so it doesn't break older/existing font awesome usage.</li>
+      </ul>
+      <h2>V2.6.1</h2>
+      <ul>
+        <li>Update stepper hover states</li>
+      </ul>
+      <h2>V2.6.0</h2>
+      <ul>
+        <li>Print stylesheet</li>
+      </ul>
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Change for font's are inculded in the SASS files, this will mean nay bespoke SASS builds will need updating to include '_fonts'.</li>
+      </ul>
+
+      <h2>V2.5.1</h2>
+      <ul>
+        <li>Button selector fix</li>
+      </ul>
+
+      <h2>V2.5.0</h2>
+      <ul>
+        <li>Update icons and add font awesome support</li>
+        <li>Alert component</li>
+        <li>Add the ability to add a 'lazy' attribute to the Tab and accordion components, allowing for the content to then be lazy loaded.</li>
+      </ul>
+
+      <h2>V2.4.0</h2>
+      <ul>
+        <li>New stepper component</li>
+      </ul>
+
+      <h2>V2.3.3</h2>
+      <ul>
+        <li>Table component hotfix - Add the ability to add id's to table rows so that the vue component can connect to external JS.</li>
+      </ul>
+
+      <h2>V2.3.2 </h2>
       <ul>
         <li>Table component hotfix - Create a re-ordered event that gets dispatched when the user successfully re-orders a table.</li>
       </ul>

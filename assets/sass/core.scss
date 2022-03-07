@@ -1,4 +1,6 @@
 @charset "UTF-8";
 
-@import "_func";
-@import "_corefiles";
+@use "_fonts";
+@use "_corefiles";
+@use "_forms";
+@use "_print";

@@ -15,6 +15,7 @@
 | show | number | - | Limits the number of results shown and will create pagination controls. |
 | page | number | - | Starting page for the pagination. |
 | reorder | bool | - | Create an order column and allow for the table rows to be reordered |
+| headingclass | string | - | Add a class to the table row within the thead, used to add a background or change test colour. |
 
 ### Class modifiers
 
@@ -52,7 +53,6 @@ this.$el.addEventListener('sorted', function (e) {
       
   console.log('Table sorted')
 }, false);
-```
 
 // Re-ordered via drag and drop
 this.$el.addEventListener('reordered', function (e) { 

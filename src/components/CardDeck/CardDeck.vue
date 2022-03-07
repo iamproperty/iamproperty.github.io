@@ -11,12 +11,11 @@
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/_func.scss";
 @import "../../../assets/sass/components/cardDeck.scss";
 </style>
 
 <script>
-import Card from '../Card/Card.vue'
+import Card from '../../elements/Card/Card.vue'
 
 export default {
   components: {

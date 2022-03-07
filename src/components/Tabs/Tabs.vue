@@ -4,7 +4,7 @@
     <input type="radio" class="d-none" v-for="(value,index) in tabLinks()" :key="index" :name="value.name" :id="value.id" :checked="index == 0? 'checked':''" />
 
     <div class="tabs__links">
-      <label v-for="(value,index) in tabLinks()" :key="index" :for="value.id" class="link">
+      <label v-for="(value,index) in tabLinks()" :key="index" :for="value.id" class="link" v-on:click="openTab(index)">
         {{value.tabTitle}}
       </label>
     </div>
@@ -15,7 +15,6 @@
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/_func.scss";
 @import "../../../assets/sass/components/tabs.scss";
 </style>
 
@@ -52,6 +51,23 @@ export default {
         }
 
         return tabLinks;
+      }
+    }
+  },
+  methods: {
+    openTab: function (index) {
+      
+      let i = 0;
+      for (const [key, value] of Object.entries(this.$slots.default)) {
+          
+        if(value.componentOptions && value.componentOptions.propsData && value.componentOptions.propsData.title){
+          
+          if(i == index){
+            value.componentInstance._data.show = true;
+          }
+
+          i++;
+        }
       }
     }
   }

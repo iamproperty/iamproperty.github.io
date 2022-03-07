@@ -1,3 +1,5 @@
+@use "../_func.scss" as *;
+
 a,
 .link {
   @include var (color, --colour-link);

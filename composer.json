@@ -1,0 +1,34 @@
+{
+    "name": "iamproperty/iamkey",
+    "description": "Design system Blade components",
+    "type": "library",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "James Lambert",
+            "email": "james.lambert@iamproperty.com"
+        },
+        {
+            "name": "James Fenwick",
+            "email": "james.fenwick@iamproperty.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "IAMProperty\\iamkey\\": "blade/src"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "lock": false
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "IAMProperty\\iamkey\\ServiceProvider"
+            ]
+        }
+    }
+}

@@ -1,5 +1,7 @@
 @use "sass:math";
 
+@import "../../../node_modules/bootstrap/scss/_functions.scss";
+
 @function pow($x, $n) {
   $ret: 1;
     
@@ -28,7 +30,6 @@
   $pow: pow(10, $digits);
   @return round($float * $pow)/$pow;
 }
-
 
 // converts pixels to em (context sets the current size of the font)
 @function em($pixels, $context: 16)
