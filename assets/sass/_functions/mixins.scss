@@ -121,3 +121,21 @@
   }
 
 }
+
+@mixin is($selector, $before: '', $after: '' ,$compatible:$compatible){
+
+  @if $compatible == "true" {
+    $split-values: str-split($selector, ",");
+    @each $value in $split-values {
+
+      #{$before}#{$value}#{$after} {
+        @content;
+      }
+    }
+  }
+  @else {
+    #{$before}:is(#{$selector})#{$after} {
+      @content;
+    }
+  }
+}
