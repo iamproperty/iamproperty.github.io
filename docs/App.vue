@@ -4,7 +4,7 @@
     <SVGLogo class="d-none" />
     <SVGIcons class="d-none" />
 
-    <Nav logo="key" logoText="Design system<br/>&amp; framework">
+    <Nav logo="key" logotext="Design system<br/>&amp; framework">
       <ul class="list-unstyled">
         <li><router-link :class="{'router-link-sub-active': subIsActive('/principles')}" to="/principles">Principles</router-link></li>
         <li><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
@@ -19,6 +19,7 @@
       <div class="container pt-4 d-print-none">
         <ul class="list-unstyled list-inline ms-auto d-block mb-0">
           <li class="list-inline-item me-4 ms-0 mb-2"><a :href="require('./assets/brand-guidelines.pdf')" target="_blank">Brand guidelines</a></li>
+          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/information')}" to="/information">Information</router-link></li>
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/get-started')}" to="/get-started">Get started</router-link></li>
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/accessibility')}" to="/accessibility">Accessibility</router-link></li>
           <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/examples')}" to="/examples">Examples</router-link></li>
