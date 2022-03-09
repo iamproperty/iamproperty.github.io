@@ -11,7 +11,7 @@
     } 
   } @else {
     @for $i from $n to 0 {
-      $ret: $ret/$x;
+      $ret: math.div($ret,$x);
     }
   }
   
@@ -28,29 +28,29 @@
   }
   
   $pow: pow(10, $digits);
-  @return round($float * $pow)/$pow;
+  @return math.div(round($float * $pow),$pow);
 }
 
 // converts pixels to em (context sets the current size of the font)
 @function em($pixels, $context: 16)
 {
-	@return #{$pixels/$context}em;
+	@return #{math.div($pixels,$context)}em;
 }
 
 @function rem($pixels, $context: 16)
 {
-	@return #{$pixels/$context}rem;
+	@return #{math.div($pixels,$context)}rem;
 }
 
 @function vw($pixels, $context: 16)
 {
-	$size: 16/$pixels * 100;
+	$size: math.div(16,$pixels) * 100;
 	@return #{to-fixed($size,5)}vw;
 }
 
 @function strip-px($number) {
   @if type-of($number) == 'number' and not unitless($number) {
-    @return $number/ ($number * 0 + 1);
+    @return math.div($number, ($number * 0 + 1));
   }
 
   @return $number;
