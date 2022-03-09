@@ -150,4 +150,8 @@
   --colour-underline: var(--colour-underline-theme);
   --colour-border: var(--colour-border-theme);
   --colour-brand: var(--colour-primary-theme);
+
+  .text-primary {
+    color: var(--colour-primary-theme)!important;
+  }
 }

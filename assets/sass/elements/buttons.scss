@@ -161,7 +161,7 @@
 }
 
 input:checked + .btn-tertiary:not(:hover):not(:focus):not(:active),
-input:checked + .btn-check:not(:hover):not(:focus):not(:active) {
+input:checked + .btn-tag:not(.btn-primary):not(.btn-secondary):not(:hover):not(:focus):not(:active) {
   color: var(--bs-body-bg);
 }
 
