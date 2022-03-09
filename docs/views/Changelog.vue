@@ -11,6 +11,7 @@
       <h3>Breaking changes</h3>
       <ul>
         <li>The way sass gets imported has changed to seperate out the forms files so that they dont have to be included into the email CSS.</li>
+        <li>Some new sass features are being used this might cause issues for bespoke builds using older sass versions in the build.</li>
       </ul>
 
       <h2>V2.6.3 (current version)</h2>
