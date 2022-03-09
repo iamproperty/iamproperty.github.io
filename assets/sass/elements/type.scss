@@ -96,7 +96,7 @@ p + p {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 3rem;
-  @include var(color,--colour-primary);
+  @include var(color,--colour-heading);
 }
 
 blockquote {

@@ -12,14 +12,40 @@
       #{$var}: #{$value};
     }
   }
+  --colour-body-theme: rgba(var(--colour-body-rgb), var(--alpha, 1));
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
   --alpha: var(--bs-bg-opacity,1);
   --#{$variable-prefix}gradient: #{$gradient};
   --content-max-width: #{$content-max-width};
+  --colour-brand: var(--colour-primary-theme);
 }
 
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --bs-body-bg: var(--colour-primary-theme);
+    --colour-body: white;
+    --colour-heading: white;
+    --colour-link: white;
+    --colour-hover: white;
+    --colour-active: white;
+    --colour-underline: white;
+    --colour-border: white;
+    --colour-brand: white;
+  }
+
+  body .text-primary {
+    color: white!important;
+  }
+}
+
+
 @media screen {
+  [class*="bg-"] {
+    --colour-body: var(--colour-primary-theme);
+    --colour-heading: var(--colour-primary-theme);
+    color: var(--colour-body);
+  }
   /* Override the colours when on a drark background */
   .bg-primary:not(.prevent-invert),
   .bg-dark:not(.prevent-invert),

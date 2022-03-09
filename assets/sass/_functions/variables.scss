@@ -391,23 +391,23 @@ $vars: map-merge((
 
 // #region pagination
 // Default
-$pagination-color: var(--colour-primary);
+$pagination-color: var(--colour-heading);
 $pagination-disabled-color: var(--colour-muted);
 $pagination-bg: transparent;
 $pagination-border-width: 1px;
 $pagination-border-color: var(--colour-border);
 
 // Hover and focus
-$pagination-hover-color: var(--colour-primary);
+$pagination-hover-color: var(--colour-heading);
 $pagination-hover-bg: var(--colour-muted);
 $pagination-hover-border-color: var(--colour-border);
-$pagination-focus-color: var(--colour-primary);
+$pagination-focus-color: var(--colour-hover);
 $pagination-focus-bg: var(--colour-muted);
 
 // Active
-$pagination-active-color: white;
-$pagination-active-bg: var(--colour-primary);
-$pagination-active-border-color: var(--colour-primary);
+$pagination-active-color: var(--bs-body-bg);
+$pagination-active-bg: var(--colour-heading);
+$pagination-active-border-color: var(--colour-heading);
 
 // Disabled
 $pagination-disabled-bg: $pagination-bg;

@@ -30,7 +30,7 @@
   min-width: 100%;
   min-width: Min(100%, var(--svg-width));
   font-size: rem(64);
-  @include var(color,--colour-primary);
+  @include var(color,--colour-brand);
 
   /* Restrict the logo colours so that only text-secondary can be defined */
   &[class*="text-"]:not(.text-secondary){
@@ -59,10 +59,10 @@
   }
 }
 
-a.brand,
-a .brand {
+a.brand:not(:hover):not(:focus):not(:active),
+a:not(:hover):not(:focus):not(:active) .brand {
 
-  @include var(color,--colour-primary);
+  @include var(color,--colour-brand);
 }
 
 a.brand:hover,

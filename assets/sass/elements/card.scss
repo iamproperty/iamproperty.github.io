@@ -13,7 +13,12 @@ a.card {
   }
 }
 
+.card:not(.card--simple) {
+
+  @include reset-colours();
+}
 .card {
+
   --spread: #{rem(12)};
   box-shadow: 0 2px var(--spread) 0 rgba(154,154,154,0.25);
   min-height: 100%;

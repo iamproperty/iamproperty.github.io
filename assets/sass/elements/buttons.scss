@@ -83,13 +83,21 @@
   &.btn-tag:not(.btn-primary):not(.btn-secondary) {
 
     --btn-bg: transparent;
-    --btn-bg-hover: var(--colour-primary);
-    --btn-bg-active: var(--colour-primary);
-    --btn-outline: var(--colour-primary);
-    --btn-outline-hover: var(--colour-primary);
-    --btn-text-hover:  #ffffff;
-    --btn-text-active: #ffffff;
+    --btn-bg-hover: var(--colour-heading);
+    --btn-bg-active: var(--colour-heading);
+    --btn-outline: var(--colour-heading);
+    --btn-outline-hover: var(--colour-heading);
+    --btn-outline-active: var(--colour-heading);
+    --btn-text-hover: var(--bs-body-bg);
+    --btn-text-active: var(--bs-body-bg);
+
+    &:not(:hover):not(:focus):not(:active) {
+
+      color: var(--colour-heading);
+    }
   }
+
+
 
   [class*="bg-"]:not(.prevent-invert) & {
 
@@ -151,6 +159,12 @@
     }
   }
 }
+
+input:checked + .btn-tertiary:not(:hover):not(:focus):not(:active),
+input:checked + .btn-check:not(:hover):not(:focus):not(:active) {
+  color: var(--bs-body-bg);
+}
+
 
 // #region button small and tag
 .btn-sm {
