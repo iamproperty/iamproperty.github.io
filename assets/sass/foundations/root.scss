@@ -12,6 +12,7 @@
       #{$var}: #{$value};
     }
   }
+  --bs-body-bg: white;
   --colour-body-theme: rgba(var(--colour-body-rgb), var(--alpha, 1));
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
