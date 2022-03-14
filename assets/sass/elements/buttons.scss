@@ -30,21 +30,20 @@
     text-decoration: none;
     border-radius: rem(20);
     background: transparent;
-    border-color: var(--btn-bg);
+    border-color: var(--btn-bg)!important;
     color: var(--btn-hover-text);
   }
 
   a:active &,
   a.active &,
   &:active,
-  &.active,
-  *:checked + &,
-  details[open] > &:is(summary):first-child {
+  &.active {
     
     border-radius: rem(20);
     transition: 0s;
-
+    background: transparent;
     border-color: var(--btn-text);
+    color: var(--btn-hover-text);
 
     &:focus {
       @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
@@ -66,7 +65,7 @@
   &.btn-tag:not(.btn-primary):not(.btn-secondary) {
 
     background: var(--btn-tertiary-bg);
-    border-color: var(--btn-hover-text);
+    border-color: var(--btn-hover-text) !important;
     color: var(--btn-tertiary-hover-text);
 
     &:not(:hover):not(:focus) {
@@ -76,11 +75,30 @@
       border-color: var(--btn-hover-text);
     }
   }
+
+  &.btn-tag.btn-primary {
+    --btn-bg: var(--colour-warning);
+  }
+}
+
+input:checked + .btn:not(:hover):not(:focus),
+details[open] > summary.btn:first-child {
+  
+  transition: 0s;
+  background: var(--btn-tertiary-bg);
+  border-color: var(--btn-hover-text);
+  color: var(--btn-tertiary-hover-text);
+
+  &:focus {
+    @include box-shadow($btn-focus-box-shadow, $btn-active-box-shadow);
+  }
 }
 
 input:checked + .btn-tertiary:not(:hover):not(:focus):not(:active),
 input:checked + .btn-tag:not(.btn-primary):not(.btn-secondary):not(:hover):not(:focus):not(:active) {
-  color: var(--bs-body-bg);
+  background: var(--btn-tertiary-bg);
+  border-color: var(--btn-hover-text);
+  color: var(--btn-tertiary-hover-text);
 }
 
 
