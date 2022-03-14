@@ -13,26 +13,25 @@
     }
   }
   --bs-body-bg: white;
-  --colour-body-theme: rgba(var(--colour-body-rgb), var(--alpha, 1));
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
   --alpha: var(--bs-bg-opacity,1);
   --#{$variable-prefix}gradient: #{$gradient};
   --content-max-width: #{$content-max-width};
-  --colour-brand: var(--colour-primary-theme);
+  --colour-brand: var(--colour-primary);
+
+  /* Button colours */
+  --btn-bg: var(--colour-warning);
+  --btn-text: var(--colour-primary);
+  --btn-hover-text: var(--colour-primary);
+  --btn-tertiary-bg: var(--colour-primary);
+  --btn-tertiary-hover-text: white;
 }
 
 @media screen and (prefers-color-scheme: dark) {
   :root {
-    --bs-body-bg: var(--colour-primary-theme);
-    --colour-body: white;
-    --colour-heading: white;
-    --colour-link: white;
-    --colour-hover: white;
-    //--colour-active: white;
-    --colour-underline: white;
-    --colour-border: white;
-    --colour-brand: white;
+    --bs-body-bg: var(--colour-primary);
+    @include invert-colours();
   }
 
   body .text-primary {
@@ -40,13 +39,19 @@
   }
 }
 
-
 @media screen {
-  [class*="bg-"] {
-    --colour-body: var(--colour-primary-theme);
-    --colour-heading: var(--colour-primary-theme);
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.invert-colours) {
+
+    @include reset-colours();
+
+    --colour-body: var(--colour-primary);
+    --colour-heading: var(--colour-primary);
     color: var(--colour-body);
+
+    --btn-bg: var(--colour-primary);
+    --btn-text: white;
   }
+
   /* Override the colours when on a drark background */
   .bg-primary:not(.prevent-invert),
   .bg-dark:not(.prevent-invert),
@@ -54,26 +59,20 @@
   .invert-colours {
     
     @if $compatible != "true" {
-      > * {
-
-        --colour-secondary-rgb: 255,255,255;
-        --colour-primary-rgb: 255,255,255;
-        --colour-secondary: white;
-        --colour-primary: white;
-      }
-      --colour-brand: white;
-      --colour-body: white;
-      --colour-link: white;
-      --colour-hover: white;
-      --colour-active: white;
-      --colour-heading: white;
-      --colour-underline: white;
-      --colour-border: white;
+      
+      @include invert-colours();
     }
     color: white;
   }
 
-  .bg-light:not(.prevent-invert) {
+  .bg-dark:not(.prevent-invert),
+  .bg-danger:not(.prevent-invert),
+  .invert-colours {
+    
+    --colour-underline: white;
+  }
+
+  .bg-light[class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.prevent-invert) {
     --bs-body-bg: var(--colour-light-theme);
     --colour-heading: var(--colour-dark);
     color: var(--colour-dark);

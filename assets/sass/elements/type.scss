@@ -131,7 +131,7 @@ blockquote {
   @extend %heading;
   text-decoration: underline;
   text-underline-offset: 1rem;
-  text-decoration-color: var(--colour-secondary-theme);
+  text-decoration-color: var(--colour-secondary);
   text-decoration-thickness: 0.4rem;
   margin-bottom: 2rem;
 }

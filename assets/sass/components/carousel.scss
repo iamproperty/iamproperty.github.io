@@ -91,18 +91,6 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
   }
 }
 
-
-.carousel__controls {
-
-  @include invert-colours(){
-    
-    a:not(:hover):not(:focus):not(:active):not(.active){
-
-      opacity: 0.5;
-    }
-  }
-}
-
 .carousel .carousel__controls > a:nth-child(10) ~ a {
 
   display: none;

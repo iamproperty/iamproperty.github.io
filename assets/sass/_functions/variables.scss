@@ -83,23 +83,11 @@ $theme-colors: map-merge((
 
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 
-@each $color, $value in $theme-colors-rgb {
-
-  $vars: map-merge((
-    --colour-#{$color}-rgb: #{$value}
-  ), $vars);
-}
-@each $color, $value in $theme-colors-rgb {
-
-  $vars: map-merge((
-    --colour-#{$color}: rgba(var(--colour-#{$color}-rgb),var(--alpha, 1))
-  ), $vars);
-}
 
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
-    --colour-#{$color}-theme: rgba(var(--colour-#{$color}-rgb),var(--alpha, 1))
+    --colour-#{$color}: rgba($value,var(--alpha, 1))
   ), $vars);
 }
 
@@ -110,7 +98,7 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
     @return #{map-get($theme-colors, #{$identifier})};
   }
 
-  @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-bg-opacity,1));
+  @return var(--colour-#{$identifier});
 }
 @function show-css-var-text($identifier) {
 
@@ -118,7 +106,7 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
     @return #{map-get($theme-colors, #{$identifier})};
   }
 
-  @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-text-opacity,1));
+  @return var(--colour-#{$identifier});
 }
 $utilities-bg-colors: map-loop($utilities-colors, show-css-var, "$key");
 
@@ -156,12 +144,12 @@ $non-theme-colors: map-merge((
 }
 
 $vars: map-merge((
-  "--colour-body-rgb": to-rgb($colour-body),
-  "--colour-white-rgb": to-rgb(#ffffff),
-  "--colour-black-rgb": to-rgb(#000000),
-  "--colour-body":  rgba(var(--colour-body-rgb),var(--alpha,1)),
-  "--colour-white": rgba(var(--colour-white-rgb),var(--alpha,1)),
-  "--colour-black": rgba(var(--colour-black-rgb),var(--alpha,1))
+  "--colour-body-theme":  rgba(to-rgb($colour-body),var(--alpha,1)),
+  "--colour-white-theme": rgba(to-rgb(#ffffff),var(--alpha,1)),
+  "--colour-black-theme": rgba(to-rgb(#000000),var(--alpha,1)),
+  "--colour-body":  rgba(to-rgb($colour-body),var(--alpha,1)),
+  "--colour-white": rgba(to-rgb(#ffffff),var(--alpha,1)),
+  "--colour-black": rgba(to-rgb(#000000),var(--alpha,1))
 ), $vars);
 
 $gradient: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info) 100%);

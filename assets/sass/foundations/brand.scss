@@ -37,10 +37,6 @@
     color: inherit!important;
   }
 
-  &[class*="text-"].text-secondary{
-    color: var(--colour-secondary-theme)!important;
-  }
-
   svg {
     fill: currentColor;
     height: 1em;
