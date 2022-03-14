@@ -40,7 +40,7 @@
 }
 
 @media screen {
-  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.invert-colours) {
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-black):not(.invert-colours) {
 
     @include reset-colours();
 
@@ -50,12 +50,18 @@
 
     --btn-bg: var(--colour-primary);
     --btn-text: white;
+
+    .btn-secondary {
+
+      --btn-text: var(--colour-primary);
+    }
   }
 
   /* Override the colours when on a drark background */
   .bg-primary:not(.prevent-invert),
   .bg-dark:not(.prevent-invert),
   .bg-danger:not(.prevent-invert),
+  .bg-black,
   .invert-colours {
     
     @if $compatible != "true" {

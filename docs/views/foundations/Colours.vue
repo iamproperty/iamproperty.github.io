@@ -155,8 +155,8 @@ $compatible: 'false';
     background: white;
     padding: 0.5rem;
 
-    --colour-body: var(--colour-primary-theme);
-    --colour-heading: var(--colour-primary-theme);
+    --colour-body: var(--colour-primary);
+    --colour-heading: var(--colour-primary);
     color: var(--colour-body);
   }
   span {
