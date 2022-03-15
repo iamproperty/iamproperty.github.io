@@ -7,6 +7,7 @@
       <ul>
         <li>Error page templates and error specific CSS</li>
         <li>Email templates and email specific CSS</li>
+        <li>Dark mode</li>
       </ul>
       <h3>Breaking changes</h3>
       <ul>
