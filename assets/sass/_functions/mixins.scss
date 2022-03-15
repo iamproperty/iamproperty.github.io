@@ -2,20 +2,20 @@
 
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   
-    $min: breakpoint-min($name, $breakpoints);
-    @if $min {
-      @media screen and (min-width: $min) {
-        @content;
-      }
-    }
-    @else if $name =='xs' {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media screen and (min-width: $min) {
       @content;
-    } 
-    @else {
-      @if $mobileOnly != "true" {
-      @content;
-      }
     }
+  }
+  @else if $name =='xs' {
+    @content;
+  } 
+  @else {
+    @if $mobileOnly != "true" {
+    @content;
+    }
+  }
 }
 
 // Example: @include prefix(transition, transform 1.5s, webkit ms o);
@@ -120,4 +120,22 @@
     }
   }
 
+}
+
+@mixin is($selector, $before: '', $after: '' ,$compatible:$compatible){
+
+  @if $compatible == "true" {
+    $split-values: str-split($selector, ",");
+    @each $value in $split-values {
+
+      #{$before}#{$value}#{$after} {
+        @content;
+      }
+    }
+  }
+  @else {
+    #{$before}:is(#{$selector})#{$after} {
+      @content;
+    }
+  }
 }

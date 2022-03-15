@@ -54,32 +54,13 @@ small {
   @include font-size($h6-font-size);
 }
 
-h1,
-.h1,
-h2,
-.h2 {
-  @extend %heading;
-}
-h3,
-.h3 {
-  @extend %heading;
-}
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6  {
+@include is('h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4'){
   
   @extend %heading;
 }
 
-.display-1,
-.display-2,
-.display-3,
-.display-4 {
+@include is('.display-1,.display-2, .display-3, .display-4') {
 
-  @extend %heading;
   font-size: var(--fs-display);
 }
 

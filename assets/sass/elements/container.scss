@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../_func.scss" as *;
 
 @import "../../../node_modules/bootstrap/scss/_grid.scss";
@@ -51,11 +52,6 @@
 .container {
   position: relative;
   z-index: 1;
-
-
-  &[class*="circle-pattern"] {
-    //overflow: hidden;
-  }
 
   > .circle {
 
@@ -143,7 +139,7 @@ $default-curve-width: 576!default;
   // Let vars
   $height: 100;
   $width: $default-curve-width;
-  $middle-x: $width/2;
+  $middle-x: math.div($width,2);
   $edge: 2;
   $modify: 1;
 
@@ -151,23 +147,23 @@ $default-curve-width: 576!default;
   width: #{$width}px;
   padding-top: calc(#{($height*$modify)}px + #{$padding-top}px)!important;
   margin-top: -#{($height*$modify)}px;
-  margin-left: calc(-#{($width/2)}px + 50vw);
+  margin-left: calc(-#{math.div($width,2)}px + 50vw);
   clip-path: path('#{'M0,'+($start*$modify)+' L'+($edge)+','+($start*$modify)+' C'+$middle-x+','+($point-1*$modify)+' '+$middle-x+','+($point-2*$modify)+' '+($width - $edge)+','+($end*$modify)+' L'+($width + $edge)+','+($end * $modify)+' L'+$width+',5000 L0,5000 Z'}');
 
-  padding-inline: calc((#{($width/2)}px - 50vw) + var(--container-padding-x));
+  padding-inline: calc((#{math.div($width,2)}px - 50vw) + var(--container-padding-x));
 
   @include media-breakpoint-up(sm) {
 
     // Tablet vars
     $width: 992;
-    $middle-x: $width/2;
+    $middle-x: math.div($width,2);
     $modify: 1.5;
 
     // Tablet CSS rules
     width: #{$width}px;
     padding-top: calc(#{($height*$modify)}px + #{$padding-top}px)!important;
     margin-top: -#{($height*$modify)}px;
-    margin-left: calc(-#{($width/2)}px + 50vw);
+    margin-left: calc(-#{math.div($width,2)}px + 50vw);
     clip-path: path('#{'M0,'+($start*$modify)+' L'+($edge)+','+($start*$modify)+' C'+$middle-x+','+($point-1*$modify)+' '+$middle-x+','+($point-2*$modify)+' '+($width - $edge)+','+($end*$modify)+' L'+($width + $edge)+','+($end*$modify)+' L'+$width+',5000 L0,5000 Z'}');
   }
 
@@ -175,7 +171,7 @@ $default-curve-width: 576!default;
 
     // Desktop vars
     $width: 1440;
-    $middle-x: $width/2;
+    $middle-x: math.div($width,2);
     $modify: 2;
 
     // Desktop CSS rules
@@ -183,7 +179,7 @@ $default-curve-width: 576!default;
     max-width: #{$width}px!important;
     padding-top: calc(#{($height*$modify)}px + #{$padding-top}px)!important;
     margin-top: -#{($height*$modify)}px;
-    margin-left: calc(-#{($width/2)}px + 50vw);
+    margin-left: calc(-#{math.div($width,2)}px + 50vw);
     clip-path: path('#{'M0,'+($start*$modify)+' L'+($edge)+','+($start*$modify)+' C'+$middle-x+','+($point-1*$modify)+' '+$middle-x+','+($point-2*$modify)+' '+($width - $edge)+','+($end*$modify)+' L'+($width + $edge)+','+($end*$modify)+' L'+$width+',5000 L0,5000 Z'}');
   }
 }

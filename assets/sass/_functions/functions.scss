@@ -11,7 +11,7 @@
     } 
   } @else {
     @for $i from $n to 0 {
-      $ret: $ret/$x;
+      $ret: math.div($ret,$x);
     }
   }
   
@@ -28,29 +28,29 @@
   }
   
   $pow: pow(10, $digits);
-  @return round($float * $pow)/$pow;
+  @return math.div(round($float * $pow),$pow);
 }
 
 // converts pixels to em (context sets the current size of the font)
 @function em($pixels, $context: 16)
 {
-	@return #{$pixels/$context}em;
+	@return #{math.div($pixels,$context)}em;
 }
 
 @function rem($pixels, $context: 16)
 {
-	@return #{$pixels/$context}rem;
+	@return #{math.div($pixels,$context)}rem;
 }
 
 @function vw($pixels, $context: 16)
 {
-	$size: 16/$pixels * 100;
+	$size: math.div(16,$pixels) * 100;
 	@return #{to-fixed($size,5)}vw;
 }
 
 @function strip-px($number) {
   @if type-of($number) == 'number' and not unitless($number) {
-    @return $number/ ($number * 0 + 1);
+    @return math.div($number, ($number * 0 + 1));
   }
 
   @return $number;
@@ -93,4 +93,49 @@
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
   $next: breakpoint-next($name, $breakpoints);
   @return if($next, breakpoint-min($next, $breakpoints), null);
+}
+
+// Trims the start/left of the string:
+@function str-trimStart ($str) {
+  @if (str-slice($str, 1, 1) == ' ') {
+      @return str-trimStart(str-slice($str, 2));
+  } @else {
+      @return $str;
+  }
+}
+
+// Trims the end/right of the string:
+@function str-trimEnd ($str) {
+@if (str-slice($str, str-length($str), -1) == ' ') {
+      @return str-trimEnd(str-slice($str, 1, -2));
+  } @else {
+      @return $str;
+  }
+}
+
+// Trims both the start and end of the string:
+@function str-trim ($str) {
+@return str-trimStart(str-trimEnd($str));
+}
+
+@function str-split($string, $separator) {
+  // empty array/list
+  $split-arr: ();
+  // first index of separator in string
+  $index : str-index($string, $separator);
+  // loop through string
+  @while $index != null {
+      // get the substring from the first character to the separator
+      $item: str-slice($string, 1, $index - 1);
+      // push item to array
+      $split-arr: append($split-arr, str-trim($item));
+      // remove item and separator from string
+      $string: str-slice($string, $index + 1);
+      // find new index of separator
+      $index : str-index($string, $separator);
+  }
+  // add the remaining string to list (the last item)
+  $split-arr: append($split-arr, str-trim($string));
+
+  @return $split-arr;
 }
