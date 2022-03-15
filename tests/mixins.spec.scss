@@ -36,11 +36,9 @@
     @include assert {
       @include output {
         @include var(color,--colour-primary);
-        @include var(color,--colour-primary,"",'true');
       }
       @include expect {
         color: var(--colour-primary);
-        color: rgba(var(--colour-primary-rgb), var(--alpha, 1));
       }
     }
   }

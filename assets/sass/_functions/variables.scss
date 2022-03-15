@@ -83,23 +83,11 @@ $theme-colors: map-merge((
 
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 
-@each $color, $value in $theme-colors-rgb {
-
-  $vars: map-merge((
-    --colour-#{$color}-rgb: #{$value}
-  ), $vars);
-}
-@each $color, $value in $theme-colors-rgb {
-
-  $vars: map-merge((
-    --colour-#{$color}: rgba(var(--colour-#{$color}-rgb),var(--alpha, 1))
-  ), $vars);
-}
 
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
-    --colour-#{$color}-theme: rgba(var(--colour-#{$color}-rgb),var(--alpha, 1))
+    --colour-#{$color}: rgba($value,var(--alpha, 1))
   ), $vars);
 }
 
@@ -110,7 +98,7 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
     @return #{map-get($theme-colors, #{$identifier})};
   }
 
-  @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-bg-opacity,1));
+  @return var(--colour-#{$identifier});
 }
 @function show-css-var-text($identifier) {
 
@@ -118,18 +106,19 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
     @return #{map-get($theme-colors, #{$identifier})};
   }
 
-  @return rgba(var(--colour-#{$identifier}-rgb),var(--bs-text-opacity,1));
+  @return var(--colour-#{$identifier});
 }
-$utilities-bg-colors: map-loop($utilities-colors, show-css-var, "$key");
 
-$utilities-text: map-merge(
+$utilities-colors: map-merge(
   $utilities-colors,
   (
     "black": to-rgb($black),
     "white": to-rgb($white),
     "body": to-rgb($body-color)
   )
-) !default;
+);
+
+$utilities-bg-colors: map-loop($utilities-colors, show-css-var, "$key");
 $utilities-text-colors: map-loop($utilities-text, show-css-var-text, "$key");
 
 
@@ -137,6 +126,7 @@ $utilities-text-colors: map-loop($utilities-text, show-css-var-text, "$key");
 // Colours that we want setting but not used for Bootstraps mixins, i.e. .text-primary, .bg-muted
 $non-theme-colors: ();
 $non-theme-colors: map-merge((
+  "black":      #000000,
   "white":      #ffffff,
   "muted":      $colour-muted,
   "border":           $colour-border,
@@ -156,12 +146,12 @@ $non-theme-colors: map-merge((
 }
 
 $vars: map-merge((
-  "--colour-body-rgb": to-rgb($colour-body),
-  "--colour-white-rgb": to-rgb(#ffffff),
-  "--colour-black-rgb": to-rgb(#000000),
-  "--colour-body":  rgba(var(--colour-body-rgb),var(--alpha,1)),
-  "--colour-white": rgba(var(--colour-white-rgb),var(--alpha,1)),
-  "--colour-black": rgba(var(--colour-black-rgb),var(--alpha,1))
+  "--colour-body-theme":  rgba(to-rgb($colour-body),var(--alpha,1)),
+  "--colour-white-theme": rgba(to-rgb(#ffffff),var(--alpha,1)),
+  "--colour-black-theme": rgba(to-rgb(#000000),var(--alpha,1)),
+  "--colour-body":  rgba(to-rgb($colour-body),var(--alpha,1)),
+  "--colour-white": rgba(to-rgb(#ffffff),var(--alpha,1)),
+  "--colour-black": rgba(to-rgb(#000000),var(--alpha,1))
 ), $vars);
 
 $gradient: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info) 100%);
@@ -391,23 +381,23 @@ $vars: map-merge((
 
 // #region pagination
 // Default
-$pagination-color: var(--colour-primary);
+$pagination-color: var(--colour-heading);
 $pagination-disabled-color: var(--colour-muted);
 $pagination-bg: transparent;
 $pagination-border-width: 1px;
 $pagination-border-color: var(--colour-border);
 
 // Hover and focus
-$pagination-hover-color: var(--colour-primary);
+$pagination-hover-color: var(--colour-heading);
 $pagination-hover-bg: var(--colour-muted);
 $pagination-hover-border-color: var(--colour-border);
-$pagination-focus-color: var(--colour-primary);
+$pagination-focus-color: var(--colour-hover);
 $pagination-focus-bg: var(--colour-muted);
 
 // Active
-$pagination-active-color: white;
-$pagination-active-bg: var(--colour-primary);
-$pagination-active-border-color: var(--colour-primary);
+$pagination-active-color: var(--bs-body-bg);
+$pagination-active-bg: var(--colour-heading);
+$pagination-active-border-color: var(--colour-heading);
 
 // Disabled
 $pagination-disabled-bg: $pagination-bg;

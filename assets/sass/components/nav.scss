@@ -2,7 +2,8 @@
 
 .nav {
 
-  background: white;
+  background: var(--bs-body-bg);
+
 
   &__inner {
 
@@ -115,7 +116,7 @@
   &__menu li a:not(.text-decoration-none):not(.btn),
   &__menu li .link:not(.text-decoration-none):not(.btn) {
     text-decoration: none;
-    @include var(color,--colour-primary,!important);
+    //@include var(color,--colour-primary,!important);
     display: inline-block;
     padding: rem(8) 0 rem(8) 0;
     margin-bottom: 0;

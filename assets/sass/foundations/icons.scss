@@ -3,7 +3,7 @@
 .icon {
   fill: currentColor;
   stroke: transparent;
-  @include var(color,--colour-primary-theme);
+  @include var(color,--colour-brand);
   width: rem(64);
   height: rem(64);
   display: inline-block;
@@ -42,7 +42,6 @@
   font-size: rem(64 - 16);
   height: rem(64);
   padding: 0.5rem;
-  @include var(color,--colour-primary-theme);
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   display: inline-block;

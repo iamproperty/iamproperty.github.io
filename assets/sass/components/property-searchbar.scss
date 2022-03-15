@@ -101,6 +101,9 @@
 
 // #region Heror searchbar
 .property-searchbar--hero .property-searchbar {
+
+  @include reset-colours();
+
   padding: 1rem;
   background-color: #fff;
   width: 100%;
