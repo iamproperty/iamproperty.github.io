@@ -41,3 +41,25 @@ postcss([
   fs.writeFile("public/error/css/maintenance.min.css", output.css, (err) => {  if (err) throw err; });
 });
 
+
+
+// PWA offline page
+postcss([
+  purgecss({
+    content: ['public/offline/index.html']
+  })
+]).process(mycss).then(output => {
+  
+  var offlinePage = fs.readFileSync("public/offline/index.html", "utf8");
+
+  const reg = /(?<=<\!\-\- CSS start \-\->)(.*)(?=<\!\-\- CSS end \-\->)/s;
+  const newStr = offlinePage.replace(reg, `
+  <style type="text/css">
+    ${output}
+  </style>
+`);
+
+  console.log('- PWA offline error page CSS written (embedded in the html file)');
+  fs.writeFile("public/offline/index.html",newStr, (err) => {  if (err) throw err; });
+});
+
