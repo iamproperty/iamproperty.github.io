@@ -3,11 +3,12 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.7.0 (future version)</h2>
+      <h2>V2.7.0 (current version)</h2>
       <ul>
         <li>Error page templates and error specific CSS</li>
         <li>Email templates and email specific CSS</li>
         <li>Dark mode</li>
+        <li>PWA support added</li>
       </ul>
       <h3>Breaking changes</h3>
       <ul>
@@ -15,7 +16,7 @@
         <li>Some new sass features are being used this might cause issues for bespoke builds using older sass versions in the build.</li>
       </ul>
 
-      <h2>V2.6.3 (current version)</h2>
+      <h2>V2.6.3</h2>
       <ul>
         <li>Update the default font awesome selector so it doesn't break older/existing font awesome usage.</li>
       </ul>
