@@ -1,5 +1,6 @@
-ol li,
-ul li{
+@use "../_func.scss" as *;
+
+@include is('ol, ul','','li'){
   max-width: $content-max-width;
 }
 

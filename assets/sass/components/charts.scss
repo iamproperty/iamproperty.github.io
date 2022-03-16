@@ -1,3 +1,5 @@
+@use "../_func" as *;
+
 // #region Chart Colours
 $chart-colors: ();
 $chart-colors: map-merge((
@@ -13,10 +15,19 @@ $chart-colors: map-merge((
   10: --colour-warning,
 ), $chart-colors);
 
-html {
+:root {
   
   @each $index, $value in $chart-colors {
     --colour-chart-#{$index}: var(#{$value});
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --colour-chart-1: var(--colour-dark);
+    --colour-chart-5: var(--colour-light);
+    --colour-chart-6: var(--colour-dark);
+    --colour-chart-7: var(--colour-secondary);
   }
 }
 // #endregion
@@ -507,7 +518,7 @@ html {
   }
 
   .pie foreignObject {
-    background: white;
+    background: var(--bs-body-bg);
     border-radius: 50%;
     z-index: 100;
     pointer-events: none;

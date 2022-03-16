@@ -1,47 +1,96 @@
+@use "../func" as *;
+
 :root {
+  // Print out the $vars array setup in the variables file so they can be used as CSS vars
   // Custom variable values only support SassScript inside `#{}`.
   @each $var, $value in $vars {
     #{$var}: #{$value};
   }
 
+  // Add in media query based updates to the global vars like updating the heading 1 font size
   @include media-breakpoint-up(md) {
     
     @each $var, $value in $varsMD {
       #{$var}: #{$value};
     }
   }
+
+  // Extra vars needed
+  --bs-body-bg: white;
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
-  --alpha: var(--bs-bg-opacity);
+  --alpha: var(--bs-bg-opacity,1);
   --#{$variable-prefix}gradient: #{$gradient};
   --content-max-width: #{$content-max-width};
+  --colour-brand: var(--colour-primary);
+
+  /* Button colours */
+  --btn-bg: var(--colour-warning);
+  --btn-text: var(--colour-primary);
+  --btn-hover-text: var(--colour-primary);
+  --btn-tertiary-bg: var(--colour-primary);
+  --btn-tertiary-hover-text: white;
+}
+
+// Dark mode; functional colours get updated
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --bs-body-bg: var(--colour-primary);
+    @include invert-colours();
+  }
+
+  body .text-primary {
+    color: white!important;
+  }
 }
 
 @media screen {
-  /* Override the colours when on a drark background */
+
+  // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-black):not(.invert-colours) {
+
+    @include reset-colours();
+
+    --colour-body: var(--colour-primary);
+    --colour-heading: var(--colour-primary);
+    color: var(--colour-body);
+
+    --btn-bg: var(--colour-primary);
+    --btn-text: white;
+
+    .btn-secondary {
+
+      --btn-text: var(--colour-primary);
+    }
+  }
+
+  // Slight colour adjustments on the light background to match brand guidelines
+  .bg-light[class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.prevent-invert) {
+    --bs-body-bg: var(--colour-light);
+    --colour-heading: var(--colour-dark);
+    color: var(--colour-dark);
+  }
+
+  // Override the colours when on a dark background, similiar to dark mode but on a module level
   .bg-primary:not(.prevent-invert),
   .bg-dark:not(.prevent-invert),
   .bg-danger:not(.prevent-invert),
+  .bg-black:not(.prevent-invert),
   .invert-colours {
-    > * {
-
-      --colour-secondary-rgb: 255,255,255;
-      --colour-primary-rgb: 255,255,255;
-      --colour-secondary: white;
-      --colour-primary: white;
+    
+    @if $compatible != "true" {
+      
+      @include invert-colours();
     }
-    --colour-body: white;
-    --colour-link: white;
-    --colour-hover: white;
-    --colour-active: white;
-    --colour-heading: white;
-    --colour-underline: white;
-    --colour-border: white;
     color: white;
   }
 
-  .bg-light:not(.prevent-invert) {
-    --colour-heading: var(--colour-dark);
-    color: var(--colour-dark);
+  // Only update the the colour of the underline on dark backgrounds except the primary as the secondary colour looks good on it
+  .bg-dark:not(.prevent-invert),
+  .bg-danger:not(.prevent-invert),
+  .bg-black:not(.prevent-invert),
+  .invert-colours {
+    
+    --colour-underline: white;
   }
 }

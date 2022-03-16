@@ -8,7 +8,6 @@
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/_func.scss";
 @import "../../../assets/sass/components/alert.scss";
 </style>
 
@@ -19,7 +18,7 @@ export default {
   name: 'Alert',
   props: {
     dismissible: {
-      type: String,
+      type: String|Boolean,
       required: false,
       default: false
     },

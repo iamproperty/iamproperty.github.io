@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+// Set mobile only variable so that the media query mixin doesn't print out non mobile rules
+
+@use "_func" as *;
+
+$mobileOnly: "true";
+$compatible: "true";
+
+// Update the breakpoints to just one to remove some utility classes
+$grid-breakpoints: (
+  xs: 0
+);
+
+// Simplify the grid
+$grid-columns: 4;
+
+$device-xs-width: 600;
+$device-md-width: 600;
+$container-padding-x: 32;
+$default-curve-width: 600;
+
+@import "_corefiles";
+
+:root {
+
+  --container-padding-x: #{rem(66)};
+}
+
+html {
+
+  @media (min-width: #{em(600)}) {
+    font-size: 100%;
+  }
+}
+
+.content-wrapper > * {
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.container:not(.container-fluid) {
+  max-width: 600px;
+  padding-left: #{rem(48)};
+  padding-right: #{rem(48)};
+}
+
+.table--email,
+.table--email tr,
+.table--email td {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.table--email td + td {
+  padding-left: 1rem;
+}
+
+/* card */
+.card {
+  min-height: auto;
+}
+/* utilities */
+.text-white {
+  color: white;;
+}

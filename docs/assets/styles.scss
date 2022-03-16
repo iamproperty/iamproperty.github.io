@@ -1,6 +1,11 @@
+
+@use '../../assets/sass/_func.scss' as *;
+
 // Load the SCSS framework
 $fontPath: '/fonts/';
-@import '../../assets/sass/core.scss';
+@import "../../assets/sass/_fonts.scss";
+@import '../../assets/sass/_corefiles.scss';
+@import "../../assets/sass/_forms";
 
 
 // Utility generator

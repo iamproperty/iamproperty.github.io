@@ -1,3 +1,5 @@
+@use "../_func.scss" as *;
+
 // #region Default table
 table {
   --border-width: 2px;
@@ -17,6 +19,7 @@ td,th {
   border: none;
   font-size: rem(16);
   line-height: rem(24);
+  color: var(--colour-body);
 
   &:first-child {
     padding-left: rem(8);

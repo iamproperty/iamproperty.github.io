@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/foundations">Foundations</a></li>
+        <li><a href="/templates">Templates</a></li>
       </ul>
       <h1>Print styles</h1>
       <p class="strapline">Making pages printable gives the user another way of reading the page.</p>

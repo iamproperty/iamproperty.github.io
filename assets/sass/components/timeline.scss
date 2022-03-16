@@ -1,3 +1,6 @@
+@use "sass:math";
+@use "../_func" as *;
+
 .timeline {
 
   --breakpoint:(100% - #{rem(992)});
@@ -57,12 +60,12 @@
   }
 
   > * {
-    max-width: rem((1320 / 2) - 96);
+    max-width: rem(math.div(1320,2) - 96);
     order: 1;
   }
 
   > img {
-    max-width: min(100%, #{rem((1320 / 2) - 96)});
+    max-width: min(100%, #{rem(math.div(1320,2) - 96)});
     margin-bottom: 2rem;
   }
 

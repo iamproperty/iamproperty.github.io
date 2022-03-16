@@ -12,7 +12,7 @@
     <div class="container visualtest">
       <div class="row">
         <div class="col mw-fit-content pb-4">
-          <span class="circle circle-example bg-secondary"></span>
+          <span class="circle circle-example text-secondary bg-secondary"></span>
         </div>
         <div class="col mw-fit-content pb-4">
           <span class="circle circle-example text-info bg-info"></span>

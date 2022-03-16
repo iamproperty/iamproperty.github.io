@@ -12,7 +12,6 @@
 
 
 <style lang="scss">
-@import "../../../assets/sass/_func.scss";
 @import "../../../assets/sass/components/stepper.scss";
 </style>
 

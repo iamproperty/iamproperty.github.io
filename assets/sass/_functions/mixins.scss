@@ -1,11 +1,20 @@
+@import "../../../node_modules/bootstrap/scss/mixins";
+
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  
   $min: breakpoint-min($name, $breakpoints);
   @if $min {
     @media screen and (min-width: $min) {
       @content;
     }
-  } @else {
+  }
+  @else if $name =='xs' {
     @content;
+  } 
+  @else {
+    @if $mobileOnly != "true" {
+    @content;
+    }
   }
 }
 
@@ -24,16 +33,11 @@
 // Used to make it possible to use css properties but still support IE11
 @mixin var($property, $varName, $important:"", $compatible:$compatible) {
 
-  @if $compatible == 'true' {
+  @if $compatible == "true" {
     #{$property}: map-get($vars, $varName) #{$important};
-  }
-  @else if $compatible == 'fallback' {
-      
-    #{$property}: map-get($vars, $varName) #{$important};
-    #{$property}: var(#{$varName}) #{$important};
   }
   @else {
-  #{$property}: var(#{$varName}) #{$important};
+    #{$property}: var(#{$varName}) #{$important};
   }
 }
 
@@ -43,19 +47,11 @@
   ol,
   dd,
   .body,
-  td {
+  table:not(.table--email) td {
     @content;
   }
 }
 
-@mixin invert-colours(){
-  [class*="bg-"].bg-dark:not(.prevent-invert) &,
-  [class*="bg-"].bg-danger:not(.prevent-invert) &,
-  [class*="bg-"].bg-primary:not(.prevent-invert) &,
-  .invert-colours & {
-    @content;
-  }
-}
 
 @mixin headers($includeClasses: 'false'){
   h1,
@@ -100,7 +96,7 @@
   
   $found: false;
 
-  @if $compatible == 'true' {
+  @if $compatible == "true" {
     font-size: $value;
   }
   @else {
@@ -116,4 +112,60 @@
     }
   }
 
+}
+
+@mixin is($selector, $before: '', $after: '' ,$compatible:$compatible){
+
+  @if $compatible == "true" {
+    $split-values: str-split($selector, ",");
+    @each $value in $split-values {
+
+      #{$before}#{$value}#{$after} {
+        @content;
+      }
+    }
+  }
+  @else {
+    #{$before}:is(#{$selector})#{$after} {
+      @content;
+    }
+  }
+}
+
+@mixin reset-colours($compatible:$compatible) {
+  
+  --colour-body: var(--colour-body-theme);
+  --colour-heading: var(--colour-primary);
+  --colour-link: var(--colour-link-theme);
+  --colour-hover: var(--colour-hover-theme);
+  --colour-active: var(--colour-active-theme);
+  --colour-underline: var(--colour-underline-theme);
+  --colour-border: var(--colour-border-theme);
+  --colour-brand: var(--colour-primary);
+
+  --btn-bg: var(--colour-warning);
+  --btn-text: var(--colour-primary);
+  --btn-hover-text: var(--colour-primary);
+  --btn-tertiary-bg: var(--colour-primary);
+  --btn-tertiary-hover-text: white;
+
+  .text-primary {
+    color: var(--colour-primary)!important;
+  }
+}
+
+@mixin invert-colours($compatible:$compatible) {
+  
+  --colour-body: white;
+  --colour-heading: white;
+  --colour-link: white;
+  --colour-hover: white;
+  --colour-border: white;
+  --colour-brand: white;
+
+  --btn-bg: white;
+  --btn-text: var(--colour-primary);
+  --btn-hover-text: var(--colour-heading);
+  --btn-tertiary-bg: white;
+  --btn-tertiary-hover-text: var(--colour-primary);
 }

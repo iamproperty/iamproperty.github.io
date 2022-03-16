@@ -85,6 +85,41 @@
         </div>
       </div>
     </div>
+
+    <div class="container">
+      <h2>Colour combinations</h2>
+      <div class="colour-blocks">
+        <div class="colour-block bg-primary p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+        </div>
+        <div class="colour-block bg-secondary p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+        </div>
+        <div class="colour-block bg-info p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+        </div>
+        <div class="colour-block bg-warning p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+        </div>
+        <div class="colour-block bg-danger p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+        </div>
+        <div class="colour-block bg-light p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+        </div>
+        <div class="colour-block bg-dark p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+        </div>
+      </div>
+    </div>
+
   </main>
 </template>
 
@@ -119,6 +154,10 @@ $compatible: 'false';
   .details {
     background: white;
     padding: 0.5rem;
+
+    --colour-body: var(--colour-primary);
+    --colour-heading: var(--colour-primary);
+    color: var(--colour-body);
   }
   span {
     display: block;

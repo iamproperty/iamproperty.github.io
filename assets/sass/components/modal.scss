@@ -1,3 +1,6 @@
+@use "sass:math";
+@use "../_func" as *;
+
 .modal {
   display: none;
 }
@@ -44,14 +47,14 @@
       }
 
       &.modal__dock--left {
-        right: calc(50% + #{rem(820/2)} + 1rem);
+        right: calc(50% + #{rem(math.div(820,2))} + 1rem);
         
         &:after {
           transform: rotate(-180deg);
         }
       }
       &.modal__dock--right {
-        left: calc(50% + #{rem(820/2)} + 1rem);
+        left: calc(50% + #{rem(math.div(820,2))} + 1rem);
       }
     }
   }

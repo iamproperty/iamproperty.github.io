@@ -57,8 +57,6 @@
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/_func.scss";
-//@import "../../../node_modules/bootstrap/scss/nav";
 @import "../../../assets/sass/components/nav.scss";
 </style>
 

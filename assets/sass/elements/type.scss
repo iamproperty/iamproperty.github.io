@@ -1,3 +1,18 @@
+@use "../_func.scss" as *;
+
+/* Duplicated from bootstrap reboot so that the type file will compile */
+mark {
+  padding: $mark-padding;
+  background-color: $mark-bg;
+}
+
+small {
+  @include font-size($small-font-size);
+}
+
+
+@import "../../../node_modules/bootstrap/scss/_type.scss";
+
 // #region headings
 %heading {
   clear: both;
@@ -6,38 +21,46 @@
   @include var(color,--colour-heading);
   color: var(--colour-heading,var(--colour-primary));
   display: block;
-  //margin-bottom: clamp(1rem,0.5em,0.5em);
-  //line-height: clamp(2.5rem,1em,1.2em);
   text-indent: -0.04em;
   letter-spacing: -0.01em;
+
+  margin-top: 0; // 1
+  margin-bottom: $headings-margin-bottom;
+  font-style: $headings-font-style;
+  line-height: $headings-line-height;
 }
 
-h1,
-.h1,
-h2,
+.h1 {
+  @include font-size($h1-font-size);
+}
+
 .h2 {
-  @extend %heading;
+  @include font-size($h2-font-size);
 }
-h3,
+
 .h3 {
-  @extend %heading;
+  @include font-size($h3-font-size);
 }
-h4,
-.h4,
-h5,
-.h5,
-h6,
-.h6  {
+
+.h4 {
+  @include font-size($h4-font-size);
+}
+
+.h5 {
+  @include font-size($h5-font-size);
+}
+
+.h6 {
+  @include font-size($h6-font-size);
+}
+
+@include is('h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4'){
   
   @extend %heading;
 }
 
-.display-1,
-.display-2,
-.display-3,
-.display-4 {
+@include is('.display-1,.display-2, .display-3, .display-4') {
 
-  @extend %heading;
   font-size: var(--fs-display);
 }
 
@@ -73,7 +96,7 @@ p + p {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 3rem;
-  @include var(color,--colour-primary);
+  @include var(color,--colour-heading);
 }
 
 blockquote {
@@ -108,7 +131,7 @@ blockquote {
   @extend %heading;
   text-decoration: underline;
   text-underline-offset: 1rem;
-  text-decoration-color: var(--colour-secondary-theme);
+  text-decoration-color: var(--colour-secondary);
   text-decoration-thickness: 0.4rem;
   margin-bottom: 2rem;
 }

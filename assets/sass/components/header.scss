@@ -1,3 +1,5 @@
+@use "../_func" as *;
+
 .header-banner {
   background: linear-gradient(180deg,var(--colour-secondary) 0, var(--colour-info) 100%);
   margin-bottom: rem(32);
@@ -13,6 +15,10 @@
   }
 
   &__inner {
+    
+    @include reset-colours();
+
+    color: var(--colour-body);
     background: white;
     padding: rem(32);
     margin: rem(30) 0;

@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -8,9 +7,17 @@ export const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
+    component: () => import('../views/Home.vue'),
     meta: {
-      title: 'IAM Key Design system and framework'
+      title: 'iamkey Design system and framework'
+    }
+  },
+  {
+    path: '/information',
+    component: () => import('../views/Information.vue'),
+    name: 'Information',
+    meta: {
+      title: 'Information | iamkey'
     }
   },
   {
@@ -18,7 +25,7 @@ export const routes = [
     component: () => import('../views/Audit.vue'),
     name: 'Audit',
     meta: {
-      title: 'Audit | IAM Key'
+      title: 'Audit | iamkey'
     }
   },
   {
@@ -26,7 +33,7 @@ export const routes = [
     component: () => import('../views/GetStarted.vue'),
     name: 'Get started',
     meta: {
-      title: 'Get started | IAM Key'
+      title: 'Get started | iamkey'
     }
   },
   {
@@ -34,7 +41,7 @@ export const routes = [
     component: () => import('../views/Changelog.vue'),
     name: 'Changelog',
     meta: {
-      title: 'Changelog | IAM Key'
+      title: 'Changelog | iamkey'
     }
   },
   {
@@ -42,7 +49,7 @@ export const routes = [
     component: () => import('../views/Principles.vue'),
     name: 'Principles',
     meta: {
-      title: 'Principles | IAM Key'
+      title: 'Principles | iamkey'
     }
   },
   {
@@ -50,7 +57,7 @@ export const routes = [
     component: () => import('../views/Accessibility.vue'),
     name: 'Accessibility',
     meta: {
-      title: 'Accessibility | IAM Key'
+      title: 'Accessibility | iamkey'
     }
   },
   {
@@ -61,7 +68,7 @@ export const routes = [
         path: '',
         name: 'Foundations',
         meta: {
-          title: 'Foundations | IAM Key'
+          title: 'Foundations | iamkey'
         },
         component: () => import('../views/foundations/Index.vue')
       },
@@ -69,7 +76,7 @@ export const routes = [
         path: 'logos',
         name: 'Logos',
         meta: {
-          title: 'Logos | Foundations | IAM Key'
+          title: 'Logos | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Logos.vue')
       },
@@ -77,7 +84,7 @@ export const routes = [
         path: 'colours',
         name: 'Colours',
         meta: {
-          title: 'Colours | Foundations | IAM Key'
+          title: 'Colours | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Colours.vue')
       },
@@ -85,7 +92,7 @@ export const routes = [
         path: 'fonts',
         name: 'Fonts',
         meta: {
-          title: 'Fonts | Foundations | IAM Key'
+          title: 'Fonts | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Fonts.vue')
       },
@@ -93,7 +100,7 @@ export const routes = [
         path: 'icons',
         name: 'Icons',
         meta: {
-          title: 'Icons | Foundations | IAM Key'
+          title: 'Icons | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Icons.vue')
       },
@@ -101,7 +108,7 @@ export const routes = [
         path: 'illustrations',
         name: 'Illustrations',
         meta: {
-          title: 'Illustrations | Foundations | IAM Key'
+          title: 'Illustrations | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Illustrations.vue')
       },
@@ -109,7 +116,7 @@ export const routes = [
         path: 'circles',
         name: 'Circles',
         meta: {
-          title: 'Circles | Foundations | IAM Key'
+          title: 'Circles | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Circles.vue')
       },
@@ -117,7 +124,7 @@ export const routes = [
         path: 'media',
         name: 'Media',
         meta: {
-          title: 'Media | Foundations | IAM Key'
+          title: 'Media | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Media.vue')
       },
@@ -125,7 +132,7 @@ export const routes = [
         path: 'breakpoints',
         name: 'Breakpoints',
         meta: {
-          title: 'Breakpoints | Foundations | IAM Key'
+          title: 'Breakpoints | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Breakpoints.vue')
       },
@@ -133,7 +140,7 @@ export const routes = [
         path: 'grid',
         name: 'Grid',
         meta: {
-          title: 'Grid | Foundations | IAM Key'
+          title: 'Grid | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Grid.vue')
 
@@ -142,7 +149,7 @@ export const routes = [
         path: 'utilities',
         name: 'Utility Classes',
         meta: {
-          title: 'Utility Classes | Foundations | IAM Key'
+          title: 'Utility Classes | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Utilities.vue')
       },
@@ -150,17 +157,9 @@ export const routes = [
         path: 'animation',
         name: 'Animation',
         meta: {
-          title: 'Animation | Foundations | IAM Key'
+          title: 'Animation | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Animation.vue')
-      },
-      {
-        path: 'print',
-        name: 'Print',
-        meta: {
-          title: 'Print | Foundations | IAM Key'
-        },
-        component: () => import('../views/foundations/Print.vue')
       }
     ]
   },
@@ -172,7 +171,7 @@ export const routes = [
         path: '',
         name: 'Elements',
         meta: {
-          title: 'Elements | IAM Key'
+          title: 'Elements | iamkey'
         },
         component: () => import('../views/elements/Index.vue')
       },
@@ -180,7 +179,7 @@ export const routes = [
         path: 'container',
         name: 'Container',
         meta: {
-          title: 'Container | Elements | IAM Key'
+          title: 'Container | Elements | iamkey'
         },
         component: () => import('../views/elements/Container.vue')
       },
@@ -188,7 +187,7 @@ export const routes = [
         path: 'type',
         name: 'Type',
         meta: {
-          title: 'Typography | Elements | IAM Key'
+          title: 'Typography | Elements | iamkey'
         },
         component: () => import('../views/elements/Type.vue')
       },
@@ -196,7 +195,7 @@ export const routes = [
         path: 'lists',
         name: 'Lists',
         meta: {
-          title: 'Lists | Elements | IAM Key'
+          title: 'Lists | Elements | iamkey'
         },
         component: () => import('../views/elements/Lists.vue')
       },
@@ -204,7 +203,7 @@ export const routes = [
         path: 'buttons',
         name: 'Buttons & links',
         meta: {
-          title: 'Buttons & links | Elements | IAM Key'
+          title: 'Buttons & links | Elements | iamkey'
         },
         component: () => import('../views/elements/Buttons.vue')
       },
@@ -212,7 +211,7 @@ export const routes = [
         path: 'tables',
         name: 'Tables',
         meta: {
-          title: 'Tables | Elements | IAM Key'
+          title: 'Tables | Elements | iamkey'
         },
         component: () => import('../views/elements/Tables.vue')
       },
@@ -220,7 +219,7 @@ export const routes = [
         path: 'advanced-tables',
         name: 'Advanced Tables',
         meta: {
-          title: 'Advanced Tables | Elements | IAM Key'
+          title: 'Advanced Tables | Elements | iamkey'
         },
         component: () => import('../views/elements/AdvancedTables.vue')
       },
@@ -228,7 +227,7 @@ export const routes = [
         path: 'tooltips',
         name: 'Tooltips',
         meta: {
-          title: 'Tooltips | Elements | IAM Key'
+          title: 'Tooltips | Elements | iamkey'
         },
         component: () => import('../views/elements/TooltipsDoc.vue')
       },
@@ -241,7 +240,7 @@ export const routes = [
             path: '',
             name: 'Form',
             meta: {
-              title: 'Form elements | Elements | IAM Key'
+              title: 'Form elements | Elements | iamkey'
             },
             component: () => import('../views/elements/FormIndex.vue')
           },
@@ -249,7 +248,7 @@ export const routes = [
             path: 'inputs',
             name: 'Form input field',
             meta: {
-              title: 'Form input fields | Elements | IAM Key'
+              title: 'Form input fields | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Input.vue')
           },
@@ -257,7 +256,7 @@ export const routes = [
             path: 'input-types',
             name: 'Form basic input types',
             meta: {
-              title: 'Form basic input types | Elements | IAM Key'
+              title: 'Form basic input types | Elements | iamkey'
             },
             component: () => import('../views/elements/form/InputTypes.vue')
           },
@@ -265,7 +264,7 @@ export const routes = [
             path: 'textarea',
             name: 'Form textarea',
             meta: {
-              title: 'Form textarea | Elements | IAM Key'
+              title: 'Form textarea | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Textarea.vue')
           },
@@ -273,7 +272,7 @@ export const routes = [
             path: 'date',
             name: 'Form date and time pickers',
             meta: {
-              title: 'Form date and time pickers | Elements | IAM Key'
+              title: 'Form date and time pickers | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Date.vue')
           },
@@ -281,7 +280,7 @@ export const routes = [
             path: 'range',
             name: 'Form range field',
             meta: {
-              title: 'Form range field | Elements | IAM Key'
+              title: 'Form range field | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Range.vue')
           },
@@ -289,7 +288,7 @@ export const routes = [
             path: 'file',
             name: 'Form file upload field',
             meta: {
-              title: 'Form file upload field | Elements | IAM Key'
+              title: 'Form file upload field | Elements | iamkey'
             },
             component: () => import('../views/elements/form/File.vue')
           },
@@ -297,7 +296,7 @@ export const routes = [
             path: 'select',
             name: 'Form select field',
             meta: {
-              title: 'Form select field | Elements | IAM Key'
+              title: 'Form select field | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Select.vue')
           },
@@ -305,7 +304,7 @@ export const routes = [
             path: 'checkbox',
             name: 'Checkbox field',
             meta: {
-              title: 'Checkbox field | Elements | IAM Key'
+              title: 'Checkbox field | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Checkbox.vue')
           },
@@ -313,7 +312,7 @@ export const routes = [
             path: 'radio',
             name: 'Radio field',
             meta: {
-              title: 'Radio field | Elements | IAM Key'
+              title: 'Radio field | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Radio.vue')
           },
@@ -321,7 +320,7 @@ export const routes = [
             path: 'toggle',
             name: 'Toggle buttons',
             meta: {
-              title: 'Toggle buttons | Elements | IAM Key'
+              title: 'Toggle buttons | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Toggle.vue')
           },
@@ -329,7 +328,7 @@ export const routes = [
             path: 'tags',
             name: 'Pill tags',
             meta: {
-              title: 'Pill tags | Elements | IAM Key'
+              title: 'Pill tags | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Tags.vue')
           },
@@ -337,20 +336,27 @@ export const routes = [
             path: 'validation',
             name: 'Form validation',
             meta: {
-              title: 'Form validation | Elements | IAM Key'
+              title: 'Form validation | Elements | iamkey'
             },
             component: () => import('../views/elements/form/Validation.vue')
           }
         ]
       },
-      
+      {
+        path: 'card',
+        name: 'Card',
+        meta: {
+          title: 'Card | Components | iamkey'
+        },
+        component: () => import('../views/elements/CardDoc.vue')
+      }
     ]
   },
   {
     path: '/components',
     name: 'Components',
     meta: {
-      title: 'Components | IAM Key'
+      title: 'Components | iamkey'
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -366,7 +372,7 @@ export const routes = [
         path: 'accordion',
         name: 'Accordion',
         meta: {
-          title: 'Accordion | Components | IAM Key'
+          title: 'Accordion | Components | iamkey'
         },
         component: () => import('../views/components/AccordionDoc.vue')
       },
@@ -374,7 +380,7 @@ export const routes = [
         path: 'alert',
         name: 'Alert',
         meta: {
-          title: 'Alert | Components | IAM Key'
+          title: 'Alert | Components | iamkey'
         },
         component: () => import('../views/components/AlertDoc.vue')
       },
@@ -382,23 +388,15 @@ export const routes = [
         path: 'banner',
         name: 'Banner',
         meta: {
-          title: 'Banner | Components | IAM Key'
+          title: 'Banner | Components | iamkey'
         },
         component: () => import('../views/components/BannerDoc.vue')
-      },
-      {
-        path: 'card',
-        name: 'Card',
-        meta: {
-          title: 'Card | Components | IAM Key'
-        },
-        component: () => import('../views/components/CardDoc.vue')
       },
       {
         path: 'card-deck',
         name: 'Card Deck',
         meta: {
-          title: 'Card Deck | Components | IAM Key'
+          title: 'Card Deck | Components | iamkey'
         },
         component: () => import('../views/components/CardDeckDoc.vue')
       },
@@ -406,7 +404,7 @@ export const routes = [
         path: 'carousel',
         name: 'Carousel',
         meta: {
-          title: 'Carousel | Components | IAM Key'
+          title: 'Carousel | Components | iamkey'
         },
         component: () => import('../views/components/CarouselDoc.vue')
       },
@@ -414,7 +412,7 @@ export const routes = [
         path: 'drawer',
         name: 'Drawer',
         meta: {
-          title: 'Drawer | Components | IAM Key'
+          title: 'Drawer | Components | iamkey'
         },
         component: () => import('../views/components/DrawerDoc.vue')
       },
@@ -422,7 +420,7 @@ export const routes = [
         path: 'charts',
         name: 'Charts',
         meta: {
-          title: 'Charts | Components | IAM Key'
+          title: 'Charts | Components | iamkey'
         },
         component: () => import('../views/components/ChartsDoc.vue')
       },
@@ -430,7 +428,7 @@ export const routes = [
         path: 'header',
         name: 'Header',
         meta: {
-          title: 'Header | Components | IAM Key'
+          title: 'Header | Components | iamkey'
         },
         component: () => import('../views/components/Header.vue')
       },
@@ -438,7 +436,7 @@ export const routes = [
         path: 'modal',
         name: 'Modal',
         meta: {
-          title: 'Modal | Components | IAM Key'
+          title: 'Modal | Components | iamkey'
         },
         component: () => import('../views/components/ModalDoc.vue')
       },
@@ -446,7 +444,7 @@ export const routes = [
         path: 'nav',
         name: 'Nav',
         meta: {
-          title: 'Nav | Components | IAM Key'
+          title: 'Nav | Components | iamkey'
         },
         component: () => import('../views/components/NavDoc.vue')
       },
@@ -454,7 +452,7 @@ export const routes = [
         path: 'property-searchbar',
         name: 'Property Searchbar',
         meta: {
-          title: 'Property Searchbar | Components | IAM Key'
+          title: 'Property Searchbar | Components | iamkey'
         },
         component: () => import('../views/components/PropertySearchbarDoc.vue')
       },
@@ -462,7 +460,7 @@ export const routes = [
         path: 'snapshot',
         name: 'Snapshot',
         meta: {
-          title: 'Snapshot | Components | IAM Key'
+          title: 'Snapshot | Components | iamkey'
         },
         component: () => import('../views/components/SnapshotDoc.vue')
       },
@@ -470,7 +468,7 @@ export const routes = [
         path: 'stepper',
         name: 'Stepper',
         meta: {
-          title: 'Stepper | Components | IAM Key'
+          title: 'Stepper | Components | iamkey'
         },
         component: () => import('../views/components/StepperDoc.vue')
       },
@@ -478,7 +476,7 @@ export const routes = [
         path: 'tabs',
         name: 'Tabs',
         meta: {
-          title: 'Tabs | Components | IAM Key'
+          title: 'Tabs | Components | iamkey'
         },
         component: () => import('../views/components/TabsDoc.vue')
       },
@@ -486,7 +484,7 @@ export const routes = [
         path: 'testimonial',
         name: 'Testimonial',
         meta: {
-          title: 'Testimonial | Components | IAM Key'
+          title: 'Testimonial | Components | iamkey'
         },
         component: () => import('../views/components/TestimonialDoc.vue')
       },
@@ -494,9 +492,51 @@ export const routes = [
         path: 'timeline',
         name: 'Timeline',
         meta: {
-          title: 'Timeline | Components | IAM Key'
+          title: 'Timeline | Components | iamkey'
         },
         component: () => import('../views/components/TimelineDoc.vue')
+      }
+    ]
+  },
+  {
+    path: '/templates',
+    name: 'Templates',
+    meta: {
+      title: 'Templates | iamkey'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "templates" */ '../views/Templates.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/templates/Index.vue')
+      },
+      {
+        path: 'email',
+        name: 'Email Template',
+        meta: {
+          title: 'Email Template | Components | iamkey'
+        },
+        component: () => import('../views/templates/EmailDoc.vue')
+      },
+      {
+        path: 'print',
+        name: 'Print Template',
+        meta: {
+          title: 'Print Template | Components | iamkey'
+        },
+        component: () => import('../views/templates/PrintDoc.vue')
+      },
+      {
+        path: 'error-pages',
+        name: 'Error page templates',
+        meta: {
+          title: 'Error page templates | Template | iamkey'
+        },
+        component: () => import('../views/templates/ErrorDoc.vue')
       }
     ]
   },
@@ -504,7 +544,7 @@ export const routes = [
     path: '/examples',
     name: 'Examples',
     meta: {
-      title: 'Examples | IAM Key'
+      title: 'Examples | iamkey'
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -550,7 +590,7 @@ export const routes = [
     path: '/standalone',
     name: 'Standalone',
     meta: {
-      title: 'Standalone | IAM Key'
+      title: 'Standalone | iamkey'
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -566,7 +606,7 @@ export const routes = [
         path: 'navbar',
         name: "navbar example",
         meta: {
-          title: 'Navbar example| IAM Key'
+          title: 'Navbar example| iamkey'
         },
         component: () => import('../views/standalone/Navbar.vue')
       },
@@ -574,7 +614,7 @@ export const routes = [
         path: 'iamsold-homepage',
         name: "iam sold homepage",
         meta: {
-          title: 'iam sold | IAM Key'
+          title: 'iam sold | iamkey'
         },
         component: () => import('../views/standalone/IamsoldHomepage.vue')
       },
@@ -582,7 +622,7 @@ export const routes = [
         path: 'iamsold-admin',
         name: "iam sold admin",
         meta: {
-          title: 'iam sold | IAM Key'
+          title: 'iam sold | iamkey'
         },
         component: () => import('../views/standalone/IamsoldAdmin.vue')
       },
@@ -590,7 +630,7 @@ export const routes = [
         path: 'completions-dashboard',
         name: "Completions dashboard",
         meta: {
-          title: 'Completions dashboard | IAM Key'
+          title: 'Completions dashboard | iamkey'
         },
         component: () => import('../views/standalone/CompletionsDashboard.vue')
       },
@@ -598,7 +638,7 @@ export const routes = [
         path: 'print',
         name: "Print",
         meta: {
-          title: 'Print | IAM Key'
+          title: 'Print | iamkey'
         },
         component: () => import('../views/standalone/PrintExample.vue')
       },
@@ -606,7 +646,7 @@ export const routes = [
         path: 'print-single',
         name: "Single page Print",
         meta: {
-          title: 'Single page Print | IAM Key'
+          title: 'Single page Print | iamkey'
         },
         component: () => import('../views/standalone/PrintExampleSingle.vue')
       }
@@ -616,7 +656,7 @@ export const routes = [
     path: '/articles',
     name: 'Articles',
     meta: {
-      title: 'Articles | IAM Key'
+      title: 'Articles | iamkey'
     },
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -632,7 +672,7 @@ export const routes = [
         path: 'flexbox-charts',
         name: "Flexbox Charts",
         meta: {
-          title: 'Flexbox Charts | IAM Key'
+          title: 'Flexbox Charts | iamkey'
         },
         component: () => import('../views/articles/FlexboxCharts.vue')
       }
@@ -643,7 +683,7 @@ export const routes = [
     name: 'Page not found',
     component: () => import('../views/PageNotFound.vue'),
     meta: {
-      title: 'Page not Found | IAM Key'
+      title: 'Page not Found | iamkey'
     }
   }
 ]

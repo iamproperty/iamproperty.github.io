@@ -87,9 +87,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../../assets/sass/_func.scss";
-@import "../../../assets/sass/components/accordion.scss";
-
+@use "../../../assets/sass/_func.scss" as *;
 
 .container-example {
   width: calc(100% + #{rem($container-padding-x)} + #{rem($container-padding-x)});
