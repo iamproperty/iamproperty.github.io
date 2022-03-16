@@ -5,7 +5,43 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+
+    <!-- Client Hints -->
+    <!-- FUTURE USE <meta http-equiv="Accept-CH" content="DPR,Width,Viewport-Width" /> -->
+    <!-- Disable automatic detection and formatting of possible phone numbers -->
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Basic SEO -->
     <title>IAM Key Design system and framework</title>
+    <meta name="description" content="The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great digital products." />
+
+    <!-- APP Manifest -->
+    <link rel="manifest" href="<%= BASE_URL %>manifest.json" />
+
+    <!-- Apple -->
+    <link rel="apple-touch-icon" href="<%= BASE_URL %>applie-touch-icon.png" /><!-- 180 x 180 -->
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Windows -->
+    <meta name="application-name" content="iamkey design system and framework" />
+    <meta name="msapplication-TileColor" content="#00313c" />
+    <meta name="msapplication-TileImage" content="<%= BASE_URL %>android-chrome-192x192.png" />
+
+    <!-- Android -->
+    <meta name="theme-color" content="#00313c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Duplicate basic Meta for Open Graph -->
+    <meta property="og:title" content="iamkey design system and framework" />
+    <meta property="og:description" content="The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great digital products." />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="iamkey design system and framework" />
+    <meta name="twitter:creator" content="iamproperty" />
+
+    <!-- <meta property="og:image" content="" />< !-- 1200 x 630 for large image - 600 x 314 for small image -->
 
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/light.css" integrity="sha384-zCLzLBaV9kpBZtwZ72K00PI4UjqXZhrzMeVtYGOOHqL2N5PXSVw2MtJjaWTKYDHW" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-ig3RKyui4sECvuz+WE8EmFYy7sjRvEvy82mmhfV7ljRieb+0f8eEZKxHv2KC0+io" crossorigin="anonymous">
@@ -21,5 +57,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
     <!-- and it's easy to individually load additional languages -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/languages/go.min.js"></script>
+
+
+    <script>
+      //make sure that Service Workers are supported.
+      if (navigator.serviceWorker) {
+      navigator.serviceWorker.register('<%= BASE_URL %>sw.js', {scope: '/'})
+      .then(function (registration) {
+        console.log(registration);
+        console.log(Date.now());
+      })
+      .catch(function (e) {
+        console.error(e);
+      })
+      } else {
+        console.log('Service Worker is not supported in this browser.');
+      }
+    </script>
+
   </body>
 </html>
