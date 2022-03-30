@@ -62,7 +62,7 @@ Vue.use(shared)
 
 Vue.config.productionTip = false
 
-let template = window.location.pathname.startsWith('/standalone') ? Standalone : App;
+let template = window.location.pathname.startsWith('/standalone') || window.location.pathname.startsWith('/prototype') ? Standalone : App;
 
 new Vue({
   router,
