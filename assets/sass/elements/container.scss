@@ -56,7 +56,7 @@
   > .circle {
 
     position: absolute;
-    z-index: -1;
+    z-index: var(--index-below);
     border-width: 3px;
   }
 

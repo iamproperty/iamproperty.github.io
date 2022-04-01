@@ -22,7 +22,7 @@ abbr[title],
 @mixin tooltip(){
 
   display: block;
-  z-index: 2;
+  z-index: var(--index-above);
   position: absolute;
   top: calc(100% + 0.25rem);
   left: 50%;

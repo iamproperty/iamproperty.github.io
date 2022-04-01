@@ -426,3 +426,28 @@ $accordion-body-padding-y: 1rem;
 $accordion-body-padding-x: var(--accordion-indent);
 
 // #endregion
+
+// #region Z-index
+
+
+$vars: map-merge((
+  "--index-below":  -1,
+  "--index-base":  0,
+  "--index-focus":  2,
+  "--index-above":  10,
+  "--index-floating":  100,
+  "--index-menu":  200,
+  "--index-overlay":  1000,
+), $vars);
+
+
+$zindex-dropdown:                   var(--index-above);
+$zindex-sticky:                     var(--index-floating);
+$zindex-fixed:                      var(--index-floating);
+$zindex-offcanvas-backdrop:         var(--index-menu);
+$zindex-offcanvas:                  var(--index-menu);
+$zindex-modal-backdrop:             var(--index-overlay);
+$zindex-modal:                      var(--index-overlay);
+$zindex-popover:                    var(--index-above);
+$zindex-tooltip:                    var(--index-above);
+// #endregion
