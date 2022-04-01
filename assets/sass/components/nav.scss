@@ -2,7 +2,8 @@
 
 .nav {
 
-  background: white;
+  background: var(--bs-body-bg);
+
 
   &__inner {
 
@@ -115,7 +116,7 @@
   &__menu li a:not(.text-decoration-none):not(.btn),
   &__menu li .link:not(.text-decoration-none):not(.btn) {
     text-decoration: none;
-    @include var(color,--colour-primary,!important);
+    //@include var(color,--colour-primary,!important);
     display: inline-block;
     padding: rem(8) 0 rem(8) 0;
     margin-bottom: 0;
@@ -227,7 +228,7 @@
   padding-top: 1px;
   left: 0;
   width: 100%;
-  z-index: 99999;
+  z-index: var(--index-menu);
 
   &.is-stuck {
 
@@ -250,7 +251,7 @@ nav + main > *:first-child {
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 99999;
+      z-index: var(--index-menu);
     }
   }
 }
@@ -449,7 +450,7 @@ nav + main > *:first-child {
     details {
       @include media-breakpoint-up(md) {
 
-        z-index: 1;
+        z-index: var(--index-above);
         padding: 0 1rem;
         margin-left: -1rem;
         margin-right: -1rem;
@@ -585,7 +586,7 @@ nav + main > *:first-child {
       bottom: 0;
       right: 0;
       margin: 0;
-      z-index: 1;
+      z-index: var(--index-focus);
       border-color: transparent;
       background: transparent;
       padding: 0.85rem 0rem;

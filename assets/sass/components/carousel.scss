@@ -91,18 +91,6 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
   }
 }
 
-
-.carousel__controls {
-
-  @include invert-colours(){
-    
-    a:not(:hover):not(:focus):not(:active):not(.active){
-
-      opacity: 0.5;
-    }
-  }
-}
-
 .carousel .carousel__controls > a:nth-child(10) ~ a {
 
   display: none;
@@ -178,20 +166,10 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
 
   // Make sure that we dont just have one pip showing
   .carousel .carousel__controls.cols-sm-2 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-sm-3 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-sm-3 > a:first-child:nth-last-child(3),
-  .carousel .carousel__controls.cols-sm-4 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-sm-4 > a:first-child:nth-last-child(3),
-  .carousel .carousel__controls.cols-sm-4 > a:first-child:nth-last-child(4),
-  .carousel .carousel__controls.cols-sm-5 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-sm-5 > a:first-child:nth-last-child(3),
-  .carousel .carousel__controls.cols-sm-5 > a:first-child:nth-last-child(4),
-  .carousel .carousel__controls.cols-sm-5 > a:first-child:nth-last-child(5),
-  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(3),
-  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(4),
-  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(5),
-  .carousel .carousel__controls.cols-sm-6 > a:first-child:nth-last-child(6) {
+  .carousel .carousel__controls.cols-sm-3 > :is(a:first-child:nth-last-child(2), a:first-child:nth-last-child(3)),
+  .carousel .carousel__controls.cols-sm-4 > :is(a:first-child:nth-last-child(2), a:first-child:nth-last-child(3), a:first-child:nth-last-child(4)),
+  .carousel .carousel__controls.cols-sm-5 > :is(a:first-child:nth-last-child(2),a:first-child:nth-last-child(3),a:first-child:nth-last-child(4),a:first-child:nth-last-child(5)),
+  .carousel .carousel__controls.cols-sm-6 > :is(a:first-child:nth-last-child(2),a:first-child:nth-last-child(3),a:first-child:nth-last-child(4),a:first-child:nth-last-child(5),a:first-child:nth-last-child(6)) {
     display: none;
   }
 
@@ -237,20 +215,10 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
 
   // Make sure that we dont just have one pip showing
   .carousel .carousel__controls.cols-md-2 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-md-3 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-md-3 > a:first-child:nth-last-child(3),
-  .carousel .carousel__controls.cols-md-4 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-md-4 > a:first-child:nth-last-child(3),
-  .carousel .carousel__controls.cols-md-4 > a:first-child:nth-last-child(4),
-  .carousel .carousel__controls.cols-md-5 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-md-5 > a:first-child:nth-last-child(3),
-  .carousel .carousel__controls.cols-md-5 > a:first-child:nth-last-child(4),
-  .carousel .carousel__controls.cols-md-5 > a:first-child:nth-last-child(5),
-  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(3),
-  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(4),
-  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(5),
-  .carousel .carousel__controls.cols-md-6 > a:first-child:nth-last-child(6) {
+  .carousel .carousel__controls.cols-md-3 > :is(a:first-child:nth-last-child(2), a:first-child:nth-last-child(3)),
+  .carousel .carousel__controls.cols-md-4 > :is(a:first-child:nth-last-child(2), a:first-child:nth-last-child(3), a:first-child:nth-last-child(4)),
+  .carousel .carousel__controls.cols-md-5 > :is(a:first-child:nth-last-child(2),a:first-child:nth-last-child(3),a:first-child:nth-last-child(4),a:first-child:nth-last-child(5)),
+  .carousel .carousel__controls.cols-md-6 > :is(a:first-child:nth-last-child(2),a:first-child:nth-last-child(3),a:first-child:nth-last-child(4),a:first-child:nth-last-child(5),a:first-child:nth-last-child(6)) {
     display: none;
   }
 

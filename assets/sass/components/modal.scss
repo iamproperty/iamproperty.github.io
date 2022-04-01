@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../_func" as *;
 
 .modal {
@@ -12,7 +13,7 @@
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.25);
-  z-index: 99999;
+  z-index: var(--index-overlay);
   border: none;
   overscroll-behavior: contain;
 
@@ -33,7 +34,7 @@
     @include media-breakpoint-up(md) {
       display: block;
       position: absolute;
-      z-index: 1;
+      z-index: var(--index-focus);
       top: 50%;
       transform: translate(0,-50%);
       overflow: hidden;
@@ -46,14 +47,14 @@
       }
 
       &.modal__dock--left {
-        right: calc(50% + #{rem(820/2)} + 1rem);
+        right: calc(50% + #{rem(math.div(820,2))} + 1rem);
         
         &:after {
           transform: rotate(-180deg);
         }
       }
       &.modal__dock--right {
-        left: calc(50% + #{rem(820/2)} + 1rem);
+        left: calc(50% + #{rem(math.div(820,2))} + 1rem);
       }
     }
   }
@@ -95,7 +96,7 @@
     right: 0;    
     margin-top: -0.75rem;
     margin-right: -0.75rem;
-    z-index: 99;
+    z-index: var(--index-focus);
 
     &:not(:hover):not(:focus):not(:active){
       background: white;

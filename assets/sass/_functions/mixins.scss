@@ -2,20 +2,20 @@
 
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   
-    $min: breakpoint-min($name, $breakpoints);
-    @if $min {
-      @media screen and (min-width: $min) {
-        @content;
-      }
-    }
-    @else if $name =='xs' {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media screen and (min-width: $min) {
       @content;
-    } 
-    @else {
-      @if $mobileOnly != "true" {
-      @content;
-      }
     }
+  }
+  @else if $name =='xs' {
+    @content;
+  } 
+  @else {
+    @if $mobileOnly != "true" {
+    @content;
+    }
+  }
 }
 
 // Example: @include prefix(transition, transform 1.5s, webkit ms o);
@@ -52,14 +52,6 @@
   }
 }
 
-@mixin invert-colours(){
-  [class*="bg-"].bg-dark:not(.prevent-invert) &,
-  [class*="bg-"].bg-danger:not(.prevent-invert) &,
-  [class*="bg-"].bg-primary:not(.prevent-invert) &,
-  .invert-colours & {
-    @content;
-  }
-}
 
 @mixin headers($includeClasses: 'false'){
   h1,
@@ -120,4 +112,60 @@
     }
   }
 
+}
+
+@mixin is($selector, $before: '', $after: '' ,$compatible:$compatible){
+
+  @if $compatible == "true" {
+    $split-values: str-split($selector, ",");
+    @each $value in $split-values {
+
+      #{$before}#{$value}#{$after} {
+        @content;
+      }
+    }
+  }
+  @else {
+    #{$before}:is(#{$selector})#{$after} {
+      @content;
+    }
+  }
+}
+
+@mixin reset-colours($compatible:$compatible) {
+  
+  --colour-body: var(--colour-body-theme);
+  --colour-heading: var(--colour-primary);
+  --colour-link: var(--colour-link-theme);
+  --colour-hover: var(--colour-hover-theme);
+  --colour-active: var(--colour-active-theme);
+  --colour-underline: var(--colour-underline-theme);
+  --colour-border: var(--colour-border-theme);
+  --colour-brand: var(--colour-primary);
+
+  --btn-bg: var(--colour-warning);
+  --btn-text: var(--colour-primary);
+  --btn-hover-text: var(--colour-primary);
+  --btn-tertiary-bg: var(--colour-primary);
+  --btn-tertiary-hover-text: white;
+
+  .text-primary {
+    color: var(--colour-primary)!important;
+  }
+}
+
+@mixin invert-colours($compatible:$compatible) {
+  
+  --colour-body: white;
+  --colour-heading: white;
+  --colour-link: white;
+  --colour-hover: white;
+  --colour-border: white;
+  --colour-brand: white;
+
+  --btn-bg: white;
+  --btn-text: var(--colour-primary);
+  --btn-hover-text: var(--colour-heading);
+  --btn-tertiary-bg: white;
+  --btn-tertiary-hover-text: var(--colour-primary);
 }

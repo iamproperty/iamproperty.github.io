@@ -22,13 +22,14 @@ abbr[title],
 @mixin tooltip(){
 
   display: block;
-  z-index: 2;
+  z-index: var(--index-above);
   position: absolute;
   top: calc(100% + 0.25rem);
   left: 50%;
   min-width: max(120%, #{rem(100)});
   transform: translate(-50%,0);
-  background: #eee;
+  background: var(--bs-body-bg);
+  color: inherit;
   padding: 0.5em;
   border-radius: 3px;
   box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.3);

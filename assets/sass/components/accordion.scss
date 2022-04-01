@@ -20,7 +20,7 @@
 .accordion-button {
 
   padding: $accordion-button-padding-y var(--accordion-right-padding) $accordion-button-padding-y $accordion-button-padding-x;
-  color: $accordion-button-color;
+  color: var(--colour-heading);
   text-align: left; // Reset button style
   background-color: $accordion-button-bg;
   overflow-anchor: none;
@@ -83,18 +83,18 @@
   }
 
   &:hover {
-    z-index: 2;
+    z-index: var(--index-focus);
   }
 
   &:focus {
-    z-index: 3;
+    z-index: var(--index-focus);
     border-color: $accordion-button-focus-border-color;
     outline: 0;
     box-shadow: $accordion-button-focus-box-shadow;
   }
 
   [open] > summary > & {
-    color: $accordion-button-active-color;
+    color: var(--colour-heading);
     background-color: $accordion-button-active-bg;
     
     &::after {

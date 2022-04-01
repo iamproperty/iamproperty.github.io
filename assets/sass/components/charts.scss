@@ -15,10 +15,19 @@ $chart-colors: map-merge((
   10: --colour-warning,
 ), $chart-colors);
 
-html {
+:root {
   
   @each $index, $value in $chart-colors {
     --colour-chart-#{$index}: var(#{$value});
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --colour-chart-1: var(--colour-dark);
+    --colour-chart-5: var(--colour-light);
+    --colour-chart-6: var(--colour-dark);
+    --colour-chart-7: var(--colour-secondary);
   }
 }
 // #endregion
@@ -116,7 +125,6 @@ html {
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column-reverse;
-    z-index: 2;
     width: 0;
 
     .axis__point {
@@ -170,7 +178,7 @@ html {
     width: 100%;
     height: calc(100% - 2rem);
     margin-bottom: 2rem;
-    z-index: -1;
+    z-index: var(--index-below);
     display: flex;
     flex-direction: column-reverse;
 
@@ -305,12 +313,9 @@ html {
           }
         }
 
-        &:hover {
-          //z-index: 1;
-        }
         &:hover span {
           opacity: 1;
-          z-index: 99;
+          z-index: var(--index-above);
         }
       }
 
@@ -429,7 +434,7 @@ html {
           left: 50%;
           height: 100%;
           margin-left: -1px;
-          z-index: 0;
+          z-index: var(--index-below);
         }
       }
     }
@@ -444,7 +449,7 @@ html {
     width: 100%;
     height: calc(100% - 2rem);
     pointer-events: none;
-    z-index: -1;
+    z-index: var(--index-below)
   }
 
   .pie {
@@ -509,9 +514,9 @@ html {
   }
 
   .pie foreignObject {
-    background: white;
+    background: var(--bs-body-bg);
     border-radius: 50%;
-    z-index: 100;
+    z-index: var(--index-focus);
     pointer-events: none;
     display: none;
     padding: 1rem;

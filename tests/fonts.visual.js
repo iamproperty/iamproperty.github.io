@@ -4,6 +4,8 @@ expect.extend({ toMatchImageSnapshot })
 
 const pkg = require('../package.json');
 
+const visualtest = require('./_visualtest.js');
+
 describe(`Body font class`, () => {
   it(`should use the correct font`, async() => {
 
@@ -29,7 +31,7 @@ describe(`Heading font class`, () => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     await page.goto(pkg.localURL+'/foundations/fonts#visualtest')
-    
+
     await page.setViewport({ width: 375, height: 800 })
 
     const fontFamily = await page.$eval(
@@ -42,26 +44,4 @@ describe(`Heading font class`, () => {
   });
 })
 
-describe(`Fonts page`, () => {
-
-  it(`It should render correctly.`, async(done) => {
-
-    const browser = await puppeteer.launch()
-    const page = await browser.newPage()
-    await page.goto(pkg.localURL+'/foundations/fonts#visualtest')
-    
-    await page.setViewport({ width: 375, height: 800 })
-    const mobileImage = await page.screenshot({ fullPage: true });
-    expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
-
-    await page.setViewport({ width: 768, height: 800 })
-    const tabletImage = await page.screenshot({ fullPage: true });
-    expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
-
-    await page.setViewport({ width: 1440, height: 800 })
-    const desktopImage = await page.screenshot({ fullPage: true });
-    expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
-
-    done()
-  });
-});
+visualtest.testPages(`Fonts page`,'/foundations/fonts#visualtest');
