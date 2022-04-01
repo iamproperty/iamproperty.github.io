@@ -23,7 +23,8 @@
     padding: rem(32);
     margin: rem(30) 0;
     position: relative;
-    z-index: 2;
+    z-index: var(--index-above);
+    
     @include media-breakpoint-up(md) {
       max-width: rem(600);
       margin: rem(112) 0 rem(80) 0;

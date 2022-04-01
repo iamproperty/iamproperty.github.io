@@ -26,7 +26,7 @@
   &--fixed {
     position: fixed;
     padding-top: 2rem;
-    z-index: 99999;
+    z-index: var(--index-floating);
     left: 50%;
     transform: translate(-50%,0);
     bottom: 0;
@@ -47,7 +47,7 @@
     width: 1rem;
     padding:0;
     border: none;
-    z-index: $stretched-link-z-index + 1;
+    z-index: var(--index-focus);
     background: currentColor;
     mask-image: var(--icon-close);
     mask-size: 100%;
@@ -58,7 +58,7 @@
 
 .alert__holder {
   position: fixed;
-  z-index: 999999;
+  z-index: var(--index-floating);
   bottom: 0;
   left: 0;
   width: 100%;

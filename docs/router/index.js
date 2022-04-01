@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 export const routes = [
-  {
+  { /* Home */
     path: '/',
     name: 'Home',
     component: () => import('../views/Home.vue'),
@@ -60,7 +60,7 @@ export const routes = [
       title: 'Accessibility | iamkey'
     }
   },
-  {
+  { /* Foundations */
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
     children: [
@@ -152,6 +152,14 @@ export const routes = [
           title: 'Utility Classes | Foundations | iamkey'
         },
         component: () => import('../views/foundations/Utilities.vue')
+      },
+      {
+        path: 'z-index',
+        name: 'Z-index',
+        meta: {
+          title: 'Z-index | Foundations | iamkey'
+        },
+        component: () => import('../views/foundations/Zindex.vue')
       },
       {
         path: 'animation',
