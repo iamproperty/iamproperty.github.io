@@ -697,7 +697,7 @@ nav + main > *:first-child {
         position: absolute;
         left: 50%;
         top: 100%;
-        margin-top: rem(14);
+        margin-top: rem(10);
         width: 0%;
         height: rem(6);
         @include var(background-color,--colour-underline);
@@ -714,10 +714,6 @@ nav + main > *:first-child {
         
         width: 100%;
       }
-    }
-
-    .nav__menu-btn {
-      margin-left: 4rem;
     }
 
     // Update the nav
