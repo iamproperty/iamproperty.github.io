@@ -4,7 +4,7 @@
     <input type="checkbox" name="showMenu" id="showMenu" class="d-none" />
     <input type="checkbox" name="showSearch" id="showSearch" class="d-none" />
 
-    <div class="nav__inner">
+    <div class="nav__inner" v-if="isMarketplace === false">
       <div class="container">
         <div class="row">
           <div class="col mw-md-fit-content nav__logo">
@@ -52,7 +52,37 @@
       </div>
     </div>
 
-    
+    <div class="nav__inner" v-else>
+      <div class="container">
+        <div class="row">
+          <div class="col nav__logo">
+            <a href="/" class="text-decoration-none mb-0">
+              <Logo id="property" :path="logopath" :desc="logotext" class="pb-0 pe-0"></Logo>
+            </a>
+
+            <a href="/" class="text-decoration-none mb-0 current">
+              <Logo id="movebutler" :path="logopath" :desc="logotext" class="pb-0 pe-0"></Logo>
+            </a>
+
+            <a href="/" class="text-decoration-none mb-0">
+              <Logo id="sold" :path="logopath" :desc="logotext" class="pb-0 pe-0"></Logo>
+            </a>
+          </div>
+
+          <div class="col mw-fit-content flex-row align-items-center nav__menu-btn">
+            <label for="showMenu">Menu</label>
+          </div>
+        </div>
+      </div>
+      <div class="nav__menu--secondary bg-primary" v-if="hasSecondarySlot">
+        <div class="container">
+          <slot name="secondary"></slot>
+        </div>
+      </div>
+      <div class="nav__menu flex-row">
+        <slot></slot>
+      </div>
+    </div>
   </nav>
 </template>
 
@@ -63,6 +93,7 @@
 <script>
 import nav from '../../../assets/js/modules/nav.js'
 import Logo from '../../foundations/Logo/Logo.vue'
+
 
 export default {
   components: {
@@ -114,6 +145,9 @@ export default {
     },
     hasSearchSlot() {
       return !!this.$slots.search
+    },
+    isMarketplace() {
+      return this.$vnode.data.staticClass && this.$vnode.data.staticClass.includes('nav--marketplace') ? true : false;
     }
   },
   mounted(){
