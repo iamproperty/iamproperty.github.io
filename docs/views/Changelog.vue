@@ -5,7 +5,7 @@
       
       <h2>V2.7.1 (future version)</h2>
       <ul>
-        <li></li>
+        <li>Marketplace nav</li>
       </ul>
       <h3>Breaking changes</h3>
       <ul>
