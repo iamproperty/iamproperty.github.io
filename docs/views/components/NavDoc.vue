@@ -58,6 +58,13 @@
       </template>
     </Nav>
 
+    <div class="container pb-0">
+      <h2>Marketplace navigation</h2>
+      <p>To transform the navigation to give you the marketplace option you need to assign the class of <strong>.nav--marketplace</strong>. See the <a href="/standalone/marketplace" target="_blank">marketplace example page</a> to see it better in action.</p>
+    </div>
+    
+    <Nav logo="property" class="nav--marketplace visualtest mb-5"></Nav>
+    
     <div class="container">
       <h2>Sub navigation</h2>
       <p>Allow for sublinks to be shown within the navigation so that users don't have to navigate to a landing page. See the <a href="/standalone/navbar" target="_blank">navbvar example page</a> to see it better in action.</p>

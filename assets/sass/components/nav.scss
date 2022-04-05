@@ -157,7 +157,11 @@
 .nav[class*="bg-"] {
 
   .nav__menu--secondary {
+
     background-color: white!important;
+  }
+  .nav__menu--secondary > .container > .list-unstyled > li > a,
+  .nav__menu--secondary > .container > .list-unstyled > li > details > summary .link {
 
     --colour-link: var(--colour-link-theme);
     --colour-hover: var(--colour-hover-theme);
@@ -657,6 +661,7 @@ nav + main > *:first-child {
 
   .nav__menu {
     height: 100%;
+    padding-top: 1.5rem;
     padding-left: var(--container-padding-x);
     padding-right: var(--container-padding-x);
   }
@@ -742,12 +747,11 @@ nav + main > *:first-child {
     }
 
     .nav__menu {
-      .container {
 
+        padding-top: 1.5rem;
         padding-left: 2rem;
         padding-right: 1.5rem;
-      }
-
+      
       > .list-unstyled {
         text-align: left;
 

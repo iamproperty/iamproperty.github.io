@@ -1,28 +1,14 @@
 <template>
   <div>
-    <Nav logo="sold" logotext="Auction dashboard" btnlink="/account" btntext="Logout" class="nav--admin">
-      <ul class="list-unstyled">
-        <li class=""><a href="/standalone/movebutler">Movebutler</a></li>
-        <li class="active"><a href="/standalone/marketplace">Marketplace</a></li>
-        <li class=""><a href="/props">Control Panel</a></li>
-        <li class=""><a href="/props">Quick start guide</a></li>
-        <li class=""><a href="/props">Contact us</a></li>
-        <li class="branch-switcher"><a href="#branches"><span>Today you're at</span> Hartlepool</a></li>
-      </ul>
+    <Nav logo="sold" class="nav--marketplace">
+      
       <template v-slot:secondary>
-        <ul class="list-unstyled">
-          <li class=""><a href="/props">Dashboard</a></li>
-          <li class=""><a href="/props">View all stock</a></li>
-          <li class=""><a href="/props">Upload a property lead</a></li>
-          <li class=""><a href="/props">Upload a viewing</a></li>
-          <li class=""><a href="/props">AuctionBOOST</a></li>
-          <li class=""><a href="/props">Notifications</a></li>
-          <li class=""><a href="/props">Your rewards</a></li>
-          <li class=""><a href="/props">Order making</a></li>
-        </ul>
+
+TBC
+
       </template>
     </Nav>
-    <main>
+    <main class="main--marketplace">
       
       <div class="container pt-4">
         <h1>Iamsold homepage (work in progress)</h1>
@@ -45,12 +31,16 @@
 import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue'
 import Nav from '@/components/Nav/Nav.vue'
 import Input from '@/elements/Input/Input.vue'
+import Logo from '@/foundations/Logo/Logo.vue'
+import Icon from '@/foundations/Icon/Icon.vue'
 
 export default {
   components: {
     PropertySearchbar,
     Nav,
-    Input
+    Input,
+    Logo,
+    Icon
   },
 }
 </script>
