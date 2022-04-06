@@ -34,6 +34,20 @@ function inputRange(inputWrapper){
       else 
         option.classList.remove('d-none');
     });
+
+  }, false);
+}
+
+function inputRedirect(inputWrapper){
+
+  inputWrapper.addEventListener('change', function(e){
+
+    const url = inputWrapper.getAttribute('data-redirect');
+    const desiredValue = inputWrapper.getAttribute('data-value-if');
+
+    if(inputWrapper.value == desiredValue)
+      document.location.href = url;
+
   }, false);
 }
 
@@ -43,6 +57,10 @@ function form(formElement) {
   // Check for input range groups
   Array.from(formElement.querySelectorAll('[data-input-range]')).forEach((arrayElement, index) => {
     inputRange(arrayElement);
+  });
+
+  Array.from(formElement.querySelectorAll('[data-redirect][data-value-if]')).forEach((arrayElement, index) => {
+    inputRedirect(arrayElement);
   });
 }
 
