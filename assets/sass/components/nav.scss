@@ -795,6 +795,8 @@ nav + main > *:first-child {
     padding-left: rem(280);
     
     .container {
+      --container-padding: 2rem;
+      --container-padding-x: 2rem;
       max-width: 100%!important;
     }
   }
