@@ -6,6 +6,8 @@
       <h2>V2.7.1 (future version)</h2>
       <ul>
         <li>Marketplace nav</li>
+        <li>Ticklist</li>
+        <li>Admin panel</li>
       </ul>
       <h3>Breaking changes</h3>
       <ul>
