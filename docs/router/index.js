@@ -171,7 +171,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Elements */
     path: '/elements',
     component: () => import(/* webpackChunkName: "elements" */ '../views/Elements.vue'),
     children: [
@@ -357,10 +357,18 @@ export const routes = [
           title: 'Card | Components | iamkey'
         },
         component: () => import('../views/elements/CardDoc.vue')
+      },
+      {
+        path: 'panel',
+        name: 'Admin panel',
+        meta: {
+          title: 'Admin panel | Components | iamkey'
+        },
+        component: () => import('../views/elements/PanelDoc.vue')
       }
     ]
   },
-  {
+  { /* Components */
     path: '/components',
     name: 'Components',
     meta: {
@@ -506,7 +514,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Templates */
     path: '/templates',
     name: 'Templates',
     meta: {
@@ -548,7 +556,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Examples */
     path: '/examples',
     name: 'Examples',
     meta: {
@@ -594,7 +602,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Standalone */
     path: '/standalone',
     name: 'Standalone',
     meta: {
@@ -684,7 +692,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Articles */
     path: '/articles',
     name: 'Articles',
     meta: {
