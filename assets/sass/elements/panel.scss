@@ -24,7 +24,7 @@
     display: none;
   }
 
-  > *:first-child {
+  > *:not(.note-feed):first-child {
     margin-top: var(--panel-gutter);
   }
 
@@ -32,21 +32,31 @@
     margin-bottom: var(--panel-gutter);
   }
 
-  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child {
     border-bottom: 2px solid var(--colour-border-light);
     font-size: var(--fs-4);
     line-height: 1;
     letter-spacing: 1;
     padding: var(--panel-gutter) var(--panel-gutter) var(--panel-gutter) var(--panel-gutter);
     margin: 0 calc(var(--panel-gutter) * -1) var(--panel-gutter) calc(var(--panel-gutter) * -1);
+    display: block;
   }
 
-  > :is(.table__wrapper, table),
+  > .table__wrapper,
+  > .note-feed > .table__wrapper,
   > .tabs__container:first-child > .tabs > .tab > .table__wrapper {
 
     margin: 0 calc(var(--panel-gutter) * -1) var(--panel-gutter) calc(var(--panel-gutter) * -1);
+    padding: 0 var(--panel-gutter) 0 var(--panel-gutter);
     min-width: calc(100% + var(--panel-gutter) + var(--panel-gutter));
-    padding-right: 0;
+    
+    table {
+
+      margin: 0 calc(var(--panel-gutter) * -1) var(--panel-gutter) calc(var(--panel-gutter) * -1);
+      min-width: calc(100% + var(--panel-gutter) + var(--panel-gutter));
+      padding-right: 0;
+
+    }
 
     tr {
       :is(th, td) {
@@ -75,7 +85,7 @@
   }
 
   // Table margin top override
-  :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6, .admin-panel__links, .tabs__links) + :is(.table__wrapper, table) {
+  :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6, .admin-panel__links, .tabs__links) + :is(.table__wrapper, table, .note-feed) {
     margin-top: calc(var(--panel-gutter) * -1);
 
     tr:first-child {
