@@ -100,6 +100,9 @@ table.border-0 {
 // #region Tables are only stacked on mobile
 @media screen and (max-width: 36em) {
   .table__wrapper:not(.table-fullwidth) {
+
+    overflow: hidden;
+
     thead {
       display: none;
     }
@@ -213,6 +216,12 @@ table.border-0 {
 .table__pagination select {
   max-width: rem(240);
 }
+.table__pagination .showing-input-field {
+  min-width: 4.5rem;
+}
+.table__pagination .page-number {
+  min-width: 7rem;
+}
 // #endregion
 
 // #region Reorderable
@@ -258,3 +267,25 @@ table.border-0 {
 }
 
 // #endregion
+
+
+.note-feed {
+
+  td:last-child {
+    min-width: 20rem;
+
+    /*
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    padding-bottom: 0;
+    margin-bottom: 1rem;
+
+    &:hover {
+
+    -webkit-line-clamp: inherit;
+    }
+    */
+  }
+}

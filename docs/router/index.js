@@ -511,6 +511,14 @@ export const routes = [
           title: 'Timeline | Components | iamkey'
         },
         component: () => import('../views/components/TimelineDoc.vue')
+      },
+      {
+        path: 'notefeed',
+        name: 'Note feed',
+        meta: {
+          title: 'Note feed | Components | iamkey'
+        },
+        component: () => import('../views/components/NoteFeedDoc.vue')
       }
     ]
   },
