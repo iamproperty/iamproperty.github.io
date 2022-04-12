@@ -2,6 +2,10 @@
   <div :class="wrapperClass()" ref="wrapper">
     <label v-if="needsLabel()" :class="`form-label${labelclass?` ${labelclass}`:''}`" :for="id" v-html="displayLabel()"></label>
     
+    <span :class="`prefix ${this.prefixClass} ${size?`prefix-${size}`:''}`" v-html="prefix" v-if="prefix" role="presentation"></span>
+
+    <span :class="`suffix ${this.suffixClass} ${size?`suffix-${size}`:''}`" v-html="suffix" v-if="suffix" role="presentation"></span>
+
     <!-- Standard input field -->
     <input v-if="isInput()" v-model="inputVal" :class="`form-control${size?` form-control-${size}`:``}${inputclass?` ${inputclass}`:``}`" :type="type" :name="name?name:id" :id="id" :pattern="needPattern()" :list="hasOptions()" v-bind="$attrs" v-on:keyup="inputKeyup" />
     
@@ -92,12 +96,32 @@ export default {
     options: {
       type: Array,
       required: false
+    },
+    prefix: {
+      type: String,
+      required: false
+    },
+    prefixClass: {
+      type: String,
+      required: false
+    },
+    suffix: {
+      type: String,
+      required: false
+    },
+    suffixClass: {
+      type: String,
+      required: false
     }
   },
   computed: {
     displayLabel() {
       return () => {
 
+        if(this.$attrs.multiple){
+          return this.label+`<span class="small d-block text-body font-body fw-normal">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</span>`
+        }
+        
         if(this.$attrs.multiple){
           return this.label+`<span class="small d-block text-body font-body fw-normal">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</span>`
         }

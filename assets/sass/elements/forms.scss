@@ -1,6 +1,7 @@
 .form-control__wrapper {
   margin-bottom: 1.5rem;
   max-width: $content-max-width;
+  position: relative;
 
   label {
     display: block;
@@ -125,4 +126,50 @@ select[multiple]::-webkit-scrollbar-thumb {
   //background-color:#000000!important; // manage scrollbar thumb background color here
   border-radius: 0.35rem;
 }
+// #endregion
+
+// #region prefix
+
+.form-control__wrapper :is(.prefix,.suffix) {
+
+  color: #212529;
+  background: #e9ecef;
+  padding: 0.75em 1em;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  position: absolute;
+  bottom: 1px;
+}
+
+.form-control__wrapper .prefix {
+
+  border-top-left-radius: 0.625rem;
+  border-bottom-left-radius: 0.625rem;
+  left: 1px;
+}
+
+.form-control__wrapper :is(.prefix-sm,.suffix-sm) {
+
+  font-size: var(--fs-small);
+}
+.form-control__wrapper :is(.prefix-lg,.suffix-lg) {
+
+  font-size: 1.5rem;
+}
+
+.form-control__wrapper .prefix + .form-control {
+  padding-left: em(64);
+}
+.form-control__wrapper .suffix + .form-control {
+  padding-right: em(64);
+}
+
+.form-control__wrapper .suffix {
+  left: auto;
+  right: 1px;
+  border-top-right-radius: 0.625rem;
+  border-bottom-right-radius: 0.625rem;
+}
+
 // #endregion
