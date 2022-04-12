@@ -71,6 +71,19 @@
       <Input id="test9" label="Form input" labelclass="col-5 col-sm-4" class="form-control-inline col-md-6" prefix="#" prefixClass="offset-5 offset-sm-4"></Input>
     </div>
 
+    <div class="container pb-0">
+
+      <h2>Tooltips and hints</h2>
+      <p>A tooltip or hint text can be added to the label to help explain the purpose of the input field.</p>
+      
+    </div>
+    <div class="container visualtest">
+      <Input id="test10" label="Form input" class="" title="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."></Input>
+      
+      <Input id="test10b" label="Form input" class="" hint="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."></Input>
+      
+    </div>
+
 
     <div class="container">
       <h2>Data binding</h2>

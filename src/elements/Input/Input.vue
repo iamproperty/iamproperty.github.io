@@ -1,9 +1,9 @@
 <template>
   <div :class="wrapperClass()" ref="wrapper">
-    <label v-if="needsLabel()" :class="`form-label${labelclass?` ${labelclass}`:''}`" :for="id" v-html="displayLabel()"></label>
+    <label v-if="needsLabel()" :class="`form-label${labelclass?` ${labelclass}`:''}`" :for="id" v-html="displayLabel()" :title="title"></label>
     
+    <!-- Prefix and Suffix -->
     <span :class="`prefix ${this.prefixClass} ${size?`prefix-${size}`:''}`" v-html="prefix" v-if="prefix" role="presentation"></span>
-
     <span :class="`suffix ${this.suffixClass} ${size?`suffix-${size}`:''}`" v-html="suffix" v-if="suffix" role="presentation"></span>
 
     <!-- Standard input field -->
@@ -112,6 +112,14 @@ export default {
     suffixClass: {
       type: String,
       required: false
+    },
+    title: {
+      type: String,
+      required: false
+    },
+    hint: {
+      type: String,
+      required: false
     }
   },
   computed: {
@@ -122,8 +130,8 @@ export default {
           return this.label+`<span class="small d-block text-body font-body fw-normal">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</span>`
         }
         
-        if(this.$attrs.multiple){
-          return this.label+`<span class="small d-block text-body font-body fw-normal">Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.</span>`
+        if(this.hint){
+          return this.label+`<span class="small d-block text-body font-body fw-normal">${this.hint}</span>`
         }
 
         return this.label;

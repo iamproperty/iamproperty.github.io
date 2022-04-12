@@ -6,6 +6,25 @@
   label {
     display: block;
 
+    &[title]:after{
+
+      content: "";
+      display: inline-block;
+      margin-left: 0.25em;
+      margin-bottom: 0.1em;
+      width: 1em;
+      height: 1em;
+      vertical-align: text-bottom;
+      background: currentColor;
+      mask-image: var(--icon-question);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-question);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
   }
 }
 

@@ -1,7 +1,6 @@
 @use "../_func.scss" as *;
 
-abbr[title],
-.tooltip {
+:is(abbr[title], .tooltip) {
 
   text-decoration: underline;
   text-underline-offset: 0.2em;
@@ -11,9 +10,7 @@ abbr[title],
   position: relative;
   cursor: help;
 
-  &:hover,
-  &:focus,
-  &:active{
+  &:is(:hover, :focus, :active){
 
     text-decoration: none;
   }
@@ -37,6 +34,27 @@ abbr[title],
 
 .tooltip {
 
+
+  &:after{
+
+    content: "";
+    display: inline-block;
+    margin-left: 0.1em;
+    margin-bottom: 0.1em;
+    width: 0.8em;
+    height: 0.9em;
+    vertical-align: text-bottom;
+    background: currentColor;
+    mask-image: var(--icon-question);
+    mask-size: 100%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon-question);
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+  }
+
   .tooltip__content {
 
     opacity: 0;
@@ -44,9 +62,7 @@ abbr[title],
     
   }
 
-  &:hover,
-  &:focus,
-  &:active{
+  &:is(:hover, :focus, :active){
 
     .tooltip__content {
 
@@ -58,17 +74,12 @@ abbr[title],
 
 @media (hover: none) {
   
-  abbr[title],
-  .tooltip[title] {
+  :is(abbr[title], .tooltip[title]) {
 
-    &:hover,
-    &:focus,
-    &:active{
+    &:is(:hover, :focus, :active):before{
       
-      &::after {
-        content: attr(title);
-        @include tooltip();
-      }
+      content: attr(title);
+      @include tooltip();
     }
   }
 }
