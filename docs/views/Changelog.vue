@@ -5,6 +5,8 @@
       
       <h2>V2.7.1 (future version)</h2>
       <ul>
+        <li>Start of 'required if' functionality</li>
+        <li>Multi upload input field</li>
         <li>Note feed component</li>
         <li>Marketplace nav</li>
         <li>Ticklist</li>
