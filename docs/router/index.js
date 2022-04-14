@@ -60,6 +60,14 @@ export const routes = [
       title: 'Accessibility | iamkey'
     }
   },
+  {
+    path: '/best-practice',
+    name: 'Best practice',
+    meta: {
+      title: 'Best practice | Components | iamkey'
+    },
+    component: () => import('../views/BestPracticeDoc.vue')
+  },
   { /* Foundations */
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
