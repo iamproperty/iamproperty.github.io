@@ -41,6 +41,46 @@
       <pre><code class="language-html">{{htmlUsage}}</code></pre>
     </div>
     
+
+    <div class="container">
+      
+      <h2>Admin panel</h2>
+      <p>The tabs component display changes when its held within an admin panel, this is to make it fit into the admin panel styles.</p>
+    </div>
+
+    <div class="container visualtest">
+      <div class="admin-panel">
+        <Tabs>
+          <Tab title="The benefits of auction">
+            <h2>Tab content 1</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          <Tab title="The types of auctions we offer">
+            <h2>Tab content 2</h2>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          <Tab title="Online auctions" lazy>
+            <h2>Tab content 3</h2>
+            <p>Lazy loaded table</p>
+            <Table 
+            :fields="[
+              { key: 'column_1' },
+              { key: 'column_2' },
+              { key: 'column_3' }
+            ]" 
+            :items="[
+            {
+              column_1: 'row 1',
+              column_2: 'row 1',
+              column_4: 'row 1',
+            }
+            ]"></Table>
+          </Tab>
+        </Tabs>
+      </div>
+    </div>
+
+
     <div class="container">
       <h2>Vue Tabs component reference</h2>
       <Readme></Readme>

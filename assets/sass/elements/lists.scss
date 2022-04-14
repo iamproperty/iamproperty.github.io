@@ -4,6 +4,38 @@
   max-width: $content-max-width;
 }
 
+.tick-list {
+
+  padding-left: 2.5rem;
+
+  li {
+    position: relative;
+    list-style: none;
+    padding-bottom: 1rem;
+    
+    &:before {
+      
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -2.5rem;
+      width: 1.5em;
+      height: 1.5em;
+      
+      background: var(--colour-secondary);
+      mask-image: var(--icon-tick);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-tick);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
+  }
+}
+
+
 .breadcrumb {
 
   font-size: rem(14);

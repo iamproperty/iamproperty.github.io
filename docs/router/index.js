@@ -61,6 +61,14 @@ export const routes = [
     }
   },
   {
+    path: '/best-practice',
+    name: 'Best practice',
+    meta: {
+      title: 'Best practice | Components | iamkey'
+    },
+    component: () => import('../views/BestPracticeDoc.vue')
+  },
+  { /* Foundations */
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
     children: [
@@ -154,6 +162,14 @@ export const routes = [
         component: () => import('../views/foundations/Utilities.vue')
       },
       {
+        path: 'z-index',
+        name: 'Z-index',
+        meta: {
+          title: 'Z-index | Foundations | iamkey'
+        },
+        component: () => import('../views/foundations/Zindex.vue')
+      },
+      {
         path: 'animation',
         name: 'Animation',
         meta: {
@@ -163,7 +179,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Elements */
     path: '/elements',
     component: () => import(/* webpackChunkName: "elements" */ '../views/Elements.vue'),
     children: [
@@ -349,10 +365,18 @@ export const routes = [
           title: 'Card | Components | iamkey'
         },
         component: () => import('../views/elements/CardDoc.vue')
+      },
+      {
+        path: 'panel',
+        name: 'Admin panel',
+        meta: {
+          title: 'Admin panel | Components | iamkey'
+        },
+        component: () => import('../views/elements/PanelDoc.vue')
       }
     ]
   },
-  {
+  { /* Components */
     path: '/components',
     name: 'Components',
     meta: {
@@ -495,10 +519,18 @@ export const routes = [
           title: 'Timeline | Components | iamkey'
         },
         component: () => import('../views/components/TimelineDoc.vue')
+      },
+      {
+        path: 'notefeed',
+        name: 'Note feed',
+        meta: {
+          title: 'Note feed | Components | iamkey'
+        },
+        component: () => import('../views/components/NoteFeedDoc.vue')
       }
     ]
   },
-  {
+  { /* Templates */
     path: '/templates',
     name: 'Templates',
     meta: {
@@ -540,7 +572,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Examples */
     path: '/examples',
     name: 'Examples',
     meta: {
@@ -635,6 +667,30 @@ export const routes = [
         component: () => import('../views/standalone/CompletionsDashboard.vue')
       },
       {
+        path: 'marketplace',
+        name: "Marketplace",
+        meta: {
+          title: 'Marketplace | IAM Key'
+        },
+        component: () => import('../views/standalone/Marketplace.vue')
+      },
+      {
+        path: 'movebutler',
+        name: "Movebutler",
+        meta: {
+          title: 'Movebutler | IAM Key'
+        },
+        component: () => import('../views/standalone/Movebutler.vue')
+      },
+      {
+        path: 'agent',
+        name: "Agent Platform",
+        meta: {
+          title: 'Agent Platform | IAM Key'
+        },
+        component: () => import('../views/standalone/Agent.vue')
+      },
+      {
         path: 'print',
         name: "Print",
         meta: {
@@ -675,7 +731,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Articles */
     path: '/articles',
     name: 'Articles',
     meta: {

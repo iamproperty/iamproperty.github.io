@@ -1,10 +1,30 @@
 .form-control__wrapper {
   margin-bottom: 1.5rem;
   max-width: $content-max-width;
+  position: relative;
 
   label {
     display: block;
 
+    &[title]:after{
+
+      content: "";
+      display: inline-block;
+      margin-left: 0.25em;
+      margin-bottom: 0.1em;
+      width: 1em;
+      height: 1em;
+      vertical-align: text-bottom;
+      background: currentColor;
+      mask-image: var(--icon-question);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-question);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
   }
 }
 
@@ -125,4 +145,50 @@ select[multiple]::-webkit-scrollbar-thumb {
   //background-color:#000000!important; // manage scrollbar thumb background color here
   border-radius: 0.35rem;
 }
+// #endregion
+
+// #region prefix
+
+.form-control__wrapper :is(.prefix,.suffix) {
+
+  color: #212529;
+  background: #e9ecef;
+  padding: 0.75em 1em;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  position: absolute;
+  bottom: 1px;
+}
+
+.form-control__wrapper .prefix {
+
+  border-top-left-radius: 0.625rem;
+  border-bottom-left-radius: 0.625rem;
+  left: 1px;
+}
+
+.form-control__wrapper :is(.prefix-sm,.suffix-sm) {
+
+  font-size: var(--fs-small);
+}
+.form-control__wrapper :is(.prefix-lg,.suffix-lg) {
+
+  font-size: 1.5rem;
+}
+
+.form-control__wrapper .prefix + .form-control {
+  padding-left: em(64);
+}
+.form-control__wrapper .suffix + .form-control {
+  padding-right: em(64);
+}
+
+.form-control__wrapper .suffix {
+  left: auto;
+  right: 1px;
+  border-top-right-radius: 0.625rem;
+  border-bottom-right-radius: 0.625rem;
+}
+
 // #endregion
