@@ -151,16 +151,16 @@
         <div class="admin-panel">
           <h2>Property Survey</h2>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur dui erat, auctor vestibulum sem eu, pellentesque rutrum diam. In vulputate ex in dui congue, eu fringilla odio volutpat. </p>
-
-          <h3>Request a call</h3>
-          <Input type="checkbox" id="callback" label="By requesting a call you are happy for us to pass your details to our survey providers">
-          <div class="conditional">
-              
-            <button class="mt-3 btn btn-primary">Request a call</button>
+          <div class="bg-secondary p-4 pb-0 mb-5">
+            <h3>Request a call</h3>
+            <Input type="checkbox" id="callback" label="By requesting a call you are happy for us to pass your details to our survey providers">
+            <div class="conditional">
+                
+              <button class="mt-3 btn btn-primary">Request a call</button>
+            </div>
+            </Input>
+            <button class="mt-3 btn btn-tertiary">Not intersted in a call</button>
           </div>
-          </Input>
-          <button class="mt-3 btn btn-tertiary mb-5">Not intersted in a call</button>
-
           <div class="row mb-5">
             <div class="col-sm-5 me-auto">
               <h3>Benefits to your client</h3>
