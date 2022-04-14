@@ -2,7 +2,7 @@
   <div class="container note-feed mb-2">
     <span class="h3" v-html="title" v-if="title"></span>
 
-    <Table :items="itemsData" v-bind="$props" class="mb-0"></Table>
+    <Table :fields="[{ key: 'date_added' },{ key: 'user' },{ key: 'note' }]" :items="itemsData" v-bind="$props" class="mb-0"></Table>
     <form :action="action" :method="method" @submit.prevent="submitForm(...arguments)">
       <input type="hidden" :value="user" name="user" />
       <Input id="addNote" type="textarea" label="Add note" required class="mw-100"></Input>
@@ -14,7 +14,9 @@
 <script>
 import Input from '../../elements/Input/Input.vue'
 import Table from '../../elements/Table/Table.vue'
-const tableProps = Table.props;
+let tableProps = Table.props;
+tableProps.fields.required = false;
+
 
 export default {
   components: {

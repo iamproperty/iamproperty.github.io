@@ -4,6 +4,11 @@
   --panel-gutter: 1rem;
   --panel-tab-colour: #fafafa;
 
+  &.bg-secondary{
+
+    background-color: rgba(#b4e6a5,0.3) !important;
+  }
+
   @media screen and (prefers-color-scheme: dark) {
 
     --panel-tab-colour: transparent;
@@ -18,7 +23,6 @@
   border: 1px solid var(--colour-border-light);
   border-top: 3px solid var(--colour-secondary);
   margin-bottom: 2rem;
-  min-height: calc(100% - 2rem);
 
   &:empty {
     display: none;
@@ -93,6 +97,11 @@
       border-top: none;
     }
   }
+}
+
+[class*="col"] .admin-panel:first-child:last-child {
+
+  min-height: calc(100% - 2rem);
 }
 
 .admin-panel .admin-panel__links, 

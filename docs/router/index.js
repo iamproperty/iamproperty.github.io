@@ -725,9 +725,9 @@ export const routes = [
         component: () => import('../views/prototype/Index.vue')
       },
       {
-        path: 'test',
-        name: 'Test',
-        component: () => import('../views/prototype/test.vue')
+        path: 'survey',
+        name: 'Survey',
+        component: () => import('../views/prototype/survey.vue')
       }
     ]
   },
