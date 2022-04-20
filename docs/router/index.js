@@ -725,9 +725,29 @@ export const routes = [
         component: () => import('../views/prototype/Index.vue')
       },
       {
+        path: 'client-login',
+        name: 'Client login',
+        component: () => import('../views/prototype/clientLogin.vue')
+      },
+      {
         path: 'survey',
-        name: 'Survey',
-        component: () => import('../views/prototype/survey.vue')
+        name: 'Survey - In platform',
+        component: () => import('../views/prototype/survey/inplatform.vue')
+      },
+      {
+        path: 'survey-client-onboarding',
+        name: 'Survey - Client onboarding',
+        component: () => import('../views/prototype/survey/clientOnboarding.vue')
+      },
+      {
+        path: 'survey-client-dashboard',
+        name: 'Survey - Client dashboard',
+        component: () => import('../views/prototype/survey/clientDashboard.vue')
+      },
+      {
+        path: 'survey-client-dashboard-2',
+        name: 'Survey - Client dashboard 2',
+        component: () => import('../views/prototype/survey/clientDashboard2.vue')
       }
     ]
   },

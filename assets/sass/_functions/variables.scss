@@ -77,7 +77,8 @@ $theme-colors: map-merge((
   "warning":    $warning,
   "danger":     $danger,
   "light":      $light,
-  "dark":       $dark
+  "dark":       $dark,
+  "admin":      #f0f0f0
 ), $theme-colors);
 
 
@@ -108,6 +109,8 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 
   @return var(--colour-#{$identifier});
 }
+
+$utilities-colors: $theme-colors-rgb;
 
 $utilities-colors: map-merge(
   $utilities-colors,

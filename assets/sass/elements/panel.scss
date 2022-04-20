@@ -3,6 +3,7 @@
 .admin-panel {
   --panel-gutter: 1rem;
   --panel-tab-colour: #fafafa;
+  background: var(--bs-body-bg);
 
   &.bg-secondary{
 

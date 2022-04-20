@@ -7,7 +7,10 @@
     <div class="nav__inner" v-if="isMarketplace === false">
       <div class="container">
         <div class="row">
-          <div class="col mw-md-fit-content nav__logo">
+          <div class="col mw-md-fit-content nav__logo" v-if="hasLogoSlot">
+            <slot name="logo"></slot>
+          </div>
+          <div class="col mw-md-fit-content nav__logo" v-else>
             <a href="/" class="text-decoration-none mb-0">
               <Logo :id="logo" :path="logopath" :desc="logotext" class="pb-0"></Logo>
             </a>
@@ -215,6 +218,9 @@ export default {
     }
   },
   computed: {
+    hasLogoSlot() {
+      return !!this.$slots.logo
+    },
     hasSecondarySlot() {
       return !!this.$slots.secondary
     },

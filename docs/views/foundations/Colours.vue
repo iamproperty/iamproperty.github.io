@@ -92,30 +92,56 @@
         <div class="colour-block bg-primary p-3">
           <span class="h5 mb-0">Heading</span>
           <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
         </div>
         <div class="colour-block bg-secondary p-3">
           <span class="h5 mb-0">Heading</span>
           <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
         </div>
         <div class="colour-block bg-info p-3">
           <span class="h5 mb-0">Heading</span>
           <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
         </div>
         <div class="colour-block bg-warning p-3">
           <span class="h5 mb-0">Heading</span>
           <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
         </div>
         <div class="colour-block bg-danger p-3">
           <span class="h5 mb-0">Heading</span>
           <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
         </div>
         <div class="colour-block bg-light p-3">
           <span class="h5 mb-0">Heading</span>
           <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
         </div>
         <div class="colour-block bg-dark p-3">
           <span class="h5 mb-0">Heading</span>
           <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
+        </div>
+        <div class="colour-block bg-admin p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
+        </div>
+        <div class="colour-block bg-white p-3">
+          <span class="h5 mb-0">Heading</span>
+          <p>Paragraph</p>
+          <a href="/link" class="mw-fit-content">Basic link</a>
+          <button class="btn">Primary button</button>
         </div>
       </div>
     </div>

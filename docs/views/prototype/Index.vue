@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container pt-3">
     <h1>Prototypes</h1>
     <ul>
       <li v-for="(value,index) in pages" :key="index"><a :href="value.link">{{value.title}}</a></li>
