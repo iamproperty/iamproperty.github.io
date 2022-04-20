@@ -23,11 +23,12 @@
 
     <div class="col-md bg-admin p-5 d-flex flex-column overflow-hidden position-relative">
       
-<span class="circle circle-1 text-warning bg-secondary"></span>
-<span class="circle circle-2 circle--cross text-info"></span>
 <span class="circle circle-3 circle--stripe text-danger opacity-25"></span>
 
-      <nav class="ms-auto mb-4">
+      <nav class="ms-auto mb-4 position-relative">
+<span class="circle circle-1 text-warning bg-secondary"></span>
+<span class="circle circle-2 circle--cross text-info"></span>
+
         <ul class="list-unstyled list-inline">
             <li class="list-inline-item"><a href="https://iamproperty.testing.iamproperty.group/client/transactions" class="font-bold text-grey me-4">My Transactions</a></li>
             <li class="list-inline-item"><a href="https://iamproperty.testing.iamproperty.group/logout" class="font-bold text-grey">Log out</a></li>
@@ -95,18 +96,18 @@
 
 .circle-1 {
   top: 0%;
-  left: 50%;
+  right: 100%;
   font-size: 8rem;
-  margin-top: -5rem;
-  margin-left: 0rem;
+  margin-top: -7rem;
+  margin-right: 10rem;
   z-index: 1;
 }
 .circle-2 {
   top: 0%;
-  left: 50%;
+  right: 100%;
   font-size: 12rem;
-  margin-top: -6rem;
-  margin-left: 5rem;;
+  margin-top: -10rem;
+  margin-right: 1rem;
 }
 
 .circle-3 {
