@@ -86,7 +86,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container visualtest">
       <h2>Colour combinations</h2>
       <div class="colour-blocks">
         <div class="colour-block bg-primary p-3">
