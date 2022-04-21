@@ -13,7 +13,7 @@
         <div class="col-md-12">
           <div class="admin-pa/nel">
             <span class="h3">Note feed title</span>
-            <NoteFeed user="User name" :fields="fields" :items="items" :show="3" @formSubmitted="submitForm(...arguments)"></NoteFeed>
+            <NoteFeed user="User name" :items="items" :show="3" @formSubmitted="submitForm(...arguments)"></NoteFeed>
           </div>
         </div>
       </div>
@@ -23,7 +23,7 @@
         <div class="col-md-6">
           <div class="admin-panel">
             <span class="h3">Note feed title</span>
-            <NoteFeed user="User name" :fields="fields" :items="items" :show="3" @formSubmitted="submitForm(...arguments)"></NoteFeed>
+            <NoteFeed user="User name" :items="items" :show="3" @formSubmitted="submitForm(...arguments)"></NoteFeed>
           </div>
         </div>
       </div>
@@ -54,12 +54,7 @@ export default {
     }
   },
   data () {
-    return {    
-      fields: [
-        { key: 'date_added' },
-        { key: 'user' },
-        { key: 'note' }
-      ],
+    return {
       items: [
         {
           date_added: '09/03/2022',

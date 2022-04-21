@@ -15,6 +15,15 @@ $utilities: map-merge(
         100: 100%,
         fit-content: fit-content
       )
+    ),
+    "min-width": (
+      responsive: true,
+      property: min-width,
+      class: min,
+      values: (
+        100: 100%,
+        fit-content: fit-content
+      )
     )
   )
 );

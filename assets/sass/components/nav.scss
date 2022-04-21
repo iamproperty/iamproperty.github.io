@@ -32,6 +32,16 @@
     }
   }
 
+  .nav__logo img {
+    height: rem(48);
+    width: auto;
+
+    @include media-breakpoint-up(sm) {
+      height: rem(60);
+      width: auto;
+    }
+  }
+
   .nav__search-btn,
   .nav__menu-btn {
 

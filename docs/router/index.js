@@ -12,7 +12,7 @@ export const routes = [
       title: 'iamkey Design system and framework'
     }
   },
-  {
+  { /* Information */
     path: '/information',
     component: () => import('../views/Information.vue'),
     name: 'Information',
@@ -20,7 +20,7 @@ export const routes = [
       title: 'Information | iamkey'
     }
   },
-  {
+  { /* Audit */
     path: '/audit',
     component: () => import('../views/Audit.vue'),
     name: 'Audit',
@@ -705,6 +705,49 @@ export const routes = [
           title: 'Single page Print | iamkey'
         },
         component: () => import('../views/standalone/PrintExampleSingle.vue')
+      }
+    ]
+  },
+  { /* Prototype */
+    path: '/prototype',
+    name: 'Prototype',
+    meta: {
+      title: 'Prototypes | iamkey'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "prototypes" */ '../views/Prototype.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/prototype/Index.vue')
+      },
+      {
+        path: 'client-login',
+        name: 'Client login',
+        component: () => import('../views/prototype/clientLogin.vue')
+      },
+      {
+        path: 'survey',
+        name: 'Survey - In platform',
+        component: () => import('../views/prototype/survey/inplatform.vue')
+      },
+      {
+        path: 'survey-client-onboarding',
+        name: 'Survey - Client onboarding',
+        component: () => import('../views/prototype/survey/clientOnboarding.vue')
+      },
+      {
+        path: 'survey-client-dashboard',
+        name: 'Survey - Client dashboard',
+        component: () => import('../views/prototype/survey/clientDashboard.vue')
+      },
+      {
+        path: 'survey-client-dashboard-2',
+        name: 'Survey - Client dashboard 2',
+        component: () => import('../views/prototype/survey/clientDashboard2.vue')
       }
     ]
   },
