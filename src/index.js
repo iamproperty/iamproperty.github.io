@@ -4,6 +4,7 @@ export { default as Logo } from './foundations/Logo/Logo.vue'
 // Elements
 export { default as Table } from './elements/Table/Table.vue'
 export { default as Input } from './elements/Input/Input.vue'
+export { default as FileUploads } from './elements/FileUploads/FileUploads.vue'
 // Components
 export { default as Accordion } from './components/Accordion/Accordion.vue'
 export { default as AccordionItem } from './components/Accordion/AccordionItem.vue'
@@ -23,3 +24,4 @@ export { default as Step } from './components/Stepper/Step.vue'
 export { default as Tabs } from './components/Tabs/Tabs.vue'
 export { default as Tab } from './components/Tabs/Tab.vue'
 export { default as Alert } from './components/Alert/Alert.vue'
+export { default as NoteFeed } from './components/NoteFeed/NoteFeed.vue'

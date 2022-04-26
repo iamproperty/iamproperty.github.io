@@ -26,6 +26,15 @@
       </ol>
     </div>
     <div class="container visualtest">
+      <h2>Tick lists</h2>
+      <ul class="tick-list">
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+        <li>List item 4</li>
+      </ul>
+    </div>
+    <div class="container visualtest">
       <h2>Breadcrumb</h2>
       <ol class="breadcrumb">
         <li><a href="/home">Home</a></li>

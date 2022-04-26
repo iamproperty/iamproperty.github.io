@@ -125,7 +125,6 @@ $chart-colors: map-merge((
     margin-bottom: 2rem;
     display: flex;
     flex-direction: column-reverse;
-    z-index: 2;
     width: 0;
 
     .axis__point {
@@ -179,7 +178,7 @@ $chart-colors: map-merge((
     width: 100%;
     height: calc(100% - 2rem);
     margin-bottom: 2rem;
-    z-index: -1;
+    z-index: var(--index-below);
     display: flex;
     flex-direction: column-reverse;
 
@@ -314,12 +313,9 @@ $chart-colors: map-merge((
           }
         }
 
-        &:hover {
-          //z-index: 1;
-        }
         &:hover span {
           opacity: 1;
-          z-index: 99;
+          z-index: var(--index-above);
         }
       }
 
@@ -438,7 +434,7 @@ $chart-colors: map-merge((
           left: 50%;
           height: 100%;
           margin-left: -1px;
-          z-index: 0;
+          z-index: var(--index-below);
         }
       }
     }
@@ -453,7 +449,7 @@ $chart-colors: map-merge((
     width: 100%;
     height: calc(100% - 2rem);
     pointer-events: none;
-    z-index: -1;
+    z-index: var(--index-below)
   }
 
   .pie {
@@ -520,7 +516,7 @@ $chart-colors: map-merge((
   .pie foreignObject {
     background: var(--bs-body-bg);
     border-radius: 50%;
-    z-index: 100;
+    z-index: var(--index-focus);
     pointer-events: none;
     display: none;
     padding: 1rem;

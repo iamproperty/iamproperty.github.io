@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 export const routes = [
-  {
+  { /* Home */
     path: '/',
     name: 'Home',
     component: () => import('../views/Home.vue'),
@@ -12,7 +12,7 @@ export const routes = [
       title: 'iamkey Design system and framework'
     }
   },
-  {
+  { /* Information */
     path: '/information',
     component: () => import('../views/Information.vue'),
     name: 'Information',
@@ -20,7 +20,7 @@ export const routes = [
       title: 'Information | iamkey'
     }
   },
-  {
+  { /* Audit */
     path: '/audit',
     component: () => import('../views/Audit.vue'),
     name: 'Audit',
@@ -61,6 +61,14 @@ export const routes = [
     }
   },
   {
+    path: '/best-practice',
+    name: 'Best practice',
+    meta: {
+      title: 'Best practice | Components | iamkey'
+    },
+    component: () => import('../views/BestPracticeDoc.vue')
+  },
+  { /* Foundations */
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ '../views/Foundations.vue'),
     children: [
@@ -154,6 +162,14 @@ export const routes = [
         component: () => import('../views/foundations/Utilities.vue')
       },
       {
+        path: 'z-index',
+        name: 'Z-index',
+        meta: {
+          title: 'Z-index | Foundations | iamkey'
+        },
+        component: () => import('../views/foundations/Zindex.vue')
+      },
+      {
         path: 'animation',
         name: 'Animation',
         meta: {
@@ -163,7 +179,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Elements */
     path: '/elements',
     component: () => import(/* webpackChunkName: "elements" */ '../views/Elements.vue'),
     children: [
@@ -349,10 +365,18 @@ export const routes = [
           title: 'Card | Components | iamkey'
         },
         component: () => import('../views/elements/CardDoc.vue')
+      },
+      {
+        path: 'panel',
+        name: 'Admin panel',
+        meta: {
+          title: 'Admin panel | Components | iamkey'
+        },
+        component: () => import('../views/elements/PanelDoc.vue')
       }
     ]
   },
-  {
+  { /* Components */
     path: '/components',
     name: 'Components',
     meta: {
@@ -495,10 +519,18 @@ export const routes = [
           title: 'Timeline | Components | iamkey'
         },
         component: () => import('../views/components/TimelineDoc.vue')
+      },
+      {
+        path: 'notefeed',
+        name: 'Note feed',
+        meta: {
+          title: 'Note feed | Components | iamkey'
+        },
+        component: () => import('../views/components/NoteFeedDoc.vue')
       }
     ]
   },
-  {
+  { /* Templates */
     path: '/templates',
     name: 'Templates',
     meta: {
@@ -540,7 +572,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Examples */
     path: '/examples',
     name: 'Examples',
     meta: {
@@ -586,7 +618,7 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Standalone */
     path: '/standalone',
     name: 'Standalone',
     meta: {
@@ -635,6 +667,30 @@ export const routes = [
         component: () => import('../views/standalone/CompletionsDashboard.vue')
       },
       {
+        path: 'marketplace',
+        name: "Marketplace",
+        meta: {
+          title: 'Marketplace | IAM Key'
+        },
+        component: () => import('../views/standalone/Marketplace.vue')
+      },
+      {
+        path: 'movebutler',
+        name: "Movebutler",
+        meta: {
+          title: 'Movebutler | IAM Key'
+        },
+        component: () => import('../views/standalone/Movebutler.vue')
+      },
+      {
+        path: 'agent',
+        name: "Agent Platform",
+        meta: {
+          title: 'Agent Platform | IAM Key'
+        },
+        component: () => import('../views/standalone/Agent.vue')
+      },
+      {
         path: 'print',
         name: "Print",
         meta: {
@@ -652,7 +708,50 @@ export const routes = [
       }
     ]
   },
-  {
+  { /* Prototype */
+    path: '/prototype',
+    name: 'Prototype',
+    meta: {
+      title: 'Prototypes | iamkey'
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "prototypes" */ '../views/Prototype.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Index',
+        component: () => import('../views/prototype/Index.vue')
+      },
+      {
+        path: 'client-login',
+        name: 'Client login',
+        component: () => import('../views/prototype/clientLogin.vue')
+      },
+      {
+        path: 'survey',
+        name: 'Survey - In platform',
+        component: () => import('../views/prototype/survey/inplatform.vue')
+      },
+      {
+        path: 'survey-client-onboarding',
+        name: 'Survey - Client onboarding',
+        component: () => import('../views/prototype/survey/clientOnboarding.vue')
+      },
+      {
+        path: 'survey-client-dashboard',
+        name: 'Survey - Client dashboard',
+        component: () => import('../views/prototype/survey/clientDashboard.vue')
+      },
+      {
+        path: 'survey-client-dashboard-2',
+        name: 'Survey - Client dashboard 2',
+        component: () => import('../views/prototype/survey/clientDashboard2.vue')
+      }
+    ]
+  },
+  { /* Articles */
     path: '/articles',
     name: 'Articles',
     meta: {

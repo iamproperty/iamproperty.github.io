@@ -102,7 +102,8 @@ export default {
         { key: 'contact_details' },
         { key: 'address' },
         { key: 'point_of_contact' },
-        { key: 'actions' }
+        { key: 'actions' },
+        { key: 'complete' }
       ],
       items: [
         {
@@ -112,7 +113,8 @@ export default {
           contact_details: '<a href="tel:07411882800">07411882800</a> (Mobile)<br> <a href="tel:07411882800">07411882800</a> (Main)',
           address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
           point_of_contact: 'None set',
-          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>',
+          complete: '<div class="fs-1 m-0"><svg class="icon m-0"><title>Yes</title><use xlink:href="#icon-tick"></use></svg></div>'
         },
         {
           basic_details: 'mrs Laura Branson<br> (Mrs Laura Branson)',
@@ -120,7 +122,8 @@ export default {
           contact_details: '<a href="tel:07729797870">07729797870</a> (Main)<br> <a href="tel:07729797870">07729797870</a> (Mobile)',
           address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
           point_of_contact: 'None set',
-          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>',
+          complete: '<div class="fs-1 m-0"><svg class="icon m-0"><title>Yes</title><use xlink:href="#icon-tick"></use></svg></div>'
         },
         {
           basic_details: 'Holly Branson<br> (Ms Holly Branson)',
@@ -128,7 +131,8 @@ export default {
           contact_details: '<a href="tel:07729797870">07729797870</a> (Main)<br> <a href="tel:07729797870">07729797870</a> (Mobile)',
           address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
           point_of_contact: 'None set',
-          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>',
+          complete: '<div class="fs-1 m-0"><svg class="icon m-0"><title>Yes</title><use xlink:href="#icon-tick"></use></svg></div>'
         },
         {
           basic_details: 'Clare Branson<br> (Ms Clare Branson)',
@@ -136,7 +140,8 @@ export default {
           contact_details: '<a href="tel:07729797870">07729797870</a> (Main)<br> <a href="tel:07729797870">07729797870</a> (Mobile)',
           address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
           point_of_contact: 'None set',
-          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
+          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>',
+          complete: '<span class="h4 m-0"><i class="icon fa-times-circle d-block mx-0"></i></span><span class="visually-hidden">No</span>'
         }
       ]
     }

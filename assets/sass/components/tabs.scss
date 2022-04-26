@@ -7,6 +7,7 @@
     overflow: hidden;
 
     .link:not(.text-decoration-none):not(.btn) {
+      --is-current: 0;
       font-weight: bold;
       font-family: var(--font-heading);
       font-size: rem(18);
@@ -23,6 +24,7 @@
 
       &:before {
         width: 0;
+        width: calc(var(--is-current) * 100%);
       }
 
       &:hover:before,
@@ -37,12 +39,36 @@
   }
 
   @for $i from 1 through 10 {
-    input:checked:nth-child(#{$i}) ~ .tabs__links .link:not(.text-decoration-none):not(.btn):nth-child(#{$i}):before {
-      width: 100%;
+    input:checked:nth-child(#{$i}) ~ .tabs__links .link:not(.text-decoration-none):not(.btn):nth-child(#{$i}) {
+      
+      --is-current: 1;
+      --panel-tab-colour: white;
+      --panel-tab-border: var(--colour-secondary)
     }
     input:checked:nth-child(#{$i}) ~ .tabs .tab:nth-child(#{$i}){
       display: block;
+      display: contents;
     }
   }
 }
 
+// #region admin panel
+.admin-panel > .tabs__container:first-child {
+
+  display: contents;
+
+  .tabs {
+    display: contents;
+  }
+
+  .tabs__links {
+
+    padding-bottom: 0;
+
+    .link:not(.text-decoration-none):not(.btn) {
+
+      margin-bottom: 0;
+    }
+  }
+}
+// #endregion

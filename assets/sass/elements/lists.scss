@@ -4,6 +4,69 @@
   max-width: $content-max-width;
 }
 
+.tick-list {
+
+  padding-left: 0;
+
+  li {
+    position: relative;
+    list-style: none;
+    padding-bottom: 1rem;
+    padding-left: 2.5rem;
+    
+    &:before {
+      
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1.5em;
+      height: 1.5em;
+      
+      background: var(--colour-secondary);
+      mask-image: var(--icon-tick);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-tick);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
+
+    &[class*="bg-"] {
+      padding: 1rem;
+      padding-left: 4rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      z-index: 0;
+
+      &:before,
+      &:after {
+      
+        top: 50%;
+        left: 1rem;
+        width: 2rem;
+        height: 2rem;
+        margin-top: -1rem;
+      }
+
+      &:after {
+      
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background-color: white;
+        border-radius: 50%;
+        transform-origin: 50% 50%;
+        transform: scale(0.9);
+      }
+
+    }
+  }
+}
+
+
 .breadcrumb {
 
   font-size: rem(14);

@@ -83,11 +83,11 @@
   }
 
   &:hover {
-    z-index: 2;
+    z-index: var(--index-focus);
   }
 
   &:focus {
-    z-index: 3;
+    z-index: var(--index-focus);
     border-color: $accordion-button-focus-border-color;
     outline: 0;
     box-shadow: $accordion-button-focus-box-shadow;

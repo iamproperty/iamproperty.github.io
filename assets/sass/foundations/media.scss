@@ -26,7 +26,7 @@ img {
 
   a:before,
   a:after {
-    display: none;
+    display: none!important;
   }
 
   img {
@@ -37,7 +37,7 @@ img {
     height: 100%;
     transform: translate(-50%,-50%);
     object-fit: cover;
-    z-index: 1;
+    z-index: var(--index-base);
   }
 
   .btn-secondary {
@@ -45,7 +45,7 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    z-index: 2;
+    z-index: var(--index-focus);
   }
 }
 // #endregion

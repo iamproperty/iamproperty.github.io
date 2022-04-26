@@ -255,7 +255,13 @@ function table(tableElement) {
     }
     #${randID} tbody tr:nth-child(${startShowing}),
     #${randID} tbody tr:nth-child(${startShowing}) ~ tr{
-      display: table-row;
+      display: block;
+    }
+    @media screen and (min-width: 36em) {
+      #${randID} tbody tr:nth-child(${startShowing}),
+      #${randID} tbody tr:nth-child(${startShowing}) ~ tr{
+        display: table-row;
+      }
     }
     #${randID} tbody tr:nth-child(${stopShowing}) ~ tr{
       display: none;
@@ -274,10 +280,10 @@ function table(tableElement) {
     form.classList.add('pb-3');
 
     // Create the form and create a container div to hold the pagination buttons
-    form.innerHTML = `<div class="col-6 col-sm-3 col-md-2 mb-3">
+    form.innerHTML = `<div class="col mw-fit-content mb-3">
   <div class="form-control__wrapper form-control-inline mb-0">
     <label for="${randID}_showing" class="form-label">Showing:</label>
-    <input type="number" name="${randID}_showing" id="${randID}_showing" class="form-control form-control-sm" placeholder="" list="${randID}_pagination" value="${show}" min="1" max="${totalRows}" />
+    <input type="number" name="${randID}_showing" id="${randID}_showing" class="form-control form-control-sm showing-input-field" placeholder="" list="${randID}_pagination" value="${show}" min="1" max="${totalRows}" />
   </div>
   <datalist id="${randID}_pagination">
   <option value="5">5</option>
@@ -286,8 +292,8 @@ function table(tableElement) {
   <option value="${totalRows}">${totalRows}</option>
   </datalist>
 </div>
-<div class="col-6 col-sm-2 col-md-2 d-flex align-items-center mb-3"><span class="label">per page</span></div>
-<div class="col-sm-7 col-md-8 d-sm-flex justify-content-end align-items-center mb-3" id="${randID}_paginationBtns"></div>`;
+<div class="col mw-fit-content me-auto d-flex align-items-center mb-3"><span class="label">per page</span></div>
+<div class="col mw-fit-content d-sm-flex justify-content-end align-items-center" id="${randID}_paginationBtns"></div>`;
 
     // Add after the actual table
     tableElement.append(form)
@@ -317,7 +323,7 @@ function table(tableElement) {
           strButtons += `<li class="page-item"><button class="page-link" data-page="${i}">${i}</button></li>`;
       }
 
-      paginationButtonsWrapper.innerHTML = `<span class="pe-2">Page: </span><ul class="pagination mb-0">
+      paginationButtonsWrapper.innerHTML = `<span class="pe-2 mb-3">Page: </span><ul class="pagination mb-3">
         ${page == 1 ? `<li class="page-item disabled"><span class="page-link">Previous</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)-1}">Previous</button></li>`}
         ${strButtons}
         ${page == numberPages ? `<li class="page-item disabled"><span class="page-link">Next</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)+1}">Next</button></li>`}
@@ -337,9 +343,11 @@ function table(tableElement) {
       }
 
       paginationButtonsWrapper.innerHTML = `
-<select class="form-select mb-3">
+<div class="form-control__wrapper page-number mb-2">
+<select class="form-select">
   ${strOptions}
 </select>
+</div>
       `;
     }
   }
@@ -524,7 +532,7 @@ function table(tableElement) {
 
   // Watch for the filterable event and re-sort the tbody
   tableElement.addEventListener('filtered', function (e) { 
-    
+
     if(tableElement.getAttribute('data-sortBy') && tableElement.getAttribute('data-sort'))
       sortTable(tableElement.getAttribute('data-sortBy'), tableElement.getAttribute('data-sort'));
 

@@ -4,10 +4,13 @@
     <input type="checkbox" name="showMenu" id="showMenu" class="d-none" />
     <input type="checkbox" name="showSearch" id="showSearch" class="d-none" />
 
-    <div class="nav__inner">
+    <div class="nav__inner" v-if="isMarketplace === false">
       <div class="container">
         <div class="row">
-          <div class="col mw-md-fit-content nav__logo">
+          <div class="col mw-md-fit-content nav__logo" v-if="hasLogoSlot">
+            <slot name="logo"></slot>
+          </div>
+          <div class="col mw-md-fit-content nav__logo" v-else>
             <a href="/" class="text-decoration-none mb-0">
               <Logo :id="logo" :path="logopath" :desc="logotext" class="pb-0"></Logo>
             </a>
@@ -38,7 +41,7 @@
 
         </div>
       </div>
-      <div class="nav__menu--secondary bg-primary" v-if="hasSecondarySlot">
+      <div class="nav__menu--secondary" v-if="hasSecondarySlot">
         <div class="container">
           <slot name="secondary"></slot>
         </div>
@@ -52,7 +55,43 @@
       </div>
     </div>
 
-    
+    <div class="nav__inner" v-else>
+      <div class="container">
+        <div class="row">
+          <div class="col nav__logo">
+            <a :href="propertylink" :class="`text-decoration-none mb-0 ${logo=='property'?'current':''}`">
+              <Logo id="property" :path="logopath" class="pb-0 pe-0"></Logo>
+            </a>
+
+            <a :href="movebutlerlink" :class="`text-decoration-none mb-0 ${logo=='movebutler'?'current':''}`">
+              <Logo id="movebutler" :path="logopath" class="pb-0 pe-0"></Logo>
+            </a>
+
+            <a :href="iamsoldlink" :class="`text-decoration-none mb-0 ${logo=='sold'?'current':''}`">
+              <Logo id="sold" :path="logopath" class="pb-0 pe-0"></Logo>
+            </a>
+          </div>
+
+          <div class="col mw-fit-content flex-row align-items-center nav__menu-btn">
+            <label for="showMenu">Menu</label>
+          </div>
+        </div>
+      </div>
+      <div class="nav__menu--secondary bg-primary" v-if="hasSecondarySlot">
+        <div class="container">
+          <slot name="secondary"></slot>
+        </div>
+      </div>
+      <div class="nav__menu flex-row">
+
+        
+          <slot></slot>
+
+
+
+      </div>
+
+    </div>
   </nav>
 </template>
 
@@ -63,10 +102,15 @@
 <script>
 import nav from '../../../assets/js/modules/nav.js'
 import Logo from '../../foundations/Logo/Logo.vue'
+import Input from '../../elements/Input/Input.vue'
+import Icon from '../../foundations/Icon/Icon.vue'
+
 
 export default {
   components: {
-    Logo
+    Input,
+    Logo,
+    Icon
   },
   name: 'Nav',
   props: {
@@ -93,6 +137,18 @@ export default {
     btntext: {
       type: String,
       required: false
+    },
+    propertylink: {
+      type: String,
+      required: false
+    },
+    movebutlerlink: {
+      type: String,
+      required: false
+    },
+    iamsoldlink: {
+      type: String,
+      required: false
     }
   },
   data () {
@@ -109,11 +165,17 @@ export default {
     }
   },
   computed: {
+    hasLogoSlot() {
+      return !!this.$slots.logo
+    },
     hasSecondarySlot() {
       return !!this.$slots.secondary
     },
     hasSearchSlot() {
       return !!this.$slots.search
+    },
+    isMarketplace() {
+      return this.$vnode.data.staticClass && this.$vnode.data.staticClass.includes('nav--marketplace') ? true : false;
     }
   },
   mounted(){

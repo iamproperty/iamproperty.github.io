@@ -36,18 +36,23 @@
 @media screen and (prefers-color-scheme: dark) {
   :root {
     --bs-body-bg: var(--colour-primary);
+    --colour-admin: var(--colour-primary);
     @include invert-colours();
   }
 
   body .text-primary {
     color: white!important;
   }
+
+  body .bg-white {
+    background-color: transparent!important;
+  }
 }
 
 @media screen {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-black):not(.invert-colours) {
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-black):not(.invert-colours):not(.bg-white):not(.bg-admin) {
 
     @include reset-colours();
 
@@ -56,13 +61,17 @@
     color: var(--colour-body);
 
     --btn-bg: var(--colour-primary);
-    --btn-text: white;
+    --btn-text: var(--colour-white);
+    --colour-underline: var(--colour-primary);
 
     .btn-secondary {
 
       --btn-text: var(--colour-primary);
     }
+    
   }
+
+  
 
   // Slight colour adjustments on the light background to match brand guidelines
   .bg-light[class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.prevent-invert) {

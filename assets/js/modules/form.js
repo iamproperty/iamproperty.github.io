@@ -34,6 +34,54 @@ function inputRange(inputWrapper){
       else 
         option.classList.remove('d-none');
     });
+
+  }, false);
+}
+
+function inputRedirect(inputWrapper){
+
+  inputWrapper.addEventListener('change', function(e){
+
+    const url = inputWrapper.getAttribute('data-redirect');
+    const desiredValue = inputWrapper.getAttribute('data-value-if');
+
+    if(inputWrapper.value == desiredValue)
+      document.location.href = url;
+
+  }, false);
+}
+
+//
+function multipleFileUploads(wrapper){
+
+  const fileTenplate = wrapper.querySelector('.row');
+  const clone = fileTenplate.cloneNode(true);
+  const addButton = wrapper.querySelector('[data-add]');
+
+  wrapper.addEventListener('click', function(e){
+    for (var target = e.target; target && target != this; target = target.parentNode) {
+      if (target.matches('[data-add]')) {  // Add a new row upload file input fields
+
+        const tempClone = clone.cloneNode(true);
+        wrapper.insertBefore(tempClone,target);
+
+        if(addButton.matches('[data-maxfiles]') && Array.from(wrapper.querySelectorAll(':scope > .row')).length >= addButton.dataset.maxfiles)
+          addButton.setAttribute('disabled','disabled');
+
+      break;
+      }
+      if (target.matches('[data-delete]')) { // Delete the current row
+
+        let row = target.closest('.row');
+        row.remove();
+
+        if(addButton.matches('[data-maxfiles]') && Array.from(wrapper.querySelectorAll(':scope > .row')).length < addButton.dataset.maxfiles)
+          addButton.removeAttribute('disabled');
+
+      break;
+      }
+    }
+    
   }, false);
 }
 
@@ -44,6 +92,68 @@ function form(formElement) {
   Array.from(formElement.querySelectorAll('[data-input-range]')).forEach((arrayElement, index) => {
     inputRange(arrayElement);
   });
+
+  Array.from(formElement.querySelectorAll('[data-redirect][data-value-if]')).forEach((arrayElement, index) => {
+    inputRedirect(arrayElement);
+  });
+
+  Array.from(formElement.querySelectorAll('.multiple-file-uploads')).forEach((arrayElement, index) => {
+    multipleFileUploads(arrayElement);
+  });
+
+  
+  // Check the file size of a file when uploaded in case it exceeds the max file size set
+  formElement.addEventListener('change', function(e){
+    for (var target = e.target; target && target != this; target = target.parentNode) {
+      if (target.matches('[type="file"][data-filesize]') && target.files && target.files[0]) { 
+
+          const maxAllowedSize = target.dataset.filesize;
+          if (target.files[0].size > maxAllowedSize) { 
+
+            target.value = '';
+            alert('File too large');
+          }
+        break;
+      }
+    }
+  }, false);
+
+
+  // When a form is updated we may want to update some of the existing input fields; setting active fields when some data is selected.
+  formElement.addEventListener('change', function(e){
+
+    // Remove disabled attribute when a pre-selected input field equals a certain value
+    Array.from(formElement.querySelectorAll('select[data-activeif][data-equals],input[data-activeif][data-equals]')).forEach((arrayElement, index) => {
+      
+      let group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
+      let selector = arrayElement.dataset.activeif;
+      let value = arrayElement.dataset.equals;
+      let testElement = group.querySelector(`select[data-id="${selector}"],input[data-id="${selector}"]`);
+
+      if(testElement.value == value){
+        arrayElement.removeAttribute('disabled');
+      }
+      else {
+        arrayElement.setAttribute('disabled','disabled');
+        arrayElement.value = '';
+      }
+    });
+
+    // Show this input wrapper when a pre-selected input field equals a certain value
+    Array.from(formElement.querySelectorAll('.form-control__wrapper[data-displayif][data-equals]')).forEach((arrayElement, index) => {
+      
+      let group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
+      let selector = arrayElement.dataset.activeif;
+      let value = arrayElement.dataset.equals;
+      let testElement = group.querySelector(`select[data-id="${selector}"],input[data-id="${selector}"]`);
+
+      if(testElement.value == value)
+        arrayElement.classList.remove('d-none');
+      else
+        arrayElement.classList.add('d-none');
+    });
+
+  }, false);
 }
 
 export default form

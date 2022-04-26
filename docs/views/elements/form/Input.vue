@@ -50,12 +50,41 @@
     <div class="container pb-0">
 
       <h2>Inline</h2>
-      <p>Using the <strong>.form-control-inline</strong>  a class can control the width of the field container a class can be given to the label to control its width. This is usefull if you want to have uniformed inline input fields.</p>
+      <p>Using the <strong>.form-control-inline</strong> a class can control the width of the field container a class can be given to the label to control its width. This is usefull if you want to have uniformed inline input fields.</p>
       
     </div>
     <div class="container visualtest">
       <Input id="test6" label="Form input" labelclass="col-5 col-sm-4" class="form-control-inline col-md-6"></Input>
     </div>
+
+    <div class="container pb-0">
+
+      <h2>Prefix and suffix</h2>
+      <p>Both can be added to an input field to give it about of exta contexual meaning. Highlighting that the value inside needs to be in pounds or in inches for example.</p>
+      
+    </div>
+    <div class="container visualtest">
+      <Input id="test7" label="Form input" class="" prefix="£"></Input>
+      <Input id="test8" label="Form input" class="" suffix="ins"></Input>
+
+      <p class="pt-3 mb-2">Can be used of inline input fields with the use of extra classes to define its offset which should match the width of the label.</p>
+      <Input id="test9" label="Form input" labelclass="col-5 col-sm-4" class="form-control-inline col-md-6" prefix="#" prefixClass="offset-5 offset-sm-4"></Input>
+    </div>
+
+    <div class="container pb-0">
+
+      <h2>Tooltips and hints</h2>
+      <p>A tooltip or hint text can be added to the label to help explain the purpose of the input field.</p>
+      
+    </div>
+    <div class="container visualtest">
+      <Input id="test10" label="Form input" class="" title="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."></Input>
+      
+      <Input id="test10b" label="Form input" class="" hint="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."></Input>
+      
+    </div>
+
+
     <div class="container">
       <h2>Data binding</h2>
 
