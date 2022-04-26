@@ -59,16 +59,16 @@
       <div class="container">
         <div class="row">
           <div class="col nav__logo">
-            <a href="/standalone/marketplace" :class="`text-decoration-none mb-0 ${logo=='property'?'current':''}`">
-              <Logo id="property" class="pb-0 pe-0"></Logo>
+            <a :href="propertylink" :class="`text-decoration-none mb-0 ${logo=='property'?'current':''}`">
+              <Logo id="property" :path="logopath" class="pb-0 pe-0"></Logo>
             </a>
 
-            <a href="/standalone/movebutler" :class="`text-decoration-none mb-0 ${logo=='movebutler'?'current':''}`">
-              <Logo id="movebutler" class="pb-0 pe-0"></Logo>
+            <a :href="movebutlerlink" :class="`text-decoration-none mb-0 ${logo=='movebutler'?'current':''}`">
+              <Logo id="movebutler" :path="logopath" class="pb-0 pe-0"></Logo>
             </a>
 
-            <a href="/standalone/agent" :class="`text-decoration-none mb-0 ${logo=='sold'?'current':''}`">
-              <Logo id="sold" class="pb-0 pe-0"></Logo>
+            <a :href="iamsoldlink" :class="`text-decoration-none mb-0 ${logo=='sold'?'current':''}`">
+              <Logo id="sold" :path="logopath" class="pb-0 pe-0"></Logo>
             </a>
           </div>
 
@@ -135,6 +135,18 @@ export default {
       required: false
     },
     btntext: {
+      type: String,
+      required: false
+    },
+    propertylink: {
+      type: String,
+      required: false
+    },
+    movebutlerlink: {
+      type: String,
+      required: false
+    },
+    iamsoldlink: {
       type: String,
       required: false
     }

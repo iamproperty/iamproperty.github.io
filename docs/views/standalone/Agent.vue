@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav logo="sold" class="nav--marketplace">
+    <Nav logo="sold" class="nav--marketplace" propertylink="/standalone/marketplace" movebutlerlink="/standalone/movebutler" iamsoldlink="/standalone/agent">
       
 
 

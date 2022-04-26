@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.7.2 (future version)</h2>
+      <h2>V2.7.4</h2>
       <ul>
         <li>Fix marketplace nav</li>
       </ul>
