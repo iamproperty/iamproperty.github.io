@@ -3,7 +3,12 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.7.1 (future version)</h2>
+      <h2>V2.7.4</h2>
+      <ul>
+        <li>Fix marketplace nav</li>
+      </ul>
+      
+      <h2>V2.7.1 (current version)</h2>
       <ul>
         <li>Start of 'required if' functionality</li>
         <li>Multi upload input field</li>
@@ -16,7 +21,7 @@
       <ul>
         <li>A change to the z-index values may cause some display issues with integrated systems.</li>
       </ul>
-      <h2>V2.7.0 (current version)</h2>
+      <h2>V2.7.0</h2>
       <ul>
         <li>Error page templates and error specific CSS</li>
         <li>Email templates and email specific CSS</li>

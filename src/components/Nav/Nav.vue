@@ -59,16 +59,16 @@
       <div class="container">
         <div class="row">
           <div class="col nav__logo">
-            <a href="/standalone/marketplace" :class="`text-decoration-none mb-0 ${logo=='property'?'current':''}`">
-              <Logo id="property" class="pb-0 pe-0"></Logo>
+            <a :href="propertylink" :class="`text-decoration-none mb-0 ${logo=='property'?'current':''}`">
+              <Logo id="property" :path="logopath" class="pb-0 pe-0"></Logo>
             </a>
 
-            <a href="/standalone/movebutler" :class="`text-decoration-none mb-0 ${logo=='movebutler'?'current':''}`">
-              <Logo id="movebutler" class="pb-0 pe-0"></Logo>
+            <a :href="movebutlerlink" :class="`text-decoration-none mb-0 ${logo=='movebutler'?'current':''}`">
+              <Logo id="movebutler" :path="logopath" class="pb-0 pe-0"></Logo>
             </a>
 
-            <a href="/standalone/agent" :class="`text-decoration-none mb-0 ${logo=='sold'?'current':''}`">
-              <Logo id="sold" class="pb-0 pe-0"></Logo>
+            <a :href="iamsoldlink" :class="`text-decoration-none mb-0 ${logo=='sold'?'current':''}`">
+              <Logo id="sold" :path="logopath" class="pb-0 pe-0"></Logo>
             </a>
           </div>
 
@@ -83,79 +83,14 @@
         </div>
       </div>
       <div class="nav__menu flex-row">
-        <span class="h6 text-muted">Services</span>
 
-      <a href="/standalone/marketplace" class="text-decoration-none mb-4 d-flex justify-content-between align-items-center">
-        <Logo id="property" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
+        
+          <slot></slot>
 
-      <a href="/standalone/movebutler" class="text-decoration-none mb-4 d-flex justify-content-between align-items-center">
-        <Logo id="movebutler" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
 
-      <a href="/standalone/agent" class="text-decoration-none mb-5 d-flex justify-content-between align-items-center">
-        <Logo id="sold" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
 
-      <span class="h6 text-muted">My Branches</span>
-
-      <form>
-      <Input type="select" id="test1" label="Today, you're at" :options="[{display:'Branch 1',value:'1'},{display:'Branch Two',value:'2'},{display:'Create new branch',value:'new'}]" data-value-if="new" data-redirect="/cp/company/branches/create"></Input>
-      </form>
-
-      <span class="h6 text-muted">Menu</span>
-
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"><i class="icon fs-1 fa-user"></i></span>
-          <span class="col">
-            <span Class="h5 mb-1">Control panel</span>
-            <span class="text-muted small">
-              Manage your iamproperty account, branches, staff, billing and invoices
-            </span>
-          </span>
-        </span>
-      </a>
-      
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"><Icon id="tick-list" class="fs-1 m-0"></Icon></span>
-          <span class="col">
-            <span Class="h5 mb-1">Quick start guide & FAQ</span>
-            <span class="text-muted small">
-              Download a guide on how to manage your account
-            </span>
-          </span>
-        </span>
-      </a>
-      
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"><Icon id="chat" class="fs-1 m-0 p-1"></Icon></span>
-          <span class="col">
-            <span Class="h5 mb-1">Contact us</span>
-            <span class="text-muted small">
-              Get in touch
-            </span>
-          </span>
-        </span>
-      </a>
-
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"><i class="icon fs-1 fa-sign-out"></i></span>
-          <span class="col">
-            <span Class="h5 mb-1">Log out</span>
-            <span class="text-muted small">
-              Martin  Critchlow<br> Watson-Clark
-            </span>
-          </span>
-        </span>
-      </a>
       </div>
+
     </div>
   </nav>
 </template>
@@ -200,6 +135,18 @@ export default {
       required: false
     },
     btntext: {
+      type: String,
+      required: false
+    },
+    propertylink: {
+      type: String,
+      required: false
+    },
+    movebutlerlink: {
+      type: String,
+      required: false
+    },
+    iamsoldlink: {
       type: String,
       required: false
     }
