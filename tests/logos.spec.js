@@ -8,7 +8,7 @@ describe('Logo component', () => {
     })
     
     expect(test.html()).toContain('<title>iam property</title>')
-    expect(test.html()).toContain('<use xlink:href="#logo-property"></use>')
+    expect(test.html()).toContain('<use xlink:href="/svg/logo.svg#logo-property"></use>')
   })
 
   it('renders the correct logo when an ID is passed', () => {
@@ -19,7 +19,7 @@ describe('Logo component', () => {
     })
     
     expect(test.html()).toContain('<title>iam sold</title>')
-    expect(test.html()).toContain('<use xlink:href="#logo-sold"></use>')
+    expect(test.html()).toContain('<use xlink:href="/svg/logo.svg#logo-sold"></use>')
   })
 
   it('renders a description when passed', () => {
