@@ -42,3 +42,6 @@ assets/js/scripts.bundle.min.js.map
 
 # Composer
 /vendor/
+
+# public files
+public/svg

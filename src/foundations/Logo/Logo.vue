@@ -19,7 +19,7 @@ export default {
     path: {
       type: String,
       required: false,
-      default: ''
+      default: '/svg/logo.svg'
     },
     desc: {
       type: String

@@ -17,9 +17,18 @@ if (process.env.TEST_MODE === `integration`) {
 }
 
 module.exports = {
+  transpileDependencies: [
+    'framework7',
+    'framework7-vue',
+    'template7',
+    'dom7',
+    'ssr-window'
+  ],
   lintOnSave: false,
   pages,
   chainWebpack: (config) => {
+
+    /*
     const svgRule = config.module.rule('svg')
 
     svgRule.uses.clear()
@@ -41,6 +50,15 @@ module.exports = {
           ]
         }
       })
+*/
+
+
+config.module.rule('svg')
+.test(/\.svg$/)
+.use('vue-svg-loader')
+.loader('vue-svg-loader')
+.end()
+
 
     config.module.rule('md')
       .test(/\.md/)
