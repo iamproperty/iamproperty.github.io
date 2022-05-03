@@ -9,7 +9,8 @@ helpers.addBodyClasses(document.body);
 helpers.checkElements(document.body);
 
 // import 'bootstrap/dist/css/bootstrap.css'
-import cssVars from './assets/styles.scss'
+import cssVars from './assets/data.module.scss'
+import styles from './assets/styles.scss'
 
 // Filters the CSS vars object to pull out the theme colours
 const themeColours = Object.keys(cssVars).reduce(function (arr, key) {

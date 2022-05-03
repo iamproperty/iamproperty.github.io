@@ -28,48 +28,23 @@ module.exports = {
   pages,
   chainWebpack: (config) => {
 
-    /*
-    const svgRule = config.module.rule('svg')
-
-    svgRule.uses.clear()
-
-    svgRule
-      .use('babel-loader')
-      .loader('babel-loader')
-      .end()
-      .use('vue-svg-loader')
-      .loader('vue-svg-loader')
-      .options({
-        svgo: {
-          plugins: [
-            {
-              cleanupIDs: false,
-              mergePaths: false,
-              inlineStyles: false
-            }
-          ]
-        }
-      })
-*/
-
-
-config.module.rule('svg')
-.test(/\.svg$/)
-.use('vue-svg-loader')
-.loader('vue-svg-loader')
-.end()
+    config.module.rule('svg')
+    .test(/\.svg$/)
+    .use('vue-svg-loader')
+    .loader('vue-svg-loader')
+    .end()
 
 
     config.module.rule('md')
-      .test(/\.md/)
-      .use('vue-loader')
-      .loader('vue-loader')
-      .end()
-      .use('vue-markdown-loader')
-      .loader('vue-markdown-loader/lib/markdown-compiler')
-      .options({
-        raw: true
-      })
+    .test(/\.md/)
+    .use('vue-loader')
+    .loader('vue-loader')
+    .end()
+    .use('vue-markdown-loader')
+    .loader('vue-markdown-loader/lib/markdown-compiler')
+    .options({
+      raw: true
+    })
 
     config.module.rule('files')
     .test(/\.(pdf)$/)
@@ -78,7 +53,9 @@ config.module.rule('svg')
     .end()
 
   },
-  css: {sourceMap: true},
+  css: {
+    sourceMap: true
+  },
   configureWebpack: {
     resolve: {
       alias: {
