@@ -101,16 +101,18 @@
           <div class="col-sm-6">
             <div class="admin-panel">
               <h3>Survey Details</h3>
-              <Input id="fieldid" label="Requested a call?" value="Yes"></Input>
+              <ul class="tick-list">
+                <li class="h6">A call has been requested</li>
+              </ul>
             </div>
             <div class="admin-panel bg-secondary">
               <h3>Survey milestones</h3>
-              <ul class="tick-list">
-                <li>Survey milestone 1 details</li>
-                <li>Survey milestone 1 details</li>
-                <li>Survey milestone 1 details</li>
-                <li>Survey milestone 1 details</li>
-                <li>Survey milestone 1 details</li>
+              <ul class="tick-list fw-bold">
+                <li class="tick--success"><a href="/">ID Verified</a></li>
+                <li class="tick--warning pb-4"><a href="/">Carry out welcome call (Overdue)</a><br><span class="small">Due 25 Apr 2022</span></li>
+                <li class="tick--danger">Survey milestone 1 details</li>
+                <li class="tick--incomplete">Survey milestone 2 details</li>
+                <li class="tick--incomplete">Survey milestone 3 details</li>
               </ul>
             </div>
           </div>
@@ -131,14 +133,11 @@
 
         <div class="admin-panel">
           <h3>Survey Details</h3>
-          <form class="row">
-            <div class="col-12 col-sm-6">
-              <Input id="fieldid" label="Requested a call?" value="Yes" class="form-control-inline" labelclass="col mw-fit-content" ></Input>
-            </div>
-            <div class="col mw-fit-content">
-              <button class="btn btn-tertiary">Edit</button>
-            </div>
-          </form>
+
+          <ul class="tick-list">
+            <li class="h6 tick--warning">No survey requested</li>
+          </ul>
+          <a href="/" class="btn btn-tertiary">Request survey</a>
         </div>
 
         <div class="admin-panel">

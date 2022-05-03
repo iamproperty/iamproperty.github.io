@@ -34,6 +34,29 @@
       -webkit-mask-position: 50% 50%;
     }
 
+    &.tick--warning:before {
+
+      background: var(--colour-warning);
+      mask-image: var(--icon-warning);
+      -webkit-mask-image: var(--icon-warning);
+    }
+
+    &.tick--danger:before {
+
+      background: var(--colour-danger);
+      mask-image: var(--icon-warning);
+      -webkit-mask-image: var(--icon-warning);
+    }
+
+    &.tick--incomplete:before {
+
+      background: currentColor;
+      mask-image: none;
+      -webkit-mask-image: none;
+      border-radius: 50%;
+      transform: scale(0.8);
+    }
+
     &[class*="bg-"] {
       padding: 1rem;
       padding-left: 4rem;
