@@ -6,7 +6,7 @@ const pkg = require('../package.json');
 
 describe(`Header`, () => {
   
-  it(`should have the breadcrumb and background image absolutely positioned`, async(done) => {
+  it(`should have the breadcrumb and background image absolutely positioned`, async() => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
@@ -31,7 +31,7 @@ describe(`Header`, () => {
 
 
     await browser.close()
-    done()
+    return true;
   })
 })
 
