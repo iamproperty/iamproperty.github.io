@@ -243,8 +243,7 @@
 .nav {
 
   position: sticky;
-  top: -1px;
-  padding-top: 1px;
+  top: 0;
   left: 0;
   width: 100%;
   z-index: var(--index-menu);
@@ -654,6 +653,12 @@ nav + main > *:first-child {
 
   --nav-border: #eeeeee;
   --nav-height: 6rem;
+  --featured-hover-bg: #eeeeee;
+
+  @media screen and (prefers-color-scheme: dark) {
+
+    --featured-hover-bg: #001c22;
+  }
 
   &.nav--admin {
 
@@ -677,7 +682,7 @@ nav + main > *:first-child {
   }
 
   .nav__featured-link:hover {
-    background: #eeeeee;
+    background: var(--featured-hover-bg);
   }
 
   .list-unstyled {
@@ -743,7 +748,7 @@ nav + main > *:first-child {
       position: absolute;
       top: var(--nav-height);
       z-index: 60;
-      background: #fff;
+      background: var(--bs-body-bg);
       overflow-y: auto;
       box-shadow: -0.5rem 1rem 1rem rgb(0 0 0 / 5%);
       border-top: 1px solid var(--nav-border);
@@ -777,7 +782,7 @@ nav + main > *:first-child {
       position: absolute;
       top: calc(var(--nav-height) + 1px);
       left: 0;
-      height: calc(100vh - var(--nav-height));
+      height: calc(100vh - var(--nav-height) - 1px);
       width: rem(280);
       overflow: auto;
 
