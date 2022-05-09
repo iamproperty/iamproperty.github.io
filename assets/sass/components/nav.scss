@@ -746,7 +746,7 @@ nav + main > *:first-child {
       height: calc(100vh - var(--nav-height));
       width: rem(400);
       position: absolute;
-      top: calc(var(--nav-height));
+      top: var(--nav-height);
       z-index: 60;
       background: var(--bs-body-bg);
       overflow-y: auto;
