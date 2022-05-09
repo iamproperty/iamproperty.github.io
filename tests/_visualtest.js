@@ -10,7 +10,7 @@ module.exports = {
       
     describe(page, () => {
     
-      it(`It should render correctly.`, async(done) => {
+      it(`It should render correctly.`, async() => {
     
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
@@ -29,10 +29,10 @@ module.exports = {
         const desktopImage = await page.screenshot({ fullPage: true });
         expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
     
-        done()
+        return true;
       });
     
-      it(`It should render correctly in dark mode.`, async(done) => {
+      it(`It should render correctly in dark mode.`, async() => {
   
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
@@ -44,8 +44,9 @@ module.exports = {
         const desktopImage = await page.screenshot({ fullPage: true });
         expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
     
-        done()
+        return true;
       });
+      
     });
   },
 };

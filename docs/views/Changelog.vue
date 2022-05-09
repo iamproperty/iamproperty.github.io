@@ -3,12 +3,17 @@
     <div class="container">
       <h1>Changelog</h1>
       
-      <h2>V2.7.5 (Future version)</h2>
+      <h2>V2.7.6</h2>
+      <ul>
+        <li>Minor fixes for the marketplace nav so it works better in dark mode.</li>
+      </ul>
+
+      <h2>V2.7.5</h2>
       <ul>
         <li>Add extra tick list classes</li>
       </ul>
       
-      <h2>V2.7.4 (current version)</h2>
+      <h2>V2.7.4</h2>
       <ul>
         <li>Fix marketplace nav</li>
       </ul>

@@ -6,7 +6,7 @@ const pkg = require('../package.json');
 
 describe(`Headings`, () => {
   
-  it(`should have the correct size`, async(done) => {
+  it(`should have the correct size`, async() => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
@@ -51,7 +51,7 @@ describe(`Headings`, () => {
     expect(fontSize6).toBe(16);
 
     await browser.close()
-    done()
+    return true;
   })
 })
 
