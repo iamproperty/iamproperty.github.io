@@ -45,7 +45,7 @@
       </div>
 
       <h3>To add font awesome to an app</h3>
-      <p>To include the relevant CSS and font files to your app/website you need to include the below 2 link tags. Or follow the the <a href="https://fontawesome.com/start">font awesome getting started</a> guide. It is worth noting that we are only using the light version of the font file, this is to match our icons better.</p>
+      <p>To include the relevant CSS and font files to your app/website you need to include the below tag. Or follow the the <a href="https://fontawesome.com/start">font awesome getting started</a> guide. It is worth noting that we are only using the light version of the font file, this is to match our icons better.</p>
       <pre><code class="html">{{cssScripts}}</code></pre>
 
       <h3>How to use font awesome</h3>
@@ -68,16 +68,35 @@ export default {
   },
   data () {
     return {
-      icons: ['calendar','chat','clock','computer','document','documents','email','envelope','in-progress','launch','lock','mobile','offer','paper-plane','phone','rocket','search','send','sold','tag','tick','tick-list','time'],
+      icons: [],
       faicons: ['arrow-down','envelope','award','camera','align-right','axe','bicycle'],
       htmlUsage: `<svg class="icon">
   <title>Email</title>
-  <use xlink:href="#icon-email"></use>
+  <use xlink:href="{filepath}#icon-email"></use>
 </svg>`,
-      cssScripts: `<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/light.css" integrity="sha384-zCLzLBaV9kpBZtwZ72K00PI4UjqXZhrzMeVtYGOOHqL2N5PXSVw2MtJjaWTKYDHW" crossorigin="anonymous">
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/fontawesome.css" integrity="sha384-ig3RKyui4sECvuz+WE8EmFYy7sjRvEvy82mmhfV7ljRieb+0f8eEZKxHv2KC0+io" crossorigin="anonymous">`,
+      cssScripts: `<script src="https://kit.fontawesome.com/26fdbf0179.js" crossorigin="anonymous" />`,
       fausage: `<a href="#down">Down <i class="fa-arrow-down"></i></a>`
     }
+  },
+  mounted(){
+    
+    let tempIcons = [];
+    var request = new XMLHttpRequest();
+    request.open("GET", "/svg/icons.svg");
+    request.setRequestHeader("Content-Type", "image/svg+xml");
+    request.addEventListener("load", function(event) {
+      var response = event.target.responseText;
+      var doc = new DOMParser();
+      var xml = doc.parseFromString(response, "image/svg+xml");
+      
+      Array.from(xml.querySelectorAll('symbol')).forEach((arrayElement, index) => {
+        tempIcons.push(arrayElement.getAttribute('id').replace('icon-',''));
+      });
+
+      tempIcons = tempIcons.sort();
+    });
+    request.send();
+    this.icons = tempIcons;
   }
 }
 </script>
