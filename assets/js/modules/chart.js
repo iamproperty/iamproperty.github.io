@@ -30,13 +30,13 @@ function chart(chartElement,min,max,type) {
   // Add css vars to cells
   Array.from(chartElement.querySelectorAll('tbody tr')).forEach((tr, index) => {
 
-    let group = tr.querySelector('td:first-child').innerText;
+    let group = tr.querySelector('td:first-child').innerHTML;
 
     Array.from(tr.querySelectorAll('td[data-numeric]:not([data-numeric="0"]):not(:first-child)')).forEach((td, index) => {
       
       const value = Number.parseFloat(td.getAttribute('data-numeric'));
       let percent = ((value - min)/(max)) * 100;
-      const content = td.innerText;
+      const content = td.innerHTML;
       const label = td.getAttribute('data-label');
       let bottom = 0;
 
@@ -97,7 +97,6 @@ export const createPies = function(chartElement){
 
   Array.from(chartElement.querySelectorAll('tbody tr')).forEach((item, index) => {
     
-    
     let paths = '';
     let tooltips = '';
 
@@ -106,7 +105,7 @@ export const createPies = function(chartElement){
     let total = 0;
 
     let titleKey = item.querySelectorAll('td')[0]
-    let title = titleKey.innerText;
+    let title = titleKey.innerHTML;
 
     Array.from(item.querySelectorAll('td')).forEach((cell, subindex) => {
 
@@ -153,7 +152,7 @@ export const createPies = function(chartElement){
           ].join(' ');
 
         paths += `<path d="${pathData}"></path>`;
-        tooltips += `<foreignObject x="-70" y="-70" width="140" height="140" style="transform: rotate(90deg)"><div><span class="h5 mb-0"><span class="total d-block">${ucfirst(unsnake(title))}</span> ${ucfirst(unsnake(cell.getAttribute('data-label')))}<br/> ${cell.innerText}</span></div></foreignObject>`;
+        tooltips += `<foreignObject x="-70" y="-70" width="140" height="140" style="transform: rotate(90deg)"><div><span class="h5 mb-0"><span class="total d-block">${ucfirst(unsnake(title))}</span> ${ucfirst(unsnake(cell.getAttribute('data-label')))}<br/> ${cell.innerHTML}</span></div></foreignObject>`;
       }
     });
 
