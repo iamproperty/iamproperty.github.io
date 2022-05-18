@@ -420,4 +420,170 @@
 		<path d="M329.75,200c0-71.66-58.09-129.75-129.75-129.75S70.25,128.34,70.25,200s58.09,129.75,129.75,129.75,129.75-58.09,129.75-129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12px;"/>
 	</symbol>
 
+	<!-- basket -->
+  <symbol id="icon-basket" viewBox="0 0 400 400">
+		<rect x="71.9" y="161.95" width="256.2" height="58.17" rx="12" ry="12" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M84.97,220.12l18.35,106.94c1.14,6.65,6.91,11.51,13.66,11.51h166.04c6.75,0,12.52-4.86,13.66-11.51l18.35-106.94" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/><path d="M284.31,161.95l-63.13-94.37c-2.57-3.84-6.89-6.15-11.52-6.15h-30.13c-4.95,0-9.52,2.64-12,6.92l-54.09,93.59" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="148.37" y1="261.68" x2="148.37" y2="297.01" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="261.68" x2="200" y2="297.01" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="251.63" y1="261.68" x2="251.63" y2="297.01" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+	<!-- alarm2 -->
+  <symbol id="icon-alarm2" viewBox="0 0 400 400">
+		
+		<path d="M249.68,115.12c6.35-8.38,16.41-13.8,27.74-13.8,19.21,0,34.78,15.57,34.78,34.78,0,11.01-5.11,20.82-13.1,27.19" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M114.99,284.12l-21.98,48.78c-1.63,3.62,2.43,7.15,5.78,5.03l45.24-28.5" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<circle cx="199.74" cy="216.17" r="108.62" transform="translate(-94.35 204.55) rotate(-45)" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="199.74" y1="298.24" x2="199.74" y2="324.79" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="199.74" y1="108.57" x2="199.74" y2="134.09" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="127.48" y1="257.79" x2="127.48" y2="257.79" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="272.07" y1="174.32" x2="272.07" y2="174.32" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="117.67" y1="216.17" x2="91.12" y2="216.17" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="308.36" y1="216.17" x2="281.81" y2="216.17" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="157.4" y1="142.98" x2="157.4" y2="142.98" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="241.46" y1="288.57" x2="241.46" y2="288.57" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="157.62" y1="288.91" x2="157.62" y2="288.91" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="241.46" y1="143.7" x2="241.46" y2="143.7" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="125.96" y1="173.6" x2="125.96" y2="173.6" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="272.07" y1="257.96" x2="272.07" y2="257.96" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polyline points="199.74 164.75 199.74 216.17 226.75 243.18" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M286.27,284.12l21.98,48.78c1.63,3.62-2.43,7.15-5.78,5.03l-45.23-28.5" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M279.07,82.32c28.87,0,52.27,23.4,52.27,52.27" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M279.07,61.43c40.4,0,73.16,32.75,73.16,73.16" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M150.32,115.12c-6.35-8.38-16.41-13.8-27.74-13.8-19.21,0-34.78,15.57-34.78,34.78,0,11.01,5.11,20.82,13.1,27.19" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M120.93,82.32c-28.87,0-52.27,23.4-52.27,52.27" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M120.93,61.43c-40.4,0-73.16,32.75-73.16,73.16" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- download -->
+  <symbol id="icon-download" viewBox="0 0 400 400">
+		<polyline points="235.39 270.77 200 306.16 164.61 270.77" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="235.39" x2="200" y2="164.61" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="306.16" x2="200" y2="235.39" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M247.18,235.39h35.39c26.06,0,47.18-21.12,47.18-47.18s-21.12-47.18-47.18-47.18c-5.38,0-10.46,1.09-15.28,2.75-8.94-28.84-35.51-49.93-67.29-49.93-39.09,0-70.77,31.69-70.77,70.77,0,3.43,.54,6.72,1.01,10.02-6.37-6.18-15.03-10.02-24.6-10.02-19.54,0-35.39,15.84-35.39,35.39s15.84,35.39,35.39,35.39h47.18" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- loading -->
+  <symbol id="icon-loading" viewBox="0 0 400 400">
+		<path d="M267.7,200c0,37.39-30.31,67.7-67.7,67.7-17.09,0-32.7-6.33-44.61-16.77" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polygon points="175.91 242.38 138.01 227.25 143.85 267.64 175.91 242.38"/>
+		<path d="M132.3,200c0-37.39,30.31-67.7,67.7-67.7,17.09,0,32.7,6.33,44.61,16.77" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polygon points="224.09 157.61 261.99 172.75 256.15 132.36 224.09 157.61"/>
+		<circle cx="200" cy="200" r="129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- refresh -->
+  <symbol id="icon-refresh" viewBox="0 0 400 400">
+		<path d="M267.7,200c0,37.39-30.31,67.7-67.7,67.7s-67.7-30.31-67.7-67.7,30.31-67.7,67.7-67.7c16.74,0,32.07,6.08,43.89,16.15" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polygon points="223.49 157.29 261.6 171.88 255.19 131.58 223.49 157.29"/>
+		<circle cx="200" cy="200" r="129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- battery -->
+  <symbol id="icon-battery" viewBox="0 0 400 400">
+		<rect x="133.28" y="102.49" width="133.44" height="236.08" rx="1" ry="1" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M165.07,61.43h69.85c.55,0,1,.45,1,1v40.06h-71.85V62.43c0-.55,.45-1,1-1Z" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<rect x="164.07" y="174.34" width="71.85" height="123.17" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="164.07" y1="215.4" x2="235.93" y2="215.4" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="164.07" y1="256.45" x2="235.93" y2="256.45" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="184.6" y1="318.04" x2="215.4" y2="318.04" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="184.6" y1="138.41" x2="215.4" y2="138.41" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="153.81" x2="200" y2="123.02" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- key -->
+  <symbol id="icon-key" viewBox="0 0 400 400">
+		<circle cx="251.69" cy="148.62" r="23.96" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M66.86,281.38l98.29-98.29c-11.08-30.78-4.16-66.58,20.76-91.09,34.05-33.49,89.31-32.88,122.66,1.3,33.02,33.86,32.77,88.08-.77,121.62-24.49,24.49-60,31.23-90.57,20.23l-7.58,7.58c-2.82,2.82-6.2,5.02-9.92,6.45l-23.9,9.19-13.28,32.3-30.05,11.03-12,31.02-47.04-5.87-6.6-45.47Z" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="183.46" y1="206.42" x2="92.04" y2="297.85" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- next -->
+  <symbol id="icon-next" viewBox="0 0 400 400">
+		<path d="M147.14,149.68c0-2.64,1.36-5.08,3.57-6.38,2.21-1.31,4.92-1.29,7.11,.06l81.97,50.32c2.15,1.32,3.47,3.73,3.47,6.33s-1.32,5-3.47,6.33l-81.97,50.32c-2.19,1.34-4.9,1.37-7.11,.06-2.21-1.3-3.57-3.75-3.57-6.38v-100.64Z" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="252.86" y1="142.33" x2="252.86" y2="257.67" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M329.75,200c0-71.66-58.09-129.75-129.75-129.75S70.25,128.34,70.25,200s58.09,129.75,129.75,129.75,129.75-58.09,129.75-129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- prev -->
+  <symbol id="icon-prev" viewBox="0 0 400 400">
+		<path d="M252.86,250.32c0,2.64-1.36,5.08-3.57,6.38-2.21,1.31-4.92,1.29-7.11-.06l-81.97-50.32c-2.15-1.32-3.47-3.73-3.47-6.33s1.32-5,3.47-6.33l81.97-50.32c2.19-1.34,4.9-1.37,7.11-.06,2.21,1.3,3.57,3.75,3.57,6.38v100.64Z" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="147.14" y1="257.67" x2="147.14" y2="142.33" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M329.75,200c0-71.66-58.09-129.75-129.75-129.75S70.25,128.34,70.25,200s58.09,129.75,129.75,129.75,129.75-58.09,129.75-129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+	
+	<!-- pause -->
+  <symbol id="icon-pause" viewBox="0 0 400 400">
+		<rect x="219.22" y="147.14" width="28.83" height="105.72" rx="12" ry="12" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<rect x="151.94" y="147.14" width="28.83" height="105.72" rx="12" ry="12" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M329.75,200c0-71.66-58.09-129.75-129.75-129.75S70.25,128.34,70.25,200s58.09,129.75,129.75,129.75,129.75-58.09,129.75-129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+	
+	<!-- forwards -->
+  <symbol id="icon-forwards" viewBox="0 0 400 400">
+		<path d="M195.19,149.68c0-2.64,1.36-5.08,3.57-6.38,2.21-1.31,4.92-1.29,7.11,.06l81.97,50.32c2.15,1.32,3.47,3.73,3.47,6.33s-1.32,5-3.47,6.33l-81.97,50.32c-2.19,1.34-4.9,1.37-7.11,.06-2.21-1.3-3.57-3.75-3.57-6.38v-100.64Z" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M195.19,221.91l-56.61,34.75c-2.16,1.34-4.9,1.34-7.11,.04-2.21-1.3-3.56-3.75-3.56-6.39v-100.63c0-2.64,1.35-5.1,3.56-6.39,2.22-1.3,4.95-1.3,7.11,.05l56.61,34.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M329.75,200c0-71.66-58.09-129.75-129.75-129.75S70.25,128.34,70.25,200s58.09,129.75,129.75,129.75,129.75-58.09,129.75-129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- backwards -->
+  <symbol id="icon-backwards" viewBox="0 0 400 400">
+		<path d="M204.81,149.68c0-2.64-1.36-5.08-3.57-6.38-2.21-1.31-4.92-1.29-7.11,.06l-81.97,50.32c-2.15,1.32-3.47,3.73-3.47,6.33s1.32,5,3.47,6.33l81.97,50.32c2.19,1.34,4.9,1.37,7.11,.06,2.21-1.3,3.57-3.75,3.57-6.38v-100.64Z" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M204.81,178.09l56.61-34.75c2.17-1.35,4.9-1.35,7.11-.05,2.21,1.3,3.56,3.75,3.56,6.39v100.63c0,2.64-1.34,5.1-3.56,6.39-2.21,1.3-4.95,1.3-7.11-.04l-56.61-34.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M329.75,200c0-71.66-58.09-129.75-129.75-129.75S70.25,128.34,70.25,200s58.09,129.75,129.75,129.75,129.75-58.09,129.75-129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- play -->
+  <symbol id="icon-play" viewBox="0 0 400 400">
+		<path d="M166.36,149.68c0-2.64,1.36-5.08,3.57-6.38,2.21-1.3,4.92-1.29,7.11,.06l81.97,50.32c2.15,1.32,3.47,3.73,3.47,6.33s-1.32,5-3.47,6.33l-81.97,50.32c-2.19,1.34-4.9,1.37-7.11,.06-2.21-1.3-3.57-3.75-3.57-6.38v-100.64Z" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M329.75,200c0-71.66-58.09-129.75-129.75-129.75S70.25,128.34,70.25,200s58.09,129.75,129.75,129.75,129.75-58.09,129.75-129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- delete -->
+  <symbol id="icon-delete" viewBox="0 0 400 400">
+		<path d="M99.22,111.82v201.55c0,13.92,11.27,25.19,25.19,25.19h151.17c13.92,0,25.19-11.27,25.19-25.19V111.82" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="86.63" y1="111.82" x2="313.37" y2="111.82" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="149.61" y1="162.21" x2="149.61" y2="288.18" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="162.21" x2="200" y2="288.18" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="250.39" y1="162.21" x2="250.39" y2="288.18" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<path d="M250.39,111.82v-25.19c0-13.92-11.27-25.19-25.19-25.19h-50.39c-13.93,0-25.19,11.27-25.19,25.19v25.19" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- download2 -->
+  <symbol id="icon-download2" viewBox="0 0 400 400">
+		<line x1="200" y1="176.41" x2="200" y2="93.84" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="258.98" x2="200" y2="176.41" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polyline points="294.37 188.2 329.75 188.2 329.75 306.16 70.25 306.16 70.25 188.2 105.63 188.2" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="258.98" x2="152.82" y2="211.8" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="247.18" y1="211.8" x2="200" y2="258.98" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- upload -->
+  <symbol id="icon-upload" viewBox="0 0 400 400">
+		<line x1="200" y1="93.84" x2="247.18" y2="141.02" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="188.2" x2="200" y2="258.98" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polyline points="294.37 188.2 329.75 188.2 329.75 306.16 70.25 306.16 70.25 188.2 105.63 188.2" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="152.82" y1="141.02" x2="200" y2="93.84" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="188.2" x2="200" y2="93.84" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- pin2 -->
+  <symbol id="icon-pin2" viewBox="0 0 400 400">
+		<path d="M250.39,187.4c27.85,0,50.39,22.54,50.39,50.39H99.22c0-27.85,22.54-50.39,50.39-50.39h100.78Z" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polyline points="149.61 187.4 149.61 61.43 250.39 61.43 250.39 187.4" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<line x1="200" y1="237.79" x2="200" y2="338.57" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- left -->
+  <symbol id="icon-left" viewBox="0 0 400 400">
+		<circle cx="200" cy="200" r="129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polyline points="211.8 152.82 164.61 200 211.8 247.18" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
+	<!-- right -->
+  <symbol id="icon-right" viewBox="0 0 400 400">
+		<circle cx="200" cy="200" r="129.75" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+		<polyline points="188.2 247.18 235.39 200 188.2 152.82" style="fill:none; stroke-linecap:round; stroke-linejoin:round; stroke-width:12.04px;"/>
+	</symbol>
+
 </svg>
