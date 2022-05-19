@@ -11,7 +11,7 @@ function table(tableElement) {
   const sortedEvent = new Event('sorted');
   const filteredEvent = new Event('filtered');
   const reorderedEvent = new Event('reordered');
-  const randID = 'tabe_'+Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
+  const randID = 'table_'+Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
   let draggedRow;
 
   tableElement.setAttribute('id',randID)
@@ -271,87 +271,6 @@ function table(tableElement) {
     tableElement.append(style);
   }
 
-  const createPaginationForm = function(show,page,totalRows){
-
-    const form = document.createElement("div");
-    form.classList.add('table__pagination');
-    form.classList.add('row');
-    form.classList.add('pt-3');
-    form.classList.add('pb-3');
-
-    // Create the form and create a container div to hold the pagination buttons
-    form.innerHTML = `<div class="col mw-fit-content mb-3">
-  <div class="form-control__wrapper form-control-inline mb-0">
-    <label for="${randID}_showing" class="form-label">Showing:</label>
-    <input type="number" name="${randID}_showing" id="${randID}_showing" class="form-control form-control-sm showing-input-field" placeholder="" list="${randID}_pagination" value="${show}" min="1" max="${totalRows}" />
-  </div>
-  <datalist id="${randID}_pagination">
-  <option value="5">5</option>
-  ${totalRows > 10 ? `<option value="10">10</option>` : ''}
-  ${totalRows > 20 ? `<option value="20">20</option>` : ''}
-  <option value="${totalRows}">${totalRows}</option>
-  </datalist>
-</div>
-<div class="col mw-fit-content me-auto d-flex align-items-center mb-3"><span class="label">per page</span></div>
-<div class="col mw-fit-content d-sm-flex justify-content-end align-items-center" id="${randID}_paginationBtns"></div>`;
-
-    // Add after the actual table
-    tableElement.append(form)
-  }
-
-  const createPaginationButttons = function(show,page,totalRows){
-
-    const paginationButtonsWrapper = document.getElementById(randID+'_paginationBtns')
-
-    if(paginationButtonsWrapper == null)
-      return false;
-
-    const numberPages = Math.ceil(totalRows / show)
-
-    if(numberPages == 1){ // Remore the buttons or dont display any if we dont need them
-      paginationButtonsWrapper.innerHTML = '';
-    }
-    else if(numberPages < 5){ // If less than 5 pages (which fits comfortably on mobile) we display buttons
-
-      let strButtons = '';
-
-      for (let i = 1; i <= numberPages; i++) {
-
-        if(i == page)
-          strButtons += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`;
-        else
-          strButtons += `<li class="page-item"><button class="page-link" data-page="${i}">${i}</button></li>`;
-      }
-
-      paginationButtonsWrapper.innerHTML = `<span class="pe-2 mb-3">Page: </span><ul class="pagination mb-3">
-        ${page == 1 ? `<li class="page-item disabled"><span class="page-link">Previous</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)-1}">Previous</button></li>`}
-        ${strButtons}
-        ${page == numberPages ? `<li class="page-item disabled"><span class="page-link">Next</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)+1}">Next</button></li>`}
-      </ul>`;
-
-    }
-    else { // If more than 5 lets show a select field instead so that we dont have loads and loads of buttons
-
-      let strOptions = '';
-
-      for (let i = 1; i <= numberPages; i++) {
-
-        if(i == page)
-          strOptions += `<option value="${i}" selected>Page ${i}</option>`;
-        else
-          strOptions += `<option value="${i}">Page ${i}</option>`;
-      }
-
-      paginationButtonsWrapper.innerHTML = `
-<div class="form-control__wrapper page-number mb-2">
-<select class="form-select">
-  ${strOptions}
-</select>
-</div>
-      `;
-    }
-  }
-
   // On page load check if the table should be paginated
   if(tableElement.getAttribute('data-show')){
 
@@ -361,15 +280,15 @@ function table(tableElement) {
 
     if(show < totalRows){
       paginateRows(show,page);
-      createPaginationForm(show,page,totalRows);
-      createPaginationButttons(show,page,totalRows);
+      createPaginationForm(randID,tableElement,show,page,totalRows);
+      createPaginationButttons(randID,tableElement,show,page,totalRows);
 
       tableElement.addEventListener('change', function(e){
         for (var target = e.target; target && target != this; target = target.parentNode) {
           if (target.matches('.table__pagination input[type="number"]')) {
   
             paginateRows(target.value,page);
-            createPaginationButttons(target.value,page,totalRows);
+            createPaginationButttons(randID,tableElement,target.value,page,totalRows);
             tableElement.setAttribute('data-show',target.value)
           }
         }
@@ -380,7 +299,7 @@ function table(tableElement) {
           if (target.matches('.page-item:not(.active):not(.disabled) .page-link')) { 
     
             paginateRows(tableElement.getAttribute('data-show'),target.getAttribute('data-page'));
-            createPaginationButttons(tableElement.getAttribute('data-show'),target.getAttribute('data-page'),totalRows);
+            createPaginationButttons(randID,tableElement,tableElement.getAttribute('data-show'),target.getAttribute('data-page'),totalRows);
           }
         }
       }, false);
@@ -390,7 +309,7 @@ function table(tableElement) {
           if (target.matches('.table__pagination select')) {
   
             paginateRows(tableElement.getAttribute('data-show'),target.value);
-            createPaginationButttons(tableElement.getAttribute('data-show'),target.value,totalRows);
+            createPaginationButttons(randID,tableElement,tableElement.getAttribute('data-show'),target.value,totalRows);
           }
         }
       });
@@ -548,8 +467,8 @@ function table(tableElement) {
       if(show < totalRows){
 
         paginateRows(show,1);
-        createPaginationForm(show,1,totalRows);
-        createPaginationButttons(show,1,totalRows);
+        createPaginationForm(randID,tableElement,show,1,totalRows);
+        createPaginationButttons(randID,tableElement,show,1,totalRows);
       }
     }
 
@@ -580,6 +499,87 @@ function table(tableElement) {
 
     table(newTable);
   }, false);
+}
+
+export const createPaginationForm = function(randID,tableElement,show,page,totalRows){
+
+  const form = document.createElement("div");
+  form.classList.add('table__pagination');
+  form.classList.add('row');
+  form.classList.add('pt-3');
+  form.classList.add('pb-3');
+
+  // Create the form and create a container div to hold the pagination buttons
+  form.innerHTML = `<div class="col mw-fit-content mb-3">
+<div class="form-control__wrapper form-control-inline mb-0">
+  <label for="${randID}_showing" class="form-label">Showing:</label>
+  <input type="number" name="${randID}_showing" id="${randID}_showing" class="form-control form-control-sm showing-input-field" placeholder="" list="${randID}_pagination" value="${show}" min="1" max="${totalRows}" />
+</div>
+<datalist id="${randID}_pagination">
+<option value="5">5</option>
+${totalRows > 10 ? `<option value="10">10</option>` : ''}
+${totalRows > 20 ? `<option value="20">20</option>` : ''}
+<option value="${totalRows}">${totalRows}</option>
+</datalist>
+</div>
+<div class="col mw-fit-content me-auto d-flex align-items-center mb-3"><span class="label">per page</span></div>
+<div class="col mw-fit-content d-sm-flex justify-content-end align-items-center" id="${randID}_paginationBtns"></div>`;
+
+  // Add after the actual table
+  tableElement.append(form)
+}
+
+export const createPaginationButttons = function(randID,tableElement,show,page,totalRows){
+
+  const paginationButtonsWrapper = document.getElementById(randID+'_paginationBtns')
+
+  if(paginationButtonsWrapper == null)
+    return false;
+
+  const numberPages = Math.ceil(totalRows / show)
+
+  if(numberPages == 1){ // Remore the buttons or dont display any if we dont need them
+    paginationButtonsWrapper.innerHTML = '';
+  }
+  else if(numberPages < 5){ // If less than 5 pages (which fits comfortably on mobile) we display buttons
+
+    let strButtons = '';
+
+    for (let i = 1; i <= numberPages; i++) {
+
+      if(i == page)
+        strButtons += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`;
+      else
+        strButtons += `<li class="page-item"><button class="page-link" data-page="${i}">${i}</button></li>`;
+    }
+
+    paginationButtonsWrapper.innerHTML = `<span class="pe-2 mb-3">Page: </span><ul class="pagination mb-3">
+      ${page == 1 ? `<li class="page-item disabled"><span class="page-link">Previous</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)-1}">Previous</button></li>`}
+      ${strButtons}
+      ${page == numberPages ? `<li class="page-item disabled"><span class="page-link">Next</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)+1}">Next</button></li>`}
+    </ul>`;
+
+  }
+  else { // If more than 5 lets show a select field instead so that we dont have loads and loads of buttons
+
+    let strOptions = '';
+
+    for (let i = 1; i <= numberPages; i++) {
+
+      if(i == page)
+        strOptions += `<option value="${i}" selected>Page ${i}</option>`;
+      else
+        strOptions += `<option value="${i}">Page ${i}</option>`;
+    }
+
+    paginationButtonsWrapper.innerHTML = `
+<div class="form-control__wrapper page-number mb-2">
+<select class="form-select">
+${strOptions}
+</select>
+</div>
+    `;
+  }
 }
 
 export default table

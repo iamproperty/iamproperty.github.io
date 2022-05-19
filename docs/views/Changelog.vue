@@ -3,6 +3,12 @@
     <div class="container">
       <h1>Changelog</h1>
       
+      <h2>V2.7.7</h2>
+      <ul>
+        <li>Update icons</li>
+        <li>Update the table and chart JS so it can be used with external javascript easier</li>
+      </ul>
+
       <h2>V2.7.6</h2>
       <ul>
         <li>Minor fixes for the marketplace nav so it works better in dark mode.</li>

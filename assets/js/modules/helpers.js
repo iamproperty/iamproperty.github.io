@@ -7,7 +7,7 @@
  * Add global classes used by the CSS and later JavaScript.
  * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
  */
- const addBodyClasses = (body) => {
+export const addBodyClasses = (body) => {
   
   body.classList.add("js-enabled");
 
@@ -23,7 +23,7 @@
  * Check if an element contains certain elements that needs enhancing with the JavaScript helpers, it is recommended to do this on the page body after the dom is loaded. Elements that are loaded via ajax should also run this function. 
  * @param {HTMLElement} element Dom element, this doesn't have to be the body but it is recommended.
  */
-const checkElements = (element) => {
+export const checkElements = (element) => {
 
   // Tables
   Array.from(element.querySelectorAll('table')).forEach((table, index) => {
@@ -37,7 +37,7 @@ const checkElements = (element) => {
  * Wrap tables with a table wrapper div to help maintain its responsive design.
  * @param {HTMLElement} table Dom table element
  */
-const tableWrap = (table) => {
+export const tableWrap = (table) => {
   
   if(!table.parentNode.classList.contains('table__wrapper')){
 
@@ -51,7 +51,7 @@ const tableWrap = (table) => {
  * Creates data attributes to be used by the CSS for mobile views.
  * @param {HTMLElement} table Dom table element
  */
-const tableStacked = (table) => {
+export const tableStacked = (table) => {
 
   const colHeadings = Array.from(table.querySelectorAll('thead th'));
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
@@ -75,19 +75,23 @@ const tableStacked = (table) => {
 }
 
 
-const isNumeric = function(str) {
+export const isNumeric = function(str) {
   if (typeof str != "string") return false // we only process strings!  
   return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
          !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
 }
 
-const zeroPad = (num, places) => String(num).padStart(places, '0')
+export const zeroPad = (num, places) => String(num).padStart(places, '0')
 
-export {
-  addBodyClasses,
-  checkElements,
-  tableWrap,
-  tableStacked,
-  isNumeric,
-  zeroPad
+export const ucfirst = (str) => str.charAt(0).toUpperCase() + str.slice(1)
+export const ucwords = (str) => str.split(' ').map(s => ucfirst(s)).join(' ')
+export const unsnake = (str) => str.replace(/_/g, ' ')
+export const snake = (str) => str.replace(/ /g, '_')
+export const safeID = function(str){
+
+  str = str.toLowerCase();
+  str = snake(str);
+  str = str.replace(/\W/g,'');
+
+  return str;
 }

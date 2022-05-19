@@ -2,7 +2,8 @@
 
 .icon {
   fill: currentColor;
-  stroke: transparent;
+  stroke: currentColor;
+  stroke-width: 0;
   @include var(color,--colour-brand);
   width: rem(64);
   height: rem(64);
@@ -49,7 +50,7 @@
   font-variant: normal;
   text-rendering: auto;
   line-height: 1;
-  font-family: "Font Awesome 5 Pro";
+  font-family: "Font Awesome 6 Pro";
   font-weight: 300;
   width: auto;
 
