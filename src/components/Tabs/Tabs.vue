@@ -1,7 +1,7 @@
 <template>
   <div class="container tabs__container" ref="wrapper">
 
-    <input type="radio" class="d-none" v-for="(value,index) in tabLinks()" :key="index" :name="value.name" :id="value.id" :checked="index == 0? 'checked':''" />
+    <input type="radio" class="tab__input" v-for="(value,index) in tabLinks()" :key="index" :name="value.name" :id="value.id" :checked="index == 0? 'checked':''" />
 
     <div class="tabs__links">
       <label v-for="(value,index) in tabLinks()" :key="index" :for="value.id" class="link" v-on:click="openTab(index)">

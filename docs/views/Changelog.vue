@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
       
+      <h2>V2.7.8</h2>
+      <ul>
+        <li>Enhance tabs</li>
+      </ul>
+      
       <h2>V2.7.7</h2>
       <ul>
         <li>Update icons</li>
