@@ -26,6 +26,7 @@ import youtubeVideo from './modules/youtubevideo'
 document.addEventListener("DOMContentLoaded", function() {
 
   helpers.addBodyClasses(document.body);
+  helpers.addGlobalEvents(document.body);
   helpers.checkElements(document.body);
   console.log('test.js');
 
@@ -64,4 +65,14 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement, index) => {
     new youtubeVideo(arrayElement);
   });
+
+
+  window.addEventListener('hashchange', function() {
+
+    const hash = location.hash.replace('#','');
+    const label = document.querySelector(`label[for="${hash}"]`);
+  
+    if(label)
+      label.click();
+  }, false);
 });

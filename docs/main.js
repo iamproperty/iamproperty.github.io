@@ -6,6 +6,7 @@ import router from './router'
 import * as helpers from '../assets/js/modules/helpers'
 
 helpers.addBodyClasses(document.body);
+helpers.addGlobalEvents(document.body);
 helpers.checkElements(document.body);
 
 // import 'bootstrap/dist/css/bootstrap.css'

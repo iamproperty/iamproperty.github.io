@@ -7,7 +7,7 @@
  * Add global classes used by the CSS and later JavaScript.
  * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
  */
-export const addBodyClasses = (body) => {
+ export const addBodyClasses = (body) => {
   
   body.classList.add("js-enabled");
 
@@ -15,6 +15,28 @@ export const addBodyClasses = (body) => {
     
     body.classList.add("ie");
   }
+
+  return null
+}
+
+/**
+ * Add global events.
+ * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
+ */
+export const addGlobalEvents = (body) => {
+  
+  window.addEventListener('hashchange', function() {
+
+    const hash = location.hash.replace('#','');
+    const label = document.querySelector(`label[for="${hash}"]`);
+    const detail = document.querySelector(`details[id="${hash}"]:not([open])`);
+
+    if(label)
+      label.click();
+    else if(detail)
+      detail.setAttribute('open','open');
+    
+  }, false);
 
   return null
 }

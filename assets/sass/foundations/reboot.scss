@@ -12,6 +12,7 @@ html {
   overflow-y: scroll;
   overflow-x: hidden;
   font-size: vw($device-xs-width);
+  scroll-padding-top: rem(100);
   
   @include media-breakpoint-up(sm) {
     font-size: vw($device-sm-width);
