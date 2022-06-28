@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
       
+      <h2>V2.7.9</h2>
+      <ul>
+        <li>Fix for tables row id appearing when the data is updated.</li>
+      </ul>
+
       <h2>V2.7.8</h2>
       <ul>
         <li>Enhance tabs</li>

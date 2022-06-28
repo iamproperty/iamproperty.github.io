@@ -20,6 +20,18 @@
 import { ucfirst, unsnake } from '../../helpers/strings'
 import table from '../../../assets/js/modules/table.js'
 
+let numericValue = function(value) {
+
+  value = value.replace('£','')
+  value = value.replace('%','')
+
+  if (Number.isNaN(Number.parseFloat(value))) {
+    return 0;
+  }
+
+  return Number.parseFloat(value)
+}
+
 export default {
   name: 'Table',
   props: {
@@ -65,14 +77,8 @@ export default {
     numericValue () {
       return (value) => {
 
-        value = value.replace('£','')
-        value = value.replace('%','')
-
-        if (Number.isNaN(Number.parseFloat(value))) {
-          return 0;
-        }
-
-        return Number.parseFloat(value)
+        value = numericValue(value);
+        return value;
       }
     }
   },
@@ -103,7 +109,11 @@ export default {
 
       let tbodyHTML = '';
       this.items.forEach((row, index) => {
-        tbodyHTML += `<tr>${ Object.keys(row).map(col =>  `<td data-label="${ucfirst(unsnake(col))}">${row[col]}</td>` ).join("") }</tr>`;
+
+        let rowID = row['rowid'] ? row['rowid'] : '';
+        row = Object.fromEntries(Object.entries(row).filter(([key]) => key !== 'rowid'));
+
+        tbodyHTML += `<tr data-row-id="${rowID}">${ Object.keys(row).map(col =>  `<td data-label="${ucfirst(unsnake(col))}" data-numeric="${numericValue(row[col])}">${row[col]}</td>` ).join("") }</tr>`;
       });
       tbody.innerHTML = tbodyHTML;
 
