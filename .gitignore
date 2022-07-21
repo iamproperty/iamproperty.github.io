@@ -45,3 +45,4 @@ assets/js/scripts.bundle.min.js.map
 
 # public files
 public/svg
+.vs
