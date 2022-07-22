@@ -2,7 +2,12 @@
   <main>
     <div class="container">
       <h1>Changelog</h1>
-      
+
+      <h2>V2.8</h2>
+      <ul>
+        <li><a href="https://blog.getbootstrap.com/2022/07/19/bootstrap-5-2-0/">Update to bootstrap 5.2</a></li>
+      </ul>
+
       <h2>V2.7.9</h2>
       <ul>
         <li>Fix for tables row id appearing when the data is updated.</li>
@@ -12,7 +17,7 @@
       <ul>
         <li>Enhance tabs</li>
       </ul>
-      
+
       <h2>V2.7.7</h2>
       <ul>
         <li>Update icons</li>
@@ -28,12 +33,12 @@
       <ul>
         <li>Add extra tick list classes</li>
       </ul>
-      
+
       <h2>V2.7.4</h2>
       <ul>
         <li>Fix marketplace nav</li>
       </ul>
-      
+
       <h2>V2.7.1</h2>
       <ul>
         <li>Start of 'required if' functionality</li>
@@ -108,7 +113,7 @@
       <ul>
         <li>Accordion component hotfix</li>
       </ul>
-      
+
       <h2>V2.3.0</h2>
       <ul>
         <li>Inline YouTube video support</li>
@@ -120,12 +125,12 @@
         <li>Documentation update</li>
         <li>Curved background CSS</li>
       </ul>
-      
+
       <h3>Breaking changes</h3>
       <ul>
         <li>Update the type rules, the type scale has been increased on the headings which will possibly cause breaking layout changes.</li>
       </ul>
-      
+
       <h2>V2.1.0</h2>
       <ul>
         <li>Updated modal component with focus entrapment feature and the ability to dock the modal left or right.</li>
