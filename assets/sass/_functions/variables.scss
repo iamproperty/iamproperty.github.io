@@ -1,4 +1,5 @@
 @import "../../../node_modules/bootstrap/scss/_variables.scss";
+@import "../../../node_modules/bootstrap/scss/_maps.scss";
 
 // #region Grid Breakpoints, layouts
 $grid-breakpoints: (
@@ -67,6 +68,9 @@ $colour-focus: #000000;
 $colour-hover: #000000;
 $colour-active: $success;
 $colour-selected: $success;
+
+$colors: ();
+$grays: ();
 
 $theme-colors: ();
 $theme-colors: map-merge((

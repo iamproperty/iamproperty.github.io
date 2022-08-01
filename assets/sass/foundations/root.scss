@@ -1,5 +1,7 @@
 @use "../func" as *;
 
+@import "../../../node_modules/bootstrap/scss/_root.scss";
+
 :root {
   // Print out the $vars array setup in the variables file so they can be used as CSS vars
   // Custom variable values only support SassScript inside `#{}`.

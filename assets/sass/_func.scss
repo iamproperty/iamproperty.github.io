@@ -5,6 +5,8 @@ $mobileOnly: 'false'!default;
 $vars: ()!default;
 $varsMD: ()!default;
 
+$prefix: '';
+
 @import "_functions/functions";
 @import "_functions/variables";
 @import "_functions/mixins";

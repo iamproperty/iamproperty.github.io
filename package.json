@@ -1,6 +1,6 @@
 {
   "name": "@iamproperty/components",
-  "version": "2.7.9",
+  "version": "2.8.0",
   "private": false,
   "description": "Component library for iamproperty",
   "author": {
@@ -36,7 +36,7 @@
     "@babel/plugin-transform-runtime": "^7.16.7",
     "@vue/eslint-config-standard": "^6.1.0",
     "@vue/vue2-jest": "^27.0.0",
-    "bootstrap": "^5.1.3",
+    "bootstrap": "^5.2.0",
     "cache-loader": "^4.1.0",
     "glob": "^7.2.0",
     "mocha": "^9.2.0",
