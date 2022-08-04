@@ -1,26 +1,14 @@
-// Bootstrap modules
-//import Alert from '../../node_modules/bootstrap/js/src/alert'
-//import Button from '../../node_modules/bootstrap/js/src/button'
-//import Carousel from '../../node_modules/bootstrap/js/src/carousel'
-//import Collapse from '../../node_modules/bootstrap/js/src/collapse'
-//import Dropdown from '../../node_modules/bootstrap/js/src/dropdown'
-//import Modal from '../../node_modules/bootstrap/js/src/modal'
-//import Offcanvas from '../../node_modules/bootstrap/js/src/offcanvas'
-//import Popover from '../../node_modules/bootstrap/js/src/popover'
-//import ScrollSpy from '../../node_modules/bootstrap/js/src/scrollspy'
-//import Tab from '../../node_modules/bootstrap/js/src/tab'
-//import Toast from '../../node_modules/bootstrap/js/src/toast'
-//import Tooltip from '../../node_modules/bootstrap/js/src/tooltip'
 
 // Modules
-import * as helpers from './modules/helpers'
-import nav from './modules/nav'
-import table from './modules/table'
+import * as helpers from '../js/modules/helpers'
+import nav from '../js/modules/nav'
+import table from '../js/modules/table'
 import accordion from './modules/accordion'
-import testimonial from './modules/testimonial'
-import carousel from './modules/carousel'
-import form from './modules/form'
-import youtubeVideo from './modules/youtubevideo'
+import testimonial from '../js/modules/testimonial'
+import carousel from '../js/modules/carousel'
+import form from '../js/modules/form'
+import youtubeVideo from '../js/modules/youtubevideo'
+import modal from '../js/modules/modal'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -44,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('.accordion')).forEach((arrayElement, index) => {
     accordion(arrayElement);
   });
-  
+
   // Testimonial
   Array.from(document.querySelectorAll('.testimonial')).forEach((arrayElement, index) => {
     testimonial(arrayElement);
@@ -71,8 +59,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const hash = location.hash.replace('#','');
     const label = document.querySelector(`label[for="${hash}"]`);
-  
-    if(label)
+
+    if (label instanceof HTMLElement) {
       label.click();
+    }
+
   }, false);
 });

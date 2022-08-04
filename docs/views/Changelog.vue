@@ -6,6 +6,7 @@
       <h2>V2.8</h2>
       <ul>
         <li><a href="https://blog.getbootstrap.com/2022/07/19/bootstrap-5-2-0/">Update to bootstrap 5.2</a></li>
+        <li>Typescript support added</li>
       </ul>
 
       <h2>V2.7.9</h2>
