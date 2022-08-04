@@ -91,7 +91,7 @@
     "rollup-plugin-istanbul": "^3.0.0",
     "sass-true": "^6.0.1",
     "serve": "^13.0.2",
-    "terser": "5.1.0",
+    "terser": "5.14.2",
     "ts-node": "^10.9.1",
     "vue-jest": "^3.0.7",
     "vue-svg-loader": "^0.16.0",
