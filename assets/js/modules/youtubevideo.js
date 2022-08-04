@@ -3,7 +3,7 @@
  */
  class youtubeVideo {
 
-  /** @param {HTMLElement} embed dom element */
+  /** @param {Element} embed dom element */
   constructor(embed){
 
     let createEmbed = this.createEmbed;
@@ -14,9 +14,9 @@
 
         // loop parent nodes from the target to the delegation node
         for (var target = e.target; target && target != this; target = target.parentNode) {
-      
+
           if (target.matches('a:not([data-modal-youtube]')) {
-  
+
             e.preventDefault();
             createEmbed(embed,target);
             break;
@@ -35,12 +35,12 @@
    * @param {Function} createEmbed function to create the embed after script loaded.
    */
   loadScripts(embed, createEmbed){
-    
+
     return new Promise((resolve, reject) => {
 
       const image = new Image();
       image.onload = function(){
-        
+
         // This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
@@ -55,16 +55,16 @@
           embed.addEventListener('click', function(e){
             // loop parent nodes from the target to the delegation node
             for (var target = e.target; target && target != this; target = target.parentNode) {
-          
+
               if (target.matches('a:not([data-modal-youtube]')) {
-      
+
                 e.preventDefault();
                 createEmbed(embed,target);
                 break;
               }
             }
           }, false);
-        }   
+        }
 
       };
       image.onerror = function(){
@@ -72,7 +72,7 @@
       };
       image.src = "https://youtube.com/favicon.ico";
     });
-  
+
   }
 
   /**
@@ -88,7 +88,7 @@
 
     var video_id = target.getAttribute('data-id');
     var link_id = target.getAttribute('id')
-    
+
     // create an id to pass t the script if one isn't present
     if(typeof link_id == 'undefined' || link_id == null){
 
@@ -97,14 +97,14 @@
       target.setAttribute('id',link_id);
     }
 
-    // This function creates an <iframe> (and YouTube player) after the API code downloads.          
+    // This function creates an <iframe> (and YouTube player) after the API code downloads.
     function onYouTubeIframeAPIReady() {
 
       window.player = new YT.Player(link_id, {
         height: '100%',
         width: '100%',
         videoId: video_id,
-        playerVars: { 
+        playerVars: {
           'modestbranding': 1,
           'playsinline': 1,
           'rel': 0,
@@ -118,21 +118,21 @@
 
     }
     onYouTubeIframeAPIReady();
-    
+
     // The API will call this function when the video player is ready.
     function onPlayerReady(event) {
       // Play the video straight away
       event.target.playVideo();
-      
+
     }
 
     // The API calls this function when the player's state changes.
     // The function indicates that when playing a video (state=1)
     var done = false;
     function onPlayerStateChange(event) {
-      
+
       if (event.data == YT.PlayerState.PLAYING && !done) {
-        
+
         var link = document.getElementById(link_id);
         link.classList.add('player-ready');
 
