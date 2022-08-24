@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import {routes} from '../../router/index.js';
+import routes from '../../routes.ts';
 
 const prototypepages = routes.reduce(function (arr, route) {
   // Find the correct group

@@ -9,7 +9,7 @@
       <h2>Default card</h2>
     </div>
     <CardDeck :items="items" class="visualtest" data-test="test1"></CardDeck>
-    
+
 
     <div class="container">
       <h3>HTML code example</h3>
@@ -25,7 +25,7 @@
       <p>The card element needs a data attribute set which will set bespoke CSS.</p>
       <pre><code class="javascript">{{`&lt;a href="/link" data-type="simple">...&lt;/a>`}}</code></pre>
     </div>
-    
+
     <div class="container">
       <h2>Quick link card</h2>
       <p>A very simple card to just show the card title.</p>
@@ -123,7 +123,7 @@ export default {
         {
           link: '/components/card',
           content: `<p>Reservation fee applies</p>`,
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           title: '4 bed semi-detached',
           subtitle: 'Burt terrace, Newcastle upon tyne',
           details: {
@@ -133,13 +133,13 @@ export default {
             status: 'Live now',
             images: 5,
             videos: 2,
-            logo: require('../../assets/logo.jpg')
+            logo: '/logo.jpg'
           }
         }
       ],
       insightCards: [
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/examples/related-cards',
           title: 'News - 24 March 2021',
           details: {

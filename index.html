@@ -1,37 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="assets/favicons/favicon.ico">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico">
 
-  <link rel="stylesheet" type="text/css" href="assets/css/style.min.css" />
-  <title>I Am Key Design system and framework</title>
-</head>
-<body>
-  <nav class="navbar">
-    <div class="container">
-      <div class="row">
-        <div class="col col-sm-4 mw-fit-content">
-          <a href="/" aria-current="page" class="text-decoration-none">
-            <div class="brand brand--key"><svg><title>iam key</title><use xlink:href="assets/svg/logo.svg#logo-key"></use></svg><span>Design system<br>&amp; framework</span></div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <main>
-    <div class="container">
-      <h1>Static assets test</h1>
-    </div>
-  </main>
+    <!-- Client Hints -->
+    <!-- FUTURE USE <meta http-equiv="Accept-CH" content="DPR,Width,Viewport-Width" /> -->
+    <!-- Disable automatic detection and formatting of possible phone numbers -->
+    <meta name="format-detection" content="telephone=no" />
 
-  <footer>
-      
+    <!-- Basic SEO -->
+    <title>IAM Key Design system and framework</title>
+    <meta name="description" content="The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great digital products." />
 
-  </footer>
+    <!-- APP Manifest -->
+    <link rel="manifest" href="/manifest.json" />
 
-  <script src="assets/js/scripts.bundle.min.js"></script>
-  
-</body>
+    <!-- Apple -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" /><!-- 180 x 180 -->
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Windows -->
+    <meta name="application-name" content="iamkey design system and framework" />
+    <meta name="msapplication-TileColor" content="#00313c" />
+    <meta name="msapplication-TileImage" content="/android-chrome-192x192.png" />
+
+    <!-- Android -->
+    <meta name="theme-color" content="#00313c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Duplicate basic Meta for Open Graph -->
+    <meta property="og:title" content="iamkey design system and framework" />
+    <meta property="og:description" content="The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great digital products." />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="iamkey design system and framework" />
+    <meta name="twitter:creator" content="iamproperty" />
+
+    <!-- <meta property="og:image" content="" />< !-- 1200 x 630 for large image - 600 x 314 for small image -->
+
+    <script src="https://kit.fontawesome.com/26fdbf0179.js" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <noscript>
+      <p><strong>We're sorry but 'IAM Key Design system and framework' doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></p>
+    </noscript>
+    <div id="app"></div>
+    <script type="module" src="/docs/main.ts"></script>
+
+    <!-- built files will be auto injected -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+
+    <script>
+
+      /*
+      if(window.location.hostname !== 'localhost'){
+          
+        //make sure that Service Workers are supported.
+        if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('<%= BASE_URL %>sw.js', {scope: '/'})
+        .then(function (registration) {
+          console.log(registration);
+          console.log(Date.now());
+        })
+        .catch(function (e) {
+          console.error(e);
+        })
+        } else {
+          console.log('Service Worker is not supported in this browser.');
+        } 
+      }
+      */
+      </script>
+
+  </body>
 </html>

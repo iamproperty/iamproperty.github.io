@@ -175,7 +175,7 @@ export default {
       return !!this.$slots.search
     },
     isMarketplace() {
-      return this.$vnode.data.staticClass && this.$vnode.data.staticClass.includes('nav--marketplace') ? true : false;
+      return false;
     }
   },
   mounted(){

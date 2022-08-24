@@ -2,7 +2,7 @@
 
 .nav {
 
-  background: var(--bs-body-bg);
+  background: var(--body-bg);
 
 
   &__inner {
@@ -549,16 +549,16 @@ nav + main > *:first-child {
     
     [class*="bg-"]{
 
-      --bs-bg-opacity: 0;
+      --bg-opacity: 0;
       @include media-breakpoint-up(md) {
-        --bs-bg-opacity: 1;
+        --bg-opacity: 1;
       }
     }
 
 
     @include media-breakpoint-up(md) {
 
-      --bs-bg-opacity: 1;
+      --bg-opacity: 1;
       position: absolute;
       top: 100%;
       left: 50%;
@@ -748,7 +748,7 @@ nav + main > *:first-child {
       position: absolute;
       top: var(--nav-height);
       z-index: 60;
-      background: var(--bs-body-bg);
+      background: var(--body-bg);
       overflow-y: auto;
       box-shadow: -0.5rem 1rem 1rem rgb(0 0 0 / 5%);
       border-top: 1px solid var(--nav-border);

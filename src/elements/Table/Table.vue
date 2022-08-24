@@ -22,6 +22,9 @@ import table from '../../../assets/js/modules/table.js'
 
 let numericValue = function(value) {
 
+  if(typeof(value) != "string")
+    return value;
+
   value = value.replace('£','')
   value = value.replace('%','')
 
@@ -85,17 +88,17 @@ export default {
   mounted(){
 
     this.$nextTick(function () {
-      
+
       table(this.$refs.wrapper);
 
       // Listen for the event.
-      this.$el.addEventListener('sorted', function (e) { 
-        
+      this.$el.addEventListener('sorted', function (e) {
+
         console.log('Table sorted')
       }, false);
 
-      this.$el.addEventListener('filtered', function (e) { 
-        
+      this.$el.addEventListener('filtered', function (e) {
+
         console.log('Table filtered')
       }, false);
 

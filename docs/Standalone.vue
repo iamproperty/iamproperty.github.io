@@ -1,16 +1,12 @@
 <template>
   <div id="app">
     <div id="visualtest"></div>
-    <SVGLogo class="d-none" />
-    <SVGIcons class="d-none" />
 
     <router-view />
-    
+
   </div>
 </template>
 <script>
-import SVGLogo from '../assets/svg/logo.svg?inline'
-import SVGIcons from '../assets/svg/icons.svg?inline'
 import Logo from '@/foundations/Logo/Logo.vue'
 import pkg from '../package.json'
 import * as helpers from '../assets/js/modules/helpers'
@@ -23,8 +19,6 @@ export default {
     }
   },
   components: {
-    SVGLogo,
-    SVGIcons,
     Logo
   },
   methods: {

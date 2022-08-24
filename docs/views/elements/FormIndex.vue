@@ -8,7 +8,7 @@
 
 <script>
 import CardDeck from '@/components/CardDeck/CardDeck.vue'
-import {routes} from '../../router/index.js';
+import routes from '../../routes.ts';
 
 const elements = routes.reduce(function (arr, route) {
   // Find the correct group
@@ -37,7 +37,6 @@ const formElements = elements.reduce(function (arr, route) {
   if (route.path === "form") {
     arr = route.children;
 
-    console.log('array:' +arr)
     const children = route.children.reduce(function (acc, route) {
       // Remove the index
       if (route.path) {

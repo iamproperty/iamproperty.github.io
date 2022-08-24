@@ -31,7 +31,7 @@ export default {
       htmlUsage: `<CardDeck class="card-deck--featured bg-gradient" :items="items" :smCols="1" ctaText="Read more" titleClass="text-primary text-uppercase"></CardDeck>`,
       items: [
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/examples/related-cards',
           title: 'News - 24 March 2021',
           details: {
@@ -40,7 +40,7 @@ export default {
           content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`
         },
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/examples/related-cards',
           title: 'News - 24 March 2021',
           details: {
@@ -49,7 +49,7 @@ export default {
           content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`
         },
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/examples/related-cards',
           title: 'News - 24 March 2021',
           details: {
@@ -58,7 +58,7 @@ export default {
           content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`
         },
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/examples/related-cards',
           title: 'News - 24 March 2021',
           details: {

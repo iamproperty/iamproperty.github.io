@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { safeID } from '../../helpers/strings'
+import { safeID } from '../../helpers/strings.js'
 
 export default {
   name: 'AccordionItem',

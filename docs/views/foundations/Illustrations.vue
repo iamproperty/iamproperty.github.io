@@ -13,29 +13,31 @@
       <div class="example">
         <span class="h1">Reach your <br/>audience <br/>24/7</span>
         <span class="circle"></span>
-        <span class="illustration char1"><SVGChar1></SVGChar1></span>
-        <span class="illustration char2"><SVGChar2></SVGChar2></span>
-        <span class="illustration char3"><SVGChar3></SVGChar3></span>
+        <span class="illustration char1" v-html="SVGChar1"></span>
+        <span class="illustration char2" v-html="SVGChar2"></span>
+        <span class="illustration char3" v-html="SVGChar3"></span>
       </div>
     </div>
   </main>
 </template>
 
 <script>
-import SVGChar1 from '../../../assets/svg/illustrations/commuter1.svg'
-import SVGChar2 from '../../../assets/svg/illustrations/commuter2.svg'
-import SVGChar3 from '../../../assets/svg/illustrations/commuter3.svg'
+import SVGChar1 from '../../../assets/svg/illustrations/commuter1.svg?raw'
+import SVGChar2 from '../../../assets/svg/illustrations/commuter2.svg?raw'
+import SVGChar3 from '../../../assets/svg/illustrations/commuter3.svg?raw'
 
 export default {
-  components: {
-    SVGChar1,
-    SVGChar2,
-    SVGChar3
-  }
+  data () {
+    return {
+      SVGChar1: SVGChar1,
+      SVGChar2: SVGChar2,
+      SVGChar3: SVGChar3
+    }
+  },
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .example {
   position: relative;
   min-height: 20rem;

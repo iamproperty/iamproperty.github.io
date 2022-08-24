@@ -33,34 +33,34 @@ export default {
 </Carousel>`,
       items: [
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         },
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         },
         {
-          image: require('../../assets/house.jpeg')
+          image: '/house.jpeg'
         },
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         },
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         },
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         },
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         },
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         },
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         },
         {
-          image: require('../../assets/logo.jpg')
+          image: '/logo.jpg'
         }
       ]
     }

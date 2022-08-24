@@ -10,7 +10,7 @@ describe(`Icon`, () => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     await page.goto(pkg.localURL+'/foundations/icons#visualtest')
-    
+
     await page.setViewport({ width: 375, height: 800 })
 
     const iconHeight = await page.$eval(
@@ -21,7 +21,7 @@ describe(`Icon`, () => {
       '#icon-email .icon',
       (el) => parseInt(window.getComputedStyle(el).getPropertyValue("width"))
     )
-    
+
     expect(iconHeight).toBe(64);
     expect(iconWidth).toBe(64);
     await browser.close()
@@ -33,7 +33,7 @@ describe(`Icon`, () => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     await page.goto(pkg.localURL+'/foundations/icons#visualtest')
-    
+
     await page.setViewport({ width: 375, height: 800 })
 
     function rgbToHex(hex){
@@ -53,14 +53,14 @@ describe(`Icon`, () => {
       var g = parseInt(hexSplit[1]);
       var b = parseInt(hexSplit[2].replace(')',''));
 
-      return stichTogether(r, g, b); 
+      return stichTogether(r, g, b);
     }
 
     const iconFill = await page.$eval(
       '#icon-email .icon use',
       (el) => window.getComputedStyle(el).getPropertyValue("fill")
     )
-    
+
     expect(rgbToHex(iconFill)).toBe('#00313c');
 
     await browser.close()
@@ -69,4 +69,4 @@ describe(`Icon`, () => {
 
 const visualtest = require('./_visualtest.js');
 
-visualtest.testPages(`Icons page`,'/foundations/icons#visualtest');
+visualtest.testPages(`Icons page`,'/foundations/icons');

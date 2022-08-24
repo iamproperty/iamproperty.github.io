@@ -18,10 +18,10 @@
   }
 
   // Extra vars needed
-  --bs-body-bg: white;
+  --body-bg: white;
   --colour-underline: var(--colour-secondary);
   --colour-heading: var(--colour-primary);
-  --alpha: var(--bs-bg-opacity,1);
+  --alpha: var(--bg-opacity,1);
   --#{$variable-prefix}gradient: #{$gradient};
   --content-max-width: #{$content-max-width};
   --colour-brand: var(--colour-primary);
@@ -37,7 +37,7 @@
 // Dark mode; functional colours get updated
 @media screen and (prefers-color-scheme: dark) {
   :root {
-    --bs-body-bg: var(--colour-primary);
+    --body-bg: var(--colour-primary);
     --colour-admin: var(--colour-primary);
     @include invert-colours();
   }
@@ -77,7 +77,7 @@
 
   // Slight colour adjustments on the light background to match brand guidelines
   .bg-light[class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.prevent-invert) {
-    --bs-body-bg: var(--colour-light);
+    --body-bg: var(--colour-light);
     --colour-heading: var(--colour-dark);
     color: var(--colour-dark);
   }
