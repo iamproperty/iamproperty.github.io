@@ -32,12 +32,6 @@
       </div>
     </footer>
 
-    <script type="application/javascript">
-      /* Open up any hidden content */
-      Array.from(document.querySelectorAll('details')).forEach((arrayElement, index) => { arrayElement.setAttribute("open", "open")});
-      /* Open the print preview window */
-      document.body.onload = function() { window.print(); };
-    </script>
   </div>
 </template>
 
