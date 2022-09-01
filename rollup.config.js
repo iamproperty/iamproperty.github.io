@@ -8,7 +8,7 @@ const replace = require('@rollup/plugin-replace')
 const banner = require('./banner.js')
 
 const BUNDLE = process.env.BUNDLE === 'true'
-const ESM = process.env.ESM === 'false'
+const ESM = process.env.ESM === 'true'
 
 let fileDest = `scripts${ESM ? '.esm' : ''}`
 const external = ['@popperjs/core']
