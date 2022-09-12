@@ -3,8 +3,29 @@
 
     <input type="checkbox" name="showMenu" id="showMenu" class="d-none" />
     <input type="checkbox" name="showSearch" id="showSearch" class="d-none" />
+    <input type="checkbox" name="showAccount" id="showAccount" class="d-none" />
 
-    <div class="nav__inner" v-if="isMarketplace === false">
+    <!-- Mobile bar -->
+    <div class="nav__mobile-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col mw-md-fit-content nav__logo" v-if="hasLogoSlot">
+            <slot name="logo"></slot>
+          </div>
+          <div class="col mw-md-fit-content nav__logo" v-else>
+            <a href="/" class="text-decoration-none mb-0">
+              <Logo :id="logo" :path="logopath" :desc="logotext" class="pb-0"></Logo>
+            </a>
+          </div>
+
+          <div class="col mw-fit-content d-md-none flex-row align-items-center nav__menu-btn">
+            <label for="showMenu">Menu</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav__inner">
       <div class="container">
         <div class="row">
           <div class="col mw-md-fit-content nav__logo" v-if="hasLogoSlot">
@@ -30,13 +51,24 @@
             <label for="showMenu">Menu</label>
           </div>
 
+          <!-- Main menu -->
           <div class="col-12 col-md nav__menu ms-auto flex-row align-items-center">
             <slot></slot>
+          </div>
+
+          <div class="col nav__account-btn flex-row align-items-center" v-if="hasAccountSlot">
+            <label for="showAccount">
+              <svg class="icon" viewBox="0 0 28 28">
+                <use xlink:href="/svg/icons.svg#icon-account"></use>
+              </svg>
+              <span>My account</span>
+            </label>
           </div>
 
           <div class="col-12 col-md nav__btn mw-md-fit-content flex-row align-items-center" v-if="btnlink">
             <a :href="btnlink" class="btn me-0" v-html="btntext"></a>
           </div>
+
 
 
         </div>
@@ -55,43 +87,31 @@
       </div>
     </div>
 
-    <div class="nav__inner" v-else>
+    <div class="nav__menu--account" v-if="hasAccountSlot">
       <div class="container">
-        <div class="row">
-          <div class="col nav__logo">
-            <a :href="propertylink" :class="`text-decoration-none mb-0 ${logo=='property'?'current':''}`">
-              <Logo id="property" :path="logopath" class="pb-0 pe-0"></Logo>
-            </a>
-
-            <a :href="movebutlerlink" :class="`text-decoration-none mb-0 ${logo=='movebutler'?'current':''}`">
-              <Logo id="movebutler" :path="logopath" class="pb-0 pe-0"></Logo>
-            </a>
-
-            <a :href="iamsoldlink" :class="`text-decoration-none mb-0 ${logo=='sold'?'current':''}`">
-              <Logo id="sold" :path="logopath" class="pb-0 pe-0"></Logo>
+        <div class="row mb-4">
+          <div class="col mw-md-fit-content nav__logo" v-if="hasLogoSlot">
+            <slot name="logo"></slot>
+          </div>
+          <div class="col mw-md-fit-content nav__logo" v-else>
+            <a href="/" class="text-decoration-none mb-0">
+              <Logo :id="logo" :path="logopath" :desc="logotext" class="pb-0"></Logo>
             </a>
           </div>
 
-          <div class="col mw-fit-content flex-row align-items-center nav__menu-btn">
-            <label for="showMenu">Menu</label>
+          <div class="col mw-fit-content d-md-none flex-row align-items-center nav__menu-btn">
+            <label for="showAccount">Account</label>
           </div>
+
         </div>
       </div>
-      <div class="nav__menu--secondary bg-primary" v-if="hasSecondarySlot">
-        <div class="container">
-          <slot name="secondary"></slot>
-        </div>
-      </div>
-      <div class="nav__menu flex-row">
-
-        
-          <slot></slot>
-
-
-
+      <div class="container">
+        <slot name="account"></slot>
       </div>
 
     </div>
+
+    <span class="nav__bg"></span>
   </nav>
 </template>
 
@@ -174,6 +194,9 @@ export default {
     hasSearchSlot() {
       return !!this.$slots.search
     },
+    hasAccountSlot() {
+      return !!this.$slots.account
+    },
     isMarketplace() {
       return this.$vnode.data.staticClass && this.$vnode.data.staticClass.includes('nav--marketplace') ? true : false;
     }
@@ -181,7 +204,7 @@ export default {
   mounted(){
 
     this.$nextTick(function () {
-      
+
       nav(this.$refs.wrapper);
     })
   }
