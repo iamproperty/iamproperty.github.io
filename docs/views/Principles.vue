@@ -10,6 +10,7 @@
         <li class="pb-3"><strong class="text-primary d-block">'Mobile' first:</strong> Design and build with the smallest standard viewport in mind first then introduce complexity to larger viewports.</li>
         <li class="pb-3"><strong class="text-primary d-block">HTML first:</strong> Use standard functionality that comes free with modern web browsers and only use JavaScript to progressively enhance.</li>
         <li class="pb-3"><strong class="text-primary d-block">Accessible for all:</strong> Make sure that we do <strong>not</strong> prevent anybody from getting the most out of our systems and sites.</li>
+        <li class="pb-3"><strong class="text-primary d-block">Server friendly:</strong> Limit the number of calls to the serer of your application.</li>
       </ul>
 
       <h2>How to achieve these principles</h2>
@@ -19,6 +20,7 @@
         <li class="pb-3"><strong class="text-primary d-block">'Mobile' first:</strong> Use a flexbox based grid system that allows you to order and layout content depending upon viewport size.</li>
         <li class="pb-3"><strong class="text-primary d-block">HTML first:</strong> Build without JavaScript and try to get as much functionality working without it. Then introduce JS to improve and enhance the functionality.</li>
         <li class="pb-3"><strong class="text-primary d-block">Accessible for all:</strong> Use tools like <a href="https://wave.webaim.org/" title="WAVE Web Accessibility Evaluation Tool">WAVE</a> and automation testing to evaluate accessibility regularly.</li>
+        <li class="pb-3"><strong class="text-primary d-block">Server friendly:</strong> Concatenate files where appropriate, only make ajax calls that would produce new valid information and lazy load assets.</li>
       </ul>
 
 

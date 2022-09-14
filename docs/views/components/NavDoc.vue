@@ -7,8 +7,8 @@
       <h1>Site navigation</h1>
       <p>The main site navigation needs to be clear and easy to use without distraction.</p>
     </div>
-    
-    
+
+
     <Nav class="mb-5 visualtest" btnlink="/account" btntext="Account">
       <ul class="list-unstyled">
         <li><a href="/">Link 1</a></li>
@@ -21,7 +21,7 @@
       <h2>Secondary navigation</h2>
       <p>A secondary navigation can be added to include links that are not as important to the main user journeys but are relevant to the user. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
     </div>
-    
+
     <Nav class="visualtest mb-5" btnlink="/account" btntext="Signout">
       <ul class="list-unstyled">
         <li><a href="/">Link 1</a></li>
@@ -42,7 +42,7 @@
       <h2>Admin navigation</h2>
       <p>To transform the navigation to look more like an admin bar with the classes <strong>.bg-primary</strong> and <strong>.nav--admin</strong> can be added. These will change the background colour, condense it down and move the optional secondary nav to the bottom on desktop. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
     </div>
-    
+
     <Nav class="visualtest mb-5 bg-primary nav--admin" btnlink="/account" btntext="Signout">
       <ul class="list-unstyled">
         <li><a href="/">Link 1</a></li>
@@ -58,13 +58,6 @@
       </template>
     </Nav>
 
-    <div class="container pb-0">
-      <h2>Marketplace navigation</h2>
-      <p>To transform the navigation to give you the marketplace option you need to assign the class of <strong>.nav--marketplace</strong>. See the <a href="/standalone/marketplace" target="_blank">marketplace example page</a> to see it better in action.</p>
-    </div>
-    
-    <Nav logo="property" class="nav--marketplace visualtest mb-5"></Nav>
-    
     <div class="container">
       <h2>Sub navigation</h2>
       <p>Allow for sublinks to be shown within the navigation so that users don't have to navigate to a landing page. See the <a href="/standalone/navbar" target="_blank">navbvar example page</a> to see it better in action.</p>
@@ -75,11 +68,11 @@
     <div class="container pb-0">
       <h2>Add search form</h2>
       <p>Integrate search functionality by adding a form to the nav and add the class <strong>.nav--inline-search</strong> to the nav. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
- 
+
       <h3>Featured search area</h3>
       <p>Or create a real feature by adding a div with the class of <strong>.nav__menu--search</strong> and a search button wrappped in a div with the class <strong>.nav__search-btn</strong>. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
     </div>
-    
+
     <div class="container">
       <h2>Vue Nav component reference</h2>
       <Readme></Readme>

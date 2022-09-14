@@ -2,8 +2,17 @@
 
 .tabs__container {
 
-  .tabs__links {
-    padding-bottom: 1.5rem;
+  position: relative;
+
+  .tab__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  > .tabs__links {
+    margin-bottom: 1.5rem;
     overflow: hidden;
 
     .link:not(.text-decoration-none):not(.btn) {
@@ -38,6 +47,10 @@
     display: none;
   }
 
+  input:focus-visible ~ .tabs__links {
+    outline: blue outset 1px;
+  }
+
   @for $i from 1 through 10 {
     input:checked:nth-child(#{$i}) ~ .tabs__links .link:not(.text-decoration-none):not(.btn):nth-child(#{$i}) {
       
@@ -45,7 +58,7 @@
       --panel-tab-colour: white;
       --panel-tab-border: var(--colour-secondary)
     }
-    input:checked:nth-child(#{$i}) ~ .tabs .tab:nth-child(#{$i}){
+    input:checked:nth-child(#{$i}) ~ .tabs > .tab:nth-child(#{$i}){
       display: block;
       display: contents;
     }
@@ -57,11 +70,11 @@
 
   display: contents;
 
-  .tabs {
+  > .tabs {
     display: contents;
   }
 
-  .tabs__links {
+  > .tabs__links {
 
     padding-bottom: 0;
 

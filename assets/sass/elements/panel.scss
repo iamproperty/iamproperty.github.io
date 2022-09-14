@@ -106,7 +106,7 @@
 }
 
 .admin-panel .admin-panel__links, 
-.admin-panel > .tabs__container:first-child .tabs__links {
+.admin-panel > .tabs__container:first-child > .tabs__links {
 
   margin-top: -3px!important;
   margin-left: calc(var(--panel-gutter) * -1);
