@@ -5,6 +5,7 @@
   
   background: var(--colour-primary);
   color: white;
+
   @if $compatible != "true" {
     
     @include invert-colours();
@@ -160,7 +161,7 @@
     font-size: rem(18);
     text-indent: 0;
     overflow: visible;
-    color: var(--colour-primary);
+    color: var(--colour-body);
     height: rem(48);
     line-height: rem(48);
     display: block;
@@ -399,7 +400,7 @@ nav + main > *:first-child {
   position: absolute;
   top: 0;
   left: 100%;
-  background: white;
+  background: var(--body-bg);
   z-index: 2;
   width: 100%;
   overscroll-behavior: contain;
@@ -689,6 +690,8 @@ nav + main > *:first-child {
           box-shadow: 0 4px 20px -10px rgba(51,51,51,0.25);
           
           @include reset-colours();
+
+          --colour-admin: var(--colour-admin-theme);
 
           li {
             

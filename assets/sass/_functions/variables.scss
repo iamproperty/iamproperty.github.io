@@ -159,7 +159,8 @@ $vars: map-merge((
   "--colour-black-theme": rgba(to-rgb(#000000),var(--alpha,1)),
   "--colour-body":  rgba(to-rgb($colour-body),var(--alpha,1)),
   "--colour-white": rgba(to-rgb(#ffffff),var(--alpha,1)),
-  "--colour-black": rgba(to-rgb(#000000),var(--alpha,1))
+  "--colour-black": rgba(to-rgb(#000000),var(--alpha,1)),
+  "--colour-admin-theme":      #f0f0f0
 ), $vars);
 
 $gradient: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info) 100%);
