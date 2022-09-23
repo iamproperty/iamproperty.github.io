@@ -19,7 +19,7 @@
 
   // Extra vars needed
   --body-bg: white;
-  --colour-underline: var(--colour-secondary);
+  --colour-underline: var(--colour-primary);
   --colour-heading: var(--colour-primary);
   --alpha: var(--bg-opacity,1);
   --#{$variable-prefix}gradient: #{$gradient};

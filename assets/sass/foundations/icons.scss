@@ -9,8 +9,8 @@
   height: rem(64);
   display: inline-block;
 
-  button &,
-  a & {
+  button > &,
+  a > & {
     width: 1.5em;
     height: 1.5em;
     vertical-align: text-top;

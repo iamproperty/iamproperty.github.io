@@ -9,6 +9,13 @@
         <li>Switch webpack with Vite</li>
       </ul>
 
+      <h2>V2.9</h2>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Update to the nav component</li>
+      </ul>
+
       <h2>V2.8</h2>
       <ul>
         <li><a href="https://blog.getbootstrap.com/2022/07/19/bootstrap-5-2-0/">Update to bootstrap 5.2</a></li>
