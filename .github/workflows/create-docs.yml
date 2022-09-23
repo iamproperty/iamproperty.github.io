@@ -27,7 +27,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: https://https://iamproperty.github.io/
     runs-on: ubuntu-latest
     
     strategy:
