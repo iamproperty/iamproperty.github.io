@@ -4,9 +4,9 @@ name: Build vue docs and deploy
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ["develop"]
   pull_request:
-    branches: ["master"]
+    branches: ["develop"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
