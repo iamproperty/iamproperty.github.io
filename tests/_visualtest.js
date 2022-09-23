@@ -17,9 +17,9 @@ module.exports = {
         const page = await browser.newPage()
 
         await page.goto(pkg.localURL+url+'?cache='+Date.now()+'#visualtest')
+        await page.waitForTimeout(4000)
 
         await page.setViewport({ width: 375, height: 800 })
-
         const mobileImage = await page.screenshot({ fullPage: true });
         expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
@@ -42,7 +42,10 @@ module.exports = {
         await page.goto(pkg.localURL+url+'?cache='+Date.now()+'#visualtest')
         await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
 
+
         await page.setViewport({ width: 1440, height: 800 })
+        await page.waitForTimeout(4000)
+
         const desktopImage = await page.screenshot({ fullPage: true });
         expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 

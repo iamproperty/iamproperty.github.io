@@ -28,7 +28,7 @@
     "test:scss": "jest assets/sass/_tests",
     "visual:components": "viteshot",
     "visual:docs": "jest tests",
-    "visual:approve": "jest tests -- -u",
+    "visual:approve": "jest tests --updateSnapshot",
     "pull-request": "npm run test:unit && npm run test:scss && npm run visual:approve && npm run compile && npm run audit"
   },
   "dependencies": {
@@ -101,5 +101,5 @@
     "type": "git",
     "url": "git://github.com/iamproperty/iamproperty-vue-component-library.git"
   },
-  "localURL": "http://192.168.224.1:5173"
+  "localURL": "http://192.168.0.62:5173"
 }
