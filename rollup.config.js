@@ -11,7 +11,7 @@ const BUNDLE = process.env.BUNDLE === 'true'
 const ESM = process.env.ESM === 'true'
 
 let fileDest = `scripts${ESM ? '.esm' : ''}`
-const external = ['@popperjs/core']
+const external = ['@popperjs/core','/svg/icons.svg','/svg/logo.svg']
 const plugins = [
   babel({
     // Only transpile our source code
