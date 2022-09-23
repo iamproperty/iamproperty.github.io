@@ -43,7 +43,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install --force
       - run: npm run build:docs
-      - run: npm run deploy:fixes
+      - run: npm run deploy:files
+      - run: npm run deploy:404
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
