@@ -29,7 +29,8 @@
     "visual:components": "viteshot",
     "visual:docs": "jest tests",
     "visual:approve": "jest tests --updateSnapshot",
-    "pull-request": "npm run test:unit && npm run test:scss && npm run visual:approve && npm run compile && npm run audit"
+    "pull-request": "npm run test:unit && npm run test:scss && npm run visual:approve && npm run compile && npm run audit",
+    "deploy:fixes": "copyfiles -u 2 assets/fonts/**/* dist/assets/fonts && copyfiles -u 2 assets/svg/**/* dist/svg"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.18.6",
