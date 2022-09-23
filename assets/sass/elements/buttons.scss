@@ -96,9 +96,9 @@ details[open] > summary.btn:first-child {
 
 input:checked + .btn-tertiary:not(:hover):not(:focus):not(:active),
 input:checked + .btn-tag:not(.btn-primary):not(.btn-secondary):not(:hover):not(:focus):not(:active) {
-  background: var(--btn-tertiary-bg);
-  border-color: var(--btn-hover-text);
-  color: var(--btn-tertiary-hover-text);
+  background: var(--colour-selected);
+  border-color: var(--colour-selected)!important;
+  color: var(--colour-primary);
 }
 
 

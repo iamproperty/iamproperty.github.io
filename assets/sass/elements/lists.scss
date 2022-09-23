@@ -111,3 +111,30 @@
     }
   }
 }
+
+.orderable-list {
+
+  margin-left: 2rem;
+  counter-reset: countItem; 
+
+  li {
+    position: relative;
+    list-style: none;
+    --spread: 0.75rem;
+    box-shadow: 0 2px var(--spread) 0 rgba(154, 154, 154, 0.25);
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  li:before {
+    counter-increment: countItem; /* Increment the value of section counter by 1 */
+    content: counter(countItem);
+    background: red;
+    height: 1em;
+    width: 1em;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 100%;
+  }
+}

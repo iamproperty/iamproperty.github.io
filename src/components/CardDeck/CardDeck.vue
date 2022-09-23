@@ -3,7 +3,7 @@
       <slot></slot>
       <div :class="`row row-cols-${cols} row-cols-sm-${smcols} row-cols-md-${mdcols} ${gap ? `g-${gap}`: ``}`">
         <div class="col" v-for="(value,index) in items" :key="index">
-          <Card v-bind="value" :class="cardclass" :type="cardtype" :btntype="btntype" :titleclass="titleclass" :ctatext="ctatext" :hidectatext="hidectatext"></Card>
+          <Card v-bind="value" :class="cardclass" :type="cardtype" :btntype="(value.btntype ? value.btntype : btntype )" :titleclass="(value.titleclass ? value.titleclass : titleclass)" :ctatext="value.ctatext" :hidectatext="hidectatext"></Card>
         </div>
       </div>
       <slot name="after"></slot>

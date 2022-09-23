@@ -914,3 +914,45 @@ nav + main > *:first-child {
   }
 }
 // #endregion
+
+// #region
+
+.nav--just-account {
+
+  .nav__menu,
+  .nav__account-btn {
+    display: none!important;
+  }
+
+  @include media-breakpoint-up(md) {
+    
+    .nav__menu,
+    .nav__account-btn {
+      display: block!important;
+    }
+  }
+
+  #showMenu:checked ~ .nav__menu--account {
+    height: 100vh;
+    overflow: visible;
+    overflow-x: auto;
+    left: 0;
+    pointer-events: none;
+    background: transparent;
+
+    @include media-breakpoint-up(sm) {
+    
+      width: rem(375);
+      left: calc(100% - #{rem(375)});
+    }
+
+    > .container:first-child {
+      opacity: 0;
+    }
+    > .container:not(:first-child) {
+      pointer-events: all;
+    }
+  }
+}
+
+// #endregion

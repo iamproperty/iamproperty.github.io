@@ -1,5 +1,5 @@
 <template>
-  <a :href="link" :class="'card'+(type?' card--'+type:'')" :title="'Find out more: '+title+(subtitle ? ' - '+subtitle:'')">
+  <a :href="link" :class="'card'+(type?' card--'+type:'')+' '+cardClass" :title="ctatext+': '+title+(subtitle ? ' - '+subtitle:'')" :target="target">
     <div class="card-header__wrapper" v-if="image">
       <img :src="image" alt="" loading="lazy" class="card-image" />
       <div class="card-header">
@@ -10,7 +10,7 @@
     </div>
     <div class="card-body" v-html="cardContent()"></div>
     <div class="card-footer" v-if="hidectatext == false">
-      <span :class="`${btntype == 'link' ? `link` : `btn btn-${btntype}`} mb-0`">{{ctatext}}<span class="visually-hidden"> about {{title}}</span></span>
+      <span :class="`${btntype == 'link' ? `link` : `btn btn-${btntype}`} mb-0`">{{ctatext}}<span class="visually-hidden">: {{title}}</span></span>
     </div>
   </a>
 </template>
@@ -26,6 +26,11 @@ export default {
     link: {
       type: String,
       required: false
+    },
+    cardClass: {
+      type: String,
+      required: false,
+      default: ''
     },
     titleclass: {
       type: String,
@@ -64,6 +69,10 @@ export default {
       default: false
     },
     image: {
+      type: String,
+      required: false
+    },
+    target: {
       type: String,
       required: false
     },

@@ -87,113 +87,6 @@ $utilities: map-merge(
 );
 // #endregion
 
-// #region Remove the responsive classes for the spacing utilities
-/*
-The spacing utilities are useful but could be mis-used. The spacing of elements should be defined via the elements/components CSS.
-But at times tweaks/fixes to spacing needs to be made and can prevent the need of duplicate CSS to be created.
-However our spacing rules should be consistant across devices and we shouldn't allow device specific 'fixes' to be made
-Removing the resposive classes aves around 8kbs
-*/
-$utilities: map-merge(
-  $utilities,
-  (
-    // Padding
-    "padding": map-merge(
-      map-get($utilities, "padding"),
-      (
-        responsive: false
-      ),
-    ),
-    "padding-x": map-merge(
-      map-get($utilities, "padding-x"),
-      (
-        responsive: false
-      ),
-    ),
-    "padding-y": map-merge(
-      map-get($utilities, "padding-y"),
-      (
-        responsive: false
-      ),
-    ),
-    "padding-top": map-merge(
-      map-get($utilities, "padding-top"),
-      (
-        responsive: false
-      ),
-    ),
-    "padding-end": map-merge(
-      map-get($utilities, "padding-end"),
-      (
-        responsive: false
-      ),
-    ),
-    "padding-bottom": map-merge(
-      map-get($utilities, "padding-bottom"),
-      (
-        responsive: false
-      ),
-    ),
-    "padding-start": map-merge(
-      map-get($utilities, "padding-start"),
-      (
-        responsive: false
-      ),
-    ),
-    // Margin
-    "margin": map-merge(
-      map-get($utilities, "margin"),
-      (
-        responsive: false
-      ),
-    ),
-    "margin-x": map-merge(
-      map-get($utilities, "margin-x"),
-      (
-        responsive: false
-      ),
-    ),
-    "margin-y": map-merge(
-      map-get($utilities, "margin-y"),
-      (
-        responsive: false
-      ),
-    ),
-    "margin-top": map-merge(
-      map-get($utilities, "margin-top"),
-      (
-        responsive: false
-      ),
-    ),
-    "margin-end": map-merge(
-      map-get($utilities, "margin-end"),
-      (
-        responsive: false
-      ),
-    ),
-    "margin-bottom": map-merge(
-      map-get($utilities, "margin-bottom"),
-      (
-        responsive: false
-      ),
-    ),
-    "margin-start": map-merge(
-      map-get($utilities, "margin-start"),
-      (
-        responsive: false
-      ),
-    ),
-    // Gap
-    "gap": map-merge(
-      map-get($utilities, "gap"),
-      (
-        responsive: false
-      ),
-    ),
-  )
-);
-// #endregion
-
 // #region Fonts
 $utilities: map-merge(
   $utilities,
@@ -223,9 +116,9 @@ $utilities: map-merge(
       ),
       values:
       (
-        "secondary": linear-gradient(var(--bs-gradient-direction), var(--colour-secondary) 0, transparent 100%),
-        "primary": linear-gradient(var(--bs-gradient-direction), var(--colour-primary) 0, transparent 100%),
-        "info": linear-gradient(var(--bs-gradient-direction), var(--colour-info) 0, transparent 100%)
+        "secondary": linear-gradient(var(--gradient-direction), var(--colour-secondary) 0, transparent 100%),
+        "primary": linear-gradient(var(--gradient-direction), var(--colour-primary) 0, transparent 100%),
+        "info": linear-gradient(var(--gradient-direction), var(--colour-info) 0, transparent 100%)
       )
     )
   )
