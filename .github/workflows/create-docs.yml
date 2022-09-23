@@ -41,7 +41,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: npm install --force
       - run: npm run build:docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
