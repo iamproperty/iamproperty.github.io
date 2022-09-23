@@ -17,7 +17,7 @@ export default defineConfig(({ command, mode }) => ({
       fileName: (format) => `components.${format}.js`,
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue','/svg/icons.svg','/svg/logo.svg'],
       output: {
         // Provide global variables to use in the UMD build
         // Add external deps here
