@@ -30,7 +30,8 @@
     "visual:docs": "jest tests",
     "visual:approve": "jest tests --updateSnapshot",
     "pull-request": "npm run test:unit && npm run test:scss && npm run visual:approve && npm run compile && npm run audit",
-    "deploy:files": "copyfiles -u 2 assets/fonts/**/* dist/assets/fonts && copyfiles -u 2 assets/svg/**/* dist/svg",
+    "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* dist/assets/fonts",
+    "deploy:svg": "copyfiles -u 2 assets/svg/**/* dist/svg",
     "deploy:404": "node local_modules/create404.js"
   },
   "dependencies": {
