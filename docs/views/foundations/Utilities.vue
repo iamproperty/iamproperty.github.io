@@ -41,7 +41,7 @@
 </style>
 
 <script>
-import {shared} from '../../main.js'
+import {shared} from '../../main.ts'
 
 const replaceNewline = function(input) {
   var newline = String.fromCharCode(13, 10);
@@ -70,7 +70,7 @@ floatClass.forEach(function (classsName){
 
 let sizingClass = ['p','pb','pe','px','py','ps','pt','m','mb','me','mx','my','ms','mt','gap']
 sizingClass.forEach(function (classsName){
-  
+
   for (let i = 0; i <= 5; i++) {
     let cn = classsName+'-sm-'+i
     utClasses[cn] = {'name': cn, 'value':'Removed', 'class': 'text-danger'}
@@ -97,10 +97,10 @@ utClasses['object-cover'] = {'name': 'object-fit', 'value':utClasses['object-cov
 utClasses['lh-0'] = {'name': 'line height 0', 'value':utClasses['lh-0']['value'], 'added': 'true'}
 
 const ordered = Object.keys(utClasses).sort().reduce(
-  (obj, key) => { 
-    obj[key] = utClasses[key]; 
+  (obj, key) => {
+    obj[key] = utClasses[key];
     return obj;
-  }, 
+  },
   {}
 );
 

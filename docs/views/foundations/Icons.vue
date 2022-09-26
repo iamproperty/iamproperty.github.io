@@ -32,11 +32,11 @@
 
     <div class="container">
       <h2>Font Awesome Icons</h2>
-      
+
       <p>If you cannot find an icon above that you need, <a href="https://fontawesome.com/" target="_blank">font awesome</a> can be used instead. The free version comes with other 1,600 icons but if needed iamproperty has access to a pro licence just <a href="mailto:james.lambert@iamproperty.com">email James Lambert<i class="icon fa-envelope me-0"></i></a>. </p>
 
       <h3>Icons examples</h3>
-      
+
       <div class="row mb-3">
         <div class="col mw-fit-content mb-3" v-for="(icon) in faicons" :key="icon">
           <i :class="`icon fa-${icon} d-block mx-auto text-center`"></i>
@@ -79,24 +79,28 @@ export default {
     }
   },
   mounted(){
-    
+
+    let vueComp = this;
     let tempIcons = [];
     var request = new XMLHttpRequest();
+
     request.open("GET", "/svg/icons.svg");
     request.setRequestHeader("Content-Type", "image/svg+xml");
     request.addEventListener("load", function(event) {
       var response = event.target.responseText;
+
       var doc = new DOMParser();
       var xml = doc.parseFromString(response, "image/svg+xml");
-      
+
       Array.from(xml.querySelectorAll('symbol')).forEach((arrayElement, index) => {
         tempIcons.push(arrayElement.getAttribute('id').replace('icon-',''));
       });
 
       tempIcons = tempIcons.sort();
+      vueComp.icons = tempIcons;
     });
     request.send();
-    this.icons = tempIcons;
+
   }
 }
 </script>

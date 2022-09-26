@@ -159,7 +159,8 @@ $vars: map-merge((
   "--colour-black-theme": rgba(to-rgb(#000000),var(--alpha,1)),
   "--colour-body":  rgba(to-rgb($colour-body),var(--alpha,1)),
   "--colour-white": rgba(to-rgb(#ffffff),var(--alpha,1)),
-  "--colour-black": rgba(to-rgb(#000000),var(--alpha,1))
+  "--colour-black": rgba(to-rgb(#000000),var(--alpha,1)),
+  "--colour-admin-theme":      #f0f0f0
 ), $vars);
 
 $gradient: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info) 100%);
@@ -409,7 +410,7 @@ $pagination-focus-color: var(--colour-hover);
 $pagination-focus-bg: var(--colour-muted);
 
 // Active
-$pagination-active-color: var(--bs-body-bg);
+$pagination-active-color: var(--body-bg);
 $pagination-active-bg: var(--colour-heading);
 $pagination-active-border-color: var(--colour-heading);
 

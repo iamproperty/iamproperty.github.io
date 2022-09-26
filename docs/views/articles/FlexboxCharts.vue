@@ -24,10 +24,10 @@
     <p>So by using HTML and CSS we get to keep the default and cascaded styles. I personally think using tables is a great idea for charts as it comes with pre-defined accessibility features and makes the most sense semantically. This table could also be used as an alternative view for the chart. Since we are using CSS to create the styles we can use media queries to make them look there best on all devices.</p>
 
     <p>CSS has always worked well with percentage based layouts but <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" title="A Complete Guide to Flexbox">flexbox</a> brings a whole other level of useful features. Making the creation of layouts incredibly easy by being able to justify content and aligning items.</p>
-    
+
     <p>In the below image we have a stacked bar chart that has been created with flexbox techniques. On the containing element with have assigned <em>'display: flex;'</em> and the inner chart has a width of 100%. Forcing the chart to stretch and take up as much space as possible while the y-axis takes up just the amount of space needed. The inner part of the chart again usses flexbox to spread out each item with the same amount of space. Each item in the chart is then told to display each bar in the center ontop of each other but anchored to the bottom of the chart. This is done with three simple rules <em>'flex-direction: column-reverse; justify-content: flex-start; align-items: center;'</em>. With the small amount of CSS rules mentioned and some styling we have created a really simple but responsive bar chart with very little work.</p>
 
-    <img :src="require('../../assets/chart-flexbox-example.png')" alt="An example of a chart with browser tools overlayed ontop to show how flexbox is creating the layout." />
+    <img src="/chart-flexbox-example.png" alt="An example of a chart with browser tools overlayed ontop to show how flexbox is creating the layout." />
 
     <p>We could easily make changes to this chart by adjusting the CSS rules. We could change the 'justify-content' rule to be 'space-between' which will force the first item to the very left and the last item to the very right. The space then inbetween is then worked out for us. We could also change the direction of the bar chart by updating the 'flex-direction' to 'column' instead of the default of 'row'.</p>
 
@@ -40,9 +40,9 @@
     <h2>What's the best solution?</h2>
 
     <p>Short answer is 'It depends upon your requirements'. The long answer is to try and be flexible with the approach and to not restrict yourself with just using an SVG or just using CSS flexbox. But combine different elements of different techniques to get greater results.</p>
-    
+
     <br/>
     <p><strong>Written by James Lambert</strong></p>
-    
+
   </div>
 </template>

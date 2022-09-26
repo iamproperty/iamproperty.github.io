@@ -44,7 +44,7 @@
       <p>By default the logos have padding added to the right and bottom of it, this is to make sure there is enough spcing around the logo while also not restricting it. Depending upon how the logo is being used padding or margins need to be added. <strong>.p-3</strong> or <strong>.m-3</strong> is recommened in cases where the default vertical rythm isn't enough spacing.</p>
       <h2>Modify the logo</h2>
       <p>A logo can be modified with bootstrap utility classes, below is an exmple of how it could be changed:</p>
-      
+
       <ul>
         <li><strong>.bg-primary</strong> add a background colour to the logo</li>
         <li><strong>.text-secondary</strong> updates the colour of the logo</li>
@@ -71,8 +71,8 @@
           <Logo id="property" class="pb-0 pe-2 border-end border-2"></Logo>
         </div>
         <div class="col d-flex align-items-center">
-          <img :src="require('../../assets/yourmove.jpg')" />
-        </div>      
+          <img src="/yourmove.jpg" />
+        </div>
       </div>
     </div>
 

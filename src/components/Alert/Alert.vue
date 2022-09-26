@@ -1,5 +1,5 @@
 <template>
-  <div :class="`container alert pb-0 ${dismissible?'alert--dismissible fade show':''}`" ref="wrapper" :data-timeout="timeout" :style="timeout?`--animation-length: ${timeout}ms`:''">
+  <div :class="`container alert pb-0 ${dismissible?'alert--dismissible fade show':''}`" ref="wrapper" :data-timeout="timeout" :style="(timeout?`--animation-length: ${timeout}ms`:'')">
     <div :class="`alert__inner bg-${colour}`" role="alert">
       <button v-if="dismissible" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       <slot></slot>
@@ -18,7 +18,7 @@ export default {
   name: 'Alert',
   props: {
     dismissible: {
-      type: String|Boolean,
+      type: [String,Boolean],
       required: false,
       default: false
     },
@@ -28,7 +28,7 @@ export default {
       default: 'primary'
     },
     timeout: {
-      type: String|Number,
+      type: [String,Number],
       required: false
     }
   },

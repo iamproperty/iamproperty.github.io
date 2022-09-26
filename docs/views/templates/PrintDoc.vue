@@ -12,12 +12,12 @@
 
       <div class="row"><div class="col-md-8"><pre><code class="language-css">.d-print-block { display: block!important; }</code></pre></div></div>
 
-      <p>Other small tweaks have been made to the default print rules to help tidy up the pages.</p> 
+      <p>Other small tweaks have been made to the default print rules to help tidy up the pages.</p>
       <a href="/standalone/print" target="_blank" class="btn btn-secondary">Print example page</a>
 
     </div>
 
-    
+
     <div class="container">
 
       <h2>Create print only pages</h2>
@@ -26,7 +26,7 @@
       <div class="row mb-3"><div class="col-md-8"><pre><code>&lt;script>{{htmlUsage}}&lt;/script></code></pre></div></div>
 
     </div>
-    
+
     <div class="container">
 
       <h2>Single page template</h2>
@@ -58,7 +58,7 @@ Array.from(document.querySelectorAll('details')).forEach((arrayElement, index) =
 // Open the print preview window
 document.body.onload = function() { window.print(); };`,
       htmlSingle: `@media print {
-  
+
   @page {
     margin: 0;
   }
@@ -66,8 +66,8 @@ document.body.onload = function() { window.print(); };`,
   html {
     padding: 1cm;
     background-color: var(--colour-secondary);
-    --bs-gradient-direction: 45deg;
-    background-image: linear-gradient(var(--bs-gradient-direction), var(--colour-primary) 0, transparent 100%) !important;
+    --gradient-direction: 45deg;
+    background-image: linear-gradient(var(--gradient-direction), var(--colour-primary) 0, transparent 100%) !important;
     background-size: 100vw 100vh;
     background-repeat: repeat;
 

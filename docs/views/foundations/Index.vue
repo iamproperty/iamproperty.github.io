@@ -7,7 +7,7 @@
 </template>
 <script>
 import CardDeck from '@/components/CardDeck/CardDeck.vue'
-import {routes} from '../../router/index.js';
+import routes from '../../routes.ts';
 
 const foundations = routes.reduce(function (arr, route) {
   // Find the correct group
@@ -30,7 +30,7 @@ const foundations = routes.reduce(function (arr, route) {
   return arr
 }, {})
 
-export default {  
+export default {
   components: {
     CardDeck
   },

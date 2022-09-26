@@ -15,12 +15,12 @@
       <h2 class="h6">Dismissible alert</h2>
       <p>Curabitur aliquet quam id dui posuere blandit. Vivamus suscipit tortor eget felis porttitor volutpat. Proin eget tortor risus. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Proin eget tortor risus. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p>
     </Alert>
-    
+
     <Alert class="alert--fixed" colour="info" dismissible="true" timeout="6000">
       <h2 class="h6">Self dismissing alert</h2>
       <p>Curabitur aliquet quam id dui posuere blandit. Vivamus suscipit tortor eget felis porttitor volutpat. Proin eget tortor risus. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Proin eget tortor risus. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p>
     </Alert>
-    
+
     <div class="container">
       <h2>HTML code examples</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>

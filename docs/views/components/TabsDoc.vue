@@ -7,7 +7,7 @@
       <h1>Tabs</h1>
       <p>Group together some content and display one at a time, should not be used for important content as it may not be visible on page load.</p>
     </div>
-    
+
     <Tabs class="visualtest">
       <Tab title="The benefits of auction">
         <h2>Tab content 1</h2>
@@ -20,12 +20,12 @@
       <Tab title="Online auctions" lazy>
         <h2>Tab content 3</h2>
         <p>Lazy loaded table</p>
-        <Table 
+        <Table
         :fields="[
           { key: 'column_1' },
           { key: 'column_2' },
           { key: 'column_3' }
-        ]" 
+        ]"
         :items="[
         {
           column_1: 'row 1',
@@ -40,10 +40,10 @@
       <h2>HTML code example</h2>
       <pre><code class="language-html">{{htmlUsage}}</code></pre>
     </div>
-    
+
 
     <div class="container">
-      
+
       <h2>Admin panel</h2>
       <p>The tabs component display changes when its held within an admin panel, this is to make it fit into the admin panel styles.</p>
     </div>
@@ -58,7 +58,7 @@
           <Tab title="The types of auctions we offer">
             <h2>Tab content 2</h2>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          
+
             <Tabs>
               <Tab title="The benefits of auction">
                 <h2>Tab content 1</h2>
@@ -73,18 +73,18 @@
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
               </Tab>
             </Tabs>
-          
-          
+
+
           </Tab>
           <Tab title="Online auctions" lazy>
             <h2>Tab content 3</h2>
             <p>Lazy loaded table</p>
-            <Table 
+            <Table
             :fields="[
               { key: 'column_1' },
               { key: 'column_2' },
               { key: 'column_3' }
-            ]" 
+            ]"
             :items="[
             {
               column_1: 'row 1',
@@ -128,13 +128,13 @@ export default {
         {
           cite: 'Name goes here 2',
           quote: `<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>`,
-          image: require('../../assets/code.jpeg')
+          image: '/code.jpeg'
         },
         {
           cite: 'Name goes here 3',
           quote: `<p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p><p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.</p>`,
           class: 'largest',
-          image: require('../../assets/shutterstock_1229155495.webp')
+          image: '/shutterstock_1229155495.webp'
         }
       ],
       htmlUsage: `<div class="container tabs__container visualtest">

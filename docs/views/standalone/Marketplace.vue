@@ -27,8 +27,8 @@
               <li class=""><a href="/props">Compliance Help Centre</a></li>
               <li class=""><a href="/props">Report a SAR</a></li>
               <li class=""><a href="/props">Training Library</a></li>
-              <li class="nav__download"><a href="/props"><svg class="icon"><use xlink:href="/svg/icons.svg#icon-download2"></use></svg>Template AML Policy</a></li>
-              <li class="nav__download"><a href="/props"><svg class="icon"><use xlink:href="/svg/icons.svg#icon-download2"></use></svg>Money Laundering Officer Guide</a></li>
+              <li class="nav__download"><a href="/props"><Icon id="download2"></icon>Template AML Policy</a></li>
+              <li class="nav__download"><a href="/props"><Icon id="download2"></Icon>Money Laundering Officer Guide</a></li>
             </ul>
           </li>
           <li class=""><a href="/props">Service Marketplace</a></li>
