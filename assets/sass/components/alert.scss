@@ -7,7 +7,7 @@
     padding: 1.5rem;
     margin-bottom: 2rem;
     @include border-radius($alert-border-radius);
-    //--bs-bg-opacity: 0.5;
+    //--bg-opacity: 0.5;
 
     &:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
       --colour-body: black;

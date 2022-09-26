@@ -22,7 +22,7 @@ function table(tableElement) {
     // Create an array from the table rows, the index created is then used to sort the array
     let tableArr = [];
     Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
-      
+
       let rowIndex = tableRow.querySelector('td[data-label="'+sortBy+'"], th[data-label="'+sortBy+'"]').textContent;
 
       if(isNumeric(rowIndex))
@@ -56,7 +56,7 @@ function table(tableElement) {
   // Declare event handlers
   tableElement.addEventListener('click', function(e){
     for (var target = e.target; target && target != this; target = target.parentNode) {
-      if (target.matches('[data-sortable]')) { 
+      if (target.matches('[data-sortable]')) {
 
         // Get current sort order
         let sort = target.getAttribute('aria-sort') == "ascending" ? "descending" : "ascending";
@@ -77,7 +77,7 @@ function table(tableElement) {
         sortTable(target.textContent, sort);
 
         Array.from(tableElement.querySelectorAll('tr[draggable]')).forEach((tableRow, index) => {
-      
+
           tableRow.removeAttribute('draggable');
         });
         break;
@@ -286,7 +286,7 @@ function table(tableElement) {
       tableElement.addEventListener('change', function(e){
         for (var target = e.target; target && target != this; target = target.parentNode) {
           if (target.matches('.table__pagination input[type="number"]')) {
-  
+
             paginateRows(target.value,page);
             createPaginationButttons(randID,tableElement,target.value,page,totalRows);
             tableElement.setAttribute('data-show',target.value)
@@ -296,8 +296,8 @@ function table(tableElement) {
 
       tableElement.addEventListener('click', function(e){
         for (var target = e.target; target && target != this; target = target.parentNode) {
-          if (target.matches('.page-item:not(.active):not(.disabled) .page-link')) { 
-    
+          if (target.matches('.page-item:not(.active):not(.disabled) .page-link')) {
+
             paginateRows(tableElement.getAttribute('data-show'),target.getAttribute('data-page'));
             createPaginationButttons(randID,tableElement,tableElement.getAttribute('data-show'),target.getAttribute('data-page'),totalRows);
           }
@@ -307,7 +307,7 @@ function table(tableElement) {
       tableElement.addEventListener('change', function(e){
         for (var target = e.target; target && target != this; target = target.parentNode) {
           if (target.matches('.table__pagination select')) {
-  
+
             paginateRows(tableElement.getAttribute('data-show'),target.value);
             createPaginationButttons(randID,tableElement,tableElement.getAttribute('data-show'),target.value,totalRows);
           }
@@ -347,7 +347,7 @@ function table(tableElement) {
     });
   }
 
-  if(tableElement.getAttribute('data-reorder')){
+  if(tableElement.getAttribute('data-reorder') && tableElement.getAttribute('data-reorder') != "false"){
 
     // Add column heading
     const orderHeading = document.createElement('th');
@@ -361,22 +361,22 @@ function table(tableElement) {
     // Reset order button
     tableElement.addEventListener('click', function(e){
       for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('.table-order-reset')) { 
-  
+        if (target.matches('.table-order-reset')) {
+
           // unset sort attributes
           Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
             col.setAttribute('aria-sort','none');
           });
-  
+
           // Save the sort options on the table element so that it can be re-sorted later
           tableElement.removeAttribute('data-sort');
           tableElement.removeAttribute('data-sortBy');
-  
+
           // Sort the table
           sortTable('Order', 'ascending');
-  
+
           Array.from(tableElement.querySelectorAll('tbody tr')).forEach((tableRow, index) => {
-      
+
             tableRow.setAttribute('draggable','true');
           });
 
@@ -385,7 +385,7 @@ function table(tableElement) {
       }
     }, false);
 
-    
+
     document.addEventListener("dragover", function( e ) {
       // prevent default to allow drop
       e.preventDefault();
@@ -397,7 +397,7 @@ function table(tableElement) {
       e.dataTransfer.dropEffect = "move";
 
       for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('[data-reorder] tbody tr')) { 
+        if (target.matches('[data-reorder] tbody tr')) {
 
           target.classList.add('tr--dropable')
         }
@@ -408,7 +408,7 @@ function table(tableElement) {
       // prevent default to allow drop
       e.preventDefault();
       for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('[data-reorder] tbody tr')) { 
+        if (target.matches('[data-reorder] tbody tr')) {
 
           target.classList.remove('tr--dropable')
         }
@@ -420,8 +420,8 @@ function table(tableElement) {
       e.preventDefault();
 
       for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('[data-reorder] tbody tr')) { 
-  
+        if (target.matches('[data-reorder] tbody tr')) {
+
           if(target.parentNode != null && draggedRow.parentNode != null && target != draggedRow){
 
             draggedRow.parentNode.removeChild( draggedRow );
@@ -432,7 +432,7 @@ function table(tableElement) {
               target.parentNode.insertBefore(draggedRow, target.nextElementSibling);
 
             // Re label the rows
-            Array.from(tbody.querySelectorAll('tr')).forEach((tableRowOrder, index) => { 
+            Array.from(tbody.querySelectorAll('tr')).forEach((tableRowOrder, index) => {
               tableRowOrder.classList.remove('tr--dragging')
               tableRowOrder.classList.remove('tr--dropable')
               tableRowOrder.querySelector('th').innerHTML = index + 1;
@@ -450,7 +450,7 @@ function table(tableElement) {
   // #endregion Reorderable
 
   // Watch for the filterable event and re-sort the tbody
-  tableElement.addEventListener('filtered', function (e) { 
+  tableElement.addEventListener('filtered', function (e) {
 
     if(tableElement.getAttribute('data-sortBy') && tableElement.getAttribute('data-sort'))
       sortTable(tableElement.getAttribute('data-sortBy'), tableElement.getAttribute('data-sort'));
@@ -478,7 +478,7 @@ function table(tableElement) {
     }
   }, false);
 
-  tableElement.addEventListener('sorted', function (e) { 
+  tableElement.addEventListener('sorted', function (e) {
 
     if(tableElement.getAttribute('data-reorder')){
 
@@ -486,7 +486,7 @@ function table(tableElement) {
     }
   }, false);
 
-  tableElement.addEventListener('populated', function (e) { 
+  tableElement.addEventListener('populated', function (e) {
 
     var tableFilter = tableElement.querySelector('.table__filters')
     tableFilter.remove();

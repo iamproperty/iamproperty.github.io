@@ -21,6 +21,12 @@ export default {
     return {
       show: this.lazy ? false : true
     }
+  },
+  watch: {
+
+    show(newVal, oldVal) {
+      console.log(newVal)
+    }
   }
 }
 </script>

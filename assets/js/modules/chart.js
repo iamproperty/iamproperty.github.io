@@ -30,10 +30,10 @@ function chart(chartElement,min,max,type) {
   // Add css vars to cells
   Array.from(chartElement.querySelectorAll('tbody tr')).forEach((tr, index) => {
 
-    let group = tr.querySelector('td:first-child').innerHTML;
+    let group = tr.querySelector('td:first-child, th:first-child') ? tr.querySelector('td:first-child, th:first-child').innerHTML : '';
 
     Array.from(tr.querySelectorAll('td[data-numeric]:not([data-numeric="0"]):not(:first-child)')).forEach((td, index) => {
-      
+
       const value = Number.parseFloat(td.getAttribute('data-numeric'));
       let percent = ((value - min)/(max)) * 100;
       const content = td.innerHTML;
@@ -49,6 +49,7 @@ function chart(chartElement,min,max,type) {
       }
       td.setAttribute("style",`--bottom:${bottom}%;--percent:${percent}%;`);
 
+
       td.innerHTML = `<span data-group="${group}" data-label="${label}">${content}</span>`;
     });
   });
@@ -59,7 +60,7 @@ export const createChartKey = function(chartElement){
   let chartKey = chartElement.querySelector('.chart__key');
 
   Array.from(chartElement.querySelectorAll('thead th')).forEach((arrayElement, index) => {
-    
+
     chartKey.innerHTML += `<div class="key">${arrayElement.innerText}</div>`;
   });
 }
@@ -96,7 +97,7 @@ export const createPies = function(chartElement){
   let pieWrapper = chartElement.querySelector('.pies');
 
   Array.from(chartElement.querySelectorAll('tbody tr')).forEach((item, index) => {
-    
+
     let paths = '';
     let tooltips = '';
 
@@ -122,9 +123,9 @@ export const createPies = function(chartElement){
     });
 
     Array.from(item.querySelectorAll('td')).forEach((cell, subindex) => {
-    
+
       if(subindex != 0){
-      
+
         let value = cell.getAttribute('data-numeric');
 
         value = value.replace('£','');
@@ -132,13 +133,13 @@ export const createPies = function(chartElement){
         value = Number.parseInt(value);
 
         let percent = value/total;
-      
+
         //lines[subindex-1] += `${command} ${spacer * index} ${100-percent} `;
         const [startX, startY] = getCoordinatesForPercent(cumulativePercent);
-          
+
           // each slice starts where the last slice ended, so keep a cumulative percent
           cumulativePercent += percent;
-          
+
           const [endX, endY] = getCoordinatesForPercent(cumulativePercent);
 
           // if the slice is more than 50%, take the large arc (the long way around)
@@ -171,10 +172,10 @@ export const createLines = function(chartElement,min,max){
 
   let lines = Array();
   let spacer = 200/(items.length - 1);
-  
+
   // Creates the lines array from the fields array
   Array.from(chartElement.querySelectorAll('thead th')).forEach((field, index) => {
-  
+
     if(index != 0){
 
       lines[index-1] = '';
@@ -183,11 +184,11 @@ export const createLines = function(chartElement,min,max){
 
   // populate the lines array from the items array
   Array.from(chartElement.querySelectorAll('tbody tr')).forEach((item, index) => {
-  
+
     Array.from(item.querySelectorAll('td')).forEach((cell, subindex) => {
-    
+
       if(subindex != 0){
-      
+
         let value = cell.getAttribute('data-numeric');
 
         value = value.replace('£','');
@@ -197,14 +198,14 @@ export const createLines = function(chartElement,min,max){
         const percent = (value/max) * 100;
 
         let command = index == 0 ? 'M' : 'L';
-        
+
         lines[subindex-1] += `${command} ${spacer * index} ${100-percent} `;
       }
     });
   });
 
   lines.forEach((line, index) => {
-  
+
     returnString += `
 <svg viewBox="0 0 200 100" class="line" preserveAspectRatio="none">
   <path fill="none" d="${line}"></path>

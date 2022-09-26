@@ -8,28 +8,28 @@
       <p>Represent a linear sequence of events visually.</p>
     </div>
     <div class="container timeline__container visualtest">
-      <Timeline :image="require('../../assets/shutterstock_1229155495.webp')">
+      <Timeline :image="'/shutterstock_1229155495.webp'">
           <h2>01 Search</h2>
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
       </Timeline>
-      <Timeline :image="require('../../assets/shutterstock_1229155495.webp')">
+      <Timeline :image="'/shutterstock_1229155495.webp'">
 
         <h2>02 viewing</h2>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
       </Timeline>
 
-      <Timeline :image="require('../../assets/shutterstock_1229155495.webp')">
+      <Timeline :image="'/shutterstock_1229155495.webp'">
         <h2>03 buyer information pack</h2>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
       </Timeline>
     </div>
-    
+
 
     <div class="container">
       <h2>HTML code example</h2>
       <pre><code class="language-html">{{htmlUsage}}</code></pre>
     </div>
-    
+
     <div class="container">
       <h2>Vue Header component reference</h2>
       <Readme></Readme>

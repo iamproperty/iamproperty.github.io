@@ -1,23 +1,23 @@
-const { defaults } = require(`jest-config`);
-
-const puppeteerModes = [`acceptance`, `integration`, `visual`];
-const { TEST_MODE } = process.env;
-const PUPPETEER_MODE = puppeteerModes.includes(TEST_MODE);
-
-const testMatchers = {
-  integration: [`**/?(*.)+(integration).[tj]s?(x)`],
-  visual: [`**/?(*.)+(visual).[tj]s?(x)`],
-};
-
 module.exports = {
   moduleFileExtensions: [
-    `js`,
-    `jsx`,
-    `json`,
-    `vue`,
+    'js',
+    'ts',
+    'json',
+    'vue',
+    'scss'
   ],
-  preset: PUPPETEER_MODE ? `jest-puppeteer` : '@vue/cli-plugin-unit-jest',
-  testEnvironment: PUPPETEER_MODE ? 'jsdom' : 'jsdom',
+  transform: {
+    '^.+\\.ts$': 'ts-jest',
+    '^.+\\.vue$': '@vue/vue3-jest',
+    '^.+\\.js$': 'babel-jest'
+  },
+  preset: `jest-puppeteer`,
+  testEnvironment: 'jsdom',
+  testRegex: '(/__tests__/.*|(\\.|/)(test|spec|visual))\\.(js|ts)$',
+  transformIgnorePatterns: ['/node_modules/'],
+  testEnvironmentOptions: {
+    customExportConditions: ["node", "node-addons"],
+  },
   moduleNameMapper: {
     '~/(.*)$': '<rootDir>/docs/$1',
     '@/(.*)$': '<rootDir>/src/$1'
@@ -25,12 +25,5 @@ module.exports = {
   setupFilesAfterEnv: ["expect-puppeteer",`<rootDir>/tests/setup/after-env.js`],
   snapshotSerializers: [
     `jest-serializer-vue`,
-  ],
-  testMatch: testMatchers[TEST_MODE] || defaults.testMatch,
-  testURL: `http://localhost:8080`,
-  transform: {
-    '^.+\\.vue$': `vue-jest`,
-    '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': `jest-transform-stub`,
-    '^.+\\.jsx?$': `babel-jest`,
-  },
-};
+  ]
+}

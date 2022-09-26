@@ -4,9 +4,9 @@ name: Build vue docs and deploy
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["develop"]
+    branches: ["master"]
   pull_request:
-    branches: ["develop"]
+    branches: ["master"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -32,7 +32,7 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [16.x]
 
     steps:
       - name: Checkout
@@ -41,8 +41,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm ci
+      - run: npm install --force
       - run: npm run build:docs
+      - run: npm run deploy:svg
+      - run: npm run deploy:fonts
+      - run: npm run deploy:404
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:

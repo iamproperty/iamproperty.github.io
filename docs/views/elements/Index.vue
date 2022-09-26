@@ -8,7 +8,7 @@
 
 <script>
 import CardDeck from '@/components/CardDeck/CardDeck.vue'
-import {routes} from '../../router/index.js';
+import routes from '../../routes.ts';
 
 const elements = routes.reduce(function (arr, route) {
   // Find the correct group
@@ -21,6 +21,8 @@ const elements = routes.reduce(function (arr, route) {
         route.link = '/elements/'+route.path;
         route.title = route.name;
         route.content = '';
+        delete route.children;
+        delete route.component;
         acc.push(route);
       }
       return acc

@@ -1,9 +1,9 @@
 <template>
   <div>
-    
+
 
     <main>
-      
+
       <div class="container pt-1">
 
         <div class="row">
@@ -31,7 +31,7 @@
         <h1>Print example</h1>
 
         <h2>Transactions</h2>
-        <Table 
+        <Table
         :fields="[{key: 'Date added'},{key: 'Branch'}, {key: 'Type'}, {key: 'Transaction address'}]"
         :items="[
           {date_added: '24 Jan 2021', branch: 'Branch1', type: 'Vendor', transation_address: '2 Hepple Way, NE3 3HS'},
@@ -41,7 +41,7 @@
         class="table-striped border-0" headingclass="bg-secondary"></Table>
 
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-        
+
         <p class="text-primary mb-1">Items identified from the title deeds of:</p>
         <p class="h2 text-secondary">APARTMENT 29, PALACE COURT, WARDLE STREET, STOKE-ON-TRENT, ST6 6AL</p>
         <p class="text-primary mb-1 mt-0">Vendor</p>
@@ -57,12 +57,7 @@
       </div>
     </footer>
 
-    <script type="application/javascript">
-      /* Open up any hidden content */
-      Array.from(document.querySelectorAll('details')).forEach((arrayElement, index) => { arrayElement.setAttribute("open", "open")});
-      /* Open the print preview window */
-      document.body.onload = function() { window.print(); };
-    </script>
+
   </div>
 </template>
 
@@ -156,7 +151,7 @@ export default {
         return this.searchTerm;
       },
       set(val) {
-        
+
         this.savedSearchTerm = val;
         this.$emit('input', val);
       }

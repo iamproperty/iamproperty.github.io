@@ -4,49 +4,54 @@ expect.extend({ toMatchImageSnapshot });
 
 const pkg = require('../package.json');
 
-
 module.exports = {
   testPages: function (page,url) {
-      
+
+
+
     describe(page, () => {
-    
+
       it(`It should render correctly.`, async() => {
-    
+
         const browser = await puppeteer.launch()
         const page = await browser.newPage()
-    
-        await page.goto(pkg.localURL+url)
+
+        await page.goto(pkg.localURL+url+'?cache='+Date.now()+'#visualtest')
+        await page.waitForTimeout(4000)
 
         await page.setViewport({ width: 375, height: 800 })
         const mobileImage = await page.screenshot({ fullPage: true });
         expect(mobileImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
-    
+
         await page.setViewport({ width: 768, height: 800 })
         const tabletImage = await page.screenshot({ fullPage: true });
         expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
-    
-        await page.setViewport({ width: 1440, height: 800 })
-        const desktopImage = await page.screenshot({ fullPage: true });
-        expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
-    
-        return true;
-      });
-    
-      it(`It should render correctly in dark mode.`, async() => {
-  
-        const browser = await puppeteer.launch()
-        const page = await browser.newPage()
-    
-        await page.goto(pkg.localURL+url)
-        await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
 
         await page.setViewport({ width: 1440, height: 800 })
         const desktopImage = await page.screenshot({ fullPage: true });
         expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
-    
+
         return true;
       });
-      
+
+      it(`It should render correctly in dark mode.`, async() => {
+
+        const browser = await puppeteer.launch()
+        const page = await browser.newPage()
+
+        await page.goto(pkg.localURL+url+'?cache='+Date.now()+'#visualtest')
+        await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
+
+
+        await page.setViewport({ width: 1440, height: 800 })
+        await page.waitForTimeout(4000)
+
+        const desktopImage = await page.screenshot({ fullPage: true });
+        expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
+
+        return true;
+      });
+
     });
   },
 };
