@@ -91,37 +91,37 @@ export default {
       ],
       items2: [
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/components/card-deck',
           title: 'Card 1',
           content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
         },
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/components/card-deck',
           title: 'Card 2',
           content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p>`
         },
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/components/card-deck',
           title: 'Card 3',
           content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p>`
         },
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/components/card-deck',
           title: 'Card 4',
           content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p>`
         },
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/components/card-deck',
           title: 'Card 5',
           content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur.</p>`
         },
         {
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           link: '/components/card-deck',
           title: 'Card 6',
           content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur, tortor eu faucibus facilisis, felis libero blandit dolor.</p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur.</p>`
@@ -131,7 +131,7 @@ export default {
         {
           link: '/components/card-deck',
           content: `<p>Reservation fee applies</p>`,
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           title: '4 bed semi-detached',
           subtitle: 'Burt terrace, Newcastle upon tyne',
           details: {
@@ -141,12 +141,12 @@ export default {
             status: 'Live now',
             images: 5,
             videos: 2,
-            logo: require('../../assets/logo.jpg')
+            logo: '/logo.jpg'
           }
         },
         {
           link: '/components/card-deck',
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           title: '4 bed semi-detached',
           subtitle: 'Burt terrace, Newcastle upon tyne',
           content: `<p>Reservation fee applies</p>`,
@@ -157,12 +157,12 @@ export default {
             status: 'Sold',
             images: 5,
             videos: 2,
-            logo: require('../../assets/logo.jpg')
+            logo: '/logo.jpg'
           }
         },
         {
           link: '/components/card-deck',
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           title: '4 bed semi-detached',
           subtitle: 'Burt terrace, Newcastle upon tyne',
           content: `<p>Reservation fee applies</p>`,
@@ -173,12 +173,12 @@ export default {
             status: 'Sold',
             images: 5,
             videos: 2,
-            logo: require('../../assets/logo.jpg')
+            logo: '/logo.jpg'
           }
         },
         {
           link: '/components/card-deck',
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           title: '4 bed semi-detached',
           subtitle: 'Burt terrace, Newcastle upon tyne',
           content: `<p>Reservation fee applies</p>`,
@@ -189,7 +189,7 @@ export default {
             status: 'Sold',
             images: 5,
             videos: 2,
-            logo: require('../../assets/logo.jpg')
+            logo: '/logo.jpg'
           }
         }
       ],
@@ -197,7 +197,7 @@ export default {
         {
           link: '/components/card-deck',
           content: `<p>Reservation fee applies</p>`,
-          image: require('../../assets/house.jpeg'),
+          image: '/house.jpeg',
           title: '4 bed semi-detached',
           subtitle: 'Burt terrace, Newcastle upon tyne',
           details: {
@@ -207,7 +207,7 @@ export default {
             status: 'Live now',
             images: 5,
             videos: 2,
-            logo: require('../../assets/logo.jpg')
+            logo: '/logo.jpg'
           }
         }
       ]

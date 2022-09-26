@@ -7,8 +7,8 @@
       <h1>Header</h1>
       <p>Introduce the page so a user can decide whether the page is right for their needs.</p>
     </div>
-    
-    <Header title="Page title" class="visualtest" :image="require('../../assets/shutterstock_1229155495.webp')">
+
+    <Header title="Page title" class="visualtest" image="/shutterstock_1229155495.webp">
       <template v-slot:breadcrumb>
         <ul class="breadcrumb">
           <li><a href="/">Home</a></li>
@@ -22,7 +22,7 @@
       <h2>HTML code example</h2>
       <pre><code class="language-html">{{htmlUsage}}</code></pre>
     </div>
-    
+
     <div class="container">
       <h2>Vue Header component reference</h2>
       <Readme></Readme>

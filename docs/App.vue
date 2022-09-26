@@ -1,98 +1,59 @@
-<template>
-  <div id="app">
-    <div id="visualtest"></div>
-
-    <Nav logo="key" logotext="Design system<br/>&amp; framework">
-      <ul class="list-unstyled">
-        <li><router-link :class="{'router-link-sub-active': subIsActive('/principles')}" to="/principles">Principles</router-link></li>
-        <li><router-link :class="{'router-link-sub-active': subIsActive('/foundations')}" to="/foundations">Foundations</router-link></li>
-        <li><router-link :class="{'router-link-sub-active': subIsActive('/elements')}" to="/elements">Elements</router-link></li>
-        <li><router-link :class="{'router-link-sub-active': subIsActive('/components')}" to="/components">Components</router-link></li>
-        <li><router-link :class="{'router-link-sub-active': subIsActive('/templates')}" to="/templates">Templates</router-link></li>
-        <li><router-link :class="{'router-link-sub-active': subIsActive('/best-practice')}" to="/best-practice">Best practice</router-link></li>
-      </ul>
-    </Nav>
-    <router-view />
-    <footer class="bg-primary">
-
-      <div class="container pt-4 d-print-none">
-        <ul class="list-unstyled list-inline ms-auto d-block mb-0">
-          <li class="list-inline-item me-4 ms-0 mb-2"><a :href="require('./assets/brand-guidelines.pdf')" target="_blank">Brand guidelines</a></li>
-          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/information')}" to="/information">Information</router-link></li>
-          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/get-started')}" to="/get-started">Get started</router-link></li>
-          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/accessibility')}" to="/accessibility">Accessibility</router-link></li>
-          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/examples')}" to="/examples">Examples</router-link></li>
-          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/articles')}" to="/articles">Articles</router-link></li>
-          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/audit')}" to="/audit">Audit</router-link></li>
-          <li class="list-inline-item me-4 ms-0 mb-2"><router-link :class="{'router-link-sub-active': subIsActive('/changelog')}" to="/changelog">Changelog</router-link></li>
-        </ul>
-      </div>
-      <div class="container pt-3">
-        <p>Version: {{version}}</p>
-      </div>
-    </footer>
-  </div>
-</template>
-<script>
-/*
-import SVGLogo from '../assets/svg/logo.svg?inline'
-import SVGIcons from '../assets/svg/icons.svg?inline'
-*/
-import Logo from '@/foundations/Logo/Logo.vue'
+<script setup lang="ts">
 import pkg from '../package.json'
-import * as helpers from '../assets/js/modules/helpers'
-import form from '../assets/js/modules/form'
+import Nav from '../src/components/Nav/Nav.vue'
 
-import Nav from '@/components/Nav/Nav.vue'
-
-export default {
-  data () {
-    return {
-      version: pkg.version
-    }
-  },
-  components: {
-    Logo,
-    Nav
-  },
-  methods: {
-    subIsActive (input) {
-      const paths = Array.isArray(input) ? input : [input]
-      return paths.some(path => {
-        return this.$route.path.indexOf(path) === 0 // current path starts with this path string
-      })
-    }
-  },
-  updated(){
-
-    // Remove weird markdown component behavior
-    let element = document.querySelector('#app html');
-    if(element){
-
-      const fragment = document.createDocumentFragment();
-      Array.from(element.querySelector('body').childNodes).forEach(child => fragment.appendChild(child));
-      element.parentNode.insertBefore(fragment, element);
-      element.parentNode.removeChild(element);
-    }
-    // end
-
-    document.getElementById('showMenu').checked = false;
-
-    if(document.querySelector('main'))
-      helpers.checkElements(document.querySelector('main'));
-
-    Array.from(document.querySelectorAll('form')).forEach((arrayElement, index) => {
-      form(arrayElement);
-    });
-
-    hljs.highlightAll();
-  }
-}
+const version = pkg.version;
 </script>
+
+<template>
+
+  <div id="visualtest"></div>
+
+  <Nav logo="key" logotext="Design system<br/>&amp; framework">
+    <ul class="list-unstyled">
+      <li><router-link to="/principles">Principles</router-link></li>
+      <li><router-link to="/foundations">Foundations</router-link></li>
+      <li><router-link to="/elements">Elements</router-link></li>
+      <li><router-link to="/components">Components</router-link></li>
+      <li><router-link to="/templates">Templates</router-link></li>
+      <li><router-link to="/best-practice">Best practice</router-link></li>
+    </ul>
+  </Nav>
+
+  <router-view></router-view>
+
+  <footer class="bg-primary">
+    <div class="container pt-4 d-print-none">
+      <ul class="list-unstyled list-inline ms-auto d-block mb-0">
+        <li class="list-inline-item me-4 ms-0 mb-2"><a href="/brand-guidelines.pdf" target="_blank" download>Brand guidelines</a></li>
+        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/information">Information</router-link></li>
+        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/get-started">Get started</router-link></li>
+        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/accessibility">Accessibility</router-link></li>
+        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/examples">Examples</router-link></li>
+        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/articles">Articles</router-link></li>
+        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/audit">Audit</router-link></li>
+        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/changelog">Changelog</router-link></li>
+      </ul>
+    </div>
+    <div class="container pt-3">
+      <p>Version: {{version}}</p>
+    </div>
+  </footer>
+
+</template>
+
 <style lang="scss">
-.nav .router-link-active:not(.text-decoration-none):not(.btn):before {
+
+@import "./assets/styles.scss";
+
+.nav .list-unstyled li a.router-link-active:not(.text-decoration-none):not(.btn):before {
   width: 100%;
 }
+
+footer .router-link-active {
+  text-decoration: none;
+}
+
 #visualtest:target ~ *:not(main),
 #visualtest:target ~ main > *:not(.visualtest){
   display: none!important;

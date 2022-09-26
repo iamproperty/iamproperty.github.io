@@ -1,3 +1,3 @@
 const visualtest = require('./_visualtest.js');
 
-visualtest.testPages(`Snapshot page`,'/components/snapshot#visualtest');
+visualtest.testPages(`Snapshot page`,'/components/snapshot');

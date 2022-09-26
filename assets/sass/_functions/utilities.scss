@@ -223,9 +223,9 @@ $utilities: map-merge(
       ),
       values:
       (
-        "secondary": linear-gradient(var(--bs-gradient-direction), var(--colour-secondary) 0, transparent 100%),
-        "primary": linear-gradient(var(--bs-gradient-direction), var(--colour-primary) 0, transparent 100%),
-        "info": linear-gradient(var(--bs-gradient-direction), var(--colour-info) 0, transparent 100%)
+        "secondary": linear-gradient(var(--gradient-direction), var(--colour-secondary) 0, transparent 100%),
+        "primary": linear-gradient(var(--gradient-direction), var(--colour-primary) 0, transparent 100%),
+        "info": linear-gradient(var(--gradient-direction), var(--colour-info) 0, transparent 100%)
       )
     )
   )

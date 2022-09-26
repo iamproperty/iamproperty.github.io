@@ -8,7 +8,7 @@
     </div>
 
     <div :class="`chart chart--${type}`" ref="chart">
-      
+
       <div class="chart__yaxis" role="presentation">
         <div :key="index" v-for="(point,index) in yaxis" :style="`--value: ${point.value};--percent:${((point.value-min)/(max-min))*100}%;`" class="axis__point">
           <span>{{point.display}}</span>
@@ -34,11 +34,11 @@
 
 <script>
 import { ucfirst, unsnake } from '../../helpers/strings'
-import Table from '@/elements/Table/Table.vue'
+import Table from '../../elements/Table/Table.vue'
 import chartModule from '../../../assets/js/modules/chart.js'
 
 export default {
-  name: 'Chart',  
+  name: 'Chart',
   components: {
     Table
   },

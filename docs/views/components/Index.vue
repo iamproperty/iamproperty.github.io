@@ -9,7 +9,7 @@
 
 <script>
 import CardDeck from '@/components/CardDeck/CardDeck.vue'
-import {routes} from '../../router/index.js';
+import routes from '../../routes.ts';
 
 const components = routes.reduce(function (arr, route) {
   // Find the correct group

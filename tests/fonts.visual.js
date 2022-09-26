@@ -11,15 +11,15 @@ describe(`Body font class`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto(pkg.localURL+'/foundations/fonts#visualtest')
-    
+    await page.goto(pkg.localURL+'/foundations/fonts')
+
     await page.setViewport({ width: 375, height: 800 })
 
     const fontFamily = await page.$eval(
       '[data-test="test1"]',
       (el) => window.getComputedStyle(el).getPropertyValue("font-family")
     )
-    
+
     expect(fontFamily).toBe('qanelasmedium, arial, sans-serif');
     await browser.close()
   });
@@ -30,7 +30,7 @@ describe(`Heading font class`, () => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto(pkg.localURL+'/foundations/fonts#visualtest')
+    await page.goto(pkg.localURL+'/foundations/fonts')
 
     await page.setViewport({ width: 375, height: 800 })
 
@@ -38,10 +38,10 @@ describe(`Heading font class`, () => {
       '[data-test="test2"]',
       (el) => window.getComputedStyle(el).getPropertyValue("font-family")
     )
-    
+
     expect(fontFamily).toBe('qanelas_softextrabold, arial, sans-serif');
     await browser.close()
   });
 })
 
-visualtest.testPages(`Fonts page`,'/foundations/fonts#visualtest');
+visualtest.testPages(`Fonts page`,'/foundations/fonts');
