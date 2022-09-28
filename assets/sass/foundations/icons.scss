@@ -26,6 +26,14 @@
   & + .icon {
     margin-inline-start: 1rem;
   }
+
+  &[class*="fs-"] {
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: text-top;
+    margin-top: -0.15em;
+    margin-inline: 0.25em;
+  }
 }
 
 @include inline-text(){

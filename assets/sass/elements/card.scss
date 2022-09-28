@@ -84,6 +84,26 @@ a.card {
   }
 }
 
+.card-banner {
+  padding: 0.5rem;
+
+  &__tag {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--colour-secondary);
+    font-size: rem(14);
+    font-weight: bold;
+    aspect-ratio: 1;
+    padding: 0.75rem;
+    border-radius: 50%;
+    transform: translate(-0.25rem,-1.25rem) rotate(-25deg);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15)!important;
+
+  }
+}
+
 .card-body {
 
   color: var(--colour-body);
@@ -173,5 +193,97 @@ a.card {
     }
 
   }
+}
+// #endregion
+
+// #region Small cards 
+.card--small {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-inline: 0.5rem;
+
+  .card-header__wrapper,
+  .card-body > *:not(.card-title) {
+    display: none;
+  }
+
+  .card-body,
+  .card-footer {
+    padding: 0.5rem;
+  }
+
+  .card-title {
+    margin: 0;
+  }
+
+  .btn {
+    margin-right: 0;
+    white-space: nowrap;
+
+    &:not(.btn--link) {
+      padding: 0.5em 1em
+    }
+  }
+
+  &:not([target="_blank"]) .btn-primary:not(.btn--link):after {
+      
+    content: "";
+    height: 1em;    
+    width: 1em;
+    margin-left: 0.5em;
+    margin-right: -0.5em;
+    display: inline-block;
+    vertical-align: baseline;
+    margin-bottom: -0.15em;
+
+    mask-image: var(--icon-arrow);
+    mask-size: 100% 100%;
+    mask-repeat: no-repeat;
+    mask-position: 0 0;
+  
+    -webkit-mask-image: var(--icon-arrow);
+    -webkit-mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 0 0;
+    background-color: currentColor;
+  }
+
+    
+  @include media-breakpoint-up(md) {
+
+    flex-wrap: wrap;
+    .card-footer {
+      min-width: 100%;
+      text-align: right;
+    }
+  }
+}
+
+.card--danger,
+.card--warning,
+.card--success {
+  position: relative;
+  padding-left: 1.5rem;
+
+  &:after {
+
+    content: "";
+    height: 100%;
+    width: 1rem;
+    background: var(--colour-danger);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+.card--warning:after {
+  background: var(--colour-warning);
+}
+.card--success:after {
+  background: var(--colour-success);
 }
 // #endregion

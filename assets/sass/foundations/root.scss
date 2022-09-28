@@ -105,3 +105,22 @@
     --colour-underline: white;
   }
 }
+
+
+
+@include media-breakpoint-up(md) {
+
+  .invert-colours-md {
+    
+    @if $compatible != "true" {
+      
+      @include invert-colours();
+    }
+    color: white;
+    --colour-underline: white;
+  }
+
+  [class*="bg-"].bg-md-transparent {
+    background: transparent!important;
+  }
+}

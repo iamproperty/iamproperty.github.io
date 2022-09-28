@@ -3,6 +3,13 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.1</h2>
+      <ul>
+        <li>Minor CSS changes</li>
+        <li>Two new JS modules (orderablelist and file-upload)</li>
+        <li>Start of client dashboard prototype</li>
+      </ul>
+
       <h2>V3</h2>
       <ul>
         <li>Upgrade to Vue3</li>

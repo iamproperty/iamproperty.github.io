@@ -29,15 +29,13 @@ export default {
       })
     }
   },
-  updated(){
+  mounted(){
     if(document.querySelector('main'))
       helpers.checkElements(document.querySelector('main'));
 
     Array.from(document.querySelectorAll('form')).forEach((arrayElement, index) => {
       form(arrayElement);
     });
-
-    hljs.highlightAll();
   }
 }
 </script>

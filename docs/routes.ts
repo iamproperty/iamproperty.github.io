@@ -664,6 +664,46 @@ const routes = [
           title: 'Single page Print | iamkey'
         },
         component: () => import('./views/standalone/PrintExampleSingle.vue')
+      },
+      {
+        path: 'client-dashboard',
+        name: "Client Dashboard",
+        meta: {
+          title: 'Client Dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/ClientDashboard/index.vue')
+      },
+      {
+        path: 'client-risk',
+        name: "Client risk",
+        meta: {
+          title: 'Client Dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/ClientDashboard/risk.vue')
+      },
+      {
+        path: 'client-legal',
+        name: "Client legal",
+        meta: {
+          title: 'Client Dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/ClientDashboard/legal.vue')
+      },
+      {
+        path: 'client-legal-selected',
+        name: "Client legal selected",
+        meta: {
+          title: 'Client Dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/ClientDashboard/legalSelected.vue')
+      },
+      {
+        path: 'client-method',
+        name: "Client method",
+        meta: {
+          title: 'Client method | iamkey'
+        },
+        component: () => import('./views/standalone/ClientDashboard/method.vue')
       }
     ]
   },

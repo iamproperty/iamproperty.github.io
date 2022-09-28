@@ -9,29 +9,29 @@ function inputRange(inputWrapper){
 
     // Set attributes for input fields
     Array.from(inputWrapper.querySelectorAll('[data-min] input')).forEach((input, index) => {
-      
+
       input.setAttribute('max',max);
     });
 
     Array.from(inputWrapper.querySelectorAll('[data-max] input')).forEach((input, index) => {
-      
+
       input.setAttribute('min',min);
     });
 
     // Hide select options if they are higher or lower than the min and max values
     Array.from(inputWrapper.querySelectorAll('[data-min] select option')).forEach((option, index) => {
-      
+
       if(parseInt(option.getAttribute('value')) > max)
         option.classList.add('d-none');
-      else 
+      else
         option.classList.remove('d-none');
     });
 
     Array.from(inputWrapper.querySelectorAll('[data-max] select option')).forEach((option, index) => {
-      
+
       if(parseInt(option.getAttribute('value')) < min)
         option.classList.add('d-none');
-      else 
+      else
         option.classList.remove('d-none');
     });
 
@@ -40,13 +40,22 @@ function inputRange(inputWrapper){
 
 function inputRedirect(inputWrapper){
 
+
   inputWrapper.addEventListener('change', function(e){
 
-    const url = inputWrapper.getAttribute('data-redirect');
-    const desiredValue = inputWrapper.getAttribute('data-value-if');
+    if(inputWrapper.matches('[data-value-if]')) {
 
-    if(inputWrapper.value == desiredValue)
-      document.location.href = url;
+      const url = inputWrapper.getAttribute('data-redirect');
+      const desiredValue = inputWrapper.getAttribute('data-value-if');
+
+      if(inputWrapper.value == desiredValue)
+        document.location.href = url;
+    }
+    else {
+
+      if(typeof inputWrapper.value != "undefined")
+        document.location.href = inputWrapper.value;
+    }
 
   }, false);
 }
@@ -81,7 +90,7 @@ function multipleFileUploads(wrapper){
       break;
       }
     }
-    
+
   }, false);
 }
 
@@ -93,7 +102,7 @@ function form(formElement) {
     inputRange(arrayElement);
   });
 
-  Array.from(formElement.querySelectorAll('[data-redirect][data-value-if]')).forEach((arrayElement, index) => {
+  Array.from(formElement.querySelectorAll('[data-redirect]')).forEach((arrayElement, index) => {
     inputRedirect(arrayElement);
   });
 
@@ -101,14 +110,14 @@ function form(formElement) {
     multipleFileUploads(arrayElement);
   });
 
-  
+
   // Check the file size of a file when uploaded in case it exceeds the max file size set
   formElement.addEventListener('change', function(e){
     for (var target = e.target; target && target != this; target = target.parentNode) {
-      if (target.matches('[type="file"][data-filesize]') && target.files && target.files[0]) { 
+      if (target.matches('[type="file"][data-filesize]') && target.files && target.files[0]) {
 
           const maxAllowedSize = target.dataset.filesize;
-          if (target.files[0].size > maxAllowedSize) { 
+          if (target.files[0].size > maxAllowedSize) {
 
             target.value = '';
             alert('File too large');
@@ -124,7 +133,7 @@ function form(formElement) {
 
     // Remove disabled attribute when a pre-selected input field equals a certain value
     Array.from(formElement.querySelectorAll('select[data-activeif][data-equals],input[data-activeif][data-equals]')).forEach((arrayElement, index) => {
-      
+
       let group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
       let selector = arrayElement.dataset.activeif;
       let value = arrayElement.dataset.equals;
@@ -141,7 +150,7 @@ function form(formElement) {
 
     // Show this input wrapper when a pre-selected input field equals a certain value
     Array.from(formElement.querySelectorAll('.form-control__wrapper[data-displayif][data-equals]')).forEach((arrayElement, index) => {
-      
+
       let group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
       let selector = arrayElement.dataset.activeif;
       let value = arrayElement.dataset.equals;
