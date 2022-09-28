@@ -11,17 +11,39 @@
     <h2 class="h4">Your conveyancing milestones</h2>
 
 
-    <div class="btn-group d-block">
+    <div class="btn-group btn-group--admin d-block">
       <input type="radio" autocomplete="off" name="radio5" id="test8" class="btn-check" checked>
-      <label for="test8" class="btn btn-tertiary col-4">Option 1</label>
+      <label for="test8" class="btn btn-tertiary col-4">Outstanding</label>
       <input type="radio" autocomplete="off" name="radio5" id="test8a" class="btn-check">
-      <label for="test8a" class="btn btn-tertiary col-4">Option 2</label>
+      <label for="test8a" class="btn btn-tertiary col-4">Completed</label>
       <input type="radio" autocomplete="off" name="radio5" id="test8b" class="btn-check">
-      <label for="test8b" class="btn btn-tertiary col-4">Option 3</label>
+      <label for="test8b" class="btn btn-tertiary col-4">Upload file</label>
       <hr/>
-      <div class="conditional conditional-1 bg-white"><p>Content 1.</p></div>
-      <div class="conditional conditional-2 bg-white"><p>Content 2.</p></div>
-      <div class="conditional conditional-3 bg-white"><p>Content 3.</p></div>
+      <div class="conditional conditional-1 bg-white p-3 rounded-2 shadow">
+        <ul class="tick-list">
+          <li class="tick--incomplete">Memo of sale received</li>
+        </ul>
+      </div>
+      <div class="conditional conditional-2 bg-white p-3 rounded-2 shadow">
+        <ul class="tick-list">
+          <li>Welcome call <span class="text-muted">15/03/22</span></li>
+          <li>Welcome call <span class="text-muted">15/03/22</span></li>
+        </ul>
+      </div>
+      <div class="conditional conditional-3 bg-white p-3 rounded-2 shadow">
+
+        <form action="" method="GET" class="file-upload">
+          <Input type="select" id="test1" label="Select document type" :options="[{display:'One',value:'1'},{display:'Two',value:'2'}]" ></Input>
+
+          <Input class="form-control--lrg-file" type="file" id="testfile" label="Select a file to upload">
+            <svg class="icon"><title>document</title><use xlink:href="/svg/icons.svg#icon-document"></use></svg>
+          </Input>
+          <button class="btn btn-secondary">Upload</button>
+          <span class="file-upload__add">+ Add another file</span>
+        </form>
+
+
+      </div>
     </div>
 
 
@@ -37,8 +59,8 @@
     </div>
     <div class="container bg-white w-100 me-md-0">
 
-      <h3>Your solicitor</h3>
-      <p>TBI Solicitors, 12 Street, Bradford, BL34 7TN</p>
+      <h3>Recent uploads</h3>
+      <p>....</p>
 
     </div>
   </div>
@@ -68,6 +90,10 @@ import Heading from './_heading.vue'
 import CardDeck from '@/components/CardDeck/CardDeck.vue'
 import Icon from '@/foundations/Icon/Icon.vue'
 import Table from '@/elements/Table/Table.vue'
+import Input from '@/elements/Input/Input.vue'
+
+
+import fileupload from '../../../../assets/js/modules/file-upload'
 
 export default {
   components: {
@@ -76,7 +102,8 @@ export default {
     Heading,
     CardDeck,
     Icon,
-    Table
+    Table,
+    Input
   },
   data () {
     return {
@@ -127,6 +154,13 @@ export default {
         }
       ]
     }
+  },
+  mounted(){
+
+    document.querySelectorAll('.file-upload').forEach((arrayElement, index) => {
+      fileupload(arrayElement,(e) => {console.log('Call a function to update the listing')});
+    });
+
   }
 }
 </script>

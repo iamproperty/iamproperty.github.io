@@ -86,7 +86,6 @@ export const shared = {
 let template = window.location.pathname.startsWith('/standalone') || window.location.pathname.startsWith('/prototype') ? Standalone : App;
 
 
-export {shared}
 // Create app
 let app = createApp(template)
 app.config.globalProperties.$shared = shared;

@@ -53,7 +53,7 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
 
 // #region carousel controls/pips
 .carousel:not(.hide-controls) {
-  padding-bottom: 4.5rem;
+  padding-bottom: 4.5rem!important;
 }
 
 .carousel.hide-controls .carousel__controls {

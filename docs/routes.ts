@@ -671,39 +671,39 @@ const routes = [
         meta: {
           title: 'Client Dashboard | iamkey'
         },
-        component: () => import('../views/standalone/ClientDashboard/index.vue')
+        component: () => import('./views/standalone/ClientDashboard/index.vue')
       },
       {
         path: 'client-risk',
-        name: "Client Dashboard",
+        name: "Client risk",
         meta: {
           title: 'Client Dashboard | iamkey'
         },
-        component: () => import('../views/standalone/ClientDashboard/risk.vue')
+        component: () => import('./views/standalone/ClientDashboard/risk.vue')
       },
       {
         path: 'client-legal',
-        name: "Client Dashboard",
+        name: "Client legal",
         meta: {
           title: 'Client Dashboard | iamkey'
         },
-        component: () => import('../views/standalone/ClientDashboard/legal.vue')
+        component: () => import('./views/standalone/ClientDashboard/legal.vue')
       },
       {
         path: 'client-legal-selected',
-        name: "Client Dashboard",
+        name: "Client legal selected",
         meta: {
           title: 'Client Dashboard | iamkey'
         },
-        component: () => import('../views/standalone/ClientDashboard/legalSelected.vue')
+        component: () => import('./views/standalone/ClientDashboard/legalSelected.vue')
       },
       {
         path: 'client-method',
-        name: "Client Dashboard",
+        name: "Client method",
         meta: {
-          title: 'Client Dashboard | iamkey'
+          title: 'Client method | iamkey'
         },
-        component: () => import('../views/standalone/ClientDashboard/method.vue')
+        component: () => import('./views/standalone/ClientDashboard/method.vue')
       }
     ]
   },

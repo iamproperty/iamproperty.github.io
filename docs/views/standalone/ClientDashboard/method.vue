@@ -21,17 +21,17 @@
 
 
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-4 me-auto">
 
                 <h3 class="h4">What's most important to you in the sale of your property?</h3>
                 <p>Please rank these 3 points in order of importance. Do so by dragging and dropping the cards from 1 (most important) to 5 (least important).</p>
               </div>
-              <div class="col-md-7">
+              <div class="col-sm-10 col-md-7">
 
                 <ol class="orderable-list">
-                  <li><span class="h5">Speed of sale</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
-                  <li>Security and buyer commitment</li>
-                  <li>Maximum price</li>
+                  <li><span class="h5 mb-0">Speed of sale</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+                  <li><span class="h5 mb-0">Security and buyer commitment</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
+                  <li><span class="h5 mb-0">Maximum price</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</li>
                 </ol>
 
               </div>
@@ -55,8 +55,20 @@
 
             <Carousel class="hide-btns" :items="items" btntype="link" :smcols="2" :mdcols="2"></Carousel>
 
+            <p class="h5">When is best to contact you about our Modern Method of Auction?</p>
+            <div class="">
+              <input type="radio" autocomplete="off" name="radio1" id="test" class="btn-check">
+              <label for="test" class="btn btn-tertiary btn-admin">4 weeks</label>
+              <input type="radio" autocomplete="off" name="radio1" id="test1a" class="btn-check">
+              <label for="test1a" class="btn btn-tertiary btn-admin">6 weeks</label>
+              <input type="radio" autocomplete="off" name="radio1" id="test1c" class="btn-check">
+              <label for="test1c" class="btn btn-tertiary btn-admin">8 weeks</label>
+              <input type="radio" autocomplete="off" name="radio1" id="test1d" class="btn-check">
+              <label for="test1d" class="btn btn-tertiary btn-admin">No thanks</label>
+            </div>
 
-            <p><strong>When is best to contact you about our Modern Method of Auction?</strong></p>
+
+
 
           </div>
         </div>
@@ -102,24 +114,35 @@ export default {
     return {
       items: [
         {
-          content: `<a href="/components/card-deck" class="card">
-  <div class="card-body">
-    <h2 class="card-title">Card 1</h2>
-    <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>
+          content: `<a href="/components/card-deck" class="card text-center overflow-visible">
+  <div class="card-banner bg-secondary gradient-info gradient-direction-left">
+    <span class="h4 card-title mb-0">Modern Method<br/> of Auction</span>
+    <span class="card-banner__tag">Popular<br/> Choice</span>
   </div>
-  <div class="card-footer">
-    <span class="btn btn-secondary mb-0">Find out more<span class="visually-hidden"> about Card 1</span></span>
+  <div class="card-body">
+    <p class="h6">Trusted by over 3,500 Estate Agency branches across the UK</p>
+    <ul class="list-unstyled">
+      <li>Faster sales process</li>
+      <li>Low 'fall through' rate</li>
+      <li>Competitive offers</li>
+      <li>No selling fee</li>
+    </ul>
   </div>
 </a>`
         },
         {
-          content: `<a href="/components/card-deck" class="card">
-  <div class="card-body">
-    <h2 class="card-title">Card 1</h2>
-    <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>
+          content: `<a href="/components/card-deck" class="card text-center">
+  <div class="card-banner bg-secondary gradient-info gradient-direction-left">
+    <span class="h4 card-title mb-0">Private Treaty<br/> Service</span>
   </div>
-  <div class="card-footer">
-    <span class="btn btn-secondary mb-0">Find out more<span class="visually-hidden"> about Card 1</span></span>
+  <div class="card-body">
+    <p class="h6">Trusted by over 3,500 Estate Agency branches across the UK</p>
+    <ul class="list-unstyled">
+      <li>Faster sales process</li>
+      <li>Low 'fall through' rate</li>
+      <li>Competitive offers</li>
+      <li>No selling fee</li>
+    </ul>
   </div>
 </a>`
         }

@@ -31,13 +31,8 @@
             <div class="col-12 col-sm-6 col-md-6">
 
               <div class="bg-admin container container-xs-breakout h-100">
-                <h3>Upgrade option</h3>
-                <ul class="tick-list">
-                  <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
-                  <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
-                  <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
-                  <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
-                </ul>
+                <h3>Upgrade options</h3>
+                <p>....</p>
               </div>
             </div>
           </div>
@@ -47,8 +42,8 @@
 
       </div>
 
-      <div class="container">
-          <p class="">Do you have an existing mortgage?</p>
+      <div class="container pt-4">
+          <p class="h5">Do you have an existing mortgage?</p>
           <div class="">
             <input type="radio" autocomplete="off" name="radio1" id="test" class="btn-check">
             <label for="test" class="btn btn-tertiary">Yes</label>

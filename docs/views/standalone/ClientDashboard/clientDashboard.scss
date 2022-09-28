@@ -18,11 +18,11 @@
     margin-right: auto;
     padding: 3rem var(--container-padding-x) var(--container-padding-bottom) var(--container-padding-x);
     width: 100%;
-
     max-width: rem(1440);
-
-    background: var(--colour-primary);
     padding-top: 2rem;
+    --gradient-direction: 90deg;
+    background-image: linear-gradient(var(--gradient-direction), var(--colour-primary) 0, transparent 100%) !important;
+    background-color: var(--colour-info) !important;
 
     .client-wrapper__inner,
     .container {
