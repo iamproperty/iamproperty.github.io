@@ -9,12 +9,16 @@
     <div class="container visualtest">
       <Input type="file" id="test16" label="Label"></Input>
     </div>
-    
+
+    <div class="container visualtest">
+      <Input class="form-control--lrg-file" type="file" id="testfile" label="Label" multiple="multiple"></Input>
+    </div>
+
     <div class="container pb-0">
       <h2>Multiple files</h2>
       <p>There will be cases when the user needs to upload more than one file at a time. At this point meta style data may need to be collected for each file, which would be bespoke to the task. The muliple file element should always consist of 1 upload input field and a delete button on one row with bespoke fields in the middle. Then an add file button to duplicate the first row to create new file upload fields.</p>
     </div>
-    
+
     <div class="container visualtest">
       <form method="GET">
         <FileUploads id="files" inputcolclass="col-12 col-md-2" :maxfilesize="90000" :maxfiles="5">
@@ -36,7 +40,7 @@
       </form>
 
     </div>
-    
+
   </main>
 </template>
 

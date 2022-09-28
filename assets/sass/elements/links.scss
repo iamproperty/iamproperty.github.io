@@ -43,7 +43,8 @@ a,
     @include var (color, --colour-active);
   }
 
-  &[target="_blank"]:after {
+  &[target="_blank"]:not(.card):after,
+  &.card[target="_blank"] .btn:after {
     
     content: "";
     height: 1em;    

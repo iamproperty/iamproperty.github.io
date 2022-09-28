@@ -50,7 +50,7 @@
 
     &.tick--incomplete:before {
 
-      background: currentColor;
+      background: var(--colour-admin);
       mask-image: none;
       -webkit-mask-image: none;
       border-radius: 50%;
@@ -109,5 +109,52 @@
       text-decoration: none;
       text-transform: uppercase;
     }
+  }
+}
+
+.orderable-list {
+
+  margin-left: 3.5rem;
+  counter-reset: countItem; 
+  padding-left: 0;
+
+  li {
+    position: relative;
+    list-style: none;
+    --spread: 0.75rem;
+    box-shadow: 0 2px var(--spread) 0 rgba(154, 154, 154, 0.25);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    cursor: grab;
+  }
+
+  li:before {
+    content: "";
+    --gradient-direction: 180deg;
+    background-color: var(--colour-info);
+    background-image: linear-gradient(var(--gradient-direction), var(--colour-secondary) 0, transparent 100%) !important;
+    height: 100%;
+    width: 2.5rem;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: calc(100% + 1rem);
+    border-radius: 0.5rem;
+  }
+
+  li:after {
+    counter-increment: countItem; /* Increment the value of section counter by 1 */
+    content: counter(countItem);
+    height: 2rem;
+    width: 2.5rem;
+    line-height: 2rem;
+    font-size: rem(20);
+    font-weight: bold;
+    display: inline-block;
+    position: absolute;
+    top: calc(50% - 1rem);
+    right: calc(100% + 1rem);
+    text-align: center;
   }
 }

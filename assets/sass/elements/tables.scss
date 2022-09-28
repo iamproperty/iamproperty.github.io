@@ -99,7 +99,7 @@ table.border-0 {
 
 // #region Tables are only stacked on mobile
 @media screen and (max-width: 36em) {
-  .table__wrapper:not(.table-fullwidth) {
+  .table__wrapper:not(.table-fullwidth):not(.client-table) {
 
     overflow: hidden;
 

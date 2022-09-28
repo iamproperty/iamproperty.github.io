@@ -9,7 +9,7 @@
 </style>
 
 <script>
-import accordion from '../../../assets/ts/modules/accordion.ts'
+import accordion from '../../../assets/js/modules/accordion.js'
 
 export default {
   name: 'Accordion',

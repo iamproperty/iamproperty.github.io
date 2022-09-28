@@ -15,12 +15,11 @@
     max-width: rem(1440);
   }
   
-  .container {
+  .container:not(.container-xs-breakout) {
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
     padding-top: 0;
-    content-visiblity: unset!important; /* We only want to delay the painting of top level containers */
   }
 
   &[class*="bg-"] {
@@ -44,6 +43,18 @@
     display: table;
     clear: both;
     content: "";
+  }
+
+  &.container-xs-breakout {
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    width: calc(100% + 2.5rem);
+
+    @include media-breakpoint-up(sm) {
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+    }
   }
 }
 // #endregion

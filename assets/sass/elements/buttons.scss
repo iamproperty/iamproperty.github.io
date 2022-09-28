@@ -19,7 +19,7 @@
   border-radius: rem(20);
   margin-bottom: rem(24);
   margin-right: rem(16);
-  transition: background-color .5s, color .5s;
+  transition: all .5s, color .5s;
   height: auto;
 
   a:hover &,
@@ -79,6 +79,11 @@
   &.btn-tag.btn-primary {
     --btn-bg: var(--colour-warning);
   }
+
+  &.btn-admin:not(:hover):not(:focus) {
+    background: var(--colour-admin);
+    border-color: var(--colour-admin)!important;
+  }
 }
 
 input:checked + .btn:not(:hover):not(:focus),
@@ -96,9 +101,9 @@ details[open] > summary.btn:first-child {
 
 input:checked + .btn-tertiary:not(:hover):not(:focus):not(:active),
 input:checked + .btn-tag:not(.btn-primary):not(.btn-secondary):not(:hover):not(:focus):not(:active) {
-  background: var(--btn-tertiary-bg);
-  border-color: var(--btn-hover-text);
-  color: var(--btn-tertiary-hover-text);
+  background: var(--colour-selected);
+  border-color: var(--colour-selected)!important;
+  color: var(--colour-primary);
 }
 
 
@@ -203,6 +208,43 @@ input:checked + .btn-tag:not(.btn-primary):not(.btn-secondary):not(:hover):not(:
 
   > *:not(.btn) {
     width: 100%;
+  }
+}
+
+.btn-group--admin {
+
+  position: relative;
+
+  &:before {
+    content: "";
+    width: calc(100% - 2px);
+    height: rem(48);
+    background-color: var(--colour-admin)!important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    border-radius: 0.5rem!important;
+  }
+
+  > .btn:not(:hover):not(:focus) {
+    border-radius: 0.5rem!important;
+    background: var(--colour-admin);
+
+    border-color: var(--colour-admin)!important;
+  }
+
+  > .btn:is(:hover, :focus) {
+    border-radius: 0.5rem!important;
+    background: var(--colour-selected);
+
+    border-color: var(--colour-admin)!important;
+    color: var(--colour-primary);
+  }
+
+  > input:checked + .btn-tertiary:not(:hover):not(:focus):not(:active) {
+    border-color: var(--colour-admin)!important;
+
   }
 }
 // #endregion
