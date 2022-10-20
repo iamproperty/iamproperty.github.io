@@ -21,6 +21,10 @@
     --svg-width: #{em(465,130)};
   }
 
+  &--openview {
+    --svg-width: #{em(475,89)};
+  }
+
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;

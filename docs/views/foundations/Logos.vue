@@ -30,6 +30,9 @@
         <div class="col-sm-6 col-md-4 mb-5">
           <Logo id="movebutler"></Logo>
         </div>
+        <div class="col-sm-6 col-md-4 mb-5">
+          <Logo id="openview"></Logo>
+        </div>
       </div>
     </div>
     <div class="container">
