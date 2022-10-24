@@ -1,0 +1,4 @@
+deployments:
+  environmentMapping:
+    production:
+      - "github-pages"

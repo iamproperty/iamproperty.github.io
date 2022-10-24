@@ -3,7 +3,7 @@
 import * as helpers from '../js/modules/helpers';
 import nav from '../js/modules/nav';
 import table from '../js/modules/table';
-import accordion from './modules/accordion';
+import accordion from '../js/modules/accordion';
 import testimonial from '../js/modules/testimonial';
 import carousel from '../js/modules/carousel';
 import form from '../js/modules/form';
