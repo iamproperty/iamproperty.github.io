@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue'
 import Markdown from 'vite-plugin-md'
 import { fileURLToPath } from 'url';
 import { resolve, dirname } from 'path';
-import svgPlugin from 'vite-plugin-svg';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -37,6 +36,5 @@ export default defineConfig(({ command, mode }) => ({
       include: [/\.vue$/, /\.md$/], // <--
     }),
     Markdown(),
-    svgPlugin()
   ]
 }));
