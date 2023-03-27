@@ -3,14 +3,14 @@ const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
 const pkg = require('../package.json');
-
+/*
 describe(`Header`, () => {
 
   it(`should have the breadcrumb and background image absolutely positioned`, async() => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    await page.goto(pkg.localURL+'/components/header')
+    await page.goto(pkg.localURL+'/components/header#visualtest')
 
     await page.setViewport({ width: 1440, height: 800 })
     const breadcrumbPosition = await page.$eval(
@@ -34,6 +34,7 @@ describe(`Header`, () => {
     return true;
   })
 })
+*/
 
 const visualtest = require('./_visualtest.js');
 

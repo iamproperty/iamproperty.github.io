@@ -1,5 +1,5 @@
 'use strict'
-const  typescript = require('@rollup/plugin-typescript');
+//const  typescript = require('@rollup/plugin-typescript');
 
 const path = require('path')
 const { babel } = require('@rollup/plugin-babel')
@@ -19,7 +19,7 @@ const plugins = [
     // Include the helpers in the bundle, at most one copy of each
     babelHelpers: 'runtime'
   }),
-  typescript({ compilerOptions: {lib: ["es5", "es6", "dom"], target: "es5"}})
+  //typescript({ compilerOptions: {lib: ["es5", "es6", "dom"], target: "es5"}})
 ]
 const globals = {
   '@popperjs/core': 'Popper'
@@ -40,7 +40,7 @@ if (BUNDLE) {
 }
 
 const rollupConfig = {
-  input: path.resolve(__dirname, `assets/ts/main.ts`),
+  input: path.resolve(__dirname, `assets/js/main.js`),
   output: {
     banner,
     file: path.resolve(__dirname, `assets/js/${fileDest}.js`),

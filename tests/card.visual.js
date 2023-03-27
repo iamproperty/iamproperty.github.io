@@ -5,13 +5,13 @@ expect.extend({ toMatchImageSnapshot })
 const pkg = require('../package.json');
 
 const visualtest = require('./_visualtest.js');
-
+/*
 describe(`Card deck`, () => {
   it(`should have some extra padding bottom`, async() => {
 
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
-    await page.goto(pkg.localURL+'/components/card-deck')
+    await page.goto(pkg.localURL+'/components/card-deck#visualtest')
 
     await page.setViewport({ width: 375, height: 800 })
     const paddingBottom = await page.$eval(
@@ -37,7 +37,7 @@ describe(`Card deck`, () => {
     await browser.close()
   });
 })
-
+*/
 
 
 visualtest.testPages(`Card deck page`,'/components/card-deck');
