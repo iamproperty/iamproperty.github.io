@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import pkg from '../package.json'
 import Nav from '../src/components/Nav/Nav.vue'
 

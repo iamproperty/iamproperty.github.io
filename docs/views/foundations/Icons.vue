@@ -18,6 +18,12 @@
           <div :id="'icon-'+icon"><Icon :id="icon"></Icon></div>
           <span class="d-block text-nowrap">{{icon}}</span>
         </div>
+        <div class="col text-center mw-fit-content mb-3" >
+          <div id="icon-email">
+            <svg class="icon"><title>email</title><use xlink:href="/svg/icons.svg#icon-email"></use></svg>
+          </div>
+          <span class="d-block text-nowrap">email</span>
+        </div>
       </div>
     </div>
     <div class="container">
