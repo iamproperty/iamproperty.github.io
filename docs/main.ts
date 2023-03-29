@@ -6,6 +6,10 @@ import routes from './routes'
 
 import audit from '../audit.json';
 
+// Load web components
+import headerComponent from '../assets/ts/components/header'
+headerComponent;
+
 const router = createRouter({
   history: createWebHistory(),
   routes: routes

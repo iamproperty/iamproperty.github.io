@@ -36,6 +36,7 @@ dist-ssr
 __diff_output__
 
 # Compiled filed
+assets/css/components
 assets/css/core.min.css
 assets/css/core.min.css.map
 assets/css/style.min.css

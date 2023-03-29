@@ -15,7 +15,7 @@
     "allowJs": true,
     "types": ["vite/client", "@types/jest"]
   },
-  "include": ["assets/ts/**/*.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.spec.ts"],
+  "include": ["assets/ts/**/*.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.spec.ts", "assets/js/components/header.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "paths": {
     "@/*" : ["src/*"]

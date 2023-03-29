@@ -1,24 +1,18 @@
 <template>
-  <header class="header-banner">
-    <div class="container">
-      <!-- Space for a breadcrumb trail -->
-      <slot name="breadcrumb"></slot>
-      <div class="header-banner__inner">
-        <h1 v-html="title"></h1>
-        <slot></slot>
-      </div>
-    </div>
-    <picture v-if="image">
-      <!-- Actual image only loaded on desktops -->
-      <source :srcset="image" media="(min-width: 62em)">
-      <!-- Placeholder image -->
-      <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
-    </picture>
-  </header>
+<div>
+
+  <!-- Custom element -->
+  <iam-header class="bg-secondary" :image="image">
+    <slot name="breadcrumb"></slot>
+    <h1 v-if="title" v-html="title"></h1>
+    <slot></slot>
+  </iam-header>
+
+</div>
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/components/header.scss";
+//@import "../../../assets/sass/components/header.scss";
 </style>
 
 <script>

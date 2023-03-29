@@ -35,7 +35,14 @@ export default ({ mode }) => {
     },
     plugins: [
       Vue({
-        include: [/\.vue$/, /\.md$/], // <--
+        include: [/\.vue$/, /\.md$/],
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) => {
+              return tag.startsWith('iam-') // (return true)
+            }
+          }
+        }
       }),
       Markdown()
     ]

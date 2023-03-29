@@ -7,10 +7,9 @@
       <h1>Header</h1>
       <p>Introduce the page so a user can decide whether the page is right for their needs.</p>
     </div>
-
     <Header title="Page title" class="visualtest" image="/shutterstock_1229155495.webp">
       <template v-slot:breadcrumb>
-        <ul class="breadcrumb">
+        <ul class="breadcrumb" slot="breadcrumb">
           <li><a href="/">Home</a></li>
           <li><a href="/top">Top level</a></li>
         </ul>

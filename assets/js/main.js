@@ -3,12 +3,17 @@
 import * as helpers from '../js/modules/helpers';
 import nav from '../js/modules/nav';
 import table from '../js/modules/table';
-import accordion from '../js/modules/accordion';
+//import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial';
 import carousel from '../js/modules/carousel';
 import form from '../js/modules/form';
 import youtubeVideo from '../js/modules/youtubevideo';
 import modal from '../js/modules/modal';
+// Import web components
+import headerComponent from './components/header';
+headerComponent;
+import accordionComponent from './components/accordion';
+accordionComponent;
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function () {
     helpers.addBodyClasses(document.body);

@@ -1,10 +1,8 @@
 <template>
 
-  <details class="accordion-item" :id="createID(title)">
-    <summary :class="`${titlecolour?`bg-${titlecolour}`:''}`" v-on:click="show = true"><span class="accordion-header accordion-button h4">{{title}}<span v-if="badge" :class="`badge bg-${badgecolour}`">{{badge}}</span></span></summary>
-    <div class="accordion-body" v-if="show">
-      <slot></slot>
-    </div>
+  <details :id="createID(title)">
+    <summary :class="`${titlecolour?`bg-${titlecolour}`:''} accordion-header accordion-button h4`">{{title}}<span v-if="badge" :class="`badge bg-${badgecolour}`">{{badge}}</span></summary>
+    <slot></slot>
   </details>
 </template>
 

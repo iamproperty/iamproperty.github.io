@@ -16,7 +16,7 @@
     <meta name="description" content="The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great digital products." />
 
     <!-- APP Manifest -->
-    <link rel="manifest" href="/manifest.json" />
+    <link rel="manifest" href="/public/manifest.json" />
 
     <!-- Apple -->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" /><!-- 180 x 180 -->
@@ -58,40 +58,28 @@
     type="font/woff2"
     />
 
+    <link rel="stylesheet" href="/assets/css/core.min.css">
+
   </head>
   <body>
-    <noscript>
+
+    <div class="container mt-5">
       <p><strong>We're sorry but 'IAM Key Design system and framework' doesn't work properly without JavaScript enabled. Please enable it to continue.</strong></p>
-    </noscript>
-    <div id="app"></div>
+
+    </div>
     
-    <script type="module" src="/docs/main.ts"></script>
+    <iam-header image="/public/shutterstock_1229155495.webp">
+      <ul class="breadcrumb" slot="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/top">Top level</a></li>
+      </ul>
+      <h1>Page title</h1>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    </iam-header>
+    
+    <script type="module" src="/assets/js/scripts.bundle.min.js"></script>
 
-    <!-- built files will be auto injected -->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
-
-    <script>
-
-      /*
-      if(window.location.hostname !== 'localhost'){
-          
-        //make sure that Service Workers are supported.
-        if (navigator.serviceWorker) {
-        navigator.serviceWorker.register('<%= BASE_URL %>sw.js', {scope: '/'})
-        .then(function (registration) {
-          console.log(registration);
-          console.log(Date.now());
-        })
-        .catch(function (e) {
-          console.error(e);
-        })
-        } else {
-          console.log('Service Worker is not supported in this browser.');
-        } 
-      }
-      */
-      </script>
+  
 
   </body>
 </html>

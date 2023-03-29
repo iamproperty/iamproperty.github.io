@@ -17,7 +17,7 @@
   }
 }
 
-.accordion-button {
+iam-accordion summary {
 
   padding: $accordion-button-padding-y var(--accordion-right-padding) $accordion-button-padding-y $accordion-button-padding-x;
   color: var(--colour-heading);
@@ -148,7 +148,7 @@ summary[class*="bg-"] {
   }
 }
 
-.accordion-body {
+.accordion-item summary ~ * {
   text-align: left;
   padding: 0 $accordion-body-padding-x;
 }
@@ -156,11 +156,11 @@ summary[class*="bg-"] {
 // #region Straight edge
 .accordion--straight {
   > details > summary:not([class*="bg-"]) > .accordion-button,
-  > details > .accordion-body {
+  > details > .accordion-item summary ~ * {
     padding-left: 0!important;
   }
 
-  > details > .accordion-body {
+  .accordion-item summary ~ * {
     padding-right: 0!important;
   }
 }
