@@ -17,33 +17,12 @@ class iamAccordion extends HTMLElement {
         this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
     connectedCallback() {
-        /*
-        const picture = this.shadowRoot.querySelector('picture');
-        const source = this.shadowRoot.querySelector('picture source');
-    
-        if(this.hasAttribute('image'))
-          source.setAttribute('srcset', this.getAttribute('image'));
-        else
-          picture.remove();
-          */
-        /*
-            let slots = this.shadowRoot.querySelector("slot");
-            let elements = slots.assignedElements({ flatten: false });
-            let slotHTML = '';
-            elements.forEach((element) => {
-        
-              console.log(element.outerHTML);
-              slotHTML += element.outerHTML;
-            });
-        
-        
-            let html = template.innerHTML.replace('<slot></slot>',slotHTML);
-        
-            this.innerHTML = html;
-        
-        */
+        let elements = this.querySelectorAll('details');
+        elements.forEach((element) => {
+            element.classList.add('accordion-item');
+        });
         accordion(this);
-        template.innerHTML = '';
+        // Load in the component CSS into the root so we can style the content of the component
         this.insertAdjacentHTML("beforebegin", `<link rel="stylesheet" href="/assets/css/components/accordion.css">`);
     }
 }

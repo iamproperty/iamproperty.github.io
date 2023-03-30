@@ -1,7 +1,7 @@
 <template>
 
   <details :id="createID(title)">
-    <summary :class="`${titlecolour?`bg-${titlecolour}`:''} accordion-header accordion-button h4`">{{title}}<span v-if="badge" :class="`badge bg-${badgecolour}`">{{badge}}</span></summary>
+    <summary :class="`${titlecolour?`bg-${titlecolour}`:''}`">{{title}}<span v-if="badge" :class="`badge bg-${badgecolour}`">{{badge}}</span></summary>
     <slot></slot>
   </details>
 </template>

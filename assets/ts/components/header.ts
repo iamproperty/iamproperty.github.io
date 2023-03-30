@@ -21,7 +21,7 @@ template.innerHTML = `
 </div>
 `;
 
-class iamheader extends HTMLElement {
+class iamHeader extends HTMLElement {
 
   constructor(){
     super();
@@ -41,6 +41,9 @@ class iamheader extends HTMLElement {
   }
 }
 
-customElements.define('iam-header', iamheader);
+
+if (!window.customElements.get('iam-header'))
+  window.customElements.define('iam-header', iamHeader);
+
 
 export default {};

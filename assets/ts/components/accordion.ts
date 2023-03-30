@@ -22,10 +22,15 @@ class iamAccordion extends HTMLElement {
 
 	connectedCallback() {
  
-    let elements = this.querySelectorAll('details');
+    let details = this.querySelectorAll('details');
+    let summaries = this.querySelectorAll('summary');
     
-    elements.forEach((element) => {
-      element.classList.add('accordion-item');
+    details.forEach((detail) => {
+      detail.classList.add('accordion-item');
+    });
+
+    summaries.forEach((summary) => {
+      summary.classList.add('accordion-header accordion-button h4');
     });
 
     accordion(this);
@@ -35,6 +40,7 @@ class iamAccordion extends HTMLElement {
   }
 }
 
-customElements.define('iam-accordion', iamAccordion);
+if (!window.customElements.get('iam-accordion'))
+  window.customElements.define('iam-accordion', iamAccordion);
 
 export default {};
