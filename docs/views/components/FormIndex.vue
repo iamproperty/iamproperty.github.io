@@ -12,13 +12,13 @@ import routes from '../../routes.ts';
 
 const elements = routes.reduce(function (arr, route) {
   // Find the correct group
-  if (route.path === "/elements") {
+  if (route.path === "/components") {
     arr = route.children;
 
     const children = route.children.reduce(function (acc, route) {
       // Remove the index
       if (route.path) {
-        route.link = '/elements/'+route.path;
+        route.link = '/components/'+route.path;
         route.title = route.name;
         route.content = '';
         acc.push(route);
@@ -40,7 +40,7 @@ const formElements = elements.reduce(function (arr, route) {
     const children = route.children.reduce(function (acc, route) {
       // Remove the index
       if (route.path) {
-        route.link = '/elements/form/'+route.path;
+        route.link = '/components/form/'+route.path;
         route.title = route.name;
         route.content = '';
         acc.push(route);

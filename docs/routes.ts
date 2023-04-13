@@ -15,6 +15,14 @@ const routes = [
         component: () => import('./views/foundations/Index.vue')
       },
       {
+        path: 'accessibility',
+        name: 'Accessibility',
+        meta: {
+          title: 'Accessibility | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/Accessibility.vue')
+      },
+      {
         path: 'logos',
         name: 'Logos',
         meta: {
@@ -45,6 +53,14 @@ const routes = [
           title: 'Icons | Foundations | iamkey'
         },
         component: () => import('./views/foundations/Icons.vue')
+      },
+      {
+        path: 'type',
+        name: 'Type',
+        meta: {
+          title: 'Typography | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/Type.vue')
       },
       {
         path: 'illustrations',
@@ -110,203 +126,6 @@ const routes = [
           title: 'Animation | Foundations | iamkey'
         },
         component: () => import('./views/foundations/Animation.vue')
-      }
-    ]
-  },
-  { /* Elements */
-    path: '/elements',
-    component: () => import(/* webpackChunkName: "elements" */ './views/Elements.vue'),
-    children: [
-      {
-        path: '',
-        name: 'Elements',
-        meta: {
-          title: 'Elements | iamkey'
-        },
-        component: () => import('./views/elements/Index.vue')
-      },
-      {
-        path: 'container',
-        name: 'Container',
-        meta: {
-          title: 'Container | Elements | iamkey'
-        },
-        component: () => import('./views/elements/Container.vue')
-      },
-      {
-        path: 'type',
-        name: 'Type',
-        meta: {
-          title: 'Typography | Elements | iamkey'
-        },
-        component: () => import('./views/elements/Type.vue')
-      },
-      {
-        path: 'lists',
-        name: 'Lists',
-        meta: {
-          title: 'Lists | Elements | iamkey'
-        },
-        component: () => import('./views/elements/Lists.vue')
-      },
-      {
-        path: 'buttons',
-        name: 'Buttons & links',
-        meta: {
-          title: 'Buttons & links | Elements | iamkey'
-        },
-        component: () => import('./views/elements/Buttons.vue')
-      },
-      {
-        path: 'tables',
-        name: 'Tables',
-        meta: {
-          title: 'Tables | Elements | iamkey'
-        },
-        component: () => import('./views/elements/Tables.vue')
-      },
-      {
-        path: 'advanced-tables',
-        name: 'Advanced Tables',
-        meta: {
-          title: 'Advanced Tables | Elements | iamkey'
-        },
-        component: () => import('./views/elements/AdvancedTables.vue')
-      },
-      {
-        path: 'tooltips',
-        name: 'Tooltips',
-        meta: {
-          title: 'Tooltips | Elements | iamkey'
-        },
-        component: () => import('./views/elements/TooltipsDoc.vue')
-      },
-      {
-        path: 'form',
-        name: 'Form elements',
-        component: () => import('./views/elements/Form.vue'),
-        children: [
-          {
-            path: '',
-            name: 'Form',
-            meta: {
-              title: 'Form elements | Elements | iamkey'
-            },
-            component: () => import('./views/elements/FormIndex.vue')
-          },
-          {
-            path: 'inputs',
-            name: 'Form input field',
-            meta: {
-              title: 'Form input fields | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Input.vue')
-          },
-          {
-            path: 'input-types',
-            name: 'Form basic input types',
-            meta: {
-              title: 'Form basic input types | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/InputTypes.vue')
-          },
-          {
-            path: 'textarea',
-            name: 'Form textarea',
-            meta: {
-              title: 'Form textarea | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Textarea.vue')
-          },
-          {
-            path: 'date',
-            name: 'Form date and time pickers',
-            meta: {
-              title: 'Form date and time pickers | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Date.vue')
-          },
-          {
-            path: 'range',
-            name: 'Form range field',
-            meta: {
-              title: 'Form range field | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Range.vue')
-          },
-          {
-            path: 'file',
-            name: 'Form file upload field',
-            meta: {
-              title: 'Form file upload field | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/File.vue')
-          },
-          {
-            path: 'select',
-            name: 'Form select field',
-            meta: {
-              title: 'Form select field | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Select.vue')
-          },
-          {
-            path: 'checkbox',
-            name: 'Checkbox field',
-            meta: {
-              title: 'Checkbox field | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Checkbox.vue')
-          },
-          {
-            path: 'radio',
-            name: 'Radio field',
-            meta: {
-              title: 'Radio field | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Radio.vue')
-          },
-          {
-            path: 'toggle',
-            name: 'Toggle buttons',
-            meta: {
-              title: 'Toggle buttons | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Toggle.vue')
-          },
-          {
-            path: 'tags',
-            name: 'Pill tags',
-            meta: {
-              title: 'Pill tags | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Tags.vue')
-          },
-          {
-            path: 'validation',
-            name: 'Form validation',
-            meta: {
-              title: 'Form validation | Elements | iamkey'
-            },
-            component: () => import('./views/elements/form/Validation.vue')
-          }
-        ]
-      },
-      {
-        path: 'card',
-        name: 'Card',
-        meta: {
-          title: 'Card | Components | iamkey'
-        },
-        component: () => import('./views/elements/CardDoc.vue')
-      },
-      {
-        path: 'panel',
-        name: 'Admin panel',
-        meta: {
-          title: 'Admin panel | Components | iamkey'
-        },
-        component: () => import('./views/elements/PanelDoc.vue')
       }
     ]
   },
@@ -457,6 +276,188 @@ const routes = [
           title: 'Note feed | Components | iamkey'
         },
         component: () => import('./views/components/NoteFeedDoc.vue')
+      },{
+        path: '',
+        name: 'Elements',
+        meta: {
+          title: 'Elements | iamkey'
+        },
+        component: () => import('./views/components/Index.vue')
+      },
+      {
+        path: 'container',
+        name: 'Container',
+        meta: {
+          title: 'Container | Elements | iamkey'
+        },
+        component: () => import('./views/components/Container.vue')
+      },
+      {
+        path: 'lists',
+        name: 'Lists',
+        meta: {
+          title: 'Lists | Elements | iamkey'
+        },
+        component: () => import('./views/components/Lists.vue')
+      },
+      {
+        path: 'buttons',
+        name: 'Buttons & links',
+        meta: {
+          title: 'Buttons & links | Elements | iamkey'
+        },
+        component: () => import('./views/components/Buttons.vue')
+      },
+      {
+        path: 'tables',
+        name: 'Tables',
+        meta: {
+          title: 'Tables | Elements | iamkey'
+        },
+        component: () => import('./views/components/Tables.vue')
+      },
+      {
+        path: 'advanced-tables',
+        name: 'Advanced Tables',
+        meta: {
+          title: 'Advanced Tables | Elements | iamkey'
+        },
+        component: () => import('./views/components/AdvancedTables.vue')
+      },
+      {
+        path: 'tooltips',
+        name: 'Tooltips',
+        meta: {
+          title: 'Tooltips | Elements | iamkey'
+        },
+        component: () => import('./views/components/TooltipsDoc.vue')
+      },
+      {
+        path: 'form',
+        name: 'Form elements',
+        component: () => import('./views/components/Form.vue'),
+        children: [
+          {
+            path: '',
+            name: 'Form',
+            meta: {
+              title: 'Form elements | Elements | iamkey'
+            },
+            component: () => import('./views/components/FormIndex.vue')
+          },
+          {
+            path: 'inputs',
+            name: 'Form input field',
+            meta: {
+              title: 'Form input fields | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Input.vue')
+          },
+          {
+            path: 'input-types',
+            name: 'Form basic input types',
+            meta: {
+              title: 'Form basic input types | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/InputTypes.vue')
+          },
+          {
+            path: 'textarea',
+            name: 'Form textarea',
+            meta: {
+              title: 'Form textarea | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Textarea.vue')
+          },
+          {
+            path: 'date',
+            name: 'Form date and time pickers',
+            meta: {
+              title: 'Form date and time pickers | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Date.vue')
+          },
+          {
+            path: 'range',
+            name: 'Form range field',
+            meta: {
+              title: 'Form range field | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Range.vue')
+          },
+          {
+            path: 'file',
+            name: 'Form file upload field',
+            meta: {
+              title: 'Form file upload field | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/File.vue')
+          },
+          {
+            path: 'select',
+            name: 'Form select field',
+            meta: {
+              title: 'Form select field | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Select.vue')
+          },
+          {
+            path: 'checkbox',
+            name: 'Checkbox field',
+            meta: {
+              title: 'Checkbox field | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Checkbox.vue')
+          },
+          {
+            path: 'radio',
+            name: 'Radio field',
+            meta: {
+              title: 'Radio field | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Radio.vue')
+          },
+          {
+            path: 'toggle',
+            name: 'Toggle buttons',
+            meta: {
+              title: 'Toggle buttons | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Toggle.vue')
+          },
+          {
+            path: 'tags',
+            name: 'Pill tags',
+            meta: {
+              title: 'Pill tags | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Tags.vue')
+          },
+          {
+            path: 'validation',
+            name: 'Form validation',
+            meta: {
+              title: 'Form validation | Elements | iamkey'
+            },
+            component: () => import('./views/components/form/Validation.vue')
+          }
+        ]
+      },
+      {
+        path: 'card',
+        name: 'Card',
+        meta: {
+          title: 'Card | Components | iamkey'
+        },
+        component: () => import('./views/components/CardDoc.vue')
+      },
+      {
+        path: 'panel',
+        name: 'Admin panel',
+        meta: {
+          title: 'Admin panel | Components | iamkey'
+        },
+        component: () => import('./views/components/PanelDoc.vue')
       }
     ]
   },
@@ -523,14 +524,6 @@ const routes = [
     name: 'Get started',
     meta: {
       title: 'Get started | iamkey'
-    }
-  },
-  {
-    path: '/accessibility',
-    component: () => import('./views/Accessibility.vue'),
-    name: 'Accessibility',
-    meta: {
-      title: 'Accessibility | iamkey'
     }
   },
   { /* Examples */
@@ -746,31 +739,6 @@ const routes = [
         path: 'survey-client-dashboard-2',
         name: 'Survey - Client dashboard 2',
         component: () => import('./views/prototype/survey/clientDashboard2.vue')
-      }
-    ]
-  },
-  { /* Articles */
-    path: '/articles',
-    name: 'Articles',
-    meta: {
-      title: 'Articles | iamkey'
-    },
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "articles" */ './views/Articles.vue'),
-    children: [
-      {
-        path: '',
-        component: () => import('./views/articles/Index.vue')
-      },
-      {
-        path: 'flexbox-charts',
-        name: "Flexbox Charts",
-        meta: {
-          title: 'Flexbox Charts | iamkey'
-        },
-        component: () => import('./views/articles/FlexboxCharts.vue')
       }
     ]
   },
