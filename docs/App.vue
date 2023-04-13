@@ -13,7 +13,6 @@ const version = pkg.version;
     <ul class="list-unstyled">
       <li><router-link to="/principles">Principles</router-link></li>
       <li><router-link to="/foundations">Foundations</router-link></li>
-      <li><router-link to="/elements">Elements</router-link></li>
       <li><router-link to="/components">Components</router-link></li>
       <li><router-link to="/templates">Templates</router-link></li>
       <li><router-link to="/best-practice">Best practice</router-link></li>
@@ -28,9 +27,7 @@ const version = pkg.version;
         <li class="list-inline-item me-4 ms-0 mb-2"><a href="/brand-guidelines.pdf" target="_blank" download>Brand guidelines</a></li>
         <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/information">Information</router-link></li>
         <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/get-started">Get started</router-link></li>
-        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/accessibility">Accessibility</router-link></li>
         <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/examples">Examples</router-link></li>
-        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/articles">Articles</router-link></li>
         <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/audit">Audit</router-link></li>
         <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/changelog">Changelog</router-link></li>
       </ul>
