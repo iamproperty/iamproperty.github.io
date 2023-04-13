@@ -18,7 +18,6 @@ function accordion(accordionElement: Element) {
     });
   }
 
-
   if(window.location.hash && document.querySelector(window.location.hash+':not([open]) summary')) {
 
     const detail = document.querySelector(window.location.hash+' summary');

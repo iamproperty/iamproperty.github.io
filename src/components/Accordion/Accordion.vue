@@ -1,5 +1,5 @@
 <template>
-  <iam-accordion class="container accordion" ref="wrapper">
+  <iam-accordion ref="wrapper">
     <slot></slot>
   </iam-accordion>
 </template>
@@ -9,9 +9,10 @@
 </style>
 
 <script>
-import accordionComponent from '../../../assets/js/components/accordion'
-accordionComponent
+import iamAccordion from '../../../assets/ts/components/accordion'
 
+if (!window.customElements.get('iam-accordion'))
+  window.customElements.define('iam-accordion', iamAccordion);
 
 export default {
   name: 'Accordion',

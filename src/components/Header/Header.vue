@@ -16,6 +16,14 @@
 </style>
 
 <script>
+// Load web components
+import iamHeader from '../../../assets/ts/components/header'
+
+// Register components
+if (!window.customElements.get('iam-header'))
+  window.customElements.define('iam-header', iamHeader);
+
+
 export default {
   name: 'Header',
   props: {

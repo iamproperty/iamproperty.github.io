@@ -1,4 +1,4 @@
-import { zeroPad, isNumeric } from "./helpers";
+import { zeroPad, isNumeric } from "./helpers.js";
 
 function table(tableElement) {
 

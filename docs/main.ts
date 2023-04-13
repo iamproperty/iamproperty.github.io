@@ -5,11 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
 
 import audit from '../audit.json';
-
-// Load web components
-import headerComponent from '../assets/ts/components/header'
-headerComponent;
-
+  
 const router = createRouter({
   history: createWebHistory(),
   routes: routes
@@ -94,3 +90,6 @@ let template = window.location.pathname.startsWith('/standalone') || window.loca
 let app = createApp(template)
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
+
+
+document.body.classList.add('js-enabled');

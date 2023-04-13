@@ -1,4 +1,4 @@
-import { ucfirst, unsnake } from './helpers'
+import { ucfirst, unsnake } from './helpers.js'
 
 function chart(chartElement,min,max,type) {
 

@@ -7,7 +7,7 @@ template.innerHTML = `
 @import "/assets/css/core.min.css";
 @import "/assets/css/components/accordion.css";
 </style>
-<div class="container accordion">
+<div class="accordion">
   <slot></slot>
 </div>
 `;
@@ -30,7 +30,9 @@ class iamAccordion extends HTMLElement {
     });
 
     summaries.forEach((summary) => {
-      summary.classList.add('accordion-header accordion-button h4');
+      summary.classList.add('accordion-header');
+      summary.classList.add('accordion-button');
+      summary.classList.add('h4');
     });
 
     accordion(this);
@@ -40,7 +42,8 @@ class iamAccordion extends HTMLElement {
   }
 }
 
+/*
 if (!window.customElements.get('iam-accordion'))
-  window.customElements.define('iam-accordion', iamAccordion);
-
-export default {};
+    window.customElements.define('iam-accordion', iamAccordion);
+*/
+export default iamAccordion;

@@ -1,25 +1,26 @@
 // @ts-nocheck
 // Modules
-import * as helpers from '../js/modules/helpers';
-import nav from '../js/modules/nav';
-import table from '../js/modules/table';
-//import accordion from './modules/accordion'
-import testimonial from '../js/modules/testimonial';
-import carousel from '../js/modules/carousel';
-import form from '../js/modules/form';
-import youtubeVideo from '../js/modules/youtubevideo';
-import modal from '../js/modules/modal';
-// Import web components
-import headerComponent from './components/header';
-headerComponent;
-import accordionComponent from './components/accordion';
-accordionComponent;
+import * as helpers from '../js/modules/helpers.js';
+import nav from '../js/modules/nav.js';
+import table from '../js/modules/table.js';
+//import accordion from './modules/accordion.js'
+import testimonial from '../js/modules/testimonial.js';
+import carousel from '../js/modules/carousel.js';
+import form from '../js/modules/form.js';
+import youtubeVideo from '../js/modules/youtubevideo.js';
+import modal from '../js/modules/modal.js';
+import iamHeader from './components/header.js';
+import iamAccordion from './components/accordion.js';
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function () {
+    // Global stuff
     helpers.addBodyClasses(document.body);
     helpers.addGlobalEvents(document.body);
     helpers.checkElements(document.body);
-    console.log('test.js');
+    if (!window.customElements.get(`iam-header`))
+        window.customElements.define(`iam-header`, iamHeader);
+    if (!window.customElements.get(`iam-accordion`))
+        window.customElements.define(`iam-accordion`, iamAccordion);
     // ANav
     Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
         nav(arrayElement);
@@ -27,10 +28,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Advanced tables
     Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
         table(arrayElement);
-    });
-    // Accordions
-    Array.from(document.querySelectorAll('.accordion')).forEach((arrayElement) => {
-        accordion(arrayElement);
     });
     // Testimonial
     Array.from(document.querySelectorAll('.testimonial')).forEach((arrayElement) => {
@@ -55,8 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener('hashchange', function () {
         const hash = location.hash.replace('#', '');
         const label = document.querySelector(`label[for="${hash}"]`);
-        if (label instanceof HTMLElement) {
+        if (label instanceof HTMLElement)
             label.click();
-        }
     }, false);
 });

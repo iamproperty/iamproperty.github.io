@@ -17,7 +17,7 @@
   }
 }
 
-iam-accordion summary {
+.accordion-header {
 
   padding: $accordion-button-padding-y var(--accordion-right-padding) $accordion-button-padding-y $accordion-button-padding-x;
   color: var(--colour-heading);
@@ -105,7 +105,7 @@ iam-accordion summary {
 }
 
 // #region Coloured summary
-summary[class*="bg-"] {
+.accordion-header[class*="bg-"] {
 
   .accordion-button {
 
@@ -195,3 +195,5 @@ summary[class*="bg-"] {
   }
 }
 // #endregion
+
+

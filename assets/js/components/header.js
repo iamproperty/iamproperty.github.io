@@ -4,6 +4,11 @@ template.innerHTML = `
 <style>
 @import "/assets/css/core.min.css";
 @import "/assets/css/components/header.css";
+
+:host {
+  max-width:100%!important;
+  padding:0!important;
+}
 </style>
 <div class="header-banner">
   <div class="container" part="container">
@@ -16,11 +21,11 @@ template.innerHTML = `
     <!-- Actual image only loaded on desktops -->
     <source srcset="" media="(min-width: 62em)">
     <!-- Placeholder image -->
-    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
+    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="" />
   </picture>
 </div>
 `;
-class iamheader extends HTMLElement {
+class iamHeader extends HTMLElement {
     constructor() {
         super();
         this.attachShadow({ mode: 'open' });
@@ -35,5 +40,4 @@ class iamheader extends HTMLElement {
             picture.remove();
     }
 }
-customElements.define('iam-header', iamheader);
-export default {};
+export default iamHeader;
