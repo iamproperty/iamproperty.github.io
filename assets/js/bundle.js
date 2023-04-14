@@ -9,8 +9,8 @@ import carousel from '../js/modules/carousel.js';
 import form from '../js/modules/form.js';
 import youtubeVideo from '../js/modules/youtubevideo.js';
 import modal from '../js/modules/modal.js';
-import iamHeader from './components/header.component.js';
-import iamAccordion from './components/accordion.component.js';
+import iamHeader from './components/header/header.component.js';
+import iamAccordion from './components/accordion/accordion.component.js';
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function () {
     // Global stuff

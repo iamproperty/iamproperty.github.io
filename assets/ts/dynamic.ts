@@ -28,7 +28,7 @@ components.forEach((component) => {
       
       if(entry.intersectionRatio > 0){
         
-        import(`./components/${component}.component.min.js`).then(module => {
+        import(`./components/${component}/${component}.component.min.js`).then(module => {
           if (!window.customElements.get(`${prefix}-${component}`))
             window.customElements.define(`${prefix}-${component}`, module.default);
         }).catch((err) => {

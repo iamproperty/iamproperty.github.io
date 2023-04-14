@@ -17,7 +17,7 @@
 
 <script>
 // Load web components
-import iamHeader from '../../../assets/ts/components/header.component'
+import iamHeader from '../../../assets/ts/components/header/header.component'
 
 // Register components
 if (!window.customElements.get('iam-header'))

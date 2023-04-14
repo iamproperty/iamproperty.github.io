@@ -35,7 +35,7 @@
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
 
-    <Accordion class="visualtest">
+    <Accordion class="visualtest container">
       <h2>Child accordion</h2>
       <p class="visualtest-hide">Accordions can be embedded into another one, which will effect the its styles. Extra changes are recommended like applying a colour to the summary links and adding a badge with the number of child items.</p>
       
@@ -59,6 +59,11 @@
     </Accordion>
     
 
+    <div class="container">
+      <h2>Web component code example</h2>
+      <WebReadme></WebReadme>
+    </div>
+
 
     <div class="container">
       <h2>Vue Accordion component reference</h2>
@@ -71,12 +76,14 @@
 import Accordion from '@/components/Accordion/Accordion.vue'
 import AccordionItem from '@/components/Accordion/AccordionItem.vue'
 import Readme from '@/components/Accordion/README.md'
+import WebReadme from '~/ts/components/accordion/README.md'
 
 export default {
   components: {
     Accordion,
     AccordionItem,
-    Readme
+    Readme,
+    WebReadme
   },
   data () {
     return {

@@ -59,10 +59,10 @@ const components = ["accordion","header"];
 components.forEach((component) => {
 
   rollupConfig.push({
-    input: path.resolve(__dirname, `assets/js/components/${component}.component.js`),
+    input: path.resolve(__dirname, `assets/js/components/${component}/${component}.component.js`),
     output: {
       banner,
-      file: path.resolve(__dirname, `assets/js/components/${component}.component.min.js`),
+      file: path.resolve(__dirname, `assets/js/components/${component}/${component}.component.min.js`),
       format: 'esm',
       globals,
       name: `iam-${component}`

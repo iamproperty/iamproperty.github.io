@@ -1,5 +1,5 @@
 // @ts-nocheck
-import accordion from "../modules/accordion";
+import accordion from "../../modules/accordion";
 
 const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
 
