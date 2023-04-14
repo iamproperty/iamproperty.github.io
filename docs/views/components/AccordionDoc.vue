@@ -7,7 +7,7 @@
       <h1>Accordion</h1>
       <p>Provides a list of items that can be expanded individually to provide more information.</p>
     </div>
-    <div class="visualtest">
+    <div class="visualtest container">
     <Accordion>
 
       <AccordionItem title="How long does the auction last?">

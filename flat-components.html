@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/favicon.ico">
+
+    <!-- Client Hints -->
+    <!-- FUTURE USE <meta http-equiv="Accept-CH" content="DPR,Width,Viewport-Width" /> -->
+    <!-- Disable automatic detection and formatting of possible phone numbers -->
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Basic SEO -->
+    <title>IAM Key Design system and framework</title>
+    <meta name="description" content="The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great digital products." />
+
+    <!-- APP Manifest -->
+    <link rel="manifest" href="/public/manifest.json" />
+
+    <!-- Apple -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" /><!-- 180 x 180 -->
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Windows -->
+    <meta name="application-name" content="iamkey design system and framework" />
+    <meta name="msapplication-TileColor" content="#00313c" />
+    <meta name="msapplication-TileImage" content="/android-chrome-192x192.png" />
+
+    <!-- Android -->
+    <meta name="theme-color" content="#00313c" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Duplicate basic Meta for Open Graph -->
+    <meta property="og:title" content="iamkey design system and framework" />
+    <meta property="og:description" content="The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great digital products." />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="iamkey design system and framework" />
+    <meta name="twitter:creator" content="iamproperty" />
+
+    <!-- <meta property="og:image" content="" />< !-- 1200 x 630 for large image - 600 x 314 for small image -->
+
+    <script src="https://kit.fontawesome.com/26fdbf0179.js" crossorigin="anonymous"></script>
+
+    <link
+    rel="preload"
+    href="/assets/fonts/qanelas-medium-webfont.woff2"
+    as="font"
+    type="font/woff2"
+    />
+  <link
+    rel="preload"
+    href="/assets/fonts/qanelassoft-extrabold-webfont.woff2"
+    as="font"
+    type="font/woff2"
+    />
+
+    <link rel="stylesheet" href="/assets/css/style.min.css">
+    <script type="module" src="/assets/js/flat-components.js"></script>
+
+
+  </head>
+  <body>
+    <main>
+      <div class="container mt-5">
+        <h1>Flat components</h1>
+        <p>The below components are flat HTML and don't use Vue or web components</p>
+      </div>
+      
+      
+      <div class="header-banner">
+        <div class="container" part="container">
+          <ul class="breadcrumb" slot="breadcrumb">
+            <li><a href="/">Home</a></li>
+            <li><a href="/top">Top level</a></li>
+          </ul>
+          <div class="header-banner__inner">
+          <h1>Page title</h1>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </div>
+        </div>
+        <picture>
+          <!-- Actual image only loaded on desktops -->
+          <source srcset="/public/shutterstock_1229155495.webp" media="(min-width: 62em)">
+          <!-- Placeholder image -->
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="">
+        </picture>
+      </div>
+
+        
+      <div class="accordion container">
+        <details id="question1">
+          <summary>Question 1</summary>
+          <p>Answer </p>
+        </details>
+        <details>
+          <summary>Question 2</summary>
+          <p>Answer </p>
+        </details>
+      </div>
+      
+    </main>
+
+  </body>
+</html>

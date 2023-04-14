@@ -10,12 +10,40 @@ import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 import modal from '../js/modules/modal'
 
-const components = ['header','accordion'];
+const components = ['accordion','header','test'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',
   threshold: 0.1
 }
+
+// Load components - Each component will load once the first of its type has been loaded
+components.forEach((component) => {
+
+  if(document.getElementsByTagName(`${prefix}-${component}`).length === 0)
+    return;
+
+  let callback = (entries:any) => {
+    entries.forEach((entry:any) => {
+      
+      if(entry.intersectionRatio > 0){
+        
+        import(`./components/${component}.component.min.js`).then(module => {
+          if (!window.customElements.get(`${prefix}-${component}`))
+            window.customElements.define(`${prefix}-${component}`, module.default);
+        }).catch((err) => {
+          console.log(err.message);
+        });  
+
+        intObserver.unobserve(entry.target);
+      }
+    });
+  };
+
+  const intObserver = new IntersectionObserver(callback, options);
+  intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
+});
+
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -24,34 +52,6 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
   helpers.checkElements(document.body);
-
-  // Load components - Each component will load once the first of its type has been loaded
-  components.forEach((component) => {
-
-    if(document.getElementsByTagName(`${prefix}-${component}`).length === 0)
-      return;
-
-    let callback = (entries:any) => {
-      entries.forEach((entry:any) => {
-        
-        if(entry.intersectionRatio > 0){
-          
-          import(`./components/${component}.js`).then(module => {
-            if (!window.customElements.get(`${prefix}-${component}`))
-              window.customElements.define(`${prefix}-${component}`, module.default);
-          }).catch((err) => {
-            console.log(err.message);
-          });  
-
-          intObserver.unobserve(entry.target);
-        }
-      });
-    };
-  
-    const intObserver = new IntersectionObserver(callback, options);
-    intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
-  });
-
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {

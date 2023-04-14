@@ -1,9 +1,11 @@
 // @ts-nocheck
+const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
+
 const template = document.createElement('template');
 template.innerHTML = `
 <style>
-@import "/assets/css/core.min.css";
-@import "/assets/css/components/header.css";
+@import "${assetLocation}/css/core.min.css";
+@import "${assetLocation}/css/components/header.css";
 
 :host {
   max-width:100%!important;

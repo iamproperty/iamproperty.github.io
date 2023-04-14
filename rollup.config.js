@@ -1,4 +1,5 @@
 'use strict'
+const { minify } = require('rollup-plugin-esbuild');
 //const  typescript = require('@rollup/plugin-typescript');
 
 const path = require('path')
@@ -39,20 +40,41 @@ if (BUNDLE) {
   )
 }
 
-const rollupConfig = {
-  input: path.resolve(__dirname, `assets/js/bundle.js`),
-  output: {
-    banner,
-    file: path.resolve(__dirname, `assets/js/${fileDest}.js`),
-    format: ESM ? 'esm' : 'umd',
-    globals
-  },
-  external,
-  plugins
-}
+const rollupConfig = [
+  {
+    input: path.resolve(__dirname, `assets/js/bundle.js`),
+    output: {
+      banner,
+      file: path.resolve(__dirname, `assets/js/${fileDest}.js`),
+      format: ESM ? 'esm' : 'umd',
+      globals
+    },
+    external,
+    plugins
+  }
+];
+
+const components = ["accordion","header"];
+
+components.forEach((component) => {
+
+  rollupConfig.push({
+    input: path.resolve(__dirname, `assets/js/components/${component}.component.js`),
+    output: {
+      banner,
+      file: path.resolve(__dirname, `assets/js/components/${component}.component.min.js`),
+      format: 'esm',
+      globals,
+      name: `iam-${component}`
+    },
+    external,
+    plugins: [minify()]
+  })
+});
+
 
 if (!ESM) {
-  rollupConfig.output.name = 'iamkey'
+  rollupConfig[0].output.name = 'iamkey'
 }
 
 module.exports = rollupConfig

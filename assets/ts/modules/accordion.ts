@@ -1,5 +1,20 @@
 function accordion(accordionElement: Element) {
 
+  // Add classes to help with CSS 
+  let details = accordionElement.querySelectorAll('details');
+  let summaries = accordionElement.querySelectorAll('summary');
+  
+  details.forEach((detail) => {
+    detail.classList.add('accordion-item');
+  });
+
+  summaries.forEach((summary) => {
+    summary.classList.add('accordion-header');
+    summary.classList.add('accordion-button');
+    summary.classList.add('h4');
+  });
+  
+
   // Fetch all the details element.
   if(!accordionElement.classList.contains('accordion--keep-open')){
 

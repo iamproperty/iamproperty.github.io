@@ -9,7 +9,7 @@
 </style>
 
 <script>
-import iamAccordion from '../../../assets/ts/components/accordion'
+import iamAccordion from '../../../assets/ts/components/accordion.component'
 
 if (!window.customElements.get('iam-accordion'))
   window.customElements.define('iam-accordion', iamAccordion);

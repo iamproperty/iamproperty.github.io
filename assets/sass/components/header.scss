@@ -5,6 +5,10 @@
   margin-bottom: rem(32);
   position: relative;
   overflow: hidden;
+  max-width: 100%!important;
+
+
+
   @include media-breakpoint-up(md) {
     min-height: rem(470);
   }
