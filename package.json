@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "3.4.0",
+  "version": "3.4.1",
   "scripts": {
     "dev": "npm run copy && vite --host",
     "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
@@ -26,6 +26,7 @@
     "gen:error": "sass assets/sass/error.scss assets/css/error.min.css --style=compressed && node local_modules/error-css.js",
     "test:unit": "jest src",
     "test:scss": "jest assets/sass/_tests",
+    "test": "npm run test:unit && npm run test:scss",
     "visual:components": "viteshot",
     "visual:docs": "jest tests",
     "visual:approve": "jest tests --updateSnapshot",
