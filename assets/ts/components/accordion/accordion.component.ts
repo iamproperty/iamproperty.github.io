@@ -7,8 +7,9 @@ const template = document.createElement('template');
 template.innerHTML = `
 <style>
 @import "${assetLocation}/css/core.min.css";
-@import "${assetLocation}/css/components/header.css";
+@import "${assetLocation}/css/components/accordion.css";
 </style>
+<slot name="css"></slot>
 <div class="accordion">
   <slot></slot>
 </div>
@@ -20,6 +21,11 @@ class iamAccordion extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+    
+    if(this.hasAttribute('css')){
+      const style = this.shadowRoot.querySelector('style');
+      style.innerHTML += `@import "${this.getAttribute('css')}";`;
+    }
   }
 
 	connectedCallback() {

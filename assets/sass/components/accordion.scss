@@ -1,7 +1,7 @@
 @use "../_func.scss" as *;
 
 // Accordion
-.accordion {
+:is(.accordion, iam-accordion) {
   --accordion-indent: 0.75rem;
   --accordion-right-padding: 3rem;
   --accordion-y-padding: 1rem;

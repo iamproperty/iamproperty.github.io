@@ -7,7 +7,8 @@ template.innerHTML = `
 <style>
 @import "${assetLocation}/css/core.min.css";
 ${loadCSS}
-
+</style>
+<style>
 :host {
   max-width:100%!important;
   padding:0!important;
@@ -35,6 +36,11 @@ class iamHeader extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    if(this.hasAttribute('css')){
+      const style = this.shadowRoot.querySelector('style');
+      style.innerHTML += `@import "${this.getAttribute('css')}";`;
+    }
   }
 
 	connectedCallback() {
@@ -46,7 +52,7 @@ class iamHeader extends HTMLElement {
       source.setAttribute('srcset', this.getAttribute('image'));
     else
       picture.remove();
-      
+    
   }
 }
 
