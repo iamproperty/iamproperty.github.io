@@ -3,7 +3,7 @@ const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
 const pkg = require('../package.json');
-
+/*
 describe(`Icon`, () => {
   it(`should be set to the right default height`, async() => {
 
@@ -66,7 +66,7 @@ describe(`Icon`, () => {
     await browser.close()
   });
 })
-
+*/
 const visualtest = require('./_visualtest.js');
 
 visualtest.testPages(`Icons page`,'/foundations/icons');

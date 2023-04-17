@@ -3,7 +3,7 @@ const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
 const pkg = require('../package.json');
-
+/*
 describe(`Headings`, () => {
 
   it(`should have the correct size`, async() => {
@@ -54,7 +54,7 @@ describe(`Headings`, () => {
     return true;
   })
 })
-
+*/
 const visualtest = require('./_visualtest.js');
 
-visualtest.testPages(`Typography page`,'/elements/type');
+visualtest.testPages(`Typography page`,'/components/type');

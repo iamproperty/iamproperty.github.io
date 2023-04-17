@@ -42,5 +42,5 @@ describe(`Card deck`, () => {
 
 visualtest.testPages(`Card deck page`,'/components/card-deck');
 
-visualtest.testPages(`Card page`,'/elements/card');
+visualtest.testPages(`Card page`,'/components/card');
 
