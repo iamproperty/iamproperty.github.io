@@ -25,5 +25,12 @@ module.exports = {
   setupFilesAfterEnv: ["expect-puppeteer",`<rootDir>/tests/setup/after-env.js`],
   snapshotSerializers: [
     `jest-serializer-vue`,
-  ]
+  ],
+  globals: {
+    'vue-jest': {
+      compilerOptions: {
+        isCustomElement: (tag) => tag.startsWith('iam-'),
+      }
+    }
+  }
 }

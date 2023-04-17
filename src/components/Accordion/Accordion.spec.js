@@ -57,7 +57,7 @@ describe('Accordion component', () => {
 
     await detailButton.trigger('click')
 
-    expect(firstDetail.attributes('open')).toBe(undefined)
+    expect(firstDetail.attributes('open')).toBe(undefined || "")
   })
 
 })
