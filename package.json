@@ -1,11 +1,11 @@
 {
-  "name": "@iamproperty/components",
+  "name": "@iamproperty/Iamkey",
   "description": "Component library for iamproperty",
   "author": {
     "name": "iamproperty"
   },
   "private": false,
-  "version": "3.4.1",
+  "version": "3.4.2",
   "scripts": {
     "dev": "npm run copy && vite --host",
     "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
@@ -104,7 +104,7 @@
   "registry-url": "https://registry.npmjs.com",
   "repository": {
     "type": "git",
-    "url": "git://github.com/iamproperty/iamproperty-vue-component-library.git"
+    "url": "git://github.com/iamproperty/iamproperty.github.io.git"
   },
   "publishConfig": {
     "@iamproperty:registry": "https://npm.pkg.github.com"
