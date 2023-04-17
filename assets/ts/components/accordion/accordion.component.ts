@@ -7,7 +7,7 @@ const template = document.createElement('template');
 template.innerHTML = `
 <style>
 @import "${assetLocation}/css/core.min.css";
-@import "${assetLocation}/css/components/accordion.css";
+@import "${assetLocation}/css/components/header.css";
 </style>
 <div class="accordion">
   <slot></slot>

@@ -3,6 +3,7 @@ const { minify } = require('rollup-plugin-esbuild');
 //const  typescript = require('@rollup/plugin-typescript');
 
 const path = require('path')
+const fs = require('fs')
 const { babel } = require('@rollup/plugin-babel')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
@@ -40,6 +41,8 @@ if (BUNDLE) {
   )
 }
 
+plugins.push(minify());
+
 const rollupConfig = [
   {
     input: path.resolve(__dirname, `assets/js/bundle.js`),
@@ -51,12 +54,41 @@ const rollupConfig = [
     },
     external,
     plugins
+  },
+  {
+    input: path.resolve(__dirname, `assets/js/dynamic.js`),
+    output: {
+      banner,
+      file: path.resolve(__dirname, `assets/js/dynamic.min.js`),
+      format: ESM ? 'esm' : 'umd',
+      globals,
+      name: 'iam-dynamic'
+    },
+    external,
+    plugins: [
+      replace({
+        'process.env.NODE_ENV': '"production"',
+        preventAssignment: true,
+        'componentExt': '".component.min.js"'
+      }),
+      minify()
+    ]
   }
 ];
 
 const components = ["accordion","header"];
 
 components.forEach((component) => {
+
+  let css = '';
+
+  try {
+    css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.css`), 'utf8');
+    css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+
+  } catch (err) {
+    console.error(err);
+  }
 
   rollupConfig.push({
     input: path.resolve(__dirname, `assets/js/components/${component}/${component}.component.js`),
@@ -68,7 +100,14 @@ components.forEach((component) => {
       name: `iam-${component}`
     },
     external,
-    plugins: [minify()]
+    plugins: [
+      replace({
+        'process.env.NODE_ENV': '"production"',
+        preventAssignment: true,
+        'loadCSS': JSON.stringify(`${css}`)
+      }),
+      minify(),
+    ]
   })
 });
 

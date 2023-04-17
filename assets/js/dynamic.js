@@ -15,6 +15,7 @@ const options = {
     rootMargin: '50px',
     threshold: 0.1
 };
+const componentExt = ".component.js";
 // Load components - Each component will load once the first of its type has been loaded
 components.forEach((component) => {
     if (document.getElementsByTagName(`${prefix}-${component}`).length === 0)
@@ -22,7 +23,7 @@ components.forEach((component) => {
     let callback = (entries) => {
         entries.forEach((entry) => {
             if (entry.intersectionRatio > 0) {
-                import(`./components/${component}/${component}.component.min.js`).then(module => {
+                import(`./components/${component}/${component}${componentExt}`).then(module => {
                     if (!window.customElements.get(`${prefix}-${component}`))
                         window.customElements.define(`${prefix}-${component}`, module.default);
                 }).catch((err) => {
