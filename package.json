@@ -1,11 +1,11 @@
 {
-  "name": "@iamproperty/Iamkey",
+  "name": "@iamproperty/iamkey",
   "description": "Component library for iamproperty",
   "author": {
     "name": "iamproperty"
   },
   "private": false,
-  "version": "3.4.2",
+  "version": "3.4.",
   "scripts": {
     "dev": "npm run copy && vite --host",
     "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
