@@ -105,5 +105,8 @@
     "type": "git",
     "url": "git://github.com/iamproperty/iamproperty-vue-component-library.git"
   },
+  "publishConfig": {
+    "@iamproperty:registry": "https://npm.pkg.github.com"
+  },
   "localURL": "http://192.168.0.69:5173"
 }
