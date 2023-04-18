@@ -1,46 +1,40 @@
 // @ts-nocheck
-const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
-const loadCSS = `@import "${assetLocation}/css/components/header.css";`;
-
-const template = document.createElement('template');
-template.innerHTML = `
-<style>
-@import "${assetLocation}/css/core.min.css";
-${loadCSS}
-</style>
-<style>
-:host {
-  max-width:100%!important;
-  padding:0!important;
-}
-</style>
-<div class="header-banner">
-  <div class="container" part="container">
-    <slot name="breadcrumb"></slot>
-    <div class="header-banner__inner">
-    <slot></slot>
-    </div>
-  </div>
-  <picture>
-    <!-- Actual image only loaded on desktops -->
-    <source srcset="" media="(min-width: 62em)">
-    <!-- Placeholder image -->
-    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="" />
-  </picture>
-</div>
-`;
-
 class iamHeader extends HTMLElement {
 
   constructor(){
     super();
     this.attachShadow({ mode: 'open'});
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
 
-    if(this.hasAttribute('css')){
-      const style = this.shadowRoot.querySelector('style');
-      style.innerHTML += `@import "${this.getAttribute('css')}";`;
+    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
+    const loadCSS = `@import "${assetLocation}/css/components/header.css";`;
+
+    const template = document.createElement('template');
+    template.innerHTML = `
+    <style>
+    @import "${assetLocation}/css/core.min.css";
+    ${loadCSS}
+    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+    :host {
+      max-width:100%!important;
+      padding:0!important;
     }
+    </style>
+    <div class="header-banner">
+      <div class="container" part="container">
+        <slot name="breadcrumb"></slot>
+        <div class="header-banner__inner">
+        <slot></slot>
+        </div>
+      </div>
+      <picture>
+        <!-- Actual image only loaded on desktops -->
+        <source srcset="" media="(min-width: 62em)">
+        <!-- Placeholder image -->
+        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="" />
+      </picture>
+    </div>
+    `;
+    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
 	connectedCallback() {

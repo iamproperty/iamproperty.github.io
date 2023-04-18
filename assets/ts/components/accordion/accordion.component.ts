@@ -1,31 +1,29 @@
 // @ts-nocheck
 import accordion from "../../modules/accordion";
 
-const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
 
-const template = document.createElement('template');
-template.innerHTML = `
-<style>
-@import "${assetLocation}/css/core.min.css";
-@import "${assetLocation}/css/components/accordion.css";
-</style>
-<slot name="css"></slot>
-<div class="accordion">
-  <slot></slot>
-</div>
-`;
 
 class iamAccordion extends HTMLElement {
 
   constructor(){
     super();
     this.attachShadow({ mode: 'open'});
+
+    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
+
+    const template = document.createElement('template');
+    template.innerHTML = `
+    <style>
+    @import "${assetLocation}/css/core.min.css";
+    @import "${assetLocation}/css/components/accordion.css";
+    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+    </style>
+    <slot name="css"></slot>
+    <div class="accordion">
+      <slot></slot>
+    </div>
+    `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    
-    if(this.hasAttribute('css')){
-      const style = this.shadowRoot.querySelector('style');
-      style.innerHTML += `@import "${this.getAttribute('css')}";`;
-    }
   }
 
 	connectedCallback() {
