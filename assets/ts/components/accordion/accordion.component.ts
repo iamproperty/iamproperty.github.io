@@ -1,7 +1,7 @@
 // @ts-nocheck
 import accordion from "../../modules/accordion";
 
-
+const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
 
 class iamAccordion extends HTMLElement {
 
@@ -9,7 +9,6 @@ class iamAccordion extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
 
     const template = document.createElement('template');
     template.innerHTML = `
