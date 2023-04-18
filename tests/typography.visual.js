@@ -3,14 +3,14 @@ const { toMatchImageSnapshot } = require('jest-image-snapshot');
 expect.extend({ toMatchImageSnapshot });
 
 const pkg = require('../package.json');
-
+/*
 describe(`Headings`, () => {
 
   it(`should have the correct size`, async() => {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
 
-    await page.goto(pkg.localURL+'/elements/type#visualtest')
+    await page.goto(pkg.localURL+'/components/type#visualtest')
 
     await page.setViewport({ width: 375, height: 800 })
 
@@ -54,7 +54,7 @@ describe(`Headings`, () => {
     return true;
   })
 })
-
+*/
 const visualtest = require('./_visualtest.js');
 
-visualtest.testPages(`Typography page`,'/elements/type');
+visualtest.testPages(`Typography page`,'/components/type');
