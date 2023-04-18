@@ -15,7 +15,6 @@
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
-| title | String | - | Required |
 | image | String | - | Optional image url to display in the background |
 
 

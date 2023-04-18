@@ -1,14 +1,16 @@
 ### Usage
 
 ```
-<Accordion>
-  <AccordionItem title="Question 1">
-    <p>Accordion item content</p>
-  </AccordionItem>
-  <AccordionItem title="Question 2">
-    <p>Accordion item content</p>
-  </AccordionItem>
-</Accordion>
+<iam-accordion class="container">
+  <details id="question1" class="accordion-item">
+    <summary class="accordion-header accordion-button h4">Question 1</summary>
+    <p>Answer </p>
+  </details>
+  <details class="accordion-item">
+    <summary class="accordion-header accordion-button h4">Question 2</summary>
+    <p>Answer </p>
+  </details>
+</iam-accordion>
 ```
 
 ### Class modifiers
@@ -21,11 +23,6 @@
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
-| title | String | - | A question or statement |
-| titlecolour | String | - | Apply a colour the the accordion item title |
-| badge | String | - | Add a highlighted badge/tag to the accordion item title |
-| badgecolour | String | light | Apply a colour the badge |
-| lazy  | Boolean | - | If set the content of the tab will not loaded intially and will be loaded after the user has clicked on the accordion link. |
 
 
 ### Accordion item Slots
