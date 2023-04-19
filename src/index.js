@@ -2,14 +2,14 @@
 export { default as Icon } from './foundations/Icon/Icon.vue'
 export { default as Logo } from './foundations/Logo/Logo.vue'
 // Elements
-export { default as Table } from './elements/Table/Table.vue'
-export { default as Input } from './elements/Input/Input.vue'
-export { default as FileUploads } from './elements/FileUploads/FileUploads.vue'
+export { default as Table } from './components/Table/Table.vue'
+export { default as Input } from './components/Input/Input.vue'
+export { default as FileUploads } from './components/FileUploads/FileUploads.vue'
 // Components
 export { default as Accordion } from './components/Accordion/Accordion.vue'
 export { default as AccordionItem } from './components/Accordion/AccordionItem.vue'
 export { default as Banner } from './components/Banner/Banner.vue'
-export { default as Card } from './elements/Card/Card.vue'
+export { default as Card } from './components/Card/Card.vue'
 export { default as CardDeck } from './components/CardDeck/CardDeck.vue'
 export { default as Carousel } from './components/Carousel/Carousel.vue'
 export { default as Header } from './components/Header/Header.vue'
