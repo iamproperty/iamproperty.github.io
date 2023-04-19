@@ -3,7 +3,7 @@
     
     <div class="container pb-0">
       <ul class="breadcrumb mb-0">
-        <li><a href="/elements/form">Form elements</a></li>
+        <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>Basic input field types</h1>
       <p>The functionality of an input field can be increased by assigning a different type to it. This can change the keyboard on mobile devices to improve the user expereince. It also can add bits of functionality; for example a color input field comes with a popup window with a color picker.</p>
@@ -39,8 +39,8 @@
 
 
 <script>
-import Input from '@/elements/Input/Input.vue'
-import Readme from '@/elements/Input/README.md'
+import Input from '@/components/Input/Input.vue'
+import Readme from '@/components/Input/README.md'
 
 export default {
   components: {

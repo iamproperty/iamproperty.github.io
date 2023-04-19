@@ -84,7 +84,7 @@
 
 <script>
 import Nav from '@/components/Nav/Nav.vue'
-import Input from '@/elements/Input/Input.vue'
+import Input from '@/components/Input/Input.vue'
 import Icon from '@/foundations/Icon/Icon.vue'
 import form from '../../../../assets/js/modules/form'
 

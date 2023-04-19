@@ -15,7 +15,7 @@
 </style>
 
 <script>
-import Card from '../../elements/Card/Card.vue'
+import Card from '../Card/Card.vue'
 
 export default {
   components: {

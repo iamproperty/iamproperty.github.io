@@ -38,7 +38,7 @@
 </style>
 
 <script>
-import Input from '../../elements/Input/Input.vue'
+import Input from '../../components/Input/Input.vue'
 
 export default {
   components: {

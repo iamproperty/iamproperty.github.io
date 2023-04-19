@@ -34,7 +34,7 @@
 
 <script>
 import { ucfirst, unsnake } from '../../helpers/strings'
-import Table from '../../elements/Table/Table.vue'
+import Table from '../../components/Table/Table.vue'
 import chartModule from '../../../assets/js/modules/chart.js'
 
 export default {

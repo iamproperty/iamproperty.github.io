@@ -109,7 +109,7 @@
 import Tabs from '@/components/Tabs/Tabs.vue'
 import Tab from '@/components/Tabs/Tab.vue'
 import Readme from '@/components/Tabs/README.md'
-import Table from '@/elements/Table/Table.vue'
+import Table from '@/components/Table/Table.vue'
 
 export default {
   components: {

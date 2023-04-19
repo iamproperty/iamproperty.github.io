@@ -2,7 +2,7 @@
   <main>
     <div class="container pb-0">
       <ul class="breadcrumb mb-0">
-        <li><a href="/elements/form">Form elements</a></li>
+        <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>Form input field</h1>
       <p>Examples and usage guidelines for form control styles, layout options, and custom components for creating a wide variety of forms.</p>
@@ -104,8 +104,8 @@
 
 
 <script>
-import Input from '@/elements/Input/Input.vue'
-import Readme from '@/elements/Input/README.md'
+import Input from '@/components/Input/Input.vue'
+import Readme from '@/components/Input/README.md'
 
 export default {
   components: {

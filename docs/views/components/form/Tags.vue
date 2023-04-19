@@ -4,7 +4,7 @@
     <div class="container pb-0">
       
       <ul class="breadcrumb mb-0">
-        <li><a href="/elements/form">Form elements</a></li>
+        <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>Pill tags</h1>
       <p>Another way to include a multi select option, tags offer a much more visual approach. Essentially they are just another checkbox style. Due to the the inline block properties used and smaller margins its recommened to use a horizontal rule afterwards to help clear any floats and to add extra margins.</p>
@@ -86,8 +86,8 @@
 
 
 <script>
-import Input from '@/elements/Input/Input.vue'
-import Readme from '@/elements/Input/README.md'
+import Input from '@/components/Input/Input.vue'
+import Readme from '@/components/Input/README.md'
 
 export default {
   components: {

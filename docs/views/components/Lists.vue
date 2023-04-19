@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/elements">Elements</a></li>
+        <li><a href="/components">Components</a></li>
       </ul>
       <h1>Lists</h1>
       <p>Our lists have been kept very basic using default styles.</p>

@@ -83,7 +83,7 @@
 <script>
 import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue'
 import Nav from '@/components/Nav/Nav.vue'
-import Input from '@/elements/Input/Input.vue'
+import Input from '@/components/Input/Input.vue'
 
 export default {
   components: {

@@ -125,7 +125,7 @@
 <script>
 import nav from '../../../assets/js/modules/nav.js'
 import Logo from '../../foundations/Logo/Logo.vue'
-import Input from '../../elements/Input/Input.vue'
+import Input from '../../components/Input/Input.vue'
 import Icon from '../../foundations/Icon/Icon.vue'
 
 
