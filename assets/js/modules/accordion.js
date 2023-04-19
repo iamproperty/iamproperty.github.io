@@ -1,3 +1,4 @@
+// @ts-nocheck
 function accordion(accordionElement) {
     // Fetch all the details element.
     if (!accordionElement.classList.contains('accordion--keep-open')) {

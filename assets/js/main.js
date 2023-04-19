@@ -1,14 +1,14 @@
 // @ts-nocheck
 // Modules
-import * as helpers from '../js/modules/helpers';
-import nav from '../js/modules/nav';
-import table from '../js/modules/table';
-import accordion from '../js/modules/accordion';
-import testimonial from '../js/modules/testimonial';
-import carousel from '../js/modules/carousel';
-import form from '../js/modules/form';
-import youtubeVideo from '../js/modules/youtubevideo';
-import modal from '../js/modules/modal';
+import * as helpers from './modules/helpers.js';
+import nav from './modules/nav.js';
+import table from './modules/table.js';
+import accordion from './modules/accordion.js';
+import testimonial from './modules/testimonial.js';
+import carousel from './modules/carousel.js';
+import form from './modules/form.js';
+import youtubeVideo from './modules/youtubevideo.js';
+import modal from './modules/modal.js';
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function () {
     helpers.addBodyClasses(document.body);
