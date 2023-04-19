@@ -1,3 +1,4 @@
+// @ts-nocheck
 function orderlist(list) {
   const randID = 'list_'+Math.random().toString(36).substr(2, 9);
   const listItems = list.querySelectorAll('li');

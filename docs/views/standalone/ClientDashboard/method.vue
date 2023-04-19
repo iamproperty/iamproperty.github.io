@@ -100,7 +100,7 @@ import Carousel from '@/components/Carousel/Carousel.vue'
 import Icon from '@/foundations/Icon/Icon.vue'
 
 
-import orderList from '../../../../assets/js/modules/orderablelist'
+import orderList from '../../../../assets/ts/modules/orderablelist'
 
 export default {
   components: {

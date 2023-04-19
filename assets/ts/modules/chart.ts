@@ -1,4 +1,5 @@
-import { ucfirst, unsnake } from './helpers.js'
+// @ts-nocheck
+import { ucfirst, unsnake } from './helpers'
 
 function chart(chartElement,min,max,type) {
 

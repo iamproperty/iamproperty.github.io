@@ -22,7 +22,7 @@
 </style>
 
 <script>
-import drawer from '../../../assets/js/modules/drawer.js'
+import drawer from '../../../assets/ts/modules/drawer'
 
 export default {
   name: 'Header',

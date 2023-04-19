@@ -18,7 +18,7 @@
 
 <script>
 import { ucfirst, unsnake } from '../../helpers/strings'
-import table from '../../../assets/js/modules/table.js'
+import table from '../../../assets/ts/modules/table'
 
 let numericValue = function(value) {
 

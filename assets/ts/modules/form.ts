@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Create a link between two input/selects with one acting as setting a minimum value and the second a maximum
 // The link between the two will prevent the max input field form setting a lower value than the min and vice versa
 function inputRange(inputWrapper){

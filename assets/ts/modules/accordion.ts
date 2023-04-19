@@ -1,3 +1,4 @@
+// @ts-nocheck
 function accordion(accordionElement: Element) {
 
   // Add classes to help with CSS 

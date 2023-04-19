@@ -1,3 +1,4 @@
+// @ts-nocheck
 const navbar = (element) => {
 
   Array.from(element.querySelectorAll('details')).forEach((detail, index) => {

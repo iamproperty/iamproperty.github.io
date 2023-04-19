@@ -12,7 +12,7 @@
 </style>
 
 <script>
-import alert from '../../../assets/js/modules/alert.js'
+import alert from '../../../assets/ts/modules/alert'
 
 export default {
   name: 'Alert',

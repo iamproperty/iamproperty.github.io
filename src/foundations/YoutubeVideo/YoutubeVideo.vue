@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import youtubeVideo from '../../../assets/js/modules/youtubevideo.js'
+import youtubeVideo from '../../../assets/ts/modules/youtubevideo'
 
 export default {
   name: 'YoutuveVideo',

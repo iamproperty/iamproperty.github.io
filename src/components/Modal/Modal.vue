@@ -17,7 +17,7 @@
 </style>
 
 <script>
-import modal from '../../../assets/js/modules/modal.js'
+import modal from '../../../assets/ts/modules/modal'
 
 export default {
   name: 'Modal',

@@ -1,3 +1,4 @@
+// @ts-nocheck
 function carousel(carouselElement) {
 
   var scrollTimeout;

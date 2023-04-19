@@ -1,4 +1,5 @@
-import { zeroPad, isNumeric } from "./helpers.js";
+// @ts-nocheck
+import { zeroPad, isNumeric } from "./helpers";
 
 function table(tableElement) {
 

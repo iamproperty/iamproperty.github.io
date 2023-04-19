@@ -93,7 +93,7 @@ import Table from '@/components/Table/Table.vue'
 import Input from '@/components/Input/Input.vue'
 
 
-import fileupload from '../../../../assets/js/modules/file-upload'
+import fileupload from '../../../../assets/ts/modules/file-upload'
 
 export default {
   components: {
