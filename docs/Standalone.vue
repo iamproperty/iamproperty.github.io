@@ -9,8 +9,8 @@
 <script>
 import Logo from '@/foundations/Logo/Logo.vue'
 import pkg from '../package.json'
-import * as helpers from '../assets/js/modules/helpers'
-import form from '../assets/js/modules/form'
+import * as helpers from '../assets/ts/modules/helpers'
+import form from '../assets/ts/modules/form'
 
 export default {
   data () {

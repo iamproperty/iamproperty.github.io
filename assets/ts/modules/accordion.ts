@@ -1,3 +1,4 @@
+// @ts-nocheck
 function accordion(accordionElement: Element) {
 
   // Fetch all the details element.

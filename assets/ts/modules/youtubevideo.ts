@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Integrate YouTube videos as a way of hosting videos without the overhead and worry surrounding hosting vides. i.e. file sizes, performance and accessibility.
  */

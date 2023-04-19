@@ -1,3 +1,4 @@
+// @ts-nocheck
 const modal = (element) => {
 
   const links = element.querySelectorAll('.modal__outer a, .modal__outer button');

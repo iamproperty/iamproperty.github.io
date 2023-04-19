@@ -53,7 +53,7 @@
 <script>
 import Table from '@/components/Table/Table.vue'
 import Readme from '@/components/Table/README.md'
-import * as helpers from '../../../assets/js/modules/helpers'
+import * as helpers from '../../../assets/ts/modules/helpers'
 
 export default {
   components: {

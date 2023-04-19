@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { zeroPad, isNumeric } from "./helpers";
 
 function table(tableElement) {

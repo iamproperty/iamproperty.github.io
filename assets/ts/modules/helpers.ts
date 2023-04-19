@@ -1,3 +1,4 @@
+// @ts-nocheck
 /** 
  * Global helper functions to help maintain and enhance framework elements.
  * @module Helpers 

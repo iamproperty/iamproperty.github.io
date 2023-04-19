@@ -1,3 +1,4 @@
+// @ts-nocheck
 function alert(element) {
 
   // Create a dissmissable button

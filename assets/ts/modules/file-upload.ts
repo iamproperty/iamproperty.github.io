@@ -1,3 +1,4 @@
+// @ts-nocheck
 function fileupload(form, callback) {
 
   const input = form.querySelector('[type="file"]');

@@ -1,3 +1,4 @@
+// @ts-nocheck
 const drawer = (element) => {
 
   const observer = new IntersectionObserver( 
