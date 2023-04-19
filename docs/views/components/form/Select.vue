@@ -4,7 +4,7 @@
     <div class="container pb-0">
       
       <ul class="breadcrumb mb-0">
-        <li><a href="/elements/form">Form elements</a></li>
+        <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>Select input field</h1>
       <p>The select field inherits alot of the text input field characteristics from the same styling to sharing the same modifiers (size, inline etc).</p>
@@ -39,8 +39,8 @@
 
 
 <script>
-import Input from '@/elements/Input/Input.vue'
-import Readme from '@/elements/Input/README.md'
+import Input from '@/components/Input/Input.vue'
+import Readme from '@/components/Input/README.md'
 
 export default {
   components: {

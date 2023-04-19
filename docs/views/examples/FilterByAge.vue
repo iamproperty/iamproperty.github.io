@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import Table from '@/elements/Table/Table.vue'
-import Input from '@/elements/Input/Input.vue'
+import Table from '@/components/Table/Table.vue'
+import Input from '@/components/Input/Input.vue'
 
 const initialData = () => ({
   filterAge: '',

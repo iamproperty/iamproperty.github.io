@@ -127,7 +127,7 @@ import NoteFeed from '@/components/NoteFeed/NoteFeed.vue'
 import Stepper from '@/components/Stepper/Stepper.vue'
 import Step from '@/components/Stepper/Step.vue'
 import Nav from '@/components/Nav/Nav.vue'
-import Input from '@/elements/Input/Input.vue'
+import Input from '@/components/Input/Input.vue'
 import Logo from '@/foundations/Logo/Logo.vue'
 import Icon from '@/foundations/Icon/Icon.vue'
 

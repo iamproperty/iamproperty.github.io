@@ -3,7 +3,7 @@
     <div class="container">
       
       <ul class="breadcrumb mb-0">
-        <li><a href="/elements/form">Form elements</a></li>
+        <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>Date and time pickers</h1>
       <p>There is no need to use a bespoke JavaScript based datepicker as the browser support is very good for the default HTML5 date and time input types. For browsers that dont support them they revert back to text input fields and we can supply a validation pattern to make sure the format is correct.</p>
@@ -24,8 +24,8 @@
 
 
 <script>
-import Input from '@/elements/Input/Input.vue'
-import Readme from '@/elements/Input/README.md'
+import Input from '@/components/Input/Input.vue'
+import Readme from '@/components/Input/README.md'
 
 export default {
   components: {

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import CardDeck from './/CardDeck.vue'
-import Card from '../../elements/Card/Card.vue'
+import Card from '../../components/Card/Card.vue'
 
 describe('Card Deck component', () => {
 
