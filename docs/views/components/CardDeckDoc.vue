@@ -41,7 +41,7 @@
 <script>
 import CardDeck from '@/components/CardDeck/CardDeck.vue'
 import Readme from '@/components/CardDeck/README.md'
-import CardReadme from '@/elements/Card/README.md'
+import CardReadme from '@/components/Card/README.md'
 
 export default {
   components: {

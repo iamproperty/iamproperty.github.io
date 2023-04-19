@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <ul class="breadcrumb mb-0">
-        <li><a href="/elements/form">Form elements</a></li>
+        <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>File upload</h1>
     </div>
@@ -46,9 +46,9 @@
 
 
 <script>
-import Input from '@/elements/Input/Input.vue'
-import FileUploads from '@/elements/FileUploads/FileUploads.vue'
-import Readme from '@/elements/Input/README.md'
+import Input from '@/components/Input/Input.vue'
+import FileUploads from '@/components/FileUploads/FileUploads.vue'
+import Readme from '@/components/Input/README.md'
 
 export default {
   components: {
