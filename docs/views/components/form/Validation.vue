@@ -2,7 +2,7 @@
   <main>
     <div class="container pb-0">
       <ul class="breadcrumb mb-0">
-        <li><a href="/elements/form">Form elements</a></li>
+        <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>Form validation</h1>
       <p>Form validation on an input field can be triggered by either using the default form validation api and the supported CSS rules. Or set classes (.is-valid and .is-invalid) can be used so that server side validation can be used.</p>
@@ -19,8 +19,8 @@
 
 
 <script>
-import Input from '@/elements/Input/Input.vue'
-import Readme from '@/elements/Input/README.md'
+import Input from '@/components/Input/Input.vue'
+import Readme from '@/components/Input/README.md'
 
 export default {
   components: {

@@ -4,7 +4,7 @@
     <div class="container pb-0">
       
       <ul class="breadcrumb mb-0">
-        <li><a href="/elements/form">Form elements</a></li>
+        <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>Toggle buttons</h1>
       <p>We can create toggle buttons by using a combination of checkboxes and button classes. Like other buttons it defaults to primary button style but adding <strong>.btn-secondary</strong> or <strong>.btn-tertiary</strong> updates the styles.</p>
@@ -64,8 +64,8 @@
 
 
 <script>
-import Input from '@/elements/Input/Input.vue'
-import Readme from '@/elements/Input/README.md'
+import Input from '@/components/Input/Input.vue'
+import Readme from '@/components/Input/README.md'
 
 export default {
   components: {
