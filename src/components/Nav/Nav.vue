@@ -123,7 +123,7 @@
 </style>
 
 <script>
-import nav from '../../../assets/js/modules/nav.js'
+import nav from '../../../assets/ts/modules/nav'
 import Logo from '../../foundations/Logo/Logo.vue'
 import Input from '../../components/Input/Input.vue'
 import Icon from '../../foundations/Icon/Icon.vue'
