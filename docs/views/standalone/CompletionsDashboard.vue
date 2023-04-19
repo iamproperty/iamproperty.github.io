@@ -173,11 +173,11 @@
 
 <script>
 import Nav from '@/components/Nav/Nav.vue'
-import Input from '@/elements/Input/Input.vue'
+import Input from '@/components/Input/Input.vue'
 import Snapshot from '@/components/Snapshot/Snapshot.vue'
 import Accordion from '@/components/Accordion/Accordion.vue'
 import AccordionItem from '@/components/Accordion/AccordionItem.vue'
-import Table from '@/elements/Table/Table.vue'
+import Table from '@/components/Table/Table.vue'
 import Modal from '@/components/Modal/Modal.vue'
 
 export default {

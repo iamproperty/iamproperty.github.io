@@ -77,8 +77,8 @@
 </template>
 
 <script>
-import Table from '@/elements/Table/Table.vue'
-import Readme from '@/elements/Table/README.md'
+import Table from '@/components/Table/Table.vue'
+import Readme from '@/components/Table/README.md'
 import * as helpers from '../../../assets/js/modules/helpers'
 
 export default {

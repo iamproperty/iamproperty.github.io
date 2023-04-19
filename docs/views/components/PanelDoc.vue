@@ -61,9 +61,9 @@
       <div class="admin-panel">
         
         <div class="admin-panel__links">
-          <a href="/elements/panel">My onboarding</a>
-          <a href="/elements/panel" class="current">Branch onboarding<br><small>Branch 1</small></a>
-          <a href="/elements/panel">All onboarding</a>
+          <a href="/components/panel">My onboarding</a>
+          <a href="/components/panel" class="current">Branch onboarding<br><small>Branch 1</small></a>
+          <a href="/components/panel">All onboarding</a>
         </div>
 
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
@@ -81,7 +81,7 @@
 </template>
 
 <script>
-import Table from '@/elements/Table/Table.vue'
+import Table from '@/components/Table/Table.vue'
 
 export default {
   components: {

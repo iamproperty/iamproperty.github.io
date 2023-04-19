@@ -16,7 +16,7 @@
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/elements/card.scss";
+@import "../../../assets/sass/components/card.scss";
 </style>
 
 <script>

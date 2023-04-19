@@ -2,7 +2,7 @@
   <main>
     <div class="container pb-0">
       <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/elements">Elements</a></li>
+        <li><a href="/components">components</a></li>
       </ul>
       <h1>Tables</h1>
       <p>Used to arrange data into the tabular design; rows and columns. An HTML table is a great way to display things such as financial data, calendars, pricing, feature comparison, the nutrition facts information panel, bowling scores, and many other tabular data.</p>
@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import Table from '@/elements/Table/Table.vue'
-import Readme from '@/elements/Table/README.md'
+import Table from '@/components/Table/Table.vue'
+import Readme from '@/components/Table/README.md'
 import * as helpers from '../../../assets/js/modules/helpers'
 
 export default {

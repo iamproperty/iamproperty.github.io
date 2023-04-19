@@ -2,7 +2,7 @@
   <main>
     <div class="container pb-0">
       <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/elements">Elements</a></li>
+        <li><a href="/components">components</a></li>
       </ul>
       <h1>Container</h1>
       <p>Containers are a fundamental building block that contain, pad, and align your content within a given device or viewport.</p>

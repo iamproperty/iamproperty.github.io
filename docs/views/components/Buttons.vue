@@ -2,7 +2,7 @@
   <main>
     <div class="container pb-0">
       <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/elements">Elements</a></li>
+        <li><a href="/components">components</a></li>
       </ul>
       <h1>Buttons & links</h1>
     </div>
@@ -12,11 +12,11 @@
       <p>Links should always be highlighted in at least two different ways; one of which should be a non-colour indictaor. Our text links deploy the use of a thick underline, which is then thinned down when its an inline link. Links that open in a new window will display a single colour icon to help indicate this. Our more stylised icons can also be added into a link and they will resize to fit in, its recommended to add an additional modifying padding class to the link.</p>
     </div>
     <div class="container visualtest">
-      <a href="/elements/buttons" class="me-3">Find out more</a>
+      <a href="/components/buttons" class="me-3">Find out more</a>
       <a href="https://bbc.com" target="_blank" class="me-3">Find out more</a>
-      <a href="/elements/buttons" class="me-3">Email<i class="icon fa-envelope me-0"></i></a>
+      <a href="/components/buttons" class="me-3">Email<i class="icon fa-envelope me-0"></i></a>
       <hr />
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the <a href="/elements/buttons">industry's standard</a> dummy text ever since the 1500s, when an <a href="/elements/buttons"><Icon id="email"></Icon>unknown printer</a> took a galley of type and <a href="/elements/buttons" target="_blank">scrambled</a> it to make a type specimen book. </p>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the <a href="/components/buttons">industry's standard</a> dummy text ever since the 1500s, when an <a href="/components/buttons"><Icon id="email"></Icon>unknown printer</a> took a galley of type and <a href="/components/buttons" target="_blank">scrambled</a> it to make a type specimen book. </p>
     </div>
 
     <div class="container ">
@@ -29,23 +29,23 @@
       <input type="submit" class="btn" value="Find out more" />
       <button class="btn" disabled>Find out more</button>
       <a href="https://bbc.com" class="btn" target="_blank">Find out more</a>
-      <a href="/elements/buttons" class="btn pe-3">Email<i class="icon fa-envelope"></i></a>
-      <a href="/elements/buttons" class="btn ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
+      <a href="/components/buttons" class="btn pe-3">Email<i class="icon fa-envelope"></i></a>
+      <a href="/components/buttons" class="btn ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
 
       <hr class="hr--clear" />
       <h2 class="h4">.btn-secondary</h2>
       <button class="btn btn-secondary">Find out more</button>
       <button class="btn btn-secondary" disabled>Find out more</button>
       <a href="https://bbc.com" class="btn btn-secondary" target="_blank">Find out more</a>
-      <a href="/elements/buttons" class="btn btn-secondary pe-3">Email<i class="icon fa-envelope"></i></a>
-      <a href="/elements/buttons" class="btn btn-secondary ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
+      <a href="/components/buttons" class="btn btn-secondary pe-3">Email<i class="icon fa-envelope"></i></a>
+      <a href="/components/buttons" class="btn btn-secondary ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
       <hr class="hr--clear" />
       <h2 class="h4">.btn-tertiary</h2>
       <button class="btn btn-tertiary">Find out more</button>
       <button class="btn btn-tertiary" disabled>Find out more</button>
       <a href="https://bbc.com" class="btn btn-tertiary" target="_blank">Find out more</a>
-      <a href="/elements/buttons" class="btn btn-tertiary pe-3">Email<i class="icon fa-envelope"></i></a>
-      <a href="/elements/buttons" class="btn btn-tertiary ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
+      <a href="/components/buttons" class="btn btn-tertiary pe-3">Email<i class="icon fa-envelope"></i></a>
+      <a href="/components/buttons" class="btn btn-tertiary ps-3"><Icon id="mobile" class="ms-0"></Icon>Locate on a map</a>
     </div>
     
     <div class="container">

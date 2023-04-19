@@ -7,17 +7,17 @@
 @use "foundations/icons.scss";
 @use "foundations/circles.scss";
 @use "foundations/media.scss";
+@use "foundations/type.scss";
 
 // elements
-@use "elements/type.scss";
-@use "elements/lists.scss";
-@use "elements/tooltips.scss";
-@use "elements/container.scss";
-@use "elements/tables.scss";
-@use "elements/links.scss";
-@use "elements/buttons";
-@use "elements/card.scss";
-@use "elements/panel.scss";
+@use "components/lists.scss";
+@use "components/tooltips.scss";
+@use "components/container.scss";
+@use "components/tables.scss";
+@use "components/links.scss";
+@use "components/buttons";
+@use "components/card.scss";
+@use "components/panel.scss";
 
 // Bootstrap elements
 @import "../../node_modules/bootstrap/scss/_transitions.scss";
