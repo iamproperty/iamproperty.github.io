@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "3.4.4",
+  "version": "3.4.5",
   "scripts": {
     "dev": "npm run copy && vite --host",
     "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
@@ -16,6 +16,9 @@
     "compile:ts": "node node_modules/typescript/bin/tsc --project tscompileconfig.json && fix-esm-import-path assets/js",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
     "compile": "npm run compile:sass && npm run compile:ts && npm run compile:js",
+    "watch:ts": "tsc-watch -p tscompileconfig.json --onCompilationComplete \"fix-esm-import-path assets/js\"",
+    "watch:sass": "sass --watch assets/sass/main.scss:assets/css/style.min.css assets/sass/core.scss:assets/css/core.min.css assets/sass/components:assets/css/components --style=compressed",
+    "watch": "concurrently \"npm run dev\" \"npm run watch:sass\" \"npm run watch:ts\"",
     "copy:svg": "copyfiles -u 2 assets/svg/**/* public/svg && copyfiles -u 2 assets/svg/icons.svg public/svg && copyfiles -u 2 assets/svg/logo.svg public/svg",
     "copy:img": "copyfiles -u 2 assets/img/**/* public/img",
     "copy:fonts": "copyfiles -u 2 assets/fonts/**/* public/fonts",
@@ -27,9 +30,8 @@
     "test:unit": "jest src",
     "test:scss": "jest assets/sass/_tests",
     "test": "npm run test:unit && npm run test:scss",
-    "visual:docs": "jest tests",
-    "visual:approve": "jest tests --updateSnapshot",
-    "pull-request": "npm run test:unit && npm run test:scss && npm run visual:approve && npm run compile && npm run audit",
+    "visual": "jest tests --updateSnapshot",
+    "pull-request": "npm run test:unit && npm run test:scss && npm run visual && npm run compile && npm run audit",
     "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* dist/assets/fonts",
     "deploy:svg": "copyfiles -u 2 assets/svg/icons.svg dist/svg && copyfiles -u 2 assets/svg/logo.svg dist/svg",
     "deploy:404": "node local_modules/create404.js"
@@ -55,6 +57,7 @@
     "@vue/test-utils": "^2.3.2",
     "@vue/vue3-jest": "^29.2.3",
     "babel-jest": "^29.5.0",
+    "concurrently": "^8.0.1",
     "copyfiles": "^2.4.1",
     "cross-env": "^7.0.3",
     "expect-puppeteer": "^8.0.5",

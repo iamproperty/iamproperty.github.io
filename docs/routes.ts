@@ -182,14 +182,6 @@ const routes = [
         component: () => import('./views/components/CarouselDoc.vue')
       },
       {
-        path: 'drawer',
-        name: 'Drawer',
-        meta: {
-          title: 'Drawer | Components | iamkey'
-        },
-        component: () => import('./views/components/DrawerDoc.vue')
-      },
-      {
         path: 'charts',
         name: 'Charts',
         meta: {
