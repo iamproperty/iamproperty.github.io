@@ -82,8 +82,7 @@ export default {
     Nav,
     Input,
     Carousel,
-    Table,
-    Drawer
+    Table
   },
   props: {
     searchTerm: {
