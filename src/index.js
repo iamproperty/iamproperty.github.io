@@ -16,7 +16,6 @@ export { default as Header } from './components/Header/Header.vue'
 export { default as Testimonial } from './components/Testimonial/Testimonial.vue'
 export { default as PropertySearchbar } from './components/PropertySearchbar/PropertySearchbar.vue'
 export { default as Nav } from './components/Nav/Nav.vue'
-export { default as Drawer } from './components/Drawer/Drawer.vue'
 export { default as Modal } from './components/Modal/Modal.vue'
 
 export { default as Stepper } from './components/Stepper/Stepper.vue'
