@@ -89,11 +89,11 @@ import Footer from './_footer.vue'
 import Heading from './_heading.vue'
 import CardDeck from '@/components/CardDeck/CardDeck.vue'
 import Icon from '@/foundations/Icon/Icon.vue'
-import Table from '@/elements/Table/Table.vue'
-import Input from '@/elements/Input/Input.vue'
+import Table from '@/components/Table/Table.vue'
+import Input from '@/components/Input/Input.vue'
 
 
-import fileupload from '../../../../assets/js/modules/file-upload'
+import fileupload from '../../../../assets/ts/modules/file-upload'
 
 export default {
   components: {

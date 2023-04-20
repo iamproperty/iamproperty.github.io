@@ -26,14 +26,14 @@ export default {
           content: `<p>Core variables and principles that are used through out the framework.</p>`
         },
         {
-          link: '/elements',
-          title: 'Elements',
-          content: `<p>Small re-usable parts that are commonly used within components.</p>`
-        },
-        {
           link: '/components',
           title: 'Components',
           content: `<p>Configurable re-usable parts that build up a page.</p>`
+        },
+        {
+          link: '/templates',
+          title: 'Templates',
+          content: `<p>Groups of components that can build up a page.</p>`
         }
       ]
     }

@@ -35,7 +35,7 @@
 </style>
 
 <script>
-import testimonial from '../../../assets/js/modules/testimonial.js'
+import testimonial from '../../../assets/ts/modules/testimonial'
 
 
 export default {

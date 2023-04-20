@@ -84,7 +84,7 @@ import Footer from './_footer.vue'
 import Heading from './_heading.vue'
 import CardDeck from '@/components/CardDeck/CardDeck.vue'
 import Icon from '@/foundations/Icon/Icon.vue'
-import Table from '@/elements/Table/Table.vue'
+import Table from '@/components/Table/Table.vue'
 
 export default {
   components: {

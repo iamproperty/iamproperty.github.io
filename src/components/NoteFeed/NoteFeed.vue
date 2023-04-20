@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import Input from '../../elements/Input/Input.vue'
-import Table from '../../elements/Table/Table.vue'
+import Input from '../../components/Input/Input.vue'
+import Table from '../../components/Table/Table.vue'
 let tableProps = Table.props;
 tableProps.fields.required = false;
 

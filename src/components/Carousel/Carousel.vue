@@ -31,9 +31,9 @@
 
 
 <script>
-import Card from '../../elements/Card/Card.vue'
+import Card from '../Card/Card.vue'
 import CardDeck from '../CardDeck/CardDeck.vue'
-import carousel from '../../../assets/js/modules/carousel.js'
+import carousel from '../../../assets/ts/modules/carousel'
 
 // Inherit the card deck props
 let cardDeckProps = CardDeck.props;

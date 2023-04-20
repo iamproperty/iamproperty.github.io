@@ -147,10 +147,9 @@ main {
 <script>
 import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue'
 import Nav from '@/components/Nav/Nav.vue'
-import Input from '@/elements/Input/Input.vue'
+import Input from '@/components/Input/Input.vue'
 import Carousel from '@/components/Carousel/Carousel.vue'
-import Table from '@/elements/Table/Table.vue'
-import Drawer from '@/components/Drawer/Drawer.vue'
+import Table from '@/components/Table/Table.vue'
 
 export default {
   components: {
@@ -158,8 +157,7 @@ export default {
     Nav,
     Input,
     Carousel,
-    Table,
-    Drawer
+    Table
   },
   props: {
     searchTerm: {
