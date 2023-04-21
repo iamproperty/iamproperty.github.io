@@ -67,13 +67,8 @@
       
       
     </main>
-      <Drawer label="Actions">
-        <Carousel :items="actions" type="card" btntype="link" :hidectatext="true">
-          <template v:slot="before">
-            <h2 class="mb-0 mx-auto text-center">Actions</h2>
-          </template>
-        </Carousel>
-      </Drawer>
+
+    
     <footer class="bg-primary pt-4">
       <div class="container">
         <p>© Copyright iamsold 2021 - All rights reserved</p>
@@ -150,7 +145,6 @@ import Nav from '@/components/Nav/Nav.vue'
 import Input from '@/components/Input/Input.vue'
 import Carousel from '@/components/Carousel/Carousel.vue'
 import Table from '@/components/Table/Table.vue'
-import Drawer from '@/components/Drawer/Drawer.vue'
 
 export default {
   components: {
@@ -158,8 +152,7 @@ export default {
     Nav,
     Input,
     Carousel,
-    Table,
-    Drawer
+    Table
   },
   props: {
     searchTerm: {
