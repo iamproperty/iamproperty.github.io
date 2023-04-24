@@ -17,7 +17,6 @@ class iamAccordion extends HTMLElement {
     @import "${assetLocation}/css/components/accordion.css";
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <slot name="css"></slot>
     <div class="accordion">
       <slot></slot>
     </div>

@@ -8,6 +8,8 @@ a,
   margin-bottom: rem(16);
   position: relative;
   text-decoration: none;
+  background: none;
+  border: none;
   
   &:not(.text-decoration-none):not(.btn):before {
     content: '';
@@ -30,8 +32,7 @@ a,
     width: 0%;
   }
 
-  &:hover,
-  &:focus,
+  &:is(:hover, :focus, .focus),
   .card:hover &,
   .card:focus &  {
     @include var (color, --colour-hover);

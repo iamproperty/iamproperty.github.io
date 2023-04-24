@@ -11,6 +11,7 @@ import youtubeVideo from '../js/modules/youtubevideo'
 import modal from '../js/modules/modal'
 import iamHeader from './components/header/header.component'
 import iamAccordion from './components/accordion/accordion.component'
+import iamTabs from './components/tabs/tabs.component'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -25,6 +26,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (!window.customElements.get(`iam-accordion`))
     window.customElements.define(`iam-accordion`, iamAccordion);
+
+  if (!window.customElements.get(`iam-tabs`))
+    window.customElements.define(`iam-tabs`, iamTabs);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {

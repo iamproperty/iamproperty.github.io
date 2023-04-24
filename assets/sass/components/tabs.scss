@@ -1,15 +1,8 @@
 @use "../_func" as *;
 
-.tabs__container {
+.tabs {
 
   position: relative;
-
-  .tab__input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-  }
 
   > .tabs__links {
     margin-bottom: 1.5rem;
@@ -24,6 +17,7 @@
       margin: 0 0 0.5rem 0;
       float: left;
       clear: both;
+      padding: 0;
 
       @include media-breakpoint-up(sm) {
         clear: none;
@@ -37,51 +31,73 @@
       }
 
       &:hover:before,
-      &:focus:before {
+      &:focus:before,
+      &.focus:before {
         width: 100%;
       }
     }
   }
 
-  .tab {
-    display: none;
-  }
-
-  input:focus-visible ~ .tabs__links {
-    outline: blue outset 1px;
-  }
-
-  @for $i from 1 through 10 {
-    input:checked:nth-child(#{$i}) ~ .tabs__links .link:not(.text-decoration-none):not(.btn):nth-child(#{$i}) {
+  .tabs__links .link:not(.text-decoration-none):not(.btn)[aria-pressed="true"] {
       
-      --is-current: 1;
-      --panel-tab-colour: white;
-      --panel-tab-border: var(--colour-secondary)
-    }
-    input:checked:nth-child(#{$i}) ~ .tabs > .tab:nth-child(#{$i}){
-      display: block;
-      display: contents;
-    }
+    --is-current: 1;
+    --panel-tab-colour: white;
+    --panel-tab-border: var(--colour-secondary)
   }
 }
 
 // #region admin panel
-.admin-panel > .tabs__container:first-child {
+.admin-panel .tabs__links,
+:host(.admin-panel) .tabs__links {
 
-  display: contents;
+  margin-top: -3px!important;
+  margin-left: calc(var(--panel-gutter) * -1);
+  margin-right: calc(var(--panel-gutter) * -1);
+  display: flex;
+  flex-direction: column;
+  background-color: var(--body-bg);
+  border-bottom: 2px solid var(--colour-border-light);
+  margin-bottom: var(--panel-gutter);
 
-  > .tabs {
-    display: contents;
+  @include media-breakpoint-up(sm) {
+
+    flex-direction: row;
+    border-top: 1px solid var(--colour-border-light);
   }
 
-  > .tabs__links {
+  .link:not(.text-decoration-none):not(.btn) {
+    padding: var(--panel-gutter);
+    margin: 0;
+    width: 100%;
+    background: var(--panel-tab-colour);
+    border-top: 1px solid var(--colour-border-light);
+    border-left: 3px solid var(--panel-tab-border, #fafafa);
+    text-align: left;
 
-    padding-bottom: 0;
+    &:before {
+      display: none;
+    }
 
-    .link:not(.text-decoration-none):not(.btn) {
+    @include media-breakpoint-up(sm) {
 
-      margin-bottom: 0;
+      margin-right: 0!important;
+
+      &:first-child{
+        border-left: none!important;
+      }
+
+      &:not(:first-child){
+
+        border-left: 1px solid var(--colour-border-light)!important;
+      }
+
+      border-top: 3px solid var(--panel-tab-border, #fafafa);
     }
   }
+}
+
+:host(.admin-panel) {
+
+  display: block;
 }
 // #endregion

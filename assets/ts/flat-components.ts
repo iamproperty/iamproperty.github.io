@@ -9,6 +9,7 @@ import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 import modal from '../js/modules/modal'
+import tabs from '../js/modules/tabs'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -52,6 +53,10 @@ document.addEventListener("DOMContentLoaded", function() {
   // YouTube videos
   Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {
     new youtubeVideo(arrayElement);
+  });
+  // Tabs
+  Array.from(document.querySelectorAll('.tabs')).forEach((arrayElement) => {
+    tabs(arrayElement);
   });
 
 
