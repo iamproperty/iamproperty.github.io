@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.4.6</h2>
+      <ul>
+        <li>Update the spacing classes</li>
+      </ul>
+
       <h2>V3.1</h2>
       <ul>
         <li>Minor CSS changes</li>

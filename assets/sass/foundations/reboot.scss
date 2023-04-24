@@ -22,7 +22,7 @@ html {
   }
 
   @if $mobileOnly != "true" {
-    @media (min-width: #{em(1440)}) {
+    @media (min-width: #{em(1280)}) {
         font-size: 100%;
     }
 

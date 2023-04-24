@@ -87,20 +87,12 @@ const routes = [
         component: () => import('./views/foundations/Media.vue')
       },
       {
-        path: 'breakpoints',
-        name: 'Breakpoints',
+        path: 'spacing',
+        name: 'Spacing and Layout',
         meta: {
-          title: 'Breakpoints | Foundations | iamkey'
+          title: 'Spacing and Layout | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Breakpoints.vue')
-      },
-      {
-        path: 'grid',
-        name: 'Grid',
-        meta: {
-          title: 'Grid | Foundations | iamkey'
-        },
-        component: () => import('./views/foundations/Grid.vue')
+        component: () => import('./views/foundations/Spacing.vue')
 
       },
       {

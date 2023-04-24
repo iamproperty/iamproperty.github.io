@@ -22,3 +22,37 @@ code {
     color: var(--colour-danger);
   }
 }
+
+.version-control {
+  padding-top: 3rem;
+
+  table {
+    --border-width: 0px;
+    --inner-border-width: 0px;
+
+    thead th {
+      padding-bottom: 0.5rem;
+      font-size: 1rem;
+      color: var(--colour-body);
+
+      &:nth-child(1){
+        width: 1rem;
+      }
+      &:nth-child(2){
+        width: 1rem;
+      }
+      &:nth-child(4){
+        width: 9rem;
+      }
+
+    }
+
+    tr > *:first-child {
+      padding-inline-start: 0;
+    }
+
+    td {
+      padding-top: 0;
+    }
+  }
+}
