@@ -23,13 +23,13 @@
   }
 
   &[class*="bg-"] {
-    --container-padding-top: #{rem(48)};
-    --container-padding-bottom: #{rem(32)};
+    padding-top: #{rem(48)};
+    padding-bottom: #{rem(32)};
   }
 
   &[class*="bg-"] + .container:not([class*="bg-"]) {
 
-    --container-padding-top: #{rem(32)};
+    padding-top: #{rem(32)};
   }
 
 
