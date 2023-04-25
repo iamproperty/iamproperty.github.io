@@ -33,26 +33,6 @@ function accordion(accordionElement: Element) {
       });
     });
   }
-
-  if(window.location.hash && document.querySelector(window.location.hash+':not([open]) summary')) {
-
-    const detail = document.querySelector(window.location.hash+' summary');
-
-    if (detail instanceof HTMLElement) {
-      detail.click();
-    }
-  }
-
-  window.addEventListener('hashchange', function(){
-    if(window.location.hash && document.querySelector(window.location.hash+' summary')) {
-
-      const detail = document.querySelector(window.location.hash+' summary');
-
-      if (detail instanceof HTMLElement) {
-        detail.click();
-      }
-    }
-  });
 }
 
 export default accordion

@@ -32,7 +32,7 @@ export const createTabsLinks = function(tabsElement: Element) {
       button.setAttribute('aria-pressed',true);
     }
     
-    button.innerHTML = `${summary.innerHTML}`;
+    button.innerHTML = `${summary.innerText}`;
     button.classList.add('link');
     button.setAttribute('data-index',index);
     button.setAttribute('tabindex','-1');

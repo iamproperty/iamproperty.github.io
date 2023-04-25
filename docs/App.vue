@@ -64,3 +64,20 @@ footer .router-link-active {
   display: none!important;
 }
 </style>
+<script>
+import * as helpers from '../assets/ts/modules/helpers'
+
+
+export default {
+  props: {
+  },
+  created(){
+    console.log('hi');
+    
+    // Global stuff
+    helpers.addBodyClasses(document.body);
+    helpers.addGlobalEvents(document.body);
+    helpers.checkElements(document.body);
+  }
+}
+</script>

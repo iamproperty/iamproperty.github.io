@@ -3,6 +3,7 @@ import App from './App.vue'
 import Standalone from './Standalone.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
+import * as helpers from '../assets/ts/modules/helpers'
 
 import audit from '../audit.json';
   
@@ -92,4 +93,10 @@ app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
 
 
-document.body.classList.add('js-enabled');
+document.addEventListener("DOMContentLoaded", function() {
+
+  // Global stuff
+  helpers.addBodyClasses(document.body);
+  helpers.addGlobalEvents(document.body);
+  helpers.checkElements(document.body);
+});

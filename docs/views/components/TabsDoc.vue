@@ -37,11 +37,6 @@
       </Tab>
     </Tabs>
 
-    <div class="container">
-      <h2>HTML code example</h2>
-      <pre><code class="language-html">{{htmlUsage}}</code></pre>
-    </div>
-
 
     <div class="container">
 
@@ -96,11 +91,20 @@
         </Tabs>
     </div>
 
-
-    <div class="container">
-      <h2>Vue Tabs component reference</h2>
-      <Readme></Readme>
-    </div>
+    <Tabs class="container">
+      <details>
+        <summary><h2>HTML</h2></summary>
+        <pre><code class="javascript">{{htmlUsage}}</code></pre>
+      </details>
+      <details>
+        <summary><h2>Web component</h2></summary>
+        <WebReadme></WebReadme>
+      </details>
+      <details>
+        <summary><h2>Vue component</h2></summary>
+        <Readme></Readme>
+      </details>
+    </Tabs>
   </main>
 </template>
 
@@ -108,6 +112,7 @@
 import Tabs from '@/components/Tabs/Tabs.vue'
 import Tab from '@/components/Tabs/Tab.vue'
 import Readme from '@/components/Tabs/README.md'
+import WebReadme from '~/ts/components/tabs/README.md'
 import Table from '@/components/Table/Table.vue'
 
 export default {
@@ -115,6 +120,7 @@ export default {
     Tabs,
     Tab,
     Readme,
+    WebReadme,
     Table
   },
   data () {

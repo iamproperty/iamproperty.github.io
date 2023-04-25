@@ -1,5 +1,3 @@
-### Usage
-
 ```
 <Accordion>
   <AccordionItem title="Question 1">

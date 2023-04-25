@@ -19,7 +19,6 @@ export default {
   props: {
   },
   mounted(){
-    //accordion(this.$refs.wrapper);
   }
 }
 </script>
