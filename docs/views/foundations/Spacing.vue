@@ -66,9 +66,8 @@
     <div class="container ">
       <h2>Spacing utilities</h2>
       
-      <p>For greater control over the spacing around elements and styles, BootstrapU+2019s spacing utilites can be used to overwrite the default spacing applied to an element. These values can be applied as both margin or padding, and are written in shorthand format, where the first letter of the direction of which it is used as a suffix (e.g .mr-3 = marginright-3).</p>
+      <p>For greater control over the spacing around elements and styles, Bootstrap's spacing utilites can be used to overwrite the default spacing applied to an element. These values can be applied as both margin or padding, and are written in shorthand format, where the first letter of the direction of which it is used as a suffix (e.g .mr-3 = marginright-3).</p>
       <p>We have adapted the default spacing variables to suit the spacing applied to our designs:</p>
-
 
       <div class="row">
         <div class="col-6 col-sm-4 col-md-2">
@@ -93,15 +92,18 @@
         </div>
       </div>
 
+      <p>Alongside this we created some extra functionality to easily use the defined values. The preferred method would be to use a CSS custom property as this more controllable and custonisable. We do also have a spacing function in sass that can be used.</p>
+      
+      <h3>Sass</h3>
+      <pre><code lang="scss">margin-top: spacing(1);</code></pre>
+      <h3>CSS custom property</h3>
+      <pre><code lang="css">margin-top: var(--spacing-2);</code></pre>
+
     </div>
     <div class="container mb-3">
       <h2>Layout</h2>
 
       <p>Our grid system is based upon <a href="https://getbootstrap.com/docs/5.2/layout/grid/" rel="nofollow" target="_blank">bootstraps grid system</a> When designing page layouts in Adobe XD or Figma, please refer to the grid template supplied to match the design at the ‘100%’ size for each viewport (375px, 768px, 1280px).</p>
-
-
-      
-
 
       <Tabs>
         <Tab title="Mobile">

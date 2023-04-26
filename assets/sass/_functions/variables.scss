@@ -63,6 +63,14 @@ $spacers: (
   4: $spacer * 2,
   5: $spacer * 3,
 );
+
+@each $key, $value in $spacers {
+
+  $vars: map-merge((
+    --spacing-#{$key}: #{$value}
+  ), $vars);
+}
+
 // #endregion
 
 // #region Colours
