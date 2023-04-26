@@ -238,7 +238,7 @@
 
       <p><strong>Default – up to 576px</strong> <br>Scales to/from <strong>375px</strong> <br>This is the default breakpoint that will be visible on mobile devices.</p>
       <p><strong>Small (sm) – 576px and over</strong> <br>Scales to/from <strong>768px</strong> <br>This will be visible on landscape mobile and tablet devices.</p>
-      <p><strong>Medium (md) – 992px and over</strong> <br>Scales upto <strong>11280px</strong> <br>This will be visible on landscape tablet and desktop devices.</p>
+      <p><strong>Medium (md) – 992px and over</strong> <br>Scales upto <strong>1280px</strong> <br>This will be visible on landscape tablet and desktop devices.</p>
     </div>
     
     <div class="bg-admin version-control">
