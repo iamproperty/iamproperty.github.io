@@ -17,7 +17,7 @@ $grid-breakpoints: (
 
 $device-xs-width: 375;
 $device-sm-width: 768;
-$device-md-width: 1440;
+$device-md-width: 1280;
 
 $container-max-widths: (
   sm: 0,
@@ -27,9 +27,11 @@ $container-max-widths: (
 $grid-columns: 12;
 $grid-gutter-width: 1rem; // 15px
 
-$container-padding-x: 20;
-$container-padding-x-md: 60;
+$container-padding-x: 24;
+$container-padding-x-sm: 40;
+$container-padding-x-md: 84;
 $container-padding: var(--container-padding-top) rem($container-padding-x) var(--container-padding-bottom) rem($container-padding-x);
+$container-padding-sm: var(--container-padding-top) rem($container-padding-x-sm) var(--container-padding-bottom) rem($container-padding-x-sm);
 $container-padding-md: var(--container-padding-top) rem($container-padding-x-md) var(--container-padding-bottom) rem($container-padding-x-md);
 
 $vars: map-merge((
@@ -38,13 +40,37 @@ $vars: map-merge((
   "--container-padding-x": #{rem($container-padding-x)},
   "--container-padding-x-md": #{rem($container-padding-x-md)},
   "--container-padding": $container-padding,
+  "--container-padding-sm": $container-padding-sm,
   "--container-padding-md": $container-padding-md
 ), $vars);
+
+$varsSM: map-merge((
+  "--container-padding": var(--container-padding-sm),
+  "--container-padding-x": var(--container-padding-x-sm)
+), $varsSM);
 
 $varsMD: map-merge((
   "--container-padding": var(--container-padding-md),
   "--container-padding-x": var(--container-padding-x-md)
 ), $varsMD);
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .5,
+  2: $spacer,
+  3: $spacer * 1.5,
+  4: $spacer * 2,
+  5: $spacer * 3,
+);
+
+@each $key, $value in $spacers {
+
+  $vars: map-merge((
+    --spacing-#{$key}: #{$value}
+  ), $vars);
+}
+
 // #endregion
 
 // #region Colours

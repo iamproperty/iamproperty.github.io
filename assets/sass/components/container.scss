@@ -8,11 +8,11 @@
 
   margin-left: auto;
   margin-right: auto;
-  padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom) var(--container-padding-x);
+  padding: var(--container-padding);
   width: 100%;
 
   &:not(.container-fluid) {
-    max-width: rem(1440);
+    max-width: rem(1280);
   }
   
   .container:not(.container-xs-breakout) {
@@ -23,13 +23,13 @@
   }
 
   &[class*="bg-"] {
-    --container-padding-top: #{rem(48)};
-    --container-padding-bottom: #{rem(32)};
+    padding-top: #{rem(48)};
+    padding-bottom: #{rem(32)};
   }
 
   &[class*="bg-"] + .container:not([class*="bg-"]) {
 
-    --container-padding-top: #{rem(32)};
+    padding-top: #{rem(32)};
   }
 
 

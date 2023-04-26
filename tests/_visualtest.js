@@ -27,7 +27,7 @@ module.exports = {
         const tabletImage = await page.screenshot({ fullPage: true });
         expect(tabletImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 
-        await page.setViewport({ width: 1440, height: 800 })
+        await page.setViewport({ width: 1280, height: 800 })
         const desktopImage = await page.screenshot({ fullPage: true });
         expect(desktopImage).toMatchImageSnapshot({ allowSizeMismatch: true, customDiffConfig: { threshold: 0.5 } });
 

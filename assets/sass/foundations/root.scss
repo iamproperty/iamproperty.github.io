@@ -10,6 +10,13 @@
   }
 
   // Add in media query based updates to the global vars like updating the heading 1 font size
+  @include media-breakpoint-up(sm) {
+    
+    @each $var, $value in $varsSM {
+      #{$var}: #{$value};
+    }
+  }
+
   @include media-breakpoint-up(md) {
     
     @each $var, $value in $varsMD {
