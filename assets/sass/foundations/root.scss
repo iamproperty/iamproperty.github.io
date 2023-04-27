@@ -50,7 +50,7 @@
   }
 
   body .text-primary {
-    color: white!important;
+    color: #{$colour-inverted}!important;
   }
 
   body .bg-white {
@@ -100,7 +100,7 @@
       
       @include invert-colours();
     }
-    color: white;
+    color: #{$colour-inverted};
   }
 
   // Only update the the colour of the underline on dark backgrounds except the primary as the secondary colour looks good on it
@@ -109,7 +109,7 @@
   .bg-black:not(.prevent-invert),
   .invert-colours {
     
-    --colour-underline: white;
+    --colour-underline: #{$colour-inverted};
   }
 }
 
@@ -123,8 +123,8 @@
       
       @include invert-colours();
     }
-    color: white;
-    --colour-underline: white;
+    color: #{$colour-inverted};
+    --colour-underline: #{$colour-inverted};
   }
 
   [class*="bg-"].bg-md-transparent {

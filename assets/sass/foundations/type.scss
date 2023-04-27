@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "../_func.scss" as *;
 
 /* Duplicated from bootstrap reboot so that the type file will compile */
@@ -15,100 +16,135 @@ small {
 
 // #region headings
 %heading {
-  clear: both;
-  @include var(font-weight,--heading-weight);
-  @include var(font-family, --font-heading);
-  @include var(color,--colour-heading);
-  color: var(--colour-heading,var(--colour-primary));
-  display: block;
-  text-indent: -0.04em;
-  letter-spacing: -0.01em;
-
+  // From bootstrap reboot
   margin-top: 0; // 1
   margin-bottom: $headings-margin-bottom;
+  font-family: $headings-font-family;
   font-style: $headings-font-style;
+  font-weight: $headings-font-weight;
   line-height: $headings-line-height;
+  color: $headings-color;
+  // END:Bootstap reboot
+  clear: both;
+  display: block;
+  padding-bottom: 2rem;
 }
 
-.h1 {
-  @include font-size($h1-font-size);
+:is(.h1, h1) {
+  font-size: rem(map-get($heading-sizes,"h1_fs"));
+  line-height: rem(map-get($heading-sizes,"h1_lh"));
+  padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
+
+  @include media-breakpoint-up(sm) {
+
+    font-size: rem(map-get($heading-sizes,"h1_fs_sm"));
+    line-height: rem(map-get($heading-sizes,"h1_lh_sm"));
+    padding-bottom: rem(map-get($heading-sizes,"h1_pb_sm"));
+  }
 }
 
-.h2 {
-  @include font-size($h2-font-size);
+:is(h2, .h2) {
+  font-size: rem(map-get($heading-sizes,"h2_fs"));
+  line-height: rem(map-get($heading-sizes,"h2_lh"));
+  padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
+
+  @include media-breakpoint-up(sm) {
+
+    font-size: rem(map-get($heading-sizes,"h2_fs_sm"));
+    line-height: rem(map-get($heading-sizes,"h2_lh_sm"));
+    padding-bottom: rem(map-get($heading-sizes,"h2_pb_sm"));
+  }
 }
 
-.h3 {
-  @include font-size($h3-font-size);
+:is(h3, .h3) {
+  font-size: rem(map-get($heading-sizes,"h3_fs"));
+  line-height: rem(map-get($heading-sizes,"h3_lh"));
+  padding-bottom: rem(map-get($heading-sizes,"h3_pb"));
+  max-width: var(--content-max-width);
+
+  @include media-breakpoint-up(sm) {
+
+    font-size: rem(map-get($heading-sizes,"h3_fs_sm"));
+    line-height: rem(map-get($heading-sizes,"h3_lh_sm"));
+    padding-bottom: rem(map-get($heading-sizes,"h3_pb_sm"));
+  }
 }
 
-.h4 {
-  @include font-size($h4-font-size);
+:is(.h4, h4, .h5, h5, .h6, h6)  {
+  font-size: rem(map-get($heading-sizes,"h4_fs"));
+  line-height: rem(map-get($heading-sizes,"h4_lh"));
+  padding-bottom: rem(map-get($heading-sizes,"h4_pb"));
+  max-width: var(--content-max-width);
+
+  /* The values for mobile and tablet are exactly the same, but if that changes this block needs to be re-instated 
+  @include media-breakpoint-up(sm) {
+
+    font-size: rem(map-get($heading-sizes,"h4_fs_sm"));
+    line-height: rem(map-get($heading-sizes,"h4_lh_sm"));
+    padding-bottom: rem(map-get($heading-sizes,"h4_pb_sm"));
+  }
+  */
 }
 
-.h5 {
-  @include font-size($h5-font-size);
-}
-
-.h6 {
-  @include font-size($h6-font-size);
-}
 
 @include is('h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4'){
   
   @extend %heading;
 }
 
-@include is('.display-1,.display-2, .display-3, .display-4') {
-
-  font-size: var(--fs-display);
-}
 
 // #endregion
 
 p {
+  font-size: rem(map-get($heading-sizes,"body_fs"));
+  line-height: rem(map-get($heading-sizes,"body_lh"));
+  padding-bottom: rem(map-get($heading-sizes,"body_end_pb"));
+  max-width: var(--content-max-width);
+  margin-bottom: 0;
+}
+
+p:has(+ p) {
+  padding-bottom: rem(map-get($heading-sizes,"body_pb"));
+}
+
+@include is('.lead, .strapline'){
+  font-size: rem(map-get($heading-sizes,"lead_fs"));
+  line-height: rem(map-get($heading-sizes,"lead_lh"));
+  padding-bottom: rem(map-get($heading-sizes,"lead_pb"));
+  max-width: var(--content-max-width);
+  font-weight: 700;
+}
+
+.small {
+  font-size: rem(map-get($heading-sizes,"small_fs"));
+  line-height: rem(map-get($heading-sizes,"small_lh"));
+  padding-bottom: rem(map-get($heading-sizes,"small_pb"));
   max-width: var(--content-max-width);
 }
 
-p + p {
-  margin-top: rem(-16);
-}
 
-.strapline {
-  @include var(font-size,--fs-strapline);
-  @include var(font-family, --font-heading);
-  @include var(color,--colour-secondary);
-  line-height: 1.2;
-  font-weight: 700;
-  margin-bottom: clamp(1rem,0.5em,0.5em);
-  //text-shadow: ;
 
-  h1 + &,
-  .h1 + & {
-    margin-top: -0.5rem;
-    margin-bottom: 2rem;
-  }
-}
 
-.lead {
-  @include var(font-size,--fs-strapline);
-  @include var(font-family, --font-heading);
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 3rem;
-  @include var(color,--colour-heading);
-}
+
+
+
+
+
+
+
+
 
 blockquote {
 
   quotes: "“" "”" "‘" "’";
-  margin-bottom: 1rem;
+  padding-bottom: rem(48);
+  overflow: hidden;
 
   p {
-    @include var(font-size,--fs-4);
-    @include var(color,--colour-heading);
-    margin-top: 0;
-    margin-bottom: 1rem;
+    font-size: rem(24);
+    line-height: rem(32);
+    max-width: rem(870);
+    padding-bottom: 0;
   }
 
   & p:first-child:before {
@@ -119,19 +155,24 @@ blockquote {
   }
 
   cite {
-    @include var(font-size,--fs-5);
-    @include var(color,--colour-heading);
-    font-style: normal;
+    font-size: rem(18);
+    line-height: rem(32);
+    padding-bottom: 0;
     font-weight: bold;
+    font-style: normal;
   }
 }
 
 .stat {
-  font-size: rem(48);
-  @extend %heading;
+  font-size: rem(64);
+  line-height: rem(72);
+  font-weight: bold;
+  color: $headings-color;
+  display: block;
+
   text-decoration: underline;
-  text-underline-offset: 1rem;
+  text-underline-offset: 0.75rem;
   text-decoration-color: var(--colour-secondary);
-  text-decoration-thickness: 0.4rem;
-  margin-bottom: 2rem;
+  text-decoration-thickness: rem(4);
+  margin-bottom: rem(64);
 }

@@ -1,3 +1,4 @@
+// @ts-nocheck
 const routes = [
   { name: 'Home', path: '/', component: () => import('./views/Home.vue') },
   { name: 'Principles', path: '/principles', component: () => import('./views/Principles.vue'), meta: { title: 'Principles | iamkey' } },
@@ -56,7 +57,7 @@ const routes = [
       },
       {
         path: 'type',
-        name: 'Type',
+        name: 'Typography',
         meta: {
           title: 'Typography | Foundations | iamkey'
         },

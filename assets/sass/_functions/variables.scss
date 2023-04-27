@@ -1,3 +1,4 @@
+@use "sass:map";
 @import "../../../node_modules/bootstrap/scss/_variables.scss";
 @import "../../../node_modules/bootstrap/scss/_maps.scss";
 
@@ -86,7 +87,7 @@ $dark:          #46003c;
 
 
 // Functional/state variables 
-$colour-body: #6f6f6f;
+$colour-body: #595959;
 $colour-muted: #9d9d9d;
 $colour-border: #6f6f6f;
 $colour-link: $primary;
@@ -94,6 +95,8 @@ $colour-focus: #000000;
 $colour-hover: #000000;
 $colour-active: $success;
 $colour-selected: $info;
+$body-color: $colour-body;
+$colour-inverted: #FCFCFC;
 
 $colors: ();
 $grays: ();
@@ -168,7 +171,9 @@ $non-theme-colors: map-merge((
   "focus":            $colour-focus,
   "hover":            $colour-hover,
   "active":           $colour-active,
-  "selected":         $colour-selected
+  "selected":         $colour-selected,
+  "body": $colour-body,
+  "inverted": $colour-inverted
 ), $non-theme-colors);
 
 @each $color, $value in $non-theme-colors {
@@ -180,7 +185,6 @@ $non-theme-colors: map-merge((
 }
 
 $vars: map-merge((
-  "--colour-body-theme":  rgba(to-rgb($colour-body),var(--alpha,1)),
   "--colour-white-theme": rgba(to-rgb(#ffffff),var(--alpha,1)),
   "--colour-black-theme": rgba(to-rgb(#000000),var(--alpha,1)),
   "--colour-body":  rgba(to-rgb($colour-body),var(--alpha,1)),
@@ -202,17 +206,16 @@ $aspect-ratios: (
 );
 // #endregion
 
-// #region fonts
+// #region Type
 
-$font-body: 'qanelasmedium', arial, sans-serif;
-$font-heading: 'qanelas_softextrabold', arial, sans-serif;
+$font-body: 'Qanelas', arial, sans-serif;
+$font-heading: 'Qanelas', arial, sans-serif;
 
 $fonts: ();
 $fonts: map-merge((
   "heading":   $font-heading,
   "body":   $font-body
 ), $fonts);
-
 
 @each $font, $value in $fonts {
 
@@ -221,83 +224,82 @@ $fonts: map-merge((
   ), $vars);
 }
 
-// #endregion
 
-// #region Type
-
-$type-scale-1: #{rem(100)};
-$type-scale-2: #{rem(60)};
-$type-scale-3: #{rem(40)};
-$type-scale-4: #{rem(32)};
-$type-scale-5: #{rem(28)};
-$type-scale-6: #{rem(16)};
-$type-scale-7: #{rem(14)};
-
-$font-sizes: (
-  'display': $type-scale-3,
-  1: $type-scale-3,
-  2: $type-scale-4,
-  3: $type-scale-5,
-  4: $type-scale-6,
-  5: $type-scale-6,
-  6: $type-scale-6,
-  'badge': $badge-font-size,
-  'small': $type-scale-7,
-  'strapline': $type-scale-6
+/* Headings variables are setup this way so that we can export them into the vue documentation */
+$heading-sizes: (
+  /* H1 */
+  "h1_fs": 48,
+  "h1_lh": 56,
+  "h1_pb": 48,
+  "h1_fs_sm": 64,
+  "h1_lh_sm": 72,
+  "h1_pb_sm": 64,
+  /* H2 */
+  "h2_fs": 36,
+  "h2_lh": 44,
+  "h2_pb": 40,
+  "h2_fs_sm": 48,
+  "h2_lh_sm": 56,
+  "h2_pb_sm": 48,
+  /* H3 */
+  "h3_fs": 28,
+  "h3_lh": 36,
+  "h3_pb": 40,
+  "h3_fs_sm": 32,
+  "h3_lh_sm": 40,
+  "h3_pb_sm": 40,
+  /* H4 */
+  "h4_fs": 24,
+  "h4_lh": 32,
+  "h4_pb": 32,
+  "h4_fs_sm": 24,
+  "h4_lh_sm": 32,
+  "h4_pb_sm": 32,
+  "lead_fs": 18,
+  "lead_lh": 28,
+  "lead_pb": 48,
+  "body_fs": 16,
+  "body_lh": 24,
+  "body_pb": 48 - 24,
+  "body_end_pb": 48,
+  "small_fs": 14,
+  "small_lh": 24,
+  "small_pb": 48,
 );
 
-@each $size, $value in $font-sizes {
+/* H2 */
+$h1-font-size: rem(map-get($heading-sizes,"h1_fs"));
+$h2-font-size: rem(map-get($heading-sizes,"h2_fs"));
+$h3-font-size: rem(map-get($heading-sizes,"h3_fs"));
+$h4-font-size: rem(map-get($heading-sizes,"h4_fs"));
+$h5-font-size: rem(map-get($heading-sizes,"h4_fs"));
+$h6-font-size: rem(map-get($heading-sizes,"h4_fs"));
 
-  $vars: map-merge((
-    --fs-#{$size}: #{$value}
-  ), $vars);
-}
-
-
-$h1-font-size: var(--fs-1);
-$h2-font-size: var(--fs-2);
-$h3-font-size: var(--fs-3);
-$h4-font-size: var(--fs-4);
-$h5-font-size: var(--fs-5);
-$h6-font-size: var(--fs-6);
-
-$headings-margin-bottom: clamp(1rem,0.5em,0.5em);
-$headings-font-style: normal;
-$headings-line-height: clamp(1em,2.5rem,clamp(1.5em,1rem,1.2em));
-$display-line-height: $headings-line-height;
+$heading-weight: 700;
 
 @if $compatible == 'true' {
   $headings-font-family: $font-heading;
-  $headings-font-weight: 700;
+  $headings-font-weight: $heading-weight;
   $headings-color: $primary;
 }
 @else {
   $headings-font-family: var(--font-heading);
   $headings-font-weight: var(--heading-weight);
-  $headings-color: var(--colour-primary);
+  $headings-color: var(--colour-heading);
 }
 
-$font-md-sizes: (
-  'display': $type-scale-1,
-  1: $type-scale-2,
-  2: $type-scale-3,
-  3: $type-scale-4,
-  4: $type-scale-5,
-  'strapline': $type-scale-5
-);
+$headings-margin-bottom: 0;
+$headings-font-style: normal;
+$headings-line-height: 2rem;
+$display-line-height: $headings-line-height;
 
-@each $size, $value in $font-md-sizes {
-
-  $varsMD: map-merge((
-    --fs-#{$size}: #{$value}
-  ), $varsMD);
-}
 
 $vars: map-merge((
-  --heading-weight: 700
+  --heading-weight: $heading-weight
 ), $vars);
 
-$content-max-width: rem(820);
+$content-max-width-px: 800;
+$content-max-width: rem($content-max-width-px);
 $paragraph-margin-bottom: 2rem;
 
 // #endregion 
