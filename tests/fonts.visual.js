@@ -20,7 +20,7 @@ describe(`Body font class`, () => {
       (el) => window.getComputedStyle(el).getPropertyValue("font-family")
     )
 
-    expect(fontFamily).toBe('qanelasmedium, arial, sans-serif');
+    expect(fontFamily).toBe('Qanelas, arial, sans-serif');
     await browser.close()
   });
 })
@@ -39,7 +39,7 @@ describe(`Heading font class`, () => {
       (el) => window.getComputedStyle(el).getPropertyValue("font-family")
     )
 
-    expect(fontFamily).toBe('qanelas_softextrabold, arial, sans-serif');
+    expect(fontFamily).toBe('Qanelas, arial, sans-serif');
     await browser.close()
   });
 })

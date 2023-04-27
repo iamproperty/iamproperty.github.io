@@ -108,5 +108,5 @@
     "type": "git",
     "url": "git://github.com/iamproperty/iamproperty.github.io.git"
   },
-  "localURL": "http://192.168.0.69:5173"
+  "localURL": "http://172.23.48.1:5173"
 }
