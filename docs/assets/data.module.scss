@@ -75,13 +75,26 @@
 }
 
 
+
 // Export the SCSS vars
 :export {
+  // Headings
+  @each $var, $value in $heading-sizes {
+    #{$var}: #{$value}
+  }
+
+  @each $var, $value in $heading-sizes {
+    #{$var}_rem: #{rem($value)}
+  }
+
+  text_mw: $content-max-width-px;
+  text_mw_rem: $content-max-width;
+
   @each $color, $value in $theme-colors {
-    themeColour-#{$color}: #{$value}
+    themeColour_#{$color}: #{$value}
   }
   @each $color, $value in $non-theme-colors {
-    nonThemeColour-#{$color}: #{$value}
+    nonThemeColour_#{$color}: #{$value}
   }
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};

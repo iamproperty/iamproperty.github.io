@@ -6,7 +6,7 @@
 
       <a :href="value.link" v-if="value.link">View {{value.title}}</a>
       <div :class="`snapshot__item ${value.bg ? 'bg-'+value.bg : ''}`">
-        <span class="h6 snapshot__title">{{value.title}}</span>
+        <span class="lead snapshot__title">{{value.title}}</span>
         <span class="stat">{{value.number}}</span>
       </div>
     </div>

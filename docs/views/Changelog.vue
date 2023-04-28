@@ -3,9 +3,15 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.4.6</h2>
+      <h2>V3.4.6--alpha</h2>
       <ul>
-        <li>Update the spacing classes</li>
+        <li>Update the typography page</li>
+        <li>Update the general font sizes and line heights</li>
+        <li>Update the inverted colour</li>
+        <li>Update the spacing page</li>
+        <li>Add spacing CSS custom properties</li>
+        <li>Add spacing Sass function</li>
+        <li>Update the spacing classes values</li>
       </ul>
 
       <h2>V3.1</h2>
