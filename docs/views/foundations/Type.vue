@@ -129,7 +129,7 @@
             <div class="col-12 col-sm-7 mb-2">
 
               <p class="lead pb-1">BODY</p>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.<span class="lineheight-demo" :style="`height:${$shared.cssVars.body_pb_rem}!important`"></span></p>
 
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.<span class="lineheight-demo" :style="`height:${$shared.cssVars.body_end_pb_rem}!important`"></span></p>
 
