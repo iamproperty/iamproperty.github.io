@@ -40,14 +40,6 @@ const routes = [
         component: () => import('./views/foundations/Colours.vue')
       },
       {
-        path: 'fonts',
-        name: 'Fonts',
-        meta: {
-          title: 'Fonts | Foundations | iamkey'
-        },
-        component: () => import('./views/foundations/Fonts.vue')
-      },
-      {
         path: 'icons',
         name: 'Icons',
         meta: {

@@ -29,6 +29,7 @@
   --marker-bg: var(--colour-secondary);
   cursor: pointer;
   position: relative;
+  max-width: 100%;
 
   .badge {
     vertical-align: bottom;
