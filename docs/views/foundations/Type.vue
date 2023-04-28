@@ -4,7 +4,7 @@
       <h1>Typography</h1>
     </DSHeader>
 
-    <div class="container">
+    <div class="container ">
       <ul class="breadcrumb mb-0 d-sm-none">
         <li><a href="/foundations">Foundations</a></li>
       </ul>
@@ -12,7 +12,7 @@
       <p class="lead">Most headings will have a max-width of {{ $shared.cssVars.text_mw_rem }} ({{$shared.cssVars.text_mw}}px) applied to aid readability, with the exception of H1 and H2, which will have an auto width.</p>
       <p class="lead">We use Qanelas font for all in-product experiences. This ensures that the UI is optimised to be highly legible, performs well, and is frictionless as you move between iamproperty products and the rest of the system.</p>
     </div>
-    <div class="container">
+    <div class="container visualtest">
       <h3>Headings - Mobile</h3>
       
       <div class="row">
@@ -57,7 +57,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container visualtest">
       <h3>Headings - Tablet and Desktop</h3>
       
       <div class="row">
@@ -159,7 +159,7 @@
 
     </div>
 
-    <div class="container">
+    <div class="container visualtest">
 
 
       <h3 class="h4 pb-2">Blockquote</h3>
@@ -171,7 +171,7 @@
       <span class="stat">3,886</span>
     </div>
 
-    <div class="container">
+    <div class="container visualtest">
 
       <h2>Typography - colour</h2>
       <div class="colour-sample">
