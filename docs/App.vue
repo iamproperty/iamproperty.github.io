@@ -72,7 +72,6 @@ export default {
   props: {
   },
   created(){
-    console.log('hi');
     
     // Global stuff
     helpers.addBodyClasses(document.body);

@@ -35,12 +35,16 @@
 </template>
 
 <script>
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Tab from '@/components/Tabs/Tab.vue'
 import Header from '@/components/Header/Header.vue'
 import VueReadme from '@/components/Header/README.md'
 import WebReadme from '~/ts/components/header/README.md'
 
 export default {
   components: {
+    Tabs,
+    Tab,
     Header,
     VueReadme,
     WebReadme
@@ -63,6 +67,7 @@ export default {
     <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
   </picture>
 </header>`
+    }
   }
 }
 </script>

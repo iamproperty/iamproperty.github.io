@@ -3,10 +3,9 @@ import App from './App.vue'
 import Standalone from './Standalone.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
-import * as helpers from '../assets/ts/modules/helpers'
 
 import audit from '../audit.json';
-  
+
 const router = createRouter({
   history: createWebHistory(),
   routes: routes
@@ -91,12 +90,3 @@ let template = window.location.pathname.startsWith('/standalone') || window.loca
 let app = createApp(template)
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
-
-
-document.addEventListener("DOMContentLoaded", function() {
-
-  // Global stuff
-  helpers.addBodyClasses(document.body);
-  helpers.addGlobalEvents(document.body);
-  helpers.checkElements(document.body);
-});
