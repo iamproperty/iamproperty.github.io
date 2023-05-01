@@ -1,6 +1,11 @@
 @use "sass:math";
+@use "sass:map";
 
 @import "../../../node_modules/bootstrap/scss/_functions.scss";
+
+@function spacing($int){
+  @return map.get($spacers, $int);
+}
 
 @function pow($x, $n) {
   $ret: 1;
@@ -139,3 +144,4 @@
 
   @return $split-arr;
 }
+

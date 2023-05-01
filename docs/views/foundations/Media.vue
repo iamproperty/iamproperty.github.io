@@ -24,7 +24,7 @@
             <img src="/code.jpeg" alt="" />
           </div>
         </div>
-        <div class="col-6 col-sm-4 col-md-3 mb-4" >
+        <div class="col-12 col-sm-4 col-md-3 mb-4" >
 
           <h3 class="h5">Circle image</h3>
           <div :class="`border-0 circle`">
