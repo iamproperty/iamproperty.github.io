@@ -29,7 +29,12 @@ small {
   padding-bottom: 2rem;
 }
 
-:where(.h1, h1) {
+@include is('h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4'){
+  
+  @extend %heading;
+}
+
+:is(.h1, h1) {
   font-size: rem(map-get($heading-sizes,"h1_fs"));
   line-height: rem(map-get($heading-sizes,"h1_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
@@ -42,7 +47,7 @@ small {
   }
 }
 
-:where(h2, .h2) {
+:is(h2, .h2) {
   font-size: rem(map-get($heading-sizes,"h2_fs"));
   line-height: rem(map-get($heading-sizes,"h2_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
@@ -55,7 +60,7 @@ small {
   }
 }
 
-:where(h3, .h3) {
+:is(h3, .h3) {
   font-size: rem(map-get($heading-sizes,"h3_fs"));
   line-height: rem(map-get($heading-sizes,"h3_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h3_pb"));
@@ -69,7 +74,7 @@ small {
   }
 }
 
-:where(.h4, h4, .h5, h5, .h6, h6)  {
+:is(.h4, h4, .h5, h5, .h6, h6)  {
   font-size: rem(map-get($heading-sizes,"h4_fs"));
   line-height: rem(map-get($heading-sizes,"h4_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h4_pb"));
@@ -83,11 +88,6 @@ small {
     padding-bottom: rem(map-get($heading-sizes,"h4_pb_sm"));
   }
   */
-}
-
-@include is('h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4'){
-  
-  @extend %heading;
 }
 // #endregion
 
