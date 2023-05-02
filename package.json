@@ -34,7 +34,9 @@
     "pull-request": "npm run test:unit && npm run test:scss && npm run visual && npm run compile && npm run audit",
     "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* dist/assets/fonts",
     "deploy:svg": "copyfiles -u 2 assets/svg/icons.svg dist/svg && copyfiles -u 2 assets/svg/logo.svg dist/svg",
-    "deploy:404": "node local_modules/create404.js"
+    "deploy:404": "node local_modules/create404.js",
+    "deploy:css": "copyfiles -u 2 assets/css/**/* dist/assets/css",
+    "deploy:js": "copyfiles -u 2 assets/js/**/* dist/assets/js"
   },
   "dependencies": {
     "bootstrap": "^5.2.0"

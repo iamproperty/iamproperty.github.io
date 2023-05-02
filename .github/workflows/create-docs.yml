@@ -46,6 +46,8 @@ jobs:
       - run: npm run deploy:svg
       - run: npm run deploy:fonts
       - run: npm run deploy:404
+      - run: npm run deploy:css
+      - run: npm run deploy:js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
