@@ -1,7 +1,9 @@
 'use strict'
+const { minify } = require('rollup-plugin-esbuild');
 //const  typescript = require('@rollup/plugin-typescript');
 
 const path = require('path')
+const fs = require('fs')
 const { babel } = require('@rollup/plugin-babel')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
@@ -39,20 +41,79 @@ if (BUNDLE) {
   )
 }
 
-const rollupConfig = {
-  input: path.resolve(__dirname, `assets/js/main.js`),
-  output: {
-    banner,
-    file: path.resolve(__dirname, `assets/js/${fileDest}.js`),
-    format: ESM ? 'esm' : 'umd',
-    globals
+plugins.push(minify());
+
+const rollupConfig = [
+  {
+    input: path.resolve(__dirname, `assets/js/bundle.js`),
+    output: {
+      banner,
+      file: path.resolve(__dirname, `assets/js/${fileDest}.js`),
+      format: ESM ? 'esm' : 'umd',
+      globals
+    },
+    external,
+    plugins
   },
-  external,
-  plugins
-}
+  {
+    input: path.resolve(__dirname, `assets/js/dynamic.js`),
+    output: {
+      banner,
+      file: path.resolve(__dirname, `assets/js/dynamic.min.js`),
+      format: ESM ? 'esm' : 'umd',
+      globals,
+      name: 'iam-dynamic'
+    },
+    external,
+    plugins: [
+      replace({
+        'process.env.NODE_ENV': '"production"',
+        preventAssignment: true,
+        'componentExt': '".component.min.js"'
+      }),
+      minify()
+    ]
+  }
+];
+
+const components = ["accordion","header"];
+
+components.forEach((component) => {
+
+  let css = '';
+
+  try {
+    css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.css`), 'utf8');
+    css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+
+  } catch (err) {
+    console.error(err);
+  }
+
+  rollupConfig.push({
+    input: path.resolve(__dirname, `assets/js/components/${component}/${component}.component.js`),
+    output: {
+      banner,
+      file: path.resolve(__dirname, `assets/js/components/${component}/${component}.component.min.js`),
+      format: 'esm',
+      globals,
+      name: `iam-${component}`
+    },
+    external,
+    plugins: [
+      replace({
+        'process.env.NODE_ENV': '"production"',
+        preventAssignment: true,
+        'loadCSS': JSON.stringify(`${css}`)
+      }),
+      minify(),
+    ]
+  })
+});
+
 
 if (!ESM) {
-  rollupConfig.output.name = 'iamkey'
+  rollupConfig[0].output.name = 'iamkey'
 }
 
 module.exports = rollupConfig

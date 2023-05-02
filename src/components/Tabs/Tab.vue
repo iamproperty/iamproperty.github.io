@@ -1,7 +1,8 @@
 <template>
-  <div class="tab" v-if="show">
+  <details class="tab">
+    <summary v-html="title"></summary>
     <slot></slot>
-  </div>
+  </details>
 </template>
 
 <script>

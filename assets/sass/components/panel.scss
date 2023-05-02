@@ -33,7 +33,7 @@
     margin-top: var(--panel-gutter);
   }
 
-  > *:last-child {
+  > *:last-child:not(details) {
     margin-bottom: var(--panel-gutter);
   }
 
@@ -49,7 +49,7 @@
 
   > .table__wrapper,
   > .note-feed > .table__wrapper,
-  > .tabs__container:first-child > .tabs > .tab > .table__wrapper {
+  > .tabs > details > .table__wrapper {
 
     margin: 0 calc(var(--panel-gutter) * -1) var(--panel-gutter) calc(var(--panel-gutter) * -1);
     padding: 0 var(--panel-gutter) 0 var(--panel-gutter);
@@ -105,8 +105,7 @@
   min-height: calc(100% - 2rem);
 }
 
-.admin-panel .admin-panel__links, 
-.admin-panel > .tabs__container:first-child > .tabs__links {
+.admin-panel .admin-panel__links {
 
   margin-top: -3px!important;
   margin-left: calc(var(--panel-gutter) * -1);

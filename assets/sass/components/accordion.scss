@@ -1,7 +1,7 @@
 @use "../_func.scss" as *;
 
 // Accordion
-.accordion {
+:is(.accordion, iam-accordion) {
   --accordion-indent: 0.75rem;
   --accordion-right-padding: 3rem;
   --accordion-y-padding: 1rem;
@@ -17,7 +17,7 @@
   }
 }
 
-.accordion-button {
+.accordion-header {
 
   padding: $accordion-button-padding-y var(--accordion-right-padding) $accordion-button-padding-y $accordion-button-padding-x;
   color: var(--colour-heading);
@@ -106,7 +106,7 @@
 }
 
 // #region Coloured summary
-summary[class*="bg-"] {
+.accordion-header[class*="bg-"] {
 
   .accordion-button {
 
@@ -149,7 +149,7 @@ summary[class*="bg-"] {
   }
 }
 
-.accordion-body {
+.accordion-item summary ~ * {
   text-align: left;
   padding: 0 $accordion-body-padding-x;
 }
@@ -157,11 +157,11 @@ summary[class*="bg-"] {
 // #region Straight edge
 .accordion--straight {
   > details > summary:not([class*="bg-"]) > .accordion-button,
-  > details > .accordion-body {
+  > details > .accordion-item summary ~ * {
     padding-left: 0!important;
   }
 
-  > details > .accordion-body {
+  .accordion-item summary ~ * {
     padding-right: 0!important;
   }
 }
@@ -196,3 +196,5 @@ summary[class*="bg-"] {
   }
 }
 // #endregion
+
+
