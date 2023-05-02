@@ -10,7 +10,7 @@
     "dev": "npm run copy && vite --host",
     "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib && npm run compile",
     "prepack": "npm run build",
-    "build:docs": "npm run compile && npm run copy && vue-tsc --noEmit && vite build",
+    "build:docs": "npm run copy && vue-tsc --noEmit && vite build",
     "preview": "vite preview --host",
     "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
@@ -32,11 +32,11 @@
     "test": "npm run test:unit && npm run test:scss",
     "visual": "jest tests --updateSnapshot",
     "pull-request": "npm run test:unit && npm run test:scss && npm run visual && npm run compile && npm run audit",
-    "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* dist/assets/fonts",
-    "deploy:svg": "copyfiles -u 2 assets/svg/icons.svg dist/svg && copyfiles -u 2 assets/svg/logo.svg dist/svg",
+    "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* public/assets/fonts",
+    "deploy:svg": "copyfiles -u 2 assets/svg/icons.svg public/svg && copyfiles -u 2 assets/svg/logo.svg public/svg",
     "deploy:404": "node local_modules/create404.js",
-    "deploy:css": "copyfiles -u 2 assets/css/**/* dist/assets/css",
-    "deploy:js": "copyfiles -u 2 assets/js/**/* dist/assets/js"
+    "deploy:css": "copyfiles -u 2 assets/css/**/* public/assets/css",
+    "deploy:js": "copyfiles -u 2 assets/js/**/* public/assets/js"
   },
   "dependencies": {
     "bootstrap": "^5.2.0"
