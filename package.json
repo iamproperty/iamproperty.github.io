@@ -8,7 +8,7 @@
   "version": "3.4.6--alpha",
   "scripts": {
     "dev": "npm run copy && vite --host",
-    "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib && npm run compile",
+    "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
     "prepack": "npm run build",
     "build:docs": "npm run compile && npm run copy && vue-tsc --noEmit && vite build",
     "preview": "vite preview --host",
@@ -23,7 +23,7 @@
     "copy:img": "copyfiles -u 2 assets/img/**/* public/img",
     "copy:fonts": "copyfiles -u 2 assets/fonts/**/* public/fonts",
     "copy:icons": "copyfiles -u 2 assets/favicons/**/* public/",
-    "copy:css": "copyfiles -u 2 assets/css/**/* public/assets/css",
+    "copy:css": "copyfiles -u 1 assets/css/**/* public/assets/css && copyfiles -u 2 assets/css/**/* public/assets/css",
     "copy:js": "copyfiles -u 2 assets/js/**/* public/assets/js",
     "copy": "npm run copy:svg && npm run copy:img && npm run copy:fonts && npm run copy:icons && npm run copy:css && npm run copy:js",
     "audit": "node local_modules/audit.js",
