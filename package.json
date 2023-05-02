@@ -10,7 +10,7 @@
     "dev": "npm run copy && vite --host",
     "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib && npm run compile",
     "prepack": "npm run build",
-    "build:docs": "npm run copy && vue-tsc --noEmit && vite build",
+    "build:docs": "npm run compile && npm run copy && vue-tsc --noEmit && vite build",
     "preview": "vite preview --host",
     "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
@@ -23,7 +23,9 @@
     "copy:img": "copyfiles -u 2 assets/img/**/* public/img",
     "copy:fonts": "copyfiles -u 2 assets/fonts/**/* public/fonts",
     "copy:icons": "copyfiles -u 2 assets/favicons/**/* public/",
-    "copy": "npm run copy:svg && npm run copy:img && npm run copy:fonts && npm run copy:icons",
+    "deploy:css": "copyfiles -u 2 assets/css/**/* public/assets/css",
+    "deploy:js": "copyfiles -u 2 assets/js/**/* public/assets/js",
+    "copy": "npm run copy:svg && npm run copy:img && npm run copy:fonts && npm run copy:icons && npm run copy:css && npm run copy:js",
     "audit": "node local_modules/audit.js",
     "gen:email": "sass assets/sass/email.scss assets/css/email.min.css --style=compressed && node local_modules/email-css.js",
     "gen:error": "sass assets/sass/error.scss assets/css/error.min.css --style=compressed && node local_modules/error-css.js",
@@ -34,9 +36,7 @@
     "pull-request": "npm run test:unit && npm run test:scss && npm run visual && npm run compile && npm run audit",
     "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* public/assets/fonts",
     "deploy:svg": "copyfiles -u 2 assets/svg/icons.svg public/svg && copyfiles -u 2 assets/svg/logo.svg public/svg",
-    "deploy:404": "node local_modules/create404.js",
-    "deploy:css": "copyfiles -u 2 assets/css/**/* public/assets/css",
-    "deploy:js": "copyfiles -u 2 assets/js/**/* public/assets/js"
+    "deploy:404": "node local_modules/create404.js"
   },
   "dependencies": {
     "bootstrap": "^5.2.0"
