@@ -1,0 +1,122 @@
+// @ts-nocheck
+function createAppliedFilters(filters) {
+
+  const form = filters.closest('form');
+
+  if(!form)
+    return false;
+
+  form.addEventListener('change', function(event){
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter]')){
+
+      let input = event.target.closest('input[data-filter]');
+      let inputName = input.getAttribute('name');
+      let filter = filters.querySelector(`[data-name="${inputName}"]`);
+      let filterText = input.getAttribute('data-filter');
+      
+      if(!filter) {
+        filter = document.createElement('button');
+        filters.appendChild(filter);
+      }
+      
+      filter.setAttribute('type','button')
+      filter.classList.add('filter');
+      filter.setAttribute('data-name',inputName);
+
+      filter.innerHTML = filterText.replace('$value', input.value);
+
+      // If the value
+      if(!input.value)
+        filter.remove();
+
+
+
+      // If input has an ancestor with data-filter and all of inputs in that parent have been filled in then we need to transform the filter
+      if(input.parentNode.closest('[data-filter]')){
+        let parent = input.parentNode.closest('[data-filter]');
+        let allValuesSet = true;
+        inputName = "";
+
+        parent.querySelectorAll('input').forEach((element,index) => {
+
+          let name = element.getAttribute('name');
+
+          // create a joined inputname for the parent filter
+          inputName += `${index!=0?',':''}${name}`;
+
+          if(filters.querySelector(`[data-name="${name}"]`))
+            filters.querySelector(`[data-name="${name}"]`).remove();
+
+          if(element.value){
+
+            let childFilter = document.createElement('button');
+            childFilter.setAttribute('type','button')
+            childFilter.classList.add('filter');
+            childFilter.setAttribute('data-name',name);
+            childFilter.innerHTML = filterText.replace('$value', element.value);
+            filters.appendChild(childFilter);
+          }
+          else
+            allValuesSet = false;
+        });
+
+        if(filters.querySelector(`[data-name="${inputName}"]`))
+          filters.querySelector(`[data-name="${inputName}"]`).remove();
+
+        if(allValuesSet){
+
+          let newFilterText = parent.getAttribute('data-filter');
+          parent.querySelectorAll('input').forEach((element,index) => {
+            
+            let name = element.getAttribute('name');
+
+            // Remove all the child filter tags
+            if(filters.querySelector(`[data-name="${name}"]`))
+              filters.querySelector(`[data-name="${name}"]`).remove();
+
+            newFilterText = newFilterText.replace(`$${index+1}`,element.value);
+          });
+
+          let parentFilter = document.createElement('button');
+          parentFilter.setAttribute('type','button')
+          parentFilter.classList.add('filter');
+          parentFilter.setAttribute('data-name',inputName);
+          parentFilter.innerHTML = newFilterText;
+          filters.appendChild(parentFilter);
+        }
+
+
+      }
+
+    };
+    
+  }, false);
+
+  filters.addEventListener('click', function(event){
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('.filter')){
+      let filter = event.target.closest('.filter');
+      let names = filter.getAttribute('data-name').split(',')
+
+      for(var t=0;t<names.length;t++){
+        let name = names[t];
+        let inputs = form.querySelectorAll(`[name="${name}"]`);
+        for(var i=0;i<inputs.length;i++){
+          let input = inputs[i];
+
+          if(input.getAttribute('type') != 'radio')
+            inputs[i].value = "";
+          inputs[i].checked = false;
+        }
+      }
+
+      filter.remove();
+    }
+
+  }, false);
+
+
+}
+
+export default createAppliedFilters;
