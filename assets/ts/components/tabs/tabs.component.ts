@@ -1,6 +1,13 @@
 // @ts-nocheck
 import tabs from "../../modules/tabs";
 
+// Data layer Web component created
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  "event": "customElementRegistered",
+  "element": "tabs"
+});
+
 class iamTabs extends HTMLElement {
 
   constructor(){

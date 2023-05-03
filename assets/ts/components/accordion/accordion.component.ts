@@ -1,6 +1,13 @@
 // @ts-nocheck
 import accordion from "../../modules/accordion";
 
+// Data layer Web component created
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  "event": "customElementRegistered",
+  "element": "accordion"
+});
+
 const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
 
 class iamAccordion extends HTMLElement {

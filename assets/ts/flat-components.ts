@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Modules
 import * as helpers from '../js/modules/helpers'
+import createDataLayer from '../js/modules/data-layer'
 import nav from '../js/modules/nav'
 import table from '../js/modules/table'
 import accordion from './modules/accordion'
@@ -13,6 +14,8 @@ import tabs from '../js/modules/tabs'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
+
+  createDataLayer();
 
   // Global stuff
   helpers.addBodyClasses(document.body);
