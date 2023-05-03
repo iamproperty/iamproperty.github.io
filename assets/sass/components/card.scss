@@ -25,6 +25,11 @@ a.card {
   overflow: hidden;
   max-width: rem(925);
 
+  .card-title {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
   &:hover,
   &:focus {
     --spread: #{rem(6)};
@@ -109,6 +114,7 @@ a.card {
   color: var(--colour-body);
 
   *:last-child {
+    padding-bottom: 0;
     margin-bottom: 0;
   }
 }
@@ -159,6 +165,7 @@ a.card {
 
   .card-title {
     margin-bottom: 0;
+    padding-bottom: 0;
     padding-left: 2em;
     position: relative;
 

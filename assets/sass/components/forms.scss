@@ -1,3 +1,5 @@
+@use "../_func" as *;
+
 .form-control__wrapper {
   margin-bottom: 1.5rem;
   max-width: $content-max-width;

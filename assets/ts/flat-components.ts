@@ -1,22 +1,23 @@
 // @ts-nocheck
 // Modules
-import * as helpers from './modules/helpers'
-import nav from './modules/nav'
-import table from './modules/table'
+import * as helpers from '../js/modules/helpers'
+import nav from '../js/modules/nav'
+import table from '../js/modules/table'
 import accordion from './modules/accordion'
-import testimonial from './modules/testimonial'
-import carousel from './modules/carousel'
-import form from './modules/form'
-import youtubeVideo from './modules/youtubevideo'
-import modal from './modules/modal'
+import testimonial from '../js/modules/testimonial'
+import carousel from '../js/modules/carousel'
+import form from '../js/modules/form'
+import youtubeVideo from '../js/modules/youtubevideo'
+import modal from '../js/modules/modal'
+import tabs from '../js/modules/tabs'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
 
+  // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
   helpers.checkElements(document.body);
-  console.log('test.js');
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
@@ -53,6 +54,10 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {
     new youtubeVideo(arrayElement);
   });
+  // Tabs
+  Array.from(document.querySelectorAll('.tabs')).forEach((arrayElement) => {
+    tabs(arrayElement);
+  });
 
 
   window.addEventListener('hashchange', function() {
@@ -60,9 +65,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const hash = location.hash.replace('#','');
     const label = document.querySelector(`label[for="${hash}"]`);
 
-    if (label instanceof HTMLElement) {
+    if (label instanceof HTMLElement)
       label.click();
-    }
 
   }, false);
 });

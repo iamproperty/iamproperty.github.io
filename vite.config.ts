@@ -30,12 +30,20 @@ export default ({ mode }) => {
     } : {},
     resolve:{
       alias:{
-        '@/' : `${resolve(__dirname, 'src')}/`
+        '@/' : `${resolve(__dirname, 'src')}/`,
+        '~/' : `${resolve(__dirname, 'assets')}/`
       },
     },
     plugins: [
       Vue({
-        include: [/\.vue$/, /\.md$/], // <--
+        include: [/\.vue$/, /\.md$/],
+        template: {
+          compilerOptions: {
+            isCustomElement: (tag) => {
+              return tag.startsWith('iam-') // (return true)
+            }
+          }
+        }
       }),
       Markdown()
     ]

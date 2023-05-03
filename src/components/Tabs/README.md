@@ -1,5 +1,3 @@
-### Usage
-
 ```
 <Tabs class="visualtest">
   <Tab title="Tab content 1">

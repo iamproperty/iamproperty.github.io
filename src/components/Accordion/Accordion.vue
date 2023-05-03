@@ -1,22 +1,24 @@
 <template>
-  <div class="container accordion" ref="wrapper">
+  <iam-accordion ref="wrapper">
     <slot></slot>
-  </div>
+  </iam-accordion>
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/components/accordion.scss";
+//@import "../../../assets/sass/components/accordion.scss";
 </style>
 
 <script>
-import accordion from '../../../assets/ts/modules/accordion'
+import iamAccordion from '../../../assets/ts/components/accordion/accordion.component'
+
+if (!window.customElements.get('iam-accordion'))
+  window.customElements.define('iam-accordion', iamAccordion);
 
 export default {
   name: 'Accordion',
   props: {
   },
   mounted(){
-    accordion(this.$refs.wrapper);
   }
 }
 </script>

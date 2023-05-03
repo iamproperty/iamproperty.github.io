@@ -60,12 +60,12 @@
   }
 
   > * {
-    max-width: rem(math.div(1320,2) - 96);
+    max-width: rem(math.div(1112,2) - 96);
     order: 1;
   }
 
   > img {
-    max-width: min(100%, #{rem(math.div(1320,2) - 96)});
+    max-width: min(100%, #{rem(math.div(1112,2) - 96)});
     margin-bottom: 2rem;
   }
 

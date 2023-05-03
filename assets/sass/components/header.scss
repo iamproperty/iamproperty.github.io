@@ -5,6 +5,10 @@
   margin-bottom: rem(32);
   position: relative;
   overflow: hidden;
+  max-width: 100%!important;
+
+
+
   @include media-breakpoint-up(md) {
     min-height: rem(470);
   }
@@ -12,6 +16,18 @@
   > .container {
     padding-bottom: 0;
     position: relative;
+  }
+
+  .breadcrumb {
+    
+    margin-top: rem(24);
+    margin-bottom: -0.5rem;
+
+    @include media-breakpoint-up(md) {
+      position: absolute;
+      top: 0;
+      left: rem(60);
+    }
   }
 
   &__inner {
@@ -30,13 +46,14 @@
       margin: rem(112) 0 rem(80) 0;
       padding: rem(56) rem(64);
     }
+
     > *:last-child {
       padding-bottom: 0;
       margin-bottom: 0;
     }
   }
 
-  > picture img {
+  picture img {
     display: none;
     @include media-breakpoint-up(md) {
       display: block;
@@ -50,15 +67,21 @@
     }
   }
 
-  > .container > .breadcrumb {
-    
-    margin-top: rem(24);
-    margin-bottom: -0.5rem;
+}
 
-    @include media-breakpoint-up(md) {
-      position: absolute;
-      top: 0;
-      left: rem(60);
-    }
+// Web component CSS
+::slotted(.breadcrumb){
+  margin-top: rem(24)!important;
+  margin-bottom: -0.5rem!important;
+
+  @include media-breakpoint-up(md) {
+    position: absolute!important;
+    top: 0!important;
+    left: 5.25rem!important;
   }
+}
+
+::slotted(*:last-child) {
+  padding-bottom: 0!important;
+  margin-bottom: 0!important;
 }

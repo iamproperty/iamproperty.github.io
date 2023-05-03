@@ -7,10 +7,9 @@
       <h1>Header</h1>
       <p>Introduce the page so a user can decide whether the page is right for their needs.</p>
     </div>
-
     <Header title="Page title" class="visualtest" image="/shutterstock_1229155495.webp">
       <template v-slot:breadcrumb>
-        <ul class="breadcrumb">
+        <ul class="breadcrumb" slot="breadcrumb">
           <li><a href="/">Home</a></li>
           <li><a href="/top">Top level</a></li>
         </ul>
@@ -18,26 +17,37 @@
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
     </Header>
 
-    <div class="container">
-      <h2>HTML code example</h2>
-      <pre><code class="language-html">{{htmlUsage}}</code></pre>
-    </div>
-
-    <div class="container">
-      <h2>Vue Header component reference</h2>
-      <Readme></Readme>
-    </div>
+    <Tabs class="container">
+      <details>
+        <summary><h2>HTML</h2></summary>
+        <pre><code class="javascript">{{htmlUsage}}</code></pre>
+      </details>
+      <details>
+        <summary><h2>Web component</h2></summary>
+        <WebReadme></WebReadme>
+      </details>
+      <details>
+        <summary><h2>Vue component</h2></summary>
+        <VueReadme></VueReadme>
+      </details>
+    </Tabs>
   </main>
 </template>
 
 <script>
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Tab from '@/components/Tabs/Tab.vue'
 import Header from '@/components/Header/Header.vue'
-import Readme from '@/components/Header/README.md'
+import VueReadme from '@/components/Header/README.md'
+import WebReadme from '~/ts/components/header/README.md'
 
 export default {
   components: {
+    Tabs,
+    Tab,
     Header,
-    Readme
+    VueReadme,
+    WebReadme
   },
   data () {
     return {

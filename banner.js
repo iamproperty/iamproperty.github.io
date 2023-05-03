@@ -3,11 +3,10 @@
 const pkg = require('./package.json')
 const year = new Date().getFullYear()
 
-function getBanner(pluginFilename) {
+function getBanner() {
   return `/*!
-  * Bootstrap${pluginFilename ? ` ${pluginFilename}` : ''} v${pkg.version}
-  * Copyright 2011-${year} ${pkg.author}
-  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+  * iamKey v${pkg.version}
+  * Copyright 2022-${year} iamproperty
   */`
 }
 

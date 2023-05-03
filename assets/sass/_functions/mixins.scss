@@ -156,16 +156,16 @@
 
 @mixin invert-colours($compatible:$compatible) {
   
-  --colour-body: white;
-  --colour-heading: white;
-  --colour-link: white;
-  --colour-hover: white;
-  --colour-border: white;
-  --colour-brand: white;
+  --colour-body: #{$colour-inverted};
+  --colour-heading: #{$colour-inverted};
+  --colour-link: #{$colour-inverted};
+  --colour-hover: #{$colour-inverted};
+  --colour-border: #{$colour-inverted};
+  --colour-brand: #{$colour-inverted};
 
-  --btn-bg: white;
+  --btn-bg: #{$colour-inverted};
   --btn-text: var(--colour-primary);
   --btn-hover-text: var(--colour-heading);
-  --btn-tertiary-bg: white;
+  --btn-tertiary-bg: #{$colour-inverted};
   --btn-tertiary-hover-text: var(--colour-primary);
 }

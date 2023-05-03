@@ -8,13 +8,14 @@
       <p>Group together some content and display one at a time, should not be used for important content as it may not be visible on page load.</p>
     </div>
 
-    <Tabs class="visualtest">
+    <Tabs class="container visualtest">
       <Tab title="The benefits of auction">
         <h2>Tab content 1</h2>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
       </Tab>
       <Tab title="The types of auctions we offer">
         <h2>Tab content 2</h2>
+        <a href="/link">a link</a>
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
       </Tab>
       <Tab title="Online auctions" lazy>
@@ -36,11 +37,6 @@
       </Tab>
     </Tabs>
 
-    <div class="container">
-      <h2>HTML code example</h2>
-      <pre><code class="language-html">{{htmlUsage}}</code></pre>
-    </div>
-
 
     <div class="container">
 
@@ -49,8 +45,7 @@
     </div>
 
     <div class="container visualtest">
-      <div class="admin-panel">
-        <Tabs>
+        <Tabs class="admin-panel">
           <Tab title="The benefits of auction">
             <h2>Tab content 1</h2>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
@@ -94,14 +89,22 @@
             ]"></Table>
           </Tab>
         </Tabs>
-      </div>
     </div>
 
-
-    <div class="container">
-      <h2>Vue Tabs component reference</h2>
-      <Readme></Readme>
-    </div>
+    <Tabs class="container">
+      <details>
+        <summary><h2>HTML</h2></summary>
+        <pre><code class="javascript">{{htmlUsage}}</code></pre>
+      </details>
+      <details>
+        <summary><h2>Web component</h2></summary>
+        <WebReadme></WebReadme>
+      </details>
+      <details>
+        <summary><h2>Vue component</h2></summary>
+        <Readme></Readme>
+      </details>
+    </Tabs>
   </main>
 </template>
 
@@ -109,6 +112,7 @@
 import Tabs from '@/components/Tabs/Tabs.vue'
 import Tab from '@/components/Tabs/Tab.vue'
 import Readme from '@/components/Tabs/README.md'
+import WebReadme from '~/ts/components/tabs/README.md'
 import Table from '@/components/Table/Table.vue'
 
 export default {
@@ -116,6 +120,7 @@ export default {
     Tabs,
     Tab,
     Readme,
+    WebReadme,
     Table
   },
   data () {

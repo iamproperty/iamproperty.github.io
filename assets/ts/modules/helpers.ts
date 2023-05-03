@@ -26,16 +26,24 @@
  */
 export const addGlobalEvents = (body) => {
   
+  if(location.hash && document.querySelector(location.hash+':not([open]) summary')) {
+
+    const summary = document.querySelector(location.hash+' summary');
+
+    if (summary instanceof HTMLElement) 
+      summary.click();
+  }
+
   window.addEventListener('hashchange', function() {
 
     const hash = location.hash.replace('#','');
     const label = document.querySelector(`label[for="${hash}"]`);
-    const detail = document.querySelector(`details[id="${hash}"]:not([open])`);
+    const summary = document.querySelector(location.hash+' summary');
 
-    if(label)
+    if(label instanceof HTMLElement)
       label.click();
-    else if(detail)
-      detail.setAttribute('open','open');
+    else if(summary instanceof HTMLElement)
+      summary.click();
     
   }, false);
 
