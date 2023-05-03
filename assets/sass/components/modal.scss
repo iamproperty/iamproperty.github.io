@@ -1,136 +1,20 @@
 @use "sass:math";
 @use "../_func" as *;
 
-.modal {
-  display: none;
-}
-
-.modal:target {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.25);
-  z-index: var(--index-overlay);
+dialog[open],
+dialog:target {
+  
+  min-width: 80%;
+  width: fit-content;
+  height: fit-content;
+  max-width: 80%;
+  max-height: 80%;
+  padding: 1.5rem;
   border: none;
   overscroll-behavior: contain;
-
-  > a:first-child {
-      
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 512 512'%3e%3cg transform='rotate(45 256 256)'%3e%3crect id='r' x='16' y='216' width='480' height='80' rx='14'/%3e%3cuse href='%23r' transform='rotate(90 256 256)'/%3e%3c/g%3e%3c/svg%3e") 8 8, pointer;
-  }
-
-  > button {
-    display: none;
-
-    @include media-breakpoint-up(md) {
-      display: block;
-      position: absolute;
-      z-index: var(--index-focus);
-      top: 50%;
-      transform: translate(0,-50%);
-      overflow: hidden;
-      text-indent: 300%;
-      width: 2rem;
-      height: 2rem;
-
-      &.btn:not(:hover):not(:focus) {
-        background-color: white;
-      }
-
-      &.modal__dock--left {
-        right: calc(50% + #{rem(math.div(820,2))} + 1rem);
-        
-        &:after {
-          transform: rotate(-180deg);
-        }
-      }
-      &.modal__dock--right {
-        left: calc(50% + #{rem(math.div(820,2))} + 1rem);
-      }
-    }
-  }
-
-
-  &.modal--left button.modal__dock--left {
-    display: none;
-  }
-
-  &.modal--left button.modal__dock--right {
-    left: calc(#{rem(640)} + 2rem);
-  }
-
-  &.modal--right button.modal__dock--right {
-    display: none;
-  }
-
-  &.modal--right button.modal__dock--left {
-    right: calc(#{rem(640)} + 2rem);
-  }
+  border-radius: 0.5rem;
 }
 
-
-.modal__outer {
-
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 90%;
-  max-width: rem(820);
-  height: fit-content;
-  max-height: 90%;
-  overflow: visible;
-  transform: translate(-50%,-50%);
-
-  > .btn:first-child {
-    position: absolute;
-    top: 0;
-    right: 0;    
-    margin-top: -0.75rem;
-    margin-right: -0.75rem;
-    z-index: var(--index-focus);
-
-    &:not(:hover):not(:focus):not(:active){
-      background: white;
-    }
-  }
-  @include media-breakpoint-up(md) {
-    .modal--left & {
-      left: 1rem;
-      transform: translate(0,-50%);
-      max-width: 40rem;
-    }
-
-    .modal--right & {
-      left: auto;
-      right: 1rem;
-      transform: translate(0,-50%);
-      max-width: 40rem;
-    }
-  }
-}
-
-.modal__inner {
-  background: white;
-  overscroll-behavior: contain;
-  height: fit-content;
-  max-height: 90vh;
-  overflow: auto;
-
-  & > *:first-child {
-
-    padding: 1rem;
-    @include media-breakpoint-up(sm) {
-
-      padding: 2rem;
-    }
-  }
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.3);
 }

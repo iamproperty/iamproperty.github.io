@@ -47,6 +47,32 @@ export const addGlobalEvents = (body) => {
     
   }, false);
 
+  // Dialogs/modals
+  document.addEventListener('click', (event) => {
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-modal]')){
+
+      const button = event.target.closest('[data-modal]');
+      const modalID = button.getAttribute('data-modal');
+      const dialog = document.querySelector(`dialog#${modalID}`);
+      
+      dialog.showModal();
+    };
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
+      const dialog = event.target.closest('dialog[open]');
+      const dialogDimensions = dialog.getBoundingClientRect()
+      if (event.clientX < dialogDimensions.left || event.clientX > dialogDimensions.right || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
+        dialog.close()
+      }
+    }
+
+    
+  });
+
+
+
+
   return null
 }
 
