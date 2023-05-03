@@ -13,8 +13,6 @@
       <h2>Modal content</h2>
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-      
-      <form><button class="btn btn-secondary mb-0" formmethod="dialog">Close</button></form>
     </dialog>
     
 
@@ -28,7 +26,7 @@
     </div>
     
 
-    <dialog id="youtubewrapper" class="p-0">
+    <dialog id="youtubewrapper">
       <YoutubeVideo video="fXyAMkQzDls"></YoutubeVideo>
     </dialog>
     
@@ -38,23 +36,15 @@
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
 
-    <div class="container">
-      <h2>Vue Modal component reference</h2>
-      <Readme></Readme>
-    </div>
   </main>
 </template>
 
 <script>
 import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
-import Modal from '@/components/Modal/Modal.vue'
-import Readme from '@/components/Modal/README.md'
 
 export default {
   components: {
-    Modal,
-    YoutubeVideo,
-    Readme
+    YoutubeVideo
   },
   data () {
     return {

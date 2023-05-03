@@ -26,26 +26,25 @@
  */
 export const addGlobalEvents = (body) => {
   
-  if(location.hash && document.querySelector(location.hash+':not([open]) summary')) {
 
-    const summary = document.querySelector(location.hash+' summary');
+  const checkElements = function(hash){
 
-    if (summary instanceof HTMLElement) 
-      summary.click();
-  }
-
-  window.addEventListener('hashchange', function() {
-
-    const hash = location.hash.replace('#','');
-    const label = document.querySelector(`label[for="${hash}"]`);
-    const summary = document.querySelector(location.hash+' summary');
+    const label = document.querySelector(`label[for="${hash.replace('#','')}"]`);
+    const summary = document.querySelector(hash+' summary');
+    const dialog = document.querySelector(`dialog${hash}`);
 
     if(label instanceof HTMLElement)
       label.click();
     else if(summary instanceof HTMLElement)
       summary.click();
-    
-  }, false);
+    else if(dialog instanceof HTMLElement)
+      dialog.showModal();
+  }
+
+  if(location.hash)
+    checkElements(location.hash);
+
+  window.addEventListener('hashchange', function() { checkElements(location.hash); }, false);
 
   // Dialogs/modals
   document.addEventListener('click', (event) => {
@@ -56,6 +55,10 @@ export const addGlobalEvents = (body) => {
       const modalID = button.getAttribute('data-modal');
       const dialog = document.querySelector(`dialog#${modalID}`);
       
+      // Create close button is needed
+      if(!dialog.querySelector(':scope > form:first-child'))
+        dialog.innerHTML = `<form><button class="dialog__close" formmethod="dialog">Close</button></form>${dialog.innerHTML}`;
+
       dialog.showModal();
     };
 
@@ -66,12 +69,7 @@ export const addGlobalEvents = (body) => {
         dialog.close()
       }
     }
-
-    
   });
-
-
-
 
   return null
 }

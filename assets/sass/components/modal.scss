@@ -1,8 +1,12 @@
 @use "sass:math";
 @use "../_func" as *;
 
-dialog[open],
-dialog:target {
+// non-js fallback
+body:not(.js-enabled) dialog:not([open]):target {
+  display: block;
+}
+
+dialog[open] {
   
   min-width: 80%;
   width: fit-content;
@@ -13,6 +17,24 @@ dialog:target {
   border: none;
   overscroll-behavior: contain;
   border-radius: 0.5rem;
+
+  // Close button
+  > form:first-child {
+
+    position: relative;
+
+    button {
+      position: absolute;
+      top: auto;
+      left: auto;
+      right: 0;
+      z-index: var(--index-menu);
+    }
+
+    & + * {
+      padding-right: 3rem;
+    }
+  }
 }
 
 dialog::backdrop {
