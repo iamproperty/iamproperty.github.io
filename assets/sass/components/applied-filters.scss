@@ -1,0 +1,11 @@
+.applied-filters {
+  margin-bottom: 2rem;
+}
+
+::slotted(button.filter),
+.applied-filters .filter {
+  
+  border: 1px solid black;
+  padding: 0.5rem;
+  margin-right: 0.5rem!important;
+}
