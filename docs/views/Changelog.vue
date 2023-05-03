@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.4.6--alpha</h2>
+      <h2>V3.4.6</h2>
       <h3>Native web components introduced</h3>
       <p>See https://iamproperty.atlassian.net/wiki/spaces/FEG/blog/2023/04/13/218759184/Exploring+Native+web+components for information</p>
       <ul>
@@ -12,8 +12,9 @@
         <li>New documentation for the web components</li>
         <li>New test html pages to test the components without Vue</li>
       </ul>
-      <h3>Older changes</h3>
+      <h3>Other changes</h3>
       <ul>
+        <li>Google analytics installed</li>
         <li>Update the typography page</li>
         <li>Update the general font sizes and line heights</li>
         <li>Update the inverted colour</li>
