@@ -289,3 +289,28 @@ table.border-0 {
     */
   }
 }
+
+
+
+// #region sticky column
+
+.table--sticky {
+  -ms-scroll-chaining: none;
+  overscroll-behavior: contain;
+
+  tr {
+    position: relative;
+  }
+
+  tr > *:first-child {
+
+    position: -webkit-sticky; // for safari
+    position: sticky;
+    position: sticky;
+    right: 0;
+    top: 0;
+    z-index: 3;
+  }
+}
+
+// #endregion

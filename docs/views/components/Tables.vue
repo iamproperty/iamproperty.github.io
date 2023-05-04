@@ -9,6 +9,55 @@
     </div>
 
     <div class="container visualtest">
+      <div class="table__wrapper">
+      <table class="table--sticky">
+        <thead>
+          <tr>
+            <th>Date added</th>
+            <th>Client</th>
+            <th>Transaction address</th>
+            <th>Onboarding status</th>
+            <th>Risk level</th>
+            <th>Due diligence</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-col="Date added">18 Mar 23</td>
+            <td data-col="Client">Dave Smith, Buyer</td>
+            <td data-col="Transaction address">89, Queens Crescent, NE28 8DR</td>
+            <td data-col="Onboarding status">Risk assessment complete</td>
+            <td data-col="Risk level">Low</td>
+            <td data-col="Due diligence">Verified</td>
+            <td data-col=""><a href="/clienturl">Manage client</a></td>  
+          </tr>
+          
+          <tr>
+            <td data-col="Date added">18 Mar 23</td>
+            <td data-col="Client">Dave Smith, Buyer</td>
+            <td data-col="Transaction address">89, Queens Crescent, NE28 8DR</td>
+            <td data-col="Onboarding status">Risk assessment complete</td>
+            <td data-col="Risk level">Low</td>
+            <td data-col="Due diligence">Verified</td>
+            <td data-col=""><a href="/clienturl">Manage client</a></td>  
+          </tr>
+          
+          <tr>
+            <td data-col="Date added">18 Mar 23</td>
+            <td data-col="Client">Dave Smith, Buyer</td>
+            <td data-col="Transaction address">89, Queens Crescent, NE28 8DR</td>
+            <td data-col="Onboarding status">Risk assessment complete</td>
+            <td data-col="Risk level">Low</td>
+            <td data-col="Due diligence">Verified</td>
+            <td data-col=""><a href="/clienturl">Manage client</a></td>  
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+    <div class="container visualtest">
       <Table :fields="fields" :items="items"></Table>
     </div>
 
