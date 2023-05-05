@@ -76,7 +76,6 @@ export default {
     // Global stuff
     helpers.addBodyClasses(document.body);
     helpers.addGlobalEvents(document.body);
-    helpers.checkElements(document.body);
   }
 }
 </script>

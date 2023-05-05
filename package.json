@@ -7,7 +7,7 @@
   "private": false,
   "version": "3.4.6",
   "scripts": {
-    "dev": "npm run copy && vite --host",
+    "dev": "npm run copy && node local_modules/delete-assets.js && vite --host",
     "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
     "prepack": "npm run build",
     "build:docs": "npm run compile && npm run copy && vue-tsc --noEmit && vite build",

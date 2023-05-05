@@ -3,7 +3,7 @@
 // #region Default table
 table {
   --border-width: 2px;
-  --inner-border-width: 1px;
+  --inner-border-width: 2px;
   width: 100%;
   font-size: rem(16);
   border: none;
@@ -12,7 +12,7 @@ table {
 }
 
 td,th {
-  padding: rem(16) rem(32) rem(16) 0;
+  padding: rem(8) rem(24) rem(8) 0;
   font-weight: normal;
   text-align: left;
   vertical-align: top;
@@ -21,8 +21,8 @@ td,th {
   line-height: rem(24);
   color: var(--colour-body);
 
-  &:first-child {
-    padding-left: rem(8);
+  &:last-child {
+    padding-right: 0;
   }
 }
 
@@ -31,77 +31,92 @@ th {
   @include var(color,--colour-heading);
 }
 
-tr {
-  border-bottom: var(--inner-border-width) solid currentColor;
-  @include var(border-color,--colour-border);
+thead {
 
-  &:last-child {
+  th {
+    font-size: rem(16);
+    line-height: rem(24);
+    padding-bottom: rem(8);
+
+    font-weight: bold;
+    vertical-align: bottom;
+
+    @include media-breakpoint-up(sm) {
+      white-space: nowrap;
+      min-width: rem(120);
+    }    
+  }
+}
+
+tbody tr {
+
+  td {
+      
+    border-top: var(--border-width) solid currentColor;
+    @include var(border-color,--colour-border);
+  }
+
+  &:first-child td{
+    border-top: var(--border-width) solid currentColor;
+    @include var(border-color,--colour-primary);
+  }
+
+  &:last-child td{
     border-bottom: var(--border-width) solid currentColor;
     @include var(border-color,--colour-border);
   }
 }
 
-thead {
-  tr:first-child {
-    border-top: var(--border-width) solid currentColor;
-    @include var(border-color,--colour-border);
-  }
-
-  th {
-    font-size: rem(16);
-    line-height: rem(24);
-    padding-bottom: rem(24);
-
-    @include media-breakpoint-up(sm) {
-  
-      font-size: rem(18);
-      white-space: nowrap;
-    }
-
-    font-weight: bold;
-    vertical-align: bottom;
-  }
-}
-
-tbody:first-child{
-  tr:first-child {
-    border-top: var(--border-width) solid currentColor;
-    @include var(border-color,--colour-border);
-  }
-}
-
-.table__wrapper.border-0 table,
+.border-0 > table,
 table.border-0 {
 
   --border-width: 0px;
   --inner-border-width: 0px;
 }
-
 // #endregion
 
 // #region Table wrapper - Add via JS if needed, provides a safe space to scroll
 .table__wrapper {
   display: block;
-  width: calc(100% + 1rem);
-  padding-right: 1rem;
+  width: 100%;
+  //padding-right: 1rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
   margin-bottom: rem(32);
 
-  table {
-    margin-bottom: 0;
-    display: table;
-    overflow: hidden;
-  }
+}
+
+:is(iam-table, .table__wrapper) table {
+  margin-bottom: 0;
+  display: table;
+  overflow: hidden;
 }
 // #endregion
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // #region Tables are only stacked on mobile
+
 @media screen and (max-width: 36em) {
-  .table__wrapper:not(.table-fullwidth):not(.client-table) {
+
+  .table__wrapper:not(.table-fullwidth):not(.client-table){
 
     overflow: hidden;
+  }
+
+  :is(iam-table, .table__wrapper:not(.table-fullwidth):not(.client-table)) {
 
     thead {
       display: none;
@@ -109,23 +124,27 @@ table.border-0 {
 
     tbody {
       display: block;
-      border-top: 2px solid currentColor;
-      @include var(border-color,--colour-border);
     }
 
     tr {
       display: block;
       position: relative;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
+      margin-bottom: 2rem;
     }
 
     td,
     th {
       display: block;
       padding-right: 0;
-      padding-top: 0;
+      //padding-top: 0;
       padding-left: rem(8);
+      
+        @include var(border-color,--colour-border);
+
+      &:is(:nth-child(1), :nth-child(2)){
+        
+        border-top: none;
+      }
 
       &[data-label]:before {
         content: attr(data-label);
@@ -138,12 +157,40 @@ table.border-0 {
       }
     }
 
-    &.table-minify tr:not(:hover) {
-      td:not(:first-child){
-        display: none;
+    td:first-child {
+      @include var(background, --colour-border);
+      position: relative;
+      border-radius: rem(8);
+
+      &:after {
+        font-family: "Font Awesome 6 Pro";
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
+        padding: 0.5rem;
+        font-weight: 300;
+        color: var(--colour-primary)
       }
     }
   }
+
+  body:not(.js-enabled) .table--minify tr:not(:hover):not(:focus-within),
+  .table--minify tr:not([data-view="full"]) {
+
+    td:not(:first-child):not(:nth-child(2)):not(:nth-child(2)):not(:nth-child(3)):not(.col--sticky){
+      display: none;
+    }
+    td:first-child {
+      
+      &:after {
+        content: "\2b";
+      }
+    }
+  }
+
 }
 // #endregion
 
@@ -290,27 +337,82 @@ table.border-0 {
   }
 }
 
-
-
 // #region sticky column
+@include media-breakpoint-up(sm) {
 
-.table--sticky {
-  -ms-scroll-chaining: none;
-  overscroll-behavior: contain;
-
-  tr {
-    position: relative;
+  :is(iam-table) {
+    
+    --cta-width: 8rem;
   }
 
-  tr > *:first-child {
+  :not(iam-table).table--sticky {
+    
+    position: relative;
+    margin-right: calc(var(--cta-width) - 1.5rem);
+    margin-bottom: 2rem;
 
-    position: -webkit-sticky; // for safari
-    position: sticky;
-    position: sticky;
-    right: 0;
-    top: 0;
-    z-index: 3;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: calc(var(--cta-width) - 1.5rem);
+      height: calc(100% - #{rem(16)} + 2px);
+      padding-left: rem(24);
+      margin-left: rem(-24);
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 1.25rem);
+      z-index: 2
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: calc(100% + calc(var(--cta-width) - 1.5rem));
+      border-bottom: 2px solid currentColor;
+      @include var(border-color,--colour-border);
+      z-index: 99;
+    }
+  }
+
+  .table--sticky .table__wrapper {
+    overflow-y: hidden;
+    margin-bottom: 0;
+  }
+    
+  .table--sticky {
+
+    tr > *:last-child {
+
+      position: absolute;
+      left: 100%;
+      top: auto;
+      z-index: 3;
+      background: transparent;
+      width: var(--cta-width);
+      padding-left: rem(24);
+      margin-left: rem(-24);
+      min-width: fit-content;
+      text-align: right;
+
+      a {
+        white-space: nowrap;
+      }
+    }
+
+    tbody tr > *:last-child {
+      margin-top: -1px;
+    }
+    tbody tr {
+
+      &:last-child td{
+        border-bottom: none;
+      }
+    }
   }
 }
-
 // #endregion

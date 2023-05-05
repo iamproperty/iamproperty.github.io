@@ -2,7 +2,7 @@
 // Modules
 import * as helpers from '../js/modules/helpers'
 import nav from '../js/modules/nav'
-import table from '../js/modules/table'
+import table, {tableStacked, } from '../js/modules/table'
 import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
-  helpers.checkElements(document.body);
+  //helpers.checkElements(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Advanced tables
-  Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
+  Array.from(document.querySelectorAll('table')).forEach((arrayElement) => {
+
+    tableStacked(arrayElement);
     table(arrayElement);
   });
 

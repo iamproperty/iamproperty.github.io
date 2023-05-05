@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
-  helpers.checkElements(document.body);
+  //helpers.checkElements(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
@@ -60,10 +60,11 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Advanced tables
+  /*
   Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
     table(arrayElement);
   });
-
+  */
   // Accordions
   /*
   Array.from(document.querySelectorAll('.accordion')).forEach((arrayElement) => {

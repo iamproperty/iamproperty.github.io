@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
-  helpers.checkElements(document.body);
+  //helpers.checkElements(document.body);
 
   if (!window.customElements.get(`iam-header`))
     window.customElements.define(`iam-header`, iamHeader);
@@ -36,9 +36,11 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Advanced tables
+  /*
   Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
     table(arrayElement);
   });
+  */
 
 
 

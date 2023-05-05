@@ -1,6 +1,36 @@
 // @ts-nocheck
 import { zeroPad, isNumeric } from "./helpers";
 
+/**
+ * Creates data attributes to be used by the CSS for mobile views.
+ * @param {HTMLElement} table Dom table element
+ */
+export const tableStacked = (table) => {
+
+
+  const colHeadings = Array.from(table.querySelectorAll('thead th'));
+  const colRows = Array.from(table.querySelectorAll('tbody tr'));
+
+  colRows.forEach((row, index) => {
+
+    const cells = Array.from(row.querySelectorAll('th, td'));
+    
+    cells.forEach((cell, cellIndex) => {
+
+      const heading = colHeadings[cellIndex];
+      if(typeof heading != "undefined"){
+
+        let tempDiv = document.createElement("div");
+        tempDiv.innerHTML = heading.innerHTML;
+        let headingText = tempDiv.textContent || tempDiv.innerText || "";
+        cell.setAttribute('data-label',headingText);
+      }
+    });
+  });
+}
+
+
+
 function table(tableElement) {
 
   if(typeof tableElement != "object")
@@ -501,6 +531,12 @@ function table(tableElement) {
     table(newTable);
   }, false);
 }
+
+
+
+
+
+
 
 export const createPaginationForm = function(randID,tableElement,show,page,totalRows){
 
