@@ -5,8 +5,7 @@ import { zeroPad, isNumeric } from "./helpers";
  * Creates data attributes to be used by the CSS for mobile views.
  * @param {HTMLElement} table Dom table element
  */
-export const tableStacked = (table) => {
-
+export const addDataAttributes = (table) => {
 
   const colHeadings = Array.from(table.querySelectorAll('thead th'));
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
@@ -26,6 +25,56 @@ export const tableStacked = (table) => {
         cell.setAttribute('data-label',headingText);
       }
     });
+  });
+}
+
+
+export const getLargestLastColWidth = (table) => {
+  let largestWidth = 0;
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+
+    let lastColChild = row.querySelector(':scope > td:last-child > *:first-child');
+    lastColChild.parentNode.classList.add('col--sticky');
+
+    let htmlStyles = window.getComputedStyle(document.querySelector('html'));
+    let responsiveWidth = lastColChild.offsetWidth/parseFloat(htmlStyles.fontSize);
+    responsiveWidth += 1.5;
+
+    largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
+  });
+
+  return largestWidth;
+}
+
+
+
+export const createMobileButton = (table) => {
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+    let firstCol = row.querySelector(':scope > td:first-child');
+
+    let colContent = firstCol.textContent;
+    firstCol.innerHTML =`<span>${colContent}</span><button type="button" class="d-sm-none">${colContent}</button>`;
+  });
+}
+
+export const addTableEventListeners = (table) => {
+
+  table.addEventListener('click', (event) => {
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('tr > td:first-child button')){
+
+      let firstCol = event.target.closest('tr > td:first-child button');
+      let tableRow = firstCol.parentNode.closest('tr');
+
+      if(tableRow.getAttribute('data-view') == "full")
+        tableRow.setAttribute('data-view','default');
+      else
+        tableRow.setAttribute('data-view','full');
+
+      firstCol.blur();
+    };
   });
 }
 
