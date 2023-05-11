@@ -4,6 +4,7 @@
       
     </Nav>
     <main class="main--marketplace">
+
       <form id="tableFilters">
 
         <div class="container">
@@ -35,6 +36,8 @@
 
 
           <dialog id="filters">
+            
+          <iam-applied-filters></iam-applied-filters>
             <div class="form-check">
               <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level">
               <label for="risk-level-high" class="form-label form-check-label">High</label>
@@ -1675,10 +1678,13 @@
           </table>
         </Table>
 
+
+
       </div>
     </main>
   </div>
 </template>
+
 
 <style lang="scss">
 /*
@@ -1696,4 +1702,17 @@
 <script setup>
 import Nav from '@/components/Nav/Nav.vue'
 import Table from '@/components/Table/Table.vue'
+
+import iamAppliedFilters from '../../../assets/ts/components/applied-filters/applied-filters.component'
+
+if (!window.customElements.get('iam-applied-filters'))
+  window.customElements.define('iam-applied-filters', iamAppliedFilters);
+
+
+export default {
+  components: {
+    Nav,
+    Table
+  },
+}
 </script>
