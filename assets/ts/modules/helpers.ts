@@ -8,7 +8,7 @@
  * Add global classes used by the CSS and later JavaScript.
  * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
  */
- export const addBodyClasses = (body) => {
+export const addBodyClasses = (body) => {
   
   body.classList.add("js-enabled");
 
@@ -26,26 +26,67 @@
  */
 export const addGlobalEvents = (body) => {
   
-  if(location.hash && document.querySelector(location.hash+':not([open]) summary')) {
 
-    const summary = document.querySelector(location.hash+' summary');
+  const checkElements = function(hash){
 
-    if (summary instanceof HTMLElement) 
-      summary.click();
-  }
-
-  window.addEventListener('hashchange', function() {
-
-    const hash = location.hash.replace('#','');
-    const label = document.querySelector(`label[for="${hash}"]`);
-    const summary = document.querySelector(location.hash+' summary');
+    const label = document.querySelector(`label[for="${hash.replace('#','')}"]`);
+    const summary = document.querySelector(hash+' summary');
+    const dialog = document.querySelector(`dialog${hash}`);
 
     if(label instanceof HTMLElement)
       label.click();
     else if(summary instanceof HTMLElement)
       summary.click();
-    
-  }, false);
+    else if(dialog instanceof HTMLElement)
+      dialog.showModal();
+  }
+
+  if(location.hash)
+    checkElements(location.hash);
+
+  window.addEventListener('hashchange', function() { checkElements(location.hash); }, false);
+
+  addEventListener("popstate", (event) => {
+
+    if(event.state.type == "pagination"){
+      let form = document.querySelector(`#${event.state.form}`);
+      let pageInput = document.querySelector(`#${event.state.form} [data-pagination]`);
+      
+      if(pageInput)
+        pageInput.value = event.state.page;
+      else
+        form.innerHTML += `<input name="page" type="hidden" data-pagination="true" value="${event.state.page}" />`
+      
+      form.dispatchEvent(new Event("submit"));
+    }
+  });
+
+  // Dialogs/modals
+  document.addEventListener('click', (event) => {
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-modal]')){
+
+      const button = event.target.closest('[data-modal]');
+      const modalID = button.getAttribute('data-modal');
+      const dialog = document.querySelector(`dialog#${modalID}`);
+      
+      // Create close button is needed
+      if(dialog.parentNode.closest('form') && !dialog.querySelector(':scope > .dialog__close:first-child'))
+        dialog.innerHTML = `<button class="dialog__close" formmethod="dialog">Close</button>${dialog.innerHTML}`;
+      else if(!dialog.parentNode.closest('form') && !dialog.querySelector(':scope > form:first-child'))
+        dialog.innerHTML = `<form><button class="dialog__close" formmethod="dialog">Close</button></form>${dialog.innerHTML}`;
+
+      dialog.showModal();
+    };
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
+      const dialog = event.target.closest('dialog[open]');
+      const dialogDimensions = dialog.getBoundingClientRect()
+      if (event.clientX < dialogDimensions.left || event.clientX > dialogDimensions.right || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
+        dialog.close()
+      }
+    }
+  });
 
   return null
 }

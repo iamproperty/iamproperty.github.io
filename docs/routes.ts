@@ -666,6 +666,14 @@ const routes = [
           title: 'Client method | iamkey'
         },
         component: () => import('./views/standalone/ClientDashboard/method.vue')
+      },
+      {
+        path: 'agent-dashboard',
+        name: "Agent dashboard",
+        meta: {
+          title: 'Agent dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/AgentDashboard.vue')
       }
     ]
   },

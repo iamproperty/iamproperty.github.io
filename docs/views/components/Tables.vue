@@ -11,70 +11,70 @@
     <div class="container visualtest">
 
 
-        <iam-table class="table--sticky table--minify">
-          <table>
-            <thead>
-              <tr>
-                <th>Client</th>
-                <th>Date added</th>
-                <th>Transaction address</th>
-                <th>Onboarding status</th>
-                <th>Risk level</th>
-                <th>Due diligence</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              
-            </tbody>
-          </table>
-        </iam-table>
+      <Table class="table--sticky table--minify">
+        <table>
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Date added</th>
+              <th>Transaction address</th>
+              <th>Onboarding status</th>
+              <th>Risk level</th>
+              <th>Due diligence</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dave Smith, Buyer</td>
+              <td>18 Mar 23</td>
+              <td>89, Queens Crescent, NE28 8DR</td>
+              <td>Risk assessment complete</td>
+              <td>Low</td>
+              <td>Verified</td>
+              <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+            </tr>
+            <tr>
+              <td>Dave Smith, Buyer</td>
+              <td>18 Mar 23</td>
+              <td>89, Queens Crescent, NE28 8DR</td>
+              <td>Risk assessment complete</td>
+              <td>Low</td>
+              <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+              <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+            </tr>
+            <tr>
+              <td>Dave Smith, Buyer</td>
+              <td>18 Mar 23</td>
+              <td>89, Queens Crescent, NE28 8DR</td>
+              <td>Risk assessment complete</td>
+              <td>Low</td>
+              <td>Verified</td>
+              <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+            </tr>
+            <tr>
+              <td>Dave Smith, Buyer</td>
+              <td>18 Mar 23</td>
+              <td>89, Queens Crescent, NE28 8DR</td>
+              <td>Risk assessment complete</td>
+              <td>Low</td>
+              <td>Verified</td>
+              <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+            </tr>
+            
+          </tbody>
+        </table>
+      </Table>
 
     </div>
 
-
-
-<!-- #region:old --> 
-<!--
     <div class="container visualtest">
       <Table :fields="fields" :items="items"></Table>
     </div>
+
+<!-- #region:old --> 
+<!--
+    
 
     <div class="container pb-0">
       <h2>Striped table</h2>
@@ -199,10 +199,7 @@
 
 <script>
 
-import iamTable from '../../../assets/ts/components/table/table.component'
 
-if (!window.customElements.get('iam-table'))
-  window.customElements.define('iam-table', iamTable);
 
 
 import Table from '@/components/Table/Table.vue'

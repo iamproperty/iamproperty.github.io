@@ -1,4 +1,5 @@
 <template>
+  <!--
   <div class="table__wrapper" ref="wrapper" :data-sortby="sortby" :data-sort="sort" :data-show="show" :data-page="page" :data-reorder="reorder">
     <table>
       <thead v-if="fields">
@@ -13,12 +14,27 @@
       </tbody>
     </table>
     <slot></slot>
-  </div>
+  </div>-->
+  <iam-table>
+    <table v-if="fields">
+      <thead>
+        <tr>
+          <th v-for="(field) in fields" :key="field.key">{{ cellHeading(field.key) }}</th>
+        </tr>
+      </thead>
+      <tbody v-if="items">
+        <tr v-for="(value,index) in items" :key="index" :data-row-id="value['rowid']">
+          <td :key="cellIndex" v-for="(cellValue,cellIndex) in Object.fromEntries(Object.entries(value).filter(([key]) => key !== 'rowid'))" v-html="cellValue" :data-label="cellHeading(cellIndex)" :data-numeric="numericValue(cellValue)"></td>
+        </tr>
+      </tbody>
+    </table>
+    <slot v-else></slot>
+  </iam-table>
 </template>
 
 <script>
+import iamTable from '../../../assets/ts/components/table/table.component'
 import { ucfirst, unsnake } from '../../helpers/strings'
-import table from '../../../assets/ts/modules/table'
 
 let numericValue = function(value) {
 
@@ -34,6 +50,8 @@ let numericValue = function(value) {
 
   return Number.parseFloat(value)
 }
+
+
 
 export default {
   name: 'Table',
@@ -64,11 +82,11 @@ export default {
     },
     items: {
       type: Array,
-      required: true
+      required: false
     },
     fields: {
       type: Array,
-      required: true
+      required: false
     }
   },
   computed: {
@@ -85,12 +103,15 @@ export default {
       }
     }
   },
-  mounted(){
+  created(){
+
 
     this.$nextTick(function () {
+      
+      if (!window.customElements.get('iam-table'))
+        window.customElements.define('iam-table', iamTable);
 
-      table(this.$refs.wrapper);
-
+      /*
       // Listen for the event.
       this.$el.addEventListener('sorted', function (e) {
 
@@ -101,10 +122,11 @@ export default {
 
         console.log('Table filtered')
       }, false);
-
+      */
     })
   },
   updated(){
+    /*
     this.$nextTick(function () {
 
       // If the data gets updated we may need to recreate the tbody as it get detached when sorted in the table.js
@@ -124,6 +146,7 @@ export default {
       const updatedEvent = new Event('filtered');
       this.$refs.wrapper.dispatchEvent(updatedEvent);
     })
+    */
   }
 }
 </script>

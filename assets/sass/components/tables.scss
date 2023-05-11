@@ -98,15 +98,6 @@ table.border-0 {
 
 
 
-
-
-
-
-
-
-
-
-
 // #region Tables are only stacked on mobile
 
 @media screen and (max-width: 36em) {
@@ -416,3 +407,15 @@ table.border-0 {
   }
 }
 // #endregion
+
+
+
+// filters 
+
+.table--filtered tbody tr:not(.filtered--show) {
+  display: none!important;
+}
+
+table:not(.table--filtered) tbody tr:nth-child(15) ~ tr {
+  display: none;
+}
