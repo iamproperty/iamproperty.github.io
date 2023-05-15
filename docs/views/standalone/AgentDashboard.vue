@@ -4,36 +4,1723 @@
       
     </Nav>
     <main class="main--marketplace">
+<<<<<<< Updated upstream
       <form id="tableFilters">
+=======
 
-        <div class="container">
-        
-          <div class="row sticky-form">
+      <div class="container">
+        <h1>Welcome back, Jonny!</h1>
+      </div>
+>>>>>>> Stashed changes
 
-            <div class="col">
-              <div class="form-control__wrapper">
-                <label for="search" class="form-label">Search</label>
-                <input name="search" id="search" type="text" class="form-control" data-search="Client,	Transaction address">
+
+      <Tabs class="container">
+        <Tab title="Client Onboarding">
+          
+
+
+          <form id="tableFilters">
+
+            <div class="container">
+              
+              <span class="h4"><span data-query="total"></span> Clients added in total</span>
+
+              <div class="row tab-focus">
+
+                <div class="col-md-3">
+                  <input type="radio" name="due_diligience" data-filter="Due diligence" value="Incomplete" id="due_diligience_incomplete" class="visually-hidden" />
+                  <label class="card card--small card--danger" for="due_diligience_incomplete" ><span data-query="Due diligence == Incomplete"></span> Due diligence incomplete</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="radio" name="due_diligience" data-filter="Due diligence" value="Requires approval" id="due_diligience_requires_approval" class="visually-hidden" />
+                  <label class="card card--small card--warning" for="due_diligience_requires_approval" ><span data-query="Due diligence == Requires approval"></span> Due diligence requires approval</label>
+                </div>
+                <div class="col-md-3">
+                  <input type="radio" name="due_diligience" data-filter="Due diligence" value="Verified" id="due_diligience_verified" class="visually-hidden" />
+                  <label class="card card--small card--success" for="due_diligience_verified" ><span data-query="Due diligence == Verified"></span> Due diligence verified</label>
+                </div>
               </div>
-            </div>
-            <div class="col">
-              <button class="btn btn-secondary" type="button" data-modal="filters">Filter by</button>
-            </div>
-            <div class="col d-none d-sm-block">
-              <div class="form-control__wrapper">
-                <label for="sort" class="form-label visually-hidden">Sort by</label>
-                <select type="select" name="sort" id="sort" class="form-select" data-sort>
-                  <option value="-1">Sort by</option>
-                  <option value="risk level high" data-sort="Risk level" data-order="High,Medium,Low">Risk level (high to low)</option>
-                  <option value="risk level low" data-sort="Risk level" data-order="Low,Medium,High">Risk level (low to high)</option>
-                  <option value="client asc" data-sort="Client" data-order="asc">Client (Ascedning order)</option>
-                  <option value="client desc" data-sort="Client" data-order="desc">Client (Descending order)</option>
-                </select>
+              <hr/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+              <div class="row sticky-form">
+                <div class="col">
+                  <div class="form-control__wrapper">
+                    <label for="search" class="form-label">Search</label>
+                    <input name="search" id="search" type="text" class="form-control" data-search="Client, Transaction address">
+                  </div>
+                </div>
+                <div class="col">
+                  <button class="btn btn-secondary" type="button" data-modal="filters">Filter by</button>
+                </div>
+                <div class="col d-none d-sm-block">
+                  <div class="form-control__wrapper">
+                    <label for="sort" class="form-label visually-hidden">Sort by</label>
+                    <select type="select" name="sort" id="sort" class="form-select" data-sort>
+                      <option value="-1">Sort by</option>
+                      <option value="risk level high" data-sort="Risk level" data-order="High,Medium,Low">Risk level (high to low)</option>
+                      <option value="risk level low" data-sort="Risk level" data-order="Low,Medium,High">Risk level (low to high)</option>
+                      <option value="client asc" data-sort="Client" data-order="asc">Client (Ascedning order)</option>
+                      <option value="client desc" data-sort="Client" data-order="desc">Client (Descending order)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <button class="btn btn-secondary" type="button" data-clear>Clear filters</button>
+                </div>
               </div>
+
+
+              <dialog id="filters">
+                
+                <iam-applied-filters></iam-applied-filters>
+                <div class="form-check">
+                  <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level">
+                  <label for="risk-level-high" class="form-label form-check-label">High</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" name="risk-level" value="Medium" id="risk-level-medium" class="form-check-input" data-filter-text="Risk Level - Medium" data-filter="Risk level">
+                  <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
+                </div>
+                <div class="form-check">
+                  <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
+                  <label for="risk-level-low" class="form-label form-check-label">Low</label>
+                </div>
+
+                <hr/>
+
+                <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
+                  <label class="form-label" for="date-from">Date range</label>
+                  <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
+                  <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
+                </div>
+
+                <button class="btn btn-primary d-block m-auto" type="submit">Update results</button>
+              </dialog>
             </div>
+          </form>
+
+          <div class="container">
+          <Table class="table--sticky table--minify" data-filterby="tableFilters">
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Transaction address</th>
+                  <th>Onboarding status</th>
+                  <th>Risk level</th>
+                  <th>Due diligence</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Requires approval</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Incomplete</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>B Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Requires approval</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>A Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Incomplete</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Requires approval</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Incomplete</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>C Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>D Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td> E Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>FDave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>I Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>HDave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Requires approval</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Richard Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>High</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Bob Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Low</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+                <tr>
+                  <td>Dave Smith, Buyer</td>
+                  <td>18 Mar 23</td>
+                  <td>89, Queens Crescent, NE28 8DR</td>
+                  <td>Risk assessment complete</td>
+                  <td>Medium</td>
+                  <td>Verified</td>
+                  <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                </tr>
+              </tbody>
+            </table>
+          </Table>
+
+
           </div>
 
 
+<<<<<<< Updated upstream
           <dialog id="filters">
             <div class="form-check">
               <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level">
@@ -47,33 +1734,109 @@
               <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
               <label for="risk-level-low" class="form-label form-check-label">Low</label>
             </div>
+=======
 
+
+        </Tab>
+        <Tab title="Conveyancing Opportunities">
+          <p>Answer 2</p>
+        </Tab>
+        <Tab title="Material and Property Information">
+          
+          <form id="tableFilters2">
+
+          <div class="container">
+            
+            <span class="h4"><span data-query="total"></span> Material and Property Information added in total</span>
+>>>>>>> Stashed changes
+
+            <div class="row tab-focus">
+
+              <div class="col-md-3">
+                <input type="radio" name="form_top_filter" data-filter="multi" value='{"Form type":"Material information","Form status":"Outstanding"}' id="mi_outstanding" class="visually-hidden" />
+                <label class="card card--small card--danger" for="mi_outstanding"><span data-query="Form type == Material information && Form status == Outstanding"></span> MI Outstanding</label>
+              </div>
+
+              <div class="col-md-3">
+                <input type="radio" name="form_top_filter" data-filter="multi" value='{"Form type":"Material information","Form status":"Completed"}' id="mi_completed" class="visually-hidden" />
+                <label class="card card--small card--success" for="mi_completed"><span data-query="Form type == Material information && Form status == Completed"></span> MI Completed</label>
+              </div>
+
+            </div>
             <hr/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
 
-            <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
-              <label class="form-label" for="date-from">Date range</label>
-              <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
-              <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
+            <div class="row sticky-form">
+              <div class="col">
+                <div class="form-control__wrapper">
+                  <label for="search" class="form-label">Search</label>
+                  <input name="search" id="search" type="text" class="form-control" data-search="Client, Transaction address">
+                </div>
+              </div>
+              <div class="col">
+                <button class="btn btn-secondary" type="button" data-modal="filters">Filter by</button>
+              </div>
+              <div class="col d-none d-sm-block">
+                <div class="form-control__wrapper">
+                  <label for="sort" class="form-label visually-hidden">Sort by</label>
+                  <select type="select" name="sort" id="sort" class="form-select" data-sort>
+                    <option value="-1">Sort by</option>
+                    <option value="risk level high" data-sort="Risk level" data-order="High,Medium,Low">Risk level (high to low)</option>
+                    <option value="risk level low" data-sort="Risk level" data-order="Low,Medium,High">Risk level (low to high)</option>
+                    <option value="client asc" data-sort="Client" data-order="asc">Client (Ascedning order)</option>
+                    <option value="client desc" data-sort="Client" data-order="desc">Client (Descending order)</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col">
+                <button class="btn btn-secondary" type="button" data-clear>Clear filters</button>
+              </div>
             </div>
 
-            <button class="btn btn-primary d-block m-auto" type="submit">Update results</button>
-          </dialog>
-        </div>
-      </form>
 
+            <dialog id="filters">
+              
+              <iam-applied-filters></iam-applied-filters>
+              <div class="form-check">
+                <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level">
+                <label for="risk-level-high" class="form-label form-check-label">High</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="risk-level" value="Medium" id="risk-level-medium" class="form-check-input" data-filter-text="Risk Level - Medium" data-filter="Risk level">
+                <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
+              </div>
+              <div class="form-check">
+                <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
+                <label for="risk-level-low" class="form-label form-check-label">Low</label>
+              </div>
 
+              <hr/>
 
-      <div class="container">
-        <Table class="table--sticky table--minify" data-filterby="tableFilters">
+              <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
+                <label class="form-label" for="date-from">Date range</label>
+                <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
+                <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
+              </div>
+
+              <button class="btn btn-primary d-block m-auto" type="submit">Update results</button>
+            </dialog>
+          </div>
+          </form>
+
+          <div class="container">
+          <Table class="table--sticky table--minify" data-filterby="tableFilters2">
           <table>
             <thead>
               <tr>
                 <th>Client</th>
                 <th>Date added</th>
                 <th>Transaction address</th>
-                <th>Onboarding status</th>
-                <th>Risk level</th>
-                <th>Due diligence</th>
+                <th>Form type</th>
+                <th>Form status</th>
                 <th></th>
               </tr>
             </thead>
@@ -82,1600 +1845,82 @@
                 <td>Richard Smith, Buyer</td>
                 <td>18 Mar 23</td>
                 <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>B Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                <td>TA6</td>
+                <td>Completed</td>
+                <td><a href="/info" class="text-nowrap">View information</a></td>  
               </tr>
               <tr>
                 <td>Richard Smith, Buyer</td>
                 <td>18 Mar 23</td>
                 <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>A Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                <td>TA7</td>
+                <td>Outstanding</td>
+                <td><a href="/info" class="text-nowrap">View information</a></td>  
               </tr>
               <tr>
                 <td>Richard Smith, Buyer</td>
                 <td>18 Mar 23</td>
                 <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                <td>TA6</td>
+                <td>Outstanding</td>
+                <td><a href="/info" class="text-nowrap">View information</a></td>  
               </tr>
               <tr>
                 <td>Richard Smith, Buyer</td>
                 <td>18 Mar 23</td>
                 <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>C Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                <td>Material information</td>
+                <td>Outstanding</td>
+                <td><a href="/info" class="text-nowrap">View information</a></td>  
               </tr>
               <tr>
                 <td>Richard Smith, Buyer</td>
                 <td>18 Mar 23</td>
                 <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>D Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td> E Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>FDave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>I Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                <td>Material information</td>
+                <td>Outstanding</td>
+                <td><a href="/info" class="text-nowrap">View information</a></td>  
               </tr>
               <tr>
                 <td>Richard Smith, Buyer</td>
                 <td>18 Mar 23</td>
                 <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>HDave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                <td>Material information</td>
+                <td>Completed</td>
+                <td><a href="/info" class="text-nowrap">View information</a></td>  
               </tr>
               <tr>
                 <td>Richard Smith, Buyer</td>
                 <td>18 Mar 23</td>
                 <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                <td>TA10</td>
+                <td>Outstanding</td>
+                <td><a href="/info" class="text-nowrap">View information</a></td>  
               </tr>
               <tr>
                 <td>Richard Smith, Buyer</td>
                 <td>18 Mar 23</td>
                 <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>High</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Bob Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td><a href="/clienturl" class="text-nowrap">Verified</a></td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Low</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
-              </tr>
-              <tr>
-                <td>Dave Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Risk assessment complete</td>
-                <td>Medium</td>
-                <td>Verified</td>
-                <td><a href="/clienturl" class="text-nowrap">Manage client</a></td>  
+                <td>TA10</td>
+                <td>Completed</td>
+                <td><a href="/info" class="text-nowrap">View information</a></td>  
               </tr>
             </tbody>
           </table>
-        </Table>
+          </Table>
 
+          </div>
+
+
+        </Tab>
+      </Tabs>
+
+<<<<<<< Updated upstream
       </div>
+=======
+
+
+>>>>>>> Stashed changes
     </main>
   </div>
 </template>
@@ -1691,9 +1936,37 @@
   background-color: green;
 }
 */
+
+
+.tab-focus:focus-within {
+
+  //outline: 2px solid blue;
+  //outline-offset: 1rem;
+
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+
+  [type="radio"] + label {
+    --spread: 1rem;
+  }
+
+  [type="radio"]:checked + label {
+    --spread: 0.2rem;
+  }
+}
 </style>
 
 <script setup>
 import Nav from '@/components/Nav/Nav.vue'
 import Table from '@/components/Table/Table.vue'
+<<<<<<< Updated upstream
+=======
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Tab from '@/components/Tabs/Tab.vue'
+
+import iamAppliedFilters from '../../../assets/ts/components/applied-filters/applied-filters.component';
+
+if (!window.customElements.get('iam-applied-filters'))
+  window.customElements.define('iam-applied-filters', iamAppliedFilters);
+
+>>>>>>> Stashed changes
 </script>

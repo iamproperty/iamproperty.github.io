@@ -10,6 +10,7 @@ export const addDataAttributes = (table) => {
   colRows.forEach((row, index) => {
 
     const cells = Array.from(row.querySelectorAll('th, td'));
+    const statuses = ['Low','Medium','High','N/A','Pending','Verified','Incomplete','Completed','Requires approval'];
     
     cells.forEach((cell, cellIndex) => {
 
@@ -20,6 +21,10 @@ export const addDataAttributes = (table) => {
         tempDiv.innerHTML = heading.innerHTML;
         let headingText = tempDiv.textContent || tempDiv.innerText || "";
         cell.setAttribute('data-label',headingText);
+
+        if(statuses.includes(cell.textContent.trim())){
+          cell.setAttribute('data-content',cell.textContent.trim());
+        }
       }
     });
   });
@@ -31,7 +36,6 @@ export const getLargestLastColWidth = (table) => {
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
 
     let lastColChild = row.querySelector(':scope > td:last-child > *:first-child');
-    lastColChild.parentNode.classList.add('col--sticky');
 
     let htmlStyles = window.getComputedStyle(document.querySelector('html'));
     let responsiveWidth = lastColChild.offsetWidth/parseFloat(htmlStyles.fontSize);
@@ -132,11 +136,18 @@ export const addFilterEventListeners = (table, form, pagination, savedTableBody)
       createPaginationButttons(table, form, pagination);
     }
 
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && !event.target.closest('form dialog')){
+      
+      filterTable(table, form, pagination);
+      createPaginationButttons(table, form, pagination);
+    }
+
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
         
       filterTable(table, form, pagination);
       createPaginationButttons(table, form, pagination);
     }
+
   });
 
 
@@ -159,6 +170,12 @@ export const addFilterEventListeners = (table, form, pagination, savedTableBody)
       event.stopPropagation();
     }
 
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')){
+      
+      form.reset();
+      filterTable(table, form, pagination);
+      createPaginationButttons(table, form, pagination);
+    }
   });
 
 
@@ -253,7 +270,17 @@ export const filterTable = (table, form, pagination) => {
       return;
     }
 
-    filters.push({'column':`${filterInput.getAttribute('data-filter')}`,'value':`${filterInput.value}`});
+    if(filterInput.getAttribute('data-filter') == "multi"){
+
+
+      for (const [key, value] of Object.entries(JSON.parse(filterInput.value))) {
+        filters.push({'column':`${key}`,'value':`${value}`});
+      }
+    }
+    else {
+      
+      filters.push({'column':`${filterInput.getAttribute('data-filter')}`,'value':`${filterInput.value}`});
+    }
 
   });
 
@@ -271,6 +298,7 @@ export const filterTable = (table, form, pagination) => {
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
 
+    row.classList.remove('filtered--match');
     row.classList.remove('filtered--show');
 
     let show = searches.length && searches[0].value.length >= 3 ? false : true;
@@ -297,6 +325,8 @@ export const filterTable = (table, form, pagination) => {
     if(show){
       
       matched++;
+
+      row.classList.add('filtered--matched');
       // pagination bit 
       if(Math.ceil(matched/showRows) == parseInt(page))
         row.classList.add('filtered--show');
@@ -310,6 +340,51 @@ export const filterTable = (table, form, pagination) => {
     pagination.setAttribute('data-total',matched);
     pagination.setAttribute('data-show',showRows);
   }
+}
+
+export const populateDataQueries = (table,form) => {
+
+  const dataQueries = Array.from(form.querySelectorAll('[data-query]'));
+
+  dataQueries.forEach((queryElement, index) => {
+
+    let query = queryElement.getAttribute('data-query');
+    let numberOfMatchedRows: 0;
+
+    if(query == 'total'){
+      numberOfMatchedRows = table.querySelectorAll('tbody tr.filtered--matched').length;
+    }
+    else if(query.includes(' && ')){
+
+      let queries = query.split(' && ');
+
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr`)).filter(function(row){
+
+        let matched = true;
+
+        for (const [index, value] of Object.entries(queries)) {
+          
+          let queryParts = value.split(' == ');
+
+          if(!row.querySelector(`td[data-label="${queryParts[0]}"]`) || row.querySelector(`td[data-label="${queryParts[0]}"]`).textContent != `${queryParts[1]}`)
+            matched = false;
+        }
+
+        return matched;
+
+      }).length;
+    }
+    else {
+
+      let queryParts = query.split(' == ');
+
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody td[data-label="${queryParts[0]}"]`)).filter(function(element){
+        return element.textContent === queryParts[1];
+      }).length;
+    }
+
+    queryElement.innerHTML = numberOfMatchedRows;
+  });
 }
 
 // Pagination
@@ -385,66 +460,55 @@ export const addPaginationEventListeners = function(table, form, wrapper){
   });
 }
 
+// Export CSV Data
 export const addExportEventListeners = (button, table) => {
 
   button.addEventListener('click', (event) => {
-
     exportAsCSV(table);
   });
 }
 
 export const exportAsCSV = function(table){
 
-  // Variable to store the final csv data
-  var csv_data = [];
-
+  var csvData = [];
   // Get each row data
-  var rows = document.getElementsByTagName('tr');
+  var rows = table.getElementsByTagName('tr');
   for (var i = 0; i < rows.length; i++) {
 
     // Get each column data
     var cols = rows[i].querySelectorAll('td,th');
 
     // Stores each csv row data
-    var csvrow = [];
+    var csvRow = [];
     for (var j = 0; j < cols.length; j++) {
 
-      // Get the text data of each cell
-        // of a row and push it to csvrow
-      csvrow.push(cols[j].textContent.replaceAll(',', '""","""'));
+      // Get the text data of each cell of a row and push it to csvrow
+      csvRow.push(`"${cols[j].textContent}"`);
     }
 
     // Combine each column value with comma
-    csv_data.push(csvrow.join(","));
+    csvData.push(csvRow.join(","));
   }
 
   // Combine each row data with new line character
-  csv_data = csv_data.join('\n');
-
+  csvData = csvData.join('\n');
   
-  // Create CSV file object and feed
-  // our csv_data into it
-  let CSVFile = new Blob([csv_data], {
+  // Create CSV file object and feed our csvData into it
+  let CSVFile = new Blob([csvData], {
     type: "text/csv"
   });
 
-  // Create to temporary link to initiate
-  // download process
-  var temp_link = document.createElement('a');
-
-  // Download csv file
-  temp_link.download = "GfG.csv";
+  // Create to temporary link to initiate download process
+  var tempLink = document.createElement('a');
+  tempLink.download = "export.csv";
   var url = window.URL.createObjectURL(CSVFile);
-  temp_link.href = url;
+  tempLink.href = url;
 
   // This link should not be displayed
-  temp_link.style.display = "none";
-  document.body.appendChild(temp_link);
+  tempLink.style.display = "none";
+  document.body.appendChild(tempLink);
 
-  // Automatically click the link to
-  // trigger download
-  temp_link.click();
-  document.body.removeChild(temp_link);
-
-
+  // Automatically click the link to trigger download
+  tempLink.click();
+  document.body.removeChild(tempLink);
 }

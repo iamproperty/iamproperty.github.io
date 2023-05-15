@@ -171,7 +171,7 @@ table.border-0 {
   body:not(.js-enabled) .table--minify tr:not(:hover):not(:focus-within),
   .table--minify tr:not([data-view="full"]) {
 
-    td:not(:first-child):not(:nth-child(2)):not(:nth-child(2)):not(:nth-child(3)):not(.col--sticky){
+    td:not(:first-child):not(:nth-child(2)):not(:nth-child(2)):not(:nth-child(3)):not(:last-child){
       display: none;
     }
     td:first-child {
@@ -418,4 +418,14 @@ table.border-0 {
 
 table:not(.table--filtered) tbody tr:nth-child(15) ~ tr {
   display: none;
+}
+
+
+
+// Statuses 
+[data-content="Incomplete"] {
+  background-color: red;
+}
+[data-content="Verified"] {
+  background-color: green;
 }

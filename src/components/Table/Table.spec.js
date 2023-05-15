@@ -88,3 +88,74 @@ describe('Table component', () => {
   })
 
 })
+
+
+
+/*
+describe('addDataAttributes', () => {
+
+  test('should add data-label attribute to cells', () => {
+    // arrange
+    const table = document.createElement('table');
+    const thead = document.createElement('thead');
+    const tbody = document.createElement('tbody');
+    const tr1 = document.createElement('tr');
+    const tr2 = document.createElement('tr');
+    const th1 = document.createElement('th');
+    const th2 = document.createElement('th');
+    const td1 = document.createElement('td');
+    const td2 = document.createElement('td');
+    
+    th1.innerHTML = 'Heading 1';
+    th2.innerHTML = 'Heading 2';
+    td1.innerHTML = 'Cell 1';
+    td2.innerHTML = 'Cell 2';
+    
+    tr1.appendChild(th1);
+    tr1.appendChild(td1);
+    tr2.appendChild(th2);
+    tr2.appendChild(td2);
+    
+    thead.appendChild(tr1);
+    tbody.appendChild(tr2);
+    
+    table.appendChild(thead);
+    table.appendChild(tbody);
+    
+    // act
+    addDataAttributes(table);
+    
+    // assert
+    expect(td1.getAttribute('data-label')).toEqual('Heading 1');
+    expect(td2.getAttribute('data-label')).toEqual('Heading 2');
+  });
+
+  test('should not add data-label attribute to cells if heading is undefined', () => {
+    // arrange
+    const table = document.createElement('table');
+    const tbody = document.createElement('tbody');
+    const tr1 = document.createElement('tr');
+    const td1 = document.createElement('td');
+    const td2 = document.createElement('td');
+    
+    td1.innerHTML = 'Cell 1';
+    td2.innerHTML = 'Cell 2';
+    
+    tr1.appendChild(td1);
+    tr1.appendChild(td2);
+    
+    tbody.appendChild(tr1);
+    
+    table.appendChild(tbody);
+    
+    // act
+    addDataAttributes(table);
+    
+    // assert
+    expect(td1.hasAttribute('data-label')).toBeFalsy();
+    expect(td2.hasAttribute('data-label')).toBeFalsy();
+  });
+
+});
+
+*/

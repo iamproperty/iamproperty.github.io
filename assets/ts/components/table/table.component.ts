@@ -99,6 +99,8 @@ class iamTable extends HTMLElement {
     tableModule.createPaginationButttons(this.table, this.form, this.pagination);
     tableModule.addPaginationEventListeners(this.table, this.form, this.pagination);
 
+    tableModule.populateDataQueries(this.table, this.form);
+
 
   }
 
