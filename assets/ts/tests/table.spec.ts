@@ -173,8 +173,6 @@ describe('populateDataQueries', () => {
   tableModule.addDataAttributes(table);
   tableModule.populateDataQueries(table, form);
 
-  console.log(form.innerHTML)
-
   test('should populate elements with the data-query attribute with the result of the corresponding query', () => {
 
 
