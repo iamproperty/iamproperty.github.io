@@ -3,7 +3,7 @@
     <img v-if="image" :src="image" alt="" class="d-none d-md-block" />
     <div class="container">
       <ul class="breadcrumb mb-0 d-md-none">
-        <li><a href="/foundations">Foundations</a></li>
+        <li><a :href="`/${section}`" v-html="`${section.toUpperCase()}`"></a></li>
       </ul>
       <slot></slot>
     </div>
@@ -44,6 +44,11 @@ export default {
   props: {
     image: {
       type: String,
+      required: false
+    },
+    section: {
+      type: String,
+      default: 'foundations',
       required: false
     }
   }

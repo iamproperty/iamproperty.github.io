@@ -494,3 +494,10 @@ $zindex-modal:                      var(--index-overlay);
 $zindex-popover:                    var(--index-above);
 $zindex-tooltip:                    var(--index-above);
 // #endregion
+
+// #region Table
+$td-mw-px: 120;
+$td-mw: #{rem($td-mw-px)};
+$table-padding-px: 32;
+$table-padding: #{rem($table-padding-px)};
+// #endregion

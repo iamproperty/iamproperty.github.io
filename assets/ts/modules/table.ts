@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { zeroPad, isNumeric } from "./helpers";
+import { zeroPad, isNumeric, ucfirst } from "./helpers";
 
 // Basic functionality needed
 export const addDataAttributes = (table) => {
@@ -31,17 +31,23 @@ export const addDataAttributes = (table) => {
 }
 
 export const getLargestLastColWidth = (table) => {
+ 
   let largestWidth = 0;
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-
-    let lastColChild = row.querySelector(':scope > td:last-child > *:first-child');
+  Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
 
     let htmlStyles = window.getComputedStyle(document.querySelector('html'));
-    let responsiveWidth = lastColChild.offsetWidth/parseFloat(htmlStyles.fontSize);
-    responsiveWidth += 1.5;
+    let lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
 
-    largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
+    if(lastColChild){
+
+      let responsiveWidth = lastColChild.offsetWidth/parseFloat(htmlStyles.fontSize);
+      responsiveWidth += 1.5;
+      largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
+    }
+
+    let rowHeight = row.offsetHeight/parseFloat(htmlStyles.fontSize);
+    row.style.setProperty("--row-height", `${rowHeight}rem`);
   });
 
   return largestWidth;
@@ -50,10 +56,9 @@ export const getLargestLastColWidth = (table) => {
 export const createMobileButton = (table) => {
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-    let firstCol = row.querySelector(':scope > td:first-child');
-
+    let firstCol = row.querySelector(':scope > :is(td,th):first-child');
     let colContent = firstCol.textContent;
-    firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-sm-none">${colContent}</button>`;
+    firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-none">${colContent}</button>`;
   });
 }
 
@@ -61,9 +66,9 @@ export const addTableEventListeners = (table) => {
 
   table.addEventListener('click', (event) => {
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('tr > td:first-child button')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('tr > :is(td,th):first-child button')){
 
-      let firstCol = event.target.closest('tr > td:first-child button');
+      let firstCol = event.target.closest('tr > :is(td,th):first-child button');
       let tableRow = firstCol.parentNode.closest('tr');
 
       if(tableRow.getAttribute('data-view') == "full")
@@ -77,11 +82,16 @@ export const addTableEventListeners = (table) => {
 }
 
 // Filters
-export const createSearchDataList = (table, form, searchInput) => {
+export const createSearchDataList = (table, form) => {
+
+  let searchInput = form.querySelector('[data-search]');
+
+  if(!searchInput)
+    return false;
 
   const searchID = searchInput.getAttribute('id');
   const searchableColumns = searchInput.getAttribute('data-search').split(',');
-  let wrapper = searchInput.parentNode;
+  let inputWrapper = searchInput.parentNode;
 
   let searchableTerms = {};
   searchableColumns.forEach((columnHeading, index) => {
@@ -98,9 +108,10 @@ export const createSearchDataList = (table, form, searchInput) => {
   searchInput.setAttribute('list',`${searchID}_list`);
   searchInput.setAttribute('autocomplete','off');
 
-  wrapper.innerHTML += `<datalist id="${searchID}_list">
-  ${Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("")}
-</datalist>`;
+  if(!inputWrapper.querySelector('datalist'))
+    inputWrapper.innerHTML += `<datalist id="${searchID}_list"></datalist>`;
+  
+  inputWrapper.querySelector('datalist').innerHTML = `${Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("")}`;
 }
 
 export const addFilterEventListeners = (table, form, pagination, savedTableBody) => {
@@ -110,12 +121,12 @@ export const addFilterEventListeners = (table, form, pagination, savedTableBody)
 
     clearTimeout(timer);
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]') && event.target.closest('[data-search]').value.length >= 3){
 
       timer = setTimeout(function(){ 
         filterTable(table, form, pagination); 
         createPaginationButttons(table, form, pagination);
-      }, 500);
+      }, 1000);
     };
   });
 
@@ -178,14 +189,9 @@ export const addFilterEventListeners = (table, form, pagination, savedTableBody)
     }
   });
 
-
-  
-
   form.addEventListener('submit', (event) => {
 
     clearTimeout(timer);
-    
-console.log('submit');
 
     event.preventDefault();
 
@@ -195,6 +201,10 @@ console.log('submit');
 }
 
 export const sortTable = (table, form, savedTableBody) => {
+
+  if(form.getAttribute('data-ajax')){
+    return false;
+  }
 
   let tbody = table.querySelector('tbody');
   let select = form.querySelector('[data-sort]');
@@ -252,7 +262,13 @@ export const sortTable = (table, form, savedTableBody) => {
 
 export const filterTable = (table, form, pagination) => {
 
-  table.classList.add('table--filtered');
+  table.classList.remove('table--filtered');
+
+  if(form.getAttribute('data-ajax')){
+    loadAjaxTable(table, form, pagination);
+
+    return false;
+  }
 
   let filters = [];
   let searches = [];
@@ -267,6 +283,10 @@ export const filterTable = (table, form, pagination) => {
 
     // Ignore uncked radio inputs
     if(filterInput.type == 'radio' && !filterInput.checked){
+      return;
+    }
+
+    if(filterInput.type == 'checkbox' && !filterInput.checked){
       return;
     }
 
@@ -295,34 +315,39 @@ export const filterTable = (table, form, pagination) => {
     });
   }
 
+  // Stop function if no filters identified
+  if(!searches.length && !filters.length)
+    return false;
+  
+  table.classList.add('table--filtered');
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
 
     row.classList.remove('filtered--match');
     row.classList.remove('filtered--show');
 
-    let show = searches.length && searches[0].value.length >= 3 ? false : true;
-
-    searches.forEach((search, index) => {
-
-      let searchTd = row.querySelector(`[data-label="${search.column}"]`)
-
-      if(searchTd && searchTd.textContent.toLowerCase().includes(search.value.toLowerCase())){
-        show = true;
-      }
-    });
+    let isMatched = filters.length == 0 ? true : false;
+    let isSearched = searches.length > 0 && searches[0].value.length >= 3 ? false : true;
 
     filters.forEach((filter, index) => {
 
       let filterTd = row.querySelector(`[data-label="${filter.column}"]`)
 
-      if(!filterTd || !filterTd.textContent.includes(filter.value)){
-        show = false;
+      if(filterTd && filterTd.textContent.toLowerCase().includes(filter.value.toLowerCase())){
+        isMatched = true;
+      }
+    });
+
+    searches.forEach((search, index) => {
+
+      let searchTd = row.querySelector(`[data-label="${search.column}"]`)
+      if(searchTd && search.value.length >= 3 && searchTd.textContent.toLowerCase().includes(search.value.toLowerCase())){
+        isSearched = true;
       }
     });
 
     // You pass all the filters ass the class back
-    if(show){
+    if(isMatched && isSearched){
       
       matched++;
 
@@ -352,7 +377,7 @@ export const populateDataQueries = (table,form) => {
     let numberOfMatchedRows: 0;
 
     if(query == 'total'){
-      numberOfMatchedRows = table.querySelectorAll('tbody tr.filtered--matched').length;
+      numberOfMatchedRows = table.classList.contains('table--filtered') ? table.querySelectorAll('tbody tr.filtered--matched').length : table.querySelectorAll('tbody tr').length;
     }
     else if(query.includes(' && ')){
 
@@ -388,23 +413,23 @@ export const populateDataQueries = (table,form) => {
 }
 
 // Pagination
-export const createPaginationButttons = function(table, form, wrapper){
+export const createPaginationButttons = function(table, form, pagination){
   
-  if(!wrapper.getAttribute('data-pages'))
+  if(!pagination.getAttribute('data-pages'))
     return false;
 
-  if(!wrapper.getAttribute('data-page'))
-    wrapper.setAttribute('data-page', 1);
+  if(!pagination.getAttribute('data-page'))
+  pagination.setAttribute('data-page', 1);
 
-  let currentPage = wrapper.getAttribute('data-page');
-  let numberPages = wrapper.getAttribute('data-pages');
-  let numberRows = wrapper.getAttribute('data-total');
-  let showRows = wrapper.getAttribute('data-show');
-  let addRows = wrapper.getAttribute('data-increment');
+  let currentPage = pagination.getAttribute('data-page');
+  let numberPages = pagination.getAttribute('data-pages');
+  let numberRows = pagination.getAttribute('data-total');
+  let showRows = pagination.getAttribute('data-show');
+  let addRows = pagination.getAttribute('data-increment');
 
   if(numberPages <= 1){
     
-    wrapper.innerHTML = '';
+    pagination.innerHTML = '';
     return false;
   }
   
@@ -418,12 +443,12 @@ export const createPaginationButttons = function(table, form, wrapper){
       strButtons += `<li class="page-item"><button class="page-link" data-page="${i}">${i}</button></li>`;
   }
 
-  wrapper.innerHTML = `<ul class="pagination mb-3 d-none d-sm-flex">
+  pagination.innerHTML = `<ul class="pagination mb-3 d-none d-sm-flex">
     ${currentPage == 1 ? `<li class="page-item disabled"><span class="page-link">Previous</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(currentPage)-1}">Previous</button></li>`}
     ${strButtons}
     ${currentPage == numberPages ? `<li class="page-item disabled"><span class="page-link">Next</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(currentPage)+1}">Next</button></li>`}
   </ul>`;
-  wrapper.innerHTML += `<div class="d-sm-none">
+  pagination.innerHTML += `<div class="d-sm-none">
   <span>You've viewed ${showRows} of ${numberRows} results</span>
   <button type="button" data-show="${parseInt(showRows)+parseInt(addRows)}">Load more results</button>
   </div>`;
@@ -462,6 +487,9 @@ export const addPaginationEventListeners = function(table, form, wrapper){
 
 // Export CSV Data
 export const addExportEventListeners = (button, table) => {
+
+  if(!button)
+    return false;
 
   button.addEventListener('click', (event) => {
     exportAsCSV(table);
@@ -511,4 +539,107 @@ export const exportAsCSV = function(table){
   // Automatically click the link to trigger download
   tempLink.click();
   document.body.removeChild(tempLink);
+}
+
+// After table is loaded
+export const makeTableFunctional = function(table, form, pagination, wrapper){
+
+  createMobileButton(table);
+  addDataAttributes(table);
+  populateDataQueries(table, form);
+  
+  // Work out the largest width of the CTA's in the last column
+  if(wrapper && wrapper.classList.contains('table--cta')){
+
+    const largestWidth = getLargestLastColWidth(table);
+    wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
+  }
+}
+
+export const loadAjaxTable = function (table, form, pagination, wrapper){
+
+  const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
+
+  let queryString = new URLSearchParams(new FormData(form)).toString();
+  let columns = table.querySelectorAll('thead tr th');
+  let tbody = table.querySelector('tbody');
+
+  fetch(form.getAttribute('data-ajax')+'?'+queryString, {
+    method: 'get',
+    credentials: 'same-origin',
+    //signal: controller.signal,
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  }).then((response) => response.json()).then((response) => {
+
+    if (response.data) {
+
+      tbody.innerHTML = '';
+
+      response.data.forEach((row, index) => {
+
+        var table_row = document.createElement('tr');
+
+        columns.forEach((col, index) => {
+
+          let cellOutput = '';
+          var table_cell  = document.createElement('td');
+          // Add some data to help with the mobile layout design
+          table_cell.setAttribute('data-label',col.innerText);
+
+          if(col.getAttribute('data-output')){
+            var cellTemplate = col.getAttribute('data-output');
+            // Use a regex to replace {var} with actual values from the json data
+            cellOutput = cellTemplate.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(row, matched.replace('{','').replace('}','')); });
+          }
+
+          if(col.hasAttribute('data-format')){
+            cellOutput = formatCell(col.getAttribute('data-format'),cellOutput);
+          }
+
+          table_cell.innerHTML = cellOutput;
+          table_row.appendChild(table_cell)
+        });
+
+        tbody.appendChild(table_row)
+          
+      });
+
+      createSearchDataList(table, form)
+      // Add data to the pagination 
+      makeTableFunctional(table, form, pagination, wrapper);
+
+      pagination.setAttribute('data-total', (response.meta.total ? response.meta.total : 1));
+      pagination.setAttribute('data-page', (response.meta.current_page ? response.meta.current_page : 1));
+      pagination.setAttribute('data-pages', Math.ceil(pagination.getAttribute('data-total') / pagination.getAttribute('data-show')));
+
+      createPaginationButttons(table, form, pagination);
+
+      if(response.data.length == 0){
+        tbody.innerHTML = '<tr><td colspan="100%"><span class="h4 m-0">No results found</span></td></tr>';
+      }
+      
+    }
+    else {
+      tbody.innerHTML = '<tr><td colspan="100%"><span class="h6 m-0">Error loading table</span></td></tr>';
+    }
+
+  });
+}
+
+export const formatCell = (format, cellOutput) => {
+
+  switch (format) {
+    case 'date':
+      cellOutput = new Date(cellOutput).toLocaleDateString('en-gb', { year:"numeric", month:"long", day: "numeric"});
+    break;
+    case 'capitalise':
+      cellOutput = ucfirst(cellOutput);
+    break;
+  }
+  
+  return cellOutput;
 }

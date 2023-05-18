@@ -8,22 +8,24 @@ class iamTable extends HTMLElement {
     this.attachShadow({ mode: 'open'});
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
 
-    const isSticky = this.classList.contains('table--sticky');
+    const isCTA = this.classList.contains('table--cta');
+    const isExportable = this.classList.contains('table--export');
+    
     let classList = this.classList.toString();
 
-    classList = classList.replace('table--sticky','');
+    classList = classList.replace('table--cta','');
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
     @import "${assetLocation}/css/core.min.css";
     </style>
-    ${isSticky ? '<div class="table--sticky">' : ''}
+    ${isCTA ? '<div class="table--cta">' : ''}
     <div class="table__wrapper ${classList}">
       <slot></slot>
     </div>
-    ${isSticky ? '</div>' : ''}
-    <button class="link" type="button" data-export>Export table as CSV</button>
+    ${isCTA ? '</div>' : ''}
+    ${isExportable ? '<button class="link" type="button" data-export>Export table as CSV</button>' : ''}
     <div class="table__pagination"></div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -32,9 +34,6 @@ class iamTable extends HTMLElement {
     // Set default attributes
     if(!this.hasAttribute('data-total'))
       this.setAttribute('data-total', this.querySelectorAll('table tbody tr').length);
-
-    
-    console.log(params.get('page'))
 
     if(!this.hasAttribute('data-page'))
       this.setAttribute('data-page', (params.has('page') ? params.get('page') : 1));
@@ -56,51 +55,38 @@ class iamTable extends HTMLElement {
     this.pagination.setAttribute('data-total',this.getAttribute('data-total'));
     this.pagination.setAttribute('data-increment',this.getAttribute('data-show'));
 
-    // Create a button in the first column
-    tableModule.createMobileButton(this.table);
-
-    tableModule.addTableEventListeners(this.table);
-
-    tableModule.addExportEventListeners(this.shadowRoot.querySelector('[data-export]'), this.table);
-
-    // Setup the mobile titles
-    tableModule.addDataAttributes(this.table);
-
-    // Work out the largest width of the CTA's in the last column
-    if(this.classList.contains('table--sticky')){
-
-      const largestWidth = tableModule.getLargestLastColWidth(this.table);
-      this.style.setProperty("--cta-width", `${largestWidth}rem`);
-    }
-
     // Set events on the filter table
     this.form = document.createElement('form');
     if(this.hasAttribute('data-filterby')){
 
       this.form = document.querySelector(`#${this.getAttribute('data-filterby')}`);
-      let searchInput = this.form.querySelector('[data-search]');
 
-      if(searchInput)
-        tableModule.createSearchDataList(this.table, this.form, searchInput);
+      // Create a data list if a search input is present
+      tableModule.createSearchDataList(this.table, this.form);
 
-        if(!this.form.querySelector('[data-page]')){
-          this.form.innerHTML += `<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`
-        }
-        if(!this.form.querySelector('[data-show]')){
-          this.form.innerHTML += `<input name="show" type="hidden" value="${this.getAttribute('data-show')}" data-show="true" />`
-        }
+      if(!this.form.querySelector('[data-page]')){
+        this.form.innerHTML += `<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`
+      }
+      if(!this.form.querySelector('[data-show]')){
+        this.form.innerHTML += `<input name="show" type="hidden" value="${this.getAttribute('data-show')}" data-show="true" />`
+      }
     }
 
 
+    // Event listeners
+    tableModule.addTableEventListeners(this.table);
     tableModule.addFilterEventListeners(this.table, this.form, this.pagination, this.savedTableBody);
-    
-    tableModule.filterTable(this.table, this.form);
-
-    tableModule.createPaginationButttons(this.table, this.form, this.pagination);
     tableModule.addPaginationEventListeners(this.table, this.form, this.pagination);
+    tableModule.addExportEventListeners(this.shadowRoot.querySelector('[data-export]'), this.table);
 
-    tableModule.populateDataQueries(this.table, this.form);
-
+    if(this.form.getAttribute('data-ajax')){
+      tableModule.loadAjaxTable(this.table, this.form, this.pagination, this);
+    }
+    else {
+      tableModule.makeTableFunctional(this.table, this.form, this.pagination, this);
+      tableModule.filterTable(this.table, this.form);
+      tableModule.createPaginationButttons(this.table, this.form, this.pagination);
+    }
 
   }
 

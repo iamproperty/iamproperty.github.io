@@ -2,7 +2,7 @@
 // Modules
 import * as helpers from '../js/modules/helpers'
 import nav from '../js/modules/nav'
-import table, {tableStacked, } from '../js/modules/table'
+import * as tableModule from './modules/table'
 import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
@@ -27,8 +27,16 @@ document.addEventListener("DOMContentLoaded", function() {
   // Advanced tables
   Array.from(document.querySelectorAll('table')).forEach((arrayElement) => {
 
-    tableStacked(arrayElement);
-    table(arrayElement);
+    tableModule.addTableEventListeners(arrayElement);
+    tableModule.createMobileButton(arrayElement);
+    tableModule.addDataAttributes(arrayElement);
+
+
+    if(arrayElement.closest('.table--cta')){
+
+      const largestWidth = tableModule.getLargestLastColWidth(arrayElement);
+      arrayElement.closest('.table--cta').style.setProperty("--cta-width", `${largestWidth}rem`);
+    }
   });
 
   // Accordions

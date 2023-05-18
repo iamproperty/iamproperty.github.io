@@ -2,7 +2,6 @@
 // Modules
 import * as helpers from '../js/modules/helpers'
 import nav from '../js/modules/nav'
-import table from '../js/modules/table'
 //import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
@@ -12,6 +11,7 @@ import modal from '../js/modules/modal'
 import iamHeader from './components/header/header.component'
 import iamAccordion from './components/accordion/accordion.component'
 import iamTabs from './components/tabs/tabs.component'
+import iamTable from './components/table/table.component'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -30,17 +30,13 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!window.customElements.get(`iam-tabs`))
     window.customElements.define(`iam-tabs`, iamTabs);
 
+  if (!window.customElements.get(`iam-table`))
+    window.customElements.define(`iam-table`, iamTable);
+
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
     nav(arrayElement);
   });
-
-  // Advanced tables
-  /*
-  Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
-    table(arrayElement);
-  });
-  */
 
 
 

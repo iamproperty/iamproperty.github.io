@@ -10,7 +10,7 @@ import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 import modal from '../js/modules/modal'
 
-const components = ['accordion','header','tabs'];
+const components = ['accordion','header','tabs', 'table'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',
@@ -58,19 +58,6 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
     nav(arrayElement);
   });
-
-  // Advanced tables
-  /*
-  Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
-    table(arrayElement);
-  });
-  */
-  // Accordions
-  /*
-  Array.from(document.querySelectorAll('.accordion')).forEach((arrayElement) => {
-    accordion(arrayElement);
-  });
-*/
 
   // Testimonial
   Array.from(document.querySelectorAll('.testimonial')).forEach((arrayElement) => {
