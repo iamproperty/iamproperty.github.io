@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "3.4.6",
+  "version": "3.4.7--alpha",
   "scripts": {
     "dev": "npm run copy && node local_modules/delete-assets.js && vite --host",
     "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
