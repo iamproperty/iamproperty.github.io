@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.4.7--alpha</h2>
+      <ul>
+        <li>Implement the datalayer</li>
+      </ul>
+
       <h2>V3.4.6</h2>
       <h3>Native web components introduced</h3>
       <p>See https://iamproperty.atlassian.net/wiki/spaces/FEG/blog/2023/04/13/218759184/Exploring+Native+web+components for information</p>
