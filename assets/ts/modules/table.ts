@@ -1,586 +1,645 @@
 // @ts-nocheck
-import { zeroPad, isNumeric } from "./helpers";
+import { zeroPad, isNumeric, ucfirst } from "./helpers";
 
-function table(tableElement) {
+// Basic functionality needed
+export const addDataAttributes = (table) => {
 
-  if(typeof tableElement != "object")
+  const colHeadings = Array.from(table.querySelectorAll('thead th'));
+  const colRows = Array.from(table.querySelectorAll('tbody tr'));
+
+  colRows.forEach((row, index) => {
+
+    const cells = Array.from(row.querySelectorAll('th, td'));
+    const statuses = ['Low','Medium','High','N/A','Pending','Verified','Incomplete','Completed','Requires approval'];
+    
+    cells.forEach((cell, cellIndex) => {
+
+      const heading = colHeadings[cellIndex];
+      if(typeof heading != "undefined"){
+
+        let tempDiv = document.createElement("div");
+        tempDiv.innerHTML = heading.innerHTML;
+        let headingText = tempDiv.textContent || tempDiv.innerText || "";
+        cell.setAttribute('data-label',headingText);
+
+        if(statuses.includes(cell.textContent.trim())){
+          cell.setAttribute('data-content',cell.textContent.trim());
+        }
+      }
+    });
+  });
+}
+
+export const getLargestLastColWidth = (table) => {
+ 
+  let largestWidth = 0;
+
+  Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+
+    let htmlStyles = window.getComputedStyle(document.querySelector('html'));
+    let lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
+
+    if(lastColChild){
+
+      let responsiveWidth = lastColChild.offsetWidth/parseFloat(htmlStyles.fontSize);
+      responsiveWidth += 1.5;
+      largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
+    }
+
+    let rowHeight = row.offsetHeight/parseFloat(htmlStyles.fontSize);
+    row.style.setProperty("--row-height", `${rowHeight}rem`);
+  });
+
+  return largestWidth;
+}
+
+export const createMobileButton = (table) => {
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+    let firstCol = row.querySelector(':scope > :is(td,th):first-child');
+    let colContent = firstCol.textContent;
+    firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-none">${colContent}</button>`;
+  });
+}
+
+export const addTableEventListeners = (table) => {
+
+  table.addEventListener('click', (event) => {
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('tr > :is(td,th):first-child button')){
+
+      let firstCol = event.target.closest('tr > :is(td,th):first-child button');
+      let tableRow = firstCol.parentNode.closest('tr');
+
+      if(tableRow.getAttribute('data-view') == "full")
+        tableRow.setAttribute('data-view','default');
+      else
+        tableRow.setAttribute('data-view','full');
+
+      firstCol.blur();
+    };
+  });
+}
+
+// Filters
+export const createSearchDataList = (table, form) => {
+
+  let searchInput = form.querySelector('[data-search]');
+
+  if(!searchInput)
     return false;
 
-  const thead = tableElement.querySelector('thead');
-  const tbody = tableElement.querySelector('tbody');
-  const storedData = tbody.cloneNode(true);
-  const sortedEvent = new Event('sorted');
-  const filteredEvent = new Event('filtered');
-  const reorderedEvent = new Event('reordered');
-  const randID = 'table_'+Math.random().toString(36).substr(2, 9); // Random to make sure IDs created are unique
-  let draggedRow;
+  const searchID = searchInput.getAttribute('id');
+  const searchableColumns = searchInput.getAttribute('data-search').split(',');
+  let inputWrapper = searchInput.parentNode;
 
-  tableElement.setAttribute('id',randID)
+  let searchableTerms = {};
+  searchableColumns.forEach((columnHeading, index) => {
 
-  // #region Sortable
-  const sortTable = function(sortBy,sort){
+    Array.from(table.querySelectorAll('td[data-label="'+columnHeading.trim()+'"]')).forEach((td, index) => {
 
-    // Create an array from the table rows, the index created is then used to sort the array
-    let tableArr = [];
-    Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
-
-      let rowIndex = tableRow.querySelector('td[data-label="'+sortBy+'"], th[data-label="'+sortBy+'"]').textContent;
-
-      if(isNumeric(rowIndex))
-        rowIndex = zeroPad(rowIndex,10)
-
-      const dataRow = {
-        index: rowIndex,
-        row: tableRow
-      }
-      tableArr.push(dataRow);
+      if(td.querySelector('.td__content'))
+        searchableTerms[td.querySelector('.td__content').textContent] = td.querySelector('.td__content').textContent;
+      else
+        searchableTerms[td.textContent] = td.textContent;
     });
-
-    // Sort array
-    tableArr.sort((a, b) => (a.index > b.index) ? 1 : -1)
-
-    // Reverse if descending
-    if(sort == "descending")
-      tableArr = tableArr.reverse();
-
-    // Create a string to return and populate the tbody
-    let strTbody = '';
-    tableArr.forEach((tableRow, index) => {
-      strTbody += tableRow.row.outerHTML;
-    });
-    tbody.innerHTML = strTbody;
-
-    // Dispatch the sortable event
-    tableElement.dispatchEvent(sortedEvent);
-  }
-
-  // Declare event handlers
-  tableElement.addEventListener('click', function(e){
-    for (var target = e.target; target && target != this; target = target.parentNode) {
-      if (target.matches('[data-sortable]')) {
-
-        // Get current sort order
-        let sort = target.getAttribute('aria-sort') == "ascending" ? "descending" : "ascending";
-
-        // unset sort attributes
-        Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
-          col.setAttribute('aria-sort','none');
-        });
-
-        // Set the sort order attribute
-        target.setAttribute('aria-sort', sort);
-
-        // Save the sort options on the table element so that it can be re-sorted later
-        tableElement.setAttribute('data-sort', sort);
-        tableElement.setAttribute('data-sortBy', target.textContent);
-
-        // Sort the table
-        sortTable(target.textContent, sort);
-
-        Array.from(tableElement.querySelectorAll('tr[draggable]')).forEach((tableRow, index) => {
-
-          tableRow.removeAttribute('draggable');
-        });
-        break;
-      }
-    }
-  }, false);
-
-  // On page load check if the table should be pre-sorted, if so trigger a click
-  if(tableElement.getAttribute('data-sortBy')){
-
-    let sort = tableElement.getAttribute('data-sort') == "ascending" ? "descending" : "ascending";
-
-    Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
-      if(col.textContent == tableElement.getAttribute('data-sortBy')){
-        col.setAttribute('aria-sort',sort)
-        col.click();
-      }
-    });
-  }
-
-  // #endregion Sortable
-
-  // #region Filters
-  const createFilterForm = function(count){
-
-    // Create wrapper div
-    const form = document.createElement("div");
-    form.classList.add('table__filters');
-    form.classList.add('row');
-    form.classList.add('pt-1');
-    form.classList.add('pb-3');
-
-    // Create the filter options array
-    const filterColumns = Array.from(tableElement.querySelectorAll('th[data-filterable]'));
-
-    // Populate a list of searchable terms from the cells of the columns that could be used as a filter
-    let searchableTerms = {};
-    filterColumns.forEach((columnHeading, index) => {
-      Array.from(tableElement.querySelectorAll('td[data-label="'+columnHeading.textContent+'"]')).forEach((label, index) => {
-
-        searchableTerms[label.textContent] = label.textContent;
-      });
-    });
-
-    // Create the form
-    const filterTitle = filterColumns.length == 1 ? "Filter by "+filterColumns[0].textContent : "Filter"; // Update title if only one filter is chosen
-    const checkboxClass = filterColumns.length == 1 ? "d-none" : "d-sm-flex"; // Hide controls when only one filter is chosen
-
-    form.innerHTML = `<div class="col-sm-6 col-md-4 pb-3">
-  <div class="form-control__wrapper form-control-inline mb-0">
-    <label for="${randID}_filter" class="form-label">${filterTitle}:</label>
-    <input type="search" name="${randID}_filter" id="${randID}_filter" class="form-control form-control-sm" placeholder="" list="${randID}_list" />
-  </div>
-  <datalist id="${randID}_list">
-    ${Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("")}
-  </datalist>
-</div>
-<div class="col-md-8 align-items-center pb-3 ${checkboxClass}">
-  ${`<span class="pe-3 text-nowrap h5 mb-0">Filter by: </span>` + filterColumns.map(column => `<div class="form-check pe-3 mt-0 mb-0"><input class="form-check-input" type="checkbox" id="${randID}_${column.textContent.replace(' ','_').toLowerCase()}" checked="checked" /><label class="form-check-label text-nowrap" for="${randID}_${column.textContent.replace(' ','_').toLowerCase()}">${column.textContent}</label></div>`).join("")}
-</div>`;
-
-    // Add before the actual table
-    tableElement.prepend(form)
-  }
-
-  const filterTable = function(searchTerm){
-
-    // Create an array of rows that match the search term
-    let tableArr = [];
-    Array.from(storedData.querySelectorAll('tr')).forEach((tableRow, index) => {
-
-      // We want one long search string per row including each filterable table cell
-      let rowSearchString = '';
-      Array.from(tableElement.querySelectorAll('[type="checkbox"]:checked + label')).forEach((label, index) => {
-        rowSearchString += tableRow.querySelector('td[data-label="'+label.textContent+'"]').textContent+' | ';
-      });
-
-      // Check if the table row search string contains the search term
-      if(rowSearchString.indexOf(searchTerm) >= 0){
-
-        const dataRow = { row: tableRow }
-        tableArr.push(dataRow);
-      }
-    });
-
-    // Create a string to return and populate the tbody
-    let strTbody = '';
-    tableArr.forEach((tableRow, index) => {
-      strTbody += tableRow.row.outerHTML;
-    });
-    tbody.innerHTML = strTbody;
-
-    // Dispatch the filter event.
-    tableElement.dispatchEvent(filteredEvent);
-  }
-
-  const createFilterList = function(){
-
-    // Check which options are checked
-    let filterOptions = [];
-    Array.from(tableElement.querySelectorAll('[type="checkbox"]:checked + label')).forEach((label, index) => {
-      filterOptions.push(label.textContent);
-    });
-
-    // Build up the list of searchable terms
-    let searchableTerms = [];
-    filterOptions.forEach((option, index) => {
-      Array.from(tableElement.querySelectorAll('td[data-label="'+option+'"]')).forEach((label, index) => {
-        searchableTerms[label.textContent] = label.textContent;
-      });
-    });
-
-    // Rebuild the list
-    let dataList = tableElement.querySelector('datalist');
-    dataList.innerHTML = Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("");
-  }
-
-  // On page load check if filters are needed
-  if(Array.from(tableElement.querySelectorAll('[data-filterable]')).length){
-
-    // Create the filter options
-    createFilterForm(tableElement,Array.from(tableElement.querySelectorAll('[data-filterable]')).length);
-
-    // Add event handlers for the filter options
-    tableElement.addEventListener('keyup', function(e){
-      for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('input[type="search"]')) {
-
-          const searchTerm = target.value;
-          filterTable(searchTerm)
-        }
-      }
-    });
-
-    tableElement.addEventListener('change', function(e){
-      for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('input[type="search"]')) {
-
-          const searchTerm = target.value;
-          filterTable(searchTerm)
-        }
-      }
-    });
-
-    tableElement.addEventListener('change', function(e){
-      for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('input[type="checkbox"]')) {
-
-          const searchTerm = tableElement.querySelector('input[type="search"]').value;
-          filterTable(searchTerm)
-          createFilterList()
-        }
-      }
-    });
-  }
-  // #endregion Filters
-
-  // #region Pagination
-  const paginateRows = function(show, page){
-
-    // Create some inline CSS to control what is viewed on the table, unline the filters we are just hiding the rable rows not removing them from the DOM.
-    let style = document.getElementById(randID+'_style');
-
-    if(style == null){
-      style = document.createElement("style");
-      style.setAttribute('id',randID+'_style')
-    }
-
-    const startShowing = (show*(page-1))+1;
-    const stopShowing = show*(page);
-
-    style.innerHTML = `
-    #${randID} tbody tr {
-      display: none;
-    }
-    #${randID} tbody tr:nth-child(${startShowing}),
-    #${randID} tbody tr:nth-child(${startShowing}) ~ tr{
-      display: block;
-    }
-    @media screen and (min-width: 36em) {
-      #${randID} tbody tr:nth-child(${startShowing}),
-      #${randID} tbody tr:nth-child(${startShowing}) ~ tr{
-        display: table-row;
-      }
-    }
-    #${randID} tbody tr:nth-child(${stopShowing}) ~ tr{
-      display: none;
-    }
-    `;
-
-    tableElement.append(style);
-  }
-
-  // On page load check if the table should be paginated
-  if(tableElement.getAttribute('data-show')){
-
-    const show = parseInt(tableElement.getAttribute('data-show'));
-    const page = parseInt(tableElement.getAttribute('data-page')) ? parseInt(tableElement.getAttribute('data-page')) : 1;
-    const totalRows = tableElement.querySelectorAll('tbody tr').length;
-
-    if(show < totalRows){
-      paginateRows(show,page);
-      createPaginationForm(randID,tableElement,show,page,totalRows);
-      createPaginationButttons(randID,tableElement,show,page,totalRows);
-
-      tableElement.addEventListener('change', function(e){
-        for (var target = e.target; target && target != this; target = target.parentNode) {
-          if (target.matches('.table__pagination input[type="number"]')) {
-
-            paginateRows(target.value,page);
-            createPaginationButttons(randID,tableElement,target.value,page,totalRows);
-            tableElement.setAttribute('data-show',target.value)
-          }
-        }
-      });
-
-      tableElement.addEventListener('click', function(e){
-        for (var target = e.target; target && target != this; target = target.parentNode) {
-          if (target.matches('.page-item:not(.active):not(.disabled) .page-link')) {
-
-            paginateRows(tableElement.getAttribute('data-show'),target.getAttribute('data-page'));
-            createPaginationButttons(randID,tableElement,tableElement.getAttribute('data-show'),target.getAttribute('data-page'),totalRows);
-          }
-        }
-      }, false);
-
-      tableElement.addEventListener('change', function(e){
-        for (var target = e.target; target && target != this; target = target.parentNode) {
-          if (target.matches('.table__pagination select')) {
-
-            paginateRows(tableElement.getAttribute('data-show'),target.value);
-            createPaginationButttons(randID,tableElement,tableElement.getAttribute('data-show'),target.value,totalRows);
-          }
-        }
-      });
-    }
-  }
-  // #endregion Pagination
-
-  // #region Reorderable
-  // Set the row thats being dragged and copy the row
-  function setDraggedRow(e) {
-    e.dataTransfer.setData("text/plain", e.target.id);
-    draggedRow = e.target;
-    e.target.classList.add('tr--dragging');
-  }
-
-  // Create the order column and event handler for rows
-  const setReorderRows = function(){
-
-    Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
-
-      // Create column if not already created
-      if(tableRow.querySelector('[data-label="Order"]') == null){
-
-        const orderColumn = document.createElement('th');
-        orderColumn.innerHTML = index + 1;
-        orderColumn.setAttribute('data-label','Order');
-        tableRow.prepend(orderColumn);
-      }
-
-      // Make draggable
-      tableRow.setAttribute('id',randID+'_row_'+(index+1));
-      tableRow.setAttribute('data-order',index+1);
-      tableRow.setAttribute('draggable','true');
-      tableRow.addEventListener("dragstart", setDraggedRow);
-    });
-  }
-
-  if(tableElement.getAttribute('data-reorder') && tableElement.getAttribute('data-reorder') != "false"){
-
-    // Add column heading
-    const orderHeading = document.createElement('th');
-    orderHeading.innerHTML = 'Order';
-    orderHeading.title = 'Click here to enable re-ordering via drag and drop';
-    orderHeading.classList.add('table-order-reset');
-    thead.querySelector('tr').prepend(orderHeading);
-
-    setReorderRows();
-
-    // Reset order button
-    tableElement.addEventListener('click', function(e){
-      for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('.table-order-reset')) {
-
-          // unset sort attributes
-          Array.from(tableElement.querySelectorAll('[data-sortable]')).forEach((col, index) => {
-            col.setAttribute('aria-sort','none');
-          });
-
-          // Save the sort options on the table element so that it can be re-sorted later
-          tableElement.removeAttribute('data-sort');
-          tableElement.removeAttribute('data-sortBy');
-
-          // Sort the table
-          sortTable('Order', 'ascending');
-
-          Array.from(tableElement.querySelectorAll('tbody tr')).forEach((tableRow, index) => {
-
-            tableRow.setAttribute('draggable','true');
-          });
-
-          break;
-        }
-      }
-    }, false);
-
-
-    document.addEventListener("dragover", function( e ) {
-      // prevent default to allow drop
-      e.preventDefault();
-    }, false);
-
-    document.addEventListener("dragenter", function( e ) {
-      // prevent default to allow drop
-      e.preventDefault();
-      e.dataTransfer.dropEffect = "move";
-
-      for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('[data-reorder] tbody tr')) {
-
-          target.classList.add('tr--dropable')
-        }
-      }
-    }, false);
-
-    document.addEventListener("dragleave", function( e ) {
-      // prevent default to allow drop
-      e.preventDefault();
-      for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('[data-reorder] tbody tr')) {
-
-          target.classList.remove('tr--dropable')
-        }
-      }
-    }, false);
-
-    document.addEventListener("drop", function(e) {
-
-      e.preventDefault();
-
-      for (var target = e.target; target && target != this; target = target.parentNode) {
-        if (target.matches('[data-reorder] tbody tr')) {
-
-          if(target.parentNode != null && draggedRow.parentNode != null && target != draggedRow){
-
-            draggedRow.parentNode.removeChild( draggedRow );
-
-            if(draggedRow.getAttribute('data-order') > target.getAttribute('data-order'))
-              target.parentNode.insertBefore(draggedRow, target);
-            else
-              target.parentNode.insertBefore(draggedRow, target.nextElementSibling);
-
-            // Re label the rows
-            Array.from(tbody.querySelectorAll('tr')).forEach((tableRowOrder, index) => {
-              tableRowOrder.classList.remove('tr--dragging')
-              tableRowOrder.classList.remove('tr--dropable')
-              tableRowOrder.querySelector('th').innerHTML = index + 1;
-              tableRowOrder.setAttribute('data-order',index+1);
-            });
-
-            tableElement.dispatchEvent(reorderedEvent);
-          }
-          break;
-        }
-      }
-    }, false);
-
-  }
-  // #endregion Reorderable
-
-  // Watch for the filterable event and re-sort the tbody
-  tableElement.addEventListener('filtered', function (e) {
-
-    if(tableElement.getAttribute('data-sortBy') && tableElement.getAttribute('data-sort'))
-      sortTable(tableElement.getAttribute('data-sortBy'), tableElement.getAttribute('data-sort'));
-
-    if(tableElement.getAttribute('data-show')){
-
-      const show = parseInt(tableElement.getAttribute('data-show'));
-      const totalRows = tableElement.querySelectorAll('tbody tr').length;
-      const tablePagination = tableElement.querySelector('.table__pagination');
-
-      if(tablePagination != null)
-        tablePagination.remove();
-
-      if(show < totalRows){
-
-        paginateRows(show,1);
-        createPaginationForm(randID,tableElement,show,1,totalRows);
-        createPaginationButttons(randID,tableElement,show,1,totalRows);
-      }
-    }
-
-    if(tableElement.getAttribute('data-reorder')){
-
-      setReorderRows();
-    }
-  }, false);
-
-  tableElement.addEventListener('sorted', function (e) {
-
-    if(tableElement.getAttribute('data-reorder')){
-
-      setReorderRows();
-    }
-  }, false);
-
-  tableElement.addEventListener('populated', function (e) {
-
-    var tableFilter = tableElement.querySelector('.table__filters')
-    tableFilter.remove();
-
-    var tablePagination = tableElement.querySelector('.table__pagination')
-    tablePagination.remove();
-
-    var newTable = tableElement.cloneNode(true);
-    tableElement.parentNode.replaceChild(newTable, tableElement);
-
-    table(newTable);
-  }, false);
+  });
+
+  searchInput.setAttribute('list',`${searchID}_list`);
+  searchInput.setAttribute('autocomplete','off');
+
+  if(!inputWrapper.querySelector('datalist'))
+    inputWrapper.innerHTML += `<datalist id="${searchID}_list"></datalist>`;
+  
+  inputWrapper.querySelector('datalist').innerHTML = `${Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("")}`;
 }
 
-export const createPaginationForm = function(randID,tableElement,show,page,totalRows){
+export const addFilterEventListeners = (table, form, pagination, savedTableBody) => {
 
-  const form = document.createElement("div");
-  form.classList.add('table__pagination');
-  form.classList.add('row');
-  form.classList.add('pt-3');
-  form.classList.add('pb-3');
+  var timer;
+  form.addEventListener('keyup', (event) => {
 
-  // Create the form and create a container div to hold the pagination buttons
-  form.innerHTML = `<div class="col mw-fit-content mb-3">
-<div class="form-control__wrapper form-control-inline mb-0">
-  <label for="${randID}_showing" class="form-label">Showing:</label>
-  <input type="number" name="${randID}_showing" id="${randID}_showing" class="form-control form-control-sm showing-input-field" placeholder="" list="${randID}_pagination" value="${show}" min="1" max="${totalRows}" />
-</div>
-<datalist id="${randID}_pagination">
-<option value="5">5</option>
-${totalRows > 10 ? `<option value="10">10</option>` : ''}
-${totalRows > 20 ? `<option value="20">20</option>` : ''}
-<option value="${totalRows}">${totalRows}</option>
-</datalist>
-</div>
-<div class="col mw-fit-content me-auto d-flex align-items-center mb-3"><span class="label">per page</span></div>
-<div class="col mw-fit-content d-sm-flex justify-content-end align-items-center" id="${randID}_paginationBtns"></div>`;
+    clearTimeout(timer);
 
-  // Add after the actual table
-  tableElement.append(form)
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]') && event.target.closest('[data-search]').value.length >= 3){
+
+      timer = setTimeout(function(){ 
+        filterTable(table, form, pagination); 
+        createPaginationButttons(table, form, pagination);
+      }, 1000);
+    };
+  });
+
+  form.addEventListener('change', (event) => {
+
+    clearTimeout(timer);
+    
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')){
+      
+      sortTable(table, form, savedTableBody);
+      filterTable(table, form, pagination);
+      createPaginationButttons(table, form, pagination)
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
+        
+      filterTable(table, form, pagination);
+      createPaginationButttons(table, form, pagination);
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && !event.target.closest('form dialog')){
+      
+      filterTable(table, form, pagination);
+      createPaginationButttons(table, form, pagination);
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
+        
+      filterTable(table, form, pagination);
+      createPaginationButttons(table, form, pagination);
+    }
+
+  });
+
+
+  form.addEventListener('click', (event) => {
+
+    clearTimeout(timer);
+    
+    if (event && event.target instanceof HTMLElement && event.target.closest('dialog button:not([type="button"])')){
+      
+      let button = event.target.closest('dialog button:not([type="button"])');
+      let modal = button.closest('dialog');
+
+      modal.close();
+    }
+
+    // Prevent the form from submitting
+    if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__close')){
+      
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')){
+      
+      form.reset();
+      filterTable(table, form, pagination);
+      createPaginationButttons(table, form, pagination);
+    }
+  });
+
+  form.addEventListener('submit', (event) => {
+
+    clearTimeout(timer);
+
+    event.preventDefault();
+
+    filterTable(table, form, pagination);
+    createPaginationButttons(table, form, pagination)
+  });
 }
 
-export const createPaginationButttons = function(randID,tableElement,show,page,totalRows){
+export const sortTable = (table, form, savedTableBody) => {
 
-  const paginationButtonsWrapper = document.getElementById(randID+'_paginationBtns')
+  if(form.getAttribute('data-ajax')){
+    return false;
+  }
 
-  if(paginationButtonsWrapper == null)
+  let tbody = table.querySelector('tbody');
+  let select = form.querySelector('[data-sort]');
+  let selectedOption = select.querySelector(`option:nth-child(${select.selectedIndex + 1})`);
+
+  let sortBy = selectedOption.getAttribute('data-sort');
+  let order = selectedOption.getAttribute('data-order');
+
+  if(!sortBy){
+    
+    tbody.innerHTML = savedTableBody.innerHTML;
+    return false;
+  }
+
+  let orderArray = [];
+  if(!['asc','desc','descending'].includes(order)){
+    orderArray = order.split(',');
+  }
+
+  // Create an array from the table rows, the index created is then used to sort the array
+  let tableArr = [];
+  Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
+
+    let rowIndex = tableRow.querySelector('td[data-label="'+sortBy+'"], th[data-label="'+sortBy+'"]').textContent.trim();
+
+    // If a predefined order set replace the search term with an ordered numeric value so it can be sorted
+    if(orderArray.length && orderArray.includes(rowIndex)){
+      rowIndex = orderArray.indexOf(rowIndex);
+    }
+
+    if(isNumeric(rowIndex))
+      rowIndex = zeroPad(rowIndex,10)
+
+    const dataRow = {
+      index: rowIndex,
+      row: tableRow
+    }
+    tableArr.push(dataRow);
+  });
+
+  // Sort array alphabetically
+  tableArr.sort((a, b) => (a.index > b.index) ? 1 : -1)
+
+  // Reverse if descending
+  if(order == "descending" || order == "desc")
+    tableArr = tableArr.reverse();
+
+  // Create a string to return and populate the tbody
+  let strTbody = '';
+  tableArr.forEach((tableRow, index) => {
+    strTbody += tableRow.row.outerHTML;
+  });
+  tbody.innerHTML = strTbody;
+}
+
+export const filterTable = (table, form, pagination) => {
+
+  table.classList.remove('table--filtered');
+
+  if(form.getAttribute('data-ajax')){
+    loadAjaxTable(table, form, pagination);
+
+    return false;
+  }
+
+  let filters = [];
+  let searches = [];
+  let matched = 0;
+  let page = form.querySelector('[data-pagination]') ? parseInt(form.querySelector('[data-pagination]').value) : 1;
+  let showRows = form.querySelector('[data-show]') ? parseInt(form.querySelector('[data-show]').value) : 15;
+
+  // Filter
+  let filterInputs = Array.from(form.querySelectorAll('[data-filter]'));
+
+  filterInputs.forEach((filterInput, index) => {
+
+    // Ignore uncked radio inputs
+    if(filterInput.type == 'radio' && !filterInput.checked){
+      return;
+    }
+
+    if(filterInput.type == 'checkbox' && !filterInput.checked){
+      return;
+    }
+
+    if(filterInput.getAttribute('data-filter') == "multi"){
+
+
+      for (const [key, value] of Object.entries(JSON.parse(filterInput.value))) {
+        filters.push({'column':`${key}`,'value':`${value}`});
+      }
+    }
+    else {
+      
+      filters.push({'column':`${filterInput.getAttribute('data-filter')}`,'value':`${filterInput.value}`});
+    }
+
+  });
+
+  // Add search columns too
+  if(form.querySelector('[data-search]')){
+    let searchInput = form.querySelector('[data-search]');
+    let searchColumns = form.querySelector('[data-search]').getAttribute('data-search').split(',');
+
+    searchColumns.forEach((column, index) => {
+
+      searches.push({'column':`${column.trim()}`,'value':`${searchInput.value}`});
+    });
+  }
+
+  // Stop function if no filters identified
+  if(!searches.length && !filters.length)
+    return false;
+  
+  table.classList.add('table--filtered');
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+
+    row.classList.remove('filtered--match');
+    row.classList.remove('filtered--show');
+
+    let isMatched = filters.length == 0 ? true : false;
+    let isSearched = searches.length > 0 && searches[0].value.length >= 3 ? false : true;
+
+    filters.forEach((filter, index) => {
+
+      let filterTd = row.querySelector(`[data-label="${filter.column}"]`)
+
+      if(filterTd && filterTd.textContent.toLowerCase().includes(filter.value.toLowerCase())){
+        isMatched = true;
+      }
+    });
+
+    searches.forEach((search, index) => {
+
+      let searchTd = row.querySelector(`[data-label="${search.column}"]`)
+      if(searchTd && search.value.length >= 3 && searchTd.textContent.toLowerCase().includes(search.value.toLowerCase())){
+        isSearched = true;
+      }
+    });
+
+    // You pass all the filters ass the class back
+    if(isMatched && isSearched){
+      
+      matched++;
+
+      row.classList.add('filtered--matched');
+      // pagination bit 
+      if(Math.ceil(matched/showRows) == parseInt(page))
+        row.classList.add('filtered--show');
+    }
+  });
+
+  if(pagination){
+    
+    pagination.setAttribute('data-page',page);
+    pagination.setAttribute('data-pages',Math.ceil(matched/showRows));
+    pagination.setAttribute('data-total',matched);
+    pagination.setAttribute('data-show',showRows);
+  }
+}
+
+export const populateDataQueries = (table,form) => {
+
+  const dataQueries = Array.from(form.querySelectorAll('[data-query]'));
+
+  dataQueries.forEach((queryElement, index) => {
+
+    let query = queryElement.getAttribute('data-query');
+    let numberOfMatchedRows: 0;
+
+    if(query == 'total'){
+      numberOfMatchedRows = table.classList.contains('table--filtered') ? table.querySelectorAll('tbody tr.filtered--matched').length : table.querySelectorAll('tbody tr').length;
+    }
+    else if(query.includes(' && ')){
+
+      let queries = query.split(' && ');
+
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr`)).filter(function(row){
+
+        let matched = true;
+
+        for (const [index, value] of Object.entries(queries)) {
+          
+          let queryParts = value.split(' == ');
+
+          if(!row.querySelector(`td[data-label="${queryParts[0]}"]`) || row.querySelector(`td[data-label="${queryParts[0]}"]`).textContent != `${queryParts[1]}`)
+            matched = false;
+        }
+
+        return matched;
+
+      }).length;
+    }
+    else {
+
+      let queryParts = query.split(' == ');
+
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody td[data-label="${queryParts[0]}"]`)).filter(function(element){
+        return element.textContent === queryParts[1];
+      }).length;
+    }
+
+    queryElement.innerHTML = numberOfMatchedRows;
+  });
+}
+
+// Pagination
+export const createPaginationButttons = function(table, form, pagination){
+  
+  if(!pagination.getAttribute('data-pages'))
     return false;
 
-  const numberPages = Math.ceil(totalRows / show)
+  if(!pagination.getAttribute('data-page'))
+  pagination.setAttribute('data-page', 1);
 
-  if(numberPages == 1){ // Remore the buttons or dont display any if we dont need them
-    paginationButtonsWrapper.innerHTML = '';
+  let currentPage = pagination.getAttribute('data-page');
+  let numberPages = pagination.getAttribute('data-pages');
+  let numberRows = pagination.getAttribute('data-total');
+  let showRows = pagination.getAttribute('data-show');
+  let addRows = pagination.getAttribute('data-increment');
+
+  if(numberPages <= 1){
+    
+    pagination.innerHTML = '';
+    return false;
   }
-  else if(numberPages < 5){ // If less than 5 pages (which fits comfortably on mobile) we display buttons
+  
+  let strButtons = '';
 
-    let strButtons = '';
+  for (let i = 1; i <= numberPages; i++) {
 
-    for (let i = 1; i <= numberPages; i++) {
+    if(i == currentPage)
+      strButtons += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`;
+    else
+      strButtons += `<li class="page-item"><button class="page-link" data-page="${i}">${i}</button></li>`;
+  }
 
-      if(i == page)
-        strButtons += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`;
-      else
-        strButtons += `<li class="page-item"><button class="page-link" data-page="${i}">${i}</button></li>`;
+  pagination.innerHTML = `<ul class="pagination mb-3 d-none d-sm-flex">
+    ${currentPage == 1 ? `<li class="page-item disabled"><span class="page-link">Previous</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(currentPage)-1}">Previous</button></li>`}
+    ${strButtons}
+    ${currentPage == numberPages ? `<li class="page-item disabled"><span class="page-link">Next</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(currentPage)+1}">Next</button></li>`}
+  </ul>`;
+  pagination.innerHTML += `<div class="d-sm-none">
+  <span>You've viewed ${showRows} of ${numberRows} results</span>
+  <button type="button" data-show="${parseInt(showRows)+parseInt(addRows)}">Load more results</button>
+  </div>`;
+}
+
+export const addPaginationEventListeners = function(table, form, wrapper){
+
+  wrapper.addEventListener('click', (event) => {
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('button[data-page]')){
+      
+      let paginationInput = form.querySelector('[data-pagination]');
+      let newPage = event.target.closest('button[data-page]').getAttribute('data-page');
+      paginationInput.value = newPage;
+
+      form.dispatchEvent(new Event("submit"));
+      wrapper.setAttribute('data-page', newPage);
+      createPaginationButttons(table, form, wrapper);
+
+      const url = new URL(location);
+      url.searchParams.set("page", newPage);
+      history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
     }
 
-    paginationButtonsWrapper.innerHTML = `<span class="pe-2 mb-3">Page: </span><ul class="pagination mb-3">
-      ${page == 1 ? `<li class="page-item disabled"><span class="page-link">Previous</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)-1}">Previous</button></li>`}
-      ${strButtons}
-      ${page == numberPages ? `<li class="page-item disabled"><span class="page-link">Next</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(page)+1}">Next</button></li>`}
-    </ul>`;
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
 
-  }
-  else { // If more than 5 lets show a select field instead so that we dont have loads and loads of buttons
+      let showInput = form.querySelector('[data-show]');
+      let showRows = event.target.closest('[data-show]').getAttribute('data-show');
+      showInput.value = showRows;
 
-    let strOptions = '';
+      form.dispatchEvent(new Event("submit"));
+      wrapper.setAttribute('data-show', showRows);
+    }
+  });
+}
 
-    for (let i = 1; i <= numberPages; i++) {
+// Export CSV Data
+export const addExportEventListeners = (button, table) => {
 
-      if(i == page)
-        strOptions += `<option value="${i}" selected>Page ${i}</option>`;
-      else
-        strOptions += `<option value="${i}">Page ${i}</option>`;
+  if(!button)
+    return false;
+
+  button.addEventListener('click', (event) => {
+    exportAsCSV(table);
+  });
+}
+
+export const exportAsCSV = function(table){
+
+  var csvData = [];
+  // Get each row data
+  var rows = table.getElementsByTagName('tr');
+  for (var i = 0; i < rows.length; i++) {
+
+    // Get each column data
+    var cols = rows[i].querySelectorAll('td,th');
+
+    // Stores each csv row data
+    var csvRow = [];
+    for (var j = 0; j < cols.length; j++) {
+
+      // Get the text data of each cell of a row and push it to csvrow
+      csvRow.push(`"${cols[j].textContent}"`);
     }
 
-    paginationButtonsWrapper.innerHTML = `
-<div class="form-control__wrapper page-number mb-2">
-<select class="form-select">
-${strOptions}
-</select>
-</div>
-    `;
+    // Combine each column value with comma
+    csvData.push(csvRow.join(","));
+  }
+
+  // Combine each row data with new line character
+  csvData = csvData.join('\n');
+  
+  // Create CSV file object and feed our csvData into it
+  let CSVFile = new Blob([csvData], {
+    type: "text/csv"
+  });
+
+  // Create to temporary link to initiate download process
+  var tempLink = document.createElement('a');
+  tempLink.download = "export.csv";
+  var url = window.URL.createObjectURL(CSVFile);
+  tempLink.href = url;
+
+  // This link should not be displayed
+  tempLink.style.display = "none";
+  document.body.appendChild(tempLink);
+
+  // Automatically click the link to trigger download
+  tempLink.click();
+  document.body.removeChild(tempLink);
+}
+
+// After table is loaded
+export const makeTableFunctional = function(table, form, pagination, wrapper){
+
+  createMobileButton(table);
+  addDataAttributes(table);
+  populateDataQueries(table, form);
+  
+  // Work out the largest width of the CTA's in the last column
+  if(wrapper && wrapper.classList.contains('table--cta')){
+
+    const largestWidth = getLargestLastColWidth(table);
+    wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
   }
 }
 
-export default table
+export const loadAjaxTable = function (table, form, pagination, wrapper){
+
+  const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
+
+  let queryString = new URLSearchParams(new FormData(form)).toString();
+  let columns = table.querySelectorAll('thead tr th');
+  let tbody = table.querySelector('tbody');
+
+  fetch(form.getAttribute('data-ajax')+'?'+queryString, {
+    method: 'get',
+    credentials: 'same-origin',
+    //signal: controller.signal,
+    headers: new Headers({
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'X-Requested-With': 'XMLHttpRequest'
+    })
+  }).then((response) => response.json()).then((response) => {
+
+    if (response.data) {
+
+      tbody.innerHTML = '';
+
+      response.data.forEach((row, index) => {
+
+        var table_row = document.createElement('tr');
+
+        columns.forEach((col, index) => {
+
+          let cellOutput = '';
+          var table_cell  = document.createElement('td');
+          // Add some data to help with the mobile layout design
+          table_cell.setAttribute('data-label',col.innerText);
+
+          if(col.getAttribute('data-output')){
+            var cellTemplate = col.getAttribute('data-output');
+            // Use a regex to replace {var} with actual values from the json data
+            cellOutput = cellTemplate.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(row, matched.replace('{','').replace('}','')); });
+          }
+
+          if(col.hasAttribute('data-format')){
+            cellOutput = formatCell(col.getAttribute('data-format'),cellOutput);
+          }
+
+          table_cell.innerHTML = cellOutput;
+          table_row.appendChild(table_cell)
+        });
+
+        tbody.appendChild(table_row)
+          
+      });
+
+      createSearchDataList(table, form)
+      // Add data to the pagination 
+      makeTableFunctional(table, form, pagination, wrapper);
+
+      pagination.setAttribute('data-total', (response.meta.total ? response.meta.total : 1));
+      pagination.setAttribute('data-page', (response.meta.current_page ? response.meta.current_page : 1));
+      pagination.setAttribute('data-pages', Math.ceil(pagination.getAttribute('data-total') / pagination.getAttribute('data-show')));
+
+      createPaginationButttons(table, form, pagination);
+
+      if(response.data.length == 0){
+        tbody.innerHTML = '<tr><td colspan="100%"><span class="h4 m-0">No results found</span></td></tr>';
+      }
+      
+    }
+    else {
+      tbody.innerHTML = '<tr><td colspan="100%"><span class="h6 m-0">Error loading table</span></td></tr>';
+    }
+
+  });
+}
+
+export const formatCell = (format, cellOutput) => {
+
+  switch (format) {
+    case 'date':
+      cellOutput = new Date(cellOutput).toLocaleDateString('en-gb', { year:"numeric", month:"long", day: "numeric"});
+    break;
+    case 'capitalise':
+      cellOutput = ucfirst(cellOutput);
+    break;
+  }
+  
+  return cellOutput;
+}

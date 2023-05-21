@@ -1,13 +1,16 @@
 ```
-<Table :fields="fields" :items="items"></Table>
+<iam-table class="container">
+  <table>
+    <thead>....</thead>
+    <tbody>...</tbody>
+  </table>
+</iam-tabs>
 ```
 
 ### Properties
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
-| items  | Array | - | Table row data passed |
-| fields | Array | - | Table header titles |
 | data-show | int | 15 | Update how many rows can be shown per page |
 | data-filterby | string (form ID) | | Give an optional form ID to connect a form to the table and make it act like a filtering system |
 
@@ -16,30 +19,3 @@
 
 - Adding a class of **.table--cta** to the table component will fix the last column of the table in place (While on tablet or desktop). 
 - Adding a class of **.table--export** to the table component will create a button at the bottom of the table to export its contents out as a CSV file.
-
-### Example of items and fields
-
-#### fields
-
-```
-[
-  {
-    key: 'col_1',
-    key: 'col_2',
-    key: 'col_3',
-    key: 'col_4',
-  }
-]
-```
-#### items
-
-```
-[
-  {
-    col_1: 'Row content 1',
-    col_2: 'Row content 2',
-    col_3: 'Row content 3',
-    col_4: 'Row content 4',
-  }
-]
-```

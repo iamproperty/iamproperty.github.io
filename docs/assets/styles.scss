@@ -23,6 +23,39 @@ code {
   }
 }
 
+.markdown-body {
+
+  h1,h2,h3 {
+    
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    padding-bottom: 1rem;
+  }
+  
+  h4,h5,h6 {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    padding-bottom: 1rem;
+  }
+
+  container-type: inline-size;
+  
+  
+  td {
+    min-width: 0!important;
+  }
+
+  @container (width < 23.4375em) {
+
+    td:empty {
+      display:none;
+    }
+  }
+}
+
+
+
+
 .version-control {
   padding-top: 3rem;
 

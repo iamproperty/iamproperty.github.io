@@ -294,14 +294,6 @@ const routes = [
         component: () => import('./views/components/Tables.vue')
       },
       {
-        path: 'advanced-tables',
-        name: 'Advanced Tables',
-        meta: {
-          title: 'Advanced Tables | Elements | iamkey'
-        },
-        component: () => import('./views/components/AdvancedTables.vue')
-      },
-      {
         path: 'tooltips',
         name: 'Tooltips',
         meta: {
@@ -674,6 +666,14 @@ const routes = [
           title: 'Client method | iamkey'
         },
         component: () => import('./views/standalone/ClientDashboard/method.vue')
+      },
+      {
+        path: 'agent-dashboard',
+        name: "Agent dashboard",
+        meta: {
+          title: 'Agent dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/AgentDashboard.vue')
       }
     ]
   },
