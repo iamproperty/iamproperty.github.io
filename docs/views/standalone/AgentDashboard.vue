@@ -147,33 +147,42 @@
             <br/>
             <br/>
 
-              <div class="row sticky-form">
-                <div class="col">
-                  <div class="form-control__wrapper">
-                    <label for="search" class="form-label">Search</label>
-                    <input name="search" id="search" type="text" class="form-control" data-search="Client, Transaction address">
-                  </div>
-                </div>
-                <div class="col">
-                  <button class="btn btn-secondary" type="button" data-modal="filters">Filter by</button>
-                </div>
-                <div class="col d-none d-sm-block">
-                  <div class="form-control__wrapper">
-                    <label for="sort" class="form-label visually-hidden">Sort by</label>
-                    <select type="select" name="sort" id="sort" class="form-select" data-sort>
-                      <option value="-1">Sort by</option>
-                      <option value="risk level high" data-sort="Risk level" data-order="High,Medium,Low">Risk level (high to low)</option>
-                      <option value="risk level low" data-sort="Risk level" data-order="Low,Medium,High">Risk level (low to high)</option>
-                      <option value="client asc" data-sort="Client" data-order="asc">Client (Ascedning order)</option>
-                      <option value="client desc" data-sort="Client" data-order="desc">Client (Descending order)</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col">
-                  <button class="btn btn-secondary" type="button" data-clear>Clear filters</button>
-                </div>
-              </div>
 
+            </div>
+            <div class="sticky-wrapper">
+            <div class="sticky-form">
+              <div class="container">
+                  
+                <div class="row">
+                  <div class="col">
+                    <div class="form-control__wrapper">
+                      <label for="search" class="form-label">Search</label>
+                      <input name="search" id="search" type="text" class="form-control" data-search="Client, Transaction address">
+                    </div>
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-secondary" type="button" data-modal="filters">Filter by</button>
+                  </div>
+                  <div class="col d-none d-sm-block">
+                    <div class="form-control__wrapper">
+                      <label for="sort" class="form-label visually-hidden">Sort by</label>
+                      <select type="select" name="sort" id="sort" class="form-select" data-sort>
+                        <option value="-1">Sort by</option>
+                        <option value="risk level high" data-sort="Risk level" data-order="High,Medium,Low">Risk level (high to low)</option>
+                        <option value="risk level low" data-sort="Risk level" data-order="Low,Medium,High">Risk level (low to high)</option>
+                        <option value="client asc" data-sort="Client" data-order="asc">Client (Ascedning order)</option>
+                        <option value="client desc" data-sort="Client" data-order="desc">Client (Descending order)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <button class="btn btn-secondary" type="button" data-clear>Clear filters</button>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
 
               <dialog id="filters">
                 
@@ -201,7 +210,9 @@
 
                 <button class="btn btn-primary d-block m-auto" type="submit">Update results</button>
               </dialog>
-            </div>
+
+
+
           </form>
 
           <div class="container">
@@ -1998,16 +2009,48 @@
   </div>
 </template>
 <style lang="scss" >
-/*
+
+main {
+  min-height: 10000px;
+}
+
+form {
+  display: contents;
+}
+
 .sticky-form {
+  /*
   position: sticky;
+  //top: -1px;
   top: 4.5rem;
   left: 0;
   width: 100%;
   z-index: 9999;
-  background-color: green;
+  */
+  pointer-events: all;
 }
-*/
+
+.sticky-wrapper {
+  
+  padding-top: calc(4.5rem + 1px);
+  pointer-events: none;
+  top: -1px;
+
+position: sticky;
+}
+.sticky-wrapper.stuck {
+
+
+  position: sticky;
+  top: -1px;
+
+  z-index: 999999999;
+  
+  .sticky-form {
+
+  background: green;
+  }
+}
 
 
 </style>
@@ -2015,8 +2058,20 @@
 <script setup>
 import Nav from '@/components/Nav/Nav.vue'
 import Table from '@/components/Table/Table.vue'
+import { onMounted } from 'vue';
 
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
+onMounted(() => {
+  const el = document.querySelector(".sticky-wrapper")
+  console.log(el)
+  const observer = new IntersectionObserver( 
+    ([e]) => {
 
+      console.log(e);
+        e.target.classList.toggle("stuck", e.intersectionRatio < 1)
+    },
+    { threshold: [1] }
+  );
+  
+  observer.observe(el);
+})
 </script>
