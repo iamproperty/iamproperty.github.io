@@ -511,14 +511,6 @@ const routes = [
         component: () => import('./views/examples/Charts.vue')
       },
       {
-        path: 'related-cards',
-        component: () => import('./views/examples/RelatedCards.vue')
-      },
-      {
-        path: 'insight-cards',
-        component: () => import('./views/examples/InsightCards.vue')
-      },
-      {
         path: 'news-promo-cards',
         component: () => import('./views/examples/NewsPromoCards.vue')
       },
