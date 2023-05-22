@@ -12,7 +12,7 @@
     </div>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 ">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -42,7 +42,7 @@
     
     </div>
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -74,7 +74,7 @@
 
     </div>
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -85,14 +85,14 @@
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
           <a href="/client-onbaording">
-            <Card class="hover">Client onboarding</Card>
+            <Card data-illustration="/svg/illustrations/table.svg" class="hover">Client onboarding</Card>
           </a>          
         </div>
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <a href="/client-onbaording">
-            <Card class="active">Client onboarding</Card>
+            <Card data-illustration="/svg/illustrations/table.svg" class="active">Client onboarding</Card>
           </a>          
         </div>
       </div>
@@ -109,7 +109,7 @@
 
     </div>
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
           
             
         <div class="col">
@@ -139,7 +139,7 @@
 
     </div>
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4 pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
