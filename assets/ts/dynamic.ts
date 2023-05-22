@@ -10,7 +10,7 @@ import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 import modal from '../js/modules/modal'
 
-const components = ['accordion','header','tabs', 'table'];
+const components = ['accordion','header','tabs', 'table','card'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',
@@ -21,6 +21,8 @@ const componentExt = ".component.js";
 // Load components - Each component will load once the first of its type has been loaded
 components.forEach((component) => {
 
+  console.log(component)
+  
   if(document.getElementsByTagName(`${prefix}-${component}`).length === 0)
     return;
 
@@ -28,6 +30,8 @@ components.forEach((component) => {
     entries.forEach((entry:any) => {
       
       if(entry.intersectionRatio > 0){
+
+        console.log(component)
         
         import(`./components/${component}/${component}${componentExt}`).then(module => {
           if (!window.customElements.get(`${prefix}-${component}`))

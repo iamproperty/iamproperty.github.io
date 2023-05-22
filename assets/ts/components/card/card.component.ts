@@ -20,7 +20,7 @@ class iamCard extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="card ${classList}">
+    <div class="card ${classList}" tabindex="0" role="button">
       ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /></div>` : ''}
       <div class="card__body">
       ${this.classList.contains('card--filter') && this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
@@ -35,7 +35,29 @@ class iamCard extends HTMLElement {
 
 	connectedCallback() {
     
+    // Mimic clicking the parent node so the focus and target events can be on the card
+    const parentNode = this.parentNode.closest('a, button')
+    const card = this.shadowRoot.querySelector('.card')
+
+    parentNode.setAttribute('tabindex','-1');
     
+    card.addEventListener('click', (event) => {
+
+      parentNode.click();
+    });
+
+    card.addEventListener('keydown', (event) => {
+
+      switch(event.keyCode)
+      {
+          case 32:
+          case 13:
+            parentNode.click();
+              break;
+          default:
+              break;
+      }
+    });
   }
 
   static get observedAttributes() {

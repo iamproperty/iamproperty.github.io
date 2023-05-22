@@ -108,6 +108,7 @@ a,
   padding:0;
   display: flex;
   margin: 0 0 rem(24) 0;
+  outline: none!important;
 
   &:not(.d-inline-block){
       
@@ -115,7 +116,7 @@ a,
   }
 
   iam-card {
-    display: contents;
+    width: 100%;
   }
 }
 
