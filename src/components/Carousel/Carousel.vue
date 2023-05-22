@@ -32,16 +32,7 @@
 
 <script>
 import Card from '../Card/Card.vue'
-import CardDeck from '../CardDeck/CardDeck.vue'
 import carousel from '../../../assets/ts/modules/carousel'
-
-// Inherit the card deck props
-let cardDeckProps = CardDeck.props;
-// Update the default values
-cardDeckProps.gap.default = 0
-cardDeckProps.cols.default = 1
-cardDeckProps.smcols.default = 2
-cardDeckProps.mdcols.default = 4
 
 
 export default {
@@ -55,7 +46,55 @@ export default {
     }
   },
   props: {
-    ...cardDeckProps,
+    items: {
+      type: Array,
+      required: false
+    },
+    cols: {
+      type: Number,
+      required: false,
+      default: 1
+    },
+    smcols: {
+      type: Number,
+      required: false,
+      default: 1
+    },
+    mdcols: {
+      type: Number,
+      required: false,
+      default: 3
+    },
+    gap: {
+      type: Number,
+      required: false,
+      default: 4
+    },
+    cardtype: {
+      type: String,
+      required: false
+    },
+    cardclass: {
+      type: String,
+      required: false
+    },
+    btntype: {
+      type: String,
+      required: false
+    },
+    titleclass: {
+      type: String,
+      required: false
+    },
+    ctatext: {
+      type: String,
+      required: false
+    },
+    hidectatext: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
     colclass: {
       type: String,
       required: false
