@@ -151,14 +151,6 @@ const routes = [
         component: () => import('./views/components/BannerDoc.vue')
       },
       {
-        path: 'card-deck',
-        name: 'Card Deck',
-        meta: {
-          title: 'Card Deck | Components | iamkey'
-        },
-        component: () => import('./views/components/CardDeckDoc.vue')
-      },
-      {
         path: 'carousel',
         name: 'Carousel',
         meta: {
