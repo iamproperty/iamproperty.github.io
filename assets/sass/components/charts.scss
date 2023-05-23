@@ -518,7 +518,7 @@ $chart-colors: map-merge((
   }
 
   .pie foreignObject {
-    background: var(--body-bg);
+    background: var(--colour-canvas);
     border-radius: 50%;
     z-index: var(--index-focus);
     pointer-events: none;

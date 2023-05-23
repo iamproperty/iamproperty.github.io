@@ -44,19 +44,27 @@ import cssVars from './assets/data.module.scss'
 import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 
 // Filters the CSS vars object to pull out the theme colours
-const themeColours = Object.keys(cssVars).reduce(function (arr, key) {
-  if (key.startsWith('themeColour-')) {
-    let updateKey = key.replace('themeColour-', '')
+const themeColours = Object.keys(cssVars).reduce( (arr, key) => {
+  if (key.startsWith('themeColour_')) {
+    let updateKey = key.replace('themeColour_', '')
     updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
     arr[updateKey] = cssVars[key]
+
+    console.log(key);
   }
   return arr
 }, {})
 
+const secondaryColours = {...themeColours};
+delete secondaryColours["Primary"];
+delete secondaryColours["Secondary"];
+delete secondaryColours["Canvas"];
+delete secondaryColours["Light"];
+
 // Filters the CSS vars object to pull out the non-theme colours
 const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
-  if (key.startsWith('nonThemeColour-')) {
-    let updateKey = key.replace('nonThemeColour-', '')
+  if (key.startsWith('nonThemeColour_')) {
+    let updateKey = key.replace('nonThemeColour_', '')
     updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
     arr[updateKey] = cssVars[key]
   }
@@ -65,8 +73,8 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
 
 // Filters the CSS vars object to pull out the aspect ratios
 const aspectRatios = Object.keys(cssVars).reduce(function (arr, key) {
-  if (key.startsWith('aspect-ratio-')) {
-    let updateKey = key.replace('aspect-ratio-', '')
+  if (key.startsWith('aspect-ratio_')) {
+    let updateKey = key.replace('aspect-ratio_', '')
     updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
     arr[updateKey] = cssVars[key]
   }
@@ -76,12 +84,12 @@ const aspectRatios = Object.keys(cssVars).reduce(function (arr, key) {
 // Global vars
 export const shared = {
   themeColours: themeColours,
+  secondaryColours: secondaryColours,
   nonThemeColours: nonThemeColours,
   aspectRatios: aspectRatios,
   cssVars: cssVars,
   audit: audit
 }
-
 
 let template = window.location.pathname.startsWith('/standalone') || window.location.pathname.startsWith('/prototype') ? Standalone : App;
 

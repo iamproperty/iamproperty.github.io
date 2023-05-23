@@ -44,19 +44,15 @@ html {
 }
 
 body {
-
+  color-scheme: light dark;
   font-family: 'qanelasmedium', arial, sans-serif;
+  @include var(background,--colour-canvas);
   @include var(color,--colour-body);
   width: 100%;
   line-height: 1.2;
   min-height: 100%;
   //overflow-y: scroll;
   //overflow-x: hidden;
-}
-
-
-#app {
-  min-height: 100%;
 }
 
 body > footer,
