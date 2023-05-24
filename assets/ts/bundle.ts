@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Modules
 import * as helpers from '../js/modules/helpers'
+import createDataLayer from '../js/modules/data-layer'
 import nav from '../js/modules/nav'
 //import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
@@ -12,10 +13,12 @@ import iamHeader from './components/header/header.component'
 import iamAccordion from './components/accordion/accordion.component'
 import iamTabs from './components/tabs/tabs.component'
 import iamTable from './components/table/table.component'
+import iamCard from './components/card/card.component'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
 
+  createDataLayer();
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
@@ -32,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (!window.customElements.get(`iam-table`))
     window.customElements.define(`iam-table`, iamTable);
+
+  if (!window.customElements.get(`iam-card`))
+    window.customElements.define(`iam-card`, iamCard);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {

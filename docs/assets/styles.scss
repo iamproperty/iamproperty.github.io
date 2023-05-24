@@ -51,6 +51,11 @@ code {
       display:none;
     }
   }
+
+  p:has(strong:first-child:last-child){
+    color: var(--colour-primary);
+    padding-bottom: 0.5rem;
+  }
 }
 
 

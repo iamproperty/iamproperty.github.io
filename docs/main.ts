@@ -6,6 +6,11 @@ import routes from './routes'
 
 import audit from '../audit.json';
 
+import createDataLayer from '../assets/ts/modules/data-layer'
+
+
+createDataLayer();
+
 const router = createRouter({
   history: createWebHistory(),
   routes: routes

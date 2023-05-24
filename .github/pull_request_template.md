@@ -19,6 +19,7 @@ The below needs to be done before a pull request can be approved:
 - [ ] New components added as an export to src/index.js
 - [ ] New components/features have sufficient unit tests
 - [ ] New components/features have sufficient documentation
+- [ ] New component has dataLayer events added
 
 ## Accesibility check list
 

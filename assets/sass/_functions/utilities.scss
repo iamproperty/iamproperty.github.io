@@ -119,6 +119,22 @@ $utilities: map-merge(
         "primary": linear-gradient(var(--gradient-direction), var(--colour-primary) 0, transparent 100%),
         "info": linear-gradient(var(--gradient-direction), var(--colour-info) 0, transparent 100%)
       )
+    ),
+    "colour": (
+      property: --colour,
+      class: colour,
+      values:
+      (
+        "primary": var(--colour-primary),
+        "secondary": var(--colour-secondary),
+        "info": var(--colour-info),
+        "success": var(--colour-success),
+        "warning": var(--colour-warning),
+        "danger": var(--colour-danger),
+        "light": var(--colour-light),
+        "dark": var(--colour-dark),
+        "admin": var(--colour-admin)
+      )
     )
   )
 );

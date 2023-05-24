@@ -1,6 +1,6 @@
 ```
 <a href="/link-url">
-  <Card>Link content</Card>
+  <iam-card>Link content</iam-card>
 </a>
 ```
 
