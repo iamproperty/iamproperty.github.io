@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Modules
 import * as helpers from '../js/modules/helpers'
+import createDataLayer from '../js/modules/data-layer'
 import nav from '../js/modules/nav'
 //import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
@@ -17,6 +18,7 @@ import iamCard from './components/card/card.component'
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
 
+  createDataLayer();
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);

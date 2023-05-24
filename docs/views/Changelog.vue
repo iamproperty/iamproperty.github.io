@@ -5,6 +5,7 @@
 
       <h2>V3.4.7--alpha</h2>
       <ul>
+        <li>Implement the datalayer</li>
         <li>New card custom element</li>
         <li>Removal of the card deck vue component</li>
         <li>New table custom element</li>
