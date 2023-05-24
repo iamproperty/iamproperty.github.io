@@ -1,5 +1,3 @@
-### Usage
-
 ```
 <Table :fields="fields" :items="items"></Table>
 ```
@@ -9,54 +7,39 @@
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | items  | Array | - | Table row data passed |
-| fields | Array | - | Table header titles  |
-| sort   | string | - | Choose from ascending or descending |
-| sortBy | string | - | Needs to match a column name and will trigger sorting via that column on page load |
-| show | number | - | Limits the number of results shown and will create pagination controls. |
-| page | number | - | Starting page for the pagination. |
-| reorder | bool | - | Create an order column and allow for the table rows to be reordered |
-| headingclass | string | - | Add a class to the table row within the thead, used to add a background or change test colour. |
+| fields | Array | - | Table header titles |
+| data-show | int | 15 | Update how many rows can be shown per page |
+| data-filterby | string (form ID) | | Give an optional form ID to connect a form to the table and make it act like a filtering system |
+
 
 ### Class modifiers
 
-- **.table-fullwidth** - Prevents the table from stacking on mobile
-- **.table-striped** - Add zebra-striping to the table
-- **.table-hover** - Enable a hover state on table rows within a &lt;tbody&gt;
+- Adding a class of **.table--cta** to the table component will fix the last column of the table in place (While on tablet or desktop). 
+- Adding a class of **.table--export** to the table component will create a button at the bottom of the table to export its contents out as a CSV file.
 
-### Make columns filterable or sortable
+### Example of items and fields
 
-To give a column some extra functionality extra values need to be set in the data.
+#### fields
 
 ```
-fields: [
-  { 
-    key: 'name',
-    filterable: true,
-    sortable: true
-  },
-  { key: 'address' }
+[
+  {
+    key: 'col_1',
+    key: 'col_2',
+    key: 'col_3',
+    key: 'col_4',
+  }
 ]
 ```
-
-### Custom JavaScript Events
-
-A custom event can be hooked into when the table gets updated by one of it filters.
+#### items
 
 ```
-this.$el.addEventListener('filtered', function (e) { 
-      
-  console.log('Table filtered')
-}, false);
-
-// Sorted
-this.$el.addEventListener('sorted', function (e) { 
-      
-  console.log('Table sorted')
-}, false);
-
-// Re-ordered via drag and drop
-this.$el.addEventListener('reordered', function (e) { 
-      
-  console.log('Table re-ordered')
-}, false);
+[
+  {
+    col_1: 'Row content 1',
+    col_2: 'Row content 2',
+    col_3: 'Row content 3',
+    col_4: 'Row content 4',
+  }
+]
 ```

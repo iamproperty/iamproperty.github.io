@@ -72,7 +72,14 @@ export const setTabsEventHandlers = function(tabsElement: Element){
       });
 
       if(button.hasAttribute('href'))
-        history.pushState(undefined, undefined, button.getAttribute('href'))
+        history.pushState(undefined, undefined, button.getAttribute('href'));
+      
+      // Data layer Open Event
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        "event": "openTab",
+        "tabTitle": button.textContent
+      });
     });
 
   });

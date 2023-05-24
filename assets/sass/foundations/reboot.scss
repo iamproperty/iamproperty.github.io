@@ -45,22 +45,15 @@ html {
 
 body {
 
-  font-family: 'qanelasmedium', arial, sans-serif;
+  @include var(font-family,--font-body);
   @include var(color,--colour-body);
   width: 100%;
   line-height: 1.2;
-  height: 100%;
+  min-height: 100%;
   //overflow-y: scroll;
   //overflow-x: hidden;
 }
 
-@media (hover: none) {
-  body {
-    height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-}
 
 #app {
   min-height: 100%;

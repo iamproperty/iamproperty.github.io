@@ -8,7 +8,7 @@
  * Add global classes used by the CSS and later JavaScript.
  * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
  */
- export const addBodyClasses = (body) => {
+export const addBodyClasses = (body) => {
   
   body.classList.add("js-enabled");
 
@@ -46,6 +46,21 @@ export const addGlobalEvents = (body) => {
 
   window.addEventListener('hashchange', function() { checkElements(location.hash); }, false);
 
+  addEventListener("popstate", (event) => {
+
+    if(event.state.type == "pagination"){
+      let form = document.querySelector(`#${event.state.form}`);
+      let pageInput = document.querySelector(`#${event.state.form} [data-pagination]`);
+      
+      if(pageInput)
+        pageInput.value = event.state.page;
+      else
+        form.innerHTML += `<input name="page" type="hidden" data-pagination="true" value="${event.state.page}" />`
+      
+      form.dispatchEvent(new Event("submit"));
+    }
+  });
+
   // Dialogs/modals
   document.addEventListener('click', (event) => {
 
@@ -56,7 +71,9 @@ export const addGlobalEvents = (body) => {
       const dialog = document.querySelector(`dialog#${modalID}`);
       
       // Create close button is needed
-      if(!dialog.querySelector(':scope > form:first-child'))
+      if(dialog.parentNode.closest('form') && !dialog.querySelector(':scope > .dialog__close:first-child'))
+        dialog.innerHTML = `<button class="dialog__close" formmethod="dialog">Close</button>${dialog.innerHTML}`;
+      else if(!dialog.parentNode.closest('form') && !dialog.querySelector(':scope > form:first-child'))
         dialog.innerHTML = `<form><button class="dialog__close" formmethod="dialog">Close</button></form>${dialog.innerHTML}`;
 
       dialog.showModal();
@@ -73,62 +90,6 @@ export const addGlobalEvents = (body) => {
 
   return null
 }
-
-/**
- * Check if an element contains certain elements that needs enhancing with the JavaScript helpers, it is recommended to do this on the page body after the dom is loaded. Elements that are loaded via ajax should also run this function. 
- * @param {HTMLElement} element Dom element, this doesn't have to be the body but it is recommended.
- */
-export const checkElements = (element) => {
-
-  // Tables
-  Array.from(element.querySelectorAll('table')).forEach((table, index) => {
-
-    tableStacked(table);
-    tableWrap(table);
-  });
-}
-
-/**
- * Wrap tables with a table wrapper div to help maintain its responsive design.
- * @param {HTMLElement} table Dom table element
- */
-export const tableWrap = (table) => {
-  
-  if(!table.parentNode.classList.contains('table__wrapper')){
-
-    const tableHTML = table.outerHTML;
-
-    table.outerHTML = `<div class="table__wrapper">${tableHTML}</div>`;
-  }
-}
-
-/**
- * Creates data attributes to be used by the CSS for mobile views.
- * @param {HTMLElement} table Dom table element
- */
-export const tableStacked = (table) => {
-
-  const colHeadings = Array.from(table.querySelectorAll('thead th'));
-  const colRows = Array.from(table.querySelectorAll('tbody tr'));
-
-  colRows.forEach((row, index) => {
-
-    const cells = Array.from(row.querySelectorAll('th, td'));
-    
-    cells.forEach((cell, cellIndex) => {
-
-      const heading = colHeadings[cellIndex];
-      if(typeof heading != "undefined"){
-
-        let tempDiv = document.createElement("div");
-        tempDiv.innerHTML = heading.innerHTML;
-        let headingText = tempDiv.textContent || tempDiv.innerText || "";
-        cell.setAttribute('data-label',headingText);
-      }
-    });
-  });
-}
-
 
 export const isNumeric = function(str) {
   if (typeof str != "string") return false // we only process strings!  

@@ -13,16 +13,16 @@
 @use "components/lists.scss";
 @use "components/tooltips.scss";
 @use "components/container.scss";
-@use "components/tables.scss";
-@use "components/links.scss";
+@use "components/table.scss";
+@use "foundations/links.scss";
 @use "components/buttons";
-@use "components/card.scss";
 @use "components/panel.scss";
 @use "components/modal.scss";
 
+@use "components/pagination.scss";
+
 // Bootstrap elements
 @import "../../node_modules/bootstrap/scss/_transitions.scss";
-@import "../../node_modules/bootstrap/scss/_pagination.scss";
 @import "../../node_modules/bootstrap/scss/_badge.scss";
 
 // Helpers

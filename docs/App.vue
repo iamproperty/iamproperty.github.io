@@ -63,4 +63,12 @@ footer .router-link-active {
 #visualtest:target ~ main > .visualtest pre {
   display: none!important;
 }
+
+#app {
+
+  display: contents;
+  > div {
+    display: contents;
+  }
+}
 </style>

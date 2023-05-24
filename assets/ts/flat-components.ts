@@ -1,8 +1,9 @@
 // @ts-nocheck
 // Modules
 import * as helpers from '../js/modules/helpers'
+import createDataLayer from '../js/modules/data-layer'
 import nav from '../js/modules/nav'
-import table from '../js/modules/table'
+import * as tableModule from './modules/table'
 import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
@@ -14,10 +15,12 @@ import tabs from '../js/modules/tabs'
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
 
+  createDataLayer();
+
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
-  helpers.checkElements(document.body);
+  //helpers.checkElements(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
@@ -25,8 +28,18 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Advanced tables
-  Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
-    table(arrayElement);
+  Array.from(document.querySelectorAll('table')).forEach((arrayElement) => {
+
+    tableModule.addTableEventListeners(arrayElement);
+    tableModule.createMobileButton(arrayElement);
+    tableModule.addDataAttributes(arrayElement);
+
+
+    if(arrayElement.closest('.table--cta')){
+
+      const largestWidth = tableModule.getLargestLastColWidth(arrayElement);
+      arrayElement.closest('.table--cta').style.setProperty("--cta-width", `${largestWidth}rem`);
+    }
   });
 
   // Accordions

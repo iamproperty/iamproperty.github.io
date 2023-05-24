@@ -1,12 +1,26 @@
 <template>
   <main>
-    <CardDeck :items="pages" cardtype="quick" :smcols="2">
-      <h1>Foundations</h1>
-    </CardDeck>
+
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-md-3">
+
+        <div v-for="item in pages">
+          <a :href="item.link">
+            <Card>
+              {{ item.title }}
+              <span v-if="item.content" v-html="item.content"></span>
+            </Card>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
   </main>
 </template>
 <script>
-import CardDeck from '@/components/CardDeck/CardDeck.vue'
+import Card from '@/components/Card/Card.vue'
 import routes from '../../routes.ts';
 
 const foundations = routes.reduce(function (arr, route) {
@@ -32,7 +46,7 @@ const foundations = routes.reduce(function (arr, route) {
 
 export default {
   components: {
-    CardDeck
+    Card
   },
   data () {
     return {

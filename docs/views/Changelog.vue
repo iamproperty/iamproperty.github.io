@@ -6,6 +6,10 @@
       <h2>V3.4.7--alpha</h2>
       <ul>
         <li>Update the modal component</li>
+        <li>Implement the datalayer</li>
+        <li>New card custom element</li>
+        <li>Removal of the card deck vue component</li>
+        <li>New table custom element</li>
       </ul>
 
       <h2>V3.4.6</h2>

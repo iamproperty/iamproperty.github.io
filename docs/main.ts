@@ -7,6 +7,11 @@ import audit from '../audit.json';
 import * as helpers from '../assets/ts/modules/helpers'
 
 
+import createDataLayer from '../assets/ts/modules/data-layer'
+
+
+createDataLayer();
+
 const router = createRouter({
   history: createWebHistory(),
   routes: routes
@@ -92,9 +97,5 @@ let app = createApp(template)
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
 
-
-
-// Global stuff
 helpers.addBodyClasses(document.body);
 helpers.addGlobalEvents(document.body);
-helpers.checkElements(document.body);

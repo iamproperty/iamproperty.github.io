@@ -14,14 +14,29 @@
           <span>{{point.display}}</span>
         </div>
       </div>
-      <Table v-bind="$props">
+
+
+      <div class="table__wrapper">
+
+      <table v-if="fields">
+        <thead>
+          <tr>
+            <th v-for="(field) in fields" :key="field.key">{{ cellHeading(field.key) }}</th>
+          </tr>
+        </thead>
+        <tbody v-if="items">
+          <tr v-for="(value,index) in items" :key="index" :data-row-id="value['rowid']">
+            <td :key="cellIndex" v-for="(cellValue,cellIndex) in Object.fromEntries(Object.entries(value).filter(([key]) => key !== 'rowid'))" v-html="cellValue" :data-label="cellHeading(cellIndex)" :data-numeric="numericValue(cellValue)"></td>
+          </tr>
+        </tbody>
+      </table>
 
         <div class="chart__guidelines" role="presentation">
           <div :key="index" v-for="(point,index) in yaxis" :data-value="point.value" :style="`--percent:${((point.value-min)/(max-min))*100}%;`" class="guideline">
           </div>
         </div>
         <span class="lines" v-if="type == 'line'"></span>
-      </Table>
+      </div>
       <div class="pies" v-if="type == 'pie'"></div>
     </div>
     </figure>
@@ -34,13 +49,26 @@
 
 <script>
 import { ucfirst, unsnake } from '../../helpers/strings'
-import Table from '../../components/Table/Table.vue'
 import chartModule from '../../../assets/ts/modules/chart'
+
+let numericValue = function(value) {
+
+  if(typeof(value) != "string")
+    return value;
+
+  value = value.replace('£','')
+  value = value.replace('%','')
+
+  if (Number.isNaN(Number.parseFloat(value))) {
+    return 0;
+  }
+
+  return Number.parseFloat(value);
+}
 
 export default {
   name: 'Chart',
   components: {
-    Table
   },
   props: {
     type: {
@@ -72,6 +100,20 @@ export default {
     fields: {
       type: Array,
       required: true
+    }
+  },
+  computed: {
+    cellHeading () {
+      return (heading) => {
+        return `${ucfirst(unsnake(heading))}`
+      }
+    },
+    numericValue () {
+      return (value) => {
+
+        value = numericValue(value);
+        return value;
+      }
     }
   },
   mounted(){
