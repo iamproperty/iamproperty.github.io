@@ -264,6 +264,8 @@ $chart-colors: map-merge((
         text-overflow: ellipsis;
         font-size: var(--label-size);
         display: none;
+        border: none;
+        min-width: auto;
 
         @include media-breakpoint-up(md) {
           display: block;
@@ -282,10 +284,12 @@ $chart-colors: map-merge((
         height: var(--percent, 0%);
         bottom: var(--bottom,0%);
         width: 50%;
+        min-width: 0;
         max-width: 10rem;
         position: relative;
         background: green;
         padding: 0;
+        border: none;
 
         &[data-label]:before {
           display: none;

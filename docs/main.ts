@@ -6,6 +6,11 @@ import routes from './routes'
 
 import audit from '../audit.json';
 
+import createDataLayer from '../assets/ts/modules/data-layer'
+
+
+createDataLayer();
+
 const router = createRouter({
   history: createWebHistory(),
   routes: routes
@@ -90,3 +95,8 @@ let template = window.location.pathname.startsWith('/standalone') || window.loca
 let app = createApp(template)
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
+
+import * as helpers from '../assets/ts/modules/helpers'
+
+helpers.addBodyClasses(document.body);
+helpers.addGlobalEvents(document.body);

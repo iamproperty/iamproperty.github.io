@@ -1,0 +1,4488 @@
+{
+  "data": [
+    {
+      "id": 18,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Scott Cove, Flat 51f\nBethany Tunnel, WV99 1TL",
+      "client": {
+        "formatted_name": "Robertson Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/18/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 17,
+      "created_at": {
+        "date": "2023-05-15 12:10:45.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 9,
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Richards Fords, Flat 94\nFreddie Haven, BN14 7AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/9/view"
+        }
+      },
+      "formatted_address": "Alexander Plaza, Flat 61\nKevin Road, TW15 3EQ",
+      "client": {
+        "formatted_name": "Jackson Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Lloyd Conlin"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/17/view",
+        "transaction_view": "http://my.localhost/ic/transaction/9/view"
+      }
+    },
+    {
+      "id": 16,
+      "created_at": {
+        "date": "2023-05-15 12:10:44.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Bennett Manors, 32 Allen Station, BD24 0LF",
+      "client": {
+        "formatted_name": "Richards Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/16/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 15,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 8,
+        "user": {
+          "formatted_name": "Jason Hall"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Alison River, 7 Henry Wells, CT6 9AR",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/8/view"
+        }
+      },
+      "formatted_address": "Olivia Drive, Studio 64\nFox Underpass, ME19 6QD",
+      "client": {
+        "formatted_name": "Keith Clark",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Jason Hall"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/15/view",
+        "transaction_view": "http://my.localhost/ic/transaction/8/view"
+      }
+    },
+    {
+      "id": 14,
+      "created_at": {
+        "date": "2023-05-15 12:10:43.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Paul Row, 2 Natalie Stream, TW4 7JP",
+      "client": {
+        "formatted_name": "Chapman Ltd",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/14/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 13,
+      "created_at": {
+        "date": "2023-05-15 12:10:42.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 7,
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Dave Courts, 92 Oscar Ridge, LL18 3RP",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/7/view"
+        }
+      },
+      "formatted_address": "Brandon Flat, 248 Jayden Parkway, SE1 7DB",
+      "client": {
+        "formatted_name": "Morgan Ltd",
+        "status_label": "Not started yet",
+        "user": {
+          "formatted_name": "Robbie Jakob-Whitworth"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Not started yet",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/13/view",
+        "transaction_view": "http://my.localhost/ic/transaction/7/view"
+      }
+    },
+    {
+      "id": 12,
+      "created_at": {
+        "date": "2023-05-15 12:10:41.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "Callum Keys, Studio 39\nMaria Ports, GU10 4HE",
+      "client": {
+        "formatted_name": "Sophia Ward",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "buyer with a related sale",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/12/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 11,
+      "created_at": {
+        "date": "2023-05-15 12:10:40.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 6,
+        "user": {
+          "formatted_name": "Armin Talic"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Adams Shore, 324 Price Causeway, SW8 4TE",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/6/view"
+        }
+      },
+      "formatted_address": "George Square, 20 Kelly Square, CH63 4JT",
+      "client": {
+        "formatted_name": "Walker Ltd",
+        "status_label": "Solicitor Instructed",
+        "user": {
+          "formatted_name": "Armin Talic"
+        }
+      },
+      "type": "vendor buying on",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Solicitor Instructed",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/11/view",
+        "transaction_view": "http://my.localhost/ic/transaction/6/view"
+      }
+    },
+    {
+      "id": 10,
+      "created_at": {
+        "date": "2023-05-15 12:10:39.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Kennedy Key, 8 Bennett Gardens, TN23 5PR",
+      "client": {
+        "formatted_name": "Emma Johnson",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "vendor",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/10/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    },
+    {
+      "id": 9,
+      "created_at": {
+        "date": "2023-05-15 12:10:38.000000",
+        "timezone_type": null,
+        "timezone": "Europe/London"
+      },
+      "transaction": {
+        "id": 5,
+        "user": {
+          "formatted_name": "Ian Outterside"
+        },
+        "branch": {
+          "name": "Komodo Newcastle Office"
+        },
+        "formatted_address": "Reynolds Underpass, Studio 45\nHarrison Stream, AB53 4RJ",
+        "table_routes": {
+          "transaction_view": "http://my.localhost/ic/transaction/5/view"
+        }
+      },
+      "formatted_address": "Dylan Hollow, 86 Jordan Parkways, HA7 1HB",
+      "client": {
+        "formatted_name": "Lauren Allen",
+        "status_label": "Incomplete",
+        "user": {
+          "formatted_name": "Ian Outterside"
+        }
+      },
+      "type": "buyer",
+      "assessment": {
+        "risk": null
+      },
+      "due_diligence_complete": 0,
+      "status_label": "Incomplete",
+      "alert": "Incomplete",
+      "approved": true,
+      "table_routes": {
+        "view": "http://my.localhost/ic/risk-assessments/9/view",
+        "transaction_view": "http://my.localhost/ic/transaction/5/view"
+      }
+    }
+  ],
+  "links": {
+    "first": "http://my.localhost/api/ic/client-transactions?page=1",
+    "last": "http://my.localhost/api/ic/client-transactions?page=2",
+    "prev": null,
+    "next": "http://my.localhost/api/ic/client-transactions?page=2"
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 2,
+    "path": "http://my.localhost/api/ic/client-transactions",
+    "per_page": 10,
+    "to": 10,
+    "total": 18
+  }
+}

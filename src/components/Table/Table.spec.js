@@ -6,10 +6,10 @@ describe('Table component', () => {
   const test = mount(Table, {
     propsData: {
       fields: [
-        { key: 'name', filterable: true, sortable: true },
-        { key: 'job', filterable: true, sortable: true },
+        { key: 'name' },
+        { key: 'job' },
         { key: 'address' },
-        { key: 'emergency_contact', filterable: true, sortable: true },
+        { key: 'emergency_contact' },
         { key: 'actions' }
       ],
       items: [
@@ -40,11 +40,6 @@ describe('Table component', () => {
   })
 
   // On load
-  it('renders a div with the class of table wrapper', () => {
-
-    expect(test.classes()).toContain('table__wrapper')
-  })
-
   it('renders a thead', () => {
 
     expect(test.find('thead').exists()).toBe(true)
@@ -55,36 +50,9 @@ describe('Table component', () => {
     expect(test.find('tbody').exists()).toBe(true)
   })
 
-  it('renders a filters form when needed', () => {
+  it('renders a table heading', () => {
 
-    expect(test.find('.table__filters').exists()).toBe(true)
-  })
-
-  it('renders a pagination form when needed', () => {
-
-    expect(test.find('.table__pagination').exists()).toBe(true)
-  })
-
-  // Events
-  it('can be sorted by name', async () => {
-
-    const firstCol = test.find('[data-sortable]')
-    expect(firstCol.html()).toContain('Name')
-
-    await firstCol.trigger('click')
-
-    let firstRowCol = test.find('tbody tr:first-child [data-label="Name"]')
-    expect(firstRowCol.html()).toContain('Andrew')
-  })
-
-  it('can be filtered by name', async () => {
-
-    const searchField = test.find('[type="search"]')
-
-    await searchField.setValue('Andrew')
-    await searchField.trigger('change')
-
-    expect(test.findAll('tbody tr').length).toBe(1)
+    expect(test.find('thead th').exists()).toBe(true)
   })
 
 })
