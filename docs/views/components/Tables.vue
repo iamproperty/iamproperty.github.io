@@ -160,6 +160,113 @@
     
     
     <div class="container">
+      <h2>Max height table</h2>
+      <p>...</p>
+    </div>
+
+
+    <div class="container visualtest">
+      
+      <Table class="table-mh-small">
+        <table>
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Date added</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </Table>
+    </div>
+
+    
+    <div class="container">
       <h2>Expandable table</h2>
       <p>For greater control over displaying larger sets of data on mobile, there is the option to hide and expand columns. Displaying at least three elements of table data by default, and hiding the rest within the expanded section.</p>
     </div>
