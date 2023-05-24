@@ -1,153 +1,241 @@
 <template>
   <main>
+
+    <DSHeader :image="headerImg" section="components">
+      <h1>Cards</h1>
+    </DSHeader>
+
     <div class="container">
-      <ul class="breadcrumb mb-0 d-sm-none pb-0">
-        <li><a href="/components">Components</a></li>
-      </ul>
-      <h1>Card</h1>
-      <p>A large link that also works as a content container, usually containing a title, description and call to action text. Cards are designed to be used as a child component of <a href="/components/card-deck">card decks</a>, card carousels and featured cards.</p>
-      <h2>Default card</h2>
+      <h2>Navigational cards</h2>
+      <p class="lead">Navigational cards can be used to direct the user to another page or modal. All will apply a drop shadow with a default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15% as default unless specified otherwise, this should have the ability to be removed if needed.</p>
+      <h3>Header card</h3>
     </div>
-    <CardDeck :items="items" class="visualtest" data-test="test1"></CardDeck>
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card>Client onboarding</Card>
+          </a>          
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording">
+            <Card class="hover">Client onboarding</Card>
+          </a>          
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording">
+            <Card class="active">Client onboarding</Card>
+          </a>          
+        </div>
+      </div>
+    </div>
+    <div class="container">
+
+      <h3>Header card with description</h3>
+      <p>This is a variation of the Header card which includes the addition body copy description.</p>
+    
+    </div>
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card>Client onboarding <span>Action Client due diligence checks and view information</span></Card>
+          </a>          
+        </div>
+
+      
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording">
+            <Card class="hover">Client onboarding <span>Action Client due diligence checks and view information</span></Card>
+          </a>          
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording">
+            <Card class="active">Client onboarding <span>Action Client due diligence checks and view information</span></Card>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    <div class="container">
+      <h3>Text card with SVG</h3>
+      <p>This is a variation of the Header card which includes the addition of an SVG illustration. </p>
+
+    </div>
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
+          </a>          
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording">
+            <Card data-illustration="/svg/illustrations/table.svg" class="hover">Client onboarding</Card>
+          </a>          
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording">
+            <Card data-illustration="/svg/illustrations/table.svg" class="active">Client onboarding</Card>
+          </a>          
+        </div>
+      </div>
+
+    </div>
+    <div class="container">
+
+
+      <h2>Filter cards</h2>
+      <p class="lead">Filter cards can be used to better display key data sets or information that when selected will provide the user with a outcome or set of results.</p>
+
+      <h3>Numerical filter card</h3>
+      <p>Numerical filter card display a figure on left and text applying to that numerical value next to it. The coloured block on the left of the card can have a primary or a status colour (red, amber, green), the ‘active’ state outline needs to apply the same colour used on the left of the card.</p>
+
+    </div>
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+          
+            
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <button>
+            <Card class="card--filter" data-total="14">Due diligence incomplete</Card>
+          </button>
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <button>
+            <Card class="card--filter hover" data-total="14">Due diligence incomplete</Card>
+          </button>
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <button>
+            <Card class="card--filter active" data-total="14">Due diligence incomplete</Card>
+          </button>
+        </div>
+
+      </div>
+    </div>
+    <div class="container">
+      <h3>Text and icon filter card</h3>
+      <p>This filter card provides user with a visual aid (icon) as well as a text label to ensure the user gains a quicker understanding of the filter card subject. This card can also apply a drop shadow with a default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15%.</p>
+
+    </div>
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4 pe-none">
+        
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <button class="d-inline-block">
+          <Card class="card--filter"><i class="icon fa-house"></i>Character property</Card>
+        </button>
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <button class="d-inline-block">
+            <Card class="card--filter hover"><i class="icon fa-house"></i>Character property</Card>
+          </button>
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <button class="d-inline-block">
+            <Card class="card--filter active"><i class="icon fa-house"></i>Character property</Card>
+          </button>
+        </div>
+      </div>
+    </div>
 
 
     <div class="container">
-      <h3>HTML code example</h3>
-      <pre><code class="javascript">{{htmlUsage}}</code></pre>
-    </div>
+      
+      <h2>Implementation</h2>
+      <Tabs>
+        <details>
+          <summary><h3>Web component</h3></summary>
+          <WebReadme></WebReadme>
+        </details>
+        <details>
+          <summary><h3>Vue component</h3></summary>
+          <Readme></Readme>
+        </details>
+        <details>
+          <summary><h3>HTML</h3></summary>
+          <pre><code class="javascript">{{htmlUsage}}</code></pre>
+        </details>
+      </Tabs>
 
-    <div class="container">
-      <h2>Simple card</h2>
-      <p>A reduced version of the card without a border or extra padding.</p>
     </div>
-    <CardDeck :items="items" cardtype="simple" :gap="0" class="visualtest"></CardDeck>
-    <div class="container">
-      <p>The card element needs a data attribute set which will set bespoke CSS.</p>
-      <pre><code class="javascript">{{`&lt;a href="/link" data-type="simple">...&lt;/a>`}}</code></pre>
-    </div>
-
-    <div class="container">
-      <h2>Quick link card</h2>
-      <p>A very simple card to just show the card title.</p>
-    </div>
-    <CardDeck :items="items" cardtype="quick" class="bg-dark visualtest"></CardDeck>
-    <div class="container">
-      <p>The card element needs a data attribute set which will set bespoke CSS.</p>
-      <pre><code class="javascript">{{`&lt;a href="/link" data-type="quick">...&lt;/a>`}}</code></pre>
-    </div>
-
-    <div class="container">
-      <h2>Insight cards</h2>
-      <p>A simple card type with a link at the bottom instead of a button and a read time detail set.</p>
-    </div>
-
-    <CardDeck :items="insightCards" :smcols="2" :mdcols="4" cardtype="simple" btntype="link" ctatext="Read more" titleclass="h6 fw-normal font-body text-uppercase" class="visualtest">
-    </CardDeck>
-
-    <div class="container">
-      <h2>Property card</h2>
-      <p>A more complex card with lots of key information but is still made using the same component.</p>
-    </div>
-    <CardDeck :items="propertyListing" :smcols="2" :mdcols="4" btntype="link" class="visualtest" titleclass="h6"></CardDeck>
-    <div class="container">
-      <p>No data attribute is needed and can be built up by adding</p>
-      <pre><code class="javascript">{{htmlProperty}}</code></pre>
-    </div>
-
-
-    <div class="container">
-      <h2>Property Listing card</h2>
-      <p>Property cards by default shift the image to the left on cards when given more space. This is done by putting the card into a card deck with only one column per row on tablet or desktop (<strong>.row-cols-sm-1</strong>).</p>
-    </div>
-    <CardDeck :items="propertyListing" :smcols="1" :mdcols="1" btntype="link" class="visualtest" titleclass="h6"></CardDeck>
-    <div class="container">
-      <p></p>
-    </div>
-
-    <div class="container">
-      <h2>Vue Card component reference</h2>
-      <CardReadme></CardReadme>
+    <div class="bg-admin version-control">
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Version Control</th>
+              <th>Date</th>
+              <th>Notable updates</th>
+            </tr>
+          </thead>
+          <tbody class="text-body">
+            <tr>
+              <td>V1 added</td>
+              <td>19.05.2023</td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="/pdfs/cards.pdf" download>Download latest designs</a>
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-import CardDeck from '@/components/CardDeck/CardDeck.vue'
-import CardReadme from '@/components/Card/README.md'
+import Card from '@/components/Card/Card.vue'
+import Readme from '@/components/Card/README.md'
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Tab from '@/components/Tabs/Tab.vue'
+import WebReadme from '~/ts/components/card/README.md'
+import DSHeader from '../DSHeader.vue'
+import headerImg from '../../img/cards-header.png'
+import Table from '@/components/Table/Table.vue'
 
 export default {
   components: {
-    CardDeck,
-    CardReadme
+    DSHeader,
+    Table,
+    Readme,
+    WebReadme,
+    Tabs,
+    Tab,
+    Card,
+    headerImg
   },
   data () {
     return {
-      htmlUsage: `<a href="/components/card-deck" class="card">
+      headerImg: headerImg,
+      htmlUsage: `<a href="/link-url" class="card">
   <div class="card-body">
-    <h2 class="card-title">Card 1</h2>
-    <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>
+    Link text
+    <span>Link description text..</span>
   </div>
-  <div class="card-footer">
-    <span class="btn btn-secondary mb-0">Find out more<span class="visually-hidden"> about Card 1</span></span>
-  </div>
-</a>`,
-      htmlProperty: `<a href="/components/card" title="Find out more: 4 bed semi-detached - Burt terrace, Newcastle upon tyne" class="card">
-  <div class="card-header__wrapper">
-    <img src="/img/house.16902622.jpeg" alt="" loading="lazy" class="card-image">
-    <div class="card-header">
-      <span class="badge bg-primary p-2 me-2"><span class="text-danger lh-0 fs-1 align-middle">•</span>&nbsp;&nbsp;Live now</span>
-      <span class="badge bg-black bg-opacity-50 p-2 align-self-end"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 30 28" class="icon text-white"><title>Images </title><path d="M15 10.5c2.484 0 4.5 2.016 4.5 4.5s-2.016 4.5-4.5 4.5-4.5-2.016-4.5-4.5 2.016-4.5 4.5-4.5zM26 4c2.203 0 4 1.797 4 4v14c0 2.203-1.797 4-4 4h-22c-2.203 0-4-1.797-4-4v-14c0-2.203 1.797-4 4-4h3.5l0.797-2.125c0.391-1.031 1.609-1.875 2.703-1.875h8c1.094 0 2.312 0.844 2.703 1.875l0.797 2.125h3.5zM15 22c3.859 0 7-3.141 7-7s-3.141-7-7-7-7 3.141-7 7 3.141 7 7 7z"></path></svg> 5&nbsp;&nbsp;|&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="30" height="28" viewBox="0 0 28 28" class="icon text-white ms-0"><title>Videos </title><path d="M11.109 17.625l7.562-3.906-7.562-3.953v7.859zM14 4.156c5.891 0 9.797 0.281 9.797 0.281 0.547 0.063 1.75 0.063 2.812 1.188 0 0 0.859 0.844 1.109 2.781 0.297 2.266 0.281 4.531 0.281 4.531v2.125s0.016 2.266-0.281 4.531c-0.25 1.922-1.109 2.781-1.109 2.781-1.062 1.109-2.266 1.109-2.812 1.172 0 0-3.906 0.297-9.797 0.297v0c-7.281-0.063-9.516-0.281-9.516-0.281-0.625-0.109-2.031-0.078-3.094-1.188 0 0-0.859-0.859-1.109-2.781-0.297-2.266-0.281-4.531-0.281-4.531v-2.125s-0.016-2.266 0.281-4.531c0.25-1.937 1.109-2.781 1.109-2.781 1.062-1.125 2.266-1.125 2.812-1.188 0 0 3.906-0.281 9.797-0.281v0z"></path></svg> 2</span>
-    </div>
-    <img src="/img/logo.423a9165.jpg" alt="" loading="lazy" class="card-logo">
-  </div>
-  <div class="card-body">
-    <span class="badge rounded-pill py-2 px-3 mb-3 me-2 bg-secondary text-primary">Modern method</span>
-    <span class="badge rounded-pill py-2 px-3 mb-3 me-2 bg-light text-dark">Freehold</span>
-    <span class="card-title d-block h6">4 bed semi-detached <span class="d-block fw-normal font-body text-body small">Burt terrace, Newcastle upon tyne</span></span>
-    <span class="d-block h6 text-dark mb-1">Price guide: £90,000.00</span>
-    <span class="d-block h6 text-primary mb-4">Auction time left: 19 days</span>
-    <p>Reservation fee applies</p>
-  </div>
-  <div class="card-footer">
-    <span class="link mb-0">Find out more<span class="visually-hidden"> about 4 bed semi-detached</span></span>
-  </div>
-</a>`,
-      items: [
-        {
-          link: '/components/card',
-          title: 'Card 1',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        }
-      ],
-      propertyListing: [
-        {
-          link: '/components/card',
-          content: `<p>Reservation fee applies</p>`,
-          image: '/house.jpeg',
-          title: '4 bed semi-detached',
-          subtitle: 'Burt terrace, Newcastle upon tyne',
-          details: {
-            tags: ['Modern method','Freehold'],
-            guideprice: '£90,000.00',
-            auctiontime: '19 days',
-            status: 'Live now',
-            images: 5,
-            videos: 2,
-            logo: '/logo.jpg'
-          }
-        }
-      ],
-      insightCards: [
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          details: {
-            readtime: '10mins'
-          },
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`
-        }
-      ]
+</a>`
     }
   }
 }
