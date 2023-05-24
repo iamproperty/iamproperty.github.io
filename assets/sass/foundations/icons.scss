@@ -4,7 +4,7 @@
   fill: currentColor;
   stroke: currentColor;
   stroke-width: 0;
-  @include var(color,--colour-brand);
+  @include var(color,--colour-primary);
   width: rem(64);
   height: rem(64);
   display: inline-block;

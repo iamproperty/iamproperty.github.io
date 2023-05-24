@@ -45,7 +45,7 @@ html {
 
 body {
 
-  font-family: 'qanelasmedium', arial, sans-serif;
+  @include var(font-family,--font-body);
   @include var(color,--colour-body);
   width: 100%;
   line-height: 1.2;
