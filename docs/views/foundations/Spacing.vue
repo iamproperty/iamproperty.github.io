@@ -241,7 +241,7 @@
       <p><strong>Medium (md) – 992px and over</strong> <br>Scales upto <strong>1280px</strong> <br>This will be visible on landscape tablet and desktop devices.</p>
     </div>
     
-    <div class="bg-admin version-control">
+    <div class="bg-light version-control">
       <div class="container">
         <table>
           <thead>
@@ -272,6 +272,10 @@
   height: 5rem;
   position: relative;
 
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+  }
+
   :is(.before,.after) {
     position: absolute;
     left: 0;
@@ -296,6 +300,12 @@
   text-align: center;
   padding-top: 1rem;
   position: relative;
+
+  
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+  }
+
 }
 
 $colWidth: 25%;
@@ -304,6 +314,12 @@ $colWidth: 25%;
   background-image: linear-gradient(180deg, #FFDFDF 25%, #FFEEEE 25%, #FFEEEE 50%, #FFDFDF 50%, #FFDFDF 75%, #FFEEEE 75%, #FFEEEE 100%);
   background-size: 100% 2rem;
   position: relative;
+
+  
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+  }
+
 
   &.row--mobile {
     max-width: 23.5rem;

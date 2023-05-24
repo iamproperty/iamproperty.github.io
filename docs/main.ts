@@ -49,8 +49,6 @@ const themeColours = Object.keys(cssVars).reduce( (arr, key) => {
     let updateKey = key.replace('themeColour_', '')
     updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
     arr[updateKey] = cssVars[key]
-
-    console.log(key);
   }
   return arr
 }, {})
@@ -71,6 +69,21 @@ const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
   return arr
 }, {})
 
+const extendedColours = {...nonThemeColours};
+delete extendedColours["Muted"];
+delete extendedColours["Body"];
+
+// Filters the CSS vars object to pull out the non-theme colours
+const darkModeColours = Object.keys(cssVars).reduce(function (arr, key) {
+  if (key.startsWith('darkModeColour_')) {
+    let updateKey = key.replace('darkModeColour_', '')
+    updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
+    arr[updateKey] = cssVars[key]
+  }
+  return arr
+}, {})
+
+
 // Filters the CSS vars object to pull out the aspect ratios
 const aspectRatios = Object.keys(cssVars).reduce(function (arr, key) {
   if (key.startsWith('aspect-ratio_')) {
@@ -86,6 +99,8 @@ export const shared = {
   themeColours: themeColours,
   secondaryColours: secondaryColours,
   nonThemeColours: nonThemeColours,
+  extendedColours: extendedColours,
+  darkModeColours: darkModeColours,
   aspectRatios: aspectRatios,
   cssVars: cssVars,
   audit: audit

@@ -101,6 +101,9 @@
   @each $color, $value in $non-theme-colors {
     nonThemeColour_#{$color}: #{$value}
   }
+  @each $color, $value in $dark-mode-colors {
+    darkModeColour_#{$color}: #{$value}
+  }
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};
   }

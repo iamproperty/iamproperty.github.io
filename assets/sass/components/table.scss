@@ -85,15 +85,19 @@ table.border-0 {
 
 // #region Table wrapper - Add via JS if needed, provides a safe space to scroll
 :is(iam-table, .iam-table) {
-
+  --wrapper-padding: #{rem(32)};
   display: block;
-  padding: rem(32);
+  padding: var(--wrapper-padding);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
   border-radius: rem(8);
   margin-bottom: rem(32);
 
   table {
     margin-bottom: 0;
+  }
+
+  @media (forced-colors: active) {
+    --wrapper-padding: 0;
   }
 }
 
@@ -115,7 +119,7 @@ table.border-0 {
 }
 @container (width < 23.4375em) {
 
-  :is(.iam-table,.iam-table):not(.table--fullwidth){
+  :is(iam-table,.iam-table):not(.table--fullwidth){
     .table__wrapper {
 
       overflow: hidden;
@@ -205,8 +209,8 @@ table.border-0 {
             font-family: "Font Awesome 6 Pro";
             content: "\f055";
             position: absolute;
-            top: 0;
-            right: 0;
+            top: 1px;
+            right: 1px;
             font-size: rem(28);
             line-height: rem(28);
             font-weight: 300;

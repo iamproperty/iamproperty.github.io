@@ -134,14 +134,11 @@
 
 @mixin reset-colours($compatible:$compatible) {
   
-  --colour-body: var(--colour-body-theme);
-  --colour-heading: var(--colour-primary);
-  --colour-link: var(--colour-link-theme);
-  --colour-hover: var(--colour-hover-theme);
-  --colour-active: var(--colour-active-theme);
-  //--colour-underline: var(--colour-underline);
-  --colour-border: var(--colour-border-theme);
-  --colour-brand: var(--colour-primary);
+  @each $color, $value in $non-theme-colors {
+
+    --colour-#{$color}: #{$value};
+  }
+
 
   --btn-bg: var(--colour-warning);
   --btn-text: var(--colour-primary);
@@ -156,12 +153,10 @@
 
 @mixin invert-colours($compatible:$compatible) {
   
-  --colour-body: var(--colour-inverted);
-  --colour-heading: var(--colour-inverted);
-  --colour-link: var(--colour-inverted);
-  --colour-hover: var(--colour-inverted);
-  --colour-border: var(--colour-inverted);
-  --colour-brand: var(--colour-inverted);
+  @each $color, $value in $dark-mode-colors {
+
+    --colour-#{$color}: #{$value};
+  }
 
   --btn-bg: var(--colour-inverted);
   --btn-text: var(--colour-primary);

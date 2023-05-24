@@ -25,13 +25,8 @@
   }
 
   // Extra vars needed
-  --colour-underline: var(--colour-primary);
-  --colour-heading: var(--colour-primary);
-  --alpha: var(--bg-opacity,1);
-  --#{$variable-prefix}gradient: #{$gradient};
   --content-max-width: #{$content-max-width};
-  --colour-brand: var(--colour-primary);
-
+  
   /* Button colours */
   --btn-bg: var(--colour-warning);
   --btn-text: var(--colour-primary);
@@ -43,8 +38,6 @@
 // Dark mode; functional colours get updated
 @media screen and (prefers-color-scheme: dark) {
   :root {
-    --colour-canvas: var(--colour-primary);
-    --colour-admin: var(--colour-primary);
     @include invert-colours();
   }
 
@@ -52,15 +45,13 @@
     color: #{$colour-inverted}!important;
   }
 
-  body .bg-white {
-    background-color: transparent!important;
-  }
+  
 }
 
 @media screen {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-black):not(.invert-colours):not(.bg-white):not(.bg-admin) {
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-canvas):not(.invert-colours) {
 
     @include reset-colours();
 

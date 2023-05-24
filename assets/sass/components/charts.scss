@@ -23,6 +23,7 @@ $chart-colors: map-merge((
 }
 
 @media screen and (prefers-color-scheme: dark) {
+
   :root {
     --colour-chart-1: var(--colour-dark);
     --colour-chart-5: var(--colour-light);
@@ -30,6 +31,28 @@ $chart-colors: map-merge((
     --colour-chart-7: var(--colour-secondary);
   }
 }
+
+//@media (forced-colors: active) {
+  .chart__wrapper:has(.chart:not(.chart--line)) {
+
+    --colour-chart-1: repeating-linear-gradient(
+      45deg,
+      CanvasText 0px,
+      CanvasText 5px,
+      Canvas 5px,
+      Canvas 10px
+    );
+    --colour-chart-2: transparent radial-gradient(circle, CanvasText 3px, transparent 3px) 6px 6px/12px 12px repeat;
+    --colour-chart-3: repeating-linear-gradient(
+      90deg,
+      CanvasText 0px,
+      CanvasText 5px,
+      Canvas 5px,
+      Canvas 10px
+    );
+    // TODO: Add more patterns
+  }
+//}
 // #endregion
 
 // #region Apply colours
@@ -38,13 +61,26 @@ $chart-colors: map-merge((
   .chart__key .key:not(:first-child):nth-child(#{$i+1}):before,
   .chart:not(.chart--none):not(.chart--pie) table tbody tr td:not(:first-child):nth-child(#{$i+1}) {
     background: var(#{'--colour-chart-'+$i});
+
+    @media (forced-colors: active) {
+      forced-color-adjust: none;
+      border: 1px solid CanvasText;
+    }
   }
   .chart.chart--line:not(.chart--none):not(.chart--pie) .line:nth-child(#{$i}) {
     stroke: var(#{'--colour-chart-'+$i});
     z-index: #{10 - $i};
+
+    @media (forced-colors: active) {
+      forced-color-adjust: none;
+    }
   }
   .chart.chart--pie .pie path:nth-child(#{$i}) {
     fill: var(#{'--colour-chart-'+$i});
+
+    @media (forced-colors: active) {
+      forced-color-adjust: none;
+    }
   }
 }
 // #endregion

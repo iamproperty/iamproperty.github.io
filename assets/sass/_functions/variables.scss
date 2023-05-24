@@ -82,7 +82,7 @@ $success:       #b4e6a5;
 $info:          #1ebee6;
 $warning:       #ffa500;
 $danger:        #dc3545;
-$light:         #ffd2d2;
+$light:         #EEEEEE;
 $dark:          #46003c;
 $canvas:        #FCFCFC;
 
@@ -112,7 +112,7 @@ $theme-colors: map-merge((
   "success":    $success,
   "dark":       $dark,
   "light":      $light,
-  "canvas":      $canvas
+  "white":      $canvas
 ), $theme-colors);
 
 
@@ -151,7 +151,6 @@ $utilities-text: map-merge(
   $utilities-colors,
   (
     "black": to-rgb($black),
-    "white": to-rgb($white),
     "muted": to-rgb($colour-muted),
     "body": to-rgb($body-color)
   )
@@ -167,13 +166,17 @@ $non-theme-colors: ();
 $non-theme-colors: map-merge((
   "muted":      $colour-muted,
   "body":       $body-color,
-  "border":           $colour-border,
-  "link":             $colour-link,
-  "focus":            $colour-focus,
-  "hover":            $colour-hover,
-  "active":           $colour-active,
-  "selected":         $colour-selected,
-  "inverted":   $colour-inverted
+  "border":     $colour-border,
+  "link":       var(--colour-primary),
+  "brand":      var(--colour-primary),
+  "underline":  var(--colour-primary),
+  "heading":    var(--colour-primary),
+  "focus":      $colour-focus,
+  "hover":      $colour-hover,
+  "active":     $colour-active,
+  "selected":   var(--colour-info),
+  "inverted":   $canvas,
+  "canvas":     $canvas
 ), $non-theme-colors);
 
 @each $color, $value in $non-theme-colors {
@@ -183,17 +186,17 @@ $non-theme-colors: map-merge((
   ), $vars);
 }
 
-$vars: map-merge((
-  "--colour-white-theme": rgba(to-rgb(#ffffff),var(--alpha,1)),
-  "--colour-black-theme": rgba(to-rgb(#000000),var(--alpha,1)),
-  "--colour-body":  rgba(to-rgb($colour-body),var(--alpha,1)),
-  "--colour-white": rgba(to-rgb(#ffffff),var(--alpha,1)),
-  "--colour-black": rgba(to-rgb(#000000),var(--alpha,1)),
-  "--colour-admin-theme":      #f0f0f0
-), $vars);
-
-$gradient: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info) 100%);
-
+$dark-mode-colors: map-merge($non-theme-colors, (
+  "link": var(--colour-inverted),
+  "body": var(--colour-inverted),
+  "heading": var(--colour-inverted),
+  "hover": var(--colour-inverted),
+  "border": var(--colour-inverted),
+  "brand": var(--colour-inverted),
+  "underline": var(--colour-inverted),
+  "canvas": var(--colour-primary),
+  "light": $light
+));
 // #endregion
 
 // #region aspect ratios
