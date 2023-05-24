@@ -89,6 +89,11 @@
 
   text_mw: $content-max-width-px;
   text_mw_rem: $content-max-width;
+  table_padding_px: $table-padding-px;
+  table_padding: $table-padding;
+
+  td_mw_px: $td-mw-px;
+  td_mw: $td-mw;
 
   @each $color, $value in $theme-colors {
     themeColour_#{$color}: #{$value}

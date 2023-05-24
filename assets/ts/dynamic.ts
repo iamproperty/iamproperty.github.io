@@ -11,7 +11,7 @@ import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 import modal from '../js/modules/modal'
 
-const components = ['accordion','header','tabs'];
+const components = ['accordion','header','tabs', 'table','card'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',
@@ -22,6 +22,8 @@ const componentExt = ".component.js";
 // Load components - Each component will load once the first of its type has been loaded
 components.forEach((component) => {
 
+  console.log(component)
+  
   if(document.getElementsByTagName(`${prefix}-${component}`).length === 0)
     return;
 
@@ -29,6 +31,8 @@ components.forEach((component) => {
     entries.forEach((entry:any) => {
       
       if(entry.intersectionRatio > 0){
+
+        console.log(component)
         
         import(`./components/${component}/${component}${componentExt}`).then(module => {
           if (!window.customElements.get(`${prefix}-${component}`))
@@ -55,24 +59,12 @@ document.addEventListener("DOMContentLoaded", function() {
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
-  helpers.checkElements(document.body);
+  //helpers.checkElements(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
     nav(arrayElement);
   });
-
-  // Advanced tables
-  Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
-    table(arrayElement);
-  });
-
-  // Accordions
-  /*
-  Array.from(document.querySelectorAll('.accordion')).forEach((arrayElement) => {
-    accordion(arrayElement);
-  });
-*/
 
   // Testimonial
   Array.from(document.querySelectorAll('.testimonial')).forEach((arrayElement) => {

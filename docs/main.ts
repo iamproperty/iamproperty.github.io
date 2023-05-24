@@ -95,3 +95,8 @@ let template = window.location.pathname.startsWith('/standalone') || window.loca
 let app = createApp(template)
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
+
+import * as helpers from '../assets/ts/modules/helpers'
+
+helpers.addBodyClasses(document.body);
+helpers.addGlobalEvents(document.body);
