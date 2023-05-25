@@ -500,4 +500,10 @@ $td-mw-px: 120;
 $td-mw: #{rem($td-mw-px)};
 $table-padding-px: 32;
 $table-padding: #{rem($table-padding-px)};
+$table-mh-sm-px: 200;
+$table-mh-sm: #{rem($table-mh-sm-px)};
+$table-mh-md-px: 400;
+$table-mh-md: #{rem($table-mh-md-px)};
+$table-mh-lg-px: 600;
+$table-mh-lg: #{rem($table-mh-lg-px)};
 // #endregion
