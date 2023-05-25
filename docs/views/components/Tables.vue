@@ -161,7 +161,7 @@
     
     <div class="container">
       <h2>Max height table</h2>
-      <p>To control how much real estate the table takes up on a page we can set a max height from a pre-defined list. Using the class of <b>.table--mh-small</b> will set the max height to {{$shared.cssVars.table_mh_sm}} ({{$shared.cssVars.table_mh_sm_px}}px); <b>.table--mh-medium</b> will set it to {{$shared.cssVars.table_mh_md}} ({{$shared.cssVars.table_mh_md_px}}px) and <b>.table--mh-large</b> will set it to {{$shared.cssVars.table_mh_lg}} ({{$shared.cssVars.table_mh_lg_px}}px). Commonly when using one of these classes we don't want to convert the table into a stackable view on mobile, this is achievable by adding the **.table--fullwidth** class.</p>
+      <p>To control how much real estate the table takes up on a page we can set a max height from a pre-defined list. Using the class of <b>.table--mh-small</b> will set the max height to {{$shared.cssVars.table_mh_sm}} ({{$shared.cssVars.table_mh_sm_px}}px); <b>.table--mh-medium</b> will set it to {{$shared.cssVars.table_mh_md}} ({{$shared.cssVars.table_mh_md_px}}px) and <b>.table--mh-large</b> will set it to {{$shared.cssVars.table_mh_lg}} ({{$shared.cssVars.table_mh_lg_px}}px). Commonly when using one of these classes we don't want to convert the table into a stackable view on mobile, this is achievable by adding the <b>.table--fullwidth</b> class.</p>
     </div>
 
 
