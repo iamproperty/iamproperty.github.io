@@ -6,9 +6,6 @@
     <main class="main--marketplace">
 
 
-      <div class="container">
-        <h1>Welcome back, Jonny!</h1>
-      </div>
 <!--
       <Tabs class="container">
         <Tab title="Conveyancing Opportunities">
@@ -117,12 +114,79 @@
         </Tab>
         <Tab title="Client Onboarding">
         -->
-          <form id="tableFilters" data-submit>
+          <form id="tableFilters">
 
-            <div class="container">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Welcome back, Jonny!</h1>
+          </div>
+          <div class="col-md-2">
+            <div class="dialog__wrapper">
               
-              <span class="h4"><span data-query="total"></span> Clients added in total</span>
+            <button class="btn btn-tertiary me-0" id="showmenu">Individual</button>
+            <dialog id="menu">
+              <div class="form-control__wrapper">
+                <label for="search" class="form-label d-none d-sm-block">Search</label>
+                <span class="suffix" role="presentation"><i class="fa fa-light fa-search" aria-hidden="true"></i></span>
+                <input name="search" id="search" type="text" class="form-control" autocomplete="off">
+              </div>
 
+              <ul class="list-unstyled">
+                <li vlaue="Alice Knowles">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline1" class="form-check-input" value="Alice Knowles" dta-filter="">
+                    <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
+                  </div>                  
+                </li>
+                <li vlaue="Ethan Ramirez">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input" value="Ethan Ramirez">
+                    <label for="pipeline2" class="form-label form-check-label">Ethan Ramirez</label>
+                  </div>                  
+                </li>
+                <li vlaue="Sophia Patel">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input" value="Sophia Patel">
+                    <label for="pipeline3" class="form-label form-check-label">Sophia Patel</label>
+                  </div>                  
+                </li>
+                <li vlaue="Noah Jenkins">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input" value="Noah Jenkins">
+                    <label for="pipeline4" class="form-label form-check-label">Noah Jenkins</label>
+                  </div>                  
+                </li>
+                <li vlaue="Ava Thompson">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input" value="Ava Thompson">
+                    <label for="pipeline5" class="form-label form-check-label">Ava Thompson</label>
+                  </div>                  
+                </li>
+              </ul>
+
+
+              <button type="submit" class="btn btn-secondary">Update</button>
+
+
+            </dialog>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+            <div class="container">
+
+              <span class="h4"><span data-query="total"></span> <div class="form-control__wrapper form-control--inline-text"><label for="clients-added">Clients added </label><select id="clients-added" class="form-select" data-filter="Date added">
+                <option value="">in total</option>
+                <option value="26 Mar 23">today</option>
+                <option>Yesterday</option>
+                <option>this week</option>
+                <option>last week</option>
+                <option>this month</option>
+                <option>last month</option>
+              </select></div></span>
+ 
               <div class="row tab-focus">
 
                   <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Incomplete" id="due_diligience_incomplete" class="d-none" v-model="checked" />
@@ -239,7 +303,7 @@
                 </tr>
                 <tr>
                   <td>Bob Smith, Buyer</td>
-                  <td>18 Mar 23</td>
+                  <td>26 Mar 23</td>
                   <td>89, Queens Crescent, NE28 8DR</td>
                   <td>Risk assessment complete</td>
                   <td>Low</td>
@@ -2042,6 +2106,21 @@ form {
     }
   }
 }
+
+
+.dialog__wrapper {
+  position: relative;
+  display: inline-block;
+
+  dialog {
+    right: 0;
+    left: auto;
+    top: 100%;
+    z-index: 999999999;
+
+    min-width: 20rem;
+  }
+}
 </style>
 
 <script>
@@ -2083,6 +2162,25 @@ export default {
       }, { threshold: [0,1] });
 
       observer.observe(el);
+
+
+
+      document.addEventListener('click', (event) => {
+
+        if (event && event.target instanceof HTMLElement && event.target.closest('#showmenu')){
+
+          let btn = event.target.closest('#showmenu');
+          
+          let popover = document.querySelector('#menu');
+
+          if(popover.hasAttribute('open'))
+            popover.close();
+          else
+          popover.show();
+
+        };
+      });
+
 
     }, "100");
 

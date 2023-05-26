@@ -74,8 +74,40 @@
   }
 }
 
+
+.form-control__wrapper.form-control--inline-text {
+
+  display: inline;
+
+  label {
+    display: inline;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+  }
+
+  select {  
+    display: inline;
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    padding: 0 5px;
+    margin: 0 -5px;
+    display: inline-block;
+    width: auto;
+    padding-right: $form-select-padding-x;
+    background-position: right 0.2rem center;
+  }
+}
+
 // #region checkbox
 .form-check {
+
+  overflow: hidden;
 
   input,
   label {

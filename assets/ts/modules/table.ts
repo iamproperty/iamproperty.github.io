@@ -295,13 +295,12 @@ export const filterTable = (table, form, pagination) => {
 
     if(filterInput.getAttribute('data-filter') == "multi"){
 
-
       for (const [key, value] of Object.entries(JSON.parse(filterInput.value))) {
         filters.push({'column':`${key}`,'value':`${value}`});
       }
     }
-    else {
-      
+    else if (filterInput.value) {
+
       filters.push({'column':`${filterInput.getAttribute('data-filter')}`,'value':`${filterInput.value}`});
     }
 
