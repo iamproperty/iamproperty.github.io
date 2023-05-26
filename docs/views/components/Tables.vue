@@ -174,10 +174,10 @@
               <tr>
                 <th>Client</th>
                 <th>Date added</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th></th>
+                <th class="d-none d-sm-table-cell">Lorum ipsum</th>
+                <th class="d-none d-sm-table-cell">Lorum ipsum</th>
+                <th class="d-none d-md-table-cell">Lorum ipsum</th>
+                <th class="d-none d-md-table-cell"></th>
               </tr>
             </thead>
             <tbody>
