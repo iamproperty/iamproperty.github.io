@@ -9,8 +9,7 @@ html {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  overflow-y: scroll;
-  overflow-x: hidden;
+
   font-size: vw($device-xs-width);
   scroll-padding-top: rem(100);
   
@@ -49,14 +48,13 @@ body {
   @include var(color,--colour-body);
   width: 100%;
   line-height: 1.2;
-  min-height: 100%;
-  //overflow-y: scroll;
-  //overflow-x: hidden;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 
 #app {
-  min-height: 100%;
 }
 
 body > footer,

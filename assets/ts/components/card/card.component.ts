@@ -36,14 +36,33 @@ class iamCard extends HTMLElement {
 	connectedCallback() {
     
     // Mimic clicking the parent node so the focus and target events can be on the card
-    const parentNode = this.parentNode.closest('a, button')
+    const parentNode = this.parentNode.closest('a, button, label')
     const card = this.shadowRoot.querySelector('.card')
 
     parentNode.setAttribute('tabindex','-1');
     
+    if(parentNode.matches('label[for]')){
+
+      let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+        
+      if(isChecked)
+        card.classList.add('active');
+    }
+
     card.addEventListener('click', (event) => {
 
-      parentNode.click();
+      if(parentNode.matches('label[for]')){
+
+        let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+          
+        if(!isChecked)
+          card.classList.add('active');
+        else
+          card.classList.remove('active');
+      }
+      else {
+        parentNode.click();
+      }
     });
 
     card.addEventListener('keydown', (event) => {
@@ -52,7 +71,18 @@ class iamCard extends HTMLElement {
       {
           case 32:
           case 13:
-            parentNode.click();
+            if(parentNode.matches('label[for]')){
+
+              let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+                
+              if(!isChecked)
+                card.classList.add('active');
+              else
+                card.classList.remove('active');
+            }
+            else {
+              parentNode.click();
+            }
               break;
           default:
               break;

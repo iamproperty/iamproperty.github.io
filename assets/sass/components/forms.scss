@@ -153,21 +153,21 @@ select[multiple]::-webkit-scrollbar-thumb {
 
 .form-control__wrapper :is(.prefix,.suffix) {
 
-  color: #212529;
-  background: #e9ecef;
+  color: var(--colour-white);
+  background: var(--colour-primary);
   padding: 0.75em 1em;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
   position: absolute;
-  bottom: 1px;
+  bottom: 2px;
 }
 
 .form-control__wrapper .prefix {
 
   border-top-left-radius: 0.625rem;
   border-bottom-left-radius: 0.625rem;
-  left: 1px;
+  left: 0;
 }
 
 .form-control__wrapper :is(.prefix-sm,.suffix-sm) {
@@ -188,7 +188,7 @@ select[multiple]::-webkit-scrollbar-thumb {
 
 .form-control__wrapper .suffix {
   left: auto;
-  right: 1px;
+  right: 0;
   border-top-right-radius: 0.625rem;
   border-bottom-right-radius: 0.625rem;
 }
