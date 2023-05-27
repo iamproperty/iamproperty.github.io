@@ -32,8 +32,8 @@
 
 // #region General styles
 .nav {
-
   
+  overflow-x: hidden;
   font-weight: bold;
 
   &__inner, 
@@ -414,6 +414,10 @@ nav + main > *:first-child {
 .nav__menu--account {
   z-index: 2;
   height: 100vh;
+}
+
+.nav:has(#showMenu:checked){
+  min-height: 100vh;
 }
 
 #showMenu:checked ~ .nav__inner,

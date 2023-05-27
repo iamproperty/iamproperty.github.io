@@ -331,7 +331,8 @@ $input-line-height: 1.5;
 $input-padding-y: 0.75em;
 $input-padding-x: 1em;
 $input-border-radius: rem(10);
-$input-border-color: var(--colour-border);
+$input-border-color: var(--colour-primary);
+$input-border-width: 2px;
 
 // sm
 $input-height-sm: null;
@@ -357,8 +358,9 @@ $input-group-addon-border-color: var(--colour-border);
 $form-select-padding-y: $input-padding-y;
 //$form-select-indicator-padding
 $form-select-padding-x: #{$input-padding-x};
-$form-select-border-color: var(--colour-border);
+$form-select-border-color: var(--colour-primary);
 $form-select-border-radius: $input-border-radius;
+$form-select-border-width: 2px;
 
 // Checkbox
 $form-check-input-width: 1.5rem;
@@ -369,13 +371,13 @@ $form-check-margin-bottom: #{rem(16)};
 $form-check-input-border: 1px solid var(--colour-border);
 
 $form-check-input-checked-color:          $primary;
-$form-check-input-checked-bg-color:       var(--colour-success);
+$form-check-input-checked-bg-color:       var(--colour-info);
 $form-check-input-checked-border-color:   var(--colour-border);
 $form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10l3 3l6-6'/></svg>");
 
 $form-check-input-indeterminate-color:          $primary;
-$form-check-input-indeterminate-bg-color:       var(--colour-success);
-$form-check-input-indeterminate-border-color:   var(--colour-success);
+$form-check-input-indeterminate-bg-color:       var(--colour-info);
+$form-check-input-indeterminate-border-color:   var(--colour-info);
 $form-check-input-indeterminate-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-indeterminate-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/></svg>");
 
 $form-switch-bg-image:    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$colour-border}'/></svg>");

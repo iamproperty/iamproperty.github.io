@@ -77,7 +77,6 @@
   &:is(:active, .active){
     --icon-right: 0.5rem;
     outline: none;
-    background: #FCFCFC;
     
     &:before {
       background: var(--colour-warning);
@@ -85,6 +84,10 @@
     &:after {
       background: var(--colour-primary);
     }
+  }
+
+  &:is(:active){
+    background: #FCFCFC;
   }
   
   span {
