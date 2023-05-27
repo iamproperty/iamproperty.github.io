@@ -11,12 +11,14 @@ dialog[open] {
   min-width: 80%;
   width: fit-content;
   height: fit-content;
-  max-width: 80%;
-  max-height: 80%;
+  max-width: 80vw;
+  max-height: 80vh;
   padding: 1.5rem;
   border: none;
   overscroll-behavior: contain;
   border-radius: 0.5rem;
+  background: white;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
 
   // Close button
   > form:first-child {
