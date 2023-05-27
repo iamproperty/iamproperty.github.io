@@ -61,8 +61,13 @@
 
 // #region Circles
 .container {
-  position: relative;
-  z-index: 1;
+
+
+  &:has(.circle){
+      
+    position: relative;
+    z-index: 1;
+  }
 
   > .circle {
 

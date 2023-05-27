@@ -117,15 +117,28 @@ export const createSearchDataList = (table, form) => {
 export const addFilterEventListeners = (table, form, pagination, savedTableBody) => {
 
   var timer;
+
+  // Check what conditions are set on the table to see what the form actions are
+  let formSubmit = function(){
+      
+    if(form.hasAttribute('data-ajax'))
+      loadAjaxTable(table, form, pagination);
+    else if(form.hasAttribute('data-submit'))
+      form.submit();
+    else {
+      filterTable(table, form, pagination); 
+      createPaginationButttons(table, form, pagination);
+    }
+  }
+
   form.addEventListener('keyup', (event) => {
 
     clearTimeout(timer);
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]') && event.target.closest('[data-search]').value.length >= 3){
 
-      timer = setTimeout(function(){ 
-        filterTable(table, form, pagination); 
-        createPaginationButttons(table, form, pagination);
+      timer = setTimeout(function(){
+        formSubmit();
       }, 1000);
     };
   });
@@ -136,29 +149,26 @@ export const addFilterEventListeners = (table, form, pagination, savedTableBody)
     
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')){
       
-      sortTable(table, form, savedTableBody);
-      filterTable(table, form, pagination);
-      createPaginationButttons(table, form, pagination)
+      if(!form.hasAttribute('data-submit'))
+        sortTable(table, form, savedTableBody);
+
+      formSubmit();
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
         
-      filterTable(table, form, pagination);
-      createPaginationButttons(table, form, pagination);
+      formSubmit();
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && !event.target.closest('form dialog')){
       
-      filterTable(table, form, pagination);
-      createPaginationButttons(table, form, pagination);
+      formSubmit();
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
         
-      filterTable(table, form, pagination);
-      createPaginationButttons(table, form, pagination);
+      formSubmit();
     }
-
   });
 
 
@@ -184,8 +194,7 @@ export const addFilterEventListeners = (table, form, pagination, savedTableBody)
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')){
       
       form.reset();
-      filterTable(table, form, pagination);
-      createPaginationButttons(table, form, pagination);
+      formSubmit();
     }
   });
 
@@ -193,10 +202,10 @@ export const addFilterEventListeners = (table, form, pagination, savedTableBody)
 
     clearTimeout(timer);
 
-    event.preventDefault();
+    if(!form.hasAttribute('data-submit'))
+      event.preventDefault();
 
-    filterTable(table, form, pagination);
-    createPaginationButttons(table, form, pagination)
+    formSubmit();
   });
 }
 
@@ -264,12 +273,6 @@ export const filterTable = (table, form, pagination) => {
 
   table.classList.remove('table--filtered');
 
-  if(form.getAttribute('data-ajax')){
-    loadAjaxTable(table, form, pagination);
-
-    return false;
-  }
-
   let filters = [];
   let searches = [];
   let matched = 0;
@@ -292,13 +295,12 @@ export const filterTable = (table, form, pagination) => {
 
     if(filterInput.getAttribute('data-filter') == "multi"){
 
-
       for (const [key, value] of Object.entries(JSON.parse(filterInput.value))) {
         filters.push({'column':`${key}`,'value':`${value}`});
       }
     }
-    else {
-      
+    else if (filterInput.value) {
+
       filters.push({'column':`${filterInput.getAttribute('data-filter')}`,'value':`${filterInput.value}`});
     }
 
@@ -312,6 +314,17 @@ export const filterTable = (table, form, pagination) => {
     searchColumns.forEach((column, index) => {
 
       searches.push({'column':`${column.trim()}`,'value':`${searchInput.value}`});
+    });
+  }
+
+  //Display the filter count
+  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+    element.innerHTML = '';
+  });
+  if(filters.length) {
+      
+    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+      element.innerHTML += `(${filters.length})`;
     });
   }
 
@@ -408,7 +421,10 @@ export const populateDataQueries = (table,form) => {
       }).length;
     }
 
-    queryElement.innerHTML = numberOfMatchedRows;
+    if(queryElement.hasAttribute('data-total'))
+      queryElement.setAttribute('data-total', numberOfMatchedRows);
+    else
+      queryElement.innerHTML = numberOfMatchedRows;
   });
 }
 
