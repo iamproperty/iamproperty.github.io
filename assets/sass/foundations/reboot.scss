@@ -8,8 +8,8 @@ html {
   -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
   height: 100%;
   width: 100%;
-  overflow: hidden;
-
+  overflow-x: hidden;
+  overflow-y: scroll;
   font-size: vw($device-xs-width);
   scroll-padding-top: rem(100);
   
@@ -48,9 +48,8 @@ body {
   @include var(color,--colour-body);
   width: 100%;
   line-height: 1.2;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
+  min-height: 100%;
+
 }
 
 
