@@ -114,7 +114,7 @@
         </Tab>
         <Tab title="Client Onboarding">
         -->
-          <form id="tableFilters">
+          <form id="tableFilters" data-submit>
 
       <div class="container">
         <div class="row">
@@ -126,52 +126,49 @@
               
             <button class="btn btn-tertiary me-0" id="showmenu">Individual</button>
             <dialog id="menu">
-              <div class="form-control__wrapper">
-                <label for="search" class="form-label d-none d-sm-block">Search</label>
-                <span class="suffix" role="presentation"><i class="fa fa-light fa-search" aria-hidden="true"></i></span>
-                <input name="search" id="search" type="text" class="form-control" autocomplete="off">
-              </div>
-
-              <ul class="list-unstyled">
-                <li vlaue="Alice Knowles">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline1" class="form-check-input" value="Alice Knowles" dta-filter="">
-                    <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
-                  </div>                  
-                </li>
-                <li vlaue="Ethan Ramirez">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input" value="Ethan Ramirez">
-                    <label for="pipeline2" class="form-label form-check-label">Ethan Ramirez</label>
-                  </div>                  
-                </li>
-                <li vlaue="Sophia Patel">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input" value="Sophia Patel">
-                    <label for="pipeline3" class="form-label form-check-label">Sophia Patel</label>
-                  </div>                  
-                </li>
-                <li vlaue="Noah Jenkins">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input" value="Noah Jenkins">
-                    <label for="pipeline4" class="form-label form-check-label">Noah Jenkins</label>
-                  </div>                  
-                </li>
-                <li vlaue="Ava Thompson">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input" value="Ava Thompson">
-                    <label for="pipeline5" class="form-label form-check-label">Ava Thompson</label>
-                  </div>                  
-                </li>
-              </ul>
-
+              <Filterlist data-max-height="small">
+                <ul class="list-unstyled">
+                  <li>
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline1" class="form-check-input d-none" value="Alice Knowles" dta-filter="">
+                      <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
+                    </div>                  
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input d-none" value="Ethan Ramirez">
+                      <label for="pipeline2" class="form-label form-check-label">Ethan Ramirez</label>
+                    </div>                  
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input d-none" value="Sophia Patel">
+                      <label for="pipeline3" class="form-label form-check-label">Sophia Patel</label>
+                    </div>                  
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input d-none" value="Noah Jenkins">
+                      <label for="pipeline4" class="form-label form-check-label">Noah Jenkins</label>
+                    </div>                  
+                  </li>
+                  <li>
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input d-none" value="Ava Thompson">
+                      <label for="pipeline5" class="form-label form-check-label">Ava Thompson</label>
+                    </div>                  
+                  </li>
+                </ul>
+              </Filterlist>
 
               <button type="submit" class="btn btn-secondary">Update</button>
 
-
             </dialog>
+
             </div>
           </div>
+          
+
         </div>
         
       </div>
@@ -2127,12 +2124,14 @@ form {
 import Nav from '@/components/Nav/Nav.vue'
 import Table from '@/components/Table/Table.vue'
 import Card from '@/components/Card/Card.vue'
+import Filterlist from '@/components/Filterlist/Filterlist.vue'
 
 export default {
   components: {
     Nav,
     Table,
-    Card
+    Card,
+    Filterlist
   },
   data () {
     return {
@@ -2168,6 +2167,7 @@ export default {
       document.addEventListener('click', (event) => {
 
         if (event && event.target instanceof HTMLElement && event.target.closest('#showmenu')){
+          event.preventDefault();
 
           let btn = event.target.closest('#showmenu');
           

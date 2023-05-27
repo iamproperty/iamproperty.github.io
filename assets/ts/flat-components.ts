@@ -11,6 +11,7 @@ import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 import modal from '../js/modules/modal'
 import tabs from '../js/modules/tabs'
+import filterlist from '../js/modules/filterlist'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -70,6 +71,12 @@ document.addEventListener("DOMContentLoaded", function() {
   // Tabs
   Array.from(document.querySelectorAll('.tabs')).forEach((arrayElement) => {
     tabs(arrayElement);
+  });
+
+  // filterlist
+  Array.from(document.querySelectorAll('.iam-filterlist')).forEach((arrayElement) => {
+    if(arrayElement.hasAttribute('data-input') && document.querySelector(arrayElement.getAttribute('data-input')))
+      filterlist(arrayElement,document.querySelector(arrayElement.getAttribute('data-input')));
   });
 
 
