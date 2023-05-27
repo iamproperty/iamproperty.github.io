@@ -5,176 +5,69 @@
     </Nav>
     <main class="main--marketplace">
 
+      <form id="tableFilters">
 
-<!--
-      <Tabs class="container">
-        <Tab title="Conveyancing Opportunities">
- 
-          <form id="tableFilters3" data-ajax="/data/client-transactions.json">
-
-            <div class="container">
-              
-              <span class="h4"><span data-query="total"></span> Clients added in total</span>
-
-              <div class="row">
-
-                <div class="col-md-3">
-                  <input type="radio" name="due_diligience" data-filter="Onboarding status" value="Incomplete" id="due_diligience_incomplete" class="visually-hidden" />
-                  <label class="card card--small card--danger" for="due_diligience_incomplete" ><span data-query="Onboarding status == Incomplete"></span> Onboarding status incomplete</label>
-                </div>
-                <div class="col-md-3">
-                  <input type="radio" name="due_diligience" data-filter="Onboarding status" value="Not started yet" id="due_diligience_requires_approval" class="visually-hidden" />
-                  <label class="card card--small card--warning" for="due_diligience_requires_approval" ><span data-query="Onboarding status == Not started yet"></span> Onboarding status Not started yet</label>
-                </div>
-              </div>
-              <hr/>
-            <br/>
-            <br/>
-            <br/>
-
-              <div class="row sticky-form">
-                <div class="col">
-                  <div class="form-control__wrapper">
-                    <label for="search" class="form-label">Search</label>
-                    <input name="search" id="search" type="text" class="form-control" data-search="Client, Transaction address">
-                  </div>
-                </div>
-                <div class="col">
-                  <button class="btn btn-secondary" type="button" data-modal="filters">Filter by</button>
-                </div>
-                <div class="col d-none d-sm-block">
-                  <div class="form-control__wrapper">
-                    <label for="sort" class="form-label visually-hidden">Sort by</label>
-                    <select type="select" name="sort" id="sort" class="form-select" data-sort>
-                      <option value="-1">Sort by</option>
-                      <option value="risk level high" data-sort="Risk level" data-order="High,Medium,Low">Risk level (high to low)</option>
-                      <option value="risk level low" data-sort="Risk level" data-order="Low,Medium,High">Risk level (low to high)</option>
-                      <option value="client asc" data-sort="Client" data-order="asc">Client (Ascedning order)</option>
-                      <option value="client desc" data-sort="Client" data-order="desc">Client (Descending order)</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col">
-                  <button class="btn btn-secondary" type="button" data-clear>Clear filters</button>
-                </div>
-              </div>
-
-
-              <dialog id="filters">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h1>Welcome back, Jonny!</h1>
+            </div>
+            <div class="col-md-2">
+              <div class="dialog__wrapper">
                 
-                <iam-applied-filters></iam-applied-filters>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level">
-                  <label for="risk-level-high" class="form-label form-check-label">High</label>
+              <button class="btn btn-tertiary me-0" id="showmenu">Individual</button>
+              <dialog id="menu">
+              <AppliedFilters>
+                <div class="form-control__wrapper">
+                  <label for="search" class="form-label d-none d-sm-block">Search</label>
+                  <span class="suffix" role="presentation"><i class="fa fa-light fa-search" aria-hidden="true"></i></span>
+                  <input name="search" id="search" type="text" class="form-control" autocomplete="off">
                 </div>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="Medium" id="risk-level-medium" class="form-check-input" data-filter-text="Risk Level - Medium" data-filter="Risk level">
-                  <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
-                </div>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
-                  <label for="risk-level-low" class="form-label form-check-label">Low</label>
-                </div>
+                <ul class="list-unstyled">
+                  <li vlaue="Alice Knowles">
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline1" class="form-check-input" value="Alice Knowles" data-filter-text="$value">
+                      <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
+                    </div>                  
+                  </li>
+                  <li vlaue="Ethan Ramirez">
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input" value="Ethan Ramirez" data-filter-text="$value">
+                      <label for="pipeline2" class="form-label form-check-label">Ethan Ramirez</label>
+                    </div>                  
+                  </li>
+                  <li vlaue="Sophia Patel">
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input" value="Sophia Patel" data-filter-text="$value">
+                      <label for="pipeline3" class="form-label form-check-label">Sophia Patel</label>
+                    </div>                  
+                  </li>
+                  <li vlaue="Noah Jenkins">
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input" value="Noah Jenkins" data-filter-text="$value">
+                      <label for="pipeline4" class="form-label form-check-label">Noah Jenkins</label>
+                    </div>                  
+                  </li>
+                  <li vlaue="Ava Thompson">
+                    <div class="form-check">
+                      <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input" value="Ava Thompson" data-filter-text="$value">
+                      <label for="pipeline5" class="form-label form-check-label">Ava Thompson</label>
+                    </div>                  
+                  </li>
+                </ul>
 
-                <hr/>
+              </AppliedFilters>
 
-                <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
-                  <label class="form-label" for="date-from">Date range</label>
-                  <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
-                  <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
-                </div>
+                <button type="submit" class="btn btn-secondary">Update</button>
 
-                <button class="btn btn-primary d-block m-auto" type="submit">Update results</button>
+
               </dialog>
-            </div>
-          </form>
-
-          <div class="container">
-          <Table class="table--sticky table--minify" data-filterby="tableFilters3">
-            <table>
-              <thead>
-                <tr>
-                  <th data-output="{transaction.user.formatted_name}">Client</th>
-                  <th data-output="{created_at.date}" data-format="date">Date added</th>
-                  <th data-output="<a href='{transaction.table_routes.transaction_view}'>{transaction.formatted_address}</a>">Transaction address</th>
-                  <th data-output="{status_label}">Onboarding status</th>
-                  <th>Risk level</th>
-                  <th data-output="{due_diligence_complete}">Due diligence</th>
-                  <th data-output="<a href='{table_routes.transaction_view}'>Manage client</a>"></th>
-                </tr>
-              </thead>
-              <tbody>
-              </tbody>
-            </table>
-          </Table>
-
-
-          </div>
-
-        </Tab>
-        <Tab title="Client Onboarding">
-        -->
-          <form id="tableFilters">
-
-      <div class="container">
-        <div class="row">
-          <div class="col">
-            <h1>Welcome back, Jonny!</h1>
-          </div>
-          <div class="col-md-2">
-            <div class="dialog__wrapper">
-              
-            <button class="btn btn-tertiary me-0" id="showmenu">Individual</button>
-            <dialog id="menu">
-              <div class="form-control__wrapper">
-                <label for="search" class="form-label d-none d-sm-block">Search</label>
-                <span class="suffix" role="presentation"><i class="fa fa-light fa-search" aria-hidden="true"></i></span>
-                <input name="search" id="search" type="text" class="form-control" autocomplete="off">
               </div>
-
-              <ul class="list-unstyled">
-                <li vlaue="Alice Knowles">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline1" class="form-check-input" value="Alice Knowles" dta-filter="">
-                    <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
-                  </div>                  
-                </li>
-                <li vlaue="Ethan Ramirez">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input" value="Ethan Ramirez">
-                    <label for="pipeline2" class="form-label form-check-label">Ethan Ramirez</label>
-                  </div>                  
-                </li>
-                <li vlaue="Sophia Patel">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input" value="Sophia Patel">
-                    <label for="pipeline3" class="form-label form-check-label">Sophia Patel</label>
-                  </div>                  
-                </li>
-                <li vlaue="Noah Jenkins">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input" value="Noah Jenkins">
-                    <label for="pipeline4" class="form-label form-check-label">Noah Jenkins</label>
-                  </div>                  
-                </li>
-                <li vlaue="Ava Thompson">
-                  <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input" value="Ava Thompson">
-                    <label for="pipeline5" class="form-label form-check-label">Ava Thompson</label>
-                  </div>                  
-                </li>
-              </ul>
-
-
-              <button type="submit" class="btn btn-secondary">Update</button>
-
-
-            </dialog>
             </div>
           </div>
+          
         </div>
-        
-      </div>
+
             <div class="container">
 
               <span class="h4"><span data-query="total"></span> <div class="form-control__wrapper form-control--inline-text"><label for="clients-added">Clients added </label><select id="clients-added" class="form-select" data-filter="Date added">
@@ -248,28 +141,28 @@
 
               <dialog id="filters">
                 
-                <iam-applied-filters></iam-applied-filters>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level" v-model="checked">
-                  <label for="risk-level-high" class="form-label form-check-label">High</label>
-                </div>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="Medium" id="risk-level-medium" class="form-check-input" data-filter-text="Risk Level - Medium" data-filter="Risk level">
-                  <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
-                </div>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
-                  <label for="risk-level-low" class="form-label form-check-label">Low</label>
-                </div>
+                <AppliedFilters>
+                  <div class="form-check">
+                    <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level" v-model="checked">
+                    <label for="risk-level-high" class="form-label form-check-label">High</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" name="risk-level" value="Medium" id="risk-level-medium" class="form-check-input" data-filter-text="Risk Level - Medium" data-filter="Risk level">
+                    <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
+                    <label for="risk-level-low" class="form-label form-check-label">Low</label>
+                  </div>
 
-                <hr/>
+                  <hr/>
 
-                <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
-                  <label class="form-label" for="date-from">Date range</label>
-                  <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
-                  <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
-                </div>
-
+                  <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
+                    <label class="form-label" for="date-from">Date range</label>
+                    <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
+                    <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
+                  </div>
+                </AppliedFilters>
                 <button class="btn btn-primary d-block m-auto" type="submit">Update results</button>
               </dialog>
 
@@ -1891,182 +1784,7 @@
 
 
           </div>
-<!--
-        </Tab>
-        <Tab title="Material and Property Information">
-          
-          <form id="tableFilters2">
-
-          <div class="container">
-            
-            <span class="h4"><span data-query="total"></span> Material and Property Information added in total</span>
-
-            <div class="row tab-focus">
-
-              <div class="col-md-3">
-                <input type="radio" name="form_top_filter" data-filter="multi" value='{"Form type":"Material information","Form status":"Outstanding"}' id="mi_outstanding" class="visually-hidden" />
-                <label class="card card--small card--danger" for="mi_outstanding"><span data-query="Form type == Material information && Form status == Outstanding"></span> MI Outstanding</label>
-              </div>
-
-              <div class="col-md-3">
-                <input type="radio" name="form_top_filter" data-filter="multi" value='{"Form type":"Material information","Form status":"Completed"}' id="mi_completed" class="visually-hidden" />
-                <label class="card card--small card--success" for="mi_completed"><span data-query="Form type == Material information && Form status == Completed"></span> MI Completed</label>
-              </div>
-
-            </div>
-            <hr/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-          <br/>
-
-            <div class="row sticky-form">
-              <div class="col">
-                <div class="form-control__wrapper">
-                  <label for="search" class="form-label">Search</label>
-                  <input name="search" id="search" type="text" class="form-control" data-search="Client, Transaction address">
-                </div>
-              </div>
-              <div class="col">
-                <button class="btn btn-secondary" type="button" data-modal="filters">Filter by</button>
-              </div>
-              <div class="col d-none d-sm-block">
-                <div class="form-control__wrapper">
-                  <label for="sort" class="form-label visually-hidden">Sort by</label>
-                  <select type="select" name="sort" id="sort" class="form-select" data-sort>
-                    <option value="-1">Sort by</option>
-                    <option value="risk level high" data-sort="Risk level" data-order="High,Medium,Low">Risk level (high to low)</option>
-                    <option value="risk level low" data-sort="Risk level" data-order="Low,Medium,High">Risk level (low to high)</option>
-                    <option value="client asc" data-sort="Client" data-order="asc">Client (Ascedning order)</option>
-                    <option value="client desc" data-sort="Client" data-order="desc">Client (Descending order)</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col">
-                <button class="btn btn-secondary" type="button" data-clear>Clear filters</button>
-              </div>
-            </div>
-
-
-            <dialog id="filters">
-              
-              <iam-applied-filters></iam-applied-filters>
-              <div class="form-check">
-                <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level">
-                <label for="risk-level-high" class="form-label form-check-label">High</label>
-              </div>
-              <div class="form-check">
-                <input type="radio" name="risk-level" value="Medium" id="risk-level-medium" class="form-check-input" data-filter-text="Risk Level - Medium" data-filter="Risk level">
-                <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
-              </div>
-              <div class="form-check">
-                <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
-                <label for="risk-level-low" class="form-label form-check-label">Low</label>
-              </div>
-
-              <hr/>
-
-              <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
-                <label class="form-label" for="date-from">Date range</label>
-                <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
-                <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
-              </div>
-
-              <button class="btn btn-primary d-block m-auto" type="submit">Update results</button>
-            </dialog>
-          </div>
-          </form>
-
-          <div class="container">
-          <Table class="table--sticky table--minify" data-filterby="tableFilters2">
-          <table>
-            <thead>
-              <tr>
-                <th>Client</th>
-                <th>Date added</th>
-                <th>Transaction address</th>
-                <th>Form type</th>
-                <th>Form status</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>TA6</td>
-                <td>Completed</td>
-                <td><a href="/info" class="text-nowrap">View information</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>TA7</td>
-                <td>Outstanding</td>
-                <td><a href="/info" class="text-nowrap">View information</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>TA6</td>
-                <td>Outstanding</td>
-                <td><a href="/info" class="text-nowrap">View information</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Material information</td>
-                <td>Outstanding</td>
-                <td><a href="/info" class="text-nowrap">View information</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Material information</td>
-                <td>Outstanding</td>
-                <td><a href="/info" class="text-nowrap">View information</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>Material information</td>
-                <td>Completed</td>
-                <td><a href="/info" class="text-nowrap">View information</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>TA10</td>
-                <td>Outstanding</td>
-                <td><a href="/info" class="text-nowrap">View information</a></td>  
-              </tr>
-              <tr>
-                <td>Richard Smith, Buyer</td>
-                <td>18 Mar 23</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>TA10</td>
-                <td>Completed</td>
-                <td><a href="/info" class="text-nowrap">View information</a></td>  
-              </tr>
-            </tbody>
-          </table>
-          </Table>
-
-          </div>
-
-
-        </Tab>
-      </Tabs>
--->
-      
+     
     </main>
   </div>
 </template>
@@ -2127,12 +1845,14 @@ form {
 import Nav from '@/components/Nav/Nav.vue'
 import Table from '@/components/Table/Table.vue'
 import Card from '@/components/Card/Card.vue'
+import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue'
 
 export default {
   components: {
     Nav,
     Table,
-    Card
+    Card,
+    AppliedFilters
   },
   data () {
     return {

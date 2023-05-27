@@ -17,16 +17,15 @@ class iamAppliedFilters extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="applied-filters">
-      <slot></slot>
-    </div>
+    <div class="applied-filters"></div>
+    <slot></slot>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
 	connectedCallback() {
 
-    createAppliedFilters(this);
+    createAppliedFilters(this,this.shadowRoot.querySelector('.applied-filters'));
   }
 }
 

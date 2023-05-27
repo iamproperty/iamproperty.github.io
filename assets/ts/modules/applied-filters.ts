@@ -1,19 +1,23 @@
 // @ts-nocheck
-function createAppliedFilters(filters) {
+function createAppliedFilters(container,filters) {
 
-  const form = filters.closest('form');
+  container.addEventListener('change', function(event){
 
-  if(!form)
-    return false;
+    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')){
 
-  form.addEventListener('change', function(event){
-
-    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter]')){
-
-      let input = event.target.closest('input[data-filter]');
+      let shouldRemoveFilter = false;
+      let input = event.target.closest('input[data-filter-text]');
       let inputName = input.getAttribute('name');
+      
+      if(inputName.includes('[]'))
+        inputName = inputName.replace('[]',`[${input.value}]`);
+
       let filter = filters.querySelector(`[data-name="${inputName}"]`);
-      let filterText = input.getAttribute('data-filter');
+
+      if(filter && input.getAttribute('type') == 'checkbox')
+        shouldRemoveFilter = true;
+
+      let filterText = input.getAttribute('data-filter-text');
       
       if(!filter) {
         filter = document.createElement('button');
@@ -27,14 +31,14 @@ function createAppliedFilters(filters) {
       filter.innerHTML = filterText.replace('$value', input.value);
 
       // If the value
-      if(!input.value)
+      if(!input.value || shouldRemoveFilter)
         filter.remove();
 
 
 
       // If input has an ancestor with data-filter and all of inputs in that parent have been filled in then we need to transform the filter
-      if(input.parentNode.closest('[data-filter]')){
-        let parent = input.parentNode.closest('[data-filter]');
+      if(input.parentNode.closest('[data-filter-text]')){
+        let parent = input.parentNode.closest('[data-filter-text]');
         let allValuesSet = true;
         inputName = "";
 
@@ -66,7 +70,7 @@ function createAppliedFilters(filters) {
 
         if(allValuesSet){
 
-          let newFilterText = parent.getAttribute('data-filter');
+          let newFilterText = parent.getAttribute('data-filter-text');
           parent.querySelectorAll('input').forEach((element,index) => {
             
             let name = element.getAttribute('name');
@@ -101,12 +105,21 @@ function createAppliedFilters(filters) {
 
       for(var t=0;t<names.length;t++){
         let name = names[t];
-        let inputs = form.querySelectorAll(`[name="${name}"]`);
+        let selector = `[name="${name}"]`;
+
+        if(name.match(/\[(.*)\]/)){
+          let newName = name.replace(/\[(.*)\]/,`[]`);
+          let value = name.replace(/.*\[(.*)\]/,`$1`);
+          selector = `[name="${newName}"][value="${value}"]`;
+        }
+
+        let inputs = container.querySelectorAll(selector);
         for(var i=0;i<inputs.length;i++){
           let input = inputs[i];
 
-          if(input.getAttribute('type') != 'radio')
+          if(input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox')
             inputs[i].value = "";
+
           inputs[i].checked = false;
         }
       }
