@@ -13,7 +13,7 @@ table {
 
 td,th {
   padding: rem(12) rem(32) rem(12) 0;
-  min-width: $td-mw;
+  
   font-weight: normal;
   text-align: left;
   vertical-align: top;
@@ -21,6 +21,10 @@ td,th {
   font-size: rem(16);
   line-height: rem(24);
   color: var(--colour-body);
+
+  @include media-breakpoint-up(sm) {
+    min-width: #{$td-mw};
+  }
 
   &:last-child {
     padding-right: 0;
@@ -40,7 +44,7 @@ thead {
 
     @include media-breakpoint-up(sm) {
       white-space: nowrap;
-      min-width: rem(120);
+      min-width: #{$td-mw};
     }    
   }
 }
@@ -48,7 +52,6 @@ thead {
 
 tbody tr {
 
-  table-layout:fixed;
 
   &:is(:hover,:focus,.hover) {
 
@@ -115,116 +118,124 @@ table.border-0 {
 }
 @container (width < 23.4375em) {
 
-  .table__wrapper {
+  .table__wrapper:not(.table--fullwidth) {
 
     overflow: hidden;
+    max-height: none!important;
+
   }
-
-  table {
-
-    thead {
-      display: none;
-    }
-
-    tbody {
-      display: block;
-
-      tr td:first-child {
-        padding-top:0;
-      }
-    }
-
-    tr {
-      display: block;
-      position: relative;
-      border: none;
-
-      & + tr {
-        margin-top: rem(32);
-      }
-      
-      &:is(:hover,:focus,.hover) {
-
-        td {
-          background: transparent;
-        }
-      }
-
-      &:last-child td:not(:last-child) {
-        border-bottom:none;
-      }
-
-      &:first-child td:first-child {
-        border-top: none;
-        border-color: var(--colour-border);
-      }
-      &:first-child td {
-        border-color: var(--colour-border);
-      }
-    }
-
-    td,
-    th {
-      display: block;
-      @include var(border-color,--colour-border);
-
-      &:nth-child(1){
-        
-        border-top: none;
-      }
-
-      &[data-label]:before {
-        content: attr(data-label);
-        color: var(--colour-heading);
-        padding: 0;
-        margin-bottom: 0;
-        display: block;
-        font-weight: bold;
-        margin: 0;
-      }
-    }
+  :is(iam-table, .iam-table):not(.table--fullwidth) {
     
-    tbody tr:has(td:nth-child(4)) td:first-child {
-      
-      position: relative;
+    table {
 
-      button {
-        display: block!important;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background: transparent;
+      thead {
+        display: none;
+      }
+
+      tbody {
+        display: block;
+
+        tr td:first-child {
+          padding-top:0;
+        }
+      }
+
+      tr {
+        display: block;
+        position: relative;
         border: none;
-        position: absolute;
-        overflow: hidden;
-        text-indent: -300%;
 
-        &:after {
-          font-family: "Font Awesome 6 Pro";
-          content: "\f055";
-          position: absolute;
+        & + tr {
+          margin-top: rem(32);
+        }
+        
+        &:is(:hover,:focus,.hover) {
+
+          td {
+            background: transparent;
+          }
+        }
+
+        &:last-child td:not(:last-child) {
+          border-bottom:none;
+        }
+
+        &:first-child td:first-child {
+          border-top: none;
+          border-color: var(--colour-border);
+        }
+        &:first-child td {
+          border-color: var(--colour-border);
+        }
+      }
+
+      td,
+      th {
+        display: block;
+        @include var(border-color,--colour-border);
+
+        &:nth-child(1){
+          
+          border-top: none;
+        }
+
+        &[data-label]:before {
+          content: attr(data-label);
+          color: var(--colour-heading);
+          padding: 0;
+          margin-bottom: 0;
+          display: block;
+          font-weight: bold;
+          margin: 0;
+        }
+      }
+
+      tbody tr:first-child td:not(:first-child) {
+        border-top: var(--border-width) solid currentColor!important;
+        border-color: var(--colour-border)!important;
+      }
+      
+      tbody tr:has(td:nth-child(4)) td:first-child {
+        
+        position: relative;
+
+        button {
+          display: block!important;
           top: 0;
-          right: 0;
-          font-size: rem(28);
-          line-height: rem(28);
-          font-weight: 300;
-          color: var(--colour-primary);
-          text-indent: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background: transparent;
+          border: none;
+          position: absolute;
+          overflow: hidden;
+          text-indent: -300%;
+
+          &:after {
+            font-family: "Font Awesome 6 Pro";
+            content: "\f055";
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            font-size: rem(28);
+            line-height: rem(28);
+            font-weight: 300;
+            color: var(--colour-primary);
+            text-indent: 0;
+          }
+        }
+      }
+
+      tbody tr:has(td:nth-child(4))[data-view="full"] td:first-child {
+        button:after {
+          content: "\f056";
+          font-weight: 900;
         }
       }
     }
-
-    tbody tr:has(td:nth-child(4))[data-view="full"] td:first-child {
-      button:after {
-        content: "\f056";
-        font-weight: 900;
-      }
-    }
   }
-
-  body:not(.js-enabled) tbody tr:not(:hover):not(:focus-within),
-  :is(iam-table, .iam-table) table tr:not([data-view="full"]) {
+  body:not(.js-enabled) :is(iam-table, .iam-table):not(.table--fullwidth) tbody tr:not(:hover):not(:focus-within),
+  :is(iam-table, .iam-table):not(.table--fullwidth) tbody tr:not([data-view="full"]) {
 
     td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){
       display: none;
@@ -236,7 +247,8 @@ table.border-0 {
       }
     }
   }
-  .table--cta tr td:last-child {
+
+  .table--cta:not(.table--fullwidth) tr td:last-child {
     display: block!important;
   }
 
@@ -309,6 +321,83 @@ table.border-0 {
   }
 }
 // #endregion
+
+// #region Max height tables
+.table__wrapper:is(.table--mh-small,.table--mh-medium,.table--mh-large) {
+  max-height: var(--table-mh,#{rem(200)});
+  overflow: auto;
+  position: relative;
+
+  &::before {
+    content: "";
+    top: calc(100% - 1.2rem);
+    bottom: 2px;
+    left: 0;
+    right: 0;
+    height: 1.2rem;
+    position: sticky;
+    display: block;
+    background: linear-gradient(180deg, rgba(var(--bg-colour-rgb, 255, 255, 255), 0) 0%, rgba(var(--bg-colour-rgb, 255, 255, 255), 1) 100%);
+    border-bottom: 2px solid var(--colour-border);
+    z-index: 2;
+    margin-bottom: -1.2rem;
+  }
+}
+
+.table__wrapper.table--mh-small {
+  --table-mh: #{$table-mh-sm};
+}
+.table__wrapper.table--mh-medium {
+  --table-mh: #{$table-mh-md};
+}
+.table__wrapper.table--mh-large {
+  --table-mh: #{$table-mh-lg};
+}
+
+// If table CTA class is set then undo max-height
+.table--cta > .table__wrapper:is(.table--mh-small,.table--mh-medium,.table--mh-large) {
+  max-height: none;
+  position: static;
+
+  &::before {
+    display: none;
+  }
+}
+
+iam-table:is(.table--mh-small,.table--mh-medium,.table--mh-large):not(.table--cta) {
+
+  position: relative;
+
+  thead {
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: var(--colour-white);;
+
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--colour-primary);
+    }
+  }
+  tbody {
+    position: relative;
+
+    tr:first-child td {
+      border-top: 0;
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+  }
+}
+//#endregion
 
 // filters 
 .table--filtered tbody tr:not(.filtered--show) {

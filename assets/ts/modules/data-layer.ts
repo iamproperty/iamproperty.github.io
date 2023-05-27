@@ -37,7 +37,7 @@ function createDataLayer () {
         // @ts-ignore: Object is possibly 'null'.
         "linkText": event.target.closest('a').hasAttribute('title') ? event.target.closest('a').getAttribute('title') : event.target.closest('a').textContent,
         // @ts-ignore: Object is possibly 'null'.
-        "class": event.target.closest('a').getAttribute('class'),
+        "class": (event.target.closest('a').hasAttribute('class') ? event.target.closest('a').getAttribute('class') : ''),
         // @ts-ignore: Object is possibly 'null'.
         "href": event.target.closest('a').getAttribute('href')
       });
@@ -48,7 +48,7 @@ function createDataLayer () {
         // @ts-ignore: Object is possibly 'null'.
         "buttonText": event.target.closest('button').textContent,
         // @ts-ignore: Object is possibly 'null'.
-        "class": event.target.closest('a').getAttribute('class')
+        "class": (event.target.closest('button').hasAttribute('class') ? event.target.closest('button').getAttribute('class') : '')
       });
     }
 

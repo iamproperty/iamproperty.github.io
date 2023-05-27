@@ -95,6 +95,15 @@
   td_mw_px: $td-mw-px;
   td_mw: $td-mw;
 
+  table_mh_sm_px: $table-mh-sm-px;
+  table_mh_sm: $table-mh-sm;
+  table_mh_md_px: $table-mh-md-px;
+  table_mh_md: $table-mh-md;
+  table_mh_lg_px: $table-mh-lg-px;
+  table_mh_lg: $table-mh-lg;
+
+
+
   @each $color, $value in $theme-colors {
     themeColour_#{$color}: #{$value}
   }

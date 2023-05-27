@@ -99,7 +99,7 @@ a,
 }
 
 // Support card component
-:is(a,button):has(.card, iam-card){
+:is(a,button,label):has(.card, iam-card){
   &:before {
     display: none;
   }
