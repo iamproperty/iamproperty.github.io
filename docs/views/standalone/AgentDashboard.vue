@@ -6,9 +6,6 @@
     <main class="main--marketplace">
 
 
-      <div class="container">
-        <h1>Welcome back, Jonny!</h1>
-      </div>
 <!--
       <Tabs class="container">
         <Tab title="Conveyancing Opportunities">
@@ -119,49 +116,114 @@
         -->
           <form id="tableFilters">
 
-            <div class="container">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h1>Welcome back, Jonny!</h1>
+          </div>
+          <div class="col-md-2">
+            <div class="dialog__wrapper">
               
-              <span class="h4"><span data-query="total"></span> Clients added in total</span>
+            <button class="btn btn-tertiary me-0" id="showmenu">Individual</button>
+            <dialog id="menu">
+              <div class="form-control__wrapper">
+                <label for="search" class="form-label d-none d-sm-block">Search</label>
+                <span class="suffix" role="presentation"><i class="fa fa-light fa-search" aria-hidden="true"></i></span>
+                <input name="search" id="search" type="text" class="form-control" autocomplete="off">
+              </div>
 
+              <ul class="list-unstyled">
+                <li vlaue="Alice Knowles">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline1" class="form-check-input" value="Alice Knowles" dta-filter="">
+                    <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
+                  </div>                  
+                </li>
+                <li vlaue="Ethan Ramirez">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input" value="Ethan Ramirez">
+                    <label for="pipeline2" class="form-label form-check-label">Ethan Ramirez</label>
+                  </div>                  
+                </li>
+                <li vlaue="Sophia Patel">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input" value="Sophia Patel">
+                    <label for="pipeline3" class="form-label form-check-label">Sophia Patel</label>
+                  </div>                  
+                </li>
+                <li vlaue="Noah Jenkins">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input" value="Noah Jenkins">
+                    <label for="pipeline4" class="form-label form-check-label">Noah Jenkins</label>
+                  </div>                  
+                </li>
+                <li vlaue="Ava Thompson">
+                  <div class="form-check">
+                    <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input" value="Ava Thompson">
+                    <label for="pipeline5" class="form-label form-check-label">Ava Thompson</label>
+                  </div>                  
+                </li>
+              </ul>
+
+
+              <button type="submit" class="btn btn-secondary">Update</button>
+
+
+            </dialog>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+            <div class="container">
+
+              <span class="h4"><span data-query="total"></span> <div class="form-control__wrapper form-control--inline-text"><label for="clients-added">Clients added </label><select id="clients-added" class="form-select" data-filter="Date added">
+                <option value="">in total</option>
+                <option value="26 Mar 23">today</option>
+                <option>Yesterday</option>
+                <option>this week</option>
+                <option>last week</option>
+                <option>this month</option>
+                <option>last month</option>
+              </select></div></span>
+ 
               <div class="row tab-focus">
-<!--
-                <div class="col-md-3">
-                  <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Incomplete" id="due_diligience_incomplete" class="visually-hidden" />
-                  <label class="card card--small card--danger" for="due_diligience_incomplete" ><span data-query="Due diligence == Incomplete"></span> Due diligence incomplete</label>
+
+                  <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Incomplete" id="due_diligience_incomplete" class="d-none" v-model="checked" />
+                  <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Requires approval" id="due_diligience_requires_approval" class="d-none" />
+                  <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Verified" id="due_diligience_verified" class="d-none" />
+
+                <div class="col-sm-4 col-md-3">
+                  <label for="due_diligience_incomplete"><Card class="card--filter colour-danger" data-total="" data-query="Due diligence == Incomplete">Due diligence incomplete</Card></label>
                 </div>
-                <div class="col-md-3">
-                  <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Requires approval" id="due_diligience_requires_approval" class="visually-hidden" />
-                  <label class="card card--small card--warning" for="due_diligience_requires_approval" ><span data-query="Due diligence == Requires approval"></span> Due diligence requires approval</label>
+                <div class="col-sm-4 col-md-3">
+                  <label for="due_diligience_requires_approval" ><Card class="card--filter colour-warning" data-total="" data-query="Due diligence == Requires approval">Due diligence requires approval</Card></label>
                 </div>
-                <div class="col-md-3">
-                  <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Verified" id="due_diligience_verified" class="visually-hidden" />
-                  <label class="card card--small card--success" for="due_diligience_verified" ><span data-query="Due diligence == Verified"></span> Due diligence verified</label>
+                <div class="col-sm-4 col-md-3">
+                  <label for="due_diligience_verified" ><Card class="card--filter colour-success" data-total="" data-query="Due diligence == Verified">Due diligence verified</Card></label>
                 </div>
-               --> 
-               <input type="text" name="filter" id="filter" data-filter="Risk level" value="Low" />
+                
               </div>
               <hr/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
 
 
             </div>
+
+
             <div class="sticky-wrapper">
             <div class="sticky-form">
               <div class="container">
                   
-                <div class="row">
-                  <div class="col">
+                <div class="row align-items-end">
+                  <div class="col-6 col-md-5">
                     <div class="form-control__wrapper">
-                      <label for="search" class="form-label">Search</label>
+                      <label for="search" class="form-label d-none d-sm-block">Search</label>
+                      <span class="suffix" role="presentation"><i class="fa fa-light fa-search"></i></span>
                       <input name="search" id="search" type="text" class="form-control" data-search="Client, Transaction address">
                     </div>
                   </div>
-                  <div class="col">
-                    <button class="btn btn-secondary" type="button" data-modal="filters">Filter by</button>
+                  <div class="col-6 offset-md-1 col-md-2">
+                    <button class="btn btn-tertiary me-0 d-block w-100" type="button" data-modal="filters">Filter by <span data-filter-count></span><i class="fa fa-filter"></i></button>
                   </div>
                   <div class="col d-none d-sm-block">
                     <div class="form-control__wrapper">
@@ -176,7 +238,7 @@
                     </div>
                   </div>
                   <div class="col">
-                    <button class="btn btn-secondary" type="button" data-clear>Clear filters</button>
+                    <button class="btn btn-primary text-nowrap d-none d-md-block" type="button" data-clear><i class="fa fa-xmark"></i> Clear filters</button>
                   </div>
                 </div>
 
@@ -188,7 +250,7 @@
                 
                 <iam-applied-filters></iam-applied-filters>
                 <div class="form-check">
-                  <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level">
+                  <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level" v-model="checked">
                   <label for="risk-level-high" class="form-label form-check-label">High</label>
                 </div>
                 <div class="form-check">
@@ -241,7 +303,7 @@
                 </tr>
                 <tr>
                   <td>Bob Smith, Buyer</td>
-                  <td>18 Mar 23</td>
+                  <td>26 Mar 23</td>
                   <td>89, Queens Crescent, NE28 8DR</td>
                   <td>Risk assessment complete</td>
                   <td>Low</td>
@@ -2010,68 +2072,119 @@
 </template>
 <style lang="scss" >
 
-main {
-  min-height: 10000px;
-}
+
+
 
 form {
   display: contents;
 }
+@media screen and (max-width: 36em){
 
-.sticky-form {
-  /*
-  position: sticky;
-  //top: -1px;
-  top: 4.5rem;
-  left: 0;
-  width: 100%;
-  z-index: 9999;
-  */
-  pointer-events: all;
-}
-
-.sticky-wrapper {
-  
-  padding-top: calc(4.5rem + 1px);
-  pointer-events: none;
-  top: -1px;
-
-position: sticky;
-}
-.sticky-wrapper.stuck {
-
-
-  position: sticky;
-  top: -1px;
-
-  z-index: 999999999;
-  
   .sticky-form {
 
-  background: green;
+    pointer-events: all;
+    display: block;
+
+    .container {
+      padding-top: 1rem;
+      padding-bottom: 0;
+    }
+  }
+
+  .sticky-wrapper {
+    
+    padding-top: calc(4.5rem + 1px);
+    margin-top: -4.5rem;
+    display: block;
+    pointer-events: none;
+    top: -1px;
+    position: sticky;
+    z-index: 999999;
+
+    &.stuck .sticky-form {
+      background: var(--colour-secondary);
+    }
   }
 }
 
 
+.dialog__wrapper {
+  position: relative;
+  display: inline-block;
+
+  dialog {
+    right: 0;
+    left: auto;
+    top: 100%;
+    z-index: 999999999;
+
+    min-width: 20rem;
+  }
+}
 </style>
 
-<script setup>
+<script>
 import Nav from '@/components/Nav/Nav.vue'
 import Table from '@/components/Table/Table.vue'
-import { onMounted } from 'vue';
+import Card from '@/components/Card/Card.vue'
 
-onMounted(() => {
-  const el = document.querySelector(".sticky-wrapper")
-  console.log(el)
-  const observer = new IntersectionObserver( 
-    ([e]) => {
+export default {
+  components: {
+    Nav,
+    Table,
+    Card
+  },
+  data () {
+    return {
+      checked: true
+    }
+  },
+  mounted(){
 
-      console.log(e);
-        e.target.classList.toggle("stuck", e.intersectionRatio < 1)
-    },
-    { threshold: [1] }
-  );
-  
-  observer.observe(el);
-})
+    setTimeout(() => {
+      
+      const el = document.querySelector(".sticky-wrapper")
+      /*
+      const observer = new IntersectionObserver( 
+        ([e]) => e.target.classList.toggle("stuck", e.intersectionRatio < 1),
+        { threshold: [0,1], root: document.querySelector('body') }
+      );
+      */
+
+
+      var observer = new IntersectionObserver(function(entries) {
+        // no intersection with screen
+        if(entries[0].boundingClientRect.top < 1)
+          el.classList.add('stuck')
+        else
+          el.classList.remove('stuck')
+
+      }, { threshold: [0,1] });
+
+      observer.observe(el);
+
+
+
+      document.addEventListener('click', (event) => {
+
+        if (event && event.target instanceof HTMLElement && event.target.closest('#showmenu')){
+
+          let btn = event.target.closest('#showmenu');
+          
+          let popover = document.querySelector('#menu');
+
+          if(popover.hasAttribute('open'))
+            popover.close();
+          else
+          popover.show();
+
+        };
+      });
+
+
+    }, "100");
+
+  }
+}
+
 </script>
