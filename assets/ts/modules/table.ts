@@ -22,6 +22,9 @@ export const addDataAttributes = (table) => {
         let headingText = tempDiv.textContent || tempDiv.innerText || "";
         cell.setAttribute('data-label',headingText);
 
+        if(heading.hasAttribute('class'))
+          cell.setAttribute('class',heading.getAttribute('class'))
+
         if(statuses.includes(cell.textContent.trim())){
           cell.setAttribute('data-content',cell.textContent.trim());
         }
