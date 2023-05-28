@@ -10,6 +10,7 @@ class iamAppliedFilters extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
+    let classList = this.classList.toString();
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
@@ -17,7 +18,7 @@ class iamAppliedFilters extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="applied-filters"></div>
+    <div class="applied-filters ${classList}"></div>
     <slot></slot>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));

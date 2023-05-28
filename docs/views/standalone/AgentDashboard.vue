@@ -17,7 +17,7 @@
                 
               <button class="btn btn-tertiary me-0" id="showmenu">Individual</button>
               <dialog id="menu">
-              <AppliedFilters>
+              <AppliedFilters class="applied-filters--compact">
                 <div class="form-control__wrapper">
                   <label for="search" class="form-label d-none d-sm-block">Search</label>
                   <span class="suffix" role="presentation"><i class="fa fa-light fa-search" aria-hidden="true"></i></span>
