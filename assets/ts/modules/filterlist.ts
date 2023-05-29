@@ -20,25 +20,27 @@ function addFilterlistEventListeners(list: Element, input:Element) {
 
     clearTimeout(timer);
     
-    filterTheList(list,input);
+    filterTheList(list, input.value);
   });
-
 }
 
-function filterTheList(list: Element, input:Element){
-
-  let searchTerm = input.value.toLowerCase();
+export const filterTheList =  function (list: Element, searchTerm){
 
   Array.from(list.querySelectorAll(':scope > li')).forEach((item, index) => {
     let content = item.textContent.toLowerCase();
 
     item.classList.add('d-none');
 
-    if(content.includes(searchTerm))
+    if(content.includes(searchTerm.toLowerCase()))
       item.classList.remove('d-none');
   });
 
-  console.log(input.value)
+  // Data layer Web component created
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    "event": "Filtered list",
+    "value": searchTerm
+  });
 }
 
 export default filterlist;
