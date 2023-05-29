@@ -12,7 +12,7 @@ function addFilterlistEventListeners(list: Element, input:Element) {
 
     clearTimeout(timer);
       timer = setTimeout(function(){
-        filterTheList(list,input);
+        filterTheList(list,input.value);
       }, 1000);
   });
 

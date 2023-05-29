@@ -20,19 +20,7 @@ class iamFilterlist extends HTMLElement {
     <style>
     @import "${assetLocation}/css/core.min.css";
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
-    .list__wrapper {
-      overflow-x: hidden;
-      overflow-y: auto;
-    }
-    .list__wrapper--small {
-      max-height: 12.5rem;
-    }
-    .list__wrapper--medium {
-      max-height: 25rem;
-    }
-    .list__wrapper--large {
-      max-height: 37.5rem;
-    }
+    
     :host {
       margin-bottom: 3rem;
       display:block;

@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // filterlist
   Array.from(document.querySelectorAll('.iam-filterlist')).forEach((arrayElement) => {
     if(arrayElement.hasAttribute('data-input') && document.querySelector(arrayElement.getAttribute('data-input')))
-      filterlist(arrayElement,document.querySelector(arrayElement.getAttribute('data-input')));
+      filterlist(arrayElement.querySelector('ul'),document.querySelector(arrayElement.getAttribute('data-input')));
   });
 
 

@@ -1,5 +1,5 @@
 ```
-<iam-filter-list>
+<iam-filterlist>
 <ul>
   <li>Olivia Anderson</li>
   <li>Ethan Ramirez</li>
@@ -7,7 +7,7 @@
   <li>Noah Jenkins</li>
   <li>Ava Thompson</li>
 </ul>
-</iam-filter-list>
+</iam-filterlist>
 ```
 
 **Properties**
