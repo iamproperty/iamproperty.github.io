@@ -14,17 +14,6 @@ class iamFilterlist extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    if(!this.querySelector('i.fa-search'))
-      this.innerHTML += '<i class="fa fa-light fa-search" aria-hidden="true" slot="icon"></i>';
-
-    const maxHeights = {
-      "small": "12.5rem",
-      "medium": "25rem",
-      "large": "37.5rem"
-    }
-
-    let maxHeight = (this.hasAttribute('data-max-height') ? maxHeights[this.getAttribute('data-max-height')] : 'none');
-
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const template = document.createElement('template');
     template.innerHTML = `
@@ -32,12 +21,21 @@ class iamFilterlist extends HTMLElement {
     @import "${assetLocation}/css/core.min.css";
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     .list__wrapper {
-      max-height: ${maxHeight};
       overflow-x: hidden;
       overflow-y: auto;
     }
+    .list__wrapper--small {
+      max-height: 12.5rem;
+    }
+    .list__wrapper--medium {
+      max-height: 25rem;
+    }
+    .list__wrapper--large {
+      max-height: 37.5rem;
+    }
     :host {
       margin-bottom: 3rem;
+      display:block;
     }
     </style>
     <div class="form-control__wrapper">
@@ -53,6 +51,19 @@ class iamFilterlist extends HTMLElement {
   }
 
 	connectedCallback() {
+
+    const maxHeights = {
+      "small": "12.5rem",
+      "medium": "25rem",
+      "large": "37.5rem"
+    }
+
+    let maxHeightClass = (this.hasAttribute('data-max-height') && maxHeights[this.getAttribute('data-max-height')] ? 'list__wrapper--'+this.getAttribute('data-max-height') : '');
+
+    this.shadowRoot.querySelector('.list__wrapper').classList.add(maxHeightClass);
+
+    if(!this.querySelector('i.fa-search'))
+      this.innerHTML += '<i class="fa fa-light fa-search" aria-hidden="true" slot="icon"></i>';
 
     filterlist(this.querySelector('ul'),this.shadowRoot.querySelector('#search'));
   }

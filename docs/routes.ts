@@ -167,6 +167,14 @@ const routes = [
         component: () => import('./views/components/ChartsDoc.vue')
       },
       {
+        path: 'filterlist',
+        name: 'Filter list',
+        meta: {
+          title: 'Filter list | Components | iamkey'
+        },
+        component: () => import('./views/components/FilterlistDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {
