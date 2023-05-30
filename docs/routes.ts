@@ -564,14 +564,6 @@ const routes = [
         component: () => import('./views/standalone/IamsoldAdmin.vue')
       },
       {
-        path: 'completions-dashboard',
-        name: "Completions dashboard",
-        meta: {
-          title: 'Completions dashboard | iamkey'
-        },
-        component: () => import('./views/standalone/CompletionsDashboard.vue')
-      },
-      {
         path: 'marketplace',
         name: "Marketplace",
         meta: {
