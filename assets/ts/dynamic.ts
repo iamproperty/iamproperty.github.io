@@ -84,6 +84,9 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   // YouTube videos
   Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {
+
+    console.log(arrayElement)
+
     new youtubeVideo(arrayElement);
   });
 

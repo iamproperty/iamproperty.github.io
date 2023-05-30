@@ -175,12 +175,12 @@ const routes = [
         component: () => import('./views/components/Header.vue')
       },
       {
-        path: 'modal',
-        name: 'Modal',
+        path: 'dialog',
+        name: 'Dialog (Modal and popover)',
         meta: {
-          title: 'Modal | Components | iamkey'
+          title: 'Dialog (Modal and popover) | Components | iamkey'
         },
-        component: () => import('./views/components/ModalDoc.vue')
+        component: () => import('./views/components/DialogDoc.vue')
       },
       {
         path: 'nav',
