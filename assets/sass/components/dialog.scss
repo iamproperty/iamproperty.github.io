@@ -190,4 +190,13 @@ dialog::backdrop {
     }  
   }
 }
+
+// Show hide the indidual or multiple label
+.dialog__wrapper:has(input:checked ~ input:checked) .individual,
+.dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
+
+  display: none;
+}
+
+
 // #endregion
