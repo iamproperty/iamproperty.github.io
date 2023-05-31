@@ -143,6 +143,14 @@ const routes = [
         component: () => import('./views/components/AlertDoc.vue')
       },
       {
+        path: 'applied-filters',
+        name: 'Applied Filters',
+        meta: {
+          title: 'Applied Filters | Components | iamkey'
+        },
+        component: () => import('./views/components/AppliedFiltersDoc.vue')
+      },
+      {
         path: 'banner',
         name: 'Banner',
         meta: {
