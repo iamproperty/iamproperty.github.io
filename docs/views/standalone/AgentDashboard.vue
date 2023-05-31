@@ -5,53 +5,55 @@
     </Nav>
     <main class="main--marketplace">
 
-
-      <form id="tableFilters" method="post" data-ajax="http://localhost:5173/client-transactions.json">
+<form id="tableFilters">
 
       <div class="container">
         <div class="row">
           <div class="col">
             <h1>Welcome back, Jonny!</h1>
           </div>
-          <div class="col-md-2">
-            <div class="dialog__wrapper">
-              
-            <button class="btn btn-tertiary me-0" id="showmenu">Individual</button>
-            <dialog id="menu">
+          <div class="col-md-3 mw-fit-content">
+            <div class="dialog__wrapper dialog__wrapper--md-right">
+
+            <button class="btn btn-tertiary me-0 nowrap" aria-label="Display filters of who's work to include"><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
+            <dialog>
               <div class="form-control__wrapper">
                 <label for="search" class="form-label d-none d-sm-block">Search</label>
                 <span class="suffix" role="presentation"><i class="fa fa-light fa-search" aria-hidden="true"></i></span>
                 <input name="search" id="search" type="text" class="form-control" autocomplete="off">
               </div>
 
+              <input type="checkbox" id="pipeline1" class="form-check-input" :value="`Alice Knowles`" dta-filter="" v-model="checked" >
+              <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input" value="Ethan Ramirez">
+              <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input" value="Sophia Patel">
+              <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input" value="Noah Jenkins">
+              <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input" value="Ava Thompson">
+
               <ul class="list-unstyled">
                 <li vlaue="Alice Knowles">
                   <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline1" class="form-check-input" value="Alice Knowles" dta-filter="">
                     <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
                   </div>                  
                 </li>
                 <li vlaue="Ethan Ramirez">
                   <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input" value="Ethan Ramirez">
                     <label for="pipeline2" class="form-label form-check-label">Ethan Ramirez</label>
                   </div>                  
                 </li>
                 <li vlaue="Sophia Patel">
                   <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input" value="Sophia Patel">
                     <label for="pipeline3" class="form-label form-check-label">Sophia Patel</label>
                   </div>                  
                 </li>
                 <li vlaue="Noah Jenkins">
                   <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input" value="Noah Jenkins">
+                    
                     <label for="pipeline4" class="form-label form-check-label">Noah Jenkins</label>
                   </div>                  
                 </li>
                 <li vlaue="Ava Thompson">
                   <div class="form-check">
-                    <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input" value="Ava Thompson">
+                    
                     <label for="pipeline5" class="form-label form-check-label">Ava Thompson</label>
                   </div>                  
                 </li>
@@ -81,7 +83,7 @@
  
               <div class="row tab-focus">
 
-                  <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Incomplete" id="due_diligience_incomplete" class="d-none" v-model="checked" />
+                  <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Incomplete" id="due_diligience_incomplete" class="d-none" />
                   <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Requires approval" id="due_diligience_requires_approval" class="d-none" />
                   <input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Verified" id="due_diligience_verified" class="d-none" />
 
@@ -129,8 +131,8 @@
                       </select>
                     </div>
                   </div>
-                  <div class="col">
-                    <button class="btn btn-primary text-nowrap d-none d-md-block" type="button" data-clear><i class="fa fa-xmark"></i> Clear filters</button>
+                  <div class="col mw-fit-content">
+                    <button class="btn btn-primary text-nowrap d-none d-md-block me-0" type="button" data-clear><i class="fa fa-xmark"></i> Clear filters</button>
                   </div>
                 </div>
 
@@ -139,10 +141,10 @@
           </div>
 
               <dialog id="filters">
-                
+                <span class="h3">Filter by</span>
                 <iam-applied-filters></iam-applied-filters>
                 <div class="form-check">
-                  <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level" v-model="checked">
+                  <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level" >
                   <label for="risk-level-high" class="form-label form-check-label">High</label>
                 </div>
                 <div class="form-check">
@@ -1783,7 +1785,6 @@
 
 
           </div>
- 
     </main>
   </div>
 </template>
@@ -1824,20 +1825,6 @@ form {
   }
 }
 
-
-.dialog__wrapper {
-  position: relative;
-  display: inline-block;
-
-  dialog {
-    right: 0;
-    left: auto;
-    top: 100%;
-    z-index: 999999999;
-
-    min-width: 20rem;
-  }
-}
 </style>
 
 <script>
@@ -1851,9 +1838,14 @@ export default {
     Table,
     Card
   },
-  data () {
-    return {
-      checked: true
+  computed: {
+    checked: {
+      get() {
+        return this.value;
+      },
+      set(value) {
+        this.$emit("input", value);
+      }
     }
   },
   mounted(){
@@ -1882,21 +1874,7 @@ export default {
 
 
 
-      document.addEventListener('click', (event) => {
-
-        if (event && event.target instanceof HTMLElement && event.target.closest('#showmenu')){
-
-          let btn = event.target.closest('#showmenu');
-          
-          let popover = document.querySelector('#menu');
-
-          if(popover.hasAttribute('open'))
-            popover.close();
-          else
-          popover.show();
-
-        };
-      });
+      
 
 
     }, "100");

@@ -8,7 +8,6 @@ import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
-import modal from '../js/modules/modal'
 import iamHeader from './components/header/header.component'
 import iamAccordion from './components/accordion/accordion.component'
 import iamTabs from './components/tabs/tabs.component'
@@ -60,10 +59,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // Form
   Array.from(document.querySelectorAll('form')).forEach((arrayElement) => {
     form(arrayElement);
-  });
-  // Modal
-  Array.from(document.querySelectorAll('.modal')).forEach((arrayElement) => {
-    modal(arrayElement);
   });
   // YouTube videos
   Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {
