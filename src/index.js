@@ -24,3 +24,5 @@ export { default as Tabs } from './components/Tabs/Tabs.vue'
 export { default as Tab } from './components/Tabs/Tab.vue'
 export { default as Alert } from './components/Alert/Alert.vue'
 export { default as NoteFeed } from './components/NoteFeed/NoteFeed.vue'
+
+export { default as AppliedFilters } from './components/AppliedFilters/AppliedFilters.vue'
