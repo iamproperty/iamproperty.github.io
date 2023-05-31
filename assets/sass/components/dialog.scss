@@ -1,0 +1,202 @@
+@use "sass:math";
+@use "../_func" as *;
+
+// non-js fallback
+body:not(.js-enabled) dialog:not([open]):target {
+  display: block;
+}
+
+// #region Default styling of both modals and popovers
+dialog[open] {
+
+  --dialog-padding: #{rem(24)};
+
+  width: fit-content;
+  height: fit-content;  
+  border: none;
+  overscroll-behavior: contain;
+  background: white;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
+  border-radius: rem(28);
+  padding: var(--dialog-padding);
+
+  // Close button
+  > form:first-child {
+
+    position: static;
+  }
+
+  > form:first-child button,
+  > button:first-child {
+    position: absolute;
+    top: var(--dialog-padding);
+    right: var(--dialog-padding);
+    z-index: var(--index-floating);
+
+    text-indent: 300%;
+    overflow: hidden;
+    border: none;
+    height: rem(20);
+    width: rem(20);
+    background: transparent;
+
+    &:after {
+      content: "";
+      top: 0;
+      left: 0;
+      position: absolute;
+      display: block;
+      height: rem(20);
+      width: rem(20);
+      z-index: var(--index-focus);
+      background: currentColor;
+      mask-image: var(--icon-close);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-close);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
+
+    & + * {
+      padding-right: rem(36);
+    }
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+  > :is(p):last-child {
+    padding-bottom: 0;
+  }
+}
+// #endregion
+
+// #region modal styling
+*:not(.dialog__wrapper) > dialog[open] {
+  
+  min-width: 100%;
+  max-width: 80vw;
+  max-height: 85vh;
+  margin-top: 12vh;
+
+  @include media-breakpoint-up(sm) {
+    
+    --dialog-padding: #{rem(56)};
+
+    min-width: 80vw;
+    max-height: 80vh;
+    margin-top: auto;
+    border-radius: rem(34);
+  }
+  
+  @include media-breakpoint-up(md) {
+    
+    min-width: rem(1112);
+    width: rem(1112);
+    max-width: rem(1112);
+  }
+
+  &:has(.youtube-embed){
+    padding: 0!important;
+  }
+}
+
+
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+// #endregion
+
+// #region popover styling
+.dialog__wrapper {
+
+  position: relative;
+  display: inline-block;
+
+  > .btn:first-child {
+    &:after {
+      content: "";
+    
+      display: inline-block;
+      margin-left: 0.5em;
+      margin-bottom: -0.15em;
+      height: 1em;
+      width: 1em;
+      z-index: var(--index-focus);
+      background: currentColor;
+      mask-image: var(--icon-arrow);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-arrow);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+
+      transform: rotate(90deg);
+    }
+  }
+
+  &:has(dialog[open]) > .btn:first-child:after {
+
+    transform: rotate(270deg);
+  }
+
+  > dialog[open] {
+
+    left: 0;
+    top: 100%;
+    z-index: var(--index-floating);
+    min-width: rem(320);
+    border-radius: rem(16);
+    max-width: rem(600);
+  }
+
+  &.dialog__wrapper--right > dialog[open]{
+
+    right: 0;
+    left: auto;
+  }  
+
+  @include media-breakpoint-up(sm) {
+    
+    &.dialog__wrapper--sm-left > dialog[open]{
+
+      left: 0;
+      right: auto;
+    }  
+    &.dialog__wrapper--sm-right > dialog[open]{
+
+      right: 0;
+      left: auto;
+    }  
+  }
+
+  @include media-breakpoint-up(md) {
+    
+    &.dialog__wrapper--md-left > dialog[open]{
+
+      left: 0;
+      right: auto;
+    }  
+    &.dialog__wrapper--md-right > dialog[open]{
+
+      right: 0;
+      left: auto;
+    }  
+  }
+}
+
+// Show hide the indidual or multiple label
+.dialog__wrapper:has(input:checked ~ input:checked) .individual,
+.dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
+
+  display: none;
+}
+
+
+// #endregion

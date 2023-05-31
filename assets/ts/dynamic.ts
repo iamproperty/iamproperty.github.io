@@ -9,9 +9,8 @@ import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
-import modal from '../js/modules/modal'
 
-const components = ['accordion','header','tabs', 'table','card','filterlist'];
+const components = ['accordion','header','tabs', 'table','card','pagination','filterlist'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',
@@ -78,12 +77,11 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('form')).forEach((arrayElement) => {
     form(arrayElement);
   });
-  // Modal
-  Array.from(document.querySelectorAll('.modal')).forEach((arrayElement) => {
-    modal(arrayElement);
-  });
   // YouTube videos
   Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {
+
+    console.log(arrayElement)
+
     new youtubeVideo(arrayElement);
   });
 
