@@ -10,6 +10,7 @@ import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 import tabs from '../js/modules/tabs'
+import createPaginationButttons from '../js/modules/pagination'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -65,6 +66,18 @@ document.addEventListener("DOMContentLoaded", function() {
   // Tabs
   Array.from(document.querySelectorAll('.tabs')).forEach((arrayElement) => {
     tabs(arrayElement);
+  });
+
+  Array.from(document.querySelectorAll('.pagination__wrapper')).forEach((arrayElement) => {
+
+
+    const params = new URLSearchParams(window.location.search);
+    arrayElement.setAttribute('data-page', (params.has('page') ? params.get('page') : 1));
+    arrayElement.setAttribute('data-show', (params.has('show') ? params.get('show') : 15));
+    arrayElement.setAttribute('data-increment', 15);
+    arrayElement.setAttribute('data-pages', Math.ceil(arrayElement.getAttribute('data-total') / arrayElement.getAttribute('data-show')));
+
+    createPaginationButttons(arrayElement,arrayElement);
   });
 
 

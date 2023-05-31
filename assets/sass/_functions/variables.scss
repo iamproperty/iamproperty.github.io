@@ -427,26 +427,25 @@ $vars: map-merge((
 // #region pagination
 // Default
 $pagination-color: var(--colour-heading);
-$pagination-disabled-color: var(--colour-muted);
+$pagination-disabled-color: var(--colour-border);
 $pagination-bg: transparent;
 $pagination-border-width: 1px;
-$pagination-border-color: var(--colour-border);
+$pagination-border-color: var(--colour-primary);
 
 // Hover and focus
 $pagination-hover-color: var(--colour-heading);
-$pagination-hover-bg: var(--colour-muted);
-$pagination-hover-border-color: var(--colour-border);
-$pagination-focus-color: var(--colour-hover);
-$pagination-focus-bg: var(--colour-muted);
+$pagination-hover-bg: var(--colour-info);
+$pagination-hover-border-color: var(--colour-info);
+$pagination-focus-color: var(--colour-heading);
+$pagination-focus-bg: var(--colour-info);
 
 // Active
-$pagination-active-color: var(--body-bg);
-$pagination-active-bg: var(--colour-heading);
-$pagination-active-border-color: var(--colour-heading);
-
+$pagination-active-color: var(--colour-primary);
+$pagination-active-bg: var(--colour-info);
+$pagination-active-border-color: var(--colour-info);
 // Disabled
 $pagination-disabled-bg: $pagination-bg;
-$pagination-disabled-border-color: $pagination-border-color;
+$pagination-disabled-border-color: var(--colour-border);
 // #endregion
 
 // #region Accordion

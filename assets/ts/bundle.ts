@@ -38,6 +38,9 @@ document.addEventListener("DOMContentLoaded", function() {
   if (!window.customElements.get(`iam-card`))
     window.customElements.define(`iam-card`, iamCard);
 
+  if (!window.customElements.get(`iam-pagination`))
+    window.customElements.define(`iam-pagination`, iamPagination);
+
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
     nav(arrayElement);

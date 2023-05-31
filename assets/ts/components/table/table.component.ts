@@ -1,5 +1,6 @@
 // @ts-nocheck
 import * as tableModule from "../../modules/table";
+import createPaginationButttons from "../../modules/pagination";
 
 class iamTable extends HTMLElement {
 
@@ -49,11 +50,6 @@ class iamTable extends HTMLElement {
     this.table = this.querySelector('table');
     this.savedTableBody = this.querySelector('tbody').cloneNode(true);
     this.pagination = this.shadowRoot.querySelector('.table__pagination');
-    this.pagination.setAttribute('data-page',this.getAttribute('data-page'));
-    this.pagination.setAttribute('data-pages',this.getAttribute('data-pages'));
-    this.pagination.setAttribute('data-show',this.getAttribute('data-show'));
-    this.pagination.setAttribute('data-total',this.getAttribute('data-total'));
-    this.pagination.setAttribute('data-increment',this.getAttribute('data-show'));
 
     // Set events on the filter table
     this.form = document.createElement('form');
@@ -75,8 +71,8 @@ class iamTable extends HTMLElement {
 
     // Event listeners
     tableModule.addTableEventListeners(this.table);
-    tableModule.addFilterEventListeners(this.table, this.form, this.pagination, this.savedTableBody);
-    tableModule.addPaginationEventListeners(this.table, this.form, this.pagination);
+    tableModule.addFilterEventListeners(this.table, this.form, this.pagination, this, this.savedTableBody);
+    tableModule.addPaginationEventListeners(this.table, this.form, this.pagination, this);
     tableModule.addExportEventListeners(this.shadowRoot.querySelector('[data-export]'), this.table);
 
     if(this.form.getAttribute('data-ajax')){
@@ -84,8 +80,8 @@ class iamTable extends HTMLElement {
     }
     else {
       tableModule.makeTableFunctional(this.table, this.form, this.pagination, this);
-      tableModule.filterTable(this.table, this.form);
-      tableModule.createPaginationButttons(this.table, this.form, this.pagination);
+      tableModule.filterTable(this.table, this.form,this);
+      createPaginationButttons(this,this.pagination);
     }
 
   }
@@ -96,6 +92,7 @@ class iamTable extends HTMLElement {
   }
   
   attributeChangedCallback(attrName, oldVal, newVal) {
+    /*
     switch (attrName) {
       case "data-total": {
         this.setAttribute('data-pages', Math.ceil(newVal / this.getAttribute('data-show')));
@@ -108,13 +105,8 @@ class iamTable extends HTMLElement {
       case "data-pages": {
         console.log('create pagination');
 
-            
-        this.pagination.setAttribute('data-pages',this.getAttribute('data-pages'));
-        this.pagination.setAttribute('data-show',this.getAttribute('data-show'));
-        this.pagination.setAttribute('data-total',this.getAttribute('data-total'));
-
         tableModule.filterTable(this.table, this.form);
-        tableModule.createPaginationButttons(this.table, this.form, this.pagination);
+        createPaginationButttons(this,this.pagination);
 
         break;
       }
@@ -129,7 +121,7 @@ class iamTable extends HTMLElement {
         break;
       }
     }
-
+    */
   }
 }
 

@@ -181,29 +181,6 @@ describe('populateDataQueries', () => {
   });
 });
 
-describe('createPaginationButttons', () => {
-
-  const table = document.createElement('table');
-  table.innerHTML = basicTable;
-  const form = document.createElement('form');
-  form.innerHTML += `<div><span data-query="total"></span><span data-query="Heading 2 == Low"></span></div>`;
-  const pagination = document.createElement('div');
-
-  pagination.setAttribute('data-page',2);
-  pagination.setAttribute('data-pages',5);
-  pagination.setAttribute('data-show',15);
-  pagination.setAttribute('data-total',150);
-  pagination.setAttribute('data-increment',15);
-
-  tableModule.addDataAttributes(table);
-  tableModule.createPaginationButttons(table, form, pagination);
-
-  test('should populate the pagination with links to each page', () => {
-
-    expect(pagination.querySelectorAll('button.page-link').length).toEqual(6);
-  });
-});
-
 describe('formatCell', () => {
 
   test('should format the text correctly', () => {

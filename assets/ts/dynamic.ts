@@ -10,7 +10,7 @@ import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 
-const components = ['accordion','header','tabs', 'table','card'];
+const components = ['accordion','header','tabs', 'table','card','pagination'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',

@@ -419,6 +419,14 @@ const routes = [
           title: 'Admin panel | Components | iamkey'
         },
         component: () => import('./views/components/PanelDoc.vue')
+      },
+      {
+        path: 'pagination',
+        name: 'Pagination',
+        meta: {
+          title: 'Pagination | Components | iamkey'
+        },
+        component: () => import('./views/components/PaginationDoc.vue')
       }
     ]
   },
