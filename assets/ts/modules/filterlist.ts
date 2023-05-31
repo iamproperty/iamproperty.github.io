@@ -13,7 +13,7 @@ function addFilterlistEventListeners(list: Element, input:Element) {
     clearTimeout(timer);
       timer = setTimeout(function(){
         filterTheList(list,input.value);
-      }, 1000);
+      }, 500);
   });
 
   input.addEventListener('change', (event) => {
