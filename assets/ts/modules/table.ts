@@ -26,6 +26,11 @@ export const addDataAttributes = (table) => {
         if(heading.hasAttribute('class'))
           cell.setAttribute('class',heading.getAttribute('class'))
 
+        if(heading.hasAttribute('data-format')){
+          cell.setAttribute('data-format',heading.getAttribute('data-format'))
+          cell.innerHTML = formatCell('date',cell.textContent.trim()); //Make sure date format is consistent
+        }
+
         if(statuses.includes(cell.textContent.trim())){
           cell.setAttribute('data-content',cell.textContent.trim());
         }
@@ -139,11 +144,11 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
     clearTimeout(timer);
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]') && event.target.closest('[data-search]').value.length >= 3){
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
 
       timer = setTimeout(function(){
         formSubmit();
-      }, 1000);
+      }, 500);
     };
   });
 
@@ -198,6 +203,10 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')){
       
       form.reset();
+
+      if(!form.hasAttribute('data-submit'))
+        sortTable(table, form, savedTableBody);
+
       formSubmit();
     }
   });
@@ -225,10 +234,12 @@ export const sortTable = (table, form, savedTableBody) => {
 
   let sortBy = selectedOption.getAttribute('data-sort');
   let order = selectedOption.getAttribute('data-order');
+  let format = selectedOption.getAttribute('data-format');
 
   if(!sortBy){
     
     tbody.innerHTML = savedTableBody.innerHTML;
+    addDataAttributes(table);
     return false;
   }
 
@@ -251,6 +262,10 @@ export const sortTable = (table, form, savedTableBody) => {
     if(isNumeric(rowIndex))
       rowIndex = zeroPad(rowIndex,10)
 
+    // If the sort format is date then lets transform the index to a sortable date (this is never displayed)
+    if(format && format == "date")
+      rowIndex = new Date(rowIndex);
+    
     const dataRow = {
       index: rowIndex,
       row: tableRow
@@ -297,18 +312,23 @@ export const filterTable = (table, form, wrapper) => {
       return;
     }
 
+
     if(filterInput.getAttribute('data-filter') == "multi"){
 
       for (const [key, value] of Object.entries(JSON.parse(filterInput.value))) {
-        filters.push({'column':`${key}`,'value':`${value}`});
+        filters[filterInput.getAttribute('data-filter')].push(value);
       }
     }
     else if (filterInput.value) {
 
-      filters.push({'column':`${filterInput.getAttribute('data-filter')}`,'value':`${filterInput.value}`});
+      if(!filters[filterInput.getAttribute('data-filter')])
+        filters[filterInput.getAttribute('data-filter')] = new Array();
+
+      filters[filterInput.getAttribute('data-filter')].push(filterInput.value);
     }
 
   });
+
 
   // Add search columns too
   if(form.querySelector('[data-search]')){
@@ -338,41 +358,132 @@ export const filterTable = (table, form, wrapper) => {
   
   table.classList.add('table--filtered');
 
+  // Reset
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-
-    row.classList.remove('filtered--match');
+    row.classList.remove('filtered');
+    row.classList.remove('filtered--matched');
     row.classList.remove('filtered--show');
+    
+    row.removeAttribute('data-filtered-by');
+  });
 
-    let isMatched = filters.length == 0 ? true : false;
-    let isSearched = searches.length > 0 && searches[0].value.length >= 3 ? false : true;
+  // Filter the table
 
-    filters.forEach((filter, index) => {
+  for (const [key, filterValue] of Object.entries(filters)) {
+    
+    console.log(filterValue)
+    Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
 
-      let filterTd = row.querySelector(`[data-label="${filter.column}"]`)
+      let isMatched = false;
+      filterValue.forEach((filter, index) => {
 
-      if(filterTd && filterTd.textContent.toLowerCase().includes(filter.value.toLowerCase())){
-        isMatched = true;
+        let filterTd = row.querySelector(`[data-label="${key}"]`)
+
+        // Dynamic values
+        if(filter && filter == "$today")
+          filter = formatCell('date', new Date());
+        else if(filter && filter == "$yesterday"){
+
+          let yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          filter = formatCell('date', yesterday);
+        }
+        else if(filter && (filter == "$thisWeek" || filter == "$lastWeek")){
+
+          let today = new Date();
+          let mondayThisWeek = new Date(today.setDate(today.getDate() - (today.getDay()-1)));
+          let sundayThisWeek = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+          let checkDate = new Date(filterTd.textContent.toLowerCase());
+
+          today.setHours(0, 0, 0, 0);
+          mondayThisWeek.setHours(0, 0, 0, 0);
+          sundayThisWeek.setHours(0, 0, 0, 0);
+          checkDate.setHours(0, 0, 0, 0);
+
+          if(filter == "$thisWeek"){
+            isMatched = (checkDate >= mondayThisWeek && checkDate <= sundayThisWeek);
+          }
+          else {
+            let mondayLastWeek = new Date(mondayThisWeek.setDate(mondayThisWeek.getDate() - 7));
+            let sundayLastWeek = new Date(sundayThisWeek.setDate(sundayThisWeek.getDate() - 7));
+
+            mondayLastWeek.setHours(0, 0, 0, 0);
+            sundayLastWeek.setHours(0, 0, 0, 0);
+
+            isMatched = (checkDate >= mondayLastWeek && checkDate <= sundayLastWeek);
+          }
+        }
+        else if(filter && filter == "$thisMonth"){
+
+          let today = new Date(), year = today.getFullYear(), month = today.getMonth();
+
+          var firstDayMonth = new Date(year, month, 1);
+          var lastDayMonth = new Date(year, month + 1, 0);
+          let checkDate = new Date(filterTd.textContent.toLowerCase());
+
+          firstDayMonth.setHours(0, 0, 0, 0);
+          lastDayMonth.setHours(0, 0, 0, 0);
+          checkDate.setHours(0, 0, 0, 0);
+
+          isMatched = (checkDate >= firstDayMonth && checkDate <= lastDayMonth);
+        }
+        else if(filter && filter == "$lastMonth"){
+
+          let today = new Date(), year = today.getFullYear(), month = today.getMonth();
+
+          var firstDayLastMonth = new Date(year, month - 1, 1);
+          var lastDayLastMonth = new Date(year, month, 0);
+          let checkDate = new Date(filterTd.textContent.toLowerCase());
+
+          firstDayLastMonth.setHours(0, 0, 0, 0);
+          lastDayLastMonth.setHours(0, 0, 0, 0);
+          checkDate.setHours(0, 0, 0, 0);
+
+          isMatched = (checkDate >= firstDayLastMonth && checkDate <= lastDayLastMonth);
+        }
+        
+        if(filterTd && filterTd.textContent.toLowerCase().includes(filter.toLowerCase())){
+          isMatched = true;
+        }
+
+      });
+
+      if(!isMatched){
+
+        row.classList.add('filtered');
+        row.setAttribute('data-filtered-by',key)
       }
+    
     });
-
+  }
+  // Search whats left of the table after filtering
+  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
+    
+    let isSearched = searches.length > 0 && searches[0].value.length >= 3 ? false : true;
+      
     searches.forEach((search, index) => {
 
-      let searchTd = row.querySelector(`[data-label="${search.column}"]`)
+      let searchTd = row.querySelector(`[data-label="${search.column}"]`);
+
       if(searchTd && search.value.length >= 3 && searchTd.textContent.toLowerCase().includes(search.value.toLowerCase())){
         isSearched = true;
       }
+
     });
 
-    // You pass all the filters ass the class back
-    if(isMatched && isSearched){
-      
-      matched++;
+    if(!isSearched)
+      row.classList.add('filtered');
+  });
 
-      row.classList.add('filtered--matched');
-      // pagination bit 
-      if(Math.ceil(matched/showRows) == parseInt(page))
-        row.classList.add('filtered--show');
-    }
+  // Work out what to display after pagination
+  Array.from(table.querySelectorAll('tbody tr:not(.filtered')).forEach((row, index) => {
+
+    matched++;
+
+    row.classList.add('filtered--matched');
+    // pagination bit 
+    if(Math.ceil(matched/showRows) == parseInt(page))
+      row.classList.add('filtered--show');
   });
 
   if(wrapper){
@@ -381,6 +492,8 @@ export const filterTable = (table, form, wrapper) => {
     wrapper.setAttribute('data-total',matched);
     wrapper.setAttribute('data-show',showRows);
   }
+
+  populateDataQueries(table,form);
 }
 
 export const populateDataQueries = (table,form) => {
@@ -393,13 +506,29 @@ export const populateDataQueries = (table,form) => {
     let numberOfMatchedRows: 0;
 
     if(query == 'total'){
-      numberOfMatchedRows = table.classList.contains('table--filtered') ? table.querySelectorAll('tbody tr.filtered--matched').length : table.querySelectorAll('tbody tr').length;
+      numberOfMatchedRows = table.classList.contains('table--filtered') ? table.querySelectorAll('tbody tr:not(.filtered)').length : table.querySelectorAll('tbody tr').length;
+    }
+    else if(!query.includes(' == ') && query.includes(' & ')){
+
+      let queries = query.split(' & ');
+      let selector = '';
+
+      queries.forEach(element => {
+        selector += `:not([data-filtered-by="${element}"])`;
+      });
+
+      console.log(selector)
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr${selector}`)).length;
+    }
+    else if(!query.includes(' == ')){
+
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr:not([data-filtered-by="${query}"])`)).length;
     }
     else if(query.includes(' && ')){
 
       let queries = query.split(' && ');
 
-      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr`)).filter(function(row){
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr:not(.filtered)`)).filter(function(row){
 
         let matched = true;
 
@@ -418,8 +547,8 @@ export const populateDataQueries = (table,form) => {
     else {
 
       let queryParts = query.split(' == ');
-
-      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody td[data-label="${queryParts[0]}"]`)).filter(function(element){
+      console.log(queryParts[0]);
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr.filtered--matched td[data-label="${queryParts[0]}"], tbody tr[data-filtered-by="${queryParts[0]}"] td[data-label="${queryParts[0]}"]`)).filter(function(element){
         return element.textContent === queryParts[1];
       }).length;
     }
@@ -611,7 +740,7 @@ export const formatCell = (format, cellOutput) => {
 
   switch (format) {
     case 'date':
-      cellOutput = new Date(cellOutput).toLocaleDateString('en-gb', { year:"numeric", month:"long", day: "numeric"});
+      cellOutput = new Date(cellOutput).toLocaleDateString('en-gb', { year:"2-digit", month:"long", day: "numeric"});
     break;
     case 'capitalise':
       cellOutput = ucfirst(cellOutput);
