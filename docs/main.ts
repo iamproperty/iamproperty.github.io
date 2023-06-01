@@ -3,8 +3,9 @@ import App from './App.vue'
 import Standalone from './Standalone.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
-
 import audit from '../audit.json';
+import * as helpers from '../assets/ts/modules/helpers'
+
 
 import createDataLayer from '../assets/ts/modules/data-layer'
 
@@ -95,8 +96,6 @@ let template = window.location.pathname.startsWith('/standalone') || window.loca
 let app = createApp(template)
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
-
-import * as helpers from '../assets/ts/modules/helpers'
 
 helpers.addBodyClasses(document.body);
 helpers.addGlobalEvents(document.body);

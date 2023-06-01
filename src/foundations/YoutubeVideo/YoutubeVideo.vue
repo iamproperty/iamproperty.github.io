@@ -10,7 +10,7 @@
 import youtubeVideo from '../../../assets/ts/modules/youtubevideo'
 
 export default {
-  name: 'YoutuveVideo',
+  name: 'YoutubeVideo',
   props: {
     video: {
       type: String,

@@ -1,4 +1,6 @@
 // @ts-nocheck
+import { createEmbed } from "./youtubevideo"; 
+
 /** 
  * Global helper functions to help maintain and enhance framework elements.
  * @module Helpers 
@@ -26,7 +28,6 @@ export const addBodyClasses = (body) => {
  */
 export const addGlobalEvents = (body) => {
   
-
   const checkElements = function(hash){
 
     const label = document.querySelector(`label[for="${hash.replace('#','')}"]`);
@@ -64,6 +65,7 @@ export const addGlobalEvents = (body) => {
   // Dialogs/modals
   document.addEventListener('click', (event) => {
 
+    // Modal
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-modal]')){
 
       const button = event.target.closest('[data-modal]');
@@ -76,16 +78,59 @@ export const addGlobalEvents = (body) => {
       else if(!dialog.parentNode.closest('form') && !dialog.querySelector(':scope > form:first-child'))
         dialog.innerHTML = `<form><button class="dialog__close" formmethod="dialog">Close</button></form>${dialog.innerHTML}`;
 
-      dialog.showModal();
-    };
 
+      let videoButton = dialog.querySelector('.youtube-embed a');
+
+      if (videoButton){
+        createEmbed(videoButton)
+      }
+
+      dialog.showModal();
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        "event": "openModal",
+        "id": modalID
+      });
+    };
+    // Close modal
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
       const dialog = event.target.closest('dialog[open]');
       const dialogDimensions = dialog.getBoundingClientRect()
       if (event.clientX < dialogDimensions.left || event.clientX > dialogDimensions.right || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
         dialog.close()
+        
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          "event": "closeModal",
+          "id": dialog.getAttribute('id')
+        });
       }
     }
+
+    // Popover
+    if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')){
+
+      let btn = event.target.closest('.dialog__wrapper > button');
+      let parent = event.target.closest('.dialog__wrapper > button').parentNode;
+      let dataEvent = "openPopover"
+      let popover = parent.querySelector(':scope > dialog');
+      
+      if(popover.hasAttribute('open')){
+        
+        popover.close();
+        dataEvent = "closePopover"
+      }
+      else
+        popover.show();
+
+      window.dataLayer = window.dataLayer || [];
+      
+      window.dataLayer.push({
+        "event": dataEvent,
+        "id": btn.textContent
+      });
+    };
   });
 
   return null

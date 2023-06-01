@@ -8,13 +8,14 @@ import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
-import modal from '../js/modules/modal'
 import iamHeader from './components/header/header.component'
 import iamAccordion from './components/accordion/accordion.component'
 import iamTabs from './components/tabs/tabs.component'
 import iamTable from './components/table/table.component'
 import iamCard from './components/card/card.component'
 import iamAppliedFilters from './components/applied-filters/applied-filters.component'
+import iamPagination from './components/pagination/pagination.component'
+import iamFilterlist from './components/filterlist/filterlist.component'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -39,6 +40,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (!window.customElements.get(`iam-card`))
     window.customElements.define(`iam-card`, iamCard);
+  
+  if (!window.customElements.get(`iam-filterlist`))
+    window.customElements.define(`iam-filterlist`, iamFilterlist);
+
+  if (!window.customElements.get(`iam-pagination`))
+    window.customElements.define(`iam-pagination`, iamPagination);
 
   if (!window.customElements.get(`iam-applied-filters`))
     window.customElements.define(`iam-applied-filters`, iamAppliedFilters);
@@ -61,10 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // Form
   Array.from(document.querySelectorAll('form')).forEach((arrayElement) => {
     form(arrayElement);
-  });
-  // Modal
-  Array.from(document.querySelectorAll('.modal')).forEach((arrayElement) => {
-    modal(arrayElement);
   });
   // YouTube videos
   Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {

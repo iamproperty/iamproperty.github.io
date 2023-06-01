@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { zeroPad, isNumeric, ucfirst } from "./helpers";
+import createPaginationButttons from "./pagination";
 
 // Basic functionality needed
 export const addDataAttributes = (table) => {
@@ -117,7 +118,7 @@ export const createSearchDataList = (table, form) => {
   inputWrapper.querySelector('datalist').innerHTML = `${Object.keys(searchableTerms).map(term => `<option value="${term}"></option>`).join("")}`;
 }
 
-export const addFilterEventListeners = (table, form, pagination, savedTableBody) => {
+export const addFilterEventListeners = (table, form, pagination, wrapper, savedTableBody) => {
 
   var timer;
 
@@ -125,12 +126,12 @@ export const addFilterEventListeners = (table, form, pagination, savedTableBody)
   let formSubmit = function(){
       
     if(form.hasAttribute('data-ajax'))
-      loadAjaxTable(table, form, pagination);
+      loadAjaxTable(table, form, pagination,wrapper);
     else if(form.hasAttribute('data-submit'))
       form.submit();
     else {
-      filterTable(table, form, pagination); 
-      createPaginationButttons(table, form, pagination);
+      filterTable(table, form, wrapper);
+      createPaginationButttons(wrapper,pagination);
     }
   }
 
@@ -272,7 +273,7 @@ export const sortTable = (table, form, savedTableBody) => {
   tbody.innerHTML = strTbody;
 }
 
-export const filterTable = (table, form, pagination) => {
+export const filterTable = (table, form, wrapper) => {
 
   table.classList.remove('table--filtered');
 
@@ -374,12 +375,11 @@ export const filterTable = (table, form, pagination) => {
     }
   });
 
-  if(pagination){
-    
-    pagination.setAttribute('data-page',page);
-    pagination.setAttribute('data-pages',Math.ceil(matched/showRows));
-    pagination.setAttribute('data-total',matched);
-    pagination.setAttribute('data-show',showRows);
+  if(wrapper){
+    wrapper.setAttribute('data-page',page);
+    wrapper.setAttribute('data-pages',Math.ceil(matched/showRows));
+    wrapper.setAttribute('data-total',matched);
+    wrapper.setAttribute('data-show',showRows);
   }
 }
 
@@ -432,60 +432,19 @@ export const populateDataQueries = (table,form) => {
 }
 
 // Pagination
-export const createPaginationButttons = function(table, form, pagination){
-  
-  if(!pagination.getAttribute('data-pages'))
-    return false;
+export const addPaginationEventListeners = function(table, form, pagination, wrapper){
 
-  if(!pagination.getAttribute('data-page'))
-  pagination.setAttribute('data-page', 1);
+  pagination.addEventListener('click', (event) => {
 
-  let currentPage = pagination.getAttribute('data-page');
-  let numberPages = pagination.getAttribute('data-pages');
-  let numberRows = pagination.getAttribute('data-total');
-  let showRows = pagination.getAttribute('data-show');
-  let addRows = pagination.getAttribute('data-increment');
-
-  if(numberPages <= 1){
-    
-    pagination.innerHTML = '';
-    return false;
-  }
-  
-  let strButtons = '';
-
-  for (let i = 1; i <= numberPages; i++) {
-
-    if(i == currentPage)
-      strButtons += `<li class="page-item active" aria-current="page"><span class="page-link">${i}</span></li>`;
-    else
-      strButtons += `<li class="page-item"><button class="page-link" data-page="${i}">${i}</button></li>`;
-  }
-
-  pagination.innerHTML = `<ul class="pagination mb-3 d-none d-sm-flex">
-    ${currentPage == 1 ? `<li class="page-item disabled"><span class="page-link">Previous</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(currentPage)-1}">Previous</button></li>`}
-    ${strButtons}
-    ${currentPage == numberPages ? `<li class="page-item disabled"><span class="page-link">Next</span></li>` : `<li class="page-item"><button class="page-link" data-page="${parseInt(currentPage)+1}">Next</button></li>`}
-  </ul>`;
-  pagination.innerHTML += `<div class="d-sm-none">
-  <span>You've viewed ${showRows} of ${numberRows} results</span>
-  <button type="button" data-show="${parseInt(showRows)+parseInt(addRows)}">Load more results</button>
-  </div>`;
-}
-
-export const addPaginationEventListeners = function(table, form, wrapper){
-
-  wrapper.addEventListener('click', (event) => {
-
-    if (event && event.target instanceof HTMLElement && event.target.closest('button[data-page]')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-page]')){
       
-      let paginationInput = form.querySelector('[data-pagination]');
-      let newPage = event.target.closest('button[data-page]').getAttribute('data-page');
-      paginationInput.value = newPage;
+      event.preventDefault();
 
-      form.dispatchEvent(new Event("submit"));
+      let paginationInput = form.querySelector('[data-pagination]');
+      let newPage = event.target.closest('[data-page]').getAttribute('data-page');
+      paginationInput.value = newPage;
       wrapper.setAttribute('data-page', newPage);
-      createPaginationButttons(table, form, wrapper);
+      form.dispatchEvent(new Event("submit"));
 
       const url = new URL(location);
       url.searchParams.set("page", newPage);
@@ -494,12 +453,12 @@ export const addPaginationEventListeners = function(table, form, wrapper){
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
 
+      event.preventDefault();
       let showInput = form.querySelector('[data-show]');
       let showRows = event.target.closest('[data-show]').getAttribute('data-show');
       showInput.value = showRows;
-
-      form.dispatchEvent(new Event("submit"));
       wrapper.setAttribute('data-show', showRows);
+      form.dispatchEvent(new Event("submit"));
     }
   });
 }
@@ -583,10 +542,9 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
   let columns = table.querySelectorAll('thead tr th');
   let tbody = table.querySelector('tbody');
 
-  fetch(form.getAttribute('data-ajax')+'?'+queryString, {
+  fetch(form.getAttribute('data-ajax'), {
     method: 'get',
     credentials: 'same-origin',
-    //signal: controller.signal,
     headers: new Headers({
       'Content-Type': 'application/json',
       Accept: 'application/json',
@@ -631,11 +589,11 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
       // Add data to the pagination 
       makeTableFunctional(table, form, pagination, wrapper);
 
-      pagination.setAttribute('data-total', (response.meta.total ? response.meta.total : 1));
-      pagination.setAttribute('data-page', (response.meta.current_page ? response.meta.current_page : 1));
-      pagination.setAttribute('data-pages', Math.ceil(pagination.getAttribute('data-total') / pagination.getAttribute('data-show')));
+      wrapper.setAttribute('data-total', (response.meta.total ? response.meta.total : 1));
+      wrapper.setAttribute('data-page', (response.meta.current_page ? response.meta.current_page : 1));
+      wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
-      createPaginationButttons(table, form, pagination);
+      createPaginationButttons(wrapper, pagination);
 
       if(response.data.length == 0){
         tbody.innerHTML = '<tr><td colspan="100%"><span class="h4 m-0">No results found</span></td></tr>';

@@ -16,7 +16,6 @@ export { default as Header } from './components/Header/Header.vue'
 export { default as Testimonial } from './components/Testimonial/Testimonial.vue'
 export { default as PropertySearchbar } from './components/PropertySearchbar/PropertySearchbar.vue'
 export { default as Nav } from './components/Nav/Nav.vue'
-export { default as Modal } from './components/Modal/Modal.vue'
 
 export { default as Stepper } from './components/Stepper/Stepper.vue'
 export { default as Step } from './components/Stepper/Step.vue'
@@ -26,3 +25,4 @@ export { default as Alert } from './components/Alert/Alert.vue'
 export { default as NoteFeed } from './components/NoteFeed/NoteFeed.vue'
 
 export { default as AppliedFilters } from './components/AppliedFilters/AppliedFilters.vue'
+export { default as Filterlist } from './components/Filterlist/Filterlist.vue'

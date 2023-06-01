@@ -175,6 +175,14 @@ const routes = [
         component: () => import('./views/components/ChartsDoc.vue')
       },
       {
+        path: 'filterlist',
+        name: 'Filter list',
+        meta: {
+          title: 'Filter list | Components | iamkey'
+        },
+        component: () => import('./views/components/FilterlistDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {
@@ -183,12 +191,12 @@ const routes = [
         component: () => import('./views/components/Header.vue')
       },
       {
-        path: 'modal',
-        name: 'Modal',
+        path: 'dialog',
+        name: 'Dialog (Modal and popover)',
         meta: {
-          title: 'Modal | Components | iamkey'
+          title: 'Dialog (Modal and popover) | Components | iamkey'
         },
-        component: () => import('./views/components/ModalDoc.vue')
+        component: () => import('./views/components/DialogDoc.vue')
       },
       {
         path: 'nav',
@@ -427,6 +435,14 @@ const routes = [
           title: 'Admin panel | Components | iamkey'
         },
         component: () => import('./views/components/PanelDoc.vue')
+      },
+      {
+        path: 'pagination',
+        name: 'Pagination',
+        meta: {
+          title: 'Pagination | Components | iamkey'
+        },
+        component: () => import('./views/components/PaginationDoc.vue')
       }
     ]
   },
@@ -570,14 +586,6 @@ const routes = [
           title: 'iam sold | iamkey'
         },
         component: () => import('./views/standalone/IamsoldAdmin.vue')
-      },
-      {
-        path: 'completions-dashboard',
-        name: "Completions dashboard",
-        meta: {
-          title: 'Completions dashboard | iamkey'
-        },
-        component: () => import('./views/standalone/CompletionsDashboard.vue')
       },
       {
         path: 'marketplace',
