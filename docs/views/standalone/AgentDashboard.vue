@@ -64,8 +64,7 @@
           
 
         </div>
-        
-      </div>
+
             <div class="container">
 
               <span class="h4"><span data-query="total"></span> <div class="form-control__wrapper form-control--inline-text"><label for="clients-added">Clients added </label><select id="clients-added" class="form-select" data-filter="Date added">
@@ -138,29 +137,29 @@
           </div>
 
               <dialog id="filters">
-                <span class="h3">Filter by</span>
-                <iam-applied-filters></iam-applied-filters>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level" >
-                  <label for="risk-level-high" class="form-label form-check-label">High</label>
-                </div>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="Medium" id="risk-level-medium" class="form-check-input" data-filter-text="Risk Level - Medium" data-filter="Risk level">
-                  <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
-                </div>
-                <div class="form-check">
-                  <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
-                  <label for="risk-level-low" class="form-label form-check-label">Low</label>
-                </div>
+                
+                <AppliedFilters>
+                  <div class="form-check">
+                    <input type="radio" name="risk-level" value="High" id="risk-level-high" class="form-check-input" data-filter-text="Risk Level - High" data-filter="Risk level" v-model="checked">
+                    <label for="risk-level-high" class="form-label form-check-label">High</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" name="risk-level" value="Medium" id="risk-level-medium" class="form-check-input" data-filter-text="Risk Level - Medium" data-filter="Risk level">
+                    <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" name="risk-level" value="Low" id="risk-level-low" class="form-check-input" data-filter-text="Risk Level - Low" data-filter="Risk level">
+                    <label for="risk-level-low" class="form-label form-check-label">Low</label>
+                  </div>
 
-                <hr/>
+                  <hr/>
 
-                <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
-                  <label class="form-label" for="date-from">Date range</label>
-                  <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
-                  <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
-                </div>
-
+                  <div class="form-control__wrapper" data-filter-text="Date between: $1 - $2">
+                    <label class="form-label" for="date-from">Date range</label>
+                    <input class="form-control" type="date" name="date-from" id="date-from" data-filter-text="Date from - $value" />
+                    <input class="form-control" type="date" name="date-to" id="date-to" data-filter-text="Date to - $value" />
+                  </div>
+                </AppliedFilters>
                 <button class="btn btn-primary d-block m-auto" type="submit">Update results</button>
               </dialog>
 
@@ -1782,6 +1781,7 @@
 
 
           </div>
+     
     </main>
   </div>
 </template>
@@ -1828,6 +1828,7 @@ form {
 import Nav from '@/components/Nav/Nav.vue'
 import Table from '@/components/Table/Table.vue'
 import Card from '@/components/Card/Card.vue'
+import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue'
 import Filterlist from '@/components/Filterlist/Filterlist.vue'
 
 export default {
@@ -1835,6 +1836,7 @@ export default {
     Nav,
     Table,
     Card,
+    AppliedFilters,
     Filterlist
   },
   computed: {

@@ -13,6 +13,8 @@ import iamAccordion from './components/accordion/accordion.component'
 import iamTabs from './components/tabs/tabs.component'
 import iamTable from './components/table/table.component'
 import iamCard from './components/card/card.component'
+import iamAppliedFilters from './components/applied-filters/applied-filters.component'
+import iamPagination from './components/pagination/pagination.component'
 import iamFilterlist from './components/filterlist/filterlist.component'
 
 // Attach classes to dom elements
@@ -44,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (!window.customElements.get(`iam-pagination`))
     window.customElements.define(`iam-pagination`, iamPagination);
+
+  if (!window.customElements.get(`iam-applied-filters`))
+    window.customElements.define(`iam-applied-filters`, iamAppliedFilters);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
