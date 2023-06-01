@@ -17,18 +17,13 @@
 
             <button class="btn btn-tertiary me-0 nowrap" aria-label="Display filters of who's work to include"><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
             <dialog>
-              <div class="form-control__wrapper">
-                <label for="search" class="form-label d-none d-sm-block">Search</label>
-                <span class="suffix" role="presentation"><i class="fa fa-light fa-search" aria-hidden="true"></i></span>
-                <input name="search" id="search" type="text" class="form-control" autocomplete="off">
-              </div>
 
+              <Filterlist data-max-height="small">
               <input type="checkbox" id="pipeline1" class="form-check-input" :value="`Alice Knowles`" dta-filter="" v-model="checked" >
               <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input" value="Ethan Ramirez">
               <input type="checkbox" name="pipeline[]" id="pipeline3" class="form-check-input" value="Sophia Patel">
               <input type="checkbox" name="pipeline[]" id="pipeline4" class="form-check-input" value="Noah Jenkins">
               <input type="checkbox" name="pipeline[]" id="pipeline5" class="form-check-input" value="Ava Thompson">
-
               <ul class="list-unstyled">
                 <li vlaue="Alice Knowles">
                   <div class="form-check">
@@ -58,14 +53,16 @@
                   </div>                  
                 </li>
               </ul>
-
+              </Filterlist>
 
               <button type="submit" class="btn btn-secondary">Update</button>
 
-
             </dialog>
+
             </div>
           </div>
+          
+
         </div>
         
       </div>
@@ -1831,12 +1828,14 @@ form {
 import Nav from '@/components/Nav/Nav.vue'
 import Table from '@/components/Table/Table.vue'
 import Card from '@/components/Card/Card.vue'
+import Filterlist from '@/components/Filterlist/Filterlist.vue'
 
 export default {
   components: {
     Nav,
     Table,
-    Card
+    Card,
+    Filterlist
   },
   computed: {
     checked: {

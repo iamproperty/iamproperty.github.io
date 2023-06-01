@@ -13,6 +13,7 @@ import iamAccordion from './components/accordion/accordion.component'
 import iamTabs from './components/tabs/tabs.component'
 import iamTable from './components/table/table.component'
 import iamCard from './components/card/card.component'
+import iamFilterlist from './components/filterlist/filterlist.component'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -37,6 +38,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (!window.customElements.get(`iam-card`))
     window.customElements.define(`iam-card`, iamCard);
+  
+  if (!window.customElements.get(`iam-filterlist`))
+    window.customElements.define(`iam-filterlist`, iamFilterlist);
 
   if (!window.customElements.get(`iam-pagination`))
     window.customElements.define(`iam-pagination`, iamPagination);

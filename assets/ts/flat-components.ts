@@ -10,6 +10,7 @@ import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 import tabs from '../js/modules/tabs'
+import filterlist from '../js/modules/filterlist'
 import createPaginationButttons from '../js/modules/pagination'
 
 // Attach classes to dom elements
@@ -68,6 +69,12 @@ document.addEventListener("DOMContentLoaded", function() {
     tabs(arrayElement);
   });
 
+  // filterlist
+  Array.from(document.querySelectorAll('.iam-filterlist')).forEach((arrayElement) => {
+    if(arrayElement.hasAttribute('data-input') && document.querySelector(arrayElement.getAttribute('data-input')))
+      filterlist(arrayElement.querySelector('ul'),document.querySelector(arrayElement.getAttribute('data-input')));
+  });
+  
   Array.from(document.querySelectorAll('.pagination__wrapper')).forEach((arrayElement) => {
 
 
