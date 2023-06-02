@@ -97,3 +97,29 @@ a,
     }
   }
 }
+
+// Support card component
+:is(a,button,label):has(.card, iam-card){
+  &:before {
+    display: none;
+  }
+  border: none;
+  background: none;
+  padding:0;
+  display: flex;
+  margin: 0 0 rem(24) 0;
+  outline: none!important;
+
+  &:not(.d-inline-block){
+      
+    width: 100%;
+  }
+
+  iam-card {
+    width: 100%;
+  }
+}
+
+.col > :is(a,button):has(.card, iam-card):first-child:last-child{
+  min-height: calc(100% - rem(24));
+}

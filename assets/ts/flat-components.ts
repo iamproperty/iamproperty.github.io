@@ -1,23 +1,27 @@
 // @ts-nocheck
 // Modules
 import * as helpers from '../js/modules/helpers'
+import createDataLayer from '../js/modules/data-layer'
 import nav from '../js/modules/nav'
-import table from '../js/modules/table'
+import * as tableModule from './modules/table'
 import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
-import modal from '../js/modules/modal'
 import tabs from '../js/modules/tabs'
+import filterlist from '../js/modules/filterlist'
+import createPaginationButttons from '../js/modules/pagination'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
 
+  createDataLayer();
+
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
-  helpers.checkElements(document.body);
+  //helpers.checkElements(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
@@ -25,8 +29,18 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // Advanced tables
-  Array.from(document.querySelectorAll('.table__wrapper')).forEach((arrayElement) => {
-    table(arrayElement);
+  Array.from(document.querySelectorAll('table')).forEach((arrayElement) => {
+
+    tableModule.addTableEventListeners(arrayElement);
+    tableModule.createMobileButton(arrayElement);
+    tableModule.addDataAttributes(arrayElement);
+
+
+    if(arrayElement.closest('.table--cta')){
+
+      const largestWidth = tableModule.getLargestLastColWidth(arrayElement);
+      arrayElement.closest('.table--cta').style.setProperty("--cta-width", `${largestWidth}rem`);
+    }
   });
 
   // Accordions
@@ -46,10 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('form')).forEach((arrayElement) => {
     form(arrayElement);
   });
-  // Modal
-  Array.from(document.querySelectorAll('.modal')).forEach((arrayElement) => {
-    modal(arrayElement);
-  });
   // YouTube videos
   Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {
     new youtubeVideo(arrayElement);
@@ -57,6 +67,24 @@ document.addEventListener("DOMContentLoaded", function() {
   // Tabs
   Array.from(document.querySelectorAll('.tabs')).forEach((arrayElement) => {
     tabs(arrayElement);
+  });
+
+  // filterlist
+  Array.from(document.querySelectorAll('.iam-filterlist')).forEach((arrayElement) => {
+    if(arrayElement.hasAttribute('data-input') && document.querySelector(arrayElement.getAttribute('data-input')))
+      filterlist(arrayElement.querySelector('ul'),document.querySelector(arrayElement.getAttribute('data-input')));
+  });
+  
+  Array.from(document.querySelectorAll('.pagination__wrapper')).forEach((arrayElement) => {
+
+
+    const params = new URLSearchParams(window.location.search);
+    arrayElement.setAttribute('data-page', (params.has('page') ? params.get('page') : 1));
+    arrayElement.setAttribute('data-show', (params.has('show') ? params.get('show') : 15));
+    arrayElement.setAttribute('data-increment', 15);
+    arrayElement.setAttribute('data-pages', Math.ceil(arrayElement.getAttribute('data-total') / arrayElement.getAttribute('data-show')));
+
+    createPaginationButttons(arrayElement,arrayElement);
   });
 
 

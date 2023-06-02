@@ -27,6 +27,11 @@
       <h2>Multi select</h2>
       <Input type="select" id="test3" label="Label" :options="[{display:'One',value:'1'},{display:'Two',value:'2'},{display:'Three',value:'3'},{display:'Four',value:'4'},{display:'Five',value:'5'},{display:'Six',value:'6'},{display:'Seven',value:'7'},{display:'Eight',value:'8'},{display:'Nine',value:'9'},{display:'Ten',value:'10'}]" multiple="multiple"></Input>
       
+
+
+      <h2>Inline-text select</h2>
+      <span class="h4"><span data-query="total"></span> <div class="form-control__wrapper form-control--inline-text"><label for="clients-added">Clients added </label><select id="clients-added" class="form-select"><option>in total</option></select></div></span>
+
     </div>
     
     <div class="container">

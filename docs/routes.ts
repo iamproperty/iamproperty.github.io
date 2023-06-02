@@ -143,20 +143,20 @@ const routes = [
         component: () => import('./views/components/AlertDoc.vue')
       },
       {
+        path: 'applied-filters',
+        name: 'Applied Filters',
+        meta: {
+          title: 'Applied Filters | Components | iamkey'
+        },
+        component: () => import('./views/components/AppliedFiltersDoc.vue')
+      },
+      {
         path: 'banner',
         name: 'Banner',
         meta: {
           title: 'Banner | Components | iamkey'
         },
         component: () => import('./views/components/BannerDoc.vue')
-      },
-      {
-        path: 'card-deck',
-        name: 'Card Deck',
-        meta: {
-          title: 'Card Deck | Components | iamkey'
-        },
-        component: () => import('./views/components/CardDeckDoc.vue')
       },
       {
         path: 'carousel',
@@ -175,6 +175,14 @@ const routes = [
         component: () => import('./views/components/ChartsDoc.vue')
       },
       {
+        path: 'filterlist',
+        name: 'Filter list',
+        meta: {
+          title: 'Filter list | Components | iamkey'
+        },
+        component: () => import('./views/components/FilterlistDoc.vue')
+      },
+      {
         path: 'header',
         name: 'Header',
         meta: {
@@ -183,12 +191,12 @@ const routes = [
         component: () => import('./views/components/Header.vue')
       },
       {
-        path: 'modal',
-        name: 'Modal',
+        path: 'dialog',
+        name: 'Dialog (Modal and popover)',
         meta: {
-          title: 'Modal | Components | iamkey'
+          title: 'Dialog (Modal and popover) | Components | iamkey'
         },
-        component: () => import('./views/components/ModalDoc.vue')
+        component: () => import('./views/components/DialogDoc.vue')
       },
       {
         path: 'nav',
@@ -292,14 +300,6 @@ const routes = [
           title: 'Tables | Elements | iamkey'
         },
         component: () => import('./views/components/Tables.vue')
-      },
-      {
-        path: 'advanced-tables',
-        name: 'Advanced Tables',
-        meta: {
-          title: 'Advanced Tables | Elements | iamkey'
-        },
-        component: () => import('./views/components/AdvancedTables.vue')
       },
       {
         path: 'tooltips',
@@ -435,6 +435,14 @@ const routes = [
           title: 'Admin panel | Components | iamkey'
         },
         component: () => import('./views/components/PanelDoc.vue')
+      },
+      {
+        path: 'pagination',
+        name: 'Pagination',
+        meta: {
+          title: 'Pagination | Components | iamkey'
+        },
+        component: () => import('./views/components/PaginationDoc.vue')
       }
     ]
   },
@@ -527,14 +535,6 @@ const routes = [
         component: () => import('./views/examples/Charts.vue')
       },
       {
-        path: 'related-cards',
-        component: () => import('./views/examples/RelatedCards.vue')
-      },
-      {
-        path: 'insight-cards',
-        component: () => import('./views/examples/InsightCards.vue')
-      },
-      {
         path: 'news-promo-cards',
         component: () => import('./views/examples/NewsPromoCards.vue')
       },
@@ -586,14 +586,6 @@ const routes = [
           title: 'iam sold | iamkey'
         },
         component: () => import('./views/standalone/IamsoldAdmin.vue')
-      },
-      {
-        path: 'completions-dashboard',
-        name: "Completions dashboard",
-        meta: {
-          title: 'Completions dashboard | iamkey'
-        },
-        component: () => import('./views/standalone/CompletionsDashboard.vue')
       },
       {
         path: 'marketplace',
@@ -674,6 +666,14 @@ const routes = [
           title: 'Client method | iamkey'
         },
         component: () => import('./views/standalone/ClientDashboard/method.vue')
+      },
+      {
+        path: 'agent-dashboard',
+        name: "Agent dashboard",
+        meta: {
+          title: 'Agent dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/AgentDashboard.vue')
       }
     ]
   },

@@ -8,9 +8,8 @@ html {
   -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  overflow-y: scroll;
   overflow-x: hidden;
+  overflow-y: scroll;
   font-size: vw($device-xs-width);
   scroll-padding-top: rem(100);
   
@@ -45,25 +44,32 @@ html {
 
 body {
 
-  font-family: 'qanelasmedium', arial, sans-serif;
+  @include var(font-family,--font-body);
   @include var(color,--colour-body);
   width: 100%;
   line-height: 1.2;
-  height: 100%;
-  //overflow-y: scroll;
-  //overflow-x: hidden;
+  min-height: 100%;
+
 }
 
-@media (hover: none) {
-  body {
-    height: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
+// #region scrollbars
+div::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
+ 
+div::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+  border-radius: 2px;
+}
+ 
+div::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 2px;
+}
+//#endregion
 
 #app {
-  min-height: 100%;
 }
 
 body > footer,

@@ -158,3 +158,18 @@
     text-align: center;
   }
 }
+
+// list wrapper to apply a min height
+.list__wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.list__wrapper--small {
+  max-height: 12.5rem;
+}
+.list__wrapper--medium {
+  max-height: 25rem;
+}
+.list__wrapper--large {
+  max-height: 37.5rem;
+}

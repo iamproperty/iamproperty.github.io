@@ -11,8 +11,8 @@
           <h2 class="h4">Your list</h2>
 
           <div class="col-sm-10 col-md-12">
-            <CardDeck class="p-0 mb-0" :items="items" btntype="primary" cardtype="small" titleclass="h5" :smcols="2" :mdcols="4"></CardDeck>
-
+            
+            
           </div>
         </div>
         <Footer></Footer>
@@ -37,7 +37,6 @@
 import Nav from './_nav.vue'
 import Footer from './_footer.vue'
 import Heading from './_heading.vue'
-import CardDeck from '@/components/CardDeck/CardDeck.vue'
 import Icon from '@/foundations/Icon/Icon.vue'
 
 export default {
@@ -45,7 +44,6 @@ export default {
     Nav,
     Footer,
     Heading,
-    CardDeck,
     Icon
   },
   data () {

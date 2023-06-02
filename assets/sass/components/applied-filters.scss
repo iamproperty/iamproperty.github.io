@@ -1,0 +1,65 @@
+@use "../_func.scss" as *;
+
+.applied-filters {
+
+  &:not(.applied-filters--compact):not(:empty):before {
+    content: "Applied filters";
+    font-weight: bold;
+    font-size: rem(18);
+    line-height: rem(22);
+    color: var(--colour-header);
+    margin-bottom: rem(16);
+    display: block;
+  }
+
+  &:not(:empty) {
+    margin-bottom: 1rem;
+  }
+}
+
+.applied-filters .filter {
+  
+  border: 1px solid var(--colour-border);
+  padding: 1rem rem(24) 1rem rem(24);
+  background: transparent;
+  margin-right: 0.5rem!important;
+  margin-bottom: 0.5rem!important;
+  line-height: rem(24);
+  white-space: nowrap;
+
+  &:after {
+    content: "";
+    display: inline-block;
+    height: rem(20);
+    width: rem(20);
+    padding:0;
+    margin-left: rem(24);
+    margin-bottom: -0.25rem;
+    border: none;
+    z-index: var(--index-focus);
+    background: currentColor;
+    mask-image: var(--icon-close);
+    mask-size: 100%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon-close);
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+  }
+}
+
+.applied-filters--compact .filter {
+  background-color: var(--colour-light);
+  border: none;
+  padding: rem(10);
+  line-height: rem(16);
+    border-radius: rem(5);
+
+  &:after {
+    margin-left: rem(10);
+    height: rem(16);
+    width: rem(16);
+    margin-bottom: -0.1rem;
+  }
+}

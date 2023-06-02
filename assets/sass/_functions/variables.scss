@@ -89,7 +89,7 @@ $dark:          #46003c;
 // Functional/state variables 
 $colour-body: #595959;
 $colour-muted: #9d9d9d;
-$colour-border: #6f6f6f;
+$colour-border: #D8D8D8;
 $colour-link: $primary;
 $colour-focus: #000000;
 $colour-hover: #000000;
@@ -331,7 +331,8 @@ $input-line-height: 1.5;
 $input-padding-y: 0.75em;
 $input-padding-x: 1em;
 $input-border-radius: rem(10);
-$input-border-color: var(--colour-border);
+$input-border-color: var(--colour-primary);
+$input-border-width: 2px;
 
 // sm
 $input-height-sm: null;
@@ -357,8 +358,9 @@ $input-group-addon-border-color: var(--colour-border);
 $form-select-padding-y: $input-padding-y;
 //$form-select-indicator-padding
 $form-select-padding-x: #{$input-padding-x};
-$form-select-border-color: var(--colour-border);
+$form-select-border-color: var(--colour-primary);
 $form-select-border-radius: $input-border-radius;
+$form-select-border-width: 2px;
 
 // Checkbox
 $form-check-input-width: 1.5rem;
@@ -369,13 +371,13 @@ $form-check-margin-bottom: #{rem(16)};
 $form-check-input-border: 1px solid var(--colour-border);
 
 $form-check-input-checked-color:          $primary;
-$form-check-input-checked-bg-color:       var(--colour-success);
+$form-check-input-checked-bg-color:       var(--colour-info);
 $form-check-input-checked-border-color:   var(--colour-border);
 $form-check-input-checked-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-checked-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10l3 3l6-6'/></svg>");
 
 $form-check-input-indeterminate-color:          $primary;
-$form-check-input-indeterminate-bg-color:       var(--colour-success);
-$form-check-input-indeterminate-border-color:   var(--colour-success);
+$form-check-input-indeterminate-bg-color:       var(--colour-info);
+$form-check-input-indeterminate-border-color:   var(--colour-info);
 $form-check-input-indeterminate-bg-image:       url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$form-check-input-indeterminate-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M6 10h8'/></svg>");
 
 $form-switch-bg-image:    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$colour-border}'/></svg>");
@@ -403,7 +405,7 @@ $card-cap-bg: transparent;
 // #endregion card-variables
 
 // #region Icons
-$icon-blank: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M17 13v6c0 0.276-0.111 0.525-0.293 0.707s-0.431 0.293-0.707 0.293h-11c-0.276 0-0.525-0.111-0.707-0.293s-0.293-0.431-0.293-0.707v-11c0-0.276 0.111-0.525 0.293-0.707s0.431-0.293 0.707-0.293h6c0.552 0 1-0.448 1-1s-0.448-1-1-1h-6c-0.828 0-1.58 0.337-2.121 0.879s-0.879 1.293-0.879 2.121v11c0 0.828 0.337 1.58 0.879 2.121s1.293 0.879 2.121 0.879h11c0.828 0 1.58-0.337 2.121-0.879s0.879-1.293 0.879-2.121v-6c0-0.552-0.448-1-1-1s-1 0.448-1 1zM10.707 14.707l9.293-9.293v3.586c0 0.552 0.448 1 1 1s1-0.448 1-1v-6c0-0.136-0.027-0.265-0.076-0.383s-0.121-0.228-0.216-0.323c-0.001-0.001-0.001-0.001-0.002-0.002-0.092-0.092-0.202-0.166-0.323-0.216-0.118-0.049-0.247-0.076-0.383-0.076h-6c-0.552 0-1 0.448-1 1s0.448 1 1 1h3.586l-9.293 9.293c-0.391 0.391-0.391 1.024 0 1.414s1.024 0.391 1.414 0z' stroke-width='2px'></path></svg>");
+$icon-blank: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M17 13v6c0 0.276-0.111 0.525-0.293 0.707s-0.431 0.293-0.707 0.293h-11c-0.276 0-0.525-0.111-0.707-0.293s-0.293-0.431-0.293-0.707v-11c0-0.276 0.111-0.525 0.293-0.707s0.431-0.293 0.707-0.293h6c0.552 0 1-0.448 1-1s-0.448-1-1-1h-6c-0.828 0-1.58 0.337-2.121 0.879s-0.879 1.293-0.879 2.121v11c0 0.828 0.337 1.58 0.879 2.121s1.293 0.879 2.121 0.879h11c0.828 0 1.58-0.337 2.121-0.879s0.879-1.293 0.879-2.121v-6c0-0.552-0.448-1-1-1s-1 0.448-1 1zM10.707 14.707l9.293-9.293v3.586c0 0.552 0.448 1 1 1s1-0.448 1-1v-6c0-0.136-0.027-0.265-0.076-0.383s-0.121-0.228-0.216-0.323c-0.001-0.001-0.001-0.001-0.002-0.002-0.092-0.092-0.202-0.166-0.323-0.216-0.118-0.049-0.247-0.076-0.383-0.076h-6c-0.552 0-1 0.448-1 1s0.448 1 1 1h3.586l-9.293 9.293c-0.391 0.391-0.391 1.024 0 1.414s1.024 0.391 1.414 0z' stroke-width='4px'></path></svg>");
 $icon-sort: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='101' height='101' preserveAspectRatio='none'%3E%3Cpath opacity='.3' d='M51 1l25 23 24 22H1l25-22zm0 100l25-23 24-22H1l25 22z'/%3E%3C/svg%3E");
 $icon-arrow: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><path d='M6.5,2l9,9-9,9' style='fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px'/></svg>");
 $icon-close: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>");
@@ -425,26 +427,25 @@ $vars: map-merge((
 // #region pagination
 // Default
 $pagination-color: var(--colour-heading);
-$pagination-disabled-color: var(--colour-muted);
+$pagination-disabled-color: var(--colour-border);
 $pagination-bg: transparent;
 $pagination-border-width: 1px;
-$pagination-border-color: var(--colour-border);
+$pagination-border-color: var(--colour-primary);
 
 // Hover and focus
 $pagination-hover-color: var(--colour-heading);
-$pagination-hover-bg: var(--colour-muted);
-$pagination-hover-border-color: var(--colour-border);
-$pagination-focus-color: var(--colour-hover);
-$pagination-focus-bg: var(--colour-muted);
+$pagination-hover-bg: var(--colour-info);
+$pagination-hover-border-color: var(--colour-info);
+$pagination-focus-color: var(--colour-heading);
+$pagination-focus-bg: var(--colour-info);
 
 // Active
-$pagination-active-color: var(--body-bg);
-$pagination-active-bg: var(--colour-heading);
-$pagination-active-border-color: var(--colour-heading);
-
+$pagination-active-color: var(--colour-primary);
+$pagination-active-bg: var(--colour-info);
+$pagination-active-border-color: var(--colour-info);
 // Disabled
 $pagination-disabled-bg: $pagination-bg;
-$pagination-disabled-border-color: $pagination-border-color;
+$pagination-disabled-border-color: var(--colour-border);
 // #endregion
 
 // #region Accordion
@@ -493,4 +494,17 @@ $zindex-modal-backdrop:             var(--index-overlay);
 $zindex-modal:                      var(--index-overlay);
 $zindex-popover:                    var(--index-above);
 $zindex-tooltip:                    var(--index-above);
+// #endregion
+
+// #region Table
+$td-mw-px: 120;
+$td-mw: #{rem($td-mw-px)};
+$table-padding-px: 32;
+$table-padding: #{rem($table-padding-px)};
+$table-mh-sm-px: 200;
+$table-mh-sm: #{rem($table-mh-sm-px)};
+$table-mh-md-px: 400;
+$table-mh-md: #{rem($table-mh-md-px)};
+$table-mh-lg-px: 600;
+$table-mh-lg: #{rem($table-mh-lg-px)};
 // #endregion

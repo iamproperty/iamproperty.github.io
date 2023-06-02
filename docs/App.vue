@@ -63,20 +63,12 @@ footer .router-link-active {
 #visualtest:target ~ main > .visualtest pre {
   display: none!important;
 }
-</style>
-<script>
-import * as helpers from '../assets/ts/modules/helpers'
 
+#app {
 
-export default {
-  props: {
-  },
-  created(){
-    
-    // Global stuff
-    helpers.addBodyClasses(document.body);
-    helpers.addGlobalEvents(document.body);
-    helpers.checkElements(document.body);
+  display: contents;
+  > div {
+    display: contents;
   }
 }
-</script>
+</style>

@@ -1,0 +1,140 @@
+@use "../_func" as *;
+
+@import "../../../node_modules/bootstrap/scss/_pagination.scss";
+
+// #region Basic fixes
+.pagination {
+  gap: rem(4);
+  padding-top: rem(24);
+}
+
+.pagination .page-link {
+  font-size: rem(14);
+  width: rem(28);
+  line-height: rem(28);
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  border: none!important;
+}
+
+.pagination .page-item {
+  border: var(--#{$prefix}pagination-border-width) solid var(--#{$prefix}pagination-border-color);
+  border-radius: 4px!important;
+  @include transition($pagination-transition);
+
+  &:hover {
+    border-color: var(--#{$prefix}pagination-hover-border-color);
+  }
+
+  &:focus {
+    box-shadow: var(--#{$prefix}pagination-focus-box-shadow);
+  }
+
+  &.active {
+    border-color: var(--#{$prefix}pagination-active-border-color);
+  }
+
+  &.disabled {
+    border-color: var(--#{$prefix}pagination-disabled-border-color);
+  }
+}
+// #endregion
+
+// #region First and last buttons
+.pagination .page-item {
+
+  &:first-child .page-link,
+  &:last-child .page-link {
+
+    overflow: hidden;
+    text-indent: -300%;
+    background: currentColor;
+    mask-image: var(--icon-arrow);
+    mask-size: 50%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon-arrow);
+    -webkit-mask-size: 50%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+  }
+
+  &:first-child .page-link,
+  {
+    transform: rotate(180deg);
+  }
+}
+// #endregion
+
+// #region Minimise the amount of buttons on display 
+.pagination:has(.page-item:nth-child(8)) {
+
+  .page-item {
+    display: none;
+  }
+
+  .page-item:is(:first-child, :last-child, :nth-child(2), :nth-last-child(2)) {
+    display: block;
+  }
+
+  .page-item.active {
+    display: block;
+  }
+  
+  .page-item:has(+ .active),
+  .page-item.active + .page-item,
+  .page-item:nth-child(2).active + .page-item + .page-item,
+  .page-item:has(+ .page-item + .page-item:nth-last-child(2).active) {
+    display: block;
+  }
+
+  .page-item:nth-child(2),
+  .page-item:nth-last-child(2) {
+
+    margin-right: rem(4 + 28);
+    position: relative;
+
+    &:after {
+      content: "...";
+      display: block;
+      width: rem(28);
+      line-height: rem(28);
+      position: absolute;
+      left: calc(100% + #{rem(4)} + 2px);
+      top: -1px;
+      pointer-events: none;
+      border: var(--#{$prefix}pagination-border-width) solid var(--#{$prefix}pagination-border-color);
+
+      border-radius: 4px;
+      text-align: center;
+    }
+  }
+
+  .page-item:nth-last-child(2) {
+
+    margin-left: rem(4 + 28);
+    margin-right: 0;
+
+    &:after {
+      left: auto;
+      right: calc(100% + #{rem(4)} + 2px);
+    }
+  }
+
+  .page-item:nth-child(2).active,
+  .page-item:nth-child(2):has(+ .active),
+  .page-item:nth-child(2):has(+ .page-item + .active),
+  .page-item:nth-last-child(4).active + .page-item + .page-item,
+  .page-item:nth-last-child(3).active + .page-item,
+  .page-item:nth-last-child(2).active {
+  
+    margin-left: 0;
+    margin-right: 0;
+
+    &:after {
+      display: none;
+    }
+  }
+}
+// #endregion

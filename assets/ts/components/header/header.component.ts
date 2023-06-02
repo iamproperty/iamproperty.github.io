@@ -1,4 +1,12 @@
 // @ts-nocheck
+
+// Data layer Web component created
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  "event": "customElementRegistered",
+  "element": "header"
+});
+
 class iamHeader extends HTMLElement {
 
   constructor(){
