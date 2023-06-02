@@ -185,7 +185,7 @@ describe('formatCell', () => {
 
   test('should format the text correctly', () => {
 
-    expect(tableModule.formatCell('date', '2023-05-15 12:10:45.000000')).toEqual('15 May 2023');
+    expect(tableModule.formatCell('date', '2023-05-15 12:10:45.000000')).toEqual('15 May 23');
     expect(tableModule.formatCell('capitalise', 'low')).toEqual('Low');
   });
 });
