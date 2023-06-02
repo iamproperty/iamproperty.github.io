@@ -3,7 +3,7 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.4.7--alpha</h2>
+      <h2>V3.4.7</h2>
       <ul>
         <li>Applied filters component</li>
         <li>Filter list component</li>
