@@ -26,3 +26,4 @@ The below needs to be done before a pull request can be approved:
 - [ ] New components/features are accessible to keyboard users (All links/buttons are tabbable, All content is accessible)
 - [ ] New components/features are accessible to non-JS users (All links/buttons are tabbable, All content is accessible), this may have visual differences
 - [ ] New components/features have hover, focus and active states on all the links/buttons
+- [ ] New components/features work when in dark mode and high contrast mode. Buttons, links and icons should still look like what they are.

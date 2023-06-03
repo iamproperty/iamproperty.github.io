@@ -104,7 +104,6 @@ $utilities: map-merge(
 //  #endregion
 
 // #region Gradient colours 
-
 $utilities: map-merge(
   $utilities,
   (
@@ -116,7 +115,7 @@ $utilities: map-merge(
       ),
       values:
       (
-        "secondary": linear-gradient(var(--gradient-direction), var(--colour-secondary) 0, transparent 100%),
+        "success": linear-gradient(var(--gradient-direction), var(--colour-success) 0, transparent 100%),
         "primary": linear-gradient(var(--gradient-direction), var(--colour-primary) 0, transparent 100%),
         "info": linear-gradient(var(--gradient-direction), var(--colour-info) 0, transparent 100%)
       )
@@ -141,20 +140,63 @@ $utilities: map-merge(
 );
 $utilities: map-merge(
   $utilities,
-  (
+  ( 
     "gradient-direction": (
       css-var: true,
       class: gradient-direction,
       values:
       (
         "left": 90deg,
-        "right": -90deg,
-        "up": 360deg
+        "angle": 135deg
       )
     )
   )
 );
+// #endregion
 
-
-
+// #region Tint helper classes
+$utilities: map-merge(
+  $utilities,
+  (
+    "bg-opacity": (
+      css-var: true,
+      class: bg-opacity,
+      values:
+      (
+        "10": 0.1,
+        "20": 0.2,
+        "30": 0.3,
+        "40": 0.4,
+        "50": 0.5,
+        "60": 0.6,
+        "70": 0.7,
+        "80": 0.8,
+        "90": 0.9,
+        "100": 1
+      )
+    )
+  )
+);
+$utilities: map-merge(
+  $utilities,
+  (
+    "text-opacity": (
+      css-var: true,
+      class: text-opacity,
+      values:
+      (
+        "10": 0.1,
+        "20": 0.2,
+        "30": 0.3,
+        "40": 0.4,
+        "50": 0.5,
+        "60": 0.6,
+        "70": 0.7,
+        "80": 0.8,
+        "90": 0.9,
+        "100": 1
+      )
+    )
+  )
+);
 // #endregion
