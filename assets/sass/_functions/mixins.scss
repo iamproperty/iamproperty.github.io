@@ -140,11 +140,6 @@
   }
 
 
-  --btn-bg: var(--colour-warning);
-  --btn-text: var(--colour-primary);
-  --btn-hover-text: var(--colour-primary);
-  --btn-tertiary-bg: var(--colour-primary);
-  --btn-tertiary-hover-text: white;
 
   .text-primary {
     color: var(--colour-primary)!important;
@@ -163,4 +158,12 @@
   --btn-hover-text: var(--colour-heading);
   --btn-tertiary-bg: var(--colour-inverted);;
   --btn-tertiary-hover-text: var(--colour-primary);
+
+  
+  --colour-body: #{$colour-inverted};
+  --colour-heading: #{$colour-inverted};
+  --colour-link: #{$colour-inverted};
+  --colour-hover: #{$colour-inverted};
+  --colour-border: #{$colour-inverted};
+  --colour-brand: #{$colour-inverted};
 }

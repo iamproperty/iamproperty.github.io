@@ -31,7 +31,7 @@
         </details>
       </Tabs>
     </div>
-    <div class="bg-admin version-control">
+    <div class="bg-light version-control">
       <div class="container">
         <table>
           <thead>

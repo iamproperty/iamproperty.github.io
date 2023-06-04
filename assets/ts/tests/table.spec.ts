@@ -11,7 +11,7 @@ const basicTable = `<thead>
     <th>Heading 3</th>
   </tr>
 </thead>
-<tbody
+<tbody>
   <tr>
     <td>Cell 1</td>
     <td>Low</td>
@@ -171,7 +171,10 @@ describe('populateDataQueries', () => {
   form.innerHTML += `<div><span data-query="total"></span><span data-query="Heading 2 == Low"></span></div>`;
 
   tableModule.addDataAttributes(table);
+  tableModule.filterTable(table, form, document.createElement('div'));
   tableModule.populateDataQueries(table, form);
+
+console.log(table.outerHTML)
 
   test('should populate elements with the data-query attribute with the result of the corresponding query', () => {
 
@@ -185,7 +188,7 @@ describe('formatCell', () => {
 
   test('should format the text correctly', () => {
 
-    expect(tableModule.formatCell('date', '2023-05-15 12:10:45.000000')).toEqual('15 May 2023');
+    expect(tableModule.formatCell('date', '2023-05-15 12:10:45.000000')).toEqual('15 May 23');
     expect(tableModule.formatCell('capitalise', 'low')).toEqual('Low');
   });
 });

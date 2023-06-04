@@ -159,6 +159,22 @@ const routes = [
         component: () => import('./views/components/BannerDoc.vue')
       },
       {
+        path: 'buttons',
+        name: 'Buttons & links',
+        meta: {
+          title: 'Buttons & links | Elements | iamkey'
+        },
+        component: () => import('./views/components/Buttons.vue')
+      },
+      {
+        path: 'card',
+        name: 'Card',
+        meta: {
+          title: 'Card | Components | iamkey'
+        },
+        component: () => import('./views/components/CardDoc.vue')
+      },
+      {
         path: 'carousel',
         name: 'Carousel',
         meta: {
@@ -175,101 +191,6 @@ const routes = [
         component: () => import('./views/components/ChartsDoc.vue')
       },
       {
-        path: 'filterlist',
-        name: 'Filter list',
-        meta: {
-          title: 'Filter list | Components | iamkey'
-        },
-        component: () => import('./views/components/FilterlistDoc.vue')
-      },
-      {
-        path: 'header',
-        name: 'Header',
-        meta: {
-          title: 'Header | Components | iamkey'
-        },
-        component: () => import('./views/components/Header.vue')
-      },
-      {
-        path: 'dialog',
-        name: 'Dialog (Modal and popover)',
-        meta: {
-          title: 'Dialog (Modal and popover) | Components | iamkey'
-        },
-        component: () => import('./views/components/DialogDoc.vue')
-      },
-      {
-        path: 'nav',
-        name: 'Nav',
-        meta: {
-          title: 'Nav | Components | iamkey'
-        },
-        component: () => import('./views/components/NavDoc.vue')
-      },
-      {
-        path: 'property-searchbar',
-        name: 'Property Searchbar',
-        meta: {
-          title: 'Property Searchbar | Components | iamkey'
-        },
-        component: () => import('./views/components/PropertySearchbarDoc.vue')
-      },
-      {
-        path: 'snapshot',
-        name: 'Snapshot',
-        meta: {
-          title: 'Snapshot | Components | iamkey'
-        },
-        component: () => import('./views/components/SnapshotDoc.vue')
-      },
-      {
-        path: 'stepper',
-        name: 'Stepper',
-        meta: {
-          title: 'Stepper | Components | iamkey'
-        },
-        component: () => import('./views/components/StepperDoc.vue')
-      },
-      {
-        path: 'tabs',
-        name: 'Tabs',
-        meta: {
-          title: 'Tabs | Components | iamkey'
-        },
-        component: () => import('./views/components/TabsDoc.vue')
-      },
-      {
-        path: 'testimonial',
-        name: 'Testimonial',
-        meta: {
-          title: 'Testimonial | Components | iamkey'
-        },
-        component: () => import('./views/components/TestimonialDoc.vue')
-      },
-      {
-        path: 'timeline',
-        name: 'Timeline',
-        meta: {
-          title: 'Timeline | Components | iamkey'
-        },
-        component: () => import('./views/components/TimelineDoc.vue')
-      },
-      {
-        path: 'notefeed',
-        name: 'Note feed',
-        meta: {
-          title: 'Note feed | Components | iamkey'
-        },
-        component: () => import('./views/components/NoteFeedDoc.vue')
-      },{
-        path: '',
-        name: 'Elements',
-        meta: {
-          title: 'Elements | iamkey'
-        },
-        component: () => import('./views/components/Index.vue')
-      },
-      {
         path: 'container',
         name: 'Container',
         meta: {
@@ -278,36 +199,12 @@ const routes = [
         component: () => import('./views/components/Container.vue')
       },
       {
-        path: 'lists',
-        name: 'Lists',
+        path: 'dialog',
+        name: 'Dialog (Modal and popover)',
         meta: {
-          title: 'Lists | Elements | iamkey'
+          title: 'Dialog (Modal and popover) | Components | iamkey'
         },
-        component: () => import('./views/components/Lists.vue')
-      },
-      {
-        path: 'buttons',
-        name: 'Buttons & links',
-        meta: {
-          title: 'Buttons & links | Elements | iamkey'
-        },
-        component: () => import('./views/components/Buttons.vue')
-      },
-      {
-        path: 'tables',
-        name: 'Tables',
-        meta: {
-          title: 'Tables | Elements | iamkey'
-        },
-        component: () => import('./views/components/Tables.vue')
-      },
-      {
-        path: 'tooltips',
-        name: 'Tooltips',
-        meta: {
-          title: 'Tooltips | Elements | iamkey'
-        },
-        component: () => import('./views/components/TooltipsDoc.vue')
+        component: () => import('./views/components/DialogDoc.vue')
       },
       {
         path: 'form',
@@ -421,12 +318,44 @@ const routes = [
         ]
       },
       {
-        path: 'card',
-        name: 'Card',
+        path: 'filterlist',
+        name: 'Filter list',
         meta: {
-          title: 'Card | Components | iamkey'
+          title: 'Filter list | Components | iamkey'
         },
-        component: () => import('./views/components/CardDoc.vue')
+        component: () => import('./views/components/FilterlistDoc.vue')
+      },
+      {
+        path: 'header',
+        name: 'Header',
+        meta: {
+          title: 'Header | Components | iamkey'
+        },
+        component: () => import('./views/components/Header.vue')
+      },
+      {
+        path: 'lists',
+        name: 'Lists',
+        meta: {
+          title: 'Lists | Elements | iamkey'
+        },
+        component: () => import('./views/components/Lists.vue')
+      },
+      {
+        path: 'nav',
+        name: 'Nav',
+        meta: {
+          title: 'Nav | Components | iamkey'
+        },
+        component: () => import('./views/components/NavDoc.vue')
+      },
+      {
+        path: 'notefeed',
+        name: 'Note feed',
+        meta: {
+          title: 'Note feed | Components | iamkey'
+        },
+        component: () => import('./views/components/NoteFeedDoc.vue')
       },
       {
         path: 'panel',
@@ -443,6 +372,70 @@ const routes = [
           title: 'Pagination | Components | iamkey'
         },
         component: () => import('./views/components/PaginationDoc.vue')
+      },
+      {
+        path: 'property-searchbar',
+        name: 'Property Searchbar',
+        meta: {
+          title: 'Property Searchbar | Components | iamkey'
+        },
+        component: () => import('./views/components/PropertySearchbarDoc.vue')
+      },
+      {
+        path: 'snapshot',
+        name: 'Snapshot',
+        meta: {
+          title: 'Snapshot | Components | iamkey'
+        },
+        component: () => import('./views/components/SnapshotDoc.vue')
+      },
+      {
+        path: 'stepper',
+        name: 'Stepper',
+        meta: {
+          title: 'Stepper | Components | iamkey'
+        },
+        component: () => import('./views/components/StepperDoc.vue')
+      },
+      {
+        path: 'tables',
+        name: 'Tables',
+        meta: {
+          title: 'Tables | Elements | iamkey'
+        },
+        component: () => import('./views/components/Tables.vue')
+      },
+      {
+        path: 'tabs',
+        name: 'Tabs',
+        meta: {
+          title: 'Tabs | Components | iamkey'
+        },
+        component: () => import('./views/components/TabsDoc.vue')
+      },
+      {
+        path: 'testimonial',
+        name: 'Testimonial',
+        meta: {
+          title: 'Testimonial | Components | iamkey'
+        },
+        component: () => import('./views/components/TestimonialDoc.vue')
+      },
+      {
+        path: 'timeline',
+        name: 'Timeline',
+        meta: {
+          title: 'Timeline | Components | iamkey'
+        },
+        component: () => import('./views/components/TimelineDoc.vue')
+      },
+      {
+        path: 'tooltips',
+        name: 'Tooltips',
+        meta: {
+          title: 'Tooltips | Elements | iamkey'
+        },
+        component: () => import('./views/components/TooltipsDoc.vue')
       }
     ]
   },

@@ -27,12 +27,8 @@
   // Extra vars needed
   --content-max-width: #{$content-max-width};
   
-  /* Button colours */
-  --btn-bg: var(--colour-warning);
-  --btn-text: var(--colour-primary);
-  --btn-hover-text: var(--colour-primary);
-  --btn-tertiary-bg: var(--colour-primary);
-  --btn-tertiary-hover-text: white;
+  --colour-brand: var(--colour-primary);
+  
 }
 
 // Dark mode; functional colours get updated
@@ -58,16 +54,7 @@
     --colour-body: var(--colour-primary);
     --colour-heading: var(--colour-primary);
     color: var(--colour-body);
-
-    --btn-bg: var(--colour-primary);
-    --btn-text: var(--colour-white);
     --colour-underline: var(--colour-primary);
-
-    .btn-secondary {
-
-      --btn-text: var(--colour-primary);
-    }
-    
   }
 
   
@@ -86,12 +73,15 @@
   .bg-black:not(.prevent-invert),
   .invert-colours {
     
+    --btn-bg: #{$colour-inverted};
+
     @if $compatible != "true" {
       
       @include invert-colours();
     }
     color: #{$colour-inverted};
   }
+
 
   // Only update the the colour of the underline on dark backgrounds except the primary as the secondary colour looks good on it
   .bg-dark:not(.prevent-invert),
