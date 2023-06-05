@@ -115,6 +115,13 @@ $theme-colors: map-merge((
   "white":      $canvas
 ), $theme-colors);
 
+@each $color, $value in $theme-colors {
+
+  $vars: map-merge((
+    --colour-#{$color}-hex: $value
+  ), $vars);
+}
+
 
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 
@@ -122,6 +129,7 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
+    --colour-#{$color}-hex: $value,
     --colour-#{$color}-rgb: $value,
     --colour-#{$color}: rgba(var(--colour-#{$color}-rgb), var(--bg-opacity,1))
   ), $vars);
