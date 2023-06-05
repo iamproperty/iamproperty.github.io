@@ -579,9 +579,9 @@
       - Add a native browser ‘blocked’ symbol when the user hovers over the button.</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div class="container visualtest pb-5 ">
       <div class="row">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-6 col-md-4 pe-none">
           <p class="lead pb-2">Default state</p>
           <button class="btn btn-primary" disabled>Lorum ipsum</button>
         </div>
