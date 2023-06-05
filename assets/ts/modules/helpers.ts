@@ -130,9 +130,13 @@ export const addGlobalEvents = (body) => {
         
         popover.close();
         dataEvent = "closePopover"
+        btn.classList.remove('active');
       }
-      else
+      else {
+        
         popover.show();
+        btn.classList.add('active');
+      }
 
       window.dataLayer = window.dataLayer || [];
       
