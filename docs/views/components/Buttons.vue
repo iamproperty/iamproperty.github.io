@@ -49,7 +49,7 @@
       <p>Use an icon to support a primary button. See example below where a plus is used to highlight that the button action adds a new record. The icon can be added before or after the button copy. Whichever is most relevant.</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-auto">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -86,7 +86,7 @@
       <p>Use an interactive prompt to support a primary button. See example below where an arrow is used to add interest and signify that the button will navigate the user to another page.</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-auto">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -249,7 +249,7 @@
       <p>Use an icon to support a secondary button. See example below where a plus is used to highlight that the button action adds a new event. The icon can be added before or after the button copy. Whichever is most relevant.</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-auto">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -277,7 +277,7 @@
       <p>Use an interactive prompt to support a secondary button. See example below where an arrow is used to add interest and signify that the button will navigate the user to another page.</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-auto">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -305,7 +305,7 @@
       <p>Secondary buttons can be used to open a filter dialog pop-over.</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-auto">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -347,7 +347,7 @@
       <p>Secondary buttons can be used to open a filter dialog modal.</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-auto">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -388,7 +388,7 @@
       <p>Form fields can be set-up to act like a button to improve consistency when used alongside other buttons.</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-auto">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -555,7 +555,7 @@
     </div>
 
 
-    <div class="container visualtest pb-5 penone">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -579,7 +579,7 @@
       - Add a native browser ‘blocked’ symbol when the user hovers over the button.</p>
     </div>
 
-    <div class="container visualtest pb-5 penone">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -604,7 +604,7 @@
     <div class="container visualtest">
       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the <a href="/components/buttons">industry's standard</a> dummy text ever since the 1500s, when an <a href="/components/buttons"><i class="fa-light fa-envelope"></i> unknown printer</a> took a galley of type and scrambled it to make a type specimen book. </p>
     </div>
-    <div class="container visualtest pb-5 penone">
+    <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
