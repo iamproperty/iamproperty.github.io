@@ -3,7 +3,7 @@
 .admin-panel {
   --panel-gutter: 1rem;
   --panel-tab-colour: #fafafa;
-  background: var(--body-bg);
+  background: var(--colour-canvas);
 
   &.bg-secondary{
 
@@ -112,7 +112,7 @@
   margin-right: calc(var(--panel-gutter) * -1);
   display: flex;
   flex-direction: column;
-  background-color: var(--body-bg);
+  background-color: var(--colour-canvas);
   border-bottom: 2px solid var(--colour-border-light);
   margin-bottom: var(--panel-gutter);
 
@@ -154,7 +154,7 @@
   .current {
     
     --is-current: 1;
-    --panel-tab-colour: var(--body-bg);;
+    --panel-tab-colour: var(--colour-canvas);
     --panel-tab-border: var(--colour-secondary);
     pointer-events: none;
   }

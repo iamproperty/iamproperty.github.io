@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.4.8--alpha</h2>
+      <ul>
+        <li>Redesigned buttons and links</li>
+      </ul>
+
       <h2>V3.4.7</h2>
       <ul>
         <li>Applied filters component</li>

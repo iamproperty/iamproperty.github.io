@@ -176,24 +176,27 @@
       <h2>Typography - colour</h2>
       <div class="colour-sample">
         <div class="colour" :style="`background:${$shared.cssVars.themeColour_primary}!important`"></div>
-        <span class="lead pb-2">Primary text colour</span>
-        <p>HEX code: {{ $shared.cssVars.themeColour_primary }}</p>
+        <span class="lead pb-2">Primary text colour</span><br/>
+        <span>CSS Variable: --colour-primary</span><br/>
+        <p>HEX code: {{ $shared.cssVars.themeColour_primary.toUpperCase() }}</p>
       </div>
       <div class="colour-sample">
-        <div class="colour" :style="`background:${$shared.cssVars.nonThemeColour_inverted}!important`"></div>
-        <span class="lead pb-2">Inverted text colour</span>
-        <p>HEX code: {{ $shared.cssVars.nonThemeColour_inverted }}</p>
+        <div class="colour border" :style="`background:${$shared.cssVars.nonThemeColour_inverted}!important`"></div>
+        <span class="lead pb-2">Inverted text colour</span><br/>
+        <span>CSS Variable: --colour-inverted</span><br/>
+        <p>HEX code: {{ $shared.cssVars.nonThemeColour_inverted.toUpperCase() }}</p>
       </div>
       <div class="colour-sample">
         <div class="colour" :style="`background:${$shared.cssVars.nonThemeColour_body}!important`"></div>
-        <span class="lead pb-2">Paragraph body text colour</span>
-        <p>HEX code: {{ $shared.cssVars.nonThemeColour_body }}</p>
+        <span class="lead pb-2">Paragraph body text colour</span><br/>
+        <span>CSS Variable: --colour-body</span><br/>
+        <p>HEX code: {{ $shared.cssVars.nonThemeColour_body.toUpperCase() }}</p>
       </div>
       
     </div>
 
     
-    <div class="bg-admin version-control">
+    <div class="bg-light version-control">
       <div class="container">
         <table>
           <thead>
@@ -239,6 +242,10 @@
 .colour-sample {
   float: left;
   margin-right: 1rem;
+
+  @media (forced-colors: active) {
+    forced-color-adjust: none;
+  }
 
   .colour {
     display: block;

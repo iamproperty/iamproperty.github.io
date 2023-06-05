@@ -353,7 +353,7 @@ export const filterTable = (table, form, wrapper) => {
   }
 
   // Stop function if no filters identified
-  if(!searches.length && !filters.length)
+  if(!Object.keys(searches).length && !Object.keys(filters).length)
     return false;
   
   table.classList.add('table--filtered');
@@ -371,7 +371,6 @@ export const filterTable = (table, form, wrapper) => {
 
   for (const [key, filterValue] of Object.entries(filters)) {
     
-    console.log(filterValue)
     Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
 
       let isMatched = false;
@@ -516,8 +515,7 @@ export const populateDataQueries = (table,form) => {
       queries.forEach(element => {
         selector += `:not([data-filtered-by="${element}"])`;
       });
-
-      console.log(selector)
+      
       numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr${selector}`)).length;
     }
     else if(!query.includes(' == ')){
@@ -547,8 +545,7 @@ export const populateDataQueries = (table,form) => {
     else {
 
       let queryParts = query.split(' == ');
-      console.log(queryParts[0]);
-      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr.filtered--matched td[data-label="${queryParts[0]}"], tbody tr[data-filtered-by="${queryParts[0]}"] td[data-label="${queryParts[0]}"]`)).filter(function(element){
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr:not([class*="filtered"]) td[data-label="${queryParts[0]}"], tbody tr[data-filtered-by="${queryParts[0]}"] td[data-label="${queryParts[0]}"]`)).filter(function(element){
         return element.textContent === queryParts[1];
       }).length;
     }

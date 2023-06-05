@@ -43,7 +43,8 @@ html {
 }
 
 body {
-
+  color-scheme: light dark;
+  @include var(background,--colour-canvas);
   @include var(font-family,--font-body);
   @include var(color,--colour-body);
   width: 100%;
@@ -68,9 +69,6 @@ div::-webkit-scrollbar-thumb {
   border-radius: 2px;
 }
 //#endregion
-
-#app {
-}
 
 body > footer,
 body > #app > footer {

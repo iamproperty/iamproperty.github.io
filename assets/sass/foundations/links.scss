@@ -1,105 +1,103 @@
 @use "../_func.scss" as *;
 
-a,
-.link {
-  @include var (color, --colour-link);
-  display: inline-block;
-  min-height: em(28);
-  margin-bottom: rem(16);
-  position: relative;
-  text-decoration: none;
-  background: none;
-  border: none;
-  
-  &:not(.text-decoration-none):not(.btn):before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    bottom: 0;
-    width: 100%;
-    height: 2px;
-    @include var(background-color,--colour-underline);
-    -webkit-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    transform: translateX(-50%);
-    -webkit-transition: .3s ease-in;
-    transition: .3s ease-in;
-  }
+// global
+a {
+  color: var(--colour-link);
 
-  &:not(.text-decoration-none):not(.btn):hover:before,
-  .card:hover &:before,
-  details[open] &:not(.text-decoration-none):not(.btn):before {
-    width: 0%;
-  }
+  &:is(:hover, :focus, .hover, :focus-within) {
 
-  &:is(:hover, :focus, .focus),
-  .card:hover &,
-  .card:focus &  {
-    @include var (color, --colour-hover);
-  }
+    color: var(--colour-hover);
+  }   
 
-  &:active,
-  &.active,
-  .card:active & {
-    @include var (color, --colour-active);
-  }
+  &:is(:active, .active) {
 
-  &[target="_blank"]:not(.card):after,
-  &.card[target="_blank"] .btn:after {
-    
-    content: "";
-    height: 1em;    
-    width: 1em;
-    margin-left: 0.5em;
-    margin-right: -0.2em;
-    display: inline-block;
-    vertical-align: baseline;
-    margin-bottom: -0.15em;
-
-    mask-image: var(--icon-blank);
-    mask-size: 100% 100%;
-    mask-repeat: no-repeat;
-    mask-position: 0 0;
-  
-    -webkit-mask-image: var(--icon-blank);
-    -webkit-mask-size: 100% 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: 0 0;
-    background-color: currentColor;
+    color: var(--colour-active);
   }
-  
 }
+
+a:where(:not(.btn):not(:has(.card)):not(:has(iam-card))),
+.link {
+  background-color: transparent;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  color: var(--colour-link);
+  margin: 0 rem(24) rem(24) 0;
+  padding: 0;
+  font-size: rem(18);
+  line-height: rem(24);
+  min-height: rem(24);
+  position: relative;
+  font-weight: bold;
+
+  &:not(.text-decoration-none){
+    &:after {
+      position: absolute;
+      content: "";
+      top: 100%;
+      left: 50%;
+      height: 2px;
+      width: 100%;
+      transform: translate(-50%,0);
+      background: var(--colour-underline);
+      transition: width 0.5s;
+    }
+  }
+
+  [class*=fa-] {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+  [class*=fa-]:not(:first-child) {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+
+  &:is(:hover, :focus, .hover, :active, .active, :focus-within) {
+
+    &:after {
+      width: 60%;
+    }
+  }     
+}
+
 @include inline-text(){
-  a {
+  a:not(.btn) {
     min-height: none;
     display: inline;
-    margin-bottom: 0;
+    margin: 0;
     text-decoration: underline;
-    text-underline-offset: 0.2em;
-    text-decoration-thickness: 2px;
-    text-decoration-color: var(--colour-underline);
 
-    &:hover,
-    &:focus,
-    &:active{
-
-      text-decoration: none;
-    }
-  
-    &:before {
-
+    &:after {
       display: none;
     }
 
-    &[target="_blank"]:after {
-      margin-left: 0.25em;
-      margin-right: 0.2em;
+    [class*="fa-"]{
+      margin: 0;
+      display: inline;
+    }
+
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 2px;
+
+    &:is(:hover, :focus, .hover, :focus-within) {
+
+      color: var(--colour-hover);
+      text-decoration: none;
+    }   
+
+    &:is(:active, .active) {
+
+      color: var(--colour-active);
+      text-decoration: none;
     }
   }
 }
 
-// Support card component
+// #region Support card component
 :is(a,button,label):has(.card, iam-card){
+
   &:before {
     display: none;
   }
@@ -109,6 +107,7 @@ a,
   display: flex;
   margin: 0 0 rem(24) 0;
   outline: none!important;
+  text-decoration: none;
 
   &:not(.d-inline-block){
       
@@ -123,3 +122,4 @@ a,
 .col > :is(a,button):has(.card, iam-card):first-child:last-child{
   min-height: calc(100% - rem(24));
 }
+// #endregion

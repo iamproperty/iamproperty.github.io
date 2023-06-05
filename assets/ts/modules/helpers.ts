@@ -69,16 +69,12 @@ export const addGlobalEvents = (body) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-modal]')){
 
       const button = event.target.closest('[data-modal]');
-      const modalID = button.getAttribute('data-modal');
+      const modalID = button.hasAttribute('data-modal') ? button.getAttribute('data-modal') : button.getAttribute('data-filter');
       const dialog = document.querySelector(`dialog#${modalID}`);
       
       // Create close button is needed
-      if(dialog.parentNode.closest('form') && !dialog.querySelector(':scope > .dialog__close:first-child'))
-        dialog.innerHTML = `<button class="dialog__close" formmethod="dialog">Close</button>${dialog.innerHTML}`;
-      else if(!dialog.parentNode.closest('form') && !dialog.querySelector(':scope > form:first-child'))
-        dialog.innerHTML = `<form><button class="dialog__close" formmethod="dialog">Close</button></form>${dialog.innerHTML}`;
-
-
+      dialog.innerHTML = `<button class="dialog__close">Close</button>${dialog.innerHTML}`;
+      
       let videoButton = dialog.querySelector('.youtube-embed a');
 
       if (videoButton){
@@ -94,6 +90,20 @@ export const addGlobalEvents = (body) => {
       });
     };
     // Close modal
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('button.dialog__close')){
+      const dialog = event.target.closest('dialog[open]');
+
+      event.preventDefault();
+      dialog.close()
+        
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        "event": "closeModal",
+        "id": dialog.getAttribute('id')
+      });
+    }
+    
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
       const dialog = event.target.closest('dialog[open]');
       const dialogDimensions = dialog.getBoundingClientRect()
