@@ -1,6 +1,6 @@
 @use "../func" as *;
 
-@import "../../../node_modules/bootstrap/scss/_root.scss";
+@import "../../bootstrap/scss/_root.scss";
 
 :root {
   // Print out the $vars array setup in the variables file so they can be used as CSS vars
@@ -25,27 +25,15 @@
   }
 
   // Extra vars needed
-  --body-bg: white;
-  --colour-underline: var(--colour-primary);
-  --colour-heading: var(--colour-primary);
-  --alpha: var(--bg-opacity,1);
-  --#{$variable-prefix}gradient: #{$gradient};
   --content-max-width: #{$content-max-width};
+  
   --colour-brand: var(--colour-primary);
-
-  /* Button colours */
-  --btn-bg: var(--colour-warning);
-  --btn-text: var(--colour-primary);
-  --btn-hover-text: var(--colour-primary);
-  --btn-tertiary-bg: var(--colour-primary);
-  --btn-tertiary-hover-text: white;
+  
 }
 
 // Dark mode; functional colours get updated
 @media screen and (prefers-color-scheme: dark) {
   :root {
-    --body-bg: var(--colour-primary);
-    --colour-admin: var(--colour-primary);
     @include invert-colours();
   }
 
@@ -53,38 +41,27 @@
     color: #{$colour-inverted}!important;
   }
 
-  body .bg-white {
-    background-color: transparent!important;
-  }
+  
 }
 
 @media screen {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-black):not(.invert-colours):not(.bg-white):not(.bg-admin) {
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-canvas):not(.invert-colours) {
 
     @include reset-colours();
 
     --colour-body: var(--colour-primary);
     --colour-heading: var(--colour-primary);
     color: var(--colour-body);
-
-    --btn-bg: var(--colour-primary);
-    --btn-text: var(--colour-white);
     --colour-underline: var(--colour-primary);
-
-    .btn-secondary {
-
-      --btn-text: var(--colour-primary);
-    }
-    
   }
 
   
 
   // Slight colour adjustments on the light background to match brand guidelines
   .bg-light[class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.prevent-invert) {
-    --body-bg: var(--colour-light);
+    --colour-canvas: var(--colour-light);
     --colour-heading: var(--colour-dark);
     color: var(--colour-dark);
   }
@@ -96,12 +73,15 @@
   .bg-black:not(.prevent-invert),
   .invert-colours {
     
+    --btn-bg: #{$colour-inverted};
+
     @if $compatible != "true" {
       
       @include invert-colours();
     }
     color: #{$colour-inverted};
   }
+
 
   // Only update the the colour of the underline on dark backgrounds except the primary as the secondary colour looks good on it
   .bg-dark:not(.prevent-invert),

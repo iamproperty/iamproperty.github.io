@@ -15,7 +15,7 @@
             <div class="col-md-3 mw-fit-content">
               <div class="dialog__wrapper dialog__wrapper--md-right">
 
-              <button class="btn btn-tertiary me-0 nowrap" aria-label="Display filters of who's work to include"><span class="empty"><i class="fa fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
+              <button class="btn btn-secondary me-0 nowrap" aria-label="Display filters of who's work to include"><span class="empty"><i class="fa fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
               <dialog>
 
                 <AppliedFilters class="applied-filters--compact">
@@ -110,12 +110,12 @@
                     <input name="search" id="search" type="text" class="form-control" data-search="Client, Transaction address">
                   </div>
                 </div>
-                <div class="col-6 offset-md-1 col-md-2">
-                  <button class="btn btn-tertiary me-0 d-block w-100" type="button" data-modal="filters">Filter by <span data-filter-count></span><i class="fa fa-filter"></i></button>
+                <div class="col-6 ms-auto col-md mw-fit-content">
+                  <button class="btn btn-secondary me-0 d-block w-100 btn-filter" type="button" data-modal="filters">Filter by <span data-filter-count></span></button>
                 </div>
-                <div class="col d-none d-sm-block">
-                  <div class="form-control__wrapper">
-                    <label for="sort" class="form-label visually-hidden">Sort by</label>
+                <div class="col d-none d-sm-block col-md mw-fit-content">
+                  <div class="btn btn-secondary">
+                    <label for="sort" class="visually-hidden">Sort by</label>
                     <select type="select" name="sort" id="sort" class="form-select" data-sort>
                       <option value="-1">Sort by</option>
                       <option value="risk level high" data-sort="Risk level" data-order="High,Medium,Low">Risk level (high to low)</option>
@@ -128,7 +128,7 @@
                   </div>
                 </div>
                 <div class="col mw-fit-content">
-                  <button class="btn btn-primary text-nowrap d-none d-md-block me-0" type="button" data-clear><i class="fa fa-xmark"></i> Clear filters</button>
+                  <button class="btn btn-tertiary text-nowrap d-none d-md-block me-0" type="button" data-clear><i class="fa fa-xmark"></i> Clear filters</button>
                 </div>
               </div>
 

@@ -117,12 +117,13 @@ dialog::backdrop {
   position: relative;
   display: inline-block;
 
+
   > .btn:first-child {
     &:after {
       content: "";
     
       display: inline-block;
-      margin-left: 0.5em;
+      margin-left: 1em;
       margin-bottom: -0.15em;
       height: 1em;
       width: 1em;
@@ -138,6 +139,11 @@ dialog::backdrop {
       -webkit-mask-position: 50% 50%;
 
       transform: rotate(90deg);
+    }
+
+    &.active:after {
+
+      transform: rotate(-90deg);
     }
   }
 

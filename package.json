@@ -5,12 +5,13 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "3.4.7",
+  "version": "3.4.8--alpha",
   "scripts": {
-    "dev": "npm run copy && node local_modules/delete-assets.js && vite --host",
-    "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
+    "bootstrap": "copyfiles -u 2 node_modules/bootstrap/**/* assets/bootstrap",
+    "dev": "npm run bootstrap && npm run copy && node local_modules/delete-assets.js && vite --host",
+    "build": "npm run bootstrap && npm run compile && vue-tsc --noEmit && vite build --mode lib",
     "prepack": "npm run build",
-    "build:docs": "npm run compile && npm run copy && vue-tsc --noEmit && vite build",
+    "build:docs": "npm run bootstrap && npm run compile && npm run copy && vue-tsc --noEmit && vite build",
     "preview": "vite preview --host",
     "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",

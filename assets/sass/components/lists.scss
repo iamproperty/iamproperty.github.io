@@ -32,6 +32,10 @@
       -webkit-mask-size: 100%;
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: 50% 50%;
+      @media (forced-colors: active) {
+        content: "\2713";
+        -webkit-mask-image: none;
+      }
     }
 
     &.tick--warning:before {
@@ -39,6 +43,11 @@
       background: var(--colour-warning);
       mask-image: var(--icon-warning);
       -webkit-mask-image: var(--icon-warning);
+      @media (forced-colors: active) {
+        content: "!";
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
     }
 
     &.tick--danger:before {
@@ -46,6 +55,11 @@
       background: var(--colour-danger);
       mask-image: var(--icon-warning);
       -webkit-mask-image: var(--icon-warning);
+      @media (forced-colors: active) {
+        content: "!";
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
     }
 
     &.tick--incomplete:before {

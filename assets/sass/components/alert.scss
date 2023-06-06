@@ -31,6 +31,14 @@
     transform: translate(-50%,0);
     bottom: 0;
   }
+
+  @media (forced-colors: active) {
+    
+    .alert__inner {
+      border: 1px solid CanvasText;
+      color: CanvasText;
+    }
+  }
 }
 
 // Dismissible alerts
@@ -53,6 +61,20 @@
     mask-size: 100%;
     mask-repeat: no-repeat;
     mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon-close);
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+
+    @media (forced-colors: active) {
+
+      &:before {
+        content: "X";
+      }
+      border: 1px solid CanvasText;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
   }
 }
 

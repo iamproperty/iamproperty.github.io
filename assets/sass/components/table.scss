@@ -4,6 +4,7 @@
 table {
   --border-width: 2px;
   --inner-border-width: 2px;
+  --hover-background: #EEEEEE;
   width: 100%;
   font-size: rem(16);
   border: none;
@@ -21,11 +22,7 @@ td,th {
   font-size: rem(16);
   line-height: rem(24);
   color: var(--colour-body);
-
-  @include media-breakpoint-up(sm) {
-    min-width: #{$td-mw};
-  }
-
+  
   &:last-child {
     padding-right: 0;
   }
@@ -41,23 +38,26 @@ thead {
   th {
     font-weight: bold;
     vertical-align: bottom;
-
-    @include media-breakpoint-up(sm) {
-      white-space: nowrap;
-      min-width: #{$td-mw};
-    }    
   }
 }
 
+@container (width >= 60em) {
+  thead {
+
+    th {
+      white-space: nowrap;
+        min-width: #{$td-mw};
+      }
+  }
+}
 
 tbody tr {
 
 
-  &:is(:hover,:focus,.hover) {
+  &:is(:hover,:focus-within,.hover) {
 
-    td {
-      --bg-colour-rgb: 238,238,238;
-      background: #EEEEEE;
+    th,td {
+      background: var(--hover-background);
     }
   }
 
@@ -88,15 +88,19 @@ table.border-0 {
 
 // #region Table wrapper - Add via JS if needed, provides a safe space to scroll
 :is(iam-table, .iam-table) {
-
+  --wrapper-padding: #{rem(32)};
   display: block;
-  padding: rem(32);
+  padding: var(--wrapper-padding);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
   border-radius: rem(8);
   margin-bottom: rem(32);
 
   table {
     margin-bottom: 0;
+  }
+
+  @media (forced-colors: active) {
+    --wrapper-padding: 0;
   }
 }
 

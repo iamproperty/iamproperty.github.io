@@ -11,7 +11,7 @@ const basicTable = `<thead>
     <th>Heading 3</th>
   </tr>
 </thead>
-<tbody
+<tbody>
   <tr>
     <td>Cell 1</td>
     <td>Low</td>
@@ -171,7 +171,10 @@ describe('populateDataQueries', () => {
   form.innerHTML += `<div><span data-query="total"></span><span data-query="Heading 2 == Low"></span></div>`;
 
   tableModule.addDataAttributes(table);
+  tableModule.filterTable(table, form, document.createElement('div'));
   tableModule.populateDataQueries(table, form);
+
+console.log(table.outerHTML)
 
   test('should populate elements with the data-query attribute with the result of the corresponding query', () => {
 

@@ -1,6 +1,6 @@
 @use "sass:map";
-@import "../../../node_modules/bootstrap/scss/_variables.scss";
-@import "../../../node_modules/bootstrap/scss/_maps.scss";
+@import "../../bootstrap/scss/_variables.scss";
+@import "../../bootstrap/scss/_maps.scss";
 
 // #region Grid Breakpoints, layouts
 $grid-breakpoints: (
@@ -82,8 +82,9 @@ $success:       #b4e6a5;
 $info:          #1ebee6;
 $warning:       #ffa500;
 $danger:        #dc3545;
-$light:         #ffd2d2;
+$light:         #EEEEEE;
 $dark:          #46003c;
+$canvas:        #FCFCFC;
 
 
 // Functional/state variables 
@@ -104,15 +105,22 @@ $grays: ();
 $theme-colors: ();
 $theme-colors: map-merge((
   "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
+  "secondary":    $secondary,
   "info":       $info,
   "warning":    $warning,
   "danger":     $danger,
-  "light":      $light,
+  "success":    $success,
   "dark":       $dark,
-  "admin":      #f0f0f0
+  "light":      $light,
+  "white":      $canvas
 ), $theme-colors);
+
+@each $color, $value in $theme-colors {
+
+  $vars: map-merge((
+    --colour-#{$color}-hex: $value
+  ), $vars);
+}
 
 
 $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
@@ -121,7 +129,9 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
 @each $color, $value in $theme-colors-rgb {
 
   $vars: map-merge((
-    --colour-#{$color}: rgba($value,var(--alpha, 1))
+    --colour-#{$color}-hex: $value,
+    --colour-#{$color}-rgb: $value,
+    --colour-#{$color}: rgba(var(--colour-#{$color}-rgb), var(--bg-opacity,1))
   ), $vars);
 }
 
@@ -132,7 +142,7 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
     @return #{map-get($theme-colors, #{$identifier})};
   }
 
-  @return var(--colour-#{$identifier});
+  @return rgba(var(--colour-#{$identifier}-rgb),var(--bg-opacity));
 }
 @function show-css-var-text($identifier) {
 
@@ -140,16 +150,16 @@ $theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
     @return #{map-get($theme-colors, #{$identifier})};
   }
 
-  @return var(--colour-#{$identifier});
+  @return rgba(var(--colour-#{$identifier}-rgb),var(--text-opacity));
 }
 
 $utilities-colors: $theme-colors-rgb;
 
-$utilities-colors: map-merge(
+$utilities-text: map-merge(
   $utilities-colors,
   (
     "black": to-rgb($black),
-    "white": to-rgb($white),
+    "muted": to-rgb($colour-muted),
     "body": to-rgb($body-color)
   )
 );
@@ -162,39 +172,63 @@ $utilities-text-colors: map-loop($utilities-text, show-css-var-text, "$key");
 // Colours that we want setting but not used for Bootstraps mixins, i.e. .text-primary, .bg-muted
 $non-theme-colors: ();
 $non-theme-colors: map-merge((
-  "black":      #000000,
-  "white":      #ffffff,
   "muted":      $colour-muted,
-  "border":           $colour-border,
-  "border-light":     #eeeeee,
-  "link":             $colour-link,
-  "focus":            $colour-focus,
-  "hover":            $colour-hover,
-  "active":           $colour-active,
-  "selected":         $colour-selected,
-  "body": $colour-body,
-  "inverted": $colour-inverted
+  "body":       $body-color,
+  "border":     $colour-border,
+  "link":       var(--colour-primary),
+  "brand":      var(--colour-primary),
+  "underline":  var(--colour-secondary),
+  "heading":    var(--colour-primary),
+  "focus":      var(--colour-primary),
+  "hover":      var(--colour-primary),
+  "active":     var(--colour-primary),
+  "selected":   var(--colour-info),
+  "inverted":   $canvas,
+  "canvas":     $canvas,
+  "btn": var(--colour-primary),
+  "btn-bg": var(--colour-warning),
+  "btn-border": var(--colour-warning),
+  "btn-bg-hover": transparent,
+  "btn-hover": var(--colour-primary),
+  "btn-secondary": var(--colour-primary),
+  "btn-secondary-border": var(--colour-primary),
+  "btn-secondary-bg": transparent,
+  "btn-secondary-bg-hover": var(--colour-primary),
+  "btn-secondary-hover": var(--colour-inverted)
 ), $non-theme-colors);
 
 @each $color, $value in $non-theme-colors {
 
   $vars: map-merge((
-    --colour-#{$color}-theme: #{$value},
-    --colour-#{$color}: #{'var(--colour-'+$color+'-theme)'}
+    --colour-#{$color}: #{$value}
   ), $vars);
 }
 
-$vars: map-merge((
-  "--colour-white-theme": rgba(to-rgb(#ffffff),var(--alpha,1)),
-  "--colour-black-theme": rgba(to-rgb(#000000),var(--alpha,1)),
-  "--colour-body":  rgba(to-rgb($colour-body),var(--alpha,1)),
-  "--colour-white": rgba(to-rgb(#ffffff),var(--alpha,1)),
-  "--colour-black": rgba(to-rgb(#000000),var(--alpha,1)),
-  "--colour-admin-theme":      #f0f0f0
-), $vars);
+$dark-mode-colors: map-merge($non-theme-colors, (
+  "link": var(--colour-inverted),
+  "body": var(--colour-inverted),
+  "heading": var(--colour-inverted),
+  "hover": var(--colour-inverted),
+  "active": var(--colour-inverted),
+  "border": var(--colour-inverted),
+  "brand": var(--colour-inverted),
+  "underline": var(--colour-inverted),
+  "canvas": var(--colour-primary),
+  "light": $light,
 
-$gradient: linear-gradient(180deg, var(--colour-secondary) 0, var(--colour-info) 100%);
+  
+  "btn": #{$primary},
+  "btn-border": #{$colour-inverted},
+  "btn-bg": #{$colour-inverted},
+  "btn-hover": #{$colour-inverted},
 
+  
+  "btn-secondary": var(--colour-inverted),
+  "btn-secondary-border": var(--colour-inverted),
+  "btn-secondary-bg": transparent,
+  "btn-secondary-bg-hover": var(--colour-inverted),
+  "btn-secondary-hover": var(--colour-primary)
+));
 // #endregion
 
 // #region aspect ratios
@@ -413,6 +447,11 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 $icon-question: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'><path d='M14 21.5v-3c0-0.281-0.219-0.5-0.5-0.5h-3c-0.281 0-0.5 0.219-0.5 0.5v3c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5zM18 11c0-2.859-3-5-5.688-5-2.547 0-4.453 1.094-5.797 3.328-0.141 0.219-0.078 0.5 0.125 0.656l2.063 1.563c0.078 0.063 0.187 0.094 0.297 0.094 0.141 0 0.297-0.063 0.391-0.187 0.734-0.938 1.047-1.219 1.344-1.437 0.266-0.187 0.781-0.375 1.344-0.375 1 0 1.922 0.641 1.922 1.328 0 0.812-0.422 1.219-1.375 1.656-1.109 0.5-2.625 1.797-2.625 3.313v0.562c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5v0c0-0.359 0.453-1.125 1.188-1.547 1.188-0.672 2.812-1.578 2.812-3.953zM24 14c0 6.625-5.375 12-12 12s-12-5.375-12-12 5.375-12 12-12 12 5.375 12 12z'/></svg>");
 $icon-warning: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'><path d='M12 2c6.625 0 12 5.375 12 12s-5.375 12-12 12-12-5.375-12-12 5.375-12 12-12zM14 21.484v-2.969c0-0.281-0.219-0.516-0.484-0.516h-3c-0.281 0-0.516 0.234-0.516 0.516v2.969c0 0.281 0.234 0.516 0.516 0.516h3c0.266 0 0.484-0.234 0.484-0.516zM13.969 16.109l0.281-9.703c0-0.109-0.047-0.219-0.156-0.281-0.094-0.078-0.234-0.125-0.375-0.125h-3.437c-0.141 0-0.281 0.047-0.375 0.125-0.109 0.063-0.156 0.172-0.156 0.281l0.266 9.703c0 0.219 0.234 0.391 0.531 0.391h2.891c0.281 0 0.516-0.172 0.531-0.391z'></path></svg>");
 
+
+$icon-filter: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 15'><path d='M0,28.5a.5.5,0,0,0,.5.5H2.55a2.5,2.5,0,0,0,4.9,0H15.5a.5.5,0,0,0,0-1H7.45a2.5,2.5,0,0,0-4.9,0H.5A.5.5,0,0,0,0,28.5Zm3.5,0A1.5,1.5,0,1,1,5,30,1.5,1.5,0,0,1,3.5,28.5Zm6-5A1.5,1.5,0,1,1,11,25a1.5,1.5,0,0,1-1.5-1.5ZM11,21a2.5,2.5,0,0,0-2.45,2H.5a.5.5,0,0,0,0,1H8.55a2.5,2.5,0,0,0,4.9,0H15.5a.5.5,0,0,0,0-1H13.45A2.5,2.5,0,0,0,11,21ZM6,20a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,6,20Zm2.45-2a2.5,2.5,0,0,0-4.9,0H.5a.5.5,0,0,0,0,1H3.55a2.5,2.5,0,0,0,4.9,0H15.5a.5.5,0,0,0,0-1Z' transform='translate(0 -16)'/></svg>");
+
+
+
 $vars: map-merge((
   --icon-blank: #{escape-svg($icon-blank)},
   --icon-sort: #{$icon-sort},
@@ -420,7 +459,8 @@ $vars: map-merge((
   --icon-close: #{escape-svg($icon-close)},
   --icon-tick: #{escape-svg($icon-tick)},
   --icon-question: #{escape-svg($icon-question)},
-  --icon-warning: #{escape-svg($icon-warning)}
+  --icon-warning: #{escape-svg($icon-warning)},
+  --icon-filter: #{escape-svg($icon-filter)}
 ), $vars);
 // #endregion
 

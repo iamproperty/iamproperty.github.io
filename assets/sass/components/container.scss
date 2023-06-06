@@ -1,7 +1,7 @@
 @use "sass:math";
 @use "../_func.scss" as *;
 
-@import "../../../node_modules/bootstrap/scss/_grid.scss";
+@import "../../bootstrap/scss/_grid.scss";
 
 // #region container
 .container {

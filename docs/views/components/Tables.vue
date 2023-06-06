@@ -575,7 +575,7 @@
     <div class="container">
       
       <h2>Implementation</h2>
-      <Tabs >
+      <Tabs>
         <details>
           <summary><h2>Web component</h2></summary>
           <WebReadme></WebReadme>
@@ -590,7 +590,7 @@
         </details>
       </Tabs>
     </div>
-    <div class="bg-admin version-control">
+    <div class="bg-light version-control">
       <div class="container">
         <table>
           <thead>

@@ -69,16 +69,12 @@ export const addGlobalEvents = (body) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-modal]')){
 
       const button = event.target.closest('[data-modal]');
-      const modalID = button.getAttribute('data-modal');
+      const modalID = button.hasAttribute('data-modal') ? button.getAttribute('data-modal') : button.getAttribute('data-filter');
       const dialog = document.querySelector(`dialog#${modalID}`);
       
       // Create close button is needed
-      if(dialog.parentNode.closest('form') && !dialog.querySelector(':scope > .dialog__close:first-child'))
-        dialog.innerHTML = `<button class="dialog__close" formmethod="dialog">Close</button>${dialog.innerHTML}`;
-      else if(!dialog.parentNode.closest('form') && !dialog.querySelector(':scope > form:first-child'))
-        dialog.innerHTML = `<form><button class="dialog__close" formmethod="dialog">Close</button></form>${dialog.innerHTML}`;
-
-
+      dialog.innerHTML = `<button class="dialog__close">Close</button>${dialog.innerHTML}`;
+      
       let videoButton = dialog.querySelector('.youtube-embed a');
 
       if (videoButton){
@@ -94,6 +90,20 @@ export const addGlobalEvents = (body) => {
       });
     };
     // Close modal
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('button.dialog__close')){
+      const dialog = event.target.closest('dialog[open]');
+
+      event.preventDefault();
+      dialog.close()
+        
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        "event": "closeModal",
+        "id": dialog.getAttribute('id')
+      });
+    }
+    
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
       const dialog = event.target.closest('dialog[open]');
       const dialogDimensions = dialog.getBoundingClientRect()
@@ -111,18 +121,49 @@ export const addGlobalEvents = (body) => {
     // Popover
     if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')){
 
+      // Close existing open popover
+
       let btn = event.target.closest('.dialog__wrapper > button');
       let parent = event.target.closest('.dialog__wrapper > button').parentNode;
       let dataEvent = "openPopover"
       let popover = parent.querySelector(':scope > dialog');
       
+
+      if(document.querySelector('dialog[open]') && document.querySelector('dialog[open]') != popover)
+        document.querySelector('dialog[open]').close();
+
+
       if(popover.hasAttribute('open')){
         
         popover.close();
         dataEvent = "closePopover"
+
+        popover.removeAttribute('style');
+        btn.classList.remove('active');
       }
-      else
+      else {
+        
         popover.show();
+        btn.classList.add('active');
+      
+        var position = btn.getBoundingClientRect();
+        let topOffset = position.top;
+        let leftOffset = position.left;
+
+        if(btn.closest('iam-table')){
+
+          let container = btn.closest('iam-table').parentNode.getBoundingClientRect();
+
+          topOffset -= container.top;
+          leftOffset -= container.left;
+
+        }
+
+        if(popover.classList.contains('dialog--fix')){
+          popover.setAttribute('style',`position:fixed;top: ${topOffset}px; left: ${leftOffset}px; margin: 3rem 0 0 0;`)
+        }
+      }
+        
 
       window.dataLayer = window.dataLayer || [];
       
