@@ -139,6 +139,11 @@ dialog::backdrop {
 
       transform: rotate(90deg);
     }
+
+    &.active:after {
+
+      transform: rotate(-90deg);
+    }
   }
 
   &:has(dialog[open]) > .btn:first-child:after {
