@@ -209,6 +209,7 @@ $dark-mode-colors: map-merge($non-theme-colors, (
   "body": var(--colour-inverted),
   "heading": var(--colour-inverted),
   "hover": var(--colour-inverted),
+  "active": var(--colour-inverted),
   "border": var(--colour-inverted),
   "brand": var(--colour-inverted),
   "underline": var(--colour-inverted),

@@ -139,9 +139,13 @@ export const addGlobalEvents = (body) => {
         dataEvent = "closePopover"
 
         popover.removeAttribute('style');
+        btn.classList.remove('active');
       }
       else {
+        
         popover.show();
+        btn.classList.add('active');
+      }
 
         var position = btn.getBoundingClientRect();
         let topOffset = position.top;

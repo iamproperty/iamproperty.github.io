@@ -9,41 +9,51 @@
       <h2>Buttons</h2>
       <p class="lead">Buttons are generally used as an anchor link to another page or to perform an action such as submitting a form.</p>
       <h3>Primary</h3>
-      <p>Use a primary button to call attention to an action on a form or to highlight the strongest call to action on a page. Primary buttons should only appear once per container (not including the application header or in a modal dialog). Not every screen requires a primary button.</p>
-    </div>
-
-    <div class="container visualtest pb-5 pe-none">
-      <div class="row">
-        <div class="col-sm-6 col-md-4">
-          <p class="lead pb-2">Default state</p>
-          <a href="/components/buttons" class="btn btn-primary">Lorum ipsum</a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <p class="lead pb-2">Hover/Focus state</p>
-          <a href="/components/buttons" class="btn btn-primary hover">Lorum ipsum</a>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-6 col-md-4">
-          <a href="/components/buttons" class="btn btn-primary colour-primary">Lorum ipsum</a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <a href="/components/buttons" class="btn btn-primary colour-primary hover">Lorum ipsum</a>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
-          <a href="/components/buttons" class="btn btn-primary">Lorum ipsum</a>
-        </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
-          <a href="/components/buttons" class="btn btn-primary hover">Lorum ipsum</a>
-        </div>
-      </div>
+      <p>Use a primary button to call attention to an action on a form or to highlight the strongest call to action on a page. Primary buttons should only appear once per container (not including the application header or in a modal dialog). Not every screen requires a primary button. A filter overlay of 85% brightness will be applied to the default states for the active state.</p>
     </div>
 
     <!-- #region Primary button -->
+    <div class="container visualtest pb-5 pe-none">
+      <div class="row">
+        <div class="col-sm-4 col-md-4">
+          <p class="lead pb-2">Default state</p>
+          <a href="/components/buttons" class="btn btn-primary">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <p class="lead pb-2">Hover/Focus state</p>
+          <a href="/components/buttons" class="btn btn-primary hover">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-primary active">Lorum ipsum</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4 col-md-4">
+          <a href="/components/buttons" class="btn btn-primary colour-primary">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <a href="/components/buttons" class="btn btn-primary colour-primary hover">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-4 col-md-4">
+          <a href="/components/buttons" class="btn btn-primary colour-primary active">Lorum ipsum</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-primary">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-primary hover">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-primary active">Lorum ipsum</a>
+        </div>
+      </div>
+    </div>
+
     <div class="container pb-0">
       <h4 class="text-body">Primary button (with icon)</h4>
       <p>Use an icon to support a primary button. See example below where a plus is used to highlight that the button action adds a new record. The icon can be added before or after the button copy. Whichever is most relevant.</p>
@@ -59,6 +69,10 @@
           <p class="lead pb-2">Hover/Focus state</p>
           <a href="/components/buttons" class="btn btn-primary hover fa-plus-large">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-primary active fa-plus-large">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -68,6 +82,9 @@
         <div class="col-sm-6 col-md-4">
           <a href="/components/buttons" class="btn btn-primary colour-primary hover fa-plus-large">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <a href="/components/buttons" class="btn btn-primary colour-primary active fa-plus-large">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -76,6 +93,9 @@
         </div>
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-primary hover fa-plus-large">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-primary active fa-plus-large">Lorum ipsum</a>
         </div>
       </div>
     </div>
@@ -96,6 +116,10 @@
           <p class="lead pb-2">Focus/Hover state</p>
           <a href="/components/buttons" class="btn btn-primary hover btn--prompt">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-primary active btn--prompt">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -105,6 +129,9 @@
         <div class="col-sm-6 col-md-4">
           <a href="/components/buttons" class="btn btn-primary colour-primary hover btn--prompt">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <a href="/components/buttons" class="btn btn-primary colour-primary active btn--prompt">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -113,6 +140,9 @@
         </div>
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-primary hover btn--prompt">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-primary active btn--prompt">Lorum ipsum</a>
         </div>
       </div>
     </div>
@@ -134,6 +164,10 @@
           <p class="lead pb-2">Hover/focus state</p>
           <a href="/components/buttons" class="btn btn-primary hover btn-sm">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Hover/focus state</p>
+          <a href="/components/buttons" class="btn btn-primary active btn-sm">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -143,6 +177,9 @@
         <div class="col-sm-6 col-md-4">
           <a href="/components/buttons" class="btn btn-primary colour-primary hover btn-sm">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <a href="/components/buttons" class="btn btn-primary colour-primary active btn-sm">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -151,6 +188,9 @@
         </div>
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-primary hover btn-sm">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-primary active btn-sm">Lorum ipsum</a>
         </div>
       </div>
     </div>
@@ -172,6 +212,10 @@
           <p class="lead pb-2">Hover/Focus state</p>
           <a href="/components/buttons" class="btn btn-primary hover btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
+        <div class="col-7 col-sm-3">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-primary active btn-compact fa-plus-large">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -181,6 +225,9 @@
         <div class="col-7 col-sm-3">
           <a href="/components/buttons" class="btn btn-primary colour-primary hover btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
+        <div class="col-7 col-sm-3">
+          <a href="/components/buttons" class="btn btn-primary colour-primary active btn-compact fa-plus-large">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -189,6 +236,9 @@
         </div>
         <div class="col-7 col-sm-3 bg-primary pt-3 pb-2">
           <a href="/components/buttons" class="btn btn-primary hover btn-compact fa-plus-large">Lorum ipsum</a>
+        </div>
+        <div class="col-7 col-sm-3 bg-primary pt-3 pb-2">
+          <a href="/components/buttons" class="btn btn-primary active btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
       </div>
     </div>
@@ -210,6 +260,10 @@
           <p class="lead pb-2">Hover/Focus state</p>
           <a href="/components/buttons" class="btn btn-primary hover colour-success">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-primary active colour-success">Lorum ipsum</a>
+        </div>
       </div>
 
     </div>
@@ -218,28 +272,34 @@
     <!-- #region Secondary button -->
     <div class="container">
       <h3>Secondary</h3>
-      <p>Use a secondary button to help the user get a further understanding of its priority. It can either be paired alongside a primary button on used on it’s own to support a secondary action for the user.</p>
+      <p>Use a secondary button to help the user get a further understanding of its priority. It can either be paired alongside a primary button on used on it’s own to support a secondary action for the user. A filter overlay of 85% brightness will be applied to the default states for the active state.</p>
     </div>
 
     <div class="container visualtest pb-5 pe-none">
       <div class="row">
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-4 col-md-4">
           <p class="lead pb-2">Default state</p>
           <a href="/components/buttons" class="btn btn-secondary">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4">
+        <div class="col-sm-4 col-md-4">
           <p class="lead pb-2">Hover/Focus state</p>
           <a href="/components/buttons" class="btn btn-secondary hover">Lorum ipsum</a>
         </div>
+        <div class="col-sm-4 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-secondary active">Lorum ipsum</a>
+        </div>
       </div>
 
-
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-4 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-secondary">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-4 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-secondary hover">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-secondary active">Lorum ipsum</a>
         </div>
       </div>
     </div>
@@ -259,6 +319,10 @@
           <p class="lead pb-2">Hover/Focus state</p>
           <a href="/components/buttons" class="btn btn-secondary hover fa-plus-large">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-secondary active fa-plus-large">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -267,6 +331,9 @@
         </div>
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-secondary hover fa-plus-large">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-secondary active fa-plus-large">Lorum ipsum</a>
         </div>
       </div>
     </div>
@@ -287,6 +354,10 @@
           <p class="lead pb-2">Focus/Hover state</p>
           <a href="/components/buttons" class="btn btn-secondary hover btn--prompt">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-secondary active btn--prompt">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -296,14 +367,17 @@
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-secondary hover btn--prompt">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-secondary active btn--prompt">Lorum ipsum</a>
+        </div>
       </div>
     </div>
 
-
+ 
     <div class="container pb-0">
       <h4 class="text-body">Secondary button (opening filter dialog pop-over)</h4>
       <p>Secondary buttons can be used to open a filter dialog pop-over.</p>
-    </div>
+    </div>  
 
     <div class="container visualtest pb-5 pe-none">
       <div class="row">
@@ -321,6 +395,13 @@
             <dialog><p>Dialog content</p></dialog>
           </div>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <div class="dialog__wrapper">
+            <button class="btn btn-secondary active"><i class="fa-light fa-user"></i>Individual</button>
+            <dialog><p>Dialog content</p></dialog>
+          </div>
+        </div>
       </div>
 
       <div class="row">
@@ -333,6 +414,12 @@
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <div class="dialog__wrapper">
             <button class="btn btn-secondary hover"><i class="fa-light fa-user"></i>Individual</button>
+            <dialog><p>Dialog content</p></dialog>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <div class="dialog__wrapper">
+            <button class="btn btn-secondary active"><i class="fa-light fa-user"></i>Individual</button>
             <dialog><p>Dialog content</p></dialog>
           </div>
         </div>
@@ -363,6 +450,13 @@
           <dialog id="example2"><p>Dialog content</p></dialog>
         
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          
+          <button class="btn btn-secondary btn-filter active" data-model="example2b">Filter by</button>
+          <dialog id="example2b"><p>Dialog content</p></dialog>
+        
+        </div>
       </div>
 
       <div class="row">
@@ -376,8 +470,11 @@
           
           <button class="btn btn-secondary  btn-filter hover" data-model="example4">Filter by</button>
           <dialog id="example4"><p>Dialog content</p></dialog>
-        
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
           
+          <button class="btn btn-secondary  btn-filter active" data-model="example4b">Filter by</button>
+          <dialog id="example4b"><p>Dialog content</p></dialog>
         </div>
       </div>
     </div>
@@ -396,7 +493,7 @@
           <div class="btn btn-secondary">
             <select>
               <option>Sort by</option>
-              <option>Option 1</option>
+              <option>Partial name of option</option>
               <option>Option 2</option>
             </select>
           </div>
@@ -408,11 +505,22 @@
           <div class="btn btn-secondary hover">
             <select >
               <option>Sort by</option>
-              <option>Option 1</option>
+              <option>Partial name of option</option>
               <option>Option 2</option>
             </select>
           </div>
 
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          
+          <div class="btn btn-secondary active">
+            <select >
+              <option>Sort by</option>
+              <option>Partial name of option</option>
+              <option>Option 2</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -423,7 +531,7 @@
           <div class="btn btn-secondary">
             <select>
               <option>Sort by</option>
-              <option>Option 1</option>
+              <option>Partial name of option</option>
               <option>Option 2</option>
             </select>
           </div>
@@ -435,7 +543,19 @@
           <div class="btn btn-secondary hover">
             <select>
               <option>Sort by</option>
-              <option>Option 1</option>
+              <option>Partial name of option</option>
+              <option>Option 2</option>
+            </select>
+          </div>
+          
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          
+          
+          <div class="btn btn-secondary active">
+            <select>
+              <option>Sort by</option>
+              <option>Partial name of option</option>
               <option>Option 2</option>
             </select>
           </div>
@@ -462,6 +582,10 @@
           <p class="lead pb-2">Hover/focus state</p>
           <a href="/components/buttons" class="btn btn-secondary hover btn-sm">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-secondary active btn-sm">Lorum ipsum</a>
+        </div>
       </div>
       <div class="row">
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
@@ -469,6 +593,9 @@
         </div>
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-secondary hover btn-sm">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-secondary active btn-sm">Lorum ipsum</a>
         </div>
       </div>
     </div>
@@ -490,6 +617,10 @@
           <p class="lead pb-2">Hover/Focus state</p>
           <a href="/components/buttons" class="btn btn-secondary hover btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
+        <div class="col-7 col-sm-3">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-secondary active btn-compact fa-plus-large">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -499,6 +630,9 @@
         <div class="col-7 col-sm-3">
           <a href="/components/buttons" class="btn btn-secondary colour-secondary hover btn-compact fa-save">Lorum ipsum</a>
         </div>
+        <div class="col-7 col-sm-3">
+          <a href="/components/buttons" class="btn btn-secondary colour-secondary active btn-compact fa-save">Lorum ipsum</a>
+        </div>
       </div>
       <div class="row">
         <div class="col-5 col-sm-3">
@@ -506,6 +640,9 @@
         </div>
         <div class="col-7 col-sm-3">
           <a href="/components/buttons" class="btn btn-secondary colour-danger hover btn-compact fa-trash">Lorum ipsum</a>
+        </div>
+        <div class="col-7 col-sm-3">
+          <a href="/components/buttons" class="btn btn-secondary colour-danger active btn-compact fa-trash">Lorum ipsum</a>
         </div>
       </div>
 
@@ -516,6 +653,9 @@
         <div class="col-7 col-sm-3 bg-primary pt-3 pb-2">
           <a href="/components/buttons" class="btn btn-secondary hover btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
+        <div class="col-7 col-sm-3 bg-primary pt-3 pb-2">
+          <a href="/components/buttons" class="btn btn-secondary active btn-compact fa-plus-large">Lorum ipsum</a>
+        </div>
       </div>
     </div>
     <!-- #endregion -->
@@ -523,7 +663,7 @@
     <!-- #region tertiary button -->
     <div class="container pb-0">
       <h3>Tertiary</h3>
-      <p>Use a tertiary button for links such as low level navigations. </p>
+      <p>Use a tertiary button for links such as low level navigations. A filter overlay of 85% brightness will be applied to the default states for the active state.</p>
     </div>
 
 
@@ -537,6 +677,10 @@
           <p class="lead pb-2">Hover/Focus state</p>
           <a href="/components/buttons" class="btn btn-tertiary hover">Lorum ipsum</a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-tertiary active">Lorum ipsum</a>
+        </div>
       </div>
 
       <div class="row">
@@ -545,6 +689,9 @@
         </div>
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <a href="/components/buttons" class="btn btn-tertiary hover">Lorum ipsum</a>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <a href="/components/buttons" class="btn btn-tertiary active">Lorum ipsum</a>
         </div>
       </div>
     </div>
@@ -565,12 +712,16 @@
           <p class="lead pb-2">Hover/Focus state</p>
           <a href="/components/buttons" class="btn btn-tertiary hover"><span>Lorum ipsum</span><i class="fa-light fa-arrow-down-to-bracket"></i></a>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-tertiary active"><span>Lorum ipsum</span><i class="fa-light fa-arrow-down-to-bracket"></i></a>
+        </div>
       </div>
     </div>
 
     <!-- #endregion -->
 
-    <!-- #region links -->
+    <!-- #region diasabled -->
     <div class="container pb-0">
       <h3>Disabled button state</h3>
       <p>When any of the buttons above are disabled we should:<br/>
@@ -616,6 +767,11 @@
           <p><a href="/components/buttons" class="hover">industry's standard</a></p>
           <p><a href="/components/buttons" class="hover"><i class="fa-light fa-envelope"></i> unknown printer</a></p>
         </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <p><a href="/components/buttons" class="active">industry's standard</a></p>
+          <p><a href="/components/buttons" class="active"><i class="fa-light fa-envelope"></i> unknown printer</a></p>
+        </div>
       </div>
       <div class="row">
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
@@ -625,6 +781,10 @@
         <div class="col-sm-6 col-md-4 bg-primary pt-3">
           <p><a href="/components/buttons" class="hover">industry's standard</a></p>
           <p><a href="/components/buttons" class="hover"><i class="fa-light fa-envelope"></i> unknown printer</a></p>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+          <p><a href="/components/buttons" class="active">industry's standard</a></p>
+          <p><a href="/components/buttons" class="active"><i class="fa-light fa-envelope"></i> unknown printer</a></p>
         </div>
       </div>
     </div>
