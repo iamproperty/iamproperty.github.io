@@ -64,6 +64,9 @@ export const getLargestLastColWidth = (table) => {
 
 export const createMobileButton = (table) => {
 
+  if(table.closest('.table--fullwidth'))
+    return false;
+
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     let firstCol = row.querySelector(':scope > :is(td,th):first-child');
     let colContent = firstCol.textContent;

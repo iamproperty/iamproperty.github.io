@@ -127,6 +127,14 @@ const routes = [
         component: () => import('./views/components/Index.vue')
       },
       {
+        path: 'panel',
+        name: 'Admin panel',
+        meta: {
+          title: 'Admin panel | Components | iamkey'
+        },
+        component: () => import('./views/components/PanelDoc.vue')
+      },
+      {
         path: 'accordion',
         name: 'Accordion',
         meta: {
@@ -356,14 +364,6 @@ const routes = [
           title: 'Note feed | Components | iamkey'
         },
         component: () => import('./views/components/NoteFeedDoc.vue')
-      },
-      {
-        path: 'panel',
-        name: 'Admin panel',
-        meta: {
-          title: 'Admin panel | Components | iamkey'
-        },
-        component: () => import('./views/components/PanelDoc.vue')
       },
       {
         path: 'pagination',
@@ -667,6 +667,14 @@ const routes = [
           title: 'Agent dashboard | iamkey'
         },
         component: () => import('./views/standalone/AgentDashboard.vue')
+      },
+      {
+        path: 'openview',
+        name: "Openview homepage",
+        meta: {
+          title: 'Openview homepage | iamkey'
+        },
+        component: () => import('./views/standalone/Openview.vue')
       }
     ]
   },

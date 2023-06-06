@@ -1,10 +1,10 @@
 @use "_func" as *;
 
-@import "../../node_modules/bootstrap/scss/forms/labels";
-@import "../../node_modules/bootstrap/scss/forms/form-control";
-@import "../../node_modules/bootstrap/scss/forms/form-select";
-@import "../../node_modules/bootstrap/scss/forms/form-check";
-@import "../../node_modules/bootstrap/scss/forms/form-range";
-@import "../../node_modules/bootstrap/scss/forms/input-group";
-@import "../../node_modules/bootstrap/scss/forms/validation";
+@import "../bootstrap/scss/forms/labels";
+@import "../bootstrap/scss/forms/form-control";
+@import "../bootstrap/scss/forms/form-select";
+@import "../bootstrap/scss/forms/form-check";
+@import "../bootstrap/scss/forms/form-range";
+@import "../bootstrap/scss/forms/input-group";
+@import "../bootstrap/scss/forms/validation";
 @import "components/forms.scss";

@@ -1,6 +1,6 @@
 @use "../_func" as *;
 
-@import "../../../node_modules/bootstrap/scss/_reboot.scss";
+@import "../../bootstrap/scss/_reboot.scss";
 
 /* Reset & Defaults - Most of the resets/normailization stuff is done by Bootstrap */
 html {

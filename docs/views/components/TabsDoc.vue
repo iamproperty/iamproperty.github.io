@@ -54,22 +54,6 @@
             <h2>Tab content 2</h2>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 
-            <Tabs>
-              <Tab title="The benefits of auction">
-                <h2>Tab content 1</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-              </Tab>
-              <Tab title="The types of auctions we offer">
-                <h2>Tab content 2</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-              </Tab>
-              <Tab title="Online auctions">
-                <h2>Tab content 3</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-              </Tab>
-            </Tabs>
-
-
           </Tab>
           <Tab title="Online auctions" lazy>
             <h2>Tab content 3</h2>

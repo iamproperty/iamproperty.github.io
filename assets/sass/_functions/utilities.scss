@@ -1,6 +1,6 @@
 @use "functions" as *;
 
-@import "../../../node_modules/bootstrap/scss/utilities";
+@import "../../bootstrap/scss/utilities";
 
 // #region Sizing
 /* Enhance the max width utility to include fit-content which can come in handy for flex-box based layouts. */

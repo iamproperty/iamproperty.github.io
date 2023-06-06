@@ -83,9 +83,11 @@ components.forEach((component) => {
   let css = '';
 
   try {
-    css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.css`), 'utf8');
-    css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
-
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.css`))) {
+      
+      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.css`), 'utf8');
+      css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+    }
   } catch (err) {
     console.error(err);
   }

@@ -7,6 +7,8 @@
   > .tabs__links {
     margin-bottom: 1.5rem;
     overflow: hidden;
+    padding-bottom: 2px;
+
 
     .link:not(.text-decoration-none):not(.btn) {
       --is-current: 0;
@@ -18,6 +20,7 @@
       float: left;
       clear: both;
       padding: 0;
+      display: inline-block;
 
       @include media-breakpoint-up(sm) {
         clear: none;
@@ -25,14 +28,23 @@
         margin-right: 2rem;
       }
 
-      &:before {
-        width: 0;
+      &:after {
+        position: absolute;
+        content: "";
+        top: 100%;
+        left: 50%;
+        height: 2px;
+        //width: 100%;
+        transform: translate(-50%,0);
+        background: var(--colour-underline);
+        transition: width 0.5s;
+        
         width: calc(var(--is-current) * 100%);
       }
 
-      &:hover:before,
-      &:focus:before,
-      &.focus:before {
+      &:hover:after,
+      &:focus:after,
+      &.focus:after {
         width: 100%;
       }
     }
@@ -49,7 +61,7 @@
 // #region admin panel
 .admin-panel .tabs__links,
 :host(.admin-panel) .tabs__links {
-
+/*
   margin-top: -3px!important;
   margin-left: calc(var(--panel-gutter) * -1);
   margin-right: calc(var(--panel-gutter) * -1);
@@ -94,6 +106,7 @@
       border-top: 3px solid var(--panel-tab-border, #fafafa);
     }
   }
+  */
 }
 
 :host(.admin-panel) {
