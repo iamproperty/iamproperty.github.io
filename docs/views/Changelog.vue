@@ -3,8 +3,9 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.4.8--alpha</h2>
+      <h2>V3.5</h2>
       <ul>
+        <li>New way of loading bootstrap</li>
         <li>Redesigned Admin panels</li>
         <li>Redesigned buttons and links</li>
       </ul>

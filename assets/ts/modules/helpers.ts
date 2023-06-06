@@ -145,8 +145,7 @@ export const addGlobalEvents = (body) => {
         
         popover.show();
         btn.classList.add('active');
-      }
-
+      
         var position = btn.getBoundingClientRect();
         let topOffset = position.top;
         let leftOffset = position.left;
