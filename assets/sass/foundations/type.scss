@@ -11,7 +11,7 @@ small {
   @include font-size($small-font-size);
 }
 
-@import "../../../node_modules/bootstrap/scss/_type.scss";
+@import "../../bootstrap/scss/_type.scss";
 
 // #region headings
 %heading {
