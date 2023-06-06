@@ -121,18 +121,46 @@ export const addGlobalEvents = (body) => {
     // Popover
     if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')){
 
+      // Close existing open popover
+
       let btn = event.target.closest('.dialog__wrapper > button');
       let parent = event.target.closest('.dialog__wrapper > button').parentNode;
       let dataEvent = "openPopover"
       let popover = parent.querySelector(':scope > dialog');
       
+
+      if(document.querySelector('dialog[open]') && document.querySelector('dialog[open]') != popover)
+        document.querySelector('dialog[open]').close();
+
+
       if(popover.hasAttribute('open')){
         
         popover.close();
         dataEvent = "closePopover"
+
+        popover.removeAttribute('style');
       }
-      else
+      else {
         popover.show();
+
+        var position = btn.getBoundingClientRect();
+        let topOffset = position.top;
+        let leftOffset = position.left;
+
+        if(btn.closest('iam-table')){
+
+          let container = btn.closest('iam-table').parentNode.getBoundingClientRect();
+
+          topOffset -= container.top;
+          leftOffset -= container.left;
+
+        }
+
+        if(popover.classList.contains('dialog--fix')){
+          popover.setAttribute('style',`position:fixed;top: ${topOffset}px; left: ${leftOffset}px; margin: 3rem 0 0 0;`)
+        }
+      }
+        
 
       window.dataLayer = window.dataLayer || [];
       

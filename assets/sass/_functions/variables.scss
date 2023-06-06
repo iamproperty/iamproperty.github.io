@@ -1,6 +1,6 @@
 @use "sass:map";
-@import "../../../node_modules/bootstrap/scss/_variables.scss";
-@import "../../../node_modules/bootstrap/scss/_maps.scss";
+@import "../../bootstrap/scss/_variables.scss";
+@import "../../bootstrap/scss/_maps.scss";
 
 // #region Grid Breakpoints, layouts
 $grid-breakpoints: (

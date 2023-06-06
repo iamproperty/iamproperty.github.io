@@ -5,6 +5,7 @@
 
       <h2>V3.4.8--alpha</h2>
       <ul>
+        <li>Redesigned Admin panels</li>
         <li>Redesigned buttons and links</li>
       </ul>
 

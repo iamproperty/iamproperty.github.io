@@ -84,6 +84,11 @@ class iamTable extends HTMLElement {
       createPaginationButttons(this,this.pagination);
     }
 
+    this.shadowRoot.querySelector('.table__wrapper').addEventListener("scroll", (event) => {
+
+      if(this.table.querySelector('dialog[open]'))
+        this.table.querySelector('dialog[open]').close();
+    });
   }
 
 

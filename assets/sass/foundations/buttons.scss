@@ -32,7 +32,9 @@
   margin-right: rem(24);
   transition: background .5s, color .5s;
   height: auto;
+  max-width: fit-content;
   appearance: none;
+  white-space: nowrap;
 
   a:is(:hover, :focus, .hover, :active, .active, :focus-within):not([disabled]) &,
   &:is(:hover, :focus, .hover, :active, .active, :focus-within):not([disabled]) {
@@ -304,7 +306,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     min-height: rem(24);
     position: relative;
 
-    &:after {
+    &:not(.text-decoration-none):after {
       position: absolute;
       content: "";
       top: 100%;
