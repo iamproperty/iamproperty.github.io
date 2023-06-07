@@ -25,6 +25,15 @@ class iamFilterlist extends HTMLElement {
       margin-bottom: 3rem;
       display:block;
     }
+    :host(.mh-sm){
+      max-height: none!important;
+    }
+    :host(.mh-md){
+      max-height: none!important;
+    }
+    :host(.mh-lg){
+      max-height: none!important;
+    }
     </style>
     <div class="form-control__wrapper">
       <label for="search" class="visually-hidden">Search</label>
@@ -40,15 +49,8 @@ class iamFilterlist extends HTMLElement {
 
 	connectedCallback() {
 
-    const maxHeights = {
-      "small": "12.5rem",
-      "medium": "25rem",
-      "large": "37.5rem"
-    }
-
-    let maxHeightClass = (this.hasAttribute('data-max-height') && maxHeights[this.getAttribute('data-max-height')] ? 'list__wrapper--'+this.getAttribute('data-max-height') : '');
-
-    this.shadowRoot.querySelector('.list__wrapper').classList.add(maxHeightClass);
+    let classList = this.classList.toString();
+    this.shadowRoot.querySelector('.list__wrapper').setAttribute('class',`list__wrapper ${classList}`);
 
     if(!this.querySelector('i.fa-search'))
       this.innerHTML += '<i class="fa fa-light fa-search" aria-hidden="true" slot="icon"></i>';
