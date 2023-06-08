@@ -2,9 +2,10 @@
 
 .admin-panel {
   --padding-x: #{rem(32)};
-  --padding-y: #{rem(24)};
+  --padding-top: #{rem(24)};
+  --padding-bottom: #{rem(24)};
   display: block;
-  padding: var(--padding-y) var(--padding-x);
+  padding: var(--padding-top) var(--padding-x) var(--padding-bottom) var(--padding-x);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
   background-color: var(--colour-white);
   border-radius: rem(8);
@@ -39,7 +40,7 @@
     font-size: rem(18);
     line-height: rem(24);
     padding: rem(16) var(--padding-x);
-    margin: calc(var(--padding-y) * -1) calc(var(--padding-x) * -1) var(--padding-y) calc(var(--padding-x) * -1);
+    margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
     display: block;
     border-top-left-radius: rem(8);
     border-top-right-radius: rem(8);
@@ -73,13 +74,13 @@
   }
 
   > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child + :is(.mh-sm,.mh-md,.mh-lg){
-    padding-top: var(--padding-y);
-    margin-top: calc(var(--padding-y) * -1);
+    padding-top: var(--padding-top);
+    margin-top: calc(var(--padding-top) * -1);
   }
   
   > :is(.mh-sm,.mh-md,.mh-lg):last-child{
-    padding-bottom: var(--padding-y);
-    margin-bottom: calc(var(--padding-y) * -1)!important;
+    padding-bottom: var(--padding-bottom);
+    margin-bottom: calc(var(--padding-bottom) * -1)!important;
 
     > *:last-child{
       margin-bottom: 0!important;
@@ -100,7 +101,7 @@
 .admin-panel :is(.admin-panel__links, .tabs__links) {
 
   padding: 0;
-  margin: calc(var(--padding-y) * -1) calc(var(--padding-x) * -1) var(--padding-y) calc(var(--padding-x) * -1);
+  margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
 
   border-top-left-radius: rem(8);
   border-top-right-radius: rem(8);
