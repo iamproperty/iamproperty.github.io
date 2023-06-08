@@ -331,16 +331,21 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     min-height: rem(24);
     position: relative;
 
-    &:not(.text-decoration-none):after {
+    &:after {
       position: absolute;
       content: "";
       top: 100%;
       left: 50%;
       height: 2px;
-      width: 100%;
+      width: 0%;
       transform: translate(-50%,0);
       background: var(--colour-underline);
       transition: width 0.5s;
+    }
+
+    &:not(.text-decoration-none):after {
+
+      width: 100%;
     }
 
     [class*=fa-] {

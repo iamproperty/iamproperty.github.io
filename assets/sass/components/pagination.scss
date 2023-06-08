@@ -16,12 +16,16 @@
   text-align: center;
   overflow: hidden;
   border: none!important;
+  text-decoration: none;
+  font-weight: normal;
+  display: block;
 }
 
 .pagination .page-item {
   border: var(--#{$prefix}pagination-border-width) solid var(--#{$prefix}pagination-border-color);
   border-radius: 4px!important;
   @include transition($pagination-transition);
+  overflow: hidden;
 
   &:hover {
     border-color: var(--#{$prefix}pagination-hover-border-color);

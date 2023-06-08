@@ -22,7 +22,7 @@ class iamFilterlist extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     
     :host {
-      margin-bottom: 3rem;
+      margin-bottom: 1rem;
       display:block;
     }
     :host(.mh-sm){
@@ -38,7 +38,7 @@ class iamFilterlist extends HTMLElement {
     <div class="form-control__wrapper">
       <label for="search" class="visually-hidden">Search</label>
       <span class="suffix" role="presentation"><slot name="icon"></slot></span>
-      <input name="search" id="search" type="text" class="form-control" autocomplete="off">
+      <input name="search" id="search" type="text" class="form-control" autocomplete="off" placeholder="Search" />
     </div>
     <div class="list__wrapper">
       <slot></slot>

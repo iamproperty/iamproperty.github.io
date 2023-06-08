@@ -70,7 +70,15 @@ export const createMobileButton = (table) => {
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     let firstCol = row.querySelector(':scope > :is(td,th):first-child');
     let colContent = firstCol.textContent;
-    firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-none">${colContent}</button>`;
+
+    if(colContent != "")
+      firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-none">${colContent}</button>`;
+    else {
+        
+      let secondCol = row.querySelector(':scope > :is(td,th):nth-child(2)');
+      let secondColContent = secondCol.textContent;
+      secondCol.innerHTML =`<span class="td__content">${secondColContent}</span><button type="button" class="d-none">${secondColContent}</button>`;
+    }
   });
 }
 
@@ -140,6 +148,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     else {
       filterTable(table, form, wrapper);
       createPaginationButttons(wrapper,pagination);
+      populateDataQueries(table,form);
     }
   }
 
@@ -169,6 +178,11 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
         
+      formSubmit();
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && event.target.closest('form .dialog__wrapper > dialog')){
+      
       formSubmit();
     }
 
@@ -220,6 +234,11 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
     if(!form.hasAttribute('data-submit'))
       event.preventDefault();
+
+    formSubmit();
+  });
+
+  form.addEventListener('force', (event) => {
 
     formSubmit();
   });
@@ -301,6 +320,15 @@ export const filterTable = (table, form, wrapper) => {
   let page = form.querySelector('[data-pagination]') ? parseInt(form.querySelector('[data-pagination]').value) : 1;
   let showRows = form.querySelector('[data-show]') ? parseInt(form.querySelector('[data-show]').value) : 15;
 
+  // Reset
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+    row.classList.remove('filtered');
+    row.classList.remove('filtered--matched');
+    row.classList.remove('filtered--show');
+    
+    row.removeAttribute('data-filtered-by');
+  });
+
   // Filter
   let filterInputs = Array.from(form.querySelectorAll('[data-filter]'));
 
@@ -348,6 +376,9 @@ export const filterTable = (table, form, wrapper) => {
   Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
     element.innerHTML = '';
   });
+
+  console.log(filters)
+
   if(filters.length) {
       
     Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
@@ -361,14 +392,6 @@ export const filterTable = (table, form, wrapper) => {
   
   table.classList.add('table--filtered');
 
-  // Reset
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-    row.classList.remove('filtered');
-    row.classList.remove('filtered--matched');
-    row.classList.remove('filtered--show');
-    
-    row.removeAttribute('data-filtered-by');
-  });
 
   // Filter the table
 
@@ -495,7 +518,6 @@ export const filterTable = (table, form, wrapper) => {
     wrapper.setAttribute('data-show',showRows);
   }
 
-  populateDataQueries(table,form);
 }
 
 export const populateDataQueries = (table,form) => {
@@ -548,7 +570,7 @@ export const populateDataQueries = (table,form) => {
     else {
 
       let queryParts = query.split(' == ');
-      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr:not([class*="filtered"]) td[data-label="${queryParts[0]}"], tbody tr[data-filtered-by="${queryParts[0]}"] td[data-label="${queryParts[0]}"]`)).filter(function(element){
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr:not(.filtered) td[data-label="${queryParts[0]}"], tbody tr[data-filtered-by="${queryParts[0]}"] td[data-label="${queryParts[0]}"]`)).filter(function(element){
         return element.textContent === queryParts[1];
       }).length;
     }
