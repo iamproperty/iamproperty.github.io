@@ -1,141 +1,294 @@
 <template>
   <main>
-    <div class="container">
-      <ul class="breadcrumb mb-0 d-sm-none pb-0">
-        <li><a href="/components">Components</a></li>
-      </ul>
-      <h1>Admin panel</h1>
-      <p>A way of grouping and seperating content within an admin setting. The first title within the panel will become the panels header. Tables and tabs within an admin panel will be displayed in a unique way, with tables taken the full width and tab links becoming larger in display. To further group content inside of the panel the grid system can be used.</p>
-      
-    </div>
-    
-    <div class="container visualtest">
 
+
+
+    <DSHeader :image="headerImg" section="components">
+      <h1>Admin panel</h1>
+    </DSHeader>
+
+
+
+
+
+    <div class="container">
+      <p class="lead">An admin panel can be used to group and seperate content within an admin setting.</p>
+      
       <h2>Basic admin panel</h2>
+
+      <p>A basic admin panel includes a header and body text. They can be used to group information under a heading. All will apply a drop shadow with a default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15% as default unless specified otherwise, this should have the ability to be removed if needed.</p>
 
       <div class="admin-panel">
         <h2>Admin panel title</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
       </div>
     </div>
 
 
 
     <div class="container">
-      <h3>HTML code example</h3>
-      <pre><code class="javascript">{{htmlUsage}}</code></pre>
-    </div>
-
-
-    <div class="container visualtest">
-
-      <h2>Admin panels within the grid system</h2>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="admin-panel">
-            <h2>Admin panel title</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="admin-panel">
-            <h2>Admin panel title</h2>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container visualtest">
-      <h2>Admin panel with a table inside</h2>
-      <div class="admin-panel">
-        <Table :fields="fields" :items="items"></Table>
-        
-      </div>
-
-
-    </div>
-    <div class="container visualtest">
-
-      <h2>Admin panel with links to make it look like tabs</h2>
-      <div class="admin-panel">
-        
-        <div class="admin-panel__links">
-          <a href="/components/panel">My onboarding</a>
-          <a href="/components/panel" class="current">Branch onboarding<br><small>Branch 1</small></a>
-          <a href="/components/panel">All onboarding</a>
-        </div>
-
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-
-      </div>
-    </div>
-    <div class="container ">
-
-      <p>The admin panel can hold the tabs component too which would make it look like the above component. See the <a href="/components/tabs">tabs component page</a> for an example.</p>
-      
+      <h2>Colour variants</h2>
+      <p>We can use colour in the header to add interest across products. There are four colour variations light gradient, dark gradient, light, and dark. Please see below:</p>
     </div>
 
     
+    <div class="container visualtest">
+
+      <div class="admin-panel">
+        <h2>Admin panel title</h2>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+      </div>
+      <div class="admin-panel">
+        <h2 class="bg-primary gradient-info">Admin panel title</h2>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+      </div>
+      <div class="admin-panel">
+        <h2 class="bg-light">Admin panel title</h2>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+      </div>
+      <div class="admin-panel">
+        <h2 class="bg-primary">Admin panel title</h2>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <h2>Admin panels within the grid system</h2>
+      <p>When admin panels are arranged in a grid system they should have a minimum of 16px (1rem) spacing between them.</p>
+    </div>
+ 
+    <div class="container visualtest">
+      <div class="row">
+        <div class="col-6 col-sm-4">
+          <div class="admin-panel">
+            <h2>Admin panel title</h2>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+          </div>          
+        </div>
+        <div class="col-6 col-sm-4">
+          <div class="admin-panel">
+            <h2 class="bg-primary gradient-info">Admin panel title</h2>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+          </div>          
+        </div>
+        <div class="col-6 col-sm-4">
+          <div class="admin-panel">
+            <h2 class="bg-light">Admin panel title</h2>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+          </div>          
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Admin panel max height</h2>
+      <p>To control how much real estate the admin panel takes up on a page we can set a max height for the text within it to a pre-defined list. There are three heights for text to presented. Small with a max height of {{$shared.cssVars.ut_mh_sm}} ({{$shared.cssVars.ut_mh_sm_px}}px), medium with a max height of {{$shared.cssVars.ut_mh_md}} ({{$shared.cssVars.ut_mh_md_px}}px) and, and large with a max height of {{$shared.cssVars.ut_mh_lg}} ({{$shared.cssVars.ut_mh_lg_px}}px).</p>
+    </div>
+
+    <div class="container visualtest">
+      <div class="row">
+        <div class="col-6 col-sm-4">
+          <div class="admin-panel">
+            <h2>Admin panel title</h2>
+            <div class="mh-lg">
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+          </div>          
+        </div>
+        <div class="col-6 col-sm-4">
+          <div class="admin-panel">
+            <h2 class="bg-primary gradient-info">Admin panel title</h2>
+            <div class="mh-md">
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+          </div>          
+        </div>
+        <div class="col-6 col-sm-4">
+          <div class="admin-panel">
+            <h2 class="bg-light">Admin panel title</h2>
+            <div class="mh-sm">
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+            </div>
+          </div>          
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Admin panel with CTA</h2>
+      <p>Admin panels can include a CTA to start a journey, perform an action or to navigate to a new page. Any button type can be used as the CTA. Use a minimum of 24px (1.5rem) padding above the button.</p>
+    </div>
+
+    
+    <div class="container visualtest">
+
+      <div class="admin-panel">
+        <h2>Admin panel title</h2>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+        <button class="btn btn-primary">Lorum ipsum</button>
+      </div>
+    </div>
+
+    <div class="container visualtest">
+      <h2>Admin panel with table</h2>
+      <p>Admin panels can include tables as their main content. Tables should only be used in this instance to present ‘at a glance’ information such as upcoming events, tasks, or reminders.</p>
+    </div>
+    <div class="container visualtest">
+      <div class="row">
+        <div class="col-sm-6 col-md-5">
+          <div class="admin-panel">
+            <h2>Admin panel title</h2>
+            <Table class="table--fullwidth mh-md">
+              <table>
+                <table>
+                      <thead>
+                        <tr>
+                          <th>Time</th>
+                          <th>Name</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>9:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>10:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>11:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>9:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>9:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>9:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>9:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>9:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>9:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                        <tr>
+                          <td>9:30</td>
+                          <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </table>
+            </Table>
+          </div>          
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>Admin panel with tabs</h2>
+      <p>Admin panels can have tabs as a header. Selecting each tab will change the content shown within the admin panel content. The light & dark gradient and block colours can all be used as the highlight colour for the selected tab.</p>
+    </div>
+    
+    <div class="container visualtest">
+      <Tabs class="admin-panel">
+        <Tab title="Tab 1">
+          <p>Tabe content 1</p>
+        </Tab>
+        <Tab title="Tab 2">
+          <p>Tabe content 2</p>
+        </Tab>
+        <Tab title="Tab 3" >
+          <p>Tabe content 3</p>
+        </Tab>
+      </Tabs>
+    </div>
+    
+
+    <div class="container">
+      
+      <h2>Implementation</h2>
+      <Tabs>
+
+        <details>
+          <summary><h2>HTML</h2></summary>
+          <pre><code class="html">{{`<div class="admin-panel">
+  <h2>Admin panel title</h2><!-- Titles automatically have a gradient background applied -->
+  <p>...</p>
+</div>
+
+
+<div class="admin-panel">
+  <iam-tabs></iam-tabs><!-- Adding tabs as the first child will add the gradient background to the selected tab -->
+</div>`}}</code></pre>
+        </details>
+      </Tabs>
+    </div>
+    <div class="bg-light version-control">
+      <div class="container ct-inline">
+        <table>
+          <thead>
+            <tr>
+              <th>Version Control</th>
+              <th>Date</th>
+              <th>Notable updates</th>
+            </tr>
+          </thead>
+          <tbody class="text-body">
+            <tr>
+              <td>V1 added</td>
+              <td>06.06.2023</td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="/pdfs/admin-panel.pdf" download>Download latest designs</a>
+      </div>
+    </div>
+
   </main>
 </template>
 
 <script>
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Tab from '@/components/Tabs/Tab.vue'
+import Readme from '@/components/Table/README.md'
+import WebReadme from '~/ts/components/table/README.md'
+import DSHeader from '../DSHeader.vue'
+import headerImg from '../../img/type-header.png'
 import Table from '@/components/Table/Table.vue'
 
 export default {
   components: {
-    Table
+    DSHeader,
+    Table,
+    Readme,
+    WebReadme,
+    Tabs,
+    Tab,
+  },
+  mounted(){
+    
   },
   data () {
     return {
-      htmlUsage: `<div class="admin-panel">
-  <h2>Admin panel title</h2>
-  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-</div>`,
-      fields: [
-        { key: 'basic_details' },
-        { key: 'capacity' },
-        { key: 'contact_details' },
-        { key: 'address' },
-        { key: 'point_of_contact' },
-        { key: 'actions' }
-      ],
-      items: [
-        {
-          rowid: 'test',
-          basic_details: 'mr Richard Branson<br> (Mr Richard Branson)',
-          capacity: 'Legal owner',
-          contact_details: '<a href="tel:07411882800">07411882800</a> (Mobile)<br> <a href="tel:07411882800">07411882800</a> (Main)',
-          address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
-          point_of_contact: 'None set',
-          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
-        },
-        {
-          basic_details: 'mrs Laura Branson<br> (Mrs Laura Branson)',
-          capacity: 'Legal owner',
-          contact_details: '<a href="tel:07729797870">07729797870</a> (Main)<br> <a href="tel:07729797870">07729797870</a> (Mobile)',
-          address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
-          point_of_contact: 'None set',
-          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
-        },
-        {
-          basic_details: 'Holly Branson<br> (Ms Holly Branson)',
-          capacity: 'Legal owner',
-          contact_details: '<a href="tel:07729797870">07729797870</a> (Main)<br> <a href="tel:07729797870">07729797870</a> (Mobile)',
-          address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
-          point_of_contact: 'None set',
-          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
-        },
-        {
-          basic_details: 'Clare Branson<br> (Ms Clare Branson)',
-          capacity: 'Legal owner',
-          contact_details: '<a href="tel:07729797870">07729797870</a> (Main)<br> <a href="tel:07729797870">07729797870</a> (Mobile)',
-          address: 'Branson Towers<br> London<br> London<br> SW20 0AL<br> United Kingdom',
-          point_of_contact: 'None set',
-          actions: '<a href="#">View</a><br><a href="#">Point of Contact</a>'
-        }
-      ]
+      headerImg: headerImg
     }
   }
 }

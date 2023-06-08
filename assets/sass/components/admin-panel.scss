@@ -1,13 +1,22 @@
 @use "../_func" as *;
 
 .admin-panel {
-  --wrapper-padding: #{rem(32)};
+  --padding-x: #{rem(32)};
+  --padding-y: #{rem(24)};
   display: block;
-  padding: var(--wrapper-padding);
+  padding: var(--padding-y) var(--padding-x);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
-  background-color: white;
+  background-color: var(--colour-white);
   border-radius: rem(8);
-  margin-bottom: rem(32);
+  margin-bottom: rem(24);
+
+  @media screen and (prefers-color-scheme: dark) {
+    background-color: var(--colour-white);
+
+  
+    @include reset-colours();
+    color: var(--colour-body);
+  }  
 
   &.bg-secondary{
 
@@ -20,13 +29,17 @@
 
   > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child {
     
-    background-color: var(--colour-info);
-    background-image: linear-gradient(90deg, var(--colour-success) 0, transparent 100%);
+    --gradient-direction: -90deg;
+    background-color:var(--colour-success);
 
+    &:not([class*="bg-"]){
+      background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
+    }
+    
     font-size: rem(18);
     line-height: rem(24);
-    padding: rem(16) var(--wrapper-padding);
-    margin: calc(var(--wrapper-padding) * -1) calc(var(--wrapper-padding) * -1) rem(32) calc(var(--wrapper-padding) * -1);
+    padding: rem(16) var(--padding-x);
+    margin: calc(var(--padding-y) * -1) calc(var(--padding-x) * -1) var(--padding-y) calc(var(--padding-x) * -1);
     display: block;
     border-top-left-radius: rem(8);
     border-top-right-radius: rem(8);
@@ -46,34 +59,79 @@
   > *:is(p):last-child{
     padding-bottom: 0!important;
   }
+
+  p {
+    max-width: 100%;
+    padding-bottom: rem(24);
+  }
+
+  > :is(.mh-sm,.mh-md,.mh-lg){
+    overflow: auto;
+    
+    padding: 0 var(--padding-x);
+    margin: 0 calc(var(--padding-x) * -1) rem(24) calc(var(--padding-x) * -1);
+  }
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child + :is(.mh-sm,.mh-md,.mh-lg){
+    padding-top: var(--padding-y);
+    margin-top: calc(var(--padding-y) * -1);
+  }
+  
+  > :is(.mh-sm,.mh-md,.mh-lg):last-child{
+    padding-bottom: var(--padding-y);
+    margin-bottom: calc(var(--padding-y) * -1)!important;
+
+    > *:last-child{
+      margin-bottom: 0!important;
+    }
+  
+    > *:is(p):last-child{
+      padding-bottom: 0!important;
+    }
+  }
 }
 
-[class*="col"] .admin-panel:first-child:last-child {
+[class*="col"] .admin-panel:first-child:last-child:not(:has(.mh-sm,.mh-md,.mh-lg)) {
 
-  min-height: calc(100% - 2rem);
+  min-height: calc(100% - #{rem(24)});
 }
 
-.admin-panel .admin-panel__links {
+// #region panel links 
+.admin-panel :is(.admin-panel__links, .tabs__links) {
 
-  padding: 0 var(--wrapper-padding);
-  margin: calc(var(--wrapper-padding) * -1) calc(var(--wrapper-padding) * -1) rem(32) calc(var(--wrapper-padding) * -1);
+  padding: 0;
+  margin: calc(var(--padding-y) * -1) calc(var(--padding-x) * -1) var(--padding-y) calc(var(--padding-x) * -1);
 
+  border-top-left-radius: rem(8);
+  border-top-right-radius: rem(8);
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid var(--colour-border);
+  overflow: hidden;
 
   @include media-breakpoint-up(sm) {
 
     flex-direction: row;
   }
 
-  :is(a, label) {
+  :is(a, label, button) {
     margin: 0;
-    margin-left: calc(var(--wrapper-padding) * -1);
-    padding: #{rem(8)} var(--wrapper-padding);
+    //margin-left: calc(var(--wrapper-padding) * -1);
+    padding: #{rem(16)} var(--padding-x);
     width: 100%;
-    border-left: 3px solid var(--panel-tab-border, transparent);
     position: relative;
+    text-align: left;
+
+    --gradient-direction: -90deg;
+    background-color:var(--colour-success);
+
+    &:not([class*="bg-"]){
+      background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
+    }
+
+    &:not(.current, [aria-pressed="true"]){
+      background: white!important;
+    }
 
     &:after {
       display: none;
@@ -82,25 +140,16 @@
     @include media-breakpoint-up(sm) {
 
       margin: 0;
-      padding: rem(24) rem(16) rem(8) rem(16);
-      width: auto;
-      border-left: none!important;
-      
-      border-bottom: 2px solid var(--panel-tab-border, transparent);
 
-      &:first-child {
-        margin-left: rem(-16);
-      }
-      &:last-child {
-        margin-right: rem(-16);
+      &:not(:first-child){
+          
+        border-left: 1px solid var(--colour-border)!important;
       }
     }
   }
 
   .current {
-    
-    --is-current: 1;
-    --panel-tab-border: var(--colour-secondary);
     pointer-events: none;
   }
 }
+// #endregion

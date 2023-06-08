@@ -10,7 +10,7 @@
       
       <div class="row">
         <div class="col-sm-8 col-md-4">
-          <Filterlist data-max-height="small">
+          <Filterlist class="mh-sm">
 
             <ul class="list-unstyled">
               <li class="lead text-primary pb-1">Olivia Anderson</li>

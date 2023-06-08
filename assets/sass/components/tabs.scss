@@ -1,6 +1,6 @@
 @use "../_func" as *;
 
-.tabs {
+.tabs:not(.admin-panel) {
 
   position: relative;
 

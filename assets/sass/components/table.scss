@@ -332,9 +332,8 @@ table.border-0 {
 // #endregion
 
 // #region Max height tables
-.table__wrapper:is(.table--mh-small,.table--mh-medium,.table--mh-large) {
-  max-height: var(--table-mh,#{rem(200)});
-  overflow: auto;
+.table__wrapper:is(.mh-sm,.mh-md,.mh-lg) {
+  
   position: relative;
 
   &::before {
@@ -353,18 +352,8 @@ table.border-0 {
   }
 }
 
-.table__wrapper.table--mh-small {
-  --table-mh: #{$table-mh-sm};
-}
-.table__wrapper.table--mh-medium {
-  --table-mh: #{$table-mh-md};
-}
-.table__wrapper.table--mh-large {
-  --table-mh: #{$table-mh-lg};
-}
-
 // If table CTA class is set then undo max-height
-.table--cta > .table__wrapper:is(.table--mh-small,.table--mh-medium,.table--mh-large) {
+.table--cta > .table__wrapper:is(.mh-sm,.mh-md,.mh-lg) {
   max-height: none;
   position: static;
 
@@ -373,7 +362,7 @@ table.border-0 {
   }
 }
 
-iam-table:is(.table--mh-small,.table--mh-medium,.table--mh-large):not(.table--cta) {
+iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
 
   position: relative;
 

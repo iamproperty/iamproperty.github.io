@@ -42,7 +42,7 @@
           <div class="col-sm-6 col-md-4">
             <div class="admin-panel">
               <h2><i class="fa-regular fa-calendar"></i> Today's events</h2>
-              <Table class="table--mh-medium table--fullwidth">
+              <Table class="mh-md table--fullwidth">
                 <table>
                   <thead>
                     <tr>
@@ -100,7 +100,7 @@
           <div class="col-sm-6 col-md-8">
             <div class="admin-panel">
               <h2><i class="fa-light fa-circle-check"></i> My tasks</h2>
-              <Table class="table--mh-medium table--fullwidth">
+              <Table class="mh-md table--fullwidth">
                 <table>
                   <thead>
                     <tr>
