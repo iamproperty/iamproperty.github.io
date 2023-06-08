@@ -26,7 +26,7 @@
                   <li>
                     <div class="form-check">
                       <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
-                    </div>                  
+                    </div>
                   </li>
                   <li>
                     <div class="form-check">
