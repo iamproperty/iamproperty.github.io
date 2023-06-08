@@ -23,8 +23,8 @@ export const addDataAttributes = (table) => {
         let headingText = tempDiv.textContent || tempDiv.innerText || "";
         cell.setAttribute('data-label',headingText);
 
-        if(heading.hasAttribute('class'))
-          cell.setAttribute('class',heading.getAttribute('class'))
+        if(heading.hasAttribute('data-td-class'))
+          cell.setAttribute('class',heading.getAttribute('data-td-class'))
 
         if(heading.hasAttribute('data-format')){
           cell.setAttribute('data-format',heading.getAttribute('data-format'))
