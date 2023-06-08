@@ -2,7 +2,7 @@
 
 .admin-panel {
   --padding-x: #{rem(32)};
-  --padding-top: #{rem(24)};
+  --padding-top: #{rem(16)};
   --padding-bottom: #{rem(24)};
   display: block;
   padding: var(--padding-top) var(--padding-x) var(--padding-bottom) var(--padding-x);
@@ -71,6 +71,20 @@
     
     padding: 0 var(--padding-x);
     margin: 0 calc(var(--padding-x) * -1) rem(24) calc(var(--padding-x) * -1);
+
+    &:before {
+      content: "";
+      top: 100%;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1.5rem;
+      position: sticky;
+      display: block;
+      background: linear-gradient(180deg, rgba(var(--bg-colour-rgb, 255, 255, 255), 0) 0%, rgba(var(--bg-colour-rgb, 255, 255, 255), 1) 100%);
+      z-index: 2;
+      margin-bottom: -1.5rem;
+    }
   }
 
   > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child + :is(.mh-sm,.mh-md,.mh-lg){
