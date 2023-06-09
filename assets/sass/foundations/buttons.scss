@@ -146,6 +146,8 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   text-align: center;
   width: calc(rem(48) - 4px);
+  min-width: calc(rem(48) - 4px);
+  max-width: calc(rem(48) - 4px);
   height: calc(rem(48) - 4px)!important;
   text-indent: -300px;
   overflow: hidden;
