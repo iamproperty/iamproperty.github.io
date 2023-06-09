@@ -5,7 +5,7 @@
     </Nav>
     <main class="main--marketplace">
 
-      <form id="tableFilters">
+      <form id="tableFilters" data-submit>
 
         <div class="container">
           <div class="row">
@@ -15,7 +15,7 @@
             <div class="col-md-3 mw-fit-content">
               <div class="dialog__wrapper dialog__wrapper--md-right">
 
-              <button class="btn btn-secondary me-0 nowrap" aria-label="Display filters of who's work to include"><span class="empty"><i class="fa fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
+              <button class="btn btn-secondary me-0 nowrap" type="button" aria-label="Display filters of who's work to include"><span class="empty"><i class="fa fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
               <dialog>
 
                 <AppliedFilters class="applied-filters--compact">
@@ -49,6 +49,16 @@
           <span class="h4">Total Buyer pipeline results: <span data-query="Locked to"></span></span>
           <hr/>
         </div>
+
+
+        <div class="container">
+          <div class="tabs__links">
+            <button class="link active" name="page" value="buyer">Buyer</button>
+            <button class="link" name="page" value="vendor">Vendor</button>
+            <button class="link" name="page" value="allocation">Property Allocation</button>
+          </div>
+        </div>
+
 
       </form>
 
