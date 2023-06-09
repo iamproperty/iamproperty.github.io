@@ -748,6 +748,13 @@
 
     <div class="container pb-0">
       
+      <h2>Mobile button padding</h2>
+      <p>Due to the small real estate of mobile screens we can reduce the minimum padding around buttons from 24px (1.5rem) to 16px (1rem). Compact buttons can still have the smaller padding of 8px (0.5rem) on desktop, tablet, and mobile.</p>
+      <p>This reduced padding provides more flexibility when designing for mobile as more content can be displayed on the screen at once. The minimum padding does however ensure that the screen doesn’t become too cluttered and that there is adequate spacing around the button to maintain a suitable touch target size to avoid accidental taps.</p>
+    </div>
+
+    <div class="container pb-0">
+      
       <h2>Text links</h2>
       <p class="pb-3">Inline text links can be used among body copy. See examples below:</p>
     </div>
@@ -862,6 +869,14 @@
             </tr>
           </thead>
           <tbody class="text-body">
+            <tr>
+              <td>V1.1 added</td>
+              <td>08.06.2023</td>
+              <td>- Increased icon size on primary and secondary buttons to 1.125rem and ‘compact’ primary and secondary buttons to 1.25rem<br/>
+- Decreased font weight on tertiary buttons to 500<br/>
+- Updated style of ‘dark’ tertiary button to include green underline<br/>
+- Added mobile button padding guidance</td>
+            </tr>
             <tr>
               <td>V1 added</td>
               <td>01.06.2023</td>
