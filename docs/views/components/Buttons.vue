@@ -870,6 +870,14 @@
           </thead>
           <tbody class="text-body">
             <tr>
+              <td>V1.1 added</td>
+              <td>08.06.2023</td>
+              <td>- Increased icon size on primary and secondary buttons to 1.125rem and ‘compact’ primary and secondary buttons to 1.25rem<br/>
+- Decreased font weight on tertiary buttons to 500<br/>
+- Updated style of ‘dark’ tertiary button to include green underline<br/>
+- Added mobile button padding guidance</td>
+            </tr>
+            <tr>
               <td>V1 added</td>
               <td>01.06.2023</td>
               <td>N/A</td>
