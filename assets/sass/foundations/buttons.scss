@@ -3,6 +3,14 @@
 // #region button primary
 .btn {
 
+  --btn-margin: #{rem(16)};
+
+  @include media-breakpoint-up(sm) { 
+
+    --btn-margin: #{rem(24)};
+  }
+
+
   &:not(.btn-secondary)[class*="colour-"]{
     --colour-btn-bg: var(--colour);
     --colour-btn-border: var(--colour);
@@ -28,8 +36,8 @@
   line-height: rem(24);
   padding: calc(rem(12) - 2px) calc(rem(40) - 2px);
   border-radius: rem(24);
-  margin-bottom: rem(24);
-  margin-right: rem(24);
+  margin-bottom: var(--btn-margin);
+  margin-right: var(--btn-margin);
   transition: background .5s, color .5s;
   height: auto;
   max-width: fit-content;
@@ -315,21 +323,20 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 // #endregion
 
 
-// #region Rertiary Button
+// #region Tertiary Button
 
-.btn {
+.btn.btn-tertiary {
 
-  &.btn-tertiary {
-
-    background-color: transparent;
-    border: none;
-    color: var(--colour-link);
-    margin: 0 rem(24) rem(24) 0;
-    padding: 0;
-    font-size: rem(18);
-    line-height: rem(24);
-    min-height: rem(24);
-    position: relative;
+  background-color: transparent;
+  border: none;
+  color: var(--colour-link);
+  margin: 0 var(--btn-margin) var(--btn-margin) 0;
+  padding: 0;
+  font-size: rem(18);
+  font-weight: normal;
+  line-height: rem(24);
+  min-height: rem(24);
+  position: relative;
 
     &:after {
       position: absolute;
@@ -343,11 +350,6 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
       transition: width 0.5s;
     }
 
-    &:not(.text-decoration-none):after {
-
-      width: 100%;
-    }
-
     [class*=fa-] {
       margin-left: 0;
       margin-right: 0.5rem;
@@ -357,16 +359,15 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
       margin-right: 0;
     }
 
-    &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
 
-      &:after {
-        width: 60%;
-      }
+    &:after {
+      width: 60%;
     }
-    &:is(:active, .active):not([disabled]) {
+  }
+  &:is(:active, .active):not([disabled]) {
 
-      color: var(--colour-active);
-    }
+    color: var(--colour-active);
   }
 
 }
