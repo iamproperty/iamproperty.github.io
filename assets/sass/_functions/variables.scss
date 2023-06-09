@@ -112,7 +112,7 @@ $theme-colors: map-merge((
   "success":    $success,
   "dark":       $dark,
   "light":      $light,
-  "white":      #ffffff
+  "white":      #FFFFFF
 ), $theme-colors);
 
 @each $color, $value in $theme-colors {
