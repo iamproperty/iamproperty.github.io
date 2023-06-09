@@ -5,7 +5,7 @@
     </Nav>
     <main class="main--marketplace">
 
-      <form id="tableFilters" data-submit>
+      <form id="tableFilters">
 
         <div class="container">
           <div class="row">

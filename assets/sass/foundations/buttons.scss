@@ -338,31 +338,37 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   min-height: rem(24);
   position: relative;
 
-    &:after {
-      position: absolute;
-      content: "";
-      top: 100%;
-      left: 50%;
-      height: 2px;
-      width: 0%;
-      transform: translate(-50%,0);
-      background: var(--colour-underline);
-      transition: width 0.5s;
-    }
+  &:after {
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 50%;
+    height: 2px;
+    width: 100%;
+    transform: translate(-50%,0);
+    background: var(--colour-underline);
+    transition: width 0.5s;
+  }
 
-    [class*=fa-] {
-      margin-left: 0;
-      margin-right: 0.5rem;
-    }
-    [class*=fa-]:not(:first-child) {
-      margin-left: 0.5rem;
-      margin-right: 0;
-    }
+
+  &.text-decoration-none:after {
+
+    width: 0%;
+  }
+
+  [class*=fa-] {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+  [class*=fa-]:not(:first-child) {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
 
   &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
 
     &:after {
-      width: 60%;
+      width: 60%!important;
     }
   }
   &:is(:active, .active):not([disabled]) {
@@ -371,4 +377,4 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   }
 
 }
-
+// #endregion
