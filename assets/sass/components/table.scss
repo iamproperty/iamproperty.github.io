@@ -133,6 +133,7 @@ table.border-0 {
   .iam-table, iam-table {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
+    margin-bottom: 0;
   }
   
 
@@ -152,6 +153,7 @@ table.border-0 {
 
       overflow: visible;
       margin-inline: 1.5rem;
+      margin-bottom: 1.5rem;
       width: calc(100% - 3rem);
 
       thead {

@@ -124,19 +124,23 @@
   border-bottom: 1px solid var(--colour-border);
   overflow: hidden;
 
+  &:after {
+    display: none;
+  }
+  
   @include media-breakpoint-up(sm) {
 
     flex-direction: row;
   }
 
-  :is(a, label, button) {
+  .link:not(.text-decoration-none):not(.btn) {
     margin: 0;
     //margin-left: calc(var(--wrapper-padding) * -1);
     padding: #{rem(16)} var(--padding-x);
     width: 100%;
     position: relative;
     text-align: left;
-
+    flex-grow: 1;
     --gradient-direction: -90deg;
     background-color:var(--colour-success);
 

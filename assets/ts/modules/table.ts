@@ -377,8 +377,6 @@ export const filterTable = (table, form, wrapper) => {
     element.innerHTML = '';
   });
 
-  console.log(filters)
-
   if(filters.length) {
       
     Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
@@ -530,7 +528,7 @@ export const populateDataQueries = (table,form) => {
     let numberOfMatchedRows: 0;
 
     if(query == 'total'){
-      numberOfMatchedRows = table.classList.contains('table--filtered') ? table.querySelectorAll('tbody tr:not(.filtered)').length : table.querySelectorAll('tbody tr').length;
+      numberOfMatchedRows = table.classList.contains('table--filtered') ? table.querySelectorAll('tbody tr').length : table.querySelectorAll('tbody tr').length;
     }
     else if(!query.includes(' == ') && query.includes(' & ')){
 
@@ -570,7 +568,7 @@ export const populateDataQueries = (table,form) => {
     else {
 
       let queryParts = query.split(' == ');
-      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr:not(.filtered) td[data-label="${queryParts[0]}"], tbody tr[data-filtered-by="${queryParts[0]}"] td[data-label="${queryParts[0]}"]`)).filter(function(element){
+      numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr.filtered--matched td[data-label="${queryParts[0]}"], tbody tr[data-filtered-by="${queryParts[0]}"] td[data-label="${queryParts[0]}"]`)).filter(function(element){
         return element.textContent === queryParts[1];
       }).length;
     }

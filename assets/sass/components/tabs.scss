@@ -64,7 +64,6 @@
     }
 
     &[aria-pressed="true"],
-    &:active,
     &.active {
       pointer-events: none;
     }
