@@ -21,6 +21,10 @@ class iamTabs extends HTMLElement {
     <style>
     @import "${assetLocation}/css/core.min.css";
     ${loadCSS}
+
+    :host(.admin-panel){
+      display: contents!important;
+    }
     
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
@@ -33,6 +37,9 @@ class iamTabs extends HTMLElement {
   }
 
 	connectedCallback() {
+
+    let classList = this.classList.toString();
+    this.shadowRoot.querySelector('.tabs').setAttribute('class',`tabs ${classList}`);
 
     tabs(this);
   }

@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.5.1--alpha</h2>
+      <ul>
+        <li>Update to Admin panels documentation</li>
+      </ul>
+
       <h2>V3.5</h2>
       <ul>
         <li>New way of loading bootstrap</li>

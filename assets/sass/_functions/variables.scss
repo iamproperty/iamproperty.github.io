@@ -112,7 +112,7 @@ $theme-colors: map-merge((
   "success":    $success,
   "dark":       $dark,
   "light":      $light,
-  "white":      #ffffff
+  "white":      #FFFFFF
 ), $theme-colors);
 
 @each $color, $value in $theme-colors {
@@ -554,10 +554,13 @@ $td-mw-px: 120;
 $td-mw: #{rem($td-mw-px)};
 $table-padding-px: 32;
 $table-padding: #{rem($table-padding-px)};
-$table-mh-sm-px: 200;
-$table-mh-sm: #{rem($table-mh-sm-px)};
-$table-mh-md-px: 400;
-$table-mh-md: #{rem($table-mh-md-px)};
-$table-mh-lg-px: 600;
-$table-mh-lg: #{rem($table-mh-lg-px)};
+// #endregion
+
+// #region UT vars
+$ut-mh-sm-px: 200;
+$ut-mh-sm: #{rem($ut-mh-sm-px)};
+$ut-mh-md-px: 400;
+$ut-mh-md: #{rem($ut-mh-md-px)};
+$ut-mh-lg-px: 600;
+$ut-mh-lg: #{rem($ut-mh-lg-px)};
 // #endregion

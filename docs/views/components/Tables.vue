@@ -161,14 +161,14 @@
     
     <div class="container">
       <h2>Max height table</h2>
-      <p>To control how much real estate the table takes up on a page we can set a max height from a pre-defined list. Using the class of <b>.table--mh-small</b> will set the max height to {{$shared.cssVars.table_mh_sm}} ({{$shared.cssVars.table_mh_sm_px}}px); <b>.table--mh-medium</b> will set it to {{$shared.cssVars.table_mh_md}} ({{$shared.cssVars.table_mh_md_px}}px) and <b>.table--mh-large</b> will set it to {{$shared.cssVars.table_mh_lg}} ({{$shared.cssVars.table_mh_lg_px}}px). Commonly when using one of these classes we don't want to convert the table into a stackable view on mobile, this is achievable by adding the <b>.table--fullwidth</b> class.</p>
+      <p>To control how much real estate the table takes up on a page we can set a max height from a pre-defined list. Using the class of <b>.mh-sm</b> will set the max height to {{$shared.cssVars.ut_mh_sm}} ({{$shared.cssVars.ut_mh_sm_px}}px); <b>.mh-md</b> will set it to {{$shared.cssVars.ut_mh_md}} ({{$shared.cssVars.ut_mh_md_px}}px) and <b>.mh-lg</b> will set it to {{$shared.cssVars.ut_mh_lg}} ({{$shared.cssVars.ut_mh_lg_px}}px). Commonly when using one of these classes we don't want to convert the table into a stackable view on mobile, this is achievable by adding the <b>.table--fullwidth</b> class.</p>
     </div>
 
 
     <Tabs class="container">
       <details>
         <summary><h3>Max height small</h3></summary>
-        <Table class="table--mh-small table--fullwidth">
+        <Table class="mh-sm table--fullwidth">
           <table>
             <thead>
               <tr>
@@ -267,7 +267,7 @@
       </details>
       <details>
         <summary><h3>Max height medium</h3></summary>
-        <Table class="table--mh-medium table--fullwidth">
+        <Table class="mh-md table--fullwidth">
           <table>
             <thead>
               <tr>
@@ -366,7 +366,7 @@
       </details>
       <details>
         <summary><h3>Max height large</h3></summary>
-        <Table class="table--mh-large table--fullwidth">
+        <Table class="mh-lg table--fullwidth">
           <table>
             <thead>
               <tr>

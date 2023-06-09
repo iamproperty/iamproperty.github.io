@@ -62,8 +62,7 @@
   // Slight colour adjustments on the light background to match brand guidelines
   .bg-light[class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.prevent-invert) {
     --colour-canvas: var(--colour-light);
-    --colour-heading: var(--colour-dark);
-    color: var(--colour-dark);
+    //color: var(--colour-dark);
   }
 
   // Override the colours when on a dark background, similiar to dark mode but on a module level
