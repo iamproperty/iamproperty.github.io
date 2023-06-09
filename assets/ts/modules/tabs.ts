@@ -46,15 +46,20 @@ export const setTabsEventHandlers = function(tabsElement: Element){
 
   let details = tabsElement.querySelectorAll(':scope > details');
   let summaries = tabsElement.querySelectorAll(':scope > details > summary');
-  let buttons = tabsElement.querySelectorAll(':scope > .tabs__links > button, .tabs__links > a');
+  let buttons = tabsElement.querySelectorAll(':scope .tabs__links > .link');
 
   if(tabsElement.shadowRoot)
-    buttons = tabsElement.shadowRoot.querySelectorAll('.tabs__links > button, .tabs__links > a');
+    buttons = tabsElement.shadowRoot.querySelectorAll('.tabs__links > .link');
+
+  console.log(buttons)
 
   // Set the on click for the tab buttons, these will open the details box it matches too
   buttons.forEach((button) => {
 
     button.addEventListener("click", (e) => {
+
+      console.log('hi')
+
       e.preventDefault();
       buttons.forEach((buttonLoopItem) => {
 

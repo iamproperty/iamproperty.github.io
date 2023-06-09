@@ -338,7 +338,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   min-height: rem(24);
   position: relative;
 
-  &:not(.text-decoration-none):after {
+  &:after {
     position: absolute;
     content: "";
     top: 100%;
@@ -348,6 +348,12 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     transform: translate(-50%,0);
     background: var(--colour-underline);
     transition: width 0.5s;
+  }
+
+
+  &.text-decoration-none:after {
+
+    width: 0%;
   }
 
   [class*=fa-] {
@@ -362,7 +368,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
 
     &:after {
-      width: 60%;
+      width: 60%!important;
     }
   }
   &:is(:active, .active):not([disabled]) {
@@ -371,4 +377,4 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   }
 
 }
-
+// #endregion

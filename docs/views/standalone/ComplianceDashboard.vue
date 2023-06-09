@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav logo="movebutler" class="nav--marketplace" propertylink="/standalone/marketplace" movebutlerlink="/standalone/movebutler" iamsoldlink="/standalone/agent">
+    <Nav logo="sold" class="nav--marketplace" propertylink="/standalone/marketplace" movebutlerlink="/standalone/movebutler" iamsoldlink="/standalone/agent">
       
     </Nav>
     <main class="main--marketplace">
@@ -15,29 +15,28 @@
             <div class="col-md-3 mw-fit-content">
               <div class="dialog__wrapper dialog__wrapper--md-right">
 
-              <button class="btn btn-secondary me-0 nowrap" aria-label="Display filters of who's work to include"><span class="empty"><i class="fa fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
+              <button class="btn btn-secondary me-0 nowrap" type="button" aria-label="Display filters of who's work to include"><span class="empty"><i class="fa fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
               <dialog>
 
                 <AppliedFilters class="applied-filters--compact">
                 <Filterlist data-max-height="small">
                 <input type="checkbox" name="pipeline[]" id="pipeline1" class="form-check-input d-none" value="Alice Knowles" data-filter-text="$value" data-filter="Locked to">
                 <input type="checkbox" name="pipeline[]" id="pipeline2" class="form-check-input d-none" value="Amy Reading" data-filter-text="$value" data-filter="Locked to">
-                <ul class="list-unstyled">
+                <ul class="list-unstyled mb-0">
                   <li>
-                    <div class="form-check">
-                      <label for="pipeline1" class="form-label form-check-label">Alice Knowles</label>
+                    <div class="form-check ps-0">
+                      <label for="pipeline1" class="form-label form-check-label fw-normal">Alice Knowles</label>
                     </div>
                   </li>
                   <li>
-                    <div class="form-check">
-                      <label for="pipeline2" class="form-label form-check-label">Amy Reading</label>
+                    <div class="form-check ps-0">
+                      <label for="pipeline2" class="form-label form-check-label fw-normal">Amy Reading</label>
                     </div>                  
                   </li>
                 </ul>
                 </Filterlist>
 
               </AppliedFilters>
-                <button type="submit" class="btn btn-secondary">Update</button>
 
               </dialog>
 
@@ -51,6 +50,16 @@
           <hr/>
         </div>
 
+
+        <div class="container">
+          <div class="tabs__links">
+            <button class="link active" name="page" value="buyer">Buyer</button>
+            <button class="link" name="page" value="vendor">Vendor</button>
+            <button class="link" name="page" value="allocation">Property Allocation</button>
+          </div>
+        </div>
+
+
       </form>
 
       <div class="container">
@@ -58,7 +67,7 @@
           <table>
             <thead>
               <tr>
-                <th class="min-fit-content" data-td-class="text-danger">Alerts</th>
+                <th class="min-fit-content" data-td-class="alert-status">Alerts</th>
                 <th>Property address</th>
                 <th data-format="date">Date Authorised</th>
                 <th>Date Authorised by</th>
@@ -86,7 +95,7 @@
                 <td><a href="/clienturl" class="text-nowrap">View property</a></td>  
               </tr>
               <tr>
-                <td>2</td>
+                <td></td>
                 <td>89, Queens Crescent, NE28 8DR</td>
                 <td>31 May 23</td>
                 <td>Abigail Budden</td>

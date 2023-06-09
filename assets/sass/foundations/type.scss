@@ -27,6 +27,10 @@ small {
   clear: both;
   display: block;
   padding-bottom: 2rem;
+    
+  [class*="fa-"] {
+    margin-right: 0.5rem;
+  }
 }
 
 @include is('h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4'){

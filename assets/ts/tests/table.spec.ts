@@ -168,16 +168,13 @@ describe('populateDataQueries', () => {
   const table = document.createElement('table');
   table.innerHTML = basicTable;
   const form = document.createElement('form');
-  form.innerHTML += `<div><span data-query="total"></span><span data-query="Heading 2 == Low"></span></div>`;
+  form.innerHTML += `<div><input name="heading" value="Low" data-filter="Heading 2" /><span data-query="total"></span><span data-query="Heading 2 == Low"></span></div>`;
 
   tableModule.addDataAttributes(table);
   tableModule.filterTable(table, form, document.createElement('div'));
   tableModule.populateDataQueries(table, form);
 
-console.log(table.outerHTML)
-
   test('should populate elements with the data-query attribute with the result of the corresponding query', () => {
-
 
     expect(form.querySelector('[data-query="total"]').textContent).toEqual('4');
     expect(form.querySelector('[data-query="Heading 2 == Low"]').textContent).toEqual('2');

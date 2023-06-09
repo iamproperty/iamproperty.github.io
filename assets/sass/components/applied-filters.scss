@@ -17,6 +17,10 @@
   }
 }
 
+::slotted(*:last-child) {
+  margin-bottom: 0;
+}
+
 .applied-filters .filter {
   
   border: 1px solid var(--colour-border);

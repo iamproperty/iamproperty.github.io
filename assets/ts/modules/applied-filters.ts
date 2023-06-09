@@ -103,7 +103,7 @@ function createAppliedFilters(container,filters) {
 
       let input = event.target.closest('input[data-filter-text]');
 
-      addFilterButton (filters, input)
+      addFilterButton (filters, input);
     };
     
   }, false);
@@ -125,13 +125,19 @@ function createAppliedFilters(container,filters) {
         }
 
         let inputs = container.querySelectorAll(selector);
+
         for(var i=0;i<inputs.length;i++){
           let input = inputs[i];
 
-          if(input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox')
-            inputs[i].value = "";
 
-          inputs[i].checked = false;
+          if(input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox')
+            input.value = "";
+          else {
+            input.checked = false;
+
+            var event = new Event('force');
+            input.closest('form').dispatchEvent(event);
+          }
         }
       }
 

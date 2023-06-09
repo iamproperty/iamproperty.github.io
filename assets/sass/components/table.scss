@@ -24,7 +24,10 @@ td,th {
   color: var(--colour-body);
   
   &:last-child {
-    padding-right: 0;
+    padding-right: rem(2);
+  }
+  &:first-child {
+    padding-left: rem(2);
   }
 }
 
@@ -55,6 +58,8 @@ tbody tr {
 
 
   &:is(:hover,:focus-within,.hover) {
+
+    --bg-colour-rgb: 238,238,238;
 
     th,td {
       background: var(--hover-background);
@@ -89,6 +94,7 @@ table.border-0 {
 // #region Table wrapper - Add via JS if needed, provides a safe space to scroll
 :is(iam-table, .iam-table) {
   --wrapper-padding: #{rem(32)};
+  --bg-colour: #ffffff;
   display: block;
   background: var(--colour-white);
   padding: var(--wrapper-padding);
@@ -120,18 +126,35 @@ table.border-0 {
 }
 *:has(> .iam-table){
   container-type: inline-size;
+  
 }
 @container (width < 23.4375em) {
+
+  .iam-table, iam-table {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    margin-bottom: 0;
+  }
+  
 
   .table__wrapper:not(.table--fullwidth) {
 
     overflow: hidden;
     max-height: none!important;
-
   }
   :is(iam-table, .iam-table):not(.table--fullwidth) {
     
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+
     table {
+
+      overflow: visible;
+      margin-inline: 1.5rem;
+      margin-bottom: 1.5rem;
+      width: calc(100% - 3rem);
 
       thead {
         display: none;
@@ -139,6 +162,7 @@ table.border-0 {
 
       tbody {
         display: block;
+        overflow: visible;
 
         tr td:first-child {
           padding-top:0;
@@ -149,6 +173,10 @@ table.border-0 {
         display: block;
         position: relative;
         border: none;
+        background: var(--colour-white);
+        padding: var(--wrapper-padding);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+        border-radius: rem(8);
 
         & + tr {
           margin-top: rem(32);
@@ -193,6 +221,10 @@ table.border-0 {
           font-weight: bold;
           margin: 0;
         }
+      }
+
+      td:first-child::after {
+        top: 1.75rem;
       }
 
       td::after {
@@ -408,81 +440,92 @@ table:not(.table--filtered) tbody tr:nth-child(15) ~ tr {
 
 // Statuses 
 
+table {
+    
+  :is([data-content="Low"],
+    [data-content="Medium"],
+    [data-content="High"],
+    [data-content="Incomplete"],
+    [data-content="Requires approval"],
+    [data-content="Verified"],
+    [data-content="Not started"],
+    [data-content="Completed"],
+    .alert-status
+    ) {
+    
+    position: relative;
+    padding-left: 1.5rem;
 
-:is([data-content="Low"],
-  [data-content="Medium"],
-  [data-content="High"],
-  [data-content="Incomplete"],
-  [data-content="Requires approval"],
-  [data-content="Verified"],
-  [data-content="Not started"],
-  [data-content="Completed"]
-  ) {
-  
-  position: relative;
-  padding-left: 1.5rem;
+    &::before {
+      margin-left: -1.5rem!important;
+    }
 
-  &::before {
-    margin-left: -1.5rem!important;
+    &:after {
+
+      position: absolute;
+      top: 1rem;
+      left: 0;
+
+      content: "";
+      height: rem(16);
+      width: rem(16);
+      display: inline-block;
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
   }
 
-  &:after {
+  [data-content="High"]:after {
 
-    position: absolute;
-    top: 1rem;
-    left: 0;
-
-    content: "";
-    height: rem(16);
-    width: rem(16);
-    display: inline-block;
-    mask-size: 100%;
-    mask-repeat: no-repeat;
-    mask-position: 50% 50%;
-    -webkit-mask-size: 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: 50% 50%;
+    background: var(--colour-danger);
+    mask-image: var(--icon-high);
+    -webkit-mask-image: var(--icon-high);
   }
-}
 
-[data-content="High"]:after {
+  [data-content="Medium"]:after {
 
-  background: var(--colour-danger);
-  mask-image: var(--icon-high);
-  -webkit-mask-image: var(--icon-high);
-}
+    background: var(--colour-warning);
+    mask-image: var(--icon-medium);
+    -webkit-mask-image: var(--icon-medium);
+  }
 
-[data-content="Medium"]:after {
+  [data-content="Low"]:after {
 
-  background: var(--colour-warning);
-  mask-image: var(--icon-medium);
-  -webkit-mask-image: var(--icon-medium);
-}
+    background: var(--colour-success);
+    mask-image: var(--icon-low);
+    -webkit-mask-image: var(--icon-low); 
+  }
 
-[data-content="Low"]:after {
+  :is([data-content="Not started"],[data-content="Incomplete"]):after {
 
-  background: var(--colour-success);
-  mask-image: var(--icon-low);
-  -webkit-mask-image: var(--icon-low); 
-}
+    background: var(--colour-danger);
+    mask-image: var(--icon-flag);
+    -webkit-mask-image: var(--icon-flag); 
+  }
 
-:is([data-content="Not started"],[data-content="Incomplete"]):after {
+  [data-content="Requires approval"]:after {
 
-  background: var(--colour-danger);
-  mask-image: var(--icon-flag);
-  -webkit-mask-image: var(--icon-flag); 
-}
+    background: var(--colour-warning);
+    mask-image: var(--icon-flag);
+    -webkit-mask-image: var(--icon-flag); 
+  }
 
-[data-content="Requires approval"]:after {
+  :is([data-content="Verified"],[data-content="Completed"]):after {
 
-  background: var(--colour-warning);
-  mask-image: var(--icon-flag);
-  -webkit-mask-image: var(--icon-flag); 
-}
+    background: var(--colour-success);
+    mask-image: var(--icon-tick);
+    -webkit-mask-image: var(--icon-tick); 
+  }
 
-:is([data-content="Verified"],[data-content="Completed"]):after {
 
-  background: var(--colour-success);
-  mask-image: var(--icon-tick);
-  -webkit-mask-image: var(--icon-tick); 
+  .alert-status:not(:empty):after {
+
+    background: var(--colour-danger);
+    mask-image: var(--icon-warning);
+    -webkit-mask-image: var(--icon-warning); 
+  }
 }

@@ -92,6 +92,7 @@ class iamTable extends HTMLElement {
       tableModule.makeTableFunctional(this.table, this.form, this.pagination, this);
       tableModule.filterTable(this.table, this.form,this);
       createPaginationButttons(this,this.pagination);
+      tableModule.populateDataQueries(this.table, this.form);
     }
 
     this.shadowRoot.querySelector('.table__wrapper').addEventListener("scroll", (event) => {

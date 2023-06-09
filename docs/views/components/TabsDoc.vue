@@ -8,34 +8,37 @@
       <p>Group together some content and display one at a time, should not be used for important content as it may not be visible on page load.</p>
     </div>
 
-    <Tabs class="container visualtest">
-      <Tab title="The benefits of auction">
-        <h2>Tab content 1</h2>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-      </Tab>
-      <Tab title="The types of auctions we offer">
-        <h2>Tab content 2</h2>
-        <a href="/link">a link</a>
-        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-      </Tab>
-      <Tab title="Online auctions" lazy>
-        <h2>Tab content 3</h2>
-        <p>Lazy loaded table</p>
-        <Table
-        :fields="[
-          { key: 'column_1' },
-          { key: 'column_2' },
-          { key: 'column_3' }
-        ]"
-        :items="[
-        {
-          column_1: 'row 1',
-          column_2: 'row 1',
-          column_4: 'row 1',
-        }
-        ]"></Table>
-      </Tab>
-    </Tabs>
+    <div class="container">
+        
+      <Tabs class="visualtest">
+        <Tab title="The benefits of auction">
+          <h2>Tab content 1</h2>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </Tab>
+        <Tab title="The types of auctions we offer">
+          <h2>Tab content 2</h2>
+          <a href="/link">a link</a>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </Tab>
+        <Tab title="Online auctions" lazy>
+          <h2>Tab content 3</h2>
+          <p>Lazy loaded table</p>
+          <Table
+          :fields="[
+            { key: 'column_1' },
+            { key: 'column_2' },
+            { key: 'column_3' }
+          ]"
+          :items="[
+          {
+            column_1: 'row 1',
+            column_2: 'row 1',
+            column_4: 'row 1',
+          }
+          ]"></Table>
+        </Tab>
+      </Tabs>
+    </div>
 
 
     <div class="container">
