@@ -90,6 +90,7 @@ table.border-0 {
 :is(iam-table, .iam-table) {
   --wrapper-padding: #{rem(32)};
   display: block;
+  background: var(--colour-white);
   padding: var(--wrapper-padding);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
   border-radius: rem(8);
@@ -192,6 +193,10 @@ table.border-0 {
           font-weight: bold;
           margin: 0;
         }
+      }
+
+      td::after {
+        top: 2.5rem;
       }
 
       tbody tr:first-child td:not(:first-child) {
@@ -413,11 +418,82 @@ table:not(.table--filtered) tbody tr:nth-child(15) ~ tr {
 }
 
 // Statuses 
-/* Will be used in the future
-[data-content="Incomplete"] {
-  background-color: red;
+
+
+:is([data-content="Low"],
+  [data-content="Medium"],
+  [data-content="High"],
+  [data-content="Incomplete"],
+  [data-content="Requires approval"],
+  [data-content="Verified"],
+  [data-content="Not started"],
+  [data-content="Completed"]
+  ) {
+  
+  position: relative;
+  padding-left: 1.5rem;
+
+  &::before {
+    margin-left: -1.5rem!important;
+  }
+
+  &:after {
+
+    position: absolute;
+    top: 1rem;
+    left: 0;
+
+    content: "";
+    height: rem(16);
+    width: rem(16);
+    display: inline-block;
+    mask-size: 100%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+  }
 }
-[data-content="Verified"] {
-  background-color: green;
+
+[data-content="High"]:after {
+
+  background: var(--colour-danger);
+  mask-image: var(--icon-high);
+  -webkit-mask-image: var(--icon-high);
 }
-*/
+
+[data-content="Medium"]:after {
+
+  background: var(--colour-warning);
+  mask-image: var(--icon-medium);
+  -webkit-mask-image: var(--icon-medium);
+}
+
+[data-content="Low"]:after {
+
+  background: var(--colour-success);
+  mask-image: var(--icon-low);
+  -webkit-mask-image: var(--icon-low); 
+}
+
+:is([data-content="Not started"],[data-content="Incomplete"]):after {
+
+  background: var(--colour-danger);
+  mask-image: var(--icon-flag);
+  -webkit-mask-image: var(--icon-flag); 
+}
+
+[data-content="Requires approval"]:after {
+
+  background: var(--colour-warning);
+  mask-image: var(--icon-flag);
+  -webkit-mask-image: var(--icon-flag); 
+}
+
+:is([data-content="Verified"],[data-content="Completed"]):after {
+
+  background: var(--colour-success);
+  mask-image: var(--icon-tick);
+  -webkit-mask-image: var(--icon-tick); 
+}
