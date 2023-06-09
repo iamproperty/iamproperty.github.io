@@ -159,8 +159,8 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   height: calc(rem(48) - 4px)!important;
   text-indent: -300px;
   overflow: hidden;
-
   position: relative;
+  font-size: rem(20);
 
   &:before {
     position: absolute;
