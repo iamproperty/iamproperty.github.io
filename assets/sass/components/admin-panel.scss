@@ -7,22 +7,15 @@
   display: block;
   padding: var(--padding-top) var(--padding-x) var(--padding-bottom) var(--padding-x);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
-  background-color: var(--colour-white);
+  background-color: var(--colour-canvas-2);
   border-radius: rem(8);
   margin-bottom: rem(24);
 
   @media screen and (prefers-color-scheme: dark) {
-    background-color: var(--colour-white);
-
-  
-    @include reset-colours();
+    
+    background-color: var(--colour-canvas-2);
     color: var(--colour-body);
   }  
-
-  &.bg-secondary{
-
-    background-color: rgba(#b4e6a5,0.3) !important;
-  }
 
   &:empty {
     display: none;
@@ -81,7 +74,7 @@
       height: 1.5rem;
       position: sticky;
       display: block;
-      background: linear-gradient(180deg, rgba(var(--bg-colour-rgb, 255, 255, 255), 0) 0%, rgba(var(--bg-colour-rgb, 255, 255, 255), 1) 100%);
+      background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
       z-index: 2;
       margin-bottom: -1.5rem;
     }
@@ -149,7 +142,7 @@
     }
 
     &:not(.current, [aria-pressed="true"]){
-      background: white!important;
+      background: var(--colour-canvas-2)!important;
     }
 
     &:after {

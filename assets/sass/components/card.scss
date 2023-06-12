@@ -21,7 +21,7 @@
   display: block;
   overflow: hidden;
   z-index: 0;
-  background: #ffffff;
+  background: var(--colour-canvas-2);
 
   &.border-0 {
     box-shadow: none;
@@ -49,7 +49,7 @@
   }
 
   &:after {
-    background: var(--colour-primary);
+    background: var(--colour-body);
     mask-image: var(--icon-arrow);
     mask-size: 50%;
     mask-repeat: no-repeat;

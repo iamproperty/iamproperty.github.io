@@ -113,6 +113,9 @@
   @each $color, $value in $dark-mode-colors {
     darkModeColour_#{$color}: #{$value}
   }
+  @each $color, $value in $dark-mode-functional-colors {
+    darkModeFunctionalColour_#{$color}: #{$value}
+  }
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};
   }
