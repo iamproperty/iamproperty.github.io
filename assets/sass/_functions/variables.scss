@@ -119,7 +119,8 @@ $theme-colors: map-merge((
 @each $color, $value in $theme-colors {
 
   $vars: map-merge((
-    --colour-#{$color}: $value
+    --colour-#{$color}: $value,
+    --colour-#{$color}-theme: $value
   ), $vars);
 }
 
@@ -157,24 +158,24 @@ $non-theme-colors: map-merge((
   "muted":      $colour-muted,
   "body":       $body-color,
   "border":     $colour-border,
-  "link":       var(--colour-primary),
+  "link":       var(--colour-primary-theme),
   "brand":      var(--colour-primary),
   "underline":  var(--colour-secondary),
   "heading":    var(--colour-primary),
-  "focus":      var(--colour-primary),
-  "hover":      var(--colour-primary),
-  "active":     var(--colour-primary),
+  "focus":      var(--colour-primary-theme),
+  "hover":      var(--colour-primary-theme),
+  "active":     var(--colour-primary-theme),
   "selected":   var(--colour-info),
   "inverted":   $canvas,
-  "btn": var(--colour-primary),
+  "btn": var(--colour-primary-theme),
   "btn-bg": var(--colour-warning),
   "btn-border": var(--colour-warning),
   "btn-bg-hover": transparent,
-  "btn-hover": var(--colour-primary),
-  "btn-secondary": var(--colour-primary),
-  "btn-secondary-border": var(--colour-primary),
+  "btn-hover": var(--colour-primary-theme),
+  "btn-secondary": var(--colour-primary-theme),
+  "btn-secondary-border": var(--colour-primary-theme),
   "btn-secondary-bg": transparent,
-  "btn-secondary-bg-hover": var(--colour-primary),
+  "btn-secondary-bg-hover": var(--colour-primary-theme),
   "btn-secondary-hover": var(--colour-inverted),
   "canvas-2":     var(--colour-canvas)
 ), $non-theme-colors);
@@ -217,7 +218,7 @@ $dark-mode-functional-colors: (
   "btn-secondary-border": var(--colour-white),
   "btn-secondary-bg": transparent,
   "btn-secondary-bg-hover": var(--colour-white),
-  "btn-secondary-hover": var(--colour-primary)
+  "btn-secondary-hover": var(--colour-primary-theme)
 );
 
 

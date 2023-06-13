@@ -63,6 +63,9 @@ tbody tr {
 
     th,td {
       background: var(--hover-background);
+      color: var(--colour-primary-theme);
+      --colour-link: var(--colour-primary-theme);
+      --colour-hover: var(--colour-primary-theme);
     }
   }
 

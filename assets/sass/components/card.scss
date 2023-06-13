@@ -22,6 +22,8 @@
   overflow: hidden;
   z-index: 0;
   background: var(--colour-canvas-2);
+  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+  outline-offset: -1px;
 
   &.border-0 {
     box-shadow: none;
@@ -49,7 +51,7 @@
   }
 
   &:after {
-    background: var(--colour-body);
+    background: var(--colour-primary-theme);
     mask-image: var(--icon-arrow);
     mask-size: 50%;
     mask-repeat: no-repeat;

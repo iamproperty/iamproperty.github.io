@@ -185,7 +185,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   &.btn-secondary:is(:hover, :focus, .hover, :active, .active, :focus-within):not([disabled]) {
     background-color: var(--colour);
-    color: var(--colour-primary);
+    color: var(--colour-primary-theme);
 
     &:is(.colour-primary,.colour-dark,.colour-danger,.colour-black) {
       color: var(--colour-inverted);
@@ -199,6 +199,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   --colour-btn-bg-hover: var(--colour);
   --colour-btn-border-hover: var(--colour);
+  --colour-btn-hover: var(--colour-primary-theme);
   position: relative;
   padding-left: rem(56);
   padding-right: rem(56);
@@ -208,7 +209,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
     padding-left: rem(40);
     padding-right: rem(40);
-
+    
     &:before {
       content: "\f00c";
       font-family: "Font Awesome 6 Pro";

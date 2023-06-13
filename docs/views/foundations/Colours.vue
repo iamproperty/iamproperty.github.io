@@ -665,7 +665,7 @@ $compatible: 'false';
     }
   }
 
-  html #visualtest ~ main > .light-mode:not(.visualtest) {
+  html #visualtest:target ~ main > .light-mode:not(.visualtest) {
     display: block!important;
 
     > *:not(.visualtest) {
@@ -704,8 +704,8 @@ $compatible: 'false';
       color: #{$colour-inverted};
     }
   }
-  
-  html #visualtest ~ main > .dark-mode:not(.visualtest) {
+
+  html #visualtest:target ~ main > .dark-mode:not(.visualtest) {
     display: block!important;
 
     > *:not(.visualtest) {

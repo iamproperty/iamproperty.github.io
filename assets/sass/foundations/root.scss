@@ -26,9 +26,7 @@
 
   // Extra vars needed
   --content-max-width: #{$content-max-width};
-  
   --colour-brand: var(--colour-primary);
-  
 }
 
 // Dark mode; functional colours get updated
@@ -73,5 +71,37 @@
     @include reset-colours();
     --colour-body: #{$primary};
     color: var(--colour-body);
+  }
+
+  @each $color, $value in $theme-colors {
+
+    .bg-#{$color}[class*="gradient-"] {
+
+      background-color: var(--colour-#{$color}-theme) !important;
+    }
+  }
+  
+  [class*="bg-"][class*="gradient-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
+
+    @each $color, $value in $theme-colors {
+      --colour-#{$color}: #{$value};
+    }
+    @include reset-colours();
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-body);
+  }
+
+  [class*="bg-"][class*="gradient-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.prevent-invert) {
+    
+    @include invert-colours();
+
+    color: #{$colour-inverted};
+  }
+}
+
+
+@media (forced-colors: active) {
+  :root {
+    --contrast-outline-width: 1px;
   }
 }
