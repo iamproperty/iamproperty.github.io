@@ -42,12 +42,6 @@ module.exports = {
         await page.goto(pkg.localURL+url+'?cache='+Date.now()+'#visualtest')
         await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value: 'dark' }]);
 
-
-        await page.$eval('html', (e) => { 
-          e.setAttribute("className", 'dark-theme')
-          console.log(e)
-        });
-
         await page.setViewport({ width: 1440, height: 800 })
         await page.waitForTimeout(4000)
 
