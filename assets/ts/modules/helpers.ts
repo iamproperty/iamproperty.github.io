@@ -75,6 +75,12 @@ export const addGlobalEvents = (body) => {
       // Create close button is needed
       dialog.innerHTML = `<button class="dialog__close">Close</button>${dialog.innerHTML}`;
       
+      // remove close button when dialog is closed
+      dialog.addEventListener("close", () => {
+        const closeButton = dialog.querySelector('.dialog__close');
+        dialog.removeChild(closeButton);
+      }, { once: true }); // only adds this once
+      
       let videoButton = dialog.querySelector('.youtube-embed a');
 
       if (videoButton){
@@ -89,8 +95,8 @@ export const addGlobalEvents = (body) => {
         "id": modalID
       });
     };
-    // Close modal
 
+    // Close modal
     if (event && event.target instanceof HTMLElement && event.target.closest('button.dialog__close')){
       const dialog = event.target.closest('dialog[open]');
 
@@ -107,7 +113,9 @@ export const addGlobalEvents = (body) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
       const dialog = event.target.closest('dialog[open]');
       const dialogDimensions = dialog.getBoundingClientRect()
+
       if (event.clientX < dialogDimensions.left || event.clientX > dialogDimensions.right || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
+
         dialog.close()
         
         window.dataLayer = window.dataLayer || [];

@@ -30,7 +30,6 @@
   }
 
   &__body {
-    
     position: relative;
     padding: var(--top-padding) var(--right-padding) var(--bottom-padding) var(--left-padding);
     z-index: -1;
@@ -124,16 +123,13 @@
 
 
 ::slotted(i){
-  
-  font-size: rem(18)!important;
-  height: rem(18)!important;
-  margin: 0 0 0.5rem 0!important;
-  font-weight: 400!important;
-  display: block!important;
+  font-size: rem(24);
+  margin: -3px var(--icon-right) 0 0;
+  font-weight: 400;
+  vertical-align: middle;
 }
 
 ::slotted(span){
-  
   display: block;
   font-weight: normal;
   padding-top: rem(24);

@@ -34,6 +34,17 @@
           </a>          
         </div>
       </div>
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">With Icon</span>
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+      </div>
     </div>
     <div class="container">
 

@@ -8,7 +8,7 @@ class iamCard extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const loadCSS = `@import "${assetLocation}/css/components/card.css";`;
 
-    if(this.querySelector('.icon'))
+    if(this.querySelector('.fa'))
       this.classList.add('card--has-icon');
 
     let classList = this.classList.toString();
