@@ -129,6 +129,12 @@
   vertical-align: middle;
 }
 
+.card--filter ::slotted(i) {
+  display: block !important;
+  height: rem(18)!important;
+  margin: 0 0 0.5rem 0!important;
+}
+
 ::slotted(span){
   display: block;
   font-weight: normal;
