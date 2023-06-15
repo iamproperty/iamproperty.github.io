@@ -7,6 +7,9 @@
       <ul>
         <li>Update to Admin panels documentation</li>
         <li>Minor button amends</li>
+        <li>Update to dialog (modal / popover) documentation</li>
+        <li>Update to dialog style, max height and width</li>
+        <li>Update to Cards component when icon is included</li>
       </ul>
 
       <h2>V3.5</h2>
