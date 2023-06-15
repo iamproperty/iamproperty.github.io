@@ -21,7 +21,9 @@
   display: block;
   overflow: hidden;
   z-index: 0;
-  background: #ffffff;
+  background: var(--colour-canvas-2);
+  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+  outline-offset: -1px;
 
   &.border-0 {
     box-shadow: none;
@@ -30,7 +32,6 @@
   }
 
   &__body {
-    
     position: relative;
     padding: var(--top-padding) var(--right-padding) var(--bottom-padding) var(--left-padding);
     z-index: -1;
@@ -49,7 +50,7 @@
   }
 
   &:after {
-    background: var(--colour-primary);
+    background: var(--colour-primary-theme);
     mask-image: var(--icon-arrow);
     mask-size: 50%;
     mask-repeat: no-repeat;
@@ -124,16 +125,19 @@
 
 
 ::slotted(i){
-  
-  font-size: rem(18)!important;
+  font-size: rem(24);
+  margin: -3px var(--icon-right) 0 0;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+.card--filter ::slotted(i) {
+  display: block !important;
   height: rem(18)!important;
   margin: 0 0 0.5rem 0!important;
-  font-weight: 400!important;
-  display: block!important;
 }
 
 ::slotted(span){
-  
   display: block;
   font-weight: normal;
   padding-top: rem(24);

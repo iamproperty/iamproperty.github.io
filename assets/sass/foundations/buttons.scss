@@ -3,6 +3,14 @@
 // #region button primary
 .btn {
 
+  --btn-margin: #{rem(16)};
+
+  @include media-breakpoint-up(sm) { 
+
+    --btn-margin: #{rem(24)};
+  }
+
+
   &:not(.btn-secondary)[class*="colour-"]{
     --colour-btn-bg: var(--colour);
     --colour-btn-border: var(--colour);
@@ -28,8 +36,8 @@
   line-height: rem(24);
   padding: calc(rem(12) - 2px) calc(rem(40) - 2px);
   border-radius: rem(24);
-  margin-bottom: rem(24);
-  margin-right: rem(24);
+  margin-bottom: var(--btn-margin);
+  margin-right: var(--btn-margin);
   transition: background .5s, color .5s;
   height: auto;
   max-width: fit-content;
@@ -146,11 +154,13 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   text-align: center;
   width: calc(rem(48) - 4px);
+  min-width: calc(rem(48) - 4px);
+  max-width: calc(rem(48) - 4px);
   height: calc(rem(48) - 4px)!important;
   text-indent: -300px;
   overflow: hidden;
-
   position: relative;
+  font-size: rem(20);
 
   &:before {
     position: absolute;
@@ -175,7 +185,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   &.btn-secondary:is(:hover, :focus, .hover, :active, .active, :focus-within):not([disabled]) {
     background-color: var(--colour);
-    color: var(--colour-primary);
+    color: var(--colour-primary-theme);
 
     &:is(.colour-primary,.colour-dark,.colour-danger,.colour-black) {
       color: var(--colour-inverted);
@@ -189,6 +199,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   --colour-btn-bg-hover: var(--colour);
   --colour-btn-border-hover: var(--colour);
+  --colour-btn-hover: var(--colour-primary-theme);
   position: relative;
   padding-left: rem(56);
   padding-right: rem(56);
@@ -198,7 +209,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
     padding-left: rem(40);
     padding-right: rem(40);
-
+    
     &:before {
       content: "\f00c";
       font-family: "Font Awesome 6 Pro";
@@ -313,54 +324,58 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 // #endregion
 
 
-// #region Rertiary Button
+// #region Tertiary Button
 
-.btn {
+.btn.btn-tertiary {
 
-  &.btn-tertiary {
+  background-color: transparent;
+  border: none;
+  color: var(--colour-link);
+  margin: 0 var(--btn-margin) var(--btn-margin) 0;
+  padding: 0;
+  font-size: rem(18);
+  font-weight: normal;
+  line-height: rem(24);
+  min-height: rem(24);
+  position: relative;
 
-    background-color: transparent;
-    border: none;
-    color: var(--colour-link);
-    margin: 0 rem(24) rem(24) 0;
-    padding: 0;
-    font-size: rem(18);
-    line-height: rem(24);
-    min-height: rem(24);
-    position: relative;
+  &:after {
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 50%;
+    height: 2px;
+    width: 100%;
+    transform: translate(-50%,0);
+    background: var(--colour-underline);
+    transition: width 0.5s;
+  }
 
-    &:not(.text-decoration-none):after {
-      position: absolute;
-      content: "";
-      top: 100%;
-      left: 50%;
-      height: 2px;
-      width: 100%;
-      transform: translate(-50%,0);
-      background: var(--colour-underline);
-      transition: width 0.5s;
+
+  &.text-decoration-none:after {
+
+    width: 0%;
+  }
+
+  [class*=fa-] {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+  [class*=fa-]:not(:first-child) {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+
+    &:after {
+      width: 60%!important;
     }
+  }
+  &:is(:active, .active):not([disabled]) {
 
-    [class*=fa-] {
-      margin-left: 0;
-      margin-right: 0.5rem;
-    }
-    [class*=fa-]:not(:first-child) {
-      margin-left: 0.5rem;
-      margin-right: 0;
-    }
-
-    &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
-
-      &:after {
-        width: 60%;
-      }
-    }
-    &:is(:active, .active):not([disabled]) {
-
-      color: var(--colour-active);
-    }
+    color: var(--colour-active);
   }
 
 }
-
+// #endregion

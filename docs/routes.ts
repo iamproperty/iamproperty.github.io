@@ -675,6 +675,14 @@ const routes = [
           title: 'Openview homepage | iamkey'
         },
         component: () => import('./views/standalone/Openview.vue')
+      },
+      {
+        path: 'compliance-dashboard',
+        name: "Compliance dashboard",
+        meta: {
+          title: 'Compliance dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/ComplianceDashboard.vue')
       }
     ]
   },

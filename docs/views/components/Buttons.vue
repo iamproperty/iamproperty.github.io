@@ -42,13 +42,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+        <div class="col-sm-4 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary">Lorum ipsum</a>
         </div>
-        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+        <div class="col-sm-4 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary hover">Lorum ipsum</a>
         </div>
-        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+        <div class="col-sm-4 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary active">Lorum ipsum</a>
         </div>
       </div>
@@ -88,13 +88,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary fa-plus-large">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary hover fa-plus-large">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary active fa-plus-large">Lorum ipsum</a>
         </div>
       </div>
@@ -135,13 +135,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary btn--prompt">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary hover btn--prompt">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary active btn--prompt">Lorum ipsum</a>
         </div>
       </div>
@@ -183,13 +183,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary btn-sm">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary hover btn-sm">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-primary active btn-sm">Lorum ipsum</a>
         </div>
       </div>
@@ -231,13 +231,13 @@
       </div>
 
       <div class="row">
-        <div class="col-5 col-sm-3 bg-primary pt-3 pb-2">
+        <div class="col-5 col-sm-3 bg-primary light-mode pt-3 pb-2">
           <a href="/components/buttons" class="btn btn-primary btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
-        <div class="col-7 col-sm-3 bg-primary pt-3 pb-2">
+        <div class="col-7 col-sm-3 bg-primary light-mode pt-3 pb-2">
           <a href="/components/buttons" class="btn btn-primary hover btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
-        <div class="col-7 col-sm-3 bg-primary pt-3 pb-2">
+        <div class="col-7 col-sm-3 bg-primary light-mode pt-3 pb-2">
           <a href="/components/buttons" class="btn btn-primary active btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
       </div>
@@ -292,13 +292,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+        <div class="col-sm-4 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary">Lorum ipsum</a>
         </div>
-        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+        <div class="col-sm-4 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary hover">Lorum ipsum</a>
         </div>
-        <div class="col-sm-4 col-md-4 bg-primary pt-3">
+        <div class="col-sm-4 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary active">Lorum ipsum</a>
         </div>
       </div>
@@ -326,13 +326,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary fa-plus-large">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary hover fa-plus-large">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary active fa-plus-large">Lorum ipsum</a>
         </div>
       </div>
@@ -361,13 +361,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary btn--prompt">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary hover btn--prompt">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary active btn--prompt">Lorum ipsum</a>
         </div>
       </div>
@@ -405,19 +405,19 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <div class="dialog__wrapper">
             <button class="btn btn-secondary"><i class="fa-light fa-user"></i>Individual</button>
             <dialog><p>Dialog content</p></dialog>
           </div>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <div class="dialog__wrapper">
             <button class="btn btn-secondary hover"><i class="fa-light fa-user"></i>Individual</button>
             <dialog><p>Dialog content</p></dialog>
           </div>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <div class="dialog__wrapper">
             <button class="btn btn-secondary active"><i class="fa-light fa-user"></i>Individual</button>
             <dialog><p>Dialog content</p></dialog>
@@ -460,18 +460,18 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           
           <button class="btn btn-secondary btn-filter" data-model="example3">Filter by</button>
           <dialog id="example3"><p>Dialog content</p></dialog>
         
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           
           <button class="btn btn-secondary  btn-filter hover" data-model="example4">Filter by</button>
           <dialog id="example4"><p>Dialog content</p></dialog>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           
           <button class="btn btn-secondary  btn-filter active" data-model="example4b">Filter by</button>
           <dialog id="example4b"><p>Dialog content</p></dialog>
@@ -525,7 +525,7 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           
           
           <div class="btn btn-secondary">
@@ -537,7 +537,7 @@
           </div>
         
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           
           
           <div class="btn btn-secondary hover">
@@ -549,7 +549,7 @@
           </div>
           
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           
           
           <div class="btn btn-secondary active">
@@ -588,13 +588,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary btn-sm">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary hover btn-sm">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-secondary active btn-sm">Lorum ipsum</a>
         </div>
       </div>
@@ -647,13 +647,13 @@
       </div>
 
       <div class="row">
-        <div class="col-5 col-sm-3 bg-primary pt-3 pb-2">
+        <div class="col-5 col-sm-3 bg-primary light-mode pt-3 pb-2">
           <a href="/components/buttons" class="btn btn-secondary btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
-        <div class="col-7 col-sm-3 bg-primary pt-3 pb-2">
+        <div class="col-7 col-sm-3 bg-primary light-mode pt-3 pb-2">
           <a href="/components/buttons" class="btn btn-secondary hover btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
-        <div class="col-7 col-sm-3 bg-primary pt-3 pb-2">
+        <div class="col-7 col-sm-3 bg-primary light-mode pt-3 pb-2">
           <a href="/components/buttons" class="btn btn-secondary active btn-compact fa-plus-large">Lorum ipsum</a>
         </div>
       </div>
@@ -684,13 +684,13 @@
       </div>
 
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-tertiary">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-tertiary hover">Lorum ipsum</a>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <a href="/components/buttons" class="btn btn-tertiary active">Lorum ipsum</a>
         </div>
       </div>
@@ -748,6 +748,13 @@
 
     <div class="container pb-0">
       
+      <h2>Mobile button padding</h2>
+      <p>Due to the small real estate of mobile screens we can reduce the minimum padding around buttons from 24px (1.5rem) to 16px (1rem). Compact buttons can still have the smaller padding of 8px (0.5rem) on desktop, tablet, and mobile.</p>
+      <p>This reduced padding provides more flexibility when designing for mobile as more content can be displayed on the screen at once. The minimum padding does however ensure that the screen doesn’t become too cluttered and that there is adequate spacing around the button to maintain a suitable touch target size to avoid accidental taps.</p>
+    </div>
+
+    <div class="container pb-0">
+      
       <h2>Text links</h2>
       <p class="pb-3">Inline text links can be used among body copy. See examples below:</p>
     </div>
@@ -774,15 +781,15 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <p><a href="/components/buttons">industry's standard</a></p>
           <p><a href="/components/buttons"><i class="fa-light fa-envelope"></i> unknown printer</a></p>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <p><a href="/components/buttons" class="hover">industry's standard</a></p>
           <p><a href="/components/buttons" class="hover"><i class="fa-light fa-envelope"></i> unknown printer</a></p>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary pt-3">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
           <p><a href="/components/buttons" class="active">industry's standard</a></p>
           <p><a href="/components/buttons" class="active"><i class="fa-light fa-envelope"></i> unknown printer</a></p>
         </div>
@@ -862,6 +869,14 @@
             </tr>
           </thead>
           <tbody class="text-body">
+            <tr>
+              <td>V1.1 added</td>
+              <td>08.06.2023</td>
+              <td>- Increased icon size on primary and secondary buttons to 1.125rem and ‘compact’ primary and secondary buttons to 1.25rem<br/>
+- Decreased font weight on tertiary buttons to 500<br/>
+- Updated style of ‘dark’ tertiary button to include green underline<br/>
+- Added mobile button padding guidance</td>
+            </tr>
             <tr>
               <td>V1 added</td>
               <td>01.06.2023</td>

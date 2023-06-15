@@ -4,7 +4,7 @@
 table {
   --border-width: 2px;
   --inner-border-width: 2px;
-  --hover-background: #EEEEEE;
+  --hover-background: var(--colour-light);
   width: 100%;
   font-size: rem(16);
   border: none;
@@ -24,7 +24,10 @@ td,th {
   color: var(--colour-body);
   
   &:last-child {
-    padding-right: 0;
+    padding-right: rem(2);
+  }
+  &:first-child {
+    padding-left: rem(2);
   }
 }
 
@@ -56,8 +59,13 @@ tbody tr {
 
   &:is(:hover,:focus-within,.hover) {
 
+    --bg-colour-rgb: 238,238,238;
+
     th,td {
       background: var(--hover-background);
+      color: var(--colour-primary-theme);
+      --colour-link: var(--colour-primary-theme);
+      --colour-hover: var(--colour-primary-theme);
     }
   }
 
@@ -89,7 +97,9 @@ table.border-0 {
 // #region Table wrapper - Add via JS if needed, provides a safe space to scroll
 :is(iam-table, .iam-table) {
   --wrapper-padding: #{rem(32)};
+  --bg-colour: #ffffff;
   display: block;
+  background: var(--colour-canvas-2);
   padding: var(--wrapper-padding);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
   border-radius: rem(8);
@@ -119,18 +129,35 @@ table.border-0 {
 }
 *:has(> .iam-table){
   container-type: inline-size;
+  
 }
 @container (width < 23.4375em) {
+
+  .iam-table, iam-table {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    margin-bottom: 0;
+  }
+  
 
   .table__wrapper:not(.table--fullwidth) {
 
     overflow: hidden;
     max-height: none!important;
-
   }
   :is(iam-table, .iam-table):not(.table--fullwidth) {
     
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+
     table {
+
+      overflow: visible;
+      margin-inline: 1.5rem;
+      margin-bottom: 1.5rem;
+      width: calc(100% - 3rem);
 
       thead {
         display: none;
@@ -138,6 +165,7 @@ table.border-0 {
 
       tbody {
         display: block;
+        overflow: visible;
 
         tr td:first-child {
           padding-top:0;
@@ -148,6 +176,10 @@ table.border-0 {
         display: block;
         position: relative;
         border: none;
+        background: var(--colour-canvas-2);
+        padding: var(--wrapper-padding);
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+        border-radius: rem(8);
 
         & + tr {
           margin-top: rem(32);
@@ -192,6 +224,14 @@ table.border-0 {
           font-weight: bold;
           margin: 0;
         }
+      }
+
+      td:first-child::after {
+        top: 1.75rem;
+      }
+
+      td::after {
+        top: 2.5rem;
       }
 
       tbody tr:first-child td:not(:first-child) {
@@ -305,12 +345,16 @@ table.border-0 {
       min-width: fit-content;
       min-height: var(--row-height);
       text-align: right;
-      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 1.25rem);
-      background: linear-gradient(90deg, rgba(var(--bg-colour-rgb,255,255,255),0) 0%, rgba(var(--bg-colour-rgb,255,255,255),1) 1.25rem);
+      background: linear-gradient(90deg, transparent 0%, var(--colour-canvas-2) 1.25rem);
 
       a {
         white-space: nowrap;
       }
+    }
+
+    tr:hover > *:last-child {
+
+      background: linear-gradient(90deg, transparent 0%, var(--hover-background) 1.25rem);
     }
 
     tbody tr > *:last-child {
@@ -327,9 +371,8 @@ table.border-0 {
 // #endregion
 
 // #region Max height tables
-.table__wrapper:is(.table--mh-small,.table--mh-medium,.table--mh-large) {
-  max-height: var(--table-mh,#{rem(200)});
-  overflow: auto;
+.table__wrapper:is(.mh-sm,.mh-md,.mh-lg) {
+  
   position: relative;
 
   &::before {
@@ -341,25 +384,15 @@ table.border-0 {
     height: 1.2rem;
     position: sticky;
     display: block;
-    background: linear-gradient(180deg, rgba(var(--bg-colour-rgb, 255, 255, 255), 0) 0%, rgba(var(--bg-colour-rgb, 255, 255, 255), 1) 100%);
+    background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
     border-bottom: 2px solid var(--colour-border);
     z-index: 2;
     margin-bottom: -1.2rem;
   }
 }
 
-.table__wrapper.table--mh-small {
-  --table-mh: #{$table-mh-sm};
-}
-.table__wrapper.table--mh-medium {
-  --table-mh: #{$table-mh-md};
-}
-.table__wrapper.table--mh-large {
-  --table-mh: #{$table-mh-lg};
-}
-
 // If table CTA class is set then undo max-height
-.table--cta > .table__wrapper:is(.table--mh-small,.table--mh-medium,.table--mh-large) {
+.table--cta > .table__wrapper:is(.mh-sm,.mh-md,.mh-lg) {
   max-height: none;
   position: static;
 
@@ -368,7 +401,7 @@ table.border-0 {
   }
 }
 
-iam-table:is(.table--mh-small,.table--mh-medium,.table--mh-large):not(.table--cta) {
+iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
 
   position: relative;
 
@@ -377,7 +410,7 @@ iam-table:is(.table--mh-small,.table--mh-medium,.table--mh-large):not(.table--ct
     top: 0;
     left: 0;
     z-index: 1;
-    background-color: var(--colour-white);;
+    background-color: var(--colour-canvas-2);
 
     &:before {
       content: "";
@@ -413,11 +446,93 @@ table:not(.table--filtered) tbody tr:nth-child(15) ~ tr {
 }
 
 // Statuses 
-/* Will be used in the future
-[data-content="Incomplete"] {
-  background-color: red;
+
+table {
+    
+  :is([data-content="Low"],
+    [data-content="Medium"],
+    [data-content="High"],
+    [data-content="Incomplete"],
+    [data-content="Requires approval"],
+    [data-content="Verified"],
+    [data-content="Not started"],
+    [data-content="Completed"],
+    .alert-status
+    ) {
+    
+    position: relative;
+    padding-left: 1.5rem;
+
+    &::before {
+      margin-left: -1.5rem!important;
+    }
+
+    &:after {
+
+      position: absolute;
+      top: 1rem;
+      left: 0;
+
+      content: "";
+      height: rem(16);
+      width: rem(16);
+      display: inline-block;
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
+  }
+
+  [data-content="High"]:after {
+
+    background: var(--colour-danger);
+    mask-image: var(--icon-high);
+    -webkit-mask-image: var(--icon-high);
+  }
+
+  [data-content="Medium"]:after {
+
+    background: var(--colour-warning);
+    mask-image: var(--icon-medium);
+    -webkit-mask-image: var(--icon-medium);
+  }
+
+  [data-content="Low"]:after {
+
+    background: var(--colour-success);
+    mask-image: var(--icon-low);
+    -webkit-mask-image: var(--icon-low); 
+  }
+
+  :is([data-content="Not started"],[data-content="Incomplete"]):after {
+
+    background: var(--colour-danger);
+    mask-image: var(--icon-flag);
+    -webkit-mask-image: var(--icon-flag); 
+  }
+
+  [data-content="Requires approval"]:after {
+
+    background: var(--colour-warning);
+    mask-image: var(--icon-flag);
+    -webkit-mask-image: var(--icon-flag); 
+  }
+
+  :is([data-content="Verified"],[data-content="Completed"]):after {
+
+    background: var(--colour-success);
+    mask-image: var(--icon-tick);
+    -webkit-mask-image: var(--icon-tick); 
+  }
+
+
+  .alert-status:not(:empty):after {
+
+    background: var(--colour-danger);
+    mask-image: var(--icon-warning);
+    -webkit-mask-image: var(--icon-warning); 
+  }
 }
-[data-content="Verified"] {
-  background-color: green;
-}
-*/

@@ -86,9 +86,8 @@
 	@return $colour;
 }
 
-@function tint($colour, $percent)
-{
-	@return $colour;
+@function tint($colour, $percentage) {
+  @return mix(white, $colour, $percentage);
 }
 @function shade($colour, $percent)
 {

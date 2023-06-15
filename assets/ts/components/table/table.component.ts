@@ -20,6 +20,16 @@ class iamTable extends HTMLElement {
     template.innerHTML = `
     <style>
     @import "${assetLocation}/css/core.min.css";
+
+    :host(.mh-sm){
+      max-height: none!important;
+    }
+    :host(.mh-md){
+      max-height: none!important;
+    }
+    :host(.mh-lg){
+      max-height: none!important;
+    }
     </style>
     ${isCTA ? '<div class="table--cta">' : ''}
     <div class="table__wrapper ${classList}">
@@ -48,7 +58,7 @@ class iamTable extends HTMLElement {
 	connectedCallback() {
 
     this.table = this.querySelector('table');
-    this.savedTableBody = this.querySelector('tbody').cloneNode(true);
+    this.savedTableBody = this.table.querySelector('tbody').cloneNode(true);
     this.pagination = this.shadowRoot.querySelector('.table__pagination');
 
     // Set events on the filter table
@@ -82,6 +92,7 @@ class iamTable extends HTMLElement {
       tableModule.makeTableFunctional(this.table, this.form, this.pagination, this);
       tableModule.filterTable(this.table, this.form,this);
       createPaginationButttons(this,this.pagination);
+      tableModule.populateDataQueries(this.table, this.form);
     }
 
     this.shadowRoot.querySelector('.table__wrapper').addEventListener("scroll", (event) => {

@@ -14,6 +14,7 @@
 @use "components/tooltips.scss";
 @use "components/container.scss";
 @use "components/table.scss";
+@use "components/tabs.scss";
 @use "foundations/links.scss";
 @use "foundations/buttons";
 @use "components/admin-panel.scss";
@@ -36,6 +37,8 @@
 //@import "../bootstrap/scss/helpers/stretched-link";
 @import "../bootstrap/scss/helpers/text-truncation";
 //@import "../bootstrap/scss/helpers/vr";
+
+@import "helpers/max-height.scss";
 
 // Utilities
 @import "../bootstrap/scss/utilities/_api.scss";

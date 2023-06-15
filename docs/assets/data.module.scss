@@ -95,12 +95,12 @@
   td_mw_px: $td-mw-px;
   td_mw: $td-mw;
 
-  table_mh_sm_px: $table-mh-sm-px;
-  table_mh_sm: $table-mh-sm;
-  table_mh_md_px: $table-mh-md-px;
-  table_mh_md: $table-mh-md;
-  table_mh_lg_px: $table-mh-lg-px;
-  table_mh_lg: $table-mh-lg;
+  ut_mh_sm_px: $ut-mh-sm-px;
+  ut_mh_sm: $ut-mh-sm;
+  ut_mh_md_px: $ut-mh-md-px;
+  ut_mh_md: $ut-mh-md;
+  ut_mh_lg_px: $ut-mh-lg-px;
+  ut_mh_lg: $ut-mh-lg;
 
 
 
@@ -112,6 +112,9 @@
   }
   @each $color, $value in $dark-mode-colors {
     darkModeColour_#{$color}: #{$value}
+  }
+  @each $color, $value in $dark-mode-functional-colors {
+    darkModeFunctionalColour_#{$color}: #{$value}
   }
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};

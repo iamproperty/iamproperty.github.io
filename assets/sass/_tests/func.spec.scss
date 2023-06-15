@@ -178,7 +178,7 @@
         color: tint(#ffffff, 50);
       }
       @include expect {
-        color: #ffffff;
+        color: white;
       }
     }
   }

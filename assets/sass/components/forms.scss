@@ -187,12 +187,12 @@ select[multiple]::-webkit-scrollbar-thumb {
 
   color: var(--colour-white);
   background: var(--colour-primary);
-  padding: 0.75em 1em;
+  padding: calc(0.75em + 1px) 1em;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
   position: absolute;
-  bottom: 2px;
+  bottom: 0px;
 }
 
 .form-control__wrapper .prefix {
