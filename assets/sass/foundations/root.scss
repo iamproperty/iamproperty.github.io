@@ -26,87 +26,82 @@
 
   // Extra vars needed
   --content-max-width: #{$content-max-width};
-  
   --colour-brand: var(--colour-primary);
-  
 }
 
 // Dark mode; functional colours get updated
 @media screen and (prefers-color-scheme: dark) {
   :root {
+    
+    @each $color, $value in $dark-mode-colors {
+      --colour-#{$color}: #{$value};
+    }
     @include invert-colours();
   }
-
-  body .text-primary {
-    color: #{$colour-inverted}!important;
-  }
-
-  
 }
 
-@media screen {
+@media screen and (prefers-color-scheme: light) {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-canvas):not(.invert-colours) {
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.invert-colours) {
 
+    @each $color, $value in $theme-colors {
+      --colour-#{$color}: #{$value};
+    }
     @include reset-colours();
-
     --colour-body: var(--colour-primary);
-    --colour-heading: var(--colour-primary);
     color: var(--colour-body);
-    --colour-underline: var(--colour-primary);
-  }
-
-  
-
-  // Slight colour adjustments on the light background to match brand guidelines
-  .bg-light[class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.prevent-invert) {
-    --colour-canvas: var(--colour-light);
-    //color: var(--colour-dark);
   }
 
   // Override the colours when on a dark background, similiar to dark mode but on a module level
-  .bg-primary:not(.prevent-invert),
-  .bg-dark:not(.prevent-invert),
-  .bg-danger:not(.prevent-invert),
-  .bg-black:not(.prevent-invert),
+  [class*="bg-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
   .invert-colours {
     
-    --btn-bg: #{$colour-inverted};
+    @include invert-colours();
 
-    @if $compatible != "true" {
-      
-      @include invert-colours();
-    }
     color: #{$colour-inverted};
   }
+}
 
+@media screen and (prefers-color-scheme: dark) {
 
-  // Only update the the colour of the underline on dark backgrounds except the primary as the secondary colour looks good on it
-  .bg-dark:not(.prevent-invert),
-  .bg-danger:not(.prevent-invert),
-  .bg-black:not(.prevent-invert),
-  .invert-colours {
+  // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
+  [class*="bg-"]:not(.bg-canvas):not(.bg-canvas-2) {
+
+    @include reset-colours();
+    --colour-body: #{$primary};
+    color: var(--colour-body);
+  }
+
+  @each $color, $value in $theme-colors {
+
+    .bg-#{$color}[class*="gradient-"] {
+
+      background-color: var(--colour-#{$color}-theme) !important;
+    }
+  }
+  
+  [class*="bg-"][class*="gradient-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
+
+    @each $color, $value in $theme-colors {
+      --colour-#{$color}: #{$value};
+    }
+    @include reset-colours();
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-body);
+  }
+
+  [class*="bg-"][class*="gradient-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.prevent-invert) {
     
-    --colour-underline: #{$colour-inverted};
+    @include invert-colours();
+
+    color: #{$colour-inverted};
   }
 }
 
 
-
-@include media-breakpoint-up(md) {
-
-  .invert-colours-md {
-    
-    @if $compatible != "true" {
-      
-      @include invert-colours();
-    }
-    color: #{$colour-inverted};
-    --colour-underline: #{$colour-inverted};
-  }
-
-  [class*="bg-"].bg-md-transparent {
-    background: transparent!important;
+@media (forced-colors: active) {
+  :root {
+    --contrast-outline-width: 1px;
   }
 }

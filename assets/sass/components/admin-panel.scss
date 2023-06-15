@@ -7,22 +7,16 @@
   display: block;
   padding: var(--padding-top) var(--padding-x) var(--padding-bottom) var(--padding-x);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
-  background-color: var(--colour-white);
+  background-color: var(--colour-canvas-2);
   border-radius: rem(8);
   margin-bottom: rem(24);
+  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
   @media screen and (prefers-color-scheme: dark) {
-    background-color: var(--colour-white);
-
-  
-    @include reset-colours();
+    
+    background-color: var(--colour-canvas-2);
     color: var(--colour-body);
   }  
-
-  &.bg-secondary{
-
-    background-color: rgba(#b4e6a5,0.3) !important;
-  }
 
   &:empty {
     display: none;
@@ -34,6 +28,7 @@
     background-color:var(--colour-success);
 
     &:not([class*="bg-"]){
+      color: var(--colour-primary-theme);
       background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
     }
     
@@ -81,7 +76,7 @@
       height: 1.5rem;
       position: sticky;
       display: block;
-      background: linear-gradient(180deg, rgba(var(--bg-colour-rgb, 255, 255, 255), 0) 0%, rgba(var(--bg-colour-rgb, 255, 255, 255), 1) 100%);
+      background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
       z-index: 2;
       margin-bottom: -1.5rem;
     }
@@ -123,6 +118,7 @@
   flex-direction: column;
   border-bottom: 1px solid var(--colour-border);
   overflow: hidden;
+  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
   &:after {
     display: none;
@@ -148,8 +144,12 @@
       background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
     }
 
+    &:is(.current, [aria-pressed="true"]){
+      color: var(--colour-primary-theme);
+    }
+
     &:not(.current, [aria-pressed="true"]){
-      background: white!important;
+      background: var(--colour-canvas-2)!important;
     }
 
     &:after {
@@ -167,7 +167,7 @@
     }
   }
 
-  .current {
+  .link:is(.current,[aria-pressed="true"]) {
     pointer-events: none;
   }
 }

@@ -3,14 +3,14 @@
 
 $test_colors: ();
 $test_colors: map-merge((
-  "primary-hex":#00313c,
-  "secondary-hex":#b4e6a5,
-  "success-hex":#b4e6a5,
-  "info-hex":#1ebee6,
-  "warning-hex":#ffa500,
-  "danger-hex":#dc3545,
-  "light-hex":#EEEEEE,
-  "dark-hex":#46003c
+  "primary":#00313c,
+  "secondary":#b4e6a5,
+  "success":#b4e6a5,
+  "info":#1ebee6,
+  "warning":#ffa500,
+  "danger":#dc3545,
+  "light":#EEEEEE,
+  "dark":#46003c
 ), $test_colors);
 
 

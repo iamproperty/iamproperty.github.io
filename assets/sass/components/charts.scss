@@ -32,7 +32,7 @@ $chart-colors: map-merge((
   }
 }
 
-//@media (forced-colors: active) {
+@media (forced-colors: active) {
   .chart__wrapper:has(.chart:not(.chart--line)) {
 
     --colour-chart-1: repeating-linear-gradient(
@@ -52,7 +52,7 @@ $chart-colors: map-merge((
     );
     // TODO: Add more patterns
   }
-//}
+}
 // #endregion
 
 // #region Apply colours

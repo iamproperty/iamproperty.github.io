@@ -15,10 +15,11 @@ dialog[open] {
   height: fit-content;  
   border: none;
   overscroll-behavior: contain;
-  background: white;
+  background: var(--colour-canvas-2);
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
   border-radius: rem(28);
   padding: var(--dialog-padding);
+  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
   // Close button
   > form:first-child {

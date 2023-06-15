@@ -183,7 +183,7 @@
       <div class="colour-sample">
         <div class="colour border" :style="`background:${$shared.cssVars.nonThemeColour_inverted}!important`"></div>
         <span class="lead pb-2">Inverted text colour</span><br/>
-        <span>CSS Variable: --colour-inverted</span><br/>
+        <span>CSS Variable: --colour-white</span><br/>
         <p>HEX code: {{ $shared.cssVars.nonThemeColour_inverted.toUpperCase() }}</p>
       </div>
       <div class="colour-sample">
