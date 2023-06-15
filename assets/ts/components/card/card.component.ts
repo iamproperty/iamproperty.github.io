@@ -35,6 +35,8 @@ class iamCard extends HTMLElement {
 
 	connectedCallback() {
     
+    this.classList.add('loaded');
+    
     // Mimic clicking the parent node so the focus and target events can be on the card
     const parentNode = this.parentNode.closest('a, button, label')
     const card = this.shadowRoot.querySelector('.card')

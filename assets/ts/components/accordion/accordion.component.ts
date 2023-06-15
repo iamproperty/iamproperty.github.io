@@ -37,6 +37,8 @@ class iamAccordion extends HTMLElement {
 
     // Load in the component CSS into the root so we can style the content of the component
     this.insertAdjacentHTML("beforebegin", `<link rel="stylesheet" href="${assetLocation}/css/components/accordion.css">`)
+    
+    this.classList.add('loaded');
   }
 }
 

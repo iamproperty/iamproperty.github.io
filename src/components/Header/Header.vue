@@ -9,11 +9,7 @@
 
 <script>
 // Load web components
-import iamHeader from '../../../assets/ts/components/header/header.component'
-
-// Register components
-if (!window.customElements.get('iam-header'))
-  window.customElements.define('iam-header', iamHeader);
+import iamHeader from '../../../assets/js/components/header/header.component.min.js'
 
 
 export default {
@@ -27,6 +23,14 @@ export default {
       type: String,
       required: false
     }
+  },
+  mounted(){
+    this.$nextTick(function () {
+
+      // Register components
+      if (!window.customElements.get('iam-header'))
+        window.customElements.define('iam-header', iamHeader);
+    })
   }
 }
 </script>

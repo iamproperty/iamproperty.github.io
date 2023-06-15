@@ -18,14 +18,10 @@ class iamHeader extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = `
+    <link rel="stylesheet" href="${assetLocation}/css/core.min.css" />
     <style>
-    @import "${assetLocation}/css/core.min.css";
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
-    :host {
-      max-width:100%!important;
-      padding:0!important;
-    }
     </style>
     <div class="header-banner">
       <div class="container" part="container">
@@ -47,6 +43,8 @@ class iamHeader extends HTMLElement {
 
 	connectedCallback() {
     
+    this.classList.add('loaded');
+
     const picture = this.shadowRoot.querySelector('picture');
     const source = this.shadowRoot.querySelector('picture source');
 
