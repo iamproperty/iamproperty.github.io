@@ -6,6 +6,8 @@ import routes from './routes'
 import audit from '../audit.json';
 import * as helpers from '../assets/ts/modules/helpers'
 
+import extendDialogs from '../assets/ts/modules/dialogs';
+
 
 import createDataLayer from '../assets/ts/modules/data-layer'
 
@@ -124,6 +126,8 @@ app.use(router).mount('#app')
 
 helpers.addBodyClasses(document.body);
 helpers.addGlobalEvents(document.body);
+helpers.addGlobalEvents(document.body);
+extendDialogs(document.body);
 
 const hasDarkPreference = window.matchMedia(
   "(prefers-color-scheme: dark)"

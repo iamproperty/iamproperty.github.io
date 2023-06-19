@@ -516,7 +516,7 @@
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <h3 class="h4">Mobile collapsed table</h3>
-          <Table>
+          <Table class="table--cta">
             <table>
               <thead>
                 <tr>
@@ -544,7 +544,7 @@
         <div class="col-sm-6 col-md-4 offset-md-1">
 
           <h3 class="h4">Mobile expanded table</h3>
-          <Table>
+          <Table class="table--cta">
             <table>
               <thead>
                 <tr>

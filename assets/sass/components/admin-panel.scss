@@ -68,17 +68,7 @@
     margin: 0 calc(var(--padding-x) * -1) rem(24) calc(var(--padding-x) * -1);
 
     &:before {
-      content: "";
       top: 100%;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 1.5rem;
-      position: sticky;
-      display: block;
-      background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
-      z-index: 2;
-      margin-bottom: -1.5rem;
     }
   }
 

@@ -51,14 +51,10 @@ export const setTabsEventHandlers = function(tabsElement: Element){
   if(tabsElement.shadowRoot)
     buttons = tabsElement.shadowRoot.querySelectorAll('.tabs__links > .link');
 
-  console.log(buttons)
-
   // Set the on click for the tab buttons, these will open the details box it matches too
   buttons.forEach((button) => {
 
     button.addEventListener("click", (e) => {
-
-      console.log('hi')
 
       e.preventDefault();
       buttons.forEach((buttonLoopItem) => {
