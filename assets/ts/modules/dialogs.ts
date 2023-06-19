@@ -32,6 +32,10 @@ const extendDialogs = (body) => {
       // Open the modal!
       dialog.showModal();
 
+      dialog.focus();
+
+      console.log(dialog.querySelector('button'));
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         "event": "openModal",
