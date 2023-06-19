@@ -101,6 +101,15 @@ dialog[open] {
       margin-right: rem(20);
       display: block;
     }
+
+    @media (forced-colors: active) {
+      text-indent: 0;
+      width: fit-content;
+
+      &:after {
+        display: none;
+      }
+    }
   }
 
   @include media-breakpoint-up(sm) {
@@ -220,9 +229,7 @@ dialog::backdrop {
 // #region Multi 
 .js-enabled *:not(.dialog__wrapper) > dialog[open].dialog--multi {
 
-  min-width: rem(924);
-  width: rem(924);
-  max-width: rem(924);
+
   padding-top: calc(var(--dialog-padding) * 4);
 
   & > form:first-child button, & > button:first-child {
@@ -306,14 +313,16 @@ dialog::backdrop {
         border-radius: 50%;
       }
 
-      &:not(.active) {
+      &:not(.active):before {
         opacity: 0.5;
       }
     }
   }
 
   @include media-breakpoint-up(md) {
-
+    min-width: rem(924);
+    width: rem(924);
+    max-width: rem(924);
     padding-top: var(--dialog-padding);
     padding-left: calc(var(--dialog-padding) + #{rem(282)});
     display: flex; 
@@ -347,6 +356,7 @@ dialog::backdrop {
         text-align: left;
         padding-left: 2rem;
         font-size: rem(18);
+        outline-width: 1px;
       }
     }
 
