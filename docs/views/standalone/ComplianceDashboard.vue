@@ -86,7 +86,7 @@
                 <td>89, Queens Crescent, NE28 8DR</td>
                 <td>31 May 23</td>
                 <td>Abigail Budden</td>
-                <td>Preapproved</td>
+                <td><span><i class="fa-solid fa-circle me-1"></i>Vendor</span></td>
                 <td>Low</td>
                 <td>Cash</td>
                 <td>Lorum ipsum dolor sit amet incididunt</td>

@@ -109,6 +109,7 @@ $theme-colors: map-merge((
   "info":       $info,
   "warning":    $warning,
   "success":    $success,
+  "complete":   #0F9D58,
   "danger":     $danger,
   "dark":       $dark,
   "light":      $light,
@@ -136,7 +137,7 @@ $theme-colors: map-merge((
   @return var(--colour-#{$identifier});
 }
 
-$utilities-colors: $theme-colors-rgb;
+$utilities-colors: $theme-colors;
 
 $utilities-text: map-merge(
   $utilities-colors,
@@ -464,13 +465,7 @@ $vars: map-merge((
   --icon-arrow: #{escape-svg($icon-arrow)},
   --icon-close: #{escape-svg($icon-close)},
   --icon-tick: #{escape-svg($icon-tick)},
-  --icon-question: #{escape-svg($icon-question)},
-  --icon-warning: #{escape-svg($icon-warning)},
-  --icon-filter: #{escape-svg($icon-filter)},
-  --icon-high: #{escape-svg($icon-high)},
-  --icon-medium: #{escape-svg($icon-medium)},
-  --icon-low: #{escape-svg($icon-low)},
-  --icon-flag: #{escape-svg($icon-flag)}
+  --icon-question: #{escape-svg($icon-question)}
 ), $vars);
 // #endregion
 

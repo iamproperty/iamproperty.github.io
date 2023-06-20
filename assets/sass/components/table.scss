@@ -469,70 +469,64 @@ table {
 
     &:after {
 
+      font-family: "Font Awesome 6 Pro";
       position: absolute;
       top: 1rem;
       left: 0;
-
       content: "";
+      font-size: rem(16);
+      line-height: 1;
       height: rem(16);
       width: rem(16);
       display: inline-block;
-      mask-size: 100%;
-      mask-repeat: no-repeat;
-      mask-position: 50% 50%;
-      -webkit-mask-size: 100%;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: 50% 50%;
     }
   }
 
   [data-content="High"]:after {
-
-    background: var(--colour-danger);
-    mask-image: var(--icon-high);
-    -webkit-mask-image: var(--icon-high);
+    content: "\f325";
+    font-weight: normal;
+    color: var(--colour-danger);
   }
 
   [data-content="Medium"]:after {
 
-    background: var(--colour-warning);
-    mask-image: var(--icon-medium);
-    -webkit-mask-image: var(--icon-medium);
+    content: "\f7a4";
+    font-weight: normal;
+    color: var(--colour-warning);
   }
 
   [data-content="Low"]:after {
 
-    background: var(--colour-success);
-    mask-image: var(--icon-low);
-    -webkit-mask-image: var(--icon-low); 
+    content: "\e404";
+    font-weight: normal;
+    color: var(--colour-complete);
   }
 
   :is([data-content="Not started"],[data-content="Incomplete"]):after {
 
-    background: var(--colour-danger);
-    mask-image: var(--icon-flag);
-    -webkit-mask-image: var(--icon-flag); 
+    content: "\f024";
+    font-weight: light;
+    color: var(--colour-danger);
   }
 
   [data-content="Requires approval"]:after {
 
-    background: var(--colour-warning);
-    mask-image: var(--icon-flag);
-    -webkit-mask-image: var(--icon-flag); 
+    content: "\f024";
+    font-weight: light;
+    color: var(--colour-warning);
   }
 
   :is([data-content="Verified"],[data-content="Completed"]):after {
-
-    background: var(--colour-success);
-    mask-image: var(--icon-tick);
-    -webkit-mask-image: var(--icon-tick); 
+    
+    content: "\f00c";
+    font-weight: normal;
+    color: var(--colour-complete);
   }
-
 
   .alert-status:not(:empty):after {
 
-    background: var(--colour-danger);
-    mask-image: var(--icon-warning);
-    -webkit-mask-image: var(--icon-warning); 
+    content: "\f06a";
+    font-weight: light;
+    color: var(--colour-danger);
   }
 }
