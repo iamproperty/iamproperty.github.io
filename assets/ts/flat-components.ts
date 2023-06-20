@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Modules
 import * as helpers from '../js/modules/helpers'
+import extendDialogs from '../js/modules/dialogs'
 import createDataLayer from '../js/modules/data-layer'
 import nav from '../js/modules/nav'
 import * as tableModule from './modules/table'
@@ -22,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
   //helpers.checkElements(document.body);
+  extendDialogs(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {

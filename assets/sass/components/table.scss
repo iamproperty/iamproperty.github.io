@@ -69,18 +69,18 @@ tbody tr {
     }
   }
 
-  td {
+  :is(td, th) {
       
     border-top: var(--border-width) solid currentColor;
     @include var(border-color,--colour-border);
   }
 
-  &:first-child td{
+  &:first-child :is(td, th){
     border-top: var(--border-width) solid currentColor;
     @include var(border-color,--colour-primary);
   }
 
-  &:last-child td{
+  &:last-child :is(td, th){
     border-bottom: var(--border-width) solid currentColor;
     @include var(border-color,--colour-border);
   }
@@ -104,6 +104,10 @@ table.border-0 {
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
   border-radius: rem(8);
   margin-bottom: rem(32);
+
+  &:before {
+    display: none!important;
+  }
 
   table {
     margin-bottom: 0;
@@ -292,8 +296,23 @@ table.border-0 {
     }
   }
 
+  .table--cta {
+    border-bottom: 0;
+
+    &:after {
+      content: none;
+      display: none !important;;
+    }
+  }
   .table--cta:not(.table--fullwidth) tr td:last-child {
     display: block!important;
+    position: static;
+    width: 100%;
+    min-width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: left;
+    min-height: 0;
   }
 
 }
@@ -376,17 +395,10 @@ table.border-0 {
   position: relative;
 
   &::before {
-    content: "";
     top: calc(100% - 1.2rem);
     bottom: 2px;
-    left: 0;
-    right: 0;
     height: 1.2rem;
-    position: sticky;
-    display: block;
-    background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
     border-bottom: 2px solid var(--colour-border);
-    z-index: 2;
     margin-bottom: -1.2rem;
   }
 }

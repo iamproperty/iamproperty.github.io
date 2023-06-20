@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Modules
 import * as helpers from '../js/modules/helpers'
+import extendDialogs from '../js/modules/dialogs'
 import createDataLayer from '../js/modules/data-layer'
 import nav from '../js/modules/nav'
 //import accordion from './modules/accordion'
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // Global stuff
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
+  extendDialogs(document.body);
   //helpers.checkElements(document.body);
 
   if (!window.customElements.get(`iam-header`))

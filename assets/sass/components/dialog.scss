@@ -17,13 +17,37 @@ dialog[open] {
   overscroll-behavior: contain;
   background: var(--colour-canvas-2);
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
-  border-radius: rem(28);
+  border-radius: rem(10);
   padding: var(--dialog-padding);
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
+  display: flex;
+  flex-direction: column;
+
+  > *:last-child,
+  > .mh-lg > *:last-child{
+    margin-bottom: 0;
+  }
+  
+  > :is(p):last-child,
+  > .mh-lg > :is(p):last-child {
+    padding-bottom: 0;
+  }
+}
+// #endregion
+
+// #region modal styling
+*:not(.dialog__wrapper) > dialog[open] {
+  overflow-y: hidden;
+  width: 90vw;
+  max-width: rem(324); // col-width*4
+
+  //height: 90vh;
+  max-height: min(90vh, #{rem(752)});
+  overscroll-behavior: contain;
+
   // Close button
   > form:first-child {
-
     position: static;
   }
 
@@ -64,58 +88,338 @@ dialog[open] {
     & + * {
       padding-right: var(--dialog-padding);
       margin-right: rem(20);
+      display: block;
+    }
+
+    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) {
+      padding-bottom: rem(8);
+      line-height: rem(19);
+    }
+
+    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) + * {
+      padding-right: var(--dialog-padding);
+      margin-right: rem(20);
+      display: block;
+    }
+
+    @media (forced-colors: active) {
+      text-indent: 0;
+      width: fit-content;
+
+      &:after {
+        display: none;
+      }
     }
   }
-
-  > *:last-child {
-    margin-bottom: 0;
-  }
-  > :is(p):last-child {
-    padding-bottom: 0;
-  }
-}
-// #endregion
-
-// #region modal styling
-*:not(.dialog__wrapper) > dialog[open] {
-  overflow-y: hidden;
-  width: 90vw;
-  max-width: rem(376); // col-width*4 // 96px*4 = 376px
-  height: fit-content;
 
   @include media-breakpoint-up(sm) {
     
     --dialog-padding: #{rem(32)};
-
-    max-width: rem(564); // col-width*6 // 96px*6 = 564px
-    border-radius: rem(34);
+    min-width: rem(335);
+    width: fit-content;
+    max-width: rem(686);
   }
   
   @include media-breakpoint-up(md) {
     
+    min-width: rem(454);
+    width: fit-content;
+    max-width: rem(736);
   }
 
   &:has(.youtube-embed){
     padding: 0!important;
   }
-}
 
-.mh-lg {
-  padding-right: rem(20);
-
-  @include media-breakpoint-up(md) {
-    margin-right: var(--dialog-padding);
+  &.dialog--fullwidth {
+    max-width: rem(1112);
   }
 
-  > *:last-child {
-    margin-bottom: 0;
+  container-type: inline-size;
+    
+  @container (width < 23.4375em) {
+
+    > .btn:not(.dialog__close),
+    > form > .btn:not(.dialog__close),
+    > .mh-lg > :is(form,div) > .btn:not(.dialog__close),
+    > .mh-lg > .btn:not(.dialog__close),
+    > form > fieldset > .btn:not(.dialog__close),
+    .btn--wrapper > .btn:not(.dialog__close) {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      display: block;
+      text-align: center;
+
+      &:not(:last-child) {
+        margin-bottom: 1rem!important;
+      }
+    }
+  }
+
+  .mh-lg {
+    padding-right: calc(var(--dialog-padding) - 10px);
+    margin-right: calc((var(--dialog-padding) * -1) + 10px);
+    margin-bottom: calc(var(--dialog-padding) * -1);
+    padding-bottom: var(--dialog-padding);
+    //max-height: none!important;
+
+    &:before {
+      top: 100%;
+      height: var(--dialog-padding);
+    }
   }
 }
-
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(4px);
+  overscroll-behavior: contain;
+}
+// #endregion
+
+// #region Transactional 
+*:not(.dialog__wrapper) > dialog[open]:not(.dialog--multi):is(:has(button:last-child),:has(form:last-child > button:last-child)) {
+
+  text-align: center;
+
+  &:before {
+    content: "\f05a";
+    font-weight: 300;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display,inline-block);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    font-family: "Font Awesome 6 Pro";
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
+    margin-top: 0;
+    margin-bottom: rem(24);
+    line-height: 1;
+    color: var(--colour-heading);
+    clear: both;
+  }
+
+  > form:first-child button,
+  > button:first-child {
+    display: none;
+
+    & + * {
+      padding-right: 0;
+      margin-right: 0;
+    }
+
+    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) + * {
+      padding-right: 0;
+      margin-right: 0;
+    }
+  }
+
+  button {
+    margin-bottom: 0;
+  }
+}
+// #endregion
+
+// #region Multi 
+.js-enabled *:not(.dialog__wrapper) > dialog[open].dialog--multi {
+
+
+  padding-top: calc(var(--dialog-padding) * 4);
+
+  & > form:first-child button, & > button:first-child {
+    top: calc(var(--dialog-padding) * 4);
+  }
+
+  fieldset:not(.active) {
+    display: none;
+  }
+
+  &:not(:has(fieldset.active)) fieldset:first-of-type{
+    display: flex;
+  }
+
+  form > *:not(fieldset) {
+    display: none!important;
+  }
+
+  form {
+    max-height: rem(370);
+  }
+
+  :is(.h1,.h2,.h3,.h4,.h5,.h6){
+    padding-right: calc(var(--dialog-padding) * 3);
+    padding-bottom: var(--dialog-padding);
+  }
+
+  .steps {
+    width: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: var(--dialog-padding);
+    counter-reset: section;
+    display: flex;
+    justify-content: space-between;
+
+    &:before {   
+ 
+      content: "";
+      position: absolute;
+      top: calc(50% - 1px);
+      left: var(--dialog-padding);
+      z-index: 2;
+      width: calc(100% - var(--dialog-padding) - var(--dialog-padding));
+      height: 2px;
+      background: currentColor;
+      z-index: 1;
+      opacity: 0.5;
+    }
+
+    button {
+
+      position: relative;
+      background: transparent;
+      border: none;
+      color: inherit;
+      height: rem(24);
+      line-height: rem(24);
+      width: rem(24);
+      text-indent: 300%;
+      overflow: hidden;
+      z-index: 2;
+      background-color: var(--colour-primary);
+      outline: 0.5rem solid var(--colour-primary);
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        counter-increment: section;
+        content: counter(section);
+
+        border: 1px solid currentColor;
+        height: rem(24);
+        line-height: rem(24);
+        width: rem(24);
+        text-align: center;
+        display: inline-block;
+        text-indent: 0;
+        border-radius: 50%;
+      }
+
+      &:not(.active):before {
+        opacity: 0.5;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    min-width: rem(924);
+    width: rem(924);
+    max-width: rem(924);
+    padding-top: var(--dialog-padding);
+    padding-left: calc(var(--dialog-padding) + #{rem(282)});
+    display: flex; 
+    flex-direction: column;
+    //height: rem(478);
+
+    @media (min-height: #{rem(500)}) {
+      height: rem(478);
+      max-height: rem(478);
+    }
+
+
+    & > form:first-child button, & > button:first-child {
+      top: var(--dialog-padding);
+    }
+
+    .steps {
+      width: rem(282);
+      height: 100%;
+      flex-direction: column;
+      justify-content: center;
+
+      &:before {
+        display: none;
+      }
+
+      button {
+        margin-block: 0.5rem;
+        width: 100%;
+        text-indent: 0;
+        text-align: left;
+        padding-left: 2rem;
+        font-size: rem(18);
+        outline-width: 1px;
+      }
+    }
+
+    .btn--wrapper {
+      margin-top: auto;
+      text-align: right;
+    }
+    > form {
+      display: contents
+    }
+    fieldset {    
+      display: flex; 
+      flex-direction: column;
+      flex-grow: 1;
+      position: relative;
+
+      overflow: auto;
+      margin-bottom: calc(var(--dialog-padding) * -1);
+      padding-bottom: var(--dialog-padding);
+
+        
+      padding-right: calc(var(--dialog-padding) - 10px);
+      margin-right: calc((var(--dialog-padding) * -1) + 10px);
+
+      &::before {
+        content: "";
+        top: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--dialog-padding);
+        min-height: var(--dialog-padding);
+        position: sticky;
+        display: block;
+        background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
+        z-index: 2;
+        margin-bottom: calc(var(--dialog-padding) * -1);;
+      }
+    }
+  }
+}
+// #endregion
+
+// #region youTube video
+*:not(.dialog__wrapper) > dialog[open]:has(.youtube-embed){
+
+  display: block;
+
+  .mh-lg, .mh-lg:before {
+    display: contents;
+  }
+
+  @include media-breakpoint-up(sm) {
+    
+    min-width: rem(686);
+    max-width: rem(686);
+  }
+  
+  @include media-breakpoint-up(md) {
+    
+    min-width: rem(736);
+    max-width: rem(736);
+  }
 }
 // #endregion
 

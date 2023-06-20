@@ -3,6 +3,16 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.6.1--alpha</h2>
+      <ul>
+        <li>Update the dialogs</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>The dialog javaScript is split out into a new fill and requires a new function to be called on the body.</li>
+      </ul>
+
       <h2>V3.6.0</h2>
       <ul>
         <li>Major overhaul of the colours</li>
