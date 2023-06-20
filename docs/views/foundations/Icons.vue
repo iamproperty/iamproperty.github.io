@@ -212,17 +212,12 @@
 </style>
 
 <script>
-import Icon from '@/foundations/Icon/Icon.vue'
-import Readme from '@/foundations/Icon/README.md'
-
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/type-header.png'
 
 export default {
   components: {
-    DSHeader,
-    Icon,
-    Readme
+    DSHeader
   },
   data () {
     return {
