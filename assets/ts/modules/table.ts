@@ -67,14 +67,17 @@ export const createMobileButton = (table) => {
   if(table.closest('.table--fullwidth'))
     return false;
 
+  if(table.querySelectorAll('thead tr th').length < 4)
+    return false;
+
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     let firstCol = row.querySelector(':scope > :is(td,th):first-child');
+
     let colContent = firstCol.textContent;
 
     if(colContent != "")
       firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-none">${colContent}</button>`;
     else {
-        
       let secondCol = row.querySelector(':scope > :is(td,th):nth-child(2)');
       let secondColContent = secondCol.textContent;
       secondCol.innerHTML =`<span class="td__content">${secondColContent}</span><button type="button" class="d-none">${secondColContent}</button>`;

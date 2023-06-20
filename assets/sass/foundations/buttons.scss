@@ -37,7 +37,11 @@
   padding: calc(rem(12) - 2px) calc(rem(40) - 2px);
   border-radius: rem(24);
   margin-bottom: var(--btn-margin);
-  margin-right: var(--btn-margin);
+
+  &:not(:last-child){
+
+    margin-right: var(--btn-margin);
+  }
   transition: background .5s, color .5s;
   height: auto;
   max-width: fit-content;

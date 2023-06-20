@@ -54,17 +54,17 @@ body {
 }
 
 // #region scrollbars
-div::-webkit-scrollbar {
+:is(div,form,fieldset)::-webkit-scrollbar {
   width: 10px;
   height: 6px;
 }
  
-div::-webkit-scrollbar-track {
+:is(div,form,fieldset)::-webkit-scrollbar-track {
   background-color: #f1f1f1;
   border-left: 4px solid var(--bg-colour,var(--colour-canvas));
 }
  
-div::-webkit-scrollbar-thumb {
+:is(div,form,fieldset)::-webkit-scrollbar-thumb {
   background-color: #c1c1c1;
   width: 6px;
   border-left: 4px solid var(--bg-colour,var(--colour-canvas));

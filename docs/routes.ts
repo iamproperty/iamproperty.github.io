@@ -208,11 +208,27 @@ const routes = [
       },
       {
         path: 'dialog',
-        name: 'Dialog (Modal and popover)',
+        name: 'Dialog',
         meta: {
-          title: 'Dialog (Modal and popover) | Components | iamkey'
+          title: 'Dialog | Components | iamkey'
         },
         component: () => import('./views/components/DialogDoc.vue')
+      },
+      {
+        path: 'modal',
+        name: 'Dialog (Modal)',
+        meta: {
+          title: 'Dialog (Modal) | Components | iamkey'
+        },
+        component: () => import('./views/components/ModalDoc.vue')
+      },
+      {
+        path: 'popover',
+        name: 'Dialog (Popover)',
+        meta: {
+          title: 'Dialog (Popover) | Components | iamkey'
+        },
+        component: () => import('./views/components/PopoverDoc.vue')
       },
       {
         path: 'form',
