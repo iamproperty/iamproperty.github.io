@@ -64,11 +64,16 @@
 
   &:is(:hover,:focus,.hover) {
     --icon-right: 0.5rem;
-    outline: 2px solid var(--colour-primary);
+    outline: 2px solid var(--colour, var(--colour-primary));
     outline-offset: -2px;
 
+  }
+  
+  // Update arrow cololur
+  &:not([class*="colour-"]):is(:hover,:focus,.hover) {
+
     &:before {
-      background: var(--colour-primary);
+      background: var(--colour-primary-theme);
     }
     &:after {
       background: #ffffff;
@@ -123,18 +128,11 @@
   }
 }
 
-
 ::slotted(i){
   font-size: rem(24);
   margin: -3px var(--icon-right) 0 0;
   font-weight: 400;
   vertical-align: middle;
-}
-
-.card--filter ::slotted(i) {
-  display: block !important;
-  height: rem(18)!important;
-  margin: 0 0 0.5rem 0!important;
 }
 
 ::slotted(span){
@@ -145,6 +143,14 @@
 }
 // #endregion
 
+// #region border left
+.card[class*="colour-"],
+.card--filter {
+  
+  border-left: rem(12) solid var(--colour,var(--colour-primary));
+}
+// #endregion
+
 //#region Filter card
 .card--filter {
   --top-padding: #{rem(24)};
@@ -152,7 +158,7 @@
   --bottom-padding: #{rem(24)};
   --left-padding: 1rem;
 
-  border-left: rem(12) solid var(--colour,var(--colour-primary));
+  //border-left: rem(12) solid var(--colour,var(--colour-primary));
 
   &:has(.card__total) .card__body{
 
@@ -202,13 +208,19 @@
     padding-right: rem(16);
   }
 }
+
+.card--filter ::slotted(i) {
+  display: block !important;
+  font-size: rem(18)!important;
+  margin: 0 0 0.5rem 0!important;
+}
 // #endregion
 
 // #region card with an image
 .card:has(.card__head) {
   .card__head {
     padding-bottom: 0;
-    padding-top: 55%;
+    padding-top: 27%;
     position: relative;
     overflow: hidden;
     background: rgba(0,0,0,0.1);
