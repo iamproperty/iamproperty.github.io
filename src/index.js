@@ -1,5 +1,4 @@
 // Foundations
-export { default as Icon } from './foundations/Icon/Icon.vue'
 export { default as Logo } from './foundations/Logo/Logo.vue'
 // Elements
 export { default as Table } from './components/Table/Table.vue'
