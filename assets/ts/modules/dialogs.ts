@@ -135,7 +135,18 @@ const extendDialogs = (body) => {
           popover.setAttribute('style',`position:fixed;top: ${topOffset}px; left: ${leftOffset}px; margin: 3rem 0 0 0;`)
         }
       }
-        
+      
+      // When the dialog is fixed it could dip under the viewport
+      // Lets check the dimensions and transform it to appear above
+      let boundingRec = popover.getBoundingClientRect();
+      let popoverBottom = boundingRec.bottom - window.scrollY;
+      let windowPos = window.innerHeight - window.scrollY;
+      if(popoverBottom > windowPos){
+
+        let currentStyle = popover.getAttribute('style');
+
+        popover.setAttribute('style',currentStyle+`transform: translate(0, calc(-100% - 4rem))`);
+      }
 
       window.dataLayer = window.dataLayer || [];
       
