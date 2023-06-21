@@ -386,16 +386,9 @@ export const filterTable = (table, form, wrapper) => {
       element.innerHTML += `(${filters.length})`;
     });
   }
-
-  // Stop function if no filters identified
-  if(!Object.keys(searches).length && !Object.keys(filters).length)
-    return false;
   
-  table.classList.add('table--filtered');
-
-
   // Filter the table
-
+  table.classList.add('table--filtered');
   for (const [key, filterValue] of Object.entries(filters)) {
     
     Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
@@ -507,8 +500,10 @@ export const filterTable = (table, form, wrapper) => {
     matched++;
 
     row.classList.add('filtered--matched');
+
     // pagination bit 
-    if(Math.ceil(matched/showRows) == parseInt(page))
+    let matchesPage = Math.ceil(matched/showRows);
+    if(matchesPage == parseInt(page))
       row.classList.add('filtered--show');
   });
 
@@ -598,9 +593,12 @@ export const addPaginationEventListeners = function(table, form, pagination, wra
       wrapper.setAttribute('data-page', newPage);
       form.dispatchEvent(new Event("submit"));
 
-      const url = new URL(location);
-      url.searchParams.set("page", newPage);
-      history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
+      if(table.hasAttribute('data-show-history')){
+          
+        const url = new URL(location);
+        url.searchParams.set("page", newPage);
+        history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
+      }
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
