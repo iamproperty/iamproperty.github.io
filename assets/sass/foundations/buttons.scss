@@ -305,24 +305,16 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 // #region button that opens up a filter dialog
 .btn-filter {
   &:after {
-    content: "";
-  
+    content: "\f1de";
     display: inline-block;
     margin-left: 1em;
     margin-bottom: -0.15em;
     height: 1em;
     width: 1em;
     z-index: var(--index-focus);
-    background: currentColor;
-    mask-image: var(--icon-filter);
-    mask-size: 100%;
-    mask-repeat: no-repeat;
-    mask-position: 50% 50%;
-    -webkit-mask-image: var(--icon-filter);
-    -webkit-mask-size: 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: 50% 50%;
-
+    color: currentColor;
+    font-weight: 300;
+    font-family: "Font Awesome 6 Pro";
   }
 }
 // #endregion
