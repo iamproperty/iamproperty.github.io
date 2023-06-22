@@ -1,0 +1,23 @@
+{
+  "success":true,
+  "status":200,
+  "data":
+  {
+    "buyerTasks":[
+      {
+        "property_id":"d2a6dbae4a5543bfa75f029a72f6b214",
+        "property_address":"4 The Drove, Osbournby, Sleaford",
+        "property_status":"sold",
+        "date_authorised":"-",
+        "authorised_by":"-",
+        "risk_level":1,
+        "buying_position":"Cash",
+        "locked_to":"Emma Burdis",
+        "lastComplianceNote":"Placed in PAM whilst we await the marriage certifcate for V1 and V2. Uncompleted ID to ensure not sold or placed in Auction untill we have the required document",
+        "followup":"19/11/2022 12:15",
+        "alerts":"5",
+        "overdue_by":""
+     }
+    ]
+  }
+}

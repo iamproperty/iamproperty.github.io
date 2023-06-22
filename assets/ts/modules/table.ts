@@ -692,6 +692,8 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
   let columns = table.querySelectorAll('thead tr th');
   let tbody = table.querySelector('tbody');
 
+
+
   fetch(form.getAttribute('data-ajax'), {
     method: 'get',
     credentials: 'same-origin',
@@ -702,11 +704,17 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
     })
   }).then((response) => response.json()).then((response) => {
 
-    if (response.data) {
+    let schema = form.hasAttribute('data-schema') ? form.getAttribute('data-schema') : 'data';
+    let totalNumberSchema = form.hasAttribute('data-schema-total') ? form.getAttribute('data-schema-total') : 'meta.total';
+
+    let totalNumber = resolvePath(response, totalNumberSchema, 1);
+    let data = resolvePath(response, schema);
+    
+    if (data) {
 
       tbody.innerHTML = '';
 
-      response.data.forEach((row, index) => {
+      data.forEach((row, index) => {
 
         var table_row = document.createElement('tr');
 
@@ -739,7 +747,7 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
       // Add data to the pagination 
       makeTableFunctional(table, form, pagination, wrapper);
 
-      wrapper.setAttribute('data-total', (response.meta.total ? response.meta.total : 1));
+      wrapper.setAttribute('data-total', totalNumber);
       wrapper.setAttribute('data-page', (response.meta.current_page ? response.meta.current_page : 1));
       wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
@@ -753,7 +761,6 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
     else {
       tbody.innerHTML = '<tr><td colspan="100%"><span class="h6 m-0">Error loading table</span></td></tr>';
     }
-
   });
 }
 
