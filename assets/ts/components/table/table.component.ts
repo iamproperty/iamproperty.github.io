@@ -66,18 +66,21 @@ class iamTable extends HTMLElement {
     if(this.hasAttribute('data-filterby')){
 
       this.form = document.querySelector(`#${this.getAttribute('data-filterby')}`);
-
-      // Create a data list if a search input is present
-      tableModule.createSearchDataList(this.table, this.form);
-
-      if(!this.form.querySelector('[data-page]')){
-        this.form.innerHTML += `<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`
-      }
-      if(!this.form.querySelector('[data-show]')){
-        this.form.innerHTML += `<input name="show" type="hidden" value="${this.getAttribute('data-show')}" data-show="true" />`
-      }
+    }
+    else {
+      
+      this.table.parentNode.insertBefore(this.form, this.table.nextSibling);
     }
 
+    // Create a data list if a search input is present
+    tableModule.createSearchDataList(this.table, this.form);
+
+    if(!this.form.querySelector('[data-page]')){
+      this.form.innerHTML += `<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`
+    }
+    if(!this.form.querySelector('[data-show]')){
+      this.form.innerHTML += `<input name="show" type="hidden" value="${this.getAttribute('data-show')}" data-show="true" />`
+    }
 
     // Event listeners
     tableModule.addTableEventListeners(this.table);
