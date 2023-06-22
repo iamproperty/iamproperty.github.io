@@ -10,7 +10,7 @@
       <p class="lead">Navigational cards can be used to direct the user to another page or modal. All will apply a drop shadow with a default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15% as default unless specified otherwise, this should have the ability to be removed if needed.</p>
       <h3>Header card</h3>
     </div>
-
+    
     <div class="container visualtest">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
@@ -39,6 +39,24 @@
           <span class="pb-3 d-block text-uppercase">With Icon</span>
           <a href="/client-onbaording">
             <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">With Icon</span>
+          <a href="/client-onbaording">
+            <Card class="hover">
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">With Icon</span>
+          <a href="/client-onbaording">
+            <Card class="active">
               <i class="fa fa-home"></i>
               Lorem Ipsum
             </Card>
