@@ -27,6 +27,15 @@
   // Extra vars needed
   --content-max-width: #{$content-max-width};
   --colour-brand: var(--colour-primary);
+
+  // Cards variables
+  --card-top-padding: 2rem;
+  --card-right-padding: #{rem(16+16+24)};
+  --card-bottom-padding: 2rem;
+  --card-left-padding: 1rem;
+  --card-border-radius: #{rem(8)};
+  --card-box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
+
 }
 
 // Dark mode; functional colours get updated
