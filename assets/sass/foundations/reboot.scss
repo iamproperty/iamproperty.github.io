@@ -54,17 +54,17 @@ body {
 }
 
 // #region scrollbars
-div::-webkit-scrollbar {
+:is(div,form,fieldset)::-webkit-scrollbar {
   width: 10px;
   height: 6px;
 }
  
-div::-webkit-scrollbar-track {
+:is(div,form,fieldset)::-webkit-scrollbar-track {
   background-color: #f1f1f1;
   border-left: 4px solid var(--bg-colour,var(--colour-canvas));
 }
  
-div::-webkit-scrollbar-thumb {
+:is(div,form,fieldset)::-webkit-scrollbar-thumb {
   background-color: #c1c1c1;
   width: 6px;
   border-left: 4px solid var(--bg-colour,var(--colour-canvas));
@@ -134,3 +134,11 @@ details summary > * {
 details {
   width: 100%;
 }
+
+// #region Undefined web components
+iam-card:not(:defined) {
+  box-shadow: var(--card-border-radius);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
+}
+// #endregion

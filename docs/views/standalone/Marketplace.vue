@@ -27,8 +27,8 @@
               <li class=""><a href="/props">Compliance Help Centre</a></li>
               <li class=""><a href="/props">Report a SAR</a></li>
               <li class=""><a href="/props">Training Library</a></li>
-              <li class="nav__download"><a href="/props"><Icon id="download2"></icon>Template AML Policy</a></li>
-              <li class="nav__download"><a href="/props"><Icon id="download2"></Icon>Money Laundering Officer Guide</a></li>
+              <li class="nav__download"><a href="/props">Template AML Policy</a></li>
+              <li class="nav__download"><a href="/props">Money Laundering Officer Guide</a></li>
             </ul>
           </li>
           <li class=""><a href="/props">Service Marketplace</a></li>
@@ -42,7 +42,7 @@
 
 
         <span class="row">
-            <span class="col mw-fit-content"><Icon id="account" class="fs-2 p-2 m-0"></Icon></span>
+            <span class="col mw-fit-content"></span>
             <span class="col d-flex align-items-center">
               <span Class="h5 mb-1">Johny Smith</span>
             </span>
@@ -53,7 +53,7 @@
 
 
           <span class="row">
-            <span class="col mw-fit-content"><Icon id="auction" class="fs-2 p-2 m-0"></Icon></span>
+            <span class="col mw-fit-content"></span>
             <span class="col">
               <span Class="h5 mb-1">Services</span>
               <span class="small">
@@ -68,7 +68,7 @@
 
         <a href="/" class="nav__featured-link text-decoration-none pb-5 d-block mb-0">
           <span class="row">
-            <span class="col mw-fit-content"><Icon id="account-settings" class="fs-2 m-0"></Icon></span>
+            <span class="col mw-fit-content"></span>
             <span class="col">
               <span Class="h5 mb-1">Control panel</span>
               <span class="small">
@@ -121,15 +121,13 @@ import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.
 import Nav from '@/components/Nav/Nav.vue'
 import Logo from '@/foundations/Logo/Logo.vue'
 import Input from '@/components/Input/Input.vue'
-import Icon from '@/foundations/Icon/Icon.vue'
 
 export default {
   components: {
     PropertySearchbar,
     Nav,
     Input,
-    Logo,
-    Icon
+    Logo
   },
 }
 </script>

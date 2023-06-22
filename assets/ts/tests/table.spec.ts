@@ -9,6 +9,9 @@ const basicTable = `<thead>
     <th>Heading 1</th>
     <th>Heading 2</th>
     <th>Heading 3</th>
+    <th>Heading 4</th>
+    <th>Heading 5</th>
+    <th>Heading 6</th>
   </tr>
 </thead>
 <tbody>
@@ -16,21 +19,33 @@ const basicTable = `<thead>
     <td>Cell 1</td>
     <td>Low</td>
     <td>Cell 3</td>
+    <td>Cell 4</td>
+    <td>Cell 5</td>
+    <td>Cell 6</td>
   </tr>
   <tr>
     <td>Cell 1</td>
     <td>Low</td>
     <td><a href="/link">View information</a></td>
+    <td>Cell 4</td>
+    <td>Cell 5</td>
+    <td>Cell 6</td>
   </tr>
   <tr>
     <td>Different Cell 1</td>
     <td>Medium</td>
     <td><a href="/link">View information</a></td>
+    <td>Cell 4</td>
+    <td>Cell 5</td>
+    <td>Cell 6</td>
   </tr>
   <tr>
     <td>Different Cell 1</td>
     <td>High</td>
     <td><a href="/link">View information</a></td>
+    <td>Cell 4</td>
+    <td>Cell 5</td>
+    <td>Cell 6</td>
   </tr>
 </tbody>`;
 

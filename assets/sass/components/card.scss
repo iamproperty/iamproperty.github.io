@@ -2,15 +2,10 @@
 
 // #region Default card
 .card {
-  --top-padding: 2rem;
-  --right-padding: #{rem(16+16+24)};
-  --bottom-padding: 2rem;
-  --left-padding: 1rem;
-  --icon-right: 1rem;
-
+  --card-icon-right: 1rem;
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-border-radius);
   position: relative;
-  box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
-  border-radius: rem(8);
   font-weight: bold;
   font-size: rem(18);
   line-height: rem(24);
@@ -27,13 +22,13 @@
 
   &.border-0 {
     box-shadow: none;
-    --left-padding: 0rem;
+    --card-left-padding: 0rem;
     outline-offset: 1px!important;
   }
 
   &__body {
     position: relative;
-    padding: var(--top-padding) var(--right-padding) var(--bottom-padding) var(--left-padding);
+    padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
     z-index: -1;
   }
 
@@ -41,8 +36,8 @@
   &:after {
     content: "";
     position: absolute;
-    right: var(--icon-right);
-    bottom: var(--bottom-padding);
+    right: var(--card-icon-right);
+    bottom: var(--card-bottom-padding);
     height: rem(24);
     width: rem(24);
     background: var(--colour-warning);
@@ -64,11 +59,16 @@
 
   &:is(:hover,:focus,.hover) {
     --icon-right: 0.5rem;
-    outline: 2px solid var(--colour-primary);
+    outline: 2px solid var(--colour, var(--colour-primary));
     outline-offset: -2px;
 
+  }
+  
+  // Update arrow cololur
+  &:not([class*="colour-"]):is(:hover,:focus,.hover) {
+
     &:before {
-      background: var(--colour-primary);
+      background: var(--colour-primary-theme);
     }
     &:after {
       background: #ffffff;
@@ -123,18 +123,11 @@
   }
 }
 
-
 ::slotted(i){
   font-size: rem(24);
-  margin: -3px var(--icon-right) 0 0;
+  margin: -3px var(--card-icon-right) 0 0;
   font-weight: 400;
   vertical-align: middle;
-}
-
-.card--filter ::slotted(i) {
-  display: block !important;
-  height: rem(18)!important;
-  margin: 0 0 0.5rem 0!important;
 }
 
 ::slotted(span){
@@ -145,6 +138,14 @@
 }
 // #endregion
 
+// #region border left
+.card[class*="colour-"],
+.card--filter {
+  
+  border-left: rem(12) solid var(--colour,var(--colour-primary));
+}
+// #endregion
+
 //#region Filter card
 .card--filter {
   --top-padding: #{rem(24)};
@@ -152,7 +153,7 @@
   --bottom-padding: #{rem(24)};
   --left-padding: 1rem;
 
-  border-left: rem(12) solid var(--colour,var(--colour-primary));
+  //border-left: rem(12) solid var(--colour,var(--colour-primary));
 
   &:has(.card__total) .card__body{
 
@@ -202,13 +203,19 @@
     padding-right: rem(16);
   }
 }
+
+.card--filter ::slotted(i) {
+  display: block !important;
+  font-size: rem(18)!important;
+  margin: 0 0 0.5rem 0!important;
+}
 // #endregion
 
 // #region card with an image
 .card:has(.card__head) {
   .card__head {
     padding-bottom: 0;
-    padding-top: 55%;
+    padding-top: 27%;
     position: relative;
     overflow: hidden;
     background: rgba(0,0,0,0.1);
@@ -236,7 +243,7 @@
   .card__footer {
     position: relative;
     background: #ffffff;
-    padding: var(--top-padding) var(--right-padding) var(--bottom-padding) var(--left-padding);
+    padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
     z-index: -1;
     display: block;
   }

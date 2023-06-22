@@ -10,7 +10,7 @@
       <p class="lead">Navigational cards can be used to direct the user to another page or modal. All will apply a drop shadow with a default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15% as default unless specified otherwise, this should have the ability to be removed if needed.</p>
       <h3>Header card</h3>
     </div>
-
+    
     <div class="container visualtest">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
@@ -39,6 +39,24 @@
           <span class="pb-3 d-block text-uppercase">With Icon</span>
           <a href="/client-onbaording">
             <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">With Icon</span>
+          <a href="/client-onbaording">
+            <Card class="hover">
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">With Icon</span>
+          <a href="/client-onbaording">
+            <Card class="active">
               <i class="fa fa-home"></i>
               Lorem Ipsum
             </Card>
@@ -79,6 +97,80 @@
       </div>
 
     </div>
+
+
+
+    <div class="container">
+
+      <h3>Status card</h3>
+      <p>This is a variation of the header card which includes a status colour block on the left of the card. The status card is used to signify task/items which are not started, in progress, incomplete or complete and the colour block to the left will reflect the relevant task status (please see colours style guide for status colours).</p>
+
+    </div>
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card class="colour-danger">Financial preparation <span>Here would be the top level description of the task</span></Card>
+          </a>          
+        </div>
+
+      
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording">
+            <Card class="colour-danger hover">Financial preparation <span>Here would be the top level description of the task</span></Card>
+          </a>          
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording">
+            <Card class="colour-danger active">Financial preparation <span>Here would be the top level description of the task</span></Card>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container">
+
+      <h3>Feature card with description</h3>
+      <p>This is a variation of the header card which includes the ability to added an image or SVG to the top of the card - this is a useful card for pointing users to features, articles or any larger item which would benefit from a greater visual prominance.</p>
+    </div>
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/client-onbaording">
+            <Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card>
+          </a>          
+        </div>
+
+      
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <a href="/client-onbaording">
+            <Card :data-image="cardImg" class="hover">Financial preparation <span>Here would be the top level description of the task</span></Card>
+          </a>          
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <a href="/client-onbaording">
+            <Card :data-image="cardImg" class="active">Financial preparation <span>Here would be the top level description of the task</span></Card>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+
+
     <div class="container">
       <h3>Text card with SVG</h3>
       <p>This is a variation of the Header card which includes the addition of an SVG illustration. </p>
@@ -155,22 +247,29 @@
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <button class="d-inline-block">
-          <Card class="card--filter"><i class="icon fa-house"></i>Character property</Card>
+          <Card class="card--filter"><i class="fa fa-house"></i>Character property</Card>
         </button>
         </div>
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
           <button class="d-inline-block">
-            <Card class="card--filter hover"><i class="icon fa-house"></i>Character property</Card>
+            <Card class="card--filter hover"><i class="fa fa-house"></i>Character property</Card>
           </button>
         </div>
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <button class="d-inline-block">
-            <Card class="card--filter active"><i class="icon fa-house"></i>Character property</Card>
+            <Card class="card--filter active"><i class="fa fa-house"></i>Character property</Card>
           </button>
         </div>
       </div>
+    </div>
+
+
+    <div class="container">
+      <h2>Mode examples</h2>
+      <p>This is an example of how cards can be displayed across light mode, dark mode, and high contrast mode</p>
+      <img :src="cardModes" alt="" class="mb-4" />
     </div>
 
 
@@ -205,6 +304,13 @@
           </thead>
           <tbody class="text-body">
             <tr>
+              <td>V2 added</td>
+              <td>14.06.2023</td>
+              <td>Inclusion of a Features card<br/>
+Inclusion of Status navigation card<br/>
+Inclusion of card ‘modes’ - light mode, dark mode and high contrast</td>
+            </tr>
+            <tr>
               <td>V1 added</td>
               <td>19.05.2023</td>
               <td>N/A</td>
@@ -225,6 +331,8 @@ import Tab from '@/components/Tabs/Tab.vue'
 import WebReadme from '~/ts/components/card/README.md'
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/cards-header.png'
+import cardImg from '../../img/cardImg.png'
+import cardModes from '../../img/cardModes.png'
 import Table from '@/components/Table/Table.vue'
 
 export default {
@@ -236,11 +344,15 @@ export default {
     Tabs,
     Tab,
     Card,
-    headerImg
+    headerImg,
+    cardImg,
+    cardModes
   },
   data () {
     return {
       headerImg: headerImg,
+      cardImg: cardImg,
+      cardModes:cardModes,
       htmlUsage: `<a href="/link-url" class="card">
   <div class="card-body">
     Link text

@@ -1,6 +1,7 @@
 // @ts-nocheck
 // Modules
 import * as helpers from '../js/modules/helpers'
+import extendDialogs from '../js/modules/dialogs'
 import createDataLayer from '../js/modules/data-layer'
 import nav from '../js/modules/nav'
 import table from '../js/modules/table'
@@ -16,7 +17,7 @@ const options = {
   rootMargin: '50px',
   threshold: 0.1
 }
-const componentExt = ".component.js";
+const componentExt = ".component.min.js";
 
 // Load components - Each component will load once the first of its type has been loaded
 components.forEach((component) => {
@@ -59,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
   //helpers.checkElements(document.body);
+  extendDialogs(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {

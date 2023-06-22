@@ -1,81 +1,26 @@
 @use "../_func" as *;
 
-.icon {
-  fill: currentColor;
-  stroke: currentColor;
-  stroke-width: 0;
-  @include var(color,--colour-primary);
-  width: rem(64);
-  height: rem(64);
-  display: inline-block;
 
-  button > &,
-  a > & {
-    width: 1.5em;
-    height: 1.5em;
-    vertical-align: text-top;
-    margin-top: -0.15em;
-    margin-inline: 0.25em;
-    color: inherit;
-  }
-
-  &[class*="text-"]{
-    fill: currentColor;
-  }
-
-  & + .icon {
-    margin-inline-start: 1rem;
-  }
-
-  &[class*="fs-"] {
-    width: 1.5em;
-    height: 1.5em;
-    vertical-align: text-top;
-    margin-top: -0.15em;
-    margin-inline: 0.25em;
-  }
+.icon--xs {
+  font-size: rem(16);
 }
 
-@include inline-text(){
-  .icon {
-    width: 1em;
-    height: 1em;
-    vertical-align: text-top;
-    margin-top: 0.15em;
-    margin-inline: 0.25em;
-  }
+.icon--sm {
+  font-size: rem(18);
 }
 
-// Font awesome support
-.icon[class*="fa-"]:not(.far) {
-  font-size: rem(64 - 16);
-  height: rem(64);
-  padding: 0.5rem;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  display: inline-block;
-  font-style: normal;
-  font-variant: normal;
-  text-rendering: auto;
-  line-height: 1;
-  font-family: "Font Awesome 6 Pro";
-  font-weight: 300;
-  width: auto;
-
-  button &,
-  a & {
-    font-size: 1em;
-    height: 1em;
-    padding: 0;
-    vertical-align: text-top;
-    margin-top: 0.15em;
-    margin-inline: 0.25em;
-  }
+.icon--compact {
+  font-size: rem(20);
 }
 
-@include inline-text(){
-  .icon[class*="fa-"] {
-    font-size: 1em;
-    color: inherit;
-  }
+.icon--md {
+  font-size: rem(28);
+}
+
+.icon--lg {
+  font-size: rem(40);
+}
+
+[class*="fa-"]:not(.fa-regular,.fa-light, .fa-solid ) {
+  font-weight: 400;
 }

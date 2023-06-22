@@ -1,6 +1,4 @@
 // @ts-nocheck
-import { createEmbed } from "./youtubevideo"; 
-
 /** 
  * Global helper functions to help maintain and enhance framework elements.
  * @module Helpers 
@@ -49,7 +47,7 @@ export const addGlobalEvents = (body) => {
 
   addEventListener("popstate", (event) => {
 
-    if(event.state.type == "pagination"){
+    if(event && event.state.type && event.state.type == "pagination"){
       let form = document.querySelector(`#${event.state.form}`);
       let pageInput = document.querySelector(`#${event.state.form} [data-pagination]`);
       
@@ -60,126 +58,6 @@ export const addGlobalEvents = (body) => {
       
       form.dispatchEvent(new Event("submit"));
     }
-  });
-
-  // Dialogs/modals
-  document.addEventListener('click', (event) => {
-
-    // Modal
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-modal]')){
-
-      const button = event.target.closest('[data-modal]');
-      const modalID = button.hasAttribute('data-modal') ? button.getAttribute('data-modal') : button.getAttribute('data-filter');
-      const dialog = document.querySelector(`dialog#${modalID}`);
-      
-      // Create close button is needed
-      dialog.innerHTML = `<button class="dialog__close">Close</button>${dialog.innerHTML}`;
-      
-      // remove close button when dialog is closed
-      dialog.addEventListener("close", () => {
-        const closeButton = dialog.querySelector('.dialog__close');
-        dialog.removeChild(closeButton);
-      }, { once: true }); // only adds this once
-      
-      let videoButton = dialog.querySelector('.youtube-embed a');
-
-      if (videoButton){
-        createEmbed(videoButton)
-      }
-
-      dialog.showModal();
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        "event": "openModal",
-        "id": modalID
-      });
-    };
-
-    // Close modal
-    if (event && event.target instanceof HTMLElement && event.target.closest('button.dialog__close')){
-      const dialog = event.target.closest('dialog[open]');
-
-      event.preventDefault();
-      dialog.close()
-        
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        "event": "closeModal",
-        "id": dialog.getAttribute('id')
-      });
-    }
-    
-    if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
-      const dialog = event.target.closest('dialog[open]');
-      const dialogDimensions = dialog.getBoundingClientRect()
-
-      if (event.clientX < dialogDimensions.left || event.clientX > dialogDimensions.right || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
-
-        dialog.close()
-        
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          "event": "closeModal",
-          "id": dialog.getAttribute('id')
-        });
-      }
-    }
-
-    // Popover
-    if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')){
-
-      // Close existing open popover
-
-      let btn = event.target.closest('.dialog__wrapper > button');
-      let parent = event.target.closest('.dialog__wrapper > button').parentNode;
-      let dataEvent = "openPopover"
-      let popover = parent.querySelector(':scope > dialog');
-      
-
-      if(document.querySelector('dialog[open]') && document.querySelector('dialog[open]') != popover)
-        document.querySelector('dialog[open]').close();
-
-
-      if(popover.hasAttribute('open')){
-        
-        popover.close();
-        dataEvent = "closePopover"
-
-        popover.removeAttribute('style');
-        btn.classList.remove('active');
-      }
-      else {
-        
-        popover.show();
-        btn.classList.add('active');
-      
-        var position = btn.getBoundingClientRect();
-        let topOffset = position.top;
-        let leftOffset = position.left;
-
-        if(btn.closest('iam-table')){
-
-          let container = btn.closest('iam-table').parentNode.getBoundingClientRect();
-
-          topOffset -= container.top;
-          leftOffset -= container.left;
-
-        }
-
-        if(popover.classList.contains('dialog--fix')){
-          popover.setAttribute('style',`position:fixed;top: ${topOffset}px; left: ${leftOffset}px; margin: 3rem 0 0 0;`)
-        }
-      }
-        
-
-      window.dataLayer = window.dataLayer || [];
-      
-      window.dataLayer.push({
-        "event": dataEvent,
-        "id": btn.textContent
-      });
-    };
   });
 
   return null
