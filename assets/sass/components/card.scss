@@ -2,15 +2,10 @@
 
 // #region Default card
 .card {
-  --top-padding: 2rem;
-  --right-padding: #{rem(16+16+24)};
-  --bottom-padding: 2rem;
-  --left-padding: 1rem;
-  --icon-right: 1rem;
-
+  --card-icon-right: 1rem;
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-border-radius);
   position: relative;
-  box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
-  border-radius: rem(8);
   font-weight: bold;
   font-size: rem(18);
   line-height: rem(24);
@@ -27,13 +22,13 @@
 
   &.border-0 {
     box-shadow: none;
-    --left-padding: 0rem;
+    --card-left-padding: 0rem;
     outline-offset: 1px!important;
   }
 
   &__body {
     position: relative;
-    padding: var(--top-padding) var(--right-padding) var(--bottom-padding) var(--left-padding);
+    padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
     z-index: -1;
   }
 
@@ -41,8 +36,8 @@
   &:after {
     content: "";
     position: absolute;
-    right: var(--icon-right);
-    bottom: var(--bottom-padding);
+    right: var(--card-icon-right);
+    bottom: var(--card-bottom-padding);
     height: rem(24);
     width: rem(24);
     background: var(--colour-warning);
@@ -130,7 +125,7 @@
 
 ::slotted(i){
   font-size: rem(24);
-  margin: -3px rem(16) 0 0;
+  margin: -3px var(--card-icon-right) 0 0;
   font-weight: 400;
   vertical-align: middle;
 }
@@ -248,7 +243,7 @@
   .card__footer {
     position: relative;
     background: #ffffff;
-    padding: var(--top-padding) var(--right-padding) var(--bottom-padding) var(--left-padding);
+    padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
     z-index: -1;
     display: block;
   }
