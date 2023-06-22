@@ -3,10 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.6.1--alpha</h2>
+      <h2>V3.7.0</h2>
       <ul>
         <li>Update icons to just use font awesome ones</li>
         <li>Update the dialogs</li>
+        <li>Bug fixes</li>
       </ul>
 
       <h3>Breaking changes</h3>
