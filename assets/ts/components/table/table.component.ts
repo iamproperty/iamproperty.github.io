@@ -97,8 +97,12 @@ class iamTable extends HTMLElement {
 
     this.shadowRoot.querySelector('.table__wrapper').addEventListener("scroll", (event) => {
 
-      if(this.table.querySelector('dialog[open]'))
+      if(this.table.querySelector('dialog[open]')){
+        
         this.table.querySelector('dialog[open]').close();
+        this.table.querySelector('.dialog__wrapper > button.active').classList.remove('active');
+      }
+
     });
   }
 

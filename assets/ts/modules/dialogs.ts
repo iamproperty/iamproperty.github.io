@@ -31,10 +31,7 @@ const extendDialogs = (body) => {
 
       // Open the modal!
       dialog.showModal();
-
       dialog.focus();
-
-      console.log(dialog.querySelector('button'));
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -49,7 +46,12 @@ const extendDialogs = (body) => {
 
       event.preventDefault();
       dialog.close()
-        
+      
+      // Remove active class from exiting active buttons
+      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
+        btnElement.classList.remove('active');
+      });
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         "event": "closeModal",
@@ -61,6 +63,11 @@ const extendDialogs = (body) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('button[formmethod="dialog"]')){
       const dialog = event.target.closest('dialog[open]');
 
+      // Remove active class from exiting active buttons
+      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
+        btnElement.classList.remove('active');
+      });
+      
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         "event": "closeModal",
@@ -105,6 +112,11 @@ const extendDialogs = (body) => {
         document.querySelector('dialog[open]').close();
 
 
+      // Remove active class from exiting active buttons
+      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
+        btnElement.classList.remove('active');
+      });
+
       if(popover.hasAttribute('open')){
         
         popover.close();
@@ -128,7 +140,6 @@ const extendDialogs = (body) => {
 
           topOffset -= container.top;
           leftOffset -= container.left;
-
         }
 
         if(popover.classList.contains('dialog--fix')){
