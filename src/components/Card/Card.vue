@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import iamCard from '../../../assets/ts/components/card/card.component'
+import iamCard from '../../../assets/js/components/card/card.component.min.js'
 
 export default {
   name: 'Card',
-  created(){
+  mounted(){
 
     this.$nextTick(function () {
       

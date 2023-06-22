@@ -17,7 +17,7 @@ const options = {
   rootMargin: '50px',
   threshold: 0.1
 }
-const componentExt = ".component.js";
+const componentExt = ".component.min.js";
 
 // Load components - Each component will load once the first of its type has been loaded
 components.forEach((component) => {
