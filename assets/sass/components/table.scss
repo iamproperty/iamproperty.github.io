@@ -29,6 +29,16 @@ td,th {
   &:first-child {
     padding-left: rem(2);
   }
+
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    font-size: inherit;
+    padding: 0;
+    min-width: rem(300);
+  }
 }
 
 th {
@@ -461,14 +471,15 @@ table:not(.table--filtered) tbody tr:nth-child(15) ~ tr {
 
 table {
     
-  :is([data-content="Low"],
-    [data-content="Medium"],
-    [data-content="High"],
-    [data-content="Incomplete"],
-    [data-content="Requires approval"],
-    [data-content="Verified"],
-    [data-content="Not started"],
-    [data-content="Completed"],
+  :is([data-content="low"],
+    [data-content="medium"],
+    [data-content="high"],
+    [data-content="unknown"],
+    [data-content="incomplete"],
+    [data-content="requires approval"],
+    [data-content="verified"],
+    [data-content="not started"],
+    [data-content="completed"],
     .alert-status
     ) {
     
@@ -494,41 +505,48 @@ table {
     }
   }
 
-  [data-content="High"]:after {
+  [data-content="high"]:after {
     content: "\f325";
     font-weight: normal;
     color: var(--colour-danger);
   }
 
-  [data-content="Medium"]:after {
+  [data-content="medium"]:after {
 
     content: "\f7a4";
     font-weight: normal;
     color: var(--colour-warning);
   }
 
-  [data-content="Low"]:after {
+  [data-content="low"]:after {
 
     content: "\e404";
     font-weight: normal;
     color: var(--colour-complete);
   }
 
-  :is([data-content="Not started"],[data-content="Incomplete"]):after {
+  [data-content="unknown"]:after {
+
+    content: "\e404";
+    font-weight: normal;
+    color: var(--colour-muted);
+  }
+
+  :is([data-content="not started"],[data-content="incomplete"]):after {
 
     content: "\f024";
     font-weight: light;
     color: var(--colour-danger);
   }
 
-  [data-content="Requires approval"]:after {
+  [data-content="requires approval"]:after {
 
     content: "\f024";
     font-weight: light;
     color: var(--colour-warning);
   }
 
-  :is([data-content="Verified"],[data-content="Completed"]):after {
+  :is([data-content="verified"],[data-content="completed"]):after {
     
     content: "\f00c";
     font-weight: normal;

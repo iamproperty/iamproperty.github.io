@@ -11,7 +11,7 @@ export const addDataAttributes = (table) => {
   colRows.forEach((row, index) => {
 
     const cells = Array.from(row.querySelectorAll('th, td'));
-    const statuses = ['Low','Medium','High','N/A','Pending','Verified','Incomplete','Completed','Requires approval'];
+    const statuses = ['low','medium','high','unknown','n/a','pending','verified','incomplete','completed','requires approval'];
     
     cells.forEach((cell, cellIndex) => {
 
@@ -28,11 +28,11 @@ export const addDataAttributes = (table) => {
 
         if(heading.hasAttribute('data-format')){
           cell.setAttribute('data-format',heading.getAttribute('data-format'))
-          cell.innerHTML = formatCell('date',cell.textContent.trim()); //Make sure date format is consistent
+          cell.innerHTML = formatCell(heading.getAttribute('data-format'),cell.textContent.trim()); //Make sure date format is consistent
         }
 
-        if(statuses.includes(cell.textContent.trim())){
-          cell.setAttribute('data-content',cell.textContent.trim());
+        if(statuses.includes(cell.textContent.trim().toLowerCase())){
+          cell.setAttribute('data-content',cell.textContent.trim().toLowerCase());
         }
       }
     });
@@ -706,8 +706,10 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
 
     let schema = form.hasAttribute('data-schema') ? form.getAttribute('data-schema') : 'data';
     let totalNumberSchema = form.hasAttribute('data-schema-total') ? form.getAttribute('data-schema-total') : 'meta.total';
+    let currentPageSchema = form.hasAttribute('data-schema-page') ? form.getAttribute('data-schema-page') : 'meta.current_page';
 
     let totalNumber = resolvePath(response, totalNumberSchema, 1);
+    let currentPage = resolvePath(response, currentPageSchema, 1);
     let data = resolvePath(response, schema);
     
     if (data) {
@@ -731,8 +733,13 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
             cellOutput = cellTemplate.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(row, matched.replace('{','').replace('}','')); });
           }
 
-          if(col.hasAttribute('data-format')){
-            cellOutput = formatCell(col.getAttribute('data-format'),cellOutput);
+          if(col.hasAttribute('data-transform')){
+
+            const transforms = JSON.parse(col.getAttribute('data-transform'));
+            cellOutput = transforms[cellOutput];
+
+            if(!cellOutput && col.hasAttribute('data-default'))
+              cellOutput = col.getAttribute('data-default');
           }
 
           table_cell.innerHTML = cellOutput;
@@ -748,7 +755,7 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
       makeTableFunctional(table, form, pagination, wrapper);
 
       wrapper.setAttribute('data-total', totalNumber);
-      wrapper.setAttribute('data-page', (response.meta.current_page ? response.meta.current_page : 1));
+      wrapper.setAttribute('data-page', currentPage);
       wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
       createPaginationButttons(wrapper, pagination);
@@ -767,13 +774,11 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
 export const formatCell = (format, cellOutput) => {
 
   switch (format) {
+    case 'datetime':
+      return new Date(cellOutput).toLocaleDateString('en-gb', { weekday: 'short', year:"2-digit", month:"long", day: "numeric", }) + " " + new Date(cellOutput).toLocaleTimeString("en-gb", { hour: "2-digit", minute: "2-digit"});
     case 'date':
-      cellOutput = new Date(cellOutput).toLocaleDateString('en-gb', { year:"2-digit", month:"long", day: "numeric"});
-    break;
+      return new Date(cellOutput).toLocaleDateString('en-gb', { year:"2-digit", month:"long", day: "numeric"});
     case 'capitalise':
-      cellOutput = ucfirst(cellOutput);
-    break;
+      return cellOutput = ucfirst(cellOutput);
   }
-  
-  return cellOutput;
 }

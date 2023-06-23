@@ -71,12 +71,12 @@
                 <th data-output="{property_address}">Property address</th>
                 <th data-format="date" data-output="{authorised_by}">Date Authorised</th>
                 <th data-output="{authorised_by}">Date Authorised by</th>
-                <th data-output="{property_status}">Property status</th>
-                <th data-output="{risk_level}">Risk</th>
+                <th data-output="{property_status}" data-format="capitalise">Property status</th>
+                <th data-output="{risk_level}" data-transform='{"1":"Low","2":"Medium","3":"High"}' data-default="Unknown">Risk</th>
                 <th data-output="{buying_position}">Buying position</th>
-                <th data-output="{lastComplianceNote}">Last compliance note</th>
+                <th data-output="<p>{lastComplianceNote}</p>">Last compliance note</th>
                 <th data-output="{locked_to}">Locked to</th>
-                <th data-format="{followup}">Follow up</th>
+                <th data-output="{followup}" data-format="datetime">Follow up</th>
                 <th data-output="<a href='/admin/properties/{property_id}?tab=compliance'>View property</a>"></th>
               </tr>
             </thead>
