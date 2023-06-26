@@ -52,6 +52,9 @@ class iamTable extends HTMLElement {
     if(!this.hasAttribute('data-show'))
       this.setAttribute('data-show', 15);
 
+    if(!this.hasAttribute('data-increment'))
+      this.setAttribute('data-increment', 15);
+
     this.setAttribute('data-pages', Math.ceil(this.getAttribute('data-total') / this.getAttribute('data-show')));
   }
 
@@ -71,6 +74,10 @@ class iamTable extends HTMLElement {
       
       this.table.parentNode.insertBefore(this.form, this.table.nextSibling);
     }
+
+    // Set ajax class
+    if(this.form.hasAttribute('data-ajax'))
+      this.table.classList.add('table--ajax');
 
     // Create a data list if a search input is present
     tableModule.createSearchDataList(this.table, this.form);
@@ -100,8 +107,12 @@ class iamTable extends HTMLElement {
 
     this.shadowRoot.querySelector('.table__wrapper').addEventListener("scroll", (event) => {
 
-      if(this.table.querySelector('dialog[open]'))
+      if(this.table.querySelector('dialog[open]')){
+        
         this.table.querySelector('dialog[open]').close();
+        this.table.querySelector('.dialog__wrapper > button.active').classList.remove('active');
+      }
+
     });
   }
 

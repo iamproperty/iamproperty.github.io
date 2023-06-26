@@ -5,7 +5,7 @@
     </Nav>
     <main class="main--marketplace">
 
-      <form id="tableFilters">
+      <form id="tableFilters" data-ajax="/data/compliance-dashboard.json" data-schema="data.buyerTasks">
 
         <div class="container">
           <div class="row">
@@ -67,59 +67,20 @@
           <table>
             <thead>
               <tr>
-                <th class="min-fit-content" data-td-class="alert-status">Alerts</th>
-                <th>Property address</th>
-                <th data-format="date">Date Authorised</th>
-                <th>Date Authorised by</th>
-                <th>Property status</th>
-                <th>Risk</th>
-                <th>Buying position</th>
-                <th>Last compliance note</th>
-                <th>Locked to</th>
-                <th data-format="date">Follow up</th>
-                <th></th> 
+                <th class="min-fit-content" data-td-class="alert-status" data-output="{alerts}">Alerts</th>
+                <th data-output="{property_address}">Property address</th>
+                <th data-format="date" data-output="{authorised_by}">Date Authorised</th>
+                <th data-output="{authorised_by}">Date Authorised by</th>
+                <th data-output="{property_status}" data-format="capitalise">Property status</th>
+                <th data-output="{risk_level}" data-transform='{"1":"Low","2":"Medium","3":"High"}' data-default="Unknown">Risk</th>
+                <th data-output="{buying_position}">Buying position</th>
+                <th data-output="<p>{lastComplianceNote}</p>">Last compliance note</th>
+                <th data-output="{locked_to}">Locked to</th>
+                <th data-output="{followup}" data-format="datetime">Follow up</th>
+                <th data-output="<a href='/admin/properties/{property_id}?tab=compliance'>View property</a>"></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>2</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>31 May 23</td>
-                <td>Abigail Budden</td>
-                <td><span><i class="fa-solid fa-circle me-1"></i>Vendor</span></td>
-                <td>Low</td>
-                <td>Cash</td>
-                <td>Lorum ipsum dolor sit amet incididunt</td>
-                <td>Amy Reading</td>
-                <td>31 May 23</td>
-                <td><a href="/clienturl" class="text-nowrap">View property</a></td>  
-              </tr>
-              <tr>
-                <td></td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>31 May 23</td>
-                <td>Abigail Budden</td>
-                <td>Preapproved</td>
-                <td>Medium</td>
-                <td>Cash</td>
-                <td>Lorum ipsum dolor sit amet incididunt</td>
-                <td>Amy Reading</td>
-                <td>31 May 23</td>
-                <td><a href="/clienturl" class="text-nowrap">View property</a></td>  
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>89, Queens Crescent, NE28 8DR</td>
-                <td>31 May 23</td>
-                <td>Alice Knowles</td>
-                <td>Preapproved</td>
-                <td>High</td>
-                <td>Cash</td>
-                <td>Lorum ipsum dolor sit amet incididunt</td>
-                <td>Alice Knowles</td>
-                <td>31 May 23</td>
-                <td><a href="/clienturl" class="text-nowrap">View property</a></td>  
-              </tr>
             </tbody>
           </table>
         </Table>
