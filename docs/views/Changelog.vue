@@ -8,10 +8,11 @@
         <li>Updates to the ajax table functionality</li>
       </ul>
 
-      <h2>V3.7</h2>
+      <h2>V3.7.0</h2>
       <ul>
         <li>Update icons to just use font awesome ones</li>
         <li>Update the dialogs</li>
+        <li>Bug fixes</li>
       </ul>
 
       <h3>Breaking changes</h3>
