@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.7.1</h2>
+      <ul>
+        <li>Updates to the ajax table functionality</li>
+      </ul>
+
       <h2>V3.7.0</h2>
       <ul>
         <li>Update icons to just use font awesome ones</li>

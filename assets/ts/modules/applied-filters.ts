@@ -121,7 +121,7 @@ function createAppliedFilters(container,filters) {
         if(name.match(/\[(.*)\]/)){
           let newName = name.replace(/\[(.*)\]/,`[]`);
           let value = name.replace(/.*\[(.*)\]/,`$1`);
-          selector = `[name="${newName}"][value="${value}"]`;
+          selector = `[value="${value}"]`;
         }
 
         let inputs = container.querySelectorAll(selector);
