@@ -56,19 +56,23 @@ body {
 // #region scrollbars
 :is(div,form,fieldset)::-webkit-scrollbar {
   width: 10px;
-  height: 6px;
+  height: 10px;
 }
  
 :is(div,form,fieldset)::-webkit-scrollbar-track {
   background-color: #f1f1f1;
-  border-left: 4px solid var(--bg-colour,var(--colour-canvas));
+  border-top: 4px solid var(--colour-canvas-2);
+  border-left: 4px solid var(--colour-canvas-2);
 }
  
 :is(div,form,fieldset)::-webkit-scrollbar-thumb {
   background-color: #c1c1c1;
   width: 6px;
-  border-left: 4px solid var(--bg-colour,var(--colour-canvas));
+  border-top: 4px solid var(--colour-canvas-2);
+  border-left: 4px solid var(--colour-canvas-2);
 }
+
+
 //#endregion
 
 body > footer,

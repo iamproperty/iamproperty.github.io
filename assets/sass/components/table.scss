@@ -47,7 +47,11 @@ th {
 }
 
 thead {
+  tr {
 
+    border-bottom: var(--border-width) solid currentColor;
+    @include var(border-color,--colour-primary);
+  }
   th {
     font-weight: bold;
     vertical-align: bottom;
@@ -66,6 +70,8 @@ thead {
 
 tbody tr {
 
+  border-bottom: var(--border-width) solid currentColor;
+  @include var(border-color,--colour-border);
 
   &:is(:hover,:focus-within,.hover) {
 
@@ -79,11 +85,13 @@ tbody tr {
     }
   }
 
+  /*
   :is(td, th) {
       
     border-top: var(--border-width) solid currentColor;
     @include var(border-color,--colour-border);
   }
+
 
   &:first-child :is(td, th){
     border-top: var(--border-width) solid currentColor;
@@ -94,6 +102,7 @@ tbody tr {
     border-bottom: var(--border-width) solid currentColor;
     @include var(border-color,--colour-border);
   }
+  */
 }
 
 .border-0 > table,
@@ -172,6 +181,7 @@ table.border-0 {
       margin-inline: 1.5rem;
       margin-bottom: 1.5rem;
       width: calc(100% - 3rem);
+      display: block;
 
       thead {
         display: none;
@@ -204,18 +214,6 @@ table.border-0 {
           td {
             background: transparent;
           }
-        }
-
-        &:last-child td:not(:last-child) {
-          border-bottom:none;
-        }
-
-        &:first-child td:first-child {
-          border-top: none;
-          border-color: var(--colour-border);
-        }
-        &:first-child td {
-          border-color: var(--colour-border);
         }
       }
 
@@ -323,6 +321,10 @@ table.border-0 {
     padding-left: 0;
     text-align: left;
     min-height: 0;
+
+    &:after {
+      display: none;
+    }
   }
 
 }
@@ -341,17 +343,7 @@ table.border-0 {
     position: relative;
     margin-right: calc(var(--cta-width) - 1.5rem);
 
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: calc(100% + calc(var(--cta-width) - 1.5rem));
-      border-bottom: 2px solid currentColor;
-      @include var(border-color,--colour-border);
-      z-index: 99;
-    }
+    
   }
 
   .table--cta .table__wrapper {
@@ -368,32 +360,40 @@ table.border-0 {
       top: auto;
       z-index: 3;
       background: transparent;
-      width: var(--cta-width);
+      width: calc(var(--cta-width) + 1.5rem);
       padding-left: rem(40);
       margin-left: rem(-40);
-      min-width: fit-content;
       min-height: var(--row-height);
       text-align: right;
       background: linear-gradient(90deg, transparent 0%, var(--colour-canvas-2) 1.25rem);
+
+      //border-bottom: var(--border-width) solid var(--colour-border);
+
+      &:after {
+        bottom: 0;
+        left: 0;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: var(--colour-border);
+      }
 
       a {
         white-space: nowrap;
       }
     }
 
-    tr:hover > *:last-child {
+    tr > th:last-child {
+      --colour-border: var(--colour-primary);
+    }
 
+    tbody tr:hover > *:last-child {
       background: linear-gradient(90deg, transparent 0%, var(--hover-background) 1.25rem);
     }
 
-    tbody tr > *:last-child {
-      margin-top: -1px;
-    }
-    tbody tr {
-
-      &:last-child td{
-        border-bottom: none;
-      }
+    thead tr > *:last-child {
+      margin-top: 1px;
     }
   }
 }
@@ -463,12 +463,22 @@ iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
   display: none!important;
 }
 
-table:not(.table--filtered) tbody tr:nth-child(15) ~ tr {
+table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
   display: none;
 }
 
-// Statuses 
 
+// Loading via ajax
+.table--loading {
+  opacity: 0.8;
+  pointer-events: none;
+
+  &.table--cta thead th:last-child {
+    opacity: 0;
+  }
+}
+
+// Statuses 
 table {
     
   :is([data-content="low"],
@@ -480,7 +490,7 @@ table {
     [data-content="verified"],
     [data-content="not started"],
     [data-content="completed"],
-    .alert-status
+    .alert-status:not([data-content="0"])
     ) {
     
     position: relative;
@@ -496,7 +506,6 @@ table {
       position: absolute;
       top: 1rem;
       left: 0;
-      content: "";
       font-size: rem(16);
       line-height: 1;
       height: rem(16);
@@ -553,7 +562,7 @@ table {
     color: var(--colour-complete);
   }
 
-  .alert-status:not(:empty):after {
+  .alert-status:not([data-content="0"]):not(:empty):after {
 
     content: "\f06a";
     font-weight: light;
