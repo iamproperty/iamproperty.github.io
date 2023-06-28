@@ -284,8 +284,8 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       if(!forms.includes(parentForm))
         forms.push(parentForm);
 
-      if(!fields.includes(mimicInput))
-        fields.push(mimicInput);
+      if(!fields.includes(mimicField))
+        fields.push(mimicField);
       
     });
   });
@@ -297,7 +297,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     const updateMimicInput = function(){
       let mimickedAlready = [];
       let formData = new FormData(parentForm);
-
+      
       let i = 1;
       for (const [key, value] of formData) {
 
@@ -316,6 +316,19 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
         const event = new Event("force");
         form.dispatchEvent(event);
       }
+
+
+      // Check for empties
+      for (const field of fields) {
+        if(!formData.has(field) && parentForm.querySelector(`[name="${field}"]`)){
+          
+          document.querySelector(`[data-mimic="${field}"]`).value = "";
+          
+          const event = new Event("force");
+          form.dispatchEvent(event);
+        }
+      }
+
     }
 
     parentForm.addEventListener('force', (event) => {
@@ -770,7 +783,9 @@ export const makeTableFunctional = function(table, form, pagination, wrapper){
   }
 }
 
-export const loadAjaxTable = function (table, form, pagination, wrapper){
+
+
+export const loadAjaxTable = async function (table, form, pagination, wrapper){
 
   const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
 
@@ -778,89 +793,144 @@ export const loadAjaxTable = function (table, form, pagination, wrapper){
   let queryString = new URLSearchParams(formData).toString();
   let columns = table.querySelectorAll('thead tr th');
   let tbody = table.querySelector('tbody');
+  let ajaxURL = form.getAttribute('data-ajax');
 
   wrapper.classList.add('table--loading');
+  
+  // Setup controller vars if not already set
+  if(!window.controller)
+    window.controller = [];
 
-  fetch(form.getAttribute('data-ajax')+'?'+queryString, {
-    method: 'get',
-    credentials: 'same-origin',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
+  // Abort if controller already present for this url
+  if(window.controller[ajaxURL])
+    window.controller[ajaxURL].abort();
+
+  // Create a new controller so it can be aborted if new fetch made
+  window.controller[ajaxURL] = new AbortController();
+  const { signal } = controller[ajaxURL];
+
+  try {
+    await fetch(ajaxURL+'?'+queryString, {
+      signal: signal,
+      method: 'get',
+      credentials: 'same-origin',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      })
     })
-  }).then((response) => response.json()).then((response) => {
+    .then((response) => response.json()).then((response) => {
 
-    let schema = form.hasAttribute('data-schema') ? form.getAttribute('data-schema') : 'data';
-    let totalNumberSchema = form.hasAttribute('data-schema-total') ? form.getAttribute('data-schema-total') : 'meta.total';
-    let currentPageSchema = form.hasAttribute('data-schema-page') ? form.getAttribute('data-schema-page') : 'meta.current_page';
+      let schema = form.hasAttribute('data-schema') ? form.getAttribute('data-schema') : 'data';
+      let totalNumberSchema = form.hasAttribute('data-schema-total') ? form.getAttribute('data-schema-total') : 'meta.total';
+      let currentPageSchema = form.hasAttribute('data-schema-page') ? form.getAttribute('data-schema-page') : 'meta.current_page';
 
-    let totalNumber = resolvePath(response, totalNumberSchema, 1);
-    let currentPage = resolvePath(response, currentPageSchema, 1);
-    let data = resolvePath(response, schema);
-    
-    if (data) {
+      let totalNumber = resolvePath(response, totalNumberSchema, 1);
+      let currentPage = resolvePath(response, currentPageSchema, 1);
+      let data = resolvePath(response, schema);
+      let emptyMsg = wrapper.hasAttribute('data-empty-msg') ? wrapper.getAttribute('data-empty-msg') : "No results found";
+      
+      if (data) {
 
-      tbody.innerHTML = '';
+        tbody.innerHTML = '';
 
-      data.forEach((row, index) => {
+        data.forEach((row, index) => {
 
-        var table_row = document.createElement('tr');
+          var table_row = document.createElement('tr');
 
-        columns.forEach((col, index) => {
+          columns.forEach((col, index) => {
 
-          let cellOutput = '';
-          var table_cell  = document.createElement('td');
-          // Add some data to help with the mobile layout design
-          table_cell.setAttribute('data-label',col.innerText);
+            let cellOutput = '';
+            var table_cell  = document.createElement('td');
+            // Add some data to help with the mobile layout design
+            table_cell.setAttribute('data-label',col.innerText);
 
-          if(col.getAttribute('data-output')){
-            var cellTemplate = col.getAttribute('data-output');
-            // Use a regex to replace {var} with actual values from the json data
-            cellOutput = cellTemplate.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(row, matched.replace('{','').replace('}','')); });
-          }
+            if(col.getAttribute('data-output')){
+              var cellTemplate = col.getAttribute('data-output');
+              // Use a regex to replace {var} with actual values from the json data
+              cellOutput = cellTemplate.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(row, matched.replace('{','').replace('}','')); });
+            }
 
-          if(col.hasAttribute('data-transform')){
+            // If an output array is defined then the content is going to made of of multiple values from an array
+            if(col.hasAttribute('data-output-array')){
+              
+              var cellTemplate = col.getAttribute('data-output');
+              let arrValue = resolvePath(row, cellTemplate.replace('{','').replace('}',''));
 
-            const transforms = JSON.parse(col.getAttribute('data-transform'));
-            cellOutput = transforms[cellOutput];
+              cellOutput = "";
+              arrValue.forEach((rowValue, i) => {
 
-            if(!cellOutput && col.hasAttribute('data-default'))
-              cellOutput = col.getAttribute('data-default');
-          }
+                let cellTemplateValue = col.getAttribute('data-output-array');
+                let cellOutputValue = "";
 
-          table_cell.innerHTML = cellOutput;
-          table_row.appendChild(table_cell)
+                // If we need to transform some of the data
+                if(col.hasAttribute('data-output-array-property') && col.hasAttribute('data-output-array-transform')){
+
+                  const propertyValue = resolvePath(rowValue, col.getAttribute('data-output-array-property'));
+                  const transforms = JSON.parse(col.getAttribute('data-output-array-transform'));
+                  const transformValue = transforms[propertyValue];
+
+                  cellOutputValue = cellTemplateValue.replace(`{${col.getAttribute('data-output-array-property')}}`,transformValue);
+                }
+
+                cellOutputValue = cellOutputValue.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(rowValue, matched.replace('{','').replace('}','')); });
+                cellOutput += cellOutputValue;
+              });
+            }
+
+
+            if(col.hasAttribute('data-transform')){
+
+              const transforms = JSON.parse(col.getAttribute('data-transform'));
+              cellOutput = transforms[cellOutput];
+
+              if(!cellOutput && col.hasAttribute('data-default'))
+                cellOutput = col.getAttribute('data-default');
+            }
+
+            table_cell.innerHTML = cellOutput;
+            table_row.appendChild(table_cell)
+          });
+
+          tbody.appendChild(table_row)
         });
 
-        tbody.appendChild(table_row)
-      });
+        createSearchDataList(table, form)
+        // Add data to the pagination 
+        wrapper.setAttribute('data-total', parseInt(totalNumber));
+        wrapper.setAttribute('data-page', parseInt(currentPage));
+        wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
-      createSearchDataList(table, form)
-      // Add data to the pagination 
+        makeTableFunctional(table, form, pagination, wrapper);
+        createPaginationButttons(wrapper, pagination);
 
-      wrapper.setAttribute('data-total', parseInt(totalNumber));
-      wrapper.setAttribute('data-page', parseInt(currentPage));
-      wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
+        if(parseInt(totalNumber) == 0){
+          tbody.innerHTML = `<tr><td colspan="100%"><span>${emptyMsg}</span></td></tr>`;
+        }
 
-      makeTableFunctional(table, form, pagination, wrapper);
-      createPaginationButttons(wrapper, pagination);
+        wrapper.classList.remove('table--loading');
 
-      if(response.data.length == 0){
-        tbody.innerHTML = '<tr><td colspan="100%"><span class="h4 m-0">No results found</span></td></tr>';
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          "event": "Ajax table loaded",
+          "url": ajaxURL,
+          "formData": queryString
+        });
+      }
+      else {
+        tbody.innerHTML = '<tr><td colspan="100%"><span>Error loading table</span></td></tr>';
       }
 
-      wrapper.classList.remove('table--loading');
-    }
-    else {
-      tbody.innerHTML = '<tr><td colspan="100%"><span class="h6 m-0">Error loading table</span></td></tr>';
-    }
-  });
-
-  if(form.hasAttribute('data-ajax-post')){
-    const http = new XMLHttpRequest()
-    http.open('GET', `${window.location.href}?ajax=true&${queryString}`);
-    http.send()
+      // Pass post data back to the page
+      if(form.hasAttribute('data-ajax-post')){
+        const http = new XMLHttpRequest()
+        http.open('GET', `${window.location.href}?ajax=true&${queryString}`);
+        http.send();
+      }
+    });
+  } catch (error) {
+    console.log(error);
   }
 }
 
