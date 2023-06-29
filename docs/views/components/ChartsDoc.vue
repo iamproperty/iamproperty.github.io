@@ -1,19 +1,194 @@
 <template>
   <main>
-    <div class="container">
-      <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/components">Components</a></li>
-      </ul>
-      <h1>Charts</h1>
-      <p>Show individual values of a data set so users can compare the values to each other.</p>
-      <p class="note"><strong>Note: </strong>The data is added to the page using a table element which is then converted into a chart by using a combination of CSS and supporting SVG's.</p>
-    </div>
+   <div class="container">
+   <ul class="breadcrumb mb-0 d-sm-none">
+      <li><a href="/components">Components</a></li>
+   </ul>
+   <h1>Charts</h1>
+   <p>Show individual values of a data set so users can compare the values to each other.</p>
+   <p class="note"><strong>Note: </strong>The data is added to the page using a table element which is then converted into a chart by using a combination of CSS and supporting SVG's.</p>
+   </div>
     
-    <Chart class="visualtest" :max="max" :min="min" :fields="fields" :items="items" :yaxis="yaxis" type="none">
-      <h2>No chart</h2>
-      <p>An example of chart data not converted into a chart. The first column of the table is used to create the x-axis of the chart. With the following columns added to the chart as a piece of data (bar or point). </p>
-    </Chart>
-    
+   <div class="container visualtest">      
+      <h2>Default chart</h2>
+      <Chart :fields="fields" :items="items" :data-max="max" :data-min="min" data-yaxis="£0,£10,£20,£50,£100"></Chart>
+   </div>
+
+
+   <div class="container visualtest">      
+      <h2>Bar chart</h2>
+      <Chart :fields="fields" :items="items" :data-max="max" :data-min="min" data-yaxis="£0,£10,£20,£50,£100" data-type="bar"></Chart>
+   </div>
+
+
+   <div class="container visualtest">      
+      <h2>Responsive chart</h2>
+      <Chart :fields="fields" :items="items" :data-max="max" :data-min="min" data-yaxis="£0,£10,£20,£50,£100" data-type="responsive"></Chart>
+   </div>
+
+
+   <div class="container visualtest">      
+      <h2>Stacked chart</h2>
+      <Chart data-type="stacked" data-max="2500000">
+         <table>
+            <thead>
+               <tr class="">
+                  <th>Year</th>
+                  <th>Lofts</th>
+                  <th>Cavity walls</th>
+                  <th>Solid walls</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr>
+                  <td>2010</td>
+                  <td>1200000</td>
+                  <td>300000</td>
+                  <td>50000</td>
+               </tr>
+               <tr>
+                  <td>2011</td>
+                  <td>1150000</td>
+                  <td>360000</td>
+                  <td>70000</td>
+               </tr>
+               <tr>
+                  <td>2012</td>
+                  <td>1550000</td>
+                  <td>700000</td>
+                  <td>120000</td>
+               </tr>
+               <tr>
+                  <td>2013</td>
+                  <td>120000</td>
+                  <td>120000</td>
+                  <td>20000</td>
+               </tr>
+               <tr>
+                  <td>2014</td>
+                  <td>170000</td>
+                  <td>170000</td>
+                  <td>50000</td>
+               </tr>
+               <tr>
+                  <td>2015</td>
+                  <td>120000</td>
+                  <td>120000</td>
+                  <td>20000</td>
+               </tr>
+               <tr>
+                  <td>2016</td>
+                  <td>100000</td>
+                  <td>90000</td>
+                  <td>20000</td>
+               </tr>
+               <tr>
+                  <td>2017</td>
+                  <td>100000</td>
+                  <td>110000</td>
+                  <td>20000</td>
+               </tr>
+               <tr>
+                  <td>2018</td>
+                  <td>100000</td>
+                  <td>90000</td>
+                  <td>20000</td>
+               </tr>
+               <tr>
+                  <td>2019</td>
+                  <td>80000</td>
+                  <td>70000</td>
+                  <td>20000</td>
+               </tr>
+               <tr>
+                  <td>2020</td>
+                  <td>80000</td>
+                  <td>70000</td>
+                  <td>20000</td>
+               </tr>
+               <tr>
+                  <td>2021</td>
+                  <td>80000</td>
+                  <td>90000</td>
+                  <td>20000</td>
+               </tr>
+            </tbody>
+         </table>
+      </Chart>
+   </div>
+
+   <div class="container visualtest">      
+      <h2>Line chart</h2>
+      <Chart :fields="fields" :items="items" :data-max="max" :data-min="min" data-yaxis="£0,£10,£20,£50,£100" data-types="column,line" data-type="line"></Chart>
+   </div>
+
+   <div class="container visualtest">      
+      <h2>Scatter chart</h2>
+      <Chart data-type="scatter" data-min="0" data-max="700" data-guidelines="0,100,200,300,400,500,600,700" data-increment="0.1" data-start="10" data-end="26" data-xaxis="10,12,14,16,18,20,22,24,26" data-slope data-yint>
+         <table>
+              <thead>
+                  <tr class="">
+                      <th>Temperature °C</th>
+                      <th>Ice Cream Sales</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>14.2</td>
+                  <td>215</td>
+                </tr>
+                <tr>
+                  <td>16.4</td>
+                  <td>325</td>
+                </tr>
+                <tr>
+                  <td>11.9</td>
+                  <td>185</td>
+                </tr>
+                <tr>
+                  <td>15.2</td>
+                  <td>332</td>
+                </tr>
+                <tr>
+                  <td>18.5</td>
+                  <td>406</td>
+                </tr>
+                <tr>
+                  <td>22.1</td>
+                  <td>522</td>
+                </tr>
+                <tr>
+                  <td>19.4</td>
+                  <td>412</td>
+                </tr>
+                <tr>
+                  <td>25.1</td>
+                  <td>614</td>
+                </tr>
+                <tr>
+                  <td>23.4</td>
+                  <td>544</td>
+                </tr>
+                <tr>
+                  <td>18.1</td>
+                  <td>421</td>
+                </tr>
+                <tr>
+                  <td>22.6</td>
+                  <td>445</td>
+                </tr>
+                <tr>
+                  <td>17.2</td>
+                  <td>408</td>
+                </tr>
+              </tbody>
+          </table>
+
+      </Chart>
+   </div>
+
+
+<!--
     <Chart class="visualtest" :max="max" :min="min" :fields="fields" :items="items" :yaxis="yaxis" caption="An example of a bar chart.">
       <h2>Bar chart</h2>
     </Chart>
@@ -42,6 +217,8 @@
       <h2>Vue Charts component reference</h2>
       <Readme></Readme>
     </div>
+   
+-->
   </main>
 </template>
 
@@ -146,22 +323,22 @@ export default {
             </thead>
             <tbody>
                <tr>
-                  <td data-label="Year" data-numeric="2011">2011</td>
+                  <td data-numeric="2011">2011</td>
                   <td data-label="Growth" data-numeric="50" style="--percent:50%;"><span data-group="2011" data-label="Growth">£50</span></td>
                   <td data-label="Growth2" data-numeric="10.1" style="--percent:10.1%;"><span data-group="2011" data-label="Growth2">£10.10</span></td>
                </tr>
                <tr>
-                  <td data-label="Year" data-numeric="2012">2012</td>
+                  <td data-numeric="2012">2012</td>
                   <td data-label="Growth" data-numeric="75" style="--percent:75%;"><span data-group="2012" data-label="Growth">£75.00</span></td>
                   <td data-label="Growth2" data-numeric="50.1" style="--percent:50.1%;"><span data-group="2012" data-label="Growth2">£50.10</span></td>
                </tr>
                <tr>
-                  <td data-label="Year" data-numeric="2013">2013</td>
+                  <td data-numeric="2013">2013</td>
                   <td data-label="Growth" data-numeric="45" style="--percent:45%;"><span data-group="2013" data-label="Growth">£45.00</span></td>
                   <td data-label="Growth2" data-numeric="57.1" style="--percent:57.10000000000001%;"><span data-group="2013" data-label="Growth2">£57.10</span></td>
                </tr>
                <tr>
-                  <td data-label="Year" data-numeric="2014">2014</td>
+                  <td data-numeric="2014">2014</td>
                   <td data-label="Growth" data-numeric="35" style="--percent:35%;"><span data-group="2014" data-label="Growth">£35.00</span></td>
                   <td data-label="Growth2" data-numeric="80.1" style="--percent:80.1%;"><span data-group="2014" data-label="Growth2">£80.10</span></td>
                </tr>
