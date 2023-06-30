@@ -43,20 +43,18 @@ export const getLargestLastColWidth = (table) => {
  
   let largestWidth = 0;
 
-  Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
 
     let htmlStyles = window.getComputedStyle(document.querySelector('html'));
     let lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
 
     if(lastColChild){
 
+      lastColChild.classList.add('text-nowrap');
       let responsiveWidth = lastColChild.offsetWidth/parseFloat(htmlStyles.fontSize);
-      responsiveWidth += 1.5;
+      responsiveWidth += 1.7;
       largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
     }
-
-    let rowHeight = row.offsetHeight/parseFloat(htmlStyles.fontSize);
-    row.style.setProperty("--row-height", `${rowHeight}rem`);
   });
 
   return largestWidth;
@@ -780,6 +778,16 @@ export const makeTableFunctional = function(table, form, pagination, wrapper){
 
     const largestWidth = getLargestLastColWidth(table);
     wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
+
+    function outputsize() {
+
+      Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+        let rowHeight = row.offsetHeight;
+        row.style.setProperty("--row-height", `${rowHeight}px`);
+      });
+    }
+    
+    new ResizeObserver(outputsize).observe(table)
   }
 }
 
