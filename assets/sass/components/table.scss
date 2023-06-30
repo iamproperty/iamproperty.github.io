@@ -100,7 +100,7 @@ tbody tr {
 
     th,td {
       background: var(--hover-background);
-      color: var(--colour-primary-theme);
+      //color: var(--colour-primary-theme);
       --colour-link: var(--colour-primary-theme);
       --colour-hover: var(--colour-primary-theme);
     }
@@ -126,6 +126,7 @@ table.border-0 {
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
   border-radius: rem(8);
   margin-bottom: rem(32);
+  overflow: hidden;
 
   &:before {
     display: none!important;
@@ -249,7 +250,7 @@ table.border-0 {
         top: 2.5rem;
       }
 
-      tbody tr:first-child td:not(:first-child) {
+      tbody tr td:not(:first-child) {
         border-top: var(--border-width) solid currentColor!important;
         border-color: var(--colour-border)!important;
       }
@@ -334,7 +335,7 @@ table.border-0 {
 // #endregion
 
 // #region CTA column
-@include media-breakpoint-up(sm) {
+@container (width > 23.4375em) {
 
   :is(iam-table) {
     
@@ -369,7 +370,7 @@ table.border-0 {
       top: auto;
       z-index: 3;
       background: transparent;
-      width: calc(var(--cta-width) + 1.5rem);
+      width: calc(var(--cta-width) + 1rem);
       padding-left: rem(40);
       margin-left: rem(-40);
       min-height: var(--row-height);
@@ -388,6 +389,7 @@ table.border-0 {
 
       a {
         white-space: nowrap;
+        padding-right: 0.2rem;
       }
     }
 
