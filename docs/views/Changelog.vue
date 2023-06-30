@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.7.3</h2>
+      <ul>
+        <li>Minor non-breaking bug fixes</li>
+      </ul>
+
       <h2>V3.7.2</h2>
       <ul>
         <li>Updates to the ajax table functionality to include cancelling old fetches, allow for columns to write from an array returned in the json and better config for empty table messages.</li>

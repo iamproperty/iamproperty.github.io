@@ -510,6 +510,17 @@ dialog::backdrop {
 }
 
 // Show hide the indidual or multiple label
+.dialog__wrapper :is(.empty, .individual) {
+  display: none;
+}
+
+@supports selector(:has(*)) {
+
+  .dialog__wrapper :is(.empty, .individual) {
+    display: inline;
+  }
+}
+
 .dialog__wrapper:has(input:checked) .empty,
 .dialog__wrapper:not(:has(input:checked)) .individual,
 .dialog__wrapper:has(input:checked ~ input:checked) .individual,

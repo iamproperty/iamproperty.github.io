@@ -15,6 +15,7 @@ class iamTable extends HTMLElement {
     let classList = this.classList.toString();
 
     classList = classList.replace('table--cta','');
+    classList = classList.replace('table--loading','');
 
     const template = document.createElement('template');
     template.innerHTML = `
