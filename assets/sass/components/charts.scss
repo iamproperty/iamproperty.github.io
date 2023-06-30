@@ -986,3 +986,87 @@ input[type="radio"]:not([value="pie"])[value="stacked"]:checked ~ .chart__wrappe
   }
 }
 // #endregion
+
+
+
+
+
+
+
+
+
+// #region Modifiers
+
+// #region Display data modifier class
+:host(.chart--display-data) {
+  table tbody tr {
+
+    td:not(:first-child) {
+      
+      span {
+        &:before {
+          display: none;
+        }
+        opacity: 1!important;
+        z-index: var(--index-above);
+        top: 0%;
+        transform: translate(-50%, 0%)!important;
+        display: block!important;
+        height: fit-content;
+        
+        margin: 0;
+      }
+    }
+  }
+
+  #{$bar-chart} table tbody tr td:not(:first-child) {
+    span {
+      top: 50%;
+      right: 0;
+      left: 0;
+      transform: translate(0%, -50%)!important;
+      text-align: right;
+      width: calc(100% - 0.4rem);
+      min-width: fit-content;
+      padding: 0 0.1rem;
+      border-radius: 0;
+    }
+  }
+
+  #{$scatter-line-chart} table tbody tr td:not(:first-child) {
+    span {
+      bottom: 0.25rem;
+      top: auto;
+    }
+  }
+
+  #{$line-chart} .lines~table tbody tr td:not(:first-child):not(:hover) {
+    opacity: 1;
+  }
+}
+// #endregion
+
+// #region show chart totals
+:host(.chart--show-totals) {
+  .chart__key {
+    .key {
+      
+      .chart__total {
+        display: flex;
+        font-size: var(--label-size);
+        font-weight: bold;
+        line-height: 1;
+      }
+
+      .chart__total__number {
+        margin-right: 1rem;
+      }
+      .chart__total__percent {
+        margin-left: auto;
+      }
+    }
+  }
+}
+// #endregion
+
+// #endregion 

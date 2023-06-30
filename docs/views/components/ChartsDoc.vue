@@ -1,6 +1,6 @@
 <template>
   <main>
-   <div class="container">
+   <div class="container pb-5 mb-5">
    <ul class="breadcrumb mb-0 d-sm-none">
       <li><a href="/components">Components</a></li>
    </ul>
@@ -11,13 +11,226 @@
     
    <div class="container visualtest">      
       <h2>Default chart</h2>
-      <Chart :fields="fields" :items="items" :data-max="max" :data-min="min" data-yaxis="£0,£10,£20,£50,£100"></Chart>
+      <Chart class="chart chart--animate chart--show-totals" data-max="1800" data-min="0" data-type="column" data-yaxis="0,200,400,600,800,1000,1200,1400,1600,1800">
+         <table>
+            <thead>
+               <tr>
+                  <th>Month</th>
+                  <th>Deaths due to Covid</th>
+                  <th>Deaths involving Covid</th>
+               </tr>
+            </thead>
+            <tbody>
+            <tr>
+                  <td>Mar-20</td>
+                  <td>46</td>
+                  <td>55</td>
+            </tr>
+            <tr>
+                  <td>Apr-20</td>
+                  <td>1320</td>
+                  <td>1450</td>
+            </tr>
+            <tr>
+                  <td>May-20</td>
+                  <td>600</td>
+                  <td>680</td>
+            </tr>
+            <tr>
+                  <td>Jun-20</td>
+                  <td>195</td>
+                  <td>225</td>
+            </tr>
+            <tr>
+                  <td>Jul-20</td>
+                  <td>40</td>
+                  <td>50</td>
+            </tr>
+            <tr>
+                  <td>Aug-20</td>
+                  <td>33</td>
+                  <td>60</td>
+            </tr>
+            <tr>
+                  <td>Sep-20</td>
+                  <td>40</td>
+                  <td>50</td>
+            </tr>
+            <tr>
+                  <td>Oct-20</td>
+                  <td>230</td>
+                  <td>300</td>
+            </tr>
+            <tr>
+                  <td>Nov-20</td>
+                  <td>720</td>
+                  <td>850</td>
+            </tr>
+            <tr>
+                  <td>Dec-20</td>
+                  <td>1100</td>
+                  <td>1220</td>
+            </tr>
+            <tr>
+                  <td>Jan-21</td>
+                  <td>1580</td>
+                  <td>1730</td>
+            </tr>
+            <tr>
+                  <td>Feb-21</td>
+                  <td>740</td>
+                  <td>850</td>
+            </tr>
+            <tr>
+                  <td>Mar-21</td>
+                  <td>190</td>
+                  <td>220</td>
+            </tr>
+            <tr>
+                  <td>Apr-21</td>
+                  <td>40</td>
+                  <td>50</td>
+            </tr>
+            <tr>
+                  <td>May-21</td>
+                  <td>20</td>
+                  <td>30</td>
+            </tr>
+            <tr>
+                  <td>Jun-21</td>
+                  <td>5</td>
+                  <td>10</td>
+            </tr>
+            <tr>
+                  <td>Jul-21</td>
+                  <td>50</td>
+                  <td>70</td>
+            </tr>
+            <tr>
+                  <td>Aug-21</td>
+                  <td>90</td>
+                  <td>100</td>
+            </tr>
+            <tr>
+                  <td>Sep-21</td>
+                  <td>220</td>
+                  <td>300</td>
+            </tr>
+            <tr>
+                  <td>Oct-21</td>
+                  <td>300</td>
+                  <td>350</td>
+            </tr>
+            <tr>
+                  <td>Nov-21</td>
+                  <td>320</td>
+                  <td>380</td>
+            </tr>
+            <tr>
+                  <td>Dec-21</td>
+                  <td>180</td>
+                  <td>205</td>
+            </tr>
+            <tr>
+                  <td>Jan-22</td>
+                  <td>215</td>
+                  <td>350</td>
+            </tr>
+            <tr>
+                  <td>Feb-22</td>
+                  <td>100</td>
+                  <td>180</td>
+            </tr>
+            <tr>
+                  <td>Mar-22</td>
+                  <td>130</td>
+                  <td>198</td>
+            </tr>
+            <tr>
+                  <td>Apr-22</td>
+                  <td>190</td>
+                  <td>270</td>
+            </tr>
+            <tr>
+                  <td>May-22</td>
+                  <td>60</td>
+                  <td>100</td>
+            </tr>
+            <tr>
+                  <td>Jun-22</td>
+                  <td>40</td>
+                  <td>60</td>
+            </tr>
+            <tr>
+                  <td>Jul-22</td>
+                  <td>110</td>
+                  <td>195</td>
+            </tr>
+            <tr>
+                  <td>Aug-22</td>
+                  <td>100</td>
+                  <td>150</td>
+            </tr>
+            <tr>
+                  <td>Sep-22</td>
+                  <td>90</td>
+                  <td>100</td>
+            </tr>
+            </tbody>
+         </table>
+      </Chart>
    </div>
 
 
    <div class="container visualtest">      
       <h2>Bar chart</h2>
-      <Chart :fields="fields" :items="items" :data-max="max" :data-min="min" data-yaxis="£0,£10,£20,£50,£100" data-type="bar"></Chart>
+      <Chart class="chart chart--display-data chart--animate" data-max="50" data-min="0" data-type="bar" data-yaxis="45%">
+      
+         <table>
+              <thead>
+                  <tr>
+                      <th>Issue</th>
+                      <th>Democrat</th>
+                      <th>Republican</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <td>Inflation</td>
+                      <td>45%</td>
+                      <td>18%</td>
+                  </tr>
+                  <tr>
+                      <td>Abortion</td>
+                      <td>12%</td>
+                      <td>43%</td>
+                  </tr>
+                  <tr>
+                      <td>Gun policy</td>
+                      <td>8%</td>
+                      <td>14%</td>
+                  </tr>
+                  <tr>
+                      <td>Immigration</td>
+                      <td>15%</td>
+                      <td>5%</td>
+                  </tr>
+                  <tr>
+                      <td>Crime</td>
+                      <td>13%</td>
+                      <td>10%</td>
+                  </tr>
+              </tbody>
+          </table>
+
+          <figcaption>
+            <p class="chart__title">National exit poll: Issues by party</p>
+            <p class="chart__strapline">Which issue mattered most in deciding how to vote</p>
+            <p>Sample size: 4,636 respondents.</p>
+            <p>Figures may not sum to 100 and all figures have a margin of error</p>
+            <p class="chart__source">Source: Edison Research/NEP via Reuters, 9 Nov, 00.18 EST (0.518 GMT)</p>
+          </figcaption>
+      </Chart>
    </div>
 
 
@@ -124,7 +337,7 @@
 
    <div class="container visualtest">      
       <h2>Scatter chart</h2>
-      <Chart data-type="scatter" data-min="0" data-max="700" data-guidelines="0,100,200,300,400,500,600,700" data-increment="0.1" data-start="10" data-end="26" data-xaxis="10,12,14,16,18,20,22,24,26" data-slope data-yint>
+      <Chart data-type="scatter" data-min="0" data-max="700" data-yaxis="0,100,200,300,400,500,600,700" data-increment="0.1" data-start="10" data-end="26" data-xaxis="10,12,14,16,18,20,22,24,26" data-slope data-yint>
          <table>
               <thead>
                   <tr class="">

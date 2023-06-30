@@ -4,7 +4,7 @@ import { ucfirst, unsnake, numberOfDays } from './helpers'
 export const setupChart = (chartElement:any,chartOuter:any,tableElement:any,chartKey:any,chartGuidelines:any,chartYaxis:any) => {
 
 
-  let {xaxis,slope} = getChartData(chartElement,chartOuter);
+  let {xaxis,slope,type} = getChartData(chartElement,chartOuter);
 
   setCellData(chartElement,chartOuter,tableElement);
 
@@ -12,9 +12,7 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any,char
   createChartGuidelines(chartElement,chartOuter,chartGuidelines);
   createChartYaxis(chartElement,chartOuter,chartYaxis);
 
-
-
-  const availableTypes = chartElement.hasAttribute('data-types') ? chartElement.getAttribute('data-types').split(',') : [];
+  const availableTypes = chartElement.hasAttribute('data-types') ? chartElement.getAttribute('data-types').split(',') : [type];
 
   if(availableTypes.includes('line')){
     createLines(chartElement,chartOuter);
@@ -27,6 +25,15 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any,char
 
   if(chartElement.hasAttribute('data-slope')) // Need to check attribute is there not its value
     createSlope(chartElement,chartOuter);
+
+
+  if(chartElement.classList.contains('chart--show-totals'))
+    createKeyTotals(chartElement,chartOuter);
+
+
+
+  if(availableTypes.includes('bar') || availableTypes.includes('dumbbell') || availableTypes.includes('responsive'))
+    setLongestLabel(chartElement,chartOuter);
 
   return true;
 };
@@ -325,6 +332,26 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
     }
   });
 }
+
+export const setLongestLabel = function(chartElement:any,chartOuter:any){
+  let chartWrapper = chartOuter.querySelector('.chart__wrapper');
+  let table = chartOuter.querySelector('.chart table');
+  // set the longest label attr so that the bar chart knows what margin to set on the left
+  let longestLabel = '';
+  Array.from(table.querySelectorAll('tbody tr td:first-child')).forEach((td: any) => {
+    if(typeof td.textContent != "undefined" && td.textContent.length > longestLabel.length)
+      longestLabel = td.textContent;
+  });
+  chartWrapper.setAttribute('data-longest-label',longestLabel);
+
+  // set the longest data set attr so that the bar chart knows what margin to set on the left
+  let longestSet = '';
+  Array.from(table.querySelectorAll('thead tr th')).forEach((td: any) => {
+    if(td.textContent.length > longestSet.length)
+      longestSet = td.textContent;
+  });
+  chartWrapper.setAttribute('data-set-label',longestSet);
+};
 // #endregion
 
 // #region CREATE function
@@ -448,7 +475,7 @@ export const createChartYaxis = function(chartElement:any,chartOuter:any,chartYa
 
 export const createXaxis = function(chartElement:any,chartOuter:any,xaxis:any){
 
-  const chartWrapper = chartOuter.querySelector('.chart__wrapper');
+  const chart = chartOuter.querySelector('.chart');
   let chartXaxis = chartOuter.querySelector('.chart__xaxis');
 
   let {increment,start,end} = getChartData(chartElement,chartOuter);
@@ -467,7 +494,7 @@ export const createXaxis = function(chartElement:any,chartOuter:any,xaxis:any){
       chartXaxis.innerHTML += `<div class="axis__point" style="--percent:${position}%;"><span>${xaxis[i]}</span></div>`;
     }
   }
-  chartWrapper.prepend(chartXaxis);
+  chart.prepend(chartXaxis);
 }
 
 
@@ -556,17 +583,17 @@ export const createSlope = function(chartElement:any,chartOuter:any){
 
   let {min,max,start,end,slope,yInt} = getChartData(chartElement,chartOuter);
 
-  let chartWrapper = chartOuter.querySelector('.chart__wrapper');
+  let chart = chartOuter.querySelector('.chart');
   let slopeWrapper = chartOuter.querySelector('.slope');
 
   if(!slopeWrapper){
 
     slopeWrapper = document.createElement("div");
     slopeWrapper.setAttribute('class','slope');
-    chartWrapper.prepend(slopeWrapper);
+    chart.prepend(slopeWrapper);
   }
 
-  Array.from(chartWrapper.querySelectorAll('tbody tr')).forEach((tr:any) => {
+  Array.from(chart.querySelectorAll('tbody tr')).forEach((tr:any) => {
 
     const display = getComputedStyle(tr).display;
     if(display != "none"){
@@ -602,6 +629,59 @@ export const createSlope = function(chartElement:any,chartOuter:any){
   let { percent: lastYPercent } = getValues(chartElement,lastY,min,max);
 
   slopeWrapper.innerHTML = `<svg viewBox="0 0 200 100" class="line" preserveAspectRatio="none"><path fill="none" d="M 0 ${100-firstYPercent} L 200 ${100-lastYPercent}" style="--path: path('M 0 100 L 200 100');"></path></svg>`;
+}
+
+
+function createKeyTotals(chartElement:any,chartOuter:any){
+
+  let chartTotal = 0;
+
+  Array.from(chartOuter.querySelectorAll('tbody tr:not([data-total]) td[data-numeric]:not([data-label="Min"]):not([data-label="Max"]):not(:first-child)')).forEach((td:any) => {
+
+    const value = Number.parseFloat(td.getAttribute('data-numeric'));
+    chartTotal += value;
+  });
+  // Get row totals already worked out
+  Array.from(chartOuter.querySelectorAll('tbody tr[data-total]')).forEach((tr:any) => {
+
+    const value = Number.parseFloat(tr.getAttribute('data-total'));
+    chartTotal += value;
+  });
+
+  chartElement.setAttribute('data-total',chartTotal);
+
+  Array.from(chartOuter.querySelectorAll('.chart__key .key[data-label]')).forEach((key:any) => {
+
+    if(key.querySelector('.chart__total'))
+      key.querySelector('.chart__total').remove();
+
+    let label = key.getAttribute('data-label');
+    let keyTotal:any = 0;
+
+    Array.from(chartOuter.querySelectorAll(`tbody td[data-label="${label}"]`)).forEach((td:any) => {
+
+      const value = Number.parseFloat(td.getAttribute('data-numeric'));
+      keyTotal += value;
+    });
+
+    let keyPercent = Math.round((keyTotal/chartTotal)*100);
+
+    if(chartElement.hasAttribute('data-currency')){
+      
+      if (chartElement.getAttribute('data-currency') == "GBP") {
+        // @ts-ignore
+        keyTotal = new Intl.NumberFormat('en-GB', { style: 'currency', currency: 'GBP', trailingZeroDisplay: 'stripIfInteger' }).format(keyTotal);
+      }
+    }
+    else if(chartElement.hasAttribute('data-total-format')){
+      keyTotal = chartElement.getAttribute('data-total-format').replace('{i}',keyTotal);
+    }
+    else {
+      keyTotal = new Intl.NumberFormat('en-GB').format(keyTotal);
+    }
+
+    key.innerHTML += `<span class="chart__total"><span class="chart__total__number"><span class="visually-hidden">Total: </span>${keyTotal}</span><span class="chart__total__percent"><span class="visually-hidden">Total percent: </span>${keyPercent}%</span></span>`;
+  });
 }
 
 // #endregion
