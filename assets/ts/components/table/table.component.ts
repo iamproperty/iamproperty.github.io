@@ -8,6 +8,7 @@ class iamTable extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
+    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
 
     const isCTA = this.classList.contains('table--cta');
     const isExportable = this.classList.contains('table--export');
@@ -20,7 +21,7 @@ class iamTable extends HTMLElement {
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${assetLocation}/css/core.min.css";
+    @import "${coreCSS}";
 
     :host(.mh-sm){
       max-height: none!important;
@@ -31,6 +32,8 @@ class iamTable extends HTMLElement {
     :host(.mh-lg){
       max-height: none!important;
     }
+    
+    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     ${isCTA ? '<div class="table--cta">' : ''}
     <div class="table__wrapper ${classList}">

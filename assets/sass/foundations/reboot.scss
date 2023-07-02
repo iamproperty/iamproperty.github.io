@@ -1,3 +1,4 @@
+@use "sass:math";
 @use "../_func" as *;
 
 @import "../../bootstrap/scss/_reboot.scss";
@@ -141,8 +142,7 @@ details {
 
 
 // #region Undefined web components
-:is(iam-header,iam-accordion):not(.loaded) {
-  background: var(--colour-light);
+:is(*):not(:defined) {
   display: block;
   padding: rem(24);
   margin-bottom: rem(24);
@@ -152,7 +152,7 @@ details {
   max-width: 80rem;
 }
 
-main > :is(iam-header,iam-accordion):not(.loaded) {
+main > :is(*):not(:defined) {
 
   padding: var(--container-padding);
   padding-top: 1rem;
@@ -160,14 +160,18 @@ main > :is(iam-header,iam-accordion):not(.loaded) {
 
 @include media-breakpoint-up(md) {
     
-  main > :is(iam-header,iam-accordion):not(.loaded) {
+  main > :is(*):not(:defined) {
     max-width: 100%!important;
-    padding-inline: calc(50% - #{rem(1112/2)});
+    padding-inline: calc(50% - #{rem(math.div(1112,2))});
+  }
+
+  iam-header:not(:defined) {
+    min-height: rem(470);
   }
 }
 
 iam-card:not(:defined) {
-  box-shadow: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow);
   border-radius: var(--card-border-radius);
   padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
 }

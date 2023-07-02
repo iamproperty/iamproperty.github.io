@@ -7,7 +7,7 @@
 
 <script>
 // Load web components
-import iamAppliedFilters from '../../../assets/ts/components/applied-filters/applied-filters.component'
+import iamAppliedFilters from '../../../assets/js/components/applied-filters/applied-filters.component.min.js'
 
 // Register components
 if (!window.customElements.get('iam-applied-filters'))

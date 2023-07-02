@@ -7,7 +7,7 @@
 
 <script>
 // Load web components
-import iamFilterlist from '../../../assets/ts/components/filterlist/filterlist.component'
+import iamFilterlist from '../../../assets/js/components/filterlist/filterlist.component.min.js'
 
 // Register components
 if (!window.customElements.get('iam-filterlist'))

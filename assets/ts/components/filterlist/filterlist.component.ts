@@ -14,11 +14,13 @@ class iamFilterlist extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
+    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
+    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
+    
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${assetLocation}/css/core.min.css";
+    @import "${coreCSS}";
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     
     :host {
