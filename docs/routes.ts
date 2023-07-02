@@ -208,11 +208,27 @@ const routes = [
       },
       {
         path: 'dialog',
-        name: 'Dialog (Modal and popover)',
+        name: 'Dialog',
         meta: {
-          title: 'Dialog (Modal and popover) | Components | iamkey'
+          title: 'Dialog | Components | iamkey'
         },
         component: () => import('./views/components/DialogDoc.vue')
+      },
+      {
+        path: 'modal',
+        name: 'Dialog (Modal)',
+        meta: {
+          title: 'Dialog (Modal) | Components | iamkey'
+        },
+        component: () => import('./views/components/ModalDoc.vue')
+      },
+      {
+        path: 'popover',
+        name: 'Dialog (Popover)',
+        meta: {
+          title: 'Dialog (Popover) | Components | iamkey'
+        },
+        component: () => import('./views/components/PopoverDoc.vue')
       },
       {
         path: 'form',
@@ -621,46 +637,6 @@ const routes = [
         component: () => import('./views/standalone/PrintExampleSingle.vue')
       },
       {
-        path: 'client-dashboard',
-        name: "Client Dashboard",
-        meta: {
-          title: 'Client Dashboard | iamkey'
-        },
-        component: () => import('./views/standalone/ClientDashboard/index.vue')
-      },
-      {
-        path: 'client-risk',
-        name: "Client risk",
-        meta: {
-          title: 'Client Dashboard | iamkey'
-        },
-        component: () => import('./views/standalone/ClientDashboard/risk.vue')
-      },
-      {
-        path: 'client-legal',
-        name: "Client legal",
-        meta: {
-          title: 'Client Dashboard | iamkey'
-        },
-        component: () => import('./views/standalone/ClientDashboard/legal.vue')
-      },
-      {
-        path: 'client-legal-selected',
-        name: "Client legal selected",
-        meta: {
-          title: 'Client Dashboard | iamkey'
-        },
-        component: () => import('./views/standalone/ClientDashboard/legalSelected.vue')
-      },
-      {
-        path: 'client-method',
-        name: "Client method",
-        meta: {
-          title: 'Client method | iamkey'
-        },
-        component: () => import('./views/standalone/ClientDashboard/method.vue')
-      },
-      {
         path: 'agent-dashboard',
         name: "Agent dashboard",
         meta: {
@@ -700,31 +676,6 @@ const routes = [
       {
         path: '',
         component: () => import('./views/prototype/Index.vue')
-      },
-      {
-        path: 'client-login',
-        name: 'Client login',
-        component: () => import('./views/prototype/clientLogin.vue')
-      },
-      {
-        path: 'survey',
-        name: 'Survey - In platform',
-        component: () => import('./views/prototype/survey/inplatform.vue')
-      },
-      {
-        path: 'survey-client-onboarding',
-        name: 'Survey - Client onboarding',
-        component: () => import('./views/prototype/survey/clientOnboarding.vue')
-      },
-      {
-        path: 'survey-client-dashboard',
-        name: 'Survey - Client dashboard',
-        component: () => import('./views/prototype/survey/clientDashboard.vue')
-      },
-      {
-        path: 'survey-client-dashboard-2',
-        name: 'Survey - Client dashboard 2',
-        component: () => import('./views/prototype/survey/clientDashboard2.vue')
       }
     ]
   },

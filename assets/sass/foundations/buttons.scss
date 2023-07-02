@@ -37,7 +37,11 @@
   padding: calc(rem(12) - 2px) calc(rem(40) - 2px);
   border-radius: rem(24);
   margin-bottom: var(--btn-margin);
-  margin-right: var(--btn-margin);
+
+  &:not(:last-child){
+
+    margin-right: var(--btn-margin);
+  }
   transition: background .5s, color .5s;
   height: auto;
   max-width: fit-content;
@@ -185,7 +189,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   &.btn-secondary:is(:hover, :focus, .hover, :active, .active, :focus-within):not([disabled]) {
     background-color: var(--colour);
-    color: var(--colour-primary);
+    color: var(--colour-primary-theme);
 
     &:is(.colour-primary,.colour-dark,.colour-danger,.colour-black) {
       color: var(--colour-inverted);
@@ -199,6 +203,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   --colour-btn-bg-hover: var(--colour);
   --colour-btn-border-hover: var(--colour);
+  --colour-btn-hover: var(--colour-primary-theme);
   position: relative;
   padding-left: rem(56);
   padding-right: rem(56);
@@ -208,7 +213,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
     padding-left: rem(40);
     padding-right: rem(40);
-
+    
     &:before {
       content: "\f00c";
       font-family: "Font Awesome 6 Pro";
@@ -300,24 +305,16 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 // #region button that opens up a filter dialog
 .btn-filter {
   &:after {
-    content: "";
-  
+    content: "\f1de";
     display: inline-block;
     margin-left: 1em;
     margin-bottom: -0.15em;
     height: 1em;
     width: 1em;
     z-index: var(--index-focus);
-    background: currentColor;
-    mask-image: var(--icon-filter);
-    mask-size: 100%;
-    mask-repeat: no-repeat;
-    mask-position: 50% 50%;
-    -webkit-mask-image: var(--icon-filter);
-    -webkit-mask-size: 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: 50% 50%;
-
+    color: currentColor;
+    font-weight: 300;
+    font-family: "Font Awesome 6 Pro";
   }
 }
 // #endregion

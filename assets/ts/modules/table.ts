@@ -11,7 +11,7 @@ export const addDataAttributes = (table) => {
   colRows.forEach((row, index) => {
 
     const cells = Array.from(row.querySelectorAll('th, td'));
-    const statuses = ['Low','Medium','High','N/A','Pending','Verified','Incomplete','Completed','Requires approval'];
+    const statuses = ['0','low','medium','high','unknown','n/a','pending','verified','incomplete','completed','requires approval'];
     
     cells.forEach((cell, cellIndex) => {
 
@@ -28,11 +28,11 @@ export const addDataAttributes = (table) => {
 
         if(heading.hasAttribute('data-format')){
           cell.setAttribute('data-format',heading.getAttribute('data-format'))
-          cell.innerHTML = formatCell('date',cell.textContent.trim()); //Make sure date format is consistent
+          cell.innerHTML = formatCell(heading.getAttribute('data-format'),cell.textContent.trim()); //Make sure date format is consistent
         }
 
-        if(statuses.includes(cell.textContent.trim())){
-          cell.setAttribute('data-content',cell.textContent.trim());
+        if(statuses.includes(cell.textContent.trim().toLowerCase())){
+          cell.setAttribute('data-content',cell.textContent.trim().toLowerCase());
         }
       }
     });
@@ -43,20 +43,18 @@ export const getLargestLastColWidth = (table) => {
  
   let largestWidth = 0;
 
-  Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
 
     let htmlStyles = window.getComputedStyle(document.querySelector('html'));
     let lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
 
     if(lastColChild){
 
+      lastColChild.classList.add('text-nowrap');
       let responsiveWidth = lastColChild.offsetWidth/parseFloat(htmlStyles.fontSize);
-      responsiveWidth += 1.5;
+      responsiveWidth += 1.7;
       largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
     }
-
-    let rowHeight = row.offsetHeight/parseFloat(htmlStyles.fontSize);
-    row.style.setProperty("--row-height", `${rowHeight}rem`);
   });
 
   return largestWidth;
@@ -67,14 +65,17 @@ export const createMobileButton = (table) => {
   if(table.closest('.table--fullwidth'))
     return false;
 
+  if(table.querySelectorAll('thead tr th').length < 4)
+    return false;
+
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     let firstCol = row.querySelector(':scope > :is(td,th):first-child');
+
     let colContent = firstCol.textContent;
 
     if(colContent != "")
       firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-none">${colContent}</button>`;
     else {
-        
       let secondCol = row.querySelector(':scope > :is(td,th):nth-child(2)');
       let secondColContent = secondCol.textContent;
       secondCol.innerHTML =`<span class="td__content">${secondColContent}</span><button type="button" class="d-none">${secondColContent}</button>`;
@@ -139,10 +140,19 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   var timer;
 
   // Check what conditions are set on the table to see what the form actions are
-  let formSubmit = function(){
-      
-    if(form.hasAttribute('data-ajax'))
+  let formSubmit = function(paginate = false){
+
+    if(form.hasAttribute('data-ajax')){
+
+      // Default back to page 1
+      if(!paginate){
+        let paginationInput = form.querySelector('[data-pagination]');
+        paginationInput.value = 1;
+        wrapper.setAttribute('data-page', 1);
+      }
+
       loadAjaxTable(table, form, pagination,wrapper);
+    }
     else if(form.hasAttribute('data-submit'))
       form.submit();
     else {
@@ -195,6 +205,11 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
         
       formSubmit();
     }
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-mimic]')){
+        
+      formSubmit();
+    }
   });
 
 
@@ -241,6 +256,86 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   form.addEventListener('force', (event) => {
 
     formSubmit();
+  });
+
+  form.addEventListener('paginate', (event) => {
+
+    formSubmit(true);
+  });
+
+
+  
+
+  // Mmimic fields
+  let forms = [];
+  let fields = [];
+
+  // Collect the forms that we need to add an event listener for.
+  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input, index) => {
+    
+    let mimicField = input.getAttribute('data-mimic');
+
+    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput, index) => {
+
+      let parentForm = mimicInput.closest('form');
+
+      if(!forms.includes(parentForm))
+        forms.push(parentForm);
+
+      if(!fields.includes(mimicField))
+        fields.push(mimicField);
+      
+    });
+  });
+
+
+  // For each form add change listener
+  forms.forEach((parentForm, index) => {
+
+    const updateMimicInput = function(){
+      let mimickedAlready = [];
+      let formData = new FormData(parentForm);
+      
+      let i = 1;
+      for (const [key, value] of formData) {
+
+        if(document.querySelector(`[data-mimic="${key}"]`) && !mimickedAlready.includes(key)){
+
+          mimickedAlready.push(key);
+          document.querySelector(`[data-mimic="${key}"]`).value = value;
+        }
+        else if(document.querySelector(`[data-mimic="${key}"]`))
+          document.querySelector(`[data-mimic="${key}"]`).value += ","+value;
+
+        i++;
+      }
+
+      for (const value of mimickedAlready) {
+        const event = new Event("force");
+        form.dispatchEvent(event);
+      }
+
+
+      // Check for empties
+      for (const field of fields) {
+        if(!formData.has(field) && parentForm.querySelector(`[name="${field}"]`)){
+          
+          document.querySelector(`[data-mimic="${field}"]`).value = "";
+          
+          const event = new Event("force");
+          form.dispatchEvent(event);
+        }
+      }
+
+    }
+
+    parentForm.addEventListener('force', (event) => {
+      updateMimicInput();
+    });
+
+    parentForm.addEventListener('change', (event) => {
+      updateMimicInput();
+    });
   });
 }
 
@@ -350,12 +445,14 @@ export const filterTable = (table, form, wrapper) => {
         filters[filterInput.getAttribute('data-filter')].push(value);
       }
     }
-    else if (filterInput.value) {
+    else if (filterInput && filterInput.value) {
 
-      if(!filters[filterInput.getAttribute('data-filter')])
-        filters[filterInput.getAttribute('data-filter')] = new Array();
+      let dataFilter = filterInput.getAttribute('data-filter');
 
-      filters[filterInput.getAttribute('data-filter')].push(filterInput.value);
+      if(!filters[dataFilter])
+        filters[dataFilter] = new Array();
+
+      filters[dataFilter].push(filterInput.value);
     }
 
   });
@@ -383,16 +480,9 @@ export const filterTable = (table, form, wrapper) => {
       element.innerHTML += `(${filters.length})`;
     });
   }
-
-  // Stop function if no filters identified
-  if(!Object.keys(searches).length && !Object.keys(filters).length)
-    return false;
   
-  table.classList.add('table--filtered');
-
-
   // Filter the table
-
+  table.classList.add('table--filtered');
   for (const [key, filterValue] of Object.entries(filters)) {
     
     Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
@@ -504,8 +594,10 @@ export const filterTable = (table, form, wrapper) => {
     matched++;
 
     row.classList.add('filtered--matched');
+
     // pagination bit 
-    if(Math.ceil(matched/showRows) == parseInt(page))
+    let matchesPage = Math.ceil(matched/showRows);
+    if(matchesPage == parseInt(page))
       row.classList.add('filtered--show');
   });
 
@@ -518,7 +610,7 @@ export const filterTable = (table, form, wrapper) => {
 
 }
 
-export const populateDataQueries = (table,form) => {
+export const populateDataQueries = (table,form,wrapper) => {
 
   const dataQueries = Array.from(form.querySelectorAll('[data-query]'));
 
@@ -528,7 +620,10 @@ export const populateDataQueries = (table,form) => {
     let numberOfMatchedRows: 0;
 
     if(query == 'total'){
-      numberOfMatchedRows = table.classList.contains('table--filtered') ? table.querySelectorAll('tbody tr').length : table.querySelectorAll('tbody tr').length;
+      if(wrapper.hasAttribute('data-total'))
+        numberOfMatchedRows = wrapper.getAttribute('data-total');
+      else
+        numberOfMatchedRows = table.classList.contains('table--filtered') ? table.querySelectorAll('tbody tr').length : table.querySelectorAll('tbody tr').length;
     }
     else if(!query.includes(' == ') && query.includes(' & ')){
 
@@ -593,11 +688,14 @@ export const addPaginationEventListeners = function(table, form, pagination, wra
       let newPage = event.target.closest('[data-page]').getAttribute('data-page');
       paginationInput.value = newPage;
       wrapper.setAttribute('data-page', newPage);
-      form.dispatchEvent(new Event("submit"));
+      form.dispatchEvent(new Event("paginate"));
 
-      const url = new URL(location);
-      url.searchParams.set("page", newPage);
-      history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
+      if(table.hasAttribute('data-show-history')){
+          
+        const url = new URL(location);
+        url.searchParams.set("page", newPage);
+        history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
+      }
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
@@ -671,101 +769,187 @@ export const exportAsCSV = function(table){
 // After table is loaded
 export const makeTableFunctional = function(table, form, pagination, wrapper){
 
-  createMobileButton(table);
   addDataAttributes(table);
-  populateDataQueries(table, form);
+  createMobileButton(table);
+  populateDataQueries(table, form, wrapper);
   
   // Work out the largest width of the CTA's in the last column
   if(wrapper && wrapper.classList.contains('table--cta')){
 
     const largestWidth = getLargestLastColWidth(table);
     wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
+
+    function outputsize() {
+
+      Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+        let rowHeight = row.offsetHeight;
+        row.style.setProperty("--row-height", `${rowHeight}px`);
+      });
+    }
+    
+    new ResizeObserver(outputsize).observe(table)
   }
 }
 
-export const loadAjaxTable = function (table, form, pagination, wrapper){
+
+
+export const loadAjaxTable = async function (table, form, pagination, wrapper){
 
   const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
 
-  let queryString = new URLSearchParams(new FormData(form)).toString();
+  let formData = new FormData(form);
+  let queryString = new URLSearchParams(formData).toString();
   let columns = table.querySelectorAll('thead tr th');
   let tbody = table.querySelector('tbody');
+  let ajaxURL = form.getAttribute('data-ajax');
 
-  fetch(form.getAttribute('data-ajax'), {
-    method: 'get',
-    credentials: 'same-origin',
-    headers: new Headers({
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      'X-Requested-With': 'XMLHttpRequest'
+  wrapper.classList.add('table--loading');
+  
+  // Setup controller vars if not already set
+  if(!window.controller)
+    window.controller = [];
+
+  // Abort if controller already present for this url
+  if(window.controller[ajaxURL])
+    window.controller[ajaxURL].abort();
+
+  // Create a new controller so it can be aborted if new fetch made
+  window.controller[ajaxURL] = new AbortController();
+  const { signal } = controller[ajaxURL];
+
+  try {
+    await fetch(ajaxURL+'?'+queryString, {
+      signal: signal,
+      method: 'get',
+      credentials: 'same-origin',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      })
     })
-  }).then((response) => response.json()).then((response) => {
+    .then((response) => response.json()).then((response) => {
 
-    if (response.data) {
+      let schema = form.hasAttribute('data-schema') ? form.getAttribute('data-schema') : 'data';
+      let totalNumberSchema = form.hasAttribute('data-schema-total') ? form.getAttribute('data-schema-total') : 'meta.total';
+      let currentPageSchema = form.hasAttribute('data-schema-page') ? form.getAttribute('data-schema-page') : 'meta.current_page';
 
-      tbody.innerHTML = '';
+      let totalNumber = resolvePath(response, totalNumberSchema, 1);
+      let currentPage = resolvePath(response, currentPageSchema, 1);
+      let data = resolvePath(response, schema);
+      let emptyMsg = wrapper.hasAttribute('data-empty-msg') ? wrapper.getAttribute('data-empty-msg') : "No results found";
+      
+      if (data) {
 
-      response.data.forEach((row, index) => {
+        tbody.innerHTML = '';
 
-        var table_row = document.createElement('tr');
+        data.forEach((row, index) => {
 
-        columns.forEach((col, index) => {
+          var table_row = document.createElement('tr');
 
-          let cellOutput = '';
-          var table_cell  = document.createElement('td');
-          // Add some data to help with the mobile layout design
-          table_cell.setAttribute('data-label',col.innerText);
+          columns.forEach((col, index) => {
 
-          if(col.getAttribute('data-output')){
-            var cellTemplate = col.getAttribute('data-output');
-            // Use a regex to replace {var} with actual values from the json data
-            cellOutput = cellTemplate.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(row, matched.replace('{','').replace('}','')); });
-          }
+            let cellOutput = '';
+            var table_cell  = document.createElement('td');
+            // Add some data to help with the mobile layout design
+            table_cell.setAttribute('data-label',col.innerText);
 
-          if(col.hasAttribute('data-format')){
-            cellOutput = formatCell(col.getAttribute('data-format'),cellOutput);
-          }
+            if(col.getAttribute('data-output')){
+              var cellTemplate = col.getAttribute('data-output');
+              // Use a regex to replace {var} with actual values from the json data
+              cellOutput = cellTemplate.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(row, matched.replace('{','').replace('}','')); });
+            }
 
-          table_cell.innerHTML = cellOutput;
-          table_row.appendChild(table_cell)
+            // If an output array is defined then the content is going to made of of multiple values from an array
+            if(col.hasAttribute('data-output-array')){
+              
+              var cellTemplate = col.getAttribute('data-output');
+              let arrValue = resolvePath(row, cellTemplate.replace('{','').replace('}',''));
+
+              cellOutput = "";
+              arrValue.forEach((rowValue, i) => {
+
+                let cellTemplateValue = col.getAttribute('data-output-array');
+                let cellOutputValue = "";
+
+                // If we need to transform some of the data
+                if(col.hasAttribute('data-output-array-property') && col.hasAttribute('data-output-array-transform')){
+
+                  const propertyValue = resolvePath(rowValue, col.getAttribute('data-output-array-property'));
+                  const transforms = JSON.parse(col.getAttribute('data-output-array-transform'));
+                  const transformValue = transforms[propertyValue];
+
+                  cellOutputValue = cellTemplateValue.replace(`{${col.getAttribute('data-output-array-property')}}`,transformValue);
+                }
+
+                cellOutputValue = cellOutputValue.replace( new RegExp(/{(.*?)}/,"gm"), function(matched){ return resolvePath(rowValue, matched.replace('{','').replace('}','')); });
+                cellOutput += cellOutputValue;
+              });
+            }
+
+
+            if(col.hasAttribute('data-transform')){
+
+              const transforms = JSON.parse(col.getAttribute('data-transform'));
+              cellOutput = transforms[cellOutput];
+
+              if(!cellOutput && col.hasAttribute('data-default'))
+                cellOutput = col.getAttribute('data-default');
+            }
+
+            table_cell.innerHTML = cellOutput;
+            table_row.appendChild(table_cell)
+          });
+
+          tbody.appendChild(table_row)
         });
 
-        tbody.appendChild(table_row)
-          
-      });
+        createSearchDataList(table, form)
+        // Add data to the pagination 
+        wrapper.setAttribute('data-total', parseInt(totalNumber));
+        wrapper.setAttribute('data-page', parseInt(currentPage));
+        wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
-      createSearchDataList(table, form)
-      // Add data to the pagination 
-      makeTableFunctional(table, form, pagination, wrapper);
+        makeTableFunctional(table, form, pagination, wrapper);
+        createPaginationButttons(wrapper, pagination);
 
-      wrapper.setAttribute('data-total', (response.meta.total ? response.meta.total : 1));
-      wrapper.setAttribute('data-page', (response.meta.current_page ? response.meta.current_page : 1));
-      wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
+        if(parseInt(totalNumber) == 0){
+          tbody.innerHTML = `<tr><td colspan="100%"><span>${emptyMsg}</span></td></tr>`;
+        }
 
-      createPaginationButttons(wrapper, pagination);
+        wrapper.classList.remove('table--loading');
 
-      if(response.data.length == 0){
-        tbody.innerHTML = '<tr><td colspan="100%"><span class="h4 m-0">No results found</span></td></tr>';
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          "event": "Ajax table loaded",
+          "url": ajaxURL,
+          "formData": queryString
+        });
       }
-      
-    }
-    else {
-      tbody.innerHTML = '<tr><td colspan="100%"><span class="h6 m-0">Error loading table</span></td></tr>';
-    }
+      else {
+        tbody.innerHTML = '<tr><td colspan="100%"><span>Error loading table</span></td></tr>';
+      }
 
-  });
+      // Pass post data back to the page
+      if(form.hasAttribute('data-ajax-post')){
+        const http = new XMLHttpRequest()
+        http.open('GET', `${window.location.href}?ajax=true&${queryString}`);
+        http.send();
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const formatCell = (format, cellOutput) => {
 
   switch (format) {
+    case 'datetime':
+      return new Date(cellOutput).toLocaleDateString('en-gb', { weekday: 'short', year:"2-digit", month:"long", day: "numeric", }) + " " + new Date(cellOutput).toLocaleTimeString("en-gb", { hour: "2-digit", minute: "2-digit"});
     case 'date':
-      cellOutput = new Date(cellOutput).toLocaleDateString('en-gb', { year:"2-digit", month:"long", day: "numeric"});
-    break;
+      return new Date(cellOutput).toLocaleDateString('en-gb', { year:"2-digit", month:"long", day: "numeric"});
     case 'capitalise':
-      cellOutput = ucfirst(cellOutput);
-    break;
+      return cellOutput = ucfirst(cellOutput);
   }
-  
-  return cellOutput;
 }

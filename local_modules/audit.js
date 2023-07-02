@@ -29,11 +29,6 @@ var logoSize = formatBytes(logoStat.size);
 summary['logo_size'] = logoSize;
 console.log("- Logo SVG: "+logoSize);
 
-var iconsStat = fs.statSync(path.join('./assets/svg/icons.svg'));
-var iconsSize = formatBytes(iconsStat.size);
-summary['icons_size'] = iconsSize;
-console.log("- Icons SVG: "+iconsSize);
-
 // Images
 var assets_size = 0;
 

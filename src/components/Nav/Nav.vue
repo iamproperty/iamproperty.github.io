@@ -126,14 +126,12 @@
 import nav from '../../../assets/ts/modules/nav'
 import Logo from '../../foundations/Logo/Logo.vue'
 import Input from '../../components/Input/Input.vue'
-import Icon from '../../foundations/Icon/Icon.vue'
 
 
 export default {
   components: {
     Input,
-    Logo,
-    Icon
+    Logo
   },
   name: 'Nav',
   props: {

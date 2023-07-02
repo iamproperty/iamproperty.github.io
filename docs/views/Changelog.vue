@@ -3,10 +3,49 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.5.1--alpha</h2>
+      <h2>V3.7.3</h2>
       <ul>
+        <li>Minor non-breaking bug fixes</li>
+      </ul>
+
+      <h2>V3.7.2</h2>
+      <ul>
+        <li>Updates to the ajax table functionality to include cancelling old fetches, allow for columns to write from an array returned in the json and better config for empty table messages.</li>
+      </ul>
+
+      <h2>V3.7.1</h2>
+      <ul>
+        <li>Updates to the ajax table functionality</li>
+      </ul>
+
+      <h2>V3.7.0</h2>
+      <ul>
+        <li>Update icons to just use font awesome ones</li>
+        <li>Update the dialogs</li>
+        <li>Bug fixes</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>The dialog javaScript is split out into a new fill and requires a new function to be called on the body.</li>
+        <li>Old SVG icons have been removed</li>
+      </ul>
+
+      <h2>V3.6.0</h2>
+      <ul>
+        <li>Major overhaul of the colours</li>
+        <li>Dark mode support added</li>
+        <li>High contrast mode support started</li>
         <li>Update to Admin panels documentation</li>
         <li>Minor button amends</li>
+        <li>Update to dialog (modal / popover) documentation</li>
+        <li>Update to dialog style, max height and width</li>
+        <li>Update to Cards component when icon is included</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Updates to the colors should not break if they have been implented correctly. But if Sass variables have been used some of the names may have changed.</li>
       </ul>
 
       <h2>V3.5</h2>

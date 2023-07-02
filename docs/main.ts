@@ -6,6 +6,8 @@ import routes from './routes'
 import audit from '../audit.json';
 import * as helpers from '../assets/ts/modules/helpers'
 
+import extendDialogs from '../assets/ts/modules/dialogs';
+
 
 import createDataLayer from '../assets/ts/modules/data-layer'
 
@@ -62,8 +64,10 @@ const themeColours = Object.keys(cssVars).reduce( (arr, key) => {
 const secondaryColours = {...themeColours};
 delete secondaryColours["Primary"];
 delete secondaryColours["Secondary"];
+delete secondaryColours["Warning"];
 delete secondaryColours["Canvas"];
 delete secondaryColours["Light"];
+delete secondaryColours["White"];
 
 // Filters the CSS vars object to pull out the non-theme colours
 const nonThemeColours = Object.keys(cssVars).reduce(function (arr, key) {
@@ -81,13 +85,13 @@ delete extendedColours["Body"];
 
 // Filters the CSS vars object to pull out the non-theme colours
 const darkModeColours = Object.keys(cssVars).reduce(function (arr, key) {
-  if (key.startsWith('darkModeColour_')) {
-    let updateKey = key.replace('darkModeColour_', '')
+  if (key.startsWith('darkModeColour_') || key.startsWith('darkModeFunctionalColour_')) {
+    let updateKey = key.replace('darkModeColour_', '').replace('darkModeFunctionalColour_', '')
     updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
     arr[updateKey] = cssVars[key]
   }
   return arr
-}, {})
+}, {});
 
 
 // Filters the CSS vars object to pull out the aspect ratios
@@ -122,3 +126,15 @@ app.use(router).mount('#app')
 
 helpers.addBodyClasses(document.body);
 helpers.addGlobalEvents(document.body);
+helpers.addGlobalEvents(document.body);
+extendDialogs(document.body);
+
+const hasDarkPreference = window.matchMedia(
+  "(prefers-color-scheme: dark)"
+).matches;
+
+if (hasDarkPreference) {
+  document.documentElement.className = "dark-theme";
+} else {
+  document.documentElement.className = "light-theme";
+}

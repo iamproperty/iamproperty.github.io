@@ -42,7 +42,7 @@
       
       <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
         <span class="row">
-          <span class="col mw-fit-content"><Icon id="tick-list" class="fs-1 m-0"></Icon></span>
+          <span class="col mw-fit-content"></span>
           <span class="col">
             <span Class="h5 mb-1">Quick start guide & FAQ</span>
             <span class="text-muted small">
@@ -54,7 +54,7 @@
       
       <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
         <span class="row">
-          <span class="col mw-fit-content"><Icon id="chat" class="fs-1 m-0 p-1"></Icon></span>
+          <span class="col mw-fit-content"></span>
           <span class="col">
             <span Class="h5 mb-1">Contact us</span>
             <span class="text-muted small">
@@ -158,15 +158,13 @@ import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.
 import Nav from '@/components/Nav/Nav.vue'
 import Input from '@/components/Input/Input.vue'
 import Logo from '@/foundations/Logo/Logo.vue'
-import Icon from '@/foundations/Icon/Icon.vue'
 
 export default {
   components: {
     PropertySearchbar,
     Nav,
     Input,
-    Logo,
-    Icon
+    Logo
   },
 }
 </script>

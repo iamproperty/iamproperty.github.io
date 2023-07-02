@@ -15,6 +15,7 @@ class iamTable extends HTMLElement {
     let classList = this.classList.toString();
 
     classList = classList.replace('table--cta','');
+    classList = classList.replace('table--loading','');
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -52,6 +53,9 @@ class iamTable extends HTMLElement {
     if(!this.hasAttribute('data-show'))
       this.setAttribute('data-show', 15);
 
+    if(!this.hasAttribute('data-increment'))
+      this.setAttribute('data-increment', 15);
+
     this.setAttribute('data-pages', Math.ceil(this.getAttribute('data-total') / this.getAttribute('data-show')));
   }
 
@@ -66,18 +70,25 @@ class iamTable extends HTMLElement {
     if(this.hasAttribute('data-filterby')){
 
       this.form = document.querySelector(`#${this.getAttribute('data-filterby')}`);
-
-      // Create a data list if a search input is present
-      tableModule.createSearchDataList(this.table, this.form);
-
-      if(!this.form.querySelector('[data-page]')){
-        this.form.innerHTML += `<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`
-      }
-      if(!this.form.querySelector('[data-show]')){
-        this.form.innerHTML += `<input name="show" type="hidden" value="${this.getAttribute('data-show')}" data-show="true" />`
-      }
+    }
+    else {
+      
+      this.table.parentNode.insertBefore(this.form, this.table.nextSibling);
     }
 
+    // Set ajax class
+    if(this.form.hasAttribute('data-ajax'))
+      this.table.classList.add('table--ajax');
+
+    // Create a data list if a search input is present
+    tableModule.createSearchDataList(this.table, this.form);
+
+    if(!this.form.querySelector('[data-page]')){
+      this.form.innerHTML += `<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`
+    }
+    if(!this.form.querySelector('[data-show]')){
+      this.form.innerHTML += `<input name="show" type="hidden" value="${this.getAttribute('data-show')}" data-show="true" />`
+    }
 
     // Event listeners
     tableModule.addTableEventListeners(this.table);
@@ -97,8 +108,12 @@ class iamTable extends HTMLElement {
 
     this.shadowRoot.querySelector('.table__wrapper').addEventListener("scroll", (event) => {
 
-      if(this.table.querySelector('dialog[open]'))
+      if(this.table.querySelector('dialog[open]')){
+        
         this.table.querySelector('dialog[open]').close();
+        this.table.querySelector('.dialog__wrapper > button.active').classList.remove('active');
+      }
+
     });
   }
 
