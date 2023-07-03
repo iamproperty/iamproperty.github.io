@@ -1,85 +1,173 @@
 @use "../_func.scss" as *;
 
+
+@mixin tooltip(){
+
+  display: block;
+  z-index: var(--index-floating);
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: auto;
+  right: 0.85em;
+  width: #{rem(270)};
+  transform: translate(50%,0);
+  background: var(--colour-primary);
+  color: var(--colour-white);
+  padding: rem(24);
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11); 
+
+  > strong:first-child {
+    display: block;
+    padding-bottom: 1rem;
+  }
+
+  @include media-breakpoint-up(sm) {
+
+    width: #{rem(335)}; 
+  }
+  
+  @include media-breakpoint-up(md) {
+
+    width: #{rem(360)}; 
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -0.25rem;
+    border-width: 0.5rem;
+    border-style: solid;
+    border-color: transparent transparent var(--colour-primary) transparent;
+    margin-bottom: -1px;
+  }
+
+}
+
+
+
 :is(abbr[title], .tooltip) {
 
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  text-decoration-thickness: 2px;
-  text-decoration-style: dashed;
-  text-decoration-color: var(--colour-underline);
+  text-decoration: none;
   position: relative;
-  cursor: help;
 
   &:is(:hover, :focus, :active){
 
     text-decoration: none;
   }
-}
-
-@mixin tooltip(){
-
-  display: block;
-  z-index: var(--index-above);
-  position: absolute;
-  top: calc(100% + 0.25rem);
-  left: 50%;
-  min-width: max(120%, #{rem(100)});
-  transform: translate(-50%,0);
-  background: var(--colour-canvas-2);
-  color: inherit;
-  padding: 0.5em;
-  border-radius: 3px;
-  box-shadow: 1px 1px 3px 1px rgba(0,0,0,0.3);
-}
-
-.tooltip {
-
 
   &:after{
 
-    content: "";
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 900;
+    content: "\f059";
     display: inline-block;
-    margin-left: 0.1em;
+    margin-left: 0.2em;
+    margin-right: 0.1em;
     margin-bottom: 0.1em;
-    width: 0.8em;
-    height: 0.9em;
-    vertical-align: text-bottom;
-    background: currentColor;
-    mask-image: var(--icon-question);
-    mask-size: 100%;
-    mask-repeat: no-repeat;
-    mask-position: 50% 50%;
-    -webkit-mask-image: var(--icon-question);
-    -webkit-mask-size: 100%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: 50% 50%;
+    color: var(--colour-primary);
+
   }
 
-  .tooltip__content {
+  > span {
 
     opacity: 0;
     position: absolute;
     
   }
 
-  &:is(:hover, :focus, :active){
+  &:is(:hover, .hover, :focus, :active){
 
-    .tooltip__content {
+    > span {
 
       opacity: 1;
       @include tooltip();
     }
   }
-}
 
-@media (hover: none) {
-  
-  :is(abbr[title], .tooltip[title]) {
-
-    &:is(:hover, :focus, :active):before{
+  &.tooltip--top span{
       
-      content: attr(title);
-      @include tooltip();
+    top: auto;
+    bottom: calc(100% + 0.5rem);
+    left: auto;
+    right: 0.85em;
+
+    &:after {
+        
+      top: 100%;
+      bottom: auto;
+      left: 50%;
+      border-color: var(--colour-primary) transparent transparent transparent;
+      margin-top: -1px;
     }
+  }
+
+
+  &.shift--left span{
+    transform: translate(calc(0% + 1.5rem), 0);
+
+    &:after {
+      left: calc(100% - 1.5rem);
+    }
+  }
+  &.shift--right span{
+    transform: translate(calc(100% - 1rem), 0);
+
+    &:after {
+      left: 1rem;
+    }
+  }
+
+  
+  @include media-breakpoint-up(sm) {
+
+    &:is(.shift--left,.shift--right) span{
+      transform: translate(50%, 0);
+  
+      &:after {
+        left: 50%
+      }
+    }
+
+    &.tooltip--left span{
+      
+      top: 50%;
+      bottom: auto;
+      left: auto;
+      right: 1.6em;
+  
+      transform: translate(0,-50%);
+  
+      &:after {
+          
+        top: calc(50% - 0.5em);
+        bottom: auto;
+        left: calc(100% + 0.25em - 1px);
+        border-color: transparent transparent transparent var(--colour-primary);
+        margin-bottom: 0;
+      }
+    }
+    &.tooltip--right span{
+        
+      top: 50%;
+      bottom: auto;
+      left: calc(100% + 0.5rem);
+      right: auto;
+  
+      transform: translate(0,-50%);
+  
+      &:after {
+          
+        top: calc(50% - 0.5em);
+        bottom: auto;
+        left: auto;
+        right: calc(100% - 1px);
+        border-color: transparent var(--colour-primary) transparent transparent;
+        margin-bottom: 0;
+      }
+    }
+
   }
 }
