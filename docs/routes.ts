@@ -223,6 +223,14 @@ const routes = [
         component: () => import('./views/components/ModalDoc.vue')
       },
       {
+        path: 'nonmodal',
+        name: 'Dialog (Non-Modal)',
+        meta: {
+          title: 'Dialog (Non-Modal) | Components | iamkey'
+        },
+        component: () => import('./views/components/NonModalDoc.vue')
+      },
+      {
         path: 'popover',
         name: 'Dialog (Popover)',
         meta: {
