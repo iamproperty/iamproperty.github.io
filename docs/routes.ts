@@ -444,14 +444,6 @@ const routes = [
           title: 'Timeline | Components | iamkey'
         },
         component: () => import('./views/components/TimelineDoc.vue')
-      },
-      {
-        path: 'tooltips',
-        name: 'Tooltips',
-        meta: {
-          title: 'Tooltips | Elements | iamkey'
-        },
-        component: () => import('./views/components/TooltipsDoc.vue')
       }
     ]
   },
