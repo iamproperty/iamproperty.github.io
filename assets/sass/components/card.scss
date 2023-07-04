@@ -58,10 +58,9 @@
   }
 
   &:is(:hover,:focus,.hover) {
-    --icon-right: 0.5rem;
+    --card-icon-right: 0.5rem;
     outline: 2px solid var(--colour, var(--colour-primary));
     outline-offset: -2px;
-
   }
   
   // Update arrow cololur
@@ -76,7 +75,7 @@
   }
 
   &:is(:active, .active){
-    --icon-right: 0.5rem;
+    --card-icon-right: 0.5rem;
     outline: none;
     
     &:before {

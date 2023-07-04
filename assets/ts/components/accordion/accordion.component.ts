@@ -8,20 +8,21 @@ window.dataLayer.push({
   "element": "accordion"
 });
 
-const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
-
 class iamAccordion extends HTMLElement {
 
   constructor(){
     super();
     this.attachShadow({ mode: 'open'});
-
+    
+    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
+    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
+    const loadCSS = `@import "${assetLocation}/css/components/accordion.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${assetLocation}/css/core.min.css";
-    @import "${assetLocation}/css/components/accordion.css";
+    @import "${coreCSS}";
+    ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="accordion">
@@ -34,9 +35,6 @@ class iamAccordion extends HTMLElement {
 	connectedCallback() {
 
     accordion(this);
-
-    // Load in the component CSS into the root so we can style the content of the component
-    this.insertAdjacentHTML("beforebegin", `<link rel="stylesheet" href="${assetLocation}/css/components/accordion.css">`)
   }
 }
 
