@@ -188,6 +188,11 @@
           </thead>
           <tbody class="text-body">
             <tr>
+              <td>V2 added</td>
+              <td>04.07.2023</td>
+              <td>Changes to status icons</td>
+            </tr>
+            <tr>
               <td>V1 added</td>
               <td>15.06.2023</td>
               <td>N/A</td>
@@ -225,9 +230,10 @@ export default {
       statusIcons: [
         {title: "Complete", class: "fa-regular fa-check text-complete"},
         {title: "Approval required", class: "fa-light fa-flag text-warning"},
-        {title: "Incomplete", class: "fa-light fa-flag text-danger"},
-        {title: "Error", class: "fa-light fa-circle-exclamation text-danger"},
+        {title: "Overdue", class: "fa-light fa-flag text-danger"},
+        {title: "Not Started/To do", class: "fa-light fa-flag text-muted"},
         {title: "Warning", class: "fa-light fa-triangle-exclamation text-warning"},
+        {title: "Error", class: "fa-light fa-circle-exclamation text-danger"},
         {title: "Low priority", class: "fa-regular fa-dash text-complete"},
         {title: "Medium priority", class: "fa-regular fa-grip-lines text-warning"},
         {title: "High priority", class: "fa-regular fa-chevrons-up text-danger"}
