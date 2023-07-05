@@ -515,7 +515,7 @@ table {
     [data-content="verified"],
     [data-content="not started"],
     [data-content="completed"],
-    .alert-status:not([data-content="0"])
+    .alert-status:not([data-content="0"]):not([data-content=""])
     ) {
     
     position: relative;
@@ -587,10 +587,10 @@ table {
     color: var(--colour-complete);
   }
 
-  .alert-status:not([data-content="0"]):not(:empty):after {
+  .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty):after {
 
-    content: "\f06a";
+    content: "\f0f3";
     font-weight: light;
-    color: var(--colour-danger);
+    color: var(--colour-primary);
   }
 }
