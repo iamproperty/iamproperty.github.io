@@ -3,9 +3,10 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.7.4--alpha</h2>
+      <h2>V3.7.4</h2>
       <ul>
         <li>Popovers</li>
+        <li>Update table status icons</li>
       </ul>
 
       <h3>Breaking changes</h3>
