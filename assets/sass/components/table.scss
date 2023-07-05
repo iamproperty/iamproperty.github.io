@@ -510,12 +510,17 @@ table {
     [data-content="medium"],
     [data-content="high"],
     [data-content="unknown"],
+    [data-content="overdue"],
     [data-content="incomplete"],
     [data-content="requires approval"],
+    [data-content="approval required"],
+    [data-content="warning"],
     [data-content="verified"],
     [data-content="not started"],
+    [data-content="to do"],
     [data-content="completed"],
-    .alert-status:not([data-content="0"])
+    [data-content="complete"],
+    .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty)
     ) {
     
     position: relative;
@@ -566,31 +571,38 @@ table {
     color: var(--colour-muted);
   }
 
-  :is([data-content="not started"],[data-content="incomplete"]):after {
+  :is([data-content="overdue"],[data-content="incomplete"]):after {
 
     content: "\f024";
     font-weight: light;
     color: var(--colour-danger);
   }
 
-  [data-content="requires approval"]:after {
+  :is([data-content="not started"],[data-content="to do"]):after {
+
+    content: "\f024";
+    font-weight: light;
+    color: var(--colour-muted);
+  }
+
+  :is([data-content="requires approval"],[data-content="approval required"],[data-content="warning"]):after {
 
     content: "\f024";
     font-weight: light;
     color: var(--colour-warning);
   }
 
-  :is([data-content="verified"],[data-content="completed"]):after {
+  :is([data-content="verified"],[data-content="completed"],[data-content="complete"]):after {
     
     content: "\f00c";
     font-weight: normal;
     color: var(--colour-complete);
   }
 
-  .alert-status:not([data-content="0"]):not(:empty):after {
+  .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty):after {
 
-    content: "\f06a";
+    content: "\f0f3";
     font-weight: light;
-    color: var(--colour-danger);
+    color: var(--colour-primary);
   }
 }

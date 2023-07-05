@@ -3,6 +3,17 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.7.4</h2>
+      <ul>
+        <li>Popovers</li>
+        <li>Update table status icons</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Some of the dialog utility classes have changed</li>
+      </ul>
+
       <h2>V3.7.3</h2>
       <ul>
         <li>Minor non-breaking bug fixes</li>

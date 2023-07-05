@@ -100,17 +100,13 @@ const extendDialogs = (body) => {
     // Popover
     if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')){
 
-      // Close existing open popover
-
       let btn = event.target.closest('.dialog__wrapper > button');
       let parent = event.target.closest('.dialog__wrapper > button').parentNode;
       let dataEvent = "openPopover"
       let popover = parent.querySelector(':scope > dialog');
       
-
       if(document.querySelector('dialog[open]') && document.querySelector('dialog[open]') != popover)
         document.querySelector('dialog[open]').close();
-
 
       // Remove active class from exiting active buttons
       Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
@@ -166,6 +162,17 @@ const extendDialogs = (body) => {
         "id": btn.textContent
       });
     };
+
+    // Close popovers when clicked away
+    if (event && event.target instanceof HTMLElement && !event.target.closest('dialog[open]') && !event.target.closest('.dialog__wrapper > button')){
+      
+      if(document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]'))
+        document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]').close();
+
+      Array.from(document.querySelectorAll('.dialog__wrapper:not([data-keep-open]) > button')).forEach((btnElement,index) => {
+        btnElement.classList.remove('active');
+      });
+    }
   });
 
   return null

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import iamTable from '../../../assets/ts/components/table/table.component'
+import iamTable from '../../../assets/js/components/table/table.component.min.js'
 import { ucfirst, unsnake } from '../../helpers/strings'
 
 export default {
