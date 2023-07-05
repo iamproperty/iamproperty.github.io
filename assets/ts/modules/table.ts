@@ -696,6 +696,11 @@ export const addPaginationEventListeners = function(table, form, pagination, wra
         url.searchParams.set("page", newPage);
         history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
       }
+
+      // scroll back to the top of the table
+      const yOffset = -250;
+      const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
@@ -776,8 +781,12 @@ export const makeTableFunctional = function(table, form, pagination, wrapper){
   // Work out the largest width of the CTA's in the last column
   if(wrapper && wrapper.classList.contains('table--cta')){
 
-    const largestWidth = getLargestLastColWidth(table);
-    wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
+    if(!wrapper.hasAttribute('data-cta-width')){
+        
+      const largestWidth = getLargestLastColWidth(table);
+      wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
+      wrapper.setAttribute("data-cta-width", `${largestWidth}rem`);
+    }
 
     function outputsize() {
 
@@ -910,7 +919,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
         wrapper.setAttribute('data-page', parseInt(currentPage));
         wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
-        makeTableFunctional(table, form, pagination, wrapper);
+        makeTableFunctional(table, form, pagination, wrapper);        
         createPaginationButttons(wrapper, pagination);
 
         if(parseInt(totalNumber) == 0){
