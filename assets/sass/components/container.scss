@@ -10,7 +10,6 @@
   margin-right: auto;
   padding: var(--container-padding);
   width: 100%;
-  container-type: inline-size;
 
   &:not(.container-fluid) {
     max-width: rem(1280);
