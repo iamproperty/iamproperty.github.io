@@ -1,6 +1,14 @@
 // @ts-nocheck
 //import createPaginationButttons from "../../modules/pagination";
 
+// Data layer Web component created
+window.dataLayer = window.dataLayer || [];
+window.dataLayer.push({
+  "event": "customElementRegistered",
+  "element": "Notification"
+});
+
+
 class iamNotification extends HTMLElement {
 
   constructor(){
@@ -33,7 +41,6 @@ class iamNotification extends HTMLElement {
 
     this.classList.add(`bg-${statusBG}`);
 
-
     switch(statusBG) {
       case 'danger':
         this.innerHTML += '<i class="fa-light fa-circle-exclamation" aria-hidden="true" slot="icon"></i>';
@@ -42,13 +49,11 @@ class iamNotification extends HTMLElement {
         this.innerHTML += '<i class="fa-light fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>';
         break;
       case 'success':
-        this.innerHTML += '<i class="fa-regular fa-check-circle" aria-hidden="true" slot="icon"></i>';
+        this.innerHTML += '<i class="fa-light fa-check-circle" aria-hidden="true" slot="icon"></i>';
         break;
       default:
-        this.innerHTML += '<i class="fa-light fa-circle-exclamation" aria-hidden="true" slot="icon"></i>';
+        this.innerHTML += '<i class="fa-light fa-circle-info" aria-hidden="true" slot="icon"></i>';
     }
-
-
   }
 }
 

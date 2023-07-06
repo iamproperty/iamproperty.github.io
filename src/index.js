@@ -24,3 +24,5 @@ export { default as NoteFeed } from './components/NoteFeed/NoteFeed.vue'
 
 export { default as AppliedFilters } from './components/AppliedFilters/AppliedFilters.vue'
 export { default as Filterlist } from './components/Filterlist/Filterlist.vue'
+
+export { default as Notification } from './components/Notification/Notification.vue'
