@@ -1,0 +1,42 @@
+@use "../_func" as *;
+
+:host,
+.iam-notification {
+  display: block;
+  padding: rem(24) rem(24) rem(24) rem(24 - 8);
+  border-radius: rem(8);
+  box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
+  margin-bottom: 1rem;
+  font-size: rem(15);
+  border-left: rem(8) solid transparent;
+}
+
+:host(:not(.bg-danger):not(.bg-warning):not(.bg-success)),
+.iam-notification:not(.bg-danger):not(.bg-warning):not(.bg-success){
+  
+  border-color: var(--colour-info);
+
+  ::slotted(i),
+  i {
+    color: var(--colour-info);
+  }
+}
+
+.notification {
+  color: var(--colour-heading);
+  display: flex;
+
+
+  .notification__icon {
+
+    margin-inline-end: rem(16);
+
+    ::slotted(i) {
+      font-size: rem(18);
+    }
+  }
+
+  .notification__text {
+
+  }
+}

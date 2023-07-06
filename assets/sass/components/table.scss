@@ -151,13 +151,11 @@ table.border-0 {
 // #endregion
 
 // #region Tables are only stacked on mobile
-*:has(> iam-table){
-  container-type: inline-size;
-}
+*:has(> table),*:has(> iam-table),
 *:has(> .iam-table){
   container-type: inline-size;
-  
 }
+
 @container (width < 23.4375em) {
 
   .iam-table, iam-table {

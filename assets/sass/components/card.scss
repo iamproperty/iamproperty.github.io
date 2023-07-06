@@ -224,11 +224,16 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 101%;
-      height: 101%;
+      width: 102%;
+      height: 102%;
       object-fit: cover;
     }
   }
+}
+
+.card.card--lg-image:has(.card__head) .card__head{
+  
+  padding-top: 55%;
 }
 // #endregion
 

@@ -17,6 +17,7 @@ import iamCard from './components/card/card.component'
 import iamAppliedFilters from './components/applied-filters/applied-filters.component'
 import iamPagination from './components/pagination/pagination.component'
 import iamFilterlist from './components/filterlist/filterlist.component'
+import iamNotification from './components/notification/notification.component'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -51,6 +52,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
   if (!window.customElements.get(`iam-applied-filters`))
     window.customElements.define(`iam-applied-filters`, iamAppliedFilters);
+
+  if (!window.customElements.get(`iam-notification`))
+    window.customElements.define(`iam-notification`, iamNotification);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {

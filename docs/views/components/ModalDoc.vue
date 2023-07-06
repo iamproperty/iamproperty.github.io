@@ -86,7 +86,7 @@
     <!-- #endregion -->
 
     <!-- #region Transactional -->
-    <div class="container">
+    <div class="container" id="transactional">
       <h3>Transactional</h3>
       <p>A transactional modal dialog is a type of modal dialog that is used when a user’s action or decision has significant consequences or irreversible effects. Its key characteristic is to ensure that the user fully understands the implications of their action before proceeding.</p>
 
@@ -130,7 +130,7 @@
 
 
     <!-- #region Acknowledgement -->
-    <div class="container">
+    <div class="container" id="acknowledgement">
       <h3>Acknowledgement</h3>
       <p>The purpose of an acknowledgment modal dialog is to obtain explicit consent or confirmation from the user regarding specific information or conditions. It ensures that users are aware of important details and have actively acknowledged them, providing legal or compliance requirements, and establishing a clear understanding between the user and the system or platform.</p>
 
@@ -323,7 +323,7 @@ import modalAcknowledgementAnatomy from '../../img/dialogs/acknowledgement-modal
 
 import {createDialog} from '../../../assets/ts/modules/dialogs';
 
-modalTransactional
+
 export default {
   components: {
     YoutubeVideo,
