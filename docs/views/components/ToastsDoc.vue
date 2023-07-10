@@ -105,7 +105,7 @@
     <div class="notification__holder container" id="example">
       <Notification data-type="toast" data-status="danger"><strong>Just an example</strong><br/> Alert message will display here</Notification>
 
-      <Notification data-type="toast" data-status="danger" data-dismiss data-timeout="12000" ><strong>Just an example</strong><br/> Alert message will display here <a href="/" data-dismiss-button>Retry</a></Notification>
+      <Notification data-type="toast" data-status="danger" data-dismiss><strong>Just an example</strong><br/> Alert message will display here <a href="/" data-dismiss-button>Retry</a></Notification>
     </div>
 
 
