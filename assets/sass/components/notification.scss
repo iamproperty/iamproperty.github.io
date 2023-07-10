@@ -3,12 +3,13 @@
 :host,
 .iam-notification {
   display: block;
-  padding: rem(24) rem(24) rem(24) rem(24 - 8)!important;
+  padding: rem(22) rem(24) rem(22) rem(24 - 8)!important;
   border-radius: rem(8);
   box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
   margin-bottom: 1rem;
   font-size: rem(15);
-  border: 2px solid var(--colour,transparent);
+  border: rem(2) solid var(--colour,var(--colour-info));
+  background: #e9f9fd;
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
   ::slotted(i),
@@ -17,10 +18,28 @@
   }
 }
 
+:host([data-type]),
+.iam-notification[data-type] {
+  
+  border: rem(2) solid transparent;
+}
+
+:host(.colour-warning),
+.iam-notification.colour-warning {
+
+  background: #FFF6E6;
+}
+
 :host(.colour-danger),
 .iam-notification.colour-danger {
 
-  background: #FCEBEC;
+  background: #fcebec;
+}
+
+:host(.colour-success),
+.iam-notification.colour-success {
+
+  background: #f8fdf6;
 }
 
 :host([data-type="alert"]),

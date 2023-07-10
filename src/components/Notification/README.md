@@ -1,7 +1,14 @@
 ```
-<Notification role="alert" id="example" data-type="alert" data-status="danger" data-dismiss="">
+<!-- Inline -->
+<Notification data-status="danger" data-dismiss="">
 <strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
 </Notification>
+
+<!-- Alert -->
+<Notification data-type="alert" data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</Notification>
+
 ```
 
 **Properties**

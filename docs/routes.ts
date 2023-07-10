@@ -430,6 +430,14 @@ const routes = [
         component: () => import('./views/components/AlertDoc.vue')
       },
       {
+        path: 'inline-notification',
+        name: 'System notifications (Inline)',
+        meta: {
+          title: 'System notifications (Inline) | Components | iamkey'
+        },
+        component: () => import('./views/components/InlineDoc.vue')
+      },
+      {
         path: 'tables',
         name: 'Tables',
         meta: {
