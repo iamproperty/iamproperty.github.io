@@ -26,6 +26,8 @@ class iamNotification extends HTMLElement {
       button.classList.add('link');
     });
 
+    if(buttons.length || this.hasAttribute('data-dismiss'))
+      this.classList.add('notification--dismissable');
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -58,18 +60,21 @@ class iamNotification extends HTMLElement {
     
     const wrapper = this;
 
-    switch(statusBG) {
-      case 'danger':
-        this.innerHTML += '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>';
-        break;
-      case 'warning':
-        this.innerHTML += '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>';
-        break;
-      case 'success':
-        this.innerHTML += '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>';
-        break;
-      default:
-        this.innerHTML += '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>';
+    if(!this.querySelector('i')){
+      
+      switch(statusBG) {
+        case 'danger':
+          this.innerHTML += '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>';
+          break;
+        case 'warning':
+          this.innerHTML += '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>';
+          break;
+        case 'success':
+          this.innerHTML += '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>';
+          break;
+        default:
+          this.innerHTML += '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>';
+      }
     }
 
     setupNotification(wrapper);
