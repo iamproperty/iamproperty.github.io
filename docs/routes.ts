@@ -422,6 +422,14 @@ const routes = [
         component: () => import('./views/components/StepperDoc.vue')
       },
       {
+        path: 'system-notifications',
+        name: 'System notifications',
+        meta: {
+          title: 'System notifications | Components | iamkey'
+        },
+        component: () => import('./views/components/SystemNotificationsDoc.vue')
+      },
+      {
         path: 'tables',
         name: 'Tables',
         meta: {
