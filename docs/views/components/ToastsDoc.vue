@@ -126,7 +126,7 @@
         </details>
         <details>
           <summary><h2>HTML</h2></summary>
-          <pre><code class="html">{{`<div class="iam-notification bg-danger" role="alert" id="example" data-type="alert" data-status="danger" data-dismiss="">
+          <pre><code class="html">{{`<div class="iam-notification bg-danger" role="alert" id="example" data-type="toast" data-status="danger" data-dismiss="">
   <div class="notification">
     <div class="notification__icon"><i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i></div>
     <div class="notification__inner">
