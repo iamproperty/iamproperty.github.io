@@ -113,7 +113,7 @@
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/alerts.pdf" download>Download latest designs</a>
+        <a href="/pdfs/inline-notifications.pdf" download>Download latest designs</a>
       </div>
     </div>
   </main>
