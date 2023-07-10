@@ -1,7 +1,6 @@
 <template>
-  <iam-notification role="alert">
+  <iam-notification>
     <slot></slot>
-    <button v-if="dismissible" type="button" class="btn-close" aria-label="Close"></button>
   </iam-notification>
 </template>
 
@@ -11,20 +10,7 @@ import iamNotification from '../../../assets/js/components/notification/notifica
 export default {
   name: 'Notification',
   props: {
-    dismissible: {
-      type: [String,Boolean],
-      required: false,
-      default: false
-    },
-    colour: {
-      type: String,
-      required: false,
-      default: 'primary'
-    },
-    timeout: {
-      type: [String,Number],
-      required: false
-    }
+
   },
   created(){
 

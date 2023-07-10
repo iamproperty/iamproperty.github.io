@@ -50,19 +50,19 @@
 
       <div class="row mb-4">
         <div class="col-sm-6 pe-5">
-          <Notification data-status="danger"><strong>Documents not uploaded:</strong> Subtitle text goes here.</Notification>
+          <Notification data-type="demo" data-status="danger"><strong>Documents not uploaded:</strong> Subtitle text goes here.</Notification>
           <span class="d-block mb-4">Error notification</span>
         </div>
         <div class="col-sm-6 pe-5">
-          <Notification data-status="warning"><strong>Documents not uploaded:</strong> Subtitle text goes here.</Notification>
+          <Notification data-type="demo" data-status="warning"><strong>Documents not uploaded:</strong> Subtitle text goes here.</Notification>
           <span class="d-block mb-4">Warning notification</span>
         </div>
         <div class="col-sm-6 pe-5">
-          <Notification data-status="success"><strong>Documents not uploaded:</strong> Subtitle text goes here.</Notification>
+          <Notification data-type="demo" data-status="success"><strong>Documents not uploaded:</strong> Subtitle text goes here.</Notification>
           <span class="d-block mb-4">Success notification</span>
         </div>
         <div class="col-sm-6 pe-5">
-          <Notification><strong>Documents not uploaded:</strong> Subtitle text goes here.</Notification>
+          <Notification data-type="demo"><strong>Documents not uploaded:</strong> Subtitle text goes here.</Notification>
           <span class="d-block mb-4">Informational notification</span>
         </div>
       </div>

@@ -143,14 +143,6 @@ const routes = [
         component: () => import('./views/components/AccordionDoc.vue')
       },
       {
-        path: 'alert',
-        name: 'Alert',
-        meta: {
-          title: 'Alert | Components | iamkey'
-        },
-        component: () => import('./views/components/AlertDoc.vue')
-      },
-      {
         path: 'applied-filters',
         name: 'Applied Filters',
         meta: {
@@ -428,6 +420,14 @@ const routes = [
           title: 'System notifications | Components | iamkey'
         },
         component: () => import('./views/components/SystemNotificationsDoc.vue')
+      },
+      {
+        path: 'alert',
+        name: 'System notifications (Alert)',
+        meta: {
+          title: 'System notifications (Alert) | Components | iamkey'
+        },
+        component: () => import('./views/components/AlertDoc.vue')
       },
       {
         path: 'tables',

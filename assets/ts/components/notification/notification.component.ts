@@ -1,5 +1,5 @@
 // @ts-nocheck
-//import createPaginationButttons from "../../modules/pagination";
+import setupNotification, { closeNotification } from "../../modules/notification";
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
@@ -18,6 +18,15 @@ class iamNotification extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/notification.css";`;
 
+    const buttons = this.querySelectorAll('a,button');
+
+    Array.from(buttons).forEach((button, index) => {
+
+      button.setAttribute('slot','btns');
+      button.classList.add('link');
+    });
+
+
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
@@ -28,7 +37,8 @@ class iamNotification extends HTMLElement {
 
     <div class="notification">
       <div class="notification__icon"><slot name="icon"></slot></div>
-      <div class="notification__text"><slot></slot></div>
+      <div class="notification__inner"><div class="notification__text"><slot></slot></div>${ buttons.length ? `<div class="notification__btns"><slot name="btns"></slot></div>` : '' }</div>
+      ${ this.hasAttribute('data-dismiss') ? `<div class="notification__dismiss"><button data-dismiss-button>Dismiss</button></div>` : ''}
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -36,23 +46,38 @@ class iamNotification extends HTMLElement {
   }
 
 	connectedCallback() {
-
+    
+    const dismissBtn = this.shadowRoot.querySelector('[data-dismiss-button]');
     const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : 'white'
-
-    this.classList.add(`bg-${statusBG}`);
+    
+    if(this.hasAttribute('data-type'))
+      this.classList.add(`bg-${statusBG}`);
+    else {
+      this.classList.add(`colour-${statusBG}`);
+    }
+    
+    const wrapper = this;
 
     switch(statusBG) {
       case 'danger':
-        this.innerHTML += '<i class="fa-light fa-circle-exclamation" aria-hidden="true" slot="icon"></i>';
+        this.innerHTML += '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>';
         break;
       case 'warning':
-        this.innerHTML += '<i class="fa-light fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>';
+        this.innerHTML += '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>';
         break;
       case 'success':
-        this.innerHTML += '<i class="fa-light fa-check-circle" aria-hidden="true" slot="icon"></i>';
+        this.innerHTML += '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>';
         break;
       default:
-        this.innerHTML += '<i class="fa-light fa-circle-info" aria-hidden="true" slot="icon"></i>';
+        this.innerHTML += '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>';
+    }
+
+    setupNotification(wrapper);
+
+    if(dismissBtn){
+      dismissBtn.addEventListener('click', function(e){
+        closeNotification(wrapper);
+      }, false);
     }
   }
 }

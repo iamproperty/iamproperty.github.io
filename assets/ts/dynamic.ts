@@ -11,7 +11,9 @@ import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
 import youtubeVideo from '../js/modules/youtubevideo'
 
-const components = ['accordion','header','tabs', 'table','card','pagination','filterlist', 'applied-filters','notification'];
+import iamNotification from './components/notification/notification.component'
+
+const components = ['accordion','header','tabs', 'table','card','pagination','filterlist', 'applied-filters'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',
@@ -61,6 +63,10 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.addGlobalEvents(document.body);
   //helpers.checkElements(document.body);
   extendDialogs(document.body);
+
+  
+  if (!window.customElements.get(`iam-notification`))
+    window.customElements.define(`iam-notification`, iamNotification);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
