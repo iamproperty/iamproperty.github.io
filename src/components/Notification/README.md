@@ -9,6 +9,11 @@
 <strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
 </Notification>
 
+<!-- Toast -->
+<Notification data-type="toast" data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</Notification>
+
 ```
 
 **Properties**
