@@ -294,11 +294,13 @@ html #app #visualtest:target ~ main > {
     display: block!important;
     position: static;
     margin-bottom: 3rem;
+    position: relative;
   }
 
   #modal-multi {
     
     display: flex!important;
+    position: relative;
   }
 }
 
