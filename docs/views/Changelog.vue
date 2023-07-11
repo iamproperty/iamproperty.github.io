@@ -3,9 +3,10 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.7.5--alpha</h2>
+      <h2>V3.7.5</h2>
       <ul>
-        <li>SystemNotifications component</li>
+        <li>System Notification components (Alert,inline and toasts)</li>
+        <li>Bug fixes</li>
       </ul>
 
       <h3>Breaking changes</h3>
