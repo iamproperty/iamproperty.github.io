@@ -11,7 +11,7 @@ export const addDataAttributes = (table) => {
   colRows.forEach((row, index) => {
 
     const cells = Array.from(row.querySelectorAll('th, td'));
-    const statuses = ['0','low','medium','high','unknown','n/a','pending','verified','incomplete','completed','requires approval'];
+    const statuses = ['0','low','medium','high','unknown','n/a','pending','verified','overdue','incomplete','complete','completed','approval required','requires approval','to do','not started','warning','error'];
     
     cells.forEach((cell, cellIndex) => {
 

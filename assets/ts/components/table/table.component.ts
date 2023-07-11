@@ -45,6 +45,10 @@ class iamTable extends HTMLElement {
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
+  }
+
+	connectedCallback() {
+
     const params = new URLSearchParams(window.location.search)
     // Set default attributes
     if(!this.hasAttribute('data-total'))
@@ -60,9 +64,6 @@ class iamTable extends HTMLElement {
       this.setAttribute('data-increment', 15);
 
     this.setAttribute('data-pages', Math.ceil(this.getAttribute('data-total') / this.getAttribute('data-show')));
-  }
-
-	connectedCallback() {
 
     this.table = this.querySelector('table');
     this.savedTableBody = this.table.querySelector('tbody').cloneNode(true);
