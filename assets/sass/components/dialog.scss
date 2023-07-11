@@ -37,6 +37,11 @@ dialog[open] {
 // #endregion
 
 // #region modal styling
+
+*:not(.dialog__wrapper) > dialog[open] {
+
+}
+
 *:not(.dialog__wrapper) > dialog[open] {
   overflow-y: hidden;
   width: 90vw;
@@ -135,16 +140,9 @@ dialog[open] {
     max-width: rem(1112);
   }
 
-  container-type: inline-size;
-    
-  @container (width < 23.4375em) {
+  @media screen and (max-width: 36em) {
 
-    > .btn:not(.dialog__close),
-    > form > .btn:not(.dialog__close),
-    > .mh-lg > :is(form,div) > .btn:not(.dialog__close),
-    > .mh-lg > .btn:not(.dialog__close),
-    > form > fieldset > .btn:not(.dialog__close),
-    .btn--wrapper > .btn:not(.dialog__close) {
+    :is(form, fieldset, .btn--wrapper):has(> .btn:first-child, > .btn:last-child) .btn:not(.dialog__close) {
       width: 100%;
       max-width: 100%;
       margin: 0;
@@ -242,6 +240,7 @@ dialog::backdrop {
 
   &:not(:has(fieldset.active)) fieldset:first-of-type{
     display: flex;
+    flex-direction: column;
   }
 
   form > *:not(fieldset) {
@@ -319,6 +318,11 @@ dialog::backdrop {
     }
   }
 
+  @include media-breakpoint-up(sm) {
+    min-width: rem(452);
+    width: rem(452);
+    max-width: rem(452);
+  }
   @include media-breakpoint-up(md) {
     min-width: rem(924);
     width: rem(924);
