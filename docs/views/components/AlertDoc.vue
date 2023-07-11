@@ -114,10 +114,11 @@
       <h2>Component</h2>
     </div>
 
-    <Notification id="example" data-type="alert" data-status="danger" data-dismiss ><strong>Just an example</strong><br/> Alert message will display here <a href="/" data-dismiss-button>Retry</a></Notification>
-
+    <Notification id="example" class="visualtest" data-type="alert" data-status="danger" data-dismiss ><strong>Just an example</strong><br/> Alert message will display here <a href="/" data-dismiss-button>Retry</a></Notification>
+    
     <div class="container">
       <a href="#example">Show in correct page position</a>
+      <a href="#reset">Reset</a>
     </div>
 
     <div class="container">
@@ -178,9 +179,24 @@
   margin-bottom: 3rem;
 }
 
-#example:target ~ div a{
+#example ~ div a + a {
   display: none;
 }
+#example:not(.d-none):target ~ div a:first-child {
+  display: none;
+}
+#example:target ~ div a + a {
+  display: inline-block;
+}
+
+#example.d-none ~ div a:first-child {
+  display: none!important;
+}
+
+#example.d-none ~ div a + a {
+  display: inline-block!important;
+}
+
 </style>
 
 <script>
@@ -207,6 +223,21 @@ import alertDo4 from '../../img/notifications/alert-do4.png'
 import alertDont from '../../img/notifications/alert-dont.png'
 import alertDont2 from '../../img/notifications/alert-dont2.png'
 import alertDont3 from '../../img/notifications/alert-dont3.png'
+
+
+document.addEventListener('click',function(event){
+
+  if (event && event.target instanceof HTMLElement && event.target.closest('[href="#reset"]')){
+
+    let link = event.target.closest('[href="#reset"]');
+  
+    if(document.querySelector('#example'))
+      document.querySelector('#example').classList.remove('d-none');
+    
+    
+  };
+})
+
 
 export default {
   components: {

@@ -16,7 +16,7 @@ function setupNotification(element) {
 
 export const closeNotification = function(element) {
 
-  element.remove();
+  element.classList.add('d-none');
 }
 
 export default setupNotification

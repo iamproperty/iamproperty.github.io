@@ -32,7 +32,7 @@ class iamNotification extends HTMLElement {
     <style>
     @import "${coreCSS}";
     ${loadCSS}
-    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+    ${this.hasAttribute('data-css') ? `${this.getAttribute('data-css')}` : ``}
     </style>
 
     <div class="notification">
