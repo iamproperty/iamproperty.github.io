@@ -1,7 +1,14 @@
 ```
-<iam-notification role="alert" id="example" data-type="alert" data-status="danger" data-dismiss="">
+<!-- Inline -->
+<iam-notification data-status="danger" data-dismiss="">
 <strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
 </iam-notification>
+
+<!-- Alert -->
+<iam-notification data-type="alert" data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</iam-notification>
+
 ```
 
 **Properties**
