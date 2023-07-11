@@ -34,7 +34,11 @@
       </ol>
     </div>
 
-    <div class="container">
+    <div class="container pb-0">
+      <h4>Status</h4>
+      <p>Alerts offer the following message statuses — Informative, success, warning, error.</p>
+    </div>
+    <div class="container pt-0 visualtest">
       <h4>Status</h4>
       <p>Alerts offer the following message statuses — Informative, success, warning, error.</p>
 
@@ -102,7 +106,7 @@
       <h2>Component</h2>
     </div>
 
-    <div class="notification__holder container" id="example">
+    <div class="notification__holder container visualtest" id="example">
       <Notification data-type="toast" data-status="danger"><strong>Just an example</strong><br/> Alert message will display here</Notification>
 
       <Notification data-type="toast" data-status="danger" data-dismiss><strong>Just an example</strong><br/> Alert message will display here <a href="/" data-dismiss-button>Retry</a></Notification>
