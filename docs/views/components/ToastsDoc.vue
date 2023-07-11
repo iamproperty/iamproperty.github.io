@@ -44,19 +44,19 @@
 
       <div class="row mb-4">
         <div class="col-sm-6 pe-5">
-          <Notification data-type="demo"><strong>Timer set</strong><br/> Alert message will display here <a href="/close">Cancel</a></Notification>
+          <Notification data-type="demo"><strong>Timer set</strong><br/> Alert message will display here <a href="/components/toasts">Cancel</a></Notification>
           <span class="d-block mb-4">Informational notification</span>
         </div>
         <div class="col-sm-6 pe-5">
-          <Notification data-type="demo" data-status="success"><strong>Property added</strong><br/> Alert message will display here <a href="/">Undo</a></Notification>
+          <Notification data-type="demo" data-status="success"><strong>Property added</strong><br/> Alert message will display here <a href="/components/toasts">Undo</a></Notification>
           <span class="d-block mb-4">Success notification</span>
         </div>
         <div class="col-sm-6 pe-5">
-          <Notification data-type="demo" data-status="warning"><strong>Action incomplete</strong><br/> Alert message will display here <a href="/">Dismiss</a></Notification>
+          <Notification data-type="demo" data-status="warning"><strong>Action incomplete</strong><br/> Alert message will display here <a href="/components/toasts">Dismiss</a></Notification>
           <span class="d-block mb-4">Warning notification</span>
         </div>
         <div class="col-sm-6 pe-5">
-          <Notification data-type="demo" data-status="danger"><strong>Transaction failed</strong><br/> Alert message will display here <a href="/">Retry</a></Notification>
+          <Notification data-type="demo" data-status="danger"><strong>Transaction failed</strong><br/> Alert message will display here <a href="/components/toasts">Retry</a></Notification>
           <span class="d-block mb-4">Error notification</span>
         </div>
       </div>
