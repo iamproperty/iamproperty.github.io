@@ -43,9 +43,11 @@
 
 
 
-    <div class="container">
+    <div class="container pb-0">
       <h4>Status</h4>
       <p>Inline notifications offer the following message statuses — Informative, success, warning, error.</p>
+    </div>  
+    <div class="container pt-0 visualtest">
 
       <div class="row mb-4">
         <div class="col-sm-6 pe-5">
