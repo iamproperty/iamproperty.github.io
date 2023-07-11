@@ -64,7 +64,7 @@
 
   </head>
   <body>
-    <main>
+    <main style="padding-bottom: 400px;">
       <div class="container mt-5">
         <h1>Flat components</h1>
         <p>The below components are flat HTML and don't use Vue or web components</p>
@@ -244,11 +244,24 @@
         </div>
       </div>
           
-      <div class="container">
+      <div class="container pb-5 mb-5">
         <div class="pagination__wrapper" data-total="120">
           
         </div>
       </div>
+
+
+      <div class="iam-notification bg-danger" role="alert" id="example" data-type="alert" data-status="danger" data-dismiss="">
+        <div class="notification">
+          <div class="notification__icon"><i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i></div>
+          <div class="notification__inner">
+            <div class="notification__text"><strong>Just an example</strong><br> Alert message will display here</div>
+            <div class="notification__btns"><a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a></div>
+          </div>
+          <div class="notification__dismiss"><button data-dismiss-button="">Dismiss</button></div>
+        </div>
+      </div>
+
 
     </main>
 

@@ -13,6 +13,7 @@ import youtubeVideo from '../js/modules/youtubevideo'
 import tabs from '../js/modules/tabs'
 import filterlist from '../js/modules/filterlist'
 import createPaginationButttons from '../js/modules/pagination'
+import setupNotification from '../js/modules/notification'
 
 // Attach classes to dom elements
 document.addEventListener("DOMContentLoaded", function() {
@@ -75,6 +76,13 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('.iam-filterlist')).forEach((arrayElement) => {
     if(arrayElement.hasAttribute('data-input') && document.querySelector(arrayElement.getAttribute('data-input')))
       filterlist(arrayElement.querySelector('ul'),document.querySelector(arrayElement.getAttribute('data-input')));
+  });
+  
+
+  // notification
+  Array.from(document.querySelectorAll('.iam-notification')).forEach((arrayElement) => {
+    if(arrayElement.hasAttribute('data-type'))
+      setupNotification(arrayElement);
   });
   
   Array.from(document.querySelectorAll('.pagination__wrapper')).forEach((arrayElement) => {
