@@ -143,14 +143,6 @@ const routes = [
         component: () => import('./views/components/AccordionDoc.vue')
       },
       {
-        path: 'alert',
-        name: 'Alert',
-        meta: {
-          title: 'Alert | Components | iamkey'
-        },
-        component: () => import('./views/components/AlertDoc.vue')
-      },
-      {
         path: 'applied-filters',
         name: 'Applied Filters',
         meta: {
@@ -420,6 +412,38 @@ const routes = [
           title: 'Stepper | Components | iamkey'
         },
         component: () => import('./views/components/StepperDoc.vue')
+      },
+      {
+        path: 'system-notifications',
+        name: 'System notifications',
+        meta: {
+          title: 'System notifications | Components | iamkey'
+        },
+        component: () => import('./views/components/SystemNotificationsDoc.vue')
+      },
+      {
+        path: 'alert',
+        name: 'System notifications (Alert)',
+        meta: {
+          title: 'System notifications (Alert) | Components | iamkey'
+        },
+        component: () => import('./views/components/AlertDoc.vue')
+      },
+      {
+        path: 'toasts',
+        name: 'System notifications (Toasts)',
+        meta: {
+          title: 'System notifications (Toasts) | Components | iamkey'
+        },
+        component: () => import('./views/components/ToastsDoc.vue')
+      },
+      {
+        path: 'inline-notification',
+        name: 'System notifications (Inline)',
+        meta: {
+          title: 'System notifications (Inline) | Components | iamkey'
+        },
+        component: () => import('./views/components/InlineDoc.vue')
       },
       {
         path: 'tables',

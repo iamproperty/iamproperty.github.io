@@ -65,7 +65,7 @@
 
   </head>
   <body>
-    <main>
+    <main style="padding-bottom: 400px;">
       <div class="container mt-5">
         <h1>Web components</h1>
         <p>All of the below components are built with web components and are loaded dynamically when the component comes into view.</p>
@@ -167,11 +167,35 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container pb-5 mb-5">
         
         <iam-pagination data-total="120"></iam-pagination>
       </div>
 
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-sm-6 pe-5">
+            <iam-notification data-type="demo" data-status="danger"><strong>Documents not uploaded:</strong> Subtitle text goes here.</iam-notification>
+            <span class="d-block mb-4">Error notification</span>
+          </div>
+          <div class="col-sm-6 pe-5">
+            <iam-notification data-type="demo" data-status="warning"><strong>Documents not uploaded:</strong> Subtitle text goes here.</iam-notification>
+            <span class="d-block mb-4">Warning notification</span>
+          </div>
+          <div class="col-sm-6 pe-5">
+            <iam-notification data-type="demo" data-status="success"><strong>Documents not uploaded:</strong> Subtitle text goes here.</iam-notification>
+            <span class="d-block mb-4">Success notification</span>
+          </div>
+          <div class="col-sm-6 pe-5">
+            <iam-notification data-type="demo"><strong>Documents not uploaded:</strong> Subtitle text goes here.</iam-notification>
+            <span class="d-block mb-4">Informational notification</span>
+          </div>
+        </div>
+      </div>
+
+      <iam-notification data-type="alert" data-status="danger" data-dismiss>
+        <strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" class="link">Retry</a>
+      </iam-notification>
 
     </main>
   

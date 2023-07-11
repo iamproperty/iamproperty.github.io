@@ -20,6 +20,9 @@ class iamPagination extends HTMLElement {
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+	connectedCallback() {
 
     // Set default attributes
     const params = new URLSearchParams(window.location.search);
@@ -38,9 +41,7 @@ class iamPagination extends HTMLElement {
 
     this.setAttribute('data-pages', Math.ceil(this.getAttribute('data-total') / this.getAttribute('data-show')));
     createPaginationButttons(this,this.shadowRoot.querySelector('.pagination__wrapper'));
-  }
 
-	connectedCallback() {
     this.shadowRoot.querySelector('.pagination__wrapper').classList.remove('d-none');
   }
 }

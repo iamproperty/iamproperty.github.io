@@ -17,6 +17,23 @@ export const addBodyClasses = (body) => {
     body.classList.add("ie");
   }
 
+  let nav = document.querySelector('nav');
+  if(nav) {
+    let navHeight = nav.offsetHeight;
+    document.querySelector('body').style.setProperty("--nav-height", `${navHeight}px`);
+
+    function outputsize() {
+
+      navHeight = nav.offsetHeight;
+      document.querySelector('body').style.setProperty("--nav-height", `${navHeight}px`);
+    }
+    
+    new ResizeObserver(outputsize).observe(nav);
+  }
+  else {
+    document.querySelector('body').style.setProperty("--nav-height", `0px`);
+  }
+
   return null
 }
 

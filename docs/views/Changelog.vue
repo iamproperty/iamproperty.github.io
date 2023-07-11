@@ -3,6 +3,17 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.7.5</h2>
+      <ul>
+        <li>System Notification components (Alert,inline and toasts)</li>
+        <li>Bug fixes</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Vue alert component has been depreciated and replaced with the notifications component</li>
+      </ul>
+
       <h2>V3.7.4</h2>
       <ul>
         <li>Popovers</li>
