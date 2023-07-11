@@ -9,6 +9,11 @@
 <strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
 </Notification>
 
+<!-- Toast -->
+<Notification data-type="toast" data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</Notification>
+
 ```
 
 **Properties**
@@ -18,6 +23,7 @@
 | data-status | String | info | Choose from danger,succes and warning. This will change the colour of the notification box and which icon is shown. |
 | data-type | String | inline | Choose from alert and toast. This will change the behavour of the component. |
 | data-dismiss | Boolean | - | Adds a close button which will remove the alert box after clicking it. |
+| data-timeout | Boolean | - | Adds a timer for how long the notification will appear. |
 
 **Slots**
 
