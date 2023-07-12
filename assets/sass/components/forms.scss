@@ -1,35 +1,115 @@
 @use "../_func" as *;
 
-.form-control__wrapper {
-  margin-bottom: 1.5rem;
+// #region Form label
+label {
+  font-size: rem(18);
+  line-height: rem(21);
+  margin-bottom: rem(8);
+  font-weight: normal;
+  color: var(--colour-heading);
+  display: block;
+
+  &:has(+ input:not(:disabled):not([readonly]):not(:required)):after {
+    content: " (Optional)";
+  }
+}
+// #endregion
+
+// #region input field
+input {
+  display: block;
+  width: 100%;
   max-width: $content-max-width;
-  position: relative;
+  display: block;
+  width: 100%;
+  padding: rem(12) rem(16);
+  font-size: rem(16);
+  line-height: rem(20);
+  color: var(--colour-body);
+  background-color: var(--colour-canvas-2);
+  background-clip: padding-box;
+  border: 2px solid var(--colour-primary);
+  appearance: none; // Fix appearance for date inputs in Safari
+  border-radius: rem(8);
+  margin-bottom: 1rem;
 
-  label {
-    display: block;
 
-    &[title]:after{
+  // TODO: review later
+  &[type="file"] {
+    overflow: hidden; // prevent pseudo element button overlap
 
-      content: "";
-      display: inline-block;
-      margin-left: 0.25em;
-      margin-bottom: 0.1em;
-      width: 1em;
-      height: 1em;
-      vertical-align: text-bottom;
-      background: currentColor;
-      mask-image: var(--icon-question);
-      mask-size: 100%;
-      mask-repeat: no-repeat;
-      mask-position: 50% 50%;
-      -webkit-mask-image: var(--icon-question);
-      -webkit-mask-size: 100%;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: 50% 50%;
+    &:not(:disabled):not([readonly]) {
+      cursor: pointer;
     }
+  }
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  &:is(:focus,.focus):not(:disabled) {
+    border-color: var(--colour-info);
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+  }
+
+  // Add some height to date inputs on iOS
+  // https://github.com/twbs/bootstrap/issues/23307
+  // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
+  &::-webkit-date-and-time-value {
+    // Multiply line-height by 1em if it has no unit
+    height: if(unit($input-line-height) == "", $input-line-height * 1em, $input-line-height);
+  }
+
+  // Disabled inputs
+  &:disabled {
+    background-color: #CCD6D8;
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  // File input buttons theming
+  &::file-selector-button {
+    padding: $input-padding-y $input-padding-x;
+    margin: (-$input-padding-y) (-$input-padding-x);
+    margin-inline-end: $input-padding-x;
+    color: $form-file-button-color;
+    @include gradient-bg($form-file-button-bg);
+    pointer-events: none;
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    border-inline-end-width: $input-border-width;
+    border-radius: 0; // stylelint-disable-line property-disallowed-list
+    @include transition($btn-transition);
+  }
+
+  &:hover:not(:disabled):not([readonly])::file-selector-button {
+    background-color: $form-file-button-hover-bg;
+  }
+}
+// #endregion
+
+
+// #region wrappers
+
+div:has(> label):has(input) {
+  position: relative;
+  max-width: $content-max-width;
+
+  &:has(input[readonly]):after{
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 300;
+    content: "\f023";
+    position: absolute;
+    font-size: rem(19);
+    height: rem(20);
+    width: rem(20);
+    bottom: calc(rem(12) + 2px);
+    right: calc(rem(12) + 2px);
   }
 }
 
+
+
+// #endregion
 
 .form-control-inline {
   display: flex;
@@ -40,6 +120,7 @@
     padding-right: 1rem;
   }
 }
+
 
 .form-control-color {
   width: $form-color-width;
