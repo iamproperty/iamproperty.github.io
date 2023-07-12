@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.7.6</h2>
+      <ul>
+        <li>Table bug fixes</li>
+      </ul>
+
       <h2>V3.7.5</h2>
       <ul>
         <li>System Notification components (Alert,inline and toasts)</li>
