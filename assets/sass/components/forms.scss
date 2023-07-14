@@ -33,7 +33,7 @@ label {
   border-radius: rem(8);
   margin-bottom: rem(24);
   min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
-  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
 
   // TODO: review later
   &[type="file"] {
@@ -216,6 +216,10 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline)) {
   text-align: center;
   text-overflow: ellipsis;
   position: relative;
+  
+  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+
 
   &:after {
     display: inline-block;

@@ -206,6 +206,7 @@
         <input type="number" step="0" :id="`input${i}`" :name="`input${i++}`" required class="" />
       </div>
       
+      <h3 class="pt-4 h6 visualtest-hide">Time period</h3>
       <div>
         <label for="time">Input field label</label>
 
@@ -428,7 +429,21 @@
 
     </div>
 
+    <div class="container pt-4 pb-0">
+      <h2>Vue component</h2>
+    </div>
 
+    <div class="container pb-0 visualtest">
+      <Input id="vuecomp" label="Input field label" :value="message" v-model="message" maxlength="100"><span></span></Input>
+    </div>
+
+    <div class="container pb-4">
+      <h3 class="h6 pb-3">Data binding</h3>
+
+      <p>The data binding within Vue JS can still be used even though we are using a bespoke component and not the default input element.</p> 
+      <p>Input field value: <strong>{{message}}</strong></p>
+
+    </div>
 
 
     <div class="container">

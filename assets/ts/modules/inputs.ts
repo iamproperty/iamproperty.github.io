@@ -21,7 +21,8 @@ const extendInputs = (body) => {
       if(input.hasAttribute('type') && input.getAttribute('type') == 'color')
         input.nextElementSibling.value = input.value;
 
-      input.nextElementSibling.setAttribute("data-count", input.value.length);
+      if(input.hasAttribute('maxlength') && input.nextElementSibling)
+        input.nextElementSibling.setAttribute("data-count", input.value.length);
     }
   });
 
@@ -76,7 +77,7 @@ export const setMaxlengthVars = (input) => {
     wrapper.insertBefore(span, input.nextSibling);
   }
 
-  span.setAttribute('data-count',0);
+  span.setAttribute('data-count',input.value.length);
 }
 
 export const changeType = (input,type) => {
