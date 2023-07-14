@@ -109,6 +109,10 @@ export default {
       type: String,
       required: false
     },
+    pattern: {
+      type: String,
+      required: false
+    },
     suffixClass: {
       type: String,
       required: false
@@ -167,7 +171,7 @@ export default {
             return '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}'
         }
 
-        return ''
+        return '(.*?)'
       }
     },
     needsLabel () {

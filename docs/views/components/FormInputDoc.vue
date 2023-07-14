@@ -41,12 +41,13 @@
 
     <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
-      <label :for="`input${i}`">Input field label</label>
-      <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placeholder text" required />
+      <label :for="`input1`">Input field label</label>
+      <input type="text" :id="`input1`" :name="`input1`" placeholder="Optional placeholder text" required />
 
+    
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
-      <label :for="`input${i}`">Input field label</label>
-      <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placeholder text" class="focus" required/>
+      <label :for="`input2`">Input field label</label>
+      <input type="text" :id="`input2`" :name="`input2`" placeholder="Optional placeholder text" class="focus" required/>
 
     </div>
 
@@ -58,12 +59,12 @@
 
     <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
-      <label :for="`input${i}`">Input field label</label>
-      <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placeholder text" />
+      <label :for="`input3`">Input field label</label>
+      <input type="text" :id="`input3`" :name="`input3`" placeholder="Optional placeholder text" />
 
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
-      <label :for="`input${i}`">Input field label</label>
-      <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placeholder text" class="focus" />
+      <label :for="`input4`">Input field label</label>
+      <input type="text" :id="`input4`" :name="`input4`" placeholder="Optional placeholder text" class="focus" />
 
     </div>
 
@@ -88,12 +89,12 @@
     <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
 
-      <label :for="`input${i}`">Input field label</label>
-      <input type="text" :id="`input${i}`" :name="`input${i++}`" disabled />
+      <label :for="`input5`">Input field label</label>
+      <input type="text" :id="`input5`" :name="`input5`" disabled />
 
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
-      <label :for="`input${i}`">Input field label</label>
-      <input type="text" :id="`input${i}`" :name="`input${i++}`" class="focus" disabled />
+      <label :for="`input6`">Input field label</label>
+      <input type="text" :id="`input$6`" :name="`input6`" class="focus" disabled />
     </div>
 
     <div class="container pb-0">
@@ -111,13 +112,13 @@
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
 
       <div>
-        <label :for="`input${i}`">Input field label</label>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" readonly value="Input field value" />
+        <label :for="`input7`">Input field label</label>
+        <input type="text" :id="`input7`" :name="`input7`" readonly value="Input field value" />
       </div>
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
       <div>
-        <label :for="`input${i}`">Input field label</label>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" class="focus" readonly value="Input field value" />
+        <label :for="`input8`">Input field label</label>
+        <input type="text" :id="`input8`" :name="`input8`" class="focus" readonly value="Input field value" />
       </div>
     </div>
 
@@ -140,16 +141,16 @@
     <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
       <div>
-        <label :for="`input${i}`">Input field label</label>
+        <label :for="`input9`">Input field label</label>
         <span class="prefix fa-solid fa-envelope"></span>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required />
+        <input type="text" :id="`input9`" :name="`input9`" placeholder="Optional placheolder text" required />
       </div>
  
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
       <div>
-        <label :for="`input${i}`">Input field label</label>
+        <label :for="`input10`">Input field label</label>
         <span class="prefix fa-solid fa-envelope"></span>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" class="focus" placeholder="Optional placheolder text" required />
+        <input type="text" :id="`input10`" :name="`input10`" class="focus" placeholder="Optional placheolder text" required />
       </div>
 
       <p>When we use an icon as a prefix or suffix it should be solid and 1 rem (16px) in size with 1rem (16px) padding around the icon.</p>
@@ -159,17 +160,17 @@
 
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
       <div>
-        <label :for="`input${i}`">Input field label</label>
+        <label :for="`input11`">Input field label</label>
         <span class="suffix">days</span>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required />
+        <input type="text" :id="`input11`" :name="`input11`" placeholder="Optional placheolder text" required />
       </div>
  
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
 
       <div>
-        <label :for="`input${i}`">Input field label</label>
+        <label :for="`input12`">Input field label</label>
         <span class="suffix">days</span>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required class="focus" />
+        <input type="text" :id="`input12`" :name="`input12`" placeholder="Optional placheolder text" required class="focus" />
       </div>
 
       <p>When we use text we should keep it to a minimum. For example, using for units of measurement. The text should be 1rem (16px) within a container height of 1.5rem (24px) and a max width of 5rem (80px). The padding around the container should be 1rem (16px) left and right and 0.75rem (12px) top and bottom.</p>
@@ -191,7 +192,7 @@
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
 
       <div>
-        <label :for="`input${i}`">Input field label</label>
+        <label :for="`input13`">Input field label</label>
 
         <span class="prefix">
           <select name="currency">
@@ -203,7 +204,7 @@
           <span>$ <small>(USD)</small></span>
           <span>€ <small>(EUR)</small></span>
         </span>
-        <input type="number" step="0" :id="`input${i}`" :name="`input${i++}`" required class="" />
+        <input type="number" step="0" :id="`input13`" :name="`input13`" required class="" />
       </div>
       
       <h3 class="pt-4 h6 visualtest-hide">Time period</h3>
@@ -237,14 +238,14 @@
       
       <h3 class="h6">.form-control-sm</h3>
       <div>
-        <label :for="`input${i}`">Input field label</label>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" required class="form-control-sm" />
+        <label :for="`input14`">Input field label</label>
+        <input type="text" :id="`input14`" :name="`input14`" required class="form-control-sm" />
       </div>
 
       <h3 class="h6">.form-control-lg</h3>
       <div>
-        <label :for="`input${i}`">Input field label</label>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" required class="form-control-lg" />
+        <label :for="`input15`">Input field label</label>
+        <input type="text" :id="`input15`" :name="`input15`" required class="form-control-lg" />
       </div>
     </div>
 
@@ -255,9 +256,9 @@
     </div>
     <div class="container visualtest">
       <div>
-        <label :for="`input${i}`">Input field label</label>
+        <label :for="`input16`">Input field label</label>
         <span class="suffix">days</span>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required />
+        <input type="text" :id="`input16`" :name="`input16`" placeholder="Optional placheolder text" required />
         <span>Optional helper text</span>
       </div>
     </div>
@@ -268,8 +269,8 @@
     </div>
     <div class="container visualtest">
       <div>
-        <label :for="`input${i}`">Input field label</label>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required maxlength="100" />
+        <label :for="`input17`">Input field label</label>
+        <input type="text" :id="`input17`" :name="`input17`" placeholder="Optional placheolder text" required maxlength="100" />
         <span>Optional helper text</span>
         
       </div>
@@ -287,8 +288,8 @@
       <div class="row">
           
         <div class="col-2">
-          <label :for="`input${i}`">Title</label>
-          <input type="text" :id="`input${i}`" :name="`input${i++}`" required class="form-control-inline" />
+          <label :for="`input18`">Title</label>
+          <input type="text" :id="`input18`" :name="`input18`" required class="form-control-inline" />
         </div>
       </div>
     </div>
@@ -304,14 +305,14 @@
     <div class="container visualtest">
       <div class="row">
         <div class="col-4 col-sm-2 col-md-1">
-          <label :for="`input${i}`">Title</label>
-          <input type="text" :id="`input${i}`" :name="`input${i++}`" required />
+          <label :for="`input19`">Title</label>
+          <input type="text" :id="`input19`" :name="`input19`" required />
         </div>
       </div>
       <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
-          <label :for="`input${i}`">Surname</label>
-          <input type="text" :id="`input${i}`" :name="`input${i++}`" required />
+          <label :for="`input20`">Surname</label>
+          <input type="text" :id="`input20`" :name="`input20`" required />
         </div>
       </div>
       
@@ -332,8 +333,8 @@
       <h3 class="h6">Single line</h3>
       <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
-          <label :for="`input${i}`">Address</label>
-          <input type="text" :id="`input${i}`" :name="`input${i++}`" required />
+          <label :for="`input21`">Address</label>
+          <input type="text" :id="`input21`" :name="`input21`" required />
         </div>
       </div>
     </div>
@@ -341,8 +342,8 @@
     <div class="container visualtest">
       <h3 class="h6">Textarea</h3>
       <div>
-          <label :for="`input${i}`">Address</label>
-          <textarea type="text" :id="`input${i}`" :name="`input${i++}`" required></textarea>
+          <label :for="`input22`">Address</label>
+          <textarea type="text" :id="`input22`" :name="`input22`" required></textarea>
       </div>
     </div>
 
@@ -358,8 +359,8 @@
 
     <div class="container visualtest">
       <div>
-        <label :for="`input${i}`">Input field label</label>
-        <input type="number" :id="`input${i}`" :name="`input${i++}`" required />
+        <label :for="`input23`">Input field label</label>
+        <input type="number" :id="`input23`" :name="`input23`" required />
       </div>
     </div>
     <div class="container pb-0">
@@ -510,7 +511,6 @@ export default {
       headerImg: headerImg,
       message:'input field value',
       htmlUsage: `...`,
-      i: 0,
     }
   },
   mounted (){
