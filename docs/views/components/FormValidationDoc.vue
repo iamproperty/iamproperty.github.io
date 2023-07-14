@@ -23,8 +23,8 @@
 
 
       <div class="was-validated">
-        <label :for="`input${i}`">Input field label</label>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placeholder text" required />
+        <label :for="`input1`">Input field label</label>
+        <input type="text" :id="`input1`" :name="`input1`" placeholder="Optional placeholder text" required />
         <span>Optional helper text</span>
         <span class="invalid-feedback">This field is required</span>
       </div>
@@ -34,8 +34,8 @@
       <p>When the value in the field is valid we can choose to show a success state</p>
 
       <div class="was-validated">
-        <label :for="`input${i}`">Input field label</label>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placeholder text" required value="Correct value" />
+        <label :for="`input2`">Input field label</label>
+        <input type="text" :id="`input2`" :name="`input2`" placeholder="Optional placeholder text" required value="Correct value" />
         <span>Optional helper text</span>
         <span class="invalid-feedback">This field is required</span>
       </div>
