@@ -32,12 +32,14 @@
 
 
 
-    <div class="container">
+    <div class="container pb-0">
       
       <h2>Input field</h2>
 
       <h3 class="h6">Standard input field</h3>
+    </div>
 
+    <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
       <label :for="`input${i}`">Input field label</label>
       <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placeholder text" required />
@@ -49,10 +51,12 @@
     </div>
 
 
-    <div class="container">
+    <div class="container pb-0">
       
       <h3 class="h6">Optional input field</h3>
+    </div>
 
+    <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
       <label :for="`input${i}`">Input field label</label>
       <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placeholder text" />
@@ -64,7 +68,7 @@
     </div>
 
 
-    <div class="container">
+    <div class="container pb-0">
       
       <h3 class="h6">Disabled input field</h3>
       <p class="pb-2">Use disabled for values are not applicable currently, but could be enabled in a different state. When set, the disabled attribute has the following effects on an element:</p>
@@ -79,7 +83,9 @@
         <li>Add a fill of #CCD6D8 to the form field input</li>
         <li>Add a native browser ‘blocked’ symbol when the user hovers over the button</li>
       </ul>
+    </div>
 
+    <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
 
       <label :for="`input${i}`">Input field label</label>
@@ -90,7 +96,7 @@
       <input type="text" :id="`input${i}`" :name="`input${i++}`" class="focus" disabled />
     </div>
 
-    <div class="container">
+    <div class="container pb-0">
       
       <h3 class="h6">Readonly</h3>
       <p class="pb-2">Use readonly controls for values that cannot be changed by the user, but are still significant. When set, the readonly attribute has the following effects on an element:</p>
@@ -99,7 +105,9 @@
         <li>Read-only elements are included in tabbing navigation.</li>
         <li>Read-only elements may be successful.</li>
       </ul>
+    </div>
 
+    <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
 
       <div>
@@ -111,122 +119,376 @@
         <label :for="`input${i}`">Input field label</label>
         <input type="text" :id="`input${i}`" :name="`input${i++}`" class="focus" readonly value="Input field value" />
       </div>
+    </div>
 
+    <div class="container">
       <p class="note mb-4"><strong>Note:</strong> Whenever and input field requires an icon like in the above example the label and input field need to be wrapped inside of a div. This div doesn't require a class or any other attributes.</p>
       
       <p class="note mb-4"><strong>Note:</strong> Their are a number of <a href="https://www.w3.org/TR/html4/interact/forms.html#h-17.12">key differences between disabled and readonly</a> and they all should be taken into consideration before choosing which one to use.</p>
     </div>
 
-    <div class="container">
+    <div class="container pb-0">
 
 
       <h3 class="h6">Prefix and suffix</h3>
       <p class="pb-2">Both can be added to an input field to give it about of extra contextual meaning. Highlighting that the value inside needs to be in pounds or in inches for example.</p>
 
       
+      <h3 class="h6">Prefix</h3>
+    </div>
+
+    <div class="container visualtest">
+      <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
       <div>
         <label :for="`input${i}`">Input field label</label>
-        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Input field value" />
+        <span class="prefix fa-solid fa-envelope"></span>
+        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required />
+      </div>
+ 
+      <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+        <span class="prefix fa-solid fa-envelope"></span>
+        <input type="text" :id="`input${i}`" :name="`input${i++}`" class="focus" placeholder="Optional placheolder text" required />
+      </div>
+
+      <p>When we use an icon as a prefix or suffix it should be solid and 1 rem (16px) in size with 1rem (16px) padding around the icon.</p>
+
+      
+      <h3 class="h6">Suffix</h3>
+
+      <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+        <span class="suffix">days</span>
+        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required />
+      </div>
+ 
+      <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
+
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+        <span class="suffix">days</span>
+        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required class="focus" />
+      </div>
+
+      <p>When we use text we should keep it to a minimum. For example, using for units of measurement. The text should be 1rem (16px) within a container height of 1.5rem (24px) and a max width of 5rem (80px). The padding around the container should be 1rem (16px) left and right and 0.75rem (12px) top and bottom.</p>
+
+    </div>
+
+
+
+
+    <div class="container pb-0">
+      <h2>Input masks</h2>
+      <p>We can add input masks to fields to ensure the data is entered correctly.</p>
+
+
+      <h3 class="h6">Currency</h3>
+    </div>
+
+    <div class="container visualtest">
+      <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
+
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+
+        <span class="prefix">
+          <select name="currency">
+            <option value="GBP">Pound sterling</option>
+            <option value="USD">US Dollars</option>
+            <option value="EUR">Euro</option>
+          </select>
+          <span>£ <small>(GBP)</small></span>
+          <span>$ <small>(USD)</small></span>
+          <span>€ <small>(EUR)</small></span>
+        </span>
+        <input type="number" step="0" :id="`input${i}`" :name="`input${i++}`" required class="" />
+      </div>
+      
+      <div>
+        <label for="time">Input field label</label>
+
+        <span class="suffix">
+          <select name="time-period" data-change-type="" data-input="time">
+            <option value="time">Time</option>
+            <option value="date">Date</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+          </select>
+          <span>time</span>
+          <span>date</span>
+          <span>week</span>
+          <span>month</span>
+        </span>
+        <input type="time" step="0" id="time" name="time" required class="" />
+      </div>
+      
+
+    </div>
+
+
+    <div class="container pb-0">
+      <h2>Sizes</h2>
+      <p>The size of the input fields can be modified by adding the class of <strong>.form-control-sm</strong> or <strong>.form-control-lg</strong> to the input field.</p>
+    </div>
+    <div class="container visualtest">
+      
+      <h3 class="h6">.form-control-sm</h3>
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+        <input type="text" :id="`input${i}`" :name="`input${i++}`" required class="form-control-sm" />
+      </div>
+
+      <h3 class="h6">.form-control-lg</h3>
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+        <input type="text" :id="`input${i}`" :name="`input${i++}`" required class="form-control-lg" />
+      </div>
+    </div>
+
+
+    <div class="container pb-0">
+      <h2>Helper text</h2>
+      <p>Helper text provides additional guidance about the input field, such as how it will be used. The text should be concise and only take up 1 line when possible.</p>
+    </div>
+    <div class="container visualtest">
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+        <span class="suffix">days</span>
+        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required />
+        <span>Optional helper text</span>
+      </div>
+    </div>
+
+    <div class="container pb-0">
+      <h2>Character/wordcounter</h2>
+      <p>Character or word counters should be used if there is a character or word limit. They display the ratio of characters used and the total character limit.</p>
+    </div>
+    <div class="container visualtest">
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+        <input type="text" :id="`input${i}`" :name="`input${i++}`" placeholder="Optional placheolder text" required maxlength="100" />
+        <span>Optional helper text</span>
+        
+      </div>
+    </div>
+
+
+
+
+    <div class="container pb-0">
+
+      <h2>Inline</h2>
+      <p>Using the <strong>.form-control-inline</strong> a class can control the width of the field container a class can be given to the label to control its width. This is usefull if you want to have uniformed inline input fields.</p>
+    </div>
+    <div class="container visualtest">
+      <div class="row">
+          
+        <div class="col-2">
+          <label :for="`input${i}`">Title</label>
+          <input type="text" :id="`input${i}`" :name="`input${i++}`" required class="form-control-inline" />
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container pb-0">
+
+      <h2>Widths</h2>
+      <p>Column classes can be used to control the width of the input fields by being added to the wrapper div element.</p>
+    </div>
+
+
+    <div class="container visualtest">
+      <div class="row">
+        <div class="col-4 col-sm-2 col-md-1">
+          <label :for="`input${i}`">Title</label>
+          <input type="text" :id="`input${i}`" :name="`input${i++}`" required />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+          <label :for="`input${i}`">Surname</label>
+          <input type="text" :id="`input${i}`" :name="`input${i++}`" required />
+        </div>
+      </div>
+      
+    </div>
+
+
+    <div class="container pb-0">
+
+      <h2>Heights</h2>
+      <p class="pb-2">Form input fields can display user input in the following ways:</p>
+      <ul>
+        <li>Single line fields display only one line of text</li>
+        <li>Text areas are fixed-height fields</li>
+      </ul>
+    </div>
+
+    <div class="container visualtest">
+      <h3 class="h6">Single line</h3>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+          <label :for="`input${i}`">Address</label>
+          <input type="text" :id="`input${i}`" :name="`input${i++}`" required />
+        </div>
+      </div>
+    </div>
+
+    <div class="container visualtest">
+      <h3 class="h6">Textarea</h3>
+      <div>
+          <label :for="`input${i}`">Address</label>
+          <textarea type="text" :id="`input${i}`" :name="`input${i++}`" required></textarea>
+      </div>
+    </div>
+
+
+    <div class="container pb-0">
+
+      <h2>Input field types</h2>
+      <p >The functionality of an input field can be increased by assigning a different type to it. This can change the keyboard on mobile devices to improve the user expereince. It also can add bits of functionality; for example a color input field comes with a popup window with a color picker.</p>
+
+      <h3 class="h6">Number</h3>
+      <p class="pb-3">Number fields will only allow numeric values to be entered. These can be entered via the arrows on the field or by typing. It is recommended that the to give the input a numeric minimum and maximum value. The minimum value will most commonly be 0 or 1 to prevent negative values.</p>
+    </div>
+
+    <div class="container visualtest">
+      <div>
+        <label :for="`input${i}`">Input field label</label>
+        <input type="number" :id="`input${i}`" :name="`input${i++}`" required />
+      </div>
+    </div>
+    <div class="container pb-0">
+      <h3 class="h6">Email</h3>
+      <p class="pb-3">Email fields will trigger a native browser auto-fill dialog to show with all previous emails you’ve inputed.</p>
+    </div>
+    <div class="container visualtest">
+      <div>
+        <label for="email">Input field label</label>
+        <input type="email" id="email" name="email" required autocomplete="on"/>
+      </div>
+    </div>
+    <div class="container pb-0">
+      <p class="note mb-4"><strong>Note:</strong> For the auto-fill dialog to show the autocomplete attribute needs to be added to either the form or the individual input field.</p>
+
+      <h3 class="h6">Search</h3>
+      <p class="pb-3">Search fields will trigger a native browser auto-fill dialog to show with all previous search terms you’ve inputed.</p>
+    </div>
+
+    <div class="container visualtest">
+      <div>
+        <label for="search">Input field label</label>
+        <input type="search" id="search" name="search" required autocomplete="on"/>
+      </div>
+    </div>
+    <div class="container pb-0">
+      <h3 class="h6">URL</h3>
+      <p class="pb-3">URL fields will trigger a native browser auto-fill dialog to show with all previous search terms you’ve inputed.</p>
+    </div>
+    <div class="container visualtest">
+      <div>
+        <label for="url">Input field label</label>
+        <input type="url" id="url" name="url" required autocomplete="on"/>
+      </div>
+    </div>
+    <div class="container pb-0">
+      <h3 class="h6">Telephone</h3>
+      <p class="pb-3">Telephone fields will trigger a native browser auto-fill dialog to show with all previous telephone numbers you’ve inputed. Input should be limited to numbers and symbols only.</p>
+    </div>
+    <div class="container visualtest">
+      <div>
+        <label for="phone">Input field label</label>
+        <input type="tel" id="phone" name="phone" required autocomplete="on"/>
+      </div>
+    </div>
+    <div class="container pb-0">
+      <h3 class="h6">Password</h3>
+      <p class="pb-3">Password fields hide the field value for security. We can add an optional hide/show button after the field.</p>
+    </div>
+    <div class="container visualtest"> 
+      <div>
+        <label for="password">Input field label</label>
+        <button type="button" class="suffix fa-solid fa-eye" data-alt-class="suffix fa-solid fa-eye-slash" data-change-type="text" data-input="password"><span class="visually-hidden">Show password</span></button>
+        <input type="password" id="password" name="password" required autocomplete="on"/>
+      </div>
+    </div>
+    <div class="container pb-0">
+      <h3 class="h6">Colour</h3>
+      <p class="pb-3">Colour fields allow the user to either enter the hex colour code in the field or select a colour from the colour picker. The colour picker should default to hex code input.</p>
+    </div>
+    <div class="container visualtest"> 
+      <div>
+        <label for="color">Input field label</label>
+        <input type="color" id="color" name="color" required="" autocomplete="on" />
+        <output></output>
       </div>
 
     </div>
 
 
 
-    <div class="container pb-0">
-
-    <h2>Prefix and suffix</h2>
-    <p>Both can be added to an input field to give it about of exta contexual meaning. Highlighting that the value inside needs to be in pounds or in inches for example.</p>
-
-    </div>
-    <div class="container visualtest">
-    <Input id="test7" label="Form input" class="" prefix="£"></Input>
-    <Input id="test8" label="Form input" class="" suffix="ins"></Input>
-
-    <p class="pt-3 mb-2">Can be used of inline input fields with the use of extra classes to define its offset which should match the width of the label.</p>
-    <Input id="test9" label="Form input" labelclass="col-5 col-sm-4" class="form-control-inline col-md-6" prefix="#" prefixClass="offset-5 offset-sm-4"></Input>
-    </div>
-
-
-
-
-
-    <div class="container bg-dark d-none visualtest">
-      
-      <Input id="test1dark" label="Form input" value="some value"></Input>
-
-    </div>
-    <div class="container pb-0">
-      <h2>Sizes</h2>
-      <p>The size of the input fields can be modified by adding the class of <strong>.form-control-sm</strong> or <strong>.form-control-sm</strong> to the input field.</p>
-      
-    </div>
-    <div class="container visualtest">
-      
-      <Input id="test3" label="Small input field" size="sm"></Input>
-      <Input id="test4" label="Large input field" size="lg"></Input>
-    </div>
-    <div class="container pb-0">
-      <h2>Widths</h2>
-      <p>Column classes can be used to control the width of the input fields by being added to the <strong>.form-control__wrapper</strong> element.</p>
-    </div>
-    <div class="container visualtest">
-      <Input id="test5" label="Title" class="col-6 col-sm-2 col-md-1"></Input>
-
-    </div>
-    <div class="container pb-0">
-
-      <h2>Inline</h2>
-      <p>Using the <strong>.form-control-inline</strong> a class can control the width of the field container a class can be given to the label to control its width. This is usefull if you want to have uniformed inline input fields.</p>
-      
-    </div>
-    <div class="container visualtest">
-      <Input id="test6" label="Form input" labelclass="col-5 col-sm-4" class="form-control-inline col-md-6"></Input>
-    </div>
-
-
-    <div class="container pb-0">
-
-      <h2>Tooltips and hints</h2>
-      <p>A tooltip or hint text can be added to the label to help explain the purpose of the input field.</p>
-      
-    </div>
-    <div class="container visualtest">
-      <Input id="test10" label="Form input" class="" title="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."></Input>
-      
-      <Input id="test10b" label="Form input" class="" hint="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."></Input>
-      
-    </div>
-
 
     <div class="container">
-      <h2>Data binding</h2>
-
-      <p>The data binding within Vue JS can still be used even though we are using a bespoke component and not the default input element.</p> 
-      <p>Input field value: {{message}}</p>
-      <Input id="test11" label="Form input" v-model="message"></Input>
-
+      <h2>Implementation</h2>
+      <Tabs>
+        <details>
+          <summary><h2>HTML</h2></summary>
+          <pre><code class="html">{{`<div>
+  <label for="input">Input field label</label>
+  <span class="prefix fa-solid fa-envelope"></span>
+  <input type="text" id="input" name="input" placeholder="Optional placheolder text" required="" />
+</div>`}}</code></pre>
+        </details>
+        <details>
+          <summary><h2>Vue component</h2></summary>
+          <Readme></Readme>
+        </details>
+      </Tabs>
     </div>
     
-    <div class="container">
-      <h2>Vue Input component reference</h2>
-      <Readme></Readme>
+    <div class="bg-light version-control">
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Version Control</th>
+              <th>Date</th>
+              <th>Notable updates</th>
+            </tr>
+          </thead>
+          <tbody class="text-body">
+            <tr>
+              <td>V1 added</td>
+              <td>12.07.2023</td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="/pdfs/inputs.pdf" download>Download latest designs</a>
+      </div>
     </div>
 
   </main>
 </template>
 
 <script>
+import {setMaxlengthVars} from '../../../assets/ts/modules/inputs';
+
 import DSHeader from '../DSHeader.vue';
 import headerImg from '../../img/type-header.png';
 import Input from '@/components/Input/Input.vue';
 import Readme from '@/components/Input/README.md';
+import Tabs from '@/components/Tabs/Tabs.vue'
 
 export default {
   components: {
     DSHeader,
     Input,
-    Readme
+    Readme,
+    Tabs
   },
   data () {
     return {
@@ -235,6 +497,14 @@ export default {
       htmlUsage: `...`,
       i: 0,
     }
+  },
+  mounted (){
+
+
+    // maxlength counter init
+    Array.from(document.querySelectorAll('input[maxlength]')).forEach((input,index) => {
+      setMaxlengthVars(input);
+    });
   }
 }
 </script>

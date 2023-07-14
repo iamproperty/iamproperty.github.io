@@ -1,10 +1,8 @@
-### Usage
-
 ```
 <Input id="fieldid" label="Label"></Input>
 ```
 
-### Properties
+**Properties**
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |

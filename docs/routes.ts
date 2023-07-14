@@ -342,6 +342,14 @@ const routes = [
         component: () => import('./views/components/FormInputDoc.vue')
       },
       {
+        path: 'validation',
+        name: 'Form validation',
+        meta: {
+          title: 'Form validation | Components | iamkey'
+        },
+        component: () => import('./views/components/FormValidationDoc.vue')
+      },
+      {
         path: 'filterlist',
         name: 'Filter list',
         meta: {
