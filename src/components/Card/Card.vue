@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import iamCard from '../../../assets/js/components/card/card.component.min.js'
+import iamCard from '../../../assets/js/components/card/card.component.js'
 
 export default {
   name: 'Card',
