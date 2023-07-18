@@ -3,6 +3,7 @@
 import * as helpers from '../js/modules/helpers'
 import extendDialogs from '../js/modules/dialogs'
 import createDataLayer from '../js/modules/data-layer'
+import extendInputs from '../js/modules/inputs';
 import nav from '../js/modules/nav'
 import table from '../js/modules/table'
 //import accordion from './modules/accordion'
@@ -63,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.addGlobalEvents(document.body);
   //helpers.checkElements(document.body);
   extendDialogs(document.body);
+  extendInputs(document.body);
 
   
   if (!window.customElements.get(`iam-notification`))

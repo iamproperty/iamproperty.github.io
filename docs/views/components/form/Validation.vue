@@ -6,6 +6,7 @@
       </ul>
       <h1>Form validation</h1>
       <p>Form validation on an input field can be triggered by either using the default form validation api and the supported CSS rules. Or set classes (.is-valid and .is-invalid) can be used so that server side validation can be used.</p>
+    
     </div>
 
     <div class="container visualtest">
