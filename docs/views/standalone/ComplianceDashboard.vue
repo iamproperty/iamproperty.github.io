@@ -59,6 +59,26 @@
           </div>
         </div>
 
+        <div class="container">
+          <div class="row tab-focus">
+
+<input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Incomplete" id="due_diligience_incomplete" class="d-none" />
+<input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Requires approval" id="due_diligience_requires_approval" class="d-none" />
+<input type="checkbox" name="due_diligience" data-filter="Due diligence" value="Verified" id="due_diligience_verified" class="d-none" />
+
+<div class="col-sm-4 col-md-3">
+<label for="due_diligience_incomplete"><Card class="card--filter colour-danger card--flag" data-total="" data-query="Due diligence == Incomplete">Due diligence incomplete</Card></label>
+</div>
+<div class="col-sm-4 col-md-3">
+<label for="due_diligience_requires_approval" ><Card class="card--filter colour-warning card--flag" data-total="" data-query="Due diligence == Requires approval">Due diligence requires approval</Card></label>
+</div>
+<div class="col-sm-4 col-md-3">
+<label for="due_diligience_verified" ><Card class="card--filter colour-success card--flag" data-total="" data-query="Due diligence == Verified">Due diligence verified</Card></label>
+</div>
+
+</div>
+
+        </div>
 
       </form>
 
