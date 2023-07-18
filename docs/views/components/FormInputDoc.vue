@@ -236,13 +236,13 @@
     </div>
     <div class="container visualtest">
       
-      <h3 class="h6">.form-control-sm</h3>
+      <h3 class="h6">.form-control-sm, .input--sm</h3>
       <div>
         <label :for="`input14`">Input field label</label>
         <input type="text" :id="`input14`" :name="`input14`" required class="form-control-sm" />
       </div>
 
-      <h3 class="h6">.form-control-lg</h3>
+      <h3 class="h6">.form-control-lg, .input--lg</h3>
       <div>
         <label :for="`input15`">Input field label</label>
         <input type="text" :id="`input15`" :name="`input15`" required class="form-control-lg" />
@@ -282,7 +282,7 @@
     <div class="container pb-0">
 
       <h2>Inline</h2>
-      <p>Using the <strong>.form-control-inline</strong> a class can control the width of the field container a class can be given to the label to control its width. This is usefull if you want to have uniformed inline input fields.</p>
+      <p>Using the <strong>.form-control-inline or .input--inline</strong> class can control the width of the field container a class can be given to the label to control its width. This is usefull if you want to have uniformed inline input fields.</p>
     </div>
     <div class="container visualtest">
       <div class="row">

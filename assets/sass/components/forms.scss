@@ -168,21 +168,21 @@ div:has(> label:first-child):has(> input) {
   }
 }
 
-div:has(> .form-control-sm) {
+div:has(> :is(.form-control-sm, .input--sm)) {
   
   --input-fs: #{rem(14)};
   --input-lh: #{rem(16)};
   --input-padding-block: #{rem(10)};
   --input-padding-inline: #{rem(14)};
 }
-div:has(> .form-control-lg) {
+div:has(> :is(.form-control-lg, .input--sm)) {
   --input-fs: #{rem(24)};
   --input-lh: #{rem(29)};
   --input-padding-block: #{rem(20)};
   --input-padding-inline: #{rem(22)};
 }
 
-div:has(> label:first-child):has(> input):has(> :is(.form-control-inline)) { 
+div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input--inline)) { 
 
   label {
     flex-shrink: 0;
