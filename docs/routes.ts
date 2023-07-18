@@ -300,14 +300,6 @@ const routes = [
             component: () => import('./views/components/form/Checkbox.vue')
           },
           {
-            path: 'radio',
-            name: 'Radio field',
-            meta: {
-              title: 'Radio field | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Radio.vue')
-          },
-          {
             path: 'toggle',
             name: 'Toggle buttons',
             meta: {
@@ -340,6 +332,14 @@ const routes = [
           title: 'Form input fields | Components | iamkey'
         },
         component: () => import('./views/components/FormInputDoc.vue')
+      },
+      {
+        path: 'radio',
+        name: 'Form Radio fields',
+        meta: {
+          title: 'Form Radio fields | Elements | iamkey'
+        },
+        component: () => import('./views/components/RadioDoc.vue')
       },
       {
         path: 'validation',

@@ -2,7 +2,7 @@
   <main>
 
     <DSHeader :image="headerImg" section="components">
-      <h1>Form input field</h1>
+      <h1>Form input fields</h1>
     </DSHeader>
 
 

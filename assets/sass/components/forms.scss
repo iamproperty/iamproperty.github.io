@@ -9,7 +9,7 @@ label {
   color: var(--colour-heading);
   display: block;
 
-  &:has(+ input:not(:disabled):not([readonly]):not(:required)):after {
+  &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio'])):after {
     content: " (Optional)";
   }
 }
@@ -373,8 +373,111 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 }
 // #endregion
 
+// #region radio field 
 
 
+input[type="radio"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  margin: 0;
+}
+
+div:has(> input[type="radio"]) {
+  position: relative;
+}
+
+input[type="radio"] + label:not(:has(> iam-card)) {
+
+  color: var(--colour-heading);
+  position: relative;
+  font-size: rem(16);
+  line-height: rem(20);
+  padding-left: rem(40);
+  padding-top: rem(10);
+  padding-bottom: rem(10);
+  margin-bottom: rem(24);
+  margin-right: rem(24);
+
+  &:before {
+    content: "";
+    border: 2px solid var(--colour-primary);
+    border-radius: 50%;
+    height: rem(24);
+    width: rem(24);
+    display: inline-block;
+    position: absolute;
+    top: rem(10 - 2);
+    left: 0;
+  }
+  
+  &:after {
+    content: ""!important;
+    background: var(--colour-info);
+    border-radius: 50%;
+    height: rem(14);
+    width: rem(14);
+    display: none;
+    position: absolute;
+    top: rem(15 - 2);
+    left: rem(5);
+  }
+}
+
+input[type="radio"]:checked + label {
+
+  &:before {
+    border-color: var(--colour-info);
+  }
+
+  &:after {
+    display: inline-block;
+  }
+
+  iam-card {
+    --colour: var(--colour,var(--colour-info));
+  }
+}
+
+input[type="radio"]:is(:focus,:hover,.focus) + label {
+
+  &:before {
+    background: var(--colour-light);
+    outline: rem(8) solid var(--colour-light);
+  }
+}
+input[type="radio"]:is(:active,.active) + label {
+
+  &:before {
+    background: #E0E0E0;
+    outline: rem(8) solid #E0E0E0;
+  }
+}
+
+// Disabled
+input[type="radio"]:disabled + label {
+
+  opacity: 0.4;
+  cursor: not-allowed;
+
+  > iam-card {
+    pointer-events: none;
+  }
+
+  &:before {
+    background-color: none!important;
+    outline: none!important;
+    border-color: var(--colour-primary)!important;
+  }
+  
+  &:after {
+    background-color: var(--colour-primary)!important;
+  }
+}
+// #endregion
 
 // #region checkbox
 .form-check {

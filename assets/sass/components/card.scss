@@ -90,6 +90,8 @@
     background: #FCFCFC;
   }
   
+
+  
   span {
     display: block;
     font-weight: bold;
@@ -167,7 +169,6 @@
 
   &:is(:hover,:focus,.hover) {
     outline: none;
-    background: #EEEEEE;
       
     .card__body {
       background: #EEEEEE;
@@ -175,11 +176,18 @@
   }
 
   &:is(:active, .active){
-    outline: 2px solid var(--colour,var(--colour-primary));
+    
+    .card__body {
+      background: #E0E0E0;
+    }
+  }
+
+  &:is(:checked, .checked){
+    outline: 2px solid var(--colour,var(--colour-info));
     outline-offset: -2px;
 
     .card__body {
-      background: #ffffff;
+      background: #E0E0E0;
     }
   }
 
@@ -200,6 +208,21 @@
     font-size: rem(48);
     line-height: rem(48);
     padding-right: rem(16);
+  }
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  .card--filter {
+
+    .card__body {
+      background: none!important;
+    }
+
+    &:is(:hover,:focus,.hover, :active, .active):not(:checked,.checked){ 
+      outline: 2px solid var(--colour, var(--colour-primary))!important;
+      outline-offset: -2px;
+
+    }
   }
 }
 
