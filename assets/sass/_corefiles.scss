@@ -23,6 +23,8 @@
 @use "components/pagination.scss";
 @use "components/accordion.scss";
 
+@use "components/card-global.scss";
+
 // Bootstrap elements
 @import "../bootstrap/scss/_transitions.scss";
 @import "../bootstrap/scss/_badge.scss";
