@@ -11,7 +11,7 @@ export const addDataAttributes = (table) => {
   colRows.forEach((row, index) => {
 
     const cells = Array.from(row.querySelectorAll('th, td'));
-    const statuses = ['0','low','medium','high','unknown','n/a','pending','verified','incomplete','completed','requires approval'];
+    const statuses = ['0','low','medium','high','unknown','n/a','pending','verified','overdue','incomplete','complete','completed','approval required','requires approval','to do','not started','warning','error'];
     
     cells.forEach((cell, cellIndex) => {
 
@@ -43,20 +43,18 @@ export const getLargestLastColWidth = (table) => {
  
   let largestWidth = 0;
 
-  Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
 
     let htmlStyles = window.getComputedStyle(document.querySelector('html'));
     let lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
 
     if(lastColChild){
 
+      lastColChild.classList.add('text-nowrap');
       let responsiveWidth = lastColChild.offsetWidth/parseFloat(htmlStyles.fontSize);
-      responsiveWidth += 1.5;
+      responsiveWidth += 1.7;
       largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
     }
-
-    let rowHeight = row.offsetHeight/parseFloat(htmlStyles.fontSize);
-    row.style.setProperty("--row-height", `${rowHeight}rem`);
   });
 
   return largestWidth;
@@ -698,6 +696,11 @@ export const addPaginationEventListeners = function(table, form, pagination, wra
         url.searchParams.set("page", newPage);
         history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
       }
+
+      // scroll back to the top of the table
+      const yOffset = -250;
+      const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
@@ -778,8 +781,22 @@ export const makeTableFunctional = function(table, form, pagination, wrapper){
   // Work out the largest width of the CTA's in the last column
   if(wrapper && wrapper.classList.contains('table--cta')){
 
-    const largestWidth = getLargestLastColWidth(table);
-    wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
+    if(!wrapper.hasAttribute('data-cta-width')){
+        
+      const largestWidth = getLargestLastColWidth(table);
+      wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
+      wrapper.setAttribute("data-cta-width", `${largestWidth}rem`);
+    }
+
+    function outputsize() {
+
+      Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+        let rowHeight = row.offsetHeight;
+        row.style.setProperty("--row-height", `${rowHeight}px`);
+      });
+    }
+    
+    new ResizeObserver(outputsize).observe(table)
   }
 }
 
@@ -902,7 +919,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
         wrapper.setAttribute('data-page', parseInt(currentPage));
         wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
-        makeTableFunctional(table, form, pagination, wrapper);
+        makeTableFunctional(table, form, pagination, wrapper);        
         createPaginationButttons(wrapper, pagination);
 
         if(parseInt(totalNumber) == 0){

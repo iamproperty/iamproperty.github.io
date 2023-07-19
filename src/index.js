@@ -19,8 +19,9 @@ export { default as Stepper } from './components/Stepper/Stepper.vue'
 export { default as Step } from './components/Stepper/Step.vue'
 export { default as Tabs } from './components/Tabs/Tabs.vue'
 export { default as Tab } from './components/Tabs/Tab.vue'
-export { default as Alert } from './components/Alert/Alert.vue'
 export { default as NoteFeed } from './components/NoteFeed/NoteFeed.vue'
 
 export { default as AppliedFilters } from './components/AppliedFilters/AppliedFilters.vue'
 export { default as Filterlist } from './components/Filterlist/Filterlist.vue'
+
+export { default as Notification } from './components/Notification/Notification.vue'

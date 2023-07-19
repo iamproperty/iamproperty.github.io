@@ -9,7 +9,7 @@
 </style>
 
 <script>
-import iamTabs from '../../../assets/ts/components/tabs/tabs.component'
+import iamTabs from '../../../assets/js/components/tabs/tabs.component.min.js'
 
 if (!window.customElements.get('iam-tabs'))
   window.customElements.define('iam-tabs', iamTabs);

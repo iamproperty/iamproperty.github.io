@@ -7,16 +7,22 @@ class iamPagination extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
+    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${assetLocation}/css/core.min.css";
+    @import "${coreCSS}";
+    
+    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="pagination__wrapper d-none">
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+	connectedCallback() {
 
     // Set default attributes
     const params = new URLSearchParams(window.location.search);
@@ -35,9 +41,7 @@ class iamPagination extends HTMLElement {
 
     this.setAttribute('data-pages', Math.ceil(this.getAttribute('data-total') / this.getAttribute('data-show')));
     createPaginationButttons(this,this.shadowRoot.querySelector('.pagination__wrapper'));
-  }
 
-	connectedCallback() {
     this.shadowRoot.querySelector('.pagination__wrapper').classList.remove('d-none');
   }
 }

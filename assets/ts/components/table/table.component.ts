@@ -8,18 +8,12 @@ class iamTable extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
-
-    const isCTA = this.classList.contains('table--cta');
-    const isExportable = this.classList.contains('table--export');
-    
-    let classList = this.classList.toString();
-
-    classList = classList.replace('table--cta','');
+    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${assetLocation}/css/core.min.css";
+    @import "${coreCSS}";
 
     :host(.mh-sm){
       max-height: none!important;
@@ -30,18 +24,24 @@ class iamTable extends HTMLElement {
     :host(.mh-lg){
       max-height: none!important;
     }
+    
+    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    ${isCTA ? '<div class="table--cta">' : ''}
-    <div class="table__wrapper ${classList}">
+    <div class="table--cta">
+    <div class="table__wrapper">
       <slot></slot>
     </div>
-    ${isCTA ? '</div>' : ''}
-    ${isExportable ? '<button class="link" type="button" data-export>Export table as CSV</button>' : ''}
+    </div>
     <div class="table__pagination"></div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
+  }
+
+	connectedCallback() {
+
     const params = new URLSearchParams(window.location.search)
+
     // Set default attributes
     if(!this.hasAttribute('data-total'))
       this.setAttribute('data-total', this.querySelectorAll('table tbody tr').length);
@@ -56,13 +56,23 @@ class iamTable extends HTMLElement {
       this.setAttribute('data-increment', 15);
 
     this.setAttribute('data-pages', Math.ceil(this.getAttribute('data-total') / this.getAttribute('data-show')));
-  }
 
-	connectedCallback() {
+    // Update table__wrapper class
+    let classList = this.classList.toString();
+
+    classList = classList.replace('table--cta','');
+    classList = classList.replace('table--loading','');
+    this.shadowRoot.querySelector('.table__wrapper').className += ` ${classList}`;
 
     this.table = this.querySelector('table');
     this.savedTableBody = this.table.querySelector('tbody').cloneNode(true);
     this.pagination = this.shadowRoot.querySelector('.table__pagination');
+
+    // Remove table CTA
+    const isCTA = this.classList.contains('table--cta');
+
+    if(!isCTA)
+      this.shadowRoot.querySelector('.table--cta').classList.remove('table--cta');
 
     // Set events on the filter table
     this.form = document.createElement('form');

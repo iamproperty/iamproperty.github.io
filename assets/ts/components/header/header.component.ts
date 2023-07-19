@@ -14,18 +14,15 @@ class iamHeader extends HTMLElement {
     this.attachShadow({ mode: 'open'});
 
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
+    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/header.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${assetLocation}/css/core.min.css";
+    @import "${coreCSS}";
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
-    :host {
-      max-width:100%!important;
-      padding:0!important;
-    }
     </style>
     <div class="header-banner">
       <div class="container" part="container">
@@ -47,6 +44,8 @@ class iamHeader extends HTMLElement {
 
 	connectedCallback() {
     
+    this.classList.add('loaded');
+
     const picture = this.shadowRoot.querySelector('picture');
     const source = this.shadowRoot.querySelector('picture source');
 

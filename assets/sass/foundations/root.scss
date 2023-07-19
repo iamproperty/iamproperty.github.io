@@ -35,7 +35,7 @@
   --card-left-padding: 1rem;
   --card-border-radius: #{rem(8)};
   --card-box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
-
+  --nav-height: #{rem(96)};
 }
 
 // Dark mode; functional colours get updated
@@ -63,7 +63,7 @@
   }
 
   // Override the colours when on a dark background, similiar to dark mode but on a module level
-  [class*="bg-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
+  [class*="bg-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
   .invert-colours {
     
     @include invert-colours();
@@ -100,7 +100,7 @@
     color: var(--colour-body);
   }
 
-  [class*="bg-"][class*="gradient-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.prevent-invert) {
+  [class*="bg-"][class*="gradient-"]:not(.bg-info):not(.bg-success):not(.bg-warning):not(.prevent-invert) {
     
     @include invert-colours();
 

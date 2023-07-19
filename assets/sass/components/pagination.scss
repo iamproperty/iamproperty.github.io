@@ -76,6 +76,7 @@
 
   .page-item {
     display: none;
+    overflow: visible;
   }
 
   .page-item:is(:first-child, :last-child, :nth-child(2), :nth-last-child(2)) {
@@ -122,7 +123,7 @@
 
     &:after {
       left: auto;
-      right: calc(100% + #{rem(4)} + 2px);
+      right: calc(100% + #{rem(4)} + 1px);
     }
   }
 
