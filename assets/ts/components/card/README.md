@@ -21,3 +21,4 @@ The card component needs to be wrapped with a link or a button, this is required
 - Adding a class of **.colour-danger** will add a left hand border with the danger colour (See status card). This works with all of the theme
 - Adding a class of **.border-o** will remove the box-shadow of the card and make some minor sizing adjustments. 
 - Adding a class like **.colour-warning** will update the colour of the left berder for the card. The theme colours will be avialable to use.
+- Adding a class of **.card--flag** will add a card to the top right corner. 
