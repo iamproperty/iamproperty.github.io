@@ -325,7 +325,7 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
   display: none;
 }
 
-.chart__outer > input[type="checkbox"]:not(:checked) ~ .chart :is(.lines, .radar) .line {
+.chart__outer > input[type="checkbox"]:not(:checked) ~ .chart__wrapper :is(.chart__lines, .radar) .line {
   display: none!important;
 }
 
@@ -343,7 +343,7 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
     display: block;
   }
 
-  input:nth-of-type(#{$i}):not(:checked) ~ .chart :is(.lines,.radar) .line:nth-child(#{$i}) {
+  input:nth-of-type(#{$i}):not(:checked) ~ .chart__wrapper :is(.chart__lines,.radar) .line:nth-child(#{$i}) {
     display: block!important;
   }
 }
@@ -1040,7 +1040,7 @@ input[type="radio"]:not([value="pie"])[value="stacked"]:checked ~ .chart__wrappe
     }
   }
 
-  #{$line-chart} .lines~table tbody tr td:not(:first-child):not(:hover) {
+  #{$line-chart} .chart__lines~table tbody tr td:not(:first-child):not(:hover) {
     opacity: 1;
   }
 }
