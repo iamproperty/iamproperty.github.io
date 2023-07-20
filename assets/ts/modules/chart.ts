@@ -1,8 +1,24 @@
 import { ucfirst, unsnake, numberOfDays } from './helpers'
 
 // #region Functions that setup and trigger other functions 
-export const setupChart = (chartElement:any,chartOuter:any,tableElement:any,chartKey:any,chartGuidelines:any,chartYaxis:any) => {
+export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => {
 
+  // #region Reset the chart
+  // empty divs to re-populate
+  const chartOptions = chartOuter.querySelector('.chart__options');
+  chartOptions.innerHTML = `<span>Chart Type</span>`;
+  const chartKey = chartOuter.querySelector('.chart__key');
+  chartKey.innerHTML = '';
+  const chartGuidelines = chartOuter.querySelector('.chart__guidelines');
+  chartGuidelines.innerHTML = ``;
+  const chartYaxis = chartOuter.querySelector('.chart__yaxis');
+  chartYaxis.innerHTML = ``;
+
+  // Remove old input fields
+  Array.from(chartOuter.querySelectorAll(':scope > input[type="checkbox"],:scope > input[type="radio"]')).map((element: any) => { element.remove(); })
+  // #endregion
+
+  createTypeSwitcher(chartElement,chartKey,chartOptions);
 
   let {xaxis,slope,type} = getChartData(chartElement,chartOuter);
 
@@ -18,6 +34,8 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any,char
     createLines(chartElement,chartOuter);
   }
 
+  if(availableTypes.includes('pie'))
+    createPies(chartElement,chartOuter);
 
   if(xaxis){
     createXaxis(chartElement,chartOuter,xaxis);
@@ -31,9 +49,96 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any,char
     createKeyTotals(chartElement,chartOuter);
 
 
-
   if(availableTypes.includes('bar') || availableTypes.includes('dumbbell') || availableTypes.includes('responsive'))
     setLongestLabel(chartElement,chartOuter);
+
+
+  // Event handlers
+  setEventHandlers(chartElement,chartOuter);
+
+  return true;
+};
+// #endregion
+
+// #region Event handlers and observers
+export const setEventHandlers = function(chartElement:any,chartOuter:any) {
+  const showData = chartOuter.querySelectorAll(':scope > input[type="checkbox"]');
+
+
+  let {min,max,type} = getChartData(chartElement,chartOuter);
+
+  const availableTypes = chartElement.hasAttribute('data-types') ? chartElement.getAttribute('data-types').split(',') : [type];
+
+  for (var i = 0; i < showData.length; i++) {
+    showData[i].addEventListener('change', function() {
+
+      if(availableTypes.includes('pie'))
+        createPies(chartElement,chartOuter);
+
+      //setupOptionalContent(chartElement,min,max); // TODO: move this to the observer and just update the data attribute
+    });
+  }
+  /* TO DO: do i need?
+  // Update chart type
+  const chartTypes = chartElement.querySelectorAll(':scope > input[type="radio"]');
+  for (var i = 0; i < chartTypes.length; i++) {
+    chartTypes[i].addEventListener('change', function() {  
+      //setupOptionalContent(chartElement,min,max); // TODO: move this to the observer and just update the data attribute
+    });
+  }
+  */
+};
+
+export const setEventObservers = function(chartElement:any,chartOuter:any) {
+
+  if(chartElement.hasAttribute('data-series'))
+    return false;
+
+  let table = chartElement.querySelector('table');
+  let newTable = chartOuter.querySelector('table');
+
+  const attributesUpdated = (mutationList:any, observer:any) => {
+
+    observer.disconnect();
+    observer2.disconnect();
+
+    for (const mutation of mutationList) {
+
+      if(mutation.attributeName == 'class' || (mutation.type === 'attributes' && mutation.attributeName === 'data-total') || mutation.type === 'attributes') {
+
+        newTable.innerHTML = table.innerHTML;
+        setupChart(chartElement,chartOuter,newTable);
+      }
+    }
+
+    observer.observe(table, { characterData: true, subtree: true });
+    observer2.observe(chartElement, { attributes: true });
+  };
+
+  const tableUpdated = (mutationList:any, observer:any) => {
+
+    observer.disconnect();
+    observer2.disconnect();
+
+    for (const mutation of mutationList) {
+
+      if(mutation.type == "characterData" || (mutation.type == "childList" && mutation.addedNodes.length)){
+
+        newTable.innerHTML = table.innerHTML;
+        setupChart(chartElement,chartOuter,newTable);
+      }
+    }
+
+    observer.observe(table, { characterData: true, subtree: true });
+    observer2.observe(chartElement, { attributes: true });
+  };
+
+
+  let observer = new MutationObserver(tableUpdated);
+  let observer2 = new MutationObserver(attributesUpdated);
+
+  observer.observe(table, { characterData: true, subtree: true });
+  observer2.observe(chartElement, { attributes: true });
 
   return true;
 };
@@ -116,6 +221,18 @@ const getValues = function(chartElement:any,value:number,min:any,max:any,start?:
 
   return { percent, axis, bottom};
 }
+
+function getCoordinatesForPercent(percent:number, pieCount:number) {
+
+  // This moves the start point to the top middle point like a clock
+  if(pieCount > 1)
+    percent = percent - 0.25;
+
+  const x = Math.cos(2 * Math.PI * percent);
+  const y = Math.sin(2 * Math.PI * percent);
+  return [x*100, y*100];
+}
+
 // #endregion
 
 // #region SET functions - set data attributes and classes
@@ -355,8 +472,22 @@ export const setLongestLabel = function(chartElement:any,chartOuter:any){
 // #endregion
 
 // #region CREATE function
-export const createChartKey = function(chartElement:any,chartOuter:any,tableElement:any,chartKey:any){
+export const createTypeSwitcher = function(chartElement:any,chartKey:any,chartOptions:any){
 
+  const chartID = `chart-${Date.now()+(Math.floor(Math.random() * 100) + 1)}`;
+  const availableTypes = chartElement.hasAttribute('data-types') ? chartElement.getAttribute('data-types').split(',') : [];
+
+  if(!chartElement.hasAttribute('data-types') && chartElement.hasAttribute('data-type'))
+    chartKey.insertAdjacentHTML('afterend', `<input type="radio" name="chart-type" value="${chartElement.getAttribute('data-type')}" checked="">`);
+  else if (chartElement.hasAttribute('data-types')){
+
+    let chartType = chartElement.hasAttribute('data-type') ? chartElement.getAttribute('data-type') : 'column';
+    chartOptions.insertAdjacentHTML('beforebegin', availableTypes.map((type:any) => `<input type="radio" name="chart-type" value="${type}" id="${chartID}-${type}" ${chartType == type ? 'checked=""' : '' }>`).join(''));
+    chartOptions.insertAdjacentHTML('beforeend', availableTypes.map((type:any) => `<label for="${chartID}-${type}">${type}</label>` ).join(''));
+  }
+}
+
+export const createChartKey = function(chartElement:any,chartOuter:any,tableElement:any,chartKey:any){
 
   const chartID = `chart-${Date.now()+(Math.floor(Math.random() * 100) + 1)}`;
   //const chartOuter = chartElement.querySelector('.chart__outer');
@@ -573,6 +704,97 @@ export const createLines = function(chartElement:any,chartOuter:any){
 
   linesWrapper.innerHTML = returnString;
 }
+
+
+export const createPies = function(chartElement:any,chartOuter:any){
+
+  let returnString = '';
+  let chartInner = chartOuter.querySelector('.chart');
+  let pieWrapper = chartOuter.querySelector('.pies');
+
+  if(!pieWrapper){
+    pieWrapper = document.createElement("div");
+    pieWrapper.setAttribute('class','pies');
+    chartInner.append(pieWrapper);
+  }
+
+  Array.from(chartInner.querySelectorAll('tbody tr')).forEach((item:any, index) => {
+
+    let paths = '';
+    let tooltips = '';
+    let cumulativePercent = 0;
+    let total = 0;
+    let titleKey = item.querySelectorAll('td')[0]
+    let title = titleKey.innerHTML;
+    let pieCount = 0;
+
+    // Work out the total amount
+    Array.from(item.querySelectorAll('td')).forEach((td:any, subindex) => {
+
+      const display = getComputedStyle(td).display;
+
+      if(subindex != 0 && display != 'none'){
+
+        let value = td.getAttribute('data-numeric');
+
+        value = value.replace('£','');
+        value = value.replace('%','');
+        value = value.replace(',','');
+        value = Number.parseInt(value);
+
+        total += value;
+        pieCount++;
+      }
+    });
+
+    // Create the paths
+    Array.from(item.querySelectorAll('td')).forEach((td:any, subindex) => {
+
+      const display = getComputedStyle(td).display;
+
+      if (subindex != 0 && pieCount == 1 && display != "none"){
+
+        const pathData = `M 0 0 L 100 0 A 100 100 0 1 1 100 -0.01 L 0 0`;
+
+        paths += `<path d="${pathData}" style="${td.getAttribute('style')} --path-index: ${subindex};"></path>`;
+        tooltips += `<foreignObject x="-70" y="-70" width="140" height="140" ><div><span class="h5 mb-0"><span class="total d-block">${ucfirst(unsnake(title))}</span> ${ucfirst(unsnake(td.getAttribute('data-label')))}<br/> ${td.innerHTML}${td.hasAttribute('data-second') ? `${td.getAttribute('data-second-label')}: ${td.getAttribute('data-second')}` : ''}</span></div></foreignObject>`;
+      }
+      else if(subindex != 0){
+
+        let value = td.getAttribute('data-numeric');
+        let hide = display == "none" ? "display: none;" : "";
+
+        value = value.replace('£','');
+        value = value.replace('%','');
+        value = value.replace(',','');
+        value = Number.parseInt(value);
+
+        let percent = value/total;
+        const [startX, startY] = getCoordinatesForPercent(cumulativePercent,pieCount);
+        const [endX, endY] = getCoordinatesForPercent(cumulativePercent+percent,pieCount);
+        const largeArcFlag = percent > .5 ? 1 : 0; // if the slice is more than 50%, take the large arc (the long way around)
+        const pathData = [
+          `M 0 0`,
+          `L ${(startX ? startX.toFixed(0): 0)} ${(startY ? startY.toFixed(0): 0)}`, // Move
+          `A 100 100 0 ${largeArcFlag} 1 ${(endX ? endX.toFixed(0) : 0)} ${(endY ? endY.toFixed(0) : 0)}`, // Arc
+          `L 0 0`, // Line
+        ].join(' ');
+
+        paths += `<path d="${pathData}" style="${td.getAttribute('style')} --path-index: ${subindex};${hide}"></path>`;
+        tooltips += `<foreignObject x="-70" y="-70" width="140" height="140" ><div><span class="h5 mb-0"><span class="total d-block">${ucfirst(unsnake(title))}</span> ${ucfirst(unsnake(td.getAttribute('data-label')))}<br/> ${td.innerHTML}${td.hasAttribute('data-second') ? `${td.getAttribute('data-second-label')}: ${td.getAttribute('data-second')}` : ''}</span></div></foreignObject>`;
+      
+        // each slice starts where the last slice ended, so keep a cumulative percent
+        if(display != 'none')
+          cumulativePercent += percent;
+      }
+    });
+    
+    returnString += `<div class="pie"><svg viewBox="-105 -105 210 210" preserveAspectRatio="none" style="--row-index: ${index+1};">${paths}${tooltips}</svg><div><span class="h5 mb-0">${title}</span></div></div>`
+  });
+
+  pieWrapper.innerHTML = returnString;
+}
+
 
 export const createSlope = function(chartElement:any,chartOuter:any){
   let n:number = 0;

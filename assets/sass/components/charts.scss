@@ -1,15 +1,15 @@
 @use "../_func" as *;
 
-$chart-colour-1: #0071F1!default;
-$chart-colour-2: #009B9B!default;
-$chart-colour-3: #24B300!default;
-$chart-colour-4: #FFB32B!default;
-$chart-colour-5: #F51A5A!default;
-$chart-colour-6: #FA6400!default;
-$chart-colour-7: #963CE1!default;
-$chart-colour-8: #8D8D8D!default;
-$chart-colour-9: #067EB3!default;
-$chart-colour-10: #D24712!default;
+$chart-colour-1: #00313c!default;
+$chart-colour-2: #0F9D58!default;
+$chart-colour-3: #ffa500!default;
+$chart-colour-4: #dc3545!default;
+$chart-colour-5: #46003c!default;
+$chart-colour-6: #b4e6a5!default;
+$chart-colour-7: #1ebee6!default;
+$chart-colour-8: #ffd2d2!default;
+$chart-colour-9: #9d9d9d!default;
+$chart-colour-10: #66838a!default;
 
 $chart-colors: ();
 $chart-colors: map-merge((
@@ -32,24 +32,24 @@ $chart-height-lg: 42.86%!default;
 $default-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__wrapper';
 $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value=none]):not([value=pie]):checked~.chart__wrapper';
 
-$comparison-chart: 'input[type=radio][value="comparison"]:not([value=none]):not([value=pie]):checked~.chart__wrapper';
-$comparison-chart-key: 'input[type=radio][value="comparison"]:not([value=none]):not([value=pie]):checked~.chart__key';
+//$comparison-chart: 'input[type=radio][value="comparison"]:not([value=none]):not([value=pie]):checked~.chart__wrapper';
+//$comparison-chart-key: 'input[type=radio][value="comparison"]:not([value=none]):not([value=pie]):checked~.chart__key';
 
 $responsive-chart: 'input[type=radio][value="responsive"]:not([value=none]):not([value=pie]):checked~.chart__wrapper';
 $scatter-line-chart: 'input[type="radio"]:not([value="pie"]):is([value="line"],[value="scatter"],[value="bubble"],[value="radar"],[value="proportional"],[value="combo"]):checked ~ .chart__wrapper';
 
 
 $line-chart: 'input[type="radio"]:not([value="pie"])[value="line"]:checked ~ .chart__wrapper';
-$bubble-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="bubble"]:checked ~ .chart__wrapper';
-$radar-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="radar"]:checked ~ .chart__wrapper';
-$proportional-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="proportional"]:checked ~ .chart__wrapper';
-$proportional-chart-key: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="proportional"]:checked ~ .chart__key';
+//$bubble-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="bubble"]:checked ~ .chart__wrapper';
+//$radar-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="radar"]:checked ~ .chart__wrapper';
+//$proportional-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="proportional"]:checked ~ .chart__wrapper';
+//$proportional-chart-key: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="proportional"]:checked ~ .chart__key';
 $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="polar"]):checked ~ .chart__wrapper';
-$polar-chart: 'input[type="radio"]:not([value="none"])[value="polar"]:checked ~ .chart__wrapper';
-$tree-chart: 'input[type="radio"]:not([value="none"])[value="treemap"]:checked ~ .chart__wrapper';
-$tree-chart-key: 'input[type="radio"]:not([value="none"])[value="treemap"]:checked ~ .chart__key';
-$dumbbell-chart: 'input[type="radio"]:not([value="none"])[value="dumbbell"]:checked ~ .chart__wrapper';
-$waffle-chart: 'input[type="radio"]:not([value="none"])[value="waffle"]:checked ~ .chart__wrapper';
+//$polar-chart: 'input[type="radio"]:not([value="none"])[value="polar"]:checked ~ .chart__wrapper';
+//$tree-chart: 'input[type="radio"]:not([value="none"])[value="treemap"]:checked ~ .chart__wrapper';
+//$tree-chart-key: 'input[type="radio"]:not([value="none"])[value="treemap"]:checked ~ .chart__key';
+//$dumbbell-chart: 'input[type="radio"]:not([value="none"])[value="dumbbell"]:checked ~ .chart__wrapper';
+//$waffle-chart: 'input[type="radio"]:not([value="none"])[value="waffle"]:checked ~ .chart__wrapper';
 
 
 // #region Basic setup - including: container setup, css vars 
@@ -183,7 +183,7 @@ $waffle-chart: 'input[type="radio"]:not([value="none"])[value="waffle"]:checked 
     fill: currentColor;
     z-index: #{10 - $i};
   }
-  input:is([value="pie"],[value="polar"]):checked ~ .chart__outer .pie path:nth-child(10n - #{10 - $i}) {
+  input:is([value="pie"],[value="polar"]):checked ~ .chart__wrapper .pie path:nth-child(10n - #{10 - $i}) {
     fill: var(#{'--chart-colour-'+$i+'-set'});
   }
 }
@@ -203,6 +203,11 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
 }
 
 .chart__options {
+
+  &:has(span:first-child:last-child){
+    display: none;
+  }
+
 
   position: absolute;
   display: block;
@@ -988,8 +993,114 @@ input[type="radio"]:not([value="pie"])[value="stacked"]:checked ~ .chart__wrappe
 // #endregion
 
 
+// #region Pie chart
+#{'.chart__outer '+$pie-chart} {
 
+  margin-bottom: 2rem;
 
+  .chart__yaxis,
+  .line {
+    display: none;
+  }
+  table {
+    display: none;
+  }
+
+  .pies {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .pie {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    min-width: rem(200);
+    flex: 1 1 auto;
+    display: inline-block;
+    max-width: var(--pie-size);
+
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .pie svg {
+    width: 100%;
+    height: 100%;
+
+    path:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .pie > div {
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    background: var(--body-colour-set);
+    border-radius: 50%;
+    z-index: var(--index-focus);
+    padding: 1rem;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 67%;
+
+    span {
+      text-align: center;
+      display: block;
+    }
+  }
+
+  .pie:has(path:hover) > div {
+    display: none;
+  }
+
+  .pie foreignObject {
+    background: var(--body-colour-set);
+    border-radius: 50%;
+    z-index: var(--index-focus);
+    pointer-events: none;
+    display: none;
+    padding: 1rem;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    span {
+      text-align: center;
+      display: block;
+    }
+  }
+  
+  .pie {
+    path:nth-child(1):hover ~ foreignObject:nth-of-type(1),
+    path:nth-child(2):hover ~ foreignObject:nth-of-type(2),
+    path:nth-child(3):hover ~ foreignObject:nth-of-type(3),
+    path:nth-child(4):hover ~ foreignObject:nth-of-type(4),
+    path:nth-child(5):hover ~ foreignObject:nth-of-type(5),
+    path:nth-child(6):hover ~ foreignObject:nth-of-type(6),
+    path:nth-child(7):hover ~ foreignObject:nth-of-type(7),
+    path:nth-child(8):hover ~ foreignObject:nth-of-type(8),
+    path:nth-child(9):hover ~ foreignObject:nth-of-type(9){
+      display: block;
+    }
+  }
+}
+// #endregion
 
 
 

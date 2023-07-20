@@ -4,7 +4,7 @@
    <ul class="breadcrumb mb-0 d-sm-none">
       <li><a href="/components">Components</a></li>
    </ul>
-   <h1>Charts</h1>
+   <h1>Charts (BETA)</h1>
    <p>Show individual values of a data set so users can compare the values to each other.</p>
    <p class="note"><strong>Note: </strong>The data is added to the page using a table element which is then converted into a chart by using a combination of CSS and supporting SVG's.</p>
    </div>
@@ -400,6 +400,45 @@
       </Chart>
    </div>
 
+
+   
+   <div class="container visualtest" id="pie">
+
+      <h2>Pie chart</h2>
+
+      <Chart data-max="100" data-min="0" data-type="pie">
+         <table>
+            <thead>
+                  <tr class="">
+                     <th>Year</th>
+                     <th>Growth</th>
+                     <th>Growth2</th>
+                     <th>Growth2</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  <tr>
+                     <td>2011</td>
+                     <td>£50.0</td>
+                     <td>£50.10</td>
+                     <td>£50.10</td>
+                  </tr>
+                  <tr>
+                     <td>2012</td>
+                     <td>£75.00</td>
+                     <td>£50.10</td>
+                     <td>£50.10</td>
+                  </tr>
+                  <tr>
+                     <td>2013</td>
+                     <td>£45.00</td>
+                     <td>£57.10</td>
+                     <td>£57.10</td>
+                  </tr>
+            </tbody>
+         </table>
+      </Chart>
+   </div>
 
 <!--
     <Chart class="visualtest" :max="max" :min="min" :fields="fields" :items="items" :yaxis="yaxis" caption="An example of a bar chart.">

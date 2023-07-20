@@ -1,5 +1,5 @@
 // @ts-nocheck
-import setupChart from "../../modules/chart";
+import {setupChart,setEventObservers,setEventHandlers} from "../../modules/chart";
 
 class iamChart extends HTMLElement {
 
@@ -22,14 +22,11 @@ class iamChart extends HTMLElement {
     </style>
     <div class="chart__outer">
       <div class="chart__key"></div>
-      ${!this.hasAttribute('data-types') && this.hasAttribute('data-type') ? `<input type="radio" name="chart-type" value="${this.getAttribute('data-type')}" checked="">` : ''}
-      ${this.hasAttribute('data-types') ? `
-        ${availableTypes.map((type) => `<input type="radio" name="chart-type" value="${type}" id="${chartID}-${type}" ${chartType == type ? 'checked=""' : '' }>`).join('')}
-        <div class="chart__options">
-          <span>Chart Type</span>
-          ${availableTypes.map((type) => `<label for="${chartID}-${type}">${type}</label>` ).join('')}
-        </div>` : ''
-      }
+
+      <div class="chart__options">
+        <span>Chart Type</span>
+      </div>
+
       <div class="chart__wrapper">
         <div class="chart__yaxis"></div>
         <div class="chart">
@@ -47,14 +44,12 @@ class iamChart extends HTMLElement {
     const orginalTable =  this.querySelector('table');
     const newTable = orginalTable.cloneNode(true);
     const chart = this.shadowRoot.querySelector('.chart');
-    const chartKey = this.shadowRoot.querySelector('.chart__key');
     const chartOuter = this.shadowRoot.querySelector('.chart__outer');
-    const chartGuidelines = this.shadowRoot.querySelector('.chart__guidelines');
-    const chartYaxis = this.shadowRoot.querySelector('.chart__yaxis');
-
+    
     chart.appendChild(newTable);
 
-    setupChart(this,chartOuter,newTable,chartKey,chartGuidelines,chartYaxis);
+    setupChart(this,chartOuter,newTable);
+    setEventObservers(this,chartOuter);
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {
