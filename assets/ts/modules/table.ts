@@ -191,12 +191,17 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       formSubmit();
     }
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && event.target.closest('form .dialog__wrapper > dialog')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter][data-no-ajax]')){ // Allow for input fields to filter the current results without a new ajax call
+
+      filterTable(table, form, wrapper);
+      createPaginationButttons(wrapper,pagination);
+      populateDataQueries(table,form);
+    }
+    else if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && event.target.closest('form .dialog__wrapper > dialog')){
       
       formSubmit();
     }
-
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && !event.target.closest('form dialog')){
+    else if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && !event.target.closest('form dialog')){
       
       formSubmit();
     }
@@ -370,6 +375,9 @@ export const sortTable = (table, form, savedTableBody) => {
   Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
 
     let rowIndex = tableRow.querySelector('td[data-label="'+sortBy+'"], th[data-label="'+sortBy+'"]').textContent.trim();
+
+    if(tableRow.querySelector('[data-label="'+sortBy+'"] .td__content'))
+      rowIndex = tableRow.querySelector('[data-label="'+sortBy+'"] .td__content').textContent.trim();
 
     // If a predefined order set replace the search term with an ordered numeric value so it can be sorted
     if(orderArray.length && orderArray.includes(rowIndex)){
@@ -915,6 +923,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
         wrapper.setAttribute('data-page', parseInt(currentPage));
         wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
+        filterTable(table, form, wrapper);
         makeTableFunctional(table, form, pagination, wrapper);        
         createPaginationButttons(wrapper, pagination);
 
