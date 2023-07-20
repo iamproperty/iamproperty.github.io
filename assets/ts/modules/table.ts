@@ -781,12 +781,8 @@ export const makeTableFunctional = function(table, form, pagination, wrapper){
   // Work out the largest width of the CTA's in the last column
   if(wrapper && wrapper.classList.contains('table--cta')){
 
-    if(!wrapper.hasAttribute('data-cta-width')){
-        
-      const largestWidth = getLargestLastColWidth(table);
-      wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
-      wrapper.setAttribute("data-cta-width", `${largestWidth}rem`);
-    }
+    const largestWidth = getLargestLastColWidth(table);
+    wrapper.style.setProperty("--cta-width", `${largestWidth}rem`);
 
     function outputsize() {
 
