@@ -508,14 +508,17 @@ table {
     [data-content="medium"],
     [data-content="high"],
     [data-content="unknown"],
+    [data-content="due"],
     [data-content="overdue"],
     [data-content="incomplete"],
     [data-content="requires approval"],
+    [data-content="upcoming"],
     [data-content="approval required"],
     [data-content="warning"],
     [data-content="verified"],
     [data-content="not started"],
     [data-content="to do"],
+    [data-content="on track"],
     [data-content="completed"],
     [data-content="complete"],
     .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty)
@@ -569,23 +572,30 @@ table {
     color: var(--colour-muted);
   }
 
-  :is([data-content="overdue"],[data-content="incomplete"]):after {
+  :is([data-content="overdue"],[data-content="due"],[data-content="incomplete"]):after {
 
     content: "\f024";
     font-weight: light;
     color: var(--colour-danger);
   }
 
-  :is([data-content="not started"],[data-content="to do"]):after {
+  :is([data-content="not started"],[data-content="to do"],[data-content="on track"]):after {
 
     content: "\f024";
     font-weight: light;
     color: var(--colour-muted);
   }
 
-  :is([data-content="requires approval"],[data-content="approval required"],[data-content="warning"]):after {
+  :is([data-content="requires approval"],[data-content="approval required"],[data-content="upcoming"]):after {
 
     content: "\f024";
+    font-weight: light;
+    color: var(--colour-warning);
+  }
+
+  :is([data-content="warning"]):after {
+
+    content: "\f071";
     font-weight: light;
     color: var(--colour-warning);
   }
