@@ -600,8 +600,6 @@ export const createChartYaxis = function(chartElement:any,chartOuter:any,chartYa
     let { axis } = getValues(chartElement,value,min,max);
     chartYaxis.innerHTML += `<div class="axis__point" style="--percent:${axis}%;"><span>${yaxis[i]}</span></div>`;
   }
-
-
 }
 
 export const createXaxis = function(chartElement:any,chartOuter:any,xaxis:any){
@@ -627,7 +625,6 @@ export const createXaxis = function(chartElement:any,chartOuter:any,xaxis:any){
   }
   chart.prepend(chartXaxis);
 }
-
 
 export const createLines = function(chartElement:any,chartOuter:any){
   
@@ -704,7 +701,6 @@ export const createLines = function(chartElement:any,chartOuter:any){
 
   linesWrapper.innerHTML = returnString;
 }
-
 
 export const createPies = function(chartElement:any,chartOuter:any){
 
@@ -795,7 +791,6 @@ export const createPies = function(chartElement:any,chartOuter:any){
   pieWrapper.innerHTML = returnString;
 }
 
-
 export const createSlope = function(chartElement:any,chartOuter:any){
   let n:number = 0;
   let totalX:number = 0;
@@ -853,7 +848,6 @@ export const createSlope = function(chartElement:any,chartOuter:any){
   slopeWrapper.innerHTML = `<svg viewBox="0 0 200 100" class="line" preserveAspectRatio="none"><path fill="none" d="M 0 ${100-firstYPercent} L 200 ${100-lastYPercent}" style="--path: path('M 0 100 L 200 100');"></path></svg>`;
 }
 
-
 function createKeyTotals(chartElement:any,chartOuter:any){
 
   let chartTotal = 0;
@@ -905,8 +899,6 @@ function createKeyTotals(chartElement:any,chartOuter:any){
     key.innerHTML += `<span class="chart__total"><span class="chart__total__number"><span class="visually-hidden">Total: </span>${keyTotal}</span><span class="chart__total__percent"><span class="visually-hidden">Total percent: </span>${keyPercent}%</span></span>`;
   });
 }
-
 // #endregion
-
 
 export default setupChart;
