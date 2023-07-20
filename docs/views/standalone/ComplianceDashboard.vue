@@ -62,6 +62,7 @@
         <div class="container">
           <div class="row tab-focus">
 
+
 <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="Due" id="due_diligience_incomplete" class="d-none" />
 <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="Upcoming" id="due_diligience_requires_approval" class="d-none" />
 <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="On track" id="due_diligience_verified" class="d-none" />
@@ -74,6 +75,7 @@
 </div>
 <div class="col-sm-4 col-md-3">
 <label for="due_diligience_verified" ><Card class="card--filter colour-success card--flag" data-total="" data-query="SLA progress == On track">On track</Card></label>
+
 </div>
 
 </div>
