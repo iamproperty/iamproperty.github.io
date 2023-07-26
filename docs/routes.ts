@@ -244,14 +244,6 @@ const routes = [
             component: () => import('./views/components/FormIndex.vue')
           },
           {
-            path: 'inputs',
-            name: 'Form input field',
-            meta: {
-              title: 'Form input fields | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Input.vue')
-          },
-          {
             path: 'input-types',
             name: 'Form basic input types',
             meta: {
@@ -308,14 +300,6 @@ const routes = [
             component: () => import('./views/components/form/Checkbox.vue')
           },
           {
-            path: 'radio',
-            name: 'Radio field',
-            meta: {
-              title: 'Radio field | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Radio.vue')
-          },
-          {
             path: 'toggle',
             name: 'Toggle buttons',
             meta: {
@@ -340,6 +324,30 @@ const routes = [
             component: () => import('./views/components/form/Validation.vue')
           }
         ]
+      },
+      {
+        path: 'inputs',
+        name: 'Form input fields',
+        meta: {
+          title: 'Form input fields | Components | iamkey'
+        },
+        component: () => import('./views/components/FormInputDoc.vue')
+      },
+      {
+        path: 'radio',
+        name: 'Form Radio fields',
+        meta: {
+          title: 'Form Radio fields | Elements | iamkey'
+        },
+        component: () => import('./views/components/RadioDoc.vue')
+      },
+      {
+        path: 'validation',
+        name: 'Form validation',
+        meta: {
+          title: 'Form validation | Components | iamkey'
+        },
+        component: () => import('./views/components/FormValidationDoc.vue')
       },
       {
         path: 'filterlist',

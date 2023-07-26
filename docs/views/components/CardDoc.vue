@@ -233,6 +233,12 @@
             <Card class="card--filter active" data-total="14">Due diligence incomplete</Card>
           </button>
         </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Selected State</span>
+          <button>
+            <Card class="card--filter checked" data-total="14">Due diligence incomplete</Card>
+          </button>
+        </div>
 
       </div>
     </div>
@@ -260,6 +266,12 @@
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <button class="d-inline-block">
             <Card class="card--filter active"><i class="fa fa-house"></i>Character property</Card>
+          </button>
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Checked State</span>
+          <button class="d-inline-block">
+            <Card class="card--filter checked"><i class="fa fa-house"></i>Character property</Card>
           </button>
         </div>
       </div>
