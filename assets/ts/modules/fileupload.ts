@@ -4,6 +4,7 @@ function fileupload(fileupload: Element, wrapper: Element) {
   const filesWrapper = wrapper.querySelector('.files');
   const dropArea = wrapper.querySelector('.drop-area');
   const input = fileupload.querySelector('input');
+  const maxSize = fileupload.hasAttribute('data-maxsize') ? fileupload.getAttribute('data-maxsize') : 0;
 
   // We clone the input field to work as a buffer input field, this allows us to add new files without losing the old ones
   const cloneInput = input.cloneNode();
@@ -30,13 +31,8 @@ function fileupload(fileupload: Element, wrapper: Element) {
       const { files } = input;
       const button = event.target.closest('.files button');
 
-      console.log(button);
-
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
-
-        console.log(file.name)
-        console.log(button.getAttribute('data-file'))
         
         if(file.name != button.getAttribute('data-file'))
           dt.items.add(file) // here you exclude the file. thus removing it.
@@ -44,16 +40,12 @@ function fileupload(fileupload: Element, wrapper: Element) {
       
       input.files = dt.files // Assign the updates list
 
-      console.log(dt.files);
-      console.log(input.files);
-
-
       const changeEvent = new Event('change');
       input.dispatchEvent(changeEvent);
     }
   });
 
-
+  // Buffer input change event
   cloneInput.addEventListener('change', (event) => {
 
     if(input.hasAttribute('multiple')){
@@ -66,7 +58,9 @@ function fileupload(fileupload: Element, wrapper: Element) {
       for (let i = 0; i < filesArray.length; i++) {
         const file = filesArray[i]
 
-        if(!fileNames.includes(file.name))
+        const size = file.size/1000;
+
+        if(!fileNames.includes(file.name) && (maxSize == 0 || size < maxSize))
           dt.items.add(file) // here you exclude the file. thus removing it.
 
         fileNames.push(file.name);

@@ -27,7 +27,7 @@ class iamFileupload extends HTMLElement {
     </style>
     <div class="file-upload">
       <span class="file-upload__title">Upload file</span>
-      <p>Max file size is 500kb. Supported file <br/>types are .pdf, .csv, .jpg, and .png </p>
+      <p class="helper-text"></p>
       <button class="btn btn-primary"><slot name="btn"></slot> Upload document</button>
       <div class="drop-area"></div>
       <hr/>
@@ -43,6 +43,10 @@ class iamFileupload extends HTMLElement {
     this.innerHTML += '<i class="fa-regular fa-arrow-up-from-bracket me-2" aria-hidden="true" slot="btn"></i>';
     
     const wrapper = this.shadowRoot.querySelector('.file-upload');
+    const input = this.querySelector('input');
+    const helperText = this.shadowRoot.querySelector('.helper-text');
+
+    helperText.innerHTML = `${this.hasAttribute('data-maxsize') ? `Max file size is ${this.getAttribute('data-maxsize')}kb. ` : '' }${ input.hasAttribute('accept') ? `Supported file types are ${input.getAttribute('accept')}` : '' }`;
 
     fileupload(this,wrapper);
   }

@@ -1,5 +1,5 @@
 ```
-<FileUpload data-maxsize="500"><input type="file" name="files[]" multiple="multiple" accept=".pdf, .csv, .jpg, .png" /></FileUpload>
+<iam-fileupload data-maxsize="500"><input type="file" name="files[]" multiple="multiple" accept=".pdf, .csv, .jpg, .png" /></iam-fileupload>
 ```
 
 **Properties**

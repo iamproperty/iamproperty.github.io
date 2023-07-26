@@ -3,6 +3,7 @@
 
 .file-upload {
   max-width: rem(400)!important;
+  padding-bottom: rem(16);
 
   .drop-area > input {
     display: none;
@@ -25,6 +26,10 @@
     padding-bottom: rem(map-get($heading-sizes,"h4_pb"));
     max-width: var(--content-max-width);
   }
+
+  .helper-text {
+    max-width: rem(270);
+  }
 }
 
 .files {
@@ -38,17 +43,57 @@
     border: 2px solid var(--colour-primary-theme);
     appearance: none; // Fix appearance for date inputs in Safari
     border-radius: rem(8);
-    margin-bottom: rem(24);
+    margin-bottom: rem(16);
     color: var(--colour-primary);
     border-color: #D8D8D8;
     background: #D8D8D8;
     max-width: rem(400)!important;
+    position: relative;
+
+
+    button {
+      position: absolute;
+      top: calc(50% - #{rem(9)});
+      right: rem(14);
+      z-index: var(--index-floating);
+      text-indent: 300%;
+      overflow: hidden;
+      border: none;
+      height: rem(18);
+      width: rem(18);
+      background: transparent;
+
+      &:after {
+        content: "";
+        top: 0;
+        left: 0;
+        position: absolute;
+        display: block;
+        height: rem(18);
+        width: rem(18);
+        z-index: var(--index-focus);
+        background: currentColor;
+        mask-image: var(--icon-close);
+        mask-size: 100%;
+        mask-repeat: no-repeat;
+        mask-position: 50% 50%;
+        -webkit-mask-image: var(--icon-close);
+        -webkit-mask-size: 100%;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: 50% 50%;
+      }
+    }
   }
 }
 
-:host(.drag-drop) .file-upload {
+:host(.fileupload--drag-drop) .file-upload {
   
   max-width: rem(800)!important;
+  
+  .helper-text {
+
+    max-width: rem(800)!important;
+  }
 
   .drop-area > input {
     display: block;
@@ -58,7 +103,7 @@
     position: relative;
     padding: rem(24) rem(32) rem(24) rem(32);
     user-select: none;
-    
+
     &.focus {
       
       border: 2px solid var(--colour-info);
