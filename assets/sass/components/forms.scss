@@ -9,14 +9,14 @@ label {
   color: var(--colour-heading);
   display: block;
 
-  &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio'])):after {
+  &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='file'])):after {
     content: " (Optional)";
   }
 }
 // #endregion
 
 // #region input field
-:is(input,textarea,output) {
+:is(input,textarea,output,select) {
   display: block;
   width: 100%;
   max-width: $content-max-width;
@@ -34,15 +34,6 @@ label {
   margin-bottom: rem(24);
   min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
   max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
-
-  // TODO: review later
-  &[type="file"] {
-    overflow: hidden; // prevent pseudo element button overlap
-
-    &:not(:disabled):not([readonly]) {
-      cursor: pointer;
-    }
-  }
 
   // Customize the `:focus` state to imitate native WebKit styles.
   &:is(:focus,.focus):not(:disabled) {
@@ -64,26 +55,6 @@ label {
     background-color: #CCD6D8;
     opacity: 0.4;
     cursor: not-allowed;
-  }
-
-  // File input buttons theming
-  &::file-selector-button {
-    padding: $input-padding-y $input-padding-x;
-    margin: (-$input-padding-y) (-$input-padding-x);
-    margin-inline-end: $input-padding-x;
-    color: $form-file-button-color;
-    @include gradient-bg($form-file-button-bg);
-    pointer-events: none;
-    border-color: inherit;
-    border-style: solid;
-    border-width: 0;
-    border-inline-end-width: $input-border-width;
-    border-radius: 0; // stylelint-disable-line property-disallowed-list
-    @include transition($btn-transition);
-  }
-
-  &:hover:not(:disabled):not([readonly])::file-selector-button {
-    background-color: $form-file-button-hover-bg;
   }
 
 }
@@ -556,71 +527,45 @@ select[multiple]::-webkit-scrollbar-thumb {
 }
 // #endregion
 
+// #region Select
 
+select {
+  $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
-// #region large upload field
+  background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem)/var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
+              linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top/calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) no-repeat;
+  
+  padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem));
+  
+  option {font-size: 1.2em;}
 
-.form-control__wrapper.form-control--lrg-file {
-  aspect-ratio: 4/2;
-  border: 1px dashed var(--colour-selected);
-  position: relative;
-
-  .icon {
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%,calc(-50% - 1rem));
-    color: var(--colour-muted);
-    font-size: 5rem;
-    height: 1em;
-    width: 1em;
-    pointer-events: none;
+  &[multiple],
+  &[size]:not([size="1"]) {
+    background: none;
+    max-height: none!important;
   }
 
-  > label {
-    
-    position: absolute;
-    top: calc(50% + 2rem);
-    left:50%;
-    transform: translate(-50%,-50%);
-    width: 100%;
-    text-align: center;
+  &:disabled {
+    color: $form-select-disabled-color;
+    background-color: $form-select-disabled-bg;
+    border-color: $form-select-disabled-border-color;
   }
 
-  > input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-  }
-
-  .file-uploaded & {
-    border: 3px solid var(--colour-success);
-    border-radius: 50%;
-    aspect-ratio: 1;
-    margin-inline: auto;
-    max-width: 10rem;
-
-    > label {
-      content: "File uploaded";
-    }
+  // Remove outline from select box in FF
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 $form-select-color;
   }
 }
+// #endregion
 
-.file-upload__add {
-  display: none;
-
-  .file-uploaded & {
-    display: block;
-    margin-inline: auto;
-    color: var(--colour-muted);
-    font-size: rem(14);
-    text-align: center;
-    margin-top: -1rem;
-    margin-bottom: 1rem;
-    cursor: pointer;
+// #region file upload
+iam-fileupload {
+  
+  input {
+    display: none;
   }
+
 }
+
 // #endregion

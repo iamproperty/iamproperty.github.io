@@ -1,7 +1,12 @@
 // @ts-nocheck
 const routes = [
   { name: 'Home', path: '/', component: () => import('./views/Home.vue') },
-  { name: 'Principles', path: '/principles', component: () => import('./views/Principles.vue'), meta: { title: 'Principles | iamkey' } },
+  { 
+    name: 'Upload', 
+    path: '/upload', 
+    component: () => import('./views/upload.vue'), 
+    meta: { title: 'Upload | iamkey' }
+  },
   { name: 'Principles', path: '/principles', component: () => import('./views/Principles.vue'), meta: { title: 'Principles | iamkey' } },
   { /* Foundations */
     path: '/foundations',
@@ -244,22 +249,6 @@ const routes = [
             component: () => import('./views/components/FormIndex.vue')
           },
           {
-            path: 'input-types',
-            name: 'Form basic input types',
-            meta: {
-              title: 'Form basic input types | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/InputTypes.vue')
-          },
-          {
-            path: 'textarea',
-            name: 'Form textarea',
-            meta: {
-              title: 'Form textarea | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Textarea.vue')
-          },
-          {
             path: 'date',
             name: 'Form date and time pickers',
             meta: {
@@ -274,22 +263,6 @@ const routes = [
               title: 'Form range field | Elements | iamkey'
             },
             component: () => import('./views/components/form/Range.vue')
-          },
-          {
-            path: 'file',
-            name: 'Form file upload field',
-            meta: {
-              title: 'Form file upload field | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/File.vue')
-          },
-          {
-            path: 'select',
-            name: 'Form select field',
-            meta: {
-              title: 'Form select field | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Select.vue')
           },
           {
             path: 'checkbox',
@@ -314,14 +287,6 @@ const routes = [
               title: 'Pill tags | Elements | iamkey'
             },
             component: () => import('./views/components/form/Tags.vue')
-          },
-          {
-            path: 'validation',
-            name: 'Form validation',
-            meta: {
-              title: 'Form validation | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Validation.vue')
           }
         ]
       },
@@ -334,12 +299,28 @@ const routes = [
         component: () => import('./views/components/FormInputDoc.vue')
       },
       {
+        path: 'select',
+        name: 'Form select fields (BETA)',
+        meta: {
+          title: 'Form select fields | Elements | iamkey'
+        },
+        component: () => import('./views/components/Select.vue')
+      },
+      {
         path: 'radio',
         name: 'Form Radio fields',
         meta: {
           title: 'Form Radio fields | Elements | iamkey'
         },
         component: () => import('./views/components/RadioDoc.vue')
+      },
+      {
+        path: 'file',
+        name: 'Form file upload fields',
+        meta: {
+          title: 'Form file upload field | Elements | iamkey'
+        },
+        component: () => import('./views/components/File.vue')
       },
       {
         path: 'validation',
