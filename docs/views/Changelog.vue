@@ -3,6 +3,13 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.7.7</h2>
+      <ul>
+        <li>Bug fixed to always recreate cta width on table</li>
+        <li>Allow flags to be shown on the cards</li>
+        <li>Update the status icons</li>
+      </ul>
+
       <h2>V3.7.6</h2>
       <ul>
         <li>Table bug fixes</li>
