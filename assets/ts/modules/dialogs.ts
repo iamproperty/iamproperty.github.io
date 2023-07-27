@@ -86,7 +86,8 @@ const extendDialogs = (body) => {
 
         if (event.clientX < dialogDimensions.left || event.clientX > dialogDimensions.right || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
 
-          dialog.close()
+          if(!event.target.closest('input[type="radio"]')) // Weird bug when interacting with radio input fields within dialogs cuases it to close
+            dialog.close()
           
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
