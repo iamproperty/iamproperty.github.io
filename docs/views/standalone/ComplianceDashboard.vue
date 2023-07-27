@@ -44,12 +44,6 @@
             </div>
           </div>
         </div>
-        <div class="container">
-
-          <span class="h4">Total Buyer pipeline results: <span data-query="Locked to"></span></span>
-          <hr/>
-        </div>
-
 
         <div class="container">
           <div class="tabs__links">
@@ -58,30 +52,64 @@
             <button class="link" name="page" value="allocation">Property Allocation</button>
           </div>
         </div>
+        <div class="container">
+
+          <span class="h4">Total Buyer pipeline results: <span data-query="Locked to"></span></span>
+          <hr/>
+        </div>
 
         <div class="container">
           <div class="row tab-focus">
 
 
-<input type="checkbox" name="sla_progress" data-filter="SLA progress" value="Due" id="due_diligience_incomplete" class="d-none" />
-<input type="checkbox" name="sla_progress" data-filter="SLA progress" value="Upcoming" id="due_diligience_requires_approval" class="d-none" />
-<input type="checkbox" name="sla_progress" data-filter="SLA progress" value="On track" id="due_diligience_verified" class="d-none" />
+          <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="Due" id="due_diligience_incomplete" class="d-none" />
+          <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="Upcoming" id="due_diligience_requires_approval" class="d-none" />
+          <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="On track" id="due_diligience_verified" class="d-none" />
 
-<div class="col-sm-4 col-md-3">
-<label for="due_diligience_incomplete"><Card class="card--filter colour-danger card--flag" data-total="" data-query="SLA progress == Overdue">Due/Overdue</Card></label>
-</div>
-<div class="col-sm-4 col-md-3">
-<label for="due_diligience_requires_approval" ><Card class="card--filter colour-warning card--flag" data-total="" data-query="SLA progress == Upcoming">Upcoming</Card></label>
-</div>
-<div class="col-sm-4 col-md-3">
-<label for="due_diligience_verified" ><Card class="card--filter colour-success card--flag" data-total="" data-query="SLA progress == On track">On track</Card></label>
+          <div class="col-sm-4 col-md-3">
+          <label for="due_diligience_incomplete"><Card class="card--filter colour-danger card--flag" data-total="" data-query="SLA progress == Overdue">Due/Overdue</Card></label>
+          </div>
+          <div class="col-sm-4 col-md-3">
+          <label for="due_diligience_requires_approval" ><Card class="card--filter colour-warning card--flag" data-total="" data-query="SLA progress == Upcoming">Upcoming</Card></label>
+          </div>
+          <div class="col-sm-4 col-md-3">
+          <label for="due_diligience_verified" ><Card class="card--filter colour-success card--flag" data-total="" data-query="SLA progress == On track">On track</Card></label>
 
-</div>
+          </div>
 
-</div>
+          </div>
 
         </div>
 
+        <div class="container">
+
+          <div class="row align-items-end">
+            <div class="col-12 ms-md-auto mw-fit-content">
+
+                <div class="dialog__wrapper dialog__wrapper--md-right">
+
+                    <button class="btn btn-secondary me-0 nowrap" type="button" aria-label="Display filters of who's work to include">Sort by</button>
+                    <dialog>
+
+                      <div class="mb-0">
+                        <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest"/>
+                        <label for="follow-up-oldest" class="radio--tick">Follow up date (Oldest to newest)</label>
+                        <hr/>
+                        <input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest"/>
+                        <label for="follow-up-newest" class="radio--tick">Follow up date (Newest to oldest)</label>
+                        <hr/>
+                        <input type="radio" name="sort" data-sort="" id="date-instructed-oldest" value="date-instructed-oldest" checked="" autofocus="true"/>
+                        <label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label>
+                        <hr/>
+                        <input type="radio" name="sort" data-sort="" id="date-instructed-newest" value="date-instructed-newest"/>
+                        <label for="date-instructed-newest" class="radio--tick">Date Instructed (Newest to oldest)</label>
+                      </div>
+                    </dialog>
+                </div>
+
+            </div>
+        </div>  
+        </div>
       </form>
 
       <div class="container">

@@ -392,6 +392,8 @@ div:has(> input[type="radio"]) {
 
 input[type="radio"] + label:not(:has(> iam-card)) {
 
+  --tick-colour: transparent;
+
   color: var(--colour-heading);
   position: relative;
   font-size: rem(16);
@@ -401,6 +403,7 @@ input[type="radio"] + label:not(:has(> iam-card)) {
   padding-bottom: rem(10);
   margin-bottom: rem(24);
   margin-right: rem(24);
+  cursor: pointer;
 
   &:before {
     content: "";
@@ -425,9 +428,52 @@ input[type="radio"] + label:not(:has(> iam-card)) {
     top: rem(15 - 2);
     left: rem(5);
   }
+
+  &.radio--tick {
+    &:before {
+      
+      content: "\f00c";
+      position: absolute;
+      font-size: 1.5em;
+      line-height: 1;
+      color: var(--tick-colour);
+      font-family: "Font Awesome 6 Pro";
+
+      background: none !important;
+      border: none!important;
+      outline: none!important;
+      left: 0.25rem;
+    }
+    
+
+    &:after {
+      display: none;
+    }
+  }
+}
+
+
+@media (forced-colors: active) {
+
+  input[type="radio"]:not(:checked) + label.radio--tick:not(:has(> iam-card)) {
+
+    &:before {
+    
+      display: none;
+    }
+  }
+}
+
+div:has(> input[type="radio"]:nth-of-type(2)) {
+  label {
+    margin-bottom: 0rem;
+  }
+  margin-bottom: rem(24);
 }
 
 input[type="radio"]:checked + label {
+
+  --tick-colour: var(--colour-info);
 
   &:before {
     border-color: var(--colour-info);
@@ -442,7 +488,13 @@ input[type="radio"]:checked + label {
   }
 }
 
+input[type="radio"]:checked:is(:focus,:hover,.focus) + label {
+
+  --tick-colour: var(--colour-info);
+}
 input[type="radio"]:is(:focus,:hover,.focus) + label {
+
+  --tick-colour: var(--colour-muted);
 
   &:before {
     background: var(--colour-light);
@@ -450,6 +502,8 @@ input[type="radio"]:is(:focus,:hover,.focus) + label {
   }
 }
 input[type="radio"]:is(:active,.active) + label {
+
+  --tick-colour: var(--colour-light);
 
   &:before {
     background: #E0E0E0;
