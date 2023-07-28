@@ -923,7 +923,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
         wrapper.setAttribute('data-page', parseInt(currentPage));
         wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
-        filterTable(table, form, wrapper);
+        
         makeTableFunctional(table, form, pagination, wrapper);        
         createPaginationButttons(wrapper, pagination);
 
