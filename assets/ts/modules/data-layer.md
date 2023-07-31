@@ -8,8 +8,6 @@ The `createDataLayer()` function should be called in the JavaScript code of the 
 
 ## Function Signature
 
-typescriptCopy code
-
 `function createDataLayer(): void` 
 
 ## Events Tracked
