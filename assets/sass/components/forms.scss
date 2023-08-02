@@ -433,11 +433,6 @@ input[type="radio"] + label:not(:has(> iam-card)) {
   }
 }
 
-input[type="checked"] + label:not(:has(> iam-card)) {
-
-}
-
-
 @media (forced-colors: active) {
 
   input:is([type="radio"],[type="checkbox"]):not(:checked) + label.radio--tick:not(:has(> iam-card)) {
@@ -479,6 +474,27 @@ input[type="checkbox"]:not([disabled]):checked + label {
     background: var(--colour-info)!important;
   }
 }
+input[type="checkbox"]:checked + label {
+
+  &:after {
+    content: "\f00c";
+    position: absolute;
+    font-size: 1em;
+    line-height: 1;
+    color: var(--colour-primary-theme);
+    font-family: "Font Awesome 6 Pro";
+    font-weight: bold;
+    height: rem(24);
+    width: rem(24);
+    line-height: rem(26);
+    background: none !important;
+    border: none!important;
+    outline: none!important;
+    top: rem(10 - 2);
+    left: 0;
+    text-align: center;
+  }
+}
 
 input:is([type="radio"],[type="checkbox"]):checked:is(:focus,:hover,.focus) + label {
 
@@ -518,6 +534,9 @@ input:is([type="radio"],[type="checkbox"]):disabled + label {
     outline: none!important;
     border-color: var(--colour-primary)!important;
   }
+}
+
+input[type="radio"][disabled]:checked + label {
   
   &:after {
     background-color: var(--colour-primary)!important;
@@ -527,8 +546,8 @@ input:is([type="radio"],[type="checkbox"]):disabled + label {
 input[type="checkbox"][disabled]:checked + label {
 
   &:before {
-    background: var(--colour-muted)!important;
-    border-color: var(--colour-muted)!important;
+    background: #E0E0E0!important;
+    border-color: #E0E0E0!important;
   }
 }
 // #endregion

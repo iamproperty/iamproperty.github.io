@@ -118,21 +118,20 @@
         </div>
 
         <dialog id="filters">
-          <span class="h3 pb-2">Filters</span>
-          <span class="lead pb-1 ">Risk Level</span>
+          <span class="h3 pb-2">Filter by</span>
+          <span class="h4 pb-1 ">Risk Level</span>
           <div>
-            <input type="checkbox" name="risk-level" id="risk-level-high" data-filter-text="Risk Level - High" data-filter="Risk level" value="High">
+            <input type="checkbox" name="risk-level-high" id="risk-level-high" data-filter-text="Risk Level - High" data-filter="Risk level" value="High">
             <label for="risk-level-high" class="form-label form-check-label">High</label>
             <hr/>
-            <input type="checkbox" name="risk-level" id="risk-level-medium" data-filter-text="Risk Level - Medium" data-filter="Risk level" value="Medium">
+            <input type="checkbox" name="risk-level-medium" id="risk-level-medium" data-filter-text="Risk Level - Medium" data-filter="Risk level" value="Medium">
             <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
             <hr/>
 
-            <input type="checkbox" name="risk-level" id="risk-level-low" data-filter-text="Risk Level - Low" data-filter="Risk level" value="Low">
+            <input type="checkbox" name="risk-level-low" id="risk-level-low" data-filter-text="Risk Level - Low" data-filter="Risk level" value="Low">
             <label for="risk-level-low" class="form-label form-check-label">Low</label>
             <hr/>
           </div>
-
           <button class="btn btn-primary d-block m-auto">Update results</button>
           <hr/>
         </dialog>
