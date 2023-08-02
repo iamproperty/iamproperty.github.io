@@ -151,7 +151,7 @@ const extendDialogs = (body) => {
       let windowPos = window.innerHeight - window.scrollY;
       if(popoverBottom > windowPos){
 
-        let currentStyle = popover.getAttribute('style');
+        let currentStyle = popover.hasAttribute('style') ? popover.getAttribute('style')+' ' : '';
 
         popover.setAttribute('style',currentStyle+`transform: translate(0, calc(-100% - 4rem))`);
       }
