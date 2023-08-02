@@ -3,10 +3,13 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.7.8--beta</h2>
+      <h2>V3.7.8</h2>
 
       <ul>
-        <li>Form inputs including radio input fields (removal of bootstrap classes)</li>
+        <li>Form inputs (removal of bootstrap classes)</li>
+        <li>Form radio buttons</li>
+        <li>Form checkboxes</li>
+        <li>Form file upload</li>
       </ul>
 
       <h3>Breaking changes</h3>

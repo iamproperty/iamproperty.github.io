@@ -30,14 +30,14 @@ const version = pkg.version;
             <button class="btn btn-primary colour-primary mb-0 me-0">Search</button>
             </div>
 
+  <datalist data-id="searchterms" ref="list">
+    <option v-for="item in refinedResults" :value="item"></option>
+  </datalist>
+
           </form>
         </dialog>
       </div>
   </Nav>
-
-  <datalist data-id="searchterms" ref="list">
-    <option v-for="item in refinedResults" :value="item"></option>
-  </datalist>
 
   <router-view></router-view>
 
@@ -63,6 +63,14 @@ const version = pkg.version;
 @use '../assets/sass/_func.scss' as *;
 @import "./assets/styles.scss";
 
+@media screen and (max-width: 62em){
+  .nav__inner {
+    display: none;
+  }
+  #showMenu:checked ~ .nav__inner {
+    display: block;
+  }
+}
 
 mark {
   padding-inline: 0;
