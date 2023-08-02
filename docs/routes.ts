@@ -275,6 +275,14 @@ const routes = [
         component: () => import('./views/components/Checkbox.vue')
       },
       {
+        path: 'select',
+        name: 'Form select fields (BETA)',
+        meta: {
+          title: 'Form select fields | Elements | iamkey'
+        },
+        component: () => import('./views/components/Select.vue')
+      },
+      {
         path: 'radio',
         name: 'Form Radio fields',
         meta: {
@@ -322,6 +330,14 @@ const routes = [
           title: 'Pill tags | Elements | iamkey'
         },
         component: () => import('./views/components/Tags.vue')
+      },
+      {
+        path: 'file',
+        name: 'Form file upload fields',
+        meta: {
+          title: 'Form file upload field | Elements | iamkey'
+        },
+        component: () => import('./views/components/File.vue')
       },
       {
         path: 'validation',
