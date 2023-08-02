@@ -51,6 +51,31 @@
     position: relative;
 
 
+
+    
+    @media screen and (prefers-color-scheme: dark) {
+
+      background: var(--colour-canvas-2);
+      border-color: var(--colour-canvas-2);
+      color: var(--colour-white);
+    }
+
+    
+    @media (forced-colors: active) {
+
+      padding-right: 5rem;
+
+      button {
+        padding: 0;
+        width: 3.7rem!important;
+        text-indent: 0% !important;
+
+        &:after {
+          display: none!important;
+        }
+      }
+    }
+
     button {
       position: absolute;
       top: calc(50% - #{rem(9)});
