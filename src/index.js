@@ -3,7 +3,7 @@ export { default as Logo } from './foundations/Logo/Logo.vue'
 // Elements
 export { default as Table } from './components/Table/Table.vue'
 export { default as Input } from './components/Input/Input.vue'
-export { default as FileUploads } from './components/FileUploads/FileUploads.vue'
+export { default as FileUpload } from './components/FileUpload/FileUpload.vue'
 // Components
 export { default as Accordion } from './components/Accordion/Accordion.vue'
 export { default as AccordionItem } from './components/Accordion/AccordionItem.vue'
