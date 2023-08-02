@@ -4,7 +4,7 @@
       <ul class="breadcrumb mb-0 d-sm-none">
         <li><a href="/foundations">Foundations</a></li>
       </ul>
-      <h1>Circles</h1>
+      <h1>Circles (Beta)</h1>
       <p>Circles are used as little bits of flair to help highlight our brand. Not elements in their own rights but re-used across multiple different elements and components.</p>
       <h2>Basic circle</h2>
       <p>By default circles will have a basic flat secondary colour but can be updated by with other colours using the <strong>.text-{colour}</strong> class. Or transform it to a simple outline by using a border class like <strong>.border-1</strong>.</p>

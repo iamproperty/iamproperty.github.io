@@ -439,7 +439,7 @@ dialog::backdrop {
 
     margin-bottom: 0.25rem;
 
-    &:after {
+    &:not(.btn-compact):after {
       content: "";
     
       display: inline-block;

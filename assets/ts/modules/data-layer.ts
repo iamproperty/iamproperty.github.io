@@ -4,54 +4,50 @@ type WindowWithDataLayer = Window & {
 
 declare const window: WindowWithDataLayer;
 
-function createDataLayer () {
-
+function createDataLayer(): void {
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    "event": "Pageview",
-    "pageTitle": document.title
+    event: "Pageview",
+    pageTitle: document.title,
   });
-  
-  // Global events to track
-  document.addEventListener('click', (event) => {
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[open] summary')){
-      window.dataLayer.push({
-        "event": "closeDetails",
-        // @ts-ignore: Object is possibly 'null'.
-        "detailsTitle": event.target.closest('summary').textContent
-      });
-    }
-    else if (event && event.target instanceof HTMLElement && event.target.closest('summary')){
-        
-      window.dataLayer.push({
-        "event": "openDetails",
-        // @ts-ignore: Object is possibly 'null'.
-        "detailsTitle": event.target.closest('summary').textContent
-      });
-    }
-  
-    if (event && event.target instanceof HTMLElement && event.target.closest('a')){
-      window.dataLayer.push({
-        "event": "linkClicked",
-        // @ts-ignore: Object is possibly 'null'.
-        "linkText": event.target.closest('a').hasAttribute('title') ? event.target.closest('a').getAttribute('title') : event.target.closest('a').textContent,
-        // @ts-ignore: Object is possibly 'null'.
-        "class": (event.target.closest('a').hasAttribute('class') ? event.target.closest('a').getAttribute('class') : ''),
-        // @ts-ignore: Object is possibly 'null'.
-        "href": event.target.closest('a').getAttribute('href')
-      });
-    }
-    if (event && event.target instanceof HTMLElement && event.target.closest('button')){
-      window.dataLayer.push({
-        "event": "buttonClicked",
-        // @ts-ignore: Object is possibly 'null'.
-        "buttonText": event.target.closest('button').textContent,
-        // @ts-ignore: Object is possibly 'null'.
-        "class": (event.target.closest('button').hasAttribute('class') ? event.target.closest('button').getAttribute('class') : '')
-      });
-    }
+  document.addEventListener("click", (event: MouseEvent) => {
+    const target = (event.target as HTMLElement).closest<HTMLElement>("[open] summary");
 
+    if (target) {
+      window.dataLayer.push({
+        event: "closeDetails",
+        detailsTitle: target.textContent || "",
+      });
+    } else {
+      const summary = (event.target as HTMLElement).closest<HTMLElement>("summary");
+      const link = (event.target as HTMLElement).closest<HTMLAnchorElement>("a");
+      const button = (event.target as HTMLElement).closest<HTMLButtonElement>("button");
+
+      if (summary) {
+        window.dataLayer.push({
+          event: "openDetails",
+          detailsTitle: summary.textContent || "",
+        });
+      }
+
+      if (link) {
+        window.dataLayer.push({
+          event: "linkClicked",
+          linkText: link.hasAttribute("title") ? link.getAttribute("title") || "" : link.textContent || "",
+          class: link.hasAttribute("class") ? link.getAttribute("class") || "" : "",
+          href: link.getAttribute("href") || "",
+        });
+      }
+
+      if (button) {
+        window.dataLayer.push({
+          event: "buttonClicked",
+          buttonText: button.textContent || "",
+          class: button.hasAttribute("class") ? button.getAttribute("class") || "" : "",
+        });
+      }
+    }
   });
 }
 

@@ -4,7 +4,7 @@
       <ul class="breadcrumb mb-0 d-sm-none">
         <li><a href="/foundations">Foundations</a></li>
       </ul>
-      <h1>Z-index strategy</h1>
+      <h1>Z-index strategy (Beta)</h1>
 
       <p>Z-index is a relative CSS property. It has no unit of measurement, other than the other z-indexes in the project. Those other values are usually spread all over the project, which leads to interesting phenomenons. It is very easy to accidentally assign a larger z-index number to an element than that of an element it should be above. The aim of this strategy is to use semantic values instead of numbers using keywords which describe the position of the z-index.</p>
 
