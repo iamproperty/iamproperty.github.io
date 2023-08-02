@@ -17,7 +17,7 @@ const routes = [
       },
       {
         path: 'accessibility',
-        name: 'Accessibility',
+        name: 'Accessibility (Beta)',
         meta: {
           title: 'Accessibility | Foundations | iamkey'
         },
@@ -26,7 +26,7 @@ const routes = [
       },
       {
         path: 'logos',
-        name: 'Logos',
+        name: 'Logos (Beta)',
         meta: {
           title: 'Logos | Foundations | iamkey'
         },
@@ -62,7 +62,7 @@ const routes = [
       },
       {
         path: 'illustrations',
-        name: 'Illustrations',
+        name: 'Illustrations (Beta)',
         meta: {
           title: 'Illustrations | Foundations | iamkey'
         },
@@ -71,7 +71,7 @@ const routes = [
       },
       {
         path: 'circles',
-        name: 'Circles',
+        name: 'Circles (Beta)',
         meta: {
           title: 'Circles | Foundations | iamkey'
         },
@@ -79,7 +79,7 @@ const routes = [
       },
       {
         path: 'media',
-        name: 'Media',
+        name: 'Media (Beta)',
         meta: {
           title: 'Media | Foundations | iamkey'
         },
@@ -97,7 +97,7 @@ const routes = [
       },
       {
         path: 'utilities',
-        name: 'Utility Classes',
+        name: 'Utility Classes (Beta)',
         meta: {
           title: 'Utility Classes | Foundations | iamkey'
         },
@@ -105,7 +105,7 @@ const routes = [
       },
       {
         path: 'z-index',
-        name: 'Z-index',
+        name: 'Z-index (Beta)',
         meta: {
           title: 'Z-index | Foundations | iamkey'
         },
@@ -114,7 +114,7 @@ const routes = [
       },
       {
         path: 'animation',
-        name: 'Animation',
+        name: 'Animation (Beta)',
         meta: {
           title: 'Animation | Foundations | iamkey'
         },
@@ -145,7 +145,7 @@ const routes = [
       },
       {
         path: 'accordion',
-        name: 'Accordion',
+        name: 'Accordion (Beta)',
         meta: {
           title: 'Accordion | Components | iamkey'
         },
@@ -154,7 +154,7 @@ const routes = [
       },
       {
         path: 'applied-filters',
-        name: 'Applied Filters',
+        name: 'Applied Filters (Beta)',
         meta: {
           title: 'Applied Filters | Components | iamkey'
         },
@@ -162,7 +162,7 @@ const routes = [
       },
       {
         path: 'banner',
-        name: 'Banner',
+        name: 'Banner (Beta)',
         meta: {
           title: 'Banner | Components | iamkey'
         },
@@ -189,7 +189,7 @@ const routes = [
       },
       {
         path: 'carousel',
-        name: 'Carousel',
+        name: 'Carousel (Beta)',
         meta: {
           title: 'Carousel | Components | iamkey'
         },
@@ -198,7 +198,7 @@ const routes = [
       },
       {
         path: 'charts',
-        name: 'Charts',
+        name: 'Charts (Beta)',
         meta: {
           title: 'Charts | Components | iamkey'
         },
@@ -206,7 +206,7 @@ const routes = [
       },
       {
         path: 'container',
-        name: 'Container',
+        name: 'Container (Beta)',
         meta: {
           title: 'Container | Elements | iamkey'
         },
@@ -373,7 +373,7 @@ const routes = [
       },
       {
         path: 'filterlist',
-        name: 'Filter list',
+        name: 'Filter list (Beta)',
         meta: {
           title: 'Filter list | Components | iamkey'
         },
@@ -382,7 +382,7 @@ const routes = [
       },
       {
         path: 'header',
-        name: 'Header',
+        name: 'Header (Beta)',
         meta: {
           title: 'Header | Components | iamkey'
         },
@@ -391,7 +391,7 @@ const routes = [
       },
       {
         path: 'lists',
-        name: 'Lists',
+        name: 'Lists (Beta)',
         meta: {
           title: 'Lists | Elements | iamkey'
         },
@@ -400,7 +400,7 @@ const routes = [
       },
       {
         path: 'nav',
-        name: 'Nav',
+        name: 'Nav (Beta)',
         meta: {
           title: 'Nav | Components | iamkey'
         },
@@ -408,7 +408,7 @@ const routes = [
       },
       {
         path: 'notefeed',
-        name: 'Note feed',
+        name: 'Note feed (Beta)',
         meta: {
           title: 'Note feed | Components | iamkey'
         },
@@ -416,7 +416,7 @@ const routes = [
       },
       {
         path: 'pagination',
-        name: 'Pagination',
+        name: 'Pagination (Beta)',
         meta: {
           title: 'Pagination | Components | iamkey'
         },
@@ -425,7 +425,7 @@ const routes = [
       },
       {
         path: 'property-searchbar',
-        name: 'Property Searchbar',
+        name: 'Property Searchbar (Beta)',
         meta: {
           title: 'Property Searchbar | Components | iamkey'
         },
@@ -434,7 +434,7 @@ const routes = [
       },
       {
         path: 'snapshot',
-        name: 'Snapshot',
+        name: 'Snapshot (Beta)',
         meta: {
           title: 'Snapshot | Components | iamkey'
         },
@@ -442,7 +442,7 @@ const routes = [
       },
       {
         path: 'stepper',
-        name: 'Stepper',
+        name: 'Stepper (Beta)',
         meta: {
           title: 'Stepper | Components | iamkey'
         },
@@ -495,7 +495,7 @@ const routes = [
       },
       {
         path: 'tabs',
-        name: 'Tabs',
+        name: 'Tabs (Beta)',
         meta: {
           title: 'Tabs | Components | iamkey'
         },
@@ -504,7 +504,7 @@ const routes = [
       },
       {
         path: 'testimonial',
-        name: 'Testimonial',
+        name: 'Testimonial (Beta)',
         meta: {
           title: 'Testimonial | Components | iamkey'
         },
@@ -512,7 +512,7 @@ const routes = [
       },
       {
         path: 'timeline',
-        name: 'Timeline',
+        name: 'Timeline (Beta)',
         meta: {
           title: 'Timeline | Components | iamkey'
         },
