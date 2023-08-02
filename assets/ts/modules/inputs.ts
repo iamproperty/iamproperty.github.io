@@ -40,6 +40,20 @@ const extendInputs = (body) => {
         changeType(input,newType);
       }
     }
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('dialog [type="radio"]')){
+
+      const dialog = event.target.closest('dialog');
+      const radio = event.target.closest('dialog [type="radio"]');
+
+      Array.from(dialog.querySelectorAll('[type="radio"][autofocus]')).forEach((input,index) => {
+        input.removeAttribute('autofocus');
+      });
+
+      Array.from(dialog.querySelectorAll('[type="radio"]:checked')).forEach((input,index) => {
+        input.setAttribute('autofocus',true);
+      });
+    }
   });
 
   body.addEventListener('click', (event) => {
