@@ -2,7 +2,7 @@
   <main>
     <div class="container">
 
-      <h1>Accessibility</h1>
+      <h1>Accessibility (Beta)</h1>
       <p class="strapline">By making your website accessible, you are ensuring that all of your potential users, including people with disabilities, have a decent user experience and are able to easily access your information. </p>
       
 
