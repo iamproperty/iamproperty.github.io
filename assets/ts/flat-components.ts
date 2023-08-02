@@ -3,6 +3,7 @@
 import * as helpers from '../js/modules/helpers'
 import extendDialogs from '../js/modules/dialogs'
 import createDataLayer from '../js/modules/data-layer'
+import extendInputs from '../js/modules/inputs';
 import nav from '../js/modules/nav'
 import * as tableModule from './modules/table'
 import accordion from './modules/accordion'
@@ -25,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.addGlobalEvents(document.body);
   //helpers.checkElements(document.body);
   extendDialogs(document.body);
+  extendInputs(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {

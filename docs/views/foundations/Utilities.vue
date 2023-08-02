@@ -4,7 +4,7 @@
       <ul class="breadcrumb mb-0 d-sm-none">
         <li><a href="/foundations">Foundations</a></li>
       </ul>
-      <h1>Utility classes</h1>
+      <h1>Utility classes (Beta)</h1>
       <p>Our Utility classes are based upon and use the <a href="https://getbootstrap.com/docs/5.1/utilities/api/" target="_blank">boostrap utility api</a>. But some classes have been removed to help reduce the CSS file size or to restrict unwanted layout and style changes. For example the responsive version of the padding and margins classes have been removed. This reduces around 10kb in file size and removes the temptation to over configure elements.</p>
       <p class="h5 pb-4">Total classes: {{totalClasses}}</p>
       <ul class="list-unstyled">

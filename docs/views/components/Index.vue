@@ -2,6 +2,8 @@
   <main>
     <div class="container">
 
+      <h1>Components</h1>
+      
       <div class="row row-cols-1 row-cols-md-3">
 
         <div v-for="item in pages">

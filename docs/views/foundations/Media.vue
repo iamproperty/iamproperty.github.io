@@ -4,7 +4,7 @@
       <ul class="breadcrumb mb-0 d-sm-none">
         <li><a href="/foundations">Foundations</a></li>
       </ul>
-      <h1>Media</h1>
+      <h1>Media (Beta)</h1>
       <p class="strapline">Images and other media elements are used widely across the digital estate in variety of components.</p>
       <p>By default an image will be 100% width of its container with a height set to auto. But images and other media elements can be combined with <a href="https://getbootstrap.com/docs/5.0/helpers/ratio/" target="_blank">bootstrap ratio elements</a> by wrapping it with a div with the class of <strong>.ratio</strong>.</p>
     </div>

@@ -3,6 +3,21 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.7.8</h2>
+
+      <ul>
+        <li>Form inputs (removal of bootstrap classes)</li>
+        <li>Form radio buttons</li>
+        <li>Form checkboxes</li>
+        <li>Form file upload</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Updating the form inputs could cause issues with other compoonents especiialy since not all of the input field varients have been reviewed yet.</li>
+      </ul>
+
+
       <h2>V3.7.7</h2>
       <ul>
         <li>Bug fixed to always recreate cta width on table</li>

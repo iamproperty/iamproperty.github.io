@@ -105,11 +105,15 @@ a:where(:not(.btn):not(:has(.card)):not(:has(iam-card))),
   background: none;
   padding:0;
   display: flex;
-  margin: 0 0 rem(24) 0;
+
+  &:not([class*="col"]){
+    margin: 0 0 rem(24) 0;
+  }
+
   outline: none!important;
   text-decoration: none;
 
-  &:not(.d-inline-block){
+  &:not(.d-inline-block):not([class*="col"]){
       
     width: 100%;
   }

@@ -6,7 +6,7 @@
       <ul class="breadcrumb mb-0">
         <li><a href="/components/form">Form components</a></li>
       </ul>
-      <h1>Select input field</h1>
+      <h1>Select input field (BETA)</h1>
       <p>The select field inherits alot of the text input field characteristics from the same styling to sharing the same modifiers (size, inline etc).</p>
     </div>
     <div class="container visualtest">

@@ -29,10 +29,6 @@
       <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.display ? value.display : value.value}}</option>
     </select>
 
-    <datalist v-if="allowDatalist()" :id="id+'-list'">
-      <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.value}}</option>
-    </datalist>
-
     <!-- Checkbox -->
     <input v-if="type=='checkbox'||type=='radio'" class="form-check-input" :type="type" :name="name?name:id" :id="id" v-bind="$attrs" />
     <label v-if="type=='checkbox'||type=='radio'" :class="`form-label form-check-label${labelclass?` ${labelclass}`:''}`" :for="id" v-html="label"></label>
@@ -41,9 +37,13 @@
     <input v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn-check${inputclass?` ${inputclass}`:``}`" :type="type.replace('-btn','')" autocomplete="off" :name="name?name:id" :id="id" v-bind="$attrs" />
     <label v-if="type=='checkbox-btn'||type=='radio-btn'" :class="`btn${labelclass?` ${labelclass}`:''}`" :for="id" v-html="label" @click="clickEvent"></label>
 
-    <!-- Error message -->
-    <p v-if="errormsg" class="invalid-feedback mb-0" v-html="errormsg"></p>
     <slot></slot>
+    <!-- Error message -->
+    <span v-if="errormsg" class="invalid-feedback mb-0" v-html="errormsg"></span>
+    
+    <datalist v-if="allowDatalist()" :id="id+'-list'">
+      <option v-for="(value,index) in options" :key="index" :value="value.value">{{value.value}}</option>
+    </datalist>
   </div>
 </template>
 
@@ -109,6 +109,10 @@ export default {
       type: String,
       required: false
     },
+    pattern: {
+      type: String,
+      required: false
+    },
     suffixClass: {
       type: String,
       required: false
@@ -167,7 +171,7 @@ export default {
             return '[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}'
         }
 
-        return false
+        return '(.*?)'
       }
     },
     needsLabel () {

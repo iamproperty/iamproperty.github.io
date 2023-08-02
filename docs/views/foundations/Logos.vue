@@ -4,7 +4,7 @@
       <ul class="breadcrumb mb-0 d-sm-none">
         <li><a href="/foundations">Foundations</a></li>
       </ul>
-      <h1>Logos</h1>
+      <h1>Logos (Beta)</h1>
       <p class="strapline">All iamproperty brands and products are united by sharing the same Tone of Voice and visual identity.</p>
       <p>Our brand logos should always be added using SVG files to ensure the logo is sharp and crisp on all devices. We have created a SVG sprite file which holds all of the brand logos ready to use.</p>
     </div>

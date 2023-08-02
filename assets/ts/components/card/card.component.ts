@@ -53,28 +53,51 @@ class iamCard extends HTMLElement {
 
     parentNode.setAttribute('tabindex','-1');
     
+
     if(parentNode.matches('label[for]')){
 
-      let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+      let isChecked = document.getElementById(parentNode.getAttribute('for')).checked;
         
       if(isChecked)
-        card.classList.add('active');
+        card.classList.add('checked');
+      else
+        card.classList.remove('checked');
     }
 
     card.addEventListener('click', (event) => {
 
       if(parentNode.matches('label[for]')){
 
-        let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+        event.stopPropagation();
+        event.preventDefault();
+
+        const input = document.getElementById(parentNode.getAttribute('for'))
+
+        const inputName = input.getAttribute('name');
+        const inputID = input.getAttribute('id');
+
+        const inputs = Array.from(document.querySelectorAll(`[name="${inputName}"]:not([id="${inputID}"])`));
+    
+        inputs.forEach((input, index) => {
           
-        if(!isChecked)
-          card.classList.add('active');
-        else
-          card.classList.remove('active');
-      }
-      else {
+          const otherCard = document.querySelector(`[for="${input.getAttribute('id')}"] iam-card`);
+          
+          otherCard.dispatchEvent(new Event('inactive'));
+        });
+
         parentNode.click();
+        let isChecked = input.checked
+          
+        if(isChecked)
+          card.classList.add('checked');
+        else
+          card.classList.remove('checked');
+
       }
+    });
+
+    this.addEventListener('inactive', (event) => {
+      card.classList.remove('checked');
     });
 
     card.addEventListener('keydown', (event) => {
@@ -85,12 +108,31 @@ class iamCard extends HTMLElement {
           case 13:
             if(parentNode.matches('label[for]')){
 
-              let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+              event.stopPropagation();
+              event.preventDefault();
+      
+              const input = document.getElementById(parentNode.getAttribute('for'))
+      
+              const inputName = input.getAttribute('name');
+              const inputID = input.getAttribute('id');
+      
+              const inputs = Array.from(document.querySelectorAll(`[name="${inputName}"]:not([id="${inputID}"])`));
+          
+              inputs.forEach((input, index) => {
                 
-              if(!isChecked)
-                card.classList.add('active');
+                const otherCard = document.querySelector(`[for="${input.getAttribute('id')}"] iam-card`);
+                
+                otherCard.dispatchEvent(new Event('inactive'));
+              });
+      
+              parentNode.click();
+              let isChecked = input.checked
+                
+              if(isChecked)
+                card.classList.add('checked');
               else
-                card.classList.remove('active');
+                card.classList.remove('checked');
+      
             }
             else {
               parentNode.click();

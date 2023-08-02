@@ -1,140 +1,558 @@
 @use "../_func" as *;
 
-.form-control__wrapper {
-  margin-bottom: 1.5rem;
+// #region Form label
+label {
+  font-size: rem(18);
+  line-height: rem(21);
+  margin-bottom: rem(8);
+  font-weight: normal;
+  color: var(--colour-heading);
+  display: block;
+
+  &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='file'])):after {
+    content: " (Optional)";
+  }
+}
+// #endregion
+
+// #region input field
+:is(input,textarea,output,select) {
+  display: block;
+  width: 100%;
   max-width: $content-max-width;
+  display: block;
+  width: 100%;
+  padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
+  font-size: var(--input-fs, #{rem(16)});
+  line-height: var(--input-lh, #{rem(20)});
+  color: var(--colour-body);
+  background-color: var(--colour-canvas-2);
+  background-clip: padding-box;
+  border: 2px solid var(--colour-primary);
+  appearance: none; // Fix appearance for date inputs in Safari
+  border-radius: rem(8);
+  margin-bottom: rem(24);
+  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+
+  // Customize the `:focus` state to imitate native WebKit styles.
+  &:is(:focus,.focus):not(:disabled) {
+    border-color: var(--colour-info);
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+  }
+
+  // Add some height to date inputs on iOS
+  // https://github.com/twbs/bootstrap/issues/23307
+  // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
+  &::-webkit-date-and-time-value {
+    // Multiply line-height by 1em if it has no unit
+    height: if(unit($input-line-height) == "", $input-line-height * 1em, $input-line-height);
+  }
+
+  // Disabled inputs
+  &:disabled {
+    background-color: #CCD6D8;
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+}
+
+textarea {
+  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px);
+  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px);
+}
+// #endregion
+
+
+// #region wrappers
+div:has(> label:first-child):has(> input) {
   position: relative;
+  max-width: $content-max-width;
+  margin-bottom: rem(24);
+
+  &:has(input[readonly]):after{
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 300;
+    content: "\f023";
+    position: absolute;
+    font-size: var(--input-lh, #{rem(20)});
+    height: var(--input-lh, #{rem(20)});
+    width: var(--input-lh, #{rem(20)});
+    bottom: calc(var(--input-padding-block, #{rem(12)}) + 2px);
+    right: calc(var(--input-padding-block, #{rem(16)}) + 2px);
+    text-align: center;
+  }
+
+  input, output, .prefix, .suffix {
+    margin-bottom: 0;
+  }
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  > *:not(input):not(output):not(.prefix):not(.suffix) {
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  :is(input,textarea,output) {
+    flex-shrink: 1;
+    flex-grow: 1;
+    width: 0;
+  }
+
+  input ~ *:not(output) {
+    order: 5;
+    margin-top: rem(8);
+  }
+
+  input[type="color"]{
+    width: 3rem;
+    flex-shrink: 0;
+    flex-grow: 0;
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    padding: 0;
+    overflow: hidden;
+
+  
+    &::-moz-color-swatch {
+      
+      border-radius: 0;
+      border: none;
+    }
+
+    &::-webkit-color-swatch {
+      
+      border-radius: 0;
+      border: none;
+    }
+  }
+
+  output {
+    border-left: none;
+    border-end-start-radius: 0;
+    border-start-start-radius: 0;
+  }
+}
+
+div:has(> :is(.form-control-sm, .input--sm)) {
+  
+  --input-fs: #{rem(14)};
+  --input-lh: #{rem(16)};
+  --input-padding-block: #{rem(10)};
+  --input-padding-inline: #{rem(14)};
+}
+div:has(> :is(.form-control-lg, .input--sm)) {
+  --input-fs: #{rem(24)};
+  --input-lh: #{rem(29)};
+  --input-padding-block: #{rem(20)};
+  --input-padding-inline: #{rem(22)};
+}
+
+div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input--inline)) { 
 
   label {
+    flex-shrink: 0;
+    white-space: nowrap;
+    width: fit-content!important;
+    margin: 0;
+    margin-inline-end: 1rem;
+  }
+}
+// #endregion
+
+
+
+// #region prefix
+:is(.prefix, .suffix) {
+  display: inline-block;
+  width: auto;
+  padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-block, #{rem(16)});
+  font-size: var(--input-fs, #{rem(16)});
+  line-height: var(--input-lh, #{rem(20)});
+  color: var(--colour-body);
+  background-color: var(--colour-primary-theme);
+  border: 2px solid var(--colour-primary);
+  color: var(--colour-white);
+  margin-bottom: 1rem;
+  border-end-start-radius: rem(8);
+  border-start-start-radius: rem(8);
+  min-width: calc(#{rem(20 + 12 + 12)} + 4px);
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  position: relative;
+  
+  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+
+
+  &:after {
+    display: inline-block;
+    max-width: rem(20);
+  }
+
+  &[class*="fa-"] {
+    width: calc(#{rem(20 + 12 + 12)} + 4px);
+    padding-inline: 0;
+  }
+
+  select {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  span {
+    display: none;
+  }
+
+  select:has(option:nth-child(1):checked) ~ span:nth-of-type(1),
+  select:has(option:nth-child(2):checked) ~ span:nth-of-type(2),
+  select:has(option:nth-child(3):checked) ~ span:nth-of-type(3),
+  select:has(option:nth-child(4):checked) ~ span:nth-of-type(4),
+  select:has(option:nth-child(5):checked) ~ span:nth-of-type(5),
+  select:has(option:nth-child(6):checked) ~ span:nth-of-type(6),
+  select:has(option:nth-child(7):checked) ~ span:nth-of-type(7),
+  select:has(option:nth-child(8):checked) ~ span:nth-of-type(8),
+  select:has(option:nth-child(9):checked) ~ span:nth-of-type(9),
+  select:has(option:nth-child(10):checked) ~ span:nth-of-type(10) {
+
     display: block;
+  }
 
-    &[title]:after{
+  select ~ span:after {
+    content: " \f078";
+    font-family: "Font Awesome 6 Pro";
+    font-size: 0.8em;
+    display: inline-block;
+    padding-left: 1em;
+  }
 
-      content: "";
-      display: inline-block;
-      margin-left: 0.25em;
-      margin-bottom: 0.1em;
-      width: 1em;
-      height: 1em;
-      vertical-align: text-bottom;
-      background: currentColor;
-      mask-image: var(--icon-question);
-      mask-size: 100%;
-      mask-repeat: no-repeat;
-      mask-position: 50% 50%;
-      -webkit-mask-image: var(--icon-question);
-      -webkit-mask-size: 100%;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: 50% 50%;
+  select:focus-visible ~ span:after {
+    content: "\f077";
+  }
+}
+
+.prefix {
+  
+  border-right: none;
+}
+
+.suffix {
+  
+  border-left: none;
+  border-end-start-radius: 0;
+  border-start-start-radius: 0;
+  border-start-end-radius: rem(8)!important;
+  border-end-end-radius: rem(8)!important;
+  order: 2;
+}
+
+.prefix span {
+  display: none;
+
+  small {
+    font-size: 0.8em;
+  }
+}
+
+.prefix ~ :is(input,textarea,output) {
+  
+  border-end-start-radius: 0;
+  border-start-start-radius: 0;
+}
+
+.suffix ~ :is(input,textarea,output) {
+  order: 1;
+  
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+// #endregion
+
+// #region word counter
+
+input[maxlength] + span {
+
+  position: relative;
+
+  &:before {
+    
+    counter-reset: variable var(--char-count) var(--maxlength);
+    counter-reset: variable2 var(--maxlength);
+    content: attr(data-count) " / " counter(variable2);
+    float: right;
+    
+    margin: 0 0 1em 1em;
+  }
+}
+
+// #endregion
+
+
+// #region Form validation
+
+$icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
+
+$icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
+
+
+.was-validated input:is(:invalid, .is-invalid) {
+
+  border-color: var(--colour-danger);
+
+  background-image: escape-svg($icon-error);
+  background-repeat: no-repeat;
+  background-position: right var(--input-padding-inline, #{rem(16)}) center;
+  background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});;
+  
+  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}));
+}
+
+.was-validated input:is(:valid, .is-valid) {
+
+  border-color: var(--colour-complete);
+
+  background-image: escape-svg($icon-tick);
+  background-repeat: no-repeat;
+  background-position: right var(--input-padding-inline, #{rem(16)}) center;
+  background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});;
+  
+  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}));
+}
+
+.invalid-feedback {
+  color: var(--colour-danger);
+  margin-top: rem(8);
+  background-image: escape-svg($icon-error);
+  background-repeat: no-repeat;
+  background-position: left top 1px;
+  background-size: var(--input-fs, #{rem(16)}) var(--input-fs, #{rem(16)});
+  padding-left: calc(var(--input-fs, #{rem(16)}) + #{rem(8)});
+  display: none;
+}
+
+.was-validated:has(input:is(:invalid, .is-invalid)) .invalid-feedback {
+  display: block;
+}
+// #endregion
+
+// #region radio field 
+input:is([type="radio"],[type="checkbox"]) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 0;
+  width: 0;
+  margin: 0;
+}
+
+div:has(> input:is([type="radio"],[type="checkbox"])) {
+  position: relative;
+}
+
+div:has( > input[type="radio"]){
+
+  --border-radius: 50%;
+  --outline-width: #{rem(8)};
+}
+div:has( > input[type="checkbox"]) {
+
+  --border-radius: #{rem(6)};
+  --outline-width: #{rem(4)};
+}
+
+input:is([type="radio"],[type="checkbox"]) + label:not(:has(> iam-card)) {
+
+  --tick-colour: transparent;
+
+  color: var(--colour-heading);
+  position: relative;
+  font-size: rem(16);
+  line-height: rem(20);
+  padding-left: rem(40);
+  padding-top: rem(10);
+  padding-bottom: rem(10);
+  margin-bottom: rem(24);
+  margin-right: rem(24);
+  cursor: pointer;
+
+  &:before {
+    content: "";
+    border: 2px solid var(--colour-primary);
+    border-radius: var(--border-radius);
+    height: rem(24);
+    width: rem(24);
+    display: inline-block;
+    position: absolute;
+    top: rem(10 - 2);
+    left: 0;
+  }
+}
+
+input[type="radio"] + label:not(:has(> iam-card)) {
+
+  &:after {
+    content: ""!important;
+    background: var(--colour-info);
+    border-radius: var(--border-radius);
+    height: rem(14);
+    width: rem(14);
+    display: none;
+    position: absolute;
+    top: rem(15 - 2);
+    left: rem(5);
+  }
+
+  &.radio--tick {
+    &:before {
+      
+      content: "\f00c";
+      position: absolute;
+      font-size: 1.5em;
+      line-height: 1;
+      color: var(--tick-colour);
+      font-family: "Font Awesome 6 Pro";
+
+      background: none !important;
+      border: none!important;
+      outline: none!important;
+      left: 0.25rem;
+    }
+    &:after {
+      display: none;
     }
   }
 }
 
+@media (forced-colors: active) {
 
-.form-control-inline {
-  display: flex;
-  align-items: center;
+  input:is([type="radio"],[type="checkbox"]):not(:checked) + label.radio--tick:not(:has(> iam-card)) {
 
-  label {
-    white-space: nowrap;
-    padding-right: 1rem;
+    &:before {
+    
+      display: none;
+    }
   }
 }
 
-.form-control-color {
-  width: $form-color-width;
-  height: $form-color-width; // Override fixed browser height
-  overflow: hidden;
-  padding: 0;
-
-  .input-group > & {
-
-    flex: 0 0 3rem;
-  }
-
-  &::-moz-color-swatch {
-    height: $form-color-width;
-    border-radius: 0;
-    border: none;
-  }
-
-  &::-webkit-color-swatch {
-    height: $form-color-width;
-    border-radius: 0;
-    border: none;
+div:has(> :is(input[type="radio"],input[type="checkbox"]):nth-of-type(2)) {
+  label:not(:has(> iam-card)):not(:last-of-type) {
+    margin-bottom: 0rem;
   }
 }
 
+input:is([type="radio"],[type="checkbox"]):checked + label {
 
-.input-group {
-  .form-range {
-    flex: 1 1 0;
-    height: auto;
-    margin-right: 1rem;
-  }
-}
+  --tick-colour: var(--colour-info);
 
-
-.form-control__wrapper.form-control--inline-text {
-
-  display: inline;
-
-  label {
-    display: inline;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    color: inherit;
+  &:before {
+    border-color: var(--colour-info);
   }
 
-  select {  
-    display: inline;
-    font-size: inherit;
-    font-weight: inherit;
-    line-height: inherit;
-    color: inherit;
-    background-color: transparent;
-    border: none;
-    padding: 0 5px;
-    margin: 0 -5px;
+  &:after {
     display: inline-block;
-    width: auto;
-    padding-right: $form-select-padding-x;
-    background-position: right 0.2rem center;
+  }
+
+  iam-card {
+    --colour: var(--colour,var(--colour-info));
   }
 }
+
+input[type="checkbox"]:not([disabled]):checked + label {
+
+  &:before {
+    background: var(--colour-info)!important;
+  }
+}
+input[type="checkbox"]:checked + label {
+
+  &:after {
+    content: "\f00c";
+    position: absolute;
+    font-size: 1em;
+    line-height: 1;
+    color: var(--colour-primary-theme);
+    font-family: "Font Awesome 6 Pro";
+    font-weight: bold;
+    height: rem(24);
+    width: rem(24);
+    line-height: rem(26);
+    background: none !important;
+    border: none!important;
+    outline: none!important;
+    top: rem(10 - 2);
+    left: 0;
+    text-align: center;
+  }
+}
+
+input:is([type="radio"],[type="checkbox"]):checked:is(:focus,:hover,.focus) + label {
+
+  --tick-colour: var(--colour-info);
+}
+input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus) + label {
+
+  --tick-colour: var(--colour-muted);
+
+  &:before {
+    background: var(--colour-light);
+    outline: var(--outline-width) solid var(--colour-light);
+  }
+}
+input:is([type="radio"],[type="checkbox"]):is(:active,.active) + label {
+
+  --tick-colour: var(--colour-light);
+
+  &:before {
+    background: #E0E0E0;
+    outline: var(--outline-width) solid #E0E0E0;
+  }
+}
+
+// Disabled
+input:is([type="radio"],[type="checkbox"]):disabled + label {
+
+  opacity: 0.4;
+  cursor: not-allowed;
+
+  > iam-card {
+    pointer-events: none;
+  }
+
+  &:before {
+    background-color: none!important;
+    outline: none!important;
+    border-color: var(--colour-primary)!important;
+  }
+}
+
+input[type="radio"][disabled]:checked + label {
+  
+  &:after {
+    background-color: var(--colour-primary)!important;
+  }
+}
+
+input[type="checkbox"][disabled]:checked + label {
+
+  &:before {
+    background: #E0E0E0!important;
+    border-color: #E0E0E0!important;
+  }
+}
+// #endregion
 
 // #region checkbox
-.form-check {
 
-  overflow: hidden;
-
-  input,
-  label {
-    cursor: pointer;
-  }
-
-  input:not([disabled]) + label:hover,
-  input:not([disabled]):hover + label,
-  input:not([disabled]):focus + label {
-
-    color: var(--colour-hover);
-    border-color: var(--colour-hover);
-  }
-}
-.form-check + .form-check {
-  margin-top: -0.5rem;
-}
-
-.form-check-label {
-  float: left;
-}
-
-.form-check-label + .form-check-input {
-
-  margin-left: 1rem;
-  margin-right: 0.5rem;
-}
 
 // #endregion
 
@@ -181,116 +599,45 @@ select[multiple]::-webkit-scrollbar-thumb {
 }
 // #endregion
 
-// #region prefix
+// #region Select
 
-.form-control__wrapper :is(.prefix,.suffix) {
+select {
+  $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
-  color: var(--colour-white);
-  background: var(--colour-primary);
-  padding: calc(0.75em + 1px) 1em;
-  font-size: 1rem;
-  font-weight: normal;
-  line-height: 1.5;
-  position: absolute;
-  bottom: 0px;
+  background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem)/var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
+              linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top/calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) no-repeat;
+  
+  padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem));
+  
+  option {font-size: 1.2em;}
+
+  &[multiple],
+  &[size]:not([size="1"]) {
+    background: none;
+    max-height: none!important;
+  }
+
+  &:disabled {
+    color: $form-select-disabled-color;
+    background-color: $form-select-disabled-bg;
+    border-color: $form-select-disabled-border-color;
+  }
+
+  // Remove outline from select box in FF
+  &:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 $form-select-color;
+  }
 }
+// #endregion
 
-.form-control__wrapper .prefix {
+// #region file upload
+iam-fileupload {
+  
+  input {
+    display: none;
+  }
 
-  border-top-left-radius: 0.625rem;
-  border-bottom-left-radius: 0.625rem;
-  left: 0;
-}
-
-.form-control__wrapper :is(.prefix-sm,.suffix-sm) {
-
-  font-size: var(--fs-small);
-}
-.form-control__wrapper :is(.prefix-lg,.suffix-lg) {
-
-  font-size: 1.5rem;
-}
-
-.form-control__wrapper .prefix + .form-control {
-  padding-left: em(64);
-}
-.form-control__wrapper .suffix + .form-control {
-  padding-right: em(64);
-}
-
-.form-control__wrapper .suffix {
-  left: auto;
-  right: 0;
-  border-top-right-radius: 0.625rem;
-  border-bottom-right-radius: 0.625rem;
 }
 
 // #endregion
-
-
-// #region large upload field
-
-.form-control__wrapper.form-control--lrg-file {
-  aspect-ratio: 4/2;
-  border: 1px dashed var(--colour-selected);
-  position: relative;
-
-  .icon {
-    position: absolute;
-    top: 50%;
-    left:50%;
-    transform: translate(-50%,calc(-50% - 1rem));
-    color: var(--colour-muted);
-    font-size: 5rem;
-    height: 1em;
-    width: 1em;
-    pointer-events: none;
-  }
-
-  > label {
-    
-    position: absolute;
-    top: calc(50% + 2rem);
-    left:50%;
-    transform: translate(-50%,-50%);
-    width: 100%;
-    text-align: center;
-  }
-
-  > input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-  }
-
-  .file-uploaded & {
-    border: 3px solid var(--colour-success);
-    border-radius: 50%;
-    aspect-ratio: 1;
-    margin-inline: auto;
-    max-width: 10rem;
-
-    > label {
-      content: "File uploaded";
-    }
-  }
-}
-
-.file-upload__add {
-  display: none;
-
-  .file-uploaded & {
-    display: block;
-    margin-inline: auto;
-    color: var(--colour-muted);
-    font-size: rem(14);
-    text-align: center;
-    margin-top: -1rem;
-    margin-bottom: 1rem;
-    cursor: pointer;
-  }
-}
-// #endrgion

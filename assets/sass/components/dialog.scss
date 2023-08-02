@@ -156,6 +156,8 @@ dialog[open] {
   }
 
   .mh-lg {
+    padding-left: 1rem;
+    margin-left: -1rem;
     padding-right: calc(var(--dialog-padding) - 10px);
     margin-right: calc((var(--dialog-padding) * -1) + 10px);
     margin-bottom: calc(var(--dialog-padding) * -1);
@@ -439,7 +441,7 @@ dialog::backdrop {
 
     margin-bottom: 0.25rem;
 
-    &:after {
+    &:not(.btn-compact):after {
       content: "";
     
       display: inline-block;
