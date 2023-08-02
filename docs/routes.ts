@@ -17,7 +17,7 @@ const routes = [
       },
       {
         path: 'accessibility',
-        name: 'Accessibility',
+        name: 'Accessibility (Beta)',
         meta: {
           title: 'Accessibility | Foundations | iamkey'
         },
@@ -26,7 +26,7 @@ const routes = [
       },
       {
         path: 'logos',
-        name: 'Logos',
+        name: 'Logos (Beta)',
         meta: {
           title: 'Logos | Foundations | iamkey'
         },
@@ -62,7 +62,7 @@ const routes = [
       },
       {
         path: 'illustrations',
-        name: 'Illustrations',
+        name: 'Illustrations (Beta)',
         meta: {
           title: 'Illustrations | Foundations | iamkey'
         },
@@ -71,7 +71,7 @@ const routes = [
       },
       {
         path: 'circles',
-        name: 'Circles',
+        name: 'Circles (Beta)',
         meta: {
           title: 'Circles | Foundations | iamkey'
         },
@@ -79,7 +79,7 @@ const routes = [
       },
       {
         path: 'media',
-        name: 'Media',
+        name: 'Media (Beta)',
         meta: {
           title: 'Media | Foundations | iamkey'
         },
@@ -97,7 +97,7 @@ const routes = [
       },
       {
         path: 'utilities',
-        name: 'Utility Classes',
+        name: 'Utility Classes (Beta)',
         meta: {
           title: 'Utility Classes | Foundations | iamkey'
         },
@@ -105,7 +105,7 @@ const routes = [
       },
       {
         path: 'z-index',
-        name: 'Z-index',
+        name: 'Z-index (Beta)',
         meta: {
           title: 'Z-index | Foundations | iamkey'
         },
@@ -114,7 +114,7 @@ const routes = [
       },
       {
         path: 'animation',
-        name: 'Animation',
+        name: 'Animation (Beta)',
         meta: {
           title: 'Animation | Foundations | iamkey'
         },
@@ -145,7 +145,7 @@ const routes = [
       },
       {
         path: 'accordion',
-        name: 'Accordion',
+        name: 'Accordion (Beta)',
         meta: {
           title: 'Accordion | Components | iamkey'
         },
@@ -154,7 +154,7 @@ const routes = [
       },
       {
         path: 'applied-filters',
-        name: 'Applied Filters',
+        name: 'Applied Filters (Beta)',
         meta: {
           title: 'Applied Filters | Components | iamkey'
         },
@@ -162,7 +162,7 @@ const routes = [
       },
       {
         path: 'banner',
-        name: 'Banner',
+        name: 'Banner (Beta)',
         meta: {
           title: 'Banner | Components | iamkey'
         },
@@ -189,7 +189,7 @@ const routes = [
       },
       {
         path: 'carousel',
-        name: 'Carousel',
+        name: 'Carousel (Beta)',
         meta: {
           title: 'Carousel | Components | iamkey'
         },
@@ -198,7 +198,7 @@ const routes = [
       },
       {
         path: 'charts',
-        name: 'Charts',
+        name: 'Charts (Beta)',
         meta: {
           title: 'Charts | Components | iamkey'
         },
@@ -206,7 +206,7 @@ const routes = [
       },
       {
         path: 'container',
-        name: 'Container',
+        name: 'Container (Beta)',
         meta: {
           title: 'Container | Elements | iamkey'
         },
@@ -250,101 +250,6 @@ const routes = [
         searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip'
       },
       {
-        path: 'form',
-        name: 'Form elements',
-        component: () => import('./views/components/Form.vue'),
-        children: [
-          {
-            path: '',
-            name: 'Form',
-            meta: {
-              title: 'Form elements | Elements | iamkey'
-            },
-            component: () => import('./views/components/FormIndex.vue')
-          },
-          {
-            path: 'input-types',
-            name: 'Form basic input types',
-            meta: {
-              title: 'Form basic input types | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/InputTypes.vue')
-          },
-          {
-            path: 'textarea',
-            name: 'Form textarea',
-            meta: {
-              title: 'Form textarea | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Textarea.vue')
-          },
-          {
-            path: 'date',
-            name: 'Form date and time pickers',
-            meta: {
-              title: 'Form date and time pickers | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Date.vue')
-          },
-          {
-            path: 'range',
-            name: 'Form range field',
-            meta: {
-              title: 'Form range field | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Range.vue')
-          },
-          {
-            path: 'file',
-            name: 'Form file upload field',
-            meta: {
-              title: 'Form file upload field | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/File.vue')
-          },
-          {
-            path: 'select',
-            name: 'Form select field',
-            meta: {
-              title: 'Form select field | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Select.vue')
-          },
-          {
-            path: 'checkbox',
-            name: 'Checkbox field',
-            meta: {
-              title: 'Checkbox field | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Checkbox.vue')
-          },
-          {
-            path: 'toggle',
-            name: 'Toggle buttons',
-            meta: {
-              title: 'Toggle buttons | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Toggle.vue')
-          },
-          {
-            path: 'tags',
-            name: 'Pill tags',
-            meta: {
-              title: 'Pill tags | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Tags.vue')
-          },
-          {
-            path: 'validation',
-            name: 'Form validation',
-            meta: {
-              title: 'Form validation | Elements | iamkey'
-            },
-            component: () => import('./views/components/form/Validation.vue')
-          }
-        ]
-      },
-      {
         path: 'inputs',
         name: 'Form input fields',
         meta: {
@@ -354,6 +259,22 @@ const routes = [
         searchterms: 'label, disabled, prefix, suffix, readonly, masks, helper'
       },
       {
+        path: 'select',
+        name: 'Form select field (Beta)',
+        meta: {
+          title: 'Form select field | Elements | iamkey'
+        },
+        component: () => import('./views/components/Select.vue')
+      },
+      {
+        path: 'checkbox',
+        name: 'Form checkbox field (Beta)',
+        meta: {
+          title: 'Checkbox field | Elements | iamkey'
+        },
+        component: () => import('./views/components/Checkbox.vue')
+      },
+      {
         path: 'radio',
         name: 'Form Radio fields',
         meta: {
@@ -361,6 +282,46 @@ const routes = [
         },
         component: () => import('./views/components/RadioDoc.vue'),
         searchterms: 'selected, card, select, reveal'
+      },
+      {
+        path: 'date',
+        name: 'Form date and time pickers (Beta)',
+        meta: {
+          title: 'Form date and time pickers | Elements | iamkey'
+        },
+        component: () => import('./views/components/Date.vue')
+      },
+      {
+        path: 'range',
+        name: 'Form range field (Beta)',
+        meta: {
+          title: 'Form range field | Elements | iamkey'
+        },
+        component: () => import('./views/components/Range.vue')
+      },
+      {
+        path: 'file',
+        name: 'Form file upload field (Beta)',
+        meta: {
+          title: 'Form file upload field | Elements | iamkey'
+        },
+        component: () => import('./views/components/File.vue')
+      },
+      {
+        path: 'toggle',
+        name: 'Form Toggle buttons (Beta)',
+        meta: {
+          title: 'Toggle buttons | Elements | iamkey'
+        },
+        component: () => import('./views/components/Toggle.vue')
+      },
+      {
+        path: 'tags',
+        name: 'Form Pill tags (Beta)',
+        meta: {
+          title: 'Pill tags | Elements | iamkey'
+        },
+        component: () => import('./views/components/Tags.vue')
       },
       {
         path: 'validation',
@@ -373,7 +334,7 @@ const routes = [
       },
       {
         path: 'filterlist',
-        name: 'Filter list',
+        name: 'Filter list (Beta)',
         meta: {
           title: 'Filter list | Components | iamkey'
         },
@@ -382,7 +343,7 @@ const routes = [
       },
       {
         path: 'header',
-        name: 'Header',
+        name: 'Header (Beta)',
         meta: {
           title: 'Header | Components | iamkey'
         },
@@ -391,7 +352,7 @@ const routes = [
       },
       {
         path: 'lists',
-        name: 'Lists',
+        name: 'Lists (Beta)',
         meta: {
           title: 'Lists | Elements | iamkey'
         },
@@ -400,7 +361,7 @@ const routes = [
       },
       {
         path: 'nav',
-        name: 'Nav',
+        name: 'Nav (Beta)',
         meta: {
           title: 'Nav | Components | iamkey'
         },
@@ -408,7 +369,7 @@ const routes = [
       },
       {
         path: 'notefeed',
-        name: 'Note feed',
+        name: 'Note feed (Beta)',
         meta: {
           title: 'Note feed | Components | iamkey'
         },
@@ -416,7 +377,7 @@ const routes = [
       },
       {
         path: 'pagination',
-        name: 'Pagination',
+        name: 'Pagination (Beta)',
         meta: {
           title: 'Pagination | Components | iamkey'
         },
@@ -425,7 +386,7 @@ const routes = [
       },
       {
         path: 'property-searchbar',
-        name: 'Property Searchbar',
+        name: 'Property Searchbar (Beta)',
         meta: {
           title: 'Property Searchbar | Components | iamkey'
         },
@@ -434,7 +395,7 @@ const routes = [
       },
       {
         path: 'snapshot',
-        name: 'Snapshot',
+        name: 'Snapshot (Beta)',
         meta: {
           title: 'Snapshot | Components | iamkey'
         },
@@ -442,7 +403,7 @@ const routes = [
       },
       {
         path: 'stepper',
-        name: 'Stepper',
+        name: 'Stepper (Beta)',
         meta: {
           title: 'Stepper | Components | iamkey'
         },
@@ -495,7 +456,7 @@ const routes = [
       },
       {
         path: 'tabs',
-        name: 'Tabs',
+        name: 'Tabs (Beta)',
         meta: {
           title: 'Tabs | Components | iamkey'
         },
@@ -504,7 +465,7 @@ const routes = [
       },
       {
         path: 'testimonial',
-        name: 'Testimonial',
+        name: 'Testimonial (Beta)',
         meta: {
           title: 'Testimonial | Components | iamkey'
         },
@@ -512,7 +473,7 @@ const routes = [
       },
       {
         path: 'timeline',
-        name: 'Timeline',
+        name: 'Timeline (Beta)',
         meta: {
           title: 'Timeline | Components | iamkey'
         },
