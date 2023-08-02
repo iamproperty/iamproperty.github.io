@@ -345,9 +345,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 // #endregion
 
 // #region radio field 
-
-
-input[type="radio"] {
+input:is([type="radio"],[type="checkbox"]) {
   position: absolute;
   top: 0;
   left: 0;
@@ -357,11 +355,22 @@ input[type="radio"] {
   margin: 0;
 }
 
-div:has(> input[type="radio"]) {
+div:has(> input:is([type="radio"],[type="checkbox"])) {
   position: relative;
 }
 
-input[type="radio"] + label:not(:has(> iam-card)) {
+div:has( > input[type="radio"]){
+
+  --border-radius: 50%;
+  --outline-width: #{rem(8)};
+}
+div:has( > input[type="checkbox"]) {
+
+  --border-radius: #{rem(6)};
+  --outline-width: #{rem(4)};
+}
+
+input:is([type="radio"],[type="checkbox"]) + label:not(:has(> iam-card)) {
 
   --tick-colour: transparent;
 
@@ -379,7 +388,7 @@ input[type="radio"] + label:not(:has(> iam-card)) {
   &:before {
     content: "";
     border: 2px solid var(--colour-primary);
-    border-radius: 50%;
+    border-radius: var(--border-radius);
     height: rem(24);
     width: rem(24);
     display: inline-block;
@@ -387,11 +396,14 @@ input[type="radio"] + label:not(:has(> iam-card)) {
     top: rem(10 - 2);
     left: 0;
   }
-  
+}
+
+input[type="radio"] + label:not(:has(> iam-card)) {
+
   &:after {
     content: ""!important;
     background: var(--colour-info);
-    border-radius: 50%;
+    border-radius: var(--border-radius);
     height: rem(14);
     width: rem(14);
     display: none;
@@ -415,18 +427,15 @@ input[type="radio"] + label:not(:has(> iam-card)) {
       outline: none!important;
       left: 0.25rem;
     }
-    
-
     &:after {
       display: none;
     }
   }
 }
 
-
 @media (forced-colors: active) {
 
-  input[type="radio"]:not(:checked) + label.radio--tick:not(:has(> iam-card)) {
+  input:is([type="radio"],[type="checkbox"]):not(:checked) + label.radio--tick:not(:has(> iam-card)) {
 
     &:before {
     
@@ -435,14 +444,14 @@ input[type="radio"] + label:not(:has(> iam-card)) {
   }
 }
 
-div:has(> input[type="radio"]:nth-of-type(2)) {
+div:has(> input:is([type="radio"],[type="checkbox"]):nth-of-type(2)) {
   label {
     margin-bottom: 0rem;
   }
   margin-bottom: rem(24);
 }
 
-input[type="radio"]:checked + label {
+input:is([type="radio"],[type="checkbox"]):checked + label {
 
   --tick-colour: var(--colour-info);
 
@@ -459,31 +468,59 @@ input[type="radio"]:checked + label {
   }
 }
 
-input[type="radio"]:checked:is(:focus,:hover,.focus) + label {
+input[type="checkbox"]:not([disabled]):checked + label {
+
+  &:before {
+    background: var(--colour-info)!important;
+  }
+}
+input[type="checkbox"]:checked + label {
+
+  &:after {
+    content: "\f00c";
+    position: absolute;
+    font-size: 1em;
+    line-height: 1;
+    color: var(--colour-primary-theme);
+    font-family: "Font Awesome 6 Pro";
+    font-weight: bold;
+    height: rem(24);
+    width: rem(24);
+    line-height: rem(26);
+    background: none !important;
+    border: none!important;
+    outline: none!important;
+    top: rem(10 - 2);
+    left: 0;
+    text-align: center;
+  }
+}
+
+input:is([type="radio"],[type="checkbox"]):checked:is(:focus,:hover,.focus) + label {
 
   --tick-colour: var(--colour-info);
 }
-input[type="radio"]:is(:focus,:hover,.focus) + label {
+input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus) + label {
 
   --tick-colour: var(--colour-muted);
 
   &:before {
     background: var(--colour-light);
-    outline: rem(8) solid var(--colour-light);
+    outline: var(--outline-width) solid var(--colour-light);
   }
 }
-input[type="radio"]:is(:active,.active) + label {
+input:is([type="radio"],[type="checkbox"]):is(:active,.active) + label {
 
   --tick-colour: var(--colour-light);
 
   &:before {
     background: #E0E0E0;
-    outline: rem(8) solid #E0E0E0;
+    outline: var(--outline-width) solid #E0E0E0;
   }
 }
 
 // Disabled
-input[type="radio"]:disabled + label {
+input:is([type="radio"],[type="checkbox"]):disabled + label {
 
   opacity: 0.4;
   cursor: not-allowed;
@@ -497,44 +534,26 @@ input[type="radio"]:disabled + label {
     outline: none!important;
     border-color: var(--colour-primary)!important;
   }
+}
+
+input[type="radio"][disabled]:checked + label {
   
   &:after {
     background-color: var(--colour-primary)!important;
   }
 }
+
+input[type="checkbox"][disabled]:checked + label {
+
+  &:before {
+    background: #E0E0E0!important;
+    border-color: #E0E0E0!important;
+  }
+}
 // #endregion
 
 // #region checkbox
-.form-check {
 
-  overflow: hidden;
-
-  input,
-  label {
-    cursor: pointer;
-  }
-
-  input:not([disabled]) + label:hover,
-  input:not([disabled]):hover + label,
-  input:not([disabled]):focus + label {
-
-    color: var(--colour-hover);
-    border-color: var(--colour-hover);
-  }
-}
-.form-check + .form-check {
-  margin-top: -0.5rem;
-}
-
-.form-check-label {
-  float: left;
-}
-
-.form-check-label + .form-check-input {
-
-  margin-left: 1rem;
-  margin-right: 0.5rem;
-}
 
 // #endregion
 

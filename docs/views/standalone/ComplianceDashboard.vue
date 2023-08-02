@@ -84,11 +84,17 @@
         <div class="container">
 
           <div class="row align-items-end">
-            <div class="col-12 ms-md-auto mw-fit-content">
+
+
+            <div class="col-6 ms-auto col-md ms-md-auto mw-fit-content">
+              <button class="btn btn-secondary me-0 d-block w-100 btn-filter mb-1" type="button" data-modal="filters">Filter by <span data-filter-count=""></span></button>
+            </div>
+
+            <div class="col-12 mw-fit-content">
 
                 <div class="dialog__wrapper dialog__wrapper--md-right">
 
-                    <button class="btn btn-secondary me-0 nowrap" type="button" aria-label="Display filters of who's work to include">Sort by</button>
+                    <button class="btn btn-secondary me-0 nowrap mb-1" type="button" aria-label="Display filters of who's work to include">Sort by</button>
                     <dialog>
 
                       <div class="mb-0">
@@ -108,8 +114,28 @@
                 </div>
 
             </div>
-        </div>  
+          </div>  
         </div>
+
+        <dialog id="filters">
+          <span class="h3 pb-2">Filter by</span>
+          <span class="h4 pb-1 ">Risk Level</span>
+          <div>
+            <input type="checkbox" name="risk-level-high" id="risk-level-high" data-filter-text="Risk Level - High" data-filter="Risk level" value="High">
+            <label for="risk-level-high" class="form-label form-check-label">High</label>
+            <hr/>
+            <input type="checkbox" name="risk-level-medium" id="risk-level-medium" data-filter-text="Risk Level - Medium" data-filter="Risk level" value="Medium">
+            <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
+            <hr/>
+
+            <input type="checkbox" name="risk-level-low" id="risk-level-low" data-filter-text="Risk Level - Low" data-filter="Risk level" value="Low">
+            <label for="risk-level-low" class="form-label form-check-label">Low</label>
+            <hr/>
+          </div>
+          <button class="btn btn-primary d-block m-auto">Update results</button>
+          <hr/>
+        </dialog>
+
       </form>
 
       <div class="container">
