@@ -1,8 +1,8 @@
 // @ts-nocheck
 const routes = [
   { name: 'Home', path: '/', component: () => import('./views/Home.vue') },
-  { name: 'Principles', path: '/principles', component: () => import('./views/Principles.vue'), meta: { title: 'Principles | iamkey' } },
-  { name: 'Principles', path: '/principles', component: () => import('./views/Principles.vue'), meta: { title: 'Principles | iamkey' } },
+  { name: 'Principles', path: '/principles', component: () => import('./views/Principles.vue'), meta: { title: 'Principles | iamkey' }, searchterms: 'relative units, variables, progressively enhance' },
+  { name: 'Search', path: '/search', component: () => import('./views/Search.vue'), meta: { title: 'Search | iamkey' } },
   { /* Foundations */
     path: '/foundations',
     component: () => import(/* webpackChunkName: "foundations" */ './views/Foundations.vue'),
@@ -21,7 +21,8 @@ const routes = [
         meta: {
           title: 'Accessibility | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Accessibility.vue')
+        component: () => import('./views/foundations/Accessibility.vue'),
+        searchterms: 'wave, lighthouse'
       },
       {
         path: 'logos',
@@ -29,7 +30,8 @@ const routes = [
         meta: {
           title: 'Logos | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Logos.vue')
+        component: () => import('./views/foundations/Logos.vue'),
+        searchterms: 'brand, identity'
       },
       {
         path: 'colours',
@@ -37,7 +39,8 @@ const routes = [
         meta: {
           title: 'Colours | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Colours.vue')
+        component: () => import('./views/foundations/Colours.vue'),
+        searchterms: 'light mode, dark mode, background, palette, slate, gradient, high contrast'
       },
       {
         path: 'icons',
@@ -45,7 +48,8 @@ const routes = [
         meta: {
           title: 'Icons | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Icons.vue')
+        component: () => import('./views/foundations/Icons.vue'),
+        searchterms: 'svg, status, font awesome'
       },
       {
         path: 'type',
@@ -53,7 +57,8 @@ const routes = [
         meta: {
           title: 'Typography | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Type.vue')
+        component: () => import('./views/foundations/Type.vue'),
+        searchterms: 'headings, body, lead, small, blockquote, stat'
       },
       {
         path: 'illustrations',
@@ -61,7 +66,8 @@ const routes = [
         meta: {
           title: 'Illustrations | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Illustrations.vue')
+        component: () => import('./views/foundations/Illustrations.vue'),
+        searchterms: 'svg, presentation'
       },
       {
         path: 'circles',
@@ -77,7 +83,8 @@ const routes = [
         meta: {
           title: 'Media | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Media.vue')
+        component: () => import('./views/foundations/Media.vue'),
+        searchterms: 'youtube'
       },
       {
         path: 'spacing',
@@ -85,8 +92,8 @@ const routes = [
         meta: {
           title: 'Spacing and Layout | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Spacing.vue')
-
+        component: () => import('./views/foundations/Spacing.vue'),
+        searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
       },
       {
         path: 'utilities',
@@ -102,7 +109,8 @@ const routes = [
         meta: {
           title: 'Z-index | Foundations | iamkey'
         },
-        component: () => import('./views/foundations/Zindex.vue')
+        component: () => import('./views/foundations/Zindex.vue'),
+        searchterms: 'below, base, focus, above, floating, menu, overlay'
       },
       {
         path: 'animation',
@@ -132,7 +140,8 @@ const routes = [
         meta: {
           title: 'Admin panel | Components | iamkey'
         },
-        component: () => import('./views/components/PanelDoc.vue')
+        component: () => import('./views/components/PanelDoc.vue'),
+        searchterms: 'admin, tabs'
       },
       {
         path: 'accordion',
@@ -140,7 +149,8 @@ const routes = [
         meta: {
           title: 'Accordion | Components | iamkey'
         },
-        component: () => import('./views/components/AccordionDoc.vue')
+        component: () => import('./views/components/AccordionDoc.vue'),
+        searchterms: 'expanded, list'
       },
       {
         path: 'applied-filters',
@@ -156,7 +166,8 @@ const routes = [
         meta: {
           title: 'Banner | Components | iamkey'
         },
-        component: () => import('./views/components/BannerDoc.vue')
+        component: () => import('./views/components/BannerDoc.vue'),
+        searchterms: 'promote'
       },
       {
         path: 'buttons',
@@ -164,7 +175,8 @@ const routes = [
         meta: {
           title: 'Buttons & links | Elements | iamkey'
         },
-        component: () => import('./views/components/Buttons.vue')
+        component: () => import('./views/components/Buttons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact'
       },
       {
         path: 'card',
@@ -172,7 +184,8 @@ const routes = [
         meta: {
           title: 'Card | Components | iamkey'
         },
-        component: () => import('./views/components/CardDoc.vue')
+        component: () => import('./views/components/CardDoc.vue'),
+        searchterms: 'navigational, filter, status, numerical'
       },
       {
         path: 'carousel',
@@ -180,7 +193,8 @@ const routes = [
         meta: {
           title: 'Carousel | Components | iamkey'
         },
-        component: () => import('./views/components/CarouselDoc.vue')
+        component: () => import('./views/components/CarouselDoc.vue'),
+        searchterms: 'slideshow'
       },
       {
         path: 'charts',
@@ -196,7 +210,8 @@ const routes = [
         meta: {
           title: 'Container | Elements | iamkey'
         },
-        component: () => import('./views/components/Container.vue')
+        component: () => import('./views/components/Container.vue'),
+        searchterms: 'fundamental, backgrounds, curve'
       },
       {
         path: 'dialog',
@@ -204,7 +219,8 @@ const routes = [
         meta: {
           title: 'Dialog | Components | iamkey'
         },
-        component: () => import('./views/components/DialogDoc.vue')
+        component: () => import('./views/components/DialogDoc.vue'),
+        searchterms: 'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, inline notification, snackbar, banner, dismissal'
       },
       {
         path: 'modal',
@@ -212,7 +228,8 @@ const routes = [
         meta: {
           title: 'Dialog (Modal) | Components | iamkey'
         },
-        component: () => import('./views/components/ModalDoc.vue')
+        component: () => import('./views/components/ModalDoc.vue'),
+        searchterms: 'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, dismissal'
       },
       {
         path: 'nonmodal',
@@ -220,7 +237,8 @@ const routes = [
         meta: {
           title: 'Dialog (Non-Modal) | Components | iamkey'
         },
-        component: () => import('./views/components/NonModalDoc.vue')
+        component: () => import('./views/components/NonModalDoc.vue'),
+        searchterms: 'passive, transactional, acknowledgement, popover'
       },
       {
         path: 'popover',
@@ -228,7 +246,8 @@ const routes = [
         meta: {
           title: 'Dialog (Popover) | Components | iamkey'
         },
-        component: () => import('./views/components/PopoverDoc.vue')
+        component: () => import('./views/components/PopoverDoc.vue'),
+        searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip'
       },
       {
         path: 'form',
@@ -331,7 +350,8 @@ const routes = [
         meta: {
           title: 'Form input fields | Components | iamkey'
         },
-        component: () => import('./views/components/FormInputDoc.vue')
+        component: () => import('./views/components/FormInputDoc.vue'),
+        searchterms: 'label, disabled, prefix, suffix, readonly, masks, helper'
       },
       {
         path: 'radio',
@@ -339,7 +359,8 @@ const routes = [
         meta: {
           title: 'Form Radio fields | Elements | iamkey'
         },
-        component: () => import('./views/components/RadioDoc.vue')
+        component: () => import('./views/components/RadioDoc.vue'),
+        searchterms: 'selected, card, select, reveal'
       },
       {
         path: 'validation',
@@ -347,7 +368,8 @@ const routes = [
         meta: {
           title: 'Form validation | Components | iamkey'
         },
-        component: () => import('./views/components/FormValidationDoc.vue')
+        component: () => import('./views/components/FormValidationDoc.vue'),
+        searchterms: 'error, success, message'
       },
       {
         path: 'filterlist',
@@ -355,7 +377,8 @@ const routes = [
         meta: {
           title: 'Filter list | Components | iamkey'
         },
-        component: () => import('./views/components/FilterlistDoc.vue')
+        component: () => import('./views/components/FilterlistDoc.vue'),
+        searchterms: 'reduce, search'
       },
       {
         path: 'header',
@@ -363,7 +386,8 @@ const routes = [
         meta: {
           title: 'Header | Components | iamkey'
         },
-        component: () => import('./views/components/Header.vue')
+        component: () => import('./views/components/Header.vue'),
+        searchterms: 'introduce, banner'
       },
       {
         path: 'lists',
@@ -371,7 +395,8 @@ const routes = [
         meta: {
           title: 'Lists | Elements | iamkey'
         },
-        component: () => import('./views/components/Lists.vue')
+        component: () => import('./views/components/Lists.vue'),
+        searchterms: 'unordered, ordered, tick, breadcrumb'
       },
       {
         path: 'nav',
@@ -395,7 +420,8 @@ const routes = [
         meta: {
           title: 'Pagination | Components | iamkey'
         },
-        component: () => import('./views/components/PaginationDoc.vue')
+        component: () => import('./views/components/PaginationDoc.vue'),
+        searchterms: 'navigation'
       },
       {
         path: 'property-searchbar',
@@ -403,7 +429,8 @@ const routes = [
         meta: {
           title: 'Property Searchbar | Components | iamkey'
         },
-        component: () => import('./views/components/PropertySearchbarDoc.vue')
+        component: () => import('./views/components/PropertySearchbarDoc.vue'),
+        searchterms: 'search, property, price range, number of beds, property type, desired'
       },
       {
         path: 'snapshot',
@@ -427,7 +454,8 @@ const routes = [
         meta: {
           title: 'System notifications | Components | iamkey'
         },
-        component: () => import('./views/components/SystemNotificationsDoc.vue')
+        component: () => import('./views/components/SystemNotificationsDoc.vue'),
+        searchterms: 'high urgency, meduim urgency, low urgency, notify, message, toasts, inline notification, alert, transactional modal, acknowledgment, status'
       },
       {
         path: 'alert',
@@ -435,7 +463,8 @@ const routes = [
         meta: {
           title: 'System notifications (Alert) | Components | iamkey'
         },
-        component: () => import('./views/components/AlertDoc.vue')
+        component: () => import('./views/components/AlertDoc.vue'),
+        searchterms: 'high urgency, warning, promotional, calls to action, time-sensitive, critical'
       },
       {
         path: 'toasts',
@@ -443,7 +472,8 @@ const routes = [
         meta: {
           title: 'System notifications (Toasts) | Components | iamkey'
         },
-        component: () => import('./views/components/ToastsDoc.vue')
+        component: () => import('./views/components/ToastsDoc.vue'),
+        searchterms: 'low urgency, confirmation, message, temporary'
       },
       {
         path: 'inline-notification',
@@ -451,7 +481,8 @@ const routes = [
         meta: {
           title: 'System notifications (Inline) | Components | iamkey'
         },
-        component: () => import('./views/components/InlineDoc.vue')
+        component: () => import('./views/components/InlineDoc.vue'),
+        searchterms: 'high urgency, error, form'
       },
       {
         path: 'tables',
@@ -459,7 +490,8 @@ const routes = [
         meta: {
           title: 'Tables | Elements | iamkey'
         },
-        component: () => import('./views/components/Tables.vue')
+        component: () => import('./views/components/Tables.vue'),
+        searchterms: 'expandable, scrollable, rows, columns'
       },
       {
         path: 'tabs',
@@ -467,7 +499,8 @@ const routes = [
         meta: {
           title: 'Tabs | Components | iamkey'
         },
-        component: () => import('./views/components/TabsDoc.vue')
+        component: () => import('./views/components/TabsDoc.vue'),
+        searchterms: 'admin panel, '
       },
       {
         path: 'testimonial',
@@ -542,7 +575,8 @@ const routes = [
     name: 'Information',
     meta: {
       title: 'Information | iamkey'
-    }
+    },
+    searchterms: 'guidance, XD library, framework, bootstrap, library, integration'
   },
   {
     path: '/get-started',
@@ -550,7 +584,8 @@ const routes = [
     name: 'Get started',
     meta: {
       title: 'Get started | iamkey'
-    }
+    },
+    searchterms: 'npm, install, assets, static, sass, modules, vue, branch, commands, contributing, code, web server, develoment, unit tests, regression tests, workflow'
   },
   { /* Examples */
     path: '/examples',
@@ -618,7 +653,8 @@ const routes = [
         meta: {
           title: 'iam sold | iamkey'
         },
-        component: () => import('./views/standalone/IamsoldHomepage.vue')
+        component: () => import('./views/standalone/IamsoldHomepage.vue'),
+        searchterms: 'iamsold, iam sold'
       },
       {
         path: 'iamsold-admin',
@@ -626,7 +662,8 @@ const routes = [
         meta: {
           title: 'iam sold | iamkey'
         },
-        component: () => import('./views/standalone/IamsoldAdmin.vue')
+        component: () => import('./views/standalone/IamsoldAdmin.vue'),
+        searchterms: 'iamsold, iam sold'
       },
       {
         path: 'marketplace',
@@ -634,7 +671,8 @@ const routes = [
         meta: {
           title: 'Marketplace | IAM Key'
         },
-        component: () => import('./views/standalone/Marketplace.vue')
+        component: () => import('./views/standalone/Marketplace.vue'),
+        searchterms: 'iamproperty'
       },
       {
         path: 'movebutler',
@@ -674,7 +712,8 @@ const routes = [
         meta: {
           title: 'Agent dashboard | iamkey'
         },
-        component: () => import('./views/standalone/AgentDashboard.vue')
+        component: () => import('./views/standalone/AgentDashboard.vue'),
+        searchterms: 'movebutler'
       },
       {
         path: 'openview',
@@ -690,7 +729,8 @@ const routes = [
         meta: {
           title: 'Compliance dashboard | iamkey'
         },
-        component: () => import('./views/standalone/ComplianceDashboard.vue')
+        component: () => import('./views/standalone/ComplianceDashboard.vue'),
+        searchterms: 'iamsold, iam sold'
       }
     ]
   },
@@ -711,14 +751,19 @@ const routes = [
       }
     ]
   },
-  { path: '/audit', component: () => import('./views/Audit.vue') },
+  { path: '/audit',
+    name: 'Audit',
+    component: () => import('./views/Audit.vue'),
+    searchterms: 'filesize'
+  },
   {
     path: '/changelog',
     component: () => import('./views/Changelog.vue'),
     name: 'Changelog',
     meta: {
       title: 'Changelog | iamkey'
-    }
+    },
+    searchterms: 'versions, changes'
   },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('./views/PageNotFound.vue') }
 ]
