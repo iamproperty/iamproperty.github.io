@@ -1,81 +1,177 @@
 <template>
   <main>
     
+    <DSHeader :image="headerImg" section="components">
+      <h1>Form checkbox fields (Beta)</h1>
+    </DSHeader>
+
     <div class="container pb-0">
       
-      <ul class="breadcrumb mb-0">
-        <li><a href="/components/form">Form components</a></li>
-      </ul>
-      <h1>Checkbox field</h1>
-      <p>Using what a fairly common approach on styling checkboxes using a wrapper div to group the input and label.</p>
+      <p class="lead">...</p>
     </div>
-    <div class="container visualtest pt-2">
 
-      <Input type="checkbox" id="test1" label="Label"></Input>
-      <hr/>
-      <Input type="checkbox" id="test2" label="Label for disabled field" disabled></Input>
-      
-      <pre><code>&lt;div class="form-check">
-  &lt;input type="checkbox" name="test1" id="test1" class="form-check-input">
-  &lt;label for="test1" class="form-label form-check-label">Label&lt;/label>
-&lt;/div></code></pre>
+    <SelectionControl></SelectionControl>
 
-      <h2>Stacked</h2>
-      <p class="visualtest-hide">Checkboxes next to each other will spaced tightly together, to avoid this a hr element can be used in between.</p>
+    <div class="container pb-0">
+      <h2>Standard checkboxes</h2>
+      <p>...</p>
+    </div>
 
-      <Input type="checkbox" id="test3" label="Label"></Input>
-      <Input type="checkbox" id="test4" label="Label"></Input>
-      
-      <h2>Inline</h2>
-      <p class="visualtest-hide">The layout of checkboxes can be modified by adding a <strong>.form-check-inline</strong> class to the <strong>.form-check</strong> element. It is recommened to use a hr after the last checkbox.</p>
+    <div class="container visualtest">
 
-      <Input type="checkbox" id="test5" label="Label" class="form-check-inline"></Input>
-      <Input type="checkbox" id="test6" label="Label" class="form-check-inline"></Input>
-      <hr/>
-      <h2>Switches</h2>
+      <div class="row pe-none">
 
-      <p class="visualtest-hide">The display of checkboxes can be changed to look like a switch by adding a <strong>.form-switch</strong> class to the <strong>.form-check</strong> element.</p>
-
-      <Input type="checkbox" id="test7" label="Label" class="form-switch"></Input>
-
-      <h2>Conditional Reveal of content</h2>
-      <p class="visualtest-hide">Sometimes we only want to show some content or input fields if a user has checked a box first. </p>
-      <Input type="checkbox" id="test9" label="Label" checked="checked">
-        <div class="conditional">
-          <p class="mb-2">Hello the checkbox above must be checked for this to appear.</p>
-          <Input id="test71" label="Label of previously hidden field"></Input>
+        <div class="col-6 col-md-4 pb-3">
+          <h3 class="lead text-uppercase text-body pb-2">Unselected</h3>
+          <input type="checkbox" name="radio1" id="radio1" />
+          <label for="radio1">Radio button copy</label>
         </div>
-      </Input>
-<pre><code>&lt;div class="form-check">
-  &lt;input type="checkbox" name="test9" id="test9" class="form-check-input">
-  &lt;label for="test9" class="form-label form-check-label">Label&lt;/label>
-  &lt;div class="conditional">
-    &lt;p class="mb-2">Hello the checkbox above must be checked for this to appear.&lt;/p>
-  &lt;/div>
-&lt;/div></code></pre>
+
+        <div class="col-6 col-md-4 pb-3">
+
+          <h3 class="lead text-uppercase text-body pb-2">Selected</h3>
+          <input type="checkbox" name="radio2" id="radio2" checked />
+          <label for="radio2">Radio button copy </label>
+        </div>
+
+        <hr/>
+
+        <div class="col-6 col-md-4 pb-3">
+          <h3 class="lead text-uppercase text-body pb-2">Hover/focus unselected</h3>
+        <input type="checkbox" name="radio3" id="radio3" class="focus" />
+        <label for="radio3">Radio button copy </label>
+        </div>
+
+        <div class="col-6 col-md-4 pb-3">
+          <h3 class="lead text-uppercase text-body pb-2">Hover/focus Selected</h3>
+          <input type="checkbox" name="radio4" id="radio4" class="focus" checked />
+          <label for="radio4">Radio button copy </label>
+        </div>
+
+        <hr/>
+
+        <div class="col-6 col-md-4 pb-3">
+          <h3 class="lead text-uppercase text-body pb-2">Pressed unselected</h3>
+        <input type="checkbox" name="radio5" id="radio5" class="active" />
+        <label for="radio5">Radio button copy </label>
+        </div>
+
+        <div class="col-6 col-md-4 pb-3">
+          <h3 class="lead text-uppercase text-body pb-2">Pressed Selected</h3>
+        <input type="checkbox" name="radio6" id="radio6" class="active" checked />
+        <label for="radio6">Radio button copy </label>
+        </div>
+
+      </div>
 
     </div>
+
+  
+
+    <div class="container pt-4 pb-0">
+
+      <h2>Disabled Checkboxes</h2>
+    </div>
+
+    <div class="container visualtest">
+      <div class="row">
+
+        <div class="col-6 col-md-4 pb-3">
+          <h3 class="lead text-uppercase text-body pb-2">Disabled Unselected</h3>
+          <input type="checkbox" name="radio10" id="radio10" disabled />
+          <label for="radio10">Radio button copy</label>
+        </div>
+
+        <div class="col-6 col-md-4 pb-3">
+
+          <h3 class="lead text-uppercase text-body pb-2">Disabled Selected</h3>
+          <input type="checkbox" name="radio20" id="radio20" checked disabled />
+          <label for="radio20">Radio button copy </label>
+        </div>
+
+        <hr/>
+
+        <div class="col-6 col-md-4 pb-3">
+          <h3 class="lead text-uppercase text-body pb-2">Disabled Hover/focus unselected</h3>
+          <input type="checkbox" name="radio30" id="radio30" class="focus" disabled />
+          <label for="radio30">Radio button copy </label>
+        </div>
+
+        <div class="col-6 col-md-4 pb-3">
+          <h3 class="lead text-uppercase text-body pb-2">Disabled Hover/focus Selected</h3>
+          <input type="checkbox" name="radio40" id="radio40" class="focus" checked disabled />
+          <label for="radio40">Radio button copy </label>
+        </div>
+      </div>
+    </div>
+
     
     <div class="container">
-      <h2>Vue Input component reference</h2>
-      <p>The checkbox input field uses the same Vue component as the input field, the type just needs to be set to 'checkbox'.</p>
-      <Readme></Readme>
+      <h2>Implementation</h2>
+      <Tabs>
+        <details>
+          <summary><h2>HTML</h2></summary>
+          
+          <pre><code class="html">{{`<input type="checkbox" id="checkbox" name="checkbox"  />
+<label for="checkbox">Input field label</label>`}}</code></pre>
+        </details>
+        <details>
+          <summary><h2>Vue component</h2></summary>
+          <p class="pb-3">The checkbox input field uses the same Vue component as the input field, the type just needs to be set to 'checkbox'. The name attribute is required for the checkbox input field.</p>
+          <Readme></Readme>
+        </details>
+      </Tabs>
     </div>
+    
+    <!--
+    <div class="bg-light version-control">
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Version Control</th>
+              <th>Date</th>
+              <th>Notable updates</th>
+            </tr>
+          </thead>
+          <tbody class="text-body">
+            <tr>
+              <td>V1 added</td>
+              <td>13.07.2023</td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="/pdfs/radio-buttons.pdf" download>Download latest designs</a>
+      </div>
+    </div>
+    -->
   </main>
 </template>
 
 
 <script>
-import Input from '@/components/Input/Input.vue'
-import Readme from '@/components/Input/README.md'
+
+import DSHeader from '../DSHeader.vue';
+import SelectionControl from '../selectionControls.vue';
+import headerImg from '../../img/type-header.png';
+import Input from '@/components/Input/Input.vue';
+import Readme from '@/components/Input/README.md';
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Card from '@/components/Card/Card.vue'
 
 export default {
   components: {
+    DSHeader,
+    SelectionControl,
     Input,
-    Readme
+    Readme,
+    Tabs,
+    Card
   },
   data () {
     return {
+      headerImg: headerImg,
       message:'input field value',
       htmlUsage: `...`,
     }
