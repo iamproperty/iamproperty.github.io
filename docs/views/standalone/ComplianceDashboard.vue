@@ -86,7 +86,7 @@
           <div class="row align-items-end">
 
 
-            <div class="col-6 ms-auto col-md ms-md-auto mw-fit-content">
+            <div class="col-12 ms-md-auto mw-fit-content">
               <button class="btn btn-secondary me-0 d-block w-100 btn-filter mb-1" type="button" data-modal="filters">Filter by <span data-filter-count=""></span></button>
             </div>
 

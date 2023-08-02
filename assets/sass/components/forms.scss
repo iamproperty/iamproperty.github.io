@@ -444,11 +444,10 @@ input[type="radio"] + label:not(:has(> iam-card)) {
   }
 }
 
-div:has(> input:is([type="radio"],[type="checkbox"]):nth-of-type(2)) {
-  label {
+div:has(> :is(input[type="radio"],input[type="checkbox"]):nth-of-type(2)) {
+  label:not(:has(> iam-card)):not(:last-of-type) {
     margin-bottom: 0rem;
   }
-  margin-bottom: rem(24);
 }
 
 input:is([type="radio"],[type="checkbox"]):checked + label {
