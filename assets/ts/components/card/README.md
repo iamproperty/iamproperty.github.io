@@ -1,3 +1,15 @@
+**Add the below to your initialise script**
+
+```
+import iamCard from '../node_modules/@iamproperty/components/assets/js/components/card/card.component.min'; // Might need to update the path
+
+
+if (!window.customElements.get(`iam-card`))
+  window.customElements.define(`iam-card`, iamCard);
+```
+
+**Add the below HTML code to where you want the component to live.**
+
 ```
 <a href="/link-url">
   <iam-card>Link content</iam-card>
