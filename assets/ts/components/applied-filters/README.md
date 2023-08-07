@@ -1,3 +1,18 @@
+**Add the below to your initialise script**
+
+```
+import('../node_modules/@iamproperty/components/assets/js/components/applied-filters/applied-filters.component.min').then(module => { // Might need to update the path
+
+  if (!window.customElements.get(`iam-applied-filters`))
+    window.customElements.define(`iam-applied-filters`, module.default);
+
+}).catch((err) => {
+  console.log(err.message);
+});
+```
+
+**Add the below HTML code to where you want the component to live.**
+
 ```
 <iam-applied-filters></iam-applied-filters>
 ```
