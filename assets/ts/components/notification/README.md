@@ -1,3 +1,18 @@
+**Add the below to your initialise script**
+
+```
+import('../node_modules/@iamproperty/components/assets/js/components/notification/notification.component.min').then(module => { // Might need to update the path
+
+  if (!window.customElements.get(`iam-notification`))
+    window.customElements.define(`iam-notification`, module.default);
+
+}).catch((err) => {
+  console.log(err.message);
+});
+```
+
+**Add the below HTML code to where you want the component to live.**
+
 ```
 <!-- Inline -->
 <iam-notification data-status="danger" data-dismiss="">

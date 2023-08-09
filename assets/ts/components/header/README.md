@@ -1,4 +1,17 @@
-### Usage
+**Add the below to your initialise script**
+
+```
+import('../node_modules/@iamproperty/components/assets/js/components/filterlist/filterlist.component.min').then(module => { // Might need to update the path
+
+  if (!window.customElements.get(`iam-filterlist`))
+    window.customElements.define(`iam-filterlist`, module.default);
+
+}).catch((err) => {
+  console.log(err.message);
+});
+```
+
+**Add the below HTML code to where you want the component to live.**
 
 ```
 <iam-header class="bg-secondary" image="/shutterstock_1229155495.webp">
@@ -11,14 +24,14 @@
 </iam-header>
 ```
 
-### Properties
+**Properties** 
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | image | String | - | Optional image url to display in the background |
 
 
-### Slots
+**Slots**
 
 | Option | Default Value | Description |
 | ------ | ------------- | ----------- |

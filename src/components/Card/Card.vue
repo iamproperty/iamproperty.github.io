@@ -5,16 +5,20 @@
 </template>
 
 <script>
-import iamCard from '../../../assets/js/components/card/card.component.min.js'
-
 export default {
   name: 'Card',
   mounted(){
 
     this.$nextTick(function () {
       
-      if (!window.customElements.get('iam-card'))
-        window.customElements.define('iam-card', iamCard);
+      import('../../../assets/js/components/card/card.component.min.js').then(module => {
+
+        if (!window.customElements.get(`iam-card`))
+          window.customElements.define(`iam-card`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
     })
   }
 }
