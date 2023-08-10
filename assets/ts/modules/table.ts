@@ -160,6 +160,16 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       createPaginationButttons(wrapper,pagination);
       populateDataQueries(table,form);
     }
+
+    // Pass post data back to the page
+    if(form.hasAttribute('data-ajax-post')){
+          
+      let formData = new FormData(form);
+      let queryString = new URLSearchParams(formData).toString();
+      const http = new XMLHttpRequest()
+      http.open('GET', `${window.location.href}?ajax=true&${queryString}`);
+      http.send();
+    }
   }
 
   form.addEventListener('keyup', (event) => {
@@ -417,7 +427,7 @@ export const filterTable = (table, form, wrapper) => {
 
   table.classList.remove('table--filtered');
 
-  let filters = [];
+  let filters = filterFilters(form);
   let searches = [];
   let matched = 0;
   let page = form.querySelector('[data-pagination]') ? parseInt(form.querySelector('[data-pagination]').value) : 1;
@@ -431,40 +441,6 @@ export const filterTable = (table, form, wrapper) => {
     
     row.removeAttribute('data-filtered-by');
   });
-
-  // Filter
-  let filterInputs = Array.from(form.querySelectorAll('[data-filter]'));
-
-  filterInputs.forEach((filterInput, index) => {
-
-    // Ignore uncked radio inputs
-    if(filterInput.type == 'radio' && !filterInput.checked){
-      return;
-    }
-
-    if(filterInput.type == 'checkbox' && !filterInput.checked){
-      return;
-    }
-
-
-    if(filterInput.getAttribute('data-filter') == "multi"){
-
-      for (const [key, value] of Object.entries(JSON.parse(filterInput.value))) {
-        filters[filterInput.getAttribute('data-filter')].push(value);
-      }
-    }
-    else if (filterInput && filterInput.value) {
-
-      let dataFilter = filterInput.getAttribute('data-filter');
-
-      if(!filters[dataFilter])
-        filters[dataFilter] = new Array();
-
-      filters[dataFilter].push(filterInput.value);
-    }
-
-  });
-
 
   // Add search columns too
   if(form.querySelector('[data-search]')){
@@ -482,10 +458,10 @@ export const filterTable = (table, form, wrapper) => {
     element.innerHTML = '';
   });
 
-  if(filters.length) {
+  if(Object.keys(filters).length) {
       
     Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
-      element.innerHTML += `(${filters.length})`;
+      element.innerHTML += `(${Object.keys(filters).length})`;
     });
   }
   
@@ -804,7 +780,37 @@ export const makeTableFunctional = function(table, form, pagination, wrapper){
   }
 }
 
+const filterFilters = function(form){
 
+  let filters = new Object();
+
+  // Filter
+  let filterInputs = Array.from(form.querySelectorAll('[data-filter]'));
+
+  filterInputs.forEach((filterInput, index) => {
+
+    // Ignore uncked radio inputs
+    if(filterInput.type == 'radio' && !filterInput.checked){
+      return;
+    }
+    
+    if(filterInput.type == 'checkbox' && !filterInput.checked){
+      return;
+    }
+
+    if (filterInput && filterInput.value) {
+
+      let dataFilter = filterInput.getAttribute('data-filter');
+
+      if(!filters[dataFilter])
+        filters[dataFilter] = new Array();
+    
+      filters[dataFilter].push(filterInput.value);
+    }
+  });
+
+  return filters;
+}
 
 export const loadAjaxTable = async function (table, form, pagination, wrapper){
 
@@ -818,6 +824,20 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
 
   wrapper.classList.add('table--loading');
   
+  // Display the filter count
+  let filters = filterFilters(form);
+
+  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+    element.innerHTML = '';
+  });
+
+  if(Object.keys(filters).length) {
+      
+    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+      element.innerHTML += `(${Object.keys(filters).length})`;
+    });
+  }
+
   // Setup controller vars if not already set
   if(!window.controller)
     window.controller = [];
@@ -927,6 +947,16 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
         makeTableFunctional(table, form, pagination, wrapper);        
         createPaginationButttons(wrapper, pagination);
 
+        Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement, index) => {
+
+          let totalNumber = resolvePath(response, queryElement.getAttribute('data-ajax-query'), '');
+
+          if(queryElement.hasAttribute('data-total'))
+            queryElement.setAttribute('data-total', totalNumber);
+          else
+            queryElement.innerHTML = totalNumber;
+        });
+
         if(parseInt(totalNumber) == 0){
           tbody.innerHTML = `<tr><td colspan="100%"><span>${emptyMsg}</span></td></tr>`;
         }
@@ -942,13 +972,6 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
       }
       else {
         tbody.innerHTML = '<tr><td colspan="100%"><span>Error loading table</span></td></tr>';
-      }
-
-      // Pass post data back to the page
-      if(form.hasAttribute('data-ajax-post')){
-        const http = new XMLHttpRequest()
-        http.open('GET', `${window.location.href}?ajax=true&${queryString}`);
-        http.send();
       }
     });
   } catch (error) {
