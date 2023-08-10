@@ -76,8 +76,8 @@ class iamCard extends HTMLElement {
         const inputName = input.getAttribute('name');
         const inputID = input.getAttribute('id');
 
-        const inputs = Array.from(document.querySelectorAll(`[name="${inputName}"]:not([id="${inputID}"])`));
-    
+        // Mimic radio button functionality
+        const inputs = Array.from(document.querySelectorAll(`[name="${inputName}"][type="radio"]:not([id="${inputID}"])`));
         inputs.forEach((input, index) => {
           
           const otherCard = document.querySelector(`[for="${input.getAttribute('id')}"] iam-card`);
