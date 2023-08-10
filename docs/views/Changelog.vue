@@ -3,6 +3,11 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V3.7.9-beta</h2>
+      <ul>
+        <li>Update the ajax table functionality so we can take ajax responses and display the meta data values on the page.</li>
+      </ul>
+
       <h2>V3.7.8</h2>
 
       <ul>
