@@ -160,7 +160,7 @@ $non-theme-colors: map-merge((
   "body":       $body-color,
   "border":     $colour-border,
   "link":       var(--colour-primary-theme),
-  "brand":      var(--colour-primary),
+  "brand":      var(--colour-primary-theme),
   "underline":  var(--colour-secondary),
   "heading":    var(--colour-primary),
   "focus":      var(--colour-primary-theme),

@@ -39,14 +39,14 @@
     padding: var(--container-padding)!important;
     padding-top: 1rem!important;
     padding-bottom: 1rem!important;
-    background: white;
+    background: var(--colour-canvas-2);
     z-index: var(--index-menu);
     overflow: auto;
 
     transition: left 1s ease-out;
 
     
-    @include reset-colours();
+    //@include reset-colours();
 
     &.open {
       left: calc(100% - (#{rem(375)} - var(--scrollbar-width)));

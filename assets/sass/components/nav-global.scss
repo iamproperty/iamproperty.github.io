@@ -1,5 +1,6 @@
 @use "../_func" as *;
 
+// #region Create the correct padding top of the page
 nav:has(iam-nav) {
 
   min-height: #{rem(68)};
@@ -17,18 +18,20 @@ nav:has(iam-nav) {
     }
   }
 }
+// #endregion
 
 iam-nav:not(:defined) {
   
   @media screen and (max-width: 62em) {
     &:not(:target) > *:not(.brand):not(.btn-menu) {
-
       display: none;
     }
   }
 }
 
+
 iam-nav {
+
   display: flex!important;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -41,7 +44,6 @@ iam-nav {
   max-width: var(--max-width,80rem)!important;
   width: 100%;
   border-radius: 0!important;
-
   position: fixed;
   top: 0;
   left: 50%;
@@ -114,14 +116,17 @@ iam-nav {
     background-color: var(--colour-white);
     border-color: var(--colour-white);
   }
+}
 
-  // Mobile bar changes
-  @media screen and (max-width: 62em) {
-    
+
+// #region Mobile bar
+@media screen and (max-width: 62em) {
+  iam-nav {
+
     &:not([class*="bg-"]) {
           
-      background-color: var(--colour-primary);
-      background: linear-gradient(180deg, var(--colour-primary) 0%, var(--colour-primary) #{rem(68)}, var(--colour-canvas) #{rem(68)}, var(--colour-canvas) 100%);
+      background-color: var(--colour-primary-theme);
+      background: linear-gradient(180deg, var(--colour-primary-theme) 0%, var(--colour-primary-theme) #{rem(68)}, var(--colour-canvas-2) #{rem(68)}, var(--colour-canvas-2) 100%);
 
       .brand[slot="logo"] {
           
@@ -130,8 +135,13 @@ iam-nav {
       }
     }
   }
+}
+// #endregion
+
+// #region Desktop nav
+@include media-breakpoint-up(md) {
+  iam-nav {
   
-  @include media-breakpoint-up(md) {
 
     &.bg-primary {
 
@@ -153,10 +163,7 @@ iam-nav {
       
     }
 
-    background-color: white;
-
     padding-bottom: rem(16)!important;
-
     display: flex!important;
     align-items: center;
 
@@ -166,7 +173,7 @@ iam-nav {
 
     &:not([class*="bg-"]) {
         
-      background: var(--colour-canvas);
+      background: var(--colour-canvas-2);
     }
 
     .brand {
@@ -213,7 +220,7 @@ iam-nav {
       padding: var(--container-padding)!important;
       padding-block: 0!important;
 
-      li > a {
+      > li > a {
         color: white;
         height: rem(52);
         line-height: rem(52);
@@ -224,7 +231,7 @@ iam-nav {
         position: absolute;
         top: 0;
         left: 50%;
-        height: rem(52);
+        height: 100%;
         width: 100vw;
         background-color: var(--colour-primary);
         transform: translate(-50%,0);
@@ -241,8 +248,8 @@ iam-nav {
       margin-right: 0!important;
     }
   }
-
 }
+// #endregion
 
 // #region secondary top
 @include media-breakpoint-up(md) {
