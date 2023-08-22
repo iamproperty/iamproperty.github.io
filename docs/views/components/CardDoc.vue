@@ -79,7 +79,6 @@
             <Card>
               Client onboarding 
               <span>Action Client due diligence checks and view information</span>
-              <span><progress id="file" value="61" max="100"></progress> 61%</span>
             </Card>
           </a>          
         </div>
