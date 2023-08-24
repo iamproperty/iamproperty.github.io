@@ -3,8 +3,9 @@
     <div class="container">
       <h1>Changelog</h1>
 
-      <h2>V3.7.9-beta</h2>
+      <h2>V3.7.10</h2>
       <ul>
+        <li>Multi-step modal component updated to display full width on mobile.</li>
         <li>Update the ajax table functionality so we can take ajax responses and display the meta data values on the page.</li>
       </ul>
 
