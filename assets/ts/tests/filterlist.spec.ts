@@ -16,7 +16,7 @@ const listHTML = `
 
 describe('addDataAttributes', () => {
 
-  let list = document.createElement('ul');
+  let list = document.createElement('div');
   list.innerHTML = listHTML;
 
   filterTheList(list, "Lucas");

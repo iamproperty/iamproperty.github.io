@@ -3,6 +3,20 @@ import { createEmbed } from "./youtubevideo";
 
 const extendDialogs = (body) => {
 
+  Array.from(body.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
+
+    let parent = dialog.closest('.dialog__wrapper');
+
+    if(!parent){
+        
+      dialog.removeAttribute('open');
+      dialog.showModal();
+      dialog.focus();
+
+      createDialog(dialog);
+    }
+  });
+
   // Dialogs/modals
   body.addEventListener('click', (event) => {
 
@@ -209,33 +223,97 @@ export const createDialog = (dialog) => {
 
 }
 
-const createMultiFormDialog = (dialog) => {
+export const createMultiFormDialog = (dialog) => {
+
   let buttons = "";
   let fieldsets = Array.from(dialog.querySelectorAll('fieldset[data-title]'));
+
   fieldsets.forEach((fieldset,index) => {
-    buttons += `<button data-title="${fieldset.getAttribute('data-title')}" type="button" class="${index == 0 ? "active":""}">${fieldset.getAttribute('data-title')}</button>`;
+    buttons += `<button data-title="${fieldset.getAttribute('data-title')}" type="button" class="${index == 0 ? "active":""}" tabindex="-1">${fieldset.getAttribute('data-title')}</button>`;
 
     const btnWrapper = document.createElement("div");
     btnWrapper.classList.add('btn--wrapper');
     fieldset.appendChild(btnWrapper);
     
-
     if(index != 0)
-      btnWrapper.innerHTML += `<button data-title="${fieldsets[index-1].getAttribute('data-title')}" class="btn btn-secondary mb-0" type="button">Previous</button>`;
+      btnWrapper.innerHTML += `<button data-title="${fieldsets[index-1].getAttribute('data-title')}" class="btn btn-secondary mb-0" data-previous type="button">Previous</button>`;
 
     if(index != fieldsets.length - 1)
-      btnWrapper.innerHTML += `<button data-title="${fieldsets[index+1].getAttribute('data-title')}" class="btn btn-primary mb-0" type="button">Next</button>`;
+      btnWrapper.innerHTML += `<button data-title="${fieldsets[index+1].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="button">Next</button>`;
 
     if(index == fieldsets.length - 1)
-      btnWrapper.innerHTML += `<button class="btn btn-primary mb-0">Submit</button>`;
+      btnWrapper.innerHTML += `<button data-title="${fieldsets[index].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="submit">Submit</button>`;
   });
 
   dialog.innerHTML = `<div class="steps bg-primary">${buttons}</div>${dialog.innerHTML}`;
 
 
-  dialog.addEventListener('click', (event) => {
-    if (event && event.target instanceof HTMLElement && event.target.closest('button[data-title]')){
-      const button = event.target.closest('button[data-title]');
+  // Open the fieldset with an error inside
+  let validatedFieldsets = Array.from(dialog.querySelectorAll('fieldset.was-validated'));
+  for (let i = 0; i < validatedFieldsets.length; i++) {
+
+    let fieldset = validatedFieldsets[i];
+    let fieldsetID = fieldset.getAttribute('data-title');
+    
+    if(fieldset.querySelector('.is-invalid')){
+
+      Array.from(dialog.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element, index) => {
+
+        element.classList.add('active');
+      });
+
+      break;
+    }
+    else {
+
+      Array.from(dialog.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element, index) => {
+
+        element.classList.add('valid');
+      });
+    }
+  }
+
+  // Prevent the bubble messages
+  dialog.addEventListener('invalid', (function () {
+    return function (e) {
+      e.preventDefault();
+    };
+  })(), true);
+
+
+  function validateFieldset(button){
+
+    const currentFieldset = dialog.querySelector(`fieldset.active`) ? dialog.querySelector(`fieldset.active`) : dialog.querySelector(`fieldset[data-title]`);
+    const currentFieldsetID = currentFieldset.getAttribute('data-title');
+    let isFieldsetValid = true;
+
+    currentFieldset.classList.add('was-validated');
+
+    Array.from(currentFieldset.querySelectorAll('input')).forEach((input, index) => {
+
+      if (!input.checkValidity())
+        isFieldsetValid = false;
+    });
+
+    // If valid mode to next field set
+    if(!isFieldsetValid){
+
+      Array.from(dialog.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach((element, index) => {
+
+        element.classList.remove('valid');
+      });
+    }
+    else {
+
+      Array.from(dialog.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach((element, index) => {
+
+        element.classList.add('valid');
+      });
+    }
+
+    // Allow the previous button to navigate
+    if(isFieldsetValid || !button.hasAttribute('data-next')){
+
       const fieldset = dialog.querySelector(`fieldset[data-title="${button.getAttribute('data-title')}"]`);
       const step = dialog.querySelector(`.steps button[data-title="${button.getAttribute('data-title')}"]`);
 
@@ -248,6 +326,44 @@ const createMultiFormDialog = (dialog) => {
 
       step.classList.add('active');
       fieldset.classList.add('active');
+    }
+
+
+    let fieldsetCount = Array.from(dialog.querySelectorAll(`fieldset`)).length;
+    let validFieldsetCount = Array.from(dialog.querySelectorAll(`fieldset.valid`)).length;
+
+    // update the progress bar
+    dialog.style.setProperty('--progress', `${(validFieldsetCount/(fieldsetCount - 1) * 100)}%`);
+  }
+
+  // remove error messages from server
+  dialog.addEventListener('keydown', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('button')){
+
+      const button = event.target.closest('button');
+
+      if(event.keyCode == 13){
+        
+        event.preventDefault();
+        validateFieldset(button);
+      }
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('input')){
+      const input = event.target.closest('input');
+
+      input.classList.remove('is-invalid');
+
+
+    }
+  });
+
+
+  dialog.addEventListener('click', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('button[data-title]')){
+
+      const button = event.target.closest('button[data-title]');
+      validateFieldset(button);
     };
     return null
   });

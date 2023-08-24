@@ -279,7 +279,7 @@ dialog::backdrop {
       height: 2px;
       background: currentColor;
       z-index: 1;
-      opacity: 0.5;
+      background: linear-gradient(90deg, var(--colour-success) 0%, var(--colour-success) var(--progress, 0%), rgba(255,255,255,0.5) var(--progress, 0%), rgba(255,255,255,0.5) 100%);
     }
 
     button {
@@ -287,7 +287,7 @@ dialog::backdrop {
       position: relative;
       background: transparent;
       border: none;
-      color: inherit;
+      color: rgba($color: #ffffff, $alpha: 0.5);
       height: rem(24);
       line-height: rem(24);
       width: rem(24);
@@ -314,8 +314,35 @@ dialog::backdrop {
         border-radius: 50%;
       }
 
-      &:not(.active):before {
-        opacity: 0.5;
+      &:not(.active):not(.valid) {
+        
+        pointer-events: none;
+
+        &:before {
+          opacity: 0.5;
+        }
+      }
+
+      &.active {
+        color: var(--colour-white);
+      }
+      &.valid {
+        color: var(--colour-success);
+      }
+    }
+
+    @media screen and (prefers-color-scheme: dark) {
+
+      button {
+        
+        color: rgba($color: #000000, $alpha: 0.5);
+
+        &.active {
+          color: black;
+        }
+        &.valid {
+          color: var(--colour-complete);
+        }
       }
     }
   }
@@ -567,5 +594,41 @@ dialog::backdrop {
 .dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
 
   display: none;
+}
+// #endregion
+
+// #region mobile fullwidth view 
+@media screen and (max-width: 36em) {
+
+  dialog[open].dialog--sm-fullpage,
+  .js-enabled *:not(.dialog__wrapper) > dialog[open].dialog--multi {
+
+    min-width: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    overflow-y: auto;
+
+    .btn--wrapper {
+      padding-top: rem(64);
+    }
+  }
+
+  dialog[open].dialog--sm-fullpage {
+    
+    .mh-lg {
+      max-height: none!important;
+      overflow: visible;
+    }
+
+    &:before,
+    *:first-child {
+      margin-top: auto!important;
+    }
+
+    *:last-child {
+
+      margin-bottom: auto!important;
+    }
+  }
 }
 // #endregion
