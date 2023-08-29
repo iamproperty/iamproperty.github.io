@@ -29,20 +29,6 @@ const extendDialogs = (body) => {
       
       createDialog(dialog);
 
-      
-      // Prevent the user from escaping the model when transactional
-      if(dialog.querySelector(':scope > .mh-lg > form:last-child > button:last-child, :scope > .mh-lg > button:last-child') && !dialog.classList.contains('dialog--multi')) {
-        dialog.addEventListener("cancel", (e) => {
-          e.preventDefault();
-        });        
-      }
-
-      // Create the video embed
-      let videoButton = dialog.querySelector('.youtube-embed a');
-      if (videoButton){
-        createEmbed(videoButton)
-      }
-
       // Open the modal!
       dialog.showModal();
       dialog.focus();
@@ -194,6 +180,19 @@ const extendDialogs = (body) => {
 }
 
 export const createDialog = (dialog) => {
+
+  // Prevent the user from escaping the model when transactional
+  if(dialog.querySelector(':scope > .mh-lg > form:last-child > button:last-child, :scope > .mh-lg > button:last-child') && !dialog.classList.contains('dialog--multi')) {
+    dialog.addEventListener("cancel", (e) => {
+      e.preventDefault();
+    });        
+  }
+
+  // Create the video embed
+  let videoButton = dialog.querySelector('.youtube-embed a');
+  if (videoButton){
+    createEmbed(videoButton)
+  }
 
   // Multi dialog
   if(dialog.classList.contains('dialog--multi') && !dialog.querySelector(':scope > .steps')) {
