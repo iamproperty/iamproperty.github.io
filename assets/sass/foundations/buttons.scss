@@ -375,3 +375,22 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
 }
 // #endregion
+
+
+// #region Action button
+
+.btn-action {
+  background-color: white;
+  border: 1px solid #9D9D9D;
+  border-radius: rem(4);
+  font-weight: 400!important;
+  font-size: 1rem;
+  line-height: rem(20);
+  padding: rem(6);
+
+  &.btn[class*=fa-]:before {
+    margin-right: rem(6);
+  }
+}
+
+// #endregion

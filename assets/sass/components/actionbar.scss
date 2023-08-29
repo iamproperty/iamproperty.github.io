@@ -1,0 +1,135 @@
+@use "../_func.scss" as *;
+
+.actionbar__wrapper {
+
+  position: relative;
+}
+
+.selectall {
+  position: absolute!important;
+  top: 50%;
+  left: rem(32);
+  transform: translate(0,-50%);
+
+  
+  label {
+    height: rem(40);
+    width: rem(40);
+    overflow: hidden;
+  }
+
+  @include media-breakpoint-up(sm) {
+    label {
+      width: auto;
+    }
+  }
+
+}
+
+:is(.actionbar,.actionbar--selected,.actionbar--search){
+  
+  padding: 0 rem(32);
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  height: rem(68);
+
+  border-top-left-radius: rem(10);
+  border-top-right-radius: rem(10);
+}
+
+.actionbar {
+
+  background-color: #FFFFFF;
+  display: flex;
+}
+
+.actionbar--selected {
+
+  background-color: #E6EAEC;
+  display: none;
+}
+
+.actionbar--search {
+
+  background-color: #E6EAEC;
+  display: none;
+  z-index: 2;
+  position: relative;
+
+  &.show {
+    display: flex;
+  }
+}
+
+
+// Show selected bar
+.selectall:has(input:checked) ~ .actionbar {
+  display: none;
+}
+.selectall:has(input:checked) ~ .actionbar--selected {
+  display: flex;
+}
+
+// Show search bar
+.actionbar--search.show {
+  display: flex;
+}
+
+.actionbar__wrapper:has(.actionbar--search.show) > *:not(.actionbar--search.show) {
+  display: none;
+}
+
+
+::slotted(*){
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+  margin-left: rem(16)!important;
+  margin-right: 0!important;
+}
+
+::slotted(.btn-action:not(.show)){
+  display: none!important;
+}
+
+
+::slotted(.btn-primary){
+  
+  padding-top: calc(#{rem(8)} - 2px)!important;
+  padding-bottom: calc(#{rem(8)} - 2px)!important;
+}
+
+.search-wrapper {
+  width: 50%;
+  margin: 0!important;
+}
+
+
+.safe-area {
+
+  display: flex;
+
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+
+  width: rem(210);
+
+  @include media-breakpoint-up(sm) {
+
+    width: rem(450);
+  }
+
+  
+  @include media-breakpoint-up(md) {
+
+
+    width: rem(750);
+  }
+
+
+  overflow: visible;
+  border: 1px solid red;
+  position: relative;
+}
