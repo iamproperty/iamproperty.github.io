@@ -1,3 +1,18 @@
+**Add the below to your initialise script**
+
+```
+import('../node_modules/@iamproperty/components/assets/js/components/table/table.component.min').then(module => { // Might need to update the path
+
+  if (!window.customElements.get(`iam-table`))
+    window.customElements.define(`iam-table`, module.default);
+
+}).catch((err) => {
+  console.log(err.message);
+});
+```
+
+**Add the below HTML code to where you want the component to live.**
+
 ```
 <iam-table class="container">
   <table>
