@@ -121,7 +121,7 @@ table.border-0 {
   --wrapper-padding: #{rem(32)};
   --bg-colour: #ffffff;
   display: block;
-  background: var(--colour-canvas-2);
+  background: white;
   padding: var(--wrapper-padding);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
   border-radius: rem(8);
@@ -134,10 +134,17 @@ table.border-0 {
 
   table {
     margin-bottom: 0;
+
+    td:has(input[type="checkbox"]) {
+      width: rem(30);
+      min-width: rem(30);
+      max-width: rem(30);
+    }
   }
 
   @media (forced-colors: active) {
     --wrapper-padding: 0;
+    background: var(--colour-canvas-2);
   }
 }
 
@@ -162,6 +169,7 @@ table.border-0 {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
     margin-bottom: 0;
+    background: white;
   }
   
 
