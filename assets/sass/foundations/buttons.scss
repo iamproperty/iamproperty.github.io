@@ -90,6 +90,22 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 }
 // #endregion
 
+// #region Action button
+.btn-action {
+  background-color: white;
+  border: 1px solid #9D9D9D;
+  border-radius: rem(4);
+  font-weight: 400!important;
+  font-size: 1rem;
+  line-height: rem(20);
+  padding: rem(6);
+
+  &.btn[class*=fa-]:before {
+    margin-right: rem(6);
+  }
+}
+// #endregion
+
 // #region button with icon
 .btn {
   &[class*="fa-"]:before {
@@ -165,6 +181,22 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   overflow: hidden;
   position: relative;
   font-size: rem(20);
+
+  &.btn-compact {
+
+    font-size: 1rem; 
+    padding: rem(6)!important;
+    height: auto!important;
+    line-height: rem(20);
+    height: rem(20 + 6 + 6);
+    width: rem(20 + 6 + 6);
+    min-width: rem(20 + 6 + 6);
+
+    &:before {
+      line-height: rem(20 + 6 + 6);
+    }
+  }
+
 
   &:before {
     position: absolute;

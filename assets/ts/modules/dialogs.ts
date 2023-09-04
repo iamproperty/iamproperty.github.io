@@ -106,8 +106,8 @@ const extendDialogs = (body) => {
       let dataEvent = "openPopover"
       let popover = parent.querySelector(':scope > dialog');
       
-      if(document.querySelector('dialog[open]') && document.querySelector('dialog[open]') != popover)
-        document.querySelector('dialog[open]').close();
+      if(document.querySelector('*:not([data-keep-open]) > dialog[open]') && document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover)
+        document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
 
       // Remove active class from exiting active buttons
       Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
