@@ -146,11 +146,11 @@ class iamActionbar extends HTMLElement {
         else if(view == "small")
           icon = 'fa-bars';
 
-        btns += `<button class="btn-action btn-compact fa-regular ${icon}">${view}</button>`;
+        btns += `<button class="btn btn-action btn-compact mb-0 fa-regular ${icon}">${view}</button>`;
       });
 
 
-      actionbarWrapper.insertAdjacentHTML( 'afterbegin', `<div class="views">${btns}</div>` );
+      actionbarWrapper.insertAdjacentHTML( 'afterbegin', `<div class="views m-0">${btns}</div>` );
 
       let views = this.shadowRoot.querySelector('.views');
 
@@ -172,6 +172,9 @@ class iamActionbar extends HTMLElement {
 
     // #region search
     const searchBar = this.shadowRoot.querySelector('.actionbar--search');
+
+    if(this.hasAttribute('data-search') && this.getAttribute('data-search') == 'show')
+      searchBar.classList.add('show');
 
     this.shadowRoot.addEventListener('click', (event) => {
 
@@ -216,31 +219,42 @@ class iamActionbar extends HTMLElement {
     
     function hideButtons () {
 
+      const wrapperWidth = actionbarWrapper.scrollWidth;
       const screenWidth = document.documentElement.scrollWidth;
+
+
       let safeAreaWidth = 750;
       let elementMargin = 16;
+
+
+      // We need to modify the widths to mimic the CSS's scaling functionality
       let modifier = 1;
-
-
-      if (document.documentElement.scrollWidth >= 992 && screenWidth <= 1280){
-
+      if (screenWidth >= 992 && screenWidth <= 1280){
         modifier = screenWidth/1280;
+      }
+      else if (screenWidth >= 576 && screenWidth <= 1280) {
+        modifier = screenWidth/768;
+      }
+      else if (screenWidth < 576) {
+        modifier = screenWidth/375;
+      }
+
+      // Work out the safe sapce width depending upon the wrappers width and modifier 
+      if (wrapperWidth >= 992 && wrapperWidth <= 1280){
         safeAreaWidth = safeAreaWidth*modifier;
       }
-      else if (document.documentElement.scrollWidth >= 576 && screenWidth <= 1280) {
-        modifier = screenWidth/768;
+      else if (wrapperWidth >= 576 && wrapperWidth <= 1280) {
         safeAreaWidth = 450*modifier;
       }
-      else if (document.documentElement.scrollWidth < 576) {
-        modifier = screenWidth/375;
+      else if (wrapperWidth < 576) {
         safeAreaWidth = 210*modifier;
       }
 
       elementMargin = elementMargin*modifier;
 
 
-
-      if (document.documentElement.scrollWidth < 576) {
+      // If the wrapper width is small we want to reduce the btn sizes
+      if (wrapperWidth < 576) {
         
         Array.from(that.querySelectorAll(':scope > .btn:not(.js-updated)')).forEach((element,index) => {
 

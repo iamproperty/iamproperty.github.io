@@ -182,6 +182,22 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   position: relative;
   font-size: rem(20);
 
+  &.btn-compact {
+
+    font-size: 1rem; 
+    padding: rem(6)!important;
+    height: auto!important;
+    line-height: rem(20);
+    height: rem(20 + 6 + 6);
+    width: rem(20 + 6 + 6);
+    min-width: rem(20 + 6 + 6);
+
+    &:before {
+      line-height: rem(20 + 6 + 6);
+    }
+  }
+
+
   &:before {
     position: absolute;
     top: 0;
