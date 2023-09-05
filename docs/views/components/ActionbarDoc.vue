@@ -63,20 +63,13 @@
         
       </div>
       <h4>Overflow menu options</h4>
-      <div class="row">
-        <div class="col-6 col-md-4">
-          <p>Popover: Text list</p>
-        </div>
-        <div class="col-6 col-md-4">
-          <p>Popover: Text list with icons</p>
-        </div>
-        <div class="col-6 col-md-4">
-          <p>Popover: selection collapsed </p>
-        </div>
-        <div class="col-6 col-md-4">
-          <p>Popover: selection expanded</p>
-        </div>
+      
+      <div class="container visualtest">
+        
+        <PopoverLists></PopoverLists>
       </div>
+
+
 
     </div>
 
@@ -640,6 +633,10 @@ import WebReadme from '~/ts/components/card/README.md'
 
 import anatomy from '../../img/actionbar/actionbar-anatomy.png'
 
+
+import PopoverLists from '../popoverLists.vue'
+
+
 export default {
   components: {
     DSHeader,
@@ -649,7 +646,8 @@ export default {
     Actionbar,
     Readme,
     WebReadme,
-    anatomy
+    anatomy,
+    PopoverLists
   },
   data () {
     return {
