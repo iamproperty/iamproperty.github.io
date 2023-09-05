@@ -205,6 +205,7 @@ export const createDialog = (dialog) => {
     createMultiFormDialog(dialog);
   }
 
+  // If you are using Vue eevents and bindings its recommended to add in the .mh-lg div manually to the dialog
   if(!dialog.querySelector(':scope > .mh-lg') && !dialog.classList.contains('dialog--multi')){
     dialog.innerHTML = `<div class="mh-lg">${dialog.innerHTML}</div>`;
 
@@ -224,7 +225,7 @@ export const createDialog = (dialog) => {
 
   // Create close button is needed
   if(!dialog.querySelector(':scope > button:first-child'))
-    dialog.innerHTML = `<button class="dialog__close">Close</button>${dialog.innerHTML}`;
+    dialog.insertAdjacentHTML('afterbegin', `<button class="dialog__close">Close</button>`);
 
 }
 
@@ -250,7 +251,7 @@ export const createMultiFormDialog = (dialog) => {
       btnWrapper.innerHTML += `<button data-title="${fieldsets[index].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="submit">Submit</button>`;
   });
 
-  dialog.innerHTML = `<div class="steps bg-primary">${buttons}</div>${dialog.innerHTML}`;
+  dialog.insertAdjacentHTML('afterbegin',`<div class="steps bg-primary">${buttons}</div>`);
 
 
   // Open the fieldset with an error inside
