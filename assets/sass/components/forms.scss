@@ -9,7 +9,7 @@ label {
   color: var(--colour-heading);
   display: block;
 
-  &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='file'])):after {
+  &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not([type='file'])):after {
     content: " (Optional)";
   }
 }
@@ -65,6 +65,29 @@ textarea {
 }
 // #endregion
 
+
+// #region legend
+fieldset {
+  width: 100%;
+}
+legend {
+  font-family: $headings-font-family;
+  font-style: $headings-font-style;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: $headings-color;
+  margin: 0;
+  clear: both;
+  display: block;
+  float: none;
+  font-size: rem(map-get($heading-sizes,"h4_fs"));
+  line-height: rem(map-get($heading-sizes,"h4_lh"));
+  padding-bottom: 0.5rem;
+  max-width: var(--content-max-width);
+  min-width: 100%;
+}
+
+// #endregion
 
 // #region wrappers
 div:has(> label:first-child):has(> input) {
@@ -304,9 +327,16 @@ $icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' vie
 $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
 
 
-.was-validated *:is(:invalid, .is-invalid):not(.is-valid) {
+.was-validated *:not(button):is(:invalid, .is-invalid):not(.is-valid) {
 
+  --colour-check-border: var(--colour-danger);
   border-color: var(--colour-danger);
+}
+
+.was-validated *:not(button):is(:invalid, .is-invalid):not(.is-valid) + label {
+
+  --colour-check-border: var(--colour-danger);
+  --colour-check-bg: #FCEBEC;
 }
 
 .was-validated input:is(:invalid, .is-invalid) {
@@ -318,7 +348,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}));
 }
 
-.was-validated *:is(:valid, .is-valid):not(.is-invalid) {
+.was-validated *:not(button):is(:valid, .is-valid):not(.is-invalid) {
 
   border-color: var(--colour-complete);
 }
@@ -348,7 +378,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 }
 // #endregion
 
-// #region radio field 
+// #region radio/checkbox field 
 input:is([type="radio"],[type="checkbox"]) {
   position: absolute;
   top: 0;
@@ -359,18 +389,21 @@ input:is([type="radio"],[type="checkbox"]) {
   margin: 0;
 }
 
-div:has(> input:is([type="radio"],[type="checkbox"])) {
+:is(div,fieldset):has(> input:is([type="radio"],[type="checkbox"])) {
   position: relative;
+
+  padding-bottom: rem(24);
 }
 
-div:has( > input[type="radio"]){
+:is(div,fieldset):has( > input[type="radio"]){
 
   --border-radius: 50%;
   --outline-width: #{rem(8)};
 }
-div:has( > input[type="checkbox"]) {
 
-  --border-radius: #{rem(6)};
+:is(div,fieldset):has( > input[type="checkbox"]) {
+
+  --border-radius: #{rem(4)};
   --outline-width: #{rem(4)};
 }
 
@@ -389,16 +422,30 @@ input:is([type="radio"],[type="checkbox"]) + label:not(:has(> iam-card)) {
   margin-right: rem(24);
   cursor: pointer;
 
+  &:has(+ span){
+    margin-bottom: 0;
+  }
+
+  &:has(+ input){
+    margin-bottom: 0;
+  }
+  
+  &:last-child {
+    
+    margin-bottom: rem(24);
+  }
+
   &:before {
     content: "";
-    border: 2px solid var(--colour-primary);
+    border: 2px solid var(--colour-check-border, var(--colour-primary));
+    background: var(--colour-check-bg, transparent);
     border-radius: var(--border-radius);
     height: rem(24);
     width: rem(24);
     display: inline-block;
     position: absolute;
     top: rem(10 - 2);
-    left: 0;
+    left: var(--outline-width);
   }
 }
 
@@ -494,7 +541,7 @@ input[type="checkbox"]:checked + label {
     border: none!important;
     outline: none!important;
     top: rem(10 - 2);
-    left: 0;
+    left: var(--outline-width);
     text-align: center;
   }
 }
@@ -508,7 +555,7 @@ input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus) + label {
   --tick-colour: var(--colour-muted);
 
   &:before {
-    background: var(--colour-light);
+    background: var(--colour-check-bg, var(--colour-light));
     outline: var(--outline-width) solid var(--colour-light);
   }
 }
@@ -517,7 +564,7 @@ input:is([type="radio"],[type="checkbox"]):is(:active,.active) + label {
   --tick-colour: var(--colour-light);
 
   &:before {
-    background: #E0E0E0;
+    background: var(--colour-check-bg, #E0E0E0);
     outline: var(--outline-width) solid #E0E0E0;
   }
 }
@@ -553,11 +600,6 @@ input[type="checkbox"][disabled]:checked + label {
     border-color: #E0E0E0!important;
   }
 }
-// #endregion
-
-// #region checkbox
-
-
 // #endregion
 
 // #region Conditional reveal
