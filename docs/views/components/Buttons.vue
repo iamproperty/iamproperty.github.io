@@ -721,6 +721,70 @@
 
     <!-- #endregion -->
 
+
+
+    <!-- #region Action button -->
+    <div class="container pb-0">
+      <h3>Action button</h3>
+      <p>Actions buttons are used primarily within the action bar. A filter overlay of 85% brightness will be applied to the default states for the active state.</p>
+    </div>
+
+
+    <div class="container visualtest pb-5 pe-none">
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Default state</p>
+          <a href="/components/buttons" class="btn btn-action">Edit</a>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Hover/Focus state</p>
+          <a href="/components/buttons" class="btn btn-action hover">Edit</a>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-action active">Edit</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
+          <a href="/components/buttons" class="btn btn-action">Edit</a>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
+          <a href="/components/buttons" class="btn btn-action hover">Edit</a>
+        </div>
+        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
+          <a href="/components/buttons" class="btn btn-action active">Edit</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container pb-0">
+      <h4 class="text-body">Action button (with icon)</h4>
+      <p>An icon is usually added to support an action button and help show its purpose.</p>
+    </div>
+
+
+    <div class="container visualtest pb-5 pe-none">
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Default state</p>
+          <a href="/components/buttons.pdf" class="btn btn-action fa-edit">Edit</a>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Hover/Focus state</p>
+          <a href="/components/buttons" class="btn btn-action hover fa-edit">Edit</a>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Active state</p>
+          <a href="/components/buttons" class="btn btn-action active fa-edit">Edit</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- #endregion -->
+
+
     <!-- #region diasabled -->
     <div class="container pb-0">
       <h3>Disabled button state</h3>
@@ -869,6 +933,11 @@
             </tr>
           </thead>
           <tbody class="text-body">
+            <tr>
+              <td>V1.2 added</td>
+              <td>06.09.2023</td>
+              <td>Action button variant added</td>
+            </tr>
             <tr>
               <td>V1.1 added</td>
               <td>08.06.2023</td>
