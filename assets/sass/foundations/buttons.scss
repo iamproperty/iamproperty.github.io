@@ -198,7 +198,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   position: relative;
   font-size: rem(20);
 
-  &.btn-compact {
+  &.btn-sm {
 
     font-size: 1rem; 
     padding: rem(6)!important;
