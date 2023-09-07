@@ -454,8 +454,6 @@ export const filterTable = (table, form, wrapper) => {
   }
 
   // Display the filter count
-  let filters = filterFilters(form);
-
   Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
     element.innerHTML = '';
     element.parentNode.classList.remove('hover');
