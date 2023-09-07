@@ -77,7 +77,12 @@ const extendDialogs = (body) => {
     
     // Close the modal when clicked on the backdrop
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
-      const dialog = event.target.closest('dialog[open]');
+      let dialog = event.target.closest('dialog[open]');
+
+      // Small fix to make sure the dialog isn't a dialog inside of a dialog.
+      var style = window.getComputedStyle(dialog);
+      if(style.display === 'contents')
+        dialog = dialog.parentNode.closest('dialog[open]');
       
       // Dont allow the backdrop to be clicked when transactional
       if(!dialog.querySelector(':scope > .mh-lg > form:last-child > button:last-child, :scope > .mh-lg > button:last-child') || dialog.classList.contains('dialog--multi')){
@@ -106,8 +111,8 @@ const extendDialogs = (body) => {
       let dataEvent = "openPopover"
       let popover = parent.querySelector(':scope > dialog');
       
-      if(document.querySelector('dialog[open]') && document.querySelector('dialog[open]') != popover)
-        document.querySelector('dialog[open]').close();
+      if(document.querySelector('*:not([data-keep-open]) > dialog[open]') && document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover)
+        document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
 
       // Remove active class from exiting active buttons
       Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
@@ -152,8 +157,14 @@ const extendDialogs = (body) => {
       if(popoverBottom > windowPos){
 
         let currentStyle = popover.hasAttribute('style') ? popover.getAttribute('style')+' ' : '';
-
         popover.setAttribute('style',currentStyle+`transform: translate(0, calc(-100% - 4rem))`);
+
+        // Check that the dialog doesn't go over the top of the page
+        boundingRec = popover.getBoundingClientRect();
+        let popoverTop = boundingRec.top - window.scrollY;
+
+        if(popoverTop < 100)
+          popover.removeAttribute('style');
       }
 
       window.dataLayer = window.dataLayer || [];
@@ -199,6 +210,7 @@ export const createDialog = (dialog) => {
     createMultiFormDialog(dialog);
   }
 
+  // If you are using Vue eevents and bindings its recommended to add in the .mh-lg div manually to the dialog
   if(!dialog.querySelector(':scope > .mh-lg') && !dialog.classList.contains('dialog--multi')){
     dialog.innerHTML = `<div class="mh-lg">${dialog.innerHTML}</div>`;
 
@@ -218,7 +230,7 @@ export const createDialog = (dialog) => {
 
   // Create close button is needed
   if(!dialog.querySelector(':scope > button:first-child'))
-    dialog.innerHTML = `<button class="dialog__close">Close</button>${dialog.innerHTML}`;
+    dialog.insertAdjacentHTML('afterbegin', `<button class="dialog__close">Close</button>`);
 
 }
 
@@ -244,7 +256,7 @@ export const createMultiFormDialog = (dialog) => {
       btnWrapper.innerHTML += `<button data-title="${fieldsets[index].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="submit">Submit</button>`;
   });
 
-  dialog.innerHTML = `<div class="steps bg-primary">${buttons}</div>${dialog.innerHTML}`;
+  dialog.insertAdjacentHTML('afterbegin',`<div class="steps bg-primary">${buttons}</div>`);
 
 
   // Open the fieldset with an error inside

@@ -183,6 +183,7 @@ dialog::backdrop {
 
   text-align: center;
 
+
   &:before {
     content: "\f05a";
     font-weight: 300;
@@ -203,6 +204,38 @@ dialog::backdrop {
     line-height: 1;
     color: var(--colour-heading);
     clear: both;
+  }
+
+  &:has(> i):before{
+
+    display: none;
+  }
+
+  &:has(> i) > i{
+
+    display: var(--fa-display,inline-block);
+    line-height: 1;
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
+    margin-top: 0;
+    margin-bottom: rem(24);
+    line-height: 1;
+    color: var(--colour-heading);
+    clear: both;
+
+    &:has(> i){
+      position: relative;
+    }
+
+    > i:before {
+      content: "\f2ed";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: scale(0.5) translate(-100%,0);
+    }
   }
 
   > form:first-child button,
@@ -508,7 +541,7 @@ dialog::backdrop {
     z-index: var(--index-floating);
     min-width: rem(320);
     border-radius: rem(16);
-    width: rem(319);
+    width: rem(320);
     padding: rem(24);
 
     @include media-breakpoint-up(sm) {
@@ -516,6 +549,61 @@ dialog::backdrop {
     }
     @include media-breakpoint-up(md) {
       width: rem(360);
+    }
+
+
+    &.dialog--list {
+      
+      width: fit-content!important;
+      min-width: rem(140)!important;
+      max-width: rem(280)!important;
+      padding: rem(16);
+      margin: 0;
+
+      .btn-action {
+        border: none;
+        padding: 0;
+        margin: 0;
+        padding-block: rem(6);
+        line-height: rem(20);
+        background: none;
+        white-space: inherit;
+        max-width: 100%;
+        min-width: 100%;
+
+        &:before {
+          min-width: rem(20);
+          display: inline-block;
+        }
+
+        &::after {
+          float: right;
+        }
+      }
+
+      hr {
+        height: 2px;
+        background: var(--colour-border);
+        margin-left: -#{rem(16)};
+        margin-right: -#{rem(16)};
+        margin-block: 0.25rem;
+      }
+
+      .radio--tick {
+        margin-right: 0;
+        padding-left: 1.5rem;
+          margin-bottom: 0;
+
+        &:before {
+          left: 0;
+          font-size: 1em;
+          top: 0.75rem;
+        }
+      }
+    }
+
+    dialog[open] {
+      display: contents;
     }
   }
 
