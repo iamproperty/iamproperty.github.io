@@ -183,6 +183,7 @@ dialog::backdrop {
 
   text-align: center;
 
+
   &:before {
     content: "\f05a";
     font-weight: 300;
@@ -203,6 +204,38 @@ dialog::backdrop {
     line-height: 1;
     color: var(--colour-heading);
     clear: both;
+  }
+
+  &:has(> i):before{
+
+    display: none;
+  }
+
+  &:has(> i) > i{
+
+    display: var(--fa-display,inline-block);
+    line-height: 1;
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
+    margin-top: 0;
+    margin-bottom: rem(24);
+    line-height: 1;
+    color: var(--colour-heading);
+    clear: both;
+
+    &:has(> i){
+      position: relative;
+    }
+
+    > i:before {
+      content: "\f2ed";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: scale(0.5) translate(-100%,0);
+    }
   }
 
   > form:first-child button,
