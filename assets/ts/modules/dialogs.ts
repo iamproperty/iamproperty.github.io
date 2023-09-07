@@ -157,8 +157,14 @@ const extendDialogs = (body) => {
       if(popoverBottom > windowPos){
 
         let currentStyle = popover.hasAttribute('style') ? popover.getAttribute('style')+' ' : '';
-
         popover.setAttribute('style',currentStyle+`transform: translate(0, calc(-100% - 4rem))`);
+
+        // Check that the dialog doesn't go over the top of the page
+        boundingRec = popover.getBoundingClientRect();
+        let popoverTop = boundingRec.top - window.scrollY;
+
+        if(popoverTop < 100)
+          popover.removeAttribute('style');
       }
 
       window.dataLayer = window.dataLayer || [];
