@@ -77,7 +77,12 @@ const extendDialogs = (body) => {
     
     // Close the modal when clicked on the backdrop
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
-      const dialog = event.target.closest('dialog[open]');
+      let dialog = event.target.closest('dialog[open]');
+
+      // Small fix to make sure the dialog isn't a dialog inside of a dialog.
+      var style = window.getComputedStyle(dialog);
+      if(style.display === 'contents')
+        dialog = dialog.parentNode.closest('dialog[open]');
       
       // Dont allow the backdrop to be clicked when transactional
       if(!dialog.querySelector(':scope > .mh-lg > form:last-child > button:last-child, :scope > .mh-lg > button:last-child') || dialog.classList.contains('dialog--multi')){
@@ -106,8 +111,8 @@ const extendDialogs = (body) => {
       let dataEvent = "openPopover"
       let popover = parent.querySelector(':scope > dialog');
       
-      if(document.querySelector('dialog[open]') && document.querySelector('dialog[open]') != popover)
-        document.querySelector('dialog[open]').close();
+      if(document.querySelector('*:not([data-keep-open]) > dialog[open]') && document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover)
+        document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
 
       // Remove active class from exiting active buttons
       Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
