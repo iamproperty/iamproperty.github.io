@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-6 col-md-4 pb-3 was-validated">
-          <h3 class="lead text-uppercase text-body pb-2">Selected</h3>
+          <h3 class="lead text-uppercase text-body pb-2">Error</h3>
           <input type="checkbox" name="radio2a" id="radio2a" required />
           <label for="radio2a">Checkbox </label>
           <span>Optional helper text</span>
@@ -57,7 +57,7 @@
         </div>
 
         <div class="col-6 col-md-4 pb-3 was-validated">
-          <h3 class="lead text-uppercase text-body pb-2">Selected</h3>
+          <h3 class="lead text-uppercase text-body pb-2">Hover/focus error</h3>
           <input type="checkbox" name="radio2b" id="radio2b" class="focus" required />
           <label for="radio2b">Checkbox </label>
           <span>Optional helper text</span>
@@ -79,7 +79,7 @@
         </div>
 
         <div class="col-6 col-md-4 pb-3 was-validated">
-          <h3 class="lead text-uppercase text-body pb-2">Selected</h3>
+          <h3 class="lead text-uppercase text-body pb-2">Pressed Error</h3>
           <input type="checkbox" name="radio2c" id="radio2c" class="active" required />
           <label for="radio2c">Checkbox </label>
           <span>Optional helper text</span>
