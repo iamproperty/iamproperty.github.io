@@ -453,15 +453,28 @@ export const filterTable = (table, form, wrapper) => {
     });
   }
 
-  //Display the filter count
+  // Display the filter count
+  let filters = filterFilters(form);
+
   Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
     element.innerHTML = '';
+    element.parentNode.classList.remove('hover');
   });
 
-  if(Object.keys(filters).length) {
-      
+  let filterCount = 0;
+  Object.values(filters).forEach((filter, index) => {
+    
+    if(typeof filter == "object" && Object.values(filter).length)
+      filterCount += Object.values(filter).length;
+    else
+      filterCount++;
+  });
+
+  if(filterCount) {
+    
     Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
-      element.innerHTML += `(${Object.keys(filters).length})`;
+      element.innerHTML += `(${filterCount})`;
+      element.parentNode.classList.add('hover');
     });
   }
   
@@ -829,12 +842,23 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
 
   Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
     element.innerHTML = '';
+    element.parentNode.classList.remove('hover');
   });
 
-  if(Object.keys(filters).length) {
-      
+  let filterCount = 0;
+  Object.values(filters).forEach((filter, index) => {
+
+    if(typeof filter == "object" && Object.values(filter).length)
+      filterCount += Object.values(filter).length;
+    else
+      filterCount++;
+  });
+
+  if(filterCount) {
+    
     Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
-      element.innerHTML += `(${Object.keys(filters).length})`;
+      element.innerHTML += `(${filterCount})`;
+      element.parentNode.classList.add('hover');
     });
   }
 
