@@ -92,16 +92,32 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
 // #region Action button
 .btn-action {
-  background-color: white;
-  border: 1px solid #9D9D9D;
-  border-radius: rem(4);
+  background-color: var(--colour-canvas-2);
+  border: 1px solid var(--colour-muted);
+  border-radius: rem(4)!important;
   font-weight: 400!important;
   font-size: 1rem;
   line-height: rem(20);
   padding: rem(6);
+  color: var(--colour-heading);
 
   &.btn[class*=fa-]:before {
     margin-right: rem(6);
+  }
+
+  
+  a:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) &,
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) {
+    background: var(--colour-btn-action-hover-bg);
+  }
+
+  
+  a:is(:active, .active):not([disabled]) &,
+  &:is(:active, .active):not([disabled]) {
+    
+    filter: brightness(85%);
+    transition: background .1s, color .1s;
+    color: var(--colour-heading);
   }
 }
 // #endregion
@@ -182,7 +198,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   position: relative;
   font-size: rem(20);
 
-  &.btn-compact {
+  &.btn-sm {
 
     font-size: 1rem; 
     padding: rem(6)!important;
