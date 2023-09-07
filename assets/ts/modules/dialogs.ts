@@ -80,7 +80,12 @@ const extendDialogs = (body) => {
     
     // Close the modal when clicked on the backdrop
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog[open]')){
-      const dialog = event.target.closest('dialog[open]');
+      let dialog = event.target.closest('dialog[open]');
+
+      // Small fix to make sure the dialog isn't a dialog inside of a dialog.
+      var style = window.getComputedStyle(dialog);
+      if(style.display === 'contents')
+        dialog = dialog.parentNode.closest('dialog[open]');
       
       // Dont allow the backdrop to be clicked when transactional
       if(!dialog.querySelector(':scope > .mh-lg > form:last-child > button:last-child, :scope > .mh-lg > button:last-child') || dialog.classList.contains('dialog--multi')){
@@ -158,8 +163,14 @@ const extendDialogs = (body) => {
       if(popoverBottom > windowPos){
 
         let currentStyle = popover.hasAttribute('style') ? popover.getAttribute('style')+' ' : '';
-
         popover.setAttribute('style',currentStyle+`transform: translate(0, calc(-100% - 4rem))`);
+
+        // Check that the dialog doesn't go over the top of the page
+        boundingRec = popover.getBoundingClientRect();
+        let popoverTop = boundingRec.top - window.scrollY;
+
+        if(popoverTop < 100)
+          popover.removeAttribute('style');
       }
 
       window.dataLayer = window.dataLayer || [];

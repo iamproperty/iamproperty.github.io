@@ -506,7 +506,7 @@ export default {
         { name: 'Default', id: 'tooltip' },
         { name: 'shift--left (mobile)', id: 'shift--left' },
         { name: 'shift--right (mobile)', id: 'shift--right' },
-        { name: 'tooltip--top', id: 'tooltip--top' },
+        { name: 'tooltip--top (all)', id: 'tooltip--top' },
         { name: 'tooltip--top shift--left (mobile)', id: 'tooltip--top shift--left' },
         { name: 'tooltip--top shift--right (mobile)', id: 'tooltip--top shift--right' },
         { name: 'tooltip--left (tablet,desktop)', id: 'tooltip--left' },

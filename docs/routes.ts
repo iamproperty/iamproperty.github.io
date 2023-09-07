@@ -277,7 +277,7 @@ const routes = [
       },
       {
         path: 'checkbox',
-        name: 'Form checkbox field (Beta)',
+        name: 'Form checkboxes',
         meta: {
           title: 'Checkbox field | Elements | iamkey'
         },

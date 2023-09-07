@@ -115,6 +115,8 @@
       <button data-modal="modal-transactional" class="btn btn-secondary">Open Modal</button>
     </div>
     <dialog id="modal-transactional">
+
+      <i class="fa-light fa-circle"><i class="fa-regular fa-trash-can"></i></i>
       
       <span class="h3">Delete property file</span>
       <p>Continually will permanently delete this property. Are you sure you’d like to continue?</p>
