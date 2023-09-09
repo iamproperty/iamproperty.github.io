@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import iamActionbar from '../../../assets/js/components/actionbar/actionbar.component.js'
+import iamActionbar from '../../../assets/js/components/actionbar/actionbar.component.min.js'
 
 if (!window.customElements.get('iam-actionbar'))
   window.customElements.define('iam-actionbar', iamActionbar);
