@@ -568,7 +568,7 @@ input[type="checkbox"]:indeterminate + label {
     border: none!important;
     outline: none!important;
     top: rem(10 - 2);
-    left: 0;
+    left: var(--outline-width);
     text-align: center;
   }
 }

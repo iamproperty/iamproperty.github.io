@@ -453,26 +453,15 @@ export const filterTable = (table, form, wrapper) => {
     });
   }
 
-  // Display the filter count
+  //Display the filter count
   Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
     element.innerHTML = '';
-    element.parentNode.classList.remove('hover');
   });
 
-  let filterCount = 0;
-  Object.values(filters).forEach((filter, index) => {
-    
-    if(typeof filter == "object" && Object.values(filter).length)
-      filterCount += Object.values(filter).length;
-    else
-      filterCount++;
-  });
-
-  if(filterCount) {
-    
+  if(Object.keys(filters).length) {
+      
     Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
-      element.innerHTML += `(${filterCount})`;
-      element.parentNode.classList.add('hover');
+      element.innerHTML += `(${Object.keys(filters).length})`;
     });
   }
   
@@ -840,23 +829,12 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
 
   Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
     element.innerHTML = '';
-    element.parentNode.classList.remove('hover');
   });
 
-  let filterCount = 0;
-  Object.values(filters).forEach((filter, index) => {
-
-    if(typeof filter == "object" && Object.values(filter).length)
-      filterCount += Object.values(filter).length;
-    else
-      filterCount++;
-  });
-
-  if(filterCount) {
-    
+  if(Object.keys(filters).length) {
+      
     Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
-      element.innerHTML += `(${filterCount})`;
-      element.parentNode.classList.add('hover');
+      element.innerHTML += `(${Object.keys(filters).length})`;
     });
   }
 
@@ -966,7 +944,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
         wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
         
-        makeTableFunctional(table, form, pagination, wrapper);        
+        makeTableFunctional(table, form, pagination, wrapper);
         createPaginationButttons(wrapper, pagination);
 
         Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement, index) => {

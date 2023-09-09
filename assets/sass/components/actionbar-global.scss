@@ -1,12 +1,6 @@
 @use "../_func.scss" as *;
 
-
-// Dialog wrapper
-.dialog__wrapper[slot="overflow"] dialog[open] {
-
-  display: contents;
-}
-
+// #region Default view
 iam-actionbar {
 
   background-color: #FCFCFC;
@@ -14,7 +8,9 @@ iam-actionbar {
   border-top-left-radius: rem(10);
   border-top-right-radius: rem(10);
 }
+// #endregion
 
+// #region As part of the iam-table component
 iam-table iam-actionbar {
 
   margin-left: 1.5rem;
@@ -51,8 +47,9 @@ iam-table iam-actionbar {
     margin-bottom: 1rem;
   }
 }
+// #endregion
 
-
+// #region Switchview
 iam-actionbar ~ :is([data-view="square"],[data-view="list"],[data-view="small"]) {
   display: none;
 }
@@ -66,3 +63,27 @@ iam-actionbar[data-view="list"] ~ [data-view="list"] {
 iam-actionbar[data-view="small"] ~ [data-view="small"] {
   display: block;
 }
+// #endregion 
+
+// #region Child elements
+.actionbar__text {
+
+  font-size: rem(18);
+  line-height: rem(40);
+  color: var(--colour-heading);
+  display: inline-block;
+}
+
+// Dialog wrapper
+.dialog__wrapper[slot="selected-overflow"] > button,
+.dialog__wrapper[slot="overflow"] > button {
+
+  background: none;
+  border: none;
+}
+.dialog__wrapper[slot="selected-overflow"] dialog[open],
+.dialog__wrapper[slot="overflow"] dialog[open] {
+
+  display: contents;
+}
+// #endregion

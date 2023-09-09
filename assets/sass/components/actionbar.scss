@@ -1,14 +1,13 @@
 @use "../_func.scss" as *;
 
-
-
 .actionbar__wrapper {
-
   position: relative;
+  z-index: 10;
   height: rem(68);
   container-type: inline-size;
 }
 
+// #region View states (Default, search, selected)
 .views,
 .selectall {
   position: absolute!important;
@@ -20,22 +19,20 @@
   }
 
   transform: translate(0,-50%);
-
-  padding-left: rem(4);
-  margin-left: rem(-4);
   z-index: 10;
+
+  .btn-action:not(:last-child){
+    margin-right: rem(4)!important;
+  }
 }
 
 .selectall {
   
-
   width: rem(40);
-
   overflow: hidden;
 
   label {
     height: rem(40);
-    
   }
 
   @include media-breakpoint-up(sm) {
@@ -43,7 +40,6 @@
     width: auto;
     overflow: visible;
   }
-
 }
 
 .actionbar [data-search] {
@@ -57,6 +53,8 @@
 
 :is(.actionbar,.actionbar--selected,.actionbar--search){
   
+  border-top-left-radius: rem(10);
+  border-top-right-radius: rem(10);
   padding: 0 rem(24);
   flex-wrap: nowrap;
   justify-content: flex-end;
@@ -93,7 +91,6 @@
   pointer-events: none;
 }
 
-
 // Show selected bar
 .selectall:has(input:checked) ~ .actionbar,
 .selectall:has(input:indeterminate) ~ .actionbar {
@@ -119,9 +116,10 @@
   opacity: 0;
   pointer-events: none;
 }
+// #endregion
 
-
-::slotted(*){
+// #region Slotted elements
+::slotted(*:not([slot="overflow"])){
   margin-top: 0!important;
   margin-bottom: 0!important;
   margin-left: rem(16)!important;
@@ -132,14 +130,12 @@
   order: 2;
 }
 
-// #region action buttons 
-
-
 // buttons only for single items
 ::slotted([data-single]){
   pointer-events: none;
   opacity: 0.5;
 }
+
 :host([data-selected="1"]) ::slotted([data-single]){
   pointer-events: all;
   opacity: 1;
@@ -156,12 +152,9 @@
     display: block;
   }
 }
-
 // #endregion
 
-
-
-
+// #region safe area
 .safe-area {
 
   display: flex;
@@ -188,8 +181,15 @@
   }
 }
 
+:host([data-switchviews]) .safe-area {
+  
+  width: rem(144);
+}
+// #endregion
+
 // #region overflow dialog 
-::slotted(.btn-compact[slot="selected-overflow"]) {
+::slotted(.btn-compact[slot="selected-overflow"]),
+::slotted(.btn-compact[slot="overflow"]) {
 
   max-width: none!important;
   text-indent: 0!important;
@@ -207,17 +207,14 @@
 
 ::slotted(.dialog__wrapper[slot="overflow"]) dialog[open]{
 
- 
-    
   background: red;
-  
 }
 
-
+.dialog__wrapper.dialog-overflow {
+  margin-left: 0.5rem;
+  margin-right: -0.5rem;
+}
 // #endregion
-
-
-
 
 // #region Search bar
 .actionbar--search .btn{
