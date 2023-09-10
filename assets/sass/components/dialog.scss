@@ -183,6 +183,7 @@ dialog::backdrop {
 
   text-align: center;
 
+
   &:before {
     content: "\f05a";
     font-weight: 300;
@@ -203,6 +204,38 @@ dialog::backdrop {
     line-height: 1;
     color: var(--colour-heading);
     clear: both;
+  }
+
+  &:has(> i):before{
+
+    display: none;
+  }
+
+  &:has(> i) > i{
+
+    display: var(--fa-display,inline-block);
+    line-height: 1;
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
+    margin-top: 0;
+    margin-bottom: rem(24);
+    line-height: 1;
+    color: var(--colour-heading);
+    clear: both;
+
+    &:has(> i){
+      position: relative;
+    }
+
+    > i:before {
+      content: "\f2ed";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: scale(0.5) translate(-100%,0);
+    }
   }
 
   > form:first-child button,
@@ -279,7 +312,7 @@ dialog::backdrop {
       height: 2px;
       background: currentColor;
       z-index: 1;
-      opacity: 0.5;
+      background: linear-gradient(90deg, var(--colour-success) 0%, var(--colour-success) var(--progress, 0%), rgba(255,255,255,0.5) var(--progress, 0%), rgba(255,255,255,0.5) 100%);
     }
 
     button {
@@ -287,7 +320,7 @@ dialog::backdrop {
       position: relative;
       background: transparent;
       border: none;
-      color: inherit;
+      color: rgba($color: #ffffff, $alpha: 0.5);
       height: rem(24);
       line-height: rem(24);
       width: rem(24);
@@ -314,8 +347,35 @@ dialog::backdrop {
         border-radius: 50%;
       }
 
-      &:not(.active):before {
-        opacity: 0.5;
+      &:not(.active):not(.valid) {
+        
+        pointer-events: none;
+
+        &:before {
+          opacity: 0.5;
+        }
+      }
+
+      &.active {
+        color: var(--colour-white);
+      }
+      &.valid {
+        color: var(--colour-success);
+      }
+    }
+
+    @media screen and (prefers-color-scheme: dark) {
+
+      button {
+        
+        color: rgba($color: #000000, $alpha: 0.5);
+
+        &.active {
+          color: black;
+        }
+        &.valid {
+          color: var(--colour-complete);
+        }
       }
     }
   }
@@ -481,7 +541,7 @@ dialog::backdrop {
     z-index: var(--index-floating);
     min-width: rem(320);
     border-radius: rem(16);
-    width: rem(319);
+    width: rem(320);
     padding: rem(24);
 
     @include media-breakpoint-up(sm) {
@@ -489,6 +549,61 @@ dialog::backdrop {
     }
     @include media-breakpoint-up(md) {
       width: rem(360);
+    }
+
+
+    &.dialog--list {
+      
+      width: fit-content!important;
+      min-width: rem(140)!important;
+      max-width: rem(280)!important;
+      padding: rem(16);
+      margin: 0;
+
+      .btn-action {
+        border: none;
+        padding: 0;
+        margin: 0;
+        padding-block: rem(6);
+        line-height: rem(20);
+        background: none;
+        white-space: inherit;
+        max-width: 100%;
+        min-width: 100%;
+
+        &:before {
+          min-width: rem(20);
+          display: inline-block;
+        }
+
+        &::after {
+          float: right;
+        }
+      }
+
+      hr {
+        height: 2px;
+        background: var(--colour-border);
+        margin-left: -#{rem(16)};
+        margin-right: -#{rem(16)};
+        margin-block: 0.25rem;
+      }
+
+      .radio--tick {
+        margin-right: 0;
+        padding-left: 1.5rem;
+          margin-bottom: 0;
+
+        &:before {
+          left: 0;
+          font-size: 1em;
+          top: 0.75rem;
+        }
+      }
+    }
+
+    dialog[open] {
+      display: contents;
     }
   }
 
@@ -567,5 +682,41 @@ dialog::backdrop {
 .dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
 
   display: none;
+}
+// #endregion
+
+// #region mobile fullwidth view 
+@media screen and (max-width: 36em) {
+
+  dialog[open].dialog--sm-fullpage,
+  .js-enabled *:not(.dialog__wrapper) > dialog[open].dialog--multi {
+
+    min-width: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    overflow-y: auto;
+
+    .btn--wrapper {
+      padding-top: rem(64);
+    }
+  }
+
+  dialog[open].dialog--sm-fullpage {
+    
+    .mh-lg {
+      max-height: none!important;
+      overflow: visible;
+    }
+
+    &:before,
+    *:first-child {
+      margin-top: auto!important;
+    }
+
+    *:last-child {
+
+      margin-bottom: auto!important;
+    }
+  }
 }
 // #endregion

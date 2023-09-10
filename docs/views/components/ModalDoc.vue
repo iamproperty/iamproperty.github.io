@@ -115,6 +115,8 @@
       <button data-modal="modal-transactional" class="btn btn-secondary">Open Modal</button>
     </div>
     <dialog id="modal-transactional">
+
+      <i class="fa-light fa-circle"><i class="fa-regular fa-trash-can"></i></i>
       
       <span class="h3">Delete property file</span>
       <p>Continually will permanently delete this property. Are you sure you’d like to continue?</p>
@@ -204,8 +206,18 @@
 
       <h4>Dismissal</h4>
       <p>The multi-step modal is less restrictive about dismissal, allowing the user several options to navigate content or dismiss. Users can follow the action buttons, progress through the modal content and complete the prompted action at the end to dismiss. It can also be dismissed by clicking the ‘X’ button or clicking anywhere outside the modal. </p>
+
+      <h4>Behaviours</h4>
+      <ul class="mb-4">
+        <li>Should open on the first step</li>
+        <li>Validation is ran per step by clicking on next</li>
+        <li>Can only progress to the next step once the current step is successfully validated</li>
+        <li>Once validation is successful on all steps the form will submit using the default browser behaviour.</li>
+      </ul>
+
+      <p class="note mb-3"><strong>Note:</strong> To get the dialog to open on page load due to a server side validation error being present, a class of `is-invalid` needs to be added to the input field. The fieldset its in and any other fieldset which has had validation ran on it. Finally add an `open` attribute to the dialog itself.</p>
     </div>
-    
+
     <div class="container pb-5 mb-5">
       <h4>Preview</h4>
       <button data-modal="modal-multi" class="btn btn-secondary">Open Modal</button>
@@ -215,17 +227,42 @@
       <span class="h3">Multi-step modal title</span>
       <form>
         <fieldset data-title="Personal details">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+          
+          
+          <div>
+            <label for="input1">Name 1</label>
+            <input type="text" id="input1" name="input1" placeholder="Optional placeholder text" required="" />
+            <span class="invalid-feedback">This field is required</span>
+          </div>
+        
         </fieldset>
         <fieldset data-title="Property details">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+
+          <div>
+            <label for="input2">Name 2</label>
+            <input type="text" id="input2" name="input2" placeholder="Optional placeholder text" required=""/>
+            <span class="invalid-feedback">This field is required</span>
+          </div>
+
         </fieldset>
         <fieldset data-title="Location">
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+          
+          <div>
+            <label for="input3">Name 3</label>
+            <input type="text" id="input3" name="input3" placeholder="Optional placeholder text" required="" class="is-invalid" />
+            <span class="invalid-feedback">This field is required</span>
+          </div>
+
         </fieldset>
         <fieldset data-title="Submit property">
 
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+          
+          <div>
+            <label for="input4">Name 4</label>
+            <input type="text" id="input4" name="input4" placeholder="Optional placeholder text" required="" />
+            <span class="invalid-feedback">This field is required</span>
+          </div>
+
 
         </fieldset>
         <button class="btn btn-primary">Submit</button>
@@ -233,6 +270,9 @@
 
     </dialog>
     <!-- #endregion -->
+
+
+
 
 
     
@@ -258,6 +298,40 @@
       </Tabs>
     </div>
 
+
+    <div class="container pt-3">
+      <h2>Event Tracking</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Triggers</th>
+            <th>Details captured</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>openModal</td>
+            <td>
+              Element with the <code>data-modal</code> attribute is clicked,<br/>
+              Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is closed
+            </td>
+            <td>The modal ID</td>
+          </tr>
+          <tr>
+            <td>closeModal</td>
+            <td>
+              Button with the class of <code>dialog__close</code> is clicked,<br/>
+              Button with the <code>formmethod</code> attribute of <code>dialog</code> is clicked,<br/>
+              While a <code>dialog</code> is open and the backdrop is clicked,<br/>
+              Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is open
+            </td>
+            <td>The modal ID</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="bg-light version-control">
       <div class="container">
         <table>
@@ -265,18 +339,27 @@
             <tr>
               <th>Version Control</th>
               <th>Date</th>
+              <th>Design System Version</th>
               <th>Notable updates</th>
             </tr>
           </thead>
           <tbody class="text-body">
             <tr>
+              <td>V1.2</td>
+              <td>22.08.2023</td>
+              <td></td>
+              <td>Multi-step component updated to display full width on mobile.</td>
+            </tr>
+            <tr>
               <td>V1.1</td>
               <td>25.05.2023</td>
+              <td></td>
               <td>Added min and max widths to the modals for design flexibility</td>
             </tr>
             <tr>
               <td>V1 added</td>
               <td>19.05.2023</td>
+              <td></td>
               <td>N/A</td>
             </tr>
           </tbody>
@@ -367,6 +450,20 @@ export default {
   },
   mounted(){
     this.$nextTick(function () {
+
+      Array.from(document.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
+
+        let parent = dialog.closest('.dialog__wrapper');
+
+        if(!parent){
+            
+          dialog.removeAttribute('open');
+          dialog.showModal();
+          dialog.focus();
+
+          createDialog(dialog);
+        }
+      });
 
       var hash = window.location.hash;
 

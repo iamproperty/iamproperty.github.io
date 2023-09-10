@@ -90,6 +90,38 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 }
 // #endregion
 
+// #region Action button
+.btn-action {
+  background-color: var(--colour-canvas-2);
+  border: 1px solid var(--colour-muted);
+  border-radius: rem(4)!important;
+  font-weight: 400!important;
+  font-size: 1rem;
+  line-height: rem(20);
+  padding: rem(6);
+  color: var(--colour-heading);
+
+  &.btn[class*=fa-]:before {
+    margin-right: rem(6);
+  }
+
+  
+  a:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) &,
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) {
+    background: var(--colour-btn-action-hover-bg);
+  }
+
+  
+  a:is(:active, .active):not([disabled]) &,
+  &:is(:active, .active):not([disabled]) {
+    
+    filter: brightness(85%);
+    transition: background .1s, color .1s;
+    color: var(--colour-heading);
+  }
+}
+// #endregion
+
 // #region button with icon
 .btn {
   &[class*="fa-"]:before {
@@ -165,6 +197,22 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   overflow: hidden;
   position: relative;
   font-size: rem(20);
+
+  &.btn-sm {
+
+    font-size: 1rem; 
+    padding: rem(6)!important;
+    height: auto!important;
+    line-height: rem(20);
+    height: rem(20 + 6 + 6);
+    width: rem(20 + 6 + 6);
+    min-width: rem(20 + 6 + 6);
+
+    &:before {
+      line-height: rem(20 + 6 + 6);
+    }
+  }
+
 
   &:before {
     position: absolute;
