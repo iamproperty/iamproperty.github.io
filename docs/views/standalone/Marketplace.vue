@@ -3,7 +3,6 @@
     <nav>
       <iam-nav id="menu">
 
-
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
             <title>iamproperty</title>
@@ -162,8 +161,6 @@ import Nav from '@/components/Nav/Nav.vue'
 import Logo from '@/foundations/Logo/Logo.vue'
 import Input from '@/components/Input/Input.vue'
 
-import iamNav from '../../../assets/ts/components/nav/nav.component'
-
 
 export default {
   components: {
@@ -173,13 +170,6 @@ export default {
     Logo
   },
   mounted(){
-
-    setTimeout(() => {
-    
-      if (!window.customElements.get(`iam-nav`))
-        window.customElements.define(`iam-nav`, iamNav);
-
-    }, "100");
 
   }
 }

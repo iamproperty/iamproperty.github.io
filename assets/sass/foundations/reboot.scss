@@ -141,7 +141,7 @@ details {
 
 
 // #region Undefined web components
-:is(*):not(:defined) {
+:is(*):not(:defined):not(iam-nav) {
   display: block;
   padding: rem(24);
   margin-bottom: rem(24);

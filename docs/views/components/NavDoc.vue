@@ -1,127 +1,165 @@
 <template>
   <main>
+
+    
+    <DSHeader :image="headerImg" section="components">
+      <h1>Navbar</h1>
+    </DSHeader>
+
+
+
     <div class="container pb-0">
-      <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/components">Components</a></li>
-      </ul>
-      <h1>Site navigation</h1>
-      <p>The main site navigation needs to be clear and easy to use without distraction.</p>
+      
+      <p class="lead">Allow users to navigate across the key views within the platform </p>
+      <p>Our navigation bar provides users with consistent links to the main sections of the site or platform. The items presented in the navbar are key navigation items which display on desktop as a horizontal list, on tablet and mobile it appears collapsed into a list behind the menu icon.</p>
+      <p>The list navigation items is appended with a button (usually primary) and can also include a compact button if needed. On desktop this is positioned at the end of the list to stand out from the rest of the list, on tablet and mobile it is housed within the collapsed list behind the menu icon.</p>
+
     </div>
 
+    <div class="demo">
+    <Nav class="visualtest" data-css="/assets/css/components/nav.docs.css">
 
-    <Nav class="mb-5 visualtest" btnlink="/account" btntext="Account">
-      <ul class="list-unstyled">
-        <li><a href="/">Link 1</a></li>
-        <li><a href="/">Link 2</a></li>
-        <li><a href="/">Link 3</a></li>
-      </ul>
+      <a href="/" class="brand brand--property" slot="logo">
+        <svg>
+          <title>iamproperty</title>
+          <use xlink:href="/svg/logo.svg#logo-property"></use>
+        </svg>
+      </a>
+
+      <a href="/" class="selected">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
+
+      <button class="btn btn-primary">Lorem ipsum</button>
+
     </Nav>
-
-    <div class="container pb-0">
-      <h2>Secondary navigation</h2>
-      <p>A secondary navigation can be added to include links that are not as important to the main user journeys but are relevant to the user. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
     </div>
 
-    <Nav class="visualtest mb-5" btnlink="/account" btntext="Signout">
-      <ul class="list-unstyled">
-        <li><a href="/">Link 1</a></li>
-        <li><a href="/">Link 2</a></li>
-        <li><a href="/">Link 3</a></li>
-      </ul>
-      <template v-slot:secondary>
-        <ul class="list-unstyled">
-        <li class=""><a href="/props">Secondary link 1</a></li>
-        <li class=""><a href="/props">Secondary link 2</a></li>
-        <li class=""><a href="/props">Secondary link 3</a></li>
-        <li class=""><a href="tel:01234567890">0123 456 7890</a></li>
-      </ul>
-      </template>
+    <div class="container pt-4 pb-0">
+      <span class="lead text-body pb-3 d-block">VARIATION (DEEP SLATE)</span>
+    </div>
+
+    <div class="demo">
+    <Nav class="visualtest bg-primary" data-css="/assets/css/components/nav.docs.css">
+
+    <a href="/" class="brand brand--property" slot="logo">
+      <svg>
+        <title>iamproperty</title>
+        <use xlink:href="/svg/logo.svg#logo-property"></use>
+      </svg>
+    </a>
+
+    <a href="/" class="selected">Lorem ipsum</a>
+    <a href="/">Lorem ipsum</a>
+    <a href="/">Lorem ipsum</a>
+    <a href="/">Lorem ipsum</a>
+
+    <button class="btn btn-primary">Lorem ipsum</button>
+
     </Nav>
-
-    <div class="container pb-0">
-      <h2>Admin navigation</h2>
-      <p>To transform the navigation to look more like an admin bar with the classes <strong>.bg-primary</strong> and <strong>.nav--admin</strong> can be added. These will change the background colour, condense it down and move the optional secondary nav to the bottom on desktop. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
     </div>
 
-    <Nav class="visualtest mb-5 bg-primary nav--admin" btnlink="/account" btntext="Signout">
-      <ul class="list-unstyled">
-        <li><a href="/">Link 1</a></li>
-        <li><a href="/">Link 2</a></li>
-        <li><a href="/">Link 3</a></li>
-      </ul>
-      <template v-slot:secondary>
-        <ul class="list-unstyled">
-        <li class=""><a href="/props">Secondary link 1</a></li>
-        <li class=""><a href="/props">Secondary link 2</a></li>
-        <li class=""><a href="/props">Secondary link 3</a></li>
-      </ul>
-      </template>
-    </Nav>
+    <div class="container pt-5 ">
+      
+      <h2 class="h4">Usage notes</h2>
+      <p>There should be no more than 6 navigation items (not including the button) in the navbar</p>
 
-    <div class="container">
-      <h2>Sub navigation</h2>
-      <p>Allow for sublinks to be shown within the navigation so that users don't have to navigate to a landing page. See the <a href="/standalone/navbar" target="_blank">navbvar example page</a> to see it better in action.</p>
-      <h3>Mega menu</h3>
-      <p>Add a class of <strong>.nav__mega-menu</strong> to the details element to really highlight the section and have additional supportive content. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
+      <p>On tablet, all menu items are hidden behind the ‘menu + hamburger), once activated the menu slides in from the right hand side and displays fully expanded at a width of 21.5rem ( 344px).</p>
+
+      <p>All menu items are hidden behind the hamburger menu on mobile, once activated the menu slides in from the right hand side and should occupy the full width and height on mobile device.</p>
+
+      <p>This navbar can be stick or not depending on ruling - it will be none-sticky by default.</p>
     </div>
 
-    <div class="container pb-0">
-      <h2>Add search form</h2>
-      <p>Integrate search functionality by adding a form to the nav and add the class <strong>.nav--inline-search</strong> to the nav. See the <a href="/standalone/iamsold-admin" target="_blank">iamsold admin dashboard example page</a> to see it better in action.</p>
-
-      <h3>Featured search area</h3>
-      <p>Or create a real feature by adding a div with the class of <strong>.nav__menu--search</strong> and a search button wrappped in a div with the class <strong>.nav__search-btn</strong>. See the <a href="/standalone/iamsold-homepage" target="_blank">iamsold example page</a> to see it better in action.</p>
+    
+    <div class="container pt-4">
+      
+      <h2>Implementation</h2>
+      <Tabs >
+        <details>
+          <summary><h2>Web component</h2></summary>
+          <WebReadme></WebReadme>
+        </details>
+        <details>
+          <summary><h2>Vue component</h2></summary>
+          <Readme></Readme>
+        </details>
+        <!--
+        <details>
+          <summary><h2>HTML</h2></summary>
+          <pre><code class="javascript">{{`<nav></nav>`}}</code></pre>
+        </details>
+      -->
+      </Tabs>
+    </div>
+    <div class="bg-light version-control">
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Version Control</th>
+              <th>Date</th>
+              <th>Notable updates</th>
+            </tr>
+          </thead>
+          <tbody class="text-body">
+            <tr>
+              <td>V0.1</td>
+              <td>25.08.2023</td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="/pdfs/navbar.pdf" download>Download latest designs</a>
+      </div>
     </div>
 
-    <div class="container">
-      <h2>Vue Nav component reference</h2>
-      <Readme></Readme>
-    </div>
   </main>
 </template>
 
 <style lang="scss">
-main .nav {
-  position: relative;
-  z-index: 99;
+
+
+
+
+@media screen and (max-width: 62em) {
+.demo {
+  background-color: #F2F2F2;
+  overflow: hidden;
+  padding: 1rem 1rem 0 1rem;
+}
 }
 
-.nav.has-secondary {
-  top: 0rem!important;
-}
 
-main label[for="showMenu"]{
-  pointer-events: none;
-}
 </style>
 
 <script>
+
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Tab from '@/components/Tabs/Tab.vue'
+import WebReadme from '~/ts/components/nav/README.md'
+import DSHeader from '../DSHeader.vue'
+import headerImg from '../../img/type-header.png'
+import Table from '@/components/Table/Table.vue'
+
+
 import Nav from '@/components/Nav/Nav.vue'
 import Readme from '@/components/Nav/README.md'
 
 export default {
   components: {
     Nav,
-    Readme
+    Readme,
+    DSHeader,
+    Table,
+    WebReadme,
+    Tabs,
+    Tab
   },
   data () {
     return {
-      htmlUsage: `<header class="header">
-  <div class="container">
-    <ul class="breadcrumb">
-      <li><a href="/">Home</a></li>
-      <li><a href="/top">Top level</a></li>
-    </ul>
-    <div class="header__inner">
-      <h1>Page title</h1>
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-    </div>
-  </div>
-  <picture>
-    <source srcset="/img/shutterstock_1229155495.f3b0401e.webp" media="(min-width: 62em)" />
-    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
-  </picture>
-</header>`
+      headerImg: headerImg
     }
   }
 }

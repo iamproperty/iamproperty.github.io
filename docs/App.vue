@@ -9,14 +9,22 @@ const version = pkg.version;
 
   <div id="visualtest"></div>
 
+  <nav>
   <Nav logo="key" logotext="Design system<br/>&amp; framework">
-    <ul class="list-unstyled">
-      <li><router-link to="/principles">Principles</router-link></li>
-      <li><router-link to="/foundations">Foundations</router-link></li>
-      <li><router-link to="/components">Components</router-link></li>
-      <li><router-link to="/templates">Templates</router-link></li>
-      <li><router-link to="/best-practice">Best practice</router-link></li>
-    </ul>
+
+
+
+    <a href="/" class="brand brand--key" slot="logo">
+
+      <svg><title>iam key</title><use xlink:href="/svg/logo.svg#logo-key"></use></svg>
+      <span>Design system<br>&amp; framework</span>
+    </a>
+
+    <router-link to="/principles">Principles</router-link>
+    <router-link to="/foundations">Foundations</router-link>
+    <router-link to="/components">Components</router-link>
+    <router-link to="/templates">Templates</router-link>
+    <router-link to="/best-practice">Best practice</router-link>
 
     <div class="dialog__wrapper dialog__wrapper--right">
         <button class="btn btn-primary colour-primary btn-compact fa-search me-0 mb-0">Open Popover</button>
@@ -30,14 +38,15 @@ const version = pkg.version;
             <button class="btn btn-primary colour-primary mb-0 me-0">Search</button>
             </div>
 
-  <datalist data-id="searchterms" ref="list">
-    <option v-for="item in refinedResults" :value="item"></option>
-  </datalist>
+          <datalist data-id="searchterms" ref="list">
+            <option v-for="item in refinedResults" :value="item"></option>
+          </datalist>
 
           </form>
         </dialog>
       </div>
   </Nav>
+  </nav>
 
   <router-view></router-view>
 
@@ -76,8 +85,25 @@ mark {
   padding-inline: 0;
 }
 
-.nav .list-unstyled li a.router-link-active:not(.text-decoration-none):not(.btn):before {
+a.router-link-active:not(.text-decoration-none):not(.btn):before {
   width: 100%;
+}
+
+
+@media screen and (max-width: 62em) {
+  iam-nav > a.router-link-active:not([slot=logo]){
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--colour-info) !important;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  iam-nav > a.router-link-active:not([slot=logo]):after {
+    width: 100% !important;
+    background: var(--colour-info) !important;
+  }
 }
 
 .nav {
@@ -90,14 +116,13 @@ mark {
 
 @media screen and (max-width: 62em) {
 
-  .nav .dialog__wrapper {
-    padding-top: 2rem;
+  iam-nav .dialog__wrapper {
     width: 100%;
   }
-  .nav .dialog__wrapper > .btn {
+  iam-nav .dialog__wrapper > .btn {
     display: none;
   }
-  .nav .dialog__wrapper dialog {
+  iam-nav .dialog__wrapper dialog {
     display: contents;
   }
 }
@@ -130,6 +155,9 @@ footer .router-link-active {
     display: contents;
   }
 }
+
+
+
 </style>
 
 

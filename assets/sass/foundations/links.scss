@@ -15,7 +15,7 @@ a {
   }
 }
 
-a:where(:not(.btn):not(:has(.card)):not(:has(iam-card))),
+a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
 .link {
   background-color: transparent;
   text-decoration: none;

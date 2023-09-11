@@ -17,69 +17,69 @@ class iamNav extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/nav.component.css";`;
 
+    console.log(this.hasAttribute('data-css'))
     const template = document.createElement('template');
     template.innerHTML = `
-    <style>
+    <style class="styles">
     @import "${coreCSS}";
     ${loadCSS}
-    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    
+    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
+    <div class="container">
+      <slot name="logo"></slot>
+      <slot name="btn"></slot>
+      <button class="btn-menu">Menu<i class="fa-regular fa-bars"></i><i class="fa-regular fa-xmark"></i></button>
 
-    <slot name="logo"></slot>
-    <slot name="btn"></slot>
-
-    <div class="menu">
-      <div class="menu--top">
-        <slot name="logo2"></slot>
-        <a href="#menu" class="btn-close" slot="btn">Menu</a>
-      </div>
-      <hr/>
-      <slot></slot>
-      <slot name="secondary"></slot>
-      <slot name="actions"></slot>
+      <div class="menu__outer">
+        <div class="menu">
+          
+          <slot></slot>
+          <slot name="actions"></slot>
+          <slot name="secondary"></slot>
+        </div>
+      </div>      
     </div>
-    <div class="backdrop"></div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
 	connectedCallback() {
-    
-    
-    const menuButton = this.querySelector('.btn-menu');
-    const logo = this.querySelector('.brand');
-    const logo2 = logo.cloneNode(true);
-    logo2.setAttribute('slot','logo2');
 
+    if(this.hasAttribute('data-css'))
+      this.shadowRoot.querySelector('.styles').insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
+    
+    const menuButton = this.shadowRoot.querySelector('.btn-menu');
     const menu = this.shadowRoot.querySelector('.menu');
-    const closeButton = this.shadowRoot.querySelector('.btn-close');
-
     document.documentElement.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.offsetWidth) + 'px');
+    const iamNav = this;
 
-    this.append(logo2);
 
     menuButton.addEventListener('click', function(e){
       
       e.preventDefault();
+      menuButton.classList.toggle('current');
+      menu.classList.toggle('open');
 
-      menu.classList.add('open');
+      console.log(this)
+      iamNav.classList.toggle('open');
       
     }, false);
 
 
-    closeButton.addEventListener('click', function(e){
-      
-      e.preventDefault();
+    if(!this.classList.contains('nav--sticky')){
+      document.addEventListener("scroll", (event) => {
 
-      menu.classList.remove('open');
+        let lastKnownScrollPosition = window.scrollY;
       
-    }, false);
-
+        if(lastKnownScrollPosition > 0){
+          menuButton.classList.remove('current');
+          menu.classList.remove('open');
+          iamNav.classList.remove('open');
+        }
+      });
+    }
 
   }
-
-
 }
 
 export default iamNav;

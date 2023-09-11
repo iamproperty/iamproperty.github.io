@@ -1,5 +1,234 @@
 @use "../_func" as *;
 
+:host{
+  display: flex!important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+
+}
+
+::slotted(.brand) {
+
+  margin-right: auto;
+}
+
+.btn-menu {
+    
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  height: rem(48);
+  padding-block: rem(12);
+  line-height: rem(24);
+  overflow: hidden;
+  position: relative;
+  background: none;
+  border: none;
+  width: rem(24);
+  text-indent: -300px;
+  color: var(--colour-heading);
+
+  i {
+    font-size: rem(24);
+    line-height: rem(24);
+    position: absolute;
+    text-indent: 0px;
+
+    width: rem(24);
+    text-align: center;
+    top: rem(12);
+    left: 0;
+
+    &.fa-xmark {
+      
+    font-size: rem(30);
+    }
+  }
+
+  i + i {
+    display: none;
+  }
+
+  &.current {
+
+    i {
+      display: none;
+    }
+
+    i + i {
+      display: inline;
+    }
+  }
+}
+
+// #region mobile menu
+@media screen and (max-width: 62em) {
+  :host > .container {
+    display: contents;
+  }
+
+  .menu__outer {
+    
+    position: absolute;
+    top: rem(96);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - #{rem(96)});
+    overflow: hidden;
+    pointer-events: none;
+    transition: background 0.5s;
+  }
+
+  .menu__outer:has(.menu.open) {
+
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(2px);
+  }
+
+  .menu {
+
+    overscroll-behavior: contain;
+    width: calc(#{rem(375)} - var(--scrollbar-width));
+    background-color: var(--colour-canvas-2);
+    display: block;
+    position: absolute;
+    height: calc(100vh - #{rem(96)});
+    left: 100%;
+    top: 0;
+    padding: 0 rem(24);
+    z-index: var(--index-menu);
+    overflow: auto;
+    transition: all 1s ease-out;
+
+    @media screen and (prefers-color-scheme: dark) {
+      --colour-link: var(--colour-white);
+      @include invert-colours();
+    }
+
+    // The menu is always white unless in dark mode
+    @media screen and (prefers-color-scheme: light) {
+      
+      background-color: var(--colour-white);
+      @include reset-colours();
+    }
+
+    
+    @media (forced-colors: active) {
+      
+      outline: 1px solid white;
+    }
+
+    &:before {
+      content: "";
+      position: sticky;
+      display: block ;
+      top: 0;
+      left: 0;
+      width: calc(100% + 3rem);
+      border-top: 2px solid var(--colour-border);
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+    }
+
+    &.open {
+      left: calc(100% - (#{rem(375)} - var(--scrollbar-width)) );
+      -webkit-box-shadow: 0 6px 12px 0px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 12px 0px rgba(0,0,0,0.2);
+      pointer-events: all;
+    }
+  }
+
+
+  ::slotted(a:not([slot="logo"])) {
+    display: block!important;
+    line-height: rem(20)!important;
+    padding: rem(24) 0!important;
+    margin: 0!important;
+
+    &:after {
+      content: "";
+      display: block;
+      height: 2px;
+      width: 100%!important;
+      background-color: var(--colour-border)!important;
+    }
+  }
+
+  ::slotted(.dialog__wrapper) {
+    
+    margin: rem(48) 0 rem(24) 0!important;
+  }
+  ::slotted(button) {
+
+    display: block!important;
+    margin: rem(48) 0 rem(24) 0!important;
+    width: 100%!important;
+    max-width: 100%!important;
+    text-align: center!important;
+  }
+}
+// #endregion
+
+// #region desktop
+@include media-breakpoint-up(md) {
+
+  .btn-menu {
+    display: none;
+  }
+
+  :host {
+    max-width: 100%!important;
+    padding: 0!important;
+  }
+
+  :host > .container {
+    padding-block: rem(24)!important;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    > * {
+      margin-bottom: 0!important;
+    }
+  }
+
+  .menu {
+    display: contents;
+  }
+
+  ::slotted(a:not([slot="logo"])),
+  ::slotted(button) {
+
+    margin-bottom: 0!important;
+    margin-right: 0!important;
+  }
+
+  ::slotted(a:not([slot="logo"])) {
+
+    margin-left: rem(32)!important;
+
+    &:not(.selected):after {
+      width: 0!important;
+    }
+  }
+
+
+  ::slotted(button) {
+
+    margin-left: rem(48)!important;
+  }
+
+  
+  ::slotted(.dialog__wrapper) {
+
+    margin-left: rem(48)!important;
+  }
+
+}
+// #endregion
+
+/*
 ::slotted(.brand) {
   
   margin-right: auto!important;
@@ -106,4 +335,4 @@
   }
 }
 
-
+*/
