@@ -370,9 +370,9 @@ const routes = [
       },
       {
         path: 'nav',
-        name: 'Nav (Beta)',
+        name: 'Navbar',
         meta: {
-          title: 'Nav | Components | iamkey'
+          title: 'Navbar | Components | iamkey'
         },
         component: () => import('./views/components/NavDoc.vue')
       },

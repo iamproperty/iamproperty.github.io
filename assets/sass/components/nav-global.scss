@@ -59,11 +59,11 @@ iam-nav:not(:defined) {
     display: none;
   }
   
-  @media screen and (max-width: 62em) {
-    &:not(:target) > *:not(.brand):not(.btn-menu) {
+  //@media screen and (max-width: 62em) {
+    &:not(:target) > *:not(.brand) {
       display: none;
     }
-  }
+  //}
 }
 
 iam-nav {

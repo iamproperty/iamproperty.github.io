@@ -24,3 +24,9 @@
 | ------ | ------------- | ----------- |
 | default | - | Populates the main nav area |
 | logo | - | A place to add the logo to the site |
+
+**Class modifiers**
+
+- Adding a class of **.bg-primary** will change the background of the navbar without chaning the menu background. 
+- Adding a class of **.nav--sticky** will add etxra styling to make the navbar stick to the top of the page
+- Adding a class of **.nav--xs-sticky** will add etxra styling to make the navbar stick to the top of the page BUT only on the mobile view.

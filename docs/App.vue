@@ -32,10 +32,11 @@ const version = pkg.version;
           <form action="/search" class="row">
             <div class="col mb-0">
               <label for="search" class="visually-hidden">Search</label>
+              <button class="suffix me-0 mb-0 d-md-none"><i class="fa-regular fa-search"></i></button>
               <input type="search" class="" id="search" name="search" required="" autocomplete="off" list="searchterms" @keydown="removelist" @keyup="addlist" />
             </div>
-            <div class="col mw-fit-content">
-            <button class="btn btn-primary colour-primary mb-0 me-0">Search</button>
+            <div class="col mw-fit-content d-none d-md-block">
+              <button class="btn btn-primary colour-primary mb-0 me-0">Search</button>
             </div>
 
           <datalist data-id="searchterms" ref="list">
@@ -79,6 +80,7 @@ const version = pkg.version;
   #showMenu:checked ~ .nav__inner {
     display: block;
   }
+
 }
 
 mark {
@@ -103,6 +105,11 @@ a.router-link-active:not(.text-decoration-none):not(.btn):before {
   iam-nav > a.router-link-active:not([slot=logo]):after {
     width: 100% !important;
     background: var(--colour-info) !important;
+  }
+  
+  #search {
+    
+    border-radius: 0.5rem!important;
   }
 }
 

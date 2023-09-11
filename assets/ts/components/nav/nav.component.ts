@@ -15,7 +15,7 @@ class iamNav extends HTMLElement {
 
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/nav.component.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/nav.css";`;
 
     console.log(this.hasAttribute('data-css'))
     const template = document.createElement('template');
@@ -45,40 +45,34 @@ class iamNav extends HTMLElement {
 
 	connectedCallback() {
 
+    // Load external CSS if needed
     if(this.hasAttribute('data-css'))
       this.shadowRoot.querySelector('.styles').insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
     
     const menuButton = this.shadowRoot.querySelector('.btn-menu');
     const menu = this.shadowRoot.querySelector('.menu');
-    document.documentElement.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.offsetWidth) + 'px');
     const iamNav = this;
 
+    // Create a scroll wdith variable to help with the sizing of the menu with in the CSS
+    document.documentElement.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.offsetWidth) + 'px');
 
+    // Open and close the menu
     menuButton.addEventListener('click', function(e){
       
       e.preventDefault();
       menuButton.classList.toggle('current');
       menu.classList.toggle('open');
-
-      console.log(this)
       iamNav.classList.toggle('open');
       
     }, false);
 
+    // Allow outside JS to close the menu
+    this.addEventListener("request-close", (event) => {
 
-    if(!this.classList.contains('nav--sticky')){
-      document.addEventListener("scroll", (event) => {
-
-        let lastKnownScrollPosition = window.scrollY;
-      
-        if(lastKnownScrollPosition > 0){
-          menuButton.classList.remove('current');
-          menu.classList.remove('open');
-          iamNav.classList.remove('open');
-        }
-      });
-    }
-
+      menuButton.classList.remove('current');
+      menu.classList.remove('open');
+      iamNav.classList.remove('open');
+    });
   }
 }
 
