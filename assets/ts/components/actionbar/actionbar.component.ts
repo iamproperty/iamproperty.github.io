@@ -123,6 +123,14 @@ class iamActionbar extends HTMLElement {
             this.setAttribute('data-selected',0);
         }
       });
+
+      let cancelButton = this.querySelector('button[data-cancel]');
+      if(cancelButton){
+        cancelButton.addEventListener('click', (event) => {
+
+          this.setAttribute('data-selected',0);
+        });
+      }
     }
     // #endregion
 

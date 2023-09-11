@@ -162,7 +162,7 @@
               <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
               <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
               <hr slot="selected" />
-              <button class="btn btn-action" slot="selected">Cancel</button>
+              <button class="btn btn-action" slot="selected" data-cancel>Cancel</button>
 
             </Actionbar>
           </div>
@@ -198,7 +198,7 @@
               <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
               <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
               <hr slot="selected" />
-              <button class="btn btn-action" slot="selected">Cancel</button>
+              <button class="btn btn-action" slot="selected" data-cancel>Cancel</button>
 
             </Actionbar>
           </div>
@@ -233,7 +233,7 @@
               <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
               <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
               <hr slot="selected" />
-              <button class="btn btn-action" slot="selected">Cancel</button>
+              <button class="btn btn-action" slot="selected" data-cancel>Cancel</button>
 
             </Actionbar>
           </div>
@@ -273,7 +273,7 @@
           <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
           <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
           <hr slot="selected" />
-          <button class="btn btn-action" slot="selected">Cancel</button>
+          <button class="btn btn-action" slot="selected" data-cancel>Cancel</button>
 
         </Actionbar>
       </div>
@@ -314,7 +314,7 @@
           <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
           <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
           <hr slot="selected" />
-          <button class="btn btn-action" slot="selected">Cancel</button>
+          <button class="btn btn-action" slot="selected" data-cancel>Cancel</button>
 
         </Actionbar>
       </div>
@@ -355,7 +355,7 @@
           <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
           <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
           <hr slot="selected" />
-          <button class="btn btn-action" slot="selected">Cancel</button>
+          <button class="btn btn-action" slot="selected" data-cancel>Cancel</button>
 
         </Actionbar>
         <Actionbar data-selectall data-selected="6" data-search>
@@ -384,7 +384,7 @@
           <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
           <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
           <hr slot="selected" />
-          <button class="btn btn-action" slot="selected">Cancel</button>
+          <button class="btn btn-action" slot="selected" data-cancel="">Cancel</button>
 
         </Actionbar>
       </div>
@@ -421,7 +421,7 @@
           <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
           <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
           <hr slot="selected" />
-          <button class="btn btn-action" slot="selected">Cancel</button>
+          <button class="btn btn-action" slot="selected" data-cancel>Cancel</button>
 
         </Actionbar>
       </div>
