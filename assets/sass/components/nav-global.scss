@@ -91,6 +91,11 @@ iam-nav {
   @media screen and (max-width: 62em) {
 
     > a:not([slot="logo"]) {
+
+      &:after {
+        
+        top: calc(100% - 2px);
+      }
       
       &:where(:hover,:focus) {
         text-decoration: underline;
@@ -137,7 +142,49 @@ iam-nav {
 
 
 
+// #region mobile and tablet mega menu
 
+@media screen and (max-width: 62em) {
+  iam-nav details {
+
+    background-color: #EEEEEE;
+
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding-inline: 1.5rem;
+
+    summary {
+
+      background-color: var(--colour-canvas-2);
+      text-decoration: none;
+      display:block;
+      border: none;
+      color: var(--colour-link);
+      margin: 0;
+      padding: 1.5rem 0;
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+      min-height: 1.5rem;
+      position: relative;
+      font-weight: bold;
+
+      &::after {
+        //content: ;
+      }
+    }
+
+
+
+    /*
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100% !important;
+    background-color: var(--colour-border) !important;
+*/
+  } 
+}
+// #endregion
 
 
 

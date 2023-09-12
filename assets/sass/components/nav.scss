@@ -143,7 +143,7 @@
       pointer-events: all;
     }
   }
-  
+
   .menu__secondary {
     display: none;
   }
@@ -210,6 +210,8 @@
   }
 }
 // #endregion
+
+
 
 // #region tablet tweaks
 @include media-breakpoint-up(sm) {

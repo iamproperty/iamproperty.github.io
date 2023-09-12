@@ -642,6 +642,14 @@ const routes = [
         component: () => import('./views/standalone/NavbarSecondary.vue')
       },
       {
+        path: 'navbar-mega',
+        name: "navbar Megamenu example",
+        meta: {
+          title: 'Navbar Megamenu example| iamkey'
+        },
+        component: () => import('./views/standalone/NavbarMega.vue')
+      },
+      {
         path: 'iamsold-homepage',
         name: "iam sold homepage",
         meta: {
