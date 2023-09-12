@@ -149,6 +149,7 @@
   }
 
   .container.has-secondary .menu__secondary {
+    display: block;
     margin-top: 1.5rem;
     margin-left: -1.5rem;
     margin-right: -1.5rem;
@@ -184,6 +185,7 @@
     padding: rem(24) 0!important;
     margin: 0!important;
     flex-shrink: 0;
+    font-weight: normal!important;
 
     &:after {
       content: "";
@@ -318,6 +320,7 @@
   ::slotted(a:not([slot="logo"])) {
 
     margin-left: rem(32)!important;
+    font-weight: normal!important;
 
     &:not(.selected):after {
       width: 0!important;
