@@ -145,6 +145,7 @@
     line-height: rem(20)!important;
     padding: rem(24) 0!important;
     margin: 0!important;
+    font-weight: normal!important;
 
     &:after {
       content: "";
@@ -228,6 +229,7 @@
   ::slotted(a:not([slot="logo"])) {
 
     margin-left: rem(32)!important;
+    font-weight: normal!important;
 
     &:not(.selected):after {
       width: 0!important;
