@@ -377,6 +377,14 @@ const routes = [
         component: () => import('./views/components/NavDoc.vue')
       },
       {
+        path: 'nav-secondary',
+        name: 'Navbar-secondary',
+        meta: {
+          title: 'Navbar-secondary | Components | iamkey'
+        },
+        component: () => import('./views/components/NavSecondaryDoc.vue')
+      },
+      {
         path: 'notefeed',
         name: 'Note feed (Beta)',
         meta: {
@@ -624,6 +632,14 @@ const routes = [
           title: 'Navbar example| iamkey'
         },
         component: () => import('./views/standalone/Navbar.vue')
+      },
+      {
+        path: 'navbar-secondary',
+        name: "navbar Secondary example",
+        meta: {
+          title: 'Navbar Secondary example| iamkey'
+        },
+        component: () => import('./views/standalone/NavbarSecondary.vue')
       },
       {
         path: 'iamsold-homepage',

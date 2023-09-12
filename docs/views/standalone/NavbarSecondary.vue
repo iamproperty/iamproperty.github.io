@@ -16,7 +16,10 @@
       <a href="/">Lorem ipsum</a>
 
       <button class="btn btn-primary">Lorem ipsum</button>
-      
+
+      <a href="/" slot="secondary">Contact</a>
+      <a href="/" slot="secondary">About us</a>
+
     </Nav>
     </nav>
     <main>

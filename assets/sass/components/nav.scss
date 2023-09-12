@@ -5,7 +5,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-
 }
 
 ::slotted(.brand) {
@@ -91,7 +90,6 @@
     overscroll-behavior: contain;
     width: calc(#{rem(375)} - var(--scrollbar-width));
     background-color: var(--colour-canvas-2);
-    display: block;
     position: absolute;
     height: calc(100vh - #{rem(96)});
     left: 100%;
@@ -100,6 +98,13 @@
     z-index: var(--index-menu);
     overflow: auto;
     transition: all 1s ease-out;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    > * {
+      flex-shrink: 0;
+    }
 
     @media screen and (prefers-color-scheme: dark) {
       --colour-link: var(--colour-white);
@@ -138,13 +143,47 @@
       pointer-events: all;
     }
   }
+  
+  .menu__secondary {
+    display: none;
+  }
 
+  .container.has-secondary .menu__secondary {
+    margin-top: 1.5rem;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 3rem!important;
+    flex-grow: 1;
+    position: relative;
+
+    @media screen and (prefers-color-scheme: light) {
+      background-color: #EEEEEE;
+    }
+
+    .container {
+      display: contents;
+    }
+    
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 1.5rem;
+      display: block;
+      height: 2px;
+      width: calc(100% - 3rem)!important;
+      background-color: var(--colour-border)!important;
+    }
+  }
 
   ::slotted(a:not([slot="logo"])) {
     display: block!important;
     line-height: rem(20)!important;
     padding: rem(24) 0!important;
     margin: 0!important;
+    flex-shrink: 0;
 
     &:after {
       content: "";
@@ -157,7 +196,8 @@
 
   ::slotted(.dialog__wrapper) {
     
-    margin: rem(48) 0 rem(24) 0!important;
+    margin: rem(48) 0 rem(48) 0!important;
+    flex-shrink: 0;
   }
   ::slotted(button) {
 
@@ -166,12 +206,12 @@
     width: 100%!important;
     max-width: 100%!important;
     text-align: center!important;
+    flex-shrink: 0;
   }
 }
 // #endregion
 
 // #region tablet tweaks
-
 @include media-breakpoint-up(sm) {
 
   ::slotted(button) {
@@ -179,7 +219,6 @@
     width: auto!important;
   }
 
-    
   .btn-menu:not(.current) {
 
     width: auto;
@@ -208,14 +247,63 @@
     flex-wrap: nowrap;
     align-items: center;
 
+    &.has-secondary {
+      padding-top: rem(24 + 40)!important;
+    }
+
     > * {
       margin-bottom: 0!important;
     }
   }
 
   .menu,
-  .menu__outer {
+  .menu__outer,
+  .menu__primary {
     display: contents;
+  }
+
+  .menu__secondary {
+    display: none;
+  }
+
+  .container.has-secondary .menu__secondary {
+          
+    background-color: var(--colour-canvas-2);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    @media screen and (prefers-color-scheme: light) {
+            
+      background-color: #EEEEEE;
+      @include reset-colours();
+    }
+
+    @media screen and (prefers-color-scheme: dark) {
+            
+      
+      @include invert-colours();
+    }
+
+
+    .container {
+      margin-left: auto;
+      margin-right: auto;
+      padding: var(--container-padding)!important;
+      padding-top: rem(8)!important;
+      padding-bottom: rem(8)!important;
+      text-align: right;
+    }
+  }
+
+  ::slotted(a[slot="secondary"]) {
+    font-size: rem(14)!important;
+
+    &:after {
+      top: calc(100% - 0.25em)!important;
+    }
   }
 
   ::slotted(a:not([slot="logo"])),
@@ -234,20 +322,20 @@
     }
   }
 
-
   ::slotted(button) {
 
     margin-left: rem(48)!important;
   }
 
-  
   ::slotted(.dialog__wrapper) {
 
     margin-left: rem(48)!important;
   }
-
 }
 // #endregion
+
+
+
 
 /*
 ::slotted(.brand) {

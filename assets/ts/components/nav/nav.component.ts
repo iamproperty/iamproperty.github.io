@@ -32,10 +32,18 @@ class iamNav extends HTMLElement {
 
       <div class="menu__outer">
         <div class="menu">
-          
-          <slot></slot>
-          <slot name="actions"></slot>
-          <slot name="secondary"></slot>
+            
+          <div class="menu__primary">
+
+            <slot></slot>
+            <slot name="actions"></slot>
+          </div>
+
+          <div class="menu__secondary">
+            <div class="container">
+            <slot name="secondary"></slot>
+            </div>
+          </div>
         </div>
       </div>      
     </div>
@@ -52,6 +60,7 @@ class iamNav extends HTMLElement {
     const menuButton = this.shadowRoot.querySelector('.btn-menu');
     const menu = this.shadowRoot.querySelector('.menu');
     const iamNav = this;
+    const container = this.shadowRoot.querySelector('.container');
 
     // Create a scroll wdith variable to help with the sizing of the menu with in the CSS
     document.documentElement.style.setProperty('--scrollbar-width', (window.innerWidth - document.documentElement.offsetWidth) + 'px');
@@ -73,6 +82,11 @@ class iamNav extends HTMLElement {
       menu.classList.remove('open');
       iamNav.classList.remove('open');
     });
+
+    // Has secondary link
+    if(this.querySelector('a[slot="secondary"]')){
+      container.classList.add('has-secondary');
+    }
   }
 }
 

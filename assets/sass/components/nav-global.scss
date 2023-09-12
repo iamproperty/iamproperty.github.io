@@ -1,6 +1,5 @@
 @use "../_func" as *;
 
-
 body:has(iam-nav.open:not(.nav--sticky):not(.nav--xs-sticky)) {
   max-height: 100vh;
   overflow: hidden;
@@ -18,6 +17,13 @@ nav:has(iam-nav) {
     left: 0;
     width: 100%;
     z-index: var(--index-menu);
+  }
+}
+
+@include media-breakpoint-up(md) {
+  nav:has(iam-nav a[slot="secondary"]){
+    
+    min-height: #{rem(96 + 40)};
   }
 }
 
@@ -43,14 +49,12 @@ nav:has(iam-nav.nav--sticky) {
   }
 }
 
-
 @include media-breakpoint-up(sm) {
   body:has(iam-nav.open:not(.nav--sticky)) {
     max-height: 100vh;
     overflow: hidden;
   }
 }
-
 // #endregion
 
 iam-nav:not(:defined) {
@@ -59,11 +63,9 @@ iam-nav:not(:defined) {
     display: none;
   }
   
-  //@media screen and (max-width: 62em) {
-    &:not(:target) > *:not(.brand) {
-      display: none;
-    }
-  //}
+  &:not(:target) > *:not(.brand) {
+    display: none;
+  }  
 }
 
 iam-nav {
