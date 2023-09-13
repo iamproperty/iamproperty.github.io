@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav>
-    <Nav class="nav--sticky">
+    <Nav class="nav--st/icky" data-search="/search" data-prevent-search>
 
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
@@ -10,62 +10,85 @@
         </svg>
       </a>
 
-      <a href="/">Why iamproperty</a>
+      <details>
+        <summary>Why iamproperty</summary>
+        <div data-title="Why iamproperty">
+        <a href="/">Win more instructions</a>
+        <a href="/">Secure sales pipeline</a>
+        <a href="/">Increase revenue</a>
+        <a href="/">Material information</a>
+        <a href="/">Smoother client onboarding</a>
+        <a href="/">Enhance my proposition</a>
+        <a href="/">AML compliance management</a>
+        <a href="/">Learn more about auction</a>
+        </div>
+      </details>
 
       <details>
         <summary>Solution finder</summary>
-        
-        <details>
-          <summary>Our solutions</summary>
-          <a href="/">Win more instructions</a>
-          <a href="/">Secure sales pipeline</a>
-          <a href="/">Increase revenue</a>
-          <a href="/">Material information</a>
-          <a href="/">Smoother client onboarding</a>
-          <a href="/">Enhance my proposition</a>
-          <a href="/">AML compliance management</a>
-          <a href="/">Learn more about auction</a>
-        </details>
-        <details>
-          <summary>By job role</summary>
-          <a href="/">Win more instructions</a>
-          <a href="/">Secure sales pipeline</a>
-          <a href="/">Increase revenue</a>
-          <a href="/">Material information</a>
-          <a href="/">Smoother client onboarding</a>
-          <a href="/">Enhance my proposition</a>
-          <a href="/">AML compliance management</a>
-          <a href="/">Learn more about auction</a>
-        </details>
-        <details>
-          <summary>By objective</summary>
-          <a href="/">Win more instructions</a>
-          <a href="/">Secure sales pipeline</a>
-          <a href="/">Increase revenue</a>
-          <a href="/">Material information</a>
-          <a href="/">Smoother client onboarding</a>
-          <a href="/">Enhance my proposition</a>
-          <a href="/">AML compliance management</a>
-          <a href="/">Learn more about auction</a>
-        </details>
-        <details>
-          <summary>By product</summary>
-          <a href="/">Win more instructions</a>
-          <a href="/">Secure sales pipeline</a>
-          <a href="/">Increase revenue</a>
-          <a href="/">Material information</a>
-          <a href="/">Smoother client onboarding</a>
-          <a href="/">Enhance my proposition</a>
-          <a href="/">AML compliance management</a>
-          <a href="/">Learn more about auction</a>
-        </details>
+        <div>
+          <details>
+            <summary>Our solutions</summary>
+            <div data-title="Our solutions">
+              <a href="/">Win more instructions</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By job role</summary>
+            <div>
+              <a href="/">Win more instructions1</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By objective</summary>
+            <div>
+              <a href="/">Win more instructions2</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By product</summary>
+            <div>
+              <a href="/">Win more instructions3</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+              
+              <a href="/"><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></a>
+            </div>
+          </details>
+        </div>
       </details>
 
       <a href="/">Lorem ipsum</a>
       <a href="/">Lorem ipsum</a>
 
       <button class="btn btn-primary">Lorem ipsum</button>
-
 
     </Nav>
     </nav>
@@ -92,10 +115,20 @@
 
 <script>
 import Nav from '@/components/Nav/Nav.vue'
+import Card from '@/components/Card/Card.vue'
+
+import cardImg from '../../img/cardImg.png'
 
 export default {
   components: {
-    Nav
+    Nav,
+    Card,
+    cardImg
+  },
+  data () {
+    return {
+      cardImg: cardImg,
+    }
   }
 }
 </script>

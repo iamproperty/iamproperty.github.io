@@ -49,7 +49,7 @@
     display: none;
   }
 
-  &.current {
+  &.selected {
 
     i {
       display: none;
@@ -77,12 +77,24 @@
     overflow: hidden;
     pointer-events: none;
     transition: background 0.5s;
+
+    &:has(.menu.open) {
+
+      background: rgba(0,0,0,0.2);
+      backdrop-filter: blur(2px);
+    }
   }
 
-  .menu__outer:has(.menu.open) {
-
-    background: rgba(0,0,0,0.2);
-    backdrop-filter: blur(2px);
+  .menu::-webkit-scrollbar {
+    width: 6px;
+  }
+   
+  .menu::-webkit-scrollbar-track {
+    border: 0!important;
+  }
+   
+  .menu::-webkit-scrollbar-thumb {
+    border: 0!important;
   }
 
   .menu {
@@ -94,7 +106,7 @@
     height: calc(100vh - #{rem(96)});
     left: 100%;
     top: 0;
-    padding: 0 rem(24);
+    padding: 0 rem(24) 0 rem(24);
     z-index: var(--index-menu);
     overflow: auto;
     transition: all 1s ease-out;
@@ -118,7 +130,6 @@
       @include reset-colours();
     }
 
-    
     @media (forced-colors: active) {
       
       outline: 1px solid white;
@@ -126,14 +137,13 @@
 
     &:before {
       content: "";
-      position: sticky;
+      position: absolute;
       display: block ;
       top: 0;
       left: 0;
-      width: calc(100% + 3rem);
+      width: 100%;
       border-top: 2px solid var(--colour-border);
-      margin-left: -1.5rem;
-      margin-right: -1.5rem;
+      z-index: 1;
     }
 
     &.open {
@@ -148,9 +158,8 @@
     display: none;
   }
 
-  .container.has-secondary .menu__secondary {
+  .has-secondary .menu__secondary {
     display: block;
-    margin-top: 1.5rem;
     margin-left: -1.5rem;
     margin-right: -1.5rem;
     padding-left: 1.5rem;
@@ -185,6 +194,7 @@
     padding: rem(24) 0!important;
     margin: 0!important;
     flex-shrink: 0;
+    font-size: 1rem!important;
     font-weight: normal!important;
 
     &:after {
@@ -192,32 +202,73 @@
       display: block;
       height: 2px;
       width: 100%!important;
-      background-color: var(--colour-border)!important;
+      background-color: var(--colour-border)!important;  
+      top: calc(100% - 2px);
     }
   }
 
-  ::slotted(.dialog__wrapper) {
+  *:is(.has-search, .has-actions) .menu__primary{
     
-    margin: rem(48) 0 rem(48) 0!important;
-    flex-shrink: 0;
+    display: block;
+    padding-bottom: rem(48);
   }
+
+  .menu:not(.has-secondary) .menu__primary{
+    
+    display: block;
+    padding-bottom: rem(48);
+  }
+
   ::slotted(button) {
 
     display: block!important;
-    margin: rem(48) 0 rem(24) 0!important;
+    margin: 0 0 rem(24) 0!important;
     width: 100%!important;
     max-width: 100%!important;
     text-align: center!important;
     flex-shrink: 0;
   }
+
+  .has-actions slot[name="actions"]{
+    display: block;
+    padding-bottom: rem(24);
+  }
+
+  slot[name="actions"]::slotted(button){
+    margin-top: 0!important;
+  }
+
+  // Search
+  .dialog__wrapper {
+    width: 100%;
+    margin: 0 0 rem(48) 0!important;
+    flex-shrink: 0;
+  }
+  .dialog__wrapper > .btn {
+    display: none;
+  }
+  .dialog__wrapper dialog {
+    display: contents;
+  }
 }
 // #endregion
 
-
-
 // #region tablet tweaks
-@include media-breakpoint-up(sm) {
+@media screen and (max-width: 62em) and (min-width: 36em) {
 
+  .menu {
+    padding-right: rem(40)!important;
+  }
+
+  .has-secondary .menu__secondary {
+
+    margin-right: rem(-40)!important;
+    padding-right: rem(40)!important;
+
+    &:before {
+      width: calc(100% - 4rem) !important
+    }
+  }
   ::slotted(button) {
 
     width: auto!important;
@@ -230,15 +281,10 @@
     padding-right: rem(24 + 4);
   }
 }
-
 // #endregion
 
 // #region desktop
 @include media-breakpoint-up(md) {
-
-  .btn-menu {
-    display: none;
-  }
 
   :host {
     max-width: 100%!important;
@@ -251,13 +297,17 @@
     flex-wrap: nowrap;
     align-items: center;
 
-    &.has-secondary {
+    &:has(.has-secondary) {
       padding-top: rem(24 + 40)!important;
     }
 
     > * {
       margin-bottom: 0!important;
     }
+  }
+
+  .btn-menu {
+    display: none;
   }
 
   .menu,
@@ -270,7 +320,7 @@
     display: none;
   }
 
-  .container.has-secondary .menu__secondary {
+  .has-secondary .menu__secondary {
           
     background-color: var(--colour-canvas-2);
     display: block;
@@ -320,10 +370,11 @@
   ::slotted(a:not([slot="logo"])) {
 
     margin-left: rem(32)!important;
+    font-size: rem(16)!important;
     font-weight: normal!important;
 
-    &:not(.selected):after {
-      width: 0!important;
+    &:after {
+      display: none;
     }
   }
 
@@ -332,121 +383,70 @@
     margin-left: rem(48)!important;
   }
 
-  ::slotted(.dialog__wrapper) {
+  slot[name="actions"]{
+    display: block;
+    padding-left: rem(48);
+  }
 
-    margin-left: rem(48)!important;
+  // Search bar
+  slot[name="actions"]::slotted(button) {
+
+    margin-left: rem(12)!important;
+  }
+
+  :host([data-search]) slot[name="actions"] {
+
+    padding-left: 0!important;
+  }
+
+  #search-wrapper {
+    
+    margin-left: rem(24)!important;
+    position: static;
+  }
+
+  #search-dialog[open] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-block: rem(24);
+    padding-inline: 0;
+    background-color: transparent;
+
+    text-align: right;
+    border-radius: 0;
+    box-shadow: none;
+
+    .container {
+      
+    padding: var(--container-padding);
+    padding-bottom: 0;
+    }
+  }
+
+  :host(.search-open) {
+
+    background: #E6EAEC!important;
+
+    #search-button {
+      display: none;
+    }
+  }
+
+  // backdrop
+  .backdrop.show {
+
+    content: "";
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    height: calc(100vh - #{rem(96)});
+    width: 100%;
+    z-index: -1;
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(2px);
   }
 }
 // #endregion
-
-
-
-
-/*
-::slotted(.brand) {
-  
-  margin-right: auto!important;
-}
-
-.container:not(.container-fluid) {
-  max-width: var(--max-width,80rem);
-  padding: var(--container-padding)!important;
-  padding-bottom: 0!important;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: nowrap;
-
-  @include media-breakpoint-up(md) {
-
-    display: contents;
-  }
-}
-
-@include media-breakpoint-up(md) {
-
-  :host {
-    flex-wrap: nowrap;
-  }
-}
-.menu {
-  @media screen and (max-width: 62em) {
-    display: block;
-    width: calc(#{rem(375)} - var(--scrollbar-width));
-    position: absolute;
-    height: 100vh;
-    left: 100%;
-    top: 0;
-    padding: var(--container-padding)!important;
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
-    background: var(--colour-canvas-2);
-    z-index: var(--index-menu);
-    overflow: auto;
-
-    transition: left 1s ease-out;
-
-    
-    //@include reset-colours();
-
-    &.open {
-      left: calc(100% - (#{rem(375)} - var(--scrollbar-width)));
-    }
-
-    .menu--top {
-      display: flex;
-    }
-    
-    .btn-close {
-        
-      padding: 0;
-      margin: 0;
-      text-align: center;
-      width: rem(36);
-      height: rem(36);
-      margin-right: -#{rem(18 - 9)};
-      text-indent: -300px;
-      overflow: hidden;
-      position: relative;
-      border: none;
-      background: currentColor;
-
-      mask-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z' fill='var(--colour-primary)'/></svg>"));
-      mask-repeat: no-repeat;
-      mask-position: 50% 50%;
-      mask-size: #{rem(18)};
-      -webkit-mask-image: escape-svg(url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--! Font Awesome Pro 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M345 137c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-119 119L73 103c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l119 119L39 375c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l119-119L311 409c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-119-119L345 137z' fill='var(--colour-primary)'/></svg>"));
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: 50% 50%;
-      -webkit-mask-size: #{rem(18)};
-    }
-  }
-
-  @include media-breakpoint-up(md) {
-
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    flex-grow: 1;
-    order: 1;
-    
-    > * {
-      order: 1;
-    }
-
-    .menu--top {
-      display: none;
-    }
-    
-    > .btn,
-    > div:has(> label:first-child):has(> input),
-    > form div:has(> label:first-child):has(> input) {
-      margin-bottom: 0;
-      margin-left: 1rem;
-    }
-  }
-}
-
-*/

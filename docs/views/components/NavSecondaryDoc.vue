@@ -6,13 +6,10 @@
       <h1>Navbar-secondary</h1>
     </DSHeader>
 
-
-
     <div class="container pb-0">
       
       <p class="lead">Allow users to navigate across additional minor or lesser items.</p>
       <p>Our secondary navigational area can be used to house items of lesser importance to navigation of the site but offer a quick helpful support for example these areas could house items such as ‘Contact Us’ or within the iamproperty agent platform could it be used to house navigation for the other services a user has signed up for. This navbar area is completely optional, it can only be used as a supporting element to one of our navbars and it can be used on any of our navbars types. The navbar-secondary sits above the primary navbar on desktop, and is housed at the bottom of the expanded menu on tablet and mobile.</p>
-
     </div>
 
     <div class="demo">
@@ -45,21 +42,21 @@
     <div class="demo">
     <Nav class="visualtest bg-primary" data-css="/assets/css/components/nav.docs.css">
 
-    <a href="/" class="brand brand--property" slot="logo">
-      <svg>
-        <title>iamproperty</title>
-        <use xlink:href="/svg/logo.svg#logo-property"></use>
-      </svg>
-    </a>
+      <a href="/" class="brand brand--property" slot="logo">
+        <svg>
+          <title>iamproperty</title>
+          <use xlink:href="/svg/logo.svg#logo-property"></use>
+        </svg>
+      </a>
 
-    <a href="/" class="selected">Lorem ipsum</a>
-    <a href="/">Lorem ipsum</a>
-    <a href="/">Lorem ipsum</a>
-    <a href="/">Lorem ipsum</a>
+      <a href="/" class="selected">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
 
-    <button class="btn btn-primary">Lorem ipsum</button>
+      <button class="btn btn-primary">Lorem ipsum</button>
 
-    <a href="/" slot="secondary">Contact</a>
+      <a href="/" slot="secondary">Contact</a>
       <a href="/" slot="secondary">About us</a>
 
     </Nav>

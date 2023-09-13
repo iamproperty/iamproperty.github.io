@@ -23,7 +23,16 @@ export default {
       }).catch((err) => {
         console.log(err.message);
       });
+
+
+
     })
+
+
+  },
+  methods: {
+
   }
 }
+
 </script>

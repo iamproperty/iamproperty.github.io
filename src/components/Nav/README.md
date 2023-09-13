@@ -25,6 +25,7 @@
 | default | - | Populates the main nav area |
 | logo | - | A place to add the logo to the site |
 | secondary | - | Moves the link upto the top of the navbar on desktop |
+| actions | - | A place to add buttons |
 
 **Class modifiers**
 

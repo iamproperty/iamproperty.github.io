@@ -10,9 +10,7 @@ const version = pkg.version;
   <div id="visualtest"></div>
 
   <nav>
-  <Nav logo="key" logotext="Design system<br/>&amp; framework">
-
-
+  <Nav logo="key" logotext="Design system<br/>&amp; framework" data-search="/search" data-list="searchterms">
 
     <a href="/" class="brand brand--key" slot="logo">
 
@@ -26,26 +24,10 @@ const version = pkg.version;
     <router-link to="/templates">Templates</router-link>
     <router-link to="/best-practice">Best practice</router-link>
 
-    <div class="dialog__wrapper dialog__wrapper--right">
-        <button class="btn btn-primary colour-primary btn-compact fa-search me-0 mb-0">Open Popover</button>
-        <dialog id="search-dialog">
-          <form action="/search" class="row">
-            <div class="col mb-0">
-              <label for="search" class="visually-hidden">Search</label>
-              <button class="suffix me-0 mb-0 d-md-none"><i class="fa-regular fa-search"></i></button>
-              <input type="search" class="" id="search" name="search" required="" autocomplete="off" list="searchterms" @keydown="removelist" @keyup="addlist" />
-            </div>
-            <div class="col mw-fit-content d-none d-md-block">
-              <button class="btn btn-primary colour-primary mb-0 me-0">Search</button>
-            </div>
+    <datalist id="searchterms" ref="list">
+      <option v-for="item in refinedResults" :value="item"></option>
+    </datalist>
 
-          <datalist data-id="searchterms" ref="list">
-            <option v-for="item in refinedResults" :value="item"></option>
-          </datalist>
-
-          </form>
-        </dialog>
-      </div>
   </Nav>
   </nav>
 
@@ -92,21 +74,17 @@ a.router-link-active:not(.text-decoration-none):not(.btn):before {
 }
 
 
-@media screen and (max-width: 62em) {
+//@media screen and (max-width: 62em) {
   iam-nav > a.router-link-active:not([slot=logo]){
     text-decoration: underline;
     text-underline-offset: 0.3em;
     text-decoration-thickness: 2px;
     text-decoration-color: var(--colour-info) !important;
   }
-}
+//}
 
 @include media-breakpoint-up(md) {
-  iam-nav > a.router-link-active:not([slot=logo]):after {
-    width: 100% !important;
-    background: var(--colour-info) !important;
-  }
-  
+
   #search {
     
     border-radius: 0.5rem!important;
@@ -121,22 +99,6 @@ a.router-link-active:not(.text-decoration-none):not(.btn):before {
   min-height: unset;
 }
 
-@media screen and (max-width: 62em) {
-
-  iam-nav .dialog__wrapper {
-    width: 100%;
-  }
-  iam-nav .dialog__wrapper > .btn {
-    display: none;
-  }
-  iam-nav .dialog__wrapper dialog {
-    display: contents;
-  }
-}
-
-#search-dialog {
-  min-width: 30rem;
-}
 
 footer .router-link-active {
   text-decoration: none;
@@ -229,20 +191,7 @@ export default {
     Card
   },
   methods: {
-    removelist: function(e){
 
-      let datalist = this.$refs.list;
-
-      if (e.target.value.length < 3) 
-        datalist.setAttribute("id", "");
-    },
-    addlist: function(e){
-
-      let datalist = this.$refs.list;
-
-      if (e.target.value.length >= 2) 
-        datalist.setAttribute("id", "searchterms");
-    }
   },
   mounted () {
     var urlParams = new URLSearchParams(window.location.search);
