@@ -50,6 +50,7 @@ import('../node_modules/@iamproperty/components/assets/js/components/nav/nav.com
 | logo | - | A place to add the logo to the site |
 | secondary | - | Moves the link upto the top of the navbar on desktop |
 | actions | - | A place to add buttons |
+| dual | - | Plave the link or list to the right of the nav, forcing the default slot to the left. |
 
 **Class modifiers**
 

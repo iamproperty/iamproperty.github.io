@@ -476,3 +476,17 @@ iam-nav details {
   }
 }
 // #endregion
+
+// #region Dual navbar in desktop
+@include media-breakpoint-up(md) {
+  iam-nav {
+    .brand:has(~ [slot="dual"]) {
+      margin-right: rem(24);
+    }
+
+    *:not([slot="dual"]):has(+ [slot="dual"]) {
+      margin-right: auto;
+    }
+  }
+}
+// #endregion

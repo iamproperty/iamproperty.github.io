@@ -393,6 +393,14 @@ const routes = [
         component: () => import('./views/components/NavMegaDoc.vue')
       },
       {
+        path: 'nav-dual',
+        name: 'Navbar-dual',
+        meta: {
+          title: 'Navbar-dual menu | Components | iamkey'
+        },
+        component: () => import('./views/components/NavDualDoc.vue')
+      },
+      {
         path: 'notefeed',
         name: 'Note feed (Beta)',
         meta: {
@@ -656,6 +664,14 @@ const routes = [
           title: 'Navbar Megamenu example| iamkey'
         },
         component: () => import('./views/standalone/NavbarMega.vue')
+      },
+      {
+        path: 'navbar-dual',
+        name: "navbar Dual example",
+        meta: {
+          title: 'Navbar Dual example| iamkey'
+        },
+        component: () => import('./views/standalone/NavbarDual.vue')
       },
       {
         path: 'iamsold-homepage',

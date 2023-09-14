@@ -33,6 +33,7 @@ class iamNav extends HTMLElement {
             
           <div class="menu__primary">
             <slot></slot>
+            <slot name="dual"></slot>
           </div>
           <div class="dialog__wrapper d-none" id="search-wrapper"></div>
           <slot name="actions"></slot>
