@@ -11,7 +11,7 @@ class iamNav extends HTMLElement {
 
   constructor(){
     super();
-    this.attachShadow({ mode: 'open'});
+    const shadowRoot = this.attachShadow({ mode: 'open'});
 
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
@@ -46,9 +46,10 @@ class iamNav extends HTMLElement {
       </div>      
     </div>
     <div class="lists"></div>
-    <div class="backdrop"></div>
+    <div class="backdrop" part="backdrop"></div>
     `;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+
+    shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
 	connectedCallback() {
@@ -179,6 +180,12 @@ class iamNav extends HTMLElement {
       let searchDialog = this.shadowRoot.querySelector('#search-dialog');
       let searchInput = this.shadowRoot.querySelector('#search');
       let searchForm = this.shadowRoot.querySelector('#search-form');
+
+      if(this.hasAttribute('data-search-open')){
+        
+        searchDialog.setAttribute('open','open');
+        this.classList.add('search-open');
+      }
 
       searchButton.addEventListener("click", (event) => {
 

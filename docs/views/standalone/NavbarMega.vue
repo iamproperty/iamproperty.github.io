@@ -12,15 +12,62 @@
 
       <details>
         <summary>Why iamproperty</summary>
-        <div data-title="Why iamproperty">
-        <a href="/">Win more instructions</a>
-        <a href="/">Secure sales pipeline</a>
-        <a href="/">Increase revenue</a>
-        <a href="/">Material information</a>
-        <a href="/">Smoother client onboarding</a>
-        <a href="/">Enhance my proposition</a>
-        <a href="/">AML compliance management</a>
-        <a href="/">Learn more about auction</a>
+        <div>
+          <details>
+            <summary>Our solutions</summary>
+            <div data-title="Our solutions">
+              <a href="/">Win more instructions</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By job role</summary>
+            <div>
+              <a href="/">Win more instructions1</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By objective</summary>
+            <div>
+              <a href="/">Win more instructions2</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By product</summary>
+            <div>
+              <a href="/">Win more instructions3</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+              
+              <a href="/"><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></a>
+            </div>
+          </details>
         </div>
       </details>
 
@@ -85,13 +132,74 @@
         </div>
       </details>
 
-      <a href="/">Lorem ipsum</a>
-      <a href="/">Lorem ipsum</a>
+      <details>
+        <summary>Insights and resources</summary>
+        <div>
+          <details>
+            <summary>Our solutions</summary>
+            <div data-title="Our solutions">
+              <a href="/">Win more instructions</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By job role</summary>
+            <div>
+              <a href="/">Win more instructions1</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By objective</summary>
+            <div>
+              <a href="/">Win more instructions2</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+            </div>
+          </details>
+          <details>
+            <summary>By product</summary>
+            <div>
+              <a href="/">Win more instructions3</a>
+              <a href="/">Secure sales pipeline</a>
+              <a href="/">Increase revenue</a>
+              <a href="/">Material information</a>
+              <a href="/">Smoother client onboarding</a>
+              
+              <a href="/">Enhance my proposition</a>
+              <a href="/">AML compliance management</a>
+              <a href="/">Learn more about auction</a>
+              
+              <a href="/"><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></a>
+            </div>
+          </details>
+        </div>
+      </details>
+
+      <a href="/">Tech of a life</a>
 
       <button class="btn btn-primary">Lorem ipsum</button>
 
     </Nav>
     </nav>
+    
     <main>
       <div class="container pt-4">
         <h1>Heading 1</h1>

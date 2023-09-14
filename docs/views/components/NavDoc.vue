@@ -16,8 +16,8 @@
 
     </div>
 
-    <div class="demo">
-    <Nav class="visualtest" data-css="/assets/css/components/nav.docs.css">
+    <div class="demo visualtest">
+    <Nav data-css="/assets/css/components/nav.docs.css">
 
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
@@ -40,8 +40,8 @@
       <span class="lead text-body pb-3 d-block">VARIATION (DEEP SLATE)</span>
     </div>
 
-    <div class="demo">
-    <Nav class="visualtest bg-primary" data-css="/assets/css/components/nav.docs.css">
+    <div class="demo visualtest">
+    <Nav class="bg-primary" data-css="/assets/css/components/nav.docs.css">
 
     <a href="/" class="brand brand--property" slot="logo">
       <svg>
@@ -130,6 +130,11 @@
   padding: 1rem 1rem 0 1rem;
   height: 100vh;
 }
+
+#visualtest:target ~ main > .demo {
+  padding: 0!important;
+}
+
 }
 
 

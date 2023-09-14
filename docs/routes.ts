@@ -385,6 +385,14 @@ const routes = [
         component: () => import('./views/components/NavSecondaryDoc.vue')
       },
       {
+        path: 'nav-mega',
+        name: 'Navbar-mega menu',
+        meta: {
+          title: 'Navbar-mega menu | Components | iamkey'
+        },
+        component: () => import('./views/components/NavMegaDoc.vue')
+      },
+      {
         path: 'notefeed',
         name: 'Note feed (Beta)',
         meta: {
