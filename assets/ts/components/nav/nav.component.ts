@@ -26,7 +26,6 @@ class iamNav extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="container">
       <slot name="logo"></slot>
-      <slot name="btn"></slot>
       <button class="btn-menu">Menu<i class="fa-regular fa-bars"></i><i class="fa-regular fa-xmark"></i></button>
 
       <div class="menu__outer">
