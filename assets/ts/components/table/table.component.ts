@@ -27,6 +27,7 @@ class iamTable extends HTMLElement {
     
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
+    <slot name="before"></slot>
     <div class="table--cta">
     <div class="table__wrapper">
       <slot></slot>
@@ -124,6 +125,70 @@ class iamTable extends HTMLElement {
       }
 
     });
+
+
+    // Add in the checkboxes
+
+    if(this.querySelector('iam-actionbar[data-selectall]')){
+      
+      const actionbar = this.querySelector('iam-actionbar[data-selectall]');
+
+      Array.from(this.table.querySelectorAll('thead tr')).forEach((row,index) => {
+            
+        row.insertAdjacentHTML(
+          'afterbegin',
+          "<th></th>"
+        );
+      });
+
+      Array.from(this.table.querySelectorAll('tbody tr')).forEach((row,index) => {
+            
+        row.insertAdjacentHTML(
+          'afterbegin',
+          `<td class="selectrow"><input type="checkbox" name="row" id="row${index}"/><label for="row${index}"><span class="visually-hidden">Select row</span></label></td>`
+        );
+      });
+
+      this.table.addEventListener('change',(event) => {
+
+        if (event && event.target instanceof HTMLElement && event.target.closest('.selectrow input')){
+
+        
+          let count = this.table.querySelectorAll('.selectrow input[type="checkbox"]').length;
+          let countChecked = this.table.querySelectorAll('.selectrow input[type="checkbox"]:checked').length;
+
+          actionbar.setAttribute('data-selected', count == countChecked ? "all" : countChecked);
+
+          console.log(countChecked);
+        };
+
+      });
+
+      actionbar.addEventListener('selected', (event) => {
+
+        console.log(event.detail.selected);
+
+
+        if(event.detail.selected == '0'){
+
+          Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input,index) => {
+            
+            input.checked = false;
+          });
+
+        }
+        else if(event.detail.selected == 'all'){
+          
+          Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input,index) => {
+            
+            input.checked = true;
+          });
+
+        }
+        
+      });
+
+    }
   }
 
 

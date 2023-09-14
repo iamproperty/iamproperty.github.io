@@ -546,6 +546,34 @@ input[type="checkbox"]:checked + label {
   }
 }
 
+input[type="checkbox"]:indeterminate + label {
+
+  &:before {
+    background: var(--colour-info) !important;
+    border-color: var(--colour-info) !important;
+  }
+  
+  &:after {
+    content: "\f068";
+    position: absolute;
+    font-size: 1em;
+    line-height: 1;
+    color: var(--colour-primary-theme);
+    font-family: "Font Awesome 6 Pro";
+    font-weight: bold;
+    height: rem(24);
+    width: rem(24);
+    line-height: rem(26);
+    background: none !important;
+    border: none!important;
+    outline: none!important;
+    top: rem(10 - 2);
+    left: var(--outline-width);
+    text-align: center;
+  }
+}
+
+
 input:is([type="radio"],[type="checkbox"]):checked:is(:focus,:hover,.focus) + label {
 
   --tick-colour: var(--colour-info);

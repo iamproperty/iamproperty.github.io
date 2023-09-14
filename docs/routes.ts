@@ -135,15 +135,6 @@ const routes = [
         component: () => import('./views/components/Index.vue')
       },
       {
-        path: 'panel',
-        name: 'Admin panel',
-        meta: {
-          title: 'Admin panel | Components | iamkey'
-        },
-        component: () => import('./views/components/PanelDoc.vue'),
-        searchterms: 'admin, tabs'
-      },
-      {
         path: 'accordion',
         name: 'Accordion (Beta)',
         meta: {
@@ -151,6 +142,24 @@ const routes = [
         },
         component: () => import('./views/components/AccordionDoc.vue'),
         searchterms: 'expanded, list'
+      },
+      {
+        path: 'actionbar',
+        name: 'Action bar',
+        meta: {
+          title: 'Action bar | Components | iamkey'
+        },
+        component: () => import('./views/components/ActionbarDoc.vue'),
+        searchterms: 'options, actions, edit, tinymce, editor'
+      },
+      {
+        path: 'panel',
+        name: 'Admin panel',
+        meta: {
+          title: 'Admin panel | Components | iamkey'
+        },
+        component: () => import('./views/components/PanelDoc.vue'),
+        searchterms: 'admin, tabs'
       },
       {
         path: 'applied-filters',
@@ -564,8 +573,16 @@ const routes = [
         component: () => import('./views/examples/Index.vue')
       },
       {
-        path: 'filter-by-age',
-        component: () => import('./views/examples/FilterByAge.vue')
+        path: 'actionbar-table',
+        component: () => import('./views/examples/ActionbarTable.vue')
+      },
+      {
+        path: 'actionbar-panel',
+        component: () => import('./views/examples/ActionbarPanel.vue')
+      },
+      {
+        path: 'actionbar-top',
+        component: () => import('./views/examples/ActionbarTop.vue')
       },
       {
         path: 'charts',
