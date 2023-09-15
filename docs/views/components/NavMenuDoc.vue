@@ -3,19 +3,20 @@
 
     
     <DSHeader :image="headerImg" section="components">
-      <h1>Navbar-dual</h1>
+      <h1>Navbar-menu</h1>
     </DSHeader>
 
     <div class="container pb-0">
       
-      <p class="lead">Allow users to navigate across the key views within the platform</p>
-      <p>Our navigation bar provides users with consistent links to the main sections of the site or platform. The dual variant presents the key navigation items across two horizontal lists on desktop, which are collapsed into a list behind a menu icon on tablet and mobile. Just like the Navbar, the Navbar-dual can be added in default or deep slate variant.</p>
-      <p>The primary list navigation items are dropdown which displays the mega menu, whilst the secondary list of items are standard navigation links. The primary list is appended with a button (usually primary) and can also include a compact button if needed. On desktop this is positioned at the end of the list to stand out from the rest of the list, on tablet and mobile it is housed within the collapsed list behind the menu icon. </p>
+      <p class="lead">Surfacing sub menu items allows users to navigate into a section.</p>
+
+      <p>The navbar menu is a simple single-column list that is used for items such as my account, sign in and can also be used as an overflow menu. It is triggered by a button (compact or full styling) within navbar action slot or a navigational item within the primary nav or secondary navbar. Once triggered then the menu expands. The menu has an optional H3 header which can be displayed at the top of the menu list if needed.  </p>
+      <p>On desktop and tablet, the menu will slide in from the right hand side and fill the full height of the screen. A max width is applied on desktop, will take up 50% of the screen on tablet and will be full width on mobile. If the items listed within the menu are longer than the viewport height, then the menu will scroll within the container.</p>
     </div>
 
     <div class="demo visualtest">
     
-      <Nav data-css="/assets/css/components/nav.docs.css">
+      <Nav class="nav--sticky bg-primary">
 
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
@@ -24,8 +25,10 @@
           </svg>
         </a>
 
+        <a href="/">Dashboard</a>
+
         <details>
-          <summary>Why iamproperty</summary>
+          <summary>Client onboarding</summary>
           <div>
             <details>
               <summary>Our solutions</summary>
@@ -86,7 +89,7 @@
         </details>
 
         <details>
-          <summary>Solution finder</summary>
+          <summary>Propertyaudit</summary>
           <div>
             <details>
               <summary>Our solutions</summary>
@@ -147,7 +150,7 @@
         </details>
 
         <details>
-          <summary>Insights</summary>
+          <summary>Compliance</summary>
           <div>
             <details>
               <summary>Our solutions</summary>
@@ -207,9 +210,34 @@
           </div>
         </details>
 
-        <a href="/" slot="dual">Tech of a life</a>
+        <a href="/" >Conveyancing</a>
 
-        <button class="btn btn-primary">Lorem ipsum</button>
+        <div class="nav--menu open" data-title="My account" data-icon="fa-user fa-solid">
+
+          <div>
+            <label for="test1">Active branch</label>
+            <select class="form-select" name="test1" id="test1">
+              <option value="1" selected>Newcastle</option>
+              <option value="2">Two</option>
+              <option value="2">Three</option>
+              <option value="2">Four</option>
+            </select>
+          </div>
+
+          <hr class="mt-3" />
+
+          <a href="/" >Agency settings</a>
+          <a href="/" >Control panel</a>
+          <a href="/"  class="mb-4">Contact us</a>
+
+        </div>
+
+
+
+        <a href="/" slot="secondary">iamproperty</a>
+        <a href="/" slot="secondary">openview</a>
+        <a href="/" slot="secondary">movebutler</a>
+        <a href="/" slot="secondary">iamsold</a>
 
       </Nav>
     </div>
@@ -218,10 +246,11 @@
     <div class="container pt-4 pb-0">
       
       <h2>Usage notes</h2>
-      <p>There should be no more than 6 navigation items (not including the button) in the primary navbar before the secondary navigation lists.</p>
-      <p>On tablet and mobile, all menu items are hidden behind a menu icon. This icon has a label with it on tablet, which then becomes hidden on mobile devices to avoid spatial constraints.</p>
-      <p>Buttons used within the action area of the primary navbar can be used to direct user to a page, modal or trigger the menu (see ‘Menu’ style guide)</p>
-
+      <p>The menu should slide in from the right edge of the screen on desktop and tablet, and should slide down from the top on mobile.</p>
+      <p>Items within the menu list can include text links, form fields or buttons.</p>
+      <p>There are no limits on the number of items within the menu as the panel will be scrollable. </p>
+      <p>The scrolling of the main page should be locked whilst the menu is active. </p>
+      <p>To dismiss the menu on desktop, the user can click anywhere that isn’t the menu, click the action button that initiated the menu UI or click any other item in the primary navbar.  To dismiss the menu on tablet, the user can click anywhere that isn’t the menu, click the close icon or any other item in the primary navbar. To dismiss the menu on mobile, the user can click the close icon or click another item in the primary navbar.</p>
     </div>
 
     
@@ -263,7 +292,7 @@
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/navbar-dual.pdf" download>Download latest designs</a>
+        <a href="/pdfs/navbar-menus.pdf" download>Download latest designs</a>
       </div>
     </div>
 
@@ -273,7 +302,7 @@
 <style lang="scss">
 
 
-@media screen and (max-width: 62em) {
+//@media screen and (max-width: 62em) {
   .demo {
   background-color: #F2F2F2;
   overflow: hidden;
@@ -305,7 +334,7 @@
   padding: 0!important;
 }
 
-}
+//}
 
 </style>
 

@@ -74,6 +74,13 @@ iam-nav:not(:defined) {
 // #region General styles
 iam-nav {
 
+  --nav-height: #{rem(96)};
+
+  &:has(a[slot="secondary"]){
+    
+    --nav-height: #{rem(96 + 40)};
+  }
+
   overscroll-behavior: contain!important;
   background-color: var(--colour-canvas);
   display: block;
@@ -94,6 +101,8 @@ iam-nav {
 
   a:not([slot="logo"]):not(:has(iam-card)) {
     
+    text-decoration: none;
+
     &:where(:hover,:focus,.selected) {
       text-decoration: underline;
       text-underline-offset: 0.3em;
@@ -143,7 +152,12 @@ iam-nav details {
 @media screen and (max-width: 62em) {
   iam-nav details {
 
-    background-color: #EEEEEE;
+    background-color: var(--colour-canvas);
+    
+    @media screen and (prefers-color-scheme: light) {
+      background-color: #EEEEEE;
+    }
+
     margin-left: -1.5rem;
     margin-right: -1.5rem;
     padding-inline: 1.5rem;
@@ -152,7 +166,13 @@ iam-nav details {
 
     summary {
 
+      background-color: var(--colour-white);
+
+            
+      @media screen and (prefers-color-scheme: dark) {
+        
       background-color: var(--colour-canvas-2);
+      }
       display:block;
       border: none;
       color: var(--colour-link);
@@ -345,6 +365,16 @@ iam-nav details {
       width: 100%;
       padding-inline: calc(50% - #{rem(556)});
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+
+      
+      @media screen and (prefers-color-scheme: light) {
+        background: var(--colour-white);
+        @include reset-colours();
+      }
+      @media screen and (prefers-color-scheme: dark) {
+
+        @include invert-colours();
+      }
     }
 
     &[open] > div:has(details) {
@@ -355,22 +385,59 @@ iam-nav details {
       @media screen and (prefers-color-scheme: light) {
         background: #EEEEEE;
       }
+      a {
+        display: inline-block;
+        margin-right: 2rem;
 
+        &:first-child {
+          margin-right: 0;
+        }
+      }
+
+      a:has(iam-card) {
+        display: none;
+      }
       details {
         display: inline-block;
 
         summary {
           display: inline-block;
+          margin-left: 0!important;
+          margin-right: 2rem;
+        }
+        
+        &:first-child summary{
+          margin-left: 0;
         }
       }
     }
 
     &[open] > div:not(:has(details)) {
       background: var(--colour-canvas);
+
+      @media screen and (prefers-color-scheme: light) {
+        background: var(--colour-white);
+        --colour-canvas-2: white;
+      }
+
       padding-top: rem(40 + 88);
       padding-bottom: rem(64);
       columns: 3;
       column-gap: rem(110);
+
+      > a {
+        margin-right: 0!important;
+        display: block;
+        max-height: 6rem;
+
+        &.double-height {
+          min-height: 6rem;
+        }
+      }
+
+      a:has(iam-card){
+        display: inline-block;
+      }
 
       &:before {
         content: attr(data-title);
@@ -390,7 +457,6 @@ iam-nav details {
         background-image: linear-gradient(var(--gradient-direction), var(--colour-primary-theme) 0, transparent 100%) !important;
       }
       
-
       &:has(iam-card){
           
         column-gap: rem(16);
@@ -445,7 +511,7 @@ iam-nav details {
       }
     }
 
-    details > summary {
+    > details > summary {
 
       padding-right: 0;
       background: transparent;
@@ -469,7 +535,7 @@ iam-nav details {
 
     &.search-open {
 
-      > *:not([slot="logo"]) {
+      > *:not([slot="logo"]):not([slot="secondary"]) {
         display: none!important;
       }
     }
@@ -489,4 +555,50 @@ iam-nav details {
     }
   }
 }
+// #endregion
+
+// #region navbar additional menus 
+
+iam-nav .nav--menu {
+
+  outline: none!important;
+
+  hr {
+
+    width: 100% !important;
+    border-top: 2px solid var(--colour-border) !important;
+  }
+  a {
+
+    display: block !important;
+    line-height: 1.25rem !important;
+    padding: 1.5rem 0 !important;
+    margin: 0 0 rem(36) 0!important;
+    flex-shrink: 0;
+    font-size: 1rem !important;
+    font-weight: normal !important;
+
+    &:has( + a ) {
+      margin-bottom: 0!important;
+    }
+
+
+    &:after {
+
+      content: "";
+      display: block;
+      height: 2px;
+      width: 100% !important;
+      background-color: var(--colour-border) !important;
+      top: calc(100% - 2px) !important;
+    }
+  }
+
+  > button {
+    min-width: 100%;
+    text-align: center;
+  }
+
+}
+
 // #endregion

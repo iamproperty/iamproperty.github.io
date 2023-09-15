@@ -485,7 +485,7 @@
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/navbar-secondary.pdf" download>Download latest designs</a>
+        <a href="/pdfs/navbar-mega.pdf" download>Download latest designs</a>
       </div>
     </div>
 
