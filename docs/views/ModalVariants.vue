@@ -13,11 +13,11 @@
     </div>
     <div class="col-sm-6">
       <img :src="modalMulti" alt="" />
-      <span class="text-center d-block pt-1 pb-3 text-primary">Acknowledgement</span>
+      <span class="text-center d-block pt-1 pb-3 text-primary">Multi-step</span>
     </div>
     <div class="col-sm-6">
       <img :src="modalAcknowledgement" alt="" />
-      <span class="text-center d-block pt-1 pb-3 text-primary">Multi-step</span>
+      <span class="text-center d-block pt-1 pb-3 text-primary">Acknowledgement</span>
     </div>
   </div>
 
