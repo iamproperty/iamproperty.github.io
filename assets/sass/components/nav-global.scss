@@ -562,7 +562,19 @@ iam-nav details {
 iam-nav .nav--menu {
 
   outline: none!important;
-
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+   
+  &::-webkit-scrollbar-track {
+    border: 0!important;
+  }
+   
+  &::-webkit-scrollbar-thumb {
+    border: 0!important;
+  }
+  
   hr {
 
     width: 100% !important;
@@ -599,6 +611,9 @@ iam-nav .nav--menu {
     text-align: center;
   }
 
+  &.closed * {
+    display: none!important;
+  }
 }
 
 // #endregion

@@ -30,7 +30,7 @@ class iamNav extends HTMLElement {
       <button class="btn-menu">Menu<i class="fa-regular fa-bars"></i><i class="fa-regular fa-xmark-large"></i></button>
 
       <div class="menu__outer">
-        <div class="menu">
+        <div class="menu closed">
             
           <div class="menu__primary">
             <slot></slot>
@@ -63,7 +63,6 @@ class iamNav extends HTMLElement {
     const menuButton = this.shadowRoot.querySelector('.btn-menu');
     const menu = this.shadowRoot.querySelector('.menu');
     const iamNav = this;
-    const container = this.shadowRoot.querySelector('.container');
     const backdrop = this.shadowRoot.querySelector('.backdrop');
     const buttonsHolder = this.shadowRoot.querySelector('.buttons-holder');
 
@@ -84,25 +83,30 @@ class iamNav extends HTMLElement {
         const title = element.getAttribute('data-title');
         const iconClass = element.getAttribute('data-icon');
 
+        // Create the menu button that sits seperately to the menu
         const button = document.createElement('button');
         button.setAttribute('slot',title);
         button.classList.add('btn-menu');
         button.innerHTML = `<span class="btn btn-primary"><span>${title}</span><i class="${iconClass}"></i><i class="fa-regular fa-xmark-large"></i></span>`;
-
-        let mdButton = button.querySelector('.btn-primary');
-
         buttonsHolder.insertAdjacentElement('beforeend',button);
 
+        const mdButton = button.querySelector('.btn-primary');
+
+        // Make sure the menu is added to the right part of the component
         element.setAttribute('slot','menus');
 
-
+        // If open we need to make sure the main mobile menu is closed, the new button has the right state and the backdrop is shown
         if(element.classList.contains('open')){
           button.classList.add('selected');
           mdButton.classList.toggle('active');
           iamNav.classList.add('open');
           backdrop.classList.add('show');
         }
+        else {
+          element.classList.add('closed'); // closed class is added to prevent the elements being tabbed into, this causes visual issues
+        }
 
+        // Click event
         button.addEventListener('click', function(e){
       
           e.preventDefault();
@@ -116,28 +120,27 @@ class iamNav extends HTMLElement {
           if(openMenu)
             openMenu.removeAttribute('open')
 
-
-          // Close any open menus
+          // Close the main menu and fix states on the button, iamNav component and backdrop
           if(element.classList.contains('open')){
             
             menu.classList.remove('open');
             menuButton.classList.remove('selected');
+            setTimeout(function(){ menu.classList.add('closed') }, 1000); // Delay until its close so the animation is broken
             iamNav.classList.add('open');
             backdrop.classList.add('show');
-            element.setAttribute('tabindex',"1");
-            element.focus();
+            element.classList.remove('closed');
           }
           else{
-            
             iamNav.classList.remove('open');
             backdrop.classList.remove('show');
-            element.removeAttribute('tabindex');
-            element.blur();
+            setTimeout(function(){ element.classList.add('closed') }, 1000);
           }
-            
+
+          // Close any open menus
           iamNav.querySelectorAll('.nav--menu.open').forEach(function(openmenu){
-            if(openmenu != element)
+            if(openmenu != element) {
               openmenu.classList.remove('open');
+            }
           });
 
           iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu.selected').forEach(function(selectedButton){
@@ -169,20 +172,25 @@ class iamNav extends HTMLElement {
       menuButton.classList.toggle('selected');
       menu.classList.toggle('open');
 
-        iamNav.querySelectorAll('.nav--menu.open').forEach(function(element){
-          element.classList.remove('open');
-        });
-        iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu.selected').forEach(function(element){
-          element.classList.remove('selected');
-          let innerBtn = element.querySelector('.btn-primary');
-          innerBtn.classList.remove('active');
-        });
+      // Close any other menus
+      iamNav.querySelectorAll('.nav--menu.open').forEach(function(element){
+        element.classList.remove('open');
+        setTimeout(function(){ element.classList.add('closed') }, 1000);
+      });
+      iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu.selected').forEach(function(element){
+        element.classList.remove('selected');
+        let innerBtn = element.querySelector('.btn-primary');
+        innerBtn.classList.remove('active');
+      });
 
       if(menu.classList.contains('open')){
         iamNav.classList.add('open');
+        menu.classList.remove('closed');
       }
-      else
+      else {
         iamNav.classList.remove('open');
+        setTimeout(function(){ menu.classList.add('closed') }, 1000);
+      }
 
     }, false);
 
@@ -194,7 +202,7 @@ class iamNav extends HTMLElement {
       iamNav.classList.remove('open');
     });
 
-    // Close the menu on the click of the backdrop
+    // Close the menu on the click of the backdrop on desktop
     backdrop.addEventListener("click", (event) => {
 
       let openMenu = this.querySelector('details[open] summary');
@@ -230,9 +238,10 @@ class iamNav extends HTMLElement {
           else
             details.setAttribute('open','true');
 
-          // Close any menus
+          // Close any bespoke menus
           iamNav.querySelectorAll('.nav--menu.open').forEach(function(element){
             element.classList.remove('open');
+            setTimeout(function(){ menu.classList.add('closed') }, 1000);
           });
           iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu.selected').forEach(function(element){
             element.classList.remove('selected');
@@ -240,6 +249,7 @@ class iamNav extends HTMLElement {
             innerBtn.classList.remove('active');
           });
 
+          // Close any other dropdowns on the same level
           Array.from(wrapper.querySelectorAll(':scope > details')).forEach((detailsArrayElement, index) => {
             
             if(detailsArrayElement != details)
