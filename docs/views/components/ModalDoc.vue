@@ -119,7 +119,7 @@
       <i class="fa-light fa-circle"><i class="fa-regular fa-trash-can"></i></i>
       
       <span class="h3">Delete property file</span>
-      <p>Continually will permanently delete this property. Are you sure you’d like to continue?</p>
+      <p>Continually will permanently delete this property. Are <br class="d-none d-sm-block"/>you sure you’d like to continue?</p>
   
       <form>
         <button class="btn btn-secondary" formmethod="dialog">Cancel</button>

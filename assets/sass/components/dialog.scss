@@ -167,6 +167,7 @@ dialog[open] {
     &:before {
       top: 100%;
       height: var(--dialog-padding);
+      margin-bottom: -2rem;
     }
   }
 }
@@ -255,6 +256,15 @@ dialog::backdrop {
 
   button {
     margin-bottom: 0;
+  }
+
+  @include media-breakpoint-up(sm) {
+
+    button:has( + button:last-child),
+    button:last-child {
+      min-width: calc(50% - 1rem);
+      text-align: center;
+    }
   }
 }
 // #endregion
