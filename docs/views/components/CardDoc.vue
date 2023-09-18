@@ -76,7 +76,10 @@
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
-            <Card>Client onboarding <span>Action Client due diligence checks and view information</span></Card>
+            <Card>
+              Client onboarding 
+              <span>Action Client due diligence checks and view information</span>
+            </Card>
           </a>          
         </div>
 

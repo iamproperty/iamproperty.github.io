@@ -1,8 +1,42 @@
 <template>
   <div>
-    <Nav logo="sold" class="nav--marketplace" propertylink="/standalone/marketplace" movebutlerlink="/standalone/movebutler" iamsoldlink="/standalone/agent">
+    <nav>
+      <iam-nav id="menu" class="bg-primary" style="--max-width: 100rem;--container-padding: 0 1rem;">
+        
+        <a href="/" class="brand brand--sold" slot="logo">
+          <svg>
+            <title>iamSold</title>
+            <use xlink:href="/svg/logo.svg#logo-sold"></use>
+          </svg>
+        </a>
+
+        <a href="#menu" class="btn-menu" slot="btn">Menu</a>
+        
+        <ul>
+          <li>Hello <a href="/details">Emma Varah</a> (Level 1)</li>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/home" target="_blank">New support ticket <i class="fa-regular fa-arrow-up-right-from-square"></i></a></li>
+        </ul>
+
+        <ul slot="secondary">
+          <li><a href="/admin/properties.html">Properties</a></li>
+          <li><a href="/admin/auth/staff.html">Staff</a></li>
+          <li><a href="/admin/reports.html">Reports</a></li>
+          <li><a href="/admin/awards.html">iamvalued Awards</a></li>
+        </ul>
+
+        <form id="search" slot="actions">
+          <div>
+            <label for="search">Search</label>
+            <!--<button class="suffix"><i class="fa-regular fa-magnifying-glass"></i></button>-->
+            <input id="search" name="search" type="text" placeholder="Search by keyword, property, agent or ap ref" autocomplete="off" class="input--inline" />
+          </div>
+        </form>
+        <a href="https://iamsold.test/admin/logout.html" class="btn btn-primary" slot="actions">Logout</a>
       
-    </Nav>
+      </iam-nav>
+    </nav>
+
     <main class="main--marketplace">
 
       <form id="tableFilters" data-ajax="/data/compliance-dashboard.json" data-schema="data.buyerTasks">
@@ -178,6 +212,12 @@ import Card from '@/components/Card/Card.vue'
 import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue'
 import Filterlist from '@/components/Filterlist/Filterlist.vue'
 
+
+
+import iamNav from '../../../assets/ts/components/nav/nav.component'
+
+
+
 export default {
   components: {
     Nav,
@@ -200,7 +240,8 @@ export default {
 
     setTimeout(() => {
     
-
+      if (!window.customElements.get(`iam-nav`))
+        window.customElements.define(`iam-nav`, iamNav);
 
     }, "100");
 
