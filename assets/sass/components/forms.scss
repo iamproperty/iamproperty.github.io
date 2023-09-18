@@ -387,6 +387,7 @@ input:is([type="radio"],[type="checkbox"]) {
   height: 0;
   width: 0;
   margin: 0;
+  pointer-events: none;
 }
 
 :is(div,fieldset):has(> input:is([type="radio"],[type="checkbox"])) {
