@@ -13,7 +13,7 @@
       <p>The section menu can contain up to 10 navigational links and also has an area on the right in which card components can used as promotional links, these cards only display on desktop and can display up to two cards maximum stacked on top of each other on the right hand side of the section menu. </p>
     </div>
 
-    <div class="demo visualtest">
+    <div class="demo visualtest pe-none">
     
       <Nav data-css="/assets/css/components/nav.docs.css">
 
@@ -43,7 +43,7 @@
             <details>
               <summary>By job role</summary>
               <div>
-                <a href="/">Win more instructions1</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -56,7 +56,7 @@
             <details open>
               <summary>By objective</summary>
               <div>
-                <a href="/">Win more instructions2</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -69,7 +69,7 @@
             <details>
               <summary>By product</summary>
               <div>
-                <a href="/">Win more instructions3</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -104,7 +104,7 @@
             <details>
               <summary>By job role</summary>
               <div>
-                <a href="/">Win more instructions1</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -117,7 +117,7 @@
             <details>
               <summary>By objective</summary>
               <div>
-                <a href="/">Win more instructions2</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -130,7 +130,7 @@
             <details>
               <summary>By product</summary>
               <div>
-                <a href="/">Win more instructions3</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -165,7 +165,7 @@
             <details>
               <summary>By job role</summary>
               <div>
-                <a href="/">Win more instructions1</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -178,7 +178,7 @@
             <details>
               <summary>By objective</summary>
               <div>
-                <a href="/">Win more instructions2</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -191,7 +191,7 @@
             <details>
               <summary>By product</summary>
               <div>
-                <a href="/">Win more instructions3</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -222,7 +222,7 @@
     </div>
 
     
-    <div class="demo-xs visualtest">
+    <div class="demo-xs visualtest pe-none">
       
       <Nav class="" data-search="/search" data-prevent-search data-search-open data-css="/assets/css/components/nav.docs.css">
 
@@ -252,7 +252,7 @@
             <details>
               <summary>By job role</summary>
               <div>
-                <a href="/">Win more instructions1</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -265,7 +265,7 @@
             <details>
               <summary>By objective</summary>
               <div>
-                <a href="/">Win more instructions2</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -278,7 +278,7 @@
             <details>
               <summary>By product</summary>
               <div>
-                <a href="/">Win more instructions3</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -313,7 +313,7 @@
             <details>
               <summary>By job role</summary>
               <div>
-                <a href="/">Win more instructions1</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -326,7 +326,7 @@
             <details>
               <summary>By objective</summary>
               <div>
-                <a href="/">Win more instructions2</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -339,7 +339,7 @@
             <details>
               <summary>By product</summary>
               <div>
-                <a href="/">Win more instructions3</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -374,7 +374,7 @@
             <details>
               <summary>By job role</summary>
               <div>
-                <a href="/">Win more instructions1</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -387,7 +387,7 @@
             <details>
               <summary>By objective</summary>
               <div>
-                <a href="/">Win more instructions2</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>
@@ -400,7 +400,7 @@
             <details>
               <summary>By product</summary>
               <div>
-                <a href="/">Win more instructions3</a>
+                <a href="/">Win more instructions</a>
                 <a href="/">Secure sales pipeline</a>
                 <a href="/">Increase revenue</a>
                 <a href="/">Material information</a>

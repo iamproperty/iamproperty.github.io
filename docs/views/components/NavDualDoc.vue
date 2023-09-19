@@ -13,7 +13,7 @@
       <p>The primary list navigation items are dropdown which displays the mega menu, whilst the secondary list of items are standard navigation links. The primary list is appended with a button (usually primary) and can also include a compact button if needed. On desktop this is positioned at the end of the list to stand out from the rest of the list, on tablet and mobile it is housed within the collapsed list behind the menu icon. </p>
     </div>
 
-    <div class="demo visualtest">
+    <div class="demo visualtest pe-none">
     
       <Nav data-css="/assets/css/components/nav.docs.css">
 

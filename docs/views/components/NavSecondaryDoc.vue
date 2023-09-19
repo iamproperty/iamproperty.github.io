@@ -12,7 +12,7 @@
       <p>Our secondary navigational area can be used to house items of lesser importance to navigation of the site but offer a quick helpful support for example these areas could house items such as ‘Contact Us’ or within the iamproperty agent platform could it be used to house navigation for the other services a user has signed up for. This navbar area is completely optional, it can only be used as a supporting element to one of our navbars and it can be used on any of our navbars types. The navbar-secondary sits above the primary navbar on desktop, and is housed at the bottom of the expanded menu on tablet and mobile.</p>
     </div>
 
-    <div class="demo visualtest">
+    <div class="demo visualtest position-relative">
     <Nav data-css="/assets/css/components/nav.docs.css">
 
       <a href="/" class="brand brand--property" slot="logo">
@@ -39,7 +39,7 @@
       <span class="lead text-body pb-3 d-block">VARIATION (DEEP SLATE)</span>
     </div>
 
-    <div class="demo visualtest">
+    <div class="demo visualtest position-relative">
     <Nav class="bg-primary" data-css="/assets/css/components/nav.docs.css">
 
       <a href="/" class="brand brand--property" slot="logo">
