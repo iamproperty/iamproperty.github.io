@@ -1,6 +1,21 @@
+**Add the below to your initialise script**
+
+```
+import('../node_modules/@iamproperty/components/assets/js/components/nav/nav.component.min').then(module => { // Might need to update the path
+
+  if (!window.customElements.get(`iam-nav`))
+    window.customElements.define(`iam-nav`, module.default);
+
+}).catch((err) => {
+  console.log(err.message);
+});
+```
+
+**Add the below HTML code to where you want the component to live.**
+
 ```
 <nav>
-<Nav>
+<iam-nav>
   <a href="/" class="brand brand--property" slot="logo">
     <svg>
       <title>iamproperty</title>
@@ -14,7 +29,7 @@
   <a href="/">Lorem ipsum</a>
 
   <button class="btn btn-primary">Lorem ipsum</button>
-</Nav>
+</iam-nav>
 </nav>
 ```
 

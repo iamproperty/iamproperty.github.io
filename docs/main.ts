@@ -38,8 +38,13 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-
+  let navbar = document.querySelector('iam-nav');
+  if(navbar){
+    const closeRequest = new CustomEvent("request-close");
+    navbar.dispatchEvent(closeRequest);
+  }
   setTimeout(function(){
+
 
     document.querySelectorAll('pre code:not(.hljs)').forEach((el) => {
 

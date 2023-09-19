@@ -51,7 +51,6 @@ body {
   width: 100%;
   line-height: 1.2;
   min-height: 100%;
-
 }
 
 // #region scrollbars
@@ -142,7 +141,7 @@ details {
 
 
 // #region Undefined web components
-:is(*):not(:defined) {
+:is(*):not(:defined):not(iam-nav) {
   display: block;
   padding: rem(24);
   margin-bottom: rem(24);
@@ -178,8 +177,11 @@ main > :is(*):not(:defined) {
 
 main {
   position: relative;
+  
+  > *:first-child {
+    padding-top: 2rem;
+  }
 }
-
 
 .container.notification__holder {
 

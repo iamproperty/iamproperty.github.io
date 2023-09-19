@@ -1,42 +1,41 @@
 <template>
   <div>
-    <Nav logo="sold"  btnlink="/admin/logout" btntext="Logout" class="bg-primary nav--admin nav--inline-search">
-      <ul class="list-unstyled">
-        <li class=""><a href="/props" title="View your profile details">Hello <strong>Michelle Main</strong> (Level 1)</a></li>
-        <li class=""><a href="/props">Dashboard</a></li>
-        <li class=""><a href="https://iamproperty.atlassian.net/servicedesk/customer/portal/11" target="_blank">Support Ticket</a></li>
-      </ul>
-      <form>
-        <Input id="search" type="search" v-model="searchTermGen" placeholder="Keyword, property pr ap ref" label="Search" class="form-control-sm" list="search-terms" @keyupEvent="inputKeyup(...arguments)"></Input>
-        <button class="btn btn-search">
-          <svg class="icon" viewBox="0 0 32 32">
-            <title>Search</title>
-            <ellipse cx="14.92" cy="13.81" rx="11.92" ry="11.81" class="icon__outline" />
-            <line x1="22.68" y1="22.75" x2="30" y2="30" class="icon__outline" />
+    <nav>
+      <iam-nav id="menu" class="bg-primary" style="--max-width: 100rem;--container-padding: 0 1rem;">
+        
+        <a href="/" class="brand brand--sold" slot="logo">
+          <svg>
+            <title>iamSold</title>
+            <use xlink:href="/svg/logo.svg#logo-sold"></use>
           </svg>
-        </button>
-      </form>
+        </a>
 
-      <template v-slot:secondary>
-        <ul class="list-unstyled">
-          <li class=""><a href="/props">Properties</a></li>
-          <li class=""><a href="/props">Agents</a></li>
-          <li class=""><a href="/props">Customer Profiles</a></li>
-          <li class=""><a href="/props">Agents League</a></li>
-          <li class=""><a href="/props">Staff</a></li>
-          <li class=""><a href="/props">Reports</a></li>
-          <li class=""><a href="/props">Documents</a></li>
-          <li class=""><a href="/props">Archive</a></li>
-          <li class=""><a href="/props">Regions</a></li>
-          <li class=""><a href="/props">Investigation</a></li>
-          <li class=""><a href="/props">Websites</a></li>
-          <li class=""><a href="/props">Marketing Library</a></li>
-          <li class=""><a href="/props">API</a></li>
-          <li class=""><a href="/props">Emails</a></li>
-          <li class=""><a href="/props">iamvalued Awards</a></li>
+        <a href="#menu" class="btn-menu" slot="btn">Menu</a>
+        
+        <ul>
+          <li>Hello <a href="/details">Emma Varah</a> (Level 1)</li>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/home" target="_blank">New support ticket <i class="fa-regular fa-arrow-up-right-from-square"></i></a></li>
         </ul>
-      </template>
-    </Nav>
+
+        <ul slot="secondary">
+          <li><a href="/admin/properties.html">Properties</a></li>
+          <li><a href="/admin/auth/staff.html">Staff</a></li>
+          <li><a href="/admin/reports.html">Reports</a></li>
+          <li><a href="/admin/awards.html">iamvalued Awards</a></li>
+        </ul>
+
+        <form id="search" slot="actions">
+          <div>
+            <label for="search">Search</label>
+            <!--<button class="suffix"><i class="fa-regular fa-magnifying-glass"></i></button>-->
+            <input id="search" name="search" type="text" placeholder="Search by keyword, property, agent or ap ref" autocomplete="off" class="input--inline" />
+          </div>
+        </form>
+        <a href="https://iamsold.test/admin/logout.html" class="btn btn-primary" slot="actions">Logout</a>
+      
+      </iam-nav>
+    </nav>
     <datalist id="search-terms">
       <option v-for="(value,index) in searchTerms" :key="index" :data-link="value.url">{{value.display ? value.display : value.value}}</option>
     </datalist>
@@ -146,6 +145,8 @@ import Input from '@/components/Input/Input.vue'
 import Carousel from '@/components/Carousel/Carousel.vue'
 import Table from '@/components/Table/Table.vue'
 
+import iamNav from '../../../assets/ts/components/nav/nav.component'
+
 export default {
   components: {
     PropertySearchbar,
@@ -238,6 +239,16 @@ export default {
         }
       ];
     }
+  },
+  mounted(){
+
+    setTimeout(() => {
+    
+      if (!window.customElements.get(`iam-nav`))
+        window.customElements.define(`iam-nav`, iamNav);
+
+    }, "100");
+
   }
 }
 </script>

@@ -370,11 +370,43 @@ const routes = [
       },
       {
         path: 'nav',
-        name: 'Nav (Beta)',
+        name: 'Navbar',
         meta: {
-          title: 'Nav | Components | iamkey'
+          title: 'Navbar | Components | iamkey'
         },
         component: () => import('./views/components/NavDoc.vue')
+      },
+      {
+        path: 'nav-secondary',
+        name: 'Navbar-secondary',
+        meta: {
+          title: 'Navbar-secondary | Components | iamkey'
+        },
+        component: () => import('./views/components/NavSecondaryDoc.vue')
+      },
+      {
+        path: 'nav-mega',
+        name: 'Navbar-mega menu',
+        meta: {
+          title: 'Navbar-mega menu | Components | iamkey'
+        },
+        component: () => import('./views/components/NavMegaDoc.vue')
+      },
+      {
+        path: 'nav-dual',
+        name: 'Navbar-dual',
+        meta: {
+          title: 'Navbar-dual menu | Components | iamkey'
+        },
+        component: () => import('./views/components/NavDualDoc.vue')
+      },
+      {
+        path: 'nav-menu',
+        name: 'Navbar-menu',
+        meta: {
+          title: 'Navbar-menu menu | Components | iamkey'
+        },
+        component: () => import('./views/components/NavMenuDoc.vue')
       },
       {
         path: 'notefeed',
@@ -624,6 +656,38 @@ const routes = [
           title: 'Navbar example| iamkey'
         },
         component: () => import('./views/standalone/Navbar.vue')
+      },
+      {
+        path: 'navbar-secondary',
+        name: "navbar Secondary example",
+        meta: {
+          title: 'Navbar Secondary example| iamkey'
+        },
+        component: () => import('./views/standalone/NavbarSecondary.vue')
+      },
+      {
+        path: 'navbar-mega',
+        name: "navbar Megamenu example",
+        meta: {
+          title: 'Navbar Megamenu example| iamkey'
+        },
+        component: () => import('./views/standalone/NavbarMega.vue')
+      },
+      {
+        path: 'navbar-dual',
+        name: "navbar Dual example",
+        meta: {
+          title: 'Navbar Dual example| iamkey'
+        },
+        component: () => import('./views/standalone/NavbarDual.vue')
+      },
+      {
+        path: 'navbar-menu',
+        name: "navbar Menu example",
+        meta: {
+          title: 'Navbar Menu example| iamkey'
+        },
+        component: () => import('./views/standalone/NavbarMenu.vue')
       },
       {
         path: 'iamsold-homepage',
