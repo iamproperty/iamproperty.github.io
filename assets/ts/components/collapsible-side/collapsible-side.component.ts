@@ -14,7 +14,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/collapsible-side-menu.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/collapsible-side.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -69,16 +69,26 @@ class iamCollapsibleSideMenu extends HTMLElement {
     // Open the menu
     button.addEventListener('click', (event) => {
 
+
       if(!sideMenu.classList.contains('open')){
 
         sideMenuContent.classList.remove('closed');
 
-        setTimeout(function(){ sideMenu.classList.add('open'); }, 100);
+
+        setTimeout(function(){ 
+          sideMenu.classList.add('open'); 
+        }, 100);
+
+
       }
       else {
-        
+          
         sideMenu.classList.remove('open');
         setTimeout(function(){ sideMenuContent.classList.add('closed') }, 1000); // Delay until its close so the animation is broken
+      
+        // While the menu is closing dont allow the hover to re-open it until its fully closed.
+        sideMenu.classList.add('pe-none');
+        setTimeout(function(){ sideMenu.classList.remove('pe-none')}, 1000);
       }
     });
 

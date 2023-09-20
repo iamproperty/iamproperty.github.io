@@ -1,5 +1,5 @@
 @use "../_func" as *;
-
+// Host
 :host {
   --colour-border: #e9e9e9;
   --side-link-hover: var(--colour-canvas-2);
@@ -30,8 +30,6 @@
     padding-left: 5.25rem!important;
     overflow: hidden;
   }  
-
-
 }
 
 // #region Side menu
@@ -80,10 +78,14 @@
       background: var(--colour-canvas);
     }
 
-    &.hover {
+    &:not(.open).hover {
       width: rem(344);
+
+      .btn[class*=fa-]:before {
+        content: "\f023" !important;
+      }
     }
-  } 
+  }
 
   .btn {
     position: absolute;
@@ -139,7 +141,6 @@
     max-height: 100%;
 
     &.closed {
-      display: none;
     }
 
     .h3 {
@@ -159,6 +160,11 @@
       width: rem(304);
 
     }  
+  }
+
+  &:not(.hover):not(.open) .side-menu-content.closed {
+    
+      display: none;
   }
 
   &.open .side-menu-content {

@@ -76,7 +76,7 @@ const rollupConfig = [
   }
 ];
 
-const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav'];
+const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side'];
 
 components.forEach((component) => {
 
@@ -87,6 +87,7 @@ components.forEach((component) => {
       
       css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.css`), 'utf8');
       css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      css = css.replace("\uFEFF","");
     }
   } catch (err) {
     console.error(err);
