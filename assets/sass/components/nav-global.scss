@@ -4,6 +4,17 @@
 body:has(iam-nav.open:not(.nav--sticky):not(.nav--xs-sticky)) {
   max-height: 100vh;
   overflow: hidden;
+
+}
+
+body {
+  
+  --nav-height: #{rem(96)};
+
+  &:has(iam-nav a[slot="secondary"]){
+    
+    --nav-height: #{rem(96 + 40)};
+  }
 }
 
 // #region Create the correct padding top of the page

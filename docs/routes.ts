@@ -214,10 +214,19 @@ const routes = [
         component: () => import('./views/components/ChartsDoc.vue')
       },
       {
+        path: 'collapsible-side-menu',
+        name: 'Collapsible Side Menu',
+        meta: {
+          title: 'Collapsible Side Menu | Components | iamkey'
+        },
+        component: () => import('./views/components/CollapsibleSideMenu.vue'),
+        searchterms: 'nav,hidden,expand,menu,admin,settings,sub'
+      },
+      {
         path: 'container',
         name: 'Container (Beta)',
         meta: {
-          title: 'Container | Elements | iamkey'
+          title: 'Container | Components | iamkey'
         },
         component: () => import('./views/components/Container.vue'),
         searchterms: 'fundamental, backgrounds, curve'
@@ -773,6 +782,14 @@ const routes = [
         },
         component: () => import('./views/standalone/ComplianceDashboard.vue'),
         searchterms: 'iamsold, iam sold'
+      },
+      {
+        path: 'collapsible-side-menu',
+        name: "Collapsible Side Menu example",
+        meta: {
+          title: 'Collapsible Side Menu example| iamkey'
+        },
+        component: () => import('./views/standalone/CollapsibleSideMenu.vue')
       }
     ]
   },

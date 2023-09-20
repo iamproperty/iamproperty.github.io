@@ -4,10 +4,11 @@
       <h1>Changelog</h1>
 
 
-      <h2>V3.9.0-beta-1</h2>
+      <h2>V4.0.0</h2>
       <ul>
         <li>Action bar component</li>
         <li>Updated Navbar</li>
+        <li>Collapsible side menu</li>
       </ul>
 
       <h3>Breaking changes</h3>
