@@ -76,7 +76,7 @@ tr td[colspan="100%"]:first-child:last-child span {
 @container (width >= 60em) {
   thead {
 
-    th {
+    th:not(:empty) {
       white-space: nowrap;
       min-width: #{$td-mw};
     }
@@ -136,9 +136,9 @@ table.border-0 {
     margin-bottom: 0;
 
     td:has(input[type="checkbox"]) {
-      width: rem(30);
-      min-width: rem(30);
-      max-width: rem(30);
+      width: rem(40);
+      min-width: rem(40);
+      max-width: rem(40);
     }
   }
 
@@ -643,19 +643,28 @@ table {
 
 iam-table {
 
-  tr:has([type="checkbox"]){
+  td:has([type="checkbox"]){
+    position: static!important;
+    width: rem(40);
+  }
+
+  input:is([type="radio"],[type="checkbox"]) + label {
+    padding-left: 0!important;
+    margin: 0!important;
+  
+    &:before,
+    &:after {
+      top: 0!important;
+    }
+  }
+
+  table:has([type="checkbox"]:checked) tr:has([type="checkbox"]){
     
     cursor: pointer;
 
-    //position: relative;
-
     &:is(:hover, :focus) {
       
-    background: var(--hover-background);
-    }
-
-    td:has([type="checkbox"]){
-      position: static!important;
+      background: var(--hover-background);
     }
 
     td {
@@ -674,15 +683,6 @@ iam-table {
       margin-top: -0.75rem;
     }
 
-    [type="checkbox"] + label {
-      padding-left: 0;
-      margin: 0!important;
-    
-      &:before,
-      &:after {
-        top: 0;
-      }
-    }
   }
 }
 

@@ -37,6 +37,8 @@ class iamCard extends HTMLElement {
       ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
         <slot></slot>
       </div>
+        
+      <slot name="checkbox"></slot>
       ${this.hasAttribute('data-cta') ? `<div class="card__footer"><span class="link">${this.getAttribute('data-cta')}</span></div>` : ''}
     </div>
     `;

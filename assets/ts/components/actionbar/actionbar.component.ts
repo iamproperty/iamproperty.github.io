@@ -132,6 +132,43 @@ class iamActionbar extends HTMLElement {
         });
       }
     }
+
+    // Wtach div for the select inputs
+    if(this.hasAttribute('data-select-watch')){
+
+      const element = document.getElementById(this.getAttribute('data-select-watch'));
+      element.setAttribute('data-select-container','true');
+      Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+        input.parentElement.setAttribute('slot','checkbox');
+      });
+      element.addEventListener('change',(event) => {
+
+        if (event && event.target instanceof HTMLElement && event.target.closest('[type="checkbox"]')){
+
+          let count = element.querySelectorAll('input[type="checkbox"]').length;
+          let countChecked = element.querySelectorAll('input[type="checkbox"]:checked').length;
+          that.setAttribute('data-selected', count == countChecked ? "all" : countChecked);
+
+          let input = event.target.closest('[type="checkbox"]');
+
+          if(countChecked){
+            Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+            
+              if(input.closest('iam-card'))
+                input.closest('iam-card').setAttribute('data-selected','true');
+            });
+          }
+          else {
+            Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+
+              if(input.closest('iam-card'))
+                input.closest('iam-card').removeAttribute('data-selected');
+            });
+          }
+          
+        };
+      });
+    }
     // #endregion
 
     // #region switchviews
@@ -385,8 +422,36 @@ class iamActionbar extends HTMLElement {
         
         if(selectAll)
           setSelectAllInput(selectAll, newVal);
-          const event = new CustomEvent("selected", { detail: { selected: newVal } });
-          this.dispatchEvent(event);
+
+        const event = new CustomEvent("selected", { detail: { selected: newVal } });
+        this.dispatchEvent(event);
+
+        if(newVal == "all" && this.hasAttribute('data-select-watch')){
+
+          const element = document.getElementById(this.getAttribute('data-select-watch'));
+
+          Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+            
+            input.checked = true;
+
+            if(input.closest('iam-card'))
+              input.closest('iam-card').setAttribute('data-selected','true');
+          });
+        }
+
+        if(newVal == "0" && this.hasAttribute('data-select-watch')){
+
+          const element = document.getElementById(this.getAttribute('data-select-watch'));
+
+          Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+            
+            input.checked = false;
+
+            if(input.closest('iam-card'))
+              input.closest('iam-card').removeAttribute('data-selected','true');
+          });
+        }
+
         break;
       }
     }
