@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import iamCollapsibleSideMenu from '../../../assets/js/components/collapsible-side/collapsible-side.component.js'
+import iamCollapsibleSideMenu from '../../../assets/js/components/collapsible-side/collapsible-side.component.min.js'
 
 if (!window.customElements.get('iam-collapsible-side'))
   window.customElements.define('iam-collapsible-side', iamCollapsibleSideMenu);
