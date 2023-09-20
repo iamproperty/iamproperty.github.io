@@ -9,35 +9,27 @@ const version = pkg.version;
 
   <div id="visualtest"></div>
 
-  <Nav logo="key" logotext="Design system<br/>&amp; framework">
-    <ul class="list-unstyled">
-      <li><router-link to="/principles">Principles</router-link></li>
-      <li><router-link to="/foundations">Foundations</router-link></li>
-      <li><router-link to="/components">Components</router-link></li>
-      <li><router-link to="/templates">Templates</router-link></li>
-      <li><router-link to="/best-practice">Best practice</router-link></li>
-    </ul>
+  <nav>
+  <Nav logo="key" logotext="Design system<br/>&amp; framework" data-search="/search" data-list="searchterms">
 
-    <div class="dialog__wrapper dialog__wrapper--right">
-        <button class="btn btn-primary colour-primary btn-compact fa-search me-0 mb-0">Open Popover</button>
-        <dialog id="search-dialog">
-          <form action="/search" class="row">
-            <div class="col mb-0">
-              <label for="search" class="visually-hidden">Search</label>
-              <input type="search" class="" id="search" name="search" required="" autocomplete="off" list="searchterms" @keydown="removelist" @keyup="addlist" />
-            </div>
-            <div class="col mw-fit-content">
-            <button class="btn btn-primary colour-primary mb-0 me-0">Search</button>
-            </div>
+    <a href="/" class="brand brand--key" slot="logo">
 
-  <datalist data-id="searchterms" ref="list">
-    <option v-for="item in refinedResults" :value="item"></option>
-  </datalist>
+      <svg><title>iam key</title><use xlink:href="/svg/logo.svg#logo-key"></use></svg>
+      <span>Design system<br>&amp; framework</span>
+    </a>
 
-          </form>
-        </dialog>
-      </div>
+    <router-link to="/principles">Principles</router-link>
+    <router-link to="/foundations">Foundations</router-link>
+    <router-link to="/components">Components</router-link>
+    <router-link to="/templates">Templates</router-link>
+    <router-link to="/best-practice">Best practice</router-link>
+
+    <datalist id="searchterms" ref="list">
+      <option v-for="item in refinedResults" :value="item"></option>
+    </datalist>
+
   </Nav>
+  </nav>
 
   <router-view></router-view>
 
@@ -70,14 +62,33 @@ const version = pkg.version;
   #showMenu:checked ~ .nav__inner {
     display: block;
   }
+
 }
 
 mark {
   padding-inline: 0;
 }
 
-.nav .list-unstyled li a.router-link-active:not(.text-decoration-none):not(.btn):before {
+a.router-link-active:not(.text-decoration-none):not(.btn):before {
   width: 100%;
+}
+
+
+//@media screen and (max-width: 62em) {
+  iam-nav > a.router-link-active:not([slot=logo]){
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--colour-info) !important;
+  }
+//}
+
+@include media-breakpoint-up(md) {
+
+  #search {
+    
+    border-radius: 0.5rem!important;
+  }
 }
 
 .nav {
@@ -88,23 +99,6 @@ mark {
   min-height: unset;
 }
 
-@media screen and (max-width: 62em) {
-
-  .nav .dialog__wrapper {
-    padding-top: 2rem;
-    width: 100%;
-  }
-  .nav .dialog__wrapper > .btn {
-    display: none;
-  }
-  .nav .dialog__wrapper dialog {
-    display: contents;
-  }
-}
-
-#search-dialog {
-  min-width: 30rem;
-}
 
 footer .router-link-active {
   text-decoration: none;
@@ -130,6 +124,9 @@ footer .router-link-active {
     display: contents;
   }
 }
+
+
+
 </style>
 
 
@@ -194,20 +191,7 @@ export default {
     Card
   },
   methods: {
-    removelist: function(e){
 
-      let datalist = this.$refs.list;
-
-      if (e.target.value.length < 3) 
-        datalist.setAttribute("id", "");
-    },
-    addlist: function(e){
-
-      let datalist = this.$refs.list;
-
-      if (e.target.value.length >= 2) 
-        datalist.setAttribute("id", "searchterms");
-    }
   },
   mounted () {
     var urlParams = new URLSearchParams(window.location.search);

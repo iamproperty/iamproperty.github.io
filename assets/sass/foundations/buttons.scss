@@ -4,6 +4,9 @@
 .btn {
 
   --btn-margin: #{rem(16)};
+  --btn-padding-block: #{rem(12)};
+  --btn-padding-inline: #{rem(40)};
+  --btn-border-width: 2px;
 
   @include media-breakpoint-up(sm) { 
 
@@ -29,12 +32,12 @@
   user-select: none;
 
   background: var(--colour-btn-bg);
-  border: 2px solid var(--colour-btn-border);
+  border: var(--btn-border-width) solid var(--colour-btn-border);
   color: var(--colour-btn);
 
   font-size: rem(18);
   line-height: rem(24);
-  padding: calc(rem(12) - 2px) calc(rem(40) - 2px);
+  padding: calc(var(--btn-padding-block) - var(--btn-border-width)) calc(var(--btn-padding-inline) - var(--btn-border-width));
   border-radius: rem(24);
   margin-bottom: var(--btn-margin);
 
@@ -92,13 +95,18 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
 // #region Action button
 .btn-action {
+
+  --btn-border-width: 1px;
+  --btn-padding-block: #{rem(6)};
+  --btn-padding-inline: #{rem(6)};
+
   background-color: var(--colour-canvas-2);
-  border: 1px solid var(--colour-muted);
+  border: var(--btn-border-width) solid var(--colour-muted);
   border-radius: rem(4)!important;
   font-weight: 400!important;
   font-size: 1rem;
   line-height: rem(20);
-  padding: rem(6);
+  
   color: var(--colour-heading);
 
   &.btn[class*=fa-]:before {
@@ -128,14 +136,16 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
     font-family: "Font Awesome 6 Pro";
     margin-right: 1rem;
+    line-height: 1em;
   }
 
-  [class*="fa-"]{
+  i[class*="fa-"]{
     
     font-family: "Font Awesome 6 Pro";
     margin-right: 1rem;
-
+    line-height: 1em;
     font-style: inherit;
+    
     &:not(:first-child){
       margin-left: 1rem;
       margin-right: 0;
@@ -178,41 +188,37 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 // #region button small and tag
 .btn.btn-sm {
 
-  padding: em(8) em(32);
+  --btn-padding-block: #{rem(8)};
+  --btn-padding-inline: #{rem(32)};
 }
 // #endregion
 
 // #region btn compact
 .btn-compact {
-  padding: calc(rem(12) - 2px)!important;
-  margin-bottom: rem(8)!important;
-  margin-right: rem(8)!important;
 
+  --compact-size: #{rem(48)};
+
+  padding: 0!important;
+  margin-bottom: rem(8)!important;
+  
+  &:not(:last-child){
+    margin-right: rem(8);
+  }
   text-align: center;
-  width: calc(rem(48) - 4px);
-  min-width: calc(rem(48) - 4px);
-  max-width: calc(rem(48) - 4px);
-  height: calc(rem(48) - 4px)!important;
-  text-indent: -300px;
+
+  width: calc(var(--compact-size));
+  min-width: calc(var(--compact-size));
+  max-width: calc(var(--compact-size));
+  height: calc(var(--compact-size))!important;
+  min-height: calc(var(--compact-size))!important;
+  max-height: calc(var(--compact-size))!important;
+
+  line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width))!important;
+
+  text-indent: -500px;
   overflow: hidden;
   position: relative;
   font-size: rem(20);
-
-  &.btn-sm {
-
-    font-size: 1rem; 
-    padding: rem(6)!important;
-    height: auto!important;
-    line-height: rem(20);
-    height: rem(20 + 6 + 6);
-    width: rem(20 + 6 + 6);
-    min-width: rem(20 + 6 + 6);
-
-    &:before {
-      line-height: rem(20 + 6 + 6);
-    }
-  }
-
 
   &:before {
     position: absolute;
@@ -221,8 +227,27 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     width: 100%;
     height: 100%;
     text-indent: 0;
-    line-height: calc(3rem - 6px);
+    line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width))!important;
     font-weight: 900;
+  }
+
+  &.btn-sm {
+
+    --compact-size: #{rem(40)};
+
+    font-size: 1rem; 
+    padding: 0!important;
+  }
+
+  &.btn-action {
+      
+    --compact-size: #{rem(32)};
+    font-size: 1rem; 
+
+    &:before {
+      font-size: 1em;
+      font-weight: 400;
+    }
   }
 
   &.btn-secondary {

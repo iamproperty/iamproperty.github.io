@@ -18,6 +18,31 @@
   }
 }
 
+@mixin container-up($name) {
+  
+  @if $name == 'sm' {
+    
+    @container (width > 23.4375em) {
+      @content;
+    }
+  }
+  @else if $name == 'md' {
+    
+    @container (width > 48em) {
+      @content;
+    }
+  }
+  @else if $name =='xs' {
+    @content;
+  } 
+  @else {
+    @if $mobileOnly != "true" {
+    @content;
+    }
+  }
+}
+
+
 // Example: @include prefix(transition, transform 1.5s, webkit ms o);
 @mixin prefix($property, $value, $prefixes: (webkit ms o))
 {

@@ -20,6 +20,9 @@ const extendDialogs = (body) => {
   // Dialogs/modals
   body.addEventListener('click', (event) => {
 
+    if(event.target.tagName == 'IAM-ACTIONBAR')
+      return false;
+
     // Modal
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-modal]')){
 
@@ -105,6 +108,9 @@ const extendDialogs = (body) => {
 
     // Popover
     if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')){
+
+      
+    event.stopPropagation();
 
       let btn = event.target.closest('.dialog__wrapper > button');
       let parent = event.target.closest('.dialog__wrapper > button').parentNode;

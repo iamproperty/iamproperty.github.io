@@ -1,11 +1,24 @@
 <template>
   <div>
-    <Nav logo="sold" btnlink="/account" btntext="Login / register" search="true">
-      <ul class="list-unstyled">
-        <li>
-          <details class="nav__mega-menu">
-            <summary><span class="link">Propery Auctions Explained</span></summary>
-            <div class="inner">
+
+    <nav>
+      <iam-nav id="menu" class="secondary-top bg-white">
+        
+        <a href="/" class="brand brand--sold" slot="logo">
+          <svg>
+            <title>iamSold</title>
+            <use xlink:href="/svg/logo.svg#logo-sold"></use>
+          </svg>
+        </a>
+
+        <a href="#menu" class="btn-menu" slot="btn">Menu</a>
+        
+        <ul>
+          <li><a href="https://www.ias.testing.iamproperty.group/available-properties/">Property search</a></li>
+          <li>
+            <span >Propery Auctions Explained</span>
+            <div class="sub-nav sub-nav--mega">
+
               <div class="container">
                 
                 <div class="bg-secondary col-md-8">
@@ -21,39 +34,34 @@
                   promotional content
                 </div>
               </div>
-            </div>
-          </details>
-        </li>
-        <li class=""><a href="/props">Buying at Auction</a></li>
-        <li class=""><a href="/props">Selling at Auction</a></li>
-      </ul>
-      <template v-slot:secondary>
-        <ul class="list-unstyled">
-          <li class=""><a href="/props">Stories</a></li>
-          <li class=""><a href="/props">Insight</a></li>
-          <li class=""><a href="/props">About us</a></li>
-          <li class=""><a href="/props">Careers</a></li>
-          <li class=""><a href="/props">Contact us</a></li>
-          <li class=""><a href="tel:03456460302"> 0345 646 0302</a></li>
-        </ul>
-      </template>
-      <template v-slot:search>
-        <form class="pt-4 row">
-          <div class="col-12 col-md-7">
 
-          <Input id="search" class="form-control-inline" type="search" placeholder="Keyword, property pr ap ref" label="Search"></Input>
-          
-          </div>
-          <div class="col col-md-4">
-            <button class="btn btn-search">Search</button>
-          </div>
-        </form>
-        <span class="h2 mt-3 mb-0">Popular Searches:</span>
-        <ul class="list-unstyled">
-          <li><a href="/buying">Buying houses</a></li>
+            </div>
+          </li>
+          <li><a href="/props">Buying at Auction</a></li>
+          <li><a href="/props">Selling at Auction</a></li>
         </ul>
-      </template>
-    </Nav>
+
+        <ul slot="secondary" class="text-right">
+
+          <li><a href="https://www.ias.testing.iamproperty.group/resources/" target="_self">Resources</a></li>
+          <li><a href="https://www.ias.testing.iamproperty.group/about-us/" target="_self">About us</a></li>
+          <li><a href="https://www.ias.testing.iamproperty.group/about-us/contact-us/" target="_self">Contact us</a></li>
+          <li><a href="tel:03456460302">0345 646 0302</a></li>
+          <li><a href="https://iamsold.test/admin/logout.html"><i class="fa-light fa-search"></i> Search</a></li>
+        </ul>
+
+        
+        
+        <a href="https://iamsold.test/admin/logout.html" class="btn btn-primary" slot="actions">Account</a>
+      
+      </iam-nav>
+    </nav>
+
+
+
+
+
+
     <main>
       <div class="container bg-primary prevent-invert">
         <div class="invert-colours text-center">
@@ -85,11 +93,25 @@ import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.
 import Nav from '@/components/Nav/Nav.vue'
 import Input from '@/components/Input/Input.vue'
 
+import iamNav from '../../../assets/ts/components/nav/nav.component'
+
+
+
 export default {
   components: {
     PropertySearchbar,
     Nav,
     Input
   },
+  mounted(){
+
+    setTimeout(() => {
+    
+      if (!window.customElements.get(`iam-nav`))
+        window.customElements.define(`iam-nav`, iamNav);
+
+    }, "100");
+
+  }
 }
 </script>

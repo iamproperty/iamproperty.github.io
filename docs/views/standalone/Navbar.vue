@@ -1,34 +1,24 @@
 <template>
   <div>
-    <Nav btnlink="/account" btntext="Account">
-      <ul class="list-unstyled">
-        <li>
-          <details>
-            <summary><span class="link">Seaction 1</span></summary>
-            <div class="inner">
-              <ul class="list-unstyled">
-              <li><a href="/">Sub Link 1 but with a long title</a></li>
-              <li><a href="/">Sub Link 2</a></li>
-              <li><a href="/">Sub Link 3</a></li>
-            </ul>
-            </div>
-          </details>
-        </li>
-        <li>
-          <details>
-            <summary><span class="link">Seaction 2</span></summary>
-            <div class="inner">
-              <ul class="list-unstyled">
-              <li><a href="/">Sub Link 1</a></li>
-              <li><a href="/">Sub Link 2</a></li>
-              <li><a href="/">Sub Link 3</a></li>
-            </ul>
-            </div>
-          </details>
-        </li>
-        <li><a href="/">Link 3</a></li>
-      </ul>
+    <nav>
+    <Nav class="nav--sticky">
+
+      <a href="/" class="brand brand--property" slot="logo">
+        <svg>
+          <title>iamproperty</title>
+          <use xlink:href="/svg/logo.svg#logo-property"></use>
+        </svg>
+      </a>
+
+      <a href="/" class="selected">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
+      <a href="/">Lorem ipsum</a>
+
+      <button class="btn btn-primary">Lorem ipsum</button>
+      
     </Nav>
+    </nav>
     <main>
       <div class="container pt-4">
         <h1>Heading 1</h1>

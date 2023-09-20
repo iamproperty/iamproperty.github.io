@@ -3,13 +3,25 @@
     <div class="container">
       <h1>Changelog</h1>
 
+
+      <h2>V3.9.0-beta-1</h2>
+      <ul>
+        <li>Action bar component</li>
+        <li>Updated Navbar</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>To use the old navbar CSS or SCSS files you will need to update the filename to nav.old.scss or nav.old.css.</li>
+      </ul>
+
+
       <h2>V3.8.0</h2>
       <ul>
         <li>New action button variant</li>
         <li>Checkbox documentation</li>
         <li>Popover lists variants</li>
       </ul>
-
 
       <h2>V3.7.9</h2>
       <ul>
