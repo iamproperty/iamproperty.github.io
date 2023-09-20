@@ -28,7 +28,7 @@ export { default as Filterlist } from './components/Filterlist/Filterlist.vue'
 
 export { default as Notification } from './components/Notification/Notification.vue'
 
-export { default as CollapsibleSideMenu } from './components/Actionbar/Actionbar.vue'
+export { default as Actionbar } from './components/Actionbar/Actionbar.vue'
 export { default as Pagination } from './components/Pagination/Pagination.vue'
 
 
