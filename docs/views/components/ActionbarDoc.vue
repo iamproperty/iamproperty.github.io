@@ -512,7 +512,6 @@
     </div>
 
 
-    <!-- Waiting for completion of FEG-240 
     <div class="container">
       <h3>Mobile behaviour</h3>
       <p>On mobile devices, the action bar collapses to save screen space, condensed into a few key buttons or icons or with an overflow menu with listed actions. To accommodate the mobile table rows or list elements, it becomes sticky and follows the user down the page to ensure action options are always available to the user.</p>
@@ -531,7 +530,6 @@
       </div>
 
     </div>
-    -->
 
     <div class="container">
       <h3>Overflow</h3>

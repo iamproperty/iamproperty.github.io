@@ -65,6 +65,9 @@ class iamTable extends HTMLElement {
     classList = classList.replace('table--loading','');
     this.shadowRoot.querySelector('.table__wrapper').className += ` ${classList}`;
 
+    // set actionbar class if needed
+    this.shadowRoot.querySelector('.table__wrapper').classList.add('has-actionbar');
+
     this.table = this.querySelector('table');
     this.savedTableBody = this.table.querySelector('tbody').cloneNode(true);
     this.pagination = this.shadowRoot.querySelector('.table__pagination');
