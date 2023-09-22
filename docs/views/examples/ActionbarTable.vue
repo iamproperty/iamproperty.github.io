@@ -11,16 +11,16 @@
             <div class="dialog__wrapper">
               <button class="btn btn-action mb-0 me-0">Quick filter</button>
               <dialog class="dialog--list">
-                <div class="mb-0">
+                <div class="pb-0 mb-0">
                   <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest">
                   <label for="follow-up-oldest" class="radio--tick">Follow up date (Oldest to newest)</label>
-                  <hr>
+
                   <input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest">
                   <label for="follow-up-newest" class="radio--tick">Follow up date (Newest to oldest)</label>
-                  <hr>
+
                   <input type="radio" name="sort" data-sort="" id="date-instructed-oldest" value="date-instructed-oldest" checked="" autofocus="true">
                   <label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label>
-                  <hr>
+
                   <input type="radio" name="sort" data-sort="" id="date-instructed-newest" value="date-instructed-newest">
                   <label for="date-instructed-newest" class="radio--tick mb-0">Date Instructed (Newest to oldest)</label>
                 </div>

@@ -205,11 +205,6 @@
   }
 }
 
-::slotted(.dialog__wrapper[slot="overflow"]) dialog[open]{
-
-  background: red;
-}
-
 .dialog__wrapper.dialog-overflow {
   margin-left: 0.5rem;
   margin-right: -0.5rem;

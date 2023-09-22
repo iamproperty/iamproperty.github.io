@@ -136,6 +136,13 @@ iam-actionbar[data-view="small"] ~ [data-view="small"] {
   background: none;
   border: none;
 }
+button[slot="overflow"],
+button[slot="selected-overflow"] {
+  
+  background: none;
+  border: none;
+  margin: 0!important;
+}
 .dialog__wrapper[slot="selected-overflow"] dialog[open],
 .dialog__wrapper[slot="overflow"] dialog[open] {
 
