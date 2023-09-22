@@ -140,7 +140,35 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   var timer;
 
   // Check what conditions are set on the table to see what the form actions are
-  let formSubmit = function(paginate = false){
+  let formSubmit = function(event, paginate = false){
+
+    if(form.classList.contains('processing'))
+      return false;
+
+
+    // Before submitting check if any duplicate checkboxes within the filters dialog needs to upset the original input
+    if(event.type == "submit"){
+      form.classList.add('processing');
+      Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element,index) => {
+
+        const id = element.getAttribute('data-duplicate');
+        const input = document.getElementById(id);
+        const card = document.querySelector(`[for="${id}"] iam-card`);
+
+
+        if(input.checked != element.checked){
+            
+          if(card){
+            let clickEvent = new Event('click');
+            card.dispatchEvent(clickEvent);
+          }
+          else {
+            input.checked = element.checked;
+          }
+        }
+      });
+      form.classList.remove('processing');
+    }
 
     if(form.hasAttribute('data-ajax')){
 
@@ -179,7 +207,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
 
       timer = setTimeout(function(){
-        formSubmit();
+        formSubmit(event);
       }, 500);
     };
   });
@@ -193,12 +221,12 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       if(!form.hasAttribute('data-submit'))
         sortTable(table, form, savedTableBody);
 
-      formSubmit();
+      formSubmit(event);
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
         
-      formSubmit();
+      formSubmit(event);
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter][data-no-ajax]')){ // Allow for input fields to filter the current results without a new ajax call
@@ -209,21 +237,21 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     }
     else if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && event.target.closest('form .dialog__wrapper > dialog')){
       
-      formSubmit();
+      formSubmit(event);
     }
     else if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && !event.target.closest('form dialog')){
       
-      formSubmit();
+      formSubmit(event);
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
         
-      formSubmit();
+      formSubmit(event);
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-mimic]')){
         
-      formSubmit();
+      formSubmit(event);
     }
   });
 
@@ -254,7 +282,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       if(!form.hasAttribute('data-submit'))
         sortTable(table, form, savedTableBody);
 
-      formSubmit();
+      formSubmit(event);
     }
   });
 
@@ -265,17 +293,17 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if(!form.hasAttribute('data-submit'))
       event.preventDefault();
 
-    formSubmit();
+    formSubmit(event);
   });
 
   form.addEventListener('force', (event) => {
 
-    formSubmit();
+    formSubmit(event);
   });
 
   form.addEventListener('paginate', (event) => {
 
-    formSubmit(true);
+    formSubmit(event,true);
   });
 
 

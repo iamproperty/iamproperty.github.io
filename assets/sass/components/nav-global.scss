@@ -110,7 +110,7 @@ iam-nav {
     text-decoration: none;
   }
 
-  a:not([slot="logo"]):not(:has(iam-card)) {
+  a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
     
     text-decoration: none;
 
@@ -489,7 +489,7 @@ iam-nav details {
       }
     }
 
-    a:not([slot="logo"]):not(:has(iam-card)) {
+    a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
 
       font-size: 1rem;
       line-height: rem(24);

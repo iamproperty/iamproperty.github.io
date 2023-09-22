@@ -64,6 +64,15 @@ class iamCard extends HTMLElement {
         card.classList.remove('checked');
     }
 
+    // Click event down
+    this.addEventListener('click', (event) => {
+
+      event.stopPropagation();
+      event.preventDefault();
+      let clickEvent = new Event('click');
+      card.dispatchEvent(clickEvent);
+    });
+
     card.addEventListener('click', (event) => {
 
       if(parentNode.matches('label[for]')){
@@ -151,7 +160,8 @@ class iamCard extends HTMLElement {
   attributeChangedCallback(attrName, oldVal, newVal) {
     switch (attrName) {
       case "data-total": {
-        this.shadowRoot.querySelector('.card__total').innerHTML = newVal;
+        if(this.shadowRoot.querySelector('.card__total'))
+          this.shadowRoot.querySelector('.card__total').innerHTML = newVal;
         break;
       }
       case "class": {
