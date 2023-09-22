@@ -90,7 +90,7 @@
   display: flex;
   flex-wrap: nowrap;
 
-  @media screen and (prefers-color-scheme: light) {
+  @include light-mode() {
     color: var(--colour-heading);
   }
 

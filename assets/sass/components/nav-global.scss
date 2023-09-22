@@ -165,7 +165,7 @@ iam-nav details {
 
     background-color: var(--colour-canvas);
     
-    @media screen and (prefers-color-scheme: light) {
+    @include light-mode() {
       background-color: #EEEEEE;
     }
 
@@ -180,9 +180,9 @@ iam-nav details {
       background-color: var(--colour-white);
 
             
-      @media screen and (prefers-color-scheme: dark) {
+      @include dark-mode() {
         
-      background-color: var(--colour-canvas-2);
+        background-color: var(--colour-canvas-2);
       }
       display:block;
       border: none;
@@ -378,11 +378,11 @@ iam-nav details {
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
 
       
-      @media screen and (prefers-color-scheme: light) {
+      @include light-mode() {
         background: var(--colour-white);
         @include reset-colours();
       }
-      @media screen and (prefers-color-scheme: dark) {
+      @include dark-mode() {
 
         @include invert-colours();
       }
@@ -393,7 +393,7 @@ iam-nav details {
       
       background: var(--colour-canvas-2);
       
-      @media screen and (prefers-color-scheme: light) {
+      @include light-mode() {
         background: #EEEEEE;
       }
       a {
@@ -426,7 +426,7 @@ iam-nav details {
     &[open] > div:not(:has(details)) {
       background: var(--colour-canvas);
 
-      @media screen and (prefers-color-scheme: light) {
+      @include light-mode() {
         background: var(--colour-white);
         --colour-canvas-2: white;
       }

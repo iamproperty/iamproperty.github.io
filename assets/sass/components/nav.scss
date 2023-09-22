@@ -98,7 +98,7 @@
     }
 
     .btn {
-      @media screen and (prefers-color-scheme: light) {
+      @include light-mode() {
     
         @include reset-colours();
 
@@ -188,13 +188,13 @@
       flex-shrink: 0;
     }
 
-    @media screen and (prefers-color-scheme: dark) {
+    @include dark-mode() {
       --colour-link: var(--colour-white);
       @include invert-colours();
     }
 
     // The menu is always white unless in dark mode
-    @media screen and (prefers-color-scheme: light) {
+    @include light-mode() {
       
       background-color: var(--colour-white);
       @include reset-colours();
@@ -242,7 +242,7 @@
     flex-grow: 1;
     position: relative;
 
-    @media screen and (prefers-color-scheme: light) {
+    @include light-mode() {
       background-color: #EEEEEE;
     }
 
@@ -393,14 +393,13 @@
     left: 0;
     width: 100%;
 
-    @media screen and (prefers-color-scheme: light) {
+    @include light-mode(){
             
       background-color: #EEEEEE;
       @include reset-colours();
     }
 
-    @media screen and (prefers-color-scheme: dark) {
-            
+    @include dark-mode() {
       
       @include invert-colours();
     }
@@ -494,7 +493,7 @@
 
     background: #E6EAEC!important;
 
-    @media screen and (prefers-color-scheme: dark) {
+    @include dark-mode() {
       
       background: var(--colour-canvas-2)!important;
     }
@@ -564,13 +563,13 @@
     flex-shrink: 0;
   }
 
-  @media screen and (prefers-color-scheme: dark) {
+  @include dark-mode() {
     --colour-link: var(--colour-white);
     @include invert-colours();
   }
 
   // The menu is always white unless in dark mode
-  @media screen and (prefers-color-scheme: light) {
+  @include light-mode() {
     
     background-color: var(--colour-white);
     @include reset-colours();
