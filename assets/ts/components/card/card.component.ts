@@ -44,7 +44,7 @@ class iamCard extends HTMLElement {
   }
 
 	connectedCallback() {
-    
+
     this.classList.add('loaded');
     
     // Mimic clicking the parent node so the focus and target events can be on the card
@@ -67,8 +67,6 @@ class iamCard extends HTMLElement {
     // Click event down
     this.addEventListener('click', (event) => {
 
-      event.stopPropagation();
-      event.preventDefault();
       let clickEvent = new Event('click');
       card.dispatchEvent(clickEvent);
     });
