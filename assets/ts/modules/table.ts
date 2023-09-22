@@ -279,6 +279,17 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       
       form.reset();
 
+      // Make sure any applied filters have been removed
+      Array.from(form.querySelectorAll('.applied-filters')).forEach((filters,index) => {
+        filters.innerHTML = "";
+      });
+
+      // Make sure cards are unlicked
+      Array.from(form.querySelectorAll('label iam-card')).forEach((card,index) => {
+        let clickEvent = new Event('click');
+        card.dispatchEvent(clickEvent);
+      });
+
       if(!form.hasAttribute('data-submit'))
         sortTable(table, form, savedTableBody);
 

@@ -108,11 +108,11 @@
           <div class="row align-items-end">
 
 
-            <div class="col-12 ms-md-auto mw-fit-content">
+            <div class="col-12 ms-md-auto mw-sm-fit-content">
               <button class="btn btn-secondary me-0 d-block w-100 btn-filter mb-1" type="button" data-modal="filters">Filter by <span data-filter-count=""></span></button>
             </div>
 
-            <div class="col-12 mw-fit-content">
+            <div class="col-12 mw-sm-fit-content">
 
                 <div class="dialog__wrapper dialog__wrapper--md-right">
 
@@ -135,6 +135,9 @@
                     </dialog>
                 </div>
 
+            </div>
+            <div class="col-12 mw-sm-fit-content">
+              <button class="btn btn-tertiary me-0" data-clear>Clear filters</button>
             </div>
           </div>  
         </div>
