@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav>
-      <iam-nav id="menu" class="bg-primary" style="--max-width: 100rem;--container-padding: 0 1rem;">
+      <iam-nav id="menu" class="bg-primary" data-search>
         
         <a href="/" class="brand brand--sold" slot="logo">
           <svg>
@@ -9,29 +9,17 @@
             <use xlink:href="/svg/logo.svg#logo-sold"></use>
           </svg>
         </a>
-
-        <a href="#menu" class="btn-menu" slot="btn">Menu</a>
         
-        <ul>
-          <li>Hello <a href="/details">Emma Varah</a> (Level 1)</li>
-          <li><a href="/home">Home</a></li>
-          <li><a href="/home" target="_blank">New support ticket <i class="fa-regular fa-arrow-up-right-from-square"></i></a></li>
-        </ul>
+        
+        <a href="/details" slot="secondary">Hello Emma Varah (Level 1)</a>
+        <a href="/home" target="_blank" slot="secondary">New support ticket <i class="fa-regular fa-arrow-up-right-from-square"></i></a>
+        
 
-        <ul slot="secondary">
-          <li><a href="/admin/properties.html">Properties</a></li>
-          <li><a href="/admin/auth/staff.html">Staff</a></li>
-          <li><a href="/admin/reports.html">Reports</a></li>
-          <li><a href="/admin/awards.html">iamvalued Awards</a></li>
-        </ul>
+        <a href="/admin/properties.html">Properties</a>
+        <a href="/admin/auth/staff.html">Staff</a>
+        <a href="/admin/reports.html">Reports</a>
+        <a href="/admin/awards.html">iamvalued Awards</a>
 
-        <form id="search" slot="actions">
-          <div>
-            <label for="search">Search</label>
-            <!--<button class="suffix"><i class="fa-regular fa-magnifying-glass"></i></button>-->
-            <input id="search" name="search" type="text" placeholder="Search by keyword, property, agent or ap ref" autocomplete="off" class="input--inline" />
-          </div>
-        </form>
         <a href="https://iamsold.test/admin/logout.html" class="btn btn-primary" slot="actions">Logout</a>
       
       </iam-nav>
@@ -96,9 +84,9 @@
           <div class="row tab-focus">
 
 
-          <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="Due" id="due_diligience_incomplete" class="d-none" />
-          <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="Upcoming" id="due_diligience_requires_approval" class="d-none" />
-          <input type="checkbox" name="sla_progress" data-filter="SLA progress" value="On track" id="due_diligience_verified" class="d-none" />
+          <input type="checkbox" name="[sla_progress][]" data-filter="SLA progress" value="Due" id="due_diligience_incomplete" class="d-none" />
+          <input type="checkbox" name="[sla_progress][]" data-filter="SLA progress" value="Upcoming" id="due_diligience_requires_approval" class="d-none" />
+          <input type="checkbox" name="[sla_progress][]" data-filter="SLA progress" value="On track" id="due_diligience_verified" class="d-none" />
 
           <div class="col-sm-4 col-md-3">
           <label for="due_diligience_incomplete"><Card class="card--filter colour-danger card--flag" data-total="" data-query="SLA progress == Overdue">Due/Overdue</Card></label>
@@ -120,11 +108,11 @@
           <div class="row align-items-end">
 
 
-            <div class="col-12 ms-md-auto mw-fit-content">
+            <div class="col-12 ms-md-auto mw-sm-fit-content">
               <button class="btn btn-secondary me-0 d-block w-100 btn-filter mb-1" type="button" data-modal="filters">Filter by <span data-filter-count=""></span></button>
             </div>
 
-            <div class="col-12 mw-fit-content">
+            <div class="col-12 mw-sm-fit-content">
 
                 <div class="dialog__wrapper dialog__wrapper--md-right">
 
@@ -148,11 +136,16 @@
                 </div>
 
             </div>
+            <div class="col-12 mw-sm-fit-content">
+              <button class="btn btn-tertiary me-0" data-clear>Clear filters</button>
+            </div>
           </div>  
         </div>
 
         <dialog id="filters">
+          <AppliedFilters class="applied-filters--compact" data-nosubmit>
           <span class="h3 pb-2">Filter by</span>
+
           <span class="h4 pb-1 ">Risk Level</span>
           <div>
             <input type="checkbox" name="risk-level-high" id="risk-level-high" data-filter-text="Risk Level - High" data-filter="Risk level" value="High">
@@ -166,8 +159,24 @@
             <label for="risk-level-low" class="form-label form-check-label">Low</label>
             <hr/>
           </div>
-          <button class="btn btn-primary d-block m-auto">Update results</button>
+
+          <span class="h4 pb-1 ">SLA Progress</span>
+          <div>
+            <input type="checkbox" name="[sla_progress][]" id="sla_progress_due" data-filter-text="SLA progress - Due" value="Due" data-duplicate="due_diligience_incomplete" />
+            <label for="sla_progress_due">Due</label>
+            <hr/>
+            <input type="checkbox" name="[sla_progress][]" id="sla_progress_upcoming" data-filter-text="SLA progress - Upcoming" value="Upcoming" data-duplicate="due_diligience_requires_approval"/>
+            <label for="sla_progress_upcoming">Upcoming</label>
+            <hr/>
+
+            <input type="checkbox" name="[sla_progress][]" id="sla_progress_track" data-filter-text="SLA progress - On track" value="track" data-duplicate="due_diligience_verified" />
+            <label for="sla_progress_track">On track</label>
+            <hr/>
+          </div>
+          </AppliedFilters>
+          <button class="btn btn-primary d-block mx-auto">Update results</button>
           <hr/>
+
         </dialog>
 
       </form>

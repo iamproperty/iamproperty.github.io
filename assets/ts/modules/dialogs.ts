@@ -36,6 +36,23 @@ const extendDialogs = (body) => {
       dialog.showModal();
       dialog.focus();
 
+      let firstWidth = dialog.offsetWidth;
+      dialog.setAttribute('style',`max-width: ${firstWidth}px;`);
+
+      // When the modal is opened we want to make sure any duplicate checkboxes are matching the originals
+      Array.from(dialog.querySelectorAll('[data-duplicate]')).forEach((element,index) => {
+        
+        const id = element.getAttribute('data-duplicate');
+        const originalInput = document.getElementById(id);
+
+        if(element.checked != originalInput.checked){
+
+          element.checked = originalInput.checked;
+          let changeEvent = new Event('change');
+          element.dispatchEvent(changeEvent);
+        }
+      });
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         "event": "openModal",
