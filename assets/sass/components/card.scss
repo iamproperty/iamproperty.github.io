@@ -276,3 +276,13 @@
   }
 }
 //#endregion
+
+
+:host([data-selected]) .card {
+  //background-color: yellow!important;
+
+  &:before,
+  &:after {
+    display: none!important;
+  }
+}

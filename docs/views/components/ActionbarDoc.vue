@@ -455,7 +455,7 @@
       <pre><code id="dispatchedEvents2"></code></pre>
     </div>
 
-    <!-- Waiting for the completion of FEG-129 
+    <!-- Waiting for the completion of FEG-129 -->
     <div class="container pt-5">
       <h3>Selected state: active area</h3>
       <p>The active area around the select box in the default state is kept tight around the select box. Users must directly click on the select box to trigger the Selected state. Other elements sharing the same container in the item can be interacted with, e.g. an ‘Open link’ button in a card or a text link within a table row.</p>
@@ -483,8 +483,7 @@
       </div>
 
     </div>
-  -->
-
+    
 
 
     <div class="container">
@@ -497,15 +496,15 @@
 
         <div class="col-16 col-sm-6">
           <img :src="intable" class="mb-3" />
-          <p><a href="/examples/actionbar-table">Add to tables</a></p>
+          <p><a href="/examples/actionbar-table" target="_blank">Add to tables</a></p>
         </div>
         <div class="col-16 col-sm-6">
           <img :src="adminpanel" class="mb-3" />
-          <p><a href="/examples/actionbar-panel">Add to admin panel</a></p>
+          <p><a href="/examples/actionbar-panel" target="_blank">Add to admin panel</a></p>
         </div>
         <div class="col-16 col-sm-6">
           <img :src="attop" class="mb-3" />
-          <p><a href="/examples/actionbar-top">Add to top of page</a></p>
+          <p><a href="/examples/actionbar-top" target="_blank">Add to top of page</a></p>
         </div>
 
       </div>

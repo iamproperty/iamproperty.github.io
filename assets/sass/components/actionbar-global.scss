@@ -10,6 +10,41 @@ iam-actionbar {
 }
 // #endregion
 
+// #region at the top
+
+main > iam-actionbar {
+  background-color: #e6eaec;
+
+  border-radius: rem(8);
+
+  
+  margin: var(--container-padding);
+  margin-bottom: 2rem;
+
+  box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
+
+  &:first-child {
+      
+    padding-top: 0;
+  }
+
+  
+  @include media-breakpoint-up(sm) {
+    box-shadow: none;
+    margin-inline: 0;
+    border-radius: 0;
+  }
+
+  @include media-breakpoint-up(md) {
+
+    
+  padding-inline: calc(50% - #{rem(556)} - 2rem);
+  }
+
+  
+}
+// #endregion
+
 // #region As part of the iam-table component
 iam-table iam-actionbar {
 
@@ -66,6 +101,7 @@ iam-actionbar[data-view="small"] ~ [data-view="small"] {
 // #endregion 
 
 // #region Child elements
+
 .actionbar__text {
 
   font-size: rem(18);
