@@ -561,35 +561,18 @@ dialog::backdrop {
       width: rem(360);
     }
 
-
     &.dialog--list {
       
       width: fit-content!important;
+
+      @include media-breakpoint-up(sm) {
+        width: max-content!important;
+      }
+
       min-width: rem(140)!important;
       max-width: rem(280)!important;
       padding: rem(16);
       margin: 0;
-
-      .btn-action {
-        border: none;
-        padding: 0;
-        margin: 0;
-        padding-block: rem(6);
-        line-height: rem(20);
-        background: none;
-        white-space: inherit;
-        max-width: 100%;
-        min-width: 100%;
-
-        &:before {
-          min-width: rem(20);
-          display: inline-block;
-        }
-
-        &::after {
-          float: right;
-        }
-      }
 
       hr {
         height: 2px;

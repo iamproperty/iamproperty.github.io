@@ -686,4 +686,20 @@ iam-table {
   }
 }
 
+@container (width < 23.4375em) {
+
+  iam-table:has([slot="before"]) {
+
+    iam-actionbar {
+      background-color: #e6eaec;
+    }
+    .actionbar__sticky + * {
+      margin-top: 0!important;
+    }
+  }
+
+  .table__wrapper.has-actionbar {
+    margin-top: calc(-100vh - -6.75rem)!important;
+  }
+}
 // #endregion

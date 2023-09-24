@@ -10,10 +10,16 @@ body:has(iam-nav.open:not(.nav--sticky):not(.nav--xs-sticky)) {
 body {
   
   --nav-height: #{rem(96)};
+  --sticky-padding: 0px;
 
   &:has(iam-nav a[slot="secondary"]){
     
     --nav-height: #{rem(96 + 40)};
+  }
+
+  &:has(iam-nav.nav--sticky) {
+    
+    --sticky-padding: var(--nav-height);
   }
 }
 
