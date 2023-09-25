@@ -171,7 +171,14 @@
   }
 
   iam-actionbar {
-    background: #eeeeee;
+    
+    background: var(--colour-canvas);
+    
+    @include light-mode {
+        
+      background: #eeeeee;
+    }
+      
     margin-inline: calc(var(--padding-x) * -1);
     margin-bottom: var(--padding-top);
 
