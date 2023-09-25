@@ -22,7 +22,7 @@ $chart-colors: map-merge((
   }
 }
 
-@media screen and (prefers-color-scheme: dark) {
+@include dark-mode() {
 
   :root {
     --colour-chart-1: var(--colour-dark);
