@@ -178,6 +178,10 @@
   &:is(:checked, .checked,:active, .active){
     outline: 2px solid var(--colour,var(--colour-primary));
     outline-offset: -2px;
+
+    .card__body {
+      background: none;
+    }
   }
 
   &.card--has-icon {
@@ -210,7 +214,6 @@
     &:is(:hover,:focus,.hover, :active, .active):not(:checked,.checked){ 
       outline: 2px solid var(--colour, var(--colour-primary))!important;
       outline-offset: -2px;
-
     }
   }
 }
