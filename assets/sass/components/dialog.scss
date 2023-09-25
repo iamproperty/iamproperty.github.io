@@ -374,7 +374,7 @@ dialog::backdrop {
       }
     }
 
-    @media screen and (prefers-color-scheme: dark) {
+    @include dark-mode() {
 
       button {
         

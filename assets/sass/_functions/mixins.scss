@@ -18,6 +18,28 @@
   }
 }
 
+@mixin dark-mode(){
+  @media screen and (prefers-color-scheme: dark) {
+    @if $darkMode == "true" {
+        
+      @content;
+    }
+  }
+}
+
+@mixin light-mode(){
+
+  @if $darkMode == "true" {
+    @media screen and (prefers-color-scheme: light) {
+    
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
 @mixin container-up($name) {
   
   @if $name == 'sm' {

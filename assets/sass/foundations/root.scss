@@ -39,7 +39,7 @@
 }
 
 // Dark mode; functional colours get updated
-@media screen and (prefers-color-scheme: dark) {
+@include dark-mode() {
   :root {
     
     @each $color, $value in $dark-mode-colors {
@@ -49,7 +49,7 @@
   }
 }
 
-@media screen and (prefers-color-scheme: light) {
+@include light-mode() {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
   [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.invert-colours) {
@@ -72,7 +72,7 @@
   }
 }
 
-@media screen and (prefers-color-scheme: dark) {
+@include dark-mode() {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
   [class*="bg-"]:not(.bg-canvas):not(.bg-canvas-2) {

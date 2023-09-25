@@ -12,7 +12,7 @@
   margin-bottom: rem(24);
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
-  @media screen and (prefers-color-scheme: dark) {
+  @include dark-mode() {
     
     background-color: var(--colour-canvas-2);
     color: var(--colour-body);

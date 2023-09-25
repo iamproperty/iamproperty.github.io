@@ -53,7 +53,7 @@
 
 
     
-    @media screen and (prefers-color-scheme: dark) {
+    @include dark-mode() {
 
       background: var(--colour-canvas-2);
       border-color: var(--colour-canvas-2);
