@@ -75,7 +75,13 @@
 
 .actionbar--selected {
 
-  background-color: #E6EAEC;
+  background-color: var(--colour-canvas);
+
+  @include light-mode {
+    
+    background-color: #E6EAEC;
+  }
+
   display: flex;
   opacity: 0;
   pointer-events: none;
@@ -83,7 +89,12 @@
 
 .actionbar--search {
 
-  background-color: #E6EAEC;
+  background-color: var(--colour-canvas);
+  
+  @include light-mode {
+
+    background-color: #E6EAEC;
+  }
   display: flex;
   z-index: 2;
   position: relative;
