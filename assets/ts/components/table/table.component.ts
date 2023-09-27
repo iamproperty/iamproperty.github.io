@@ -1,7 +1,5 @@
 // @ts-nocheck
 import * as tableModule from "../../modules/table";
-import createPaginationButttons from "../../modules/pagination";
-
 class iamTable extends HTMLElement {
 
   constructor(){
@@ -33,7 +31,7 @@ class iamTable extends HTMLElement {
       <slot></slot>
     </div>
     </div>
-    <div class="table__pagination"></div>
+    <iam-pagination class="pagination--table" ${this.hasAttribute('data-page')?`data-page="${this.getAttribute('data-page')}"`:''} ></iam-pagination>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
@@ -51,12 +49,11 @@ class iamTable extends HTMLElement {
       this.setAttribute('data-page', (params.has('page') ? params.get('page') : 1));
 
     if(!this.hasAttribute('data-show'))
-      this.setAttribute('data-show', 15);
-
+      this.setAttribute('data-show', (params.has('show') ? params.get('show') : 15));
+    
     if(!this.hasAttribute('data-increment'))
-      this.setAttribute('data-increment', 15);
+      this.setAttribute('data-increment', this.getAttribute('data-increment'));
 
-    this.setAttribute('data-pages', Math.ceil(this.getAttribute('data-total') / this.getAttribute('data-show')));
 
     // Update table__wrapper class
     let classList = this.classList.toString();
@@ -71,7 +68,30 @@ class iamTable extends HTMLElement {
 
     this.table = this.querySelector('table');
     this.savedTableBody = this.table.querySelector('tbody').cloneNode(true);
-    this.pagination = this.shadowRoot.querySelector('.table__pagination');
+
+    this.pagination = this.shadowRoot.querySelector('iam-pagination');
+    
+    this.pagination.setAttribute('data-total', this.getAttribute('data-total'));
+    this.pagination.setAttribute('data-page', this.getAttribute('data-page'));
+    this.pagination.setAttribute('data-show', this.getAttribute('data-show'));
+    this.pagination.setAttribute('data-increment', this.getAttribute('data-show'));
+
+    if(this.hasAttribute('data-page-jump'))
+      this.pagination.setAttribute('data-page-jump', 'true');
+
+    if(this.hasAttribute('data-per-page'))
+      this.pagination.setAttribute('data-per-page', 'true');
+
+    if(this.hasAttribute('data-item-count'))
+      this.pagination.setAttribute('data-item-count', 'true');
+    
+    if(this.hasAttribute('data-loading'))
+      this.pagination.setAttribute('data-loading', 'true');
+
+    if(this.classList.contains('table--fullwidth'))
+      this.pagination.setAttribute('data-minimal', 'true');
+
+
 
     // Remove table CTA
     const isCTA = this.classList.contains('table--cta');
@@ -116,7 +136,6 @@ class iamTable extends HTMLElement {
     else {
       tableModule.makeTableFunctional(this.table, this.form, this.pagination, this);
       tableModule.filterTable(this.table, this.form,this);
-      createPaginationButttons(this,this.pagination);
       tableModule.populateDataQueries(this.table, this.form);
     }
 
@@ -162,16 +181,11 @@ class iamTable extends HTMLElement {
           let countChecked = this.table.querySelectorAll('.selectrow input[type="checkbox"]:checked').length;
 
           actionbar.setAttribute('data-selected', count == countChecked ? "all" : countChecked);
-
-          console.log(countChecked);
         };
 
       });
 
       actionbar.addEventListener('selected', (event) => {
-
-        console.log(event.detail.selected);
-
 
         if(event.detail.selected == '0'){
 
@@ -197,40 +211,36 @@ class iamTable extends HTMLElement {
 
 
   static get observedAttributes() {
-    return ["data-total","data-pages","data-page","data-show"];
+    return ["data-total","data-page","data-show"];
   }
   
   attributeChangedCallback(attrName, oldVal, newVal) {
-    /*
+    
+    this.pagination = this.shadowRoot.querySelector('iam-pagination');
+
     switch (attrName) {
       case "data-total": {
-        this.setAttribute('data-pages', Math.ceil(newVal / this.getAttribute('data-show')));
+        
+        if(oldVal != newVal){
+          this.pagination.setAttribute('data-total',newVal);
+        }
         break;
       }
       case "data-show": {
-        this.setAttribute('data-pages', Math.ceil(this.getAttribute('data-total') / newVal));
-        break;
-      }
-      case "data-pages": {
-        console.log('create pagination');
-
-        tableModule.filterTable(this.table, this.form);
-        createPaginationButttons(this,this.pagination);
-
+        
+        if(oldVal != newVal){
+          this.pagination.setAttribute('data-show',newVal);
+        }
         break;
       }
       case "data-page": {
 
-        let paginationInput = this.form.querySelector('[data-pagination]');
-
-        paginationInput.value = newVal;
-        
-        //tableModule.filterTable(this.table, this.form);
-
+        if(oldVal != newVal){
+          this.pagination.setAttribute('data-page',newVal);
+        }
         break;
       }
     }
-    */
   }
 }
 

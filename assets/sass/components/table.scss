@@ -703,3 +703,16 @@ iam-table {
   }
 }
 // #endregion
+
+// #region pagination
+
+@container (width < 23.4375em) {
+  .pagination--table {
+    margin-inline: rem(24);
+    width: auto;
+  }
+  :host(.table--fullwidth) .pagination--table {
+    margin-inline: 0;
+  }
+}
+// #endregion
