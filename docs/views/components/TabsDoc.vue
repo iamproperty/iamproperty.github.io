@@ -37,6 +37,10 @@
           }
           ]"></Table>
         </Tab>
+        <Tab title="Disabled tab example" :disabled="disabledBoolean">
+          <h2>Tab content (disabled tab)</h2>
+          <p>Tab paragraph (disabled tab)</p>
+        </Tab>
       </Tabs>
     </div>
 
@@ -56,7 +60,6 @@
           <Tab title="The types of auctions we offer">
             <h2>Tab content 2</h2>
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-
           </Tab>
           <Tab title="Online auctions" lazy>
             <h2>Tab content 3</h2>
@@ -74,6 +77,10 @@
               column_4: 'row 1',
             }
             ]"></Table>
+          </Tab>
+          <Tab title="Disabled tab example" :disabled="disabledBoolean">
+            <h2>Tab content (disabled tab)</h2>
+            <p>Tab paragraph (disabled tab)</p>
           </Tab>
         </Tabs>
     </div>
@@ -112,6 +119,7 @@ export default {
   },
   data () {
     return {
+      disabledBoolean: true,
       items: [
         {
           title: 'Tab 1',

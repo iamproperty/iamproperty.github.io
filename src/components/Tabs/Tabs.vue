@@ -9,11 +9,10 @@
 </style>
 
 <script>
-import iamTabs from '../../../assets/js/components/tabs/tabs.component.min.js'
+import iamTabs from '../../../assets/js/components/tabs/tabs.component.js'
 
 if (!window.customElements.get('iam-tabs'))
   window.customElements.define('iam-tabs', iamTabs);
-
 
 export default {
   name: 'Tabs'

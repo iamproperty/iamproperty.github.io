@@ -29,7 +29,9 @@ class iamTabs extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="tabs">
-      <div class="tabs__links"></div>
+      <div class="tabs__links__wrapper">
+        <div class="tabs__links"></div>
+      </div>
       <slot></slot>
     </div>
     `;
@@ -40,6 +42,11 @@ class iamTabs extends HTMLElement {
     
     let classList = this.classList.toString().replace('container','');
     this.shadowRoot.querySelector('.tabs').setAttribute('class',`tabs ${classList}`);
+    
+    // let buttons = this.shadowRoot.querySelector('.link')
+    // buttons.forEach((button) => {
+    //   console.log('hi', button);
+    // })
 
     tabs(this);
   }
