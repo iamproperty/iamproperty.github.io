@@ -52,8 +52,7 @@ class iamTable extends HTMLElement {
       this.setAttribute('data-show', (params.has('show') ? params.get('show') : 15));
     
     if(!this.hasAttribute('data-increment'))
-      this.setAttribute('data-increment', this.getAttribute('data-increment'));
-
+      this.setAttribute('data-increment', this.getAttribute('data-show'));
 
     // Update table__wrapper class
     let classList = this.classList.toString();
@@ -70,7 +69,6 @@ class iamTable extends HTMLElement {
     this.savedTableBody = this.table.querySelector('tbody').cloneNode(true);
 
     this.pagination = this.shadowRoot.querySelector('iam-pagination');
-    
     this.pagination.setAttribute('data-total', this.getAttribute('data-total'));
     this.pagination.setAttribute('data-page', this.getAttribute('data-page'));
     this.pagination.setAttribute('data-show', this.getAttribute('data-show'));
@@ -90,7 +88,6 @@ class iamTable extends HTMLElement {
 
     if(this.classList.contains('table--fullwidth'))
       this.pagination.setAttribute('data-minimal', 'true');
-
 
 
     // Remove table CTA
@@ -117,7 +114,7 @@ class iamTable extends HTMLElement {
     // Create a data list if a search input is present
     tableModule.createSearchDataList(this.table, this.form);
 
-    if(!this.form.querySelector('[data-page]')){
+    if(!this.form.querySelector('[data-pagination]')){
       this.form.innerHTML += `<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`
     }
     if(!this.form.querySelector('[data-show]')){

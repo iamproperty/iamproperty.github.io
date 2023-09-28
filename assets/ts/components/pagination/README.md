@@ -28,3 +28,10 @@ import('../node_modules/@iamproperty/components/assets/js/components/pagination/
 | data-page-jump |  |  | Adds the page jump dropdown on all viewports | 
 | data-per-page |  |  | Adds the per page dropdown on tablet and desktop viewports (is hidden on tablet if not enough room availble) | 
 | data-item-count |  |  | Will add the total count on tablet and desktop viewports | 
+
+**Dispatched events**
+
+| Event | Dispatched when | Details passed|
+| ------ | ------------- | ----------- |
+| update-show | When a user clicks mobile 'Load more' button | { show: $showAmont } |
+| update-page | When a user changes the page jump select or clicks on the 'Prev' and 'Next' buttons | { page: $pageNumber } |

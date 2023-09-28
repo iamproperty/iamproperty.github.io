@@ -869,6 +869,11 @@
     margin-left: 0rem;
     margin-right: 0rem;
   }
+
+  @include dark-mode(){
+
+    background-color: var(--colour-canvas);
+  }
 }
 
 .demo-bottom {

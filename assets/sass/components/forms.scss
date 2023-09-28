@@ -16,7 +16,7 @@ label {
 // #endregion
 
 // #region input field
-:is(input:not([type="checkbox"]):not([type="radio"]),textarea,output,select) {
+:is(input:not([type="checkbox"]):not([type="radio"]),textarea,output,select:not(.select--minimal)) {
   display: block;
   width: 100%;
   max-width: $content-max-width;
@@ -109,7 +109,7 @@ div:has(> label:first-child):has(> input) {
   }
 
   input, output, .prefix, .suffix {
-    margin-bottom: 0;
+    margin-bottom: 0!important;
   }
 
   display: flex;
@@ -121,7 +121,7 @@ div:has(> label:first-child):has(> input) {
     width: 100%;
   }
 
-  :is(input,textarea,output) {
+  :is(input:not([type=checkbox]):not([type=radio]),textarea,output) {
     flex-shrink: 1;
     flex-grow: 1;
     width: 0;
@@ -291,13 +291,13 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     }
   }
 
-  .prefix ~ :is(input,textarea,output) {
+  .prefix ~ :is(input:not([type=checkbox]):not([type=radio]),textarea,output) {
     
     border-end-start-radius: 0;
     border-start-start-radius: 0;
   }
 
-  .suffix ~ :is(input,textarea,output) {
+  .suffix ~ :is(input:not([type=checkbox]):not([type=radio]),textarea,output) {
     order: 1;
     
     border-start-end-radius: 0;
@@ -731,6 +731,11 @@ select {
   option {
     background-color: var(--colour-canvas);
     padding-left: 1em;
+  }
+
+
+  &:is(:hover,:focus) {
+    outline: 1px solid var(--colour-info);
   }
 }
 

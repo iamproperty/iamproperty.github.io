@@ -90,8 +90,13 @@
 }
 
 @include container-up(sm) {
+
+  .pagination > .item-count {
+    display: none;
+  }
+
   :host([data-item-count]) {
-    .item-count {
+    .pagination > .item-count {
       display: flex!important;
       margin: 0;
     }
@@ -127,8 +132,19 @@
   &:is(:hover,:focus):not(:disabled){
     background-color: var(--colour-light);
   }
+
   &:is(:active):not(:disabled){
     background-color: #E0E0E0;
+  }
+
+  @include dark-mode(){
+    &:is(:hover,:focus):not(:disabled){
+      background-color: var(--colour-canvas);
+    }
+  
+    &:is(:active):not(:disabled){
+      background-color: var(--colour-canvas);
+    }
   }
 
   &:disabled {

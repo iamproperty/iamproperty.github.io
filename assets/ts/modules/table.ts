@@ -273,7 +273,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')){
-      
+
       form.classList.add('processing');
       // Make sure any applied filters have been removed
       Array.from(form.querySelectorAll('.applied-filters')).forEach((filters,index) => {
@@ -297,7 +297,17 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
           case "checkbox":
               if (frm_elements[i].checked)
               {
-                  frm_elements[i].checked = false;
+                  let input = frm_elements[i];
+                  let id = input.getAttribute('id');
+                  let label = document.querySelector(`[for="${id}"`);
+
+                  if(label.querySelector('iam-card')){
+                    let card = label.querySelector('iam-card');
+                    let clickEvent = new Event('click');
+                    card.dispatchEvent(clickEvent);
+                  }
+
+                  input.checked = false;
               }
               break;
           case "select-one":
@@ -309,11 +319,6 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
               break;
           }
       }
-
-      Array.from(form.querySelectorAll('label iam-card')).forEach((card,index) => {
-        let clickEvent = new Event('click');
-        card.dispatchEvent(clickEvent);
-      });
 
       form.classList.remove('processing');
 
@@ -935,6 +940,10 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
   window.controller[ajaxURL] = new AbortController();
   const { signal } = controller[ajaxURL];
 
+  // Set loading on the pagination
+  pagination.setAttribute('data-loading','true');
+  form.classList.add('processing');
+
   try {
     await fetch(ajaxURL+'?'+queryString, {
       signal: signal,
@@ -1056,6 +1065,10 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
       else {
         tbody.innerHTML = '<tr><td colspan="100%"><span>Error loading table</span></td></tr>';
       }
+    
+      // Remove loading on the pagination
+      pagination.removeAttribute('data-loading');
+      form.classList.remove('processing');
     });
   } catch (error) {
     console.log(error);

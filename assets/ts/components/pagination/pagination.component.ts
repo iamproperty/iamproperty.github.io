@@ -42,7 +42,7 @@ class iamPagination extends HTMLElement {
         <span> / page</span>
       </div>
       <div class="mobile-controls m-auto text-center">
-        <i class="fa-solid fa-spinner-third fa-spin"></i>
+        <i class="fa-solid fa-spinner fa-spin"></i>
         <button class="load-more btn btn-primary m-auto">Load more</a>
       </div>
     </div>
