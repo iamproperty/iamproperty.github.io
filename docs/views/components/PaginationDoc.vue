@@ -821,13 +821,20 @@
           </thead>
           <tbody class="text-body">
             <tr>
+              <td>V2</td>
+              <td>21.09.2023</td>
+              <td>Added new variations for pagination: minimal and minimal with page jump.<br/>
+                Added new functions: Labels and items per page<br/>
+                Added breakpoint designs and behaviours</td>
+            </tr>
+            <tr>
               <td>V0.1</td>
               <td>30.05.2023</td>
               <td>No designs supplied yet</td>
             </tr>
           </tbody>
         </table>
-        <!--<a href="/pdfs/tables.pdf" download>Download latest designs</a>-->
+        <a href="/pdfs/pagination.pdf" download>Download latest designs</a>
       </div>
     </div>
 
