@@ -394,7 +394,12 @@ export const createMultiFormDialog = (dialog) => {
 
 
   dialog.addEventListener('click', (event) => {
-    if (event && event.target instanceof HTMLElement && event.target.closest('button[data-title]')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('button[type="submit"]')){
+      
+      const form = event.target.closest('form');
+      form.classList.add('was-validated');
+    }
+    else if (event && event.target instanceof HTMLElement && event.target.closest('button[data-title]')){
 
       const button = event.target.closest('button[data-title]');
       validateFieldset(button);

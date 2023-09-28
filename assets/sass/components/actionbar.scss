@@ -60,7 +60,10 @@
   justify-content: flex-end;
   align-items: center;
   height: rem(68);
-  position: absolute;
+  
+  @supports selector(:has(*)) {
+    position: absolute;
+  }
   inset: 0;
 
   @include container-up(sm) {
@@ -83,7 +86,10 @@
   }
 
   display: flex;
+  
+  @supports selector(:has(*)) {
   opacity: 0;
+  }
   pointer-events: none;
 }
 
