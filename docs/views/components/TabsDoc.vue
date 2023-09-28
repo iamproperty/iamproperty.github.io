@@ -150,5 +150,29 @@
         <Readme></Readme>
       </details>
     </Tabs>
+    
+    <div class="bg-light version-control">
+      <div class="container">
+        <table>
+          <thead>
+            <tr>
+              <th>Version Control</th>
+              <th>Date</th>
+              <th>Design System Version</th>
+              <th>Notable updates</th>
+            </tr>
+          </thead>
+          <tbody class="text-body">
+            <tr>
+              <td>V1 added</td>
+              <td>28.09.2023</td>
+              <td>v4.0.1</td>
+              <td>N/A</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="/pdfs/tabs.pdf" download>Download latest designs</a>
+      </div>
+    </div>
   </main>
 </template>

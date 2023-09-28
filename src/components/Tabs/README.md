@@ -1,16 +1,18 @@
 ```
 <Tabs class="visualtest">
-  <Tab title="Tab content 1">
-    <h2>Tab content 1</h2>
+  <Tab title="Tab one">
+    <p>Content one... Any element after summary is within content. First tab is active by default.</p>
   </Tab>
-  <Tab title="Tab content 2">
-    <h2>Tab content 2</h2>
-  </Tab>
-  <Tab title="Tab content 3">
-    <h2>Tab content 3</h2>
+  <Tab title="Tab two">
+    <p>Content two...</p>
   </Tab>
 </Tabs>
 ```
+
+  <details>
+    <summary>Tab two</summary>
+    <p>Lorem ipsum</p>
+  </details>
 
 ### Tab Properties
 
