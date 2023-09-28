@@ -26,6 +26,12 @@ iam-card.card--flag {
 iam-card {
 
 
+  @supports not selector(:has(*)) {
+      
+    margin-bottom: 2rem;
+    display: block;
+  }
+
   > div:has([type="checkbox"]) {
     display: contents;
 
@@ -42,6 +48,7 @@ iam-card {
     }
   }
 }
+
 
 [data-select-container]:has([type="checkbox"]:checked) iam-card {
 
