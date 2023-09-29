@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import iamTable from '../../../assets/js/components/table/table.component.js'
+import iamTable from '../../../assets/js/components/table/table.component.min.js'
 import iamPagination from '../../../assets/js/components/pagination/pagination.component.min.js'
 import { ucfirst, unsnake } from '../../helpers/strings'
 

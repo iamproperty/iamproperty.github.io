@@ -94,7 +94,7 @@
     <div class="container visualtest mb-5 d-none d-md-block">
 
       <div class="demo demo-bottom">
-        <Table class="table--fullwidth" data-page-jump data-item-count data-per-page>
+        <Table class="table--fullwidth" data-page-jump data-item-count data-per-page data-no-scroll>
           <table>
             <thead>
               <tr>
@@ -205,7 +205,7 @@
     <div class="container visualtest mb-5 d-none d-sm-block">
 
       <div class="demo demo-bottom">
-        <Table class="table--fullwidth" data-page="2" data-show="5" data-page-jump data-item-count data-per-page style="max-width: 48em;">
+        <Table class="table--fullwidth" data-page="2" data-show="5" data-page-jump data-item-count data-per-page style="max-width: 48em;" data-no-scroll>
           <table>
             <thead>
               <tr>
@@ -301,7 +301,7 @@
     <div class="container visualtest mb-5 d-none d-sm-block">
 
       <div class="demo demo-bottom">
-        <Table class="table--fullwidth" data-page="2" data-show="5" data-item-count data-per-page style="max-width: 48em;">
+        <Table class="table--fullwidth" data-page="2" data-show="5" data-item-count data-per-page style="max-width: 48em;" data-no-scroll>
           <table>
             <thead>
               <tr>
@@ -406,7 +406,7 @@
 
           <div class="demo demo-bottom">
             <div style="max-width: 23em; position: absolute;">
-              <Table  data-page="2" data-show="5" data-item-count data-per-page>
+              <Table  data-page="2" data-show="5" data-item-count data-per-page data-no-scroll>
                 <table>
                   <thead>
                     <tr>
@@ -503,7 +503,7 @@
 
           <div class="demo demo-bottom">
             <div style="max-width: 23em; position: absolute;">
-              <Table  data-page="2" data-show="5" data-item-count data-per-page data-loading>
+              <Table  data-page="2" data-show="5" data-item-count data-per-page data-loading data-no-scroll>
                 <table>
                   <thead>
                     <tr>
@@ -599,7 +599,7 @@
 
           <div class="demo demo-bottom">
             <div style="max-width: 23em; position: absolute;">
-              <Table class="table--fullwidth mx-auto" data-page="2" data-show="5">
+              <Table class="table--fullwidth mx-auto" data-page="2" data-show="5" data-no-scroll>
                 <table>
                   <thead>
                     <tr>
@@ -695,7 +695,7 @@
 
           <div class="demo demo-bottom">
             <div style="max-width: 23em; position: absolute;">
-              <Table class="table--fullwidth mx-auto" data-page="2" data-show="5" data-page-jump>
+              <Table class="table--fullwidth mx-auto" data-page="2" data-show="5" data-page-jump data-no-scroll>
                 <table>
                   <thead>
                     <tr>
