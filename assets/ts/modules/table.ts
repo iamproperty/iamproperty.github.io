@@ -763,9 +763,11 @@ export const addPaginationEventListeners = function(table, form, pagination, wra
     }
 
     // scroll back to the top of the table
-    const yOffset = -250;
-    const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
-    window.scrollTo({top: y, behavior: 'smooth'});
+    if(!wrapper.hasAttribute('data-no-scroll')){
+      const yOffset = -250;
+      const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({top: y, behavior: 'smooth'});
+    }
   });
 
   pagination.addEventListener('update-show', (event) => {
