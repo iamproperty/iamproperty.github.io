@@ -16,7 +16,7 @@ label {
 // #endregion
 
 // #region input field
-:is(input:not([type="checkbox"]):not([type="radio"]),textarea,output,select) {
+:is(input:not([type="checkbox"]):not([type="radio"]),textarea,output,select:not(.select--minimal)) {
   display: block;
   width: 100%;
   max-width: $content-max-width;
@@ -685,6 +685,7 @@ select[multiple]::-webkit-scrollbar-thumb {
 
 // #region Select
 
+
 select {
   $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
@@ -711,6 +712,45 @@ select {
   &:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 $form-select-color;
+  }
+}
+
+.select--minimal {
+
+  all: unset;
+  font-size: inherit;
+  background: none;
+  border: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0 calc(1.25em + 0.8ch) 0 0.25em;
+  height: auto;
+  cursor: pointer;
+
+  option {
+    background-color: var(--colour-canvas);
+    padding-left: 1em;
+  }
+
+
+  &:is(:hover,:focus) {
+    outline: 1px solid var(--colour-info);
+  }
+}
+
+*:has(> .select--minimal){
+  position: relative;
+
+  &:after {
+    font-size: 0.8em;
+    line-height: 1em;
+    content: "\f078";
+    font-family: "Font Awesome 6 Pro";
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    right: calc(0.25em + 0.8ch);
+    pointer-events: none;
   }
 }
 // #endregion

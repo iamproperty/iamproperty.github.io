@@ -259,7 +259,7 @@ table.border-0 {
       }
 
       td:first-child::after {
-        top: 1.75rem;
+        top: 1.75rem!important;
       }
 
       td::after {
@@ -599,28 +599,24 @@ table {
   :is([data-content="overdue"],[data-content="due"],[data-content="incomplete"]):after {
 
     content: "\f024";
-    font-weight: light;
     color: var(--colour-danger);
   }
 
   :is([data-content="not started"],[data-content="to do"],[data-content="on track"]):after {
 
     content: "\f024";
-    font-weight: light;
     color: var(--colour-muted);
   }
 
   :is([data-content="requires approval"],[data-content="approval required"],[data-content="upcoming"]):after {
 
     content: "\f024";
-    font-weight: light;
     color: var(--colour-warning);
   }
 
   :is([data-content="warning"]):after {
 
     content: "\f071";
-    font-weight: light;
     color: var(--colour-warning);
   }
 
@@ -634,7 +630,6 @@ table {
   .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty):after {
 
     content: "\f0f3";
-    font-weight: light;
     color: var(--colour-primary);
   }
 }
@@ -700,6 +695,19 @@ iam-table {
 
   .table__wrapper.has-actionbar {
     margin-top: calc(-100vh - -6.75rem)!important;
+  }
+}
+// #endregion
+
+// #region pagination
+
+@container (width < 23.4375em) {
+  .pagination--table {
+    margin-inline: rem(24);
+    width: auto;
+  }
+  :host(.table--fullwidth) .pagination--table {
+    margin-inline: 0;
   }
 }
 // #endregion

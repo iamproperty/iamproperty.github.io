@@ -29,6 +29,7 @@ import('../node_modules/@iamproperty/components/assets/js/components/table/table
 | data-show | int | 15 | Update how many rows can be shown per page |
 | data-filterby | string (form ID) | | Give an optional form ID to connect a form to the table and make it act like a filtering system |
 
+*Pagination properties can also be added to the table component so that they can be passed down to the child pagination element.*
 
 **Class modifiers**
 

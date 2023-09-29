@@ -1,145 +1,237 @@
 @use "../_func" as *;
 
-@import "../../bootstrap/scss/_pagination.scss";
-
-// #region Basic fixes
-.pagination {
-  gap: rem(4);
-  padding-top: rem(24);
-}
-
-.pagination .page-link {
-  font-size: rem(14);
-  width: rem(28);
-  line-height: rem(28);
-  padding: 0;
-  text-align: center;
-  overflow: hidden;
-  border: none!important;
-  text-decoration: none;
-  font-weight: normal;
+:host {
+  
+  container-type: inline-size;
   display: block;
 }
 
-.pagination .page-item {
-  border: var(--#{$prefix}pagination-border-width) solid var(--#{$prefix}pagination-border-color);
-  border-radius: 4px!important;
-  @include transition($pagination-transition);
-  overflow: hidden;
+.pagination {
+  display: block;
 
-  &:hover {
-    border-color: var(--#{$prefix}pagination-hover-border-color);
+  @include container-up(sm) {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between!important;
+    padding-top: rem(32);
   }
 
-  &:focus {
-    box-shadow: var(--#{$prefix}pagination-focus-box-shadow);
+  > div {
+    
+    display: flex;
+    align-items: center;
   }
+}
 
-  &.active {
-    border-color: var(--#{$prefix}pagination-active-border-color);
+// #region page jump and per page
+.pagination div:is(.page-jump, .per-page) {
+
+  border: 1px solid var(--colour-light);
+  height: rem(52);
+
+  display: none;
+  align-items: center;
+  padding-inline: 1rem;
+  
+  .select--minimal {
+    height: rem(52);
+    line-height: rem(52);
+    margin-left: rem(-16);
+    padding-left: rem(16);
+    font-weight: bold;
   }
+}
 
-  &.disabled {
-    border-color: var(--#{$prefix}pagination-disabled-border-color);
+.page-jump {
+  
+  border-right: none!important;
+}
+
+.total-pages {
+  white-space: nowrap;
+}
+
+:host([data-page-jump][data-minimal]) {
+  .page-jump {
+    display: flex!important;
+  }
+}
+@include container-up(sm) {
+:host([data-page-jump]) {
+  .page-jump {
+    display: flex!important;
+  }
+}
+}
+
+@include container-up(sm) {
+  :host([data-per-page]:not([data-page-jump][data-item-count])) {
+    .per-page {
+      display: flex!important;
+    }
+  }
+}
+@include container-up(md) {
+  :host([data-per-page][data-page-jump][data-item-count]) {
+    .per-page {
+      display: flex!important;
+    }
   }
 }
 // #endregion
 
-// #region First and last buttons
-.pagination .page-item {
-
-  &:first-child .page-link,
-  &:last-child .page-link {
-
-    overflow: hidden;
-    text-indent: -300%;
-    background: currentColor;
-    mask-image: var(--icon-arrow);
-    mask-size: 50%;
-    mask-repeat: no-repeat;
-    mask-position: 50% 50%;
-    -webkit-mask-image: var(--icon-arrow);
-    -webkit-mask-size: 50%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: 50% 50%;
-  }
-
-  &:first-child .page-link,
-  {
-    transform: rotate(180deg);
-  }
+// #region Item count
+.pagination > .item-count {
+  display: block;
+  text-align: center;
+  margin-bottom: rem(16);
+  margin-inline: auto;
 }
-// #endregion
 
-// #region Minimise the amount of buttons on display 
-.pagination:has(.page-item:nth-child(8)) {
+@include container-up(sm) {
 
-  .page-item {
+  .pagination > .item-count {
     display: none;
-    overflow: visible;
   }
 
-  .page-item:is(:first-child, :last-child, :nth-child(2), :nth-last-child(2)) {
-    display: block;
+  :host([data-item-count]) {
+    .pagination > .item-count {
+      display: flex!important;
+      margin: 0;
+    }
   }
+}
+// #endregion
 
-  .page-item.active {
-    display: block;
-  }
+// #region buttons
+*:where(.prev, .next) {
+
+  border: 1px solid var(--colour-light);
+  line-height: rem(52);
+  height: rem(52);
+  margin: 0;
+  display: none;
+  background: none;
+  padding-inline: 1rem;
+
   
-  .page-item:has(+ .active),
-  .page-item.active + .page-item,
-  .page-item:nth-child(2).active + .page-item + .page-item,
-  .page-item:has(+ .page-item + .page-item:nth-last-child(2).active) {
-    display: block;
+  @include container-up(sm) {
+
+    display: inline-block;
   }
 
-  .page-item:nth-child(2),
-  .page-item:nth-last-child(2) {
+  &:after {
+    margin-left: 0.5em;
+    font-size: 0.8rem;
+    content: "\f054";
+    font-family: "Font Awesome 6 Pro";
+    color:var(--colour-info);
+  }
 
-    margin-right: rem(4 + 28);
-    position: relative;
+  &:is(:hover,:focus):not(:disabled){
+    background-color: var(--colour-light);
+  }
 
-    &:after {
-      content: "...";
-      display: block;
-      width: rem(28);
-      line-height: rem(28);
-      position: absolute;
-      left: calc(100% + #{rem(4)} + 2px);
-      top: -1px;
-      pointer-events: none;
-      border: var(--#{$prefix}pagination-border-width) solid var(--#{$prefix}pagination-border-color);
+  &:is(:active):not(:disabled){
+    background-color: #E0E0E0;
+  }
 
-      border-radius: 4px;
-      text-align: center;
+  @include dark-mode(){
+    &:is(:hover,:focus):not(:disabled){
+      background-color: var(--colour-canvas);
     }
-  }
-
-  .page-item:nth-last-child(2) {
-
-    margin-left: rem(4 + 28);
-    margin-right: 0;
-
-    &:after {
-      left: auto;
-      right: calc(100% + #{rem(4)} + 1px);
-    }
-  }
-
-  .page-item:nth-child(2).active,
-  .page-item:nth-child(2):has(+ .active),
-  .page-item:nth-child(2):has(+ .page-item + .active),
-  .page-item:nth-last-child(4).active + .page-item + .page-item,
-  .page-item:nth-last-child(3).active + .page-item,
-  .page-item:nth-last-child(2).active {
   
-    margin-left: 0;
-    margin-right: 0;
-
-    &:after {
-      display: none;
+    &:is(:active):not(:disabled){
+      background-color: var(--colour-canvas);
     }
+  }
+
+  &:disabled {
+    
+    &:after,
+    &:before {
+      color: inherit!important;
+    }
+  }
+}
+
+:host([data-minimal]) {
+  .pagination {
+    justify-content: flex-end;
+
+    @include container-up(sm) {
+
+      justify-content: space-between;
+    }
+  }
+  *:where(.prev, .next){
+    display: inline-block!important;
+  }
+}
+
+.prev {
+
+  border-right: none;
+  &:after {
+    display: none;
+  }
+  &:before {
+    margin-right: 0.5em;
+    font-size: 0.8rem;
+    content: "\f053";
+    font-family: "Font Awesome 6 Pro";
+    color:var(--colour-info);
+  }
+}
+// #endregion
+
+// #region mobile button
+.mobile-controls {
+  display: block;
+}
+
+:host([data-minimal]) {
+  .pagination {
+    padding-top: rem(24);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  *:is(.mobile-controls,.item-count) {
+    display: none;
+  }
+}
+
+@include container-up(sm) {
+  .mobile-controls {
+    display: none!important;
+  }
+  :host([data-item-count]) {
+    .item-count {
+      display: flex!important;
+    }
+  }
+}
+
+.fa-spin {
+  display: none!important;
+  font-size: rem(48);
+  color: var(--colour-info);
+}
+
+:host([data-loading]) {
+
+  .mobile-controls {
+    padding-top: rem(32);
+  }
+  .item-count,
+  .mobile-controls > *:not(.fa-spin) {
+    display: none!important;
+  }
+  .fa-spin {
+    display: block!important;
+    margin: auto;
   }
 }
 // #endregion
