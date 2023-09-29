@@ -24,13 +24,11 @@ dialog[open] {
   display: flex;
   flex-direction: column;
 
-  > *:last-child,
-  > .mh-lg > *:last-child{
+  > *:last-child {
     margin-bottom: 0;
   }
   
-  > :is(p):last-child,
-  > .mh-lg > :is(p):last-child {
+  > :is(p):last-child {
     padding-bottom: 0;
   }
 }
@@ -161,13 +159,13 @@ dialog[open] {
     padding-right: calc(var(--dialog-padding) - 10px);
     margin-right: calc((var(--dialog-padding) * -1) + 10px);
     margin-bottom: calc(var(--dialog-padding) * -1);
-    padding-bottom: var(--dialog-padding);
-    //max-height: none!important;
 
-    &:before {
-      top: 100%;
-      height: var(--dialog-padding);
-      margin-bottom: -2rem;
+    > *:last-child {
+      margin-bottom: 2rem!important;
+    }
+
+    > p:last-child {
+      padding-bottom: 0!important;
     }
   }
 }
@@ -464,11 +462,17 @@ dialog::backdrop {
 
         overflow: auto;
         margin-bottom: calc(var(--dialog-padding) * -1);
-        padding-bottom: var(--dialog-padding);
-
-          
         padding-right: calc(var(--dialog-padding) - 10px);
         margin-right: calc((var(--dialog-padding) * -1) + 10px);
+
+        > :last-child {
+          margin-bottom: var(--dialog-padding)!important;
+        }
+
+        > p:last-child {
+          padding-bottom: 0!important;
+          margin-bottom: var(--dialog-padding)!important;
+        }
 
         &::before {
           content: "";
