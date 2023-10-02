@@ -265,7 +265,7 @@
 
 
         </fieldset>
-        <button class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary colour-success" type="submit">Register</button>
       </form>
 
     </dialog>

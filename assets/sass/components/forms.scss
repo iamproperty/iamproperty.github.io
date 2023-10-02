@@ -108,7 +108,7 @@ div:has(> label:first-child):has(> input) {
     text-align: center;
   }
 
-  input:not([type=checkbox]):not([type=radio]), output, .prefix, .suffix {
+  input:not([type="checkbox"]):not([type="radio"]), output, .prefix, .suffix {
     margin-bottom: 0;
   }
 
@@ -116,12 +116,12 @@ div:has(> label:first-child):has(> input) {
   flex-wrap: wrap;
   align-items: center;
 
-  > *:not(input:not([type=checkbox]):not([type=radio])):not(output):not(.prefix):not(.suffix) {
+  > *:not(input:not([type="checkbox"]):not([type="radio"])):not(output):not(.prefix):not(.suffix) {
     flex-shrink: 0;
     width: 100%;
   }
 
-  :is(input:not([type=checkbox]):not([type=radio]),textarea,output) {
+  :is(input:not([type="checkbox"]):not([type="radio"]),textarea,output) {
     flex-shrink: 1;
     flex-grow: 1;
     width: 0;
@@ -133,9 +133,9 @@ div:has(> label:first-child):has(> input) {
   }
 
   input[type="color"]{
-    width: 3rem;
-    flex-shrink: 0;
-    flex-grow: 0;
+    width: 3rem!important;
+    flex-shrink: 0!important;
+    flex-grow: 0!important;
     border-start-end-radius: 0;
     border-end-end-radius: 0;
     padding: 0;
@@ -156,9 +156,10 @@ div:has(> label:first-child):has(> input) {
   }
 
   output {
-    border-left: none;
-    border-end-start-radius: 0;
-    border-start-start-radius: 0;
+    border-left: none!important;
+    border-end-start-radius: 0!important;
+    border-start-start-radius: 0!important;
+    margin: 0!important;
   }
 }
 
