@@ -4,6 +4,13 @@
 iam-actionbar {
 
   background-color: #FCFCFC;
+
+
+  @include dark-mode(){
+    
+    background-color: var(--colour-canvas);
+  }
+
   display: block;
   border-top-left-radius: rem(10);
   border-top-right-radius: rem(10);
@@ -14,7 +21,9 @@ iam-actionbar {
 // #region at the top
 main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
 
-  background-color: #e6eaec;
+  @include light-mode(){
+    background-color: #e6eaec;
+  }
   border-radius: rem(8);
   margin: var(--container-padding);
   margin-bottom: 2rem;
@@ -91,7 +100,7 @@ iam-table iam-actionbar {
   }  
 }
 
-@include media-breakpoint-up(sm) {
+@include container-up(sm) {
 
   iam-table iam-actionbar {
 

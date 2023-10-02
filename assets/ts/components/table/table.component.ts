@@ -7,11 +7,14 @@ class iamTable extends HTMLElement {
     this.attachShadow({ mode: 'open'});
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
-
+    const loadCSS = `@import "${assetLocation}/css/components/table.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/table.extras.css";`;
+    
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
     @import "${coreCSS}";
+    ${loadCSS}
 
     :host(.mh-sm){
       max-height: none!important;
@@ -35,6 +38,9 @@ class iamTable extends HTMLElement {
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
+    // insert extra CSS
+    if(!document.getElementById('tableExtras'))
+      document.head.insertAdjacentHTML('beforeend',`<style id="tableExtras">${loadExtraCSS}</style>`);
   }
 
 	connectedCallback() {
@@ -131,6 +137,102 @@ class iamTable extends HTMLElement {
       tableModule.loadAjaxTable(this.table, this.form, this.pagination, this);
     }
     else {
+
+
+      function uniqueID(index = 1){
+
+        let ID = Math.floor(Math.random() * Date.now() * (index+1));
+
+        return ID;
+      }
+      
+
+      // Add in the checkboxes
+
+      if(this.querySelector('iam-actionbar[data-selectall]')){
+        
+        const actionbar = this.querySelector('iam-actionbar[data-selectall]');
+
+        Array.from(this.table.querySelectorAll('thead tr')).forEach((row,index) => {
+              
+          row.insertAdjacentHTML(
+            'afterbegin',
+            `<th class="th--fixed"></th>`
+          );
+        });
+
+        Array.from(this.table.querySelectorAll('tbody tr')).forEach((row,index) => {
+          
+          let rowID = `row${uniqueID(index)}`;
+          row.insertAdjacentHTML(
+            'afterbegin',
+            `<td class="td--fixed selectrow"><input type="checkbox" name="row" id="${rowID}"/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
+          );
+        });
+
+        this.table.addEventListener('change',(event) => {
+
+          if (event && event.target instanceof HTMLElement && event.target.closest('.selectrow input')){
+
+          
+            let count = this.table.querySelectorAll('.selectrow input[type="checkbox"]').length;
+            let countChecked = this.table.querySelectorAll('.selectrow input[type="checkbox"]:checked').length;
+
+            actionbar.setAttribute('data-selected', count == countChecked ? "all" : countChecked);
+          };
+
+        });
+
+        actionbar.addEventListener('selected', (event) => {
+
+          if(event.detail.selected == '0'){
+
+            Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input,index) => {
+              
+              input.checked = false;
+            });
+
+          }
+          else if(event.detail.selected == 'all'){
+            
+            Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input,index) => {
+              
+              input.checked = true;
+            });
+
+          }
+          
+        });
+
+      }
+
+      // Make the dialog menus columns fixed 
+      let colIndex = -1;
+      Array.from(this.table.querySelectorAll('tbody tr')).forEach((row,index) => {
+              
+        if(row.querySelector(':scope > td > .dialog__wrapper')){
+
+          let columnn = row.querySelector(':scope > td > .dialog__wrapper').parentNode;
+
+          columnn.classList.add('td--fixed');
+
+          colIndex = Array.from(columnn.parentNode.children).indexOf(columnn);
+        }
+      });
+
+      if(colIndex != -1){
+
+
+        this.table.querySelector(`thead tr th:nth-child(${colIndex+1})`).classList.add('th--fixed');
+
+        Array.from(this.table.querySelectorAll(`tbody tr td:nth-child(${colIndex+1})`)).forEach((col,index) => {
+            
+          col.classList.add('td--fixed');
+        });
+      }
+
+
+
       tableModule.makeTableFunctional(this.table, this.form, this.pagination, this);
       tableModule.filterTable(this.table, this.form,this);
       tableModule.populateDataQueries(this.table, this.form);
@@ -146,64 +248,6 @@ class iamTable extends HTMLElement {
 
     });
 
-
-    // Add in the checkboxes
-
-    if(this.querySelector('iam-actionbar[data-selectall]')){
-      
-      const actionbar = this.querySelector('iam-actionbar[data-selectall]');
-
-      Array.from(this.table.querySelectorAll('thead tr')).forEach((row,index) => {
-            
-        row.insertAdjacentHTML(
-          'afterbegin',
-          "<th></th>"
-        );
-      });
-
-      Array.from(this.table.querySelectorAll('tbody tr')).forEach((row,index) => {
-            
-        row.insertAdjacentHTML(
-          'afterbegin',
-          `<td class="selectrow"><input type="checkbox" name="row" id="row${index}"/><label for="row${index}"><span class="visually-hidden">Select row</span></label></td>`
-        );
-      });
-
-      this.table.addEventListener('change',(event) => {
-
-        if (event && event.target instanceof HTMLElement && event.target.closest('.selectrow input')){
-
-        
-          let count = this.table.querySelectorAll('.selectrow input[type="checkbox"]').length;
-          let countChecked = this.table.querySelectorAll('.selectrow input[type="checkbox"]:checked').length;
-
-          actionbar.setAttribute('data-selected', count == countChecked ? "all" : countChecked);
-        };
-
-      });
-
-      actionbar.addEventListener('selected', (event) => {
-
-        if(event.detail.selected == '0'){
-
-          Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input,index) => {
-            
-            input.checked = false;
-          });
-
-        }
-        else if(event.detail.selected == 'all'){
-          
-          Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input,index) => {
-            
-            input.checked = true;
-          });
-
-        }
-        
-      });
-
-    }
   }
 
 
