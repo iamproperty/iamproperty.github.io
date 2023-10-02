@@ -278,7 +278,7 @@ export const createMultiFormDialog = (dialog) => {
 
     // Last fieldset
     if(index == fieldsets.length - 1){
-      if(form.querySelector(':scope > button[type="submit"]')){
+      if(form && form.querySelector(':scope > button[type="submit"]')){
 
         let existingButton = form.querySelector(':scope > button[type="submit"]');
         existingButton.classList.add('mb-0')
