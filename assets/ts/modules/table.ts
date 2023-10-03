@@ -277,18 +277,48 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')){
       
-      form.reset();
-
+      form.classList.add('processing');
       // Make sure any applied filters have been removed
       Array.from(form.querySelectorAll('.applied-filters')).forEach((filters,index) => {
         filters.innerHTML = "";
       });
 
       // Make sure cards are unlicked
+      let frm_elements = form.elements;
+
+      for (let i = 0; i < frm_elements.length; i++)
+      {
+          let field_type = frm_elements[i].type.toLowerCase() ? frm_elements[i].type.toLowerCase() : "text";
+          switch (field_type)
+          {
+          case "text":
+          case "password":
+          case "textarea":
+              frm_elements[i].value = "";
+              break;
+          case "radio":
+          case "checkbox":
+              if (frm_elements[i].checked)
+              {
+                  frm_elements[i].checked = false;
+              }
+              break;
+          case "select-one":
+          case "select-multi":
+              frm_elements[i].selectedIndex = -1;
+              break;
+          case "hidden":
+          default:
+              break;
+          }
+      }
+
       Array.from(form.querySelectorAll('label iam-card')).forEach((card,index) => {
         let clickEvent = new Event('click');
         card.dispatchEvent(clickEvent);
       });
+
+      form.classList.remove('processing');
 
       if(!form.hasAttribute('data-submit'))
         sortTable(table, form, savedTableBody);

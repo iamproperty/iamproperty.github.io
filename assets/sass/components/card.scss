@@ -175,19 +175,12 @@
     }
   }
 
-  &:is(:active, .active){
-    
-    .card__body {
-      background: #E0E0E0;
-    }
-  }
-
-  &:is(:checked, .checked){
-    outline: 2px solid var(--colour,var(--colour-info));
+  &:is(:checked, .checked,:active, .active){
+    outline: 2px solid var(--colour,var(--colour-primary));
     outline-offset: -2px;
 
     .card__body {
-      background: #E0E0E0;
+      background: none;
     }
   }
 
@@ -221,7 +214,6 @@
     &:is(:hover,:focus,.hover, :active, .active):not(:checked,.checked){ 
       outline: 2px solid var(--colour, var(--colour-primary))!important;
       outline-offset: -2px;
-
     }
   }
 }

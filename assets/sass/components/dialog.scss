@@ -24,13 +24,11 @@ dialog[open] {
   display: flex;
   flex-direction: column;
 
-  > *:last-child,
-  > .mh-lg > *:last-child{
+  > *:last-child {
     margin-bottom: 0;
   }
   
-  > :is(p):last-child,
-  > .mh-lg > :is(p):last-child {
+  > :is(p):last-child {
     padding-bottom: 0;
   }
 }
@@ -161,13 +159,13 @@ dialog[open] {
     padding-right: calc(var(--dialog-padding) - 10px);
     margin-right: calc((var(--dialog-padding) * -1) + 10px);
     margin-bottom: calc(var(--dialog-padding) * -1);
-    padding-bottom: var(--dialog-padding);
-    //max-height: none!important;
 
-    &:before {
-      top: 100%;
-      height: var(--dialog-padding);
-      margin-bottom: -2rem;
+    > *:last-child {
+      margin-bottom: 2rem!important;
+    }
+
+    > p:last-child {
+      padding-bottom: 0!important;
     }
   }
 }
@@ -279,10 +277,11 @@ dialog::backdrop {
     top: calc(var(--dialog-padding) * 4);
   }
 
+  @supports selector(:has(*)) {
   fieldset:not(.active) {
     display: none;
   }
-
+  }
   &:not(:has(fieldset.active)) fieldset:first-of-type{
     display: flex;
     flex-direction: column;
@@ -440,36 +439,55 @@ dialog::backdrop {
       margin-top: auto;
       text-align: right;
     }
-    > form {
-      display: contents
+    
+    
+    @supports not selector(:has(*)) {
+      > form {
+        overflow: auto;
+
+        button:not([type="submit"]){
+          display: none;
+        }
+      }
     }
-    fieldset {    
-      display: flex; 
-      flex-direction: column;
-      flex-grow: 1;
-      position: relative;
+    @supports selector(:has(*)) {
+      > form {
+        display: contents
+      }
+      fieldset {    
+        display: flex; 
+        flex-direction: column;
+        flex-grow: 1;
+        position: relative;
 
-      overflow: auto;
-      margin-bottom: calc(var(--dialog-padding) * -1);
-      padding-bottom: var(--dialog-padding);
+        overflow: auto;
+        margin-bottom: calc(var(--dialog-padding) * -1);
+        padding-right: calc(var(--dialog-padding) - 10px);
+        margin-right: calc((var(--dialog-padding) * -1) + 10px);
 
-        
-      padding-right: calc(var(--dialog-padding) - 10px);
-      margin-right: calc((var(--dialog-padding) * -1) + 10px);
+        > :last-child {
+          margin-bottom: var(--dialog-padding)!important;
+        }
 
-      &::before {
-        content: "";
-        top: 100%;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: var(--dialog-padding);
-        min-height: var(--dialog-padding);
-        position: sticky;
-        display: block;
-        background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
-        z-index: 2;
-        margin-bottom: calc(var(--dialog-padding) * -1);;
+        > p:last-child {
+          padding-bottom: 0!important;
+          margin-bottom: var(--dialog-padding)!important;
+        }
+
+        &::before {
+          content: "";
+          top: 100%;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: var(--dialog-padding);
+          min-height: var(--dialog-padding);
+          position: sticky;
+          display: block;
+          background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
+          z-index: 2;
+          margin-bottom: calc(var(--dialog-padding) * -1);;
+        }
       }
     }
   }
