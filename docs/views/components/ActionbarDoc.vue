@@ -1,6 +1,5 @@
 <template>
   <main>
-    
     <DSHeader :image="headerImg" section="components">
       <h1>Action bar</h1>
     </DSHeader>
@@ -9,7 +8,7 @@
       <p class="lead">Action bars serve as a central hub for users to access and perform actions within an interface.</p>
       <h2>Introduction</h2>
       <p>Action bars are a useful component that can be integrated with other existing components, allowing users to eciently perform actions on one or multiple items simultaneously. Action bars emphasise clarity by presenting a concise set of actions, ensuring that the most important and frequently used actions are prominently displayed.</p>
-      <p>Defined by it’s compact design and responsive overflow options, the micro-component rich action bar is viable in already busy interfaces and on smaller screens.</p>
+      <p>Defined by it's compact design and responsive overflow options, the micro-component rich action bar is viable in already busy interfaces and on smaller screens.</p>
     
       <h2>Anatomy</h2>
       <img :src="anatomy" class="mb-3" />

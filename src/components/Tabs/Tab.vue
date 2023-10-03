@@ -1,6 +1,6 @@
 <template>
   <details class="tab">
-    <summary v-html="title"></summary>
+    <summary v-html="title" :class="{ disabled: isDisabled }"></summary>
     <slot></slot>
   </details>
 </template>
@@ -16,17 +16,16 @@ export default {
     lazy: {
       type: Boolean,
       required: false
+    },
+    disabled: {
+      type: Boolean,
+      required: false
     }
   },
   data() {
     return {
-      show: this.lazy ? false : true
-    }
-  },
-  watch: {
-
-    show(newVal, oldVal) {
-      console.log(newVal)
+      show: this.lazy ? false : true,
+      isDisabled: this.disabled ? true : false
     }
   }
 }
