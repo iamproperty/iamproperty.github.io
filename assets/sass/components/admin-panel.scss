@@ -89,6 +89,10 @@
       padding-bottom: 0!important;
     }
   }
+
+  > iam-pagination {
+    margin-top: -1rem;
+  }
 }
 
 [class*="col"] .admin-panel:first-child:last-child:not(:has(.mh-sm,.mh-md,.mh-lg)) {
