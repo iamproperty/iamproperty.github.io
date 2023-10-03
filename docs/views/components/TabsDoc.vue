@@ -1,9 +1,7 @@
 <script setup>
   import DSHeader from '../DSHeader.vue'
   import headerImg from '../../img/cards-header.png'
-  //import anatomy from ''
-  const anatomy = 'https://placehold.co/800x450'
-
+  import anatomy from '../../img/tabs/tabs-anatomy.png'
   import Tabs from '@/components/Tabs/Tabs.vue'
   import Tab from '@/components/Tabs/Tab.vue'
   import Readme from '@/components/Tabs/README.md'
@@ -56,14 +54,15 @@
 
     <div class="container">
       <p class="lead">Tabs group together content and display one at a time, they should not be used for important content as it may not be visible on page load. Tabs should be presented horizontally and above content.</p>
-      <h2>Introduction</h2>
-      <p>LOREM IPSUM</p>
 
       <h2>Anatomy</h2>
       <img :src="anatomy" class="mb-3" />
       <ol class="mb-5">
-        <li>lorem ipsum</li>
-        <li>lorem ipsum</li>
+        <li>Selected tab item name: this should briefly summarise what type of content is shown below the tab.</li>
+        <li>Selected tab underline: this line shows beneath the selected tab item.</li>
+        <li>Unselected tab item name: this should briefly summarise what type of content is shown below the tab when selected.</li>
+        <li>Tabs underline: this line stretches the width of the page and serves as a separation between the tab items and tab content.</li>
+        <li>Tab content: the content that is shown when a tab is selected.</li>
       </ol>
     </div>
 

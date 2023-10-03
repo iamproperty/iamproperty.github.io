@@ -27,14 +27,6 @@ export default {
       show: this.lazy ? false : true,
       isDisabled: this.disabled ? true : false
     }
-  },
-  mounted() {
-    console.log(this.isDisabled)
-  },
-  watch: {
-    show(newVal, oldVal) {
-      console.log(newVal)
-    }
   }
 }
 </script>

@@ -42,11 +42,6 @@ class iamTabs extends HTMLElement {
     
     let classList = this.classList.toString().replace('container','');
     this.shadowRoot.querySelector('.tabs').setAttribute('class',`tabs ${classList}`);
-    
-    // let buttons = this.shadowRoot.querySelector('.link')
-    // buttons.forEach((button) => {
-    //   console.log('hi', button);
-    // })
 
     tabs(this);
   }
