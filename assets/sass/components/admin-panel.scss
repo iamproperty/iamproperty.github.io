@@ -13,9 +13,13 @@
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
   @include dark-mode() {
-    
     background-color: var(--colour-canvas-2);
     color: var(--colour-body);
+
+    .bg-white {
+      background-color: var(--colour-canvas-2) !important;
+      color: var(--colour-body) !important;
+    }
   }  
 
   &:empty {
