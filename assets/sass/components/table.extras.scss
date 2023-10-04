@@ -9,6 +9,7 @@
 // #region Basic table stuff
 iam-table {
   
+  --hover-background: var(--colour-light);
   --row-bg: var(--colour-canvas-2);
   thead tr {
     background: var(--row-bg);
@@ -24,9 +25,10 @@ iam-table {
     }
 
     @include dark-mode(){
-      &:is(:hover,:focus-within,.hover) {
+      
+      --hover-background: var(--colour-canvas);
 
-        --row-bg: var(--colour-canvas);
+      &:is(:hover,:focus-within,.hover) {
         background: var(--row-bg);
       }
     }
