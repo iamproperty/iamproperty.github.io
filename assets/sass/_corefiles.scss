@@ -42,7 +42,12 @@
 @import "../bootstrap/scss/helpers/text-truncation";
 //@import "../bootstrap/scss/helpers/vr";
 
+// Helpers
 @import "helpers/max-height.scss";
+@import "helpers/dynamic.scss";
 
 // Utilities
 @import "../bootstrap/scss/utilities/_api.scss";
+
+// Templates
+@import "templates/form.scss";

@@ -183,9 +183,6 @@ routes.forEach((route) => {
 
 const refinedResults = [...new Set(results)];
 
-console.log(results);
-console.log(refinedResults);
-
 export default {
   components: {
     Card

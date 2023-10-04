@@ -40,7 +40,8 @@
     "deploy:404": "node local_modules/create404.js"
   },
   "dependencies": {
-    "bootstrap": "^5.2.0"
+    "bootstrap": "^5.2.0",
+    "js-cookie": "^3.0.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",

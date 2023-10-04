@@ -119,6 +119,14 @@ const routes = [
           title: 'Animation | Foundations | iamkey'
         },
         component: () => import('./views/foundations/Animation.vue')
+      },
+      {
+        path: 'dynamic-events',
+        name: 'Dynamic Events (Beta)',
+        meta: {
+          title: 'Dynamic Events | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/DynamicEvents.vue')
       }
     ]
   },
@@ -151,6 +159,15 @@ const routes = [
         },
         component: () => import('./views/components/ActionbarDoc.vue'),
         searchterms: 'options, actions, edit, tinymce, editor'
+      },
+      {
+        path: 'addresslookup',
+        name: 'Address Lookup (Beta)',
+        meta: {
+          title: 'Address Lookup | Components | iamkey'
+        },
+        component: () => import('./views/components/AddressLookupDoc.vue'),
+        searchterms: 'postcode'
       },
       {
         path: 'panel',
@@ -547,6 +564,14 @@ const routes = [
         component: () => import('./views/templates/Index.vue')
       },
       {
+        path: 'form',
+        name: 'Form page Template (Beta)',
+        meta: {
+          title: 'Email Template | Components | iamkey'
+        },
+        component: () => import('./views/templates/FormDoc.vue')
+      },
+      {
         path: 'email',
         name: 'Email Template',
         meta: {
@@ -790,6 +815,54 @@ const routes = [
           title: 'Collapsible Side Menu example| iamkey'
         },
         component: () => import('./views/standalone/CollapsibleSideMenu.vue')
+      },
+      {
+        path: 'crm-mb',
+        name: "CRM - MB",
+        meta: {
+          title: 'CRM to MB example | iamkey'
+        },
+        component: () => import('./views/standalone/crm-mb/Index.vue')
+      },
+      {
+        path: 'crm-mb/page2',
+        name: "CRM - MB 2",
+        meta: {
+          title: 'CRM to MB example | iamkey'
+        },
+        component: () => import('./views/standalone/crm-mb/Page2.vue')
+      },
+      {
+        path: 'crm-mb/page3',
+        name: "CRM - MB 3",
+        meta: {
+          title: 'CRM to MB example | iamkey'
+        },
+        component: () => import('./views/standalone/crm-mb/Page3.vue')
+      },
+      {
+        path: 'crm-mb/page4',
+        name: "CRM - MB 4",
+        meta: {
+          title: 'CRM to MB example | iamkey'
+        },
+        component: () => import('./views/standalone/crm-mb/Page4.vue')
+      },
+      {
+        path: 'crm-mb/page5',
+        name: "CRM - MB 5",
+        meta: {
+          title: 'CRM to MB example | iamkey'
+        },
+        component: () => import('./views/standalone/crm-mb/Page5.vue')
+      },
+      {
+        path: 'crm-mb/page6',
+        name: "CRM - MB 6",
+        meta: {
+          title: 'CRM to MB example | iamkey'
+        },
+        component: () => import('./views/standalone/crm-mb/Page6.vue')
       }
     ]
   },

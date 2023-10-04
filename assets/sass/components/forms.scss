@@ -1,7 +1,7 @@
 @use "../_func" as *;
 
 // #region Form label
-label {
+:where(label,.label) {
   font-size: rem(18);
   line-height: rem(21);
   margin-bottom: rem(8);
@@ -109,7 +109,7 @@ div:has(> label:first-child):has(> input) {
   }
 
   input:not([type="checkbox"]):not([type="radio"]), output, .prefix, .suffix {
-    margin-bottom: 0;
+    margin-bottom: 0!important;
   }
 
   display: flex;
@@ -207,6 +207,7 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     background-color: var(--colour-primary-theme);
     border: 2px solid var(--colour-primary);
     color: var(--colour-white);
+    margin-top: 0!important;
     margin-bottom: 1rem;
     border-end-start-radius: rem(8);
     border-start-start-radius: rem(8);
@@ -298,7 +299,8 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     border-start-start-radius: 0!important;
   }
 
-  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]),textarea,output) {
+  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]),textarea,output),
+  :is(input:not([type="checkbox"]):not([type="radio"]),textarea,output):has(~ .suffix) {
     order: 1;
     
     border-start-end-radius: 0!important;
@@ -346,7 +348,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   --colour-check-bg: #FCEBEC;
 }
 
-.was-validated input:is(:invalid, .is-invalid) {
+.was-validated input:is(:invalid, .is-invalid,:-internal-autofill-selected) {
 
   background-image: escape-svg($icon-error);
   background-repeat: no-repeat;
@@ -380,9 +382,21 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   display: none;
 }
 
+// Postcode lookup validation
+iam-address-lookup:has([required]){
+  
+  --req-display: none;
+}
+
 .was-validated:has(*:is(:invalid, .is-invalid)) .invalid-feedback {
   display: block;
 }
+
+.was-validated iam-address-lookup:has([required]:invalid) {
+  --error-border: var(--colour-danger);
+  --error-display: block;
+}
+
 // #endregion
 
 // #region radio/checkbox field 
@@ -469,7 +483,7 @@ input[type="radio"] + label:not(:has(> iam-card)) {
     display: none;
     position: absolute;
     top: rem(15 - 2);
-    left: rem(5);
+    left: calc(#{rem(5)} + var(--outline-width));
   }
 
   &.radio--tick {
