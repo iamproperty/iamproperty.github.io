@@ -16,12 +16,12 @@ import('../node_modules/@iamproperty/components/assets/js/components/tabs/tabs.c
 ```
 <iam-tabs class="container">
   <details>
-    <summary>Question 1</summary>
-    <p>Answer </p>
+    <summary>Tab one</summary>
+    <p>Content one... Any element after summary is within content. First tab is active by default.</p>
   </details>
   <details>
-    <summary>Question 2</summary>
-    <p>Answer</p>
+    <summary>Tab two</summary>
+    <p>Content two... </p>
   </details>
 </iam-tabs>
 ```
@@ -31,3 +31,4 @@ import('../node_modules/@iamproperty/components/assets/js/components/tabs/tabs.c
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | title  | String | - | Used for the heading of the component |
+| disabled  | Boolean | - | Used to apply disabled state for a tab (tab content will not be reachable) |

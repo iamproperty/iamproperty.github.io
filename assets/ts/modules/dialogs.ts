@@ -261,6 +261,7 @@ export const createMultiFormDialog = (dialog) => {
 
   let buttons = "";
   let fieldsets = Array.from(dialog.querySelectorAll('fieldset[data-title]'));
+  let form = dialog.querySelector('form');
 
   fieldsets.forEach((fieldset,index) => {
     buttons += `<button data-title="${fieldset.getAttribute('data-title')}" type="button" class="${index == 0 ? "active":""}" tabindex="-1">${fieldset.getAttribute('data-title')}</button>`;
@@ -275,8 +276,18 @@ export const createMultiFormDialog = (dialog) => {
     if(index != fieldsets.length - 1)
       btnWrapper.innerHTML += `<button data-title="${fieldsets[index+1].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="button">Next</button>`;
 
-    if(index == fieldsets.length - 1)
-      btnWrapper.innerHTML += `<button data-title="${fieldsets[index].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="submit">Submit</button>`;
+    // Last fieldset
+    if(index == fieldsets.length - 1){
+      if(form && form.querySelector(':scope > button[type="submit"]')){
+
+        let existingButton = form.querySelector(':scope > button[type="submit"]');
+        existingButton.classList.add('mb-0')
+
+        btnWrapper.insertAdjacentElement('beforeend',existingButton);
+      }
+      else
+        btnWrapper.innerHTML += `<button data-title="${fieldsets[index].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="submit">Submit</button>`;
+    }  
   });
 
   dialog.insertAdjacentHTML('afterbegin',`<div class="steps bg-primary">${buttons}</div>`);
@@ -376,11 +387,12 @@ export const createMultiFormDialog = (dialog) => {
 
       const button = event.target.closest('button');
 
-      if(event.keyCode == 13){
+      if(event.keyCode == 13 && button.getAttribute('type') != "submit"){
         
         event.preventDefault();
         validateFieldset(button);
       }
+
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('input')){
@@ -388,7 +400,10 @@ export const createMultiFormDialog = (dialog) => {
 
       input.classList.remove('is-invalid');
 
-
+      if(event.keyCode == 13){
+        
+        event.preventDefault();
+      }
     }
   });
 

@@ -506,7 +506,7 @@ const routes = [
       },
       {
         path: 'tabs',
-        name: 'Tabs (Beta)',
+        name: 'Tabs',
         meta: {
           title: 'Tabs | Components | iamkey'
         },
