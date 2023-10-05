@@ -116,6 +116,7 @@ div:has(> label:first-child):has(> input) {
   flex-wrap: wrap;
   align-items: center;
 
+
   > *:not(input:not([type="checkbox"]):not([type="radio"])):not(output):not(.prefix):not(.suffix) {
     flex-shrink: 0;
     width: 100%;
@@ -297,7 +298,6 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     border-end-start-radius: 0!important;
     border-start-start-radius: 0!important;
   }
-
 
   .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]),textarea,output) {
     order: 1;

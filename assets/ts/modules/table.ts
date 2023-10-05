@@ -59,44 +59,50 @@ export const getLargestLastColWidth = (table) => {
   return largestWidth;
 }
 
-export const createMobileButton = (table) => {
+export const createMobileButton = (table, wrapper) => {
 
-  if(table.closest('.table--fullwidth'))
+
+  if(wrapper.classList.contains('.table--fullwidth') && !wrapper.hasAttribute('data-expandable'))
     return false;
 
-  if(table.querySelectorAll('thead tr th').length < 4)
+  if(table.querySelectorAll('thead tr th').length < 4 && !wrapper.hasAttribute('data-expandable'))
     return false;
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-    let firstCol = row.querySelector(':scope > :is(td,th):first-child');
 
-    let colContent = firstCol.textContent;
-
-    if(colContent != "")
-      firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-none">${colContent}</button>`;
-    else {
-      let secondCol = row.querySelector(':scope > :is(td,th):nth-child(2)');
-      let secondColContent = secondCol.textContent;
-      secondCol.innerHTML =`<span class="td__content">${secondColContent}</span><button type="button" class="d-none">${secondColContent}</button>`;
-    }
+  Array.from(table.querySelectorAll('thead tr')).forEach((row,index) => {
+        
+    row.insertAdjacentHTML(
+      'afterbegin',
+      `<th class="th--fixed expand-button-heading"></th>`
+    );
   });
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row,index) => {
+        
+    row.insertAdjacentHTML(
+      'afterbegin',
+      `<td class="td--fixed td--expand"><button class="btn btn-compact btn-secondary" data-expand-button>Expand</button></td>`
+    );
+  });
+
+
 }
 
 export const addTableEventListeners = (table) => {
 
   table.addEventListener('click', (event) => {
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('tr > :is(td,th):first-child button')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-expand-button]')){
 
-      let firstCol = event.target.closest('tr > :is(td,th):first-child button');
-      let tableRow = firstCol.parentNode.closest('tr');
+      let button = event.target.closest('[data-expand-button]');
+      let tableRow = button.closest('tr');
 
       if(tableRow.getAttribute('data-view') == "full")
         tableRow.setAttribute('data-view','default');
       else
         tableRow.setAttribute('data-view','full');
 
-      firstCol.blur();
+        button.blur();
     };
   });
 }
@@ -840,7 +846,7 @@ export const exportAsCSV = function(table){
 export const makeTableFunctional = function(table, form, pagination, wrapper){
 
   addDataAttributes(table);
-  createMobileButton(table);
+  createMobileButton(table, wrapper);
   populateDataQueries(table, form, wrapper);
   
   // Work out the largest width of the CTA's in the last column

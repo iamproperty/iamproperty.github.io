@@ -69,50 +69,6 @@ describe('addDataAttributes', () => {
 
 });
 
-/* TODO: This unit test doesn't work as puppeteer seems to have an issue with query selector all
-describe('getLargestLastColWidth', () => {
-
-  test('should return the width of the largest last column content', async() => {
-
-    const browser = await puppeteer.launch({});
-    try {
-        const page = await browser.newPage();
-        await page.exposeFunction("getLargestLastColWidth", tableModule.getLargestLastColWidth);
-        await page.setContent(`<table id="table">${basicTable}</table>`);
-        await page.waitForSelector('#table tr');
-
-        const largestWidth = await page.evaluate(`getLargestLastColWidth(document.querySelector("#table"))`);
-
-        //const links = await page.$$eval('#table', e=>getLargestLastColWidth(e))
-      console.log(await largestWidth)
-
-
-    } catch (e) {
-        console.error(e);
-    } finally {
-        await browser.close();
-    }
-
-    
-  });
-
-});
-*/
-
-describe('createMobileButton', () => {
-
-  const table = document.createElement('table');
-  table.innerHTML = basicTable;
-
-  tableModule.createMobileButton(table);
-
-  test('should add a button to the first cell in a column', () => {
-
-    expect(table.querySelector('tbody td:nth-child(1) button').textContent).toEqual('Cell 1');
-    expect(table.querySelector('tbody td:nth-child(1) span').textContent).toEqual('Cell 1');
-  });
-});
-
 describe('createSearchDataList', () => {
 
   const table = document.createElement('table');
@@ -162,6 +118,7 @@ describe('sortTable', () => {
 
 });
 
+
 describe('filterTable', () => {
 
   const table = document.createElement('table');
@@ -177,25 +134,8 @@ describe('filterTable', () => {
     expect(table.querySelectorAll('tbody tr.filtered--matched').length).toEqual(1);
   });
 });
-/*
-describe('populateDataQueries', () => {
 
-  const table = document.createElement('table');
-  table.innerHTML = basicTable;
-  const form = document.createElement('form');
-  form.innerHTML += `<div><input name="heading" value="Low" data-filter="Heading 2" /><span data-query="total"></span><span data-query="Heading 2 == Low"></span></div>`;
 
-  tableModule.addDataAttributes(table);
-  tableModule.filterTable(table, form, document.createElement('div'));
-  tableModule.populateDataQueries(table, form);
-
-  test('should populate elements with the data-query attribute with the result of the corresponding query', () => {
-
-    //expect(form.querySelector('[data-query="total"]').textContent).toEqual('4');
-    //expect(form.querySelector('[data-query="Heading 2 == Low"]').textContent).toEqual('2');
-  });
-});
-*/
 describe('formatCell', () => {
 
   test('should format the text correctly', () => {
