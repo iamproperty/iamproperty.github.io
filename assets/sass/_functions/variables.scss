@@ -178,7 +178,7 @@ $non-theme-colors: map-merge((
   "btn-secondary-bg": transparent,
   "btn-secondary-bg-hover": var(--colour-primary-theme),
   "btn-secondary-hover": var(--colour-inverted),
-  "canvas-2":     var(--colour-canvas),
+  "canvas-2":     white,
   "btn-action-hover-bg": var(--colour-light)
 ), $non-theme-colors);
 

@@ -4,6 +4,19 @@
       <h1>Changelog</h1>
 
 
+      <h2>V4.1.0-beta</h2>
+      <ul>
+        <li>Updated Pagination</li>
+        <li>Updated Navbar</li>
+        <li>Collapsible side menu</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Any where the table component is used requires that the pagination component JS is loaded</li>
+      </ul>
+
+
       <h2>V4.0.0</h2>
       <ul>
         <li>Action bar component</li>

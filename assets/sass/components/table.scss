@@ -1,123 +1,8 @@
 @use "../_func.scss" as *;
 
-// #region Default table
-table {
-  --border-width: 2px;
-  --inner-border-width: 2px;
-  --hover-background: var(--colour-light);
-  width: 100%;
-  font-size: rem(16);
-  border: none;
-  margin-bottom: rem(32);
-  overflow: auto;
-}
-
-td,th {
-  padding: rem(12) rem(32) rem(12) 0;
-  
-  font-weight: normal;
-  text-align: left;
-  vertical-align: top;
-  border: none;
-  font-size: rem(16);
-  line-height: rem(24);
-  color: var(--colour-body);
-  
-  &:last-child {
-    padding-right: rem(2);
-  }
-  &:first-child {
-    padding-left: rem(2);
-  }
-
-  p {
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;  
-    overflow: hidden;
-    font-size: inherit;
-    padding: 0;
-    min-width: rem(300);
-  }
-}
-
-th {
-  font-weight: bold;
-  @include var(color,--colour-heading);
-}
-
-thead {
-  tr {
-
-    border-bottom: var(--border-width) solid currentColor;
-    @include var(border-color,--colour-primary);
-  }
-  th {
-    font-weight: bold;
-    vertical-align: bottom;
-  }
-}
-
-// Error messages
-tr td[colspan="100%"]:first-child:last-child span {
-
-  max-width: rem(624);
-  font-weight: bold;
-  padding: 3rem;
-  text-align: center;
-  display: block;
-  color: var(--colour-heading);
-
-  @include media-breakpoint-up(md) {
-    max-width: rem(1048);
-  }
-}
-
-@container (width >= 60em) {
-  thead {
-
-    th:not(:empty) {
-      white-space: nowrap;
-      min-width: #{$td-mw};
-    }
-    th.th--mw-md {
-      min-width: rem(240);
-    }
-    th.th--mw-lg {
-      min-width: rem(360);
-    }
-  }
-}
-
-tbody tr {
-
-  border-bottom: var(--border-width) solid currentColor;
-  @include var(border-color,--colour-border);
-
-  &:is(:hover,:focus-within,.hover) {
-
-    --bg-colour-rgb: 238,238,238;
-
-    th,td {
-      background: var(--hover-background);
-      //color: var(--colour-primary-theme);
-      --colour-link: var(--colour-primary-theme);
-      --colour-hover: var(--colour-primary-theme);
-    }
-  }
-
-}
-
-.border-0 > table,
-table.border-0 {
-
-  --border-width: 0px;
-  --inner-border-width: 0px;
-}
-// #endregion
 
 // #region Table wrapper - Add via JS if needed, provides a safe space to scroll
-:is(iam-table, .iam-table) {
+:host {
   --wrapper-padding: #{rem(32)};
   --bg-colour: #ffffff;
   display: block;
@@ -132,16 +17,6 @@ table.border-0 {
     display: none!important;
   }
 
-  table {
-    margin-bottom: 0;
-
-    td:has(input[type="checkbox"]) {
-      width: rem(40);
-      min-width: rem(40);
-      max-width: rem(40);
-    }
-  }
-
   @media screen and (prefers-color-scheme: dark) {
     
     background: var(--colour-canvas-2);
@@ -151,6 +26,10 @@ table.border-0 {
     --wrapper-padding: 0;
     background: var(--colour-canvas-2);
   }
+}
+
+::slotted(table) {
+  margin-bottom: 0!important;
 }
 
 .table__wrapper {
@@ -163,269 +42,67 @@ table.border-0 {
 // #endregion
 
 // #region Tables are only stacked on mobile
-*:has(> iam-table),
-*:has(> .iam-table){
-  container-type: inline-size;
-}
-
 @container (width < 23.4375em) {
 
-  .iam-table, iam-table {
+  :host(:not(.table--fullwidth)) {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
     margin-bottom: 0;
-    background: white;
-
-    @media screen and (prefers-color-scheme: dark) {
-      
-      background: var(--colour-canvas-2);
-    }
-  }
+    background: var(--colour-canvas-2);
+    border-radius: 0;
   
+    .table__wrapper:not(.table--fullwidth) {
+      overflow: hidden;
+      max-height: none!important;
+    }
 
-  .table__wrapper:not(.table--fullwidth) {
-
-    overflow: hidden;
-    max-height: none!important;
-  }
-  :is(iam-table, .iam-table):not(.table--fullwidth) {
-    
     background: none;
     padding: 0;
     box-shadow: none;
     overflow: visible;
 
-    table {
+    ::slotted(table) {
 
-      overflow: visible;
+      overflow: visible!important;
       margin-inline: 1.5rem;
-      margin-bottom: 1.5rem;
-      width: calc(100% - 3rem);
+      margin-bottom: 1.5rem!important;
+      width: calc(100% - 3rem)!important;
       display: block;
-
-      thead {
-        display: none;
-      }
-
-      tbody {
-        display: block;
-        overflow: visible;
-
-        tr td:first-child {
-          padding-top:0;
-        }
-      }
-
-      tr {
-        display: block;
-        position: relative;
-        border: none;
-        background: var(--colour-canvas-2);
-        padding: var(--wrapper-padding);
-        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
-        border-radius: rem(8);
-
-        & + tr {
-          margin-top: rem(32);
-        }
-        
-        &:is(:hover,:focus,.hover) {
-
-          td {
-            background: transparent;
-          }
-        }
-      }
-
-      td,
-      th {
-        display: block;
-        @include var(border-color,--colour-border);
-
-        &:nth-child(1){
-          
-          border-top: none;
-        }
-
-        &[data-label]:before {
-          content: attr(data-label);
-          color: var(--colour-heading);
-          padding: 0;
-          margin-bottom: 0;
-          display: block;
-          font-weight: bold;
-          margin: 0;
-        }
-      }
-
-      td:first-child::after {
-        top: 1.75rem;
-      }
-
-      td::after {
-        top: 2.5rem;
-      }
-
-      tbody tr td:not(:first-child) {
-        border-top: var(--border-width) solid currentColor!important;
-        border-color: var(--colour-border)!important;
-      }
+    }
       
-      tbody tr:has(td:nth-child(4)) td:first-child {
-        
-        position: relative;
+    .table--cta {
+      border-bottom: 0;
 
-        button {
-          display: block!important;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background: transparent;
-          border: none;
-          position: absolute;
-          overflow: hidden;
-          text-indent: -300%;
-
-          &:after {
-            font-family: "Font Awesome 6 Pro";
-            content: "\f055";
-            position: absolute;
-            top: 1px;
-            right: 1px;
-            font-size: rem(28);
-            line-height: rem(28);
-            font-weight: 300;
-            color: var(--colour-primary);
-            text-indent: 0;
-          }
-        }
-      }
-
-      tbody tr:has(td:nth-child(4))[data-view="full"] td:first-child {
-        button:after {
-          content: "\f056";
-          font-weight: 900;
-        }
+      &:after {
+        content: none;
+        display: none !important;;
       }
     }
   }
-  body:not(.js-enabled) :is(iam-table, .iam-table):not(.table--fullwidth) tbody tr:not(:hover):not(:focus-within),
-  :is(iam-table, .iam-table):not(.table--fullwidth) tbody tr:not([data-view="full"]) {
-
-    td:not(:first-child):not(:nth-child(2)):not(:nth-child(3)){
-      display: none;
-    }
-    td:first-child {
-      
-      button:after {
-        content: "\f055";
-      }
-    }
-  }
-
-  .table--cta {
-    border-bottom: 0;
-
-    &:after {
-      content: none;
-      display: none !important;;
-    }
-  }
-  .table--cta:not(.table--fullwidth) tr td:not(:first-child):last-child {
-    display: block!important;
-    position: static;
-    width: 100%;
-    min-width: 100%;
-    margin-left: 0;
-    padding-left: 0;
-    text-align: left;
-    min-height: 0;
-
-    &:after {
-      display: none;
-    }
-  }
-
 }
 // #endregion
 
 // #region CTA column
 @container (width > 23.4375em) {
 
-  :is(iam-table) {
+  :host {
     
     --cta-width: 8rem;
   }
 
-  :is(iam-table).table--loading {
+  :host(.table--loading) {
     
     --cta-width: 1.5rem!important;
   }
 
-  :not(iam-table).table--cta {
+  .table--cta {
     
     position: relative;
-    margin-right: calc(var(--cta-width) - 1.5rem);
   }
 
   .table--cta .table__wrapper {
     overflow-y: hidden;
     margin-bottom: 0;
-  }
-  
-  .table--cta:not(.table--loading):has(tr:first-child td:first-child:last-child) {
-    padding-right: calc(var(--wrapper-padding) + 1.5rem);
-  }
-  .table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
-
-    tr > *:not(:first-child):last-child {
-
-      position: absolute;
-      left: 100%;
-      top: auto;
-      z-index: 3;
-      background: transparent;
-      width: calc(var(--cta-width) + 1rem);
-      padding-left: rem(40);
-      margin-left: rem(-40);
-      min-height: var(--row-height);
-      text-align: right;
-      background: linear-gradient(90deg, transparent 0%, white 1.25rem);
-      cursor: default;
-
-      @media screen and (prefers-color-scheme: dark) {
-        
-      background: linear-gradient(90deg, transparent 0%, var(--colour-canvas-2) 1.25rem);
-      }
-
-      &:after {
-        bottom: 0;
-        left: 0;
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background-color: var(--colour-border);
-      }
-
-      a {
-        white-space: nowrap;
-        padding-right: 0.2rem;
-      }
-    }
-
-    tr > th:not(:first-child):last-child {
-      --colour-border: var(--colour-primary);
-    }
-
-    tbody tr:hover > *:not(:first-child):last-child {
-      background: linear-gradient(90deg, transparent 0%, var(--hover-background) 1.25rem);
-    }
-
-    thead tr > *:not(:first-child):last-child {
-      margin-top: 1px;
-    }
   }
 }
 // #endregion
@@ -453,58 +130,23 @@ table.border-0 {
     display: none;
   }
 }
-
-iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
-
-  position: relative;
-
-  thead {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    background-color: var(--colour-canvas-2);
-
-    &:before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--colour-primary);
-    }
-  }
-  tbody {
-    position: relative;
-
-    tr:first-child td {
-      border-top: 0;
-    }
-    tr:last-child td {
-      border-bottom: 0;
-    }
-
-  }
-}
 //#endregion
 
-// filters 
-.table--filtered tbody tr:not(.filtered--show) {
-  display: none!important;
+// #region Table with actionbar
+@container (width < 23.4375em) {
+
+  .table__wrapper.has-actionbar {
+    margin-top: calc(-100vh - -6.75rem)!important;
+  }
 }
+// #endregion
 
-table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
-  display: none;
-}
-
-
-// Loading via ajax
-.table--loading {
+// #region Loading via ajax
+:host(.table--loading) {
   pointer-events: none;
   position: relative;
 
-  table {
+  ::slotted(table) {
     min-height: 20rem;
     opacity: 0.5;
   }
@@ -524,182 +166,16 @@ table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
     background: radial-gradient(var(--colour-canvas-2), transparent);
   }
 }
+// #endregion
 
-// Statuses 
-table {
-    
-  :is([data-content="low"],
-    [data-content="medium"],
-    [data-content="high"],
-    [data-content="unknown"],
-    [data-content="due"],
-    [data-content="overdue"],
-    [data-content="incomplete"],
-    [data-content="requires approval"],
-    [data-content="upcoming"],
-    [data-content="approval required"],
-    [data-content="warning"],
-    [data-content="verified"],
-    [data-content="not started"],
-    [data-content="to do"],
-    [data-content="on track"],
-    [data-content="completed"],
-    [data-content="complete"],
-    .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty)
-    ) {
-    
-    position: relative;
-    padding-left: 1.5rem;
-
-    &::before {
-      margin-left: -1.5rem!important;
-    }
-
-    &:after {
-
-      font-family: "Font Awesome 6 Pro";
-      position: absolute;
-      top: 1rem;
-      left: 0;
-      font-size: rem(16);
-      line-height: 1;
-      height: rem(16);
-      width: rem(16);
-      display: inline-block;
-    }
-  }
-
-  [data-content="high"]:after {
-    content: "\f325";
-    font-weight: normal;
-    color: var(--colour-danger);
-  }
-
-  [data-content="medium"]:after {
-
-    content: "\f7a4";
-    font-weight: normal;
-    color: var(--colour-warning);
-  }
-
-  [data-content="low"]:after {
-
-    content: "\e404";
-    font-weight: normal;
-    color: var(--colour-complete);
-  }
-
-  [data-content="unknown"]:after {
-
-    content: "\e404";
-    font-weight: normal;
-    color: var(--colour-muted);
-  }
-
-  :is([data-content="overdue"],[data-content="due"],[data-content="incomplete"]):after {
-
-    content: "\f024";
-    font-weight: light;
-    color: var(--colour-danger);
-  }
-
-  :is([data-content="not started"],[data-content="to do"],[data-content="on track"]):after {
-
-    content: "\f024";
-    font-weight: light;
-    color: var(--colour-muted);
-  }
-
-  :is([data-content="requires approval"],[data-content="approval required"],[data-content="upcoming"]):after {
-
-    content: "\f024";
-    font-weight: light;
-    color: var(--colour-warning);
-  }
-
-  :is([data-content="warning"]):after {
-
-    content: "\f071";
-    font-weight: light;
-    color: var(--colour-warning);
-  }
-
-  :is([data-content="verified"],[data-content="completed"],[data-content="complete"]):after {
-    
-    content: "\f00c";
-    font-weight: normal;
-    color: var(--colour-complete);
-  }
-
-  .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty):after {
-
-    content: "\f0f3";
-    font-weight: light;
-    color: var(--colour-primary);
-  }
-}
-
-// #region Table with actionbar 
-
-iam-table {
-
-  td:has([type="checkbox"]){
-    position: static!important;
-    width: rem(40);
-  }
-
-  input:is([type="radio"],[type="checkbox"]) + label {
-    padding-left: 0!important;
-    margin: 0!important;
-  
-    &:before,
-    &:after {
-      top: 0!important;
-    }
-  }
-
-  table:has([type="checkbox"]:checked) tr:has([type="checkbox"]){
-    
-    cursor: pointer;
-
-    &:is(:hover, :focus) {
-      
-      background: var(--hover-background);
-    }
-
-    td {
-      background: transparent;
-    }
-
-    [type="checkbox"] {
-      width: 100%;
-      height: 100%;
-      max-height: var(--row-height);
-      max-width: 100%;
-      cursor: pointer;
-      pointer-events: all;
-      top: auto;
-      margin: 0;
-      margin-top: -0.75rem;
-    }
-
-  }
-}
-
+// #region pagination
 @container (width < 23.4375em) {
-
-  iam-table:has([slot="before"]) {
-
-    iam-actionbar {
-      background-color: #e6eaec;
-    }
-    .actionbar__sticky + * {
-      margin-top: 0!important;
-    }
+  .pagination--table {
+    margin-inline: rem(24);
+    width: auto;
   }
-
-  .table__wrapper.has-actionbar {
-    margin-top: calc(-100vh - -6.75rem)!important;
+  :host(.table--fullwidth) .pagination--table {
+    margin-inline: 0;
   }
 }
 // #endregion

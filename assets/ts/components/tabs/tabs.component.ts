@@ -29,7 +29,9 @@ class iamTabs extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="tabs">
-      <div class="tabs__links"></div>
+      <div class="tabs__links__wrapper">
+        <div class="tabs__links"></div>
+      </div>
       <slot></slot>
     </div>
     `;

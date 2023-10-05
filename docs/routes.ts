@@ -444,7 +444,7 @@ const routes = [
       },
       {
         path: 'pagination',
-        name: 'Pagination (Beta)',
+        name: 'Pagination',
         meta: {
           title: 'Pagination | Components | iamkey'
         },
@@ -523,7 +523,7 @@ const routes = [
       },
       {
         path: 'tabs',
-        name: 'Tabs (Beta)',
+        name: 'Tabs',
         meta: {
           title: 'Tabs | Components | iamkey'
         },
@@ -649,6 +649,10 @@ const routes = [
       {
         path: 'actionbar-top',
         component: () => import('./views/examples/ActionbarTop.vue')
+      },
+      {
+        path: 'pagination',
+        component: () => import('./views/examples/Pagination.vue')
       },
       {
         path: 'charts',

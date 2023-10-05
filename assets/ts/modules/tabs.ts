@@ -12,23 +12,29 @@ export const createTabsLinks = function(tabsElement: Element) {
     tabLinks = document.createElement('div');
     tabLinks.classList.add('tabs__links');
 
-    tabsElement.prepend(tabLinks);
+    let tabLinksWrapper = document.createElement('div');
+    tabLinksWrapper.classList.add('tabs__links__wrapper');
+    
+    tabLinksWrapper.prepend(tabLinks);
+    tabsElement.prepend(tabLinksWrapper);
   }
 
   // Create the tab buttons from the summary titles
   details.forEach((detail, index) => {
     
     let summary = detail.querySelector(':scope > summary');
+    let isDisabled = summary.classList.contains('disabled')
+
     summary.classList.add('visually-hidden');
     
     let button = document.createElement('button');
-    if(detail.hasAttribute('id')){
-        
+
+    if (detail.hasAttribute('id')) {
       button = document.createElement('a');
       button.setAttribute('href',`#${detail.getAttribute('id')}`);
     }
 
-    if(detail.hasAttribute('open')){
+    if (detail.hasAttribute('open')) {
       button.setAttribute('aria-pressed',true);
     }
     
@@ -36,6 +42,10 @@ export const createTabsLinks = function(tabsElement: Element) {
     button.classList.add('link');
     button.setAttribute('data-index',index);
     button.setAttribute('tabindex','-1');
+
+    if (isDisabled) {
+      button.classList.add('disabled')
+    }
 
     tabLinks.appendChild(button);
   });
@@ -55,15 +65,17 @@ export const setTabsEventHandlers = function(tabsElement: Element){
   buttons.forEach((button) => {
 
     button.addEventListener("click", (e) => {
-
       e.preventDefault();
-      buttons.forEach((buttonLoopItem) => {
 
+      if (button.classList.contains('disabled'))
+        return false
+
+      buttons.forEach((buttonLoopItem) => {
         let buttonPressed = buttonLoopItem == button ? true : false;
         buttonLoopItem.setAttribute('aria-pressed', buttonPressed);
       });
+
       details.forEach((detail, detailsIndex) => {
-        
         let detailsOpen = button.getAttribute('data-index') == detailsIndex ? true : false;
 
         if(detailsOpen)
@@ -90,15 +102,15 @@ export const setTabsEventHandlers = function(tabsElement: Element){
 
     // Maintain the focus on the summary element but visually highlight the tab button
     summary.addEventListener("focus", (e) => {
-
       buttons.forEach((button) => {
           
         button.classList.remove('focus');
       });
+
       buttons[index].classList.add('focus');
     });
-    summary.addEventListener("click", (e) => {
 
+    summary.addEventListener("click", (e) => {
       e.preventDefault();
       buttons[index].click();
     });
@@ -128,7 +140,6 @@ export const openFirstTab = function(tabsElement: Element){
 }
 
 const tabs = function(tabsElement: Element){
-
   createTabsLinks(tabsElement);
   setTabsEventHandlers(tabsElement);
   openFirstTab(tabsElement);
