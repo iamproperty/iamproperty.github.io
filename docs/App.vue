@@ -85,10 +85,7 @@ a.router-link-active:not(.text-decoration-none):not(.btn):before {
 
 @include media-breakpoint-up(md) {
 
-  #search {
-    
-    border-radius: 0.5rem!important;
-  }
+
 }
 
 .nav {

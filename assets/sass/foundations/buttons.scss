@@ -314,22 +314,24 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   }
 
   select {
+    all: unset!important;
     
-    padding: calc(rem(12) - 2px) calc(rem(40) - 2px);
-    margin: calc(rem(-12)) calc(rem(-40));
+    padding: calc(rem(12) - 2px) calc(rem(40) - 2px)!important;
+    margin: calc(rem(-12)) calc(rem(-40))!important;
     
-    padding-right: rem(56);
-    margin-right: rem(-56);
-    border-radius: rem(24);
-    appearance: none;
-    background: none;
+    padding-right: rem(56)!important;
+    margin-right: rem(-56)!important;
+    border-radius: rem(24)!important;
+    appearance: none!important;
+    background: none!important;
     border: none!important;
-    color: inherit;
+    color: currentColor!important;
     display: block;
-    min-width: calc(100% + rem(40) + rem(56));
+    max-width: 100%!important;
     outline: none;
     font-weight: bold;
-    
+    font-size: 1.125rem!important;
+    line-height: 1.5rem!important;
     option {
       padding: 0;
       text-align: left;
@@ -340,8 +342,8 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   &:after {
     position: absolute;
-    top: rem(8);
-    right: rem(40);
+    top: rem(10);
+    right: rem(32);
 
     content: "";
     height: rem(24);

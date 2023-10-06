@@ -106,6 +106,7 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
   padding:0;
   display: flex;
 
+
   &:not([class*="col"]){
     margin: 0 0 rem(24) 0;
   }
@@ -123,7 +124,7 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
   }
 }
 
-.col > :is(a,button):has(.card, iam-card):first-child:last-child{
+:is(.col,[class*="col-"]) > :is(a,button):has(.card, iam-card):first-child:last-child{
   min-height: calc(100% - rem(24));
 }
 // #endregion

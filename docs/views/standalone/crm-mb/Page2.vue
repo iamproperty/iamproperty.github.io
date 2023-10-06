@@ -3,7 +3,7 @@
     <MBNav></MBNav>
     <main class="template--form">
       
-      <div class="container pt-4 text-center">
+      <div class="container text-center">
 
       <h1 class="mx-auto">Fetch property from CRM</h1>
       <ol class="list--steps" data-mobile-text="Client details">
@@ -38,7 +38,10 @@
           <form id="form" novalidate action="/standalone/crm-mb/page3">
 
             <strong class="text-primary d-block">Transation address</strong>
-            <span id="property" class="d-block"></span>
+            <div class="pb-5"><span id="property" class="d-inline-block"></span> <i role="button" class="fa-solid fa-trash text-primary ms-3" data-click-events='[
+              {"target":"#input11","event":"updateValue","value":""},
+              {"target":"#property-details","event":"hide"}
+              ]'></i></div>
 
             <hr/>
             <div>
@@ -49,21 +52,21 @@
 
             <div>
               <span class="label">Tenure</span>
-              <input type="radio" name="tenure" id="tenure1" tabindex="-1" value="freehold">
+              <input type="radio" name="tenure" id="tenure1" tabindex="-1" value="freehold" required>
               <label for="tenure1" class="d-inline-block">Freehold</label>
-              <input type="radio" name="tenure" id="tenure2" tabindex="-1" value="leasehold">
+              <input type="radio" name="tenure" id="tenure2" tabindex="-1" value="leasehold" required>
               <label for="tenure2" class="d-inline-block">Leasehold</label>
             </div>
 
             <div>
               <span class="label">Property type</span>
-              <input type="radio" name="property-type" id="propertyType1" tabindex="-1" value="residential">
+              <input type="radio" name="property-type" id="propertyType1" tabindex="-1" value="residential" required>
               <label for="propertyType1" class="d-inline-block">Residential</label>
-              <input type="radio" name="property-type" id="propertyType2" tabindex="-1" value="commercial">
+              <input type="radio" name="property-type" id="propertyType2" tabindex="-1" value="commercial" required>
               <label for="propertyType2" class="d-inline-block">Commercial</label>
             </div>
 
-            <div>
+            <div class="pb-3">
               <span class="label">Method of sale</span>
               <input type="radio" name="method-sale" id="methodSale1" tabindex="-1" value="private treaty" required>
               <label for="methodSale1" class="d-inline-block">Private treaty</label>
@@ -98,6 +101,7 @@ import Notification from '@/components/Notification/Notification.vue'
 
 export default {
   components: {
+    MBNav,
     MBFooter,
     Input,
     Logo,

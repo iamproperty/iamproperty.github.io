@@ -1,5 +1,6 @@
 <template>
-  <Nav class="nav--sticky">
+  <nav>
+  <Nav>
 
   <a href="/" class="brand brand--movebutler" slot="logo">
     <svg>
@@ -16,6 +17,7 @@
   <button class="btn btn-primary">Lorem ipsum</button>
 
   </Nav>
+  </nav>
 </template>
 
 <script>

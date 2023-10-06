@@ -32,11 +32,14 @@ class iamAddressLookup extends HTMLElement {
 
       <div class="postcode-lookup">
         <div>
-        <label for="postcode">Search property address <span class="optional">(Optional)</span></label>
-        <hr/>
+        <label for="postcode">Search property address <span class="optional">(Optional)</span>
+        <span>
         <input type="text" name="postcode" id="postcode" list="addressess" autoComplete="new-password" aria-autocomplete="none" placeholder="Postcode" />
         <span class="suffix fa-regular fa-search"></span>
+        </span>
         <span class="invalid-feedback">This field is required</span>
+        </label>
+
         </div>
         <button class="btn btn-tertiary switch-to-manual-btn">Or enter address manually</button>
       </div>

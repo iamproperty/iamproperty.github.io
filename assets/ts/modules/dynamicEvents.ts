@@ -8,6 +8,10 @@ const createDynamicEvents = () => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-change-events]'))
       readMatches(event.target,event.target.closest('[data-change-events]').getAttribute('data-change-events'));
   });
+  document.addEventListener('change', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-change-events]'))
+      readMatches(event.target,event.target.closest('[data-change-events]').getAttribute('data-change-events'));
+  });
   document.addEventListener('keyup', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-change-events]'))
       readMatches(event.target,event.target.closest('[data-change-events]').getAttribute('data-change-events'));
@@ -93,6 +97,12 @@ const runEvent = (element,event,eventType) => {
       break;
     case "removeAttribute":
       document.querySelector(`${event['target']}`).removeAttribute(event['attribute']);
+      break;
+    case "updateValue":
+      document.querySelector(`${event['target']}`).value = event['value'] ? event['value'] : "";
+      
+      let changeEvent = new Event('change');
+      document.querySelector(`${event['target']}`).dispatchEvent(changeEvent);
       break;
     default:
       break;

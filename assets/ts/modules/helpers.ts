@@ -63,6 +63,12 @@ export const addGlobalEvents = (body) => {
   document.addEventListener("submit", (event) => {
 
     
+    Array.from(document.querySelectorAll('.js-hide')).forEach((hiddenDiv,index) => {
+      Array.from(hiddenDiv.querySelectorAll('[data-required]')).forEach((input,index) => {
+        input.setAttribute('required','true');
+      });
+    });
+    
 
     if (event && event.target instanceof HTMLElement && event.target.matches('form')){
 

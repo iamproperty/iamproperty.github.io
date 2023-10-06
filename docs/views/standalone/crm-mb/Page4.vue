@@ -15,9 +15,9 @@
       </div>
       <div class="container">
 
-        <div class="admin-panel" >
+        <div class="form-panel" >
           <hr/>
-          <h2>Select your client type</h2>
+          <h2 class="h3">Select your client type</h2>
 
 
           <form id="form" novalidate action="/standalone/crm-mb/page5">
@@ -32,32 +32,35 @@
               <hr/>
               <div class="conditional conditional-1 pt-3">
                 
-                <div>
-                  <label for="vendor">Select existing vendor from CRM</label>
+                <label for="vendor">Select existing vendor from CRM
                   <select type="select" name="vendor" id="vendor">
                     <option value=""></option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                   </select>
-                </div>
+                </label>
 
               </div>
               <div class="conditional conditional-2 pt-3">
-                <div>
-                  <label for="buyer">Select existing buyer from CRM</label>
+                <label for="buyer">Select existing buyer from CRM
                   <select type="select" name="buyer" id="buyer">
                     <option value=""></option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                   </select>
-                </div>
-
+                </label>
               </div>
-
             </div>
 
+            <div class="row pt-3">
+              <div class="col-md-4 d-flex align-items-center">
+                <a href="/standalone/crm-mb/page3" class="btn btn-tertiary mb-0">Back</a>
+              </div>
+              <div class="col-md-8 text-end">
+                <button type="submit" class="btn btn-primary mb-0 me-0">Continue</button>
+              </div>
+            </div>
 
-            <div class="text-end pt-3"><button type="submit" class="btn btn-primary mb-0">Continue</button></div>
           </form>  
         </div>
 

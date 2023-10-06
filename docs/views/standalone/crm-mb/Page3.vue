@@ -15,9 +15,8 @@
       </div>
       <div class="container">
 
-        <div class="admin-panel" >
-          <hr/>
-          <h2>Legal proprietor and material information check</h2>
+        <div class="form-panel" >
+          <h2 class="h3">Legal proprietor and material information check</h2>
 
 
           <form id="form" novalidate action="/standalone/crm-mb/page4">
@@ -31,18 +30,22 @@
 
 
 
-            <div>
-              <label for="building-name">Building name/number</label>
-              <input type="text" id="building-name" name="building-name" value="5" required="" />
+            
+            <label>Building name/number <input type="text" name="building-name" value="5" required="" /></label>
+
+            <label>Postcode <input type="text" name="postcode" value="LS6 4LS" required="" /></label>
+
+            <div class="row pt-3">
+              <div class="col-md-4 d-flex align-items-center">
+                
+                <a href="/standalone/crm-mb/page2" class="btn btn-tertiary mb-0">Back</a>
+              </div>
+              <div class="col-md-8 text-end">
+                  
+                <a href="/standalone/crm-mb/page4" class="btn btn-secondary mb-0">Skip this step</a>
+                <button type="submit" class="btn btn-primary mb-0 me-0">Continue</button>
+              </div>
             </div>
-
-            <div>
-              <label for="postcode">Postcode</label>
-              <input type="text" id="postcode" name="postcode" value="LS6 4LS" required="" />
-            </div>
-
-
-            <div class="text-end pt-3"><a href="/standalone/crm-mb/page4" class="btn btn-secondary mb-0">Skip this step</a><button type="submit" class="btn btn-primary mb-0">Continue</button></div>
           </form>  
         </div>
 
