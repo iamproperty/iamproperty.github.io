@@ -13,15 +13,11 @@
       </ol>
 
       </div>
-      <div class="container">
-
+      
         <form novalidate action="/standalone/crm-mb/page6">
           <div class="form-panel" >
             <hr/>
             <h2 class="h3">Client type</h2>
-
-
-            <form id="form" class="pb-2">
 
               <div data-change-events='[
               {"matches":"vendor-buying","if":"show","else":"hide","target":"#vendor-buying"},
@@ -47,7 +43,6 @@
                 <input type="radio" name="legal-type" id="legal-type2" value="company" required data-change-events>
                 <label for="legal-type2" class="d-inline-block">Company</label>
               </div>
-            </form>
           </div>
 
           <hr/>
@@ -62,7 +57,10 @@
                 <strong class="text-primary d-block">Residential address</strong>
                 <p>5 Sunset Road, Leeds, West Yorkshire, England, LS6 4LS <a href="/" class="text-decoration-none ms-1"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></a></p>
 
-                <label>Title <input type="text" name="title" data-required="" /></label>
+                <div class="row">
+
+                  <label class="col-6 col-sm-4 col-md-2">Title <input type="text" name="title" data-required="" /></label>
+                </div>
                   
                 <label>First name <input type="text" name="first-name" data-required="" /></label>
                   
@@ -178,7 +176,7 @@
                     </select>
                   </label>
                 
-                  <label>Postcode <input type="text" name="postcode" data-name="address_1" id="postcode" data-required  /></label>
+                  <div class="row"><label class="col-sm-4">Postcode <input type="text" name="postcode" data-name="address_1" id="postcode" data-required /></label></div>
                   
                 
                   <label>Country
@@ -204,32 +202,6 @@
           </div>
 
         </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </div>
-
-
-
-
-
-
-
-
-
 
 
 

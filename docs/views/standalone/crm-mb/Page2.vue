@@ -25,8 +25,8 @@
             {"in-list":"#addresses", "target":"#form", "if": "populate-form", "source": "/property.json"}
             ]' />
             <datalist id="addresses">
-              <option value="5 Sunset Road, Leeds, West Yorkshire…"></option>
-              <option value="5 Sunset Road, York, West Yorkshire, Y…"></option>
+              <option value="5 Sunset Road, Leeds, West Yorkshire…" data-values='{ "property": "5 Sunset Road, Leeds, West Yorkshire…", "value": "2000,010", "tenure": "freehold", "property-type": "residential", "method-of-sale": ""}'></option>
+              <option value="5 Sunset Road, York, West Yorkshire, Y…" data-values='{ "property": "5 Sunset Road, York, West Yorkshire…", "value": "2000,010", "tenure": "freehold", "property-type": "residential", "method-of-sale": ""}'></option>
             </datalist>
             <button class="suffix fa-solid fa-search"><span class="visually-hidden">Search</span></button>
           </div>
@@ -44,11 +44,12 @@
               ]'></i></div>
 
             <hr/>
-            <div>
-              <label for="value">Input field label</label>
+            <label for="value">Property value
+              <span>
               <span class="prefix">£ <small>GBP</small></span>
-              <input type="text" id="value" name="value" placeholder="Optional placheolder text" required="" />
-            </div>
+              <input type="text"  name="value" placeholder="Optional placheolder text" required="" />
+              </span>
+            </label>
 
             <div>
               <span class="label">Tenure</span>

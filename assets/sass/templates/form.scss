@@ -11,6 +11,23 @@ body:has(.template--form) {
 .template--form {
 
   --input-max-width: #{rem(450)};
+  --select-max-width: #{rem(500)};
+
+  @supports selector(:has(*)){
+
+    label:has(> :is(.suffix,.prefix)) {
+
+      --input-max-width: #{rem(500)};
+      max-width: var(--input-max-width);
+    }
+    div:has(> :is(.suffix,.prefix)) {
+
+      --input-max-width: #{rem(500)};
+      max-width: var(--input-max-width);
+    }
+  }
+
+
 
   // Make H2's look like H3's
   :is(h2, .h2) {
@@ -43,16 +60,17 @@ body:has(.template--form) {
     
     @include media-breakpoint-up(sm) {
 
-      max-width: rem(924); // Guess
+      max-width: calc(100% - 5rem); // Guess
       margin-inline: auto;
-      padding-inline: rem(94);
-      padding-block: rem(40);
-      margin-bottom: rem(32);
     }
 
     @include media-breakpoint-up(md) {
 
+      max-width: rem(924); // Guess
       border-radius: 0.5rem;
+      padding-inline: rem(94);
+      padding-block: rem(40);
+      margin-bottom: rem(32);
     }
 
     > *:last-child {

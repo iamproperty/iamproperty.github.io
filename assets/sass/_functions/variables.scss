@@ -339,6 +339,7 @@ $paragraph-margin-bottom: 2rem;
 
 $input-max-width-px: 800;
 $input-max-width: var(--input-max-width, #{rem($input-max-width-px)});
+$select-max-width: var(--select-max-width, #{rem($input-max-width-px)});
 // #endregion 
 
 // #region Buttons

@@ -53,8 +53,10 @@ const checkMatch = (element,event) => {
     return false;
   }
   else if("in-list" in event){
-    if(document.querySelector(`${event['in-list']} option[value="${element.value}"]`))
-      runEvent(element,event,'if');
+    if(document.querySelector(`${event['in-list']} option[value="${element.value}"]`)){
+      let match = document.querySelector(`${event['in-list']} option[value="${element.value}"]`);
+      runEvent(element,event,'if',match);
+    }
     else
       runEvent(element,event,'else');
 
@@ -65,7 +67,7 @@ const checkMatch = (element,event) => {
   }
 };
 
-const runEvent = (element,event,eventType) => {
+const runEvent = (element,event,eventType,match) => {
 
   if(eventType in event == false)
     return false;
@@ -90,7 +92,7 @@ const runEvent = (element,event,eventType) => {
       });
       break;
     case "populate-form":
-      populateForm(element,event);
+      populateForm(element,event,match);
       break;
     case "setAttribute":
       document.querySelector(`${event['target']}`).setAttribute(event['attribute'],event['value']);
@@ -109,60 +111,30 @@ const runEvent = (element,event,eventType) => {
   }
 }
 
-const populateForm =  async function (element,event) {
+const populateForm = function (element,event,match) {
   
-  const ajaxURL = event['source'];
-
+  let response = JSON.parse(match.getAttribute('data-values'));
   let form = document.querySelector(event['target']);
-  form.setAttribute('data-loading','true');
 
-  // Setup controller vars if not already set
-  if(!window.controller)
-  window.controller = [];
+  Object.keys(response).forEach((field, index) => {
 
-  // Abort if controller already present for this url
-  if(window.controller[ajaxURL])
-  window.controller[ajaxURL].abort();
-
-  // Create a new controller so it can be aborted if new fetch made
-  window.controller[ajaxURL] = new AbortController();
-  const { signal } = controller[ajaxURL];
-  try {
-    await fetch(event['source']+'?'+encodeURI(element.value), {
-      signal: signal,
-      method: 'get',
-      credentials: 'same-origin',
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    })
-    .then((response) => response.json()).then((response) => {
-      Object.keys(response).forEach((field, index) => {
-
-        if(document.getElementById(field) && document.getElementById(field).tagName == "SPAN")
-          document.getElementById(field).innerHTML = response[field];
-        
-        if(form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`)){
-          
-          Array.from(form.querySelectorAll(`input[name="${field}"][type="radio"]`)).forEach(function(input,index){
-            input.disabled = true;
-          });
-
-          form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`).checked = true;
-          form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`).disabled = false;
-        }
-        else if(form.querySelector(`input[name="${field}"]`)){
-          form.querySelector(`input[name="${field}"]`).value = response[field];
-          form.querySelector(`input[name="${field}"]`).setAttribute('readonly','true');
-        }
+    if(document.getElementById(field) && document.getElementById(field).tagName == "SPAN")
+      document.getElementById(field).innerHTML = response[field];
+    
+    if(form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`)){
+      
+      Array.from(form.querySelectorAll(`input[name="${field}"][type="radio"]`)).forEach(function(input,index){
+        input.disabled = true;
       });
-      form.removeAttribute('data-loading');
-    });
-  } catch (error) {
-    console.log(error);
-  }
+
+      form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`).checked = true;
+      form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`).disabled = false;
+    }
+    else if(form.querySelector(`input[name="${field}"]`)){
+      form.querySelector(`input[name="${field}"]`).value = response[field];
+      form.querySelector(`input[name="${field}"]`).setAttribute('readonly','true');
+    }
+  });
 }
 
 export default createDynamicEvents;

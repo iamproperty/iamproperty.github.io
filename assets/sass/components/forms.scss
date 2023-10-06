@@ -23,7 +23,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output,select:not(.select--minimal)) {
   display: block;
   width: 100%;
-  max-width: $input-max-width;
   display: block;
   width: 100%;
   padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
@@ -60,7 +59,11 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     opacity: 0.4;
     cursor: not-allowed;
   }
+}
 
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])){
+
+  max-width: $input-max-width;
 }
 
 textarea {
@@ -98,18 +101,6 @@ div:has(> label:first-child):has(> input) {
   max-width: $input-max-width;
   margin-bottom: rem(24);
 
-  &:has(input[readonly]):after{
-    font-family: "Font Awesome 6 Pro";
-    font-weight: 300;
-    content: "\f023";
-    position: absolute;
-    font-size: var(--input-lh, #{rem(20)});
-    height: var(--input-lh, #{rem(20)});
-    width: var(--input-lh, #{rem(20)});
-    bottom: calc(var(--input-padding-block, #{rem(12)}) + 2px);
-    right: calc(var(--input-padding-block, #{rem(16)}) + 2px);
-    text-align: center;
-  }
 
   input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), output, .prefix, .suffix {
     margin-bottom: 0!important;
@@ -193,7 +184,29 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
 }
 // #endregion
 
+// #region readonly
+*:has( > input[readonly]) {
 
+  position: relative;
+  
+  max-width: $input-max-width;
+
+    
+  &:after{
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 300;
+    content: "\f023";
+    position: absolute;
+    font-size: var(--input-lh, #{rem(20)});
+    height: var(--input-lh, #{rem(20)});
+    width: var(--input-lh, #{rem(20)});
+    bottom: calc(var(--input-padding-block, #{rem(12)}) + 2px);
+    right: calc(var(--input-padding-block, #{rem(16)}) + 2px);
+    text-align: center;
+  }
+}
+
+// #endregion
 
 // #region prefix
 :is(.prefix, .suffix) {
@@ -224,7 +237,7 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     
     min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
     max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
-
+    flex-shrink: 0;
 
     &:after {
       display: inline-block;
@@ -350,6 +363,7 @@ input[maxlength] + span {
 
 .was-validated input:is(:invalid, .is-invalid,:-internal-autofill-selected) {
 
+  border-color: var(--colour-danger)!important;
   background-image: escape-svg($icon-error);
   background-repeat: no-repeat;
   background-position: right var(--input-padding-inline, #{rem(16)}) center;
@@ -708,8 +722,10 @@ select {
               linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top/calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) no-repeat;
   
   padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem));
-  
   option {font-size: 1.2em;}
+
+  
+  max-width: $select-max-width;
 
   &[multiple],
   &[size]:not([size="1"]) {
