@@ -51,30 +51,34 @@
               </span>
             </label>
 
-            <div>
+            <fieldset>
               <span class="label">Tenure</span>
               <input type="radio" name="tenure" id="tenure1" tabindex="-1" value="freehold" required>
               <label for="tenure1" class="d-inline-block">Freehold</label>
               <input type="radio" name="tenure" id="tenure2" tabindex="-1" value="leasehold" required>
               <label for="tenure2" class="d-inline-block">Leasehold</label>
-            </div>
+              
+              <span class="invalid-feedback">This field is required</span>
+            </fieldset>
 
-            <div>
+            <fieldset>
               <span class="label">Property type</span>
               <input type="radio" name="property-type" id="propertyType1" tabindex="-1" value="residential" required>
               <label for="propertyType1" class="d-inline-block">Residential</label>
               <input type="radio" name="property-type" id="propertyType2" tabindex="-1" value="commercial" required>
               <label for="propertyType2" class="d-inline-block">Commercial</label>
-            </div>
+              
+              <span class="invalid-feedback">This field is required</span>
+            </fieldset>
 
-            <div class="pb-3">
+            <fieldset class="pb-3">
               <span class="label">Method of sale</span>
               <input type="radio" name="method-sale" id="methodSale1" tabindex="-1" value="private treaty" required>
               <label for="methodSale1" class="d-inline-block">Private treaty</label>
               <input type="radio" name="method-sale" id="methodSale2" tabindex="-1" value="auction" required>
               <label for="methodSale2" class="d-inline-block">Auction</label>
               <span class="invalid-feedback">This field is required</span>
-            </div>
+            </fieldset>
 
 
             <Notification >

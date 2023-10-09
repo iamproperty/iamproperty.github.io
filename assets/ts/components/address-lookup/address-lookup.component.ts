@@ -32,18 +32,18 @@ class iamAddressLookup extends HTMLElement {
 
       <div class="postcode-lookup">
         <div>
-        <label for="postcode">Search property address <span class="optional">(Optional)</span>
-        <span>
-        <input type="text" name="postcode" id="postcode" list="addressess" autoComplete="new-password" aria-autocomplete="none" placeholder="Postcode" />
-        <span class="suffix fa-regular fa-search"></span>
-        </span>
-        <span class="invalid-feedback">This field is required</span>
+        <label class="mb-2">Search property address <span class="optional">(Optional)</span>
+          <span>
+          <input type="text" name="postcode" list="address-lookup__addressess" autoComplete="new-password" aria-autocomplete="none" placeholder="Postcode" />
+          <span class="suffix fa-regular fa-search"></span>
+          </span>
+          <span class="invalid-feedback">Required Adddress fields missing</span>
         </label>
 
         </div>
         <button class="btn btn-tertiary switch-to-manual-btn">Or enter address manually</button>
       </div>
-      <datalist id="addressess"></datalist>
+      <datalist id="address-lookup__addressess"></datalist>
 
       <div class="manual-address pb-2 js-hide">
         <slot></slot>
@@ -57,7 +57,7 @@ class iamAddressLookup extends HTMLElement {
 	async connectedCallback() {
 
     const wrapper = this.shadowRoot.querySelector('.wrapper');
-    const lookup = this.shadowRoot.querySelector('#postcode');
+    const lookup = this.shadowRoot.querySelector('label');
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
     const list = this.shadowRoot.querySelector('datalist');

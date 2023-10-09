@@ -22,12 +22,22 @@
 
           <form id="form" novalidate action="/standalone/crm-mb/page5">
 
-            <div data-change-events='[{"matches":"vendor","if":"setAttribute","else":"removeAttribute","attribute":"required", "value":"true","target":"#vendor"},{"matches":"buyer","if":"setAttribute","else":"removeAttribute","attribute":"required", "value":"true","target":"#buyer"}]'>
+            <div>
+              
+              
               <span class="label">Client type</span>
-              <input type="radio" name="client-type" id="client-type" tabindex="-1" value="vendor" required data-change-events>
+              <input type="radio" name="client-type" id="client-type" tabindex="-1" value="vendor" required data-change-events='[
+            {"matches":"vendor","if":"setAttribute","else":"removeAttribute","attribute":"required", "value":"true","target":"#vendor"},
+            {"matches":"buyer","if":"setAttribute","else":"removeAttribute","attribute":"required", "value":"true","target":"#buyer"}
+            ]'>
               <label for="client-type" class="d-inline-block">Vendor</label>
-              <input type="radio" name="client-type" id="client-type2" tabindex="-1" value="buyer" required data-change-events>
+              <input type="radio" name="client-type" id="client-type2" tabindex="-1" value="buyer" required data-change-events='[
+            {"matches":"vendor","if":"setAttribute","else":"removeAttribute","attribute":"required", "value":"true","target":"#vendor"},
+            {"matches":"buyer","if":"setAttribute","else":"removeAttribute","attribute":"required", "value":"true","target":"#buyer"}
+            ]'>
               <label for="client-type2" class="d-inline-block">Buyer</label>
+              
+              <span class="invalid-feedback">This field is required</span>
 
               <hr/>
               <div class="conditional conditional-1 pt-3">

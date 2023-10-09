@@ -30,6 +30,8 @@
                 <label for="client-type" class="d-inline-block">Vendor</label>
                 <input type="radio" name="client-type" id="client-type2" value="vendor-buying" required data-change-events>
                 <label for="client-type2" class="d-inline-block">Vendor buying on</label>  
+                
+                <span class="invalid-feedback">This field is required</span>
               </div>
 
               <div  data-change-events='[
@@ -42,6 +44,8 @@
 
                 <input type="radio" name="legal-type" id="legal-type2" value="company" required data-change-events>
                 <label for="legal-type2" class="d-inline-block">Company</label>
+                
+                <span class="invalid-feedback">This field is required</span>
               </div>
           </div>
 
@@ -59,7 +63,7 @@
 
                 <div class="row">
 
-                  <label class="col-6 col-sm-4 col-md-2">Title <input type="text" name="title" data-required="" /></label>
+                  <label class="col-6 col-sm-4 col-md-2 error-nowrap">Title <input type="text" name="title" data-required="" /></label>
                 </div>
                   
                 <label>First name <input type="text" name="first-name" data-required="" /></label>
@@ -94,7 +98,6 @@
                     <option value="2">Two</option>
                   </select>
                 </label>
-
               </div>
 
               <label for="capacity">Capacity
@@ -120,7 +123,8 @@
                   <input type="radio" name="through-branch" id="through-branch1" value="yes" data-required data-change-events>
                   <label for="through-branch1" class="d-inline-block">Yes</label>
                   <input type="radio" name="through-branch" id="through-branch2" value="no" data-required data-change-events>
-                  <label for="through-branch2" class="d-inline-block">No</label>  
+                  <label for="through-branch2" class="d-inline-block">No</label>
+                  <span class="invalid-feedback">This field is required</span>
                 </fieldset>
                 <fieldset data-change-events='[
                 {"matches":"yes","if":"show","else":"hide","target":"#onward-purchase"},
@@ -130,6 +134,7 @@
                   <label for="onward-purchase1" class="d-inline-block">Yes</label>
                   <input type="radio" name="onward-purchase" id="onward-purchase2" value="no" data-required data-change-events>
                   <label for="onward-purchase2" class="d-inline-block">No</label>  
+                  <span class="invalid-feedback">This field is required</span>
                 </fieldset>
               </fieldset>
 

@@ -45,7 +45,9 @@ const readMatches = (element,events) => {
 const checkMatch = (element,event) => {
 
   if("matches" in event){
-    if(element.value == event.matches)
+    if(event['matches'] == 'any')
+      runEvent(element,event,'if');
+    else if(element.value == event.matches)
       runEvent(element,event,'if');
     else
       runEvent(element,event,'else');
@@ -79,7 +81,8 @@ const runEvent = (element,event,eventType,match) => {
       hideElement.classList.add('js-hide');
 
       Array.from(hideElement.querySelectorAll('[data-required]')).forEach((input, index) => {
-        input.removeAttribute('required');
+        
+          input.removeAttribute('required');
       });
       break;
     case "show":
@@ -88,7 +91,9 @@ const runEvent = (element,event,eventType,match) => {
       showElement.classList.remove('js-hide');
 
       Array.from(showElement.querySelectorAll('[data-required]')).forEach((input, index) => {
-        input.setAttribute('required','true');
+        
+        if(!input.closest('.js-hide'))
+          input.setAttribute('required','true');
       });
       break;
     case "populate-form":

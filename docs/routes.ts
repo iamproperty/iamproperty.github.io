@@ -867,6 +867,22 @@ const routes = [
           title: 'CRM to MB example | iamkey'
         },
         component: () => import('./views/standalone/crm-mb/Page6.vue')
+      },
+      {
+        path: 'crm-ias',
+        name: "CRM - IAS",
+        meta: {
+          title: 'CRM to IAS example | iamkey'
+        },
+        component: () => import('./views/standalone/crm-ias/Index.vue')
+      },
+      {
+        path: 'crm-ias/page2',
+        name: "CRM - IAS 2",
+        meta: {
+          title: 'CRM to IAS example | iamkey'
+        },
+        component: () => import('./views/standalone/crm-ias/Page2.vue')
       }
     ]
   },

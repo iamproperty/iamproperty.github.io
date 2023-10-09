@@ -54,7 +54,7 @@
         </div>
 
 
-        <form class="form-panel js-hide" id="invite">
+        <form novalidate action="/standalone/crm-mb" class="form-panel js-hide" id="invite">
           <hr/>
           <h2>Send digital invite</h2>
 
@@ -64,32 +64,33 @@
           <div class="row">
             <div class="col-sm-6">
               
-              <label for="email">Email address</label>
-              <input type="email" id="email" name="email" data-required="" />
+              <label>Email address <input type="email" name="email" data-required="" /></label>
+              
 
             </div>
             <div class="col-sm-6">
               
-              <label for="tel">Telephone number</label>
-              <input type="tel" id="tel" name="tel" data-required="" />
+              <label>Telephone number <input type="tel" name="tel" data-required="" /></label>
 
             </div>
           </div>
 
-          <div>
+          <fieldset>
             <input type="checkbox" name="sms" id="sms">
             <label for="sms">Send SMS reminder (Optional)</label>
-          </div>
+        </fieldset>
 
           
-          <div>
+          <fieldset>
             <span class="label">From a money laundering perspective is there anything unusual or suspicious about this transaction or individual at this stage?</span>
             <input type="radio" name="money-laundering" id="money-laundering1" value="yes" data-required>
             <label for="money-laundering1" class="d-inline-block">Yes</label>
 
             <input type="radio" name="money-laundering" id="money-laundering2" value="no" data-required>
             <label for="money-laundering2" class="d-inline-block">No</label>
-          </div>
+            
+            <span class="invalid-feedback">This field is required</span>
+          </fieldset>
           
           <Notification class="">
             <strong>Please ensure the details from your CRM are correct: </strong> If they are not correct, please go to the property details within the CRM to update.

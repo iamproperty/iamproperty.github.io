@@ -76,7 +76,7 @@ const rollupConfig = [
   }
 ];
 
-const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side'];
+const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup'];
 
 components.forEach((component) => {
 
