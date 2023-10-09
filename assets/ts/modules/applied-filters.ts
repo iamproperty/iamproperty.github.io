@@ -96,17 +96,14 @@ function createAppliedFilters(container,filters) {
   Array.from(container.querySelectorAll('input[type="checkbox"]:checked')).forEach((input, index) => {
     addFilterButton(filters, input)
   });
-  
-  container.addEventListener('change', function(event){
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')){
-
-      let input = event.target.closest('input[data-filter-text]');
-
-      addFilterButton (filters, input);
-    };
+  Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input, index) => {
     
-  }, false);
+    input.addEventListener('change', function(event){
+
+      addFilterButton(filters, input)
+    });
+  });
 
   filters.addEventListener('click', function(event){
 
@@ -136,7 +133,8 @@ function createAppliedFilters(container,filters) {
             input.checked = false;
 
             var event = new Event('force');
-            input.closest('form').dispatchEvent(event);
+            if(!container.hasAttribute('data-nosubmit'))
+              input.closest('form').dispatchEvent(event);
           }
         }
       }

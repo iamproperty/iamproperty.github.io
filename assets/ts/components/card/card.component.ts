@@ -37,6 +37,8 @@ class iamCard extends HTMLElement {
       ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
         <slot></slot>
       </div>
+        
+      <slot name="checkbox"></slot>
       ${this.hasAttribute('data-cta') ? `<div class="card__footer"><span class="link">${this.getAttribute('data-cta')}</span></div>` : ''}
     </div>
     `;
@@ -44,7 +46,7 @@ class iamCard extends HTMLElement {
   }
 
 	connectedCallback() {
-    
+
     this.classList.add('loaded');
     
     // Mimic clicking the parent node so the focus and target events can be on the card
@@ -63,6 +65,13 @@ class iamCard extends HTMLElement {
       else
         card.classList.remove('checked');
     }
+
+    // Click event down
+    this.addEventListener('click', (event) => {
+
+      let clickEvent = new Event('click');
+      card.dispatchEvent(clickEvent);
+    });
 
     card.addEventListener('click', (event) => {
 
@@ -151,7 +160,8 @@ class iamCard extends HTMLElement {
   attributeChangedCallback(attrName, oldVal, newVal) {
     switch (attrName) {
       case "data-total": {
-        this.shadowRoot.querySelector('.card__total').innerHTML = newVal;
+        if(this.shadowRoot.querySelector('.card__total'))
+          this.shadowRoot.querySelector('.card__total').innerHTML = newVal;
         break;
       }
       case "class": {

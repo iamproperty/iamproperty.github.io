@@ -1,7 +1,11 @@
 @use "../_func" as *;
 
+$icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
+
+$icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
+
 // #region Form label
-label {
+:is(label,.label) {
   font-size: rem(18);
   line-height: rem(21);
   margin-bottom: rem(8);
@@ -16,10 +20,9 @@ label {
 // #endregion
 
 // #region input field
-:is(input,textarea,output,select) {
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output,select:not(.select--minimal)) {
   display: block;
   width: 100%;
-  max-width: $content-max-width;
   display: block;
   width: 100%;
   padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
@@ -56,15 +59,18 @@ label {
     opacity: 0.4;
     cursor: not-allowed;
   }
+}
 
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])){
+
+  max-width: $input-max-width;
 }
 
 textarea {
-  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px);
-  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px);
+  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px)!important;
+  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px)!important;
 }
 // #endregion
-
 
 // #region legend
 fieldset {
@@ -92,36 +98,25 @@ legend {
 // #region wrappers
 div:has(> label:first-child):has(> input) {
   position: relative;
-  max-width: $content-max-width;
+  max-width: $input-max-width;
   margin-bottom: rem(24);
 
-  &:has(input[readonly]):after{
-    font-family: "Font Awesome 6 Pro";
-    font-weight: 300;
-    content: "\f023";
-    position: absolute;
-    font-size: var(--input-lh, #{rem(20)});
-    height: var(--input-lh, #{rem(20)});
-    width: var(--input-lh, #{rem(20)});
-    bottom: calc(var(--input-padding-block, #{rem(12)}) + 2px);
-    right: calc(var(--input-padding-block, #{rem(16)}) + 2px);
-    text-align: center;
-  }
 
-  input, output, .prefix, .suffix {
-    margin-bottom: 0;
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), output, .prefix, .suffix {
+    margin-bottom: 0!important;
   }
 
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 
-  > *:not(input):not(output):not(.prefix):not(.suffix) {
+
+  > *:not(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])):not(output):not(.prefix):not(.suffix) {
     flex-shrink: 0;
     width: 100%;
   }
 
-  :is(input,textarea,output) {
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output) {
     flex-shrink: 1;
     flex-grow: 1;
     width: 0;
@@ -133,9 +128,9 @@ div:has(> label:first-child):has(> input) {
   }
 
   input[type="color"]{
-    width: 3rem;
-    flex-shrink: 0;
-    flex-grow: 0;
+    width: 3rem!important;
+    flex-shrink: 0!important;
+    flex-grow: 0!important;
     border-start-end-radius: 0;
     border-end-end-radius: 0;
     padding: 0;
@@ -156,9 +151,10 @@ div:has(> label:first-child):has(> input) {
   }
 
   output {
-    border-left: none;
-    border-end-start-radius: 0;
-    border-start-start-radius: 0;
+    border-left: none!important;
+    border-end-start-radius: 0!important;
+    border-start-start-radius: 0!important;
+    margin: 0!important;
   }
 }
 
@@ -188,115 +184,145 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
 }
 // #endregion
 
+// #region readonly
+*:has( > input[readonly]) {
 
+  position: relative;
+  
+  max-width: $input-max-width;
+
+    
+  &:after{
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 300;
+    content: "\f023";
+    position: absolute;
+    font-size: var(--input-lh, #{rem(20)});
+    height: var(--input-lh, #{rem(20)});
+    width: var(--input-lh, #{rem(20)});
+    bottom: calc(var(--input-padding-block, #{rem(12)}) + 2px);
+    right: calc(var(--input-padding-block, #{rem(16)}) + 2px);
+    text-align: center;
+  }
+}
+
+// #endregion
 
 // #region prefix
 :is(.prefix, .suffix) {
-  display: inline-block;
-  width: auto;
-  padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-block, #{rem(16)});
-  font-size: var(--input-fs, #{rem(16)});
-  line-height: var(--input-lh, #{rem(20)});
-  color: var(--colour-body);
-  background-color: var(--colour-primary-theme);
-  border: 2px solid var(--colour-primary);
-  color: var(--colour-white);
-  margin-bottom: 1rem;
-  border-end-start-radius: rem(8);
-  border-start-start-radius: rem(8);
-  min-width: calc(#{rem(20 + 12 + 12)} + 4px);
-  overflow: hidden;
-  white-space: nowrap;
-  text-align: center;
-  text-overflow: ellipsis;
-  position: relative;
-  
-  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
-  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
-
-
-  &:after {
-    display: inline-block;
-    max-width: rem(20);
-  }
-
-  &[class*="fa-"] {
-    width: calc(#{rem(20 + 12 + 12)} + 4px);
-    padding-inline: 0;
-  }
-
-  select {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
-
-  span {
-    display: none;
-  }
-
-  select:has(option:nth-child(1):checked) ~ span:nth-of-type(1),
-  select:has(option:nth-child(2):checked) ~ span:nth-of-type(2),
-  select:has(option:nth-child(3):checked) ~ span:nth-of-type(3),
-  select:has(option:nth-child(4):checked) ~ span:nth-of-type(4),
-  select:has(option:nth-child(5):checked) ~ span:nth-of-type(5),
-  select:has(option:nth-child(6):checked) ~ span:nth-of-type(6),
-  select:has(option:nth-child(7):checked) ~ span:nth-of-type(7),
-  select:has(option:nth-child(8):checked) ~ span:nth-of-type(8),
-  select:has(option:nth-child(9):checked) ~ span:nth-of-type(9),
-  select:has(option:nth-child(10):checked) ~ span:nth-of-type(10) {
-
-    display: block;
-  }
-
-  select ~ span:after {
-    content: " \f078";
-    font-family: "Font Awesome 6 Pro";
-    font-size: 0.8em;
-    display: inline-block;
-    padding-left: 1em;
-  }
-
-  select:focus-visible ~ span:after {
-    content: "\f077";
-  }
-}
-
-.prefix {
-  
-  border-right: none;
-}
-
-.suffix {
-  
-  border-left: none;
-  border-end-start-radius: 0;
-  border-start-start-radius: 0;
-  border-start-end-radius: rem(8)!important;
-  border-end-end-radius: rem(8)!important;
-  order: 2;
-}
-
-.prefix span {
   display: none;
+}
+@supports selector(:has(*)) {
 
-  small {
-    font-size: 0.8em;
+  :is(.prefix, .suffix) {
+    display: inline-block;
+    width: auto;
+    padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-block, #{rem(16)});
+    font-size: var(--input-fs, #{rem(16)});
+    line-height: var(--input-lh, #{rem(20)});
+    color: var(--colour-body);
+    background-color: var(--colour-primary-theme);
+    border: 2px solid var(--colour-primary);
+    color: var(--colour-white);
+    margin-top: 0!important;
+    margin-bottom: 1rem;
+    border-end-start-radius: rem(8);
+    border-start-start-radius: rem(8);
+    min-width: calc(#{rem(20 + 12 + 12)} + 4px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    text-overflow: ellipsis;
+    position: relative;
+    
+    min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+    max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
+    flex-shrink: 0;
+
+    &:after {
+      display: inline-block;
+      max-width: rem(20);
+    }
+
+    &[class*="fa-"] {
+      width: calc(#{rem(20 + 12 + 12)} + 4px);
+      padding-inline: 0;
+    }
+
+    select {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    span {
+      display: none;
+    }
+
+    select:has(option:nth-child(1):checked) ~ span:nth-of-type(1),
+    select:has(option:nth-child(2):checked) ~ span:nth-of-type(2),
+    select:has(option:nth-child(3):checked) ~ span:nth-of-type(3),
+    select:has(option:nth-child(4):checked) ~ span:nth-of-type(4),
+    select:has(option:nth-child(5):checked) ~ span:nth-of-type(5),
+    select:has(option:nth-child(6):checked) ~ span:nth-of-type(6),
+    select:has(option:nth-child(7):checked) ~ span:nth-of-type(7),
+    select:has(option:nth-child(8):checked) ~ span:nth-of-type(8),
+    select:has(option:nth-child(9):checked) ~ span:nth-of-type(9),
+    select:has(option:nth-child(10):checked) ~ span:nth-of-type(10) {
+
+      display: block;
+    }
+
+    select ~ span:after {
+      content: " \f078";
+      font-family: "Font Awesome 6 Pro";
+      font-size: 0.8em;
+      display: inline-block;
+      padding-left: 1em;
+    }
+
+    select:focus-visible ~ span:after {
+      content: "\f077";
+    }
   }
-}
 
-.prefix ~ :is(input,textarea,output) {
-  
-  border-end-start-radius: 0;
-  border-start-start-radius: 0;
-}
+  .prefix {
+    
+    border-right: none;
+  }
 
-.suffix ~ :is(input,textarea,output) {
-  order: 1;
-  
-  border-start-end-radius: 0;
-  border-end-end-radius: 0;
+  .suffix {
+    
+    border-left: none;
+    border-end-start-radius: 0;
+    border-start-start-radius: 0;
+    border-start-end-radius: rem(8)!important;
+    border-end-end-radius: rem(8)!important;
+    order: 2;
+  }
+
+  .prefix span {
+    display: none;
+
+    small {
+      font-size: 0.8em;
+    }
+  }
+
+  .prefix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output) {
+    
+    border-end-start-radius: 0!important;
+    border-start-start-radius: 0!important;
+  }
+
+  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output),
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output):has(~ .suffix) {
+    order: 1;
+    
+    border-start-end-radius: 0!important;
+    border-end-end-radius: 0!important;
+  }
 }
 // #endregion
 
@@ -322,24 +348,20 @@ input[maxlength] + span {
 
 // #region Form validation
 
-$icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
 
-$icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
-
-
-.was-validated *:not(button):is(:invalid, .is-invalid):not(.is-valid) {
-
-  --colour-check-border: var(--colour-danger);
-  border-color: var(--colour-danger);
-}
-
-.was-validated *:not(button):is(:invalid, .is-invalid):not(.is-valid) + label {
+.was-validated *:not(button):is(:invalid, .is-invalid):not(.is-valid) + label,
+.was-validated label:has(*:not(button):is(:invalid, .is-invalid):not(.is-valid)) {
 
   --colour-check-border: var(--colour-danger);
   --colour-check-bg: #FCEBEC;
+  border-color: var(--colour-danger);
 }
 
-.was-validated input:is(:invalid, .is-invalid) {
+.was-validated *:not(button):is(:invalid, .is-invalid,:-internal-autofill-selected) {
+
+  border-color: var(--colour-danger)!important;
+}
+.was-validated input:is(:invalid, .is-invalid,:-internal-autofill-selected) {
 
   background-image: escape-svg($icon-error);
   background-repeat: no-repeat;
@@ -373,12 +395,26 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   display: none;
 }
 
-.was-validated:has(*:is(:invalid, .is-invalid)) .invalid-feedback {
+// Postcode lookup validation
+iam-address-lookup:has([required]){
+  
+  --req-display: none;
+}
+
+.was-validated :is(:invalid, .is-invalid) ~ .invalid-feedback {
   display: block;
 }
+
+.was-validated iam-address-lookup:has([required]:invalid) {
+  --error-border: var(--colour-danger);
+  --error-display: block;
+}
+
 // #endregion
 
 // #region radio/checkbox field 
+@supports selector(:has(*)) {
+
 input:is([type="radio"],[type="checkbox"]) {
   position: absolute;
   top: 0;
@@ -390,25 +426,25 @@ input:is([type="radio"],[type="checkbox"]) {
   pointer-events: none;
 }
 
-:is(div,fieldset):has(> input:is([type="radio"],[type="checkbox"])) {
+:is(div,fieldset,label):has(> input:is([type="radio"],[type="checkbox"])):not(:has(label input)) {
   position: relative;
-
-  padding-bottom: rem(24);
+  margin-bottom: rem(24);
 }
 
-:is(div,fieldset):has( > input[type="radio"]){
+:is(div,fieldset,label):has( > input[type="radio"]){
 
   --border-radius: 50%;
   --outline-width: #{rem(8)};
 }
 
-:is(div,fieldset):has( > input[type="checkbox"]) {
+:is(div,fieldset,label):has( > input[type="checkbox"]) {
 
   --border-radius: #{rem(4)};
   --outline-width: #{rem(4)};
 }
 
-input:is([type="radio"],[type="checkbox"]) + label:not(:has(> iam-card)) {
+input:is([type="radio"],[type="checkbox"]) + label:not(:has(> iam-card)),
+label:has(input:is([type="radio"],[type="checkbox"])):not(:has(> iam-card)){
 
   --tick-colour: transparent;
 
@@ -433,7 +469,7 @@ input:is([type="radio"],[type="checkbox"]) + label:not(:has(> iam-card)) {
   
   &:last-child {
     
-    margin-bottom: rem(24);
+    margin-bottom: 0;
   }
 
   &:before {
@@ -450,7 +486,8 @@ input:is([type="radio"],[type="checkbox"]) + label:not(:has(> iam-card)) {
   }
 }
 
-input[type="radio"] + label:not(:has(> iam-card)) {
+input[type="radio"] + label:not(:has(> iam-card)),
+label:has(input[type="radio"]):not(:has(> iam-card)) {
 
   &:after {
     content: ""!important;
@@ -461,7 +498,7 @@ input[type="radio"] + label:not(:has(> iam-card)) {
     display: none;
     position: absolute;
     top: rem(15 - 2);
-    left: rem(5);
+    left: calc(#{rem(5)} + var(--outline-width));
   }
 
   &.radio--tick {
@@ -487,7 +524,8 @@ input[type="radio"] + label:not(:has(> iam-card)) {
 
 @media (forced-colors: active) {
 
-  input:is([type="radio"],[type="checkbox"]):not(:checked) + label.radio--tick:not(:has(> iam-card)) {
+  input:is([type="radio"],[type="checkbox"]):not(:checked) + label.radio--tick:not(:has(> iam-card)),
+  label:has(input:is([type="radio"],[type="checkbox"]):not(:checked)).radio--tick:not(:has(> iam-card)) {
 
     &:before {
     
@@ -496,13 +534,15 @@ input[type="radio"] + label:not(:has(> iam-card)) {
   }
 }
 
-div:has(> :is(input[type="radio"],input[type="checkbox"]):nth-of-type(2)) {
-  label:not(:has(> iam-card)):not(:last-of-type) {
+// multiple radio's together
+:is(div,fieldset):has(> :is(input[type="radio"],input[type="checkbox"]):nth-of-type(2)) {
+  label:not(:has(> iam-card)) {
     margin-bottom: 0rem;
   }
 }
 
-input:is([type="radio"],[type="checkbox"]):checked + label {
+input:is([type="radio"],[type="checkbox"]):checked + label,
+label:has(input:is([type="radio"],[type="checkbox"]):checked) {
 
   --tick-colour: var(--colour-info);
 
@@ -519,13 +559,16 @@ input:is([type="radio"],[type="checkbox"]):checked + label {
   }
 }
 
-input[type="checkbox"]:not([disabled]):checked + label {
+input[type="checkbox"]:not([disabled]):checked + label,
+label:has(input[type="checkbox"]:not([disabled]):checked) {
 
   &:before {
     background: var(--colour-info)!important;
   }
 }
-input[type="checkbox"]:checked + label {
+
+input[type="checkbox"]:checked + label,
+label:has(input[type="checkbox"]:checked) {
 
   &:after {
     content: "\f00c";
@@ -547,7 +590,8 @@ input[type="checkbox"]:checked + label {
   }
 }
 
-input[type="checkbox"]:indeterminate + label {
+input[type="checkbox"]:indeterminate + label,
+label:has(input[type="checkbox"]:indeterminate) {
 
   &:before {
     background: var(--colour-info) !important;
@@ -575,11 +619,14 @@ input[type="checkbox"]:indeterminate + label {
 }
 
 
-input:is([type="radio"],[type="checkbox"]):checked:is(:focus,:hover,.focus) + label {
+input:is([type="radio"],[type="checkbox"]):checked:is(:focus,:hover,.focus) + label,
+label:has(input:is([type="radio"],[type="checkbox"]):checked:is(:focus,:hover,.focus)) {
 
   --tick-colour: var(--colour-info);
 }
-input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus) + label {
+
+input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus) + label,
+label:has(input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus)) {
 
   --tick-colour: var(--colour-muted);
 
@@ -588,7 +635,8 @@ input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus) + label {
     outline: var(--outline-width) solid var(--colour-light);
   }
 }
-input:is([type="radio"],[type="checkbox"]):is(:active,.active) + label {
+input:is([type="radio"],[type="checkbox"]):is(:active,.active) + label,
+label:has(input:is([type="radio"],[type="checkbox"]):is(:active,.active)) {
 
   --tick-colour: var(--colour-light);
 
@@ -599,7 +647,8 @@ input:is([type="radio"],[type="checkbox"]):is(:active,.active) + label {
 }
 
 // Disabled
-input:is([type="radio"],[type="checkbox"]):disabled + label {
+input:is([type="radio"],[type="checkbox"]):disabled + label,
+label:has(input:is([type="radio"],[type="checkbox"]):disabled)  {
 
   opacity: 0.4;
   cursor: not-allowed;
@@ -615,19 +664,23 @@ input:is([type="radio"],[type="checkbox"]):disabled + label {
   }
 }
 
-input[type="radio"][disabled]:checked + label {
+input[type="radio"][disabled]:checked + label,
+label:has(input[type="radio"][disabled]:checked) {
   
   &:after {
     background-color: var(--colour-primary)!important;
   }
 }
 
-input[type="checkbox"][disabled]:checked + label {
+input[type="checkbox"][disabled]:checked + label,
+label:has(input[type="checkbox"][disabled]:checked) {
 
   &:before {
     background: #E0E0E0!important;
     border-color: #E0E0E0!important;
   }
+}
+
 }
 // #endregion
 
@@ -676,6 +729,7 @@ select[multiple]::-webkit-scrollbar-thumb {
 
 // #region Select
 
+
 select {
   $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
@@ -683,8 +737,10 @@ select {
               linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top/calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) no-repeat;
   
   padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem));
-  
   option {font-size: 1.2em;}
+
+  
+  max-width: $select-max-width;
 
   &[multiple],
   &[size]:not([size="1"]) {
@@ -704,6 +760,54 @@ select {
     text-shadow: 0 0 0 $form-select-color;
   }
 }
+
+div:has(> select){
+
+  margin-bottom: rem(24);
+
+  select {
+    margin-bottom: 0!important;
+  }
+}
+
+.select--minimal {
+
+  all: unset;
+  font-size: inherit;
+  background: none;
+  border: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0 calc(1.25em + 0.8ch) 0 0.25em;
+  height: auto;
+  cursor: pointer;
+
+  option {
+    background-color: var(--colour-canvas);
+    padding-left: 1em;
+  }
+
+
+  &:is(:hover,:focus) {
+    outline: 1px solid var(--colour-info);
+  }
+}
+
+*:has(> .select--minimal){
+  position: relative;
+
+  &:after {
+    font-size: 0.8em;
+    line-height: 1em;
+    content: "\f078";
+    font-family: "Font Awesome 6 Pro";
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    right: calc(0.25em + 0.8ch);
+    pointer-events: none;
+  }
+}
 // #endregion
 
 // #region file upload
@@ -713,6 +817,72 @@ iam-fileupload {
     display: none;
   }
 
+}
+// #endregion
+
+
+// #region label with input field in 
+:is(label, .label):has(:is(input,select)){
+
+  display: block;
+  margin-bottom: rem(24);
+
+  :is(input,select) {
+    margin-top: rem(8);
+    margin-bottom: 0!important;
+  }
+
+  :is(input,select) ~ span:not(:is(.suffix,.prefix,.invalid-feedback)) {
+    all: initial;
+    font-family: var(--font-body);
+    color: var(--colour-body);
+    margin-top: rem(8);
+    display: block;
+    line-height: 1.2;
+  }
+  .invalid-feedback {
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.2;
+  }
+
+  span:has(:is(input,select)) {
+    display: flex;
+    width: 100%;
+  }
+
+  :is(.suffix,.prefix) {
+    margin: rem(8) 0 0 0!important;
+  }
+}
+
+.was-validated label:has(:is(input:not([type="radio"]):not([type="checkbox"]),select)),
+.was-validated fieldset:has(label input:is([type="radio"],[type="checkbox"]):invalid){
+  
+  margin-bottom: 1.5rem;
+
+  &:has(:invalid):after {
+    content: "This field is required";
+    color: var(--colour-danger);
+    margin-top: rem(8);
+    background-image: escape-svg($icon-error);
+    background-repeat: no-repeat;
+    background-position: left top 1px;
+    background-size: var(--input-fs, #{rem(16)}) var(--input-fs, #{rem(16)});
+    padding-left: calc(var(--input-fs, #{rem(16)}) + #{rem(8)});
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  &[data-error]:has(:invalid):after {
+    content: attr(data-error)!important;
+  }
+
+  &.error-nowrap:after {
+    white-space: nowrap;
+  }
 }
 
 // #endregion

@@ -60,7 +60,10 @@
   justify-content: flex-end;
   align-items: center;
   height: rem(68);
-  position: absolute;
+  
+  @supports selector(:has(*)) {
+    position: absolute;
+  }
   inset: 0;
 
   @include container-up(sm) {
@@ -75,15 +78,29 @@
 
 .actionbar--selected {
 
-  background-color: #E6EAEC;
+  background-color: var(--colour-canvas);
+
+  @include light-mode {
+    
+    background-color: #E6EAEC;
+  }
+
   display: flex;
+  
+  @supports selector(:has(*)) {
   opacity: 0;
+  }
   pointer-events: none;
 }
 
 .actionbar--search {
 
-  background-color: #E6EAEC;
+  background-color: var(--colour-canvas);
+  
+  @include light-mode {
+
+    background-color: #E6EAEC;
+  }
   display: flex;
   z-index: 2;
   position: relative;
@@ -203,11 +220,6 @@
     position: static!important;
     line-height: inherit!important;
   }
-}
-
-::slotted(.dialog__wrapper[slot="overflow"]) dialog[open]{
-
-  background: red;
 }
 
 .dialog__wrapper.dialog-overflow {

@@ -76,18 +76,30 @@ const rollupConfig = [
   }
 ];
 
-const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side'];
+const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup'];
 
 components.forEach((component) => {
 
   let css = '';
-
+  let extraCSS = '';
+  
   try {
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.css`))) {
       
       css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.css`), 'utf8');
       css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       css = css.replace("\uFEFF","");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  try {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.extras.css`))) {
+      
+      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.extras.css`), 'utf8');
+      extraCSS = extraCSS.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      extraCSS = extraCSS.replace("\uFEFF","");
     }
   } catch (err) {
     console.error(err);
@@ -107,7 +119,8 @@ components.forEach((component) => {
       replace({
         'process.env.NODE_ENV': '"production"',
         preventAssignment: true,
-        'loadCSS': JSON.stringify(`${css}`)
+        'loadCSS': JSON.stringify(`${css}`),
+        'loadExtraCSS': JSON.stringify(`${extraCSS}`)
       }),
       minify(),
     ]

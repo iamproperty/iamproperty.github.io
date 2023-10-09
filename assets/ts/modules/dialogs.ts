@@ -36,6 +36,23 @@ const extendDialogs = (body) => {
       dialog.showModal();
       dialog.focus();
 
+      let firstWidth = dialog.offsetWidth;
+      dialog.setAttribute('style',`max-width: ${firstWidth}px;`);
+
+      // When the modal is opened we want to make sure any duplicate checkboxes are matching the originals
+      Array.from(dialog.querySelectorAll('[data-duplicate]')).forEach((element,index) => {
+        
+        const id = element.getAttribute('data-duplicate');
+        const originalInput = document.getElementById(id);
+
+        if(element.checked != originalInput.checked){
+
+          element.checked = originalInput.checked;
+          let changeEvent = new Event('change');
+          element.dispatchEvent(changeEvent);
+        }
+      });
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         "event": "openModal",
@@ -244,6 +261,7 @@ export const createMultiFormDialog = (dialog) => {
 
   let buttons = "";
   let fieldsets = Array.from(dialog.querySelectorAll('fieldset[data-title]'));
+  let form = dialog.querySelector('form');
 
   fieldsets.forEach((fieldset,index) => {
     buttons += `<button data-title="${fieldset.getAttribute('data-title')}" type="button" class="${index == 0 ? "active":""}" tabindex="-1">${fieldset.getAttribute('data-title')}</button>`;
@@ -258,8 +276,18 @@ export const createMultiFormDialog = (dialog) => {
     if(index != fieldsets.length - 1)
       btnWrapper.innerHTML += `<button data-title="${fieldsets[index+1].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="button">Next</button>`;
 
-    if(index == fieldsets.length - 1)
-      btnWrapper.innerHTML += `<button data-title="${fieldsets[index].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="submit">Submit</button>`;
+    // Last fieldset
+    if(index == fieldsets.length - 1){
+      if(form && form.querySelector(':scope > button[type="submit"]')){
+
+        let existingButton = form.querySelector(':scope > button[type="submit"]');
+        existingButton.classList.add('mb-0')
+
+        btnWrapper.insertAdjacentElement('beforeend',existingButton);
+      }
+      else
+        btnWrapper.innerHTML += `<button data-title="${fieldsets[index].getAttribute('data-title')}" class="btn btn-primary mb-0" data-next type="submit">Submit</button>`;
+    }  
   });
 
   dialog.insertAdjacentHTML('afterbegin',`<div class="steps bg-primary">${buttons}</div>`);
@@ -359,11 +387,12 @@ export const createMultiFormDialog = (dialog) => {
 
       const button = event.target.closest('button');
 
-      if(event.keyCode == 13){
+      if(event.keyCode == 13 && button.getAttribute('type') != "submit"){
         
         event.preventDefault();
         validateFieldset(button);
       }
+
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('input')){
@@ -371,13 +400,21 @@ export const createMultiFormDialog = (dialog) => {
 
       input.classList.remove('is-invalid');
 
-
+      if(event.keyCode == 13){
+        
+        event.preventDefault();
+      }
     }
   });
 
 
   dialog.addEventListener('click', (event) => {
-    if (event && event.target instanceof HTMLElement && event.target.closest('button[data-title]')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('button[type="submit"]')){
+      
+      const form = event.target.closest('form');
+      form.classList.add('was-validated');
+    }
+    else if (event && event.target instanceof HTMLElement && event.target.closest('button[data-title]')){
 
       const button = event.target.closest('button[data-title]');
       validateFieldset(button);

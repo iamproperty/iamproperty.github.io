@@ -45,6 +45,15 @@
         <li><a href="/sub-section">Sub Section</a></li>
       </ol>
     </div>
+
+    <div class="container visualtest">
+      <h2>Step list</h2>
+      <ol class="list--steps" data-mobile-text="Client details">
+        <li class="step--complete">Property details</li>
+        <li class="step--current">Client details</li>
+        <li>Onboarding route</li>
+      </ol>
+    </div>
     
 
   </main>

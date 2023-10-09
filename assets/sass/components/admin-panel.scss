@@ -12,7 +12,7 @@
   margin-bottom: rem(24);
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
-  @media screen and (prefers-color-scheme: dark) {
+  @include dark-mode() {
     
     background-color: var(--colour-canvas-2);
     color: var(--colour-body);
@@ -89,6 +89,10 @@
       padding-bottom: 0!important;
     }
   }
+
+  > iam-pagination {
+    margin-top: -1rem;
+  }
 }
 
 [class*="col"] .admin-panel:first-child:last-child:not(:has(.mh-sm,.mh-md,.mh-lg)) {
@@ -160,5 +164,50 @@
   .link:is(.current,[aria-pressed="true"]) {
     pointer-events: none;
   }
+}
+// #endregion
+
+// #region Has actionbar
+.admin-panel:has(iam-actionbar) {
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child {
+    margin-bottom: 0;
+  }
+
+  iam-actionbar {
+    
+    background: var(--colour-canvas);
+    
+    @include light-mode {
+        
+      background: #eeeeee;
+    }
+      
+    margin-inline: calc(var(--padding-x) * -1);
+    margin-bottom: var(--padding-top);
+
+    &:first-child {
+      margin-top: calc(var(--padding-top) * -1);
+    }
+    &:not(:first-child){
+      
+      border-radius: 0;
+    }
+  }
+
+  > iam-table {
+    overflow: visible;
+    
+    &:first-child {
+      margin-top: calc(var(--padding-top) * -1);
+    }
+
+    iam-actionbar {
+      
+      margin-top: 0!important;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  } 
 }
 // #endregion

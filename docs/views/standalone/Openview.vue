@@ -42,7 +42,7 @@
           <div class="col-sm-6 col-md-4">
             <div class="admin-panel">
               <h2><i class="fa-regular fa-calendar"></i> Today's events</h2>
-              <Table class="mh-md table--fullwidth">
+              <Table class="mh-md table--fullwidth" data-show="5">
                 <table>
                   <thead>
                     <tr>
@@ -51,26 +51,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
                     <tr>
                       <td>9:30</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>

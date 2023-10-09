@@ -1,6 +1,5 @@
 <template>
   <main>
-    
     <DSHeader :image="headerImg" section="components">
       <h1>Action bar</h1>
     </DSHeader>
@@ -9,7 +8,7 @@
       <p class="lead">Action bars serve as a central hub for users to access and perform actions within an interface.</p>
       <h2>Introduction</h2>
       <p>Action bars are a useful component that can be integrated with other existing components, allowing users to eciently perform actions on one or multiple items simultaneously. Action bars emphasise clarity by presenting a concise set of actions, ensuring that the most important and frequently used actions are prominently displayed.</p>
-      <p>Defined by it’s compact design and responsive overflow options, the micro-component rich action bar is viable in already busy interfaces and on smaller screens.</p>
+      <p>Defined by it's compact design and responsive overflow options, the micro-component rich action bar is viable in already busy interfaces and on smaller screens.</p>
     
       <h2>Anatomy</h2>
       <img :src="anatomy" class="mb-3" />
@@ -455,7 +454,7 @@
       <pre><code id="dispatchedEvents2"></code></pre>
     </div>
 
-    <!-- Waiting for the completion of FEG-129 
+    <!-- Waiting for the completion of FEG-129 -->
     <div class="container pt-5">
       <h3>Selected state: active area</h3>
       <p>The active area around the select box in the default state is kept tight around the select box. Users must directly click on the select box to trigger the Selected state. Other elements sharing the same container in the item can be interacted with, e.g. an ‘Open link’ button in a card or a text link within a table row.</p>
@@ -483,8 +482,7 @@
       </div>
 
     </div>
-  -->
-
+    
 
 
     <div class="container">
@@ -497,15 +495,15 @@
 
         <div class="col-16 col-sm-6">
           <img :src="intable" class="mb-3" />
-          <p><a href="/examples/actionbar-table">Add to tables</a></p>
+          <p><a href="/examples/actionbar-table" target="_blank">Add to tables</a></p>
         </div>
         <div class="col-16 col-sm-6">
           <img :src="adminpanel" class="mb-3" />
-          <p><a href="/examples/actionbar-panel">Add to admin panel</a></p>
+          <p><a href="/examples/actionbar-panel" target="_blank">Add to admin panel</a></p>
         </div>
         <div class="col-16 col-sm-6">
           <img :src="attop" class="mb-3" />
-          <p><a href="/examples/actionbar-top">Add to top of page</a></p>
+          <p><a href="/examples/actionbar-top" target="_blank">Add to top of page</a></p>
         </div>
 
       </div>
@@ -513,7 +511,6 @@
     </div>
 
 
-    <!-- Waiting for completion of FEG-240 
     <div class="container">
       <h3>Mobile behaviour</h3>
       <p>On mobile devices, the action bar collapses to save screen space, condensed into a few key buttons or icons or with an overflow menu with listed actions. To accommodate the mobile table rows or list elements, it becomes sticky and follows the user down the page to ensure action options are always available to the user.</p>
@@ -532,7 +529,6 @@
       </div>
 
     </div>
-    -->
 
     <div class="container">
       <h3>Overflow</h3>

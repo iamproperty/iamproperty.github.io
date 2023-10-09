@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { zeroPad, isNumeric, ucfirst } from "./helpers";
-import createPaginationButttons from "./pagination";
 
 // Basic functionality needed
 export const addDataAttributes = (table) => {
@@ -60,44 +59,50 @@ export const getLargestLastColWidth = (table) => {
   return largestWidth;
 }
 
-export const createMobileButton = (table) => {
+export const createMobileButton = (table, wrapper) => {
 
-  if(table.closest('.table--fullwidth'))
+
+  if(wrapper.classList.contains('.table--fullwidth') && !wrapper.hasAttribute('data-expandable'))
     return false;
 
-  if(table.querySelectorAll('thead tr th').length < 4)
+  if(table.querySelectorAll('thead tr th').length < 4 && !wrapper.hasAttribute('data-expandable'))
     return false;
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-    let firstCol = row.querySelector(':scope > :is(td,th):first-child');
 
-    let colContent = firstCol.textContent;
-
-    if(colContent != "")
-      firstCol.innerHTML =`<span class="td__content">${colContent}</span><button type="button" class="d-none">${colContent}</button>`;
-    else {
-      let secondCol = row.querySelector(':scope > :is(td,th):nth-child(2)');
-      let secondColContent = secondCol.textContent;
-      secondCol.innerHTML =`<span class="td__content">${secondColContent}</span><button type="button" class="d-none">${secondColContent}</button>`;
-    }
+  Array.from(table.querySelectorAll('thead tr')).forEach((row,index) => {
+        
+    row.insertAdjacentHTML(
+      'afterbegin',
+      `<th class="th--fixed expand-button-heading"></th>`
+    );
   });
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row,index) => {
+        
+    row.insertAdjacentHTML(
+      'afterbegin',
+      `<td class="td--fixed td--expand"><button class="btn btn-compact btn-secondary" data-expand-button>Expand</button></td>`
+    );
+  });
+
+
 }
 
 export const addTableEventListeners = (table) => {
 
   table.addEventListener('click', (event) => {
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('tr > :is(td,th):first-child button')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-expand-button]')){
 
-      let firstCol = event.target.closest('tr > :is(td,th):first-child button');
-      let tableRow = firstCol.parentNode.closest('tr');
+      let button = event.target.closest('[data-expand-button]');
+      let tableRow = button.closest('tr');
 
       if(tableRow.getAttribute('data-view') == "full")
         tableRow.setAttribute('data-view','default');
       else
         tableRow.setAttribute('data-view','full');
 
-      firstCol.blur();
+        button.blur();
     };
   });
 }
@@ -140,7 +145,35 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   var timer;
 
   // Check what conditions are set on the table to see what the form actions are
-  let formSubmit = function(paginate = false){
+  let formSubmit = function(event, paginate = false){
+
+    if(form.classList.contains('processing'))
+      return false;
+
+
+    // Before submitting check if any duplicate checkboxes within the filters dialog needs to upset the original input
+    if(event.type == "submit"){
+      form.classList.add('processing');
+      Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element,index) => {
+
+        const id = element.getAttribute('data-duplicate');
+        const input = document.getElementById(id);
+        const card = document.querySelector(`[for="${id}"] iam-card`);
+
+
+        if(input.checked != element.checked){
+            
+          if(card){
+            let clickEvent = new Event('click');
+            card.dispatchEvent(clickEvent);
+          }
+          else {
+            input.checked = element.checked;
+          }
+        }
+      });
+      form.classList.remove('processing');
+    }
 
     if(form.hasAttribute('data-ajax')){
 
@@ -157,7 +190,6 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       form.submit();
     else {
       filterTable(table, form, wrapper);
-      createPaginationButttons(wrapper,pagination);
       populateDataQueries(table,form);
     }
 
@@ -179,7 +211,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
 
       timer = setTimeout(function(){
-        formSubmit();
+        formSubmit(event);
       }, 500);
     };
   });
@@ -193,37 +225,36 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       if(!form.hasAttribute('data-submit'))
         sortTable(table, form, savedTableBody);
 
-      formSubmit();
+      formSubmit(event);
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
         
-      formSubmit();
+      formSubmit(event);
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter][data-no-ajax]')){ // Allow for input fields to filter the current results without a new ajax call
 
       filterTable(table, form, wrapper);
-      createPaginationButttons(wrapper,pagination);
       populateDataQueries(table,form);
     }
     else if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && event.target.closest('form .dialog__wrapper > dialog')){
       
-      formSubmit();
+      formSubmit(event);
     }
     else if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter]') && !event.target.closest('form dialog')){
       
-      formSubmit();
+      formSubmit(event);
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
         
-      formSubmit();
+      formSubmit(event);
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-mimic]')){
         
-      formSubmit();
+      formSubmit(event);
     }
   });
 
@@ -248,13 +279,59 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')){
-      
-      form.reset();
+
+      form.classList.add('processing');
+      // Make sure any applied filters have been removed
+      Array.from(form.querySelectorAll('.applied-filters')).forEach((filters,index) => {
+        filters.innerHTML = "";
+      });
+
+      // Make sure cards are unlicked
+      let frm_elements = form.elements;
+
+      for (let i = 0; i < frm_elements.length; i++)
+      {
+          let field_type = frm_elements[i].type.toLowerCase() ? frm_elements[i].type.toLowerCase() : "text";
+          switch (field_type)
+          {
+          case "text":
+          case "password":
+          case "textarea":
+              frm_elements[i].value = "";
+              break;
+          case "radio":
+          case "checkbox":
+              if (frm_elements[i].checked)
+              {
+                  let input = frm_elements[i];
+                  let id = input.getAttribute('id');
+                  let label = document.querySelector(`[for="${id}"`);
+
+                  if(label.querySelector('iam-card')){
+                    let card = label.querySelector('iam-card');
+                    let clickEvent = new Event('click');
+                    card.dispatchEvent(clickEvent);
+                  }
+
+                  input.checked = false;
+              }
+              break;
+          case "select-one":
+          case "select-multi":
+              frm_elements[i].selectedIndex = -1;
+              break;
+          case "hidden":
+          default:
+              break;
+          }
+      }
+
+      form.classList.remove('processing');
 
       if(!form.hasAttribute('data-submit'))
         sortTable(table, form, savedTableBody);
 
-      formSubmit();
+      formSubmit(event);
     }
   });
 
@@ -265,17 +342,17 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if(!form.hasAttribute('data-submit'))
       event.preventDefault();
 
-    formSubmit();
+    formSubmit(event);
   });
 
   form.addEventListener('force', (event) => {
 
-    formSubmit();
+    formSubmit(event);
   });
 
   form.addEventListener('paginate', (event) => {
 
-    formSubmit(true);
+    formSubmit(event,true);
   });
 
 
@@ -597,10 +674,9 @@ export const filterTable = (table, form, wrapper) => {
   });
 
   if(wrapper){
-    wrapper.setAttribute('data-page',page);
-    wrapper.setAttribute('data-pages',Math.ceil(matched/showRows));
     wrapper.setAttribute('data-total',matched);
     wrapper.setAttribute('data-show',showRows);
+    wrapper.setAttribute('data-page',page);
   }
 
 }
@@ -673,40 +749,40 @@ export const populateDataQueries = (table,form,wrapper) => {
 // Pagination
 export const addPaginationEventListeners = function(table, form, pagination, wrapper){
 
-  pagination.addEventListener('click', (event) => {
+  pagination.addEventListener('update-page', (event) => {
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-page]')){
-      
-      event.preventDefault();
+    let paginationInput = form.querySelector('[data-pagination]');
+    let newPage = event.detail.page;
 
-      let paginationInput = form.querySelector('[data-pagination]');
-      let newPage = event.target.closest('[data-page]').getAttribute('data-page');
-      paginationInput.value = newPage;
-      wrapper.setAttribute('data-page', newPage);
-      form.dispatchEvent(new Event("paginate"));
+    // Set the filter value
+    paginationInput.value = newPage;
+    form.dispatchEvent(new Event("paginate"));
 
-      if(table.hasAttribute('data-show-history')){
-          
-        const url = new URL(location);
-        url.searchParams.set("page", newPage);
-        history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
-      }
+    // Reset the data attribute
+    wrapper.setAttribute('data-page',newPage);
 
-      // scroll back to the top of the table
+    if(table.hasAttribute('data-show-history')){
+        
+      const url = new URL(location);
+      url.searchParams.set("page", newPage);
+      history.pushState({'type':'pagination','form':form.getAttribute('id'),'page':newPage}, "", url)
+    }
+
+    // scroll back to the top of the table
+    if(!wrapper.hasAttribute('data-no-scroll')){
       const yOffset = -250;
       const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({top: y, behavior: 'smooth'});
     }
+  });
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')){
+  pagination.addEventListener('update-show', (event) => {
 
-      event.preventDefault();
-      let showInput = form.querySelector('[data-show]');
-      let showRows = event.target.closest('[data-show]').getAttribute('data-show');
-      showInput.value = showRows;
-      wrapper.setAttribute('data-show', showRows);
-      form.dispatchEvent(new Event("submit"));
-    }
+    let showInput = form.querySelector('[data-show]');
+    let showRows = event.detail.show;
+    showInput.value = showRows;
+    wrapper.setAttribute('data-show', showRows);
+    form.dispatchEvent(new Event("submit"));
   });
 }
 
@@ -770,7 +846,7 @@ export const exportAsCSV = function(table){
 export const makeTableFunctional = function(table, form, pagination, wrapper){
 
   addDataAttributes(table);
-  createMobileButton(table);
+  createMobileButton(table, wrapper);
   populateDataQueries(table, form, wrapper);
   
   // Work out the largest width of the CTA's in the last column
@@ -872,6 +948,10 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
   window.controller[ajaxURL] = new AbortController();
   const { signal } = controller[ajaxURL];
 
+  // Set loading on the pagination
+  pagination.setAttribute('data-loading','true');
+  form.classList.add('processing');
+
   try {
     await fetch(ajaxURL+'?'+queryString, {
       signal: signal,
@@ -889,7 +969,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
       let totalNumberSchema = form.hasAttribute('data-schema-total') ? form.getAttribute('data-schema-total') : 'meta.total';
       let currentPageSchema = form.hasAttribute('data-schema-page') ? form.getAttribute('data-schema-page') : 'meta.current_page';
 
-      let totalNumber = resolvePath(response, totalNumberSchema, 1);
+      let totalNumber = resolvePath(response, totalNumberSchema, 15);
       let currentPage = resolvePath(response, currentPageSchema, 1);
       let data = resolvePath(response, schema);
       let emptyMsg = wrapper.hasAttribute('data-empty-msg') ? wrapper.getAttribute('data-empty-msg') : "No results found";
@@ -963,11 +1043,9 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
         // Add data to the pagination 
         wrapper.setAttribute('data-total', parseInt(totalNumber));
         wrapper.setAttribute('data-page', parseInt(currentPage));
-        wrapper.setAttribute('data-pages', Math.ceil(wrapper.getAttribute('data-total') / wrapper.getAttribute('data-show')));
 
         
         makeTableFunctional(table, form, pagination, wrapper);
-        createPaginationButttons(wrapper, pagination);
 
         Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement, index) => {
 
@@ -995,6 +1073,10 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
       else {
         tbody.innerHTML = '<tr><td colspan="100%"><span>Error loading table</span></td></tr>';
       }
+    
+      // Remove loading on the pagination
+      pagination.removeAttribute('data-loading');
+      form.classList.remove('processing');
     });
   } catch (error) {
     console.log(error);

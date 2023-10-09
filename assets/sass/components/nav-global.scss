@@ -10,10 +10,16 @@ body:has(iam-nav.open:not(.nav--sticky):not(.nav--xs-sticky)) {
 body {
   
   --nav-height: #{rem(96)};
+  --sticky-padding: 0px;
 
   &:has(iam-nav a[slot="secondary"]){
     
     --nav-height: #{rem(96 + 40)};
+  }
+
+  &:has(iam-nav.nav--sticky) {
+    
+    --sticky-padding: var(--nav-height);
   }
 }
 
@@ -108,9 +114,10 @@ iam-nav {
     height: rem(48);
     padding: 0;
     text-decoration: none;
+    min-width: min(var(--svg-width), 14rem);
   }
 
-  a:not([slot="logo"]):not(:has(iam-card)) {
+  a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
     
     text-decoration: none;
 
@@ -165,7 +172,7 @@ iam-nav details {
 
     background-color: var(--colour-canvas);
     
-    @media screen and (prefers-color-scheme: light) {
+    @include light-mode() {
       background-color: #EEEEEE;
     }
 
@@ -180,9 +187,9 @@ iam-nav details {
       background-color: var(--colour-white);
 
             
-      @media screen and (prefers-color-scheme: dark) {
+      @include dark-mode() {
         
-      background-color: var(--colour-canvas-2);
+        background-color: var(--colour-canvas-2);
       }
       display:block;
       border: none;
@@ -378,11 +385,11 @@ iam-nav details {
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
 
       
-      @media screen and (prefers-color-scheme: light) {
+      @include light-mode() {
         background: var(--colour-white);
         @include reset-colours();
       }
-      @media screen and (prefers-color-scheme: dark) {
+      @include dark-mode() {
 
         @include invert-colours();
       }
@@ -393,7 +400,7 @@ iam-nav details {
       
       background: var(--colour-canvas-2);
       
-      @media screen and (prefers-color-scheme: light) {
+      @include light-mode() {
         background: #EEEEEE;
       }
       a {
@@ -426,7 +433,7 @@ iam-nav details {
     &[open] > div:not(:has(details)) {
       background: var(--colour-canvas);
 
-      @media screen and (prefers-color-scheme: light) {
+      @include light-mode() {
         background: var(--colour-white);
         --colour-canvas-2: white;
       }
@@ -489,7 +496,7 @@ iam-nav details {
       }
     }
 
-    a:not([slot="logo"]):not(:has(iam-card)) {
+    a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
 
       font-size: 1rem;
       line-height: rem(24);
