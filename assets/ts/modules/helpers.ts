@@ -25,7 +25,7 @@ export const addBodyClasses = (body) => {
  * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
  */
 export const addGlobalEvents = (body) => {
-  
+
   const checkElements = function(hash){
 
     const label = document.querySelector(`label[for="${hash.replace('#','')}"]`);
@@ -58,6 +58,21 @@ export const addGlobalEvents = (body) => {
       
       form.dispatchEvent(new Event("submit"));
     }
+  });
+
+  document.addEventListener("submit", (event) => {
+
+    if (event && event.target instanceof HTMLElement && event.target.matches('form')){
+
+      let form = event.target;
+
+      if(form.querySelector(':invalid')){
+        
+        form.classList.add('was-validated');
+        event.preventDefault();
+      }
+    }
+
   });
 
   return null

@@ -71,26 +71,6 @@
                       <td>9:30</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
                     </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
-                    <tr>
-                      <td>9:30</td>
-                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                    </tr>
                   </tbody>
                 </table>
               </Table>

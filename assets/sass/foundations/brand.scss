@@ -25,6 +25,10 @@
     --svg-width: #{em(475,89)};
   }
 
+  &--crm {
+    --svg-width: #{em(250,89)};
+  }
+
   display: inline-flex;
   flex-direction: row;
   flex-wrap: nowrap;

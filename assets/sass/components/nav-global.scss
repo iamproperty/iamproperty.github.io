@@ -114,6 +114,7 @@ iam-nav {
     height: rem(48);
     padding: 0;
     text-decoration: none;
+    min-width: min(var(--svg-width), 14rem);
   }
 
   a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
