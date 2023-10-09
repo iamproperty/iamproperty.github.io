@@ -170,3 +170,121 @@
 .list__wrapper--large {
   max-height: 37.5rem;
 }
+
+// #region Step list
+*:has(> .list--steps){
+  container-type: inline-size;
+}
+
+.list--steps {
+
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0 0 rem(6) 0;
+  gap: rem(12);
+  counter-reset: pages;
+  color: var(--colour-heading);
+  position: relative;
+  margin-bottom: rem(6);
+
+  li {
+    position: relative;
+    display: block;
+    padding-top: 2rem;
+    width: rem(24);
+    flex-grow: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-indent: -300px;
+
+
+    &:before {
+      counter-increment: pages;
+      content: counter(pages);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: rem(-12);
+      width: rem(24);
+      height: rem(24);
+      font-size: rem(18);
+      line-height: rem(24);
+      text-align: center;
+      font-weight: bold;;
+      border: 1px solid currentColor;
+      border-radius: 1rem;
+      text-indent: 0;
+    }
+
+  }
+
+  li.step--current:before {
+    background-color: var(--colour-primary-theme);
+    border-color: var(--colour-primary-theme);
+    color: var(--colour-white);
+  }
+  li.step--complete:before {
+    background-color: var(--colour-success);
+    border-color: var(--colour-success);
+
+    @include dark-mode {
+      
+    background-color: var(--colour-complete);
+    border-color: var(--colour-complete);
+    }
+    //color: var(--colour-white);
+  } 
+  
+  &::after {
+    content: attr(data-mobile-text);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: block;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: bold;
+  }
+
+  @include container-up(sm){
+
+    padding: 0;
+
+    margin-bottom: rem(24);
+
+    &::after {
+      display: none;
+    }
+
+    li {
+      width: 100%;
+      flex-grow: 1;
+      text-indent: 0;
+      overflow: visible;
+
+      &:not(:last-child):after {
+        content: "";
+        position: absolute;
+        top: rem(12);
+        left: calc(50% + 2rem);
+        
+        width: calc(100% - 2.5rem);
+        height: 2px;
+        font-size: rem(18);
+        background-color: var(--colour-heading);
+      }
+    }
+  }
+
+  
+  @include container-up(md){
+
+    li {
+      max-width: 20%;
+    }
+  }
+}
+// #endregion

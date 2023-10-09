@@ -30,6 +30,7 @@ export { default as Notification } from './components/Notification/Notification.
 
 export { default as Actionbar } from './components/Actionbar/Actionbar.vue'
 export { default as Pagination } from './components/Pagination/Pagination.vue'
+export { default as AddressLookup } from './components/AddressLookup/AddressLookup.vue'
 
 
 export { default as CollapsibleSideMenu } from './components/CollapsibleSideMenu/CollapsibleSideMenu.vue'
