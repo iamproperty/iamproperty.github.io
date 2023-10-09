@@ -426,7 +426,7 @@ input:is([type="radio"],[type="checkbox"]) {
   pointer-events: none;
 }
 
-:is(div,fieldset,label):has(> input:is([type="radio"],[type="checkbox"])):not(:has(label)) {
+:is(div,fieldset,label):has(> input:is([type="radio"],[type="checkbox"])):not(:has(label input)) {
   position: relative;
   margin-bottom: rem(24);
 }
