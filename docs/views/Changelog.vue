@@ -4,8 +4,10 @@
       <h1>Changelog</h1>
 
 
-      <h2>V4.1.0-beta</h2>
+      <h2>V4.1.0</h2>
       <ul>
+        <li>Lots of changes ad fixes for the forms</li>
+        <li>Updated Tables</li>
         <li>Updated Pagination</li>
         <li>Updated Navbar</li>
         <li>Collapsible side menu</li>
