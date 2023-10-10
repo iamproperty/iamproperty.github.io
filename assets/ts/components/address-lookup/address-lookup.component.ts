@@ -57,7 +57,7 @@ class iamAddressLookup extends HTMLElement {
 	async connectedCallback() {
 
     const wrapper = this.shadowRoot.querySelector('.wrapper');
-    const lookup = this.shadowRoot.querySelector('label');
+    const lookup = this.shadowRoot.querySelector('[name="postcode"]');
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
     const list = this.shadowRoot.querySelector('datalist');
