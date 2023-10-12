@@ -528,7 +528,7 @@
 $compatible: 'false';
 @import "../../../assets/sass/_func";
 
-
+@layer utilities {
 @for $i from 1 through 10 {
   .bg-primary.tint-#{$i}0 {
     $tint: 100%-($i*10%);
@@ -576,7 +576,7 @@ $compatible: 'false';
 .bg-pink {
   background-color: #FFD2D2!important;
 }
-
+}
 .colour-blocks {
   display: flex;
   flex-wrap: wrap;

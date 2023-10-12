@@ -105,9 +105,10 @@ footer .router-link-active {
 #visualtest:target ~ main > *:not(.visualtest){
   display: none!important;
 }
-
+@layer utilities {
 #visualtest:target ~ main > .d-none.visualtest{
   display: block!important;
+}
 }
 #visualtest:target ~ main > .visualtest .visualtest-hide,
 #visualtest:target ~ main > .visualtest pre {
