@@ -81,7 +81,7 @@ body:has(.template--form) {
   @include media-breakpoint-up(md) {
     .container--form {
       padding-inline: 0;
-      max-width: rem(924);
+      max-width: rem(924)!important;
     }
   }
 
