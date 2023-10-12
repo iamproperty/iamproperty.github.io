@@ -4,12 +4,12 @@
 @layer reset, elements, components, templates, utilities, overrides;
 
 // Foundations
-@layer reset {
+@include layer('reset') {
   @import "foundations/root.scss";
   @import "foundations/reboot.scss";
 }
 
-@layer elements {
+@include layer('elements') {
   @import "foundations/brand.scss";
   @import "foundations/icons.scss";
   @import "foundations/circles.scss";
@@ -30,8 +30,7 @@
   @import "components/forms.scss";
 }
 
-@layer components {
-
+@include layer('components') {
 
 // #region Undefined web components
 :is(*):not(:defined):not(iam-nav) {
@@ -119,8 +118,6 @@ main {
 }
 // #endregion
 
-
-
   @import "components/tabs.scss";
   @import "components/accordion.scss";
   @import "components/card-global.scss";
@@ -130,12 +127,11 @@ main {
   @import "../bootstrap/scss/_badge.scss";
 }
 
-@layer templates {
-  // Templates
+@include layer('templates') {
   @import "templates/form.scss";
 }
 
-@layer utilities {
+@include layer('utilities') {
     
   // Helpers
   //@import "../bootstrap/scss/helpers";
@@ -157,8 +153,7 @@ main {
   @import "../bootstrap/scss/utilities/_api.scss";
 }
 
-
-@layer overrides {
+@include layer('overrides') {
   @media (prefers-reduced-motion) {
    * {
     transition: unset;

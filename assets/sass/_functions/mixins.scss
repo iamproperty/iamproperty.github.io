@@ -40,6 +40,19 @@
   }
 }
 
+@mixin layer($name){
+  @if $layers == "true" {
+
+    @layer #{$name} {
+
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
 @mixin container-up($name) {
   
   @if $name == 'sm' {
