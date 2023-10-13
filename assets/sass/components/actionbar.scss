@@ -48,7 +48,7 @@
 
 :host([data-search]) .actionbar [data-search] {
   display: block;
-  margin-left: rem(16)!important;
+  margin: 0 0 0 rem(16);
 }
 
 :is(.actionbar,.actionbar--selected,.actionbar--search){
@@ -231,6 +231,7 @@
 // #region Search bar
 .actionbar--search .btn{
 
+  margin: 0;
   margin-left: rem(-12)!important;
   margin-right: auto!important;
 }

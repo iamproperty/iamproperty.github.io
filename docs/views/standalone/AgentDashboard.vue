@@ -15,7 +15,7 @@
             <div class="col-md-3 mw-fit-content">
               <div class="dialog__wrapper dialog__wrapper--md-right">
 
-              <button class="btn btn-secondary me-0 nowrap" aria-label="Display filters of who's work to include" type="button"><span class="empty"><i class="fa fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
+              <button class="btn btn-secondary me-0 nowrap" aria-label="Display filters of who's work to include" type="button"><span class="empty"><i class="fa-regular fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
               <dialog>
 
                 <AppliedFilters class="applied-filters--compact">

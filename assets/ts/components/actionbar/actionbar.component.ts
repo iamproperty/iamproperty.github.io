@@ -66,7 +66,7 @@ class iamActionbar extends HTMLElement {
                 <slot name="menu"></slot>
               </dialog>
             </div>
-            <button class="btn btn-secondary btn-compact btn-sm fa-search m-0" data-search="">Search</button>
+            <button class="btn btn-secondary btn-compact btn-sm fa-search" data-search="">Search</button>
           </div>
         </div>
       </div>
