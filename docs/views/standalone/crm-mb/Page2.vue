@@ -22,7 +22,7 @@
             <label for="input11">Search property sales address</label>
             <input type="text" id="input11" name="input11" placeholder="Optional placheolder text" required="" list="addresses" data-change-events='[
             {"in-list":"#addresses", "target":"#property-details", "if": "show", "else": "hide"},
-            {"in-list":"#addresses", "target":"#form", "if": "populate-form", "source": "/property.json"}
+            {"in-list":"#addresses", "target":"#form", "if": "populate-form"}
             ]' />
             <datalist id="addresses">
               <option value="5 Sunset Road, Leeds, West Yorkshire…" data-values='{ "property": "5 Sunset Road, Leeds, West Yorkshire…", "value": "2000,010", "tenure": "freehold", "property-type": "residential", "method-of-sale": ""}'></option>
