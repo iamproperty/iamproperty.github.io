@@ -8,7 +8,22 @@
       <p>The range input is a simple input field with 'range' given as its type. There is only a tiny bit of JavaScript being used to display the value of the range within an output field.</p>
     </div>
     <div class="container visualtest">
-      <Input id="test1" type="range" label="Label" min="0" max="50" value="15" step="5"></Input>
+      <label>Input field label <input type="range" min="0" max="100" value="15" step="5" /></label>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="container visualtest">
+      <label>Input field label <Slider><input type="range" min="0" max="100" value="15" step="1" /></Slider></label>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="container visualtest">
+      <label>Input field label <Slider><input type="range" min="0" max="100" value="15" step="1" name="min" /><input type="range" min="0" max="100" value="50" step="1" name="max" /></Slider></label>
     </div>
   </main>
 </template>
@@ -17,11 +32,13 @@
 <script>
 import Input from '@/components/Input/Input.vue'
 import Readme from '@/components/Input/README.md'
+import Slider from '@/components/Slider/Slider.vue'
 
 export default {
   components: {
     Input,
-    Readme
+    Readme,
+    Slider
   },
   data () {
     return {

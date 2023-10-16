@@ -20,7 +20,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 // #endregion
 
 // #region input field
-:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output,select:not(.select--minimal)) {
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output,select:not(.select--minimal)) {
   display: block;
   width: 100%;
   display: block;
@@ -61,7 +61,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 }
 
-:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])){
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])){
 
   max-width: $input-max-width;
 }
@@ -102,7 +102,7 @@ div:has(> label:first-child):has(> input) {
   margin-bottom: rem(24);
 
 
-  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), output, .prefix, .suffix {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]), output, .prefix, .suffix {
     margin-bottom: 0!important;
   }
 
@@ -111,12 +111,12 @@ div:has(> label:first-child):has(> input) {
   align-items: center;
 
 
-  > *:not(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])):not(output):not(.prefix):not(.suffix) {
+  > *:not(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])):not(output):not(.prefix):not(.suffix) {
     flex-shrink: 0;
     width: 100%;
   }
 
-  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output) {
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output) {
     flex-shrink: 1;
     flex-grow: 1;
     width: 0;
@@ -310,14 +310,14 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     }
   }
 
-  .prefix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output) {
+  .prefix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output) {
     
     border-end-start-radius: 0!important;
     border-start-start-radius: 0!important;
   }
 
-  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output),
-  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output):has(~ .suffix) {
+  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output),
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output):has(~ .suffix) {
     order: 1;
     
     border-start-end-radius: 0!important;
@@ -885,4 +885,149 @@ iam-fileupload {
   }
 }
 
+// #endregion
+
+// #region input range
+input[type="range"] {
+
+  --track-size: #{rem(8)};
+  --track-colour: var(--colour-light);
+  --thumb-colour: var(--colour-info);
+  --thumb-size: #{rem(24)};
+
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+  margin-top: rem(32)!important;
+  margin-bottom: rem(32)!important;
+  height: rem(32);
+  border-radius: 50%;
+
+  
+  accent-color: var(--thumb-colour);
+}
+
+iam-slider {
+
+  input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  }
+
+
+                        /***** Track Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]::-webkit-slider-runnable-track {
+  //background: var(--track-colour);
+  height: var(--track-size);
+  border-radius: 0.5rem;
+
+  background: linear-gradient(to right, var(--track-colour), var(--track-colour) var(--start-percent, 0%), var(--thumb-colour) var(--start-percent, 0%), var(--thumb-colour) var(--percent, 0%), var(--track-colour) var(--percent, 0%));
+
+  transition: 0.5s;
+}
+
+/******** Firefox ********/
+input[type="range"]::-moz-range-track {
+  background: var(--track-colour);
+  height: var(--track-size);
+  border-radius: 0.5rem;
+}
+
+
+/***** Thumb Styles *****/
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: rem(-8); /* Centers thumb on the track */
+  background-color: var(--thumb-colour);
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  border-radius: 50%;
+  position: relative;
+  z-index: 99;
+}
+/***** Thumb Styles *****/
+/***** Firefox *****/
+input[type="range"]::-moz-range-thumb {
+  border: none; /*Removes extra border that FF applies*/
+  background-color: var(--thumb-colour); /*Removes default border-radius that FF applies*/
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  position: relative;
+  z-index: 99;
+}
+
+/***** Focus Styles *****/
+/* Removes default focus */
+input[type="range"]:focus {
+  outline: none;
+}
+
+/***** Chrome, Safari, Opera, and Edge Chromium *****/
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:focus::-webkit-slider-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .2);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .4);
+}
+
+/******** Firefox ********/
+input[type="range"]:hover::-moz-range-thumb,
+input[type="range"]:focus::-moz-range-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .2);
+}
+input[type="range"]:focus::-moz-range-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .4);
+}
+
+
+  label {
+    
+    margin: 0!important;
+  }
+  label input[type=range] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0!important;
+  }
+
+
+  input[type="range"] + input[type="range"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    --thumb-colour: red;
+  }
+
+  input[type="range"] + input[type="range"]::-webkit-slider-runnable-track {
+    
+    background: transparent;
+    //pointer-events: none;
+  }
+  
+  /******** Firefox ********/
+  input[type="range"] + input[type="range"]::-moz-range-track {
+    background: transparent;
+    //pointer-events: none;
+  }
+  
+
+
+input[type="range"]:has(+ input[type="range"]){
+  //pointer-events: none;
+}
+
+
+input[type="range"]:has(+ input[type="range"])::-webkit-slider-thumb {
+  //position: all;
+}
+
+
+}
 // #endregion

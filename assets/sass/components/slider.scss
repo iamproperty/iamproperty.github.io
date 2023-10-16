@@ -1,0 +1,21 @@
+@use "../_func" as *;
+
+:host {
+  background-color: red;
+}
+
+.row {
+  align-items: center;
+}
+
+:is(.min, .max) {
+
+  max-width: fit-content;
+
+  line-height: 2rem;
+}
+
+.slider {
+  position: relative;
+  padding: 0;
+}
