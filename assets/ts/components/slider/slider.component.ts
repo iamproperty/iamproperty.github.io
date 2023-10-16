@@ -77,23 +77,23 @@ class iamSlider extends HTMLElement {
 
       if (input.classList.contains('is-last') && !input.classList.contains('is-first')){
 
-        let percent = ((value/100) * (max-min)).toFixed(2);
+        let percent = ((value/100) * (max-min));
         slider.style.setProperty('--percent', percent + "%");
 
-        if(input.value <= slider.querySelector('.is-first').value){
+        if(parseFloat(input.value) <= parseFloat(slider.querySelector('.is-first').value)){
 
-          //slider.querySelector('.is-first').value = input.value;
+          slider.querySelector('.is-first').value = input.value;
           slider.style.setProperty('--start-percent', percent + "%");
         }
       }
       else if(input.classList.contains('is-first') && !input.classList.contains('is-last')){
 
-        let percent = ((value/100) * (max-min)).toFixed(2);
+        let percent = ((value/100) * (max-min));
         slider.style.setProperty('--start-percent', percent + "%");
 
-        if(input.value >= slider.querySelector('.is-last').value){
+        if(parseFloat(input.value) >= parseFloat(slider.querySelector('.is-last').value)){
 
-          //slider.querySelector('.is-last').value = input.value;
+          slider.querySelector('.is-last').value = input.value;
           slider.style.setProperty('--percent', percent + "%");
         }
       }

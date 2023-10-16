@@ -1000,15 +1000,19 @@ input[type="range"]:focus::-moz-range-thumb {
   input[type="range"] + input[type="range"] {
     position: absolute;
     top: 0;
-    left: 0;
-
+    left: 50%;
+    width: 50%;
     --thumb-colour: red;
   }
 
   input[type="range"] + input[type="range"]::-webkit-slider-runnable-track {
     
     background: transparent;
-    //pointer-events: none;
+    pointer-events: none;
+
+    width: 200%;
+    /* position: absolute; */
+    margin-left: -100%;
   }
   
   /******** Firefox ********/
