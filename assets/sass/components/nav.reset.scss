@@ -1,0 +1,32 @@
+@use "../_func.scss" as *;
+
+@use "../foundations/root.scss" with (
+  $root: "iam-nav" // copied directory from iamkey repo
+);
+
+iam-nav {
+
+  * {
+    all: unset;
+
+    &:is(:hover,:focus,:active) {
+      all: unset;
+    }
+  }
+
+  @import "../foundations/reboot.scss";
+  
+  @include var(font-family,--font-body);
+  @include var(color,--colour-body);
+  width: 100%;
+  line-height: 1.2;
+  min-height: 100%;
+
+  @import "../_elements.scss";
+}
+
+@import "../components/nav-global.scss";
+
+iam-card {
+  @import "../_utilities.scss";
+}

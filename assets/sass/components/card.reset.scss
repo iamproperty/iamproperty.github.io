@@ -1,0 +1,32 @@
+@use "../_func.scss" as *;
+
+@use "../foundations/root.scss" with (
+  $root: "iam-card" // copied directory from iamkey repo
+);
+
+a:has(iam-card) {
+  all: unset;
+}
+
+iam-card {
+
+  * {
+    //all: unset;
+  }
+
+  @import "../foundations/reboot.scss";
+  
+  @include var(font-family,--font-body);
+  @include var(color,--colour-body);
+  width: 100%;
+  line-height: 1.2;
+  min-height: 100%;
+
+  @import "../_elements.scss";
+}
+
+@import "../components/card-global.scss";
+
+iam-card {
+  @import "../_utilities.scss";
+}
