@@ -1,18 +1,15 @@
 @use "../_func.scss" as *;
 
 @use "../foundations/root.scss" with (
-  $root: "iam-nav" // copied directory from iamkey repo
+  $root: ":is(iam-card,iam-nav)" // copied directory from iamkey repo
 );
 
-iam-nav {
+a:has(iam-card) {
+  all: unset;
+}
 
-  * {
-    all: unset;
 
-    &:is(:hover,:focus,:active) {
-      all: unset;
-    }
-  }
+:is(iam-card,iam-nav) {
 
   @import "../foundations/reboot.scss";
   
@@ -25,8 +22,9 @@ iam-nav {
   @import "../_elements.scss";
 }
 
+@import "../components/card-global.scss";
 @import "../components/nav-global.scss";
 
-iam-card {
+:is(iam-card,iam-nav) {
   @import "../_utilities.scss";
 }

@@ -42,7 +42,7 @@ $root: ':root'!default;
 
 // Dark mode; functional colours get updated
 @include dark-mode() {
-  :root {
+  #{$root} {
     
     @each $color, $value in $dark-mode-colors {
       --colour-#{$color}: #{$value};
@@ -112,7 +112,7 @@ $root: ':root'!default;
 
 
 @media (forced-colors: active) {
-  :root {
+  #{$root} {
     --contrast-outline-width: 1px;
   }
 }
