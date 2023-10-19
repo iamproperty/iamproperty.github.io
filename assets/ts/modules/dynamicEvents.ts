@@ -124,19 +124,19 @@ const populateForm = function (element,event) {
   Object.keys(values).forEach((field, index) => {
 
     if(document.getElementById(field) && document.getElementById(field).tagName == "SPAN")
-      document.getElementById(field).innerHTML = response[field];
+      document.getElementById(field).innerHTML = values[field];
     
-    if(form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`)){
+    if(form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`)){
       
       Array.from(form.querySelectorAll(`input[name="${field}"][type="radio"]`)).forEach(function(input,index){
         input.disabled = true;
       });
 
-      form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`).checked = true;
-      form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`).disabled = false;
+      form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`).checked = true;
+      form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`).disabled = false;
     }
     else if(form.querySelector(`input[name="${field}"]`)){
-      form.querySelector(`input[name="${field}"]`).value = response[field];
+      form.querySelector(`input[name="${field}"]`).value = values[field];
       form.querySelector(`input[name="${field}"]`).setAttribute('readonly','true');
     }
   });
