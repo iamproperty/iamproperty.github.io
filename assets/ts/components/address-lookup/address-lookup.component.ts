@@ -87,7 +87,7 @@ class iamAddressLookup extends HTMLElement {
       if(!input.value)
         preFilled = false;
       else
-        preFilledAddress.innerHTML += ','+input.value;
+        preFilledAddress.innerHTML += ', '+input.value;
       
     });
 
