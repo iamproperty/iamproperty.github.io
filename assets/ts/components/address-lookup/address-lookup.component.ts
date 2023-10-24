@@ -132,28 +132,25 @@ class iamAddressLookup extends HTMLElement {
       });
     }
 
+    function openManualWrapper (){
+      lookupWrapper.classList.add('js-hide');
+      manualWrapper.classList.remove('js-hide');
+
+      Array.from(this.querySelectorAll('[data-required]')).forEach((input, index) => {
+        input.setAttribute('required','true');
+      });
+
+      manualWrapper.scrollIntoView();
+    }
+
     preFilledAddressBtn.addEventListener('click', (event) => {
 
       preFilledWrapper.classList.add('js-hide');
-      lookupWrapper.classList.add('js-hide');
-      manualWrapper.classList.remove('js-hide');
-
-      Array.from(this.querySelectorAll('[data-required]')).forEach((input, index) => {
-        input.setAttribute('required','true');
-      });
-
-      manualWrapper.scrollIntoView();
+      openManualWrapper();
     });
     switchManualBtn.addEventListener('click', (event) => {
 
-      lookupWrapper.classList.add('js-hide');
-      manualWrapper.classList.remove('js-hide');
-
-      Array.from(this.querySelectorAll('[data-required]')).forEach((input, index) => {
-        input.setAttribute('required','true');
-      });
-      
-      manualWrapper.scrollIntoView();
+      openManualWrapper();
     });
     switchLookupBtn.addEventListener('click', (event) => {
 
