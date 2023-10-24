@@ -3,6 +3,10 @@ function createAppliedFilters(container,filters) {
 
 
   function addFilterButton (filters, input){
+
+
+    console.log('hey')
+
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
     
@@ -97,12 +101,12 @@ function createAppliedFilters(container,filters) {
     addFilterButton(filters, input)
   });
 
-  Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input, index) => {
-    
-    input.addEventListener('change', function(event){
+  container.addEventListener('change', function(event){
 
-      addFilterButton(filters, input)
-    });
+    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')){
+      let input = event.target.closest('input[data-filter-text]');
+      addFilterButton(filters, input);
+    }
   });
 
   filters.addEventListener('click', function(event){
