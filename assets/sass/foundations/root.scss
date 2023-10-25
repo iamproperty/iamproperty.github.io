@@ -1,8 +1,10 @@
 @use "../func" as *;
 
-@import "../../bootstrap/scss/_root.scss";
+//@import "../../bootstrap/scss/_root.scss";
 
-:root {
+$root: ':root'!default;
+
+#{$root} {
   // Print out the $vars array setup in the variables file so they can be used as CSS vars
   // Custom variable values only support SassScript inside `#{}`.
   @each $var, $value in $vars {
@@ -40,7 +42,7 @@
 
 // Dark mode; functional colours get updated
 @include dark-mode() {
-  :root {
+  #{$root} {
     
     @each $color, $value in $dark-mode-colors {
       --colour-#{$color}: #{$value};
@@ -110,7 +112,7 @@
 
 
 @media (forced-colors: active) {
-  :root {
+  #{$root} {
     --contrast-outline-width: 1px;
   }
 }

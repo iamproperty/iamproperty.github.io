@@ -10,30 +10,13 @@
 }
 
 @include layer('elements') {
-  @import "foundations/brand.scss";
-  @import "foundations/icons.scss";
-  @import "foundations/circles.scss";
-  @import "foundations/media.scss";
-  @import "foundations/type.scss";
-  // elements
-  @import "components/lists.scss";
-  @import "components/tooltips.scss";
-  @import "components/container.scss";
-  @import "components/table.global.scss";
-
-  @import "foundations/links.scss";
-  @import "foundations/buttons";
-  @import "components/dialog.scss";
-  @import "components/admin-panel.scss";
-    
-  @import "../bootstrap/scss/forms/_form-range";
-  @import "components/forms.scss";
+  @import "_elements.scss";
 }
 
 @include layer('components') {
 
 // #region Undefined web components
-:is(*):not(:defined):not(iam-nav) {
+:is(*):not(:defined):not(iam-nav):not(iam-pagination) {
   display: block;
   padding: rem(24);
   margin-bottom: rem(24);
@@ -133,24 +116,7 @@ main {
 
 @include layer('utilities') {
     
-  // Helpers
-  //@import "../bootstrap/scss/helpers";
-  @import "../bootstrap/scss/helpers/clearfix";
-  //@import "../bootstrap/scss/helpers/colored-links";
-  @import "../bootstrap/scss/helpers/ratio";
-  @import "../bootstrap/scss/helpers/position";
-  @import "../bootstrap/scss/helpers/stacks";
-  @import "../bootstrap/scss/helpers/visually-hidden";
-  //@import "../bootstrap/scss/helpers/stretched-link";
-  @import "../bootstrap/scss/helpers/text-truncation";
-  //@import "../bootstrap/scss/helpers/vr";
-
-  // Helpers
-  @import "helpers/max-height.scss";
-  @import "helpers/dynamic.scss";
-
-  // Utilities
-  @import "../bootstrap/scss/utilities/_api.scss";
+  @import "_utilities.scss";
 }
 
 @include layer('overrides') {

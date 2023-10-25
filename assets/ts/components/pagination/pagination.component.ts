@@ -208,7 +208,7 @@ class iamPagination extends HTMLElement {
       }
       case "data-page": {
 
-        if(oldVal != newVal) {
+        if(oldVal && oldVal != newVal) {
 
           this.setup();
           // Dispact the event for other components to use as triggers 

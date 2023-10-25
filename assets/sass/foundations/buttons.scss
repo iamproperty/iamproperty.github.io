@@ -124,7 +124,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   &:is(:active, .active):not([disabled]) {
     
     filter: brightness(85%);
-    transition: background .1s, color .1s;
+    transition: all .1s;
     color: var(--colour-heading);
   }
 }
@@ -269,6 +269,7 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   &.btn-secondary:is(:hover, :focus, .hover, :active, .active, :focus-within):not([disabled]) {
     background-color: var(--colour);
     color: var(--colour-primary-theme);
+    border-color: transparent!important;
 
     &:is(.colour-primary,.colour-dark,.colour-danger,.colour-black) {
       color: var(--colour-inverted);
