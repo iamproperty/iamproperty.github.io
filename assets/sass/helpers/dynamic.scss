@@ -1,3 +1,7 @@
-.js-hide {
+body.js-enabled .js-hide {
+  display: none!important;
+}
+
+body:not(.js-enabled) .js-show {
   display: none!important;
 }
