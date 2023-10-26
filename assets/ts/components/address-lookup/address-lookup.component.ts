@@ -136,7 +136,7 @@ class iamAddressLookup extends HTMLElement {
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
-      Array.from(this.querySelectorAll('[data-required]')).forEach((input, index) => {
+      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input, index) => {
         input.setAttribute('required','true');
       });
 
