@@ -5,3 +5,11 @@ body.js-enabled .js-hide {
 body:not(.js-enabled) .js-show {
   display: none!important;
 }
+
+:host-context(body.js-enabled) .js-hide {
+  display: none!important;
+}
+
+:host-context(body:not(.js-enabled)) .js-show {
+  display: none!important;
+}
