@@ -4,9 +4,6 @@ function createAppliedFilters(container,filters) {
 
   function addFilterButton (filters, input){
 
-
-    console.log('hey')
-
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
     
@@ -16,7 +13,7 @@ function createAppliedFilters(container,filters) {
     let filter = filters.querySelector(`[data-name="${inputName}"]`);
 
     if(filter && input.getAttribute('type') == 'checkbox')
-      shouldRemoveFilter = true;
+      shouldRemoveFilter = !input.checked ? true : false;
 
     let filterText = input.getAttribute('data-filter-text');
     
@@ -101,6 +98,16 @@ function createAppliedFilters(container,filters) {
     addFilterButton(filters, input)
   });
 
+  // chech for change in displayed inputs
+  Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input, index) => {
+
+    input.addEventListener('change', function(event){
+
+      addFilterButton(filters, input)
+    });
+  });
+
+  // check for changes within modals
   container.addEventListener('change', function(event){
 
     if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')){
