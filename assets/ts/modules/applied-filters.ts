@@ -3,7 +3,7 @@ function createAppliedFilters(container,filters) {
 
 
   function addFilterButton (filters, input){
-    
+
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
     
@@ -98,16 +98,18 @@ function createAppliedFilters(container,filters) {
     addFilterButton(filters, input)
   });
 
-  // chech for change in displayed inputs
+
+  // check for change in displayed inputs
   Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input, index) => {
-    
+
     input.addEventListener('change', function(event){
 
-      addFilterButton(filters, input)
+      addFilterButton(filters, input);
+      event.stopPropagation(); // Don't allow the below event handler to trigger
     });
   });
 
-  // check for changes within modals
+  // Some change event aren't getting triggered above so this event listener on the container will pick them up. This happens with input in modals
   container.addEventListener('change', function(event){
 
     if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')){
