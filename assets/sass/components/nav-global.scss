@@ -121,7 +121,7 @@ iam-nav {
     
     text-decoration: none;
 
-    &:where(:hover,:focus,.selected) {
+    &:where(:hover,:focus,.selected,[aria-current="page"]) {
       text-decoration: underline;
       text-underline-offset: 0.3em;
       text-decoration-thickness: 2px;
@@ -130,8 +130,8 @@ iam-nav {
     &:active {
       text-decoration-color: #A2D393!important;
     }
-    &.selected {
-      
+    &.selected,
+    &[aria-current="page"] {
       text-decoration-color: var(--colour-info)!important;
     }
   }
@@ -506,7 +506,7 @@ iam-nav details {
       display: block;
       margin: 0;
       
-      &:where(:hover,:focus,.selected) {
+      &:where(:hover,:focus,.selected,[aria-current="page"]) {
         text-decoration: underline;
         text-underline-offset: 0.3em;
         text-decoration-thickness: 2px;
@@ -515,7 +515,8 @@ iam-nav details {
       &:active {
         text-decoration-color: #A2D393!important;
       }
-      &.selected {
+      &.selected,
+      &[aria-current="page"] {
         text-decoration-color: var(--colour-info);
       }
 

@@ -74,9 +74,9 @@ class iamCollapsibleSideMenu extends HTMLElement {
 
         sideMenuContent.classList.remove('closed');
 
-
         setTimeout(function(){ 
           sideMenu.classList.add('open'); 
+          button.setAttribute('aria-expanded', true);
         }, 100);
 
 
@@ -84,6 +84,8 @@ class iamCollapsibleSideMenu extends HTMLElement {
       else {
           
         sideMenu.classList.remove('open');
+        button.removeAttribute('aria-expanded');
+
         setTimeout(function(){ sideMenuContent.classList.add('closed') }, 1000); // Delay until its close so the animation is broken
       
         // While the menu is closing dont allow the hover to re-open it until its fully closed.

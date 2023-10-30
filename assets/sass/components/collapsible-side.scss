@@ -96,16 +96,27 @@
     background-color: var(--colour-canvas-2);
     border: 2px solid var(--colour-border);
     z-index: 99;
+    
+    &[aria-expanded]{
+       // Change icon
+      &[class*=fa-]:before {
+        content: "\f053"!important;
+      }
+
+      @include media-breakpoint-up(md) {
+        opacity: 0;
+        transition: opacity 0.5s;
+
+        &:is(:hover,:focus,:active) {
+          opacity: 1;
+        }
+      }
+    }
   }
 
   &:is(.open) {
 
     width: calc(100% - var(--container-padding-x));
-
-    // Change icon
-    .btn[class*=fa-]:before {
-      content: "\f053"!important;
-    }
 
     @include media-breakpoint-up(sm) {
 
@@ -114,15 +125,6 @@
     @include media-breakpoint-up(md) {
 
       width: rem(344);
-
-      .btn {
-        opacity: 0;
-        transition: opacity 0.5s;
-
-        &:is(:hover,:focus,:active) {
-          opacity: 1;
-        }
-      }
     }  
   }
 
@@ -233,7 +235,7 @@
   */
 }
 
-::slotted(a[slot="menu"]:where(:hover,:focus,.selected)) {
+::slotted(a[slot="menu"]:where(:hover,:focus,[aria-expanded])) {
 
   background-color: var(--side-link-hover)!important;
 }
@@ -244,7 +246,7 @@
   font-weight: bold!important;
 }
 
-::slotted(a[slot="menu"].selected) {
+::slotted(a[slot="menu"][aria-expanded]) {
 
   background-color: var(--side-link-hover)!important;
   font-weight: bold!important;

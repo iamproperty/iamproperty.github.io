@@ -213,10 +213,13 @@ class iamActionbar extends HTMLElement {
     if(this.hasAttribute('data-search') && this.getAttribute('data-search') == 'show')
       searchBar.classList.add('show');
 
+      const searchBtn = this.shadowRoot.querySelector('button[data-search]');      
+
     this.shadowRoot.addEventListener('click', (event) => {
 
       if (event && event.target instanceof HTMLElement && event.target.closest('button[data-search]')){
         searchBar.classList.toggle('show');
+        searchBtn.toggleAttribute('aria-expanded');
       }
     });
 
