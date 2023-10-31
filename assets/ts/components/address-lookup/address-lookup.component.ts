@@ -69,35 +69,44 @@ class iamAddressLookup extends HTMLElement {
     const switchManualBtn = this.shadowRoot.querySelector('.switch-to-manual-btn');
     const switchLookupBtn = this.shadowRoot.querySelector('.switch-to-lookup-btn');
     const title = this.hasAttribute('data-title') ? this.getAttribute('data-title')  : "Property address";
-
-    let preFilled = true;
-
-    const preFilledAddress = this.shadowRoot.querySelector('.pre-filled-address');
     const preFilledAddressBtn = this.shadowRoot.querySelector('.pre-filled-address + button');
 
-    
+  
     Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement, index) => {
 
       titleElement.innerHTML = title;
     });
 
+    function checkFilled(component){
 
-    Array.from(this.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')).forEach((input, index) => {
+      let preFilledAddress = component.shadowRoot.querySelector('.pre-filled-address');
+      let preFilled = true;
+      preFilledAddress.innerHTML = "";
 
-      if(!input.value)
-        preFilled = false;
-      else
-        preFilledAddress.innerHTML += ', '+input.value;
-      
+      Array.from(component.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')).forEach((input, index) => {
+
+        if(!input.value)
+          preFilled = false;
+        else
+          preFilledAddress.innerHTML += ', '+input.value;
+        
+      });
+
+      preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(1);
+
+      if(preFilled){
+        preFilledWrapper.classList.remove('js-hide');
+        lookupWrapper.classList.add('js-hide');
+        manualWrapper.classList.add('js-hide');
+      }
+    }
+    checkFilled(this);
+    
+    this.addEventListener('filled', (event) => {
+
+      checkFilled(this);
     });
 
-    preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(1);
-
-    if(preFilled){
-      preFilledWrapper.classList.remove('js-hide');
-      lookupWrapper.classList.add('js-hide');
-      manualWrapper.classList.add('js-hide');
-    }
 
     if(this.hasAttribute('data-use')){
 

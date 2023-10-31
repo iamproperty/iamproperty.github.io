@@ -96,9 +96,13 @@ const runEvent = (element,event,eventType) => {
           input.setAttribute('required','true');
       });
       break;
-    case "populate-form":
-      populateForm(element,event);
-      break;
+      case "populate-form":
+        populateForm(element,event);
+        break;
+      case "dispatchEvent":
+        let theEvent = new Event(event['value']);
+        document.querySelector(`${event['target']}`).dispatchEvent(theEvent);
+        break;
     case "setAttribute":
       document.querySelector(`${event['target']}`).setAttribute(event['attribute'],event['value']);
       break;
@@ -121,12 +125,23 @@ const populateForm = function (element,event) {
   let values = JSON.parse(element.getAttribute('data-values'));
   let form = document.querySelector(event['target']);
 
+  if(!values)
+    return false;
+
   Object.keys(values).forEach((field, index) => {
 
     if(document.getElementById(field) && document.getElementById(field).tagName == "SPAN")
       document.getElementById(field).innerHTML = values[field];
-    
-    if(form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`)){
+
+
+    if(form.querySelector(`select[name="${field}"] [value="${values[field]}"]`)){
+
+      form.querySelector(`select[name="${field}"]`).value = values[field];
+
+      if(element.hasAttribute('data-lock-fields'))
+        form.querySelector(`select[name="${field}"]`).disabled = true;
+    }
+    else if(form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`)){
       
       Array.from(form.querySelectorAll(`input[name="${field}"][type="radio"]`)).forEach(function(input,index){
         input.disabled = true;
@@ -137,7 +152,9 @@ const populateForm = function (element,event) {
     }
     else if(form.querySelector(`input[name="${field}"]`)){
       form.querySelector(`input[name="${field}"]`).value = values[field];
-      form.querySelector(`input[name="${field}"]`).setAttribute('readonly','true');
+
+      if(element.hasAttribute('data-lock-fields'))
+        form.querySelector(`input[name="${field}"]`).setAttribute('readonly','true');
     }
   });
 }
