@@ -59,8 +59,6 @@ import Logo from '@/foundations/Logo/Logo.vue'
 import Notification from '@/components/Notification/Notification.vue'
 import FileUpload from '@/components/FileUpload/FileUpload.vue'
 
-import estateAgents from '../../../img/estate-agents.png'
-
 
 export default {
   components: {
@@ -73,7 +71,6 @@ export default {
   },
   data () {
     return {
-      estateAgents: estateAgents,
     }
   }
 }

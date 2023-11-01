@@ -1,9 +1,10 @@
 <template>
   <main>
+
     <div class="container">
 
-      <h1>Components</h1>
-      
+      <h1>Elements</h1>
+
       <div class="row row-cols-1 row-cols-md-3 mb-5">
 
         <div v-for="item in pages">
@@ -16,12 +17,11 @@
         </div>
       </div>
 
+      <h2>Form Elements</h2>
 
-      <h2>Navigation components</h2>
-      
       <div class="row row-cols-1 row-cols-md-3 mb-5">
 
-        <div v-for="item in navpages">
+        <div v-for="item in formpages">
           <a :href="item.link">
             <Card>
               {{ item.title }}
@@ -31,11 +31,11 @@
         </div>
       </div>
 
-      <h2>Notification components</h2>
+      <h2>Dialog Elements</h2>
 
       <div class="row row-cols-1 row-cols-md-3 mb-5">
 
-        <div v-for="item in notificationspages">
+        <div v-for="item in dialogpages">
           <a :href="item.link">
             <Card>
               {{ item.title }}
@@ -46,22 +46,22 @@
       </div>
 
     </div>
+
   </main>
 </template>
-
 <script>
 import Card from '@/components/Card/Card.vue'
 import routes from '../../routes.ts';
 
-const components = routes.reduce(function (arr, route) {
+const elements = routes.reduce(function (arr, route) {
   // Find the correct group
-  if (route.path === "/components") {
+  if (route.path === "/elements") {
     arr = route.children;
 
     const children = route.children.reduce(function (acc, route) {
       // Remove the index
       if (route.path) {
-        route.link = '/components/'+route.path;
+        route.link = '/elements/'+route.path;
         route.title = route.name;
         route.content = '';
         acc.push(route);
@@ -72,17 +72,17 @@ const components = routes.reduce(function (arr, route) {
     arr = children
   }
   return arr
-}, {})
+}, {});
 
-const navComponents = routes.reduce(function (arr, route) {
+const formElements = routes.reduce(function (arr, route) {
   // Find the correct group
-  if (route.path === "/nav") {
+  if (route.path === "/form") {
     arr = route.children;
 
     const children = route.children.reduce(function (acc, route) {
       // Remove the index
       if (route.path) {
-        route.link = '/nav/'+route.path;
+        route.link = '/form/'+route.path;
         route.title = route.name;
         route.content = '';
         acc.push(route);
@@ -93,17 +93,17 @@ const navComponents = routes.reduce(function (arr, route) {
     arr = children
   }
   return arr
-}, {})
+}, {});
 
-const notificationsComponents = routes.reduce(function (arr, route) {
+const dialogElements = routes.reduce(function (arr, route) {
   // Find the correct group
-  if (route.path === "/notifications") {
+  if (route.path === "/dialogs") {
     arr = route.children;
 
     const children = route.children.reduce(function (acc, route) {
       // Remove the index
       if (route.path) {
-        route.link = '/notifications/'+route.path;
+        route.link = '/dialogs/'+route.path;
         route.title = route.name;
         route.content = '';
         acc.push(route);
@@ -114,7 +114,7 @@ const notificationsComponents = routes.reduce(function (arr, route) {
     arr = children
   }
   return arr
-}, {})
+}, {});
 
 export default {
   components: {
@@ -122,9 +122,9 @@ export default {
   },
   data () {
     return {
-      pages: components,
-      navpages: navComponents,
-      notificationspages: notificationsComponents
+      pages: elements,
+      formpages: formElements,
+      dialogpages: dialogElements
     }
   }
 }

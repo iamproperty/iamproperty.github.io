@@ -20,6 +20,7 @@ const version = pkg.version;
 
     <router-link to="/principles">Principles</router-link>
     <router-link to="/foundations">Foundations</router-link>
+    <router-link to="/elements">Elements</router-link>
     <router-link to="/components">Components</router-link>
     <router-link to="/templates">Templates</router-link>
     <router-link to="/best-practice">Best practice</router-link>
