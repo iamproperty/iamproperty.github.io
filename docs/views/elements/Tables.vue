@@ -8,7 +8,7 @@
 
       <h2>Tables component</h2>
       <p>The basic styles and behaviour of tables can be upgraded by using the design system table component. </p>
-      <a href="/elements/tables" class="btn btn-primary">Tables component</a>
+      <a href="/components/tables" class="btn btn-primary">Tables component</a>
     </div>
     
   </main>

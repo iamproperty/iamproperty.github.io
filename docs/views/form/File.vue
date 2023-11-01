@@ -23,9 +23,9 @@
 
     <div class="container">
 
-      <h2>Tables component</h2>
-      <p>The basic styles and behaviour of tables can be upgraded by using the design system table component. </p>
-      <a href="/elements/tables" class="btn btn-primary">Tables component</a>
+      <h2>File upload component</h2>
+      <p>The basic styles and behaviour of file upload field can be upgraded by using the design system file upload component. </p>
+      <a href="/components/file" class="btn btn-primary">File upload component</a>
     </div>
 
   </main>
