@@ -60,7 +60,7 @@ $root: ':root'!default;
 @include light-mode() {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  #{$root} [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.invert-colours) {
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.invert-colours) {
 
     @each $color, $value in $theme-colors {
       --colour-#{$color}: #{$value};
@@ -71,8 +71,8 @@ $root: ':root'!default;
   }
 
   // Override the colours when on a dark background, similiar to dark mode but on a module level
-  #{$root} [class*="bg-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
-  #{$root} .invert-colours {
+  [class*="bg-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
+  .invert-colours {
     
     @include invert-colours();
 
@@ -83,7 +83,7 @@ $root: ':root'!default;
 @include dark-mode() {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  #{$root} [class*="bg-"]:not(.bg-canvas):not(.bg-canvas-2) {
+  [class*="bg-"]:not(.bg-canvas):not(.bg-canvas-2) {
 
     @include reset-colours();
     --colour-body: #{$primary};
@@ -92,13 +92,13 @@ $root: ':root'!default;
 
   @each $color, $value in $theme-colors {
 
-    #{$root} .bg-#{$color}[class*="gradient-"] {
+    .bg-#{$color}[class*="gradient-"] {
 
       background-color: var(--colour-#{$color}-theme) !important;
     }
   }
   
-  #{$root} [class*="bg-"][class*="gradient-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
+  [class*="bg-"][class*="gradient-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
 
     @each $color, $value in $theme-colors {
       --colour-#{$color}: #{$value};
@@ -108,7 +108,7 @@ $root: ':root'!default;
     color: var(--colour-body);
   }
 
-  #{$root} [class*="bg-"][class*="gradient-"]:not(.bg-info):not(.bg-success):not(.bg-warning):not(.prevent-invert) {
+  [class*="bg-"][class*="gradient-"]:not(.bg-info):not(.bg-success):not(.bg-warning):not(.prevent-invert) {
     
     @include invert-colours();
 
