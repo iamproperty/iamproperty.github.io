@@ -38,6 +38,12 @@ $root: ':root'!default;
   --card-border-radius: #{rem(8)};
   --card-box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
   --nav-height: #{rem(96)};
+  --code-color: #d63384;
+
+  // Default borders
+  --border-width: 1px;
+  --border-style: solid;
+  --border-color: var(--colour-border);
 }
 
 // Dark mode; functional colours get updated

@@ -3,9 +3,10 @@
 
 @layer reset, elements, components, templates, utilities, overrides;
 
+@import "foundations/root.scss";
+
 // Foundations
 @include layer('reset') {
-  @import "foundations/root.scss";
   @import "foundations/reboot.scss";
 }
 
