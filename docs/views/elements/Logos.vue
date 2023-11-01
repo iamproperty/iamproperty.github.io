@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/foundations">Foundations</a></li>
+        <li><a href="/foundations">Elements</a></li>
       </ul>
       <h1>Logos (Beta)</h1>
       <p class="strapline">All iamproperty brands and products are united by sharing the same Tone of Voice and visual identity.</p>

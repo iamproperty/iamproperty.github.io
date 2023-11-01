@@ -3,7 +3,7 @@
 
 
 
-    <DSHeader :image="headerImg" section="components">
+    <DSHeader :image="headerImg" section="elements">
       <h1>Admin panel</h1>
     </DSHeader>
 

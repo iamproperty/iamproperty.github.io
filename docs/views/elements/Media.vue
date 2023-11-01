@@ -2,7 +2,7 @@
   <main>
     <div class="container">
       <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/foundations">Foundations</a></li>
+        <li><a href="/elements">Elements</a></li>
       </ul>
       <h1>Media (Beta)</h1>
       <p class="strapline">Images and other media elements are used widely across the digital estate in variety of components.</p>

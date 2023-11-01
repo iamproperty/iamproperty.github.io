@@ -27,12 +27,12 @@
         <td><strong>Optional:</strong> Alerts remain until dismissed by the user, or if the state that caused the alert is resolved</td>
       </tr>
       <tr>
-        <td><a href="/components/modal#transactional">Transactional modal</a></td>
+        <td><a href="/elements/modal#transactional">Transactional modal</a></td>
         <td>High priority</td>
         <td><strong>Required:</strong> Modals block app usage until the user takes a dialog action. There are usually two options - one to complete the action and one to offer the user not to complete the action</td>
       </tr>
       <tr>
-        <td><a href="/components/modal#acknowledgement">Acknowledgement modal</a></td>
+        <td><a href="/elements/modal#acknowledgement">Acknowledgement modal</a></td>
         <td>High priority</td>
         <td><strong>Required:</strong> Modals block app usage until the user takes a dialog action. Users are offered a mandatory action - they acknowledge the system notification and are in line with compliance or legal requirements.</td>
       </tr>

@@ -106,8 +106,6 @@ main {
   @import "components/card-global.scss";
   @import "components/actionbar-global.scss";
   // Bootstrap elements
-  @import "../bootstrap/scss/_transitions.scss";
-  @import "../bootstrap/scss/_badge.scss";
 }
 
 @include layer('templates') {

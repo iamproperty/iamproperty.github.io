@@ -1,13 +1,10 @@
 <template>
   <main>
-    <DSHeader :image="headerImg">
+    <DSHeader :image="headerImg" section="elements">
       <h1>Typography</h1>
     </DSHeader>
 
     <div class="container ">
-      <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/foundations">Foundations</a></li>
-      </ul>
       <h2>Typography - Headings</h2>
       <p class="lead">Most headings will have a max-width of {{ $shared.cssVars.text_mw_rem }} ({{$shared.cssVars.text_mw}}px) applied to aid readability, with the exception of H1 and H2, which will have an auto width.</p>
       <p class="lead">We use Qanelas font for all in-product experiences. This ensures that the UI is optimised to be highly legible, performs well, and is frictionless as you move between iamproperty products and the rest of the system.</p>
