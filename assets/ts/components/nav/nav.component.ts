@@ -97,7 +97,7 @@ class iamNav extends HTMLElement {
 
         // If open we need to make sure the main mobile menu is closed, the new button has the right state and the backdrop is shown
         if(element.classList.contains('open')){
-          button.classList.add('selected');
+          button.setAttribute('aria-expanded', true);
           mdButton.classList.toggle('active');
           iamNav.classList.add('open');
           backdrop.classList.add('show');
@@ -110,7 +110,7 @@ class iamNav extends HTMLElement {
         button.addEventListener('click', function(e){
       
           e.preventDefault();
-          button.classList.toggle('selected');
+          button.toggleAttribute('aria-expanded');
           element.classList.toggle('open');
           mdButton.classList.toggle('active');
 
@@ -124,7 +124,7 @@ class iamNav extends HTMLElement {
           if(element.classList.contains('open')){
             
             menu.classList.remove('open');
-            menuButton.classList.remove('selected');
+            menuButton.removeAttribute('aria-expanded');
             setTimeout(function(){ menu.classList.add('closed') }, 1000); // Delay until its close so the animation is broken
             iamNav.classList.add('open');
             backdrop.classList.add('show');
@@ -143,11 +143,11 @@ class iamNav extends HTMLElement {
             }
           });
 
-          iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu.selected').forEach(function(selectedButton){
+          iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu[aria-expanded]').forEach(function(selectedButton){
 
             if(selectedButton != button){
 
-              selectedButton.classList.remove('selected');
+              selectedButton.removeAttribute('aria-expanded');
               let innerBtn = selectedButton.querySelector('.btn-primary');
               innerBtn.classList.remove('active');
             }
@@ -169,7 +169,7 @@ class iamNav extends HTMLElement {
     menuButton.addEventListener('click', function(e){
       
       e.preventDefault();
-      menuButton.classList.toggle('selected');
+      menuButton.toggleAttribute('aria-expanded');
       menu.classList.toggle('open');
 
       // Close any other menus
@@ -177,8 +177,8 @@ class iamNav extends HTMLElement {
         element.classList.remove('open');
         setTimeout(function(){ element.classList.add('closed') }, 1000);
       });
-      iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu.selected').forEach(function(element){
-        element.classList.remove('selected');
+      iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu[aria-expanded]').forEach(function(element){
+        element.removeAttribute('aria-expanded');
         let innerBtn = element.querySelector('.btn-primary');
         innerBtn.classList.remove('active');
       });
@@ -197,7 +197,7 @@ class iamNav extends HTMLElement {
     // Allow outside JS to close the menu
     this.addEventListener("request-close", (event) => {
 
-      menuButton.classList.remove('selected');
+      menuButton.removeAttribute('aria-expanded');
       menu.classList.remove('open');
       iamNav.classList.remove('open');
     });
@@ -213,8 +213,8 @@ class iamNav extends HTMLElement {
       iamNav.querySelectorAll('.nav--menu.open').forEach(function(element){
         element.classList.remove('open');
       });
-      iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu.selected').forEach(function(element){
-        element.classList.remove('selected');
+      iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu[aria-expanded]').forEach(function(element){
+        element.removeAttribute('aria-expanded');
         let innerBtn = element.querySelector('.btn-primary');
         innerBtn.classList.remove('active');
       });
@@ -243,8 +243,8 @@ class iamNav extends HTMLElement {
             element.classList.remove('open');
             setTimeout(function(){ menu.classList.add('closed') }, 1000);
           });
-          iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu.selected').forEach(function(element){
-            element.classList.remove('selected');
+          iamNav.shadowRoot.querySelectorAll('.buttons-holder .btn-menu[aria-expanded]').forEach(function(element){
+            element.removeAttribute('aria-expanded');
             let innerBtn = element.querySelector('.btn-primary');
             innerBtn.classList.remove('active');
           });
@@ -285,7 +285,7 @@ class iamNav extends HTMLElement {
       let searchWrapper = this.shadowRoot.querySelector('#search-wrapper');
 
       searchWrapper.classList.remove('d-none');
-      searchWrapper.insertAdjacentHTML('afterbegin',`<button class="btn btn-secondary btn-compact fa-search me-0 mb-0" id="search-button">Open Search field</button>
+      searchWrapper.insertAdjacentHTML('afterbegin',`<button class="btn btn-secondary btn-compact fa-search me-0 mb-0" id="search-button" aria-controls="search-dialog">Open Search field</button>
       <dialog id="search-dialog">
       <div class="container">
         <form action="${this.hasAttribute('data-search') ? this.getAttribute('data-search') : ''}" class="row" id="search-form">
@@ -295,7 +295,7 @@ class iamNav extends HTMLElement {
             <input type="search" class="" id="search" name="search" required="" autocomplete="off" data-list="${this.hasAttribute('data-list') ? this.getAttribute('data-list') : ''}" />
           </div>
           <div class="col d-none d-md-block mw-fit-content ms-3">
-            <button class="btn btn-compact btn-secondary fa-xmark-large m-0 mb-0" type="button" id="search-close"></button>
+            <button class="btn btn-compact btn-secondary fa-xmark-large m-0 mb-0" type="button" id="search-close">Close search field</button>
           </div>
         </form>
       </div>
@@ -311,18 +311,24 @@ class iamNav extends HTMLElement {
         
         searchDialog.setAttribute('open','open');
         this.classList.add('search-open');
+
+        searchButton.setAttribute('aria-expanded', true);
       }
 
       searchButton.addEventListener("click", (event) => {
 
         searchDialog.setAttribute('open','open');
         this.classList.add('search-open');
+
+        searchButton.setAttribute('aria-expanded', true);
       });
 
       searchClose.addEventListener("click", (event) => {
 
         searchDialog.removeAttribute('open');
         this.classList.remove('search-open');
+
+        searchButton.removeAttribute('aria-expanded');
       });
 
       // Search events
