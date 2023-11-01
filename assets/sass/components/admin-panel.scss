@@ -28,7 +28,7 @@
 
   > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child {
     
-    --gradient-direction: -90deg;
+    --gradient-direction: -90deg!important;
     background-color:var(--colour-success);
 
     &:not([class*="bg-"]){
@@ -72,7 +72,7 @@
     margin: 0 calc(var(--padding-x) * -1) rem(24) calc(var(--padding-x) * -1);
 
     &:before {
-      top: 100%;
+      top: 100% !important;
     }
   }
 
@@ -93,79 +93,16 @@
       padding-bottom: 0!important;
     }
   }
+
+  > iam-pagination {
+    margin-top: -1rem;
+  }
 }
 
 [class*="col"] .admin-panel:first-child:last-child:not(:has(.mh-sm,.mh-md,.mh-lg)) {
 
   min-height: calc(100% - #{rem(24)});
 }
-
-// #region panel links 
-.admin-panel :is(.admin-panel__links, .tabs__links) {
-
-  padding: 0;
-  margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
-
-  border-top-left-radius: rem(8);
-  border-top-right-radius: rem(8);
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid var(--colour-border);
-  overflow: hidden;
-  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-
-  &:after {
-    display: none;
-  }
-  
-  @include media-breakpoint-up(sm) {
-
-    flex-direction: row;
-  }
-
-  .link:not(.text-decoration-none):not(.btn) {
-    margin: 0;
-    //margin-left: calc(var(--wrapper-padding) * -1);
-    padding: #{rem(16)} var(--padding-x);
-    width: 100%;
-    position: relative;
-    text-align: left;
-    flex-grow: 1;
-    --gradient-direction: -90deg;
-    background-color:var(--colour-success);
-
-    &:not([class*="bg-"]){
-      background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
-    }
-
-    &:is(.current, [aria-pressed="true"]){
-      color: var(--colour-primary-theme);
-    }
-
-    &:not(.current, [aria-pressed="true"]){
-      background: var(--colour-canvas-2)!important;
-    }
-
-    &:after {
-      display: none;
-    }
-
-    @include media-breakpoint-up(sm) {
-
-      margin: 0;
-
-      &:not(:first-child){
-          
-        border-left: 1px solid var(--colour-border)!important;
-      }
-    }
-  }
-
-  .link:is(.current,[aria-pressed="true"]) {
-    pointer-events: none;
-  }
-}
-// #endregion
 
 // #region Has actionbar
 .admin-panel:has(iam-actionbar) {

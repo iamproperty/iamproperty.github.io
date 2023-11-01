@@ -9,7 +9,12 @@
   margin-bottom: 1rem;
   font-size: rem(15);
   border: rem(2) solid var(--colour,var(--colour-info));
-  background: #e9f9fd;
+
+  @include light-mode(){
+      
+    background: #e9f9fd;
+  }
+
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
   ::slotted(i),

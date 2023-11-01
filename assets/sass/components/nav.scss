@@ -2,14 +2,14 @@
 
 :host{
   display: flex!important;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: row!important;
+  flex-wrap: wrap!important;
+  align-items: center!important;
 }
 
 ::slotted(.brand) {
 
-  margin-right: auto;
+  margin-right: auto!important;
 }
 
 .btn-menu {

@@ -1,6 +1,10 @@
 {
   "success": true,
   "status": 200,
+  "meta": {
+    "total": 41,
+    "current_page": 1
+  },
   "data": {
       "buyerTasks": [
           {

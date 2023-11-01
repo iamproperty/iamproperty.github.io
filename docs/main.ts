@@ -13,7 +13,10 @@ import extendInputs from '../assets/ts/modules/inputs';
 import createDataLayer from '../assets/ts/modules/data-layer'
 
 
+import createDynamicEvents from '../assets/ts/modules/dynamicEvents'
+
 createDataLayer();
+createDynamicEvents();
 
 const router = createRouter({
   history: createWebHistory(),
@@ -131,7 +134,6 @@ app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
 
 helpers.addBodyClasses(document.body);
-helpers.addGlobalEvents(document.body);
 helpers.addGlobalEvents(document.body);
 extendDialogs(document.body);
 extendInputs(document.body);

@@ -85,10 +85,7 @@ a.router-link-active:not(.text-decoration-none):not(.btn):before {
 
 @include media-breakpoint-up(md) {
 
-  #search {
-    
-    border-radius: 0.5rem!important;
-  }
+
 }
 
 .nav {
@@ -108,9 +105,10 @@ footer .router-link-active {
 #visualtest:target ~ main > *:not(.visualtest){
   display: none!important;
 }
-
+@layer utilities {
 #visualtest:target ~ main > .d-none.visualtest{
   display: block!important;
+}
 }
 #visualtest:target ~ main > .visualtest .visualtest-hide,
 #visualtest:target ~ main > .visualtest pre {
@@ -182,9 +180,6 @@ routes.forEach((route) => {
 });
 
 const refinedResults = [...new Set(results)];
-
-console.log(results);
-console.log(refinedResults);
 
 export default {
   components: {

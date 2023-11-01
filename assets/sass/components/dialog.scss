@@ -611,6 +611,13 @@ dialog::backdrop {
           top: 0.75rem;
         }
       }
+
+      .btn-action {
+        &:not(:hover,:focus,:active){
+          border-color: transparent;
+        }
+        margin: 0;
+      }
     }
 
     dialog[open] {

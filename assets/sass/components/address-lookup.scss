@@ -1,0 +1,31 @@
+:host {
+  margin-bottom: 1rem;
+  display: block;
+}
+
+input[name="postcode"] {
+  border-color: var(--error-border,var(--colour-primary))!important;
+}
+
+div:has(input[name="postcode"]) .suffix {
+
+  border-color: var(--error-border,var(--colour-primary))!important;
+}
+
+.invalid-feedback {
+  display: var(--error-display,none)!important;
+}
+
+.optional {
+  
+  display: var(--req-display,inline-block)!important;
+}
+
+.pre-filled p {
+  padding-bottom: 1rem;
+}
+.pre-filled button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}

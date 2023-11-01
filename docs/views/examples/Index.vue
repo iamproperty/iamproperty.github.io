@@ -9,6 +9,10 @@
         <li><a href="/examples/actionbar-top">Actionbar at top</a></li>
         <li><a href="/examples/actionbar-panel">Actionbar in a panel</a></li>
       </ul>
+      <h2 id="tables">Pagination</h2>
+      <ul>
+        <li><a href="/examples/pagination">Pagination</a></li>
+      </ul>
     </div>
     <div class="container">
       <h2 class="h1">Full page examples</h2>

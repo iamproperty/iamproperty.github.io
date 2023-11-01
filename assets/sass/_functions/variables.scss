@@ -178,7 +178,7 @@ $non-theme-colors: map-merge((
   "btn-secondary-bg": transparent,
   "btn-secondary-bg-hover": var(--colour-primary-theme),
   "btn-secondary-hover": var(--colour-inverted),
-  "canvas-2":     var(--colour-canvas),
+  "canvas-2":     white,
   "btn-action-hover-bg": var(--colour-light)
 ), $non-theme-colors);
 
@@ -336,6 +336,10 @@ $content-max-width-px: 800;
 $content-max-width: rem($content-max-width-px);
 $paragraph-margin-bottom: 2rem;
 
+
+$input-max-width-px: 800;
+$input-max-width: var(--input-max-width, #{rem($input-max-width-px)});
+$select-max-width: var(--select-max-width, #{rem($input-max-width-px)});
 // #endregion 
 
 // #region Buttons
