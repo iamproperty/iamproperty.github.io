@@ -47,7 +47,7 @@
               <span class="h4" :style="`font-size:${$shared.cssVars.h4_fs_rem}!important;line-height:${$shared.cssVars.h3_lh_rem}!important;padding-bottom:${$shared.cssVars.h4_pb_rem}!important;`">This is heading 4<span class="lineheight-demo" :style="`height:${$shared.cssVars.h4_pb_rem}!important`"></span></span>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
-              <span class="small extra-small">H4<br/>Font-family: Qanelas<br/>Font-weight: Bold<br/>Font-size: {{$shared.cssVars.h4_fs_rem}} ({{$shared.cssVars.h4_fs}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.h4_lh_rem}} ({{$shared.cssVars.h4_lh}}px)<br/>Padding-bottom: {{$shared.cssVars.h4_pb_rem}} ({{$shared.cssVars.h4_pb}}px)</span>
+              <span class="small extra-small">H4<br/>Font-family: Qanelas<br/>Font-weight: Semi-Bold<br/>Font-size: {{$shared.cssVars.h4_fs_rem}} ({{$shared.cssVars.h4_fs}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.h4_lh_rem}} ({{$shared.cssVars.h4_lh}}px)<br/>Padding-bottom: {{$shared.cssVars.h4_pb_rem}} ({{$shared.cssVars.h4_pb}}px)</span>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@
               <span class="h4" :style="`font-size:${$shared.cssVars.h4_fs_sm_rem}!important;line-height:${$shared.cssVars.h3_lh_sm_rem}!important;padding-bottom:${$shared.cssVars.h4_pb_sm_rem}!important;`">This is heading 4<span class="lineheight-demo" :style="`height:${$shared.cssVars.h4_pb_sm_rem}!important`"></span></span>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
-              <span class="small extra-small">H4<br/>Font-family: Qanelas<br/>Font-weight: Bold<br/>Font-size: {{$shared.cssVars.h4_fs_sm_rem}} ({{$shared.cssVars.h4_fs_sm}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.h4_lh_sm_rem}} ({{$shared.cssVars.h4_lh_sm}}px)<br/>Padding-bottom: {{$shared.cssVars.h4_pb_sm_rem}} ({{$shared.cssVars.h4_pb_sm}}px)</span>
+              <span class="small extra-small">H4<br/>Font-family: Qanelas<br/>Font-weight: Semi-Bold<br/>Font-size: {{$shared.cssVars.h4_fs_sm_rem}} ({{$shared.cssVars.h4_fs_sm}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.h4_lh_sm_rem}} ({{$shared.cssVars.h4_lh_sm}}px)<br/>Padding-bottom: {{$shared.cssVars.h4_pb_sm_rem}} ({{$shared.cssVars.h4_pb_sm}}px)</span>
             </div>
           </div>
         </div>
@@ -118,7 +118,7 @@
 
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
-              <span class="small extra-small">.lead<br/>Font-family: Qanelas<br/>Font-weight: Bold<br/>Font-size: {{$shared.cssVars.lead_fs_rem}} ({{$shared.cssVars.lead_fs}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.lead_lh_rem}} ({{$shared.cssVars.lead_lh}}px)<br/>Padding-bottom: {{$shared.cssVars.lead_pb_rem}} ({{$shared.cssVars.lead_pb}}px)</span>
+              <span class="small extra-small">.lead<br/>Font-family: Qanelas<br/>Font-weight: Semi-Bold<br/>Font-size: {{$shared.cssVars.lead_fs_rem}} ({{$shared.cssVars.lead_fs}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.lead_lh_rem}} ({{$shared.cssVars.lead_lh}}px)<br/>Padding-bottom: {{$shared.cssVars.lead_pb_rem}} ({{$shared.cssVars.lead_pb}}px)</span>
             </div>
           </div>
           <!-- Body -->
@@ -132,7 +132,7 @@
 
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
-              <p class="small extra-small pb-2">p<br/>Font-family: Qanelas<br/>Font-weight: medium<br/>Font-size: {{$shared.cssVars.body_fs_rem}} ({{$shared.cssVars.body_fs}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.body_lh_rem}} ({{$shared.cssVars.body_lh}}px)<br/>Padding-bottom: {{$shared.cssVars.body_pb_end_rem}} ({{$shared.cssVars.body_end_pb}}px)</p>
+              <p class="small extra-small pb-2">p<br/>Font-family: Qanelas<br/>Font-weight: Normal<br/>Font-size: {{$shared.cssVars.body_fs_rem}} ({{$shared.cssVars.body_fs}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.body_lh_rem}} ({{$shared.cssVars.body_lh}}px)<br/>Padding-bottom: {{$shared.cssVars.body_pb_end_rem}} ({{$shared.cssVars.body_end_pb}}px)</p>
               
               <p class="small extra-small">p:has(+ p)<br/>Padding-bottom: {{$shared.cssVars.body_pb_rem}} ({{$shared.cssVars.body_pb}}px)</p>
             </div>
@@ -146,7 +146,7 @@
 
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
-              <p class="small extra-small pb-2">.small, small<br/>Font-family: Qanelas<br/>Font-weight: medium<br/>Font-size: {{$shared.cssVars.small_fs_rem}} ({{$shared.cssVars.small_fs}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.small_lh_rem}} ({{$shared.cssVars.small_lh}}px)<br/>Padding-bottom: {{$shared.cssVars.small_pb_rem}} ({{$shared.cssVars.small_pb}}px)</p>
+              <p class="small extra-small pb-2">.small, small<br/>Font-family: Arial<br/>Font-weight: Medium<br/>Font-size: {{$shared.cssVars.small_fs_rem}} ({{$shared.cssVars.small_fs}}px)<br/>Letter-spacing: 0px<br/>Line-height: {{$shared.cssVars.small_lh_rem}} ({{$shared.cssVars.small_lh}}px)<br/>Padding-bottom: {{$shared.cssVars.small_pb_rem}} ({{$shared.cssVars.small_pb}}px)</p>
               
             </div>
           </div>
