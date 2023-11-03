@@ -16,7 +16,7 @@ mark {
   margin-bottom: $headings-margin-bottom;
   font-family: $headings-font-family;
   font-style: $headings-font-style;
-  font-weight: 900;
+  font-weight: bold;
   line-height: $headings-line-height;
   color: $headings-color;
   // END:Bootstap reboot
@@ -38,6 +38,7 @@ mark {
   font-size: rem(map-get($heading-sizes,"h1_fs"));
   line-height: rem(map-get($heading-sizes,"h1_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
+  font-weight: 900;
 
   @include media-breakpoint-up(sm) {
 
@@ -51,6 +52,7 @@ mark {
   font-size: rem(map-get($heading-sizes,"h2_fs"));
   line-height: rem(map-get($heading-sizes,"h2_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
+  font-weight: 900;
 
   @include media-breakpoint-up(sm) {
 
@@ -65,6 +67,7 @@ mark {
   line-height: rem(map-get($heading-sizes,"h3_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h3_pb"));
   max-width: var(--content-max-width);
+  font-weight: 900;
 
   @include media-breakpoint-up(sm) {
 
