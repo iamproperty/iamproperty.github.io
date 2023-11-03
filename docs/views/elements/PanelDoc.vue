@@ -3,7 +3,7 @@
 
 
 
-    <DSHeader :image="headerImg" section="components">
+    <DSHeader :image="headerImg" section="elements">
       <h1>Admin panel</h1>
     </DSHeader>
 
@@ -43,8 +43,8 @@
         <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
       </div>
       <div class="admin-panel">
-        <h2 class="bg-light">Admin panel title</h2>
-        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+        <h2 class="bg-white">Admin panel title (bg-white)</h2>
+        <p><strong>Use "bg-white" to apply this simpler version.</strong> Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
       </div>
       <div class="admin-panel">
         <h2 class="bg-primary">Admin panel title</h2>
@@ -74,7 +74,7 @@
         </div>
         <div class="col-6 col-sm-4">
           <div class="admin-panel">
-            <h2 class="bg-light">Admin panel title</h2>
+            <h2 class="bg-white">Admin panel title (bg-white)</h2>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
           </div>          
         </div>
@@ -83,7 +83,7 @@
 
     <div class="container">
       <h2>Admin panel max height</h2>
-      <p>To control how much real estate the admin panel takes up on a page we can set a max height for the text within it to a pre-defined list. There are three heights for text to presented. Small with a max height of {{$shared.cssVars.ut_mh_sm}} ({{$shared.cssVars.ut_mh_sm_px}}px), medium with a max height of {{$shared.cssVars.ut_mh_md}} ({{$shared.cssVars.ut_mh_md_px}}px) and, and large with a max height of {{$shared.cssVars.ut_mh_lg}} ({{$shared.cssVars.ut_mh_lg_px}}px).</p>
+      <p>To control how much real estate the admin panel takes up on a page we can set a max height for the text within it to a pre-defined list. There are three heights for text to presented. Small with a max height of {{$shared.cssVars.ut_mh_sm}} ({{$shared.cssVars.ut_mh_sm_px}}px), medium with a max height of {{$shared.cssVars.ut_mh_md}} ({{$shared.cssVars.ut_mh_md_px}}px) and, and large with a max height of {{$shared.cssVars.ut_mh_lg}} ({{$shared.cssVars.ut_mh_lg_px}}px). A fade equal to the padding at the bottom (1.5rem) should be added when the text is scrollable.</p>
     </div>
 
     <div class="container visualtest">
@@ -108,7 +108,7 @@
         </div>
         <div class="col-6 col-sm-4">
           <div class="admin-panel">
-            <h2 class="bg-light">Admin panel title</h2>
+            <h2 class="bg-white">Admin panel title (bg-white)</h2>
             <div class="mh-sm">
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
             <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
@@ -209,13 +209,13 @@
     <div class="container visualtest">
       <Tabs class="admin-panel">
         <Tab title="Tab 1">
-          <p>Tabe content 1</p>
+          <p>Tab content 1</p>
         </Tab>
         <Tab title="Tab 2">
-          <p>Tabe content 2</p>
+          <p>Tab content 2</p>
         </Tab>
         <Tab title="Tab 3" >
-          <p>Tabe content 3</p>
+          <p>Tab content 3</p>
         </Tab>
       </Tabs>
     </div>
@@ -233,6 +233,15 @@
   <p>...</p>
 </div>
 
+<div class="admin-panel">
+  <h2 class="bg-primary gradient-info">Admin panel title</h2><!-- .bg-primary.gradient-info classes for variant backgruond -->
+  <p>...</p>
+</div>
+
+<div class="admin-panel">
+  <h2 class="bg-white">Admin panel title</h2><!-- .bg-white class for header background similar to panel background (matches dark mode) -->
+  <p>...</p>
+</div>
 
 <div class="admin-panel">
   <iam-tabs></iam-tabs><!-- Adding tabs as the first child will add the gradient background to the selected tab -->
@@ -250,6 +259,18 @@
               <th>Notable updates</th>
             </tr>
           </thead>
+          <tbody class="text-body">
+            <tr>
+              <td>V2 added</td>
+              <td>03.31.2023</td>
+              <td>
+                - Updated 'light' header colour to #fcfcfc to match action bar header<br>
+                - Added 'dark mode' and 'high contrast' versions of the admnin panel (design download only)<br>
+                - Updated the 'Admin panel tabs' section to match the new 'tabs' guide.<br>
+                - Admin panel example 3 (using "bg-white") applies a simpler style without a clear difference between header and body
+              </td>
+            </tr>
+          </tbody>
           <tbody class="text-body">
             <tr>
               <td>V1 added</td>

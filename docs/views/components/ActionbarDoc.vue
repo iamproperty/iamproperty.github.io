@@ -677,11 +677,13 @@ div[data-view] {
   font-size: 1.5rem;
 }
 
+@layer utilities {
 .views {
 
   .btn-action:not(:last-child){
     margin-right: 0.25rem!important;
   }
+}
 }
 
 .search-wrapper {

@@ -4,8 +4,10 @@
 $fontPath: '../../fonts/';
 @import "../../assets/sass/_fonts.scss";
 @import '../../assets/sass/_corefiles.scss';
+@layer components {
 @import '../../assets/sass/components/nav-global.scss';
-@import "../../assets/sass/_forms";
+}
+//@import "../../assets/sass/_forms";
 
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');

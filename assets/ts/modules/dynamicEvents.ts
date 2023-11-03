@@ -6,26 +6,22 @@ const createDynamicEvents = () => {
   // Change event
   document.addEventListener('change', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-change-events]'))
-      readMatches(event.target,event.target.closest('[data-change-events]').getAttribute('data-change-events'));
-  });
-  document.addEventListener('change', (event) => {
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-change-events]'))
-      readMatches(event.target,event.target.closest('[data-change-events]').getAttribute('data-change-events'));
+      splitEvents(event.target,event.target.closest('[data-change-events]').getAttribute('data-change-events'));
   });
   document.addEventListener('keyup', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-change-events]'))
-      readMatches(event.target,event.target.closest('[data-change-events]').getAttribute('data-change-events'));
+      splitEvents(event.target,event.target.closest('[data-change-events]').getAttribute('data-change-events'));
   });
 
   // Click event
   document.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-click-events]'))
-      readMatches(event.target,event.target.closest('[data-click-events]').getAttribute('data-click-events'));
+      splitEvents(event.target,event.target.closest('[data-click-events]').getAttribute('data-click-events'));
   });
 };
 
 // Parse the JSON and trigger the events, this may be singular or multiple set of events
-const readMatches = (element,events) => {
+const splitEvents = (element,events) => {
 
   // an empty events will trigger looking up the dom chain for 
   if(!events){
@@ -38,11 +34,11 @@ const readMatches = (element,events) => {
 
   // Split out each event
   Array.from(JSON.parse(events)).forEach((event, index) => {
-    checkMatch(element,event);
+    checkConditions(element,event);
   });
 };
     
-const checkMatch = (element,event) => {
+const checkConditions = (element,event) => {
 
   if("matches" in event){
     if(event['matches'] == 'any')
@@ -55,12 +51,16 @@ const checkMatch = (element,event) => {
     return false;
   }
   else if("in-list" in event){
+
+    // Pass the matched datalist element instead of the triggered element
+    let match = document.querySelector(`${event['in-list']} option[value="${element.value}"]`);
+
     if(document.querySelector(`${event['in-list']} option[value="${element.value}"]`)){
-      let match = document.querySelector(`${event['in-list']} option[value="${element.value}"]`);
-      runEvent(element,event,'if',match);
+
+      runEvent(match,event,'if');
     }
     else
-      runEvent(element,event,'else');
+      runEvent(match,event,'else');
 
     return false;
   }
@@ -69,7 +69,7 @@ const checkMatch = (element,event) => {
   }
 };
 
-const runEvent = (element,event,eventType,match) => {
+const runEvent = (element,event,eventType) => {
 
   if(eventType in event == false)
     return false;
@@ -96,9 +96,13 @@ const runEvent = (element,event,eventType,match) => {
           input.setAttribute('required','true');
       });
       break;
-    case "populate-form":
-      populateForm(element,event,match);
-      break;
+      case "populate-form":
+        populateForm(element,event);
+        break;
+      case "dispatchEvent":
+        let theEvent = new Event(event['value']);
+        document.querySelector(`${event['target']}`).dispatchEvent(theEvent);
+        break;
     case "setAttribute":
       document.querySelector(`${event['target']}`).setAttribute(event['attribute'],event['value']);
       break;
@@ -116,28 +120,41 @@ const runEvent = (element,event,eventType,match) => {
   }
 }
 
-const populateForm = function (element,event,match) {
+const populateForm = function (element,event) {
   
-  let response = JSON.parse(match.getAttribute('data-values'));
+  let values = JSON.parse(element.getAttribute('data-values'));
   let form = document.querySelector(event['target']);
 
-  Object.keys(response).forEach((field, index) => {
+  if(!values)
+    return false;
+
+  Object.keys(values).forEach((field, index) => {
 
     if(document.getElementById(field) && document.getElementById(field).tagName == "SPAN")
-      document.getElementById(field).innerHTML = response[field];
-    
-    if(form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`)){
+      document.getElementById(field).innerHTML = values[field];
+
+
+    if(form.querySelector(`select[name="${field}"] [value="${values[field]}"]`)){
+
+      form.querySelector(`select[name="${field}"]`).value = values[field];
+
+      if(element.hasAttribute('data-lock-fields'))
+        form.querySelector(`select[name="${field}"]`).disabled = true;
+    }
+    else if(form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`)){
       
       Array.from(form.querySelectorAll(`input[name="${field}"][type="radio"]`)).forEach(function(input,index){
         input.disabled = true;
       });
 
-      form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`).checked = true;
-      form.querySelector(`input[name="${field}"][type="radio"][value="${response[field]}"]`).disabled = false;
+      form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`).checked = true;
+      form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`).disabled = false;
     }
     else if(form.querySelector(`input[name="${field}"]`)){
-      form.querySelector(`input[name="${field}"]`).value = response[field];
-      form.querySelector(`input[name="${field}"]`).setAttribute('readonly','true');
+      form.querySelector(`input[name="${field}"]`).value = values[field];
+
+      if(element.hasAttribute('data-lock-fields'))
+        form.querySelector(`input[name="${field}"]`).setAttribute('readonly','true');
     }
   });
 }

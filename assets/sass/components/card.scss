@@ -125,17 +125,17 @@
 }
 
 ::slotted(i){
-  font-size: rem(24);
-  margin: -3px var(--card-icon-right) 0 0;
-  font-weight: 400;
-  vertical-align: middle;
+  font-size: rem(24)!important;
+  margin: -3px var(--card-icon-right) 0 0!important;
+  font-weight: 400!important;
+  vertical-align: middle!important;
 }
 
 ::slotted(span){
-  display: block;
-  font-weight: normal;
-  padding-top: rem(24);
-  font-size: rem(16);
+  display: block!important;
+  font-weight: normal!important;
+  padding-top: rem(24)!important;
+  font-size: rem(16)!important;
 }
 // #endregion
 

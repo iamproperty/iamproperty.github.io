@@ -20,6 +20,7 @@ const version = pkg.version;
 
     <router-link to="/principles">Principles</router-link>
     <router-link to="/foundations">Foundations</router-link>
+    <router-link to="/elements">Elements</router-link>
     <router-link to="/components">Components</router-link>
     <router-link to="/templates">Templates</router-link>
     <router-link to="/best-practice">Best practice</router-link>
@@ -105,9 +106,10 @@ footer .router-link-active {
 #visualtest:target ~ main > *:not(.visualtest){
   display: none!important;
 }
-
+@layer utilities {
 #visualtest:target ~ main > .d-none.visualtest{
   display: block!important;
+}
 }
 #visualtest:target ~ main > .visualtest .visualtest-hide,
 #visualtest:target ~ main > .visualtest pre {

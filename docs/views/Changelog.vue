@@ -4,6 +4,18 @@
       <h1>Changelog</h1>
 
 
+      <h2>V5.0.0</h2>
+      <ul>
+        <li>Re-introduce elements section</li>
+        <li>Add CSS layers</li>
+        <li>Dynamic Events</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Some Sass/CSS file names have changed</li>
+      </ul>
+
       <h2>V4.1.0</h2>
       <ul>
         <li>Lots of changes ad fixes for the forms</li>

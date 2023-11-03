@@ -2,14 +2,14 @@
 
 :host{
   display: flex!important;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
+  flex-direction: row!important;
+  flex-wrap: wrap!important;
+  align-items: center!important;
 }
 
 ::slotted(.brand) {
 
-  margin-right: auto;
+  margin-right: auto!important;
 }
 
 .btn-menu {
@@ -46,7 +46,7 @@
     display: none;
   }
 
-  &.selected {
+  &[aria-expanded] {
 
     i {
       display: none;
@@ -79,7 +79,7 @@
     padding-right: rem(24 + 6);
     text-indent: 0;
 
-    &.selected {
+    &[aria-expanded] {
       text-indent: -1000%;
     }
   }
@@ -93,7 +93,7 @@
     text-indent: 0;
     padding-right: 0!important;
 
-    &.selected {
+    &[aria-expanded] {
       text-indent: 0;
     }
 
@@ -227,7 +227,7 @@
       display: none!important;
     }
   }
-
+  
   .menu__secondary {
     display: none;
   }

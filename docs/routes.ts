@@ -25,15 +25,6 @@ const routes = [
         searchterms: 'wave, lighthouse'
       },
       {
-        path: 'logos',
-        name: 'Logos (Beta)',
-        meta: {
-          title: 'Logos | Foundations | iamkey'
-        },
-        component: () => import('./views/foundations/Logos.vue'),
-        searchterms: 'brand, identity'
-      },
-      {
         path: 'colours',
         name: 'Colours',
         meta: {
@@ -41,50 +32,6 @@ const routes = [
         },
         component: () => import('./views/foundations/Colours.vue'),
         searchterms: 'light mode, dark mode, background, palette, slate, gradient, high contrast'
-      },
-      {
-        path: 'icons',
-        name: 'Icons',
-        meta: {
-          title: 'Icons | Foundations | iamkey'
-        },
-        component: () => import('./views/foundations/Icons.vue'),
-        searchterms: 'svg, status, font awesome'
-      },
-      {
-        path: 'type',
-        name: 'Typography',
-        meta: {
-          title: 'Typography | Foundations | iamkey'
-        },
-        component: () => import('./views/foundations/Type.vue'),
-        searchterms: 'headings, body, lead, small, blockquote, stat'
-      },
-      {
-        path: 'illustrations',
-        name: 'Illustrations (Beta)',
-        meta: {
-          title: 'Illustrations | Foundations | iamkey'
-        },
-        component: () => import('./views/foundations/Illustrations.vue'),
-        searchterms: 'svg, presentation'
-      },
-      {
-        path: 'circles',
-        name: 'Circles (Beta)',
-        meta: {
-          title: 'Circles | Foundations | iamkey'
-        },
-        component: () => import('./views/foundations/Circles.vue')
-      },
-      {
-        path: 'media',
-        name: 'Media (Beta)',
-        meta: {
-          title: 'Media | Foundations | iamkey'
-        },
-        component: () => import('./views/foundations/Media.vue'),
-        searchterms: 'youtube'
       },
       {
         path: 'spacing',
@@ -130,6 +77,249 @@ const routes = [
       }
     ]
   },
+  { /* Elements */
+    path: '/elements',
+    component: () => import(/* webpackChunkName: "elements" */ './views/Elements.vue'),
+    children: [
+      {
+        path: '',
+        name: 'Elements',
+        meta: {
+          title: 'Elements | iamkey'
+        },
+        component: () => import('./views/elements/Index.vue')
+      },
+      {
+        path: 'logos',
+        name: 'Logos (Beta)',
+        meta: {
+          title: 'Logos | Elements | iamkey'
+        },
+        component: () => import('./views/elements/Logos.vue'),
+        searchterms: 'brand, identity'
+      },
+      {
+        path: 'icons',
+        name: 'Icons',
+        meta: {
+          title: 'Icons | Foundations | iamkey'
+        },
+        component: () => import('./views/elements/Icons.vue'),
+        searchterms: 'svg, status, font awesome'
+      },
+      {
+        path: 'media',
+        name: 'Media (Beta)',
+        meta: {
+          title: 'Media | Elements | iamkey'
+        },
+        component: () => import('./views/elements/Media.vue'),
+        searchterms: 'youtube'
+      },
+      {
+        path: 'illustrations',
+        name: 'Illustrations (Beta)',
+        meta: {
+          title: 'Illustrations | Elements | iamkey'
+        },
+        component: () => import('./views/elements/Illustrations.vue'),
+        searchterms: 'svg, presentation'
+      },
+      {
+        path: 'type',
+        name: 'Typography',
+        meta: {
+          title: 'Typography | Elements | iamkey'
+        },
+        component: () => import('./views/elements/Type.vue'),
+        searchterms: 'headings, body, lead, small, blockquote, stat'
+      },
+      {
+        path: 'lists',
+        name: 'Lists (Beta)',
+        meta: {
+          title: 'Lists | Elements | iamkey'
+        },
+        component: () => import('./views/elements/Lists.vue'),
+        searchterms: 'unordered, ordered, tick, breadcrumb'
+      },
+      {
+        path: 'buttons',
+        name: 'Buttons & links',
+        meta: {
+          title: 'Buttons & links | Elements | iamkey'
+        },
+        component: () => import('./views/elements/Buttons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact'
+      },
+      {
+        path: 'container',
+        name: 'Container (Beta)',
+        meta: {
+          title: 'Container | Elemenets | iamkey'
+        },
+        component: () => import('./views/elements/Container.vue'),
+        searchterms: 'fundamental, backgrounds, curve'
+      },
+      {
+        path: 'panel',
+        name: 'Admin panel',
+        meta: {
+          title: 'Admin panel | Elements | iamkey'
+        },
+        component: () => import('./views/elements/PanelDoc.vue'),
+        searchterms: 'admin, tabs'
+      },
+      {
+        path: 'tables',
+        name: 'Tables (BETA)',
+        meta: {
+          title: 'Tables | Elements | iamkey'
+        },
+        component: () => import('./views/elements/Tables.vue'),
+        searchterms: 'rows, columns'
+      }
+    ]
+  },
+  { /* Form */
+    path: '/form',
+    name: 'Form',
+    meta: {
+      title: 'Elements | iamkey'
+    },
+    component: () => import( './views/Elements.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/elements/Index.vue')
+      },
+      {
+        path: 'inputs',
+        name: 'Form input fields',
+        meta: {
+          title: 'Form input fields | Elements | iamkey'
+        },
+        component: () => import('./views/form/FormInputDoc.vue'),
+        searchterms: 'label, disabled, prefix, suffix, readonly, masks, helper'
+      },
+      {
+        path: 'select',
+        name: 'Form select field (Beta)',
+        meta: {
+          title: 'Form select field | Elements | iamkey'
+        },
+        component: () => import('./views/form/Select.vue')
+      },
+      {
+        path: 'checkbox',
+        name: 'Form checkboxes',
+        meta: {
+          title: 'Checkbox field | Elements | iamkey'
+        },
+        component: () => import('./views/form/Checkbox.vue')
+      },
+      {
+        path: 'radio',
+        name: 'Form Radio fields',
+        meta: {
+          title: 'Form Radio fields | Elements | iamkey'
+        },
+        component: () => import('./views/form/RadioDoc.vue'),
+        searchterms: 'selected, card, select, reveal'
+      },
+      {
+        path: 'date',
+        name: 'Form date and time pickers (Beta)',
+        meta: {
+          title: 'Form date and time pickers | Elements | iamkey'
+        },
+        component: () => import('./views/form/Date.vue')
+      },
+      {
+        path: 'range',
+        name: 'Form range field (Beta)',
+        meta: {
+          title: 'Form range field | Elements | iamkey'
+        },
+        component: () => import('./views/form/Range.vue')
+      },
+      {
+        path: 'toggle',
+        name: 'Form Toggle buttons (Beta)',
+        meta: {
+          title: 'Toggle buttons | Elements | iamkey'
+        },
+        component: () => import('./views/form/Toggle.vue')
+      },
+      {
+        path: 'file',
+        name: 'Form file upload fields (BETA)',
+        meta: {
+          title: 'Form file upload field | Elements | iamkey'
+        },
+        component: () => import('./views/form/File.vue')
+      },
+      {
+        path: 'validation',
+        name: 'Form validation',
+        meta: {
+          title: 'Form validation | Elements | iamkey'
+        },
+        component: () => import('./views/form/FormValidationDoc.vue'),
+        searchterms: 'error, success, message'
+      }
+    ]
+  },
+  { /* Dialogs */
+    path: '/dialogs',
+    name: 'Dialogs',
+    meta: {
+      title: 'Elements | iamkey'
+    },
+    component: () => import( './views/Elements.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/elements/Index.vue')
+      },
+      {
+        path: 'dialog',
+        name: 'Dialog',
+        meta: {
+          title: 'Dialog | Elements | iamkey'
+        },
+        component: () => import('./views/dialogs/DialogDoc.vue'),
+        searchterms: 'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, inline notification, snackbar, banner, dismissal'
+      },
+      {
+        path: 'modal',
+        name: 'Dialog (Modal)',
+        meta: {
+          title: 'Dialog (Modal) | Elements | iamkey'
+        },
+        component: () => import('./views/dialogs/ModalDoc.vue'),
+        searchterms: 'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, dismissal'
+      },
+      {
+        path: 'nonmodal',
+        name: 'Dialog (Non-Modal)',
+        meta: {
+          title: 'Dialog (Non-Modal) | Elements | iamkey'
+        },
+        component: () => import('./views/dialogs/NonModalDoc.vue'),
+        searchterms: 'passive, transactional, acknowledgement, popover'
+      },
+      {
+        path: 'popover',
+        name: 'Dialog (Popover)',
+        meta: {
+          title: 'Dialog (Popover) | Elements | iamkey'
+        },
+        component: () => import('./views/dialogs/PopoverDoc.vue'),
+        searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip'
+      }
+    ]
+  },
   { /* Components */
     path: '/components',
     name: 'Components',
@@ -170,15 +360,6 @@ const routes = [
         searchterms: 'postcode'
       },
       {
-        path: 'panel',
-        name: 'Admin panel',
-        meta: {
-          title: 'Admin panel | Components | iamkey'
-        },
-        component: () => import('./views/components/PanelDoc.vue'),
-        searchterms: 'admin, tabs'
-      },
-      {
         path: 'applied-filters',
         name: 'Applied Filters (Beta)',
         meta: {
@@ -194,15 +375,6 @@ const routes = [
         },
         component: () => import('./views/components/BannerDoc.vue'),
         searchterms: 'promote'
-      },
-      {
-        path: 'buttons',
-        name: 'Buttons & links',
-        meta: {
-          title: 'Buttons & links | Elements | iamkey'
-        },
-        component: () => import('./views/components/Buttons.vue'),
-        searchterms: 'anchor, prompt, secondary button, primary button, compact'
       },
       {
         path: 'card',
@@ -231,143 +403,6 @@ const routes = [
         component: () => import('./views/components/ChartsDoc.vue')
       },
       {
-        path: 'collapsible-side-menu',
-        name: 'Collapsible Side Menu',
-        meta: {
-          title: 'Collapsible Side Menu | Components | iamkey'
-        },
-        component: () => import('./views/components/CollapsibleSideMenu.vue'),
-        searchterms: 'nav,hidden,expand,menu,admin,settings,sub'
-      },
-      {
-        path: 'container',
-        name: 'Container (Beta)',
-        meta: {
-          title: 'Container | Components | iamkey'
-        },
-        component: () => import('./views/components/Container.vue'),
-        searchterms: 'fundamental, backgrounds, curve'
-      },
-      {
-        path: 'dialog',
-        name: 'Dialog',
-        meta: {
-          title: 'Dialog | Components | iamkey'
-        },
-        component: () => import('./views/components/DialogDoc.vue'),
-        searchterms: 'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, inline notification, snackbar, banner, dismissal'
-      },
-      {
-        path: 'modal',
-        name: 'Dialog (Modal)',
-        meta: {
-          title: 'Dialog (Modal) | Components | iamkey'
-        },
-        component: () => import('./views/components/ModalDoc.vue'),
-        searchterms: 'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, dismissal'
-      },
-      {
-        path: 'nonmodal',
-        name: 'Dialog (Non-Modal)',
-        meta: {
-          title: 'Dialog (Non-Modal) | Components | iamkey'
-        },
-        component: () => import('./views/components/NonModalDoc.vue'),
-        searchterms: 'passive, transactional, acknowledgement, popover'
-      },
-      {
-        path: 'popover',
-        name: 'Dialog (Popover)',
-        meta: {
-          title: 'Dialog (Popover) | Components | iamkey'
-        },
-        component: () => import('./views/components/PopoverDoc.vue'),
-        searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip'
-      },
-      {
-        path: 'inputs',
-        name: 'Form input fields',
-        meta: {
-          title: 'Form input fields | Components | iamkey'
-        },
-        component: () => import('./views/components/FormInputDoc.vue'),
-        searchterms: 'label, disabled, prefix, suffix, readonly, masks, helper'
-      },
-      {
-        path: 'select',
-        name: 'Form select field (Beta)',
-        meta: {
-          title: 'Form select field | Elements | iamkey'
-        },
-        component: () => import('./views/components/Select.vue')
-      },
-      {
-        path: 'checkbox',
-        name: 'Form checkboxes',
-        meta: {
-          title: 'Checkbox field | Elements | iamkey'
-        },
-        component: () => import('./views/components/Checkbox.vue')
-      },
-      {
-        path: 'radio',
-        name: 'Form Radio fields',
-        meta: {
-          title: 'Form Radio fields | Elements | iamkey'
-        },
-        component: () => import('./views/components/RadioDoc.vue'),
-        searchterms: 'selected, card, select, reveal'
-      },
-      {
-        path: 'date',
-        name: 'Form date and time pickers (Beta)',
-        meta: {
-          title: 'Form date and time pickers | Elements | iamkey'
-        },
-        component: () => import('./views/components/Date.vue')
-      },
-      {
-        path: 'range',
-        name: 'Form range field (Beta)',
-        meta: {
-          title: 'Form range field | Elements | iamkey'
-        },
-        component: () => import('./views/components/Range.vue')
-      },
-      {
-        path: 'toggle',
-        name: 'Form Toggle buttons (Beta)',
-        meta: {
-          title: 'Toggle buttons | Elements | iamkey'
-        },
-        component: () => import('./views/components/Toggle.vue')
-      },
-      {
-        path: 'tags',
-        name: 'Form Pill tags (Beta)',
-        meta: {
-          title: 'Pill tags | Elements | iamkey'
-        },
-        component: () => import('./views/components/Tags.vue')
-      },
-      {
-        path: 'file',
-        name: 'Form file upload fields',
-        meta: {
-          title: 'Form file upload field | Elements | iamkey'
-        },
-        component: () => import('./views/components/File.vue')
-      },
-      {
-        path: 'validation',
-        name: 'Form validation',
-        meta: {
-          title: 'Form validation | Components | iamkey'
-        },
-        component: () => import('./views/components/FormValidationDoc.vue'),
-        searchterms: 'error, success, message'
-      },
-      {
         path: 'filterlist',
         name: 'Filter list (Beta)',
         meta: {
@@ -377,6 +412,14 @@ const routes = [
         searchterms: 'reduce, search'
       },
       {
+        path: 'file',
+        name: 'File upload component',
+        meta: {
+          title: 'File upload component | Components | iamkey'
+        },
+        component: () => import('./views/components/File.vue')
+      },
+      {
         path: 'header',
         name: 'Header (Beta)',
         meta: {
@@ -384,55 +427,6 @@ const routes = [
         },
         component: () => import('./views/components/Header.vue'),
         searchterms: 'introduce, banner'
-      },
-      {
-        path: 'lists',
-        name: 'Lists (Beta)',
-        meta: {
-          title: 'Lists | Elements | iamkey'
-        },
-        component: () => import('./views/components/Lists.vue'),
-        searchterms: 'unordered, ordered, tick, breadcrumb'
-      },
-      {
-        path: 'nav',
-        name: 'Navbar',
-        meta: {
-          title: 'Navbar | Components | iamkey'
-        },
-        component: () => import('./views/components/NavDoc.vue')
-      },
-      {
-        path: 'nav-secondary',
-        name: 'Navbar-secondary',
-        meta: {
-          title: 'Navbar-secondary | Components | iamkey'
-        },
-        component: () => import('./views/components/NavSecondaryDoc.vue')
-      },
-      {
-        path: 'nav-mega',
-        name: 'Navbar-mega menu',
-        meta: {
-          title: 'Navbar-mega menu | Components | iamkey'
-        },
-        component: () => import('./views/components/NavMegaDoc.vue')
-      },
-      {
-        path: 'nav-dual',
-        name: 'Navbar-dual',
-        meta: {
-          title: 'Navbar-dual menu | Components | iamkey'
-        },
-        component: () => import('./views/components/NavDualDoc.vue')
-      },
-      {
-        path: 'nav-menu',
-        name: 'Navbar-menu',
-        meta: {
-          title: 'Navbar-menu menu | Components | iamkey'
-        },
-        component: () => import('./views/components/NavMenuDoc.vue')
       },
       {
         path: 'notefeed',
@@ -477,42 +471,6 @@ const routes = [
         component: () => import('./views/components/StepperDoc.vue')
       },
       {
-        path: 'system-notifications',
-        name: 'System notifications',
-        meta: {
-          title: 'System notifications | Components | iamkey'
-        },
-        component: () => import('./views/components/SystemNotificationsDoc.vue'),
-        searchterms: 'high urgency, meduim urgency, low urgency, notify, message, toasts, inline notification, alert, transactional modal, acknowledgment, status'
-      },
-      {
-        path: 'alert',
-        name: 'System notifications (Alert)',
-        meta: {
-          title: 'System notifications (Alert) | Components | iamkey'
-        },
-        component: () => import('./views/components/AlertDoc.vue'),
-        searchterms: 'high urgency, warning, promotional, calls to action, time-sensitive, critical'
-      },
-      {
-        path: 'toasts',
-        name: 'System notifications (Toasts)',
-        meta: {
-          title: 'System notifications (Toasts) | Components | iamkey'
-        },
-        component: () => import('./views/components/ToastsDoc.vue'),
-        searchterms: 'low urgency, confirmation, message, temporary'
-      },
-      {
-        path: 'inline-notification',
-        name: 'System notifications (Inline)',
-        meta: {
-          title: 'System notifications (Inline) | Components | iamkey'
-        },
-        component: () => import('./views/components/InlineDoc.vue'),
-        searchterms: 'high urgency, error, form'
-      },
-      {
         path: 'tables',
         name: 'Tables',
         meta: {
@@ -545,6 +503,119 @@ const routes = [
           title: 'Timeline | Components | iamkey'
         },
         component: () => import('./views/components/TimelineDoc.vue')
+      }
+    ]
+  },
+  { /* Nav */
+    path: '/nav',
+    name: 'Nav',
+    meta: {
+      title: 'Components | iamkey'
+    },
+    component: () => import( './views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue')
+      },
+      {
+        path: 'nav',
+        name: 'Navbar',
+        meta: {
+          title: 'Navbar | Components | iamkey'
+        },
+        component: () => import('./views/nav/NavDoc.vue')
+      },
+      {
+        path: 'nav-secondary',
+        name: 'Navbar-secondary',
+        meta: {
+          title: 'Navbar-secondary | Components | iamkey'
+        },
+        component: () => import('./views/nav/NavSecondaryDoc.vue')
+      },
+      {
+        path: 'nav-mega',
+        name: 'Navbar-mega menu',
+        meta: {
+          title: 'Navbar-mega menu | Components | iamkey'
+        },
+        component: () => import('./views/nav/NavMegaDoc.vue')
+      },
+      {
+        path: 'nav-dual',
+        name: 'Navbar-dual',
+        meta: {
+          title: 'Navbar-dual menu | Components | iamkey'
+        },
+        component: () => import('./views/nav/NavDualDoc.vue')
+      },
+      {
+        path: 'nav-menu',
+        name: 'Navbar-menu',
+        meta: {
+          title: 'Navbar-menu menu | Components | iamkey'
+        },
+        component: () => import('./views/nav/NavMenuDoc.vue')
+      },
+      {
+        path: 'collapsible-side-menu',
+        name: 'Collapsible Side Menu',
+        meta: {
+          title: 'Collapsible Side Menu | Components | iamkey'
+        },
+        component: () => import('./views/nav/CollapsibleSideMenu.vue'),
+        searchterms: 'nav,hidden,expand,menu,admin,settings,sub'
+      }
+    ]
+  },
+  { /* Notifications */
+    path: '/notifications',
+    name: 'Notifications',
+    meta: {
+      title: 'Components | iamkey'
+    },
+    component: () => import( './views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue')
+      },
+      {
+        path: 'system-notifications',
+        name: 'System notifications',
+        meta: {
+          title: 'System notifications | Components | iamkey'
+        },
+        component: () => import('./views/notifications/SystemNotificationsDoc.vue'),
+        searchterms: 'high urgency, meduim urgency, low urgency, notify, message, toasts, inline notification, alert, transactional modal, acknowledgment, status'
+      },
+      {
+        path: 'alert',
+        name: 'System notifications (Alert)',
+        meta: {
+          title: 'System notifications (Alert) | Components | iamkey'
+        },
+        component: () => import('./views/notifications/AlertDoc.vue'),
+        searchterms: 'high urgency, warning, promotional, calls to action, time-sensitive, critical'
+      },
+      {
+        path: 'toasts',
+        name: 'System notifications (Toasts)',
+        meta: {
+          title: 'System notifications (Toasts) | Components | iamkey'
+        },
+        component: () => import('./views/notifications/ToastsDoc.vue'),
+        searchterms: 'low urgency, confirmation, message, temporary'
+      },
+      {
+        path: 'inline-notification',
+        name: 'System notifications (Inline)',
+        meta: {
+          title: 'System notifications (Inline) | Components | iamkey'
+        },
+        component: () => import('./views/notifications/InlineDoc.vue'),
+        searchterms: 'high urgency, error, form'
       }
     ]
   },
