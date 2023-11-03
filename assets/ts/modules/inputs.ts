@@ -3,7 +3,6 @@ const extendInputs = (body) => {
 
   document.addEventListener("load", function() {
 
-    console.log(Array.from(document.querySelectorAll('input[maxlength]')))
     // maxlength counter init
     Array.from(document.querySelectorAll('input')).forEach((input,index) => {
       let wrapper = input.parentElement;
@@ -31,7 +30,6 @@ const extendInputs = (body) => {
 
       const select = event.target.closest('select');
 
-      console.log(select)
 
       if(select.hasAttribute('data-change-type') && select.hasAttribute('data-input')){
 

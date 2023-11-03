@@ -139,7 +139,7 @@ const extendDialogs = (body) => {
 
       // Remove active class from exiting active buttons
       Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
-        btnElement.classList.remove('active');
+        btnElement.removeAttribute('aria-expanded');
       });
 
       if(popover.hasAttribute('open')){
@@ -148,13 +148,13 @@ const extendDialogs = (body) => {
         dataEvent = "closePopover"
 
         popover.removeAttribute('style');
-        btn.classList.remove('active');
+        btn.removeAttribute('aria-expanded');
       }
       else {
         
         popover.show();
-        btn.classList.add('active');
-      
+        btn.setAttribute('aria-expanded', true);
+
         var position = btn.getBoundingClientRect();
         let topOffset = position.top;
         let leftOffset = position.left;
@@ -205,7 +205,7 @@ const extendDialogs = (body) => {
         document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]').close();
 
       Array.from(document.querySelectorAll('.dialog__wrapper:not([data-keep-open]) > button')).forEach((btnElement,index) => {
-        btnElement.classList.remove('active');
+        btnElement.removeAttribute('aria-expanded');
       });
     }
   });

@@ -1,6 +1,6 @@
 <template>
   <li>
-    <a :href="url" :class="`${status?'bg-'+status:''}${typeof current != 'undefined'?'current':''}`" :aria-current="typeof current != 'undefined'?true:false">
+    <a :href="url" :class="`${status?'bg-'+status:''}${typeof current != 'undefined'?'current':''}`" :aria-current="typeof current != 'undefined'?'step':false">
       <span><slot></slot></span>
       <em class="visually-hidden" v-if="status"> - status: {{status}}</em>
     </a>

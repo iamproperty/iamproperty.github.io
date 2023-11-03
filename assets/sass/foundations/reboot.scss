@@ -95,6 +95,8 @@ button:focus {
 }
 
 hr {
+  --border-style: solid;
+  --border-color: var(--colour-border);
   border: 0;
   color: transparent;
   margin: 0;
@@ -102,6 +104,7 @@ hr {
   background-color: currentColor;
   opacity: 1;
   clear:both;
+
 
   &:after {
     display: table;

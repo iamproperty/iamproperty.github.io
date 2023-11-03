@@ -9,7 +9,7 @@ function carousel(carouselElement) {
   let smCols = carouselElement.getAttribute('data-sm-cols');
   let mdCols = carouselElement.getAttribute('data-md-cols');
 
-  carouselElement.querySelector('.carousel__controls a').classList.add('active');
+  carouselElement.querySelector('.carousel__controls a').setAttribute('aria-current', true);
 
   // On scroll we need to make sure the buttons get corrected and the next testimonial is shown
   carouselInner.addEventListener('scroll', function(e){
@@ -23,10 +23,10 @@ function carousel(carouselElement) {
       let lastItemOffset = carouselElement.querySelector('.carousel__item:last-child').offsetLeft;
 
       Array.from(carouselElement.querySelectorAll('.carousel__controls a')).forEach((link, index) => {
-        link.classList.remove('active');
+        link.removeAttribute('aria-current');
       });
 
-      carouselElement.querySelector('.control-'+targetSlide).classList.add('active');
+      carouselElement.querySelector('.control-'+targetSlide).setAttribute('aria-current', true);
       
       // Disable the previous button
       if(targetSlide == 1)
@@ -53,9 +53,9 @@ function carousel(carouselElement) {
         e.preventDefault();
 
         Array.from(carouselElement.querySelectorAll('.carousel__controls a')).forEach((link, index) => {
-          link.classList.remove('active');
+          link.removeAttribute('aria-current');
         });
-        target.classList.add('active');
+        target.setAttribute('aria-current', true);
 
         const el = document.querySelector(target.getAttribute('href'));
 

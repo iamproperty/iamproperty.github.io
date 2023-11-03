@@ -7,10 +7,6 @@ mark {
   background-color: $mark-bg;
 }
 
-small {
-  @include font-size($small-font-size);
-}
-
 @import "../../bootstrap/scss/_type.scss";
 
 // #region headings
@@ -20,7 +16,7 @@ small {
   margin-bottom: $headings-margin-bottom;
   font-family: $headings-font-family;
   font-style: $headings-font-style;
-  font-weight: $headings-font-weight;
+  font-weight: bold;
   line-height: $headings-line-height;
   color: $headings-color;
   // END:Bootstap reboot
@@ -42,6 +38,7 @@ small {
   font-size: rem(map-get($heading-sizes,"h1_fs"));
   line-height: rem(map-get($heading-sizes,"h1_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
+  font-weight: 900;
 
   @include media-breakpoint-up(sm) {
 
@@ -55,6 +52,7 @@ small {
   font-size: rem(map-get($heading-sizes,"h2_fs"));
   line-height: rem(map-get($heading-sizes,"h2_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
+  font-weight: 900;
 
   @include media-breakpoint-up(sm) {
 
@@ -69,6 +67,7 @@ small {
   line-height: rem(map-get($heading-sizes,"h3_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h3_pb"));
   max-width: var(--content-max-width);
+  font-weight: 900;
 
   @include media-breakpoint-up(sm) {
 
@@ -115,11 +114,14 @@ p:has(+ p) {
   font-weight: 700;
 }
 
+small,
 .small {
   font-size: rem(map-get($heading-sizes,"small_fs"));
   line-height: rem(map-get($heading-sizes,"small_lh"));
   padding-bottom: rem(map-get($heading-sizes,"small_pb"));
   max-width: var(--content-max-width);
+  font-family: arial, sans-serif;
+  font-weight: normal;
 }
 
 blockquote {

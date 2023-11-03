@@ -551,15 +551,10 @@ dialog::backdrop {
       transform: rotate(90deg);
     }
 
-    &.active:after {
+    &[aria-expanded]:after {
 
-      transform: rotate(-90deg);
+      transform: rotate(270deg);
     }
-  }
-
-  &:has(dialog[open]) > .btn:first-child:after {
-
-    transform: rotate(270deg);
   }
 
   > dialog[open] {
@@ -613,7 +608,9 @@ dialog::backdrop {
       }
 
       .btn-action {
-        border: none;
+        &:not(:hover,:focus,:active){
+          border-color: transparent;
+        }
         margin: 0;
       }
     }

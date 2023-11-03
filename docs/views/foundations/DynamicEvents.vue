@@ -153,6 +153,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td>Sets the elements value to the value of the value property.</td>
                 <td>Change event</td>
               </tr>
+              <tr>
+                <td>dispatchDvent</td>
+                <td>target, value</td>
+                <td>Dispatches an event on the element</td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
         </div>

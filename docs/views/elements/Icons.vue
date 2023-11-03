@@ -1,6 +1,6 @@
 <template>
   <main>
-    <DSHeader :image="headerImg" section="components">
+    <DSHeader :image="headerImg" section="elements">
       <h1>Iconography</h1>
     </DSHeader>
 

@@ -78,10 +78,10 @@ export const createMobileButton = (table, wrapper) => {
   });
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row,index) => {
-        
+    const preExpanded = row.getAttribute('data-view') === 'full' ? 'aria-expanded' : '';
     row.insertAdjacentHTML(
       'afterbegin',
-      `<td class="td--fixed td--expand"><button class="btn btn-compact btn-secondary" data-expand-button>Expand</button></td>`
+      `<td class="td--fixed td--expand"><button class="btn btn-compact btn-secondary" data-expand-button ${preExpanded}>Expand</button></td>`
     );
   });
 
@@ -97,12 +97,14 @@ export const addTableEventListeners = (table) => {
       let button = event.target.closest('[data-expand-button]');
       let tableRow = button.closest('tr');
 
+      button.toggleAttribute('aria-expanded');
+
       if(tableRow.getAttribute('data-view') == "full")
         tableRow.setAttribute('data-view','default');
       else
         tableRow.setAttribute('data-view','full');
 
-        button.blur();
+      button.blur();
     };
   });
 }

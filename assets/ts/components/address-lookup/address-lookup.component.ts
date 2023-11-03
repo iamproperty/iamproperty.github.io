@@ -32,7 +32,7 @@ class iamAddressLookup extends HTMLElement {
 
       <div class="postcode-lookup">
         <div>
-        <label class="mb-2">Search property address <span class="optional">(Optional)</span>
+        <label class="mb-2">Search <span class="title text-lowercase"></span> <span class="optional">(Optional)</span>
           <span>
           <input type="text" name="postcode" list="address-lookup__addressess" autoComplete="new-password" aria-autocomplete="none" placeholder="Postcode" />
           <span class="suffix fa-regular fa-search"></span>
@@ -49,6 +49,10 @@ class iamAddressLookup extends HTMLElement {
         <slot></slot>
         <button class="btn btn-tertiary switch-to-lookup-btn">Use postcode lookup</button>
       </div>
+      <div class="pre-filled pb-2 js-hide">
+        <strong class="title text-primary d-block"></strong>
+        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button></p>
+      </div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -60,9 +64,49 @@ class iamAddressLookup extends HTMLElement {
     const lookup = this.shadowRoot.querySelector('[name="postcode"]');
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
+    const preFilledWrapper = this.shadowRoot.querySelector('.pre-filled');
     const list = this.shadowRoot.querySelector('datalist');
     const switchManualBtn = this.shadowRoot.querySelector('.switch-to-manual-btn');
     const switchLookupBtn = this.shadowRoot.querySelector('.switch-to-lookup-btn');
+    const title = this.hasAttribute('data-title') ? this.getAttribute('data-title')  : "Property address";
+    const preFilledAddressBtn = this.shadowRoot.querySelector('.pre-filled-address + button');
+
+  
+    Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement, index) => {
+
+      titleElement.innerHTML = title;
+    });
+
+    function checkFilled(component){
+
+      let preFilledAddress = component.shadowRoot.querySelector('.pre-filled-address');
+      let preFilled = true;
+      preFilledAddress.innerHTML = "";
+
+      Array.from(component.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')).forEach((input, index) => {
+
+        if(!input.value)
+          preFilled = false;
+        else
+          preFilledAddress.innerHTML += ', '+input.value;
+        
+      });
+
+      preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(1);
+
+      if(preFilled){
+        preFilledWrapper.classList.remove('js-hide');
+        lookupWrapper.classList.add('js-hide');
+        manualWrapper.classList.add('js-hide');
+      }
+    }
+    checkFilled(this);
+    
+    this.addEventListener('filled', (event) => {
+
+      checkFilled(this);
+    });
+
 
     if(this.hasAttribute('data-use')){
 
@@ -97,20 +141,32 @@ class iamAddressLookup extends HTMLElement {
       });
     }
 
-
-    switchManualBtn.addEventListener('click', (event) => {
-
+    function openManualWrapper (){
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
-      Array.from(this.querySelectorAll('[data-required]')).forEach((input, index) => {
+      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input, index) => {
         input.setAttribute('required','true');
       });
+
+      manualWrapper.scrollIntoView();
+    }
+
+    preFilledAddressBtn.addEventListener('click', (event) => {
+
+      preFilledWrapper.classList.add('js-hide');
+      openManualWrapper();
+    });
+    switchManualBtn.addEventListener('click', (event) => {
+
+      openManualWrapper();
     });
     switchLookupBtn.addEventListener('click', (event) => {
 
       lookupWrapper.classList.remove('js-hide');
       manualWrapper.classList.add('js-hide');
+
+      lookupWrapper.scrollIntoView();
     });
 
 

@@ -33,6 +33,10 @@ iam-table {
       }
     }
   }
+
+  &[data-expandable] [data-expand-button][aria-expanded] {
+    background-color: transparent;
+  }
 }
 // #endregion
 
@@ -143,11 +147,10 @@ iam-table {
         font-weight: 300!important;
         font-size: rem(28);
         line-height: var(--compact-size)!important;
+      
       }
-    }
 
-    tr[data-view="full"] {
-      [data-expand-button] {
+      &[aria-expanded]{
 
         &:before {
             
@@ -391,7 +394,7 @@ iam-table table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~
 
 iam-table {
 
-  input:is([type="radio"],[type="checkbox"]) + label {
+  input:is([type="radio"],[type="checkbox"]) + label:not(.radio--tick) {
     padding-left: 0!important;
     margin: 0!important;
 
@@ -443,7 +446,7 @@ iam-table {
 
   iam-table {
 
-    input:is([type="radio"],[type="checkbox"]) + label {
+    input:is([type="radio"],[type="checkbox"]) + label:not(.radio--tick) {
       padding-left: 0!important;
       margin: 0!important;
       min-height: 2rem;
@@ -502,16 +505,15 @@ iam-table.table--fullwidth:not([data-expandable]) {
         content: "\f078";
         font-weight: 500;
       }
+
+      &[aria-expanded]{
+        &:before {
+          content: "\f077";
+        }
+      }
     }
 
-    tr[data-view="full"] [data-expand-button]:before {
-    
-      content: "\f077";
-    }
-
-    tr:not([data-view="full"]) td p {
-
-      
+    tr:not([data-view="full"]) td p {   
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;

@@ -349,19 +349,19 @@ input[maxlength] + span {
 // #region Form validation
 
 
-.was-validated *:not(button):is(:invalid, .is-invalid):not(.is-valid) + label,
-.was-validated label:has(*:not(button):is(:invalid, .is-invalid):not(.is-valid)) {
+.was-validated *:not(button):is(:invalid, .is-invalid, [aria-invalid]):not(.is-valid) + label,
+.was-validated label:has(*:not(button):is(:invalid, .is-invalid, [aria-invalid]):not(.is-valid)) {
 
   --colour-check-border: var(--colour-danger);
   --colour-check-bg: #FCEBEC;
   border-color: var(--colour-danger);
 }
 
-.was-validated *:not(button):is(:invalid, .is-invalid,:-internal-autofill-selected) {
+.was-validated *:not(button):is(:invalid, .is-invalid, [aria-invalid],:-internal-autofill-selected) {
 
   border-color: var(--colour-danger)!important;
 }
-.was-validated input:is(:invalid, .is-invalid,:-internal-autofill-selected) {
+.was-validated input:is(:invalid, .is-invalid,[aria-invalid],:-internal-autofill-selected) {
 
   background-image: escape-svg($icon-error);
   background-repeat: no-repeat;
