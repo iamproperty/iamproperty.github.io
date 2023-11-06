@@ -107,12 +107,14 @@ class iamSlider extends HTMLElement {
           
         slidersHolder.appendChild(rangeInput);
       }
-      else if(index == 1){
+      
+      if(index == inputs.length-1){
         input.classList.add('is-last');
         rangeInput.classList.add('is-last'); 
         slidersHolder.appendChild(rangeInput);
       }
-      else {
+
+      if(index > 1) {
         input.remove();
       }
 

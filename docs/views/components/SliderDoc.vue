@@ -56,7 +56,7 @@
     </div>
 
     <div class="container visualtest">
-      <label>Input field label <Slider><input type="number" min="0" max="150" value="15" step="1" /></Slider></label>
+      <label>Input field label <Slider><input type="number" min="0" max="100" value="15" step="1" /></Slider></label>
     </div>
  
     <div class="container pb-0">
@@ -67,8 +67,8 @@
     <div class="container visualtest">
       <label>Input field label 
         <Slider>
-          <input type="range" min="0" max="200" value="20" step="10" name="min" />
-          <input type="range" min="0" max="200" value="50" step="10" name="max" />
+          <input type="range" min="0" max="100" value="20" step="10" name="min" />
+          <input type="range" min="0" max="100" value="50" step="10" name="max" />
         </Slider>
       </label>
     </div>
