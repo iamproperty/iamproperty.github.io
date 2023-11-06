@@ -1,9 +1,5 @@
 @use "../_func" as *;
 
-:host {
-  background-color: red;
-}
-
 .row {
   align-items: center;
 }
@@ -11,7 +7,6 @@
 :is(.min, .max) {
 
   max-width: fit-content;
-
   line-height: 2rem;
 }
 
@@ -20,131 +15,110 @@
   padding: 0;
 }
 
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
+:host {
+  max-width: $input-max-width;
+  display: block;
 }
 
-
-                        /***** Track Styles *****/
-/***** Chrome, Safari, Opera, and Edge Chromium *****/
+// Track
 input[type="range"]::-webkit-slider-runnable-track {
-  //background: var(--track-colour);
-  height: var(--track-size);
-  border-radius: 0.5rem;
+
   background: linear-gradient(to right, var(--track-colour), var(--track-colour) var(--start-percent, 0%), var(--thumb-colour) var(--start-percent, 0%), var(--thumb-colour) var(--percent, 0%), var(--track-colour) var(--percent, 0%));
-  //transition: 0.5s;
 }
 
-/******** Firefox ********/
 input[type="range"]::-moz-range-track {
-  background: var(--track-colour);
-  height: var(--track-size);
-  border-radius: 0.5rem;
   
   background: linear-gradient(to right, var(--track-colour), var(--track-colour) var(--start-percent, 0%), var(--thumb-colour) var(--start-percent, 0%), var(--thumb-colour) var(--percent, 0%), var(--track-colour) var(--percent, 0%));
- 
 }
 
 
-/***** Thumb Styles *****/
-/***** Chrome, Safari, Opera, and Edge Chromium *****/
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  margin-top: rem(-8); /* Centers thumb on the track */
-  background-color: var(--thumb-colour);
-  height: var(--thumb-size);
-  width: var(--thumb-size);
-  border-radius: 50%;
-  position: relative;
-  z-index: 99;
-}
-/***** Thumb Styles *****/
-/***** Firefox *****/
-input[type="range"]::-moz-range-thumb {
-  border: none; /*Removes extra border that FF applies*/
-  background-color: var(--thumb-colour); /*Removes default border-radius that FF applies*/
-  height: var(--thumb-size);
-  width: var(--thumb-size);
-  position: relative;
-  z-index: 99;
+// Two input fields
+input[type="range"] + input[type="range"] {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
 }
 
-/***** Focus Styles *****/
-/* Removes default focus */
-input[type="range"]:focus {
-  outline: none;
+input[type="range"] + input[type="range"]::-webkit-slider-runnable-track {
+  
+  background: transparent;
+  pointer-events: none;
+  width: 200%;
+  margin-left: -100%;
 }
 
-/***** Chrome, Safari, Opera, and Edge Chromium *****/
-input[type="range"]:hover::-webkit-slider-thumb,
-input[type="range"]:focus::-webkit-slider-thumb {
-  outline: 0.5rem solid rgba(30, 190, 231, .2);
-}
-
-input[type="range"]:active::-webkit-slider-thumb {
-  outline: 0.5rem solid rgba(30, 190, 231, .4);
-}
-
-/******** Firefox ********/
-input[type="range"]:hover::-moz-range-thumb,
-input[type="range"]:focus::-moz-range-thumb {
-  outline: 0.5rem solid rgba(30, 190, 231, .2);
-}
-input[type="range"]:focus::-moz-range-thumb {
-  outline: 0.5rem solid rgba(30, 190, 231, .4);
-}
-
-
-  label {
-    
-    margin: 0!important;
-  }
-  label input[type=range] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0!important;
-  }
-
-
+@supports (-moz-appearance:none) {
   input[type="range"] + input[type="range"] {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    width: 50%;
-    --thumb-colour: red;
-  }
+    left: 0;
+    width: 100%;
 
-  input[type="range"] + input[type="range"]::-webkit-slider-runnable-track {
-    
-    background: transparent;
-    pointer-events: none;
-
-    width: 200%;
-    /* position: absolute; */
-    margin-left: -100%;
-  }
   
-  /******** Firefox ********/
-  input[type="range"] + input[type="range"]::-moz-range-track {
-    background: transparent;
-    //pointer-events: none;
-    pointer-events: none;
+  pointer-events: none;
+}
 
-    width: 200%;
-    /* position: absolute; */
-    margin-left: -100%;
-  }
-  
+} 
 
-
-input[type="range"]:has(+ input[type="range"]){
-  //pointer-events: none;
+input[type="range"] + input[type="range"]::-moz-range-track {
+  background: transparent;
+  pointer-events: none;
+  //width: 200%;
+  //margin-left: -100%;
+  pointer-events: none;
 }
 
 
-input[type="range"]:has(+ input[type="range"])::-webkit-slider-thumb {
-  //position: all;
+.input__wrapper {
+  display: flex;
+  
+  justify-content: flex-end;
+  --max-width: #{rem(100)};
+  --padding-top: 0.75rem;
+
+
+  > span {
+    display: none;
+  }
+
+  &[data-elements="2"]{
+
+    justify-content: space-between;
+    --max-width: calc(50% - #{rem(48)});
+    --padding-top: 2rem;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: rem(64);
+      height: 2px;
+      top: calc(50% - 1px);
+      left: calc(50% - #{rem(32)});
+      background-color: var(--colour-border);
+    }
+
+    span {
+      display: block;
+      position: absolute;
+      top: 0.5rem;
+      left: 1rem;
+      color: #9D9D9D;
+      font-size: 1rem;
+    }
+
+    span + span {
+      left: calc(50% + #{rem(64)});
+    }
+  
+  }
+}
+
+::slotted(input){
+  margin-top: 0!important;
+  padding-top: var(--padding-top)!important;
+  max-width: var(--max-width)!important;
+  -webkit-appearance: none!important;
+  appearance: none!important;
+  min-height: auto!important;
+  max-height: none!important;
 }

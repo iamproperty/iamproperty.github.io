@@ -25,13 +25,13 @@ class iamSlider extends HTMLElement {
     ${loadCSS}
     </style>
     <div class="row">
-      <div class="col min"></div>
+      <div class="col min pe-2"></div>
       <div class="col sliders">
         
       </div>
-      <div class="col max"></div>
+      <div class="col max ps-2"></div>
     </div>
-    <div class="input__wrapper"><slot></slot></div>
+    <div class="input__wrapper"><slot></slot><span>Minimum</span><span>Maximum</span></div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
@@ -42,7 +42,9 @@ class iamSlider extends HTMLElement {
     const minElement = this.shadowRoot.querySelector('.min');
     const maxElement = this.shadowRoot.querySelector('.max');
     const slidersHolder = this.shadowRoot.querySelector('.sliders')
-    const inputs = this.querySelectorAll('input');
+    let inputs = this.querySelectorAll('input');
+    const inputWrapper = this.shadowRoot.querySelector('.input__wrapper');
+
     
     let stepperInterval, stepperEvent = "mouseup", stepperStart = "mousedown";
     
@@ -60,7 +62,7 @@ class iamSlider extends HTMLElement {
 
       if (input.classList.contains('is-last') && !input.classList.contains('is-first')){
 
-        let percent = ((value/100) * (max-min));
+        let percent = ((value/(max-min)) * 100);
         slider.style.setProperty('--percent', percent + "%");
 
         if(parseFloat(input.value) <= parseFloat(slider.shadowRoot.querySelector('.is-first').value)){
@@ -72,7 +74,7 @@ class iamSlider extends HTMLElement {
       }
       else if(input.classList.contains('is-first') && !input.classList.contains('is-last')){
 
-        let percent = ((value/100) * (max-min));
+        let percent = ((value/(max-min)) * 100);
         slider.style.setProperty('--start-percent', percent + "%");
 
         if(parseFloat(input.value) >= parseFloat(slider.shadowRoot.querySelector('.is-last').value)){
@@ -84,7 +86,7 @@ class iamSlider extends HTMLElement {
       }
       else {
         
-        let percent = ((value/100) * (max-min)).toFixed(2);
+        let percent = ((value/(max-min)) * 100).toFixed(2);
         slider.style.setProperty('--percent', percent + "%");
       }
     };
@@ -102,16 +104,21 @@ class iamSlider extends HTMLElement {
 
         minElement.innerHTML = input.getAttribute('min');
         maxElement.innerHTML = input.getAttribute('max');
+          
+        slidersHolder.appendChild(rangeInput);
       }
-        
-      if(index == inputs.length-1){
+      else if(index == 1){
         input.classList.add('is-last');
-        rangeInput.classList.add('is-last');
+        rangeInput.classList.add('is-last'); 
+        slidersHolder.appendChild(rangeInput);
       }
-
-      slidersHolder.appendChild(rangeInput);
+      else {
+        input.remove();
+      }
 
     });
+    inputs = this.querySelectorAll('input');
+    inputWrapper.setAttribute('data-elements',inputs.length);
 
     
     const sliders = this.shadowRoot.querySelectorAll('input');
