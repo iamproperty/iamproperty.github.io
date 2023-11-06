@@ -62,9 +62,6 @@ input[type="range"] + input[type="range"]::-webkit-slider-runnable-track {
 input[type="range"] + input[type="range"]::-moz-range-track {
   background: transparent;
   pointer-events: none;
-  //width: 200%;
-  //margin-left: -100%;
-  pointer-events: none;
 }
 
 
