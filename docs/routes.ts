@@ -118,7 +118,7 @@ const routes = [
       },
       {
         path: 'illustrations',
-        name: 'Illustrations (Beta)',
+        name: 'Illustrations',
         meta: {
           title: 'Illustrations | Elements | iamkey'
         },
