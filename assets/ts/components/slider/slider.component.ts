@@ -38,12 +38,13 @@ class iamSlider extends HTMLElement {
 
 	connectedCallback() {
 
-    let slider = this;
+    const slider = this;
     const minElement = this.shadowRoot.querySelector('.min');
     const maxElement = this.shadowRoot.querySelector('.max');
     const slidersHolder = this.shadowRoot.querySelector('.sliders')
     let inputs = this.querySelectorAll('input');
     const inputWrapper = this.shadowRoot.querySelector('.input__wrapper');
+    const label = this.closest('label');
 
     
     let stepperInterval, stepperEvent = "mouseup", stepperStart = "mousedown";
@@ -165,6 +166,23 @@ class iamSlider extends HTMLElement {
         inputs[index].value = input.value;
       });
     });
+
+    // Move focus to slider when clicking on label
+    label.addEventListener('click',function(event) {
+
+      event.preventDefault();
+
+      if (this === event.target) {
+        /* click was on label */
+        slider.shadowRoot.querySelector('input').focus();
+        
+      } else {
+        /* click was on input */
+        event.stopPropagation();
+        return false;
+      }
+    });
+
   } // Connected callback
 }
 
