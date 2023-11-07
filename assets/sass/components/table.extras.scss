@@ -513,6 +513,10 @@ iam-table.table--fullwidth:not([data-expandable]) {
       }
     }
 
+    tr:not(:has(p)) [data-expand-button] {
+      display: none;
+    }
+
     tr:not([data-view="full"]) td p {   
       display: -webkit-box;
       -webkit-box-orient: vertical;
@@ -566,7 +570,7 @@ iam-table.table--fullwidth:not([data-expandable]) {
       left: auto;
       top: auto;
       z-index: 3;
-      padding: 0;
+      padding: rem(4) 0 0 0;
       min-width: rem(48 + 24);
       height: calc(var(--row-height) - 2px);
       text-align: left;

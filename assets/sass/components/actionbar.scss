@@ -53,8 +53,8 @@
 
 :is(.actionbar,.actionbar--selected,.actionbar--search){
   
-  border-top-left-radius: rem(10);
-  border-top-right-radius: rem(10);
+  border-top-left-radius: var(--actionbar-radius, #{rem(10)});
+  border-top-right-radius: var(--actionbar-radius, #{rem(10)});
   padding: 0 rem(24);
   flex-wrap: nowrap;
   justify-content: flex-end;
