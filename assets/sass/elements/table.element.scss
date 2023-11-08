@@ -40,7 +40,6 @@ table {
 }
 
 th {
-  padding-top: 0;
   font-weight: bold;
   @include var(color,--colour-heading);
 }
@@ -52,7 +51,7 @@ thead {
     @include var(border-color,--colour-primary);
   }
   th {
-    font-weight: bold;
+    padding-top: 0;
     vertical-align: bottom;
   }
 }

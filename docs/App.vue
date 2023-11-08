@@ -124,6 +124,9 @@ footer .router-link-active {
   }
 }
 
+.markdown-body {
+  overflow: auto;
+}
 
 
 </style>

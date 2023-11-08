@@ -484,7 +484,12 @@ label:has(input:is([type="radio"],[type="checkbox"])):not(:has(> iam-card)){
     top: rem(10 - 2);
     left: var(--outline-width);
   }
+  
+  &.btn:before {
+    opacity: 0;
+  }
 }
+
 
 input[type="radio"] + label:not(:has(> iam-card)),
 label:has(input[type="radio"]):not(:has(> iam-card)) {
