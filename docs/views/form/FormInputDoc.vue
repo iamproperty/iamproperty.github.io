@@ -28,6 +28,12 @@
         <li>Use input masks to auto insert the correct format in the field. This is particularly useful when entering phone numbers and card details.</li>
         <li>Only use placeholder text when relevant. If it’s clear from the field name what needs to be entered then don’t use one, for example ‘First Name’. If the field name is more ambiguous like ‘Name’ or ‘Address’ then the placeholder text can be more specific about what the user should enter such as ‘Street address and postcode’ or ‘First name’/‘Last name’.</li>
       </ul>
+
+      <h3 class="h6">Fields inside labels</h3>
+      <ul class="mb-5">
+        <li>A common practice is to include the form input field inside of the label, this is a usefull practice as it reduces the need of providing unique ID's for each field.</li>
+        <li>The design system CSS is setup to support inputs inside of labels aswell as labels above the input fields.</li>
+      </ul>
     </div>
 
 
@@ -456,7 +462,12 @@
   <label for="input">Input field label</label>
   <span class="prefix fa-solid fa-envelope"></span>
   <input type="text" id="input" name="input" placeholder="Optional placheolder text" required="" />
-</div>`}}</code></pre>
+</div>
+
+<label>
+  Input field label
+  <div><span class="prefix fa-solid fa-envelope"></span><input type="text" name="input" placeholder="Optional placheolder text" required="" /></div>
+</label>`}}</code></pre>
         </details>
         <details>
           <summary><h2>Vue component</h2></summary>
