@@ -12,7 +12,7 @@
     <div class="container">
 
       <h2>Tech illustrations</h2>
-      <p>Tech illustrations are our brand’s signature isometric style elements that can be used to display and better explain your proposition or highlight distinctive areas on platforms. They work well overlaid upon a gradient background of the same colours. You can use the gradient patterns in <a href="/foundations/colours">Colours</a> in a tasteful and balanced way. Tints may be used to create depth between dierent elements.</p>
+      <p>Tech illustrations are our brand’s signature isometric style elements that can be used to display and better explain your proposition or highlight distinctive areas on platforms. They work well overlaid upon a gradient background of the same colours. You can use the gradient patterns in <a href="/foundations/colours">Colours</a> in a tasteful and balanced way. Tints may be used to create depth between different elements.</p>
       <p class="lead">Can be used across marketing and UI mediums.</p>
       <h3>Blue variations</h3>
       <div class="row pb-5">
@@ -111,12 +111,12 @@
         <div class="col-12 col-sm-6">
           <img :src="illustrationsDo3" alt="" loading="lazy" class="mb-3" />
           <span class="h4 text-complete pb-1">Do</span>
-          <p>Use icons that relevant to the context of the UI to provide greater clarity and legibility</p>
+          <p>Use icons that are relevant to the context of the UI to provide greater clarity and legibility</p>
         </div>
         <div class="col-12 col-sm-6">
           <img :src="illustrationsDont4" alt="" loading="lazy" class="mb-3" />
           <span class="h4 text-danger pb-1">Don't</span>
-          <p>Use icons that are oensive or are unclear in meaning.</p>
+          <p>Use icons that are offensive or are unclear in meaning.</p>
         </div>
       </div>
 
@@ -160,7 +160,7 @@
       <h2>Application</h2>
       <p>There is a separation between the application of brand elements across platforms and media.</p>
       <p><strong>UI Application</strong><br/> Product platforms and internal systems will have a more functional and user focused aesthetic, prioritising simple and easily understood elements that convey direction and clear meaning to users to assist in their interaction with the UI. </p>
-      <p><strong>Marketing Application</strong><br/> Marketing platforms and media have a more flexible approach, building o of brand elements and palettes to create designs. Illustrations can be layered over images, break up copy, communicate.</p>
+      <p><strong>Marketing Application</strong><br/> Marketing platforms and media have a more flexible approach, building of brand elements and palettes to create designs. Illustrations can be layered over images, break up copy, communicate.</p>
 
       <h3>When to use illustration in marketing</h3>
 
