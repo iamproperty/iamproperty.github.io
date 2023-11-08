@@ -237,9 +237,9 @@ const routes = [
       },
       {
         path: 'range',
-        name: 'Form range field (Beta)',
+        name: 'Form range fields',
         meta: {
-          title: 'Form range field | Elements | iamkey'
+          title: 'Form range fields | Elements | iamkey'
         },
         component: () => import('./views/form/Range.vue')
       },
@@ -469,6 +469,14 @@ const routes = [
           title: 'Stepper | Components | iamkey'
         },
         component: () => import('./views/components/StepperDoc.vue')
+      },
+      {
+        path: 'slider',
+        name: 'Slider',
+        meta: {
+          title: 'Slider | Components | iamkey'
+        },
+        component: () => import('./views/components/SliderDoc.vue')
       },
       {
         path: 'tables',

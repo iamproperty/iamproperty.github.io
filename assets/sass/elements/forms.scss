@@ -20,7 +20,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 // #endregion
 
 // #region input field
-:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output,select:not(.select--minimal)) {
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output,select:not(.select--minimal)) {
   display: block;
   width: 100%;
   display: block;
@@ -61,7 +61,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 }
 
-:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])){
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])){
 
   max-width: $input-max-width;
 }
@@ -102,7 +102,7 @@ div:has(> label:first-child):has(> input) {
   margin-bottom: rem(24);
 
 
-  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), output, .prefix, .suffix {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]), output, .prefix, .suffix {
     margin-bottom: 0!important;
   }
 
@@ -111,12 +111,12 @@ div:has(> label:first-child):has(> input) {
   align-items: center;
 
 
-  > *:not(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])):not(output):not(.prefix):not(.suffix) {
+  > *:not(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])):not(output):not(.prefix):not(.suffix) {
     flex-shrink: 0;
     width: 100%;
   }
 
-  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output) {
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output) {
     flex-shrink: 1;
     flex-grow: 1;
     width: 0;
@@ -310,14 +310,14 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     }
   }
 
-  .prefix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output) {
+  .prefix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output) {
     
     border-end-start-radius: 0!important;
     border-start-start-radius: 0!important;
   }
 
-  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output),
-  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output):has(~ .suffix) {
+  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output),
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output):has(~ .suffix) {
     order: 1;
     
     border-start-end-radius: 0!important;
@@ -827,7 +827,7 @@ iam-fileupload {
   display: block;
   margin-bottom: rem(24);
 
-  :is(input,select) {
+  :is(input:not([type="range"]),select) {
     margin-top: rem(8);
     margin-bottom: 0!important;
   }
@@ -883,6 +883,108 @@ iam-fileupload {
   &.error-nowrap:after {
     white-space: nowrap;
   }
+}
+
+// #endregion
+
+// #region input range
+input[type="range"] {
+
+  --track-size: #{rem(8)};
+  --track-colour: var(--colour-light);
+  --thumb-colour: var(--colour-info);
+  --thumb-size: #{rem(24)};
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+  margin-top: rem(32);
+  margin-bottom: rem(32);
+  height: rem(32);
+  border-radius: 50%;
+  accent-color: var(--thumb-colour);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+*:has(> input[type="range"]) {
+  position: relative;
+  padding-bottom: 6rem;
+  max-width: $input-max-width;
+}
+  
+label input[type=range] {
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+}
+
+
+// Track Styles 
+input[type="range"]::-webkit-slider-runnable-track {
+
+  background: var(--track-colour);
+  height: var(--track-size);
+  border-radius: 0.5rem;
+}
+
+input[type="range"]::-moz-range-track {
+  background: var(--track-colour);
+  height: var(--track-size);
+  border-radius: 0.5rem;
+}
+
+// Thumb Styles
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: rem(-8); /* Centers thumb on the track */
+  background-color: var(--thumb-colour);
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  border-radius: 50%;
+  position: relative;
+  z-index: 99;
+  pointer-events: all;
+}
+
+input[type="range"]::-moz-range-thumb {
+  border: none; /*Removes extra border that FF applies*/
+  background-color: var(--thumb-colour); /*Removes default border-radius that FF applies*/
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  border-radius: 50%;
+  position: relative;
+  z-index: 99;
+  pointer-events: all;
+}
+
+// Focus Styles 
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:focus::-webkit-slider-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .2);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .4);
+}
+
+input[type="range"]:hover::-moz-range-thumb,
+input[type="range"]:focus::-moz-range-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .2);
+}
+input[type="range"]:focus::-moz-range-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .4);
+}
+
+
+iam-slider input::-webkit-outer-spin-button,
+iam-slider input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 // #endregion
