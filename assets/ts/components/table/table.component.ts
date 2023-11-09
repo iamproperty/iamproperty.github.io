@@ -8,7 +8,7 @@ class iamTable extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/table.css";`;
-    const loadExtraCSS = `@import "${assetLocation}/css/components/table.extras.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/table.global.css";`;
     
     const template = document.createElement('template');
     template.innerHTML = `
