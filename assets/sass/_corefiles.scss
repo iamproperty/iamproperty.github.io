@@ -27,8 +27,6 @@
 
   // Deal with preloaded state of native components
   @import "components/component.native.scss";
-
-  //@import "components/tabs.scss"; // The tabs css gets loaded in the core files so that we can create fake tabs when needed.
 }
 
 @include layer('templates') {

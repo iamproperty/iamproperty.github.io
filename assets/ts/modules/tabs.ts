@@ -52,10 +52,7 @@ export const createTabsLinks = function(tabsElement: Element) {
     }
     else if(element.matches('a')){
 
-      console.log('link');
-
-      button = element;
-      
+      button = element;      
     }
 
     button.classList.add('link');
