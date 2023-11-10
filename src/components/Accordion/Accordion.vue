@@ -9,6 +9,9 @@
 </style>
 
 <script>
+
+let devMode = process.env.NODE_ENV == "development" ? true : false;
+
 export default {
   name: 'Accordion',
   props: {
@@ -17,7 +20,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/accordion/accordion.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/accordion/accordion.component${devMode ? '.min' : ''}.js`).then(module => {
 
         if (!window.customElements.get(`iam-accordion`))
           window.customElements.define(`iam-accordion`, module.default);
