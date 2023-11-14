@@ -16,6 +16,7 @@ class iamNav extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/nav.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -52,6 +53,10 @@ class iamNav extends HTMLElement {
     `;
 
     shadowRoot.appendChild(template.content.cloneNode(true));
+    
+    // insert extra CSS
+    if(!document.getElementById('navGlobal'))
+      document.head.insertAdjacentHTML('beforeend',`<style id="navGlobal">${loadExtraCSS}</style>`);
   }
 
 	connectedCallback() {
