@@ -14,7 +14,7 @@
 
       <form class="was-validated">
 
-        <label data-error="Only weekday dates upto 7days in the future are accepted">
+        <label data-error="Only weekday dates upto 7 days in the future are accepted">
           Date
           <span><input type="date" data-start="1" data-period="7" data-allowed-days="1,2,3,4,5"/><span class="suffix fa-regular fa-calendar"></span></span>
           <span>Weekdays only</span>
