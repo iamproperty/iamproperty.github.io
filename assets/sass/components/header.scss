@@ -1,8 +1,13 @@
 @use "../_func" as *;
 
+:host{
+  padding-top: 0!important;
+  margin-bottom: rem(32);
+}
+
 .header-banner {
   background: linear-gradient(180deg,var(--colour-secondary) 0, var(--colour-info) 100%);
-  margin-bottom: rem(32);
+
   position: relative;
   overflow: hidden;
   max-width: 100%!important;

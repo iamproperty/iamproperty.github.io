@@ -128,6 +128,10 @@ footer .router-link-active {
   overflow: auto;
 }
 
+.demo {
+  grid-column: container;
+}
+
 
 </style>
 
@@ -135,6 +139,11 @@ footer .router-link-active {
 <script>
 import Card from '@/components/Card/Card.vue'
 import routes from './routes.ts';
+
+
+import extendInputs from '../assets/ts/modules/inputs';
+
+
 
 var urlParams = new URLSearchParams(window.location.search);
 let results = [];
@@ -218,6 +227,15 @@ export default {
         }
       }, 1000);
     }
+
+
+    this.$nextTick(function () {
+
+      extendInputs(document.body);
+
+
+    });
+
   },
   data () {
     return {

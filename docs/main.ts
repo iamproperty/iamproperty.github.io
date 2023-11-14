@@ -7,9 +7,6 @@ import audit from '../audit.json';
 import * as helpers from '../assets/ts/modules/helpers'
 
 import extendDialogs from '../assets/ts/modules/dialogs';
-import extendInputs from '../assets/ts/modules/inputs';
-
-
 import createDataLayer from '../assets/ts/modules/data-layer'
 
 
@@ -136,7 +133,6 @@ app.use(router).mount('#app')
 helpers.addBodyClasses(document.body);
 helpers.addGlobalEvents(document.body);
 extendDialogs(document.body);
-extendInputs(document.body);
 
 const hasDarkPreference = window.matchMedia(
   "(prefers-color-scheme: dark)"

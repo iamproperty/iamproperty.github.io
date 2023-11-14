@@ -107,15 +107,12 @@
     }
     
     &:not(.disabled) {
-      &[aria-pressed="true"]:after,
-      &:active:after,
-      &.active:after {
+      &:is([aria-pressed="true"],:active,.current):after {
         transform: translate(-50%, 0) scale(1, 1);
       }
     }
 
-    &[aria-pressed="true"],
-    &.active {
+    &:is([aria-pressed="true"],.current) {
       pointer-events: none;
       outline: var(--contrast-outline-width, 0px) solid var(--colour-primary-theme)!important;
     }

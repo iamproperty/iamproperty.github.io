@@ -16,97 +16,17 @@
 
 @include layer('components') {
 
-// #region Undefined web components
-:is(*):not(:defined):not(iam-nav):not(iam-pagination) {
-  display: block;
-  padding: rem(24);
-  margin-bottom: rem(24);
-  border-radius: rem(8);
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 80rem;
-}
-
-main > :is(*):not(:defined) {
-
-  padding: var(--container-padding);
-  padding-top: 1rem;
-}
-
-@include media-breakpoint-up(md) {
+  // Make sure the first 
+  main {
+    position: relative;
     
-  main > :is(*):not(:defined) {
-    max-width: 100%!important;
-    padding-inline: calc(50% - #{rem(math.div(1112,2))});
+    > *:first-child {
+      padding-top: 2rem;
+    }
   }
 
-  iam-header:not(:defined) {
-    min-height: rem(470);
-  }
-}
-
-:is(iam-notification,iam-card):not(:defined) {
-  box-shadow: var(--card-box-shadow);
-  border-radius: var(--card-border-radius);
-  padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
-}
-
-main {
-  position: relative;
-  
-  > *:first-child {
-    padding-top: 2rem;
-  }
-}
-
-.container.notification__holder {
-
-  position: fixed;
-  top: var(--nav-height);
-  left: 50%;
-  transform: translate(-50%,0);
-  
-  bottom: 0;
-  z-index: 999999;
-  pointer-events: none;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  display: flex;
-  margin: 0;
-  width: 100%;
-  //max-width: rem(454);
-  flex-wrap: wrap;
-  align-content: flex-start;
-  flex-direction: column;
-  align-content: flex-end;
-  align-items: flex-end;
-
-  :is(.iam-notification, iam-notification) {
-    pointer-events: all;
-    margin: 0.5rem 0 0.5rem 0;
-  }
-
-  &.bottom {
-    flex-direction: column-reverse;
-  }
-
-  &.left {
-    align-content: flex-start;
-    align-items: flex-start;
-  }
-
-  &.middle {
-    align-content: space-around;
-    align-items: center;
-  }
-}
-// #endregion
-
-  @import "components/tabs.scss";
-  @import "components/accordion.scss";
-  @import "components/card-global.scss";
-  @import "components/actionbar-global.scss";
-  // Bootstrap elements
+  // Deal with preloaded state of native components
+  @import "components/component.native.scss";
 }
 
 @include layer('templates') {

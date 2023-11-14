@@ -3,21 +3,20 @@
     <Header title="Design system <span class='text-nowrap'>& framework</span>" image="/code.jpeg">
       <p>The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great products.</p>
     </Header>
-    <div class="container">
+    
 
-      <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-cols-1 row-cols-md-3">
 
-        <div v-for="item in items">
-          <a :href="item.link">
-            <Card>
-              {{ item.title }}
-              <span v-html="item.content"></span>
-            </Card>
-          </a>
-        </div>
+      <div v-for="item in items">
+        <a :href="item.link">
+          <Card>
+            {{ item.title }}
+            <span v-html="item.content"></span>
+          </Card>
+        </a>
       </div>
-
     </div>
+
   </main>
 </template>
 

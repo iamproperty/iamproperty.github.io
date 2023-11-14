@@ -47,7 +47,7 @@ export const addGlobalEvents = (body) => {
 
   addEventListener("popstate", (event) => {
 
-    if(event && event.state.type && event.state.type == "pagination"){
+    if(event && event.state && event.state.type && event.state.type == "pagination"){
       let form = document.querySelector(`#${event.state.form}`);
       let pageInput = document.querySelector(`#${event.state.form} [data-pagination]`);
       

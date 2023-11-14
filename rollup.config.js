@@ -95,9 +95,9 @@ components.forEach((component) => {
   }
 
   try {
-    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.extras.css`))) {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.global.css`))) {
       
-      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.extras.css`), 'utf8');
+      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.global.css`), 'utf8');
       extraCSS = extraCSS.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       extraCSS = extraCSS.replace("\uFEFF","");
     }

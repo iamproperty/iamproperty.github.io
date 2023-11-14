@@ -15,9 +15,12 @@
 .ds-header{
   position: relative;
   overflow: hidden;
-  max-width: 80rem;
+  width: 100%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
+
+  grid-column: container;
   
   @media screen and (min-width: 62em){
       
