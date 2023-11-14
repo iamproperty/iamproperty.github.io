@@ -7,6 +7,7 @@
       <ul>
         <li>Tidy up and reduce the file size of the core CSS' with some CSS moved into seperate files loaded via the component associated.</li>
         <li>Developers can now add links into the tabs component to create a secondary nav component looking like the tabs</li>
+        <li>Remove the need to put content into a .container div</li>
       </ul>
 
       <h3>Breaking changes</h3>

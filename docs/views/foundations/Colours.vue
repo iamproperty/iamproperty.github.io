@@ -7,7 +7,7 @@
 
 
     <!-- #region Light mode -->
-    <div class="light-mode">
+    <div class="light-mode full-width">
 
       <div class="container">
         <div class="row">
@@ -119,7 +119,7 @@
     <!-- #endregion Light mode -->
     
     <!-- #region Dark mode -->
-    <div class="dark-mode">
+    <div class="dark-mode full-width">
 
       <div class="container">
           

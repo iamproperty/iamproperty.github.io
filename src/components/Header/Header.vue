@@ -25,11 +25,17 @@ export default {
     }
   },
   mounted(){
-    this.$nextTick(function () {
 
-      // Register components
-      if (!window.customElements.get('iam-header'))
-        window.customElements.define('iam-header', iamHeader);
+    this.$nextTick(function () {
+      
+      import(`../../../assets/js/components/header/header.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+
+        if (!window.customElements.get(`iam-header`))
+          window.customElements.define(`iam-header`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
     })
   }
 }

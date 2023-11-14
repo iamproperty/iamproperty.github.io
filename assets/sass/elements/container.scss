@@ -57,6 +57,23 @@
     }
   }
 }
+
+
+// replicate container padding-bottom
+main > .row {
+
+  padding-bottom: #{rem(16)};
+
+  &[class*="bg-"] {
+    padding-top: #{rem(48)};
+    padding-bottom: #{rem(32)};
+  }
+
+  &[class*="bg-"] + :is(.row, .container):not([class*="bg-"]) {
+
+    padding-top: #{rem(32)};
+  }
+}
 // #endregion
 
 // #region Circles
