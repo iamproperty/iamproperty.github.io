@@ -128,6 +128,10 @@ footer .router-link-active {
   overflow: auto;
 }
 
+.demo {
+  grid-column: container;
+}
+
 
 </style>
 
