@@ -136,6 +136,11 @@ footer .router-link-active {
 import Card from '@/components/Card/Card.vue'
 import routes from './routes.ts';
 
+
+import extendInputs from '../assets/ts/modules/inputs';
+
+
+
 var urlParams = new URLSearchParams(window.location.search);
 let results = [];
 let searchTerm = urlParams.get('search');
@@ -218,6 +223,15 @@ export default {
         }
       }, 1000);
     }
+
+
+    this.$nextTick(function () {
+
+      extendInputs(document.body);
+
+
+    });
+
   },
   data () {
     return {

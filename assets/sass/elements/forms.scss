@@ -831,13 +831,15 @@ iam-fileupload {
 
   display: block;
   margin-bottom: rem(24);
+  max-width: $input-max-width;
 
   :is(input:not([type="range"]),select) {
     margin-top: rem(8);
     margin-bottom: 0!important;
   }
 
-  :is(input,select) ~ span:not(:is(.suffix,.prefix,.invalid-feedback)) {
+  :is(input,select) ~ span:not(:is(.suffix,.prefix,.invalid-feedback)),
+  span:has(> :is(input,select)) ~ span:not(:is(.suffix,.prefix,.invalid-feedback)) {
     all: initial;
     font-family: var(--font-body);
     color: var(--colour-body);
@@ -992,4 +994,23 @@ iam-slider input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+// #endregion
+
+// #region Date and time fields
+:is(input[type="date"],input[type="time"]) {
+  position: relative;
+}
+:is(input[type="date"],input[type="time"])::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 8em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+  order: 3;
+}
 // #endregion

@@ -11,12 +11,54 @@
     </div>
     <div class="container visualtest">
       <h2>Date only</h2>
-      <Input type="date" id="test17" label="Date"></Input>
-      <h2>Time only</h2>
-      <Input type="time" id="test15" label="Time"></Input>
-      
-      <p class="note visualtest-hide"><strong>Note:</strong> The datetime-local, month and week input types should not be used due to limited support on the firefox browser. The user expereince of these input fields are not as good as the above fields and the above date and time inputs are much easier to understand.</p>
 
+      <form class="was-validated">
+
+        <label data-error="Only weekday dates upto 7 days in the future are accepted">
+          Date
+          <span><input type="date" data-start="1" data-period="7" data-allowed-days="1,2,3,4,5"/><span class="suffix fa-regular fa-calendar"></span></span>
+          <span>Weekdays only</span>
+        </label>
+              
+        <h3 class="pt-3">Modifying data-attributes</h3>
+        <table class="mb-5">
+          <thead>
+            <tr>
+              <th>Attribute</th>
+              <th>Allowed values</th>
+              <th>What it does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>data-start</td>
+              <td>positive or negative integer</td>
+              <td>Updates the min attribute on the input to be the current date plus the integer passed. Negative values can be passed</td>
+            </tr>
+            <tr>
+              <td>data-period</td>
+              <td>positive integer</td>
+              <td>Updates the max attribute on the input to be the start date plus the integer passed.</td>
+            </tr>
+            <tr>
+              <td>data-allowed-days</td>
+              <td>Comma delimetered array of integers</td>
+              <td>Updates the max attribute on the input to be the start date plus the integer passed.</td>
+            </tr>
+          </tbody>
+
+        </table>
+
+        <h2>Time only</h2>
+
+        <label>
+          Time
+          <span><input type="time" name="appt" min="09:00" max="17:00" /><span class="suffix fa-regular fa-clock"></span></span>
+        </label>
+      
+        <p class="note visualtest-hide"><strong>Note:</strong> The datetime-local, month and week input types should not be used due to limited support on the firefox browser. The user expereince of these input fields are not as good as the above fields and the above date and time inputs are much easier to understand.</p>
+
+      </form>
     </div>
     
   </main>
