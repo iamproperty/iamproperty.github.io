@@ -51,7 +51,7 @@ class iamAddressLookup extends HTMLElement {
       </div>
       <div class="pre-filled pb-2 js-hide">
         <strong class="title text-primary d-block"></strong>
-        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button></p>
+        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button><slot name="prefilled"></slot></p>
       </div>
     </div>
     `;
