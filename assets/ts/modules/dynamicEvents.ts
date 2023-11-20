@@ -77,32 +77,38 @@ const runEvent = (element,event,eventType) => {
   switch (event[eventType]){
     case "hide":
 
-      let hideElement =  document.querySelector(event['target'])
-      hideElement.classList.add('js-hide');
+      if(document.querySelector(event['target'])){
+          
+        let hideElement =  document.querySelector(event['target']);
+        hideElement.classList.add('js-hide');
 
-      Array.from(hideElement.querySelectorAll('[data-required]')).forEach((input, index) => {
-        
-          input.removeAttribute('required');
-      });
+        Array.from(hideElement.querySelectorAll('[data-required]')).forEach((input, index) => {
+          
+            input.removeAttribute('required');
+        });
+      }
       break;
     case "show":
 
-      let showElement =  document.querySelector(event['target'])
-      showElement.classList.remove('js-hide');
+      if(document.querySelector(event['target'])){
+            
+        let showElement =  document.querySelector(event['target']);
+        showElement.classList.remove('js-hide');
 
-      Array.from(showElement.querySelectorAll('[data-required]')).forEach((input, index) => {
-        
-        if(!input.closest('.js-hide'))
-          input.setAttribute('required','true');
-      });
+        Array.from(showElement.querySelectorAll('[data-required]')).forEach((input, index) => {
+          
+          if(!input.closest('.js-hide'))
+            input.setAttribute('required','true');
+        });
+      }
       break;
-      case "populate-form":
-        populateForm(element,event);
-        break;
-      case "dispatchEvent":
-        let theEvent = new Event(event['value']);
-        document.querySelector(`${event['target']}`).dispatchEvent(theEvent);
-        break;
+    case "populate-form":
+      populateForm(element,event);
+      break;
+    case "dispatchEvent":
+      let theEvent = new Event(event['value']);
+      document.querySelector(`${event['target']}`).dispatchEvent(theEvent);
+      break;
     case "setAttribute":
       document.querySelector(`${event['target']}`).setAttribute(event['attribute'],event['value']);
       break;
@@ -114,6 +120,9 @@ const runEvent = (element,event,eventType) => {
       
       let changeEvent = new Event('change');
       document.querySelector(`${event['target']}`).dispatchEvent(changeEvent);
+      break;
+    case "submitForm":
+      document.querySelector(`${event['target']}`).submit();
       break;
     default:
       break;
