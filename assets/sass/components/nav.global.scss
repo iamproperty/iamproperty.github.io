@@ -28,6 +28,7 @@ nav:has(iam-nav) {
 
   min-height: #{rem(96)};
   display: block;
+  position: relative;
 
   iam-nav {
     position: absolute;
