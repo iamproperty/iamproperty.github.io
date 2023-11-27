@@ -306,8 +306,6 @@ class iamNav extends HTMLElement {
       let searchButton = this.shadowRoot.querySelector('#search-button');
       let searchClose = this.shadowRoot.querySelector('#search-close');
       let searchDialog = this.shadowRoot.querySelector('#search-dialog');
-      //let searchInput = this.shadowRoot.querySelector('#search');
-      //let searchForm = this.shadowRoot.querySelector('#search-form');
 
       if(this.hasAttribute('data-search-open')){
         
