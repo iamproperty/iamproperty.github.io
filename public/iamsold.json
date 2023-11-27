@@ -1,0 +1,287 @@
+{
+  "success": true,
+  "status": 200,
+  "data": {
+      "feedback": [],
+      "results": {
+          "Properties": [
+              {
+                  "title": "1 Ladysmith Road, Grimsby, DN329EF (DDM Residentialx)",
+                  "url": "\/admin\/properties\/ff9d989afedb4f86b281ae7c706a7262\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "27 Annie Smith Way, Birkby, Huddersfield, HD22GB (SW Property)",
+                  "url": "\/admin\/properties\/be701a98b50f4ef5a2080c7404d7d05b\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "6 And 6a Severn Terrace, Smithfield Road, Shrewsbury, SY11PF (Holland Broadbridge )",
+                  "url": "\/admin\/properties\/608aa494f8764612b47003e713d4b6d9\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "6 Smithy Green, Huddersfield Road, Newhey, Rochdale, OL163TG (Kirkham Property)",
+                  "url": "\/admin\/properties\/e17216e164424677b1d8e5bb7579c010\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "8 Smithies Moor Rise, Batley, WF178AX (Barkers)",
+                  "url": "\/admin\/properties\/996678849948446faf732a72202388b4\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Land To Rear 44 Smith Street, New Balderton, Newark, NG243BA (William H Brown)",
+                  "url": "\/admin\/properties\/06239072c4844b8eb8f0bf340a5df4c2\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Rectory Farm, Blacksmith Corner, Easington, Hull, HU120TN (Beercocks)",
+                  "url": "\/admin\/properties\/f861db8ccf8741f58f8ed29506e6a5d3\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Archived Properties": [
+              {
+                  "title": "1 Blacksmith Close, Barrow-upon-humber, North Lincolnshire, North Lincolnshire, DN19 7HG (Lovelles )",
+                  "url": "\/admin\/properties\/ddb54ddc35a2421999bf56c466adce60\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "1 Blacksmith Court, Metheringham, Lincoln, Lincolnshire, LN4 3YQ (Starkey & Brown)",
+                  "url": "\/admin\/properties\/90e66d4db3df41bdaf99a7c7143de48f\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "1 Blacksmiths Mews, Mattersey Doncaster, South Yorkshire, DN10 5DW (Five Star Property)",
+                  "url": "\/admin\/properties\/296d5e74ba924c7a9e6e725db95a69e8\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "1 Smith Lane, Bradford, BD9 5HE (Whitegates)",
+                  "url": "\/admin\/properties\/06c093468f6349bdad0c1ded58e185d3\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "1 Smithy Lane, Bigby, Barnetby, DN386ES (DDM Residentialx)",
+                  "url": "\/admin\/properties\/b984eb6b278543088bfaed9a5727b65a\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "10 New Smithy Avenue, Thurlstone, Sheffield, S369QZ (Simon Blyth)",
+                  "url": "\/admin\/properties\/c58111ac2fe4493f97eda0d0068cf703\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Buyers": [
+              {
+                  "title": "Amanda Hodgson and   Christopher Smith: 18 Wright Street, Chorley",
+                  "url": "\/admin\/properties\/54d1e3da5042401e80fd5264feea550d\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Liandra Sherelle Joyce Smith & Mrs June Smith: 37 Lea Crescent, Rugby",
+                  "url": "\/admin\/properties\/846f1546e6704e389530628181125fd7\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Richard Smith & Ms Polly Jensen: Quarry Acre, Wood Royd Road, Deepcar, South Yorkshire",
+                  "url": "\/admin\/properties\/42702c6256064ff586bd484d9fbc4d49\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "L Smith of AJN Land Ltd: 29 Cumbria Close, Houghton Regis, Dunstable",
+                  "url": "\/admin\/properties\/edf0820d15c74a0e908937f733da1d70\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Ben Smith And Lisa Gibbs: 24 Birchfield Close, Wood End, Atherstone",
+                  "url": "\/admin\/properties\/a90138aac18d4c1389ea1165f5a838b6\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Benjamin Smith and Miss Stephanie Finney: 65-67 Washerwall Lane, Werrington, Stoke-on-trent",
+                  "url": "\/admin\/properties\/c491c50e1a4049f1acadff21ac3a7f0a\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Agents": [
+              {
+                  "title": "Fortnam Smith & Banwell Charmouth",
+                  "url": "\/admin\/auth\/agents\/e41de1d8f3fd4d02aeff9c10ae00bf96\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Smith LLC",
+                  "url": "\/admin\/auth\/agents\/58291f6c68cb46dca9125413c5b11cb0\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Smiths Sales & Lettings",
+                  "url": "\/admin\/auth\/agents\/b04a2fefd4d344b496e67f6bbca52f07\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Archived or Inactive Agents": [
+              {
+                  "title": "A Smiths Estate & Letting Agents",
+                  "url": "\/admin\/auth\/agents\/3f32bd3905a24abb9cda21cd886dbccb\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Clifford, Smith & Buchanan",
+                  "url": "\/admin\/auth\/agents\/7a8d8b974a274f17b00c1594686ee31e\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Smith & Wypler",
+                  "url": "\/admin\/auth\/agents\/079dadf8e3564dcb96e95df5a0afdd41\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Smiths Gore",
+                  "url": "\/admin\/auth\/agents\/931c0a6dc1c34793953e2ad9eaf0ff2e\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Vendors": [
+              {
+                  "title": "11 Wigorn Road (Alma Smith)",
+                  "url": "\/admin\/properties\/06d51bc413fd47c88f8e973725f23c35\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "3 Otterburn Villas North (Amanda Smithson)",
+                  "url": "\/admin\/properties\/2152e9bcc55d4943803cfcd68ed69b0c\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "1 Mulberry Green (Andrew Edwards - Smith)",
+                  "url": "\/admin\/properties\/f7beb77a4b9345329f8be98816e19601\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "4 Mucklestone Road (Andrew Smith)",
+                  "url": "\/admin\/properties\/81646d365f864feba803b8a82586c072\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "2 Mucklestone Road (Andrew Smith)",
+                  "url": "\/admin\/properties\/8495695424a945c5b8922223224b41e5\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "115 Beaconsfield Road (Andrew Smith)",
+                  "url": "\/admin\/properties\/d18edd13c20949b7bb5f0ac3fe6fa8cc\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Staff": [
+              {
+                  "title": "David Smith",
+                  "url": "\/admin\/auth\/staff\/3bd3e3cfe3404d6d8dba9ab4fbcd7f8a\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Donna Smith",
+                  "url": "\/admin\/auth\/staff\/f5f738a3eb40439f9e24d266770b0dda\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Archived Staff": [
+              {
+                  "title": "Amanda Whitesmith",
+                  "url": "\/admin\/auth\/staff\/98165717dc6a4138b1cc83640478b1ba\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Amanda Whitesmith",
+                  "url": "\/admin\/auth\/staff\/df515d095c2c4f75a1a582178834df3b\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Amanda Whitesmith",
+                  "url": "\/admin\/auth\/staff\/296bd1ce695e4312a990c73ac4c0625a\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Jordan Smith",
+                  "url": "\/admin\/auth\/staff\/555212c5ee1c40938d38daf08ee7c05c\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Users": [
+              {
+                  "title": "Ian Smith",
+                  "id": "e6bacdfaa6944790946356c16ca9dc0f",
+                  "url": "\/admin\/auth\/users\/e6bacdfaa6944790946356c16ca9dc0f\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Richard Smith",
+                  "id": "adcb808dd3d54b1e9b79816e071b16ee",
+                  "url": "\/admin\/auth\/users\/adcb808dd3d54b1e9b79816e071b16ee\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Thomas Smith",
+                  "id": "053c3ae2570145dc84596ab2cf4bb5c9",
+                  "url": "\/admin\/auth\/users\/053c3ae2570145dc84596ab2cf4bb5c9\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "stuart smith",
+                  "id": "f6f27cf780354822b88f52389021f070",
+                  "url": "\/admin\/auth\/users\/f6f27cf780354822b88f52389021f070\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "jon smith",
+                  "id": "9e005e07c4864ae6b6b5c937d0ba4581",
+                  "url": "\/admin\/auth\/users\/9e005e07c4864ae6b6b5c937d0ba4581\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "MICHAEL SMITH",
+                  "id": "c32defeb8cc04defaefd9239a3496dcc",
+                  "url": "\/admin\/auth\/users\/c32defeb8cc04defaefd9239a3496dcc\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Investor": [
+              {
+                  "title": "And Mrs smith",
+                  "url": "\/admin\/auth\/users\/0820e35cbfc84eb98dc8a5dc93304c0f\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Andrew Smith",
+                  "url": "\/admin\/auth\/users\/4a9936090c1342238ee81e5ab5468833\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Angela Smith",
+                  "url": "\/admin\/auth\/users\/62b3c231e28445c8b3d49c8a9aa3c26f\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Ben Smith",
+                  "url": "\/admin\/auth\/users\/9bffbc8e96ec4b628ad9d65f471a44fa\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Charlotte Smith",
+                  "url": "\/admin\/auth\/users\/3e11b5f8403e407099258ce56740e140\/details",
+                  "icon": "sf-icon-file-unknown"
+              },
+              {
+                  "title": "Claire  Smith",
+                  "url": "\/admin\/auth\/users\/175f9f48e9c54b9d95125017b15b2335\/details",
+                  "icon": "sf-icon-file-unknown"
+              }
+          ],
+          "Auction Pack": []
+      },
+      "error": null
+  }
+}

@@ -554,7 +554,7 @@ iam-nav details {
 
     &.search-open {
 
-      > *:not([slot="logo"]):not([slot="secondary"]) {
+      > *:not([slot="logo"]):not([slot="secondary"]):not([slot="search"]) {
         display: none!important;
       }
     }

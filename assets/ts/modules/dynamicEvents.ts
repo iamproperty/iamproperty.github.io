@@ -110,10 +110,15 @@ const runEvent = (element,event,eventType) => {
       document.querySelector(`${event['target']}`).dispatchEvent(theEvent);
       break;
     case "setAttribute":
-      document.querySelector(`${event['target']}`).setAttribute(event['attribute'],event['value']);
+
+      Array.from(form.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
+        element.setAttribute(event['attribute'],event['value']);
+      });
       break;
     case "removeAttribute":
-      document.querySelector(`${event['target']}`).removeAttribute(event['attribute']);
+      Array.from(form.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
+        element.removeAttribute(event['attribute']);
+      });
       break;
     case "updateValue":
       document.querySelector(`${event['target']}`).value = event['value'] ? event['value'] : "";
@@ -123,6 +128,12 @@ const runEvent = (element,event,eventType) => {
       break;
     case "submitForm":
       document.querySelector(`${event['target']}`).submit();
+      break;
+    case "openLink":
+
+      if(document.querySelector(`${event['target']}`).value)
+        window.location.href = document.querySelector(`${event['target']}`).value;
+
       break;
     default:
       break;

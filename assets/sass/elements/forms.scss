@@ -858,7 +858,7 @@ iam-fileupload {
     width: 100%;
   }
 
-  :is(.suffix,.prefix) {
+  :is(.suffix,.prefix):not(.mt-0) {
     margin: rem(8) 0 0 0!important;
   }
 }

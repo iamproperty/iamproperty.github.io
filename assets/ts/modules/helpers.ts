@@ -98,3 +98,9 @@ export const safeID = function(str){
 
   return str;
 }
+
+// Used to get values from nested json objects
+export const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
+
+
+export const isTraversable = o => Array.isArray(o) || o !== null && ['function', 'object'].includes(typeof o);
