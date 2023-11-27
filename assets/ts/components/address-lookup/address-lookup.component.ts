@@ -34,7 +34,7 @@ class iamAddressLookup extends HTMLElement {
         <div>
         <label class="mb-2">Search <span class="title text-lowercase"></span> <span class="optional">(Optional)</span>
           <span>
-          <input type="text" name="postcode" list="address-lookup__addressess" autoComplete="new-password" aria-autocomplete="none" placeholder="Postcode" />
+          <input type="text" name="postcode" list="address-lookup__addressess" autocomplete="off" aria-autocomplete="none" placeholder="Postcode" />
           <span class="suffix fa-regular fa-search"></span>
           </span>
           <span class="invalid-feedback">Required Adddress fields missing</span>
@@ -251,9 +251,28 @@ class iamAddressLookup extends HTMLElement {
           let listString = '';
           response.forEach((address, index) => {
 
-            
-            let values = JSON.stringify(address.value);
-            listString += `<option value="${address['label']}, ${postcode}" data-values='${values}'></option>`;
+            // Deal with agent platform response
+            if(typeof address.value == "object"){
+              let values = JSON.stringify(address.value);
+              listString += `<option value="${address['label']}, ${postcode}" data-values='${values}'></option>`;
+            }
+            else {
+              let values = JSON.stringify(address);
+
+              let itemString = '';
+
+              for (const [key, value] of Object.entries(address)) {
+
+                if(key == "address_number_name")
+                  itemString += `${value} `;
+                else if(key != "postcode" && key != "address_title")
+                  itemString += `${value}, `;
+              }
+
+              listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
+            }
+
+
           });
           list.innerHTML = listString;
 
