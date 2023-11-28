@@ -42,7 +42,7 @@ class iamSearch extends HTMLElement {
 
     // Clone original input field, re-name and use for display purposes
     const displayInputField = inputField.cloneNode();
-    inputField.setAttribute('name',`${inputField.getAttribute}-alt`);
+    displayInputField.setAttribute('name',`${inputField.getAttribute('name')}Alt`);
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
     
