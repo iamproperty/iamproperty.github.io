@@ -111,12 +111,12 @@ const runEvent = (element,event,eventType) => {
       break;
     case "setAttribute":
 
-      Array.from(form.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
+      Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
         element.setAttribute(event['attribute'],event['value']);
       });
       break;
     case "removeAttribute":
-      Array.from(form.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
+      Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
         element.removeAttribute(event['attribute']);
       });
       break;
