@@ -48,7 +48,6 @@ class iamNav extends HTMLElement {
         <slot name="menus"></slot>
       </div>      
     </div>
-    <div class="lists"></div>
     <div class="backdrop" part="backdrop"></div>
     `;
 
@@ -285,7 +284,7 @@ class iamNav extends HTMLElement {
     });
 
     // Search 
-    if(this.hasAttribute('data-search')){
+    if(this.querySelector('[slot="search"]')){
       menu.classList.add('has-search');
       let searchWrapper = this.shadowRoot.querySelector('#search-wrapper');
 
@@ -293,24 +292,20 @@ class iamNav extends HTMLElement {
       searchWrapper.insertAdjacentHTML('afterbegin',`<button class="btn btn-secondary btn-compact fa-search me-0 mb-0" id="search-button" aria-controls="search-dialog">Open Search field</button>
       <dialog id="search-dialog">
       <div class="container">
-        <form action="${this.hasAttribute('data-search') ? this.getAttribute('data-search') : ''}" class="row" id="search-form">
+        <div class="row">
           <div class="col mb-0 ms-auto col-md-7">
-            <label for="search" class="visually-hidden">Search</label>
-            <button class="suffix me-0 mb-0"><i class="fa-regular fa-search"></i></button>
-            <input type="search" class="" id="search" name="search" required="" autocomplete="off" data-list="${this.hasAttribute('data-list') ? this.getAttribute('data-list') : ''}" />
+            <slot name="search"></slot>
           </div>
           <div class="col d-none d-md-block mw-fit-content ms-3">
             <button class="btn btn-compact btn-secondary fa-xmark-large m-0 mb-0" type="button" id="search-close">Close search field</button>
           </div>
-        </form>
+        </div>
       </div>
       </dialog>`);
       
       let searchButton = this.shadowRoot.querySelector('#search-button');
       let searchClose = this.shadowRoot.querySelector('#search-close');
       let searchDialog = this.shadowRoot.querySelector('#search-dialog');
-      let searchInput = this.shadowRoot.querySelector('#search');
-      let searchForm = this.shadowRoot.querySelector('#search-form');
 
       if(this.hasAttribute('data-search-open')){
         
@@ -336,44 +331,6 @@ class iamNav extends HTMLElement {
         searchButton.removeAttribute('aria-expanded');
       });
 
-      // Search events
-      searchInput.addEventListener('keydown', (event) => {
-
-        const keyupEvent = new CustomEvent("search-keydown", { detail: { search: searchInput.value } });
-        this.dispatchEvent(keyupEvent);
-      });
-
-      searchInput.addEventListener('keyup', (event) => {
-
-        if (searchInput.value.length >= 3 && searchInput.hasAttribute('data-list')) 
-          searchInput.setAttribute("list", searchInput.getAttribute('data-list'));
-        else
-          searchInput.removeAttribute("list");
-
-        const keyupEvent = new CustomEvent("search-keyup", { detail: { search: searchInput.value } });
-        this.dispatchEvent(keyupEvent);
-      });
-  
-      searchInput.addEventListener('change', (event) => {
-  
-        const changeEvent = new CustomEvent("search-change", { detail: { search: searchInput.value } });
-        this.dispatchEvent(changeEvent);
-      });
-
-      searchForm.addEventListener('submit', (event) => {
-        
-        if(this.hasAttribute('data-prevent-search'))
-          event.preventDefault();
-
-        const submitEvent = new CustomEvent("search-submit", { detail: { search: searchInput.value } });
-        this.dispatchEvent(submitEvent);
-      });
-
-      // Make sure any child lists are available to the search input
-      this.querySelectorAll('datalist').forEach((list) => {
-
-        iamNav.shadowRoot.querySelector('.lists').insertAdjacentElement('beforeend',list);
-      });
     }
   }
 }

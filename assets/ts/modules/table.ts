@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { zeroPad, isNumeric, ucfirst } from "./helpers";
+import { zeroPad, isNumeric, ucfirst, resolvePath } from "./helpers";
 
 // Basic functionality needed
 export const addDataAttributes = (table) => {
@@ -902,8 +902,6 @@ const filterFilters = function(form){
 }
 
 export const loadAjaxTable = async function (table, form, pagination, wrapper){
-
-  const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
 
   let formData = new FormData(form);
   let queryString = new URLSearchParams(formData).toString();
