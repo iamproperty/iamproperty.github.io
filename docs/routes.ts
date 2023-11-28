@@ -463,6 +463,19 @@ const routes = [
         component: () => import('./views/components/SnapshotDoc.vue')
       },
       {
+        path: 'search',
+        name: 'Search (Beta)',
+        meta: {
+          title: 'Search | Components | iamkey'
+        },
+        component: () => import('./views/components/SearchDoc.vue')
+      },
+
+
+
+      
+
+      {
         path: 'stepper',
         name: 'Stepper (Beta)',
         meta: {

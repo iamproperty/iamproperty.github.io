@@ -16,7 +16,7 @@
 
     <div class="container visualtest">
 
-      <AddressLookup data-url="/addressess.json?search=">
+      <AddressLookup data-url="/addressess2.json?search=">
                         
         <label>Address line one <input type="text" name="address-line-1" data-name="address_1" required /></label>
         
@@ -27,7 +27,7 @@
         <label>City <input type="text" name="city" data-name="city" id="city" required /></label>
       
         <label>County
-          <select type="select" name="county" id="county" required>
+          <select name="county" id="county" required>
             <option value=""></option>
             <option value="Tyne and Wear">Tyne and Wear</option>
             <option value="Cleveland">Cleveland</option>
@@ -38,7 +38,7 @@
         
       
         <label>Country
-          <select type="select" name="country" id="country" required>
+          <select name="country" id="country" required>
             <option value=""></option>
             <option value="England">England</option>
             <option value="Scotland">Scotland</option>
@@ -66,7 +66,7 @@
         <label>City <input type="text" name="city" data-name="city" id="city" required value="NEWCASTLE UPON TYNE" /></label>
       
         <label>County
-          <select type="select" name="county" id="county" required>
+          <select name="county" id="county" required>
             <option value=""></option>
             <option value="Tyne and Wear" selected>Tyne and Wear</option>
             <option value="Cleveland">Cleveland</option>
@@ -77,7 +77,7 @@
         
       
         <label>Country
-          <select type="select" name="country" id="country" required>
+          <select name="country" id="country" required>
             <option value=""></option>
             <option value="England" selected>England</option>
             <option value="Scotland">Scotland</option>
@@ -105,7 +105,7 @@
         <label>City <input type="text" name="city" data-name="city" id="city" required /></label>
       
         <label>County
-          <select type="select" name="county" id="county" required>
+          <select name="county" id="county" required>
             <option value=""></option>
             <option value="Tyne and Wear">Tyne and Wear</option>
             <option value="Cleveland">Cleveland</option>
@@ -116,7 +116,7 @@
         
       
         <label>Country
-          <select type="select" name="country" id="country" required>
+          <select name="country" id="country" required>
             <option value=""></option>
             <option value="England">England</option>
             <option value="Scotland">Scotland</option>
