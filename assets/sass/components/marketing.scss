@@ -1,0 +1,40 @@
+@use "../_func.scss" as *;
+
+
+$isComponent: "true"!default;
+
+
+@mixin iamMarketing(){
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  background: var(--colour-primary);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  max-width: 40rem;
+
+  --gradient-direction: 180deg;
+    background-image: linear-gradient(var(--gradient-direction),var(--colour-info-theme) 0,transparent 100%)!important;
+}
+
+:host {
+@include iamMarketing();
+}
+
+@include slotted('*',$isComponent) {
+  position: relative;
+  z-index: 2;
+}
+
+@include slotted('img',$isComponent) {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  object-fit: cover;
+  object-position: 50% 50%;
+  mix-blend-mode: multiply;
+}
+

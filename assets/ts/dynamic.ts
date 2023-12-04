@@ -14,7 +14,7 @@ import youtubeVideo from '../js/modules/youtubevideo'
 
 import iamNotification from './components/notification/notification.component'
 
-const components = ['accordion','header','tabs', 'table','card','pagination','filterlist', 'applied-filters', 'nav'];
+const components = ['accordion','header','tabs', 'table','card','pagination','filterlist', 'applied-filters', 'nav', 'marketing'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',
