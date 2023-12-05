@@ -41,6 +41,10 @@
     padding-left: rem(16);
     font-weight: bold;
   }
+
+  div:has(> select){
+    margin-bottom: 0;
+  }
 }
 
 .page-jump {
