@@ -39,6 +39,7 @@ $vars: map-merge((
   "--container-padding-top": 0,
   "--container-padding-bottom": #{rem(16)},
   "--container-padding-x": #{rem($container-padding-x)},
+  "--container-padding-x-sm": #{rem($container-padding-x-sm)},
   "--container-padding-x-md": #{rem($container-padding-x-md)},
   "--container-padding": $container-padding,
   "--container-padding-sm": $container-padding-sm,

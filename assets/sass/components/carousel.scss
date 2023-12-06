@@ -14,9 +14,10 @@
     --gutter-x: #{$grid-gutter-width};
     overflow: auto;
     scroll-snap-type: x mandatory;
-    margin-right: calc(var(--gutter-x) * -.5);
-    margin-left: calc(var(--gutter-x) * -.5);   
+    //margin-right: calc(var(--gutter-x) * -.5);
+    //margin-left: calc(var(--gutter-x) * -.5);   
 
+    /*
     > .row {
       flex-wrap: nowrap;
       margin: 0;
@@ -28,6 +29,7 @@
         scroll-padding: calc(var(--gutter-x) * -1);
       }
     }
+    */
   }
 
   .carousel__item > *:last-child {
@@ -35,17 +37,19 @@
     padding-bottom: 0;
   }
 }
+
+
 // #endregion
 
 // #region Remove the scrollbar
-body.js-enabled .carousel__inner {
+.carousel__inner {
   // FireFox
   scrollbar-width: none;
   // IE10+
   -ms-overflow-style: none;
 }
 
-body.js-enabled .carousel__inner::-webkit-scrollbar {
+.carousel__inner::-webkit-scrollbar {
   // Chrome, Safari, Edge
   display: none;
 }
@@ -174,12 +178,6 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
   display: none;
 }
 
-.carousel:not(.hide-btns) .carousel__inner {
-
-  margin-left: rem(28);
-  margin-right: rem(28);
-}
-
 .carousel .carousel__wrapper > .btn {
   position: absolute;
   top: 50%;
@@ -201,6 +199,9 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
 
 // #endregion
 
+
+
+/*
 .carousel .carousel__inner > .row > .col:first-child {
   margin-left: 0!important;
 }
@@ -305,3 +306,4 @@ body.js-enabled .carousel__inner::-webkit-scrollbar {
     margin-right: 0;
   }
 }
+*/

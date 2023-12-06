@@ -1,6 +1,7 @@
 <template>
   <main>
-    <Header title="Design system <span class='text-nowrap'>& framework</span>" image="/code.jpeg">
+    <Header :image="headerImg">
+      <h1>Design system <span class='text-nowrap'>& framework</span></h1>
       <p>The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great products.</p>
     </Header>
     
@@ -23,6 +24,9 @@
 <script>
 import Header from '@/components/Header/Header.vue'
 import Card from '@/components/Card/Card.vue'
+
+import headerImg from '../img/homepage-banner.png'
+
 
 export default {
   name: 'Home',
@@ -48,7 +52,8 @@ export default {
           title: 'Templates',
           content: `Groups of components that can build up a page.`
         }
-      ]
+      ],
+      headerImg: headerImg
     }
   }
 }

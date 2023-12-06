@@ -1,123 +1,38 @@
 <template>
-  <div class="container carousel" :id="'carousel'+id" ref="wrapper" :data-cols="cols" :data-sm-cols="smcols" :data-md-cols="mdcols">
-    <slot><!-- Use for titles etc --></slot>
-    <div class="carousel__wrapper">
-      <div class="carousel__inner">
-
-        <div v-if="type == 'card'" :class="`row row-cols-${cols} row-cols-sm-${smcols} row-cols-md-${mdcols} ${gap ? `g-${gap}`: ``}`">
-          <div :class="`col carousel__item${colclass?` ${colclass}`:''}`" v-for="(value,index) in items" :key="index" :id="'carousel'+id+'slide'+(index+1)">
-            <Card v-bind="value" :class="cardclass" :type="cardtype" :btnyype="btntype" :titleclass="titleclass" :ctatext="ctatext" :hidectatext="hidectatext"></Card>
-          </div>
-        </div>
-        <div v-if="type != 'card'" :class="`row row-cols-${cols} row-cols-sm-${smcols} row-cols-md-${mdcols} ${gap ? `g-${gap}`: ``}`">
-          <div :class="`col carousel__item${colclass?` ${colclass}`:''}`" v-for="(value,index) in items" :key="index" v-html="content(value)" :id="'carousel'+id+'slide'+(index+1)"></div>
-        </div>
-        
-      </div>
-
-      <div :class="`carousel__controls cols-${cols} cols-sm-${smcols} cols-md-${mdcols}`">
-        <a v-for="(value,index) in items" :key="index" :href="'\#carousel'+id+'slide'+(index+1)" :class="`control-${index+1}`">Slide {{index+1}}</a>
-      </div>
-      <button class="btn btn-prev" data-go="0" disabled>Prev</button>
-      <button class="btn btn-next" data-go="2">Next</button>
-    </div>
-  </div>
+  <!-- Custom element -->
+  <iam-carousel>
+    
+    <slot></slot>
+  </iam-carousel>
 </template>
 
-
-<style lang="scss">
-@import "../../../assets/sass/components/carousel.scss";
-</style>
-
-
 <script>
-import Card from '../Card/Card.vue'
-import carousel from '../../../assets/ts/modules/carousel'
-
+// Load web components
 
 export default {
-  components: {
-    Card
-  },
-  name: 'Carousel',
-  data () {
-    return {
-      id: null
-    }
-  },
+  name: 'Header',
   props: {
-    items: {
-      type: Array,
-      required: false
+    title: {
+      type: String,
+      required: true
     },
-    cols: {
-      type: Number,
-      required: false,
-      default: 1
-    },
-    smcols: {
-      type: Number,
-      required: false,
-      default: 1
-    },
-    mdcols: {
-      type: Number,
-      required: false,
-      default: 3
-    },
-    gap: {
-      type: Number,
-      required: false,
-      default: 4
-    },
-    cardtype: {
+    image: {
       type: String,
       required: false
-    },
-    cardclass: {
-      type: String,
-      required: false
-    },
-    btntype: {
-      type: String,
-      required: false
-    },
-    titleclass: {
-      type: String,
-      required: false
-    },
-    ctatext: {
-      type: String,
-      required: false
-    },
-    hidectatext: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    colclass: {
-      type: String,
-      required: false
-    },
-    type: {
-      type: String,
-      required: false
-    }
-  },
-  computed: {
-    content (){
-      return (value) => {
-        return `${value.image ? `<img src="${value.image}" alt="" />` : ''}${value.content?value.content:''}`;
-      }
     }
   },
   mounted(){
 
-    this.id = this._uid
-
     this.$nextTick(function () {
       
-      carousel(this.$refs.wrapper);
+      import(`../../../assets/js/components/carousel/carousel.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+
+        //if (!window.customElements.get(`iam-carousel`))
+        //  window.customElements.define(`iam-carousel`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
     })
   }
 }

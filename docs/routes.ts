@@ -975,6 +975,22 @@ const routes = [
           title: 'CRM to IAS example | iamkey'
         },
         component: () => import('./views/standalone/crm-ias/Page2.vue')
+      },
+      {
+        path: 'iamproperty',
+        name: "iamproperty dashboard",
+        meta: {
+          title: 'iamproperty dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/Iamproperty.vue')
+      },
+      {
+        path: 'signin',
+        name: "Sign in",
+        meta: {
+          title: 'Sign in | iamkey'
+        },
+        component: () => import('./views/standalone/Signin.vue')
       }
     ]
   },

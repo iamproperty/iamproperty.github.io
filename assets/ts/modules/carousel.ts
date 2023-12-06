@@ -9,7 +9,7 @@ function carousel(carouselElement) {
   let smCols = carouselElement.getAttribute('data-sm-cols');
   let mdCols = carouselElement.getAttribute('data-md-cols');
 
-  carouselElement.querySelector('.carousel__controls a').setAttribute('aria-current', true);
+  //carouselElement.querySelector('.carousel__controls a').setAttribute('aria-current', true);
 
   // On scroll we need to make sure the buttons get corrected and the next testimonial is shown
   carouselInner.addEventListener('scroll', function(e){
@@ -22,9 +22,11 @@ function carousel(carouselElement) {
       let targetSlide = Math.round((scrollLeft / scrollWidth) * itemCount) + 1;
       let lastItemOffset = carouselElement.querySelector('.carousel__item:last-child').offsetLeft;
 
+      /*
       Array.from(carouselElement.querySelectorAll('.carousel__controls a')).forEach((link, index) => {
         link.removeAttribute('aria-current');
       });
+
 
       carouselElement.querySelector('.control-'+targetSlide).setAttribute('aria-current', true);
       
@@ -39,11 +41,12 @@ function carousel(carouselElement) {
         carouselElement.querySelector('.btn-next').setAttribute('disabled','disabled');
       else
         carouselElement.querySelector('.btn-next').removeAttribute('disabled');
-
+      */
     }, 100); 
 
   }, false);
 
+  /*
   // when the buttons are used we need to make sure the carousel scrolls to the correct place
   carouselElement.addEventListener('click', function(e){
 
@@ -69,7 +72,8 @@ function carousel(carouselElement) {
       }
     }
   }, false);
-
+  */
+  /*
   carouselElement.addEventListener('click', function(e){
 
     for (var target = e.target; target && target != this; target = target.parentNode) {
@@ -87,8 +91,10 @@ function carousel(carouselElement) {
       }
     }
   }, false);
+  */
 
 
+  /*
   // Add responsive hide button classes
   if(itemCount == 1)
     carouselElement.classList.add('hide-btns');
@@ -98,6 +104,8 @@ function carousel(carouselElement) {
 
   if(mdCols >= itemCount)
     carouselElement.classList.add('hide-md-btns');
+  */
+
 }
 
 export default carousel

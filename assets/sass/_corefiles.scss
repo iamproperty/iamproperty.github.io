@@ -31,6 +31,7 @@
 
 @include layer('templates') {
   @import "templates/form.scss";
+  @import "templates/auth.scss";
 }
 
 @include layer('utilities') {

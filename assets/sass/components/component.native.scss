@@ -2,7 +2,7 @@
 @use "../_func" as *;
 
 // #region Undefined web components
-:is(*):not(:defined):not(iam-nav):not(iam-pagination) {
+:is(*):not(:defined):not(iam-nav):not(iam-pagination):not(iam-carousel) {
   display: block;
   padding: rem(24);
   margin-bottom: rem(24);
@@ -12,7 +12,7 @@
   max-width: 80rem;
 }
 
-main > :is(*):not(:defined) {
+main > :is(*):not(:defined):not(iam-carousel) {
 
   padding: var(--container-padding);
   padding-top: 1rem;
@@ -20,7 +20,7 @@ main > :is(*):not(:defined) {
 
 @include media-breakpoint-up(md) {
       
-  main > :is(*):not(:defined) {
+  main > :is(*):not(:defined):not(iam-carousel) {
     max-width: 100%!important;
     padding-inline: calc(50% - #{rem(math.div(1112,2))});
   }
@@ -34,4 +34,25 @@ main > :is(*):not(:defined) {
   box-shadow: var(--card-box-shadow);
   border-radius: var(--card-border-radius);
   padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
+}
+
+// carousel
+iam-carousel {
+
+  margin-inline: calc(var(--container-padding-x) * -1);
+  margin-bottom: 5rem;
+  overflow: auto;
+
+  > .row {
+    
+    flex-wrap: nowrap!important;
+    margin-inline-end: 0;
+    padding-inline-start: var(--container-padding-x);
+    padding-inline-end: var(--container-padding-x);
+
+    .col:last-child{
+      
+      padding-inline-end: var(--container-padding-x);
+    }
+  }
 }
