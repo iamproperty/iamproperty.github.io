@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "5.1.0-beta7",
+  "version": "5.1.0-beta8",
   "scripts": {
     "bootstrap": "copyfiles -u 2 node_modules/bootstrap/**/* assets/bootstrap",
     "dev": "npm run copy && node local_modules/delete-assets.js && vite --host",
