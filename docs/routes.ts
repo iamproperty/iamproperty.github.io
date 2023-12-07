@@ -153,6 +153,14 @@ const routes = [
         searchterms: 'anchor, prompt, secondary button, primary button, compact'
       },
       {
+        path: 'badges',
+        name: 'Badges (BETA)',
+        meta: {
+          title: 'Badges | Elements | iamkey'
+        },
+        component: () => import('./views/elements/BadgesDoc.vue')
+      },
+      {
         path: 'container',
         name: 'Container (Beta)',
         meta: {
@@ -662,6 +670,14 @@ const routes = [
           title: 'Email Template | Components | iamkey'
         },
         component: () => import('./views/templates/FormDoc.vue')
+      },
+      {
+        path: 'auth',
+        name: 'Auth page Template (Beta)',
+        meta: {
+          title: 'Auth Template | Components | iamkey'
+        },
+        component: () => import('./views/templates/AuthDoc.vue')
       },
       {
         path: 'email',

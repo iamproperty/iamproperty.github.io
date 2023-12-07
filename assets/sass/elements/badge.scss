@@ -1,0 +1,29 @@
+@use "../_func" as *;
+
+.badge {
+
+  font-size: rem(12);
+  line-height: rem(26);
+  outline: 1px solid var(--colour-canvas);
+  outline-offset: -1px;
+  padding: 0 rem(10);
+  margin: 0;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+
+  & + .badge {
+    margin-left: rem(6);
+  }
+  border-radius: 0.25rem;
+  
+  &:empty {
+    display: none;
+  }
+}
+
+// Quick fix for badges in buttons
+.btn .badge {
+  position: relative;
+  top: -1px;
+}

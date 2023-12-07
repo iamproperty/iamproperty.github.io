@@ -121,7 +121,6 @@
         display: inline-block;
         font-size: 1.2rem;
         margin-right: 1rem!important;
-        line-height: 1em;
       }
 
       i[class*=fa-] + i[class*=fa-] {
@@ -612,6 +611,13 @@
 
     height: calc(100vh - var(--nav-height));
     top: 100%;
+  }
+}
+
+::slotted(.nav--menu[data-open-title]){
+
+  &:before {
+    content: attr(data-open-title);
   }
 }
 
