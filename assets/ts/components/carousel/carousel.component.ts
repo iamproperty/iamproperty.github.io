@@ -31,13 +31,14 @@ class iamCarousel extends HTMLElement {
           
           <slot></slot>
         </div>
-        <!--
+ 
         <div class="carousel__controls">
           
         </div>
+
         <button class="btn btn-prev" data-go="0" disabled>Prev</button>
         <button class="btn btn-next" data-go="2">Next</button>
-        -->
+
       </div>
     </div>
     `;
@@ -47,8 +48,27 @@ class iamCarousel extends HTMLElement {
 	connectedCallback() {
     
     const carouselElement = this.shadowRoot.querySelector('.carousel');
-    carousel(carouselElement);
-    
+    const row = this.querySelector('.row');
+    const carouselControls = this.shadowRoot.querySelector('.carousel__controls');
+
+    let itemCount = this.querySelectorAll(':scope > .row > .col').length
+
+    carouselElement.setAttribute('data-row-class',row.className);
+
+    if(this.classList.contains('hide-btns'))
+      carouselElement.classList.add('hide-btns');
+
+    if(this.classList.contains('hide-controls'))
+      carouselElement.classList.add('hide-controls');
+
+    // populate the pips
+    let pips = "";
+    for (let i = 1; i <= itemCount; i++) {
+      pips += `<button class="control-${i}" data-slide="${i}" ${i == 1 ? "aria-current":""}>Slide ${i}</button>`;
+    }
+    carouselControls.innerHTML = pips;
+
+    carousel(carouselElement,row);
   }
 }
 

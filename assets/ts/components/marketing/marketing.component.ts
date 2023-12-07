@@ -25,14 +25,24 @@ class iamMarketing extends HTMLElement {
     
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
-    <div class="marketing"><slot></slot></div>
+    <div class="marketing">
+      
+      <slot></slot>
+    </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
 	connectedCallback() {
 
-    console.log('hey james');
+    this.classList.add('invert-colours');
+
+    if(this.hasAttribute('data-img')){
+      this.shadowRoot.querySelector('.marketing').insertAdjacentHTML(
+        'afterbegin',
+        `<figure><img src="${this.getAttribute('data-img')}" alt="" /></figure>`,
+      );
+    }
   }
 }
 

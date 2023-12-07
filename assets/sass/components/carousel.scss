@@ -2,7 +2,6 @@
 
 // #region default carousel
 .carousel {
-  padding-bottom: 3rem;
 
   .carousel__wrapper {
 
@@ -14,25 +13,9 @@
     --gutter-x: #{$grid-gutter-width};
     overflow: auto;
     scroll-snap-type: x mandatory;
-    //margin-right: calc(var(--gutter-x) * -.5);
-    //margin-left: calc(var(--gutter-x) * -.5);   
-
-    /*
-    > .row {
-      flex-wrap: nowrap;
-      margin: 0;
-
-      > .col {
-        padding-top: rem(36);
-        padding-bottom: rem(24);
-        scroll-snap-align: start;
-        scroll-padding: calc(var(--gutter-x) * -1);
-      }
-    }
-    */
   }
 
-  .carousel__item > *:last-child {
+  .col > *:last-child {
     margin-bottom: 0;
     padding-bottom: 0;
   }
@@ -55,8 +38,6 @@
 }
 // #endregion
 
-
-
 // #region Direction button
 .btn-next, 
 .btn-prev {
@@ -67,19 +48,19 @@
   background: var(--marker-bg);
   border-radius: 100%;
   width: rem(36);
+  max-width: rem(36);
   height: rem(36);
-
-  @include media-breakpoint-up(md) {
-
-    width: rem(48);
-    height: rem(48);
-  }
   text-indent: -300rem;
   overflow: hidden;
   border: none;
   position: relative;
   margin: 0 rem(8);
   padding: 0;
+
+  position: absolute;
+  top: 50%;
+  left: 0rem;
+  transform: translate(0,-50%);
 
   &:disabled {
     opacity: 0.8;
@@ -118,192 +99,136 @@
   }
 }
 
+.btn-next {
+  left: auto;
+  right: 0;
+
+  @include media-breakpoint-up(md) {
+
+    margin-right: rem(-48);
+  }
+}
+
 .btn-prev {
+
+  @include media-breakpoint-up(md) {
+
+    margin-left: rem(-48);
+  }
+
   &:after {
 
     transform: rotate(180deg);
   }
 }
+
+
+
+
+
 // #endregion
 
-
 // #region carousel controls/pips
-.carousel:not(.hide-controls) {
-  padding-bottom: 4.5rem!important;
-}
-
-.carousel.hide-controls .carousel__controls {
-  display: none;
-}
-
 .carousel .carousel__controls {
-  position: absolute;
-  text-align: center;
-  width: auto;
-  left: 0;
-  width: calc(100% + 2rem);
-  margin-left: -1rem;
-  margin-right: -1rem;
-  bottom: -3rem;
 
-  a {
+  text-align: center;
+  width: 10rem;
+  max-height: 1rem;
+  overflow: hidden;
+  margin-inline: auto;
+    
+  @include media-breakpoint-up(sm) {
+    width: 100%;
+  }
+
+  button {
     width: 1rem;
     height: 1rem;
     min-height: 1rem;
     border-radius: 50%;
     text-indent: -50rem;
     overflow: hidden;
-    background: currentColor;
+    background: var(--colour-primary-theme);
     padding: 0;
     margin: 0 0.5rem 0.5rem 0.5rem;
+    border: none;
 
     &:before {
       display: none;
     }
   }
 
-  a:first-child:last-child {
+  button:first-child:last-child {
     display: none;
   }
 }
 
-.carousel .carousel__controls > a:nth-child(10) ~ a {
+.carousel__controls > button[aria-current] {
 
-  display: none;
+  background: var(--colour-success);
 }
+
 // #endregion
 
-// #region Carousel buttons
+// #region Hide buttons and pips
 .carousel.hide-btns .carousel__wrapper > .btn {
   display: none;
 }
 
-.carousel .carousel__wrapper > .btn {
-  position: absolute;
-  top: 50%;
-  left: -1.25rem;
-  transform: translate(0,-50%);
-
-  &.btn-next {
-    left: auto;
-    right: -1.25rem;
-  }
-
-  @include media-breakpoint-up(md) {
-
-    margin-left: -1rem;
-    margin-right: -1rem;
-  }
-}
-
-
-// #endregion
-
-
-
-/*
-.carousel .carousel__inner > .row > .col:first-child {
-  margin-left: 0!important;
+.carousel.hide-controls .carousel__controls {
+  display: none;
 }
 
 @include media-breakpoint-up(sm) {
 
-  .carousel .carousel__controls > a:nth-child(10) ~ a {
-
-    display: inline-block;
-  }
-
-  .carousel .carousel__inner > .row[class*="row-cols-sm-"] > .col{
-    scroll-snap-align: unset;
-  }
-
-  .carousel .carousel__inner > .row-cols-sm-2 > .col:nth-child(odd),
-  .carousel .carousel__inner > .row-cols-sm-3 > .col:nth-child(3n+1),
-  .carousel .carousel__inner > .row-cols-sm-4 > .col:nth-child(4n+1),
-  .carousel .carousel__inner > .row-cols-sm-5 > .col:nth-child(5n+1),
-  .carousel .carousel__inner > .row-cols-sm-6 > .col:nth-child(6n+1) {
-    scroll-snap-align: start;
-
-    body:not(.js-enabled) & {
-      margin-left: 4rem;
-    }
-  }
-
-  .carousel .carousel__controls.cols-sm-2 > a:not(:nth-child(odd)),
-  .carousel .carousel__controls.cols-sm-3 > a:not(:nth-child(3n+1)),
-  .carousel .carousel__controls.cols-sm-4 > a:not(:nth-child(4n+1)),
-  .carousel .carousel__controls.cols-sm-5 > a:not(:nth-child(5n+1)),
-  .carousel .carousel__controls.cols-sm-6 > a:not(:nth-child(6n+1)) {
+  [data-row-class*="cols-sm-2"] .carousel__controls > button:not(:nth-child(odd)),
+  [data-row-class*="cols-sm-3"] .carousel__controls > button:not(:nth-child(3n+1)),
+  [data-row-class*="cols-sm-4"] .carousel__controls > button:not(:nth-child(4n+1)),
+  [data-row-class*="cols-sm-5"] .carousel__controls > button:not(:nth-child(5n+1)),
+  [data-row-class*="cols-sm-6"] .carousel__controls > button:not(:nth-child(6n+1)) {
     display: none;
   }
 
   // Make sure that we dont just have one pip showing
-  .carousel .carousel__controls.cols-sm-2 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-sm-3 > :is(a:first-child:nth-last-child(2), a:first-child:nth-last-child(3)),
-  .carousel .carousel__controls.cols-sm-4 > :is(a:first-child:nth-last-child(2), a:first-child:nth-last-child(3), a:first-child:nth-last-child(4)),
-  .carousel .carousel__controls.cols-sm-5 > :is(a:first-child:nth-last-child(2),a:first-child:nth-last-child(3),a:first-child:nth-last-child(4),a:first-child:nth-last-child(5)),
-  .carousel .carousel__controls.cols-sm-6 > :is(a:first-child:nth-last-child(2),a:first-child:nth-last-child(3),a:first-child:nth-last-child(4),a:first-child:nth-last-child(5),a:first-child:nth-last-child(6)) {
+  [data-row-class*="cols-sm-2"] .carousel__controls:has(button:first-child:nth-last-child(2)),
+  [data-row-class*="cols-sm-3"] .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))),
+  [data-row-class*="cols-sm-4"] .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3), button:first-child:nth-last-child(4))),
+  [data-row-class*="cols-sm-5"] .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5))),
+  [data-row-class*="cols-sm-6"] .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5),button:first-child:nth-last-child(6))),
+  [data-row-class*="cols-sm-2"] .carousel__controls:has(button:first-child:nth-last-child(2)) ~ .btn,
+  [data-row-class*="cols-sm-3"] .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))) ~ .btn,
+  [data-row-class*="cols-sm-4"] .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3), button:first-child:nth-last-child(4))) ~ .btn,
+  [data-row-class*="cols-sm-5"] .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5))) ~ .btn,
+  [data-row-class*="cols-sm-6"] .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5),button:first-child:nth-last-child(6))) ~ .btn {
     display: none;
-  }
-
-  // Hide buttons if not needed
-  .carousel.hide-sm-btns .carousel__wrapper > .btn {
-    display: none;
-  }
-
-  .carousel.hide-sm-btns .carousel__inner {
-
-    margin-left: 0;
-    margin-right: 0;
   }
 }
 
 @include media-breakpoint-up(md) {
-
-  .carousel .carousel__inner > .row[class*="row-cols-md-"] > .col{
-    scroll-snap-align: unset;
-    margin-left: 0;
-  }
-  
-  .carousel .carousel__inner > .row-cols-md-2 > .col:nth-child(odd),
-  .carousel .carousel__inner > .row-cols-md-3 > .col:nth-child(3n+1),
-  .carousel .carousel__inner > .row-cols-md-4 > .col:nth-child(4n+1),
-  .carousel .carousel__inner > .row-cols-md-5 > .col:nth-child(5n+1),
-  .carousel .carousel__inner > .row-cols-md-6 > .col:nth-child(6n+1) {
-    scroll-snap-align: start;
-    
-    body:not(.js-enabled) & {
-
-      margin-left: calc(50vw);
-    }
+  .carousel__controls > button {
+    display: inline-block!important;
   }
 
-  .carousel .carousel__controls.cols-md-2 > a:not(:nth-child(odd)),
-  .carousel .carousel__controls.cols-md-3 > a:not(:nth-child(3n+1)),
-  .carousel .carousel__controls.cols-md-4 > a:not(:nth-child(4n+1)),
-  .carousel .carousel__controls.cols-md-5 > a:not(:nth-child(5n+1)),
-  .carousel .carousel__controls.cols-md-6 > a:not(:nth-child(6n+1)) {
-    display: none;
+  [data-row-class*="cols-md-2"] .carousel__controls > button:not(:nth-child(odd)),
+  [data-row-class*="cols-md-3"] .carousel__controls > button:not(:nth-child(3n+1)),
+  [data-row-class*="cols-md-4"] .carousel__controls > button:not(:nth-child(4n+1)),
+  [data-row-class*="cols-md-5"] .carousel__controls > button:not(:nth-child(5n+1)),
+  [data-row-class*="cols-md-6"] .carousel__controls > button:not(:nth-child(6n+1)) {
+    display: none!important;
   }
 
   // Make sure that we dont just have one pip showing
-  .carousel .carousel__controls.cols-md-2 > a:first-child:nth-last-child(2),
-  .carousel .carousel__controls.cols-md-3 > :is(a:first-child:nth-last-child(2), a:first-child:nth-last-child(3)),
-  .carousel .carousel__controls.cols-md-4 > :is(a:first-child:nth-last-child(2), a:first-child:nth-last-child(3), a:first-child:nth-last-child(4)),
-  .carousel .carousel__controls.cols-md-5 > :is(a:first-child:nth-last-child(2),a:first-child:nth-last-child(3),a:first-child:nth-last-child(4),a:first-child:nth-last-child(5)),
-  .carousel .carousel__controls.cols-md-6 > :is(a:first-child:nth-last-child(2),a:first-child:nth-last-child(3),a:first-child:nth-last-child(4),a:first-child:nth-last-child(5),a:first-child:nth-last-child(6)) {
+  [data-row-class*="cols-md-2"] .carousel__controls:has(button:first-child:nth-last-child(2)),
+  [data-row-class*="cols-md-3"] .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))),
+  [data-row-class*="cols-md-4"] .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3), button:first-child:nth-last-child(4))),
+  [data-row-class*="cols-md-5"] .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5))),
+  [data-row-class*="cols-md-6"] .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5),button:first-child:nth-last-child(6))),
+  [data-row-class*="cols-md-2"] .carousel__controls:has(button:first-child:nth-last-child(2)) ~ .btn,
+  [data-row-class*="cols-md-3"] .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))) ~ .btn,
+  [data-row-class*="cols-md-4"] .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3), button:first-child:nth-last-child(4))) ~ .btn,
+  [data-row-class*="cols-md-5"] .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5))) ~ .btn,
+  [data-row-class*="cols-md-6"] .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5),button:first-child:nth-last-child(6))) ~ .btn {
     display: none;
-  }
-
-  // Hide buttons when not needed
-  .carousel.hide-md-btns .carousel__wrapper > .btn {
-    display: none;
-  }
-
-  .carousel.hide-md-btns .carousel__inner {
-
-    margin-left: 0;
-    margin-right: 0;
   }
 }
-*/
+// #endregion

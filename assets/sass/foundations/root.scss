@@ -36,7 +36,7 @@ $root: ':root'!default;
   --card-bottom-padding: 2rem;
   --card-left-padding: 1rem;
   --card-border-radius: #{rem(8)};
-  --card-box-shadow: 2px 6px 12px rgba(0,0,0,0.2);
+  --card-box-shadow: #{rem(2)} #{rem(3)} #{rem(6)} rgba(0,0,0,0.2);
   --nav-height: #{rem(96)};
   --code-color: #d63384;
 
@@ -44,6 +44,14 @@ $root: ':root'!default;
   --border-width: 1px;
   --border-style: solid;
   --border-color: var(--colour-border);
+}
+
+.reset-colours {
+
+  @each $color, $value in $theme-colors {
+    --colour-#{$color}: #{$value};
+  }
+  @include reset-colours();
 }
 
 // Dark mode; functional colours get updated
@@ -60,7 +68,7 @@ $root: ':root'!default;
 @include light-mode() {
 
   // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.invert-colours) {
+  [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(.bg-canvas-2):not(.invert-colours) {
 
     @each $color, $value in $theme-colors {
       --colour-#{$color}: #{$value};
@@ -71,7 +79,7 @@ $root: ':root'!default;
   }
 
   // Override the colours when on a dark background, similiar to dark mode but on a module level
-  [class*="bg-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
+  [class*="bg-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
   .invert-colours {
     
     @include invert-colours();

@@ -205,23 +205,6 @@ $utilities: map-merge(
 $utilities: map-merge(
   $utilities,
   (
-    "max-heights": (
-      property: max-height,
-      class: mh,
-      values: (
-        "sm": #{rem(200)},
-        "md": #{rem(400)},
-        "lg": #{rem(600)}
-      )
-    )
-  )
-);
-// #endregion
-
-// #region Max height classes
-$utilities: map-merge(
-  $utilities,
-  (
     "container": (
       property: container-type,
       class: ct,
