@@ -40,7 +40,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
           <div class="col">
             <a href="/client-onbaording">
-              <Card :data-image="Thumb1">Get moving faster <span>Stay complaint, build revenue and get paid quicker.</span><span slot="badges" class="badge bg-success">End-to-End client-onbaording</span></Card>
+              <Card :data-image="Thumb1">Get moving faster <span>Stay complaint, build revenue and get paid quicker.</span><span slot="badges" class="badge bg-success">End-to-End onboarding</span></Card>
             </a>
           </div>
           <div class="col">

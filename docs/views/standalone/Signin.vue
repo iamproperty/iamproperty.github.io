@@ -21,7 +21,7 @@
           <span>
             <input type="password" id="password" name="password" required="" autocomplete="on">
 
-            <button type="button" class="suffix fa-solid fa-eye" data-alt-class="suffix fa-solid fa-eye-slash" data-change-type="text" data-input="password" aria-hidden="true"><span class="visually-hidden">Show password</span></button>
+            <button type="button" class="suffix fa-solid fa-eye-slash" data-alt-class="suffix fa-solid fa-eye" data-change-type="text" data-input="password" aria-hidden="true"><span class="visually-hidden">Show password</span></button>
           </span>
         </label>
         
