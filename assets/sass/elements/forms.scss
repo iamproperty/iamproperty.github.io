@@ -367,7 +367,7 @@ input[maxlength] + span {
   background-repeat: no-repeat;
   background-position: right var(--input-padding-inline, #{rem(16)}) center;
   background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});;
-  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}));
+  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}))!important;
 }
 
 .was-validated *:not(button):is(:valid, .is-valid):not(.is-invalid) {
@@ -381,7 +381,7 @@ input[maxlength] + span {
   background-repeat: no-repeat;
   background-position: right var(--input-padding-inline, #{rem(16)}) center;
   background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});;
-  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}));
+  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}))!important;
 }
 
 .invalid-feedback {
@@ -741,7 +741,7 @@ select {
   background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem)/var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
               linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top/calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) no-repeat;
   
-  padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem));
+  padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem))!important;
   option {font-size: 1.2em;}
 
   
