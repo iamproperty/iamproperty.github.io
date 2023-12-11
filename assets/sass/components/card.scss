@@ -17,8 +17,8 @@
   overflow: hidden;
   z-index: 0;
   background: var(--colour-canvas-2);
-  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-  outline-offset: -1px;
+  outline: 2px solid var(--colour-canvas-2);
+  outline-offset: -2px;
 
   &.border-0 {
     box-shadow: none;
@@ -131,11 +131,31 @@
   vertical-align: middle!important;
 }
 
-::slotted(span){
+::slotted(span:not(.badge)){
   display: block!important;
   font-weight: normal!important;
   padding-top: rem(24)!important;
   font-size: rem(16)!important;
+}
+// #endregion
+
+// #region card bages
+.card__badges {
+  position: absolute;
+  top: 0;
+  right: 0.25rem;
+  padding: 0.25rem;
+  z-index: 9;
+  text-align: right;
+  width: 1;
+}
+.card__head .card__badges {
+  
+  top: auto;
+  bottom: 0;
+  text-align: left;
+  left: 0.25rem;
+  right: auto;
 }
 // #endregion
 

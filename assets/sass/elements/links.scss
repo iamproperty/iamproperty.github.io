@@ -80,7 +80,8 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
     text-decoration: underline;
     text-underline-offset: 0.2em;
     text-decoration-thickness: 2px;
-
+    font-size: inherit;
+    
     &:is(:hover, :focus, .hover, :focus-within) {
 
       color: var(--colour-hover);

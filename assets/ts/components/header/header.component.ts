@@ -25,18 +25,12 @@ class iamHeader extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="header-banner">
-      <div class="container" part="container">
-        <slot name="breadcrumb"></slot>
-        <div class="header-banner__inner">
-        <slot></slot>
-        </div>
-      </div>
       <picture>
-        <!-- Actual image only loaded on desktops -->
-        <source srcset="" media="(min-width: 62em)">
-        <!-- Placeholder image -->
         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="" />
       </picture>
+      <div class="container">
+        <slot></slot>
+      </div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -44,13 +38,13 @@ class iamHeader extends HTMLElement {
 
 	connectedCallback() {
     
-    this.classList.add('loaded');
+    this.classList.add('bg-primary');
 
     const picture = this.shadowRoot.querySelector('picture');
-    const source = this.shadowRoot.querySelector('picture source');
+    const source = this.shadowRoot.querySelector('picture img');
 
     if(this.hasAttribute('image'))
-      source.setAttribute('srcset', this.getAttribute('image'));
+      source.setAttribute('src', this.getAttribute('image'));
     else
       picture.remove();
     

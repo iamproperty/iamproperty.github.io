@@ -7,7 +7,13 @@
       <h1>Carousel</h1>
       <p>A slideshow component for cycling through elements—images or slides of text—like a carousel.</p>
     </div>
-    <Carousel :items="items" class="visualtest" btntype="link" :smcols="2" :mdcols="4"></Carousel>
+    <Carousel class="visualtest" btntype="link" :smcols="2" :mdcols="4">
+    
+      <div :class="`row row-cols-1 row-cols-sm-2 row-cols-md-3`">
+        <div :class="`col carousel__item`" v-for="(value,index) in items" :key="index" v-html="content(value)" :id="'carousel'+id+'slide'+(index+1)"></div>
+      </div>
+    
+    </Carousel>
     
     <div class="container">
       <p class="note"><strong>Note:</strong> We do not use the carousel that comes with bootstrap instead we take advantage of the 'scroll-snap' CSS feature. This reduces its complexitity and allows us to have mulitple items in displayed by using the bootstrap gird system.</p>
@@ -36,6 +42,13 @@ export default {
   components: {
     Carousel,
     Readme
+  },
+  computed: {
+    content (){
+      return (value) => {
+        return `${value.image ? `<img src="${value.image}" alt="" />` : ''}${value.content?value.content:''}`;
+      }
+    }
   },
   data () {
     return {

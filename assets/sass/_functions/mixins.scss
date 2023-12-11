@@ -211,3 +211,19 @@
     --colour-#{$color}: #{$value};
   }
 }
+
+@mixin slotted($el, $isComponent:"true"){
+  
+  @if $isComponent == "true" {
+    ::slotted(#{$el}) {
+    
+      @content;
+    }
+  }
+  @else {
+    #{$el} {
+    
+      @content;
+    }
+  }
+}

@@ -23,24 +23,22 @@ html {
 
   @if $mobileOnly != "true" {
     @media (min-width: #{em(1280)}) {
-        font-size: 100%;
+      font-size: 100%;
+      font-size: vw(1280);
+    }
+
+    @media (min-width: #{em(1440)}) {
+      font-size: 112.5%;
+    }
+
+    @media (min-width: #{em(1680)}) {
+      //font-size: 131.25%;
     }
 
     @media print {
       font-size: 16px;
     }
   }
-  /*
-  @media (min-width: #{em(1440)}) {
-    font-size: vw(1440);
-  }
-  @media (min-width: #{em(1600)}) {
-    font-size: 111.11%;
-  }
-  @media (min-width: #{em(1800)}) {
-    font-size: 125%;
-  }
-  */
 }
 
 body {
@@ -143,7 +141,8 @@ details {
 }
 
 // Main grid setup to avoid having to use continaer divs
-main {
+
+*:not(.row) > main {
   --padding-inline: 1.5rem;
   --container-max-width: #{rem(1280)};
   --full-width-start: 0;

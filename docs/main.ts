@@ -9,6 +9,9 @@ import * as helpers from '../assets/ts/modules/helpers'
 import extendDialogs from '../assets/ts/modules/dialogs';
 import createDataLayer from '../assets/ts/modules/data-layer'
 
+import extendInputs from '../assets/ts/modules/inputs';
+
+
 
 import createDynamicEvents from '../assets/ts/modules/dynamicEvents'
 
@@ -133,6 +136,8 @@ app.use(router).mount('#app')
 helpers.addBodyClasses(document.body);
 helpers.addGlobalEvents(document.body);
 extendDialogs(document.body);
+
+extendInputs(document.body);
 
 const hasDarkPreference = window.matchMedia(
   "(prefers-color-scheme: dark)"

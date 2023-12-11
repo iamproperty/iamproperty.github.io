@@ -1,0 +1,64 @@
+@use "../_func.scss" as *;
+
+
+$isComponent: "true"!default;
+
+
+@mixin iamMarketing(){
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  max-width: 40rem;
+  min-width: 100%;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  align-items: flex-end;
+  padding-top: 33%;
+}
+
+figure {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+    &:after {
+    content: "";
+
+      inset: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-image: linear-gradient(15deg, #00313c 0%, #03404f 28.7%, #03404f 31.5%, #044353 60.099999999999994%, #1bb1dc 83.2%, rgba(28, 182, 226, 0.486) 100%);
+    opacity: 0.85;
+    z-index: 1;
+  }
+}
+
+img {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  max-height: auto;
+  z-index: 2;
+  -webkit-mask-image:-webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+  mix-blend-mode: multiply;
+}
+
+:host {
+@include iamMarketing();
+}
+
+@include slotted('*',$isComponent) {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+

@@ -98,40 +98,81 @@
     <script>
     document.addEventListener("DOMContentLoaded", function() {
 
-      const components = ['nav','card'];
-      const prefix = "iam"
-      const options = {
-        rootMargin: '50px',
-        threshold: 0.1
+      function registerComponents () {
+
+        const components = ['nav','card','marketing'];
+        const prefix = "iam"
+        const options = {
+          rootMargin: '50px',
+          threshold: 0.1
+        }
+        const componentExt = ".component.js";
+
+        // Load components - Each component will load once the first of its type has been loaded
+        components.forEach((component) => {
+
+          if(document.getElementsByTagName(`${prefix}-${component}`).length === 0)
+            return;
+
+          let callback = (entries) => {
+            entries.forEach((entry) => {
+              
+              if(entry.intersectionRatio > 0){
+
+                import(`/assets/js/components/${component}/${component}${componentExt}`).then(module => {
+                  if (!window.customElements.get(`${prefix}-${component}`))
+                    window.customElements.define(`${prefix}-${component}`, module.default);
+                }).catch((err) => {
+                  console.log(err.message);
+                });  
+
+                intObserver.unobserve(entry.target);
+              }
+            });
+          };
+
+          const intObserver = new IntersectionObserver(callback, options);
+          intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
+        });
       }
-      const componentExt = ".component.min.js";
+      registerComponents();
+      
 
-      // Load components - Each component will load once the first of its type has been loaded
-      components.forEach((component) => {
+      function generateNewJokes(contentDiv) {
+        const newXHRRequest = new XMLHttpRequest();
+        newXHRRequest.open(
+          "GET",
+          `http://localhost:8000/wp-json/wp/v2/posts/1`,
+          true
+        );
 
-        if(document.getElementsByTagName(`${prefix}-${component}`).length === 0)
-          return;
+        newXHRRequest.onload = function () {
 
-        let callback = (entries) => {
-          entries.forEach((entry) => {
+          let output = "";
+
+          console.log(this)
+
+          if (this.status === 200) {
+            const response = JSON.parse(this.responseText);
             
-            if(entry.intersectionRatio > 0){
 
-              import(`/assets/js/components/${component}/${component}${componentExt}`).then(module => {
-                if (!window.customElements.get(`${prefix}-${component}`))
-                  window.customElements.define(`${prefix}-${component}`, module.default);
-              }).catch((err) => {
-                console.log(err.message);
-              });  
+            output += `${response.content.rendered}`;
+            
+          }
+          else {
 
-              intObserver.unobserve(entry.target);
-            }
-          });
+              output += `<li>Sorry! Couldn't get jokes</li>`;
+          }
+          
+            contentDiv.innerHTML = output;
+            registerComponents();
         };
 
-        const intObserver = new IntersectionObserver(callback, options);
-        intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
-      });
+        newXHRRequest.send();
+      }
+
+      generateNewJokes(document.querySelector("#temp"));
+
     });
     </script>
 
@@ -156,6 +197,10 @@
 
   </iam-nav>
 
+
+
+
+  
   <main>
   <div class="container">
     <div class="row">
@@ -166,6 +211,16 @@
       </div>
     </div>
   </div>
+
+  <div class="container pt-5">
+    
+
+    <div id="temp" class="content" data-content-url="http://localhost:8000/wp-json/wp/v2/posts/1" data-content-schema="content">
+      <a href="http://localhost:8000/hello-world/" target="_blank">View content</a>
+    </div>
+
+  </div>
   </main>
+    
 </body>
 </html>

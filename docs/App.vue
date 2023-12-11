@@ -134,7 +134,7 @@ footer .router-link-active {
 #app {
 
   display: contents;
-  > div {
+  > div:not(.container) {
     display: contents;
   }
 }
@@ -155,9 +155,6 @@ footer .router-link-active {
 import Card from '@/components/Card/Card.vue'
 import Search from '@/components/Search/Search.vue'
 import routes from './routes.ts';
-
-
-import extendInputs from '../assets/ts/modules/inputs';
 
 
 
@@ -244,14 +241,6 @@ export default {
         }
       }, 1000);
     }
-
-
-    this.$nextTick(function () {
-
-      extendInputs(document.body);
-
-
-    });
 
   },
   data () {

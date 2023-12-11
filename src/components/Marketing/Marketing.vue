@@ -1,16 +1,16 @@
 <template>
   <!-- Custom element -->
-  <iam-carousel>
+  <iam-marketing>
     
     <slot></slot>
-  </iam-carousel>
+  </iam-marketing>
 </template>
 
 <script>
 // Load web components
 
 export default {
-  name: 'Header',
+  name: 'Marketing',
   props: {
     title: {
       type: String,
@@ -25,10 +25,10 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/carousel/carousel.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/marketing/marketing.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
 
-        if (!window.customElements.get(`iam-carousel`))
-          window.customElements.define(`iam-carousel`, module.default);
+        if (!window.customElements.get(`iam-marketing`))
+          window.customElements.define(`iam-marketing`, module.default);
 
       }).catch((err) => {
         console.log(err.message);
