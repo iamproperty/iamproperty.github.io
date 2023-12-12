@@ -178,7 +178,7 @@ dialog::backdrop {
 // #endregion
 
 // #region Transactional 
-*:not(.dialog__wrapper) > dialog[open]:not(.dialog--multi):is(:has(button:last-child),:has(form:last-child > button:last-child)) {
+*:not(.dialog__wrapper) > dialog[open]:not(.dialog--multi):is(:has(:is(button,a):last-child),:has(form:last-child > :is(button,a):last-child)) {
 
   text-align: center;
 
@@ -252,7 +252,7 @@ dialog::backdrop {
     }
   }
 
-  button {
+  form > :is(button,a) {
     margin-bottom: 0;
   }
 
