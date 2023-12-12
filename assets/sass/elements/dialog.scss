@@ -258,8 +258,8 @@ dialog::backdrop {
 
   @include media-breakpoint-up(sm) {
 
-    button:has( + button:last-child),
-    button:last-child {
+    :is(button, .btn):has(~ :is(button, .btn):last-child),
+    :is(button, .btn):last-child {
       min-width: calc(50% - 1rem);
       text-align: center;
     }
