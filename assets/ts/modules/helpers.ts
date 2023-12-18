@@ -66,6 +66,12 @@ export const addGlobalEvents = (body) => {
 
       let form = event.target;
 
+      // Reset password types
+      Array.from(form.querySelectorAll('[data-password-type]')).forEach((input,index) => {
+        input.setAttribute('type','password');
+      });
+
+
       if(form.querySelector(':invalid')){
         
         form.classList.add('was-validated');

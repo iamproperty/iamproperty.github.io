@@ -410,6 +410,22 @@ iam-address-lookup:has([required]){
   --error-display: block;
 }
 
+// Password checker
+.pwd-checker {
+  
+  display: block;
+  background-repeat: no-repeat!important;
+  background-position: left center;
+  background-size: 1em 1em;
+  padding-left: 1.5rem!important;
+}
+.pwd-checker.invalid-feedback {
+  background-image: escape-svg($icon-error);
+}
+
+.pwd-checker:not(.invalid-feedback) {
+  background-image: escape-svg($icon-tick)!important;
+}
 // #endregion
 
 // #region radio/checkbox field 

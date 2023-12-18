@@ -417,12 +417,18 @@
       <p class="pb-3">Password fields hide the field value for security. We can add an optional hide/show button after the field.</p>
     </div>
     <div class="container visualtest"> 
-      <div>
-        <label for="password">Input field label</label>
-        <button type="button" class="suffix fa-solid fa-eye" data-alt-class="suffix fa-solid fa-eye-slash" data-change-type="text" data-input="password"><span class="visually-hidden">Show password</span></button>
-        <input type="password" id="password" name="password" required autocomplete="on"/>
-      </div>
+
+      <label>Password
+        <span>
+          <input type="password" id="password" name="password" required autocomplete="on" minlength="8" data-strength-checker="pwdchecker1" />
+          <button type="button" class="suffix fa-solid fa-eye-slash" data-alt-class="suffix fa-solid fa-eye" data-change-type="text" data-input="password"><span class="visually-hidden">Show password</span></button>
+        </span>
+        <span id="pwdchecker1" class="pwd-checker"></span>
+      </label>
     </div>
+
+
+
     <div class="container pb-0">
       <h3 class="h6">Colour</h3>
       <p class="pb-3">Colour fields allow the user to either enter the hex colour code in the field or select a colour from the colour picker. The colour picker should default to hex code input.</p>
