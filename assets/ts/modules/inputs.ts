@@ -226,6 +226,7 @@ export const checkPWDStrength = (input, check = 'no') => {
     else
       pwdChecker.classList.remove('invalid-feedback');
 
+    pwdChecker.setAttribute('data-strength',strength)
     pwdChecker.innerHTML = `Password strength: ${strengthName[strength-1]} ${extraMsg}`;
   }
 

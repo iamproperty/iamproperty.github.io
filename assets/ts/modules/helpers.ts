@@ -71,8 +71,7 @@ export const addGlobalEvents = (body) => {
         input.setAttribute('type','password');
       });
 
-
-      if(form.querySelector(':invalid')){
+      if(form.querySelector(':invalid') || form.querySelector('.pwd-checker[data-strength="1"]') || form.querySelector('.pwd-checker[data-strength="2"]')){
         
         form.classList.add('was-validated');
         event.preventDefault();

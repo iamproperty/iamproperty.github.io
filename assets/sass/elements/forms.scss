@@ -426,6 +426,9 @@ iam-address-lookup:has([required]){
 .pwd-checker:not(.invalid-feedback) {
   background-image: escape-svg($icon-tick)!important;
 }
+label:has(.pwd-checker.invalid-feedback):after {
+  display: none!important;
+}
 // #endregion
 
 // #region radio/checkbox field 

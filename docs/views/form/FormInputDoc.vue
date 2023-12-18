@@ -417,7 +417,6 @@
       <p class="pb-3">Password fields hide the field value for security. We can add an optional hide/show button after the field.</p>
     </div>
     <div class="container visualtest"> 
-
       <label>Password
         <span>
           <input type="password" id="password" name="password" required autocomplete="on" minlength="8" data-strength-checker="pwdchecker1" />
@@ -425,6 +424,7 @@
         </span>
         <span id="pwdchecker1" class="pwd-checker"></span>
       </label>
+      
     </div>
 
 
