@@ -66,7 +66,12 @@ export const addGlobalEvents = (body) => {
 
       let form = event.target;
 
-      if(form.querySelector(':invalid')){
+      // Reset password types
+      Array.from(form.querySelectorAll('[data-password-type]')).forEach((input,index) => {
+        input.setAttribute('type','password');
+      });
+
+      if(form.querySelector(':invalid') || form.querySelector('.pwd-checker[data-strength="1"]') || form.querySelector('.pwd-checker[data-strength="2"]')){
         
         form.classList.add('was-validated');
         event.preventDefault();
