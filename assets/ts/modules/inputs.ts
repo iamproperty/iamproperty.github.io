@@ -10,6 +10,11 @@ const extendInputs = (body) => {
       setMaxlengthVars(input,wrapper);
     });
 
+    Array.from(document.querySelectorAll('label input')).forEach((input,index) => {
+      if(!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
+        input.insertAdjacentHTML("beforebegin", `<span class="optional-text"></span>`);
+    });
+    
     // Date restrictions 
     if(document.querySelector('input[type="date"]')){
 

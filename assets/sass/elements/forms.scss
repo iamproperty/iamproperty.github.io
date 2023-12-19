@@ -12,11 +12,23 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   font-weight: normal;
   color: var(--colour-heading);
   display: block;
+}
+// #endregion
 
-  &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not([type='file'])):after {
+// #region Optional text
+:is(label,.label) {
+
+  @if $optionalText == "true" {
+    &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not([type='file'])):after {
+      content: " (Optional)";
+    }
+  }
+
+  &:has(input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not([type='file'])) .optional-text:before {
     content: " (Optional)";
   }
 }
+
 // #endregion
 
 // #region input field
