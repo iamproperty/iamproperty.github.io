@@ -65,8 +65,9 @@
 
     <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
-      <label :for="`input3`">Input field label</label>
-      <input type="text" :id="`input3`" :name="`input3`" placeholder="Optional placeholder text" />
+      <label>Input field label
+        <input type="text" :name="`input3`" placeholder="Optional placeholder text" />
+      </label>
 
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
       <label :for="`input4`">Input field label</label>
@@ -531,12 +532,18 @@ export default {
     }
   },
   mounted (){
+    this.$nextTick(function () {
 
+      Array.from(document.querySelectorAll('label input')).forEach((input,index) => {
+        if(!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
+          input.insertAdjacentHTML("beforebegin", `<span class="optional-text"></span>`);
+      });
 
-    // maxlength counter init
-    Array.from(document.querySelectorAll('input[maxlength]')).forEach((input,index) => {
-      setMaxlengthVars(input);
-    });
+      // maxlength counter init
+      Array.from(document.querySelectorAll('input[maxlength]')).forEach((input,index) => {
+        setMaxlengthVars(input);
+      });
+    })
   }
 }
 </script>
