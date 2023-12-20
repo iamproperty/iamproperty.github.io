@@ -72,6 +72,10 @@ iam-carousel {
   }
 }
 
+// Search
+iam-search input:not(.is-invalid):not(:invalid) {
+  background: none!important;
+}
 
 
 

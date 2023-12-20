@@ -22,7 +22,13 @@ class iamSearch extends HTMLElement {
     template.innerHTML = `
     <style>
     @import "${coreCSS}";
-    
+    input {
+      background: red;
+    }
+    input:not(.is-invalid):not(:invalid) {
+      background: none!important;
+    }
+
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
     <slot></slot>
@@ -62,36 +68,43 @@ class iamSearch extends HTMLElement {
       displayInputField.setAttribute('list',listID);
     }
 
-    // on change update oringinal field with the actual value and use displayed input for the nice display text
-    displayInputField.addEventListener('change', (event) => {
-
-      let match = datalist.querySelector(`option[value="${displayInputField.value}"]`);
-
-      if(match){
-        inputField.value = match.getAttribute('data-value');
-      }
-    });
-
     // Search the endpoint when 3 characters has been added
     if(searchWrapper.hasAttribute('data-url')){
         
-      displayInputField.addEventListener('keyup', (event) => {
+      displayInputField.addEventListener('input', (event) => {
 
         if(displayInputField.value.length == 3 && !searched.includes(displayInputField.value)){
           search(displayInputField.value);
           searched.push(displayInputField.value);
         }
       });
-
-      displayInputField.addEventListener('change', (event) => {
-
-        if(displayInputField.value.length >= 3 && !searched.includes(displayInputField.value.substring(0,3))){
-          search(displayInputField.value.substring(0,3));
-          searched.push(displayInputField.value.substring(0,3));
-        }
-      });
     }
-    
+
+    function checkMatch(){
+      
+      let match = datalist.querySelector(`option[value="${displayInputField.value}"]`);
+      let subMatch = datalist.querySelector(`option[value*='${displayInputField.value}' i]`);
+
+      if(match){
+        inputField.value = match.getAttribute('data-value');
+      }
+      else if (displayInputField.value.length > 0 && !subMatch){
+        displayInputField.classList.add('is-invalid');
+        displayInputField.closest('label').setAttribute('data-error','No results returned');
+      }
+      else {
+        displayInputField.classList.remove('is-invalid');
+        displayInputField.closest('label').removeAttribute('data-error');
+      }
+    }
+
+    // on change update oringinal field with the actual value and use displayed input for the nice display text
+    displayInputField.addEventListener('input', (event) => {
+
+      checkMatch();
+    });
+
+
     const search = async (searchterm) => {
       
       let ajaxURL = searchWrapper.getAttribute('data-url');
@@ -154,6 +167,9 @@ class iamSearch extends HTMLElement {
           
           datalist.innerHTML += listString;
   
+          displayInputField.closest('form').classList.add('was-validated');
+          checkMatch();
+
           return response;
         });
 

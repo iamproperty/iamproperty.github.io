@@ -387,7 +387,7 @@ input[maxlength] + span {
   border-color: var(--colour-complete);
 }
 
-.was-validated input:is(:valid, .is-valid) {
+.was-validated input:is(:valid, .is-valid):not(:is(:invalid, .is-invalid)) {
 
   background-image: escape-svg($icon-tick);
   background-repeat: no-repeat;
@@ -899,7 +899,7 @@ iam-fileupload {
   
   margin-bottom: 1.5rem;
 
-  &:has(:invalid):after {
+  &:has(:is(:invalid,.is-invalid)):after {
     content: "This field is required";
     color: var(--colour-danger);
     margin-top: rem(8);
@@ -914,7 +914,7 @@ iam-fileupload {
     line-height: 1.2;
   }
 
-  &[data-error]:has(:invalid):after {
+  &[data-error]:has(:is(:invalid,.is-invalid)):after {
     content: attr(data-error)!important;
   }
 

@@ -84,15 +84,15 @@ class iamAddressLookup extends HTMLElement {
       preFilledAddress.innerHTML = "";
 
       Array.from(component.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')).forEach((input, index) => {
+        const value = input.value;
 
-        if(!input.value)
+        if(!value)
           preFilled = false;
         else
-          preFilledAddress.innerHTML += ', '+input.value;
-        
+          preFilledAddress.innerHTML += value+(/^-?\d+$/.test(value) ? ' ' : ', ');
       });
 
-      preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(1);
+      preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(0, -2);
 
       if(preFilled){
         preFilledWrapper.classList.remove('js-hide');
@@ -266,9 +266,9 @@ class iamAddressLookup extends HTMLElement {
                 if(key == "address_number_name")
                   itemString += `${value} `;
                 else if(key != "postcode" && key != "address_title")
-                  itemString += `${value}, `;
+                  itemString += `${value}${(/^-?\d+$/.test(value)?'':',')} `;
               }
-
+              
               listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
             }
 
