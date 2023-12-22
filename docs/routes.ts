@@ -118,7 +118,7 @@ const routes = [
       },
       {
         path: 'illustrations',
-        name: 'Illustrations (Beta)',
+        name: 'Illustrations',
         meta: {
           title: 'Illustrations | Elements | iamkey'
         },
@@ -151,6 +151,14 @@ const routes = [
         },
         component: () => import('./views/elements/Buttons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact'
+      },
+      {
+        path: 'badges',
+        name: 'Badges (BETA)',
+        meta: {
+          title: 'Badges | Elements | iamkey'
+        },
+        component: () => import('./views/elements/BadgesDoc.vue')
       },
       {
         path: 'container',
@@ -237,9 +245,9 @@ const routes = [
       },
       {
         path: 'range',
-        name: 'Form range field (Beta)',
+        name: 'Form range fields',
         meta: {
-          title: 'Form range field | Elements | iamkey'
+          title: 'Form range fields | Elements | iamkey'
         },
         component: () => import('./views/form/Range.vue')
       },
@@ -463,12 +471,33 @@ const routes = [
         component: () => import('./views/components/SnapshotDoc.vue')
       },
       {
+        path: 'search',
+        name: 'Search (Beta)',
+        meta: {
+          title: 'Search | Components | iamkey'
+        },
+        component: () => import('./views/components/SearchDoc.vue')
+      },
+
+
+
+      
+
+      {
         path: 'stepper',
         name: 'Stepper (Beta)',
         meta: {
           title: 'Stepper | Components | iamkey'
         },
         component: () => import('./views/components/StepperDoc.vue')
+      },
+      {
+        path: 'slider',
+        name: 'Slider',
+        meta: {
+          title: 'Slider | Components | iamkey'
+        },
+        component: () => import('./views/components/SliderDoc.vue')
       },
       {
         path: 'tables',
@@ -641,6 +670,14 @@ const routes = [
           title: 'Email Template | Components | iamkey'
         },
         component: () => import('./views/templates/FormDoc.vue')
+      },
+      {
+        path: 'auth',
+        name: 'Auth page Template (Beta)',
+        meta: {
+          title: 'Auth Template | Components | iamkey'
+        },
+        component: () => import('./views/templates/AuthDoc.vue')
       },
       {
         path: 'email',
@@ -954,6 +991,22 @@ const routes = [
           title: 'CRM to IAS example | iamkey'
         },
         component: () => import('./views/standalone/crm-ias/Page2.vue')
+      },
+      {
+        path: 'iamproperty',
+        name: "iamproperty dashboard",
+        meta: {
+          title: 'iamproperty dashboard | iamkey'
+        },
+        component: () => import('./views/standalone/Iamproperty.vue')
+      },
+      {
+        path: 'signin',
+        name: "Sign in",
+        meta: {
+          title: 'Sign in | iamkey'
+        },
+        component: () => import('./views/standalone/Signin.vue')
       }
     ]
   },

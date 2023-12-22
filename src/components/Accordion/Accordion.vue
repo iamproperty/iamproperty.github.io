@@ -9,16 +9,23 @@
 </style>
 
 <script>
-import iamAccordion from '../../../assets/js/components/accordion/accordion.component.min.js'
-
-if (!window.customElements.get('iam-accordion'))
-  window.customElements.define('iam-accordion', iamAccordion);
-
 export default {
   name: 'Accordion',
   props: {
   },
   mounted(){
+
+    this.$nextTick(function () {
+      
+      import(`../../../assets/js/components/accordion/accordion.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+
+        if (!window.customElements.get(`iam-accordion`))
+          window.customElements.define(`iam-accordion`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
+    })
   }
 }
 </script>

@@ -47,7 +47,7 @@ export const addGlobalEvents = (body) => {
 
   addEventListener("popstate", (event) => {
 
-    if(event && event.state.type && event.state.type == "pagination"){
+    if(event && event.state && event.state.type && event.state.type == "pagination"){
       let form = document.querySelector(`#${event.state.form}`);
       let pageInput = document.querySelector(`#${event.state.form} [data-pagination]`);
       
@@ -66,7 +66,12 @@ export const addGlobalEvents = (body) => {
 
       let form = event.target;
 
-      if(form.querySelector(':invalid')){
+      // Reset password types
+      Array.from(form.querySelectorAll('[data-password-type]')).forEach((input,index) => {
+        input.setAttribute('type','password');
+      });
+
+      if(form.querySelector(':invalid') || form.querySelector('.pwd-checker[data-strength="1"]') || form.querySelector('.pwd-checker[data-strength="2"]')){
         
         form.classList.add('was-validated');
         event.preventDefault();
@@ -98,3 +103,9 @@ export const safeID = function(str){
 
   return str;
 }
+
+// Used to get values from nested json objects
+export const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
+
+
+export const isTraversable = o => Array.isArray(o) || o !== null && ['function', 'object'].includes(typeof o);

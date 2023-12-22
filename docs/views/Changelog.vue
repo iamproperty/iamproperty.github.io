@@ -3,6 +3,18 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V5.1.0</h2>
+      <ul>
+        <li>Tidy up and reduce the file size of the core CSS' with some CSS moved into seperate files loaded via the component associated.</li>
+        <li>Developers can now add links into the tabs component to create a secondary nav component looking like the tabs</li>
+        <li>Remove the need to put content into a .container div</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Tabs classes are now only available using the tabs component</li>
+        <li>Some Sass/CSS file names have changed or moved</li>
+      </ul>
 
       <h2>V5.0.0</h2>
       <ul>

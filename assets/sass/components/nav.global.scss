@@ -28,6 +28,7 @@ nav:has(iam-nav) {
 
   min-height: #{rem(96)};
   display: block;
+  position: relative;
 
   iam-nav {
     position: absolute;
@@ -554,7 +555,7 @@ iam-nav details {
 
     &.search-open {
 
-      > *:not([slot="logo"]):not([slot="secondary"]) {
+      > *:not([slot="logo"]):not([slot="secondary"]):not([slot="search"]) {
         display: none!important;
       }
     }

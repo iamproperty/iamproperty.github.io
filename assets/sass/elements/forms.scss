@@ -12,15 +12,27 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   font-weight: normal;
   color: var(--colour-heading);
   display: block;
-
-  &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not([type='file'])):after {
-    content: " (Optional)";
-  }
 }
 // #endregion
 
+// #region Optional text
+:is(label,.label) {
+
+  @if $optionalText == "true" {
+    &:has(+ input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not([type='file'])):after {
+      content: " (Optional)";
+    }
+  }
+
+  &:has(input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not([type='file'])) .optional-text:before {
+    content: " (Optional)";
+  }
+}
+
+// #endregion
+
 // #region input field
-:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output,select:not(.select--minimal)) {
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output,select:not(.select--minimal)) {
   display: block;
   width: 100%;
   display: block;
@@ -61,7 +73,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 }
 
-:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])){
+:is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])){
 
   max-width: $input-max-width;
 }
@@ -102,7 +114,7 @@ div:has(> label:first-child):has(> input) {
   margin-bottom: rem(24);
 
 
-  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]), output, .prefix, .suffix {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]), output, .prefix, .suffix {
     margin-bottom: 0!important;
   }
 
@@ -111,12 +123,12 @@ div:has(> label:first-child):has(> input) {
   align-items: center;
 
 
-  > *:not(input:not([type="checkbox"]):not([type="radio"]):not([type="file"])):not(output):not(.prefix):not(.suffix) {
+  > *:not(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"])):not(output):not(.prefix):not(.suffix) {
     flex-shrink: 0;
     width: 100%;
   }
 
-  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output) {
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output) {
     flex-shrink: 1;
     flex-grow: 1;
     width: 0;
@@ -310,14 +322,14 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     }
   }
 
-  .prefix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output) {
+  .prefix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output) {
     
     border-end-start-radius: 0!important;
     border-start-start-radius: 0!important;
   }
 
-  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output),
-  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),textarea,output):has(~ .suffix) {
+  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output),
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output):has(~ .suffix) {
     order: 1;
     
     border-start-end-radius: 0!important;
@@ -367,7 +379,7 @@ input[maxlength] + span {
   background-repeat: no-repeat;
   background-position: right var(--input-padding-inline, #{rem(16)}) center;
   background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});;
-  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}));
+  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}))!important;
 }
 
 .was-validated *:not(button):is(:valid, .is-valid):not(.is-invalid) {
@@ -375,13 +387,13 @@ input[maxlength] + span {
   border-color: var(--colour-complete);
 }
 
-.was-validated input:is(:valid, .is-valid) {
+.was-validated input:is(:valid, .is-valid):not(:is(:invalid, .is-invalid)) {
 
   background-image: escape-svg($icon-tick);
   background-repeat: no-repeat;
   background-position: right var(--input-padding-inline, #{rem(16)}) center;
   background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});;
-  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}));
+  padding-right: calc(var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}))!important;
 }
 
 .invalid-feedback {
@@ -410,6 +422,25 @@ iam-address-lookup:has([required]){
   --error-display: block;
 }
 
+// Password checker
+.pwd-checker {
+  
+  display: block;
+  background-repeat: no-repeat!important;
+  background-position: left center;
+  background-size: 1em 1em;
+  padding-left: 1.5rem!important;
+}
+.pwd-checker.invalid-feedback {
+  background-image: escape-svg($icon-error);
+}
+
+.pwd-checker:not(.invalid-feedback) {
+  background-image: escape-svg($icon-tick)!important;
+}
+label:has(.pwd-checker.invalid-feedback):after {
+  display: none!important;
+}
 // #endregion
 
 // #region radio/checkbox field 
@@ -484,7 +515,12 @@ label:has(input:is([type="radio"],[type="checkbox"])):not(:has(> iam-card)){
     top: rem(10 - 2);
     left: var(--outline-width);
   }
+  
+  &.btn:before {
+    opacity: 0;
+  }
 }
+
 
 input[type="radio"] + label:not(:has(> iam-card)),
 label:has(input[type="radio"]):not(:has(> iam-card)) {
@@ -736,7 +772,7 @@ select {
   background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem)/var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
               linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top/calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) no-repeat;
   
-  padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem));
+  padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem))!important;
   option {font-size: 1.2em;}
 
   
@@ -826,13 +862,15 @@ iam-fileupload {
 
   display: block;
   margin-bottom: rem(24);
+  max-width: $input-max-width;
 
-  :is(input,select) {
+  :is(input:not([type="range"]),select) {
     margin-top: rem(8);
     margin-bottom: 0!important;
   }
 
-  :is(input,select) ~ span:not(:is(.suffix,.prefix,.invalid-feedback)) {
+  :is(input,select) ~ span:not(:is(.suffix,.prefix,.invalid-feedback)),
+  span:has(> :is(input,select)) ~ span:not(:is(.suffix,.prefix,.invalid-feedback)) {
     all: initial;
     font-family: var(--font-body);
     color: var(--colour-body);
@@ -851,7 +889,7 @@ iam-fileupload {
     width: 100%;
   }
 
-  :is(.suffix,.prefix) {
+  :is(.suffix,.prefix):not(.mt-0) {
     margin: rem(8) 0 0 0!important;
   }
 }
@@ -861,7 +899,7 @@ iam-fileupload {
   
   margin-bottom: 1.5rem;
 
-  &:has(:invalid):after {
+  &:has(:is(:invalid,.is-invalid)):after {
     content: "This field is required";
     color: var(--colour-danger);
     margin-top: rem(8);
@@ -876,7 +914,7 @@ iam-fileupload {
     line-height: 1.2;
   }
 
-  &[data-error]:has(:invalid):after {
+  &[data-error]:has(:is(:invalid,.is-invalid)):after {
     content: attr(data-error)!important;
   }
 
@@ -885,4 +923,125 @@ iam-fileupload {
   }
 }
 
+// #endregion
+
+// #region input range
+input[type="range"] {
+
+  --track-size: #{rem(8)};
+  --track-colour: var(--colour-light);
+  --thumb-colour: var(--colour-info);
+  --thumb-size: #{rem(24)};
+  width: 100%;
+  background: transparent;
+  cursor: pointer;
+  margin-top: rem(32);
+  margin-bottom: rem(32);
+  height: rem(32);
+  border-radius: 50%;
+  accent-color: var(--thumb-colour);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+*:has(> input[type="range"]) {
+  position: relative;
+  padding-bottom: 6rem;
+  max-width: $input-max-width;
+}
+  
+label input[type=range] {
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+}
+
+
+// Track Styles 
+input[type="range"]::-webkit-slider-runnable-track {
+
+  background: var(--track-colour);
+  height: var(--track-size);
+  border-radius: 0.5rem;
+}
+
+input[type="range"]::-moz-range-track {
+  background: var(--track-colour);
+  height: var(--track-size);
+  border-radius: 0.5rem;
+}
+
+// Thumb Styles
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  margin-top: rem(-8); /* Centers thumb on the track */
+  background-color: var(--thumb-colour);
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  border-radius: 50%;
+  position: relative;
+  z-index: 99;
+  pointer-events: all;
+}
+
+input[type="range"]::-moz-range-thumb {
+  border: none; /*Removes extra border that FF applies*/
+  background-color: var(--thumb-colour); /*Removes default border-radius that FF applies*/
+  height: var(--thumb-size);
+  width: var(--thumb-size);
+  border-radius: 50%;
+  position: relative;
+  z-index: 99;
+  pointer-events: all;
+}
+
+// Focus Styles 
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb,
+input[type="range"]:focus::-webkit-slider-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .2);
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .4);
+}
+
+input[type="range"]:hover::-moz-range-thumb,
+input[type="range"]:focus::-moz-range-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .2);
+}
+input[type="range"]:focus::-moz-range-thumb {
+  outline: 0.5rem solid rgba(30, 190, 231, .4);
+}
+
+
+iam-slider input::-webkit-outer-spin-button,
+iam-slider input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+// #endregion
+
+// #region Date and time fields
+:is(input[type="date"],input[type="time"]) {
+  position: relative;
+}
+:is(input[type="date"],input[type="time"])::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 8em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+  order: 3;
+}
 // #endregion

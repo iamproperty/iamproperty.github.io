@@ -106,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
       <p>The event passed through the coniditional property will trigger on the element that matches the target properties selector.</p>
       
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 overflow-auto">
           <table>
             <thead>
               <tr>

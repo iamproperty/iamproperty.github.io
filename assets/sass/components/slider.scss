@@ -1,0 +1,121 @@
+@use "../_func" as *;
+
+.row {
+  align-items: center;
+}
+
+:is(.min, .max) {
+
+  max-width: fit-content;
+  line-height: 2rem;
+}
+
+.sliders {
+  position: relative;
+  padding: 0;
+}
+
+:host {
+  max-width: $input-max-width;
+  display: block;
+}
+
+// Track
+input[type="range"]::-webkit-slider-runnable-track {
+
+  background: linear-gradient(to right, var(--track-colour), var(--track-colour) var(--start-percent, 0%), var(--thumb-colour) var(--start-percent, 0%), var(--thumb-colour) var(--percent, 0%), var(--track-colour) var(--percent, 0%));
+}
+
+input[type="range"]::-moz-range-track {
+  
+  background: linear-gradient(to right, var(--track-colour), var(--track-colour) var(--start-percent, 0%), var(--thumb-colour) var(--start-percent, 0%), var(--thumb-colour) var(--percent, 0%), var(--track-colour) var(--percent, 0%));
+}
+
+
+// Two input fields
+input[type="range"] + input[type="range"] {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+}
+
+input[type="range"] + input[type="range"]::-webkit-slider-runnable-track {
+  
+  background: transparent;
+  pointer-events: none;
+  width: 200%;
+  margin-left: -100%;
+}
+
+@supports (-moz-appearance:none) {
+  input[type="range"] + input[type="range"] {
+    left: 0;
+    width: 100%;
+
+  
+  pointer-events: none;
+}
+
+} 
+
+input[type="range"] + input[type="range"]::-moz-range-track {
+  background: transparent;
+  pointer-events: none;
+}
+
+
+.input__wrapper {
+  display: flex;
+  
+  justify-content: flex-end;
+  --max-width: #{rem(100)};
+  --padding-top: 0.75rem;
+
+
+  > span {
+    display: none;
+  }
+
+  &[data-elements="2"]{
+
+    justify-content: space-between;
+    --max-width: calc(50% - #{rem(48)});
+    --padding-top: 2rem;
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      width: rem(64);
+      height: 2px;
+      top: calc(50% - 1px);
+      left: calc(50% - #{rem(32)});
+      background-color: var(--colour-border);
+    }
+
+    span {
+      display: block;
+      position: absolute;
+      top: 0.5rem;
+      left: 1rem;
+      color: #9D9D9D;
+      font-size: 1rem;
+    }
+
+    span + span {
+      left: calc(50% + #{rem(64)});
+    }
+  
+  }
+}
+
+::slotted(input){
+  margin-top: 0!important;
+  padding-top: var(--padding-top)!important;
+  max-width: var(--max-width)!important;
+  -webkit-appearance: none!important;
+  appearance: none!important;
+  min-height: auto!important;
+  max-height: none!important;
+}

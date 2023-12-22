@@ -76,7 +76,7 @@ const rollupConfig = [
   }
 ];
 
-const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup','fileupload'];
+const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup','fileupload','search'];
 
 components.forEach((component) => {
 
@@ -95,9 +95,9 @@ components.forEach((component) => {
   }
 
   try {
-    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.extras.css`))) {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.global.css`))) {
       
-      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.extras.css`), 'utf8');
+      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.global.css`), 'utf8');
       extraCSS = extraCSS.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       extraCSS = extraCSS.replace("\uFEFF","");
     }

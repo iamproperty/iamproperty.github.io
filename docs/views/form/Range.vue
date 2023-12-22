@@ -1,30 +1,47 @@
 <template>
   <main>
+    
+    <DSHeader :image="headerImg" section="components">
+      <h1>Form range fields</h1>
+    </DSHeader>
+
+
     <div class="container">
-      <ul class="breadcrumb mb-0">
-        <li><a href="/components/form">Form components</a></li>
-      </ul>
-      <h1>Form range input field</h1>
-      <p>The range input is a simple input field with 'range' given as its type. There is only a tiny bit of JavaScript being used to display the value of the range within an output field.</p>
+      <p class="lead">Form range fields allow users to make selections from a range of values.</p>
     </div>
     <div class="container visualtest">
-      <Input id="test1" type="range" label="Label" min="0" max="50" value="15" step="5"></Input>
+      <label>Input field label <input type="range" min="0" max="100" value="15" step="5" /></label>
     </div>
+
+    <div class="container">
+
+      <h2>Slider component</h2>
+      <p>The basic styles and behaviour of the range field can be upgraded by using the design system slider component. </p>
+      <a href="/components/slider" class="btn btn-primary">Slider component</a>
+    </div>
+    
   </main>
 </template>
 
 
 <script>
+
+import DSHeader from '../DSHeader.vue';
+import headerImg from '../../img/type-header.png';
 import Input from '@/components/Input/Input.vue'
 import Readme from '@/components/Input/README.md'
+import Slider from '@/components/Slider/Slider.vue'
 
 export default {
   components: {
+    DSHeader,
     Input,
-    Readme
+    Readme,
+    Slider
   },
   data () {
     return {
+      headerImg: headerImg,
       message:'input field value',
       htmlUsage: `...`,
     }

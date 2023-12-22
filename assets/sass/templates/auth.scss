@@ -1,0 +1,112 @@
+@use "../_func" as *;
+
+
+body:has(.template--auth) {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: var(--colour-canvas-2);
+}
+
+.template--auth {
+  --padding-top: #{rem(24)};
+  --brand-size: #{rem(36)};
+
+  @include media-breakpoint-up(md) {
+    --padding-top: #{rem(40)};
+    --brand-size: #{rem(64)};
+  }
+
+
+  display: flex;
+  flex-wrap: wrap;
+  max-width: rem(1280);
+  margin-inline: auto;
+
+
+  main {
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: var(--padding-top);
+    padding-bottom: var(--padding-top);
+    padding-inline: var(--container-padding-x);
+
+    @include media-breakpoint-up(md) {
+      flex: 0 0 auto;
+      width: 43.75%;
+      padding-inline-end: calc(var(--container-padding-x) - rem(16));
+    }
+
+    .brand {
+      font-size: var(--brand-size);
+      padding-top: 0;
+    }
+  }
+
+
+  aside {
+
+    display: none;
+
+    @include media-breakpoint-up(md) {
+      display: block;
+      flex: 0 0 auto;
+      width: 56.25%;
+      padding-inline: var(--container-padding-x) !important;
+      padding-block: var(--padding-top);
+      position: relative;
+      overflow: hidden;
+    }
+
+    background-color: var(--colour-primary-theme);
+
+    @include light-mode(){
+    
+      background-color: #e9f9fd;
+    }
+
+
+    > figure {
+      position: relative;
+      display: block;
+      margin-top: calc(var(--padding-top) * -1);
+      margin-inline: calc(var(--container-padding-x-md) * -1);
+      min-width: calc(100% + var(--container-padding-x-md) + var(--container-padding-x-md));
+      margin-bottom: rem(40);
+      max-height: rem(400);
+      clip-path: ellipse(70% 80% at 50% 20%);
+      rotate: -5deg;
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        
+        right: -2rem;
+        left: -2rem;
+        bottom: -1rem;
+        height: 50%;
+        
+        rotate: -5deg;
+        background: linear-gradient(0deg, rgba(0,49,60,1) 0%, rgba(28,182,226,0.45) 40%, rgba(28,182,226,0) 100%);
+        opacity: 0.9;
+      }
+    }
+
+    img {
+      
+      margin-inline: rem(-24);
+      min-width: calc(100% + rem(24) + rem(24));
+      margin-top: rem(-12);
+      max-height: rem(424);
+      object-fit: cover;
+      object-position: 50% 50%;
+      rotate: 5deg;
+    }
+  }
+
+}
+

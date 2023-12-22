@@ -178,7 +178,7 @@ dialog::backdrop {
 // #endregion
 
 // #region Transactional 
-*:not(.dialog__wrapper) > dialog[open]:not(.dialog--multi):is(:has(button:last-child),:has(form:last-child > button:last-child)) {
+*:not(.dialog__wrapper) > dialog[open]:not(.dialog--multi):is(:has(:is(button,a):last-child),:has(form:last-child > :is(button,a):last-child)):not(:has(.youtube-embed)) {
 
   text-align: center;
 
@@ -252,14 +252,14 @@ dialog::backdrop {
     }
   }
 
-  button {
+  form > :is(button,a) {
     margin-bottom: 0;
   }
 
   @include media-breakpoint-up(sm) {
 
-    button:has( + button:last-child),
-    button:last-child {
+    :is(button, .btn):has(~ :is(button, .btn):last-child),
+    :is(button, .btn):last-child {
       min-width: calc(50% - 1rem);
       text-align: center;
     }

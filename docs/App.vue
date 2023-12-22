@@ -10,7 +10,7 @@ const version = pkg.version;
   <div id="visualtest"></div>
 
   <nav>
-  <Nav logo="key" logotext="Design system<br/>&amp; framework" data-search="/search" data-list="searchterms">
+  <Nav logo="key" logotext="Design system<br/>&amp; framework">
 
     <a href="/" class="brand brand--key" slot="logo">
 
@@ -25,9 +25,24 @@ const version = pkg.version;
     <router-link to="/templates">Templates</router-link>
     <router-link to="/best-practice">Best practice</router-link>
 
-    <datalist id="searchterms" ref="list">
-      <option v-for="item in refinedResults" :value="item"></option>
-    </datalist>
+    <form novalidate method="GET" slot="search" id="searchform" action="/search">
+        <Search>
+        
+          <label class="mb-0"><span class="visually-hidden">Search pages</span>
+            <span>
+              <input type="text" name="search" autocomplete="off" aria-autocomplete="none" list="searchterms" placeholder="Search pages..." class="mt-0" data-change-events='[
+                {"in-list":"#searchterms", "target":"#searchform", "if": "submitForm"}
+                ]'/>
+              
+              <button class="suffix mt-0 me-0 mb-0"><i class="fa-regular fa-search"></i></button>
+            </span>
+          </label>
+          <datalist id="searchterms" ref="list">
+            <option v-for="item in refinedResults" :value="item" :data-value="item"></option>
+          </datalist>
+        </Search>
+        
+      </form>
 
   </Nav>
   </nav>
@@ -119,11 +134,18 @@ footer .router-link-active {
 #app {
 
   display: contents;
-  > div {
+  > div:not(.container) {
     display: contents;
   }
 }
 
+.markdown-body {
+  overflow: auto;
+}
+
+.demo {
+  grid-column: container;
+}
 
 
 </style>
@@ -131,7 +153,10 @@ footer .router-link-active {
 
 <script>
 import Card from '@/components/Card/Card.vue'
+import Search from '@/components/Search/Search.vue'
 import routes from './routes.ts';
+
+
 
 var urlParams = new URLSearchParams(window.location.search);
 let results = [];
@@ -184,7 +209,8 @@ const refinedResults = [...new Set(results)];
 
 export default {
   components: {
-    Card
+    Card,
+    Search
   },
   methods: {
 
@@ -215,6 +241,7 @@ export default {
         }
       }, 1000);
     }
+
   },
   data () {
     return {

@@ -34,7 +34,7 @@ class iamAddressLookup extends HTMLElement {
         <div>
         <label class="mb-2">Search <span class="title text-lowercase"></span> <span class="optional">(Optional)</span>
           <span>
-          <input type="text" name="postcode" list="address-lookup__addressess" autoComplete="new-password" aria-autocomplete="none" placeholder="Postcode" />
+          <input type="text" name="postcode" list="address-lookup__addressess" autocomplete="off" aria-autocomplete="none" placeholder="Postcode" />
           <span class="suffix fa-regular fa-search"></span>
           </span>
           <span class="invalid-feedback">Required Adddress fields missing</span>
@@ -51,7 +51,7 @@ class iamAddressLookup extends HTMLElement {
       </div>
       <div class="pre-filled pb-2 js-hide">
         <strong class="title text-primary d-block"></strong>
-        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button></p>
+        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button><slot name="prefilled"></slot></p>
       </div>
     </div>
     `;
@@ -84,15 +84,15 @@ class iamAddressLookup extends HTMLElement {
       preFilledAddress.innerHTML = "";
 
       Array.from(component.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')).forEach((input, index) => {
+        const value = input.value;
 
-        if(!input.value)
+        if(!value)
           preFilled = false;
         else
-          preFilledAddress.innerHTML += ', '+input.value;
-        
+          preFilledAddress.innerHTML += value+(/^-?\d+$/.test(value) ? ' ' : ', ');
       });
 
-      preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(1);
+      preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(0, -2);
 
       if(preFilled){
         preFilledWrapper.classList.remove('js-hide');
@@ -251,9 +251,28 @@ class iamAddressLookup extends HTMLElement {
           let listString = '';
           response.forEach((address, index) => {
 
-            
-            let values = JSON.stringify(address.value);
-            listString += `<option value="${address['label']}, ${postcode}" data-values='${values}'></option>`;
+            // Deal with agent platform response
+            if(typeof address.value == "object"){
+              let values = JSON.stringify(address.value);
+              listString += `<option value="${address['label']}, ${postcode}" data-values='${values}'></option>`;
+            }
+            else {
+              let values = JSON.stringify(address);
+
+              let itemString = '';
+
+              for (const [key, value] of Object.entries(address)) {
+
+                if(key == "address_number_name")
+                  itemString += `${value} `;
+                else if(key != "postcode" && key != "address_title")
+                  itemString += `${value}${(/^-?\d+$/.test(value)?'':',')} `;
+              }
+              
+              listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
+            }
+
+
           });
           list.innerHTML = listString;
 

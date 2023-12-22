@@ -28,10 +28,8 @@ a:has(iam-card) {
   display: block;
 }
 
-@import "../components/card-global.scss";
-@import "../components/nav-global.scss";
 
-:is(iam-card,iam-nav, iam-table) {
+:is(iam-card,iam-nav, iam-table, .iamkey) {
   @import "../_utilities.scss";
 }
 

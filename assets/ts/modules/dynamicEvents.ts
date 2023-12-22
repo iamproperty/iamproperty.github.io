@@ -77,43 +77,63 @@ const runEvent = (element,event,eventType) => {
   switch (event[eventType]){
     case "hide":
 
-      let hideElement =  document.querySelector(event['target'])
-      hideElement.classList.add('js-hide');
+      if(document.querySelector(event['target'])){
+          
+        let hideElement =  document.querySelector(event['target']);
+        hideElement.classList.add('js-hide');
 
-      Array.from(hideElement.querySelectorAll('[data-required]')).forEach((input, index) => {
-        
-          input.removeAttribute('required');
-      });
+        Array.from(hideElement.querySelectorAll('[data-required]')).forEach((input, index) => {
+          
+            input.removeAttribute('required');
+        });
+      }
       break;
     case "show":
 
-      let showElement =  document.querySelector(event['target'])
-      showElement.classList.remove('js-hide');
+      if(document.querySelector(event['target'])){
+            
+        let showElement =  document.querySelector(event['target']);
+        showElement.classList.remove('js-hide');
 
-      Array.from(showElement.querySelectorAll('[data-required]')).forEach((input, index) => {
-        
-        if(!input.closest('.js-hide'))
-          input.setAttribute('required','true');
+        Array.from(showElement.querySelectorAll('[data-required]')).forEach((input, index) => {
+          
+          if(!input.closest('.js-hide'))
+            input.setAttribute('required','true');
+        });
+      }
+      break;
+    case "populate-form":
+      populateForm(element,event);
+      break;
+    case "dispatchEvent":
+      let theEvent = new Event(event['value']);
+      document.querySelector(`${event['target']}`).dispatchEvent(theEvent);
+      break;
+    case "setAttribute":
+
+      Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
+        element.setAttribute(event['attribute'],event['value']);
       });
       break;
-      case "populate-form":
-        populateForm(element,event);
-        break;
-      case "dispatchEvent":
-        let theEvent = new Event(event['value']);
-        document.querySelector(`${event['target']}`).dispatchEvent(theEvent);
-        break;
-    case "setAttribute":
-      document.querySelector(`${event['target']}`).setAttribute(event['attribute'],event['value']);
-      break;
     case "removeAttribute":
-      document.querySelector(`${event['target']}`).removeAttribute(event['attribute']);
+      Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
+        element.removeAttribute(event['attribute']);
+      });
       break;
     case "updateValue":
       document.querySelector(`${event['target']}`).value = event['value'] ? event['value'] : "";
       
       let changeEvent = new Event('change');
       document.querySelector(`${event['target']}`).dispatchEvent(changeEvent);
+      break;
+    case "submitForm":
+      document.querySelector(`${event['target']}`).submit();
+      break;
+    case "openLink":
+
+      if(document.querySelector(`${event['target']}`).value)
+        window.location.href = document.querySelector(`${event['target']}`).value;
+
       break;
     default:
       break;

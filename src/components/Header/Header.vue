@@ -1,6 +1,6 @@
 <template>
   <!-- Custom element -->
-  <iam-header class="bg-secondary" :image="image">
+  <iam-header :image="image">
     <slot name="breadcrumb"></slot>
     <h1 v-if="title" v-html="title"></h1>
     <slot></slot>
@@ -9,8 +9,6 @@
 
 <script>
 // Load web components
-import iamHeader from '../../../assets/js/components/header/header.component.min.js'
-
 
 export default {
   name: 'Header',
@@ -25,11 +23,17 @@ export default {
     }
   },
   mounted(){
-    this.$nextTick(function () {
 
-      // Register components
-      if (!window.customElements.get('iam-header'))
-        window.customElements.define('iam-header', iamHeader);
+    this.$nextTick(function () {
+      
+      import(`../../../assets/js/components/header/header.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+
+        if (!window.customElements.get(`iam-header`))
+          window.customElements.define(`iam-header`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
     })
   }
 }

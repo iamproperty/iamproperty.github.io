@@ -1,26 +1,5 @@
 @use "../_func.scss" as *;
 
-// #region card with a flag 
-iam-card.card--flag {
-  position: relative;
-  
-  &:after {
-    content: "\f024";
-    font-family: "Font Awesome 6 Pro";
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: rem(16);
-    line-height: 1;
-    height: rem(16);
-    width: rem(16);
-    display: inline-block;
-    font-weight: normal;
-    color: var(--colour, var(--colour-primary));
-  }
-}
-// #endregion
-
 // #region cards with an added checkbox for actionbars
 
 iam-card {
@@ -38,8 +17,8 @@ iam-card {
     > input:is([type=radio], [type=checkbox]) + label {
         
       position: absolute!important;
-      top: 0;
-      right: 0;
+      top: 0.5rem;
+      right: 0.5rem;
       width: rem(32);
       padding-left: rem(32);
       margin: rem(4) rem(8)!important;

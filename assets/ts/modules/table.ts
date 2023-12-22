@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { zeroPad, isNumeric, ucfirst } from "./helpers";
+import { zeroPad, isNumeric, ucfirst, resolvePath } from "./helpers";
 
 // Basic functionality needed
 export const addDataAttributes = (table) => {
@@ -61,20 +61,20 @@ export const getLargestLastColWidth = (table) => {
 
 export const createMobileButton = (table, wrapper) => {
 
-
-  if(wrapper.classList.contains('.table--fullwidth') && !wrapper.hasAttribute('data-expandable'))
+  if(wrapper.classList.contains('table--fullwidth') && !wrapper.hasAttribute('data-expandable'))
     return false;
 
   if(table.querySelectorAll('thead tr th').length < 4 && !wrapper.hasAttribute('data-expandable'))
     return false;
 
-
+  //If the expand column already exists we don't need to add a new one.
   Array.from(table.querySelectorAll('thead tr')).forEach((row,index) => {
-        
-    row.insertAdjacentHTML(
-      'afterbegin',
-      `<th class="th--fixed expand-button-heading"></th>`
-    );
+    if(!table.querySelectorAll('thead tr th.expand-button-heading').length){
+      row.insertAdjacentHTML(
+        'afterbegin',
+        `<th class="th--fixed expand-button-heading"></th>`
+      );    
+    }
   });
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row,index) => {
@@ -690,7 +690,7 @@ export const populateDataQueries = (table,form,wrapper) => {
   dataQueries.forEach((queryElement, index) => {
 
     let query = queryElement.getAttribute('data-query');
-    let numberOfMatchedRows: 0;
+    let numberOfMatchedRows = 0;
 
     if(query == 'total'){
       if(wrapper.hasAttribute('data-total'))
@@ -903,11 +903,9 @@ const filterFilters = function(form){
 
 export const loadAjaxTable = async function (table, form, pagination, wrapper){
 
-  const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
-
   let formData = new FormData(form);
   let queryString = new URLSearchParams(formData).toString();
-  let columns = table.querySelectorAll('thead tr th');
+  let columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');
   let tbody = table.querySelector('tbody');
   let ajaxURL = form.getAttribute('data-ajax');
 
@@ -985,7 +983,6 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper){
           var table_row = document.createElement('tr');
 
           columns.forEach((col, index) => {
-
             let cellOutput = '';
             var table_cell  = document.createElement('td');
             // Add some data to help with the mobile layout design

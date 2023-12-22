@@ -22,6 +22,7 @@ class iamCard extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/card.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/card.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -31,8 +32,9 @@ class iamCard extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="card ${classList}" tabindex="0" role="button">
-      ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /></div>` : ''}
+      ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
       <div class="card__body">
+      ${!this.hasAttribute('data-image') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
       ${this.classList.contains('card--filter') && this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
       ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
         <slot></slot>
@@ -43,6 +45,10 @@ class iamCard extends HTMLElement {
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+    
+    // insert extra CSS
+    if(!document.getElementById('cardGlobal'))
+      document.head.insertAdjacentHTML('beforeend',`<style id="cardGlobal">${loadExtraCSS}</style>`);
   }
 
 	connectedCallback() {

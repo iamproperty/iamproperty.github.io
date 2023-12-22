@@ -15,6 +15,7 @@ iam-actionbar {
   border-top-left-radius: rem(10);
   border-top-right-radius: rem(10);
 
+  --actionbar-radius: 0;
 }
 // #endregion
 
@@ -129,7 +130,7 @@ iam-actionbar[data-view="small"] ~ [data-view="small"] {
 // #endregion 
 
 // #region Child elements
-
+iam-actionbar {
 .actionbar__text {
 
   font-size: rem(18);
@@ -156,5 +157,6 @@ button[slot="selected-overflow"] {
 .dialog__wrapper[slot="overflow"] dialog[open] {
 
   display: contents;
+}
 }
 // #endregion
