@@ -384,6 +384,7 @@ html #app #visualtest:target ~ main > {
     
     display: flex!important;
     position: relative;
+    grid-column: full-width;
   }
 }
 

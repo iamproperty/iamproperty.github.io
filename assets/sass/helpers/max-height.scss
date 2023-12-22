@@ -1,8 +1,10 @@
 :is(.mh-sm,.mh-md,.mh-lg,.mh-sm-sm,.mh-sm-md,.mh-sm-lg,.mh-md-sm,.mh-md-md,.mh-md-lg){
   
+  &:not(iam-table):not(.table__wrapper){
 
-  padding-inline: var(--mh-padding-inline,0);
-  margin-inline: calc(var(--mh-padding-inline,0) * -1);
+    padding-inline: var(--mh-padding-inline,0);
+    margin-inline: calc(var(--mh-padding-inline,0) * -1);
+  }
 
   &::before {
     top: calc(100% - 1.5rem);

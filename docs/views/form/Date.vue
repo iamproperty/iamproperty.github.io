@@ -19,7 +19,9 @@
           <span><input type="date" data-start="1" data-period="7" data-allowed-days="1,2,3,4,5"/><span class="suffix fa-regular fa-calendar"></span></span>
           <span>Weekdays only</span>
         </label>
-              
+      </form>     
+    </div>
+    <div class="container">
         <h3 class="pt-3">Modifying data-attributes</h3>
         <table class="mb-5">
           <thead>
@@ -49,6 +51,9 @@
 
         </table>
 
+    </div>
+    <div class="container visualtest">
+      <form class="was-validated">
         <h2>Time only</h2>
 
         <label>

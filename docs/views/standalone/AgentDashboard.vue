@@ -5,7 +5,7 @@
     </Nav>
     <main class="main--marketplace">
 
-      <form id="tableFilters">
+      <form id="tableFilters" class="full-width">
 
         <div class="container">
           <div class="row">
@@ -633,11 +633,6 @@
 <style lang="scss" >
 
 
-
-
-form {
-  display: contents;
-}
 @media screen and (max-width: 36em){
 
   .sticky-form {
