@@ -31,15 +31,16 @@ class iamCard extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="card ${classList}" tabindex="0" role="button">
       ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
       <div class="card__body">
       ${!this.hasAttribute('data-image') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
-      ${this.classList.contains('card--filter') && this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
+      ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
       ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
         <slot></slot>
       </div>
-        
+      ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
       <slot name="checkbox"></slot>
       ${this.hasAttribute('data-cta') ? `<div class="card__footer"><span class="link">${this.getAttribute('data-cta')}</span></div>` : ''}
     </div>
@@ -58,6 +59,7 @@ class iamCard extends HTMLElement {
     // Mimic clicking the parent node so the focus and target events can be on the card
     const parentNode = this.parentNode.closest('a, button, label')
     const card = this.shadowRoot.querySelector('.card')
+    const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
 
     parentNode.setAttribute('tabindex','-1');
     
@@ -157,6 +159,19 @@ class iamCard extends HTMLElement {
               break;
       }
     });
+
+    if(btnCompact){
+
+      let addLocation = this.getAttribute('data-add-link');
+
+      btnCompact.addEventListener('click', (event) => {
+
+          event.stopPropagation();
+          event.preventDefault();
+          alert('hi');
+          window.location = addLocation;
+      });
+    }
   }
 
   static get observedAttributes() {

@@ -319,3 +319,91 @@
   }
 }
 // #endregion
+
+
+//#region Dashboard card
+.card--dashboard {
+
+  --card-top-padding: #{rem(16)};
+  --card-bottom-padding: #{rem(24)};
+
+  &:has(.card__total) .card__body{
+
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  &:before,
+  &:after {
+    display: none;
+  }
+
+  &:is(:hover,:focus,.hover) {
+    outline: none;
+      
+    .card__body {
+      background: #EEEEEE;
+    }
+  }
+
+  &:is(:checked, .checked,:active, .active){
+    outline: 2px solid var(--colour,var(--colour-primary));
+    outline-offset: -2px;
+
+    .card__body {
+      background: none;
+    }
+  }
+
+  .card__total {
+    font-size: rem(48);
+    line-height: rem(48);
+    padding-right: rem(16);
+    margin-top: 0.5rem;
+  }
+}
+
+@include dark-mode() {
+  .card--dashboard {
+
+    .card__body {
+      background: none!important;
+    }
+
+    &:is(:hover,:focus,.hover, :active, .active):not(:checked,.checked){ 
+      outline: 2px solid var(--colour, var(--colour-primary))!important;
+      outline-offset: -2px;
+    }
+  }
+}
+
+.card--dashboard .btn-compact {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.5rem 0.5rem 0 0;
+  z-index: 99;
+}
+
+.card--dashboard:has(.btn-compact:is(:hover, :focus, :active)) {
+
+  pointer-events: none;
+  outline: none;
+
+  .card__body {
+    background: none;
+    border-color: transparent!important;
+  }
+
+  .btn-compact {
+    pointer-events: all;
+  }
+}
+
+.card--dashboard ::slotted(i) {
+  display: block !important;
+  font-size: rem(40)!important;
+  margin: 0.5rem 0 0.5rem 0!important;
+  line-height: rem(40);
+}
+// #endregion
