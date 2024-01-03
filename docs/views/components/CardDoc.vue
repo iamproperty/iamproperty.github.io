@@ -102,6 +102,48 @@
     </div>
 
 
+    <div class="container">
+      <h3>Header card with secondary action</h3>
+      <p>This is a variation of the Header card which includes the addition of a secondary action.</p>
+    </div>
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4">
+        
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/">
+            <Card class="card--secondary" data-total="99" data-add-link="/?add=true">Properties</Card>
+          </a>
+        </div>
+
+
+        <div class="col4 pe-none">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <button>
+            <Card class="card--secondary hover" data-total="99" data-add-link="/?add=true">Properties</Card>
+          </button>
+        </div>
+        <div class="col4 pe-none">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <button>
+            <Card class="card--secondary active" data-total="99" data-add-link="/?add=true">Properties</Card>
+          </button>
+        </div>
+
+
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Icon instead of figure</span>
+          <a href="/">
+            <Card class="card--secondary">Key control <i class="fa fa-key"></i></Card>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+
+
 
     <div class="container">
 
