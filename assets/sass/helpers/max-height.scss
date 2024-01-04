@@ -31,15 +31,15 @@
 }
 
 .mh-sm {
-  max-height: calc(#{rem(200)} - var(--mh-modifier,0));
+  max-height: calc(#{rem(200)} - var(--mh-modifier,0rem));
 }
 
 .mh-md {
-  max-height: calc(#{rem(400)} - var(--mh-modifier,0));
+  max-height: calc(#{rem(400)} - var(--mh-modifier,0rem));
 }
 
 .mh-lg {
-  max-height: calc(#{rem(600)} - var(--mh-modifier,0));
+  max-height: calc(#{rem(600)} - var(--mh-modifier,0rem));
 }
 
 
@@ -56,15 +56,15 @@
   }
   
   .mh-sm-sm {
-    max-height: calc(#{rem(200)} - var(--mh-modifier,0));
+    max-height: calc(#{rem(200)} - var(--mh-modifier,0rem));
   }
   
   .mh-sm-md {
-    max-height: calc(#{rem(400)} - var(--mh-modifier,0));
+    max-height: calc(#{rem(400)} - var(--mh-modifier,0rem));
   }
   
   .mh-sm-lg {
-    max-height: calc(#{rem(600)} - var(--mh-modifier,0));
+    max-height: calc(#{rem(600)} - var(--mh-modifier,0rem));
   }
 }
 
@@ -81,14 +81,14 @@
   }
   
   .mh-md-sm {
-    max-height: calc(#{rem(200)} - var(--mh-modifier,0));
+    max-height: calc(#{rem(200)} - var(--mh-modifier,0rem));
   }
   
   .mh-md-md {
-    max-height: calc(#{rem(400)} - var(--mh-modifier,0));
+    max-height: calc(#{rem(400)} - var(--mh-modifier,0rem));
   }
   
   .mh-md-lg {
-    max-height: calc(#{rem(600)} - var(--mh-modifier,0));
+    max-height: calc(#{rem(600)} - var(--mh-modifier,0rem));
   }
 }
