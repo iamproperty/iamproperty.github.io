@@ -15,6 +15,10 @@ import extendInputs from '../assets/ts/modules/inputs';
 
 import createDynamicEvents from '../assets/ts/modules/dynamicEvents'
 
+
+if(import.meta.env.DEV)
+  document.body.setAttribute('data-ext-location','');
+
 createDataLayer();
 createDynamicEvents();
 
