@@ -41,10 +41,8 @@ export default {
   created(){
 
     this.$nextTick(function () {
-      const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
-      const assetExt = document.body.hasAttribute('data-ext-location') ? document.body.getAttribute('data-ext-location') : '.min';
-        
-      import(/* @vite-ignore */`${assetLocation}/js/components/table/table.component${assetExt}.js`).then(module => {
+       
+      import(`../../../assets//js/components/table/table.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-table`))
           window.customElements.define(`iam-table`, module.default);
@@ -53,7 +51,7 @@ export default {
         console.log(err.message);
       });
 
-      import(/* @vite-ignore */`${assetLocation}/js/components/pagination/pagination.component${assetExt}.js`).then(module => {
+      import(`../../../assets/js/components/pagination/pagination.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-pagination`))
           window.customElements.define(`iam-pagination`, module.default);

@@ -10,9 +10,8 @@ export default {
   mounted(){
 
     this.$nextTick(function () {
-      const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
-        
-      import(/* @vite-ignore */`${assetLocation}/js/components/card/card.component.min.js`).then(module => {
+      
+      import(`../../../assets/js/components/card/card.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-card`))
           window.customElements.define(`iam-card`, module.default);
