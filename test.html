@@ -106,7 +106,7 @@
           rootMargin: '50px',
           threshold: 0.1
         }
-        const componentExt = ".component.js";
+        const componentExt = ".component.min.js";
 
         // Load components - Each component will load once the first of its type has been loaded
         components.forEach((component) => {
@@ -179,23 +179,61 @@
 </head>
 <body>
 
-  <iam-nav>
+  <nav>
+    <iam-nav>
+      <a href="/" class="brand brand--property" slot="logo"><svg><title>iam key</title><use xlink:href="/svg/logo.svg#logo-property"></use></svg></a>
 
-    <a href="/" class="brand brand--movebutler" slot="logo">
-      <svg>
-        <title>iamproperty Movebutler</title>
-        <use xlink:href="/svg/logo.svg#logo-movebutler"></use>
-      </svg>
-    </a>
 
-    <a href="/" class="selected">Lorem ipsum</a>
-    <a href="/">Lorem ipsum</a>
-    <a href="/">Lorem ipsum</a>
-    <a href="/">Lorem ipsum</a>
+      <a href="/">Dashboard</a>
+        <a href="/">View all stock</a>
+          <a href="/">Upload a viewing</a>
 
-    <button class="btn btn-primary">Lorem ipsum</button>
 
-  </iam-nav>
+          <a href="/">Mosa leads</a>
+
+          <a href="/">Order marketing</a>
+
+          <!-- <a href="/">AuctionBoost</a>Needed? -->
+
+      <div class="nav--menu" data-title="My account" data-open-title="Martin Critchlow" data-icon="fa-user fa-solid" slot="menus">
+ 
+        <div>
+                <label for="test1">Active branch</label>
+                <select class="form-select" name="test1" id="test1">
+                    <option value="1">Newcastle</option>
+                    <option value="2">Two</option>
+                    <option value="2">Three</option>
+                    <option value="2">Four</option>
+                </select>
+            </div>
+            <hr class="mt-3">
+            
+        <a href="/">Agency settings</a> <!-- Edit Agent Landing Page -->
+        <a href="/">Your rewards</a>
+        <a href="/">The Success Hub</a>
+
+        <a href="/cp/account-overview">Control panel</a>
+        
+        <a href="/">Notifications</a><!-- Need notification number? -->
+
+        <a href="/">Quick start guide & FAQ</a><!--Footer -->
+        <a href="/">Contact us</a> <!-- What link? -->
+        <a href="/">Log out</a>
+
+          
+      </div>
+
+
+
+      <a href="/" slot="secondary" >iamproperty</a>
+      <a href="https://vtopenview.com/MyDay" slot="secondary">CRM</a>
+      <a href="/" slot="secondary">movebutler</a>
+      <a href="/" slot="secondary" class="selected">iamsold</a>
+
+
+    </iam-nav>
+    </nav>
+
 
 
 

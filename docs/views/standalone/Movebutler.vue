@@ -1,124 +1,73 @@
 <template>
   <div>
-    <Nav logo="movebutler" class="nav--marketplace" propertylink="/standalone/marketplace" movebutlerlink="/standalone/movebutler" iamsoldlink="/standalone/agent">
-      
 
-        <span class="h6 text-muted">Services</span>
-
-      <a href="/standalone/marketplace" class="text-decoration-none mb-4 d-flex justify-content-between align-items-center">
-        <Logo id="property" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
-
-      <a href="/standalone/movebutler" class="text-decoration-none mb-4 d-flex justify-content-between align-items-center">
-        <Logo id="movebutler" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
-
-      <a href="/standalone/agent" class="text-decoration-none mb-5 d-flex justify-content-between align-items-center">
-        <Logo id="sold" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
-
-      <span class="h6 text-muted">My Branches</span>
-
-      <form>
-      <Input type="select" id="test1" label="Today, you're at" :options="[{display:'Branch 1',value:'1'},{display:'Branch Two',value:'2'},{display:'Create new branch',value:'new'}]" data-value-if="new" data-redirect="/cp/company/branches/create"></Input>
-      </form>
-
-      <span class="h6 text-muted">Menu</span>
-
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"><i class="icon fs-1 fa-user"></i></span>
-          <span class="col">
-            <span Class="h5 mb-1">Control panel</span>
-            <span class="text-muted small">
-              Manage your iamproperty account, branches, staff, billing and invoices
-            </span>
-          </span>
-        </span>
-      </a>
-      
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"></span>
-          <span class="col">
-            <span Class="h5 mb-1">Quick start guide & FAQ</span>
-            <span class="text-muted small">
-              Download a guide on how to manage your account
-            </span>
-          </span>
-        </span>
-      </a>
-      
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"></span>
-          <span class="col">
-            <span Class="h5 mb-1">Contact us</span>
-            <span class="text-muted small">
-              Get in touch
-            </span>
-          </span>
-        </span>
-      </a>
-
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"><i class="icon fs-1 fa-sign-out"></i></span>
-          <span class="col">
-            <span Class="h5 mb-1">Log out</span>
-            <span class="text-muted small">
-              Martin  Critchlow<br> Watson-Clark
-            </span>
-          </span>
-        </span>
-      </a>
-
-
-      <template v-slot:secondary>
-
-        <ul class="list-unstyled pt-4">
-          <li class="pb-2"><a href="/ic" class="fw-bold">Dashboard</a></li>
-          <li class="pb-2">
-              <span class="nav__title fw-bold">Transactions</span>
-              <ul class="list-unstyled ms-3">
-                <li><a href="/standalone/movebutler" >Properties</a></li>
-                <li><a href="/standalone/agent">Client Onboarding</a></li>
-                <li><a href="/props">Track Conveyancing</a></li>
-              </ul>
-          </li>
-          <li class="pb-2">
-            <span class="nav__title fw-bold">Compliance</span>
-            <ul class="list-unstyled ms-3">
-              <li><a href="http://my.iamproperty.test/ic/land-registry">Order Land Registry Documents</a></li>
-              <li><a href="http://my.iamproperty.test/ic/aml-faqs">Compliance Help Centre</a></li>
-              <li><a href="https://www.ukciu.gov.uk/(taisli55qjh4fx2l0azbvi2r)/Registration/Login.aspx" target="_blank">Report a SAR</a></li>
-              <li><a href="http://my.iamproperty.test/ic/training-library">Training Library</a></li>
-              <li><a href="https://iamproperty-core-assets.s3.eu-west-2.amazonaws.com/AML%20Policy%20Template.docx">Download Template AML Policy</a></li>
-              <li><a href="https://iamproperty-core-assets.s3.eu-west-2.amazonaws.com/movebutler/movebutler+MLO+Guide.pdf">Download Money Laundering Officer Guide</a></li>
-            </ul>
-          </li>
-          <li class="pb-2"><a href="/props" class="fw-bold">Service Marketplace</a></li>
-          <li class="pb-2">
-            <span class="nav__title fw-bold">Conveyancing</span>
-            <ul class="list-unstyled ms-3">
-              <li><a href="http://my.iamproperty.test/ic/land-registry">My Solicitors</a></li>
-              <li><a href="http://my.iamproperty.test/ic/aml-faqs">Compare Solicitors</a></li>
-            </ul>
-          </li>
-          <li class="pb-2">
-            <span class="nav__link fw-bold">Agency Settings</span>
-            <ul class="list-unstyled ms-3">
-              <li><a href="http://my.iamproperty.test/ic/land-registry">Staff Usage</a></li>
-            </ul>
-          </li>
-          <li><a href="/props" class="fw-bold">Contact Us</a></li>
-        </ul>
-
-      </template>
+    <nav>
+    <Nav class="bg-primary nav--md-compressed">
+      <a href="/" class="brand brand--property" slot="logo"><svg><title>iam key</title><use xlink:href="/svg/logo.svg#logo-property"></use></svg></a>
+        <a href="/" slot="secondary" >iamproperty</a>
+        <a href="https://vtopenview.com/MyDay" slot="secondary">CRM</a>
+        <a href="/" slot="secondary" class="selected">movebutler</a>
+        <a href="/" slot="secondary" >iamsold</a>
+        <div class="nav--menu" data-title="My account" data-open-title="Derek" data-icon="fa-user fa-solid" slot="menus">
+            <div>
+                <label for="test1">Active branch</label>
+                <select class="form-select" name="test1" id="test1">
+                    <option value="1">Newcastle</option>
+                    <option value="2">Two</option>
+                    <option value="2">Three</option>
+                    <option value="2">Four</option>
+                </select>
+            </div>
+            <hr class="mt-3">
+            
+            <details>
+        <summary>Actions</summary>
+        <div>
+        <a href="/">View all stock</a>
+          <a href="/">Upload a viewing</a>
+          <a href="/">Mosa leads</a>
+          <a href="/">AuctionBoost</a>
+          <a href="/">The Success Hub</a>
+          <a href="/">Edit Agent Landing Page</a>
+          <a href="/">Order marketing</a>
+        </div>
+      </details>
+            <a href="/cp/account-overview">Control panel</a>
+            <a href="#">Success hub</a>
+            <a href="/" class="mb-4">Your credits</a>
+ 
+            
+        </div>
+ 
+        <a href="/" class="fw-bold">Dashboard</a>
+        <a class="text-nowrap" id="riskAssessmentSideBar" href="/">Client Onboarding</a>
+ 
+        <a class="text-nowrap" id="transactionSideBar" href="/">Property Audit</a>
+ 
+ 
+        <details>
+            <summary>Compliance Support</summary>
+            <div data-title="Compliance Support">                
+                <a href="/">Order Land Registry Documents</a>
+                <a href="https://helpcentre.iamproperty.com" target="_blank">Compliance Help Centre <i class="fa-regular fa-arrow-up-right-from-square text-primary"> </i></a>
+                <a href="https://www.ukciu.gov.uk/(taisli55qjh4fx2l0azbvi2r)/Registration/Login.aspx" target="_blank">Report a SAR <i class="fa-regular fa-arrow-up-right-from-square text-primary"> </i></a>
+            </div>
+        </details>
+        <details>
+            <summary>Conveyancing</summary>
+            <div data-title="Conveyancing">                
+                    <a href="/">Conveyancing Opportunities</a>
+                <a href="/">
+                    My Solicitors
+                </a>
+                <a href="/">
+                    Compare Solicitors
+                </a>
+            </div>
+        </details>
     </Nav>
+    </nav>
+
     <main class="main--marketplace">
       
       <div class="container pt-4">
