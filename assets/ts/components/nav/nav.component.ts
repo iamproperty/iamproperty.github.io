@@ -231,7 +231,7 @@ class iamNav extends HTMLElement {
 
       if (event && event.target instanceof HTMLElement && event.target.closest('summary')){
 
-        if(window.innerWidth > 992){
+        if(window.innerWidth > 992 && !event.target.closest('.nav--menu')){
 
           let summary = event.target.closest('summary');
           let details = summary.closest('details');
