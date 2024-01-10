@@ -76,19 +76,6 @@ nav:has(iam-nav.nav--sticky) {
 }
 // #endregion
 
-// #region before component is loaded
-iam-nav:not(:defined) {
-
-  > *:not([slot="logo"]) {
-    display: none;
-  }
-  
-  &:not(:target) > *:not(.brand) {
-    display: none;
-  }  
-}
-// #endregion
-
 // #region General styles
 iam-nav {
 
