@@ -28,7 +28,9 @@ class iamSearch extends HTMLElement {
     input:not(.is-invalid):not(:invalid) {
       background: none!important;
     }
-
+    .optional-text {
+      display: none;
+    }
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
     <slot></slot>
@@ -83,7 +85,7 @@ class iamSearch extends HTMLElement {
     function checkMatch(){
       
       let match = datalist.querySelector(`option[value="${displayInputField.value}"]`);
-      let subMatch = datalist.querySelector(`option[value*='${displayInputField.value}' i]`);
+      let subMatch = datalist.querySelector(`option[value*="${displayInputField.value}" i]`);
 
       if(match){
         inputField.value = match.getAttribute('data-value');
@@ -145,8 +147,11 @@ class iamSearch extends HTMLElement {
               let actualValue = resolvePath(item, valueSchema, '');
               let displayValue = resolvePath(item, displaySchema, '').replace('\n',', ');
 
+              console.log(displayValue);
+
+
               if(!datalist.querySelector(`option[data-value="${actualValue}"]`))
-                listString += `<option value="${displayValue}" data-value='${actualValue}'></option>`;
+                listString += `<option value="${displayValue}" data-value="${actualValue}"></option>`;
             });
           }
           else if (typeof loopValues == 'object'){

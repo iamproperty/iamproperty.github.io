@@ -607,12 +607,27 @@ dialog::backdrop {
         }
       }
 
+      a {
+
+        padding: #{rem(6)};
+
+        &:not(:hover,:focus,:active){
+          border-color: transparent;
+        }
+        margin: 0;
+
+        &:after {
+          display: none;
+        }
+      }
+
       .btn-action {
         &:not(:hover,:focus,:active){
           border-color: transparent;
         }
         margin: 0;
       }
+
     }
 
     dialog[open] {

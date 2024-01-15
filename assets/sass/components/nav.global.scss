@@ -103,6 +103,7 @@ iam-nav {
     padding: 0;
     text-decoration: none;
     min-width: min(var(--svg-width), 14rem);
+    margin-right: auto;
   }
 
   a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
@@ -582,13 +583,105 @@ iam-nav details {
 
 // #region Dual navbar in desktop
 @include media-breakpoint-up(md) {
-  iam-nav {
+  iam-nav:has([slot="dual"]) {
     .brand:has(~ [slot="dual"]) {
-      margin-right: rem(24);
+      margin-right: rem(24)!important;
     }
 
-    *:not([slot="dual"]):has(+ [slot="dual"]) {
-      margin-right: auto;
+    *:not([slot="dual"]):has(+ [slot="dual"]) + [slot="dual"] {
+      margin-left: auto!important;
+    }
+
+    .btn[slot="dual"] {
+      margin-left: 0;
+    }
+
+    &::part(btn-menu) {
+      margin-left: 1rem!important;
+    }
+  }
+}
+// #endregion
+
+// #region compact menus on mobile
+iam-nav > .dialog__wrapper {
+
+  .dialog--list {
+
+    a {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 64em) {
+
+
+  iam-nav > .dialog__wrapper {
+
+    width: 100%;
+
+    .btn-compact {
+      display: none!important;
+    }
+    .dialog--list {
+      
+      display: contents!important;
+
+      a {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  iam-nav > a + :is(.dialog__wrapper, .btn-compact) {
+    margin-top: 1.5rem;
+  }
+
+  iam-nav > .dialog__wrapper .dialog--list a,
+  iam-nav .btn-compact {
+    --compact-size: 2rem;
+    all: unset;
+    display: block!important;
+    font-size: rem(14)!important;
+    line-height: rem(32)!important;
+    height: rem(32)!important;
+    min-height: rem(32)!important;
+    max-height: rem(32)!important;
+    width: 100%!important;
+    margin: 0!important;
+    cursor: pointer;
+    color: var(--colour-link);
+    font-weight: normal!important;
+
+
+    &:where(:hover,:focus,.selected,[aria-current=page]) {
+      text-decoration: underline;
+      text-underline-offset: 0.3em;
+      text-decoration-thickness: 2px;
+      text-decoration-color: var(--colour-underline);
+    }
+
+
+    &:before {
+      display: inline-block;
+      width: auto;
+      position: static;
+      margin-right: 0.5rem;
+      font-size: 0.875rem !important;
+      text-decoration: none!important;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+
+  iam-nav > .dialog__wrapper,
+  iam-nav .btn-compact {
+
+    &:has(+ *:not(.dialog__wrapper,.btn-compact)){
+      margin-bottom: 1.5rem!important;
     }
   }
 }
