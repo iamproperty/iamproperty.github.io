@@ -21,6 +21,6 @@
   font-size: rem(40);
 }
 
-[class*="fa-"]:not(.fa-regular,.fa-light, .fa-solid ) {
+[class*="fa-"]:not(.fa-regular,.fa-light, .fa-solid, .btn) {
   font-weight: 400;
 }

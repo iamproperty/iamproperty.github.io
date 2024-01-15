@@ -24,7 +24,7 @@
   }
 
   display: inline-block;
-  font-weight: bold!important;
+  font-weight: bold;
   text-align: left;
   text-decoration: none;
   vertical-align: middle;
@@ -274,6 +274,28 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     &:is(.colour-primary,.colour-dark,.colour-danger,.colour-black) {
       color: var(--colour-inverted);
     }
+  }
+
+  &[data-number] {
+    position: relative;
+  }
+  &[data-number]:after {
+    content: attr(data-number);
+    position: absolute;
+    top: 0.5em;
+    z-index: 99;
+    background: var(--colour-danger);
+    height: 1.5em;
+    width: 1.5em;
+    border-radius: 50%;
+    text-indent: 0;
+    left: 50%;
+    font-size: 0.5em;
+    line-height: 1.5em;
+    text-align: center;
+    color: white;
+    letter-spacing: -0.1em;
+    font-family: arial, sans-serif;
   }
 }
 // #endregion

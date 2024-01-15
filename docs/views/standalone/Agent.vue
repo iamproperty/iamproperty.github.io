@@ -8,50 +8,52 @@
 
 
       <a href="/">Dashboard</a>
-        <a href="/">View all stock</a>
-          <a href="/">Upload a viewing</a>
+      <a href="/">View all stock</a>
+      <a href="/">Your rewards</a>
+      <a href="/">Mosa leads</a>
 
+      <div class="dialog__wrapper dialog-overflow show" slot="dual">
+        <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
+        <dialog class="dialog--list">
+                
+          <a href="/"><i class="fa-regular fa-upload"></i>Upload lead</a> 
+          <a href="/"><i class="fa-solid fa-plus"></i>Add viewing</a>
+          <a href="/"><i class="fa-solid fa-plus"></i>Order marketing</a>
+        </dialog>
+      </div>
 
-          <a href="/">Mosa leads</a>
+      <a href="/notifications" class="btn btn-secondary btn-compact fa-bell" data-number="5" title="5 unread notifications" slot="dual">5 unread notifications</a>
 
-          <a href="/">Order marketing</a>
+      <a href="/" slot="secondary" >iamproperty</a>
+      <a href="https://vtopenview.com/MyDay" slot="secondary">CRM</a>
+      <a href="/" slot="secondary">movebutler</a>
+      <a href="/" slot="secondary" class="selected">iamsold</a>
 
-          <!-- <a href="/">AuctionBoost</a>Needed? -->
 
       <div class="nav--menu" data-title="My account" data-open-title="Martin Critchlow" data-icon="fa-user fa-solid" slot="menus">
  
-        <div>
-                <label for="test1">Active branch</label>
-                <select class="form-select" name="test1" id="test1">
-                    <option value="1">Newcastle</option>
-                    <option value="2">Two</option>
-                    <option value="2">Three</option>
-                    <option value="2">Four</option>
-                </select>
-            </div>
-            <hr class="mt-3">
+        <div>  
+          <label for="test1">Active branch</label>
+          <select class="form-select" name="test1" id="test1">
+            <option value="1">Newcastle</option>
+            <option value="2">Two</option>
+            <option value="2">Three</option>
+            <option value="2">Four</option>
+          </select>
+        </div>
+        <hr class="mt-3">
             
-        <a href="/">Agency settings</a> <!-- Edit Agent Landing Page -->
-        <a href="/">Your rewards</a>
-        <a href="/">The Success Hub</a>
-
-        <a href="/cp/account-overview">Control panel</a>
-        
         <a href="/">Notifications</a><!-- Need notification number? -->
 
-        <a href="/">Quick start guide & FAQ</a><!--Footer -->
+        <a href="/">Agency settings</a> <!-- Edit Agent Landing Page -->
+        <a href="/">The Success Hub</a>
+        <a href="/cp/account-overview">Control panel</a>
         <a href="/">Contact us</a> <!-- What link? -->
         <a href="/">Log out</a>
 
           
       </div>
 
-
-
-      <a href="/" slot="secondary" >iamproperty</a>
-      <a href="https://vtopenview.com/MyDay" slot="secondary">CRM</a>
-      <a href="/" slot="secondary">movebutler</a>
-      <a href="/" slot="secondary" class="selected">iamsold</a>
 
 
     </Nav>

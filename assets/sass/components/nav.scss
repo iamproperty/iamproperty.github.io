@@ -7,11 +7,6 @@
   align-items: center!important;
 }
 
-::slotted(.brand) {
-
-  margin-right: auto!important;
-}
-
 .btn-menu {
     
   padding: 0;
@@ -88,7 +83,7 @@
 
     width: fit-content;
     height: auto;
-    margin: 0 0 0 3rem!important;
+    margin: 0 0 0 3rem;
     padding: 0!important;
     text-indent: 0;
     padding-right: 0!important;
@@ -255,7 +250,7 @@
     }
   }
 
-  ::slotted(a:not([slot="logo"])) {
+  ::slotted(a:not([slot="logo"]):not(.btn-compact)) {
     display: block!important;
     line-height: rem(20)!important;
     padding: rem(24) 0!important;
@@ -434,15 +429,19 @@
     margin-right: 0!important;
   }
 
-  ::slotted(a:not([slot="logo"])) {
+  ::slotted(a:not([slot="logo"]):not(.btn-compact)) {
 
-    margin-left: rem(32)!important;
     font-size: rem(16)!important;
     font-weight: normal!important;
 
     &:after {
       display: none;
     }
+  }
+
+  ::slotted(a:not([slot="logo"]):not([slot="dual"])) {
+
+    margin-left: rem(32)!important;
   }
 
   ::slotted(button) {
@@ -649,7 +648,7 @@
 }
 // #endregion
 
-// region compressed nav
+// #region compressed nav
 @include media-breakpoint-up(md) {
   :host(.nav--md-compressed) .buttons-holder button {
     margin-left: 1.5rem!important;
