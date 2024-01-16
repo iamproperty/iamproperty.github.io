@@ -188,3 +188,7 @@ main > :is(.full-width, .container, iam-header) {
 main > :is(.full-width, [class*="bg-"]) {
   grid-column: full-width;
 }
+
+.row > .col {
+  min-height: var(--min-height,0);
+}
