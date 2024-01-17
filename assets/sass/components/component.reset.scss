@@ -1,4 +1,8 @@
-@use "../_func.scss" as *;
+$darkModeLocal: 'false'!default;
+
+@use "../_func.scss" as * with (
+  $darkMode: $darkModeLocal
+);
 
 @use "../foundations/root.scss" with (
   $root: ":is(iam-card,iam-nav,iam-table,.iamkey)" // copied directory from iamkey repo
