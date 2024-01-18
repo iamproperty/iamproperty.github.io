@@ -178,7 +178,7 @@ dialog::backdrop {
 // #endregion
 
 // #region Transactional 
-*:not(.dialog__wrapper) > dialog[open]:not(.dialog--multi):is(:has(:is(button,a):last-child),:has(form:last-child > :is(button,a):last-child)):not(:has(.youtube-embed)) {
+*:not(.dialog__wrapper) > dialog[open]:is(.dialog--transactional, .dialog--acknowledgement) {
 
   text-align: center;
 
