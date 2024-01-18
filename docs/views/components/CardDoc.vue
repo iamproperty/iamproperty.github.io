@@ -63,6 +63,71 @@
           </a>          
         </div>
       </div>
+
+
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-5 mb-5" style="--min-height: 9rem;">
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+      </div>
+
+
+
+
     </div>
     <div class="container">
 

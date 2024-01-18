@@ -130,6 +130,28 @@
     padding-right: rem(16);
     margin-top: 0.5rem;
   }
+
+  &.card--has-icon:not(.card--secondary):not(.card--filter) { 
+    display: flex;
+    align-items: center;
+
+    &:before,
+    &:after {
+      top: calc(50% - 0.75rem);
+      bottom: auto;
+    }
+  }
+
+  &.card--has-icon:not(.card--secondary):not(.card--filter) .card__body {
+    padding-left: 4rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    inset: 0;
+    align-items: flex-start;
+    justify-content: center;
+  }
 }
 
 ::slotted(i){

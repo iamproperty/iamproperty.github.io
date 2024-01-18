@@ -44,6 +44,9 @@
     max-width: calc(23.4375rem - var(--scrollbar-width));
     transition: none;
   }
+  .menu.closed * {
+    display: block !important;
+  }
 }
 
 @include media-breakpoint-up(md) {

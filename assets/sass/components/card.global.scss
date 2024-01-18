@@ -26,6 +26,12 @@ iam-card {
       overflow: hidden;
     }
   }
+
+  &.card--has-icon:not(.card--filter):not(.card--secondary) i {
+    position: absolute;
+    top: calc(50% - 0.5rem - 2px);
+    left: 1rem;
+  }
 }
 
 

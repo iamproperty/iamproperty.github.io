@@ -28,7 +28,7 @@ class iamNav extends HTMLElement {
     <div class="container">
       <slot name="logo"></slot>
       <div class="buttons-holder"></div>
-      <button class="btn-menu">Menu<i class="fa-regular fa-bars"></i><i class="fa-regular fa-xmark-large"></i></button>
+      <button class="btn-menu" part="btn-menu">Menu<i class="fa-regular fa-bars"></i><i class="fa-regular fa-xmark-large"></i></button>
 
       <div class="menu__outer">
         <div class="menu closed">
@@ -91,6 +91,7 @@ class iamNav extends HTMLElement {
         const button = document.createElement('button');
         button.setAttribute('slot',title);
         button.classList.add('btn-menu');
+        button.setAttribute('part','btn-menu');
         button.innerHTML = `<span class="btn btn-primary"><span>${title}</span><i class="${iconClass}"></i><i class="fa-regular fa-xmark-large"></i></span>`;
         buttonsHolder.insertAdjacentElement('beforeend',button);
 
@@ -231,7 +232,7 @@ class iamNav extends HTMLElement {
 
       if (event && event.target instanceof HTMLElement && event.target.closest('summary')){
 
-        if(window.innerWidth > 992){
+        if(window.innerWidth > 992 && !event.target.closest('.nav--menu')){
 
           let summary = event.target.closest('summary');
           let details = summary.closest('details');
