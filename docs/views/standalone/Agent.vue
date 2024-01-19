@@ -24,11 +24,10 @@
 
       <a href="/notifications" class="btn btn-secondary btn-compact fa-bell" data-number="5" title="5 unread notifications" slot="dual">5 unread notifications</a>
 
-      <a href="/" slot="secondary" >iamproperty</a>
-      <a href="https://vtopenview.com/MyDay" slot="secondary">CRM</a>
-      <a href="/" slot="secondary">movebutler</a>
-      <a href="/" slot="secondary" class="selected">iamsold</a>
-
+      <a href="/standalone/iamproperty" slot="secondary">iamproperty</a>
+      <a href="/standalone/openview" slot="secondary">CRM</a>
+      <a href="/standalone/movebutler" slot="secondary">movebutler</a>
+      <a href="/standalone/agent" slot="secondary" class="selected">iamsold</a> 
 
       <div class="nav--menu" data-title="My account" data-open-title="Martin Critchlow" data-icon="fa-user fa-solid" slot="menus">
  

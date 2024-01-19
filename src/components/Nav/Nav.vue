@@ -15,7 +15,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/nav/nav.component.min.js`).then(module => {
+      import(`../../../assets/js/components/nav/nav.component.js`).then(module => {
 
         if (!window.customElements.get(`iam-nav`))
           window.customElements.define(`iam-nav`, module.default);

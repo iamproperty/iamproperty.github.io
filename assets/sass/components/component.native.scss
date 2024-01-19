@@ -1,42 +1,6 @@
 @use 'sass:math';
 @use "../_func" as *;
 
-iam-nav {
-  display: block;
-  padding: var(--container-padding);
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  max-width: 80rem;
-  margin-inline: auto;
-  
-  .brand {
-    font-size: rem(48);
-    height: rem(48);
-    padding: 0;
-    text-decoration: none;
-    min-width: min(var(--svg-width), 14rem);
-  }
-}
-
-@media (scripting: enabled) {
-
-  iam-nav:not(:defined) {
-
-    > *:not([slot="logo"]) {
-      display: none;
-    }
-    
-    &:not(:target) > *:not(.brand) {
-      display: none;
-    }
-
-    @include media-breakpoint-up(md) {
-      &:has([slot="secondary"]){
-        padding-top: rem(64);
-      }
-    }
-  }
-}
 
 
 // #region Undefined web components

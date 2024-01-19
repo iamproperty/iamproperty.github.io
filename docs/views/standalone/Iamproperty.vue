@@ -23,10 +23,10 @@
         <a href="/" class="mb-4">Your credits</a>
     </div>
 
-      <a href="/" slot="secondary" class="selected">iamproperty</a>
-      <a href="/" slot="secondary">CRM</a>
-      <a href="/" slot="secondary">movebutler</a>
-      <a href="/" slot="secondary">iamsold</a>
+      <a href="/standalone/iamproperty" slot="secondary" class="selected">iamproperty</a>
+      <a href="/standalone/openview" slot="secondary">CRM</a>
+      <a href="/standalone/movebutler" slot="secondary">movebutler</a>
+      <a href="/standalone/agent" slot="secondary">iamsold</a>
               
       </Nav>
     </nav>

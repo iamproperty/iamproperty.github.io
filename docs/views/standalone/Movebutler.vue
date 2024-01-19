@@ -2,12 +2,14 @@
   <div>
 
     <nav>
-    <Nav class="bg-primary nav--md-compressed">
+    <Nav class="nav--md-compressed">
       <a href="/" class="brand brand--property" slot="logo"><svg><title>iam key</title><use xlink:href="/svg/logo.svg#logo-property"></use></svg></a>
-        <a href="/" slot="secondary" >iamproperty</a>
-        <a href="https://vtopenview.com/MyDay" slot="secondary">CRM</a>
-        <a href="/" slot="secondary" class="selected">movebutler</a>
-        <a href="/" slot="secondary" >iamsold</a>
+
+        <a href="/standalone/iamproperty" slot="secondary">iamproperty</a>
+        <a href="/standalone/openview" slot="secondary">CRM</a>
+        <a href="/standalone/movebutler" slot="secondary" class="selected">movebutler</a>
+        <a href="/standalone/agent" slot="secondary">iamsold</a>           
+
         <div class="nav--menu" data-title="My account" data-open-title="Derek" data-icon="fa-user fa-solid" slot="menus">
             <div>
                 <label for="test1">Active branch</label>
