@@ -174,26 +174,27 @@
       <a href="/standalone/movebutler" slot="secondary">movebutler</a>
       <a href="/standalone/agent" slot="secondary">iamsold</a>
       
-      <div class="nav--menu" data-title="My account" data-open-title="Martin Critchlow" data-icon="fa-user fa-solid" slot="menus">
- 
-      <div>  
-        <label for="test1">Active branch</label>
-        <select class="form-select" name="test1" id="test1">
-          <option value="1">Newcastle</option>
-          <option value="2">Two</option>
-          <option value="2">Three</option>
-          <option value="2">Four</option>
-        </select>
-      </div>
-      <hr class="mt-3">
-          
-      <a href="/">Agency settings</a> <!-- Edit Agent Landing Page -->
-      <a href="/">The Success Hub</a>
-      <a href="/cp/account-overview">Control panel</a>
-      <a href="/">Contact us</a> <!-- What link? -->
-      <a href="/">Log out</a>
+      <div class="nav--menu" data-title="My account" data-open-title="John Smith" data-icon="fa-user fa-solid" slot="menus">
+  
+            
+        <a href="/">Active branches</a> <!-- Edit Agent Landing Page -->
+        <a href="/" class="mb-0">Account settings</a>
 
-        
+        <details>
+          <summary>Control centre</summary>
+          <div data-title="Control centre">
+            <a href="/">Dashboard</a>
+            <a href="/">Users</a>
+            <a href="/">Configuration</a>
+            <a href="/">Branches</a>
+            <a href="/">Companies</a>
+            <a href="/">Modules</a>
+            <a href="/">Property Management Settings</a>
+            <a href="/">Terms And Conditions</a>
+          </div>
+        </details>
+        <a href="/cp/account-overview">Help centre</a>
+        <a href="/">Log out</a>
       </div>
 
     </Nav>
