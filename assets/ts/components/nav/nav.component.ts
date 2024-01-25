@@ -76,8 +76,10 @@ class iamNav extends HTMLElement {
 
       switch(tagname){
         case "BUTTON":
-          element.setAttribute('slot','actions');
-          menu.classList.add('has-actions')
+          if(!element.hasAttribute('slot')){
+            element.setAttribute('slot','actions');
+            menu.classList.add('has-actions')
+          }
           break;
       }
 

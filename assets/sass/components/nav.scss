@@ -342,12 +342,14 @@
 @include media-breakpoint-up(md) {
 
   :host {
-    max-width: 100%!important;
-    padding: 0!important;
+    //max-width: 100%!important;
+    padding-block: 0!important;
   }
 
   :host > .container {
     padding-block: rem(24)!important;
+    padding-inline: 0!important;
+    max-width: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -444,7 +446,7 @@
     margin-left: rem(32)!important;
   }
 
-  ::slotted(button) {
+  ::slotted(.btn-primary) {
 
     margin-left: rem(48)!important;
   }
@@ -547,6 +549,7 @@
 
 // #region Menus
 ::slotted(.nav--menu) {
+  pointer-events: all;
   overscroll-behavior: contain;
   width: calc(#{rem(375)} - var(--scrollbar-width));
   background-color: var(--colour-canvas-2);
@@ -609,9 +612,6 @@
     }
   }
 
-  &:before {
-    content: attr(data-title);
-  }
 
   @include media-breakpoint-up(sm) {
 
@@ -621,8 +621,20 @@
   @include media-breakpoint-up(md) {
   
     height: calc(100vh - var(--nav-height));
-    top: 100%;
+    top: var(--nav-height);
   }
+}
+
+slot[name="menus"]{
+
+  position: absolute;
+  top: 0;
+  right: 0;
+display: block;
+  height: 100vh;
+overflow: hidden;
+pointer-events: none;
+  width: calc(#{rem(375)} - var(--scrollbar-width));
 }
 
 ::slotted(.nav--menu[data-open-title]){
@@ -665,6 +677,39 @@
 
   :host(.nav--md-compressed) ::slotted(a:not([slot=logo]):not([slot=secondary])){
     margin-left: 1.5rem!important;
+  }
+}
+// #endregion
+
+
+// #region Compact button
+@media screen and (min-width: 62em) {
+  :host(.nav--btn-compact:not(.nav--large)) {
+    .btn-menu .btn {
+      padding: 0.5rem!important;
+
+      i {
+        margin-right: 0!important;
+      }
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 62em) and (max-width: 90em) {
+  :host(.nav--btn-compact.nav--large) {
+    .btn-menu .btn {
+      padding: 0.5rem!important;
+
+      i {
+        margin-right: 0!important;
+      }
+      span {
+        display: none;
+      }
+    }
   }
 }
 // #endregion

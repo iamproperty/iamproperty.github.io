@@ -133,10 +133,12 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 // #region button with icon
 .btn {
   &[class*="fa-"]:before {
-
     font-family: "Font Awesome 6 Pro";
-    margin-right: 1rem;
     line-height: 1em;
+  }
+
+  &:not(.btn-compact):before{
+    margin-right: 1rem;
   }
 
   i[class*="fa-"]{

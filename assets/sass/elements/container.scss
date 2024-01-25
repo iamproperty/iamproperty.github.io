@@ -12,7 +12,7 @@
   width: 100%;
 
   &:not(.container-fluid) {
-    max-width: rem(1280);
+    max-width: var(--container-max-width);
   }
   
   .container:not(.container-xs-breakout) {

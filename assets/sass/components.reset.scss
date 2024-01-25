@@ -1,10 +1,10 @@
 $darkModeLocal: 'false'!default;
 
-@use "../_func.scss" as * with (
+@use "_func.scss" as * with (
   $darkMode: $darkModeLocal
 );
 
-@use "../foundations/root.scss" with (
+@use "foundations/root.scss" with (
   $root: ":is(iam-card,iam-nav,iam-table,.iamkey)" // copied directory from iamkey repo
 );
 
@@ -15,7 +15,7 @@ a:has(iam-card) {
 
 :is(iam-card,iam-nav, iam-table, .iamkey) {
 
-  @import "../foundations/reboot.scss";
+  @import "foundations/reboot.scss";
   
   @include var(font-family,--font-body);
   @include var(color,--colour-body);
@@ -23,7 +23,7 @@ a:has(iam-card) {
   line-height: 1.2;
   min-height: 100%;
 
-  @import "../_elements.scss";
+  @import "_elements.scss";
 }
 
 :is(iam-table) {
@@ -34,7 +34,7 @@ a:has(iam-card) {
 
 
 :is(iam-card,iam-nav, iam-table, .iamkey) {
-  @import "../_utilities.scss";
+  @import "_utilities.scss";
 }
 
 body.js-enabled .js-hide {

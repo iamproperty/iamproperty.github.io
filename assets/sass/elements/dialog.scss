@@ -551,7 +551,7 @@ dialog::backdrop {
       transform: rotate(90deg);
     }
 
-    &[aria-expanded]:after {
+    &[aria-expanded]:not([data-number]):after {
 
       transform: rotate(270deg);
     }
