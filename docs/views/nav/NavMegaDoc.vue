@@ -222,7 +222,7 @@
     </div>
 
     
-    <div class="demo-xs visualtest pe-none">
+    <div class="demo visualtest pe-none">
       
       <Nav class="" data-search="/search" data-prevent-search data-search-open data-css="/assets/css/components/nav.docs.css">
 

@@ -7,11 +7,6 @@
   align-items: center!important;
 }
 
-::slotted(.brand) {
-
-  margin-right: auto!important;
-}
-
 .btn-menu {
     
   padding: 0;
@@ -88,7 +83,7 @@
 
     width: fit-content;
     height: auto;
-    margin: 0 0 0 3rem!important;
+    margin: 0 0 0 3rem;
     padding: 0!important;
     text-indent: 0;
     padding-right: 0!important;
@@ -101,10 +96,6 @@
       @include light-mode() {
     
         @include reset-colours();
-
-        &:is(:hover,:focus){
-          color: var(--colour-inverted);
-        }
       }
 
       margin: 0!important;
@@ -128,6 +119,15 @@
       }
     }
   }
+}
+
+:host(.bg-primary) .btn {
+  
+
+    &:is(:hover,:focus){
+      color: var(--colour-inverted);
+    }
+  
 }
 
 // #region mobile and tablet menu
@@ -250,7 +250,7 @@
     }
   }
 
-  ::slotted(a:not([slot="logo"])) {
+  ::slotted(a:not([slot="logo"]):not(.btn-compact)) {
     display: block!important;
     line-height: rem(20)!important;
     padding: rem(24) 0!important;
@@ -342,12 +342,14 @@
 @include media-breakpoint-up(md) {
 
   :host {
-    max-width: 100%!important;
-    padding: 0!important;
+    //max-width: 100%!important;
+    padding-block: 0!important;
   }
 
   :host > .container {
     padding-block: rem(24)!important;
+    padding-inline: 0!important;
+    max-width: 100%;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
@@ -429,9 +431,8 @@
     margin-right: 0!important;
   }
 
-  ::slotted(a:not([slot="logo"])) {
+  ::slotted(a:not([slot="logo"]):not(.btn-compact)) {
 
-    margin-left: rem(32)!important;
     font-size: rem(16)!important;
     font-weight: normal!important;
 
@@ -440,7 +441,12 @@
     }
   }
 
-  ::slotted(button) {
+  ::slotted(a:not([slot="logo"]):not([slot="dual"])) {
+
+    margin-left: rem(32)!important;
+  }
+
+  ::slotted(.btn-primary) {
 
     margin-left: rem(48)!important;
   }
@@ -543,6 +549,7 @@
 
 // #region Menus
 ::slotted(.nav--menu) {
+  pointer-events: all;
   overscroll-behavior: contain;
   width: calc(#{rem(375)} - var(--scrollbar-width));
   background-color: var(--colour-canvas-2);
@@ -581,11 +588,11 @@
 
   &:before {
     display: block ;
-    width: 100%;
+    width: calc(100% + 3rem);
     border-top: 2px solid var(--colour-border);
     z-index: 1;
-    padding-block: rem(24);
-    margin: 0;
+    padding: rem(24) 1.5rem;
+    margin: 0 -1.5rem;
     font-family: $headings-font-family;
     font-style: $headings-font-style;
     font-weight: $headings-font-weight;
@@ -599,19 +606,35 @@
   
       font-size: rem(map-get($heading-sizes,"h3_fs_sm"));
       line-height: rem(map-get($heading-sizes,"h3_lh_sm"));
+      margin-right: -2.5rem;
+      padding-right: 2.5rem;
+      width: calc(100% + 4rem);
     }
   }
 
-  &:before {
-    content: attr(data-title);
+
+  @include media-breakpoint-up(sm) {
+
+    padding-right: 2.5rem !important;
   }
 
   @include media-breakpoint-up(md) {
-
-
+  
     height: calc(100vh - var(--nav-height));
-    top: 100%;
+    top: var(--nav-height);
   }
+}
+
+slot[name="menus"]{
+
+  position: absolute;
+  top: 0;
+  right: 0;
+display: block;
+  height: 100vh;
+overflow: hidden;
+pointer-events: none;
+  width: calc(#{rem(375)} - var(--scrollbar-width));
 }
 
 ::slotted(.nav--menu[data-open-title]){
@@ -633,6 +656,60 @@
     
     background: rgba(0,0,0,0.2);
     backdrop-filter: blur(2px);
+  }
+}
+// #endregion
+
+// #region compressed nav
+@include media-breakpoint-up(md) {
+  :host(.nav--md-compressed) .buttons-holder button {
+    margin-left: 1.5rem!important;
+  }
+
+  :host(.nav--md-compressed) .btn-menu .btn i[class*=fa-] {
+    margin-right: 0.5rem !important;
+    margin-left: -0.5rem !important;
+  }
+
+  :host(.nav--md-compressed) .btn-menu .btn {
+    --btn-padding-inline: 2.5rem;
+  }
+
+  :host(.nav--md-compressed) ::slotted(a:not([slot=logo]):not([slot=secondary])){
+    margin-left: 1.5rem!important;
+  }
+}
+// #endregion
+
+
+// #region Compact button
+@media screen and (min-width: 62em) {
+  :host(.nav--btn-compact:not(.nav--large)) {
+    .btn-menu .btn {
+      padding: 0.5rem!important;
+
+      i {
+        margin-right: 0!important;
+      }
+      span {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 62em) and (max-width: 90em) {
+  :host(.nav--btn-compact.nav--large) {
+    .btn-menu .btn {
+      padding: 0.5rem!important;
+
+      i {
+        margin-right: 0!important;
+      }
+      span {
+        display: none;
+      }
+    }
   }
 }
 // #endregion

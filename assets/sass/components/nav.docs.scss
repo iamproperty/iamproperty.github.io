@@ -1,5 +1,11 @@
 @use "../_func" as *;
 
+
+:host {
+  background: red;
+}
+
+
 @media screen and (max-width: 62em) {
   :host {
 
@@ -43,6 +49,9 @@
     width: 100%;
     max-width: calc(23.4375rem - var(--scrollbar-width));
     transition: none;
+  }
+  .menu.closed * {
+    display: block !important;
   }
 }
 

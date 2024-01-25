@@ -114,7 +114,7 @@
       <h4>Preview</h4>
       <button data-modal="modal-transactional" class="btn btn-secondary">Open Modal</button>
     </div>
-    <dialog id="modal-transactional">
+    <dialog id="modal-transactional" class="dialog--transactional">
 
       <i class="fa-light fa-circle"><i class="fa-regular fa-trash-can"></i></i>
       
@@ -160,7 +160,7 @@
       <h4>Preview</h4>
       <button data-modal="modal-ack" class="btn btn-secondary">Open Modal</button>
     </div>
-    <dialog id="modal-ack">
+    <dialog id="modal-ack" class="dialog--acknowledgement">
       <span class="h3">Acknowledgment modal title</span>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.</p>
   

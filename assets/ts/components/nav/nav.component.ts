@@ -24,11 +24,13 @@ class iamNav extends HTMLElement {
     @import "${coreCSS}";
     ${loadCSS}
     </style>
+    <style class="doc-styles">
+    </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="container">
       <slot name="logo"></slot>
       <div class="buttons-holder"></div>
-      <button class="btn-menu">Menu<i class="fa-regular fa-bars"></i><i class="fa-regular fa-xmark-large"></i></button>
+      <button class="btn-menu" part="btn-menu">Menu<i class="fa-regular fa-bars"></i><i class="fa-regular fa-xmark-large"></i></button>
 
       <div class="menu__outer">
         <div class="menu closed">
@@ -62,7 +64,7 @@ class iamNav extends HTMLElement {
 
     // Load external CSS if needed
     if(this.hasAttribute('data-css'))
-      this.shadowRoot.querySelector('.styles').insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
+      this.shadowRoot.querySelector('.doc-styles').insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
     
     const menuButton = this.shadowRoot.querySelector('.btn-menu');
     const menu = this.shadowRoot.querySelector('.menu');
@@ -76,8 +78,10 @@ class iamNav extends HTMLElement {
 
       switch(tagname){
         case "BUTTON":
-          element.setAttribute('slot','actions');
-          menu.classList.add('has-actions')
+          if(!element.hasAttribute('slot')){
+            element.setAttribute('slot','actions');
+            menu.classList.add('has-actions')
+          }
           break;
       }
 
@@ -91,6 +95,7 @@ class iamNav extends HTMLElement {
         const button = document.createElement('button');
         button.setAttribute('slot',title);
         button.classList.add('btn-menu');
+        button.setAttribute('part','btn-menu');
         button.innerHTML = `<span class="btn btn-primary"><span>${title}</span><i class="${iconClass}"></i><i class="fa-regular fa-xmark-large"></i></span>`;
         buttonsHolder.insertAdjacentElement('beforeend',button);
 
@@ -231,7 +236,7 @@ class iamNav extends HTMLElement {
 
       if (event && event.target instanceof HTMLElement && event.target.closest('summary')){
 
-        if(window.innerWidth > 992){
+        if(window.innerWidth > 992 && !event.target.closest('.nav--menu')){
 
           let summary = event.target.closest('summary');
           let details = summary.closest('details');

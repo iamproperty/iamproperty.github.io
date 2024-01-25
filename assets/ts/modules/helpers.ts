@@ -80,6 +80,17 @@ export const addGlobalEvents = (body) => {
 
   });
 
+  document.addEventListener("keydown", (e) => {
+
+    if(e.key === "Escape") {
+      
+      if(document.querySelector('.dialog--transactional[open], .dialog--acknowledgement[open]')){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
+  });
+
   return null
 }
 

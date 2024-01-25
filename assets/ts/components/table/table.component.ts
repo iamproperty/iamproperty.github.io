@@ -65,7 +65,7 @@ class iamTable extends HTMLElement {
 
     classList = classList.replace('table--cta','');
     classList = classList.replace('table--loading','');
-    classList = classList.replace('mh-md','');
+    //classList = classList.replace('mh-md','');
     this.shadowRoot.querySelector('.table__wrapper').className += ` ${classList}`;
 
     // set actionbar class if needed

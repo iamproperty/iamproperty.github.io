@@ -105,7 +105,7 @@ const extendDialogs = (body) => {
         dialog = dialog.parentNode.closest('dialog[open]');
       
       // Dont allow the backdrop to be clicked when transactional
-      if(!dialog.querySelector(':scope > .mh-lg > form:last-child > button:last-child, :scope > .mh-lg > button:last-child') || dialog.classList.contains('dialog--multi')){
+      if(!dialog.classList.contains('dialog--transactional') && !dialog.classList.contains('dialog--acknowledgement')){
 
         const dialogDimensions = dialog.getBoundingClientRect()
 
@@ -213,14 +213,7 @@ const extendDialogs = (body) => {
   return null
 }
 
-export const createDialog = (dialog) => {
-
-  // Prevent the user from escaping the model when transactional
-  if(dialog.querySelector(':scope > .mh-lg > form:last-child > button:last-child, :scope > .mh-lg > button:last-child') && !dialog.classList.contains('dialog--multi')) {
-    dialog.addEventListener("cancel", (e) => {
-      e.preventDefault();
-    });        
-  }
+export const createDialog = (dialog) => { 
 
   // Create the video embed
   let videoButton = dialog.querySelector('.youtube-embed a');

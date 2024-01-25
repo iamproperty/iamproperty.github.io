@@ -178,7 +178,7 @@ dialog::backdrop {
 // #endregion
 
 // #region Transactional 
-*:not(.dialog__wrapper) > dialog[open]:not(.dialog--multi):is(:has(:is(button,a):last-child),:has(form:last-child > :is(button,a):last-child)):not(:has(.youtube-embed)) {
+*:not(.dialog__wrapper) > dialog[open]:is(.dialog--transactional, .dialog--acknowledgement) {
 
   text-align: center;
 
@@ -551,7 +551,7 @@ dialog::backdrop {
       transform: rotate(90deg);
     }
 
-    &[aria-expanded]:after {
+    &[aria-expanded]:not([data-number]):after {
 
       transform: rotate(270deg);
     }
@@ -607,12 +607,27 @@ dialog::backdrop {
         }
       }
 
+      a {
+
+        padding: #{rem(6)};
+
+        &:not(:hover,:focus,:active){
+          border-color: transparent;
+        }
+        margin: 0;
+
+        &:after {
+          display: none;
+        }
+      }
+
       .btn-action {
         &:not(:hover,:focus,:active){
           border-color: transparent;
         }
         margin: 0;
       }
+
     }
 
     dialog[open] {

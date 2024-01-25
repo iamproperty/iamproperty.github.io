@@ -44,6 +44,24 @@ $root: ':root'!default;
   --border-width: 1px;
   --border-style: solid;
   --border-color: var(--colour-border);
+
+  --container-max-width: #{rem(1280)};
+  --padding-inline: 1.5rem;
+
+  @include media-breakpoint-up(sm) {
+    --padding-inline: 2.5rem;
+  }
+  @include media-breakpoint-up(md) {
+    --padding-inline: 5.25rem;
+
+    &:has(.nav--large) {
+      --container-max-width: #{rem(1920)}!important;
+      --padding-inline: #{rem(56)}!important;
+      --container-padding-x-md: #{rem(56)}!important;
+      --container-padding-md: var(--container-padding-top) var(--container-padding-x-md) var(--container-padding-bottom) var(--container-padding-x-md);
+      --container-padding: var(--container-padding-md);
+    }
+  }
 }
 
 .reset-colours {
