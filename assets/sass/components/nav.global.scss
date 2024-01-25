@@ -149,6 +149,14 @@ iam-nav details {
     text-decoration: underline;
     text-underline-offset: 0.3em;
     text-decoration-thickness: 2px;
+    text-decoration-color: var(--colour-success);
+  }
+
+  &:has([aria-current="page"]:not([data-duplicate])) > summary {
+    
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-thickness: 2px;
     text-decoration-color: var(--colour-info);
   }
 }
@@ -569,6 +577,18 @@ iam-nav details {
       margin-left: rem(32);
     }
   }
+
+  nav:has(iam-nav.open){
+    min-height: 100vh!important;
+    max-height: 100vh;
+    overflow: auto;
+
+    margin-bottom: calc((100vh - var(--nav-height)) * -1);
+  }
+
+  html:has(iam-nav.open) {
+    overflow: hidden;
+  }
 }
 
 // 4 columns on large screens
@@ -633,7 +653,7 @@ iam-nav > .dialog__wrapper {
   }
 }
 
-@media screen and (max-width: 64em) {
+@media screen and (max-width: 62em) {
 
 
   iam-nav > .dialog__wrapper {
@@ -734,7 +754,12 @@ iam-nav .nav--menu {
     display: block !important;
     line-height: 1.25rem !important;
     padding: 1.5rem 0 !important;
-    margin: 0 0 rem(36) 0!important;
+    margin: 0!important;
+
+    &:not(.mb-0):not(:has(+a)){
+      margin: 0 0 rem(36) 0!important;
+    }
+    
     flex-shrink: 0;
     font-size: 1rem !important;
     font-weight: normal !important;

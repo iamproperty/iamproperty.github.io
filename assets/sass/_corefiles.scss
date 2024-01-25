@@ -26,8 +26,7 @@
   }
 
   // Deal with preloaded state of native components
-  @import "components/nav.preload.scss";
-  @import "components/component.native.scss";
+  @import "_components.scss";
 }
 
 @include layer('templates') {

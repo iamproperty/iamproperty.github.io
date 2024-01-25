@@ -549,6 +549,7 @@
 
 // #region Menus
 ::slotted(.nav--menu) {
+  pointer-events: all;
   overscroll-behavior: contain;
   width: calc(#{rem(375)} - var(--scrollbar-width));
   background-color: var(--colour-canvas-2);
@@ -611,9 +612,6 @@
     }
   }
 
-  &:before {
-    content: attr(data-title);
-  }
 
   @include media-breakpoint-up(sm) {
 
@@ -623,8 +621,20 @@
   @include media-breakpoint-up(md) {
   
     height: calc(100vh - var(--nav-height));
-    top: 100%;
+    top: var(--nav-height);
   }
+}
+
+slot[name="menus"]{
+
+  position: absolute;
+  top: 0;
+  right: 0;
+display: block;
+  height: 100vh;
+overflow: hidden;
+pointer-events: none;
+  width: calc(#{rem(375)} - var(--scrollbar-width));
 }
 
 ::slotted(.nav--menu[data-open-title]){
