@@ -586,7 +586,7 @@ iam-nav details {
     margin-bottom: calc((100vh - var(--nav-height)) * -1);
   }
 
-  html:has(iam-nav.open) {
+  html:has(iam-nav.open:not(.demo-open)) {
     overflow: hidden;
   }
 }

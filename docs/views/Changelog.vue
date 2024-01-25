@@ -3,6 +3,17 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V5.4.0</h2>
+      <ul>
+        <li>Update the Nav component for greater configuration</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Tabs classes are now only available using the tabs component</li>
+        <li>Some Sass/CSS file names have changed or moved</li>
+      </ul>
+
       <h2>V5.1.0</h2>
       <ul>
         <li>Tidy up and reduce the file size of the core CSS' with some CSS moved into seperate files loaded via the component associated.</li>

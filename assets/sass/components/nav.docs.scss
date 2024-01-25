@@ -1,5 +1,11 @@
 @use "../_func" as *;
 
+
+:host {
+  background: red;
+}
+
+
 @media screen and (max-width: 62em) {
   :host {
 

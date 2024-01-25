@@ -16,7 +16,7 @@
 
     <div class="demo visualtest">
     
-      <Nav class="nav--sticky bg-primary">
+      <Nav class="nav--sticky bg-primary  demo-open">
 
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
@@ -212,7 +212,7 @@
 
         <a href="/" >Conveyancing</a>
 
-        <div class="nav--menu open" data-title="My account" data-icon="fa-user fa-solid">
+        <div class="nav--menu open" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid">
 
           <div>
             <label for="test1">Active branch</label>

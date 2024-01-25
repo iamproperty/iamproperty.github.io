@@ -23,7 +23,7 @@ iam-nav {
   }
 }
 
-//@media (scripting: enabled) {
+@media (scripting: enabled) {
 
   iam-nav:not(:defined) {
 
@@ -41,4 +41,4 @@ iam-nav {
       }
     }
   }
-//}
+}

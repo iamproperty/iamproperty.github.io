@@ -24,6 +24,8 @@ class iamNav extends HTMLElement {
     @import "${coreCSS}";
     ${loadCSS}
     </style>
+    <style class="doc-styles">
+    </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="container">
       <slot name="logo"></slot>
@@ -62,7 +64,7 @@ class iamNav extends HTMLElement {
 
     // Load external CSS if needed
     if(this.hasAttribute('data-css'))
-      this.shadowRoot.querySelector('.styles').insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
+      this.shadowRoot.querySelector('.doc-styles').insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
     
     const menuButton = this.shadowRoot.querySelector('.btn-menu');
     const menu = this.shadowRoot.querySelector('.menu');
