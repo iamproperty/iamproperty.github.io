@@ -104,6 +104,11 @@ iam-nav {
     text-decoration: none;
     min-width: min(var(--svg-width), 14rem);
     margin-right: auto;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
   }
 
   a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
@@ -301,8 +306,12 @@ iam-nav details {
       }
     }
 
-    a + details {
+    a + details > summary {
       padding-top: 1.5rem;
+
+      &:after {
+        margin-top: 1.5rem;
+      }
     }
 
     details[open] + details:before{
@@ -684,10 +693,6 @@ iam-nav > .dialog__wrapper {
     }
   }
 
-  iam-nav > :is(a,details) + :is(.dialog__wrapper, .btn-compact) {
-    margin-top: 1.5rem;
-  }
-
   iam-nav > .dialog__wrapper:not(.dialog--xs) .dialog--list a,
   iam-nav .btn-compact {
     --compact-size: 2rem;
@@ -724,14 +729,6 @@ iam-nav > .dialog__wrapper {
 
     &:after {
       display: none;
-    }
-  }
-
-  iam-nav > .dialog__wrapper,
-  iam-nav .btn-compact {
-
-    &:has(+ *:not(.dialog__wrapper,.btn-compact)){
-      margin-bottom: 1.5rem!important;
     }
   }
 }

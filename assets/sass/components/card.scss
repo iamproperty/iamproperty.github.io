@@ -157,8 +157,10 @@
 ::slotted(i){
   font-size: rem(24)!important;
   margin: -3px var(--card-icon-right) 0 0!important;
-  font-weight: 400!important;
   vertical-align: middle!important;
+}
+::slotted(i:not(.fa-light):not(.fa-bold)){
+  font-weight: 400!important;
 }
 
 ::slotted(span:not(.badge)){

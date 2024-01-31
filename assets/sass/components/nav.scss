@@ -713,3 +713,24 @@ pointer-events: none;
   }
 }
 // #endregion
+
+// #region Dual with buttons
+@media screen and (max-width: 62em) {
+  :host(.nav--dual-buttons) {
+    slot[name="dual"] {
+      padding-block: 1.5rem;
+      display: block;
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  :host(.nav--dual-buttons) {
+    slot[name="dual"] {
+      display: flex;
+      margin-left: auto;
+      flex-direction: row-reverse;
+    }
+  }
+}
+// #endregion

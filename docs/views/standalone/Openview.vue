@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav>
-    <Nav class="nav--large nav--btn-compact" >
+    <Nav class="nav--large nav--btn-compact nav--dual-buttons">
       
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
@@ -148,6 +148,19 @@
       </details>
 
 
+      <button class="btn btn-secondary btn-compact fa-solid fa-search" slot="dual">Search</button>
+
+      <div class="dialog__wrapper dialog-overflow d-none d-md-block" slot="dual">
+        <button class="btn btn-secondary btn-compact fa-bell m-0" data-number="2">Notifications</button>
+        <dialog class="dialog--list" id="notifications">
+                
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+        </dialog>
+      </div>
+
+      <button class="btn btn-secondary btn-compact fa-bell m-0 d-md-none" slot="dual" data-number="2" data-modal="modal-passive">Notifications</button>
+
+
 
       <div class="dialog__wrapper dialog-overflow" slot="dual">
         <button class="btn btn-secondary btn-compact fa-grid fa-solid m-0">More actions</button>
@@ -158,19 +171,6 @@
           <a href="/"><i class="fa-solid fa-plus"></i>Order marketing</a>
         </dialog>
       </div>
-
-      <button class="btn btn-secondary btn-compact fa-bell m-0 d-md-none" slot="dual" data-number="2" data-modal="modal-passive">Notifications</button>
-
-      <div class="dialog__wrapper dialog-overflow d-none d-md-block" slot="dual">
-        <button class="btn btn-secondary btn-compact fa-bell m-0" data-number="2">Notifications</button>
-        <dialog class="dialog--list" id="notifications">
-                
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-        </dialog>
-      </div>
-
-      <button class="btn btn-secondary btn-compact fa-solid fa-search" slot="dual">Search</button>
-
 
       <a href="/standalone/iamproperty" slot="secondary">iamproperty</a>
       <a href="/standalone/openview" slot="secondary" class="selected">CRM</a>
