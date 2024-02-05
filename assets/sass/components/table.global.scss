@@ -272,8 +272,12 @@ iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
 
 // #region Statuses 
 table {
-    
-  :is([data-content="low"],
+  
+  .hide-status:after {
+    display: none;
+  }
+
+  :not(.hide-status):is([data-content="low"],
     [data-content="medium"],
     [data-content="high"],
     [data-content="unknown"],
