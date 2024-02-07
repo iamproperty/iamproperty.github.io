@@ -31,6 +31,7 @@ export const addGlobalEvents = (body) => {
     const label = document.querySelector(`label[for="${hash.replace('#','')}"]`);
     const summary = document.querySelector(hash+' summary');
     const dialog = document.querySelector(`dialog${hash}`);
+    const detail = document.querySelector(`detail${hash}`);
 
     if(label instanceof HTMLElement)
       label.click();
@@ -38,6 +39,8 @@ export const addGlobalEvents = (body) => {
       summary.click();
     else if(dialog instanceof HTMLElement)
       dialog.showModal();
+    else if(detail instanceof HTMLElement)
+      detail.addAttribute('open');
   }
 
   if(location.hash)

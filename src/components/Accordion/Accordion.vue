@@ -17,7 +17,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/accordion/accordion.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/accordion/accordion.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-accordion`))
           window.customElements.define(`iam-accordion`, module.default);
