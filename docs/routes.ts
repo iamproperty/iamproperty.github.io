@@ -186,6 +186,15 @@ const routes = [
         },
         component: () => import('./views/elements/Tables.vue'),
         searchterms: 'rows, columns'
+      },
+      {
+        path: 'details',
+        name: 'Details (BETA)',
+        meta: {
+          title: 'Details | Elements | iamkey'
+        },
+        component: () => import('./views/elements/Details.vue'),
+        searchterms: 'details, accordion, summary'
       }
     ]
   },

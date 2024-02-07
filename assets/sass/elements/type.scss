@@ -11,13 +11,14 @@ mark {
 
 // #region headings
 %heading {
+  --line-height: #{$headings-line-height};
   // From bootstrap reboot
   margin-top: 0; // 1
   margin-bottom: $headings-margin-bottom;
   font-family: $headings-font-family;
   font-style: $headings-font-style;
   font-weight: bold;
-  line-height: $headings-line-height;
+  line-height: var(--line-height);
   color: $headings-color;
   // END:Bootstap reboot
   clear: both;
@@ -35,36 +36,37 @@ mark {
 }
 
 :is(.h1, h1) {
+  --line-height: #{rem(map-get($heading-sizes,"h1_lh"))};
+
   font-size: rem(map-get($heading-sizes,"h1_fs"));
-  line-height: rem(map-get($heading-sizes,"h1_lh"));
   padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
   font-weight: 900;
 
   @include media-breakpoint-up(sm) {
 
     font-size: rem(map-get($heading-sizes,"h1_fs_sm"));
-    line-height: rem(map-get($heading-sizes,"h1_lh_sm"));
+    --line-height: #{rem(map-get($heading-sizes,"h1_lh_sm"))};
     padding-bottom: rem(map-get($heading-sizes,"h1_pb_sm"));
   }
 }
 
 :is(h2, .h2) {
   font-size: rem(map-get($heading-sizes,"h2_fs"));
-  line-height: rem(map-get($heading-sizes,"h2_lh"));
+  --line-height: #{rem(map-get($heading-sizes,"h2_lh"))};
   padding-bottom: rem(map-get($heading-sizes,"h1_pb"));
   font-weight: 900;
 
   @include media-breakpoint-up(sm) {
 
     font-size: rem(map-get($heading-sizes,"h2_fs_sm"));
-    line-height: rem(map-get($heading-sizes,"h2_lh_sm"));
+    --line-height: #{rem(map-get($heading-sizes,"h2_lh_sm"))};
     padding-bottom: rem(map-get($heading-sizes,"h2_pb_sm"));
   }
 }
 
 :is(h3, .h3) {
   font-size: rem(map-get($heading-sizes,"h3_fs"));
-  line-height: rem(map-get($heading-sizes,"h3_lh"));
+  --line-height: #{rem(map-get($heading-sizes,"h3_lh"))};
   padding-bottom: rem(map-get($heading-sizes,"h3_pb"));
   max-width: var(--content-max-width);
   font-weight: 900;
@@ -72,14 +74,14 @@ mark {
   @include media-breakpoint-up(sm) {
 
     font-size: rem(map-get($heading-sizes,"h3_fs_sm"));
-    line-height: rem(map-get($heading-sizes,"h3_lh_sm"));
+    --line-height: #{rem(map-get($heading-sizes,"h3_lh_sm"))};
     padding-bottom: rem(map-get($heading-sizes,"h3_pb_sm"));
   }
 }
 
 :is(.h4, h4, .h5, h5, .h6, h6)  {
   font-size: rem(map-get($heading-sizes,"h4_fs"));
-  line-height: rem(map-get($heading-sizes,"h4_lh"));
+  --line-height: #{rem(map-get($heading-sizes,"h4_lh"))};
   padding-bottom: rem(map-get($heading-sizes,"h4_pb"));
   max-width: var(--content-max-width);
 
