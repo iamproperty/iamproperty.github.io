@@ -102,6 +102,8 @@
         </div>
       </div>
 
+      <p class="note mb-5"><strong>Note: </strong>A class of <code>.hide-status</code> can be added to the table cell to prevent the status being added. This can also be done on a full column be adding <code>[data-td-class="hide-status"]</code> to the <code>th</code>.</p>
+
       <h3>UI</h3>
       <p>UI icons are functional and highly reusable icons that appear throughout the application. They commonly are used to navigate to features, support a CTA, or to complete an action. ‘Solid’ variations of all these icons can also be used and should be used for compact primary and secondary buttons. See guidance on the button component.</p>
 
@@ -148,7 +150,6 @@
           <span><strong>class:</strong> {{icon.class}}</span>
         </div>
       </div>
-
       
       <h3>Social</h3>
       <p>Social icons are used to link users to social platforms.</p>
@@ -228,8 +229,8 @@ export default {
     return {
       headerImg: headerImg,
       statusIcons: [
-        {title: "Complete", class: "fa-regular fa-check text-complete"},
-        {title: "Approval required/Upcoming", class: "fa-light fa-flag text-warning"},
+        {title: "Complete / Verified / Manually verified", class: "fa-regular fa-check text-complete"},
+        {title: "Approval required / Upcoming / Action required", class: "fa-light fa-flag text-warning"},
         {title: "Overdue/Due", class: "fa-light fa-flag text-danger"},
         {title: "Not Started/To do/On track", class: "fa-light fa-flag text-muted"},
         {title: "Warning", class: "fa-light fa-triangle-exclamation text-warning"},

@@ -357,7 +357,7 @@ table {
     color: var(--colour-muted);
   }
 
-  :is([data-content="requires approval"],[data-content="approval required"],[data-content="upcoming"]):after {
+  :is([data-content="requires approval"],[data-content="approval required"],[data-content="action required"],[data-content="upcoming"]):after {
 
     content: "\f024";
     color: var(--colour-warning);
@@ -369,7 +369,7 @@ table {
     color: var(--colour-warning);
   }
 
-  :is([data-content="verified"],[data-content="completed"],[data-content="complete"]):after {
+  :is([data-content="manually verified"],[data-content="verified"],[data-content="completed"],[data-content="complete"]):after {
     
     content: "\f00c";
     font-weight: normal;
