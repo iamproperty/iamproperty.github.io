@@ -16,6 +16,7 @@ iam-table {
   }
   tbody tr {
     background: var(--row-bg);
+    height: 3.5rem;
 
     &:is(:hover,:focus-within,.hover) {
 
@@ -160,7 +161,7 @@ iam-table {
       }
     }
 
-    .dialog__wrapper {
+    .dialog__wrapper:not([slot="overflow"]) {
       margin-top: -0.5rem;
       margin-left: -1rem;
       z-index: 10;
@@ -216,6 +217,7 @@ iam-table {
       text-align: right;
       background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
       cursor: default;
+      padding-bottom: 0;
 
       @media screen and (prefers-color-scheme: dark) {
         
@@ -224,6 +226,7 @@ iam-table {
       a {
         white-space: nowrap;
         padding-right: 0.2rem;
+        padding-bottom: 0;
       }
     }
 
@@ -586,7 +589,7 @@ iam-table.table--fullwidth:not([data-expandable]) {
     }
 
     tr {
-      
+
       &:is(:hover,:focus) .td--fixed{
         background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
       }
@@ -597,6 +600,7 @@ iam-table.table--fullwidth:not([data-expandable]) {
     }
 
 
+    .th--fixed + th:not(.th--fixed),
     .td--fixed + td:not(.td--fixed){
 
       padding-left: calc(rem(48 + 24) + var(--width-adjust));

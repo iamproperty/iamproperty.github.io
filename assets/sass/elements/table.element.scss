@@ -46,7 +46,7 @@ th {
 
 thead {
   tr {
-
+    
     border-bottom: var(--border-width) solid currentColor;
     @include var(border-color,--colour-primary);
   }

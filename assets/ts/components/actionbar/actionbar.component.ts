@@ -293,7 +293,7 @@ class iamActionbar extends HTMLElement {
       // If the wrapper width is small we want to reduce the btn sizes by adding or removing btn-compact classes
       if (wrapperWidth < 576) {
         
-        Array.from(that.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn:first-child:not(.js-updated)')).forEach((element,index) => {
+        Array.from(that.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)')).forEach((element,index) => {
 
           element.className = element.className.replace(' btn-compact',' _btn-compact');
           element.classList.add('btn-compact');

@@ -1,4 +1,4 @@
-details {
+details:not(.details--revert) {
 
   --inline-padding: #{rem(2)};
   --border-radius: #{rem(8)} #{rem(8)} 0 0;

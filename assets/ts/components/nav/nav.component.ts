@@ -166,6 +166,12 @@ class iamNav extends HTMLElement {
       }
     });
     
+
+    this.querySelectorAll('details').forEach(function(element){
+      
+      element.classList.add('details--revert');
+    });
+
     // Has secondary link
     if(this.querySelector('a[slot="secondary"]')){
       menu.classList.add('has-secondary');
