@@ -17,8 +17,8 @@
   overflow: hidden;
   z-index: 0;
   background: var(--colour-canvas-2);
-  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-  outline-offset: -1px;
+  outline: 2px solid var(--colour-canvas-2);
+  outline-offset: -2px;
 
   &.border-0 {
     box-shadow: none;
@@ -90,6 +90,8 @@
     background: #FCFCFC;
   }
   
+
+  
   span {
     display: block;
     font-weight: bold;
@@ -120,20 +122,72 @@
       }
     }    
   }
+
+  
+  .card__total {
+    font-size: rem(48);
+    line-height: rem(48);
+    padding-right: rem(16);
+    margin-top: 0.5rem;
+  }
+
+  &.card--has-icon:not(.card--secondary):not(.card--filter) { 
+    display: flex;
+    align-items: center;
+
+    &:before,
+    &:after {
+      top: calc(50% - 0.75rem);
+      bottom: auto;
+    }
+  }
+
+  &.card--has-icon:not(.card--secondary):not(.card--filter) .card__body {
+    padding-left: 4rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    inset: 0;
+    align-items: flex-start;
+    justify-content: center;
+  }
 }
 
 ::slotted(i){
-  font-size: rem(24);
-  margin: -3px var(--card-icon-right) 0 0;
-  font-weight: 400;
-  vertical-align: middle;
+  font-size: rem(24)!important;
+  margin: -3px var(--card-icon-right) 0 0!important;
+  vertical-align: middle!important;
+}
+::slotted(i:not(.fa-light):not(.fa-bold)){
+  font-weight: 400!important;
 }
 
-::slotted(span){
-  display: block;
-  font-weight: normal;
-  padding-top: rem(24);
-  font-size: rem(16);
+::slotted(span:not(.badge)){
+  display: block!important;
+  font-weight: normal!important;
+  padding-top: rem(24)!important;
+  font-size: rem(16)!important;
+}
+// #endregion
+
+// #region card bages
+.card__badges {
+  position: absolute;
+  top: 0;
+  right: 0.25rem;
+  padding: 0.25rem;
+  z-index: 9;
+  text-align: right;
+  width: 1;
+}
+.card__head .card__badges {
+  
+  top: auto;
+  bottom: 0;
+  text-align: left;
+  left: 0.25rem;
+  right: auto;
 }
 // #endregion
 
@@ -167,19 +221,18 @@
 
   &:is(:hover,:focus,.hover) {
     outline: none;
-    background: #EEEEEE;
       
     .card__body {
       background: #EEEEEE;
     }
   }
 
-  &:is(:active, .active){
+  &:is(:checked, .checked,:active, .active){
     outline: 2px solid var(--colour,var(--colour-primary));
     outline-offset: -2px;
 
     .card__body {
-      background: #ffffff;
+      background: none;
     }
   }
 
@@ -197,9 +250,22 @@
   }
     
   .card__total {
-    font-size: rem(48);
-    line-height: rem(48);
-    padding-right: rem(16);
+    margin-top: 0;
+    order: -1;
+  }
+}
+
+@include dark-mode() {
+  .card--filter {
+
+    .card__body {
+      background: none!important;
+    }
+
+    &:is(:hover,:focus,.hover, :active, .active):not(:checked,.checked){ 
+      outline: 2px solid var(--colour, var(--colour-primary))!important;
+      outline-offset: -2px;
+    }
   }
 }
 
@@ -253,3 +319,78 @@
   }
 }
 //#endregion
+
+
+:host([data-selected]) .card {
+  //background-color: yellow!important;
+
+  &:before,
+  &:after {
+    display: none!important;
+  }
+}
+
+// #region card with a flag 
+:host(.card--flag) {
+  position: relative;
+  
+  &:after {
+    content: "\f024";
+    font-family: "Font Awesome 6 Pro";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: rem(16);
+    line-height: 1;
+    height: rem(16);
+    width: rem(16);
+    display: inline-block;
+    font-weight: normal;
+    color: var(--colour, var(--colour-primary));
+  }
+}
+// #endregion
+
+
+//#region Dashboard card
+.card--secondary {
+
+  --card-top-padding: #{rem(16)};
+  --card-bottom-padding: #{rem(24)};
+
+  &:before,
+  &:after {
+    display: none;
+  }
+}
+
+.card--secondary .btn-compact {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0.5rem 0.5rem 0 0;
+  z-index: 99;
+}
+
+.card--secondary:has(.btn-compact:is(:hover, :focus, :active)) {
+
+  pointer-events: none;
+  outline: none;
+
+  .card__body {
+    background: none;
+    border-color: transparent!important;
+  }
+
+  .btn-compact {
+    pointer-events: all;
+  }
+}
+
+.card--secondary ::slotted(i) {
+  display: block !important;
+  font-size: rem(40)!important;
+  margin: 0.5rem 0 0.5rem 0!important;
+  line-height: rem(40);
+}
+// #endregion

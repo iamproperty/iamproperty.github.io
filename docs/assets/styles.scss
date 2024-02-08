@@ -4,8 +4,6 @@
 $fontPath: '../../fonts/';
 @import "../../assets/sass/_fonts.scss";
 @import '../../assets/sass/_corefiles.scss';
-@import "../../assets/sass/_forms";
-
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
@@ -80,10 +78,13 @@ code {
       &:nth-child(2){
         width: 1rem;
       }
-      &:nth-child(4){
+    }
+
+    tr:has(th:nth-child(4)) {
+      
+      th:nth-child(3){
         width: 9rem;
       }
-
     }
 
     tr > *:first-child {
@@ -97,6 +98,25 @@ code {
 }
 
 
+@container (width < 36em) {
+  .version-control {
+  
+    table {
+      tr > * {
+        
+        &:nth-child(2){
+          display: none;
+        }
+      }
+      tr:has(*:nth-child(4)) > * {
+        
+        &:nth-child(3){
+          display: none;
+        }
+      }
+    }
+  }
+}
 @container (width >= 36em) {
   .version-control {
   
@@ -108,7 +128,11 @@ code {
         &:nth-child(2){
           width: 8rem;
         }
-        &:nth-child(4){
+      }
+
+      tr:has(th:nth-child(4)) {
+        
+        th:nth-child(3){
           width: 9rem;
         }
       }

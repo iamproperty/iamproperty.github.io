@@ -1,0 +1,290 @@
+@use "../_func.scss" as *;
+
+@include is('ol, ul','','li'){
+  max-width: $content-max-width;
+}
+
+.tick-list {
+
+  padding-left: 0;
+
+  li {
+    position: relative;
+    list-style: none;
+    padding-bottom: 1rem;
+    padding-left: 2.25rem;
+    
+    &:before {
+      
+      content: "\f00c";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1.25em;
+      height: 1.25em;
+      font-size: 1.25em;
+      line-height: 1;
+      
+      color: var(--colour-complete);
+      font-family: "Font Awesome 6 Pro";
+      font-size: 400;
+      
+    }
+
+    &.tick--warning:before {
+
+      content: "\f071";
+      font-weight: 300;
+      color: var(--colour-warning);
+    }
+
+    &.tick--danger:before {
+
+      content: "\f06a";
+      font-weight: 300;
+      color: var(--colour-danger);
+    }
+
+    &.tick--incomplete:before {
+
+      background: var(--colour-admin);
+      mask-image: none;
+      -webkit-mask-image: none;
+      border-radius: 50%;
+      transform: scale(0.8);
+    }
+
+    &[class*="bg-"] {
+      padding: 1rem;
+      padding-left: 4rem;
+      margin-bottom: 1rem;
+      border-radius: 0.5rem;
+      z-index: 0;
+
+      &:before,
+      &:after {
+      
+        top: 50%;
+        left: 1rem;
+        width: 2rem;
+        height: 2rem;
+        margin-top: -1rem;
+      }
+
+      &:after {
+      
+        content: "";
+        position: absolute;
+        z-index: -1;
+        background-color: white;
+        border-radius: 50%;
+        transform-origin: 50% 50%;
+        transform: scale(0.9);
+      }
+
+    }
+  }
+}
+
+
+.breadcrumb {
+
+  font-size: rem(14);
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    display: inline-block;
+
+    &:not(:first-child):before {
+      content: "\00A0/\00A0";
+      font-weight: bold;
+      color: var(--colour-link);
+    }
+
+    a {
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.orderable-list {
+
+  margin-left: 3.5rem;
+  counter-reset: countItem; 
+  padding-left: 0;
+
+  li {
+    position: relative;
+    list-style: none;
+    --spread: 0.75rem;
+    box-shadow: 0 2px var(--spread) 0 rgba(154, 154, 154, 0.25);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    cursor: grab;
+  }
+
+  li:before {
+    content: "";
+    --gradient-direction: 180deg;
+    background-color: var(--colour-info);
+    background-image: linear-gradient(var(--gradient-direction), var(--colour-secondary) 0, transparent 100%) !important;
+    height: 100%;
+    width: 2.5rem;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: calc(100% + 1rem);
+    border-radius: 0.5rem;
+  }
+
+  li:after {
+    counter-increment: countItem; /* Increment the value of section counter by 1 */
+    content: counter(countItem);
+    height: 2rem;
+    width: 2.5rem;
+    line-height: 2rem;
+    font-size: rem(20);
+    font-weight: bold;
+    display: inline-block;
+    position: absolute;
+    top: calc(50% - 1rem);
+    right: calc(100% + 1rem);
+    text-align: center;
+  }
+}
+
+// list wrapper to apply a min height
+.list__wrapper {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.list__wrapper--small {
+  max-height: 12.5rem;
+}
+.list__wrapper--medium {
+  max-height: 25rem;
+}
+.list__wrapper--large {
+  max-height: 37.5rem;
+}
+
+// #region Step list
+*:has(> .list--steps){
+  container-type: inline-size;
+}
+
+.list--steps {
+
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0 0 rem(6) 0;
+  gap: rem(12);
+  counter-reset: pages;
+  color: var(--colour-heading);
+  position: relative;
+  margin-bottom: rem(6);
+
+  li {
+    position: relative;
+    display: block;
+    padding-top: 2rem;
+    width: rem(24);
+    flex-grow: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+    text-indent: -300px;
+
+
+    &:before {
+      counter-increment: pages;
+      content: counter(pages);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: rem(-12);
+      width: rem(24);
+      height: rem(24);
+      font-size: rem(18);
+      line-height: rem(24);
+      text-align: center;
+      font-weight: bold;;
+      border: 1px solid currentColor;
+      border-radius: 1rem;
+      text-indent: 0;
+    }
+
+  }
+
+  li.step--current:before {
+    background-color: var(--colour-primary-theme);
+    border-color: var(--colour-primary-theme);
+    color: var(--colour-white);
+  }
+  li.step--complete:before {
+    background-color: var(--colour-success);
+    border-color: var(--colour-success);
+
+    @include dark-mode {
+      
+    background-color: var(--colour-complete);
+    border-color: var(--colour-complete);
+    }
+    //color: var(--colour-white);
+  } 
+  
+  &::after {
+    content: attr(data-mobile-text);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    display: block;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    font-weight: bold;
+  }
+
+  @include container-up(sm){
+
+    padding: 0;
+
+    margin-bottom: rem(24);
+
+    &::after {
+      display: none;
+    }
+
+    li {
+      width: 100%;
+      flex-grow: 1;
+      text-indent: 0;
+      overflow: visible;
+
+      &:not(:last-child):after {
+        content: "";
+        position: absolute;
+        top: rem(12);
+        left: calc(50% + 2rem);
+        
+        width: calc(100% - 2.5rem);
+        height: 2px;
+        font-size: rem(18);
+        background-color: var(--colour-heading);
+      }
+    }
+  }
+
+  
+  @include container-up(md){
+
+    li {
+      max-width: 20%;
+    }
+  }
+}
+// #endregion

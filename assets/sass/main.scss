@@ -2,6 +2,5 @@
 
 @use "_fonts";
 @use "_corefiles";
-@use "_forms";
-@use "_components";
-@use "_print";
+@import "_components";
+@import "_print";

@@ -1,0 +1,329 @@
+@use "../_func" as *;
+// Host
+:host {
+  --colour-border: #e9e9e9;
+  --side-link-hover: var(--colour-canvas-2);
+
+  @include light-mode() {
+            
+    --side-link-hover: #eeeeee;
+  }
+
+  display: block;
+  min-height: calc(100vh - var(--nav-height));
+  padding-top: 0!important;
+  margin-inline: auto;
+  max-width: 80rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  position: static;
+  min-height: 100%;
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+  padding-left: 0!important;
+
+  @include media-breakpoint-up(md) {
+
+    padding-left: 5.25rem!important;
+    overflow: hidden;
+  }  
+}
+
+// #region Side menu
+.side-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  min-height: calc(100vh - var(--nav-height));
+  width: rem(30);
+  height: 100%;
+  background-color: var(--colour-canvas);
+  transition: width 1s;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    border-right: 2px solid var(--colour-border);
+  }
+
+  @include media-breakpoint-up(sm) {
+
+    left: 0;
+    width: rem(40);
+  }  
+
+  @include media-breakpoint-up(md) {
+
+    left: calc(50% - #{rem(556)});
+    margin-left: #{rem(-84)};
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      border-right: 2px solid var(--colour-border);
+      left: 0;
+      opacity: 1;
+      transition: all 1s;
+      //margin-left: rem(-260);
+      width: rem(40);
+      background: var(--colour-canvas);
+    }
+
+    &:not(.open).hover {
+      width: rem(344);
+
+      .btn[class*=fa-]:before {
+        content: "\f023" !important;
+      }
+    }
+  }
+
+  .btn {
+    position: absolute;
+    top: rem(32);
+    right: 0;
+    margin-bottom: 0;
+    margin-right: rem(-20);
+    background-color: var(--colour-canvas-2);
+    border: 2px solid var(--colour-border);
+    z-index: 99;
+    
+    &[aria-expanded]{
+       // Change icon
+      &[class*=fa-]:before {
+        content: "\f053"!important;
+      }
+
+      @include media-breakpoint-up(md) {
+        opacity: 0;
+        transition: opacity 0.5s;
+
+        &:is(:hover,:focus,:active) {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &:is(.open) {
+
+    width: calc(100% - var(--container-padding-x));
+
+    @include media-breakpoint-up(sm) {
+
+      width: rem(382);
+    }  
+    @include media-breakpoint-up(md) {
+
+      width: rem(344);
+    }  
+  }
+
+  // Content
+
+  .side-menu-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: rem(32) rem(40) 0 0;
+    width: rem(351);
+    opacity: 0;
+    transition: opacity 1s;
+    min-height: 100%;
+    overflow: auto;
+    max-height: 100%;
+
+    &.closed {
+    }
+
+    .h3 {
+      padding-left: rem(24);
+    }
+      
+    @include media-breakpoint-up(sm) {
+
+      .h3 {
+        padding-left: rem(40);
+      }
+
+      width: rem(382);
+    }  
+    @include media-breakpoint-up(md) {
+
+      width: rem(304);
+
+    }  
+  }
+
+  &:not(.hover):not(.open) .side-menu-content.closed {
+    
+      display: none;
+  }
+
+  &.open .side-menu-content {
+    opacity: 1;
+  }
+
+  @include media-breakpoint-up(md) {
+
+    &.hover .side-menu-content {
+      opacity: 1;
+    }
+  }  
+}
+
+// Links
+::slotted(*[slot="menu"]) {
+  padding-left: rem(24);
+
+  @include media-breakpoint-up(sm) {
+    padding-left: rem(40)!important;
+  }
+}
+
+::slotted(hr) {
+  border-bottom: 2px solid var(--colour-border)!important;
+  margin-right: rem(-40)!important;
+}
+
+::slotted(a[slot="menu"]) {
+  display: block;
+
+  display: block!important;
+  line-height: rem(20)!important;
+  padding: rem(16) rem(40) rem(16) rem(24)!important;
+  margin: 0!important;
+  flex-shrink: 0;
+  font-size: 1rem!important;
+  font-weight: normal!important;
+  text-decoration: none;
+
+  border-bottom: 2px solid var(--colour-border)!important;
+
+  margin-right: rem(-40)!important;
+  
+  @include media-breakpoint-up(sm) {
+    padding-left: rem(40)!important;
+  }
+
+  &:after {
+    display: none;
+  }
+
+  
+  border-right: 2px solid var(--colour-border)!important;
+/*
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100%);
+    margin-top: 0;
+    width: 2px;
+    background-color: var(--colour-border);
+  }
+  */
+}
+
+::slotted(a[slot="menu"]:where(:hover,:focus,[aria-expanded])) {
+
+  background-color: var(--side-link-hover)!important;
+}
+
+::slotted(a[slot="menu"]:active) {
+
+  background-color: var(--side-link-hover)!important;
+  font-weight: bold!important;
+}
+
+::slotted(a[slot="menu"][aria-expanded]) {
+
+  background-color: var(--side-link-hover)!important;
+  font-weight: bold!important;
+  margin-right: #{rem(-40)}!important;
+  position: relative;
+
+  border-right: 2px solid var(--colour-info)!important;
+
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100% + 4px);
+    margin-top: -2px;
+    width: 2px;
+    border-right: 2px solid var(--colour-info);
+    margin-right: -2px;
+
+        
+    @media (forced-colors: active) {
+
+      border-right: 10px solid var(--colour-info);
+    }
+  }
+}
+// #endregion
+
+// #region main content
+.main-content {
+
+  padding-top: rem(24);
+  padding-left: rem(60);
+
+  
+  @include media-breakpoint-up(sm) {
+
+    padding-left: rem(80);
+  }  
+
+  @include media-breakpoint-up(md) {
+
+    padding-top: rem(40)!important;
+    padding-left: 0;
+  }  
+
+  > span.h3 {
+    padding-top: 0.75rem;
+
+    border-bottom: 2px solid var(--colour-border);
+    margin-bottom: rem(40)!important;
+
+    @include media-breakpoint-up(md) {
+
+      display: none;
+    }  
+  }
+}
+
+::slotted(.main-content__title){
+
+  border-bottom: 2px solid var(--colour-border);
+  margin-bottom: rem(40)!important;
+  max-width: 100%!important;
+  display: block;
+}
+
+@include media-breakpoint-up(md) {
+
+  .side-menu.open + .main-content {
+
+    padding-left: rem(300);
+  }
+
+  ::slotted(.main-content__title){ 
+    display: none;
+  }
+}
+// #endregion

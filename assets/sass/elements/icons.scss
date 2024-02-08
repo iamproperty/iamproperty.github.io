@@ -1,0 +1,26 @@
+@use "../_func" as *;
+
+
+.icon--xs {
+  font-size: rem(16);
+}
+
+.icon--sm {
+  font-size: rem(18);
+}
+
+.icon--compact {
+  font-size: rem(20);
+}
+
+.icon--md {
+  font-size: rem(28);
+}
+
+.icon--lg {
+  font-size: rem(40);
+}
+
+[class*="fa-"]:not(.fa-regular,.fa-light, .fa-solid, .btn) {
+  font-weight: 400;
+}

@@ -1,90 +1,64 @@
 <template>
   <div>
-    <Nav logo="sold" class="nav--marketplace" propertylink="/standalone/marketplace" movebutlerlink="/standalone/movebutler" iamsoldlink="/standalone/agent">
-      
+    
+
+    <nav>
+    <Nav>
+      <a href="/" class="brand brand--property" slot="logo"><svg><title>iam key</title><use xlink:href="/svg/logo.svg#logo-property"></use></svg></a>
 
 
-        <span class="h6 text-muted">Services</span>
+      <a href="/">Dashboard</a>
+      <a href="/">View all stock</a>
+      <a href="/">Your rewards</a>
+      <a href="/">Mosa leads</a>
 
-      <a href="/standalone/marketplace" class="text-decoration-none mb-4 d-flex justify-content-between align-items-center">
-        <Logo id="property" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
+      <div class="dialog__wrapper dialog-overflow show" slot="dual">
+        <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
+        <dialog class="dialog--list">
+                
+          <a href="/"><i class="fa-regular fa-upload"></i>Upload lead</a> 
+          <a href="/"><i class="fa-solid fa-plus"></i>Add viewing</a>
+          <a href="/"><i class="fa-solid fa-plus"></i>Order marketing</a>
+        </dialog>
+      </div>
 
-      <a href="/standalone/movebutler" class="text-decoration-none mb-4 d-flex justify-content-between align-items-center">
-        <Logo id="movebutler" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
+      <a href="/notifications" class="btn btn-secondary btn-compact fa-bell" data-number="5" title="5 unread notifications" slot="dual">5 unread notifications</a>
 
-      <a href="/standalone/agent" class="text-decoration-none mb-5 d-flex justify-content-between align-items-center">
-        <Logo id="sold" class="pb-0 pe-0 fs-2"></Logo>
-        <span class="text-success">Active</span>
-      </a>
+      <a href="/standalone/iamproperty" slot="secondary">iamproperty</a>
+      <a href="/standalone/openview" slot="secondary">CRM</a>
+      <a href="/standalone/movebutler" slot="secondary">movebutler</a>
+      <a href="/standalone/agent" slot="secondary" class="selected">iamsold</a> 
 
-      <span class="h6 text-muted">My Branches</span>
+      <div class="nav--menu" data-title="My account" data-open-title="Martin Critchlow" data-icon="fa-user fa-solid" slot="menus">
+ 
+        <div>  
+          <label for="test1">Active branch</label>
+          <select class="form-select" name="test1" id="test1">
+            <option value="1">Newcastle</option>
+            <option value="2">Two</option>
+            <option value="2">Three</option>
+            <option value="2">Four</option>
+          </select>
+        </div>
+        <hr class="mt-3">
+            
+        <a href="/">Notifications</a><!-- Need notification number? -->
 
-      <form>
-      <Input type="select" id="test1" label="Today, you're at" :options="[{display:'Branch 1',value:'1'},{display:'Branch Two',value:'2'},{display:'Create new branch',value:'new'}]" data-value-if="new" data-redirect="/cp/company/branches/create"></Input>
-      </form>
+        <a href="/">Agency settings</a> <!-- Edit Agent Landing Page -->
+        <a href="/">The Success Hub</a>
+        <a href="/cp/account-overview">Control panel</a>
+        <a href="/">Contact us</a> <!-- What link? -->
+        <a href="/">Log out</a>
 
-      <span class="h6 text-muted">Menu</span>
-
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"><i class="icon fs-1 fa-user"></i></span>
-          <span class="col">
-            <span Class="h5 mb-1">Control panel</span>
-            <span class="text-muted small">
-              Manage your iamproperty account, branches, staff, billing and invoices
-            </span>
-          </span>
-        </span>
-      </a>
-      
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"></span>
-          <span class="col">
-            <span Class="h5 mb-1">Quick start guide & FAQ</span>
-            <span class="text-muted small">
-              Download a guide on how to manage your account
-            </span>
-          </span>
-        </span>
-      </a>
-      
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"></span>
-          <span class="col">
-            <span Class="h5 mb-1">Contact us</span>
-            <span class="text-muted small">
-              Get in touch
-            </span>
-          </span>
-        </span>
-      </a>
-
-      <a href="/" class="nav__featured-link text-decoration-none pb-3 border-top pt-3 d-block mb-0">
-        <span class="row">
-          <span class="col mw-fit-content"><i class="icon fs-1 fa-sign-out"></i></span>
-          <span class="col">
-            <span Class="h5 mb-1">Log out</span>
-            <span class="text-muted small">
-              Martin  Critchlow<br> Watson-Clark
-            </span>
-          </span>
-        </span>
-      </a>
+          
+      </div>
 
 
 
-      <template v-slot:secondary>
-
-TBC
-
-      </template>
     </Nav>
+    </nav>
+
+
     <main class="main--marketplace">
       
       <div class="container pt-4">

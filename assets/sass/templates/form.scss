@@ -1,0 +1,92 @@
+@use "../_func" as *;
+
+body:has(.template--form) {
+  
+  @include light-mode(){
+    
+    background-color: #e9f9fd;
+  }
+}
+
+.template--form {
+
+  --input-max-width: #{rem(450)};
+  --select-max-width: #{rem(500)};
+
+  @supports selector(:has(*)){
+
+    label:has(> :is(.suffix,.prefix)) {
+
+      --input-max-width: #{rem(500)};
+      max-width: var(--input-max-width);
+    }
+    div:has(> :is(.suffix,.prefix)) {
+
+      --input-max-width: #{rem(500)};
+      max-width: var(--input-max-width);
+    }
+  }
+
+
+
+  // Make H2's look like H3's
+  :is(h2, .h2) {
+    font-size: rem(map-get($heading-sizes,"h3_fs"));
+    line-height: rem(map-get($heading-sizes,"h3_lh"));
+    padding-bottom: rem(map-get($heading-sizes,"h3_pb"));
+    max-width: var(--content-max-width);
+  
+    @include media-breakpoint-up(sm) {
+  
+      font-size: rem(map-get($heading-sizes,"h3_fs_sm"));
+      line-height: rem(map-get($heading-sizes,"h3_lh_sm"));
+      padding-bottom: rem(map-get($heading-sizes,"h3_pb_sm"));
+    }
+  }
+
+  @include light-mode(){
+    
+    background-color: #e9f9fd;
+  }
+
+  .form-panel {
+
+    display: block;
+    padding: 2rem;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    background-color: var(--colour-canvas-2);
+    margin-bottom: 1.5rem;
+    outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+    width: 100%;
+    
+    @include media-breakpoint-up(sm) {
+
+      max-width: calc(100% - 5rem); // Guess
+      margin-inline: auto;
+    }
+
+    @include media-breakpoint-up(md) {
+
+      max-width: rem(924); // Guess
+      border-radius: 0.5rem;
+      padding-inline: rem(94);
+      padding-block: rem(40);
+      margin-bottom: rem(32);
+    }
+
+    > *:last-child {
+      margin-bottom: 0!important;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .container--form {
+      padding-inline: 0;
+      max-width: rem(924)!important;
+    }
+  }
+
+  [data-loading] {
+    opacity: 0.5;
+  }
+}

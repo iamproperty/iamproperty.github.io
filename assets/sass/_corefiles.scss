@@ -1,45 +1,49 @@
+@use "sass:math";
 @use "_func" as *;
 
+@layer reset, elements, components, templates, utilities, overrides;
+
+
 // Foundations
-@use "foundations/root.scss";
-@use "foundations/reboot.scss";
-@use "foundations/brand.scss";
-@use "foundations/icons.scss";
-@use "foundations/circles.scss";
-@use "foundations/media.scss";
-@use "foundations/type.scss";
+@include layer('reset') {
+  @import "foundations/root.scss";
+  @import "foundations/reboot.scss";
+}
 
-// elements
-@use "components/lists.scss";
-@use "components/tooltips.scss";
-@use "components/container.scss";
-@use "components/table.scss";
-@use "components/tabs.scss";
-@use "foundations/links.scss";
-@use "foundations/buttons";
-@use "components/admin-panel.scss";
-@use "components/dialog.scss";
+@include layer('elements') {
+  @import "_elements.scss";
+}
 
-@use "components/pagination.scss";
-@use "components/accordion.scss";
+@include layer('components') {
 
-// Bootstrap elements
-@import "../bootstrap/scss/_transitions.scss";
-@import "../bootstrap/scss/_badge.scss";
+  // Make sure the first 
+  main {
+    position: relative;
+    
+    > *:first-child {
+      padding-top: 2rem;
+    }
+  }
 
-// Helpers
-//@import "../bootstrap/scss/helpers";
-@import "../bootstrap/scss/helpers/clearfix";
-//@import "../bootstrap/scss/helpers/colored-links";
-@import "../bootstrap/scss/helpers/ratio";
-@import "../bootstrap/scss/helpers/position";
-@import "../bootstrap/scss/helpers/stacks";
-@import "../bootstrap/scss/helpers/visually-hidden";
-//@import "../bootstrap/scss/helpers/stretched-link";
-@import "../bootstrap/scss/helpers/text-truncation";
-//@import "../bootstrap/scss/helpers/vr";
+  // Deal with preloaded state of native components
+  @import "_components.scss";
+}
 
-@import "helpers/max-height.scss";
+@include layer('templates') {
+  @import "templates/form.scss";
+  @import "templates/auth.scss";
+}
 
-// Utilities
-@import "../bootstrap/scss/utilities/_api.scss";
+@include layer('utilities') {
+    
+  @import "_utilities.scss";
+}
+
+@include layer('overrides') {
+  @media (prefers-reduced-motion) {
+   * {
+    transition: unset;
+    animation: none;
+   }
+  }
+}

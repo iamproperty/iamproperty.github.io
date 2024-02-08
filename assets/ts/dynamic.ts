@@ -3,9 +3,9 @@
 import * as helpers from '../js/modules/helpers'
 import extendDialogs from '../js/modules/dialogs'
 import createDataLayer from '../js/modules/data-layer'
+import extendInputs from '../js/modules/inputs';
 import nav from '../js/modules/nav'
 import table from '../js/modules/table'
-//import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
@@ -13,7 +13,7 @@ import youtubeVideo from '../js/modules/youtubevideo'
 
 import iamNotification from './components/notification/notification.component'
 
-const components = ['accordion','header','tabs', 'table','card','pagination','filterlist', 'applied-filters'];
+const components = ['accordion','header','tabs', 'table','card','pagination','filterlist', 'applied-filters', 'nav', 'marketing'];
 const prefix = "iam"
 const options = {
   rootMargin: '50px',
@@ -63,6 +63,7 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.addGlobalEvents(document.body);
   //helpers.checkElements(document.body);
   extendDialogs(document.body);
+  extendInputs(document.body);
 
   
   if (!window.customElements.get(`iam-notification`))

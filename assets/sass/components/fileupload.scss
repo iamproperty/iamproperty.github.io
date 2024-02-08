@@ -1,0 +1,158 @@
+@use "../_func" as *;
+// #region file upload field
+
+.file-upload {
+  max-width: rem(400)!important;
+  padding-bottom: rem(16);
+
+  .drop-area > input {
+    display: none;
+  }
+
+  .file-upload__title {
+    margin-top: 0; // 1
+    margin-bottom: $headings-margin-bottom;
+    font-family: $headings-font-family;
+    font-style: $headings-font-style;
+    font-weight: $headings-font-weight;
+    line-height: $headings-line-height;
+    color: $headings-color;
+    clear: both;
+    display: block;
+    padding-bottom: 2rem;
+
+    font-size: rem(map-get($heading-sizes,"h4_fs"));
+    line-height: rem(map-get($heading-sizes,"h4_lh"));
+    padding-bottom: rem(map-get($heading-sizes,"h4_pb"));
+    max-width: var(--content-max-width);
+  }
+
+  .helper-text {
+    max-width: rem(270);
+  }
+}
+
+.files {
+
+  span {
+    display: block;
+    width: 100%;
+    padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
+    font-size: var(--input-fs, #{rem(16)});
+    line-height: var(--input-lh, #{rem(20)});
+    border: 2px solid var(--colour-primary-theme);
+    appearance: none; // Fix appearance for date inputs in Safari
+    border-radius: rem(8);
+    margin-bottom: rem(16);
+    color: var(--colour-primary);
+    border-color: #D8D8D8;
+    background: #D8D8D8;
+    max-width: rem(400)!important;
+    position: relative;
+
+
+
+    
+    @include dark-mode() {
+
+      background: var(--colour-canvas-2);
+      border-color: var(--colour-canvas-2);
+      color: var(--colour-body);
+    }
+
+    
+    @media (forced-colors: active) {
+
+      padding-right: 5rem;
+
+      button {
+        padding: 0;
+        width: 3.7rem!important;
+        text-indent: 0% !important;
+
+        &:after {
+          display: none!important;
+        }
+      }
+    }
+
+    button {
+      position: absolute;
+      top: calc(50% - #{rem(9)});
+      right: rem(14);
+      z-index: var(--index-floating);
+      text-indent: 300%;
+      overflow: hidden;
+      border: none;
+      height: rem(18);
+      width: rem(18);
+      background: transparent;
+
+      &:after {
+        content: "";
+        top: 0;
+        left: 0;
+        position: absolute;
+        display: block;
+        height: rem(18);
+        width: rem(18);
+        z-index: var(--index-focus);
+        background: currentColor;
+        mask-image: var(--icon-close);
+        mask-size: 100%;
+        mask-repeat: no-repeat;
+        mask-position: 50% 50%;
+        -webkit-mask-image: var(--icon-close);
+        -webkit-mask-size: 100%;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: 50% 50%;
+      }
+    }
+  }
+}
+
+:host(.fileupload--drag-drop) .file-upload {
+  
+  max-width: rem(800)!important;
+  
+  .helper-text {
+
+    max-width: rem(800)!important;
+  }
+
+  .drop-area > input {
+    display: block;
+    min-height: rem(200);
+    border: 2px dashed var(--colour-primary-theme);
+    color: transparent;
+    position: relative;
+    padding: rem(24) rem(32) rem(24) rem(32);
+    user-select: none;
+    max-width: 100%;
+    min-width: 100%;
+
+    &.focus {
+      
+      border: 2px solid var(--colour-info);
+    }
+  }
+
+  .drop-area {
+    position: relative;
+  }
+
+  .drop-area::before {
+    content: "Drag and drop files here or click to upload";
+    position: absolute;
+    inset: rem(24) rem(32) rem(24) rem(32);
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  ::file-selector-button {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+  }
+}
+// #endregion

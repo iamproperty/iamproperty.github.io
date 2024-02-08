@@ -95,6 +95,7 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
   --yaxis-point-display: none;
   --yaxis-last-point-transform: translate(0,-100%);
 
+
   @container (min-width: 36em) {
     .chart__wrapper {
       --chart-height-resp: var(--chart-height-lg-set);

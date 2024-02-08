@@ -113,7 +113,7 @@
           text-indent: -0.1em;
         }
 
-        &.current {
+        &[aria-current="step"] {
           background: var(--colour-primary);
           color: white;
           pointer-events: none;

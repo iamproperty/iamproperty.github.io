@@ -1,3 +1,18 @@
+**Add the below to your initialise script**
+
+```
+import('../node_modules/@iamproperty/components/assets/js/components/filterlist/filterlist.component.min').then(module => { // Might need to update the path
+
+  if (!window.customElements.get(`iam-filterlist`))
+    window.customElements.define(`iam-filterlist`, module.default);
+
+}).catch((err) => {
+  console.log(err.message);
+});
+```
+
+**Add the below HTML code to where you want the component to live.**
+
 ```
 <iam-filterlist>
 <ul>

@@ -1,0 +1,153 @@
+@use "../_func" as *;
+
+.admin-panel {
+  --padding-x: #{rem(32)};
+  --padding-top: #{rem(16)};
+  --padding-bottom: #{rem(24)};
+  --mh-modifier: #{rem(56 + 16)};
+
+  --mh-padding-inline: var(--padding-x);
+
+
+  display: block;
+  padding: var(--padding-top) var(--padding-x) var(--padding-bottom) var(--padding-x);
+  box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
+  background-color: var(--colour-canvas-2);
+  border-radius: rem(8);
+  margin-bottom: rem(24);
+  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+
+  @include dark-mode() {
+    background-color: var(--colour-canvas-2);
+    color: var(--colour-body);
+
+    .bg-white {
+      background-color: transparent !important;
+      color: var(--white) !important;
+    }
+  }  
+
+  &:empty {
+    display: none;
+  }
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child {
+    
+    --gradient-direction: -90deg!important;
+    background-color:var(--colour-success);
+
+    &:not([class*="bg-"]){
+      color: var(--colour-primary-theme);
+      background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
+    }
+    
+    font-size: rem(18);
+    line-height: rem(24);
+    font-weight: bold;
+    padding: rem(16) var(--padding-x);
+    margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
+    display: block;
+    border-top-left-radius: rem(8);
+    border-top-right-radius: rem(8);
+  }
+
+  :is(iam-table, .iam-table) {
+    margin: 0 0 rem(32) 0;
+    padding: 0;
+    box-shadow: none;
+    background: none;
+  }
+
+  > *:last-child{
+    margin-bottom: 0!important;
+  }
+
+  > *:is(p):last-child{
+    padding-bottom: 0!important;
+  }
+
+  p {
+    max-width: 100%;
+    padding-bottom: rem(24);
+  }
+
+  > :is(.mh-sm,.mh-md,.mh-lg,.mh-sm-sm,.mh-sm-md,.mh-sm-lg,.mh-md-sm,.mh-md-md,.mh-md-lg){
+    overflow: auto;
+
+    &:before {
+      top: 100% !important;
+    }
+  }
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child + :is(.mh-sm,.mh-md,.mh-lg,.mh-sm-sm,.mh-sm-md,.mh-sm-lg,.mh-md-sm,.mh-md-md,.mh-md-lg){
+    padding-top: var(--padding-top);
+    margin-top: calc(var(--padding-top) * -1);
+  }
+  
+  > :is(.mh-sm,.mh-md,.mh-lg,.mh-sm-sm,.mh-sm-md,.mh-sm-lg,.mh-md-sm,.mh-md-md,.mh-md-lg):last-child{
+    padding-bottom: var(--padding-bottom);
+    margin-bottom: calc(var(--padding-bottom) * -1)!important;
+
+    > *:last-child{
+      margin-bottom: 0!important;
+    }
+  
+    > *:is(p):last-child{
+      padding-bottom: 0!important;
+    }
+  }
+
+  > iam-pagination {
+    margin-top: -1rem;
+  }
+}
+
+[class*="col"] .admin-panel:first-child:last-child:not(:has(.mh-sm,.mh-md,.mh-lg,.mh-sm-sm,.mh-sm-md,.mh-sm-lg,.mh-md-sm,.mh-md-md,.mh-md-lg)) {
+
+  min-height: calc(100% - #{rem(24)});
+}
+
+// #region Has actionbar
+.admin-panel:has(iam-actionbar) {
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child {
+    margin-bottom: 0;
+  }
+
+  iam-actionbar {
+    
+    background: var(--colour-canvas);
+    
+    @include light-mode {
+        
+      background: #eeeeee;
+    }
+      
+    margin-inline: calc(var(--padding-x) * -1);
+    margin-bottom: var(--padding-top);
+
+    &:first-child {
+      margin-top: calc(var(--padding-top) * -1);
+    }
+    &:not(:first-child){
+      
+      border-radius: 0;
+    }
+  }
+
+  > iam-table {
+    overflow: visible;
+    
+    &:first-child {
+      margin-top: calc(var(--padding-top) * -1);
+    }
+
+    iam-actionbar {
+      
+      margin-top: 0!important;
+      border-radius: 0;
+      box-shadow: none;
+    }
+  } 
+}
+// #endregion

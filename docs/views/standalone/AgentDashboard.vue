@@ -5,7 +5,7 @@
     </Nav>
     <main class="main--marketplace">
 
-      <form id="tableFilters">
+      <form id="tableFilters" class="full-width">
 
         <div class="container">
           <div class="row">
@@ -15,7 +15,7 @@
             <div class="col-md-3 mw-fit-content">
               <div class="dialog__wrapper dialog__wrapper--md-right">
 
-              <button class="btn btn-secondary me-0 nowrap" aria-label="Display filters of who's work to include" type="button"><span class="empty"><i class="fa fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
+              <button class="btn btn-secondary me-0 nowrap" aria-label="Display filters of who's work to include" type="button"><span class="empty"><i class="fa-regular fa-users me-1" aria-hidden="true"></i> Everybody</span><span class="individual"><i class="fa fa-user me-1" aria-hidden="true"></i> Individual</span><span class="multiple"><i class="fa fa-users me-1" aria-hidden="true"></i> Multiple</span></button>
               <dialog>
 
                 <AppliedFilters class="applied-filters--compact">
@@ -174,7 +174,7 @@
                 <th data-format="date">Date added</th>
                 <th>Transaction address</th>
                 <th>Onboarding status</th>
-                <th>Risk level</th>
+                <th data-td-class="hide-status">Risk level</th>
                 <th>Due diligence</th>
                 <th class="d-none">Added by</th>
                 <th></th>
@@ -633,11 +633,6 @@
 <style lang="scss" >
 
 
-
-
-form {
-  display: contents;
-}
 @media screen and (max-width: 36em){
 
   .sticky-form {

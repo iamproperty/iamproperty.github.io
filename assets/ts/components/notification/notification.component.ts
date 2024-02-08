@@ -17,6 +17,7 @@ class iamNotification extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/notification.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/notification.global.css";`;
 
     const buttons = this.querySelectorAll('a,button');
 
@@ -45,6 +46,9 @@ class iamNotification extends HTMLElement {
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
+    // insert extra CSS
+    if(!document.getElementById('notificationHolder'))
+      document.head.insertAdjacentHTML('beforeend',`<style id="notificationHolder">${loadExtraCSS}</style>`);
   }
 
 	connectedCallback() {

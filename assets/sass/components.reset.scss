@@ -1,0 +1,46 @@
+$darkModeLocal: 'false'!default;
+
+@use "_func.scss" as * with (
+  $darkMode: $darkModeLocal
+);
+
+@use "foundations/root.scss" with (
+  $root: ":is(iam-card,iam-nav,iam-table,.iamkey)" // copied directory from iamkey repo
+);
+
+a:has(iam-card) {
+  all: unset;
+}
+
+
+:is(iam-card,iam-nav, iam-table, .iamkey) {
+
+  @import "foundations/reboot.scss";
+  
+  @include var(font-family,--font-body);
+  @include var(color,--colour-body);
+  width: 100%;
+  line-height: 1.2;
+  min-height: 100%;
+
+  @import "_elements.scss";
+}
+
+:is(iam-table) {
+  width: auto;
+  max-width: rem(1112);
+  display: block;
+}
+
+
+:is(iam-card,iam-nav, iam-table, .iamkey) {
+  @import "_utilities.scss";
+}
+
+body.js-enabled .js-hide {
+  display: none!important;
+}
+
+body:not(.js-enabled) .js-show {
+  display: none!important;
+}

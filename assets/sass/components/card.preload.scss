@@ -1,0 +1,8 @@
+@use "../_func.scss" as *;
+
+iam-card:not(:defined) {
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
+}
+

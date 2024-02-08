@@ -4,7 +4,7 @@
       <ul class="breadcrumb mb-0 d-md-none">
         <li><a href="/foundations">Foundations</a></li>
       </ul>
-      <h1>Animation</h1>
+      <h1>Animation (Beta)</h1>
       <p class="strapline">Animations come in many shapes and forms.</p>
       <p>They can be as subtle as a slight motion of a button, or they can appear as spectacular as a fully animated background. Animation can be set up as interactive reactions to your visitors’ behavior (like objects being revealed when scrolling), or can be independent of visitors’ actions altogether.</p>
       <p class="mb-3"><strong>Key principles:</strong></p>

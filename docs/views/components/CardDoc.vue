@@ -63,6 +63,71 @@
           </a>          
         </div>
       </div>
+
+
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-5 mb-5" style="--min-height: 9rem;">
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+        <div class="col">
+          <a href="/client-onbaording">
+            <Card>
+              <i class="fa fa-home"></i>
+              Lorem Ipsum
+            </Card>
+          </a>          
+        </div>
+      </div>
+
+
+
+
     </div>
     <div class="container">
 
@@ -76,7 +141,10 @@
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
-            <Card>Client onboarding <span>Action Client due diligence checks and view information</span></Card>
+            <Card>
+              Client onboarding 
+              <span>Action Client due diligence checks and view information</span>
+            </Card>
           </a>          
         </div>
 
@@ -97,6 +165,48 @@
       </div>
 
     </div>
+
+
+    <div class="container">
+      <h3>Header card with secondary action</h3>
+      <p>This is a variation of the Header card which includes the addition of a secondary action.</p>
+    </div>
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4">
+        
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <a href="/">
+            <Card class="card--secondary" data-total="99" data-add-link="/?add=true">Properties</Card>
+          </a>
+        </div>
+
+
+        <div class="col4 pe-none">
+          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
+          <button>
+            <Card class="card--secondary hover" data-total="99" data-add-link="/?add=true">Properties</Card>
+          </button>
+        </div>
+        <div class="col4 pe-none">
+          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <button>
+            <Card class="card--secondary active" data-total="99" data-add-link="/?add=true">Properties</Card>
+          </button>
+        </div>
+
+
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Icon instead of figure</span>
+          <a href="/">
+            <Card class="card--secondary">Key control <i class="fa fa-key"></i></Card>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
 
 
 
@@ -233,6 +343,12 @@
             <Card class="card--filter active" data-total="14">Due diligence incomplete</Card>
           </button>
         </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Selected State</span>
+          <button>
+            <Card class="card--filter checked" data-total="14">Due diligence incomplete</Card>
+          </button>
+        </div>
 
       </div>
     </div>
@@ -260,6 +376,12 @@
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <button class="d-inline-block">
             <Card class="card--filter active"><i class="fa fa-house"></i>Character property</Card>
+          </button>
+        </div>
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Checked State</span>
+          <button class="d-inline-block">
+            <Card class="card--filter checked"><i class="fa fa-house"></i>Character property</Card>
           </button>
         </div>
       </div>

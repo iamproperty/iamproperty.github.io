@@ -22,6 +22,7 @@ class iamCard extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/card.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/card.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -30,51 +31,90 @@ class iamCard extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="card ${classList}" tabindex="0" role="button">
-      ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /></div>` : ''}
+      ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
       <div class="card__body">
-      ${this.classList.contains('card--filter') && this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
+      ${!this.hasAttribute('data-image') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
       ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
         <slot></slot>
+      ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
       </div>
+      ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
+      <slot name="checkbox"></slot>
       ${this.hasAttribute('data-cta') ? `<div class="card__footer"><span class="link">${this.getAttribute('data-cta')}</span></div>` : ''}
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+    
+    // insert extra CSS
+    if(!document.getElementById('cardGlobal'))
+      document.head.insertAdjacentHTML('beforeend',`<style id="cardGlobal">${loadExtraCSS}</style>`);
   }
 
 	connectedCallback() {
-    
+
     this.classList.add('loaded');
     
     // Mimic clicking the parent node so the focus and target events can be on the card
     const parentNode = this.parentNode.closest('a, button, label')
     const card = this.shadowRoot.querySelector('.card')
+    const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
 
     parentNode.setAttribute('tabindex','-1');
     
+
     if(parentNode.matches('label[for]')){
 
-      let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+      let isChecked = document.getElementById(parentNode.getAttribute('for')).checked;
         
       if(isChecked)
-        card.classList.add('active');
+        card.classList.add('checked');
+      else
+        card.classList.remove('checked');
     }
+
+    // Click event down
+    this.addEventListener('click', (event) => {
+
+      let clickEvent = new Event('click');
+      card.dispatchEvent(clickEvent);
+    });
 
     card.addEventListener('click', (event) => {
 
       if(parentNode.matches('label[for]')){
 
-        let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+        event.stopPropagation();
+        event.preventDefault();
+
+        const input = document.getElementById(parentNode.getAttribute('for'))
+
+        const inputName = input.getAttribute('name');
+        const inputID = input.getAttribute('id');
+
+        // Mimic radio button functionality
+        const inputs = Array.from(document.querySelectorAll(`[name="${inputName}"][type="radio"]:not([id="${inputID}"])`));
+        inputs.forEach((input, index) => {
           
-        if(!isChecked)
-          card.classList.add('active');
-        else
-          card.classList.remove('active');
-      }
-      else {
+          const otherCard = document.querySelector(`[for="${input.getAttribute('id')}"] iam-card`);
+          
+          otherCard.dispatchEvent(new Event('inactive'));
+        });
+
         parentNode.click();
+        let isChecked = input.checked
+          
+        if(isChecked)
+          card.classList.add('checked');
+        else
+          card.classList.remove('checked');
+
       }
+    });
+
+    this.addEventListener('inactive', (event) => {
+      card.classList.remove('checked');
     });
 
     card.addEventListener('keydown', (event) => {
@@ -85,12 +125,31 @@ class iamCard extends HTMLElement {
           case 13:
             if(parentNode.matches('label[for]')){
 
-              let isChecked = document.getElementById(parentNode.getAttribute('for')).checked
+              event.stopPropagation();
+              event.preventDefault();
+      
+              const input = document.getElementById(parentNode.getAttribute('for'))
+      
+              const inputName = input.getAttribute('name');
+              const inputID = input.getAttribute('id');
+      
+              const inputs = Array.from(document.querySelectorAll(`[name="${inputName}"]:not([id="${inputID}"])`));
+          
+              inputs.forEach((input, index) => {
                 
-              if(!isChecked)
-                card.classList.add('active');
+                const otherCard = document.querySelector(`[for="${input.getAttribute('id')}"] iam-card`);
+                
+                otherCard.dispatchEvent(new Event('inactive'));
+              });
+      
+              parentNode.click();
+              let isChecked = input.checked
+                
+              if(isChecked)
+                card.classList.add('checked');
               else
-                card.classList.remove('active');
+                card.classList.remove('checked');
+      
             }
             else {
               parentNode.click();
@@ -100,6 +159,18 @@ class iamCard extends HTMLElement {
               break;
       }
     });
+
+    if(btnCompact){
+
+      let addLocation = this.getAttribute('data-add-link');
+
+      btnCompact.addEventListener('click', (event) => {
+
+          event.stopPropagation();
+          event.preventDefault();
+          window.location = addLocation;
+      });
+    }
   }
 
   static get observedAttributes() {
@@ -109,7 +180,8 @@ class iamCard extends HTMLElement {
   attributeChangedCallback(attrName, oldVal, newVal) {
     switch (attrName) {
       case "data-total": {
-        this.shadowRoot.querySelector('.card__total').innerHTML = newVal;
+        if(this.shadowRoot.querySelector('.card__total'))
+          this.shadowRoot.querySelector('.card__total').innerHTML = newVal;
         break;
       }
       case "class": {

@@ -1,23 +1,42 @@
-### Usage
-
 ```
-<Nav></Nav>
+<nav>
+<Nav>
+  <a href="/" class="brand brand--property" slot="logo">
+    <svg>
+      <title>iamproperty</title>
+      <use xlink:href="/svg/logo.svg#logo-property"></use>
+    </svg>
+  </a>
+
+  <a href="/" class="selected">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+
+  <button class="btn btn-primary">Lorem ipsum</button>
+</Nav>
+</nav>
 ```
 
-### Properties
+**Properties**
 
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
-| logo | String | property | Update which logo is shown |
-| logotext | String | - | Optional logo text |
-| btnlink | String | - | Optional button can be added, used mainly for links relating to user accounts. |
-| btntext | String | - | Text used within the above button |
+| data-searcd-open  | String | - | Flag that opens the search bar on desktop on page load. |
 
-
-### Slots
+**Slots**
 
 | Option | Default Value | Description |
 | ------ | ------------- | ----------- |
-| default | - | Populates the main nav area, use a ul.list-unstyled element  |
-| secondary | - |Populates the secondary nav area (top bar when on desktop), use a ul.list-unstyled element |
-| search | - | Populates the search featured area area |
+| default | - | Populates the main nav area |
+| logo | - | A place to add the logo to the site |
+| secondary | - | Moves the link upto the top of the navbar on desktop |
+| actions | - | A place to add buttons |
+| dual | - | Plave the link or list to the right of the nav, forcing the default slot to the left. |
+| search | - | A place to include a form with search functionality |
+
+**Class modifiers**
+
+- Adding a class of **.bg-primary** will change the background of the navbar without chaning the menu background. 
+- Adding a class of **.nav--sticky** will add etxra styling to make the navbar stick to the top of the page
+- Adding a class of **.nav--xs-sticky** will add etxra styling to make the navbar stick to the top of the page BUT only on the mobile view.

@@ -1,0 +1,63 @@
+@use "../_func" as *;
+
+
+:host {
+  background: red;
+}
+
+
+@media screen and (max-width: 62em) {
+  :host {
+
+    pointer-events: none;
+    z-index: 99;
+    position: relative;
+    margin-bottom: 38rem;
+
+  }
+
+  .btn-menu {
+
+    
+    width: rem(24)!important;
+    text-indent: -300px!important;
+    padding-right: 0!important;
+
+
+    i {
+      display: none;
+    }
+
+    i + i {
+      display: inline;
+    }
+  }
+
+  .menu__outer {
+    display: contents;
+  }
+  .menu {
+    //position: relative;
+    position: absolute;
+    --scrollbar-width: 17px;
+    top: rem(96);
+    left: auto;
+    right: 0;
+    -webkit-box-shadow: 0 6px 12px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 12px 0px rgba(0,0,0,0.2);
+    //height: auto;
+    width: 100%;
+    max-width: calc(23.4375rem - var(--scrollbar-width));
+    transition: none;
+  }
+  .menu.closed * {
+    display: block !important;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  :host {
+
+    position: relative;
+  }
+}

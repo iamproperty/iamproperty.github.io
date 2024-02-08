@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import iamTable from '../../../assets/js/components/table/table.component.min.js'
 import { ucfirst, unsnake } from '../../helpers/strings'
 
 export default {
@@ -42,9 +41,24 @@ export default {
   created(){
 
     this.$nextTick(function () {
-      
-      if (!window.customElements.get('iam-table'))
-        window.customElements.define('iam-table', iamTable);
+       
+      import(/* @vite-ignore */`../../../assets/js/components/table/table.component.min.js`).then(module => {
+
+        if (!window.customElements.get(`iam-table`))
+          window.customElements.define(`iam-table`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
+
+      import(/* @vite-ignore */`../../../assets/js/components/pagination/pagination.component.min.js`).then(module => {
+
+        if (!window.customElements.get(`iam-pagination`))
+          window.customElements.define(`iam-pagination`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
     })
   },
   updated(){

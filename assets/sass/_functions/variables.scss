@@ -39,6 +39,7 @@ $vars: map-merge((
   "--container-padding-top": 0,
   "--container-padding-bottom": #{rem(16)},
   "--container-padding-x": #{rem($container-padding-x)},
+  "--container-padding-x-sm": #{rem($container-padding-x-sm)},
   "--container-padding-x-md": #{rem($container-padding-x-md)},
   "--container-padding": $container-padding,
   "--container-padding-sm": $container-padding-sm,
@@ -160,7 +161,7 @@ $non-theme-colors: map-merge((
   "body":       $body-color,
   "border":     $colour-border,
   "link":       var(--colour-primary-theme),
-  "brand":      var(--colour-primary),
+  "brand":      var(--colour-primary-theme),
   "underline":  var(--colour-secondary),
   "heading":    var(--colour-primary),
   "focus":      var(--colour-primary-theme),
@@ -178,7 +179,8 @@ $non-theme-colors: map-merge((
   "btn-secondary-bg": transparent,
   "btn-secondary-bg-hover": var(--colour-primary-theme),
   "btn-secondary-hover": var(--colour-inverted),
-  "canvas-2":     var(--colour-canvas)
+  "canvas-2":     white,
+  "btn-action-hover-bg": var(--colour-light)
 ), $non-theme-colors);
 
 @each $color, $value in $non-theme-colors {
@@ -219,7 +221,8 @@ $dark-mode-functional-colors: (
   "btn-secondary-border": var(--colour-white),
   "btn-secondary-bg": transparent,
   "btn-secondary-bg-hover": var(--colour-white),
-  "btn-secondary-hover": var(--colour-primary-theme)
+  "btn-secondary-hover": var(--colour-primary-theme),
+  "btn-action-hover-bg": var(--colour-canvas-2)
 );
 
 
@@ -334,6 +337,10 @@ $content-max-width-px: 800;
 $content-max-width: rem($content-max-width-px);
 $paragraph-margin-bottom: 2rem;
 
+
+$input-max-width-px: 800;
+$input-max-width: var(--input-max-width, #{rem($input-max-width-px)});
+$select-max-width: var(--select-max-width, #{rem($input-max-width-px)});
 // #endregion 
 
 // #region Buttons

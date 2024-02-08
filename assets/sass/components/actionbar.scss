@@ -1,0 +1,271 @@
+@use "../_func.scss" as *;
+
+:host {
+  background-color: #FCFCFC;
+}
+
+.actionbar__wrapper {
+  position: relative;
+  z-index: 10;
+  height: rem(68);
+  container-type: inline-size;
+}
+
+// #region View states (Default, search, selected)
+.views,
+.selectall {
+  position: absolute!important;
+  top: 50%;
+  left: rem(24);
+  
+  @include media-breakpoint-up(sm) {
+    left: rem(32);
+  }
+
+  transform: translate(0,-50%);
+  z-index: 10;
+
+  .btn-action:not(:last-child){
+    margin-right: rem(4)!important;
+  }
+}
+
+.selectall {
+  
+  width: rem(40);
+  overflow: hidden;
+
+  label {
+    height: rem(40);
+  }
+
+  @include media-breakpoint-up(sm) {
+
+    width: auto;
+    overflow: visible;
+  }
+}
+
+.actionbar [data-search] {
+  display: none;
+}
+
+:host([data-search]) .actionbar [data-search] {
+  display: block;
+  margin: 0 0 0 rem(16);
+}
+
+:is(.actionbar,.actionbar--selected,.actionbar--search){
+  
+  border-top-left-radius: var(--actionbar-radius, #{rem(10)});
+  border-top-right-radius: var(--actionbar-radius, #{rem(10)});
+  padding: 0 rem(24);
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  height: rem(68);
+  
+  @supports selector(:has(*)) {
+    position: absolute;
+  }
+  inset: 0;
+
+  @include container-up(sm) {
+    padding: 0 rem(32);
+  }
+}
+
+.actionbar {
+
+  display: flex;
+}
+
+.actionbar--selected {
+
+  background-color: var(--colour-canvas);
+
+  @include light-mode {
+    
+    background-color: #E6EAEC;
+  }
+
+  display: flex;
+  
+  @supports selector(:has(*)) {
+  opacity: 0;
+  }
+  pointer-events: none;
+}
+
+.actionbar--search {
+
+  background-color: var(--colour-canvas);
+  
+  @include light-mode {
+
+    background-color: #E6EAEC;
+  }
+  display: flex;
+  z-index: 2;
+  position: relative;
+  opacity: 0;
+  pointer-events: none;
+}
+
+// Show selected bar
+.selectall:has(input:checked) ~ .actionbar,
+.selectall:has(input:indeterminate) ~ .actionbar {
+  
+  opacity: 0;
+  pointer-events: none;
+}
+.selectall:has(input:checked) ~ .actionbar--selected,
+.selectall:has(input:indeterminate) ~ .actionbar--selected {
+  
+  opacity: 1;
+  pointer-events: all;
+}
+
+// Show search bar
+.actionbar--search.show {
+  
+  opacity: 1;
+  pointer-events: all;
+}
+
+.actionbar__wrapper:has(.actionbar--search.show) > *:not(.actionbar--search.show) {
+  opacity: 0;
+  pointer-events: none;
+}
+// #endregion
+
+// #region Slotted elements
+::slotted(*:not([slot="overflow"])){
+  margin-top: 0!important;
+  margin-bottom: 0!important;
+  margin-left: rem(16)!important;
+  margin-right: 0!important;
+}
+
+::slotted(.btn:not(.btn-action)){
+  order: 2;
+}
+
+// buttons only for single items
+::slotted([data-single]){
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+:host([data-selected="1"]) ::slotted([data-single]){
+  pointer-events: all;
+  opacity: 1;
+}
+
+::slotted(hr){
+  height: rem(32);
+  color: #9D9D9D!important;
+  width: 1px;
+  display: none;
+  
+  @include container-up(md) {
+
+    display: block;
+  }
+}
+// #endregion
+
+// #region safe area
+.safe-area {
+
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  width: rem(210);
+
+  @include container-up(sm) {
+
+    width: rem(450);
+  }
+
+  @include container-up(md) {
+
+    width: rem(750);
+  }
+
+  overflow: visible;
+  position: relative;
+
+  .body {
+    display: contents;
+  }
+}
+
+:host([data-switchviews]) .safe-area {
+  
+  width: rem(144);
+}
+// #endregion
+
+// #region overflow dialog 
+::slotted(.btn-compact[slot="selected-overflow"]),
+::slotted(.btn-compact[slot="overflow"]) {
+
+  max-width: none!important;
+  text-indent: 0!important;
+  width: auto!important;
+  text-align: left!important;
+  padding-left: 0!important;
+  background: none!important;
+  border: none!important;
+
+  &:before {
+    position: static!important;
+    line-height: inherit!important;
+  }
+}
+
+.dialog__wrapper.dialog-overflow {
+  margin-left: 0.5rem;
+  margin-right: -0.5rem;
+}
+// #endregion
+
+// #region Search bar
+.actionbar--search .btn{
+
+  margin: 0;
+  margin-left: rem(-12)!important;
+  margin-right: auto!important;
+}
+
+.search-wrapper {
+  width: calc(100% - #{rem(44 + 8)});
+  max-width: rem(350)!important;
+  margin: 0!important;
+
+  @include container-up(md) {
+
+    max-width: rem(450)!important;
+  }
+
+  input {
+    padding-top: rem(8);
+    padding-bottom: rem(8);
+
+    min-height: rem(40)!important;
+    max-height: rem(40)!important;
+  }
+
+  :is(.prefix,.suffix) {
+    
+    padding: rem(8)!important;
+    min-height: rem(40)!important;
+    max-height: rem(40)!important;
+    min-width: rem(40)!important;
+    max-width: rem(40)!important;
+    line-height: rem(40 - 8 - 8)!important;
+  }
+}
+// #endregion

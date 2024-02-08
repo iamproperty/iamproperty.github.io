@@ -1,0 +1,41 @@
+@use "../_func" as *;
+
+.container.notification__holder {
+
+  position: fixed;
+  top: var(--nav-height);
+  left: 50%;
+  transform: translate(-50%,0);
+  bottom: 0;
+  z-index: 999999;
+  pointer-events: none;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  margin: 0;
+  width: 100%;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  flex-direction: column;
+  align-content: flex-end;
+  align-items: flex-end;
+
+  :is(.iam-notification, iam-notification) {
+    pointer-events: all;
+    margin: 0.5rem 0 0.5rem 0;
+  }
+
+  &.bottom {
+    flex-direction: column-reverse;
+  }
+
+  &.left {
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+
+  &.middle {
+    align-content: space-around;
+    align-items: center;
+  }
+}

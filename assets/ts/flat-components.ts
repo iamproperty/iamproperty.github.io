@@ -3,9 +3,9 @@
 import * as helpers from '../js/modules/helpers'
 import extendDialogs from '../js/modules/dialogs'
 import createDataLayer from '../js/modules/data-layer'
+import extendInputs from '../js/modules/inputs';
 import nav from '../js/modules/nav'
 import * as tableModule from './modules/table'
-import accordion from './modules/accordion'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
   helpers.addGlobalEvents(document.body);
   //helpers.checkElements(document.body);
   extendDialogs(document.body);
+  extendInputs(document.body);
 
   // ANav
   Array.from(document.querySelectorAll('.nav')).forEach((arrayElement) => {
@@ -44,11 +45,6 @@ document.addEventListener("DOMContentLoaded", function() {
       const largestWidth = tableModule.getLargestLastColWidth(arrayElement);
       arrayElement.closest('.table--cta').style.setProperty("--cta-width", `${largestWidth}rem`);
     }
-  });
-
-  // Accordions
-  Array.from(document.querySelectorAll('.accordion')).forEach((arrayElement) => {
-    accordion(arrayElement);
   });
 
   // Testimonial

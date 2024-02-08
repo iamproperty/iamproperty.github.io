@@ -1,0 +1,131 @@
+@use "../_func.scss" as *;
+
+// global
+a {
+  color: var(--colour-link);
+
+  &:is(:hover, :focus, .hover, :focus-within) {
+
+    color: var(--colour-hover);
+  }   
+
+  &:is(:active, .active) {
+
+    color: var(--colour-active);
+  }
+}
+
+a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
+.link {
+  background-color: transparent;
+  text-decoration: none;
+  display: inline-block;
+  border: none;
+  color: var(--colour-link);
+  margin: 0 rem(24) rem(24) 0;
+  padding: 0;
+  font-size: rem(18);
+  line-height: rem(24);
+  min-height: rem(24);
+  position: relative;
+  font-weight: bold;
+
+  &:not(.text-decoration-none){
+    &:after {
+      position: absolute;
+      content: "";
+      top: 100%;
+      left: 50%;
+      height: 2px;
+      width: 100%;
+      transform: translate(-50%,0);
+      background: var(--colour-underline);
+      transition: width 0.5s;
+    }
+  }
+
+  [class*=fa-] {
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+  [class*=fa-]:not(:first-child) {
+    margin-left: 0.5rem;
+    margin-right: 0;
+  }
+
+  &:is(:hover, :focus, .hover, :active, .active, :focus-within) {
+
+    &:after {
+      width: 60%;
+    }
+  }     
+}
+
+@include inline-text(){
+  a:not(.btn) {
+    min-height: none;
+    display: inline;
+    margin: 0;
+    text-decoration: underline;
+
+    &:after {
+      display: none;
+    }
+
+    [class*="fa-"]{
+      margin: 0;
+      display: inline;
+    }
+
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 2px;
+    font-size: inherit;
+    
+    &:is(:hover, :focus, .hover, :focus-within) {
+
+      color: var(--colour-hover);
+      text-decoration: none;
+    }   
+
+    &:is(:active, .active) {
+
+      color: var(--colour-active);
+      text-decoration: none;
+    }
+  }
+}
+
+// #region Support card component
+:is(a,button,label):has(.card, iam-card){
+
+  &:before {
+    display: none;
+  }
+  border: none;
+  background: none;
+  padding:0;
+  display: flex;
+
+
+  &:not([class*="col"]){
+    margin: 0 0 rem(24) 0;
+  }
+
+  outline: none!important;
+  text-decoration: none;
+
+  &:not(.d-inline-block):not([class*="col"]){
+      
+    width: 100%;
+  }
+
+  iam-card {
+    width: 100%;
+  }
+}
+
+:is(.col,[class*="col-"]) > :is(a,button):has(.card, iam-card):first-child:last-child{
+  min-height: calc(100% - rem(24));
+}
+// #endregion

@@ -7,7 +7,7 @@
 
 
     <!-- #region Light mode -->
-    <div class="light-mode">
+    <div class="light-mode full-width">
 
       <div class="container">
         <div class="row">
@@ -119,7 +119,7 @@
     <!-- #endregion Light mode -->
     
     <!-- #region Dark mode -->
-    <div class="dark-mode">
+    <div class="dark-mode full-width">
 
       <div class="container">
           
@@ -257,8 +257,8 @@
     </div>
 
     <div class="container visualtest">
-      <Table class="colour-tints table--fullwidth border-0">
-        <table>
+      <div class="overflow-auto mb-3">
+        <table class="colour-tints table--fullwidth border-0 mb-0">
           <thead>
             <tr>
               <th class="visually-hidden">Colour</th>
@@ -329,7 +329,7 @@
             </tr>
           </tbody>
         </table>
-      </Table>
+      </div>
     </div>
 
     <div class="container">
@@ -404,8 +404,8 @@
       <h2>Semantic colour</h2>
     </div>
     <div class="container visualtest">
-      <Table class="semantic-colours table--fullwidth border-0">
-        <table>
+      <div class="overflow-auto mb-3">
+        <table class="semantic-colours table--fullwidth border-0 mb-0">
           <thead>
             <tr>
               <th class="visually-hidden">Usage</th>
@@ -459,7 +459,7 @@
             </tr>
           </tbody>
         </table>
-      </Table>
+      </div>
     </div>
     
 
@@ -528,7 +528,7 @@
 $compatible: 'false';
 @import "../../../assets/sass/_func";
 
-
+@layer utilities {
 @for $i from 1 through 10 {
   .bg-primary.tint-#{$i}0 {
     $tint: 100%-($i*10%);
@@ -576,7 +576,7 @@ $compatible: 'false';
 .bg-pink {
   background-color: #FFD2D2!important;
 }
-
+}
 .colour-blocks {
   display: flex;
   flex-wrap: wrap;
@@ -631,21 +631,25 @@ $compatible: 'false';
   box-shadow: none;
   background: transparent;
   table {
-  --hover-background: transparent;
+
+    background: transparent;
+    --hover-background: transparent;
+    --row-bg: transparent;
+
     th, td {
       min-width: 0;
       padding-right: 1rem;
     }
   }
 }
+
 .semantic-colours td {
-  padding-left: 0;
+  padding-left: 0!important;
 }
+
 .semantic-colours td::after {
   display: none!important;
 }
-
-
 
 // Dark/Light mode themes
 

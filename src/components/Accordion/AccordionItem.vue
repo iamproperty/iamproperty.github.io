@@ -1,6 +1,6 @@
 <template>
   <details :id="createID(title)">
-    <summary :classList="`${titlecolour?`bg-${titlecolour}`:''}`">{{title}}<span v-if="badge" :class="`badge bg-${badgecolour}`">{{badge}}</span></summary>
+    <summary>{{title}}<span v-if="badge" :class="`badge bg-${badgecolour}`">{{badge}}</span></summary>
     <slot></slot>
   </details>
 </template>

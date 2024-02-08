@@ -3,6 +3,7 @@ function createAppliedFilters(container,filters) {
 
 
   function addFilterButton (filters, input){
+
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
     
@@ -12,7 +13,7 @@ function createAppliedFilters(container,filters) {
     let filter = filters.querySelector(`[data-name="${inputName}"]`);
 
     if(filter && input.getAttribute('type') == 'checkbox')
-      shouldRemoveFilter = true;
+      shouldRemoveFilter = !input.checked ? true : false;
 
     let filterText = input.getAttribute('data-filter-text');
     
@@ -96,17 +97,26 @@ function createAppliedFilters(container,filters) {
   Array.from(container.querySelectorAll('input[type="checkbox"]:checked')).forEach((input, index) => {
     addFilterButton(filters, input)
   });
-  
+
+
+  // check for change in displayed inputs
+  Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input, index) => {
+
+    input.addEventListener('change', function(event){
+
+      addFilterButton(filters, input);
+      event.stopPropagation(); // Don't allow the below event handler to trigger
+    });
+  });
+
+  // Some change event aren't getting triggered above so this event listener on the container will pick them up. This happens with input in modals
   container.addEventListener('change', function(event){
 
     if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')){
-
       let input = event.target.closest('input[data-filter-text]');
-
-      addFilterButton (filters, input);
-    };
-    
-  }, false);
+      addFilterButton(filters, input);
+    }
+  });
 
   filters.addEventListener('click', function(event){
 
@@ -136,7 +146,8 @@ function createAppliedFilters(container,filters) {
             input.checked = false;
 
             var event = new Event('force');
-            input.closest('form').dispatchEvent(event);
+            if(!container.hasAttribute('data-nosubmit'))
+              input.closest('form').dispatchEvent(event);
           }
         }
       }

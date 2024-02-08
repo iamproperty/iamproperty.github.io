@@ -1,0 +1,750 @@
+@use "sass:math";
+@use "../_func" as *;
+
+// non-js fallback
+body:not(.js-enabled) dialog:not([open]):target {
+  display: block;
+}
+
+// #region Default styling of both modals and popovers
+dialog[open] {
+
+  --dialog-padding: #{rem(24)};
+
+  width: fit-content;
+  height: fit-content;  
+  border: none;
+  overscroll-behavior: contain;
+  background: var(--colour-canvas-2);
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
+  border-radius: rem(10);
+  padding: var(--dialog-padding);
+  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+
+  display: flex;
+  flex-direction: column;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+  
+  > :is(p):last-child {
+    padding-bottom: 0;
+  }
+}
+// #endregion
+
+// #region modal styling
+
+*:not(.dialog__wrapper) > dialog[open] {
+
+}
+
+*:not(.dialog__wrapper) > dialog[open] {
+  overflow-y: hidden;
+  width: 90vw;
+  max-width: rem(324); // col-width*4
+
+  //height: 90vh;
+  max-height: min(90vh, #{rem(752)});
+  overscroll-behavior: contain;
+
+  // Close button
+  > form:first-child {
+    position: static;
+  }
+
+  > form:first-child button,
+  > button:first-child {
+    position: absolute;
+    top: var(--dialog-padding);
+    right: var(--dialog-padding);
+    z-index: var(--index-floating);
+
+    text-indent: 300%;
+    overflow: hidden;
+    border: none;
+    height: rem(20);
+    width: rem(20);
+    background: transparent;
+
+    &:after {
+      content: "";
+      top: 0;
+      left: 0;
+      position: absolute;
+      display: block;
+      height: rem(20);
+      width: rem(20);
+      z-index: var(--index-focus);
+      background: currentColor;
+      mask-image: var(--icon-close);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-close);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+    }
+
+    & + * {
+      padding-right: var(--dialog-padding);
+      margin-right: rem(20);
+      display: block;
+    }
+
+    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) {
+      padding-bottom: rem(8);
+      line-height: rem(19);
+    }
+
+    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) + * {
+      padding-right: var(--dialog-padding);
+      margin-right: rem(20);
+      display: block;
+    }
+
+    @media (forced-colors: active) {
+      text-indent: 0;
+      width: fit-content;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    
+    --dialog-padding: #{rem(32)};
+    min-width: rem(335);
+    width: fit-content;
+    max-width: rem(686);
+  }
+  
+  @include media-breakpoint-up(md) {
+    
+    min-width: rem(454);
+    width: fit-content;
+    max-width: rem(736);
+  }
+
+  &:has(.youtube-embed){
+    padding: 0!important;
+  }
+
+  &.dialog--fullwidth {
+    max-width: rem(1112);
+  }
+
+  @media screen and (max-width: 36em) {
+
+    :is(form, fieldset, .btn--wrapper):has(> .btn:first-child, > .btn:last-child) .btn:not(.dialog__close) {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      display: block;
+      text-align: center;
+
+      &:not(:last-child) {
+        margin-bottom: 1rem!important;
+      }
+    }
+  }
+
+  .mh-lg {
+    padding-left: 1rem;
+    margin-left: -1rem;
+    padding-right: calc(var(--dialog-padding) - 10px);
+    margin-right: calc((var(--dialog-padding) * -1) + 10px);
+    margin-bottom: calc(var(--dialog-padding) * -1);
+
+    > *:last-child {
+      margin-bottom: 2rem!important;
+    }
+
+    > p:last-child {
+      padding-bottom: 0!important;
+    }
+  }
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  overscroll-behavior: contain;
+}
+// #endregion
+
+// #region Transactional 
+*:not(.dialog__wrapper) > dialog[open]:is(.dialog--transactional, .dialog--acknowledgement) {
+
+  text-align: center;
+
+
+  &:before {
+    content: "\f05a";
+    font-weight: 300;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display,inline-block);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    font-family: "Font Awesome 6 Pro";
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
+    margin-top: 0;
+    margin-bottom: rem(24);
+    line-height: 1;
+    color: var(--colour-heading);
+    clear: both;
+  }
+
+  &:has(> i):before{
+
+    display: none;
+  }
+
+  &:has(> i) > i{
+
+    display: var(--fa-display,inline-block);
+    line-height: 1;
+    font-size: 3rem;
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
+    margin-top: 0;
+    margin-bottom: rem(24);
+    line-height: 1;
+    color: var(--colour-heading);
+    clear: both;
+
+    &:has(> i){
+      position: relative;
+    }
+
+    > i:before {
+      content: "\f2ed";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: scale(0.5) translate(-100%,0);
+    }
+  }
+
+  > form:first-child button,
+  > button:first-child {
+    display: none;
+
+    & + * {
+      padding-right: 0;
+      margin-right: 0;
+    }
+
+    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) + * {
+      padding-right: 0;
+      margin-right: 0;
+    }
+  }
+
+  form > :is(button,a) {
+    margin-bottom: 0;
+  }
+
+  @include media-breakpoint-up(sm) {
+
+    :is(button, .btn):has(~ :is(button, .btn):last-child),
+    :is(button, .btn):last-child {
+      min-width: calc(50% - 1rem);
+      text-align: center;
+    }
+  }
+}
+// #endregion
+
+// #region Multi 
+.js-enabled *:not(.dialog__wrapper) > dialog[open].dialog--multi {
+
+
+  padding-top: calc(var(--dialog-padding) * 4);
+
+  & > form:first-child button, & > button:first-child {
+    top: calc(var(--dialog-padding) * 4);
+  }
+
+  @supports selector(:has(*)) {
+  fieldset:not(.active) {
+    display: none;
+  }
+  }
+  &:not(:has(fieldset.active)) fieldset:first-of-type{
+    display: flex;
+    flex-direction: column;
+  }
+
+  form > *:not(fieldset) {
+    display: none!important;
+  }
+
+  form {
+    max-height: rem(370);
+  }
+
+  :is(.h1,.h2,.h3,.h4,.h5,.h6){
+    padding-right: calc(var(--dialog-padding) * 3);
+    padding-bottom: var(--dialog-padding);
+  }
+
+  .steps {
+    width: 100%;
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: var(--dialog-padding);
+    counter-reset: section;
+    display: flex;
+    justify-content: space-between;
+
+    &:before {   
+ 
+      content: "";
+      position: absolute;
+      top: calc(50% - 1px);
+      left: var(--dialog-padding);
+      z-index: 2;
+      width: calc(100% - var(--dialog-padding) - var(--dialog-padding));
+      height: 2px;
+      background: currentColor;
+      z-index: 1;
+      background: linear-gradient(90deg, var(--colour-success) 0%, var(--colour-success) var(--progress, 0%), rgba(255,255,255,0.5) var(--progress, 0%), rgba(255,255,255,0.5) 100%);
+    }
+
+    button {
+
+      position: relative;
+      background: transparent;
+      border: none;
+      color: rgba($color: #ffffff, $alpha: 0.5);
+      height: rem(24);
+      line-height: rem(24);
+      width: rem(24);
+      text-indent: 300%;
+      overflow: hidden;
+      z-index: 2;
+      background-color: var(--colour-primary);
+      outline: 0.5rem solid var(--colour-primary);
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        counter-increment: section;
+        content: counter(section);
+
+        border: 1px solid currentColor;
+        height: rem(24);
+        line-height: rem(24);
+        width: rem(24);
+        text-align: center;
+        display: inline-block;
+        text-indent: 0;
+        border-radius: 50%;
+      }
+
+      &:not(.active):not(.valid) {
+        
+        pointer-events: none;
+
+        &:before {
+          opacity: 0.5;
+        }
+      }
+
+      &.active {
+        color: var(--colour-white);
+      }
+      &.valid {
+        color: var(--colour-success);
+      }
+    }
+
+    @include dark-mode() {
+
+      button {
+        
+        color: rgba($color: #000000, $alpha: 0.5);
+
+        &.active {
+          color: black;
+        }
+        &.valid {
+          color: var(--colour-complete);
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    min-width: rem(452);
+    width: rem(452);
+    max-width: rem(452);
+  }
+  @include media-breakpoint-up(md) {
+    min-width: rem(924);
+    width: rem(924);
+    max-width: rem(924);
+    padding-top: var(--dialog-padding);
+    padding-left: calc(var(--dialog-padding) + #{rem(282)});
+    display: flex; 
+    flex-direction: column;
+    //height: rem(478);
+
+    @media (min-height: #{rem(500)}) {
+      height: rem(478);
+      max-height: rem(478);
+    }
+
+
+    & > form:first-child button, & > button:first-child {
+      top: var(--dialog-padding);
+    }
+
+    .steps {
+      width: rem(282);
+      height: 100%;
+      flex-direction: column;
+      justify-content: center;
+
+      &:before {
+        display: none;
+      }
+
+      button {
+        margin-block: 0.5rem;
+        width: 100%;
+        text-indent: 0;
+        text-align: left;
+        padding-left: 2rem;
+        font-size: rem(18);
+        outline-width: 1px;
+      }
+    }
+
+    .btn--wrapper {
+      margin-top: auto;
+      text-align: right;
+    }
+    
+    
+    @supports not selector(:has(*)) {
+      > form {
+        overflow: auto;
+
+        button:not([type="submit"]){
+          display: none;
+        }
+      }
+    }
+    @supports selector(:has(*)) {
+      > form {
+        display: contents
+      }
+      fieldset {    
+        display: flex; 
+        flex-direction: column;
+        flex-grow: 1;
+        position: relative;
+
+        overflow: auto;
+        margin-bottom: calc(var(--dialog-padding) * -1);
+        padding-right: calc(var(--dialog-padding) - 10px);
+        margin-right: calc((var(--dialog-padding) * -1) + 10px);
+
+        > :last-child {
+          margin-bottom: var(--dialog-padding)!important;
+        }
+
+        > p:last-child {
+          padding-bottom: 0!important;
+          margin-bottom: var(--dialog-padding)!important;
+        }
+
+        &::before {
+          content: "";
+          top: 100%;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: var(--dialog-padding);
+          min-height: var(--dialog-padding);
+          position: sticky;
+          display: block;
+          background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
+          z-index: 2;
+          margin-bottom: calc(var(--dialog-padding) * -1);;
+        }
+      }
+    }
+  }
+}
+// #endregion
+
+// #region youTube video
+*:not(.dialog__wrapper) > dialog[open]:has(.youtube-embed){
+
+  display: block;
+
+  .mh-lg, .mh-lg:before {
+    display: contents;
+  }
+
+  @include media-breakpoint-up(sm) {
+    
+    min-width: rem(686);
+    max-width: rem(686);
+  }
+  
+  @include media-breakpoint-up(md) {
+    
+    min-width: rem(736);
+    max-width: rem(736);
+  }
+}
+// #endregion
+
+// #region popover styling
+.dialog__wrapper {
+
+  position: relative;
+  display: inline-block;
+  margin-bottom: calc(var(--btn-margin) - 0.25rem);
+
+
+  > .btn:first-child {
+
+    margin-bottom: 0.25rem;
+
+    &:not(.btn-compact):not([class*="fa-"]):after {
+      content: "";
+    
+      display: inline-block;
+      margin-left: 1em;
+      margin-bottom: -0.15em;
+      height: 1em;
+      width: 1em;
+      z-index: var(--index-focus);
+      background: currentColor;
+      mask-image: var(--icon-arrow);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-arrow);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+
+      transform: rotate(90deg);
+    }
+
+    &[aria-expanded]:not([data-number]):after {
+
+      transform: rotate(270deg);
+    }
+  }
+
+  > dialog[open] {
+
+    left: 0;
+    top: 100%;
+    z-index: var(--index-floating);
+    min-width: rem(320);
+    border-radius: rem(16);
+    width: rem(320);
+    padding: rem(24);
+
+    @include media-breakpoint-up(sm) {
+      width: rem(335);
+    }
+    @include media-breakpoint-up(md) {
+      width: rem(360);
+    }
+
+    &.dialog--list {
+      
+      width: fit-content!important;
+
+      @include media-breakpoint-up(sm) {
+        width: max-content!important;
+      }
+
+      min-width: rem(140)!important;
+      max-width: rem(280)!important;
+      padding: rem(16);
+      margin: 0;
+
+      hr {
+        height: 2px;
+        background: var(--colour-border);
+        margin-left: -#{rem(16)};
+        margin-right: -#{rem(16)};
+        margin-block: 0.25rem;
+      }
+
+      .radio--tick {
+        margin-right: 0;
+        padding-left: 1.5rem;
+          margin-bottom: 0;
+
+        &:before {
+          left: 0;
+          font-size: 1em;
+          top: 0.75rem;
+        }
+      }
+
+      a {
+
+        padding: #{rem(6)};
+
+        &:not(:hover,:focus,:active){
+          border-color: transparent;
+        }
+        margin: 0;
+
+        &:after {
+          display: none;
+        }
+      }
+
+      .btn-action {
+        &:not(:hover,:focus,:active){
+          border-color: transparent;
+        }
+        margin: 0;
+      }
+
+    }
+
+    dialog[open] {
+      display: contents;
+    }
+  }
+
+  &.dialog__wrapper--right > dialog[open]{
+
+    right: 0;
+    left: auto;
+  } 
+
+  &.dialog__wrapper--sm > dialog[open] {
+    
+    width: rem(239);
+  }
+
+  &.dialog__wrapper--lg > dialog[open] {
+    
+    width: rem(319);
+  }
+
+  @include media-breakpoint-up(sm) {
+    
+    &.dialog__wrapper--sm-left > dialog[open]{
+
+      left: 0;
+      right: auto;
+    }  
+    &.dialog__wrapper--sm-right > dialog[open]{
+
+      right: 0;
+      left: auto;
+    }
+    &.dialog__wrapper--sm > dialog[open] {
+      width: rem(265);
+    }
+    &.dialog__wrapper--lg > dialog[open] {
+      width: rem(452);
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    
+    &.dialog__wrapper--md-left > dialog[open]{
+
+      left: 0;
+      right: auto;
+    }  
+    &.dialog__wrapper--md-right > dialog[open]{
+
+      right: 0;
+      left: auto;
+    }
+    &.dialog__wrapper--sm > dialog[open] {
+      width: rem(266);
+    }
+    &.dialog__wrapper--lg > dialog[open] {
+      width: rem(454);
+    }
+  }
+}
+
+// Show hide the indidual or multiple label
+.dialog__wrapper :is(.empty, .individual) {
+  display: none;
+}
+
+@supports selector(:has(*)) {
+
+  .dialog__wrapper :is(.empty, .individual) {
+    display: inline;
+  }
+}
+
+.dialog__wrapper:has(input:checked) .empty,
+.dialog__wrapper:not(:has(input:checked)) .individual,
+.dialog__wrapper:has(input:checked ~ input:checked) .individual,
+.dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
+
+  display: none;
+}
+// #endregion
+
+// #region mobile fullwidth view 
+@media screen and (max-width: 36em) {
+
+  dialog[open].dialog--sm-fullpage,
+  .js-enabled *:not(.dialog__wrapper) > dialog[open].dialog--multi {
+
+    min-width: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    overflow-y: auto;
+
+    .btn--wrapper {
+      padding-top: rem(64);
+    }
+  }
+
+  dialog[open].dialog--sm-fullpage {
+    
+    .mh-lg {
+      max-height: none!important;
+      overflow: visible;
+    }
+
+    &:before,
+    *:first-child {
+      margin-top: auto!important;
+    }
+
+    *:last-child {
+
+      margin-bottom: auto!important;
+    }
+  }
+}
+// #endregion

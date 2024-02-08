@@ -23,24 +23,39 @@ html {
 
   @if $mobileOnly != "true" {
     @media (min-width: #{em(1280)}) {
+      font-size: 100%;
+      font-size: vw(1280);
+
+      &:has(.nav--large) {
         font-size: 100%;
+      }
+    }
+
+    @media (min-width: #{em(1440)}) {
+      font-size: 112.5%;
+
+      &:has(.nav--large) {
+        font-size: 100%;
+      }
+    }
+
+    @media (min-width: #{em(1680)}) {
+      //font-size: 131.25%;
     }
 
     @media print {
       font-size: 16px;
     }
+
+    @media screen and (min-width: 120em) { // 1920
+
+      &:has(.nav--large) {
+  
+        font-size: vw(1920);
+      }
+    }
+
   }
-  /*
-  @media (min-width: #{em(1440)}) {
-    font-size: vw(1440);
-  }
-  @media (min-width: #{em(1600)}) {
-    font-size: 111.11%;
-  }
-  @media (min-width: #{em(1800)}) {
-    font-size: 125%;
-  }
-  */
 }
 
 body {
@@ -51,22 +66,21 @@ body {
   width: 100%;
   line-height: 1.2;
   min-height: 100%;
-
 }
 
 // #region scrollbars
-:is(div,form,fieldset)::-webkit-scrollbar {
+:is(div,form,fieldset,textarea)::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
  
-:is(div,form,fieldset)::-webkit-scrollbar-track {
+:is(div,form,fieldset,textarea)::-webkit-scrollbar-track {
   background-color: #f1f1f1;
   border-top: 4px solid var(--colour-canvas-2);
   border-left: 4px solid var(--colour-canvas-2);
 }
  
-:is(div,form,fieldset)::-webkit-scrollbar-thumb {
+:is(div,form,fieldset,textarea)::-webkit-scrollbar-thumb {
   background-color: #c1c1c1;
   width: 6px;
   border-top: 4px solid var(--colour-canvas-2);
@@ -96,6 +110,8 @@ button:focus {
 }
 
 hr {
+  --border-style: solid;
+  --border-color: var(--colour-border);
   border: 0;
   color: transparent;
   margin: 0;
@@ -103,6 +119,7 @@ hr {
   background-color: currentColor;
   opacity: 1;
   clear:both;
+
 
   &:after {
     display: table;
@@ -140,86 +157,49 @@ details {
   width: 100%;
 }
 
+// Main grid setup to avoid having to use continaer divs
 
-// #region Undefined web components
-:is(*):not(:defined) {
-  display: block;
-  padding: rem(24);
-  margin-bottom: rem(24);
-  border-radius: rem(8);
+*:not(.row) > main {
+  --full-width-start: 0;
+
+  @include media-breakpoint-up(md) {
+    --full-width-start: calc((100% - var(--container-max-width)) / 2);
+  }
+
+  display: grid;
   margin-left: auto;
   margin-right: auto;
-  max-width: 80rem;
-}
-
-main > :is(*):not(:defined) {
-
-  padding: var(--container-padding);
-  padding-top: 1rem;
-}
-
-@include media-breakpoint-up(md) {
-    
-  main > :is(*):not(:defined) {
-    max-width: 100%!important;
-    padding-inline: calc(50% - #{rem(math.div(1112,2))});
-  }
-
-  iam-header:not(:defined) {
-    min-height: rem(470);
-  }
-}
-
-:is(iam-notification,iam-card):not(:defined) {
-  box-shadow: var(--card-box-shadow);
-  border-radius: var(--card-border-radius);
-  padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
-}
-
-main {
-  position: relative;
-}
-
-
-.container.notification__holder {
-
-  position: fixed;
-  top: var(--nav-height);
-  left: 50%;
-  transform: translate(-50%,0);
-  
-  bottom: 0;
-  z-index: 999999;
-  pointer-events: none;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  display: flex;
-  margin: 0;
   width: 100%;
-  max-width: rem(454);
-  flex-wrap: wrap;
-  align-content: flex-start;
-  flex-direction: column;
-  align-content: flex-end;
-  align-items: flex-end;
+  
+  grid-template-columns:
+  [full-width-start] var(--full-width-start)
+  [container-start] var(--padding-inline)
+  [content-start] min(
+  100% - (var(--padding-inline) * 2),
+  calc(var(--container-max-width) - (var(--padding-inline) * 2))
+  )
+  [content-end]
+  var(--padding-inline) [container-end]
+  var(--full-width-start) [full-width-end];
 
-  :is(.iam-notification, iam-notification) {
-    pointer-events: all;
-    margin: 0.5rem 0 0.5rem 0;
-  }
-
-  &.bottom {
-    flex-direction: column-reverse;
-  }
-
-  &.left {
-    align-content: flex-start;
-    align-items: flex-start;
-  }
-
-  &.middle {
-    align-content: space-around;
-    align-items: center;
+  &:not(:has(.container:last-child)){
+    padding-bottom: 1rem;
   }
 }
-// #endregion
+
+main > :not(.full-width, .container, iam-header, [class*="bg-"]) {
+  grid-column: content;
+}
+
+
+main > :is(.full-width, .container, iam-header) {
+  grid-column: container;
+}
+
+main > :is(.full-width, [class*="bg-"]) {
+  grid-column: full-width;
+}
+
+.row > .col {
+  min-height: var(--min-height,0);
+}

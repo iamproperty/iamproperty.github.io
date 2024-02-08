@@ -1,0 +1,80 @@
+@use "../_func" as *;
+
+.brand {
+
+  --svg-width: #{em(380,130)};
+
+  &--sold {
+    --svg-width: #{em(247,130)};
+  }
+
+  &--key {
+    --svg-width: #{em(228,130)};
+  }
+
+  &--compliance,
+  &--movebutler {
+    --svg-width: #{em(740,130)};
+  }
+
+  &--medwaylaw {
+    --svg-width: #{em(465,130)};
+  }
+
+  &--openview {
+    --svg-width: #{em(475,89)};
+  }
+
+  &--crm {
+    --svg-width: #{em(250,89)};
+  }
+
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding-right: rem(16);
+  padding-bottom: rem(16);
+  min-width: 100%;
+  min-width: Min(100%, var(--svg-width));
+  font-size: rem(64);
+  @include var(color,--colour-brand);
+
+  /* Restrict the logo colours so that only text-secondary can be defined */
+  &[class*="text-"]:not(.text-secondary){
+    color: inherit!important;
+  }
+
+  svg {
+    fill: currentColor;
+    height: 1em;
+    width: 100%;
+    max-width: var(--svg-width);
+  }
+
+  span {
+    white-space: nowrap;
+    font-size: 1rem;
+    padding-left: rem(16);
+    line-height: 1;
+    font-weight: bold;
+    display: inline-block;
+    text-decoration: none;
+  }
+}
+
+a.brand:not(:hover):not(:focus):not(:active),
+a:not(:hover):not(:focus):not(:active) .brand {
+
+  @include var(color,--colour-brand);
+}
+
+a.brand:hover,
+a.brand:focus,
+a.brand:active,
+a:hover .brand,
+a:focus .brand,
+a:active .brand {
+  
+  color: currentColor!important;
+}

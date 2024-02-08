@@ -17,23 +17,6 @@ export const addBodyClasses = (body) => {
     body.classList.add("ie");
   }
 
-  let nav = document.querySelector('nav');
-  if(nav) {
-    let navHeight = nav.offsetHeight;
-    document.querySelector('body').style.setProperty("--nav-height", `${navHeight}px`);
-
-    function outputsize() {
-
-      navHeight = nav.offsetHeight;
-      document.querySelector('body').style.setProperty("--nav-height", `${navHeight}px`);
-    }
-    
-    new ResizeObserver(outputsize).observe(nav);
-  }
-  else {
-    document.querySelector('body').style.setProperty("--nav-height", `0px`);
-  }
-
   return null
 }
 
@@ -42,12 +25,13 @@ export const addBodyClasses = (body) => {
  * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
  */
 export const addGlobalEvents = (body) => {
-  
+
   const checkElements = function(hash){
 
     const label = document.querySelector(`label[for="${hash.replace('#','')}"]`);
     const summary = document.querySelector(hash+' summary');
     const dialog = document.querySelector(`dialog${hash}`);
+    const detail = document.querySelector(`detail${hash}`);
 
     if(label instanceof HTMLElement)
       label.click();
@@ -55,6 +39,8 @@ export const addGlobalEvents = (body) => {
       summary.click();
     else if(dialog instanceof HTMLElement)
       dialog.showModal();
+    else if(detail instanceof HTMLElement)
+      detail.addAttribute('open');
   }
 
   if(location.hash)
@@ -64,7 +50,7 @@ export const addGlobalEvents = (body) => {
 
   addEventListener("popstate", (event) => {
 
-    if(event && event.state.type && event.state.type == "pagination"){
+    if(event && event.state && event.state.type && event.state.type == "pagination"){
       let form = document.querySelector(`#${event.state.form}`);
       let pageInput = document.querySelector(`#${event.state.form} [data-pagination]`);
       
@@ -74,6 +60,37 @@ export const addGlobalEvents = (body) => {
         form.innerHTML += `<input name="page" type="hidden" data-pagination="true" value="${event.state.page}" />`
       
       form.dispatchEvent(new Event("submit"));
+    }
+  });
+
+  document.addEventListener("submit", (event) => {
+
+    if (event && event.target instanceof HTMLElement && event.target.matches('form')){
+
+      let form = event.target;
+
+      // Reset password types
+      Array.from(form.querySelectorAll('[data-password-type]')).forEach((input,index) => {
+        input.setAttribute('type','password');
+      });
+
+      if(form.querySelector(':invalid') || form.querySelector('.pwd-checker[data-strength="1"]') || form.querySelector('.pwd-checker[data-strength="2"]')){
+        
+        form.classList.add('was-validated');
+        event.preventDefault();
+      }
+    }
+
+  });
+
+  document.addEventListener("keydown", (e) => {
+
+    if(e.key === "Escape") {
+      
+      if(document.querySelector('.dialog--transactional[open], .dialog--acknowledgement[open]')){
+        e.preventDefault();
+        e.stopPropagation();
+      }
     }
   });
 
@@ -123,3 +140,8 @@ export const numberOfDays = function(startDateString:string,endDateString:string
   
   return numberOfDays;
 }
+// Used to get values from nested json objects
+export const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'\"]/).filter(p => p).reduce((o, p) => o ? o[p] : defaultValue, object);
+
+
+export const isTraversable = o => Array.isArray(o) || o !== null && ['function', 'object'].includes(typeof o);

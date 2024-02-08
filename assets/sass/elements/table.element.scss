@@ -1,0 +1,102 @@
+@use "../_func.scss" as *;
+
+// #region Default table
+table {
+  --border-width: 2px;
+  --inner-border-width: 2px;
+  width: 100%;
+  font-size: rem(16);
+  border: none;
+  margin-bottom: rem(32);
+  overflow: auto;
+}
+
+:is(td,th) {
+  padding: rem(12) rem(32) rem(12) 0;
+  
+  font-weight: normal;
+  text-align: left;
+  vertical-align: top;
+  border: none;
+  font-size: rem(16);
+  line-height: rem(20);
+  color: var(--colour-body);
+
+  &:last-child {
+    padding-right: 0;
+  }
+  
+  p {
+    font-size: inherit;
+    padding: 0;
+      @container (width > 23.4375em) {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;  
+      overflow: hidden;
+      min-width: rem(300);
+    }
+  }
+}
+
+th {
+  font-weight: bold;
+  @include var(color,--colour-heading);
+}
+
+thead {
+  tr {
+    
+    border-bottom: var(--border-width) solid currentColor;
+    @include var(border-color,--colour-primary);
+  }
+  th {
+    padding-top: 0;
+    vertical-align: bottom;
+  }
+}
+
+// Error messages
+tr td[colspan="100%"]:first-child:last-child span {
+
+  max-width: rem(624);
+  font-weight: bold;
+  padding: 3rem;
+  text-align: center;
+  display: block;
+  color: var(--colour-heading);
+
+  @include media-breakpoint-up(md) {
+    max-width: rem(1048);
+  }
+}
+
+@container (width >= 60em) {
+  thead {
+
+    th:not(:empty) {
+      white-space: nowrap;
+      min-width: #{$td-mw};
+    }
+    th.th--mw-md {
+      min-width: rem(240);
+    }
+    th.th--mw-lg {
+      min-width: rem(360);
+    }
+  }
+}
+
+tbody tr {
+
+  border-bottom: var(--border-width) solid currentColor;
+  @include var(border-color,--colour-border);
+}
+
+.border-0 > table,
+table.border-0 {
+
+  --border-width: 0px;
+  --inner-border-width: 0px;
+}
+// #endregion

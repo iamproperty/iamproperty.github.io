@@ -1,13 +1,31 @@
-@use "components/card.scss";
-@use "components/nav.scss";
-@use "components/header.scss";
-@use "components/testimonial.scss";
-@use "components/accordion.scss";
-@use "components/notification";
-@use "components/carousel.scss";
-@use "components/property-searchbar.scss";
-@use "components/tabs.scss";
-@use "components/charts.scss";
-@use "components/timeline.scss";
-@use "components/snapshot.scss";
-@use "components/stepper.scss";
+@use 'sass:math';
+@use "_func" as *;
+
+@use 'components/nav.preload';
+@use 'components/card.preload';
+@use 'components/carousel.preload';
+
+// #region Undefined web components
+main > :is(*):not(:defined):not(iam-carousel) {
+
+  padding: var(--container-padding);
+  padding-top: 1rem;
+}
+
+@include media-breakpoint-up(md) {
+      
+  main > :is(*):not(:defined):not(iam-carousel) {
+    max-width: 100%!important;
+    padding-inline: calc(50% - #{rem(math.div(1112,2))});
+  }
+
+  iam-header:not(:defined) {
+    min-height: rem(470);
+  }
+}
+
+// Search
+iam-search input:not(.is-invalid):not(:invalid) {
+  background: none!important;
+}
+

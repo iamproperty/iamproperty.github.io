@@ -18,6 +18,66 @@
   }
 }
 
+@mixin dark-mode(){
+  @media screen and (prefers-color-scheme: dark) {
+    @if $darkMode == "true" {
+        
+      @content;
+    }
+  }
+}
+
+@mixin light-mode(){
+
+  @if $darkMode == "true" {
+    @media screen and (prefers-color-scheme: light) {
+    
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
+@mixin layer($name){
+  @if $layers == "true" {
+
+    @layer #{$name} {
+
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
+@mixin container-up($name) {
+  
+  @if $name == 'sm' {
+    
+    @container (width > 23.4375em) {
+      @content;
+    }
+  }
+  @else if $name == 'md' {
+    
+    @container (width > 48em) {
+      @content;
+    }
+  }
+  @else if $name =='xs' {
+    @content;
+  } 
+  @else {
+    @if $mobileOnly != "true" {
+    @content;
+    }
+  }
+}
+
+
 // Example: @include prefix(transition, transform 1.5s, webkit ms o);
 @mixin prefix($property, $value, $prefixes: (webkit ms o))
 {
@@ -149,5 +209,21 @@
   @each $color, $value in $dark-mode-functional-colors {
 
     --colour-#{$color}: #{$value};
+  }
+}
+
+@mixin slotted($el, $isComponent:"true"){
+  
+  @if $isComponent == "true" {
+    ::slotted(#{$el}) {
+    
+      @content;
+    }
+  }
+  @else {
+    #{$el} {
+    
+      @content;
+    }
   }
 }

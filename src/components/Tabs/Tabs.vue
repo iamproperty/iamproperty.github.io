@@ -9,13 +9,21 @@
 </style>
 
 <script>
-import iamTabs from '../../../assets/js/components/tabs/tabs.component.min.js'
-
-if (!window.customElements.get('iam-tabs'))
-  window.customElements.define('iam-tabs', iamTabs);
-
-
 export default {
-  name: 'Tabs'
+  name: 'Tabs',
+  mounted(){
+
+    this.$nextTick(function () {
+      
+      import(`../../../assets/js/components/tabs/tabs.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+
+        if (!window.customElements.get(`iam-tabs`))
+          window.customElements.define(`iam-tabs`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
+    })
+  }
 }
 </script>

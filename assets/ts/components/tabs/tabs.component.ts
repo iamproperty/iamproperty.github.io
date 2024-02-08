@@ -16,11 +16,13 @@ class iamTabs extends HTMLElement {
 
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
+    const loadCSS = `@import "${assetLocation}/css/components/tabs.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
     @import "${coreCSS}";
+    ${loadCSS}
 
     :host(.admin-panel){
       display: contents!important;
@@ -29,7 +31,9 @@ class iamTabs extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="tabs">
-      <div class="tabs__links"></div>
+      <div class="tabs__links__wrapper">
+        <div class="tabs__links"></div>
+      </div>
       <slot></slot>
     </div>
     `;

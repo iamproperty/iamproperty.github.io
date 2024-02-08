@@ -3,6 +3,106 @@
     <div class="container">
       <h1>Changelog</h1>
 
+      <h2>V5.4.0</h2>
+      <ul>
+        <li>Update the Nav component for greater configuration</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Tabs classes are now only available using the tabs component</li>
+        <li>Some Sass/CSS file names have changed or moved</li>
+      </ul>
+
+      <h2>V5.1.0</h2>
+      <ul>
+        <li>Tidy up and reduce the file size of the core CSS' with some CSS moved into seperate files loaded via the component associated.</li>
+        <li>Developers can now add links into the tabs component to create a secondary nav component looking like the tabs</li>
+        <li>Remove the need to put content into a .container div</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Tabs classes are now only available using the tabs component</li>
+        <li>Some Sass/CSS file names have changed or moved</li>
+      </ul>
+
+      <h2>V5.0.0</h2>
+      <ul>
+        <li>Re-introduce elements section</li>
+        <li>Add CSS layers</li>
+        <li>Dynamic Events</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Some Sass/CSS file names have changed</li>
+      </ul>
+
+      <h2>V4.1.0</h2>
+      <ul>
+        <li>Lots of changes ad fixes for the forms</li>
+        <li>Updated Tables</li>
+        <li>Updated Pagination</li>
+        <li>Updated Navbar</li>
+        <li>Collapsible side menu</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Any where the table component is used requires that the pagination component JS is loaded</li>
+      </ul>
+
+
+      <h2>V4.0.0</h2>
+      <ul>
+        <li>Action bar component</li>
+        <li>Updated Navbar</li>
+        <li>Collapsible side menu</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>To use the old navbar CSS or SCSS files you will need to update the filename to nav.old.scss or nav.old.css.</li>
+      </ul>
+
+
+      <h2>V3.8.0</h2>
+      <ul>
+        <li>New action button variant</li>
+        <li>Checkbox documentation</li>
+        <li>Popover lists variants</li>
+      </ul>
+
+      <h2>V3.7.9</h2>
+      <ul>
+        <li>Multi-step modal component updated to display full width on mobile.</li>
+        <li>Update the ajax table functionality so we can take ajax responses and display the meta data values on the page.</li>
+      </ul>
+
+
+      <h2>V3.7.8</h2>
+
+      <ul>
+        <li>Form inputs (removal of bootstrap classes)</li>
+        <li>Form radio buttons</li>
+        <li>Form checkboxes</li>
+        <li>Form file upload</li>
+      </ul>
+
+      <h3>Breaking changes</h3>
+      <ul>
+        <li>Updating the form inputs could cause issues with other compoonents especiialy since not all of the input field varients have been reviewed yet.</li>
+      </ul>
+
+
+      <h2>V3.7.7</h2>
+      <ul>
+        <li>Bug fixed to always recreate cta width on table</li>
+        <li>Allow flags to be shown on the cards</li>
+        <li>Update the status icons</li>
+      </ul>
+
       <h2>V3.7.6</h2>
       <ul>
         <li>Table bug fixes</li>

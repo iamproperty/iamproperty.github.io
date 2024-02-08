@@ -1,0 +1,82 @@
+@use "../_func.scss" as *;
+
+iam-carousel {
+
+  margin-inline: calc(var(--container-padding-x) * -1);
+  margin-bottom: 5rem;
+  overflow: auto;
+  display: block;
+
+  > .row {
+    
+    flex-wrap: nowrap!important;
+    margin-inline-end: 0;
+    padding-inline-start: var(--container-padding-x);
+    padding-inline-end: var(--container-padding-x);
+
+    .col:last-child{
+      padding-inline-end: var(--container-padding-x);
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+
+    margin-inline: calc(-0.5 * $grid-gutter-width);
+
+    > .row {
+        
+      padding-inline: 0;
+      margin-inline: 0;
+
+      .col:last-child{
+        padding-inline-end: calc(0.5 * $grid-gutter-width);
+      }
+    }
+  }
+}
+
+// For extra file
+iam-carousel:defined {
+  
+  overflow: visible;
+}
+
+iam-carousel > .row .col {
+  scroll-snap-align: start;
+  scroll-margin-left: calc(var(--container-padding-x) - calc(0.5 * $grid-gutter-width));
+}
+
+
+@include media-breakpoint-up(sm) {
+
+  iam-carousel > .row[class*="row-cols-sm-"] > .col{
+    scroll-snap-align: unset;
+  }
+
+  iam-carousel > .row-cols-sm-2 > .col:nth-child(odd),
+  iam-carousel > .row-cols-sm-3 > .col:nth-child(3n+1),
+  iam-carousel > .row-cols-sm-4 > .col:nth-child(4n+1),
+  iam-carousel > .row-cols-sm-5 > .col:nth-child(5n+1),
+  iam-carousel > .row-cols-sm-6 > .col:nth-child(6n+1) {
+    scroll-snap-align: start;
+  }
+}
+
+@include media-breakpoint-up(md) {
+
+  iam-carousel > .row[class*="row-cols-md-"] > .col{
+    scroll-snap-align: unset;
+    margin-left: 0;
+    scroll-margin-left: 0;
+  }
+  
+  iam-carousel > .row-cols-md-2 > .col:nth-child(odd),
+  iam-carousel > .row-cols-md-3 > .col:nth-child(3n+1),
+  iam-carousel > .row-cols-md-4 > .col:nth-child(4n+1),
+  iam-carousel > .row-cols-md-5 > .col:nth-child(5n+1),
+  iam-carousel > .row-cols-md-6 > .col:nth-child(6n+1) {
+    scroll-snap-align: start;
+
+  }
+}
+
