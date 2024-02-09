@@ -41,15 +41,52 @@ class iamChart extends HTMLElement {
 
 	connectedCallback() {
 
+    const element = this;
     const orginalTable =  this.querySelector('table');
     const newTable = orginalTable.cloneNode(true);
     const chart = this.shadowRoot.querySelector('.chart');
     const chartOuter = this.shadowRoot.querySelector('.chart__outer');
     
+
     chart.appendChild(newTable);
+
+    if(!this.classList.contains('chart--no-animate'))
+      chartOuter.classList.add('chart--animate');
 
     setupChart(this,chartOuter,newTable);
     setEventObservers(this,chartOuter);
+    
+    
+    const options = {
+      rootMargin: '50px',
+      threshold: 0.1
+    }
+
+    let callback = (entries:any) => {
+
+      entries.forEach((entry:any) => {
+        
+        if(entry.intersectionRatio > 0){
+
+
+          chartOuter.classList.add('animating');
+          chartOuter.classList.add('inview');
+          intObserver.unobserve(entry.target);
+
+          let rowCount = entry.target.querySelectorAll('tbody tr').length;
+          let animationTime = 2000 + (rowCount*100);
+          
+
+          setTimeout(function() {
+            chartOuter.classList.remove('animating');
+          }, animationTime);
+
+        }
+      });
+    };
+  
+    const intObserver = new IntersectionObserver(callback, options);
+    intObserver.observe(element);
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {

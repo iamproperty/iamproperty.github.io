@@ -1,23 +1,37 @@
 ```
-<a href="/link-url">
-  <iam-card>Link content</iam-card>
-</a>
+<iam-chart>
+  <table>
+    <thead>
+      <tr>
+        <th>Issue</th>
+        <th>Democrat</th>
+        <th>Republican</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Inflation</td><td>45%</td><td>18%</td></tr><tr><td>Abortion</td><td>12%</td><td>43%</td></tr>
+      <tr><td>Gun policy</td><td>8%</td><td>14%</td></tr><tr><td>Immigration</td><td>15%</td><td>5%</td></tr>
+      <tr><td>Crime</td><td>13%</td><td>10%</td></tr>
+    </tbody>
+  </table>
+</iam-chart>
 ```
+
+**To do**
+
+- Animation
+- Add more chart types
+- optimise code
+- change key
+- Fill in readme with class and attributes
+- flout
 
 **Note**
 
-The card component needs to be wrapped with a link or a button, this is required to give the card any functionality.
 
 **Properties**
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| data-total | Int | - | Optional total number , usually use on the filter card type |
-| data-image | image url | - | Optional image url to create a card header with an image as its background |
 
 **Class modifiers**
 
-- Adding a class of **.card--filter** will implement the filter card design. 
-- Adding a class of **.colour-danger** will add a left hand border with the danger colour (See status card). This works with all of the theme
-- Adding a class of **.border-o** will remove the box-shadow of the card and make some minor sizing adjustments. 
-- Adding a class like **.colour-warning** will update the colour of the left berder for the card. The theme colours will be avialable to use.
+- .chart--no-animate turns of the animation
