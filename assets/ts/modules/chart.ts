@@ -20,11 +20,11 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => 
 
   createTypeSwitcher(chartElement,chartKey,chartOptions);
 
-  let {xaxis,slope,type} = getChartData(chartElement,chartOuter);
+  let {xaxis,type} = getChartData(chartElement,chartOuter);
 
   setCellData(chartElement,chartOuter,tableElement);
 
-  createChartKey(chartElement,chartOuter,tableElement,chartKey);
+  createChartKey(chartOuter,tableElement,chartKey);
   createChartGuidelines(chartElement,chartOuter,chartGuidelines);
   createChartYaxis(chartElement,chartOuter,chartYaxis);
 
@@ -35,7 +35,7 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => 
   }
 
   if(availableTypes.includes('pie'))
-    createPies(chartElement,chartOuter);
+    createPies(chartOuter);
 
   if(xaxis){
     createXaxis(chartElement,chartOuter,xaxis);
@@ -50,7 +50,7 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => 
 
 
   if(availableTypes.includes('bar') || availableTypes.includes('dumbbell') || availableTypes.includes('responsive'))
-    setLongestLabel(chartElement,chartOuter);
+    setLongestLabel(chartOuter);
 
 
   // Event handlers
@@ -65,7 +65,7 @@ export const setEventHandlers = function(chartElement:any,chartOuter:any) {
   const showData = chartOuter.querySelectorAll(':scope > input[type="checkbox"]');
 
 
-  let {min,max,type} = getChartData(chartElement,chartOuter);
+  let {type} = getChartData(chartElement,chartOuter);
 
   const availableTypes = chartElement.hasAttribute('data-types') ? chartElement.getAttribute('data-types').split(',') : [type];
 
@@ -73,7 +73,7 @@ export const setEventHandlers = function(chartElement:any,chartOuter:any) {
     showData[i].addEventListener('change', function() {
 
       if(availableTypes.includes('pie'))
-        createPies(chartElement,chartOuter);
+        createPies(chartOuter);
 
       //setupOptionalContent(chartElement,min,max); // TODO: move this to the observer and just update the data attribute
     });
@@ -188,7 +188,7 @@ function getLargestValue(table:any){
   return Math.ceil(largetValue);
 }
 
-const getValues = function(chartElement:any,value:number,min:any,max:any,start?:number){
+const getValues = function(value:number,min:any,max:any,start?:number){
 
   let cleanValue:string|number = String(value);
   cleanValue = cleanValue.replace('£','');
@@ -330,7 +330,7 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
     }
 
     // Add css vars to cells
-    Array.from(tr.querySelectorAll('td[data-numeric]:not([data-label="Min"]):not([data-label="Max"]):not(:first-child)')).forEach((td:any, tdIndex) => {
+    Array.from(tr.querySelectorAll('td[data-numeric]:not([data-label="Min"]):not([data-label="Max"]):not(:first-child)')).forEach((td:any) => {
 
       let display = getComputedStyle(td).display;
       if(display == 'none')
@@ -346,7 +346,7 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
 
       if(!td.hasAttribute('style')){
         
-        let { percent, bottom, axis } = getValues(chartElement,value,rowMin,rowMax,start);
+        let { percent, bottom, axis } = getValues(value,rowMin,rowMax,start);
 
         td.setAttribute('data-percent',percent)
         td.setAttribute("style",`--bottom:${bottom}%;--percent:${percent}%;--axis:${axis}%;`);
@@ -450,7 +450,7 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
   });
 }
 
-export const setLongestLabel = function(chartElement:any,chartOuter:any){
+export const setLongestLabel = function(chartOuter:any){
   let chartWrapper = chartOuter.querySelector('.chart__wrapper');
   let table = chartOuter.querySelector('.chart table');
   // set the longest label attr so that the bar chart knows what margin to set on the left
@@ -487,7 +487,7 @@ export const createTypeSwitcher = function(chartElement:any,chartKey:any,chartOp
   }
 }
 
-export const createChartKey = function(chartElement:any,chartOuter:any,tableElement:any,chartKey:any){
+export const createChartKey = function(chartOuter:any,tableElement:any,chartKey:any){
 
   const chartID = `chart-${Date.now()+(Math.floor(Math.random() * 100) + 1)}`;
   //const chartOuter = chartElement.querySelector('.chart__outer');
@@ -564,7 +564,7 @@ export const createChartGuidelines = function(chartElement:any,chartOuter:any,ch
       value = numberOfDays(startDay,yaxis[i]) - 1;
     }
 
-    let { axis } = getValues(chartElement,value,min,max);
+    let { axis } = getValues(value,min,max);
     chartGuidelines.innerHTML += `<div class="guideline" style="--percent:${axis}%;"><span>${yaxis[i]}</span></div>`;
   }
 }
@@ -597,7 +597,7 @@ export const createChartYaxis = function(chartElement:any,chartOuter:any,chartYa
       
     }
 
-    let { axis } = getValues(chartElement,value,min,max);
+    let { axis } = getValues(value,min,max);
     chartYaxis.innerHTML += `<div class="axis__point" style="--percent:${axis}%;"><span>${yaxis[i]}</span></div>`;
   }
 }
@@ -632,7 +632,7 @@ export const createLines = function(chartElement:any,chartOuter:any){
  
   let chartType = chartElement.getAttribute('data-type');
   let returnString = '';
-  let chartWrapper = chartOuter.querySelector('.chart__wrapper');
+  //let chartWrapper = chartOuter.querySelector('.chart__wrapper');
   let linesWrapper = chartOuter.querySelector('.chart__lines');
 
   let items = Array.from(chartOuter.querySelectorAll('tbody tr'));
@@ -673,7 +673,7 @@ export const createLines = function(chartElement:any,chartOuter:any){
 
           let value = cell.getAttribute('data-numeric');
 
-          let { axis } = getValues(chartElement, value,min,max);
+          let { axis } = getValues(value,min,max);
 
           if(!Number.isNaN(axis)){
             lines[subindex] += `${commands[subindex]} ${(spacerIndent) + (spacer * counter)} ${100-axis} `;
@@ -702,7 +702,7 @@ export const createLines = function(chartElement:any,chartOuter:any){
   linesWrapper.innerHTML = returnString;
 }
 
-export const createPies = function(chartElement:any,chartOuter:any){
+export const createPies = function(chartOuter:any){
 
   let returnString = '';
   let chartInner = chartOuter.querySelector('.chart');
@@ -842,8 +842,8 @@ export const createSlope = function(chartElement:any,chartOuter:any){
   let firstY = (m * parseFloat(start)) + b;
   let lastY = (m * parseFloat(end)) + b;
   
-  let { percent: firstYPercent } = getValues(chartElement,firstY,min,max);
-  let { percent: lastYPercent } = getValues(chartElement,lastY,min,max);
+  let { percent: firstYPercent } = getValues(firstY,min,max);
+  let { percent: lastYPercent } = getValues(lastY,min,max);
 
   slopeWrapper.innerHTML = `<svg viewBox="0 0 200 100" class="line" preserveAspectRatio="none"><path fill="none" d="M 0 ${100-firstYPercent} L 200 ${100-lastYPercent}" style="--path: path('M 0 100 L 200 100');"></path></svg>`;
 }
