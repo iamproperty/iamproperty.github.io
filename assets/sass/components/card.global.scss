@@ -55,3 +55,9 @@ iam-card {
 
 
 // #endregion
+
+
+a[target="_blank"] iam-card::part(card) {
+
+  --icon: var(--icon-new-tab);
+}

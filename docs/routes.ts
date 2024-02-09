@@ -161,6 +161,15 @@ const routes = [
         component: () => import('./views/elements/BadgesDoc.vue')
       },
       {
+        path: 'progress',
+        name: 'Progress (BETA)',
+        meta: {
+          title: 'Progress | Elements | iamkey'
+        },
+        component: () => import('./views/elements/ProgressDoc.vue'),
+        searchterms: 'percentage'
+      },
+      {
         path: 'container',
         name: 'Container (Beta)',
         meta: {

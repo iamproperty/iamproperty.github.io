@@ -1,0 +1,71 @@
+@use "../_func" as *;
+
+:is(label,.label):has(progress){
+  position: relative;
+  max-width: $input-max-width;
+  margin-bottom: 2rem;
+
+  padding-right: 3rem;
+}
+
+progress {
+  border-radius: rem(5);
+  display: block;
+  margin-top: rem(8);
+  width: calc(100% + 3rem);
+  height: rem(8);
+  margin-left: 0;
+  border: none;
+}
+
+progress:before {
+  content: attr(value)'%';
+  vertical-align: 0;
+  line-height: 1;
+  
+  /*Position text over the progress bar */
+  position:absolute;
+  top: auto;
+  left:auto;
+  right:0;
+  bottom: rem(16);
+  color: var(--colour-heading);
+  font-weight: bold;
+}
+
+progress::-webkit-progress-bar {
+  background-color: var(--colour-light);
+  border-radius: rem(5);
+}
+progress::-webkit-progress-value {
+  background-color: var(--colour, var(--colour-info));
+  border-radius: rem(5);
+}
+
+
+
+
+progress::-moz-progress-bar {
+  /* style rules */
+}
+
+
+// #region inline progress
+
+:is(label, .label):has(.progress--inline){ 
+
+  font-size: 1rem;
+color: var(--colour-body);
+  
+  
+  progress.progress--inline {
+
+    width: 100%;
+  
+    &:before {
+      bottom: -0.25em;
+    }
+  }
+}
+
+// #endregion
