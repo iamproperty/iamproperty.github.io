@@ -16,7 +16,6 @@ iam-table {
   }
   tbody tr {
     background: var(--row-bg);
-    height: 3.5rem;
 
     &:is(:hover,:focus-within,.hover) {
 
@@ -430,6 +429,10 @@ iam-table {
   }
 
   tr:has([type="checkbox"]:checked){
+    height: 3.5rem;
+  }
+
+  tr:has([type="checkbox"]:checked){
     --row-bg: #E0E0E0;
 
     @include dark-mode(){
@@ -590,6 +593,10 @@ iam-table.table--fullwidth:not([data-expandable]) {
     }
 
     tr {
+
+      &:has(.td--fixed) {
+        height: 3.5rem;
+      }
 
       &:is(:hover,:focus) .td--fixed{
         background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
