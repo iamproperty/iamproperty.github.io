@@ -1,5 +1,9 @@
 @use "../_func.scss" as *;
 
+:host {
+  background-color: #FCFCFC;
+}
+
 .actionbar__wrapper {
   position: relative;
   z-index: 10;

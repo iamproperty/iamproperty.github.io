@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav>
-    <Nav class="nav--large nav--btn-compact" >
+    <Nav class="nav--large nav--btn-compact nav--dual-buttons">
       
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
@@ -28,6 +28,7 @@
                 <a href="/">Tenants</a>
                 <a href="/">Applicants</a>
                 <a href="/">Guarantors</a>
+                <a href="/">Letzone <span class="badge bg-warning"><i class="fa-regular fa-stars"></i>Beta</span></a>
                 <a href="/">Letzone</a>
                 <a href="/">Upload to portals</a>
                 <a href="/">E-sign</a>
@@ -147,8 +148,21 @@
       </details>
 
 
+      <button class="btn btn-secondary btn-compact fa-solid fa-search" slot="dual">Search</button>
 
-      <div class="dialog__wrapper dialog-overflow show" slot="dual">
+      <div class="dialog__wrapper dialog-overflow d-none d-md-block" slot="dual">
+        <button class="btn btn-secondary btn-compact fa-bell m-0" data-number="2">Notifications</button>
+        <dialog class="dialog--list" id="notifications">
+                
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+        </dialog>
+      </div>
+
+      <button class="btn btn-secondary btn-compact fa-bell m-0 d-md-none" slot="dual" data-number="2" data-modal="modal-passive">Notifications</button>
+
+
+
+      <div class="dialog__wrapper dialog-overflow" slot="dual">
         <button class="btn btn-secondary btn-compact fa-grid fa-solid m-0">More actions</button>
         <dialog class="dialog--list">
                 
@@ -157,17 +171,6 @@
           <a href="/"><i class="fa-solid fa-plus"></i>Order marketing</a>
         </dialog>
       </div>
-
-      <div class="dialog__wrapper dialog-overflow show" slot="dual">
-        <button class="btn btn-secondary btn-compact fa-bell m-0" data-number="2">More actions</button>
-        <dialog class="dialog--list">
-                
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-        </dialog>
-      </div>
-
-      <button class="btn btn-secondary btn-compact fa-solid fa-search" slot="dual">Search</button>
-
 
       <a href="/standalone/iamproperty" slot="secondary">iamproperty</a>
       <a href="/standalone/openview" slot="secondary" class="selected">CRM</a>
@@ -199,6 +202,26 @@
 
     </Nav>
     </nav>
+
+
+
+<dialog id="modal-passive">
+  <button class="dialog__close">Close</button>
+  <span>Optional label</span>
+  <span class="h3">Passive modal title</span>
+  <div class="mh-lg">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+  </div>
+</dialog>
+
+
+
+
+
+
+
+
     <main >
 
       <div class="container">
@@ -280,7 +303,7 @@
                 <table>
                   <thead>
                     <tr>
-                      <th class="d-none d-md-table-cell pe-0" data-td-class="pe-0"></th>
+                      <th class="d-none d-md-table-cell pe-0" data-td-class="d-none d-md-table-cell pe-0"></th>
                       <th>Status</th>
                       <th>Name</th>
                       <th class="d-none d-md-table-cell">Priority</th>
@@ -290,7 +313,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -304,13 +327,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -323,13 +346,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -342,13 +365,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -361,13 +384,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -380,13 +403,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -399,13 +422,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -418,13 +441,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -437,13 +460,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -456,13 +479,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -475,13 +498,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -494,13 +517,13 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
                     
                     <tr>
-                      <td>
+                      <td class="d-none d-md-table-cell">
                         <div class="dialog__wrapper">
                           <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
                           <dialog class="dialog--fix">
@@ -513,10 +536,30 @@
                       </td>
                       <td>Not started</td>
                       <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
-                      <td>Medium</td>
-                      <td>10/04/2023</td>
-                      <td>10/06/2023</td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
                     </tr>
+                    
+                    <tr>
+                      <td class="d-none d-md-table-cell">
+                        <div class="dialog__wrapper">
+                          <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
+                          <dialog class="dialog--fix">
+                            <a href="/">View task</a>
+                            <a href="/">Mark as complete</a>
+                            <button>Delete task</button>
+                            <button>Close</button>
+                          </dialog>
+                        </div>
+                      </td>
+                      <td>Not started</td>
+                      <td><a href="/somewhere">Lorum ipsumdolor sit emit, consetetur</a></td>
+                      <td class="d-none d-md-table-cell">Medium</td>
+                      <td class="d-none d-md-table-cell">10/04/2023</td>
+                      <td class="d-none d-md-table-cell">10/06/2023</td>
+                    </tr>
+                    
                     
                   </tbody>
                 </table>

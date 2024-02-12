@@ -1,5 +1,4 @@
 // @ts-nocheck
-import accordion from "../../modules/accordion";
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
@@ -16,30 +15,45 @@ class iamAccordion extends HTMLElement {
     
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
     const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/accordion.css";`;
-    const loadExtraCSS = `@import "${assetLocation}/css/components/accordion.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
     @import "${coreCSS}";
-    ${loadCSS}
-    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+
+    :host {
+      margin-bottom: 2.5rem;
+      display: block;
+    }
+    
+    ::slotted(details) {
+      --border-radius: 0!important;
+      padding-bottom: 0!important;
+    }    
     </style>
-    <div class="accordion">
       <slot></slot>
-    </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-
-    // insert extra CSS
-    if(!document.getElementById('accordionGlobal'))
-      document.head.insertAdjacentHTML('beforeend',`<style id="accordionGlobal">${loadExtraCSS}</style>`);
   }
 
 	connectedCallback() {
 
-    accordion(this);
+    if(!this.classList.contains('accordion--keep-open')){
+
+      const details: NodeListOf<HTMLElement> = this.querySelectorAll(":scope > details");
+
+      // Add the toggle listeners.
+      details.forEach((targetDetail) => {
+        targetDetail.addEventListener("toggle", () => {
+          // Close all the details that are not targetDetail.
+          details.forEach((detail) => {
+            if (detail !== targetDetail && targetDetail.hasAttribute('open')) {
+              detail.removeAttribute("open");
+            }
+          });
+        });
+      });
+    }
   }
 }
 

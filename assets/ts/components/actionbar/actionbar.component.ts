@@ -276,7 +276,7 @@ class iamActionbar extends HTMLElement {
         modifier = screenWidth/375;
       }
 
-      // Work out the safe sapce width depending upon the wrappers width and modifier 
+      // Work out the safe sapce width depending upon the wrappers width and modifier comp
       if (wrapperWidth >= 992 && wrapperWidth <= 1280){
         safeAreaWidth = safeAreaWidth*modifier;
       }
@@ -293,7 +293,7 @@ class iamActionbar extends HTMLElement {
       // If the wrapper width is small we want to reduce the btn sizes by adding or removing btn-compact classes
       if (wrapperWidth < 576) {
         
-        Array.from(that.querySelectorAll(':scope > .btn:not(.js-updated)')).forEach((element,index) => {
+        Array.from(that.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)')).forEach((element,index) => {
 
           element.className = element.className.replace(' btn-compact',' _btn-compact');
           element.classList.add('btn-compact');
@@ -302,7 +302,7 @@ class iamActionbar extends HTMLElement {
       }
       else {
 
-        Array.from(that.querySelectorAll(':scope > .btn.js-updated')).forEach((element,index) => {
+        Array.from(that.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')).forEach((element,index) => {
           
           element.classList.remove('btn-compact');
           element.classList.remove('js-updated');

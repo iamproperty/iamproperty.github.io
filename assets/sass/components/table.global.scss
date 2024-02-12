@@ -65,6 +65,7 @@ iam-table {
       padding: var(--wrapper-padding);
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
       border-radius: rem(8);
+      height: auto;
 
       & + tr {
         margin-top: rem(32);
@@ -160,7 +161,7 @@ iam-table {
       }
     }
 
-    .dialog__wrapper {
+    .dialog__wrapper:not([slot="overflow"]) {
       margin-top: -0.5rem;
       margin-left: -1rem;
       z-index: 10;
@@ -216,6 +217,7 @@ iam-table {
       text-align: right;
       background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
       cursor: default;
+      padding-bottom: 0;
 
       @media screen and (prefers-color-scheme: dark) {
         
@@ -224,6 +226,7 @@ iam-table {
       a {
         white-space: nowrap;
         padding-right: 0.2rem;
+        padding-bottom: 0;
       }
     }
 
@@ -272,8 +275,12 @@ iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
 
 // #region Statuses 
 table {
-    
-  :is([data-content="low"],
+  
+  .hide-status:after {
+    display: none;
+  }
+
+  :not(.hide-status):is([data-content="low"],
     [data-content="medium"],
     [data-content="high"],
     [data-content="unknown"],
@@ -353,7 +360,7 @@ table {
     color: var(--colour-muted);
   }
 
-  :is([data-content="requires approval"],[data-content="approval required"],[data-content="upcoming"]):after {
+  :is([data-content="requires approval"],[data-content="approval required"],[data-content="action required"],[data-content="upcoming"]):after {
 
     content: "\f024";
     color: var(--colour-warning);
@@ -365,7 +372,7 @@ table {
     color: var(--colour-warning);
   }
 
-  :is([data-content="verified"],[data-content="completed"],[data-content="complete"]):after {
+  :is([data-content="manually verified"],[data-content="verified"],[data-content="completed"],[data-content="complete"]):after {
     
     content: "\f00c";
     font-weight: normal;
@@ -419,6 +426,10 @@ iam-table {
       margin: 0;
       margin-top: 0rem;
     }
+  }
+
+  tr:has([type="checkbox"]:checked){
+    height: 3.5rem;
   }
 
   tr:has([type="checkbox"]:checked){
@@ -582,7 +593,11 @@ iam-table.table--fullwidth:not([data-expandable]) {
     }
 
     tr {
-      
+
+      &:has(.td--fixed) {
+        height: 3.5rem;
+      }
+
       &:is(:hover,:focus) .td--fixed{
         background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
       }
@@ -591,6 +606,7 @@ iam-table.table--fullwidth:not([data-expandable]) {
         height: calc(rem(74) - 2px);
       }
     }
+
 
     .th--fixed + th:not(.th--fixed),
     .td--fixed + td:not(.td--fixed){

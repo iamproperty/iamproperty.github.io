@@ -104,11 +104,23 @@ iam-nav {
     text-decoration: none;
     min-width: min(var(--svg-width), 14rem);
     margin-right: auto;
+
+    img {
+      height: 100%;
+      width: auto;
+    }
   }
 
   a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
     
     text-decoration: none;
+
+    .badge {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      margin-top: -0.8rem;
+    }
 
     &:where(:hover,:focus,.selected,[aria-current="page"]) {
       text-decoration: underline;
@@ -291,6 +303,14 @@ iam-nav details {
         top: rem(3);
         transform: none;
         font-weight: 400;
+      }
+    }
+
+    a + details > summary {
+      padding-top: 1.5rem;
+
+      &:after {
+        margin-top: 1.5rem;
       }
     }
 
@@ -656,7 +676,7 @@ iam-nav > .dialog__wrapper {
 @media screen and (max-width: 62em) {
 
 
-  iam-nav > .dialog__wrapper {
+  iam-nav > .dialog__wrapper:not(.dialog--xs) {
 
     width: 100%;
 
@@ -673,11 +693,7 @@ iam-nav > .dialog__wrapper {
     }
   }
 
-  iam-nav > a + :is(.dialog__wrapper, .btn-compact) {
-    margin-top: 1.5rem;
-  }
-
-  iam-nav > .dialog__wrapper .dialog--list a,
+  iam-nav > .dialog__wrapper:not(.dialog--xs) .dialog--list a,
   iam-nav .btn-compact {
     --compact-size: 2rem;
     all: unset;
@@ -713,14 +729,6 @@ iam-nav > .dialog__wrapper {
 
     &:after {
       display: none;
-    }
-  }
-
-  iam-nav > .dialog__wrapper,
-  iam-nav .btn-compact {
-
-    &:has(+ *:not(.dialog__wrapper,.btn-compact)){
-      margin-bottom: 1.5rem!important;
     }
   }
 }

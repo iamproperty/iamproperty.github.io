@@ -32,7 +32,7 @@ class iamCard extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
-    <div class="card ${classList}" tabindex="0" role="button">
+    <div class="card ${classList}" tabindex="0" part="card">
       ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
       <div class="card__body">
       ${!this.hasAttribute('data-image') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
@@ -42,7 +42,10 @@ class iamCard extends HTMLElement {
       </div>
       ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
       <slot name="checkbox"></slot>
-      ${this.hasAttribute('data-cta') ? `<div class="card__footer"><span class="link">${this.getAttribute('data-cta')}</span></div>` : ''}
+      <div class="card__footer">
+        <slot name="footer"></slot>
+        ${this.hasAttribute('data-cta') ? `<span class="link d-inline-block pt-0 mb-0">${this.getAttribute('data-cta')}</span>` : ''}
+      </div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));

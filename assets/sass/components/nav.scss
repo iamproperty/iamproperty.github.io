@@ -250,7 +250,7 @@
     }
   }
 
-  ::slotted(a:not([slot="logo"]):not(.btn-compact)) {
+  ::slotted(a:not([slot="logo"]):not(.btn-compact):not(.btn-primary)) {
     display: block!important;
     line-height: rem(20)!important;
     padding: rem(24) 0!important;
@@ -281,7 +281,7 @@
     padding-bottom: rem(48);
   }
 
-  ::slotted(button) {
+  ::slotted(.btn:not(.btn-compact):not(.btn-primary)) {
 
     display: block!important;
     margin: 0 0 rem(24) 0!important;
@@ -296,7 +296,7 @@
     padding-bottom: rem(24);
   }
 
-  slot[name="actions"]::slotted(button){
+  slot[name="actions"]::slotted(.btn){
     margin-top: 0!important;
   }
 
@@ -331,7 +331,7 @@
       width: calc(100% - 4rem) !important
     }
   }
-  ::slotted(button) {
+  ::slotted(.btn) {
 
     width: auto!important;
   }
@@ -425,13 +425,13 @@
   }
 
   ::slotted(a:not([slot="logo"])),
-  ::slotted(button) {
+  ::slotted(.btn) {
 
     margin-bottom: 0!important;
     margin-right: 0!important;
   }
 
-  ::slotted(a:not([slot="logo"]):not(.btn-compact)) {
+  ::slotted(a:not([slot="logo"]):not(.btn-compact):not(.btn-primary)) {
 
     font-size: rem(16)!important;
     font-weight: normal!important;
@@ -457,7 +457,7 @@
   }
 
   // Search bar
-  slot[name="actions"]::slotted(button) {
+  slot[name="actions"]::slotted(.btn) {
 
     margin-left: rem(12)!important;
   }
@@ -709,6 +709,27 @@ pointer-events: none;
       span {
         display: none;
       }
+    }
+  }
+}
+// #endregion
+
+// #region Dual with buttons
+@media screen and (max-width: 62em) {
+  :host(.nav--dual-buttons) {
+    slot[name="dual"] {
+      padding-block: 1.5rem;
+      display: block;
+    }
+  }
+}
+
+@include media-breakpoint-up(md) {
+  :host(.nav--dual-buttons) {
+    slot[name="dual"] {
+      display: flex;
+      margin-left: auto;
+      flex-direction: row-reverse;
     }
   }
 }

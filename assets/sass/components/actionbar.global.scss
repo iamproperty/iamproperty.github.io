@@ -145,6 +145,16 @@ iam-actionbar {
 
   background: none;
   border: none;
+  text-indent: 0;
+  width: 100%;
+  display: block;
+  max-width: 100%;
+  text-align: left;
+  padding: 0;
+
+  &:before {
+    position: static;
+  }
 }
 button[slot="overflow"],
 button[slot="selected-overflow"] {

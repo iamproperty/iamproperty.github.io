@@ -13,7 +13,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/actionbar/actionbar.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/actionbar/actionbar.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-actionbar`))
           window.customElements.define(`iam-actionbar`, module.default);

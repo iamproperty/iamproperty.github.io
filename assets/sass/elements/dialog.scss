@@ -529,7 +529,7 @@ dialog::backdrop {
 
     margin-bottom: 0.25rem;
 
-    &:not(.btn-compact):after {
+    &:not(.btn-compact):not([class*="fa-"]):after {
       content: "";
     
       display: inline-block;
