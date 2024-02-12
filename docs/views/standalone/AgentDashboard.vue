@@ -174,7 +174,7 @@
                 <th data-format="date">Date added</th>
                 <th>Transaction address</th>
                 <th>Onboarding status</th>
-                <th data-td-class="hide-status">Risk level</th>
+                <th>Risk level</th>
                 <th>Due diligence</th>
                 <th class="d-none">Added by</th>
                 <th></th>
