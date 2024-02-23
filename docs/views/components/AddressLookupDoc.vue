@@ -16,7 +16,7 @@
 
     <div class="container visualtest">
 
-      <AddressLookup data-url="/addressess2.json?search=" data-open>
+      <AddressLookup data-url="/addressess2.json?search=">
                         
         <label>Address line one <input type="text" name="address-line-1" data-name="address_1" value="142" required /></label>
         
