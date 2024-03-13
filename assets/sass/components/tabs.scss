@@ -198,3 +198,12 @@
   }
 }
 // #endregion
+@include media-breakpoint-up(sm) {
+  :host(.tabs--inline) .tabs__links {
+    margin: 0;
+    justify-content: center;
+  }
+  :host(.tabs--inline) .tabs__links__wrapper:after {
+    width: 100%;
+  }
+}

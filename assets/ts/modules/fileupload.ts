@@ -27,9 +27,11 @@ function fileupload(fileupload: Element, wrapper: Element) {
 
     if (event && event.target instanceof HTMLElement && event.target.closest('.files button')){
 
+
       const dt = new DataTransfer();
       const { files } = input;
       const button = event.target.closest('.files button');
+
 
       for (let i = 0; i < files.length; i++) {
         const file = files[i]
@@ -39,6 +41,12 @@ function fileupload(fileupload: Element, wrapper: Element) {
       }
       
       input.files = dt.files // Assign the updates list
+
+
+      if(input.files.length == 0){
+        const emptyEvent = new Event('empty');
+        fileupload.dispatchEvent(emptyEvent);
+      }
 
       const changeEvent = new Event('change');
       input.dispatchEvent(changeEvent);
@@ -75,6 +83,9 @@ function fileupload(fileupload: Element, wrapper: Element) {
     
     const changeEvent = new Event('change');
     input.dispatchEvent(changeEvent);
+
+    const elementChangeEvent = new Event('elementChange');
+    fileupload.dispatchEvent(elementChangeEvent);
   });
 
 
@@ -101,6 +112,14 @@ function fileupload(fileupload: Element, wrapper: Element) {
     for (const file of input.files)
       filesWrapper.innerHTML += `<span class="file">${file.name} <button data-file="${file.name}">Remove</button></span>`;
   });
+
+  if(fileupload.hasAttribute('data-filename')){
+    
+    let filename = fileupload.getAttribute('data-filename');
+
+    if(filename)
+      filesWrapper.innerHTML += `<span class="file">${filename} <button data-file="${filename}">Remove</button></span>`;
+  }
 }
 
 export default fileupload;
