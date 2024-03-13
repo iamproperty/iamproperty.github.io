@@ -42,7 +42,7 @@ export default {
 
     this.$nextTick(function () {
        
-      import(/* @vite-ignore */`../../../assets/js/components/table/table.component.min.js`).then(module => {
+      import(`../../../assets/js/components/table/table.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-table`))
           window.customElements.define(`iam-table`, module.default);
@@ -51,7 +51,7 @@ export default {
         console.log(err.message);
       });
 
-      import(/* @vite-ignore */`../../../assets/js/components/pagination/pagination.component.min.js`).then(module => {
+      import(`../../../assets/js/components/pagination/pagination.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-pagination`))
           window.customElements.define(`iam-pagination`, module.default);

@@ -32,7 +32,7 @@ class iamFileupload extends HTMLElement {
       <div class="drop-area"></div>
       <hr/>
       <slot></slot>
-      <div class="files"></div>
+      <div class="files"><slot name="files"></slot></div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));

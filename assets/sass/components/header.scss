@@ -62,7 +62,14 @@
 }
 
 
-
+:host(.header--contain) {
+  .header-banner {
+    padding-bottom: 2rem;
+  }
+  .header-banner > picture {
+    max-height: 100%;
+  }
+}
 
 
 
