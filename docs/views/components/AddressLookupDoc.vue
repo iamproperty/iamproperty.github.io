@@ -18,7 +18,7 @@
 
       <AddressLookup data-url="/addressess2.json?search=">
                         
-        <label>Address line one <input type="text" name="address-line-1" data-name="address_1" required /></label>
+        <label>Address line one <input type="text" name="address-line-1" data-name="address_1" value="142" required /></label>
         
         <label>Address line two (Optional) <input type="text" name="address-line-2" data-name="address_2" /></label>
           
@@ -47,6 +47,7 @@
         </label>
       </AddressLookup>
       
+      <p class="note"><strong>Note:</strong> To have the manual address lookup open on page load include the data attribute [data-manual].</p>
     </div>
 
     <div class="container pb-0">

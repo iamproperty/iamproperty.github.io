@@ -141,6 +141,15 @@ class iamAddressLookup extends HTMLElement {
       });
     }
 
+    if(this.hasAttribute('data-manual')){
+      lookupWrapper.classList.add('js-hide');
+      manualWrapper.classList.remove('js-hide');
+
+      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input, index) => {
+        input.setAttribute('required','true');
+      });
+    }
+      
     function openManualWrapper (){
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
