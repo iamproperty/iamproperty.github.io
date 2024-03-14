@@ -181,6 +181,42 @@
       </Chart>
    </div>
 
+   <div class="container">
+      <div class="admin-panel">
+         <h2>On Market Stats based on property</h2>
+         <div class="row">
+            <div class="col-md-6">
+               <p class="pb-1">Based on current market over the last 90 days</p>
+
+               <Chart class="chart chart--animate " data-max="60" data-min="0" data-type="column" data-yaxis="0,20,40,60" data-guidelines="0,10,20,30,40,50,60">
+                  <table>
+                     <thead>
+                        <tr>
+                           <th></th>
+                           <th>Complete sale</th>
+                           <th>Find buyer</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                     <tr>
+                           <td>Mar-20</td>
+                           <td>40</td>
+                           <td>51</td>
+                     </tr>
+                     <tr>
+                           <td>Apr-20</td>
+                           <td>52</td>
+                           <td>60</td>
+                     </tr>
+                     </tbody>
+                  </table>
+               </Chart>
+
+
+            </div>
+         </div>
+      </div>
+   </div>
 
    <div class="container visualtest">      
       <h2>Bar chart</h2>

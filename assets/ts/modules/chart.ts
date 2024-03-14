@@ -154,6 +154,7 @@ export const getChartData = function(chartElement:any,chartOuter:any){
   let max:any = chartElement.hasAttribute('data-max') ? chartElement.getAttribute('data-max') : getLargestValue(table);
   let type:string = chartElement.hasAttribute('data-type') ? chartElement.getAttribute('data-type') : 'column';
   let yaxis:any = chartElement.hasAttribute('data-yaxis') ? chartElement.getAttribute('data-yaxis').split(',') : [];
+  let guidelines:any = chartElement.hasAttribute('data-guidelines') ? chartElement.getAttribute('data-guidelines').split(',') : [];
   let targets:any = chartElement.hasAttribute('data-targets') ? JSON.parse(chartElement.getAttribute('data-targets')) : null;
   let events:any = chartElement.hasAttribute('data-events') ? JSON.parse(chartElement.getAttribute('data-events')) : null;
   let xaxis:any = chartElement.hasAttribute('data-xaxis') ? chartElement.getAttribute('data-xaxis').split(',') : null;
@@ -166,7 +167,7 @@ export const getChartData = function(chartElement:any,chartOuter:any){
   let slope:any = chartElement.hasAttribute('data-slope') ? chartElement.getAttribute('data-slope') : null;
   let yInt:any = chartElement.hasAttribute('data-yint') ? chartElement.getAttribute('data-yint') : null;
 
-  return {min,max,type,yaxis,targets,events,xaxis,increment,start,end,slope,yInt};
+  return {min,max,type,yaxis,targets,events,xaxis,increment,start,end,slope,yInt,guidelines};
 }
 
 function getLargestValue(table:any){
@@ -527,7 +528,7 @@ function createChartKeyItem(chartID:string,index:number,text:Array<string>,chart
   previousInput = input;
 
   let label = document.createElement('label');
-  label.setAttribute('class',`key`);
+  label.setAttribute('class',`key btn btn-action`);
   label.setAttribute('for',`${chartID}-dataset-${index}`);
   label.setAttribute('data-label',`${text}`);
   label.innerHTML = `${text}`;
@@ -538,7 +539,10 @@ function createChartKeyItem(chartID:string,index:number,text:Array<string>,chart
 
 export const createChartGuidelines = function(chartElement:any,chartOuter:any,chartGuidelines:any){
 
-  let {min, max, yaxis, increment} = getChartData(chartElement,chartOuter);
+  let {min, max, yaxis, increment, guidelines} = getChartData(chartElement,chartOuter);
+
+  if(guidelines.length)
+    yaxis = guidelines;
 
 
   let startDay = min;
