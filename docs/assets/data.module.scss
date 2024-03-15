@@ -116,6 +116,17 @@
   @each $color, $value in $dark-mode-functional-colors {
     darkModeFunctionalColour_#{$color}: #{$value}
   }
+  @each $color, $value in $wider-colours {
+    widerColour_#{$color}: #{$value}
+  }
+  @each $color, $value in $wider-colours-hover {
+    widerColourHover_#{$color}: #{$value}
+  }
+
+  @each $color, $value in $wider-colours-active {
+    widerColourActive_#{$color}: #{$value}
+  }
+
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};
   }
