@@ -247,81 +247,7 @@
       </div>
 
     </div>
-    <div class="container">
 
-
-      <h2>Filter cards</h2>
-      <p class="lead">Filter cards can be used to better display key data sets or information that when selected will provide the user with a outcome or set of results.</p>
-
-      <h3>Numerical filter card</h3>
-      <p>Numerical filter card display a figure on left and text applying to that numerical value next to it. The coloured block on the left of the card can have a primary or a status colour (red, amber, green), the ‘active’ state outline needs to apply the same colour used on the left of the card.</p>
-
-    </div>
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-          
-            
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <button>
-            <Card class="card--filter" data-total="14">Due diligence incomplete</Card>
-          </button>
-        </div>
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <button>
-            <Card class="card--filter hover" data-total="14">Due diligence incomplete</Card>
-          </button>
-        </div>
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <button>
-            <Card class="card--filter active" data-total="14">Due diligence incomplete</Card>
-          </button>
-        </div>
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Selected State</span>
-          <button>
-            <Card class="card--filter checked" data-total="14">Due diligence incomplete</Card>
-          </button>
-        </div>
-
-      </div>
-    </div>
-    <div class="container">
-      <h3>Text and icon filter card</h3>
-      <p>This filter card provides user with a visual aid (icon) as well as a text label to ensure the user gains a quicker understanding of the filter card subject. This card can also apply a drop shadow with a default colour of HEX #000000, 6px Y-axis and 12px blur with an opacity of 15%.</p>
-
-    </div>
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4 pe-none">
-        
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <button class="d-inline-block">
-          <Card class="card--filter"><i class="fa fa-house"></i>Character property</Card>
-        </button>
-        </div>
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <button class="d-inline-block">
-            <Card class="card--filter hover"><i class="fa fa-house"></i>Character property</Card>
-          </button>
-        </div>
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
-          <button class="d-inline-block">
-            <Card class="card--filter active"><i class="fa fa-house"></i>Character property</Card>
-          </button>
-        </div>
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Checked State</span>
-          <button class="d-inline-block">
-            <Card class="card--filter checked"><i class="fa fa-house"></i>Character property</Card>
-          </button>
-        </div>
-      </div>
-    </div>
 
 
     <div class="container">
@@ -343,10 +269,7 @@
           <summary><h3>Vue component</h3></summary>
           <Readme></Readme>
         </details>
-        <details>
-          <summary><h3>HTML</h3></summary>
-          <pre><code class="javascript">{{htmlUsage}}</code></pre>
-        </details>
+        
       </Tabs>
 
     </div>
