@@ -6,6 +6,6 @@
     --wider-colour: var(--wider-colour-#{$colour});
     --wider-colour-hover: var(--wider-colour-#{$colour}-hover);
     --wider-colour-active: var(--wider-colour-#{$colour}-active);
-    color: #262626;
+    color: #262626!important;
   }
 }

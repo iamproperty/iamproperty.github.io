@@ -24,6 +24,7 @@ function createAppliedFilters(container,filters) {
     
     filter.setAttribute('type','button')
     filter.classList.add('filter');
+    filter.classList.add('tag');
     filter.setAttribute('data-name',inputName);
 
     filter.innerHTML = filterText.replace('$value', input.value);
@@ -54,7 +55,8 @@ function createAppliedFilters(container,filters) {
 
           let childFilter = document.createElement('button');
           childFilter.setAttribute('type','button')
-          childFilter.classList.add('filter');
+          childfilter.classList.add('filter')
+          childfilter.classList.add('tag');
           childFilter.setAttribute('data-name',name);
           childFilter.innerHTML = filterText.replace('$value', element.value);
           filters.appendChild(childFilter);
@@ -82,7 +84,8 @@ function createAppliedFilters(container,filters) {
 
         let parentFilter = document.createElement('button');
         parentFilter.setAttribute('type','button')
-        parentFilter.classList.add('filter');
+        parentfilter.classList.add('filter');
+        parentfilter.classList.add('tag');
         parentFilter.setAttribute('data-name',inputName);
         parentFilter.innerHTML = newFilterText;
         filters.appendChild(parentFilter);

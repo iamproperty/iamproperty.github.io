@@ -534,17 +534,17 @@
         </div>
         <div class="col pb-2" >
           
-          <div :class="`badge wider-colour-${name}`">{{colour}}</div>
+          <div :class="`tag wider-colour-${name}`">{{colour}}</div>
 
         </div>
         <div class="col pb-2" >
           
-          <div :class="`badge wider-colour-${name} hover`">{{ $shared.widerColoursHover[name] }}</div>
+          <div :class="`tag wider-colour-${name} hover`">{{ $shared.widerColoursHover[name] }}</div>
 
         </div>
         <div class="col pb-2" >
           
-          <div :class="`badge wider-colour-${name} active`">{{ $shared.widerColoursActive[name] }}</div>
+          <div :class="`tag wider-colour-${name} active`">{{ $shared.widerColoursActive[name] }}</div>
 
         </div>
       </div>
