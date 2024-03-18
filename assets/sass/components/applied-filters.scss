@@ -16,6 +16,6 @@
   }
 }
 
-::slotted(*:last-child) {
+::slotted(*:last-child:not(dialog)) {
   margin-bottom: 0;
 }

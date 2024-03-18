@@ -55,8 +55,8 @@ function createAppliedFilters(container,filters) {
 
           let childFilter = document.createElement('button');
           childFilter.setAttribute('type','button')
-          childfilter.classList.add('filter')
-          childfilter.classList.add('tag');
+          childFilter.classList.add('filter');
+          childFilter.classList.add('tag');
           childFilter.setAttribute('data-name',name);
           childFilter.innerHTML = filterText.replace('$value', element.value);
           filters.appendChild(childFilter);
@@ -84,8 +84,8 @@ function createAppliedFilters(container,filters) {
 
         let parentFilter = document.createElement('button');
         parentFilter.setAttribute('type','button')
-        parentfilter.classList.add('filter');
-        parentfilter.classList.add('tag');
+        parentFilter.classList.add('filter');
+        parentFilter.classList.add('tag');
         parentFilter.setAttribute('data-name',inputName);
         parentFilter.innerHTML = newFilterText;
         filters.appendChild(parentFilter);
@@ -108,7 +108,7 @@ function createAppliedFilters(container,filters) {
     input.addEventListener('change', function(event){
 
       addFilterButton(filters, input);
-      event.stopPropagation(); // Don't allow the below event handler to trigger
+      //event.stopPropagation(); // Don't allow the below event handler to trigger
     });
   });
 
