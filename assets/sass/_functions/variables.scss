@@ -225,6 +225,86 @@ $dark-mode-functional-colors: (
   "btn-action-hover-bg": var(--colour-canvas-2)
 );
 
+$wider-colours: (
+
+  "1": "#EEEEEE",
+  "2": "#EBD7F6",
+  "3": "#BEE8F8",
+  "4": "#A6DCC7",
+  "5": "#FAD0DA",
+  "6": "#AFCCF2",
+  "7": "#FFD2B4",
+  "8": "#CDF0F2",
+  "9": "#FFABC2",
+  "10": "#DCEAF2",
+  "11": "#EEBCB3",
+  "12": "#F0BDFF",
+  "13": "#FFF8CF",
+  "14": "#92E3DF",
+  "15": "#FEEAE8",
+  "16": "#8BC3A6",
+  "17": "#FEF0A6",
+  "18": "#FFBDA0",
+  "19": "#CBEFE1",
+  "20": "#FFDD90",
+  "21": "#97DBF2",
+  "22": "#FFAF91",
+  "23": "#C2DCD9"
+);
+
+$wider-colours-hover: (
+
+  "1": "#E0E0E0",
+  "2": "#DFCCE8",
+  "3": "#B6DEED",
+  "4": "#98CBB7",
+  "5": "#EFC8D1",
+  "6": "#A6C1E5",
+  "7": "#F4CAAF",
+  "8": "#C2E3E5",
+  "9": "#F5A2B9",
+  "10": "#CFDCE3",
+  "11": "#E3B2A9",
+  "12": "#E3B2F2",
+  "13": "#F0E9C2",
+  "14": "#8AD9D6",
+  "15": "#F8E1DF",
+  "16": "#81B59A",
+  "17": "#F2E5A0",
+  "18": "#F2B69D",
+  "19": "#C2E3D7",
+  "20": "#F2D28A",
+  "21": "#8FD0E6",
+  "22": "#F0A68B",
+  "23": "#B9D1CE"
+);
+
+$wider-colours-active: (
+
+  "1": "#D6D6D6",
+  "2": "#D4C2DD",
+  "3": "#ABD1DF",
+  "4": "#95C6B3",
+  "5": "#E1BBC4",
+  "6": "#9EB8DA",
+  "7": "#E6BDA2",
+  "8": "#B9D8DA",
+  "9": "#E69AAF",
+  "10": "#C6D3DA",
+  "11": "#D6A9A1",
+  "12": "#D8AAE6",
+  "13": "#E6DFBA",
+  "14": "#83CCC9",
+  "15": "#F4E0DE",
+  "16": "#7DB095",
+  "17": "#FEF0A6",
+  "18": "#E6AA90",
+  "19": "#CBEFE1",
+  "20": "#E6C782",
+  "21": "#88C5DA",
+  "22": "#E69E83",
+  "23": "#AFC6C3"
+);
 
 // Kill bootstrap colors
 $colors: ();

@@ -106,6 +106,32 @@ const darkModeColours = Object.keys(cssVars).reduce(function (arr, key) {
   return arr
 }, {});
 
+// Wider colours
+const widerColours = Object.keys(cssVars).reduce(function (arr, key) {
+  if (key.startsWith('widerColour_')) {
+    let updateKey = key.replace('widerColour_', '')
+    updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
+    arr[updateKey] = cssVars[key]
+  }
+  return arr
+}, {})
+const widerColoursHover = Object.keys(cssVars).reduce(function (arr, key) {
+  if (key.startsWith('widerColourHover_')) {
+    let updateKey = key.replace('widerColourHover_', '')
+    updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
+    arr[updateKey] = cssVars[key]
+  }
+  return arr
+}, {})
+const widerColoursActive = Object.keys(cssVars).reduce(function (arr, key) {
+  if (key.startsWith('widerColourActive_')) {
+    let updateKey = key.replace('widerColourActive_', '')
+    updateKey = updateKey.charAt(0).toUpperCase() + updateKey.slice(1)
+    arr[updateKey] = cssVars[key]
+  }
+  return arr
+}, {})
+//const widerColours = {...widerColours};
 
 // Filters the CSS vars object to pull out the aspect ratios
 const aspectRatios = Object.keys(cssVars).reduce(function (arr, key) {
@@ -124,6 +150,9 @@ export const shared = {
   nonThemeColours: nonThemeColours,
   extendedColours: extendedColours,
   darkModeColours: darkModeColours,
+  widerColours: widerColours,
+  widerColoursHover: widerColoursHover,
+  widerColoursActive: widerColoursActive,
   aspectRatios: aspectRatios,
   cssVars: cssVars,
   audit: audit

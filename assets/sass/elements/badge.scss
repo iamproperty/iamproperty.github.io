@@ -20,6 +20,15 @@
   &:empty {
     display: none;
   }
+
+  background: var(--wider-colour, transparent);
+
+  &:is(:hover,.hover) {
+    background: var(--wider-colour-hover, transparent);
+  }
+  &:is(:active,.active) {
+    background: var(--wider-colour-active, transparent);
+  }
 }
 
 // Quick fix for badges in buttons

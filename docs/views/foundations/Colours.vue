@@ -496,6 +496,146 @@
     </div>
 
 
+
+    <div class="container">
+      <h2>Wider colour pallete</h2>
+    </div>
+
+    <div class="container visualtest pb-5">
+
+      <p class="pb-2">The wider colour palette is a range of colours that can be used in instances where colours can help with categorisation - calendar events, user types, applied filters, etc. They should not be used for status indications, in brand assets (print media, videos), or throughout the UI. Instead, use them sparingly and only when meaningful and functional for the user - see Tags.</p>
+
+      
+      <div class="row row-cols-2 row-cols-sm-4 d-none d-sm-flex">
+        
+        <div class="col pb-2" >
+          
+        </div>
+        <div class="col pb-2" >
+          
+          <span class="label">Default state</span>
+        </div>
+        <div class="col pb-2" >
+          
+          <span class="label">Hover state</span>
+        </div>
+        <div class="col pb-2" >
+          
+          <span class="label">Active state</span>
+        </div>
+      </div>
+
+      <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in $shared.widerColours" :key="name">
+        
+        <div class="col-12 col-sm pb-2">
+          
+          <span >Wider colour {{name}}</span>
+
+        </div>
+        <div class="col pb-2" >
+          
+          <div :class="`badge wider-colour-${name}`">{{colour}}</div>
+
+        </div>
+        <div class="col pb-2" >
+          
+          <div :class="`badge wider-colour-${name} hover`">{{ $shared.widerColoursHover[name] }}</div>
+
+        </div>
+        <div class="col pb-2" >
+          
+          <div :class="`badge wider-colour-${name} active`">{{ $shared.widerColoursActive[name] }}</div>
+
+        </div>
+      </div>
+        
+    </div>
+
+
+    <div class="container">
+      <h3 class="pb-2">Established user colours</h3>
+      <p class="pb-2">Components can be associated with a range of user types - from vendor profiles to business details - and to distinguish them, we can use an icon and a colour in the empty image state.</p>
+    </div>
+
+    <div class="container visualtest pb-5">
+
+      <div class="row">
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-2 empty-state">
+            
+            <i class="fa-light fa-building"></i>
+          </div>
+          Business
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-3 empty-state">
+            
+            <i class="fa-light fa-file-lines"></i>
+          </div>
+          Page
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-4 empty-state">
+            
+            <i class="fa-light fa-address-book"></i>
+          </div>
+          Contact
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-5 empty-state">
+            
+            <i class="fa-kit fa-lettings-property"></i>
+          </div>
+          Lettings
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-7 empty-state">
+            
+            <i class="fa-kit fa-sales-property"></i>
+          </div>
+          Sales
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-8 empty-state">
+            
+            <i class="fa-kit fa-landlord"></i>
+          </div>
+          Landlord
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-9 empty-state">
+            
+            <i class="fa-light fa-user-helmet-safety"></i>
+          </div>
+          Contractor
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-13 empty-state">
+            
+            <i class="fa-kit fa-vendor"></i>
+          </div>
+          Vendor
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-6 empty-state">
+            
+            <i class="fa-light fa-house-user"></i>
+          </div>
+          Tenant
+        </div>
+        <div class="col pb-3 flex-grow-0">
+          <div class="wider-colour-10 empty-state">
+            
+            <i class="fa-kit fa-sales-applicant"></i>
+          </div>
+          Sales applicant
+        </div>
+
+
+      </div>
+
+    </div>
+
     <div class="bg-light version-control">
       <div class="container ct-inline">
         <table>
@@ -507,6 +647,11 @@
             </tr>
           </thead>
           <tbody class="text-body">
+            <tr>
+              <td>V1.5 added</td>
+              <td>08.03.2023</td>
+              <td>Added in wider colour palette<br/> Added in user type colours</td>
+            </tr>
             <tr>
               <td>V1 added</td>
               <td>06.06.2023</td>
@@ -733,6 +878,37 @@ $compatible: 'false';
 .light-theme .dark-mode,
 .dark-theme .colour-tints .bg-dark.tint-100,
 .dark-theme .colour-tints .bg-dark.tint-90  {
+  display: none;
+}
+
+.empty-state {
+  height: 5rem;
+  width: 5rem;
+  background: var(--wider-colour, transparent);
+  border-radius: 50%;
+  position: relative;
+  margin-right: 3rem;
+  margin-bottom: 0.5rem;
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    font-size: 2rem;
+
+  }
+
+  &:is(:hover,.hover) {
+    background: var(--wider-colour-hover, transparent);
+  }
+  &:is(:active,.active) {
+    background: var(--wider-colour-active, transparent);
+  }
+}
+
+[for="light-mode"]:before,
+[for="dark-mode"]:before {
   display: none;
 }
 
