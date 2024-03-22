@@ -154,11 +154,19 @@ const routes = [
       },
       {
         path: 'badges',
-        name: 'Badges (BETA)',
+        name: 'Badges (Beta)',
         meta: {
-          title: 'Badges | Elements | iamkey'
+          title: 'Badges (Beta) | Elements | iamkey'
         },
         component: () => import('./views/elements/BadgesDoc.vue')
+      },
+      {
+        path: 'tags',
+        name: 'Tags',
+        meta: {
+          title: 'Tags | Elements | iamkey'
+        },
+        component: () => import('./views/elements/TagsDoc.vue')
       },
       {
         path: 'progress',
