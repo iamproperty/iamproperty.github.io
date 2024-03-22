@@ -46,10 +46,11 @@
 
 }
 
+abbr[title] {
+  text-underline-offset: 0.2em;
+}
 
-
-:is(abbr[title], .tooltip) {
-
+.tooltip {
   text-decoration: none;
   position: relative;
 
