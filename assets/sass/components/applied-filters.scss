@@ -10,12 +10,18 @@
     color: var(--colour-header);
     display: block;
   }
-
-  &:not(:empty) {
-    margin-bottom: 1rem;
-  }
 }
 
-::slotted(*:last-child) {
-  margin-bottom: 0;
+
+:host(.applied-filters--hide-title) {
+
+  .applied-filters:before {
+    display: none;
+  }
+}
+:host(.applied-filters--show-set) {
+
+  .tag--not-set {
+    display: none;
+  }
 }

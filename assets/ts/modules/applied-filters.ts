@@ -2,7 +2,7 @@
 function createAppliedFilters(container,filters) {
 
 
-  function addFilterButton (filters, input){
+  function addFilterButton (filters, input,notSet=true){
 
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
@@ -25,6 +25,10 @@ function createAppliedFilters(container,filters) {
     filter.setAttribute('type','button')
     filter.classList.add('filter');
     filter.classList.add('tag');
+
+    if(notSet)
+      filter.classList.add('tag--not-set');
+
     filter.setAttribute('data-name',inputName);
 
     filter.innerHTML = filterText.replace('$value', input.value);
@@ -55,8 +59,12 @@ function createAppliedFilters(container,filters) {
 
           let childFilter = document.createElement('button');
           childFilter.setAttribute('type','button')
-          childfilter.classList.add('filter')
-          childfilter.classList.add('tag');
+          childFilter.classList.add('filter');
+          childFilter.classList.add('tag');
+          
+          if(notSet)
+            filter.classList.add('tag--not-set');
+          
           childFilter.setAttribute('data-name',name);
           childFilter.innerHTML = filterText.replace('$value', element.value);
           filters.appendChild(childFilter);
@@ -65,8 +73,10 @@ function createAppliedFilters(container,filters) {
           allValuesSet = false;
       });
 
+      
       if(filters.querySelector(`[data-name="${inputName}"]`))
         filters.querySelector(`[data-name="${inputName}"]`).remove();
+
 
       if(allValuesSet){
 
@@ -84,8 +94,12 @@ function createAppliedFilters(container,filters) {
 
         let parentFilter = document.createElement('button');
         parentFilter.setAttribute('type','button')
-        parentfilter.classList.add('filter');
-        parentfilter.classList.add('tag');
+        parentFilter.classList.add('filter');
+        parentFilter.classList.add('tag');
+            
+        if(notSet)
+          filter.classList.add('tag--not-set');
+
         parentFilter.setAttribute('data-name',inputName);
         parentFilter.innerHTML = newFilterText;
         filters.appendChild(parentFilter);
@@ -97,17 +111,48 @@ function createAppliedFilters(container,filters) {
   }
 
   // check for inputs on load
-  Array.from(container.querySelectorAll('input[type="checkbox"]:checked')).forEach((input, index) => {
-    addFilterButton(filters, input)
+  Array.from(container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')).forEach((input, index) => {
+
+    addFilterButton(filters, input, false)
+  });
+
+  let dialog = container.closest('dialog')
+  
+  if(dialog){
+    
+    let observer = new MutationObserver(function(event)  {
+      if (event[0].attributeName == 'open') {
+        Array.from(container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')).forEach((input, index) => {
+
+          addFilterButton(filters, input, false)
+        });
+      }
+    });
+
+    observer.observe(dialog, { attributes: true });
+  }
+
+
+  
+
+  container.addEventListener('tags-set', function(event){
+
+    filters.innerHTML = '';
+    Array.from(container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')).forEach((input, index) => {
+
+      addFilterButton(filters, input, false)
+    });  
   });
 
 
   // check for change in displayed inputs
-  Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input, index) => {
+  Array.from(container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')).forEach((input, index) => {
 
     input.addEventListener('change', function(event){
 
-      addFilterButton(filters, input);
+      if(!container.hasAttribute('data-keep-same'))
+        addFilterButton(filters, input);
+
       event.stopPropagation(); // Don't allow the below event handler to trigger
     });
   });
@@ -117,7 +162,8 @@ function createAppliedFilters(container,filters) {
 
     if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')){
       let input = event.target.closest('input[data-filter-text]');
-      addFilterButton(filters, input);
+      if(!container.hasAttribute('data-keep-same'))
+        addFilterButton(filters, input);
     }
   });
 
@@ -143,8 +189,13 @@ function createAppliedFilters(container,filters) {
           let input = inputs[i];
 
 
-          if(input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox')
+          if(input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox'){
             input.value = "";
+            
+            var event = new Event('force');
+            if(!container.hasAttribute('data-nosubmit'))
+              input.closest('form').dispatchEvent(event);
+          }
           else {
             input.checked = false;
 

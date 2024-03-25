@@ -214,6 +214,9 @@ class iamActionbar extends HTMLElement {
 
     // #region search
     const searchBar = this.shadowRoot.querySelector('.actionbar--search');
+    if(this.hasAttribute('data-search-value')){
+      this.shadowRoot.querySelector('#search').value = this.getAttribute('data-search-value');
+    }
 
     if(this.hasAttribute('data-search') && this.getAttribute('data-search') == 'show')
       searchBar.classList.add('show');
@@ -262,14 +265,22 @@ class iamActionbar extends HTMLElement {
       const screenWidth = document.documentElement.scrollWidth;
       let safeAreaWidth = 750;
       let elementMargin = 16;
+      let tabletSafeWidth = 450;
       let mobileSafeWidth = that.hasAttribute('data-switchviews') ? 144 : 210;
+
+      if(that.hasAttribute('data-large-safe-area')){
+
+        safeAreaWidth = 1048;
+        tabletSafeWidth = 620;
+        mobileSafeWidth = 260;
+      }
 
       // We need to modify the widths to mimic the CSS's scaling functionality
       let modifier = 1;
       if (screenWidth >= 992 && screenWidth <= 1280){
         modifier = screenWidth/1280;
       }
-      else if (screenWidth >= 576 && screenWidth <= 1280) {
+      else if (screenWidth >= 576 && screenWidth < 992) {
         modifier = screenWidth/768;
       }
       else if (screenWidth < 576) {
@@ -280,8 +291,8 @@ class iamActionbar extends HTMLElement {
       if (wrapperWidth >= 992 && wrapperWidth <= 1280){
         safeAreaWidth = safeAreaWidth*modifier;
       }
-      else if (wrapperWidth >= 576 && wrapperWidth <= 1280) {
-        safeAreaWidth = 450*modifier;
+      else if (wrapperWidth >= 576 && wrapperWidth < 992) {
+        safeAreaWidth = tabletSafeWidth*modifier;
       }
       else if (wrapperWidth < 576) {
         safeAreaWidth = mobileSafeWidth*modifier;

@@ -19,8 +19,8 @@
   background: var(--wider-colour, var(--wider-colour-1));
   margin-bottom: 1rem;
 
-  & + :is(.badge, .tag) {
-    margin-left: rem(6);
+  &:has(:is(.badge, .tag)) {
+    margin-right: rem(6);
   }
   
   &:empty {
@@ -53,11 +53,16 @@
   }
 }
 
-.tag.tag--toggle {
+.tag.tag--toggle,
+.tag.tag--not-set {
 
   background: var(--colour-canvas);
   outline: 1px solid var(--colour-border);
 
+}
+
+.tag.tag--toggle {
+  
   &:after {
     display: none;
   }

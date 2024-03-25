@@ -112,7 +112,7 @@ export const addTableEventListeners = (table) => {
 // Filters
 export const createSearchDataList = (table, form) => {
 
-  let searchInput = form.querySelector('[data-search]');
+  let searchInput = form.querySelector('input[data-search]');
 
   if(!searchInput)
     return false;
@@ -152,6 +152,11 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if(form.classList.contains('processing'))
       return false;
 
+    Array.from(form.querySelectorAll('iam-applied-filters')).forEach((element,index) => {
+
+      var event = new Event('tags-set');
+      element.dispatchEvent(event);
+    });
 
     // Before submitting check if any duplicate checkboxes within the filters dialog needs to upset the original input
     if(event.type == "submit"){
@@ -206,11 +211,27 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     }
   }
 
+  if(form.querySelector('iam-actionbar[data-search]')){
+    form.querySelector('iam-actionbar[data-search]').addEventListener('search-submit', (event) => {
+
+      if(form.querySelector('input[data-search]')){
+        form.querySelector('input[data-search]').value = event.detail.search;
+      }
+      else {
+        form.insertAdjacentHTML('beforeend',`<input type="hidden" name="search" data-search="${form.querySelector('iam-actionbar[data-search]').getAttribute('data-search')}" value="${event.detail.search}"/>`);
+      }
+      
+      clearTimeout(timer);
+      formSubmit(event);
+    });
+  }
+
+
   form.addEventListener('keyup', (event) => {
 
     clearTimeout(timer);
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-search]')){
 
       timer = setTimeout(function(){
         formSubmit(event);
@@ -230,7 +251,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       formSubmit(event);
     }
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-search]')){
+    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-search]')){
         
       formSubmit(event);
     }
@@ -440,8 +461,15 @@ export const sortTable = (table, form, savedTableBody) => {
   }
 
   let tbody = table.querySelector('tbody');
-  let select = form.querySelector('[data-sort]');
-  let selectedOption = select.querySelector(`option:nth-child(${select.selectedIndex + 1})`);
+
+
+  let selectedOption = form.querySelector(`input[type="radio"][data-sort]:checked`);
+
+  if(form.querySelector('select[data-sort]')){
+    
+    let select = form.querySelector('select[data-sort]');
+    selectedOption = form.querySelector(`select[data-sort] option:nth-child(${select.selectedIndex + 1})`);
+  }
 
   let sortBy = selectedOption.getAttribute('data-sort');
   let order = selectedOption.getAttribute('data-order');
@@ -522,9 +550,9 @@ export const filterTable = (table, form, wrapper) => {
   });
 
   // Add search columns too
-  if(form.querySelector('[data-search]')){
-    let searchInput = form.querySelector('[data-search]');
-    let searchColumns = form.querySelector('[data-search]').getAttribute('data-search').split(',');
+  if(form.querySelector('input[data-search]')){
+    let searchInput = form.querySelector('input[data-search]');
+    let searchColumns = form.querySelector('input[data-search]').getAttribute('data-search').split(',');
 
     searchColumns.forEach((column, index) => {
 
@@ -566,6 +594,43 @@ export const filterTable = (table, form, wrapper) => {
 
         let filterTd = row.querySelector(`[data-label="${key}"]`)
 
+        if(filter.includes('-date-from')){
+
+          let fromDate = new Date(filter.replace('-date-from',''));
+          let checkDate = new Date(filterTd.textContent.toLowerCase());
+
+          fromDate.setHours(0, 0, 0, 0);
+          checkDate.setHours(0, 0, 0, 0);
+
+          if(checkDate < fromDate){
+                
+            row.classList.add('less-than-from-date');
+            isMatched = false;
+          }
+          else if(!row.classList.contains('less-than-from-date') && !row.classList.contains('greater-than-to-date')) {
+            
+            isMatched = true;
+          }
+        }
+        else if(filter.includes('-date-to')){
+
+          let toDate = new Date(filter.replace('-date-to',''));
+          let checkDate = new Date(filterTd.textContent.toLowerCase());
+
+          toDate.setHours(0, 0, 0, 0);
+          checkDate.setHours(0, 0, 0, 0);
+
+          if(checkDate > toDate){
+                
+            row.classList.add('greater-than-to-date');
+            isMatched = false;
+          }
+          else if(!row.classList.contains('less-than-from-date') && !row.classList.contains('greater-than-to-date')) {
+            
+            isMatched = true;
+          }
+        }
+        
         // Dynamic values
         if(filter && filter == "$today")
           filter = formatCell('date', new Date());
@@ -629,13 +694,13 @@ export const filterTable = (table, form, wrapper) => {
           isMatched = (checkDate >= firstDayLastMonth && checkDate <= lastDayLastMonth);
         }
         
-        if(filterTd && filterTd.textContent.toLowerCase().includes(filter.toLowerCase())){
+        if(filterTd && filterTd.textContent.toLowerCase().includes(filter.replace('-',' ').toLowerCase())){
           isMatched = true;
         }
 
       });
 
-      if(!isMatched){
+      if(!isMatched) {
 
         row.classList.add('filtered');
         row.setAttribute('data-filtered-by',key)
@@ -890,11 +955,18 @@ const filterFilters = function(form){
     if (filterInput && filterInput.value) {
 
       let dataFilter = filterInput.getAttribute('data-filter');
+      let filterValue = filterInput.value;
+
+      if(filterInput.hasAttribute('data-date-from'))
+        filterValue += '-date-from'
+
+      if(filterInput.hasAttribute('data-date-to'))
+        filterValue += '-date-to'
 
       if(!filters[dataFilter])
         filters[dataFilter] = new Array();
     
-      filters[dataFilter].push(filterInput.value);
+      filters[dataFilter].push(filterValue);
     }
   });
 
@@ -1088,7 +1160,7 @@ export const formatCell = (format, cellOutput) => {
     case 'datetime':
       return new Date(cellOutput).toLocaleDateString('en-gb', { weekday: 'short', year:"2-digit", month:"long", day: "numeric", }) + " " + new Date(cellOutput).toLocaleTimeString("en-gb", { hour: "2-digit", minute: "2-digit"});
     case 'date':
-      return new Date(cellOutput).toLocaleDateString('en-gb', { year:"2-digit", month:"long", day: "numeric"});
+      return new Date(cellOutput).toLocaleDateString('en-gb', {day: "numeric", month:"long", year:"2-digit" });
     case 'capitalise':
       return cellOutput = ucfirst(cellOutput);
   }
