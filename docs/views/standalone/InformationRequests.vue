@@ -34,7 +34,7 @@ const search = route.query['search'];
     <h1>Information requests</h1>
     <div class="admin-panel">
 
-      <form id="tableFilters" class="full-width" novalidate data-ubmit>
+      <form id="tableFilters" class="full-width" novalidate data-submit>
 
         
         <Actionbar data-large-safe-area data-search="Transaction address" :data-search-value="search">

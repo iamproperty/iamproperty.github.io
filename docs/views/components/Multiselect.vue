@@ -51,7 +51,7 @@
     <Multiselect data-is-required data-error="">
       <span class="label" slot="label">Users</span>
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
-      <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight" checked/>Amanda Knight</label>
+      <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight" :checked="true"/>Amanda Knight</label>
       <label class="tag"><input type="checkbox" name="tags" value="Brian Lord"/>Brian Lord</label>
       <label class="tag"><input type="checkbox" name="tags" value="Claire Lane"/>Claire Lane</label>
       <label class="tag"><input type="checkbox" name="tags" value="John Smith"/>John Smith</label>
