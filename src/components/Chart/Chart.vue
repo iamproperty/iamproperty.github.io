@@ -18,7 +18,7 @@
 
 <script>
 import { ucfirst, unsnake } from '../../helpers/strings'
-import iamChart from '../../../assets/ts/components/chart/chart.component.ts'
+//import iamChart from '../../../assets/ts/components/chart/chart.component.ts'
 
 export default {
   name: 'Chart',
@@ -42,10 +42,18 @@ export default {
     }
   },
   mounted(){
-    this.$nextTick(function () {
 
-      if (!window.customElements.get('iam-chart'))
-        window.customElements.define('iam-chart', iamChart);
+    this.$nextTick(function () {
+      
+      import(`../../../assets/js/components/chart/chart.component.js`).then(module => {
+
+        if (!window.customElements.get(`iam-chart`))
+          window.customElements.define(`iam-chart`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
+
     })
   }
 }
