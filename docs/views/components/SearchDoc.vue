@@ -2,13 +2,18 @@
   <main>
     
     <DSHeader :image="headerImg" section="components">
-      <h1>Search (Beta)</h1>
+      <h1>Search</h1>
     </DSHeader>
 
-    <div class="container">
-      <p class="lead">...</p>
+    <p class="lead">The search select field is an interactive element typically used in forms to allow users to filter a list of predefined options and select one of those options.</p>
 
-    </div>
+    <p>The options are presented in a browser default drop-down menu when the field clicked or tapped.</p>
+
+    <p>Search selects are useful when there are a lot of options in the list. The search functionality makes it simpler for the user to find the desired option quicker than a standard select.</p>
+
+
+
+    
 
     <div class="container pb-0">
       <h2>Default view</h2>
@@ -104,30 +109,31 @@
       </Tabs>
 
     </div>
-    <div class="bg-light version-control">
+
+  -->
+
+  <div class="bg-light version-control mt-5">
       <div class="container">
         <table>
           <thead>
             <tr>
               <th>Version Control</th>
               <th>Date</th>
-              <th>Design System Version</th>
               <th>Notable updates</th>
             </tr>
           </thead>
           <tbody class="text-body">
             <tr>
-              <td>0.1</td>
-              <td></td>
-              <td>v4.1.0</td>
-              <td></td>
+              <td>V1 added</td>
+              <td>18.03.2024</td>
+              <td>N/A</td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/actionbar.pdf" download>Download latest designs</a>
+        <a href="/pdfs/select.pdf" download>Download latest designs</a>
       </div>
     </div>
--->
+    
   </main>
 </template>
 

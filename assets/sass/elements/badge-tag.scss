@@ -19,7 +19,7 @@
   background: var(--wider-colour, var(--wider-colour-1));
   margin-bottom: 1rem;
 
-  &:has(:is(.badge, .tag)) {
+  &:has(+ :is(.badge, .tag)) {
     margin-right: rem(6);
   }
   
@@ -36,11 +36,10 @@
     font-weight: bold;
   }
 
-  &:is(:hover,:focus,.hover) {
+  &:is(:hover,:focus,.hover,:focus-within, :focus-visible) {
     background: var(--wider-colour-hover, var(--wider-colour-1-hover));
   }
 
-  &:has(input:checked),
   &:is(:active,.active) {
     background: var(--wider-colour-active, var(--wider-colour-1-active));
   }
@@ -53,8 +52,9 @@
   }
 }
 
-.tag.tag--toggle,
-.tag.tag--not-set {
+.tag.tag--not-set,
+iam-multiselect:not(:defined) .tag,
+.tag.tag--toggle {
 
   background: var(--colour-canvas);
   outline: 1px solid var(--colour-border);
