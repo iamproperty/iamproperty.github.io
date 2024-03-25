@@ -29,4 +29,7 @@ main > :is(*):not(:defined):not(iam-carousel) {
 iam-search input:not(.is-invalid):not(:invalid) {
   background: none!important;
 }
+iam-search .optional-text {
+  display: none!important;
+}
 

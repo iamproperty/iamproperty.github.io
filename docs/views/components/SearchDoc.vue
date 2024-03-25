@@ -11,13 +11,47 @@
 
     <p>Search selects are useful when there are a lot of options in the list. The search functionality makes it simpler for the user to find the desired option quicker than a standard select.</p>
 
+    <div class="container visualtest">
 
+        <Search>
+        
+          <label>Property address
+            <span>
+            <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties"/>
+            <span class="suffix fa-regular fa-chevron-down"></span>
+            </span>
+          </label>
+          <datalist id="properties">
+            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
+            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
+            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
+            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
+            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
+            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+          </datalist>
+        </Search>
+        
 
-    
-
-    <div class="container pb-0">
-      <h2>Default view</h2>
     </div>
+
+    <h2 class="mt-4">Behaviour</h2>
+    <ul>
+      <li>Selecting the field should activate the dropdown and set the field to active so the user can begin typing. </li>
+      <li>Selecting the field on mobile should show both the dropdown and keyboard.</li>
+      <li>All valid options from the pre-defined list should be shown in the dropdown below. </li>
+      <li>Typing in the field should begin filtering options that match the term in the dropdown.</li>
+      <li>Selecting an option should add that value to the field and close the dropdown.</li>
+      <li>[data-url] is used for the endpoint address</li>
+      <li>A datalist can be added to provide search values before calling the endpoint</li>
+      <li>Dynamic events can be added to enhance functionalitity i.e. triggering the parent form to submit when a datalist value is selected</li>
+      <li>[data-schema] & [data-value-schema] & [data-display-schema] can be used to change the values used from the endpoint</li>
+      <li>Typing in 3 characters will trigger an ajax call, the same call can't be made twice</li>
+      <li>The ajax call will populate the datalist with new items and will not remove existing items</li>
+      <li>A second hidden input field is created to hide values like ID's</li>
+      <li>We should be allowed to submit the form unless data-prevent-submit is set.</li>
+    </ul>
+
+    <h2 class="mt-5">Ajax example</h2>
 
     <div class="container visualtest">
 
@@ -26,9 +60,7 @@
         
           <label>Search existing transactions
             <span>
-            <input type="text" name="client" autocomplete="off" aria-autocomplete="none" required data-change-events='[
-                {"in-list":"#properties", "target":"#search-property", "if": "submitForm"}
-                ]' list="properties"/>
+            <input type="text" name="client" autocomplete="off" aria-autocomplete="none" required />
             <span class="suffix fa-regular fa-search"></span>
             </span>
           </label>
@@ -40,24 +72,8 @@
     </div>
 
 
-    <div class="container pb-5">
-      <ul>
-        <li>[data-url] is used for the endpoint address</li>
-        <li>A datalist can be added to provide search values before calling the endpoint</li>
-        <li>Dynamic events can be added to enhance functionalitity i.e. triggering the parent form to submit when a datalist value is selected</li>
-        <li>[data-schema] & [data-value-schema] & [data-display-schema] can be used to change the values used from the endpoint</li>
-        <li>Typing in 3 characters will trigger an ajax call, the same call can't be made twice</li>
-        <li>The ajax call will populate the datalist with new items and will not remove existing items</li>
-        <li>A second hidden input field is created to hide values like ID's</li>
-        <li>We should be allowed to submit the form unless data-prevent-submit is set.</li>
-      </ul>
-    </div>
-
-
-    <div class="container pb-0">
-      <h2>Grouped results</h2>
-    </div>
-    
+    <h2 class="mt-5">Grouped results</h2>
+    <p>If the API JSON values are returned as a key value pair object instead of an array the keys are then used as a prefix for the results. This gives the user some more context for the results.</p>
     <div class="container visualtest">
 
       <form novalidate method="GET" id="search-iamsold">
@@ -79,18 +95,8 @@
 
     </div>
 
-    
-
-    <div class="container pb-5">
-      <ul>
-        <li>Designed to replace iamsold search functionalitity</li>
-        <li>If the results schema is an object rather than array the results will be grouped with each result prepended by the key.</li>
-      </ul>
-    </div>
-
-
-<!--
-    <div class="container">
+  
+    <div class="container pt-5">
       
       <h2>Implementation</h2>
       <Tabs>
@@ -100,17 +106,12 @@
         </details>
         <details>
           <summary><h3>Vue component</h3></summary>
-          <Readme></Readme>
-        </details>
-        <details>
-          <summary><h3>Acceptance criteria</h3></summary>
-          
+          <VueReadme></VueReadme>
         </details>
       </Tabs>
 
     </div>
 
-  -->
 
   <div class="bg-light version-control mt-5">
       <div class="container">
@@ -148,6 +149,8 @@ import headerImg from '../../img/cards-header.png'
 import Tabs from '@/components/Tabs/Tabs.vue'
 import Table from '@/components/Table/Table.vue'
 import Search from '@/components/Search/Search.vue'
+import VueReadme from '@/components/Multiselect/README.md'
+import WebReadme from '~/ts/components/multiselect/README.md'
 
 
 export default {
@@ -156,7 +159,9 @@ export default {
     headerImg,
     Tabs,
     Table,
-    Search
+    Search,
+    VueReadme,
+    WebReadme
   },
   data () {
     return {

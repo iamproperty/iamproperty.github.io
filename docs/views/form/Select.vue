@@ -27,7 +27,7 @@
       <li>Dropdown (browser default)</li>
     </ol>
 
-    <h2>Select types</h2>
+    <h2 class="mt-4">Select types</h2>
 
     <table>
       <thead>

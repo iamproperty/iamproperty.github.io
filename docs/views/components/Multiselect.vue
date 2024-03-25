@@ -33,9 +33,9 @@
       <li>If the user types an invalid value and presses enter it should wipe that value from the field.</li>
     </ul>
 
-    <h2>States</h2>
+    <h2 class="mt-5">States</h2>
 
-    <p class="lead pb-2 mt-4">Default</p>
+    <p class="lead pb-2">Default</p>
     <Multiselect data-is-required data-error="">
       <span class="label" slot="label">Users</span>
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
@@ -75,7 +75,7 @@
 
     </form>
   
-
+    <h2 class="mt-5">Implementation</h2>
     <Tabs class="container">
       <details>
         <summary><h2>Web component</h2></summary>

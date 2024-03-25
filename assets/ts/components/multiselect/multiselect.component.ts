@@ -69,6 +69,12 @@ class iamMultiselect extends HTMLElement {
         })
       });
 
+      if (form.classList.contains("was-validated")) {
+        wrapper.classList.add('was-validated');
+      } else {
+        wrapper.classList.remove('was-validated');
+      };
+
       observer.observe(form, {
         attributes : true,
         attributeFilter : ['style', 'class']
@@ -103,6 +109,13 @@ class iamMultiselect extends HTMLElement {
         multiselect.setAttribute('data-error','true');
       }
     }
+
+    // Set on load
+    Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]:checked`)).forEach((checkbox, index) => {
+
+      setItem(checkbox);
+    });
+
 
     // Filter list
     search.addEventListener('input', (event) => {
