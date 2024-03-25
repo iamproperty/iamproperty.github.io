@@ -122,10 +122,10 @@ class iamTable extends HTMLElement {
     tableModule.createSearchDataList(this.table, this.form);
 
     if(!this.form.querySelector('[data-pagination]')){
-      this.form.innerHTML += `<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`
+      this.form.insertAdjacentHTML('beforeend',`<input name="page" type="hidden" value="${this.getAttribute('data-page')}" data-pagination="true" />`);
     }
     if(!this.form.querySelector('[data-show]')){
-      this.form.innerHTML += `<input name="show" type="hidden" value="${this.getAttribute('data-show')}" data-show="true" />`
+      this.form.insertAdjacentHTML('beforeend',`<input name="show" type="hidden" value="${this.getAttribute('data-show')}" data-show="true" />`);
     }
 
     // Event listeners

@@ -328,8 +328,8 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     border-start-start-radius: 0!important;
   }
 
-  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output),
-  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output):has(~ .suffix) {
+  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="date"]),textarea,output),
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="date"]),textarea,output):has(~ .suffix) {
     order: 1;
     
     border-start-end-radius: 0!important;
@@ -814,7 +814,7 @@ div:has(> select){
   border: none;
   display: inline-block;
   margin: 0;
-  padding: 0 calc(1.25em + 0.8ch) 0 0.25em;
+  padding: 0 calc(1.25em + 0.8ch) 0 0.25em!important;
   height: auto;
   cursor: pointer;
 
@@ -1030,6 +1030,10 @@ iam-slider input::-webkit-inner-spin-button {
 // #region Date and time fields
 :is(input[type="date"],input[type="time"]) {
   position: relative;
+  margin-right: -3rem;
+  padding-right: 3rem !important;
+  background-position: right 4rem center;
+  border-radius: 0.5rem !important;
 }
 :is(input[type="date"],input[type="time"])::-webkit-calendar-picker-indicator {
   background: transparent;

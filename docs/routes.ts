@@ -1033,6 +1033,14 @@ const routes = [
           title: 'Sign in | iamkey'
         },
         component: () => import('./views/standalone/Signin.vue')
+      },
+      {
+        path: 'informationRequests',
+        name: "Information requests table",
+        meta: {
+          title: 'Information requests table | iamkey'
+        },
+        component: () => import('./views/standalone/InformationRequests.vue')
       }
     ]
   },
