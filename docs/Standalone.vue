@@ -1,10 +1,8 @@
 <template>
-  <div id="app">
-    <div id="visualtest"></div>
+    
 
     <router-view />
 
-  </div>
 </template>
 <script>
 import Logo from '@/foundations/Logo/Logo.vue'

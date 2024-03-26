@@ -149,6 +149,8 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   // Check what conditions are set on the table to see what the form actions are
   let formSubmit = function(event, paginate = false){
 
+    console.log('submit');
+
     if(form.classList.contains('processing'))
       return false;
 
