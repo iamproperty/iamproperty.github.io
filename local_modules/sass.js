@@ -6,7 +6,7 @@ console.log(`Watching for file changes on ${watchFolder}`);
 
 fs.watch(watchFolder, { recursive: true }, (event, filename) => {
 
-  if (eventType === 'change') {
+  if (event === 'change') {
     fs.stat (filename, function (err, stat) {
       if(err) return console.error(err)
       const modTime = stat.mtimeMs
