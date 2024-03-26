@@ -1041,6 +1041,14 @@ const routes = [
           title: 'Information requests table | iamkey'
         },
         component: () => import('./views/standalone/InformationRequests.vue')
+      },
+      {
+        path: 'inspections',
+        name: "Inspections",
+        meta: {
+          title: 'Inspections | iamkey'
+        },
+        component: () => import('./views/standalone/Inspections.vue')
       }
     ]
   },

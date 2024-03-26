@@ -11,7 +11,7 @@
     
    <div class="container visualtest">      
       <h2>Default chart</h2>
-      <Chart class="chart chart--animate chart--show-totals" data-max="1800" data-min="0" data-type="column" data-yaxis="0,200,400,600,800,1000,1200,1400,1600,1800">
+      <Chart class="chart chart--animate chart--show-totals" data-max="1800" data-min="0" data-type="column" data-yaxis="0,200,400,600,800,1000,1200,1400,1600,1800" style="--chart-height-lg:14%;">
          <table>
             <thead>
                <tr>
