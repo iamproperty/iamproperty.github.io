@@ -1,0 +1,34 @@
+@use "../_func" as *;
+
+iam-inline-edit {
+
+  .optional-text {
+    display: none;
+  }
+
+  label {
+    margin: 0;;
+  }
+}
+// Inactive state
+iam-inline-edit:defined:not(:focus-within):not([data-saving]) {
+  
+  --display-btns: none;
+
+  input {
+    border: none;
+    background: none;
+    margin-left: -1rem;
+    width: calc(100% + 1rem);
+    max-width: calc(100% + 1rem);
+  }
+}
+
+// Hover state
+iam-inline-edit:defined:not(:focus-within):not([data-saving]):hover {
+  
+  input {
+    border: none;
+    background: var(--colour-light);
+  }
+}

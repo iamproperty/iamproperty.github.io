@@ -1,0 +1,23 @@
+@use "../_func" as *;
+
+:host {
+  
+  max-width: var(--input-max-width, 50rem);
+  display: block;
+  font-weight: normal;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.btns {
+  display: var(--display-btns, flex);
+  justify-content: flex-end;
+  gap: 0.5rem;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+}
+
+.btn-action {
+  margin: 0;
+}

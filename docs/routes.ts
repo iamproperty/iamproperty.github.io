@@ -463,6 +463,15 @@ const routes = [
         searchterms: 'introduce, banner'
       },
       {
+        path: 'inline-edit',
+        name: 'Inline edit (Beta)',
+        meta: {
+          title: 'Inline edit | Components | iamkey'
+        },
+        component: () => import('./views/components/InlineEdit.vue'),
+        searchterms: 'form, input, inline'
+      },
+      {
         path: 'multiselect',
         name: 'Multiselect',
         meta: {
