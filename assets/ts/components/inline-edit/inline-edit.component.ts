@@ -41,7 +41,7 @@ class iamInlineEdit extends HTMLElement {
     let cancelButton = this.shadowRoot.querySelector('#cancel');
     
     let label = this.querySelector('label');
-    let input = this.querySelector('input');
+    let input = this.querySelector('input, textarea, select');
 
     // Save the original value for later
     let originalValue = input.value;
@@ -53,6 +53,7 @@ class iamInlineEdit extends HTMLElement {
       input.blur();
       inlineEdit.blur();
 
+      inlineEdit.classList.remove('was-validated');
       
       const cancelEvent = new CustomEvent("inline-edit-cancel", { detail: { name: input.getAttribute('name')} });
       inlineEdit.dispatchEvent(cancelEvent);
@@ -61,12 +62,17 @@ class iamInlineEdit extends HTMLElement {
     // Save
     saveButton.addEventListener('click', (event) => {
 
+
+
+      if(inlineEdit.querySelector(':invalid')){
+        
+        inlineEdit.classList.add('was-validated');
+
+        return false;
+      }
+
+
       originalValue = input.value;
-
-      // check validation
-
-      // dispatch event autosave
-
 
       // dispatch save event
       const saveEvent = new CustomEvent("inline-edit-save", { detail: { name: input.getAttribute('name'), value: input.value } });
@@ -89,8 +95,12 @@ class iamInlineEdit extends HTMLElement {
 
         saveButton.innerHTML = '<i class="fa-regular fa-check m-0"></i> Saved';
 
-        if(inlineEdit.querySelector('.unsaved'))
-          inlineEdit.querySelector('.unsaved').innerHTML = '(Saved)';
+        if(inlineEdit.querySelector('.inline-feedback'))
+          inlineEdit.querySelector('.inline-feedback').innerHTML = '(Saved)';
+
+          
+        const confirmEvent = new CustomEvent("inline-edit-confirmed", { detail: { name: input.getAttribute('name') } });
+        inlineEdit.dispatchEvent(confirmEvent);
       }, 100);
 
       // Reset to normal
@@ -101,21 +111,37 @@ class iamInlineEdit extends HTMLElement {
         inlineEdit.removeAttribute('data-saving');
         saveButton.innerHTML = '<i class="fa-regular fa-save m-0"></i> Save';
 
-        if(inlineEdit.querySelector('.unsaved'))
-          inlineEdit.querySelector('.unsaved').remove();
+        if(inlineEdit.querySelector('.inline-feedback'))
+          inlineEdit.querySelector('.inline-feedback').remove();
 
       }, 1000);
-
-      console.log(saveButton)
-
     });
 
     // enter key saves
+    if(input.tagName === 'SELECT'){
 
+      input.addEventListener('change',(event) => {
+
+        originalValue = input.value;
+        
+        const saveEvent = new CustomEvent("inline-edit-save", { detail: { name: input.getAttribute('name'), value: input.value } });
+        inlineEdit.dispatchEvent(saveEvent);
+
+        inlineEdit.setAttribute('data-saving','true');
+        input.disabled = true;
+
+        input.blur();
+      });
+    }
+
+    if(input.tagName != 'SELECT'){
+      input.addEventListener('focus',(event) => {
+
+        input.select();
+      });
+    }
 
     //blur it should autosave
-
-
     input.addEventListener('blur',(event) => {
 
       if(input.value != originalValue){
@@ -124,7 +150,7 @@ class iamInlineEdit extends HTMLElement {
 
         if(inlineEdit.hasAttribute('data-autosave')) {
 
-          input.value = originalValue;
+          originalValue = input.value;
           
           const saveEvent = new CustomEvent("inline-edit-autosave", { detail: { name: input.getAttribute('name'), value: input.value } });
           inlineEdit.dispatchEvent(saveEvent);
@@ -132,12 +158,30 @@ class iamInlineEdit extends HTMLElement {
           feedbackText = '(Auto-saving)';
         }
 
-        let labelText = label.textContent;
-        if(!inlineEdit.querySelector('.unsaved'))
-          input.insertAdjacentHTML('beforebegin', `<span class="unsaved">${feedbackText}</span>`);
+        if(!inlineEdit.querySelector('.inline-feedback'))
+          input.insertAdjacentHTML('beforebegin', `<span class="inline-feedback">${feedbackText}</span>`);
       }
+    });
 
-    })
+
+    // checkboxes
+    inlineEdit.addEventListener('change', (event) => {
+      if (event && event.target instanceof HTMLElement && event.target.closest('input[type="checkbox"]')){
+        
+        let saveValue = "";
+
+        Array.from(inlineEdit.querySelectorAll(`label input[type="checkbox"]:checked`)).forEach((checkbox, index) => {
+
+          if(index != 0)
+            saveValue += ", ";
+
+          saveValue += checkbox.value;
+        });
+        
+        const saveEvent = new CustomEvent("inline-edit-save", { detail: { name: event.target.closest('input[type="checkbox"]').getAttribute('name'), value: saveValue } });
+        inlineEdit.dispatchEvent(saveEvent);
+      }
+    });
   }
 }
 

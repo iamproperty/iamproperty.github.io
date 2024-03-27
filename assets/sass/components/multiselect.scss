@@ -7,6 +7,11 @@
   display: block;
 }
 
+label {
+  margin-bottom: 0;
+  padding-bottom: 0.5rem;
+}
+
 .wrapper {
 
   margin-bottom: rem(24);
@@ -126,4 +131,53 @@ button {
 .wrapper:is(:hover, :focus-within) .dropdown {
 
   display: var(--display-panel, none);
+}
+
+
+// Inline edit
+
+:host-context(:focus-within) {
+  input {
+    background-color: none!important;
+  }
+}
+:host-context(iam-inline-edit) {
+
+  display: block;
+  --display-btns: none;
+
+  label:hover + .outer:not(:focus-within) .wrapper:not([data-mousedown]),
+  .outer:not(:focus-within) .wrapper:not([data-mousedown]):hover{
+    
+    background-color: var(--colour-light);
+
+    input {
+      background-color: var(--colour-light);
+    }
+
+    .dropdown {
+      display: none;
+    }
+  }
+
+  .wrapper:not(.filled):not(:focus-within):not([data-mousedown]){
+
+    input {
+      border: none;
+      background: none;
+      margin-left: -1rem;
+      width: calc(100% + 1rem);
+      max-width: calc(100% + 1rem);
+      box-shadow: none;
+    }
+
+    .dropdown {
+      display: none;
+    }
+  }
+  .wrapper.filled:not(:focus-within):not([data-mousedown]) {
+    background: none;
+    border: none;
+    padding-left: 0;
+  }
 }

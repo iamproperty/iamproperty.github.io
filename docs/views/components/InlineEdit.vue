@@ -15,15 +15,86 @@
 
 
     <InlineEdit id="inlineEdit" data-autosave>
-      <label>Optional label
-        <input type="text" name="text" value="Placeholder text" />
+      <label >Optional label
+        <input type="email" name="text" value="Placeholder text" />
       </label>
     </InlineEdit>
 
 
-
     <h3 class="h4 mt-5 pb-1">Dispatched events</h3>
     <pre><code id="dispatchedEvents"></code></pre>
+
+
+    <h2 class="mt-5">Textarea</h2>
+
+
+    <InlineEdit id="inlineEdit2" >
+      <label>Optional label
+        <textarea name="textarea" required>Default value</textarea>
+      </label>
+    </InlineEdit>
+
+
+    <h3 class="h4 mt-5 pb-1">Dispatched events</h3>
+    <pre><code id="dispatchedEvents2"></code></pre>
+
+
+    <h2 class="mt-5">Select</h2>
+
+
+    <InlineEdit id="inlineEdit3" >
+      <label>Optional label
+        <select name="select">
+          <option value="">Please select</option>
+          <option value="Bungalow">Bungalow</option>
+          <option value="Detached">Detached</option>
+          <option value="Semi-detached">Semi-detached</option>
+          <option value="Terraced">Terraced</option>
+        </select>
+      </label>
+    </InlineEdit>
+
+
+    <h3 class="h4 mt-5 pb-1">Dispatched events</h3>
+    <pre><code id="dispatchedEvents3"></code></pre>
+
+
+
+    <h2 class="mt-5">Multiselect</h2>
+
+
+    <InlineEdit id="inlineEdit4">
+      <Multiselect placeholder="Placeholder text" data-label="Users">
+        <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
+        <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight"/>Amanda Knight</label>
+        <label class="tag"><input type="checkbox" name="tags" value="Brian Lord"/>Brian Lord</label>
+        <label class="tag"><input type="checkbox" name="tags" value="Claire Lane"/>Claire Lane</label>
+        <label class="tag"><input type="checkbox" name="tags" value="John Smith"/>John Smith</label>
+        <label class="tag"><input type="checkbox" name="tags" value="James Brown"/>James Brown</label>
+        <label class="tag"><input type="checkbox" name="tags" value="Sarah Brown"/>Sarah Brown</label>
+      </Multiselect>
+    </InlineEdit>
+
+
+    <h3 class="h4 mt-5 pb-1">Dispatched events</h3>
+    <pre><code id="dispatchedEvents4"></code></pre>
+
+
+    
+
+    <h2>Input field</h2>
+
+
+    <InlineEdit id="inlineEdit5" data-autosave>
+      <label>Optional label
+        <input type="date" name="text" />
+      </label>
+    </InlineEdit>
+
+
+    <h3 class="h4 mt-5 pb-1">Dispatched events</h3>
+    <pre><code id="dispatchedEvents5"></code></pre>
+
 
 
     <div class="mt-5 container">
@@ -85,6 +156,8 @@ import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/type-header.png'
 import Table from '@/components/Table/Table.vue'
 import InlineEdit from '../../../src/components/InlineEdit/InlineEdit.vue'
+import Multiselect from '../../../src/components/Multiselect/Multiselect.vue'
+
 
 export default {
   components: {
@@ -94,15 +167,24 @@ export default {
     WebReadme,
     Tabs,
     Tab,
-    InlineEdit
+    InlineEdit,
+    Multiselect
   },
   mounted(){
     this.$nextTick(function () {
     
       let inlineEdit = document.querySelector('#inlineEdit');
+      let inlineEdit2 = document.querySelector('#inlineEdit2');
+      let inlineEdit3 = document.querySelector('#inlineEdit3');
+      let inlineEdit4 = document.querySelector('#inlineEdit4');
+      let inlineEdit5 = document.querySelector('#inlineEdit5');
 
       let dispatchedEvents = document.querySelector('#dispatchedEvents');
-      let events = ['inline-edit-cancel','inline-edit-save','inline-edit-autosave'];
+      let dispatchedEvents2 = document.querySelector('#dispatchedEvents2');
+      let dispatchedEvents3 = document.querySelector('#dispatchedEvents3');
+      let dispatchedEvents4 = document.querySelector('#dispatchedEvents4');
+      let dispatchedEvents5 = document.querySelector('#dispatchedEvents5');
+      let events = ['inline-edit-cancel','inline-edit-save','inline-edit-autosave','inline-edit-confirmed'];
         
       events.forEach((eventType ,index) => {
             
@@ -111,9 +193,33 @@ export default {
           dispatchedEvents.innerHTML += `${eventType}: ${JSON.stringify(event.detail)}\n`;
           dispatchedEvents.scrollTop = dispatchedEvents.scrollHeight;
         });
+
+        inlineEdit.addEventListener(eventType, event => {
+          
+          dispatchedEvents2.innerHTML += `${eventType}: ${JSON.stringify(event.detail)}\n`;
+          dispatchedEvents2.scrollTop = dispatchedEvents2.scrollHeight;
+        });
+
+        inlineEdit3.addEventListener(eventType, event => {
+          
+          dispatchedEvents3.innerHTML += `${eventType}: ${JSON.stringify(event.detail)}\n`;
+          dispatchedEvents3.scrollTop = dispatchedEvents3.scrollHeight;
+        });
+
+        inlineEdit4.addEventListener(eventType, event => {
+          
+          dispatchedEvents4.innerHTML += `${eventType}: ${JSON.stringify(event.detail)}\n`;
+          dispatchedEvents4.scrollTop = dispatchedEvents4.scrollHeight;
+        });
+
+        inlineEdit5.addEventListener(eventType, event => {
+          
+          dispatchedEvents5.innerHTML += `${eventType}: ${JSON.stringify(event.detail)}\n`;
+          dispatchedEvents5.scrollTop = dispatchedEvents5.scrollHeight;
+        });
       });
 
-
+      // Input events
       inlineEdit.addEventListener('inline-edit-save', event => {
         
         const savedEvent = new CustomEvent("inline-edit-saved");
@@ -126,6 +232,45 @@ export default {
         inlineEdit.dispatchEvent(savedEvent);
       });
 
+      // Textarea events
+      inlineEdit2.addEventListener('inline-edit-save', event => {
+        
+        const savedEvent = new CustomEvent("inline-edit-saved");
+        inlineEdit2.dispatchEvent(savedEvent);
+      });
+
+      inlineEdit2.addEventListener('inline-edit-autosave', event => {
+          
+        const savedEvent = new CustomEvent("inline-edit-saved");
+        inlineEdit2.dispatchEvent(savedEvent);
+      });
+
+      // Select events
+      inlineEdit3.addEventListener('inline-edit-save', event => {
+          
+        const savedEvent = new CustomEvent("inline-edit-saved");
+        inlineEdit3.dispatchEvent(savedEvent);
+      });
+
+      inlineEdit4.addEventListener('inline-edit-save', event => {
+          
+        const savedEvent = new CustomEvent("inline-edit-saved");
+        inlineEdit4.dispatchEvent(savedEvent);
+      });
+
+      
+      // date/time events
+      inlineEdit5.addEventListener('inline-edit-save', event => {
+        
+        const savedEvent = new CustomEvent("inline-edit-saved");
+        inlineEdit5.dispatchEvent(savedEvent);
+      });
+
+      inlineEdit5.addEventListener('inline-edit-autosave', event => {
+          
+        const savedEvent = new CustomEvent("inline-edit-saved");
+        inlineEdit5.dispatchEvent(savedEvent);
+      });
     });
   },
   data () {
