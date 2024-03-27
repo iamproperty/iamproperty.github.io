@@ -135,7 +135,6 @@ button {
 
 
 // Inline edit
-
 :host-context(:focus-within) {
   input {
     background-color: none!important;
@@ -158,6 +157,10 @@ button {
     .dropdown {
       display: none;
     }
+  }
+
+  .wrapper {
+    margin-bottom: 0;
   }
 
   .wrapper:not(.filled):not(:focus-within):not([data-mousedown]){

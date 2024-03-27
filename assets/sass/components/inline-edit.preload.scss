@@ -11,6 +11,19 @@ iam-inline-edit {
     margin: 0;;
   }
 }
+
+
+iam-inline-edit:focus-within {
+
+
+  --display-status: none;
+}
+
+
+
+
+
+
 // Inactive state
 iam-inline-edit:defined:not(:focus-within):not([data-saving]):not(.was-validated:has(:invalid)) {
   

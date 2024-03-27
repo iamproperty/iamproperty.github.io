@@ -27,7 +27,12 @@ class iamInlineEdit extends HTMLElement {
     
     <slot></slot>
     <div class="btns">
-    <button class="btn btn-action" id="save"><i class="fa-regular fa-save m-0"></i> Save</button><button class="btn btn-action" id="cancel">Cancel</button>
+      <button class="btn btn-action" id="save"><i class="fa-regular fa-save m-0"></i> Save</button><button class="btn btn-action" id="cancel">Cancel</button>
+    </div>
+    <div class="status pe-none">
+      <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="saving"><i class="fa-regular fa-spinner fa-spin me-1"></i> Saving...</span>
+      <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="saved"><i class="fa-regular fa-check me-1"></i> Saved</span>
+      <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="notsaved"><i class="fa-regular fa-circle-info me-1"></i> Not Saved</span>
     </div>
     `;
 
@@ -43,6 +48,10 @@ class iamInlineEdit extends HTMLElement {
     let label = this.querySelector('label');
     let input = this.querySelector('input, textarea, select');
 
+    let statusSaving = this.shadowRoot.querySelector('#saving');
+    let statusSaved = this.shadowRoot.querySelector('#saved');
+    let statusNotSaved = this.shadowRoot.querySelector('#notsaved');
+
     // Save the original value for later
     let originalValue = input.value;
 
@@ -54,6 +63,7 @@ class iamInlineEdit extends HTMLElement {
       inlineEdit.blur();
 
       inlineEdit.classList.remove('was-validated');
+      statusNotSaved.classList.add('d-none');
       
       const cancelEvent = new CustomEvent("inline-edit-cancel", { detail: { name: input.getAttribute('name')} });
       inlineEdit.dispatchEvent(cancelEvent);
@@ -61,8 +71,6 @@ class iamInlineEdit extends HTMLElement {
 
     // Save
     saveButton.addEventListener('click', (event) => {
-
-
 
       if(inlineEdit.querySelector(':invalid')){
         
@@ -78,14 +86,14 @@ class iamInlineEdit extends HTMLElement {
       const saveEvent = new CustomEvent("inline-edit-save", { detail: { name: input.getAttribute('name'), value: input.value } });
       inlineEdit.dispatchEvent(saveEvent);
 
-      inlineEdit.setAttribute('data-saving','true');
+      //inlineEdit.setAttribute('data-saving','true');
       input.disabled = true;
 
       input.blur();
       inlineEdit.blur();
-      saveButton.innerHTML = '<i class="fa-regular fa-spinner fa-spin m-0"></i> Saving...';
-      saveButton.disabled = true;
-      
+
+
+      statusSaving.classList.remove('d-none');
     });
 
     // Saved
@@ -93,12 +101,9 @@ class iamInlineEdit extends HTMLElement {
 
       setTimeout(() => {
 
-        saveButton.innerHTML = '<i class="fa-regular fa-check m-0"></i> Saved';
-
-        if(inlineEdit.querySelector('.inline-feedback'))
-          inlineEdit.querySelector('.inline-feedback').innerHTML = '(Saved)';
-
-          
+        statusSaving.classList.add('d-none');
+        statusSaved.classList.remove('d-none');
+            
         const confirmEvent = new CustomEvent("inline-edit-confirmed", { detail: { name: input.getAttribute('name') } });
         inlineEdit.dispatchEvent(confirmEvent);
       }, 100);
@@ -107,13 +112,11 @@ class iamInlineEdit extends HTMLElement {
       setTimeout(() => {
 
         input.disabled = false;
-        saveButton.disabled = false;
         inlineEdit.removeAttribute('data-saving');
-        saveButton.innerHTML = '<i class="fa-regular fa-save m-0"></i> Save';
-
-        if(inlineEdit.querySelector('.inline-feedback'))
-          inlineEdit.querySelector('.inline-feedback').remove();
-
+        
+        statusSaving.classList.add('d-none');
+        statusSaved.classList.add('d-none');
+        statusNotSaved.classList.add('d-none');
       }, 1000);
     });
 
@@ -155,11 +158,11 @@ class iamInlineEdit extends HTMLElement {
           const saveEvent = new CustomEvent("inline-edit-autosave", { detail: { name: input.getAttribute('name'), value: input.value } });
           inlineEdit.dispatchEvent(saveEvent);
 
-          feedbackText = '(Auto-saving)';
+          statusSaving.classList.remove('d-none');
         }
-
-        if(!inlineEdit.querySelector('.inline-feedback'))
-          input.insertAdjacentHTML('beforebegin', `<span class="inline-feedback">${feedbackText}</span>`);
+        else if(!inlineEdit.querySelector('.inline-feedback')){
+          statusNotSaved.classList.remove('d-none');
+        }
       }
     });
 
