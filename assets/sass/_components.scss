@@ -4,6 +4,7 @@
 @use 'components/nav.preload';
 @use 'components/card.preload';
 @use 'components/carousel.preload';
+@use 'components/multiselect.preload';
 
 // #region Undefined web components
 main > :is(*):not(:defined):not(iam-carousel) {
@@ -27,5 +28,8 @@ main > :is(*):not(:defined):not(iam-carousel) {
 // Search
 iam-search input:not(.is-invalid):not(:invalid) {
   background: none!important;
+}
+iam-search .optional-text {
+  display: none!important;
 }
 

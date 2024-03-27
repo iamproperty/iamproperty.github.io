@@ -238,7 +238,7 @@ const routes = [
       },
       {
         path: 'select',
-        name: 'Form select field (Beta)',
+        name: 'Selects',
         meta: {
           title: 'Form select field | Elements | iamkey'
         },
@@ -463,6 +463,14 @@ const routes = [
         searchterms: 'introduce, banner'
       },
       {
+        path: 'multiselect',
+        name: 'Multiselect',
+        meta: {
+          title: 'Multiselect | Components | iamkey'
+        },
+        component: () => import('./views/components/Multiselect.vue')
+      },
+      {
         path: 'notefeed',
         name: 'Note feed (Beta)',
         meta: {
@@ -498,7 +506,7 @@ const routes = [
       },
       {
         path: 'search',
-        name: 'Search (Beta)',
+        name: 'Search component',
         meta: {
           title: 'Search | Components | iamkey'
         },

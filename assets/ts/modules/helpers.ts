@@ -79,6 +79,12 @@ export const addGlobalEvents = (body) => {
         form.classList.add('was-validated');
         event.preventDefault();
       }
+
+      if(form.querySelector('iam-multiselect[data-is-required][data-error]')){
+        
+        form.classList.add('was-validated');
+        event.preventDefault();
+      }
     }
 
   });

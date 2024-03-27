@@ -373,6 +373,18 @@ input[maxlength] + span {
 
   border-color: var(--colour-danger)!important;
 }
+
+
+.was-validated select:is(:invalid, .is-invalid, [aria-invalid],:-internal-autofill-selected) {
+
+  $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
+
+  background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
+              linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top / calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem)) no-repeat,
+              escape-svg($icon-error) right var(--input-padding-block, 3.5rem) top var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat;
+  padding-right: 6rem!important;
+}
+
 .was-validated input:is(:invalid, .is-invalid,[aria-invalid],:-internal-autofill-selected) {
 
   background-image: escape-svg($icon-error);
@@ -769,12 +781,13 @@ select[multiple]::-webkit-scrollbar-thumb {
 select {
   $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
-  background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem)/var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
-              linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top/calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) no-repeat;
+  background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
+              linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top / calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem)) no-repeat;
   
   padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem))!important;
   option {font-size: 1.2em;}
 
+  box-shadow: inset -2px 0px 0px var(--colour-primary-theme);
   
   max-width: $select-max-width;
 
