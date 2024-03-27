@@ -192,12 +192,6 @@ class iamSearch extends HTMLElement {
         e.preventDefault();
       });
     }
-
-    inputField.addEventListener('focus', (event) => {
-
-      console.log('hi')
-      inputField.select();
-    });
   }
 }
 
