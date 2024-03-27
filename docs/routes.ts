@@ -464,7 +464,7 @@ const routes = [
       },
       {
         path: 'inline-edit',
-        name: 'Inline edit (Beta)',
+        name: 'Inline edit',
         meta: {
           title: 'Inline edit | Components | iamkey'
         },

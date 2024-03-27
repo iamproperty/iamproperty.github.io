@@ -1,3 +1,17 @@
+<script setup>
+function saveValue(event){
+  
+  // Replace the timeout with an ajax call
+  setTimeout(() => {
+
+    console.log('Passed to Vue');
+    const saveEvent = new CustomEvent("inline-edit-saved");
+    event.target.dispatchEvent(saveEvent);
+
+  }, 100);
+}
+</script>
+
 <template>
   <main>
 
@@ -28,7 +42,7 @@
     <h2 class="mt-5">Input field</h2>
     <p>Inline edit can be wrapped around a input field. It starts in a read-only but can be activated when the user clicks or taps the field. Once activated the input appears and can be edited and saved.</p>
 
-    <InlineEdit id="inlineEdit" data-autosave>
+    <InlineEdit id="inlineEdit" data-autosave @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
       <label >Optional label
         <input type="text" name="text" value="Placeholder text" />
       </label>
@@ -61,7 +75,7 @@
     <h2 class="mt-5">Textarea</h2>
     <p>Text area inline edit is a wrapper around a text area. It starts in a read-only but can be activated when the user clicks or taps the field. Once activated the text area appears and can be edited and saved.</p>
 
-    <InlineEdit id="inlineEdit2" >
+    <InlineEdit id="inlineEdit2" @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
       <label>Optional label
         <textarea name="textarea" required>Default value</textarea>
       </label>
@@ -87,7 +101,7 @@
     <h2 class="mt-5">Select</h2>
     <p>Select inline edit is a wrapper around a standard select. It starts in a read-only but can be activated when the user clicks or taps the field. Once activated the select appears and can be edited and saved.</p>
 
-    <InlineEdit id="inlineEdit3">
+    <InlineEdit id="inlineEdit3" @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
       <label>Optional label
         <select name="select">
           <option value="">Please select</option>
@@ -116,7 +130,7 @@
     <h2 class="mt-5">Multiselect</h2>
     <p>Multiselect inline edit is a wrapper around a multiselect. It starts in a read-only but can be activated when the user clicks or taps the field. Once activated the multiselect appears and can be edited and saved.</p>
 
-    <InlineEdit id="inlineEdit4">
+    <InlineEdit id="inlineEdit4" @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
       <Multiselect placeholder="Placeholder text" data-label="Users">
         <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
         <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight"/>Amanda Knight</label>
@@ -269,44 +283,6 @@ export default {
         });
       });
 
-      // Input events
-      inlineEdit.addEventListener('inline-edit-save', event => {
-        
-        const savedEvent = new CustomEvent("inline-edit-saved");
-        inlineEdit.dispatchEvent(savedEvent);
-      });
-
-      inlineEdit.addEventListener('inline-edit-autosave', event => {
-          
-        const savedEvent = new CustomEvent("inline-edit-saved");
-        inlineEdit.dispatchEvent(savedEvent);
-      });
-
-      // Textarea events
-      inlineEdit2.addEventListener('inline-edit-save', event => {
-        
-        const savedEvent = new CustomEvent("inline-edit-saved");
-        inlineEdit2.dispatchEvent(savedEvent);
-      });
-
-      inlineEdit2.addEventListener('inline-edit-autosave', event => {
-          
-        const savedEvent = new CustomEvent("inline-edit-saved");
-        inlineEdit2.dispatchEvent(savedEvent);
-      });
-
-      // Select events
-      inlineEdit3.addEventListener('inline-edit-save', event => {
-          
-        const savedEvent = new CustomEvent("inline-edit-saved");
-        inlineEdit3.dispatchEvent(savedEvent);
-      });
-
-      inlineEdit4.addEventListener('inline-edit-save', event => {
-          
-        const savedEvent = new CustomEvent("inline-edit-saved");
-        inlineEdit4.dispatchEvent(savedEvent);
-      });
 
     });
   },
