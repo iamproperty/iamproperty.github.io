@@ -66,6 +66,16 @@ iam-multiselect:not(:defined) .tag,
   &:after {
     display: none;
   }
+
+  &:is(:hover,:focus) {
+    
+    background: #EEEEEE;
+  }
+  
+  &:is(:active) {
+    
+    background: #E0E0E0;
+  }
   
   &:has(input:checked),
   &.selected {
