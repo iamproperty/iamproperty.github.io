@@ -58,7 +58,12 @@ class iamInlineEdit extends HTMLElement {
     // cancel
     cancelButton.addEventListener('click', (event) => {
 
+
+      console.log(originalValue)
+
       input.value = originalValue;
+
+
       input.blur();
       inlineEdit.blur();
 
@@ -79,7 +84,6 @@ class iamInlineEdit extends HTMLElement {
         return false;
       }
 
-
       originalValue = input.value;
 
       // dispatch save event
@@ -95,6 +99,23 @@ class iamInlineEdit extends HTMLElement {
 
       statusSaving.classList.remove('d-none');
     });
+
+    // Save
+    if(input.tagName === 'input'){
+      input.addEventListener('keydown', (event) => {
+
+        switch (event.key) { // change to event.key to key to use the above variable
+          case "Enter":
+              
+            event.stopPropagation();
+            event.preventDefault();
+
+            saveButton.click();
+
+            break;
+        }
+      });
+    }
 
     // Saved
     inlineEdit.addEventListener('inline-edit-saved', (event) => {
@@ -145,7 +166,7 @@ class iamInlineEdit extends HTMLElement {
     }
 
     //blur it should autosave
-    input.addEventListener('blur',(event) => {
+    inlineEdit.addEventListener('blur',(event) => {
 
       if(input.value != originalValue){
 
@@ -165,7 +186,6 @@ class iamInlineEdit extends HTMLElement {
         }
       }
     });
-
 
     // checkboxes
     inlineEdit.addEventListener('change', (event) => {

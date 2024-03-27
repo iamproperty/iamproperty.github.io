@@ -44,7 +44,7 @@ function saveValue(event){
 
     <InlineEdit id="inlineEdit" data-autosave @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
       <label >Optional label
-        <input type="text" name="text" value="Placeholder text" />
+        <input type="text" name="text" placeholder="Placeholder text" />
       </label>
     </InlineEdit>
 
@@ -77,7 +77,7 @@ function saveValue(event){
 
     <InlineEdit id="inlineEdit2" @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
       <label>Optional label
-        <textarea name="textarea" required>Default value</textarea>
+        <textarea name="textarea">Default value</textarea>
       </label>
     </InlineEdit>
 

@@ -31,7 +31,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/inline-edit/inline-edit.component.min.js`).then(module => {
+      import(`../../../assets/js/components/inline-edit/inline-edit.component.js`).then(module => {
 
         if (!window.customElements.get(`iam-inline-edit`))
           window.customElements.define(`iam-inline-edit`, module.default);

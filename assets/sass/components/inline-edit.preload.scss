@@ -60,7 +60,12 @@ iam-inline-edit:defined:not(:focus-within):not([data-saving]):not(.was-validated
 
 
 // Multi select
-iam-inline-edit iam-multiselect:has(label[slot=checked]) {
+
+iam-inline-edit:has(iam-multiselect label[slot=checked]) {
+  --display-btns: none;
+}
+
+iam-inline-edit:not(:focus-within) iam-multiselect:has(label[slot=checked]) {
   --display-button: none;
 }
 
