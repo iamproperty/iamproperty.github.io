@@ -195,8 +195,9 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
       loadAjaxTable(table, form, pagination,wrapper);
     }
-    else if(form.hasAttribute('data-submit'))
+    else if(form.hasAttribute('data-submit')){
       form.submit();
+    }
     else {
       filterTable(table, form, wrapper);
       populateDataQueries(table,form);

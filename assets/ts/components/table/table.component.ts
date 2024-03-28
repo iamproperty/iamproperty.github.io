@@ -48,17 +48,22 @@ class iamTable extends HTMLElement {
     const params = new URLSearchParams(window.location.search)
 
     // Set default attributes
-    if(!this.hasAttribute('data-total'))
+    if(!this.hasAttribute('data-total')){
       this.setAttribute('data-total', this.querySelectorAll('table tbody tr').length);
+    }
 
-    if(!this.hasAttribute('data-page'))
+    if(!this.hasAttribute('data-page')){
       this.setAttribute('data-page', (params.has('page') ? params.get('page') : 1));
+    }
 
-    if(!this.hasAttribute('data-show'))
+    if(!this.hasAttribute('data-show')){
       this.setAttribute('data-show', (params.has('show') ? params.get('show') : 15));
-    
-    if(!this.hasAttribute('data-increment'))
+    }
+      
+    if(!this.hasAttribute('data-increment')){
       this.setAttribute('data-increment', this.getAttribute('data-show'));
+    }
+      
 
     // Update table__wrapper class
     let classList = this.classList.toString();
@@ -81,21 +86,21 @@ class iamTable extends HTMLElement {
     this.pagination.setAttribute('data-show', this.getAttribute('data-show'));
     this.pagination.setAttribute('data-increment', this.getAttribute('data-show'));
 
-    if(this.hasAttribute('data-page-jump'))
+    if(this.hasAttribute('data-page-jump')){
       this.pagination.setAttribute('data-page-jump', 'true');
-
-    if(this.hasAttribute('data-per-page'))
+    }
+    if(this.hasAttribute('data-per-page')){
       this.pagination.setAttribute('data-per-page', 'true');
-
-    if(this.hasAttribute('data-item-count'))
+    }
+    if(this.hasAttribute('data-item-count')){
       this.pagination.setAttribute('data-item-count', 'true');
-    
-    if(this.hasAttribute('data-loading'))
+    }
+    if(this.hasAttribute('data-loading')){
       this.pagination.setAttribute('data-loading', 'true');
-
-    if(this.classList.contains('table--fullwidth'))
+    }
+    if(this.classList.contains('table--fullwidth')){
       this.pagination.setAttribute('data-minimal', 'true');
-
+    }
 
     // Remove table CTA
     const isCTA = this.classList.contains('table--cta');
@@ -115,9 +120,9 @@ class iamTable extends HTMLElement {
     }
 
     // Set ajax class
-    if(this.form.hasAttribute('data-ajax'))
+    if(this.form.hasAttribute('data-ajax')){
       this.table.classList.add('table--ajax');
-
+    }
     // Create a data list if a search input is present
     tableModule.createSearchDataList(this.table, this.form);
 
