@@ -24,7 +24,7 @@ class iamMultiselect extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <slot name="label"></slot>
+    <label for="search"> <slot name="feedback"></slot></label>
     <div class="outer">
     <div class="wrapper">
       
@@ -49,6 +49,15 @@ class iamMultiselect extends HTMLElement {
     let search = multiselect.shadowRoot.querySelector('#search');
     let button = multiselect.shadowRoot.querySelector('#clear');
     let order = 0;
+    let label = multiselect.shadowRoot.querySelector('label');
+
+    
+    label.innerHTML = multiselect.getAttribute('data-label');
+
+    if(multiselect.hasAttribute('placeholder')){
+
+      search.setAttribute('placeholder', multiselect.getAttribute('placeholder'));
+    }
 
     multiselect.setAttribute('data-error','true');
 
@@ -103,11 +112,20 @@ class iamMultiselect extends HTMLElement {
       if(multiselect.querySelector('label[slot="checked"]')){
         wrapper.classList.add('filled');
         multiselect.removeAttribute('data-error');
+
+        search.removeAttribute('placeholder');
       }
       else {
         wrapper.classList.remove('filled');
         multiselect.setAttribute('data-error','true');
+
+        if(multiselect.hasAttribute('placeholder')){
+
+          search.setAttribute('placeholder', multiselect.getAttribute('placeholder'));
+        }
       }
+
+
     }
 
     // Set on load
@@ -267,6 +285,18 @@ class iamMultiselect extends HTMLElement {
 
           break;
       }
+    });
+
+
+    // Fix for the inline edit multiselect
+    multiselect.addEventListener("mousedown", (event) => {
+
+      wrapper.setAttribute('data-mousedown','true');
+    });
+
+    multiselect.addEventListener("mouseup", (event) => {
+
+      wrapper.removeAttribute('data-mousedown');
     });
   }
 }

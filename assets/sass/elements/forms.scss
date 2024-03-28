@@ -877,7 +877,7 @@ iam-fileupload {
   margin-bottom: rem(24);
   max-width: $input-max-width;
 
-  :is(input:not([type="range"]),select) {
+  :is(input:not([type="range"]),select,textarea) {
     margin-top: rem(8);
     margin-bottom: 0!important;
   }

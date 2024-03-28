@@ -11,8 +11,7 @@
     <p>The options are presented in a scrollable dropdown list (which has a max height). The field can also be used to type and filter options in the scrollable dropdown list.</p>
 
 
-    <Multiselect>
-      <span class="label" slot="label">Users</span>
+    <Multiselect data-label="Users">
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
       <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight"/>Amanda Knight</label>
       <label class="tag"><input type="checkbox" name="tags" value="Brian Lord"/>Brian Lord</label>
@@ -36,8 +35,7 @@
     <h2 class="mt-5">States</h2>
 
     <p class="lead pb-2">Default</p>
-    <Multiselect data-is-required data-error="">
-      <span class="label" slot="label">Users</span>
+    <Multiselect data-is-required data-error="" data-label="Users">
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
       <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight"/>Amanda Knight</label>
       <label class="tag"><input type="checkbox" name="tags" value="Brian Lord"/>Brian Lord</label>
@@ -48,8 +46,7 @@
     </Multiselect>
 
     <p class="lead pb-2 mt-4">Selected</p>
-    <Multiselect data-is-required data-error="">
-      <span class="label" slot="label">Users</span>
+    <Multiselect data-is-required data-error="" data-label="Users">
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
       <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight" :checked="true"/>Amanda Knight</label>
       <label class="tag"><input type="checkbox" name="tags" value="Brian Lord"/>Brian Lord</label>
@@ -62,8 +59,7 @@
     <p class="lead pb-2 mt-4">Error</p>
     <form novalidate class="was-validated">
       
-      <Multiselect data-is-required data-error="">
-        <span class="label" slot="label">Users</span>
+      <Multiselect data-is-required data-error="" data-label="Users">
         <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
         <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight"/>Amanda Knight</label>
         <label class="tag"><input type="checkbox" name="tags" value="Brian Lord"/>Brian Lord</label>

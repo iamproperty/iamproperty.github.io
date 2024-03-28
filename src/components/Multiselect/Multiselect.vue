@@ -9,7 +9,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/multiselect/multiselect.component.js`).then(module => {
+      import(`../../../assets/js/components/multiselect/multiselect.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-multiselect`))
           window.customElements.define(`iam-multiselect`, module.default);

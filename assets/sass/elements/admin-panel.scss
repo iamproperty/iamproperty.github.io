@@ -5,10 +5,7 @@
   --padding-top: #{rem(16)};
   --padding-bottom: #{rem(24)};
   --mh-modifier: #{rem(56 + 16)};
-
   --mh-padding-inline: var(--padding-x);
-
-
   display: block;
   padding: var(--padding-top) var(--padding-x) var(--padding-bottom) var(--padding-x);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.11);
