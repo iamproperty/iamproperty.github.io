@@ -248,8 +248,9 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')){
       
-      if(!form.hasAttribute('data-submit'))
+      if(!form.hasAttribute('data-submit')){
         sortTable(table, form, savedTableBody);
+      }
 
       formSubmit(event);
     }
@@ -354,8 +355,9 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
       form.classList.remove('processing');
 
-      if(!form.hasAttribute('data-submit'))
+      if(!form.hasAttribute('data-submit')){
         sortTable(table, form, savedTableBody);
+      }
 
       formSubmit(event);
     }
@@ -365,8 +367,9 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
     clearTimeout(timer);
 
-    if(!form.hasAttribute('data-submit'))
+    if(!form.hasAttribute('data-submit')){
       event.preventDefault();
+    }
 
     formSubmit(event);
   });
@@ -397,11 +400,13 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
       let parentForm = mimicInput.closest('form');
 
-      if(!forms.includes(parentForm))
+      if(!forms.includes(parentForm)){
         forms.push(parentForm);
+      }
 
-      if(!fields.includes(mimicField))
+      if(!fields.includes(mimicField)){
         fields.push(mimicField);
+      }
       
     });
   });
@@ -496,20 +501,23 @@ export const sortTable = (table, form, savedTableBody) => {
 
     let rowIndex = tableRow.querySelector('td[data-label="'+sortBy+'"], th[data-label="'+sortBy+'"]').textContent.trim();
 
-    if(tableRow.querySelector('[data-label="'+sortBy+'"] .td__content'))
+    if(tableRow.querySelector('[data-label="'+sortBy+'"] .td__content')){
       rowIndex = tableRow.querySelector('[data-label="'+sortBy+'"] .td__content').textContent.trim();
+    }
 
     // If a predefined order set replace the search term with an ordered numeric value so it can be sorted
     if(orderArray.length && orderArray.includes(rowIndex)){
       rowIndex = orderArray.indexOf(rowIndex);
     }
 
-    if(isNumeric(rowIndex))
+    if(isNumeric(rowIndex)){
       rowIndex = zeroPad(rowIndex,10)
+    }
 
     // If the sort format is date then lets transform the index to a sortable date (this is never displayed)
-    if(format && format == "date")
+    if(format && format == "date"){
       rowIndex = new Date(rowIndex);
+    }
     
     const dataRow = {
       index: rowIndex,
@@ -522,8 +530,10 @@ export const sortTable = (table, form, savedTableBody) => {
   tableArr.sort((a, b) => (a.index > b.index) ? 1 : -1)
 
   // Reverse if descending
-  if(order == "descending" || order == "desc")
+  if(order == "descending" || order == "desc"){
     tableArr = tableArr.reverse();
+  }
+    
 
   // Create a string to return and populate the tbody
   let strTbody = '';
@@ -572,10 +582,13 @@ export const filterTable = (table, form, wrapper) => {
   let filterCount = 0;
   Object.values(filters).forEach((filter, index) => {
 
-    if(typeof filter == "object" && Object.values(filter).length)
+    if(typeof filter == "object" && Object.values(filter).length){
       filterCount += Object.values(filter).length;
-    else
+    }
+    else {
       filterCount++;
+    }
+      
   });
 
   if(filterCount) {
@@ -635,8 +648,9 @@ export const filterTable = (table, form, wrapper) => {
         }
         
         // Dynamic values
-        if(filter && filter == "$today")
+        if(filter && filter == "$today"){
           filter = formatCell('date', new Date());
+        }
         else if(filter && filter == "$yesterday"){
 
           let yesterday = new Date();
@@ -726,8 +740,9 @@ export const filterTable = (table, form, wrapper) => {
 
     });
 
-    if(!isSearched)
+    if(!isSearched){
       row.classList.add('filtered');
+    }
   });
 
   // Work out what to display after pagination
@@ -739,8 +754,9 @@ export const filterTable = (table, form, wrapper) => {
 
     // pagination bit 
     let matchesPage = Math.ceil(matched/showRows);
-    if(matchesPage == parseInt(page))
+    if(matchesPage == parseInt(page)){
       row.classList.add('filtered--show');
+    }
   });
 
   if(wrapper){
@@ -809,10 +825,13 @@ export const populateDataQueries = (table,form,wrapper) => {
       }).length;
     }
 
-    if(queryElement.hasAttribute('data-total'))
+    if(queryElement.hasAttribute('data-total')){
       queryElement.setAttribute('data-total', numberOfMatchedRows);
-    else
+    }
+    else {
       queryElement.innerHTML = numberOfMatchedRows;
+    }
+      
   });
 }
 
@@ -859,8 +878,9 @@ export const addPaginationEventListeners = function(table, form, pagination, wra
 // Export CSV Data
 export const addExportEventListeners = (button, table) => {
 
-  if(!button)
+  if(!button){
     return false;
+  }
 
   button.addEventListener('click', (event) => {
     exportAsCSV(table);
