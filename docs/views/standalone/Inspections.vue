@@ -123,26 +123,17 @@ const search = route.query['search'];
       <form id="tableFilters" class="full-width" novalidate data-submit>
 
         
-        <Actionbar data-large-safe-area data-search="Transaction address" :data-search-value="search">
+        <Actionbar data-search="Property" :data-search-value="search" data-for="inspectionsTable">
 
-          <div class="dialog__wrapper">
-            <button class="btn btn-action mb-0 me-0" type="button">Information view</button>
-            <dialog class="dialog--list" >
-              <div class="mb-0" >
-                <input type="radio" name="view" id="view-mine" value="mine" :checked="view?.includes('mine')" :autofocus="view?.includes('mine')" data-change-events='[{"target":"#tableFilters","event":"submitForm"}]' >
-                <label for="view-mine" class="radio--tick pb-0" >My information</label>
 
-                <input type="radio" name="view" id="view-branch" value="branch" :checked="view?.includes('branch')" :autofocus="view?.includes('branch')" data-change-events='[{"target":"#tableFilters","event":"submitForm"}]'>
-                <label for="view-branch" class="radio--tick pb-0" >Branch</label>
-
-                <input type="radio" name="view" id="view-area" value="area" :checked="view?.includes('area')" :autofocus="view?.includes('area')" data-change-events='[{"target":"#tableFilters","event":"submitForm"}]'>
-                <label for="view-area" class="radio--tick pb-0" >Area</label>
-
-                <input type="radio" name="view" id="view-all" value="all" :checked="view?.includes('all')" :autofocus="view?.includes('all')" data-change-events='[{"target":"#tableFilters","event":"submitForm"}]'>
-                <label for="view-all" class="radio--tick pb-0 mb-0" >All</label>
-              </div>
-            </dialog>
+          <div class="selectall pb-0" slot="selectall">
+            <div class="form-check m-0"><!----><!----><!----><!----><!----><!----><!----><!---->
+              <input class="form-check-input" type="checkbox" name="selectAll" id="selectAllinput">
+              <label class="form-label form-check-label" for="selectAllinput">Check In</label>
+              <!----><!----><!----><!---->
+            </div>
           </div>
+
           <div class="dialog__wrapper">
             <button class="btn btn-action mb-0 me-0"  type="button">Sort by</button>
             <dialog class="dialog--list" >
@@ -156,13 +147,28 @@ const search = route.query['search'];
             </dialog>
           </div>
 
-          <button class="btn btn-primary btn-sm fa-sliders fa-after" id="uploadBtn" @click="showModal" type="button">Filter by <span data-filter-count></span></button>
+          <button class="btn btn-secondary btn-sm btn-compact fa-sliders" id="filterBtn" @click="showModal" type="button">Filter by <span data-filter-count></span></button>
+
+          <button class="btn btn-secondary btn-sm btn-compact fa-arrow-up-from-bracket" type="button">Upload</button>
+
+          <button class="btn btn-secondary btn-sm btn-compact fa-solid fa-print" type="button">Print</button>
+
+          <!-- Selected buttons -->
+          <button type="button" class="btn btn-action fa-close" slot="selected" data-single>Cancel</button>
+          <button type="button" class="btn btn-action fa-trash-can" slot="selected" data-single>Delete</button>
+          <button type="button" class="btn btn-action " slot="selected"><i class="fa-light fa-calendar-day me-1"></i>Add to calendar</button>
+          <button type="button" class="btn btn-action fa-route" slot="selected">Calculate route</button>
+
+          <hr slot="selected" />
+          <button class="btn btn-action" type="button" slot="selected" data-cancel>Cancel</button>
 
         </Actionbar>
-        <input v-if="search" type="hidden" data-search="Transaction address" :value="search" name="search" />
+
+        <input v-if="search" type="hidden" data-search="Property" :value="search" name="search" />
+        
         <AppliedFilters class="applied-filters--hide-title applied-filters--show-set wider-colour-3" data-keep-same="true" ref="filters">
 
-          <dialog id="filters" ref="dialog" >
+          <dialog id="filters" ref="dialog">
             <button class="dialog__close">Close</button>
 
             <div class="mh-lg">
@@ -229,63 +235,42 @@ const search = route.query['search'];
         </AppliedFilters>
       </form>
 
-      <Table data-filterby="tableFilters" data-per-page class="table--fullwidth">
+      <Table id="inspectionsTable" data-filterby="tableFilters" data-per-page class="table--fullwidth table--cta">
+
+
+
+        
         <table>
           <thead>
             <tr>
-              <th></th>
-              <th>Date added</th>
-              <th>Transaction address</th>
-              <th>Form type</th>
+              <th>Property</th>
+              <th>Postcode</th>
+              <th>Date</th>
+              <th>Type</th>
               <th>Status</th>
-              <th>Percentage complete</th>
+              <th>Inspector</th>
+              <th>Notes</th>
+              <th>Tenancy</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
+
             <tr>
+              <td>1 Oak Road, Newcastle upon Tyne </td>
+              <td>NE1 6FH</td>
+              <td>11/08/2023 13:50</td>
+              <td>Check-in</td>
+              <td>Complete</td>
+              <td>John Smith</td>
+              <td><p>-</p></td>
+              <td>John Smith</td>
               <td>
-                <div class="dialog__wrapper">
-                  <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
-                  <dialog class="dialog--fix">
-                    
-                    <a href="?cancel=1" class="btn btn-tertiary d-block text-decoration-none js-hide">Cancel information request</a>
-                    <button class="btn btn-tertiary d-block text-decoration-none js-show" data-modal="cancel" data-click-events='[{"target":"#cancelBtn","event":"setAttribute","attribute":"href", "value":"?cancel=1"}]'>Cancel information request</button>
-                    <hr class="border border-1 mb-2">
-                    <button class="btn btn-tertiary dialog__close text-decoration-none">Close</button>
-                  </dialog>
-                </div>
-              </td>
-              <td data-format="date">04 March 2024</td>
-              <td>24 Street, Kent, NE1 4BB</td>
-              <td>TA6</td>
-              <td>In progress</td>
-              <td>
-                <label class="hide-text"><span class="visually-hidden">Percentage completed</span><progress max="100" value="20" class="progress--inline colour-danger">20%</progress></label>
+                <a href="/">View</a>
               </td>
             </tr>
 
-            <tr>
-              <td>
-                <div class="dialog__wrapper">
-                  <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
-                  <dialog class="dialog--fix">
-                    
-                    <a href="?cancel=2" class="btn btn-tertiary d-block text-decoration-none js-hide">Cancel information request</a>
-                    <button class="btn btn-tertiary d-block text-decoration-none js-show" data-modal="cancel" data-click-events='[{"target":"#cancelBtn","event":"setAttribute","attribute":"href", "value":"?cancel=2"}]'>Cancel information request</button>
-                    <hr class="border border-1 mb-2">
-                    <button class="btn btn-tertiary dialog__close text-decoration-none">Close</button>
-                  </dialog>
-                </div>
-              </td>
-              <td data-format="date">30 March 2024</td>
-              <td>24 Road, Kent, NE1 4BB</td>
-              <td>TA7</td>
-              <td>In progress</td>
-              <td>
-                <label class="hide-text"><span class="visually-hidden">Percentage completed</span><progress max="100" value="40" class="progress--inline colour-warning">40%</progress></label>
-              </td>
-            </tr>
-
+            
 
 
           </tbody>

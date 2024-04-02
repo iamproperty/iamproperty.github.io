@@ -56,7 +56,9 @@ class iamActionbar extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="actionbar__wrapper">
+    
       <div class="actionbar">
+        <slot name="selectall"></slot>
         <div class="safe-area">
           <slot></slot>
           <div class="body">

@@ -39,8 +39,9 @@ class iamTable extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     // insert extra CSS
-    if(!document.getElementById('tableExtras'))
+    if(!document.getElementById('tableExtras')){
       document.head.insertAdjacentHTML('beforeend',`<style id="tableExtras">${loadExtraCSS}</style>`);
+    }
   }
 
 	connectedCallback() {
@@ -74,8 +75,9 @@ class iamTable extends HTMLElement {
     this.shadowRoot.querySelector('.table__wrapper').className += ` ${classList}`;
 
     // set actionbar class if needed
-    if(this.querySelector('.actionbar__sticky'))
+    if(this.querySelector('.actionbar__sticky')){
       this.shadowRoot.querySelector('.table__wrapper').classList.add('has-actionbar');
+    } 
 
     this.table = this.querySelector('table');
     this.savedTableBody = this.table.querySelector('tbody').cloneNode(true);
@@ -155,9 +157,9 @@ class iamTable extends HTMLElement {
 
       // Add in the checkboxes
 
-      if(this.querySelector('iam-actionbar[data-selectall]')){
+      if(this.querySelector('iam-actionbar[data-selectall]') || document.querySelector(`iam-actionbar[data-for='${this.getAttribute('id')}']`)){
         
-        const actionbar = this.querySelector('iam-actionbar[data-selectall]');
+        const actionbar = this.querySelector('iam-actionbar[data-selectall]') ? this.querySelector('iam-actionbar[data-selectall]') : document.querySelector(`iam-actionbar[data-for='${this.getAttribute('id')}']`);
 
         Array.from(this.table.querySelectorAll('thead tr')).forEach((row,index) => {
               

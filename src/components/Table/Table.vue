@@ -1,5 +1,6 @@
 <template>
   <iam-table >
+    <slot name="before"></slot>
     <table v-if="fields">
       <thead>
         <tr>

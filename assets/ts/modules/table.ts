@@ -511,7 +511,7 @@ export const sortTable = (table, form, savedTableBody) => {
     }
 
     if(isNumeric(rowIndex)){
-      rowIndex = zeroPad(rowIndex,10)
+      rowIndex = zeroPad(rowIndex,10);
     }
 
     // If the sort format is date then lets transform the index to a sortable date (this is never displayed)
