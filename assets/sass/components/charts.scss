@@ -1,9 +1,9 @@
 @use "../_func" as *;
 
-$chart-colour-1: #00313c!default;
-$chart-colour-2: #0F9D58!default;
-$chart-colour-3: #ffa500!default;
-$chart-colour-4: #dc3545!default;
+$chart-colour-1: #1EBEE6!default;
+$chart-colour-2: #FFD2D2!default;
+$chart-colour-3: #B4E6A5!default;
+$chart-colour-4: #ffa500!default;
 $chart-colour-5: #46003c!default;
 $chart-colour-6: #b4e6a5!default;
 $chart-colour-7: #1ebee6!default;
@@ -91,11 +91,28 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
   --label-size: #{rem(12)};
   --pie-size: calc(50% - 1.4rem);
   --line-thickness: 1px;
-  --yaxis-width: 0;
-  --yaxis-point-display: none;
-  --yaxis-last-point-transform: translate(0,-100%);
+  --yaxis-width: auto;
+  --yaxis-point-display: block;
+  --yaxis-last-point-transform: translate(0,-50%);
+  --bar-gap: min(10%, 0.75rem);
 
+  @container (max-width: 36em) {
 
+    :has(tr:nth-child(5) td:nth-child(4)),
+    :has(tr:nth-child(10)){
+        
+      --yaxis-width: 0;
+      --yaxis-point-display: none;
+      --yaxis-last-point-transform: translate(0,-100%);
+      --bar-gap: 0;
+    }
+  }
+  @container (max-width: 63em) {
+    :has(tr:nth-child(10)){
+        
+      --bar-gap: 0;
+    }
+  }
   @container (min-width: 36em) {
     .chart__wrapper {
       --chart-height-resp: var(--chart-height-lg-set);
@@ -285,21 +302,37 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
 
 .chart__key {
 
-  padding: 0.75rem 0 0 0.75rem;
+  padding: 0 0 0 0;
   margin-bottom: 1.5rem;
-  background: var(--colour-key-bg, rgb(220, 220, 220));
+  //background: var(--colour-key-bg, rgb(220, 220, 220));
   display: flex;
   overflow: auto;
   scroll-snap-type: x mandatory;
-    scroll-padding: 0.75rem;
+  scroll-padding: 0.75rem;
+  justify-content: flex-end;
+  gap: 0.5rem;
 
   .key {
+
+    font-size: 1rem!important;
+    margin: 0;
+
+    &:before {
+      content: "";
+      height: 0.8em;
+      width: 0.8em;
+      margin-right: 0.3em;
+      background-color: var(--chart-colour);
+      display: inline-block;
+      border-radius: 50%;
+    }
+
+    /*
     display: inline-block;
     padding: 0.5rem;
     margin-right: 0.75rem;
     margin-bottom: 0.75rem;
     background: white;
-    border-left: 5px solid var(--chart-colour);
     white-space: nowrap;
     cursor: pointer;
     scroll-snap-align: start;
@@ -308,6 +341,7 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
     &:focus-within {
       outline: 3px solid var(--chart-colour);
     }
+    */
 
     &[data-label="Min"],
     &[data-label="Max"] {
@@ -338,7 +372,7 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
 @for $i from 1 to 10 {
   
   .chart__outer > input[type="checkbox"]:nth-of-type(#{$i}):focus ~ .chart__key .key:nth-of-type(#{$i}) {
-    outline: 3px solid var(--chart-colour);
+    //outline: 3px solid var(--chart-colour);
   }
 
   .chart__outer > input[type="checkbox"]:nth-of-type(#{$i}):not(:checked) ~ .chart__key .key:nth-of-type(#{$i}) {
@@ -524,6 +558,7 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
       height: 100%;
       position: relative;
       padding: 0 2px;
+      gap: var(--bar-gap);
 
       td {
         font-weight: inherit;
@@ -541,7 +576,7 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: var(--label-size);
-        display: none;
+        //display: none;
         text-align: center;
 
         @container (min-width: 62em) {
@@ -563,32 +598,18 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
         display: block;
       }
 
-      
-      &:first-child td:first-child {
-
-        left: 0%;
-        transform: translate(0,0);
-        display: block;
-        text-align: left;
-      }
-      &:last-child td:first-child {
-
-        left: 100%;
-        transform: translate(-100%,0);
-        display: block;
-        text-align: right;
-      }
-
       td:not(:first-child) {
         height: 100%;
         height: var(--percent, 0%);
         bottom: var(--bottom,0%);
         width: 100%;
-        max-width: 5rem;
+        max-width: 1.5rem;
         position: relative;
         background: green;
         padding: 0;
         background: var(--chart-colour);
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
 
         &:has(span:empty),
         &:empty{
@@ -612,7 +633,7 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
           padding: 0.5rem;
           border-radius: 0.5rem;
           margin-bottom: 0.25rem;
-          color: white;
+          color: var(--colour-primary-theme);
           white-space: pre;
           text-align: center;
 
@@ -629,20 +650,6 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
           opacity: 1;
           z-index: var(--index-above);
         }
-      }
-
-      &:first-child td:not(:first-child) span {
-
-        left: -20%;
-        transform: translate(0%,0);
-        text-align: left;
-      }
-
-      &:last-child td:not(:first-child) span {
-          
-        left: 120%;
-        transform: translate(-100%,0);
-        text-align: right;
       }
 
       @container (min-width: 36em) {
@@ -663,6 +670,45 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
       }
     }
 
+    // change the look of chart when crowded
+    @container (max-width: 36em) {
+      tbody:has(tr:nth-child(5) td:nth-child(4)) tr,
+      tbody:has(tr:nth-child(10)) tr {
+
+        td:first-child {
+          display: none;
+        }
+        
+        &:first-child td:first-child {
+
+          left: 0%;
+          transform: translate(0,0);
+          display: block;
+          text-align: left;
+        }
+        &:last-child td:first-child {
+
+          left: 100%;
+          transform: translate(-100%,0);
+          display: block;
+          text-align: right;
+        }
+        
+        &:first-child td:not(:first-child) span {
+
+          left: -20%;
+          transform: translate(0%,0);
+          text-align: left;
+        }
+
+        &:last-child td:not(:first-child) span {
+            
+          left: 120%;
+          transform: translate(-100%,0);
+          text-align: right;
+        }
+      }
+    }
     // Hide labels when it gets crowded
     @container (min-width: 62em) {
 
@@ -728,6 +774,7 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
     tbody {
       --chart-direction: 90deg;
     --chart-day-bg-pos: calc(var(--single-day) * 7) 100%;
+    --bar-gap: 0;
     }
 
     .chart__guidelines {
@@ -779,6 +826,8 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
         left: var(--bottom, 0%);
         width: var(--comparison,var(--percent));
         max-width: 100%;
+        border-top-left-radius: 0;
+        border-bottom-right-radius: 4px;
       }
 
       td:first-child {
@@ -827,9 +876,14 @@ input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__out
 // #region stacked
 input[type="radio"]:not([value="pie"])[value="stacked"]:checked ~ .chart__wrapper {
   table tbody tr {
+    --bar-gap: 0;
     flex-direction: column-reverse;
     justify-content: flex-start;
     align-items: center;
+
+    td {
+      border-radius: 0!important;
+    }
   }
 }
 // #endregion
@@ -1168,6 +1222,7 @@ input[type="radio"]:not([value="pie"])[value="stacked"]:checked ~ .chart__wrappe
         font-size: var(--label-size);
         font-weight: bold;
         line-height: 1;
+        padding-left: 1.5em;
       }
 
       .chart__total__number {

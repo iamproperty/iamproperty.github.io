@@ -113,7 +113,6 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     margin-right: rem(6);
   }
 
-  
   a:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) &,
   &:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) {
     background: var(--colour-btn-action-hover-bg);
@@ -135,6 +134,19 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   &[class*="fa-"]:before {
     font-family: "Font Awesome 6 Pro";
     line-height: 1em;
+  }
+
+  &.btn[class*='fa-after'] {
+    padding-right: 4rem;
+  }
+  &.btn[class*='fa-after']:before {
+
+    margin-right: 0;
+    margin-right: rem(6);
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translate(0, -50%);
   }
 
   &:not(.btn-compact):before{

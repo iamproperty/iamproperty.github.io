@@ -328,8 +328,8 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     border-start-start-radius: 0!important;
   }
 
-  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output),
-  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),textarea,output):has(~ .suffix) {
+  .suffix ~ :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="date"]),textarea,output),
+  :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="date"]),textarea,output):has(~ .suffix) {
     order: 1;
     
     border-start-end-radius: 0!important;
@@ -373,6 +373,18 @@ input[maxlength] + span {
 
   border-color: var(--colour-danger)!important;
 }
+
+
+.was-validated select:is(:invalid, .is-invalid, [aria-invalid],:-internal-autofill-selected) {
+
+  $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
+
+  background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
+              linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top / calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem)) no-repeat,
+              escape-svg($icon-error) right var(--input-padding-block, 3.5rem) top var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat;
+  padding-right: 6rem!important;
+}
+
 .was-validated input:is(:invalid, .is-invalid,[aria-invalid],:-internal-autofill-selected) {
 
   background-image: escape-svg($icon-error);
@@ -603,7 +615,7 @@ label:not(.tag):has(input[type="checkbox"]:not([disabled]):checked) {
   }
 }
 
-input[type="checkbox"]:checked + label,
+input[type="checkbox"]:checked + label:not(:has(> iam-card)),
 label:not(.tag):has(input[type="checkbox"]:checked) {
 
   &:after {
@@ -769,12 +781,13 @@ select[multiple]::-webkit-scrollbar-thumb {
 select {
   $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
-  background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem)/var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
-              linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top/calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) no-repeat;
+  background: escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
+              linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top / calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem)) calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem)) no-repeat;
   
   padding-right: calc(var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem))!important;
   option {font-size: 1.2em;}
 
+  box-shadow: inset -2px 0px 0px var(--colour-primary-theme);
   
   max-width: $select-max-width;
 
@@ -814,7 +827,7 @@ div:has(> select){
   border: none;
   display: inline-block;
   margin: 0;
-  padding: 0 calc(1.25em + 0.8ch) 0 0.25em;
+  padding: 0 calc(1.25em + 0.8ch) 0 0.25em!important;
   height: auto;
   cursor: pointer;
 
@@ -864,7 +877,7 @@ iam-fileupload {
   margin-bottom: rem(24);
   max-width: $input-max-width;
 
-  :is(input:not([type="range"]),select) {
+  :is(input:not([type="range"]),select,textarea) {
     margin-top: rem(8);
     margin-bottom: 0!important;
   }
@@ -1030,6 +1043,10 @@ iam-slider input::-webkit-inner-spin-button {
 // #region Date and time fields
 :is(input[type="date"],input[type="time"]) {
   position: relative;
+  margin-right: -3rem;
+  padding-right: 3rem !important;
+  background-position: right 4rem center;
+  border-radius: 0.5rem !important;
 }
 :is(input[type="date"],input[type="time"])::-webkit-calendar-picker-indicator {
   background: transparent;

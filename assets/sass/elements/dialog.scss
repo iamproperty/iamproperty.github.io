@@ -11,6 +11,8 @@ dialog[open] {
 
   --dialog-padding: #{rem(24)};
 
+  --mh-padding-inline: var(--dialog-padding);
+
   width: fit-content;
   height: fit-content;  
   border: none;

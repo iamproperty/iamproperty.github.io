@@ -13,10 +13,13 @@
 
 // #region View states (Default, search, selected)
 .views,
-.selectall {
+.selectall,
+slot[name="selectall"] {
+  display: block;
   position: absolute!important;
   top: 50%;
   left: rem(24);
+  margin-left: 0;
   
   @include media-breakpoint-up(sm) {
     left: rem(32);
@@ -30,7 +33,8 @@
   }
 }
 
-.selectall {
+.selectall,
+slot[name="selectall"] {
   
   width: rem(40);
   overflow: hidden;
@@ -113,12 +117,25 @@
 }
 
 // Show selected bar
+.actionbar {
+
+  opacity: var(--selectall-actionbar-opacity,1);
+  pointer-events: var(--selectall-actionbar-pe,all);
+}
+
+.actionbar--selected {
+
+  opacity: var(--selectall-opacity,0);
+  pointer-events: var(--selectall-pe,none);
+}
+
 .selectall:has(input:checked) ~ .actionbar,
 .selectall:has(input:indeterminate) ~ .actionbar {
   
   opacity: 0;
   pointer-events: none;
 }
+
 .selectall:has(input:checked) ~ .actionbar--selected,
 .selectall:has(input:indeterminate) ~ .actionbar--selected {
   
@@ -140,7 +157,7 @@
 // #endregion
 
 // #region Slotted elements
-::slotted(*:not([slot="overflow"])){
+::slotted(.btn){
   margin-top: 0!important;
   margin-bottom: 0!important;
   margin-left: rem(16)!important;
@@ -200,6 +217,22 @@
   .body {
     display: contents;
   }
+}
+
+:host([data-large-safe-area]) .safe-area {
+  
+  width: rem(260);
+
+  @include container-up(sm) {
+
+    width: rem(620);
+  }
+
+  @include container-up(md) {
+
+    width: rem(1048);
+  }
+
 }
 
 :host([data-switchviews]) .safe-area {

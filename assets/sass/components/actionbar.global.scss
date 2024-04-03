@@ -170,3 +170,13 @@ button[slot="selected-overflow"] {
 }
 }
 // #endregion
+
+// Select all done with vue
+
+
+iam-actionbar:has(.selectall input:checked) {
+  --selectall-opacity: 1;
+  --selectall-pe: all;
+  --selectall-actionbar-opactiy: 0;
+  --selectall-action-pe: none;
+}

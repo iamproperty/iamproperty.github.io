@@ -238,7 +238,7 @@ const routes = [
       },
       {
         path: 'select',
-        name: 'Form select field (Beta)',
+        name: 'Selects',
         meta: {
           title: 'Form select field | Elements | iamkey'
         },
@@ -454,6 +454,23 @@ const routes = [
         searchterms: 'introduce, banner'
       },
       {
+        path: 'inline-edit',
+        name: 'Inline edit',
+        meta: {
+          title: 'Inline edit | Components | iamkey'
+        },
+        component: () => import('./views/components/InlineEdit.vue'),
+        searchterms: 'form, input, inline'
+      },
+      {
+        path: 'multiselect',
+        name: 'Multiselect',
+        meta: {
+          title: 'Multiselect | Components | iamkey'
+        },
+        component: () => import('./views/components/Multiselect.vue')
+      },
+      {
         path: 'notefeed',
         name: 'Note feed (Beta)',
         meta: {
@@ -489,7 +506,7 @@ const routes = [
       },
       {
         path: 'search',
-        name: 'Search (Beta)',
+        name: 'Search component',
         meta: {
           title: 'Search | Components | iamkey'
         },
@@ -1057,6 +1074,22 @@ const routes = [
           title: 'Sign in | iamkey'
         },
         component: () => import('./views/standalone/Signin.vue')
+      },
+      {
+        path: 'informationRequests',
+        name: "Information requests table",
+        meta: {
+          title: 'Information requests table | iamkey'
+        },
+        component: () => import('./views/standalone/InformationRequests.vue')
+      },
+      {
+        path: 'inspections',
+        name: "Inspections",
+        meta: {
+          title: 'Inspections | iamkey'
+        },
+        component: () => import('./views/standalone/Inspections.vue')
       }
     ]
   },
