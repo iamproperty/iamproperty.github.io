@@ -6,9 +6,12 @@ function createAppliedFilters(container,filters) {
 
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
+
+    if(!inputName){ return false; }
     
-    if(inputName.includes('[]'))
+    if(inputName.includes('[]')){
       inputName = inputName.replace('[]',`[${input.value}]`);
+    }
 
     let filter = filters.querySelector(`[data-name="${inputName}"]`);
 

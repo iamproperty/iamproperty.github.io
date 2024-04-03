@@ -283,6 +283,16 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
         
       formSubmit(event);
     }
+
+
+    if(event && event.target instanceof HTMLElement && event.target.hasAttribute('id')){
+      
+      let id = event.target.getAttribute('id');
+
+      if(document.querySelector(`[data-duplicate="${id}"]`)){
+        document.querySelector(`[data-duplicate="${id}"]`).checked = event.target.checked;
+      }
+    }
   });
 
 

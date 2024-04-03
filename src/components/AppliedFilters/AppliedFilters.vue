@@ -6,15 +6,21 @@
 </template>
 
 <script>
-// Load web components
-import iamAppliedFilters from '../../../assets/js/components/applied-filters/applied-filters.component.js'
-
-// Register components
-if (!window.customElements.get('iam-applied-filters'))
-  window.customElements.define('iam-applied-filters', iamAppliedFilters);
-
-
 export default {
-  name: 'Header'
+  name: 'Applied Filter',
+  mounted(){
+
+    this.$nextTick(function () {
+
+      import(`../../../assets/js/components/applied-filters/applied-filters.component.js`).then(module => {
+        
+        if (!window.customElements.get(`iam-applied-filters`))
+          window.customElements.define(`iam-applied-filters`, module.default);
+
+      }).catch((err) => {
+        console.log(err.message);
+      });
+    })
+  }
 }
 </script>

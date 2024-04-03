@@ -615,7 +615,7 @@ label:not(.tag):has(input[type="checkbox"]:not([disabled]):checked) {
   }
 }
 
-input[type="checkbox"]:checked + label,
+input[type="checkbox"]:checked + label:not(:has(> iam-card)),
 label:not(.tag):has(input[type="checkbox"]:checked) {
 
   &:after {

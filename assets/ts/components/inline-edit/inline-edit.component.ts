@@ -58,11 +58,7 @@ class iamInlineEdit extends HTMLElement {
     // cancel
     cancelButton.addEventListener('click', (event) => {
 
-
-      console.log(originalValue)
-
       input.value = originalValue;
-
 
       input.blur();
       inlineEdit.blur();
@@ -101,8 +97,10 @@ class iamInlineEdit extends HTMLElement {
     });
 
     // Save
-    if(input.tagName === 'input'){
+    if(input.tagName === 'INPUT'){
       input.addEventListener('keydown', (event) => {
+
+        console.log(event)
 
         switch (event.key) { // change to event.key to key to use the above variable
           case "Enter":
