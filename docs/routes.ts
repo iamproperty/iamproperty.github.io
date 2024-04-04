@@ -654,6 +654,14 @@ const routes = [
           title: 'Filter card | Components | iamkey'
         },
         component: () => import('./views/cards/FilterCardDoc.vue')
+      },
+      {
+        path: 'record-card',
+        name: 'Record card (Beta)',
+        meta: {
+          title: 'Record card | Components | iamkey'
+        },
+        component: () => import('./views/cards/RecordCardDoc.vue')
       }
     ]
   },

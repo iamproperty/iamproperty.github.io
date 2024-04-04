@@ -15,7 +15,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/tabs/tabs.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/tabs/tabs.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-tabs`))
           window.customElements.define(`iam-tabs`, module.default);

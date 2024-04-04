@@ -14,7 +14,7 @@ class iamCard extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    if(this.querySelector('*:not(.badge) > [class*="fa-"]'))
+    if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
       this.classList.add('card--has-icon');
 
     let classList = this.classList.toString();
@@ -45,6 +45,7 @@ class iamCard extends HTMLElement {
       <slot name="checkbox"></slot>
       <div class="card__footer">
         <slot name="footer"></slot>
+        <slot name="btns"></slot>
         ${this.hasAttribute('data-cta') ? `<span class="link d-inline-block pt-0 mb-0">${this.getAttribute('data-cta')}</span>` : ''}
       </div>
     </div>
@@ -191,7 +192,7 @@ class iamCard extends HTMLElement {
       case "class": {
         let classList = this.classList.toString();
             
-        if(this.querySelector('*:not(.badge) > [class*="fa-"]'))
+        if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
           classList += ' card--has-icon';
 
         this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);

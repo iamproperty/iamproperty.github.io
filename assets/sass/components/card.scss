@@ -107,7 +107,7 @@
   
 
   
-  span {
+  span{
     display: block;
     font-weight: bold;
     padding-top: rem(24);
@@ -181,6 +181,13 @@
   display: block!important;
   font-weight: normal!important;
   font-size: rem(16)!important;
+}
+::slotted(small){
+  padding-top: rem(16)!important;
+  display: block!important;
+  font-weight: normal!important;
+  padding-bottom: 0!important;
+  color: var(--colour-body);
 }
 ::slotted(span:not(.badge):not([class*="pt-"])){
   padding-top: rem(24)!important;
@@ -305,7 +312,7 @@
 .card:has(.card__head) {
   .card__head {
     padding-bottom: 0;
-    padding-top: 27%;
+    padding-top: var(--img-height, 27%);
     position: relative;
     overflow: hidden;
     background: rgba(0,0,0,0.1);
@@ -407,3 +414,36 @@
   line-height: rem(40);
 }
 // #endregion
+
+//#region Record card 
+
+.card--record{
+  --img-height: 40%;
+
+  &:before,
+  &:after {
+    display: none;
+  }
+}
+
+slot[name="btns"] {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  margin-right: calc(var(--card-right-padding) * -1);
+
+  margin-bottom: calc(var(--card-bottom-padding) * -1);
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+
+  pointer-events: none;
+}
+
+::slotted([slot="btns"]){
+  
+  pointer-events: all;
+  margin: 0!important;
+}
+
+//#endregion
