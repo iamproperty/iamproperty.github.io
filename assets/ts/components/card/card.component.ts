@@ -14,7 +14,7 @@ class iamCard extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    if(this.querySelector('[class*="fa-"]'))
+    if(this.querySelector('*:not(.badge) > [class*="fa-"]'))
       this.classList.add('card--has-icon');
 
     let classList = this.classList.toString();
@@ -35,7 +35,8 @@ class iamCard extends HTMLElement {
     <div class="card ${classList}" tabindex="0" part="card">
       ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
       <div class="card__body">
-      ${!this.hasAttribute('data-image') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
+      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
+      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
       ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
         <slot></slot>
       ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
@@ -190,7 +191,7 @@ class iamCard extends HTMLElement {
       case "class": {
         let classList = this.classList.toString();
             
-        if(this.querySelector('[class*="fa-"]'))
+        if(this.querySelector('*:not(.badge) > [class*="fa-"]'))
           classList += ' card--has-icon';
 
         this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);

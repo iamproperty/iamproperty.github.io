@@ -34,7 +34,11 @@ iam-card {
   }
 
   .badge {
-    margin-bottom: 0.25rem!important;
+    
+    i {
+      position: static!important;
+      margin-right:  0.25rem;
+    }
   }
 }
 

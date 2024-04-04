@@ -674,6 +674,7 @@ label:not(.tag):has(input:is([type="radio"],[type="checkbox"]):checked:is(:focus
 }
 
 input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus) + label,
+input:is([type="radio"],[type="checkbox"]) + label.hover,
 label:not(.tag):has(input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,.focus)) {
 
   --tick-colour: var(--colour-muted);
@@ -684,6 +685,7 @@ label:not(.tag):has(input:is([type="radio"],[type="checkbox"]):is(:focus,:hover,
   }
 }
 input:is([type="radio"],[type="checkbox"]):is(:active,.active) + label,
+input:is([type="radio"],[type="checkbox"]) + label.active,
 label:not(.tag):has(input:is([type="radio"],[type="checkbox"]):is(:active,.active)) {
 
   --tick-colour: var(--colour-light);

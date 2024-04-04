@@ -81,13 +81,12 @@
   }
 
   &:is(:hover,:focus,.hover) {
-    --card-icon-right: 0.5rem;
     outline: 2px solid var(--colour, var(--colour-primary));
     outline-offset: -2px;
   }
   
   // Update arrow cololur
-  &:not([class*="colour-"]):is(:hover,:focus,.hover) {
+  &:not([class*="colour-"]):is(:hover,:focus,.hover,:active, .active) {
 
     &:before {
       background: var(--colour-primary-theme);
@@ -100,13 +99,6 @@
   &:is(:active, .active){
     --card-icon-right: 0.5rem;
     outline: none;
-    
-    &:before {
-      background: var(--colour-warning);
-    }
-    &:after {
-      background: var(--colour-primary);
-    }
   }
 
   &:is(:active){
@@ -196,23 +188,29 @@
 // #endregion
 
 // #region card bages
-.card__badges {
-  position: absolute;
-  top: 0;
-  right: 0.25rem;
-  padding: 0 0 0.25rem 0;
-  z-index: 9;
-  text-align: right;
-  width: 1;
-}
 .card__head .card__badges {
   
-  top: auto;
-  bottom: 0;
+  position: absolute;
+  top: 1rem;
   text-align: left;
-  left: 0.25rem;
-  right: auto;
+  left: 1rem;
+  z-index: 9;
 }
+
+.card__body .card__badges.card__badges--inline {
+  
+  margin-top: -1rem;
+  min-height: 1rem;
+}
+.card__body .card__badges:not(.card__badges--inline) {
+  
+  position: absolute;
+  top: 0.5rem;
+  text-align: left;
+  right: 0.75rem;
+  z-index: 9;
+}
+
 // #endregion
 
 // #region border left
@@ -382,15 +380,20 @@
   z-index: 99;
 }
 
-.card--secondary:has(.btn-compact:is(:hover, :focus, :active)) {
+// For docs
+.card--secondary.secondary-hover {
 
-  pointer-events: none;
-  outline: none;
+  outline: 2px solid var(--colour, var(--colour-primary));
+  outline-offset: -2px;
 
-  .card__body {
-    background: none;
-    border-color: transparent!important;
+  .btn-compact {
+    background-color: var(--colour);
+    color: var(--colour-primary-theme);
+    border-color: rgba(0, 0, 0, 0) !important;
   }
+}
+
+.card--secondary:has(.btn-compact:is(:hover, :focus, :active)) {
 
   .btn-compact {
     pointer-events: all;
