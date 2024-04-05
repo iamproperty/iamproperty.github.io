@@ -47,79 +47,80 @@
 
     <p>Display tags have 5 possible interactive states — default, hover, pressed, selected and disabled. The bolder selected state here is only used when a user needs to bulk edit or bulk remove a set of tags.</p>
 
-    <div>
 
-    <button class="tag">Default (button)</button>
-    <label class="tag"><input type="checkbox" name="tag" value="true"/>Default (checkbox)</label>
-    <button class="tag" disabled>Disabled (button)</button>
-    <label class="tag"><input type="checkbox" name="tag" value="true" disabled/>Disabled (checkbox)</label>
-
-
+    <div class="container visualtest">
+      <button class="tag">Default (button)</button>
+      <label class="tag"><input type="checkbox" name="tag" value="true"/>Default (checkbox)</label>
+      <button class="tag" disabled>Disabled (button)</button>
+      <label class="tag"><input type="checkbox" name="tag" value="true" disabled/>Disabled (checkbox)</label>
     </div>
+
     <p class="pt-5 label">Display tag states colour palette</p>
-      
-    <div class="row row-cols-2 row-cols-sm-4 d-none d-sm-flex">
-        
-      <div class="col pb-2" >
-        
+    <div class="container visualtest">
+      <div class="row row-cols-2 row-cols-sm-4 d-none d-sm-flex">
+          
+        <div class="col pb-2" >
+          
+        </div>
+        <div class="col pb-2" >
+          
+          <span class="label">Default state</span>
+        </div>
+        <div class="col pb-2" >
+          
+          <span class="label">Hover state</span>
+        </div>
+        <div class="col pb-2" >
+          
+          <span class="label">Active state</span>
+        </div>
       </div>
-      <div class="col pb-2" >
+
+      <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in $shared.widerColours" :key="name">
         
-        <span class="label">Default state</span>
-      </div>
-      <div class="col pb-2" >
-        
-        <span class="label">Hover state</span>
-      </div>
-      <div class="col pb-2" >
-        
-        <span class="label">Active state</span>
+        <div class="col-12 col-sm pb-2">
+          
+          <span >Wider colour {{name}}</span>
+
+        </div>
+        <div class="col-12 col-sm pb-2" >
+          
+          <div :class="`tag wider-colour-${name}`">{{colour}}</div>
+
+        </div>
+        <div class="col-12 col-sm pb-2" >
+          
+          <div :class="`tag wider-colour-${name} hover`">{{ $shared.widerColoursHover[name] }}</div>
+
+        </div>
+        <div class="col-12 col-sm pb-2" >
+          
+          <div :class="`tag wider-colour-${name} active`">{{ $shared.widerColoursActive[name] }}</div>
+
+        </div>
       </div>
     </div>
 
-    <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in $shared.widerColours" :key="name">
-      
-      <div class="col-12 col-sm pb-2">
-        
-        <span >Wider colour {{name}}</span>
-
-      </div>
-      <div class="col-12 col-sm pb-2" >
-        
-        <div :class="`tag wider-colour-${name}`">{{colour}}</div>
-
-      </div>
-      <div class="col-12 col-sm pb-2" >
-        
-        <div :class="`tag wider-colour-${name} hover`">{{ $shared.widerColoursHover[name] }}</div>
-
-      </div>
-      <div class="col-12 col-sm pb-2" >
-        
-        <div :class="`tag wider-colour-${name} active`">{{ $shared.widerColoursActive[name] }}</div>
-
-      </div>
-    </div>
     <p class="note mb-5"><strong>Note:</strong> To apply the wider colours to tags you need to add a class of <code>.wider-colour-3</code> to a parent element or each tag itself. This will apply the correct CSS variables for the tag elements to pick up</p>
 
 
     <h3>Toggle tag states</h3>
 
     <p>Toggle Tags have two core states — default and selected. Each of which then has three additional interaction states — hover, pressed and disabled.</p>
+    <div class="container visualtest">
+      <div class="row">
+        <div class="col-3">
+          
+          <label class="tag tag--toggle"><input type="checkbox" name="tag" value="true" />unselected</label>
+        </div>
+        <div class="col-3">
+          
 
-    <div class="row">
-      <div class="col-3">
-        
-        <label class="tag tag--toggle"><input type="checkbox" name="tag" value="true" />unselected</label>
-      </div>
-      <div class="col-3">
-        
-
-        <label class="tag tag--toggle pe-none"><input type="checkbox" name="tag" value="true" checked/>Selected</label>
-        
+          <label class="tag tag--toggle pe-none"><input type="checkbox" name="tag" value="true" checked/>Selected</label>
+          
+        </div>
       </div>
     </div>
-
     <h2 class="pt-5">Usage</h2>
     <ul>
       <li>Keep labels short to avoid wrapping.</li>

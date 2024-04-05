@@ -184,6 +184,7 @@ slot[name="selectall"] {
   color: #9D9D9D!important;
   width: 1px;
   display: none;
+  margin-left: 1rem !important;
   
   @include container-up(md) {
 

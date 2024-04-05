@@ -63,32 +63,8 @@
     <p>Selects are useful when there are several options to choose from. If there are only a few options, consider using radio buttons to present options instead.</p>
     
     <h3>States</h3>
-
-    <p class="lead pb-2">Inactive state</p>
-    <label>
-      Property type
-      <select name="select" required>
-        <option value="">Select property address</option>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-        <option>Option 4</option>
-      </select>
-    </label>
-    <p class="lead pb-2 mt-4">Active state</p>
-    <label>
-      Property type
-      <select name="select" required>
-        <option value="">Select property address</option>
-        <option selected>Bungalow</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-        <option>Option 4</option>
-      </select>
-    </label>
-
-    <p class="lead pb-2 mt-4">Inactive - error state</p>
-    <form class="was-validated">
+    <div class="container visualtest">
+      <p class="lead pb-2">Inactive state</p>
       <label>
         Property type
         <select name="select" required>
@@ -99,8 +75,32 @@
           <option>Option 4</option>
         </select>
       </label>
-    </form>
+      <p class="lead pb-2 mt-4">Active state</p>
+      <label>
+        Property type
+        <select name="select" required>
+          <option value="">Select property address</option>
+          <option selected>Bungalow</option>
+          <option>Option 2</option>
+          <option>Option 3</option>
+          <option>Option 4</option>
+        </select>
+      </label>
 
+      <p class="lead pb-2 mt-4">Inactive - error state</p>
+      <form class="was-validated">
+        <label>
+          Property type
+          <select name="select" required>
+            <option value="">Select property address</option>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+            <option>Option 4</option>
+          </select>
+        </label>
+      </form>
+    </div>
     <h3 class="mt-3">Implementation</h3>
     <pre><code>{{ `<label>
   Property type

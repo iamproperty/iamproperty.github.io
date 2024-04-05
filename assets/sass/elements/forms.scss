@@ -829,7 +829,8 @@ div:has(> select){
   border: none;
   display: inline-block;
   margin: 0;
-  padding: 0 calc(1.25em + 0.8ch) 0 0.25em!important;
+  padding: 0 calc(1.25em + 0.8ch) 0 var(--select-padding-left, 0.25em)!important;
+  
   height: auto;
   cursor: pointer;
 

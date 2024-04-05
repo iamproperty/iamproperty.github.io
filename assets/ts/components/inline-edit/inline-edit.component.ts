@@ -100,8 +100,6 @@ class iamInlineEdit extends HTMLElement {
     if(input.tagName === 'INPUT'){
       input.addEventListener('keydown', (event) => {
 
-        console.log(event)
-
         switch (event.key) { // change to event.key to key to use the above variable
           case "Enter":
               

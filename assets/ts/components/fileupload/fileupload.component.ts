@@ -46,7 +46,7 @@ class iamFileupload extends HTMLElement {
     const input = this.querySelector('input');
     const helperText = this.shadowRoot.querySelector('.helper-text');
 
-    if(this.querySelector('[slot="helper"]'))
+    if(!this.querySelector('[slot="helper"]'))
       helperText.innerHTML = `${this.hasAttribute('data-maxsize') ? `Max file size is ${this.getAttribute('data-maxsize')}kb. ` : '' }${ input.hasAttribute('accept') ? `Supported file types are ${input.getAttribute('accept')}` : '' }`;
 
     fileupload(this,wrapper);
