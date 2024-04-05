@@ -11,7 +11,7 @@
 <script>
 export default {
   name: 'Tabs',
-  mounted(){
+  created(){
 
     this.$nextTick(function () {
       

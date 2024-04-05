@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'Card',
-  mounted(){
+  created(){
 
     this.$nextTick(function () {
       
