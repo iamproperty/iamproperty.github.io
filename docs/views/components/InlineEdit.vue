@@ -42,7 +42,7 @@ function saveValue(event){
     <h2 class="mt-5">Input field</h2>
     <p>Inline edit can be wrapped around a input field. It starts in a read-only but can be activated when the user clicks or taps the field. Once activated the input appears and can be edited and saved.</p>
 
-    <InlineEdit id="inlineEdit" data-autosave @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
+    <InlineEdit id="inlineEdit" @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
       <label >Optional label
         <input type="text" name="text" placeholder="Placeholder text" />
       </label>
@@ -50,6 +50,20 @@ function saveValue(event){
 
     <h3 class="h4 mt-2 pb-1">Dispatched events</h3>
     <pre class="mb-4"><code id="dispatchedEvents" class="dispatchedEvents"></code></pre>
+
+
+    <h4>With autosave</h4>
+    <p>Adding the attribute <code>data-autosave</code> to the component will trigger an extra event (autosave) when the user has focused away from the input field. </p>
+
+    <InlineEdit id="inlineEditb" data-autosave @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
+      <label >Optional label
+        <input type="text" name="text" placeholder="Placeholder text" />
+      </label>
+    </InlineEdit>
+
+    <h3 class="h4 mt-2 pb-1">Dispatched events</h3>
+    <pre class="mb-4"><code id="dispatchedEventsb" class="dispatchedEvents"></code></pre>
+
 
     <h3>Behaviour</h3>
 
@@ -246,11 +260,13 @@ export default {
     this.$nextTick(function () {
     
       let inlineEdit = document.querySelector('#inlineEdit');
+      let inlineEditb = document.querySelector('#inlineEditb');
       let inlineEdit2 = document.querySelector('#inlineEdit2');
       let inlineEdit3 = document.querySelector('#inlineEdit3');
       let inlineEdit4 = document.querySelector('#inlineEdit4');
 
       let dispatchedEvents = document.querySelector('#dispatchedEvents');
+      let dispatchedEventsb = document.querySelector('#dispatchedEventsb');
       let dispatchedEvents2 = document.querySelector('#dispatchedEvents2');
       let dispatchedEvents3 = document.querySelector('#dispatchedEvents3');
       let dispatchedEvents4 = document.querySelector('#dispatchedEvents4');
@@ -264,7 +280,13 @@ export default {
           dispatchedEvents.scrollTop = dispatchedEvents.scrollHeight;
         });
 
-        inlineEdit.addEventListener(eventType, event => {
+        inlineEditb.addEventListener(eventType, event => {
+          
+          dispatchedEventsb.innerHTML += `${eventType}: ${JSON.stringify(event.detail)}\n`;
+          dispatchedEventsb.scrollTop = dispatchedEventsb.scrollHeight;
+        });
+
+        inlineEdit2.addEventListener(eventType, event => {
           
           dispatchedEvents2.innerHTML += `${eventType}: ${JSON.stringify(event.detail)}\n`;
           dispatchedEvents2.scrollTop = dispatchedEvents2.scrollHeight;

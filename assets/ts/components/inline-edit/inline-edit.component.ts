@@ -164,11 +164,9 @@ class iamInlineEdit extends HTMLElement {
     }
 
     //blur it should autosave
-    inlineEdit.addEventListener('blur',(event) => {
+    input.addEventListener('blur',(event) => {
 
       if(input.value != originalValue){
-
-        let feedbackText = '(Unsaved)';
 
         if(inlineEdit.hasAttribute('data-autosave')) {
 
