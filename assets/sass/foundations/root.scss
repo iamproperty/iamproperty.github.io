@@ -26,6 +26,17 @@ $root: ':root'!default;
     }
   }
 
+  // Wider colours
+  @each $colour, $value in $wider-colours {
+    --wider-colour-#{$colour}: #{$value};
+  }
+  @each $colour, $value in $wider-colours-hover {
+    --wider-colour-#{$colour}-hover: #{$value};
+  }
+  @each $colour, $value in $wider-colours-active {
+    --wider-colour-#{$colour}-active: #{$value};
+  }
+
   // Extra vars needed
   --content-max-width: #{$content-max-width};
   --colour-brand: var(--colour-primary);

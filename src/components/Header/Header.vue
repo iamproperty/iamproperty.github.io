@@ -26,7 +26,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/header/header.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/header/header.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-header`))
           window.customElements.define(`iam-header`, module.default);

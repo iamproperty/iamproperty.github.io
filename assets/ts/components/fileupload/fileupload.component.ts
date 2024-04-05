@@ -27,12 +27,12 @@ class iamFileupload extends HTMLElement {
     </style>
     <div class="file-upload">
       <span class="file-upload__title">Upload file</span>
-      <p class="helper-text"></p>
-      <button class="btn btn-primary"><slot name="btn"></slot> Upload document</button>
+      <p class="helper-text"><slot name="helper"></slot></p>
+      <button class="btn btn-primary"><slot name="btn"></slot> Upload ${this.hasAttribute('data-filetype') ? this.getAttribute('data-filetype') : 'file'}</button>
       <div class="drop-area"></div>
       <hr/>
       <slot></slot>
-      <div class="files"></div>
+      <div class="files"><slot name="files"></slot></div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -46,7 +46,8 @@ class iamFileupload extends HTMLElement {
     const input = this.querySelector('input');
     const helperText = this.shadowRoot.querySelector('.helper-text');
 
-    helperText.innerHTML = `${this.hasAttribute('data-maxsize') ? `Max file size is ${this.getAttribute('data-maxsize')}kb. ` : '' }${ input.hasAttribute('accept') ? `Supported file types are ${input.getAttribute('accept')}` : '' }`;
+    if(!this.querySelector('[slot="helper"]'))
+      helperText.innerHTML = `${this.hasAttribute('data-maxsize') ? `Max file size is ${this.getAttribute('data-maxsize')}kb. ` : '' }${ input.hasAttribute('accept') ? `Supported file types are ${input.getAttribute('accept')}` : '' }`;
 
     fileupload(this,wrapper);
   }

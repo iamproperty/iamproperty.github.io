@@ -11,7 +11,7 @@ export default {
 
     this.$nextTick(function () {
 
-      import(`../../../assets/js/components/search/search.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/search/search.component.min.js`).then(module => {
         
         if (!window.customElements.get(`iam-search`))
           window.customElements.define(`iam-search`, module.default);

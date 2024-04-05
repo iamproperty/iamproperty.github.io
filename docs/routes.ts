@@ -154,11 +154,19 @@ const routes = [
       },
       {
         path: 'badges',
-        name: 'Badges (BETA)',
+        name: 'Badges (Beta)',
         meta: {
-          title: 'Badges | Elements | iamkey'
+          title: 'Badges (Beta) | Elements | iamkey'
         },
         component: () => import('./views/elements/BadgesDoc.vue')
+      },
+      {
+        path: 'tags',
+        name: 'Tags',
+        meta: {
+          title: 'Tags | Elements | iamkey'
+        },
+        component: () => import('./views/elements/TagsDoc.vue')
       },
       {
         path: 'progress',
@@ -230,7 +238,7 @@ const routes = [
       },
       {
         path: 'select',
-        name: 'Form select field (Beta)',
+        name: 'Selects',
         meta: {
           title: 'Form select field | Elements | iamkey'
         },
@@ -403,15 +411,6 @@ const routes = [
         searchterms: 'promote'
       },
       {
-        path: 'card',
-        name: 'Card',
-        meta: {
-          title: 'Card | Components | iamkey'
-        },
-        component: () => import('./views/components/CardDoc.vue'),
-        searchterms: 'navigational, filter, status, numerical'
-      },
-      {
         path: 'carousel',
         name: 'Carousel (Beta)',
         meta: {
@@ -455,6 +454,23 @@ const routes = [
         searchterms: 'introduce, banner'
       },
       {
+        path: 'inline-edit',
+        name: 'Inline edit',
+        meta: {
+          title: 'Inline edit | Components | iamkey'
+        },
+        component: () => import('./views/components/InlineEdit.vue'),
+        searchterms: 'form, input, inline'
+      },
+      {
+        path: 'multiselect',
+        name: 'Multiselect',
+        meta: {
+          title: 'Multiselect | Components | iamkey'
+        },
+        component: () => import('./views/components/Multiselect.vue')
+      },
+      {
         path: 'notefeed',
         name: 'Note feed (Beta)',
         meta: {
@@ -490,17 +506,12 @@ const routes = [
       },
       {
         path: 'search',
-        name: 'Search (Beta)',
+        name: 'Search component',
         meta: {
           title: 'Search | Components | iamkey'
         },
         component: () => import('./views/components/SearchDoc.vue')
       },
-
-
-
-      
-
       {
         path: 'stepper',
         name: 'Stepper (Beta)',
@@ -613,6 +624,44 @@ const routes = [
         },
         component: () => import('./views/nav/CollapsibleSideMenu.vue'),
         searchterms: 'nav,hidden,expand,menu,admin,settings,sub'
+      }
+    ]
+  },
+  { /* Cards */
+    path: '/cards',
+    name: 'Cards',
+    meta: {
+      title: 'Cards | iamkey'
+    },
+    component: () => import( './views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue')
+      },
+      {
+        path: 'card',
+        name: 'Navigational Card',
+        meta: {
+          title: 'Navigational Card | Components | iamkey'
+        },
+        component: () => import('./views/cards/CardDoc.vue')
+      },
+      {
+        path: 'filter-card',
+        name: 'Filter card',
+        meta: {
+          title: 'Filter card | Components | iamkey'
+        },
+        component: () => import('./views/cards/FilterCardDoc.vue')
+      },
+      {
+        path: 'record-card',
+        name: 'Record card (Beta)',
+        meta: {
+          title: 'Record card | Components | iamkey'
+        },
+        component: () => import('./views/cards/RecordCardDoc.vue')
       }
     ]
   },
@@ -1025,6 +1074,22 @@ const routes = [
           title: 'Sign in | iamkey'
         },
         component: () => import('./views/standalone/Signin.vue')
+      },
+      {
+        path: 'informationRequests',
+        name: "Information requests table",
+        meta: {
+          title: 'Information requests table | iamkey'
+        },
+        component: () => import('./views/standalone/InformationRequests.vue')
+      },
+      {
+        path: 'inspections',
+        name: "Inspections",
+        meta: {
+          title: 'Inspections | iamkey'
+        },
+        component: () => import('./views/standalone/Inspections.vue')
       }
     ]
   },

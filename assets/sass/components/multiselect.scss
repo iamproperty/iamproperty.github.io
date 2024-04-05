@@ -1,0 +1,186 @@
+@use "../_func" as *;
+
+.outer {
+  
+  position: relative;
+  max-width: var(--input-max-width, 50rem);
+  display: block;
+}
+
+label {
+  margin-bottom: 0;
+  padding-bottom: 0.5rem;
+}
+
+.wrapper {
+
+  margin-bottom: rem(24);
+  max-width: var(--input-max-width, 50rem);
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 1rem;
+  }
+
+  input {
+    
+    margin-bottom: rem(8);
+  }
+
+  .feedback {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    padding: 0.85rem;
+    width: min-content;
+    white-space: nowrap;
+    margin-bottom: 0.5rem;
+    display: none;
+  }
+
+  &.was-validated .feedback{
+    display: block;
+  }
+}
+
+.wrapper.filled {
+  
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  min-height: calc(0.75rem + 0.75rem + 1.25rem + 4px);
+  padding: #{rem(8)} #{rem(32)} #{rem(0)} #{rem(13)};
+  font-size: var(--input-fs, #{rem(16)});
+  line-height: var(--input-lh, #{rem(20)});
+  color: var(--colour-body);
+  background-color: var(--colour-canvas-2);
+  border: 2px solid var(--colour-primary);
+  border-radius: rem(8);
+
+  &:is(:focus-within,.focus-within):not(:disabled) {
+    border-color: var(--colour-info);
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+  }
+
+  input {
+    all: unset;
+    font-size: rem(16);
+    line-height: rem(26);
+    display: inline-block;
+    width: 0;
+    flex-grow: 1;
+    padding: 0 rem(8) 0 0!important;
+    margin-inline: rem(3);
+    order: 999;
+    margin-bottom: rem(8);
+  }
+
+  .feedback {
+    display: none!important;
+  }
+
+  &:is(:focus,.focus):not(:disabled) {
+    border-color: var(--colour-info);
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+  }
+}
+
+button {
+  
+  position: absolute;
+  top: 0.75rem;
+  right: 0.5rem;
+  border: none;
+  background: none;
+  padding-inline: 0.5rem;
+  display: var(--display-button, none);
+
+  &:after {
+    content: '\2715';
+    font-weight: bold;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  padding: 0;
+  left: 0;
+  width: 100%;
+  margin: 0;
+  z-index: 99;
+  display: none;
+  max-height: rem(244) !important;
+  overflow: auto;
+
+  &:before {
+    display: none;
+  }
+}
+
+
+
+.wrapper:is(:hover, :focus-within) .dropdown {
+
+  display: var(--display-panel, none);
+}
+
+
+// Inline edit
+:host-context(:focus-within) {
+  input {
+    background-color: none!important;
+  }
+}
+:host-context(iam-inline-edit) {
+
+  display: block;
+  --display-btns: none;
+
+  label:hover + .outer:not(:focus-within) .wrapper:not([data-mousedown]),
+  .outer:not(:focus-within) .wrapper:not([data-mousedown]):hover{
+    
+    background-color: var(--colour-light);
+
+    input {
+      background-color: var(--colour-light);
+    }
+
+    .dropdown {
+      display: none;
+    }
+  }
+
+  .wrapper {
+    margin-bottom: 0;
+  }
+
+  .wrapper:not(.filled):not(:focus-within):not([data-mousedown]){
+
+    input {
+      border: none;
+      background: none;
+      margin-left: -1rem;
+      width: calc(100% + 1rem);
+      max-width: calc(100% + 1rem);
+      box-shadow: none;
+    }
+
+    .dropdown {
+      display: none;
+    }
+  }
+  .wrapper.filled:not(:focus-within):not([data-mousedown]) {
+    background: none;
+    border: none;
+    padding-left: 0;
+  }
+}

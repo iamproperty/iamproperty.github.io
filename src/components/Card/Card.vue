@@ -7,11 +7,11 @@
 <script>
 export default {
   name: 'Card',
-  mounted(){
+  created(){
 
     this.$nextTick(function () {
       
-      import(/* @vite-ignore */`../../../assets/js/components/card/card.component.min.js`).then(module => {
+      import(`../../../assets/js/components/card/card.component.js`).then(module => {
 
         if (!window.customElements.get(`iam-card`))
           window.customElements.define(`iam-card`, module.default);

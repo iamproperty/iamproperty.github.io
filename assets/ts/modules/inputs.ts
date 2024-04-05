@@ -11,8 +11,14 @@ const extendInputs = (body) => {
     });
 
     Array.from(document.querySelectorAll('label input')).forEach((input,index) => {
-      if(!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
-        input.insertAdjacentHTML("beforebegin", `<span class="optional-text"></span>`);
+      if(!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required')){
+
+        if(input.parentNode.tagName.toLowerCase() == 'span')
+          input.parentElement.insertAdjacentHTML("beforebegin", `<span class="optional-text"></span>`);
+        else
+          input.insertAdjacentHTML("beforebegin", `<span class="optional-text"></span>`);
+      }
+        
     });
     
     // Date restrictions 

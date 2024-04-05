@@ -11,7 +11,7 @@ export default {
 
     this.$nextTick(function () {
 
-      import(`../../../assets/js/components/address-lookup/address-lookup.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/address-lookup/address-lookup.component.min.js`).then(module => {
         
         if (!window.customElements.get(`iam-address-lookup`))
           window.customElements.define(`iam-address-lookup`, module.default);

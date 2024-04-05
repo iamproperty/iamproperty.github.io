@@ -14,7 +14,7 @@ class iamCard extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    if(this.querySelector('[class*="fa-"]'))
+    if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
       this.classList.add('card--has-icon');
 
     let classList = this.classList.toString();
@@ -35,7 +35,8 @@ class iamCard extends HTMLElement {
     <div class="card ${classList}" tabindex="0" part="card">
       ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
       <div class="card__body">
-      ${!this.hasAttribute('data-image') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
+      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
+      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
       ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
         <slot></slot>
       ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
@@ -44,6 +45,7 @@ class iamCard extends HTMLElement {
       <slot name="checkbox"></slot>
       <div class="card__footer">
         <slot name="footer"></slot>
+        <slot name="btns"></slot>
         ${this.hasAttribute('data-cta') ? `<span class="link d-inline-block pt-0 mb-0">${this.getAttribute('data-cta')}</span>` : ''}
       </div>
     </div>
@@ -60,11 +62,12 @@ class iamCard extends HTMLElement {
     this.classList.add('loaded');
     
     // Mimic clicking the parent node so the focus and target events can be on the card
-    const parentNode = this.parentNode.closest('a, button, label')
+    const parentNode = this.parentNode.closest('a, button, label, router-link')
     const card = this.shadowRoot.querySelector('.card')
     const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
 
-    parentNode.setAttribute('tabindex','-1');
+    if(parentNode)
+      parentNode.setAttribute('tabindex','-1');
     
 
     if(parentNode.matches('label[for]')){
@@ -190,7 +193,7 @@ class iamCard extends HTMLElement {
       case "class": {
         let classList = this.classList.toString();
             
-        if(this.querySelector('[class*="fa-"]'))
+        if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
           classList += ' card--has-icon';
 
         this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);
