@@ -25,7 +25,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/marketing/marketing.component${import.meta.env.DEV == "development" ? '.min' : ''}.js`).then(module => {
+      import(`../../../assets/js/components/marketing/marketing.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-marketing`))
           window.customElements.define(`iam-marketing`, module.default);

@@ -120,6 +120,21 @@ function fileupload(fileupload: Element, wrapper: Element) {
     if(filename)
       filesWrapper.innerHTML += `<span class="file">${filename} <button data-file="${filename}">Remove</button></span>`;
   }
+
+
+  // Change the filename
+  wrapper.addEventListener('click', (event) => {
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('.btn-primary')){
+
+      const button = event.target.closest('.btn-primary');
+
+      // If the input allows multiples then use the buffer clone input
+      const inputTrigger = input.hasAttribute('multiple') ? cloneInput : input;
+
+      inputTrigger.click();
+    }
+  });
 }
 
 export default fileupload;
