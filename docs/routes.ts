@@ -411,15 +411,6 @@ const routes = [
         searchterms: 'promote'
       },
       {
-        path: 'card',
-        name: 'Card',
-        meta: {
-          title: 'Card | Components | iamkey'
-        },
-        component: () => import('./views/components/CardDoc.vue'),
-        searchterms: 'navigational, filter, status, numerical'
-      },
-      {
         path: 'carousel',
         name: 'Carousel (Beta)',
         meta: {
@@ -521,11 +512,6 @@ const routes = [
         },
         component: () => import('./views/components/SearchDoc.vue')
       },
-
-
-
-      
-
       {
         path: 'stepper',
         name: 'Stepper (Beta)',
@@ -638,6 +624,44 @@ const routes = [
         },
         component: () => import('./views/nav/CollapsibleSideMenu.vue'),
         searchterms: 'nav,hidden,expand,menu,admin,settings,sub'
+      }
+    ]
+  },
+  { /* Cards */
+    path: '/cards',
+    name: 'Cards',
+    meta: {
+      title: 'Cards | iamkey'
+    },
+    component: () => import( './views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue')
+      },
+      {
+        path: 'card',
+        name: 'Navigational Card',
+        meta: {
+          title: 'Navigational Card | Components | iamkey'
+        },
+        component: () => import('./views/cards/CardDoc.vue')
+      },
+      {
+        path: 'filter-card',
+        name: 'Filter card',
+        meta: {
+          title: 'Filter card | Components | iamkey'
+        },
+        component: () => import('./views/cards/FilterCardDoc.vue')
+      },
+      {
+        path: 'record-card',
+        name: 'Record card (Beta)',
+        meta: {
+          title: 'Record card | Components | iamkey'
+        },
+        component: () => import('./views/cards/RecordCardDoc.vue')
       }
     ]
   },

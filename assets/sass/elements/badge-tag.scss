@@ -5,10 +5,8 @@
   font-size: rem(16);
   line-height: rem(26);
   border: none!important;
-  outline: 1px solid var(--colour-canvas);
-  outline-offset: -1px;
-  padding: 0 rem(16);
-  border-radius: rem(16);
+  //outline: 1px solid var(--colour-canvas);
+  //outline-offset: -1px;
   margin: 0;
   display: inline-block;
   text-align: center;
@@ -28,7 +26,16 @@
   }
 }
 
+.badge {
+
+  border-radius: rem(6);
+  padding: 0 rem(8);
+}
+
 .tag {
+
+  border-radius: rem(16);
+  padding: 0 rem(16);
 
   &:after {
     content: '\2715';
