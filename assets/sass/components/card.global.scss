@@ -11,6 +11,7 @@ iam-card {
     display: block;
   }
 
+
   > div:has([type="checkbox"]) {
     display: contents;
 
@@ -26,6 +27,30 @@ iam-card {
       overflow: hidden;
     }
   }
+
+  &:has([type="checkbox"]:checked) {
+    --hover-outline-colour: var(--colour-info);
+    --outline-colour: var(--colour-info);
+  }
+
+  &:has([type="checkbox"] + label:hover) {
+    //pointer-events: none;
+
+    --hover-outline-colour: transparent;
+    --hover-icon-bg: var(--colour-warning);
+    --hover-icon-colour: var(--colour-primary-theme);
+    --card-icon-right-overide:1rem;
+  }
+
+  &:has([type="checkbox"]:active) {
+    //pointer-events: none;
+
+    --hover-outline-colour: transparent;
+    --hover-icon-bg: var(--colour-warning);
+    --hover-icon-colour: var(--colour-primary-theme);
+    --card-icon-right-overide:1rem;
+  }
+
 
   &.card--has-icon:not(.card--filter):not(.card--secondary) i {
     position: absolute;

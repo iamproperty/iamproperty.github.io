@@ -172,7 +172,7 @@
         </div>
 
         <div class="col4 pe-no/ne">
-          <span class="pb-3 d-block text-uppercase">Active State</span>
+          <span class="pb-3 d-block text-uppercase">Secondary action hover/focus</span>
           <button>
             <Card class="card--secondary secondary-hover" data-total="99" data-add-link="/?add=true">Properties</Card>
           </button>
@@ -183,8 +183,8 @@
 
     
 
-    <h3>Header card with counter and secondary action</h3>
-    <p>This is a variation of the Header card which includes the addition of a counter and a secondary action.</p>
+    <h3>Header card with icon and secondary action</h3>
+    <p>This is a variation of the Header card which includes the addition of aa icon and a secondary action.</p>
 
 
     <div class="container visualtest">
@@ -210,7 +210,7 @@
         </div>
 
         <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <span class="pb-3 d-block text-uppercase">Secondary action hover/focus</span>
           <a href="/">
             <Card class="card--secondary secondary-hover" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
           </a>
@@ -461,7 +461,7 @@
 
 
         <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <span class="pb-3 d-block text-uppercase">Checkbox hover</span>
           <a href="/client-onbaording">
             <Card>
               Living room <span>1 check</span><span slot="badges" class="badge">Not started</span><div slot="checkbox"><input type="checkbox" name="card13" id="card13"><label for="card13" class="m-0 hover">Select card</label></div>
@@ -474,7 +474,7 @@
         </div>
 
         <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
+          <span class="pb-3 d-block text-uppercase">Checked</span>
           <a href="/client-onbaording">
             <Card>
               Living room <span>1 check</span><span slot="badges" class="badge">Not started</span><div slot="checkbox"><input type="checkbox" name="card14" id="card14" checked><label for="card14" class="m-0">Select card</label></div>

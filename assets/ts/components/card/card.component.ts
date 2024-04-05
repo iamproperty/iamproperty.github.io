@@ -62,11 +62,12 @@ class iamCard extends HTMLElement {
     this.classList.add('loaded');
     
     // Mimic clicking the parent node so the focus and target events can be on the card
-    const parentNode = this.parentNode.closest('a, button, label')
+    const parentNode = this.parentNode.closest('a, button, label, router-link')
     const card = this.shadowRoot.querySelector('.card')
     const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
 
-    parentNode.setAttribute('tabindex','-1');
+    if(parentNode)
+      parentNode.setAttribute('tabindex','-1');
     
 
     if(parentNode.matches('label[for]')){

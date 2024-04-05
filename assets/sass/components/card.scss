@@ -18,7 +18,7 @@
   overflow: hidden;
   z-index: 0;
   background: var(--colour-canvas-2);
-  outline: 2px solid var(--colour-canvas-2);
+  outline: 2px solid var(--outline-colour,--colour-canvas-2);
   outline-offset: -2px;
 
   > *:not(.btn-compact) {
@@ -81,7 +81,8 @@
   }
 
   &:is(:hover,:focus,.hover) {
-    outline: 2px solid var(--colour, var(--colour-primary));
+    --hover-outline-colour-default: var(--colour, var(--colour-primary));
+    outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
     outline-offset: -2px;
   }
   
@@ -89,15 +90,15 @@
   &:not([class*="colour-"]):is(:hover,:focus,.hover,:active, .active) {
 
     &:before {
-      background: var(--colour-primary-theme);
+      background: var(--hover-icon-bg, var(--colour-primary-theme));
     }
     &:after {
-      background: #ffffff;
+      background: var(--hover-icon-colour, #ffffff);
     }
   }
 
   &:is(:active, .active){
-    --card-icon-right: 0.5rem;
+    --card-icon-right: var(--card-icon-right-overide,0.5rem);
     outline: none;
   }
 
