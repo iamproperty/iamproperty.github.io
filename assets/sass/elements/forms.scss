@@ -50,6 +50,10 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
   max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
 
+  &:is(textarea) {
+    max-height: 100%
+  }
+
   // Customize the `:focus` state to imitate native WebKit styles.
   &:is(:focus,.focus):not(:disabled) {
     border-color: var(--colour-info);
@@ -80,7 +84,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
 textarea {
   min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px)!important;
-  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px)!important;
 }
 // #endregion
 
