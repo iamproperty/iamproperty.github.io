@@ -527,6 +527,15 @@ dialog::backdrop {
   margin-bottom: calc(var(--btn-margin) - 0.25rem);
 
 
+  &:has(dialog[open]) > button {
+    background: var(--colour-btn-secondary-bg-hover);
+    color: var(--colour-btn-secondary-hover);
+    filter: brightness(85%);
+    transition: background 0.1s, color 0.1s;
+    //color: var(--colour-btn);
+    border-radius: 1.5rem;
+  }
+
   > .btn:first-child {
 
     margin-bottom: 0.25rem;
@@ -749,4 +758,23 @@ dialog::backdrop {
     }
   }
 }
+// #endregion
+
+// #region admin panel dialog
+dialog:has(> .admin-panel) {
+
+  .dialog__close {
+    margin-top: -0.8rem;
+  }
+}
+dialog > .admin-panel {
+  margin: -1rem calc(var(--dialog-padding) * -1) calc(var(--dialog-padding) * -1) calc(var(--dialog-padding) * -1)!important;
+  padding-top: 0;
+
+  &:last-child {
+    
+    margin-bottom: calc(var(--dialog-padding) * -1);
+  }
+}
+
 // #endregion

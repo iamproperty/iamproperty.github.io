@@ -47,6 +47,7 @@ class iamInlineEdit extends HTMLElement {
     
     let label = this.querySelector('label');
     let input = this.querySelector('input, textarea, select');
+    let preview = this.querySelector('.preview');
 
     let statusSaving = this.shadowRoot.querySelector('#saving');
     let statusSaved = this.shadowRoot.querySelector('#saved');
@@ -92,8 +93,14 @@ class iamInlineEdit extends HTMLElement {
       input.blur();
       inlineEdit.blur();
 
-
       statusSaving.classList.remove('d-none');
+
+      if(preview){
+
+        console.log(input.value)
+
+        preview.innerHTML = input.value;
+      }
     });
 
     // Save
@@ -174,6 +181,10 @@ class iamInlineEdit extends HTMLElement {
           inlineEdit.dispatchEvent(saveEvent);
 
           statusSaving.classList.remove('d-none');
+              
+          if(preview){
+            preview.innerHTML = input.value;
+          }
         }
         else if(!inlineEdit.querySelector('.inline-feedback')){
           statusNotSaved.classList.remove('d-none');

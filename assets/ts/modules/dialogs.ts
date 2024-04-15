@@ -130,12 +130,20 @@ const extendDialogs = (body) => {
     event.stopPropagation();
 
       let btn = event.target.closest('.dialog__wrapper > button');
-      let parent = event.target.closest('.dialog__wrapper > button').parentNode;
+      let parent = btn.parentNode;
       let dataEvent = "openPopover"
       let popover = parent.querySelector(':scope > dialog');
       
-      if(document.querySelector('*:not([data-keep-open]) > dialog[open]') && document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover)
-        document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
+
+      // close open dialogs
+      if(document.querySelector('*:not([data-keep-open]) > dialog[open]') && document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover){
+
+        // Check that the ope dialog isn't a parent of the dialog being opened
+        if(btn.closest('dialog[open]') != document.querySelector('*:not([data-keep-open]) > dialog[open]')){
+          document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
+        }
+      }
+        
 
       // Remove active class from exiting active buttons
       Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
@@ -227,7 +235,7 @@ export const createDialog = (dialog) => {
   }
 
   // If you are using Vue eevents and bindings its recommended to add in the .mh-lg div manually to the dialog
-  if(!dialog.querySelector(':scope > .mh-lg') && !dialog.classList.contains('dialog--multi')){
+  if(!dialog.querySelector(':scope .mh-lg') && !dialog.classList.contains('dialog--multi')){
     dialog.innerHTML = `<div class="mh-lg">${dialog.innerHTML}</div>`;
 
     let dialogContent = dialog.querySelector('.mh-lg');

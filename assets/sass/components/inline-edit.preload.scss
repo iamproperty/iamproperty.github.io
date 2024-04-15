@@ -14,8 +14,8 @@ iam-inline-edit {
 
 
 iam-inline-edit:focus-within {
-
-
+  position: relative;
+  z-index: 99;
   --display-status: none;
 }
 
@@ -96,3 +96,57 @@ iam-inline-edit.was-validated label:has(:is(input:not([type=radio]):not([type=ch
     margin: 0 0 -1rem 0;
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 }
+
+
+// #region preview element
+
+iam-inline-edit:has(.preview) {
+
+  position: relative;
+
+  label {
+    opacity: 0;
+    margin-top: -0.75rem;
+  }
+
+  .preview {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    pointer-events: none;
+    padding: 0.75rem;
+    margin-top: -0.75rem;
+    margin-left: -0.75rem;
+  }
+
+  .preview:empty {
+    &:before {
+      content: attr(data-placeholder);
+    }
+  }
+
+  &:hover, &:focus {
+
+
+    .preview {
+        
+      border: none;
+      background: var(--colour-light);
+
+    }
+  }
+
+  &:focus-within {
+    label {
+      opacity: 1;
+    }
+    .preview {
+      opacity: 0;
+    }
+  }
+}
+
+
+// #endregion
