@@ -128,7 +128,7 @@ button {
 
 
 
-.wrapper:is(:hover, :focus-within) .dropdown {
+.wrapper:is(:focus-within) .dropdown {
 
   display: var(--display-panel, none);
 }
