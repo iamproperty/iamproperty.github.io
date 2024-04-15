@@ -806,7 +806,7 @@ $compatible: 'false';
     }
     @include invert-colours();
     
-    [class*="bg-"]:not(.bg-canvas):not(.bg-canvas-2) {
+    [class*="bg-"]:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
 
       @include reset-colours();
       --colour-body: #{$primary}!important;
