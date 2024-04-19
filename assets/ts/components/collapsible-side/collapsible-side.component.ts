@@ -26,14 +26,14 @@ class iamCollapsibleSideMenu extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
       <div class="container" part="container">
 
-        <div class="side-menu">
-          <button class="btn btn-compact fa-chevron-right btn-secondary btn-sm btn-collapse">Open or close Collapsible menu</button>
-          <div class="side-menu-content closed">
+        <div class="side-menu" part="side-menu">
+          <button class="btn btn-compact fa-chevron-right btn-secondary btn-sm btn-collapse" part="btn">Open or close Collapsible menu</button>
+          <div class="side-menu-content closed" part="side-menu-content">
             <slot name="menu"></slot>
           </div>
         </div>
 
-        <div class="main-content">
+        <div class="main-content" part="main-content">
           <slot></slot>
         </div>
 
