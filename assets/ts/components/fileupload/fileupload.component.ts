@@ -28,7 +28,7 @@ class iamFileupload extends HTMLElement {
     <div class="file-upload">
       <span class="file-upload__title">Upload file</span>
       <p class="helper-text"><slot name="helper"></slot></p>
-      <button class="btn btn-primary"><slot name="btn"></slot> Upload ${this.hasAttribute('data-filetype') ? this.getAttribute('data-filetype') : 'file'}</button>
+      <button class="btn btn-primary" type="button"><slot name="btn"></slot> Upload ${this.hasAttribute('data-filetype') ? this.getAttribute('data-filetype') : 'file'}</button>
       <div class="drop-area"></div>
       <hr/>
       <slot></slot>

@@ -142,8 +142,9 @@ class iamMultiselect extends HTMLElement {
 
         let checkbox = label.querySelector('input');
         let searchValue = checkbox.value;
+        let labelText = label.textContent;
         
-        if(searchValue.toLowerCase().includes(search.value.toLowerCase())){
+        if(searchValue.toLowerCase().includes(search.value.toLowerCase()) || labelText.toLowerCase().includes(search.value.toLowerCase())){
           label.removeAttribute('slot')
         }
         else {
