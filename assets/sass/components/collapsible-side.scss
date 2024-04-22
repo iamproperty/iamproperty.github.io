@@ -185,7 +185,14 @@
 ::slotted(*[slot="menu"]) {
   padding-left: rem(24);
 
+
+
+  
   @include media-breakpoint-up(sm) {
+    padding-left: rem(40);
+  }
+  
+  @include media-breakpoint-up(md) {
     padding-left: var(--container-padding-x-md);
   }
 }
@@ -215,7 +222,7 @@
     padding-left: rem(40)!important;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(md) {
     padding-left: var(--container-padding-x-md)!important;
   }
   &:after {

@@ -67,7 +67,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     }
     
 
-    if(this.hasAttribute('open')){
+    if(this.hasAttribute('open') && window.innerWidth > 992){
       sideMenu.classList.add('open'); 
       button.setAttribute('aria-expanded', true);
     }

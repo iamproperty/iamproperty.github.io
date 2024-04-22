@@ -41,17 +41,17 @@ class iamAddressLookup extends HTMLElement {
         </label>
 
         </div>
-        <button class="btn btn-tertiary switch-to-manual-btn">Or enter address manually</button>
+        <button class="btn btn-tertiary switch-to-manual-btn" type="button">Or enter address manually</button>
       </div>
       <datalist id="address-lookup__addressess"></datalist>
 
       <div class="manual-address pb-2 js-hide">
         <slot></slot>
-        <button class="btn btn-tertiary switch-to-lookup-btn">Use postcode lookup</button>
+        <button class="btn btn-tertiary switch-to-lookup-btn" type="button">Use postcode lookup</button>
       </div>
       <div class="pre-filled pb-2 js-hide">
         <strong class="title text-primary d-block"></strong>
-        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button><slot name="prefilled"></slot></p>
+        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer" type="button"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button><slot name="prefilled"></slot></p>
       </div>
     </div>
     `;
