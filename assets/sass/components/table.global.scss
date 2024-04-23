@@ -23,15 +23,6 @@ iam-table {
       --row-bg: var(--hover-background);
       background: var(--row-bg);
     }
-
-    @include dark-mode(){
-      
-      --hover-background: var(--colour-canvas);
-
-      &:is(:hover,:focus-within,.hover) {
-        background: var(--row-bg);
-      }
-    }
   }
 
   &[data-expandable] [data-expand-button][aria-expanded] {
@@ -219,10 +210,6 @@ iam-table {
       cursor: default;
       padding-bottom: 0;
 
-      @media screen and (prefers-color-scheme: dark) {
-        
-      background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
-      }
       a {
         white-space: nowrap;
         padding-right: 0.2rem;
@@ -434,10 +421,6 @@ iam-table {
 
   tr:has([type="checkbox"]:checked){
     --row-bg: #E0E0E0;
-
-    @include dark-mode(){
-      --row-bg: #000000;
-    }
   }
 }
 

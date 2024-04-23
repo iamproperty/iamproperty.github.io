@@ -41,3 +41,43 @@ iam-search .optional-text {
     --tabs-gradient: linear-gradient(90deg, rgba(38,38,38,0), rgba(38,38,38,1));
   }
 }
+
+// Table dark mode support
+iam-table {
+
+  tbody tr {
+    
+    @include dark-mode(){
+      
+      --hover-background: var(--colour-canvas);
+
+      &:is(:hover,:focus-within,.hover) {
+        background: var(--row-bg);
+      }
+    }
+  }
+}
+
+@container (width > 23.4375em) {
+
+  iam-table.table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
+
+    tr > *:not(:first-child):last-child {
+
+      @media screen and (prefers-color-scheme: dark) {
+        
+        background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
+      }
+    }
+  }
+}
+
+iam-table {
+
+  tr:has([type="checkbox"]:checked){
+
+    @include dark-mode(){
+      --row-bg: #000000;
+    }
+  }
+}
