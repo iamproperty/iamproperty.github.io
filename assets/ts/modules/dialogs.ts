@@ -111,7 +111,7 @@ const extendDialogs = (body) => {
 
         if (event.clientX < dialogDimensions.left || event.clientX > dialogDimensions.right || event.clientY < dialogDimensions.top || event.clientY > dialogDimensions.bottom) {
 
-          if(!event.target.closest('input[type="radio"]') && !event.target.closest('input[type="file"]') && !event.target.closest('iam-fileupload')) // Weird bug when interacting with radio input fields within dialogs cuases it to close
+          if(!event.target.closest('dialog *')) // Weird bug when interacting with radio input fields within dialogs cuases it to close
             dialog.close()
           
           window.dataLayer = window.dataLayer || [];
