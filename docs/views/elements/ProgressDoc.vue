@@ -10,8 +10,34 @@
     <div class="container">
 
       <h2>Default</h2>
+
+      <label data-percent="70">Missed opportunities<progress max="100" value="70"></progress></label>
+    </div>
+
+    <div class="container">
+
+      <h2>Circular</h2>
       
-      <label>Missed opportunities<progress max="100" value="70"></progress></label>
+      <label>Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%;"></progress></label>
+
+      <label>Lose rate <progress max="100" value="70" class="progress--circular progress--md colour-danger" style="--progress: 70%;"></progress></label>
+
+      <label>Lose rate <progress max="100" value="10" class="progress--circular progress--sm colour-warning" style="--progress: 10%;"></progress></label>
+
+      <hr/>
+
+      <p class="note mb-5"><strong>Note:</strong> For the circular progress bar a CSS variable (<code>--progress</code>) needs to be supplied on the progress element.</p>
+
+      <p class="note mb-5"><strong>Note:</strong> A data-percent attribute is needed on the label for the value to display in firefox.</p>
+
+      <div class="row">
+
+        <div class="col-md-4 text-center">
+          <label class="mb-2">Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%;"></progress></label>
+          <span class="label"><i class="fa-solid fa-circle-up text-complete"></i> 4% vs previous 30 days</span>
+        </div>
+      </div>
+
     </div>
     <div class="container">
 
