@@ -242,12 +242,6 @@ export default {
       }, 1000);
     }
 
-    
-  Array.from(document.querySelectorAll('label progress')).forEach((progress,index) => {
-    let label = progress.closest('label');
-
-    label.setAttribute('data-percent',progress.getAttribute('value'));
-  });
 
   },
   data () {
