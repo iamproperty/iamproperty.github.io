@@ -100,6 +100,12 @@ export const addGlobalEvents = (body) => {
     }
   });
 
+  Array.from(document.querySelectorAll('label progress')).forEach((progress,index) => {
+    let label = progress.closest('label');
+
+    label.setAttribute('data-percent',progress.getAttribute('value'));
+  });
+
   return null
 }
 
