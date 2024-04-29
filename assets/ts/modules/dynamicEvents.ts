@@ -115,6 +115,9 @@ const runEvent = (element,event,eventType) => {
         element.setAttribute(event['attribute'],event['value']);
       });
       break;
+    case "focus":
+      document.querySelector(`${event['target']}`).focus();
+      break;
     case "removeAttribute":
       Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function(element,index){
         element.removeAttribute(event['attribute']);

@@ -115,7 +115,7 @@ function saveValue(event){
     <h2 class="mt-5">Select</h2>
     <p>Select inline edit is a wrapper around a standard select. It starts in a read-only but can be activated when the user clicks or taps the field. Once activated the select appears and can be edited and saved.</p>
 
-    <InlineEdit id="inlineEdit3" @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
+    <InlineEdit id="inlineEdit3" class="inline-edit--inline" @save="(event) => {saveValue(event)}" @autosave="(event) => {saveValue(event)}">
       <label>Optional label
         <select name="select">
           <option value="">Please select</option>
