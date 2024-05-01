@@ -33,11 +33,10 @@ class iamCard extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="card ${classList}" tabindex="0" part="card">
-    ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
-    ${this.hasAttribute('data-record') ? `<div class="card__head"></div>` : ''}
+    ${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
       <div class="card__body">
       ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
-      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
+      ${!this.hasAttribute('data-image') && !this.hasAttribute('data-record') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
       ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
         <slot></slot>
       ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
@@ -66,6 +65,7 @@ class iamCard extends HTMLElement {
     const parentNode = this.parentNode.closest('a, button, label, router-link')
     const card = this.shadowRoot.querySelector('.card')
     const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
+    const recordType = this.hasAttribute('data-record') ? this.getAttribute('data-record') : '';
 
     if(parentNode)
       parentNode.setAttribute('tabindex','-1');
@@ -178,10 +178,6 @@ class iamCard extends HTMLElement {
           window.location = addLocation;
       });
     }
-
-
-    // Record type
-    
 
   }
 

@@ -66,6 +66,20 @@ function eventHandler(event){
     <p>Property cards can display a range of card types - from vendor profiles to business details - and to distinguish them, we can use an icon and a colour in the empty image state.</p>
 
 
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mb-4">
+
+      </div>
+    </div>
+
+
+
+    <UserColours></UserColours>
+
+
+
+
     <div class="container visualtest">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mb-4">
           
@@ -84,6 +98,7 @@ function eventHandler(event){
         
       </div>
     </div>
+
     
 
     <div class="container">
@@ -137,6 +152,7 @@ import anatomy from '../../img/record-card-anatomy.png'
 import cardImg from '../../img/cardImg.png'
 import cardModes from '../../img/cardModes.png'
 import Table from '@/components/Table/Table.vue'
+import UserColours from '../UserColours.vue'
 
 export default {
   components: {
@@ -150,7 +166,8 @@ export default {
     headerImg,
     cardImg,
     cardModes,
-    anatomy
+    anatomy,
+    UserColours
   },
   data () {
     return {
