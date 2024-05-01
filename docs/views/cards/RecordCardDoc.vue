@@ -79,27 +79,15 @@ function eventHandler(event){
 
 
 
+    <h2>Behaviours</h2>
 
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mb-4">
-          
-            
-        <div class="col">
-          <span class="pb-3 d-block text-uppercase">Default State</span>
-          <button>
-            <Card class="card--record" :data-image="cardImg">
-              Sofa.jpg
-              <small>11.91KB<br/><i class="fa-regular fa-calendar"></i> 01/01/2023</small>
-              <button class="btn btn-compact btn-secondary btn-sm fa-edit" slot="btns" @click="(event) => {eventHandler()}">Edit</button>
-              <button class="btn btn-compact btn-secondary btn-sm fa-trash colour-danger" slot="btns">Delete</button>
-            </Card>
-          </button>
-        </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <img :src="recordCardDo" alt="" />
         
       </div>
     </div>
 
-    
 
     <div class="container">
       
@@ -154,6 +142,12 @@ import cardModes from '../../img/cardModes.png'
 import Table from '@/components/Table/Table.vue'
 import UserColours from '../UserColours.vue'
 
+
+import recordCardDo from '../../img/record-card-do.png'
+import recordCardDo2 from '../../img/record-card-do-2.png'
+import recordCardDo3 from '../../img/record-card-do-3.png'
+import recordCardDont from '../../img/record-card-dont.png'
+
 export default {
   components: {
     DSHeader,
@@ -167,7 +161,11 @@ export default {
     cardImg,
     cardModes,
     anatomy,
-    UserColours
+    UserColours,
+    recordCardDo,
+    recordCardDo2,
+    recordCardDo3,
+    recordCardDont
   },
   data () {
     return {
