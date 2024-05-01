@@ -415,8 +415,10 @@ iam-table {
     }
   }
 
-  tr:has([type="checkbox"]:checked){
-    height: 3.5rem;
+  @container (width > 23.4375em) {
+    tr:has([type="checkbox"]:checked){
+      height: calc(4.625rem - 2px)
+    }
   }
 
   tr:has([type="checkbox"]:checked){
