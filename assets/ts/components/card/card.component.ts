@@ -33,7 +33,8 @@ class iamCard extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="card ${classList}" tabindex="0" part="card">
-      ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
+    ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
+    ${this.hasAttribute('data-record') ? `<div class="card__head"></div>` : ''}
       <div class="card__body">
       ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
       ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
@@ -177,6 +178,11 @@ class iamCard extends HTMLElement {
           window.location = addLocation;
       });
     }
+
+
+    // Record type
+    
+
   }
 
   static get observedAttributes() {

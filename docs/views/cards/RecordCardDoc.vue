@@ -9,12 +9,61 @@ function eventHandler(event){
   <main>
 
     <DSHeader :image="headerImg" section="components">
-      <h1>Record cards (Beta)</h1>
+      <h1>Record card</h1>
     </DSHeader>
 
 
     <p class="lead">Record cards can be used to display key information in compact and scannable lists of cards that users can preview quickly. When clicked, they direct users to another page with the full extent of information on that list item.</p>
 
+
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mb-4">
+          
+            
+        <div class="col">
+          <a href="/">
+            <Card class="card--record" :data-image="cardImg">
+              13 Oakdale Road, Madley Park, Newcastle upon Tyne
+              <small>£503pcm</small>
+              <small>4 beds 2 baths 1 reception room</small>
+              <small>Updated by: John Smith<br/> Updated on: 03/01/2024</small>
+            </Card>
+          </a>
+        </div>
+        
+            
+        <div class="col">
+          <a href="/">
+            <Card class="card--record" data-record="business">
+              13 Oakdale Road, Madley Park, Newcastle upon Tyne
+              <small>£503pcm</small>
+              <small>4 beds 2 baths 1 reception room</small>
+              <small>Updated by: John Smith<br/> Updated on: 03/01/2024</small>
+            </Card>
+          </a>
+        </div>
+        
+      </div>
+    </div>
+    
+
+
+
+    <h2>Anatomy</h2>
+
+    <img :src="anatomy" class="mb-2"/>
+    <ol class="mb-5">
+      <li>Card image</li>
+      <li>Title</li>
+      <li>Details</li>
+      <li>Dates</li>
+      <li>Labels</li>
+    </ol>
+
+
+    <h2>Empty image state icon options</h2>
+
+    <p>Property cards can display a range of card types - from vendor profiles to business details - and to distinguish them, we can use an icon and a colour in the empty image state.</p>
 
 
     <div class="container visualtest">
@@ -64,20 +113,13 @@ function eventHandler(event){
           </thead>
           <tbody class="text-body">
             <tr>
-              <td>V2 added</td>
-              <td>14.06.2023</td>
-              <td>Inclusion of a Features card<br/>
-Inclusion of Status navigation card<br/>
-Inclusion of card ‘modes’ - light mode, dark mode and high contrast</td>
-            </tr>
-            <tr>
               <td>V1 added</td>
-              <td>19.05.2023</td>
+              <td>22.02.2024</td>
               <td>N/A</td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/cards.pdf" download>Download latest designs</a>
+        <a href="/pdfs/record-cards.pdf" download>Download latest designs</a>
       </div>
     </div>
   </main>
@@ -91,6 +133,7 @@ import Tab from '@/components/Tabs/Tab.vue'
 import WebReadme from '~/ts/components/card/README.md'
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/cards-header.png'
+import anatomy from '../../img/record-card-anatomy.png'
 import cardImg from '../../img/cardImg.png'
 import cardModes from '../../img/cardModes.png'
 import Table from '@/components/Table/Table.vue'
@@ -106,7 +149,8 @@ export default {
     Card,
     headerImg,
     cardImg,
-    cardModes
+    cardModes,
+    anatomy
   },
   data () {
     return {
