@@ -41,7 +41,7 @@ class iamNotification extends HTMLElement {
     <div class="notification">
       <div class="notification__icon"><slot name="icon"></slot></div>
       <div class="notification__inner"><div class="notification__text"><slot></slot></div>${ buttons.length ? `<div class="notification__btns"><slot name="btns"></slot></div>` : '' }</div>
-      ${ this.hasAttribute('data-dismiss') ? `<div class="notification__dismiss"><button data-dismiss-button>Dismiss</button></div>` : ''}
+      ${ this.hasAttribute('data-dismiss') ? `<div class="notification__dismiss"><button data-dismiss-button part="dismiss-btn">Dismiss</button></div>` : ''}
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));

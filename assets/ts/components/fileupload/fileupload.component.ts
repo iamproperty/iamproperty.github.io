@@ -26,13 +26,13 @@ class iamFileupload extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="file-upload">
-      <span class="file-upload__title">Upload file</span>
+      <span class="file-upload__title" part="title">Upload file</span>
       <p class="helper-text"><slot name="helper"></slot></p>
-      <button class="btn btn-primary" type="button"><slot name="btn"></slot> Upload ${this.hasAttribute('data-filetype') ? this.getAttribute('data-filetype') : 'file'}</button>
+      <button class="btn btn-primary" type="button" part="button"><slot name="btn"></slot> Upload ${this.hasAttribute('data-filetype') ? this.getAttribute('data-filetype') : 'file'}</button>
       <div class="drop-area"></div>
       <hr/>
       <slot></slot>
-      <div class="files"><slot name="files"></slot></div>
+      <div class="files" part="files"><slot name="files"></slot></div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
