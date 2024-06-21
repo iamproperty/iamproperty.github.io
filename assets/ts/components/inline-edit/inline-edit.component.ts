@@ -27,9 +27,9 @@ class iamInlineEdit extends HTMLElement {
     
     <slot></slot>
     <div class="btns">
-      <button class="btn btn-action" id="save"><i class="fa-regular fa-save m-0"></i> Save</button><button class="btn btn-action" id="cancel">Cancel</button>
+      <button class="btn btn-action" id="save" part="save-btn"><i class="fa-regular fa-save m-0"></i> Save</button><button class="btn btn-action" id="cancel">Cancel</button>
     </div>
-    <div class="status pe-none">
+    <div class="status pe-none" part="status">
       <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="saving"><i class="fa-regular fa-spinner fa-spin me-1"></i> Saving...</span>
       <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="saved"><i class="fa-regular fa-check me-1"></i> Saved</span>
       <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="notsaved"><i class="fa-regular fa-circle-info me-1"></i> Not Saved</span>

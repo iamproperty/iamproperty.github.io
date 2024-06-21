@@ -32,12 +32,12 @@ class iamCarousel extends HTMLElement {
           <slot></slot>
         </div>
  
-        <div class="carousel__controls">
+        <div class="carousel__controls" part="controls">
           
         </div>
 
-        <button class="btn btn-prev" data-go="0" disabled>Prev</button>
-        <button class="btn btn-next" data-go="2">Next</button>
+        <button class="btn btn-prev" data-go="0" disabled  part="prev">Prev</button>
+        <button class="btn btn-next" data-go="2" part="next">Next</button>
 
       </div>
     </div>

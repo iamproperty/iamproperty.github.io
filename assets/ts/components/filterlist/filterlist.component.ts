@@ -40,9 +40,9 @@ class iamFilterlist extends HTMLElement {
     <div class="form-control__wrapper">
       <label for="search" class="visually-hidden">Search</label>
       <span class="suffix" role="presentation"><slot name="icon"></slot></span>
-      <input name="search" id="search" type="text" class="form-control" autocomplete="off" placeholder="Search" />
+      <input name="search" id="search" type="text" class="form-control" autocomplete="off" placeholder="Search" part="search-input" />
     </div>
-    <div class="list__wrapper">
+    <div class="list__wrapper" part="wrapper">
       <slot></slot>
     </div>
     `;

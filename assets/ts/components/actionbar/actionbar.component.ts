@@ -57,19 +57,19 @@ class iamActionbar extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="actionbar__wrapper">
     
-      <div class="actionbar">
+      <div class="actionbar" part="actionbar">
         <slot name="selectall"></slot>
         <div class="safe-area">
           <slot></slot>
           <div class="body">
             <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
               <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
-              <dialog class="dialog--list">
+              <dialog class="dialog--list" part="overflow">
                 <slot name="overflow"></slot>
                 <slot name="menu"></slot>
               </dialog>
             </div>
-            <button class="btn btn-secondary btn-compact btn-sm fa-search" data-search="">Search</button>
+            <button class="btn btn-secondary btn-compact btn-sm fa-search" data-search="" part="search-btn">Search</button>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@ class iamActionbar extends HTMLElement {
           <div class="body">
             <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
               <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
-              <dialog class="dialog--list">
+              <dialog class="dialog--list" part="selected-overflow">
                 <slot name="selected-overflow"></slot>
               </dialog>
             </div>
@@ -89,10 +89,10 @@ class iamActionbar extends HTMLElement {
       <div class="actionbar--search">
         <button data-search class="btn btn-compact fa-xmark-large btn-secondary m-0" >Close</button>
 
-        <div class="search-wrapper">
+        <div class="search-wrapper" part="search">
           <label for="search" class="visually-hidden">Input field label</label>
-          <button class="suffix"><i class="fa-regular fa-search"></i></button>
-          <input type="text" id="search" name="search" required="">
+          <button class="suffix" part="search-btn"><i class="fa-regular fa-search"></i></button>
+          <input type="text" id="search" name="search" required="" part="search-input">
         </div>
 
       </div>
