@@ -97,7 +97,7 @@
     <div class="container pt-5 pb-5">
       <h2>Different Non-Modal dialogs types</h2>
       <div class="row row-cols-1 row-cols-md-3">
-        <div><a href="/components/popover"><Card>Dialog (Popover)</Card></a></div>
+        <div><a href="/dialogs/popover"><Card>Dialog (Popover)</Card></a></div>
       </div>
     </div>
 

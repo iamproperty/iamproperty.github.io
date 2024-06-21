@@ -20,7 +20,7 @@
       
       <DialogUsage></DialogUsage>
 
-      <p>For more context of when to use modals and when not to, see the <a href="/components/dialog">dialog</a> page for further details. </p>
+      <p>For more context of when to use modals and when not to, see the <a href="/dialogs/dialog">dialog</a> page for further details. </p>
     </div>
 
 
