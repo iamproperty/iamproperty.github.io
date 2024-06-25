@@ -150,14 +150,14 @@
       <div>
         <label :for="`input9`">Input field label</label>
         <span class="prefix fa-solid fa-envelope"></span>
-        <input type="text" :id="`input9`" :name="`input9`" placeholder="Optional placheolder text" required />
+        <input type="text" :id="`input9`" :name="`input9`" placeholder="Optional placeholder text" required />
       </div>
  
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
       <div>
         <label :for="`input10`">Input field label</label>
         <span class="prefix fa-solid fa-envelope"></span>
-        <input type="text" :id="`input10`" :name="`input10`" class="focus" placeholder="Optional placheolder text" required />
+        <input type="text" :id="`input10`" :name="`input10`" class="focus" placeholder="Optional placeholder text" required />
       </div>
 
       <p>When we use an icon as a prefix or suffix it should be solid and 1 rem (16px) in size with 1rem (16px) padding around the icon.</p>
@@ -169,7 +169,7 @@
       <div>
         <label :for="`input11`">Input field label</label>
         <span class="suffix">days</span>
-        <input type="text" :id="`input11`" :name="`input11`" placeholder="Optional placheolder text" required />
+        <input type="text" :id="`input11`" :name="`input11`" placeholder="Optional placeholder text" required />
       </div>
  
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
@@ -177,7 +177,7 @@
       <div>
         <label :for="`input12`">Input field label</label>
         <span class="suffix">days</span>
-        <input type="text" :id="`input12`" :name="`input12`" placeholder="Optional placheolder text" required class="focus" />
+        <input type="text" :id="`input12`" :name="`input12`" placeholder="Optional placeholder text" required class="focus" />
       </div>
 
       <p>When we use text we should keep it to a minimum. For example, using for units of measurement. The text should be 1rem (16px) within a container height of 1.5rem (24px) and a max width of 5rem (80px). The padding around the container should be 1rem (16px) left and right and 0.75rem (12px) top and bottom.</p>
@@ -265,7 +265,7 @@
       <div>
         <label :for="`input16`">Input field label</label>
         <span class="suffix">days</span>
-        <input type="text" :id="`input16`" :name="`input16`" placeholder="Optional placheolder text" required />
+        <input type="text" :id="`input16`" :name="`input16`" placeholder="Optional placeholder text" required />
         <span>Optional helper text</span>
       </div>
     </div>
@@ -277,7 +277,7 @@
     <div class="container visualtest">
       <div>
         <label :for="`input17`">Input field label</label>
-        <input type="text" :id="`input17`" :name="`input17`" placeholder="Optional placheolder text" required maxlength="100" />
+        <input type="text" :id="`input17`" :name="`input17`" placeholder="Optional placeholder text" required maxlength="100" />
         <span>Optional helper text</span>
         
       </div>
@@ -468,12 +468,12 @@
           <pre><code class="html">{{`<div>
   <label for="input">Input field label</label>
   <span class="prefix fa-solid fa-envelope"></span>
-  <input type="text" id="input" name="input" placeholder="Optional placheolder text" required="" />
+  <input type="text" id="input" name="input" placeholder="Optional placeholder text" required="" />
 </div>
 
 <label>
   Input field label
-  <div><span class="prefix fa-solid fa-envelope"></span><input type="text" name="input" placeholder="Optional placheolder text" required="" /></div>
+  <div><span class="prefix fa-solid fa-envelope"></span><input type="text" name="input" placeholder="Optional placeholder text" required="" /></div>
 </label>`}}</code></pre>
         </details>
         <details>

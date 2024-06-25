@@ -30,7 +30,7 @@
           <td><strong>Optional</strong>: Banners remain until dismissed by the user, or if the state that caused the banner is resolved</td>
         </tr>
         <tr>
-          <td><a href="/components/modal">Modal</a></td>
+          <td><a href="/dialogs/modal">Modal</a></td>
           <td>High priority</td>
           <td><strong>Required</strong>: Modals block app usage until the user takes a dialog action or exits the dialog (if available)</td>
         </tr>
