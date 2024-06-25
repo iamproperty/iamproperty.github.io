@@ -26,8 +26,8 @@ class iamInlineEdit extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     
     <slot></slot>
-    <div class="btns">
-      <button class="btn btn-action" id="save" part="save-btn"><i class="fa-regular fa-save m-0"></i> Save</button><button class="btn btn-action" id="cancel">Cancel</button>
+    <div class="btns" part="btns">
+      <button class="btn btn-action" id="save" part="save-btn"><i class="fa-regular fa-save m-0"></i> Save</button><button class="btn btn-action" id="cancel" part="cancel-btn">Cancel</button>
     </div>
     <div class="status pe-none" part="status">
       <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="saving"><i class="fa-regular fa-spinner fa-spin me-1"></i> Saving...</span>
