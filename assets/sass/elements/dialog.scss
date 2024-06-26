@@ -12,7 +12,7 @@ dialog[open] {
   --dialog-padding: #{rem(24)};
 
   --mh-padding-inline: var(--dialog-padding);
-
+  color: inherit;
   width: fit-content;
   height: fit-content;  
   border: none;

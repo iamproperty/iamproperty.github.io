@@ -33,6 +33,8 @@ class iamFileupload extends HTMLElement {
       <hr/>
       <slot></slot>
       <div class="files" part="files"><slot name="files"></slot></div>
+      <span class="invalid-feedback ext">Some files did not match the accpeted extension type.</span>
+      <span class="invalid-feedback size">Some files Were too large to upload.</span>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -51,6 +53,30 @@ class iamFileupload extends HTMLElement {
 
     fileupload(this,wrapper);
   }
+
+  
+  static get observedAttributes() {
+    return ["data-filename"];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal) {
+
+    switch (attrName) {
+      case "data-filename": {
+        if(oldVal != newVal){
+
+          const filesWrapper = this.shadowRoot.querySelector('.files');
+          
+          filesWrapper.innerHTML = `<span class="file">${newVal} <button data-file="${newVal}">Remove</button></span>`;
+
+        }
+        break;
+      }
+    }
+  }
+
+
+  
 }
 
 export default iamFileupload;

@@ -5,6 +5,8 @@ function fileupload(fileupload: Element, wrapper: Element) {
   const dropArea = wrapper.querySelector('.drop-area');
   const input = fileupload.querySelector('input');
   const maxSize = fileupload.hasAttribute('data-maxsize') ? fileupload.getAttribute('data-maxsize') : 0;
+  const errorMsgSize = wrapper.querySelector('.invalid-feedback.size');
+  const errorMsgExt = wrapper.querySelector('.invalid-feedback.ext');
 
   // We clone the input field to work as a buffer input field, this allows us to add new files without losing the old ones
   const cloneInput = input.cloneNode();
@@ -17,7 +19,7 @@ function fileupload(fileupload: Element, wrapper: Element) {
       const button = event.target.closest('.btn-primary');
 
       // If the input allows multiples then use the buffer clone input
-      const inputTrigger = input.hasAttribute('multiple') ? cloneInput : input;
+      const inputTrigger = cloneInput;
 
       inputTrigger.click();
     }
@@ -56,33 +58,54 @@ function fileupload(fileupload: Element, wrapper: Element) {
     }
   });
 
+
+  let checkFileExt = function(filename){
+
+    if(!input.hasAttribute('accept'))
+      return true;
+
+    const nameExtension = filename.split('.').pop();
+    const acceptedTypes = input.getAttribute('accept');
+
+    if(acceptedTypes.includes(nameExtension))
+      return true;
+  
+    return false;
+  }
+
   // Buffer input change event
   cloneInput.addEventListener('change', (event) => {
 
-    if(input.hasAttribute('multiple')){
-      const filesArray = [...input.files, ...cloneInput.files];
-      
-      let fileNames = [];
+    errorMsgExt.classList.remove('d-block');
+    errorMsgSize.classList.remove('d-block');
+    const filesArray = [...input.files, ...cloneInput.files];
+    
+    let fileNames = [];
 
-      const dt = new DataTransfer();
+    const dt = new DataTransfer();
 
-      for (let i = 0; i < filesArray.length; i++) {
-        const file = filesArray[i]
+    for (let i = 0; i < filesArray.length; i++) {
+      const file = filesArray[i]
 
-        const size = file.size/1000;
+      const size = file.size/1000;
 
-        if(!fileNames.includes(file.name) && (maxSize == 0 || size < maxSize))
-          dt.items.add(file) // here you exclude the file. thus removing it.
+      if(!fileNames.includes(file.name) && (maxSize == 0 || size < maxSize) && checkFileExt(file.name))
+        dt.items.add(file) // here you exclude the file. thus removing it.
 
-        fileNames.push(file.name);
+
+      if(!checkFileExt(file.name)){
+        errorMsgExt.classList.add('d-block');
       }
 
-      input.files = dt.files;
+      if(size > maxSize){
+        errorMsgSize.classList.add('d-block');
+      }
+
+
+      fileNames.push(file.name);
     }
-    else {
-      
-      input.files = cloneInput.files;
-    }
+
+    input.files = dt.files;
     
     const changeEvent = new Event('change');
     input.dispatchEvent(changeEvent);
@@ -118,6 +141,8 @@ function fileupload(fileupload: Element, wrapper: Element) {
 
   if(fileupload.hasAttribute('data-filename')){
     
+    filesWrapper.innerHTML = '';
+
     let filename = fileupload.getAttribute('data-filename');
 
     if(filename)
