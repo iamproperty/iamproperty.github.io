@@ -5,10 +5,14 @@
 
 // #region container
 .container {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: var(--container-padding);
+
+  
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--container-padding);
+  
+    grid-column: container!important;
   width: 100%;
 
   &:not(.container-fluid) {

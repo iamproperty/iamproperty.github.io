@@ -8,6 +8,7 @@
 @include layer('reset') {
   @import "foundations/root.scss";
   @import "foundations/reboot.scss";
+  @import "foundations/grid.scss";
 }
 
 @include layer('elements') {

@@ -6,16 +6,14 @@
     </Header>
     
 
-    <div class="row row-cols-1 row-cols-md-3">
+    <div class="cols-1 cols-md-3">
 
-      <div v-for="item in items">
-        <a :href="item.link">
-          <Card>
-            {{ item.title }}
-            <span v-html="item.content"></span>
-          </Card>
-        </a>
-      </div>
+      <a v-for="item in items" :href="item.link">
+        <Card>
+          {{ item.title }}
+          <span v-html="item.content"></span>
+        </Card>
+      </a>
     </div>
 
   </main>

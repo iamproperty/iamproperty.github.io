@@ -49,7 +49,7 @@ const version = pkg.version;
 
   <router-view></router-view>
 
-  <footer class="bg-primary">
+  <footer class="bg-primary mb-0">
     <div class="container pt-4 d-print-none">
       <ul class="list-unstyled list-inline ms-auto d-block mb-0">
         <li class="list-inline-item me-4 ms-0 mb-2"><a href="/brand-guidelines.pdf" target="_blank" download>Brand guidelines</a></li>

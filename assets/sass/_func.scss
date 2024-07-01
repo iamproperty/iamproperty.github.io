@@ -11,6 +11,8 @@ $varsMD: ()!default;
 
 $prefix: '';
 
+$enable-new-grid: true;
+
 @import "_functions/functions";
 @import "_functions/variables";
 @import "_functions/mixins";

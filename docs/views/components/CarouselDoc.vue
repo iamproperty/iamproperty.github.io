@@ -9,7 +9,7 @@
     </div>
     <Carousel class="visualtest" btntype="link" :smcols="2" :mdcols="4">
     
-      <div :class="`row row-cols-1 row-cols-sm-2 row-cols-md-3`">
+      <div :class="`row row-cols-1 row-cols-sm-2 row-cols-md-4`">
         <div :class="`col carousel__item`" v-for="(value,index) in items" :key="index" v-html="content(value)" :id="'carousel'+id+'slide'+(index+1)"></div>
       </div>
     
