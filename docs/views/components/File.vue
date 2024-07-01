@@ -1,3 +1,10 @@
+<script setup lang="ts">
+
+function filesupload($event){
+  console.log($event);
+}
+
+</script>
 <template>
   <main>
     
@@ -18,7 +25,7 @@
     </div>
 
     <div class="container visualtest">
-      <FileUpload data-maxsize="500"><input type="file" name="files[]" multiple="multiple" accept=".pdf, .csv, .jpg, .png" /></FileUpload>
+      <FileUpload data-maxsize="500" @elementchange="($event) => { filesupload($event)}" @empty="($event) => { filesupload($event)}"><input @change="($event) => { filesupload($event)}" type="file" name="files[]" accept=".pdf, .csv, .jpg, .png" multiple="multiple" /></FileUpload>
     </div>
 
 
@@ -143,7 +150,7 @@
 </template>
 
 
-<script>
+<script lang="ts">
 import DSHeader from '../DSHeader.vue';
 import headerImg from '../../img/type-header.png';
 import anatomy from '../../img/file-upload-anatomy.png';

@@ -12,6 +12,20 @@ function fileupload(fileupload: Element, wrapper: Element) {
   const cloneInput = input.cloneNode();
   dropArea.append(cloneInput);
 
+  let checkFileExt = function(filename){
+
+    if(!input.hasAttribute('accept'))
+      return true;
+
+    const nameExtension = filename.split('.').pop();
+    const acceptedTypes = input.getAttribute('accept');
+
+    if(acceptedTypes.includes(nameExtension))
+      return true;
+  
+    return false;
+  }
+
   wrapper.addEventListener('click', (event) => {
 
     if (event && event.target instanceof HTMLElement && event.target.closest('.btn-primary')){
@@ -19,7 +33,10 @@ function fileupload(fileupload: Element, wrapper: Element) {
       const button = event.target.closest('.btn-primary');
 
       // If the input allows multiples then use the buffer clone input
-      const inputTrigger = cloneInput;
+      
+      errorMsgExt.classList.remove('d-block');
+      errorMsgSize.classList.remove('d-block');
+      const inputTrigger = input.hasAttribute('multiple') ? cloneInput : input;
 
       inputTrigger.click();
     }
@@ -28,7 +45,6 @@ function fileupload(fileupload: Element, wrapper: Element) {
   wrapper.addEventListener('click', (event) => {
 
     if (event && event.target instanceof HTMLElement && event.target.closest('.files button')){
-
 
       const dt = new DataTransfer();
       const { files } = input;
@@ -44,74 +60,51 @@ function fileupload(fileupload: Element, wrapper: Element) {
       
       input.files = dt.files // Assign the updates list
 
-
-      if(input.files.length == 0){
-        const emptyEvent = new Event('empty');
-        fileupload.dispatchEvent(emptyEvent);
-      }
-
       const changeEvent = new Event('change');
       input.dispatchEvent(changeEvent);
-      
-      const elementChangeEvent = new Event('elementChange');
-      fileupload.dispatchEvent(elementChangeEvent);
     }
   });
-
-
-  let checkFileExt = function(filename){
-
-    if(!input.hasAttribute('accept'))
-      return true;
-
-    const nameExtension = filename.split('.').pop();
-    const acceptedTypes = input.getAttribute('accept');
-
-    if(acceptedTypes.includes(nameExtension))
-      return true;
-  
-    return false;
-  }
 
   // Buffer input change event
   cloneInput.addEventListener('change', (event) => {
 
-    errorMsgExt.classList.remove('d-block');
-    errorMsgSize.classList.remove('d-block');
-    const filesArray = [...input.files, ...cloneInput.files];
-    
-    let fileNames = [];
+    if(input.hasAttribute('multiple')){
 
-    const dt = new DataTransfer();
+      const filesArray = [...input.files, ...cloneInput.files];
+      
+      let fileNames = [];
 
-    for (let i = 0; i < filesArray.length; i++) {
-      const file = filesArray[i]
+      const dt = new DataTransfer();
 
-      const size = file.size/1000;
+      for (let i = 0; i < filesArray.length; i++) {
+        const file = filesArray[i]
 
-      if(!fileNames.includes(file.name) && (maxSize == 0 || size < maxSize) && checkFileExt(file.name))
-        dt.items.add(file) // here you exclude the file. thus removing it.
+        const size = file.size/1000;
 
+        if(!fileNames.includes(file.name) && (maxSize == 0 || size < maxSize) && checkFileExt(file.name))
+          dt.items.add(file) // here you exclude the file. thus removing it.
+  
+  
+        if(!checkFileExt(file.name)){
+          errorMsgExt.classList.add('d-block');
+        }
+  
+        if(size > maxSize){
+          errorMsgSize.classList.add('d-block');
+        }
 
-      if(!checkFileExt(file.name)){
-        errorMsgExt.classList.add('d-block');
+        fileNames.push(file.name);
       }
 
-      if(size > maxSize){
-        errorMsgSize.classList.add('d-block');
-      }
-
-
-      fileNames.push(file.name);
+      input.files = dt.files;
+    }
+    else {
+      
+      input.files = cloneInput.files;
     }
 
-    input.files = dt.files;
-    
     const changeEvent = new Event('change');
     input.dispatchEvent(changeEvent);
-
-    const elementChangeEvent = new Event('elementChange');
-    fileupload.dispatchEvent(elementChangeEvent);
   });
 
 
@@ -132,23 +125,49 @@ function fileupload(fileupload: Element, wrapper: Element) {
 
   input.addEventListener('change', (event) => {
 
+    if(input.files.length == 1) {
+
+      let file = input.files[0];
+
+      const size = file.size/1000;
+
+      if(!checkFileExt(file.name)){
+        errorMsgExt.classList.add('d-block');
+
+        const dt = new DataTransfer();
+        input.files = dt.files;
+      }
+      if(size > maxSize){
+        errorMsgSize.classList.add('d-block');
+
+        const dt = new DataTransfer();
+        input.files = dt.files;
+      }
+    }
+    
     // Reset
     filesWrapper.innerHTML = '';
 
-    for (const file of input.files)
+    for (const file of input.files){
       filesWrapper.innerHTML += `<span class="file">${file.name} <button data-file="${file.name}">Remove</button></span>`;
+    }
+
+    const elementChangeEvent = new CustomEvent('elementchange', {detail: {"files": input.files}});
+    fileupload.dispatchEvent(elementChangeEvent);
+
+    if(input.files.length == 0){
+      const emptyEvent = new CustomEvent('empty');
+      fileupload.dispatchEvent(emptyEvent);
+    }
   });
 
   if(fileupload.hasAttribute('data-filename')){
     
-    filesWrapper.innerHTML = '';
-
     let filename = fileupload.getAttribute('data-filename');
 
     if(filename)
       filesWrapper.innerHTML += `<span class="file">${filename} <button data-file="${filename}">Remove</button></span>`;
   }
-
 }
 
 export default fileupload;
