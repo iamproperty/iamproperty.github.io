@@ -60,6 +60,7 @@ class iamAddressLookup extends HTMLElement {
 
 	async connectedCallback() {
 
+    const component = this;
     const wrapper = this.shadowRoot.querySelector('.wrapper');
     const lookup = this.shadowRoot.querySelector('[name="postcode"]');
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
@@ -268,17 +269,24 @@ class iamAddressLookup extends HTMLElement {
             else {
               let values = JSON.stringify(address);
 
-              let itemString = '';
+              if(component.hasAttribute('data-display-text')){
 
-              for (const [key, value] of Object.entries(address)) {
+                listString += `<option value="${address[component.getAttribute('data-display-text')]}, ${postcode}" data-values='${values}'></option>`;
+              }
+              else {
 
-                if(key == "address_number_name")
-                  itemString += `${value} `;
-                else if(key != "postcode" && key != "address_title")
-                  itemString += `${value}${(/^-?\d+$/.test(value)?'':',')} `;
+                let itemString = '';
+                for (const [key, value] of Object.entries(address)) {
+
+                  if(key == "address_number_name")
+                    itemString += `${value} `;
+                  else if(key != "postcode" && key != "address_title")
+                    itemString += `${value}${(/^-?\d+$/.test(value)?'':',')} `;
+                }
+                
+                listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
               }
               
-              listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
             }
 
 
