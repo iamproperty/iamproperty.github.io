@@ -343,7 +343,7 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
 
 // #region word counter
 
-input[maxlength] + span {
+:is(input,textarea)[maxlength] + span {
 
   position: relative;
 
