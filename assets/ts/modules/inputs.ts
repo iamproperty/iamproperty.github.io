@@ -5,7 +5,7 @@ const extendInputs = (body) => {
 
   function loadInput(){
     // maxlength counter init
-    Array.from(document.querySelectorAll('input[maxlength]')).forEach((input,index) => {
+    Array.from(document.querySelectorAll('input[maxlength],textarea[maxlength]')).forEach((input,index) => {
       let wrapper = input.parentElement;
       setMaxlengthVars(input,wrapper);
     });

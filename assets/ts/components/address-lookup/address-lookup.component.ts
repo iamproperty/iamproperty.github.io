@@ -48,6 +48,7 @@ class iamAddressLookup extends HTMLElement {
       <div class="manual-address pb-2 js-hide">
         <slot></slot>
         <button class="btn btn-tertiary switch-to-lookup-btn" type="button">Use postcode lookup</button>
+        <slot name="after"></slot>
       </div>
       <div class="pre-filled pb-2 js-hide">
         <strong class="title text-primary d-block"></strong>
@@ -60,6 +61,7 @@ class iamAddressLookup extends HTMLElement {
 
 	async connectedCallback() {
 
+    const component = this;
     const wrapper = this.shadowRoot.querySelector('.wrapper');
     const lookup = this.shadowRoot.querySelector('[name="postcode"]');
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
@@ -202,14 +204,19 @@ class iamAddressLookup extends HTMLElement {
           Object.keys(values).forEach((key, index) => {
 
             let value = values[key];
-            if(this.querySelector(`[data-name="${key}"]`))
+            if(this.querySelector(`[data-name="${key}"]`) && value != '')
               this.querySelector(`[data-name="${key}"]`).value = value;
-            else if(this.querySelector(`[name="${key}"]`))
+            else if(this.querySelector(`[data-name-alt="${key}"]`) && value != '')
+              this.querySelector(`[data-name-alt="${key}"]`).value = value;
+            else if(this.querySelector(`[name="${key}"]`) && value != '')
               this.querySelector(`[name="${key}"]`).value = value;
+            
+            if(this.querySelector(`[data-name-2="${key}"]`))
+              this.querySelector(`[data-name-2="${key}"]`).value += ' '+value;
           });
 
           // Focus on first input
-          this.querySelector('[data-name="address_1"]').focus();
+          this.querySelector('[name]').focus();
 
           Array.from(this.querySelectorAll('[data-required]')).forEach((input, index) => {
             input.setAttribute('required','true');
@@ -268,17 +275,24 @@ class iamAddressLookup extends HTMLElement {
             else {
               let values = JSON.stringify(address);
 
-              let itemString = '';
+              if(component.hasAttribute('data-display-text')){
 
-              for (const [key, value] of Object.entries(address)) {
+                listString += `<option value="${address[component.getAttribute('data-display-text')]}, ${postcode}" data-values='${values}'></option>`;
+              }
+              else {
 
-                if(key == "address_number_name")
-                  itemString += `${value} `;
-                else if(key != "postcode" && key != "address_title")
-                  itemString += `${value}${(/^-?\d+$/.test(value)?'':',')} `;
+                let itemString = '';
+                for (const [key, value] of Object.entries(address)) {
+
+                  if(key == "address_number_name")
+                    itemString += `${value} `;
+                  else if(key != "postcode" && key != "address_title")
+                    itemString += `${value}${(/^-?\d+$/.test(value)?'':',')} `;
+                }
+                
+                listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
               }
               
-              listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
             }
 
 

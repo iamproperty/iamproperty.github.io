@@ -281,6 +281,13 @@
         <span>Optional helper text</span>
         
       </div>
+      <div>
+        <label :for="`input17`">Input field label</label>
+        <textarea :id="`input17a`" :name="`input17a`" placeholder="Optional placeholder text" required maxlength="150" ></textarea>
+
+        <span>Optional helper text</span>
+        
+      </div>
     </div>
 
 
