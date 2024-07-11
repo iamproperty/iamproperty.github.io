@@ -50,16 +50,6 @@
     max-width: rem(400)!important;
     position: relative;
 
-
-
-    
-    @include dark-mode() {
-
-      background: var(--colour-canvas-2);
-      border-color: var(--colour-canvas-2);
-      color: var(--colour-body);
-    }
-
     
     @media (forced-colors: active) {
 

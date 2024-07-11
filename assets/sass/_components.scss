@@ -81,3 +81,13 @@ iam-table {
     }
   }
 }
+
+
+iam-fileupload::part(file) {
+  @include dark-mode() {
+
+    background: var(--colour-canvas-2);
+    border-color: var(--colour-canvas-2);
+    color: var(--colour-body);
+  }
+}
