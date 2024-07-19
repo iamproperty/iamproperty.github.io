@@ -82,6 +82,10 @@ iam-table {
   }
 }
 
+iam-pagination {
+  --pagination-link-color: var(--colour-light);
+  --pagination-link-color-active: #E0E0E0;
+}
 
 iam-fileupload::part(file) {
   @include dark-mode() {
