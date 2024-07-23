@@ -1,6 +1,6 @@
 <template>
   <!-- Custom element -->
-  <iam-carousel>
+  <iam-carousel :data-thumbnails="JSON.stringify(thumbnails)">
     
     <slot></slot>
   </iam-carousel>
@@ -19,6 +19,10 @@ export default {
     image: {
       type: String,
       required: false
+    },
+    thumbnails: {
+      type: Array, 
+      default: () => []
     }
   },
   mounted(){

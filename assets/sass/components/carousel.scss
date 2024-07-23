@@ -130,18 +130,35 @@
 
 // #region carousel controls/pips
 .carousel .carousel__controls {
-
-  text-align: center;
-  width: 10rem;
-  max-height: 1rem;
   overflow: hidden;
   margin-inline: auto;
     
+  &:not(.thumbnails){
+    max-height: 1rem;
+    width: 10rem;
+    text-align: center;
+  }
+
+  &.thumbnails {
+    margin-block-start: 2rem;
+  }
+
   @include media-breakpoint-up(sm) {
     width: 100%;
   }
 
   button {
+    padding: 0;
+    margin: 0 0.2rem 0.2rem;
+    border: 3px solid var(--colour-canvas);
+    border-radius: 4px;
+
+    &.has-thumbnail {
+      max-width: 7rem;
+    }
+  }
+
+  button:not(.has-thumbnail) {
     width: 1rem;
     height: 1rem;
     min-height: 1rem;
@@ -149,10 +166,9 @@
     text-indent: -50rem;
     overflow: hidden;
     background: var(--colour-primary-theme);
-    padding: 0;
     margin: 0 0.5rem 0.5rem 0.5rem;
     border: none;
-
+    
     &:before {
       display: none;
     }
@@ -164,8 +180,12 @@
 }
 
 .carousel__controls > button[aria-current] {
+  --colour-active-thumbnail: var(--colour-info); 
+  border-color: var(--colour-active-thumbnail);
 
-  background: var(--colour-success);
+  &:not(.has-thumbnail) {
+    background: var(--colour-success);
+  }
 }
 
 // #endregion

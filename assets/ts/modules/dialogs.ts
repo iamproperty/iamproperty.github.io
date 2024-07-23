@@ -72,6 +72,14 @@ const extendDialogs = (body) => {
         btnElement.classList.remove('active');
       });
 
+      let closeEvent = new CustomEvent('dialog-closed', {
+        bubbles: true,
+        cancelable: true,
+        detail: { modalId: dialog.id }
+      });
+
+      event.target.dispatchEvent(closeEvent);
+
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
         "event": "closeModal",
