@@ -109,6 +109,11 @@
       
     </div>
 
+    <div class="container">
+      <h3>Custom Events</h3>
+      <p>On closing a modal, the 'dialog-closed' cutom event will be dispatched. It will send an object with the modal ID in it as the detail.</p>
+    </div>
+
     <NonModelDesc></NonModelDesc>
 
     <div class="container pt-5 pb-5">
