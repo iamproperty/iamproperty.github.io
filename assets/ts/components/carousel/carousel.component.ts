@@ -75,7 +75,7 @@ class iamCarousel extends HTMLElement {
 
       if(thumbnailImages.length){
         pipClass = 'has-thumbnail';
-        pipContent = `<img src="${thumbnailImages[i - 1].src}" alt="Slide ${i}" height="74"/>`;
+        pipContent = `<img src="${thumbnailImages[i - 1].src}" alt="Slide ${i}" height="148"/>`;
       } else {
         pipContent = `Slide ${i}`;
       }

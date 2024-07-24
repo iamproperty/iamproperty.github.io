@@ -154,7 +154,12 @@
     border-radius: 4px;
 
     &.has-thumbnail {
-      max-width: 7rem;
+      height: 4.625rem;
+
+      img {
+        height: 100%;
+        width: auto;
+      }
     }
   }
 

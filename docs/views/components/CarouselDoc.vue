@@ -164,10 +164,10 @@ export default {
                 src: 'https://place-hold.it/111x74'
             },
             {
-                src: 'https://place-hold.it/111x74'
+                src: 'https://place-hold.it/50x74'
             },
             {
-                src: 'https://place-hold.it/111x74'
+                src: 'https://place-hold.it/60x74'
             }, 
             {
                 src: 'https://place-hold.it/111x74'
