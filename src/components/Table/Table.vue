@@ -52,7 +52,7 @@ export default {
         console.log(err.message);
       });
 
-      import(`../../../assets/js/components/pagination/pagination.component.min.js`).then(module => {
+      import(`../../../assets/js/components/pagination/pagination.component.js`).then(module => {
 
         if (!window.customElements.get(`iam-pagination`))
           window.customElements.define(`iam-pagination`, module.default);
