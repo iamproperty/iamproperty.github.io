@@ -166,7 +166,7 @@ function fileupload(fileupload: Element, wrapper: Element) {
     let filename = fileupload.getAttribute('data-filename');
 
     if(filename)
-      filesWrapper.innerHTML += `<span class="file">${filename} <button data-file="${filename}">Remove</button></span>`;
+      filesWrapper.innerHTML = `<span class="file">${filename} <button data-file="${filename}">Remove</button></span>`;
   }
 }
 
