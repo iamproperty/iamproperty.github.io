@@ -16,14 +16,19 @@ function carousel(carouselElement, row) {
       let scrollWidth = carouselInner.scrollWidth;
       let scrollLeft = carouselInner.scrollLeft;
       let targetSlide = Math.round((scrollLeft / scrollWidth) * itemCount) + 1;
-      let lastItemOffset = row.querySelector(':scope > .col:last-child').offsetLeft - 50;
+     
       let itemWidth = row.querySelector(':scope > .col').scrollWidth;
+      let lastItemOffset = row.querySelector(':scope > .col:last-child').offsetLeft;
+      let lastItemInView = carouselInner.scrollLeft + scrollArea >= (lastItemOffset + 100);
+
       let visibleItems = Math.round(scrollArea / itemWidth);
 
-      if(carouselInner.scrollLeft + scrollArea >= lastItemOffset){
+      //Check if theres room for more slides than we have
+      let leftOverSpace = (Math.round(itemCount / visibleItems) * visibleItems) - itemCount;
 
+      if(leftOverSpace > 0 && lastItemInView){
         targetSlide = (Math.floor(itemCount / visibleItems) * visibleItems) + 1;
-      }
+      } 
       
       Array.from(carouselElement.querySelectorAll('.carousel__controls button')).forEach((button, index) => {
         button.removeAttribute('aria-current');
@@ -38,7 +43,7 @@ function carousel(carouselElement, row) {
         carouselElement.querySelector('.btn-prev').removeAttribute('disabled');
 
       // Disable the next button if the last item is in view
-      if(targetSlide == itemCount)
+      if(targetSlide > (itemCount - visibleItems))
         carouselElement.querySelector('.btn-next').setAttribute('disabled','disabled');
       else
         carouselElement.querySelector('.btn-next').removeAttribute('disabled');
