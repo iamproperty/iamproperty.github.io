@@ -24,7 +24,7 @@ function carousel(carouselElement, row) {
       let visibleItems = Math.round(scrollArea / itemWidth);
 
       //Check if theres room for more slides than we have
-      let leftOverSpace = (Math.round(itemCount / visibleItems) * visibleItems) - itemCount;
+      let leftOverSpace = (Math.ceil(itemCount / visibleItems) * visibleItems) - itemCount;
 
       if(leftOverSpace > 0 && lastItemInView){
         targetSlide = (Math.floor(itemCount / visibleItems) * visibleItems) + 1;
@@ -80,11 +80,25 @@ function carousel(carouselElement, row) {
   
   carouselElement.addEventListener('click', function(e){
 
+    let scrollArea = carouselInner.clientWidth;
+    let scrollWidth = carouselInner.scrollWidth;
+    let itemWidth = row.querySelector(':scope > .col').scrollWidth;
+
+    let visibleItems = Math.round(scrollArea / itemWidth);
+
+    let lastItemOffset = row.querySelector(':scope > .col:last-child').offsetLeft;
+    let lastItemInView = carouselInner.scrollLeft + scrollArea >= (lastItemOffset + 100);
+
+    //Check if theres room for more slides than we have
+    let leftOverSpace = (Math.ceil(itemCount / visibleItems) * visibleItems) - itemCount;
+
+    let movement = lastItemInView && leftOverSpace > 0 ? leftOverSpace * itemWidth : carouselInner.clientWidth;
+
     for (var target = e.target; target && target != this; target = target.parentNode) {
       if (typeof target.matches == "function" && target.matches('.btn-next, .btn-prev')) {
         
         e.preventDefault();
-        let scrollTo = target.classList.contains('btn-prev') ? carouselInner.scrollLeft - carouselInner.clientWidth : carouselInner.scrollLeft + carouselInner.clientWidth;
+        let scrollTo = target.classList.contains('btn-prev') ? carouselInner.scrollLeft - movement : carouselInner.scrollLeft + carouselInner.clientWidth;
         
         carouselInner.scroll({
           top: 0,
