@@ -44,7 +44,6 @@
       <h2>Vue Card component reference</h2>
       <Readme></Readme>
     </div>
-    
   </main>
 </template>
 
@@ -134,40 +133,7 @@ export default {
         },
         {
           content: `<span class="h2">Item 12</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },{
-          content: `<span class="h2">Item 13</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 14</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 15</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 16</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 17</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 18</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 19</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 20</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 21</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 22</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 23</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
- 
+        }
       ],
       thumbnailCarouselItems: [
             {
