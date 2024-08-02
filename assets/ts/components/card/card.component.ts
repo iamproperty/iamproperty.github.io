@@ -58,14 +58,21 @@ class iamCard extends HTMLElement {
   }
 
 	connectedCallback() {
-
     this.classList.add('loaded');
-    
+
     // Mimic clicking the parent node so the focus and target events can be on the card
     const parentNode = this.parentNode.closest('a, button, label, router-link')
     const card = this.shadowRoot.querySelector('.card')
     const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
     const recordType = this.hasAttribute('data-record') ? this.getAttribute('data-record') : '';
+
+    /* 
+      If the parentNode is actually just a div, 
+      we don't want to look for anything or add events 
+    */
+    if (!parentNode) {
+      return false;
+    }
 
     if(parentNode)
       parentNode.setAttribute('tabindex','-1');
