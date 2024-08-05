@@ -33,21 +33,7 @@ class iamCard extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="card ${classList}" tabindex="0" part="card">
-    ${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
-      <div class="card__body" part="body">
-      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
-      ${!this.hasAttribute('data-image') && !this.hasAttribute('data-record') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
-      ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
-        <slot></slot>
-      ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
-      </div>
-      ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
-      <slot name="checkbox"></slot>
-      <div class="card__footer" part="footer">
-        <slot name="footer"></slot>
-        <slot name="btns"></slot>
-        ${this.hasAttribute('data-cta') ? `<span class="link d-inline-block pt-0 mb-0">${this.getAttribute('data-cta')}</span>` : ''}
-      </div>
+      ${this.createCardConent()}
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -55,6 +41,25 @@ class iamCard extends HTMLElement {
     // insert extra CSS
     if(!document.getElementById('cardGlobal'))
       document.head.insertAdjacentHTML('beforeend',`<style id="cardGlobal">${loadExtraCSS}</style>`);
+  }
+
+  const createCardConent () {
+
+    return `${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
+    <div class="card__body" part="body">
+    ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
+    ${!this.hasAttribute('data-image') && !this.hasAttribute('data-record') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
+    ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
+      <slot></slot>
+    ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
+    </div>
+    ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
+    <slot name="checkbox"></slot>
+    <div class="card__footer" part="footer">
+      <slot name="footer"></slot>
+      <slot name="btns"></slot>
+      ${this.hasAttribute('data-cta') ? `<span class="link d-inline-block pt-0 mb-0">${this.getAttribute('data-cta')}</span>` : ''}
+    </div>`;
   }
 
 	connectedCallback() {
@@ -189,7 +194,7 @@ class iamCard extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["data-total","class"];
+    return ["data-total","class","data-image"];
   }
   
   attributeChangedCallback(attrName, oldVal, newVal) {
@@ -200,12 +205,26 @@ class iamCard extends HTMLElement {
         break;
       }
       case "class": {
-        let classList = this.classList.toString();
-            
-        if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
-          classList += ' card--has-icon';
 
-        this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);
+        if(oldVal != newVal){
+          let classList = this.classList.toString();
+              
+          if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
+            classList += ' card--has-icon';
+
+          this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);
+
+          this.shadowRoot.querySelector('.card').innerHTML = this.createCardConent();
+        }
+
+        break;
+      }
+      case "data-image": {
+
+        if(oldVal != newVal){
+
+          this.shadowRoot.querySelector('.card').innerHTML = this.createCardConent();
+        }
         break;
       }
     }
