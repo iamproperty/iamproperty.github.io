@@ -7,6 +7,10 @@ input[name="postcode"] {
   border-color: var(--error-border,var(--colour-primary))!important;
 }
 
+:is([name="postcode"]):is(:focus,.focus):not(:disabled) {
+  border-color: var(--colour-info)!important;
+}
+
 div:has(input[name="postcode"]) .suffix {
 
   border-color: var(--error-border,var(--colour-primary))!important;
