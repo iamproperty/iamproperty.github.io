@@ -19,7 +19,8 @@ function carousel(carouselElement, row) {
      
       let itemWidth = row.querySelector(':scope > .col').scrollWidth;
       let lastItemOffset = row.querySelector(':scope > .col:last-child').offsetLeft;
-      let lastItemInView = carouselInner.scrollLeft + scrollArea >= (lastItemOffset + 100);
+      //+60px here is to account for when the next offscreen slide is visible beneath the next arrow
+      let lastItemInView = carouselInner.scrollLeft + scrollArea + carouselInner.getBoundingClientRect().left >= (lastItemOffset + 60);
 
       let visibleItems = Math.round(scrollArea / itemWidth);
 
@@ -69,7 +70,7 @@ function carousel(carouselElement, row) {
 
         carouselInner.scroll({
           top: 0,
-          left: el.offsetLeft - 100, 
+          left: el.offsetLeft - carouselInner.getBoundingClientRect().left, 
           behavior: 'smooth'
         });
 
@@ -87,12 +88,19 @@ function carousel(carouselElement, row) {
     let visibleItems = Math.round(scrollArea / itemWidth);
 
     let lastItemOffset = row.querySelector(':scope > .col:last-child').offsetLeft;
-    let lastItemInView = carouselInner.scrollLeft + scrollArea >= (lastItemOffset + 100);
+    let lastItemInView = carouselInner.scrollLeft + scrollArea + carouselInner.getBoundingClientRect().left >= (lastItemOffset + 60);
 
     //Check if theres room for more slides than we have
     let leftOverSpace = (Math.ceil(itemCount / visibleItems) * visibleItems) - itemCount;
 
-    let movement = lastItemInView && leftOverSpace > 0 ? leftOverSpace * itemWidth : carouselInner.clientWidth;
+    /* 
+      When the last slide isn't filled with items, we only want to move back the number of items on the slide, 
+      rather than the total number of possible visible items
+    */
+    let spacesToMove = visibleItems - leftOverSpace;
+
+    //Only want to change the amount of movement if the last item is visible
+    let movement = lastItemInView && leftOverSpace > 0 ? spacesToMove * itemWidth : carouselInner.clientWidth;
 
     for (var target = e.target; target && target != this; target = target.parentNode) {
       if (typeof target.matches == "function" && target.matches('.btn-next, .btn-prev')) {
