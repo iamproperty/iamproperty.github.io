@@ -219,6 +219,24 @@
         </Tab>
       </Tabs>
     </div>
+
+    <div class="container">
+      <h2>Admin panel with actions in the header</h2>
+      <p>
+        Instead of a heading element (h2 etc.) as the first child of admin-panel, you can add 
+        a div with a class of 'heading'. The header element inside this div will still be styled as usual. 
+        But you can also add additional content, such as action buttons in the heading div.
+      </p>
+      
+      <div class="admin-panel">
+        <div class="heading bg-primary gradient-info" style="display: grid; grid-template-columns: 1fr auto auto;align-items: center;">
+          <h2>Admin panel title</h2>
+          <div class="dialog__wrapper"><button class="btn btn-action">Quick filter</button><dialog class="dialog--list" data-v-7d119115=""><div class="mb-0" data-v-7d119115=""><input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" data-v-7d119115=""><label for="follow-up-oldest" class="radio--tick" data-v-7d119115="">Follow up date (Oldest to newest)</label><hr data-v-7d119115=""><input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest" data-v-7d119115=""><label for="follow-up-newest" class="radio--tick" data-v-7d119115="">Follow up date (Newest to oldest)</label><hr data-v-7d119115=""><input type="radio" name="sort" data-sort="" id="date-instructed-oldest" value="date-instructed-oldest" checked="" autofocus="true" data-v-7d119115=""><label for="date-instructed-oldest" class="radio--tick" data-v-7d119115="">Date Instructed (Oldest to newest)</label><hr data-v-7d119115=""><input type="radio" name="sort" data-sort="" id="date-instructed-newest" value="date-instructed-newest" data-v-7d119115=""><label for="date-instructed-newest" class="radio--tick mb-0" data-v-7d119115="">Date Instructed (Newest to oldest)</label></div></dialog></div>
+          <button class="btn btn-action">Action</button>
+        </div>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit</p>
+      </div>
+    </div>
     
 
     <div class="container">

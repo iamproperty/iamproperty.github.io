@@ -28,7 +28,8 @@
     display: none;
   }
 
-  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child {
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6, .heading):first-child {
     
     --gradient-direction: -90deg!important;
     background-color:var(--colour-success);
@@ -37,15 +38,43 @@
       color: var(--colour-primary-theme);
       background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
     }
-    
-    font-size: rem(18);
-    line-height: rem(24);
-    font-weight: bold;
-    padding: rem(16) var(--padding-x);
+  
     margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
     display: block;
     border-top-left-radius: rem(8);
     border-top-right-radius: rem(8);
+  }
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child,
+  .heading > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
+    font-size: rem(18);
+    line-height: rem(24);
+    font-weight: bold;
+    padding: rem(16) var(--padding-x);
+  }
+
+  .heading {
+    padding: rem(16) var(--padding-x);
+
+    > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
+      padding: 0;
+    }
+
+    .btn {
+      --btn-margin: 1rem;
+      margin-bottom: 0;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .btn-action,
+      .dialog__wrapper {
+        --colour-canvas-2: #FFFFFF;
+        --colour-heading: var(--colour-primary);
+        --colour-btn-action-hover-bg: var(--colour-light);
+        --colour-btn-hover: var(--colour-primary);
+        --colour-border: #D8D8D8;
+      }
+    }
   }
 
   :is(iam-table, .iam-table) {
