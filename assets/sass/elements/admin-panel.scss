@@ -29,7 +29,7 @@
   }
 
 
-  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6, .heading):first-child {
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6, .admin-panel__heading):first-child {
     
     --gradient-direction: -90deg!important;
     background-color:var(--colour-success);
@@ -46,23 +46,32 @@
   }
 
   > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child,
-  .heading > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
+  .admin-panel__heading > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
     font-size: rem(18);
     line-height: rem(24);
     font-weight: bold;
     padding: rem(16) var(--padding-x);
   }
 
-  .heading {
+  > :is(.admin-panel__heading):first-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
     padding: rem(16) var(--padding-x);
 
     > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
       padding: 0;
+      margin-inline-end: auto;
     }
 
     .btn {
-      --btn-margin: 1rem;
-      margin-bottom: 0;
+      --btn-margin: 0;
+    }
+
+    .dialog__wrapper + .btn {
+      --btn-margin: 0.25rem;
+      margin-inline-end: 0;
     }
 
     @media (prefers-color-scheme: light) {
