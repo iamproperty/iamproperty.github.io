@@ -148,6 +148,46 @@
         </Tabs>
     </div>
 
+
+    <div class="container">
+      <h2 class="mt-5">Guided tabs</h2>
+      <p>Adding a <code>.tabs--guided</code> class adds an extra layer of swiping functinality on the tabs content. Alongside this a button is displayed on desktop to navigate it to the next tab with the idea that the user is being guided through the tab content.</p>
+    </div>
+
+    <div class="container visualtest">
+        <Tabs class="tabs--guided">
+          <Tab title="Tab 1">
+            <p class="lead">Tab content 1</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          <Tab title="Tab 2">
+            <p class="lead">Tab content 2</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          <Tab title="Tab 3" >
+            <p class="lead">Tab content 3</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          <Tab title="Tab 4" >
+            <p class="lead">Tab content 4</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          <Tab title="Tab 5" >
+            <p class="lead">Tab content 5</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          <Tab title="Tab 6" >
+            <p class="lead">Tab content 6</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          <Tab title="Tab 7" >
+            <p class="lead">Tab content 7</p>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+          </Tab>
+          
+        </Tabs>
+    </div>
+
     <Tabs class="container">
       <details>
         <summary><h2>Web component</h2></summary>
