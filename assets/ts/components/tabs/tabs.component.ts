@@ -30,11 +30,13 @@ class iamTabs extends HTMLElement {
     
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="tabs">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
+    <div class="tabs" part="tabs">
       <div class="tabs__links__wrapper">
         <div class="tabs__links"></div>
       </div>
       <slot></slot>
+      <button part="next-button" class="btn btn-secondary btn-sm btn-compact fa-regular fa-chevron-right tabs__next">Next</button>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
