@@ -1110,20 +1110,6 @@ const routes = [
       }
     ]
   },
-  { path: '/audit',
-    name: 'Audit',
-    component: () => import('./views/Audit.vue'),
-    searchterms: 'filesize'
-  },
-  {
-    path: '/changelog',
-    component: () => import('./views/Changelog.vue'),
-    name: 'Changelog',
-    meta: {
-      title: 'Changelog | iamkey'
-    },
-    searchterms: 'versions, changes'
-  },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('./views/PageNotFound.vue') }
 ]
 
