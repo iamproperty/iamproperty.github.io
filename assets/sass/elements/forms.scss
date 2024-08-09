@@ -50,6 +50,10 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
   max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) + 4px);
 
+  &:is(textarea) {
+    max-height: 100%
+  }
+
   // Customize the `:focus` state to imitate native WebKit styles.
   &:is(:focus,.focus):not(:disabled) {
     border-color: var(--colour-info);
@@ -79,8 +83,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 }
 
 textarea {
-  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px)!important;
-  max-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * 3) + 4px)!important;
+  --textarea-height-scale: 3;
+  min-height: calc(var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + (var(--input-lh, #{rem(20)}) * var(--textarea-height-scale)) + 4px)!important;
 }
 // #endregion
 
@@ -340,7 +344,7 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
 
 // #region word counter
 
-input[maxlength] + span {
+:is(input,textarea)[maxlength] + span {
 
   position: relative;
 
@@ -825,28 +829,53 @@ div:has(> select){
 
   all: unset;
   font-size: inherit;
+  line-height: inherit;
   background: none;
-  border: none;
+  border: 2px solid transparent;
   display: inline-block;
-  margin: 0;
-  padding: 0 calc(1.25em + 0.8ch) 0 var(--select-padding-left, 0.25em)!important;
-  
+  padding: 0.4em calc(1em + 0.8ch) 0.4rem var(--select-padding-left, 0.4em)!important;
+  font-weight: normal!important;
+  margin: -0.4em 0!important;
+  border-radius: 0.25em;
+
+  color: var(--colour-body);
+
   height: auto;
   cursor: pointer;
+  font-family: var(--font-body)!important;
 
   option {
     background-color: var(--colour-canvas);
     padding-left: 1em;
+    font-size: inherit;
+    line-height: inherit;
   }
 
+  &:hover {
+    
+    //border: none;
+    background: var(--colour-light);
+  }
+  
+  &:is(:focus,.focus):not(:disabled) {
 
-  &:is(:hover,:focus) {
-    outline: 1px solid var(--colour-info);
+    border-color: var(--colour-info);
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
   }
 }
 
 *:has(> .select--minimal){
   position: relative;
+  display: inline-block!important;
+  width: auto!important;
+  font-size: inherit!important;
+  line-height: 1!important;
+
+  padding: 0!important;
+  margin: 0!important;
+
+  font-family: var(--font-body)!important;
 
   &:after {
     font-size: 0.8em;
@@ -854,10 +883,13 @@ div:has(> select){
     content: "\f078";
     font-family: "Font Awesome 6 Pro";
     position: absolute;
-    top: 50%;
+    top: 40%;
     transform: translate(0,-50%);
-    right: calc(0.25em + 0.8ch);
+    right: calc(0.8ch);
     pointer-events: none;
+    
+  color: var(--colour-body);
+
   }
 }
 // #endregion

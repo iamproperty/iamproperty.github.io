@@ -100,6 +100,12 @@ export const addGlobalEvents = (body) => {
     }
   });
 
+  Array.from(document.querySelectorAll('label progress')).forEach((progress,index) => {
+    let label = progress.closest('label');
+
+    label.setAttribute('data-percent',progress.getAttribute('value'));
+  });
+
   return null
 }
 
@@ -151,3 +157,32 @@ export const resolvePath = (object, path, defaultValue) => path.split(/[\.\[\]\'
 
 
 export const isTraversable = o => Array.isArray(o) || o !== null && ['function', 'object'].includes(typeof o);
+
+export const getSwipeDirection = (touchstartX,touchstartY,touchendX,touchendY) => {
+    
+  const limit = Math.tan(45 * 1.5 / 180 * Math.PI);  
+  let pageWidth = window.innerWidth || document.body.clientWidth;
+  let treshold = Math.max(1,Math.floor(0.01 * (pageWidth)));
+  let x = touchendX - touchstartX;
+  let y = touchendY - touchstartY;
+  let xy = Math.abs(x / y);
+  let yx = Math.abs(y / x);
+  if (Math.abs(x) > treshold || Math.abs(y) > treshold) {
+      if (yx <= limit) {
+          if (x < 0) {
+              return "left";
+          } else {
+            return "right";
+          }
+      }
+      if (xy <= limit) {
+          if (y < 0) {
+            return "top";
+          } else {
+            return "bottom";
+          }
+      }
+  } else {
+    return "tap";
+  }
+}

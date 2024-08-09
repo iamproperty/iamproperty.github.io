@@ -26,10 +26,10 @@ class iamInlineEdit extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     
     <slot></slot>
-    <div class="btns">
-      <button class="btn btn-action" id="save"><i class="fa-regular fa-save m-0"></i> Save</button><button class="btn btn-action" id="cancel">Cancel</button>
+    <div class="btns" part="btns">
+      <button class="btn btn-action" id="save" part="save-btn"><i class="fa-regular fa-save m-0"></i> Save</button><button class="btn btn-action" id="cancel" part="cancel-btn">Cancel</button>
     </div>
-    <div class="status pe-none">
+    <div class="status pe-none" part="status">
       <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="saving"><i class="fa-regular fa-spinner fa-spin me-1"></i> Saving...</span>
       <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="saved"><i class="fa-regular fa-check me-1"></i> Saved</span>
       <span class="btn btn-action border-0 bg-transparent prevent-invert d-none" id="notsaved"><i class="fa-regular fa-circle-info me-1"></i> Not Saved</span>
@@ -47,6 +47,7 @@ class iamInlineEdit extends HTMLElement {
     
     let label = this.querySelector('label');
     let input = this.querySelector('input, textarea, select');
+    let preview = this.querySelector('.preview');
 
     let statusSaving = this.shadowRoot.querySelector('#saving');
     let statusSaved = this.shadowRoot.querySelector('#saved');
@@ -92,8 +93,14 @@ class iamInlineEdit extends HTMLElement {
       input.blur();
       inlineEdit.blur();
 
-
       statusSaving.classList.remove('d-none');
+
+      if(preview){
+
+        console.log(input.value)
+
+        preview.innerHTML = input.value;
+      }
     });
 
     // Save
@@ -174,6 +181,10 @@ class iamInlineEdit extends HTMLElement {
           inlineEdit.dispatchEvent(saveEvent);
 
           statusSaving.classList.remove('d-none');
+              
+          if(preview){
+            preview.innerHTML = input.value;
+          }
         }
         else if(!inlineEdit.querySelector('.inline-feedback')){
           statusNotSaved.classList.remove('d-none');

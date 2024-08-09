@@ -12,7 +12,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a href="/components/radio">Radio buttons</a></td>
+        <td><a href="/form/radio">Radio buttons</a></td>
         <td>
           <ul class="mb-0">
             <li>Select a single option from a list</li>
@@ -21,7 +21,7 @@
         </td>
       </tr>
       <tr>
-        <td><a href="/components/form/checkbox">Checkboxes</a></td>
+        <td><a href="/form/checkbox">Checkboxes</a></td>
         <td>
           <ul class="mb-0">
             <li>Select one or more options from a list</li>
@@ -30,7 +30,7 @@
         </td>
       </tr>
       <tr>
-        <td><a href="/components/form/toggle">Switches</a></td>
+        <td><a href="/form/toggle">Switches</a></td>
         <td>
           <ul class="mb-0">
             <li>Toggle a single item on or off</li>

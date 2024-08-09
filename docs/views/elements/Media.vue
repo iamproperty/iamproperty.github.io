@@ -40,7 +40,7 @@
 
       <h2>YouTube video</h2>
 
-      <p>Videos can be added to the site in two ways; as a component on the page with a preview image (from youTube), or they via a <a href="/components/modal">modal component</a>.</p>
+      <p>Videos can be added to the site in two ways; as a component on the page with a preview image (from youTube), or they via a <a href="/dialogs/modal">modal component</a>.</p>
     </div>
     <div class="container visualtest">
       <div class="row">

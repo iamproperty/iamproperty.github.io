@@ -32,12 +32,12 @@ class iamCarousel extends HTMLElement {
           <slot></slot>
         </div>
  
-        <div class="carousel__controls">
+        <div class="carousel__controls" part="controls">
           
         </div>
 
-        <button class="btn btn-prev" data-go="0" disabled>Prev</button>
-        <button class="btn btn-next" data-go="2">Next</button>
+        <button class="btn btn-prev" data-go="0" disabled  part="prev">Prev</button>
+        <button class="btn btn-next" data-go="2" part="next">Next</button>
 
       </div>
     </div>
@@ -49,6 +49,8 @@ class iamCarousel extends HTMLElement {
     
     const carouselElement = this.shadowRoot.querySelector('.carousel');
     const row = this.querySelector('.row');
+    const thumbnailImages = JSON.parse(this.dataset.thumbnails);
+
     const carouselControls = this.shadowRoot.querySelector('.carousel__controls');
 
     let itemCount = this.querySelectorAll(':scope > .row > .col').length
@@ -61,10 +63,24 @@ class iamCarousel extends HTMLElement {
     if(this.classList.contains('hide-controls'))
       carouselElement.classList.add('hide-controls');
 
+    if (thumbnailImages?.length) {
+      carouselControls.classList.add('thumbnails');
+    }
+
     // populate the pips
     let pips = "";
     for (let i = 1; i <= itemCount; i++) {
-      pips += `<button class="control-${i}" data-slide="${i}" ${i == 1 ? "aria-current":""}>Slide ${i}</button>`;
+      let pipContent = null;
+      let pipClass = '';
+
+      if (thumbnailImages.length) {
+        pipClass = 'has-thumbnail';
+        pipContent = `<img src="${thumbnailImages[i - 1].src}" alt="Slide ${i}" height="148"/>`;
+      } else {
+        pipContent = `Slide ${i}`;
+      }
+
+      pips += `<button class="control-${i} ${pipClass}" data-slide="${i}" ${i == 1 ? "aria-current":""}>${pipContent}</button>`;
     }
     carouselControls.innerHTML = pips;
 

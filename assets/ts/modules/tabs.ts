@@ -1,4 +1,6 @@
 // @ts-nocheck
+import { getSwipeDirection } from './helpers'
+
 export const createTabsLinks = function(tabsElement: Element) {
 
   const details = tabsElement.querySelectorAll(':scope > details');
@@ -65,16 +67,59 @@ export const setTabsEventHandlers = function(tabsElement: Element){
 
   let details = tabsElement.querySelectorAll(':scope > details');
   let summaries = tabsElement.querySelectorAll(':scope > details > summary');
+  let buttonWrapper = tabsElement.querySelector(':scope .tabs__links');
   let buttons = tabsElement.querySelectorAll(':scope .tabs__links > button');
 
-  if(tabsElement.shadowRoot)
+  let nextButton = tabsElement.querySelector(':scope .tabs__next');
+
+  var scrollTimeout;
+  let isScrolled = false;
+  let isClicked = false;
+
+  if(tabsElement.shadowRoot){
     buttons = tabsElement.shadowRoot.querySelectorAll('.tabs__links > button');
+    buttonWrapper = tabsElement.shadowRoot.querySelector('.tabs__links');
+    nextButton = tabsElement.shadowRoot.querySelector(':scope .tabs__next');
+  }
+
+  buttonWrapper.addEventListener('scroll', function(e){
+
+    if(isClicked){
+      isClicked = false;
+      return false;
+    }
+
+    clearTimeout(scrollTimeout);
+    let buttonToClick = buttons[0];
+
+    scrollTimeout = setTimeout(function(){
+      
+      let closestOffset = Math.abs(buttonToClick.getBoundingClientRect().left);
+
+      buttons.forEach((button) => {
+
+        if(Math.abs(button.getBoundingClientRect().left) < closestOffset){
+          closestOffset = Math.abs(button.getBoundingClientRect().left);
+          buttonToClick = button;
+        }
+      });
+
+      isScrolled = true;
+      buttonToClick.click();
+      buttonToClick.focus();
+      
+    }, 100);
+
+  }, false);
+
 
   // Set the on click for the tab buttons, these will open the details box it matches too
   buttons.forEach((button) => {
 
     button.addEventListener("click", (e) => {
       e.preventDefault();
+
+      isClicked = true;
 
       if (button.classList.contains('disabled'))
         return false
@@ -83,6 +128,16 @@ export const setTabsEventHandlers = function(tabsElement: Element){
         let buttonPressed = buttonLoopItem == button ? true : false;
         buttonLoopItem.setAttribute('aria-pressed', buttonPressed);
       });
+
+      if(!isScrolled){
+          
+        buttonWrapper.scroll({
+          top: 0,
+          left: button.offsetLeft, 
+          behavior: 'smooth'
+        });
+      }
+      isScrolled = false;
 
       details.forEach((detail, detailsIndex) => {
         let detailsOpen = button.getAttribute('data-index') == detailsIndex ? true : false;
@@ -93,6 +148,13 @@ export const setTabsEventHandlers = function(tabsElement: Element){
           detail.removeAttribute('open')
       });
       
+      if(button.matches(':last-child')){
+        nextButton.setAttribute('disabled','disabled');
+      }
+      else {
+        nextButton.removeAttribute('disabled');
+      }
+
       // Data layer Open Event
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -112,6 +174,59 @@ export const setTabsEventHandlers = function(tabsElement: Element){
     });
   });
 
+  nextButton.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    let currentTab = buttonWrapper.querySelector('[aria-pressed="true"]');
+    let nextTab = currentTab.nextSibling;
+    if(nextTab)
+      nextTab.click();
+  });
+
+
+  if(tabsElement.classList.contains('tabs--guided')){
+      
+    var touchstartX = 0;
+    var touchstartY = 0;
+    var touchendX = 0;
+    var touchendY = 0;
+
+    details.forEach((detail) => {
+
+      detail.addEventListener("touchstart", (event) => {
+        event.stopPropagation();
+
+        touchstartX = event.changedTouches[0].screenX;
+        touchstartY = event.changedTouches[0].screenY;
+      });
+
+      detail.addEventListener("touchend", (event) => {
+
+        event.stopPropagation();
+        touchendX = event.changedTouches[0].screenX;
+        touchendY = event.changedTouches[0].screenY;
+        let direction = getSwipeDirection(touchstartX,touchstartY,touchendX,touchendY);
+        let currentTab = buttonWrapper.querySelector('[aria-pressed="true"]');
+
+        switch (direction) {
+          case 'left':
+            
+            let nextTab = currentTab.nextSibling;
+            if(nextTab)
+              nextTab.click();
+          
+            break;
+          case 'right':
+              
+            let prevTab = currentTab.previousSibling;
+            if(prevTab)
+              prevTab.click();
+
+          break;
+        }
+      });
+    });
+  }
 }
 
 export const openFirstTab = function(tabsElement: Element){

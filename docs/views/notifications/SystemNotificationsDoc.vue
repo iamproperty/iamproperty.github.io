@@ -104,11 +104,11 @@
       <h2>Notification types</h2>
       <p>Components available in the iamproperty design system.</p>
       <div class="row row-cols-1 row-cols-md-3">
-        <div><a href="/components/toasts"><Card :data-image="toast" class="card--lg-image">Toasts</Card></a></div>
-        <div><a href="/components/inline-notification"><Card :data-image="inlineNotification" class="card--lg-image">Inline</Card></a></div>
-        <div><a href="/components/alert"><Card :data-image="alert" class="card--lg-image">Alert</Card></a></div>
-        <div><a href="/components/modal#transactional"><Card :data-image="modalTransactional" class="card--lg-image">Transactional modal</Card></a></div>
-        <div><a href="/components/modal#acknowledgement"><Card :data-image="modalAcknowledgement" class="card--lg-image">Acknowledgement modal</Card></a></div>
+        <div><a href="/notifications/toasts"><Card :data-image="toast" class="card--lg-image">Toasts</Card></a></div>
+        <div><a href="/notifications/inline-notification"><Card :data-image="inlineNotification" class="card--lg-image">Inline</Card></a></div>
+        <div><a href="/notifications/alert"><Card :data-image="alert" class="card--lg-image">Alert</Card></a></div>
+        <div><a href="/dialogs/modal#transactional"><Card :data-image="modalTransactional" class="card--lg-image">Transactional modal</Card></a></div>
+        <div><a href="/dialogs/modal#acknowledgement"><Card :data-image="modalAcknowledgement" class="card--lg-image">Acknowledgement modal</Card></a></div>
       </div>
     </div>
 

@@ -242,6 +242,7 @@ export default {
       }, 1000);
     }
 
+
   },
   data () {
     return {

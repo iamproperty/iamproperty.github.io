@@ -1,5 +1,32 @@
 @use "../_func" as *;
 
+*:has(> iam-tabs){
+  
+  container-type: inline-size;
+}
+
+iam-tabs {
+  details:not([open]) {
+    padding-bottom: 0;
+  }
+}
+
+iam-tabs::part(next-button) {
+  display: none;
+}
+
+iam-tabs.tabs--guided::part(next-button) {
+  @container (width > 62em) {
+    position: absolute;
+    top: rem(150);
+    right: 0;
+    display: block;
+  }
+}
+iam-tabs.tabs--guided::part(next-button):not(:hover) {
+  background: var(--colour-success);
+}
+
 .tabs:not(.admin-panel) {
   position: relative;
 
@@ -12,11 +39,11 @@
       display: block;
       position: absolute;
       left: auto;
-      right: -2.5rem;
+      right: -1.5rem;
       top: 0;
       bottom: 1px;
       width: 2.5rem;
-      background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,1));
+      background: var(--tabs-gradient, linear-gradient(90deg, color(from var(--colour-canvas) a98-rgb r g b / 0), color(from var(--colour-canvas) a98-rgb r g b / 1)));
       z-index: 1000;
       pointer-events: none;
     }
@@ -33,11 +60,6 @@
       clear: both;
     }
 
-    @media screen and (prefers-color-scheme: dark) {
-      &:before {
-        background: linear-gradient(90deg, rgba(38,38,38,0), rgba(38,38,38,1));
-      }
-    }
   }
 }
 
@@ -49,6 +71,12 @@
   }
 }
 
+
+.tabs__links {
+  
+  scroll-snap-type: x mandatory;
+}
+
 .tabs__links {
   padding-bottom: 3px;
   position: relative;
@@ -56,7 +84,7 @@
   flex-wrap: nowrap;
   width: auto;
   margin: 0 -1.5rem;
-  overflow-y: hidden;
+  overflow-y: clip;
   overflow-x: auto;
   
   &::-webkit-scrollbar {
@@ -65,6 +93,8 @@
 
   .link {
     white-space: nowrap;
+    scroll-snap-align: start;
+    scroll-margin-left: var(--container-padding);
   }
 
   .link:not(.text-decoration-none):not(.btn) {

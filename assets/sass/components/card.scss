@@ -418,14 +418,101 @@
 
 //#region Record card 
 
-.card--record{
+
+
+.card--record:has(.card__head) {
   --img-height: 40%;
 
   &:before,
   &:after {
     display: none;
   }
+
+  .card__head {
+    background: transparent;
+    position: relative;
+
+  }
 }
+
+:host([data-record="business"]) {
+  --record-icon: '\f54f';
+  --record-colour: var(--wider-colour-2);
+}
+:host([data-record="page"]) {
+  --record-icon: '\f15c';
+  --record-colour: var(--wider-colour-3);
+}
+:host([data-record="contact"]) {
+  --record-icon: "\f2b9";
+  --record-colour: var(--wider-colour-4);
+}
+:host([data-record="lettings"]) {
+  --record-icon: "";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-5);
+}
+
+:host([data-record="sales"]) {
+  --record-icon: "";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-7);
+}
+:host([data-record="landlord"]) {
+  --record-icon: "";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-8);
+}
+
+:host([data-record="contractor"]) {
+  --record-icon: "\f82c";
+  --record-colour: var(--wider-colour-9);
+}
+
+:host([data-record="vendor"]) {
+  --record-icon: "";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-13);
+}
+
+:host([data-record="tenant"]) {
+  --record-icon: "\e1b0";
+  --record-colour: var(--wider-colour-6);
+}
+:host([data-record="sales-applicant"]) {
+  --record-icon: "";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-10);
+}
+
+:host([data-record]) .card--record:has(.card__head) {
+
+  .card__head {
+    background: transparent;
+    position: relative;
+
+    &:before {
+      font-family: var(--record-icon-font,"Font Awesome 6 Pro");
+      font-weight: normal;
+      font-size: rem(24);
+      content: var(--record-icon);
+      display: block;
+      position: absolute;
+      top: auto;
+      left: 50%;
+      bottom: 0;
+      background-color: var(--record-colour);
+      border-radius: 50%;
+      height: rem(64);
+      line-height: rem(64);
+      width: rem(64);
+      text-align: center;
+      transform: translate(-50%,0);
+    }
+
+  }
+}
+
 
 slot[name="btns"] {
   display: flex;

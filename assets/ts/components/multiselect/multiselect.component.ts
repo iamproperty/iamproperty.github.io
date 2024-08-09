@@ -29,9 +29,9 @@ class iamMultiselect extends HTMLElement {
     <div class="wrapper">
       
       <slot name="checked"></slot>
-      <input name="search" id="search" autocomplete="off" required />
+      <input name="search" id="search" autocomplete="off" required part="search-input"/>
       <span class="admin-panel feedback">This field is required</span>
-      <div class="admin-panel dropdown">
+      <div class="admin-panel dropdown" part="dropdown">
         <slot></slot>
       </div>
       <button id="clear"><span class="visually-hidden">Clear</span></button>
@@ -142,8 +142,9 @@ class iamMultiselect extends HTMLElement {
 
         let checkbox = label.querySelector('input');
         let searchValue = checkbox.value;
+        let labelText = label.textContent;
         
-        if(searchValue.toLowerCase().includes(search.value.toLowerCase())){
+        if(searchValue.toLowerCase().includes(search.value.toLowerCase()) || labelText.toLowerCase().includes(search.value.toLowerCase())){
           label.removeAttribute('slot')
         }
         else {

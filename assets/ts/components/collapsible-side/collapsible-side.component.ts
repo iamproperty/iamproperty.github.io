@@ -24,20 +24,20 @@ class iamCollapsibleSideMenu extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
-    <div class="container">
+      <div class="container" part="container">
 
-      <div class="side-menu">
-        <button class="btn btn-compact fa-chevron-right btn-secondary btn-sm">Open or close Collapsible menu</button>
-        <div class="side-menu-content closed">
-          <slot name="menu"></slot>
+        <div class="side-menu" part="side-menu">
+          <button class="btn btn-compact fa-chevron-right btn-secondary btn-sm btn-collapse" part="btn">Open or close Collapsible menu</button>
+          <div class="side-menu-content closed" part="side-menu-content">
+            <slot name="menu"></slot>
+          </div>
         </div>
-      </div>
 
-      <div class="main-content">
-        <slot></slot>
-      </div>
+        <div class="main-content" part="main-content">
+          <slot></slot>
+        </div>
 
-    </div>
+      </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
@@ -65,7 +65,13 @@ class iamCollapsibleSideMenu extends HTMLElement {
       this.querySelector(':scope > :is(h1,h2,h3,h4,h5,h6)').classList.add('h4');
       this.querySelector(':scope > :is(h1,h2,h3,h4,h5,h6)').classList.add('main-content__title');
     }
-      
+    
+
+    if(this.hasAttribute('open') && window.innerWidth > 992){
+      sideMenu.classList.add('open'); 
+      button.setAttribute('aria-expanded', true);
+    }
+
     // Open the menu
     button.addEventListener('click', (event) => {
 

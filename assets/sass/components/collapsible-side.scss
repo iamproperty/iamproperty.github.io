@@ -3,6 +3,7 @@
 :host {
   --colour-border: #e9e9e9;
   --side-link-hover: var(--colour-canvas-2);
+  grid-column: full-width;
 
   @include light-mode() {
             
@@ -13,9 +14,14 @@
   min-height: calc(100vh - var(--nav-height));
   padding-top: 0!important;
   margin-inline: auto;
-  max-width: 80rem;
+  width: 100%;
   overflow: hidden;
   position: relative;
+ 
+  @include media-breakpoint-up(md) {
+    max-height: calc(100vh - var(--nav-height));
+    overflow: auto;
+  }
 }
 
 .container {
@@ -28,8 +34,7 @@
   @include media-breakpoint-up(md) {
 
     padding-left: 5.25rem!important;
-    overflow: hidden;
-  }  
+  }
 }
 
 // #region Side menu
@@ -40,7 +45,7 @@
   height: 100%;
   min-height: calc(100vh - var(--nav-height));
   width: rem(30);
-  height: 100%;
+  height: calc(100% - var(--nav-height));
   background-color: var(--colour-canvas);
   transition: width 1s;
 
@@ -61,25 +66,13 @@
 
   @include media-breakpoint-up(md) {
 
-    left: calc(50% - #{rem(556)});
+    left: rem(84);
     margin-left: #{rem(-84)};
-
-    &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      height: 100%;
-      border-right: 2px solid var(--colour-border);
-      left: 0;
-      opacity: 1;
-      transition: all 1s;
-      //margin-left: rem(-260);
-      width: rem(40);
-      background: var(--colour-canvas);
-    }
+    position: fixed;
+    top: var(--nav-height);
 
     &:not(.open).hover {
-      width: rem(344);
+      width: rem(304);
 
       .btn[class*=fa-]:before {
         content: "\f023" !important;
@@ -88,6 +81,7 @@
   }
 
   .btn {
+    display: var(--btn-display, block);
     position: absolute;
     top: rem(32);
     right: 0;
@@ -96,7 +90,8 @@
     background-color: var(--colour-canvas-2);
     border: 2px solid var(--colour-border);
     z-index: 99;
-    
+    color: var(--colour-primary-theme);
+
     &[aria-expanded]{
        // Change icon
       &[class*=fa-]:before {
@@ -105,12 +100,17 @@
 
       @include media-breakpoint-up(md) {
         opacity: 0;
-        transition: opacity 0.5s;
-
-        &:is(:hover,:focus,:active) {
-          opacity: 1;
-        }
       }
+    }
+  }
+
+  &:is(:hover,:focus-within,:active) .btn {
+    
+    border: 2px solid var(--colour-border);
+    color: var(--colour-primary-theme);
+
+    @include media-breakpoint-up(md) {
+      opacity: 1;
     }
   }
 
@@ -124,7 +124,7 @@
     }  
     @include media-breakpoint-up(md) {
 
-      width: rem(344);
+      width: rem(304);
     }  
   }
 
@@ -142,9 +142,6 @@
     overflow: auto;
     max-height: 100%;
 
-    &.closed {
-    }
-
     .h3 {
       padding-left: rem(24);
     }
@@ -161,6 +158,9 @@
 
       width: rem(304);
 
+      .h3{
+        padding-left: var(--container-padding-x-md);
+      }
     }  
   }
 
@@ -185,8 +185,15 @@
 ::slotted(*[slot="menu"]) {
   padding-left: rem(24);
 
+
+
+  
   @include media-breakpoint-up(sm) {
-    padding-left: rem(40)!important;
+    padding-left: rem(40);
+  }
+  
+  @include media-breakpoint-up(md) {
+    padding-left: var(--container-padding-x-md);
   }
 }
 
@@ -215,24 +222,15 @@
     padding-left: rem(40)!important;
   }
 
+  @include media-breakpoint-up(md) {
+    padding-left: var(--container-padding-x-md)!important;
+  }
   &:after {
     display: none;
   }
 
   
   border-right: 2px solid var(--colour-border)!important;
-/*
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: calc(100%);
-    margin-top: 0;
-    width: 2px;
-    background-color: var(--colour-border);
-  }
-  */
 }
 
 ::slotted(a[slot="menu"]:where(:hover,:focus,[aria-expanded])) {
@@ -317,13 +315,30 @@
 
 @include media-breakpoint-up(md) {
 
-  .side-menu.open + .main-content {
-
-    padding-left: rem(300);
-  }
-
   ::slotted(.main-content__title){ 
     display: none;
   }
 }
+
 // #endregion
+
+// #region Desktop open state
+@include media-breakpoint-up(md) {
+
+
+  .container:has(.side-menu.open) {
+    padding-left: 2rem!important;
+    margin-left: max(19rem, calc(50% - calc(var(--container-max-width) / 2)));
+    margin-right: 0;
+    max-width: min(var(--container-max-width), 100% - 19rem);
+  }
+}
+// #endregion
+
+
+@include media-breakpoint-up(md) {
+
+:host([open-always]){
+  --btn-display: none;
+}
+}

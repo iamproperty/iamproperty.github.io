@@ -134,6 +134,16 @@
 
     <a href="/components/search" class="btn btn-primary">See search component</a>
 
+<!--
+  <div class="container">
+
+    <p>Lorem ipsum dolor sirw amet, </p>
+    <label>View: <select class="select--minimal"><option>Action 1</option><option>Action 2</option></select></label>
+    
+    <span class="dialog__wrapper"><label>View: <select class="select--minimal" data-click-events='[{"event": "setAttribute","target":"#dateFilter", "attribute": "open", "value":"true"},{"event": "focus","target":"#dateFilter"}]'><option>Action 1</option></select></label><dialog id="dateFilter"><select ><option>Action 1</option><option>Action 2</option></select></dialog></span>
+
+  </div>
+-->
 
     <div class="bg-light version-control mt-5">
       <div class="container">

@@ -33,21 +33,7 @@ class iamCard extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="card ${classList}" tabindex="0" part="card">
-      ${this.hasAttribute('data-image') ? `<div class="card__head"><img src="${this.getAttribute('data-image')}" alt="" loading="lazy" /><div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
-      <div class="card__body">
-      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
-      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
-      ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
-        <slot></slot>
-      ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
-      </div>
-      ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
-      <slot name="checkbox"></slot>
-      <div class="card__footer">
-        <slot name="footer"></slot>
-        <slot name="btns"></slot>
-        ${this.hasAttribute('data-cta') ? `<span class="link d-inline-block pt-0 mb-0">${this.getAttribute('data-cta')}</span>` : ''}
-      </div>
+      ${this.createCardConent()}
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -57,14 +43,41 @@ class iamCard extends HTMLElement {
       document.head.insertAdjacentHTML('beforeend',`<style id="cardGlobal">${loadExtraCSS}</style>`);
   }
 
-	connectedCallback() {
+  const createCardConent () {
 
+    return `${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
+    <div class="card__body" part="body">
+    ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
+    ${!this.hasAttribute('data-image') && !this.hasAttribute('data-record') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
+    ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
+      <slot></slot>
+    ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
+    </div>
+    ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
+    <slot name="checkbox"></slot>
+    <div class="card__footer" part="footer">
+      <slot name="footer"></slot>
+      <slot name="btns"></slot>
+      ${this.hasAttribute('data-cta') ? `<span class="link d-inline-block pt-0 mb-0">${this.getAttribute('data-cta')}</span>` : ''}
+    </div>`;
+  }
+
+	connectedCallback() {
     this.classList.add('loaded');
-    
+
     // Mimic clicking the parent node so the focus and target events can be on the card
     const parentNode = this.parentNode.closest('a, button, label, router-link')
     const card = this.shadowRoot.querySelector('.card')
     const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
+    const recordType = this.hasAttribute('data-record') ? this.getAttribute('data-record') : '';
+
+    /* 
+      If the parentNode is actually just a div, 
+      we don't want to look for anything or add events 
+    */
+    if (!parentNode) {
+      return false;
+    }
 
     if(parentNode)
       parentNode.setAttribute('tabindex','-1');
@@ -177,10 +190,11 @@ class iamCard extends HTMLElement {
           window.location = addLocation;
       });
     }
+
   }
 
   static get observedAttributes() {
-    return ["data-total","class"];
+    return ["data-total","class","data-image"];
   }
   
   attributeChangedCallback(attrName, oldVal, newVal) {
@@ -191,12 +205,26 @@ class iamCard extends HTMLElement {
         break;
       }
       case "class": {
-        let classList = this.classList.toString();
-            
-        if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
-          classList += ' card--has-icon';
 
-        this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);
+        if(oldVal != newVal){
+          let classList = this.classList.toString();
+              
+          if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
+            classList += ' card--has-icon';
+
+          this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);
+
+          this.shadowRoot.querySelector('.card').innerHTML = this.createCardConent();
+        }
+
+        break;
+      }
+      case "data-image": {
+
+        if(oldVal != newVal){
+
+          this.shadowRoot.querySelector('.card').innerHTML = this.createCardConent();
+        }
         break;
       }
     }

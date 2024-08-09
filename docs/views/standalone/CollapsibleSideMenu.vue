@@ -1,27 +1,11 @@
 <template>
   <div>
-    <nav>
-    <Nav class="nav--sticky bg-primary">
+    
+    <CrmNav></CrmNav>
 
-      <a href="/" class="brand brand--property" slot="logo">
-        <svg>
-          <title>iamproperty</title>
-          <use xlink:href="/svg/logo.svg#logo-property"></use>
-        </svg>
-      </a>
-
-      <a href="/" class="selected">Lorem ipsum</a>
-      <a href="/">Lorem ipsum</a>
-      <a href="/">Lorem ipsum</a>
-      <a href="/">Lorem ipsum</a>
-
-      <button class="btn btn-primary">Lorem ipsum</button>
-      
-    </Nav>
-    </nav>
     <main>
 
-      <CollapsibleSideMenu data-title="Configuration">
+      <CollapsibleSideMenu data-title="Configuration" open open-always>
         
         <div slot="menu">
           <label for="test1">Active branch</label>
@@ -50,12 +34,13 @@
 <script>
 import Nav from '@/components/Nav/Nav.vue'
 import CollapsibleSideMenu from '@/components/CollapsibleSideMenu/CollapsibleSideMenu.vue'
-
+import CrmNav from '../CrmNav.vue'
 
 export default {
   components: {
     Nav,
-    CollapsibleSideMenu
+    CollapsibleSideMenu,
+    CrmNav
   }
 }
 </script>
