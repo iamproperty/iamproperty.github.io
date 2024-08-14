@@ -225,6 +225,7 @@ class iamNav extends HTMLElement {
       if(openMenu)
         openMenu.click();
 
+      iamNav.classList.toggle('open');
       iamNav.querySelectorAll('.nav--menu.open').forEach(function(element){
         element.classList.remove('open');
       });
