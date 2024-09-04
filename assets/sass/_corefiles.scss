@@ -27,6 +27,8 @@
 
   // Deal with preloaded state of native components
   @import "_components.scss";
+
+  @import "../../assets/sass/components/menu.scss";
 }
 
 @include layer('templates') {
