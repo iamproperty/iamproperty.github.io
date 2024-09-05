@@ -1,0 +1,28 @@
+@use "../_func.scss" as *;
+@use "charts.module.scss" as *;
+
+// #region Apply chart colours
+@for $i from 1 to 10 {
+  
+  .chart__key .key:nth-child(10n - #{10 - $i}),
+  .chart__outer table tbody tr td:not(:first-child):nth-child(10n - #{10 - ($i+1)}) {
+    
+    --chart-colour: var(#{'--chart-colour-'+$i+'-set'});
+  }
+
+}
+// #endregion
+
+// #region Hide data sets
+
+.chart__outer > input[type="checkbox"]:not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child) {
+  display: none;
+}
+
+@for $i from 1 to 10 {
+  
+  .chart__outer > input[type="checkbox"]:nth-of-type(#{$i}):not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child):nth-child(#{$i+1}) {
+    display: block;
+  }
+}
+// #endregion
