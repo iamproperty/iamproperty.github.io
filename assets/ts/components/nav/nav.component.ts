@@ -236,6 +236,7 @@ class iamNav extends HTMLElement {
       });
 
       backdrop.classList.remove('show');
+      iamNav.classList.remove('open');
     });
 
     // On desktop close other menu's (details) when one is clicked
