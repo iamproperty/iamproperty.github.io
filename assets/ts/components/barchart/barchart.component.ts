@@ -1,5 +1,9 @@
 // @ts-nocheck
-import {setupChart,setEventObservers,setEventHandlers} from "../../modules/chart.module";
+import {addClasses,setupChart,setEventListener,setEventObservers,setLongestLabel,setLongestValue,createTooltips} from "../../modules/chart.module";
+
+
+// TODO: tooltip
+// TODO: responsive 'fit-content' classes done through JS
 
 class iamBarChart extends HTMLElement {
 
@@ -8,7 +12,7 @@ class iamBarChart extends HTMLElement {
     this.attachShadow({ mode: 'open'});
 
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
-    const loadCSS = `@import "${assetLocation}/css/components/barcharts.component.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/barchart.component.css";`;
     
     const template = document.createElement('template');
     template.innerHTML = `
@@ -16,15 +20,15 @@ class iamBarChart extends HTMLElement {
     ${loadCSS}
     </style>
     <slot name="before"></slot>
-    <div class="chart__outer">
-      <div class="chart__key"></div>
-      <div class="chart__wrapper">
-        <div class="chart__yaxis"></div>
-        <div class="chart">
-          <div class="chart__lines"></div>
-          <div class="chart__guidelines"></div>
+    <div class="chart__outer" part="outer">
+      <div class="chart__key" part="chart-key"></div>
+      <div class="chart__wrapper" part="wrapper">
+        <div class="chart__yaxis" part="yaxis"></div>
+        <div class="chart" part="chart">
+          <div class="chart__guidelines" part="guidelines"></div>
         </div>
       </div>
+      <div class="chart__spacer"><span part="spacer"></span</div>
     </div>
     <slot name="after"></slot>`;
 
@@ -39,50 +43,31 @@ class iamBarChart extends HTMLElement {
     
     const orginalTable =  this.querySelector('table');
     const clonedTable = orginalTable.cloneNode(true);
+
+
     const chart = this.shadowRoot.querySelector('.chart');
-    const charOuter = this.shadowRoot.querySelector('.chart__outer');
+    const chartOuter = this.shadowRoot.querySelector('.chart__outer');
     
 
     chart.appendChild(clonedTable);
 
-    
-    setupChart(chartComponent,charOuter,clonedTable);
-    setEventObservers(chartComponent,charOuter);
-    
+    addClasses(chartComponent);
 
-    /*
-    const options = {
-      rootMargin: '50px',
-      threshold: 0.1
+
+    const barCount = chart.querySelectorAll('td:not(:first-child)').length;
+
+    if(barCount < 10){
+
+      chartComponent.classList.add('chart--fit-content');
     }
 
-    let callback = (entries:any) => {
+    setupChart(chartComponent,chartOuter,clonedTable);
+    setEventObservers(chartComponent,chartOuter);
+    setEventListener(chartOuter);
+    setLongestLabel(chartOuter);
+    setLongestValue(chartOuter);
 
-      entries.forEach((entry:any) => {
-        
-        if(entry.intersectionRatio > 0){
-
-
-          chartOuter.classList.add('animating');
-          chartOuter.classList.add('inview');
-          intObserver.unobserve(entry.target);
-
-          let rowCount = entry.target.querySelectorAll('tbody tr').length;
-          let animationTime = 2000 + (rowCount*100);
-          
-
-          setTimeout(function() {
-            chartOuter.classList.remove('animating');
-          }, animationTime);
-
-        }
-      });
-    };
-  
-    const intObserver = new IntersectionObserver(callback, options);
-    intObserver.observe(element);
-
-    */
+    createTooltips(chartOuter);
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {

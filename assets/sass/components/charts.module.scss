@@ -1,15 +1,15 @@
 @use "../_func" as *;
 
-$chart-colour-1: #1EBEE6!default;
-$chart-colour-2: #FFD2D2!default;
-$chart-colour-3: #B4E6A5!default;
-$chart-colour-4: #ffa500!default;
-$chart-colour-5: #46003c!default;
-$chart-colour-6: #b4e6a5!default;
-$chart-colour-7: #1ebee6!default;
-$chart-colour-8: #ffd2d2!default;
-$chart-colour-9: #9d9d9d!default;
-$chart-colour-10: #66838a!default;
+$chart-colour-1: map-get($wider-colours,"3")!default;
+$chart-colour-2: map-get($wider-colours,"4")!default;
+$chart-colour-3: map-get($wider-colours,"5")!default;
+$chart-colour-4: map-get($wider-colours,"6")!default;
+$chart-colour-5: map-get($wider-colours,"7")!default;
+$chart-colour-6: map-get($wider-colours,"8")!default;
+$chart-colour-7: map-get($wider-colours,"9")!default;
+$chart-colour-8: map-get($wider-colours,"10")!default;
+$chart-colour-9: map-get($wider-colours,"11")!default;
+$chart-colour-10: map-get($wider-colours,"12")!default;
 
 $chart-colors: ();
 $chart-colors: map-merge((
@@ -25,12 +25,66 @@ $chart-colors: map-merge((
   10: $chart-colour-10
 ), $chart-colors);
 
-$chart-height: 56.25%!default;
-$chart-height-lg: 42.86%!default;
+$chart-colour-1-hover: map-get($wider-colours-hover,"3")!default;
+$chart-colour-2-hover: map-get($wider-colours-hover,"4")!default;
+$chart-colour-3-hover: map-get($wider-colours-hover,"5")!default;
+$chart-colour-4-hover: map-get($wider-colours-hover,"6")!default;
+$chart-colour-5-hover: map-get($wider-colours-hover,"7")!default;
+$chart-colour-6-hover: map-get($wider-colours-hover,"8")!default;
+$chart-colour-7-hover: map-get($wider-colours-hover,"9")!default;
+$chart-colour-8-hover: map-get($wider-colours-hover,"10")!default;
+$chart-colour-9-hover: map-get($wider-colours-hover,"11")!default;
+$chart-colour-10-hover: map-get($wider-colours-hover,"12")!default;
 
-// Selectors
-$default-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__wrapper';
-$bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value=none]):not([value=pie]):checked~.chart__wrapper';
+$chart-colors-hover: ();
+$chart-colors-hover: map-merge((
+  1: $chart-colour-1-hover,
+  2: $chart-colour-2-hover,
+  3: $chart-colour-3-hover,
+  4: $chart-colour-4-hover,
+  5: $chart-colour-5-hover,
+  6: $chart-colour-6-hover,
+  7: $chart-colour-7-hover,
+  8: $chart-colour-8-hover,
+  9: $chart-colour-9-hover,
+  10: $chart-colour-10-hover
+), $chart-colors-hover);
+
+$chart-height: #{rem(120)}!default;
+$chart-height-lg: #{rem(200)}!default;
+
+
+
+// #region Apply chart colours
+:host {
+  
+  @each $index, $value in $chart-colors {
+    --chart-colour-#{$index}-set: var(--chart-colour-#{$index},#{$value});
+  }
+  @each $index, $value in $chart-colors-hover {
+    --chart-colour-#{$index}-hover: var(--chart-colour-#{$index},#{$value});
+  }
+
+  --chart-colour-success: #D2F0C9!important;
+  --chart-colour-success-hover: #8AD873!important;
+  --chart-colour-danger: #F5C2C7!important;
+  --chart-colour-danger-hover: #f5c2e7!important;
+  --chart-colour-warning: #FFD280!important;
+  --chart-colour-warning-hover: #FFB020!important;
+}
+
+@for $i from 1 to 10 {
+  
+  .chart__key .key:nth-child(10n - #{10 - $i}),
+  .chart__outer table tbody tr td:not(:first-child):nth-child(10n - #{10 - ($i+1)}) {
+    
+    --chart-colour: var(#{'--chart-colour-'+$i+'-set'});
+    --chart-colour-hover: var(#{'--chart-colour-'+$i+'-hover'});
+  }
+}
+// #endregion
+
+
 
 // #region Basic setup - including: container setup, css vars 
 
@@ -41,9 +95,14 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
 .chart__outer {
 
   container-type: inline-size;
-  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
+
+  font-weight: var(--chart-font-weight, bold);;
+  color: var(--chart-text-color, black);
+
+  margin-bottom: 2rem;
+
 
   > * {
     display: block;
@@ -53,8 +112,10 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
   // CSS vars that can be overwritten by declaring them without the -set on the end of the variable i.e. --chart-colour-1: red; would overwrite --chart-colour-1-set
   --body-colour-set: var(--body-colour, Canvas);
   --text-colour-set: var(--text-colour, black);
+
   --chart-height-set: var(--chart-height, #{$chart-height});
   --chart-height-lg-set: var(--chart-height-lg, #{$chart-height-lg});
+
   --chart-height-resp: var(--chart-height-set);
 
   tbody {
@@ -63,9 +124,6 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
   }
   
 
-  @each $index, $value in $chart-colors {
-    --chart-colour-#{$index}-set: var(--chart-colour-#{$index},#{$value});
-  }
 
   // Non-configurable css vars
   --index-below: -1;
@@ -104,6 +162,7 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
   }
 
   @container (min-width: 36em) {
+    
     .chart__wrapper {
       --chart-height-resp: var(--chart-height-lg-set);
       --pie-size: calc(33.333% - 1.4rem);
@@ -123,33 +182,40 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
       --line-thickness: 0.5px;
     }
   }
+
+  .chart__spacer span {
+    opacity: 0;
+  }
+
 }
 // #endregion
-
-
 
 // #region Chart key
 .chart__outer > input[type="checkbox"] {
   opacity: 0;
   position: absolute;
   pointer-events: none;
+  bottom: 50%;
+  left: 50%;
 }
 
 .chart__key {
 
   padding: 0 0 0 0;
   margin-bottom: 1.5rem;
-  //background: var(--colour-key-bg, rgb(220, 220, 220));
   display: flex;
   overflow: auto;
   scroll-snap-type: x mandatory;
   scroll-padding: 0.75rem;
-  justify-content: flex-end;
+  //justify-content: flex-end;
   gap: 0.5rem;
+
+  &:has(label:first-child:last-child){
+    display: var(--single-key-display, none);
+  }
 
   .key {
 
-    font-size: 1rem!important;
     margin: 0;
 
     &:before {
@@ -159,24 +225,8 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
       margin-right: 0.3em;
       background-color: var(--chart-colour);
       display: inline-block;
-      border-radius: 50%;
+      border-radius: var(--key-border-radius,4px);
     }
-
-    /*
-    display: inline-block;
-    padding: 0.5rem;
-    margin-right: 0.75rem;
-    margin-bottom: 0.75rem;
-    background: white;
-    white-space: nowrap;
-    cursor: pointer;
-    scroll-snap-align: start;
-
-    &:hover,
-    &:focus-within {
-      outline: 3px solid var(--chart-colour);
-    }
-    */
 
     &[data-label="Min"],
     &[data-label="Max"] {
@@ -192,18 +242,145 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
 // Hide chart keys
 .chart__outer > input[type="checkbox"]:not(:checked) ~ .chart__key .key {
   
-  opacity: 0.25;
+  //opacity: 0.25;
 }
 
 @for $i from 1 to 10 {
   
   .chart__outer > input[type="checkbox"]:nth-of-type(#{$i}):not(:checked) ~ .chart__key .key:nth-of-type(#{$i}) {
-    opacity: 1;
+    opacity: 0.25;
   }
 }
 // #endregion
 
+// #region y-axis 
+:host([data-yaxis]){
+  
+  --yaxis-display: flex;
+}
 
+.chart__yaxis {
+
+  display: var(--yaxis-display, none);
+  flex-direction: column-reverse;
+  width: var(--yaxis-width);
+
+  .axis__point {
+    
+    bottom: var(--percent);
+    position: relative;
+    height: 0;
+    white-space: nowrap;
+
+    &:not(:last-child){
+      display: var(--yaxis-point-display);
+    }
+
+    span {
+      display: block;
+      transform: translate(0,-50%);
+      padding-right: 0.25rem;
+      text-align: right;
+      //font-size: var(--label-size);
+      font-weight: var(--chart-yaxis-fw, normal);
+      font-size: var(--chart-yaxis-fs, #{rem(12)});
+      color: var(--colour-body);
+    }
+
+    &:last-child span {
+
+      transform: var(--yaxis-last-point-transform);
+    }
+  }
+}
+// #endregion
+
+// #region X-axis
+.chart__xaxis {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -1rem;
+
+  .axis__point {
+    
+    left: var(--percent);
+    width: 1px;
+    position: absolute;
+    height: 0;
+    white-space: nowrap;
+
+    span {
+      display: block;
+      transform: translate(-50%, 0%);
+      text-align: center;
+      font-size: var(--label-size);
+      position: absolute;
+      left: 50%;
+    }
+  }
+}
+// #endregion
+
+// #region Guidelines
+.chart__guidelines {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  pointer-events: none;
+
+  .guideline {
+
+    bottom: var(--percent);
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 0px;
+    margin-bottom: -1px;
+    border-bottom: 1px dashed #eeeeee;
+    pointer-events: none;
+    z-index: var(--index-below);
+    //overflow: hidden;
+
+    &:not(.guideline--target) span{
+      display: none;
+    } 
+  }
+
+  .guideline--target {
+
+    border-bottom: 1px dashed #000000;
+    z-index: var(--index-above);
+    text-shadow: 1px solid white;
+    overflow: visible;
+
+    span {
+      position: absolute;
+      bottom: 0;
+      font-size: var(--label-size);
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
+      background: rgba(255,255,255,0.6);
+    }
+  }
+
+  [data-value="0"] {
+    border-bottom: 1px solid var(--colour-primary);
+
+    &:not(:first-child){
+
+      border-bottom: 1px dashed var(--colour-primary);
+    }
+  }
+}
+// #endregion
 
 // #region Default column chart (Also applies to line chart)
 .chart__wrapper {
@@ -212,120 +389,6 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
   display: flex;
   flex-direction: row;
   position: relative;
-  margin-bottom: 1rem;
-
-  .chart__yaxis {
-    display: flex;
-    flex-direction: column-reverse;
-    width: var(--yaxis-width);
-
-    .axis__point {
-      
-      bottom: var(--percent);
-      position: relative;
-      height: 0;
-      white-space: nowrap;
-
-      &:not(:last-child){
-        display: var(--yaxis-point-display);
-      }
-
-      span {
-        display: block;
-        transform: translate(0,-50%);
-        padding-right: 0.25rem;
-        text-align: right;
-        font-size: var(--label-size);
-      }
-
-      &:last-child span {
-
-        transform: var(--yaxis-last-point-transform);
-      }
-    }
-  }
-
-  .chart__xaxis {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column-reverse;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: -1rem;
-
-    .axis__point {
-      
-      left: var(--percent);
-      width: 1px;
-      position: absolute;
-      height: 0;
-      white-space: nowrap;
-
-      span {
-        display: block;
-        transform: translate(-50%, 0%);
-        text-align: center;
-        font-size: var(--label-size);
-        position: absolute;
-        left: 50%;
-      }
-    }
-  }
-
-  .chart__guidelines {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column-reverse;
-    pointer-events: none;
-
-    .guideline {
-
-      bottom: var(--percent);
-      position: absolute;
-      right: 0;
-      width: 100%;
-      height: 0px;
-      margin-bottom: -1px;
-      border-bottom: 1px dashed #eeeeee;
-      pointer-events: none;
-      z-index: var(--index-below);
-      //overflow: hidden;
-
-      &:not(.guideline--target) span{
-        display: none;
-      } 
-    }
-
-    .guideline--target {
-
-      border-bottom: 1px dashed #000000;
-      z-index: var(--index-above);
-      text-shadow: 1px solid white;
-      overflow: visible;
-
-      span {
-        position: absolute;
-        bottom: 0;
-        font-size: var(--label-size);
-        text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
-        background: rgba(255,255,255,0.6);
-      }
-    }
-    [data-value="0"] {
-      border-bottom: 1px solid var(--colour-primary);
-
-      &:not(:first-child){
-
-        border-bottom: 1px dashed var(--colour-primary);
-      }
-    }
-  }
 
   .chart {
     
@@ -360,7 +423,7 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
     tbody tr {
       display: flex;
       flex-direction: row;
-      justify-content: center;
+      justify-content: var(--chart-bar-alignment ,center);
       align-items: flex-end;
       border: none;
       width: 100%;
@@ -373,26 +436,26 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
         font-weight: inherit;
       }
 
-      td:first-child {
+      td:first-child { // part=xaxis
         position: absolute;
         top: 100%;
-        left: 50%;
-        transform: translate(-50%,0);
+        left: 0%;
         width: fit-content;
         padding: 0;
         white-space: nowrap;
-        max-width: 6rem;
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: var(--label-size);
-        //display: none;
         text-align: center;
 
         @container (min-width: 62em) {
     
           display: block;
-          left: 50%!important;
-          transform: translate(-50%,0)!important;
+        }
+
+        button {
+          all: unset;
+          cursor: pointer;
         }
       }
 
@@ -412,13 +475,16 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
         height: var(--percent, 0%);
         bottom: var(--bottom,0%);
         width: 100%;
-        max-width: 1.5rem;
+        max-width: #{rem(120)};
         position: relative;
-        background: green;
         padding: 0;
         background: var(--chart-colour);
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
+
+        &:hover {
+          background: var(--chart-colour-hover);
+        }
 
         &:has(span:empty),
         &:empty{
@@ -429,29 +495,31 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
           display: none;
         }
 
-        span {
+        span { //part="popover"
           position: absolute;
-          bottom: 100%;
-          left: 50%;
+          top: var(--cursor-y, 50%);
+          left: var(--cursor-x, 50%);
           font-size: var(--label-size);
           line-height: 1.2;
           transform: translate(-50%,0);
-          background: var(--chart-colour);
+          background: var(--chart-details-bg, var(--colour-canvas-2,Canvas));
           opacity: 0;
           pointer-events: none;
           padding: 0.5rem;
           border-radius: 0.5rem;
           margin-bottom: 0.25rem;
-          color: var(--colour-primary-theme);
+          //color: var(--colour-primary-theme);
           white-space: pre;
-          text-align: center;
+          text-align: left;
+          box-shadow: var(--chart-details-shadow, 0 #{rem(2)} #{rem(12)} rgba(0, 0, 0, 0.25));
+          transform: translate(-50%,-100%);
+
 
           &::before {
-            content: attr(data-label)'\A'attr(data-group)'\A';
+            content: attr(data-group)'\A';
           }
-
-          &[data-second]:after {
-            content: '\A' attr(data-second-label) ': ' attr(data-second);
+          &[data-label]::before {
+            content: attr(data-group)'\A'attr(data-label)'\A';
           }
         }
 
@@ -461,16 +529,6 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
         }
       }
 
-      @container (min-width: 36em) {
-
-        &:first-child td:not(:first-child) span,
-        &:last-child td:not(:first-child) span {
-          
-          left: 50%;
-          transform: translate(-50%,0);
-          text-align: center;
-        }
-      }
 
       td:first-child {
         &[data-label]:before {
@@ -519,216 +577,76 @@ $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value
       }
     }
     // Hide labels when it gets crowded
-    @container (min-width: 62em) {
+    @container (min-width: 36em) {
 
       tbody:has(tr:nth-child(25)){
         tr td:first-child {
           display: none!important;
         }
 
-        tr:is(:first-child, :nth-child(5n)) td:first-child {
+        tr:is(:first-child, :nth-child(2n + 1)) td:first-child {
           display: block!important;
         }
       }
 
       tbody:has(tr:nth-child(50)){
 
-        tr:is(:first-child, :nth-child(5n)) td:first-child,
+        tr:is(:first-child, :nth-child(2n + 1)) td:first-child,
         tr td:first-child {
           display: none!important;
         }
 
-        tr:is(:first-child, :nth-child(10n)) td:first-child {
+        tr:is(:first-child, :nth-child(10n + 1)) td:first-child {
           display: block!important;
         }
       }
 
       tbody:has(tr:nth-child(100)){
 
-        tr:is(:first-child, :nth-child(10n)) td:first-child,
+        tr:is(:first-child, :nth-child(10n + 1)) td:first-child,
         tr td:first-child {
           display: none!important;
         }
 
-        tr:is(:first-child, :nth-child(20n)) td:first-child {
+        tr:is(:first-child, :nth-child(20n + 1)) td:first-child {
           display: block!important;
         }
       }
     }
-
-    // Hide items when theres too many too display
-    tbody:has(tr:nth-child(1001)){
-
-      tr {
-        display: none;
-      }
-
-      tr:nth-last-child(-n+1001) ~ tr {
-        display: flex;
-      }
-    }
-  }
-
-  .line,
-  .pie {
-    display: none;
   }
 }
 // #endregion
 
-// #region Bar chart
-@mixin barchart($selector) {
-  #{$selector} {
+// #region Chart colour overide classes
+:host(.chart-colour--success) td,
+:host(:is(.chart-colour--success,.chart-colour--danger,.chart-colour--wraning)) td.chart-colour--success,
+.chart-colour--success td {
+  --chart-colour: var(--chart-colour-success)!important;
 
-    tbody {
-      --chart-direction: 90deg;
-    --chart-day-bg-pos: calc(var(--single-day) * 7) 100%;
-    --bar-gap: 0;
-    }
-
-    .chart__guidelines {
-      position: absolute;
-
-      .guideline {
-        bottom: auto;
-        left: var(--percent);
-        height: 100%;
-        border-left: 1px dashed #eee;
-        width: 0;
-
-        span{
-          display: block;
-          font-size: var(--label-size);
-          position: absolute;
-          top: 100%;
-          transform: translate(-50%,0.2em);
-        } 
-      }
-    }
-
-    .chart__yaxis {
-
-      display: none;
-    }
-
-    table {
-
-      padding-top: 0;
-    }
-
-    table tbody {
-
-      flex-direction: column;
-      position: relative;
-    }
-
-    table tbody tr {
-      flex-direction: column;
-      align-items: flex-start;
-      margin-bottom: 0.5rem;
-      padding: 0;
-
-      td {
-        
-        height: 3rem;
-        bottom: 0;
-        left: var(--bottom, 0%);
-        width: var(--comparison,var(--percent));
-        max-width: 100%;
-        border-top-left-radius: 0;
-        border-bottom-right-radius: 4px;
-      }
-
-      td:first-child {
-        position: static;
-        transform: none;
-        display: block!important;
-        max-height: 1.5rem;
-      }
-    }
-
-    &[data-longest-label] {
-      &:before {
-        display: block;
-        content: attr(data-longest-label);
-        font-size: var(--label-size);
-        padding-right: 0.5em;
-        opacity: 0;
-        pointer-events: none;
-        white-space: nowrap;
-      }   
-    }
-
-    &[data-longest-label] table tbody tr {
-      td:first-child {
-        position: absolute;
-        transform: translate(-100%, -50%)!important;
-        display: block !important;
-        max-height: 1.5rem;
-        z-index: var(--index-above);
-        top: 50%;
-        left: 0!important;
-        padding-right: 0.5em;
-      }
-    }
-
+  &:hover {
+    --chart-colour-hover: var(--chart-colour-success-hover)!important;
   }
 }
 
-@include barchart('.chart__outer '+$bar-chart);
+:host(.chart-colour--danger) td,
+:host(:is(.chart-colour--success,.chart-colour--danger,.chart-colour--wraning)) td.chart-colour--danger,
+.chart-colour--danger,
+.chart-colour--danger td{
+  --chart-colour: var(--chart-colour-danger)!important;
 
+  &:hover {
+    --chart-colour-hover: var(--chart-colour-danger-hover)!important;
+  }
+}
 
-// #endregion
+:host(.chart-colour--warning) td,
+:host(:is(.chart-colour--success,.chart-colour--danger,.chart-colour--wraning)) td.chart-colour--warning,
+.chart-colour--warning,
+.chart-colour--warning td{
+  --chart-colour: var(--chart-colour-warning)!important;
 
-// #region stacked
-input[type="radio"]:not([value="pie"])[value="stacked"]:checked ~ .chart__wrapper {
-  table tbody tr {
-    --bar-gap: 0;
-    flex-direction: column-reverse;
-    justify-content: flex-start;
-    align-items: center;
-
-    td {
-      border-radius: 0!important;
-    }
+  &:hover {
+    --chart-colour-hover: var(--chart-colour-warning-hover)!important;
   }
 }
 // #endregion
-
-
-
-
-// #region animation
-
-#{'.chart--animate.animating.inview'} {
-
-  --animation-left: 2s;
-
-  table tbody tr td:not(:first-child){
-
-    transition: height 2s ease-out, width 2s ease-out, bottom 2s ease-out, left var(--animation-left) ease-out;
-    transition-delay: calc(var(--row-index) * 0.1s);
-  }
-}
-
-#{'.chart--animate:not(.inview)'} {
-
-  table tbody tr td:not(:first-child) {
-    --bottom: var(--min-bottom, 0%)!important;
-    --percent: 0%!important;
-    --axis: 0%!important;
-    --comparison: 0%!important;
-  }
-}
-
-// #region Animate bar and column chart
-#{'.chart--animate.animating ' + $default-chart} {
-
-  table tbody tr td:not(:first-child) {
-    overflow: hidden;
-  }
-}
-// #endregion
-
-// #endregion
-

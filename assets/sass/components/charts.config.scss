@@ -1,0 +1,79 @@
+iam-barchart {
+
+  --chart-bar-alignment: left;
+  --chart-text-color: var(--colour-heading);
+}
+
+iam-barchart:not(.chart--horizontal)::part(xaxis-label) {
+
+  text-align: left;
+  transform-origin: 0rem 1rem;
+  transform: rotate(45deg);
+  max-width: 5rem;
+  font-size: 1rem;
+  color: var(--colour-heading);
+}
+
+iam-barchart:not(.chart--horizontal)::part(spacer) {
+
+  aspect-ratio: 1/1;
+  display: block;
+  width: fit-content;
+}
+
+iam-barchart:not(.chart--horizontal)::part(chart-key) {
+
+  padding-top: 2rem;
+  order: 3;
+}
+
+iam-barchart:not(.chart--horizontal)::part(key),
+iam-barchart:not(.chart--horizontal)::part(key-checked),
+iam-barchart:not(.chart--horizontal)::part(key-unchecked) {
+
+  --key-border-radius: 50%;
+  --btn-border-width: 1px;
+  --btn-padding-block: #{rem(6)};
+  --btn-padding-inline: #{rem(6)};
+
+  background-color: var(--colour-canvas-2);
+  border: var(--btn-border-width) solid var(--colour-muted);
+  border-radius: rem(4)!important;
+  font-weight: 400!important;
+  font-size: 1rem;
+  line-height: rem(20);
+  padding: calc(var(--btn-padding-block) - var(--btn-border-width)) calc(var(--btn-padding-inline) - var(--btn-border-width));
+  color: var(--colour-heading);
+}
+
+iam-barchart:not(.chart--horizontal)::part(key):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active),
+iam-barchart:not(.chart--horizontal)::part(key-checked):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active),
+iam-barchart:not(.chart--horizontal)::part(key-unchecked):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) {
+  background: var(--colour-btn-action-hover-bg);
+}
+iam-barchart:not(.chart--horizontal)::part(key):is(:hover, :focus, .hover, :focus-within),
+iam-barchart:not(.chart--horizontal)::part(key-checked):is(:hover, :focus, .hover, :focus-within),
+iam-barchart:not(.chart--horizontal)::part(key-unchecked):is(:hover, :focus, .hover, :focus-within){
+  background: var(--colour-btn-action-hover-bg);
+}
+
+iam-barchart:not(.chart--horizontal)::part(key-unchecked) {
+    
+  opacity: 0.25;
+}
+iam-barchart::part(tooltip) {
+  text-decoration: none!important;
+}
+iam-barchart::part(tooltip):after{
+
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 900;
+  content: "\f059";
+  display: inline-block;
+  margin-left: 0.2em;
+  margin-right: 0.1em;
+  margin-bottom: 0.1em;
+  color: var(--colour-primary);
+  border: none;
+
+}

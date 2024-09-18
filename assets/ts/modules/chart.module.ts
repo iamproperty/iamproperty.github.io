@@ -1,12 +1,28 @@
 import { numberOfDays } from './helpers'
 
 // #region Functions that setup and trigger other functions 
+
+export const addClasses = (chartElement:any) => {
+
+  // add colour classes
+  for (let i = 1; i <= 10; i++) {
+    if(chartElement.hasAttribute(`data-colour-${i}`)){
+
+      let colour = chartElement.getAttribute(`data-colour-${i}`);
+
+      chartElement.style.setProperty(`--chart-colour-${i}`, `var(--chart-colour-${colour})`);
+      chartElement.style.setProperty(`--chart-colour-${i}-hover`, `var(--chart-colour-${colour}-hover)`);
+    }
+  }
+
+  return true;
+};
+
+
 export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => {
 
   // #region Reset the chart
   // empty divs to re-populate
-  
-
   const chartKey = chartOuter.querySelector('.chart__key');
   chartKey.innerHTML = '';
   const chartGuidelines = chartOuter.querySelector('.chart__guidelines');
@@ -26,23 +42,56 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => 
   createChartGuidelines(chartElement,chartOuter,chartGuidelines);
   createChartYaxis(chartElement,chartOuter,chartYaxis);
 
-
   if(xaxis){
     createXaxis(chartElement,chartOuter,xaxis);
   }
 
-/*
-  if(availableTypes.includes('bar') || availableTypes.includes('dumbbell') || availableTypes.includes('responsive'))
-    setLongestLabel(chartOuter);
-*/
 
-
+  
   return true;
 };
 // #endregion
 
 // #region Event handlers and observers
+export const setEventListener = function(chartOuter:any) {
 
+  let chart = chartOuter.querySelector('.chart');
+  chart.addEventListener('mousemove', (event:any) => {
+    
+    if (event && event.target instanceof HTMLElement && event.target.closest('td:not(:first-child')){
+
+      let column = event.target.closest('td:not(:first-child')
+
+      var rect = column.getBoundingClientRect();
+        
+      let x = event.clientX - rect.left;
+      let y = event.clientY - rect.top;
+      chart.setAttribute('style', `--cursor-x: ${x}px; --cursor-y: ${y}px;`)
+    }
+  });
+
+  // Use the part for the chart items to pass through states to the pages CSS
+  let labels = chartOuter.querySelectorAll('label');
+
+  Array.from(labels).forEach((label:HTMLElement) => {
+          
+    if(chartOuter.querySelector(`input#${label.getAttribute('for')}`).checked)
+      label.setAttribute('part','key-checked');
+    else
+      label.setAttribute('part','key-unchecked');
+  });
+
+  chartOuter.addEventListener('change', function(){
+
+    Array.from(labels).forEach((label:HTMLElement) => {
+      
+      if(chartOuter.querySelector(`input#${label.getAttribute('for')}`).checked)
+        label.setAttribute('part','key-checked');
+      else
+        label.setAttribute('part','key-unchecked');
+    });
+  });
+}
 
 export const setEventObservers = function(chartElement:any,chartOuter:any) {
 
@@ -182,32 +231,14 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
   
   let {min, max} = getChartData(chartElement,chartOuter);
 
-  let chartType = chartElement.getAttribute('data-type');
   let increment = chartElement.getAttribute('data-increment');
-  let incrementStart = chartElement.getAttribute('data-start');
-  let incrementEnd = chartElement.getAttribute('data-end');
   let startDay = min;
   
-  // Change how gant charts are configured as this just seems bizarre now
-  if(increment == "days"){
-    
-    max = numberOfDays(min,max);
-    min = 0;
-
-    chartElement.querySelector('tbody').setAttribute('style',`--single-day:${((1/max)*100)}%;`);
-  }
-
-
   Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any, index) => {
 
-    let group = tr.querySelector('td:first-child, th:first-child') ? tr.querySelector('td:first-child, th:first-child').innerHTML : '';
-    let coverageStart:number = 100;
-    let coverageEnd:number = 0;
-    let cumulativeComparison:number = 0;
-    // For waffle charts
-    let previousAfter:number = 0;
-    let rowPosition:number = 0;
-    let totalPercent:number = 0;
+    let group = tr.querySelector('td:first-child, th:first-child') ? tr.querySelector('td:first-child, th:first-child').textContent : '';
+
+    tr.setAttribute('part','group');
 
     // Set the data numeric value if not set
     Array.from(tr.querySelectorAll('td:not([data-numeric]):not(:first-child)')).forEach((td:any) => {
@@ -224,15 +255,23 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
       }
     
       td.setAttribute('data-numeric',value);
+      td.setAttribute('data-value',td.textContent);
       td.setAttribute('data-start',start);
     });
 
     // Set the data label value if not set
     Array.from(tr.querySelectorAll('td:not([data-label])')).forEach((td:any, index) => {
 
-      td.setAttribute('data-label',table.querySelectorAll('thead th')[index].textContent);
+      if(index == 0)
+        td.setAttribute('part', 'xaxis-label'); // PART
+      else
+        td.setAttribute('part', 'value');
+
+      if(tr.querySelectorAll('td').length > 2)
+        td.setAttribute('data-label',table.querySelectorAll('thead th')[index].textContent);
     });
 
+    /*
     if(tr.querySelector('[data-label="Total"]')){
       tr.setAttribute('data-total',tr.querySelector('[data-label="Total"][data-numeric]').getAttribute('data-numeric'));
     }
@@ -244,32 +283,19 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
       tr.setAttribute('data-max',tr.querySelector('[data-label="Max"][data-numeric]').getAttribute('data-numeric'));
     }
 
-    if((chartType == "proportional" || chartType == "waffle") && !tr.hasAttribute('data-total')){
-
-      let total = 0;
-
-      Array.from(tr.querySelectorAll('td[data-numeric]:not(:first-child)')).forEach((td:any) => {
-
-        let display = getComputedStyle(td).display;
-        if(display == 'none')
-          return;
-
-        total += Number.parseFloat(td.getAttribute('data-numeric'));
-      });
-
-      tr.setAttribute('data-total',total);
-    }
+      */
 
     let rowMin = tr.hasAttribute('data-min') ? tr.getAttribute('data-min') : min;
     let rowMax = tr.hasAttribute('data-max') ? tr.getAttribute('data-max') : max;
-
-    // Add a useful index css var for the use of animatons.
-    tr.setAttribute('style',`--row-index:${index+1};`);
 
     if(rowMin < 0){
       let minBottom = Math.abs(((rowMin)/(rowMax - rowMin))*100);
       chartElement.setAttribute('style',`--min-bottom: ${minBottom}%;`);
     }
+
+    // Add a useful index css var for the use of animatons.
+    tr.style.setProperty('--row-index', index+1);
+
 
     // Add css vars to cells
     Array.from(tr.querySelectorAll('td[data-numeric]:not([data-label="Min"]):not([data-label="Max"]):not(:first-child)')).forEach((td:any) => {
@@ -278,13 +304,12 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
       if(display == 'none')
         return;
       
-      const label = td.getAttribute('data-label');
       const content = td.innerHTML;
       const value = Number.parseFloat(td.getAttribute('data-numeric'));
       const start = Number.parseFloat(td.getAttribute('data-start'));
 
       if(!td.querySelector('span[data-group]'))
-        td.innerHTML = `<span data-group="${group}" data-label="${label}">${content}</span>`;
+        td.innerHTML = `<span data-group="${group}" ${td.hasAttribute('data-label') ? `data-label="${td.getAttribute('data-label')}"`: ''} part="popover">${content}</span>`;
 
       if(!td.hasAttribute('style')){
         
@@ -292,126 +317,40 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
 
         td.setAttribute('data-percent',percent)
         td.setAttribute("style",`--bottom:${bottom}%;--percent:${percent}%;--axis:${axis}%;`);
-
-        if(tr.hasAttribute('data-total')){
-          let rowTotal = tr.getAttribute('data-total');
-          let comparison = ((value - rowMin)/(rowTotal)) * 100;
-          cumulativeComparison += comparison;
-          td.setAttribute('data-comparison',comparison);
-          td.style.setProperty('--cumulative-comparision',`${cumulativeComparison}%`);
-          td.style.setProperty('--comparison',`${comparison}%`);
-        }
-
-        if(chartElement.classList.contains("chart--value-order")){
-          let order:number = (10000 - Math.round(percent * 100));
-          td.style.setProperty('--order',`${order}%`);
-        }
-
-        if(chartType == "dumbbell"){
-          if(percent < coverageStart){
-            tr.style.setProperty('--coverage-start',`${percent}%`);
-            coverageStart = percent;
-          }
-          
-          if(percent > coverageEnd){
-            tr.style.setProperty('--coverage-end',`${percent}%`);
-            coverageEnd = percent;
-          }
-        }
-
-        if(chartType == "waffle") {
-
-          let actualPercent = Math.round(td.getAttribute('data-comparison'));
-
-          // Prevent the chart from spilling out of the top
-          totalPercent += actualPercent;
-          if(totalPercent > 100)
-            actualPercent = actualPercent - (totalPercent - 100);
-
-          let percentMinusAfter = previousAfter != 0 ? actualPercent - (10 - previousAfter) : actualPercent;
-          let rowHeight = percentMinusAfter < 10 ? 10 : Math.floor(percentMinusAfter/10)*10;
-          let rowWidth = percentMinusAfter < 10 ? percentMinusAfter*10 : 100;
-          let maxWidth = actualPercent*10;
-
-
-
-          td.style.setProperty('--rowPosition',`${rowPosition}%`);
-          td.style.setProperty('--rowHeight',`${rowHeight}%`);
-          td.style.setProperty('--rowWidth',`${rowWidth}%`);
-          td.style.setProperty('--maxWidth',`${maxWidth}%`);
-
-          // Create the psuedo element variables for the the block that sticks out BELOW the main row
-          let beforeWidth = 0;
-          if(previousAfter != 0){
-            beforeWidth = 100 - (previousAfter*10);
-
-            td.style.setProperty('--beforeWidth',`${beforeWidth}%`);
-            td.style.setProperty('--beforeHeight',`${10/rowHeight * 100}%`);
-            td.style.setProperty('--beforeLeft',`${previousAfter*10}%`);
-          }
-
-          // Create the psuedo element variables for the the block that sticks out ABOVE the main row
-          let afterWidth = Math.round(percentMinusAfter - rowHeight)*10;
-          let afterHeight = 10/(rowHeight) * 100;
-
-          td.style.setProperty('--afterWidth',`${afterWidth}%`);
-          td.style.setProperty('--afterHeight',`${afterHeight}%`);
-
-          // If the row width plus the previous after is under 10 it needs to be added to the new previousAfter variable
-          if(previousAfter + beforeWidth/10 + rowWidth/10 < 10 )
-            previousAfter += beforeWidth/10 + (rowWidth/10);
-          else if (percentMinusAfter < 10)
-            previousAfter = percentMinusAfter;
-          else 
-            previousAfter = afterWidth/10;
-
-          // Add to the row position so that the new row is shoved up if needed
-          rowPosition += (rowWidth > 0 ? rowHeight : 0) + (afterWidth > 0 ? 10 : 0);
-        }
-      }
-
-      // totals
-      if(chartElement.classList.contains('chart--show-totals')){
-
-        let chartTotal = chartElement.getAttribute('data-total') ? Number.parseFloat(chartElement.getAttribute('data-total')) : 0;
-        let keyTotal = chartElement.querySelector(`.key[data-label="${label}"]`) && chartElement.querySelector(`.key[data-label="${label}"]`).getAttribute('data-total') ? Number.parseFloat(chartElement.querySelector(`.key[data-label="${label}"]`).getAttribute('data-total')) : 0;
-        
-        if(chartElement.querySelector(`.key[data-label="${label}"]`))
-          chartElement.querySelector(`.key[data-label="${label}"]`).setAttribute('data-total',keyTotal+value);
-
-        chartElement.setAttribute('data-total',chartTotal+value);
       }
     });
-
-    // Values for incremental charts i.e. histograms...
-    if(increment && incrementStart && incrementEnd){
-      let firstCellValue = parseFloat(tr.querySelector('td:first-child').textContent.replace('£','').replace('%','').replace(',',''));
-      let position = ((firstCellValue - incrementStart)/(incrementEnd - incrementStart)) * 100;
-      tr.setAttribute('style',`--position:${position}%;`);
-    }
   });
 }
-/*
+
 export const setLongestLabel = function(chartOuter:any){
+
   let chartWrapper = chartOuter.querySelector('.chart__wrapper');
+  let chartSpacer = chartOuter.querySelector('.chart__spacer span');
   let table = chartOuter.querySelector('.chart table');
   // set the longest label attr so that the bar chart knows what margin to set on the left
   let longestLabel = '';
   Array.from(table.querySelectorAll('tbody tr td:first-child')).forEach((td: any) => {
-    if(typeof td.textContent != "undefined" && td.textContent.length > longestLabel.length)
+    if(typeof td.textContent != "undefined" && td.textContent.length > longestLabel.length){
+
       longestLabel = td.textContent;
+    }
   });
   chartWrapper.setAttribute('data-longest-label',longestLabel);
-
-  // set the longest data set attr so that the bar chart knows what margin to set on the left
-  let longestSet = '';
-  Array.from(table.querySelectorAll('thead tr th')).forEach((td: any) => {
-    if(td.textContent.length > longestSet.length)
-      longestSet = td.textContent;
-  });
-  chartWrapper.setAttribute('data-set-label',longestSet);
+  chartSpacer.innerHTML = longestLabel;
 };
-*/
+
+export const setLongestValue = function(chartOuter:any){
+
+  let chartWrapper = chartOuter.querySelector('.chart__wrapper');
+  let table = chartOuter.querySelector('.chart table');
+
+  let longestValue = '';
+  Array.from(table.querySelectorAll('tbody tr td:not(:first-child) span')).forEach((td: any) => {
+    if(typeof td.textContent != "undefined" && td.textContent.length > longestValue.length)
+      longestValue = td.textContent;
+  });
+  chartWrapper.setAttribute('data-longest-value',longestValue);
+};
 // #endregion
 
 // #region CREATE function
@@ -436,6 +375,7 @@ export const createChartKey = function(chartOuter:any,tableElement:any,chartKey:
     if(index == 50){
       headings.length = index + 1;
     }
+
   });
 
   return true;
@@ -445,8 +385,9 @@ function createChartKeyItem(chartID:string,index:number,text:Array<string>,chart
   let input = document.createElement('input');
   input.setAttribute('name',`${chartID}-dataset-${index}`);
   input.setAttribute('id',`${chartID}-dataset-${index}`);
-  input.setAttribute('checked',`checked`);
+  input.checked = true;
   input.setAttribute('type',`checkbox`);
+  
 
   if(index == 1)
     chartOuter.prepend(input);
@@ -459,6 +400,7 @@ function createChartKeyItem(chartID:string,index:number,text:Array<string>,chart
   label.setAttribute('class',`key btn btn-action`);
   label.setAttribute('for',`${chartID}-dataset-${index}`);
   label.setAttribute('data-label',`${text}`);
+  label.setAttribute('part',`key`);
   label.innerHTML = `${text}`;
   chartKey.append(label);
 
@@ -469,35 +411,25 @@ export const createChartGuidelines = function(chartElement:any,chartOuter:any,ch
 
   let {min, max, yaxis, increment, guidelines} = getChartData(chartElement,chartOuter);
 
-  if(guidelines.length)
-    yaxis = guidelines;
+  if(!guidelines.length)
+    guidelines = yaxis;
 
 
-  let startDay = min;
   if(increment == "days"){
     
     max = numberOfDays(min,max);
     min = 0;
   }
 
-  if(!chartGuidelines){
-    chartGuidelines = document.createElement('div');
-    chartGuidelines.setAttribute('class','chart__guidelines');
-  }
-
   chartGuidelines.innerHTML = '';
-  for (var i = 0; i < yaxis.length; i++) {
+  for (var i = 0; i < guidelines.length; i++) {
 
-    let value = parseFloat(yaxis[i].replace('£','').replace('%','').replace(',',''));
+    let value = parseFloat(guidelines[i].replace('£','').replace('%','').replace(',',''));
 
-   
-    if(increment == "days"){
 
-      value = numberOfDays(startDay,yaxis[i]) - 1;
-    }
 
     let { axis } = getValues(value,min,max);
-    chartGuidelines.innerHTML += `<div class="guideline" style="--percent:${axis}%;"><span>${yaxis[i]}</span></div>`;
+    chartGuidelines.innerHTML += `<div class="guideline" style="--percent:${axis}%;">${yaxis.indexOf(guidelines[i]) != -1 ? `<span>${guidelines[i]}</span>` : ''}</div>`;
   }
 }
 
@@ -513,10 +445,6 @@ export const createChartYaxis = function(chartElement:any,chartOuter:any,chartYa
     min = 0;
   }
 
-  if(!chartYaxis){
-    chartYaxis = document.createElement('div');
-    chartYaxis.setAttribute('class','chart__yaxis');
-  }
 
   chartYaxis.innerHTML = '';
   for (var i = 0; i < yaxis.length; i++) {
@@ -558,7 +486,21 @@ export const createXaxis = function(chartElement:any,chartOuter:any,xaxis:any){
   chart.prepend(chartXaxis);
 }
 
+export const createTooltips = function(chartOuter:any) {
 
+  const titles = chartOuter.querySelectorAll('thead th[title], tbody th[title]:first-child, tbody td[title]:first-child');
+
+  Array.from(titles).forEach((title:HTMLElement) => {
+          
+    let tooltipId = `tooltip-${Date.now()}-${Math.floor(Math.random() * 100)}`;
+
+    title.innerHTML = `<button class="tooltip" popovertarget="${tooltipId}" part="tooltip" style="anchor-name: --${tooltipId};">${title.textContent}</button><span id="${tooltipId}" style="position-anchor: --${tooltipId};" popover part="tooltip__content" class="tooltip__content">${title.getAttribute('title')}</span>`;
+
+    //title.removeAttribute('title'); // TODO add a supports query for anchor positioning
+  });
+
+
+}
 // #endregion
 
 export default setupChart;
