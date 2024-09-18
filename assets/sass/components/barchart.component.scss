@@ -236,8 +236,12 @@
 
 :host(.chart--fit-content:not(.chart--horizontal)) {
 
-  width: fit-content;
+  width: 100%;
   display: block;
+
+  .chart__wrapper {
+    width: fit-content;
+  }
 
   table {
     width: fit-content!important;
@@ -263,12 +267,12 @@
   }
 }
 
-.chart__outer {
+.chart__wrapper {
       
-  @container (min-width: 36em) {
+
+  @container (min-width: #{em($device-xs-width,16)}) {
     --fc-group-width: #{rem(22)};
     --fc-value-width: #{rem(24)};
-    
     
   }
 }

@@ -59,6 +59,7 @@ class iamBarChart extends HTMLElement {
     if(barCount < 10){
 
       chartComponent.classList.add('chart--fit-content');
+      chartComponent.classList.add('chart--display-data');
     }
 
     setupChart(chartComponent,chartOuter,clonedTable);
