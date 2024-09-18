@@ -665,6 +665,28 @@ const routes = [
       }
     ]
   },
+  { /* Charts */
+    path: '/charts',
+    name: 'Charts',
+    meta: {
+      title: 'Charts | iamkey'
+    },
+    component: () => import( './views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue')
+      },
+      {
+        path: 'barchart',
+        name: 'Bar chart',
+        meta: {
+          title: 'Bar chart | Components | iamkey'
+        },
+        component: () => import('./views/charts/BarChart.vue')
+      }
+    ]
+  },
   { /* Notifications */
     path: '/notifications',
     name: 'Notifications',

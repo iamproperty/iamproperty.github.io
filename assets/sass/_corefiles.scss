@@ -27,6 +27,8 @@
 
   // Deal with preloaded state of native components
   @import "_components.scss";
+
+  @import "components/charts.config.scss";
 }
 
 @include layer('templates') {

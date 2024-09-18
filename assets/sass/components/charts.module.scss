@@ -1,0 +1,652 @@
+@use "../_func" as *;
+
+$chart-colour-1: map-get($wider-colours,"3")!default;
+$chart-colour-2: map-get($wider-colours,"4")!default;
+$chart-colour-3: map-get($wider-colours,"5")!default;
+$chart-colour-4: map-get($wider-colours,"6")!default;
+$chart-colour-5: map-get($wider-colours,"7")!default;
+$chart-colour-6: map-get($wider-colours,"8")!default;
+$chart-colour-7: map-get($wider-colours,"9")!default;
+$chart-colour-8: map-get($wider-colours,"10")!default;
+$chart-colour-9: map-get($wider-colours,"11")!default;
+$chart-colour-10: map-get($wider-colours,"12")!default;
+
+$chart-colors: ();
+$chart-colors: map-merge((
+  1: $chart-colour-1,
+  2: $chart-colour-2,
+  3: $chart-colour-3,
+  4: $chart-colour-4,
+  5: $chart-colour-5,
+  6: $chart-colour-6,
+  7: $chart-colour-7,
+  8: $chart-colour-8,
+  9: $chart-colour-9,
+  10: $chart-colour-10
+), $chart-colors);
+
+$chart-colour-1-hover: map-get($wider-colours-hover,"3")!default;
+$chart-colour-2-hover: map-get($wider-colours-hover,"4")!default;
+$chart-colour-3-hover: map-get($wider-colours-hover,"5")!default;
+$chart-colour-4-hover: map-get($wider-colours-hover,"6")!default;
+$chart-colour-5-hover: map-get($wider-colours-hover,"7")!default;
+$chart-colour-6-hover: map-get($wider-colours-hover,"8")!default;
+$chart-colour-7-hover: map-get($wider-colours-hover,"9")!default;
+$chart-colour-8-hover: map-get($wider-colours-hover,"10")!default;
+$chart-colour-9-hover: map-get($wider-colours-hover,"11")!default;
+$chart-colour-10-hover: map-get($wider-colours-hover,"12")!default;
+
+$chart-colors-hover: ();
+$chart-colors-hover: map-merge((
+  1: $chart-colour-1-hover,
+  2: $chart-colour-2-hover,
+  3: $chart-colour-3-hover,
+  4: $chart-colour-4-hover,
+  5: $chart-colour-5-hover,
+  6: $chart-colour-6-hover,
+  7: $chart-colour-7-hover,
+  8: $chart-colour-8-hover,
+  9: $chart-colour-9-hover,
+  10: $chart-colour-10-hover
+), $chart-colors-hover);
+
+$chart-height: #{rem(120)}!default;
+$chart-height-lg: #{rem(200)}!default;
+
+
+
+// #region Apply chart colours
+:host {
+  
+  @each $index, $value in $chart-colors {
+    --chart-colour-#{$index}-set: var(--chart-colour-#{$index},#{$value});
+  }
+  @each $index, $value in $chart-colors-hover {
+    --chart-colour-#{$index}-hover: var(--chart-colour-#{$index},#{$value});
+  }
+
+  --chart-colour-success: #D2F0C9!important;
+  --chart-colour-success-hover: #8AD873!important;
+  --chart-colour-danger: #F5C2C7!important;
+  --chart-colour-danger-hover: #f5c2e7!important;
+  --chart-colour-warning: #FFD280!important;
+  --chart-colour-warning-hover: #FFB020!important;
+}
+
+@for $i from 1 to 10 {
+  
+  .chart__key .key:nth-child(10n - #{10 - $i}),
+  .chart__outer table tbody tr td:not(:first-child):nth-child(10n - #{10 - ($i+1)}) {
+    
+    --chart-colour: var(#{'--chart-colour-'+$i+'-set'});
+    --chart-colour-hover: var(#{'--chart-colour-'+$i+'-hover'});
+  }
+}
+// #endregion
+
+
+
+// #region Basic setup - including: container setup, css vars 
+
+::slotted(table) {
+  display: none!important;
+}
+
+.chart__outer {
+
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+
+  font-weight: var(--chart-font-weight, bold);;
+  color: var(--chart-text-color, black);
+
+  margin-bottom: 2rem;
+
+
+  > * {
+    display: block;
+    order: 2;
+  }
+  
+  // CSS vars that can be overwritten by declaring them without the -set on the end of the variable i.e. --chart-colour-1: red; would overwrite --chart-colour-1-set
+  --body-colour-set: var(--body-colour, Canvas);
+  --text-colour-set: var(--text-colour, black);
+
+  --chart-height-set: var(--chart-height, #{$chart-height});
+  --chart-height-lg-set: var(--chart-height-lg, #{$chart-height-lg});
+
+  --chart-height-resp: var(--chart-height-set);
+
+  tbody {
+    --chart-direction: 360deg;
+    --chart-day-bg-pos: 100% calc(var(--single-day) * 7)
+  }
+  
+
+
+  // Non-configurable css vars
+  --index-below: -1;
+  --index-base: 0;
+  --index-focus: 2;
+  --index-above: 10;
+  --index-floating: 100;
+  --index-menu: 200;
+  --index-overlay: 1000;
+  --key-label-width: 100%;
+  --label-size: #{rem(12)};
+  --pie-size: calc(50% - 1.4rem);
+  --line-thickness: 1px;
+  --yaxis-width: auto;
+  --yaxis-point-display: block;
+  --yaxis-last-point-transform: translate(0,-50%);
+  --bar-gap: min(10%, 0.75rem);
+
+  @container (max-width: 36em) {
+
+    :has(tr:nth-child(5) td:nth-child(4)),
+    :has(tr:nth-child(10)){
+        
+      --yaxis-width: 0;
+      --yaxis-point-display: none;
+      --yaxis-last-point-transform: translate(0,-100%);
+      --bar-gap: 0;
+    }
+  }
+
+  @container (max-width: 63em) {
+    :has(tr:nth-child(10)){
+        
+      --bar-gap: 0;
+    }
+  }
+
+  @container (min-width: 36em) {
+    
+    .chart__wrapper {
+      --chart-height-resp: var(--chart-height-lg-set);
+      --pie-size: calc(33.333% - 1.4rem);
+      --line-thickness: 0.8px;
+      --yaxis-width: auto;
+      --yaxis-point-display: block;
+      --yaxis-last-point-transform: translate(0,-50%);
+    }
+  }
+  
+  @container (min-width: 62em) {
+
+    .chart__wrapper {
+      
+      --label-size: #{rem(14)};
+      --pie-size: calc(25% - 1.5rem);
+      --line-thickness: 0.5px;
+    }
+  }
+
+  .chart__spacer span {
+    opacity: 0;
+  }
+
+}
+// #endregion
+
+// #region Chart key
+.chart__outer > input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
+  bottom: 50%;
+  left: 50%;
+}
+
+.chart__key {
+
+  padding: 0 0 0 0;
+  margin-bottom: 1.5rem;
+  display: flex;
+  overflow: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 0.75rem;
+  //justify-content: flex-end;
+  gap: 0.5rem;
+
+  &:has(label:first-child:last-child){
+    display: var(--single-key-display, none);
+  }
+
+  .key {
+
+    margin: 0;
+
+    &:before {
+      content: "";
+      height: 0.8em;
+      width: 0.8em;
+      margin-right: 0.3em;
+      background-color: var(--chart-colour);
+      display: inline-block;
+      border-radius: var(--key-border-radius,4px);
+    }
+
+    &[data-label="Min"],
+    &[data-label="Max"] {
+      display: none;
+    }
+
+    .chart__total {
+      display: none;
+    }
+  }
+}
+
+// Hide chart keys
+.chart__outer > input[type="checkbox"]:not(:checked) ~ .chart__key .key {
+  
+  //opacity: 0.25;
+}
+
+@for $i from 1 to 10 {
+  
+  .chart__outer > input[type="checkbox"]:nth-of-type(#{$i}):not(:checked) ~ .chart__key .key:nth-of-type(#{$i}) {
+    opacity: 0.25;
+  }
+}
+// #endregion
+
+// #region y-axis 
+:host([data-yaxis]){
+  
+  --yaxis-display: flex;
+}
+
+.chart__yaxis {
+
+  display: var(--yaxis-display, none);
+  flex-direction: column-reverse;
+  width: var(--yaxis-width);
+
+  .axis__point {
+    
+    bottom: var(--percent);
+    position: relative;
+    height: 0;
+    white-space: nowrap;
+
+    &:not(:last-child){
+      display: var(--yaxis-point-display);
+    }
+
+    span {
+      display: block;
+      transform: translate(0,-50%);
+      padding-right: 0.25rem;
+      text-align: right;
+      //font-size: var(--label-size);
+      font-weight: var(--chart-yaxis-fw, normal);
+      font-size: var(--chart-yaxis-fs, #{rem(12)});
+      color: var(--colour-body);
+    }
+
+    &:last-child span {
+
+      transform: var(--yaxis-last-point-transform);
+    }
+  }
+}
+// #endregion
+
+// #region X-axis
+.chart__xaxis {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column-reverse;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: -1rem;
+
+  .axis__point {
+    
+    left: var(--percent);
+    width: 1px;
+    position: absolute;
+    height: 0;
+    white-space: nowrap;
+
+    span {
+      display: block;
+      transform: translate(-50%, 0%);
+      text-align: center;
+      font-size: var(--label-size);
+      position: absolute;
+      left: 50%;
+    }
+  }
+}
+// #endregion
+
+// #region Guidelines
+.chart__guidelines {
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  pointer-events: none;
+
+  .guideline {
+
+    bottom: var(--percent);
+    position: absolute;
+    right: 0;
+    width: 100%;
+    height: 0px;
+    margin-bottom: -1px;
+    border-bottom: 1px dashed #eeeeee;
+    pointer-events: none;
+    z-index: var(--index-below);
+    //overflow: hidden;
+
+    &:not(.guideline--target) span{
+      display: none;
+    } 
+  }
+
+  .guideline--target {
+
+    border-bottom: 1px dashed #000000;
+    z-index: var(--index-above);
+    text-shadow: 1px solid white;
+    overflow: visible;
+
+    span {
+      position: absolute;
+      bottom: 0;
+      font-size: var(--label-size);
+      text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
+      background: rgba(255,255,255,0.6);
+    }
+  }
+
+  [data-value="0"] {
+    border-bottom: 1px solid var(--colour-primary);
+
+    &:not(:first-child){
+
+      border-bottom: 1px dashed var(--colour-primary);
+    }
+  }
+}
+// #endregion
+
+// #region Default column chart (Also applies to line chart)
+.chart__wrapper {
+
+  display: block;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+
+  .chart {
+    
+    position: relative;
+    flex-grow: 1;
+  }
+
+  table {
+    display: block;
+    width: 100%!important;
+    padding-top: var(--chart-height-resp); // 16:9 ratio
+    position: relative;
+    margin-bottom: 0;
+    overflow: visible;
+
+    thead {
+      display: none;
+    }
+
+    tbody {
+
+      display: flex;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      flex-direction: row;
+      border: none;
+    }
+    
+    tbody tr {
+      display: flex;
+      flex-direction: row;
+      justify-content: var(--chart-bar-alignment ,center);
+      align-items: flex-end;
+      border: none;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      padding: 0 2px;
+      gap: var(--bar-gap);
+
+      td {
+        font-weight: inherit;
+      }
+
+      td:first-child { // part=xaxis
+        position: absolute;
+        top: 100%;
+        left: 0%;
+        width: fit-content;
+        padding: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: var(--label-size);
+        text-align: center;
+
+        @container (min-width: 62em) {
+    
+          display: block;
+        }
+
+        button {
+          all: unset;
+          cursor: pointer;
+        }
+      }
+
+      td[data-label="Min"],
+      td[data-label="Max"] {
+        display: none;
+      }
+
+      &:first-child td:first-child,
+      &:last-child td:first-child {
+
+        display: block;
+      }
+
+      td:not(:first-child) {
+        height: 100%;
+        height: var(--percent, 0%);
+        bottom: var(--bottom,0%);
+        width: 100%;
+        max-width: #{rem(120)};
+        position: relative;
+        padding: 0;
+        background: var(--chart-colour);
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+
+        &:hover {
+          background: var(--chart-colour-hover);
+        }
+
+        &:has(span:empty),
+        &:empty{
+          display: none;
+        }
+
+        &[data-label]:before {
+          display: none;
+        }
+
+        span { //part="popover"
+          position: absolute;
+          top: var(--cursor-y, 50%);
+          left: var(--cursor-x, 50%);
+          font-size: var(--label-size);
+          line-height: 1.2;
+          transform: translate(-50%,0);
+          background: var(--chart-details-bg, var(--colour-canvas-2,Canvas));
+          opacity: 0;
+          pointer-events: none;
+          padding: 0.5rem;
+          border-radius: 0.5rem;
+          margin-bottom: 0.25rem;
+          //color: var(--colour-primary-theme);
+          white-space: pre;
+          text-align: left;
+          box-shadow: var(--chart-details-shadow, 0 #{rem(2)} #{rem(12)} rgba(0, 0, 0, 0.25));
+          transform: translate(-50%,-100%);
+
+
+          &::before {
+            content: attr(data-group)'\A';
+          }
+          &[data-label]::before {
+            content: attr(data-group)'\A'attr(data-label)'\A';
+          }
+        }
+
+        &:hover span {
+          opacity: 1;
+          z-index: var(--index-above);
+        }
+      }
+
+
+      td:first-child {
+        &[data-label]:before {
+          display: none;
+        }
+      }
+    }
+
+    // change the look of chart when crowded
+    @container (max-width: 36em) {
+      tbody:has(tr:nth-child(5) td:nth-child(4)) tr,
+      tbody:has(tr:nth-child(10)) tr {
+
+        td:first-child {
+          display: none;
+        }
+        
+        &:first-child td:first-child {
+
+          left: 0%;
+          transform: translate(0,0);
+          display: block;
+          text-align: left;
+        }
+        &:last-child td:first-child {
+
+          left: 100%;
+          transform: translate(-100%,0);
+          display: block;
+          text-align: right;
+        }
+        
+        &:first-child td:not(:first-child) span {
+
+          left: -20%;
+          transform: translate(0%,0);
+          text-align: left;
+        }
+
+        &:last-child td:not(:first-child) span {
+            
+          left: 120%;
+          transform: translate(-100%,0);
+          text-align: right;
+        }
+      }
+    }
+    // Hide labels when it gets crowded
+    @container (min-width: 36em) {
+
+      tbody:has(tr:nth-child(25)){
+        tr td:first-child {
+          display: none!important;
+        }
+
+        tr:is(:first-child, :nth-child(2n + 1)) td:first-child {
+          display: block!important;
+        }
+      }
+
+      tbody:has(tr:nth-child(50)){
+
+        tr:is(:first-child, :nth-child(2n + 1)) td:first-child,
+        tr td:first-child {
+          display: none!important;
+        }
+
+        tr:is(:first-child, :nth-child(10n + 1)) td:first-child {
+          display: block!important;
+        }
+      }
+
+      tbody:has(tr:nth-child(100)){
+
+        tr:is(:first-child, :nth-child(10n + 1)) td:first-child,
+        tr td:first-child {
+          display: none!important;
+        }
+
+        tr:is(:first-child, :nth-child(20n + 1)) td:first-child {
+          display: block!important;
+        }
+      }
+    }
+  }
+}
+// #endregion
+
+// #region Chart colour overide classes
+:host(.chart-colour--success) td,
+:host(:is(.chart-colour--success,.chart-colour--danger,.chart-colour--wraning)) td.chart-colour--success,
+.chart-colour--success td {
+  --chart-colour: var(--chart-colour-success)!important;
+
+  &:hover {
+    --chart-colour-hover: var(--chart-colour-success-hover)!important;
+  }
+}
+
+:host(.chart-colour--danger) td,
+:host(:is(.chart-colour--success,.chart-colour--danger,.chart-colour--wraning)) td.chart-colour--danger,
+.chart-colour--danger,
+.chart-colour--danger td{
+  --chart-colour: var(--chart-colour-danger)!important;
+
+  &:hover {
+    --chart-colour-hover: var(--chart-colour-danger-hover)!important;
+  }
+}
+
+:host(.chart-colour--warning) td,
+:host(:is(.chart-colour--success,.chart-colour--danger,.chart-colour--wraning)) td.chart-colour--warning,
+.chart-colour--warning,
+.chart-colour--warning td{
+  --chart-colour: var(--chart-colour-warning)!important;
+
+  &:hover {
+    --chart-colour-hover: var(--chart-colour-warning-hover)!important;
+  }
+}
+// #endregion
