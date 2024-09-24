@@ -421,7 +421,7 @@ const routes = [
       },
       {
         path: 'charts',
-        name: 'Charts (Beta)',
+        name: 'Charts (Depreciated)',
         meta: {
           title: 'Charts | Components | iamkey'
         },
@@ -679,7 +679,7 @@ const routes = [
       },
       {
         path: 'barchart',
-        name: 'Bar chart',
+        name: 'Bar chart (beta)',
         meta: {
           title: 'Bar chart | Components | iamkey'
         },
@@ -852,8 +852,8 @@ const routes = [
         component: () => import('./views/examples/Pagination.vue')
       },
       {
-        path: 'charts',
-        component: () => import('./views/examples/Charts.vue')
+        path: 'barcharts',
+        component: () => import('./views/examples/BarCharts.vue')
       },
       {
         path: 'news-promo-cards',

@@ -474,6 +474,12 @@ $chart-height-lg: #{rem(200)}!default;
         position: relative;
         padding: 0;
         background: var(--chart-colour);
+
+        @media screen and (prefers-color-scheme: dark) {
+          
+          background: color-mix(in oklab, var(--chart-colour), black 20%);
+        }
+
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
 

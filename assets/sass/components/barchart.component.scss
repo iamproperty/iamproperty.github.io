@@ -12,6 +12,7 @@
   
   .chart__outer > input[type="checkbox"]:nth-of-type(#{$i}):not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child):nth-child(#{$i+1}) {
     display: none;
+    opacity: 0;
   }
 }
 // #endregion
@@ -85,6 +86,13 @@
       display: block!important;
       height: var(--bar-height, #{rem(24)});
       line-height: var(--bar-height, #{rem(24)});
+      max-width: var(--xaxis-max-width, none);
+
+      > *:not([popover]) {
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
     }
   }
 
@@ -96,11 +104,14 @@
     opacity: 0;
     pointer-events: none;
     white-space: nowrap;
+    
+    width: var(--xaxis-max-width, none);
   }
 
   &:has(td .tooltip) .chart__wrapper[data-longest-label]:before {
   
     padding-right: 2em;
+    width: calc(var(--xaxis-max-width, none) - 1rem);
   }
 
   .chart__wrapper[data-longest-label] table tbody tr td:first-child {
@@ -114,7 +125,7 @@
       left: auto!important;
       right: 100%!important;
       padding-right: 0.5em;
-    
+      width: fit-content;
   }
 
   
@@ -126,7 +137,7 @@
 // #endregion
 
 // #region stacked
-.chart--stacked .chart__wrapper {
+:host(.chart--stacked) .chart__wrapper {
   table tbody tr {
     --bar-gap: 0;
     flex-direction: column-reverse;
@@ -136,6 +147,29 @@
     td {
       border-radius: 0!important;
     }
+  }
+}
+:host(.chart--stacked.chart--horizontal) .chart__wrapper table tbody tr {
+  
+  flex-direction: row;
+
+  &::after {
+    content: attr(data-numeric);
+    position: absolute;
+    opacity: 1 !important;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: block !important;
+    height: fit-content;
+    margin: 0;
+    bottom: 50%;
+    left: calc(var(--percent) + .5rem);
+    transform: translate(0, 50%);
+  }
+
+  td:after {
+    content: none;
   }
 }
 // #endregion
@@ -267,13 +301,23 @@
   }
 }
 
+:host(.chart--fit-content:not(.chart--horizontal).chart--no-scale) {
+  --fc-group-width: #{rem(22)};
+  --fc-value-width: #{rem(24)};
+  
+  table{
+    height: var(--chart-height-lg-set,#{rem(120)});
+  }
+  
+}
+
 .chart__wrapper {
       
 
   @container (min-width: #{em($device-xs-width,16)}) {
     --fc-group-width: #{rem(22)};
     --fc-value-width: #{rem(24)};
-    
+
   }
 }
 

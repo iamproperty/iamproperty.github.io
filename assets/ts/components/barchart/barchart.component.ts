@@ -51,7 +51,7 @@ class iamBarChart extends HTMLElement {
 
     chart.appendChild(clonedTable);
 
-    addClasses(chartComponent);
+    addClasses(chartComponent, chartOuter);
 
 
     const barCount = chart.querySelectorAll('td:not(:first-child)').length;
@@ -59,12 +59,18 @@ class iamBarChart extends HTMLElement {
     if(barCount < 10){
 
       chartComponent.classList.add('chart--fit-content');
-      chartComponent.classList.add('chart--display-data');
+      //chartComponent.classList.add('chart--display-data');
+    }
+
+    if(barCount < 5){
+
+      chartComponent.classList.add('chart--no-scale');
+      //chartComponent.classList.add('chart--display-data');
     }
 
     setupChart(chartComponent,chartOuter,clonedTable);
-    setEventObservers(chartComponent,chartOuter);
-    setEventListener(chartOuter);
+    //setEventObservers(chartComponent,chartOuter);
+    setEventListener(chartComponent,chartOuter);
     setLongestLabel(chartOuter);
     setLongestValue(chartOuter);
 

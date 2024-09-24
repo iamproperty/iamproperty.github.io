@@ -2,17 +2,24 @@ import { numberOfDays } from './helpers'
 
 // #region Functions that setup and trigger other functions 
 
-export const addClasses = (chartElement:any) => {
+export const addClasses = (chartElement:any, chartOuter:any) => {
 
   // add colour classes
   for (let i = 1; i <= 10; i++) {
     if(chartElement.hasAttribute(`data-colour-${i}`)){
 
       let colour = chartElement.getAttribute(`data-colour-${i}`);
-
       chartElement.style.setProperty(`--chart-colour-${i}`, `var(--chart-colour-${colour})`);
       chartElement.style.setProperty(`--chart-colour-${i}-hover`, `var(--chart-colour-${colour}-hover)`);
     }
+
+    Array.from(chartOuter.querySelectorAll(`[data-colour-${i}]`)).forEach((element:HTMLElement) => {
+      
+      let colour = element.getAttribute(`data-colour-${i}`);
+      element.style.setProperty(`--chart-colour-${i}-set`, `var(--chart-colour-${colour})`);
+      element.style.setProperty(`--chart-colour-${i}-hover`, `var(--chart-colour-${colour}-hover)`);
+    });
+
   }
 
   return true;
@@ -53,7 +60,7 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => 
 // #endregion
 
 // #region Event handlers and observers
-export const setEventListener = function(chartOuter:any) {
+export const setEventListener = function(chartElement:any, chartOuter:any) {
 
   let chart = chartOuter.querySelector('.chart');
   chart.addEventListener('mousemove', (event:any) => {
@@ -81,15 +88,24 @@ export const setEventListener = function(chartOuter:any) {
       label.setAttribute('part','key-unchecked');
   });
 
+  
+  let table = chartElement.querySelector('table');
+  let shadowTable = chartOuter.querySelector('table');
+
   chartOuter.addEventListener('change', function(){
 
     Array.from(labels).forEach((label:HTMLElement) => {
       
-      if(chartOuter.querySelector(`input#${label.getAttribute('for')}`).checked)
+      if(chartOuter.querySelector(`input#${label.getAttribute('for')}`)?.checked)
         label.setAttribute('part','key-checked');
       else
         label.setAttribute('part','key-unchecked');
     });
+
+    
+    shadowTable.innerHTML = table.innerHTML;
+    setCellData(chartElement,chartOuter,shadowTable);
+
   });
 }
 
@@ -152,7 +168,7 @@ export const getChartData = function(chartElement:any,chartOuter:any){
   let table = chartOuter.querySelector('.chart__wrapper table');
 
   let min:any = chartElement.hasAttribute('data-min') ? chartElement.getAttribute('data-min') : 0;
-  let max:any = chartElement.hasAttribute('data-max') ? chartElement.getAttribute('data-max') : getLargestValue(table);
+  let max:any = chartElement.hasAttribute('data-max') ? chartElement.getAttribute('data-max') : getLargestValue(chartElement,table);
   let type:string = chartElement.hasAttribute('data-type') ? chartElement.getAttribute('data-type') : 'column';
   let yaxis:any = chartElement.hasAttribute('data-yaxis') ? chartElement.getAttribute('data-yaxis').split(',') : [];
   let guidelines:any = chartElement.hasAttribute('data-guidelines') ? chartElement.getAttribute('data-guidelines').split(',') : [];
@@ -162,7 +178,7 @@ export const getChartData = function(chartElement:any,chartOuter:any){
   let increment = chartElement.hasAttribute('data-increment') ? chartElement.getAttribute('data-increment'): null;
   
   let start:any = chartElement.hasAttribute('data-start') ? chartElement.getAttribute('data-start') : 0;
-  let end:any = chartElement.hasAttribute('data-end') ? chartElement.getAttribute('data-end') : getLargestValue(table); // TODO - get largest value from the data-xaxis
+  let end:any = chartElement.hasAttribute('data-end') ? chartElement.getAttribute('data-end') : getLargestValue(chartElement,table); // TODO - get largest value from the data-xaxis
 
 
   let slope:any = chartElement.hasAttribute('data-slope') ? chartElement.getAttribute('data-slope') : null;
@@ -171,23 +187,21 @@ export const getChartData = function(chartElement:any,chartOuter:any){
   return {min,max,type,yaxis,targets,events,xaxis,increment,start,end,slope,yInt,guidelines};
 }
 
-function getLargestValue(table:any){
+function getLargestValue(chartElement:any,table:any){
 
-  let values = Array.from(table.querySelectorAll('tbody td:not(:first-child)')).map((element: any) => {
+  const selector = chartElement.classList.contains('chart--stacked') ? 'tbody tr' : 'tbody td:not(:first-child)';
 
-    let currentValue:string|number = String(element.textContent);
-    currentValue = currentValue.replace('£','');
-    currentValue = currentValue.replace('%','');
-    currentValue = currentValue.replace(',','');
-    currentValue = Number.parseFloat(currentValue);
+  let values = Array.from(table.querySelectorAll(selector)).map((element: any) => {
+
+    let currentValue = element.getAttribute('data-numeric');
 
     return currentValue;
-  })
+  });
 
-  let largetValue:number = Math.max(...values);
+  let largestValue:number = Math.max(...values);
 
   // TO DO round to the nearest 10, 100, 1000 and so on
-  return Math.ceil(largetValue);
+  return Math.ceil(largestValue);
 }
 
 const getValues = function(value:number,min:any,max:any,start?:number){
@@ -229,6 +243,26 @@ const getValues = function(value:number,min:any,max:any,start?:number){
 // #region SET functions - set data attributes and classes
 export const setCellData = function(chartElement:any,chartOuter:any,table:any){
   
+  Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any, index) => {
+
+    let rowValue = 0;
+    // Set the data numeric value if not set
+    Array.from(tr.querySelectorAll('td:not(:first-child)')).forEach((td:any) => {
+
+      let value = parseFloat(td.textContent.replace('£','').replace('%','').replace(',',''));
+    
+      td.setAttribute('data-numeric',value);
+      td.setAttribute('data-value',td.textContent);
+
+      let display = getComputedStyle(td).display;
+
+      if(display != 'none')
+        rowValue += value;
+    });
+
+    tr.setAttribute('data-numeric',rowValue);
+  });
+
   let {min, max} = getChartData(chartElement,chartOuter);
 
   let increment = chartElement.getAttribute('data-increment');
@@ -240,24 +274,10 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
 
     tr.setAttribute('part','group');
 
-    // Set the data numeric value if not set
-    Array.from(tr.querySelectorAll('td:not([data-numeric]):not(:first-child)')).forEach((td:any) => {
-
-      let value = parseFloat(td.textContent.replace('£','').replace('%','').replace(',',''));
-      let start = 0;
-      if(increment == "days"){
-        let dates = td.textContent.split(' - ');
-        if(dates[1]){
-
-          value = numberOfDays(dates[0],dates[1]);
-          start = numberOfDays(startDay,dates[0]) - 1;
-        }
-      }
     
-      td.setAttribute('data-numeric',value);
-      td.setAttribute('data-value',td.textContent);
-      td.setAttribute('data-start',start);
-    });
+    let percent = ((tr.getAttribute('data-numeric') - min)/(max - min)) * 100;
+
+    tr.style.setProperty('--percent',`${percent}%`)
 
     // Set the data label value if not set
     Array.from(tr.querySelectorAll('td:not([data-label])')).forEach((td:any, index) => {

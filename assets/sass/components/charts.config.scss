@@ -27,9 +27,9 @@ iam-barchart:not(.chart--horizontal)::part(chart-key) {
   order: 3;
 }
 
-iam-barchart:not(.chart--horizontal)::part(key),
-iam-barchart:not(.chart--horizontal)::part(key-checked),
-iam-barchart:not(.chart--horizontal)::part(key-unchecked) {
+iam-barchart::part(key),
+iam-barchart::part(key-checked),
+iam-barchart::part(key-unchecked) {
 
   --key-border-radius: 50%;
   --btn-border-width: 1px;
@@ -46,21 +46,22 @@ iam-barchart:not(.chart--horizontal)::part(key-unchecked) {
   color: var(--colour-heading);
 }
 
-iam-barchart:not(.chart--horizontal)::part(key):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active),
-iam-barchart:not(.chart--horizontal)::part(key-checked):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active),
-iam-barchart:not(.chart--horizontal)::part(key-unchecked):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) {
+iam-barchart::part(key):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active),
+iam-barchart::part(key-checked):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active),
+iam-barchart::part(key-unchecked):is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) {
   background: var(--colour-btn-action-hover-bg);
 }
-iam-barchart:not(.chart--horizontal)::part(key):is(:hover, :focus, .hover, :focus-within),
-iam-barchart:not(.chart--horizontal)::part(key-checked):is(:hover, :focus, .hover, :focus-within),
-iam-barchart:not(.chart--horizontal)::part(key-unchecked):is(:hover, :focus, .hover, :focus-within){
+iam-barchart::part(key):is(:hover, :focus, .hover, :focus-within),
+iam-barchart::part(key-checked):is(:hover, :focus, .hover, :focus-within),
+iam-barchart::part(key-unchecked):is(:hover, :focus, .hover, :focus-within){
   background: var(--colour-btn-action-hover-bg);
 }
 
-iam-barchart:not(.chart--horizontal)::part(key-unchecked) {
+iam-barchart::part(key-unchecked) {
     
   opacity: 0.25;
 }
+
 iam-barchart::part(tooltip) {
   text-decoration: none!important;
 }
@@ -76,4 +77,8 @@ iam-barchart::part(tooltip):after{
   color: var(--colour-primary);
   border: none;
 
+}
+
+iam-barchart{
+  //--xaxis-max-width: 3rem;
 }
