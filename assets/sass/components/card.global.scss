@@ -4,6 +4,8 @@
 
 iam-card {
 
+  margin-bottom: 1.5rem;
+  display: block;
 
   @supports not selector(:has(*)) {
       
@@ -65,6 +67,10 @@ iam-card {
       margin-right:  0.25rem;
     }
   }
+}
+
+:is(a, button, label) iam-card{
+  margin-bottom: 0!important;
 }
 
 

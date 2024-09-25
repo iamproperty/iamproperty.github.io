@@ -243,7 +243,7 @@ const getValues = function(value:number,min:any,max:any,start?:number){
 // #region SET functions - set data attributes and classes
 export const setCellData = function(chartElement:any,chartOuter:any,table:any){
   
-  Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any) => {
 
     let rowValue = 0;
     // Set the data numeric value if not set
@@ -264,9 +264,6 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
   });
 
   let {min, max} = getChartData(chartElement,chartOuter);
-
-  let increment = chartElement.getAttribute('data-increment');
-  let startDay = min;
   
   Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any, index) => {
 
