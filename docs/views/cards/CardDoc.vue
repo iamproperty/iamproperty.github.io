@@ -5,11 +5,6 @@
       <h1>Navigational Cards</h1>
     </DSHeader>
 
-  
-
-    <h3>Multi-action card</h3>
-      <p>This is an example of how cards can be displayed across light mode, dark mode, and high contrast mode</p>
-
     <h2>Introduction</h2>
     <p>Navigational cards can be used to direct the user to another page or modal.</p>
     <p>They can also have secondary actions such as being selectable or having a secondary action.</p> 
@@ -493,11 +488,7 @@
       </div>
     </div>
 
-      <h3>Multi-action card</h3>
-      <p>This is an example of how cards can be displayed across light mode, dark mode, and high contrast mode</p>
-
-
-
+    <h3>Multi-action card</h3>
     <div class="container visualtest">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
         <div class="col">
