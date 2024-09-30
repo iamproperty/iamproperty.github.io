@@ -30,6 +30,12 @@
 
   border-radius: rem(6);
   padding: 0 rem(8);
+
+  &--rounded {
+    border-radius: 1rem;
+    min-width: 1.625rem;
+    padding: 0;
+  }
 }
 
 .tag {

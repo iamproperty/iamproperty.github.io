@@ -92,7 +92,18 @@ export const setEventListener = function(chartElement:any, chartOuter:any) {
   let table = chartElement.querySelector('table');
   let shadowTable = chartOuter.querySelector('table');
 
-  chartOuter.addEventListener('change', function(){
+  chartOuter.addEventListener('change', function(event:any){
+
+    let eventTarget = event.target;
+
+    const customEvent = new CustomEvent("view-change", {  detail: { 
+                                                            'data-dataset': eventTarget.getAttribute('data-dataset'), 
+                                                            'label': eventTarget.getAttribute('data-label'),
+                                                            'checked': eventTarget.checked
+                                                          }
+                                                        });
+
+    chartElement.dispatchEvent(customEvent);
 
     Array.from(labels).forEach((label:HTMLElement) => {
       
@@ -243,6 +254,7 @@ const getValues = function(value:number,min:any,max:any,start?:number){
 // #region SET functions - set data attributes and classes
 export const setCellData = function(chartElement:any,chartOuter:any,table:any){
   
+  Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any) => {
   Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any) => {
 
     let rowValue = 0;
@@ -402,6 +414,8 @@ function createChartKeyItem(chartID:string,index:number,text:Array<string>,chart
   let input = document.createElement('input');
   input.setAttribute('name',`${chartID}-dataset-${index}`);
   input.setAttribute('id',`${chartID}-dataset-${index}`);
+  input.setAttribute('data-dataset',`${index}`);
+  input.setAttribute('data-label',`${text}`);
   input.checked = true;
   input.setAttribute('type',`checkbox`);
   

@@ -1,9 +1,54 @@
+<script setup>
+import BarChart from '@/components/BarChart/BarChart.vue'
+import Notification from '@/components/Notification/Notification.vue'
+import DSHeader from '../DSHeader.vue'
+import Integration from '../Integration.vue'
+import Versions from '../Versions.vue'
+import headerImg from '../../img/cards-header.png'
+import { onMounted, ref } from 'vue';
+
+const arrColours= ["3", "4","5","6","7","8","9","11","12"];
+const $toast = ref();
+const toastInterval = ref();
+
+onMounted(async () => {
+  
+  Array.from(document.querySelectorAll('iam-barchart')).forEach((chart, index) => {
+          
+    chart.addEventListener('view-change', (event) => {
+
+      clearInterval(toastInterval.value);
+
+      $toast.value.$el.classList.remove('d-none');
+      let msgElement = $toast.value.$el.querySelector('.msg');
+      msgElement.innerHTML = `${event.type} event has been dispatched<br/>${JSON.stringify(event.detail)}`;
+
+      toastInterval.value = setInterval(function(){
+
+        $toast.value.$el.classList.add('d-none');
+      }, 5000);
+    });
+  });
+});
+
+
+
+
+</script>
+
 <template>
+
+
+  <div class="container notification__holder bottom"><Notification data-type="toast" data-dismiss ref="$toast" class="d-none"><strong>Event</strong><br/> <span class="msg"></span> {{ eventMsg }}</Notification></div>
+
   <main>
 
     <DSHeader :image="headerImg" section="components">
       <h1>Bar Charts (Beta)</h1>
     </DSHeader>
+
+    
+
 
     <h2>Bar chart varients</h2>
     <p>Provides a list of items that can be expanded individually to provide more information.</p>
@@ -376,174 +421,237 @@
       </div>
       </template>
 
-    <h2 class="pb-0 pt-5">Integration</h2>
-    <Tabs class="container">
-      <details>
-        <summary><h3>Install</h3></summary>
+    <Integration component="barchart">
+      <template #web-component>
 
+        <pre><code>{{`<iam-barchart>
+  <table>
+    <thead>
+      <tr>
+        <th>Items</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Item 1</td>
+        <td>440</td>
+      </tr>
+      <tr>
+        <td>Item 2</td>
+        <td>190</td>
+      </tr>
+      <tr>
+        <td>Item 3</td>
+        <td>130</td>
+      </tr>
+    </tbody>
+  </table>
+</iam-barchart>`}}</code></pre>
+      </template>
+      <template #vue-component>
+
+        <pre><code>{{`<script setup>import BarChart from '@/components/BarChart/BarChart.vue</script>
         
-      <h4>Web component</h4>
-        <strong class="label">Add the below to your initialise script</strong>
-
-<pre class="mb-5"><code>import('../node_modules/@iamproperty/components/assets/js/components/accordion/accordion.component.min').then(module => { // Might need to update the path
-
-  if (!window.customElements.get(`iam-accordion`))
-    window.customElements.define(`iam-accordion`, module.default);
-
-}).catch((err) => {
-  console.log(err.message);
-});</code></pre>
-
-<strong class="label">Add the below HTML code to where you want the component to live.</strong>
-
-<pre><code>{{`<iam-accordion class="container">
-  <details id="question1" class="accordion-item">
-    <summary class="accordion-header accordion-button h4">Question 1</summary>
-    <p>Answer </p>
-  </details>
-  <details class="accordion-item">
-    <summary class="accordion-header accordion-button h4">Question 2</summary>
-    <p>Answer </p>
-  </details>
-</iam-accordion>
+<BarChart>
+  <table>
+    <thead>
+      <tr>
+        <th>Items</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Item 1</td>
+        <td>440</td>
+      </tr>
+      <tr>
+        <td>Item 2</td>
+        <td>190</td>
+      </tr>
+      <tr>
+        <td>Item 3</td>
+        <td>130</td>
+      </tr>
+    </tbody>
+  </table>
+</BarChart>
 `}}</code></pre>
+      </template>
 
-      <h4>Vue component</h4>
+      <template #attr>
 
-        <pre><code>{{ `import BarChart from '@/components/BarChart/BarChart.vue'
+<table>
+  <thead>
+    <tr>
+      <th>Attributes</th>
+      <th>Default</th>
+      <th>Options/Type</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>data-min</td>
+      <td>0</td>
+      <td>Numeric</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>data-max</td>
+      <td>Max value of column</td>
+      <td>Numeric</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>data-yaxis</td>
+      <td>-</td>
+      <td>Array of numbers</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>data-guidelines</td>
+      <td>-</td>
+      <td>Array of numbers</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>data-colour-{1-10}</td>
+      <td>-</td>
+      <td>warning | success | danger | {1-10}</td>
+      <td>The colours can be overwritten with meaningfull colours, i.e. danger for values that can be seen as a negative like number of bad reviews.</td>
+    </tr>
+  </tbody>
+</table>
 
-<Accordion>
-  <AccordionItem title="Question 1">
-    <p>Accordion item content</p>
-  </AccordionItem>
-  <AccordionItem title="Question 2">
-    <p>Accordion item content</p>
-  </AccordionItem>
-</Accordion>`}}</code></pre>
-      </details>
-      <details>
-        <summary><h2>Layout</h2></summary>
-        
-        <h3>Slots</h3>
+      </template>
+
+      <template #classes>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>chart--horizontal</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>chart--display-data</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+      <template #parts>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>chart--horizontal</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>chart--display-data</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+      <template #vars>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>chart--horizontal</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>chart--display-data</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+
+      <template #events>
+
+        <h5>Dispatched events</h5>
+
+
         <table>
           <thead>
             <tr>
-              <th>Slot</th>
-              <th>Notes</th>
+              <th>Event</th>
+              <th>Description</th>
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
+              <td>view-change</td>
+              <td>Is dispatched when a user changes the view of the chart by clicking on a chart item</td>
               <td></td>
             </tr>
           </tbody>
         </table>
-      </details>
-      <details>
-        <summary><h2>Modify</h2></summary>
-        <h3>Attributes</h3>
-        <table>
+
+
+        <h5>Mutation observers</h5>
+      
+      </template>
+
+      <template #criteria>
+
+      <ul>
+        <li>The chart should always stay in sync with the HTML table held with the component</li>
+        <li>The chart key should only show when there is more than 1 dataset</li>
+        <li>Vertical barcharts should use fixed widths if there is less than 10 bars</li>
+      </ul>
+
+      </template>
+
+    </Integration>
+    <Versions pdf="/pdfs/barchart.pdf">
+      <table>
           <thead>
             <tr>
-              <th>Attributes</th>
-              <th>Default</th>
-              <th>Options/Type</th>
-              <th>Notes</th>
+              <th>Version Control</th>
+              <th>Date</th>
+              <th>Notable updates</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-body">
             <tr>
-              <td>data-min</td>
-              <td>0</td>
-              <td>Numeric</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>data-max</td>
-              <td>Max value of column</td>
-              <td>Numeric</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>data-yaxis</td>
-              <td>-</td>
-              <td>Array of numbers</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>data-guidelines</td>
-              <td>-</td>
-              <td>Array of numbers</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>data-colour-{1-10}</td>
-              <td>-</td>
-              <td>warning | success | danger | {1-10}</td>
-              <td>The colours can be overwritten with meaningfull colours, i.e. danger for values that can be seen as a negative like number of bad reviews.</td>
+              <td>V1 added</td>
+              <td>10.09.2024</td>
+              <td>Inclusion of the simple bar, group bar and stacked bar charts.</td>
             </tr>
           </tbody>
         </table>
-      </details>
-      <details>
-        <summary><h2>Style</h2></summary>
-        <h3>Classes</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Class</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>chart--horizontal</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>chart--display-data</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>Parts</h3>
-
-
-        <h3>CSS variables</h3>
-
-      </details>
-      <details>
-        <summary><h2>Extend</h2></summary>
-        <h3>Events</h3>
-      </details>
-    </Tabs>
-
+    </Versions>
   </main>
 </template>
 
-<script>
-import Tabs from '@/components/Tabs/Tabs.vue'
-import BarChart from '@/components/BarChart/BarChart.vue'
-import DSHeader from '../DSHeader.vue'
-import headerImg from '../../img/cards-header.png'
-
-export default {
-  components: {
-    DSHeader,
-    Tabs,
-    BarChart
-  },
-  data () {
-    return {
-      headerImg:headerImg,
-      arrColours: ["3", "4","5","6","7","8","9","11","12"]
-    }
-  }
-}
-</script>
