@@ -19,7 +19,6 @@ class iamBarChart extends HTMLElement {
     <style>
     ${loadCSS}
     </style>
-    <slot name="before"></slot>
     <div class="chart__outer" part="outer">
       <div class="chart__key" part="chart-key"></div>
       <div class="chart__wrapper" part="wrapper">
@@ -29,8 +28,7 @@ class iamBarChart extends HTMLElement {
         </div>
       </div>
       <div class="chart__spacer"><span part="spacer"></span</div>
-    </div>
-    <slot name="after"></slot>`;
+    </div>`;
 
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
@@ -69,7 +67,7 @@ class iamBarChart extends HTMLElement {
     }
 
     setupChart(chartComponent,chartOuter,clonedTable);
-    //setEventObservers(chartComponent,chartOuter);
+    setEventObservers(chartComponent,chartOuter);
     setEventListener(chartComponent,chartOuter);
     setLongestLabel(chartOuter);
     setLongestValue(chartOuter);
