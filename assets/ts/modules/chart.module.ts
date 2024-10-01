@@ -275,7 +275,7 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
   });
 
   let {min, max} = getChartData(chartElement,chartOuter);
-
+  
   Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any, index) => {
 
     let group = tr.querySelector('td:first-child, th:first-child') ? tr.querySelector('td:first-child, th:first-child').textContent : '';

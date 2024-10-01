@@ -7,8 +7,7 @@ body:not(.js-enabled) dialog:not([open]):target {
 }
 
 // #region Default styling of both modals and popovers
-dialog[open] {
-
+dialog {
   --dialog-padding: #{rem(24)};
 
   --mh-padding-inline: var(--dialog-padding);
@@ -22,7 +21,12 @@ dialog[open] {
   border-radius: rem(10);
   padding: var(--dialog-padding);
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+}
 
+
+dialog[open] {
+
+  
   display: flex;
   flex-direction: column;
 

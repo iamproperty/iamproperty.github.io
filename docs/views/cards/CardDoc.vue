@@ -5,7 +5,6 @@
       <h1>Navigational Cards</h1>
     </DSHeader>
 
-  
     <h2>Introduction</h2>
     <p>Navigational cards can be used to direct the user to another page or modal.</p>
     <p>They can also have secondary actions such as being selectable or having a secondary action.</p> 
@@ -488,6 +487,77 @@
 
       </div>
     </div>
+
+    <h3>Multi-action card</h3>
+    <div class="container visualtest">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+        <div class="col">
+
+          <span class="pb-3 d-block text-uppercase">Default State</span>
+          
+            <Card :data-image="cardImg" data-menu-title="Template Actions">
+              Name of template Here
+              <span>Updated by: John smith</span>
+              <span class="pt-1">Updated on: 03/01/2024</span>
+              <a href="/test" slot="primary-action" title="Edit template">Edit</a>
+              <button>Duplicate</button>
+              <a href="/cards/card">Duplicate</a>
+              <button>Delete</button>
+            </Card>
+            
+        </div>
+        <div class="col">
+
+          <span class="pb-3 d-block text-uppercase">Hover State</span>
+          
+            <Card :data-image="cardImg" data-menu-title="Template Actions">
+              Name of template Here
+              <span>Updated by: John smith</span>
+              <span class="pt-1">Updated on: 03/01/2024</span>
+              <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
+              <button>Duplicate</button>
+              <a href="/cards/card">Duplicate</a>
+              <button>Delete</button>
+            </Card>
+            
+        </div>
+
+        <div class="col">
+
+          <span class="pb-3 d-block text-uppercase">Ellipsis Hover State</span>
+          
+            <Card :data-image="cardImg" data-menu-title="Template Actions" style="--ellipsis-bg: var(--colour-light);">
+              Name of template Here
+              <span>Updated by: John smith</span>
+              <span class="pt-1">Updated on: 03/01/2024</span>
+              <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
+              <button>Duplicate</button>
+              <a href="/cards/card">Duplicate</a>
+              <button>Delete</button>
+            </Card>
+            
+        </div>
+
+
+      <div class="col">
+
+      <span class="pb-3 d-block text-uppercase">Ellipsis Menu Open</span>
+
+        <Card :data-image="cardImg" data-menu-title="Template Actions" style="--menu-display: block; --ellipsis-bg: var(--colour-light);">
+          Name of template Here
+          <span>Updated by: John smith</span>
+          <span class="pt-1">Updated on: 03/01/2024</span>
+          <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
+          <button slot="actions">Duplicate</button>
+          <a href="/cards/card">Duplicate</a>
+          <button slot="actions">Delete</button>
+        </Card>
+        
+      </div>
+
+      </div>
+    </div>
+
 
 
 
