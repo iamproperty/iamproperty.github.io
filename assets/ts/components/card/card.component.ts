@@ -14,7 +14,7 @@ class iamCard extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
+    if(this.querySelector('*:not(.badge):not(small):not(.btn):not(button) > [class*="fa-"]:not(.btn)'))
       this.classList.add('card--has-icon');
 
     let classList = this.classList.toString();
@@ -83,7 +83,7 @@ class iamCard extends HTMLElement {
 
     // Add the actions slot to the buttons and links to move them into a dialog warpper
     const actionsWrapper = this.shadowRoot.querySelector('.dialog__wrapper');
-    let buttons = component.querySelectorAll('button:not([slot]),a:not([slot])');
+    let buttons = component.querySelectorAll('button[slot="actions"],a[slot="actions"]');
     if(buttons.length){
 
       const actionsWrapper = this.shadowRoot.querySelector('.dialog__wrapper');
@@ -91,9 +91,9 @@ class iamCard extends HTMLElement {
       const actionsBtn = actionsWrapper.querySelector('button');
 
       actionsWrapper.classList.remove('d-none');
+
       Array.from(buttons).forEach((button,index)=>{
 
-        button.setAttribute('slot', 'actions');
         button.classList.add('btn');
         button.classList.add('btn-action');
       });
@@ -240,7 +240,7 @@ class iamCard extends HTMLElement {
         if(oldVal != newVal){
           let classList = this.classList.toString();
               
-          if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
+          if(this.querySelector('*:not(.badge):not(small):not(.btn):not(button) > [class*="fa-"]:not(.btn)'))
             classList += ' card--has-icon';
 
           this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);

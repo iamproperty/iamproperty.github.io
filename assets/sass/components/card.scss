@@ -589,16 +589,18 @@ slot[name="btns"] {
   width: fit-content;
 }
 ::slotted([slot="primary-action"]){
-  overflow: hidden; 
-    text-indent: -300%;
-    position: absolute!important;
-    inset: 0;
-    margin: 0!important;
-    z-index: 99;
+  overflow: hidden;
+  background-color: transparent;
+  text-indent: -300%;
+  position: absolute!important;
+  inset: 0;
+  margin: 0!important;
+  z-index: 99;
+  border: none;
 }
 ::slotted([slot="primary-action"]:is(:hover,:focus,.hover)) {
   --hover-outline-colour-default: var(--colour, var(--colour-primary));
   outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
   outline-offset: -2px;
-  border-radius: var(--card-border-radius);
+  border-radius: var(--card-border-radius)!important;
 }

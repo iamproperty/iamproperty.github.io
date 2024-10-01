@@ -255,7 +255,6 @@ const getValues = function(value:number,min:any,max:any,start?:number){
 export const setCellData = function(chartElement:any,chartOuter:any,table:any){
   
   Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any) => {
-  Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any) => {
 
     let rowValue = 0;
     // Set the data numeric value if not set

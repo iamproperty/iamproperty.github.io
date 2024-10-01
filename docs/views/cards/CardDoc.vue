@@ -548,9 +548,9 @@
           <span>Updated by: John smith</span>
           <span class="pt-1">Updated on: 03/01/2024</span>
           <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
-          <button>Duplicate</button>
+          <button slot="actions">Duplicate</button>
           <a href="/cards/card">Duplicate</a>
-          <button>Delete</button>
+          <button slot="actions">Delete</button>
         </Card>
         
       </div>
