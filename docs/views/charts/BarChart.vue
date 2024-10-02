@@ -276,7 +276,7 @@ onMounted(async () => {
     <p>The X and Y axis are optional with each bar chart in use and can display increments applicable to it’s use. Individual X axis values on horizontal bars and Y axis on vertical bars can be hidden if needed (see example below)</p>
 
 
-    <div class="row aligns-items-center">
+    <div class="row aligns-items-center visualtest">
       <div class="col-sm-6 col-md-4">
         
         <BarChart class="chart--horizontal" data-yaxis="0,50,100,150,200,250,300,350,400,450">
