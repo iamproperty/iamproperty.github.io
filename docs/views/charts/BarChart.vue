@@ -44,7 +44,7 @@ onMounted(async () => {
   <main>
 
     <DSHeader :image="headerImg" section="components">
-      <h1>Bar Charts (Beta)</h1>
+      <h1>Bar Charts</h1>
     </DSHeader>
 
     

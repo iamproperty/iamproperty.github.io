@@ -679,7 +679,7 @@ const routes = [
       },
       {
         path: 'barchart',
-        name: 'Bar chart (beta)',
+        name: 'Bar chart',
         meta: {
           title: 'Bar chart | Components | iamkey'
         },
