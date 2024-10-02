@@ -1,0 +1,389 @@
+@use "../_func.scss" as *;
+@use "charts.module.scss" as *;
+
+
+
+// #region Hide data sets
+.chart__outer > input[type="checkbox"]:not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child) {
+  //display: none;
+}
+
+@for $i from 1 to 10 {
+  
+  .chart__outer > input[type="checkbox"]:nth-of-type(#{$i}):not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child):nth-child(#{$i+1}) {
+    display: none;
+    opacity: 0;
+  }
+}
+// #endregion
+
+// #region Bar chart (Horizontal)
+:host(.chart--horizontal) .chart__outer {
+
+  tbody {
+    --chart-direction: 90deg;
+  --chart-day-bg-pos: calc(var(--single-day) * 7) 100%;
+  --bar-gap: 0;
+  }
+
+  .chart__guidelines {
+    position: absolute;
+
+    .guideline {
+      bottom: auto;
+      left: var(--percent);
+      height: 100%;
+      border-left: 1px dashed #eee;
+      width: 0;
+
+      span{
+        display: block;
+        font-size: var(--label-size);
+        position: absolute;
+        top: 100%;
+        transform: translate(-50%,0.2em);
+        opacity: 1;
+      } 
+    }
+  }
+
+  .chart__yaxis {
+
+    display: none;
+  }
+
+  table {
+
+    padding-top: 0;
+  }
+
+  table tbody {
+
+    flex-direction: column;
+    position: relative;
+  }
+
+  table tbody tr {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+    padding: 0;
+
+    td { // part=value
+      
+      height: var(--bar-height, #{rem(24)});
+      bottom: 0;
+      left: var(--bottom, 0%);
+      width: var(--comparison,var(--percent));
+      max-width: 100%;
+      border-top-left-radius: 0;
+      border-bottom-right-radius: 4px;
+    }
+
+    td:first-child { // part=xaxis-label
+      position: static;
+      transform: none;
+      display: block!important;
+      height: var(--bar-height, #{rem(24)});
+      line-height: var(--bar-height, #{rem(24)});
+      max-width: var(--xaxis-max-width, none);
+
+      > *:not([popover]) {
+        max-width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .chart__wrapper[data-longest-label]:before {
+    display: block;
+    content: attr(data-longest-label);
+    font-size: var(--label-size);
+    padding-right: 0.5em;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    
+    width: var(--xaxis-max-width, none);
+  }
+
+  &:has(td .tooltip) .chart__wrapper[data-longest-label]:before {
+  
+    padding-right: 2em;
+    width: calc(var(--xaxis-max-width, none) - 1rem);
+  }
+
+  .chart__wrapper[data-longest-label] table tbody tr td:first-child {
+
+      position: absolute;
+      //transform: translate(-100%, -50%)!important;
+      display: block !important;
+      max-height: 1.5rem;
+      z-index: var(--index-above);
+      top: 0%;
+      left: auto!important;
+      right: 100%!important;
+      padding-right: 0.5em;
+      width: fit-content;
+  }
+
+  
+  .chart__spacer span {
+    display: none!important;
+  }
+
+}
+// #endregion
+
+// #region stacked
+:host(.chart--stacked) .chart__wrapper {
+  table tbody tr {
+    --bar-gap: 0;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: center;
+
+    td {
+      border-radius: 0!important;
+    }
+  }
+}
+:host(.chart--stacked.chart--horizontal) .chart__wrapper table tbody tr {
+  
+  flex-direction: row;
+
+  &::after {
+    content: attr(data-numeric);
+    position: absolute;
+    opacity: 1 !important;
+    bottom: 100%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: block !important;
+    height: fit-content;
+    margin: 0;
+    bottom: 50%;
+    left: calc(var(--percent) + .5rem);
+    transform: translate(0, 50%);
+  }
+
+  td:after {
+    content: none;
+  }
+}
+// #endregion
+
+// #region animation
+
+#{'.chart--animate.animating.inview'} {
+
+  --animation-left: 2s;
+
+  table tbody tr td:not(:first-child){
+
+    transition: height 2s ease-out, width 2s ease-out, bottom 2s ease-out, left var(--animation-left) ease-out;
+    transition-delay: calc(var(--row-index) * 0.1s);
+  }
+}
+
+#{'.chart--animate:not(.inview)'} {
+
+  table tbody tr td:not(:first-child) {
+    --bottom: var(--min-bottom, 0%)!important;
+    --percent: 0%!important;
+    --axis: 0%!important;
+    --comparison: 0%!important;
+  }
+}
+
+.chart--animate.animating {
+
+  table tbody tr td:not(:first-child) {
+    overflow: hidden;
+  }
+}
+
+// #endregion
+
+
+// #region Display data modifier class
+:host(.chart--display-data) {
+  table tbody tr {
+
+    td:not(:first-child) {
+      
+      &:after {
+
+        content: attr(data-value);
+
+
+        position: absolute;
+        opacity: 1!important;
+        //z-index: var(--index-above);
+        bottom: 100%;
+        left: 50%;
+
+        transform: translate(-50%,0);
+        
+        display: block!important;
+        height: fit-content;
+        
+        margin: 0;
+
+        
+      }
+    }
+  }
+}
+
+
+:host(.chart--display-data.chart--horizontal) {
+  table tbody tr td:not(:first-child) {
+    &:after {
+
+      bottom: 50%;
+      left: calc(100% + 0.5rem);
+      transform: translate(0,50%);
+    }
+  }
+
+  
+  .chart__wrapper[data-longest-value]:after {
+    display: block;
+    content: attr(data-longest-value);
+    font-size: var(--label-size);
+    padding-left: 0.5em;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+}
+
+:host(.chart--display-data.chart--fit-content:not(.chart--horizontal)) {
+  .chart__outer {
+    padding-top: 1rem;
+  }
+}
+// #endregion
+
+
+:host(.chart--fit-content:not(.chart--horizontal)) {
+
+  width: 100%;
+  display: block;
+
+  .chart__wrapper {
+    width: fit-content;
+  }
+
+  table {
+    width: fit-content!important;
+    padding-top: 0;
+    height: var(--chart-height-resp,#{rem(120)});
+  }
+
+  tbody {
+    position: relative;
+  }
+
+  [part="group"]{
+    min-width: fit-content;
+    width: fit-content;
+    max-width: fit-content;
+    padding-right: var(--fc-group-width, #{rem(16)});
+  }
+
+  [part="value"]{
+    min-width: var(--fc-value-width, #{rem(12)});
+    width: var(--fc-value-width, #{rem(12)});
+    max-width: var(--fc-value-width, #{rem(12)});
+  }
+}
+
+:host(.chart--fit-content:not(.chart--horizontal).chart--no-scale) {
+  --fc-group-width: #{rem(22)};
+  --fc-value-width: #{rem(24)};
+  
+  table{
+    height: var(--chart-height-lg-set,#{rem(120)});
+  }
+  
+}
+
+.chart__wrapper {
+      
+
+  @container (min-width: #{em($device-xs-width,16)}) {
+    --fc-group-width: #{rem(22)};
+    --fc-value-width: #{rem(24)};
+
+  }
+}
+
+
+// #region tooltip
+button.tooltip {
+  
+
+  &:after{
+
+    content: "?";
+    margin-left: 0.25rem;
+    display: inline-block;
+    border: 1px solid currentColor;
+  }
+
+}
+
+.tooltip__content[popover] {
+
+  //display: block;
+  z-index: var(--index-floating);
+  background: var(--colour-primary);
+  color: var(--colour-white);
+  padding: rem(24);
+
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11); 
+
+
+  white-space: normal;
+//transform: none;
+  //inset: auto;
+  
+  position: fixed;
+  //inset-area: bottom center;
+  //position-area: bottom center;
+  border: none;
+  margin: 0;
+  box-sizing: border-box;
+
+  //top: anchor(bottom);
+
+  //left: anchor(center);
+
+
+    inset-area: bottom center;
+    
+
+  overflow: visible;
+
+  width: calc(anchor-size(width) + var(--container-padding-x) + var(--container-padding-x) + #{rem(24)})!important;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -0.25rem;
+    border-width: 0.5rem;
+    border-style: solid;
+    border-color: transparent transparent var(--colour-primary) transparent;
+    margin-bottom: -1px;
+  }
+}
+
+
+
+// #endregion

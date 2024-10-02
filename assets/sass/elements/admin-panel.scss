@@ -1,7 +1,7 @@
 @use "../_func" as *;
 
 .admin-panel {
-  --padding-x: #{rem(32)};
+  --padding-x: #{rem(24)};
   --padding-top: #{rem(16)};
   --padding-bottom: #{rem(24)};
   --mh-modifier: #{rem(56 + 16)};
