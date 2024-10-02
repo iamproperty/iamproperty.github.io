@@ -101,7 +101,7 @@ $chart-height-lg: #{rem(200)}!default;
   display: flex;
   flex-direction: column;
 
-  font-weight: var(--chart-font-weight, bold);;
+  font-weight: var(--chart-font-weight, bold);
   color: var(--chart-text-color, black);
 
 
@@ -418,7 +418,7 @@ $chart-height-lg: #{rem(200)}!default;
     tbody tr {
       display: flex;
       flex-direction: row;
-      justify-content: var(--chart-bar-alignment ,center);
+      justify-content: var(--chart-bar-alignment, left);
       align-items: flex-end;
       border: none;
       width: 100%;

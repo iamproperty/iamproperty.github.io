@@ -46,7 +46,7 @@ class iamCard extends HTMLElement {
   const createCardConent () {
 
     // TODO split this out a bit
-    return `${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
+    return `${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head" part="head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
     <div class="card__body" part="body">
     ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
     ${!this.hasAttribute('data-image') && !this.hasAttribute('data-record') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}

@@ -428,14 +428,15 @@ onMounted(async () => {
   <table>
     <thead>
       <tr>
-        <th>Items</th>
+        <th>Items</th> <!-- Not visible when component loaded -->
         <th>Value</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Item 1</td>
-        <td>440</td>
+        <td>Item 1</td> <!-- Column/row title -->
+        <td>440</td><!-- Dataset item 1 value - Value numeric, currency value and percentage  -->
+        <!-- Add more cells here to represent more datasets -->
       </tr>
       <tr>
         <td>Item 2</td>
@@ -456,24 +457,10 @@ onMounted(async () => {
 <BarChart>
   <table>
     <thead>
-      <tr>
-        <th>Items</th>
-        <th>Value</th>
-      </tr>
+      ...
     </thead>
     <tbody>
-      <tr>
-        <td>Item 1</td>
-        <td>440</td>
-      </tr>
-      <tr>
-        <td>Item 2</td>
-        <td>190</td>
-      </tr>
-      <tr>
-        <td>Item 3</td>
-        <td>130</td>
-      </tr>
+      ...
     </tbody>
   </table>
 </BarChart>
@@ -488,42 +475,50 @@ onMounted(async () => {
       <th>Attributes</th>
       <th>Default</th>
       <th>Options/Type</th>
+      <th>Required</th>
       <th>Notes</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>data-min</td>
+      <th>data-min</th>
       <td>0</td>
       <td>Numeric</td>
-      <td></td>
+      <td>No</td>
+      <td>The minimum value 95% of time will be 0 which is the default value. But can be overwritten with both a positive and negative value.</td>
     </tr>
     <tr>
-      <td>data-max</td>
+      <th>data-max</th>
       <td>Max value of column</td>
       <td>Numeric</td>
-      <td></td>
+      <td>No</td>
+      <td>This value is not set will be calculated to be the largest individual value within the chart. Stacked bar charts will use the largest collective value from the groups.</td>
     </tr>
     <tr>
-      <td>data-yaxis</td>
+      <th>data-yaxis</th>
+      <td>-</td>
+      <td>Array of numbers (Currency and percentages accepted too)</td>
+      <td>No</td>
+      <td>To display a Y-axis the array of values to be displayeed needs to be passed. i.e. {1,2,3,4,5}. This will also create guidelines aswell.</td>
+    </tr>
+    <tr>
+      <th>data-guidelines</th>
       <td>-</td>
       <td>Array of numbers</td>
-      <td></td>
+      <td>No</td>
+      <td>To have guidelines without a y-axis or to overwrite the values within the y-axis a new full array can be passed. i.e. {1,2,3,4,5}</td>
     </tr>
     <tr>
-      <td>data-guidelines</td>
-      <td>-</td>
-      <td>Array of numbers</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>data-colour-{1-10}</td>
+      <th>data-colour-{1-10}</th>
       <td>-</td>
       <td>warning | success | danger | {1-10}</td>
+      <td>No</td>
       <td>The colours can be overwritten with meaningfull colours, i.e. danger for values that can be seen as a negative like number of bad reviews.</td>
     </tr>
   </tbody>
 </table>
+
+<p>A tooltip can be added to the xaxis label by giving it a title attribute.</p>
 
       </template>
 
@@ -538,12 +533,28 @@ onMounted(async () => {
         </thead>
         <tbody>
           <tr>
-            <td>chart--horizontal</td>
-            <td></td>
+            <th>.chart--horizontal</th>
+            <td>Changes the direction from vertical to horizontal</td>
           </tr>
           <tr>
-            <td>chart--display-data</td>
-            <td></td>
+            <th>.chart--display-data</th>
+            <td>displays the the values of the bars either just above them or too the right</td>
+          </tr>
+          <tr>
+            <th>.chart--fit-content</th>
+            <td>This class prevents the vertical bar charts from becoming fully responsive and give the bars a set size. This maintains the aspect ratio of the horizontal chart by keep them a similiar size. This class should only be used for charts with small number of bars and has enough space to display all the data even in a mobile view. For vertical bar charts with 10 or less bars this class is automatically added.</td>
+          </tr>
+          <tr>
+            <th>.chart--success</th>
+            <td>Changes the colour of all the bars to the global success colour.</td>
+          </tr>
+          <tr>
+            <th>.chart--wraning</th>
+            <td>Changes the colour of all the bars to the global warning colour.</td>
+          </tr>
+          <tr>
+            <th>.chart--danger</th>
+            <td>Changes the colour of all the bars to the global danger colour.</td>
           </tr>
         </tbody>
       </table>
@@ -554,18 +565,62 @@ onMounted(async () => {
       <table>
         <thead>
           <tr>
-            <th>Class</th>
+            <th>Part</th>
             <th>Notes</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>chart--horizontal</td>
-            <td></td>
+            <th>outer</th>
+            <td>This is the first parent div inside of the shadow dom and contains all of the chart items including key, y axis, x axis and the chart itself.</td>
           </tr>
           <tr>
-            <td>chart--display-data</td>
-            <td></td>
+            <th>wrapper</th>
+            <td>This div is used to create a responsive aspect ratio for the chart when there is more than 10 bars.</td>
+          </tr>
+          <tr>
+            <th>chart</th>
+            <td>Another warpper layour which holds the chart table and the guidelines. </td>
+          </tr>
+          <tr>
+            <th>chart-key</th>
+            <td>A collection of checkboxes which are used to show or hide datasets.</td>
+          </tr>
+          <tr>
+            <th>key</th>
+            <td>The button like label for the checkbox used to show or hide the dataset.</td>
+          </tr>
+          <tr>
+            <th>zaxis</th>
+            <td>The whole of the z axis.</td>
+          </tr>
+          <tr>
+            <th>axis-label</th>
+            <td>The x axis has been split out into different x-axis labels.</td>
+          </tr>
+          <tr>
+            <th>guidelines</th>
+            <td>The lines that go across the chart</td>
+          </tr>
+          <tr>
+            <th>spacer</th>
+            <td>This is used to create extra space at the bottom via javascript which looks at the absolutely position x-axis labels and decides how much space needs to be created.</td>
+          </tr>
+          <tr>
+            <th>group</th>
+            <td>The row/coloumn containing either one bar or more.</td>
+          </tr>
+          <tr>
+            <th>value</th>
+            <td>In the case of the  Bar chart this will be the actual bar displayed.</td>
+          </tr>
+          <tr>
+            <th>tooltip & tooltip__ontent</th>
+            <td>When a title is added to the first cell of a row a tooltip is created.</td>
+          </tr>
+          <tr>
+            <th>popover</th>
+            <td>This is the actual displayed value when the bar is hovered over.</td>
           </tr>
         </tbody>
       </table>
@@ -577,18 +632,22 @@ onMounted(async () => {
       <table>
         <thead>
           <tr>
-            <th>Class</th>
+            <th>Var</th>
             <th>Notes</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>chart--horizontal</td>
-            <td></td>
+            <th>--chart-height</th>
+            <td>The aspect ratio converted into percentage for the smaller view of the chart</td>
           </tr>
           <tr>
-            <td>chart--display-data</td>
-            <td></td>
+            <th>--chart-height-lg</th>
+            <td>The aspect ratio converted into percentage for the larger view of the chart</td>
+          </tr>
+          <tr>
+            <th>--single-key-display</th>
+            <td>By default the chart key is only displayed when there is more than one dataset present but this can be overwriten by giving the this variable the value of dsiplay.</td>
           </tr>
         </tbody>
       </table>
@@ -596,39 +655,40 @@ onMounted(async () => {
       </template>
 
 
-      <template #events>
-
-        <h5>Dispatched events</h5>
-
+      <template #dispatched-events>
 
         <table>
           <thead>
             <tr>
               <th>Event</th>
-              <th>Description</th>
+              <th>Dispatched</th>
               <th>Details</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>view-change</td>
-              <td>Is dispatched when a user changes the view of the chart by clicking on a chart item</td>
-              <td></td>
+              <th>view-change</th>
+              <td>When a user changes the view of the chart by clicking on a chart key item.</td>
+              <td>This would be possibly useful for when supplementary content is on the page which may not the relevant for the new view and can be hidden away.</td>
             </tr>
           </tbody>
         </table>
 
+      </template>
 
-        <h5>Mutation observers</h5>
-      
+      <template #observers>
+
+      <p>There are two observers set; one is set on the attributes changing on the component the other is on the content and children of the table inside the component. So if the table content is updated the component will re-render to reflect the changes. Allowing for the chart to be dynamic and updated via the pages javascript since this content is in the light dom.</p>
       </template>
 
       <template #criteria>
 
       <ul>
-        <li>The chart should always stay in sync with the HTML table held with the component</li>
+        <li>The chart should always stay in sync with the HTML table held within the component</li>
         <li>The chart key should only show when there is more than 1 dataset</li>
         <li>Vertical barcharts should use fixed widths if there is less than 10 bars</li>
+        <li>A popover should be displayed with the complete value data on hover of the bars in the chart.</li>
+        <li>The chart should be configurable via CSS or attributes on the component</li>
       </ul>
 
       </template>
@@ -655,3 +715,10 @@ onMounted(async () => {
   </main>
 </template>
 
+<style scoped>
+
+tr > th:first-child {
+  white-space: nowrap;
+}
+
+</style>

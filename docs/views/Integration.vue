@@ -10,7 +10,7 @@ const showInstall = slots['web-component'] || slots['vue-component'] ? true : fa
 const showLayout = slots['slots'] ? true : false;
 const showModify = slots['attr'] ? true : false;
 const showStyle = slots['classes'] || slots['parts'] || slots['vars'] ? true : false;
-const showExtend = slots['events'] ? true : false;
+const showExtend = slots['dispatched-events'] || slot['event-listeners'] || slot['watched-attrs'] || slot['observers'] ? true : false;
 const showTest = slots['criteria'] ? true : false;
 
 </script>
@@ -38,7 +38,7 @@ const showTest = slots['criteria'] ? true : false;
 
       <slot name="web-component"></slot>
 
-      <h4 v-if="slots['vue-component']">Vue component</h4>
+      <h4 v-if="slots['vue-component']" class="pt-2">Vue component</h4>
       <slot name="vue-component"></slot>
 
     </details>
@@ -61,19 +61,42 @@ const showTest = slots['criteria'] ? true : false;
       
       <h4 v-if="slots['classes']">Classes</h4>
       <slot name="classes"></slot>
+      <small v-if="slots['classes']" class="d-block -pb-5">Classes should be added directly to the component.</small>
 
       <h4 v-if="slots['parts']">Parts</h4>
       <slot name="parts"></slot>
 
+      <small v-if="slots['vars']" class="d-block pb-5">*Parts can be targeted in the pages CSS be using a selector like `iam-card::part(body)` with the part name being passed into the part function.</small>
 
-      <h4 v-if="slots['vars']">CSS Variables</h4>
+
+
+      <h4 v-if="slots['vars']">Notable CSS Variables</h4>
+
       <slot name="vars"></slot>
+      <small v-if="slots['vars']" class="d-block pb-5">There are more CSS Variables used within the component and can be found when inspecting the shadow dom. The below are the more notable ones that may effect the styling of the component in a more complicated way.</small>
 
     </details>
     <details v-if="showExtend">
       <summary><h3>Extend</h3></summary>
-      <h4 v-if="slots['events']">Events</h4>
-      <slot name="events"></slot>
+      <h4 v-if="slots['dispatched-events']">Dispatched events</h4>
+      <slot name="dispatched-events"></slot>
+
+
+      <small v-if="slots['dispatched-events']" class="d-block pb-5">For the page to extend this event it needs to create an event listener on the component, see below: <br/><br/><code>cardComponent.addEventListener('dispatched-event-name', function(event){ ...do something });</code></small>
+
+
+      <h4 v-if="slots['event-listeners']">Event Listeners</h4>
+      <slot name="event-listeners"></slot>
+
+      <small v-if="slots['dispatched-events']" class="d-block pb-5">For the page to extend this event it needs to create an event listener on the component, see below: <br/><br/><code>cardComponent.addEventListener('dispatched-event-name', function(event){ ...do something });</code></small>
+
+
+      <h4 v-if="slots['watched-attrs']">Watched Attributes</h4>
+      <slot name="watched-attrs"></slot>
+
+      <h4 v-if="slots['observers']">Mutation observers</h4>
+      <slot name="observers"></slot>
+
     </details>
     <details v-if="showTest">
       <summary><h3>Test</h3></summary>

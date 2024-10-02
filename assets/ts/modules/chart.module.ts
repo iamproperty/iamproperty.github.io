@@ -1,4 +1,3 @@
-import { numberOfDays } from './helpers'
 
 // #region Functions that setup and trigger other functions 
 
@@ -50,11 +49,9 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => 
   createChartYaxis(chartElement,chartOuter,chartYaxis);
 
   if(xaxis){
-    createXaxis(chartElement,chartOuter,xaxis);
+    createXaxis(chartOuter);
   }
 
-
-  
   return true;
 };
 // #endregion
@@ -132,7 +129,7 @@ export const setEventObservers = function(chartElement:any,chartOuter:any) {
 
     for (const mutation of mutationList) {
 
-      if(mutation.attributeName == 'class' || (mutation.type === 'attributes' && mutation.attributeName === 'data-total') || mutation.type === 'attributes') {
+      if(mutation.attributeName == 'class' || (mutation.type === 'attributes') || mutation.type === 'attributes') {
 
         shadowTable.innerHTML = table.innerHTML;
         setupChart(chartElement,chartOuter,shadowTable);
@@ -180,22 +177,22 @@ export const getChartData = function(chartElement:any,chartOuter:any){
 
   let min:any = chartElement.hasAttribute('data-min') ? chartElement.getAttribute('data-min') : 0;
   let max:any = chartElement.hasAttribute('data-max') ? chartElement.getAttribute('data-max') : getLargestValue(chartElement,table);
-  let type:string = chartElement.hasAttribute('data-type') ? chartElement.getAttribute('data-type') : 'column';
+  //let type:string = chartElement.hasAttribute('data-type') ? chartElement.getAttribute('data-type') : 'column';
   let yaxis:any = chartElement.hasAttribute('data-yaxis') ? chartElement.getAttribute('data-yaxis').split(',') : [];
   let guidelines:any = chartElement.hasAttribute('data-guidelines') ? chartElement.getAttribute('data-guidelines').split(',') : [];
-  let targets:any = chartElement.hasAttribute('data-targets') ? JSON.parse(chartElement.getAttribute('data-targets')) : null;
-  let events:any = chartElement.hasAttribute('data-events') ? JSON.parse(chartElement.getAttribute('data-events')) : null;
+  //let targets:any = chartElement.hasAttribute('data-targets') ? JSON.parse(chartElement.getAttribute('data-targets')) : null;
+  //let events:any = chartElement.hasAttribute('data-events') ? JSON.parse(chartElement.getAttribute('data-events')) : null;
   let xaxis:any = chartElement.hasAttribute('data-xaxis') ? chartElement.getAttribute('data-xaxis').split(',') : null;
-  let increment = chartElement.hasAttribute('data-increment') ? chartElement.getAttribute('data-increment'): null;
+  //let increment = chartElement.hasAttribute('data-increment') ? chartElement.getAttribute('data-increment'): null;
   
-  let start:any = chartElement.hasAttribute('data-start') ? chartElement.getAttribute('data-start') : 0;
-  let end:any = chartElement.hasAttribute('data-end') ? chartElement.getAttribute('data-end') : getLargestValue(chartElement,table); // TODO - get largest value from the data-xaxis
+  //let start:any = chartElement.hasAttribute('data-start') ? chartElement.getAttribute('data-start') : 0;
+  //let end:any = chartElement.hasAttribute('data-end') ? chartElement.getAttribute('data-end') : getLargestValue(chartElement,table); // TODO - get largest value from the data-xaxis
 
 
-  let slope:any = chartElement.hasAttribute('data-slope') ? chartElement.getAttribute('data-slope') : null;
-  let yInt:any = chartElement.hasAttribute('data-yint') ? chartElement.getAttribute('data-yint') : null;
+  //let slope:any = chartElement.hasAttribute('data-slope') ? chartElement.getAttribute('data-slope') : null;
+  //let yInt:any = chartElement.hasAttribute('data-yint') ? chartElement.getAttribute('data-yint') : null;
 
-  return {min,max,type,yaxis,targets,events,xaxis,increment,start,end,slope,yInt,guidelines};
+  return {min,max,yaxis,xaxis,guidelines};
 }
 
 function getLargestValue(chartElement:any,table:any){
@@ -299,19 +296,6 @@ export const setCellData = function(chartElement:any,chartOuter:any,table:any){
         td.setAttribute('data-label',table.querySelectorAll('thead th')[index].textContent);
     });
 
-    /*
-    if(tr.querySelector('[data-label="Total"]')){
-      tr.setAttribute('data-total',tr.querySelector('[data-label="Total"][data-numeric]').getAttribute('data-numeric'));
-    }
-
-    if(tr.querySelector('[data-label="Min"]')){
-      tr.setAttribute('data-min',tr.querySelector('[data-label="Min"][data-numeric]').getAttribute('data-numeric'));
-    }
-    if(tr.querySelector('[data-label="Max"]')){
-      tr.setAttribute('data-max',tr.querySelector('[data-label="Max"][data-numeric]').getAttribute('data-numeric'));
-    }
-
-      */
 
     let rowMin = tr.hasAttribute('data-min') ? tr.getAttribute('data-min') : min;
     let rowMax = tr.hasAttribute('data-max') ? tr.getAttribute('data-max') : max;
@@ -439,17 +423,10 @@ function createChartKeyItem(chartID:string,index:number,text:Array<string>,chart
 
 export const createChartGuidelines = function(chartElement:any,chartOuter:any,chartGuidelines:any){
 
-  let {min, max, yaxis, increment, guidelines} = getChartData(chartElement,chartOuter);
+  let {min, max, yaxis, guidelines} = getChartData(chartElement,chartOuter);
 
   if(!guidelines.length)
     guidelines = yaxis;
-
-
-  if(increment == "days"){
-    
-    max = numberOfDays(min,max);
-    min = 0;
-  }
 
   chartGuidelines.innerHTML = '';
   for (var i = 0; i < guidelines.length; i++) {
@@ -465,54 +442,28 @@ export const createChartGuidelines = function(chartElement:any,chartOuter:any,ch
 
 export const createChartYaxis = function(chartElement:any,chartOuter:any,chartYaxis:any){
 
-  let {min, max, yaxis, increment} = getChartData(chartElement,chartOuter);
-
-  let startDay = min;
-
-  if(increment == "days"){
-
-    max = numberOfDays(min,max);
-    min = 0;
-  }
-
+  let {min, max, yaxis} = getChartData(chartElement,chartOuter);
 
   chartYaxis.innerHTML = '';
   for (var i = 0; i < yaxis.length; i++) {
 
     let value = parseFloat(yaxis[i].replace('£','').replace('%',''));
 
-    if(increment == "days"){
-
-        value = numberOfDays(startDay,yaxis[i]);
-      
-    }
-
     let { axis } = getValues(value,min,max);
     chartYaxis.innerHTML += `<div class="axis__point" style="--percent:${axis}%;"><span>${yaxis[i]}</span></div>`;
   }
 }
 
-export const createXaxis = function(chartElement:any,chartOuter:any,xaxis:any){
+export const createXaxis = function(chartOuter:any){
 
   const chart = chartOuter.querySelector('.chart');
   let chartXaxis = chartOuter.querySelector('.chart__xaxis');
-
-  let {increment,start,end} = getChartData(chartElement,chartOuter);
 
   if(!chartXaxis){
     chartXaxis = document.createElement('div');
     chartXaxis.setAttribute('class','chart__xaxis');
   }
-  if(increment && start && end){
-    chartXaxis.innerHTML = '';
-    for (var i = 0; i < xaxis.length; i++) {
 
-      let value = parseFloat(xaxis[i].replace('£','').replace('%',''));
-      let position = ((value - start)/(end - start)) * 100;
-
-      chartXaxis.innerHTML += `<div class="axis__point" style="--percent:${position}%;"><span>${xaxis[i]}</span></div>`;
-    }
-  }
   chart.prepend(chartXaxis);
 }
 
