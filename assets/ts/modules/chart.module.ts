@@ -42,11 +42,11 @@ export const setupChart = (chartElement:any,chartOuter:any,tableElement:any) => 
 
   let {xaxis} = getChartData(chartElement);
 
-  setCellData(chartElement,chartOuter,tableElement);
+  setCellData(chartElement,tableElement);
 
   createChartKey(chartOuter,tableElement,chartKey);
-  createChartGuidelines(chartElement,chartOuter,chartGuidelines);
-  createChartYaxis(chartElement,chartOuter,chartYaxis);
+  createChartGuidelines(chartElement,chartGuidelines);
+  createChartYaxis(chartElement,chartYaxis);
 
   if(xaxis){
     createXaxis(chartOuter);
@@ -112,7 +112,7 @@ export const setEventListener = function(chartElement:any, chartOuter:any) {
 
     
     shadowTable.innerHTML = table.innerHTML;
-    setCellData(chartElement,chartOuter,shadowTable);
+    setCellData(chartElement,shadowTable);
 
   });
 }
@@ -249,7 +249,7 @@ const getValues = function(value:number,min:any,max:any,start?:number){
 // #endregion
 
 // #region SET functions - set data attributes and classes
-export const setCellData = function(chartElement:any,chartOuter:any,table:any){
+export const setCellData = function(chartElement:any,table:any){
   
   Array.from(table.querySelectorAll('tbody tr')).forEach((tr:any) => {
 
@@ -421,7 +421,7 @@ function createChartKeyItem(chartID:string,index:number,text:Array<string>,chart
   return previousInput;
 }
 
-export const createChartGuidelines = function(chartElement:any,chartOuter:any,chartGuidelines:any){
+export const createChartGuidelines = function(chartElement:any,chartGuidelines:any){
 
   let {min, max, yaxis, guidelines} = getChartData(chartElement);
 
@@ -440,7 +440,7 @@ export const createChartGuidelines = function(chartElement:any,chartOuter:any,ch
   }
 }
 
-export const createChartYaxis = function(chartElement:any,chartOuter:any,chartYaxis:any){
+export const createChartYaxis = function(chartElement:any,chartYaxis:any){
 
   let {min, max, yaxis} = getChartData(chartElement);
 
