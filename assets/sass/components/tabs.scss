@@ -33,20 +33,6 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   .tabs__links__wrapper {
     position: relative;
     margin: 0 auto 2rem;
-
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      left: auto;
-      right: -1.5rem;
-      top: 0;
-      bottom: 1px;
-      width: 2.5rem;
-      background: var(--tabs-gradient, linear-gradient(90deg, color(from var(--colour-canvas) a98-rgb r g b / 0), color(from var(--colour-canvas) a98-rgb r g b / 1)));
-      z-index: 1000;
-      pointer-events: none;
-    }
   
     &:after {
       content: "";
@@ -75,6 +61,9 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 .tabs__links {
   
   scroll-snap-type: x mandatory;
+
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
 }
 
 .tabs__links {

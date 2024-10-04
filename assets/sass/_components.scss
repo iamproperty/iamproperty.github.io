@@ -34,14 +34,6 @@ iam-search .optional-text {
   display: none!important;
 }
 
-// tabs
-
-@media screen and (prefers-color-scheme: dark) {
-  .tabs {
-    --tabs-gradient: linear-gradient(90deg, rgba(38,38,38,0), rgba(38,38,38,1));
-  }
-}
-
 // Table dark mode support
 iam-table {
 

@@ -34,7 +34,7 @@ class iamTable extends HTMLElement {
       <slot></slot>
     </div>
     </div>
-    <iam-pagination class="pagination--table" ${this.hasAttribute('data-page')?`data-page="${this.getAttribute('data-page')}"`:''} ></iam-pagination>
+    <iam-pagination part="pagination" class="pagination--table" ${this.hasAttribute('data-page')?`data-page="${this.getAttribute('data-page')}"`:''} ></iam-pagination>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
@@ -284,10 +284,7 @@ class iamTable extends HTMLElement {
   
   attributeChangedCallback(attrName, oldVal, newVal) {
     
-    if(this.hasAttribute('data-no-submit')){
-      return false;
-    }
-
+    
     this.pagination = this.shadowRoot.querySelector('iam-pagination');
 
     switch (attrName) {

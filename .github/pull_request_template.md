@@ -14,7 +14,6 @@ FEG-999
 
 The below needs to be done before a pull request can be approved:
 
-- [ ] The pull request command has been ran `npm run pull-request`
 - [ ] New components work as a Vue component, Web component and as static HTML
 - [ ] New components added as an export to src/index.js
 - [ ] New components/features have sufficient unit tests
