@@ -1,0 +1,93 @@
+@use "../_func.scss" as *;
+
+:host {
+  --card-icon-right: 1rem;
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-border-radius);
+  position: relative;
+  font-weight: bold;
+  font-size: rem(18);
+  line-height: rem(24);
+  color: var(--colour-primary);
+  min-height: calc(100% - 2rem);
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 0;
+  background: var(--colour-canvas-2);
+  outline: 2px solid var(--outline-colour,--colour-canvas-2);
+  outline-offset: -2px;
+  margin-bottom: 2rem;
+}
+
+
+:host(.border-0) {
+  box-shadow: none;
+  --card-left-padding: 0rem;
+  outline-offset: 1px!important;
+}
+
+.card__body {
+  position: relative;
+  padding: var(--card-top-padding) var(--card-right-padding) 0 var(--card-left-padding);
+  z-index: -1;
+}
+
+.card__footer {
+  margin-top: auto;
+  padding: 0 var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
+}
+
+::slotted(i){
+  font-size: rem(24)!important;
+  margin: -3px var(--card-icon-right) 0 0!important;
+  vertical-align: middle!important;
+}
+::slotted(i:not(.fa-light):not(.fa-bold)){
+  font-weight: 400!important;
+}
+
+::slotted(span:not(.badge)){
+  display: block!important;
+  font-weight: normal!important;
+  font-size: rem(16)!important;
+}
+::slotted(small){
+  padding-top: rem(16)!important;
+  display: block!important;
+  font-weight: normal!important;
+  padding-bottom: 0!important;
+  color: var(--colour-body);
+}
+::slotted(span:not(.badge):not([class*="pt-"])){
+  padding-top: rem(24)!important;
+}
+
+// #region card with an image
+.card:has(.card__head) {
+  .card__head:has(img) {
+    padding-bottom: 0;
+    padding-top: var(--img-height, 27%);
+    position: relative;
+    overflow: hidden;
+    background: rgba(0,0,0,0.1);
+    z-index: -1;
+
+    > img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 102%;
+      height: 102%;
+      object-fit: cover;
+    }
+  }
+}
+
+:host(.card--lg-image) .card__head:has(img){
+  
+  padding-top: 55%;
+}
+// #endregion

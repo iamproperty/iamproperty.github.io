@@ -662,6 +662,14 @@ const routes = [
           title: 'Record card | Components | iamkey'
         },
         component: () => import('./views/cards/RecordCardDoc.vue')
+      },
+      {
+        path: 'video-card',
+        name: 'Video card',
+        meta: {
+          title: 'Video card | Components | iamkey'
+        },
+        component: () => import('./views/cards/VideoCardDoc.vue')
       }
     ]
   },
