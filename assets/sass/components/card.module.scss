@@ -2,6 +2,11 @@
 
 :host {
   --card-icon-right: 1rem;
+  --card-head-top-padding: 2rem;
+  --card-head-bottom-padding: 2rem;
+  --card-footer-bottom-padding: 1.5rem;
+  --card-head-height: 6rem;
+
   box-shadow: var(--card-box-shadow);
   border-radius: var(--card-border-radius);
   position: relative;
@@ -20,8 +25,12 @@
   outline: 2px solid var(--outline-colour,--colour-canvas-2);
   outline-offset: -2px;
   margin-bottom: 2rem;
-}
 
+  > * {
+    width: 100%;
+    box-sizing: border-box;;
+  }
+}
 
 :host(.border-0) {
   box-shadow: none;
@@ -29,15 +38,34 @@
   outline-offset: 1px!important;
 }
 
+.card__head:has(img) {
+  
+  min-height: var(--card-head-height);
+  position: relative;
+  overflow: hidden;
+  background: rgba(0,0,0,0.1);
+  z-index: -1;
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    object-fit: cover;
+  }
+}
+
 .card__body {
   position: relative;
-  padding: var(--card-top-padding) var(--card-right-padding) 0 var(--card-left-padding);
+  padding: var(--card-head-top-padding) var(--card-right-padding) var(--card-head-bottom-padding) var(--card-left-padding);
   z-index: -1;
 }
 
 .card__footer {
-  margin-top: auto;
-  padding: 0 var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
+  margin-top: 0;
+  padding: 0 var(--card-right-padding) var(--card-footer-bottom-padding) var(--card-left-padding);
 }
 
 ::slotted(i){
@@ -65,29 +93,7 @@
   padding-top: rem(24)!important;
 }
 
-// #region card with an image
-.card:has(.card__head) {
-  .card__head:has(img) {
-    padding-bottom: 0;
-    padding-top: var(--img-height, 27%);
-    position: relative;
-    overflow: hidden;
-    background: rgba(0,0,0,0.1);
-    z-index: -1;
-
-    > img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 102%;
-      height: 102%;
-      object-fit: cover;
-    }
-  }
+::slotted(:is(a,button)[slot="footer"]){
+  margin-bottom: 0!important;
 }
 
-:host(.card--lg-image) .card__head:has(img){
-  
-  padding-top: 55%;
-}
-// #endregion

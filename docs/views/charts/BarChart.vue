@@ -1,46 +1,20 @@
 <script setup>
 import BarChart from '@/components/BarChart/BarChart.vue'
-import Notification from '@/components/Notification/Notification.vue'
 import DSHeader from '../DSHeader.vue'
 import Integration from '../Integration.vue'
+import TrackEvents from '../TrackEvents.vue'
 import Versions from '../Versions.vue'
 import headerImg from '../../img/cards-header.png'
-import { onMounted, ref } from 'vue';
 
 const arrColours= ["3", "4","5","6","7","8","9","11","12"];
-const $toast = ref();
-const toastInterval = ref();
-
-onMounted(async () => {
-  
-  Array.from(document.querySelectorAll('iam-barchart')).forEach((chart, index) => {
-          
-    chart.addEventListener('view-change', (event) => {
-
-      clearInterval(toastInterval.value);
-
-      $toast.value.$el.classList.remove('d-none');
-      let msgElement = $toast.value.$el.querySelector('.msg');
-      msgElement.innerHTML = `${event.type} event has been dispatched<br/>${JSON.stringify(event.detail)}`;
-
-      toastInterval.value = setInterval(function(){
-
-        $toast.value.$el.classList.add('d-none');
-      }, 5000);
-    });
-  });
-});
-
-
 
 
 </script>
 
 <template>
 
-
-  <div class="container notification__holder bottom"><Notification data-type="toast" data-dismiss ref="$toast" class="d-none"><strong>Event</strong><br/> <span class="msg"></span> {{ eventMsg }}</Notification></div>
-
+  <TrackEvents selector="iam-barchart" :events="['view-change']"></TrackEvents>
+  
   <main>
 
     <DSHeader :image="headerImg" section="components">
