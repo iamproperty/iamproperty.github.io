@@ -13,6 +13,10 @@
       <ul>
         <li><a href="/examples/pagination">Pagination</a></li>
       </ul>
+      <h2 id="charts">Charts</h2>
+      <ul>
+        <li><a href="/examples/barcharts">Bar Charts</a></li>
+      </ul>
     </div>
     <div class="container">
       <h2 class="h1">Full page examples</h2>

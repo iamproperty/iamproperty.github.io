@@ -4,7 +4,7 @@
    <ul class="breadcrumb mb-0 d-sm-none">
       <li><a href="/components">Components</a></li>
    </ul>
-   <h1>Charts (BETA)</h1>
+   <h1>Charts (Deprecated)</h1>
    <p>Show individual values of a data set so users can compare the values to each other.</p>
    <p class="note"><strong>Note: </strong>The data is added to the page using a table element which is then converted into a chart by using a combination of CSS and supporting SVG's.</p>
    </div>

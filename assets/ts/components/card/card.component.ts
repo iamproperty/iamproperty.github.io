@@ -14,7 +14,7 @@ class iamCard extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
+    if(this.querySelector('*:not(.badge):not(small):not(.btn):not(button) > [class*="fa-"]:not(.btn)'))
       this.classList.add('card--has-icon');
 
     let classList = this.classList.toString();
@@ -45,7 +45,8 @@ class iamCard extends HTMLElement {
 
   const createCardConent () {
 
-    return `${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
+    // TODO split this out a bit
+    return `${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head" part="head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
     <div class="card__body" part="body">
     ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
     ${!this.hasAttribute('data-image') && !this.hasAttribute('data-record') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
@@ -55,6 +56,13 @@ class iamCard extends HTMLElement {
     </div>
     ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
     <slot name="checkbox"></slot>
+    <slot name="primary-action"></slot>
+    <div class="dialog__wrapper d-none">
+      <button class="btn btn-secondary btn-compact fa-ellipsis-vertical" popovertarget="actions" title="${this.hasAttribute('data-menu-title') ? this.getAttribute('data-menu-title') : 'Further actions'}">Lorum ipsum</button>
+      <dialog class="dialog--fix dialog--list" id="actions" popover>
+        <slot name="actions"></slot>
+      </dialog>
+    </div>
     <div class="card__footer" part="footer">
       <slot name="footer"></slot>
       <slot name="btns"></slot>
@@ -66,10 +74,33 @@ class iamCard extends HTMLElement {
     this.classList.add('loaded');
 
     // Mimic clicking the parent node so the focus and target events can be on the card
-    const parentNode = this.parentNode.closest('a, button, label, router-link')
+    const component = this;
+    const parentNode = component.parentNode.closest('a, button, label, router-link');
     const card = this.shadowRoot.querySelector('.card')
     const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
     const recordType = this.hasAttribute('data-record') ? this.getAttribute('data-record') : '';
+
+
+    // Add the actions slot to the buttons and links to move them into a dialog warpper
+    const actionsWrapper = this.shadowRoot.querySelector('.dialog__wrapper');
+    let buttons = component.querySelectorAll('button[slot="actions"],a[slot="actions"]');
+    if(buttons.length){
+
+      const actionsWrapper = this.shadowRoot.querySelector('.dialog__wrapper');
+      const actionsDialog = this.shadowRoot.querySelector('.dialog__wrapper dialog');
+      const actionsBtn = actionsWrapper.querySelector('button');
+
+      actionsWrapper.classList.remove('d-none');
+
+      Array.from(buttons).forEach((button,index)=>{
+
+        button.classList.add('btn');
+        button.classList.add('btn-action');
+      });
+    }
+    else {
+      actionsWrapper.remove();
+    }
 
     /* 
       If the parentNode is actually just a div, 
@@ -209,7 +240,7 @@ class iamCard extends HTMLElement {
         if(oldVal != newVal){
           let classList = this.classList.toString();
               
-          if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
+          if(this.querySelector('*:not(.badge):not(small):not(.btn):not(button) > [class*="fa-"]:not(.btn)'))
             classList += ' card--has-icon';
 
           this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);
