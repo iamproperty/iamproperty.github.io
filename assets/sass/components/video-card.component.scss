@@ -1,0 +1,80 @@
+@use "../_func.scss" as *;
+@use "card.module.scss" as *;
+
+
+:host {
+  --card-right-padding: 1rem;
+
+  --card-head-height: 10rem;
+
+  font-size: 1.5rem;
+  --line-height: 2rem;
+}
+
+
+//video-card--top
+
+
+:host(:is([data-youtube],[data-vimeo]):not(.video-card--top)) .card__head {
+  order: 2;
+}
+
+:host(:is([data-youtube],[data-vimeo])) .card__head {
+
+  cursor: pointer;
+  position: relative;
+
+  > *:not(img){
+    z-index: -1;
+  }
+
+  &:before {
+    content: "";
+    display: block;
+    background-color: var(--video-btn-colour, var(--colour-success));
+    height: 5rem;
+    width: 5rem;
+    position: absolute;
+    top: calc(50% - 2.5rem);
+    left: calc(50% - 2.5rem);
+    z-index: 2;
+    border-radius: 2.5rem;
+  }
+
+  &:after {
+
+    $icon-play: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><path d='M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z'/></svg>");
+    --icon: #{$icon-play};
+
+    content: "";
+    display: block;
+    height: 2rem;
+    width: 2rem;
+    position: absolute;
+    top: calc(50% - 1rem);
+    left: calc(50% - 0.8rem);
+    z-index: 5;
+    background: var(--colour-primary-theme);
+    mask-image: var(--icon);
+    mask-size: 80%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon);
+    -webkit-mask-size: 80%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+  }
+
+  &:is(:hover,:focus) {
+    --video-btn-colour: var(--colour-canvas);
+  }
+  &:is(:active) {
+    --video-btn-colour: color-mix(in oklab, var(--colour-success), #000000 20%) !important;
+  }
+}
+
+.embed {
+  aspect-ratio: 1 / 1;
+  display: block;
+  width: 10rem;
+}

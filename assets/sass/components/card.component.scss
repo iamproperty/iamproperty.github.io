@@ -1,0 +1,82 @@
+@use "../_func.scss" as *;
+@use "card.module.scss" as *;
+@use "../elements/dialog.scss" as *;
+@use "../elements/buttons.scss" as *;
+
+:host {
+  --card-right-padding: 1rem;
+
+  --card-head-height: 10rem;
+
+  font-size: 1.5rem;
+  --line-height: 2rem;
+}
+
+.dialog__wrapper {
+  position: absolute;
+  right: 1rem;
+  bottom: 2rem;
+  min-width: 3rem !important;
+  left: auto;
+  z-index: 999;
+
+  > [popover] {
+    
+    display: var(--menu-display, none);
+    position: fixed;
+    top: anchor(top);
+    position-anchor: --anchor-el;
+    left: anchor(right);
+    right: auto;
+    margin: 0 0 0 #{rem(4)};
+    padding: rem(16);
+
+
+    &::backdrop {
+      display: none;
+    }
+  }
+
+  > [popover]:popover-open {
+
+    display: block!important;
+  }
+
+  &:has([popover]:popover-open) > button {
+    background-color: var(--colour);
+  }
+
+  > button[popovertarget] {
+    margin: 0;
+    anchor-name: --anchor-el;
+
+    &:not(:hover,:focus,:focus-within,:active){
+        
+      background: var(--ellipsis-bg);
+    }
+  }
+}
+
+
+::slotted([slot="actions"]){
+  border: none !important;
+  margin: 0 !important;
+  display: block!important;
+  width: fit-content;
+}
+::slotted([slot="primary-action"]){
+  overflow: hidden;
+  background-color: transparent;
+  text-indent: -300%;
+  position: absolute!important;
+  inset: 0;
+  margin: 0!important;
+  z-index: 99;
+  border: none;
+}
+::slotted([slot="primary-action"]:is(:hover,:focus,.hover)) {
+  --hover-outline-colour-default: var(--colour, var(--colour-primary));
+  outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
+  outline-offset: -2px;
+  border-radius: var(--card-border-radius)!important;
+}

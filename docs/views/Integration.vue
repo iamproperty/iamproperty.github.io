@@ -152,3 +152,11 @@ const showTrack = slots['data-layer'] ? true : false;
     </details>
   </Tabs>
 </template>
+
+<style scoped>
+
+tr > th:first-child {
+  white-space: nowrap;
+}
+
+</style>
