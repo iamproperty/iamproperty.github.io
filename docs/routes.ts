@@ -657,7 +657,7 @@ const routes = [
       },
       {
         path: 'record-card',
-        name: 'Record card (Beta)',
+        name: 'Record card',
         meta: {
           title: 'Record card | Components | iamkey'
         },

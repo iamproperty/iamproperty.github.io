@@ -196,7 +196,7 @@ main > :is(.full-width, .container, iam-header) {
   grid-column: container;
 }
 
-main > :is(.full-width, [class*="bg-"], iam-collapsible-side) {
+main > :is(.full-width, [class*="bg-"]:has(.container), iam-collapsible-side) {
   grid-column: full-width;
 }
 

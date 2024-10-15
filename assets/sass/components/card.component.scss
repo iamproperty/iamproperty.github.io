@@ -1,24 +1,170 @@
 @use "../_func.scss" as *;
 @use "card.module.scss" as *;
 @use "../elements/dialog.scss" as *;
+@use "../elements/popover.scss" as *;
 @use "../elements/buttons.scss" as *;
 
 :host {
   --card-right-padding: 1rem;
+  //--card-head-height: 10rem;
+  --card-icon-right: 1rem;
 
-  --card-head-height: 10rem;
-
-  font-size: 1.5rem;
-  --line-height: 2rem;
 }
 
+:host(:is(:hover,:focus,.hover):not(.prevent-hover)) {
+  --hover-outline-colour-default: var(--colour, var(--colour-primary));
+  outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
+  outline-offset: -2px;
+}
+
+:host(:is(:active,.active):not(.prevent-hover)) {
+  --card-icon-right: var(--card-icon-right-overide,0.5rem);
+  outline: none;
+}
+
+:host(.prevent-hover){
+
+  pointer-events: none;
+
+  * {
+    pointer-events: all;
+  }
+}
+
+// #region Right arrow
+:host(.show-icon) .card__body {
+  --card-right-padding: 3.5rem;
+  
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    right: var(--card-icon-right);
+    bottom: var(--card-bottom-padding);
+    height: rem(24);
+    width: rem(24);
+    background: var(--colour-warning);
+    border-radius: 50%;
+  }
+
+  &:after {
+    background: var(--colour-primary-theme);
+    mask-image: var(--icon,var(--icon-arrow));
+    mask-size: 50%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon,var(--icon-arrow));
+    -webkit-mask-size: 50%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    z-index: 2;
+  }
+}
+
+:host(:is(:hover,:focus,.hover):not(.prevent-hover):not([class*="colour-"])) {
+  
+  .card__body {
+
+    &:before {
+      background: var(--hover-icon-bg, var(--colour-primary-theme));
+    }
+    &:after {
+      background: var(--hover-icon-colour, #ffffff);
+    }
+  }
+}
+
+:host(:is(:active, .active):not(.prevent-hover):not([class*="colour-"])){
+
+  .card__body:before {
+    background: var(--hover-icon-bg, var(--colour-primary-theme));
+  }
+  .card__body:after {
+    background: var(--hover-icon-colour, #ffffff);
+  }
+}
+// #endregion
+
+// #region illustration
+.card__body {
+  &:has(.card__illustration) {
+
+    align-items: center;
+    display: flex;
+
+    .card__illustration {
+      height: rem(64);
+      width: rem(64);
+      margin-right: rem(24);
+      margin-top: rem(-20);
+      margin-bottom: rem(-20);
+      position: relative;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }    
+  }
+}
+
+// #endregion
+
+// #region border left
+:host([class*="colour-"]) {
+  
+  border-left: rem(12) solid var(--colour,var(--colour-primary));
+}
+// #endregion
+
+// #region secondary button
+::slotted([slot="secondary"]) {
+  position: absolute!important;
+  top: 0.5rem!important;
+  right: 0!important;
+  margin: 0.5rem 0.5rem 0 0!important;
+  z-index: 999!important;
+}
+
+::slotted([slot="secondary"]:not(:hover,:focus,:active,.hover)) {
+
+  background: none!important;
+  color: var(--colour-btn)!important;
+}
+// #endregion
+
+// #region checkbox
+::slotted([slot="checkbox"]){
+
+  position: absolute!important;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: rem(32);
+  height: rem(32);
+  height: rem(40);
+  overflow: hidden;
+}
+// #endregion
+
+// #region Multi-action card
 .dialog__wrapper {
   position: absolute;
   right: 1rem;
   bottom: 2rem;
-  min-width: 3rem !important;
+  width: 3rem !important;
   left: auto;
   z-index: 999;
+
+
+  > .btn:before {
+    content: "\f142";
+    font-family: "Font Awesome 6 Pro";
+  }
+
 
   > [popover] {
     
@@ -57,8 +203,7 @@
   }
 }
 
-
-::slotted([slot="actions"]){
+::slotted([slot="btns"]){
   border: none !important;
   margin: 0 !important;
   display: block!important;
@@ -74,9 +219,10 @@
   z-index: 99;
   border: none;
 }
-::slotted([slot="primary-action"]:is(:hover,:focus,.hover)) {
+:host(:not(.prevent-hover)) ::slotted([slot="primary-action"]:is(:hover,:focus,.hover)) {
   --hover-outline-colour-default: var(--colour, var(--colour-primary));
   outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
   outline-offset: -2px;
   border-radius: var(--card-border-radius)!important;
 }
+// #endregion

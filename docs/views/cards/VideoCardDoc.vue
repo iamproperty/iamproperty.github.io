@@ -34,8 +34,6 @@ import Table from '@/components/Table/Table.vue'
     
     <p>This card provides user with header text, optional body copy, optional small button as well as a hoverable thumbnail. Once the thumbnail block is clicked the video will open as a model.</p>
 
-
-
     <div class="container visualtest">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 ">
         <div class="col video-col">

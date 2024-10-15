@@ -19,7 +19,7 @@
     <p>The header card is primarily used in or near the header of the page and is used to direct the user to another page or modal.</p>
     
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -49,7 +49,7 @@
 
     <div class="container visualtest">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">With Icon</span>
           <a href="/client-onbaording">
@@ -84,7 +84,7 @@
     <p>This is a variation of the Header card which includes the addition of an SVG illustration. </p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -112,7 +112,7 @@
     <p>This is a variation of the Header card which includes the addition body copy description.</p>
   
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -147,33 +147,33 @@
     <p>This is a variation of the Header card which includes the addition of a counter and a secondary action.</p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4 pe-none">
         
-        <div class="col">
+        <div class="col pe-none">
           <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/">
-            <Card class="card--secondary" data-total="99" data-add-link="/?add=true">Properties</Card>
-          </a>
+          
+            <Card class="card--secondary" data-total="99" >Properties <a href="/test" slot="primary-action">Properties page</a> <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
+          
         </div>
 
-        <div class="col4 pe-none">
+        <div class="col  pe-none">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
           <button>
-            <Card class="card--secondary hover" data-total="99" data-add-link="/?add=true">Properties</Card>
+            <Card class="card--secondary hover" data-total="99" >Properties <a href="/test" slot="primary-action">Properties page</a> <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
         
-        <div class="col4 pe-none">
+        <div class="col  pe-none">
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <button>
-            <Card class="card--secondary active" data-total="99" data-add-link="/?add=true">Properties</Card>
+            <Card class="card--secondary active" data-total="99" >Properties<a href="/test" slot="primary-action">Properties page</a> <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
 
-        <div class="col4 pe-no/ne">
+        <div class="col pe-no/ne">
           <span class="pb-3 d-block text-uppercase">Secondary action hover/focus</span>
           <button>
-            <Card class="card--secondary secondary-hover" data-total="99" data-add-link="/?add=true">Properties</Card>
+            <Card class="card--secondary" data-total="99" >Properties<a href="/test" slot="primary-action">Properties page</a> <button class="hover btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
 
@@ -187,31 +187,31 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4 pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/">
-            <Card class="card--secondary" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
+            <Card class="card--secondary">Properties <i class="fa fa-key" slot="total-icon"></i><a href="/test" slot="primary-action">Properties page</a> <button class=" btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </a>
         </div>
-        <div class="col4 pe-none">
+        <div class="col  pe-none">
           <span class="pb-3 d-block text-uppercase">Hover/focus State </span>
           <button>
-            <Card class="card--secondary hover" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
+            <Card class="card--secondary hover">Properties <i class="fa fa-key" slot="total-icon"></i><a href="/test" slot="primary-action">Properties page</a> <button class=" btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
-        <div class="col4 pe-none">
+        <div class="col  pe-none">
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <button>
-            <Card class="card--secondary active" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
+            <Card class="card--secondary active">Properties <i class="fa fa-key" slot="total-icon"></i><a href="/test" slot="primary-action">Properties page</a> <button class=" btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Secondary action hover/focus</span>
           <a href="/">
-            <Card class="card--secondary secondary-hover" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
+            <Card class="card--secondary secondary-hover">Properties <i class="fa fa-key" slot="total-icon"></i><a href="/test" slot="primary-action">Properties page</a> <button class="hover btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </a>
         </div>
 
@@ -225,7 +225,7 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -256,7 +256,7 @@
     <p>The feature card is a variation of the header card which includes the ability to added an image or SVG to the top of the card. This is a useful card for pointing users to features, articles or any larger item which would benefit From a greater visual prominance.</p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -287,7 +287,7 @@
     <p>This is a variation of the feature card which also features a label to show status or categorise the card.</p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -326,7 +326,7 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -372,7 +372,7 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -418,7 +418,7 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -490,8 +490,8 @@
 
     <h3>Multi-action card</h3>
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
-        <div class="col">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col video-col">
 
           <span class="pb-3 d-block text-uppercase">Default State</span>
           
@@ -500,13 +500,13 @@
               <span>Updated by: John smith</span>
               <span class="pt-1">Updated on: 03/01/2024</span>
               <a href="/test" slot="primary-action" title="Edit template">Edit</a>
-              <button slot="actions">Duplicate</button>
-              <a href="/cards/card" slot="actions">Duplicate</a>
-              <button slot="actions">Delete</button>
+              <button slot="btns">Duplicate</button>
+              <a href="/cards/card" slot="btns">Duplicate</a>
+              <button slot="btns" class="btn btn-action">Delete</button>
             </Card>
             
         </div>
-        <div class="col">
+        <div class="col video-col">
 
           <span class="pb-3 d-block text-uppercase">Hover State</span>
           
@@ -515,14 +515,14 @@
               <span>Updated by: John smith</span>
               <span class="pt-1">Updated on: 03/01/2024</span>
               <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
-              <button slot="actions">Duplicate</button>
-              <a href="/cards/card" slot="actions">Duplicate</a>
-              <button slot="actions">Delete</button>
+              <button slot="btns">Duplicate</button>
+              <a href="/cards/card" slot="btns">Duplicate</a>
+              <button slot="btns">Delete</button>
             </Card>
             
         </div>
 
-        <div class="col">
+        <div class="col video-col">
 
           <span class="pb-3 d-block text-uppercase">Ellipsis Hover State</span>
           
@@ -530,16 +530,16 @@
               Name of template Here
               <span>Updated by: John smith</span>
               <span class="pt-1">Updated on: 03/01/2024</span>
-              <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
-              <button slot="actions">Duplicate</button>
-              <a href="/cards/card" slot="actions">Duplicate</a>
-              <button slot="actions">Delete</button>
+              <a href="/test" slot="primary-action" title="Edit template">Edit</a>
+              <button slot="btns">Duplicate</button>
+              <a href="/cards/card" slot="btns">Duplicate</a>
+              <button slot="btns">Delete</button>
             </Card>
             
         </div>
 
 
-      <div class="col">
+      <div class="col video-col">
 
       <span class="pb-3 d-block text-uppercase">Ellipsis Menu Open</span>
 
@@ -547,10 +547,10 @@
           Name of template Here
           <span>Updated by: John smith</span>
           <span class="pt-1">Updated on: 03/01/2024</span>
-          <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
-          <button slot="actions">Duplicate</button>
-          <a href="/cards/card" slot="actions">Duplicate</a>
-          <button slot="actions">Delete</button>
+          <a href="/test" slot="primary-action" title="Edit template">Edit</a>
+          <button slot="btns">Duplicate</button>
+          <a href="/cards/card" slot="btns">Duplicate</a>
+          <button slot="btns">Delete</button>
         </Card>
         
       </div>
@@ -567,22 +567,11 @@
       <img :src="cardModes" alt="" class="mb-4" />
     </div>
 
-
     <div class="container">
       
       <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h3>Web component</h3></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h3>Vue component</h3></summary>
-          <Readme></Readme>
-        </details>
-        
-      </Tabs>
 
+      
     </div>
     <div class="bg-light version-control">
       <div class="container">
@@ -610,10 +599,8 @@
 
 <script>
 import Card from '@/components/Card/Card.vue'
-import Readme from '@/components/Card/README.md'
 import Tabs from '@/components/Tabs/Tabs.vue'
 import Tab from '@/components/Tabs/Tab.vue'
-import WebReadme from '~/ts/components/card/README.md'
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/cards-header.png'
 import cardImg from '../../img/cardImg.png'
@@ -624,8 +611,6 @@ export default {
   components: {
     DSHeader,
     Table,
-    Readme,
-    WebReadme,
     Tabs,
     Tab,
     Card,
@@ -648,3 +633,18 @@ export default {
   }
 }
 </script>
+
+<style>
+
+.video-col {
+  position: relative;
+  margin-top: 3rem;
+}
+.video-col > span {
+
+  position: absolute;
+  bottom: 100%;
+  left: 0.5rem;
+}
+
+</style>

@@ -24,6 +24,10 @@
   &:empty {
     display: none;
   }
+
+  &:is(.bg-primary,.bg-dark,.bg-danger){
+    color: #{$colour-inverted}!important;
+  }
 }
 
 .badge {

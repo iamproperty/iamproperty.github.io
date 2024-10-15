@@ -1,8 +1,22 @@
-<script setup>
 
-function eventHandler(event){
-  alert('clicked');
-}
+<script setup>
+import RecordCard from '@/components/RecordCard/RecordCard.vue'
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Tab from '@/components/Tabs/Tab.vue'
+import DSHeader from '../DSHeader.vue'
+import headerImg from '../../img/cards-header.png'
+import anatomy from '../../img/record-card-anatomy.png'
+import cardImg from '../../img/cardImg.png'
+import cardModes from '../../img/cardModes.png'
+import Table from '@/components/Table/Table.vue'
+import UserColours from '../UserColours.vue'
+
+
+import recordCardDo from '../../img/record-card-do.png'
+import recordCardDo2 from '../../img/record-card-do-2.png'
+import recordCardDo3 from '../../img/record-card-do-3.png'
+import recordCardDont from '../../img/record-card-dont.png'
+
 
 </script>
 <template>
@@ -21,33 +35,67 @@ function eventHandler(event){
           
             
         <div class="col">
+          <span class="pb-3 d-block text-uppercase">With large image</span>
           <a href="/">
-            <Card class="card--record" :data-image="cardImg">
+            <RecordCard :data-image="cardImg">
+              <span slot="badges" class="badge">Lettings</span>
               13 Oakdale Road, Madley Park, Newcastle upon Tyne
-              <small>£503pcm</small>
-              <small>4 beds 2 baths 1 reception room</small>
-              <small>Updated by: John Smith<br/> Updated on: 03/01/2024</small>
-            </Card>
+              <span>£503pcm</span>
+              <span>4 beds 2 baths 1 reception room</span>
+              <span>Updated by: John Smith<br/> Updated on: 03/01/2024</span>
+            </RecordCard>
           </a>
         </div>
         
             
         <div class="col">
+          <span class="pb-3 d-block text-uppercase">Record type displayed</span>
           <a href="/">
-            <Card class="card--record" data-record="business">
+            <RecordCard data-record="business">
+              <span slot="badges" class="badge">Sales</span>
+              <span slot="badges" class="badge">Under offer</span>
               13 Oakdale Road, Madley Park, Newcastle upon Tyne
-              <small>£503pcm</small>
-              <small>4 beds 2 baths 1 reception room</small>
-              <small>Updated by: John Smith<br/> Updated on: 03/01/2024</small>
-            </Card>
+              <span>£503 pcm</span>
+              <span>4 <i class="fa-regular fa-bed-front me-1" title="bed"></i> 2 <i class="fa-regular fa-bath me-1" title="baths"></i> 1 <i class="fa-regular fa-couch me-1" title="sofa"></i></span>
+              <span><strong>Updated by:</strong> John Smith<br/> <strong>Updated on:</strong> 03/01/2024</span>
+            </RecordCard>
           </a>
         </div>
+            
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Initials displayed</span>
+          <a href="/">
+            <RecordCard data-record="vendor" data-initials="SA">
+              <span slot="badges" class="badge">Sales</span>
+              <span slot="badges" class="badge">Under offer</span>
+              13 Oakdale Road, Madley Park, Newcastle upon Tyne
+              <span>£503 pcm</span>
+              <span>4 <i class="fa-regular fa-bed-front me-1" title="bed"></i> 2 <i class="fa-regular fa-bath me-1" title="baths"></i> 1 <i class="fa-regular fa-couch me-1" title="sofa"></i></span>
+              <span><strong>Updated by:</strong> John Smith<br/> <strong>Updated on:</strong> 03/01/2024</span>
+            </RecordCard>
+          </a>
+        </div>
+
+        <div class="col">
+          <span class="pb-3 d-block text-uppercase">Avatar photo displayed</span>
+          <a href="/">
+            <RecordCard :data-avatar="cardImg">
+              <span slot="badges" class="badge">Sales</span>
+              <span slot="badges" class="badge">Under offer</span>
+              <span slot="badges" class="badge">Sales</span>
+              <span slot="badges" class="badge">Under offer</span>
+              13 Oakdale Road, Madley Park, Newcastle upon Tyne
+              <span>£503 pcm</span>
+              <span>4 <i class="fa-regular fa-bed-front me-1" title="bed"></i> 2 <i class="fa-regular fa-bath me-1" title="baths"></i> 1 <i class="fa-regular fa-couch me-1" title="sofa"></i></span>
+              <span><strong>Updated by:</strong> John Smith<br/> <strong>Updated on:</strong> 03/01/2024</span>
+            </RecordCard>
+          </a>
+        </div>
+
         
       </div>
     </div>
     
-
-
 
     <h2>Anatomy</h2>
 
@@ -66,15 +114,6 @@ function eventHandler(event){
     <p>Property cards can display a range of card types - from vendor profiles to business details - and to distinguish them, we can use an icon and a colour in the empty image state.</p>
 
 
-
-    <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 mb-4">
-
-      </div>
-    </div>
-
-
-
     <UserColours></UserColours>
 
 
@@ -83,8 +122,26 @@ function eventHandler(event){
 
     <div class="row">
       <div class="col-sm-6">
-        <img :src="recordCardDo" alt="" />
+        <img :src="recordCardDo" alt="" class="mb-2" />
+        <span class="h4 text-complete pb-1">Do</span>
+        <p>Labels should wrap to accommodate when the card compacts to a smaller width</p>
+      </div>
+      <div class="col-sm-6">
+        <img :src="recordCardDo2" alt="" class="mb-2" />
+        <span class="h4 text-complete pb-1">Do</span>
+        <p>On bigger breakpoint breakpoints, the number of columns will increase</p>
+      </div>
+      <div class="col-sm-6">
+        <img :src="recordCardDo3" alt="" class="mb-2" />
         
+        <span class="h4 text-complete pb-1">Do</span>
+        <p>Have cards sharing a row stretch to match the tallest card and align with each other</p>
+      </div>
+      <div class="col-sm-6">
+        <img :src="recordCardDont" alt="" class="mb-2" />
+        
+        <span class="h4 text-danger pb-1">Don't</span>
+        <p>Have cards hug content and cause misalignment in the row</p>
       </div>
     </div>
 
@@ -92,17 +149,8 @@ function eventHandler(event){
     <div class="container">
       
       <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h3>Web component</h3></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h3>Vue component</h3></summary>
-          <Readme></Readme>
-        </details>
-      </Tabs>
 
+      
     </div>
     <div class="bg-light version-control">
       <div class="container">
@@ -128,57 +176,3 @@ function eventHandler(event){
   </main>
 </template>
 
-<script>
-import Card from '@/components/Card/Card.vue'
-import Readme from '@/components/Card/README.md'
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
-import WebReadme from '~/ts/components/card/README.md'
-import DSHeader from '../DSHeader.vue'
-import headerImg from '../../img/cards-header.png'
-import anatomy from '../../img/record-card-anatomy.png'
-import cardImg from '../../img/cardImg.png'
-import cardModes from '../../img/cardModes.png'
-import Table from '@/components/Table/Table.vue'
-import UserColours from '../UserColours.vue'
-
-
-import recordCardDo from '../../img/record-card-do.png'
-import recordCardDo2 from '../../img/record-card-do-2.png'
-import recordCardDo3 from '../../img/record-card-do-3.png'
-import recordCardDont from '../../img/record-card-dont.png'
-
-export default {
-  components: {
-    DSHeader,
-    Table,
-    Readme,
-    WebReadme,
-    Tabs,
-    Tab,
-    Card,
-    headerImg,
-    cardImg,
-    cardModes,
-    anatomy,
-    UserColours,
-    recordCardDo,
-    recordCardDo2,
-    recordCardDo3,
-    recordCardDont
-  },
-  data () {
-    return {
-      headerImg: headerImg,
-      cardImg: cardImg,
-      cardModes:cardModes,
-      htmlUsage: `<a href="/link-url" class="card">
-  <div class="card-body">
-    Link text
-    <span>Link description text..</span>
-  </div>
-</a>`
-    }
-  }
-}
-</script>
