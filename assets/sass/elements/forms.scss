@@ -227,6 +227,7 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
 // #region prefix
 :is(.prefix, .suffix) {
   display: none;
+  pointer-events: none;
 }
 @supports selector(:has(*)) {
 
@@ -340,6 +341,10 @@ div:has(> label:first-child):has(> input):has(> :is(.form-control-inline,.input-
     border-end-end-radius: 0!important;
   }
 }
+
+
+
+
 // #endregion
 
 // #region word counter
