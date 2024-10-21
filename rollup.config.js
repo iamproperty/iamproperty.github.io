@@ -75,7 +75,7 @@ let rollupConfig = [
     ]
   }
 ];
-rollupConfig = [];
+//rollupConfig = [];
 
 const components = ["accordion","header","table","tabs",'card','filter-card','video-card','record-card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup','fileupload','search','inline-edit','multiselect','slider','carousel','marketing','barchart'];
 
