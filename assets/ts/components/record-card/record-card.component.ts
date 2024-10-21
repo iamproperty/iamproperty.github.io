@@ -61,6 +61,17 @@ class iamRecordCard extends HTMLElement {
         }
         break;
       }
+      case "data-avatar": {
+
+        if(oldVal != newVal){
+
+          const cardHeadImg = this.shadowRoot.querySelector('.card__avatar');
+
+          if(cardHeadImg)
+            cardHeadImg.setAttribute('src',newVal);
+        }
+        break;
+      }
     }
 
   }

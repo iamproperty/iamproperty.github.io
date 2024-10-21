@@ -4,17 +4,11 @@ import VideoCard from '@/components/VideoCard/VideoCard.vue'
 import Integration from '../Integration.vue'
 import Versions from '../Versions.vue'
 import TrackEvents from '../TrackEvents.vue'
-
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/cards-header.png'
 import cardAnatomy from '../../img/video-card-anatomy.png'
 import cardImg from '../../img/cardImg.png'
-import cardModes from '../../img/cardModes.png'
 import Table from '@/components/Table/Table.vue'
-
-
 
 
 </script>

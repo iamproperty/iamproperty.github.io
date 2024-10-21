@@ -1,4 +1,18 @@
+<script setup>
+import FilterCard from '@/components/FilterCard/FilterCard.vue'
+import DSHeader from '../DSHeader.vue'
+import headerImg from '../../img/cards-header.png'
+
+import Integration from '../Integration.vue'
+import Versions from '../Versions.vue'
+import TrackEvents from '../TrackEvents.vue'
+
+</script>
 <template>
+
+  <TrackEvents selector="iam-filter-card" :events="['select-card','unselect-card']"></TrackEvents>
+
+
   <main>
 
     <DSHeader :image="headerImg" section="components">
@@ -15,7 +29,7 @@
 
     </div>
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-non/e">
           
             
         <div class="col">
@@ -122,15 +136,201 @@
     </div>
 
 
-    <div class="container">
+    <Integration component="FilterCard" componentName="iam-filter-card" >
+      <template #web-component>
+
+        <pre><code>{{`<button><iam-filter-card data-total="14">Due diligence incomplete</iam-filter-card></button>
+        
+<label>
+  <input type="checkbox" value="on" name="test" />
+  <iam-filter-card data-total="14">Due diligence incomplete</iam-filter-card>
+</label>`}}</code></pre>
+      </template>
+      <template #vue-component>
+
+        <pre><code>{{`<script setup>import FilterCard from '@/components/FilterCard/FilterCard.vue</script>
+        
+<button><FilterCard data-total="14">Due diligence incomplete</FilterCard></button>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Attributes</th>
+            <th>Default</th>
+            <th>Options/Type</th>
+            <th>Required</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>data-img</th>
+            <td>-</td>
+            <td>String (file location)</td>
+            <td>No</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
       
-      <h2>Implementation</h2>
+      <template #slots>
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Default (body)</th>
+            <td>The default slot adds content to the body of the card.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+      <template #classes>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>.colour-{var}</th>
+            <td>To create the status card look a clour needs to be defined via a colour class.</td>
+          </tr>
+          <tr>
+            <th>.card--flag</th>
+            <td>Adds a flag to the right hand corner of the flag</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+      <template #parts>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>body</th>
+            <td>The main content of the card</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+      <template #vars>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Var</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>--card-left-padding</th>
+            <td>Controls the padding of all the parts, the card head image ignores this.</td>
+          </tr>
+          <tr>
+            <th>--card-right-padding</th>
+            <td>Controls the padding of all the parts, the card head image ignores this.</td>
+          </tr>
+          <tr>
+            <th>--card-head-height</th>
+            <td>Controls the height of the head.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
 
 
-    </div>
-    <div class="bg-light version-control">
-      <div class="container">
+      <template #dispatched-events>
+
         <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>select-card</th>
+              <td>Card is actived via click</td>
+              <td>{"Card value":"on","input name":"card10"}</td>
+            </tr>
+            <tr>
+              <th>unselect-card</th>
+              <td>Card is un-actived via click</td>
+              <td>{"Card value":"on","input name":"card10"}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </template>
+
+
+      <template #criteria>
+
+      <ul>
+        <li>On click the active state needs to be toggled</li>
+      </ul>
+
+      </template>
+      <template #data-layer>
+
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>select-card</th>
+              <td>checkbox is checked</td>
+              <td>{"Card value":"on","input name":"card10"}</td>
+            </tr>
+            <tr>
+              <th>unselect-card</th>
+              <td>Checkbox is unchecked</td>
+              <td>{"Card value":"on","input name":"card10"}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </template>
+
+    </Integration>
+    <Versions pdf="/pdfs/cards.pdf">
+      <table>
           <thead>
             <tr>
               <th>Version Control</th>
@@ -153,45 +353,8 @@ Inclusion of card ‘modes’ - light mode, dark mode and high contrast</td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/cards.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+    </Versions>
+
+    
   </main>
 </template>
-
-<script>
-import FilterCard from '@/components/FilterCard/FilterCard.vue'
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
-import DSHeader from '../DSHeader.vue'
-import headerImg from '../../img/cards-header.png'
-import cardImg from '../../img/cardImg.png'
-import cardModes from '../../img/cardModes.png'
-import Table from '@/components/Table/Table.vue'
-
-export default {
-  components: {
-    DSHeader,
-    Table,
-    Tabs,
-    Tab,
-    FilterCard,
-    headerImg,
-    cardImg,
-    cardModes
-  },
-  data () {
-    return {
-      headerImg: headerImg,
-      cardImg: cardImg,
-      cardModes:cardModes,
-      htmlUsage: `<a href="/link-url" class="card">
-  <div class="card-body">
-    Link text
-    <span>Link description text..</span>
-  </div>
-</a>`
-    }
-  }
-}
-</script>

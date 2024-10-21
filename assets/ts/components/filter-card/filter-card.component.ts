@@ -31,29 +31,49 @@ class iamFilerCard extends HTMLElement {
 
     setupCard(cardComponent);
 
-    trackComponent(cardComponent,"iam-video-card",['play-video','close-video']);
-  }
+    // Dispatch events of selecting checkboxes
+    const checkbox = cardComponent.parentElement.querySelector('input[type="checkbox"]');
+    if(checkbox){
+      checkbox.addEventListener('change', (event) => {
 
-  static get observedAttributes() {
-    return ["data-image"];
-  }
-  
-  attributeChangedCallback(attrName, oldVal, newVal) {
-    switch (attrName) {
-      case "data-image": {
-
-        if(oldVal != newVal){
-
-          const cardHeadImg = this.shadowRoot.querySelector('.card__head img');
-
-          if(cardHeadImg)
-            cardHeadImg.setAttribute('src',newVal);
+        if(checkbox.checked){
+          const customEvent = new CustomEvent("select-card", { detail: { 'Card value': checkbox.value, 'input name': checkbox.getAttribute('name') } });
+          cardComponent.dispatchEvent(customEvent);
+          cardComponent.classList.add('active');
         }
-        break;
-      }
+        else {
+
+          const customEvent = new CustomEvent("unselect-card", { detail: { 'Card value': checkbox.value, 'input name': checkbox.getAttribute('name') } });
+          cardComponent.dispatchEvent(customEvent);
+          cardComponent.classList.remove('active');
+        }
+      });
     }
 
+    if(cardComponent.parentElement.matches('button')){
+
+      const button = cardComponent.parentElement;
+      
+      button.addEventListener('click', (event) => {
+
+        if(!cardComponent.classList.contains('active')){
+          const customEvent = new CustomEvent("select-card", { detail: { 'button name': button.getAttribute('name') } });
+          cardComponent.dispatchEvent(customEvent);
+          cardComponent.classList.add('active');
+        }
+        else {
+
+          const customEvent = new CustomEvent("unselect-card", { detail: { 'button name': button.getAttribute('name') } });
+          cardComponent.dispatchEvent(customEvent);
+          cardComponent.classList.remove('active');
+        }
+      });
+    }
+
+
+    trackComponent(cardComponent,"iam-filter-card",['select-card','unselect-card']);
   }
+
 }
 
 export default iamFilerCard;

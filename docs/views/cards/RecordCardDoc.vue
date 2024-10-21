@@ -1,16 +1,15 @@
 
 <script setup>
 import RecordCard from '@/components/RecordCard/RecordCard.vue'
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/cards-header.png'
 import anatomy from '../../img/record-card-anatomy.png'
 import cardImg from '../../img/cardImg.png'
-import cardModes from '../../img/cardModes.png'
-import Table from '@/components/Table/Table.vue'
 import UserColours from '../UserColours.vue'
 
+import Integration from '../Integration.vue'
+import Versions from '../Versions.vue'
+import TrackEvents from '../TrackEvents.vue'
 
 import recordCardDo from '../../img/record-card-do.png'
 import recordCardDo2 from '../../img/record-card-do-2.png'
@@ -146,15 +145,199 @@ import recordCardDont from '../../img/record-card-dont.png'
     </div>
 
 
-    <div class="container">
+    
+
+    <Integration component="FilterCard" componentName="iam-filter-card" >
+      <template #web-component>
+
+        <pre><code>{{`<a href="/"><iam-record-card data-avatar="cardImg.png">
+              <span slot="badges" class="badge">Sales</span>
+              <span slot="badges" class="badge">Under offer</span>
+              <span slot="badges" class="badge">Sales</span>
+              <span slot="badges" class="badge">Under offer</span>
+              13 Oakdale Road, Madley Park, Newcastle upon Tyne
+              <span>£503 pcm</span>
+              <span>4 <i class="fa-regular fa-bed-front me-1" title="bed"></i> 2 <i class="fa-regular fa-bath me-1" title="baths"></i> 1 <i class="fa-regular fa-couch me-1" title="sofa"></i></span>
+              <span><strong>Updated by:</strong> John Smith<br/> <strong>Updated on:</strong> 03/01/2024</span>
+            </iam-record-card></a>`}}</code></pre>
+      </template>
+      <template #vue-component>
+
+        <pre><code>{{`<script setup>import RecordCard from '@/components/RecordCard/RecordCard.vue</script>
+        
+<a href="/"><RecordCard :data-avatar="cardImg">
+  <span slot="badges" class="badge">Sales</span>
+  <span slot="badges" class="badge">Under offer</span>
+  <span slot="badges" class="badge">Sales</span>
+  <span slot="badges" class="badge">Under offer</span>
+  13 Oakdale Road, Madley Park, Newcastle upon Tyne
+  <span>£503 pcm</span>
+  <span>4 <i class="fa-regular fa-bed-front me-1" title="bed"></i> 2 <i class="fa-regular fa-bath me-1" title="baths"></i> 1 <i class="fa-regular fa-couch me-1" title="sofa"></i></span>
+  <span><strong>Updated by:</strong> John Smith<br/> <strong>Updated on:</strong> 03/01/2024</span>
+</RecordCard></a>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Attributes</th>
+            <th>Default</th>
+            <th>Options/Type</th>
+            <th>Required</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>data-img</th>
+            <td>-</td>
+            <td>String (file location)</td>
+            <td>No</td>
+            <td></td>
+          </tr>
+          <tr>
+            <th>data-avatar</th>
+            <td>-</td>
+            <td>String (file location)</td>
+            <td>No</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
       
-      <h2>Implementation</h2>
+      <template #slots>
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Default (body)</th>
+            <td>The default slot adds content to the body of the card.</td>
+          </tr>
+          <tr>
+            <th>head</th>
+            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
+          </tr>
+          <tr>
+            <th>badges</th>
+            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
+          </tr>
+          <tr>
+            <th>footer</th>
+            <td>The bottom of card.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
 
       
-    </div>
-    <div class="bg-light version-control">
-      <div class="container">
-        <table>
+      <template #parts>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>head</th>
+            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
+          </tr>
+          <tr>
+            <th>image</th>
+            <td>The image located in the card head</td>
+          </tr>
+          <tr>
+            <th>body</th>
+            <td>The main content of the card</td>
+          </tr>
+          <tr>
+            <th>footer</th>
+            <td>The bottom of card.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+
+      <template #vars>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Var</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>--card-left-padding</th>
+            <td>Controls the padding of all the parts, the card head image ignores this.</td>
+          </tr>
+          <tr>
+            <th>--card-right-padding</th>
+            <td>Controls the padding of all the parts, the card head image ignores this.</td>
+          </tr>
+          <tr>
+            <th>--card-head-height</th>
+            <td>Controls the height of the head.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+
+      <template #watched-attrs>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attributes</th>
+      <th>Options/Type</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>data-img</th>
+      <td>String (file location)</td>
+      <td>The head image can be updated by adding a valid file location to this attribute.</td>
+    </tr>
+    <tr>
+      <th>data-avatar</th>
+      <td>String (file location)</td>
+      <td>The head image can be updated by adding a valid file location to this attribute.</td>
+    </tr>
+  </tbody>
+</table>
+</template>
+
+      <template #criteria>
+
+      <ul>
+        <li>The title of the card should only be on two lines</li>
+      </ul>
+
+      </template>
+      
+    </Integration>
+    <Versions pdf="/pdfs/record-cards.pdf">
+      <table>
           <thead>
             <tr>
               <th>Version Control</th>
@@ -170,9 +353,8 @@ import recordCardDont from '../../img/record-card-dont.png'
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/record-cards.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+    </Versions>
+
   </main>
 </template>
 

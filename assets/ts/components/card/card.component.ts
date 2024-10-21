@@ -93,8 +93,47 @@ class iamCard extends HTMLElement {
       });
     }
 
+    // Dispatch events of selecting checkboxes
+    const checkbox = cardComponent.querySelector('input[type="checkbox"]');
+    if(checkbox){
+      checkbox.addEventListener('change', (event) => {
+
+
+        if(checkbox.checked){
+          const customEvent = new CustomEvent("select-card", { detail: { 'Card value': checkbox.value, 'input name': checkbox.getAttribute('name') } });
+          cardComponent.dispatchEvent(customEvent);
+        }
+        else {
     
-    trackComponent(cardComponent,"iam-card",[]);
+          const customEvent = new CustomEvent("unselect-card", { detail: { 'Card value': checkbox.value, 'input name': checkbox.getAttribute('name') } });
+          cardComponent.dispatchEvent(customEvent);
+        }
+      });
+    }
+
+    // Dispatch events of click onto secondary buttons
+    const secondaryBtn = cardComponent.querySelector('[slot="secondary"]');
+    if(secondaryBtn){
+      secondaryBtn.addEventListener('click', (event) => {
+
+        const customEvent = new CustomEvent("secondary-button-clicked", { detail: { 'Title': secondaryBtn.getAttribute('title') } });
+        cardComponent.dispatchEvent(customEvent);
+      });
+    }
+
+    // Dispatch events of click onto action buttons
+    const actionBtns = cardComponent.querySelectorAll('[slot="btns"]');
+    Array.from(actionBtns).forEach((button,index)=>{
+
+      button.addEventListener('click', (event) => {
+
+        const customEvent = new CustomEvent("action-button-clicked", { detail: { 'Title': button.getAttribute('title') } });
+        cardComponent.dispatchEvent(customEvent);
+      });
+    });
+
+
+    trackComponent(cardComponent,"iam-card",['select-card','unselect-card','secondary-button-clicked','action-button-clicked']);
   }
 
   static get observedAttributes() {

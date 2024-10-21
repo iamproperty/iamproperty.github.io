@@ -10,7 +10,7 @@ const showInstall = slots['web-component'] || slots['vue-component'] ? true : fa
 const showLayout = slots['slots'] ? true : false;
 const showModify = slots['attr'] ? true : false;
 const showStyle = slots['classes'] || slots['parts'] || slots['vars'] ? true : false;
-const showExtend = slots['dispatched-events'] || slot['event-listeners'] || slot['watched-attrs'] || slot['observers'] ? true : false;
+const showExtend = slots['dispatched-events'] || slots['event-listeners'] || slots['watched-attrs'] || slots['observers'] ? true : false;
 const showTest = true;
 const showTrack = slots['data-layer'] ? true : false;
 
