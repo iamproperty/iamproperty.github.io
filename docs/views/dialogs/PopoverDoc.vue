@@ -385,7 +385,6 @@
 
 <script>
 import Tabs from '@/components/Tabs/Tabs.vue'
-import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/type-header.png'
 import popoverNotip from '../../img/dialogs/popovers-notip.png'
@@ -431,7 +430,6 @@ import PopoverLists from '../popoverLists.vue'
 
 export default {
   components: {
-    YoutubeVideo,
     DSHeader,
     Tabs,
     popoverNotip,
