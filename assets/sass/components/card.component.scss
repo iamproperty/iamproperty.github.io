@@ -122,12 +122,18 @@
 // #endregion
 
 // #region secondary button
+
 ::slotted([slot="secondary"]) {
-  position: absolute!important;
-  top: 0.5rem!important;
-  right: 0!important;
-  margin: 0.5rem 0.5rem 0 0!important;
-  z-index: 999!important;
+
+}
+
+slot[name="secondary"] {
+  display: block;
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+  margin: 0.5rem 0.5rem 0 0;
+  z-index: 999;
 }
 
 ::slotted([slot="secondary"]:not(:hover,:focus,:active,.hover)) {

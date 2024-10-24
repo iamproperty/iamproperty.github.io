@@ -5,7 +5,7 @@ export const cardHTML = `<div class="card__head" part="head">
 <slot name="checkbox" class="activate-prevent-hover"></slot>
 <div class="card__body" part="body">
   <slot></slot>
-  <slot name="secondary"></slot>
+  <slot name="secondary" part="secondary"></slot>
 </div>
 <div class="card__details" part="details">
   <slot name="details"></slot>
