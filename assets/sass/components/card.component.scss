@@ -122,11 +122,6 @@
 // #endregion
 
 // #region secondary button
-
-::slotted([slot="secondary"]) {
-
-}
-
 slot[name="secondary"] {
   display: block;
   position: absolute;

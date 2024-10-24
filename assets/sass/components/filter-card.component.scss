@@ -75,7 +75,7 @@
   position: relative;
   
   &:after {
-    content: "\f024";
+    content: var(--card-flag-icon, "\f024");
     font-family: "Font Awesome 6 Pro";
     position: absolute;
     top: 1rem;
