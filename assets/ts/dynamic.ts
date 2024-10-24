@@ -9,7 +9,6 @@ import table from '../js/modules/table'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
-import youtubeVideo from '../js/modules/youtubevideo'
 
 import iamNotification from './components/notification/notification.component'
 
@@ -85,13 +84,6 @@ document.addEventListener("DOMContentLoaded", function() {
   // Form
   Array.from(document.querySelectorAll('form')).forEach((arrayElement) => {
     form(arrayElement);
-  });
-  // YouTube videos
-  Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {
-
-    console.log(arrayElement)
-
-    new youtubeVideo(arrayElement);
   });
 
 
