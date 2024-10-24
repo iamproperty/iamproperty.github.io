@@ -43,7 +43,7 @@ if (BUNDLE) {
 
 plugins.push(minify());
 
-let rollupConfig = [
+const rollupConfig = [
   {
     input: path.resolve(__dirname, `assets/js/bundle.js`),
     output: {
@@ -75,7 +75,6 @@ let rollupConfig = [
     ]
   }
 ];
-//rollupConfig = [];
 
 const components = ["accordion","header","table","tabs",'card','filter-card','video-card','record-card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup','fileupload','search','inline-edit','multiselect','slider','carousel','marketing','barchart'];
 
