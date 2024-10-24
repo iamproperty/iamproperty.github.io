@@ -9,7 +9,6 @@ import * as tableModule from './modules/table'
 import testimonial from '../js/modules/testimonial'
 import carousel from '../js/modules/carousel'
 import form from '../js/modules/form'
-import youtubeVideo from '../js/modules/youtubevideo'
 import tabs from '../js/modules/tabs'
 import filterlist from '../js/modules/filterlist'
 import createPaginationButttons from '../js/modules/pagination'
@@ -59,10 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
   Array.from(document.querySelectorAll('form')).forEach((arrayElement) => {
     form(arrayElement);
   });
-  // YouTube videos
-  Array.from(document.querySelectorAll('.youtube-embed')).forEach((arrayElement) => {
-    new youtubeVideo(arrayElement);
-  });
+  
   // Tabs
   Array.from(document.querySelectorAll('.tabs')).forEach((arrayElement) => {
     tabs(arrayElement);

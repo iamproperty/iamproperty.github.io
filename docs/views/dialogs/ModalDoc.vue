@@ -272,22 +272,6 @@
     <!-- #endregion -->
 
 
-
-
-
-    
-    <div class="container pb-5">
-      <h3>YouTube Video</h3>
-      <p>We can add a YouTube video to a modal which would play/load once the modal is opened. Same implementation as the modal above, passing through the YoutubeVideo component as the content of the dialog.</p>
-      <button data-modal="youtubewrapper" class="btn btn-secondary">Open YouTube Video Modal</button>
-    </div>
-
-    <dialog id="youtubewrapper">
-      <YoutubeVideo video="fXyAMkQzDls"></YoutubeVideo>
-    </dialog>
-
-
-
     <div class="container">
       <h2>Implementation</h2>
       <Tabs>
@@ -392,7 +376,6 @@ html #app #visualtest:target ~ main > {
 
 <script>
 import Tabs from '@/components/Tabs/Tabs.vue'
-import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
 import DSHeader from '../DSHeader.vue'
 import ModalVariants from '../ModalVariants.vue'
 import headerImg from '../../img/type-header.png'
@@ -412,7 +395,6 @@ import {createDialog} from '../../../assets/ts/modules/dialogs';
 
 export default {
   components: {
-    YoutubeVideo,
     DSHeader,
     ModalVariants,
     Tabs,

@@ -43,13 +43,9 @@
 </template>
 
 <script>
-import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
-import Readme from '@/foundations/YoutubeVideo/README.md'
 
 export default {
   components: {
-    YoutubeVideo,
-    Readme
   },
   data () {
     return {

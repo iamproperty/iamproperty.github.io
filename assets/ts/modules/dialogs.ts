@@ -1,6 +1,4 @@
 // @ts-nocheck
-import { createEmbed } from "./youtubevideo"; 
-
 const extendDialogs = (body) => {
 
   Array.from(body.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
@@ -230,12 +228,6 @@ const extendDialogs = (body) => {
 }
 
 export const createDialog = (dialog) => { 
-
-  // Create the video embed
-  let videoButton = dialog.querySelector('.youtube-embed a');
-  if (videoButton){
-    createEmbed(videoButton)
-  }
 
   // Multi dialog
   if(dialog.classList.contains('dialog--multi') && !dialog.querySelector(':scope > .steps')) {
