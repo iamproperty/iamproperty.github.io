@@ -4,17 +4,11 @@ import VideoCard from '@/components/VideoCard/VideoCard.vue'
 import Integration from '../Integration.vue'
 import Versions from '../Versions.vue'
 import TrackEvents from '../TrackEvents.vue'
-
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/cards-header.png'
 import cardAnatomy from '../../img/video-card-anatomy.png'
 import cardImg from '../../img/cardImg.png'
-import cardModes from '../../img/cardModes.png'
 import Table from '@/components/Table/Table.vue'
-
-
 
 
 </script>
@@ -33,8 +27,6 @@ import Table from '@/components/Table/Table.vue'
     <h2>Vertical video card</h2>
     
     <p>This card provides user with header text, optional body copy, optional small button as well as a hoverable thumbnail. Once the thumbnail block is clicked the video will open as a model.</p>
-
-
 
     <div class="container visualtest">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 ">
