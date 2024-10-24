@@ -166,18 +166,18 @@
   --record-colour: var(--wider-colour-4);
 }
 :host([data-record="lettings"]) {
-  --record-icon: "";
+  --record-icon: "\E003";
   --record-icon-font: Font Awesome Kit;
   --record-colour: var(--wider-colour-5);
 }
 
 :host([data-record="sales"]) {
-  --record-icon: "";
+  --record-icon: "\E004";
   --record-icon-font: Font Awesome Kit;
   --record-colour: var(--wider-colour-7);
 }
 :host([data-record="landlord"]) {
-  --record-icon: "";
+  --record-icon: "\E001";
   --record-icon-font: Font Awesome Kit;
   --record-colour: var(--wider-colour-8);
 }
@@ -188,7 +188,7 @@
 }
 
 :host([data-record="vendor"]) {
-  --record-icon: "";
+  --record-icon: "\E002";
   --record-icon-font: Font Awesome Kit;
   --record-colour: var(--wider-colour-13);
 }
@@ -198,7 +198,7 @@
   --record-colour: var(--wider-colour-6);
 }
 :host([data-record="sales-applicant"]) {
-  --record-icon: "";
+  --record-icon: "\E006";
   --record-icon-font: Font Awesome Kit;
   --record-colour: var(--wider-colour-10);
 }
