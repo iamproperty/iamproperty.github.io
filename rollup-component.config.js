@@ -9,7 +9,6 @@ const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
 const banner = require('./banner.js')
 
-const BUNDLE = process.env.BUNDLE === 'true'
 const ESM = process.env.ESM === 'true'
 
 let fileDest = `scripts${ESM ? '.esm' : ''}`
@@ -27,48 +26,14 @@ const globals = {
   '@popperjs/core': 'Popper'
 }
 
-if (BUNDLE) {
-  fileDest += '.bundle'
-  // Remove last entry in external array to bundle Popper
-  external.pop()
-  delete globals['@popperjs/core']
-  plugins.push(
-    replace({
-      'process.env.NODE_ENV': '"production"',
-      preventAssignment: true
-    }),
-    nodeResolve()
-  )
-}
 
 plugins.push(minify());
 
-const rollupConfig = [
-  {
-    input: path.resolve(__dirname, `assets/js/scripts.js`),
-    output: {
-      banner,
-      file: path.resolve(__dirname, `assets/js/${fileDest}.js`),
-      format: ESM ? 'esm' : 'umd',
-      globals
-    },
-    external,
-    plugins
-  },
-  {
-    input: path.resolve(__dirname, `assets/js/components.js`),
-    output: {
-      banner,
-      file: path.resolve(__dirname, `assets/js/${fileDest.replace("scripts","components")}.js`),
-      format: ESM ? 'esm' : 'umd',
-      globals
-    },
-    external,
-    plugins
-  }
-];
+const rollupConfig = [];
 
-const components = ["accordion","header","table","tabs",'card','filter-card','video-card','record-card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup','fileupload','search','inline-edit','multiselect','slider','carousel','marketing','barchart'];
+
+
+const components = [process.env.COMPONENT];
 
 components.forEach((component) => {
 
