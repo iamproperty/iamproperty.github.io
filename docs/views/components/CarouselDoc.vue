@@ -1,216 +1,340 @@
+<script setup>
+
+import Carousel from '@/components/Carousel/Carousel.vue'
+import Card from '@/components/Card/Card.vue'
+
+import cardImg from '../../img/cardImg.png'
+
+import Integration from '../Integration.vue'
+import Versions from '../Versions.vue'
+import TrackEvents from '../TrackEvents.vue'
+
+import DSHeader from '../DSHeader.vue'
+import headerImg from '../../img/cards-header.png'
+
+</script>
+
 <template>
+
+  <TrackEvents selector="iam-carousel" :events="['pip-clicked','next-clicked','prev-clicked','slider-changed']"></TrackEvents>
+  
   <main>
-    <div class="container">
-      <ul class="breadcrumb mb-0 d-sm-none pb-0">
-        <li><a href="/components">Components</a></li>
-      </ul>
+    
+    
+    <DSHeader :image="headerImg" section="components">
       <h1>Carousel</h1>
-      <p>A slideshow component for cycling through elements—images or slides of text—like a carousel.</p>
-    </div>
-    <Carousel class="visualtest" btntype="link" :smcols="2" :mdcols="4">
+    </DSHeader>
+
+
+    <h2>Usage</h2>
+    <p>Use to display related content within the same space on a page. Typical content use cases include showcases, image galleries, content or article previews and feature highlights. </p>
+
+    <h2>Carousel anatomy</h2>
+    <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
     
-      <div :class="`row row-cols-1 row-cols-sm-2 row-cols-md-3`">
-        <div :class="`col carousel__item`" v-for="(value,index) in items" :key="index" v-html="content(value)" :id="'carousel'+id+'slide'+(index+1)"></div>
-      </div>
-    
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+      <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
     </Carousel>
     
-    <div class="container">
-      <p class="note"><strong>Note:</strong> We do not use the carousel that comes with bootstrap instead we take advantage of the 'scroll-snap' CSS feature. This reduces its complexitity and allows us to have mulitple items in displayed by using the bootstrap gird system.</p>
-      <h3>HTML code example</h3>
-      <pre><code class="javascript">{{htmlUsage}}</code></pre>
-    </div>
-
-    <div class="container">
-      <h3>Carousel with Image Thumbnails</h3>
-      <p>To implement this, you will need to pass an array of thumbnail objects.</p>
-
-      <Carousel :thumbnails="thumbnails">
+    <ul class="pb-5">
+      <li>Carousel content. This can contain cards, text, image and call to actions.</li>
+      <li>Navigation arrow. (Optional) Using secondary compact buttons that progress the carousel forward or backward. If carousel is at the beginning then the left arrow won’t display, if the carousel is at the end then the right arrow won’t display.</li>
+      <li>Pagination slider indicator. (Optional) This shows only if content goes beyond 5 pips of content and gives the user context to how far along in the carousel they are and allows user to user slider behaviour to navigate the content.</li>
+    </ul>
+    
+    <div class="admin-panel visualtest mb-5">
+      <h2>Carousel in an admin panel</h2>
+      <Carousel data-smcols="2" data-mdcols="3">
       
-        <div :class="`row row-cols-1`">
-          <div :class="`col carousel__item`" v-for="(value,index) in thumbnailCarouselItems" :key="`${carouselId}${index}`" v-html="content(value)" :id="`carousel-slide${index+1}`"></div>
-        </div>
-      
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        <div><Card :data-image="cardImg">Financial preparation <span>Here would be the top level description of the task</span></Card></div>
+        
       </Carousel>
     </div>
 
-    <div class="container">
-      <h3>Carousel examples</h3>
-      <p>This component can be configured in various ways with different types of cards alongside changing background of the container.</p>
-      <a href="/examples#carousels" class="btn btn-secondary">See carousels examples</a>
-    </div>
+    <h2>Carousel with Image Thumbnails</h2>
 
-    <div class="container">
-      <h2>Vue Card component reference</h2>
-      <Readme></Readme>
+    <div class="container pb-5 mb-5">
+      <button data-modal="modal-carousel" class="btn btn-secondary">Open Carousel inside of dialog</button>
     </div>
+    <dialog id="modal-carousel">
+      <span class="h3">Carousel with Image Thumbnails</span>
+      
+      <Carousel class="visualtest">
+
+        <div data-thumbnail="https://placehold.co/111x74"><img src="https://placehold.co/500x300"/></div>
+        <div data-thumbnail="https://placehold.co/111x74"><img src="https://placehold.co/400x200"/></div>
+        <div data-thumbnail="https://placehold.co/111x74"><img src="https://placehold.co/500x300"/></div>
+        <div data-thu-mbnail="https://placehold.co//111x74"><img src="https://placehold.co/400x200"/></div>
+        <div data-thumbnail="https://placehold.co/111x74"><img src="https://placehold.co/500x300"/></div>
+        <div data-thumbnail="https://placehold.co/111x74"><img src="https://placehold.co/400x200"/></div>
+      </Carousel>
+
+    </dialog>
+
+
+    
+    <Integration component="carousel" componentName="iam-carousel" >
+      <template #web-component>
+
+        <pre><code>{{`<iam-carousel>
+  <div>Slide one content</div>
+  <div>Slide two content</div>
+  <div>Slide three content</div>
+</iam-carousel>`}}</code></pre>
+      </template>
+      <template #vue-component>
+
+        <pre><code>{{`<script setup>import Carousel from '@/components/Carousel/Carousel.vue</script>
+        
+<Carousel>
+  <div>Slide one content</div>
+  <div>Slide two content</div>
+  <div>Slide three content</div>
+</Carousel>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attributes</th>
+      <th>Default</th>
+      <th>Options/Type</th>
+      <th>Required</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>data-thumbnail</th>
+      <td></td>
+      <td>String (file location)</td>
+      <td>No</td>
+      <td>This attribute is added to the carousel item and not the component itself.</td>
+    </tr>
+    <tr>
+      <th>data-smcols</th>
+      <td>1</td>
+      <td>Numeric (1-4)</td>
+      <td>No</td>
+      <td>Controls how many items are shown on the 'tablet view'</td>
+    </tr>
+    <tr>
+      <th>data-mdcols</th>
+      <td>1</td>
+      <td>Numeric (1-6)</td>
+      <td>No</td>
+      <td>Controls how many items are shown on the 'desktop view'</td>
+    </tr>
+  </tbody>
+</table>
+
+      </template>
+
+      <template #parts>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>carousel</th>
+            <td>A wrapper div</td>
+          </tr>
+          <tr>
+            <th>content</th>
+            <td>The div which contains the main slot</td>
+          </tr>
+          <tr>
+            <th>btns</th>
+            <td>Next and previous buttons container div, should target the next and prev parts rather than this.</td>
+          </tr>
+          <tr>
+            <th>next</th>
+            <td>The next button</td>
+          </tr>
+          <tr>
+            <th>prev</th>
+            <td>The previous button</td>
+          </tr>
+          <tr>
+            <th>controls</th>
+            <td>The div containing the pips which are generated via the code</td>
+          </tr>
+          <tr>
+            <th>progress</th>
+            <td>The div containing the slider</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+      <template #vars>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Var</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>--carousel-spacing</th>
+            <td>The outer inline spacing, used to correctly create the overflow effect on mobile and tablet. This is updated when the carousel is contained insde an admin panel our dialog.</td>
+          </tr>
+          <tr>
+            <th>--last-item-extra</th>
+            <td>Can be used to make sure the last item is displayed correctly. Not set by default but used in situations like when the carousel is contained inside and admin panel or dialog.</td>
+          </tr>
+          <tr>
+            <th>--track-size, --track-colour, --thumb-colour, --thumb-size, --thumb-size-outline</th>
+            <td>These variables are used to control the size and colour of the slider element.</td>
+          </tr>
+          <tr>
+            <th>--carousel-image-aspect-ratio</th>
+            <td>Update the image aspect ratio when the carousel is used to house images. By default it is 3/2 which is a fairly common landscape aspect ratio.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+
+      <template #dispatched-events>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>pip-clicked</th>
+              <td>When a user clicks on a pip</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>next-clicked</th>
+              <td>When a user clicks on the next button</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>prev-clicked</th>
+              <td>When a user clicks on the previous button</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>slider-changed</th>
+              <td>The slider element is used to update the carousel</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </template>
+
+      <template #criteria>
+
+      <ul>
+        <li>The previous and next button should show the a set amount of items and not just move along by 1.</li>
+        <li>The pip buttons should move the carousel along by a set amount of items and not just 1.</li>
+        <li>The slider just be displayed instead of the pips if there wojuld be more than 5 pips shown.</li>
+        <li>The carousel should work inside of the admin-panel element and the dialog/modal element.</li>
+      </ul>
+
+      </template>
+      <template #data-layer>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>pip-clicked</th>
+              <td>When a user clicks on a pip</td>
+              <td>{ "event": "pip-clicked", "element": "iam-carousel", "target": "iam-carousel", "data-slide":"2"}</td>
+            </tr>
+            <tr>
+              <th>next-clicked</th>
+              <td>When a user clicks on the next button</td>
+              <td>{ "event": "next-clicked", "element": "iam-carousel", "target": "iam-carousel", "data-slide":"2"}</td>
+            </tr>
+            <tr>
+              <th>prev-clicked</th>
+              <td>When a user clicks on the previous button</td>
+              <td>{ "event": "prev-clicked", "element": "iam-carousel", "target": "iam-carousel", "data-slide":"2"}</td>
+            </tr>
+            <tr>
+              <th>slider-changed</th>
+              <td>The slider element is used to update the carousel</td>
+              <td>{ "event": "slider-changed", "element": "iam-carousel", "target": "iam-carousel", "data-slide":"2"}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </template>
+
+    </Integration>
+    <Versions pdf="/pdfs/carousel.pdf">
+      <table>
+          <thead>
+            <tr>
+              <th>Version Control</th>
+              <th>Date</th>
+              <th>Notable updates</th>
+            </tr>
+          </thead>
+          <tbody class="text-body">
+            <tr>
+              <td>V1 added</td>
+              <td>11.1.2024</td>
+              <td>Inclusion of the simple carousel</td>
+            </tr>
+          </tbody>
+        </table>
+    </Versions>
+    
     
   </main>
 </template>
-
-<script>
-import Carousel from '@/components/Carousel/Carousel.vue'
-import Readme from '@/components/Carousel/README.md'
-
-export default {
-  components: {
-    Carousel,
-    Readme
-  },
-  computed: {
-    content (){
-      return (value) => {
-        return `${value.image ? `<img src="${value.image}" alt="" />` : ''}${value.content?value.content:''}`;
-      }
-    }
-  },
-  data () {
-    return {
-      htmlUsage: `<div id="carousel31" class="container carousel visualtest">
-  <div class="carousel__wrapper">
-    <div class="carousel__inner">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 ">
-        <div id="carousel31slide1" class="col carousel__item">
-          <span class="h2">Item 1</span>
-          <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>
-        </div>
-        <div id="carousel31slide2" class="col carousel__item">
-          <span class="h2">Item 2</span>
-          <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>
-        </div>
-        <div id="carousel31slide3" class="col carousel__item">
-          <span class="h2">Item 3</span>
-          <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>
-        </div>
-        <div id="carousel31slide4" class="col carousel__item">
-          <span class="h2">Item 4</span>
-          <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>
-        </div>
-      </div>
-    </div>
-    <div class="carousel__controls cols-1 cols-sm-2 cols-md-4">
-      <a href="#carousel31slide1" class="control-1 active">Slide 1</a>
-      <a href="#carousel31slide2" class="control-2">Slide 2</a>
-      <a href="#carousel31slide3" class="control-3">Slide 3</a>
-      <a href="#carousel31slide4" class="control-4">Slide 4</a>
-    </div>
-    <button data-go="0" disabled="disabled" class="btn btn-prev">Prev</button>
-    <button data-go="2" class="btn btn-next">Next</button>
-  </div>
-</div>`,
-      items: [
-        {
-          content: `<span class="h2">Item 1</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 2</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 3</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 4</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 5</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 6</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 7</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 8</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 9</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 10</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 11</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 12</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },{
-          content: `<span class="h2">Item 13</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 14</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 15</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 16</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 17</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 18</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 19</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 20</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 21</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 22</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
-        {
-          content: `<span class="h2">Item 23</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-        },
- 
-      ],
-      thumbnailCarouselItems: [
-            {
-                content: `<span class="h4">Carousel Item 1</span><p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages..</p>`
-            },
-            {
-                content: '<img src="https://place-hold.it/500x300"/>'
-            },
-            {
-                content: '<img src="https://place-hold.it/500x300"/>'
-            },
-            {
-                content: '<img src="https://place-hold.it/500x300"/>'
-            },
-            {
-                content: '<img src="https://place-hold.it/500x300"/>'
-            },
-            {
-                content: '<img src="https://place-hold.it/500x300"/>'
-            },
-    
-        ],
-        thumbnails: [
-            {
-                src: 'https://place-hold.it/111x74'
-            },
-            {
-                src: 'https://place-hold.it/111x74'
-            },
-            {
-                src: 'https://place-hold.it/50x74'
-            },
-            {
-                src: 'https://place-hold.it/60x74'
-            }, 
-            {
-                src: 'https://place-hold.it/111x74'
-            },
-            {
-                src: 'https://place-hold.it/111x74'
-            },
-        ]
-    }
-  }
-}
-</script>
