@@ -412,7 +412,7 @@ const routes = [
       },
       {
         path: 'carousel',
-        name: 'Carousel (Beta)',
+        name: 'Carousel',
         meta: {
           title: 'Carousel | Components | iamkey'
         },
