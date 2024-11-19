@@ -165,7 +165,6 @@ import nonModalImg from '../../img/dialogs/non-modal-demo.png'
 
 export default {
   components: {
-    YoutubeVideo,
     DSHeader,
     DialogUsage,
     ModalVariants,

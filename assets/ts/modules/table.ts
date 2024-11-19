@@ -758,7 +758,7 @@ export const filterTable = (table, form, wrapper) => {
   });
 
   // Work out what to display after pagination
-  Array.from(table.querySelectorAll('tbody tr:not(.filtered')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
 
     matched++;
 

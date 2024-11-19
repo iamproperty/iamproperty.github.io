@@ -4,23 +4,10 @@ import Standalone from './Standalone.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import routes from './routes'
 import audit from '../audit.json';
-import * as helpers from '../assets/ts/modules/helpers'
-
-import extendDialogs from '../assets/ts/modules/dialogs';
-import createDataLayer from '../assets/ts/modules/data-layer'
-
-import extendInputs from '../assets/ts/modules/inputs';
-
-
-
-import createDynamicEvents from '../assets/ts/modules/dynamicEvents'
-
 
 if(import.meta.env.DEV)
   document.body.setAttribute('data-ext-location','');
 
-createDataLayer();
-createDynamicEvents();
 
 const router = createRouter({
   history: createWebHistory(),
@@ -166,11 +153,7 @@ let app = createApp(template)
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app')
 
-helpers.addBodyClasses(document.body);
-helpers.addGlobalEvents(document.body);
-extendDialogs(document.body);
 
-extendInputs(document.body);
 
 const hasDarkPreference = window.matchMedia(
   "(prefers-color-scheme: dark)"
