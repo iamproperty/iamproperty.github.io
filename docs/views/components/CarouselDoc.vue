@@ -52,7 +52,7 @@ import headerImg from '../../img/cards-header.png'
     
     <ul class="pb-5">
       <li>Carousel content. This can contain cards, text, image and call to actions.</li>
-      <li>Navigation arrow. (Optional) Using secondary compact buttons that progress the carousel forward or backward. If carousel is at the beginning then the left arrow won’t display, if the carousel is at the end then the right arrow won’t display.</li>
+      <li>Navigation arrow. (Optional) Using secondary compact buttons that progress the carousel forward or backward. If carousel is at the beginning then the left arrow will display but as 'disabled', if the carousel is at the end then the right arrow will display but as 'disabled'.</li>
       <li>Pagination slider indicator. (Optional) This shows only if content goes beyond 5 pips of content and gives the user context to how far along in the carousel they are and allows user to user slider behaviour to navigate the content.</li>
     </ul>
     
