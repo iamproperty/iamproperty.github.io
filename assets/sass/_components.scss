@@ -5,6 +5,16 @@
 @use 'components/carousel.preload';
 @use 'components/multiselect.preload';
 @use 'components/inline-edit.preload';
+@use "components/charts.config.scss";
+
+ // Make sure the first 
+ main {
+  position: relative;
+  
+  > *:first-child {
+    padding-top: 2rem;
+  }
+}
 
 // #region Undefined web components
 main > :is(*):not(:defined):not(iam-carousel) {
