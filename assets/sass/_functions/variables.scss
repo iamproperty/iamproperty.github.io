@@ -22,6 +22,10 @@ $device-xs-width: 375;
 $device-sm-width: 768;
 $device-md-width: 1280;
 
+$max-viewport: 1280;
+//$max-font-size: 110%;
+$max-scale-up: 1.125;
+
 $container-max-widths: (
   sm: 0,
   md: 80em
@@ -36,9 +40,9 @@ $columns: 12!default;
 $rows-per-page: 20!default;
 $gap: #{rem(16)}!default;
 $gutter: #{rem(24)}!default;
-$max-width: #{rem(1280)}!default;
+$max-width-px: 1280!default;
+$max-width: #{rem($max-width-px)}!default;
 $grid-utility-count: 10!default;
-$grid-ignore-elements: "nav, main, footer, form"!default;
 
 $vars: map-merge((
   "--gap": #{$gap},

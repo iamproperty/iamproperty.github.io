@@ -62,6 +62,14 @@
   }
 }
 
+:host .container {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--container-padding);
+    width: 100%;
+}
+
 
 // replicate container padding-bottom
 main > .row {

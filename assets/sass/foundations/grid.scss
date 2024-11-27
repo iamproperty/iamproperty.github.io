@@ -14,11 +14,19 @@ body {
   @for $i from 1 to $columns {
     $templateColumns: $templateColumns + 'var(--col-size) [col-'+$i+'-end col-'+($i+1)+'-start] '
   }
-  grid-template-columns: [full-width-start] calc(var(--excess-space) - var(--gap, #{$gap}))
+  grid-template-columns: [full-width-start container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+                          [content-start col-1-start]
+                          #{$templateColumns}
+                          var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap})) [container-end full-width-end];
+
+  @media screen and (min-width: #{em($max-width-px * $max-scale-up)}) {
+    grid-template-columns: [full-width-start] calc(var(--excess-space) - var(--gap, #{$gap}))
                           [container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
                           [content-start col-1-start]
                           #{$templateColumns}
                           var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap})) [container-end] calc(var(--excess-space) - var(--gap, #{$gap})) [full-width-end];
+  }
+
   grid-template-rows: auto;
   align-content: start;
   justify-content: center;
@@ -53,14 +61,14 @@ body {
 }
 
 // Remove semantic elements out of the grid
-:is(#{$grid-ignore-elements}){
-  display: contents;
+:is(nav, main, footer){
+  display: grid;
+  grid-column: full-width;
+  grid-template-columns: subgrid;
+}
 
-  &[class*="bg-"]{
-    display: grid; 
-    grid-column: full-width;
-    grid-template-columns: subgrid;
-  }
+form {
+  display: contents;
 }
 // #endregion
 
@@ -135,7 +143,7 @@ body {
   grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
 }
 
-*:not(:where(html, body, #{$grid-ignore-elements})):has(:is([class*="cols-"], [class*="col-start-"], [class*="col-end-"], [class*="col-span-"])){
+*:not(:where(html, body)):has(:is([class*="cols-"], [class*="col-start-"], [class*="col-end-"], [class*="col-span-"])){
 
   display: grid;
   grid-template-columns: subgrid;    
@@ -243,4 +251,33 @@ body {
       }
     }
   }
+}
+// #endregion
+
+
+main {
+  grid-column: full-width!important;
+}
+
+
+main > :not(.full-width, iam-header, iam-collapsible-side, [class*="bg-"]) {
+  grid-column: content;
+}
+
+
+main > :is(.container) {
+  grid-column: content;
+}
+
+main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsible-side) {
+  grid-column: full-width;
+}
+
+[class*="bg-"]:has(.container) {
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.row > .col {
+  min-height: var(--min-height,0);
 }
