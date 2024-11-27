@@ -421,7 +421,7 @@ const routes = [
       },
       {
         path: 'charts',
-        name: 'Charts (Beta)',
+        name: 'Charts (Depreciated)',
         meta: {
           title: 'Charts | Components | iamkey'
         },
@@ -657,11 +657,41 @@ const routes = [
       },
       {
         path: 'record-card',
-        name: 'Record card (Beta)',
+        name: 'Record card',
         meta: {
           title: 'Record card | Components | iamkey'
         },
         component: () => import('./views/cards/RecordCardDoc.vue')
+      },
+      {
+        path: 'video-card',
+        name: 'Video card',
+        meta: {
+          title: 'Video card | Components | iamkey'
+        },
+        component: () => import('./views/cards/VideoCardDoc.vue')
+      }
+    ]
+  },
+  { /* Charts */
+    path: '/charts',
+    name: 'Charts',
+    meta: {
+      title: 'Charts | iamkey'
+    },
+    component: () => import( './views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue')
+      },
+      {
+        path: 'barchart',
+        name: 'Bar chart',
+        meta: {
+          title: 'Bar chart | Components | iamkey'
+        },
+        component: () => import('./views/charts/BarChart.vue')
       }
     ]
   },
@@ -830,8 +860,8 @@ const routes = [
         component: () => import('./views/examples/Pagination.vue')
       },
       {
-        path: 'charts',
-        component: () => import('./views/examples/Charts.vue')
+        path: 'barcharts',
+        component: () => import('./views/examples/BarCharts.vue')
       },
       {
         path: 'news-promo-cards',
@@ -1109,20 +1139,6 @@ const routes = [
         component: () => import('./views/prototype/Index.vue')
       }
     ]
-  },
-  { path: '/audit',
-    name: 'Audit',
-    component: () => import('./views/Audit.vue'),
-    searchterms: 'filesize'
-  },
-  {
-    path: '/changelog',
-    component: () => import('./views/Changelog.vue'),
-    name: 'Changelog',
-    meta: {
-      title: 'Changelog | iamkey'
-    },
-    searchterms: 'versions, changes'
   },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('./views/PageNotFound.vue') }
 ]

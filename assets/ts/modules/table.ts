@@ -149,7 +149,9 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   // Check what conditions are set on the table to see what the form actions are
   let formSubmit = function(event, paginate = false){
 
-    console.log('submit');
+    if(wrapper.hasAttribute('data-no-submit')){
+      return false;
+    }
 
     if(form.classList.contains('processing'))
       return false;
@@ -756,7 +758,7 @@ export const filterTable = (table, form, wrapper) => {
   });
 
   // Work out what to display after pagination
-  Array.from(table.querySelectorAll('tbody tr:not(.filtered')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
 
     matched++;
 
@@ -847,6 +849,10 @@ export const populateDataQueries = (table,form,wrapper) => {
 
 // Pagination
 export const addPaginationEventListeners = function(table, form, pagination, wrapper){
+
+  if(wrapper.hasAttribute('data-no-submit')){
+    return false;
+  }
 
   pagination.addEventListener('update-page', (event) => {
 
@@ -1007,7 +1013,7 @@ const filterFilters = function(form){
 }
 
 export const loadAjaxTable = async function (table, form, pagination, wrapper){
-
+  
   let formData = new FormData(form);
   let queryString = new URLSearchParams(formData).toString();
   let columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');

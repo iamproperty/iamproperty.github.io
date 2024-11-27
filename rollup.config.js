@@ -45,7 +45,7 @@ plugins.push(minify());
 
 const rollupConfig = [
   {
-    input: path.resolve(__dirname, `assets/js/bundle.js`),
+    input: path.resolve(__dirname, `assets/js/scripts.js`),
     output: {
       banner,
       file: path.resolve(__dirname, `assets/js/${fileDest}.js`),
@@ -56,27 +56,19 @@ const rollupConfig = [
     plugins
   },
   {
-    input: path.resolve(__dirname, `assets/js/dynamic.js`),
+    input: path.resolve(__dirname, `assets/js/components.js`),
     output: {
       banner,
-      file: path.resolve(__dirname, `assets/js/dynamic.min.js`),
+      file: path.resolve(__dirname, `assets/js/${fileDest.replace("scripts","components")}.js`),
       format: ESM ? 'esm' : 'umd',
-      globals,
-      name: 'iam-dynamic'
+      globals
     },
     external,
-    plugins: [
-      replace({
-        'process.env.NODE_ENV': '"production"',
-        preventAssignment: true,
-        'componentExt': '".component.min.js"'
-      }),
-      minify()
-    ]
+    plugins
   }
 ];
 
-const components = ["accordion","header","table","tabs",'card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup','fileupload','search','inline-edit','multiselect','slider','carousel','marketing'];
+const components = ["accordion","header","table","tabs",'card','filter-card','video-card','record-card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup','fileupload','search','inline-edit','multiselect','slider','carousel','marketing','barchart'];
 
 components.forEach((component) => {
 
@@ -87,6 +79,12 @@ components.forEach((component) => {
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.css`))) {
       
       css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.css`), 'utf8');
+      css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      css = css.replace("\uFEFF","");
+    }
+    else if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.component.css`))) {
+      
+      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.component.css`), 'utf8');
       css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       css = css.replace("\uFEFF","");
     }

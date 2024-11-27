@@ -43,7 +43,7 @@ export default {
 
     this.$nextTick(function () {
        
-      import(`../../../assets/js/components/table/table.component.js`).then(module => {
+      import(`../../../assets/js/components/table/table.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-table`))
           window.customElements.define(`iam-table`, module.default);

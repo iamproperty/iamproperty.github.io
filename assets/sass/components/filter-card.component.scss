@@ -1,0 +1,106 @@
+@use "../_func.scss" as *;
+@use "card.module.scss" as *;
+
+:host {
+
+  --top-padding: #{rem(24)};
+  --right-padding: 1rem;
+  --bottom-padding: #{rem(24)};
+  --left-padding: 1rem;
+
+  &:has(.card__total) .card__body{
+
+    align-items: center;
+    display: flex;
+  }
+
+  &:before,
+  &:after {
+    display: none;
+  }
+
+  &.card--has-icon {
+    --bottom-padding: #{rem(16)};
+    border: none;
+  }
+
+  .icon {
+    font-size: rem(18)!important;
+    height: rem(18)!important;
+    margin: 0 0 0.5rem 0!important;
+    font-weight: 400!important;
+    display: block!important;
+  }
+    
+  .card__total {
+    margin-top: 0;
+    order: -1;
+  }
+}
+
+
+:host(:is(:hover,:focus,.hover)) {
+
+  outline: none;
+    
+  :is(.card__body,.card__footer) {
+    background: #EEEEEE;
+  }
+}
+
+:host-context(:is(:checked, .checked)),
+:host(:is(:active, .active)) {
+
+  outline: 2px solid var(--colour,var(--colour-primary));
+  outline-offset: -2px;
+
+  .card__body {
+    background: none;
+  }
+  .card__footer {
+    background: none;
+  }
+}
+
+
+::slotted(i) {
+  display: block !important;
+  font-size: rem(18)!important;
+  margin: 0 0 0.5rem 0!important;
+}
+
+
+// #region card with a flag 
+:host(.card--flag) {
+  position: relative;
+  
+  &:after {
+    content: var(--card-flag-icon, "\f024");
+    font-family: "Font Awesome 6 Pro";
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: rem(16);
+    line-height: 1;
+    height: rem(16);
+    width: rem(16);
+    display: inline-block;
+    font-weight: normal;
+    color: var(--colour, var(--colour-primary));
+  }
+}
+// #endregion
+
+// #region Show total number
+.card__body:has(.card__total) {
+  --card-head-top-padding: 2rem;
+  --card-head-bottom-padding: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.card__total {
+  order: -1;
+}
+
+// #endregion

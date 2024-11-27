@@ -1,12 +1,8 @@
 // @ts-nocheck
+import {trackComponent, trackComponentRegistered} from "../_global";
+import {cardHTML,setupCard} from "../../modules/card.module";
 
-// Data layer Web component created
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  "event": "customElementRegistered",
-  "element": "Card"
-});
-
+trackComponentRegistered("iam-card");
 
 class iamCard extends HTMLElement {
 
@@ -14,175 +10,134 @@ class iamCard extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open'});
 
-    if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
-      this.classList.add('card--has-icon');
-
-    let classList = this.classList.toString();
+    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
+    const loadCSS = `@import "${assetLocation}/css/components/card.component.css";`;
     
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
-    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/card.css";`;
-    const loadExtraCSS = `@import "${assetLocation}/css/components/card.global.css";`;
-
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
-    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
-    <div class="card ${classList}" tabindex="0" part="card">
-    ${this.hasAttribute('data-image') || this.hasAttribute('data-record') ? `<div class="card__head">${this.hasAttribute('data-image') ? `<img src="${this.getAttribute('data-image')}" alt="" loading="lazy" />` : ``} <div class="card__badges"><slot name="badges"></slot></div></div>` : ''}
-      <div class="card__body" part="body">
-      ${!this.hasAttribute('data-image') && this.querySelector('[slot="badges"]') && this.querySelector('[slot="checkbox"]') ? `<div class="card__badges card__badges--inline"><slot name="badges"></slot></div>` : ''}
-      ${!this.hasAttribute('data-image') && !this.hasAttribute('data-record') && this.querySelector('[slot="badges"]') ? `<div class="card__badges"><slot name="badges"></slot></div>` : ''}
-      ${this.hasAttribute('data-illustration') ? `<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>` : ''}
-        <slot></slot>
-      ${this.hasAttribute('data-total') ? `<div class="card__total">${this.getAttribute('data-total')}</div>` : ''}
-      </div>
-      ${this.hasAttribute('data-add-link') ? `<button class="btn btn-compact btn-secondary fa-plus">Add property</button>` : ''}
-      <slot name="checkbox"></slot>
-      <div class="card__footer" part="footer">
-        <slot name="footer"></slot>
-        <slot name="btns"></slot>
-        ${this.hasAttribute('data-cta') ? `<span class="link d-inline-block pt-0 mb-0">${this.getAttribute('data-cta')}</span>` : ''}
-      </div>
-    </div>
+    ${cardHTML}
+    <slot name="primary-action"></slot>
     `;
+
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    
-    // insert extra CSS
-    if(!document.getElementById('cardGlobal'))
-      document.head.insertAdjacentHTML('beforeend',`<style id="cardGlobal">${loadExtraCSS}</style>`);
   }
 
-	connectedCallback() {
+  
+	async connectedCallback() {
 
-    this.classList.add('loaded');
-    
-    // Mimic clicking the parent node so the focus and target events can be on the card
-    const parentNode = this.parentNode.closest('a, button, label, router-link')
-    const card = this.shadowRoot.querySelector('.card')
-    const btnCompact =  this.shadowRoot.querySelector('.btn-compact');
-    const recordType = this.hasAttribute('data-record') ? this.getAttribute('data-record') : '';
+    const cardComponent = this;
+    const cardHead =  cardComponent.shadowRoot.querySelector('.card__head');
+    const cardBody =  cardComponent.shadowRoot.querySelector('.card__body');
+    const cardMenu =  cardComponent.shadowRoot.querySelector('.dialog__wrapper');
+    const btn =  cardComponent.shadowRoot.querySelector('.dialog__wrapper button');
 
-    if(parentNode)
-      parentNode.setAttribute('tabindex','-1');
-    
+    setupCard(cardComponent);
 
-    if(parentNode.matches('label[for]')){
-
-      let isChecked = document.getElementById(parentNode.getAttribute('for')).checked;
-        
-      if(isChecked)
-        card.classList.add('checked');
-      else
-        card.classList.remove('checked');
+    // Add Illustration HTML
+    if(cardComponent.hasAttribute('data-illustration')){
+      cardBody.insertAdjacentHTML('afterbegin',`<div class="card__illustration"><img src="${this.getAttribute('data-illustration')}" alt="" loading="lazy" /></div>`)
     }
 
-    // Click event down
-    this.addEventListener('click', (event) => {
+    // Add class that shows the right arrow icon
+    if(!cardComponent.querySelector('[slot="btns"]') && !cardComponent.querySelector('[slot="secondary"]')){
+      cardComponent.classList.add('show-icon');
+    }
 
-      let clickEvent = new Event('click');
-      card.dispatchEvent(clickEvent);
+    // Secondary buttons and actions
+
+    // Add the dialog wrapper HTML
+    if(cardComponent.querySelector('[slot="btns"]')){
+
+      cardComponent.shadowRoot.innerHTML += `<div class="dialog__wrapper">
+      <button class="btn btn-secondary btn-compact fa-ellipsis-vertical" popovertarget="actions" title="Further actions" type="button">Open further actions</button>
+      <div class="dialog--fix dialog--list" id="actions" popover>
+        <slot name="btns"></slot>
+      </div>
+    </div>`;
+    }
+      
+    // Make sure slotted buttons and links have correct button classes
+    Array.from(cardComponent.querySelectorAll('[slot="btns"]')).forEach((button,index)=>{
+
+      button.classList.add('btn');
+      button.classList.add('btn-action');
     });
 
-    card.addEventListener('click', (event) => {
+    // Hide the default hover and focus states when interacting with the checkbox, dialog wrapper or secondary button
+    if(cardComponent.querySelector('[slot="checkbox"],[slot="secondary"]')){
 
-      if(parentNode.matches('label[for]')){
+      const element = cardComponent.querySelector('[slot="checkbox"],[slot="secondary"]');
 
-        event.stopPropagation();
-        event.preventDefault();
+      element.addEventListener('mouseenter', (event) => {
+        cardComponent.classList.add('prevent-hover');
+      });
 
-        const input = document.getElementById(parentNode.getAttribute('for'))
-
-        const inputName = input.getAttribute('name');
-        const inputID = input.getAttribute('id');
-
-        // Mimic radio button functionality
-        const inputs = Array.from(document.querySelectorAll(`[name="${inputName}"][type="radio"]:not([id="${inputID}"])`));
-        inputs.forEach((input, index) => {
-          
-          const otherCard = document.querySelector(`[for="${input.getAttribute('id')}"] iam-card`);
-          
-          otherCard.dispatchEvent(new Event('inactive'));
-        });
-
-        parentNode.click();
-        let isChecked = input.checked
-          
-        if(isChecked)
-          card.classList.add('checked');
-        else
-          card.classList.remove('checked');
-
-      }
-    });
-
-    this.addEventListener('inactive', (event) => {
-      card.classList.remove('checked');
-    });
-
-    card.addEventListener('keydown', (event) => {
-
-      switch(event.keyCode)
-      {
-          case 32:
-          case 13:
-            if(parentNode.matches('label[for]')){
-
-              event.stopPropagation();
-              event.preventDefault();
-      
-              const input = document.getElementById(parentNode.getAttribute('for'))
-      
-              const inputName = input.getAttribute('name');
-              const inputID = input.getAttribute('id');
-      
-              const inputs = Array.from(document.querySelectorAll(`[name="${inputName}"]:not([id="${inputID}"])`));
-          
-              inputs.forEach((input, index) => {
-                
-                const otherCard = document.querySelector(`[for="${input.getAttribute('id')}"] iam-card`);
-                
-                otherCard.dispatchEvent(new Event('inactive'));
-              });
-      
-              parentNode.click();
-              let isChecked = input.checked
-                
-              if(isChecked)
-                card.classList.add('checked');
-              else
-                card.classList.remove('checked');
-      
-            }
-            else {
-              parentNode.click();
-            }
-              break;
-          default:
-              break;
-      }
-    });
-
-    if(btnCompact){
-
-      let addLocation = this.getAttribute('data-add-link');
-
-      btnCompact.addEventListener('click', (event) => {
-
-          event.stopPropagation();
-          event.preventDefault();
-          window.location = addLocation;
+      element.addEventListener('mouseleave', (event) => {
+        cardComponent.classList.remove('prevent-hover');
       });
     }
 
+    if(cardComponent.shadowRoot.querySelector('.dialog__wrapper')){
+
+      const element = cardComponent.shadowRoot.querySelector('.dialog__wrapper');
+
+      element.addEventListener('mouseenter', (event) => {
+        cardComponent.classList.add('prevent-hover');
+      });
+
+      element.addEventListener('mouseleave', (event) => {
+        cardComponent.classList.remove('prevent-hover');
+      });
+    }
+
+    // Dispatch events of selecting checkboxes
+    const checkbox = cardComponent.querySelector('input[type="checkbox"]');
+    if(checkbox){
+      checkbox.addEventListener('change', (event) => {
+
+
+        if(checkbox.checked){
+          const customEvent = new CustomEvent("select-card", { detail: { 'Card value': checkbox.value, 'input name': checkbox.getAttribute('name') } });
+          cardComponent.dispatchEvent(customEvent);
+        }
+        else {
+    
+          const customEvent = new CustomEvent("unselect-card", { detail: { 'Card value': checkbox.value, 'input name': checkbox.getAttribute('name') } });
+          cardComponent.dispatchEvent(customEvent);
+        }
+      });
+    }
+
+    // Dispatch events of click onto secondary buttons
+    const secondaryBtn = cardComponent.querySelector('[slot="secondary"]');
+    if(secondaryBtn){
+      secondaryBtn.addEventListener('click', (event) => {
+
+        const customEvent = new CustomEvent("secondary-button-clicked", { detail: { 'Title': secondaryBtn.getAttribute('title') } });
+        cardComponent.dispatchEvent(customEvent);
+      });
+    }
+
+    // Dispatch events of click onto action buttons
+    const actionBtns = cardComponent.querySelectorAll('[slot="btns"]');
+    Array.from(actionBtns).forEach((button,index)=>{
+
+      button.addEventListener('click', (event) => {
+
+        const customEvent = new CustomEvent("action-button-clicked", { detail: { 'Title': button.getAttribute('title') } });
+        cardComponent.dispatchEvent(customEvent);
+      });
+    });
+
+
+    trackComponent(cardComponent,"iam-card",['select-card','unselect-card','secondary-button-clicked','action-button-clicked']);
   }
 
   static get observedAttributes() {
-    return ["data-total","class"];
+    return ["data-image"];
   }
   
   attributeChangedCallback(attrName, oldVal, newVal) {
@@ -192,13 +147,15 @@ class iamCard extends HTMLElement {
           this.shadowRoot.querySelector('.card__total').innerHTML = newVal;
         break;
       }
-      case "class": {
-        let classList = this.classList.toString();
-            
-        if(this.querySelector('*:not(.badge):not(small):not(.btn) > [class*="fa-"]:not(.btn)'))
-          classList += ' card--has-icon';
+      case "data-image": {
 
-        this.shadowRoot.querySelector('.card').setAttribute('class',`card ${classList}`);
+        if(oldVal != newVal){
+
+          const cardHeadImg = this.shadowRoot.querySelector('.card__head img');
+
+          if(cardHeadImg)
+            cardHeadImg.setAttribute('src',newVal);
+        }
         break;
       }
     }

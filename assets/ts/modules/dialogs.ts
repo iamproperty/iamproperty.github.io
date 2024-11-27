@@ -1,6 +1,4 @@
 // @ts-nocheck
-import { createEmbed } from "./youtubevideo"; 
-
 const extendDialogs = (body) => {
 
   Array.from(body.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
@@ -71,6 +69,14 @@ const extendDialogs = (body) => {
       Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement,index) => {
         btnElement.classList.remove('active');
       });
+
+      let closeEvent = new CustomEvent('dialog-closed', {
+        bubbles: true,
+        cancelable: true,
+        detail: { modalId: dialog.id }
+      });
+
+      event.target.dispatchEvent(closeEvent);
 
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
@@ -222,12 +228,6 @@ const extendDialogs = (body) => {
 }
 
 export const createDialog = (dialog) => { 
-
-  // Create the video embed
-  let videoButton = dialog.querySelector('.youtube-embed a');
-  if (videoButton){
-    createEmbed(videoButton)
-  }
 
   // Multi dialog
   if(dialog.classList.contains('dialog--multi') && !dialog.querySelector(':scope > .steps')) {

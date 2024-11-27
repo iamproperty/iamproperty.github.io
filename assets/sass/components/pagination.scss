@@ -35,15 +35,18 @@
   padding-inline: 1rem;
   
   .select--minimal {
-    --select-padding-left: rem(16);
-    height: rem(52);
-    line-height: rem(52);
+    height: calc(3.25rem - 1em);
+    line-height: calc(3.25rem - 1em);
     margin-left: rem(-16);
     font-weight: bold;
   }
 
   div:has(> select){
     margin-bottom: 0;
+    
+    &:after {
+      top: 50%;
+    }
   }
 }
 
@@ -118,7 +121,7 @@
   display: none;
   background: none;
   padding-inline: 1rem;
-
+  color: var(--colour-body);
   
   @include container-up(sm) {
 
@@ -134,21 +137,13 @@
   }
 
   &:is(:hover,:focus):not(:disabled){
-    background-color: var(--colour-light);
+    background-color: var(--pagination-link-color);
+    color: var(--colour-hover);
   }
 
   &:is(:active):not(:disabled){
-    background-color: #E0E0E0;
-  }
-
-  @include dark-mode(){
-    &:is(:hover,:focus):not(:disabled){
-      background-color: var(--colour-canvas);
-    }
-  
-    &:is(:active):not(:disabled){
-      background-color: var(--colour-canvas);
-    }
+    background-color: var(--pagination-link-color);
+    color: var(--colour-active);
   }
 
   &:disabled {

@@ -34,7 +34,7 @@ class iamTable extends HTMLElement {
       <slot></slot>
     </div>
     </div>
-    <iam-pagination class="pagination--table" ${this.hasAttribute('data-page')?`data-page="${this.getAttribute('data-page')}"`:''} ></iam-pagination>
+    <iam-pagination part="pagination" class="pagination--table" ${this.hasAttribute('data-page')?`data-page="${this.getAttribute('data-page')}"`:''} ></iam-pagination>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
@@ -242,7 +242,10 @@ class iamTable extends HTMLElement {
 
 
       tableModule.makeTableFunctional(this.table, this.form, this.pagination, this);
-      tableModule.filterTable(this.table, this.form,this);
+      
+      if(!this.hasAttribute('data-no-submit'))
+        tableModule.filterTable(this.table, this.form,this);
+
       tableModule.populateDataQueries(this.table, this.form);
     }
 
@@ -256,6 +259,22 @@ class iamTable extends HTMLElement {
 
     });
 
+    // Push up the pagination events
+    this.pagination.addEventListener('update-show', (event) => {
+
+      let show = event.detail.show;
+
+      const updateEvent = new CustomEvent("update-show", { detail: { show: show } });
+      this.dispatchEvent(updateEvent);
+    });
+
+    this.pagination.addEventListener('update-page', (event) => {
+
+      let page = event.detail.page;
+
+      const updateEvent = new CustomEvent("update-page", { detail: { page: page } });
+      this.dispatchEvent(updateEvent);
+    });
   }
 
 
@@ -264,6 +283,7 @@ class iamTable extends HTMLElement {
   }
   
   attributeChangedCallback(attrName, oldVal, newVal) {
+    
     
     this.pagination = this.shadowRoot.querySelector('iam-pagination');
 

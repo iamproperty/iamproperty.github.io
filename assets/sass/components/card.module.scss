@@ -1,0 +1,154 @@
+@use "../_func.scss" as *;
+
+:host {
+  --card-icon-right: 1rem;
+  --card-head-top-padding: 2rem;
+  --card-head-bottom-padding: 2rem;
+  --card-footer-bottom-padding: 1.5rem;
+  --card-head-height: 6rem;
+
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-border-radius);
+  position: relative;
+  font-weight: bold;
+  font-size: rem(18);
+  line-height: rem(24);
+  color: var(--colour-primary);
+  //min-height: calc(100% - 2rem);
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 0;
+  background: var(--colour-canvas-2);
+  outline: 2px solid var(--outline-colour,--colour-canvas-2);
+  outline-offset: -2px;
+  margin-bottom: 2rem;
+
+  > * {
+    width: 100%;
+    box-sizing: border-box;;
+  }
+}
+
+:host-context(:is(a,label,button)) {
+  margin-bottom: 0!important;
+}
+
+:host(.border-0) {
+  box-shadow: none;
+  --card-left-padding: 0rem;
+  outline-offset: 1px!important;
+}
+
+.card__head:has(img) {
+  
+  min-height: var(--card-head-height);
+  position: relative;
+  overflow: hidden;
+  background: rgba(0,0,0,0.1);
+  z-index: -1;
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    object-fit: cover;
+  }
+}
+
+.card__body {
+  //position: relative;
+  padding: var(--card-head-top-padding) var(--card-right-padding) var(--card-head-bottom-padding) var(--card-left-padding);
+  //z-index: -1;
+}
+
+.card__footer {
+  margin-top: 0;
+  padding: 0 var(--card-right-padding) 0 var(--card-left-padding);
+}
+
+::slotted(i){
+  font-size: rem(24)!important;
+  margin: -3px var(--card-icon-right) 0 0!important;
+  vertical-align: middle!important;
+}
+::slotted(i:not(.fa-light):not(.fa-bold)){
+  font-weight: 400!important;
+}
+
+::slotted(.badge){
+  margin-bottom: 0.375rem!important;
+}
+::slotted(span:not(.badge)){
+  display: block!important;
+  font-weight: normal!important;
+  font-size: rem(16)!important;
+}
+::slotted(small){
+  padding-top: rem(16)!important;
+  display: block!important;
+  font-weight: normal!important;
+  padding-bottom: 0!important;
+  color: var(--colour-body);
+}
+::slotted(span:not(.badge):not([class*="pt-"])){
+  padding-top: rem(24)!important;
+}
+
+::slotted(:is(a,button)[slot="footer"]){
+  margin-bottom: var(--card-footer-bottom-padding)!important;
+}
+
+// #region Show total number
+.card__body:has(.card__total) {
+  --card-head-top-padding: 1rem;
+  --card-head-bottom-padding: 1.5rem;
+}
+
+.card__total {
+  font-size: rem(48);
+  line-height: rem(48);
+  padding-right: rem(16);
+  margin-top: 0.5rem;
+
+  i {
+    font-family: var(--fa-style-family, "Font Awesome 6 Pro");
+    font-weight: var(--fa-style, 900);
+
+    display: block !important;
+    font-size: 2.5rem !important;
+    margin: .5rem 0 .5rem 0 !important;
+  }
+}
+
+::slotted([slot="total-icon"]) {
+  display: block !important;
+  font-size: 2.5rem !important;
+  margin: .5rem 0 .5rem 0 !important;
+  line-height: 2.5rem;
+}
+
+// #endregion
+
+
+// #region badges
+.card__head:has(img) ~ .card__badges {
+  
+  position: absolute;
+  top: 0;
+  text-align: left;
+  left: 0;
+  z-index: 9;
+}
+
+.card__badges {
+  
+  padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) 0 var(--card-left-padding);
+  margin-bottom: -1.5rem;
+}
+// #endregion

@@ -12,7 +12,7 @@
   text-align: center;
   white-space: nowrap;
   max-width: fit-content;
-  color: #262626!important;
+  color: #262626;
   position: relative;
   background: var(--wider-colour, var(--wider-colour-1));
   margin-bottom: 1rem;
@@ -24,12 +24,22 @@
   &:empty {
     display: none;
   }
+
+  &:is(.bg-primary,.bg-dark,.bg-danger){
+    color: #{$colour-inverted}!important;
+  }
 }
 
 .badge {
 
   border-radius: rem(6);
   padding: 0 rem(8);
+
+  &--rounded {
+    border-radius: 1rem;
+    min-width: 1.625rem;
+    padding: 0;
+  }
 }
 
 .tag {

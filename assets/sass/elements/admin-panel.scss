@@ -1,7 +1,7 @@
 @use "../_func" as *;
 
 .admin-panel {
-  --padding-x: #{rem(32)};
+  --padding-x: #{rem(24)};
   --padding-top: #{rem(16)};
   --padding-bottom: #{rem(24)};
   --mh-modifier: #{rem(56 + 16)};
@@ -28,7 +28,8 @@
     display: none;
   }
 
-  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child {
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6, .admin-panel__heading):first-child {
     
     --gradient-direction: -90deg!important;
     background-color:var(--colour-success);
@@ -37,15 +38,52 @@
       color: var(--colour-primary-theme);
       background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
     }
-    
-    font-size: rem(18);
-    line-height: rem(24);
-    font-weight: bold;
-    padding: rem(16) var(--padding-x);
+  
     margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
     display: block;
     border-top-left-radius: rem(8);
     border-top-right-radius: rem(8);
+  }
+
+  > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6):first-child,
+  .admin-panel__heading > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
+    font-size: rem(18);
+    line-height: rem(24);
+    font-weight: bold;
+    padding: rem(16) var(--padding-x);
+  }
+
+  > :is(.admin-panel__heading):first-child {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    padding: rem(16) var(--padding-x);
+
+    > :is(h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6) {
+      padding: 0;
+      margin-inline-end: auto;
+    }
+
+    .btn {
+      --btn-margin: 0;
+    }
+
+    .dialog__wrapper + .btn {
+      --btn-margin: 0.25rem;
+      margin-inline-end: 0;
+    }
+
+    @media (prefers-color-scheme: light) {
+      .btn-action,
+      .dialog__wrapper {
+        --colour-canvas-2: #FFFFFF;
+        --colour-heading: var(--colour-primary);
+        --colour-btn-action-hover-bg: var(--colour-light);
+        --colour-btn-hover: var(--colour-primary);
+        --colour-border: #D8D8D8;
+      }
+    }
   }
 
   :is(iam-table, .iam-table) {

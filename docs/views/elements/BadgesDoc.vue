@@ -19,6 +19,19 @@
 
     <span class="badge wider-colour-3">CRM service</span>
     <hr class="mt-5"/>
+
+    <h3>Rounded badge</h3>
+
+    <p>Use the .badge--rounded class to create a more rounded version of the badge whitch looks more like and avatar type badge. This class should be used for content with 1 or 2 letters but can be used for more. But when used for more the badge will widen not be an actual circle anymore.</p>
+
+    <div class="d-flex">
+      
+    <span class="badge badge--rounded wider-colour-3">J</span>
+    <span class="badge badge--rounded wider-colour-2">JB</span>
+    <span class="badge badge--rounded wider-colour-6">JBU</span>
+    <span class="badge badge--rounded wider-colour-6">CRM service</span>
+    </div>
+    <hr class="mt-5"/>
     
 <!--
     <div class="bg-light version-control">

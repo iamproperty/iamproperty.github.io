@@ -109,6 +109,11 @@
       
     </div>
 
+    <div class="container">
+      <h3>Custom Events</h3>
+      <p>On closing a modal, the 'dialog-closed' cutom event will be dispatched. It will send an object with the modal ID in it as the detail.</p>
+    </div>
+
     <NonModelDesc></NonModelDesc>
 
     <div class="container pt-5 pb-5">
@@ -150,7 +155,6 @@
 import Table from '@/components/Table/Table.vue'
 import Tabs from '@/components/Tabs/Tabs.vue'
 import Card from '@/components/Card/Card.vue'
-import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
 import DSHeader from '../DSHeader.vue'
 import DialogUsage from '../DialogUsage.vue'
 import ModalVariants from '../ModalVariants.vue'
@@ -161,7 +165,6 @@ import nonModalImg from '../../img/dialogs/non-modal-demo.png'
 
 export default {
   components: {
-    YoutubeVideo,
     DSHeader,
     DialogUsage,
     ModalVariants,

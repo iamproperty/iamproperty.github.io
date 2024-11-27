@@ -24,6 +24,6 @@ describe('addDataAttributes', () => {
   test('should add a class of d-none to each item except the one containing Lucas Myers', () => {
 
     expect(list.querySelectorAll('li:not(.d-none)').length).toEqual(1);
-    expect(list.querySelector('li:not(.d-none').textContent).toEqual('Lucas Myers');
+    expect(list.querySelector('li:not(.d-none)').textContent).toEqual('Lucas Myers');
   });
 });

@@ -52,12 +52,10 @@ const version = pkg.version;
   <footer class="bg-primary mb-0">
     <div class="container pt-4 d-print-none">
       <ul class="list-unstyled list-inline ms-auto d-block mb-0">
-        <li class="list-inline-item me-4 ms-0 mb-2"><a href="/brand-guidelines.pdf" target="_blank" download>Brand guidelines</a></li>
         <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/information">Information</router-link></li>
         <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/get-started">Get started</router-link></li>
+        <li class="list-inline-item me-4 ms-0 mb-2"><a href="/brand-guidelines.pdf" target="_blank" download>Brand guidelines</a></li>
         <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/examples">Examples</router-link></li>
-        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/audit">Audit</router-link></li>
-        <li class="list-inline-item me-4 ms-0 mb-2"><router-link to="/changelog">Changelog</router-link></li>
       </ul>
     </div>
     <div class="container pt-3">
