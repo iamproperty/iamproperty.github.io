@@ -18,6 +18,18 @@ postcss([
 });
 
 
+// 403 template
+postcss([
+  purgecss({
+    content: ['public/error/403.html']
+  })
+]).process(mycss).then(output => {
+  
+  console.log('- 404 error page CSS written');
+  fs.writeFile("public/error/css/fourohthree.min.css", output.css, (err) => {  if (err) throw err; });
+});
+
+
 // 404 template
 postcss([
   purgecss({
