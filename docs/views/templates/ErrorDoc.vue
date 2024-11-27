@@ -164,7 +164,7 @@ import encodedImg2 from '../../../assets/img/illustrations/not-found.png';
 
             </div>
             <div class="col-8 col-sm-10 col-md-5 ms-auto me-auto">
-              <img :src="encodedImg" />
+              <img :src="encodedImg2" />
             </div>
           </div>
         </div>
