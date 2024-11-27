@@ -19,7 +19,7 @@ import encodedImg2 from '../../../assets/img/illustrations/not-found.png';
       <p>Error pages are used to clarify to the user when a page doesn’t exist or if there has been an error of some kind that can be frustrating or confusing for the user. Straightforward plain language can help. Use an error page to explain the error and instruct the user what to do next.</p>
 
       <h3>Layout</h3>
-      <p>The layout of the error page needs to be balanced with the illustration across dierent device breakpoints. Text should be concise to avoid overloading the user with unnecessary information.</p>
+      <p>The layout of the error page needs to be balanced with the illustration across different device breakpoints. Text should be concise to avoid overloading the user with unnecessary information.</p>
 
       <div class="error-example full-width">
         <div class="invert-colours bg-info gradient-primary gradient-direction-angle container mb-5 pt-5 pb-5">
@@ -135,7 +135,7 @@ import encodedImg2 from '../../../assets/img/illustrations/not-found.png';
 
 
               <span class="h1">Website is down for maintenance</span>
-              <P>We're nusy updating the iamsold website for you. We'll be back up and running again shortly.</P>
+              <P>We're busy updating the iamsold website for you. We'll be back up and running again shortly.</P>
 
               <span class="reset-colours"><button class="btn btn-primary">Go back</button></span>
 
