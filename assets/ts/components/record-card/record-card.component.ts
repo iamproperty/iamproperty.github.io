@@ -16,6 +16,8 @@ class iamRecordCard extends HTMLElement {
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
+    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+    
     ${loadCSS}
     </style>
     ${cardHTML}
