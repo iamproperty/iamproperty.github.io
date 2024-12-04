@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "6.1.0",
+  "version": "6.1.0--beta",
   "scripts": {
     "bootstrap": "copyfiles -u 2 node_modules/bootstrap/**/* assets/bootstrap",
     "reload": "vite --host",
