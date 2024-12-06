@@ -11,7 +11,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/video-card/video-card.component.js`).then(module => {
+      import(`../../../assets/js/components/video-card/video-card.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-video-card`))
           window.customElements.define(`iam-video-card`, module.default);

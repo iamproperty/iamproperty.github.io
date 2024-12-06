@@ -4,8 +4,12 @@
 @layer reset, elements, components, templates, utilities, overrides;
 
 
+$root: ":root"!default;
+$layers: "true"!default;
+
 // Foundations
 @include layer('reset') {
+  
   @import "foundations/root.scss";
   @import "foundations/reboot.scss";
   @import "foundations/grid.scss";
@@ -17,19 +21,9 @@
 
 @include layer('components') {
 
-  // Make sure the first 
-  main {
-    position: relative;
-    
-    > *:first-child {
-      padding-top: 2rem;
-    }
-  }
-
   // Deal with preloaded state of native components
   @import "_components.scss";
 
-  @import "components/charts.config.scss";
 }
 
 @include layer('templates') {
