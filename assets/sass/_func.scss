@@ -11,7 +11,8 @@ $varsMD: ()!default;
 
 $prefix: '';
 
-$enable-new-grid: true;
+$enable-new-grid: "false"!default;
+$disable-bs-grid: "false"!default;
 
 @import "_functions/functions";
 @import "_functions/variables";

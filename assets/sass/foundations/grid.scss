@@ -34,9 +34,6 @@ body {
   & * {
     grid-column: content;
 
-    &:not(div){
-    }
-
     &:where(button){
         
       max-width: fit-content;
@@ -49,34 +46,30 @@ body {
       align-content: start;
     }
   }
-
-  [class*="bg-"]{
-    &:not([class*=col-]) {
-      display: grid;
-      grid-column: full-width;
-      margin-bottom: 2rlh;
-      grid-template-columns: subgrid;
-    }
-  }
 }
 
-// Remove semantic elements out of the grid
-:is(nav, main, footer){
+div:has(main) {
+  display: contents!important;
+}
+
+:is(nav, main, footer) {
+  display: grid;
+  grid-column: full-width!important;
+  grid-template-columns: subgrid;
+}
+
+main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsible-side) {
+  grid-column: full-width;
+}
+
+[class*="bg-"]:not([class*=col-]):has(.container) {
   display: grid;
   grid-column: full-width;
   grid-template-columns: subgrid;
 }
-
-form {
-  display: contents;
-}
 // #endregion
 
-// #region Grid utility classes
-*:has([class*="order-"]) > * {
-  order: 99;
-}
-
+// #region grid mixins
 @mixin grid-utilities($br: ""){
   .#{$br}inline-start {
     justify-self: start;
@@ -130,34 +123,6 @@ form {
   }
 }
 
-@include grid-utilities();
-@each $br, $value in $breakpoints {
-  @include breakpoint($br){
-    @include grid-utilities(#{$br+'-'});
-  }
-}
-// #endregion
-
-// #region Create the columns
-:is([class*="col-start-"], [class*="col-end-"], [class*="col-span-"]) {
-  grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
-}
-
-*:not(:where(html, body)):has(:is([class*="cols-"], [class*="col-start-"], [class*="col-end-"], [class*="col-span-"])){
-
-  display: grid;
-  grid-template-columns: subgrid;    
-
-  [class*="col-"] {
-  
-    --col-start: col-1;   
-  }
-
-  * {
-    grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
-  }
-}
-
 @mixin grid-columns($br: ""){
 
   *:not(:where(main)):has(> [class*="#{$br}col-"]){
@@ -165,7 +130,7 @@ form {
     grid-template-columns: subgrid;
   }
 
-  .#{$br}col-auto {
+  .#{$br}col-start-auto {
     --col-start: auto;
   }
   
@@ -185,6 +150,68 @@ form {
   }
 }
 
+@mixin grid-rows($br: ""){
+
+  // Assign how many rows an item takes
+  @for $i from 0 to $grid-utility-count {
+    
+    .#{$br}row-span-#{$i+1} {
+      --row-span: #{$i+1};
+    }
+  }
+
+  // Move the item to a set row
+  @for $i from 0 to $rows-per-page {
+    
+    .#{$br}row-start-#{$i+1} {
+      --row-start: #{$i+1};
+    }
+  }
+}
+// #endregion
+
+@if $enable-new-grid == "true" {
+
+// #region Grid utility classes
+*:has([class*="order-"]) > *:not([class*="order-"]) {
+  order: 99;
+}
+
+
+@include grid-utilities();
+@each $br, $value in $breakpoints {
+  @include breakpoint($br){
+    @include grid-utilities(#{$br+'-'});
+  }
+}
+// #endregion
+
+// #region Create the columns
+:is([class*="col-start-"], [class*="col-end-"], [class*="col-span-"]) {
+  grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
+}
+
+*:not(:where(html, body)):has(:is([class*="cols-"], [class*="col-start-"], [class*="col-end-"], [class*="col-span-"])){
+
+  display: grid;
+  grid-template-columns: subgrid;    
+
+  [class*="col-"]:not([class*="col-start-auto"]) {
+  
+    --col-start: col-1;   
+  }
+
+  [class*="col-"] [class*="col-"] {
+  
+    --col-start: auto;   
+  }
+
+  * {
+    grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
+  }
+}
+
+
 @include grid-columns();
 @each $br, $value in $breakpoints {
   @include breakpoint($br){
@@ -198,24 +225,6 @@ form {
   grid-row: var(--row-start, auto) / span var(--row-span, 1);
 }
 
-@mixin grid-rows($br: ""){
-
-  // Assign how many rows an item takes
-  @for $i from 0 to $grid-utility-count {
-    
-    .#{$br}rows-#{$i+1} {
-      --row-span: #{$i+1};
-    }
-  }
-
-  // Move the item to a set row
-  @for $i from 0 to $rows-per-page {
-    
-    .#{$br}row-start-#{$i+1} {
-      --row-start: #{$i+1};
-    }
-  }
-}
 
 @include grid-rows();
 @each $br, $value in $breakpoints {
@@ -246,7 +255,7 @@ form {
   
       $count: math.div($columns,$i);
 
-      .cols-#{$br}-#{$i} > * {
+      .#{$br}-cols-#{$i} > * {
         grid-column: auto / span #{math.floor($count)};
       }
     }
@@ -254,30 +263,4 @@ form {
 }
 // #endregion
 
-
-main {
-  grid-column: full-width!important;
-}
-
-
-main > :not(.full-width, iam-header, iam-collapsible-side, [class*="bg-"]) {
-  grid-column: content;
-}
-
-
-main > :is(.container) {
-  grid-column: content;
-}
-
-main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsible-side) {
-  grid-column: full-width;
-}
-
-[class*="bg-"]:has(.container) {
-  display: grid;
-  grid-template-columns: subgrid;
-}
-
-.row > .col {
-  min-height: var(--min-height,0);
 }

@@ -1,9 +1,14 @@
-@use '../../assets/sass/_func.scss' as *;
+@use '../../assets/sass/_func.scss' as * with (
+  $disable-bs-grid: "false",
+  $enable-new-grid: "true"
+);
 
 // Load the SCSS framework
 $fontPath: '../../fonts/';
+
 @import "../../assets/sass/_fonts.scss";
 @import '../../assets/sass/_corefiles.scss';
+
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
@@ -61,7 +66,11 @@ code {
 
 .version-control {
   padding-top: 3rem;
-  container-type: inline-size;
+
+  > .container {
+      
+    container-type: inline-size;
+  }
 
   table {
     --border-width: 0px;

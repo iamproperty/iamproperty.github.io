@@ -66,7 +66,6 @@ const version = pkg.version;
 </template>
 
 <style lang="scss">
-@use '../assets/sass/_func.scss' as *;
 @import "./assets/styles.scss";
 
 @media screen and (max-width: 62em){
@@ -97,10 +96,6 @@ a.router-link-active:not(.text-decoration-none):not(.btn):before {
   }
 //}
 
-@include media-breakpoint-up(md) {
-
-
-}
 
 .nav {
   overflow-x: visible;
@@ -127,14 +122,6 @@ footer .router-link-active {
 #visualtest:target ~ main > .visualtest .visualtest-hide,
 #visualtest:target ~ main > .visualtest pre {
   display: none!important;
-}
-
-#app {
-
-  display: contents;
-  > div:not(.container) {
-    display: contents;
-  }
 }
 
 .markdown-body {

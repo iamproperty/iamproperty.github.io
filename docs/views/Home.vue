@@ -5,17 +5,13 @@
       <p>The single source of truth which groups all the elements that will allow the iam property team to design, realize and develop great products.</p>
     </Header>
     
-
-    <div class="cols-1 cols-md-3">
-
-      <a v-for="item in items" :href="item.link">
-        <Card>
-          {{ item.title }}
-          <span v-html="item.content"></span>
-        </Card>
-      </a>
-    </div>
-
+    <a v-for="(item, index) in items" :href="item.link" :class="`col-span-12 md-col-span-4 md-col-start-${index == 0 ? '1' : 'auto'} mb-4`">
+      <Card>
+        {{ item.title }}
+        <span v-html="item.content"></span>
+      </Card>
+    </a>
+    
   </main>
 </template>
 
