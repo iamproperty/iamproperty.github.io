@@ -11,7 +11,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/record-card/record-card.component.js`).then(module => {
+      import(`../../../assets/js/components/record-card/record-card.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-record-card`))
           window.customElements.define(`iam-record-card`, module.default);
