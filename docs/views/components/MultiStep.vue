@@ -80,7 +80,8 @@ import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scrol
     <dialog id="modal-multi">
       
     
-      <MultiStep><form>
+      <MultiStep>
+        <form>
         <span class="h3">Multi-step modal title</span>
       
         <fieldset data-title="Personal details">
@@ -124,7 +125,7 @@ import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scrol
         </fieldset>
         <button class="btn btn-primary colour-success" type="submit">Register</button>
       
-    </form>
+        </form>
       </MultiStep>
     </dialog>
     <!-- #endregion -->
@@ -133,47 +134,43 @@ import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scrol
 
   
 
-    <Integration component="card" componentName="iam-card" >
+    <Integration component="multi-Step" componentName="iam-multi-step" >
       <template #web-component>
 
-        <pre><code>{{`<a href="/url"></a><iam-card :data-image="cardImg"> 
-  Speed up sales success <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</span>
-</iam-card></a>`}}</code></pre>
+        <pre><code>{{`<dialog><iam-multi-step><form>
+  <span class="h3">Multi-step modal title</span>
+      
+  <fieldset data-title="Submit property">
+    <div>
+      <label for="input4">Name 4</label>
+      <input type="text" id="input4" name="input4" placeholder="Optional placeholder text" required="" />
+      <span class="invalid-feedback">This field is required</span>
+    </div>
+  </fieldset>
+  <button class="btn btn-primary colour-success" type="submit">Register</button>
+      
+</form></iam-multi-step></dialog>`}}</code></pre>
       </template>
       <template #vue-component>
 
-        <pre><code>{{`<script setup>import Card from '@/components/Card/Card.vue</script>
+        <pre><code>{{`<script setup>import MultiStep from '@/components/MultiStep/MultiStep.vue</script>
         
-<a href="/url"></a><Card :data-image="cardImg">
-  Speed up sales success <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</span>
-</Card></a>
-`}}</code></pre>
+<dialog><MultiStep><form>
+  <span class="h3">Multi-step modal title</span>
+      
+  <fieldset data-title="Submit property">
+    <div>
+      <label for="input4">Name 4</label>
+      <input type="text" id="input4" name="input4" placeholder="Optional placeholder text" required="" />
+      <span class="invalid-feedback">This field is required</span>
+    </div>
+  </fieldset>
+  <button class="btn btn-primary colour-success" type="submit">Register</button>
+      
+</form></MultiStep></dialog>`}}</code></pre>
       </template>
 
-      <template #attr>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Attributes</th>
-            <th>Default</th>
-            <th>Options/Type</th>
-            <th>Required</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>data-img</th>
-            <td>-</td>
-            <td>String (file location)</td>
-            <td>No</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-
-      </template>
       
       <template #slots>
       <table>
@@ -186,19 +183,7 @@ import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scrol
         <tbody>
           <tr>
             <th>Default (body)</th>
-            <td>The default slot adds content to the body of the card.</td>
-          </tr>
-          <tr>
-            <th>head</th>
-            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
-          </tr>
-          <tr>
-            <th>badges</th>
-            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
-          </tr>
-          <tr>
-            <th>footer</th>
-            <td>The bottom of card.</td>
+            <td>The default slot adds content to the body of the component.</td>
           </tr>
         </tbody>
       </table>
@@ -234,159 +219,31 @@ import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scrol
         </thead>
         <tbody>
           <tr>
-            <th>head</th>
-            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
-          </tr>
-          <tr>
-            <th>image</th>
-            <td>The image located in the card head</td>
-          </tr>
-          <tr>
-            <th>body</th>
-            <td>The main content of the card</td>
-          </tr>
-          <tr>
-            <th>footer</th>
-            <td>The bottom of card.</td>
+            <th>steps</th>
+            <td>The breadcrumb like trail thats created via the number of fieldsets</td>
           </tr>
         </tbody>
       </table>
 
       </template>
 
-      <template #vars>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Var</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>--card-left-padding</th>
-            <td>Controls the padding of all the parts, the card head image ignores this.</td>
-          </tr>
-          <tr>
-            <th>--card-right-padding</th>
-            <td>Controls the padding of all the parts, the card head image ignores this.</td>
-          </tr>
-          <tr>
-            <th>--card-head-height</th>
-            <td>Controls the height of the head.</td>
-          </tr>
-        </tbody>
-      </table>
-
-      </template>
-
-
-      <template #dispatched-events>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>select-card</th>
-              <td>checkbox is checked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>unselect-card</th>
-              <td>Checkbox is unchecked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>secondary-button-clicked</th>
-              <td>The secondary button is clicked</td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>action-button-clicked</th>
-              <td>One of the buttons in the dialog menu is clicked</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-
-      </template>
-
-      <template #watched-attrs>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Attributes</th>
-            <th>Options/Type</th>
-            <th>Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>data-img</th>
-            <td>String (file location)</td>
-            <td>The head image can be updated by adding a valid file location to this attribute.</td>
-          </tr>
-        </tbody>
-      </table>
-      </template>
 
 
       <template #criteria>
 
       <ul>
-        <li>When hovering over a secondary,action or checkbox the main hover state on the card should not be shown</li>
-        <li>All secodnary type buttons or inputs should be tabbable</li>
+        <li>Form validation should be done on each fieldset when clicking the next button</li>
+        <li>The steps links should move to the corresponding fieldset when active</li>
+        <li>Previous fieldsets need to be completed for the fieldset to be active</li>
+        <li>Step links should turn green when completed</li>
+        <li>Form data is only submitted at the end of the journey</li>
       </ul>
 
       </template>
-      <template #data-layer>
 
-        
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>select-card</th>
-              <td>checkbox is checked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>unselect-card</th>
-              <td>Checkbox is unchecked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>secondary-button-clicked</th>
-              <td>The secondary button is clicked</td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>action-button-clicked</th>
-              <td>One of the buttons in the dialog menu is clicked</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-
-
-      </template>
 
     </Integration>
-    <Versions pdf="/pdfs/navigational-card.pdf">
+    <Versions pdf="/pdfs/modals.pdf">
       <table>
         <thead>
           <tr>
@@ -406,18 +263,3 @@ import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scrol
     </Versions>
   </main>
 </template>
-
-<style>
-
-.video-col {
-  position: relative;
-  margin-top: 3rem;
-}
-.video-col > span {
-
-  position: absolute;
-  bottom: 100%;
-  left: 0.5rem;
-}
-
-</style>
