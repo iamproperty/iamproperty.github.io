@@ -200,9 +200,15 @@ class iamMultiStep extends HTMLElement {
         const form = event.target.closest('form');
         form.classList.add('was-validated');
       }
-      else if (event && event.target instanceof HTMLElement && event.target.closest('button[data-title]')){
+      return null
+    });
+
+
+    MultiStepComponent.shadowRoot.addEventListener('click', (event) => {
+      if (event && event.target instanceof HTMLElement && event.target.closest('button[data-title]')){
   
         const button = event.target.closest('button[data-title]');
+
         validateFieldset(button);
       };
       return null

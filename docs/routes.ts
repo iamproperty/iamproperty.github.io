@@ -464,9 +464,9 @@ const routes = [
       },
       {
         path: 'multistep',
-        name: 'MultiStep',
+        name: 'Multi-Step form',
         meta: {
-          title: 'Multi-step | Components | iamkey'
+          title: 'Multi-step form | Components | iamkey'
         },
         component: () => import('./views/components/MultiStep.vue')
       },
