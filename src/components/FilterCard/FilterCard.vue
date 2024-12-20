@@ -11,7 +11,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../../assets/js/components/filter-card/filter-card.component.js`).then(module => {
+      import(`../../../assets/js/components/filter-card/filter-card.component.min.js`).then(module => {
 
         if (!window.customElements.get(`iam-filter-card`))
           window.customElements.define(`iam-filter-card`, module.default);
