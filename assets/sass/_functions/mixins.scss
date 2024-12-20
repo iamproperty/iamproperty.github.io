@@ -227,3 +227,10 @@
     }
   }
 }
+
+@mixin breakpoint($name, $breakpoints: $breakpoints) {
+
+  @media screen and (min-width: #{map-get($breakpoints,$name)}) {
+    @content;
+  }
+}

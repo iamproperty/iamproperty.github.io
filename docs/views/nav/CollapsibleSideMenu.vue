@@ -168,6 +168,11 @@
   iam-collapsible-side {
     background: var(--colour-canvas);
   }
+
+  iam-collapsible-side::part(side-menu) {
+    position: absolute;
+    top: 0;
+  }
 }
 
 </style>

@@ -43,6 +43,24 @@ const routes = [
         searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
       },
       {
+        path: 'grid',
+        name: 'Grid',
+        meta: {
+          title: 'Grid | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/Grid.vue'),
+        searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
+      },
+      {
+        path: 'greakpoints',
+        name: 'Breakpoints',
+        meta: {
+          title: 'Breakpoints and scaling | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/Breakpoints.vue'),
+        searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
+      },
+      {
         path: 'utilities',
         name: 'Utility Classes (Beta)',
         meta: {
