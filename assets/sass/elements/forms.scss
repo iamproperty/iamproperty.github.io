@@ -341,36 +341,50 @@ div:has(> label:first-child):has(> input) {
     margin-top: rem(8);
   }
 
-  input[type="color"]{
-    width: 3rem!important;
-    flex-shrink: 0!important;
-    flex-grow: 0!important;
-    border-start-end-radius: 0;
-    border-end-end-radius: 0;
-    padding: 0;
-    overflow: hidden;
+}
 
-  
-    &::-moz-color-swatch {
-      
-      border-radius: 0;
-      border: none;
-    }
+// #region colors
 
-    &::-webkit-color-swatch {
-      
-      border-radius: 0;
-      border: none;
-    }
+input[type="color"]{
+  width: 3rem!important;
+  flex-shrink: 0!important;
+  flex-grow: 0!important;
+  border-start-end-radius: 0!important;
+  border-end-end-radius: 0!important;
+  padding: 0!important;
+  overflow: hidden;
+  cursor: pointer!important;
+
+
+  &::-moz-color-swatch {
+    
+    border-radius: 0;
+    border: none;
   }
 
-  output {
-    border-left: none!important;
-    border-end-start-radius: 0!important;
-    border-start-start-radius: 0!important;
-    margin: 0!important;
+  &::-webkit-color-swatch {
+    
+    border-radius: 0;
+    border: none;
   }
 }
+
+label :is(div,span,fieldset):has(input[type="color"] + output){
+  display: flex;
+}
+
+input[type="color"] + output {
+  border-left: none!important;
+  border-end-start-radius: 0!important;
+  border-start-start-radius: 0!important;
+  margin: 0!important;
+}
+
+output {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+}
+// #endregion
 
 div:has(> :is(.form-control-sm, .input--sm)) {
   

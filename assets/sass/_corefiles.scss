@@ -1,6 +1,16 @@
 @use "sass:math";
 @use "_func" as *;
 
+@mixin bsgrid(){
+  @if $disable-bs-grid == "false" {
+
+    @content;
+  }
+  @else {
+    // Grid Disabled
+  }
+}
+
 @layer reset, elements, components, templates, utilities, overrides;
 
 
@@ -12,6 +22,10 @@ $layers: "true"!default;
   
   @import "foundations/root.scss";
   @import "foundations/reboot.scss";
+  @import "foundations/grid.scss";
+}
+
+@include bsgrid(){
   @import "foundations/bs_grid.scss";
 }
 

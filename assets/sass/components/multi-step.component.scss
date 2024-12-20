@@ -1,0 +1,148 @@
+@use "../_func.scss" as *;
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+// #region Multi 
+
+:host {
+
+  --dialog-padding: 1.5rem;
+  box-sizing: border-box;
+  padding-top: calc(var(--dialog-padding) * 4); 
+  display: block;
+  position: relative;
+  margin-right: 0!important;
+  min-height: 100%;
+  padding-left: var(--dialog-padding);
+  
+  @include media-breakpoint-up(md) {
+    padding-top: var(--dialog-padding);
+    padding-left: calc(var(--dialog-padding) + #{rem(282)})!important;
+    display: flex; 
+    flex-direction: column;
+  }
+}
+
+
+// #region steps
+.steps {
+  width: 100%;
+  position: absolute;
+  top:0;
+  left: 0;
+  padding: var(--dialog-padding);
+  counter-reset: section;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--colour-primary);
+
+  &:before {   
+
+    content: "";
+    position: absolute;
+    top: calc(50% - 1px);
+    left: var(--dialog-padding);
+    z-index: 2;
+    width: calc(100% - var(--dialog-padding) - var(--dialog-padding));
+    height: 2px;
+    background: currentColor;
+    z-index: 1;
+    background: linear-gradient(90deg, var(--colour-success) 0%, var(--colour-success) var(--progress, 0%), rgba(255,255,255,0.5) var(--progress, 0%), rgba(255,255,255,0.5) 100%);
+  }
+
+  button {
+
+    position: relative;
+    background: transparent;
+    border: none;
+    color: rgba($color: #ffffff, $alpha: 0.5);
+    height: rem(24);
+    line-height: rem(24);
+    width: rem(24);
+    text-indent: 300%;
+    overflow: hidden;
+    z-index: 2;
+    background-color: var(--colour-primary);
+    outline: 0.5rem solid var(--colour-primary);
+    cursor: pointer;
+
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      counter-increment: section;
+      content: counter(section);
+
+      border: 1px solid currentColor;
+      height: rem(24);
+      line-height: rem(24);
+      width: rem(24);
+      text-align: center;
+      display: inline-block;
+      text-indent: 0;
+      border-radius: 50%;
+    }
+
+    &:not(.active):not(.valid) {
+      
+      pointer-events: none;
+
+      &:before {
+        opacity: 0.5;
+      }
+    }
+
+    &.active {
+      color: var(--colour-white);
+    }
+    &.valid {
+      color: var(--colour-success);
+    }
+  }
+
+  @include dark-mode() {
+
+    button {
+      
+      color: rgba($color: #000000, $alpha: 0.5);
+
+      &.active {
+        color: black;
+      }
+      &.valid {
+        color: var(--colour-complete);
+      }
+    }
+  }
+
+  
+  @include media-breakpoint-up(md) {
+    
+      width: rem(282);
+      height: 100%;
+      flex-direction: column;
+      justify-content: center;
+
+      &:before {
+        display: none;
+      }
+
+      button {
+        margin-block: 0.5rem;
+        width: 100%;
+        text-indent: 0;
+        text-align: left;
+        padding-left: 2rem;
+        font-size: rem(18);
+        outline-width: 1px;
+      }
+    
+
+  }
+}
+// #endregion
+
+
+

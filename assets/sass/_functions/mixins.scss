@@ -676,3 +676,10 @@
   padding-left: 0;
   list-style: none;
 }
+
+@mixin breakpoint($name, $breakpoints: $breakpoints) {
+
+  @media screen and (min-width: #{map-get($breakpoints,$name)}) {
+    @content;
+  }
+}

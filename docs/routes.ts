@@ -43,6 +43,24 @@ const routes = [
         searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
       },
       {
+        path: 'grid',
+        name: 'Grid',
+        meta: {
+          title: 'Grid | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/Grid.vue'),
+        searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
+      },
+      {
+        path: 'greakpoints',
+        name: 'Breakpoints',
+        meta: {
+          title: 'Breakpoints and scaling | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/Breakpoints.vue'),
+        searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
+      },
+      {
         path: 'utilities',
         name: 'Utility Classes (Beta)',
         meta: {
@@ -412,7 +430,7 @@ const routes = [
       },
       {
         path: 'carousel',
-        name: 'Carousel (Beta)',
+        name: 'Carousel',
         meta: {
           title: 'Carousel | Components | iamkey'
         },
@@ -461,6 +479,14 @@ const routes = [
         },
         component: () => import('./views/components/InlineEdit.vue'),
         searchterms: 'form, input, inline'
+      },
+      {
+        path: 'multistep',
+        name: 'Multi-Step form',
+        meta: {
+          title: 'Multi-step form | Components | iamkey'
+        },
+        component: () => import('./views/components/MultiStep.vue')
       },
       {
         path: 'multiselect',

@@ -35,6 +35,8 @@ const rollupConfig = [];
 
 const components = [process.env.COMPONENT];
 
+console.log(components)
+
 components.forEach((component) => {
 
   let css = '';

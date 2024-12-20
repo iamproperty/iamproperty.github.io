@@ -1,12 +1,8 @@
 // @ts-nocheck
-import carousel from "../../modules/carousel";
+import {generateThumbnailList,generatePipsHTML,carousel} from "../../modules/carousel";
+import {trackComponent, trackComponentRegistered} from "../_global";
 
-// Data layer Web component created
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  "event": "customElementRegistered",
-  "element": "carousel"
-});
+trackComponentRegistered("iam-carousel");
 
 class iamCarousel extends HTMLElement {
 
@@ -15,31 +11,37 @@ class iamCarousel extends HTMLElement {
     this.attachShadow({ mode: 'open'});
 
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
+
     const loadCSS = `@import "${assetLocation}/css/components/carousel.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="carousel" :id="'carousel'+id">
+    <div class="carousel" part="carousel">
       <div class="carousel__wrapper">
         <div class="carousel__inner">
-          
-          <slot></slot>
+          <div class="carousel__content" part="content">
+            <slot></slot>
+          </div>
         </div>
  
+      </div>
+        <div class="carousel__btns" part="btns">
+          <button class="btn btn-secondary btn-compact fa-plus-large btn-prev" data-go="0" disabled  part="prev">Prev</button>
+          <button class="btn btn-secondary btn-compact fa-plus-large btn-next" data-go="2" part="next">Next</button>
+        </div>
+
         <div class="carousel__controls" part="controls">
           
         </div>
 
-        <button class="btn btn-prev" data-go="0" disabled  part="prev">Prev</button>
-        <button class="btn btn-next" data-go="2" part="next">Next</button>
+        <div class="carousel__progress" part="progress">
+          <input type="range" min="0" max="100" value="1" step="1">
+        </div>
 
-      </div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -47,44 +49,49 @@ class iamCarousel extends HTMLElement {
 
 	connectedCallback() {
     
+    const carouselComponent = this;
     const carouselElement = this.shadowRoot.querySelector('.carousel');
-    const row = this.querySelector('.row');
-    const thumbnailImages = JSON.parse(this.dataset.thumbnails);
+    const row = this.shadowRoot.querySelector('.row');
+
+    let thumbnailImages = [];
 
     const carouselControls = this.shadowRoot.querySelector('.carousel__controls');
 
-    let itemCount = this.querySelectorAll(':scope > .row > .col').length
 
-    carouselElement.setAttribute('data-row-class',row.className);
 
-    if(this.classList.contains('hide-btns'))
-      carouselElement.classList.add('hide-btns');
-
-    if(this.classList.contains('hide-controls'))
-      carouselElement.classList.add('hide-controls');
-
-    if (thumbnailImages?.length) {
-      carouselControls.classList.add('thumbnails');
+    if(carouselComponent.querySelector('[data-thumbnail]')){
+      thumbnailImages = generateThumbnailList(carouselComponent);
+      carouselComponent.classList.add('thumbnails');
     }
 
     // populate the pips
-    let pips = "";
-    for (let i = 1; i <= itemCount; i++) {
-      let pipContent = null;
-      let pipClass = '';
+    carouselControls.innerHTML = generatePipsHTML(carouselComponent,thumbnailImages);
 
-      if (thumbnailImages.length) {
-        pipClass = 'has-thumbnail';
-        pipContent = `<img src="${thumbnailImages[i - 1].src}" alt="Slide ${i}" height="148"/>`;
-      } else {
-        pipContent = `Slide ${i}`;
-      }
 
-      pips += `<button class="control-${i} ${pipClass}" data-slide="${i}" ${i == 1 ? "aria-current":""}>${pipContent}</button>`;
-    }
-    carouselControls.innerHTML = pips;
+    Array.from(carouselComponent.querySelectorAll(':scope > div > img:first-child:last-child, :scope > div > picture:first-child:last-child img')).forEach((image, index) => {
+        
+      image.style.inset = "0 0.5rem 0 0.5rem";
+      image.style.position = "absolute";
+      image.style.width = "calc(100% - 1rem)";
+      image.style.height = "100%";
+      image.style['object-fit'] = "cover";
 
-    carousel(carouselElement,row);
+      image.closest('div').classList.add('image__wrapper');
+    });
+
+
+    carousel(carouselComponent);
+
+    trackComponent(carouselComponent,"iam-carousel",['pip-clicked','next-clicked','prev-clicked','slider-changed']);
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal) {
+    
+
+
+
+
+
   }
 }
 

@@ -35,6 +35,37 @@ fs.watch(watchFolder, { recursive: true }, (event, filename) => {
   }
 });
 
+const watchFolderModules = __dirname.replace('local_modules','\assets\\js\\modules');
+console.log(`Watching for file changes on ${watchFolderModules}`);
+
+fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
+
+  let correctfilename = __dirname.replace('local_modules','\assets\\js\\modules\\')+filename;
+
+  if (event === 'change') {
+    fs.stat (correctfilename, function (err, stat) {
+
+      if(err) return console.error(err)
+      const modTime = stat.mtimeMs
+      const size = stat.size
+
+      let component = filename.split('.')[0];
+
+      if (stat.isFile() && component !== prevComp && !filename.endsWith('.min.js') && !filename.endsWith('.map')) {
+        
+        exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.js --sourcemap`);
+        console.log(`${component} compiled`);
+
+        prevComp = component;
+        clearTimeout(compTimeout);
+        compTimeout = setTimeout(function(){
+          prevComp = "";
+        }, 100);
+      }
+    })
+  }
+});
+
 
 let prevSassComp;
 let sassCompTimeout;
