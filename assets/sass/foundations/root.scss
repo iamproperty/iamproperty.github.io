@@ -2,7 +2,6 @@
 
 //@import "../../bootstrap/scss/_root.scss";
 
-$root: ':root'!default;
 
 #{$root} {
   // Print out the $vars array setup in the variables file so they can be used as CSS vars
@@ -25,6 +24,18 @@ $root: ':root'!default;
       #{$var}: #{$value};
     }
   }
+
+  @media screen and (min-width: 36em) {
+    @each $var, $value in map-get($vars-responsive,"sm") {
+      #{'--'+$var}: #{$value};
+    }
+  }
+  @media screen and (min-width: 62em) {
+    @each $var, $value in map-get($vars-responsive,"md") {
+      #{'--'+$var}: #{$value};
+    }
+  }
+  
 
   // Wider colours
   @each $colour, $value in $wider-colours {

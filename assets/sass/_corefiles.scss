@@ -1,13 +1,32 @@
 @use "sass:math";
 @use "_func" as *;
 
+@mixin bsgrid(){
+  @if $disable-bs-grid == "false" {
+
+    @content;
+  }
+  @else {
+    // Grid Disabled
+  }
+}
+
 @layer reset, elements, components, templates, utilities, overrides;
 
 
+$root: ":root"!default;
+$layers: "true"!default;
+
 // Foundations
 @include layer('reset') {
+  
   @import "foundations/root.scss";
   @import "foundations/reboot.scss";
+  @import "foundations/grid.scss";
+}
+
+@include bsgrid(){
+  @import "../bootstrap/scss/_grid.scss";
 }
 
 @include layer('elements') {
@@ -16,19 +35,9 @@
 
 @include layer('components') {
 
-  // Make sure the first 
-  main {
-    position: relative;
-    
-    > *:first-child {
-      padding-top: 2rem;
-    }
-  }
-
   // Deal with preloaded state of native components
   @import "_components.scss";
 
-  @import "components/charts.config.scss";
 }
 
 @include layer('templates') {

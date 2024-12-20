@@ -1,6 +1,6 @@
 @use "../_func" as *;
 
-*:has(> iam-tabs){
+*:not(main):has(> iam-tabs){
   
   container-type: inline-size;
 }

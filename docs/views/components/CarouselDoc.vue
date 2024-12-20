@@ -20,7 +20,6 @@ import headerImg from '../../img/cards-header.png'
   
   <main>
     
-    
     <DSHeader :image="headerImg" section="components">
       <h1>Carousel</h1>
     </DSHeader>

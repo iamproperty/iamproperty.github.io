@@ -233,233 +233,6 @@ dialog::backdrop {
 }
 // #endregion
 
-// #region Multi 
-.js-enabled *:not(.dialog__wrapper) > dialog[open].dialog--multi {
-
-
-  padding-top: calc(var(--dialog-padding) * 4);
-
-  & > form:first-child button, & > button:first-child {
-    top: calc(var(--dialog-padding) * 4);
-  }
-
-  @supports selector(:has(*)) {
-  fieldset:not(.active) {
-    display: none;
-  }
-  }
-  &:not(:has(fieldset.active)) fieldset:first-of-type{
-    display: flex;
-    flex-direction: column;
-  }
-
-  form > *:not(fieldset) {
-    display: none!important;
-  }
-
-  form {
-    max-height: rem(370);
-  }
-
-  :is(.h1,.h2,.h3,.h4,.h5,.h6){
-    padding-right: calc(var(--dialog-padding) * 3);
-    padding-bottom: var(--dialog-padding);
-  }
-
-  .steps {
-    width: 100%;
-    position: absolute;
-    top:0;
-    left: 0;
-    padding: var(--dialog-padding);
-    counter-reset: section;
-    display: flex;
-    justify-content: space-between;
-
-    &:before {   
- 
-      content: "";
-      position: absolute;
-      top: calc(50% - 1px);
-      left: var(--dialog-padding);
-      z-index: 2;
-      width: calc(100% - var(--dialog-padding) - var(--dialog-padding));
-      height: 2px;
-      background: currentColor;
-      z-index: 1;
-      background: linear-gradient(90deg, var(--colour-success) 0%, var(--colour-success) var(--progress, 0%), rgba(255,255,255,0.5) var(--progress, 0%), rgba(255,255,255,0.5) 100%);
-    }
-
-    button {
-
-      position: relative;
-      background: transparent;
-      border: none;
-      color: rgba($color: #ffffff, $alpha: 0.5);
-      height: rem(24);
-      line-height: rem(24);
-      width: rem(24);
-      text-indent: 300%;
-      overflow: hidden;
-      z-index: 2;
-      background-color: var(--colour-primary);
-      outline: 0.5rem solid var(--colour-primary);
-
-      &:before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        counter-increment: section;
-        content: counter(section);
-
-        border: 1px solid currentColor;
-        height: rem(24);
-        line-height: rem(24);
-        width: rem(24);
-        text-align: center;
-        display: inline-block;
-        text-indent: 0;
-        border-radius: 50%;
-      }
-
-      &:not(.active):not(.valid) {
-        
-        pointer-events: none;
-
-        &:before {
-          opacity: 0.5;
-        }
-      }
-
-      &.active {
-        color: var(--colour-white);
-      }
-      &.valid {
-        color: var(--colour-success);
-      }
-    }
-
-    @include dark-mode() {
-
-      button {
-        
-        color: rgba($color: #000000, $alpha: 0.5);
-
-        &.active {
-          color: black;
-        }
-        &.valid {
-          color: var(--colour-complete);
-        }
-      }
-    }
-  }
-
-  @include media-breakpoint-up(sm) {
-    min-width: rem(452);
-    width: rem(452);
-    max-width: rem(452);
-  }
-  @include media-breakpoint-up(md) {
-    min-width: rem(924);
-    width: rem(924);
-    max-width: rem(924);
-    padding-top: var(--dialog-padding);
-    padding-left: calc(var(--dialog-padding) + #{rem(282)});
-    display: flex; 
-    flex-direction: column;
-    //height: rem(478);
-
-    @media (min-height: #{rem(500)}) {
-      height: rem(478);
-      max-height: rem(478);
-    }
-
-
-    & > form:first-child button, & > button:first-child {
-      top: var(--dialog-padding);
-    }
-
-    .steps {
-      width: rem(282);
-      height: 100%;
-      flex-direction: column;
-      justify-content: center;
-
-      &:before {
-        display: none;
-      }
-
-      button {
-        margin-block: 0.5rem;
-        width: 100%;
-        text-indent: 0;
-        text-align: left;
-        padding-left: 2rem;
-        font-size: rem(18);
-        outline-width: 1px;
-      }
-    }
-
-    .btn--wrapper {
-      margin-top: auto;
-      text-align: right;
-    }
-    
-    
-    @supports not selector(:has(*)) {
-      > form {
-        overflow: auto;
-
-        button:not([type="submit"]){
-          display: none;
-        }
-      }
-    }
-    @supports selector(:has(*)) {
-      > form {
-        display: contents
-      }
-      fieldset {    
-        display: flex; 
-        flex-direction: column;
-        flex-grow: 1;
-        position: relative;
-
-        overflow: auto;
-        margin-bottom: calc(var(--dialog-padding) * -1);
-        padding-right: calc(var(--dialog-padding) - 10px);
-        margin-right: calc((var(--dialog-padding) * -1) + 10px);
-
-        > :last-child {
-          margin-bottom: var(--dialog-padding)!important;
-        }
-
-        > p:last-child {
-          padding-bottom: 0!important;
-          margin-bottom: var(--dialog-padding)!important;
-        }
-
-        &::before {
-          content: "";
-          top: 100%;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: var(--dialog-padding);
-          min-height: var(--dialog-padding);
-          position: sticky;
-          display: block;
-          background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
-          z-index: 2;
-          margin-bottom: calc(var(--dialog-padding) * -1);;
-        }
-      }
-    }
-  }
-}
-// #endregion
-
 // #region youTube video
 *:not(.dialog__wrapper) > dialog[open]:has(.youtube-embed){
 
@@ -483,41 +256,6 @@ dialog::backdrop {
 }
 // #endregion
 
-// #region mobile fullwidth view 
-@media screen and (max-width: 36em) {
-
-  dialog[open].dialog--sm-fullpage,
-  .js-enabled *:not(.dialog__wrapper) > dialog[open].dialog--multi {
-
-    min-width: 100%;
-    min-height: 100%;
-    border-radius: 0;
-    overflow-y: auto;
-
-    .btn--wrapper {
-      padding-top: rem(64);
-    }
-  }
-
-  dialog[open].dialog--sm-fullpage {
-    
-    .mh-lg {
-      max-height: none!important;
-      overflow: visible;
-    }
-
-    &:before,
-    *:first-child {
-      margin-top: auto!important;
-    }
-
-    *:last-child {
-
-      margin-bottom: auto!important;
-    }
-  }
-}
-// #endregion
 
 // #region admin panel dialog
 dialog:has(> .admin-panel) {
@@ -551,3 +289,166 @@ dialog:has(.embed){
     width: 100%;
   }
 }
+
+
+// #region Multi step modal
+
+*:not(.dialog__wrapper) > dialog:has(iam-multi-step)[open]{
+
+  padding: 0;
+
+  & > button:first-child {
+    top: calc(var(--dialog-padding) * 4)!important;
+  }
+
+  :is(.h1,.h2,.h3,.h4,.h5,.h6){
+    padding-right: calc(var(--dialog-padding) * 3);
+    padding-bottom: var(--dialog-padding);
+  }
+
+
+  iam-multi-step {
+    padding-inline: 0!important;
+  }
+
+  form {
+    overflow: auto;
+    padding-bottom: var(--dialog-padding);
+  
+    max-height: calc(min(90vh, 47rem) - 6rem);
+  }
+
+  fieldset {    
+
+    > :last-child {
+      margin-bottom: var(--dialog-padding)!important;
+    }
+
+    > p:last-child {
+      padding-bottom: 0!important;
+      margin-bottom: var(--dialog-padding)!important;
+    }
+  }
+
+  fieldset:not(.active) {
+    display: none;
+  }
+
+  @include media-breakpoint-up(sm) {
+    min-width: rem(452);
+    width: rem(452);
+    max-width: rem(452);
+
+    
+    & > button:first-child {
+      top: calc(var(--dialog-padding) * 3.25)!important;
+    }
+
+    .btn--wrapper {
+      margin-top: auto;
+      text-align: right;
+    }
+
+    form {
+      height: calc(100vh - 6rem);
+      padding-left: 0!important;
+      padding-right: var(--dialog-padding)!important;
+    }
+  }
+
+
+  @include media-breakpoint-up(md) {
+    min-width: rem(924);
+    width: rem(924);
+    max-width: rem(924);
+
+    & > button:first-child {
+      top: calc(var(--dialog-padding) * 1)!important;
+    }
+
+    @media (min-height: #{rem(500)}) {
+      height: rem(478);
+      max-height: rem(478);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    fieldset {    
+      display: flex; 
+      flex-direction: column;
+      flex-grow: 1;
+      position: relative;
+  
+      overflow: auto;
+      margin-bottom: calc(var(--dialog-padding) * -1);
+      padding-right: calc(var(--dialog-padding) - 10px);
+      margin-right: calc((var(--dialog-padding) * -1) + 10px);
+  
+      max-height: rem(370);
+  
+      &::before {
+        content: "";
+        top: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: var(--dialog-padding);
+        min-height: var(--dialog-padding);
+        position: sticky;
+        display: block;
+        background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
+        z-index: 2;
+        margin-bottom: calc(var(--dialog-padding) * -1);;
+      }
+    }
+  }
+}
+
+// #endregion
+
+// #region mobile fullwidth view For multi step modal
+@media screen and (max-width: 36em) {
+
+  dialog[open]:has(iam-multi-step) {
+
+    min-width: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    overflow-y: auto;
+
+    iam-multi-step {
+      padding-inline: 0!important;
+    }
+
+    form {
+      height: calc(100vh - 6rem);
+      padding-inline: var(--dialog-padding)!important;
+    }
+
+    .btn--wrapper {
+      padding-top: rem(64);
+    }
+  }
+
+  dialog[open]:has(iam-multi-step) {
+    
+    .mh-lg {
+      max-height: none!important;
+      overflow: visible;
+    }
+
+    &:before,
+    *:first-child {
+      margin-top: auto!important;
+    }
+
+    *:last-child {
+
+      margin-bottom: auto!important;
+    }
+  }
+}
+// #endregion

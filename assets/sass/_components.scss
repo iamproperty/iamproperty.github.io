@@ -5,6 +5,16 @@
 @use 'components/carousel.config';
 @use 'components/multiselect.preload';
 @use 'components/inline-edit.preload';
+@use "components/charts.config.scss";
+
+ // Make sure the first 
+ main {
+  position: relative;
+  
+  > *:first-child {
+    padding-top: 2rem;
+  }
+}
 
 // #region Undefined web components
 
@@ -22,14 +32,8 @@
   padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
 }
 
-.row [class*="col"] > :is(label,button,a):has(.card:defined):first-child:last-child,
-.row [class*="col"] > .card:defined:first-child:last-child {
-  min-height: calc(100% - 2rem);
-  margin-bottom: 2rem!important;
-
-  .card:defined {
-    margin-bottom: 0!important;
-  }
+.row [class*="col"]:has(label .card:defined:first-child:last-child, button .card:defined:first-child:last-child, a .card:defined:first-child:last-child) {
+  display: flex;
 }
 
 iam-card:has([type=checkbox]:checked) {

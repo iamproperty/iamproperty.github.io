@@ -9,6 +9,8 @@ $grid-breakpoints: (
   md: 62em  /* 992 */
 );
 
+$breakpoints: $grid-breakpoints;
+
 @each $bp, $value in $grid-breakpoints {
 
   $vars: map-merge((
@@ -20,6 +22,10 @@ $device-xs-width: 375;
 $device-sm-width: 768;
 $device-md-width: 1280;
 
+$max-viewport: 1280;
+//$max-font-size: 110%;
+$max-scale-up: 1.125;
+
 $container-max-widths: (
   sm: 0,
   md: 80em
@@ -27,6 +33,25 @@ $container-max-widths: (
 
 $grid-columns: 12;
 $grid-gutter-width: 1rem; // 15px
+
+
+// #region grid options
+$columns: 12!default;
+$rows-per-page: 20!default;
+$gap: #{rem(16)}!default;
+$gutter: #{rem(24)}!default;
+$max-width-px: 1280!default;
+$max-width: #{rem($max-width-px)}!default;
+$grid-utility-count: 10!default;
+
+$vars: map-merge((
+  "--gap": #{$gap},
+  "--gutter": #{$gutter},
+  "--max-width": #{$max-width}
+),$vars);
+// #endregion
+
+
 
 $container-padding-x: 24;
 $container-padding-x-sm: 40;
@@ -618,6 +643,18 @@ $table-padding-px: 32;
 $table-padding: #{rem($table-padding-px)};
 // #endregion
 
+$vars-responsive: (
+  "sm": (
+    "gutter": 2.5rem,
+    "scale": 1.250
+  ),
+  "md": (
+    "gutter": 5.25rem,
+    "scale": 1.414
+  )
+);
+
+
 // #region UT vars
 $ut-mh-sm-px: 200;
 $ut-mh-sm: #{rem($ut-mh-sm-px)};
@@ -626,3 +663,4 @@ $ut-mh-md: #{rem($ut-mh-md-px)};
 $ut-mh-lg-px: 600;
 $ut-mh-lg: #{rem($ut-mh-lg-px)};
 // #endregion
+
