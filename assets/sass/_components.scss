@@ -2,7 +2,7 @@
 @use "_func" as *;
 
 @use 'components/nav.preload';
-@use 'components/carousel.preload';
+@use 'components/carousel.config';
 @use 'components/multiselect.preload';
 @use 'components/inline-edit.preload';
 @use "components/charts.config.scss";
@@ -17,18 +17,8 @@
 }
 
 // #region Undefined web components
-main > :is(*):not(:defined):not(iam-carousel) {
-
-  padding: var(--container-padding);
-  padding-top: 1rem;
-}
 
 @include media-breakpoint-up(md) {
-      
-  main > :is(*):not(:defined):not(iam-carousel) {
-    max-width: 100%!important;
-    padding-inline: calc(50% - #{rem(math.div(1112,2))});
-  }
 
   iam-header:not(:defined) {
     min-height: rem(470);
