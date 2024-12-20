@@ -1,5 +1,38 @@
 @use "../_func.scss" as *;
 
+// #region rset
+button {
+  // stylelint-disable-next-line property-disallowed-list
+  border-radius: 0;
+
+  text-transform: none;
+  margin: 0; // 1
+  font-family: inherit;
+  @include font-size(inherit);
+  line-height: inherit;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+button,
+[type="button"], // 1
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; // 2
+
+  @if $enable-button-pointers {
+    &:not(:disabled) {
+      cursor: pointer; // 3
+    }
+  }
+}
+// #endregion
+
 // #region button primary
 .btn {
 
