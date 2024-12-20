@@ -463,6 +463,14 @@ const routes = [
         searchterms: 'form, input, inline'
       },
       {
+        path: 'multistep',
+        name: 'Multi-Step form',
+        meta: {
+          title: 'Multi-step form | Components | iamkey'
+        },
+        component: () => import('./views/components/MultiStep.vue')
+      },
+      {
         path: 'multiselect',
         name: 'Multiselect',
         meta: {
