@@ -34,7 +34,7 @@ body {
   & * {
     grid-column: content;
 
-    &:where(button){
+    &:where(button):not(:has(.card)){
         
       max-width: fit-content;
       place-self: start;
@@ -58,7 +58,11 @@ div:has(main) {
   grid-template-columns: subgrid;
 }
 
-main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsible-side) {
+*:not(.row)>main:not(:has(.container:last-child)):not(:has(iam-collapsible-side:last-child)) {
+  padding-bottom: 1rem;
+}
+
+main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsible-side, iam-notification) {
   grid-column: full-width;
 }
 

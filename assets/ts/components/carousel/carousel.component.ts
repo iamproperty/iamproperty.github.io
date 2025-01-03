@@ -12,7 +12,7 @@ class iamCarousel extends HTMLElement {
 
     const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
 
-    const loadCSS = `@import "${assetLocation}/css/components/carousel.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/carousel.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `

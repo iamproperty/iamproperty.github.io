@@ -132,7 +132,7 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
   background: none;
   padding:0;
   display: flex;
-
+  margin-bottom: 1.5rem;
 
   &:not([class*="col"]){
     margin: 0 0 rem(24) 0;
