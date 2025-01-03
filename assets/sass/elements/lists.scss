@@ -1,5 +1,51 @@
 @use "../_func.scss" as *;
 
+ol,
+ul {
+  padding-left: 2rem;
+}
+
+ol,
+ul,
+dl {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-bottom: 0;
+}
+
+dt {
+  font-weight: $dt-font-weight;
+}
+
+dd {
+  margin-bottom: .5rem;
+  margin-left: 0; // 1
+}
+
+
+
+.list-unstyled {
+  @include list-unstyled();
+}
+
+// Inline turns list items into inline-block
+.list-inline {
+  @include list-unstyled();
+}
+.list-inline-item {
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-right: $list-inline-padding;
+  }
+}
+
 @include is('ol, ul','','li'){
   max-width: $content-max-width;
 }

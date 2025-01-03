@@ -1,9 +1,66 @@
 @use "sass:math";
 @use "../_func" as *;
 
-@import "../../bootstrap/scss/_reboot.scss";
 
-/* Reset & Defaults - Most of the resets/normailization stuff is done by Bootstrap */
+// Code
+pre,
+code,
+kbd,
+samp {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1rem;
+}
+
+pre {
+  display: block;
+  margin-top: 0; // 1
+  margin-bottom: 1rem; // 2
+  overflow: auto; // 3
+  font-size: rem(14);
+  color: $pre-color;
+
+  // Account for some code outputs that place code tags in pre tags
+  code {
+    font-size: inherit;
+    color: inherit;
+    word-break: normal;
+  }
+}
+
+code {
+  font-size: rem(14);
+  color: #d63384;
+  word-wrap: break-word;
+
+  // Streamline the style when inside anchors to avoid broken underline and more
+  a > & {
+    color: inherit;
+  }
+}
+
+kbd {
+  padding: .1875rem .375rem;
+  font-size: rem(14);
+
+  kbd {
+    padding: 0;
+    font-size: 1rem;
+    font-weight: normal;
+  }
+}
+
+
+
+
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Reset & Defaults */
 html {
 
   -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
@@ -59,6 +116,7 @@ html {
 }
 
 body {
+  margin: 0; // 1
   color-scheme: light dark;
   @include var(background,--colour-canvas);
   @include var(font-family,--font-body);
@@ -66,7 +124,10 @@ body {
   width: 100%;
   line-height: 1.2;
   min-height: 100%;
+  -webkit-text-size-adjust: 100%; // 3
+  -webkit-tap-highlight-color: rgba($black, 0); // 4
 }
+
 
 // #region scrollbars
 :is(div,form,fieldset,textarea)::-webkit-scrollbar {
@@ -126,6 +187,10 @@ hr {
     clear: both;
     content: "";
   }
+}
+
+[hidden] {
+  display: none !important;
 }
 
 form {

@@ -1,6 +1,16 @@
 @use "../_func" as *;
 
-@import "../../bootstrap/scss/_images.scss";
+
+figure {
+  margin: 0 0 1rem;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+
 
 img {
   max-width: 100%;

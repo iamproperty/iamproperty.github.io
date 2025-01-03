@@ -1,5 +1,31 @@
 @use "../_func.scss" as *;
 
+
+// #region reset
+a {
+  color: var(--#{$prefix}link-color);
+  text-decoration: $link-decoration;
+
+  &:hover {
+    color: var(--#{$prefix}link-hover-color);
+    text-decoration: $link-hover-decoration;
+  }
+}
+
+// And undo these styles for placeholder links/named anchors (without href).
+// It would be more straightforward to just use a[href] in previous block, but that
+// causes specificity issues in many other styles that are too complex to fix.
+// See https://github.com/twbs/bootstrap/issues/19402
+
+a:not([href]):not([class]) {
+  &,
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+// #endregion
+
 // global
 a {
   color: var(--colour-link);
@@ -106,7 +132,7 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
   background: none;
   padding:0;
   display: flex;
-
+  margin-bottom: 1.5rem;
 
   &:not([class*="col"]){
     margin: 0 0 rem(24) 0;

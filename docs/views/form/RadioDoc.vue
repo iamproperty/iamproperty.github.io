@@ -81,14 +81,14 @@
         <div class="col-6 col-md-4 pb-3">
           <h3 class="lead text-uppercase text-body pb-2">Unselected</h3>
           <input type="radio" name="radiocard1" id="radiocard1" tabindex="-1" />
-          <label for="radiocard1"><Card class="card--filter w-auto"><i class="fa fa-house"></i>Character property</Card></label>
+          <label for="radiocard1"><FilterCard class="card--filter w-auto"><i class="fa fa-house"></i>Character property</FilterCard></label>
         </div>
 
         <div class="col-6 col-md-4 pb-3">
 
           <h3 class="lead text-uppercase text-body pb-2">Selected</h3>
           <input type="radio" name="radiocard2" id="radiocard2" tabindex="-1" checked />
-          <label for="radiocard2"><Card class="card--filter w-auto"><i class="fa fa-house"></i>Character property</Card></label>
+          <label for="radiocard2"><FilterCard class="card--filter w-auto"><i class="fa fa-house"></i>Character property</FilterCard></label>
         </div>
 
         <hr/>
@@ -96,13 +96,13 @@
         <div class="col-6 col-md-4 pb-3">
           <h3 class="lead text-uppercase text-body pb-2">Hover/focus unselected</h3>
         <input type="radio" name="radiocard3" id="radiocard3" tabindex="-1" class="focus" />
-        <label for="radiocard3"><Card class="card--filter w-auto hover"><i class="fa fa-house"></i>Character property</Card></label>
+        <label for="radiocard3"><FilterCard class="card--filter w-auto hover"><i class="fa fa-house"></i>Character property</FilterCard></label>
         </div>
 
         <div class="col-6 col-md-4 pb-3">
           <h3 class="lead text-uppercase text-body pb-2">Hover/focus Selected</h3>
           <input type="radio" name="radiocard4" id="radiocard4" tabindex="-1" class="focus" checked />
-          <label for="radiocard4"><Card class="card--filter w-auto hover"><i class="fa fa-house"></i>Character property</Card></label>
+          <label for="radiocard4"><FilterCard class="card--filter w-auto hover"><i class="fa fa-house"></i>Character property</FilterCard></label>
         </div>
 
         <hr/>
@@ -110,13 +110,13 @@
         <div class="col-6 col-md-4 pb-3">
           <h3 class="lead text-uppercase text-body pb-2">Pressed unselected</h3>
         <input type="radio" name="radiocard5" id="radiocard5" tabindex="-1" class="active" />
-        <label for="radiocard5"><Card class="card--filter w-auto active"><i class="fa fa-house"></i>Character property</Card></label>
+        <label for="radiocard5"><FilterCard class="card--filter w-auto active"><i class="fa fa-house"></i>Character property</FilterCard></label>
         </div>
 
         <div class="col-6 col-md-4 pb-3">
           <h3 class="lead text-uppercase text-body pb-2">Pressed Selected</h3>
           <input type="radio" name="radiocrad6" id="radiocrad6" tabindex="-1" class="active" checked />
-          <label for="radiocrad6"><Card class="card--filter w-auto active"><i class="fa fa-house"></i>Character property</Card></label>
+          <label for="radiocrad6"><FilterCard class="card--filter w-auto active"><i class="fa fa-house"></i>Character property</FilterCard></label>
         </div>
 
       </div>
@@ -146,10 +146,10 @@
       <div class="row">
         <div class="col-6 col-sm-4 col-md-3">
 
-          <label for="radiocontent"><Card class="card--filter"><i class="fa fa-light fa-house"></i>Character property</Card></label>
+          <label for="radiocontent"><FilterCard class="card--filter"><i class="fa fa-light fa-house"></i>Character property</FilterCard></label>
         </div>
         <div class="col-6 col-sm-4 col-md-3">
-          <label for="radiocontent2"><Card class="card--filter"><i class="fa-kit fa-light-house-circle-plus"></i>Character property</Card></label>
+          <label for="radiocontent2"><FilterCard class="card--filter"><i class="fa-kit fa-light-house-circle-plus"></i>Character property</FilterCard></label>
         </div>
       </div>
       <div class="conditional conditional-1 pt-3">
@@ -235,14 +235,14 @@
         <div class="col-6 col-md-4 pb-3">
           <h3 class="lead text-uppercase text-body pb-2">Disabled Unselected</h3>
           <input type="radio" name="radio100" id="radio100" disabled />
-          <label for="radio100"><Card class="card--filter"><i class="fa fa-light fa-house"></i>Character property</Card></label>
+          <label for="radio100"><FilterCard class="card--filter"><i class="fa fa-light fa-house"></i>Character property</FilterCard></label>
         </div>
 
         <div class="col-6 col-md-4 pb-3">
 
           <h3 class="lead text-uppercase text-body pb-2">Disabled Selected</h3>
           <input type="radio" name="radio200" id="radio200" checked disabled />
-          <label for="radio200"><Card class="card--filter"><i class="fa fa-light fa-house"></i>Character property</Card></label>
+          <label for="radio200"><FilterCard class="card--filter"><i class="fa fa-light fa-house"></i>Character property</FilterCard></label>
         </div>
 
         <hr/>
@@ -250,13 +250,13 @@
         <div class="col-6 col-md-4 pb-3">
           <h3 class="lead text-uppercase text-body pb-2">Disabled Hover/focus unselected</h3>
           <input type="radio" name="radio30" id="radio300" class="focus" disabled />
-          <label for="radio300"><Card class="card--filter"><i class="fa fa-light fa-house"></i>Character property</Card></label>
+          <label for="radio300"><FilterCard class="card--filter"><i class="fa fa-light fa-house"></i>Character property</FilterCard></label>
         </div>
 
         <div class="col-6 col-md-4 pb-3">
           <h3 class="lead text-uppercase text-body pb-2">Disabled Hover/focus Selected</h3>
           <input type="radio" name="radio400" id="radio400" class="focus" checked disabled />
-          <label for="radio400"><Card class="card--filter"><i class="fa fa-light fa-house"></i>Character property</Card></label>
+          <label for="radio400"><FilterCard class="card--filter"><i class="fa fa-light fa-house"></i>Character property</FilterCard></label>
         </div>
       </div>
     </div>
@@ -313,7 +313,7 @@ import headerImg from '../../img/type-header.png';
 import Input from '@/components/Input/Input.vue';
 import Readme from '@/components/Input/README.md';
 import Tabs from '@/components/Tabs/Tabs.vue'
-import Card from '@/components/Card/Card.vue'
+import FilterCard from '@/components/FilterCard/FilterCard.vue'
 
 export default {
   components: {
@@ -322,7 +322,7 @@ export default {
     Input,
     Readme,
     Tabs,
-    Card
+    FilterCard
   },
   data () {
     return {

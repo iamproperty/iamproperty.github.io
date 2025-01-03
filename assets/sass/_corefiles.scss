@@ -26,7 +26,7 @@ $layers: "true"!default;
 }
 
 @include bsgrid(){
-  @import "../bootstrap/scss/_grid.scss";
+  @import "foundations/bs_grid.scss";
 }
 
 @include layer('elements') {

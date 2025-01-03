@@ -32,7 +32,7 @@
   padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
 }
 
-.row [class*="col"]:has(label .card:defined:first-child:last-child, button .card:defined:first-child:last-child, a .card:defined:first-child:last-child) {
+.row [class*="col"]:has(label:first-child:last-child .card:defined:first-child:last-child, button:first-child:last-child .card:defined:first-child:last-child, a:first-child:last-child .card:defined:first-child:last-child) {
   display: flex;
 }
 
