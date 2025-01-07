@@ -171,10 +171,11 @@ class iamTable extends HTMLElement {
 
         Array.from(this.table.querySelectorAll('tbody tr')).forEach((row,index) => {
           
+
           let rowID = `row${uniqueID(index)}`;
           row.insertAdjacentHTML(
             'afterbegin',
-            `<td class="td--fixed selectrow"><input type="checkbox" name="row" id="${rowID}"/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
+            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
           );
         });
 
