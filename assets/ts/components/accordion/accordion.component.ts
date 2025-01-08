@@ -1,4 +1,10 @@
 // Data layer Web component created
+declare global {
+  interface Window {
+    dataLayer:Array<object>;
+  }
+}
+
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
   "event": "customElementRegistered",
