@@ -7,7 +7,7 @@ window.dataLayer.push({
   "element": "action bar"
 });
 
-function setSelectAllInput(element, value){
+function setSelectAllInput(element, value):void{
 
   if(element && value == "all"){
             
@@ -104,37 +104,36 @@ class iamActionbar extends HTMLElement {
       document.head.insertAdjacentHTML('beforeend',`<style id="actionbarGlobal">${loadExtraCSS}</style>`);
   }
 
-	connectedCallback() {
+	connectedCallback():void {
 
-    let that = this;
-    const actionbarWrapper = this.shadowRoot.querySelector('.actionbar__wrapper');
+    const actionbarWrapper = this.shadowRoot?.querySelector('.actionbar__wrapper');
 
     // #region select all
     if(this.hasAttribute('data-selectall')){
 
-      actionbarWrapper.insertAdjacentHTML( 'afterbegin', `<div class="selectall pb-0"><input type="checkbox" name="selectall" id="selectall"><label for="selectall" class="m-0">Select all</label></div>` );
-      let selectAll = this.shadowRoot.querySelector('.selectall');
+      actionbarWrapper?.insertAdjacentHTML( 'afterbegin', `<div class="selectall pb-0"><input type="checkbox" name="selectall" id="selectall"><label for="selectall" class="m-0">Select all</label></div>` );
+      const selectAll = this.shadowRoot?.querySelector('.selectall');
 
       if(this.hasAttribute('data-selected')){
         setSelectAllInput(selectAll, this.getAttribute('data-selected'));
       }
 
-      selectAll.addEventListener('change', (event) => {
+      selectAll?.addEventListener('change', (event) => {
 
         if (event && event.target instanceof HTMLElement && event.target.closest('input')){
           
-          if(event.target.closest('input').checked)
+          if(event.target.closest('input')?.checked)
             this.setAttribute('data-selected','all');
           else 
-            this.setAttribute('data-selected',0);
+            this.setAttribute('data-selected','0');
         }
       });
 
-      let cancelButton = this.querySelector('button[data-cancel]');
+      const cancelButton = this.querySelector('button[data-cancel]');
       if(cancelButton){
-        cancelButton.addEventListener('click', (event) => {
+        cancelButton.addEventListener('click', () => {
 
-          this.setAttribute('data-selected',0);
+          this.setAttribute('data-selected','0');
         });
       }
     }
@@ -143,32 +142,30 @@ class iamActionbar extends HTMLElement {
     if(this.hasAttribute('data-select-watch')){
 
       const element = document.getElementById(this.getAttribute('data-select-watch'));
-      element.setAttribute('data-select-container','true');
-      Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
-        input.parentElement.setAttribute('slot','checkbox');
+      element?.setAttribute('data-select-container','true');
+      Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input) => {
+        input.parentElement?.setAttribute('slot','checkbox');
       });
-      element.addEventListener('change',(event) => {
+      element?.addEventListener('change',(event) => {
 
         if (event && event.target instanceof HTMLElement && event.target.closest('[type="checkbox"]')){
 
-          let count = element.querySelectorAll('input[type="checkbox"]').length;
-          let countChecked = element.querySelectorAll('input[type="checkbox"]:checked').length;
-          that.setAttribute('data-selected', count == countChecked ? "all" : countChecked);
-
-          let input = event.target.closest('[type="checkbox"]');
+          const count = element.querySelectorAll('input[type="checkbox"]').length;
+          const countChecked = element.querySelectorAll('input[type="checkbox"]:checked').length;
+          this.setAttribute('data-selected', count == countChecked ? "all" : String(countChecked));
 
           if(countChecked){
-            Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+            Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input) => {
             
               if(input.closest('iam-card'))
-                input.closest('iam-card').setAttribute('data-selected','true');
+                input.closest('iam-card')?.setAttribute('data-selected','true');
             });
           }
           else {
-            Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+            Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input) => {
 
               if(input.closest('iam-card'))
-                input.closest('iam-card').removeAttribute('data-selected');
+                input.closest('iam-card')?.removeAttribute('data-selected');
             });
           }
           
@@ -181,9 +178,9 @@ class iamActionbar extends HTMLElement {
     if(this.hasAttribute('data-switchviews')){
 
       let btns = '';
-      let viewList = this.getAttribute('data-switchviews').split(',');
+      const viewList = this.getAttribute('data-switchviews')?.split(',');
 
-      viewList.forEach((view,index) => {
+      viewList?.forEach((view) => {
 
         let icon = 'fa-grid-2';
 
@@ -195,14 +192,14 @@ class iamActionbar extends HTMLElement {
         btns += `<button class="btn btn-action btn-compact mb-0 fa-regular ${icon}">${view}</button>`;
       });
 
-      actionbarWrapper.insertAdjacentHTML( 'afterbegin', `<div class="views m-0">${btns}</div>` );
-      let views = this.shadowRoot.querySelector('.views');
+      actionbarWrapper?.insertAdjacentHTML( 'afterbegin', `<div class="views m-0">${btns}</div>` );
+      const views = this.shadowRoot?.querySelector('.views');
 
-      views.addEventListener('click', (event) => {
+      views?.addEventListener('click', (event) => {
 
         if (event && event.target instanceof HTMLElement && event.target.closest('.btn-action')){
           
-          let btn = event.target.closest('.btn-action');
+          const btn = event.target.closest('.btn-action');
 
           this.setAttribute('data-view',btn.textContent);
 
@@ -214,13 +211,13 @@ class iamActionbar extends HTMLElement {
     // #endregion
 
     // #region search
-    const searchBar = this.shadowRoot.querySelector('.actionbar--search');
+    const searchBar = this.shadowRoot?.querySelector('.actionbar--search');
     if(this.hasAttribute('data-search-value')){
       this.shadowRoot.querySelector('#search').value = this.getAttribute('data-search-value');
     }
 
     if(this.hasAttribute('data-search') && this.getAttribute('data-search') == 'show')
-      searchBar.classList.add('show');
+      searchBar?.classList.add('show');
 
       const searchBtn = this.shadowRoot.querySelector('button[data-search]');      
 
@@ -232,13 +229,13 @@ class iamActionbar extends HTMLElement {
       }
     });
 
-    searchBar.addEventListener('keyup', (event) => {
+    searchBar.addEventListener('keyup', () => {
 
       const keyupEvent = new CustomEvent("search-keyup", { detail: { search: searchBar.querySelector('input').value } });
       this.dispatchEvent(keyupEvent);
     });
 
-    searchBar.addEventListener('change', (event) => {
+    searchBar.addEventListener('change', () => {
 
       const changeEvent = new CustomEvent("search-change", { detail: { search: searchBar.querySelector('input').value } });
       this.dispatchEvent(changeEvent);
@@ -260,7 +257,7 @@ class iamActionbar extends HTMLElement {
     });
 
     // #region Reponsive safe area
-    function hideButtons () {
+    function hideButtons ():void {
 
       const wrapperWidth = actionbarWrapper.scrollWidth;
       const screenWidth = document.documentElement.scrollWidth;
@@ -305,7 +302,7 @@ class iamActionbar extends HTMLElement {
       // If the wrapper width is small we want to reduce the btn sizes by adding or removing btn-compact classes
       if (wrapperWidth < 576) {
         
-        Array.from(that.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)')).forEach((element,index) => {
+        Array.from(that.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)')).forEach((elemenindex) => {
 
           element.className = element.className.replace(' btn-compact',' _btn-compact');
           element.classList.add('btn-compact');
@@ -314,7 +311,7 @@ class iamActionbar extends HTMLElement {
       }
       else {
 
-        Array.from(that.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')).forEach((element,index) => {
+        Array.from(that.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')).forEach((element) => {
           
           element.classList.remove('btn-compact');
           element.classList.remove('js-updated');
@@ -323,7 +320,7 @@ class iamActionbar extends HTMLElement {
       }
 
       // Reset the elements before we decide what elements become slotted into the overflow
-      Array.from(that.querySelectorAll('[slot]')).forEach((element,index) => {
+      Array.from(that.querySelectorAll('[slot]')).forEach((element) => {
 
         if(element.getAttribute("slot") == "overflow")
           element.removeAttribute('slot');
@@ -332,13 +329,13 @@ class iamActionbar extends HTMLElement {
           element.setAttribute('slot','selected');
       });
 
-      Array.from(that.querySelectorAll('.show')).forEach((element,index) => {
+      Array.from(that.querySelectorAll('.show')).forEach((element) => {
 
        element.classList.remove('show');
       });
 
       // Foreach safe area lets check what elements are slotted in them and if they need an overflow
-      Array.from(that.shadowRoot.querySelectorAll('.safe-area')).forEach((element,index) => {
+      Array.from(that.shadowRoot.querySelectorAll('.safe-area')).forEach((element) => {
       
         // Decide on which overflow slot to use
         let overflowSlot = "overflow"
@@ -347,7 +344,7 @@ class iamActionbar extends HTMLElement {
           overflowSlot = "selected-overflow";
 
         // Get the slotted elements, remember they aren't children of the safe area
-        let elements = element.querySelector('slot').assignedElements();
+        const elements = element.querySelector('slot').assignedElements();
         let tempWidth = 44*modifier; // Allow space for the overflow button
 
         // If search then allow for the search button width
@@ -400,7 +397,7 @@ class iamActionbar extends HTMLElement {
           }
         }
 
-        let overflowDialog = element.querySelector('.dialog-overflow');
+        const overflowDialog = element.querySelector('.dialog-overflow');
 
         if(overflowDialog)
           overflowDialog.classList.add('d-none');
@@ -429,16 +426,16 @@ class iamActionbar extends HTMLElement {
     // #endregion
   }
 
-  static get observedAttributes() {
+  static get observedAttributes():Array<string> {
     return ["data-selected"];
   }
   
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal):void {
 
     switch (attrName) {
       case "data-selected": {
 
-        let selectAll = this.shadowRoot.querySelector('.selectall');
+        const selectAll = this.shadowRoot.querySelector('.selectall');
         
         if(selectAll)
           setSelectAllInput(selectAll, newVal);
