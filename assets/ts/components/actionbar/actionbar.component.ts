@@ -213,7 +213,7 @@ class iamActionbar extends HTMLElement {
     // #region search
     const searchBar = this.shadowRoot?.querySelector('.actionbar--search');
     if(this.hasAttribute('data-search-value')){
-      this.shadowRoot.querySelector('#search').value = this.getAttribute('data-search-value');
+      (this.shadowRoot?.querySelector('#search') as HTMLInputElement).value = String(this.getAttribute('data-search-value'));
     }
 
     if(this.hasAttribute('data-search') && this.getAttribute('data-search') == 'show')
