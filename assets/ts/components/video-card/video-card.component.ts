@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {trackComponent, trackComponentRegistered} from "../_global";
 import {cardHTML,setupCard} from "../../modules/card.module";
 
