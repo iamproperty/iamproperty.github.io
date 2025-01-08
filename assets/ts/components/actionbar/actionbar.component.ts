@@ -1,3 +1,4 @@
+// @ts-nocheck
 import extendDialogs from "../../modules/dialogs";
 
 // Data layer Web component created
