@@ -37,7 +37,7 @@ class iamAccordion extends HTMLElement {
     </style>
       <slot></slot>
     `;
-    this?.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot.appendChild(template.content?.cloneNode(true));
   }
 
 	connectedCallback():void {
