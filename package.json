@@ -41,8 +41,8 @@
     "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* public/assets/fonts",
     "deploy:svg": "copyfiles -u 2 assets/svg/icons.svg public/svg && copyfiles -u 2 assets/svg/logo.svg public/svg",
     "deploy:404": "node local_modules/create404.js",
-    "lint2": "eslint assets/ts/scripts.ts assets/ts/components.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts",
-    "lint": "eslint assets/ts/components/accordion/accordion.component.ts"
+    "lint": "eslint assets/ts/scripts.ts assets/ts/components.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts",
+    "lint2": "eslint assets/ts/components/accordion/accordion.component.ts"
   },
   "dependencies": {
     "@eslint/js": "^9.17.0",
