@@ -264,9 +264,9 @@ class iamActionbar extends HTMLElement {
       let safeAreaWidth = 750;
       let elementMargin = 16;
       let tabletSafeWidth = 450;
-      let mobileSafeWidth = that.hasAttribute('data-switchviews') ? 144 : 210;
+      let mobileSafeWidth = this.hasAttribute('data-switchviews') ? 144 : 210;
 
-      if(that.hasAttribute('data-large-safe-area')){
+      if(this.hasAttribute('data-large-safe-area')){
 
         safeAreaWidth = 1048;
         tabletSafeWidth = 620;
@@ -302,7 +302,7 @@ class iamActionbar extends HTMLElement {
       // If the wrapper width is small we want to reduce the btn sizes by adding or removing btn-compact classes
       if (wrapperWidth < 576) {
         
-        Array.from(that.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)')).forEach((elemenindex) => {
+        Array.from(this.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)')).forEach((elemenindex) => {
 
           element.className = element.className.replace(' btn-compact',' _btn-compact');
           element.classList.add('btn-compact');
@@ -311,7 +311,7 @@ class iamActionbar extends HTMLElement {
       }
       else {
 
-        Array.from(that.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')).forEach((element) => {
+        Array.from(this.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')).forEach((element) => {
           
           element.classList.remove('btn-compact');
           element.classList.remove('js-updated');
@@ -320,7 +320,7 @@ class iamActionbar extends HTMLElement {
       }
 
       // Reset the elements before we decide what elements become slotted into the overflow
-      Array.from(that.querySelectorAll('[slot]')).forEach((element) => {
+      Array.from(this.querySelectorAll('[slot]')).forEach((element) => {
 
         if(element.getAttribute("slot") == "overflow")
           element.removeAttribute('slot');
@@ -329,13 +329,13 @@ class iamActionbar extends HTMLElement {
           element.setAttribute('slot','selected');
       });
 
-      Array.from(that.querySelectorAll('.show')).forEach((element) => {
+      Array.from(this.querySelectorAll('.show')).forEach((element) => {
 
        element.classList.remove('show');
       });
 
       // Foreach safe area lets check what elements are slotted in them and if they need an overflow
-      Array.from(that.shadowRoot.querySelectorAll('.safe-area')).forEach((element) => {
+      Array.from(this.shadowRoot.querySelectorAll('.safe-area')).forEach((element) => {
       
         // Decide on which overflow slot to use
         let overflowSlot = "overflow"
@@ -348,10 +348,10 @@ class iamActionbar extends HTMLElement {
         let tempWidth = 44*modifier; // Allow space for the overflow button
 
         // If search then allow for the search button width
-        if(that.hasAttribute('data-search'))
+        if(this.hasAttribute('data-search'))
           tempWidth += 44*modifier; 
   
-        // Foreach element that isn't an action button or dialog wrapper add to the width, these will not be moved into the overflow slot
+        // Foreach element this isn't an action button or dialog wrapper add to the width, these will not be moved into the overflow slot
         for (let i = 0; i < elements.length; i++) {
 
           if(!elements[i].classList.contains('btn-action') && !elements[i].classList.contains('dialog__wrapper')){
