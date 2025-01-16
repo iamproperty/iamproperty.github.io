@@ -207,18 +207,18 @@ export const setTabsEventHandlers = function(tabsElement: Element){
         touchendY = event.changedTouches[0].screenY;
         const direction = getSwipeDirection(touchstartX,touchstartY,touchendX,touchendY);
         const currentTab = buttonWrapper.querySelector('[aria-pressed="true"]');
+        const nextTab = currentTab.nextSibling;
+        const prevTab = currentTab.previousSibling;
 
         switch (direction) {
           case 'left':
             
-            const nextTab = currentTab.nextSibling;
             if(nextTab)
               nextTab.click();
           
             break;
           case 'right':
               
-            const prevTab = currentTab.previousSibling;
             if(prevTab)
               prevTab.click();
 
@@ -229,7 +229,7 @@ export const setTabsEventHandlers = function(tabsElement: Element){
   }
 }
 
-export const openFirstTab = function(tabsElement: Element){
+export const openFirstTab = function(tabsElement: Element):boolean|void{
 
   if(!tabsElement.querySelector(':scope > details'))
     return false;
@@ -251,7 +251,7 @@ export const openFirstTab = function(tabsElement: Element){
 
 }
 
-const tabs = function(tabsElement: Element){
+const tabs = function(tabsElement: Element):void {
   createTabsLinks(tabsElement);
   setTabsEventHandlers(tabsElement);
   openFirstTab(tabsElement);

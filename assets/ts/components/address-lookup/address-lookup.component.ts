@@ -1,7 +1,11 @@
-// @ts-nocheck
 import Cookies from 'js-cookie';
 
 // Data layer Web component created
+declare global {
+  interface Window {
+    dataLayer:Array<object>;
+  }
+}
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
   "event": "customElementRegistered",
@@ -56,7 +60,7 @@ class iamAddressLookup extends HTMLElement {
       </div>
     </div>
     `;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
 	async connectedCallback() {

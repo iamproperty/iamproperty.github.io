@@ -1,6 +1,11 @@
 import extendDialogs from "../../modules/dialogs";
 
 // Data layer Web component created
+declare global {
+  interface Window {
+    dataLayer:Array<object>;
+  }
+}
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
   "event": "customElementRegistered",
@@ -257,14 +262,14 @@ class iamActionbar extends HTMLElement {
     });
 
     // #region Reponsive safe area
-    function hideButtons ():void {
+    const hideButtons = ():void => {
 
       const wrapperWidth = actionbarWrapper.scrollWidth;
       const screenWidth = document.documentElement.scrollWidth;
       let safeAreaWidth = 750;
       let elementMargin = 16;
       let tabletSafeWidth = 450;
-      let mobileSafeWidth = this.hasAttribute('data-switchviews') ? 144 : 210;
+      let mobileSafeWidth = this?.hasAttribute('data-switchviews') ? 144 : 210;
 
       if(this.hasAttribute('data-large-safe-area')){
 
@@ -302,7 +307,7 @@ class iamActionbar extends HTMLElement {
       // If the wrapper width is small we want to reduce the btn sizes by adding or removing btn-compact classes
       if (wrapperWidth < 576) {
         
-        Array.from(this.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)')).forEach((elemenindex) => {
+        Array.from(this.querySelectorAll(':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)')).forEach((element:HTMLElement) => {
 
           element.className = element.className.replace(' btn-compact',' _btn-compact');
           element.classList.add('btn-compact');
@@ -311,7 +316,7 @@ class iamActionbar extends HTMLElement {
       }
       else {
 
-        Array.from(this.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')).forEach((element) => {
+        Array.from(this.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')).forEach((element:HTMLElement) => {
           
           element.classList.remove('btn-compact');
           element.classList.remove('js-updated');
@@ -320,7 +325,7 @@ class iamActionbar extends HTMLElement {
       }
 
       // Reset the elements before we decide what elements become slotted into the overflow
-      Array.from(this.querySelectorAll('[slot]')).forEach((element) => {
+      Array.from(this.querySelectorAll('[slot]')).forEach((element:HTMLElement) => {
 
         if(element.getAttribute("slot") == "overflow")
           element.removeAttribute('slot');
@@ -329,22 +334,22 @@ class iamActionbar extends HTMLElement {
           element.setAttribute('slot','selected');
       });
 
-      Array.from(this.querySelectorAll('.show')).forEach((element) => {
+      Array.from(this.querySelectorAll('.show')).forEach((element:HTMLElement) => {
 
        element.classList.remove('show');
       });
 
       // Foreach safe area lets check what elements are slotted in them and if they need an overflow
-      Array.from(this.shadowRoot.querySelectorAll('.safe-area')).forEach((element) => {
+      Array.from(this.shadowRoot.querySelectorAll('.safe-area')).forEach((element:HTMLElement) => {
       
         // Decide on which overflow slot to use
         let overflowSlot = "overflow"
 
-        if(element.querySelector('slot').hasAttribute('name') && element.querySelector('slot').getAttribute('name') == "selected")
+        if(element.querySelector('slot')?.hasAttribute('name') && element.querySelector('slot')?.getAttribute('name') == "selected")
           overflowSlot = "selected-overflow";
 
         // Get the slotted elements, remember they aren't children of the safe area
-        const elements = element.querySelector('slot').assignedElements();
+        const elements = element.querySelector('slot')?.assignedElements() as Array<HTMLElement>;
         let tempWidth = 44*modifier; // Allow space for the overflow button
 
         // If search then allow for the search button width
@@ -445,27 +450,27 @@ class iamActionbar extends HTMLElement {
 
         if(newVal == "all" && this.hasAttribute('data-select-watch')){
 
-          const element = document.getElementById(this.getAttribute('data-select-watch'));
+          const element = document.getElementById(String(this.getAttribute('data-select-watch'))) as HTMLElement;
 
-          Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+          Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input:HTMLInputElement) => {
             
             input.checked = true;
 
             if(input.closest('iam-card'))
-              input.closest('iam-card').setAttribute('data-selected','true');
+              input.closest('iam-card')?.setAttribute('data-selected','true');
           });
         }
 
         if(newVal == "0" && this.hasAttribute('data-select-watch')){
 
-          const element = document.getElementById(this.getAttribute('data-select-watch'));
+          const element = document.getElementById(String(this.getAttribute('data-select-watch'))) as HTMLElement;
 
-          Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input,index) => {
+          Array.from(element.querySelectorAll('input[type="checkbox"]')).forEach((input:HTMLInputElement) => {
             
             input.checked = false;
 
             if(input.closest('iam-card'))
-              input.closest('iam-card').removeAttribute('data-selected','true');
+              input.closest('iam-card')?.removeAttribute('data-selected');
           });
         }
 

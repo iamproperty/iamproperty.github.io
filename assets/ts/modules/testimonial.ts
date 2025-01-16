@@ -1,5 +1,4 @@
-// @ts-nocheck
-function testimonial(testimonialElement) {
+function testimonial(testimonialElement):boolean|void {
 
   let scrollTimeout;
   const imagesCarousel = testimonialElement.querySelector('.testimonial__images');
@@ -13,7 +12,7 @@ function testimonial(testimonialElement) {
   testimonialElement.classList.add('testimonial--multi')
 
   // Set where the buttons go to
-  const setButtons = function(scrollTo){
+  const setButtons = function(scrollTo):void {
 
     const nextButton = testimonialElement.querySelector('.btn-next');
     const prevButton = testimonialElement.querySelector('.btn-prev');
@@ -30,7 +29,7 @@ function testimonial(testimonialElement) {
   }
 
   // On scroll we need to make sure the buttons get corrected and the next testimonial is shown
-  imagesCarousel.addEventListener('scroll', function(e){
+  imagesCarousel.addEventListener('scroll', function(){
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(function(){ 
         
