@@ -38,6 +38,9 @@ export const setupCard = (cardComponent:any) => {
   }
 
   if(!cardComponent.querySelector('[slot="badges"]')){
-    cardComponent.shadowRoot.querySelector('.card__badges').remove();
+    cardComponent.shadowRoot.querySelector('.card__badges').classList.add('empty');
+  }
+  else{
+    cardComponent.shadowRoot.querySelector('.card__badges').classList.remove('empty');
   }
 }

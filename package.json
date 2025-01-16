@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "6.1.0--beta2",
+  "version": "6.1.0--beta3",
   "scripts": {
     "temp": "rollup --environment COMPONENT:carousel --config rollup-component.config.js --sourcemap",
     "bootstrap": "copyfiles -u 2 node_modules/bootstrap/**/* assets/bootstrap",
