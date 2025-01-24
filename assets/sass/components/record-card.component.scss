@@ -1,0 +1,204 @@
+@use "../_func.scss" as *;
+@use "card.module.scss" as *;
+
+:host {
+  --card-head-height: 9rem;
+  --card-right-padding: 1rem;
+  
+  background: transparent!important;
+  position: relative;
+}
+
+:host(:is(:hover,:focus,.hover)) {
+
+  --hover-outline-colour-default: var(--colour, var(--colour-primary));
+  outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
+  outline-offset: -2px;
+}
+
+:host([data-record]) {
+
+  .card__head {
+
+    &:before {
+      font-family: var(--record-icon-font,"Font Awesome 6 Pro");
+      font-weight: normal;
+      font-size: rem(24);
+      content: var(--record-icon);
+      display: block;
+      position: absolute;
+      top: auto;
+      left: 50%;
+      bottom: 0;
+      background-color: var(--record-colour);
+      border-radius: 50%;
+      height: rem(64);
+      line-height: rem(64);
+      width: rem(64);
+      text-align: center;
+      transform: translate(-50%,0);
+    }
+  }
+}
+
+:host([data-initials]:before) {
+
+  content: (data-initials);
+  display: block;
+}
+  
+
+
+:host([data-initials]) {
+
+  .card__head {
+
+    &:before {
+      display: none!important;
+    }
+  }
+
+  &:before {
+    font-family: var(--font-body);
+    font-weight: normal;
+    font-size: rem(32);
+    content: attr(data-initials);
+    display: block;
+    position: absolute;
+    top: var(--card-head-height);
+    left: 50%;
+    bottom: 0;
+    background-color: var(--record-colour);
+    border-radius: 50%;
+    height: rem(64);
+    margin-top: rem(-64);
+    line-height: rem(64);
+    width: rem(64);
+    text-align: center;
+    transform: translate(-50%,0);
+  }
+
+}
+
+.card__head {
+  background: transparent!important;
+  position: relative;
+  min-height: var(--card-head-height);
+
+  .card__avatar {
+
+    display: block;
+    position: absolute;
+    top: auto;
+    left: 50%;
+    bottom: 0;
+    border-radius: 50%;
+    height: rem(64);
+    line-height: rem(64);
+    width: rem(64);
+    text-align: center;
+    transform: translate(-50%,0);
+    margin: 0;
+    object-fit: cover;
+  }
+}
+
+.card__badges {
+  
+  position: absolute;
+  top: 0;
+  text-align: left;
+  left: 0;
+  z-index: 9;
+}
+
+.card__body {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; overflow: hidden;
+  overflow: hidden;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.card__details {
+  padding: 0 var(--card-right-padding) 1.5rem var(--card-left-padding);
+}
+
+
+::slotted(span:not(.badge)){
+  display: block!important;
+  font-weight: normal!important;
+  font-size: rem(14)!important;
+  line-height: rem(24)!important;
+}
+
+::slotted(span:not(.badge):not([class*=pt-])) {
+  padding-top: 1rem !important;
+}
+
+::slotted(*:not(.badge)){
+  display: block!important;
+  font-weight: normal!important;
+  font-size: rem(14)!important;
+  line-height: rem(24)!important;
+}
+
+
+:host([data-initials]) {
+  --record-content: attr(data-initials);
+  --record-colour: var(--wider-colour-2);
+}
+
+
+:host([data-record="business"]) {
+  --record-icon: '\f54f';
+  --record-colour: var(--wider-colour-2);
+}
+:host([data-record="page"]) {
+  --record-icon: '\f15c';
+  --record-colour: var(--wider-colour-3);
+}
+:host([data-record="contact"]) {
+  --record-icon: "\f2b9";
+  --record-colour: var(--wider-colour-4);
+}
+:host([data-record="lettings"]) {
+  --record-icon: "\E003";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-5);
+}
+
+:host([data-record="sales"]) {
+  --record-icon: "\E004";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-7);
+}
+:host([data-record="landlord"]) {
+  --record-icon: "\E001";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-8);
+}
+
+:host([data-record="contractor"]) {
+  --record-icon: "\f82c";
+  --record-colour: var(--wider-colour-9);
+}
+
+:host([data-record="vendor"]) {
+  --record-icon: "\E002";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-13);
+}
+
+:host([data-record="tenant"]) {
+  --record-icon: "\e1b0";
+  --record-colour: var(--wider-colour-6);
+}
+:host([data-record="sales-applicant"]) {
+  --record-icon: "\E006";
+  --record-icon-font: Font Awesome Kit;
+  --record-colour: var(--wider-colour-10);
+}

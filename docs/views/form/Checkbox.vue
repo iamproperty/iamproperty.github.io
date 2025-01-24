@@ -257,6 +257,14 @@
   height: 20rem;
 }
 
+.demo > .was-validated {
+
+  display: flex;
+  
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 </style>
 
 <script>

@@ -1,6 +1,10 @@
 @use "sass:math";
 @use "../_func" as *;
 
+nav:has(iam-nav) {
+
+  grid-column: container;
+}
 iam-nav {
 
   display: block;
@@ -9,6 +13,7 @@ iam-nav {
   padding-bottom: 1.5rem;
   max-width: 100%;
   margin-inline: auto;
+  column-grid: container;
   
   .brand {
     font-size: rem(48);

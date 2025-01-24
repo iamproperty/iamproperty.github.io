@@ -133,7 +133,6 @@ import headerImg from '../../img/type-header.png'
 import NonModelDesc from '../NonModalDesc.vue'
 
 
-import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
 import DSHeader from '../DSHeader.vue'
 
 
@@ -148,7 +147,6 @@ import multiForm from '../../img/dialogs/multi-step-form.png'
 
 export default {
   components: {
-    YoutubeVideo,
     DSHeader,
     NonModelDesc,
     Tabs,

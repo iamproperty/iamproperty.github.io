@@ -35,3 +35,10 @@ iam-multiselect:has(label[slot="checked"]) {
 
   --display-button: block;
 }
+
+@include dark-mode() {
+  iam-multiselect :is(.tag,.badge):not([slot="checked"]){
+
+    color: var(--colour-heading);
+  }
+}

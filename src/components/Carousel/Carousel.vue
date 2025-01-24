@@ -1,6 +1,6 @@
 <template>
   <!-- Custom element -->
-  <iam-carousel :data-thumbnails="JSON.stringify(thumbnails)">
+  <iam-carousel>
     
     <slot></slot>
   </iam-carousel>
@@ -11,20 +11,6 @@
 
 export default {
   name: 'Header',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    image: {
-      type: String,
-      required: false
-    },
-    thumbnails: {
-      type: Array, 
-      default: () => []
-    }
-  },
   mounted(){
 
     this.$nextTick(function () {

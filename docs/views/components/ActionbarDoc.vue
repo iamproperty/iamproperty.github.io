@@ -326,7 +326,7 @@
 
       <p>Dismissal: The Select state will be dismissed either when the user completes an action and it is no longer needed, or when the user deselects all linked items. In both cases, the Selected state will be hidden and return to the Default state.</p>
     </div>
-    <div class="container visualtest">
+    <div class="container visualtest ">
       <div class="demo mb-5">
         <Actionbar data-selectall data-selected="1" data-search class="mb-4">
           <div class="dialog__wrapper">
@@ -357,7 +357,7 @@
           <button class="btn btn-action" slot="selected" data-cancel>Cancel</button>
 
         </Actionbar>
-        <Actionbar data-selectall data-selected="6" data-search>
+        <Actionbar data-selectall data-selected="6" data-search class="mb-5">
           <div class="dialog__wrapper">
             <button class="btn btn-action mb-0 me-0">Quick filter</button>
             <dialog class="dialog--list">
@@ -386,8 +386,88 @@
           <button class="btn btn-action" slot="selected" data-cancel="">Cancel</button>
 
         </Actionbar>
+        <Table class="table--cta table--fullwidth">
+
+        <Actionbar data-selectall data-selected="1" data-search slot="before">
+
+          <div class="dialog__wrapper">
+            <button class="btn btn-action mb-0 me-0">Quick filter</button>
+            <dialog class="dialog--list">
+              <div class="pb-0 mb-0">
+                <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest">
+                <label for="follow-up-oldest" class="radio--tick">Follow up date (Oldest to newest)</label>
+
+                <input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest">
+                <label for="follow-up-newest" class="radio--tick">Follow up date (Newest to oldest)</label>
+
+                <input type="radio" name="sort" data-sort="" id="date-instructed-oldest" value="date-instructed-oldest" checked="" autofocus="true">
+                <label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label>
+
+                <input type="radio" name="sort" data-sort="" id="date-instructed-newest" value="date-instructed-newest">
+                <label for="date-instructed-newest" class="radio--tick mb-0">Date Instructed (Newest to oldest)</label>
+              </div>
+            </dialog>
+          </div>
+          
+          <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
+
+          <button class="btn btn-action fa-pen-to-square"  data-single>Edit</button>
+          <button class="btn btn-action fa-box-archive" >Archive</button>
+          <button class="btn btn-action fa-trash-can" >Delete</button>
+          <hr />
+          <button class="btn btn-action" >Cancel</button>
+
+        </Actionbar>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Date added</th>
+              <th>Lorum ipsum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td data-label=""><a href="/" class="text-nowrap">Manage client</a></td>
+            </tr>
+            <tr data-selected>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td data-label=""><a href="/" class="text-nowrap">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td data-label=""><a href="/" class="text-nowrap">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td data-label=""><a href="/" class="text-nowrap">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td data-label=""><a href="/" class="text-nowrap">Manage client</a></td>
+            </tr>
+          </tbody>
+        </table>
+        </Table>
       </div>
     </div>
+
+    <p class="note mb-5"><strong>Note:</strong> Individual input fields can be given the checked attribute on page load, you may still need to add the data-selected attribute to the Actionbar component with the number of checked fields. In the case of a table that generates the input fields a data-selected attrbiute is needed on the table rwo element.</p>
+
+
     <div class="container pb-0">
       <p>Search is a secondary state, it only appears when the user clicks the ‘search’ icon, overlapping the Default state and presenting an input field. </p>
       <p>Dismissal: On Desktop and Tablet, you can exit the Search state by pressing the ‘X’ icon or anywhere on the page outside the search bar. On Mobile, You can exit the Search state by pressing anywhere on the page outside the search bar. When dismissed, the Search state will be hidden and return to the Default state.</p>
@@ -725,6 +805,7 @@ import Table from '@/components/Table/Table.vue'
 
 // Component - Replace the card references to new component
 import Actionbar from '@/components/Actionbar/Actionbar.vue'
+import Card from '@/components/Card/Card.vue'
 import Readme from '@/components/Actionbar/README.md'
 import WebReadme from '~/ts/components/actionbar/README.md'
 
@@ -762,6 +843,7 @@ export default {
     Tabs,
     Table,
     Actionbar,
+    Card,
     Readme,
     WebReadme,
     anatomy,

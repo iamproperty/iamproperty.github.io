@@ -7,9 +7,11 @@ mark {
   background-color: $mark-bg;
 }
 
-@import "../../bootstrap/scss/_type.scss";
+//@import "../../bootstrap/scss/_type.scss";
 
 // #region headings
+
+
 %heading {
   --line-height: #{$headings-line-height};
   // From bootstrap reboot
@@ -97,6 +99,7 @@ mark {
 // #endregion
 
 p {
+  margin-top: 0;
   font-size: rem(map-get($heading-sizes,"body_fs"));
   line-height: rem(map-get($heading-sizes,"body_lh"));
   padding-bottom: rem(map-get($heading-sizes,"body_end_pb"));
@@ -108,7 +111,7 @@ p:has(+ p) {
   padding-bottom: rem(map-get($heading-sizes,"body_pb"));
 }
 
-@include is('.lead, .strapline'){
+:is(.lead, .strapline){
   font-size: rem(map-get($heading-sizes,"lead_fs"));
   line-height: rem(map-get($heading-sizes,"lead_lh"));
   padding-bottom: rem(map-get($heading-sizes,"lead_pb"));
@@ -126,8 +129,41 @@ small,
   font-weight: normal;
 }
 
+
+sub,
+sup {
+  position: relative;
+  font-size: .75em;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sub { bottom: -.25em; }
+sup { top: -.5em; }
+
+
+abbr[title] {
+  text-decoration: underline dotted; // 1
+  cursor: help; // 2
+  text-decoration-skip-ink: none; // 3
+}
+
+
+// Address
+
+address {
+  margin-bottom: 1rem;
+  font-style: normal;
+  line-height: inherit;
+}
+
+
+blockquote {
+}
+
 blockquote {
 
+  margin: 0;
   quotes: "“" "”" "‘" "’";
   padding-bottom: rem(48);
   overflow: hidden;

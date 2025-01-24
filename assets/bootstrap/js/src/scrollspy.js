@@ -1,6 +1,6 @@
 /**
  * --------------------------------------------------------------------------
- * Bootstrap (v5.2.3): scrollspy.js
+ * Bootstrap (v5.2.0): scrollspy.js
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  * --------------------------------------------------------------------------
  */
@@ -40,16 +40,14 @@ const Default = {
   offset: null, // TODO: v6 @deprecated, keep it for backwards compatibility reasons
   rootMargin: '0px 0px -25%',
   smoothScroll: false,
-  target: null,
-  threshold: [0.1, 0.5, 1]
+  target: null
 }
 
 const DefaultType = {
   offset: '(number|null)', // TODO v6 @deprecated, keep it for backwards compatibility reasons
   rootMargin: 'string',
   smoothScroll: 'boolean',
-  target: 'element',
-  threshold: 'array'
+  target: 'element'
 }
 
 /**
@@ -112,13 +110,6 @@ class ScrollSpy extends BaseComponent {
     // TODO: on v6 target should be given explicitly & remove the {target: 'ss-target'} case
     config.target = getElement(config.target) || document.body
 
-    // TODO: v6 Only for backwards compatibility reasons. Use rootMargin only
-    config.rootMargin = config.offset ? `${config.offset}px 0px -30%` : config.rootMargin
-
-    if (typeof config.threshold === 'string') {
-      config.threshold = config.threshold.split(',').map(value => Number.parseFloat(value))
-    }
-
     return config
   }
 
@@ -150,8 +141,8 @@ class ScrollSpy extends BaseComponent {
   _getNewObserver() {
     const options = {
       root: this._rootElement,
-      threshold: this._config.threshold,
-      rootMargin: this._config.rootMargin
+      threshold: [0.1, 0.5, 1],
+      rootMargin: this._getRootMargin()
     }
 
     return new IntersectionObserver(entries => this._observerCallback(entries), options)
@@ -194,6 +185,11 @@ class ScrollSpy extends BaseComponent {
         activate(entry)
       }
     }
+  }
+
+  // TODO: v6 Only for backwards compatibility reasons. Use rootMargin only
+  _getRootMargin() {
+    return this._config.offset ? `${this._config.offset}px 0px -30%` : this._config.rootMargin
   }
 
   _initializeTargetsAndObservables() {

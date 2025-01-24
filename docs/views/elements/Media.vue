@@ -38,41 +38,18 @@
 
     <div class="container pb-0">
 
-      <h2>YouTube video</h2>
+      <h2>Videos</h2>
 
-      <p>Videos can be added to the site in two ways; as a component on the page with a preview image (from youTube), or they via a <a href="/dialogs/modal">modal component</a>.</p>
-    </div>
-    <div class="container visualtest">
-      <div class="row">
-        <div class="col-12 col-sm-6">
-          <YoutubeVideo video="lROFZaJcVug" class="mb-5"></YoutubeVideo>
-        </div>
-      </div>
+      <p>Videos can be added to the site via the <a href="/cards/video-card">Video card component</a>.</p>
     </div>
 
-
-
-
-    <div class="container">
-      <h2>YouTube video HTML code example</h2>
-      <pre><code class="javascript">{{htmlUsage}}</code></pre>
-    </div>
-
-    <div class="container">
-      <h2>Vue YoutubeVideo component reference</h2>
-      <Readme></Readme>
-    </div>
   </main>
 </template>
 
 <script>
-import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
-import Readme from '@/foundations/YoutubeVideo/README.md'
 
 export default {
   components: {
-    YoutubeVideo,
-    Readme
   },
   data () {
     return {
