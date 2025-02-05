@@ -442,11 +442,13 @@
       <p class="pb-3">Colour fields allow the user to either enter the hex colour code in the field or select a colour from the colour picker. The colour picker should default to hex code input.</p>
     </div>
     <div class="container visualtest"> 
-      <div>
-        <label for="color">Input field label</label>
-        <input type="color" id="color" name="color" required="" autocomplete="on" />
-        <output></output>
-      </div>
+      
+      <label for="color">Input field label
+        <div>
+          <input type="color" id="color" name="color" required="" autocomplete="on" />
+          <output></output>
+        </div>
+      </label>
 
     </div>
 

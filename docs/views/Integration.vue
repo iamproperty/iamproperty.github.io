@@ -3,15 +3,16 @@ import Tabs from '@/components/Tabs/Tabs.vue'
 import { useSlots } from 'vue';
 
 const slots = useSlots()
-const props = defineProps(['component']);
+const props = defineProps(['component', 'componentName']);
 
 
 const showInstall = slots['web-component'] || slots['vue-component'] ? true : false;
 const showLayout = slots['slots'] ? true : false;
 const showModify = slots['attr'] ? true : false;
 const showStyle = slots['classes'] || slots['parts'] || slots['vars'] ? true : false;
-const showExtend = slots['dispatched-events'] || slot['event-listeners'] || slot['watched-attrs'] || slot['observers'] ? true : false;
-const showTest = slots['criteria'] ? true : false;
+const showExtend = slots['dispatched-events'] || slots['event-listeners'] || slots['watched-attrs'] || slots['observers'] ? true : false;
+const showTest = true;
+const showTrack = slots['data-layer'] ? true : false;
 
 </script>
 
@@ -88,7 +89,7 @@ const showTest = slots['criteria'] ? true : false;
       <h4 v-if="slots['event-listeners']">Event Listeners</h4>
       <slot name="event-listeners"></slot>
 
-      <small v-if="slots['dispatched-events']" class="d-block pb-5">For the page to extend this event it needs to create an event listener on the component, see below: <br/><br/><code>cardComponent.addEventListener('dispatched-event-name', function(event){ ...do something });</code></small>
+      <small v-if="slots['event-listeners']" class="d-block pb-5">Events can also be dispatched onto the component and listened for using an event listener created inside of the component JavaScript, see below: <br/><br/><code>cardComponent.addEventListener('event-name', function(event){ ...do something });</code></small>
 
 
       <h4 v-if="slots['watched-attrs']">Watched Attributes</h4>
@@ -97,11 +98,65 @@ const showTest = slots['criteria'] ? true : false;
       <h4 v-if="slots['observers']">Mutation observers</h4>
       <slot name="observers"></slot>
 
+
     </details>
     <details v-if="showTest">
       <summary><h3>Test</h3></summary>
-      <h4 v-if="slots['criteria']">Accpetance criteria</h4>
+      <h4 v-if="slots['criteria']">Acceptance criteria</h4>
       <slot name="criteria"></slot>
+
+      <h4 class="pt-3">Accessibility</h4>
+      <ul>
+        <li>All text should be legible</li>
+        <li>All buttons and links within the component should be tabbable unless stated in the acceptance criteria.</li>
+        <li>All buttons and links should have a title which is visible on hover.</li>
+        <li>The shadow root should not hold any content</li>
+      </ul>
+
+      <h4 v-if="slots['keyboard']">Keyboard commands</h4>
+      <slot name="keyboard"></slot>
+
+    </details>
+    <details v-if="showTrack">
+      <summary><h3>Track</h3></summary>
+      
+      <h4 v-if="slots['data-layer']">DataLayer events</h4>
+
+      <span class="h6">Global Events</span>
+      <table v-if="slots['data-layer']">
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Dispatched</th>
+            <th>Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>customElementRegistered</th>
+            <td>When component is registered (Usually on page load)</td>
+            <td>{ "event": "customElementRegistered", "element": "{{ props.componentName }}" }</td>
+          </tr>
+          <tr>
+            <th>customElementAdded</th>
+            <td>When component is added to the page</td>
+            <td>{ "event": "customElementAdded", "element": "{{ props.componentName }}" }</td>
+          </tr>
+        </tbody>
+      </table>
+      <span class="h6">Component Events</span>
+      <slot name="data-layer"></slot>
+
+      <small v-if="slots['dispatched-events']" class="d-block pb-5">Data layer events are pushed to a basic JavaScript object that can be picked up by seperate JavaScript which is usually a 3rd party like Google Analytics.</small>
+
     </details>
   </Tabs>
 </template>
+
+<style scoped>
+
+tr > th:first-child {
+  white-space: nowrap;
+}
+
+</style>

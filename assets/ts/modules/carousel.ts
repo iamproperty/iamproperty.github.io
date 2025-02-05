@@ -1,12 +1,94 @@
 // @ts-nocheck
-function carousel(carouselElement, row) {
+
+export const generateThumbnailList = function(carouselComponent){
+
+  let thumbnailImages = [];
+
+  Array.from(carouselComponent.querySelectorAll(':scope > div')).forEach((slide, index) => {
+        
+    if(slide.hasAttribute('data-thumbnail')){
+
+      thumbnailImages[index] = slide.getAttribute('data-thumbnail');
+    }
+  });
+
+  return thumbnailImages;
+}
+
+
+export const generatePipsHTML = function(carouselComponent,thumbnailImages){
+
+  let itemCount = carouselComponent.querySelectorAll(':scope > div').length;
+
+  let pips = "";
+  for (let i = 1; i <= itemCount; i++) {
+    let pipContent = null;
+    let pipClass = '';
+
+    if (thumbnailImages.length && thumbnailImages[i - 1]) {
+      pipClass = 'has-thumbnail';
+      pipContent = `<img src="${thumbnailImages[i - 1]}" alt="Slide ${i}" height="148"/>`;
+    } else {
+      pipContent = `Slide ${i}`;
+    }
+
+    pips += `<button class="control-${i} ${pipClass}" data-slide="${i}" ${i == 1 ? "aria-current":""}>${pipContent}</button>`;
+  }
+  
+  return pips;
+}
+
+
+const getProgressMax = function(itemCount,visibleItems){
+
+  if(visibleItems == 1){
+    return itemCount;
+  }
+
+  let max = (Math.ceil(itemCount / visibleItems) * visibleItems) - visibleItems;
+
+  return max + 1;
+}
+
+const getProgressPercent = function(value,max){
+  
+  return (((value-1)/(max-1)) * 100);
+}
+
+export const carousel = function (carouselComponent) {
 
   var scrollTimeout;
 
+  const carouselElement = carouselComponent.shadowRoot.querySelector('.carousel');
+
   let carouselInner = carouselElement.querySelector('.carousel__inner');
   let carouselControls = carouselElement.querySelector('.carousel__controls');
-  let itemCount = row.querySelectorAll(':scope > .col').length;
+  let carouselProgress = carouselElement.querySelector('.carousel__progress [type="range"]');
+  let itemCount = carouselComponent.querySelectorAll(':scope > div').length;
+  let scrollArea = carouselInner.clientWidth;
+  let itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
+  let visibleItems = Math.round(scrollArea / itemWidth);
+
+  carouselProgress.setAttribute('min',1);
+  carouselProgress.setAttribute('step',visibleItems);
+
+  let progressMax = getProgressMax(itemCount,visibleItems);
+
+  carouselProgress.setAttribute('max',progressMax);
+  carouselProgress.value = 1;
+
+  let percent = getProgressPercent(1,progressMax);
   
+  carouselProgress.style.setProperty('--percent', percent + "%");
+  
+  let stepperInterval, stepperEvent = "mouseup", stepperStart = "mousedown";
+    
+  if("ontouchstart" in document.documentElement) {
+    stepperEvent = "touchend";
+    stepperStart = "touchstart";
+  }
+
+
   // On scroll we need to make sure the buttons get corrected and the next testimonial is shown
   carouselInner.addEventListener('scroll', function(e){
     clearTimeout(scrollTimeout);
@@ -17,8 +99,8 @@ function carousel(carouselElement, row) {
       let scrollLeft = carouselInner.scrollLeft;
       let targetSlide = Math.round((scrollLeft / scrollWidth) * itemCount) + 1;
      
-      let itemWidth = row.querySelector(':scope > .col').scrollWidth;
-      let lastItemOffset = row.querySelector(':scope > .col:last-child').offsetLeft;
+      let itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
+      let lastItemOffset = carouselComponent.querySelector(':scope > div:last-child').offsetLeft;
       //+60px here is to account for when the next offscreen slide is visible beneath the next arrow
       let lastItemInView = carouselInner.scrollLeft + scrollArea + carouselInner.getBoundingClientRect().left >= (lastItemOffset + 60);
 
@@ -26,6 +108,9 @@ function carousel(carouselElement, row) {
 
       //Check if theres room for more slides than we have
       let leftOverSpace = (Math.ceil(itemCount / visibleItems) * visibleItems) - itemCount;
+
+      carouselProgress.setAttribute('step',visibleItems);
+
 
       if(leftOverSpace > 0 && lastItemInView){
         targetSlide = (Math.floor(itemCount / visibleItems) * visibleItems) + 1;
@@ -49,6 +134,16 @@ function carousel(carouselElement, row) {
       else
         carouselElement.querySelector('.btn-next').removeAttribute('disabled');
       
+      carouselProgress.value = targetSlide;
+
+      
+      progressMax = getProgressMax(itemCount,visibleItems);
+
+      carouselProgress.setAttribute('max',progressMax);
+      percent = (targetSlide/progressMax) * 100;
+      percent = getProgressPercent(targetSlide,progressMax);
+      carouselProgress.style.setProperty('--percent', percent + "%");
+
     }, 100); 
 
   }, false);
@@ -65,8 +160,15 @@ function carousel(carouselElement, row) {
           button.removeAttribute('aria-current');
         });
         target.setAttribute('aria-current', true);
+
+        const customEvent = new CustomEvent("pip-clicked", {  detail: { 
+                                                            'slide': target.getAttribute('data-slide')
+                                                          }
+                                                        });
+
+        carouselComponent.dispatchEvent(customEvent);
         
-        const el = row.querySelector(`:scope > *:nth-child(${target.getAttribute('data-slide')})`);
+        const el = carouselComponent.querySelector(`:scope > *:nth-child(${target.getAttribute('data-slide')})`);
 
         carouselInner.scroll({
           top: 0,
@@ -83,11 +185,11 @@ function carousel(carouselElement, row) {
 
     let scrollArea = carouselInner.clientWidth;
     let scrollWidth = carouselInner.scrollWidth;
-    let itemWidth = row.querySelector(':scope > .col').scrollWidth;
+    let itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
 
     let visibleItems = Math.round(scrollArea / itemWidth);
 
-    let lastItemOffset = row.querySelector(':scope > .col:last-child').offsetLeft;
+    let lastItemOffset = carouselComponent.querySelector(':scope > div:last-child').offsetLeft;
     let lastItemInView = carouselInner.scrollLeft + scrollArea + carouselInner.getBoundingClientRect().left >= (lastItemOffset + 60);
 
     //Check if theres room for more slides than we have
@@ -104,6 +206,15 @@ function carousel(carouselElement, row) {
 
     for (var target = e.target; target && target != this; target = target.parentNode) {
       if (typeof target.matches == "function" && target.matches('.btn-next, .btn-prev')) {
+
+        let direction = target.matches('.btn-next') ? 'next' : 'prev';
+
+        const customEvent = new CustomEvent(`${direction}-clicked`, {  detail: { 
+          'slide': target.getAttribute('data-go')
+          }
+        });
+
+        carouselComponent.dispatchEvent(customEvent);
         
         e.preventDefault();
         let scrollTo = target.classList.contains('btn-prev') ? carouselInner.scrollLeft - movement : carouselInner.scrollLeft + carouselInner.clientWidth;
@@ -116,6 +227,49 @@ function carousel(carouselElement, row) {
         break;
       }
     }
+  }, false);
+
+
+  carouselProgress.addEventListener(stepperStart,function(event){
+    
+    clearInterval(stepperInterval);
+    stepperInterval = setInterval(function() {
+      scrollArea = carouselInner.clientWidth;
+      itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
+      visibleItems = Math.round(scrollArea / itemWidth);
+      carouselProgress.setAttribute('step',visibleItems);
+      progressMax = getProgressMax(itemCount,visibleItems);
+      carouselProgress.setAttribute('max',progressMax);
+      percent = getProgressPercent(carouselProgress.value,progressMax);
+
+      carouselProgress.style.setProperty('--percent', percent + "%");
+    }, 10);
+  });
+
+  carouselProgress.addEventListener(stepperEvent,function(event){
+    clearInterval(stepperInterval);
+  });
+
+  carouselProgress.addEventListener('change', function(e){
+
+    clearInterval(stepperInterval);
+    let target = carouselComponent.querySelector(`:scope > *:nth-child(${carouselProgress.value})`);
+
+    carouselInner.scroll({
+      top: 0,
+      left: target ? target.offsetLeft - carouselInner.getBoundingClientRect().left : 0, 
+      behavior: 'smooth'
+    });
+
+    let direction = target.matches('.btn-next') ? 'next' : 'prev';
+        
+    const customEvent = new CustomEvent(`slider-changed`, {  detail: { 
+      'slide': carouselProgress.value
+      }
+    });
+
+    carouselComponent.dispatchEvent(customEvent);
+    
   }, false);
 }
 

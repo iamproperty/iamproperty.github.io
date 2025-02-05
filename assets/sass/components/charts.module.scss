@@ -100,7 +100,7 @@ $chart-height-lg: #{rem(200)}!default;
 
   display: flex;
   flex-direction: column;
-
+  position: relative;
   font-weight: var(--chart-font-weight, bold);
   color: var(--chart-text-color, black);
 
@@ -210,7 +210,6 @@ $chart-height-lg: #{rem(200)}!default;
   }
 
   .key {
-
     margin: 0;
 
     &:before {
@@ -233,6 +232,16 @@ $chart-height-lg: #{rem(200)}!default;
     }
   }
 }
+
+@for $i from 1 to 10 {
+  
+  .chart__outer input[type="checkbox"]:focus:nth-child(#{$i}) ~ .chart__key .key:nth-child(#{$i}) {
+    background: var(--colour-btn-action-hover-bg)!important;
+    border: var(--btn-border-width) solid var(--colour-muted)!important;
+  }  
+}
+
+
 
 // Hide chart keys
 .chart__outer > input[type="checkbox"]:not(:checked) ~ .chart__key .key {
@@ -474,10 +483,12 @@ $chart-height-lg: #{rem(200)}!default;
         position: relative;
         padding: 0;
         background: var(--chart-colour);
-
-        @media screen and (prefers-color-scheme: dark) {
+        
+        & {
+          @media screen and (prefers-color-scheme: dark) {
           
-          background: color-mix(in oklab, var(--chart-colour), black 20%);
+            background: color-mix(in oklab, var(--chart-colour), black 20%);
+          }
         }
 
         border-top-right-radius: 4px;

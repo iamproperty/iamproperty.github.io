@@ -1,6 +1,8 @@
 
 details {
 
+  display: block;
+
   &:not([open]){
       
     padding-bottom: rem(32);

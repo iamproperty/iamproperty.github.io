@@ -43,6 +43,24 @@ const routes = [
         searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
       },
       {
+        path: 'grid',
+        name: 'Grid',
+        meta: {
+          title: 'Grid | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/Grid.vue'),
+        searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
+      },
+      {
+        path: 'greakpoints',
+        name: 'Breakpoints',
+        meta: {
+          title: 'Breakpoints and scaling | Foundations | iamkey'
+        },
+        component: () => import('./views/foundations/Breakpoints.vue'),
+        searchterms: 'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling'
+      },
+      {
         path: 'utilities',
         name: 'Utility Classes (Beta)',
         meta: {
@@ -402,17 +420,8 @@ const routes = [
         component: () => import('./views/components/AppliedFiltersDoc.vue')
       },
       {
-        path: 'banner',
-        name: 'Banner (Beta)',
-        meta: {
-          title: 'Banner | Components | iamkey'
-        },
-        component: () => import('./views/components/BannerDoc.vue'),
-        searchterms: 'promote'
-      },
-      {
         path: 'carousel',
-        name: 'Carousel (Beta)',
+        name: 'Carousel',
         meta: {
           title: 'Carousel | Components | iamkey'
         },
@@ -473,6 +482,14 @@ const routes = [
         component: () => import('./views/components/MenuDoc.vue')
       },
       {
+        path: 'multistep',
+        name: 'Multi-Step form',
+        meta: {
+          title: 'Multi-step form | Components | iamkey'
+        },
+        component: () => import('./views/components/MultiStep.vue')
+      },
+      {
         path: 'multiselect',
         name: 'Multiselect',
         meta: {
@@ -498,17 +515,8 @@ const routes = [
         searchterms: 'navigation'
       },
       {
-        path: 'property-searchbar',
-        name: 'Property Searchbar (Beta)',
-        meta: {
-          title: 'Property Searchbar | Components | iamkey'
-        },
-        component: () => import('./views/components/PropertySearchbarDoc.vue'),
-        searchterms: 'search, property, price range, number of beds, property type, desired'
-      },
-      {
         path: 'snapshot',
-        name: 'Snapshot (Beta)',
+        name: 'Snapshot (Deprecation warning)',
         meta: {
           title: 'Snapshot | Components | iamkey'
         },
@@ -524,7 +532,7 @@ const routes = [
       },
       {
         path: 'stepper',
-        name: 'Stepper (Beta)',
+        name: 'Stepper (Deprecation warning)',
         meta: {
           title: 'Stepper | Components | iamkey'
         },
@@ -563,14 +571,6 @@ const routes = [
           title: 'Testimonial | Components | iamkey'
         },
         component: () => import('./views/components/TestimonialDoc.vue')
-      },
-      {
-        path: 'timeline',
-        name: 'Timeline (Beta)',
-        meta: {
-          title: 'Timeline | Components | iamkey'
-        },
-        component: () => import('./views/components/TimelineDoc.vue')
       }
     ]
   },
@@ -667,11 +667,19 @@ const routes = [
       },
       {
         path: 'record-card',
-        name: 'Record card (Beta)',
+        name: 'Record card',
         meta: {
           title: 'Record card | Components | iamkey'
         },
         component: () => import('./views/cards/RecordCardDoc.vue')
+      },
+      {
+        path: 'video-card',
+        name: 'Video card',
+        meta: {
+          title: 'Video card | Components | iamkey'
+        },
+        component: () => import('./views/cards/VideoCardDoc.vue')
       }
     ]
   },

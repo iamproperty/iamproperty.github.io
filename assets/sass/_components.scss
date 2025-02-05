@@ -2,29 +2,93 @@
 @use "_func" as *;
 
 @use 'components/nav.preload';
-@use 'components/card.preload';
-@use 'components/carousel.preload';
+@use 'components/carousel.config';
 @use 'components/multiselect.preload';
 @use 'components/inline-edit.preload';
+@use "components/charts.config.scss";
 
-// #region Undefined web components
-main > :is(*):not(:defined):not(iam-carousel) {
-
-  padding: var(--container-padding);
-  padding-top: 1rem;
+ // Make sure the first 
+ main {
+  position: relative;
+  
+  > *:first-child {
+    padding-top: 2rem;
+  }
 }
 
+// #region Undefined web components
+
 @include media-breakpoint-up(md) {
-      
-  main > :is(*):not(:defined):not(iam-carousel) {
-    max-width: 100%!important;
-    padding-inline: calc(50% - #{rem(math.div(1112,2))});
-  }
 
   iam-header:not(:defined) {
     min-height: rem(470);
   }
 }
+
+// #region Cards
+.card:not(:defined) {
+  box-shadow: var(--card-box-shadow);
+  border-radius: var(--card-border-radius);
+  padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
+}
+
+.row [class*="col"]:has(label:first-child:last-child .card:defined:first-child:last-child, button:first-child:last-child .card:defined:first-child:last-child, a:first-child:last-child .card:defined:first-child:last-child) {
+  display: flex;
+}
+
+iam-card:has([type=checkbox]:checked) {
+  --hover-outline-colour: var(--colour-info);
+  --outline-colour: var(--colour-info);
+}
+
+label:has(.card) {
+
+  padding: 0!important;
+  margin-right: 0!important;
+
+  &:before,
+  &:after {
+    display: none!important;
+  }
+
+  .optional-text {
+    display: none;
+  }
+
+  &:has(:checked) {
+    .card:defined {
+      outline: 2px solid var(--colour,var(--colour-primary));
+      outline-offset: -2px;
+    
+      ::part(body) {
+        background: none;
+      }
+      ::part(footer) {
+        background: none;
+      }
+    }
+  }
+}
+
+
+iam-filter-card:not(:has(i)){
+
+  border-left: 0.75rem solid var(--colour, var(--colour-primary));
+}
+
+.card .badge:not([class*="bg-"]):not([class*="wider-colour-"]){
+
+  background-color: var(--colour-canvas);
+  outline: 1px solid var(--colour-light);
+}
+
+
+a[target="_blank"] .card {
+
+  --icon: var(--icon-new-tab);
+}
+
+// #endregion
 
 // Search
 iam-search input:not(.is-invalid):not(:invalid) {

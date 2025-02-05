@@ -155,7 +155,6 @@
 import Table from '@/components/Table/Table.vue'
 import Tabs from '@/components/Tabs/Tabs.vue'
 import Card from '@/components/Card/Card.vue'
-import YoutubeVideo from '@/foundations/YoutubeVideo/YoutubeVideo.vue'
 import DSHeader from '../DSHeader.vue'
 import DialogUsage from '../DialogUsage.vue'
 import ModalVariants from '../ModalVariants.vue'
@@ -166,7 +165,6 @@ import nonModalImg from '../../img/dialogs/non-modal-demo.png'
 
 export default {
   components: {
-    YoutubeVideo,
     DSHeader,
     DialogUsage,
     ModalVariants,

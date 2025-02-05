@@ -1,14 +1,16 @@
 @use "sass:math";
 @use "../_func.scss" as *;
 
-@import "../../bootstrap/scss/_grid.scss";
-
 // #region container
 .container {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: var(--container-padding);
+
+  
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--container-padding);
+  
+    grid-column: container!important;
   width: 100%;
 
   &:not(.container-fluid) {
@@ -56,6 +58,14 @@
       width: 100%;
     }
   }
+}
+
+:host .container {
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: var(--container-padding);
+    width: 100%;
 }
 
 

@@ -1,9 +1,8 @@
 // @ts-nocheck
 import {addClasses,setupChart,setEventListener,setEventObservers,setLongestLabel,setLongestValue,createTooltips} from "../../modules/chart.module";
+import {trackComponent, trackComponentRegistered} from "../_global";
 
-
-// TODO: tooltip
-// TODO: responsive 'fit-content' classes done through JS
+trackComponentRegistered("iam-barchart");
 
 class iamBarChart extends HTMLElement {
 
@@ -17,6 +16,8 @@ class iamBarChart extends HTMLElement {
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
+    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+    
     ${loadCSS}
     </style>
     <div class="chart__outer" part="outer">
@@ -36,34 +37,24 @@ class iamBarChart extends HTMLElement {
 	connectedCallback() {
 
     const chartComponent = this;
-    
     const chartID = `chart-${Date.now()+(Math.floor(Math.random() * 100) + 1)}`;
-    
     const orginalTable =  this.querySelector('table');
     const clonedTable = orginalTable.cloneNode(true);
-
-
     const chart = this.shadowRoot.querySelector('.chart');
     const chartOuter = this.shadowRoot.querySelector('.chart__outer');
-    
-
-    chart.appendChild(clonedTable);
-
-    addClasses(chartComponent, chartOuter);
-
-
     const barCount = chart.querySelectorAll('td:not(:first-child)').length;
 
-    if(barCount < 10){
+    chart.appendChild(clonedTable);
+    addClasses(chartComponent, chartOuter);
+
+    if(barCount <= 10){
 
       chartComponent.classList.add('chart--fit-content');
-      //chartComponent.classList.add('chart--display-data');
     }
 
-    if(barCount < 5){
+    if(barCount <= 5){
 
       chartComponent.classList.add('chart--no-scale');
-      //chartComponent.classList.add('chart--display-data');
     }
 
     setupChart(chartComponent,chartOuter,clonedTable);
@@ -71,8 +62,9 @@ class iamBarChart extends HTMLElement {
     setEventListener(chartComponent,chartOuter);
     setLongestLabel(chartOuter);
     setLongestValue(chartOuter);
-
     createTooltips(chartOuter);
+
+    trackComponent(chartComponent,"iam-barchart",['view-change']);
   }
 
   attributeChangedCallback(attrName, oldVal, newVal) {

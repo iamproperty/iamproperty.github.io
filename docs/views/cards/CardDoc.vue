@@ -1,4 +1,21 @@
+<script setup>
+import Card from '@/components/Card/Card.vue'
+
+import Integration from '../Integration.vue'
+import Versions from '../Versions.vue'
+import TrackEvents from '../TrackEvents.vue'
+
+import DSHeader from '../DSHeader.vue'
+import headerImg from '../../img/cards-header.png'
+import cardImg from '../../img/cardImg.png'
+import cardModes from '../../img/cardModes.png'
+
+
+</script>
 <template>
+  
+  <TrackEvents selector="iam-card" :events="['select-card','unselect-card','secondary-button-clicked','action-button-clicked']"></TrackEvents>
+
   <main>
 
     <DSHeader :image="headerImg" section="components">
@@ -19,7 +36,7 @@
     <p>The header card is primarily used in or near the header of the page and is used to direct the user to another page or modal.</p>
     
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -49,7 +66,7 @@
 
     <div class="container visualtest">
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">With Icon</span>
           <a href="/client-onbaording">
@@ -84,7 +101,7 @@
     <p>This is a variation of the Header card which includes the addition of an SVG illustration. </p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -112,7 +129,7 @@
     <p>This is a variation of the Header card which includes the addition body copy description.</p>
   
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -147,33 +164,33 @@
     <p>This is a variation of the Header card which includes the addition of a counter and a secondary action.</p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4 pe-none">
         
-        <div class="col">
+        <div class="col pe-none">
           <span class="pb-3 d-block text-uppercase">Default State</span>
-          <a href="/">
-            <Card class="card--secondary" data-total="99" data-add-link="/?add=true">Properties</Card>
-          </a>
+          
+            <Card class="card--secondary" data-total="99" >Properties <a href="/test" slot="primary-action">Properties page</a> <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
+          
         </div>
 
-        <div class="col4 pe-none">
+        <div class="col  pe-none">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
           <button>
-            <Card class="card--secondary hover" data-total="99" data-add-link="/?add=true">Properties</Card>
+            <Card class="card--secondary hover" data-total="99" >Properties <a href="/test" slot="primary-action">Properties page</a> <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
         
-        <div class="col4 pe-none">
+        <div class="col  pe-none">
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <button>
-            <Card class="card--secondary active" data-total="99" data-add-link="/?add=true">Properties</Card>
+            <Card class="card--secondary active" data-total="99" >Properties<a href="/test" slot="primary-action">Properties page</a> <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
 
-        <div class="col4 pe-no/ne">
+        <div class="col pe-none">
           <span class="pb-3 d-block text-uppercase">Secondary action hover/focus</span>
           <button>
-            <Card class="card--secondary secondary-hover" data-total="99" data-add-link="/?add=true">Properties</Card>
+            <Card class="card--secondary" data-total="99" >Properties<a href="/test" slot="primary-action">Properties page</a> <button class="hover btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
 
@@ -187,31 +204,31 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 mb-4 pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/">
-            <Card class="card--secondary" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
+            <Card class="card--secondary">Properties <i class="fa fa-key" slot="total-icon"></i><a href="/test" slot="primary-action">Properties page</a> <button class=" btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </a>
         </div>
-        <div class="col4 pe-none">
+        <div class="col  pe-none">
           <span class="pb-3 d-block text-uppercase">Hover/focus State </span>
           <button>
-            <Card class="card--secondary hover" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
+            <Card class="card--secondary hover">Properties <i class="fa fa-key" slot="total-icon"></i><a href="/test" slot="primary-action">Properties page</a> <button class=" btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
-        <div class="col4 pe-none">
+        <div class="col  pe-none">
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <button>
-            <Card class="card--secondary active" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
+            <Card class="card--secondary active">Properties <i class="fa fa-key" slot="total-icon"></i><a href="/test" slot="primary-action">Properties page</a> <button class=" btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </button>
         </div>
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Secondary action hover/focus</span>
           <a href="/">
-            <Card class="card--secondary secondary-hover" data-add-link="/?add=true">Properties <i class="fa fa-key"></i></Card>
+            <Card class="card--secondary secondary-hover">Properties <i class="fa fa-key" slot="total-icon"></i><a href="/test" slot="primary-action">Properties page</a> <button class="hover btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card>
           </a>
         </div>
 
@@ -225,7 +242,7 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -256,7 +273,7 @@
     <p>The feature card is a variation of the header card which includes the ability to added an image or SVG to the top of the card. This is a useful card for pointing users to features, articles or any larger item which would benefit From a greater visual prominance.</p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -287,7 +304,7 @@
     <p>This is a variation of the feature card which also features a label to show status or categorise the card.</p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4  pe-none">
         
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
@@ -326,7 +343,7 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -372,7 +389,7 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -418,7 +435,7 @@
 
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
@@ -490,8 +507,8 @@
 
     <h3>Multi-action card</h3>
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
-        <div class="col">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+        <div class="col video-col">
 
           <span class="pb-3 d-block text-uppercase">Default State</span>
           
@@ -500,13 +517,13 @@
               <span>Updated by: John smith</span>
               <span class="pt-1">Updated on: 03/01/2024</span>
               <a href="/test" slot="primary-action" title="Edit template">Edit</a>
-              <button slot="actions">Duplicate</button>
-              <a href="/cards/card" slot="actions">Duplicate</a>
-              <button slot="actions">Delete</button>
+              <button slot="btns">Duplicate</button>
+              <a href="/cards/card" slot="btns">Duplicate</a>
+              <button slot="btns" class="btn btn-action">Delete</button>
             </Card>
             
         </div>
-        <div class="col">
+        <div class="col video-col">
 
           <span class="pb-3 d-block text-uppercase">Hover State</span>
           
@@ -515,14 +532,14 @@
               <span>Updated by: John smith</span>
               <span class="pt-1">Updated on: 03/01/2024</span>
               <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
-              <button slot="actions">Duplicate</button>
-              <a href="/cards/card" slot="actions">Duplicate</a>
-              <button slot="actions">Delete</button>
+              <button slot="btns">Duplicate</button>
+              <a href="/cards/card" slot="btns">Duplicate</a>
+              <button slot="btns">Delete</button>
             </Card>
             
         </div>
 
-        <div class="col">
+        <div class="col video-col">
 
           <span class="pb-3 d-block text-uppercase">Ellipsis Hover State</span>
           
@@ -530,16 +547,16 @@
               Name of template Here
               <span>Updated by: John smith</span>
               <span class="pt-1">Updated on: 03/01/2024</span>
-              <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
-              <button slot="actions">Duplicate</button>
-              <a href="/cards/card" slot="actions">Duplicate</a>
-              <button slot="actions">Delete</button>
+              <a href="/test" slot="primary-action" title="Edit template">Edit</a>
+              <button slot="btns">Duplicate</button>
+              <a href="/cards/card" slot="btns">Duplicate</a>
+              <button slot="btns">Delete</button>
             </Card>
             
         </div>
 
 
-      <div class="col">
+      <div class="col video-col">
 
       <span class="pb-3 d-block text-uppercase">Ellipsis Menu Open</span>
 
@@ -547,10 +564,10 @@
           Name of template Here
           <span>Updated by: John smith</span>
           <span class="pt-1">Updated on: 03/01/2024</span>
-          <a href="/test" class="hover" slot="primary-action" title="Edit template">Edit</a>
-          <button slot="actions">Duplicate</button>
-          <a href="/cards/card" slot="actions">Duplicate</a>
-          <button slot="actions">Delete</button>
+          <a href="/test" slot="primary-action" title="Edit template">Edit</a>
+          <button slot="btns">Duplicate</button>
+          <a href="/cards/card" slot="btns">Duplicate</a>
+          <button slot="btns">Delete</button>
         </Card>
         
       </div>
@@ -559,92 +576,297 @@
     </div>
 
 
-
-
     <div class="container">
       <h2>Mode examples</h2>
       <p>This is an example of how cards can be displayed across light mode, dark mode, and high contrast mode</p>
       <img :src="cardModes" alt="" class="mb-4" />
     </div>
 
+    <Integration component="card" componentName="iam-card" >
+      <template #web-component>
 
-    <div class="container">
-      
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h3>Web component</h3></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h3>Vue component</h3></summary>
-          <Readme></Readme>
-        </details>
+        <pre><code>{{`<a href="/url"></a><iam-card :data-image="cardImg"> 
+  Speed up sales success <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</span>
+</iam-card></a>`}}</code></pre>
+      </template>
+      <template #vue-component>
+
+        <pre><code>{{`<script setup>import Card from '@/components/Card/Card.vue</script>
         
-      </Tabs>
+<a href="/url"></a><Card :data-image="cardImg">
+  Speed up sales success <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</span>
+</Card></a>
+`}}</code></pre>
+      </template>
 
-    </div>
-    <div class="bg-light version-control">
-      <div class="container">
+      <template #attr>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Attributes</th>
+            <th>Default</th>
+            <th>Options/Type</th>
+            <th>Required</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>data-img</th>
+            <td>-</td>
+            <td>String (file location)</td>
+            <td>No</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+      
+      <template #slots>
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Default (body)</th>
+            <td>The default slot adds content to the body of the card.</td>
+          </tr>
+          <tr>
+            <th>head</th>
+            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
+          </tr>
+          <tr>
+            <th>badges</th>
+            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
+          </tr>
+          <tr>
+            <th>footer</th>
+            <td>The bottom of card.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+      <template #classes>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>.colour-{var}</th>
+            <td>To create the status card look a clour needs to be defined via a colour class.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+      <template #parts>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>head</th>
+            <td>Usually the top of the card but in the instance of the video card its located at the bottom.</td>
+          </tr>
+          <tr>
+            <th>image</th>
+            <td>The image located in the card head</td>
+          </tr>
+          <tr>
+            <th>body</th>
+            <td>The main content of the card</td>
+          </tr>
+          <tr>
+            <th>footer</th>
+            <td>The bottom of card.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+      <template #vars>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Var</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>--card-left-padding</th>
+            <td>Controls the padding of all the parts, the card head image ignores this.</td>
+          </tr>
+          <tr>
+            <th>--card-right-padding</th>
+            <td>Controls the padding of all the parts, the card head image ignores this.</td>
+          </tr>
+          <tr>
+            <th>--card-head-height</th>
+            <td>Controls the height of the head.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      </template>
+
+
+      <template #dispatched-events>
+
         <table>
           <thead>
             <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Notable updates</th>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
             </tr>
           </thead>
-          <tbody class="text-body">
+          <tbody>
             <tr>
-              <td>V1 added</td>
-              <td>28.03.2024</td>
-              <td>N/A</td>
+              <th>select-card</th>
+              <td>checkbox is checked</td>
+              <td>{"Card value":"on","input name":"card10"}</td>
+            </tr>
+            <tr>
+              <th>unselect-card</th>
+              <td>Checkbox is unchecked</td>
+              <td>{"Card value":"on","input name":"card10"}</td>
+            </tr>
+            <tr>
+              <th>secondary-button-clicked</th>
+              <td>The secondary button is clicked</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>action-button-clicked</th>
+              <td>One of the buttons in the dialog menu is clicked</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/navigational-cards.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+
+      </template>
+
+      <template #watched-attrs>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Attributes</th>
+            <th>Options/Type</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>data-img</th>
+            <td>String (file location)</td>
+            <td>The head image can be updated by adding a valid file location to this attribute.</td>
+          </tr>
+        </tbody>
+      </table>
+      </template>
+
+
+      <template #criteria>
+
+      <ul>
+        <li>When hovering over a secondary,action or checkbox the main hover state on the card should not be shown</li>
+        <li>All secodnary type buttons or inputs should be tabbable</li>
+      </ul>
+
+      </template>
+      <template #data-layer>
+
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>select-card</th>
+              <td>checkbox is checked</td>
+              <td>{"Card value":"on","input name":"card10"}</td>
+            </tr>
+            <tr>
+              <th>unselect-card</th>
+              <td>Checkbox is unchecked</td>
+              <td>{"Card value":"on","input name":"card10"}</td>
+            </tr>
+            <tr>
+              <th>secondary-button-clicked</th>
+              <td>The secondary button is clicked</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>action-button-clicked</th>
+              <td>One of the buttons in the dialog menu is clicked</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </template>
+
+    </Integration>
+    <Versions pdf="/pdfs/navigational-card.pdf">
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
+            <td>V1 added</td>
+            <td>28.03.2024</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </Versions>
   </main>
 </template>
 
-<script>
-import Card from '@/components/Card/Card.vue'
-import Readme from '@/components/Card/README.md'
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
-import WebReadme from '~/ts/components/card/README.md'
-import DSHeader from '../DSHeader.vue'
-import headerImg from '../../img/cards-header.png'
-import cardImg from '../../img/cardImg.png'
-import cardModes from '../../img/cardModes.png'
-import Table from '@/components/Table/Table.vue'
+<style>
 
-export default {
-  components: {
-    DSHeader,
-    Table,
-    Readme,
-    WebReadme,
-    Tabs,
-    Tab,
-    Card,
-    headerImg,
-    cardImg,
-    cardModes
-  },
-  data () {
-    return {
-      headerImg: headerImg,
-      cardImg: cardImg,
-      cardModes:cardModes,
-      htmlUsage: `<a href="/link-url" class="card">
-  <div class="card-body">
-    Link text
-    <span>Link description text..</span>
-  </div>
-</a>`
-    }
-  }
+.video-col {
+  position: relative;
+  margin-top: 3rem;
 }
-</script>
+.video-col > span {
+
+  position: absolute;
+  bottom: 100%;
+  left: 0.5rem;
+}
+
+</style>
