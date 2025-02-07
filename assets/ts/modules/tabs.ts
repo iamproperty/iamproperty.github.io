@@ -72,9 +72,9 @@ export const setTabsEventHandlers = function(tabsElement: Element){
 
   let nextButton = tabsElement.querySelector(':scope .tabs__next');
 
-  let scrollTimeout;
-  let isScrolled = false;
-  let isClicked = false;
+  var scrollTimeout;
+  window.isClicked = false;
+  window.isScrolling = false;
 
   if(tabsElement.shadowRoot){
     buttons = tabsElement.shadowRoot.querySelectorAll('.tabs__links > button');
@@ -82,45 +82,18 @@ export const setTabsEventHandlers = function(tabsElement: Element){
     nextButton = tabsElement.shadowRoot.querySelector(':scope .tabs__next');
   }
 
-  buttonWrapper.addEventListener('scroll', function(e){
-
-    if(isClicked){
-      isClicked = false;
-      return false;
-    }
-
-    clearTimeout(scrollTimeout);
-    let buttonToClick = buttons[0];
-
-    scrollTimeout = setTimeout(function(){
-      
-      let closestOffset = Math.abs(buttonToClick.getBoundingClientRect().left);
-
-      buttons.forEach((button) => {
-
-        if(Math.abs(button.getBoundingClientRect().left) < closestOffset){
-          closestOffset = Math.abs(button.getBoundingClientRect().left);
-          buttonToClick = button;
-        }
-      });
-
-      isScrolled = true;
-      buttonToClick.click();
-      buttonToClick.focus();
-      
-    }, 100);
-
-  }, false);
-
-
   // Set the on click for the tab buttons, these will open the details box it matches too
   buttons.forEach((button) => {
 
     button.addEventListener("click", (e) => {
       e.preventDefault();
 
-      isClicked = true;
+      if(window.isScrolling)
+        return;
 
+      if(!window.triggered)
+        window.isClicked = true;
+      
       if (button.classList.contains('disabled'))
         return false
 
@@ -129,16 +102,12 @@ export const setTabsEventHandlers = function(tabsElement: Element){
         buttonLoopItem.setAttribute('aria-pressed', buttonPressed);
       });
 
-      if(!isScrolled){
-          
-        buttonWrapper.scroll({
-          top: 0,
-          left: button.offsetLeft, 
-          behavior: 'smooth'
-        });
-      }
-      isScrolled = false;
-
+      buttonWrapper.scroll({
+        top: 0,
+        left: button.offsetLeft, 
+        behavior: 'smooth'
+      });
+      
       details.forEach((detail, detailsIndex) => {
         const detailsOpen = button.getAttribute('data-index') == detailsIndex ? true : false;
 
@@ -162,7 +131,50 @@ export const setTabsEventHandlers = function(tabsElement: Element){
         "tabTitle": button.textContent
       });
     });
+  });
 
+  buttonWrapper.addEventListener("scroll", (event) => {
+
+    if(window.isScrolling)
+      return;
+
+    clearTimeout(scrollTimeout);
+    window.isScrolling = true;
+  });
+
+
+  
+
+  buttonWrapper.addEventListener("scrollend", (event) => {
+
+    window.isScrolling = false;
+    clearTimeout(scrollTimeout);
+
+    scrollTimeout = setTimeout(function(){
+
+      if(window.isClicked){
+        window.isClicked = false;
+        return false;
+      }
+    
+      let buttonToClick = buttons[0];
+      let closestOffset = Math.abs(buttonToClick.getBoundingClientRect().left);
+
+      buttons.forEach((button) => {
+
+        if(Math.abs(button.getBoundingClientRect().left) < closestOffset){
+          closestOffset = Math.abs(button.getBoundingClientRect().left);
+          buttonToClick = button;
+        }
+      });
+
+      window.triggered = true;
+      buttonToClick.focus();
+      buttonToClick.click();
+      window.triggered = false;
+
+    }, 200);
+      
   });
   
   // Make sure we dont loose existing summary functionality

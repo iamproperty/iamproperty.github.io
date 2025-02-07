@@ -146,7 +146,7 @@
   z-index: 9;
 }
 
-.card__badges {
+.card__badges:not(.empty) {
   
   padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) 0 var(--card-left-padding);
   margin-bottom: -1.5rem;
