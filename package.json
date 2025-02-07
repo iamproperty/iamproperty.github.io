@@ -43,7 +43,7 @@
     "deploy:404": "node local_modules/create404.js",
     "lint": "eslint assets/ts/scripts.ts assets/ts/components.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts",
     "lint:fix": "eslint assets/ts/scripts.ts assets/ts/components.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts --fix",
-    "prettier": "prettier assets/ts assets/sass src docs --fix"
+    "prettier": "prettier assets/ts assets/sass src docs --write"
   },
   "dependencies": {
     "@eslint/js": "^9.17.0",
