@@ -593,7 +593,7 @@ import cardModes from '../../img/cardModes.png'
 
         <pre><code>{{`<script setup>import Card from '@/components/Card/Card.vue</script>
         
-<a href="/url"></a><Card :data-image="cardImg">
+<a href="/url"><Card :data-image="cardImg">
   Speed up sales success <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</span>
 </Card></a>
 `}}</code></pre>
