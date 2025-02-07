@@ -585,7 +585,7 @@ import cardModes from '../../img/cardModes.png'
     <Integration component="card" componentName="iam-card" >
       <template #web-component>
 
-        <pre><code>{{`<a href="/url"></a><iam-card :data-image="cardImg"> 
+        <pre><code>{{`<a href="/url"><iam-card :data-image="cardImg"> 
   Speed up sales success <span>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</span>
 </iam-card></a>`}}</code></pre>
       </template>

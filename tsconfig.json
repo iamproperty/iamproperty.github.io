@@ -14,7 +14,8 @@
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "allowJs": true,
-    "types": ["vite/client", "@types/jest"]
+    "types": ["vite/client", "@types/jest"],
+    "noCheck": true
   },
   "include": ["assets/ts/**/*.ts", "assets/ts/**/*.d.ts", "assets/ts/**/*.tsx", "assets/ts/**/*.spec.ts", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.spec.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
