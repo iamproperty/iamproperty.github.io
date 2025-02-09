@@ -54,7 +54,5 @@
         <li>Onboarding route</li>
       </ol>
     </div>
-    
-
   </main>
 </template>

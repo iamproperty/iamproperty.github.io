@@ -21,42 +21,43 @@
     <div class="container">
       <h2 class="h1">Full page examples</h2>
       <ul>
-        <li v-for="(value,index) in standalonepages" :key="index"><a :href="value.link" target="_blank">{{value.title}}</a></li>
+        <li v-for="(value, index) in standalonepages" :key="index">
+          <a :href="value.link" target="_blank">{{ value.title }}</a>
+        </li>
       </ul>
     </div>
   </main>
 </template>
 
 <script>
-import routes from '../../routes.ts';
+  import routes from '../../routes.ts';
 
-const standalonepages = routes.reduce(function (arr, route) {
-  // Find the correct group
-  if (route.path === "/standalone") {
-    arr = route.children;
+  const standalonepages = routes.reduce(function (arr, route) {
+    // Find the correct group
+    if (route.path === '/standalone') {
+      arr = route.children;
 
-    const children = route.children.reduce(function (acc, route) {
-      // Remove the index
-      if (route.path) {
-        route.link = '/standalone/'+route.path;
-        route.title = route.name;
-        route.content = '';
-        acc.push(route);
-      }
-      return acc
-    }, [])
+      const children = route.children.reduce(function (acc, route) {
+        // Remove the index
+        if (route.path) {
+          route.link = '/standalone/' + route.path;
+          route.title = route.name;
+          route.content = '';
+          acc.push(route);
+        }
+        return acc;
+      }, []);
 
-    arr = children
-  }
-  return arr
-}, {})
-
-
-export default {
-  data () {
-    return {
-      standalonepages: standalonepages
+      arr = children;
     }
-  }
-}
+    return arr;
+  }, {});
+
+  export default {
+    data() {
+      return {
+        standalonepages: standalonepages,
+      };
+    },
+  };
 </script>

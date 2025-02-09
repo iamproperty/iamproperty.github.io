@@ -1,12 +1,10 @@
-@use "sass:math";
-@use "../_func" as *;
+@use 'sass:math';
+@use '../_func' as *;
 
 nav:has(iam-nav) {
-
   grid-column: container;
 }
 iam-nav {
-
   display: block;
   padding: var(--container-padding);
   padding-top: 1.5rem;
@@ -14,7 +12,7 @@ iam-nav {
   max-width: 100%;
   margin-inline: auto;
   column-grid: container;
-  
+
   .brand {
     font-size: rem(48);
     height: rem(48);
@@ -24,24 +22,25 @@ iam-nav {
   }
 
   @include media-breakpoint-up(md) {
-    padding-inline: max(var(--padding-inline), calc((100% - var(--container-max-width)) / 2 + var(--padding-inline)))!important;
+    padding-inline: max(
+      var(--padding-inline),
+      calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
+    ) !important;
   }
 }
 
 @media (scripting: enabled) {
-
   iam-nav:not(:defined) {
-
-    > *:not([slot="logo"]) {
+    > *:not([slot='logo']) {
       display: none;
     }
-    
+
     &:not(:target) > *:not(.brand) {
       display: none;
     }
 
     @include media-breakpoint-up(md) {
-      &:has([slot="secondary"]){
+      &:has([slot='secondary']) {
         padding-top: rem(64);
       }
     }

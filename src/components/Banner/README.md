@@ -9,16 +9,14 @@
 
 ### Properties
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| title | String | - | Required |
-| image | String | - | Optional image url to display in the background |
-| background | String | light | The background colour can be overwritten if need be |
-
-
+| Option     | Type   | Default Value | Description                                         |
+| ---------- | ------ | ------------- | --------------------------------------------------- |
+| title      | String | -             | Required                                            |
+| image      | String | -             | Optional image url to display in the background     |
+| background | String | light         | The background colour can be overwritten if need be |
 
 ### Slots
 
-| Option | Default Value | Description |
-| ------ | ------------- | ----------- |
-| default | - | Will display underneath the heading |
+| Option  | Default Value | Description                         |
+| ------- | ------------- | ----------------------------------- |
+| default | -             | Will display underneath the heading |

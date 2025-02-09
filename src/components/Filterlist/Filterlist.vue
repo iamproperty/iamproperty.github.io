@@ -6,15 +6,13 @@
 </template>
 
 <script>
-// Load web components
-import iamFilterlist from '../../../assets/js/components/filterlist/filterlist.component.min.js'
+  // Load web components
+  import iamFilterlist from '../../../assets/js/components/filterlist/filterlist.component.min.js';
 
-// Register components
-if (!window.customElements.get('iam-filterlist'))
-  window.customElements.define('iam-filterlist', iamFilterlist);
+  // Register components
+  if (!window.customElements.get('iam-filterlist')) window.customElements.define('iam-filterlist', iamFilterlist);
 
-
-export default {
-  name: 'Filter list',
-}
+  export default {
+    name: 'Filter list',
+  };
 </script>

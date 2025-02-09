@@ -1,10 +1,8 @@
 <template>
   <main>
-    
     <DSHeader :image="headerImg" section="components">
       <h1>Form range fields</h1>
     </DSHeader>
-
 
     <div class="container">
       <p class="lead">Form range fields allow users to make selections from a range of values.</p>
@@ -14,37 +12,35 @@
     </div>
 
     <div class="container">
-
       <h2>Slider component</h2>
-      <p>The basic styles and behaviour of the range field can be upgraded by using the design system slider component. </p>
+      <p>
+        The basic styles and behaviour of the range field can be upgraded by using the design system slider component.
+      </p>
       <a href="/components/slider" class="btn btn-primary">Slider component</a>
     </div>
-    
   </main>
 </template>
 
-
 <script>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Input from '@/components/Input/Input.vue';
+  import Readme from '@/components/Input/README.md';
+  import Slider from '@/components/Slider/Slider.vue';
 
-import DSHeader from '../DSHeader.vue';
-import headerImg from '../../img/type-header.png';
-import Input from '@/components/Input/Input.vue'
-import Readme from '@/components/Input/README.md'
-import Slider from '@/components/Slider/Slider.vue'
-
-export default {
-  components: {
-    DSHeader,
-    Input,
-    Readme,
-    Slider
-  },
-  data () {
-    return {
-      headerImg: headerImg,
-      message:'input field value',
-      htmlUsage: `...`,
-    }
-  }
-}
+  export default {
+    components: {
+      DSHeader,
+      Input,
+      Readme,
+      Slider,
+    },
+    data() {
+      return {
+        headerImg: headerImg,
+        message: 'input field value',
+        htmlUsage: `...`,
+      };
+    },
+  };
 </script>

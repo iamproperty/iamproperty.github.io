@@ -1,18 +1,17 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
-:host{
-  padding-top: 0!important;
+:host {
+  padding-top: 0 !important;
   margin-bottom: rem(32);
-  background-color: transparent!important;
-  display: block!important;
+  background-color: transparent !important;
+  display: block !important;
 }
 
 .header-banner {
-  
   padding-top: rem(44);
 
   max-width: rem(1920);
-  
+
   min-height: rem(400);
   margin-inline: auto;
   display: block;
@@ -25,7 +24,6 @@
   height: auto;
 
   > picture {
-  
     display: block;
     position: absolute;
     top: 0;
@@ -38,30 +36,27 @@
     max-height: rem(400);
 
     &:after {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       z-index: -1;
       inset: 0;
-      background: linear-gradient(300deg, rgba(30,190,230,1) 0%, rgba(0,49,60,1) 100%);
+      background: linear-gradient(300deg, rgba(30, 190, 230, 1) 0%, rgba(0, 49, 60, 1) 100%);
       opacity: 0.85;
     }
 
     img {
-        display: block;
-        position: absolute;
-        z-index: -2;
-        inset: 0;
-        object-fit: cover;
-        object-position: 50% 50%;
-        width: 100%;
-        height: 100%;
+      display: block;
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      object-fit: cover;
+      object-position: 50% 50%;
+      width: 100%;
+      height: 100%;
     }
   }
-
-  
 }
-
 
 :host(.header--contain) {
   .header-banner {
@@ -72,27 +67,19 @@
   }
 }
 
-
-
-
-
-
-
-
-
 // Web component CSS
-::slotted(.breadcrumb){
-  margin-top: rem(24)!important;
-  margin-bottom: -0.5rem!important;
+::slotted(.breadcrumb) {
+  margin-top: rem(24) !important;
+  margin-bottom: -0.5rem !important;
 
   @include media-breakpoint-up(md) {
-    position: absolute!important;
-    top: 0!important;
-    left: 5.25rem!important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 5.25rem !important;
   }
 }
 
 ::slotted(*:last-child) {
-  padding-bottom: 0!important;
-  margin-bottom: 0!important;
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }

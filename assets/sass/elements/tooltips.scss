@@ -1,8 +1,6 @@
-@use "../_func.scss" as *;
+@use '../_func.scss' as *;
 
-
-@mixin tooltip(){
-
+@mixin tooltip() {
   display: block;
   z-index: var(--index-floating);
   position: absolute;
@@ -10,12 +8,12 @@
   left: auto;
   right: 0.85em;
   width: #{rem(270)};
-  transform: translate(50%,0);
+  transform: translate(50%, 0);
   background: var(--colour-primary);
   color: var(--colour-white);
   padding: rem(24);
   border-radius: 0.5rem;
-  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11); 
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
 
   > strong:first-child {
     display: block;
@@ -23,17 +21,15 @@
   }
 
   @include media-breakpoint-up(sm) {
-
-    width: #{rem(335)}; 
+    width: #{rem(335)};
   }
-  
-  @include media-breakpoint-up(md) {
 
-    width: #{rem(360)}; 
+  @include media-breakpoint-up(md) {
+    width: #{rem(360)};
   }
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 100%;
     left: 50%;
@@ -43,7 +39,6 @@
     border-color: transparent transparent var(--colour-primary) transparent;
     margin-bottom: -1px;
   }
-
 }
 
 abbr[title] {
@@ -54,49 +49,40 @@ abbr[title] {
   text-decoration: none;
   position: relative;
 
-  &:is(:hover, :focus, :active){
-
+  &:is(:hover, :focus, :active) {
     text-decoration: none;
   }
 
-  &:after{
-
-    font-family: "Font Awesome 6 Pro";
+  &:after {
+    font-family: 'Font Awesome 6 Pro';
     font-weight: 900;
-    content: "\f059";
+    content: '\f059';
     display: inline-block;
     margin-left: 0.2em;
     margin-right: 0.1em;
     margin-bottom: 0.1em;
     color: var(--colour-primary);
-
   }
 
   > span {
-
     opacity: 0;
     position: absolute;
-    
   }
 
-  &:is(:hover, .hover, :focus, :active){
-
+  &:is(:hover, .hover, :focus, :active) {
     > span {
-
       opacity: 1;
       @include tooltip();
     }
   }
 
-  &.tooltip--top span{
-      
+  &.tooltip--top span {
     top: auto;
     bottom: calc(100% + 0.5rem);
     left: auto;
     right: 0.85em;
 
     &:after {
-        
       top: 100%;
       bottom: auto;
       left: 50%;
@@ -105,15 +91,14 @@ abbr[title] {
     }
   }
 
-
-  &.shift--left span{
+  &.shift--left span {
     transform: translate(calc(0% + 1.5rem), 0);
 
     &:after {
       left: calc(100% - 1.5rem);
     }
   }
-  &.shift--right span{
+  &.shift--right span {
     transform: translate(calc(100% - 1rem), 0);
 
     &:after {
@@ -121,28 +106,24 @@ abbr[title] {
     }
   }
 
-  
   @include media-breakpoint-up(sm) {
-
-    &:is(.shift--left,.shift--right) span{
+    &:is(.shift--left, .shift--right) span {
       transform: translate(50%, 0);
-  
+
       &:after {
-        left: 50%
+        left: 50%;
       }
     }
 
-    &.tooltip--left span{
-      
+    &.tooltip--left span {
       top: 50%;
       bottom: auto;
       left: auto;
       right: 1.6em;
-  
-      transform: translate(0,-50%);
-  
+
+      transform: translate(0, -50%);
+
       &:after {
-          
         top: calc(50% - 0.5em);
         bottom: auto;
         left: calc(100% + 0.25em - 1px);
@@ -150,17 +131,15 @@ abbr[title] {
         margin-bottom: 0;
       }
     }
-    &.tooltip--right span{
-        
+    &.tooltip--right span {
       top: 50%;
       bottom: auto;
       left: calc(100% + 0.5rem);
       right: auto;
-  
-      transform: translate(0,-50%);
-  
+
+      transform: translate(0, -50%);
+
       &:after {
-          
         top: calc(50% - 0.5em);
         bottom: auto;
         left: auto;
@@ -169,6 +148,5 @@ abbr[title] {
         margin-bottom: 0;
       }
     }
-
   }
 }

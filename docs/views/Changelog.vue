@@ -16,8 +16,13 @@
 
       <h2>V5.1.0</h2>
       <ul>
-        <li>Tidy up and reduce the file size of the core CSS' with some CSS moved into seperate files loaded via the component associated.</li>
-        <li>Developers can now add links into the tabs component to create a secondary nav component looking like the tabs</li>
+        <li>
+          Tidy up and reduce the file size of the core CSS' with some CSS moved into seperate files loaded via the
+          component associated.
+        </li>
+        <li>
+          Developers can now add links into the tabs component to create a secondary nav component looking like the tabs
+        </li>
         <li>Remove the need to put content into a .container div</li>
       </ul>
 
@@ -53,7 +58,6 @@
         <li>Any where the table component is used requires that the pagination component JS is loaded</li>
       </ul>
 
-
       <h2>V4.0.0</h2>
       <ul>
         <li>Action bar component</li>
@@ -63,9 +67,10 @@
 
       <h3>Breaking changes</h3>
       <ul>
-        <li>To use the old navbar CSS or SCSS files you will need to update the filename to nav.old.scss or nav.old.css.</li>
+        <li>
+          To use the old navbar CSS or SCSS files you will need to update the filename to nav.old.scss or nav.old.css.
+        </li>
       </ul>
-
 
       <h2>V3.8.0</h2>
       <ul>
@@ -77,9 +82,11 @@
       <h2>V3.7.9</h2>
       <ul>
         <li>Multi-step modal component updated to display full width on mobile.</li>
-        <li>Update the ajax table functionality so we can take ajax responses and display the meta data values on the page.</li>
+        <li>
+          Update the ajax table functionality so we can take ajax responses and display the meta data values on the
+          page.
+        </li>
       </ul>
-
 
       <h2>V3.7.8</h2>
 
@@ -92,9 +99,11 @@
 
       <h3>Breaking changes</h3>
       <ul>
-        <li>Updating the form inputs could cause issues with other compoonents especiialy since not all of the input field varients have been reviewed yet.</li>
+        <li>
+          Updating the form inputs could cause issues with other compoonents especiialy since not all of the input field
+          varients have been reviewed yet.
+        </li>
       </ul>
-
 
       <h2>V3.7.7</h2>
       <ul>
@@ -137,7 +146,10 @@
 
       <h2>V3.7.2</h2>
       <ul>
-        <li>Updates to the ajax table functionality to include cancelling old fetches, allow for columns to write from an array returned in the json and better config for empty table messages.</li>
+        <li>
+          Updates to the ajax table functionality to include cancelling old fetches, allow for columns to write from an
+          array returned in the json and better config for empty table messages.
+        </li>
       </ul>
 
       <h2>V3.7.1</h2>
@@ -154,7 +166,9 @@
 
       <h3>Breaking changes</h3>
       <ul>
-        <li>The dialog javaScript is split out into a new fill and requires a new function to be called on the body.</li>
+        <li>
+          The dialog javaScript is split out into a new fill and requires a new function to be called on the body.
+        </li>
         <li>Old SVG icons have been removed</li>
       </ul>
 
@@ -172,7 +186,10 @@
 
       <h3>Breaking changes</h3>
       <ul>
-        <li>Updates to the colors should not break if they have been implented correctly. But if Sass variables have been used some of the names may have changed.</li>
+        <li>
+          Updates to the colors should not break if they have been implented correctly. But if Sass variables have been
+          used some of the names may have changed.
+        </li>
       </ul>
 
       <h2>V3.5</h2>
@@ -195,7 +212,10 @@
 
       <h2>V3.4.6</h2>
       <h3>Native web components introduced</h3>
-      <p>See https://iamproperty.atlassian.net/wiki/spaces/FEG/blog/2023/04/13/218759184/Exploring+Native+web+components for information</p>
+      <p>
+        See https://iamproperty.atlassian.net/wiki/spaces/FEG/blog/2023/04/13/218759184/Exploring+Native+web+components
+        for information
+      </p>
       <ul>
         <li>Transform Accordions, Tabs and header components into custom elements</li>
         <li>Vue wrappers for the 3 components</li>
@@ -236,7 +256,9 @@
 
       <h2>V2.8</h2>
       <ul>
-        <li><a href="https://blog.getbootstrap.com/2022/07/19/bootstrap-5-2-0/">Update to bootstrap 5.2</a></li>
+        <li>
+          <a href="https://blog.getbootstrap.com/2022/07/19/bootstrap-5-2-0/">Update to bootstrap 5.2</a>
+        </li>
         <li>Typescript support added</li>
       </ul>
 
@@ -293,8 +315,14 @@
       </ul>
       <h3>Breaking changes</h3>
       <ul>
-        <li>The way sass gets imported has changed to seperate out the forms files so that they dont have to be included into the email CSS.</li>
-        <li>Some new sass features are being used this might cause issues for bespoke builds using older sass versions in the build.</li>
+        <li>
+          The way sass gets imported has changed to seperate out the forms files so that they dont have to be included
+          into the email CSS.
+        </li>
+        <li>
+          Some new sass features are being used this might cause issues for bespoke builds using older sass versions in
+          the build.
+        </li>
       </ul>
 
       <h2>V2.6.3</h2>
@@ -311,7 +339,10 @@
       </ul>
       <h3>Breaking changes</h3>
       <ul>
-        <li>Change for font's are inculded in the SASS files, this will mean nay bespoke SASS builds will need updating to include '_fonts'.</li>
+        <li>
+          Change for font's are inculded in the SASS files, this will mean nay bespoke SASS builds will need updating to
+          include '_fonts'.
+        </li>
       </ul>
 
       <h2>V2.5.1</h2>
@@ -323,7 +354,10 @@
       <ul>
         <li>Update icons and add font awesome support</li>
         <li>Alert component</li>
-        <li>Add the ability to add a 'lazy' attribute to the Tab and accordion components, allowing for the content to then be lazy loaded.</li>
+        <li>
+          Add the ability to add a 'lazy' attribute to the Tab and accordion components, allowing for the content to
+          then be lazy loaded.
+        </li>
       </ul>
 
       <h2>V2.4.0</h2>
@@ -333,12 +367,18 @@
 
       <h2>V2.3.3</h2>
       <ul>
-        <li>Table component hotfix - Add the ability to add id's to table rows so that the vue component can connect to external JS.</li>
+        <li>
+          Table component hotfix - Add the ability to add id's to table rows so that the vue component can connect to
+          external JS.
+        </li>
       </ul>
 
-      <h2>V2.3.2 </h2>
+      <h2>V2.3.2</h2>
       <ul>
-        <li>Table component hotfix - Create a re-ordered event that gets dispatched when the user successfully re-orders a table.</li>
+        <li>
+          Table component hotfix - Create a re-ordered event that gets dispatched when the user successfully re-orders a
+          table.
+        </li>
       </ul>
 
       <h2>V2.3.1</h2>
@@ -360,7 +400,10 @@
 
       <h3>Breaking changes</h3>
       <ul>
-        <li>Update the type rules, the type scale has been increased on the headings which will possibly cause breaking layout changes.</li>
+        <li>
+          Update the type rules, the type scale has been increased on the headings which will possibly cause breaking
+          layout changes.
+        </li>
       </ul>
 
       <h2>V2.1.0</h2>
@@ -387,19 +430,22 @@
     </div>
     <div class="container">
       <h2>V1.0.14 (Not supported)</h2>
-      <p>This is the latest version of the previous component library, a lot will change from this version to the next one.</p>
+      <p>
+        This is the latest version of the previous component library, a lot will change from this version to the next
+        one.
+      </p>
     </div>
   </main>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
+  // @ is an alias to /src
+  // import HelloWorld from '@/components/HelloWorld.vue'
 
-export default {
-  name: 'Home',
-  components: {
-    // HelloWorld
-  }
-}
+  export default {
+    name: 'Home',
+    components: {
+      // HelloWorld
+    },
+  };
 </script>

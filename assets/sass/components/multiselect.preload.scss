@@ -1,12 +1,12 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
-iam-multiselect .tag[slot="checked"]{
+iam-multiselect .tag[slot='checked'] {
   margin-bottom: rem(8);
   order: var(--order, 1);
   margin-inline: rem(3);
 }
 
-iam-multiselect .tag:not([slot="checked"]){
+iam-multiselect .tag:not([slot='checked']) {
   display: block;
   width: 100%;
   max-width: 100%;
@@ -17,8 +17,8 @@ iam-multiselect .tag:not([slot="checked"]){
   outline: none;
   padding-block: 0.5rem;
 
-  &:not(:hover,:focus,:active,:focus-within){
-    background: none!important;
+  &:not(:hover, :focus, :active, :focus-within) {
+    background: none !important;
   }
 
   &::after {
@@ -26,19 +26,16 @@ iam-multiselect .tag:not([slot="checked"]){
   }
 }
 
-iam-multiselect:has(label:not([slot="checked"]):not([slot="notmatched"])) {
-
+iam-multiselect:has(label:not([slot='checked']):not([slot='notmatched'])) {
   --display-panel: block;
 }
 
-iam-multiselect:has(label[slot="checked"]) {
-
+iam-multiselect:has(label[slot='checked']) {
   --display-button: block;
 }
 
 @include dark-mode() {
-  iam-multiselect :is(.tag,.badge):not([slot="checked"]){
-
+  iam-multiselect :is(.tag, .badge):not([slot='checked']) {
     color: var(--colour-heading);
   }
 }

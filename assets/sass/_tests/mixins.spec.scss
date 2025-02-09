@@ -7,7 +7,7 @@
     // Assert the expected results
     @include assert {
       @include output {
-        @include prefix(transform,scale(2));
+        @include prefix(transform, scale(2));
       }
       @include expect {
         -webkit-transform: scale(2);
@@ -18,7 +18,7 @@
     }
     @include assert {
       @include output {
-        @include prefix(transform,scale(2),webkit);
+        @include prefix(transform, scale(2), webkit);
       }
       @include expect {
         -webkit-transform: scale(2);
@@ -35,7 +35,7 @@
     // Assert the expected results
     @include assert {
       @include output {
-        @include var(color,--colour-primary);
+        @include var(color, --colour-primary);
       }
       @include expect {
         color: var(--colour-primary);
@@ -51,7 +51,7 @@
     // Assert the expected results
     @include assert {
       @include output {
-        @include inline-text(){
+        @include inline-text() {
           color: purple;
           background: green;
         }
@@ -62,7 +62,7 @@
         ol,
         dd,
         .body,
-        table:not(.table--email) td{
+        table:not(.table--email) td {
           color: purple;
           background: green;
         }
@@ -78,7 +78,7 @@
     // Assert the expected results
     @include assert {
       @include output {
-        @include headers(){
+        @include headers() {
           color: purple;
           background: green;
         }
@@ -97,7 +97,7 @@
     }
     @include assert {
       @include output {
-        @include headers('true'){
+        @include headers('true') {
           color: purple;
           background: green;
         }
@@ -136,7 +136,7 @@
       @include output {
         $parent: '.bg-primary';
         $color: 'primary';
-        @include bg-variant($parent,$color);
+        @include bg-variant($parent, $color);
       }
       @include expect {
         .bg-primary {
@@ -158,7 +158,7 @@
       @include output {
         $parent: '.text-primary';
         $color: 'primary';
-        @include text-emphasis-variant($parent,$color);
+        @include text-emphasis-variant($parent, $color);
       }
       @include expect {
         .text-primary {
@@ -169,7 +169,6 @@
   }
 }
 /*#endregion */
-
 
 /*#region font-size*/
 @include describe('font-size [Mixin]') {
@@ -188,7 +187,3 @@
   }
 }
 /*#endregion */
-
-
-
-

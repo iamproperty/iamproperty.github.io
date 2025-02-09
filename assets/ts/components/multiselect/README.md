@@ -28,8 +28,8 @@ import('../node_modules/@iamproperty/components/assets/js/components/fileupload/
 
 **Properties**
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| data-min | Int | - | Set's the minimum amout of tags needed for the input field to validate |
-| data-min | Int | - | Set's the maximum amout of tags allowed to be added |
-| data-is-required | flag | - | Makes it so at least one tag must be added for the it to be valid and allow the outer form to be sumitted |
+| Option           | Type | Default Value | Description                                                                                               |
+| ---------------- | ---- | ------------- | --------------------------------------------------------------------------------------------------------- |
+| data-min         | Int  | -             | Set's the minimum amout of tags needed for the input field to validate                                    |
+| data-min         | Int  | -             | Set's the maximum amout of tags allowed to be added                                                       |
+| data-is-required | flag | -             | Makes it so at least one tag must be added for the it to be valid and allow the outer form to be sumitted |

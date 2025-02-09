@@ -1,5 +1,4 @@
-@use "../_func" as *;
-
+@use '../_func' as *;
 
 .icon--xs {
   font-size: rem(16);
@@ -21,6 +20,6 @@
   font-size: rem(40);
 }
 
-[class*="fa-"]:not(.fa-regular,.fa-light, .fa-solid, .btn) {
+[class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
   font-weight: 400;
 }

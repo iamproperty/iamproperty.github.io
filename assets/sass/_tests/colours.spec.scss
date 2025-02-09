@@ -2,22 +2,23 @@
 @import '../../sass/func';
 
 $test_colors: ();
-$test_colors: map-merge((
-  "primary":#00313c,
-  "secondary":#b4e6a5,
-  "success":#b4e6a5,
-  "info":#1ebee6,
-  "warning":#ffa500,
-  "danger":#dc3545,
-  "light":#EEEEEE,
-  "dark":#46003c
-), $test_colors);
-
+$test_colors: map-merge(
+  (
+    'primary': #00313c,
+    'secondary': #b4e6a5,
+    'success': #b4e6a5,
+    'info': #1ebee6,
+    'warning': #ffa500,
+    'danger': #dc3545,
+    'light': #eeeeee,
+    'dark': #46003c,
+  ),
+  $test_colors
+);
 
 @include describe('Colour variables are added to the global var array [Variable]') {
   @each $color, $value in $test_colors {
-
-    @include it($color+' colour variable is added to the global var array with the correct hex code') {
+    @include it($color + ' colour variable is added to the global var array with the correct hex code') {
       @include assert {
         @include output {
           color: map-get($vars, --colour-#{$color});

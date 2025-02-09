@@ -4,9 +4,9 @@
 
 **Properties**
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| data-maxsize | Int | - | Blocks files from being added that is larger than the max size given in kb's |
+| Option       | Type | Default Value | Description                                                                  |
+| ------------ | ---- | ------------- | ---------------------------------------------------------------------------- |
+| data-maxsize | Int  | -             | Blocks files from being added that is larger than the max size given in kb's |
 
 **Class modifiers**
 
