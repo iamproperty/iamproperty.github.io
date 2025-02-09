@@ -1,15 +1,13 @@
-@use "../_func.scss" as *;
-@use "card.module.scss" as *;
+@use '../_func.scss' as *;
+@use 'card.module.scss' as *;
 
 :host {
-
   --top-padding: #{rem(24)};
   --right-padding: 1rem;
   --bottom-padding: #{rem(24)};
   --left-padding: 1rem;
 
-  &:has(.card__total) .card__body{
-
+  &:has(.card__total) .card__body {
     align-items: center;
     display: flex;
   }
@@ -25,33 +23,30 @@
   }
 
   .icon {
-    font-size: rem(18)!important;
-    height: rem(18)!important;
-    margin: 0 0 0.5rem 0!important;
-    font-weight: 400!important;
-    display: block!important;
+    font-size: rem(18) !important;
+    height: rem(18) !important;
+    margin: 0 0 0.5rem 0 !important;
+    font-weight: 400 !important;
+    display: block !important;
   }
-    
+
   .card__total {
     margin-top: 0;
     order: -1;
   }
 }
 
-
-:host(:is(:hover,:focus,.hover)) {
-
+:host(:is(:hover, :focus, .hover)) {
   outline: none;
-    
-  :is(.card__body,.card__footer) {
-    background: #EEEEEE;
+
+  :is(.card__body, .card__footer) {
+    background: #eeeeee;
   }
 }
 
 :host-context(:is(:checked, .checked)),
 :host(:is(:active, .active)) {
-
-  outline: 2px solid var(--colour,var(--colour-primary));
+  outline: 2px solid var(--colour, var(--colour-primary));
   outline-offset: -2px;
 
   .card__body {
@@ -62,21 +57,19 @@
   }
 }
 
-
 ::slotted(i) {
   display: block !important;
-  font-size: rem(18)!important;
-  margin: 0 0 0.5rem 0!important;
+  font-size: rem(18) !important;
+  margin: 0 0 0.5rem 0 !important;
 }
 
-
-// #region card with a flag 
+// #region card with a flag
 :host(.card--flag) {
   position: relative;
-  
+
   &:after {
-    content: var(--card-flag-icon, "\f024");
-    font-family: "Font Awesome 6 Pro";
+    content: var(--card-flag-icon, '\f024');
+    font-family: 'Font Awesome 6 Pro';
     position: absolute;
     top: 1rem;
     right: 1rem;

@@ -19,9 +19,9 @@ import('../node_modules/@iamproperty/components/assets/js/components/fileupload/
 
 **Properties**
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| data-maxsize | Int | - | Blocks files from being added that is larger than the max size given in kb's |
+| Option       | Type | Default Value | Description                                                                  |
+| ------------ | ---- | ------------- | ---------------------------------------------------------------------------- |
+| data-maxsize | Int  | -             | Blocks files from being added that is larger than the max size given in kb's |
 
 **Class modifiers**
 

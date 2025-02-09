@@ -1,4 +1,4 @@
-@use "../_func.scss" as *;
+@use '../_func.scss' as *;
 
 // #region rset
 button {
@@ -12,7 +12,7 @@ button {
   line-height: inherit;
 }
 
-[role="button"] {
+[role='button'] {
   cursor: pointer;
 }
 button:focus:not(:focus-visible) {
@@ -35,24 +35,21 @@ button,
 
 // #region button primary
 .btn {
-
   --btn-margin: #{rem(16)};
   --btn-padding-block: #{rem(12)};
   --btn-padding-inline: #{rem(40)};
   --btn-border-width: 2px;
 
-  @include media-breakpoint-up(sm) { 
-
+  @include media-breakpoint-up(sm) {
     --btn-margin: #{rem(24)};
   }
 
-
-  &:not(.btn-secondary)[class*="colour-"]{
+  &:not(.btn-secondary)[class*='colour-'] {
     --colour-btn-bg: var(--colour);
     --colour-btn-border: var(--colour);
   }
 
-  &:is(.colour-primary,.colour-dark,.colour-danger,.colour-black) {
+  &:is(.colour-primary, .colour-dark, .colour-danger, .colour-black) {
     --colour-btn: #{$colour-inverted};
   }
 
@@ -70,22 +67,24 @@ button,
 
   font-size: rem(18);
   line-height: rem(24);
-  padding: calc(var(--btn-padding-block) - var(--btn-border-width)) calc(var(--btn-padding-inline) - var(--btn-border-width));
+  padding: calc(var(--btn-padding-block) - var(--btn-border-width))
+    calc(var(--btn-padding-inline) - var(--btn-border-width));
   border-radius: rem(24);
   margin-bottom: var(--btn-margin);
 
-  &:not(:last-child){
-
+  &:not(:last-child) {
     margin-right: var(--btn-margin);
   }
-  transition: background .5s, color .5s;
+  transition:
+    background 0.5s,
+    color 0.5s;
   height: auto;
   max-width: fit-content;
   appearance: none;
   white-space: nowrap;
 
-  a:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) &,
-  &:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) {
+  a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
     outline: 0;
     text-decoration: none;
 
@@ -96,9 +95,10 @@ button,
 
   a:is(:active, .active):not([disabled]) &,
   &:is(:active, .active):not([disabled]) {
-    
     filter: brightness(85%);
-    transition: background .1s, color .1s;
+    transition:
+      background 0.1s,
+      color 0.1s;
     color: var(--colour-btn);
     border-radius: rem(24);
   }
@@ -113,7 +113,6 @@ button,
 
 // #region secondary button
 .btn-secondary {
-
   background: var(--colour-btn-secondary-bg);
   border: 2px solid var(--colour-btn-secondary-border);
   color: var(--colour-btn-secondary);
@@ -128,36 +127,33 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
 // #region Action button
 .btn-action {
-
   --btn-border-width: 1px;
   --btn-padding-block: #{rem(6)};
   --btn-padding-inline: #{rem(6)};
 
   background-color: var(--colour-canvas-2);
   border: var(--btn-border-width) solid var(--colour-muted);
-  border-radius: rem(4)!important;
-  font-weight: 400!important;
+  border-radius: rem(4) !important;
+  font-weight: 400 !important;
   font-size: 1rem;
   line-height: rem(20);
-  
+
   color: var(--colour-heading);
 
-  &.btn[class*=fa-]:before {
+  &.btn[class*='fa-']:before {
     content: var(--fa);
     margin-right: rem(6);
   }
 
-  a:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) &,
-  &:is(:hover, :focus, .hover, :focus-within):not([disabled],:active, .active) {
+  a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
     background: var(--colour-btn-action-hover-bg);
   }
 
-  
   a:is(:active, .active):not([disabled]) &,
   &:is(:active, .active):not([disabled]) {
-    
     filter: brightness(85%);
-    transition: all .1s;
+    transition: all 0.1s;
     color: var(--colour-heading);
   }
 }
@@ -165,9 +161,9 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
 // #region button with icon
 .btn {
-  &[class*="fa-"]:before {
+  &[class*='fa-']:before {
     content: var(--fa);
-    font-family: "Font Awesome 6 Pro";
+    font-family: 'Font Awesome 6 Pro';
     line-height: 1em;
   }
 
@@ -175,7 +171,6 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     padding-right: 4rem;
   }
   &.btn[class*='fa-after']:before {
-
     margin-right: 0;
     margin-right: rem(6);
     position: absolute;
@@ -184,18 +179,17 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     transform: translate(0, -50%);
   }
 
-  &:not(.btn-compact):before{
+  &:not(.btn-compact):before {
     margin-right: 1rem;
   }
 
-  i[class*="fa-"]{
-    
-    font-family: "Font Awesome 6 Pro";
+  i[class*='fa-'] {
+    font-family: 'Font Awesome 6 Pro';
     margin-right: 1rem;
     line-height: 1em;
     font-style: inherit;
-    
-    &:not(:first-child){
+
+    &:not(:first-child) {
       margin-left: 1rem;
       margin-right: 0;
     }
@@ -203,10 +197,10 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 }
 // #endregion
 
-// #region button with prompt 
+// #region button with prompt
 .btn.btn--prompt {
   &:after {
-    content: "";
+    content: '';
     height: rem(24);
     width: rem(16);
     display: inline-block;
@@ -223,7 +217,6 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     margin-left: 1rem;
   }
 
-  
   a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
   &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
     &:after {
@@ -236,7 +229,6 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
 // #region button small and tag
 .btn.btn-sm {
-
   --btn-padding-block: #{rem(8)};
   --btn-padding-inline: #{rem(32)};
 }
@@ -244,13 +236,12 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
 // #region btn compact
 .btn-compact {
-
   --compact-size: #{rem(48)};
 
-  padding: 0!important;
+  padding: 0 !important;
   margin-bottom: rem(8);
-  
-  &:not(:last-child){
+
+  &:not(:last-child) {
     margin-right: rem(8);
   }
   text-align: center;
@@ -258,11 +249,11 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   width: calc(var(--compact-size));
   min-width: calc(var(--compact-size));
   max-width: calc(var(--compact-size));
-  height: calc(var(--compact-size))!important;
-  min-height: calc(var(--compact-size))!important;
-  max-height: calc(var(--compact-size))!important;
+  height: calc(var(--compact-size)) !important;
+  min-height: calc(var(--compact-size)) !important;
+  max-height: calc(var(--compact-size)) !important;
 
-  line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width))!important;
+  line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width)) !important;
 
   text-indent: -500px;
   overflow: hidden;
@@ -279,26 +270,22 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     text-indent: 0;
     line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width));
     font-weight: 900;
-    
   }
 
-  &[class*=fa-]:before {
-    
-    line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width))!important;
+  &[class*='fa-']:before {
+    line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width)) !important;
   }
 
   &.btn-sm {
-
     --compact-size: #{rem(40)};
 
-    font-size: 1rem; 
-    padding: 0!important;
+    font-size: 1rem;
+    padding: 0 !important;
   }
 
   &.btn-action {
-      
     --compact-size: #{rem(32)};
-    font-size: 1rem; 
+    font-size: 1rem;
 
     &:before {
       font-size: 1em;
@@ -307,21 +294,22 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   }
 
   &.btn-secondary {
-    
     --colour-btn-border: transparent;
     border-color: transparent;
 
-    &:not([class*="colour-"]){
-      --colour: var(--colour-light)
+    &:not([class*='colour-']) {
+      --colour: var(--colour-light);
     }
   }
 
-  &.btn-secondary:is(:hover, :focus, .hover, :active, .active, [aria-expanded], :focus-within):not([disabled]):not(.btn-collapse) {
+  &.btn-secondary:is(:hover, :focus, .hover, :active, .active, [aria-expanded], :focus-within):not([disabled]):not(
+      .btn-collapse
+    ) {
     background-color: var(--colour);
     color: var(--colour-primary-theme);
-    border-color: transparent!important;
+    border-color: transparent !important;
 
-    &:is(.colour-primary,.colour-dark,.colour-danger,.colour-black) {
+    &:is(.colour-primary, .colour-dark, .colour-danger, .colour-black) {
       color: var(--colour-inverted);
     }
   }
@@ -352,7 +340,6 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
 // #region btn with colour success
 .btn.colour-success {
-
   --colour-btn-bg-hover: var(--colour);
   --colour-btn-border-hover: var(--colour);
   --colour-btn-hover: var(--colour-primary-theme);
@@ -362,13 +349,12 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
   &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
-
     padding-left: rem(40);
     padding-right: rem(40);
-    
+
     &:before {
-      content: "\f00c";
-      font-family: "Font Awesome 6 Pro";
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Pro';
       margin-right: 1rem;
       font-style: inherit;
       width: 1rem;
@@ -377,8 +363,6 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
       vertical-align: bottom;
     }
   }
-
-
 }
 // #endregion
 
@@ -388,29 +372,29 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   position: relative;
   padding-right: rem(56);
 
-  &:not(.mw-100){
+  &:not(.mw-100) {
     max-width: rem(112 + 40 + 56);
   }
 
   select {
-    all: unset!important;
-    
-    padding: calc(rem(12) - 2px) calc(rem(40) - 2px)!important;
-    margin: calc(rem(-12)) calc(rem(-40))!important;
-    
-    padding-right: rem(56)!important;
-    margin-right: rem(-56)!important;
-    border-radius: rem(24)!important;
-    appearance: none!important;
-    background: none!important;
-    border: none!important;
-    color: currentColor!important;
+    all: unset !important;
+
+    padding: calc(rem(12) - 2px) calc(rem(40) - 2px) !important;
+    margin: calc(rem(-12)) calc(rem(-40)) !important;
+
+    padding-right: rem(56) !important;
+    margin-right: rem(-56) !important;
+    border-radius: rem(24) !important;
+    appearance: none !important;
+    background: none !important;
+    border: none !important;
+    color: currentColor !important;
     display: block;
-    max-width: 100%!important;
+    max-width: 100% !important;
     outline: none;
     font-weight: bold;
-    font-size: 1.125rem!important;
-    line-height: 1.5rem!important;
+    font-size: 1.125rem !important;
+    line-height: 1.5rem !important;
     option {
       padding: 0;
       text-align: left;
@@ -418,13 +402,12 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     }
   }
 
-
   &:after {
     position: absolute;
     top: rem(10);
     right: rem(32);
 
-    content: "";
+    content: '';
     height: rem(24);
     width: rem(16);
     display: inline-block;
@@ -443,23 +426,21 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     pointer-events: none;
   }
 
-  &.active:after{
+  &.active:after {
     transform: rotate(-90deg);
   }
 }
 
-.btn:has(select:focus):after{
+.btn:has(select:focus):after {
   transform: rotate(-90deg);
 }
 
 // #endregion
 
-
-
 // #region button that opens up a filter dialog
 .btn-filter {
   &:after {
-    content: "\f1de";
+    content: '\f1de';
     display: inline-block;
     margin-left: 1em;
     margin-bottom: -0.15em;
@@ -468,16 +449,14 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
     z-index: var(--index-focus);
     color: currentColor;
     font-weight: 300;
-    font-family: "Font Awesome 6 Pro";
+    font-family: 'Font Awesome 6 Pro';
   }
 }
 // #endregion
 
-
 // #region Tertiary Button
 
 .btn.btn-tertiary {
-
   background-color: transparent;
   border: none;
   color: var(--colour-link);
@@ -491,41 +470,36 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
 
   &:after {
     position: absolute;
-    content: "";
+    content: '';
     top: 100%;
     left: 50%;
     height: 2px;
     width: 100%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
     background: var(--colour-underline);
     transition: width 0.5s;
   }
 
-
   &.text-decoration-none:after {
-
     width: 0%;
   }
 
-  [class*=fa-] {
+  [class*='fa-'] {
     margin-left: 0;
     margin-right: 0.5rem;
   }
-  [class*=fa-]:not(:first-child) {
+  [class*='fa-']:not(:first-child) {
     margin-left: 0.5rem;
     margin-right: 0;
   }
 
   &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
-
     &:after {
-      width: 60%!important;
+      width: 60% !important;
     }
   }
   &:is(:active, .active):not([disabled]) {
-
     color: var(--colour-active);
   }
-
 }
 // #endregion

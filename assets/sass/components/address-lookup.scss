@@ -3,26 +3,24 @@
   display: block;
 }
 
-input[name="postcode"] {
-  border-color: var(--error-border,var(--colour-primary))!important;
+input[name='postcode'] {
+  border-color: var(--error-border, var(--colour-primary)) !important;
 }
 
-:is([name="postcode"]):is(:focus,.focus):not(:disabled) {
-  border-color: var(--colour-info)!important;
+:is([name='postcode']):is(:focus, .focus):not(:disabled) {
+  border-color: var(--colour-info) !important;
 }
 
-div:has(input[name="postcode"]) .suffix {
-
-  border-color: var(--error-border,var(--colour-primary))!important;
+div:has(input[name='postcode']) .suffix {
+  border-color: var(--error-border, var(--colour-primary)) !important;
 }
 
 .invalid-feedback {
-  display: var(--error-display,none)!important;
+  display: var(--error-display, none) !important;
 }
 
 .optional {
-  
-  display: var(--req-display,inline-block)!important;
+  display: var(--req-display, inline-block) !important;
 }
 
 .pre-filled p {

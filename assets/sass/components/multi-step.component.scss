@@ -1,36 +1,36 @@
-@use "../_func.scss" as *;
+@use '../_func.scss' as *;
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
-// #region Multi 
+// #region Multi
 
 :host {
-
   --dialog-padding: 1.5rem;
   box-sizing: border-box;
-  padding-top: calc(var(--dialog-padding) * 4); 
+  padding-top: calc(var(--dialog-padding) * 4);
   display: block;
   position: relative;
-  margin-right: 0!important;
+  margin-right: 0 !important;
   min-height: 100%;
   padding-left: var(--dialog-padding);
-  
+
   @include media-breakpoint-up(md) {
     padding-top: var(--dialog-padding);
-    padding-left: calc(var(--dialog-padding) + #{rem(282)})!important;
-    display: flex; 
+    padding-left: calc(var(--dialog-padding) + #{rem(282)}) !important;
+    display: flex;
     flex-direction: column;
   }
 }
-
 
 // #region steps
 .steps {
   width: 100%;
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   padding: var(--dialog-padding);
   counter-reset: section;
@@ -38,9 +38,8 @@
   justify-content: space-between;
   background-color: var(--colour-primary);
 
-  &:before {   
-
-    content: "";
+  &:before {
+    content: '';
     position: absolute;
     top: calc(50% - 1px);
     left: var(--dialog-padding);
@@ -49,11 +48,16 @@
     height: 2px;
     background: currentColor;
     z-index: 1;
-    background: linear-gradient(90deg, var(--colour-success) 0%, var(--colour-success) var(--progress, 0%), rgba(255,255,255,0.5) var(--progress, 0%), rgba(255,255,255,0.5) 100%);
+    background: linear-gradient(
+      90deg,
+      var(--colour-success) 0%,
+      var(--colour-success) var(--progress, 0%),
+      rgba(255, 255, 255, 0.5) var(--progress, 0%),
+      rgba(255, 255, 255, 0.5) 100%
+    );
   }
 
   button {
-
     position: relative;
     background: transparent;
     border: none;
@@ -86,7 +90,6 @@
     }
 
     &:not(.active):not(.valid) {
-      
       pointer-events: none;
 
       &:before {
@@ -103,9 +106,7 @@
   }
 
   @include dark-mode() {
-
     button {
-      
       color: rgba($color: #000000, $alpha: 0.5);
 
       &.active {
@@ -117,32 +118,25 @@
     }
   }
 
-  
   @include media-breakpoint-up(md) {
-    
-      width: rem(282);
-      height: 100%;
-      flex-direction: column;
-      justify-content: center;
+    width: rem(282);
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
 
-      &:before {
-        display: none;
-      }
+    &:before {
+      display: none;
+    }
 
-      button {
-        margin-block: 0.5rem;
-        width: 100%;
-        text-indent: 0;
-        text-align: left;
-        padding-left: 2rem;
-        font-size: rem(18);
-        outline-width: 1px;
-      }
-    
-
+    button {
+      margin-block: 0.5rem;
+      width: 100%;
+      text-indent: 0;
+      text-align: left;
+      padding-left: 2rem;
+      font-size: rem(18);
+      outline-width: 1px;
+    }
   }
 }
 // #endregion
-
-
-

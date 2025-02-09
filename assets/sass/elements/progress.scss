@@ -1,6 +1,6 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
-:is(label,.label):has(progress){
+:is(label, .label):has(progress) {
   position: relative;
   max-width: $input-max-width;
   margin-bottom: 2rem;
@@ -19,20 +19,20 @@ progress {
 }
 
 label[data-percent]:has(progress):before {
-  content: attr(data-percent)'%';
+  content: attr(data-percent) '%';
   vertical-align: 0;
   line-height: 1;
-  position:absolute;
+  position: absolute;
   top: auto;
-  left:auto;
-  right:0;
+  left: auto;
+  right: 0;
   bottom: rem(16);
   color: var(--colour-heading);
   font-weight: bold;
 }
 
 progress[data-progress]:before {
-  content: attr(data-progress)'%';
+  content: attr(data-progress) '%';
 }
 
 progress::-webkit-progress-bar {
@@ -45,27 +45,23 @@ progress::-webkit-progress-value {
 }
 
 // #region inline progress
-:is(label, .label):has(.progress--inline){ 
-
+:is(label, .label):has(.progress--inline) {
   font-size: 1rem;
   color: var(--colour-body);
-  
+
   &:before {
     bottom: -0.25em;
   }
 
   progress.progress--inline {
-
     width: 100%;
-
   }
 }
 
 // #endregion
 
 // #region Circular
-label:has(.progress--circular){
-
+label:has(.progress--circular) {
   --max-width: #{rem(200)};
   --pt: #{rem(90)};
   --pt-percent: 45%;
@@ -92,7 +88,7 @@ label:has(.progress--circular){
   line-height: 1;
 }
 
-label:has(.progress--circular.progress--md){
+label:has(.progress--circular.progress--md) {
   --max-width: #{rem(170)};
   --pt: #{rem(76.5)};
   --pt-percent: 45%;
@@ -100,7 +96,7 @@ label:has(.progress--circular.progress--md){
   --value-pb: #{rem(24)};
 }
 
-label:has(.progress--circular.progress--sm){
+label:has(.progress--circular.progress--sm) {
   --max-width: #{rem(120)};
   --pt: #{rem(54)};
   --pt-percent: 45%;
@@ -112,14 +108,12 @@ label:has(.progress--circular.progress--sm){
 }
 
 // Responsive-ish settings
-*:has(> label > .progress--circular){
-  
+*:has(> label > .progress--circular) {
   container-type: inline-size;
 }
 
 @container (width <= 10.625rem) {
-
-  label:has(.progress--circular:not(.progress--sm):not(.progress--md)){
+  label:has(.progress--circular:not(.progress--sm):not(.progress--md)) {
     --max-width: #{rem(170)};
     --pt: #{rem(76.5)};
     --pt-percent: 45%;
@@ -129,21 +123,17 @@ label:has(.progress--circular.progress--sm){
 }
 
 @container (width <= 7.5rem) {
+  label:has(.progress--circular:not(.progress--sm):not(.progress--md)) {
+    --max-width: #{rem(120)};
+    --pt: #{rem(54)};
+    --pt-percent: 45%;
+    --bar-width: #{rem(16)};
+    --value-fs: #{rem(24)};
 
-  label:has(.progress--circular:not(.progress--sm):not(.progress--md)){
-  --max-width: #{rem(120)};
-  --pt: #{rem(54)};
-  --pt-percent: 45%;
-  --bar-width: #{rem(16)};
-  --value-fs: #{rem(24)};
-
-  --value-pb: #{rem(16)};
-  --label-fs: #{rem(12)};
+    --value-pb: #{rem(16)};
+    --label-fs: #{rem(12)};
   }
 }
-
-
-
 
 label:has(.progress--circular) + label:has(.progress--circular) {
   margin-left: 2rem;
@@ -157,7 +147,6 @@ label:has(.progress--circular) + label:has(.progress--circular) {
 }
 
 .progress--circular {
-
   --progress-shown: var(--progress, 0%);
   position: absolute;
   z-index: -2;
@@ -165,7 +154,10 @@ label:has(.progress--circular) + label:has(.progress--circular) {
   left: 0;
   margin: 0;
   background: red;
-  background: conic-gradient(var(--colour, var(--colour-info)) var(--progress-shown), var(--colour-light) var(--progress-shown) calc(100% - var(--progress-shown)));
+  background: conic-gradient(
+    var(--colour, var(--colour-info)) var(--progress-shown),
+    var(--colour-light) var(--progress-shown) calc(100% - var(--progress-shown))
+  );
   height: 100%;
   width: 100%;
   border-radius: 50%;
@@ -178,19 +170,17 @@ label:has(.progress--circular) + label:has(.progress--circular) {
   opacity: 0;
 }
 
-
 .progress--circular::-moz-progress-bar {
   opacity: 0;
 }
 
 label[data-percent]:has(.progress--circular):before {
-
   top: var(--pt-percent);
-  left:50%;
-  right:auto;
+  left: 50%;
+  right: auto;
   bottom: auto;
   color: var(--colour-heading);
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   font-size: var(--value-fs);
   line-height: 1;
   z-index: 2;
@@ -198,7 +188,7 @@ label[data-percent]:has(.progress--circular):before {
 }
 
 label:has(.progress--circular):after {
-  content: "";
+  content: '';
   position: absolute;
   z-index: -1;
   top: 50%;

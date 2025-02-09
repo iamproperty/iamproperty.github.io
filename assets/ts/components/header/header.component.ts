@@ -3,18 +3,21 @@
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
-  "event": "customElementRegistered",
-  "element": "header"
+  event: 'customElementRegistered',
+  element: 'header',
 });
 
 class iamHeader extends HTMLElement {
-
-  constructor(){
+  constructor() {
     super();
-    this.attachShadow({ mode: 'open'});
+    this.attachShadow({ mode: 'open' });
 
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+    const coreCSS = document.body.hasAttribute('data-core-css')
+      ? document.body.getAttribute('data-core-css')
+      : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/header.css";`;
 
     const template = document.createElement('template');
@@ -36,18 +39,14 @@ class iamHeader extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-	connectedCallback() {
-    
+  connectedCallback() {
     this.classList.add('bg-primary');
 
     const picture = this.shadowRoot.querySelector('picture');
     const source = this.shadowRoot.querySelector('picture img');
 
-    if(this.hasAttribute('image'))
-      source.setAttribute('src', this.getAttribute('image'));
-    else
-      picture.remove();
-    
+    if (this.hasAttribute('image')) source.setAttribute('src', this.getAttribute('image'));
+    else picture.remove();
   }
 }
 

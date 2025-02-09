@@ -1,17 +1,19 @@
 <template>
   <main>
-
     <DSHeader :image="headerImg" section="components">
       <h1>Filter list</h1>
     </DSHeader>
 
     <div class="container">
-      <p class="lead">The filter list wraps around a normal list element and gives it the functionality to reduce the list by adding a search term to the created input field. The search works on the text content of the list items and not the inner html. This allows for any element you want to be added to the list item from labels to buttons.</p>
-      
+      <p class="lead">
+        The filter list wraps around a normal list element and gives it the functionality to reduce the list by adding a
+        search term to the created input field. The search works on the text content of the list items and not the inner
+        html. This allows for any element you want to be added to the list item from labels to buttons.
+      </p>
+
       <div class="row">
         <div class="col-sm-8 col-md-4">
           <Filterlist class="mh-sm">
-
             <ul class="list-unstyled">
               <li class="lead text-primary pb-1">Olivia Anderson</li>
               <li class="lead text-primary pb-1">Ethan Ramirez</li>
@@ -34,16 +36,14 @@
               <li class="lead text-primary pb-1">Aria Foster</li>
               <li class="lead text-primary pb-1">Daniel Morgan</li>
             </ul>
-
           </Filterlist>
         </div>
       </div>
     </div>
 
     <div class="container">
-      
       <h2>Implementation</h2>
-      <Tabs >
+      <Tabs>
         <details>
           <summary><h2>Web component</h2></summary>
           <WebReadme></WebReadme>
@@ -83,32 +83,30 @@
 </template>
 
 <script>
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
-import Readme from '@/components/Filterlist/README.md'
-import WebReadme from '~/ts/components/filterlist/README.md'
-import DSHeader from '../DSHeader.vue'
-import headerImg from '../../img/type-header.png'
-import Table from '@/components/Table/Table.vue'
-import Filterlist from '@/components/Filterlist/Filterlist.vue'
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Tab from '@/components/Tabs/Tab.vue';
+  import Readme from '@/components/Filterlist/README.md';
+  import WebReadme from '~/ts/components/filterlist/README.md';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Table from '@/components/Table/Table.vue';
+  import Filterlist from '@/components/Filterlist/Filterlist.vue';
 
-export default {
-  components: {
-    DSHeader,
-    Table,
-    Readme,
-    WebReadme,
-    Tabs,
-    Tab,
-    Filterlist
-  },
-  mounted(){
-    
-  },
-  data () {
-    return {
-      headerImg: headerImg,
-      htmlUsage: `<div class="iam-filter-list">
+  export default {
+    components: {
+      DSHeader,
+      Table,
+      Readme,
+      WebReadme,
+      Tabs,
+      Tab,
+      Filterlist,
+    },
+    mounted() {},
+    data() {
+      return {
+        headerImg: headerImg,
+        htmlUsage: `<div class="iam-filter-list">
   <div class="form-control__wrapper">
     <label for="search" class="visually-hidden">Search</label>
     <span class="suffix" role="presentation"><slot name="icon"></slot></span>
@@ -123,8 +121,8 @@ export default {
       <li>Ava Thompson</li>
     </ul>
   </div>
-</div>`
-    }
-  }
-}
+</div>`,
+      };
+    },
+  };
 </script>

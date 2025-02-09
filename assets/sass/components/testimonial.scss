@@ -1,7 +1,6 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 .testimonial {
-
   --testimonial-padding: 1rem;
   --testimonial-spacing: 1rem;
 
@@ -12,7 +11,6 @@
 
   // Circle
   > div:first-child {
-
     position: relative;
     overflow: hidden;
   }
@@ -35,11 +33,9 @@
     height: rem(230);
 
     @include media-breakpoint-up(sm) {
-
       height: rem(340);
     }
     @include media-breakpoint-up(md) {
-
       min-height: 100%;
       scroll-snap-type: y mandatory;
       flex-direction: column;
@@ -47,7 +43,6 @@
     }
 
     img {
-
       scroll-snap-align: start;
       user-select: none;
       pointer-events: none;
@@ -71,7 +66,7 @@
       bottom: auto;
       right: 0;
       top: 50%;
-      transform: rotate(90deg) translate(0,-120%);
+      transform: rotate(90deg) translate(0, -120%);
       transform-origin: center;
     }
   }
@@ -89,7 +84,6 @@
   }
 
   &__content {
-
     --display-none: none;
     margin: 0 var(--testimonial-padding) var(--testimonial-spacing) var(--testimonial-padding);
     position: relative;
@@ -106,8 +100,7 @@
 
   // Only show 1 blockquote at a time
   @for $i from 1 through 10 {
-
-    &[data-show="#{$i}"] blockquote:not(:nth-child(#{$i})) {
+    &[data-show='#{$i}'] blockquote:not(:nth-child(#{$i})) {
       display: var(--display-none);
       opacity: 0;
       user-select: none;
@@ -116,7 +109,6 @@
   }
 
   &__after {
-
     padding: 1rem var(--testimonial-padding) var(--testimonial-spacing) var(--testimonial-padding);
   }
 }
@@ -128,6 +120,6 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .testimonial__images {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

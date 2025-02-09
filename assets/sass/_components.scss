@@ -1,16 +1,16 @@
 @use 'sass:math';
-@use "_func" as *;
+@use '_func' as *;
 
 @use 'components/nav.preload';
 @use 'components/carousel.config';
 @use 'components/multiselect.preload';
 @use 'components/inline-edit.preload';
-@use "components/charts.config.scss";
+@use 'components/charts.config.scss';
 
- // Make sure the first 
- main {
+// Make sure the first
+main {
   position: relative;
-  
+
   > *:first-child {
     padding-top: 2rem;
   }
@@ -19,7 +19,6 @@
 // #region Undefined web components
 
 @include media-breakpoint-up(md) {
-
   iam-header:not(:defined) {
     min-height: rem(470);
   }
@@ -32,23 +31,27 @@
   padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
 }
 
-.row [class*="col"]:has(label:first-child:last-child .card:defined:first-child:last-child, button:first-child:last-child .card:defined:first-child:last-child, a:first-child:last-child .card:defined:first-child:last-child) {
+.row
+  [class*='col']:has(
+    label:first-child:last-child .card:defined:first-child:last-child,
+    button:first-child:last-child .card:defined:first-child:last-child,
+    a:first-child:last-child .card:defined:first-child:last-child
+  ) {
   display: flex;
 }
 
-iam-card:has([type=checkbox]:checked) {
+iam-card:has([type='checkbox']:checked) {
   --hover-outline-colour: var(--colour-info);
   --outline-colour: var(--colour-info);
 }
 
 label:has(.card) {
-
-  padding: 0!important;
-  margin-right: 0!important;
+  padding: 0 !important;
+  margin-right: 0 !important;
 
   &:before,
   &:after {
-    display: none!important;
+    display: none !important;
   }
 
   .optional-text {
@@ -57,9 +60,9 @@ label:has(.card) {
 
   &:has(:checked) {
     .card:defined {
-      outline: 2px solid var(--colour,var(--colour-primary));
+      outline: 2px solid var(--colour, var(--colour-primary));
       outline-offset: -2px;
-    
+
       ::part(body) {
         background: none;
       }
@@ -70,21 +73,16 @@ label:has(.card) {
   }
 }
 
-
-iam-filter-card:not(:has(i)){
-
+iam-filter-card:not(:has(i)) {
   border-left: 0.75rem solid var(--colour, var(--colour-primary));
 }
 
-.card .badge:not([class*="bg-"]):not([class*="wider-colour-"]){
-
+.card .badge:not([class*='bg-']):not([class*='wider-colour-']) {
   background-color: var(--colour-canvas);
   outline: 1px solid var(--colour-light);
 }
 
-
-a[target="_blank"] .card {
-
+a[target='_blank'] .card {
   --icon: var(--icon-new-tab);
 }
 
@@ -92,22 +90,19 @@ a[target="_blank"] .card {
 
 // Search
 iam-search input:not(.is-invalid):not(:invalid) {
-  background: none!important;
+  background: none !important;
 }
 iam-search .optional-text {
-  display: none!important;
+  display: none !important;
 }
 
 // Table dark mode support
 iam-table {
-
   tbody tr {
-    
-    @include dark-mode(){
-      
+    @include dark-mode() {
       --hover-background: var(--colour-canvas);
 
-      &:is(:hover,:focus-within,.hover) {
+      &:is(:hover, :focus-within, .hover) {
         background: var(--row-bg);
       }
     }
@@ -115,13 +110,9 @@ iam-table {
 }
 
 @container (width > 23.4375em) {
-
   iam-table.table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
-
     tr > *:not(:first-child):last-child {
-
       @media screen and (prefers-color-scheme: dark) {
-        
         background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
       }
     }
@@ -129,10 +120,8 @@ iam-table {
 }
 
 iam-table {
-
-  tr:has([type="checkbox"]:checked){
-
-    @include dark-mode(){
+  tr:has([type='checkbox']:checked) {
+    @include dark-mode() {
       --row-bg: #000000;
     }
   }
@@ -140,12 +129,11 @@ iam-table {
 
 iam-pagination {
   --pagination-link-color: var(--colour-light);
-  --pagination-link-color-active: #E0E0E0;
+  --pagination-link-color-active: #e0e0e0;
 }
 
 iam-fileupload::part(file) {
   @include dark-mode() {
-
     background: var(--colour-canvas-2);
     border-color: var(--colour-canvas-2);
     color: var(--colour-body);

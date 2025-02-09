@@ -1,8 +1,7 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 // #region Property searchbar
 .property-searchbar {
-
   fieldset {
     position: relative;
 
@@ -11,7 +10,7 @@
       padding-right: 1.5rem;
 
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         right: 0.5rem;
@@ -39,7 +38,6 @@
   }
 
   @include media-breakpoint-up(md) {
-
     .row .row {
       .form-label {
         display: none;
@@ -101,7 +99,6 @@
 
 // #region Heror searchbar
 .property-searchbar--hero .property-searchbar {
-
   @include reset-colours();
 
   padding: 1rem;
@@ -113,7 +110,6 @@
   position: relative;
 
   @include media-breakpoint-up(md) {
-
     border-radius: rem(48);
     padding: 1.5rem 2.5rem;
 

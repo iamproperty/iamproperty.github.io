@@ -8,17 +8,17 @@
 </template>
 
 <style lang="scss">
-@import "../../../assets/sass/components/timeline.scss";
+  @import '../../../assets/sass/components/timeline.scss';
 </style>
 
 <script>
-export default {
-  name: 'Timeline',
-  props: {
-    image: {
-      type: String,
-      required: false
-    }
-  }
-}
+  export default {
+    name: 'Timeline',
+    props: {
+      image: {
+        type: String,
+        required: false,
+      },
+    },
+  };
 </script>

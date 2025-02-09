@@ -1,5 +1,4 @@
-@use "../_func" as *;
-
+@use '../_func' as *;
 
 figure {
   margin: 0 0 1rem;
@@ -9,8 +8,6 @@ img,
 svg {
   vertical-align: middle;
 }
-
-
 
 img {
   max-width: 100%;

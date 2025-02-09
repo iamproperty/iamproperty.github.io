@@ -28,3 +28,4 @@ import('../node_modules/@iamproperty/components/assets/js/components/nav/nav.com
 | Option | Type | Default Value | Description |
 | ------ | ---- | ------------- | ----------- |
 | data-autosave  | Flag | - | Allows the input field to dispatch the autosave event when unfocusing the input field |
+```

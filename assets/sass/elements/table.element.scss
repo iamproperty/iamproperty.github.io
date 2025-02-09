@@ -1,4 +1,4 @@
-@use "../_func.scss" as *;
+@use '../_func.scss' as *;
 
 // #region reset
 table {
@@ -46,9 +46,9 @@ table {
   overflow: auto;
 }
 
-:is(td,th) {
+:is(td, th) {
   padding: rem(12) rem(32) rem(12) 0;
-  
+
   font-weight: normal;
   text-align: left;
   vertical-align: top;
@@ -60,14 +60,14 @@ table {
   &:last-child {
     padding-right: 0;
   }
-  
+
   p {
     font-size: inherit;
     padding: 0;
-      @container (width > 23.4375em) {
+    @container (width > 23.4375em) {
       display: -webkit-box;
       -webkit-line-clamp: 4;
-      -webkit-box-orient: vertical;  
+      -webkit-box-orient: vertical;
       overflow: hidden;
       min-width: rem(300);
     }
@@ -76,14 +76,13 @@ table {
 
 th {
   font-weight: bold;
-  @include var(color,--colour-heading);
+  @include var(color, --colour-heading);
 }
 
 thead {
   tr {
-    
     border-bottom: var(--border-width) solid currentColor;
-    @include var(border-color,--colour-primary);
+    @include var(border-color, --colour-primary);
   }
   th {
     padding-top: 0;
@@ -92,8 +91,7 @@ thead {
 }
 
 // Error messages
-tr td[colspan="100%"]:first-child:last-child span {
-
+tr td[colspan='100%']:first-child:last-child span {
   max-width: rem(624);
   font-weight: bold;
   padding: 3rem;
@@ -108,7 +106,6 @@ tr td[colspan="100%"]:first-child:last-child span {
 
 @container (width >= 60em) {
   thead {
-
     th:not(:empty) {
       white-space: nowrap;
       min-width: #{$td-mw};
@@ -123,14 +120,12 @@ tr td[colspan="100%"]:first-child:last-child span {
 }
 
 tbody tr {
-
   border-bottom: var(--border-width) solid currentColor;
-  @include var(border-color,--colour-border);
+  @include var(border-color, --colour-border);
 }
 
 .border-0 > table,
 table.border-0 {
-
   --border-width: 0px;
   --inner-border-width: 0px;
 }

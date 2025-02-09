@@ -1,30 +1,43 @@
 @use 'sass:math';
 @use 'sass:map';
-@use "../_func" as *;
+@use '../_func' as *;
 
 // #region Main grid setup
 body {
   --excess-space: calc((100% - var(--max-width, #{$max-width})) / 2);
-  --col-size: calc((100% - max(0%,var(--excess-space)) - max(0%,var(--excess-space)) - var(--gutter, #{$gutter}) - var(--gutter, #{$gutter}) - (var(--gap, #{$gap}) * (#{$columns - 1}))) / #{$columns});
+  --col-size: calc(
+    (
+        100% - max(0%, var(--excess-space)) - max(0%, var(--excess-space)) - var(--gutter, #{$gutter}) - var(
+            --gutter,
+            #{$gutter}
+          ) -
+          (var(--gap, #{$gap}) * (#{$columns - 1}))
+      ) /
+      #{$columns}
+  );
   column-gap: var(--gap, #{$gap});
   display: grid;
   margin-inline: 0;
   width: 100%;
   $templateColumns: '';
   @for $i from 1 to $columns {
-    $templateColumns: $templateColumns + 'var(--col-size) [col-'+$i+'-end col-'+($i+1)+'-start] '
+    $templateColumns: $templateColumns + 'var(--col-size) [col-' + $i + '-end col-'+ ($i + 1)+'-start] ';
   }
-  grid-template-columns: [full-width-start container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
-                          [content-start col-1-start]
-                          #{$templateColumns}
-                          var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap})) [container-end full-width-end];
+  grid-template-columns:
+    [full-width-start container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+    [content-start col-1-start]
+    #{$templateColumns}
+    var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+    [container-end full-width-end];
 
   @media screen and (min-width: #{em($max-width-px * $max-scale-up)}) {
-    grid-template-columns: [full-width-start] calc(var(--excess-space) - var(--gap, #{$gap}))
-                          [container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
-                          [content-start col-1-start]
-                          #{$templateColumns}
-                          var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap})) [container-end] calc(var(--excess-space) - var(--gap, #{$gap})) [full-width-end];
+    grid-template-columns:
+      [full-width-start] calc(var(--excess-space) - var(--gap, #{$gap}))
+      [container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+      [content-start col-1-start]
+      #{$templateColumns}
+      var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+      [container-end] calc(var(--excess-space) - var(--gap, #{$gap})) [full-width-end];
   }
 
   grid-template-rows: auto;
@@ -34,38 +47,36 @@ body {
   & * {
     grid-column: content;
 
-    &:where(button):not(:has(.card)){
-        
+    &:where(button):not(:has(.card)) {
       max-width: fit-content;
       place-self: start;
     }
 
-    &:is(div){
-        
+    &:is(div) {
       align-content: start;
     }
   }
 }
 
 div:has(main) {
-  display: contents!important;
+  display: contents !important;
 }
 
 :is(nav, main, footer) {
   display: grid;
-  grid-column: full-width!important;
+  grid-column: full-width !important;
   grid-template-columns: subgrid;
 }
 
-*:not(.row)>main:not(:has(.container:last-child)):not(:has(iam-collapsible-side:last-child)) {
+*:not(.row) > main:not(:has(.container:last-child)):not(:has(iam-collapsible-side:last-child)) {
   padding-bottom: 1rem;
 }
 
-main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsible-side, iam-notification) {
+main > :is(.full-width, [class*='bg-']:has(.container), iam-header, iam-collapsible-side, iam-notification) {
   grid-column: full-width;
 }
 
-[class*="bg-"]:not([class*=col-]):has(.container) {
+[class*='bg-']:not([class*='col-']):has(.container) {
   display: grid;
   grid-column: full-width;
   grid-template-columns: subgrid;
@@ -73,11 +84,11 @@ main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsi
 // #endregion
 
 // #region grid mixins
-@mixin grid-utilities($br: ""){
+@mixin grid-utilities($br: '') {
   .#{$br}inline-start {
     justify-self: start;
   }
-  
+
   .#{$br}block-start {
     align-self: start;
   }
@@ -85,7 +96,7 @@ main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsi
   .#{$br}inline-center {
     justify-self: center;
   }
-  
+
   .#{$br}block-center {
     align-self: center;
   }
@@ -93,7 +104,7 @@ main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsi
   .#{$br}inline-end {
     justify-self: end;
   }
-  
+
   .#{$br}block-end {
     align-self: end;
   }
@@ -101,34 +112,33 @@ main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsi
   .#{$br}display-contents {
     display: contents;
   }
-  
+
   .#{$br}display-none {
     display: none;
   }
-  
+
   .#{$br}display-block {
     display: block;
   }
-      
+
   .#{$br}display-grid {
     display: grid;
   }
-      
-  .#{$br}flow-dense { // Apply to a wrapper div of the items
+
+  .#{$br}flow-dense {
+    // Apply to a wrapper div of the items
     grid-auto-flow: dense;
   }
 
   @for $i from 0 to $grid-utility-count {
-
-    .#{$br}order-#{$i+1} {
-      order: #{$i+1};
+    .#{$br}order-#{$i + 1} {
+      order: #{$i + 1};
     }
   }
 }
 
-@mixin grid-columns($br: ""){
-
-  *:not(:where(main)):has(> [class*="#{$br}col-"]){
+@mixin grid-columns($br: '') {
+  *:not(:where(main)):has(> [class*='#{$br}col-']) {
     display: grid;
     grid-template-columns: subgrid;
   }
@@ -136,134 +146,122 @@ main > :is(.full-width, [class*="bg-"]:has(.container), iam-header, iam-collapsi
   .#{$br}col-start-auto {
     --col-start: auto;
   }
-  
+
   @for $i from 0 to $columns {
-
-    .#{$br}col-start-#{$i+1} {
-      --col-start: col-#{$i+1}-start!important;
+    .#{$br}col-start-#{$i + 1} {
+      --col-start: col-#{$i + 1}-start !important;
     }
 
-    .#{$br}col-end-#{$i+1} {
-      --col-end: col-#{$i+1}-end;
+    .#{$br}col-end-#{$i + 1} {
+      --col-end: col-#{$i + 1}-end;
     }
-        
-    .#{$br}col-span-#{$i+1} {
-      --col-end: span #{$i+1};
+
+    .#{$br}col-span-#{$i + 1} {
+      --col-end: span #{$i + 1};
     }
   }
 }
 
-@mixin grid-rows($br: ""){
-
+@mixin grid-rows($br: '') {
   // Assign how many rows an item takes
   @for $i from 0 to $grid-utility-count {
-    
-    .#{$br}row-span-#{$i+1} {
-      --row-span: #{$i+1};
+    .#{$br}row-span-#{$i + 1} {
+      --row-span: #{$i + 1};
     }
   }
 
   // Move the item to a set row
   @for $i from 0 to $rows-per-page {
-    
-    .#{$br}row-start-#{$i+1} {
-      --row-start: #{$i+1};
+    .#{$br}row-start-#{$i + 1} {
+      --row-start: #{$i + 1};
     }
   }
 }
 // #endregion
 
-@if $enable-new-grid == "true" {
-
-// #region Grid utility classes
-*:has([class*="order-"]) > *:not([class*="order-"]) {
-  order: 99;
-}
-
-
-@include grid-utilities();
-@each $br, $value in $breakpoints {
-  @include breakpoint($br){
-    @include grid-utilities(#{$br+'-'});
-  }
-}
-// #endregion
-
-// #region Create the columns
-:is([class*="col-start-"], [class*="col-end-"], [class*="col-span-"]) {
-  grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
-}
-
-*:not(:where(html, body)):has(:is([class*="cols-"], [class*="col-start-"], [class*="col-end-"], [class*="col-span-"])){
-
-  display: grid;
-  grid-template-columns: subgrid;    
-
-  [class*="col-"]:not([class*="col-start-auto"]) {
-  
-    --col-start: col-1;   
+@if $enable-new-grid == 'true' {
+  // #region Grid utility classes
+  *:has([class*='order-']) > *:not([class*='order-']) {
+    order: 99;
   }
 
-  [class*="col-"] [class*="col-"] {
-  
-    --col-start: auto;   
+  @include grid-utilities();
+  @each $br, $value in $breakpoints {
+    @include breakpoint($br) {
+      @include grid-utilities(#{$br + '-'});
+    }
   }
+  // #endregion
 
-  * {
+  // #region Create the columns
+  :is([class*='col-start-'], [class*='col-end-'], [class*='col-span-']) {
     grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
   }
-}
 
+  *:not(:where(html, body)):has(
+      :is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-'])
+    ) {
+    display: grid;
+    grid-template-columns: subgrid;
 
-@include grid-columns();
-@each $br, $value in $breakpoints {
-  @include breakpoint($br){
-    @include grid-columns(#{$br+'-'});
+    [class*='col-']:not([class*='col-start-auto']) {
+      --col-start: col-1;
+    }
+
+    [class*='col-'] [class*='col-'] {
+      --col-start: auto;
+    }
+
+    * {
+      grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
+    }
   }
-}
-// #endregion
 
-// #region Create rows
-:where([class*="row-"],[class*="rows-"]) {
-  grid-row: var(--row-start, auto) / span var(--row-span, 1);
-}
-
-
-@include grid-rows();
-@each $br, $value in $breakpoints {
-  @include breakpoint($br){
-    @include grid-rows(#{$br+'-'});
+  @include grid-columns();
+  @each $br, $value in $breakpoints {
+    @include breakpoint($br) {
+      @include grid-columns(#{$br + '-'});
+    }
   }
-}
-// #endregion
+  // #endregion
 
-// #region Create the Columns wrappers
-[class*="cols-"]:not(.row) {
-  display: grid;
-  grid-template-columns: subgrid;
-}
-
-@for $i from 1 to math.floor(math.div($columns,2)) + 1 {
-  
-  $count: math.div($columns,$i);
-
-  .cols-#{$i} > * {
-    grid-column: auto / span #{math.floor($count)};
+  // #region Create rows
+  :where([class*='row-'], [class*='rows-']) {
+    grid-row: var(--row-start, auto) / span var(--row-span, 1);
   }
-}
 
-@each $br, $value in $breakpoints {
-  @include breakpoint($br){
-    @for $i from 1 to math.floor(math.div($columns,2)) + 1 {
-  
-      $count: math.div($columns,$i);
+  @include grid-rows();
+  @each $br, $value in $breakpoints {
+    @include breakpoint($br) {
+      @include grid-rows(#{$br + '-'});
+    }
+  }
+  // #endregion
 
-      .#{$br}-cols-#{$i} > * {
-        grid-column: auto / span #{math.floor($count)};
+  // #region Create the Columns wrappers
+  [class*='cols-']:not(.row) {
+    display: grid;
+    grid-template-columns: subgrid;
+  }
+
+  @for $i from 1 to math.floor(math.div($columns, 2)) + 1 {
+    $count: math.div($columns, $i);
+
+    .cols-#{$i} > * {
+      grid-column: auto / span #{math.floor($count)};
+    }
+  }
+
+  @each $br, $value in $breakpoints {
+    @include breakpoint($br) {
+      @for $i from 1 to math.floor(math.div($columns, 2)) + 1 {
+        $count: math.div($columns, $i);
+
+        .#{$br}-cols-#{$i} > * {
+          grid-column: auto / span #{math.floor($count)};
+        }
       }
     }
   }
-}
-// #endregion
-
+  // #endregion
 }

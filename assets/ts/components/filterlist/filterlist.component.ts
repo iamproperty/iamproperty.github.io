@@ -1,22 +1,25 @@
 // @ts-nocheck
-import filterlist from "../../modules/filterlist";
+import filterlist from '../../modules/filterlist';
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
-  "event": "customElementRegistered",
-  "element": "filterlist"
+  event: 'customElementRegistered',
+  element: 'filterlist',
 });
 
 class iamFilterlist extends HTMLElement {
-
-  constructor(){
+  constructor() {
     super();
-    this.attachShadow({ mode: 'open'});
+    this.attachShadow({ mode: 'open' });
 
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
-    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
-    
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+    const coreCSS = document.body.hasAttribute('data-core-css')
+      ? document.body.getAttribute('data-core-css')
+      : `${assetLocation}/css/core.min.css`;
+
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
@@ -49,15 +52,14 @@ class iamFilterlist extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-	connectedCallback() {
-
+  connectedCallback() {
     const classList = this.classList.toString();
-    this.shadowRoot.querySelector('.list__wrapper').setAttribute('class',`list__wrapper ${classList}`);
+    this.shadowRoot.querySelector('.list__wrapper').setAttribute('class', `list__wrapper ${classList}`);
 
-    if(!this.querySelector('i.fa-search'))
+    if (!this.querySelector('i.fa-search'))
       this.innerHTML += '<i class="fa fa-light fa-search" aria-hidden="true" slot="icon"></i>';
 
-    filterlist(this.querySelector('ul'),this.shadowRoot.querySelector('#search'));
+    filterlist(this.querySelector('ul'), this.shadowRoot.querySelector('#search'));
   }
 }
 

@@ -1,4 +1,4 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 .stepper {
   background: #f0f0f0;
@@ -9,7 +9,6 @@
   overflow: hidden;
 
   @include media-breakpoint-up(md) {
-      
     flex-wrap: nowrap;
     overflow-x: auto;
   }
@@ -23,7 +22,6 @@
     overflow: auto;
 
     @include media-breakpoint-up(sm) {
-
       display: flex;
       flex-grow: 1;
       padding-right: calc(2rem + 1px);
@@ -44,18 +42,18 @@
       padding: 1px;
 
       @include media-breakpoint-up(sm) {
-        &:first-child a{
+        &:first-child a {
           padding-left: 1rem;
           clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 50%, calc(100% - 2rem) 100%, 0 100%);
         }
       }
 
       @include media-breakpoint-up(md) {
-        &:first-child a{
+        &:first-child a {
           padding-left: 2rem;
         }
       }
-      
+
       a {
         display: block;
         padding: 1rem;
@@ -67,7 +65,6 @@
         color: var(--colour-primary);
 
         @include media-breakpoint-up(sm) {
-
           margin-right: -2rem;
           padding: 2rem 3rem 2rem 3rem;
           clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 50%, calc(100% - 2rem) 100%, 0 100%, 2rem 50%);
@@ -77,20 +74,20 @@
           justify-content: center;
           align-items: center;
         }
-        
+
         span {
           position: relative;
           display: inline;
           padding-left: 2.25rem;
 
           &:before {
-            counter-increment: section; 
+            counter-increment: section;
             content: counter(section);
             display: block;
             position: absolute;
             top: 50%;
             left: 0;
-            transform: translate(0,-50%);
+            transform: translate(0, -50%);
             margin-right: 0.5rem;
             font-size: 0.75em;
             border-radius: 50%;
@@ -105,21 +102,21 @@
 
         &.bg-warning span:before,
         &.bg-danger span:before {
-          content: "!";
+          content: '!';
         }
 
         &.bg-success span:before {
-          content: "\2713";
+          content: '\2713';
           text-indent: -0.1em;
         }
 
-        &[aria-current="step"] {
+        &[aria-current='step'] {
           background: var(--colour-primary);
           color: white;
           pointer-events: none;
         }
 
-        &:not([href]){
+        &:not([href]) {
           pointer-events: none;
         }
 
@@ -127,17 +124,13 @@
           opacity: 0.6;
         }
         &[href]:active {
-
           opacity: 0.8;
         }
-
       }
     }
   }
 
-
   > span {
-
     width: 100%;
     display: flex;
     padding: 1rem;
@@ -150,12 +143,11 @@
     &.stepper__end {
       display: none;
     }
-      
+
     @include media-breakpoint-up(md) {
-        
       width: max-content;
       padding: 2rem 2rem;
-      
+
       &.stepper__end {
         padding-left: 3.5rem;
         display: flex;
