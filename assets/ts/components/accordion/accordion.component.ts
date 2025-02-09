@@ -12,6 +12,11 @@ window.dataLayer.push({
 
 class iamAccordion extends HTMLElement {
   constructor() {
+
+
+
+
+    
     super();
     this.attachShadow({ mode: 'open' });
 
