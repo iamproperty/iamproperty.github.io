@@ -125,8 +125,16 @@ button {
   display: var(--display-panel, none);
 }
 
-.wrapper .dropdown:hover {
-  display: var(--display-panel, none);
+@media (hover: hover) {
+  .wrapper .dropdown:hover {
+    display: var(--display-panel, none);
+  }
+}
+
+@media (hover: none) {
+  :host-context(.hover) .wrapper .dropdown {
+    display: block;
+  }
 }
 
 // Inline edit

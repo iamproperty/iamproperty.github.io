@@ -142,6 +142,20 @@ class iamMultiselect extends HTMLElement {
       });
     });
 
+    // Add a delayed hover effect for non hover devices
+    let hoverTimeout;
+    multiselect.addEventListener('focus', (event) => {
+      multiselect.classList.add('hover');
+      clearTimeout(hoverTimeout);
+    });
+
+    search.addEventListener('blur', (event) => {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(function () {
+        multiselect.classList.remove('hover');
+      }, 1000);
+    });
+
     // Set items
     multiselect.addEventListener('change', (event) => {
       if (event && event.target instanceof HTMLElement && event.target.closest('input[type="checkbox"]')) {
