@@ -116,6 +116,10 @@
   }
 
   .notification__btns {
+    &.empty {
+      display: none;
+    }
+
     flex-grow: 0;
     flex-shrink: 0;
     --colour-underline: currentColor;
@@ -141,6 +145,10 @@
   }
 
   .notification__dismiss {
+    &:empty {
+      display: none;
+    }
+
     flex-grow: 0;
     padding-left: 1rem;
 

@@ -20,7 +20,11 @@ function setupNotification(element) {
   element.addEventListener(
     'click',
     function (e) {
-      if (event && event.target instanceof HTMLElement && event.target.closest('[data-dismiss-button]')) {
+      if (
+        event &&
+        event.target instanceof HTMLElement &&
+        (event.target.closest('[data-dismiss-button]') || event.target.matches('[data-dismiss-button]'))
+      ) {
         e.preventDefault();
         closeNotification(element);
       }
