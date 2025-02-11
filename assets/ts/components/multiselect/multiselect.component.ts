@@ -27,7 +27,7 @@ class iamMultiselect extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <label for="search"> <slot name="feedback"></slot></label>
+    <label for="search" class="mb-0"><span class="inner-label label"></span> <slot name="feedback"></slot>
     <div class="outer">
     <div class="wrapper">
       
@@ -40,6 +40,7 @@ class iamMultiselect extends HTMLElement {
       <button id="clear"><span class="visually-hidden">Clear</span></button>
     </div>
     </div>
+    </label>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
@@ -51,9 +52,9 @@ class iamMultiselect extends HTMLElement {
     const search = multiselect.shadowRoot.querySelector('#search');
     const button = multiselect.shadowRoot.querySelector('#clear');
     let order = 0;
-    const label = multiselect.shadowRoot.querySelector('label');
+    const innerLabel = multiselect.shadowRoot.querySelector('label .inner-label');
 
-    label.innerHTML = multiselect.getAttribute('data-label');
+    innerLabel.innerHTML = multiselect.getAttribute('data-label');
 
     if (multiselect.hasAttribute('placeholder')) {
       search.setAttribute('placeholder', multiselect.getAttribute('placeholder'));
