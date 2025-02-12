@@ -9,7 +9,7 @@
   }
 }
 
-@layer reset, elements, components, templates, utilities, overrides;
+@layer reset, elements, components, templates, overrides, utilities;
 
 $root: ':root' !default;
 $layers: 'true' !default;
@@ -37,27 +37,6 @@ $layers: 'true' !default;
 @include layer('templates') {
   @import 'templates/form.scss';
   @import 'templates/auth.scss';
-}
-
-@include layer('utilities') {
-  @import '_utilities.scss';
-
-  @import '_functions/utilities';
-
-  @each $key, $utility in $new_utilities {
-    
-    .#{$key} {
-      
-      @extend #{"%" + $key};
-    }
-  }
-  
-  @include clearfix();
-
-  
-  .clearfix { @include _clearfix(); }
-
-
 }
 
 @include layer('overrides') {

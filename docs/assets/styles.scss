@@ -8,6 +8,10 @@ $fontPath: '../../fonts/';
 
 @import '../../assets/sass/_fonts.scss';
 @import '../../assets/sass/_corefiles.scss';
+@import '../../assets/sass/utilities';
+
+
+@include clearfix();
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
   import { shared } from '../../main.ts';
   import Tabs from '@/components/Tabs/Tabs.vue';
 
@@ -99,18 +99,65 @@
       return obj;
     }, {});
 
+  const utMixins = Object.keys(shared.cssVars).reduce(function (arr, key) {
+    if (key.startsWith('-ut-mixin-')) {
+      let updateKey = key.replace('-ut-mixin-', '');
+      let value = shared.cssVars[key];
+      arr[updateKey] = value;
+    }
+    return arr;
+  }, {});
+
+
+  const getMixin = (name):string => {
+    switch(name) {
+      case 'clearfix':
+        // code block
+        return `
+@mixin clearfix() {
+  .clearfix {
+    &::after {
+      display: block;
+      clear: both;
+      content: "";
+    }
+  }
+}
+        `;
+      case 'visually-hidden':
+        // code block
+        return `
+@mixin visually-hidden() {
+  .visually-hidden,
+  .visually-hidden-focusable:not(:focus):not(:focus-within) {
+
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+}
+        `;
+      default:
+        return 'Content missing';
+    }
+  }
+
+
 </script>
 
 <template>
   <main>
-    
     <ul class="breadcrumb mb-0 d-sm-none">
       <li><a href="/foundations">Foundations</a></li>
     </ul>
     <h1>Utility classes (Beta)</h1>
 
-
-      
     <Tabs>
       <details>
         <summary><h2>Bootstrap</h2></summary>
@@ -118,9 +165,9 @@
         <p>
           Our Utility classes are based upon and use the
           <a href="https://getbootstrap.com/docs/5.1/utilities/api/" target="_blank">boostrap utility api</a>. But some
-          classes have been removed to help reduce the CSS file size or to restrict unwanted layout and style changes. For
-          example the responsive version of the padding and margins classes have been removed. This reduces around 10kb in
-          file size and removes the temptation to over configure elements.
+          classes have been removed to help reduce the CSS file size or to restrict unwanted layout and style changes.
+          For example the responsive version of the padding and margins classes have been removed. This reduces around
+          10kb in file size and removes the temptation to over configure elements.
         </p>
         <p class="h5 pb-4">Total classes: {{ totalClasses }}</p>
         <ul class="list-unstyled">
@@ -131,16 +178,26 @@
             <pre><code>{{ value.value }}</code></pre>
           </li>
         </ul>
-        
       </details>
 
+      <details>
+        <summary><h2>Mixins</h2></summary>
+
+        <ul class="list-unstyled">
+          <li v-for="(value, name) in utMixins" :key="name" class="pb-4">
+            <h2 class="h5 pb-1">
+              {{ name }}
+            </h2>
+            <p class="pb-3">{{ value }}</p>
+            <pre><code>@include {{ name }}();
+
+{{ getMixin(name).trim() }}</code></pre>
+          </li>
+        </ul>
+      </details>
 
       <details>
-        <summary><h2>New</h2></summary>
-
-
-
-        
+        <summary><h2>Tailwind</h2></summary>
       </details>
     </Tabs>
   </main>

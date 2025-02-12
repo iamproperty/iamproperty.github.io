@@ -11,6 +11,7 @@
 }
 
 @import '_corefiles';
+@import '_utilities';
 
 @include layer('elements') {
   .h1 {
