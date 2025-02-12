@@ -41,6 +41,23 @@ $layers: 'true' !default;
 
 @include layer('utilities') {
   @import '_utilities.scss';
+
+  @import '_functions/utilities';
+
+  @each $key, $utility in $new_utilities {
+    
+    .#{$key} {
+      
+      @extend #{"%" + $key};
+    }
+  }
+  
+  @include clearfix();
+
+  
+  .clearfix { @include _clearfix(); }
+
+
 }
 
 @include layer('overrides') {

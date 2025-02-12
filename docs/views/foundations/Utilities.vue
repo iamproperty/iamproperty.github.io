@@ -1,51 +1,6 @@
-<template>
-  <main>
-    <div class="container">
-      <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/foundations">Foundations</a></li>
-      </ul>
-      <h1>Utility classes (Beta)</h1>
-      <p>
-        Our Utility classes are based upon and use the
-        <a href="https://getbootstrap.com/docs/5.1/utilities/api/" target="_blank">boostrap utility api</a>. But some
-        classes have been removed to help reduce the CSS file size or to restrict unwanted layout and style changes. For
-        example the responsive version of the padding and margins classes have been removed. This reduces around 10kb in
-        file size and removes the temptation to over configure elements.
-      </p>
-      <p class="h5 pb-4">Total classes: {{ totalClasses }}</p>
-      <ul class="list-unstyled">
-        <li :class="'pb-4 ' + value.class" v-for="(value, name) in utClasses" :key="name">
-          <h2 :class="'h5 ' + value.class">
-            {{ name }} <span class="strong text-success" v-if="value.added">Added</span>
-          </h2>
-          <pre><code>{{ value.value }}</code></pre>
-        </li>
-      </ul>
-    </div>
-  </main>
-</template>
-
-<style lang="scss" scoped>
-  @media (min-width: 36em) {
-    .list-unstyled {
-      columns: auto 2;
-      column-gap: 1rem;
-
-      li {
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-    }
-  }
-  @media (min-width: 62em) {
-    .list-unstyled {
-      columns: auto 3;
-    }
-  }
-</style>
-
-<script>
+<script setup>
   import { shared } from '../../main.ts';
+  import Tabs from '@/components/Tabs/Tabs.vue';
 
   const replaceNewline = function (input) {
     var newline = String.fromCharCode(13, 10);
@@ -144,12 +99,68 @@
       return obj;
     }, {});
 
-  export default {
-    data() {
-      return {
-        utClasses: ordered,
-        totalClasses: totalClasses,
-      };
-    },
-  };
 </script>
+
+<template>
+  <main>
+    
+    <ul class="breadcrumb mb-0 d-sm-none">
+      <li><a href="/foundations">Foundations</a></li>
+    </ul>
+    <h1>Utility classes (Beta)</h1>
+
+
+      
+    <Tabs>
+      <details>
+        <summary><h2>Bootstrap</h2></summary>
+
+        <p>
+          Our Utility classes are based upon and use the
+          <a href="https://getbootstrap.com/docs/5.1/utilities/api/" target="_blank">boostrap utility api</a>. But some
+          classes have been removed to help reduce the CSS file size or to restrict unwanted layout and style changes. For
+          example the responsive version of the padding and margins classes have been removed. This reduces around 10kb in
+          file size and removes the temptation to over configure elements.
+        </p>
+        <p class="h5 pb-4">Total classes: {{ totalClasses }}</p>
+        <ul class="list-unstyled">
+          <li :class="'pb-4 ' + value.class" v-for="(value, name) in utClasses" :key="name">
+            <h2 :class="'h5 ' + value.class">
+              {{ name }} <span class="strong text-success" v-if="value.added">Added</span>
+            </h2>
+            <pre><code>{{ value.value }}</code></pre>
+          </li>
+        </ul>
+        
+      </details>
+
+
+      <details>
+        <summary><h2>New</h2></summary>
+
+
+
+        
+      </details>
+    </Tabs>
+  </main>
+</template>
+
+<style lang="scss" scoped>
+  @media (min-width: 36em) {
+    .list-unstyled {
+      columns: auto 2;
+      column-gap: 1rem;
+
+      li {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+    }
+  }
+  @media (min-width: 62em) {
+    .list-unstyled {
+      columns: auto 3;
+    }
+  }
+</style>
