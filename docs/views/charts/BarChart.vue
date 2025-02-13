@@ -342,7 +342,48 @@
       </div>
     </div>
 
-    <h3>Colour</h3>
+    <h3>Stacked bar with menu</h3>
+    <p>Give the user actions against each table cell i.e. view a property or see further evidence.</p>
+    <div class="container bg-light mb-5 visualtest">
+      <div class="row align-items-center">
+        <div class="col-sm-6 mx-auto">
+          <BarChart class="chart--horizontal chart--stacked chart--display-data">
+            <table>
+              <thead>
+                <tr>
+                  <th>Items</th>
+                  <th>Subcat 1</th>
+                  <th>Subcat 2</th>
+                  <th>Subcat 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Item 1</td>
+                  <td>100<a href="/">View properties</a><button>Archive</button></td>
+                  <td>150<a href="/">View properties</a><button>Archive</button></td>
+                  <td>150<a href="/">View properties</a><button>Archive</button></td>
+                </tr>
+                <tr>
+                  <td>Item 2</td>
+                  <td>50<a href="/">View properties</a><button>Archive</button></td>
+                  <td>50<a href="/">View properties</a><button>Archive</button></td>
+                  <td>200<a href="/">View properties</a><button>Archive</button></td>
+                </tr>
+                <tr>
+                  <td>Item 3</td>
+                  <td>100<a href="/">View properties</a><button>Archive</button></td>
+                  <td>50<a href="/">View properties</a><button>Archive</button></td>
+                  <td>200<a href="/">View properties</a><button>Archive</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </BarChart>
+        </div>
+      </div>
+    </div>
+
+    <h2>Colour</h2>
 
     <p>
       The only time colours are bound to a particular item is when including singular items which align to the values of
@@ -351,34 +392,35 @@
       Aside from this, please use the applied colours listed below.
     </p>
 
-    <table class="border-0 mb-1">
-      <thead>
-        <tr>
-          <th>Hex code</th>
-          <th>Ref*</th>
-          <th>Colour</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="mb-1">
-          <td>#D2F0C9 - Complete/positive</td>
-          <td>success</td>
-          <td class="bg-success" style="min-width: 5rem"></td>
-        </tr>
-        <tr class="mb-1">
-          <td>#FFD280 - In progress/warning</td>
-          <td>warning</td>
-          <td class="bg-warning" style="min-width: 5rem"></td>
-        </tr>
-        <tr>
-          <td>#F5C2C7 - Incomplete/negative</td>
-          <td>danger</td>
-          <td class="bg-danger" style="min-width: 5rem"></td>
-        </tr>
-      </tbody>
-    </table>
-    <p>* Use this reference for when adding to the data-colour-{i} attributes.</p>
-
+    <div>
+      <table class="border-0 mb-1">
+        <thead>
+          <tr>
+            <th>Hex code</th>
+            <th>Ref*</th>
+            <th>Colour</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="mb-1">
+            <td>#D2F0C9 - Complete/positive</td>
+            <td>success</td>
+            <td class="bg-success" style="min-width: 5rem"></td>
+          </tr>
+          <tr class="mb-1">
+            <td>#FFD280 - In progress/warning</td>
+            <td>warning</td>
+            <td class="bg-warning" style="min-width: 5rem"></td>
+          </tr>
+          <tr>
+            <td>#F5C2C7 - Incomplete/negative</td>
+            <td>danger</td>
+            <td class="bg-danger" style="min-width: 5rem"></td>
+          </tr>
+        </tbody>
+      </table>
+      <p>* Use this reference for when adding to the data-colour-{i} attributes.</p>
+    </div>
     <div class="row row-cols-2 row-cols-sm-4 d-none d-sm-flex">
       <div class="col pb-2">
         <span class="label">Chart colour</span>
