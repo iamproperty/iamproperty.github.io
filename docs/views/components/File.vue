@@ -1,4 +1,6 @@
 <script setup lang="ts">
+  import Integration from '../Integration.vue';
+
   function filesupload($event) {
     console.log($event);
   }
@@ -36,15 +38,15 @@
           }
         "
         ><input
-          @change="
-            ($event) => {
-              filesupload($event);
-            }
-          "
           type="file"
           name="files[]"
           accept=".pdf, .csv, .jpg, .png"
           multiple="multiple"
+          @change="
+          ($event) => {
+            filesupload($event);
+          }
+        "
       /></FileUpload>
     </div>
 
@@ -78,7 +80,7 @@
       <div>
         <label for="category">Category</label>
 
-        <select name="category" id="category">
+        <select id="category" name="category">
           <option value="1">One</option>
           <option value="2">Two</option>
         </select>
@@ -87,7 +89,7 @@
       <div>
         <label for="client">Client</label>
 
-        <select name="client" id="client">
+        <select id="client" name="client">
           <option value="1">One</option>
           <option value="2">Two</option>
         </select>
@@ -96,7 +98,7 @@
       <div>
         <label for="type">Type</label>
 
-        <select name="type" id="type">
+        <select id="type" name="type">
           <option value="1">One</option>
           <option value="2">Two</option>
         </select>
@@ -117,12 +119,9 @@
       /></FileUpload>
     </div>
 
-    <div class="container">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h2>HTML</h2></summary>
-          <pre><code class="html">{{`<div class="file-upload">
+    <Integration component="fileupload" componentName="iam-fileupload">
+      <template #web-component>
+        <pre><code>{{`<div class="file-upload">
   <span class="file-upload__title">Upload file</span>
   <p class="helper-text">Max file size is 500kb. Supported file types are .pdf, .csv, .jpg, .png</p>
   <button class="btn btn-primary"><i class="fa-regular fa-arrow-up-from-bracket me-2" aria-hidden="true" slot="btn"></i> Upload document</button>
@@ -131,18 +130,140 @@
   <input type="file" name="files[]" accept=".pdf, .csv, .jpg, .png">
   <div class="files"></div>
 </div>`}}</code></pre>
-        </details>
-        <details>
-          <summary><h2>Web component</h2></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
-        </details>
-      </Tabs>
-    </div>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import FileUpload from '@/components/Carousel/FileUpload.vue</script>
+        
+<FileUpload data-maxsize="500"><input type="file" name="files[]" multiple="multiple" accept=".pdf, .csv, .jpg, .png" /></FileUpload>
 
+`}}</code></pre>
+      </template>
+
+      <template #attr>
+        <table>
+          <thead>
+            <tr>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>data-maxsize</th>
+              <td>-</td>
+              <td>Integer</td>
+              <td>No</td>
+              <td>Blocks files from being added that is larger than the max size given in kb's.                .</td>
+            </tr>
+   
+          </tbody>
+        </table>
+      </template>
+
+      <template #parts>
+        <table>
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>title</th>
+              <td>The span which contains the label for the component e.g., Upload file</td>
+            </tr>
+            <tr>
+              <th>button</th>
+              <td>The button which prompts the system file explorer to open</td>
+            </tr>
+            <tr>
+              <th>files</th>
+              <td>The div which houses an item per file that has been selected.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #vars>
+        <table>
+          <thead>
+            <tr>
+              <th>Var</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>--carousel-spacing</th>
+              <td>
+                The outer inline spacing, used to correctly create the overflow effect on mobile and tablet. This is
+                updated when the carousel is contained insde an admin panel our dialog.
+              </td>
+            </tr>
+            <tr>
+              <th>--last-item-extra</th>
+              <td>
+                Can be used to make sure the last item is displayed correctly. Not set by default but used in situations
+                like when the carousel is contained inside and admin panel or dialog.
+              </td>
+            </tr>
+            <tr>
+              <th>--track-size, --track-colour, --thumb-colour, --thumb-size, --thumb-size-outline</th>
+              <td>These variables are used to control the size and colour of the slider element.</td>
+            </tr>
+            <tr>
+              <th>--carousel-image-aspect-ratio</th>
+              <td>
+                Update the image aspect ratio when the carousel is used to house images. By default it is 3/2 which is a
+                fairly common landscape aspect ratio.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #dispatched-events>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>elementchange</th>
+              <td>Fires whenever the file input changes, so if files are added, or changed.</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>empty</th>
+              <td>Fires when the file input changes, resulting in there being no files selected.</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #criteria>
+        <ul>
+          <li>The user should be able to open their file explorer by clicking the 'upload file' button.</li>
+          <li>The user should be able to select multiple files in the 'multiple' attribute is set.</li>
+          <li>The user should be able to see a list of all the files they have selected.</li>
+          <li>The user should be able to remove a file from the list by clicking the 'x' icon on the file.</li>
+          <li>If the data-maxsize attribute is set and the user tries to upload a file larger than the set size, they will be shown an error and the file will not be added to the list.</li>
+        </ul>
+      </template>
+      <template #data-layer>
+        <p>No component specific dataLayer events</p>
+      </template>
+    </Integration>
+   
     <div class="bg-light version-control">
       <div class="container">
         <table>
