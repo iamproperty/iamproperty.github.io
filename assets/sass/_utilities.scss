@@ -3,15 +3,6 @@
 
 @include layer('utilities') {
   // Helpers
-  //@import "../bootstrap/scss/helpers";
-  .clearfix {
-    
-    &::after {
-      display: block;
-      clear: both;
-      content: '';
-    }
-  }
 
   //@import "../bootstrap/scss/helpers/colored-links";
   .ratio {
@@ -72,11 +63,6 @@
         z-index: $zindex-sticky;
       }
     }
-  }
-
-  .visually-hidden,
-  .visually-hidden-focusable:not(:focus):not(:focus-within) {
-    @include visually-hidden();
   }
 
   //@import "../bootstrap/scss/helpers/stretched-link";

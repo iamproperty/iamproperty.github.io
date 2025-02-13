@@ -1,0 +1,7 @@
+@use 'sass:math';
+@use '_func' as *;
+
+@include layer('utilities') {
+  @include clearfix();
+  @include visually-hidden();
+}
