@@ -40,6 +40,7 @@ export const createTabsLinks = function (tabsElement: Element) {
       button.innerHTML = `${summary.innerText}`;
       button.classList.add('link');
       button.setAttribute('data-index', tabindex);
+      button.setAttribute('part', 'tab-link');
       element.setAttribute('tabindex', '-1');
 
       if (isDisabled) {

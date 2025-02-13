@@ -5,15 +5,15 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "7.1.0--beta4",
+  "version": "7.1.0--beta5",
   "scripts": {
     "temp": "rollup --environment COMPONENT:carousel --config rollup-component.config.js --sourcemap",
     "bootstrap": "copyfiles -u 2 node_modules/bootstrap/**/* assets/bootstrap",
     "reload": "vite --host",
     "dev": "npm run copy && node local_modules/delete-assets.js && vite --host",
-    "build": "npm run compile && vue-tsc --noEmit && vite build --mode lib",
+    "build": "node local_modules/delete-build-assets.js && npm run compile && vue-tsc --noEmit && vite build --mode lib",
     "prepack": "npm run build",
-    "build:docs": "npm run compile && npm run copy && vue-tsc --noEmit && vite build",
+    "build:docs": "node local_modules/delete-build-assets.js && npm run compile && npm run copy && vue-tsc --noEmit && vite build",
     "preview": "vite preview --host",
     "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
