@@ -512,6 +512,10 @@ $chart-height-lg: #{rem(200)} !default;
             font-size: 0.9rem;
           }
 
+          hr {
+            margin: 0;
+            opacity: 0;
+          }
           :is(a, button) {
             display: inline-block;
             clear: both;

@@ -247,7 +247,11 @@ export const setCellData = function (chartElement: any, table: any) {
 
       if (display != 'none') rowValue += value;
 
-      Array.from(td.querySelectorAll('a, button')).forEach((element: any) => {
+      Array.from(td.querySelectorAll('a, button')).forEach((element: any, index: number) => {
+        if (index == 0) {
+          element.insertAdjacentHTML('beforeBegin', '<hr/>');
+        }
+
         element.classList.add('btn');
         element.classList.add('btn-tertiary');
       });
