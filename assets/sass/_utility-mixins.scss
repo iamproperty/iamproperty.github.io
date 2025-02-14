@@ -4,4 +4,11 @@
 @include layer('utilities') {
   @include clearfix();
   @include visually-hidden();
+  @include text-truncate();
+  @include ratio();
+  @include fixed();
+  @include sticky();
+  @include max-height();
+  @include js-display();
+
 }

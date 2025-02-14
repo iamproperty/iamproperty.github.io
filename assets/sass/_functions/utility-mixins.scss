@@ -1,0 +1,282 @@
+$new_utilities: ();
+
+// #region Clearfix
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'clearfix': 'Clear the floats from both sides'
+  )
+);
+
+@mixin clearfix() {
+  .clearfix {
+    &::after {
+      display: block;
+      clear: both;
+      content: "";
+    }
+  }
+}
+// #endregion
+
+// #region visually-hidden
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'visually-hidden': 'Hide an element from the standard user but not from screen readers'
+  )
+);
+
+@mixin visually-hidden() {
+  .visually-hidden,
+  .visually-hidden-focusable:not(:focus):not(:focus-within) {
+
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important; // Fix for https://github.com/twbs/bootstrap/issues/25686
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+}
+// #endregion
+
+// #region text-truncate
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'text-truncate': 'Keep the text onto one line and add an ellipsis if needed'
+  )
+);
+
+@mixin text-truncate() {
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+// #endregion
+
+// #region ratio
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'ratio': 'Use pre-defined aspect ratios to generate the sizing or elements'
+  )
+);
+
+@mixin ratio() {
+  .ratio {
+    position: relative;
+    width: 100%;
+
+    &::before {
+      display: block;
+      padding-top: var(--#{$prefix}aspect-ratio);
+      content: '';
+    }
+
+    > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @each $key, $ratio in $aspect-ratios {
+    .ratio-#{$key} {
+      --#{$prefix}aspect-ratio: #{$ratio};
+    }
+  }
+}
+// #endregion
+
+// #region fixed
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'fixed': 'Fix elements to either the top or bottom'
+  )
+);
+
+@mixin fixed() {
+  .fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: $zindex-fixed;
+  }
+
+  .fixed-bottom {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-fixed;
+  }
+}
+// #endregion
+
+// #region sticky
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'sticky': 'Make elements stick to either the top or bottom'
+  )
+);
+
+@mixin sticky() {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+      .sticky#{$infix}-top {
+        position: sticky;
+        top: 0;
+        z-index: $zindex-sticky;
+      }
+
+      .sticky#{$infix}-bottom {
+        position: sticky;
+        bottom: 0;
+        z-index: $zindex-sticky;
+      }
+    }
+  }
+}
+// #endregion
+
+
+// #region max-height
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'max-height': 'Set a pre-defined max height on an element, note this will create a scrollable area if the content is larger than the max height.'
+  )
+);
+
+@mixin max-height() {
+  :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg) {
+    &:not(iam-table):not(.table__wrapper) {
+      padding-inline: var(--mh-padding-inline, 0);
+      margin-inline: calc(var(--mh-padding-inline, 0) * -1);
+    }
+  
+    &::before {
+      top: calc(100% - 1.5rem);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1.5rem;
+      position: sticky;
+      display: block;
+      background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
+      z-index: 2;
+      margin-bottom: -1.5rem;
+    }
+  }
+  
+  :is(.mh-sm, .mh-md, .mh-lg) {
+    overflow: auto;
+    overscroll-behavior: contain;
+  
+    &::before {
+      content: '';
+    }
+  }
+  
+  .mh-sm {
+    max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+  }
+  
+  .mh-md {
+    max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
+  }
+  
+  .mh-lg {
+    max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
+  }
+  
+  @include media-breakpoint-up(sm) {
+    :is(.mh-sm-sm, .mh-sm-md, .mh-sm-lg) {
+      overflow: auto;
+      overscroll-behavior: contain;
+  
+      &::before {
+        content: '';
+      }
+    }
+  
+    .mh-sm-sm {
+      max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+    }
+  
+    .mh-sm-md {
+      max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
+    }
+  
+    .mh-sm-lg {
+      max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
+    }
+  }
+  
+  @include media-breakpoint-up(md) {
+    :is(.mh-md-sm, .mh-md-md, .mh-md-lg) {
+      overflow: auto;
+      overscroll-behavior: contain;
+  
+      &::before {
+        content: '';
+      }
+    }
+  
+    .mh-md-sm {
+      max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+    }
+  
+    .mh-md-md {
+      max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
+    }
+  
+    .mh-md-lg {
+      max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
+    }
+  }
+  
+}
+// #endregion
+
+
+// #region js-display
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'js-display': 'Show and hide elements depending upon if javascript is running or not'
+  )
+);
+
+@mixin js-display() {
+  
+  @media (scripting: enabled) {
+
+    .js-show {
+      display: none !important;
+    }
+  }
+
+  @media (scripting: none) {
+    .js-hide {
+      display: none !important;
+    }
+  }
+}
+// #endregion
+
+

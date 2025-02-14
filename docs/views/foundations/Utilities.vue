@@ -143,8 +143,23 @@
   }
 }
         `;
+      case 'text-truncate':
+        // code block
+        return `
+@mixin text-truncate() {
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+        `;
       default:
-        return 'Content missing';
+        return `
+@mixin ${name}() {
+  ...
+}
+        `;
     }
   }
 
@@ -183,17 +198,15 @@
       <details>
         <summary><h2>Mixins</h2></summary>
 
-        <ul class="list-unstyled">
-          <li v-for="(value, name) in utMixins" :key="name" class="pb-4">
-            <h2 class="h5 pb-1">
-              {{ name }}
-            </h2>
-            <p class="pb-3">{{ value }}</p>
-            <pre><code>@include {{ name }}();
+        <template v-for="(value, name) in utMixins" :key="name" class="pb-4">
+          <h2 class="h5 pb-1">
+            {{ name }}
+          </h2>
+          <p class="pb-3">{{ value }}</p>
+          <pre class="mb-5"><code>@include {{ name }}();
 
 {{ getMixin(name).trim() }}</code></pre>
-          </li>
-        </ul>
+          </template>
       </details>
 
       <details>

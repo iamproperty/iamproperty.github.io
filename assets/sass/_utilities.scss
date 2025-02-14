@@ -2,84 +2,11 @@
 @use '_func' as *;
 
 @include layer('utilities') {
-  // Helpers
-
-  //@import "../bootstrap/scss/helpers/colored-links";
-  .ratio {
-    position: relative;
-    width: 100%;
-
-    &::before {
-      display: block;
-      padding-top: var(--#{$prefix}aspect-ratio);
-      content: '';
-    }
-
-    > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  @each $key, $ratio in $aspect-ratios {
-    .ratio-#{$key} {
-      --#{$prefix}aspect-ratio: #{$ratio};
-    }
-  }
-
-  .fixed-top {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: $zindex-fixed;
-  }
-
-  .fixed-bottom {
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: $zindex-fixed;
-  }
-
-  // Responsive sticky top and bottom
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-      .sticky#{$infix}-top {
-        position: sticky;
-        top: 0;
-        z-index: $zindex-sticky;
-      }
-
-      .sticky#{$infix}-bottom {
-        position: sticky;
-        bottom: 0;
-        z-index: $zindex-sticky;
-      }
-    }
-  }
-
-  //@import "../bootstrap/scss/helpers/stretched-link";
-
-  .text-truncate {
-    @include text-truncate();
-  }
-
-  //@import "../bootstrap/scss/helpers/vr";
 
   // Helpers
-  @import 'helpers/max-height.scss';
-  @import 'helpers/dynamic.scss';
   @import 'helpers/line-clamp.scss';
   @import 'helpers/wider-colours.scss';
 
-  // Utilities
 
   // Loop over each breakpoint
   @each $breakpoint in map-keys($grid-breakpoints) {
