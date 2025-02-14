@@ -213,6 +213,10 @@ export const openFirstTab = function (tabsElement: Element): boolean | void {
   const details = tabsElement.querySelectorAll(':scope > details');
   const buttons = tabsElement.shadowRoot.querySelectorAll('.tabs__links > button');
 
+
+  console.log(details);
+  console.log(buttons);
+
   if (
     location.hash &&
     tabsElement.shadowRoot.querySelector(`.tabs__links [data-id="${location.hash.replace('#', '')}"]`)
@@ -224,6 +228,9 @@ export const openFirstTab = function (tabsElement: Element): boolean | void {
   } else if (!tabsElement.querySelector(`details[open]`)) {
     details[0].setAttribute('open', true);
     buttons[0].setAttribute('aria-pressed', true);
+
+    console.log(details[0]);
+    console.log(buttons[0]);
   }
 };
 
