@@ -11,4 +11,6 @@
   @include max-height();
   @include js-display();
 
+  @include line-clamp();
+
 }

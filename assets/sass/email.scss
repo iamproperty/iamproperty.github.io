@@ -21,6 +21,8 @@ $container-padding-x: 32;
 $default-curve-width: 600;
 
 @import '_corefiles';
+@import '_grid';
+@import '_bs_grid';
 @import '_utilities';
 @import '_utility-mixins';
 
