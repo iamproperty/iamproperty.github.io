@@ -130,11 +130,12 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
     window.isScrolling = false;
     clearTimeout(scrollTimeout);
 
+    if (window.isClicked) {
+      window.isClicked = false;
+      return false;
+    }
+
     scrollTimeout = setTimeout(function () {
-      if (window.isClicked) {
-        window.isClicked = false;
-        return false;
-      }
 
       let buttonToClick = buttons[0];
       let closestOffset = Math.abs(buttonToClick.getBoundingClientRect().left);
@@ -213,10 +214,6 @@ export const openFirstTab = function (tabsElement: Element): boolean | void {
   const details = tabsElement.querySelectorAll(':scope > details');
   const buttons = tabsElement.shadowRoot.querySelectorAll('.tabs__links > button');
 
-
-  console.log(details);
-  console.log(buttons);
-
   if (
     location.hash &&
     tabsElement.shadowRoot.querySelector(`.tabs__links [data-id="${location.hash.replace('#', '')}"]`)
@@ -228,9 +225,6 @@ export const openFirstTab = function (tabsElement: Element): boolean | void {
   } else if (!tabsElement.querySelector(`details[open]`)) {
     details[0].setAttribute('open', true);
     buttons[0].setAttribute('aria-pressed', true);
-
-    console.log(details[0]);
-    console.log(buttons[0]);
   }
 };
 
