@@ -130,11 +130,12 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
     window.isScrolling = false;
     clearTimeout(scrollTimeout);
 
+    if (window.isClicked) {
+      window.isClicked = false;
+      return false;
+    }
+
     scrollTimeout = setTimeout(function () {
-      if (window.isClicked) {
-        window.isClicked = false;
-        return false;
-      }
 
       let buttonToClick = buttons[0];
       let closestOffset = Math.abs(buttonToClick.getBoundingClientRect().left);
