@@ -2,8 +2,16 @@
 @use '_func' as *;
 
 @include layer('utilities') {
-  // Helpers
-  @import 'helpers/wider-colours.scss';
+  // Missing classes that exist as mixins
+  @include clearfix();
+  @include visually-hidden();
+  @include text-truncate();
+  @include ratio();
+  @include fixed();
+  @include sticky();
+  @include max-height();
+  @include js-display();
+  @include line-clamp();
 
   // Loop over each breakpoint
   @each $breakpoint in map-keys($grid-breakpoints) {

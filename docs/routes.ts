@@ -76,7 +76,7 @@ const routes = [
       },
       {
         path: 'utilities',
-        name: 'Utility Classes (Beta)',
+        name: 'Utility Classes',
         meta: {
           title: 'Utility Classes | Foundations | iamkey',
         },
