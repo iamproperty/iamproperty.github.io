@@ -99,7 +99,6 @@
 // #endregion
 
 @include layer('reset') {
-  
   // #region Main grid setup
   body {
     --excess-space: calc((100% - var(--max-width, #{$max-width})) / 2);
@@ -180,7 +179,6 @@
     grid-template-columns: subgrid;
   }
   // #endregion
-
 
   // #region Grid utility classes
   *:has([class*='order-']) > *:not([class*='order-']) {
@@ -266,5 +264,4 @@
     }
   }
   // #endregion
-
 }

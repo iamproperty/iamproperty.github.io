@@ -136,7 +136,6 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
     }
 
     scrollTimeout = setTimeout(function () {
-
       let buttonToClick = buttons[0];
       let closestOffset = Math.abs(buttonToClick.getBoundingClientRect().left);
 
@@ -162,7 +161,7 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
     });
   });
 
-  nextButton.addEventListener('click', (e) => {
+  nextButton?.addEventListener('click', (e) => {
     e.preventDefault();
 
     const currentTab = buttonWrapper.querySelector('[aria-pressed="true"]');

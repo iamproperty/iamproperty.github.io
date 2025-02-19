@@ -10,7 +10,23 @@
   @include sticky();
   @include max-height();
   @include js-display();
-
   @include line-clamp();
-
+  @include align();
+  @include opacity();
+  @include overflow();
+  @include display();
+  @include position();
+  @include border();
+  @include sizes();
+  @include flex();
+  @include order();
+  @include margins();
+  @include paddings();
+  @include gap();
+  @include text();
+  @include colours();
+  @include wider-colours();
+  @include pointer-events();
+  @include rounded();
+  @include visible();
 }

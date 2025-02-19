@@ -108,9 +108,8 @@
     return arr;
   }, {});
 
-
-  const getMixin = (name):string => {
-    switch(name) {
+  const getMixin = (name): string => {
+    switch (name) {
       case 'clearfix':
         // code block
         return `
@@ -154,16 +153,82 @@
   }
 }
         `;
-      default:
+      case 'ratio':
+        // code block
         return `
-@mixin ${name}() {
-  ...
-}
-        `;
+@mixin ratio() {
+  .ratio {
+    position: relative;
+    width: 100%;
+
+    &::before {
+      display: block;
+      padding-top: var(--#{$prefix}aspect-ratio);
+      content: '';
+    }
+
+    > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
     }
   }
 
+  @each $key, $ratio in $aspect-ratios {
+    .ratio-#{$key} {
+      --#{$prefix}aspect-ratio: #{$ratio};
+    }
+  }
+}
+        `;
+      case 'fixed':
+        return `
+@mixin fixed() {
+  .fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: $zindex-fixed;
+  }
 
+  .fixed-bottom {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $zindex-fixed;
+  }
+}
+        `;
+      case 'sticky':
+        return `
+@mixin sticky() {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint) {
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+      .sticky#{$infix}-top {
+        position: sticky;
+        top: 0;
+        z-index: $zindex-sticky;
+      }
+
+      .sticky#{$infix}-bottom {
+        position: sticky;
+        bottom: 0;
+        z-index: $zindex-sticky;
+      }
+    }
+  }
+}
+        `;
+      default:
+        return `...`;
+    }
+  };
 </script>
 
 <template>
@@ -203,10 +268,9 @@
             {{ name }}
           </h2>
           <p class="pb-3">{{ value }}</p>
-          <pre class="mb-5"><code>@include {{ name }}();
-
+          <pre class="mb-5 pb-o"><code>@include {{ name }}();</code><code v-if="getMixin(name).trim() != '...'">
 {{ getMixin(name).trim() }}</code></pre>
-          </template>
+        </template>
       </details>
 
       <details>
@@ -232,5 +296,9 @@
     .list-unstyled {
       columns: auto 3;
     }
+  }
+
+  pre {
+    max-height: 20rem;
   }
 </style>
