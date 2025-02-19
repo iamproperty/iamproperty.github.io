@@ -165,6 +165,11 @@ class iamMultiselect extends HTMLElement {
         setItem(checkbox);
 
         search.focus();
+        clearTimeout(hoverTimeout);
+        multiselect.classList.add('hover');
+        hoverTimeout = setTimeout(function () {
+          multiselect.classList.remove('hover');
+        }, 5000);
       }
     });
 

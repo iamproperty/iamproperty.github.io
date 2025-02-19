@@ -80,9 +80,7 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
     button.addEventListener('click', (e) => {
       e.preventDefault();
 
-      if (window.isScrolling) return;
-
-      if (!window.triggered) window.isClicked = true;
+      window.isClicked = true;
 
       if (button.classList.contains('disabled')) return false;
 
@@ -105,9 +103,9 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
       });
 
       if (button.matches(':last-child')) {
-        nextButton.setAttribute('disabled', 'disabled');
+        nextButton?.setAttribute('disabled', 'disabled');
       } else {
-        nextButton.removeAttribute('disabled');
+        nextButton?.removeAttribute('disabled');
       }
 
       // Data layer Open Event
@@ -119,21 +117,9 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
     });
   });
 
-  buttonWrapper.addEventListener('scroll', (event) => {
-    if (window.isScrolling) return;
-
-    clearTimeout(scrollTimeout);
-    window.isScrolling = true;
-  });
-
   buttonWrapper.addEventListener('scrollend', (event) => {
-    window.isScrolling = false;
-    clearTimeout(scrollTimeout);
 
-    if (window.isClicked) {
-      window.isClicked = false;
-      return false;
-    }
+    clearTimeout(scrollTimeout);
 
     scrollTimeout = setTimeout(function () {
       let buttonToClick = buttons[0];
@@ -146,11 +132,17 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
         }
       });
 
-      window.triggered = true;
+      if (window.isClicked) {
+        window.isClicked = false;
+        return false;
+      }
+      else {
+          
+        buttonToClick.click();
+      }
       buttonToClick.focus();
-      buttonToClick.click();
-      window.triggered = false;
-    }, 200);
+      
+    }, 500);
   });
 
   // Make sure we dont loose existing summary functionality
