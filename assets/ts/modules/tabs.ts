@@ -118,7 +118,6 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
   });
 
   buttonWrapper.addEventListener('scrollend', (event) => {
-
     clearTimeout(scrollTimeout);
 
     scrollTimeout = setTimeout(function () {
@@ -135,13 +134,10 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
       if (window.isClicked) {
         window.isClicked = false;
         return false;
-      }
-      else {
-          
+      } else {
         buttonToClick.click();
       }
       buttonToClick.focus();
-      
     }, 500);
   });
 

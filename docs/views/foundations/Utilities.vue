@@ -1349,7 +1349,10 @@
     </ul>
 
     <h1>Utility classes</h1>
-    <p>Utility classes help developers quickly apply global style rules in a consistant way while reducing duplicate CSS rules.</p>
+    <p>
+      Utility classes help developers quickly apply global style rules in a consistant way while reducing duplicate CSS
+      rules.
+    </p>
 
     <Tabs>
       <details>
@@ -1375,7 +1378,9 @@
 
       <details>
         <summary><h2>Mixins</h2></summary>
-        <p>Using mixins to create the utility classes allows for the classes to be added to the web components easily.</p>
+        <p>
+          Using mixins to create the utility classes allows for the classes to be added to the web components easily.
+        </p>
         <template v-for="(value, name) in utMixins" :key="name" class="pb-4">
           <h2 class="h5 pb-1">
             {{ name }}
@@ -1388,7 +1393,10 @@
 
       <details>
         <summary><h2>Tailwind</h2></summary>
-        <p>Tailwind can be used for smaller sites that use a framework like nuxt or next. But it will need to be configured carefully and parts of the library like their grid system is not recommended.</p>
+        <p>
+          Tailwind can be used for smaller sites that use a framework like nuxt or next. But it will need to be
+          configured carefully and parts of the library like their grid system is not recommended.
+        </p>
       </details>
     </Tabs>
   </main>
