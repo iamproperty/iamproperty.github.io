@@ -147,4 +147,8 @@
   @each $key, $ratio in $aspect-ratios {
     aspect-ratio-#{$key}: #{$ratio};
   }
+
+  @each $key, $details in $new_utilities {
+    -ut-mixin-#{$key}: #{$details};
+  }
 }

@@ -118,11 +118,9 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
   });
 
   buttonWrapper.addEventListener('scrollend', (event) => {
-
     clearTimeout(scrollTimeout);
 
     scrollTimeout = setTimeout(function () {
-
       let buttonToClick = buttons[0];
       let closestOffset = Math.abs(buttonToClick.getBoundingClientRect().left);
 
@@ -136,13 +134,10 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
       if (window.isClicked) {
         window.isClicked = false;
         return false;
-      }
-      else {
-          
+      } else {
         buttonToClick.click();
       }
       buttonToClick.focus();
-      
     }, 500);
   });
 
