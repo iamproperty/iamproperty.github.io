@@ -3,7 +3,7 @@
 .admin-panel {
   --padding-x: #{rem(24)};
   --padding-top: #{rem(16)};
-  --padding-bottom: #{rem(24)};
+  --padding-bottom: #{rem(16)};
   --mh-modifier: #{rem(56 + 16)};
   --mh-padding-inline: var(--padding-x);
   display: block;
@@ -49,7 +49,7 @@
     font-size: rem(18);
     line-height: rem(24);
     font-weight: bold;
-    padding: rem(16) var(--padding-x);
+    padding: rem(16) rem(24);
   }
 
   > :is(.admin-panel__heading):first-child {
@@ -57,7 +57,7 @@
     flex-wrap: wrap;
     gap: 1rem;
     align-items: center;
-    padding: rem(16) var(--padding-x);
+    padding: rem(16) rem(24);
 
     > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
       padding: 0;
@@ -66,6 +66,7 @@
 
     .btn {
       --btn-margin: 0;
+      margin-bottom: 0;
     }
 
     .dialog__wrapper + .btn {
@@ -105,7 +106,7 @@
     padding-bottom: rem(24);
   }
 
-  > :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg) {
+  > :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid) {
     overflow: auto;
 
     &:before {
@@ -114,12 +115,23 @@
   }
 
   > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):first-child
-    + :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg) {
+    + :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid) {
     padding-top: var(--padding-top);
     margin-top: calc(var(--padding-top) * -1);
   }
 
-  > :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg):last-child {
+  > :is(
+      .mh-sm,
+      .mh-md,
+      .mh-lg,
+      .mh-sm-sm,
+      .mh-sm-md,
+      .mh-sm-lg,
+      .mh-md-sm,
+      .mh-md-md,
+      .mh-md-lg,
+      .mh-fluid
+    ):last-child {
     padding-bottom: var(--padding-bottom);
     margin-bottom: calc(var(--padding-bottom) * -1) !important;
 
@@ -135,11 +147,16 @@
   > iam-pagination {
     margin-top: -1rem;
   }
+
+  &:has(.mh-fluid) {
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
-[class*='col']
-  .admin-panel:first-child:last-child:not(
-    :has(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg)
+[class*='col'].admin-panel:first-child:last-child:not(
+    :has(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid)
   ) {
   min-height: calc(100% - #{rem(24)});
 }
@@ -180,6 +197,27 @@
       border-radius: 0;
       box-shadow: none;
     }
+  }
+}
+// #endregion
+
+// #region Admin panel as details
+details.admin-panel {
+  summary:after {
+    content: '\f077';
+    font-weight: bold;
+    margin-left: 0;
+  }
+}
+details.admin-panel:not([open]) {
+  padding-bottom: 0;
+
+  summary:first-child {
+    margin-bottom: 0;
+  }
+
+  summary:after {
+    content: '\f078';
   }
 }
 // #endregion

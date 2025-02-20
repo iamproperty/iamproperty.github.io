@@ -172,7 +172,7 @@ $new_utilities: map-merge(
 );
 
 @mixin max-height() {
-  :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg) {
+  :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid) {
     &:not(iam-table):not(.table__wrapper) {
       padding-inline: var(--mh-padding-inline, 0);
       margin-inline: calc(var(--mh-padding-inline, 0) * -1);
@@ -192,7 +192,7 @@ $new_utilities: map-merge(
     }
   }
 
-  :is(.mh-sm, .mh-md, .mh-lg) {
+  :is(.mh-sm, .mh-md, .mh-lg, .mh-fluid) {
     overflow: auto;
     overscroll-behavior: contain;
 
@@ -211,6 +211,10 @@ $new_utilities: map-merge(
 
   .mh-lg {
     max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
+  }
+
+  .mh-fluid {
+    max-height: 100%;
   }
 
   @include media-breakpoint-up(sm) {
