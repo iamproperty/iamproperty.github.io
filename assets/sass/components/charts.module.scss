@@ -199,13 +199,13 @@ $chart-height-lg: #{rem(200)} !default;
   }
 
   .key {
-    margin: 0;
+    margin: 0 !important;
 
     &:before {
       content: '';
       height: 0.8em;
       width: 0.8em;
-      margin-right: 0.3em;
+      margin-right: 0.3em !important;
       background-color: var(--chart-colour);
       display: inline-block;
       border-radius: var(--key-border-radius, 4px);
@@ -500,14 +500,41 @@ $chart-height-lg: #{rem(200)} !default;
           &::before {
             content: attr(data-group) '\A';
           }
+
           &[data-label]::before {
             content: attr(data-group) '\A' attr(data-label) '\A';
+          }
+
+          &:has(:is(a, button)) {
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -100%);
+            font-size: 0.9rem;
+          }
+
+          hr {
+            margin: 0;
+            opacity: 0;
+          }
+          :is(a, button) {
+            display: inline-block;
+            clear: both;
+            float: left;
+            margin-top: 1rem;
+            margin-right: 1rem;
+            margin-bottom: 0.25em;
+            font-size: 1em;
+          }
+
+          :is(a, button) + :is(a, button) {
+            margin-top: 0;
           }
         }
 
         &:hover span {
           opacity: 1;
           z-index: var(--index-above);
+          pointer-events: all;
         }
       }
 
