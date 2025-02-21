@@ -168,11 +168,14 @@ class iamTable extends HTMLElement {
         });
 
         Array.from(this.table.querySelectorAll('tbody tr')).forEach((row, index) => {
-          const rowID = `row${uniqueID(index)}`;
-          row.insertAdjacentHTML(
-            'afterbegin',
-            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-          );
+
+          if(!row.querySelector('.selectrow')){
+            const rowID = `row${uniqueID(index)}`;
+            row.insertAdjacentHTML(
+              'afterbegin',
+              `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
+            );            
+          }
         });
 
         this.table.addEventListener('change', (event) => {
