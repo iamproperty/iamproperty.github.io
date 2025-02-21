@@ -207,6 +207,21 @@ details.admin-panel {
     content: '\f077';
     font-weight: bold;
     margin-left: 0;
+    height: 2rem;
+    width: 2rem;
+    text-align: center;
+    line-height: 2rem;
+    margin-right: -0.5rem;
+  }
+
+  summary:not(:has(.btn:hover)):hover:after {
+    background: var(--colour-light);
+    border-radius: 50%;
+  }
+  summary:not(:has(.btn:hover)):active:after {
+    background: var(--colour-light);
+    filter: brightness(85%);
+    border-radius: 50%;
   }
 }
 details.admin-panel:not([open]) {
