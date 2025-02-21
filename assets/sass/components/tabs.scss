@@ -55,14 +55,13 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   }
 }
 
-.tabs__links {
-  scroll-snap-type: x mandatory;
-
+.tabs:not(.admin-panel) .tabs__links {
   -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
   mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
 }
 
 .tabs__links {
+  scroll-snap-type: x mandatory;
   padding-bottom: 3px;
   position: relative;
   display: flex;
