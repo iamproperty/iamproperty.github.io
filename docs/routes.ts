@@ -176,10 +176,19 @@ const routes = [
         searchterms: 'unordered, ordered, tick, breadcrumb',
       },
       {
-        path: 'buttons',
-        name: 'Buttons & links',
+        path: 'links',
+        name: 'Links',
         meta: {
-          title: 'Buttons & links | Elements | iamkey',
+          title: 'Links | Elements | iamkey',
+        },
+        component: () => import('./views/elements/Links.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'buttons',
+        name: 'Buttons',
+        meta: {
+          title: 'Buttons | Elements | iamkey',
         },
         component: () => import('./views/elements/Buttons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',

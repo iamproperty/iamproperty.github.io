@@ -76,10 +76,15 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
     margin-right: 0;
   }
 
-  &:is(:hover, :focus, .hover, :active, .active, :focus-within) {
+  &:not([disabled]):is(:hover, :focus, .hover, :active, .active, :focus-within) {
     &:after {
       width: 60%;
     }
+  }
+
+  &[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
 }
 
@@ -97,21 +102,27 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
     [class*='fa-'] {
       margin: 0;
       display: inline;
+      --fa-display: inline;
+
+      &:after {
+        content: "\a0";
+      }
     }
 
     text-decoration: underline;
-    text-underline-offset: 0.2em;
-    text-decoration-thickness: 2px;
+    text-underline-offset: 0.125rem;
+    text-decoration-thickness: 0.125rem;
     font-size: inherit;
 
-    &:is(:hover, :focus, .hover, :focus-within) {
+    &:not([disabled]):is(:hover, :focus, .hover, :focus-within) {
       color: var(--colour-hover);
       text-decoration: none;
     }
 
-    &:is(:active, .active) {
+    &:not([disabled]):is(:active, .active) {
       color: var(--colour-active);
       text-decoration: none;
+      filter: brightness(85%);
     }
   }
 }
