@@ -1,0 +1,35 @@
+@use '../_func.scss' as *;
+
+// #region Action button
+.btn-action {
+  --btn-border-width: 1px;
+  --btn-padding-block: #{rem(6)};
+  --btn-padding-inline: #{rem(6)};
+
+  background-color: var(--colour-canvas-2);
+  border: var(--btn-border-width) solid var(--colour-muted);
+  border-radius: rem(4) !important;
+  font-weight: 400 !important;
+  font-size: 1rem;
+  line-height: rem(20);
+
+  color: var(--colour-heading);
+
+  &.btn[class*='fa-']:before {
+    content: var(--fa);
+    margin-right: rem(6);
+  }
+
+  a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+    background: var(--colour-btn-action-hover-bg);
+  }
+
+  a:is(:active, .active):not([disabled]) &,
+  &:is(:active, .active):not([disabled]) {
+    filter: brightness(85%);
+    transition: all 0.1s;
+    color: var(--colour-heading);
+  }
+}
+// #endregion
