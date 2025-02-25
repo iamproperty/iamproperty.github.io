@@ -1,3 +1,8 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="elements">
@@ -223,11 +228,6 @@
       </div>
     </div>
     <!-- #endregion -->
-
-
-
-
-
 
     <!-- #region Secondary button -->
 
@@ -635,7 +635,6 @@
 
     <!-- #endregion -->
 
-
     <!-- #region disabled -->
     <div class="container pb-0">
       <h3>Disabled button state</h3>
@@ -663,9 +662,7 @@
     </div>
     <!-- #endregion -->
 
-
-
-<!-- #region mobile button padding -->
+    <!-- #region mobile button padding -->
     <div class="container pb-0">
       <h2>Mobile button padding</h2>
       <p>
@@ -679,7 +676,7 @@
         there is adequate spacing around the button to maintain a suitable touch target size to avoid accidental taps.
       </p>
     </div>
-<!-- #endregion mobile button padding -->
+    <!-- #endregion mobile button padding -->
 
 
 
@@ -820,72 +817,6 @@
 
 
 
-    <!-- #region Action button 
-    <div class="container pb-0">
-      <h3>Action button</h3>
-      <p>
-        Actions buttons are used primarily within the action bar. A filter overlay of 85% brightness will be applied to
-        the default states for the active state.
-      </p>
-    </div>
-
-    <div class="container visualtest pb-5 pe-none">
-      <div class="row">
-        <div class="col-sm-6 col-md-4">
-          <p class="lead pb-2">Default state</p>
-          <a href="/components/buttons" class="btn btn-action">Edit</a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <p class="lead pb-2">Hover/Focus state</p>
-          <a href="/components/buttons" class="btn btn-action hover">Edit</a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <p class="lead pb-2">Active state</p>
-          <a href="/components/buttons" class="btn btn-action active">Edit</a>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
-          <a href="/components/buttons" class="btn btn-action">Edit</a>
-        </div>
-        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
-          <a href="/components/buttons" class="btn btn-action hover">Edit</a>
-        </div>
-        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
-          <a href="/components/buttons" class="btn btn-action active">Edit</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="container pb-0">
-      <h4 class="text-body">Action button (with icon)</h4>
-      <p>An icon is usually added to support an action button and help show its purpose.</p>
-    </div>
-
-    <div class="container visualtest pb-5 pe-none">
-      <div class="row">
-        <div class="col-sm-6 col-md-4">
-          <p class="lead pb-2">Default state</p>
-          <a href="/components/buttons.pdf" class="btn btn-action fa-edit">Edit</a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <p class="lead pb-2">Hover/Focus state</p>
-          <a href="/components/buttons" class="btn btn-action hover fa-edit">Edit</a>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <p class="lead pb-2">Active state</p>
-          <a href="/components/buttons" class="btn btn-action active fa-edit">Edit</a>
-        </div>
-      </div>
-    </div>
-
-    #endregion -->
-
-
-
-
-
     <div class="bg-light version-control">
       <div class="container">
         <table>
@@ -934,25 +865,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Table from '@/components/Table/Table.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Table,
-      Tabs,
-      Tab,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-      };
-    },
-  };
-</script>

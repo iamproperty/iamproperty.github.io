@@ -63,9 +63,11 @@ button,
   cursor: pointer;
   user-select: none;
 
-  background: var(--colour-btn-bg);
-  border: var(--btn-border-width) solid var(--colour-btn-border);
   color: var(--colour-btn);
+  &:not(.border-0){
+    background: var(--colour-btn-bg);
+    border: var(--btn-border-width) solid var(--colour-btn-border);
+  }
 
   font-size: var(--btn-font-size);
   line-height: var(--btn-line-height);

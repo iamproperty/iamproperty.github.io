@@ -1,3 +1,8 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="elements">
@@ -97,25 +102,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Table from '@/components/Table/Table.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Table,
-      Tabs,
-      Tab,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-      };
-    },
-  };
-</script>
