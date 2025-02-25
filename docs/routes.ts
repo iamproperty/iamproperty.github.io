@@ -281,7 +281,7 @@ const routes = [
         },
         component: () => import('./views/links/CompactButtons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
-      }
+      },
     ],
   },
   {

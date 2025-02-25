@@ -10,12 +10,14 @@
     </DSHeader>
 
     <div class="container pb-0">
-      <p class="lead">Text links are links that are primarily used inline within text. They are also sometimes used within components if to help users navigate to specific areas. A filter overlay of 85% brightness will be applied to the default states for the active state.</p>
-      
-      <h2>Default</h2>
-      <p>
-        Inline text links can be used among body copy. See examples below:
+      <p class="lead">
+        Text links are links that are primarily used inline within text. They are also sometimes used within components
+        if to help users navigate to specific areas. A filter overlay of 85% brightness will be applied to the default
+        states for the active state.
       </p>
+
+      <h2>Default</h2>
+      <p>Inline text links can be used among body copy. See examples below:</p>
     </div>
 
     <div class="container visualtest">
@@ -74,9 +76,6 @@
       </div>
     </div>
 
-
-
-
     <div class="bg-light version-control">
       <div class="container">
         <table>
@@ -91,10 +90,11 @@
             <tr>
               <td>V1 added</td>
               <td>21.02.2025</td>
-              <td>- Split out into separate page<br/>
-                  - Added disabled states</td>
+              <td>
+                - Split out into separate page<br />
+                - Added disabled states
+              </td>
             </tr>
-
           </tbody>
         </table>
         <a href="/pdfs/text-links.pdf" download>Download latest designs</a>

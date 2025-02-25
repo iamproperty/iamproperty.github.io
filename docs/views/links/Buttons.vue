@@ -64,7 +64,6 @@
       </div>
     </div>
 
-    
     <h3>Primary button (with icon)</h3>
     <p>
       Use an icon to support a primary button. See example below where a plus is used to highlight that the button
@@ -112,7 +111,6 @@
       </div>
     </div>
 
-    
     <h3>Primary button (with interactive prompt)</h3>
     <p>
       Use an interactive prompt to support a primary button. See example below where an arrow is used to add interest
@@ -162,7 +160,6 @@
 
     <h3>Primary button (small)</h3>
     <p>When there is limited space a small button variant can be used.</p>
-
 
     <div class="container visualtest pb-5 pe-none">
       <div class="row">
@@ -234,10 +231,9 @@
     <h2>Secondary</h2>
     <p>
       Use a secondary button to help the user get a further understanding of its priority. It can either be paired
-      alongside a primary button on used on it’s own to support a secondary action for the user. A filter overlay of
-      85% brightness will be applied to the default states for the active state.
+      alongside a primary button on used on it’s own to support a secondary action for the user. A filter overlay of 85%
+      brightness will be applied to the default states for the active state.
     </p>
-
 
     <div class="container visualtest pb-5 pe-none">
       <div class="row">
@@ -268,13 +264,11 @@
       </div>
     </div>
 
-
     <h3>Secondary button (with icon)</h3>
     <p>
       Use an icon to support a secondary button. See example below where a plus is used to highlight that the button
       action adds a new event. The icon can be added before or after the button copy. Whichever is most relevant.
     </p>
-
 
     <div class="container visualtest pb-5 pe-none">
       <div class="row">
@@ -307,10 +301,9 @@
 
     <h3>Secondary button (with interactive prompt)</h3>
     <p>
-      Use an interactive prompt to support a secondary button. See example below where an arrow is used to add
-      interest and signify that the button will navigate the user to another page.
+      Use an interactive prompt to support a secondary button. See example below where an arrow is used to add interest
+      and signify that the button will navigate the user to another page.
     </p>
-
 
     <div class="container visualtest pb-5 pe-none">
       <div class="row">
@@ -340,12 +333,10 @@
         </div>
       </div>
     </div>
-
 
     <h3>Secondary button (opening filter dialog pop-over)</h3>
     <p>Secondary buttons can be used to open a filter dialog pop-over.</p>
 
-
     <div class="container visualtest pb-5 pe-none">
       <div class="row">
         <div class="col-sm-6 col-md-4">
@@ -417,10 +408,8 @@
       </div>
     </div>
 
-
-      <h3>Secondary button (opening filter dialog modal)</h3>
-      <p>Secondary buttons can be used to open a filter dialog modal.</p>
-
+    <h3>Secondary button (opening filter dialog modal)</h3>
+    <p>Secondary buttons can be used to open a filter dialog modal.</p>
 
     <div class="container visualtest pb-5 pe-none">
       <div class="row">
@@ -460,11 +449,10 @@
       </div>
     </div>
 
-
     <h3>Secondary button (form field acting as a button)</h3>
     <p>Form fields can be set-up to act like a button to improve consistency when used alongside other buttons.</p>
 
-    <div class="container visualtest pb-5 ">
+    <div class="container visualtest pb-5">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -532,7 +520,6 @@
       </div>
     </div>
 
-
     <h3>Secondary button (small)</h3>
     <p>When there is limited space a small button variant can be used.</p>
 
@@ -563,7 +550,6 @@
         </div>
       </div>
     </div>
-
 
     <!-- #endregion -->
 
@@ -656,7 +642,7 @@
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Hover/Focus state</p>
           <button class="btn btn-primary" disabled><i class="fa-regular fa-plus"></i>Add new record</button>
-          <button class="btn btn-secondary" disabled><i class="fa-regular fa-plus"></i>Add new record</button> 
+          <button class="btn btn-secondary" disabled><i class="fa-regular fa-plus"></i>Add new record</button>
         </div>
       </div>
     </div>
@@ -667,8 +653,8 @@
       <h2>Mobile button padding</h2>
       <p>
         Due to the small real estate of mobile screens we can reduce the minimum padding around buttons from 24px
-        (1.5rem) to 16px (0.5rem). Compact buttons can still have the smaller padding of 8px (0.5rem) on desktop, tablet,
-        and mobile.
+        (1.5rem) to 16px (0.5rem). Compact buttons can still have the smaller padding of 8px (0.5rem) on desktop,
+        tablet, and mobile.
       </p>
       <p>
         This reduced padding provides more flexibility when designing for mobile as more content can be displayed on the
@@ -692,11 +678,12 @@
             <tr>
               <td>V1.3 added</td>
               <td>13.02.2025</td>
-              <td>Button height reduced to 48px at regular sizing and 40px small sizing to improve inclusion
-                  within product level pages. Reduced the small variants of button components to to 16px
-                  text sizing to improve usage within compact areas. Reduced the min spacing around
-                  mobile buttons to 8px (formerly 16px) to give adequate spacing to distinguish and tap
-                  buttons without taking too much space.</td>
+              <td>
+                Button height reduced to 48px at regular sizing and 40px small sizing to improve inclusion within
+                product level pages. Reduced the small variants of button components to to 16px text sizing to improve
+                usage within compact areas. Reduced the min spacing around mobile buttons to 8px (formerly 16px) to give
+                adequate spacing to distinguish and tap buttons without taking too much space.
+              </td>
             </tr>
             <tr>
               <td>V1.2 added</td>
