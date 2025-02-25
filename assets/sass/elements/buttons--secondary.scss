@@ -1,0 +1,15 @@
+@use '../_func.scss' as *;
+
+// #region secondary button
+.btn-secondary {
+  background: var(--colour-btn-secondary-bg);
+  border: 2px solid var(--colour-btn-secondary-border);
+  color: var(--colour-btn-secondary);
+}
+
+a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
+.btn-secondary:is(:hover, :focus, .hover, :focus-within, :active, .active):not([disabled]) {
+  background: var(--colour-btn-secondary-bg-hover);
+  color: var(--colour-btn-secondary-hover);
+}
+// #endregion

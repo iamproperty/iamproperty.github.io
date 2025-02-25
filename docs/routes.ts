@@ -176,15 +176,6 @@ const routes = [
         searchterms: 'unordered, ordered, tick, breadcrumb',
       },
       {
-        path: 'buttons',
-        name: 'Buttons & links',
-        meta: {
-          title: 'Buttons & links | Elements | iamkey',
-        },
-        component: () => import('./views/elements/Buttons.vue'),
-        searchterms: 'anchor, prompt, secondary button, primary button, compact',
-      },
-      {
         path: 'badges',
         name: 'Badges (Beta)',
         meta: {
@@ -244,6 +235,52 @@ const routes = [
         },
         component: () => import('./views/elements/Details.vue'),
         searchterms: 'details, accordion, summary',
+      },
+    ],
+  },
+  {
+    /* Form */ path: '/links',
+    name: 'Links',
+    meta: {
+      title: 'Elements | iamkey',
+    },
+    component: () => import('./views/Elements.vue'),
+    children: [
+      {
+        path: 'text-links',
+        name: 'Links',
+        meta: {
+          title: 'Links | Elements | iamkey',
+        },
+        component: () => import('./views/links/Links.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'buttons',
+        name: 'Buttons',
+        meta: {
+          title: 'Buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/Buttons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'action-buttons',
+        name: 'Action buttons',
+        meta: {
+          title: 'Action buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/ActionButtons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'compact-buttons',
+        name: 'Compact buttons',
+        meta: {
+          title: 'Compact buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/CompactButtons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
       },
     ],
   },

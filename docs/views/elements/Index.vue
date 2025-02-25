@@ -14,6 +14,19 @@
         </div>
       </div>
 
+      <h2>Link and button Elements</h2>
+
+      <div class="row row-cols-1 row-cols-md-3 mb-5">
+        <div v-for="item in linkPages">
+          <a :href="item.link">
+            <Card>
+              {{ item.title }}
+              <span v-if="item.content" v-html="item.content"></span>
+            </Card>
+          </a>
+        </div>
+      </div>
+
       <h2>Form Elements</h2>
 
       <div class="row row-cols-1 row-cols-md-3 mb-5">
@@ -55,6 +68,27 @@
         // Remove the index
         if (route.path) {
           route.link = '/elements/' + route.path;
+          route.title = route.name;
+          route.content = '';
+          acc.push(route);
+        }
+        return acc;
+      }, []);
+
+      arr = children;
+    }
+    return arr;
+  }, {});
+
+  const linkElements = routes.reduce(function (arr, route) {
+    // Find the correct group
+    if (route.path === '/links') {
+      arr = route.children;
+
+      const children = route.children.reduce(function (acc, route) {
+        // Remove the index
+        if (route.path) {
+          route.link = '/links/' + route.path;
           route.title = route.name;
           route.content = '';
           acc.push(route);
@@ -118,6 +152,7 @@
         pages: elements,
         formpages: formElements,
         dialogpages: dialogElements,
+        linkPages: linkElements,
       };
     },
   };
