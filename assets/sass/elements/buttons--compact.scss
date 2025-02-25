@@ -12,19 +12,19 @@
   }
   text-align: center;
 
-  width: calc(var(--compact-size));
-  min-width: calc(var(--compact-size));
-  max-width: calc(var(--compact-size));
-  height: calc(var(--compact-size)) !important;
-  min-height: calc(var(--compact-size)) !important;
-  max-height: calc(var(--compact-size)) !important;
+  width: var(--compact-size);
+  min-width: var(--compact-size);
+  max-width: var(--compact-size);
+  height: var(--compact-size) !important;
+  min-height: var(--compact-size) !important;
+  max-height: var(--compact-size) !important;
 
-  line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width)) !important;
+  line-height: var(--compact-size) !important;
 
   text-indent: -500px;
   overflow: hidden;
   position: relative;
-  font-size: rem(20);
+  font-size: rem(16);
 
   &:before {
     content: var(--fa);
@@ -34,17 +34,17 @@
     width: 100%;
     height: 100%;
     text-indent: 0;
-    line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width));
+    line-height: calc(var(--compact-size) - #{rem(4)});
     font-weight: 900;
   }
 
   &[class*='fa-']:before {
-    line-height: calc(var(--compact-size) - var(--btn-border-width) - var(--btn-border-width)) !important;
+    line-height: calc(var(--compact-size) - #{rem(4)});
   }
+
 
   &.btn-sm {
     --compact-size: #{rem(40)};
-
     font-size: 1rem;
     padding: 0 !important;
   }
@@ -60,6 +60,7 @@
   }
 
   &.btn-secondary {
+    --colour-btn-bg: transparent;
     --colour-btn-border: transparent;
     border-color: transparent;
 
@@ -68,12 +69,11 @@
     }
   }
 
-  &.btn-secondary:is(:hover, :focus, .hover, :active, .active, [aria-expanded], :focus-within):not([disabled]):not(
-      .btn-collapse
-    ) {
+  &.btn-secondary:is(:hover, :focus, .hover, :active, .active, [aria-expanded], :focus-within):not([disabled]):not(.btn-collapse) {
+
     background-color: var(--colour);
     color: var(--colour-primary-theme);
-    border-color: transparent !important;
+    border-color: var(--colour);
 
     &:is(.colour-primary, .colour-dark, .colour-danger, .colour-black) {
       color: var(--colour-inverted);
@@ -102,4 +102,38 @@
     font-family: arial, sans-serif;
   }
 }
+
+
+[class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
+.invert-colours {
+  
+  .btn-compact.btn-secondary {
+    //background: var(--colour-inverted)!important;
+  }
+
+  .btn-compact.btn-secondary:not(:hover, :focus, .hover, :focus-within):not(.btn-collapse) {
+
+    background-color: var(--colour-inverted)!important;
+    border-color: var(--colour-inverted)!important;
+    color: var(--colour-primary-theme);
+  }
+
+  .btn-compact.btn-secondary:is(:hover, :focus, .hover, :focus-within):not([disabled]):not(.btn-collapse) {
+
+    background-color: transparent;
+    border-color: var(--colour-inverted)!important;
+    color: var(--colour-inverted);
+  }
+
+  .btn-compact.btn-secondary[disabled] {
+
+    background-color: var(--colour-inverted)!important;
+    border-color: var(--colour-inverted)!important;
+    color: var(--colour-primary-theme)!important;
+  }
+}
+
+
+
+
 // #endregion

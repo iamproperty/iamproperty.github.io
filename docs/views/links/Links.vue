@@ -14,7 +14,7 @@
       
       <h2>Default</h2>
       <p>
-        ...
+        Inline text links can be used among body copy. See examples below:
       </p>
     </div>
 

@@ -272,9 +272,16 @@ const routes = [
         },
         component: () => import('./views/links/ActionButtons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'compact-buttons',
+        name: 'Compact buttons',
+        meta: {
+          title: 'Compact buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/CompactButtons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
       }
-      
-  
     ],
   },
   {

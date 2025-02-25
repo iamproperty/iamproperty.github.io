@@ -39,12 +39,12 @@
     margin-right: 0;
   }
 
-  &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled], :disabled, :active, .active) {
     &:after {
       width: 60% !important;
     }
   }
-  &:is(:active, .active):not([disabled]) {
+  &:is(:active, .active):not([disabled], :disabled) {
     color: var(--colour-active);
   }
 }
