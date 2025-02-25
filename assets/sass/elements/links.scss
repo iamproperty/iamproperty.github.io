@@ -105,7 +105,7 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
       --fa-display: inline;
 
       &:after {
-        content: "\a0";
+        content: '\a0';
       }
     }
 

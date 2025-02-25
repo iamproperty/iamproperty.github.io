@@ -42,7 +42,6 @@
     line-height: calc(var(--compact-size) - #{rem(4)});
   }
 
-
   &.btn-sm {
     --compact-size: #{rem(40)};
     font-size: 1rem;
@@ -69,8 +68,9 @@
     }
   }
 
-  &.btn-secondary:is(:hover, :focus, .hover, :active, .active, [aria-expanded], :focus-within):not([disabled]):not(.btn-collapse) {
-
+  &.btn-secondary:is(:hover, :focus, .hover, :active, .active, [aria-expanded], :focus-within):not([disabled]):not(
+      .btn-collapse
+    ) {
     background-color: var(--colour);
     color: var(--colour-primary-theme);
     border-color: var(--colour);
@@ -103,37 +103,31 @@
   }
 }
 
-
-[class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
+[class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(
+    .bg-canvas
+  ):not(.bg-canvas-2):not(.prevent-invert),
 .invert-colours {
-  
   .btn-compact.btn-secondary {
     //background: var(--colour-inverted)!important;
   }
 
   .btn-compact.btn-secondary:not(:hover, :focus, .hover, :focus-within):not(.btn-collapse) {
-
-    background-color: var(--colour-inverted)!important;
-    border-color: var(--colour-inverted)!important;
+    background-color: var(--colour-inverted) !important;
+    border-color: var(--colour-inverted) !important;
     color: var(--colour-primary-theme);
   }
 
   .btn-compact.btn-secondary:is(:hover, :focus, .hover, :focus-within):not([disabled]):not(.btn-collapse) {
-
     background-color: transparent;
-    border-color: var(--colour-inverted)!important;
+    border-color: var(--colour-inverted) !important;
     color: var(--colour-inverted);
   }
 
   .btn-compact.btn-secondary[disabled] {
-
-    background-color: var(--colour-inverted)!important;
-    border-color: var(--colour-inverted)!important;
-    color: var(--colour-primary-theme)!important;
+    background-color: var(--colour-inverted) !important;
+    border-color: var(--colour-inverted) !important;
+    color: var(--colour-primary-theme) !important;
   }
 }
-
-
-
 
 // #endregion

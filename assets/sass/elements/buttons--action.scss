@@ -8,12 +8,10 @@
   --btn-margin: #{rem(8)};
 
   &:not(.btn-primary) {
-    
     color: var(--colour-heading);
   }
 
-  &:not(.btn-primary):not(.border-0){
-    
+  &:not(.btn-primary):not(.border-0) {
     background-color: var(--colour-canvas-2);
     border: var(--btn-border-width) solid var(--colour-muted);
   }
@@ -41,12 +39,11 @@
     color: var(--colour-btn);
   }
 
-  a:is(:active, .active):not([disabled]):not(.btn-primary)  &,
-  &:is(:active, .active):not([disabled]):not(.btn-primary)  {
+  a:is(:active, .active):not([disabled]):not(.btn-primary) &,
+  &:is(:active, .active):not([disabled]):not(.btn-primary) {
     filter: brightness(85%);
     transition: all 0.1s;
     color: var(--colour-heading);
   }
-
 }
 // #endregion

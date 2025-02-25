@@ -47,7 +47,6 @@ button,
   --btn-font-size: #{rem(18)};
   --btn-line-height: #{rem(20)};
 
-
   @include media-breakpoint-up(sm) {
     --btn-margin: #{rem(24)};
   }
@@ -70,7 +69,7 @@ button,
   user-select: none;
 
   color: var(--colour-btn);
-  &:not(.border-0){
+  &:not(.border-0) {
     background: var(--colour-btn-bg);
     border: var(--btn-border-width) solid var(--colour-btn-border);
   }
@@ -241,7 +240,7 @@ button,
   select {
     all: unset !important;
     margin: calc(rem(-12)) calc(rem(-40)) !important;
-    padding: var(--btn-padding-block) var(--btn-padding-inline)!important;
+    padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
     padding-right: rem(56) !important;
     margin-right: rem(-56) !important;
     border-radius: rem(24) !important;
