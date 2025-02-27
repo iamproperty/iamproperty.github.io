@@ -132,7 +132,7 @@ button {
 }
 
 @media (hover: none) {
-  :host-context(.hover) .wrapper .dropdown {
+  :host(.hover) .wrapper .dropdown {
     display: block;
   }
 }

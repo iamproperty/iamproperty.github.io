@@ -232,14 +232,29 @@ export const setCellData = function (chartElement: any, table: any) {
     let rowValue = 0;
     // Set the data numeric value if not set
     Array.from(tr.querySelectorAll('td:not(:first-child)')).forEach((td: any) => {
-      const value = parseFloat(td.textContent.replace('£', '').replace('%', '').replace(',', ''));
+      // Ignore the buttons and links inside
+      const copyTD = td.cloneNode(true);
+      Array.from(copyTD.querySelectorAll('*')).forEach((element: any) => {
+        element.remove();
+      });
+
+      const value = parseFloat(copyTD.textContent.replace('£', '').replace('%', '').replace(',', ''));
 
       td.setAttribute('data-numeric', value);
-      td.setAttribute('data-value', td.textContent);
+      td.setAttribute('data-value', copyTD.textContent);
 
       const display = getComputedStyle(td).display;
 
       if (display != 'none') rowValue += value;
+
+      Array.from(td.querySelectorAll('a, button')).forEach((element: any, index: number) => {
+        if (index == 0) {
+          element.insertAdjacentHTML('beforeBegin', '<hr/>');
+        }
+
+        element.classList.add('btn');
+        element.classList.add('btn-tertiary');
+      });
     });
 
     tr.setAttribute('data-numeric', rowValue);
@@ -323,9 +338,13 @@ export const setLongestValue = function (chartOuter: any) {
   const table = chartOuter.querySelector('.chart table');
 
   let longestValue = '';
-  Array.from(table.querySelectorAll('tbody tr td:not(:first-child) span')).forEach((td: any) => {
-    if (typeof td.textContent != 'undefined' && td.textContent.length > longestValue.length)
-      longestValue = td.textContent;
+  Array.from(table.querySelectorAll('tbody tr td:not(:first-child)')).forEach((td: any) => {
+    if (
+      typeof td.getAttribute('data-value') != 'undefined' &&
+      td.getAttribute('data-value').length > longestValue.length
+    ) {
+      longestValue = td.getAttribute('data-value');
+    }
   });
   chartWrapper.setAttribute('data-longest-value', longestValue);
 };

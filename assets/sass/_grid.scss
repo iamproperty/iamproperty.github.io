@@ -1,87 +1,6 @@
 @use 'sass:math';
 @use 'sass:map';
-@use '../_func' as *;
-
-// #region Main grid setup
-body {
-  --excess-space: calc((100% - var(--max-width, #{$max-width})) / 2);
-  --col-size: calc(
-    (
-        100% - max(0%, var(--excess-space)) - max(0%, var(--excess-space)) - var(--gutter, #{$gutter}) - var(
-            --gutter,
-            #{$gutter}
-          ) -
-          (var(--gap, #{$gap}) * (#{$columns - 1}))
-      ) /
-      #{$columns}
-  );
-  column-gap: var(--gap, #{$gap});
-  display: grid;
-  margin-inline: 0;
-  width: 100%;
-  $templateColumns: '';
-  @for $i from 1 to $columns {
-    $templateColumns: $templateColumns + 'var(--col-size) [col-' + $i + '-end col-'+ ($i + 1)+'-start] ';
-  }
-  grid-template-columns:
-    [full-width-start container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
-    [content-start col-1-start]
-    #{$templateColumns}
-    var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
-    [container-end full-width-end];
-
-  @media screen and (min-width: #{em($max-width-px * $max-scale-up)}) {
-    grid-template-columns:
-      [full-width-start] calc(var(--excess-space) - var(--gap, #{$gap}))
-      [container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
-      [content-start col-1-start]
-      #{$templateColumns}
-      var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
-      [container-end] calc(var(--excess-space) - var(--gap, #{$gap})) [full-width-end];
-  }
-
-  grid-template-rows: auto;
-  align-content: start;
-  justify-content: center;
-
-  & * {
-    grid-column: content;
-
-    &:where(button):not(:has(.card)) {
-      max-width: fit-content;
-      place-self: start;
-    }
-
-    &:is(div) {
-      align-content: start;
-    }
-  }
-}
-
-div:has(main) {
-  display: contents !important;
-}
-
-:is(nav, main, footer) {
-  display: grid;
-  grid-column: full-width !important;
-  grid-template-columns: subgrid;
-}
-
-*:not(.row) > main:not(:has(.container:last-child)):not(:has(iam-collapsible-side:last-child)) {
-  padding-bottom: 1rem;
-}
-
-main > :is(.full-width, [class*='bg-']:has(.container), iam-header, iam-collapsible-side, iam-notification) {
-  grid-column: full-width;
-}
-
-[class*='bg-']:not([class*='col-']):has(.container) {
-  display: grid;
-  grid-column: full-width;
-  grid-template-columns: subgrid;
-}
-// #endregion
+@use '_func' as *;
 
 // #region grid mixins
 @mixin grid-utilities($br: '') {
@@ -179,7 +98,88 @@ main > :is(.full-width, [class*='bg-']:has(.container), iam-header, iam-collapsi
 }
 // #endregion
 
-@if $enable-new-grid == 'true' {
+@include layer('reset') {
+  // #region Main grid setup
+  body {
+    --excess-space: calc((100% - var(--max-width, #{$max-width})) / 2);
+    --col-size: calc(
+      (
+          100% - max(0%, var(--excess-space)) - max(0%, var(--excess-space)) - var(--gutter, #{$gutter}) - var(
+              --gutter,
+              #{$gutter}
+            ) -
+            (var(--gap, #{$gap}) * (#{$columns - 1}))
+        ) /
+        #{$columns}
+    );
+    column-gap: var(--gap, #{$gap});
+    display: grid;
+    margin-inline: 0;
+    width: 100%;
+    $templateColumns: '';
+    @for $i from 1 to $columns {
+      $templateColumns: $templateColumns + 'var(--col-size) [col-' + $i + '-end col-'+ ($i + 1)+'-start] ';
+    }
+    grid-template-columns:
+      [full-width-start container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+      [content-start col-1-start]
+      #{$templateColumns}
+      var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+      [container-end full-width-end];
+
+    @media screen and (min-width: #{em($max-width-px * $max-scale-up)}) {
+      grid-template-columns:
+        [full-width-start] calc(var(--excess-space) - var(--gap, #{$gap}))
+        [container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+        [content-start col-1-start]
+        #{$templateColumns}
+        var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+        [container-end] calc(var(--excess-space) - var(--gap, #{$gap})) [full-width-end];
+    }
+
+    grid-template-rows: auto;
+    align-content: start;
+    justify-content: center;
+
+    & * {
+      grid-column: content;
+
+      &:where(button):not(:has(.card)) {
+        max-width: fit-content;
+        place-self: start;
+      }
+
+      &:is(div) {
+        align-content: start;
+      }
+    }
+  }
+
+  div:has(main) {
+    display: contents !important;
+  }
+
+  :is(nav, main, footer) {
+    display: grid;
+    grid-column: full-width !important;
+    grid-template-columns: subgrid;
+  }
+
+  *:not(.row) > main:not(:has(.container:last-child)):not(:has(iam-collapsible-side:last-child)) {
+    padding-bottom: 1rem;
+  }
+
+  main > :is(.full-width, [class*='bg-']:has(.container), iam-header, iam-collapsible-side, iam-notification) {
+    grid-column: full-width;
+  }
+
+  [class*='bg-']:not([class*='col-']):has(.container) {
+    display: grid;
+    grid-column: full-width;
+    grid-template-columns: subgrid;
+  }
+  // #endregion
+
   // #region Grid utility classes
   *:has([class*='order-']) > *:not([class*='order-']) {
     order: 99;

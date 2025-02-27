@@ -1,150 +1,66 @@
-<script setup lang="ts">
-  import { shared } from '../../main.ts';
-  import Tabs from '@/components/Tabs/Tabs.vue';
+$new_utilities: ();
 
-  const replaceNewline = function (input) {
-    var newline = String.fromCharCode(13, 10);
-    return input.replaceAll('\\n', newline);
-  };
-  // Filters the CSS vars object to pull out the non-theme colours
-  const utClasses = Object.keys(shared.cssVars).reduce(function (arr, key) {
-    if (key.startsWith('--ut-')) {
-      let updateKey = key.replace('--ut-', '');
-      let value = replaceNewline(shared.cssVars[key].substring(0, shared.cssVars[key].length - 1).substring(1));
-      arr[updateKey] = { name: updateKey, value: value };
-    }
-    return arr;
-  }, {});
+$style_breakpoints: ();
 
-  const totalClasses = Object.keys(utClasses).length;
+@each $bp, $value in $grid-breakpoints {
+  @if $bp != 'xs' {
+    $style_breakpoints: map-merge((#{$bp}: ''), $style_breakpoints);
+  } @else {
+    $style_breakpoints: map-merge((#{$bp}: -#{$bp}), $style_breakpoints);
+  }
+}
 
-  // Removed classes
-  Object.keys(shared.themeColours).forEach(function (element) {
-    utClasses['border-' + element.toLowerCase()] = {
-      name: 'border-' + element.toLowerCase(),
-      value: 'Removed',
-      class: 'text-danger',
-    };
-  });
-  let floatClass = [
-    'float-end',
-    'float-md-end',
-    'float-md-none',
-    'float-md-start',
-    'float-none',
-    'float-sm-end',
-    'float-sm-none',
-    'float-sm-start',
-    'float-start',
-  ];
-  floatClass.forEach(function (classsName) {
-    utClasses[classsName] = { name: classsName, value: 'Removed', class: 'text-danger' };
-  });
+// #region Clearfix
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'clearfix': 'Clear the floats from both sides',
+  )
+);
 
-  let sizingClass = ['p', 'pb', 'pe', 'px', 'py', 'ps', 'pt', 'm', 'mb', 'me', 'mx', 'my', 'ms', 'mt', 'gap'];
-  sizingClass.forEach(function (classsName) {
-    for (let i = 0; i <= 5; i++) {
-      let cn = classsName + '-sm-' + i;
-      utClasses[cn] = { name: cn, value: 'Removed', class: 'text-danger' };
-      cn = classsName + '-md-' + i;
-      utClasses[cn] = { name: cn, value: 'Removed', class: 'text-danger' };
-    }
-    let cn = classsName + '-sm-auto';
-    utClasses[cn] = { name: cn, value: 'Removed', class: 'text-danger' };
-    cn = classsName + '-md-auto';
-    utClasses[cn] = { name: cn, value: 'Removed', class: 'text-danger' };
-  });
-
-  utClasses['lh-sm'] = { name: 'lh-sm', value: 'Removed', class: 'text-danger' };
-  utClasses['lh-base'] = { name: 'lh-sm', value: 'Removed', class: 'text-danger' };
-  utClasses['lh-lg'] = { name: 'lh-sm', value: 'Removed', class: 'text-danger' };
-
-  // Added classes
-  utClasses['mw-fit-content'] = {
-    name: 'mw-fit-content',
-    value: utClasses['mw-fit-content']['value'],
-    added: 'true',
-  };
-  utClasses['mw-sm-fit-content'] = {
-    name: 'mw-sm-fit-content',
-    value: utClasses['mw-sm-fit-content']['value'],
-    added: 'true',
-  };
-  utClasses['mw-md-fit-content'] = {
-    name: 'mw-md-fit-content',
-    value: utClasses['mw-md-fit-content']['value'],
-    added: 'true',
-  };
-  utClasses['font-body'] = {
-    name: 'font-body',
-    value: utClasses['font-body']['value'],
-    added: 'true',
-  };
-  utClasses['object-contain'] = {
-    name: 'object-fit',
-    value: utClasses['object-contain']['value'],
-    added: 'true',
-  };
-  utClasses['object-cover'] = {
-    name: 'object-fit',
-    value: utClasses['object-cover']['value'],
-    added: 'true',
-  };
-  utClasses['lh-0'] = { name: 'line height 0', value: utClasses['lh-0']['value'], added: 'true' };
-
-  const ordered = Object.keys(utClasses)
-    .sort()
-    .reduce((obj, key) => {
-      obj[key] = utClasses[key];
-      return obj;
-    }, {});
-
-  const utMixins = Object.keys(shared.cssVars).reduce(function (arr, key) {
-    if (key.startsWith('-ut-mixin-')) {
-      let updateKey = key.replace('-ut-mixin-', '');
-      let value = shared.cssVars[key];
-      arr[updateKey] = value;
-    }
-    return arr;
-  }, {});
-
-  const getMixin = (name): string => {
-    switch (name) {
-      case 'clearfix':
-        // code block
-        return `
 @mixin clearfix() {
   .clearfix {
     &::after {
       display: block;
       clear: both;
-      content: "";
+      content: '';
     }
   }
 }
-        `;
-      case 'visually-hidden':
-        // code block
-        return `
+// #endregion
+
+// #region visually-hidden
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'visually-hidden': 'Hide an element from the standard user but not from screen readers',
+  )
+);
+
 @mixin visually-hidden() {
   .visually-hidden,
   .visually-hidden-focusable:not(:focus):not(:focus-within) {
-
     position: absolute !important;
     width: 1px !important;
     height: 1px !important;
     padding: 0 !important;
-    margin: -1px !important;
+    margin: -1px !important; // Fix for https://github.com/twbs/bootstrap/issues/25686
     overflow: hidden !important;
     clip: rect(0, 0, 0, 0) !important;
     white-space: nowrap !important;
     border: 0 !important;
   }
 }
-        `;
-      case 'text-truncate':
-        // code block
-        return `
+// #endregion
+
+// #region text-truncate
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'text-truncate': 'Keep the text onto one line and add an ellipsis if needed',
+  )
+);
+
 @mixin text-truncate() {
   .text-truncate {
     overflow: hidden;
@@ -152,10 +68,16 @@
     white-space: nowrap;
   }
 }
-        `;
-      case 'ratio':
-        // code block
-        return `
+// #endregion
+
+// #region ratio
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'ratio': 'Use pre-defined aspect ratios to generate the sizing or elements',
+  )
+);
+
 @mixin ratio() {
   .ratio {
     position: relative;
@@ -182,9 +104,16 @@
     }
   }
 }
-        `;
-      case 'fixed':
-        return `
+// #endregion
+
+// #region fixed
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'fixed': 'Fix elements to either the top or bottom',
+  )
+);
+
 @mixin fixed() {
   .fixed-top {
     position: fixed;
@@ -202,9 +131,16 @@
     z-index: $zindex-fixed;
   }
 }
-        `;
-      case 'sticky':
-        return `
+// #endregion
+
+// #region sticky
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'sticky': 'Make elements stick to either the top or bottom',
+  )
+);
+
 @mixin sticky() {
   @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
@@ -224,9 +160,17 @@
     }
   }
 }
-        `;
-      case 'max-height':
-        return `
+// #endregion
+
+// #region max-height
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'max-height':
+      'Set a pre-defined max height on an element, note this will create a scrollable area if the content is larger than the max height.',
+  )
+);
+
 @mixin max-height() {
   :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg) {
     &:not(iam-table):not(.table__wrapper) {
@@ -315,9 +259,16 @@
     }
   }
 }
-        `;
-      case 'js-display':
-        return `
+// #endregion
+
+// #region js-display
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'js-display': 'Show and hide elements depending upon if javascript is running or not',
+  )
+);
+
 @mixin js-display() {
   @media (scripting: enabled) {
     .js-show {
@@ -331,9 +282,16 @@
     }
   }
 }
-        `;
-      case 'line-clamp':
-        return `
+// #endregion
+
+// #region Line clamp
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'line-clamp': 'Restricts a texts height to a number of lines (1-5)',
+  )
+);
+
 @mixin line-clamp() {
   .line-clamp {
     display: -webkit-box;
@@ -359,9 +317,16 @@
     -webkit-line-clamp: 5;
   }
 }
-        `;
-      case 'wider-colours':
-        return `
+// #endregion
+
+// #region Wider colours
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'wider-colours': 'Apply the wider range of colours in our design system',
+  )
+);
+
 @mixin wider-colours() {
   @each $colour, $value in $wider-colours {
     .wider-colour-#{$colour} {
@@ -372,9 +337,16 @@
     }
   }
 }
-        `;
-      case 'align':
-        return `
+// #endregion
+
+// #region Align
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'align': 'Change the alignment of the text ',
+  )
+);
+
 @mixin align() {
   .align-baseline {
     vertical-align: baseline !important;
@@ -400,9 +372,16 @@
     vertical-align: text-top !important;
   }
 }
-        `;
-      case 'opacity':
-        return `
+// #endregion
+
+// #region Opacity
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'opacity': 'Apply the opacity of an element by intervals of 25%',
+  )
+);
+
 @mixin opacity() {
   .opacity-0 {
     opacity: 0 !important;
@@ -424,9 +403,16 @@
     opacity: 1 !important;
   }
 }
-        `;
-      case 'overflow':
-        return `
+// #endregion
+
+// #region Overflow
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'overflow': 'Update the overflow of an element',
+  )
+);
+
 @mixin overflow() {
   .overflow-auto {
     overflow: auto !important;
@@ -444,9 +430,16 @@
     overflow: scroll !important;
   }
 }
-        `;
-      case 'display':
-        return `
+// #endregion
+
+// #region Display
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'display': 'Update the display of an element, can be applied at different breakpoints',
+  )
+);
+
 @mixin display() {
   @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
@@ -494,9 +487,16 @@
     }
   }
 }
-        `;
-      case 'position':
-        return `
+// #endregion
+
+// #region Position
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'position': 'Update the position of an element, can be applied at different breakpoints',
+  )
+);
+
 @mixin position() {
   @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
@@ -583,9 +583,16 @@
     }
   }
 }
-        `;
-      case 'border':
-        return `
+// #endregion
+
+// #region Border
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'border': 'Apply a border and adjust its settings',
+  )
+);
+
 @mixin border() {
   .border {
     border: var(--border-width) var(--border-style) var(--border-color) !important;
@@ -667,9 +674,16 @@
     --border-opacity: 1;
   }
 }
-        `;
-      case 'sizes':
-        return `
+// #endregion
+
+// #region Sizes
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'sizes': 'Apply sizing rules to an element',
+  )
+);
+
 @mixin sizes() {
   .w-25 {
     width: 25% !important;
@@ -759,9 +773,16 @@
     object-fit: contain !important;
   }
 }
-        `;
-      case 'flex':
-        return `
+// #endregion
+
+// #region Flex
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'flex': 'Update the flex rules of an element, can be applied at different breakpoints',
+  )
+);
+
 @mixin flex() {
   @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
@@ -909,9 +930,16 @@
     }
   }
 }
-        `;
-      case 'order':
-        return `
+// #endregion
+
+// #region Order
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'order': 'Update the order of an element, can be applied at different breakpoints',
+  )
+);
+
 @mixin order() {
   @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-up($breakpoint) {
@@ -951,9 +979,16 @@
     }
   }
 }
-        `;
-      case 'margins':
-        return `
+// #endregion
+
+// #region Margins
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'margins': 'Adjust the margins of an element',
+  )
+);
+
 @mixin margins() {
   @each $key, $value in $spacers {
     .m-#{$key} {
@@ -1017,9 +1052,16 @@
     margin-left: auto !important;
   }
 }
-        `;
-      case 'paddings':
-        return `
+// #endregion
+
+// #region Paddings
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'paddings': 'Adjust the paddings of an element',
+  )
+);
+
 @mixin paddings() {
   @each $key, $value in $spacers {
     .p-#{$key} {
@@ -1053,9 +1095,16 @@
     }
   }
 }
-        `;
-      case 'gap':
-        return `
+// #endregion
+
+// #region Gap
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'gap': 'Update the gap sizing of an element with the display flex',
+  )
+);
+
 @mixin gap() {
   @each $key, $value in $spacers {
     .gap-#{$key} {
@@ -1063,9 +1112,16 @@
     }
   }
 }
-        `;
-      case 'text':
-        return `
+// #endregion
+
+// #region Text
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'text': 'Apply the text settings',
+  )
+);
+
 @mixin text() {
   .font-monospace {
     font-family: var(--font-monospace) !important;
@@ -1188,9 +1244,16 @@
     word-break: break-word !important;
   }
 }
-        `;
-      case 'colours':
-        return `
+// #endregion
+
+// #region Colours
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'colours': 'Applu our design system colours by either text colour or background',
+  )
+);
+
 @mixin colours() {
   @each $color, $value in $theme-colors {
     .text-#{$color} {
@@ -1208,9 +1271,16 @@
     }
   }
 }
-        `;
-      case 'gradients':
-        return `
+// #endregion
+
+// #region gradients
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'gradients': 'Add gradients to backgrounds',
+  )
+);
+
 @mixin gradients() {
   .bg-gradient {
     background-image: var(--gradient) !important;
@@ -1251,9 +1321,16 @@
     --gradient-direction: 135deg;
   }
 }
-        `;
-      case 'pointer-events':
-        return `
+// #endregion
+
+// #region Pointer-events
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'pointer-events': 'Disable or enable point events',
+  )
+);
+
 @mixin pointer-events() {
   .pe-none {
     pointer-events: none !important;
@@ -1263,9 +1340,16 @@
     pointer-events: auto !important;
   }
 }
-        `;
-      case 'rounded':
-        return `
+// #endregion
+
+// #region Rounded
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'rounded': 'Add rounded corners',
+  )
+);
+
 @mixin rounded() {
   .rounded {
     border-radius: var(--border-radius) !important;
@@ -1323,9 +1407,16 @@
     border-top-left-radius: var(--border-radius) !important;
   }
 }
-        `;
-      case 'visible':
-        return `
+// #endregion
+
+// #region Visible
+$new_utilities: map-merge(
+  $new_utilities,
+  (
+    'visible': 'Change the visibility of elements',
+  )
+);
+
 @mixin visible() {
   .visible {
     visibility: visible !important;
@@ -1335,92 +1426,4 @@
     visibility: hidden !important;
   }
 }
-        `;
-      default:
-        return `...`;
-    }
-  };
-</script>
-
-<template>
-  <main>
-    <ul class="breadcrumb mb-0 d-sm-none">
-      <li><a href="/foundations">Foundations</a></li>
-    </ul>
-
-    <h1>Utility classes</h1>
-    <p>
-      Utility classes help developers quickly apply global style rules in a consistant way while reducing duplicate CSS
-      rules.
-    </p>
-
-    <Tabs>
-      <details>
-        <summary><h2>Bootstrap</h2></summary>
-
-        <p>
-          Our original Utility classes are based upon and use the
-          <a href="https://getbootstrap.com/docs/5.1/utilities/api/" target="_blank">boostrap utility api</a>. But some
-          classes have been removed to help reduce the CSS file size or to restrict unwanted layout and style changes.
-          For example the responsive version of the padding and margins classes have been removed. This reduces around
-          10kb in file size and removes the temptation to over configure elements.
-        </p>
-        <p class="h5 pb-4">Total classes: {{ totalClasses }}</p>
-        <ul class="list-unstyled">
-          <li :class="'pb-4 ' + value.class" v-for="(value, name) in utClasses" :key="name">
-            <h2 :class="'h5 ' + value.class">
-              {{ name }} <span class="strong text-success" v-if="value.added">Added</span>
-            </h2>
-            <pre><code>{{ value.value }}</code></pre>
-          </li>
-        </ul>
-      </details>
-
-      <details>
-        <summary><h2>Mixins</h2></summary>
-        <p>
-          Using mixins to create the utility classes allows for the classes to be added to the web components easily.
-        </p>
-        <template v-for="(value, name) in utMixins" :key="name" class="pb-4">
-          <h2 class="h5 pb-1">
-            {{ name }}
-          </h2>
-          <p class="pb-3">{{ value }}</p>
-          <pre class="mb-5 pb-o"><code>@include {{ name }}();</code><code v-if="getMixin(name).trim() != '...'">
-{{ getMixin(name).trim() }}</code></pre>
-        </template>
-      </details>
-
-      <details>
-        <summary><h2>Tailwind</h2></summary>
-        <p>
-          Tailwind can be used for smaller sites that use a framework like nuxt or next. But it will need to be
-          configured carefully and parts of the library like their grid system is not recommended.
-        </p>
-      </details>
-    </Tabs>
-  </main>
-</template>
-
-<style lang="scss" scoped>
-  @media (min-width: 36em) {
-    .list-unstyled {
-      columns: auto 2;
-      column-gap: 1rem;
-
-      li {
-        break-inside: avoid;
-        page-break-inside: avoid;
-      }
-    }
-  }
-  @media (min-width: 62em) {
-    .list-unstyled {
-      columns: auto 3;
-    }
-  }
-
-  pre {
-    max-height: 20rem;
-  }
-</style>
+// #endregion
