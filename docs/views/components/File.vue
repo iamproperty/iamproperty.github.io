@@ -193,44 +193,6 @@
         </table>
       </template>
 
-      <template #vars>
-        <table>
-          <thead>
-            <tr>
-              <th>Var</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>--carousel-spacing</th>
-              <td>
-                The outer inline spacing, used to correctly create the overflow effect on mobile and tablet. This is
-                updated when the carousel is contained insde an admin panel our dialog.
-              </td>
-            </tr>
-            <tr>
-              <th>--last-item-extra</th>
-              <td>
-                Can be used to make sure the last item is displayed correctly. Not set by default but used in situations
-                like when the carousel is contained inside and admin panel or dialog.
-              </td>
-            </tr>
-            <tr>
-              <th>--track-size, --track-colour, --thumb-colour, --thumb-size, --thumb-size-outline</th>
-              <td>These variables are used to control the size and colour of the slider element.</td>
-            </tr>
-            <tr>
-              <th>--carousel-image-aspect-ratio</th>
-              <td>
-                Update the image aspect ratio when the carousel is used to house images. By default it is 3/2 which is a
-                fairly common landscape aspect ratio.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
-
       <template #dispatched-events>
         <table>
           <thead>
@@ -244,7 +206,7 @@
             <tr>
               <th>elementchange</th>
               <td>Fires whenever the file input changes, so if files are added, or changed.</td>
-              <td></td>
+              <td>Emits the list of files currently added</td>
             </tr>
             <tr>
               <th>empty</th>
@@ -254,7 +216,7 @@
             <tr>
               <th>fileremoved</th>
               <td>Fires when a file is removed from the list by clicking the X icon on an individual file.</td>
-              <td></td>
+              <td>Emits the name of the removed file</td>
             </tr>
           </tbody>
         </table>
