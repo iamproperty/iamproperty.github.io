@@ -37,6 +37,11 @@
             filesupload($event);
           }
         "
+        @fileremoved="
+          ($event) => {
+            filesupload($event);
+          }
+        "
         ><input
           type="file"
           name="files[]"
@@ -244,6 +249,11 @@
             <tr>
               <th>empty</th>
               <td>Fires when the file input changes, resulting in there being no files selected.</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>fileremoved</th>
+              <td>Fires when a file is removed from the list by clicking the X icon on an individual file.</td>
               <td></td>
             </tr>
           </tbody>

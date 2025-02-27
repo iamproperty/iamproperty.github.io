@@ -1,7 +1,7 @@
 <script setup>
   import { ref, onMounted, defineEmits } from 'vue';
 
-  const emit = defineEmits(['elementChange', 'empty']);
+  const emit = defineEmits(['elementChange', 'empty', 'fileRemoved']);
   const $component = ref(null);
 
   onMounted(() => {
@@ -10,6 +10,9 @@
     });
     $component.value.addEventListener('empty', function (event) {
       emit('empty', event);
+    });
+    $component.value.addEventListener('fileRemoved', function (event) {
+      emit('fileRemoved', event);
     });
   });
 </script>
