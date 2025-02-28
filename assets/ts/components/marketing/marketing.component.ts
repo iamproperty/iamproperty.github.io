@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -36,7 +34,7 @@ class iamMarketing extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     this.classList.add('invert-colours');
 
     if (this.hasAttribute('data-img')) {

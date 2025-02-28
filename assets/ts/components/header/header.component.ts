@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -39,7 +37,7 @@ class iamHeader extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     this.classList.add('bg-primary');
 
     const picture = this.shadowRoot.querySelector('picture');

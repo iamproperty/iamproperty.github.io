@@ -69,6 +69,9 @@
           <a href="/brand-guidelines.pdf" target="_blank" download>Brand guidelines</a>
         </li>
         <li class="list-inline-item me-4 ms-0 mb-2">
+          <router-link to="/audit-results">Audit</router-link>
+        </li>
+        <li class="list-inline-item me-4 ms-0 mb-2">
           <router-link to="/examples">Examples</router-link>
         </li>
       </ul>

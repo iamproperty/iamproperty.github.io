@@ -1,5 +1,4 @@
-// @ts-nocheck
-function orderlist(list) {
+function orderlist(list): void {
   const randID = 'list_' + Math.random().toString(36).substr(2, 9);
   const listItems = list.querySelectorAll('li');
   const listCount = listItems.length;
@@ -23,13 +22,13 @@ function orderlist(list) {
     item.setAttribute('aria-label', `${item.innerText}: ${index + 1} of ${listCount} moveable items`);
   });
 
-  function setDraggedRow(e) {
+  function setDraggedRow(e): void {
     e.dataTransfer.setData('text/plain', e.target.id);
     draggedRow = e.target;
     e.target.classList.add('li--dragging');
   }
 
-  function resetItems() {
+  function resetItems(): void {
     // Re label the rows
     Array.from(list.querySelectorAll('li')).forEach((item, index) => {
       item.classList.remove('li--dragging');

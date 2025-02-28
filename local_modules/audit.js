@@ -23,6 +23,28 @@ var jsSize = formatBytes(jsStat.size);
 summary['js_size'] = jsSize;
 console.log("- JS: "+jsSize);
 
+var totalJSstat = jsStat.size;
+
+var components = require('../components.json');
+
+Array.from(components).forEach((component) => {
+
+  var compStat = fs.statSync(path.join(`./assets/js/components/${component}/${component}.component.min.js`));
+  var compSize = formatBytes(compStat.size);
+  summary[`${component}_size`] = compSize;
+  console.log(`-- ${component} component: `+compSize);
+
+  totalJSstat += compStat.size;
+});
+
+var totalJSsize = formatBytes(totalJSstat);
+
+summary[`Total_JS_size`] = totalJSsize;
+console.log(`- Total JS size: `+totalJSsize);
+
+
+
+
 //SVGs
 var logoStat = fs.statSync(path.join('./assets/svg/logo.svg'));
 var logoSize = formatBytes(logoStat.size);

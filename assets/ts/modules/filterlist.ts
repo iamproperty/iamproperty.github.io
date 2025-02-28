@@ -1,27 +1,26 @@
-// @ts-nocheck
-function filterlist(list: Element, input: Element) {
+function filterlist(list: Element, input: Element): void {
   addFilterlistEventListeners(list, input);
 }
 
-function addFilterlistEventListeners(list: Element, input: Element) {
+function addFilterlistEventListeners(list: Element, input: Element): void {
   let timer;
 
-  input.addEventListener('keyup', (event) => {
+  input.addEventListener('keyup', () => {
     clearTimeout(timer);
     timer = setTimeout(function () {
       filterTheList(list, input.value);
     }, 500);
   });
 
-  input.addEventListener('change', (event) => {
+  input.addEventListener('change', () => {
     clearTimeout(timer);
 
     filterTheList(list, input.value);
   });
 }
 
-export const filterTheList = function (list: Element, searchTerm) {
-  Array.from(list.querySelectorAll(':scope > li')).forEach((item, index) => {
+export const filterTheList = function (list: Element, searchTerm): void {
+  Array.from(list.querySelectorAll(':scope > li')).forEach((item) => {
     const content = item.textContent.toLowerCase();
 
     item.classList.add('d-none');

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
 
@@ -27,16 +26,16 @@ class iamFilerCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
+  async connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const cardComponent = this;
-    const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
 
     setupCard(cardComponent);
 
     // Dispatch events of selecting checkboxes
     const checkbox = cardComponent.parentElement.querySelector('input[type="checkbox"]');
     if (checkbox) {
-      checkbox.addEventListener('change', (event) => {
+      checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
           const customEvent = new CustomEvent('select-card', {
             detail: { 'Card value': checkbox.value, 'input name': checkbox.getAttribute('name') },
@@ -56,7 +55,7 @@ class iamFilerCard extends HTMLElement {
     if (cardComponent.parentElement.matches('button')) {
       const button = cardComponent.parentElement;
 
-      button.addEventListener('click', (event) => {
+      button.addEventListener('click', () => {
         if (!cardComponent.classList.contains('active')) {
           const customEvent = new CustomEvent('select-card', {
             detail: { 'button name': button.getAttribute('name') },

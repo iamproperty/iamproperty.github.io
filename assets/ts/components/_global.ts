@@ -1,5 +1,4 @@
-// @ts-nocheck
-export const trackComponentRegistered = (componentName: string) => {
+export const trackComponentRegistered = (componentName: string): void => {
   // Data layer Web component created
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
@@ -8,7 +7,7 @@ export const trackComponentRegistered = (componentName: string) => {
   });
 };
 
-export const trackComponent = (component: any, componentName: string, trackEvents: any) => {
+export const trackComponent = (component: any, componentName: string, trackEvents: any): boolean => {
   // Data layer Web component created
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({

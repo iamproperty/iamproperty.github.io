@@ -1,4 +1,4 @@
-const createPaginationButttons = function (controller: any, pagination: any) {
+const createPaginationButttons = function (controller: any, pagination: any): boolean {
   if (!controller.getAttribute('data-pages')) return false;
 
   if (!controller.getAttribute('data-page')) controller.setAttribute('data-page', 1);

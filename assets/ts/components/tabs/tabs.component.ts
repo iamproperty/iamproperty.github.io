@@ -1,4 +1,3 @@
-// @ts-nocheck
 import tabs from '../../modules/tabs';
 
 // Data layer Web component created
@@ -45,7 +44,7 @@ class iamTabs extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const classList = this.classList.toString().replace('container', '');
     this.shadowRoot.querySelector('.tabs').setAttribute('class', `tabs ${classList}`);
 

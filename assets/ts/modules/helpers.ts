@@ -1,4 +1,3 @@
-// @ts-nocheck
 /**
  * Global helper functions to help maintain and enhance framework elements.
  * @module Helpers
@@ -8,22 +7,20 @@
  * Add global classes used by the CSS and later JavaScript.
  * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
  */
-export const addBodyClasses = (body) => {
+export const addBodyClasses = (body): void => {
   body.classList.add('js-enabled');
 
   if (navigator.userAgent.indexOf('MSIE') !== -1 || navigator.appVersion.indexOf('Trident/') > 0) {
     body.classList.add('ie');
   }
-
-  return null;
 };
 
 /**
  * Add global events.
  * @param {HTMLElement} body Dom element, this doesn't have to be the body but it is recommended.
  */
-export const addGlobalEvents = (body) => {
-  const checkElements = function (hash) {
+export const addGlobalEvents = (body): void => {
+  const checkElements = function (hash): void {
     const label = document.querySelector(`label[for="${hash.replace('#', '')}"]`);
     const summary = document.querySelector(hash + ' summary');
     const dialog = document.querySelector(`dialog${hash}`);
@@ -62,7 +59,7 @@ export const addGlobalEvents = (body) => {
       const form = event.target;
 
       // Reset password types
-      Array.from(form.querySelectorAll('[data-password-type]')).forEach((input, index) => {
+      Array.from(form.querySelectorAll('[data-password-type]')).forEach((input) => {
         input.setAttribute('type', 'password');
       });
 
@@ -91,16 +88,14 @@ export const addGlobalEvents = (body) => {
     }
   });
 
-  Array.from(document.querySelectorAll('label progress')).forEach((progress, index) => {
+  Array.from(document.querySelectorAll('label progress')).forEach((progress) => {
     const label = progress.closest('label');
 
     label.setAttribute('data-percent', progress.getAttribute('value'));
   });
-
-  return null;
 };
 
-export const isNumeric = function (str) {
+export const isNumeric = function (str): any {
   if (typeof str != 'string') return false; // we only process strings!
   return (
     !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
@@ -108,17 +103,17 @@ export const isNumeric = function (str) {
   ); // ...and ensure strings of whitespace fail
 };
 
-export const zeroPad = (num, places) => String(num).padStart(places, '0');
+export const zeroPad = (num, places): any => String(num).padStart(places, '0');
 
-export const ucfirst = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-export const ucwords = (str) =>
+export const ucfirst = (str): any => str.charAt(0).toUpperCase() + str.slice(1);
+export const ucwords = (str): any =>
   str
     .split(' ')
     .map((s) => ucfirst(s))
     .join(' ');
-export const unsnake = (str) => str.replace(/_/g, ' ');
-export const snake = (str) => str.replace(/ /g, '_');
-export const safeID = function (str) {
+export const unsnake = (str): any => str.replace(/_/g, ' ');
+export const snake = (str): any => str.replace(/ /g, '_');
+export const safeID = function (str): any {
   str = str.toLowerCase();
   str = snake(str);
   str = str.replace(/\W/g, '');
@@ -126,7 +121,7 @@ export const safeID = function (str) {
   return str;
 };
 
-export const numberOfDays = function (startDateString: string, endDateString: string) {
+export const numberOfDays = function (startDateString: string, endDateString: string): number {
   const convertStart = startDateString.split('/');
   const convertEnd = endDateString.split('/');
   const dateStart: any = new Date(convertStart[1] + '/' + convertStart[0] + '/' + convertStart[2]);
@@ -145,15 +140,17 @@ export const numberOfDays = function (startDateString: string, endDateString: st
   return numberOfDays;
 };
 // Used to get values from nested json objects
-export const resolvePath = (object, path, defaultValue) =>
+export const resolvePath = (object, path, defaultValue): any =>
   path
+    // eslint-disable-next-line no-useless-escape
     .split(/[\.\[\]\'\"]/)
     .filter((p) => p)
     .reduce((o, p) => (o ? o[p] : defaultValue), object);
 
-export const isTraversable = (o) => Array.isArray(o) || (o !== null && ['function', 'object'].includes(typeof o));
+export const isTraversable = (o): Array =>
+  Array.isArray(o) || (o !== null && ['function', 'object'].includes(typeof o));
 
-export const getSwipeDirection = (touchstartX, touchstartY, touchendX, touchendY) => {
+export const getSwipeDirection = (touchstartX, touchstartY, touchendX, touchendY): string => {
   const limit = Math.tan(((45 * 1.5) / 180) * Math.PI);
   const pageWidth = window.innerWidth || document.body.clientWidth;
   const treshold = Math.max(1, Math.floor(0.01 * pageWidth));

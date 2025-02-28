@@ -54,23 +54,13 @@ const rollupConfig = [
     },
     external,
     plugins
-  },
-  {
-    input: path.resolve(__dirname, `assets/js/components.js`),
-    output: {
-      banner,
-      file: path.resolve(__dirname, `assets/js/${fileDest.replace("scripts","components")}.js`),
-      format: ESM ? 'esm' : 'umd',
-      globals
-    },
-    external,
-    plugins
   }
 ];
 
-const components = ["accordion","header","table","tabs",'card','filter-card','video-card','record-card',"filterlist",'applied-filters','pagination','notification','actionbar','nav','collapsible-side','address-lookup','fileupload','search','inline-edit','multiselect','slider','carousel','marketing','barchart'];
 
-components.forEach((component) => {
+var components = require('./components.json');
+
+Array.from(components).forEach((component) => {
 
   let css = '';
   let extraCSS = '';

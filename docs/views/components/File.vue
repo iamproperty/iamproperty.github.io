@@ -48,10 +48,10 @@
           accept=".pdf, .csv, .jpg, .png"
           multiple="multiple"
           @change="
-          ($event) => {
-            filesupload($event);
-          }
-        "
+            ($event) => {
+              filesupload($event);
+            }
+          "
       /></FileUpload>
     </div>
 
@@ -153,9 +153,8 @@
               <td>-</td>
               <td>Integer</td>
               <td>No</td>
-              <td>Blocks files from being added that is larger than the max size given in kb's.                .</td>
+              <td>Blocks files from being added that is larger than the max size given in kb's. .</td>
             </tr>
-   
           </tbody>
         </table>
       </template>
@@ -220,14 +219,17 @@
           <li>The user should be able to select multiple files in the 'multiple' attribute is set.</li>
           <li>The user should be able to see a list of all the files they have selected.</li>
           <li>The user should be able to remove a file from the list by clicking the 'x' icon on the file.</li>
-          <li>If the data-maxsize attribute is set and the user tries to upload a file larger than the set size, they will be shown an error and the file will not be added to the list.</li>
+          <li>
+            If the data-maxsize attribute is set and the user tries to upload a file larger than the set size, they will
+            be shown an error and the file will not be added to the list.
+          </li>
         </ul>
       </template>
       <template #data-layer>
         <p>No component specific dataLayer events</p>
       </template>
     </Integration>
-   
+
     <div class="bg-light version-control">
       <div class="container">
         <table>

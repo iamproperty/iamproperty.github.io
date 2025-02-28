@@ -1,7 +1,7 @@
 import { ucfirst, unsnake, numberOfDays } from './helpers';
 
 // #region Functions that setup and trigger other functions
-export const setupChart = (chartElement: any, chartOuter: any, tableElement: any) => {
+export const setupChart = (chartElement: any, chartOuter: any, tableElement: any): boolean => {
   // #region Reset the chart
   // empty divs to re-populate
   const chartOptions = chartOuter.querySelector('.chart__options');
@@ -62,7 +62,7 @@ export const setupChart = (chartElement: any, chartOuter: any, tableElement: any
 // #endregion
 
 // #region Event handlers and observers
-export const setEventHandlers = function (chartElement: any, chartOuter: any) {
+export const setEventHandlers = function (chartElement: any, chartOuter: any): void {
   const showData = chartOuter.querySelectorAll(':scope > input[type="checkbox"]');
 
   const { type } = getChartData(chartElement, chartOuter);
@@ -89,13 +89,13 @@ export const setEventHandlers = function (chartElement: any, chartOuter: any) {
   */
 };
 
-export const setEventObservers = function (chartElement: any, chartOuter: any) {
+export const setEventObservers = function (chartElement: any, chartOuter: any): boolean {
   if (chartElement.hasAttribute('data-series')) return false;
 
   const table = chartElement.querySelector('table');
   const newTable = chartOuter.querySelector('table');
 
-  const attributesUpdated = (mutationList: any, observer: any) => {
+  const attributesUpdated = (mutationList: any, observer: any): void => {
     observer.disconnect();
     observer2.disconnect();
 
@@ -114,7 +114,7 @@ export const setEventObservers = function (chartElement: any, chartOuter: any) {
     observer2.observe(chartElement, { attributes: true });
   };
 
-  const tableUpdated = (mutationList: any, observer: any) => {
+  const tableUpdated = (mutationList: any, observer: any): boolean => {
     observer.disconnect();
     observer2.disconnect();
 
@@ -140,7 +140,7 @@ export const setEventObservers = function (chartElement: any, chartOuter: any) {
 // #endregion
 
 // #region GET functions
-export const getChartData = function (chartElement: any, chartOuter: any) {
+export const getChartData = function (chartElement: any, chartOuter: any): any {
   const table = chartOuter.querySelector('.chart__wrapper table');
 
   const min: any = chartElement.hasAttribute('data-min') ? chartElement.getAttribute('data-min') : 0;
@@ -188,7 +188,7 @@ export const getChartData = function (chartElement: any, chartOuter: any) {
   };
 };
 
-function getLargestValue(table: any) {
+function getLargestValue(table: any): number {
   const values = Array.from(table.querySelectorAll('tbody td:not(:first-child)')).map((element: any) => {
     let currentValue: string | number = String(element.textContent);
     currentValue = currentValue.replace('£', '');
@@ -205,7 +205,7 @@ function getLargestValue(table: any) {
   return Math.ceil(largetValue);
 }
 
-const getValues = function (value: number, min: any, max: any, start?: number) {
+const getValues = function (value: number, min: any, max: any, start?: number): any {
   let cleanValue: string | number = String(value);
   cleanValue = cleanValue.replace('£', '');
   cleanValue = cleanValue.replace('%', '');
@@ -237,7 +237,7 @@ const getValues = function (value: number, min: any, max: any, start?: number) {
   return { percent, axis, bottom };
 };
 
-function getCoordinatesForPercent(percent: number, pieCount: number) {
+function getCoordinatesForPercent(percent: number, pieCount: number): any {
   // This moves the start point to the top middle point like a clock
   if (pieCount > 1) percent = percent - 0.25;
 
@@ -249,7 +249,7 @@ function getCoordinatesForPercent(percent: number, pieCount: number) {
 // #endregion
 
 // #region SET functions - set data attributes and classes
-export const setCellData = function (chartElement: any, chartOuter: any, table: any) {
+export const setCellData = function (chartElement: any, chartOuter: any, table: any): void {
   let { min, max } = getChartData(chartElement, chartOuter);
 
   const chartType = chartElement.getAttribute('data-type');
@@ -457,7 +457,7 @@ export const setCellData = function (chartElement: any, chartOuter: any, table: 
   });
 };
 
-export const setLongestLabel = function (chartOuter: any) {
+export const setLongestLabel = function (chartOuter: any): void {
   const chartWrapper = chartOuter.querySelector('.chart__wrapper');
   const table = chartOuter.querySelector('.chart table');
   // set the longest label attr so that the bar chart knows what margin to set on the left
@@ -478,7 +478,7 @@ export const setLongestLabel = function (chartOuter: any) {
 // #endregion
 
 // #region CREATE function
-export const createTypeSwitcher = function (chartElement: any, chartKey: any, chartOptions: any) {
+export const createTypeSwitcher = function (chartElement: any, chartKey: any, chartOptions: any): void {
   const chartID = `chart-${Date.now() + (Math.floor(Math.random() * 100) + 1)}`;
   const availableTypes = chartElement.hasAttribute('data-types')
     ? chartElement.getAttribute('data-types').split(',')
@@ -507,7 +507,7 @@ export const createTypeSwitcher = function (chartElement: any, chartKey: any, ch
   }
 };
 
-export const createChartKey = function (chartOuter: any, tableElement: any, chartKey: any) {
+export const createChartKey = function (chartOuter: any, tableElement: any, chartKey: any): void | boolean {
   const chartID = `chart-${Date.now() + (Math.floor(Math.random() * 100) + 1)}`;
   //const chartOuter = chartElement.querySelector('.chart__outer');
 
@@ -535,7 +535,7 @@ function createChartKeyItem(
   chartKey: any,
   chartOuter: any,
   previousInput: any
-) {
+): any {
   const input = document.createElement('input');
   input.setAttribute('name', `${chartID}-dataset-${index}`);
   input.setAttribute('id', `${chartID}-dataset-${index}`);
@@ -557,8 +557,9 @@ function createChartKeyItem(
   return previousInput;
 }
 
-export const createChartGuidelines = function (chartElement: any, chartOuter: any, chartGuidelines: any) {
-  let { min, max, yaxis, increment, guidelines } = getChartData(chartElement, chartOuter);
+export const createChartGuidelines = function (chartElement: any, chartOuter: any, chartGuidelines: any): void {
+  const { increment, guidelines } = getChartData(chartElement, chartOuter);
+  let { min, max, yaxis } = getChartData(chartElement, chartOuter);
 
   if (guidelines.length) yaxis = guidelines;
 
@@ -586,8 +587,9 @@ export const createChartGuidelines = function (chartElement: any, chartOuter: an
   }
 };
 
-export const createChartYaxis = function (chartElement: any, chartOuter: any, chartYaxis: any) {
-  let { min, max, yaxis, increment } = getChartData(chartElement, chartOuter);
+export const createChartYaxis = function (chartElement: any, chartOuter: any, chartYaxis: any): void {
+  const { yaxis, increment } = getChartData(chartElement, chartOuter);
+  let { min, max } = getChartData(chartElement, chartOuter);
 
   const startDay = min;
 
@@ -614,7 +616,7 @@ export const createChartYaxis = function (chartElement: any, chartOuter: any, ch
   }
 };
 
-export const createXaxis = function (chartElement: any, chartOuter: any, xaxis: any) {
+export const createXaxis = function (chartElement: any, chartOuter: any, xaxis: any): void {
   const chart = chartOuter.querySelector('.chart');
   let chartXaxis = chartOuter.querySelector('.chart__xaxis');
 
@@ -636,7 +638,7 @@ export const createXaxis = function (chartElement: any, chartOuter: any, xaxis: 
   chart.prepend(chartXaxis);
 };
 
-export const createLines = function (chartElement: any, chartOuter: any) {
+export const createLines = function (chartElement: any, chartOuter: any): void {
   const { min, max } = getChartData(chartElement, chartOuter);
 
   const chartType = chartElement.getAttribute('data-type');
@@ -702,7 +704,7 @@ export const createLines = function (chartElement: any, chartOuter: any) {
   linesWrapper.innerHTML = returnString;
 };
 
-export const createPies = function (chartOuter: any) {
+export const createPies = function (chartOuter: any): void {
   let returnString = '';
   const chartInner = chartOuter.querySelector('.chart');
   let pieWrapper = chartOuter.querySelector('.pies');
@@ -782,7 +784,7 @@ export const createPies = function (chartOuter: any) {
   pieWrapper.innerHTML = returnString;
 };
 
-export const createSlope = function (chartElement: any, chartOuter: any) {
+export const createSlope = function (chartElement: any, chartOuter: any): void {
   let n: number = 0;
   let totalX: number = 0;
   let totalY: number = 0;
@@ -835,7 +837,7 @@ export const createSlope = function (chartElement: any, chartOuter: any) {
   slopeWrapper.innerHTML = `<svg viewBox="0 0 200 100" class="line" preserveAspectRatio="none"><path fill="none" d="M 0 ${100 - firstYPercent} L 200 ${100 - lastYPercent}" style="--path: path('M 0 100 L 200 100');"></path></svg>`;
 };
 
-function createKeyTotals(chartElement: any, chartOuter: any) {
+function createKeyTotals(chartElement: any, chartOuter: any): void {
   let chartTotal = 0;
 
   Array.from(
@@ -869,7 +871,7 @@ function createKeyTotals(chartElement: any, chartOuter: any) {
 
     if (chartElement.hasAttribute('data-currency')) {
       if (chartElement.getAttribute('data-currency') == 'GBP') {
-        // @ts-ignore
+        // @ts-expect-error Not sure
         keyTotal = new Intl.NumberFormat('en-GB', {
           style: 'currency',
           currency: 'GBP',

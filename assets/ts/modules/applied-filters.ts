@@ -1,6 +1,5 @@
-// @ts-nocheck
-function createAppliedFilters(container, filters) {
-  function addFilterButton(filters, input, notSet = true) {
+function createAppliedFilters(container, filters): void {
+  function addFilterButton(filters, input, notSet = true): void | boolean {
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
 
@@ -95,7 +94,7 @@ function createAppliedFilters(container, filters) {
   // check for inputs on load
   Array.from(
     container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-  ).forEach((input, index) => {
+  ).forEach((input) => {
     addFilterButton(filters, input, false);
   });
 
@@ -106,7 +105,7 @@ function createAppliedFilters(container, filters) {
       if (event[0].attributeName == 'open') {
         Array.from(
           container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-        ).forEach((input, index) => {
+        ).forEach((input) => {
           addFilterButton(filters, input, false);
         });
       }
@@ -115,11 +114,11 @@ function createAppliedFilters(container, filters) {
     observer.observe(dialog, { attributes: true });
   }
 
-  container.addEventListener('tags-set', function (event) {
+  container.addEventListener('tags-set', function () {
     filters.innerHTML = '';
     Array.from(
       container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-    ).forEach((input, index) => {
+    ).forEach((input) => {
       addFilterButton(filters, input, false);
     });
   });
@@ -127,7 +126,7 @@ function createAppliedFilters(container, filters) {
   // check for change in displayed inputs
   Array.from(
     container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-  ).forEach((input, index) => {
+  ).forEach((input) => {
     input.addEventListener('change', function (event) {
       if (!container.hasAttribute('data-keep-same')) addFilterButton(filters, input);
 
@@ -155,7 +154,7 @@ function createAppliedFilters(container, filters) {
           let selector = `[name="${name}"]`;
 
           if (name.match(/\[(.*)\]/)) {
-            const newName = name.replace(/\[(.*)\]/, `[]`);
+            //const newName = name.replace(/\[(.*)\]/, `[]`);
             const value = name.replace(/.*\[(.*)\]/, `$1`);
             selector = `[value="${value}"]`;
           }
@@ -168,12 +167,12 @@ function createAppliedFilters(container, filters) {
             if (input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox') {
               input.value = '';
 
-              var event = new Event('force');
+              const event = new Event('force');
               if (!container.hasAttribute('data-nosubmit')) input.closest('form').dispatchEvent(event);
             } else {
               input.checked = false;
 
-              var event = new Event('force');
+              const event = new Event('force');
               if (!container.hasAttribute('data-nosubmit')) input.closest('form').dispatchEvent(event);
             }
           }

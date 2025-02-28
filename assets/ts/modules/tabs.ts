@@ -1,10 +1,7 @@
-// @ts-nocheck
 import { getSwipeDirection } from './helpers';
 
-export const createTabsLinks = function (tabsElement: Element) {
-  const details = tabsElement.querySelectorAll(':scope > details');
+export const createTabsLinks = function (tabsElement: Element): void {
   const detailsORLinks = tabsElement.querySelectorAll(':scope > details, :scope > a');
-  const summaries = tabsElement.querySelectorAll(':scope > details > summary');
   let tabLinks = tabsElement.querySelector(':scope > .tabs__links');
 
   if (tabsElement.shadowRoot && tabsElement.shadowRoot.querySelector('.tabs__links'))
@@ -23,7 +20,7 @@ export const createTabsLinks = function (tabsElement: Element) {
 
   // Create the tab buttons from the summary titles
   let tabindex = 0;
-  detailsORLinks.forEach((element, index) => {
+  detailsORLinks.forEach((element) => {
     let button = document.createElement('button');
 
     if (element.matches('details')) {
@@ -57,7 +54,7 @@ export const createTabsLinks = function (tabsElement: Element) {
   });
 };
 
-export const setTabsEventHandlers = function (tabsElement: Element) {
+export const setTabsEventHandlers = function (tabsElement: Element): void {
   const details = tabsElement.querySelectorAll(':scope > details');
   const summaries = tabsElement.querySelectorAll(':scope > details > summary');
   let buttonWrapper = tabsElement.querySelector(':scope .tabs__links');
@@ -65,7 +62,7 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
 
   let nextButton = tabsElement.querySelector(':scope .tabs__next');
 
-  var scrollTimeout;
+  let scrollTimeout;
   window.isClicked = false;
   window.isScrolling = false;
 
@@ -117,7 +114,7 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
     });
   });
 
-  buttonWrapper.addEventListener('scrollend', (event) => {
+  buttonWrapper.addEventListener('scrollend', () => {
     clearTimeout(scrollTimeout);
 
     scrollTimeout = setTimeout(function () {

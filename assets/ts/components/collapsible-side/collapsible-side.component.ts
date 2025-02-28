@@ -1,4 +1,3 @@
-// @ts-nocheck
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -45,7 +44,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const sideMenu = this.shadowRoot.querySelector('.side-menu');
     const sideMenuContent = this.shadowRoot.querySelector('.side-menu-content');
     const mainContent = this.shadowRoot.querySelector('.main-content');
@@ -74,7 +73,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     }
 
     // Open the menu
-    button.addEventListener('click', (event) => {
+    button.addEventListener('click', () => {
       if (!sideMenu.classList.contains('open')) {
         sideMenuContent.classList.remove('closed');
 
@@ -99,7 +98,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     });
 
     // Mimic hover event on desktop so that we can control when classes are set and which order
-    sideMenu.addEventListener('mouseenter', (event) => {
+    sideMenu.addEventListener('mouseenter', () => {
       if (window.innerWidth > 992) {
         if (!sideMenu.classList.contains('open')) sideMenuContent.classList.remove('closed');
 
@@ -107,13 +106,13 @@ class iamCollapsibleSideMenu extends HTMLElement {
       }
     });
 
-    sideMenu.addEventListener('mousemove', (event) => {
+    sideMenu.addEventListener('mousemove', () => {
       if (window.innerWidth > 992) {
         if (!sideMenu.classList.contains('open')) sideMenuContent.classList.remove('closed');
       }
     });
 
-    sideMenu.addEventListener('mouseleave', (event) => {
+    sideMenu.addEventListener('mouseleave', () => {
       if (window.innerWidth > 992) {
         sideMenu.classList.remove('hover');
 
