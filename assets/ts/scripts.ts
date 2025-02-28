@@ -5,7 +5,33 @@ import createDataLayer from './modules/data-layer';
 import extendInputs from './modules/inputs';
 import createDynamicEvents from './modules/dynamicEvents';
 
-import components from '../../components.json';
+const components = [
+  "accordion",
+  "header",
+  "table",
+  "tabs",
+  "card",
+  "filter-card",
+  "video-card",
+  "record-card",
+  "filterlist",
+  "applied-filters",
+  "pagination",
+  "notification",
+  "actionbar",
+  "nav",
+  "collapsible-side",
+  "address-lookup",
+  "fileupload",
+  "search",
+  "inline-edit",
+  "multiselect",
+  "multi-step",
+  "slider",
+  "carousel",
+  "marketing",
+  "barchart"
+];
 
 // Attach classes to dom elements
 document.addEventListener('DOMContentLoaded', function () {

@@ -26,6 +26,7 @@ The below needs to be done before a pull request can be approved:
 - [ ] New components/features have sufficient documentation
 - [ ] New component has dataLayer events added
 - [ ] New component is added to the components.json file so it is picked up in the rollup config file
+- [ ] New component is added to the components const in the main scripts file
 
 ## Accesibility check list
 
