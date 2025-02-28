@@ -126,15 +126,7 @@
 
     <Integration component="fileupload" componentName="iam-fileupload">
       <template #web-component>
-        <pre><code>{{`<div class="file-upload">
-  <span class="file-upload__title">Upload file</span>
-  <p class="helper-text">Max file size is 500kb. Supported file types are .pdf, .csv, .jpg, .png</p>
-  <button class="btn btn-primary"><i class="fa-regular fa-arrow-up-from-bracket me-2" aria-hidden="true" slot="btn"></i> Upload document</button>
-  <div class="drop-area"><input type="file" name="files[]" accept=".pdf, .csv, .jpg, .png"></div>
-  <hr>
-  <input type="file" name="files[]" accept=".pdf, .csv, .jpg, .png">
-  <div class="files"></div>
-</div>`}}</code></pre>
+        <pre><code>{{`<iam-fileupload data-maxsize="500"> <input type="file" name="files[]" accept=".pdf, .csv, .jpg, .png" multiple="multiple" /></iam-fileupload>`}}</code></pre>
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import FileUpload from '@/components/Carousel/FileUpload.vue</script>
@@ -264,21 +256,15 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import anatomy from '../../img/file-upload-anatomy.png';
-  import Tabs from '@/components/Tabs/Tabs.vue';
 
   import Input from '@/components/Input/Input.vue';
   import FileUpload from '@/components/FileUpload/FileUpload.vue';
-  import Readme from '@/components/FileUpload/README.md';
-  import WebReadme from '~/ts/components/fileupload/README.md';
 
   export default {
     components: {
       DSHeader,
       Input,
       FileUpload,
-      Readme,
-      Tabs,
-      WebReadme,
     },
     data() {
       return {
