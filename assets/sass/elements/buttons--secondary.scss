@@ -2,9 +2,12 @@
 
 // #region secondary button
 .btn-secondary {
-  background: var(--colour-btn-secondary-bg);
-  border: 2px solid var(--colour-btn-secondary-border);
   color: var(--colour-btn-secondary);
+
+  &:not(.border-0) {
+    background: var(--colour-btn-secondary-bg);
+    border: 2px solid var(--colour-btn-secondary-border);
+  }
 }
 
 a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,

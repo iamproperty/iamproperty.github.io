@@ -69,6 +69,7 @@ button,
   user-select: none;
 
   color: var(--colour-btn);
+
   &:not(.border-0) {
     background: var(--colour-btn-bg);
     border: var(--btn-border-width) solid var(--colour-btn-border);

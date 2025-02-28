@@ -653,8 +653,8 @@
       <h2>Mobile button padding</h2>
       <p>
         Due to the small real estate of mobile screens we can reduce the minimum padding around buttons from 24px
-        (1.5rem) to 16px (0.5rem). Compact buttons can still have the smaller padding of 8px (0.5rem) on desktop,
-        tablet, and mobile.
+        (1.5rem) to 8px (0.5rem). Compact buttons can still have the smaller padding of 8px (0.5rem) on desktop, tablet,
+        and mobile.
       </p>
       <p>
         This reduced padding provides more flexibility when designing for mobile as more content can be displayed on the
