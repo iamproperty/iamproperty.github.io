@@ -19,14 +19,14 @@
   }
 
   > .btn:first-child {
-    margin-bottom: 0.25rem;
+    //margin-bottom: 0.25rem;
 
     &:not(.btn-compact):not([class*='fa-']):after {
       content: '';
 
       display: inline-block;
       margin-left: 1em;
-      margin-bottom: -0.15em;
+
       height: 1em;
       width: 1em;
       z-index: var(--index-focus);
@@ -46,10 +46,15 @@
     &[aria-expanded]:not([data-number]):after {
       transform: rotate(270deg);
     }
+
+    &:has(+ dialog[open]):not([data-number]):after {
+      transform: rotate(270deg);
+    }
   }
 
   > :is(dialog[open], dialog:popover-open) {
     left: 0;
+    margin-top: -1rem;
     top: 100%;
     z-index: var(--index-floating);
     min-width: rem(320);
