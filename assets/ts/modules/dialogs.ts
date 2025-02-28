@@ -1,5 +1,4 @@
-// @ts-nocheck
-const extendDialogs = (body) => {
+const extendDialogs = (body): void => {
   Array.from(body.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
     const parent = dialog.closest('.dialog__wrapper');
 
@@ -230,7 +229,7 @@ const extendDialogs = (body) => {
   return null;
 };
 
-export const createDialog = (dialog) => {
+export const createDialog = (dialog): void => {
   // If you are using Vue eevents and bindings its recommended to add in the .mh-lg div manually to the dialog
   if (!dialog.querySelector(':scope .mh-lg') && !dialog.querySelector('iam-multi-step')) {
     dialog.innerHTML = `<div class="mh-lg">${dialog.innerHTML}</div>`;

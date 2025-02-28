@@ -65,9 +65,7 @@ class iamAddressLookup extends HTMLElement {
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
-    const component = this;
-    const wrapper = this.shadowRoot.querySelector('.wrapper');
+  async connectedCallback(): void {
     const lookup = this.shadowRoot.querySelector('[name="postcode"]');
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
@@ -77,12 +75,13 @@ class iamAddressLookup extends HTMLElement {
     const switchLookupBtn = this.shadowRoot.querySelector('.switch-to-lookup-btn');
     const title = this.hasAttribute('data-title') ? this.getAttribute('data-title') : 'Property address';
     const preFilledAddressBtn = this.shadowRoot.querySelector('.pre-filled-address + button');
+    const dataDisplayText = this.hasAttribute('data-display-text');
 
     Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement, index) => {
       titleElement.innerHTML = title;
     });
 
-    function checkFilled(component) {
+    function checkFilled(component): void {
       const preFilledAddress = component.shadowRoot.querySelector('.pre-filled-address');
       let preFilled = true;
       preFilledAddress.innerHTML = '';
@@ -145,7 +144,7 @@ class iamAddressLookup extends HTMLElement {
       });
     }
 
-    function openManualWrapper() {
+    function openManualWrapper(): void {
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
@@ -211,7 +210,7 @@ class iamAddressLookup extends HTMLElement {
       }
     });
 
-    const search = async (postcode) => {
+    const search = async (postcode): any => {
       let ajaxURL = this.getAttribute('data-url');
       ajaxURL += `${encodeURI(postcode)}`;
 
@@ -249,8 +248,8 @@ class iamAddressLookup extends HTMLElement {
               } else {
                 const values = JSON.stringify(address);
 
-                if (component.hasAttribute('data-display-text')) {
-                  listString += `<option value="${address[component.getAttribute('data-display-text')]}, ${postcode}" data-values='${values}'></option>`;
+                if (dataDisplayText) {
+                  listString += `<option value="${address[dataDisplayText]}, ${postcode}" data-values='${values}'></option>`;
                 } else {
                   let itemString = '';
                   for (const [key, value] of Object.entries(address)) {

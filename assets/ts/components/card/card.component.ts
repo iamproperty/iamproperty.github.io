@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
 
@@ -28,7 +27,8 @@ class iamCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
+  async connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const cardComponent = this;
     const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
     const cardBody = cardComponent.shadowRoot.querySelector('.card__body');
@@ -141,11 +141,11 @@ class iamCard extends HTMLElement {
     ]);
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-image'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-total': {
         if (this.shadowRoot.querySelector('.card__total'))

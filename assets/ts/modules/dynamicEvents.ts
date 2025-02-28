@@ -1,7 +1,5 @@
-// @ts-nocheck
-
 // Create the event listeners
-const createDynamicEvents = () => {
+const createDynamicEvents = (): void => {
   // Change event
   document.addEventListener('change', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-change-events]'))
@@ -20,7 +18,7 @@ const createDynamicEvents = () => {
 };
 
 // Parse the JSON and trigger the events, this may be singular or multiple set of events
-const splitEvents = (element, events) => {
+const splitEvents = (element, events): void => {
   // an empty events will trigger looking up the dom chain for
   if (!events) {
     events = element.parentNode.getAttribute('data-change-events');
@@ -30,12 +28,12 @@ const splitEvents = (element, events) => {
   if (!events) return false;
 
   // Split out each event
-  Array.from(JSON.parse(events)).forEach((event, index) => {
+  Array.from(JSON.parse(events)).forEach((event) => {
     checkConditions(element, event);
   });
 };
 
-const checkConditions = (element, event) => {
+const checkConditions = (element, event): void | boolean => {
   if ('matches' in event) {
     if (event['matches'] == 'any') runEvent(element, event, 'if');
     else if (element.value == event.matches) runEvent(element, event, 'if');
@@ -56,7 +54,7 @@ const checkConditions = (element, event) => {
   }
 };
 
-const runEvent = (element, event, eventType) => {
+const runEvent = (element, event, eventType): void | boolean => {
   if (eventType in event == false) return false;
 
   switch (event[eventType]) {
@@ -119,7 +117,7 @@ const runEvent = (element, event, eventType) => {
   }
 };
 
-const populateForm = function (element, event) {
+const populateForm = function (element, event): void {
   const values = JSON.parse(element.getAttribute('data-values'));
   const form = document.querySelector(event['target']);
 

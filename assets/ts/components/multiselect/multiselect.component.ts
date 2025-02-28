@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -45,7 +43,8 @@ class iamMultiselect extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const multiselect = this;
     const form = this.closest('form');
     const wrapper = this.shadowRoot.querySelector('.wrapper');
@@ -91,7 +90,7 @@ class iamMultiselect extends HTMLElement {
     }
 
     // Set the correct attributes
-    function setItem(inputToSet) {
+    function setItem(inputToSet): void {
       if (inputToSet.checked == false) {
         inputToSet.closest('label').removeAttribute('slot');
         inputToSet.closest('label').removeAttribute('style');
@@ -239,7 +238,7 @@ class iamMultiselect extends HTMLElement {
       }
     });
 
-    function checkLastTag() {
+    function checkLastTag(): Element | null {
       if (order == 0) return false;
 
       let lastTag = multiselect.querySelector(`label[data-order="${order}"]`);

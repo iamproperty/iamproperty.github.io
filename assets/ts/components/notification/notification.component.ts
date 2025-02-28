@@ -1,4 +1,3 @@
-// @ts-nocheck
 import setupNotification, { closeNotification } from '../../modules/notification';
 
 // Data layer Web component created
@@ -43,6 +42,7 @@ class iamNotification extends HTMLElement {
   }
 
   connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const wrapper = this;
     const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : 'white';
 

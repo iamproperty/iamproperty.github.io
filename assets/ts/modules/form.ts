@@ -1,7 +1,6 @@
-// @ts-nocheck
 // Create a link between two input/selects with one acting as setting a minimum value and the second a maximum
 // The link between the two will prevent the max input field form setting a lower value than the min and vice versa
-function inputRange(inputWrapper) {
+function inputRange(inputWrapper): void {
   inputWrapper.addEventListener(
     'change',
     function (e) {
@@ -32,7 +31,7 @@ function inputRange(inputWrapper) {
   );
 }
 
-function inputRedirect(inputWrapper) {
+function inputRedirect(inputWrapper): void {
   inputWrapper.addEventListener(
     'change',
     function (e) {
@@ -50,7 +49,7 @@ function inputRedirect(inputWrapper) {
 }
 
 //
-function multipleFileUploads(wrapper) {
+function multipleFileUploads(wrapper): void {
   const fileTenplate = wrapper.querySelector('.row');
   const clone = fileTenplate.cloneNode(true);
   const addButton = wrapper.querySelector('[data-add]');
@@ -94,7 +93,7 @@ function multipleFileUploads(wrapper) {
 }
 
 // Acts as an overall initialise function to trigger other functions.
-function form(formElement) {
+function form(formElement): void {
   // Check for input range groups
   Array.from(formElement.querySelectorAll('[data-input-range]')).forEach((arrayElement, index) => {
     inputRange(arrayElement);

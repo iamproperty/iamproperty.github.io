@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { trackComponent, trackComponentRegistered } from '../_global';
 
 trackComponentRegistered('iam-multi-step');
@@ -26,7 +25,8 @@ class iamMultiStep extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const MultiStepComponent = this;
     const steps = this.shadowRoot.querySelector('.steps');
     const form = this.querySelector('form');
@@ -86,14 +86,14 @@ class iamMultiStep extends HTMLElement {
     MultiStepComponent.addEventListener(
       'invalid',
       (function () {
-        return function (e) {
+        return function (e): any {
           e.preventDefault();
         };
       })(),
       true
     );
 
-    function validateFieldset(button) {
+    function validateFieldset(button): void {
       const currentFieldset = MultiStepComponent.querySelector(`fieldset.active`)
         ? MultiStepComponent.querySelector(`fieldset.active`)
         : MultiStepComponent.querySelector(`fieldset[data-title]`);
@@ -202,11 +202,11 @@ class iamMultiStep extends HTMLElement {
     trackComponent(MultiStepComponent, 'iam-multi-step', []);
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-image'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-total': {
         if (this.shadowRoot.querySelector('.card__total'))

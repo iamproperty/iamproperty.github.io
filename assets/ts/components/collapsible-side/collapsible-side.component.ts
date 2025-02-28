@@ -1,4 +1,3 @@
-// @ts-nocheck
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -45,7 +44,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const sideMenu = this.shadowRoot.querySelector('.side-menu');
     const sideMenuContent = this.shadowRoot.querySelector('.side-menu-content');
     const mainContent = this.shadowRoot.querySelector('.main-content');

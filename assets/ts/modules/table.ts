@@ -1,8 +1,7 @@
-// @ts-nocheck
 import { zeroPad, isNumeric, ucfirst, resolvePath } from './helpers';
 
 // Basic functionality needed
-export const addDataAttributes = (table) => {
+export const addDataAttributes = (table): void => {
   const colHeadings = Array.from(table.querySelectorAll('thead th'));
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
 
@@ -55,7 +54,7 @@ export const addDataAttributes = (table) => {
   });
 };
 
-export const getLargestLastColWidth = (table) => {
+export const getLargestLastColWidth = (table): number => {
   let largestWidth = 0;
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
@@ -73,7 +72,7 @@ export const getLargestLastColWidth = (table) => {
   return largestWidth;
 };
 
-export const createMobileButton = (table, wrapper) => {
+export const createMobileButton = (table, wrapper): void => {
   if (wrapper.classList.contains('table--fullwidth') && !wrapper.hasAttribute('data-expandable')) return false;
 
   if (table.querySelectorAll('thead tr th').length < 4 && !wrapper.hasAttribute('data-expandable')) return false;
@@ -94,7 +93,7 @@ export const createMobileButton = (table, wrapper) => {
   });
 };
 
-export const addTableEventListeners = (table) => {
+export const addTableEventListeners = (table): void => {
   table.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-expand-button]')) {
       const button = event.target.closest('[data-expand-button]');
@@ -111,7 +110,7 @@ export const addTableEventListeners = (table) => {
 };
 
 // Filters
-export const createSearchDataList = (table, form) => {
+export const createSearchDataList = (table, form): void => {
   const searchInput = form.querySelector('input[data-search]');
 
   if (!searchInput) return false;
@@ -139,11 +138,11 @@ export const createSearchDataList = (table, form) => {
     .join('')}`;
 };
 
-export const addFilterEventListeners = (table, form, pagination, wrapper, savedTableBody) => {
+export const addFilterEventListeners = (table, form, pagination, wrapper, savedTableBody): void => {
   let timer;
 
   // Check what conditions are set on the table to see what the form actions are
-  const formSubmit = function (event, paginate = false) {
+  const formSubmit = function (event, paginate = false): void | boolean {
     if (wrapper.hasAttribute('data-no-submit')) {
       return false;
     }
@@ -390,8 +389,8 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   });
 
   // For each form add change listener
-  forms.forEach((parentForm, index) => {
-    const updateMimicInput = function () {
+  forms.forEach((parentForm) => {
+    const updateMimicInput = function (): void {
       const mimickedAlready = [];
       const formData = new FormData(parentForm);
 
@@ -432,7 +431,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   });
 };
 
-export const sortTable = (table, form, savedTableBody) => {
+export const sortTable = (table, form, savedTableBody): void | boolean => {
   if (form.getAttribute('data-ajax')) {
     return false;
   }
@@ -509,7 +508,7 @@ export const sortTable = (table, form, savedTableBody) => {
   tbody.innerHTML = strTbody;
 };
 
-export const filterTable = (table, form, wrapper) => {
+export const filterTable = (table, form, wrapper): void => {
   table.classList.remove('table--filtered');
 
   const filters = filterFilters(form);
@@ -712,7 +711,7 @@ export const filterTable = (table, form, wrapper) => {
   }
 };
 
-export const populateDataQueries = (table, form, wrapper) => {
+export const populateDataQueries = (table, form, wrapper): void | boolean => {
   const dataQueries = Array.from(form.querySelectorAll('[data-query]'));
 
   dataQueries.forEach((queryElement, index) => {
@@ -774,7 +773,7 @@ export const populateDataQueries = (table, form, wrapper) => {
 };
 
 // Pagination
-export const addPaginationEventListeners = function (table, form, pagination, wrapper) {
+export const addPaginationEventListeners = function (table, form, pagination, wrapper): void | boolean {
   if (wrapper.hasAttribute('data-no-submit')) {
     return false;
   }
@@ -814,7 +813,7 @@ export const addPaginationEventListeners = function (table, form, pagination, wr
 };
 
 // Export CSV Data
-export const addExportEventListeners = (button, table) => {
+export const addExportEventListeners = (button, table): void | boolean => {
   if (!button) {
     return false;
   }
@@ -824,7 +823,7 @@ export const addExportEventListeners = (button, table) => {
   });
 };
 
-export const exportAsCSV = function (table) {
+export const exportAsCSV = function (table): void {
   let csvData = [];
   // Get each row data
   const rows = table.getElementsByTagName('tr');
@@ -867,7 +866,7 @@ export const exportAsCSV = function (table) {
 };
 
 // After table is loaded
-export const makeTableFunctional = function (table, form, pagination, wrapper) {
+export const makeTableFunctional = function (table, form, pagination, wrapper): void {
   addDataAttributes(table);
   createMobileButton(table, wrapper);
   populateDataQueries(table, form, wrapper);
@@ -877,7 +876,7 @@ export const makeTableFunctional = function (table, form, pagination, wrapper) {
     const largestWidth = getLargestLastColWidth(table);
     wrapper.style.setProperty('--cta-width', `${largestWidth}rem`);
 
-    function outputsize() {
+    function outputsize(): void {
       Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
         const rowHeight = row.offsetHeight;
         row.style.setProperty('--row-height', `${rowHeight}px`);
@@ -888,13 +887,13 @@ export const makeTableFunctional = function (table, form, pagination, wrapper) {
   }
 };
 
-const filterFilters = function (form) {
+const filterFilters = function (form): object {
   const filters = new Object();
 
   // Filter
   const filterInputs = Array.from(form.querySelectorAll('[data-filter]'));
 
-  filterInputs.forEach((filterInput, index) => {
+  filterInputs.forEach((filterInput) => {
     // Ignore uncked radio inputs
     if (filterInput.type == 'radio' && !filterInput.checked) {
       return;
@@ -921,7 +920,7 @@ const filterFilters = function (form) {
   return filters;
 };
 
-export const loadAjaxTable = async function (table, form, pagination, wrapper) {
+export const loadAjaxTable = async function (table, form, pagination, wrapper): void {
   const formData = new FormData(form);
   const queryString = new URLSearchParams(formData).toString();
   const columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');
@@ -1006,7 +1005,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper) {
               table_cell.setAttribute('data-label', col.innerText);
 
               if (col.getAttribute('data-output')) {
-                var cellTemplate = col.getAttribute('data-output');
+                const cellTemplate = col.getAttribute('data-output');
                 // Use a regex to replace {var} with actual values from the json data
                 cellOutput = cellTemplate.replace(new RegExp(/{(.*?)}/, 'gm'), function (matched) {
                   return resolvePath(row, matched.replace('{', '').replace('}', ''));
@@ -1015,7 +1014,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper) {
 
               // If an output array is defined then the content is going to made of of multiple values from an array
               if (col.hasAttribute('data-output-array')) {
-                var cellTemplate = col.getAttribute('data-output');
+                const cellTemplate = col.getAttribute('data-output');
                 const arrValue = resolvePath(row, cellTemplate.replace('{', '').replace('}', ''));
 
                 cellOutput = '';
@@ -1098,7 +1097,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper) {
   }
 };
 
-export const formatCell = (format, cellOutput) => {
+export const formatCell = (format, cellOutput): any => {
   switch (format) {
     case 'datetime':
       return (

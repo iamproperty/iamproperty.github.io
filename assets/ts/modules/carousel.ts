@@ -1,6 +1,4 @@
-// @ts-nocheck
-
-export const generateThumbnailList = function (carouselComponent) {
+export const generateThumbnailList = function (carouselComponent): any {
   const thumbnailImages = [];
 
   Array.from(carouselComponent.querySelectorAll(':scope > div')).forEach((slide, index) => {
@@ -12,7 +10,7 @@ export const generateThumbnailList = function (carouselComponent) {
   return thumbnailImages;
 };
 
-export const generatePipsHTML = function (carouselComponent, thumbnailImages) {
+export const generatePipsHTML = function (carouselComponent, thumbnailImages): string {
   const itemCount = carouselComponent.querySelectorAll(':scope > div').length;
 
   let pips = '';
@@ -33,7 +31,7 @@ export const generatePipsHTML = function (carouselComponent, thumbnailImages) {
   return pips;
 };
 
-const getProgressMax = function (itemCount, visibleItems) {
+const getProgressMax = function (itemCount, visibleItems): number {
   if (visibleItems == 1) {
     return itemCount;
   }
@@ -43,11 +41,11 @@ const getProgressMax = function (itemCount, visibleItems) {
   return max + 1;
 };
 
-const getProgressPercent = function (value, max) {
+const getProgressPercent = function (value, max): number {
   return ((value - 1) / (max - 1)) * 100;
 };
 
-export const carousel = function (carouselComponent) {
+export const carousel = function (carouselComponent): void {
   let scrollTimeout;
 
   const carouselElement = carouselComponent.shadowRoot.querySelector('.carousel');

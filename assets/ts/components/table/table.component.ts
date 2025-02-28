@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as tableModule from '../../modules/table';
 class iamTable extends HTMLElement {
   constructor() {
@@ -47,7 +46,7 @@ class iamTable extends HTMLElement {
     }
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const params = new URLSearchParams(window.location.search);
 
     // Set default attributes
@@ -147,7 +146,7 @@ class iamTable extends HTMLElement {
     if (this.form.getAttribute('data-ajax')) {
       tableModule.loadAjaxTable(this.table, this.form, this.pagination, this);
     } else {
-      function uniqueID(index = 1) {
+      function uniqueID(index = 1): number {
         const ID = Math.floor(Math.random() * Date.now() * (index + 1));
 
         return ID;
@@ -168,13 +167,12 @@ class iamTable extends HTMLElement {
         });
 
         Array.from(this.table.querySelectorAll('tbody tr')).forEach((row, index) => {
-
-          if(!row.querySelector('.selectrow')){
+          if (!row.querySelector('.selectrow')) {
             const rowID = `row${uniqueID(index)}`;
             row.insertAdjacentHTML(
               'afterbegin',
               `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-            );            
+            );
           }
         });
 
@@ -250,11 +248,11 @@ class iamTable extends HTMLElement {
     });
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-total', 'data-page', 'data-show'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     this.pagination = this.shadowRoot.querySelector('iam-pagination');
 
     switch (attrName) {

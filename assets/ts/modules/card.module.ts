@@ -14,7 +14,7 @@ export const cardHTML = `<div class="card__head" part="head">
   <slot name="footer"></slot>
 </div>`;
 
-export const setupCard = (cardComponent: any) => {
+export const setupCard = (cardComponent: any): void => {
   cardComponent.classList.add('card');
   const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
   const cardBody = cardComponent.shadowRoot.querySelector('.card__body');

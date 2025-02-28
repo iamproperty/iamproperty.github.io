@@ -1,5 +1,4 @@
-// @ts-nocheck
-function setupNotification(element) {
+function setupNotification(element): void {
   // Add toast to notification holder
   if (element.hasAttribute('data-type') && element.getAttribute('data-type') == 'toast') {
     let holder = document.querySelector('.notification__holder');
@@ -40,27 +39,27 @@ function setupNotification(element) {
       closeNotification(element);
     }, timeOut);
 
-    element.addEventListener('mouseenter', (event) => {
+    element.addEventListener('mouseenter', () => {
       timer.pause();
     });
 
-    element.addEventListener('mouseleave', (event) => {
+    element.addEventListener('mouseleave', () => {
       timer.resume();
     });
   }
 }
 
-function Timer(callback, delay) {
+function Timer(callback, delay): void {
   let timerId,
     start,
     remaining = delay;
 
-  this.pause = function () {
+  this.pause = function (): void {
     window.clearTimeout(timerId);
     remaining -= new Date() - start;
   };
 
-  this.resume = function () {
+  this.resume = function (): void {
     start = new Date();
     window.clearTimeout(timerId);
     timerId = window.setTimeout(callback, remaining);
@@ -69,7 +68,7 @@ function Timer(callback, delay) {
   this.resume();
 }
 
-export const closeNotification = function (element) {
+export const closeNotification = function (element): void {
   element.classList.add('d-none');
 };
 

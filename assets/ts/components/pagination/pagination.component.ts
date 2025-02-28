@@ -1,4 +1,3 @@
-// @ts-nocheck
 class iamPagination extends HTMLElement {
   constructor() {
     super();
@@ -53,7 +52,7 @@ class iamPagination extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     // Set default attributes
     const params = new URLSearchParams(window.location.search);
 
@@ -107,7 +106,7 @@ class iamPagination extends HTMLElement {
     });
   }
 
-  setup() {
+  setup(): void {
     // Elements
     const wrapper = this.shadowRoot.querySelector('.pagination');
     const select = this.shadowRoot.querySelector('.page-jump select');
@@ -160,11 +159,11 @@ class iamPagination extends HTMLElement {
     perPage.value = increment;
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-total', 'data-increment', 'data-page', 'data-show'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-total': {
         if (oldVal != newVal) {

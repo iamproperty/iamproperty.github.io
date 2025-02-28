@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   addClasses,
   setupChart,
@@ -43,7 +42,8 @@ class iamBarChart extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const chartComponent = this;
     const chartID = `chart-${Date.now() + (Math.floor(Math.random() * 100) + 1)}`;
     const orginalTable = this.querySelector('table');
@@ -72,8 +72,6 @@ class iamBarChart extends HTMLElement {
 
     trackComponent(chartComponent, 'iam-barchart', ['view-change']);
   }
-
-  attributeChangedCallback(attrName, oldVal, newVal) {}
 }
 
 export default iamBarChart;

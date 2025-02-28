@@ -1,6 +1,5 @@
-// @ts-nocheck
-function createAppliedFilters(container, filters) {
-  function addFilterButton(filters, input, notSet = true) {
+function createAppliedFilters(container, filters): void {
+  function addFilterButton(filters, input, notSet = true): void | boolean {
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
 
@@ -168,12 +167,12 @@ function createAppliedFilters(container, filters) {
             if (input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox') {
               input.value = '';
 
-              var event = new Event('force');
+              const event = new Event('force');
               if (!container.hasAttribute('data-nosubmit')) input.closest('form').dispatchEvent(event);
             } else {
               input.checked = false;
 
-              var event = new Event('force');
+              const event = new Event('force');
               if (!container.hasAttribute('data-nosubmit')) input.closest('form').dispatchEvent(event);
             }
           }

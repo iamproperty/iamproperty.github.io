@@ -1,5 +1,4 @@
-// @ts-nocheck
-const navbar = (element) => {
+const navbar = (element): void => {
   Array.from(element.querySelectorAll('details')).forEach((detail, index) => {
     detail.addEventListener(
       'mouseenter',

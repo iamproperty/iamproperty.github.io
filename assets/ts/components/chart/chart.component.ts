@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { setupChart, setEventObservers, setEventHandlers } from '../../modules/chart';
 
 class iamChart extends HTMLElement {
@@ -40,7 +39,8 @@ class iamChart extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const element = this;
     const orginalTable = this.querySelector('table');
     const newTable = orginalTable.cloneNode(true);
@@ -59,7 +59,7 @@ class iamChart extends HTMLElement {
       threshold: 0.1,
     };
 
-    const callback = (entries: any) => {
+    const callback = (entries: any): void => {
       entries.forEach((entry: any) => {
         if (entry.intersectionRatio > 0) {
           chartOuter.classList.add('animating');
@@ -79,8 +79,6 @@ class iamChart extends HTMLElement {
     const intObserver = new IntersectionObserver(callback, options);
     intObserver.observe(element);
   }
-
-  attributeChangedCallback(attrName, oldVal, newVal) {}
 }
 
 export default iamChart;

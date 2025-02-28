@@ -1,5 +1,4 @@
-// @ts-nocheck
-function fileupload(fileupload: Element, wrapper: Element) {
+function fileupload(fileupload: Element, wrapper: Element): void {
   const filesWrapper = wrapper.querySelector('.files');
   const dropArea = wrapper.querySelector('.drop-area');
   const input = fileupload.querySelector('input');
@@ -11,7 +10,7 @@ function fileupload(fileupload: Element, wrapper: Element) {
   const cloneInput = input.cloneNode();
   dropArea.append(cloneInput);
 
-  const checkFileExt = function (filename) {
+  const checkFileExt = function (filename): boolean {
     if (!input.hasAttribute('accept')) return true;
 
     const nameExtension = filename.split('.').pop();

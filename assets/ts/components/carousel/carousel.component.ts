@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { generateThumbnailList, generatePipsHTML, carousel } from '../../modules/carousel';
 import { trackComponent, trackComponentRegistered } from '../_global';
 
@@ -48,7 +47,8 @@ class iamCarousel extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const carouselComponent = this;
     const carouselElement = this.shadowRoot.querySelector('.carousel');
     const row = this.shadowRoot.querySelector('.row');
@@ -88,8 +88,6 @@ class iamCarousel extends HTMLElement {
       'slider-changed',
     ]);
   }
-
-  attributeChangedCallback(attrName, oldVal, newVal) {}
 }
 
 export default iamCarousel;

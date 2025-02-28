@@ -1,5 +1,4 @@
-// @ts-nocheck
-function fileupload(form, callback) {
+function fileupload(form, callback): void {
   const input = form.querySelector('[type="file"]');
   const label = form.querySelector(`[for="${input.getAttribute('id')}"]`);
   const add = form.querySelector('.file-upload__add');

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
 
@@ -30,7 +29,8 @@ class iamVideoCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
+  async connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const cardComponent = this;
     const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
 
@@ -127,10 +127,10 @@ class iamVideoCard extends HTMLElement {
     trackComponent(cardComponent, 'iam-video-card', ['play-video', 'close-video']);
   }
 
-  loadYouTubeScripts() {
+  loadYouTubeScripts(): any {
     return new Promise((resolve, reject) => {
       const image = new Image();
-      image.onload = function () {
+      image.onload = function (): any {
         // This code loads the IFrame Player API code asynchronously.
         const tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
@@ -139,14 +139,14 @@ class iamVideoCard extends HTMLElement {
         document.body.classList.add('youtubeLoaded');
         resolve(true);
       };
-      image.onerror = function () {
+      image.onerror = function (): any {
         reject(false);
       };
       image.src = 'https://youtube.com/favicon.ico';
     });
   }
 
-  createYoutTubeVideo(target) {
+  createYoutTubeVideo(target): void | boolean {
     if (typeof window.player == 'undefined') {
       window.player = [];
     }
@@ -184,7 +184,7 @@ class iamVideoCard extends HTMLElement {
     //onYouTubeIframeAPIReady();
 
     // The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
+    function onPlayerReady(event): void {
       // Play the video straight away
       event.target.playVideo();
     }
@@ -192,7 +192,7 @@ class iamVideoCard extends HTMLElement {
     // The API calls this function when the player's state changes.
     // The function indicates that when playing a video (state=1)
     let done = false;
-    function onPlayerStateChange(event) {
+    function onPlayerStateChange(event): void {
       if (event.data == YT.PlayerState.PLAYING && !done) {
         const link = document.getElementById(link_id);
         link.classList.add('player-ready');
@@ -202,11 +202,11 @@ class iamVideoCard extends HTMLElement {
     }
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-image'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-image': {
         if (oldVal != newVal) {

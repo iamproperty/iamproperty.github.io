@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -63,7 +61,7 @@ class iamNav extends HTMLElement {
       document.head.insertAdjacentHTML('beforeend', `<style id="navGlobal">${loadExtraCSS}</style>`);
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     // Load external CSS if needed
     if (this.hasAttribute('data-css'))
       this.shadowRoot
@@ -72,6 +70,7 @@ class iamNav extends HTMLElement {
 
     const menuButton = this.shadowRoot.querySelector('.btn-menu');
     const menu = this.shadowRoot.querySelector('.menu');
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const iamNav = this;
     const backdrop = this.shadowRoot.querySelector('.backdrop');
     const buttonsHolder = this.shadowRoot.querySelector('.buttons-holder');
