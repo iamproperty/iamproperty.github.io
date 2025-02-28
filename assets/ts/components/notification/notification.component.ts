@@ -69,7 +69,7 @@ class iamNotification extends HTMLElement {
 
     const buttons = this.querySelectorAll('a,button');
 
-    Array.from(buttons).forEach((button, index) => {
+    Array.from(buttons).forEach((button) => {
       button.setAttribute('slot', 'btns');
       button.classList.add('link');
     });
@@ -90,7 +90,7 @@ class iamNotification extends HTMLElement {
 
       this.shadowRoot.querySelector('.notification__dismiss [data-dismiss-button]').addEventListener(
         'click',
-        function (e) {
+        function () {
           closeNotification(wrapper);
         },
         false

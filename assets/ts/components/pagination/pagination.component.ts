@@ -81,12 +81,12 @@ class iamPagination extends HTMLElement {
     });
 
     // Next and previous buttons will simply trigger and on change on the select which in turn will dispatch an event
-    next.addEventListener('click', (event) => {
+    next.addEventListener('click', () => {
       select.value = parseInt(select.value) + 1;
       select.dispatchEvent(new Event('change'));
     });
 
-    prev.addEventListener('click', (event) => {
+    prev.addEventListener('click', () => {
       select.value = parseInt(select.value) - 1;
       select.dispatchEvent(new Event('change'));
     });
@@ -96,7 +96,7 @@ class iamPagination extends HTMLElement {
       this.setAttribute('data-increment', event.target.value);
     });
 
-    loadMore.addEventListener('click', (event) => {
+    loadMore.addEventListener('click', () => {
       const newValue = parseInt(this.getAttribute('data-show')) + parseInt(this.getAttribute('data-increment'));
       this.setAttribute('data-show', newValue);
 

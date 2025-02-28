@@ -162,7 +162,7 @@ class iamTable extends HTMLElement {
           ? this.querySelector('iam-actionbar[data-selectall]')
           : document.querySelector(`iam-actionbar[data-for='${this.getAttribute('id')}']`);
 
-        Array.from(this.table.querySelectorAll('thead tr')).forEach((row, index) => {
+        Array.from(this.table.querySelectorAll('thead tr')).forEach((row) => {
           row.insertAdjacentHTML('afterbegin', `<th class="th--fixed"></th>`);
         });
 
@@ -187,11 +187,11 @@ class iamTable extends HTMLElement {
 
         actionbar.addEventListener('selected', (event) => {
           if (event.detail.selected == '0') {
-            Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input, index) => {
+            Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
               input.checked = false;
             });
           } else if (event.detail.selected == 'all') {
-            Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input, index) => {
+            Array.from(this.table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
               input.checked = true;
             });
           }
@@ -200,7 +200,7 @@ class iamTable extends HTMLElement {
 
       // Make the dialog menus columns fixed
       let colIndex = -1;
-      Array.from(this.table.querySelectorAll('tbody tr')).forEach((row, index) => {
+      Array.from(this.table.querySelectorAll('tbody tr')).forEach((row) => {
         if (row.querySelector(':scope > td > .dialog__wrapper')) {
           const columnn = row.querySelector(':scope > td > .dialog__wrapper').parentNode;
 
@@ -213,7 +213,7 @@ class iamTable extends HTMLElement {
       if (colIndex != -1) {
         this.table.querySelector(`thead tr th:nth-child(${colIndex + 1})`).classList.add('th--fixed');
 
-        Array.from(this.table.querySelectorAll(`tbody tr td:nth-child(${colIndex + 1})`)).forEach((col, index) => {
+        Array.from(this.table.querySelectorAll(`tbody tr td:nth-child(${colIndex + 1})`)).forEach((col) => {
           col.classList.add('td--fixed');
         });
       }
@@ -225,7 +225,7 @@ class iamTable extends HTMLElement {
       tableModule.populateDataQueries(this.table, this.form);
     }
 
-    this.shadowRoot.querySelector('.table__wrapper').addEventListener('scroll', (event) => {
+    this.shadowRoot.querySelector('.table__wrapper').addEventListener('scroll', () => {
       if (this.table.querySelector('dialog[open]')) {
         this.table.querySelector('dialog[open]').close();
         this.table.querySelector('.dialog__wrapper > button.active').classList.remove('active');

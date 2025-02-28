@@ -77,7 +77,7 @@ class iamAddressLookup extends HTMLElement {
     const preFilledAddressBtn = this.shadowRoot.querySelector('.pre-filled-address + button');
     const dataDisplayText = this.hasAttribute('data-display-text');
 
-    Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement, index) => {
+    Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement) => {
       titleElement.innerHTML = title;
     });
 
@@ -88,7 +88,7 @@ class iamAddressLookup extends HTMLElement {
 
       Array.from(
         component.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')
-      ).forEach((input, index) => {
+      ).forEach((input) => {
         const value = input.value;
 
         if (!value) preFilled = false;
@@ -105,7 +105,7 @@ class iamAddressLookup extends HTMLElement {
     }
     checkFilled(this);
 
-    this.addEventListener('filled', (event) => {
+    this.addEventListener('filled', () => {
       checkFilled(this);
     });
 
@@ -125,7 +125,7 @@ class iamAddressLookup extends HTMLElement {
 
             const values = JSON.parse(this.getAttribute('data-use'));
 
-            Object.keys(values).forEach((key, index) => {
+            Object.keys(values).forEach((key) => {
               const value = values[key];
               if (this.querySelector(`[data-name="${key}"]`)) this.querySelector(`[data-name="${key}"]`).value = value;
               else if (this.querySelector(`[name="${key}"]`)) this.querySelector(`[name="${key}"]`).value = value;
@@ -139,7 +139,7 @@ class iamAddressLookup extends HTMLElement {
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
-      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input, index) => {
+      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input) => {
         input.setAttribute('required', 'true');
       });
     }
@@ -148,32 +148,32 @@ class iamAddressLookup extends HTMLElement {
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
-      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input, index) => {
+      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input) => {
         input.setAttribute('required', 'true');
       });
 
       manualWrapper.scrollIntoView();
     }
 
-    preFilledAddressBtn.addEventListener('click', (event) => {
+    preFilledAddressBtn.addEventListener('click', () => {
       preFilledWrapper.classList.add('js-hide');
       openManualWrapper();
     });
-    switchManualBtn.addEventListener('click', (event) => {
+    switchManualBtn.addEventListener('click', () => {
       openManualWrapper();
     });
-    switchLookupBtn.addEventListener('click', (event) => {
+    switchLookupBtn.addEventListener('click', () => {
       lookupWrapper.classList.remove('js-hide');
       manualWrapper.classList.add('js-hide');
 
       lookupWrapper.scrollIntoView();
     });
 
-    lookup.addEventListener('keyup', (event) => {
+    lookup.addEventListener('keyup', () => {
       if (lookup.value.length >= 3) search(lookup.value);
     });
 
-    lookup.addEventListener('change', (event) => {
+    lookup.addEventListener('change', () => {
       if (lookup.value.length >= 3) {
         search(lookup.value);
 
@@ -183,7 +183,7 @@ class iamAddressLookup extends HTMLElement {
 
           const values = JSON.parse(list.querySelector(`[value="${lookup.value}"]`).getAttribute('data-values'));
 
-          Object.keys(values).forEach((key, index) => {
+          Object.keys(values).forEach((key) => {
             const value = values[key];
             if (this.querySelector(`[data-name="${key}"]`) && value != '')
               this.querySelector(`[data-name="${key}"]`).value = value;
@@ -199,7 +199,7 @@ class iamAddressLookup extends HTMLElement {
           // Focus on first input
           this.querySelector('[name]').focus();
 
-          Array.from(this.querySelectorAll('[data-required]')).forEach((input, index) => {
+          Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
             input.setAttribute('required', 'true');
           });
           lookup.removeAttribute('required');
@@ -240,7 +240,7 @@ class iamAddressLookup extends HTMLElement {
           .then((response) => {
             // populate datalist
             let listString = '';
-            response.forEach((address, index) => {
+            response.forEach((address) => {
               // Deal with agent platform response
               if (typeof address.value == 'object') {
                 const values = JSON.stringify(address.value);

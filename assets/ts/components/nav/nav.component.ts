@@ -224,14 +224,14 @@ class iamNav extends HTMLElement {
     );
 
     // Allow outside JS to close the menu
-    this.addEventListener('request-close', (event) => {
+    this.addEventListener('request-close', () => {
       menuButton.removeAttribute('aria-expanded');
       menu.classList.remove('open');
       iamNav.classList.remove('open');
     });
 
     // Close the menu on the click of the backdrop on desktop
-    backdrop.addEventListener('click', (event) => {
+    backdrop.addEventListener('click', () => {
       const openMenu = this.querySelector('details[open] summary');
 
       if (openMenu) openMenu.click();
@@ -274,7 +274,7 @@ class iamNav extends HTMLElement {
           });
 
           // Close any other dropdowns on the same level
-          Array.from(wrapper.querySelectorAll(':scope > details')).forEach((detailsArrayElement, index) => {
+          Array.from(wrapper.querySelectorAll(':scope > details')).forEach((detailsArrayElement) => {
             if (detailsArrayElement != details) detailsArrayElement.removeAttribute('open');
           });
 
@@ -333,14 +333,14 @@ class iamNav extends HTMLElement {
         searchButton.setAttribute('aria-expanded', true);
       }
 
-      searchButton.addEventListener('click', (event) => {
+      searchButton.addEventListener('click', () => {
         searchDialog.setAttribute('open', 'open');
         this.classList.add('search-open');
 
         searchButton.setAttribute('aria-expanded', true);
       });
 
-      searchClose.addEventListener('click', (event) => {
+      searchClose.addEventListener('click', () => {
         searchDialog.removeAttribute('open');
         this.classList.remove('search-open');
 

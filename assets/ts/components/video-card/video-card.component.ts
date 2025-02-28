@@ -72,6 +72,7 @@ class iamVideoCard extends HTMLElement {
     if (cardComponent.hasAttribute('data-youtube')) {
       // Load the scripts only once
       if (!document.body.classList.contains('youtubeLoaded')) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const loaded = await this.loadYouTubeScripts();
       }
       cardHead.addEventListener('click', function () {
@@ -84,7 +85,7 @@ class iamVideoCard extends HTMLElement {
         dialog.showModal();
       });
 
-      dialog.addEventListener('close', (event) => {
+      dialog.addEventListener('close', () => {
         if (
           window.player[embed.getAttribute('id')] &&
           typeof window.player[embed.getAttribute('id')].pauseVideo == 'function'
@@ -114,7 +115,7 @@ class iamVideoCard extends HTMLElement {
         dialog.showModal();
       });
 
-      dialog.addEventListener('close', (event) => {
+      dialog.addEventListener('close', () => {
         embed.innerHTML = ``; // Remove the video since we cant pause it
 
         const customEvent = new CustomEvent('close-video', {

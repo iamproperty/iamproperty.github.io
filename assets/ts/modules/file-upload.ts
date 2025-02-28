@@ -7,7 +7,7 @@ function fileupload(form, callback): void {
 
   input.addEventListener(
     'change',
-    function (e) {
+    function () {
       // prevent default to allow drop
 
       const url = form.getAttribute('action');
@@ -39,7 +39,7 @@ function fileupload(form, callback): void {
 
   add.addEventListener(
     'click',
-    function (e) {
+    function () {
       form.classList.remove('file-uploaded');
       label.innerHTML = 'Select a file to upload';
       input.removeAttribute('disabled');

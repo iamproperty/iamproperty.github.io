@@ -94,7 +94,7 @@ function createAppliedFilters(container, filters): void {
   // check for inputs on load
   Array.from(
     container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-  ).forEach((input, index) => {
+  ).forEach((input) => {
     addFilterButton(filters, input, false);
   });
 
@@ -105,7 +105,7 @@ function createAppliedFilters(container, filters): void {
       if (event[0].attributeName == 'open') {
         Array.from(
           container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-        ).forEach((input, index) => {
+        ).forEach((input) => {
           addFilterButton(filters, input, false);
         });
       }
@@ -114,11 +114,11 @@ function createAppliedFilters(container, filters): void {
     observer.observe(dialog, { attributes: true });
   }
 
-  container.addEventListener('tags-set', function (event) {
+  container.addEventListener('tags-set', function () {
     filters.innerHTML = '';
     Array.from(
       container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-    ).forEach((input, index) => {
+    ).forEach((input) => {
       addFilterButton(filters, input, false);
     });
   });
@@ -126,7 +126,7 @@ function createAppliedFilters(container, filters): void {
   // check for change in displayed inputs
   Array.from(
     container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-  ).forEach((input, index) => {
+  ).forEach((input) => {
     input.addEventListener('change', function (event) {
       if (!container.hasAttribute('data-keep-same')) addFilterButton(filters, input);
 
@@ -154,7 +154,7 @@ function createAppliedFilters(container, filters): void {
           let selector = `[name="${name}"]`;
 
           if (name.match(/\[(.*)\]/)) {
-            const newName = name.replace(/\[(.*)\]/, `[]`);
+            //const newName = name.replace(/\[(.*)\]/, `[]`);
             const value = name.replace(/.*\[(.*)\]/, `$1`);
             selector = `[value="${value}"]`;
           }

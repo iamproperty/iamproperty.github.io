@@ -3,26 +3,26 @@
 function inputRange(inputWrapper): void {
   inputWrapper.addEventListener(
     'change',
-    function (e) {
+    function () {
       const min = parseInt(inputWrapper.querySelector('[data-min] select,[data-min] input').value);
       const max = parseInt(inputWrapper.querySelector('[data-max] select,[data-max] input').value);
 
       // Set attributes for input fields
-      Array.from(inputWrapper.querySelectorAll('[data-min] input')).forEach((input, index) => {
+      Array.from(inputWrapper.querySelectorAll('[data-min] input')).forEach((input) => {
         input.setAttribute('max', max);
       });
 
-      Array.from(inputWrapper.querySelectorAll('[data-max] input')).forEach((input, index) => {
+      Array.from(inputWrapper.querySelectorAll('[data-max] input')).forEach((input) => {
         input.setAttribute('min', min);
       });
 
       // Hide select options if they are higher or lower than the min and max values
-      Array.from(inputWrapper.querySelectorAll('[data-min] select option')).forEach((option, index) => {
+      Array.from(inputWrapper.querySelectorAll('[data-min] select option')).forEach((option) => {
         if (parseInt(option.getAttribute('value')) > max) option.classList.add('d-none');
         else option.classList.remove('d-none');
       });
 
-      Array.from(inputWrapper.querySelectorAll('[data-max] select option')).forEach((option, index) => {
+      Array.from(inputWrapper.querySelectorAll('[data-max] select option')).forEach((option) => {
         if (parseInt(option.getAttribute('value')) < min) option.classList.add('d-none');
         else option.classList.remove('d-none');
       });
@@ -34,7 +34,7 @@ function inputRange(inputWrapper): void {
 function inputRedirect(inputWrapper): void {
   inputWrapper.addEventListener(
     'change',
-    function (e) {
+    function () {
       if (inputWrapper.matches('[data-value-if]')) {
         const url = inputWrapper.getAttribute('data-redirect');
         const desiredValue = inputWrapper.getAttribute('data-value-if');
@@ -95,15 +95,15 @@ function multipleFileUploads(wrapper): void {
 // Acts as an overall initialise function to trigger other functions.
 function form(formElement): void {
   // Check for input range groups
-  Array.from(formElement.querySelectorAll('[data-input-range]')).forEach((arrayElement, index) => {
+  Array.from(formElement.querySelectorAll('[data-input-range]')).forEach((arrayElement) => {
     inputRange(arrayElement);
   });
 
-  Array.from(formElement.querySelectorAll('[data-redirect]')).forEach((arrayElement, index) => {
+  Array.from(formElement.querySelectorAll('[data-redirect]')).forEach((arrayElement) => {
     inputRedirect(arrayElement);
   });
 
-  Array.from(formElement.querySelectorAll('.multiple-file-uploads')).forEach((arrayElement, index) => {
+  Array.from(formElement.querySelectorAll('.multiple-file-uploads')).forEach((arrayElement) => {
     multipleFileUploads(arrayElement);
   });
 
@@ -128,11 +128,11 @@ function form(formElement): void {
   // When a form is updated we may want to update some of the existing input fields; setting active fields when some data is selected.
   formElement.addEventListener(
     'change',
-    function (e) {
+    function () {
       // Remove disabled attribute when a pre-selected input field equals a certain value
       Array.from(
         formElement.querySelectorAll('select[data-activeif][data-equals],input[data-activeif][data-equals]')
-      ).forEach((arrayElement, index) => {
+      ).forEach((arrayElement) => {
         const group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
         const selector = arrayElement.dataset.activeif;
         const value = arrayElement.dataset.equals;
@@ -148,7 +148,7 @@ function form(formElement): void {
 
       // Show this input wrapper when a pre-selected input field equals a certain value
       Array.from(formElement.querySelectorAll('.form-control__wrapper[data-displayif][data-equals]')).forEach(
-        (arrayElement, index) => {
+        (arrayElement) => {
           const group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
           const selector = arrayElement.dataset.activeif;
           const value = arrayElement.dataset.equals;

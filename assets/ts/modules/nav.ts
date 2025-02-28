@@ -1,8 +1,8 @@
 const navbar = (element): void => {
-  Array.from(element.querySelectorAll('details')).forEach((detail, index) => {
+  Array.from(element.querySelectorAll('details')).forEach((detail) => {
     detail.addEventListener(
       'mouseenter',
-      function (e) {
+      function () {
         if (window.matchMedia('(min-width: 62em)').matches) detail.setAttribute('open', 'true');
       },
       false
@@ -10,7 +10,7 @@ const navbar = (element): void => {
 
     detail.addEventListener(
       'mouseleave',
-      function (e) {
+      function () {
         if (window.matchMedia('(min-width: 62em)').matches) detail.removeAttribute('open');
       },
       false

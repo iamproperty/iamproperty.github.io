@@ -50,8 +50,8 @@ class iamCarousel extends HTMLElement {
   connectedCallback(): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const carouselComponent = this;
-    const carouselElement = this.shadowRoot.querySelector('.carousel');
-    const row = this.shadowRoot.querySelector('.row');
+    //const carouselElement = this.shadowRoot.querySelector('.carousel');
+    //const row = this.shadowRoot.querySelector('.row');
 
     let thumbnailImages = [];
 
@@ -69,7 +69,7 @@ class iamCarousel extends HTMLElement {
       carouselComponent.querySelectorAll(
         ':scope > div > img:first-child:last-child, :scope > div > picture:first-child:last-child img'
       )
-    ).forEach((image, index) => {
+    ).forEach((image) => {
       image.style.inset = '0 0.5rem 0 0.5rem';
       image.style.position = 'absolute';
       image.style.width = 'calc(100% - 1rem)';

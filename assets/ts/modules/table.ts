@@ -298,7 +298,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')) {
       form.classList.add('processing');
       // Make sure any applied filters have been removed
-      Array.from(form.querySelectorAll('.applied-filters')).forEach((filters, index) => {
+      Array.from(form.querySelectorAll('.applied-filters')).forEach((filters) => {
         filters.innerHTML = '';
       });
 
@@ -372,10 +372,10 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   const fields = [];
 
   // Collect the forms that we need to add an event listener for.
-  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input, index) => {
+  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
     const mimicField = input.getAttribute('data-mimic');
 
-    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput, index) => {
+    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput) => {
       const parentForm = mimicInput.closest('form');
 
       if (!forms.includes(parentForm)) {
@@ -421,11 +421,11 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       }
     };
 
-    parentForm.addEventListener('force', (event) => {
+    parentForm.addEventListener('force', () => {
       updateMimicInput();
     });
 
-    parentForm.addEventListener('change', (event) => {
+    parentForm.addEventListener('change', () => {
       updateMimicInput();
     });
   });
@@ -462,7 +462,7 @@ export const sortTable = (table, form, savedTableBody): void | boolean => {
 
   // Create an array from the table rows, the index created is then used to sort the array
   let tableArr = [];
-  Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
+  Array.from(tbody.querySelectorAll('tr')).forEach((tableRow) => {
     let rowIndex = tableRow
       .querySelector('td[data-label="' + sortBy + '"], th[data-label="' + sortBy + '"]')
       .textContent.trim();
@@ -502,7 +502,7 @@ export const sortTable = (table, form, savedTableBody): void | boolean => {
 
   // Create a string to return and populate the tbody
   let strTbody = '';
-  tableArr.forEach((tableRow, index) => {
+  tableArr.forEach((tableRow) => {
     strTbody += tableRow.row.outerHTML;
   });
   tbody.innerHTML = strTbody;
@@ -518,7 +518,7 @@ export const filterTable = (table, form, wrapper): void => {
   const showRows = form.querySelector('[data-show]') ? parseInt(form.querySelector('[data-show]').value) : 15;
 
   // Reset
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
     row.classList.remove('filtered');
     row.classList.remove('filtered--matched');
     row.classList.remove('filtered--show');
@@ -531,19 +531,19 @@ export const filterTable = (table, form, wrapper): void => {
     const searchInput = form.querySelector('input[data-search]');
     const searchColumns = form.querySelector('input[data-search]').getAttribute('data-search').split(',');
 
-    searchColumns.forEach((column, index) => {
+    searchColumns.forEach((column) => {
       searches.push({ column: `${column.trim()}`, value: `${searchInput.value}` });
     });
   }
 
   //Display the filter count
-  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element) => {
     element.innerHTML = '';
     element.parentNode.classList.remove('hover');
   });
 
   let filterCount = 0;
-  Object.values(filters).forEach((filter, index) => {
+  Object.values(filters).forEach((filter) => {
     if (typeof filter == 'object' && Object.values(filter).length) {
       filterCount += Object.values(filter).length;
     } else {
@@ -552,7 +552,7 @@ export const filterTable = (table, form, wrapper): void => {
   });
 
   if (filterCount) {
-    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element) => {
       element.innerHTML += `(${filterCount})`;
       element.parentNode.classList.add('hover');
     });
@@ -561,9 +561,9 @@ export const filterTable = (table, form, wrapper): void => {
   // Filter the table
   table.classList.add('table--filtered');
   for (const [key, filterValue] of Object.entries(filters)) {
-    Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
+    Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row) => {
       let isMatched = false;
-      filterValue.forEach((filter, index) => {
+      filterValue.forEach((filter) => {
         const filterTd = row.querySelector(`[data-label="${key}"]`);
 
         if (filter.includes('-date-from')) {
@@ -671,10 +671,10 @@ export const filterTable = (table, form, wrapper): void => {
     });
   }
   // Search whats left of the table after filtering
-  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row) => {
     let isSearched = searches.length > 0 && searches[0].value.length >= 3 ? false : true;
 
-    searches.forEach((search, index) => {
+    searches.forEach((search) => {
       const searchTd = row.querySelector(`[data-label="${search.column}"]`);
 
       if (
@@ -692,7 +692,7 @@ export const filterTable = (table, form, wrapper): void => {
   });
 
   // Work out what to display after pagination
-  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row) => {
     matched++;
 
     row.classList.add('filtered--matched');
@@ -714,7 +714,7 @@ export const filterTable = (table, form, wrapper): void => {
 export const populateDataQueries = (table, form, wrapper): void | boolean => {
   const dataQueries = Array.from(form.querySelectorAll('[data-query]'));
 
-  dataQueries.forEach((queryElement, index) => {
+  dataQueries.forEach((queryElement) => {
     const query = queryElement.getAttribute('data-query');
     let numberOfMatchedRows = 0;
 
@@ -741,7 +741,7 @@ export const populateDataQueries = (table, form, wrapper): void | boolean => {
       numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr:not(.filtered)`)).filter(function (row) {
         let matched = true;
 
-        for (const [index, value] of Object.entries(queries)) {
+        for (const value of Object.entries(queries)) {
           const queryParts = value.split(' == ');
 
           if (
@@ -818,7 +818,7 @@ export const addExportEventListeners = (button, table): void | boolean => {
     return false;
   }
 
-  button.addEventListener('click', (event) => {
+  button.addEventListener('click', () => {
     exportAsCSV(table);
   });
 };
@@ -877,7 +877,7 @@ export const makeTableFunctional = function (table, form, pagination, wrapper): 
     wrapper.style.setProperty('--cta-width', `${largestWidth}rem`);
 
     function outputsize(): void {
-      Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+      Array.from(table.querySelectorAll('tr')).forEach((row) => {
         const rowHeight = row.offsetHeight;
         row.style.setProperty('--row-height', `${rowHeight}px`);
       });
@@ -932,19 +932,19 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
   // Display the filter count
   const filters = filterFilters(form);
 
-  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element) => {
     element.innerHTML = '';
     element.parentNode.classList.remove('hover');
   });
 
   let filterCount = 0;
-  Object.values(filters).forEach((filter, index) => {
+  Object.values(filters).forEach((filter) => {
     if (typeof filter == 'object' && Object.values(filter).length) filterCount += Object.values(filter).length;
     else filterCount++;
   });
 
   if (filterCount) {
-    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element) => {
       element.innerHTML += `(${filterCount})`;
       element.parentNode.classList.add('hover');
     });
@@ -995,10 +995,10 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
         if (data) {
           tbody.innerHTML = '';
 
-          data.forEach((row, index) => {
+          data.forEach((row) => {
             const table_row = document.createElement('tr');
 
-            columns.forEach((col, index) => {
+            columns.forEach((col) => {
               let cellOutput = '';
               const table_cell = document.createElement('td');
               // Add some data to help with the mobile layout design
@@ -1018,7 +1018,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
                 const arrValue = resolvePath(row, cellTemplate.replace('{', '').replace('}', ''));
 
                 cellOutput = '';
-                arrValue.forEach((rowValue, i) => {
+                arrValue.forEach((rowValue) => {
                   const cellTemplateValue = col.getAttribute('data-output-array');
                   let cellOutputValue = '';
 

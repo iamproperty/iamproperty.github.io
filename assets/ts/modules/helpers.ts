@@ -59,7 +59,7 @@ export const addGlobalEvents = (body): void => {
       const form = event.target;
 
       // Reset password types
-      Array.from(form.querySelectorAll('[data-password-type]')).forEach((input, index) => {
+      Array.from(form.querySelectorAll('[data-password-type]')).forEach((input) => {
         input.setAttribute('type', 'password');
       });
 
@@ -88,7 +88,7 @@ export const addGlobalEvents = (body): void => {
     }
   });
 
-  Array.from(document.querySelectorAll('label progress')).forEach((progress, index) => {
+  Array.from(document.querySelectorAll('label progress')).forEach((progress) => {
     const label = progress.closest('label');
 
     label.setAttribute('data-percent', progress.getAttribute('value'));

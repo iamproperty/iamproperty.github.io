@@ -3,12 +3,12 @@ import hibpCheck from '../vendor/hibp.js';
 const extendInputs = (body): void => {
   function loadInput(): void {
     // maxlength counter init
-    Array.from(document.querySelectorAll('input[maxlength],textarea[maxlength]')).forEach((input, index) => {
+    Array.from(document.querySelectorAll('input[maxlength],textarea[maxlength]')).forEach((input) => {
       const wrapper = input.parentElement;
       setMaxlengthVars(input, wrapper);
     });
 
-    Array.from(document.querySelectorAll('label input')).forEach((input, index) => {
+    Array.from(document.querySelectorAll('label input')).forEach((input) => {
       if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required')) {
         if (input.parentNode.tagName.toLowerCase() == 'span')
           input.parentElement.insertAdjacentHTML('beforebegin', `<span class="optional-text"></span>`);
@@ -27,7 +27,7 @@ const extendInputs = (body): void => {
         return `${year}-${month}-${day}`;
       }
 
-      Array.from(document.querySelectorAll('input[type="date"]')).forEach((input, index) => {
+      Array.from(document.querySelectorAll('input[type="date"]')).forEach((input) => {
         const startDate = today;
 
         if (input.hasAttribute('data-start')) {
@@ -47,7 +47,7 @@ const extendInputs = (body): void => {
         if (input.hasAttribute('data-allowed-days')) {
           const allowedDays = JSON.parse(`[${input.getAttribute('data-allowed-days')}]`);
 
-          input.addEventListener('input', function (e) {
+          input.addEventListener('input', function () {
             const day = new Date(this.value).getUTCDay();
 
             if (allowedDays.includes(day)) input.setCustomValidity('');
@@ -97,11 +97,11 @@ const extendInputs = (body): void => {
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog [type="radio"]')) {
       const dialog = event.target.closest('dialog');
 
-      Array.from(dialog.querySelectorAll('[type="radio"][autofocus]')).forEach((input, index) => {
+      Array.from(dialog.querySelectorAll('[type="radio"][autofocus]')).forEach((input) => {
         input.removeAttribute('autofocus');
       });
 
-      Array.from(dialog.querySelectorAll('[type="radio"]:checked')).forEach((input, index) => {
+      Array.from(dialog.querySelectorAll('[type="radio"]:checked')).forEach((input) => {
         input.setAttribute('autofocus', true);
       });
     }

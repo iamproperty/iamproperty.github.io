@@ -1,4 +1,4 @@
-import { setupChart, setEventObservers, setEventHandlers } from '../../modules/chart';
+import { setupChart, setEventObservers } from '../../modules/chart';
 
 class iamChart extends HTMLElement {
   constructor() {
@@ -9,9 +9,11 @@ class iamChart extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
     const loadCSS = `@import "${assetLocation}/css/components/charts.css";`;
+    /*
     const chartID = `chart-${Date.now() + (Math.floor(Math.random() * 100) + 1)}`;
     const chartType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'column';
     const availableTypes = this.hasAttribute('data-types') ? this.getAttribute('data-types').split(',') : [];
+    */
 
     const template = document.createElement('template');
     template.innerHTML = `

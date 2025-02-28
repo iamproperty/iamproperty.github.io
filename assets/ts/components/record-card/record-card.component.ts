@@ -30,7 +30,7 @@ class iamRecordCard extends HTMLElement {
     const cardHead = this.shadowRoot.querySelector('.card__head');
     setupCard(this);
 
-    Array.from(this.querySelectorAll(':scope > *:not([slot])')).forEach((element, index) => {
+    Array.from(this.querySelectorAll(':scope > *:not([slot])')).forEach((element) => {
       element.setAttribute('slot', 'details');
     });
 

@@ -63,7 +63,7 @@ const runEvent = (element, event, eventType): void | boolean => {
         const hideElement = document.querySelector(event['target']);
         hideElement.classList.add('js-hide');
 
-        Array.from(hideElement.querySelectorAll('[data-required]')).forEach((input, index) => {
+        Array.from(hideElement.querySelectorAll('[data-required]')).forEach((input) => {
           input.removeAttribute('required');
         });
       }
@@ -73,7 +73,7 @@ const runEvent = (element, event, eventType): void | boolean => {
         const showElement = document.querySelector(event['target']);
         showElement.classList.remove('js-hide');
 
-        Array.from(showElement.querySelectorAll('[data-required]')).forEach((input, index) => {
+        Array.from(showElement.querySelectorAll('[data-required]')).forEach((input) => {
           if (!input.closest('.js-hide')) input.setAttribute('required', 'true');
         });
       }
@@ -86,7 +86,7 @@ const runEvent = (element, event, eventType): void | boolean => {
       document.querySelector(`${event['target']}`).dispatchEvent(theEvent);
       break;
     case 'setAttribute':
-      Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function (element, index) {
+      Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function (element) {
         element.setAttribute(event['attribute'], event['value']);
       });
       break;
@@ -94,7 +94,7 @@ const runEvent = (element, event, eventType): void | boolean => {
       document.querySelector(`${event['target']}`).focus();
       break;
     case 'removeAttribute':
-      Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function (element, index) {
+      Array.from(document.querySelectorAll(`${event['target']}`)).forEach(function (element) {
         element.removeAttribute(event['attribute']);
       });
       break;
@@ -123,7 +123,7 @@ const populateForm = function (element, event): void {
 
   if (!values) return false;
 
-  Object.keys(values).forEach((field, index) => {
+  Object.keys(values).forEach((field) => {
     if (document.getElementById(field) && document.getElementById(field).tagName == 'SPAN')
       document.getElementById(field).innerHTML = values[field];
 
@@ -132,7 +132,7 @@ const populateForm = function (element, event): void {
 
       if (element.hasAttribute('data-lock-fields')) form.querySelector(`select[name="${field}"]`).disabled = true;
     } else if (form.querySelector(`input[name="${field}"][type="radio"][value="${values[field]}"]`)) {
-      Array.from(form.querySelectorAll(`input[name="${field}"][type="radio"]`)).forEach(function (input, index) {
+      Array.from(form.querySelectorAll(`input[name="${field}"][type="radio"]`)).forEach(function (input) {
         input.disabled = true;
       });
 

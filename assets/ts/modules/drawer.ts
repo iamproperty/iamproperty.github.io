@@ -1,4 +1,4 @@
-const drawer = (element): void => {
+const drawer = (): void => {
   const observer = new IntersectionObserver(
     function ([e]) {
       e.target.classList.toggle('in-view', e.intersectionRatio > 0);

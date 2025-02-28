@@ -45,7 +45,7 @@ class iamBarChart extends HTMLElement {
   connectedCallback(): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const chartComponent = this;
-    const chartID = `chart-${Date.now() + (Math.floor(Math.random() * 100) + 1)}`;
+    //const chartID = `chart-${Date.now() + (Math.floor(Math.random() * 100) + 1)}`;
     const orginalTable = this.querySelector('table');
     const clonedTable = orginalTable.cloneNode(true);
     const chart = this.shadowRoot.querySelector('.chart');

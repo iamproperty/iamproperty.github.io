@@ -23,8 +23,7 @@ function fileupload(fileupload: Element, wrapper: Element): void {
 
   wrapper.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('.btn-primary')) {
-      const button = event.target.closest('.btn-primary');
-
+      
       // If the input allows multiples then use the buffer clone input
 
       errorMsgExt.classList.remove('d-block');
@@ -58,7 +57,7 @@ function fileupload(fileupload: Element, wrapper: Element): void {
   });
 
   // Buffer input change event
-  cloneInput.addEventListener('change', (event) => {
+  cloneInput.addEventListener('change', () => {
     if (input.hasAttribute('multiple')) {
       const filesArray = [...input.files, ...cloneInput.files];
 
@@ -94,19 +93,19 @@ function fileupload(fileupload: Element, wrapper: Element): void {
     input.dispatchEvent(changeEvent);
   });
 
-  cloneInput.addEventListener('dragenter', (event) => {
+  cloneInput.addEventListener('dragenter', () => {
     cloneInput.classList.add('focus');
   });
 
-  cloneInput.addEventListener('dragleave', (event) => {
+  cloneInput.addEventListener('dragleave', () => {
     cloneInput.classList.remove('focus');
   });
 
-  cloneInput.addEventListener('drop', (event) => {
+  cloneInput.addEventListener('drop', () => {
     cloneInput.classList.remove('focus');
   });
 
-  input.addEventListener('change', (event) => {
+  input.addEventListener('change', () => {
     if (input.files.length == 1) {
       const file = input.files[0];
 

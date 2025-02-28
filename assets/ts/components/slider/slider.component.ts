@@ -55,7 +55,7 @@ class iamSlider extends HTMLElement {
       stepperStart = 'touchstart';
     }
 
-    const stepperFunction = function (input, eventType): void {
+    const stepperFunction = function (input): void {
       const value = input.value;
 
       const min = slider.shadowRoot.querySelector('.is-first').getAttribute('min');

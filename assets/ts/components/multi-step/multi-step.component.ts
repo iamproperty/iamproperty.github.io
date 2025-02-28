@@ -70,13 +70,13 @@ class iamMultiStep extends HTMLElement {
       const fieldsetID = fieldset.getAttribute('data-title');
 
       if (fieldset.querySelector('.is-invalid')) {
-        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element, index) => {
+        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element) => {
           element.classList.add('active');
         });
 
         break;
       } else {
-        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element, index) => {
+        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element) => {
           element.classList.add('valid');
         });
       }
@@ -102,32 +102,32 @@ class iamMultiStep extends HTMLElement {
 
       currentFieldset.classList.add('was-validated');
 
-      Array.from(currentFieldset.querySelectorAll('input')).forEach((input, index) => {
+      Array.from(currentFieldset.querySelectorAll('input')).forEach((input) => {
         if (!input.checkValidity()) isFieldsetValid = false;
       });
 
       // If valid mode to next field set
       if (!isFieldsetValid) {
         Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element, index) => {
+          (element) => {
             element.classList.remove('valid');
           }
         );
 
         Array.from(MultiStepComponent.shadowRoot.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element, index) => {
+          (element) => {
             element.classList.remove('valid');
           }
         );
       } else {
         Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element, index) => {
+          (element) => {
             element.classList.add('valid');
           }
         );
 
         Array.from(MultiStepComponent.shadowRoot.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element, index) => {
+          (element) => {
             element.classList.add('valid');
           }
         );
@@ -142,10 +142,10 @@ class iamMultiStep extends HTMLElement {
           `.steps button[data-title="${button.getAttribute('data-title')}"]`
         );
 
-        Array.from(MultiStepComponent.querySelectorAll('button')).forEach((button, index) => {
+        Array.from(MultiStepComponent.querySelectorAll('button')).forEach((button) => {
           button.classList.remove('active');
         });
-        Array.from(MultiStepComponent.querySelectorAll('fieldset')).forEach((button, index) => {
+        Array.from(MultiStepComponent.querySelectorAll('fieldset')).forEach((button) => {
           button.classList.remove('active');
         });
 

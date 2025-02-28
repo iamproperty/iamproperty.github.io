@@ -74,7 +74,7 @@ class iamSearch extends HTMLElement {
 
     // Search the endpoint when 3 characters has been added
     if (searchWrapper.hasAttribute('data-url')) {
-      displayInputField.addEventListener('input', (event) => {
+      displayInputField.addEventListener('input', () => {
         if (displayInputField.value.length == 3 && !searched.includes(displayInputField.value)) {
           search(displayInputField.value);
           searched.push(displayInputField.value);
@@ -98,7 +98,7 @@ class iamSearch extends HTMLElement {
     }
 
     // on change update oringinal field with the actual value and use displayed input for the nice display text
-    displayInputField.addEventListener('input', (event) => {
+    displayInputField.addEventListener('input', () => {
       checkMatch();
     });
 
