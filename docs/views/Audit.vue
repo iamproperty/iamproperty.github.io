@@ -21,13 +21,13 @@
             <th>CSS</th>
             <td>{{ $shared.audit.css_size }}</td>
             <td>{{ $shared.benchmark.css_size }}</td>
-            <td>All the CSS available in the framework.</td>
+            <td>The base CSS plus the standard grid, components and the mixin utilities</td>
           </tr>
           <tr>
             <th>Core CSS</th>
             <td>{{ $shared.audit.css_core_size }}</td>
             <td>{{ $shared.benchmark.css_core_size }}</td>
-            <td>All the CSS available excluding the components.</td>
+            <td>The most important CSS; doesn't include the grid, components or utilities</td>
           </tr>
           <tr>
             <th>Base JS</th>

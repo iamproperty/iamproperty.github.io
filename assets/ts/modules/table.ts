@@ -5,7 +5,7 @@ export const addDataAttributes = (table): void => {
   const colHeadings = Array.from(table.querySelectorAll('thead th'));
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
 
-  colRows.forEach((row, index) => {
+  colRows.forEach((row) => {
     const cells = Array.from(row.querySelectorAll('th, td'));
     const statuses = [
       '0',
@@ -57,7 +57,7 @@ export const addDataAttributes = (table): void => {
 export const getLargestLastColWidth = (table): number => {
   let largestWidth = 0;
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
     const htmlStyles = window.getComputedStyle(document.querySelector('html'));
     const lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
 
@@ -78,13 +78,13 @@ export const createMobileButton = (table, wrapper): void => {
   if (table.querySelectorAll('thead tr th').length < 4 && !wrapper.hasAttribute('data-expandable')) return false;
 
   //If the expand column already exists we don't need to add a new one.
-  Array.from(table.querySelectorAll('thead tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
     if (!table.querySelectorAll('thead tr th.expand-button-heading').length) {
       row.insertAdjacentHTML('afterbegin', `<th class="th--fixed expand-button-heading"></th>`);
     }
   });
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
     const preExpanded = row.getAttribute('data-view') === 'full' ? 'aria-expanded' : '';
     row.insertAdjacentHTML(
       'afterbegin',
@@ -120,8 +120,8 @@ export const createSearchDataList = (table, form): void => {
   const inputWrapper = searchInput.parentNode;
 
   const searchableTerms = {};
-  searchableColumns.forEach((columnHeading, index) => {
-    Array.from(table.querySelectorAll('td[data-label="' + columnHeading.trim() + '"]')).forEach((td, index) => {
+  searchableColumns.forEach((columnHeading) => {
+    Array.from(table.querySelectorAll('td[data-label="' + columnHeading.trim() + '"]')).forEach((td) => {
       if (td.querySelector('.td__content'))
         searchableTerms[td.querySelector('.td__content').textContent] = td.querySelector('.td__content').textContent;
       else searchableTerms[td.textContent] = td.textContent;
@@ -149,7 +149,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
 
     if (form.classList.contains('processing')) return false;
 
-    Array.from(form.querySelectorAll('iam-applied-filters')).forEach((element, index) => {
+    Array.from(form.querySelectorAll('iam-applied-filters')).forEach((element) => {
       const event = new Event('tags-set');
       element.dispatchEvent(event);
     });
@@ -157,7 +157,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     // Before submitting check if any duplicate checkboxes within the filters dialog needs to upset the original input
     if (event.type == 'submit') {
       form.classList.add('processing');
-      Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element, index) => {
+      Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element) => {
         const id = element.getAttribute('data-duplicate');
         const input = document.getElementById(id);
         const card = document.querySelector(`[for="${id}"] iam-card`);
@@ -1065,7 +1065,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
 
           makeTableFunctional(table, form, pagination, wrapper);
 
-          Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement, index) => {
+          Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement) => {
             const totalNumber = resolvePath(response, queryElement.getAttribute('data-ajax-query'), '');
 
             if (queryElement.hasAttribute('data-total')) queryElement.setAttribute('data-total', totalNumber);
