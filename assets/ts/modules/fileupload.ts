@@ -54,7 +54,6 @@ function fileupload(fileupload: Element, wrapper: Element): void {
 
       const fileRemovedEvent = new CustomEvent('fileRemoved', { detail: { removedFile: button?.dataset.file } });
       fileupload.dispatchEvent(fileRemovedEvent);
-
     }
   });
 
