@@ -1,0 +1,316 @@
+@use '../_func.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// #region reset
+button {
+  // stylelint-disable-next-line property-disallowed-list
+  border-radius: 0;
+  text-transform: none;
+  margin: 0; // 1
+  font-family: inherit;
+  @include font-size(inherit);
+  line-height: inherit;
+}
+
+[role='button'] {
+  cursor: pointer;
+}
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+button,
+[type="button"], // 1
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; // 2
+
+  @if $enable-button-pointers {
+    &:not(:disabled) {
+      cursor: pointer; // 3
+    }
+  }
+}
+// #endregion
+
+// #region button primary
+.btn {
+  --btn-margin: #{rem(16)};
+  --btn-padding-block: #{rem(12)};
+  --btn-padding-inline: #{rem(40)};
+  --btn-border-width: #{rem(2)};
+  --btn-font-size: #{rem(18)};
+  --btn-line-height: #{rem(20)};
+
+  @include media-breakpoint-up(sm) {
+    --btn-margin: #{rem(24)};
+  }
+
+  &:not(.btn-secondary)[class*='colour-'] {
+    --colour-btn-bg: var(--colour);
+    --colour-btn-border: var(--colour);
+  }
+
+  &:is(.colour-primary, .colour-dark, .colour-danger, .colour-black) {
+    --colour-btn: #{$colour-inverted};
+  }
+
+  display: inline-block;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+
+  color: var(--colour-btn);
+
+  &:not(.border-0) {
+    background: var(--colour-btn-bg);
+    border: var(--btn-border-width) solid var(--colour-btn-border);
+  }
+
+  font-size: var(--btn-font-size);
+  line-height: var(--btn-line-height);
+  padding: var(--btn-padding-block) var(--btn-padding-inline);
+  border-radius: rem(24);
+  margin-bottom: var(--btn-margin);
+
+  &:not(:last-child) {
+    margin-right: var(--btn-margin);
+  }
+
+  transition:
+    background 0.5s,
+    color 0.5s;
+  height: auto;
+  max-width: fit-content;
+  appearance: none;
+  white-space: nowrap;
+
+  a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
+  &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+    outline: 0;
+    text-decoration: none;
+
+    background: var(--colour-btn-bg-hover);
+    color: var(--colour-btn-hover);
+    border-radius: rem(24);
+  }
+
+  a:is(:active, .active):not([disabled]) &,
+  &:is(:active, .active):not([disabled]) {
+    filter: brightness(85%);
+    transition:
+      background 0.1s,
+      color 0.1s;
+    color: var(--colour-btn);
+    border-radius: rem(24);
+  }
+
+  a:disabled &,
+  &:disabled,
+  [disabled] &,
+  &[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+// #endregion
+
+// #region btn with colour success
+.btn.colour-success {
+  --colour-btn-bg-hover: var(--colour);
+  --colour-btn-border-hover: var(--colour);
+  --colour-btn-hover: var(--colour-primary-theme);
+  position: relative;
+  padding-left: rem(56);
+  padding-right: rem(56);
+
+  a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
+  &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
+    padding-left: rem(40);
+    padding-right: rem(40);
+
+    &:before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Pro';
+      margin-right: 1rem;
+      font-style: inherit;
+      width: 1rem;
+      display: inline-block;
+      height: var(--btn-line-height);
+      vertical-align: bottom;
+    }
+  }
+}
+// #endregion
+
+// #region button small and tag
+.btn.btn-sm {
+  --btn-padding-block: #{rem(8)};
+  --btn-padding-inline: #{rem(32)};
+  --btn-margin: #{rem(8)};
+  --btn-font-size: #{rem(16)};
+}
+// #endregion
+
+// #region button with icon
+.btn {
+  &[class*='fa-']:before {
+    content: var(--fa);
+    font-family: 'Font Awesome 6 Pro';
+    line-height: 1em;
+  }
+
+  &.btn[class*='fa-after'] {
+    padding-right: 4rem;
+  }
+  &.btn[class*='fa-after']:before {
+    margin-right: 0;
+    margin-right: rem(6);
+    position: absolute;
+    right: 1.5rem;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  &:not(.btn-compact):before {
+    margin-right: 1rem;
+  }
+
+  i[class*='fa-'] {
+    font-family: 'Font Awesome 6 Pro';
+    margin-right: 1rem;
+    line-height: 1em;
+    font-style: inherit;
+
+    &:not(:first-child) {
+      margin-left: 1rem;
+      margin-right: 0;
+    }
+  }
+}
+// #endregion
+
+// #region button with prompt
+.btn.btn--prompt {
+  &:after {
+    content: '';
+    height: var(--btn-line-height);
+    width: rem(16);
+    display: inline-block;
+    background: currentColor;
+    mask-image: var(--icon-arrow);
+    mask-size: 100%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon-arrow);
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    vertical-align: bottom;
+    margin-left: 1rem;
+  }
+
+  a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
+  &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
+    &:after {
+      margin-left: 1.5rem;
+      margin-right: -0.5rem;
+    }
+  }
+}
+// #endregion
+
+// #region Select as button
+
+.btn:has(select) {
+  position: relative;
+  padding-right: rem(56);
+
+  &:not(.mw-100) {
+    max-width: rem(112 + 40 + 56);
+  }
+
+  select {
+    all: unset !important;
+    margin: calc(rem(-12)) calc(rem(-40)) !important;
+    padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
+    padding-right: rem(56) !important;
+    margin-right: rem(-56) !important;
+    border-radius: rem(24) !important;
+    appearance: none !important;
+    background: none !important;
+    border: none !important;
+    color: currentColor !important;
+    display: block;
+    max-width: 100% !important;
+    outline: none;
+    font-weight: bold;
+    font-size: var(--btn-font-size) !important;
+    line-height: var(--btn-line-height) !important;
+
+    option {
+      padding: 0;
+      text-align: left;
+      color: var(--colour-primary);
+    }
+  }
+
+  &:after {
+    position: absolute;
+    top: rem(10);
+    right: rem(32);
+
+    content: '';
+    height: rem(24);
+    width: rem(16);
+    display: inline-block;
+    background: currentColor;
+    mask-image: var(--icon-arrow);
+    mask-size: 100%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon-arrow);
+    -webkit-mask-size: 100%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+    vertical-align: bottom;
+    margin-left: 1rem;
+    transform: rotate(90deg);
+    pointer-events: none;
+  }
+
+  &.active:after {
+    transform: rotate(-90deg);
+  }
+}
+
+.btn:has(select:focus):after {
+  transform: rotate(-90deg);
+}
+
+// #endregion
+
+// #region button that opens up a filter dialog
+.btn-filter {
+  &:after {
+    content: '\f1de';
+    display: inline-block;
+    margin-left: 1em;
+    margin-bottom: -0.15em;
+    height: 1em;
+    width: 1em;
+    z-index: var(--index-focus);
+    color: currentColor;
+    font-weight: 300;
+    font-family: 'Font Awesome 6 Pro';
+  }
+}
+// #endregion
