@@ -473,6 +473,14 @@ const routes = [
         component: () => import('./views/components/AppliedFiltersDoc.vue'),
       },
       {
+        path: 'bento-grid',
+        name: 'Bento grid (Beta)',
+        meta: {
+          title: 'Bento grid | Components | iamkey',
+        },
+        component: () => import('./views/components/BentoGridDoc.vue'),
+      },
+      {
         path: 'carousel',
         name: 'Carousel',
         meta: {
