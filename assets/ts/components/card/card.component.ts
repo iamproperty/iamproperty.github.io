@@ -31,11 +31,6 @@ class iamCard extends HTMLElement {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const cardComponent = this;
     const cardBody = cardComponent.shadowRoot.querySelector('.card__body');
-    /*
-    const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
-    const cardMenu = cardComponent.shadowRoot.querySelector('.dialog__wrapper');
-    const btn = cardComponent.shadowRoot.querySelector('.dialog__wrapper button');
-    */
 
     setupCard(cardComponent);
 

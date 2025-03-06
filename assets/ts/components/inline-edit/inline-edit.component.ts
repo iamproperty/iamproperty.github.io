@@ -45,8 +45,6 @@ class iamInlineEdit extends HTMLElement {
     const inlineEdit = this;
     const saveButton = this.shadowRoot.querySelector('#save');
     const cancelButton = this.shadowRoot.querySelector('#cancel');
-
-    //const label = this.querySelector('label');
     const input = this.querySelector('input, textarea, select');
     const preview = this.querySelector('.preview');
 
