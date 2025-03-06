@@ -66,11 +66,9 @@
       <Tabs>
         <details>
           <summary><h2>Web component</h2></summary>
-          <WebReadme></WebReadme>
         </details>
         <details>
           <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
         </details>
         <details>
           <summary><h2>HTML</h2></summary>
@@ -103,31 +101,29 @@
 </template>
 
 <script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-  import Readme from '@/components/AppliedFilters/README.md';
-  import WebReadme from '~/ts/components/applied-filters/README.md';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Table from '@/components/Table/Table.vue';
-  import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';
+import Tabs from '@/components/Tabs/Tabs.vue'
+import Tab from '@/components/Tabs/Tab.vue'
+import DSHeader from '../DSHeader.vue'
+import headerImg from '../../img/type-header.png'
+import Table from '@/components/Table/Table.vue'
+import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue'
 
-  export default {
-    components: {
-      DSHeader,
-      Table,
-      Readme,
-      WebReadme,
-      Tabs,
-      Tab,
-      AppliedFilters,
-    },
-    mounted() {},
-    data() {
-      return {
-        headerImg: headerImg,
-        htmlUsage: `<div class="applied-filters "><button type="button" class="filter" data-name="test1">Option 1</button></div>`,
-      };
-    },
-  };
+export default {
+  components: {
+    DSHeader,
+    Table,
+    Tabs,
+    Tab,
+    AppliedFilters
+  },
+  mounted(){
+    
+  },
+  data () {
+    return {
+      headerImg: headerImg,
+      htmlUsage: `<div class="applied-filters "><button type="button" class="filter" data-name="test1">Option 1</button></div>`
+    }
+  }
+}
 </script>

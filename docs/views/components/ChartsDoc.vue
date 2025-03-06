@@ -543,7 +543,6 @@
     
     <div class="container">
       <h2>Vue Charts component reference</h2>
-      <Readme></Readme>
     </div>
    
 -->
@@ -551,74 +550,77 @@
 </template>
 
 <script>
-  import Chart from '@/components/Chart/Chart.vue';
-  import Readme from '@/components/Chart/README.md';
+import Chart from '@/components/Chart/Chart.vue'
 
-  export default {
-    components: {
-      Chart,
-      Readme,
-    },
-    data() {
-      return {
-        max: 100,
-        min: 0,
-        yaxis: [
-          {
-            value: 0,
-            display: '£0',
-          },
-          {
-            value: 50,
-            display: '£50',
-          },
-          {
-            value: 100,
-            display: '£100',
-          },
-        ],
-        yaxis2: [
-          {
-            value: 0,
-            display: '£0',
-          },
-          {
-            value: 50,
-            display: '£50',
-          },
-          {
-            value: 100,
-            display: '£100',
-          },
-          {
-            value: 150,
-            display: '£150',
-          },
-        ],
-        fields: [{ key: 'year' }, { key: 'Growth' }, { key: 'Growth2' }],
-        items: [
-          {
-            year: '2011',
-            growth: '£50.0',
-            growth2: '£50.10',
-          },
-          {
-            year: '2012',
-            growth: '£75.00',
-            growth2: '£50.10',
-          },
-          {
-            year: '2013',
-            growth: '£45.00',
-            growth2: '£57.10',
-          },
-          {
-            year: '2014',
-            growth: '£35.00',
-            growth2: '£80.10',
-          },
-        ],
-        htmlUsage: `<div class="container">
+
+export default {
+  components: {
+    Chart,
+  },
+  data () {
+    return {
+      max: 100,
+      min: 0,
+      yaxis: [
+        { 
+          value: 0,
+          display: '£0'
+        },
+        { 
+          value: 50,
+          display: '£50'
+        },
+        { 
+          value: 100,
+          display: '£100'
+        }
+      ],
+      yaxis2: [
+        { 
+          value: 0,
+          display: '£0'
+        },
+        { 
+          value: 50,
+          display: '£50'
+        },
+        { 
+          value: 100,
+          display: '£100'
+        },
+        { 
+          value: 150,
+          display: '£150'
+        }
+      ],
+      fields: [
+        { key: 'year' },
+        { key: 'Growth' },
+        { key: 'Growth2' }
+      ],
+      items: [
+        {
+          year: '2011',
+          growth: '£50.0',
+          growth2: '£50.10'
+        },
+        {
+          year: '2012',
+          growth: '£75.00',
+          growth2: '£50.10'
+        },
+        {
+          year: '2013',
+          growth: '£45.00',
+          growth2: '£57.10'
+        },
+        {
+          year: '2014',
+          growth: '£35.00',
+          growth2: '£80.10'
+        }
+      ],
+      htmlUsage: `<div class="container">
    <div role="presentation" class="chart__key chart__key--bar h5">
       <div class="key">year</div>
       <div class="key">Growth</div>
