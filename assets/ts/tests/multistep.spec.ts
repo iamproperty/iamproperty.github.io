@@ -6,7 +6,6 @@ import 'expect-puppeteer';
 
 import iamMultiStep from '../components/multi-step/multi-step.component';
 
-
 describe('The Multi-step component', () => {
   if (!window.customElements.get(`iam-multi-step`)) window.customElements.define(`iam-multi-step`, iamMultiStep);
 
@@ -56,25 +55,21 @@ describe('The Multi-step component', () => {
 </iam-multi-step>`;
 
   test('should add the active class to the first fieldset element', () => {
-
     let component = document.querySelector('iam-multi-step');
-    let fieldset = component.querySelector('fieldset')
-
+    let fieldset = component.querySelector('fieldset');
 
     expect(fieldset.classList).toContain('active');
   });
 
   test('should have a next button added to each fieldset element', () => {
-
     let component = document.querySelector('iam-multi-step');
-    let fieldset = component.querySelector('fieldset')
-    let button = fieldset.querySelector('.btn--wrapper button[data-next]')
+    let fieldset = component.querySelector('fieldset');
+    let button = fieldset.querySelector('.btn--wrapper button[data-next]');
 
     expect(button?.innerHTML).toContain('Next');
   });
 
   test('should have a steps list created using the data-title attributes for content', () => {
-
     let component = document.querySelector('iam-multi-step');
     let button = component?.shadowRoot.querySelector('.steps button');
 

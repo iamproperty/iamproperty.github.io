@@ -23,7 +23,6 @@ function fileupload(fileupload: Element, wrapper: Element): void {
 
   wrapper.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('.btn-primary')) {
-      
       // If the input allows multiples then use the buffer clone input
 
       errorMsgExt.classList.remove('d-block');
