@@ -95,6 +95,7 @@ let month = date.getMonth() + 1;
 let year = date.getFullYear();
 let currentDate = `${day}-${month}-${year}`;
 
+summary['fulldate'] = date;
 summary['date'] = currentDate;
 
 fs.writeFile('audit.json', JSON.stringify(summary,null,2), (err) => {  if (err) throw err; });
