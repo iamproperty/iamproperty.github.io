@@ -89,4 +89,12 @@ summary['fonts_size'] = fonts_size;
 summary['fonts_count'] = fonts_count;
 console.log("- Fonts("+fonts_count+"): "+fonts_size);
 
+const date = new Date()
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+let currentDate = `${day}-${month}-${year}`;
+
+summary['date'] = currentDate;
+
 fs.writeFile('audit.json', JSON.stringify(summary,null,2), (err) => {  if (err) throw err; });
