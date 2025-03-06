@@ -239,8 +239,8 @@ const routes = [
     ],
   },
   {
-    /* Form */ path: '/links',
-    name: 'Links',
+    path: '/links',
+    name: 'links',
     meta: {
       title: 'Elements | iamkey',
     },
@@ -248,7 +248,7 @@ const routes = [
     children: [
       {
         path: 'text-links',
-        name: 'Links',
+        name: 'text-links',
         meta: {
           title: 'Links | Elements | iamkey',
         },

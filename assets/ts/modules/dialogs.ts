@@ -218,11 +218,9 @@ const extendDialogs = (body): void => {
       if (document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]'))
         document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]').close();
 
-      Array.from(document.querySelectorAll('.dialog__wrapper:not([data-keep-open]) > button')).forEach(
-        (btnElement) => {
-          btnElement.removeAttribute('aria-expanded');
-        }
-      );
+      Array.from(document.querySelectorAll('.dialog__wrapper:not([data-keep-open]) > button')).forEach((btnElement) => {
+        btnElement.removeAttribute('aria-expanded');
+      });
     }
   });
 

@@ -101,29 +101,27 @@
 </template>
 
 <script>
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Tab from '@/components/Tabs/Tab.vue'
-import DSHeader from '../DSHeader.vue'
-import headerImg from '../../img/type-header.png'
-import Table from '@/components/Table/Table.vue'
-import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue'
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Tab from '@/components/Tabs/Tab.vue';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Table from '@/components/Table/Table.vue';
+  import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';
 
-export default {
-  components: {
-    DSHeader,
-    Table,
-    Tabs,
-    Tab,
-    AppliedFilters
-  },
-  mounted(){
-    
-  },
-  data () {
-    return {
-      headerImg: headerImg,
-      htmlUsage: `<div class="applied-filters "><button type="button" class="filter" data-name="test1">Option 1</button></div>`
-    }
-  }
-}
+  export default {
+    components: {
+      DSHeader,
+      Table,
+      Tabs,
+      Tab,
+      AppliedFilters,
+    },
+    mounted() {},
+    data() {
+      return {
+        headerImg: headerImg,
+        htmlUsage: `<div class="applied-filters "><button type="button" class="filter" data-name="test1">Option 1</button></div>`,
+      };
+    },
+  };
 </script>

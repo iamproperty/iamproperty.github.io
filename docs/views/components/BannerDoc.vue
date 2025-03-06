@@ -37,21 +37,19 @@
       <h2>HTML code examples</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
-
-
   </main>
 </template>
 
 <script>
-import Banner from '@/components/Banner/Banner.vue'
+  import Banner from '@/components/Banner/Banner.vue';
 
-export default {
-  components: {
-    Banner,
-  },
-  data () {
-    return {
-      htmlUsage: `<div class="container">
+  export default {
+    components: {
+      Banner,
+    },
+    data() {
+      return {
+        htmlUsage: `<div class="container">
   <div class="bg-light mb-4">
     <div class="row">
       <div class="col-sm-6">

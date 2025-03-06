@@ -69,30 +69,28 @@
       </details>
       <details>
         <summary><h2>Web component</h2></summary>
-        
       </details>
       <details>
         <summary><h2>Vue component</h2></summary>
-        
       </details>
     </Tabs>
   </main>
 </template>
 
 <script>
-import Tabs from '@/components/Tabs/Tabs.vue'
-import Accordion from '@/components/Accordion/Accordion.vue'
-import AccordionItem from '@/components/Accordion/AccordionItem.vue'
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Accordion from '@/components/Accordion/Accordion.vue';
+  import AccordionItem from '@/components/Accordion/AccordionItem.vue';
 
-export default {
-  components: {
-    Tabs,
-    Accordion,
-    AccordionItem,
-  },
-  data () {
-    return {
-      htmlUsage: `<div class="container accordion">
+  export default {
+    components: {
+      Tabs,
+      Accordion,
+      AccordionItem,
+    },
+    data() {
+      return {
+        htmlUsage: `<div class="container accordion">
   <details class="accordion-item">
     <summary><span class="accordion-header accordion-button h4">How long does the auction last?</span></summary>
     <div class="accordion-body">
