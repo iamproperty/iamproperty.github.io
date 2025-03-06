@@ -1,6 +1,4 @@
-// @ts-nocheck
-
-export const generateThumbnailList = function (carouselComponent) {
+export const generateThumbnailList = function (carouselComponent): any {
   const thumbnailImages = [];
 
   Array.from(carouselComponent.querySelectorAll(':scope > div')).forEach((slide, index) => {
@@ -12,7 +10,7 @@ export const generateThumbnailList = function (carouselComponent) {
   return thumbnailImages;
 };
 
-export const generatePipsHTML = function (carouselComponent, thumbnailImages) {
+export const generatePipsHTML = function (carouselComponent, thumbnailImages): string {
   const itemCount = carouselComponent.querySelectorAll(':scope > div').length;
 
   let pips = '';
@@ -33,7 +31,7 @@ export const generatePipsHTML = function (carouselComponent, thumbnailImages) {
   return pips;
 };
 
-const getProgressMax = function (itemCount, visibleItems) {
+const getProgressMax = function (itemCount, visibleItems): number {
   if (visibleItems == 1) {
     return itemCount;
   }
@@ -43,11 +41,11 @@ const getProgressMax = function (itemCount, visibleItems) {
   return max + 1;
 };
 
-const getProgressPercent = function (value, max) {
+const getProgressPercent = function (value, max): number {
   return ((value - 1) / (max - 1)) * 100;
 };
 
-export const carousel = function (carouselComponent) {
+export const carousel = function (carouselComponent): void {
   let scrollTimeout;
 
   const carouselElement = carouselComponent.shadowRoot.querySelector('.carousel');
@@ -84,7 +82,7 @@ export const carousel = function (carouselComponent) {
   // On scroll we need to make sure the buttons get corrected and the next testimonial is shown
   carouselInner.addEventListener(
     'scroll',
-    function (e) {
+    function () {
       clearTimeout(scrollTimeout);
       scrollTimeout = setTimeout(function () {
         const scrollArea = carouselInner.clientWidth;
@@ -109,7 +107,7 @@ export const carousel = function (carouselComponent) {
           targetSlide = Math.floor(itemCount / visibleItems) * visibleItems + 1;
         }
 
-        Array.from(carouselElement.querySelectorAll('.carousel__controls button')).forEach((button, index) => {
+        Array.from(carouselElement.querySelectorAll('.carousel__controls button')).forEach((button) => {
           button.removeAttribute('aria-current');
         });
 
@@ -145,7 +143,7 @@ export const carousel = function (carouselComponent) {
         if (typeof target.matches == 'function' && target.matches('button')) {
           e.preventDefault();
 
-          Array.from(carouselControls.querySelectorAll('button')).forEach((button, index) => {
+          Array.from(carouselControls.querySelectorAll('button')).forEach((button) => {
             button.removeAttribute('aria-current');
           });
           target.setAttribute('aria-current', true);
@@ -177,7 +175,7 @@ export const carousel = function (carouselComponent) {
     'click',
     function (e) {
       const scrollArea = carouselInner.clientWidth;
-      const scrollWidth = carouselInner.scrollWidth;
+      //const scrollWidth = carouselInner.scrollWidth;
       const itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
 
       const visibleItems = Math.round(scrollArea / itemWidth);
@@ -227,7 +225,7 @@ export const carousel = function (carouselComponent) {
     false
   );
 
-  carouselProgress.addEventListener(stepperStart, function (event) {
+  carouselProgress.addEventListener(stepperStart, function () {
     clearInterval(stepperInterval);
     stepperInterval = setInterval(function () {
       scrollArea = carouselInner.clientWidth;
@@ -242,13 +240,13 @@ export const carousel = function (carouselComponent) {
     }, 10);
   });
 
-  carouselProgress.addEventListener(stepperEvent, function (event) {
+  carouselProgress.addEventListener(stepperEvent, function () {
     clearInterval(stepperInterval);
   });
 
   carouselProgress.addEventListener(
     'change',
-    function (e) {
+    function () {
       clearInterval(stepperInterval);
       const target = carouselComponent.querySelector(`:scope > *:nth-child(${carouselProgress.value})`);
 
@@ -258,7 +256,7 @@ export const carousel = function (carouselComponent) {
         behavior: 'smooth',
       });
 
-      const direction = target.matches('.btn-next') ? 'next' : 'prev';
+      //const direction = target.matches('.btn-next') ? 'next' : 'prev';
 
       const customEvent = new CustomEvent(`slider-changed`, {
         detail: {

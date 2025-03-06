@@ -1,5 +1,4 @@
-// @ts-nocheck
-function fileupload(form, callback) {
+function fileupload(form, callback): void {
   const input = form.querySelector('[type="file"]');
   const label = form.querySelector(`[for="${input.getAttribute('id')}"]`);
   const add = form.querySelector('.file-upload__add');
@@ -8,7 +7,7 @@ function fileupload(form, callback) {
 
   input.addEventListener(
     'change',
-    function (e) {
+    function () {
       // prevent default to allow drop
 
       const url = form.getAttribute('action');
@@ -40,7 +39,7 @@ function fileupload(form, callback) {
 
   add.addEventListener(
     'click',
-    function (e) {
+    function () {
       form.classList.remove('file-uploaded');
       label.innerHTML = 'Select a file to upload';
       input.removeAttribute('disabled');
