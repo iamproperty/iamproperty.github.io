@@ -46,12 +46,12 @@
 
 <script>
   import Banner from '@/components/Banner/Banner.vue';
-  import Readme from '@/components/Banner/README.md'
+  import Readme from '@/components/Banner/README.md';
 
   export default {
     components: {
       Banner,
-      Readme
+      Readme,
     },
     data() {
       return {
