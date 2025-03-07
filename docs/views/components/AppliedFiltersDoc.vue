@@ -66,9 +66,11 @@
       <Tabs>
         <details>
           <summary><h2>Web component</h2></summary>
+          <WebReadme></WebReadme>
         </details>
         <details>
           <summary><h2>Vue component</h2></summary>
+          <Readme></Readme>
         </details>
         <details>
           <summary><h2>HTML</h2></summary>
@@ -103,6 +105,8 @@
 <script>
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Tab from '@/components/Tabs/Tab.vue';
+  import Readme from '@/components/AppliedFilters/README.md'
+  import WebReadme from '~/ts/components/applied-filters/README.md'
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Table from '@/components/Table/Table.vue';
@@ -115,6 +119,8 @@
       Tabs,
       Tab,
       AppliedFilters,
+      Readme,
+      WebReadme,
     },
     mounted() {},
     data() {
