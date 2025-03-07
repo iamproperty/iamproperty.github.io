@@ -65,7 +65,7 @@ export const setTabsEventHandlers = function (tabsElement: Element) {
 
   let nextButton = tabsElement.querySelector(':scope .tabs__next');
 
-  var scrollTimeout;
+  let scrollTimeout;
   window.isClicked = false;
   window.isScrolling = false;
 

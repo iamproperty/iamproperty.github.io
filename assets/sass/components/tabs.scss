@@ -5,6 +5,8 @@
 }
 
 iam-tabs {
+  --colour-tab-underline: var(--colour-info);
+
   details:not([open]) {
     padding-bottom: 0;
   }
@@ -22,6 +24,7 @@ iam-tabs.tabs--guided::part(next-button) {
     display: block;
   }
 }
+
 iam-tabs.tabs--guided::part(next-button):not(:hover) {
   background: var(--colour-success);
 }
@@ -108,11 +111,12 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
       height: 3px;
       width: 100%;
       transform: translate(-50%, 0) scale(0, 0); // translate pulls this left so it's centered
-      background: var(--colour-info);
+      background: var(--colour-tab-underline);
       transition: transform 0.4s;
     }
 
     &:not(.disabled) {
+
       &:hover:after,
       &:focus:after,
       &.focus:after {
@@ -206,12 +210,14 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     pointer-events: none;
   }
 }
+
 // #endregion
 @include media-breakpoint-up(sm) {
   :host(.tabs--inline) .tabs__links {
     margin: 0;
     justify-content: center;
   }
+
   :host(.tabs--inline) .tabs__links__wrapper:after {
     width: 100%;
   }
