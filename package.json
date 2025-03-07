@@ -7,21 +7,21 @@
   "private": false,
   "version": "7.1.0--beta7",
   "scripts": {
-    "temp": "rollup --environment COMPONENT:carousel --config rollup-component.config.js --sourcemap",
+    "temp": "rollup --environment COMPONENT:carousel --config rollup-component.config.cjs --sourcemap",
     "reload": "vite --host",
-    "dev": "npm run copy && node local_modules/delete-assets.js && vite --host",
-    "build": "node local_modules/delete-build-assets.js && npm run compile && vue-tsc --noEmit && vite build --mode lib",
+    "dev": "npm run copy && node local_modules/delete-assets.cjs && vite --host",
+    "build": "node local_modules/delete-build-assets.cjs && npm run compile && vue-tsc --noEmit && vite build --mode lib",
     "prepack": "npm run build",
-    "build:docs": "node local_modules/delete-build-assets.js && npm run compile && npm run copy && vue-tsc --noEmit && vite build",
+    "build:docs": "node local_modules/delete-build-assets.cjs && npm run compile && npm run copy && vue-tsc --noEmit && vite build",
     "preview": "vite preview --host",
     "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
-    "compile:js": "rollup --environment BUNDLE:true --config rollup.config.js --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
+    "compile:js": "rollup --environment BUNDLE:true --config rollup.config.cjs --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
     "compile:ts": "node node_modules/typescript/bin/tsc --project tscompileconfig.json && fix-esm-import-path assets/js",
     "compile": "npm run compile:sass && npm run compile:ts && npm run compile:js",
     "watch:ts": "tsc-watch -p tscompileconfig.json --onCompilationComplete \"fix-esm-import-path assets/js\"",
     "watch:sass": "sass --watch assets/sass/main.scss:assets/css/style.min.css assets/sass/core.scss:assets/css/core.min.css assets/sass/error.scss:assets/css/error.min.css assets/sass/components:assets/css/components assets/sass/components.reset.scss:assets/css/components.reset.min.css --style=compressed",
-    "watch": "concurrently \"npm run dev\" \"npm run watch:ts\" \"npm run watch:sass\" \"node local_modules/components.js\"",
-    "watch2": "npm run watch:ts && npm run watch:sass && node local_modules/components.js && npm run dev",
+    "watch": "concurrently \"npm run dev\" \"npm run watch:ts\" \"npm run watch:sass\" \"node local_modules/components.cjs\"",
+    "watch2": "npm run watch:ts && npm run watch:sass && node local_modules/components.cjs && npm run dev",
     "copy:svg": "copyfiles -u 2 assets/svg/**/* public/svg && copyfiles -u 2 assets/svg/icons.svg public/svg && copyfiles -u 2 assets/svg/logo.svg public/svg",
     "copy:img": "copyfiles -u 2 assets/img/* public/img && copyfiles -u 2 assets/img/**/* public/img && copyfiles -u 2 assets/img/**/**/* public/img",
     "copy:fonts": "copyfiles -u 2 assets/fonts/**/* public/fonts",
@@ -29,9 +29,9 @@
     "copy:css": "copyfiles -u 2 assets/css/**/* public/assets/css && copyfiles -u 2 assets/css/* public/assets/css",
     "copy:js": "copyfiles -u 2 assets/js/**/* public/assets/js",
     "copy": "npm run copy:svg && npm run copy:img && npm run copy:fonts && npm run copy:icons && npm run copy:css && npm run copy:js",
-    "audit": "node local_modules/audit.js",
-    "gen:email": "sass assets/sass/email.scss assets/css/email.min.css --style=compressed && node local_modules/email-css.js",
-    "gen:error": "sass assets/sass/error.scss assets/css/error.min.css --style=compressed && node local_modules/error-css.js",
+    "audit": "node local_modules/audit.cjs",
+    "gen:email": "sass assets/sass/email.scss assets/css/email.min.css --style=compressed && node local_modules/email-css.cjs",
+    "gen:error": "sass assets/sass/error.scss assets/css/error.min.css --style=compressed && node local_modules/error-css.cjs",
     "test:vue": "jest src",
     "test:unit": "jest assets/ts/tests",
     "test:scss": "jest assets/sass/_tests",
@@ -40,7 +40,7 @@
     "pr": "npm run pull-request",
     "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* public/assets/fonts",
     "deploy:svg": "copyfiles -u 2 assets/svg/icons.svg public/svg && copyfiles -u 2 assets/svg/logo.svg public/svg",
-    "deploy:404": "node local_modules/create404.js",
+    "deploy:404": "node local_modules/create404.cjs",
     "lint": "eslint assets/ts/scripts.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts",
     "lint:fix": "eslint assets/ts/scripts.ts assets/ts/components/**/*.ts assets/ts/modules/**/*.ts --fix",
     "prettier": "prettier assets/ts assets/sass src docs --write"
@@ -53,7 +53,8 @@
     "globals": "^15.14.0",
     "js-cookie": "^3.0.5",
     "prettier": "^3.4.2",
-    "typescript-eslint": "^8.19.1"
+    "typescript-eslint": "^8.19.1",
+    "unplugin-vue-markdown": "^28.3.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.21.0",
@@ -61,7 +62,6 @@
     "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-typescript": "^7.21.0",
-
     "@fullhuman/postcss-purgecss": "^5.0.0",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^24.0.1",
@@ -127,5 +127,6 @@
     "type": "git",
     "url": "git://github.com/iamproperty/iamproperty.github.io.git"
   },
-  "localURL": "http://192.168.0.69:5173"
+  "localURL": "http://192.168.0.69:5173",
+  "type": "module"
 }
