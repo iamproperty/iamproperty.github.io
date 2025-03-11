@@ -179,7 +179,7 @@ label:has(.progress--circular) + label:has(.progress--circular) {
 }
 
 label[data-percent]:not(:has(strong)):has(.progress--circular):before,
-label[data-percent]:has(.progress--circular) strong  {
+label[data-percent]:has(.progress--circular) strong {
   top: var(--pt-percent);
   left: 50%;
   right: auto;

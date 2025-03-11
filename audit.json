@@ -1,7 +1,7 @@
 {
-  "css_size": "168kb",
+  "css_size": "169kb",
   "css_core_size": "122kb",
-  "js_size": "17kb",
+  "js_size": "16kb",
   "accordion_size": "1kb",
   "header_size": "3kb",
   "table_size": "42kb",
@@ -26,13 +26,14 @@
   "slider_size": "5kb",
   "carousel_size": "31kb",
   "marketing_size": "2kb",
-  "barchart_size": "45kb",
-  "Total_JS_size": "346kb",
+  "barchart_size": "50kb",
+  "doughnutchart_size": "51kb",
+  "Total_JS_size": "402kb",
   "logo_size": "25kb",
   "img_size": "151kb",
   "img_count": 3,
   "fonts_size": "56kb",
   "fonts_count": 3,
-  "fulldate": "2025-03-06T14:22:01.556Z",
-  "date": "6-3-2025"
+  "fulldate": "2025-03-11T15:21:51.512Z",
+  "date": "11-3-2025"
 }

@@ -22,14 +22,11 @@ export const addClasses = (chartElement: any, chartOuter: any): boolean => {
 };
 
 export const setupChart = (chartElement: any, chartOuter: any, tableElement: any): boolean => {
-  
-  if(chartElement.tagName == "IAM-DOUGHNUTCHART"){
-
+  if (chartElement.tagName == 'IAM-DOUGHNUTCHART') {
     setupDoughnutChart(chartElement, chartOuter, tableElement);
     return true;
   }
-  
-  
+
   // #region Reset the chart
   // empty divs to re-populate
   const chartKey = chartOuter.querySelector('.chart__key');
@@ -38,7 +35,6 @@ export const setupChart = (chartElement: any, chartOuter: any, tableElement: any
   chartGuidelines.innerHTML = ``;
   const chartYaxis = chartOuter.querySelector('.chart__yaxis');
   chartYaxis.innerHTML = ``;
-
 
   // Remove old input fields
   Array.from(chartOuter.querySelectorAll(':scope > input[type="checkbox"],:scope > input[type="radio"]')).map(
@@ -62,7 +58,6 @@ export const setupChart = (chartElement: any, chartOuter: any, tableElement: any
 
   return true;
 };
-
 
 export const setupDoughnutChart = (chartElement: any, chartOuter: any, tableElement: any): boolean => {
   // #region Reset the chart
@@ -136,8 +131,7 @@ export const setEventListener = function (chartElement: any, chartOuter: any): v
     shadowTable.innerHTML = table.innerHTML;
     setCellData(chartElement, shadowTable);
 
-    if(chartElement.tagName == "IAM-DOUGHNUTCHART"){
-
+    if (chartElement.tagName == 'IAM-DOUGHNUTCHART') {
       createdoughnuts(chartOuter);
     }
   });
@@ -448,9 +442,7 @@ function createChartKeyItem(
   label.setAttribute('data-label', `${text}`);
   label.setAttribute('part', `key`);
 
-
-  const total = chartOuter.querySelector(`tbody tr td:nth-child(${index+1})`)?.getAttribute('data-numeric');
-
+  const total = chartOuter.querySelector(`tbody tr td:nth-child(${index + 1})`)?.getAttribute('data-numeric');
 
   label.setAttribute('data-numeric', total);
   label.innerHTML = `${text}`;

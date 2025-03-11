@@ -17,15 +17,20 @@
       <h1>Doughnut Charts</h1>
     </DSHeader>
 
-
     <h2>Usage</h2>
-    <p>Doughnut charts help show proportions of categorical data and are widely used in dashboards and reports. They’re best uses are for showing percentages of a whole, useful for data consumption and what best with small data sets (10 categories max.).</p>
+    <p>
+      Doughnut charts help show proportions of categorical data and are widely used in dashboards and reports. They’re
+      best uses are for showing percentages of a whole, useful for data consumption and what best with small data sets
+      (10 categories max.).
+    </p>
 
-    <p>Doughnut charts are not ideal for large data sets as small slices can be hard to see, they are also limited to single category tracking so if you need to show composition across multiple categories, consider a stacked bar chart instead.</p>
-
+    <p>
+      Doughnut charts are not ideal for large data sets as small slices can be hard to see, they are also limited to
+      single category tracking so if you need to show composition across multiple categories, consider a stacked bar
+      chart instead.
+    </p>
 
     <h2>Doughnut chart anatomy</h2>
-
 
     <div class="container bg-light mb-5 visualtest">
       <div class="md-col-end-6">
@@ -89,32 +94,41 @@
           </table>
         </DoughnutChart>
       </div>
-
     </div>
 
     <ol class="mb-5">
       <li>
-        <strong>Item description:</strong> Each item description has an optional clickable function which navigates to a relevant page. Using the vertical version it is recommended 4 item descriptions max. With the horizontal chart the items will start from the centre of their contain and expand out - for example is only 2 items they will appear to align with the centre on the doughnut.
+        <strong>Item description:</strong> Each item description has an optional clickable function which navigates to a
+        relevant page. Using the vertical version it is recommended 4 item descriptions max. With the horizontal chart
+        the items will start from the centre of their contain and expand out - for example is only 2 items they will
+        appear to align with the centre on the doughnut.
       </li>
       <li><strong>Slice visualisation:</strong> Slices start from the 12 o’clock position growing clockwise.</li>
-      <li><strong>Numerical total and label:</strong> This is an optional addition to the chart to give further context to the data.</li>
-      <li><strong>Item numerical amounts:</strong> This is an optional addition which can be used to communicate item amounts.</li>
+      <li>
+        <strong>Numerical total and label:</strong> This is an optional addition to the chart to give further context to
+        the data.
+      </li>
+      <li>
+        <strong>Item numerical amounts:</strong> This is an optional addition which can be used to communicate item
+        amounts.
+      </li>
     </ol>
-
 
     <h2>Layouts</h2>
 
-    <p>Doughnut charts follow a 12 o’clock position which grows clockwise for a familiar reading experience. By default
-    slices are sorted by value largest to smallest to make data analysis easier. There’s is a limit of 10 slices maximum to
-    ensure readability - any more than that will run the risk of being too thinly sliced to see.</p>
-
+    <p>
+      Doughnut charts follow a 12 o’clock position which grows clockwise for a familiar reading experience. By default
+      slices are sorted by value largest to smallest to make data analysis easier. There’s is a limit of 10 slices
+      maximum to ensure readability - any more than that will run the risk of being too thinly sliced to see.
+    </p>
 
     <h2>Dimensions</h2>
 
-    <p>Each variant of the doughnut charts has a small, medium and large sizing at a 20% size reduction to the doughnut
-    ring with each size decrease. This gives the flexibility to present data in the best way possible with various data
-    sets and page layouts.</p>
-
+    <p>
+      Each variant of the doughnut charts has a small, medium and large sizing at a 20% size reduction to the doughnut
+      ring with each size decrease. This gives the flexibility to present data in the best way possible with various
+      data sets and page layouts.
+    </p>
 
     <h3>Large</h3>
 
@@ -168,7 +182,6 @@
         </DoughnutChart>
       </div>
     </div>
-
 
     <h3>Medium</h3>
     <div class="container visualtest">
@@ -249,7 +262,6 @@
         </DoughnutChart>
       </div>
 
-
       <div class="md-col-start-4">
         <DoughnutChart class="chart--sm chart--horizontal">
           <table>
@@ -278,9 +290,13 @@
       </div>
     </div>
 
-
     <h2>Doughnut chart hover and disabled state behaviour</h2>
-    <p>The hoverable state on all doughnut charts includes a 25% colour darken on the slice and displays key information regarding that particular data set. The hoverable information must line up line centrally to the width of of the slice but there is no fix height position of the hoverable information, it simply appears in the same position the user has pointed to the item with their cursor. </p>
+    <p>
+      The hoverable state on all doughnut charts includes a 25% colour darken on the slice and displays key information
+      regarding that particular data set. The hoverable information must line up line centrally to the width of of the
+      slice but there is no fix height position of the hoverable information, it simply appears in the same position the
+      user has pointed to the item with their cursor.
+    </p>
 
     <Integration component="doughnutchart" componentName="iam-doughnutchart">
       <template #web-component>

@@ -16,7 +16,6 @@ class iamBarChart extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
 
-
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';

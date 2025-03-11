@@ -6,32 +6,32 @@ import extendInputs from './modules/inputs';
 import createDynamicEvents from './modules/dynamicEvents';
 
 const components = [
-  "accordion",
-  "header",
-  "table",
-  "tabs",
-  "card",
-  "filter-card",
-  "video-card",
-  "record-card",
-  "filterlist",
-  "applied-filters",
-  "pagination",
-  "notification",
-  "actionbar",
-  "nav",
-  "collapsible-side",
-  "address-lookup",
-  "fileupload",
-  "search",
-  "inline-edit",
-  "multiselect",
-  "multi-step",
-  "slider",
-  "carousel",
-  "marketing",
-  "barchart",
-  "doughnutchart"
+  'accordion',
+  'header',
+  'table',
+  'tabs',
+  'card',
+  'filter-card',
+  'video-card',
+  'record-card',
+  'filterlist',
+  'applied-filters',
+  'pagination',
+  'notification',
+  'actionbar',
+  'nav',
+  'collapsible-side',
+  'address-lookup',
+  'fileupload',
+  'search',
+  'inline-edit',
+  'multiselect',
+  'multi-step',
+  'slider',
+  'carousel',
+  'marketing',
+  'barchart',
+  'doughnutchart',
 ];
 
 // Attach classes to dom elements
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
     threshold: 0.1,
   };
   const componentExt = '.component.min.js';
-/*
+  /*
   // Load components - Each component will load once the first of its type has been loaded
   components.forEach((component) => {
     if (document.getElementsByTagName(`${prefix}-${component}`).length === 0) return;

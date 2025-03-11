@@ -27,109 +27,105 @@
   const sort = route.query['sort'];
   const view = route.query['view'];
   const search = route.query['search'];
-
 </script>
 
-
-
 <template>
-
-
-
-  
-
   <main class="main">
     <h1 class="h4">Competitor Analysis</h1>
-
 
     <div class="admin-panel md-col-end-5 grid">
       <div class="admin-panel__heading bg-primary gradient-info">
         <h2>Properties currently listed</h2>
       </div>
-      
+
       <div class="mh-md col-start-1 md-col-start-1 md-col-end-2">
         45th place
-      
-        <label data-percent="70"><strong>120</strong> Properties<progress max="100" value="70" class="progress--circular progress--sm " style="--progress:70%;"></progress></label>
+
+        <label data-percent="70"
+          ><strong>120</strong> Properties<progress
+            max="100"
+            value="70"
+            class="progress--circular progress--sm"
+            style="--progress: 70%"
+          ></progress
+        ></label>
       </div>
 
       <div class="mh-md col-start-1 md-col-start-3">
         <table class="mw-100">
-        <thead class="visually-hidden">
-          <tr>
-            <th>Rank</th>
-            <th>Company</th>
-            <th>Listed</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">4.</th>
-            <td><strong>Beacon & Partners</strong></td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-          <tr>
-            <th class="mw-fit-content pe-1">1.</th>
-            <td>Summit property Services</td>
-            <td>180</td>
-          </tr>
-        </tbody>
-      </table>
+          <thead class="visually-hidden">
+            <tr>
+              <th>Rank</th>
+              <th>Company</th>
+              <th>Listed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">4.</th>
+              <td><strong>Beacon & Partners</strong></td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+            <tr>
+              <th class="mw-fit-content pe-1">1.</th>
+              <td>Summit property Services</td>
+              <td>180</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
 
     <div class="admin-panel md-col-start-6">
       <h2 class="bg-light">Listing vs sale price</h2>
       <div class="mh-md md-col-start-3">
-            
         <p>Average difference between original listing price and actual sale price</p>
-        
+
         <table>
           <thead>
             <tr>
@@ -140,16 +136,14 @@
               <th>£ difference</th>
               <th>5 of listing</th>
             </tr>
-        </thead>
+          </thead>
         </table>
-
       </div>
     </div>
 
     <div class="admin-panel md-col-end-6">
       <h2 class="bg-light">Listing status</h2>
 
-      
       <BarChart class="chart--horizontal chart--stacked chart--display-data chart--fit-content chart--no-scale">
         <table>
           <thead>
@@ -242,7 +236,7 @@
 
       <span>5th</span>
       <p>Average number of days between property listing and being SSTC or under offer</p>
-      
+
       <BarChart class="chart--horizontal chart--display-data chart--fit-content chart--no-scale">
         <table>
           <thead>
@@ -295,16 +289,14 @@
           </tbody>
         </table>
       </BarChart>
-      
     </div>
-
 
     <div class="admin-panel md-col-end-4">
       <h2 class="bg-light">Cancelled sales</h2>
 
       <span>5th</span>
       <p>Average number of days between property listing and being SSTC or under offer</p>
-      
+
       <BarChart class="chart--horizontal chart--display-data chart--fit-content chart--no-scale">
         <table>
           <thead>
@@ -357,16 +349,14 @@
           </tbody>
         </table>
       </BarChart>
-      
     </div>
-
 
     <div class="admin-panel md-col-start-5 md-col-end-8">
       <h2 class="bg-light">Price reductions</h2>
 
       <span>5th</span>
       <p>Average number of days between property listing and being SSTC or under offer</p>
-      
+
       <BarChart class="chart--horizontal chart--display-data chart--fit-content chart--no-scale">
         <table>
           <thead>
@@ -419,16 +409,14 @@
           </tbody>
         </table>
       </BarChart>
-      
     </div>
-
 
     <div class="admin-panel md-col-start-9">
       <h2 class="bg-light">Withdrawn from sale</h2>
 
       <span>5th</span>
       <p>Average number of days between property listing and being SSTC or under offer</p>
-      
+
       <BarChart class="chart--horizontal chart--display-data chart--fit-content chart--no-scale">
         <table>
           <thead>
@@ -481,20 +469,12 @@
           </tbody>
         </table>
       </BarChart>
-      
     </div>
-
-
-
-
-
-
   </main>
 </template>
 
 <style lang="scss">
-
-body {
-  --max-width: 120rem
-}
+  body {
+    --max-width: 120rem;
+  }
 </style>

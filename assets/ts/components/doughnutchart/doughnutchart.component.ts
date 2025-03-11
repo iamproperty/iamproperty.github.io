@@ -1,19 +1,10 @@
-import {
-  addClasses,
-  setupChart,
-  setEventListener,
-  setEventObservers
-} from '../../modules/chart.module';
+import { addClasses, setupChart, setEventListener, setEventObservers } from '../../modules/chart.module';
 import { trackComponent, trackComponentRegistered } from '../_global';
 
 trackComponentRegistered('iam-doughnutchart');
 
 class iamDoughnutChart extends HTMLElement {
-
   constructor() {
-
-
-
     super();
     this.attachShadow({ mode: 'open' });
 
@@ -62,12 +53,10 @@ class iamDoughnutChart extends HTMLElement {
 
     // Set events on the paths
     chart.addEventListener('mousemove', (event: any) => {
-
       if (event && event.target.closest('.doughnut')) {
-
         const column = event.target.closest('.doughnut');
         const rect = column.getBoundingClientRect();
-  
+
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         chart.setAttribute('style', `--cursor-x: ${x}px; --cursor-y: ${y}px;`);
@@ -78,14 +67,13 @@ class iamDoughnutChart extends HTMLElement {
       let count = 1;
 
       doughnut?.querySelectorAll('path').forEach((path) => {
-
         const rect = path.getBoundingClientRect();
         const doughnutRect = doughnut.getBoundingClientRect();
-        const x = (rect.left - doughnutRect.left) + (rect.width / 2);
-        const y = (rect.top - doughnutRect.top) +  (rect.height / 2);
+        const x = rect.left - doughnutRect.left + rect.width / 2;
+        const y = rect.top - doughnutRect.top + rect.height / 2;
 
-        doughnut.style.setProperty(`--middle-${count}-x`,`${x}px`);
-        doughnut.style.setProperty(`--middle-${count}-y`,`${y}px`);
+        doughnut.style.setProperty(`--middle-${count}-x`, `${x}px`);
+        doughnut.style.setProperty(`--middle-${count}-y`, `${y}px`);
         count++;
       });
     });
