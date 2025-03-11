@@ -1,3 +1,5 @@
+import hibpCheck from '../vendor/hibp.js';
+
 const extendInputs = (body): void => {
   function loadInput(): void {
     // maxlength counter init
@@ -176,23 +178,23 @@ export const checkPWDStrength = (input, check = 'no'): void => {
   // if the strength is above weak and above the minimum length do some kind of api call to check if its in a list of passwords
 
   if (strength >= 3 && check == 'no') {
-    //hibpCheck(password, input);
+    hibpCheck(password, input);
 
-    //input.addEventListener('hibpCheck', function (event) {
-      //checkhibpCheck(event, input);
-    //});
+    input.addEventListener('hibpCheck', function (event) {
+      checkhibpCheck(event, input);
+    });
 
-    //function checkhibpCheck(event, input): void {
-      //if (event.detail) {
+    function checkhibpCheck(event, input): void {
+      if (event.detail) {
         // found
-        //checkPWDStrength(input, 'danger');
-      //} else {
+        checkPWDStrength(input, 'danger');
+      } else {
         // not found
         checkPWDStrength(input, 'success');
-      //}
+      }
 
-      //input.removeEventListener('hibpCheck', checkhibpCheck); // Succeeds
-    //}
+      input.removeEventListener('hibpCheck', checkhibpCheck); // Succeeds
+    }
   } else if (strength >= 3 && check == 'danger') {
     strength = 3;
     extraMsg = `(this password is very common)`;
