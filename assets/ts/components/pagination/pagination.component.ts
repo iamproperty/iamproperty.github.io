@@ -1,4 +1,3 @@
-// @ts-nocheck
 class iamPagination extends HTMLElement {
   constructor() {
     super();
@@ -53,7 +52,7 @@ class iamPagination extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     // Set default attributes
     const params = new URLSearchParams(window.location.search);
 
@@ -82,12 +81,12 @@ class iamPagination extends HTMLElement {
     });
 
     // Next and previous buttons will simply trigger and on change on the select which in turn will dispatch an event
-    next.addEventListener('click', (event) => {
+    next.addEventListener('click', () => {
       select.value = parseInt(select.value) + 1;
       select.dispatchEvent(new Event('change'));
     });
 
-    prev.addEventListener('click', (event) => {
+    prev.addEventListener('click', () => {
       select.value = parseInt(select.value) - 1;
       select.dispatchEvent(new Event('change'));
     });
@@ -97,7 +96,7 @@ class iamPagination extends HTMLElement {
       this.setAttribute('data-increment', event.target.value);
     });
 
-    loadMore.addEventListener('click', (event) => {
+    loadMore.addEventListener('click', () => {
       const newValue = parseInt(this.getAttribute('data-show')) + parseInt(this.getAttribute('data-increment'));
       this.setAttribute('data-show', newValue);
 
@@ -107,7 +106,7 @@ class iamPagination extends HTMLElement {
     });
   }
 
-  setup() {
+  setup(): void {
     // Elements
     const wrapper = this.shadowRoot.querySelector('.pagination');
     const select = this.shadowRoot.querySelector('.page-jump select');
@@ -160,11 +159,11 @@ class iamPagination extends HTMLElement {
     perPage.value = increment;
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-total', 'data-increment', 'data-page', 'data-show'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-total': {
         if (oldVal != newVal) {

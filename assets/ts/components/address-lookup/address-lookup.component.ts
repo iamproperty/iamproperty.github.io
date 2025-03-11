@@ -65,9 +65,7 @@ class iamAddressLookup extends HTMLElement {
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
-    const component = this;
-    const wrapper = this.shadowRoot.querySelector('.wrapper');
+  async connectedCallback(): void {
     const lookup = this.shadowRoot.querySelector('[name="postcode"]');
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
@@ -77,19 +75,20 @@ class iamAddressLookup extends HTMLElement {
     const switchLookupBtn = this.shadowRoot.querySelector('.switch-to-lookup-btn');
     const title = this.hasAttribute('data-title') ? this.getAttribute('data-title') : 'Property address';
     const preFilledAddressBtn = this.shadowRoot.querySelector('.pre-filled-address + button');
+    const dataDisplayText = this.hasAttribute('data-display-text');
 
-    Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement, index) => {
+    Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement) => {
       titleElement.innerHTML = title;
     });
 
-    function checkFilled(component) {
+    function checkFilled(component): void {
       const preFilledAddress = component.shadowRoot.querySelector('.pre-filled-address');
       let preFilled = true;
       preFilledAddress.innerHTML = '';
 
       Array.from(
         component.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')
-      ).forEach((input, index) => {
+      ).forEach((input) => {
         const value = input.value;
 
         if (!value) preFilled = false;
@@ -106,7 +105,7 @@ class iamAddressLookup extends HTMLElement {
     }
     checkFilled(this);
 
-    this.addEventListener('filled', (event) => {
+    this.addEventListener('filled', () => {
       checkFilled(this);
     });
 
@@ -126,7 +125,7 @@ class iamAddressLookup extends HTMLElement {
 
             const values = JSON.parse(this.getAttribute('data-use'));
 
-            Object.keys(values).forEach((key, index) => {
+            Object.keys(values).forEach((key) => {
               const value = values[key];
               if (this.querySelector(`[data-name="${key}"]`)) this.querySelector(`[data-name="${key}"]`).value = value;
               else if (this.querySelector(`[name="${key}"]`)) this.querySelector(`[name="${key}"]`).value = value;
@@ -140,41 +139,41 @@ class iamAddressLookup extends HTMLElement {
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
-      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input, index) => {
+      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input) => {
         input.setAttribute('required', 'true');
       });
     }
 
-    function openManualWrapper() {
+    function openManualWrapper(): void {
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
-      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input, index) => {
+      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input) => {
         input.setAttribute('required', 'true');
       });
 
       manualWrapper.scrollIntoView();
     }
 
-    preFilledAddressBtn.addEventListener('click', (event) => {
+    preFilledAddressBtn.addEventListener('click', () => {
       preFilledWrapper.classList.add('js-hide');
       openManualWrapper();
     });
-    switchManualBtn.addEventListener('click', (event) => {
+    switchManualBtn.addEventListener('click', () => {
       openManualWrapper();
     });
-    switchLookupBtn.addEventListener('click', (event) => {
+    switchLookupBtn.addEventListener('click', () => {
       lookupWrapper.classList.remove('js-hide');
       manualWrapper.classList.add('js-hide');
 
       lookupWrapper.scrollIntoView();
     });
 
-    lookup.addEventListener('keyup', (event) => {
+    lookup.addEventListener('keyup', () => {
       if (lookup.value.length >= 3) search(lookup.value);
     });
 
-    lookup.addEventListener('change', (event) => {
+    lookup.addEventListener('change', () => {
       if (lookup.value.length >= 3) {
         search(lookup.value);
 
@@ -184,7 +183,7 @@ class iamAddressLookup extends HTMLElement {
 
           const values = JSON.parse(list.querySelector(`[value="${lookup.value}"]`).getAttribute('data-values'));
 
-          Object.keys(values).forEach((key, index) => {
+          Object.keys(values).forEach((key) => {
             const value = values[key];
             if (this.querySelector(`[data-name="${key}"]`) && value != '')
               this.querySelector(`[data-name="${key}"]`).value = value;
@@ -200,7 +199,7 @@ class iamAddressLookup extends HTMLElement {
           // Focus on first input
           this.querySelector('[name]').focus();
 
-          Array.from(this.querySelectorAll('[data-required]')).forEach((input, index) => {
+          Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
             input.setAttribute('required', 'true');
           });
           lookup.removeAttribute('required');
@@ -211,7 +210,7 @@ class iamAddressLookup extends HTMLElement {
       }
     });
 
-    const search = async (postcode) => {
+    const search = async (postcode): any => {
       let ajaxURL = this.getAttribute('data-url');
       ajaxURL += `${encodeURI(postcode)}`;
 
@@ -241,7 +240,7 @@ class iamAddressLookup extends HTMLElement {
           .then((response) => {
             // populate datalist
             let listString = '';
-            response.forEach((address, index) => {
+            response.forEach((address) => {
               // Deal with agent platform response
               if (typeof address.value == 'object') {
                 const values = JSON.stringify(address.value);
@@ -249,8 +248,8 @@ class iamAddressLookup extends HTMLElement {
               } else {
                 const values = JSON.stringify(address);
 
-                if (component.hasAttribute('data-display-text')) {
-                  listString += `<option value="${address[component.getAttribute('data-display-text')]}, ${postcode}" data-values='${values}'></option>`;
+                if (dataDisplayText) {
+                  listString += `<option value="${address[dataDisplayText]}, ${postcode}" data-values='${values}'></option>`;
                 } else {
                   let itemString = '';
                   for (const [key, value] of Object.entries(address)) {

@@ -892,6 +892,15 @@ const routes = [
       'npm, install, assets, static, sass, modules, vue, branch, commands, contributing, code, web server, develoment, unit tests, regression tests, workflow',
   },
   {
+    path: '/audit-results',
+    component: () => import('./views/Audit.vue'),
+    name: 'Audit',
+    meta: {
+      title: 'Audit | iamkey',
+    },
+    searchterms: 'Audit, npm, build, pr, Pull request',
+  },
+  {
     /* Examples */ path: '/examples',
     name: 'Examples',
     meta: {

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
 
@@ -27,27 +26,26 @@ class iamRecordCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
-    const cardComponent = this;
-    const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
-    setupCard(cardComponent);
+  async connectedCallback(): void {
+    const cardHead = this.shadowRoot.querySelector('.card__head');
+    setupCard(this);
 
-    Array.from(cardComponent.querySelectorAll(':scope > *:not([slot])')).forEach((element, index) => {
+    Array.from(this.querySelectorAll(':scope > *:not([slot])')).forEach((element) => {
       element.setAttribute('slot', 'details');
     });
 
-    if (cardComponent.hasAttribute('data-avatar')) {
-      cardHead.innerHTML += `<img src="${cardComponent.getAttribute('data-avatar')}" alt="" loading="lazy" class="card__avatar" part="avatar" />`;
+    if (this.hasAttribute('data-avatar')) {
+      cardHead.innerHTML += `<img src="${this.getAttribute('data-avatar')}" alt="" loading="lazy" class="card__avatar" part="avatar" />`;
     }
 
-    trackComponent(cardComponent, 'iam-record-card', []);
+    trackComponent(this, 'iam-record-card', []);
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-image'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-image': {
         if (oldVal != newVal) {

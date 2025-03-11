@@ -1,4 +1,3 @@
-// @ts-nocheck
 import fileupload from '../../modules/fileupload';
 
 // Data layer Web component created
@@ -43,7 +42,7 @@ class iamFileupload extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     this.innerHTML += '<i class="fa-regular fa-arrow-up-from-bracket me-2" aria-hidden="true" slot="btn"></i>';
 
     const wrapper = this.shadowRoot.querySelector('.file-upload');
@@ -56,11 +55,11 @@ class iamFileupload extends HTMLElement {
     fileupload(this, wrapper);
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-filename'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-filename': {
         if (oldVal != newVal) {

@@ -1,12 +1,11 @@
-// @ts-nocheck
 import { zeroPad, isNumeric, ucfirst, resolvePath } from './helpers';
 
 // Basic functionality needed
-export const addDataAttributes = (table) => {
+export const addDataAttributes = (table): void => {
   const colHeadings = Array.from(table.querySelectorAll('thead th'));
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
 
-  colRows.forEach((row, index) => {
+  colRows.forEach((row) => {
     const cells = Array.from(row.querySelectorAll('th, td'));
     const statuses = [
       '0',
@@ -55,10 +54,10 @@ export const addDataAttributes = (table) => {
   });
 };
 
-export const getLargestLastColWidth = (table) => {
+export const getLargestLastColWidth = (table): number => {
   let largestWidth = 0;
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
     const htmlStyles = window.getComputedStyle(document.querySelector('html'));
     const lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
 
@@ -73,19 +72,19 @@ export const getLargestLastColWidth = (table) => {
   return largestWidth;
 };
 
-export const createMobileButton = (table, wrapper) => {
+export const createMobileButton = (table, wrapper): void => {
   if (wrapper.classList.contains('table--fullwidth') && !wrapper.hasAttribute('data-expandable')) return false;
 
   if (table.querySelectorAll('thead tr th').length < 4 && !wrapper.hasAttribute('data-expandable')) return false;
 
   //If the expand column already exists we don't need to add a new one.
-  Array.from(table.querySelectorAll('thead tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
     if (!table.querySelectorAll('thead tr th.expand-button-heading').length) {
       row.insertAdjacentHTML('afterbegin', `<th class="th--fixed expand-button-heading"></th>`);
     }
   });
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
     const preExpanded = row.getAttribute('data-view') === 'full' ? 'aria-expanded' : '';
     row.insertAdjacentHTML(
       'afterbegin',
@@ -94,7 +93,7 @@ export const createMobileButton = (table, wrapper) => {
   });
 };
 
-export const addTableEventListeners = (table) => {
+export const addTableEventListeners = (table): void => {
   table.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-expand-button]')) {
       const button = event.target.closest('[data-expand-button]');
@@ -111,7 +110,7 @@ export const addTableEventListeners = (table) => {
 };
 
 // Filters
-export const createSearchDataList = (table, form) => {
+export const createSearchDataList = (table, form): void => {
   const searchInput = form.querySelector('input[data-search]');
 
   if (!searchInput) return false;
@@ -121,8 +120,8 @@ export const createSearchDataList = (table, form) => {
   const inputWrapper = searchInput.parentNode;
 
   const searchableTerms = {};
-  searchableColumns.forEach((columnHeading, index) => {
-    Array.from(table.querySelectorAll('td[data-label="' + columnHeading.trim() + '"]')).forEach((td, index) => {
+  searchableColumns.forEach((columnHeading) => {
+    Array.from(table.querySelectorAll('td[data-label="' + columnHeading.trim() + '"]')).forEach((td) => {
       if (td.querySelector('.td__content'))
         searchableTerms[td.querySelector('.td__content').textContent] = td.querySelector('.td__content').textContent;
       else searchableTerms[td.textContent] = td.textContent;
@@ -139,18 +138,18 @@ export const createSearchDataList = (table, form) => {
     .join('')}`;
 };
 
-export const addFilterEventListeners = (table, form, pagination, wrapper, savedTableBody) => {
+export const addFilterEventListeners = (table, form, pagination, wrapper, savedTableBody): void => {
   let timer;
 
   // Check what conditions are set on the table to see what the form actions are
-  const formSubmit = function (event, paginate = false) {
+  const formSubmit = function (event, paginate = false): void | boolean {
     if (wrapper.hasAttribute('data-no-submit')) {
       return false;
     }
 
     if (form.classList.contains('processing')) return false;
 
-    Array.from(form.querySelectorAll('iam-applied-filters')).forEach((element, index) => {
+    Array.from(form.querySelectorAll('iam-applied-filters')).forEach((element) => {
       const event = new Event('tags-set');
       element.dispatchEvent(event);
     });
@@ -158,7 +157,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     // Before submitting check if any duplicate checkboxes within the filters dialog needs to upset the original input
     if (event.type == 'submit') {
       form.classList.add('processing');
-      Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element, index) => {
+      Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element) => {
         const id = element.getAttribute('data-duplicate');
         const input = document.getElementById(id);
         const card = document.querySelector(`[for="${id}"] iam-card`);
@@ -299,7 +298,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-clear]')) {
       form.classList.add('processing');
       // Make sure any applied filters have been removed
-      Array.from(form.querySelectorAll('.applied-filters')).forEach((filters, index) => {
+      Array.from(form.querySelectorAll('.applied-filters')).forEach((filters) => {
         filters.innerHTML = '';
       });
 
@@ -373,10 +372,10 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   const fields = [];
 
   // Collect the forms that we need to add an event listener for.
-  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input, index) => {
+  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
     const mimicField = input.getAttribute('data-mimic');
 
-    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput, index) => {
+    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput) => {
       const parentForm = mimicInput.closest('form');
 
       if (!forms.includes(parentForm)) {
@@ -390,8 +389,8 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   });
 
   // For each form add change listener
-  forms.forEach((parentForm, index) => {
-    const updateMimicInput = function () {
+  forms.forEach((parentForm) => {
+    const updateMimicInput = function (): void {
       const mimickedAlready = [];
       const formData = new FormData(parentForm);
 
@@ -422,17 +421,17 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       }
     };
 
-    parentForm.addEventListener('force', (event) => {
+    parentForm.addEventListener('force', () => {
       updateMimicInput();
     });
 
-    parentForm.addEventListener('change', (event) => {
+    parentForm.addEventListener('change', () => {
       updateMimicInput();
     });
   });
 };
 
-export const sortTable = (table, form, savedTableBody) => {
+export const sortTable = (table, form, savedTableBody): void | boolean => {
   if (form.getAttribute('data-ajax')) {
     return false;
   }
@@ -463,7 +462,7 @@ export const sortTable = (table, form, savedTableBody) => {
 
   // Create an array from the table rows, the index created is then used to sort the array
   let tableArr = [];
-  Array.from(tbody.querySelectorAll('tr')).forEach((tableRow, index) => {
+  Array.from(tbody.querySelectorAll('tr')).forEach((tableRow) => {
     let rowIndex = tableRow
       .querySelector('td[data-label="' + sortBy + '"], th[data-label="' + sortBy + '"]')
       .textContent.trim();
@@ -503,13 +502,13 @@ export const sortTable = (table, form, savedTableBody) => {
 
   // Create a string to return and populate the tbody
   let strTbody = '';
-  tableArr.forEach((tableRow, index) => {
+  tableArr.forEach((tableRow) => {
     strTbody += tableRow.row.outerHTML;
   });
   tbody.innerHTML = strTbody;
 };
 
-export const filterTable = (table, form, wrapper) => {
+export const filterTable = (table, form, wrapper): void => {
   table.classList.remove('table--filtered');
 
   const filters = filterFilters(form);
@@ -519,7 +518,7 @@ export const filterTable = (table, form, wrapper) => {
   const showRows = form.querySelector('[data-show]') ? parseInt(form.querySelector('[data-show]').value) : 15;
 
   // Reset
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
     row.classList.remove('filtered');
     row.classList.remove('filtered--matched');
     row.classList.remove('filtered--show');
@@ -532,19 +531,19 @@ export const filterTable = (table, form, wrapper) => {
     const searchInput = form.querySelector('input[data-search]');
     const searchColumns = form.querySelector('input[data-search]').getAttribute('data-search').split(',');
 
-    searchColumns.forEach((column, index) => {
+    searchColumns.forEach((column) => {
       searches.push({ column: `${column.trim()}`, value: `${searchInput.value}` });
     });
   }
 
   //Display the filter count
-  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element) => {
     element.innerHTML = '';
     element.parentNode.classList.remove('hover');
   });
 
   let filterCount = 0;
-  Object.values(filters).forEach((filter, index) => {
+  Object.values(filters).forEach((filter) => {
     if (typeof filter == 'object' && Object.values(filter).length) {
       filterCount += Object.values(filter).length;
     } else {
@@ -553,7 +552,7 @@ export const filterTable = (table, form, wrapper) => {
   });
 
   if (filterCount) {
-    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element) => {
       element.innerHTML += `(${filterCount})`;
       element.parentNode.classList.add('hover');
     });
@@ -562,9 +561,9 @@ export const filterTable = (table, form, wrapper) => {
   // Filter the table
   table.classList.add('table--filtered');
   for (const [key, filterValue] of Object.entries(filters)) {
-    Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
+    Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row) => {
       let isMatched = false;
-      filterValue.forEach((filter, index) => {
+      filterValue.forEach((filter) => {
         const filterTd = row.querySelector(`[data-label="${key}"]`);
 
         if (filter.includes('-date-from')) {
@@ -672,10 +671,10 @@ export const filterTable = (table, form, wrapper) => {
     });
   }
   // Search whats left of the table after filtering
-  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row) => {
     let isSearched = searches.length > 0 && searches[0].value.length >= 3 ? false : true;
 
-    searches.forEach((search, index) => {
+    searches.forEach((search) => {
       const searchTd = row.querySelector(`[data-label="${search.column}"]`);
 
       if (
@@ -693,7 +692,7 @@ export const filterTable = (table, form, wrapper) => {
   });
 
   // Work out what to display after pagination
-  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row, index) => {
+  Array.from(table.querySelectorAll('tbody tr:not(.filtered)')).forEach((row) => {
     matched++;
 
     row.classList.add('filtered--matched');
@@ -712,10 +711,10 @@ export const filterTable = (table, form, wrapper) => {
   }
 };
 
-export const populateDataQueries = (table, form, wrapper) => {
+export const populateDataQueries = (table, form, wrapper): void | boolean => {
   const dataQueries = Array.from(form.querySelectorAll('[data-query]'));
 
-  dataQueries.forEach((queryElement, index) => {
+  dataQueries.forEach((queryElement) => {
     const query = queryElement.getAttribute('data-query');
     let numberOfMatchedRows = 0;
 
@@ -742,7 +741,7 @@ export const populateDataQueries = (table, form, wrapper) => {
       numberOfMatchedRows = Array.from(table.querySelectorAll(`tbody tr:not(.filtered)`)).filter(function (row) {
         let matched = true;
 
-        for (const [index, value] of Object.entries(queries)) {
+        for (const value of Object.entries(queries)) {
           const queryParts = value.split(' == ');
 
           if (
@@ -774,7 +773,7 @@ export const populateDataQueries = (table, form, wrapper) => {
 };
 
 // Pagination
-export const addPaginationEventListeners = function (table, form, pagination, wrapper) {
+export const addPaginationEventListeners = function (table, form, pagination, wrapper): void | boolean {
   if (wrapper.hasAttribute('data-no-submit')) {
     return false;
   }
@@ -814,17 +813,17 @@ export const addPaginationEventListeners = function (table, form, pagination, wr
 };
 
 // Export CSV Data
-export const addExportEventListeners = (button, table) => {
+export const addExportEventListeners = (button, table): void | boolean => {
   if (!button) {
     return false;
   }
 
-  button.addEventListener('click', (event) => {
+  button.addEventListener('click', () => {
     exportAsCSV(table);
   });
 };
 
-export const exportAsCSV = function (table) {
+export const exportAsCSV = function (table): void {
   let csvData = [];
   // Get each row data
   const rows = table.getElementsByTagName('tr');
@@ -867,7 +866,7 @@ export const exportAsCSV = function (table) {
 };
 
 // After table is loaded
-export const makeTableFunctional = function (table, form, pagination, wrapper) {
+export const makeTableFunctional = function (table, form, pagination, wrapper): void {
   addDataAttributes(table);
   createMobileButton(table, wrapper);
   populateDataQueries(table, form, wrapper);
@@ -877,8 +876,8 @@ export const makeTableFunctional = function (table, form, pagination, wrapper) {
     const largestWidth = getLargestLastColWidth(table);
     wrapper.style.setProperty('--cta-width', `${largestWidth}rem`);
 
-    function outputsize() {
-      Array.from(table.querySelectorAll('tr')).forEach((row, index) => {
+    function outputsize(): void {
+      Array.from(table.querySelectorAll('tr')).forEach((row) => {
         const rowHeight = row.offsetHeight;
         row.style.setProperty('--row-height', `${rowHeight}px`);
       });
@@ -888,13 +887,13 @@ export const makeTableFunctional = function (table, form, pagination, wrapper) {
   }
 };
 
-const filterFilters = function (form) {
+const filterFilters = function (form): object {
   const filters = new Object();
 
   // Filter
   const filterInputs = Array.from(form.querySelectorAll('[data-filter]'));
 
-  filterInputs.forEach((filterInput, index) => {
+  filterInputs.forEach((filterInput) => {
     // Ignore uncked radio inputs
     if (filterInput.type == 'radio' && !filterInput.checked) {
       return;
@@ -921,7 +920,7 @@ const filterFilters = function (form) {
   return filters;
 };
 
-export const loadAjaxTable = async function (table, form, pagination, wrapper) {
+export const loadAjaxTable = async function (table, form, pagination, wrapper): void {
   const formData = new FormData(form);
   const queryString = new URLSearchParams(formData).toString();
   const columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');
@@ -933,19 +932,19 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper) {
   // Display the filter count
   const filters = filterFilters(form);
 
-  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+  Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element) => {
     element.innerHTML = '';
     element.parentNode.classList.remove('hover');
   });
 
   let filterCount = 0;
-  Object.values(filters).forEach((filter, index) => {
+  Object.values(filters).forEach((filter) => {
     if (typeof filter == 'object' && Object.values(filter).length) filterCount += Object.values(filter).length;
     else filterCount++;
   });
 
   if (filterCount) {
-    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element, index) => {
+    Array.from(form.querySelectorAll('[data-filter-count]')).forEach((element) => {
       element.innerHTML += `(${filterCount})`;
       element.parentNode.classList.add('hover');
     });
@@ -996,17 +995,17 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper) {
         if (data) {
           tbody.innerHTML = '';
 
-          data.forEach((row, index) => {
+          data.forEach((row) => {
             const table_row = document.createElement('tr');
 
-            columns.forEach((col, index) => {
+            columns.forEach((col) => {
               let cellOutput = '';
               const table_cell = document.createElement('td');
               // Add some data to help with the mobile layout design
               table_cell.setAttribute('data-label', col.innerText);
 
               if (col.getAttribute('data-output')) {
-                var cellTemplate = col.getAttribute('data-output');
+                const cellTemplate = col.getAttribute('data-output');
                 // Use a regex to replace {var} with actual values from the json data
                 cellOutput = cellTemplate.replace(new RegExp(/{(.*?)}/, 'gm'), function (matched) {
                   return resolvePath(row, matched.replace('{', '').replace('}', ''));
@@ -1015,11 +1014,11 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper) {
 
               // If an output array is defined then the content is going to made of of multiple values from an array
               if (col.hasAttribute('data-output-array')) {
-                var cellTemplate = col.getAttribute('data-output');
+                const cellTemplate = col.getAttribute('data-output');
                 const arrValue = resolvePath(row, cellTemplate.replace('{', '').replace('}', ''));
 
                 cellOutput = '';
-                arrValue.forEach((rowValue, i) => {
+                arrValue.forEach((rowValue) => {
                   const cellTemplateValue = col.getAttribute('data-output-array');
                   let cellOutputValue = '';
 
@@ -1066,7 +1065,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper) {
 
           makeTableFunctional(table, form, pagination, wrapper);
 
-          Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement, index) => {
+          Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement) => {
             const totalNumber = resolvePath(response, queryElement.getAttribute('data-ajax-query'), '');
 
             if (queryElement.hasAttribute('data-total')) queryElement.setAttribute('data-total', totalNumber);
@@ -1098,7 +1097,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper) {
   }
 };
 
-export const formatCell = (format, cellOutput) => {
+export const formatCell = (format, cellOutput): any => {
   switch (format) {
     case 'datetime':
       return (

@@ -1,6 +1,6 @@
 // #region Functions that setup and trigger other functions
 
-export const addClasses = (chartElement: any, chartOuter: any) => {
+export const addClasses = (chartElement: any, chartOuter: any): boolean => {
   // add colour classes
   for (let i = 1; i <= 10; i++) {
     if (chartElement.hasAttribute(`data-colour-${i}`)) {
@@ -19,7 +19,7 @@ export const addClasses = (chartElement: any, chartOuter: any) => {
   return true;
 };
 
-export const setupChart = (chartElement: any, chartOuter: any, tableElement: any) => {
+export const setupChart = (chartElement: any, chartOuter: any, tableElement: any): boolean => {
   // #region Reset the chart
   // empty divs to re-populate
   const chartKey = chartOuter.querySelector('.chart__key');
@@ -54,7 +54,7 @@ export const setupChart = (chartElement: any, chartOuter: any, tableElement: any
 // #endregion
 
 // #region Event handlers and observers
-export const setEventListener = function (chartElement: any, chartOuter: any) {
+export const setEventListener = function (chartElement: any, chartOuter: any): void {
   const chart = chartOuter.querySelector('.chart');
   chart.addEventListener('mousemove', (event: any) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('td:not(:first-child')) {
@@ -104,11 +104,11 @@ export const setEventListener = function (chartElement: any, chartOuter: any) {
   });
 };
 
-export const setEventObservers = function (chartElement: any, chartOuter: any) {
+export const setEventObservers = function (chartElement: any, chartOuter: any): boolean {
   const table = chartElement.querySelector('table');
   const shadowTable = chartOuter.querySelector('table');
 
-  const attributesUpdated = (mutationList: any, observer: any) => {
+  const attributesUpdated = (mutationList: any, observer: any): void => {
     observer.disconnect();
     observer2.disconnect();
 
@@ -123,7 +123,7 @@ export const setEventObservers = function (chartElement: any, chartOuter: any) {
     observer2.observe(chartElement, { attributes: true });
   };
 
-  const tableUpdated = (mutationList: any, observer: any) => {
+  const tableUpdated = (mutationList: any, observer: any): void => {
     observer.disconnect();
     observer2.disconnect();
 
@@ -149,7 +149,7 @@ export const setEventObservers = function (chartElement: any, chartOuter: any) {
 // #endregion
 
 // #region GET functions
-export const getChartData = function (chartElement: any) {
+export const getChartData = function (chartElement: any): any {
   const table = chartElement.shadowRoot.querySelector('.chart__wrapper table');
 
   const min: any = chartElement.hasAttribute('data-min') ? chartElement.getAttribute('data-min') : 0;
@@ -177,7 +177,7 @@ export const getChartData = function (chartElement: any) {
   return { min, max, yaxis, xaxis, guidelines };
 };
 
-function getLargestValue(chartElement: any, table: any) {
+function getLargestValue(chartElement: any, table: any): number {
   const selector = chartElement.classList.contains('chart--stacked') ? 'tbody tr' : 'tbody td:not(:first-child)';
 
   const values = Array.from(table.querySelectorAll(selector)).map((element: any) => {
@@ -192,7 +192,7 @@ function getLargestValue(chartElement: any, table: any) {
   return Math.ceil(largestValue);
 }
 
-const getValues = function (value: number, min: any, max: any, start?: number) {
+const getValues = function (value: number, min: any, max: any, start?: number): any {
   let cleanValue: string | number = String(value);
   cleanValue = cleanValue.replace('£', '');
   cleanValue = cleanValue.replace('%', '');
@@ -227,7 +227,7 @@ const getValues = function (value: number, min: any, max: any, start?: number) {
 // #endregion
 
 // #region SET functions - set data attributes and classes
-export const setCellData = function (chartElement: any, table: any) {
+export const setCellData = function (chartElement: any, table: any): void {
   Array.from(table.querySelectorAll('tbody tr')).forEach((tr: any) => {
     let rowValue = 0;
     // Set the data numeric value if not set
@@ -318,7 +318,7 @@ export const setCellData = function (chartElement: any, table: any) {
   });
 };
 
-export const setLongestLabel = function (chartOuter: any) {
+export const setLongestLabel = function (chartOuter: any): void {
   const chartWrapper = chartOuter.querySelector('.chart__wrapper');
   const chartSpacer = chartOuter.querySelector('.chart__spacer span');
   const table = chartOuter.querySelector('.chart table');
@@ -333,7 +333,7 @@ export const setLongestLabel = function (chartOuter: any) {
   chartSpacer.innerHTML = longestLabel;
 };
 
-export const setLongestValue = function (chartOuter: any) {
+export const setLongestValue = function (chartOuter: any): void {
   const chartWrapper = chartOuter.querySelector('.chart__wrapper');
   const table = chartOuter.querySelector('.chart table');
 
@@ -352,7 +352,7 @@ export const setLongestValue = function (chartOuter: any) {
 
 // #region CREATE function
 
-export const createChartKey = function (chartOuter: any, tableElement: any, chartKey: any) {
+export const createChartKey = function (chartOuter: any, tableElement: any, chartKey: any): boolean {
   const chartID = `chart-${Date.now() + (Math.floor(Math.random() * 100) + 1)}`;
   //const chartOuter = chartElement.querySelector('.chart__outer');
 
@@ -380,7 +380,7 @@ function createChartKeyItem(
   chartKey: any,
   chartOuter: any,
   previousInput: any
-) {
+): any {
   const input = document.createElement('input');
   input.setAttribute('name', `${chartID}-dataset-${index}`);
   input.setAttribute('id', `${chartID}-dataset-${index}`);
@@ -405,8 +405,9 @@ function createChartKeyItem(
   return previousInput;
 }
 
-export const createChartGuidelines = function (chartElement: any, chartGuidelines: any) {
-  let { min, max, yaxis, guidelines } = getChartData(chartElement);
+export const createChartGuidelines = function (chartElement: any, chartGuidelines: any): any {
+  const { min, max, yaxis } = getChartData(chartElement);
+  let { guidelines } = getChartData(chartElement);
 
   if (!guidelines.length) guidelines = yaxis;
 
@@ -419,7 +420,7 @@ export const createChartGuidelines = function (chartElement: any, chartGuideline
   }
 };
 
-export const createChartYaxis = function (chartElement: any, chartYaxis: any) {
+export const createChartYaxis = function (chartElement: any, chartYaxis: any): void {
   const { min, max, yaxis } = getChartData(chartElement);
 
   chartYaxis.innerHTML = '';
@@ -431,7 +432,7 @@ export const createChartYaxis = function (chartElement: any, chartYaxis: any) {
   }
 };
 
-export const createXaxis = function (chartOuter: any) {
+export const createXaxis = function (chartOuter: any): void {
   const chart = chartOuter.querySelector('.chart');
   let chartXaxis = chartOuter.querySelector('.chart__xaxis');
 
@@ -443,7 +444,7 @@ export const createXaxis = function (chartOuter: any) {
   chart.prepend(chartXaxis);
 };
 
-export const createTooltips = function (chartOuter: any) {
+export const createTooltips = function (chartOuter: any): void {
   const titles = chartOuter.querySelectorAll(
     'thead th[title], tbody th[title]:first-child, tbody td[title]:first-child'
   );
