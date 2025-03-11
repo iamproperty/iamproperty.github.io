@@ -108,11 +108,9 @@ class iamMultiStep extends HTMLElement {
 
       // If valid mode to next field set
       if (!isFieldsetValid) {
-        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element) => {
-            element.classList.remove('valid');
-          }
-        );
+        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach((element) => {
+          element.classList.remove('valid');
+        });
 
         Array.from(MultiStepComponent.shadowRoot.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
           (element) => {
@@ -120,11 +118,9 @@ class iamMultiStep extends HTMLElement {
           }
         );
       } else {
-        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element) => {
-            element.classList.add('valid');
-          }
-        );
+        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach((element) => {
+          element.classList.add('valid');
+        });
 
         Array.from(MultiStepComponent.shadowRoot.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
           (element) => {
