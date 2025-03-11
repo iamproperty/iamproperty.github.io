@@ -248,7 +248,7 @@ const routes = [
     children: [
       {
         path: 'text-links',
-        name: 'Links',
+        name: 'Text-Links',
         meta: {
           title: 'Links | Elements | iamkey',
         },
@@ -746,6 +746,14 @@ const routes = [
         },
         component: () => import('./views/charts/BarChart.vue'),
       },
+      {
+        path: 'doughnutchart',
+        name: 'Doughnut chart',
+        meta: {
+          title: 'Doughnut chart | Components | iamkey',
+        },
+        component: () => import('./views/charts/DoughnutChart.vue'),
+      },
     ],
   },
   {
@@ -1184,6 +1192,14 @@ const routes = [
           title: 'Inspections | iamkey',
         },
         component: () => import('./views/standalone/Inspections.vue'),
+      },
+      {
+        path: 'competitor-analysis',
+        name: 'Competitor analysis',
+        meta: {
+          title: 'Competitor analysis | iamkey',
+        },
+        component: () => import('./views/standalone/competitor-analysis.vue'),
       },
     ],
   },

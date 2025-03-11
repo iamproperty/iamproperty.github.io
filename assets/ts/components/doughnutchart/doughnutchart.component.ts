@@ -2,25 +2,25 @@ import {
   addClasses,
   setupChart,
   setEventListener,
-  setEventObservers,
-  setLongestLabel,
-  setLongestValue,
-  createTooltips,
+  setEventObservers
 } from '../../modules/chart.module';
 import { trackComponent, trackComponentRegistered } from '../_global';
 
-trackComponentRegistered('iam-barchart');
+trackComponentRegistered('iam-doughnutchart');
 
-class iamBarChart extends HTMLElement {
+class iamDoughnutChart extends HTMLElement {
+
   constructor() {
+
+
+
     super();
     this.attachShadow({ mode: 'open' });
-
 
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const loadCSS = `@import "${assetLocation}/css/components/barchart.component.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/doughnutchart.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -51,28 +51,47 @@ class iamBarChart extends HTMLElement {
     const clonedTable = orginalTable.cloneNode(true);
     const chart = this.shadowRoot.querySelector('.chart');
     const chartOuter = this.shadowRoot.querySelector('.chart__outer');
-    const barCount = chart.querySelectorAll('td:not(:first-child)').length;
+    //const barCount = chart.querySelectorAll('td:not(:first-child)').length;
 
     chart.appendChild(clonedTable);
     addClasses(chartComponent, chartOuter);
 
-    if (barCount <= 10) {
-      chartComponent.classList.add('chart--fit-content');
-    }
-
-    if (barCount <= 5) {
-      chartComponent.classList.add('chart--no-scale');
-    }
-
     setupChart(chartComponent, chartOuter, clonedTable);
     setEventObservers(chartComponent, chartOuter);
     setEventListener(chartComponent, chartOuter);
-    setLongestLabel(chartOuter);
-    setLongestValue(chartOuter);
-    createTooltips(chartOuter);
 
-    trackComponent(chartComponent, 'iam-barchart', ['view-change']);
+    // Set events on the paths
+    chart.addEventListener('mousemove', (event: any) => {
+
+      if (event && event.target.closest('.doughnut')) {
+
+        const column = event.target.closest('.doughnut');
+        const rect = column.getBoundingClientRect();
+  
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        chart.setAttribute('style', `--cursor-x: ${x}px; --cursor-y: ${y}px;`);
+      }
+    });
+
+    chart?.querySelectorAll('.doughnut').forEach((doughnut) => {
+      let count = 1;
+
+      doughnut?.querySelectorAll('path').forEach((path) => {
+
+        const rect = path.getBoundingClientRect();
+        const doughnutRect = doughnut.getBoundingClientRect();
+        const x = (rect.left - doughnutRect.left) + (rect.width / 2);
+        const y = (rect.top - doughnutRect.top) +  (rect.height / 2);
+
+        doughnut.style.setProperty(`--middle-${count}-x`,`${x}px`);
+        doughnut.style.setProperty(`--middle-${count}-y`,`${y}px`);
+        count++;
+      });
+    });
+
+    trackComponent(chartComponent, 'iam-doughnutchart', ['view-change']);
   }
 }
 
-export default iamBarChart;
+export default iamDoughnutChart;

@@ -9,6 +9,14 @@
 
       <label data-percent="70">Missed opportunities<progress max="100" value="70"></progress></label>
     </div>
+    <div class="container">
+      <h2>Rank</h2>
+
+      <label data-percent="70"
+        ><strong>120</strong> Properties<progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress
+      ></label>
+      
+    </div>
 
     <div class="container">
       <h2>Circular</h2>
