@@ -1,7 +1,7 @@
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
-      <h1>Menu</h1>
+      <h1>Menu (Beta)</h1>
     </DSHeader>
 
     

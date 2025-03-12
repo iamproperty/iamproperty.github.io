@@ -534,7 +534,7 @@ const routes = [
       },
       {
         path: 'menu',
-        name: 'Menu',
+        name: 'Menu (Beta)',
         meta: {
           title: 'Menu | Components | iamkey',
           beta: true,
