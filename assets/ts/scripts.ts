@@ -27,11 +27,13 @@ const components = [
   'inline-edit',
   'multiselect',
   'multi-step',
+  'menu',
   'slider',
   'carousel',
   'marketing',
   'barchart',
   'doughnutchart',
+  'bento-grid',
 ];
 
 // Attach classes to dom elements

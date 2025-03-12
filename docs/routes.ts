@@ -248,7 +248,7 @@ const routes = [
     children: [
       {
         path: 'text-links',
-        name: 'Text-Links',
+        name: 'Text Links',
         meta: {
           title: 'Links | Elements | iamkey',
         },
@@ -473,6 +473,14 @@ const routes = [
         component: () => import('./views/components/AppliedFiltersDoc.vue'),
       },
       {
+        path: 'bento-grid',
+        name: 'Bento grid (Beta)',
+        meta: {
+          title: 'Bento grid | Components | iamkey',
+        },
+        component: () => import('./views/components/BentoGridDoc.vue'),
+      },
+      {
         path: 'carousel',
         name: 'Carousel',
         meta: {
@@ -523,6 +531,16 @@ const routes = [
         },
         component: () => import('./views/components/InlineEdit.vue'),
         searchterms: 'form, input, inline',
+      },
+      {
+        path: 'menu',
+        name: 'Menu (Beta)',
+        meta: {
+          title: 'Menu | Components | iamkey',
+          beta: true,
+          standalone: true,
+        },
+        component: () => import('./views/components/MenuDoc.vue'),
       },
       {
         path: 'multistep',

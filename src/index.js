@@ -10,6 +10,7 @@ export { default as AddressLookup } from './components/AddressLookup/AddressLook
 export { default as AppliedFilters } from './components/AppliedFilters/AppliedFilters.vue';
 export { default as Banner } from './components/Banner/Banner.vue';
 export { default as BarChart } from './components/BarChart/BarChart.vue';
+export { default as BentoGrid } from './components/BentoGrid/BentoGrid.vue';
 export { default as Card } from './components/Card/Card.vue';
 export { default as Carousel } from './components/Carousel/Carousel.vue';
 export { default as CollapsibleSideMenu } from './components/CollapsibleSideMenu/CollapsibleSideMenu.vue';
@@ -20,6 +21,7 @@ export { default as Header } from './components/Header/Header.vue';
 export { default as InlineEdit } from './components/InlineEdit/InlineEdit.vue';
 export { default as Multiselect } from './components/Multiselect/Multiselect.vue';
 export { default as Multistep } from './components/MultiStep/MultiStep.vue';
+export { default as Menu } from './components/Menu/Menu.vue';
 export { default as Nav } from './components/Nav/Nav.vue';
 export { default as NoteFeed } from './components/NoteFeed/NoteFeed.vue';
 export { default as Notification } from './components/Notification/Notification.vue';

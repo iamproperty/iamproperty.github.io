@@ -1,0 +1,91 @@
+@use '../_func.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host {
+  container-type: inline-size;
+  display: block;
+}
+
+::slotted(details) {
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+  padding: 0 !important;
+  position: relative;
+  overflow: hidden;
+}
+
+@container (width > 40em) {
+  .wrapper {
+    aspect-ratio: 1.75 / 1;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 1rem;
+
+    --content-max-width: 28rem;
+  }
+
+  ::slotted(details) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(60% - 0.5rem) !important;
+    height: calc(50% - 0.5rem);
+    z-index: 1;
+    border-radius: 1rem;
+    margin: 0;
+  }
+
+  ::slotted(details.animating) {
+    transition: 1s !important;
+    z-index: 10 !important;
+  }
+
+  ::slotted(details:nth-child(2)) {
+    top: 0;
+    left: calc(60% + 0.5rem);
+    width: calc(40% - 0.5rem) !important;
+    height: calc(50% - 0.5rem);
+  }
+  ::slotted(details:nth-child(3)) {
+    top: calc(50% + 0.5rem);
+    left: 0;
+    width: calc(50% - 0.5rem) !important;
+    height: calc(50% - 0.5rem);
+  }
+  ::slotted(details:nth-child(4)) {
+    top: calc(50% + 0.5rem);
+    left: calc(50% + 0.5rem);
+    width: calc(50% - 0.5rem) !important;
+    height: calc(50% - 0.5rem);
+  }
+
+  ::slotted(details[open]) {
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100%;
+    z-index: 9;
+  }
+
+  ::slotted(details[open]:after) {
+    content: '';
+    display: block;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    width: 100%;
+    background: red;
+  }
+
+  ::slotted(details[open]:not(.animating)) {
+    overflow: auto;
+    overflow-x: clip;
+    overscroll-behavior: contain;
+  }
+}
