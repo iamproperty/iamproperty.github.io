@@ -248,7 +248,7 @@ const routes = [
     children: [
       {
         path: 'text-links',
-        name: 'Links',
+        name: 'Text Links',
         meta: {
           title: 'Links | Elements | iamkey',
         },
@@ -471,6 +471,14 @@ const routes = [
           title: 'Applied Filters | Components | iamkey',
         },
         component: () => import('./views/components/AppliedFiltersDoc.vue'),
+      },
+      {
+        path: 'bento-grid',
+        name: 'Bento grid (Beta)',
+        meta: {
+          title: 'Bento grid | Components | iamkey',
+        },
+        component: () => import('./views/components/BentoGridDoc.vue'),
       },
       {
         path: 'carousel',

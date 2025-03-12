@@ -139,3 +139,213 @@ iam-fileupload::part(file) {
     color: var(--colour-body);
   }
 }
+
+iam-bento-grid {
+
+  details {
+
+
+    summary {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      max-width: 100%;
+      padding: 1.5rem;
+      margin-bottom: 0;
+      
+      [role="presentation"] {
+        display: block;
+        font-family: var(--font-body);
+        font-weight: normal;
+        font-size: 1rem;
+        position: relative;
+        width: fit-content;
+        //margin-bottom: 2rem;
+        opacity: 0;
+        transition: opacity 1s;
+
+        
+        &:before {
+          display: block;
+          content: " ";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          width: 100%;
+          height: 0;
+          border: 1px solid currentColor;
+          transform: translate(-50%, 0);
+          transition: 1s;
+        }
+
+        &:after {
+          display: inline-block;
+          content: "\f061";
+          top: 100%;
+          margin-left: 0.5em;
+          line-height: 1em;
+          font-size: 1em;
+          font-family: "Font Awesome 6 Pro";
+        }
+      }
+
+      &::after {
+
+        opacity: 0;
+        content: "\f422";
+        pointer-events: all;
+        top: 1.5rem;
+        right: 1.5rem;
+        left: auto;
+        position: absolute;
+        line-height: 1em;
+        font-size: 1em;
+        font-family: "Font Awesome 6 Pro";
+      }
+
+      &:hover {
+        [role="presentation"] {
+          display: block;
+          font-family: var(--font-body);
+          font-weight: normal;
+          font-size: 1rem;
+          position: relative;
+          width: fit-content;
+          
+          &:before {
+            width: 80%;
+          }
+        }
+      }
+    }
+
+
+    &:before {
+
+      content: "";
+      position: absolute;
+      display: block;
+      top: 30%;
+      left: 40%;
+      //width: 100%;
+      height: 70%;
+      aspect-ratio:  2 / 1;
+      
+      background-image: var(--bg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 0.5rem;
+      transition: 1s;
+    }
+
+    &:hover:before {
+
+      left: 35%;
+      top: 25%;
+      height: 75%;
+    }
+
+    &[open]:before {
+
+      left: 50%!important;
+      top: 30%!important;
+      height: 70%!important;
+    }
+
+
+    &::details-content {
+      opacity: 0;
+      
+      padding: 0 1.5rem 1.5rem 1.5rem;
+      transition: 1s;
+
+      overflow: auto;
+    }
+  }
+
+  details {
+
+    summary:hover {
+
+      [role="presentation"] {
+        opacity: 1;
+      }
+
+    }
+  }
+
+
+  @container (width > 40em) {
+
+    details summary {
+
+      position: sticky;
+      top: 0;
+      left: 0;
+
+    }
+
+  }
+
+  details[open] {
+
+    &:not(.animating)::details-content {
+      opacity: 1;
+    }
+    
+    > *:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    summary {
+      pointer-events: none;
+      width: 100%;
+      max-width: 100%;
+      height: fit-content;
+
+      [role="presentation"] {
+        opacity: 0;
+      }
+
+      [role="presentation"] {
+        margin-bottom: -2rem;
+      }
+
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+  :is(details)::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  :is(details)::-webkit-scrollbar-track {
+    background-color: #00313c;
+    border-top: none;
+    border-left: 4px solid transparent;
+  }
+  
+  :is(details)::-webkit-scrollbar-thumb {
+    background-color: white;
+    width: 4px;
+    border-top: none;
+    border-left: none;
+  }
+  
+
+  details[open] {
+    position: relative;
+  }
+
+}
+
+
+@supports selector(::details-content) {
+  .notice {
+    display: none;
+  }
+}
