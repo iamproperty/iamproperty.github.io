@@ -248,7 +248,7 @@ const routes = [
     children: [
       {
         path: 'text-links',
-        name: 'Links',
+        name: 'Text Links',
         meta: {
           title: 'Links | Elements | iamkey',
         },
