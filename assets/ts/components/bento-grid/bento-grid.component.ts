@@ -35,40 +35,22 @@ class iamAccordion extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     this.classList.add('loaded');
 
     const arrDetails = this.querySelectorAll('details');
 
-
-    Array.from(arrDetails).forEach((details:HTMLDetailsElement) => {
-
+    Array.from(arrDetails).forEach((details: HTMLDetailsElement) => {
       details.classList.add('bg-primary');
       const summary = details.querySelector('summary');
 
       summary?.classList.add('h3');
 
-      if(!summary?.querySelector('[role="presentation"]'))
+      if (!summary?.querySelector('[role="presentation"]'))
         summary?.insertAdjacentHTML('beforeend', ` <span role="presentation">Find out more</span>`);
-
     });
-    
-
-
-
-
-
-
-
-
-
-
-
 
     this.addEventListener('click', (event) => {
-      
       if (event && event.target instanceof HTMLElement && event.target.closest('details summary')) {
-        
         const summary = event.target.closest('details summary');
         const details = summary?.closest('details');
 
@@ -77,12 +59,8 @@ class iamAccordion extends HTMLElement {
         setTimeout(() => {
           details?.classList.remove('animating');
         }, 1100);
-
       }
     });
-
-
-
   }
 }
 

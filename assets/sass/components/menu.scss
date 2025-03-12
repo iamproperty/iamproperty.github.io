@@ -1,8 +1,7 @@
-$menuPadding: 1rem!default;
-$menuBorder: none!default;
-$menuBorderRadius: 1rem!default;
-$menuBoxShadow: 0px 2px 9px rgba(0, 0, 0, 0.1)!default;
-
+$menuPadding: 1rem !default;
+$menuBorder: none !default;
+$menuBorderRadius: 1rem !default;
+$menuBoxShadow: 0px 2px 9px rgba(0, 0, 0, 0.1) !default;
 
 iam-menu:defined {
   --menu-padding: #{$menuPadding};
@@ -15,5 +14,3 @@ iam-menu:defined {
   //--menu-down-icon: none;
   //--menu-after-bg: none;
 }
-
-

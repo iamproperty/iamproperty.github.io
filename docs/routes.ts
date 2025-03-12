@@ -538,9 +538,9 @@ const routes = [
         meta: {
           title: 'Menu | Components | iamkey',
           beta: true,
-          standalone: true
+          standalone: true,
         },
-        component: () => import('./views/components/MenuDoc.vue')
+        component: () => import('./views/components/MenuDoc.vue'),
       },
       {
         path: 'multistep',

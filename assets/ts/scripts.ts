@@ -32,7 +32,7 @@ const components = [
   'carousel',
   'marketing',
   'barchart',
-  'bento-grid'
+  'bento-grid',
 ];
 
 // Attach classes to dom elements

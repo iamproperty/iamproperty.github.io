@@ -1,11 +1,13 @@
-// @ts-nocheck
 class iamMenu extends HTMLElement {
-
-  constructor(){
+  constructor() {
     super();
-    this.attachShadow({ mode: 'open'});
+    this.attachShadow({ mode: 'open' });
 
-    const loadCSS = `@import "/assets/css/components/menu.component.css";`; // For local development
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+    const loadCSS = `@import "${assetLocation}/css/components/menu.component.css";`;
+
     const template = document.createElement('template');
 
     template.innerHTML = `
@@ -18,155 +20,136 @@ class iamMenu extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-	connectedCallback() {
-    
-    const menuComponent = this;
-    const menuID = menuComponent.hasAttribute('id') ? menuComponent.getAttribute('id') : false;
+  connectedCallback(): void {
+    const menuID = this.hasAttribute('id') ? this.getAttribute('id') : false;
     const menuButton = document.querySelector(`[popovertarget="${menuID}"]`);
 
-    const menuInner = menuComponent.shadowRoot.querySelector('.menu--inner');
-    const topLevelmenuItems = menuComponent.querySelectorAll(':scope > a, :scope > button, :scope > details > summary');
-    const menuItems = menuComponent.querySelectorAll('a, button');
-    const subMenus = menuComponent.querySelectorAll('details');
+    const menuInner = this.shadowRoot.querySelector('.menu--inner');
+    const topLevelmenuItems = this.querySelectorAll(':scope > a, :scope > button, :scope > details > summary');
+    const menuItems = this.querySelectorAll('a, button');
+    const subMenus = this.querySelectorAll('details');
 
     let subNextIndex;
     let subPrevIndex;
 
     // Set the needed CSS styles to connect the ID attribute to the anchor name
-    if(menuID && menuButton){
+    if (menuID && menuButton) {
+      menuInner?.setAttribute('role', 'menu');
+      this.style['position-anchor'] = `--${menuID}`;
 
-      menuInner?.setAttribute('role','menu');
-      menuComponent.style['position-anchor'] = `--${menuID}`;
-
-      menuButton?.setAttribute('aria-haspopup','true');
+      menuButton?.setAttribute('aria-haspopup', 'true');
       menuButton?.style['anchor-name'] = `--${menuID}`;
       menuButton?.setAttribute('aria-controls', menuID);
-    
-      subMenus.forEach((item,index) => {
-        
-        item.setAttribute('role','menu');
+
+      subMenus.forEach((item, index) => {
+        item.setAttribute('role', 'menu');
       });
 
-      menuItems.forEach((item,index) => {
-        
-        item.setAttribute('role','menuitem');
-        item.setAttribute('tabindex','0');
+      menuItems.forEach((item, index) => {
+        item.setAttribute('role', 'menuitem');
+        item.setAttribute('tabindex', '0');
 
-        if(index == 0){
+        if (index == 0) {
           item.setAttribute('autofocus', true);
         }
       });
 
-      menuComponent.addEventListener('keydown', (event) => {
-
-        if (event && event.target instanceof HTMLElement && event.target.closest('a, button, summary')){
-
+      this.addEventListener('keydown', (event) => {
+        if (event && event.target instanceof HTMLElement && event.target.closest('a, button, summary')) {
           const activeItem = document.activeElement;
-          let prevIndex = Array.from(topLevelmenuItems).indexOf(activeItem) - 1;
-          let nextIndex = Array.from(topLevelmenuItems).indexOf(activeItem) + 1;
+          const prevIndex = Array.from(topLevelmenuItems).indexOf(activeItem) - 1;
+          const nextIndex = Array.from(topLevelmenuItems).indexOf(activeItem) + 1;
 
-          switch (event.keyCode) { // change to event.key to key to use the above variable
+          switch (
+            event.keyCode // change to event.key to key to use the above variable
+          ) {
             case 27: // Esc
-
-              if(activeItem.closest('details')){
-
+              if (activeItem.closest('details')) {
                 event.stopPropagation();
                 event.preventDefault();
                 activeItem.closest('details').removeAttribute('open');
                 activeItem.closest('details').querySelector(':scope summary').focus();
-              }
-              else {
-                
+              } else {
                 event.stopPropagation();
                 menuButton.focus();
               }
 
-              break; 
+              break;
             case 32: // Space
             case 13: // Enter
-
-              if(activeItem.matches('summary') && !activeItem.parentElement.matches('details[open]')){
-
-                activeItem.parentElement.setAttribute('open',true);
-                let subMenuItems = activeItem.closest('details').querySelectorAll('a, button, :scope details > summary');
+              if (activeItem.matches('summary') && !activeItem.parentElement.matches('details[open]')) {
+                activeItem.parentElement.setAttribute('open', true);
+                const subMenuItems = activeItem
+                  .closest('details')
+                  .querySelectorAll('a, button, :scope details > summary');
                 Array.from(subMenuItems)[0].focus();
               }
 
-              break;            
+              break;
             case 35: // end
-                
               event.stopPropagation();
               event.preventDefault();
 
-              menuComponent.querySelector('details[open]').removeAttribute('open');
-              Array.from(menuItems)[menuItems.length-1].focus();
+              this.querySelector('details[open]').removeAttribute('open');
+              Array.from(menuItems)[menuItems.length - 1].focus();
 
               break;
             case 36: // home
-                
               event.stopPropagation();
               event.preventDefault();
 
-              menuComponent.querySelector('details[open]').removeAttribute('open');
+              this.querySelector('details[open]').removeAttribute('open');
               Array.from(menuItems)[0].focus();
 
               break;
             case 38: // up
-                    
-                event.stopPropagation();
-                event.preventDefault();
-  
-                if(Array.from(topLevelmenuItems).indexOf(activeItem) > -1){
-                    
-                  if(Array.from(topLevelmenuItems)[prevIndex] != undefined)
-                    Array.from(topLevelmenuItems)[prevIndex].focus();
-                  else
-                    Array.from(topLevelmenuItems)[topLevelmenuItems.length-1].focus();
-                }
-                else if(activeItem.closest('details'))  {
-  
-                  let subMenuItems = activeItem.closest('details').querySelectorAll('a, button, :scope details > summary');
-                  subPrevIndex = Array.from(subMenuItems).indexOf(activeItem) - 1;
-  
-                  if(Array.from(subMenuItems)[subPrevIndex] != undefined)
-                    Array.from(subMenuItems)[subPrevIndex].focus();
-                  else
-                    Array.from(subMenuItems)[subMenuItems.length-1].focus();  
-                }
-
-              break;
-            case 40: // down
-                  
               event.stopPropagation();
               event.preventDefault();
 
-              if(Array.from(topLevelmenuItems).indexOf(activeItem) > -1){
-                  
-                if(Array.from(topLevelmenuItems)[nextIndex] != undefined)
-                  Array.from(topLevelmenuItems)[nextIndex].focus();
-                else
-                  Array.from(topLevelmenuItems)[0].focus();
-              }
-              else if(activeItem.closest('details')) {
+              if (Array.from(topLevelmenuItems).indexOf(activeItem) > -1) {
+                if (Array.from(topLevelmenuItems)[prevIndex] != undefined)
+                  Array.from(topLevelmenuItems)[prevIndex].focus();
+                else Array.from(topLevelmenuItems)[topLevelmenuItems.length - 1].focus();
+              } else if (activeItem.closest('details')) {
+                const subMenuItems = activeItem
+                  .closest('details')
+                  .querySelectorAll('a, button, :scope details > summary');
+                subPrevIndex = Array.from(subMenuItems).indexOf(activeItem) - 1;
 
-                let subMenuItems = activeItem.closest('details').querySelectorAll('a, button, :scope details > summary');
+                if (Array.from(subMenuItems)[subPrevIndex] != undefined) Array.from(subMenuItems)[subPrevIndex].focus();
+                else Array.from(subMenuItems)[subMenuItems.length - 1].focus();
+              }
+
+              break;
+            case 40: // down
+              event.stopPropagation();
+              event.preventDefault();
+
+              if (Array.from(topLevelmenuItems).indexOf(activeItem) > -1) {
+                if (Array.from(topLevelmenuItems)[nextIndex] != undefined)
+                  Array.from(topLevelmenuItems)[nextIndex].focus();
+                else Array.from(topLevelmenuItems)[0].focus();
+              } else if (activeItem.closest('details')) {
+                const subMenuItems = activeItem
+                  .closest('details')
+                  .querySelectorAll('a, button, :scope details > summary');
                 subNextIndex = Array.from(subMenuItems).indexOf(activeItem) + 1;
 
-                if(Array.from(subMenuItems)[subNextIndex] != undefined)
-                  Array.from(subMenuItems)[subNextIndex].focus();
-                else
-                  Array.from(subMenuItems)[0].focus();  
+                if (Array.from(subMenuItems)[subNextIndex] != undefined) Array.from(subMenuItems)[subNextIndex].focus();
+                else Array.from(subMenuItems)[0].focus();
               }
 
-              break;            
+              break;
           }
         }
       });
     }
 
     // insert extra CSS to help style inline details and summary items to allow collapsible sub menus
-    if(menuComponent.querySelector('details') && !document.getElementById('menuGlobalStyles'))
-      document.head.insertAdjacentHTML('beforeend',`<style id="menuGlobalStyles">
+    if (this.querySelector('details') && !document.getElementById('menuGlobalStyles'))
+      document.head.insertAdjacentHTML(
+        'beforeend',
+        `<style id="menuGlobalStyles">
 iam-menu details > * {
   background: unset !important;
   border: unset !important;
@@ -231,8 +214,8 @@ iam-menu details summary:not([class*="fa-"]:before {
   rotate: 90deg;
   color: inherit;
 }
-</style>`);
-
+</style>`
+      );
   }
 }
 
