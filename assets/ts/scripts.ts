@@ -27,10 +27,12 @@ const components = [
   'inline-edit',
   'multiselect',
   'multi-step',
+  'menu',
   'slider',
   'carousel',
   'marketing',
   'barchart',
+  'bento-grid',
 ];
 
 // Attach classes to dom elements
@@ -61,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (entry.intersectionRatio > 0) {
           console.log(component);
 
-          import(`./components/${component}/${component}${componentExt}`)
+          import(`../js/components/${component}/${component}${componentExt}`)
             .then((module) => {
               if (!window.customElements.get(`${prefix}-${component}`))
                 window.customElements.define(`${prefix}-${component}`, module.default);

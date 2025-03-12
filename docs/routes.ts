@@ -533,6 +533,16 @@ const routes = [
         searchterms: 'form, input, inline',
       },
       {
+        path: 'menu',
+        name: 'Menu (Beta)',
+        meta: {
+          title: 'Menu | Components | iamkey',
+          beta: true,
+          standalone: true,
+        },
+        component: () => import('./views/components/MenuDoc.vue'),
+      },
+      {
         path: 'multistep',
         name: 'Multi-Step form',
         meta: {
