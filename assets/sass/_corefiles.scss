@@ -1,60 +1,36 @@
-@use "sass:math";
-@use "_func" as *;
+@use 'sass:math';
+@use '_func' as *;
 
-@mixin bsgrid(){
-  @if $disable-bs-grid == "false" {
+@layer reset, elements, components, templates, overrides, utilities;
 
-    @content;
-  }
-  @else {
-    // Grid Disabled
-  }
-}
-
-@layer reset, elements, components, templates, utilities, overrides;
-
-
-$root: ":root"!default;
-$layers: "true"!default;
+$root: ':root' !default;
+$layers: 'true' !default;
 
 // Foundations
 @include layer('reset') {
-  
-  @import "foundations/root.scss";
-  @import "foundations/reboot.scss";
-  @import "foundations/grid.scss";
-}
-
-@include bsgrid(){
-  @import "foundations/bs_grid.scss";
+  @import 'foundations/root.scss';
+  @import 'foundations/reboot.scss';
 }
 
 @include layer('elements') {
-  @import "_elements.scss";
+  @import '_elements.scss';
 }
 
 @include layer('components') {
-
   // Deal with preloaded state of native components
-  @import "_components.scss";
-
+  @import '_components.scss';
 }
 
 @include layer('templates') {
-  @import "templates/form.scss";
-  @import "templates/auth.scss";
-}
-
-@include layer('utilities') {
-    
-  @import "_utilities.scss";
+  @import 'templates/form.scss';
+  @import 'templates/auth.scss';
 }
 
 @include layer('overrides') {
   @media (prefers-reduced-motion) {
-   * {
-    transition: unset;
-    animation: none;
-   }
+    * {
+      transition: unset;
+      animation: none;
+    }
   }
 }

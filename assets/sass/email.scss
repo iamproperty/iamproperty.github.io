@@ -2,14 +2,14 @@
 
 // Set mobile only variable so that the media query mixin doesn't print out non mobile rules
 
-@use "_func" as *;
+@use '_func' as *;
 
-$mobileOnly: "true";
-$compatible: "true";
+$mobileOnly: 'true';
+$compatible: 'true';
 
 // Update the breakpoints to just one to remove some utility classes
 $grid-breakpoints: (
-  xs: 0
+  xs: 0,
 );
 
 // Simplify the grid
@@ -20,15 +20,17 @@ $device-md-width: 600;
 $container-padding-x: 32;
 $default-curve-width: 600;
 
-@import "_corefiles";
+@import '_corefiles';
+@import '_grid';
+@import '_bs_grid';
+@import '_utilities';
+@import '_utility-mixins';
 
 :root {
-
   --container-padding-x: #{rem(66)};
 }
 
 html {
-
   @media (min-width: #{em(600)}) {
     font-size: 100%;
   }
@@ -62,5 +64,5 @@ html {
 }
 /* utilities */
 .text-white {
-  color: white;;
+  color: white;
 }

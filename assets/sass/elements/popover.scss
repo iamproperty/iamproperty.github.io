@@ -1,33 +1,32 @@
-@use "sass:math";
-@use "../_func" as *;
+@use 'sass:math';
+@use '../_func' as *;
 
 // #region popover styling
 .dialog__wrapper {
-
   position: relative;
   display: inline-block;
   margin-bottom: calc(var(--btn-margin) - 0.25rem);
 
-
-  &:has(dialog[open],dialog:popover-open) > button {
+  &:has(dialog[open], dialog:popover-open) > button {
     background: var(--colour-btn-secondary-bg-hover);
     color: var(--colour-btn-secondary-hover);
     filter: brightness(85%);
-    transition: background 0.1s, color 0.1s;
+    transition:
+      background 0.1s,
+      color 0.1s;
     //color: var(--colour-btn);
     border-radius: 1.5rem;
   }
 
   > .btn:first-child {
+    //margin-bottom: 0.25rem;
 
-    margin-bottom: 0.25rem;
+    &:not(.btn-compact):not([class*='fa-']):after {
+      content: '';
 
-    &:not(.btn-compact):not([class*="fa-"]):after {
-      content: "";
-    
       display: inline-block;
       margin-left: 1em;
-      margin-bottom: -0.15em;
+
       height: 1em;
       width: 1em;
       z-index: var(--index-focus);
@@ -45,14 +44,17 @@
     }
 
     &[aria-expanded]:not([data-number]):after {
+      transform: rotate(270deg);
+    }
 
+    &:has(+ dialog[open]):not([data-number]):after {
       transform: rotate(270deg);
     }
   }
 
-  > :is(dialog[open],dialog:popover-open) {
-
+  > :is(dialog[open], dialog:popover-open) {
     left: 0;
+    margin-top: -1rem;
     top: 100%;
     z-index: var(--index-floating);
     min-width: rem(320);
@@ -68,15 +70,14 @@
     }
 
     &.dialog--list {
-      
-      width: fit-content!important;
+      width: fit-content !important;
 
       @include media-breakpoint-up(sm) {
-        width: max-content!important;
+        width: max-content !important;
       }
 
-      min-width: rem(140)!important;
-      max-width: rem(280)!important;
+      min-width: rem(140) !important;
+      max-width: rem(280) !important;
       padding: rem(16);
       margin: 0;
 
@@ -91,7 +92,7 @@
       .radio--tick {
         margin-right: 0;
         padding-left: 1.5rem;
-          margin-bottom: 0;
+        margin-bottom: 0;
 
         &:before {
           left: 0;
@@ -101,10 +102,9 @@
       }
 
       a {
-
         padding: #{rem(6)};
 
-        &:not(:hover,:focus,:active){
+        &:not(:hover, :focus, :active) {
           border-color: transparent;
         }
         margin: 0;
@@ -115,44 +115,37 @@
       }
 
       .btn-action {
-        &:not(:hover,:focus,:active){
+        &:not(:hover, :focus, :active) {
           border-color: transparent;
         }
         margin: 0;
       }
-
     }
 
-    :is(dialog[open],dialog:popover-open) {
+    :is(dialog[open], dialog:popover-open) {
       display: contents;
     }
   }
 
-  &.dialog__wrapper--right > :is(dialog[open],dialog:popover-open){
-
+  &.dialog__wrapper--right > :is(dialog[open], dialog:popover-open) {
     right: 0;
     left: auto;
-  } 
+  }
 
-  &.dialog__wrapper--sm > :is(dialog[open],dialog:popover-open) {
-    
+  &.dialog__wrapper--sm > :is(dialog[open], dialog:popover-open) {
     width: rem(239);
   }
 
-  &.dialog__wrapper--lg > :is(dialog[open],dialog:popover-open) {
-    
+  &.dialog__wrapper--lg > :is(dialog[open], dialog:popover-open) {
     width: rem(319);
   }
 
   @include media-breakpoint-up(sm) {
-    
-    &.dialog__wrapper--sm-left > dialog[open]{
-
+    &.dialog__wrapper--sm-left > dialog[open] {
       left: 0;
       right: auto;
-    }  
-    &.dialog__wrapper--sm-right > dialog[open]{
-
+    }
+    &.dialog__wrapper--sm-right > dialog[open] {
       right: 0;
       left: auto;
     }
@@ -165,14 +158,11 @@
   }
 
   @include media-breakpoint-up(md) {
-    
-    &.dialog__wrapper--md-left > dialog[open]{
-
+    &.dialog__wrapper--md-left > dialog[open] {
       left: 0;
       right: auto;
-    }  
-    &.dialog__wrapper--md-right > dialog[open]{
-
+    }
+    &.dialog__wrapper--md-right > dialog[open] {
       right: 0;
       left: auto;
     }
@@ -191,7 +181,6 @@
 }
 
 @supports selector(:has(*)) {
-
   .dialog__wrapper :is(.empty, .individual) {
     display: inline;
   }
@@ -201,7 +190,6 @@
 .dialog__wrapper:not(:has(input:checked)) .individual,
 .dialog__wrapper:has(input:checked ~ input:checked) .individual,
 .dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
-
   display: none;
 }
 // #endregion

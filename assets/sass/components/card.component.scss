@@ -1,29 +1,27 @@
-@use "../_func.scss" as *;
-@use "card.module.scss" as *;
-@use "../elements/dialog.scss" as *;
-@use "../elements/popover.scss" as *;
-@use "../elements/buttons.scss" as *;
+@use '../_func.scss' as *;
+@use 'card.module.scss' as *;
+@use '../elements/dialog.scss' as *;
+@use '../elements/popover.scss' as *;
+@use '../elements/buttons.scss' as *;
 
 :host {
   --card-right-padding: 1rem;
   //--card-head-height: 10rem;
   --card-icon-right: 1rem;
-
 }
 
-:host(:is(:hover,:focus,.hover):not(.prevent-hover)) {
+:host(:is(:hover, :focus, .hover):not(.prevent-hover)) {
   --hover-outline-colour-default: var(--colour, var(--colour-primary));
   outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
   outline-offset: -2px;
 }
 
-:host(:is(:active,.active):not(.prevent-hover)) {
-  --card-icon-right: var(--card-icon-right-overide,0.5rem);
+:host(:is(:active, .active):not(.prevent-hover)) {
+  --card-icon-right: var(--card-icon-right-overide, 0.5rem);
   outline: none;
 }
 
-:host(.prevent-hover){
-
+:host(.prevent-hover) {
   pointer-events: none;
 
   * {
@@ -34,10 +32,10 @@
 // #region Right arrow
 :host(.show-icon) .card__body {
   --card-right-padding: 3.5rem;
-  
+
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     right: var(--card-icon-right);
     bottom: var(--card-bottom-padding);
@@ -49,11 +47,11 @@
 
   &:after {
     background: var(--colour-primary-theme);
-    mask-image: var(--icon,var(--icon-arrow));
+    mask-image: var(--icon, var(--icon-arrow));
     mask-size: 50%;
     mask-repeat: no-repeat;
     mask-position: 50% 50%;
-    -webkit-mask-image: var(--icon,var(--icon-arrow));
+    -webkit-mask-image: var(--icon, var(--icon-arrow));
     -webkit-mask-size: 50%;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: 50% 50%;
@@ -61,10 +59,8 @@
   }
 }
 
-:host(:is(:hover,:focus,.hover):not(.prevent-hover):not([class*="colour-"])) {
-  
+:host(:is(:hover, :focus, .hover):not(.prevent-hover):not([class*='colour-'])) {
   .card__body {
-
     &:before {
       background: var(--hover-icon-bg, var(--colour-primary-theme));
     }
@@ -74,8 +70,7 @@
   }
 }
 
-:host(:is(:active, .active):not(.prevent-hover):not([class*="colour-"])){
-
+:host(:is(:active, .active):not(.prevent-hover):not([class*='colour-'])) {
   .card__body:before {
     background: var(--hover-icon-bg, var(--colour-primary-theme));
   }
@@ -88,7 +83,6 @@
 // #region illustration
 .card__body {
   &:has(.card__illustration) {
-
     align-items: center;
     display: flex;
 
@@ -108,21 +102,20 @@
         height: 100%;
         object-fit: contain;
       }
-    }    
+    }
   }
 }
 
 // #endregion
 
 // #region border left
-:host([class*="colour-"]) {
-  
-  border-left: rem(12) solid var(--colour,var(--colour-primary));
+:host([class*='colour-']) {
+  border-left: rem(12) solid var(--colour, var(--colour-primary));
 }
 // #endregion
 
 // #region secondary button
-slot[name="secondary"] {
+slot[name='secondary'] {
   display: block;
   position: absolute;
   top: 0.5rem;
@@ -131,17 +124,15 @@ slot[name="secondary"] {
   z-index: 999;
 }
 
-::slotted([slot="secondary"]:not(:hover,:focus,:active,.hover)) {
-
-  background: none!important;
-  color: var(--colour-btn)!important;
+::slotted([slot='secondary']:not(:hover, :focus, :active, .hover)) {
+  background: none !important;
+  color: var(--colour-btn) !important;
 }
 // #endregion
 
 // #region checkbox
-::slotted([slot="checkbox"]){
-
-  position: absolute!important;
+::slotted([slot='checkbox']) {
+  position: absolute !important;
   top: 0.5rem;
   right: 0.5rem;
   width: rem(32);
@@ -160,15 +151,12 @@ slot[name="secondary"] {
   left: auto;
   z-index: 999;
 
-
   > .btn:before {
-    content: "\f142";
-    font-family: "Font Awesome 6 Pro";
+    content: '\f142';
+    font-family: 'Font Awesome 6 Pro';
   }
 
-
   > [popover] {
-    
     display: var(--menu-display, none);
     position: fixed;
     top: anchor(top);
@@ -178,15 +166,13 @@ slot[name="secondary"] {
     margin: 0 0 0 #{rem(4)};
     padding: rem(16);
 
-
     &::backdrop {
       display: none;
     }
   }
 
   > [popover]:popover-open {
-
-    display: block!important;
+    display: block !important;
   }
 
   &:has([popover]:popover-open) > button {
@@ -197,33 +183,32 @@ slot[name="secondary"] {
     margin: 0;
     anchor-name: --anchor-el;
 
-    &:not(:hover,:focus,:focus-within,:active){
-        
+    &:not(:hover, :focus, :focus-within, :active) {
       background: var(--ellipsis-bg);
     }
   }
 }
 
-::slotted([slot="btns"]){
+::slotted([slot='btns']) {
   border: none !important;
   margin: 0 !important;
-  display: block!important;
+  display: block !important;
   width: fit-content;
 }
-::slotted([slot="primary-action"]){
+::slotted([slot='primary-action']) {
   overflow: hidden;
   background-color: transparent;
   text-indent: -300%;
-  position: absolute!important;
+  position: absolute !important;
   inset: 0;
-  margin: 0!important;
+  margin: 0 !important;
   z-index: 99;
   border: none;
 }
-:host(:not(.prevent-hover)) ::slotted([slot="primary-action"]:is(:hover,:focus,.hover)) {
+:host(:not(.prevent-hover)) ::slotted([slot='primary-action']:is(:hover, :focus, .hover)) {
   --hover-outline-colour-default: var(--colour, var(--colour-primary));
   outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
   outline-offset: -2px;
-  border-radius: var(--card-border-radius)!important;
+  border-radius: var(--card-border-radius) !important;
 }
 // #endregion

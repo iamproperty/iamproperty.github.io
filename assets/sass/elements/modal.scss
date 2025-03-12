@@ -1,9 +1,8 @@
-@use "sass:math";
-@use "../_func" as *;
+@use 'sass:math';
+@use '../_func' as *;
 
 // #region modal styling
 *:not(.dialog__wrapper) > dialog[open] {
-
 }
 
 *:not(.dialog__wrapper) > dialog[open] {
@@ -35,7 +34,7 @@
     background: transparent;
 
     &:after {
-      content: "";
+      content: '';
       top: 0;
       left: 0;
       position: absolute;
@@ -60,12 +59,12 @@
       display: block;
     }
 
-    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) {
+    & + span:not(.h1, .h2, .h3, .h4, .h5, .h6) {
       padding-bottom: rem(8);
       line-height: rem(19);
     }
 
-    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) + * {
+    & + span:not(.h1, .h2, .h3, .h4, .h5, .h6) + * {
       padding-right: var(--dialog-padding);
       margin-right: rem(20);
       display: block;
@@ -82,22 +81,20 @@
   }
 
   @include media-breakpoint-up(sm) {
-    
     --dialog-padding: #{rem(32)};
     min-width: rem(335);
     width: fit-content;
     max-width: rem(686);
   }
-  
+
   @include media-breakpoint-up(md) {
-    
     min-width: rem(454);
     width: fit-content;
     max-width: rem(736);
   }
 
-  &:has(.youtube-embed){
-    padding: 0!important;
+  &:has(.youtube-embed) {
+    padding: 0 !important;
   }
 
   &.dialog--fullwidth {
@@ -105,7 +102,6 @@
   }
 
   @media screen and (max-width: 36em) {
-
     :is(form, fieldset, .btn--wrapper):has(> .btn:first-child, > .btn:last-child) .btn:not(.dialog__close) {
       width: 100%;
       max-width: 100%;
@@ -114,7 +110,7 @@
       text-align: center;
 
       &:not(:last-child) {
-        margin-bottom: 1rem!important;
+        margin-bottom: 1rem !important;
       }
     }
   }
@@ -127,11 +123,11 @@
     margin-bottom: calc(var(--dialog-padding) * -1);
 
     > *:last-child {
-      margin-bottom: 2rem!important;
+      margin-bottom: 2rem !important;
     }
 
     > p:last-child {
-      padding-bottom: 0!important;
+      padding-bottom: 0 !important;
     }
   }
 }
@@ -143,23 +139,21 @@ dialog::backdrop {
 }
 // #endregion
 
-// #region Transactional 
+// #region Transactional
 *:not(.dialog__wrapper) > dialog[open]:is(.dialog--transactional, .dialog--acknowledgement) {
-
   text-align: center;
 
-
   &:before {
-    content: "\f05a";
+    content: '\f05a';
     font-weight: 300;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-    display: var(--fa-display,inline-block);
+    display: var(--fa-display, inline-block);
     font-style: normal;
     font-variant: normal;
     line-height: 1;
     text-rendering: auto;
-    font-family: "Font Awesome 6 Pro";
+    font-family: 'Font Awesome 6 Pro';
     font-size: 3rem;
     @include media-breakpoint-up(md) {
       font-size: 4rem;
@@ -171,14 +165,12 @@ dialog::backdrop {
     clear: both;
   }
 
-  &:has(> i):before{
-
+  &:has(> i):before {
     display: none;
   }
 
-  &:has(> i) > i{
-
-    display: var(--fa-display,inline-block);
+  &:has(> i) > i {
+    display: var(--fa-display, inline-block);
     line-height: 1;
     font-size: 3rem;
     @include media-breakpoint-up(md) {
@@ -190,7 +182,7 @@ dialog::backdrop {
     color: var(--colour-heading);
     clear: both;
 
-    &:has(> i){
+    &:has(> i) {
       position: relative;
     }
 
@@ -198,7 +190,7 @@ dialog::backdrop {
       position: absolute;
       top: 0;
       left: 50%;
-      transform: scale(0.5) translate(-100%,0);
+      transform: scale(0.5) translate(-100%, 0);
     }
   }
 
@@ -211,18 +203,17 @@ dialog::backdrop {
       margin-right: 0;
     }
 
-    & + span:not(.h1,.h2,.h3,.h4,.h5,.h6) + * {
+    & + span:not(.h1, .h2, .h3, .h4, .h5, .h6) + * {
       padding-right: 0;
       margin-right: 0;
     }
   }
 
-  form > :is(button,a) {
+  form > :is(button, a) {
     margin-bottom: 0;
   }
 
   @include media-breakpoint-up(sm) {
-
     :is(button, .btn):has(~ :is(button, .btn):last-child),
     :is(button, .btn):last-child {
       min-width: calc(50% - 1rem);
@@ -233,51 +224,44 @@ dialog::backdrop {
 // #endregion
 
 // #region youTube video
-*:not(.dialog__wrapper) > dialog[open]:has(.youtube-embed){
-
+*:not(.dialog__wrapper) > dialog[open]:has(.youtube-embed) {
   display: block;
 
-  .mh-lg, .mh-lg:before {
+  .mh-lg,
+  .mh-lg:before {
     display: contents;
   }
 
   @include media-breakpoint-up(sm) {
-    
     min-width: rem(686);
     max-width: rem(686);
   }
-  
+
   @include media-breakpoint-up(md) {
-    
     min-width: rem(736);
     max-width: rem(736);
   }
 }
 // #endregion
 
-
 // #region admin panel dialog
 dialog:has(> .admin-panel) {
-
   .dialog__close {
     margin-top: -0.8rem;
   }
 }
 dialog > .admin-panel {
-  margin: -1rem calc(var(--dialog-padding) * -1) calc(var(--dialog-padding) * -1) calc(var(--dialog-padding) * -1)!important;
+  margin: -1rem calc(var(--dialog-padding) * -1) calc(var(--dialog-padding) * -1) calc(var(--dialog-padding) * -1) !important;
   padding-top: 0;
 
   &:last-child {
-    
     margin-bottom: calc(var(--dialog-padding) * -1);
   }
 }
 
 // #endregion
 
-
-dialog:has(.embed){
-
+dialog:has(.embed) {
   width: calc(100% - 6rem) !important;
   max-width: 50rem !important;
   padding: 0;
@@ -289,43 +273,39 @@ dialog:has(.embed){
   }
 }
 
-
 // #region Multi step modal
 
-*:not(.dialog__wrapper) > dialog:has(iam-multi-step)[open]{
-
+*:not(.dialog__wrapper) > dialog:has(iam-multi-step)[open] {
   padding: 0;
 
   & > button:first-child {
-    top: calc(var(--dialog-padding) * 4)!important;
+    top: calc(var(--dialog-padding) * 4) !important;
   }
 
-  :is(.h1,.h2,.h3,.h4,.h5,.h6){
+  :is(.h1, .h2, .h3, .h4, .h5, .h6) {
     padding-right: calc(var(--dialog-padding) * 3);
     padding-bottom: var(--dialog-padding);
   }
 
-
   iam-multi-step {
-    padding-inline: 0!important;
+    padding-inline: 0 !important;
   }
 
   form {
     overflow: auto;
     padding-bottom: var(--dialog-padding);
-  
+
     max-height: calc(min(90vh, 47rem) - 6rem);
   }
 
-  fieldset {    
-
+  fieldset {
     > :last-child {
-      margin-bottom: var(--dialog-padding)!important;
+      margin-bottom: var(--dialog-padding) !important;
     }
 
     > p:last-child {
-      padding-bottom: 0!important;
-      margin-bottom: var(--dialog-padding)!important;
+      padding-bottom: 0 !important;
+      margin-bottom: var(--dialog-padding) !important;
     }
   }
 
@@ -338,9 +318,8 @@ dialog:has(.embed){
     width: rem(452);
     max-width: rem(452);
 
-    
     & > button:first-child {
-      top: calc(var(--dialog-padding) * 3.25)!important;
+      top: calc(var(--dialog-padding) * 3.25) !important;
     }
 
     .btn--wrapper {
@@ -350,11 +329,10 @@ dialog:has(.embed){
 
     form {
       height: calc(100vh - 6rem);
-      padding-left: 0!important;
-      padding-right: var(--dialog-padding)!important;
+      padding-left: 0 !important;
+      padding-right: var(--dialog-padding) !important;
     }
   }
-
 
   @include media-breakpoint-up(md) {
     min-width: rem(924);
@@ -362,7 +340,7 @@ dialog:has(.embed){
     max-width: rem(924);
 
     & > button:first-child {
-      top: calc(var(--dialog-padding) * 1)!important;
+      top: calc(var(--dialog-padding) * 1) !important;
     }
 
     @media (min-height: #{rem(500)}) {
@@ -375,21 +353,21 @@ dialog:has(.embed){
       flex-direction: column;
     }
 
-    fieldset {    
-      display: flex; 
+    fieldset {
+      display: flex;
       flex-direction: column;
       flex-grow: 1;
       position: relative;
-  
+
       overflow: auto;
       margin-bottom: calc(var(--dialog-padding) * -1);
       padding-right: calc(var(--dialog-padding) - 10px);
       margin-right: calc((var(--dialog-padding) * -1) + 10px);
-  
+
       max-height: rem(370);
-  
+
       &::before {
-        content: "";
+        content: '';
         top: 100%;
         bottom: 0;
         left: 0;
@@ -400,7 +378,7 @@ dialog:has(.embed){
         display: block;
         background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
         z-index: 2;
-        margin-bottom: calc(var(--dialog-padding) * -1);;
+        margin-bottom: calc(var(--dialog-padding) * -1);
       }
     }
   }
@@ -410,21 +388,19 @@ dialog:has(.embed){
 
 // #region mobile fullwidth view For multi step modal
 @media screen and (max-width: 36em) {
-
   dialog[open]:has(iam-multi-step) {
-
     min-width: 100%;
     min-height: 100%;
     border-radius: 0;
     overflow-y: auto;
 
     iam-multi-step {
-      padding-inline: 0!important;
+      padding-inline: 0 !important;
     }
 
     form {
       height: calc(100vh - 6rem);
-      padding-inline: var(--dialog-padding)!important;
+      padding-inline: var(--dialog-padding) !important;
     }
 
     .btn--wrapper {
@@ -433,20 +409,18 @@ dialog:has(.embed){
   }
 
   dialog[open]:has(iam-multi-step) {
-    
     .mh-lg {
-      max-height: none!important;
+      max-height: none !important;
       overflow: visible;
     }
 
     &:before,
     *:first-child {
-      margin-top: auto!important;
+      margin-top: auto !important;
     }
 
     *:last-child {
-
-      margin-bottom: auto!important;
+      margin-bottom: auto !important;
     }
   }
 }

@@ -1,15 +1,11 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 .snapshot {
-
   > .row {
-
     padding-bottom: 1rem;
-
   }
 
   > .row > .col {
-
     margin-bottom: 1rem;
     min-width: rem(150);
     position: relative;
@@ -28,7 +24,6 @@
   }
 
   &__item {
-
     position: relative;
     display: flex;
     flex-direction: column;
@@ -36,11 +31,10 @@
     height: 100%;
     padding: 1rem;
 
-    &:not([class*="bg-"]){
+    &:not([class*='bg-']) {
       border: 1px solid var(--colour-border);
     }
   }
-
 
   a {
     position: absolute;
@@ -60,7 +54,7 @@
     padding-bottom: 1rem;
 
     &:after {
-      content: ":";
+      content: ':';
     }
   }
 

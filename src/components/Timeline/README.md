@@ -13,6 +13,6 @@
 
 ### Properties
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| image | String | - | Optional image url to display in the background |
+| Option | Type   | Default Value | Description                                     |
+| ------ | ------ | ------------- | ----------------------------------------------- |
+| image  | String | -             | Optional image url to display in the background |

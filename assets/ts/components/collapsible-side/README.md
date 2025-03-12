@@ -15,7 +15,7 @@ import('../node_modules/@iamproperty/components/assets/js/components/collapsible
 
 ```
 <iam-collapsible-side data-title="Configuration">
-        
+
   <div slot="menu">
     <label for="test1">Active branch</label>
     <select class="form-select" name="test1" id="test1">

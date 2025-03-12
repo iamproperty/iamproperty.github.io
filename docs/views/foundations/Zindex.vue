@@ -6,7 +6,13 @@
       </ul>
       <h1>Z-index strategy (Beta)</h1>
 
-      <p>Z-index is a relative CSS property. It has no unit of measurement, other than the other z-indexes in the project. Those other values are usually spread all over the project, which leads to interesting phenomenons. It is very easy to accidentally assign a larger z-index number to an element than that of an element it should be above. The aim of this strategy is to use semantic values instead of numbers using keywords which describe the position of the z-index.</p>
+      <p>
+        Z-index is a relative CSS property. It has no unit of measurement, other than the other z-indexes in the
+        project. Those other values are usually spread all over the project, which leads to interesting phenomenons. It
+        is very easy to accidentally assign a larger z-index number to an element than that of an element it should be
+        above. The aim of this strategy is to use semantic values instead of numbers using keywords which describe the
+        position of the z-index.
+      </p>
 
       <table>
         <thead>
@@ -25,7 +31,10 @@
           <tr>
             <td>base</td>
             <td>0</td>
-            <td>The main index of a component or page. This will usually be used to give child elements z-index values meaning.</td>
+            <td>
+              The main index of a component or page. This will usually be used to give child elements z-index values
+              meaning.
+            </td>
           </tr>
           <tr>
             <td>focus</td>
@@ -35,12 +44,18 @@
           <tr>
             <td>above</td>
             <td>10</td>
-            <td>For inline elements that need to displayed on top of the content but not above other coomponents like overlays. A good example of this would be tooltips and popovers.</td>
+            <td>
+              For inline elements that need to displayed on top of the content but not above other coomponents like
+              overlays. A good example of this would be tooltips and popovers.
+            </td>
           </tr>
           <tr>
             <td>floating</td>
             <td>100</td>
-            <td>For components that are positioned absolutely, fixed or sticky. Because they have been taken out of the natural flow of the page they should be displayed above other components.</td>
+            <td>
+              For components that are positioned absolutely, fixed or sticky. Because they have been taken out of the
+              natural flow of the page they should be displayed above other components.
+            </td>
           </tr>
           <tr>
             <td>menu</td>

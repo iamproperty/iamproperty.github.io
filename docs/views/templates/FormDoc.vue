@@ -5,9 +5,6 @@
         <li><a href="/foundations">Templates</a></li>
       </ul>
       <h1>Form (Beta)</h1>
-      
-      
-
     </div>
   </main>
 </template>

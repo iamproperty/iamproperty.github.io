@@ -1,14 +1,14 @@
-@use '../../assets/sass/_func.scss' as * with (
-  $disable-bs-grid: "false",
-  $enable-new-grid: "true"
-);
+@use '../../assets/sass/_func.scss';
 
 // Load the SCSS framework
 $fontPath: '../../fonts/';
 
-@import "../../assets/sass/_fonts.scss";
+@import '../../assets/sass/_fonts.scss';
 @import '../../assets/sass/_corefiles.scss';
-
+@import '../../assets/sass/_grid';
+@import '../../assets/sass/_bs_grid';
+@import '../../assets/sass/_utilities';
+@import '../../assets/sass/_utility-mixins';
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
@@ -19,7 +19,7 @@ code {
 .note {
   border-left: 2px solid var(--colour-danger);
   padding: 1rem 0.5rem 1rem 0.5rem;
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
 
   strong:first-child {
     color: var(--colour-danger);
@@ -27,48 +27,44 @@ code {
 }
 
 .markdown-body {
-
-  h1,h2,h3 {
-    
+  h1,
+  h2,
+  h3 {
     font-size: 1.125rem;
     line-height: 1.5rem;
     padding-bottom: 1rem;
   }
-  
-  h4,h5,h6 {
+
+  h4,
+  h5,
+  h6 {
     font-size: 1rem;
     line-height: 1.25rem;
     padding-bottom: 1rem;
   }
 
   container-type: inline-size;
-  
-  
+
   td {
-    min-width: 0!important;
+    min-width: 0 !important;
   }
 
   @container (width < 23.4375em) {
-
     td:empty {
-      display:none;
+      display: none;
     }
   }
 
-  p:has(strong:first-child:last-child){
+  p:has(strong:first-child:last-child) {
     color: var(--colour-primary);
     padding-bottom: 0.5rem;
   }
 }
 
-
-
-
 .version-control {
   padding-top: 3rem;
 
   > .container {
-      
     container-type: inline-size;
   }
 
@@ -81,17 +77,16 @@ code {
       font-size: 1rem;
       color: var(--colour-body);
 
-      &:nth-child(1){
+      &:nth-child(1) {
         width: 1rem;
       }
-      &:nth-child(2){
+      &:nth-child(2) {
         width: 1rem;
       }
     }
 
     tr:has(th:nth-child(4)) {
-      
-      th:nth-child(3){
+      th:nth-child(3) {
         width: 9rem;
       }
     }
@@ -106,20 +101,16 @@ code {
   }
 }
 
-
 @container (width < 36em) {
   .version-control {
-  
     table {
       tr > * {
-        
-        &:nth-child(2){
+        &:nth-child(2) {
           display: none;
         }
       }
       tr:has(*:nth-child(4)) > * {
-        
-        &:nth-child(3){
+        &:nth-child(3) {
           display: none;
         }
       }
@@ -128,25 +119,21 @@ code {
 }
 @container (width >= 36em) {
   .version-control {
-  
     table {
       thead th {
-        &:nth-child(1){
+        &:nth-child(1) {
           width: 9rem;
         }
-        &:nth-child(2){
+        &:nth-child(2) {
           width: 8rem;
         }
       }
 
       tr:has(th:nth-child(4)) {
-        
-        th:nth-child(3){
+        th:nth-child(3) {
           width: 9rem;
         }
       }
     }
   }
 }
-
-

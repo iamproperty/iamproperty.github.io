@@ -27,10 +27,9 @@ import('../node_modules/@iamproperty/components/assets/js/components/fileupload/
 
 **Properties**
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| data-url | String | - | Optional value that populates the datalist with extra results from an API |
-| data-schema | String | - | Tells the JavaScript where to look for the array of values in the API JSON |
-| data-value-schema | String | - | Tells the JavaScript where to look for the value within the API JSON |
-| data-display-schema | String | - | Tells the JavaScript where to look for the title within the API JSON |
-
+| Option              | Type   | Default Value | Description                                                                |
+| ------------------- | ------ | ------------- | -------------------------------------------------------------------------- |
+| data-url            | String | -             | Optional value that populates the datalist with extra results from an API  |
+| data-schema         | String | -             | Tells the JavaScript where to look for the array of values in the API JSON |
+| data-value-schema   | String | -             | Tells the JavaScript where to look for the value within the API JSON       |
+| data-display-schema | String | -             | Tells the JavaScript where to look for the title within the API JSON       |

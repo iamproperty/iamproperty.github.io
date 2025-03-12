@@ -1,5 +1,5 @@
-@use "sass:math";
-@use "../_func" as *;
+@use 'sass:math';
+@use '../_func' as *;
 
 // non-js fallback
 body:not(.js-enabled) dialog:not([open]):target {
@@ -14,7 +14,7 @@ dialog {
   --mh-padding-inline: var(--dialog-padding);
   color: inherit;
   width: fit-content;
-  height: fit-content;  
+  height: fit-content;
   border: none;
   overscroll-behavior: contain;
   background: var(--colour-canvas-2);
@@ -26,15 +26,13 @@ dialog {
 
 [popover]:popover-open,
 dialog[open] {
-
-  
   display: flex;
   flex-direction: column;
 
   > *:last-child {
     margin-bottom: 0;
   }
-  
+
   > :is(p):last-child {
     padding-bottom: 0;
   }

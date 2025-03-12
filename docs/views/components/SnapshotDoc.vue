@@ -8,7 +8,7 @@
       <p>Provides a brief overview of a set of figures.</p>
     </div>
     <Snapshot :items="items" class="visualtest"><h2>Snapshot title</h2></Snapshot>
-    
+
     <div class="container">
       <h2>HTML code example</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
@@ -27,53 +27,53 @@
 </template>
 
 <script>
-import Snapshot from '@/components/Snapshot/Snapshot.vue'
-import Readme from '@/components/Snapshot/README.md'
+  import Snapshot from '@/components/Snapshot/Snapshot.vue';
+  import Readme from '@/components/Snapshot/README.md';
 
-export default {
-  components: {
-    Snapshot,
-    Readme
-  },
-  data () {
-    return {
-      items: [
-        {
-          title: 'Exchanged',
-          number: 1
-        },
-        {
-          title: 'SSTC',
-          number: 5,
-          link: '#anchor'
-        },
-        {
-          title: 'Green',
-          number: 1,
-          bg: 'success'
-        },
-        {
-          title: 'Amber',
-          number: 1,
-          bg: 'warning'
-        },
-        {
-          title: 'Red',
-          number: 1,
-          bg: 'danger'
-        },
-        {
-          title: 'Opportunities this month',
-          number: 1,
-          bg: 'info'
-        },
-        {
-          title: 'Completions Achieved MTD',
-          number: 1,
-          bg: 'info'
-        }
-      ],
-      htmlUsage: `<div class="container snapshot">
+  export default {
+    components: {
+      Snapshot,
+      Readme,
+    },
+    data() {
+      return {
+        items: [
+          {
+            title: 'Exchanged',
+            number: 1,
+          },
+          {
+            title: 'SSTC',
+            number: 5,
+            link: '#anchor',
+          },
+          {
+            title: 'Green',
+            number: 1,
+            bg: 'success',
+          },
+          {
+            title: 'Amber',
+            number: 1,
+            bg: 'warning',
+          },
+          {
+            title: 'Red',
+            number: 1,
+            bg: 'danger',
+          },
+          {
+            title: 'Opportunities this month',
+            number: 1,
+            bg: 'info',
+          },
+          {
+            title: 'Completions Achieved MTD',
+            number: 1,
+            bg: 'info',
+          },
+        ],
+        htmlUsage: `<div class="container snapshot">
   <div class="row">
     <div class="col">
       <div class="snapshot__item "><span class="h6 snapshot__title">Exchanged</span><span class="stat">1</span></div>
@@ -98,8 +98,8 @@ export default {
       <div class="snapshot__item bg-info"><span class="h6 snapshot__title">Completions Achieved MTD</span><span class="stat">1</span></div>
     </div>
   </div>
-</div>`
-    }
-  }
-}
+</div>`,
+      };
+    },
+  };
 </script>

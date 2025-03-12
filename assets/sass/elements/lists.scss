@@ -1,4 +1,4 @@
-@use "../_func.scss" as *;
+@use '../_func.scss' as *;
 
 ol,
 ul {
@@ -24,11 +24,9 @@ dt {
 }
 
 dd {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   margin-left: 0; // 1
 }
-
-
 
 .list-unstyled {
   @include list-unstyled();
@@ -46,12 +44,11 @@ dd {
   }
 }
 
-@include is('ol, ul','','li'){
+@include is('ol, ul', '', 'li') {
   max-width: $content-max-width;
 }
 
 .tick-list {
-
   padding-left: 0;
 
   li {
@@ -59,10 +56,9 @@ dd {
     list-style: none;
     padding-bottom: 1rem;
     padding-left: 2.25rem;
-    
+
     &:before {
-      
-      content: "\f00c";
+      content: '\f00c';
       position: absolute;
       top: 0;
       left: 0;
@@ -70,29 +66,25 @@ dd {
       height: 1.25em;
       font-size: 1.25em;
       line-height: 1;
-      
+
       color: var(--colour-complete);
-      font-family: "Font Awesome 6 Pro";
+      font-family: 'Font Awesome 6 Pro';
       font-size: 400;
-      
     }
 
     &.tick--warning:before {
-
-      content: "\f071";
+      content: '\f071';
       font-weight: 300;
       color: var(--colour-warning);
     }
 
     &.tick--danger:before {
-
-      content: "\f06a";
+      content: '\f06a';
       font-weight: 300;
       color: var(--colour-danger);
     }
 
     &.tick--incomplete:before {
-
       background: var(--colour-admin);
       mask-image: none;
       -webkit-mask-image: none;
@@ -100,7 +92,7 @@ dd {
       transform: scale(0.8);
     }
 
-    &[class*="bg-"] {
+    &[class*='bg-'] {
       padding: 1rem;
       padding-left: 4rem;
       margin-bottom: 1rem;
@@ -109,7 +101,6 @@ dd {
 
       &:before,
       &:after {
-      
         top: 50%;
         left: 1rem;
         width: 2rem;
@@ -118,8 +109,7 @@ dd {
       }
 
       &:after {
-      
-        content: "";
+        content: '';
         position: absolute;
         z-index: -1;
         background-color: white;
@@ -127,14 +117,11 @@ dd {
         transform-origin: 50% 50%;
         transform: scale(0.9);
       }
-
     }
   }
 }
 
-
 .breadcrumb {
-
   font-size: rem(14);
   padding-left: 0;
   list-style: none;
@@ -143,7 +130,7 @@ dd {
     display: inline-block;
 
     &:not(:first-child):before {
-      content: "\00A0/\00A0";
+      content: '\00A0/\00A0';
       font-weight: bold;
       color: var(--colour-link);
     }
@@ -156,9 +143,8 @@ dd {
 }
 
 .orderable-list {
-
   margin-left: 3.5rem;
-  counter-reset: countItem; 
+  counter-reset: countItem;
   padding-left: 0;
 
   li {
@@ -173,10 +159,14 @@ dd {
   }
 
   li:before {
-    content: "";
+    content: '';
     --gradient-direction: 180deg;
     background-color: var(--colour-info);
-    background-image: linear-gradient(var(--gradient-direction), var(--colour-secondary) 0, transparent 100%) !important;
+    background-image: linear-gradient(
+      var(--gradient-direction),
+      var(--colour-secondary) 0,
+      transparent 100%
+    ) !important;
     height: 100%;
     width: 2.5rem;
     display: inline-block;
@@ -218,12 +208,11 @@ dd {
 }
 
 // #region Step list
-*:has(> .list--steps){
+*:has(> .list--steps) {
   container-type: inline-size;
 }
 
 .list--steps {
-
   display: flex;
   justify-content: center;
   list-style: none;
@@ -244,7 +233,6 @@ dd {
     overflow: hidden;
     text-indent: -300px;
 
-
     &:before {
       counter-increment: pages;
       content: counter(pages);
@@ -257,12 +245,11 @@ dd {
       font-size: rem(18);
       line-height: rem(24);
       text-align: center;
-      font-weight: bold;;
+      font-weight: bold;
       border: 1px solid currentColor;
       border-radius: 1rem;
       text-indent: 0;
     }
-
   }
 
   li.step--current:before {
@@ -275,13 +262,12 @@ dd {
     border-color: var(--colour-success);
 
     @include dark-mode {
-      
-    background-color: var(--colour-complete);
-    border-color: var(--colour-complete);
+      background-color: var(--colour-complete);
+      border-color: var(--colour-complete);
     }
     //color: var(--colour-white);
-  } 
-  
+  }
+
   &::after {
     content: attr(data-mobile-text);
     position: absolute;
@@ -295,8 +281,7 @@ dd {
     font-weight: bold;
   }
 
-  @include container-up(sm){
-
+  @include container-up(sm) {
     padding: 0;
 
     margin-bottom: rem(24);
@@ -312,11 +297,11 @@ dd {
       overflow: visible;
 
       &:not(:last-child):after {
-        content: "";
+        content: '';
         position: absolute;
         top: rem(12);
         left: calc(50% + 2rem);
-        
+
         width: calc(100% - 2.5rem);
         height: 2px;
         font-size: rem(18);
@@ -325,9 +310,7 @@ dd {
     }
   }
 
-  
-  @include container-up(md){
-
+  @include container-up(md) {
     li {
       max-width: 20%;
     }

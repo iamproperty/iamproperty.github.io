@@ -1,7 +1,6 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 :host {
-  
   max-width: var(--input-max-width, 50rem);
   display: block;
   font-weight: normal;
@@ -9,7 +8,8 @@
   position: relative;
 }
 
-.btns, .status {
+.btns,
+.status {
   justify-content: flex-end;
   gap: 0.5rem;
   position: absolute;
@@ -18,7 +18,6 @@
 }
 
 .btns {
-  
   display: var(--display-btns, flex);
   justify-content: flex-end;
 }

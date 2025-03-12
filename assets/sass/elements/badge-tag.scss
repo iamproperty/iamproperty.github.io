@@ -1,10 +1,9 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 :is(.badge, .tag) {
-
   font-size: rem(16);
   line-height: rem(26);
-  border: none!important;
+  border: none !important;
   //outline: 1px solid var(--colour-canvas);
   //outline-offset: -1px;
   margin: 0;
@@ -20,18 +19,17 @@
   &:has(+ :is(.badge, .tag)) {
     margin-right: rem(6);
   }
-  
+
   &:empty {
     display: none;
   }
 
-  &:is(.bg-primary,.bg-dark,.bg-danger){
-    color: #{$colour-inverted}!important;
+  &:is(.bg-primary, .bg-dark, .bg-danger) {
+    color: #{$colour-inverted} !important;
   }
 }
 
 .badge {
-
   border-radius: rem(6);
   padding: 0 rem(8);
 
@@ -43,7 +41,6 @@
 }
 
 .tag {
-
   border-radius: rem(16);
   padding: 0 rem(16);
 
@@ -53,52 +50,45 @@
     font-weight: bold;
   }
 
-  &:is(:hover,:focus,.hover,:focus-within, :focus-visible) {
+  &:is(:hover, :focus, .hover, :focus-within, :focus-visible) {
     background: var(--wider-colour-hover, var(--wider-colour-1-hover));
   }
 
-  &:is(:active,.active) {
+  &:is(:active, .active) {
     background: var(--wider-colour-active, var(--wider-colour-1-active));
   }
 
   &:has(input:disabled),
   &:disabled {
-    
-    background: var(--wider-colour-1)!important;
-    color: #99adb1!important;
+    background: var(--wider-colour-1) !important;
+    color: #99adb1 !important;
   }
 }
 
 .tag.tag--not-set,
 iam-multiselect:not(:defined) .tag,
 .tag.tag--toggle {
-
   background: var(--colour-canvas);
   outline: 1px solid var(--colour-border);
-
 }
 
 .tag.tag--toggle {
-  
   &:after {
     display: none;
   }
 
-  &:is(:hover,:focus) {
-    
-    background: #EEEEEE;
+  &:is(:hover, :focus) {
+    background: #eeeeee;
   }
-  
+
   &:is(:active) {
-    
-    background: #E0E0E0;
+    background: #e0e0e0;
   }
-  
+
   &:has(input:checked),
   &.selected {
-      
-    background: #E9F9FD;
-    outline: 1px solid #1EBEE6;
+    background: #e9f9fd;
+    outline: 1px solid #1ebee6;
   }
 }
 

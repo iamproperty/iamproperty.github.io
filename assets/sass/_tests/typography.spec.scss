@@ -2,7 +2,6 @@
 @import '../../sass/func';
 
 @include describe('Font variables should be defined correctly') {
-
   @include it('with the body font set to Qanelas Medium') {
     @include assert {
       @include output {

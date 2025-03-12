@@ -81,7 +81,6 @@
 }
 /*#endregion*/
 
-
 /*#region vw*/
 @include describe('vw [func]') {
   @include it('vw function returns the correct vw size') {

@@ -1,7 +1,6 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
-*:not(main):has(> iam-tabs){
-  
+*:not(main):has(> iam-tabs) {
   container-type: inline-size;
 }
 
@@ -33,19 +32,18 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   .tabs__links__wrapper {
     position: relative;
     margin: 0 auto 2rem;
-  
+
     &:after {
-      content: "";
+      content: '';
       left: 50%;
       position: relative;
       height: 1px;
       width: 100vw;
       background-color: var(--colour-border);
-      transform: translate(-50%,0);
+      transform: translate(-50%, 0);
       display: block;
       clear: both;
     }
-
   }
 }
 
@@ -57,16 +55,13 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   }
 }
 
-
-.tabs__links {
-  
-  scroll-snap-type: x mandatory;
-
+.tabs:not(.admin-panel) .tabs__links {
   -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
   mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 90%, rgba(0, 0, 0, 0) 100%);
 }
 
 .tabs__links {
+  scroll-snap-type: x mandatory;
   padding-bottom: 3px;
   position: relative;
   display: flex;
@@ -75,7 +70,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   margin: 0 -1.5rem;
   overflow-y: clip;
   overflow-x: auto;
-  
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -107,7 +102,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 
     &:after {
       position: absolute;
-      content: "";
+      content: '';
       bottom: 0;
       left: 50%; // half way across
       height: 3px;
@@ -124,16 +119,16 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
         transform: translate(-50%, 0) scale(0.6, 1);
       }
     }
-    
+
     &:not(.disabled) {
-      &:is([aria-pressed="true"],:active,.current):after {
+      &:is([aria-pressed='true'], :active, .current):after {
         transform: translate(-50%, 0) scale(1, 1);
       }
     }
 
-    &:is([aria-pressed="true"],.current) {
+    &:is([aria-pressed='true'], .current) {
       pointer-events: none;
-      outline: var(--contrast-outline-width, 0px) solid var(--colour-primary-theme)!important;
+      outline: var(--contrast-outline-width, 0px) solid var(--colour-primary-theme) !important;
     }
   }
 }
@@ -150,10 +145,8 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   }
 }
 
-
-// #region admin-panel links 
+// #region admin-panel links
 .admin-panel :is(.admin-panel__links, .tabs__links) {
-
   padding: 0;
   margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
 
@@ -168,9 +161,8 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   &:after {
     display: none;
   }
-  
-  @include media-breakpoint-up(sm) {
 
+  @include media-breakpoint-up(sm) {
     flex-direction: row;
   }
 
@@ -183,18 +175,18 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     text-align: left;
     flex-grow: 1;
     --gradient-direction: -90deg;
-    background-color:var(--colour-success);
+    background-color: var(--colour-success);
 
-    &:not([class*="bg-"]){
-      background-image: linear-gradient(var(--gradient-direction),  var(--colour-info) 0, transparent 100%);
+    &:not([class*='bg-']) {
+      background-image: linear-gradient(var(--gradient-direction), var(--colour-info) 0, transparent 100%);
     }
 
-    &:is(.current, [aria-pressed="true"]){
+    &:is(.current, [aria-pressed='true']) {
       color: var(--colour-primary-theme);
     }
 
-    &:not(.current, [aria-pressed="true"]){
-      background: var(--colour-canvas-2)!important;
+    &:not(.current, [aria-pressed='true']) {
+      background: var(--colour-canvas-2) !important;
     }
 
     &:after {
@@ -202,17 +194,15 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     }
 
     @include media-breakpoint-up(sm) {
-
       margin: 0;
 
-      &:not(:first-child){
-          
-        border-left: 1px solid var(--colour-border)!important;
+      &:not(:first-child) {
+        border-left: 1px solid var(--colour-border) !important;
       }
     }
   }
 
-  .link:is(.current,[aria-pressed="true"]) {
+  .link:is(.current, [aria-pressed='true']) {
     pointer-events: none;
   }
 }

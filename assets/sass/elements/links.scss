@@ -1,5 +1,4 @@
-@use "../_func.scss" as *;
-
+@use '../_func.scss' as *;
 
 // #region reset
 a {
@@ -31,12 +30,10 @@ a {
   color: var(--colour-link);
 
   &:is(:hover, :focus, .hover, :focus-within) {
-
     color: var(--colour-hover);
-  }   
+  }
 
   &:is(:active, .active) {
-
     color: var(--colour-active);
   }
 }
@@ -56,38 +53,42 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
   position: relative;
   font-weight: bold;
 
-  &:not(.text-decoration-none){
+  &:not(.text-decoration-none) {
     &:after {
       position: absolute;
-      content: "";
+      content: '';
       top: 100%;
       left: 50%;
       height: 2px;
       width: 100%;
-      transform: translate(-50%,0);
+      transform: translate(-50%, 0);
       background: var(--colour-underline);
       transition: width 0.5s;
     }
   }
 
-  [class*=fa-] {
+  [class*='fa-'] {
     margin-left: 0;
     margin-right: 0.5rem;
   }
-  [class*=fa-]:not(:first-child) {
+  [class*='fa-']:not(:first-child) {
     margin-left: 0.5rem;
     margin-right: 0;
   }
 
-  &:is(:hover, :focus, .hover, :active, .active, :focus-within) {
-
+  &:not([disabled]):is(:hover, :focus, .hover, :active, .active, :focus-within) {
     &:after {
       width: 60%;
     }
-  }     
+  }
+
+  &[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
 }
 
-@include inline-text(){
+@include inline-text() {
   a:not(.btn) {
     min-height: none;
     display: inline;
@@ -98,51 +99,53 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
       display: none;
     }
 
-    [class*="fa-"]{
+    [class*='fa-'] {
       margin: 0;
       display: inline;
+      --fa-display: inline;
+
+      &:after {
+        content: '\a0';
+      }
     }
 
     text-decoration: underline;
-    text-underline-offset: 0.2em;
-    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25rem;
+    text-decoration-thickness: 0.125rem;
     font-size: inherit;
-    
-    &:is(:hover, :focus, .hover, :focus-within) {
 
+    &:not([disabled]):is(:hover, :focus, .hover, :focus-within) {
       color: var(--colour-hover);
       text-decoration: none;
-    }   
+    }
 
-    &:is(:active, .active) {
-
+    &:not([disabled]):is(:active, .active) {
       color: var(--colour-active);
       text-decoration: none;
+      filter: brightness(85%);
     }
   }
 }
 
 // #region Support card component
-:is(a,button,label):has(.card, iam-card){
-
+:is(a, button, label):has(.card, iam-card) {
   &:before {
     display: none;
   }
   border: none;
   background: none;
-  padding:0;
+  padding: 0;
   display: flex;
   margin-bottom: 1.5rem;
 
-  &:not([class*="col"]){
+  &:not([class*='col']) {
     margin: 0 0 rem(24) 0;
   }
 
-  outline: none!important;
+  outline: none !important;
   text-decoration: none;
 
-  &:not(.d-inline-block):not([class*="col"]){
-      
+  &:not(.d-inline-block):not([class*='col']) {
     width: 100%;
   }
 

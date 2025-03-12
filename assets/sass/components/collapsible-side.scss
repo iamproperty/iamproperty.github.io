@@ -1,4 +1,4 @@
-@use "../_func" as *;
+@use '../_func' as *;
 // Host
 :host {
   --colour-border: #e9e9e9;
@@ -6,18 +6,17 @@
   grid-column: full-width;
 
   @include light-mode() {
-            
     --side-link-hover: #eeeeee;
   }
 
   display: block;
   min-height: calc(100vh - var(--nav-height));
-  padding-top: 0!important;
+  padding-top: 0 !important;
   margin-inline: auto;
   width: 100%;
   overflow: hidden;
   position: relative;
- 
+
   @include media-breakpoint-up(md) {
     max-height: calc(100vh - var(--nav-height));
     overflow: auto;
@@ -27,13 +26,12 @@
 .container {
   position: static;
   min-height: 100%;
-  padding-top: 0!important;
-  padding-bottom: 0!important;
-  padding-left: 0!important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
 
   @include media-breakpoint-up(md) {
-
-    padding-left: 5.25rem!important;
+    padding-left: 5.25rem !important;
   }
 }
 
@@ -50,7 +48,7 @@
   transition: width 1s;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     right: 0;
@@ -59,13 +57,11 @@
   }
 
   @include media-breakpoint-up(sm) {
-
     left: 0;
     width: rem(40);
-  }  
+  }
 
   @include media-breakpoint-up(md) {
-
     left: rem(84);
     margin-left: #{rem(-84)};
     position: fixed;
@@ -74,8 +70,8 @@
     &:not(.open).hover {
       width: rem(304);
 
-      .btn[class*=fa-]:before {
-        content: "\f023" !important;
+      .btn[class*='fa-']:before {
+        content: '\f023' !important;
       }
     }
   }
@@ -92,10 +88,10 @@
     z-index: 99;
     color: var(--colour-primary-theme);
 
-    &[aria-expanded]{
-       // Change icon
-      &[class*=fa-]:before {
-        content: "\f053"!important;
+    &[aria-expanded] {
+      // Change icon
+      &[class*='fa-']:before {
+        content: '\f053' !important;
       }
 
       @include media-breakpoint-up(md) {
@@ -104,8 +100,7 @@
     }
   }
 
-  &:is(:hover,:focus-within,:active) .btn {
-    
+  &:is(:hover, :focus-within, :active) .btn {
     border: 2px solid var(--colour-border);
     color: var(--colour-primary-theme);
 
@@ -115,17 +110,14 @@
   }
 
   &:is(.open) {
-
     width: calc(100% - var(--container-padding-x));
 
     @include media-breakpoint-up(sm) {
-
       width: rem(382);
-    }  
+    }
     @include media-breakpoint-up(md) {
-
       width: rem(304);
-    }  
+    }
   }
 
   // Content
@@ -145,28 +137,25 @@
     .h3 {
       padding-left: rem(24);
     }
-      
-    @include media-breakpoint-up(sm) {
 
+    @include media-breakpoint-up(sm) {
       .h3 {
         padding-left: rem(40);
       }
 
       width: rem(382);
-    }  
+    }
     @include media-breakpoint-up(md) {
-
       width: rem(304);
 
-      .h3{
+      .h3 {
         padding-left: var(--container-padding-x-md);
       }
-    }  
+    }
   }
 
   &:not(.hover):not(.open) .side-menu-content.closed {
-    
-      display: none;
+    display: none;
   }
 
   &.open .side-menu-content {
@@ -174,88 +163,79 @@
   }
 
   @include media-breakpoint-up(md) {
-
     &.hover .side-menu-content {
       opacity: 1;
     }
-  }  
+  }
 }
 
 // Links
-::slotted(*[slot="menu"]) {
+::slotted(*[slot='menu']) {
   padding-left: rem(24);
 
-
-
-  
   @include media-breakpoint-up(sm) {
     padding-left: rem(40);
   }
-  
+
   @include media-breakpoint-up(md) {
     padding-left: var(--container-padding-x-md);
   }
 }
 
 ::slotted(hr) {
-  border-bottom: 2px solid var(--colour-border)!important;
-  margin-right: rem(-40)!important;
+  border-bottom: 2px solid var(--colour-border) !important;
+  margin-right: rem(-40) !important;
 }
 
-::slotted(a[slot="menu"]) {
+::slotted(a[slot='menu']) {
   display: block;
 
-  display: block!important;
-  line-height: rem(20)!important;
-  padding: rem(16) rem(40) rem(16) rem(24)!important;
-  margin: 0!important;
+  display: block !important;
+  line-height: rem(20) !important;
+  padding: rem(16) rem(40) rem(16) rem(24) !important;
+  margin: 0 !important;
   flex-shrink: 0;
-  font-size: 1rem!important;
-  font-weight: normal!important;
+  font-size: 1rem !important;
+  font-weight: normal !important;
   text-decoration: none;
 
-  border-bottom: 2px solid var(--colour-border)!important;
+  border-bottom: 2px solid var(--colour-border) !important;
 
-  margin-right: rem(-40)!important;
-  
+  margin-right: rem(-40) !important;
+
   @include media-breakpoint-up(sm) {
-    padding-left: rem(40)!important;
+    padding-left: rem(40) !important;
   }
 
   @include media-breakpoint-up(md) {
-    padding-left: var(--container-padding-x-md)!important;
+    padding-left: var(--container-padding-x-md) !important;
   }
   &:after {
     display: none;
   }
 
-  
-  border-right: 2px solid var(--colour-border)!important;
+  border-right: 2px solid var(--colour-border) !important;
 }
 
-::slotted(a[slot="menu"]:where(:hover,:focus,[aria-expanded])) {
-
-  background-color: var(--side-link-hover)!important;
+::slotted(a[slot='menu']:where(:hover, :focus, [aria-expanded])) {
+  background-color: var(--side-link-hover) !important;
 }
 
-::slotted(a[slot="menu"]:active) {
-
-  background-color: var(--side-link-hover)!important;
-  font-weight: bold!important;
+::slotted(a[slot='menu']:active) {
+  background-color: var(--side-link-hover) !important;
+  font-weight: bold !important;
 }
 
-::slotted(a[slot="menu"][aria-expanded]) {
-
-  background-color: var(--side-link-hover)!important;
-  font-weight: bold!important;
-  margin-right: #{rem(-40)}!important;
+::slotted(a[slot='menu'][aria-expanded]) {
+  background-color: var(--side-link-hover) !important;
+  font-weight: bold !important;
+  margin-right: #{rem(-40)} !important;
   position: relative;
 
-  border-right: 2px solid var(--colour-info)!important;
-
+  border-right: 2px solid var(--colour-info) !important;
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     right: 0;
@@ -265,9 +245,7 @@
     border-right: 2px solid var(--colour-info);
     margin-right: -2px;
 
-        
     @media (forced-colors: active) {
-
       border-right: 10px solid var(--colour-info);
     }
   }
@@ -276,46 +254,39 @@
 
 // #region main content
 .main-content {
-
   padding-top: rem(24);
   padding-left: rem(60);
 
-  
   @include media-breakpoint-up(sm) {
-
     padding-left: rem(80);
-  }  
+  }
 
   @include media-breakpoint-up(md) {
-
-    padding-top: rem(40)!important;
+    padding-top: rem(40) !important;
     padding-left: 0;
-  }  
+  }
 
   > span.h3 {
     padding-top: 0.75rem;
 
     border-bottom: 2px solid var(--colour-border);
-    margin-bottom: rem(40)!important;
+    margin-bottom: rem(40) !important;
 
     @include media-breakpoint-up(md) {
-
       display: none;
-    }  
+    }
   }
 }
 
-::slotted(.main-content__title){
-
+::slotted(.main-content__title) {
   border-bottom: 2px solid var(--colour-border);
-  margin-bottom: rem(40)!important;
-  max-width: 100%!important;
+  margin-bottom: rem(40) !important;
+  max-width: 100% !important;
   display: block;
 }
 
 @include media-breakpoint-up(md) {
-
-  ::slotted(.main-content__title){ 
+  ::slotted(.main-content__title) {
     display: none;
   }
 }
@@ -324,10 +295,8 @@
 
 // #region Desktop open state
 @include media-breakpoint-up(md) {
-
-
   .container:has(.side-menu.open) {
-    padding-left: 2rem!important;
+    padding-left: 2rem !important;
     margin-left: max(19rem, calc(50% - calc(var(--container-max-width) / 2)));
     margin-right: 0;
     max-width: min(var(--container-max-width), 100% - 19rem);
@@ -335,10 +304,8 @@
 }
 // #endregion
 
-
 @include media-breakpoint-up(md) {
-
-:host([open-always]){
-  --btn-display: none;
-}
+  :host([open-always]) {
+    --btn-display: none;
+  }
 }

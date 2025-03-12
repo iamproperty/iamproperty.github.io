@@ -14,33 +14,28 @@ export const cardHTML = `<div class="card__head" part="head">
   <slot name="footer"></slot>
 </div>`;
 
-
-export const setupCard = (cardComponent:any) => {
-
+export const setupCard = (cardComponent: any): void => {
   cardComponent.classList.add('card');
-  const cardHead =  cardComponent.shadowRoot.querySelector('.card__head');
-  const cardBody =  cardComponent.shadowRoot.querySelector('.card__body');
+  const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
+  const cardBody = cardComponent.shadowRoot.querySelector('.card__body');
 
-  if(cardComponent.hasAttribute('data-image')){
-
+  if (cardComponent.hasAttribute('data-image')) {
     cardHead.innerHTML += `<img src="${cardComponent.getAttribute('data-image')}" alt="" loading="lazy" part="image" />`;
   }
 
-
   // Inset the HTML for the data total or icon fallback
-  if(cardComponent.hasAttribute('data-total')){
-
-    cardBody.insertAdjacentHTML('beforeend', `<div class="card__total">${cardComponent.getAttribute('data-total')}</div>`);
-  }
-  else if(cardComponent.querySelector('[slot="total-icon"]')){
-    
+  if (cardComponent.hasAttribute('data-total')) {
+    cardBody.insertAdjacentHTML(
+      'beforeend',
+      `<div class="card__total">${cardComponent.getAttribute('data-total')}</div>`
+    );
+  } else if (cardComponent.querySelector('[slot="total-icon"]')) {
     cardBody.insertAdjacentHTML('beforeend', `<div class="card__total"><slot name="total-icon"></slot></div>`);
   }
 
-  if(!cardComponent.querySelector('[slot="badges"]')){
+  if (!cardComponent.querySelector('[slot="badges"]')) {
     cardComponent.shadowRoot.querySelector('.card__badges').classList.add('empty');
-  }
-  else{
+  } else {
     cardComponent.shadowRoot.querySelector('.card__badges').classList.remove('empty');
   }
-}
+};

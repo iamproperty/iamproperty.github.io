@@ -20,50 +20,50 @@
 </template>
 
 <script>
-import Carousel from '@/components/Carousel/Carousel.vue'
+  import Carousel from '@/components/Carousel/Carousel.vue';
 
-export default {
-  components: {
-    Carousel
-  },
-  data () {
-    return {
-      htmlUsage: `<Carousel class="hide-controls" :items="items" :smCols="3" :mdCols="5" colClass="d-flex align-items-center">
+  export default {
+    components: {
+      Carousel,
+    },
+    data() {
+      return {
+        htmlUsage: `<Carousel class="hide-controls" :items="items" :smCols="3" :mdCols="5" colClass="d-flex align-items-center">
   <h2 class="mx-auto text-center">We're already working with thousands of agents across the UK</h2>
 </Carousel>`,
-      items: [
-        {
-          image: '/logo.jpg'
-        },
-        {
-          image: '/logo.jpg'
-        },
-        {
-          image: '/house.jpeg'
-        },
-        {
-          image: '/logo.jpg'
-        },
-        {
-          image: '/logo.jpg'
-        },
-        {
-          image: '/logo.jpg'
-        },
-        {
-          image: '/logo.jpg'
-        },
-        {
-          image: '/logo.jpg'
-        },
-        {
-          image: '/logo.jpg'
-        },
-        {
-          image: '/logo.jpg'
-        }
-      ]
-    }
-  }
-}
+        items: [
+          {
+            image: '/logo.jpg',
+          },
+          {
+            image: '/logo.jpg',
+          },
+          {
+            image: '/house.jpeg',
+          },
+          {
+            image: '/logo.jpg',
+          },
+          {
+            image: '/logo.jpg',
+          },
+          {
+            image: '/logo.jpg',
+          },
+          {
+            image: '/logo.jpg',
+          },
+          {
+            image: '/logo.jpg',
+          },
+          {
+            image: '/logo.jpg',
+          },
+          {
+            image: '/logo.jpg',
+          },
+        ],
+      };
+    },
+  };
 </script>

@@ -1,20 +1,18 @@
-@use "../_func.scss" as *;
+@use '../_func.scss' as *;
 
 iam-carousel:defined {
-
   > div > *:last-child {
-    margin-bottom: 0!important;
-    padding-bottom: 0!important;
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
   }
 }
 
 // Preload
 iam-carousel:not(:defined) {
-  
   display: flex;
   flex-wrap: nowrap;
   overflow: auto;
-  margin-block-end: 2rem;    
+  margin-block-end: 2rem;
   overflow: auto;
 
   & > * {
@@ -26,9 +24,8 @@ iam-carousel:not(:defined) {
 }
 
 // #region Carousel inside of a admin panel
-.admin-panel:has(iam-carousel){
-
-  container-type: inline-size; 
+.admin-panel:has(iam-carousel) {
+  container-type: inline-size;
 }
 
 .admin-panel:has(iam-carousel:last-child) iam-carousel::part(carousel) {
@@ -37,7 +34,6 @@ iam-carousel:not(:defined) {
 
 @container (min-width: 62em) {
   .admin-panel iam-carousel {
-
     --carousel-spacing: 1.5rem;
     margin-inline: -1.5rem;
 
@@ -54,15 +50,13 @@ iam-carousel:not(:defined) {
       --last-item-extra: 1.5rem;
     }
   }
-
 }
 // #endregion
 
-// #region carousel in dialog 
+// #region carousel in dialog
 
-dialog:has(iam-carousel){
-
-  container-type: inline-size; 
+dialog:has(iam-carousel) {
+  container-type: inline-size;
   --carousel-spacing: 2rem;
 
   @include media-breakpoint-up(sm) {
@@ -71,13 +65,13 @@ dialog:has(iam-carousel){
   }
 }
 
-dialog:has(iam-carousel:last-child){
+dialog:has(iam-carousel:last-child) {
   iam-carousel::part(carousel) {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
   }
 
   iam-carousel::part(controls) {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
     max-width: calc(100% - 4rem);
   }
 }

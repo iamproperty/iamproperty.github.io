@@ -1,9 +1,7 @@
-:is(.mh-sm,.mh-md,.mh-lg,.mh-sm-sm,.mh-sm-md,.mh-sm-lg,.mh-md-sm,.mh-md-md,.mh-md-lg){
-  
-  &:not(iam-table):not(.table__wrapper){
-
-    padding-inline: var(--mh-padding-inline,0);
-    margin-inline: calc(var(--mh-padding-inline,0) * -1);
+:is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg) {
+  &:not(iam-table):not(.table__wrapper) {
+    padding-inline: var(--mh-padding-inline, 0);
+    margin-inline: calc(var(--mh-padding-inline, 0) * -1);
   }
 
   &::before {
@@ -20,75 +18,69 @@
   }
 }
 
-:is(.mh-sm,.mh-md,.mh-lg){
-
+:is(.mh-sm, .mh-md, .mh-lg) {
   overflow: auto;
   overscroll-behavior: contain;
 
   &::before {
-    content: "";
+    content: '';
   }
 }
 
 .mh-sm {
-  max-height: calc(#{rem(200)} - var(--mh-modifier,0rem));
+  max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
 }
 
 .mh-md {
-  max-height: calc(#{rem(400)} - var(--mh-modifier,0rem));
+  max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
 }
 
 .mh-lg {
-  max-height: calc(#{rem(600)} - var(--mh-modifier,0rem));
+  max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
 }
 
-
 @include media-breakpoint-up(sm) {
-
-  :is(.mh-sm-sm,.mh-sm-md,.mh-sm-lg){
-
+  :is(.mh-sm-sm, .mh-sm-md, .mh-sm-lg) {
     overflow: auto;
     overscroll-behavior: contain;
-  
+
     &::before {
-      content: "";
+      content: '';
     }
   }
-  
+
   .mh-sm-sm {
-    max-height: calc(#{rem(200)} - var(--mh-modifier,0rem));
+    max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
   }
-  
+
   .mh-sm-md {
-    max-height: calc(#{rem(400)} - var(--mh-modifier,0rem));
+    max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
   }
-  
+
   .mh-sm-lg {
-    max-height: calc(#{rem(600)} - var(--mh-modifier,0rem));
+    max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
   }
 }
 
 @include media-breakpoint-up(md) {
-
-  :is(.mh-md-sm,.mh-md-md,.mh-md-lg){
-
+  :is(.mh-md-sm, .mh-md-md, .mh-md-lg) {
     overflow: auto;
     overscroll-behavior: contain;
-  
+
     &::before {
-      content: "";
+      content: '';
     }
   }
-  
+
   .mh-md-sm {
-    max-height: calc(#{rem(200)} - var(--mh-modifier,0rem));
+    max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
   }
-  
+
   .mh-md-md {
-    max-height: calc(#{rem(400)} - var(--mh-modifier,0rem));
+    max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
   }
-  
+
   .mh-md-lg {
-    max-height: calc(#{rem(600)} - var(--mh-modifier,0rem));
+    max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
   }
 }
