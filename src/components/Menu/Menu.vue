@@ -11,7 +11,7 @@ export default {
 
     this.$nextTick(function () {
       
-      import(`../../assets/js/components/menu.component.js`).then(module => {
+      import(`../../../assets/js/components/menu/menu.component.js`).then(module => {
 
         if (!window.customElements.get(`iam-menu`))
           window.customElements.define(`iam-menu`, module.default);

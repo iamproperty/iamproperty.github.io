@@ -99,7 +99,7 @@
 import DSHeader from '../DSHeader.vue'
 import headerImg from '../../img/cards-header.png'
 import Tabs from '@/components/Tabs/Tabs.vue'
-import Menu from '@/components/Menu.vue'
+import Menu from '@/components/Menu/Menu.vue'
 
 
 export default {
