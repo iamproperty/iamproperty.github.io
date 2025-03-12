@@ -101,6 +101,11 @@
     display: none;
   }
 
+  .chart {
+    display: flex;
+    align-items: center;
+  }
+
   .doughnuts {
     display: flex;
     flex-direction: row;
@@ -109,13 +114,11 @@
 
   .doughnut {
     position: relative;
-    //width: 100%;
     aspect-ratio: 1 / 1;
     min-width: rem(190);
     flex: 1 1 auto;
     display: inline-block;
     max-width: var(--doughnut-size);
-    margin: rem(12);
 
     @container (min-width: #{em($device-xs-width,16)}) {
       width: var(--doughnut-size);
