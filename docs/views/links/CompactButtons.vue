@@ -82,7 +82,9 @@
     </div>
 
     <h3>Small</h3>
-    <p>Use a small primary compact button when there isn’t enough space for a default compact primary compact button.</p>
+    <p>
+      Use a small primary compact button when there isn’t enough space for a default compact primary compact button.
+    </p>
     <div class="container visualtest pb-5">
       <div class="row">
         <div class="col-5 col-sm-3 pb-3 pe-none">

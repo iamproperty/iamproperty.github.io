@@ -248,7 +248,7 @@ const routes = [
     children: [
       {
         path: 'text-links',
-        name: 'Links',
+        name: 'Text Links',
         meta: {
           title: 'Links | Elements | iamkey',
         },
@@ -473,6 +473,14 @@ const routes = [
         component: () => import('./views/components/AppliedFiltersDoc.vue'),
       },
       {
+        path: 'bento-grid',
+        name: 'Bento grid (Beta)',
+        meta: {
+          title: 'Bento grid | Components | iamkey',
+        },
+        component: () => import('./views/components/BentoGridDoc.vue'),
+      },
+      {
         path: 'carousel',
         name: 'Carousel',
         meta: {
@@ -523,6 +531,16 @@ const routes = [
         },
         component: () => import('./views/components/InlineEdit.vue'),
         searchterms: 'form, input, inline',
+      },
+      {
+        path: 'menu',
+        name: 'Menu (Beta)',
+        meta: {
+          title: 'Menu | Components | iamkey',
+          beta: true,
+          standalone: true,
+        },
+        component: () => import('./views/components/MenuDoc.vue'),
       },
       {
         path: 'multistep',
@@ -746,6 +764,14 @@ const routes = [
         },
         component: () => import('./views/charts/BarChart.vue'),
       },
+      {
+        path: 'doughnutchart',
+        name: 'Doughnut chart',
+        meta: {
+          title: 'Doughnut chart | Components | iamkey',
+        },
+        component: () => import('./views/charts/DoughnutChart.vue'),
+      },
     ],
   },
   {
@@ -882,6 +908,15 @@ const routes = [
     },
     searchterms:
       'npm, install, assets, static, sass, modules, vue, branch, commands, contributing, code, web server, develoment, unit tests, regression tests, workflow',
+  },
+  {
+    path: '/audit-results',
+    component: () => import('./views/Audit.vue'),
+    name: 'Audit',
+    meta: {
+      title: 'Audit | iamkey',
+    },
+    searchterms: 'Audit, npm, build, pr, Pull request',
   },
   {
     /* Examples */ path: '/examples',
@@ -1175,6 +1210,14 @@ const routes = [
           title: 'Inspections | iamkey',
         },
         component: () => import('./views/standalone/Inspections.vue'),
+      },
+      {
+        path: 'competitor-analysis',
+        name: 'Competitor analysis',
+        meta: {
+          title: 'Competitor analysis | iamkey',
+        },
+        component: () => import('./views/standalone/competitor-analysis.vue'),
       },
     ],
   },

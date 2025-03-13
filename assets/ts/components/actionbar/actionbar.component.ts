@@ -235,7 +235,7 @@ class iamActionbar extends HTMLElement {
     // #endregion
 
     // Make sure dialogs created in the shadow dom work
-    Array.from(this.shadowRoot.querySelectorAll('.body')).forEach((element, index) => {
+    Array.from(this.shadowRoot.querySelectorAll('.body')).forEach((element) => {
       extendDialogs(element);
     });
 

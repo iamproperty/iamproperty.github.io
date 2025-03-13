@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { trackComponent, trackComponentRegistered } from '../_global';
 
 trackComponentRegistered('iam-multi-step');
@@ -26,7 +25,8 @@ class iamMultiStep extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const MultiStepComponent = this;
     const steps = this.shadowRoot.querySelector('.steps');
     const form = this.querySelector('form');
@@ -70,13 +70,13 @@ class iamMultiStep extends HTMLElement {
       const fieldsetID = fieldset.getAttribute('data-title');
 
       if (fieldset.querySelector('.is-invalid')) {
-        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element, index) => {
+        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element) => {
           element.classList.add('active');
         });
 
         break;
       } else {
-        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element, index) => {
+        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${fieldsetID}"]`)).forEach((element) => {
           element.classList.add('valid');
         });
       }
@@ -86,14 +86,14 @@ class iamMultiStep extends HTMLElement {
     MultiStepComponent.addEventListener(
       'invalid',
       (function () {
-        return function (e) {
+        return function (e): any {
           e.preventDefault();
         };
       })(),
       true
     );
 
-    function validateFieldset(button) {
+    function validateFieldset(button): void {
       const currentFieldset = MultiStepComponent.querySelector(`fieldset.active`)
         ? MultiStepComponent.querySelector(`fieldset.active`)
         : MultiStepComponent.querySelector(`fieldset[data-title]`);
@@ -102,32 +102,28 @@ class iamMultiStep extends HTMLElement {
 
       currentFieldset.classList.add('was-validated');
 
-      Array.from(currentFieldset.querySelectorAll('input')).forEach((input, index) => {
+      Array.from(currentFieldset.querySelectorAll('input')).forEach((input) => {
         if (!input.checkValidity()) isFieldsetValid = false;
       });
 
       // If valid mode to next field set
       if (!isFieldsetValid) {
-        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element, index) => {
-            element.classList.remove('valid');
-          }
-        );
+        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach((element) => {
+          element.classList.remove('valid');
+        });
 
         Array.from(MultiStepComponent.shadowRoot.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element, index) => {
+          (element) => {
             element.classList.remove('valid');
           }
         );
       } else {
-        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element, index) => {
-            element.classList.add('valid');
-          }
-        );
+        Array.from(MultiStepComponent.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach((element) => {
+          element.classList.add('valid');
+        });
 
         Array.from(MultiStepComponent.shadowRoot.querySelectorAll(`[data-title="${currentFieldsetID}"]`)).forEach(
-          (element, index) => {
+          (element) => {
             element.classList.add('valid');
           }
         );
@@ -142,10 +138,10 @@ class iamMultiStep extends HTMLElement {
           `.steps button[data-title="${button.getAttribute('data-title')}"]`
         );
 
-        Array.from(MultiStepComponent.querySelectorAll('button')).forEach((button, index) => {
+        Array.from(MultiStepComponent.querySelectorAll('button')).forEach((button) => {
           button.classList.remove('active');
         });
-        Array.from(MultiStepComponent.querySelectorAll('fieldset')).forEach((button, index) => {
+        Array.from(MultiStepComponent.querySelectorAll('fieldset')).forEach((button) => {
           button.classList.remove('active');
         });
 
@@ -202,11 +198,11 @@ class iamMultiStep extends HTMLElement {
     trackComponent(MultiStepComponent, 'iam-multi-step', []);
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-image'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-total': {
         if (this.shadowRoot.querySelector('.card__total'))

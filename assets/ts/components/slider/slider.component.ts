@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -38,7 +36,8 @@ class iamSlider extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const slider = this;
     const minElement = this.shadowRoot.querySelector('.min');
     const maxElement = this.shadowRoot.querySelector('.max');
@@ -56,7 +55,7 @@ class iamSlider extends HTMLElement {
       stepperStart = 'touchstart';
     }
 
-    const stepperFunction = function (input, eventType) {
+    const stepperFunction = function (input): void {
       const value = input.value;
 
       const min = slider.shadowRoot.querySelector('.is-first').getAttribute('min');
@@ -118,16 +117,16 @@ class iamSlider extends HTMLElement {
     const sliders = this.shadowRoot.querySelectorAll('input');
 
     Array.from(inputs).forEach((input, index) => {
-      input.addEventListener('keyup', function (event) {
+      input.addEventListener('keyup', function () {
         sliders[index].value = input.value;
         stepperFunction(sliders[index]);
       });
-      input.addEventListener('keydown', function (event) {
+      input.addEventListener('keydown', function () {
         sliders[index].value = input.value;
         stepperFunction(sliders[index]);
       });
 
-      input.addEventListener('change', function (event) {
+      input.addEventListener('change', function () {
         sliders[index].value = input.value;
         stepperFunction(sliders[index]);
       });
@@ -136,7 +135,7 @@ class iamSlider extends HTMLElement {
     Array.from(sliders).forEach((input, index) => {
       stepperFunction(input, 'start');
 
-      input.addEventListener(stepperStart, function (event) {
+      input.addEventListener(stepperStart, function () {
         clearInterval(stepperInterval);
         stepperInterval = setInterval(function () {
           stepperFunction(input, 'drag');
@@ -144,11 +143,11 @@ class iamSlider extends HTMLElement {
         }, 10);
       });
 
-      input.addEventListener(stepperEvent, function (event) {
+      input.addEventListener(stepperEvent, function () {
         clearInterval(stepperInterval);
       });
 
-      input.addEventListener('change', function (event) {
+      input.addEventListener('change', function () {
         clearInterval(stepperInterval);
         stepperFunction(input, 'click');
         inputs[index].value = input.value;

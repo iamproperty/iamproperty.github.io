@@ -1,4 +1,3 @@
-// @ts-nocheck
 import createAppliedFilters from '../../modules/applied-filters';
 
 // Data layer Web component created
@@ -35,7 +34,7 @@ class iamAppliedFilters extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     createAppliedFilters(this, this.shadowRoot.querySelector('.applied-filters'));
   }
 }

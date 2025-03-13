@@ -1,6 +1,5 @@
-// @ts-nocheck
-const extendDialogs = (body) => {
-  Array.from(body.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
+const extendDialogs = (body): void => {
+  Array.from(body.querySelectorAll('dialog[open]')).forEach((dialog) => {
     const parent = dialog.closest('.dialog__wrapper');
 
     if (!parent) {
@@ -36,7 +35,7 @@ const extendDialogs = (body) => {
       }
 
       // When the modal is opened we want to make sure any duplicate checkboxes are matching the originals
-      Array.from(dialog.querySelectorAll('[data-duplicate]')).forEach((element, index) => {
+      Array.from(dialog.querySelectorAll('[data-duplicate]')).forEach((element) => {
         const id = element.getAttribute('data-duplicate');
         const originalInput = document.getElementById(id);
 
@@ -62,7 +61,7 @@ const extendDialogs = (body) => {
       dialog.close();
 
       // Remove active class from exiting active buttons
-      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement, index) => {
+      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement) => {
         btnElement.classList.remove('active');
       });
 
@@ -86,7 +85,7 @@ const extendDialogs = (body) => {
       const dialog = event.target.closest('dialog[open]');
 
       // Remove active class from exiting active buttons
-      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement, index) => {
+      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement) => {
         btnElement.classList.remove('active');
       });
 
@@ -152,7 +151,7 @@ const extendDialogs = (body) => {
       }
 
       // Remove active class from exiting active buttons
-      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement, index) => {
+      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement) => {
         btnElement.removeAttribute('aria-expanded');
       });
 
@@ -219,18 +218,16 @@ const extendDialogs = (body) => {
       if (document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]'))
         document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]').close();
 
-      Array.from(document.querySelectorAll('.dialog__wrapper:not([data-keep-open]) > button')).forEach(
-        (btnElement, index) => {
-          btnElement.removeAttribute('aria-expanded');
-        }
-      );
+      Array.from(document.querySelectorAll('.dialog__wrapper:not([data-keep-open]) > button')).forEach((btnElement) => {
+        btnElement.removeAttribute('aria-expanded');
+      });
     }
   });
 
   return null;
 };
 
-export const createDialog = (dialog) => {
+export const createDialog = (dialog): void => {
   // If you are using Vue eevents and bindings its recommended to add in the .mh-lg div manually to the dialog
   if (!dialog.querySelector(':scope .mh-lg') && !dialog.querySelector('iam-multi-step')) {
     dialog.innerHTML = `<div class="mh-lg">${dialog.innerHTML}</div>`;
