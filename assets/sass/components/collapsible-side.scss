@@ -1,4 +1,5 @@
 @use '../_func' as *;
+
 // Host
 :host {
   --colour-border: #e9e9e9;
@@ -121,7 +122,6 @@
   }
 
   // Content
-
   .side-menu-content {
     position: absolute;
     top: 0;
@@ -145,6 +145,7 @@
 
       width: rem(382);
     }
+
     @include media-breakpoint-up(md) {
       width: rem(304);
 
@@ -169,87 +170,7 @@
   }
 }
 
-// Links
-::slotted(*[slot='menu']) {
-  padding-left: rem(24);
-
-  @include media-breakpoint-up(sm) {
-    padding-left: rem(40);
-  }
-
-  @include media-breakpoint-up(md) {
-    padding-left: var(--container-padding-x-md);
-  }
-}
-
-::slotted(hr) {
-  border-bottom: 2px solid var(--colour-border) !important;
-  margin-right: rem(-40) !important;
-}
-
-::slotted(a[slot='menu']) {
-  display: block;
-
-  display: block !important;
-  line-height: rem(20) !important;
-  padding: rem(16) rem(40) rem(16) rem(24) !important;
-  margin: 0 !important;
-  flex-shrink: 0;
-  font-size: 1rem !important;
-  font-weight: normal !important;
-  text-decoration: none;
-
-  border-bottom: 2px solid var(--colour-border) !important;
-
-  margin-right: rem(-40) !important;
-
-  @include media-breakpoint-up(sm) {
-    padding-left: rem(40) !important;
-  }
-
-  @include media-breakpoint-up(md) {
-    padding-left: var(--container-padding-x-md) !important;
-  }
-  &:after {
-    display: none;
-  }
-
-  border-right: 2px solid var(--colour-border) !important;
-}
-
-::slotted(a[slot='menu']:where(:hover, :focus, [aria-expanded])) {
-  background-color: var(--side-link-hover) !important;
-}
-
-::slotted(a[slot='menu']:active) {
-  background-color: var(--side-link-hover) !important;
-  font-weight: bold !important;
-}
-
-::slotted(a[slot='menu'][aria-expanded]) {
-  background-color: var(--side-link-hover) !important;
-  font-weight: bold !important;
-  margin-right: #{rem(-40)} !important;
-  position: relative;
-
-  border-right: 2px solid var(--colour-info) !important;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: calc(100% + 4px);
-    margin-top: -2px;
-    width: 2px;
-    border-right: 2px solid var(--colour-info);
-    margin-right: -2px;
-
-    @media (forced-colors: active) {
-      border-right: 10px solid var(--colour-info);
-    }
-  }
-}
+// links moved to links.scss
 // #endregion
 
 // #region main content

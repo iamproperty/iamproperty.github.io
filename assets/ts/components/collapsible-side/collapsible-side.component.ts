@@ -1,4 +1,3 @@
-// @ts-nocheck
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -31,6 +30,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
 
         <div class="side-menu" part="side-menu">
           <button class="btn btn-compact fa-chevron-right btn-secondary btn-sm btn-collapse" part="btn">Open or close Collapsible menu</button>
+          
           <div class="side-menu-content closed" part="side-menu-content">
             <slot name="menu"></slot>
           </div>
@@ -42,35 +42,46 @@ class iamCollapsibleSideMenu extends HTMLElement {
 
       </div>
     `;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    
+    if (this.shadowRoot) {
+      this.shadowRoot.appendChild(template.content.cloneNode(true));
+    }
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    if (!this.shadowRoot) return;
+
     const sideMenu = this.shadowRoot.querySelector('.side-menu');
     const sideMenuContent = this.shadowRoot.querySelector('.side-menu-content');
     const mainContent = this.shadowRoot.querySelector('.main-content');
     const button = this.shadowRoot.querySelector('.side-menu > .btn');
 
-    // Load external CSS if needed
-    if (this.hasAttribute('data-css'))
-      this.shadowRoot
-        .querySelector('.styles')
-        .insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
+    if (!sideMenu || !sideMenuContent || !mainContent || !button) return;
 
-    // Set sde nav title
-    if (!this.hasAttribute('data-title')) this.setAttribute('data-title', 'configuration');
+    // Load external CSS if needed
+    if (this.hasAttribute('data-css')) {
+      const styles = this.shadowRoot.querySelector('.styles') as HTMLStyleElement;
+      if (styles) {
+          styles.insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
+      }
+    }
+
+    // Set side nav title
+    if (!this.hasAttribute('data-title')) {
+        this.setAttribute('data-title', 'configuration');
+    }
 
     sideMenuContent.insertAdjacentHTML('afterbegin', `<span class="h3">${this.getAttribute('data-title')}</span>`);
     mainContent.insertAdjacentHTML('afterbegin', `<span class="h3">${this.getAttribute('data-title')}</span>`);
 
-    if (this.querySelector(':scope > :is(h1,h2,h3,h4,h5,h6)')) {
-      this.querySelector(':scope > :is(h1,h2,h3,h4,h5,h6)').classList.add('h4');
-      this.querySelector(':scope > :is(h1,h2,h3,h4,h5,h6)').classList.add('main-content__title');
+    const titleElement = this.querySelector(':scope > :is(h1,h2,h3,h4,h5,h6)') as HTMLElement;
+    if (titleElement) {
+        titleElement.classList.add('h4', 'main-content__title');
     }
 
     if (this.hasAttribute('open') && window.innerWidth > 992) {
-      sideMenu.classList.add('open');
-      button.setAttribute('aria-expanded', true);
+        sideMenu.classList.add('open');
+        button.setAttribute('aria-expanded', 'true');
     }
 
     // Open the menu
@@ -80,7 +91,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
 
         setTimeout(function () {
           sideMenu.classList.add('open');
-          button.setAttribute('aria-expanded', true);
+          button.setAttribute('aria-expanded', 'true');
         }, 100);
       } else {
         sideMenu.classList.remove('open');
@@ -123,6 +134,26 @@ class iamCollapsibleSideMenu extends HTMLElement {
           }, 1000); // Delay until its close so the animation is broken
       }
     });
+
+    const sideMenuParentGroups = this.querySelectorAll('.parent')
+    const sideMenuParentGroupsTopLinks = this.querySelectorAll('.parent > li:first-of-type')
+
+    sideMenuParentGroupsTopLinks?.forEach(parentLink => {
+      parentLink.addEventListener('click', () => {
+        if (!parentLink || !parentLink.parentElement) return false // make sure elements exist
+
+        if (parentLink.parentElement.classList.contains('reveal')) {
+          parentLink.parentElement.classList.remove('reveal') // remove if clicking a revealed parent
+        }
+        else { // remove other reveals and add reveal to this one
+          sideMenuParentGroups?.forEach(parentGroup => {
+            parentGroup.classList.remove('reveal')
+          })
+
+          parentLink.parentElement.classList.add('reveal')
+        }
+      })
+    })
   }
 }
 

@@ -144,3 +144,109 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
 }
 
 // #endregion
+
+// #region Sidebar link styling including parent group styling
+iam-collapsible-side > * {
+  padding-left: rem(24);
+
+  @include media-breakpoint-up(sm) {
+    padding-left: rem(40);
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-left: var(--container-padding-x-md);
+  }
+}
+
+iam-collapsible-side hr {
+  border-bottom: 2px solid var(--colour-border) !important;
+  margin-right: rem(-40) !important;
+}
+
+iam-collapsible-side [class*="link"] {
+  display: block !important;
+  line-height: rem(20) !important;
+  padding: rem(16) rem(24) rem(16) rem(24) !important;
+  margin: 0 !important;
+  flex-shrink: 0;
+  font-size: 1rem !important;
+  font-weight: normal !important;
+  text-decoration: none !important;
+  border-bottom: 2px solid var(--colour-border) !important;
+  border-right: 2px solid var(--colour-border) !important;
+  margin-right: rem(-40) !important;
+
+  &::after {
+    display: none !important;
+  }
+
+  i { // icon
+    margin-right: rem(8) !important;
+  }
+
+  @include media-breakpoint-up(sm) {
+    padding-left: rem(24) !important;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-left: var(--container-padding-x-md) !important;
+  }
+}
+
+iam-collapsible-side a {
+  &:hover, &:focus, &[aria-expanded] {
+    background-color: #ededed !important;
+  }
+}
+
+iam-collapsible-side [class*="active"] {
+  background-color: #e8f9fd !important;
+  border-right-color: #1dbde6 !important;
+  border-right-width: 3px !important;
+}
+
+// Parent links
+iam-collapsible-side {
+  .parent {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+
+    li:first-of-type {
+      a {
+        padding-right: rem(40) !important;
+
+        &::before {
+          position: absolute;
+          display: block;
+          content: '\f055';
+          font-family: 'Font Awesome 6 Pro';
+          right: 20px;
+          font-weight: 300;
+        }
+      }
+    }
+
+    li:not(:first-of-type) {
+      display: none;
+
+      a {
+        padding-left: rem(90) !important;
+      }
+    }
+
+    &.reveal {
+      li:first-of-type {
+        a::before {
+          content: '\f056';
+          font-weight: bold;
+        }
+      }
+
+      li:not(:first-of-type) {
+        display: block;
+      }
+    }
+  }
+}
+// #endregion
