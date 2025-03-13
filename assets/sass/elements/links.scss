@@ -195,13 +195,15 @@ iam-collapsible-side [class*="link"] {
 
 iam-collapsible-side a {
   &:hover, &:focus, &[aria-expanded] {
-    background-color: #ededed !important;
+    &:not([class*="active"]) {
+      background-color: var(--colour-light) !important;
+    }
   }
 }
 
 iam-collapsible-side [class*="active"] {
-  background-color: #e8f9fd !important;
-  border-right-color: #1dbde6 !important;
+  background-color: var(--colour-activeLink) !important;
+  border-right-color: var(--colour-activeLinkBorder) !important;
   border-right-width: 3px !important;
 }
 
@@ -213,6 +215,8 @@ iam-collapsible-side {
     list-style: none;
 
     li:first-of-type {
+      cursor: pointer;
+      
       a {
         padding-right: rem(40) !important;
 
