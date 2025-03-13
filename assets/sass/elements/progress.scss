@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+@include layer('elements') {
+
 :is(label, .label):has(progress) {
   position: relative;
   max-width: $input-max-width;
@@ -201,3 +204,4 @@ label:has(.progress--circular):after {
 }
 
 // #endregion
+}

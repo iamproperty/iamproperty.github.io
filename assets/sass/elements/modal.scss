@@ -1,6 +1,9 @@
 @use 'sass:math';
 @use '../_func' as *;
 
+$layers: 'true' !default;
+@include layer('elements') {
+
 // #region modal styling
 *:not(.dialog__wrapper) > dialog[open] {
 }
@@ -155,14 +158,15 @@ dialog::backdrop {
     text-rendering: auto;
     font-family: 'Font Awesome 6 Pro';
     font-size: 3rem;
-    @include media-breakpoint-up(md) {
-      font-size: 4rem;
-    }
     margin-top: 0;
     margin-bottom: rem(24);
     line-height: 1;
     color: var(--colour-heading);
     clear: both;
+
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
   }
 
   &:has(> i):before {
@@ -173,15 +177,16 @@ dialog::backdrop {
     display: var(--fa-display, inline-block);
     line-height: 1;
     font-size: 3rem;
-    @include media-breakpoint-up(md) {
-      font-size: 4rem;
-    }
     margin-top: 0;
     margin-bottom: rem(24);
     line-height: 1;
     color: var(--colour-heading);
     clear: both;
 
+    @include media-breakpoint-up(md) {
+      font-size: 4rem;
+    }
+    
     &:has(> i) {
       position: relative;
     }
@@ -425,3 +430,4 @@ dialog:has(.embed) {
   }
 }
 // #endregion
+}

@@ -1,5 +1,8 @@
 @use 'sass:math';
-@use '../_func.scss' as *;
+@use '../_func' as *;
+
+$layers: 'true' !default;
+@include layer('elements') {
 
 // #region container
 .container {
@@ -190,3 +193,4 @@ main > .row {
   }
 }
 // #endregion
+}

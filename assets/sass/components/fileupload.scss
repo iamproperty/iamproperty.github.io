@@ -1,3 +1,4 @@
+@use'sass:map';
 @use '../_func' as *;
 // #region file upload field
 
@@ -21,9 +22,9 @@
     display: block;
     padding-bottom: 2rem;
 
-    font-size: rem(map-get($heading-sizes, 'h4_fs'));
-    line-height: rem(map-get($heading-sizes, 'h4_lh'));
-    padding-bottom: rem(map-get($heading-sizes, 'h4_pb'));
+    font-size: rem(map.get($heading-sizes, 'h4_fs'));
+    line-height: rem(map.get($heading-sizes, 'h4_lh'));
+    padding-bottom: rem(map.get($heading-sizes, 'h4_pb'));
     max-width: var(--content-max-width);
   }
 

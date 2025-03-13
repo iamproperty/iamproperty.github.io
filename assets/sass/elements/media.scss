@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+@include layer('elements') {
+
 figure {
   margin: 0 0 1rem;
 }
@@ -17,4 +20,6 @@ img {
   > img:first-child:last-child {
     object-fit: cover;
   }
+}
+
 }

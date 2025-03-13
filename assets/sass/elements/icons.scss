@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+@include layer('elements') {
+
 .icon--xs {
   font-size: rem(16);
 }
@@ -22,4 +25,6 @@
 
 [class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
   font-weight: 400;
+}
+
 }

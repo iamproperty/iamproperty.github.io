@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+@include layer('elements') {
+
 .admin-panel {
   --padding-x: #{rem(24)};
   --padding-top: #{rem(16)};
@@ -169,13 +172,13 @@
 
   iam-actionbar {
     background: var(--colour-canvas);
+    margin-inline: calc(var(--padding-x) * -1);
+    margin-bottom: var(--padding-top);
 
     @include light-mode {
       background: #eeeeee;
     }
 
-    margin-inline: calc(var(--padding-x) * -1);
-    margin-bottom: var(--padding-top);
 
     &:first-child {
       margin-top: calc(var(--padding-top) * -1);
@@ -236,3 +239,4 @@ details.admin-panel:not([open]) {
   }
 }
 // #endregion
+}

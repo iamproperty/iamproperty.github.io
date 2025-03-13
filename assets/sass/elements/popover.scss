@@ -1,6 +1,9 @@
 @use 'sass:math';
 @use '../_func' as *;
 
+$layers: 'true' !default;
+@include layer('elements') {
+
 // #region popover styling
 .dialog__wrapper {
   position: relative;
@@ -72,14 +75,14 @@
     &.dialog--list {
       width: fit-content !important;
 
-      @include media-breakpoint-up(sm) {
-        width: max-content !important;
-      }
-
       min-width: rem(140) !important;
       max-width: rem(280) !important;
       padding: rem(16);
       margin: 0;
+
+      @include media-breakpoint-up(sm) {
+        width: max-content !important;
+      }
 
       hr {
         height: 2px;
@@ -193,3 +196,4 @@
   display: none;
 }
 // #endregion
+}

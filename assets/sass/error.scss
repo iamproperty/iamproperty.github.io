@@ -3,18 +3,18 @@
 // Set mobile only variable so that the media query mixin doesn't print out non mobile rules
 @use '_func' as *;
 
+@use '_corefiles';
+@use '_grid';
+@use '_bs_grid';
+@use '_utilities';
+@use '_utility-mixins';
+
 @include layer('reset') {
   html {
     --font-body: arial, sans-serif !important;
     --font-heading: arial, sans-serif !important;
   }
 }
-
-@import '_corefiles';
-@import '_grid';
-@import '_bs_grid';
-@import '_utilities';
-@import '_utility-mixins';
 
 @include layer('elements') {
   .h1 {

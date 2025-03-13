@@ -1,6 +1,6 @@
 @use '../_func.scss' as *;
 @use 'charts.module.scss' as *;
-@import '../elements/buttons.scss';
+@use '../elements/buttons.scss' as *;
 
 // #region Hide data sets
 .chart__outer > input[type='checkbox']:not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child) {

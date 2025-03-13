@@ -1,3 +1,9 @@
+@use 'sass:map';
+@use '../_func' as *;
+
+$layers: 'true' !default;
+@include layer('elements') {
+
 details {
   display: block;
 
@@ -111,7 +117,7 @@ iam-accordion details {
 
     font-size: rem(18);
     line-height: var(--line-height);
-    padding-bottom: rem(map-get($heading-sizes, 'h3_pb'));
+    padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
     font-weight: 700;
     max-width: 100%;
 
@@ -131,9 +137,9 @@ iam-accordion details {
     }
 
     @include media-breakpoint-up(sm) {
-      font-size: rem(map-get($heading-sizes, 'h3_fs_sm'));
-      --line-height: #{rem(map-get($heading-sizes, 'h3_lh_sm'))};
-      padding-bottom: rem(map-get($heading-sizes, 'h3_pb_sm'));
+      font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
+      --line-height: #{rem(map.get($heading-sizes, 'h3_lh_sm'))};
+      padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
       font-weight: 900;
     }
   }
@@ -186,4 +192,5 @@ dialog iam-accordion details {
   &::before {
     content: '';
   }
+}
 }

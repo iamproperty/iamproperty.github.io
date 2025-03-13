@@ -1,7 +1,7 @@
 @use '../_func.scss' as *;
 
-@import './buttons--global.scss';
-@import './buttons--secondary.scss';
-@import './buttons--tertiary.scss';
-@import './buttons--action.scss';
-@import './buttons--compact.scss';
+@use './buttons--global.scss';
+@use './buttons--secondary.scss';
+@use './buttons--tertiary.scss';
+@use './buttons--action.scss';
+@use './buttons--compact.scss';

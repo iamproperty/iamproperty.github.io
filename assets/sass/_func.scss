@@ -11,8 +11,14 @@ $varsMD: () !default;
 
 $prefix: '';
 
-@import '_functions/functions';
-@import '_functions/variables';
-@import '_functions/mixins';
-@import '_functions/bs_utilities';
-@import '_functions/utility-mixins';
+@forward '_functions/functions';
+
+@forward '_functions/variables' with (
+  $vars: $vars,
+  $compatible: $compatible
+);
+@forward '_functions/mixins' with (
+  $layers: $layers
+);
+@forward '_functions/bs_utilities';
+@forward '_functions/utility-mixins';

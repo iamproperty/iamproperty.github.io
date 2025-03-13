@@ -1,4 +1,7 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
+
+$layers: 'true' !default;
+@include layer('elements') {
 
 // #region reset
 a {
@@ -94,6 +97,9 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
     display: inline;
     margin: 0;
     text-decoration: underline;
+    text-underline-offset: 0.25rem;
+    text-decoration-thickness: 0.125rem;
+    font-size: inherit;
 
     &:after {
       display: none;
@@ -109,10 +115,6 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
       }
     }
 
-    text-decoration: underline;
-    text-underline-offset: 0.25rem;
-    text-decoration-thickness: 0.125rem;
-    font-size: inherit;
 
     &:not([disabled]):is(:hover, :focus, .hover, :focus-within) {
       color: var(--colour-hover);
@@ -129,21 +131,22 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
 
 // #region Support card component
 :is(a, button, label):has(.card, iam-card) {
-  &:before {
-    display: none;
-  }
+
   border: none;
   background: none;
   padding: 0;
   display: flex;
   margin-bottom: 1.5rem;
+  outline: none !important;
+  text-decoration: none;
+
+  &:before {
+    display: none;
+  }
 
   &:not([class*='col']) {
     margin: 0 0 rem(24) 0;
   }
-
-  outline: none !important;
-  text-decoration: none;
 
   &:not(.d-inline-block):not([class*='col']) {
     width: 100%;
@@ -155,3 +158,4 @@ a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
 }
 
 // #endregion
+}

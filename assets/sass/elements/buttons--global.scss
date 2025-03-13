@@ -1,4 +1,7 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
+
+$layers: 'true' !default;
+@include layer('elements') {
 
 *,
 *::before,
@@ -47,6 +50,32 @@ button,
   --btn-font-size: #{rem(18)};
   --btn-line-height: #{rem(20)};
 
+
+  display: inline-block;
+  font-weight: bold;
+  text-align: left;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+
+  color: var(--colour-btn);
+
+  font-size: var(--btn-font-size);
+  line-height: var(--btn-line-height);
+  padding: var(--btn-padding-block) var(--btn-padding-inline);
+  border-radius: rem(24);
+  margin-bottom: var(--btn-margin);
+
+  transition:
+    background 0.5s,
+    color 0.5s;
+  height: auto;
+  max-width: fit-content;
+  appearance: none;
+  white-space: nowrap;
+
+
   @include media-breakpoint-up(sm) {
     --btn-margin: #{rem(24)};
   }
@@ -60,38 +89,15 @@ button,
     --colour-btn: #{$colour-inverted};
   }
 
-  display: inline-block;
-  font-weight: bold;
-  text-align: left;
-  text-decoration: none;
-  vertical-align: middle;
-  cursor: pointer;
-  user-select: none;
-
-  color: var(--colour-btn);
-
   &:not(.border-0) {
     background: var(--colour-btn-bg);
     border: var(--btn-border-width) solid var(--colour-btn-border);
   }
 
-  font-size: var(--btn-font-size);
-  line-height: var(--btn-line-height);
-  padding: var(--btn-padding-block) var(--btn-padding-inline);
-  border-radius: rem(24);
-  margin-bottom: var(--btn-margin);
 
   &:not(:last-child) {
     margin-right: var(--btn-margin);
   }
-
-  transition:
-    background 0.5s,
-    color 0.5s;
-  height: auto;
-  max-width: fit-content;
-  appearance: none;
-  white-space: nowrap;
 
   a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
   &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
@@ -314,3 +320,4 @@ button,
   }
 }
 // #endregion
+}

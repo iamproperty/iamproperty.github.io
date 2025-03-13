@@ -5,9 +5,6 @@
   --side-link-hover: var(--colour-canvas-2);
   grid-column: full-width;
 
-  @include light-mode() {
-    --side-link-hover: #eeeeee;
-  }
 
   display: block;
   min-height: calc(100vh - var(--nav-height));
@@ -16,6 +13,10 @@
   width: 100%;
   overflow: hidden;
   position: relative;
+
+  @include light-mode() {
+    --side-link-hover: #eeeeee;
+  }
 
   @include media-breakpoint-up(md) {
     max-height: calc(100vh - var(--nav-height));
@@ -199,6 +200,7 @@
   font-weight: normal !important;
   text-decoration: none;
 
+  border-right: 2px solid var(--colour-border) !important;
   border-bottom: 2px solid var(--colour-border) !important;
 
   margin-right: rem(-40) !important;
@@ -214,7 +216,6 @@
     display: none;
   }
 
-  border-right: 2px solid var(--colour-border) !important;
 }
 
 ::slotted(a[slot='menu']:where(:hover, :focus, [aria-expanded])) {

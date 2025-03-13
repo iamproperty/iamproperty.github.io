@@ -1,23 +1,27 @@
-@import 'elements/brand.scss';
-@import 'elements/icons.scss';
-@import 'elements/media.scss';
-@import 'elements/type.scss';
+@use './func' as *;
+
+$layers: 'true' !default;
+
+@use 'elements/brand.scss' with ($layers:$layers);
+@use 'elements/icons.scss' with ($layers:$layers);
+@use 'elements/media.scss' with ($layers:$layers);
+@use 'elements/type.scss' with ($layers:$layers);
 // elements
-@import 'elements/lists.scss';
-@import 'elements/tooltips.scss';
-@import 'elements/container.scss';
-@import 'elements/table.element.scss';
+@use 'elements/lists.scss' with ($layers:$layers);
+@use 'elements/tooltips.scss' with ($layers:$layers);
+@use 'elements/container.scss' with ($layers:$layers);
+@use 'elements/table.element.scss' with ($layers:$layers);
 
-@import 'elements/links.scss';
-@import 'elements/buttons';
-@import 'elements/dialog.scss';
-@import 'elements/popover.scss';
-@import 'elements/modal.scss';
-@import 'elements/admin-panel.scss';
+@use 'elements/links.scss' with ($layers:$layers);
+@use 'elements/buttons' with ($layers:$layers);
+@use 'elements/dialog.scss' with ($layers:$layers);
+@use 'elements/popover.scss' with ($layers:$layers);
+@use 'elements/modal.scss' with ($layers:$layers);
+@use 'elements/admin-panel.scss' with ($layers:$layers);
 
-@import 'elements/forms.scss';
+@use 'elements/forms.scss' with ($layers:$layers);
 
-@import 'elements/badge-tag.scss';
-@import 'elements/details.scss';
+@use 'elements/badge-tag.scss' with ($layers:$layers);
+@use 'elements/details.scss' with ($layers:$layers);
 
-@import 'elements/progress.scss';
+@use 'elements/progress.scss' with ($layers:$layers);

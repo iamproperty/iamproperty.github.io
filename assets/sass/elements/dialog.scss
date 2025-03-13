@@ -1,6 +1,9 @@
 @use 'sass:math';
 @use '../_func' as *;
 
+$layers: 'true' !default;
+@include layer('elements') {
+
 // non-js fallback
 body:not(.js-enabled) dialog:not([open]):target {
   display: block;
@@ -38,3 +41,4 @@ dialog[open] {
   }
 }
 // #endregion
+}

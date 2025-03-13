@@ -16,12 +16,12 @@
   margin-inline: auto;
   display: block;
 
+  position: relative;
+  height: auto;
+
   @include media-breakpoint-up(md) {
     padding-top: rem(84);
   }
-
-  position: relative;
-  height: auto;
 
   > picture {
     display: block;

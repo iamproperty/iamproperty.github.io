@@ -1,4 +1,7 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
+
+$layers: 'true' !default;
+@include layer('elements') {
 
 // #region secondary button
 .btn-secondary {
@@ -16,3 +19,4 @@ a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
   color: var(--colour-btn-secondary-hover);
 }
 // #endregion
+}

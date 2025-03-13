@@ -1,20 +1,20 @@
 @use 'sass:math';
 @use '_func' as *;
 
-@layer reset, elements, components, templates, overrides, utilities;
-
 $root: ':root' !default;
 $layers: 'true' !default;
 
 // Foundations
-@include layer('reset') {
-  @import 'foundations/root.scss';
-  @import 'foundations/reboot.scss';
-}
 
-@include layer('elements') {
-  @import '_elements.scss';
-}
+@use 'foundations/root.scss' with (
+  $root: $root,
+  $layers: $layers
+);
+@use 'foundations/reboot.scss';
+
+
+@use '_elements.scss';
+
 
 @include layer('components') {
   // Deal with preloaded state of native components

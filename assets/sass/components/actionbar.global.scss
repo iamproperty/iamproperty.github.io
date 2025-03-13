@@ -2,25 +2,23 @@
 
 // #region Default view
 iam-actionbar {
+  --actionbar-radius: 0;
   background-color: #fcfcfc;
+  display: block;
+  border-top-left-radius: rem(10);
+  border-top-right-radius: rem(10);
+
 
   @include dark-mode() {
     background-color: var(--colour-canvas);
   }
 
-  display: block;
-  border-top-left-radius: rem(10);
-  border-top-right-radius: rem(10);
-
-  --actionbar-radius: 0;
 }
 // #endregion
 
 // #region at the top
 main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
-  @include light-mode() {
-    background-color: #e6eaec;
-  }
+
   border-radius: rem(8);
   margin: var(--container-padding);
   margin-bottom: 2rem;
@@ -28,6 +26,10 @@ main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
 
   &:first-child {
     padding-top: 0;
+  }
+
+  @include light-mode() {
+    background-color: #e6eaec;
   }
 
   @include media-breakpoint-up(sm) {

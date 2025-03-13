@@ -1,4 +1,7 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
+
+$layers: 'true' !default;
+@include layer('elements') {
 
 // #region reset
 table {
@@ -130,3 +133,4 @@ table.border-0 {
   --inner-border-width: 0px;
 }
 // #endregion
+}

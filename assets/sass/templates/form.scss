@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use 'sass:math';
+
 @use '../_func' as *;
 
 body:has(.template--form) {
@@ -23,15 +26,15 @@ body:has(.template--form) {
 
   // Make H2's look like H3's
   :is(h2, .h2) {
-    font-size: rem(map-get($heading-sizes, 'h3_fs'));
-    line-height: rem(map-get($heading-sizes, 'h3_lh'));
-    padding-bottom: rem(map-get($heading-sizes, 'h3_pb'));
+    font-size: rem(map.get($heading-sizes, 'h3_fs'));
+    line-height: rem(map.get($heading-sizes, 'h3_lh'));
+    padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
     max-width: var(--content-max-width);
 
     @include media-breakpoint-up(sm) {
-      font-size: rem(map-get($heading-sizes, 'h3_fs_sm'));
-      line-height: rem(map-get($heading-sizes, 'h3_lh_sm'));
-      padding-bottom: rem(map-get($heading-sizes, 'h3_pb_sm'));
+      font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
+      line-height: rem(map.get($heading-sizes, 'h3_lh_sm'));
+      padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
     }
   }
 

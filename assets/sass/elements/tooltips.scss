@@ -1,4 +1,4 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 @mixin tooltip() {
   display: block;
@@ -40,6 +40,9 @@
     margin-bottom: -1px;
   }
 }
+
+$layers: 'true' !default;
+@include layer('elements') {
 
 abbr[title] {
   text-underline-offset: 0.2em;
@@ -149,4 +152,6 @@ abbr[title] {
       }
     }
   }
+}
+
 }

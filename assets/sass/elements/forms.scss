@@ -1,8 +1,15 @@
+@use 'sass:map';
+@use 'sass:math';
+
 @use '../_func' as *;
 
 $icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
 
 $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
+
+$layers: 'true' !default;
+@include layer('elements') {
+
 
 // #region RESETS
 
@@ -275,7 +282,7 @@ progress {
   // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
   &::-webkit-date-and-time-value {
     // Multiply line-height by 1em if it has no unit
-    height: if(unit($input-line-height) == '', $input-line-height * 1em, $input-line-height);
+    height: if(math.unit($input-line-height) == '', $input-line-height * 1em, $input-line-height);
   }
 
   // Disabled inputs
@@ -313,8 +320,8 @@ legend {
   clear: both;
   display: block;
   float: none;
-  font-size: rem(map-get($heading-sizes, 'h4_fs'));
-  line-height: rem(map-get($heading-sizes, 'h4_lh'));
+  font-size: rem(map.get($heading-sizes, 'h4_fs'));
+  line-height: rem(map.get($heading-sizes, 'h4_lh'));
   padding-bottom: 0.5rem;
   max-width: var(--content-max-width);
   min-width: 100%;
@@ -1298,3 +1305,4 @@ iam-slider input::-webkit-inner-spin-button {
   order: 3;
 }
 // #endregion
+}

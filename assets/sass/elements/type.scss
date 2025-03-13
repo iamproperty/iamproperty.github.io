@@ -1,5 +1,8 @@
 @use 'sass:map';
-@use '../_func.scss' as *;
+@use '../_func' as *;
+
+$layers: 'true' !default;
+@include layer('elements') {
 
 /* Duplicated from bootstrap reboot so that the type file will compile */
 mark {
@@ -36,58 +39,58 @@ mark {
 }
 
 :is(.h1, h1) {
-  --line-height: #{rem(map-get($heading-sizes, 'h1_lh'))};
+  --line-height: #{rem(map.get($heading-sizes, 'h1_lh'))};
 
-  font-size: rem(map-get($heading-sizes, 'h1_fs'));
-  padding-bottom: rem(map-get($heading-sizes, 'h1_pb'));
+  font-size: rem(map.get($heading-sizes, 'h1_fs'));
+  padding-bottom: rem(map.get($heading-sizes, 'h1_pb'));
   font-weight: 900;
 
   @include media-breakpoint-up(sm) {
-    font-size: rem(map-get($heading-sizes, 'h1_fs_sm'));
-    --line-height: #{rem(map-get($heading-sizes, 'h1_lh_sm'))};
-    padding-bottom: rem(map-get($heading-sizes, 'h1_pb_sm'));
+    font-size: rem(map.get($heading-sizes, 'h1_fs_sm'));
+    --line-height: #{rem(map.get($heading-sizes, 'h1_lh_sm'))};
+    padding-bottom: rem(map.get($heading-sizes, 'h1_pb_sm'));
   }
 }
 
 :is(h2, .h2) {
-  font-size: rem(map-get($heading-sizes, 'h2_fs'));
-  --line-height: #{rem(map-get($heading-sizes, 'h2_lh'))};
-  padding-bottom: rem(map-get($heading-sizes, 'h1_pb'));
+  font-size: rem(map.get($heading-sizes, 'h2_fs'));
+  --line-height: #{rem(map.get($heading-sizes, 'h2_lh'))};
+  padding-bottom: rem(map.get($heading-sizes, 'h1_pb'));
   font-weight: 900;
 
   @include media-breakpoint-up(sm) {
-    font-size: rem(map-get($heading-sizes, 'h2_fs_sm'));
-    --line-height: #{rem(map-get($heading-sizes, 'h2_lh_sm'))};
-    padding-bottom: rem(map-get($heading-sizes, 'h2_pb_sm'));
+    font-size: rem(map.get($heading-sizes, 'h2_fs_sm'));
+    --line-height: #{rem(map.get($heading-sizes, 'h2_lh_sm'))};
+    padding-bottom: rem(map.get($heading-sizes, 'h2_pb_sm'));
   }
 }
 
 :is(h3, .h3) {
-  font-size: rem(map-get($heading-sizes, 'h3_fs'));
-  --line-height: #{rem(map-get($heading-sizes, 'h3_lh'))};
-  padding-bottom: rem(map-get($heading-sizes, 'h3_pb'));
+  font-size: rem(map.get($heading-sizes, 'h3_fs'));
+  --line-height: #{rem(map.get($heading-sizes, 'h3_lh'))};
+  padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
   max-width: var(--content-max-width);
   font-weight: 900;
 
   @include media-breakpoint-up(sm) {
-    font-size: rem(map-get($heading-sizes, 'h3_fs_sm'));
-    --line-height: #{rem(map-get($heading-sizes, 'h3_lh_sm'))};
-    padding-bottom: rem(map-get($heading-sizes, 'h3_pb_sm'));
+    font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
+    --line-height: #{rem(map.get($heading-sizes, 'h3_lh_sm'))};
+    padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
   }
 }
 
 :is(.h4, h4, .h5, h5, .h6, h6) {
-  font-size: rem(map-get($heading-sizes, 'h4_fs'));
-  --line-height: #{rem(map-get($heading-sizes, 'h4_lh'))};
-  padding-bottom: rem(map-get($heading-sizes, 'h4_pb'));
+  font-size: rem(map.get($heading-sizes, 'h4_fs'));
+  --line-height: #{rem(map.get($heading-sizes, 'h4_lh'))};
+  padding-bottom: rem(map.get($heading-sizes, 'h4_pb'));
   max-width: var(--content-max-width);
 
   /* The values for mobile and tablet are exactly the same, but if that changes this block needs to be re-instated 
   @include media-breakpoint-up(sm) {
 
-    font-size: rem(map-get($heading-sizes,"h4_fs_sm"));
-    line-height: rem(map-get($heading-sizes,"h4_lh_sm"));
-    padding-bottom: rem(map-get($heading-sizes,"h4_pb_sm"));
+    font-size: rem(map.get($heading-sizes,"h4_fs_sm"));
+    line-height: rem(map.get($heading-sizes,"h4_lh_sm"));
+    padding-bottom: rem(map.get($heading-sizes,"h4_pb_sm"));
   }
   */
 }
@@ -95,30 +98,30 @@ mark {
 
 p {
   margin-top: 0;
-  font-size: rem(map-get($heading-sizes, 'body_fs'));
-  line-height: rem(map-get($heading-sizes, 'body_lh'));
-  padding-bottom: rem(map-get($heading-sizes, 'body_end_pb'));
+  font-size: rem(map.get($heading-sizes, 'body_fs'));
+  line-height: rem(map.get($heading-sizes, 'body_lh'));
+  padding-bottom: rem(map.get($heading-sizes, 'body_end_pb'));
   max-width: var(--content-max-width);
   margin-bottom: 0;
 }
 
 p:has(+ p) {
-  padding-bottom: rem(map-get($heading-sizes, 'body_pb'));
+  padding-bottom: rem(map.get($heading-sizes, 'body_pb'));
 }
 
 :is(.lead, .strapline) {
-  font-size: rem(map-get($heading-sizes, 'lead_fs'));
-  line-height: rem(map-get($heading-sizes, 'lead_lh'));
-  padding-bottom: rem(map-get($heading-sizes, 'lead_pb'));
+  font-size: rem(map.get($heading-sizes, 'lead_fs'));
+  line-height: rem(map.get($heading-sizes, 'lead_lh'));
+  padding-bottom: rem(map.get($heading-sizes, 'lead_pb'));
   max-width: var(--content-max-width);
   font-weight: 700;
 }
 
 small,
 .small {
-  font-size: rem(map-get($heading-sizes, 'small_fs'));
-  line-height: rem(map-get($heading-sizes, 'small_lh'));
-  padding-bottom: rem(map-get($heading-sizes, 'small_pb'));
+  font-size: rem(map.get($heading-sizes, 'small_fs'));
+  line-height: rem(map.get($heading-sizes, 'small_lh'));
+  padding-bottom: rem(map.get($heading-sizes, 'small_pb'));
   max-width: var(--content-max-width);
   font-family: arial, sans-serif;
   font-weight: normal;
@@ -196,4 +199,6 @@ blockquote {
   text-decoration-color: var(--colour-secondary);
   text-decoration-thickness: rem(4);
   margin-bottom: rem(64);
+}
+
 }

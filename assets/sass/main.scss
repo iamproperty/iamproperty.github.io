@@ -2,6 +2,6 @@
 
 @use '_fonts';
 @use '_corefiles';
-@import '_grid';
-@import '_utility-mixins';
-@import '_print';
+@use '_grid';
+@use '_utility-mixins';
+@use '_print';

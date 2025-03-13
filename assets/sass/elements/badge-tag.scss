@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+@include layer('elements') {
+
 :is(.badge, .tag) {
   font-size: rem(16);
   line-height: rem(26);
@@ -96,4 +99,6 @@ iam-multiselect:not(:defined) .tag,
 .btn :is(.badge, .tag) {
   position: relative;
   top: -1px;
+}
+
 }
