@@ -2,7 +2,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 // non-js fallback
 body:not(.js-enabled) dialog:not([open]):target {

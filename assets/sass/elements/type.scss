@@ -2,7 +2,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 /* Duplicated from bootstrap reboot so that the type file will compile */
 mark {
@@ -45,7 +48,7 @@ mark {
   padding-bottom: rem(map.get($heading-sizes, 'h1_pb'));
   font-weight: 900;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     font-size: rem(map.get($heading-sizes, 'h1_fs_sm'));
     --line-height: #{rem(map.get($heading-sizes, 'h1_lh_sm'))};
     padding-bottom: rem(map.get($heading-sizes, 'h1_pb_sm'));
@@ -58,7 +61,7 @@ mark {
   padding-bottom: rem(map.get($heading-sizes, 'h1_pb'));
   font-weight: 900;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     font-size: rem(map.get($heading-sizes, 'h2_fs_sm'));
     --line-height: #{rem(map.get($heading-sizes, 'h2_lh_sm'))};
     padding-bottom: rem(map.get($heading-sizes, 'h2_pb_sm'));
@@ -72,7 +75,7 @@ mark {
   max-width: var(--content-max-width);
   font-weight: 900;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
     --line-height: #{rem(map.get($heading-sizes, 'h3_lh_sm'))};
     padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
@@ -86,7 +89,7 @@ mark {
   max-width: var(--content-max-width);
 
   /* The values for mobile and tablet are exactly the same, but if that changes this block needs to be re-instated 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
 
     font-size: rem(map.get($heading-sizes,"h4_fs_sm"));
     line-height: rem(map.get($heading-sizes,"h4_lh_sm"));

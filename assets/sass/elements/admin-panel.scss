@@ -1,7 +1,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 .admin-panel {
   --padding-x: #{rem(24)};
@@ -18,7 +21,7 @@ $layers: 'true' !default;
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
   overflow: hidden;
 
-  @include dark-mode() {
+  @include dark-mode($darkMode) {
     background-color: var(--colour-canvas-2);
     color: var(--colour-body);
 
@@ -175,7 +178,7 @@ $layers: 'true' !default;
     margin-inline: calc(var(--padding-x) * -1);
     margin-bottom: var(--padding-top);
 
-    @include light-mode {
+    @include light-mode($darkMode) {
       background: #eeeeee;
     }
 

@@ -2,7 +2,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 // #region container
 .container {
@@ -35,13 +38,13 @@ $layers: 'true' !default;
     --col-start: auto;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     [class*='sm-col-span-']:not(:first-child) {
       --col-start: auto;
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     [class*='md-col-span-']:not(:first-child) {
       --col-start: auto;
     }
@@ -84,7 +87,7 @@ $layers: 'true' !default;
     margin-right: -1.25rem;
     width: calc(100% + 2.5rem);
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(sm,$mobileOnly) {
       margin-left: auto;
       margin-right: auto;
       width: 100%;
@@ -143,7 +146,7 @@ main > .row {
     bottom: rem(-200);
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     &:not([class*='circle-pattern-']) > .circle {
       font-size: rem(450);
       top: rem(-50);
@@ -171,7 +174,7 @@ main > .row {
     left: rem(-175);
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     &.circle-pattern-2 > .circle {
       font-size: rem(450);
       top: rem(-75);
@@ -185,7 +188,7 @@ main > .row {
   }
 
   // Desktop container adjustment
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     > .circle {
       margin-left: rem(60);
       margin-right: rem(60);

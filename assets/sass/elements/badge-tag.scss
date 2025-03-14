@@ -1,7 +1,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 :is(.badge, .tag) {
   font-size: rem(16);

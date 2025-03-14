@@ -653,8 +653,7 @@
 </template>
 
 <style lang="scss">
-  $compatible: 'false';
-  @import '../../../assets/sass/_func';
+  @use '../../../assets/sass/_func' as *;
 
   @layer utilities {
     @for $i from 1 through 10 {
@@ -831,10 +830,9 @@
           .prevent-invert
         ),
       .invert-colours {
-        @if $compatible != 'true' {
+        
           @include invert-colours();
-        }
-
+        
         color: #{$colour-inverted};
       }
     }

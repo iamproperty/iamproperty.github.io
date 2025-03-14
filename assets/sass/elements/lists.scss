@@ -1,7 +1,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 ol,
 ul {
@@ -264,7 +267,7 @@ dd {
     background-color: var(--colour-success);
     border-color: var(--colour-success);
 
-    @include dark-mode {
+    @include dark-mode($darkMode) {
       background-color: var(--colour-complete);
       border-color: var(--colour-complete);
     }

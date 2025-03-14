@@ -1,13 +1,19 @@
 @use 'sass:math';
 @use '_func' as *;
 
-@use 'components/nav.preload';
-@use 'components/carousel.config';
-@use 'components/multiselect.preload';
-@use 'components/inline-edit.preload';
-@use 'components/charts.config.scss';
-@use 'components/menu.scss';
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
+@use 'components/nav.preload' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use 'components/carousel.config' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use 'components/multiselect.preload' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use 'components/inline-edit.preload' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use 'components/charts.config.scss' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use 'components/menu.scss' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+
+
+@include layer('components', $layers) {
 // Make sure the first
 main {
   position: relative;
@@ -19,7 +25,7 @@ main {
 
 // #region Undefined web components
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md,$mobileOnly) {
   iam-header:not(:defined) {
     min-height: rem(470);
   }
@@ -100,7 +106,7 @@ iam-search .optional-text {
 // Table dark mode support
 iam-table {
   tbody tr {
-    @include dark-mode() {
+    @include dark-mode($darkMode) {
       --hover-background: var(--colour-canvas);
 
       &:is(:hover, :focus-within, .hover) {
@@ -122,7 +128,7 @@ iam-table {
 
 iam-table {
   tr:has([type='checkbox']:checked) {
-    @include dark-mode() {
+    @include dark-mode($darkMode) {
       --row-bg: #000000;
     }
   }
@@ -134,7 +140,7 @@ iam-pagination {
 }
 
 iam-fileupload::part(file) {
-  @include dark-mode() {
+  @include dark-mode($darkMode) {
     background: var(--colour-canvas-2);
     border-color: var(--colour-canvas-2);
     color: var(--colour-body);
@@ -327,4 +333,5 @@ iam-bento-grid {
   .notice {
     display: none;
   }
+}
 }

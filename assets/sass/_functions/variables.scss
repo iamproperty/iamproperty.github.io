@@ -7,7 +7,6 @@ $vars: () !default;
 $varsSM: () !default;
 $varsMD: () !default;
 
-$compatible: 'false' !default;
 $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 $optionalText: 'true' !default;
@@ -2103,15 +2102,9 @@ $h6-font-size: rem(map.get($heading-sizes, 'h4_fs'));
 
 $heading-weight: 700;
 
-@if $compatible == 'true' {
-  $headings-font-family: $font-heading;
-  $headings-font-weight: $heading-weight;
-  $headings-color: $primary;
-} @else {
-  $headings-font-family: var(--font-heading);
-  $headings-font-weight: var(--heading-weight);
-  $headings-color: var(--colour-heading);
-}
+$headings-font-family: var(--font-heading);
+$headings-font-weight: var(--heading-weight);
+$headings-color: var(--colour-heading);
 
 $headings-margin-bottom: 0;
 $headings-font-style: normal;

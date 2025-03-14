@@ -2,7 +2,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 details {
   display: block;
@@ -43,7 +46,7 @@ iam-accordion details {
     padding-bottom: rem(42);
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     --inline-padding: #{rem(30)};
     --icon-top: #{rem(24)};
     --line-height: #{rem(24)};
@@ -136,7 +139,7 @@ iam-accordion details {
       font-family: 'Font Awesome 6 Pro';
     }
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(sm,$mobileOnly) {
       font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
       --line-height: #{rem(map.get($heading-sizes, 'h3_lh_sm'))};
       padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));

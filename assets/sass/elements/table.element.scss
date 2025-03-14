@@ -1,7 +1,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 // #region reset
 table {
@@ -102,7 +105,7 @@ tr td[colspan='100%']:first-child:last-child span {
   display: block;
   color: var(--colour-heading);
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     max-width: rem(1048);
   }
 }

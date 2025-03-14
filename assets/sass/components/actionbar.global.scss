@@ -1,5 +1,7 @@
 @use '../_func.scss' as *;
 
+$darkMode: 'true' !default;
+
 // #region Default view
 iam-actionbar {
   --actionbar-radius: 0;
@@ -9,7 +11,7 @@ iam-actionbar {
   border-top-right-radius: rem(10);
 
 
-  @include dark-mode() {
+  @include dark-mode($darkMode) {
     background-color: var(--colour-canvas);
   }
 
@@ -28,17 +30,17 @@ main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
     padding-top: 0;
   }
 
-  @include light-mode() {
+  @include light-mode($darkMode) {
     background-color: #e6eaec;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     box-shadow: none;
     margin-inline: 0;
     border-radius: 0;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     padding-inline: calc(50% - #{rem(556)} - 2rem);
   }
 }
@@ -53,7 +55,7 @@ iam-table iam-actionbar {
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     padding: 0 !important;
   }
 }

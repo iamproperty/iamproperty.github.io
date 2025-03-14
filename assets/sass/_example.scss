@@ -29,16 +29,16 @@ $layers: 'true' !default;
     }
 
     // Any media queries should be added after all of the root rulesets
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(sm,$mobileOnly) {
 
       min-height: rem(300);
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md,$mobileOnly) {
       min-height: rem(470);
     }
 
-    @include dark-mode() {
+    @include dark-mode($darkMode) {
       // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
       [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
         color: var(--colour-body);

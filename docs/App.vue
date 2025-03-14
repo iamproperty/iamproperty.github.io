@@ -83,7 +83,7 @@
 </template>
 
 <style lang="scss">
-  @import './assets/styles.scss';
+  @use './assets/styles.scss';
 
   @media screen and (max-width: 62em) {
     .nav__inner {

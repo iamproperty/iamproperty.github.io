@@ -1,7 +1,9 @@
 {
-  "css_size": "170kb",
+  "css_size": "171kb",
+  "css_mob_size": "153kb",
   "css_core_size": "125kb",
-  "js_size": "17kb",
+  "css_core_mob_size": "116kb",
+  "js_size": "16kb",
   "accordion_size": "1kb",
   "header_size": "3kb",
   "table_size": "42kb",
@@ -29,12 +31,12 @@
   "marketing_size": "2kb",
   "barchart_size": "45kb",
   "bento-grid_size": "3kb",
-  "Total_JS_size": "354kb",
+  "Total_JS_size": "353kb",
   "logo_size": "25kb",
   "img_size": "151kb",
   "img_count": 3,
   "fonts_size": "56kb",
   "fonts_count": 3,
-  "fulldate": "2025-03-12T11:28:52.337Z",
-  "date": "12-3-2025"
+  "fulldate": "2025-03-13T20:59:23.472Z",
+  "date": "13-3-2025"
 }

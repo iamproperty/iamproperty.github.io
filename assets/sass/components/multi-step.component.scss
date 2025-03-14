@@ -1,5 +1,7 @@
 @use '../_func.scss' as *;
 
+$darkMode: 'true' !default;
+
 *,
 *:before,
 *:after {
@@ -18,7 +20,7 @@
   min-height: 100%;
   padding-left: var(--dialog-padding);
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     padding-top: var(--dialog-padding);
     padding-left: calc(var(--dialog-padding) + #{rem(282)}) !important;
     display: flex;
@@ -105,7 +107,7 @@
     }
   }
 
-  @include dark-mode() {
+  @include dark-mode($darkMode) {
     button {
       color: rgba($color: #000000, $alpha: 0.5);
 
@@ -118,7 +120,7 @@
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     width: rem(282);
     height: 100%;
     flex-direction: column;

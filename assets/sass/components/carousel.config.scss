@@ -1,4 +1,10 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
+
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('components', $layers) {
 
 iam-carousel:defined {
   > div > *:last-child {
@@ -59,7 +65,7 @@ dialog:has(iam-carousel) {
   container-type: inline-size;
   --carousel-spacing: 2rem;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     min-width: rem(600);
     max-width: rem(600);
   }
@@ -76,3 +82,5 @@ dialog:has(iam-carousel:last-child) {
   }
 }
 // #endregion
+}
+

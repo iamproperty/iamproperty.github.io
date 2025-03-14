@@ -1,5 +1,11 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('components', $layers) {
+
 iam-multiselect .tag[slot='checked'] {
   margin-bottom: rem(8);
   order: var(--order, 1);
@@ -34,8 +40,9 @@ iam-multiselect:has(label[slot='checked']) {
   --display-button: block;
 }
 
-@include dark-mode() {
+@include dark-mode($darkMode) {
   iam-multiselect :is(.tag, .badge):not([slot='checked']) {
     color: var(--colour-heading);
   }
+}
 }

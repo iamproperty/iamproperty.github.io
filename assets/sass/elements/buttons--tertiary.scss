@@ -1,7 +1,10 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-@include layer('elements') {@use '../_func.scss' as *;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 // #region Tertiary Button
 

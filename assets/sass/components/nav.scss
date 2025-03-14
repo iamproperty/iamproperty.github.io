@@ -2,6 +2,10 @@
 
 @use '../_func' as *;
 
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
 :host {
   display: flex !important;
   flex-direction: row !important;
@@ -67,7 +71,7 @@
     }
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     margin: 0 0 0 rem(48);
     width: auto;
     padding-right: rem(24 + 6);
@@ -78,7 +82,7 @@
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     width: fit-content;
     height: auto;
     margin: 0 0 0 3rem;
@@ -91,7 +95,7 @@
     }
 
     .btn {
-      @include light-mode() {
+      @include light-mode($darkMode) {
         @include reset-colours();
       }
 
@@ -178,13 +182,13 @@
       flex-shrink: 0;
     }
 
-    @include dark-mode() {
+    @include dark-mode($darkMode) {
       --colour-link: var(--colour-white);
       @include invert-colours();
     }
 
     // The menu is always white unless in dark mode
-    @include light-mode() {
+    @include light-mode($darkMode) {
       background-color: var(--colour-white);
       @include reset-colours();
     }
@@ -230,7 +234,7 @@
     flex-grow: 1;
     position: relative;
 
-    @include light-mode() {
+    @include light-mode($darkMode) {
       background-color: #eeeeee;
     }
 
@@ -322,7 +326,7 @@
 // #endregion
 
 // #region desktop
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md,$mobileOnly) {
   :host {
     //max-width: 100%!important;
     padding-block: 0 !important;
@@ -375,12 +379,12 @@
     left: 0;
     width: 100%;
 
-    @include light-mode() {
+    @include light-mode($darkMode) {
       background-color: #eeeeee;
       @include reset-colours();
     }
 
-    @include dark-mode() {
+    @include dark-mode($darkMode) {
       @include invert-colours();
     }
 
@@ -467,7 +471,7 @@
   :host(.search-open) {
     background: #e6eaec !important;
 
-    @include dark-mode() {
+    @include dark-mode($darkMode) {
       background: var(--colour-canvas-2) !important;
     }
 
@@ -534,13 +538,13 @@
     flex-shrink: 0;
   }
 
-  @include dark-mode() {
+  @include dark-mode($darkMode) {
     --colour-link: var(--colour-white);
     @include invert-colours();
   }
 
   // The menu is always white unless in dark mode
-  @include light-mode() {
+  @include light-mode($darkMode) {
     background-color: var(--colour-white);
     @include reset-colours();
   }
@@ -565,7 +569,7 @@
     line-height: rem(map.get($heading-sizes, 'h3_lh'));
     max-width: var(--content-max-width);
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(sm,$mobileOnly) {
       font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
       line-height: rem(map.get($heading-sizes, 'h3_lh_sm'));
       margin-right: -2.5rem;
@@ -574,11 +578,11 @@
     }
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     padding-right: 2.5rem !important;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     height: calc(100vh - var(--nav-height));
     top: var(--nav-height);
   }
@@ -617,7 +621,7 @@ slot[name='menus'] {
 // #endregion
 
 // #region compressed nav
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md,$mobileOnly) {
   :host(.nav--md-compressed) .buttons-holder button {
     margin-left: 1.5rem !important;
   }
@@ -679,7 +683,7 @@ slot[name='menus'] {
   }
 }
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md,$mobileOnly) {
   :host(.nav--dual-buttons) {
     slot[name='dual'] {
       display: flex;

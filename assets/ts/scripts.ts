@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (entry.intersectionRatio > 0) {
           console.log(component);
 
-          import(`../js/components/${component}/${component}${componentExt}`)
+          import(/* @vite-ignore */`../js/components/${component}/${component}${componentExt}`)
             .then((module) => {
               if (!window.customElements.get(`${prefix}-${component}`))
                 window.customElements.define(`${prefix}-${component}`, module.default);

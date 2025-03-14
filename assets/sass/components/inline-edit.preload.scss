@@ -1,5 +1,11 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('components', $layers) {
+
 iam-inline-edit {
   .optional-text {
     display: none;
@@ -129,3 +135,4 @@ iam-inline-edit:has(.preview) {
 }
 
 // #endregion
+}

@@ -5,6 +5,11 @@
 
 @use 'mixins' as *;
 
+
+$layers: 'true' !default;
+
+$mobileOnly: 'false' !default;
+
 $new_utilities: ();
 
 $style_breakpoints: ();
@@ -150,7 +155,7 @@ $new_utilities: map.merge(
 
 @mixin sticky() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+    @include media-breakpoint-up($breakpoint, $mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .sticky#{$infix}-top {
@@ -224,7 +229,7 @@ $new_utilities: map.merge(
     max-height: 100%;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     :is(.mh-sm-sm, .mh-sm-md, .mh-sm-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -247,7 +252,7 @@ $new_utilities: map.merge(
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     :is(.mh-md-sm, .mh-md-md, .mh-md-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -453,7 +458,7 @@ $new_utilities: map.merge(
 
 @mixin display() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+    @include media-breakpoint-up($breakpoint,$mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .d#{$infix}-inline {
@@ -510,7 +515,7 @@ $new_utilities: map.merge(
 
 @mixin position() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+    @include media-breakpoint-up($breakpoint,$mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
       .position#{$infix}-static {
         position: static !important;
@@ -796,7 +801,7 @@ $new_utilities: map.merge(
 
 @mixin flex() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+    @include media-breakpoint-up($breakpoint, $mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .flex#{$infix}-fill {
@@ -953,7 +958,7 @@ $new_utilities: map.merge(
 
 @mixin order() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+    @include media-breakpoint-up($breakpoint,$mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .order#{$infix}-first {

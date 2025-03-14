@@ -1,5 +1,7 @@
 @use '../_func' as *;
 
+$darkMode: 'true' !default;
+
 :host,
 .iam-notification {
   display: block;
@@ -11,7 +13,7 @@
   border: rem(2) solid var(--colour, var(--colour-info));
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
-  @include light-mode() {
+  @include light-mode($darkMode) {
     background: #e9f9fd;
   }
 
@@ -85,7 +87,7 @@
   display: flex;
   flex-wrap: nowrap;
 
-  @include light-mode() {
+  @include light-mode($darkMode) {
     color: var(--colour-heading);
   }
 

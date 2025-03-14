@@ -1,7 +1,11 @@
 @use '../_func.scss' as *;
 
-@use './buttons--global.scss';
-@use './buttons--secondary.scss';
-@use './buttons--tertiary.scss';
-@use './buttons--action.scss';
-@use './buttons--compact.scss';
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@use './buttons--global.scss' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use './buttons--secondary.scss' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use './buttons--tertiary.scss' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use './buttons--action.scss' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);
+@use './buttons--compact.scss' with ($layers:$layers, $darkMode:$darkMode, $mobileOnly:$mobileOnly);

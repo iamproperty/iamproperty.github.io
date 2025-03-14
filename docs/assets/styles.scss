@@ -1,14 +1,36 @@
-@use '../../assets/sass/_func.scss';
+@use '../../assets/sass/_func.scss' as *;
 
 // Load the SCSS framework
 $fontPath: '../../fonts/';
 
-@import '../../assets/sass/_fonts.scss';
-@import '../../assets/sass/_corefiles.scss';
-@import '../../assets/sass/_grid';
-@import '../../assets/sass/_bs_grid';
-@import '../../assets/sass/_utilities';
-@import '../../assets/sass/_utility-mixins';
+
+$root: ':root' !default;
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+
+@use '../../assets/sass/_fonts.scss';
+@use '../../assets/sass/_corefiles.scss' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly,
+  $darkMode: 'true'
+);
+
+@use '../../assets/sass/_grid' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly
+);
+@use '../../assets/sass/_bs_grid' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly
+);
+@use '../../assets/sass/_utilities' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly
+);
+@use '../../assets/sass/_utility-mixins' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly
+);
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 

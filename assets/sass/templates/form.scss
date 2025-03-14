@@ -3,8 +3,15 @@
 
 @use '../_func' as *;
 
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('templates', $layers) {
+
+
 body:has(.template--form) {
-  @include light-mode() {
+  @include light-mode($darkMode) {
     background-color: #e9f9fd;
   }
 }
@@ -31,14 +38,14 @@ body:has(.template--form) {
     padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
     max-width: var(--content-max-width);
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(sm,$mobileOnly) {
       font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
       line-height: rem(map.get($heading-sizes, 'h3_lh_sm'));
       padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
     }
   }
 
-  @include light-mode() {
+  @include light-mode($darkMode) {
     background-color: #e9f9fd;
   }
 
@@ -51,12 +58,12 @@ body:has(.template--form) {
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
     width: 100%;
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(sm,$mobileOnly) {
       max-width: calc(100% - 5rem); // Guess
       margin-inline: auto;
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md,$mobileOnly) {
       max-width: rem(924); // Guess
       border-radius: 0.5rem;
       padding-inline: rem(94);
@@ -69,7 +76,7 @@ body:has(.template--form) {
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     .container--form {
       padding-inline: 0;
       max-width: rem(924) !important;
@@ -79,4 +86,6 @@ body:has(.template--form) {
   [data-loading] {
     opacity: 0.5;
   }
+}
+
 }

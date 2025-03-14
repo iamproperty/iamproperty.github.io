@@ -1,5 +1,11 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('templates', $layers) {
+
 body:has(.template--auth) {
   display: flex;
   flex-direction: row;
@@ -16,7 +22,7 @@ body:has(.template--auth) {
   max-width: rem(1280);
   margin-inline: auto;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     --padding-top: #{rem(40)};
     --brand-size: #{rem(64)};
   }
@@ -29,7 +35,7 @@ body:has(.template--auth) {
     padding-bottom: var(--padding-top);
     padding-inline: var(--container-padding-x);
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md,$mobileOnly) {
       flex: 0 0 auto;
       width: 43.75%;
       padding-inline-end: calc(var(--container-padding-x) - rem(16));
@@ -45,7 +51,7 @@ body:has(.template--auth) {
     display: none;
     background-color: var(--colour-primary-theme);
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md,$mobileOnly) {
       display: block;
       flex: 0 0 auto;
       width: 56.25%;
@@ -56,7 +62,7 @@ body:has(.template--auth) {
     }
 
 
-    @include light-mode() {
+    @include light-mode($darkMode) {
       background-color: #e9f9fd;
     }
 
@@ -102,4 +108,6 @@ body:has(.template--auth) {
       rotate: 5deg;
     }
   }
+}
+
 }

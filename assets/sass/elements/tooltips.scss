@@ -20,11 +20,11 @@
     padding-bottom: 1rem;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     width: #{rem(335)};
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     width: #{rem(360)};
   }
 
@@ -42,7 +42,10 @@
 }
 
 $layers: 'true' !default;
-@include layer('elements') {
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
 
 abbr[title] {
   text-underline-offset: 0.2em;
@@ -109,7 +112,7 @@ abbr[title] {
     }
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     &:is(.shift--left, .shift--right) span {
       transform: translate(50%, 0);
 

@@ -1,7 +1,11 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-@include layer('reset') {
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('reset', $layers) {
 // Code
 pre,
 code,
@@ -65,10 +69,10 @@ html {
   font-size: vw($device-xs-width);
   scroll-padding-top: rem(100);
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     font-size: vw($device-sm-width);
   }
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     font-size: vw($device-md-width);
   }
 

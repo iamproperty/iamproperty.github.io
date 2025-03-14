@@ -8,7 +8,7 @@
   border: 1px solid var(--colour-canvas);
   overflow: hidden;
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md,$mobileOnly) {
     flex-wrap: nowrap;
     overflow-x: auto;
   }
@@ -21,7 +21,7 @@
     width: 100%;
     overflow: auto;
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(sm,$mobileOnly) {
       display: flex;
       flex-grow: 1;
       padding-right: calc(2rem + 1px);
@@ -31,7 +31,7 @@
       clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 50%, calc(100% - 2rem) 100%, 0 100%);
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md,$mobileOnly) {
       overflow: initial;
     }
 
@@ -41,14 +41,14 @@
       background: var(--colour-canvas);
       padding: 1px;
 
-      @include media-breakpoint-up(sm) {
+      @include media-breakpoint-up(sm,$mobileOnly) {
         &:first-child a {
           padding-left: 1rem;
           clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 50%, calc(100% - 2rem) 100%, 0 100%);
         }
       }
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(md,$mobileOnly) {
         &:first-child a {
           padding-left: 2rem;
         }
@@ -64,7 +64,7 @@
         position: relative;
         color: var(--colour-primary);
 
-        @include media-breakpoint-up(sm) {
+        @include media-breakpoint-up(sm,$mobileOnly) {
           margin-right: -2rem;
           padding: 2rem 3rem 2rem 3rem;
           clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 50%, calc(100% - 2rem) 100%, 0 100%, 2rem 50%);
@@ -144,7 +144,7 @@
       display: none;
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md,$mobileOnly) {
       width: max-content;
       padding: 2rem 2rem;
 

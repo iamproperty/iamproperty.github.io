@@ -23,7 +23,7 @@ slot[name='selectall'] {
   transform: translate(0, -50%);
   z-index: 10;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     left: rem(32);
   }
 
@@ -41,7 +41,7 @@ slot[name='selectall'] {
     height: rem(40);
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm,$mobileOnly) {
     width: auto;
     overflow: visible;
   }
@@ -84,7 +84,7 @@ slot[name='selectall'] {
   pointer-events: none;
   display: flex;
 
-  @include light-mode {
+  @include light-mode($darkMode) {
     background-color: #e6eaec;
   }
 
@@ -102,7 +102,7 @@ slot[name='selectall'] {
   opacity: 0;
   pointer-events: none;
 
-  @include light-mode {
+  @include light-mode($darkMode) {
     background-color: #e6eaec;
   }
 }
