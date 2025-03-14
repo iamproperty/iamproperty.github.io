@@ -24,8 +24,12 @@ progress {
   border: none;
 }
 
-label[data-percent]:has(progress):before {
+label[data-percent]:not(:has(strong)):has(progress):before {
   content: attr(data-percent) '%';
+}
+
+label[data-percent]:not(:has(strong)):has(progress):before,
+label[data-percent]:has(progress) strong {
   vertical-align: 0;
   line-height: 1;
   position: absolute;
@@ -180,7 +184,8 @@ label:has(.progress--circular) + label:has(.progress--circular) {
   opacity: 0;
 }
 
-label[data-percent]:has(.progress--circular):before {
+label[data-percent]:not(:has(strong)):has(.progress--circular):before,
+label[data-percent]:has(.progress--circular) strong {
   top: var(--pt-percent);
   left: 50%;
   right: auto;

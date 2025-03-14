@@ -151,6 +151,12 @@ abbr[title] {
   text-decoration-skip-ink: none; // 3
 }
 
+strong {
+  font-weight: bolder;
+  font-family: var(--font-heading);
+  color: var(--colour-heading);
+}
+
 // Address
 
 address {

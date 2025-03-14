@@ -78,9 +78,18 @@ $chart-height-lg: #{rem(200)} !default;
   --chart-colour-warning-hover: #ffb020 !important;
 }
 
-@for $i from 1 to 10 {
-  .chart__key .key:nth-child(10n - #{10 - $i}),
-  .chart__outer table tbody tr td:not(:first-child):nth-child(10n - #{10 - ($i+1)}) {
+@for $i from 1 to 11 {
+  .chart__key .key:nth-child(11n - #{11 - $i}),
+  .chart__outer table tbody tr td:not(:first-child):nth-child(11n - #{11 - ($i+1)}) {
+    --chart-colour: var(#{'--chart-colour-' + $i + '-set'});
+    --chart-colour-hover: var(#{'--chart-colour-' + $i + '-hover'});
+  }
+
+  .chart__outer
+    table
+    tbody
+    tr:nth-child(#{$i}):has(td:nth-child(2):last-child):not([data-colour]):not([data-colour-1])
+    td:nth-child(2) {
     --chart-colour: var(#{'--chart-colour-' + $i + '-set'});
     --chart-colour-hover: var(#{'--chart-colour-' + $i + '-hover'});
   }
@@ -124,7 +133,6 @@ $chart-height-lg: #{rem(200)} !default;
   --index-overlay: 1000;
   --key-label-width: 100%;
   --label-size: #{rem(12)};
-  --pie-size: calc(50% - 1.4rem);
   --line-thickness: 1px;
   --yaxis-width: auto;
   --yaxis-point-display: block;
@@ -152,7 +160,6 @@ $chart-height-lg: #{rem(200)} !default;
 
     .chart__wrapper {
       --chart-height-resp: var(--chart-height-lg-set);
-      --pie-size: calc(33.333% - 1.4rem);
       --line-thickness: 0.8px;
       --yaxis-width: auto;
       --yaxis-point-display: block;
@@ -167,7 +174,6 @@ $chart-height-lg: #{rem(200)} !default;
 
     .chart__wrapper {
       --label-size: #{rem(14)};
-      --pie-size: calc(25% - 1.5rem);
       --line-thickness: 0.5px;
     }
   }
@@ -237,7 +243,7 @@ $chart-height-lg: #{rem(200)} !default;
   //opacity: 0.25;
 }
 
-@for $i from 1 to 10 {
+@for $i from 1 to 11 {
   .chart__outer > input[type='checkbox']:nth-of-type(#{$i}):not(:checked) ~ .chart__key .key:nth-of-type(#{$i}) {
     opacity: 0.25;
   }
@@ -364,6 +370,64 @@ $chart-height-lg: #{rem(200)} !default;
 }
 // #endregion
 
+// #region tooltip
+
+[part='popover'] {
+  //part="popover"
+  position: absolute;
+  top: var(--cursor-y, 50%);
+  left: var(--cursor-x, 50%);
+  font-size: var(--label-size);
+  line-height: 1.2;
+  background: var(--chart-details-bg, var(--colour-canvas-2, Canvas));
+  opacity: 0;
+  pointer-events: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.25rem;
+  display: block;
+  //color: var(--colour-primary-theme);
+  white-space: pre;
+  text-align: left;
+  box-shadow: var(--chart-details-shadow, 0 #{rem(2)} #{rem(12)} rgba(0, 0, 0, 0.25));
+  transform: translate(-50%, -100%);
+
+  &::before {
+    content: attr(data-group) '\A';
+  }
+
+  &[data-label]::before {
+    content: attr(data-group) '\A' attr(data-label) '\A';
+  }
+
+  &:has(:is(a, button)) {
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    font-size: 0.9rem;
+  }
+
+  hr {
+    margin: 0;
+    opacity: 0;
+  }
+  :is(a, button) {
+    display: inline-block !important;
+    clear: both !important;
+    float: left !important;
+    margin-top: 1rem !important;
+    margin-right: 1rem !important;
+    margin-bottom: 0.25em !important;
+    font-size: 1em !important;
+  }
+
+  :is(a, button) + :is(a, button) {
+    margin-top: 0 !important;
+  }
+}
+
+// #endregion
+
 // #region Default column chart (Also applies to line chart)
 .chart__wrapper {
   display: block;
@@ -481,61 +545,7 @@ $chart-height-lg: #{rem(200)} !default;
           display: none;
         }
 
-        span {
-          //part="popover"
-          position: absolute;
-          top: var(--cursor-y, 50%);
-          left: var(--cursor-x, 50%);
-          font-size: var(--label-size);
-          line-height: 1.2;
-          transform: translate(-50%, 0);
-          background: var(--chart-details-bg, var(--colour-canvas-2, Canvas));
-          opacity: 0;
-          pointer-events: none;
-          padding: 0.5rem;
-          border-radius: 0.5rem;
-          margin-bottom: 0.25rem;
-          //color: var(--colour-primary-theme);
-          white-space: pre;
-          text-align: left;
-          box-shadow: var(--chart-details-shadow, 0 #{rem(2)} #{rem(12)} rgba(0, 0, 0, 0.25));
-          transform: translate(-50%, -100%);
-
-          &::before {
-            content: attr(data-group) '\A';
-          }
-
-          &[data-label]::before {
-            content: attr(data-group) '\A' attr(data-label) '\A';
-          }
-
-          &:has(:is(a, button)) {
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, -100%);
-            font-size: 0.9rem;
-          }
-
-          hr {
-            margin: 0;
-            opacity: 0;
-          }
-          :is(a, button) {
-            display: inline-block;
-            clear: both;
-            float: left;
-            margin-top: 1rem;
-            margin-right: 1rem;
-            margin-bottom: 0.25em;
-            font-size: 1em;
-          }
-
-          :is(a, button) + :is(a, button) {
-            margin-top: 0;
-          }
-        }
-
-        &:hover span {
+        &:hover [part='popover'] {
           opacity: 1;
           z-index: var(--index-above);
           pointer-events: all;
@@ -651,6 +661,25 @@ $chart-height-lg: #{rem(200)} !default;
 
   &:hover {
     --chart-colour-hover: var(--chart-colour-warning-hover) !important;
+  }
+}
+// #endregion
+
+// #region Hide data sets
+.chart__outer > input[type='checkbox']:not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child) {
+  //display: none;
+}
+
+@for $i from 1 to 11 {
+  .chart__outer
+    > input[type='checkbox']:nth-of-type(#{$i}):not(:checked)
+    ~ .chart__wrapper
+    table
+    tbody
+    tr
+    td:not(:first-child):nth-child(#{$i + 1}) {
+    display: none;
+    opacity: 0;
   }
 }
 // #endregion

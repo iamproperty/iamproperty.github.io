@@ -1279,6 +1279,7 @@ $new_utilities: map.merge(
 
     .bg-#{$color} {
       --bg-opacity: 1;
+      --bg-colour: var(--colour-#{$color}) !important;
       background-color: var(--colour-#{$color}) !important;
     }
 

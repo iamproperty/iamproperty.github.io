@@ -159,6 +159,15 @@ $darkMode: 'true' !default;
     display: flex;
     flex-direction: column;
   }
+
+  &.grid {
+    display: grid !important;
+    grid-template-columns: subgrid !important;
+
+    > *:not(:first-child) {
+      grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
+    }
+  }
 }
 
 [class*='col'].admin-panel:first-child:last-child:not(
