@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
     threshold: 0.1,
   };
   const componentExt = '.component.min.js';
-  /*
+  
   // Load components - Each component will load once the first of its type has been loaded
   components.forEach((component) => {
     if (document.getElementsByTagName(`${prefix}-${component}`).length === 0) return;
@@ -81,5 +81,5 @@ document.addEventListener('DOMContentLoaded', function () {
     const intObserver = new IntersectionObserver(callback, options);
     intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
   });
-  */
+  
 });

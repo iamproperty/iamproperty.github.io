@@ -1,5 +1,9 @@
 @use '../_func' as *;
 
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
 *:not(main):has(> iam-tabs) {
   container-type: inline-size;
 }
