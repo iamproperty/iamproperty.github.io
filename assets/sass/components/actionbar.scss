@@ -1,5 +1,8 @@
 @use '../_func.scss' as *;
 
+@include margins();
+@include visually-hidden();
+
 :host {
   background-color: #fcfcfc;
 }
@@ -152,6 +155,11 @@ slot[name='selectall'] {
 
 ::slotted(.btn:not(.btn-action)) {
   order: 2;
+}
+
+::slotted(:not([slot])){
+  align-self: center!important;
+  margin-block: 0;
 }
 
 // buttons only for single items

@@ -407,7 +407,7 @@
 
 // #endregion
 
-@mixin media-breakpoint-up($name, $mobileOnly, $breakpoints: $grid-breakpoints) {
+@mixin media-breakpoint-up($name, $mobileOnly: 'false', $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
   @if $min {
 

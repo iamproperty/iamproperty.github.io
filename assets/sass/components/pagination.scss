@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+
+@include margins();
+
 :host {
   container-type: inline-size;
   display: block;

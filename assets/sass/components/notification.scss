@@ -17,6 +17,9 @@ $darkMode: 'true' !default;
     background: #e9f9fd;
   }
 
+  &::slotted(strong) {
+    color: green;
+  }
   &::slotted(i),
   i {
     color: var(--colour, currentColor);

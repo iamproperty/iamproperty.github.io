@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+@use '../bs_grid' as *;
+
+
 .row {
   align-items: center;
 }

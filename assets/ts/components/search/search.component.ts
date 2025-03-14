@@ -32,6 +32,9 @@ class iamSearch extends HTMLElement {
     }
     .optional-text {
       display: none;
+    } 
+    .js-hide {
+      display: none !important;
     }
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
