@@ -5,7 +5,6 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('components', $layers) {
-
   $menuPadding: 1rem !default;
   $menuBorder: none !default;
   $menuBorderRadius: 1rem !default;

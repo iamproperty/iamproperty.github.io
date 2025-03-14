@@ -5,7 +5,6 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('elements', $layers) {
-
   .brand {
     --svg-width: #{em(380, 130)};
 
@@ -19,7 +18,6 @@ $darkMode: 'true' !default;
     min-width: Min(100%, var(--svg-width));
     font-size: rem(64);
     @include var(color, --colour-brand);
-
 
     &--sold {
       --svg-width: #{em(247, 130)};
@@ -82,5 +80,4 @@ $darkMode: 'true' !default;
   a:active .brand {
     color: currentColor !important;
   }
-
 }

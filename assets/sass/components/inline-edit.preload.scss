@@ -5,134 +5,133 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('components', $layers) {
+  iam-inline-edit {
+    .optional-text {
+      display: none;
+    }
 
-iam-inline-edit {
-  .optional-text {
-    display: none;
-  }
-
-  label,
-  textarea {
-    margin: 0;
-  }
-}
-
-iam-inline-edit:focus-within {
-  position: relative;
-  z-index: 99;
-  --display-status: none;
-}
-
-// Inactive state
-iam-inline-edit:defined:not(:focus-within):not([data-saving]):not(.was-validated:has(:invalid)) {
-  --display-btns: none;
-
-  input,
-  textarea,
-  select {
-    border: none;
-    background: none;
-    margin-left: -1rem;
-    width: calc(100% + 1rem);
-    max-width: calc(100% + 1rem);
-    box-shadow: none;
-  }
-}
-
-iam-inline-edit:defined:focus-within:has(select),
-iam-inline-edit:defined[data-saving]:has(select) {
-  --display-btns: none;
-}
-
-// Hover state
-iam-inline-edit:defined:not(:focus-within):not([data-saving]):not(.was-validated:has(:invalid)):hover {
-  input,
-  textarea,
-  select {
-    border: none;
-    background: var(--colour-light);
-  }
-}
-
-// Multi select
-
-iam-inline-edit:has(iam-multiselect label[slot='checked']) {
-  --display-btns: none;
-}
-
-iam-inline-edit:not(:focus-within) iam-multiselect:has(label[slot='checked']) {
-  --display-button: none;
-}
-
-iam-inline-edit iam-multiselect .tag[slot='checked'] {
-  outline: none;
-}
-
-// Error message
-
-iam-inline-edit.was-validated
-  label:has(:is(input:not([type='radio']):not([type='checkbox']), select)):has(:is(:invalid, .is-invalid)):after {
-  position: absolute;
-  right: 0;
-  bottom: 100%;
-  padding: 0.85rem;
-  width: min-content;
-  white-space: nowrap;
-
-  color: var(--colour-heading);
-
-  display: block;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
-  background: var(--colour-canvas-2);
-  border-radius: 0.5rem;
-  margin: 0 0 -1rem 0;
-  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-}
-
-// #region preview element
-
-iam-inline-edit:has(.preview) {
-  position: relative;
-
-  label {
-    opacity: 0;
-    margin-top: -0.75rem;
-  }
-
-  .preview {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    pointer-events: none;
-    padding: 0.75rem;
-    margin-top: -0.75rem;
-    margin-left: -0.75rem;
-  }
-
-  .preview:empty {
-    &:before {
-      content: attr(data-placeholder);
+    label,
+    textarea {
+      margin: 0;
     }
   }
 
-  &:hover,
-  &:focus {
-    .preview {
+  iam-inline-edit:focus-within {
+    position: relative;
+    z-index: 99;
+    --display-status: none;
+  }
+
+  // Inactive state
+  iam-inline-edit:defined:not(:focus-within):not([data-saving]):not(.was-validated:has(:invalid)) {
+    --display-btns: none;
+
+    input,
+    textarea,
+    select {
+      border: none;
+      background: none;
+      margin-left: -1rem;
+      width: calc(100% + 1rem);
+      max-width: calc(100% + 1rem);
+      box-shadow: none;
+    }
+  }
+
+  iam-inline-edit:defined:focus-within:has(select),
+  iam-inline-edit:defined[data-saving]:has(select) {
+    --display-btns: none;
+  }
+
+  // Hover state
+  iam-inline-edit:defined:not(:focus-within):not([data-saving]):not(.was-validated:has(:invalid)):hover {
+    input,
+    textarea,
+    select {
       border: none;
       background: var(--colour-light);
     }
   }
 
-  &:focus-within {
+  // Multi select
+
+  iam-inline-edit:has(iam-multiselect label[slot='checked']) {
+    --display-btns: none;
+  }
+
+  iam-inline-edit:not(:focus-within) iam-multiselect:has(label[slot='checked']) {
+    --display-button: none;
+  }
+
+  iam-inline-edit iam-multiselect .tag[slot='checked'] {
+    outline: none;
+  }
+
+  // Error message
+
+  iam-inline-edit.was-validated
+    label:has(:is(input:not([type='radio']):not([type='checkbox']), select)):has(:is(:invalid, .is-invalid)):after {
+    position: absolute;
+    right: 0;
+    bottom: 100%;
+    padding: 0.85rem;
+    width: min-content;
+    white-space: nowrap;
+
+    color: var(--colour-heading);
+
+    display: block;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    background: var(--colour-canvas-2);
+    border-radius: 0.5rem;
+    margin: 0 0 -1rem 0;
+    outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+  }
+
+  // #region preview element
+
+  iam-inline-edit:has(.preview) {
+    position: relative;
+
     label {
-      opacity: 1;
-    }
-    .preview {
       opacity: 0;
+      margin-top: -0.75rem;
+    }
+
+    .preview {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      padding: 0.75rem;
+      margin-top: -0.75rem;
+      margin-left: -0.75rem;
+    }
+
+    .preview:empty {
+      &:before {
+        content: attr(data-placeholder);
+      }
+    }
+
+    &:hover,
+    &:focus {
+      .preview {
+        border: none;
+        background: var(--colour-light);
+      }
+    }
+
+    &:focus-within {
+      label {
+        opacity: 1;
+      }
+      .preview {
+        opacity: 0;
+      }
     }
   }
-}
 
-// #endregion
+  // #endregion
 }

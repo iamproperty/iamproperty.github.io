@@ -4,7 +4,7 @@
   --testimonial-padding: 1rem;
   --testimonial-spacing: 1rem;
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     --testimonial-padding: 4rem;
     --testimonial-spacing: 2rem;
   }
@@ -32,10 +32,10 @@
     touch-action: pan-x;
     height: rem(230);
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       height: rem(340);
     }
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       min-height: 100%;
       scroll-snap-type: y mandatory;
       flex-direction: column;
@@ -61,7 +61,7 @@
     left: 50%;
     transform: translate(-50%, 50%);
 
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       left: auto;
       bottom: auto;
       right: 0;
@@ -75,10 +75,10 @@
   h2 {
     padding: 2rem var(--testimonial-padding) 0 var(--testimonial-padding);
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       padding-top: 3rem;
     }
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       padding-top: 9rem;
     }
   }
@@ -88,7 +88,7 @@
     margin: 0 var(--testimonial-padding) var(--testimonial-spacing) var(--testimonial-padding);
     position: relative;
 
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       --display-none: block;
 
       blockquote:not(.largest) {

@@ -2,7 +2,6 @@
 @use 'sass:string';
 @use 'sass:math';
 
-
 $vars: () !default;
 $varsSM: () !default;
 $varsMD: () !default;
@@ -12,7 +11,6 @@ $darkMode: 'true' !default;
 $optionalText: 'true' !default;
 
 @use 'functions' as *;
-
 
 // #region Boostrap
 // Color system
@@ -1859,7 +1857,6 @@ $theme-colors: map.merge(
 }
 
 //  RGB Theme colours
-
 
 $utilities-colors: $theme-colors;
 

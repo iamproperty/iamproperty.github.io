@@ -20,7 +20,7 @@ $darkMode: 'true' !default;
   min-height: 100%;
   padding-left: var(--dialog-padding);
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     padding-top: var(--dialog-padding);
     padding-left: calc(var(--dialog-padding) + #{rem(282)}) !important;
     display: flex;
@@ -120,7 +120,7 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     width: rem(282);
     height: 100%;
     flex-direction: column;

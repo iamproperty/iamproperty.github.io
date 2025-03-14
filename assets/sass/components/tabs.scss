@@ -166,7 +166,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     display: none;
   }
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     flex-direction: row;
   }
 
@@ -197,7 +197,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
       display: none;
     }
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       margin: 0;
 
       &:not(:first-child) {
@@ -211,7 +211,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   }
 }
 // #endregion
-@include media-breakpoint-up(sm,$mobileOnly) {
+@include media-breakpoint-up(sm, $mobileOnly) {
   :host(.tabs--inline) .tabs__links {
     margin: 0;
     justify-content: center;

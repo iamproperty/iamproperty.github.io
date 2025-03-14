@@ -6,42 +6,41 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('elements', $layers) {
-
-// non-js fallback
-body:not(.js-enabled) dialog:not([open]):target {
-  display: block;
-}
-
-// #region Default styling of both modals and popovers
-[popover],
-dialog {
-  --dialog-padding: #{rem(24)};
-
-  --mh-padding-inline: var(--dialog-padding);
-  color: inherit;
-  width: fit-content;
-  height: fit-content;
-  border: none;
-  overscroll-behavior: contain;
-  background: var(--colour-canvas-2);
-  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
-  border-radius: rem(10);
-  padding: var(--dialog-padding);
-  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-}
-
-[popover]:popover-open,
-dialog[open] {
-  display: flex;
-  flex-direction: column;
-
-  > *:last-child {
-    margin-bottom: 0;
+  // non-js fallback
+  body:not(.js-enabled) dialog:not([open]):target {
+    display: block;
   }
 
-  > :is(p):last-child {
-    padding-bottom: 0;
+  // #region Default styling of both modals and popovers
+  [popover],
+  dialog {
+    --dialog-padding: #{rem(24)};
+
+    --mh-padding-inline: var(--dialog-padding);
+    color: inherit;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    overscroll-behavior: contain;
+    background: var(--colour-canvas-2);
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
+    border-radius: rem(10);
+    padding: var(--dialog-padding);
+    outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
   }
-}
-// #endregion
+
+  [popover]:popover-open,
+  dialog[open] {
+    display: flex;
+    flex-direction: column;
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    > :is(p):last-child {
+      padding-bottom: 0;
+    }
+  }
+  // #endregion
 }

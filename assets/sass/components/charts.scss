@@ -95,7 +95,6 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
     --chart-colour-#{$index}-set: var(--chart-colour-#{$index}, #{$value});
   }
 
-
   tbody {
     --chart-direction: 360deg;
     --chart-day-bg-pos: 100% calc(var(--single-day) * 7);
@@ -160,7 +159,6 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
       --line-thickness: 0.5px;
     }
   }
-
 }
 // #endregion
 

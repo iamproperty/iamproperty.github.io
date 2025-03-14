@@ -6,7 +6,6 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('components', $layers) {
-
   nav:has(iam-nav) {
     grid-column: container;
   }
@@ -27,7 +26,7 @@ $darkMode: 'true' !default;
       min-width: min(var(--svg-width), 14rem);
     }
 
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       padding-inline: max(
         var(--padding-inline),
         calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
@@ -45,7 +44,7 @@ $darkMode: 'true' !default;
         display: none;
       }
 
-      @include media-breakpoint-up(md,$mobileOnly) {
+      @include media-breakpoint-up(md, $mobileOnly) {
         &:has([slot='secondary']) {
           padding-top: rem(64);
         }

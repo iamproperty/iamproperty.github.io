@@ -830,9 +830,8 @@
           .prevent-invert
         ),
       .invert-colours {
-        
-          @include invert-colours();
-        
+        @include invert-colours();
+
         color: #{$colour-inverted};
       }
     }

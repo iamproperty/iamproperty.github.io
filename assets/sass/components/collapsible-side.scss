@@ -8,7 +8,6 @@ $darkMode: 'true' !default;
   --side-link-hover: var(--colour-canvas-2);
   grid-column: full-width;
 
-
   display: block;
   min-height: calc(100vh - var(--nav-height));
   padding-top: 0 !important;
@@ -21,7 +20,7 @@ $darkMode: 'true' !default;
     --side-link-hover: #eeeeee;
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     max-height: calc(100vh - var(--nav-height));
     overflow: auto;
   }
@@ -34,7 +33,7 @@ $darkMode: 'true' !default;
   padding-bottom: 0 !important;
   padding-left: 0 !important;
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     padding-left: 5.25rem !important;
   }
 }
@@ -60,12 +59,12 @@ $darkMode: 'true' !default;
     border-right: 2px solid var(--colour-border);
   }
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     left: 0;
     width: rem(40);
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     left: rem(84);
     margin-left: #{rem(-84)};
     position: fixed;
@@ -98,7 +97,7 @@ $darkMode: 'true' !default;
         content: '\f053' !important;
       }
 
-      @include media-breakpoint-up(md,$mobileOnly) {
+      @include media-breakpoint-up(md, $mobileOnly) {
         opacity: 0;
       }
     }
@@ -108,7 +107,7 @@ $darkMode: 'true' !default;
     border: 2px solid var(--colour-border);
     color: var(--colour-primary-theme);
 
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       opacity: 1;
     }
   }
@@ -116,10 +115,10 @@ $darkMode: 'true' !default;
   &:is(.open) {
     width: calc(100% - var(--container-padding-x));
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       width: rem(382);
     }
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       width: rem(304);
     }
   }
@@ -142,14 +141,14 @@ $darkMode: 'true' !default;
       padding-left: rem(24);
     }
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       .h3 {
         padding-left: rem(40);
       }
 
       width: rem(382);
     }
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       width: rem(304);
 
       .h3 {
@@ -166,7 +165,7 @@ $darkMode: 'true' !default;
     opacity: 1;
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     &.hover .side-menu-content {
       opacity: 1;
     }
@@ -177,11 +176,11 @@ $darkMode: 'true' !default;
 ::slotted(*[slot='menu']) {
   padding-left: rem(24);
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     padding-left: rem(40);
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     padding-left: var(--container-padding-x-md);
   }
 }
@@ -208,17 +207,16 @@ $darkMode: 'true' !default;
 
   margin-right: rem(-40) !important;
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     padding-left: rem(40) !important;
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     padding-left: var(--container-padding-x-md) !important;
   }
   &:after {
     display: none;
   }
-
 }
 
 ::slotted(a[slot='menu']:where(:hover, :focus, [aria-expanded])) {
@@ -261,11 +259,11 @@ $darkMode: 'true' !default;
   padding-top: rem(24);
   padding-left: rem(60);
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     padding-left: rem(80);
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     padding-top: rem(40) !important;
     padding-left: 0;
   }
@@ -276,7 +274,7 @@ $darkMode: 'true' !default;
     border-bottom: 2px solid var(--colour-border);
     margin-bottom: rem(40) !important;
 
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       display: none;
     }
   }
@@ -289,7 +287,7 @@ $darkMode: 'true' !default;
   display: block;
 }
 
-@include media-breakpoint-up(md,$mobileOnly) {
+@include media-breakpoint-up(md, $mobileOnly) {
   ::slotted(.main-content__title) {
     display: none;
   }
@@ -298,7 +296,7 @@ $darkMode: 'true' !default;
 // #endregion
 
 // #region Desktop open state
-@include media-breakpoint-up(md,$mobileOnly) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .container:has(.side-menu.open) {
     padding-left: 2rem !important;
     margin-left: max(19rem, calc(50% - calc(var(--container-max-width) / 2)));
@@ -308,7 +306,7 @@ $darkMode: 'true' !default;
 }
 // #endregion
 
-@include media-breakpoint-up(md,$mobileOnly) {
+@include media-breakpoint-up(md, $mobileOnly) {
   :host([open-always]) {
     --btn-display: none;
   }

@@ -10,9 +10,7 @@ $darkMode: 'true' !default;
 @layer legacy, reset, elements, components, templates, overrides, utilities;
 
 @include layer('reset', $layers) {
-
   #{$root} {
-
     // Print out the $vars array setup in the variables file so they can be used as CSS vars
     // Custom variable values only support SassScript inside `#{}`.
     @each $var, $value in $vars {
@@ -52,23 +50,18 @@ $darkMode: 'true' !default;
     --container-max-width: #{rem(1280)};
     --padding-inline: 1.5rem;
 
-
-
-
-
     @media (prefers-reduced-motion: no-preference) {
       scroll-behavior: smooth;
     }
 
-
     // Add in media query based updates to the global vars like updating the heading 1 font size
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       @each $var, $value in $varsSM {
         #{$var}: #{$value};
       }
     }
 
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       @each $var, $value in $varsMD {
         #{$var}: #{$value};
       }
@@ -85,18 +78,18 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       --padding-inline: 2.5rem;
     }
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       --padding-inline: 5.25rem;
 
       &:has(.nav--large) {
         --container-max-width: #{rem(1920)} !important;
         --padding-inline: #{rem(56)} !important;
         --container-padding-x-md: #{rem(56)} !important;
-        --container-padding-md: var(--container-padding-top) var(--container-padding-x-md) var(--container-padding-bottom)
-          var(--container-padding-x-md);
+        --container-padding-md: var(--container-padding-top) var(--container-padding-x-md)
+          var(--container-padding-bottom) var(--container-padding-x-md);
         --container-padding: var(--container-padding-md);
       }
     }

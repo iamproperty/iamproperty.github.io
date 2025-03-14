@@ -122,7 +122,6 @@ $chart-height-lg: #{rem(200)} !default;
 
   --chart-height-resp: var(--chart-height-set);
 
-
   // Non-configurable css vars
   --index-below: -1;
   --index-base: 0;
@@ -524,7 +523,6 @@ $chart-height-lg: #{rem(200)} !default;
 
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
-
 
         & {
           @media screen and (prefers-color-scheme: dark) {

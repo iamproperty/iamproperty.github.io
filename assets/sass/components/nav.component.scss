@@ -76,7 +76,7 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     margin: 0 0 0 rem(48);
     width: auto;
     padding-right: rem(24 + 6);
@@ -87,7 +87,7 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     width: fit-content;
     height: auto;
     margin: 0 0 0 3rem;
@@ -302,7 +302,7 @@ $darkMode: 'true' !default;
     flex-shrink: 0;
 
     > .btn {
-      margin: 0!important;
+      margin: 0 !important;
     }
   }
   .dialog__wrapper > .btn {
@@ -335,7 +335,7 @@ $darkMode: 'true' !default;
 // #endregion
 
 // #region desktop
-@include media-breakpoint-up(md,$mobileOnly) {
+@include media-breakpoint-up(md, $mobileOnly) {
   :host {
     //max-width: 100%!important;
     padding-block: 0 !important;
@@ -583,7 +583,7 @@ $darkMode: 'true' !default;
     line-height: rem(map.get($heading-sizes, 'h3_lh'));
     max-width: var(--content-max-width);
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
       line-height: rem(map.get($heading-sizes, 'h3_lh_sm'));
       margin-right: -2.5rem;
@@ -592,11 +592,11 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     padding-right: 2.5rem !important;
   }
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     height: calc(100vh - var(--nav-height));
     top: var(--nav-height);
   }
@@ -635,7 +635,7 @@ slot[name='menus'] {
 // #endregion
 
 // #region compressed nav
-@include media-breakpoint-up(md,$mobileOnly) {
+@include media-breakpoint-up(md, $mobileOnly) {
   :host(.nav--md-compressed) .buttons-holder button {
     margin-left: 1.5rem !important;
   }
@@ -697,7 +697,7 @@ slot[name='menus'] {
   }
 }
 
-@include media-breakpoint-up(md,$mobileOnly) {
+@include media-breakpoint-up(md, $mobileOnly) {
   :host(.nav--dual-buttons) {
     slot[name='dual'] {
       display: flex;

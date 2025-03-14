@@ -5,7 +5,6 @@
 @use 'sass:meta';
 @use 'sass:string';
 
-
 $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29')) !default;
 
 // #region from Bootstrap
@@ -43,8 +42,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
 
 // Colors
 @function to-rgb($value) {
-  
-  @return color.channel($value, "red", rgb), color.channel($value, "green", rgb), color.channel($value, "blue", rgb);
+  @return color.channel($value, 'red', rgb), color.channel($value, 'green', rgb), color.channel($value, 'blue', rgb);
 }
 
 // stylelint-disable scss/dollar-variable-pattern
@@ -86,13 +84,6 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
 @function show-css-var-text($identifier) {
   @return var(--colour-#{$identifier});
 }
-
-
-
-
-
-
-
 
 // stylelint-enable scss/dollar-variable-pattern
 

@@ -5,21 +5,20 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('elements', $layers) {
+  // #region secondary button
+  .btn-secondary {
+    color: var(--colour-btn-secondary);
 
-// #region secondary button
-.btn-secondary {
-  color: var(--colour-btn-secondary);
-
-  &:not(.border-0) {
-    background: var(--colour-btn-secondary-bg);
-    border: 2px solid var(--colour-btn-secondary-border);
+    &:not(.border-0) {
+      background: var(--colour-btn-secondary-bg);
+      border: 2px solid var(--colour-btn-secondary-border);
+    }
   }
-}
 
-a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
-.btn-secondary:is(:hover, :focus, .hover, :focus-within, :active, .active):not([disabled]) {
-  background: var(--colour-btn-secondary-bg-hover);
-  color: var(--colour-btn-secondary-hover);
-}
-// #endregion
+  a:is(:hover, :focus, .hover, :active, .active):not([disabled]) .btn-secondary,
+  .btn-secondary:is(:hover, :focus, .hover, :focus-within, :active, .active):not([disabled]) {
+    background: var(--colour-btn-secondary-bg-hover);
+    color: var(--colour-btn-secondary-hover);
+  }
+  // #endregion
 }

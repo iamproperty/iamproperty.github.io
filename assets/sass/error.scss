@@ -26,7 +26,7 @@
     padding-bottom: rem(map.get($heading-sizes, 'h1_pb'));
     font-weight: 900;
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       font-size: rem(map.get($heading-sizes, 'h1_fs_sm'));
       --line-height: #{rem(map.get($heading-sizes, 'h1_lh_sm'))};
       padding-bottom: rem(map.get($heading-sizes, 'h1_pb_sm'));

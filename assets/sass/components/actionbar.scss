@@ -26,7 +26,7 @@ slot[name='selectall'] {
   transform: translate(0, -50%);
   z-index: 10;
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     left: rem(32);
   }
 
@@ -44,7 +44,7 @@ slot[name='selectall'] {
     height: rem(40);
   }
 
-  @include media-breakpoint-up(sm,$mobileOnly) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     width: auto;
     overflow: visible;
   }
@@ -157,8 +157,8 @@ slot[name='selectall'] {
   order: 2;
 }
 
-::slotted(:not([slot])){
-  align-self: center!important;
+::slotted(:not([slot])) {
+  align-self: center !important;
   margin-block: 0;
 }
 
@@ -208,7 +208,6 @@ slot[name='selectall'] {
   .body {
     display: contents;
   }
-  
 }
 
 :host([data-large-safe-area]) .safe-area {

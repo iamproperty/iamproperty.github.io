@@ -19,7 +19,7 @@
   position: relative;
   height: auto;
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     padding-top: rem(84);
   }
 
@@ -72,7 +72,7 @@
   margin-top: rem(24) !important;
   margin-bottom: -0.5rem !important;
 
-  @include media-breakpoint-up(md,$mobileOnly) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     position: absolute !important;
     top: 0 !important;
     left: 5.25rem !important;

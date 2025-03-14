@@ -10,10 +10,8 @@ $layers: 'true' !default;
 
 // Each file should be added to a layer: legacy, reset, elements, components, templates, overrides or utilities
 @include layer('elements') {
-
   // Try to keep the selectors as basic and easy to read as apossible
   .element {
-
     --css-variable: 3rem;
     --second-variable: 3rem;
 
@@ -29,12 +27,11 @@ $layers: 'true' !default;
     }
 
     // Any media queries should be added after all of the root rulesets
-    @include media-breakpoint-up(sm,$mobileOnly) {
-
+    @include media-breakpoint-up(sm, $mobileOnly) {
       min-height: rem(300);
     }
 
-    @include media-breakpoint-up(md,$mobileOnly) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       min-height: rem(470);
     }
 
@@ -44,7 +41,7 @@ $layers: 'true' !default;
         color: var(--colour-body);
       }
     }
-  
+
     @media (forced-colors: active) {
       #{$root} {
         --contrast-outline-width: 1px;
@@ -61,6 +58,4 @@ $layers: 'true' !default;
   :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
     @extend %heading;
   }
-
-
 }

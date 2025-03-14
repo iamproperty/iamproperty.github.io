@@ -146,7 +146,6 @@ $darkMode: 'true' !default;
         [container-end] calc(var(--excess-space) - var(--gap, #{$gap})) [full-width-end];
     }
 
-
     & * {
       grid-column: content;
 

@@ -169,8 +169,6 @@
   @return if(breakpoint-min($name, $breakpoints) == null, '', '-#{$name}');
 }
 
-
-
 // Media of at most the maximum breakpoint width. No query for the largest breakpoint.
 // Makes the @content apply to the given breakpoint and narrower.
 @mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
@@ -410,7 +408,6 @@
 @mixin media-breakpoint-up($name, $mobileOnly: 'false', $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
   @if $min {
-
     @if $mobileOnly != 'true' {
       @media screen and (min-width: $min) {
         @content;
@@ -483,7 +480,6 @@
 
 // Used to make it possible to use css properties but still support IE11
 @mixin var($property, $varName, $important: '') {
-  
   #{$property}: var(#{$varName}) #{$important};
 }
 
@@ -537,21 +533,18 @@
 @mixin font-size($value) {
   $found: false;
 
-
-    @each $size, $subvalue in $font-sizes {
-      @if ($value == $subvalue and $found == false) {
-        font-size: var(--fs-#{$size});
-        $found: true;
-      }
+  @each $size, $subvalue in $font-sizes {
+    @if ($value == $subvalue and $found == false) {
+      font-size: var(--fs-#{$size});
+      $found: true;
     }
-    @if $found == false {
-      font-size: $value;
-    }
-
+  }
+  @if $found == false {
+    font-size: $value;
+  }
 }
 
 @mixin is($selector, $before: '', $after: '') {
-
   #{$before}:is(#{$selector})#{$after} {
     @content;
   }

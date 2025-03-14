@@ -6,194 +6,193 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('elements', $layers) {
-
-details {
-  display: block;
-
-  &:not([open]) {
-    padding-bottom: rem(32);
-  }
-
-  summary {
-    font-size: rem(18);
-    line-height: rem(21);
-    font-weight: normal;
-    color: var(--colour-heading);
+  details {
     display: block;
 
-    &:after {
-      content: '\f055';
-      display: inline-block;
-      margin-left: 0.5em;
-      line-height: 1em;
-      font-size: 1em;
-      font-family: 'Font Awesome 6 Pro';
-    }
-  }
-
-  &[open] summary {
-    margin-bottom: rem(16);
-  }
-}
-
-iam-accordion details {
-  --inline-padding: #{rem(2)};
-  --border-radius: #{rem(8)} #{rem(8)} 0 0;
-  --icon-top: #{rem(14)};
-  --line-height: #{rem(24)};
-
-  *:not(iam-tabs) > &:not([open]) {
-    padding-bottom: rem(42);
-  }
-
-  @include media-breakpoint-up(sm,$mobileOnly) {
-    --inline-padding: #{rem(30)};
-    --icon-top: #{rem(24)};
-    --line-height: #{rem(24)};
-  }
-
-  summary {
-    border-bottom: 1px solid var(--colour-border);
-    padding-left: var(--inline-padding);
-    padding-right: calc(var(--inline-padding) + #{rem(24)} + #{rem(24)});
-    padding-block: rem(14) !important;
-    position: relative;
-    color: $headings-color;
-
-    &:is(:hover, :focus-visible) {
-      background: var(--colour-light);
-      border-radius: var(--border-radius);
+    &:not([open]) {
+      padding-bottom: rem(32);
     }
 
-    h3,
-    .h3 {
-      all: unset !important;
-    }
-
-    &::after {
-      display: none;
-    }
-
-    *:is(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label) {
-      max-width: 100%;
-      padding: 0;
-      margin: 0;
+    summary {
+      font-size: rem(18);
+      line-height: rem(21);
+      font-weight: normal;
+      color: var(--colour-heading);
+      display: block;
 
       &:after {
         content: '\f055';
+        display: inline-block;
+        margin-left: 0.5em;
+        line-height: 1em;
+        font-size: 1em;
+        font-family: 'Font Awesome 6 Pro';
+      }
+    }
+
+    &[open] summary {
+      margin-bottom: rem(16);
+    }
+  }
+
+  iam-accordion details {
+    --inline-padding: #{rem(2)};
+    --border-radius: #{rem(8)} #{rem(8)} 0 0;
+    --icon-top: #{rem(14)};
+    --line-height: #{rem(24)};
+
+    *:not(iam-tabs) > &:not([open]) {
+      padding-bottom: rem(42);
+    }
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      --inline-padding: #{rem(30)};
+      --icon-top: #{rem(24)};
+      --line-height: #{rem(24)};
+    }
+
+    summary {
+      border-bottom: 1px solid var(--colour-border);
+      padding-left: var(--inline-padding);
+      padding-right: calc(var(--inline-padding) + #{rem(24)} + #{rem(24)});
+      padding-block: rem(14) !important;
+      position: relative;
+      color: $headings-color;
+
+      &:is(:hover, :focus-visible) {
+        background: var(--colour-light);
+        border-radius: var(--border-radius);
+      }
+
+      h3,
+      .h3 {
+        all: unset !important;
+      }
+
+      &::after {
+        display: none;
+      }
+
+      *:is(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label) {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+
+        &:after {
+          content: '\f055';
+          position: absolute;
+          font-size: rem(24);
+          top: calc((#{var(--line-height)} / 2) - #{rem(12)} + #{rem(14)});
+          right: var(--inline-padding);
+          width: rem(24);
+          height: rem(24);
+          line-height: rem(24);
+          font-weight: 300;
+          font-family: 'Font Awesome 6 Pro';
+        }
+      }
+    }
+
+    &[open] summary {
+      margin-bottom: 2rem;
+    }
+
+    &[open] summary :is(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label) {
+      &:after {
+        content: '\f056';
+        font-weight: 900;
+      }
+    }
+
+    summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label)) {
+      // h3 purposelessly missed out
+
+      font-family: $headings-font-family;
+      font-style: $headings-font-style;
+      color: $headings-color;
+      clear: both;
+      display: block;
+
+      [class*='fa-'] {
+        margin-right: 0.5rem;
+      }
+
+      font-size: rem(18);
+      line-height: var(--line-height);
+      padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
+      font-weight: 700;
+      max-width: 100%;
+
+      &:after {
+        content: '\f055';
+        display: block;
         position: absolute;
         font-size: rem(24);
         top: calc((#{var(--line-height)} / 2) - #{rem(12)} + #{rem(14)});
         right: var(--inline-padding);
         width: rem(24);
         height: rem(24);
+        margin: 0;
         line-height: rem(24);
         font-weight: 300;
         font-family: 'Font Awesome 6 Pro';
       }
+
+      @include media-breakpoint-up(sm, $mobileOnly) {
+        font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
+        --line-height: #{rem(map.get($heading-sizes, 'h3_lh_sm'))};
+        padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
+        font-weight: 900;
+      }
+    }
+
+    &[open] summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6)) {
+      &:after {
+        content: '\f056';
+        font-weight: 900;
+      }
     }
   }
 
-  &[open] summary {
-    margin-bottom: 2rem;
-  }
+  dialog iam-accordion details {
+    --inline-padding: var(--dialog-padding);
 
-  &[open] summary :is(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label) {
-    &:after {
-      content: '\f056';
-      font-weight: 900;
-    }
-  }
+    margin-inline: calc(var(--dialog-padding) * -1);
+    width: calc(100% + var(--dialog-padding) + var(--dialog-padding));
 
-  summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label)) {
-    // h3 purposelessly missed out
-
-    font-family: $headings-font-family;
-    font-style: $headings-font-style;
-    color: $headings-color;
-    clear: both;
-    display: block;
-
-    [class*='fa-'] {
-      margin-right: 0.5rem;
+    &:has(summary:is(:hover, :focus-visible)),
+    &[open] {
+      background: var(--colour-light);
+      overflow: hidden;
     }
 
-    font-size: rem(18);
-    line-height: var(--line-height);
-    padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
-    font-weight: 700;
-    max-width: 100%;
-
-    &:after {
-      content: '\f055';
-      display: block;
-      position: absolute;
-      font-size: rem(24);
-      top: calc((#{var(--line-height)} / 2) - #{rem(12)} + #{rem(14)});
-      right: var(--inline-padding);
-      width: rem(24);
-      height: rem(24);
-      margin: 0;
-      line-height: rem(24);
-      font-weight: 300;
-      font-family: 'Font Awesome 6 Pro';
+    // Fix the border bottom issue
+    &:has(+ details[open]),
+    &:has(summary:is(:hover, :focus-visible)),
+    &:has(+ details summary:is(:hover, :focus-visible)),
+    &[open] {
+      border-bottom: 1px solid var(--colour-border);
     }
 
-    @include media-breakpoint-up(sm,$mobileOnly) {
-      font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
-      --line-height: #{rem(map.get($heading-sizes, 'h3_lh_sm'))};
-      padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
-      font-weight: 900;
+    &:has(+ details[open]) summary,
+    &:has(summary:is(:hover, :focus-visible)) summary,
+    &:has(+ details summary:is(:hover, :focus-visible)) summary,
+    &[open] summary {
+      border-bottom: 0;
+    }
+
+    &[open] summary {
+      margin-bottom: 1rem;
+    }
+
+    summary {
+      --inline-padding: 0;
+    }
+
+    padding-inline: var(--dialog-padding);
+
+    &::before {
+      content: '';
     }
   }
-
-  &[open] summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6)) {
-    &:after {
-      content: '\f056';
-      font-weight: 900;
-    }
-  }
-}
-
-dialog iam-accordion details {
-  --inline-padding: var(--dialog-padding);
-
-  margin-inline: calc(var(--dialog-padding) * -1);
-  width: calc(100% + var(--dialog-padding) + var(--dialog-padding));
-
-  &:has(summary:is(:hover, :focus-visible)),
-  &[open] {
-    background: var(--colour-light);
-    overflow: hidden;
-  }
-
-  // Fix the border bottom issue
-  &:has(+ details[open]),
-  &:has(summary:is(:hover, :focus-visible)),
-  &:has(+ details summary:is(:hover, :focus-visible)),
-  &[open] {
-    border-bottom: 1px solid var(--colour-border);
-  }
-
-  &:has(+ details[open]) summary,
-  &:has(summary:is(:hover, :focus-visible)) summary,
-  &:has(+ details summary:is(:hover, :focus-visible)) summary,
-  &[open] summary {
-    border-bottom: 0;
-  }
-
-  &[open] summary {
-    margin-bottom: 1rem;
-  }
-
-  summary {
-    --inline-padding: 0;
-  }
-
-  padding-inline: var(--dialog-padding);
-
-  &::before {
-    content: '';
-  }
-}
 }
