@@ -7,11 +7,11 @@ $darkMode: 'true' !default;
 @include layer('elements', $layers) {
   // #region reset
   a {
-    color: var(--#{$prefix}link-color);
+    color: var(--link-color);
     text-decoration: $link-decoration;
 
     &:hover {
-      color: var(--#{$prefix}link-hover-color);
+      color: var(--link-hover-color);
       text-decoration: $link-hover-decoration;
     }
   }

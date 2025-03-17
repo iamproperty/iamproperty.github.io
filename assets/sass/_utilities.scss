@@ -8,6 +8,10 @@ $layers: 'true' !default;
 $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
+
+@forward '_functions/variables_old' show $utilities;
+@use '_functions/bs_utilities' as *;
+
 @include layer('utilities', $layers) {
   // Missing classes that exist as mixins
   @include clearfix();

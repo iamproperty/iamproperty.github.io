@@ -3,7 +3,12 @@
 @use 'sass:meta';
 @use 'sass:string';
 
-@use '../../assets/sass/_func.scss' as *;
+@use '../../assets/sass/_functions/functions.scss' as *;
+
+@use '../../assets/sass/_functions/variables_old.scss' as *;
+@use '../../assets/sass/_functions/mixins.scss' as *;
+@use '../../assets/sass/_functions/bs_utilities' as *;
+@use '../../assets/sass/_functions/utility-mixins' as *;
 
 // Utility generator
 // Used to generate utilities & print utilities
