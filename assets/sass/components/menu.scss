@@ -13,12 +13,9 @@ $darkMode: 'true' !default;
   iam-menu:defined {
     --menu-padding: #{$menuPadding};
     --border-color: var(--colour-border);
+    --menu-item-margin: 0 0 0.5rem 0;
     border: #{$menuBorder};
     border-radius: #{$menuBorderRadius};
     box-shadow: #{$menuBoxShadow};
-    --menu-item-margin: 0 0 0.5rem 0;
-
-    //--menu-down-icon: none;
-    //--menu-after-bg: none;
   }
 }
