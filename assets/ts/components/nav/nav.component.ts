@@ -16,7 +16,7 @@ class iamNav extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css')
       ? document.body.getAttribute('data-core-css')
       : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/nav.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/nav.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
 
     const template = document.createElement('template');

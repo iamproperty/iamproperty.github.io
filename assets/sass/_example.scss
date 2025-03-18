@@ -1,0 +1,61 @@
+// Include and builtin sass modules
+@use 'sass:map';
+
+// Include any local files needed, the _func file will bring in all functions and variables
+@use '_func.scss' as *;
+
+// Sass variables declared
+$root: ':root' !default;
+$layers: 'true' !default;
+
+// Each file should be added to a layer: legacy, reset, elements, components, templates, overrides or utilities
+@include layer('elements') {
+  // Try to keep the selectors as basic and easy to read as apossible
+  .element {
+    --css-variable: 3rem;
+    --second-variable: 3rem;
+
+    // Rulesets
+    // - Always use relative values with the exception of borders, text-decoration and outlines
+    // - Use globally set CSS variables as much as possible especially for cases like: font sizes and colours
+    width: 1rem;
+    border: 2px solid var(--colour-border);
+
+    // Any expanded queries should be added after all of the root rulesets
+    &:has(> i) {
+      position: relative;
+    }
+
+    // Any media queries should be added after all of the root rulesets
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      min-height: rem(300);
+    }
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      min-height: rem(470);
+    }
+
+    @include dark-mode($darkMode) {
+      // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
+      [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
+        color: var(--colour-body);
+      }
+    }
+
+    @media (forced-colors: active) {
+      #{$root} {
+        --contrast-outline-width: 1px;
+      }
+    }
+  }
+
+  // Extends should only be used inside of the same file and used very carefully
+  %heading {
+    font-weight: bold;
+    line-height: var(--line-height);
+  }
+
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6) {
+    @extend %heading;
+  }
+}

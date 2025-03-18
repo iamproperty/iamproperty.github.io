@@ -116,11 +116,11 @@
     components: {
       DSHeader,
       Table,
-      Readme,
-      WebReadme,
       Tabs,
       Tab,
       AppliedFilters,
+      Readme,
+      WebReadme,
     },
     mounted() {},
     data() {

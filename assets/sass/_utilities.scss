@@ -1,7 +1,18 @@
 @use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
 @use '_func' as *;
 
-@include layer('utilities') {
+$root: ':root' !default;
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+
+@forward '_functions/variables_old' show $utilities;
+@use '_functions/bs_utilities' as *;
+
+@include layer('utilities', $layers) {
   // Missing classes that exist as mixins
   @include clearfix();
   @include visually-hidden();
@@ -14,16 +25,16 @@
   @include line-clamp();
 
   // Loop over each breakpoint
-  @each $breakpoint in map-keys($grid-breakpoints) {
+  @each $breakpoint in map.keys($grid-breakpoints) {
     // Generate media query if needed
-    @include media-breakpoint-up($breakpoint) {
+    @include media-breakpoint-up($breakpoint, $mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       // Loop over each utility property
       @each $key, $utility in $utilities {
         // The utility can be disabled with `false`, thus check if the utility is a map first
         // Only proceed if responsive media queries are enabled or if it's the base media query
-        @if type-of($utility) == 'map' and (map-get($utility, responsive) or $infix == '') {
+        @if meta.type-of($utility) == 'map' and (map.get($utility, responsive) or $infix == '') {
           @include generate-utility($utility, $infix);
         }
       }
@@ -35,7 +46,7 @@
     @each $key, $utility in $utilities {
       // The utility can be disabled with `false`, thus check if the utility is a map first
       // Then check if the utility needs print styles
-      @if type-of($utility) == 'map' and map-get($utility, print) == true {
+      @if meta.type-of($utility) == 'map' and map.get($utility, print) == true {
         @include generate-utility($utility, '-print');
       }
     }

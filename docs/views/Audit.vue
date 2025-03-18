@@ -30,6 +30,18 @@
             <td>The most important CSS; doesn't include the grid, components or utilities</td>
           </tr>
           <tr>
+            <th>Mobile CSS</th>
+            <td>{{ $shared.audit.css_mob_size }}</td>
+            <td>{{ $shared.benchmark.css_mob_size }}</td>
+            <td>The base CSS plus the standard grid, components and the mixin utilities</td>
+          </tr>
+          <tr>
+            <th>Core CSS</th>
+            <td>{{ $shared.audit.css_core_mob_size }}</td>
+            <td>{{ $shared.benchmark.css_core_mob_size }}</td>
+            <td>The most important CSS; doesn't include the grid, components or utilities</td>
+          </tr>
+          <tr>
             <th>Base JS</th>
             <td>{{ $shared.audit.js_size }}</td>
             <td>{{ $shared.benchmark.js_size }}</td>

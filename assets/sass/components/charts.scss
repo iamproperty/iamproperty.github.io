@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @use '../_func' as *;
 
 $chart-colour-1: #1ebee6 !default;
@@ -12,7 +14,7 @@ $chart-colour-9: #9d9d9d !default;
 $chart-colour-10: #66838a !default;
 
 $chart-colors: ();
-$chart-colors: map-merge(
+$chart-colors: map.merge(
   (
     1: $chart-colour-1,
     2: $chart-colour-2,
@@ -68,16 +70,6 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
   --chart-height-set: var(--chart-height, #{$chart-height});
   --chart-height-lg-set: var(--chart-height-lg, #{$chart-height-lg});
   --chart-height-resp: var(--chart-height-set);
-
-  tbody {
-    --chart-direction: 360deg;
-    --chart-day-bg-pos: 100% calc(var(--single-day) * 7);
-  }
-
-  @each $index, $value in $chart-colors {
-    --chart-colour-#{$index}-set: var(--chart-colour-#{$index}, #{$value});
-  }
-
   // Non-configurable css vars
   --index-below: -1;
   --index-base: 0;
@@ -94,6 +86,46 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
   --yaxis-point-display: block;
   --yaxis-last-point-transform: translate(0, -50%);
   --bar-gap: min(10%, 0.75rem);
+
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+
+  @each $index, $value in $chart-colors {
+    --chart-colour-#{$index}-set: var(--chart-colour-#{$index}, #{$value});
+  }
+
+  tbody {
+    --chart-direction: 360deg;
+    --chart-day-bg-pos: 100% calc(var(--single-day) * 7);
+  }
+
+  &:has(.chart__options) {
+    position: relative;
+    padding-top: rem(24);
+  }
+
+  > * {
+    display: block;
+    order: 2;
+  }
+
+  > figcaption {
+    display: contents;
+
+    p:not(.chart__strapline, .chart__title) {
+      margin-bottom: 0.25rem;
+      font-size: var(--label-size);
+    }
+
+    > * {
+      order: 3;
+    }
+
+    > :is(.chart__title, .chart__strapline) {
+      order: 1;
+    }
+  }
 
   @container (max-width: 36em) {
     :has(tr:nth-child(5) td:nth-child(4)),
@@ -125,37 +157,6 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
       --label-size: #{rem(14)};
       --pie-size: calc(25% - 1.5rem);
       --line-thickness: 0.5px;
-    }
-  }
-
-  &:has(.chart__options) {
-    position: relative;
-    padding-top: rem(24);
-  }
-
-  margin-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-
-  > * {
-    display: block;
-    order: 2;
-  }
-
-  > figcaption {
-    display: contents;
-
-    p:not(.chart__strapline, .chart__title) {
-      margin-bottom: 0.25rem;
-      font-size: var(--label-size);
-    }
-
-    > * {
-      order: 3;
-    }
-
-    > :is(.chart__title, .chart__strapline) {
-      order: 1;
     }
   }
 }
