@@ -8,9 +8,15 @@
   import tabSpacing from '../../img/tabs/individual-tab-spacing.png';
   import desktopTabsSpacing from '../../img/tabs/desktop-tabs-spacing.png';
   import mobileTabsSpacing from '../../img/tabs/mobile-tabs-spacing.png';
+  import verticalLevel1Spacing from '../../img/tabs/default-level-1-tab-spacing.png';
+  import verticalExpandableLevel1Spacing from '../../img/tabs/expandable-level-1-tab-spacing.png';
+  import verticalExpandableLevel2Spacing from '../../img/tabs/expandable-level-2-tab-spacing.png';
+  import collapsibleNav from '../../img/tabs/collapsible-nav.png';
+
   import mobileUi from '../../img/tabs/mobile-ui-example.png';
 
   import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
   const disabledBoolean = ref(true);
 
@@ -166,66 +172,127 @@
               </Tab>
             </Tabs>
           </div>
+          
         </div>
+
+        <div>
+          <h3>Dropdown</h3>
+          <p>
+            If the total width of the tab items exceeds the screen width by a significant amount on mobile (for example, more than double the width of the mobile screen) It may be appropriate to present the tabs in a dropdown list.
+            You can find the dropdown documentation here: <RouterLink to="/form/select">Select component</RouterLink>
+          </p>
+        </div>
+      </section>
+      <section>
+        <h2>Vertical Tabs</h2>
+        <p>This tab type should be presented vertically either within a collapsible side menu or alongside content on
+          desktop. If the vertical tabs are outside of a collapsible side menu on tablet/mobile the vertical tabs should be
+          replaced with a select drop down which presents all of the tabs.</p>
+        <h3>States</h3>
+        <h4>Default Level 1 tab</h4>
+        
+        <ul class="states-wrap list-unstyled d-flex flex-wrap">
+          <li>
+          <p class="lead pb-1">Unselected State</p>
+          <button class="fake-vertical-tab">Lorem Ipsum</button>
+        </li>
+        <li>
+          <p class="lead pb-1">Unselected Hover/Focus State</p>
+          <button class="fake-vertical-tab hover">Lorem Ipsum</button>
+        </li>
+        <li>
+          <p class="lead pb-1">Selected State</p>
+          <button class="fake-vertical-tab" aria-pressed="true">Lorem Ipsum</button>
+        </li>
+     
+        </ul>
+
+        <h4>Expandable Level 1 tab</h4>
+        
+        <ul class="states-wrap list-unstyled d-flex flex-wrap">
+          <li>
+          <p class="lead pb-1">Unselected State</p>
+          <button class="fake-vertical-tab expandable level-1">Lorem Ipsum <i class="fa-light fa-circle-plus"></i></button>
+        </li>
+        <li>
+          <p class="lead pb-1">Unselected Hover/Focus State</p>
+          <button class="fake-vertical-tab expandable level-1 hover">Lorem Ipsum <i class="fa-light fa-circle-plus"></i></button>
+        </li>
+        <li>
+          <p class="lead pb-1">Selected State</p>
+          <button class="fake-vertical-tab expandable level-1" aria-pressed="true">Lorem Ipsum <i class="fa-solid fa-circle-minus"></i></button>
+        </li>
+
+        <li>
+          <p class="lead pb-1">Selected Hover/Focus State</p>
+          <button class="fake-vertical-tab expandable level-1 hover" aria-pressed="true">Lorem Ipsum <i class="fa-solid fa-circle-minus"></i></button>
+        </li>
+     
+     
+        </ul>
+
+        <h4>Expandable Level 2 tab</h4>
+        
+        <ul class="states-wrap list-unstyled d-flex flex-wrap">
+          <li>
+          <p class="lead pb-1">Unselected State</p>
+          <button class="fake-vertical-tab expandable level-2">Lorem Ipsum</button>
+        </li>
+        <li>
+          <p class="lead pb-1">Unselected Hover/Focus State</p>
+          <button class="fake-vertical-tab expandable level-2 hover">Lorem Ipsum</button>
+        </li>
+        <li>
+          <p class="lead pb-1">Selected State</p>
+          <button class="fake-vertical-tab expandable level-2" aria-pressed="true">Lorem Ipsum</button>
+        </li>
+     
+        </ul>
+
+      </section>
+
+      <section>
+        <h3>Dimensions</h3>
+        <div class="row">
+        <div class="col-4">
+        <h4>Default level 1 tab</h4>
+        <img :src="verticalLevel1Spacing" />
+      </div>
+      <div class="col-4">
+        <h4>Expandable level 1 tab</h4>
+        <img :src="verticalExpandableLevel1Spacing" />
+      </div>
+      <div class="col-4">
+        <h4>Expandable level 2 tab</h4>
+        <img :src="verticalExpandableLevel2Spacing" />
+      </div>
+      </div>
+      </section>
+
+      <section>
+        <h3>Side menu with vertical tabs</h3>
+        <p>Vertical tabs can be added to a side menu. The list of items should scroll vertically if they overflow the height of
+          the side menu tab area.
+          </p>
+
+          <img :src="collapsibleNav" />
+      </section>
+
+      <section>
+        <h3>Tablet/Mobile behaviour (outside of collapsible side menu only)</h3>
+
+        <p>On tablet/mobile vertical tabs should be presented in a dropdown list. You can find the dropdown documentation here: <RouterLink to="/form/select">Select component</RouterLink></p>
+
       </section>
 
 
     </div>
 
-    <div class="container visualtest">
-      <Tabs>
-        <a href="/link" class="active">A link</a>
-        <a href="/link">A another link</a>
-      </Tabs>
-
-      <p>Fake content that is served up via the serverside</p>
-    </div>
-
-    <div class="container visualtest">
-      <Tabs>
-        <Tab title="The benefits of auction">
-          <p class="lead">Tab content 1</p>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book.
-          </p>
-        </Tab>
-        <Tab title="The types of auctions we offer">
-          <p class="lead">Tab content 2</p>
-          <a href="/link">a link</a>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book.
-          </p>
-        </Tab>
-        <Tab title="Online auctions" lazy>
-          <p class="lead">Tab content 3</p>
-          <p>Lazy loaded table</p>
-          <Table
-            :fields="[{ key: 'column_1' }, { key: 'column_2' }, { key: 'column_3' }]"
-            :items="[
-              {
-                column_1: 'row 1',
-                column_2: 'row 1',
-                column_4: 'row 1',
-              },
-            ]"
-          ></Table>
-        </Tab>
-        <Tab title="Disabled tab example" :disabled="disabledBoolean">
-          <p class="lead">Tab content (disabled tab)</p>
-          <p>Tab paragraph (disabled tab)</p>
-        </Tab>
-      </Tabs>
-    </div>
-
     <div class="container">
       <h2 class="mt-5">Admin panel</h2>
       <p>
-        The tabs component display changes when its held within an admin panel, this is to make it fit into the admin
-        panel styles.
+        Selecting each tab will change the content shown within the admin panel content. The light & dark gradient and
+        block colours can all be used as the highlight colour for the selected tab.
       </p>
     </div>
 
@@ -261,11 +328,29 @@
             ]"
           ></Table>
         </Tab>
-        <Tab title="Disabled tab example" :disabled="disabledBoolean">
-          <p class="lead">Tab content (disabled tab)</p>
-        </Tab>
       </Tabs>
     </div>
+        
+    <ul class="states-wrap list-unstyled d-flex flex-wrap">
+      <li>
+      <p class="lead pb-1">Default</p>
+      <button class="fake-admin-tab">The benefits of auction</button>
+    </li>
+    <li>
+      <p class="lead pb-1">Selected</p>
+      <button class="fake-admin-tab" aria-pressed="true">The benefits of auction</button>
+    </li>
+    <li>
+      <p class="lead pb-1">Hover</p>
+      <button class="fake-admin-tab hover">The benefits of auction</button>
+    </li>
+
+    <li>
+      <p class="lead pb-1">Disabled</p>
+      <button class="fake-admin-tab disabled">The benefits of auction</button>
+    </li>
+ 
+    </ul>
 
     <div class="container">
       <h2 class="mt-5">Guided tabs</h2>
@@ -610,5 +695,61 @@
       }
     }
 
+  }
+
+  .fake-vertical-tab,
+  .fake-admin-tab {
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+  }
+
+  .fake-vertical-tab {
+    border-bottom: 2px solid rgba(111, 111, 111, 0.15);
+
+    &:not(.disabled).hover,
+    &:not(.disabled):is([aria-pressed=true],:active,.current) {
+      background: #E9F9FD;
+    }
+    
+    &:not(.disabled, .level-1):is([aria-pressed=true],:active,.current) {
+      border-right: 3px solid var(--colour-info);
+      font-weight: bold;
+    }
+
+    &.expandable {
+      i {
+        margin-inline-start: 1rem;
+      }
+
+      &:not(.disabled, .level-2):is([aria-pressed=true],:active,.current) {
+        background: none;
+      }
+
+      &.level-2 {
+        padding-inline-start: 4rem;
+      }
+    }
+  }
+
+  .fake-admin-tab {
+    font-size: 1.15rem;
+    border-right: 1px solid var(--colour-border);
+
+    &:not(.disabled, .level-2):is([aria-pressed=true],:active,.current) {
+      background-color: rgb(180, 230, 165);
+      background-image: linear-gradient(-90deg, rgb(30, 190, 230) 0px, rgba(0, 0, 0, 0) 100%)
+    }
+
+    &.disabled {
+      cursor: not-allowed;
+      opacity: .4;
+    }
+
+  }
+
+  .mobile-ui {
+    width: 50%;
+    max-width: 22.5rem;
   }
 </style>
