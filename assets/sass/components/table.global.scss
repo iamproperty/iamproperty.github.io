@@ -614,3 +614,57 @@ iam-table.table--fullwidth:not([data-expandable]) {
   }
 }
 // #endregion
+
+// #region sort by column header
+
+
+
+$icon-sort: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d='M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z'/></svg>");
+
+$icon-sort-asc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d='M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z'/></svg>");
+
+
+
+$icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d='M174.6 472.6c4.5 4.7 10.8 7.4 17.4 7.4s12.8-2.7 17.4-7.4l168-176c9.2-9.6 8.8-24.8-.8-33.9s-24.8-8.8-33.9 .8L216 396.1 216 56c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 340.1L41.4 263.4c-9.2-9.6-24.3-9.9-33.9-.8s-9.9 24.3-.8 33.9l168 176z'/></svg>");
+
+
+
+
+iam-table {
+  
+  @container (width >= 32em) {
+  
+
+    &:has(th[data-sort]) th, td{
+      padding-block: 0.75rem;
+      padding-left: 0.5rem;
+      padding-right: 2.5rem;
+    }
+
+    th[data-sort] {
+      
+      background-repeat: no-repeat;
+      background-size: 1rem 1rem;
+      background-position: calc(100% - 0.5rem) 50%;
+      cursor: pointer;
+
+      &:hover {
+        background-color:var(--colour-light);
+        background-image: $icon-sort;
+      }
+    }
+
+    th[data-sort][data-order-by="asc"] {
+
+      background-image: $icon-sort-asc;
+    }
+    th[data-sort][data-order-by="desc"] {
+
+      background-image: $icon-sort-desc;
+    }
+  }
+  
+  }
+  
+  // #endregion
+  

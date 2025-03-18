@@ -93,7 +93,7 @@ export const createMobileButton = (table, wrapper): void => {
   });
 };
 
-export const addTableEventListeners = (table): void => {
+export const addTableEventListeners = (table, form): void => {
   table.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-expand-button]')) {
       const button = event.target.closest('[data-expand-button]');
@@ -105,6 +105,44 @@ export const addTableEventListeners = (table): void => {
       else tableRow.setAttribute('data-view', 'full');
 
       button.blur();
+    }
+    else if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
+      const heading = event.target.closest('[data-sort]');
+      heading.setAttribute('data-sort','true');
+
+      // Turn other headings off
+      Array.from(table.querySelectorAll('th[data-sort]')).forEach((element) => {
+        if(element != heading){
+          element.setAttribute('data-sort','');
+          element.removeAttribute('data-order-by');
+        }
+      });
+
+      if(heading.hasAttribute('data-order-by') && heading.getAttribute('data-order-by') == "asc"){
+        heading.setAttribute('data-order-by','desc');
+      }
+      else {
+        heading.setAttribute('data-order-by','asc');
+      }
+
+      // dispath event
+      const dispatchedEvent = new CustomEvent('sort-by-heading', {
+        detail: { 
+          'heading': heading.textContent,
+          'sortBy': heading.getAttribute('data-order-by'),
+          'ref': heading.getAttribute('data-ref')
+         },
+      });
+      const component = heading.closest('iam-table');
+      component.dispatchEvent(dispatchedEvent);
+
+
+      const sortBy = heading.textContent.trim();
+      const order = heading.getAttribute('data-order-by');
+
+      if (!wrapper.hasAttribute('data-submit')) {
+        sortTableByValues(table, sortBy, order);
+      }
     }
   });
 };
@@ -455,6 +493,15 @@ export const sortTable = (table, form, savedTableBody): void | boolean => {
     return false;
   }
 
+  sortTableByValues(table, sortBy, order, format);
+
+};
+
+
+export const sortTableByValues = (table, sortBy, order, format = ''): void => {
+  
+  const tbody = table.querySelector('tbody');
+
   let orderArray = [];
   if (!['asc', 'desc', 'descending'].includes(order)) {
     orderArray = order.split(',');
@@ -506,7 +553,7 @@ export const sortTable = (table, form, savedTableBody): void | boolean => {
     strTbody += tableRow.row.outerHTML;
   });
   tbody.innerHTML = strTbody;
-};
+}
 
 export const filterTable = (table, form, wrapper): void => {
   table.classList.remove('table--filtered');

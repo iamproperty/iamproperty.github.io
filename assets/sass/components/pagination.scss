@@ -19,7 +19,14 @@
     display: flex;
     align-items: center;
   }
+
+  *:has(.prev:disabled):has(.next:disabled) {
+
+    display: none;
+  }
 }
+
+
 
 // #region page jump and per page
 .pagination div:is(.page-jump, .per-page) {
