@@ -18,10 +18,13 @@
   "fileupload",
   "search",
   "inline-edit",
+  "menu",
   "multiselect",
   "multi-step",
   "slider",
   "carousel",
   "marketing",
-  "barchart"
+  "barchart",
+  "doughnutchart",
+  "bento-grid"
 ]

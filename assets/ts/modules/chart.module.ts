@@ -1,3 +1,5 @@
+import { ucfirst, unsnake } from './helpers';
+
 // #region Functions that setup and trigger other functions
 
 export const addClasses = (chartElement: any, chartOuter: any): boolean => {
@@ -20,6 +22,11 @@ export const addClasses = (chartElement: any, chartOuter: any): boolean => {
 };
 
 export const setupChart = (chartElement: any, chartOuter: any, tableElement: any): boolean => {
+  if (chartElement.tagName == 'IAM-DOUGHNUTCHART') {
+    setupDoughnutChart(chartElement, chartOuter, tableElement);
+    return true;
+  }
+
   // #region Reset the chart
   // empty divs to re-populate
   const chartKey = chartOuter.querySelector('.chart__key');
@@ -48,6 +55,28 @@ export const setupChart = (chartElement: any, chartOuter: any, tableElement: any
   if (xaxis) {
     createXaxis(chartOuter);
   }
+
+  return true;
+};
+
+export const setupDoughnutChart = (chartElement: any, chartOuter: any, tableElement: any): boolean => {
+  // #region Reset the chart
+  // empty divs to re-populate
+  const chartKey = chartOuter.querySelector('.chart__key');
+  chartKey.innerHTML = '';
+
+  // Remove old input fields
+  Array.from(chartOuter.querySelectorAll(':scope > input[type="checkbox"],:scope > input[type="radio"]')).map(
+    (element: any) => {
+      element.remove();
+    }
+  );
+  // #endregion
+
+  setCellData(chartElement, tableElement);
+
+  createChartKey(chartOuter, tableElement, chartKey);
+  createdoughnuts(chartOuter);
 
   return true;
 };
@@ -101,6 +130,10 @@ export const setEventListener = function (chartElement: any, chartOuter: any): v
 
     shadowTable.innerHTML = table.innerHTML;
     setCellData(chartElement, shadowTable);
+
+    if (chartElement.tagName == 'IAM-DOUGHNUTCHART') {
+      createdoughnuts(chartOuter);
+    }
   });
 };
 
@@ -146,6 +179,15 @@ export const setEventObservers = function (chartElement: any, chartOuter: any): 
 
   return true;
 };
+
+function getCoordinatesForPercent(percent: number, doughnutCount: number): any {
+  // This moves the start point to the top middle point like a clock
+  if (doughnutCount > 1) percent = percent - 0.25;
+
+  const x = Math.cos(2 * Math.PI * percent);
+  const y = Math.sin(2 * Math.PI * percent);
+  return [x * 100, y * 100];
+}
 // #endregion
 
 // #region GET functions
@@ -399,6 +441,10 @@ function createChartKeyItem(
   label.setAttribute('for', `${chartID}-dataset-${index}`);
   label.setAttribute('data-label', `${text}`);
   label.setAttribute('part', `key`);
+
+  const total = chartOuter.querySelector(`tbody tr td:nth-child(${index + 1})`)?.getAttribute('data-numeric');
+
+  label.setAttribute('data-numeric', total);
   label.innerHTML = `${text}`;
   chartKey.append(label);
 
@@ -457,6 +503,92 @@ export const createTooltips = function (chartOuter: any): void {
     //title.removeAttribute('title'); // TODO add a supports query for anchor positioning
   });
 };
+
+export const createdoughnuts = function (chartOuter: any): void {
+  let returnString = '';
+  const chartInner = chartOuter.querySelector('.chart');
+  let doughnutWrapper = chartOuter.querySelector('.doughnuts');
+
+  if (!doughnutWrapper) {
+    doughnutWrapper = document.createElement('div');
+    doughnutWrapper.setAttribute('class', 'doughnuts');
+    chartInner.append(doughnutWrapper);
+  }
+
+  Array.from(chartInner.querySelectorAll('tbody tr')).forEach((item: any, index) => {
+    let paths = '';
+    let tooltips = '';
+    let cumulativePercent = 0;
+    let total = 0;
+    const titleKey = item.querySelectorAll('td')[0];
+    const title = titleKey.innerHTML;
+    let doughnutCount = 0;
+    const rowTotal = item.getAttribute('data-numeric');
+
+    // Work out the total amount
+    Array.from(item.querySelectorAll('td')).forEach((td: any, subindex) => {
+      const display = getComputedStyle(td).display;
+
+      if (subindex != 0 && display != 'none') {
+        let value = td.getAttribute('data-numeric');
+
+        value = value.replace('£', '');
+        value = value.replace('%', '');
+        value = value.replace(',', '');
+        value = Number.parseInt(value);
+
+        total += value;
+        doughnutCount++;
+      }
+    });
+
+    // Create the paths
+    Array.from(item.querySelectorAll('td')).forEach((td: any, subindex) => {
+      const display = getComputedStyle(td).display;
+
+      if (subindex != 0 && doughnutCount == 1 && display != 'none') {
+        const pathData = `M 0 0 L 100 0 A 100 100 0 1 1 100 -0.01 L 0 0`;
+
+        paths += `<path d="${pathData}" style="${td.getAttribute('style')} --path-index: ${subindex};"></path>`;
+        tooltips += `<span class="h5 mb-0" part="popover">${ucfirst(unsnake(td.getAttribute('data-label'))).trim()}<br/>${td.hasAttribute('data-second') ? `${td.getAttribute('data-second-label')}: ${td.getAttribute('data-second')}<br/>` : ''}${td.querySelector('[part="popover"]')?.innerHTML}</span>`;
+      } else if (subindex != 0) {
+        let value = td.getAttribute('data-numeric');
+        const hide = display == 'none' ? 'display: none;' : '';
+
+        value = value.replace('£', '');
+        value = value.replace('%', '');
+        value = value.replace(',', '');
+        value = Number.parseInt(value);
+
+        const percent = value / total;
+        const [startX, startY] = getCoordinatesForPercent(cumulativePercent, doughnutCount);
+        const [endX, endY] = getCoordinatesForPercent(cumulativePercent + percent, doughnutCount);
+        const largeArcFlag = percent > 0.5 ? 1 : 0; // if the slice is more than 50%, take the large arc (the long way around)
+        const pathData = [
+          `M 0 0`,
+          `L ${startX ? startX.toFixed(0) : 0} ${startY ? startY.toFixed(0) : 0}`, // Move
+          `A 100 100 0 ${largeArcFlag} 1 ${endX ? endX.toFixed(0) : 0} ${endY ? endY.toFixed(0) : 0}`, // Arc
+          `L 0 0`, // Line
+        ].join(' ');
+
+        paths += `<path d="${pathData}" style="${td.getAttribute('style')} --path-index: ${subindex};${hide}"></path>`;
+        tooltips += `<span class="h5 mb-0" part="popover">${ucfirst(unsnake(td.getAttribute('data-label'))).trim()}<br/>${td.hasAttribute('data-second') ? `${td.getAttribute('data-second-label')}: ${td.getAttribute('data-second')}<br/>` : ''}${td.querySelector('[part="popover"]')?.innerHTML}</span>`;
+
+        // each slice starts where the last slice ended, so keep a cumulative percent
+        if (display != 'none') cumulativePercent += percent;
+      }
+    });
+
+    returnString += `<div class="doughnut">
+  <svg viewBox="-105 -105 210 210" preserveAspectRatio="none" style="--row-index: ${index + 1};">${paths}</svg>
+  <div class="doughnut__title" data-numeric="${rowTotal}"><span class="h5 mb-0">${title}</span></div>
+  <div class="tooltips">${tooltips}</div>
+</div>`;
+  });
+
+  doughnutWrapper.innerHTML = returnString;
+};
+
 // #endregion
 
 export default setupChart;

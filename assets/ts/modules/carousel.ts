@@ -31,7 +31,7 @@ export const generatePipsHTML = function (carouselComponent, thumbnailImages): s
   return pips;
 };
 
-const getProgressMax = function (itemCount, visibleItems): number {
+export const getProgressMax = function (itemCount, visibleItems): number {
   if (visibleItems == 1) {
     return itemCount;
   }
