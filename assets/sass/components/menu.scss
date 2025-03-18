@@ -1,16 +1,21 @@
-$menuPadding: 1rem !default;
-$menuBorder: none !default;
-$menuBorderRadius: 1rem !default;
-$menuBoxShadow: 0px 2px 9px rgba(0, 0, 0, 0.1) !default;
+@use '../_func' as *;
 
-iam-menu:defined {
-  --menu-padding: #{$menuPadding};
-  --border-color: var(--colour-border);
-  border: #{$menuBorder};
-  border-radius: #{$menuBorderRadius};
-  box-shadow: #{$menuBoxShadow};
-  --menu-item-margin: 0 0 0.5rem 0;
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  //--menu-down-icon: none;
-  //--menu-after-bg: none;
+@include layer('components', $layers) {
+  $menuPadding: 1rem !default;
+  $menuBorder: none !default;
+  $menuBorderRadius: 1rem !default;
+  $menuBoxShadow: 0px 2px 9px rgba(0, 0, 0, 0.1) !default;
+
+  iam-menu:defined {
+    --menu-padding: #{$menuPadding};
+    --border-color: var(--colour-border);
+    --menu-item-margin: 0 0 0.5rem 0;
+    border: #{$menuBorder};
+    border-radius: #{$menuBorderRadius};
+    box-shadow: #{$menuBoxShadow};
+  }
 }

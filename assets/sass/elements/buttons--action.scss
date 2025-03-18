@@ -1,49 +1,55 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
-// #region Action button
-.btn-action {
-  --btn-border-width: #{rem(1)};
-  --btn-padding-block: #{rem(5)};
-  --btn-padding-inline: #{rem(5)};
-  --btn-margin: #{rem(8)};
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  &:not(.btn-primary) {
-    color: var(--colour-heading);
+@include layer('elements', $layers) {
+  // #region Action button
+  .btn-action {
+    --btn-border-width: #{rem(1)};
+    --btn-padding-block: #{rem(5)};
+    --btn-padding-inline: #{rem(5)};
+    --btn-margin: #{rem(8)};
+
+    &:not(.btn-primary) {
+      color: var(--colour-heading);
+    }
+
+    &:not(.btn-primary):not(.border-0) {
+      background-color: var(--colour-canvas-2);
+      border: var(--btn-border-width) solid var(--colour-muted);
+    }
+
+    border-radius: rem(4) !important;
+    font-weight: 400 !important;
+    font-size: 1rem;
+    line-height: rem(20);
+
+    &.btn[class*='fa-']:before {
+      content: var(--fa);
+      margin-right: rem(6);
+    }
+
+    a:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
+    &:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+      background: var(--colour-btn-action-hover-bg);
+    }
+
+    .btn-primary:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
+    &.btn-primary:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+      filter: brightness(90%);
+      background: var(--colour-btn-bg);
+      border: var(--btn-border-width) solid var(--colour-btn-border);
+      color: var(--colour-btn);
+    }
+
+    a:is(:active, .active):not([disabled]):not(.btn-primary) &,
+    &:is(:active, .active):not([disabled]):not(.btn-primary) {
+      filter: brightness(85%);
+      transition: all 0.1s;
+      color: var(--colour-heading);
+    }
   }
-
-  &:not(.btn-primary):not(.border-0) {
-    background-color: var(--colour-canvas-2);
-    border: var(--btn-border-width) solid var(--colour-muted);
-  }
-
-  border-radius: rem(4) !important;
-  font-weight: 400 !important;
-  font-size: 1rem;
-  line-height: rem(20);
-
-  &.btn[class*='fa-']:before {
-    content: var(--fa);
-    margin-right: rem(6);
-  }
-
-  a:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
-  &:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
-    background: var(--colour-btn-action-hover-bg);
-  }
-
-  .btn-primary:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
-  &.btn-primary:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
-    filter: brightness(90%);
-    background: var(--colour-btn-bg);
-    border: var(--btn-border-width) solid var(--colour-btn-border);
-    color: var(--colour-btn);
-  }
-
-  a:is(:active, .active):not([disabled]):not(.btn-primary) &,
-  &:is(:active, .active):not([disabled]):not(.btn-primary) {
-    filter: brightness(85%);
-    transition: all 0.1s;
-    color: var(--colour-heading);
-  }
+  // #endregion
 }
-// #endregion

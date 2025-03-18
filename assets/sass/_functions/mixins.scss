@@ -1,41 +1,49 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:string';
+
+@use 'variables' as *;
+
 // Utility generator
 // Used to generate utilities & print utilities
 @mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
-  $values: map-get($utility, values);
+  $values: map.get($utility, values);
 
   // If the values are a list or string, convert it into a map
-  @if type-of($values) == 'string' or type-of(nth($values, 1)) != 'list' {
-    $values: zip($values, $values);
+  @if meta.type-of($values) == 'string' or meta.type-of(list.nth($values, 1)) != 'list' {
+    $values: list.zip($values, $values);
   }
 
   @each $key, $value in $values {
-    $properties: map-get($utility, property);
+    $properties: map.get($utility, property);
 
     // Multiple properties are possible, for example with vertical or horizontal margins or paddings
-    @if type-of($properties) == 'string' {
-      $properties: append((), $properties);
+    @if meta.type-of($properties) == 'string' {
+      $properties: list.append((), $properties);
     }
 
     // Use custom class if present
-    $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
+    $property-class: if(map.has-key($utility, class), map.get($utility, class), list.nth($properties, 1));
     $property-class: if($property-class == null, '', $property-class);
 
     // Use custom CSS variable name if present, otherwise default to `class`
     $css-variable-name: if(
-      map-has-key($utility, css-variable-name),
-      map-get($utility, css-variable-name),
-      map-get($utility, class)
+      map.has-key($utility, css-variable-name),
+      map.get($utility, css-variable-name),
+      map.get($utility, class)
     );
 
     // State params to generate pseudo-classes
-    $state: if(map-has-key($utility, state), map-get($utility, state), ());
+    $state: if(map.has-key($utility, state), map.get($utility, state), ());
 
-    $infix: if($property-class == '' and str-slice($infix, 1, 1) == '-', str-slice($infix, 2), $infix);
+    $infix: if($property-class == '' and string.slice($infix, 1, 1) == '-', string.slice($infix, 2), $infix);
 
     // Don't prefix if value key is null (eg. with shadow class)
     $property-class-modifier: if($key, if($property-class == '' and $infix == '', '', '-') + $key, '');
 
-    @if map-get($utility, rfs) {
+    @if map.get($utility, rfs) {
       // Inside the media query
       @if $is-rfs-media-query {
         $val: rfs-value($value);
@@ -47,9 +55,9 @@
       }
     }
 
-    $is-css-var: map-get($utility, css-var);
-    $is-local-vars: map-get($utility, local-vars);
-    $is-rtl: map-get($utility, rtl);
+    $is-css-var: map.get($utility, css-var);
+    $is-local-vars: map.get($utility, local-vars);
+    $is-rtl: map.get($utility, rtl);
 
     @if $value != null {
       @if $is-rtl == false {
@@ -58,12 +66,12 @@
 
       @if $is-css-var {
         .#{$property-class + $infix + $property-class-modifier} {
-          --#{$prefix}#{$css-variable-name}: #{$value};
+          --#{$css-variable-name}: #{$value};
         }
 
         @each $pseudo in $state {
           .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
-            --#{$prefix}#{$css-variable-name}: #{$value};
+            --#{$css-variable-name}: #{$value};
           }
         }
       } @else {
@@ -71,7 +79,7 @@
           @each $property in $properties {
             @if $is-local-vars {
               @each $local-var, $variable in $is-local-vars {
-                --#{$prefix}#{$local-var}: #{$variable};
+                --#{$local-var}: #{$variable};
               }
             }
             #{$property}: $value if($enable-important-utilities, !important, null);
@@ -83,7 +91,7 @@
             @each $property in $properties {
               @if $is-local-vars {
                 @each $local-var, $variable in $is-local-vars {
-                  --#{$prefix}#{$local-var}: #{$variable};
+                  --#{$local-var}: #{$variable};
                 }
               }
               #{$property}: $value if($enable-important-utilities, !important, null);
@@ -123,7 +131,7 @@
   @if not $n {
     @error "breakpoint `#{$name}` not found in `#{$breakpoints}`";
   }
-  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+  @return if($n < length($breakpoint-names), list.nth($breakpoint-names, $n + 1), null);
 }
 
 // Minimum breakpoint width. Null for the smallest (first) breakpoint.
@@ -131,7 +139,7 @@
 //    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
 //    576px
 @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
-  $min: map-get($breakpoints, $name);
+  $min: map.get($breakpoints, $name);
   @return if($min != 0, $min, null);
 }
 
@@ -144,11 +152,12 @@
 //
 //    >> breakpoint-max(md, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
 //    767.98px
+/*
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
-  $max: map-get($breakpoints, $name);
+  $max: map.get($breakpoints, $name);
   @return if($max and $max > 0, $max - 0.02, null);
 }
-
+*/
 // Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
 // Useful for making responsive utilities.
 //
@@ -158,19 +167,6 @@
 //    "-sm"
 @function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
   @return if(breakpoint-min($name, $breakpoints) == null, '', '-#{$name}');
-}
-
-// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
-// Makes the @content apply to the given breakpoint and wider.
-@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
-  $min: breakpoint-min($name, $breakpoints);
-  @if $min {
-    @media (min-width: $min) {
-      @content;
-    }
-  } @else {
-    @content;
-  }
 }
 
 // Media of at most the maximum breakpoint width. No query for the largest breakpoint.
@@ -197,7 +193,7 @@
       @content;
     }
   } @else if $max == null {
-    @include media-breakpoint-up($lower, $breakpoints) {
+    @include media-breakpoint-up($lower, 'false', $breakpoints) {
       @content;
     }
   } @else if $min == null {
@@ -220,7 +216,7 @@
       @content;
     }
   } @else if $max == null {
-    @include media-breakpoint-up($name, $breakpoints) {
+    @include media-breakpoint-up($name, 'false', $breakpoints) {
       @content;
     }
   } @else if $min == null {
@@ -233,6 +229,7 @@
 
 // #region Bootstrap layout
 // scss-docs-start clearfix
+/*
 @mixin clearfix() {
   &::after {
     display: block;
@@ -240,15 +237,16 @@
     content: '';
   }
 }
+  */
 // scss-docs-end clearfix
 // Container mixins
 
 @mixin make-container($gutter: $container-padding-x) {
-  --#{$prefix}gutter-x: #{$gutter};
-  --#{$prefix}gutter-y: 0;
+  --gutter-x: #{$gutter};
+  --gutter-y: 0;
   width: 100%;
-  padding-right: calc(var(--#{$prefix}gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
-  padding-left: calc(var(--#{$prefix}gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
+  padding-right: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
+  padding-left: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
   margin-right: auto;
   margin-left: auto;
 }
@@ -257,34 +255,35 @@
 // Generate semantic grid columns with these mixins.
 
 @mixin make-row($gutter: $grid-gutter-width) {
-  --#{$prefix}gutter-x: #{$gutter};
-  --#{$prefix}gutter-y: 0;
+  --gutter-x: #{$gutter};
+  --gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
   // TODO: Revisit calc order after https://github.com/react-bootstrap/react-bootstrap/issues/6039 is fixed
-  margin-top: calc(-1 * var(--#{$prefix}gutter-y)); // stylelint-disable-line function-disallowed-list
-  margin-right: calc(-0.5 * var(--#{$prefix}gutter-x)); // stylelint-disable-line function-disallowed-list
-  margin-left: calc(-0.5 * var(--#{$prefix}gutter-x)); // stylelint-disable-line function-disallowed-list
+  margin-top: calc(-1 * var(--gutter-y)); // stylelint-disable-line function-disallowed-list
+  margin-right: calc(-0.5 * var(--gutter-x)); // stylelint-disable-line function-disallowed-list
+  margin-left: calc(-0.5 * var(--gutter-x)); // stylelint-disable-line function-disallowed-list
 }
 
 @mixin make-col-ready() {
   // Add box sizing if only the grid is loaded
-  box-sizing: if(variable-exists(include-column-box-sizing) and $include-column-box-sizing, border-box, null);
+  box-sizing: if(meta.variable-exists(include-column-box-sizing) and $include-column-box-sizing, border-box, null);
   // Prevent columns from becoming too narrow when at smaller grid tiers by
   // always setting `width: 100%;`. This works because we set the width
   // later on to override this initial width.
   flex-shrink: 0;
   width: 100%;
   max-width: 100%; // Prevent `.col-auto`, `.col` (& responsive variants) from breaking out the grid
-  padding-right: calc(var(--#{$prefix}gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
-  padding-left: calc(var(--#{$prefix}gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
-  margin-top: var(--#{$prefix}gutter-y);
+  padding-right: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
+  padding-left: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
+  margin-top: var(--gutter-y);
 }
 
 @mixin make-col($size: false, $columns: $grid-columns) {
   @if $size {
     flex: 0 0 auto;
-    width: percentage(divide($size, $columns));
+    $width: math.div($size, 12);
+    width: math.percentage($width);
   } @else {
     flex: 1 1 0;
     max-width: 100%;
@@ -297,8 +296,8 @@
 }
 
 @mixin make-col-offset($size, $columns: $grid-columns) {
-  $num: divide($size, $columns);
-  margin-left: if($num == 0, 0, percentage($num));
+  $num: math.div($size, $columns);
+  margin-left: if($num == 0, 0, math.percentage($num));
 }
 
 // Row columns
@@ -309,7 +308,7 @@
 @mixin row-cols($count) {
   > * {
     flex: 0 0 auto;
-    width: divide(100%, $count);
+    width: math.div(100%, $count);
   }
 }
 
@@ -319,10 +318,10 @@
 // any value of `$grid-columns`.
 
 @mixin make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
-  @each $breakpoint in map-keys($breakpoints) {
+  @each $breakpoint in map.keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint, $breakpoints);
 
-    @include media-breakpoint-up($breakpoint, $breakpoints) {
+    @include media-breakpoint-up($breakpoint, 'false', $breakpoints) {
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .col#{$infix} {
         flex: 1 0 0%; // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
@@ -368,12 +367,12 @@
       @each $key, $value in $gutters {
         .g#{$infix}-#{$key},
         .gx#{$infix}-#{$key} {
-          --#{$prefix}gutter-x: #{$value};
+          --gutter-x: #{$value};
         }
 
         .g#{$infix}-#{$key},
         .gy#{$infix}-#{$key} {
-          --#{$prefix}gutter-y: #{$value};
+          --gutter-y: #{$value};
         }
       }
     }
@@ -384,7 +383,7 @@
   @each $breakpoint in map-keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint, $breakpoints);
 
-    @include media-breakpoint-up($breakpoint, $breakpoints) {
+    @include media-breakpoint-up($breakpoint, 'false', $breakpoints) {
       @if $columns > 0 {
         @for $i from 1 through $columns {
           .g-col#{$infix}-#{$i} {
@@ -406,11 +405,13 @@
 
 // #endregion
 
-@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+@mixin media-breakpoint-up($name, $mobileOnly: 'false', $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
   @if $min {
-    @media screen and (min-width: $min) {
-      @content;
+    @if $mobileOnly != 'true' {
+      @media screen and (min-width: $min) {
+        @content;
+      }
     }
   } @else if $name == 'xs' {
     @content;
@@ -421,7 +422,7 @@
   }
 }
 
-@mixin dark-mode() {
+@mixin dark-mode($darkMode) {
   @media screen and (prefers-color-scheme: dark) {
     @if $darkMode == 'true' {
       @content;
@@ -429,7 +430,7 @@
   }
 }
 
-@mixin light-mode() {
+@mixin light-mode($darkMode) {
   @if $darkMode == 'true' {
     @media screen and (prefers-color-scheme: light) {
       @content;
@@ -439,7 +440,7 @@
   }
 }
 
-@mixin layer($name) {
+@mixin layer($name, $layers: 'true') {
   @if $layers == 'true' {
     @layer #{$name} {
       @content;
@@ -478,12 +479,8 @@
 }
 
 // Used to make it possible to use css properties but still support IE11
-@mixin var($property, $varName, $important: '', $compatible: $compatible) {
-  @if $compatible == 'true' {
-    #{$property}: map-get($vars, $varName) #{$important};
-  } @else {
-    #{$property}: var(#{$varName}) #{$important};
-  }
+@mixin var($property, $varName, $important: '') {
+  #{$property}: var(#{$varName}) #{$important};
 }
 
 @mixin inline-text() {
@@ -533,40 +530,27 @@
   }
 }
 
-@mixin font-size($value, $compatible: $compatible) {
+@mixin font-size($value) {
   $found: false;
 
-  @if $compatible == 'true' {
+  @each $size, $subvalue in $font-sizes {
+    @if ($value == $subvalue and $found == false) {
+      font-size: var(--fs-#{$size});
+      $found: true;
+    }
+  }
+  @if $found == false {
     font-size: $value;
-  } @else {
-    @each $size, $subvalue in $font-sizes {
-      @if ($value == $subvalue and $found == false) {
-        font-size: var(--fs-#{$size});
-        $found: true;
-      }
-    }
-    @if $found == false {
-      font-size: $value;
-    }
   }
 }
 
-@mixin is($selector, $before: '', $after: '', $compatible: $compatible) {
-  @if $compatible == 'true' {
-    $split-values: str-split($selector, ',');
-    @each $value in $split-values {
-      #{$before}#{$value}#{$after} {
-        @content;
-      }
-    }
-  } @else {
-    #{$before}:is(#{$selector})#{$after} {
-      @content;
-    }
+@mixin is($selector, $before: '', $after: '') {
+  #{$before}:is(#{$selector})#{$after} {
+    @content;
   }
 }
 
-@mixin reset-colours($compatible: $compatible) {
+@mixin reset-colours() {
   @each $color, $value in $non-theme-colors {
     --colour-#{$color}: #{$value};
   }
@@ -576,7 +560,7 @@
   }
 }
 
-@mixin invert-colours($compatible: $compatible) {
+@mixin invert-colours() {
   @each $color, $value in $dark-mode-functional-colors {
     --colour-#{$color}: #{$value};
   }
@@ -600,7 +584,7 @@
 }
 
 @mixin breakpoint($name, $breakpoints: $breakpoints) {
-  @media screen and (min-width: #{map-get($breakpoints,$name)}) {
+  @media screen and (min-width: #{map.get($breakpoints,$name)}) {
     @content;
   }
 }

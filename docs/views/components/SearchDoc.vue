@@ -75,7 +75,7 @@
           </label>
           <datalist id="properties"></datalist>
         </Search>
-        <button class="js-hide btn btn-primary">Submit</button>
+        <button class="d-none btn btn-primary">Submit</button>
       </form>
     </div>
 

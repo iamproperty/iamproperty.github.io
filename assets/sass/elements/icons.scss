@@ -1,25 +1,31 @@
 @use '../_func' as *;
 
-.icon--xs {
-  font-size: rem(16);
-}
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-.icon--sm {
-  font-size: rem(18);
-}
+@include layer('elements', $layers) {
+  .icon--xs {
+    font-size: rem(16);
+  }
 
-.icon--compact {
-  font-size: rem(20);
-}
+  .icon--sm {
+    font-size: rem(18);
+  }
 
-.icon--md {
-  font-size: rem(28);
-}
+  .icon--compact {
+    font-size: rem(20);
+  }
 
-.icon--lg {
-  font-size: rem(40);
-}
+  .icon--md {
+    font-size: rem(28);
+  }
 
-[class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
-  font-weight: 400;
+  .icon--lg {
+    font-size: rem(40);
+  }
+
+  [class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
+    font-weight: 400;
+  }
 }

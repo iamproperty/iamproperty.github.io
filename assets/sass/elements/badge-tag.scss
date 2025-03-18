@@ -1,99 +1,105 @@
 @use '../_func' as *;
 
-:is(.badge, .tag) {
-  font-size: rem(16);
-  line-height: rem(26);
-  border: none !important;
-  //outline: 1px solid var(--colour-canvas);
-  //outline-offset: -1px;
-  margin: 0;
-  display: inline-block;
-  text-align: center;
-  white-space: nowrap;
-  max-width: fit-content;
-  color: #262626;
-  position: relative;
-  background: var(--wider-colour, var(--wider-colour-1));
-  margin-bottom: 1rem;
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  &:has(+ :is(.badge, .tag)) {
-    margin-right: rem(6);
+@include layer('elements', $layers) {
+  :is(.badge, .tag) {
+    font-size: rem(16);
+    line-height: rem(26);
+    border: none !important;
+    //outline: 1px solid var(--colour-canvas);
+    //outline-offset: -1px;
+    margin: 0;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    max-width: fit-content;
+    color: #262626;
+    position: relative;
+    background: var(--wider-colour, var(--wider-colour-1));
+    margin-bottom: 1rem;
+
+    &:has(+ :is(.badge, .tag)) {
+      margin-right: rem(6);
+    }
+
+    &:empty {
+      display: none;
+    }
+
+    &:is(.bg-primary, .bg-dark, .bg-danger) {
+      color: #{$colour-inverted} !important;
+    }
   }
 
-  &:empty {
-    display: none;
+  .badge {
+    border-radius: rem(6);
+    padding: 0 rem(8);
+
+    &--rounded {
+      border-radius: 1rem;
+      min-width: 1.625rem;
+      padding: 0;
+    }
   }
 
-  &:is(.bg-primary, .bg-dark, .bg-danger) {
-    color: #{$colour-inverted} !important;
-  }
-}
+  .tag {
+    border-radius: rem(16);
+    padding: 0 rem(16);
 
-.badge {
-  border-radius: rem(6);
-  padding: 0 rem(8);
+    &:after {
+      content: '\2715';
+      margin-left: 0.6em;
+      font-weight: bold;
+    }
 
-  &--rounded {
-    border-radius: 1rem;
-    min-width: 1.625rem;
-    padding: 0;
-  }
-}
+    &:is(:hover, :focus, .hover, :focus-within, :focus-visible) {
+      background: var(--wider-colour-hover, var(--wider-colour-1-hover));
+    }
 
-.tag {
-  border-radius: rem(16);
-  padding: 0 rem(16);
+    &:is(:active, .active) {
+      background: var(--wider-colour-active, var(--wider-colour-1-active));
+    }
 
-  &:after {
-    content: '\2715';
-    margin-left: 0.6em;
-    font-weight: bold;
-  }
-
-  &:is(:hover, :focus, .hover, :focus-within, :focus-visible) {
-    background: var(--wider-colour-hover, var(--wider-colour-1-hover));
+    &:has(input:disabled),
+    &:disabled {
+      background: var(--wider-colour-1) !important;
+      color: #99adb1 !important;
+    }
   }
 
-  &:is(:active, .active) {
-    background: var(--wider-colour-active, var(--wider-colour-1-active));
+  .tag.tag--not-set,
+  iam-multiselect:not(:defined) .tag,
+  .tag.tag--toggle {
+    background: var(--colour-canvas);
+    outline: 1px solid var(--colour-border);
   }
 
-  &:has(input:disabled),
-  &:disabled {
-    background: var(--wider-colour-1) !important;
-    color: #99adb1 !important;
-  }
-}
+  .tag.tag--toggle {
+    &:after {
+      display: none;
+    }
 
-.tag.tag--not-set,
-iam-multiselect:not(:defined) .tag,
-.tag.tag--toggle {
-  background: var(--colour-canvas);
-  outline: 1px solid var(--colour-border);
-}
+    &:is(:hover, :focus) {
+      background: #eeeeee;
+    }
 
-.tag.tag--toggle {
-  &:after {
-    display: none;
-  }
+    &:is(:active) {
+      background: #e0e0e0;
+    }
 
-  &:is(:hover, :focus) {
-    background: #eeeeee;
+    &:has(input:checked),
+    &.selected {
+      background: #e9f9fd;
+      outline: 1px solid #1ebee6;
+    }
   }
 
-  &:is(:active) {
-    background: #e0e0e0;
+  // Quick fix for badges in buttons
+  .btn :is(.badge, .tag) {
+    position: relative;
+    top: -1px;
   }
-
-  &:has(input:checked),
-  &.selected {
-    background: #e9f9fd;
-    outline: 1px solid #1ebee6;
-  }
-}
-
-// Quick fix for badges in buttons
-.btn :is(.badge, .tag) {
-  position: relative;
-  top: -1px;
 }

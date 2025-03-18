@@ -4,10 +4,6 @@
   </iam-tabs>
 </template>
 
-<style lang="scss">
-  @import '../../../assets/sass/components/tabs.scss';
-</style>
-
 <script>
   export default {
     name: 'Tabs',

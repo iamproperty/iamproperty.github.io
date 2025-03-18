@@ -1,5 +1,7 @@
 @use '../_func.scss' as *;
 
+$darkMode: 'true' !default;
+
 // #region Container type
 *:has(> iam-table) {
   container-type: inline-size;
@@ -409,7 +411,7 @@ iam-table {
 @container (width < 23.4375em) {
   iam-table:has([slot='before']) {
     iam-actionbar {
-      @include light-mode() {
+      @include light-mode($darkMode) {
         background-color: #e6eaec;
       }
     }
