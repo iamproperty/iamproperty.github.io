@@ -835,6 +835,102 @@
       </div>
     </div>
 
+    <h2>Column filter</h2>
+
+    <p>When an action bar is used with a table we can add a column filter. The column filter allows the user to customise
+what columns they show or hide in the table. There should be an option to save this filter so if the user leaves the
+page and returns the column filter is still applied.</p>
+
+<p>When clicked a dialog (popover or modal) can be displayed to show the column sorting options.</p>
+
+    <div class="container bg-light visualtest">
+      
+      <Table class="table--cta table--fullwidth">
+          <Actionbar data-search="" data-filter-columns slot="before">
+            
+            <hr />
+            <button class="btn btn-action" slot="overflow">Cancel</button>
+          </Actionbar>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Client name</th>
+                <th>Date added</th>
+                <th>Lorum ipsum</th>
+                <th>Lorum ipsum</th>
+                <th>Lorum ipsum</th>
+                <th>Lorum ipsum</th>
+                <th>Lorum ipsum</th>
+                <th>Lorum ipsum</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tom Smith</td>
+                <td>10.05.23</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                    aliqua. Excepteur sint occaecat cupidatat.
+                  </p>
+                </td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td><a href="/">Manage client</a></td>
+              </tr>
+              <tr>
+                <td>Tom Smith</td>
+                <td>10.05.23</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                    aliqua. Excepteur sint occaecat cupidatat.
+                  </p>
+                </td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td><a href="/">Manage client</a></td>
+              </tr>
+              <tr>
+                <td>Tom Smith</td>
+                <td>10.05.23</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td><a href="/">Manage client</a></td>
+              </tr>
+              <tr>
+                <td>Tom Smith</td>
+                <td>10.05.23</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td>Lorum ipsum</td>
+                <td><a href="/">Manage client</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </Table>
+
+
+
+    </div>
+
+
+
     <div class="container">
       <h2>Implementation</h2>
       <Tabs>
@@ -877,8 +973,21 @@
         <a href="/pdfs/actionbar.pdf" download>Download latest designs</a>
       </div>
     </div>
+
+
+
+
+
+
+
+
   </main>
 </template>
+
+
+
+
+
 
 <style lang="scss" scoped>
   @use '../../../assets/sass/func' as *;
