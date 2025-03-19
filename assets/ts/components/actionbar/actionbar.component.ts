@@ -104,7 +104,6 @@ class iamActionbar extends HTMLElement {
       document.head.insertAdjacentHTML('beforeend', `<style id="actionbarGlobal">${loadExtraCSS}</style>`);
   }
 
-  
   connectedCallback(): void {
     const actionbarWrapper = this.shadowRoot?.querySelector('.actionbar__wrapper');
 

@@ -1478,7 +1478,6 @@
       <div class="demo">
         <Table class="table--cta table--fullwidth">
           <Actionbar data-search="" slot="before">
-
             <button class="btn btn-action fa-box-archive">Archive</button
             ><button class="btn btn-action fa-trash-can">Export to .csv</button>
           </Actionbar>
