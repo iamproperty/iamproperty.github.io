@@ -108,9 +108,10 @@ $darkMode: 'true' !default;
     }
   }
 
-  [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
+  [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(
+      .bg-canvas
+    ):not(.bg-canvas-2):not(.prevent-invert),
   .invert-colours {
-
     .btn-compact.btn-secondary:not(:hover, :focus, .hover, :focus-within):not(.btn-collapse) {
       background-color: var(--colour-inverted) !important;
       border-color: var(--colour-inverted) !important;

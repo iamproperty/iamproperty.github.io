@@ -14,8 +14,8 @@
     "prepack": "npm run build",
     "build:docs": "node local_modules/delete-build-assets.cjs && npm run compile && npm run copy && vue-tsc --noEmit && vite build",
     "preview": "vite preview --host",
-  "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/mobile-core.scss assets/css/mobile-core.min.css --style=compressed && sass assets/sass/mobile.scss assets/css/mobile.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
-   "compile:js": "rollup --environment BUNDLE:true --config rollup.config.cjs --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
+    "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/mobile-core.scss assets/css/mobile-core.min.css --style=compressed && sass assets/sass/mobile.scss assets/css/mobile.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
+    "compile:js": "rollup --environment BUNDLE:true --config rollup.config.cjs --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
     "compile:ts": "node node_modules/typescript/bin/tsc --project tscompileconfig.json && fix-esm-import-path assets/js",
     "compile": "npm run compile:sass && npm run compile:ts && npm run compile:js",
     "watch:ts": "tsc-watch -p tscompileconfig.json --onCompilationComplete \"fix-esm-import-path assets/js\"",
@@ -48,7 +48,6 @@
   "dependencies": {
     "eslint": "^9.21.0",
     "eslint-config-prettier": "^10.1.1",
-    "eslint-config-prettier-vue": "^1.0.0",
     "eslint-plugin-vue": "^10.0.0",
     "globals": "^15.14.0",
     "js-cookie": "^3.0.5",

@@ -12,28 +12,21 @@ $optionalText: 'true' !default;
 
 @use 'functions' as *;
 
-
 $white: #fff !default;
 $black: #000 !default;
-
 
 $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29')) !default;
 
 // #region To review
 
-
 $pre-color: null !default;
 $mark-padding: 0.1875em !default;
 
+$mark-bg: yellow !default;
 
-$mark-bg: yellow!default;
-
-$dt-font-weight: bold!default;
+$dt-font-weight: bold !default;
 
 $list-inline-padding: 0.5rem !default;
-
-
-
 
 $table-cell-padding-y: 0.5rem !default;
 $table-cell-padding-x: 0.5rem !default;
@@ -42,15 +35,11 @@ $table-cell-padding-x-sm: 0.25rem !default;
 
 $table-caption-color: gray !default;
 
-
 $table-th-font-weight: null !default;
-
-
 
 $link-decoration: underline !default;
 
 $link-hover-decoration: null !default;
-
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
@@ -69,22 +58,17 @@ $enable-negative-margins: false !default;
 $enable-deprecation-messages: true !default;
 $enable-important-utilities: true !default;
 
-
 $legend-margin-bottom: 0.5rem !default;
 $legend-font-size: 1.5rem !default;
 $legend-font-weight: null !default;
 
-
 $form-select-disabled-color: null !default;
 $form-select-disabled-color: null !default;
-$form-select-disabled-bg: gray!default;
-
-
+$form-select-disabled-bg: gray !default;
 
 $form-select-disabled-color: null !default;
 $form-select-disabled-bg: $gray-200 !default;
 $form-select-disabled-border-color: black !default;
-
 
 $form-select-color: inherit !default;
 
@@ -97,19 +81,15 @@ $box-shadow-sm: 0 0.125rem 0.25rem rgba($black, 0.075) !default;
 $box-shadow-lg: 0 1rem 3rem rgba($black, 0.175) !default;
 $box-shadow-inset: inset 0 1px 2px rgba($black, 0.075) !default;
 
-
 $position-values: (
   0: 0,
   50: 50%,
   100: 100%,
 ) !default;
 
-
-$utilities-border: 
-  (
-    'white': to-rgb($white),
-  )
- !default;
+$utilities-border: (
+  'white': to-rgb($white),
+) !default;
 $utilities-border-colors: map-loop($utilities-border, rgba-css-var, '$key', 'border') !default;
 
 $border-width: 1px !default;
@@ -120,7 +100,6 @@ $border-widths: (
   4: 4px,
   5: 5px,
 ) !default;
-
 
 $negative-spacers: null;
 
@@ -135,12 +114,9 @@ $line-height-base: 1.5 !default;
 $line-height-sm: 1.25 !default;
 $line-height-lg: 2 !default;
 
-
 $text-muted: gray;
 
 // #endregion
-
-
 
 // #region Grid Breakpoints, layouts
 $grid-breakpoints: (
@@ -153,7 +129,6 @@ $breakpoints: $grid-breakpoints;
 
 @include assert-ascending($grid-breakpoints, '$grid-breakpoints');
 @include assert-starts-at-zero($grid-breakpoints, '$grid-breakpoints');
-
 
 @each $bp, $value in $grid-breakpoints {
   $vars: map.merge((--breakpoint-#{$bp}: #{$value}), $vars);
@@ -253,8 +228,6 @@ $gutters: $spacers;
 // #endregion
 
 // #region Colours
-
-
 
 // Default Bootstrap Theme vars
 $primary: #00313c;
@@ -545,7 +518,6 @@ $h4-font-size: rem(map.get($heading-sizes, 'h4_fs'));
 $h5-font-size: rem(map.get($heading-sizes, 'h4_fs'));
 $h6-font-size: rem(map.get($heading-sizes, 'h4_fs'));
 
-
 $font-sizes: (
   1: $h1-font-size,
   2: $h2-font-size,
@@ -554,7 +526,6 @@ $font-sizes: (
   5: $h5-font-size,
   6: $h6-font-size,
 ) !default;
-
 
 $heading-weight: 700;
 
@@ -794,4 +765,3 @@ $ut-mh-md: #{rem($ut-mh-md-px)};
 $ut-mh-lg-px: 600;
 $ut-mh-lg: #{rem($ut-mh-lg-px)};
 // #endregion
-
