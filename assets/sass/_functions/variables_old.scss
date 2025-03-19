@@ -11,7 +11,10 @@ $darkMode: 'true' !default;
 $optionalText: 'true' !default;
 
 @use 'functions' as *;
-@forward 'variables' show $heading-sizes, $content-max-width-px, $content-max-width, $table-padding, $table-padding-px, $td-mw, $td-mw-px,$ut-mh-sm-px,$ut-mh-sm,$ut-mh-md-px,$ut-mh-md,$ut-mh-lg-px,$ut-mh-lg,$non-theme-colors,$dark-mode-colors,$dark-mode-functional-colors,$wider-colours,$wider-colours-hover,$wider-colours-active,$grid-breakpoints;
+@forward 'variables' show $heading-sizes, $content-max-width-px, $content-max-width, $table-padding, $table-padding-px,
+  $td-mw, $td-mw-px, $ut-mh-sm-px, $ut-mh-sm, $ut-mh-md-px, $ut-mh-md, $ut-mh-lg-px, $ut-mh-lg, $non-theme-colors,
+  $dark-mode-colors, $dark-mode-functional-colors, $wider-colours, $wider-colours-hover, $wider-colours-active,
+  $grid-breakpoints;
 
 // #region Boostrap
 // Color system
@@ -336,7 +339,6 @@ $theme-colors: (
 $white: #fff !default;
 $black: #000 !default;
 
-
 // The contrast ratio to reach against white, to determine if color changes from "light" to "dark". Acceptable values for WCAG 2.0 are 3, 4.5 and 7.
 // See https://www.w3.org/TR/WCAG20/#visual-audio-contrast-contrast
 $min-contrast-ratio: 4.5 !default;
@@ -344,7 +346,6 @@ $min-contrast-ratio: 4.5 !default;
 // Customize the light and dark text colors for use in our color contrast function.
 $color-contrast-dark: $black !default;
 $color-contrast-light: $white !default;
-
 
 // Characters which are escaped by the escape-svg function
 $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29')) !default;
@@ -439,7 +440,6 @@ $stretched-link-z-index: 1 !default;
 // Style p element.
 
 $paragraph-margin-bottom: 1rem !default;
-
 
 // Grid containers
 //
