@@ -1083,7 +1083,7 @@
       <div class="demo">
         <div class="row">
           <div class="col-sm-6 col-md-4 ms-auto">
-            <Table>
+            <Table class="table--fullwidth">
               <Actionbar data-selectall="" data-search="" slot="before">
                 <div class="dialog__wrapper show">
                   <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -1476,40 +1476,9 @@
 
     <div class="container visualtest pb-5">
       <div class="demo">
-        <Table class="table--cta">
+        <Table class="table--cta table--fullwidth">
           <Actionbar data-search="" slot="before">
-            <div class="dialog__wrapper" slot="overflow">
-              <button class="btn btn-action mb-0 me-0">Sort by</button>
-              <dialog class="dialog--list">
-                <div class="pb-0 mb-0">
-                  <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" /><label
-                    for="follow-up-oldest"
-                    class="radio--tick"
-                    >Follow up date (Oldest to newest)</label
-                  ><input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest" /><label
-                    for="follow-up-newest"
-                    class="radio--tick"
-                    >Follow up date (Newest to oldest)</label
-                  ><input
-                    type="radio"
-                    name="sort"
-                    data-sort=""
-                    id="date-instructed-oldest"
-                    autofocus=""
-                    value="date-instructed-oldest"
-                  /><label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label
-                  ><input
-                    type="radio"
-                    name="sort"
-                    data-sort=""
-                    id="date-instructed-newest"
-                    value="date-instructed-newest"
-                  /><label for="date-instructed-newest" class="radio--tick mb-0"
-                    >Date Instructed (Newest to oldest)</label
-                  >
-                </div>
-              </dialog>
-            </div>
+
             <button class="btn btn-action fa-box-archive">Archive</button
             ><button class="btn btn-action fa-trash-can">Export to .csv</button>
           </Actionbar>

@@ -114,13 +114,16 @@ export const addTableEventListeners = (table, wrapper): void => {
         if (element != heading) {
           element.setAttribute('data-sort', '');
           element.removeAttribute('data-order-by');
+          heading.setAttribute('title','Click to sort ascending')
         }
       });
 
       if (heading.hasAttribute('data-order-by') && heading.getAttribute('data-order-by') == 'asc') {
         heading.setAttribute('data-order-by', 'desc');
+        heading.setAttribute('title','Click to sort ascending')
       } else {
         heading.setAttribute('data-order-by', 'asc');
+        heading.setAttribute('title','Click to sort descending')
       }
 
       // dispath event
