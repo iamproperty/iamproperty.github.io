@@ -12,10 +12,21 @@ var cssSize = formatBytes(cssStat.size);
 summary['css_size'] = cssSize;
 console.log("- CSS: "+cssSize);
 
+var cssStatMob = fs.statSync(path.join('./assets/css/mobile.min.css'));
+var cssSizeMob = formatBytes(cssStatMob.size);
+summary['css_mob_size'] = cssSizeMob;
+console.log("- Mobile CSS: "+cssSizeMob);
+
 var cssStatCore = fs.statSync(path.join('./assets/css/core.min.css'));
 var cssCoreSize = formatBytes(cssStatCore.size);
 summary['css_core_size'] = cssCoreSize;
 console.log("- Core CSS: "+cssCoreSize);
+
+
+var cssStatCoreMob = fs.statSync(path.join('./assets/css/mobile-core.min.css'));
+var cssCoreMobSize = formatBytes(cssStatCoreMob.size);
+summary['css_core_mob_size'] = cssCoreMobSize;
+console.log("- Core Mobile CSS: "+cssCoreMobSize);
 
 // JS
 var jsStat = fs.statSync(path.join('./assets/js/scripts.bundle.min.js'));

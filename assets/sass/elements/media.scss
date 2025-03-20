@@ -1,20 +1,26 @@
 @use '../_func' as *;
 
-figure {
-  margin: 0 0 1rem;
-}
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-img,
-svg {
-  vertical-align: middle;
-}
+@include layer('elements', $layers) {
+  figure {
+    margin: 0 0 1rem;
+  }
 
-img {
-  max-width: 100%;
-}
+  img,
+  svg {
+    vertical-align: middle;
+  }
 
-.ratio {
-  > img:first-child:last-child {
-    object-fit: cover;
+  img {
+    max-width: 100%;
+  }
+
+  .ratio {
+    > img:first-child:last-child {
+      object-fit: cover;
+    }
   }
 }

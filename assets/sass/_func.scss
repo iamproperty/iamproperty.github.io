@@ -1,18 +1,10 @@
-$compatible: 'false' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
-$layers: 'true' !default;
 $optionalText: 'true' !default;
 
 // Declare global vars variable
-$vars: () !default;
-$varsSM: () !default;
-$varsMD: () !default;
 
-$prefix: '';
+@forward '_functions/functions';
 
-@import '_functions/functions';
-@import '_functions/variables';
-@import '_functions/mixins';
-@import '_functions/bs_utilities';
-@import '_functions/utility-mixins';
+@forward '_functions/variables';
+
+@forward '_functions/mixins';
+@forward '_functions/utility-mixins';

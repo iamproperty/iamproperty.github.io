@@ -1,18 +1,20 @@
+@use 'sass:map';
+
 @use '../_func' as *;
 
-$chart-colour-1: map-get($wider-colours, '3') !default;
-$chart-colour-2: map-get($wider-colours, '4') !default;
-$chart-colour-3: map-get($wider-colours, '5') !default;
-$chart-colour-4: map-get($wider-colours, '6') !default;
-$chart-colour-5: map-get($wider-colours, '7') !default;
-$chart-colour-6: map-get($wider-colours, '8') !default;
-$chart-colour-7: map-get($wider-colours, '9') !default;
-$chart-colour-8: map-get($wider-colours, '10') !default;
-$chart-colour-9: map-get($wider-colours, '11') !default;
-$chart-colour-10: map-get($wider-colours, '12') !default;
+$chart-colour-1: map.get($wider-colours, '3') !default;
+$chart-colour-2: map.get($wider-colours, '4') !default;
+$chart-colour-3: map.get($wider-colours, '5') !default;
+$chart-colour-4: map.get($wider-colours, '6') !default;
+$chart-colour-5: map.get($wider-colours, '7') !default;
+$chart-colour-6: map.get($wider-colours, '8') !default;
+$chart-colour-7: map.get($wider-colours, '9') !default;
+$chart-colour-8: map.get($wider-colours, '10') !default;
+$chart-colour-9: map.get($wider-colours, '11') !default;
+$chart-colour-10: map.get($wider-colours, '12') !default;
 
 $chart-colors: ();
-$chart-colors: map-merge(
+$chart-colors: map.merge(
   (
     1: $chart-colour-1,
     2: $chart-colour-2,
@@ -28,19 +30,19 @@ $chart-colors: map-merge(
   $chart-colors
 );
 
-$chart-colour-1-hover: map-get($wider-colours-hover, '3') !default;
-$chart-colour-2-hover: map-get($wider-colours-hover, '4') !default;
-$chart-colour-3-hover: map-get($wider-colours-hover, '5') !default;
-$chart-colour-4-hover: map-get($wider-colours-hover, '6') !default;
-$chart-colour-5-hover: map-get($wider-colours-hover, '7') !default;
-$chart-colour-6-hover: map-get($wider-colours-hover, '8') !default;
-$chart-colour-7-hover: map-get($wider-colours-hover, '9') !default;
-$chart-colour-8-hover: map-get($wider-colours-hover, '10') !default;
-$chart-colour-9-hover: map-get($wider-colours-hover, '11') !default;
-$chart-colour-10-hover: map-get($wider-colours-hover, '12') !default;
+$chart-colour-1-hover: map.get($wider-colours-hover, '3') !default;
+$chart-colour-2-hover: map.get($wider-colours-hover, '4') !default;
+$chart-colour-3-hover: map.get($wider-colours-hover, '5') !default;
+$chart-colour-4-hover: map.get($wider-colours-hover, '6') !default;
+$chart-colour-5-hover: map.get($wider-colours-hover, '7') !default;
+$chart-colour-6-hover: map.get($wider-colours-hover, '8') !default;
+$chart-colour-7-hover: map.get($wider-colours-hover, '9') !default;
+$chart-colour-8-hover: map.get($wider-colours-hover, '10') !default;
+$chart-colour-9-hover: map.get($wider-colours-hover, '11') !default;
+$chart-colour-10-hover: map.get($wider-colours-hover, '12') !default;
 
 $chart-colors-hover: ();
-$chart-colors-hover: map-merge(
+$chart-colors-hover: map.merge(
   (
     1: $chart-colour-1-hover,
     2: $chart-colour-2-hover,
@@ -111,11 +113,6 @@ $chart-height-lg: #{rem(200)} !default;
   font-weight: var(--chart-font-weight, bold);
   color: var(--chart-text-color, black);
 
-  > * {
-    display: block;
-    order: 2;
-  }
-
   // CSS vars that can be overwritten by declaring them without the -set on the end of the variable i.e. --chart-colour-1: red; would overwrite --chart-colour-1-set
   --body-colour-set: var(--body-colour, Canvas);
   --text-colour-set: var(--text-colour, black);
@@ -124,11 +121,6 @@ $chart-height-lg: #{rem(200)} !default;
   --chart-height-lg-set: var(--chart-height-lg, #{$chart-height-lg});
 
   --chart-height-resp: var(--chart-height-set);
-
-  tbody {
-    --chart-direction: 360deg;
-    --chart-day-bg-pos: 100% calc(var(--single-day) * 7);
-  }
 
   // Non-configurable css vars
   --index-below: -1;
@@ -145,6 +137,16 @@ $chart-height-lg: #{rem(200)} !default;
   --yaxis-point-display: block;
   --yaxis-last-point-transform: translate(0, -50%);
   --bar-gap: min(10%, 0.75rem);
+
+  > * {
+    display: block;
+    order: 2;
+  }
+
+  tbody {
+    --chart-direction: 360deg;
+    --chart-day-bg-pos: 100% calc(var(--single-day) * 7);
+  }
 
   @container (min-width: #{em($device-xs-width,16)}) {
     :has(tr:nth-child(5) td:nth-child(4)),
@@ -519,14 +521,14 @@ $chart-height-lg: #{rem(200)} !default;
         padding: 0;
         background: var(--chart-colour);
 
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+
         & {
           @media screen and (prefers-color-scheme: dark) {
             background: color-mix(in oklab, var(--chart-colour), black 20%);
           }
         }
-
-        border-top-right-radius: 4px;
-        border-top-left-radius: 4px;
 
         &:hover {
           background: var(--chart-colour-hover);

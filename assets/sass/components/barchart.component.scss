@@ -1,6 +1,6 @@
 @use '../_func.scss' as *;
 @use 'charts.module.scss' as *;
-@import '../elements/buttons.scss';
+@use '../elements/buttons.scss' as *;
 
 // #region Bar chart (Horizontal)
 :host(.chart--horizontal) .chart__outer {

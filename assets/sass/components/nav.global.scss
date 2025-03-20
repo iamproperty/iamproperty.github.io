@@ -1,6 +1,8 @@
 @use 'sass:math';
 @use '../_func' as *;
 
+$darkMode: 'true' !default;
+
 body:has(iam-nav.open:not(.nav--sticky):not(.nav--xs-sticky)) {
   max-height: 100vh;
   overflow: hidden;
@@ -34,7 +36,7 @@ nav:has(iam-nav) {
   }
 }
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   nav:has(iam-nav a[slot='secondary']) {
     min-height: #{rem(96 + 40)};
   }
@@ -59,7 +61,7 @@ nav:has(iam-nav.nav--sticky) {
   }
 }
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(sm, $mobileOnly) {
   body:has(iam-nav.open:not(.nav--sticky)) {
     max-height: 100vh;
     overflow: hidden;
@@ -165,7 +167,7 @@ iam-nav details {
 @mixin mobDetails() {
   background-color: var(--colour-canvas);
 
-  @include light-mode() {
+  @include light-mode($darkMode) {
     background-color: #eeeeee;
   }
 
@@ -178,7 +180,7 @@ iam-nav details {
   summary {
     background-color: var(--colour-white);
 
-    @include dark-mode() {
+    @include dark-mode($darkMode) {
       background-color: var(--colour-canvas-2);
     }
     display: block;
@@ -346,7 +348,7 @@ iam-nav details {
 // #endregion
 
 // #region Desktop mega menu
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   iam-nav > details,
   iam-nav *:not(.nav--menu) > details {
     width: auto;
@@ -399,11 +401,11 @@ iam-nav details {
       ) !important;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
 
-      @include light-mode() {
+      @include light-mode($darkMode) {
         background: var(--colour-white);
         @include reset-colours();
       }
-      @include dark-mode() {
+      @include dark-mode($darkMode) {
         @include invert-colours();
       }
     }
@@ -411,7 +413,7 @@ iam-nav details {
     &[open] > div:has(details) {
       background: var(--colour-canvas-2);
 
-      @include light-mode() {
+      @include light-mode($darkMode) {
         background: #eeeeee;
       }
 
@@ -449,7 +451,7 @@ iam-nav details {
     &[open] > div:not(:has(details)) {
       background: var(--colour-canvas);
 
-      @include light-mode() {
+      @include light-mode($darkMode) {
         background: var(--colour-white);
         --colour-canvas-2: white;
       }
@@ -590,7 +592,7 @@ iam-nav details {
 // #endregion
 
 // #region Search
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   iam-nav {
     &.search-open {
       > *:not([slot='logo']):not([slot='secondary']):not([slot='search']) {
@@ -602,7 +604,7 @@ iam-nav details {
 // #endregion
 
 // #region Dual navbar in desktop
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   iam-nav:has([slot='dual']) {
     .brand:has(~ [slot='dual']) {
       margin-right: rem(24) !important;

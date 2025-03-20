@@ -165,25 +165,6 @@
       </AddressLookup>
     </div>
 
-    <div class="container">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h3>Web component</h3></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h3>Vue component</h3></summary>
-          <Readme></Readme>
-        </details>
-        <!--
-        <details>
-          <summary><h3>HTML</h3></summary>
-          <pre><code class="javascript">{{`<div class="container"></div>`}}</code></pre>
-        </details>
-      -->
-      </Tabs>
-    </div>
     <div class="bg-light version-control">
       <div class="container">
         <table>

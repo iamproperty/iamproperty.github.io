@@ -1,17 +1,28 @@
+@use 'sass:map';
+
+@use 'functions' as *;
+@use 'variables' as *;
+
+@use 'mixins' as *;
+
+$layers: 'true' !default;
+
+$mobileOnly: 'false' !default;
+
 $new_utilities: ();
 
 $style_breakpoints: ();
 
 @each $bp, $value in $grid-breakpoints {
   @if $bp != 'xs' {
-    $style_breakpoints: map-merge((#{$bp}: ''), $style_breakpoints);
+    $style_breakpoints: map.merge((#{$bp}: ''), $style_breakpoints);
   } @else {
-    $style_breakpoints: map-merge((#{$bp}: -#{$bp}), $style_breakpoints);
+    $style_breakpoints: map.merge((#{$bp}: -#{$bp}), $style_breakpoints);
   }
 }
 
 // #region Clearfix
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'clearfix': 'Clear the floats from both sides',
@@ -30,7 +41,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region visually-hidden
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'visually-hidden': 'Hide an element from the standard user but not from screen readers',
@@ -54,7 +65,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region text-truncate
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'text-truncate': 'Keep the text onto one line and add an ellipsis if needed',
@@ -71,7 +82,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region ratio
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'ratio': 'Use pre-defined aspect ratios to generate the sizing or elements',
@@ -85,7 +96,7 @@ $new_utilities: map-merge(
 
     &::before {
       display: block;
-      padding-top: var(--#{$prefix}aspect-ratio);
+      padding-top: var(--aspect-ratio);
       content: '';
     }
 
@@ -100,14 +111,14 @@ $new_utilities: map-merge(
 
   @each $key, $ratio in $aspect-ratios {
     .ratio-#{$key} {
-      --#{$prefix}aspect-ratio: #{$ratio};
+      --aspect-ratio: #{$ratio};
     }
   }
 }
 // #endregion
 
 // #region fixed
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'fixed': 'Fix elements to either the top or bottom',
@@ -134,7 +145,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region sticky
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'sticky': 'Make elements stick to either the top or bottom',
@@ -142,8 +153,8 @@ $new_utilities: map-merge(
 );
 
 @mixin sticky() {
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+  @each $breakpoint in map.keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint, $mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .sticky#{$infix}-top {
@@ -163,7 +174,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region max-height
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'max-height':
@@ -217,7 +228,7 @@ $new_utilities: map-merge(
     max-height: 100%;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     :is(.mh-sm-sm, .mh-sm-md, .mh-sm-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -240,7 +251,7 @@ $new_utilities: map-merge(
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     :is(.mh-md-sm, .mh-md-md, .mh-md-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -266,7 +277,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region js-display
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'js-display': 'Show and hide elements depending upon if javascript is running or not',
@@ -289,7 +300,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Line clamp
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'line-clamp': 'Restricts a texts height to a number of lines (1-5)',
@@ -324,7 +335,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Wider colours
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'wider-colours': 'Apply the wider range of colours in our design system',
@@ -344,7 +355,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Align
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'align': 'Change the alignment of the text ',
@@ -379,7 +390,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Opacity
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'opacity': 'Apply the opacity of an element by intervals of 25%',
@@ -410,7 +421,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Overflow
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'overflow': 'Update the overflow of an element',
@@ -437,7 +448,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Display
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'display': 'Update the display of an element, can be applied at different breakpoints',
@@ -445,8 +456,8 @@ $new_utilities: map-merge(
 );
 
 @mixin display() {
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+  @each $breakpoint in map.keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint, $mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .d#{$infix}-inline {
@@ -494,7 +505,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Position
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'position': 'Update the position of an element, can be applied at different breakpoints',
@@ -502,8 +513,8 @@ $new_utilities: map-merge(
 );
 
 @mixin position() {
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+  @each $breakpoint in map.keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint, $mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
       .position#{$infix}-static {
         position: static !important;
@@ -590,7 +601,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Border
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'border': 'Apply a border and adjust its settings',
@@ -681,7 +692,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Sizes
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'sizes': 'Apply sizing rules to an element',
@@ -780,7 +791,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Flex
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'flex': 'Update the flex rules of an element, can be applied at different breakpoints',
@@ -788,8 +799,8 @@ $new_utilities: map-merge(
 );
 
 @mixin flex() {
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+  @each $breakpoint in map.keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint, $mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .flex#{$infix}-fill {
@@ -937,7 +948,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Order
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'order': 'Update the order of an element, can be applied at different breakpoints',
@@ -945,8 +956,8 @@ $new_utilities: map-merge(
 );
 
 @mixin order() {
-  @each $breakpoint in map-keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
+  @each $breakpoint in map.keys($grid-breakpoints) {
+    @include media-breakpoint-up($breakpoint, $mobileOnly) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .order#{$infix}-first {
@@ -986,7 +997,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Margins
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'margins': 'Adjust the margins of an element',
@@ -1059,7 +1070,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Paddings
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'paddings': 'Adjust the paddings of an element',
@@ -1102,7 +1113,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Gap
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'gap': 'Update the gap sizing of an element with the display flex',
@@ -1119,7 +1130,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Text
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'text': 'Apply the text settings',
@@ -1251,7 +1262,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Colours
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'colours': 'Applu our design system colours by either text colour or background',
@@ -1279,7 +1290,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region gradients
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'gradients': 'Add gradients to backgrounds',
@@ -1329,7 +1340,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Pointer-events
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'pointer-events': 'Disable or enable point events',
@@ -1348,7 +1359,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Rounded
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'rounded': 'Add rounded corners',
@@ -1415,7 +1426,7 @@ $new_utilities: map-merge(
 // #endregion
 
 // #region Visible
-$new_utilities: map-merge(
+$new_utilities: map.merge(
   $new_utilities,
   (
     'visible': 'Change the visibility of elements',
