@@ -48,6 +48,18 @@ iam-table iam-actionbar {
   margin-left: 1.5rem;
   margin-right: 1.5rem;
 }
+iam-table.table--fullwidth:has(iam-actionbar) {
+  padding-top: 5rem;
+}
+iam-table.table--fullwidth iam-actionbar {
+  margin: 0 -2rem 1rem -2rem;
+  box-shadow: none;
+  border-radius: 0;
+
+  @include light-mode($darkMode) {
+    background-color: #e6eaec;
+  }
+}
 
 .actionbar__sticky-wrapper {
   container-type: inline-size;
@@ -91,6 +103,7 @@ iam-table iam-actionbar {
 }
 
 @include container-up(sm) {
+  iam-table.table--fullwidth iam-actionbar,
   iam-table iam-actionbar {
     margin-left: -2rem;
     margin-right: -2rem;
