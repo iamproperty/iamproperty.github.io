@@ -664,3 +664,9 @@ iam-table {
 }
 
 // #endregion
+
+@for $i from 1 through 30 {
+  iam-table [data-hide-col#{$i}] + table :is(thead, tbody) :is(th, td):nth-child(#{$i}) {
+    display: none;
+  }
+}
