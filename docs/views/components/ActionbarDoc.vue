@@ -1041,15 +1041,18 @@
             <tr>
               <th>Version Control</th>
               <th>Date</th>
-              <th>Design System Version</th>
               <th>Notable updates</th>
             </tr>
           </thead>
           <tbody class="text-body">
             <tr>
+              <td>V1.1 added</td>
+              <td>10.03.2025</td>
+              <td>Added option for column filter and saving column filter.</td>
+            </tr>
+            <tr>
               <td>V1 added</td>
               <td>23.08.2023</td>
-              <td>v3.7.10</td>
               <td>N/A</td>
             </tr>
           </tbody>
