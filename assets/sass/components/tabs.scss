@@ -14,6 +14,35 @@ iam-tabs {
   details:not([open]) {
     padding-bottom: 0;
   }
+
+  .tabs__dropdown {
+    display: none;
+    width: fit-content;
+  }
+
+  &:is(.tabs--dropdown) {
+    .tabs__dropdown {
+      display: block;
+    }
+
+    &::part(wrapper) {
+      display: none;
+    }
+  }
+
+  @container (min-width: 62em) {
+    &:is(.tabs--dropdown) {
+      .tabs__dropdown {
+        display: none;
+      }
+
+      &::part(wrapper) {
+        display: block;
+      }
+    }
+  }
+
+
 }
 
 iam-tabs::part(next-button) {

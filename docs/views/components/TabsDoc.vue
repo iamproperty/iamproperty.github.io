@@ -5,20 +5,9 @@
   import Tab from '@/components/Tabs/Tab.vue';
   import Table from '@/components/Table/Table.vue';
   import Integration from '../Integration.vue';
-  import tabSpacing from '../../img/tabs/individual-tab-spacing.png';
-  import desktopTabsSpacing from '../../img/tabs/desktop-tabs-spacing.png';
-  import mobileTabsSpacing from '../../img/tabs/mobile-tabs-spacing.png';
-  import verticalLevel1Spacing from '../../img/tabs/default-level-1-tab-spacing.png';
-  import verticalExpandableLevel1Spacing from '../../img/tabs/expandable-level-1-tab-spacing.png';
-  import verticalExpandableLevel2Spacing from '../../img/tabs/expandable-level-2-tab-spacing.png';
-  import collapsibleNav from '../../img/tabs/collapsible-nav.png';
 
-  import mobileUi from '../../img/tabs/mobile-ui-example.png';
-
-  import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
-  const disabledBoolean = ref(true);
 
 </script>
 
@@ -39,7 +28,7 @@ import { RouterLink } from 'vue-router';
       <div class="container visualtest">
         <Tabs>
           <Tab title="The benefits of auction">
-            <h2>Content 1</h2>
+            <h3>Content 1</h3>
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
               industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
@@ -47,7 +36,7 @@ import { RouterLink } from 'vue-router';
             </p>
           </Tab>
           <Tab title="The types of auctions we offer">
-            <h2>Content 2</h2>
+            <h3>Content 2</h3>
             <a href="/link">a link</a>
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -56,7 +45,7 @@ import { RouterLink } from 'vue-router';
             </p>
           </Tab>
           <Tab title="Online auctions" lazy>
-            <h2>Content 3</h2>
+            <h3>Content 3</h3>
             <p>Lazy loaded table</p>
             <Table
               :fields="[{ key: 'column_1' }, { key: 'column_2' }, { key: 'column_3' }]"
@@ -70,7 +59,7 @@ import { RouterLink } from 'vue-router';
             ></Table>
           </Tab>
           <Tab title="Another auction link">
-            <h2>Content 4</h2>
+            <h3>Content 4</h3>
             <p>Tab paragraph</p>
           </Tab>
         </Tabs>
@@ -79,7 +68,7 @@ import { RouterLink } from 'vue-router';
       <section>
         <div>
           <h3>Desktop/Tablet</h3>
-          <ul class="states-wrap list-unstyled d-flex flex-wrap">
+          <ul class="states-wrap list-unstyled d-flex flex-wrap mb-4">
             <li>
             <p class="lead pb-1">Default</p>
             <button class="link fake-tab">The benefits of auction</button>
@@ -104,7 +93,7 @@ import { RouterLink } from 'vue-router';
         </div>
         <div>
           <h3>Mobile</h3>
-          <ul class="states-wrap list-unstyled d-flex flex-wrap">
+          <ul class="states-wrap list-unstyled d-flex flex-wrap mb-4">
             <li>
             <p class="lead pb-1">Default</p>
             <button class="link fake-tab">The benefits of auction</button>
@@ -128,13 +117,6 @@ import { RouterLink } from 'vue-router';
           </ul>
         </div>
       </section>
-      <section>
-        <h3>Spacing</h3>
-        <img :src="tabSpacing" class="mb-3" />
-        <img :src="desktopTabsSpacing" class="mb-3" />
-        <img :src="mobileTabsSpacing" class="mb-3" />
-
-      </section>
 
       <section>
         <h3>Mobile Behaviour</h3>
@@ -143,44 +125,72 @@ import { RouterLink } from 'vue-router';
         <p>If the total width of the tab items exceeds the screen width on mobile, the tab list should be scrollable horizontally.</p>
 
         <div>
-          <div class="mobile-ui">
-            <img :src="mobileUi"/>
-            <Tabs>
-              <Tab title="The benefits of auction">
-                <h2>Content 1</h2>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                </p>
-              </Tab>
-              <Tab title="The types of auctions we offer">
-                <h2>Content 2</h2>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                </p>
-              </Tab>
-              <Tab title="Online auctions" lazy>
-                <h2>Content 3</h2>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                </p>
-              </Tab>
-              <Tab title="Another auction link">
-                <h2>Content 4</h2>
-                <p>
-                  Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
-                </p>
-              </Tab>
-            </Tabs>
-          </div>
-          
-        </div>
-
-        <div>
-          <h3>Dropdown</h3>
+          <h3>Tablet/Mobile behaviour (outside of collapsible side menu only)</h3>
           <p>
             If the total width of the tab items exceeds the screen width by a significant amount on mobile (for example, more than double the width of the mobile screen) It may be appropriate to present the tabs in a dropdown list.
-            You can find the dropdown documentation here: <RouterLink to="/form/select">Select component</RouterLink>
+            You can find the dropdown documentation here: <RouterLink to="/form/select">Select component</RouterLink>. To implement the dropdown variation, simply add a class of tabs--dropdown to the component.
           </p>
+        </div>
+
+        <div class="container visualtest">
+          <Tabs class="tabs--dropdown">
+            <Tab title="Tab 1">
+              <p class="lead">Tab content 1</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </p>
+            </Tab>
+            <Tab title="Tab 2">
+              <p class="lead">Tab content 2</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </p>
+            </Tab>
+            <Tab title="Tab 3">
+              <p class="lead">Tab content 3</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </p>
+            </Tab>
+            <Tab title="Tab 4">
+              <p class="lead">Tab content 4</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </p>
+            </Tab>
+            <Tab title="Tab 5">
+              <p class="lead">Tab content 5</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </p>
+            </Tab>
+            <Tab title="Tab 6">
+              <p class="lead">Tab content 6</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </p>
+            </Tab>
+            <Tab title="Tab 7">
+              <p class="lead">Tab content 7</p>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+              </p>
+            </Tab>
+          </Tabs>
         </div>
       </section>
       <section>
@@ -188,110 +198,21 @@ import { RouterLink } from 'vue-router';
         <p>This tab type should be presented vertically either within a collapsible side menu or alongside content on
           desktop. If the vertical tabs are outside of a collapsible side menu on tablet/mobile the vertical tabs should be
           replaced with a select drop down which presents all of the tabs.</p>
-        <h3>States</h3>
-        <h4>Default Level 1 tab</h4>
-        
-        <ul class="states-wrap list-unstyled d-flex flex-wrap">
-          <li>
-          <p class="lead pb-1">Unselected State</p>
-          <button class="fake-vertical-tab">Lorem Ipsum</button>
-        </li>
-        <li>
-          <p class="lead pb-1">Unselected Hover/Focus State</p>
-          <button class="fake-vertical-tab hover">Lorem Ipsum</button>
-        </li>
-        <li>
-          <p class="lead pb-1">Selected State</p>
-          <button class="fake-vertical-tab" aria-pressed="true">Lorem Ipsum</button>
-        </li>
-     
-        </ul>
-
-        <h4>Expandable Level 1 tab</h4>
-        
-        <ul class="states-wrap list-unstyled d-flex flex-wrap">
-          <li>
-          <p class="lead pb-1">Unselected State</p>
-          <button class="fake-vertical-tab expandable level-1">Lorem Ipsum <i class="fa-light fa-circle-plus"></i></button>
-        </li>
-        <li>
-          <p class="lead pb-1">Unselected Hover/Focus State</p>
-          <button class="fake-vertical-tab expandable level-1 hover">Lorem Ipsum <i class="fa-light fa-circle-plus"></i></button>
-        </li>
-        <li>
-          <p class="lead pb-1">Selected State</p>
-          <button class="fake-vertical-tab expandable level-1" aria-pressed="true">Lorem Ipsum <i class="fa-solid fa-circle-minus"></i></button>
-        </li>
-
-        <li>
-          <p class="lead pb-1">Selected Hover/Focus State</p>
-          <button class="fake-vertical-tab expandable level-1 hover" aria-pressed="true">Lorem Ipsum <i class="fa-solid fa-circle-minus"></i></button>
-        </li>
-     
-     
-        </ul>
-
-        <h4>Expandable Level 2 tab</h4>
-        
-        <ul class="states-wrap list-unstyled d-flex flex-wrap">
-          <li>
-          <p class="lead pb-1">Unselected State</p>
-          <button class="fake-vertical-tab expandable level-2">Lorem Ipsum</button>
-        </li>
-        <li>
-          <p class="lead pb-1">Unselected Hover/Focus State</p>
-          <button class="fake-vertical-tab expandable level-2 hover">Lorem Ipsum</button>
-        </li>
-        <li>
-          <p class="lead pb-1">Selected State</p>
-          <button class="fake-vertical-tab expandable level-2" aria-pressed="true">Lorem Ipsum</button>
-        </li>
-     
-        </ul>
-
-      </section>
-
-      <section>
-        <h3>Dimensions</h3>
-        <div class="row">
-        <div class="col-4">
-        <h4>Default level 1 tab</h4>
-        <img :src="verticalLevel1Spacing" />
-      </div>
-      <div class="col-4">
-        <h4>Expandable level 1 tab</h4>
-        <img :src="verticalExpandableLevel1Spacing" />
-      </div>
-      <div class="col-4">
-        <h4>Expandable level 2 tab</h4>
-        <img :src="verticalExpandableLevel2Spacing" />
-      </div>
-      </div>
       </section>
 
       <section>
         <h3>Side menu with vertical tabs</h3>
         <p>Vertical tabs can be added to a side menu. The list of items should scroll vertically if they overflow the height of
-          the side menu tab area.
+          the side menu tab area. You can find the collapsible side menu documentation here: <RouterLink to="/nav/collapsible-side-menu">collapsible side menu</RouterLink>
           </p>
-
-          <img :src="collapsibleNav" />
       </section>
-
-      <section>
-        <h3>Tablet/Mobile behaviour (outside of collapsible side menu only)</h3>
-
-        <p>On tablet/mobile vertical tabs should be presented in a dropdown list. You can find the dropdown documentation here: <RouterLink to="/form/select">Select component</RouterLink></p>
-
-      </section>
-
 
     </div>
 
     <div class="container">
       <h2 class="mt-5">Admin panel</h2>
       <p>
-        Selecting each tab will change the content shown within the admin panel content. The light & dark gradient and
+        Selecting each tab will change the content shown within the admin panel content. The light &amp; dark gradient and
         block colours can all be used as the highlight colour for the selected tab.
       </p>
     </div>
@@ -525,6 +446,10 @@ import { RouterLink } from 'vue-router';
               <th>admin-panel</th>
               <td>When this class is added to the component, each tab button gets a gradient background colour when selected, instead of an underline.</td>
             </tr>
+            <tr>
+              <th>tabs--dropdown</th>
+              <td>When this class is added to the component, when viewing the tabbed area on a mobile or tablet device, a dropdown will show with the tab options instead of the actual tabs.</td>
+            </tr>
           </tbody>
         </table>
       </template>
@@ -697,39 +622,10 @@ import { RouterLink } from 'vue-router';
 
   }
 
-  .fake-vertical-tab,
   .fake-admin-tab {
     padding: 1rem 1.5rem;
     background: none;
     border: none;
-  }
-
-  .fake-vertical-tab {
-    border-bottom: 2px solid rgba(111, 111, 111, 0.15);
-
-    &:not(.disabled).hover,
-    &:not(.disabled):is([aria-pressed=true],:active,.current) {
-      background: #E9F9FD;
-    }
-    
-    &:not(.disabled, .level-1):is([aria-pressed=true],:active,.current) {
-      border-right: 3px solid var(--colour-info);
-      font-weight: bold;
-    }
-
-    &.expandable {
-      i {
-        margin-inline-start: 1rem;
-      }
-
-      &:not(.disabled, .level-2):is([aria-pressed=true],:active,.current) {
-        background: none;
-      }
-
-      &.level-2 {
-        padding-inline-start: 4rem;
-      }
-    }
   }
 
   .fake-admin-tab {
@@ -746,10 +642,5 @@ import { RouterLink } from 'vue-router';
       opacity: .4;
     }
 
-  }
-
-  .mobile-ui {
-    width: 50%;
-    max-width: 22.5rem;
   }
 </style>

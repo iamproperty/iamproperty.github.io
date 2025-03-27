@@ -5,48 +5,36 @@ $layers: 'true' !default;
 $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
-@use 'components/nav.preload' with (
-  $layers: $layers,
+@use 'components/nav.preload' with ($layers: $layers,
   $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/carousel.config' with (
-  $layers: $layers,
+  $mobileOnly: $mobileOnly);
+@use 'components/carousel.config' with ($layers: $layers,
   $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/multiselect.preload' with (
-  $layers: $layers,
+  $mobileOnly: $mobileOnly);
+@use 'components/multiselect.preload' with ($layers: $layers,
   $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/inline-edit.preload' with (
-  $layers: $layers,
+  $mobileOnly: $mobileOnly);
+@use 'components/inline-edit.preload' with ($layers: $layers,
   $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/charts.config.scss' with (
-  $layers: $layers,
+  $mobileOnly: $mobileOnly);
+@use 'components/charts.config.scss' with ($layers: $layers,
   $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/menu.scss' with (
-  $layers: $layers,
+  $mobileOnly: $mobileOnly);
+@use 'components/menu.scss' with ($layers: $layers,
   $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/tabs.scss' with (
-  $layers: $layers,
+  $mobileOnly: $mobileOnly);
+
+@use 'components/tabs.scss' with ($layers: $layers,
   $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
+  $mobileOnly: $mobileOnly);
 
 @include layer('components', $layers) {
+
   // Make sure the first
   main {
     position: relative;
 
-    > *:first-child {
+    >*:first-child {
       padding-top: 2rem;
     }
   }
@@ -66,12 +54,9 @@ $darkMode: 'true' !default;
     padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
   }
 
-  .row
-    [class*='col']:has(
-      label:first-child:last-child .card:defined:first-child:last-child,
-      button:first-child:last-child .card:defined:first-child:last-child,
-      a:first-child:last-child .card:defined:first-child:last-child
-    ) {
+  .row [class*='col']:has(label:first-child:last-child .card:defined:first-child:last-child,
+    button:first-child:last-child .card:defined:first-child:last-child,
+    a:first-child:last-child .card:defined:first-child:last-child) {
     display: flex;
   }
 
@@ -101,6 +86,7 @@ $darkMode: 'true' !default;
         ::part(body) {
           background: none;
         }
+
         ::part(footer) {
           background: none;
         }
@@ -127,6 +113,7 @@ $darkMode: 'true' !default;
   iam-search input:not(.is-invalid):not(:invalid) {
     background: none !important;
   }
+
   iam-search .optional-text {
     display: none !important;
   }
@@ -146,7 +133,7 @@ $darkMode: 'true' !default;
 
   @container (width > 23.4375em) {
     iam-table.table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
-      tr > *:not(:first-child):last-child {
+      tr>*:not(:first-child):last-child {
         @media screen and (prefers-color-scheme: dark) {
           background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
         }
@@ -308,7 +295,7 @@ $darkMode: 'true' !default;
         opacity: 1;
       }
 
-      > *:last-child {
+      >*:last-child {
         padding-bottom: 0;
         margin-bottom: 0;
       }

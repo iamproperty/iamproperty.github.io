@@ -1,8 +1,10 @@
+import v from '../../js/components/pagination/pagination.component.min';
 import { getSwipeDirection } from './helpers';
 
 export const createTabsLinks = function (tabsElement: Element): void {
   const detailsORLinks = tabsElement.querySelectorAll(':scope > details, :scope > a');
   let tabLinks = tabsElement.querySelector(':scope > .tabs__links');
+  let tabDropdown = tabsElement.querySelector(':scope .tabs__dropdown');
 
   if (tabsElement.shadowRoot && tabsElement.shadowRoot.querySelector('.tabs__links'))
     tabLinks = tabsElement.shadowRoot.querySelector('.tabs__links');
@@ -18,10 +20,19 @@ export const createTabsLinks = function (tabsElement: Element): void {
     tabsElement.prepend(tabLinksWrapper);
   }
 
+  if (!tabDropdown) {
+    tabDropdown = document.createElement('select');
+
+    tabDropdown.classList.add('tabs__dropdown');
+
+    tabsElement.prepend(tabDropdown);
+  }
+
   // Create the tab buttons from the summary titles
   let tabindex = 0;
   detailsORLinks.forEach((element) => {
     let button = document.createElement('button');
+    const dropdownOpt = document.createElement('option');
 
     if (element.matches('details')) {
       const summary = element.querySelector(':scope > summary');
@@ -38,6 +49,11 @@ export const createTabsLinks = function (tabsElement: Element): void {
       button.classList.add('link');
       button.setAttribute('data-index', tabindex);
       button.setAttribute('part', 'tab-link');
+
+      dropdownOpt.innerHTML = `${summary.innerText}`;
+      dropdownOpt.value = summary.innerText.replace(/\s+/g, '-').toLowerCase();
+      dropdownOpt.setAttribute('data-index', tabindex);
+
       element.setAttribute('tabindex', '-1');
 
       if (isDisabled) {
@@ -51,6 +67,8 @@ export const createTabsLinks = function (tabsElement: Element): void {
 
     button.classList.add('link');
     tabLinks.appendChild(button);
+
+    tabDropdown.appendChild(dropdownOpt);
   });
 };
 
@@ -59,6 +77,7 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
   const summaries = tabsElement.querySelectorAll(':scope > details > summary');
   let buttonWrapper = tabsElement.querySelector(':scope .tabs__links');
   let buttons = tabsElement.querySelectorAll(':scope .tabs__links > button');
+  const tabDropdown = tabsElement.querySelector(':scope .tabs__dropdown');
 
   let nextButton = tabsElement.querySelector(':scope .tabs__next');
 
@@ -69,7 +88,7 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
   if (tabsElement.shadowRoot) {
     buttons = tabsElement.shadowRoot.querySelectorAll('.tabs__links > button');
     buttonWrapper = tabsElement.shadowRoot.querySelector('.tabs__links');
-    nextButton = tabsElement.shadowRoot.querySelector(':scope .tabs__next');
+    nextButton = tabsElement.shadowRoot.querySelector('.tabs__next');
   }
 
   // Set the on click for the tab buttons, these will open the details box it matches too
@@ -92,11 +111,14 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
         behavior: 'smooth',
       });
 
-      details.forEach((detail, detailsIndex) => {
-        const detailsOpen = button.getAttribute('data-index') == detailsIndex ? true : false;
+      //Handles showing correct content
+      toggleTab(details, button);
 
-        if (detailsOpen) detail.setAttribute('open', detailsOpen);
-        else detail.removeAttribute('open');
+      // Data layer Open Event
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'openTab',
+        tabTitle: button.textContent,
       });
 
       if (button.matches(':last-child')) {
@@ -105,13 +127,9 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
         nextButton?.removeAttribute('disabled');
       }
 
-      // Data layer Open Event
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'openTab',
-        tabTitle: button.textContent,
-      });
     });
+
+    dropdownTabSelector(details, tabDropdown)
   });
 
   buttonWrapper.addEventListener('scrollend', () => {
@@ -151,6 +169,7 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
 
     const currentTab = buttonWrapper.querySelector('[aria-pressed="true"]');
     const nextTab = currentTab.nextSibling;
+
     if (nextTab) nextTab.click();
   });
 
@@ -191,6 +210,33 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
     });
   }
 };
+
+export const toggleTab = function (details: Array, button: Element): boolean | void {
+  details.forEach((detail, detailsIndex) => {
+    const detailsOpen = button.getAttribute('data-index') == detailsIndex ? true : false;
+
+    if (detailsOpen) detail.setAttribute('open', detailsOpen);
+    else detail.removeAttribute('open');
+
+  });
+}
+
+export const dropdownTabSelector = function (details: Array, dropdown: Element): boolean | void {
+
+  dropdown.addEventListener('change', (e) => {
+    e.preventDefault();
+    const selected = dropdown.options[dropdown.selectedIndex];
+
+    toggleTab(details, selected)
+
+    // Data layer Open Event
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'openTab',
+      tabTitle: selected.innerText,
+    });
+  });
+}
 
 export const openFirstTab = function (tabsElement: Element): boolean | void {
   if (!tabsElement.querySelector(':scope > details')) return false;
