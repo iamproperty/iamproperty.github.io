@@ -1,0 +1,27 @@
+@use '../_func' as *;
+
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('components', $layers) {
+  .tabs__dropdown {
+    display: none;
+  }
+
+  iam-tabs:is(.tabs--dropdown) {
+    .tabs__dropdown {
+      display: block;
+    }
+  }
+
+  @container (min-width: 62em) {
+    iam-tabs:is(.tabs--dropdown-md) {
+      .tabs__dropdown {
+        display: block;
+      }
+    }
+  }
+
+  // #endregion
+}

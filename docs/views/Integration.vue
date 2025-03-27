@@ -77,7 +77,7 @@
       <slot name="vars"></slot>
       <small v-if="slots['vars']" class="d-block pb-5"
         >There are more CSS Variables used within the component and can be found when inspecting the shadow dom. The
-        below are the more notable ones that may effect the styling of the component in a more complicated way.</small
+        above are the more notable ones that may effect the styling of the component in a more complicated way.</small
       >
     </details>
     <details v-if="showExtend">

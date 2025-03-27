@@ -34,6 +34,8 @@ class iamTabs extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="tabs" part="tabs">
+      <div class="tabs__dropdown" part="tab-dropdown"></div>
+
       <div class="tabs__links__wrapper" part="wrapper">
         <div class="tabs__links" part="tab-links"></div>
       </div>
