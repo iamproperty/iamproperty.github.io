@@ -126,10 +126,9 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
       } else {
         nextButton?.removeAttribute('disabled');
       }
-
     });
 
-    dropdownTabSelector(details, tabDropdown)
+    dropdownTabSelector(details, tabDropdown);
   });
 
   buttonWrapper.addEventListener('scrollend', () => {
@@ -217,17 +216,15 @@ export const toggleTab = function (details: Array, button: Element): boolean | v
 
     if (detailsOpen) detail.setAttribute('open', detailsOpen);
     else detail.removeAttribute('open');
-
   });
-}
+};
 
 export const dropdownTabSelector = function (details: Array, dropdown: Element): boolean | void {
-
   dropdown.addEventListener('change', (e) => {
     e.preventDefault();
     const selected = dropdown.options[dropdown.selectedIndex];
 
-    toggleTab(details, selected)
+    toggleTab(details, selected);
 
     // Data layer Open Event
     window.dataLayer = window.dataLayer || [];
@@ -236,7 +233,7 @@ export const dropdownTabSelector = function (details: Array, dropdown: Element):
       tabTitle: selected.innerText,
     });
   });
-}
+};
 
 export const openFirstTab = function (tabsElement: Element): boolean | void {
   if (!tabsElement.querySelector(':scope > details')) return false;

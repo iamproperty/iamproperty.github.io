@@ -41,8 +41,6 @@ iam-tabs {
       }
     }
   }
-
-
 }
 
 iam-tabs::part(next-button) {
@@ -149,7 +147,6 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     }
 
     &:not(.disabled) {
-
       &:hover:after,
       &:focus:after,
       &.focus:after {

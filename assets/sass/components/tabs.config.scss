@@ -5,7 +5,6 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('components', $layers) {
-
   .tabs__dropdown {
     display: none;
   }
@@ -23,7 +22,6 @@ $darkMode: 'true' !default;
       }
     }
   }
-
 
   // #endregion
 }

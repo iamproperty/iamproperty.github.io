@@ -6,9 +6,7 @@
   import Table from '@/components/Table/Table.vue';
   import Integration from '../Integration.vue';
 
-import { RouterLink } from 'vue-router';
-
-
+  import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -19,11 +17,15 @@ import { RouterLink } from 'vue-router';
 
     <div class="container">
       <p class="lead">
-        Tabs group together content and display one at a time, they should not be used for important content as it may not be visible on page load.
+        Tabs group together content and display one at a time, they should not be used for important content as it may
+        not be visible on page load.
       </p>
 
       <h2>Horizontal tabs</h2>
-      <p>This tab type should be presented horizontally and above content. They are best used when there are less than 5 tab items.</p>
+      <p>
+        This tab type should be presented horizontally and above content. They are best used when there are less than 5
+        tab items.
+      </p>
 
       <div class="container visualtest">
         <Tabs>
@@ -70,50 +72,50 @@ import { RouterLink } from 'vue-router';
           <h3>Desktop/Tablet</h3>
           <ul class="states-wrap list-unstyled d-flex flex-wrap mb-4">
             <li>
-            <p class="lead pb-1">Default</p>
-            <button class="link fake-tab">The benefits of auction</button>
-          </li>
-          <li>
-            <p class="lead pb-1">Hover/Focus</p>
-            <button class="link fake-tab hover">The benefits of auction</button>
-          </li>
-          <li>
-            <p class="lead pb-1">Pressed</p>
-            <button class="link fake-tab" aria-pressed="true">The benefits of auction</button>
-          </li>
-          <li>
-            <p class="lead pb-1">Selected</p>
-            <button class="link fake-tab current">The benefits of auction</button>
-          </li>
-          <li>
-            <p class="lead pb-1">Disabled</p>
-            <button class="link fake-tab disabled" disabled>The benefits of auction</button>
-          </li>
+              <p class="lead pb-1">Default</p>
+              <button class="link fake-tab">The benefits of auction</button>
+            </li>
+            <li>
+              <p class="lead pb-1">Hover/Focus</p>
+              <button class="link fake-tab hover">The benefits of auction</button>
+            </li>
+            <li>
+              <p class="lead pb-1">Pressed</p>
+              <button class="link fake-tab" aria-pressed="true">The benefits of auction</button>
+            </li>
+            <li>
+              <p class="lead pb-1">Selected</p>
+              <button class="link fake-tab current">The benefits of auction</button>
+            </li>
+            <li>
+              <p class="lead pb-1">Disabled</p>
+              <button class="link fake-tab disabled" disabled>The benefits of auction</button>
+            </li>
           </ul>
         </div>
         <div>
           <h3>Mobile</h3>
           <ul class="states-wrap list-unstyled d-flex flex-wrap mb-4">
             <li>
-            <p class="lead pb-1">Default</p>
-            <button class="link fake-tab">The benefits of auction</button>
-          </li>
-          <li>
-            <p class="lead pb-1">Hover/Focus</p>
-            <button class="link fake-tab hover">The benefits of auction</button>
-          </li>
-          <li>
-            <p class="lead pb-1">Pressed</p>
-            <button class="link fake-tab" aria-pressed="true">The benefits of auction</button>
-          </li>
-          <li>
-            <p class="lead pb-1">Selected</p>
-            <button class="link fake-tab current">The benefits of auction</button>
-          </li>
-          <li>
-            <p class="lead pb-1">Disabled</p>
-            <button class="link fake-tab disabled" disabled>The benefits of auction</button>
-          </li>
+              <p class="lead pb-1">Default</p>
+              <button class="link fake-tab">The benefits of auction</button>
+            </li>
+            <li>
+              <p class="lead pb-1">Hover/Focus</p>
+              <button class="link fake-tab hover">The benefits of auction</button>
+            </li>
+            <li>
+              <p class="lead pb-1">Pressed</p>
+              <button class="link fake-tab" aria-pressed="true">The benefits of auction</button>
+            </li>
+            <li>
+              <p class="lead pb-1">Selected</p>
+              <button class="link fake-tab current">The benefits of auction</button>
+            </li>
+            <li>
+              <p class="lead pb-1">Disabled</p>
+              <button class="link fake-tab disabled" disabled>The benefits of auction</button>
+            </li>
           </ul>
         </div>
       </section>
@@ -122,13 +124,19 @@ import { RouterLink } from 'vue-router';
         <h3>Mobile Behaviour</h3>
         <h4>Scroll horizontally</h4>
 
-        <p>If the total width of the tab items exceeds the screen width on mobile, the tab list should be scrollable horizontally.</p>
+        <p>
+          If the total width of the tab items exceeds the screen width on mobile, the tab list should be scrollable
+          horizontally.
+        </p>
 
         <div>
           <h3>Tablet/Mobile behaviour (outside of collapsible side menu only)</h3>
           <p>
-            If the total width of the tab items exceeds the screen width by a significant amount on mobile (for example, more than double the width of the mobile screen) It may be appropriate to present the tabs in a dropdown list.
-            You can find the dropdown documentation here: <RouterLink to="/form/select">Select component</RouterLink>. To implement the dropdown variation, simply add a class of tabs--dropdown to the component.
+            If the total width of the tab items exceeds the screen width by a significant amount on mobile (for example,
+            more than double the width of the mobile screen) It may be appropriate to present the tabs in a dropdown
+            list. You can find the dropdown documentation here:
+            <RouterLink to="/form/select">Select component</RouterLink>. To implement the dropdown variation, simply add
+            a class of tabs--dropdown to the component.
           </p>
         </div>
 
@@ -195,25 +203,28 @@ import { RouterLink } from 'vue-router';
       </section>
       <section>
         <h2>Vertical Tabs</h2>
-        <p>This tab type should be presented vertically either within a collapsible side menu or alongside content on
-          desktop. If the vertical tabs are outside of a collapsible side menu on tablet/mobile the vertical tabs should be
-          replaced with a select drop down which presents all of the tabs.</p>
+        <p>
+          This tab type should be presented vertically either within a collapsible side menu or alongside content on
+          desktop. If the vertical tabs are outside of a collapsible side menu on tablet/mobile the vertical tabs should
+          be replaced with a select drop down which presents all of the tabs.
+        </p>
       </section>
 
       <section>
         <h3>Side menu with vertical tabs</h3>
-        <p>Vertical tabs can be added to a side menu. The list of items should scroll vertically if they overflow the height of
-          the side menu tab area. You can find the collapsible side menu documentation here: <RouterLink to="/nav/collapsible-side-menu">collapsible side menu</RouterLink>
-          </p>
+        <p>
+          Vertical tabs can be added to a side menu. The list of items should scroll vertically if they overflow the
+          height of the side menu tab area. You can find the collapsible side menu documentation here:
+          <RouterLink to="/nav/collapsible-side-menu">collapsible side menu</RouterLink>
+        </p>
       </section>
-
     </div>
 
     <div class="container">
       <h2 class="mt-5">Admin panel</h2>
       <p>
-        Selecting each tab will change the content shown within the admin panel content. The light &amp; dark gradient and
-        block colours can all be used as the highlight colour for the selected tab.
+        Selecting each tab will change the content shown within the admin panel content. The light &amp; dark gradient
+        and block colours can all be used as the highlight colour for the selected tab.
       </p>
     </div>
 
@@ -251,26 +262,25 @@ import { RouterLink } from 'vue-router';
         </Tab>
       </Tabs>
     </div>
-        
+
     <ul class="states-wrap list-unstyled d-flex flex-wrap">
       <li>
-      <p class="lead pb-1">Default</p>
-      <button class="fake-admin-tab">The benefits of auction</button>
-    </li>
-    <li>
-      <p class="lead pb-1">Selected</p>
-      <button class="fake-admin-tab" aria-pressed="true">The benefits of auction</button>
-    </li>
-    <li>
-      <p class="lead pb-1">Hover</p>
-      <button class="fake-admin-tab hover">The benefits of auction</button>
-    </li>
+        <p class="lead pb-1">Default</p>
+        <button class="fake-admin-tab">The benefits of auction</button>
+      </li>
+      <li>
+        <p class="lead pb-1">Selected</p>
+        <button class="fake-admin-tab" aria-pressed="true">The benefits of auction</button>
+      </li>
+      <li>
+        <p class="lead pb-1">Hover</p>
+        <button class="fake-admin-tab hover">The benefits of auction</button>
+      </li>
 
-    <li>
-      <p class="lead pb-1">Disabled</p>
-      <button class="fake-admin-tab disabled">The benefits of auction</button>
-    </li>
- 
+      <li>
+        <p class="lead pb-1">Disabled</p>
+        <button class="fake-admin-tab disabled">The benefits of auction</button>
+      </li>
     </ul>
 
     <div class="container">
@@ -394,18 +404,23 @@ import { RouterLink } from 'vue-router';
               <td>-</td>
               <td>Boolean</td>
               <td>No</td>
-              <td>This is a property on the individual tab component. It is used to set whether the content of the tab will not loaded intially and will be loaded after the user has clicked on the tab link.</td>
+              <td>
+                This is a property on the individual tab component. It is used to set whether the content of the tab
+                will not loaded intially and will be loaded after the user has clicked on the tab link.
+              </td>
             </tr>
             <tr>
               <th>disabled</th>
               <td>-</td>
               <td>Boolean</td>
               <td>No</td>
-              <td>This is a property on the individual tab component. It is used to apply disabled state for a tab (tab content will not be reachable)</td>
+              <td>
+                This is a property on the individual tab component. It is used to apply disabled state for a tab (tab
+                content will not be reachable)
+              </td>
             </tr>
           </tbody>
         </table>
-        
       </template>
 
       <template #slots>
@@ -444,11 +459,17 @@ import { RouterLink } from 'vue-router';
             </tr>
             <tr>
               <th>admin-panel</th>
-              <td>When this class is added to the component, each tab button gets a gradient background colour when selected, instead of an underline.</td>
+              <td>
+                When this class is added to the component, each tab button gets a gradient background colour when
+                selected, instead of an underline.
+              </td>
             </tr>
             <tr>
               <th>tabs--dropdown</th>
-              <td>When this class is added to the component, when viewing the tabbed area on a mobile or tablet device, a dropdown will show with the tab options instead of the actual tabs.</td>
+              <td>
+                When this class is added to the component, when viewing the tabbed area on a mobile or tablet device, a
+                dropdown will show with the tab options instead of the actual tabs.
+              </td>
             </tr>
           </tbody>
         </table>
@@ -498,9 +519,7 @@ import { RouterLink } from 'vue-router';
           <tbody>
             <tr>
               <th>--colour-tab-underline</th>
-              <td>
-                The colour used for the underline when hovering over a tab, or when the tab is active.
-              </td>
+              <td>The colour used for the underline when hovering over a tab, or when the tab is active.</td>
             </tr>
           </tbody>
         </table>
@@ -511,7 +530,10 @@ import { RouterLink } from 'vue-router';
           <li>Hovering over a tab should show an underline colour 60% of it's width.</li>
           <li>Selecting a tab should show an underline colour 100% of it's width.</li>
           <li>Selecting a tab should show the appropriate content for that tab</li>
-          <li>If the tabs are too wide to fit on a mobile screen, a user should be able to swipe left and right to scroll them.</li>
+          <li>
+            If the tabs are too wide to fit on a mobile screen, a user should be able to swipe left and right to scroll
+            them.
+          </li>
         </ul>
       </template>
       <template #data-layer>
@@ -550,7 +572,7 @@ import { RouterLink } from 'vue-router';
         </table>
       </template>
     </Integration>
-    
+
     <div class="bg-light version-control">
       <div class="container">
         <table>
@@ -578,9 +600,8 @@ import { RouterLink } from 'vue-router';
 </template>
 
 <style lang="scss" scoped>
-
   .states-wrap {
-    border: 2px dashed #9747FF; 
+    border: 2px dashed #9747ff;
     padding: 1rem;
     border-radius: 5px;
 
@@ -596,22 +617,22 @@ import { RouterLink } from 'vue-router';
     font-size: 1.125rem;
     cursor: pointer;
     margin: 0;
-    padding: 1.5rem 1.5rem .5rem 1.5rem;
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
 
     &:after {
       position: absolute;
-      content: "";
+      content: '';
       bottom: 0;
       left: 50%;
       height: 3px;
       width: 100%;
       transform: translate(-50%, 0) scale(0, 0);
       background: var(--colour-info);
-      transition: transform .4s;
-    } 
+      transition: transform 0.4s;
+    }
 
-    &:not(.disabled):is([aria-pressed=true],:active,.current):after {
-        transform: translate(-50%, 0) scale(1, 1);
+    &:not(.disabled):is([aria-pressed='true'], :active, .current):after {
+      transform: translate(-50%, 0) scale(1, 1);
     }
 
     &:not(.disabled).hover {
@@ -619,7 +640,6 @@ import { RouterLink } from 'vue-router';
         transform: translate(-50%, 0) scale(0.6, 1);
       }
     }
-
   }
 
   .fake-admin-tab {
@@ -632,15 +652,14 @@ import { RouterLink } from 'vue-router';
     font-size: 1.15rem;
     border-right: 1px solid var(--colour-border);
 
-    &:not(.disabled, .level-2):is([aria-pressed=true],:active,.current) {
+    &:not(.disabled, .level-2):is([aria-pressed='true'], :active, .current) {
       background-color: rgb(180, 230, 165);
-      background-image: linear-gradient(-90deg, rgb(30, 190, 230) 0px, rgba(0, 0, 0, 0) 100%)
+      background-image: linear-gradient(-90deg, rgb(30, 190, 230) 0px, rgba(0, 0, 0, 0) 100%);
     }
 
     &.disabled {
       cursor: not-allowed;
-      opacity: .4;
+      opacity: 0.4;
     }
-
   }
 </style>
