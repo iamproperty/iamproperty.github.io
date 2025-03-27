@@ -1,4 +1,3 @@
-import v from '../../js/components/pagination/pagination.component.min';
 import { getSwipeDirection } from './helpers';
 
 export const createTabsLinks = function (tabsElement: Element): void {
