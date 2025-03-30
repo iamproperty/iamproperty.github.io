@@ -854,7 +854,8 @@
     </p>
 
     <p>When clicked a dialog popover can be displayed to show the column sorting options.</p>
-    <h3>Filter on change</h3>
+    
+    <h3>Filter on save</h3>
     <div class="container bg-light visualtest mb-5">
       <Table class="table--fullwidth">
         <Actionbar slot="before" data-search="" data-filter-columns-save data-hide-col1></Actionbar>
@@ -934,7 +935,7 @@
         </table>
       </Table>
     </div>
-    <h3>Filter on save</h3>
+    <h3>Filter on change</h3>
     <div class="container bg-light visualtest">
       <Table class="table--fullwidth">
         <Actionbar slot="before" data-search="" data-filter-columns></Actionbar>

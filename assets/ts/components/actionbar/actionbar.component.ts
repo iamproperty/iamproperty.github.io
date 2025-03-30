@@ -76,7 +76,7 @@ class iamActionbar extends HTMLElement {
                 <div class="pb-0 mb-0 checklists">
                   
                 </div>
-                <div class="text-right checklist-btns"><button id="cancelColumns" class="btn btn-action">Cancel</button><button id="saveColumns" class="btn btn-action">Save</button></div>
+                <div class="text-right checklist-btns"><button id="cancelColumns" class="btn btn-action">Cancel</button><button id="saveColumns" class="btn btn-action btn-secondary">Save</button></div>
               </dialog>
             </div>
 
