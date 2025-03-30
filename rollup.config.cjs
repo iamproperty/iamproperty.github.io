@@ -83,9 +83,17 @@ Array.from(components).forEach((component) => {
   }
 
   try {
-    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.global.css`))) {
+
+    let componentFileName = component;
+
+    if (componentFileName == "table-no-submit" || componentFileName == "table-submit" || componentFileName == "table-ajax"){
+      componentFileName = "table";
+    }
+  
+
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.global.css`))) {
       
-      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.global.css`), 'utf8');
+      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.global.css`), 'utf8');
       extraCSS = extraCSS.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       extraCSS = extraCSS.replace("\uFEFF","");
     }

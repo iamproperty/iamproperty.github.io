@@ -1,17 +1,12 @@
-import {
-  moveAttributesToComponents,
-  findForm,
+import { 
   setupBasicTable,
+  findForm,
   setupAdvancedTable,
-  paginateRows,
-  setupNoSubmitTable,
   setupSubmitTable,
-  setupAjaxTable,
-  loadAjaxTable,
   paginateTable
 } from '../../modules/table';
 
-class iamTableBasic extends HTMLElement {
+class iamTableSubmit extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -42,47 +37,38 @@ class iamTableBasic extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     // insert extra CSS
-    if (!document.getElementById('tableExtras')) {
-      document.head.insertAdjacentHTML('beforeend', `<style id="tableExtras">${loadExtraCSS}</style>`);
+    if (!document.getElementById('tableSingleExtras') && !document.getElementById('tableExtras')) {
+      document.head.insertAdjacentHTML('beforeend', `<style id="tableSingleExtras">${loadExtraCSS}</style>`);
     }
   }
 
+
+
   connectedCallback(): void {
+
+    const params = new URLSearchParams(window.location.search);
 
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
-
     const form = findForm(this,table);
 
-    const savedTableBody = table.querySelector('tbody').cloneNode(true);
 
-    moveAttributesToComponents(this);
+    if(params.has('page')) this.setAttribute('data-page',params.get('page'));
+    if(params.has('show')) this.setAttribute('data-show',params.get('show'));
+
+    if(params.has('page')) pagination.setAttribute('data-page',params.get('page'));
+    if(params.has('show')) pagination.setAttribute('data-show',params.get('show'));
+
 
     setupBasicTable(this,table,form,pagination);
+
     setupAdvancedTable(this,table,form,pagination);
 
+    setupSubmitTable(this, table,form,pagination);
 
-    if(this.hasAttribute('data-submit')){
-
-      setupSubmitTable(this, table,form,pagination);
-      paginateTable(this, table, form, pagination, () => { form.submit(); });
-    }
-    else if(this.hasAttribute('data-no-submit')){
-
-      setupNoSubmitTable(this, table,form,pagination, savedTableBody);
-      paginateTable(this, table, form, pagination, () => { paginateRows(this); })
-    }
-    else if(this.hasAttribute('data-ajax')){
-
-      setupAjaxTable(this, table,form, pagination);
-      paginateTable(this, table, form, pagination, () => { loadAjaxTable(this, table, form, pagination) })
-    }
-    else {
-
-      paginateTable(this, table, form, pagination, () => { paginateRows(this); })
-    }
+    paginateTable(this, table, form, pagination, () => { form.submit(); });
 
   }
 }
 
-export default iamTableBasic;
+export default iamTableSubmit;

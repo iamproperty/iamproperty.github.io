@@ -1,6 +1,235 @@
-import { zeroPad, isNumeric, ucfirst, resolvePath } from './helpers';
+import { zeroPad, isNumeric, ucfirst, resolvePath, uniqueID } from './helpers';
 
-// Basic functionality needed
+
+// #region Helpers
+export const formatCell = (format, cellOutput): any => {
+  switch (format) {
+    case 'datetime':
+      return (
+        new Date(cellOutput).toLocaleDateString('en-gb', {
+          weekday: 'short',
+          year: '2-digit',
+          month: 'long',
+          day: 'numeric',
+        }) +
+        ' ' +
+        new Date(cellOutput).toLocaleTimeString('en-gb', { hour: '2-digit', minute: '2-digit' })
+      );
+    case 'date':
+      return new Date(cellOutput).toLocaleDateString('en-gb', {
+        day: 'numeric',
+        month: 'long',
+        year: '2-digit',
+      });
+    case 'capitalise':
+      return (cellOutput = ucfirst(cellOutput));
+  }
+};
+
+const filterFilters = function (form): object {
+  const filters = new Object();
+
+  // Filter
+  const filterInputs = Array.from(form.querySelectorAll('[data-filter]'));
+
+  filterInputs.forEach((filterInput) => {
+    // Ignore uncked radio inputs
+    if (filterInput.type == 'radio' && !filterInput.checked) {
+      return;
+    }
+
+    if (filterInput.type == 'checkbox' && !filterInput.checked) {
+      return;
+    }
+
+    if (filterInput && filterInput.value) {
+      const dataFilter = filterInput.getAttribute('data-filter');
+      let filterValue = filterInput.value;
+
+      if (filterInput.hasAttribute('data-date-from')) filterValue += '-date-from';
+
+      if (filterInput.hasAttribute('data-date-to')) filterValue += '-date-to';
+
+      if (!filters[dataFilter]) filters[dataFilter] = [];
+
+      filters[dataFilter].push(filterValue);
+    }
+  });
+
+  return filters;
+};
+
+export const moveAttributesToComponents = (component): void => {
+
+  let form = document.createElement('form');
+  
+  if (component.hasAttribute('data-filterby')) {
+    form = document.querySelector(`#${component.getAttribute('data-filterby')}`);
+  } else if(component.closest('form')) {
+    form = component.closest('form');
+  } 
+  else {
+    table.parentNode.insertBefore(form, table.nextSibling);
+  }
+
+  
+  if(form.hasAttribute('data-ajax'))
+    component.setAttribute('data-ajax',form.getAttribute('data-ajax'))
+
+  if(form.hasAttribute('data-schema'))
+    component.setAttribute('data-schema',form.getAttribute('data-schema'))
+
+}
+
+export const paginateTable = (component, table, form, pagination, callback): void => {
+
+  if(!form.querySelector('[name=show]'))
+    form.insertAdjacentHTML('beforeend',`<input name="show" type="hidden" value="${component.getAttribute('data-show')}" />`);
+
+
+  if(!form.querySelector('[name=page]')) 
+    form.insertAdjacentHTML('beforeend',`<input name="page" type="hidden" value="${component.getAttribute('data-page')}" />`);
+
+
+  pagination.addEventListener('update-show', (event) => {
+
+    if (form.querySelector('[name=show]').value != event.detail.show) {
+
+      form.querySelector('[name=show]').value = event.detail.show;
+
+
+      const updateEvent = new CustomEvent('update-show', { detail: { show: event.detail.show } });
+      component.dispatchEvent(updateEvent);
+
+      updateAttributes(component, pagination);
+
+      callback();
+    }
+  });
+
+  pagination.addEventListener('update-page', (event) => {
+
+    console.log(event)
+
+    if (form.querySelector('[name=page]').value != event.detail.page) {
+
+      form.querySelector('[name=page]').value = event.detail.page;
+
+      const updateEvent = new CustomEvent('update-page', { detail: { page: event.detail.page } });
+      component.dispatchEvent(updateEvent);
+
+      updateAttributes(component, pagination);
+
+      callback();
+
+      // scroll back to the top of the table
+      if (!component.hasAttribute('data-no-scroll')) {
+        const yOffset = -250;
+        const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }
+  });
+}
+
+
+export const findForm = (component, table): HTMLElement => {
+
+  let form = document.createElement('form');
+  
+  if (component.hasAttribute('data-filterby')) {
+    form = document.querySelector(`#${component.getAttribute('data-filterby')}`);
+  } else if(component.closest('form')) {
+    form = component.closest('form');
+  } 
+  else {
+    table.parentNode.insertBefore(form, table.nextSibling);
+  }
+
+  return form;
+}
+// #endregion
+
+export const setupBasicTable = (component,table,form,pagination): void => {
+
+  
+  const tableWrapper = component.shadowRoot.querySelector('.table__wrapper');
+
+  if (!component.hasAttribute('data-total')) component.setAttribute('data-total', component.querySelectorAll('tbody tr').length);
+  if (!component.hasAttribute('data-page')) component.setAttribute('data-page', 1);
+  if (!component.hasAttribute('data-show')) component.setAttribute('data-show', 5);
+  if (!component.hasAttribute('data-increment')) component.setAttribute('data-increment', component.getAttribute('data-show'));
+
+  transferAttributes(component,pagination);
+
+  addDataAttributes(table);
+  createMobileButton(component,table);
+
+  // Max height
+  if (component.classList.contains('mh-sm')) tableWrapper.classList.add('mh-sm');
+  if (component.classList.contains('mh-md')) tableWrapper.classList.add('mh-md');
+  if (component.classList.contains('mh-lg')) tableWrapper.classList.add('mh-lg');
+
+
+  if (component.classList.contains('table--cta')) {
+
+    getLargestLastColWidth(component, table);
+    getRowHeight(component, table);
+  }
+}
+
+
+// #region Basic table fnctions
+export const transferAttributes = (component,pagination): void => {
+
+  pagination.setAttribute('data-total', component.getAttribute('data-total'));
+  pagination.setAttribute('data-page', component.getAttribute('data-page'));
+  pagination.setAttribute('data-show', component.getAttribute('data-show'));
+  pagination.setAttribute('data-increment', component.getAttribute('data-show'));
+
+  if (component.hasAttribute('data-page-jump')) pagination.setAttribute('data-page-jump', 'true');
+  if (component.hasAttribute('data-per-page')) pagination.setAttribute('data-per-page', 'true');
+  if (component.hasAttribute('data-item-count')) pagination.setAttribute('data-item-count', 'true');
+  if (component.hasAttribute('data-loading')) pagination.setAttribute('data-loading', 'true');
+
+  if (component.classList.contains('table--fullwidth')) pagination.setAttribute('data-minimal', 'true');
+}
+
+export const updateAttributes = (component, pagination): void => {
+
+  component.setAttribute('data-total', pagination.getAttribute('data-total'));
+  component.setAttribute('data-page', pagination.getAttribute('data-page'));
+  component.setAttribute('data-show', pagination.getAttribute('data-show'));
+  component.setAttribute('data-increment', pagination.getAttribute('data-show'));
+}
+
+export const paginateRows = (component): void => {
+
+  const total = component.getAttribute('data-total');
+  const page = component.getAttribute('data-page');
+  const show = component.getAttribute('data-show');
+  const increment = component.getAttribute('data-increment');
+
+  const table = component.querySelector('table');
+
+  const end = page * show;
+  const start = end - show;
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+    
+
+    if(index >= start && index < end){
+      row.classList.add('show');
+    }
+    else {
+      row.classList.remove('show');
+    }
+
+
+  });
+
+}
+
 export const addDataAttributes = (table): void => {
   const colHeadings = Array.from(table.querySelectorAll('thead th'));
   const colRows = Array.from(table.querySelectorAll('tbody tr'));
@@ -28,7 +257,8 @@ export const addDataAttributes = (table): void => {
       'on track',
       'not started',
       'warning',
-      'error',
+      'successful',
+      'failed',
     ];
 
     cells.forEach((cell, cellIndex) => {
@@ -54,28 +284,10 @@ export const addDataAttributes = (table): void => {
   });
 };
 
-export const getLargestLastColWidth = (table): number => {
-  let largestWidth = 0;
+export const createMobileButton = (component, table): void => {
+  if (component.classList.contains('table--fullwidth') && !component.hasAttribute('data-expandable')) return false;
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
-    const htmlStyles = window.getComputedStyle(document.querySelector('html'));
-    const lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
-
-    if (lastColChild) {
-      lastColChild.classList.add('text-nowrap');
-      let responsiveWidth = lastColChild.offsetWidth / parseFloat(htmlStyles.fontSize);
-      responsiveWidth += 1.7;
-      largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
-    }
-  });
-
-  return largestWidth;
-};
-
-export const createMobileButton = (table, wrapper): void => {
-  if (wrapper.classList.contains('table--fullwidth') && !wrapper.hasAttribute('data-expandable')) return false;
-
-  if (table.querySelectorAll('thead tr th').length < 4 && !wrapper.hasAttribute('data-expandable')) return false;
+  if (table.querySelectorAll('thead tr th').length < 4 && !component.hasAttribute('data-expandable')) return false;
 
   //If the expand column already exists we don't need to add a new one.
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
@@ -91,9 +303,7 @@ export const createMobileButton = (table, wrapper): void => {
       `<td class="td--fixed td--expand"><button class="btn btn-compact btn-secondary" data-expand-button ${preExpanded}>Expand</button></td>`
     );
   });
-};
 
-export const addTableEventListeners = (table, wrapper): void => {
   table.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-expand-button]')) {
       const button = event.target.closest('[data-expand-button]');
@@ -105,7 +315,220 @@ export const addTableEventListeners = (table, wrapper): void => {
       else tableRow.setAttribute('data-view', 'full');
 
       button.blur();
-    } else if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
+    }
+  });
+
+
+};
+
+export const getLargestLastColWidth = (component, table): void => {
+
+  let largestWidth = 0;
+
+console.log(table)
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
+    const htmlStyles = window.getComputedStyle(document.querySelector('html'));
+    const lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
+
+    if (lastColChild) {
+      lastColChild.classList.add('text-nowrap');
+      let responsiveWidth = lastColChild.offsetWidth / parseFloat(htmlStyles.fontSize);
+      responsiveWidth += 1.8;
+      largestWidth = largestWidth > responsiveWidth ? largestWidth : responsiveWidth;
+    }
+  });
+
+  component.style.setProperty('--cta-width', `${largestWidth}rem`);
+};
+
+export const getRowHeight = (component, table): void => {
+
+  function outputsize(): void {
+    Array.from(table.querySelectorAll('tr')).forEach((row) => {
+      const rowHeight = row.offsetHeight;
+
+      row.style.setProperty('--row-height', `${rowHeight}px`);
+    });
+  }
+
+  new ResizeObserver(outputsize).observe(table);
+}
+// #endregion
+
+export const setupAdvancedTable = (component, table): void => {
+
+  if (component.querySelector('iam-actionbar[data-selectall]') || document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`)) {
+
+    const actionbar = component.querySelector('iam-actionbar[data-selectall]') ? component.querySelector('iam-actionbar[data-selectall]') : document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`);
+
+    addSelectboxes(component, table,actionbar);
+  }
+
+
+
+  component.querySelectorAll('.dialog__wrapper .btn-compact').forEach(btn => {
+    btn.classList.add('btn-sm')
+    btn.classList.add('m-0')
+  });
+}
+// #region Advanced table functions
+export const addSelectboxes = (component, table,actionbar): void => {
+
+  Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
+
+    if(row.querySelector('.expand-button-heading'))
+      row.querySelector('.expand-button-heading').insertAdjacentHTML('afterend', `<th class="th--fixed"></th>`);
+    else
+      row.insertAdjacentHTML('afterbegin', `<th class="th--fixed"></th>`);
+  });
+
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+
+    row.setAttribute('data-index',index+1);
+    if (!row.querySelector('.selectrow')) {
+      const rowID = `row${uniqueID(index)}`;
+
+      if(row.querySelector('.td--expand'))
+        row.querySelector('.td--expand').insertAdjacentHTML(
+          'afterend',
+          `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
+        );
+      else
+        row.insertAdjacentHTML(
+          'afterbegin',
+          `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
+        );
+  
+    
+
+    }
+  });
+
+  table.addEventListener('change', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('.selectrow input')) {
+
+      const input = event.target.closest('.selectrow input');
+      const row = event.target.closest('tr');
+
+      const count = table.querySelectorAll('.selectrow input[type="checkbox"]').length;
+      const countChecked = table.querySelectorAll('.selectrow input[type="checkbox"]:checked').length;
+
+      actionbar.setAttribute('data-selected', count == countChecked ? 'all' : countChecked);
+
+
+      console.log(row.getAttribute('data-index'));
+
+
+
+      const dispatchedEvent = new CustomEvent('row-selected', {
+        detail: {
+          rowIndex: row.getAttribute('data-index'),
+          checked: input.checked ? true : false
+        },
+      });
+      component.dispatchEvent(dispatchedEvent);
+
+    }
+  });
+
+  actionbar.addEventListener('selected', (event) => {
+    if (event.detail.selected == '0') {
+      Array.from(table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
+        input.checked = false;
+      });
+
+      const dispatchedEvent = new CustomEvent('all-rows-unselected');
+      component.dispatchEvent(dispatchedEvent);
+
+    } else if (event.detail.selected == 'all') {
+      Array.from(table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
+        input.checked = true;
+      });
+
+      const dispatchedEvent = new CustomEvent('all-rows-selected');
+      component.dispatchEvent(dispatchedEvent);
+    }
+  });
+
+}
+
+// Export CSV Data
+export const addExportEventListeners = (button, table): void | boolean => {
+  if (!button) {
+    return false;
+  }
+
+  button.addEventListener('click', () => {
+    exportAsCSV(table);
+  });
+};
+
+export const exportAsCSV = function (table): void {
+  let csvData = [];
+  // Get each row data
+  const rows = table.getElementsByTagName('tr');
+  for (let i = 0; i < rows.length; i++) {
+    // Get each column data
+    const cols = rows[i].querySelectorAll('td,th');
+
+    // Stores each csv row data
+    const csvRow = [];
+    for (let j = 0; j < cols.length; j++) {
+      // Get the text data of each cell of a row and push it to csvrow
+      csvRow.push(`"${cols[j].textContent}"`);
+    }
+
+    // Combine each column value with comma
+    csvData.push(csvRow.join(','));
+  }
+
+  // Combine each row data with new line character
+  csvData = csvData.join('\n');
+
+  // Create CSV file object and feed our csvData into it
+  const CSVFile = new Blob([csvData], {
+    type: 'text/csv',
+  });
+
+  // Create to temporary link to initiate download process
+  const tempLink = document.createElement('a');
+  tempLink.download = 'export.csv';
+  const url = window.URL.createObjectURL(CSVFile);
+  tempLink.href = url;
+
+  // This link should not be displayed
+  tempLink.style.display = 'none';
+  document.body.appendChild(tempLink);
+
+  // Automatically click the link to trigger download
+  tempLink.click();
+  document.body.removeChild(tempLink);
+};
+
+
+// #endregion
+
+export const setupNoSubmitTable = (component, table, form, pagination, savedTableBody): void => {
+
+  sortViaHeaders(component, table);
+
+  createSearchDataList(component, table);
+
+  form.addEventListener('change', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
+      
+      sortTable(table, form, savedTableBody);
+    }
+  });
+
+  addFilterEventListeners(component, table, form, pagination, savedTableBody);
+
+}
+
+// #region No submit table functions
+export const sortViaHeaders = (component, table): void => {
+  table.addEventListener('click', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
       const heading = event.target.closest('[data-sort]');
       heading.setAttribute('data-sort', 'true');
 
@@ -134,36 +557,35 @@ export const addTableEventListeners = (table, wrapper): void => {
           ref: heading.getAttribute('data-ref'),
         },
       });
-      const component = heading.closest('iam-table');
+      
       component.dispatchEvent(dispatchedEvent);
 
       const sortBy = heading.textContent.trim();
       const order = heading.getAttribute('data-order-by');
 
-      if (!wrapper.hasAttribute('data-submit')) {
+      if (!component.hasAttribute('data-submit')) { // TODO
         sortTableByValues(table, sortBy, order);
       }
     }
   });
 };
 
-// Filters
-export const createSearchDataList = (table, form): void => {
-  const searchInput = form.querySelector('input[data-search]');
+export const createSearchDataList = (component, table): void => {
+  const actionbar = component.querySelector('iam-actionbar');
+  if (!actionbar) return false;
 
+  const searchInput = actionbar.shadowRoot?.querySelector('input#search');
   if (!searchInput) return false;
 
   const searchID = searchInput.getAttribute('id');
-  const searchableColumns = searchInput.getAttribute('data-search').split(',');
   const inputWrapper = searchInput.parentNode;
 
   const searchableTerms = {};
-  searchableColumns.forEach((columnHeading) => {
-    Array.from(table.querySelectorAll('td[data-label="' + columnHeading.trim() + '"]')).forEach((td) => {
-      if (td.querySelector('.td__content'))
-        searchableTerms[td.querySelector('.td__content').textContent] = td.querySelector('.td__content').textContent;
-      else searchableTerms[td.textContent] = td.textContent;
-    });
+  table.querySelectorAll('tbody td:not(.td--fixed)').forEach((td) => {
+    
+    if (td.querySelector('.td__content'))
+      searchableTerms[td.querySelector('.td__content').textContent] = td.querySelector('.td__content').textContent;
+    else searchableTerms[td.textContent] = td.textContent;
   });
 
   searchInput.setAttribute('list', `${searchID}_list`);
@@ -176,14 +598,94 @@ export const createSearchDataList = (table, form): void => {
     .join('')}`;
 };
 
-export const addFilterEventListeners = (table, form, pagination, wrapper, savedTableBody): void => {
+export const sortTable = (table, form, savedTableBody): void | boolean => {
+  if (form.getAttribute('data-ajax')) {
+    return false;
+  }
+
+  const tbody = table.querySelector('tbody');
+
+  let selectedOption = form.querySelector(`input[type="radio"][data-sort]:checked`);
+
+  if (form.querySelector('select[data-sort]')) {
+    const select = form.querySelector('select[data-sort]');
+    selectedOption = form.querySelector(`select[data-sort] option:nth-child(${select.selectedIndex + 1})`);
+  }
+
+  const sortBy = selectedOption.getAttribute('data-sort');
+  const order = selectedOption.getAttribute('data-order');
+  const format = selectedOption.getAttribute('data-format');
+
+  if (!sortBy) {
+    tbody.innerHTML = savedTableBody.innerHTML;
+    addDataAttributes(table);
+    return false;
+  }
+
+  sortTableByValues(table, sortBy, order, format);
+};
+
+export const sortTableByValues = (table, sortBy, order, format = ''): void => {
+  const tbody = table.querySelector('tbody');
+
+  let orderArray = [];
+  if (!['asc', 'desc', 'descending'].includes(order)) {
+    orderArray = order.split(',');
+  }
+
+  // Create an array from the table rows, the index created is then used to sort the array
+  let tableArr = [];
+  Array.from(tbody.querySelectorAll('tr')).forEach((tableRow) => {
+    let rowIndex = tableRow
+      .querySelector('td[data-label="' + sortBy + '"], th[data-label="' + sortBy + '"]')
+      .textContent.trim();
+
+    if (tableRow.querySelector('[data-label="' + sortBy + '"] .td__content')) {
+      rowIndex = tableRow.querySelector('[data-label="' + sortBy + '"] .td__content').textContent.trim();
+    }
+
+    // If a predefined order set replace the search term with an ordered numeric value so it can be sorted
+    if (orderArray.length && orderArray.includes(rowIndex)) {
+      rowIndex = orderArray.indexOf(rowIndex);
+    }
+
+    if (isNumeric(rowIndex)) {
+      rowIndex = zeroPad(rowIndex, 10);
+    }
+
+    // If the sort format is date then lets transform the index to a sortable date (this is never displayed)
+    if (format && format == 'date') {
+      rowIndex = new Date(rowIndex);
+    }
+
+    const dataRow = {
+      index: rowIndex,
+      row: tableRow,
+    };
+    tableArr.push(dataRow);
+  });
+
+  // Sort array alphabetically
+  tableArr.sort((a, b) => (a.index > b.index ? 1 : -1));
+
+  // Reverse if descending
+  if (order == 'descending' || order == 'desc') {
+    tableArr = tableArr.reverse();
+  }
+
+  // Create a string to return and populate the tbody
+  let strTbody = '';
+  tableArr.forEach((tableRow) => {
+    strTbody += tableRow.row.outerHTML;
+  });
+  tbody.innerHTML = strTbody;
+};
+
+export const addFilterEventListeners = (component, table, form, pagination, savedTableBody): void => {
   let timer;
 
   // Check what conditions are set on the table to see what the form actions are
   const formSubmit = function (event, paginate = false): void | boolean {
-    if (wrapper.hasAttribute('data-no-submit')) {
-      return false;
-    }
 
     if (form.classList.contains('processing')) return false;
 
@@ -212,22 +714,11 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       form.classList.remove('processing');
     }
 
-    if (form.hasAttribute('data-ajax')) {
-      // Default back to page 1
-      if (!paginate) {
-        const paginationInput = form.querySelector('[data-pagination]');
-        paginationInput.value = 1;
-        wrapper.setAttribute('data-page', 1);
-      }
-
-      loadAjaxTable(table, form, pagination, wrapper);
-    } else if (form.hasAttribute('data-submit')) {
-      form.submit();
-    } else {
-      filterTable(table, form, wrapper);
-      populateDataQueries(table, form);
-    }
-
+    
+    filterTable(component, table, form, pagination);
+    populateDataQueries(component, table, form);
+    
+/*
     // Pass post data back to the page
     if (form.hasAttribute('data-ajax-post')) {
       const formData = new FormData(form);
@@ -236,23 +727,44 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
       http.open('GET', `${window.location.href}?ajax=true&${queryString}`);
       http.send();
     }
+      */
   };
 
-  if (form.querySelector('iam-actionbar[data-search]')) {
-    form.querySelector('iam-actionbar[data-search]').addEventListener('search-submit', (event) => {
+  if (component.querySelector('iam-actionbar[data-search]')) {
+    component.querySelector('iam-actionbar[data-search]').addEventListener('search-submit', (event) => {
       if (form.querySelector('input[data-search]')) {
         form.querySelector('input[data-search]').value = event.detail.search;
       } else {
         form.insertAdjacentHTML(
           'beforeend',
-          `<input type="hidden" name="search" data-search="${form.querySelector('iam-actionbar[data-search]').getAttribute('data-search')}" value="${event.detail.search}"/>`
+          `<input type="hidden" name="search" data-search="${component.querySelector('iam-actionbar[data-search]').getAttribute('data-search')}" value="${event.detail.search}"/>`
         );
       }
+
+      const submitEvent = new CustomEvent('search-submit', {
+        detail: event.details,
+      });
+      component.dispatchEvent(submitEvent);
 
       clearTimeout(timer);
       formSubmit(event);
     });
   }
+
+  if (component.querySelector('iam-actionbar') && !component.querySelector('iam-actionbar').closest('form')){
+
+    component.querySelector('iam-actionbar').addEventListener('change', (event) => {
+
+      if(!form.querySelector('.duplicate-actionbar')){
+
+        form.insertAdjacentHTML('beforeend',`<div class="duplicate-actionbar" style="visibility: hidden; pointer-events: none; position: absolute;"></div>`);
+      }
+
+      form.querySelector('.duplicate-actionbar').innerHTML = component.querySelector('iam-actionbar').innerHTML;
+      filterTable(component, table, form, pagination);
+    });
+  }
+  
 
   form.addEventListener('keyup', (event) => {
     clearTimeout(timer);
@@ -267,13 +779,6 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   form.addEventListener('change', (event) => {
     clearTimeout(timer);
 
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
-      if (!form.hasAttribute('data-submit')) {
-        sortTable(table, form, savedTableBody);
-      }
-
-      formSubmit(event);
-    }
 
     if (event && event.target instanceof HTMLElement && event.target.closest('input[data-search]')) {
       formSubmit(event);
@@ -282,7 +787,7 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-filter][data-no-ajax]')) {
       // Allow for input fields to filter the current results without a new ajax call
 
-      filterTable(table, form, wrapper);
+      filterTable(component, table, form, pagination);
       populateDataQueries(table, form);
     } else if (
       event &&
@@ -469,90 +974,12 @@ export const addFilterEventListeners = (table, form, pagination, wrapper, savedT
   });
 };
 
-export const sortTable = (table, form, savedTableBody): void | boolean => {
-  if (form.getAttribute('data-ajax')) {
-    return false;
-  }
+export const filterTable = (component, table, form, pagination): void => {
 
-  const tbody = table.querySelector('tbody');
 
-  let selectedOption = form.querySelector(`input[type="radio"][data-sort]:checked`);
+  console.log('hei');
 
-  if (form.querySelector('select[data-sort]')) {
-    const select = form.querySelector('select[data-sort]');
-    selectedOption = form.querySelector(`select[data-sort] option:nth-child(${select.selectedIndex + 1})`);
-  }
 
-  const sortBy = selectedOption.getAttribute('data-sort');
-  const order = selectedOption.getAttribute('data-order');
-  const format = selectedOption.getAttribute('data-format');
-
-  if (!sortBy) {
-    tbody.innerHTML = savedTableBody.innerHTML;
-    addDataAttributes(table);
-    return false;
-  }
-
-  sortTableByValues(table, sortBy, order, format);
-};
-
-export const sortTableByValues = (table, sortBy, order, format = ''): void => {
-  const tbody = table.querySelector('tbody');
-
-  let orderArray = [];
-  if (!['asc', 'desc', 'descending'].includes(order)) {
-    orderArray = order.split(',');
-  }
-
-  // Create an array from the table rows, the index created is then used to sort the array
-  let tableArr = [];
-  Array.from(tbody.querySelectorAll('tr')).forEach((tableRow) => {
-    let rowIndex = tableRow
-      .querySelector('td[data-label="' + sortBy + '"], th[data-label="' + sortBy + '"]')
-      .textContent.trim();
-
-    if (tableRow.querySelector('[data-label="' + sortBy + '"] .td__content')) {
-      rowIndex = tableRow.querySelector('[data-label="' + sortBy + '"] .td__content').textContent.trim();
-    }
-
-    // If a predefined order set replace the search term with an ordered numeric value so it can be sorted
-    if (orderArray.length && orderArray.includes(rowIndex)) {
-      rowIndex = orderArray.indexOf(rowIndex);
-    }
-
-    if (isNumeric(rowIndex)) {
-      rowIndex = zeroPad(rowIndex, 10);
-    }
-
-    // If the sort format is date then lets transform the index to a sortable date (this is never displayed)
-    if (format && format == 'date') {
-      rowIndex = new Date(rowIndex);
-    }
-
-    const dataRow = {
-      index: rowIndex,
-      row: tableRow,
-    };
-    tableArr.push(dataRow);
-  });
-
-  // Sort array alphabetically
-  tableArr.sort((a, b) => (a.index > b.index ? 1 : -1));
-
-  // Reverse if descending
-  if (order == 'descending' || order == 'desc') {
-    tableArr = tableArr.reverse();
-  }
-
-  // Create a string to return and populate the tbody
-  let strTbody = '';
-  tableArr.forEach((tableRow) => {
-    strTbody += tableRow.row.outerHTML;
-  });
-  tbody.innerHTML = strTbody;
-};
-
-export const filterTable = (table, form, wrapper): void => {
   table.classList.remove('table--filtered');
 
   const filters = filterFilters(form);
@@ -573,10 +1000,10 @@ export const filterTable = (table, form, wrapper): void => {
   // Add search columns too
   if (form.querySelector('input[data-search]')) {
     const searchInput = form.querySelector('input[data-search]');
-    const searchColumns = form.querySelector('input[data-search]').getAttribute('data-search').split(',');
+    //const searchColumns = form.querySelector('input[data-search],[part="search-input"]').getAttribute('data-search').split(',');
 
-    searchColumns.forEach((column) => {
-      searches.push({ column: `${column.trim()}`, value: `${searchInput.value}` });
+    table.querySelectorAll('thead tr th').forEach((column) => {
+      searches.push({ column: `${column.textContent.trim()}`, value: `${searchInput.value}` });
     });
   }
 
@@ -748,14 +1175,14 @@ export const filterTable = (table, form, wrapper): void => {
     }
   });
 
-  if (wrapper) {
-    wrapper.setAttribute('data-total', matched);
-    wrapper.setAttribute('data-show', showRows);
-    wrapper.setAttribute('data-page', page);
+  if (pagination) {
+    pagination.setAttribute('data-total', matched);
+    pagination.setAttribute('data-show', showRows);
+    pagination.setAttribute('data-page', page);
   }
 };
 
-export const populateDataQueries = (table, form, wrapper): void | boolean => {
+export const populateDataQueries = (component,table, form): void | boolean => {
   const dataQueries = Array.from(form.querySelectorAll('[data-query]'));
 
   dataQueries.forEach((queryElement) => {
@@ -763,7 +1190,7 @@ export const populateDataQueries = (table, form, wrapper): void | boolean => {
     let numberOfMatchedRows = 0;
 
     if (query == 'total') {
-      if (wrapper.hasAttribute('data-total')) numberOfMatchedRows = wrapper.getAttribute('data-total');
+      if (component.hasAttribute('data-total')) numberOfMatchedRows = component.getAttribute('data-total');
       else
         numberOfMatchedRows = table.classList.contains('table--filtered')
           ? table.querySelectorAll('tbody tr').length
@@ -815,163 +1242,87 @@ export const populateDataQueries = (table, form, wrapper): void | boolean => {
     }
   });
 };
+// #endregion
 
-// Pagination
-export const addPaginationEventListeners = function (table, form, pagination, wrapper): void | boolean {
-  if (wrapper.hasAttribute('data-no-submit')) {
-    return false;
+
+export const setupSubmitTable = (component, table, form, pagination): void => {
+
+  form.setAttribute('method','get');
+
+  const actionbar = component.querySelector('iam-actionbar')
+
+  if (actionbar){
+
+    actionbar.addEventListener('change', (event) => {
+
+      form.submit();
+    });
   }
 
-  pagination.addEventListener('update-page', (event) => {
-    const paginationInput = form.querySelector('[data-pagination]');
-    const newPage = event.detail.page;
+  
 
-    // Set the filter value
-    paginationInput.value = newPage;
-    form.dispatchEvent(new Event('paginate'));
+}
 
-    // Reset the data attribute
-    wrapper.setAttribute('data-page', newPage);
 
-    if (table.hasAttribute('data-show-history')) {
-      const url = new URL(location);
-      url.searchParams.set('page', newPage);
-      history.pushState({ type: 'pagination', form: form.getAttribute('id'), page: newPage }, '', url);
-    }
+// #region submit tables functions
 
-    // scroll back to the top of the table
-    if (!wrapper.hasAttribute('data-no-scroll')) {
-      const yOffset = -250;
-      const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-    }
+
+// #endregion 
+
+export const setupAjaxTable = (component, table, form, pagination): void => {
+
+  loadAjaxTable(component, table, form, pagination);
+
+  const actionbar = component.querySelector('iam-actionbar')
+
+
+  form.addEventListener('submit', (event) => {
+    loadAjaxTable(component, table, form, pagination);
+
+    event.preventDefault();
   });
 
-  pagination.addEventListener('update-show', (event) => {
-    const showInput = form.querySelector('[data-show]');
-    const showRows = event.detail.show;
-    showInput.value = showRows;
-    wrapper.setAttribute('data-show', showRows);
-    form.dispatchEvent(new Event('submit'));
-  });
-};
+  if (actionbar){
 
-// Export CSV Data
-export const addExportEventListeners = (button, table): void | boolean => {
-  if (!button) {
-    return false;
+    actionbar.addEventListener('change', (event) => {
+      loadAjaxTable(component, table, form, pagination);
+    });
   }
 
-  button.addEventListener('click', () => {
-    exportAsCSV(table);
-  });
-};
+}
+// #region ajax tables functions
 
-export const exportAsCSV = function (table): void {
-  let csvData = [];
-  // Get each row data
-  const rows = table.getElementsByTagName('tr');
-  for (let i = 0; i < rows.length; i++) {
-    // Get each column data
-    const cols = rows[i].querySelectorAll('td,th');
+export const loadAjaxTable = async function (component, table, form, pagination): void {
 
-    // Stores each csv row data
-    const csvRow = [];
-    for (let j = 0; j < cols.length; j++) {
-      // Get the text data of each cell of a row and push it to csvrow
-      csvRow.push(`"${cols[j].textContent}"`);
-    }
 
-    // Combine each column value with comma
-    csvData.push(csvRow.join(','));
+  // Add actionbar inputs into form
+  if (component.querySelector('iam-actionbar') && !component.querySelector('iam-actionbar').closest('form')){
+
+    if(!form.querySelector('.duplicate-actionbar'))
+      form.insertAdjacentHTML('beforeend',`<div class="duplicate-actionbar" style="visibility: hidden; pointer-events: none; position: absolute;"></div>`);
+
+    form.querySelector('.duplicate-actionbar').innerHTML = component.querySelector('iam-actionbar').innerHTML;
   }
 
-  // Combine each row data with new line character
-  csvData = csvData.join('\n');
+  // Add pagination inputs into form 
+  if(!form.querySelector('input[name=show]'))
+    form.insertAdjacentHTML('beforeend',`<input name="show" type="hidden" value="${component.getAttribute('data-show')}" />`);
 
-  // Create CSV file object and feed our csvData into it
-  const CSVFile = new Blob([csvData], {
-    type: 'text/csv',
-  });
+  if(!form.querySelector('input[name=page]')) 
+    form.insertAdjacentHTML('beforeend',`<input name="page" type="hidden" value="${component.getAttribute('data-page')}" />`);
 
-  // Create to temporary link to initiate download process
-  const tempLink = document.createElement('a');
-  tempLink.download = 'export.csv';
-  const url = window.URL.createObjectURL(CSVFile);
-  tempLink.href = url;
+  form.querySelector('input[name=page]').value = component.getAttribute('data-page');
+  form.querySelector('input[name=show]').value = component.getAttribute('data-show');
 
-  // This link should not be displayed
-  tempLink.style.display = 'none';
-  document.body.appendChild(tempLink);
-
-  // Automatically click the link to trigger download
-  tempLink.click();
-  document.body.removeChild(tempLink);
-};
-
-// After table is loaded
-export const makeTableFunctional = function (table, form, pagination, wrapper): void {
-  addDataAttributes(table);
-  createMobileButton(table, wrapper);
-  populateDataQueries(table, form, wrapper);
-
-  // Work out the largest width of the CTA's in the last column
-  if (wrapper && wrapper.classList.contains('table--cta')) {
-    const largestWidth = getLargestLastColWidth(table);
-    wrapper.style.setProperty('--cta-width', `${largestWidth}rem`);
-
-    function outputsize(): void {
-      Array.from(table.querySelectorAll('tr')).forEach((row) => {
-        const rowHeight = row.offsetHeight;
-        row.style.setProperty('--row-height', `${rowHeight}px`);
-      });
-    }
-
-    new ResizeObserver(outputsize).observe(table);
-  }
-};
-
-const filterFilters = function (form): object {
-  const filters = new Object();
-
-  // Filter
-  const filterInputs = Array.from(form.querySelectorAll('[data-filter]'));
-
-  filterInputs.forEach((filterInput) => {
-    // Ignore uncked radio inputs
-    if (filterInput.type == 'radio' && !filterInput.checked) {
-      return;
-    }
-
-    if (filterInput.type == 'checkbox' && !filterInput.checked) {
-      return;
-    }
-
-    if (filterInput && filterInput.value) {
-      const dataFilter = filterInput.getAttribute('data-filter');
-      let filterValue = filterInput.value;
-
-      if (filterInput.hasAttribute('data-date-from')) filterValue += '-date-from';
-
-      if (filterInput.hasAttribute('data-date-to')) filterValue += '-date-to';
-
-      if (!filters[dataFilter]) filters[dataFilter] = [];
-
-      filters[dataFilter].push(filterValue);
-    }
-  });
-
-  return filters;
-};
-
-export const loadAjaxTable = async function (table, form, pagination, wrapper): void {
+  // Construct form data to send to api
   const formData = new FormData(form);
+  
   const queryString = new URLSearchParams(formData).toString();
   const columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');
   const tbody = table.querySelector('tbody');
   const ajaxURL = form.getAttribute('data-ajax');
 
-  wrapper.classList.add('table--loading');
+  component.classList.add('table--loading');
 
   // Display the filter count
   const filters = filterFilters(form);
@@ -1032,8 +1383,8 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
         const totalNumber = resolvePath(response, totalNumberSchema, 15);
         const currentPage = resolvePath(response, currentPageSchema, 1);
         const data = resolvePath(response, schema);
-        const emptyMsg = wrapper.hasAttribute('data-empty-msg')
-          ? wrapper.getAttribute('data-empty-msg')
+        const emptyMsg = component.hasAttribute('data-empty-msg')
+          ? component.getAttribute('data-empty-msg')
           : 'No results found';
 
         if (data) {
@@ -1102,12 +1453,13 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
             tbody.appendChild(table_row);
           });
 
-          createSearchDataList(table, form);
-          // Add data to the pagination
-          wrapper.setAttribute('data-total', parseInt(totalNumber));
-          wrapper.setAttribute('data-page', parseInt(currentPage));
-
-          makeTableFunctional(table, form, pagination, wrapper);
+          
+          
+          component.setAttribute('data-total', parseInt(totalNumber));
+          component.setAttribute('data-page', parseInt(currentPage));
+            
+          pagination.setAttribute('data-total', totalNumber);
+          pagination.setAttribute('data-page', currentPage);
 
           Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement) => {
             const totalNumber = resolvePath(response, queryElement.getAttribute('data-ajax-query'), '');
@@ -1120,7 +1472,7 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
             tbody.innerHTML = `<tr><td colspan="100%"><span>${emptyMsg}</span></td></tr>`;
           }
 
-          wrapper.classList.remove('table--loading');
+          component.classList.remove('table--loading');
 
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
@@ -1128,6 +1480,10 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
             url: ajaxURL,
             formData: queryString,
           });
+
+          setupBasicTable(component,table,pagination);
+          setupAdvancedTable(component,table,pagination);
+
         } else {
           tbody.innerHTML = '<tr><td colspan="100%"><span>Error loading table</span></td></tr>';
         }
@@ -1135,32 +1491,58 @@ export const loadAjaxTable = async function (table, form, pagination, wrapper): 
         // Remove loading on the pagination
         pagination.removeAttribute('data-loading');
         form.classList.remove('processing');
+
+
       });
   } catch (error) {
     console.log(error);
   }
 };
+// #endregion
 
-export const formatCell = (format, cellOutput): any => {
-  switch (format) {
-    case 'datetime':
-      return (
-        new Date(cellOutput).toLocaleDateString('en-gb', {
-          weekday: 'short',
-          year: '2-digit',
-          month: 'long',
-          day: 'numeric',
-        }) +
-        ' ' +
-        new Date(cellOutput).toLocaleTimeString('en-gb', { hour: '2-digit', minute: '2-digit' })
-      );
-    case 'date':
-      return new Date(cellOutput).toLocaleDateString('en-gb', {
-        day: 'numeric',
-        month: 'long',
-        year: '2-digit',
-      });
-    case 'capitalise':
-      return (cellOutput = ucfirst(cellOutput));
-  }
+
+
+
+
+
+
+
+/*
+// Pagination - still needed?
+export const addPaginationEventListeners = function (component, table, form, pagination): void | boolean {
+
+  
+  pagination.addEventListener('update-page', (event) => {
+    const paginationInput = form.querySelector('[data-pagination]');
+    const newPage = event.detail.page;
+
+    // Set the filter value
+    paginationInput.value = newPage;
+    form.dispatchEvent(new Event('paginate'));
+
+    // Reset the data attribute
+    component.setAttribute('data-page', newPage);
+
+    if (table.hasAttribute('data-show-history')) {
+      const url = new URL(location);
+      url.searchParams.set('page', newPage);
+      history.pushState({ type: 'pagination', form: form.getAttribute('id'), page: newPage }, '', url);
+    }
+
+    // scroll back to the top of the table
+    if (!component.hasAttribute('data-no-scroll')) {
+      const yOffset = -250;
+      const y = table.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+
+  pagination.addEventListener('update-show', (event) => {
+    const showInput = form.querySelector('[data-show]');
+    const showRows = event.detail.show;
+    showInput.value = showRows;
+    component.setAttribute('data-show', showRows);
+    form.dispatchEvent(new Event('submit'));
+  });
 };
+*/

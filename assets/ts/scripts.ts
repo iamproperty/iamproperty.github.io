@@ -9,6 +9,8 @@ const components = [
   'accordion',
   'header',
   'table',
+  'table-basic',
+  'table-no-submit',
   'tabs',
   'card',
   'filter-card',
