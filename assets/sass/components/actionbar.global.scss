@@ -49,10 +49,10 @@ iam-table iam-actionbar {
   margin-right: 1.5rem;
 }
 iam-table.table--fullwidth:has(iam-actionbar) {
-  padding-top: 5rem;
+  padding-top: 0;
 }
 iam-table.table--fullwidth iam-actionbar {
-  margin: 0 -2rem 1rem -2rem;
+  margin: 0 -2rem 2rem -2rem;
   box-shadow: none;
   border-radius: 0;
 
@@ -107,8 +107,8 @@ iam-table.table--fullwidth iam-actionbar {
   iam-table iam-actionbar {
     margin-left: -2rem;
     margin-right: -2rem;
-    margin-top: -2rem;
-    margin-bottom: 1rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
   }
 }
 // #endregion

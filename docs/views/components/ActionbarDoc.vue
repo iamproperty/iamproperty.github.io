@@ -1,4 +1,9 @@
+<script setup>
+  import TrackEvents from '../TrackEvents.vue';
+</script>
+
 <template>
+  <TrackEvents selector="iam-actionbar" :events="['columm-filters-set']"></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Action bar</h1>
@@ -835,6 +840,182 @@
       </div>
     </div>
 
+    <h2>Column filter</h2>
+
+    <p>
+      When an action bar is used with a table we can add a column filter. The column filter allows the user to customise
+      what columns they show or hide in the table. There should be an option to save this filter so if the user leaves
+      the page and returns the column filter is still applied.
+    </p>
+
+    <p class="note mb-5">
+      <strong>Note:</strong> Saving the filters should be done as part of your appplications logic and not part of the
+      component. The application logic can listen out for 'columm-filters-set' custom event dispatched on the actionbar.
+    </p>
+
+    <p>When clicked a dialog popover can be displayed to show the column sorting options.</p>
+    
+    <h3>Filter on save</h3>
+    <div class="container bg-light visualtest mb-5">
+      <Table class="table--fullwidth">
+        <Actionbar slot="before" data-search="" data-filter-columns-save data-hide-col1></Actionbar>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Client name</th>
+              <th>Property address</th>
+              <th>Vendor</th>
+              <th>Appointment date</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </Table>
+    </div>
+    <h3>Filter on change</h3>
+    <div class="container bg-light visualtest">
+      <Table class="table--fullwidth">
+        <Actionbar slot="before" data-search="" data-filter-columns></Actionbar>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Client name</th>
+              <th>Property address</th>
+              <th>Vendor</th>
+              <th>Appointment date</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </Table>
+    </div>
+
     <div class="container">
       <h2>Implementation</h2>
       <Tabs>
@@ -861,15 +1042,18 @@
             <tr>
               <th>Version Control</th>
               <th>Date</th>
-              <th>Design System Version</th>
               <th>Notable updates</th>
             </tr>
           </thead>
           <tbody class="text-body">
             <tr>
+              <td>V1.1 added</td>
+              <td>10.03.2025</td>
+              <td>Added option for column filter and saving column filter.</td>
+            </tr>
+            <tr>
               <td>V1 added</td>
               <td>23.08.2023</td>
-              <td>v3.7.10</td>
               <td>N/A</td>
             </tr>
           </tbody>

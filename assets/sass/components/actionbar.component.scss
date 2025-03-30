@@ -284,3 +284,62 @@ slot[name='selectall'] {
   }
 }
 // #endregion
+
+// #region filter columns
+.filter-columns,
+.checklist-btns {
+  display: none;
+}
+
+:host([data-filter-columns]) .filter-columns {
+  display: block;
+}
+
+:host([data-filter-columns-save]) .filter-columns {
+  display: block;
+}
+
+:host([data-filter-columns-save]) .checklist-btns {
+  display: block;
+  text-align: right;
+  padding-top: 0.5rem;
+
+  #saveColumns {
+    margin-left: 0.25rem;
+  }
+  #saveColumns:not(:hover, :focus, :active) {
+    background-color: var(--colour-warning);
+  }
+  #cancelColumns:not(:hover, :focus, :active) {
+    border-color: var(--colour-border);
+  }
+}
+
+.fa-table-columns:has(+ dialog input:not(:checked)) {
+  overflow: visible;
+  text-indent: -200vw;
+
+  &:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--colour-info);
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+  }
+}
+
+:host([data-filter-columns-save]) .fa-table-columns:after {
+  display: none !important;
+}
+
+@for $i from 1 through 30 {
+  :host([data-filter-columns-save][data-hide-col#{$i}]) .fa-table-columns:after {
+    display: block !important;
+  }
+}
+
+// #endregion
