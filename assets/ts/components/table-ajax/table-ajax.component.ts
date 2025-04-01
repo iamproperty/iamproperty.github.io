@@ -1,10 +1,10 @@
-import { 
+import {
   setupBasicTable,
   findForm,
   setupAdvancedTable,
   setupAjaxTable,
   paginateTable,
-  loadAjaxTable
+  loadAjaxTable,
 } from '../../modules/table';
 
 class iamTableAjax extends HTMLElement {
@@ -43,27 +43,22 @@ class iamTableAjax extends HTMLElement {
     }
   }
 
-
-
   connectedCallback(): void {
-
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
 
-    
-    const form = findForm(this,table);
+    const form = findForm(this, table);
 
-    setupBasicTable(this,table,form,pagination);
+    setupBasicTable(this, table, form, pagination);
 
-    setupAdvancedTable(this,table,form,pagination);
+    setupAdvancedTable(this, table, form, pagination);
 
     setupAjaxTable(this, table, form, pagination);
 
-
-    paginateTable(component, table, form, pagination, () => { loadAjaxTable(component, table, form, pagination) })
-
+    paginateTable(component, table, form, pagination, () => {
+      loadAjaxTable(component, table, form, pagination);
+    });
   }
-
 }
 
 export default iamTableAjax;

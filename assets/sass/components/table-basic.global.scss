@@ -4,11 +4,8 @@ $darkMode: 'true' !default;
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
-
-
 // #region Basic table stuff
 :is(#{$selector}) {
-
   --hover-background: var(--colour-light);
   --row-bg: var(--colour-canvas-2);
 
@@ -24,7 +21,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     min-width: 10rem;
   }
 
-
   /*
   thead tr {
     background: var(--row-bg);
@@ -36,7 +32,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     }
   }
 */
-/*
+  /*
   &[data-expandable] [data-expand-button][aria-expanded] {
     background-color: transparent;
   }
@@ -44,32 +40,26 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 }
 // #endregion
 
-
-// #region Pagination 
+// #region Pagination
 :is(#{$selector}) table:has(tr.show) tbody tr:not(.show) {
   display: none !important;
 }
 // #endregion
 
-
 // #region Tables are only stacked on mobile
 :is(#{$selector}):not(.table--fullwidth) {
-
   td:has([data-expand-button]),
   .expand-button-heading {
     display: none;
   }
 
-
   @container (width < 23.4375em) {
-
     &:not(.table--fullwidth) {
-        
       td:has([data-expand-button]) {
         height: 0;
         padding: 0;
         position: relative;
-        display: block!important;
+        display: block !important;
       }
       td:has([data-expand-button]) + td {
         border-top: none !important;
@@ -104,12 +94,10 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
           }
         }
       }
-      
     }
   }
 
   @container (width < 23.4375em) {
-  
     thead {
       display: none;
     }
@@ -144,10 +132,9 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
       }
     }
 
-    
-  td:has([data-expand-button]) {
-    display: block;
-  }
+    td:has([data-expand-button]) {
+      display: block;
+    }
 
     :is(td, th) {
       display: block;
@@ -193,7 +180,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
       overflow: hidden;
     }
 
-    
     tbody tr:not([data-view='full']) td:not(.td--fixed) + td:not(.td--fixed) + td + td {
       display: none;
     }
@@ -203,53 +189,48 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 // #region CTA column
 
-
 :is(#{$selector}):not(.table--fullwidth).table--cta {
   @container (width < 23.4375em) {
     tbody tr td:last-child {
-      display: block!important;
+      display: block !important;
     }
   }
 }
 
 :is(#{$selector}).table--cta {
   @container (width > 23.4375em) {
-      padding-right: calc(var(--wrapper-padding) + 1.5rem);
+    padding-right: calc(var(--wrapper-padding) + 1.5rem);
 
-    
-      tr > th:nth-last-child(2),
-      tr > td:nth-last-child(2) {
-        padding-right: var(--cta-width);
-      }
+    tr > th:nth-last-child(2),
+    tr > td:nth-last-child(2) {
+      padding-right: var(--cta-width);
+    }
 
-      tr > *:not(:first-child):last-child {
-        position: absolute;
-        left: calc(100% - var(--cta-width));
-        top: auto;
-        background: transparent;
-        width: var(--cta-width);
-        min-height: calc(var(--row-height) - 2px);
-        text-align: right;
-        background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvs-2)) 1.25rem);
-        cursor: default;
+    tr > *:not(:first-child):last-child {
+      position: absolute;
+      left: calc(100% - var(--cta-width));
+      top: auto;
+      background: transparent;
+      width: var(--cta-width);
+      min-height: calc(var(--row-height) - 2px);
+      text-align: right;
+      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvs-2)) 1.25rem);
+      cursor: default;
+      padding-bottom: 0;
+
+      a {
+        white-space: nowrap;
+        padding-right: 0.2rem;
         padding-bottom: 0;
-
-        a {
-          white-space: nowrap;
-          padding-right: 0.2rem;
-          padding-bottom: 0;
-        }
       }
+    }
 
-      tbody tr:hover > *:not(:first-child):last-child {
-        background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvs-2)) 1.25rem);
-      }
-    
+    tbody tr:hover > *:not(:first-child):last-child {
+      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvs-2)) 1.25rem);
+    }
   }
 }
 // #endregion
-
-
 
 // #region Statuses
 table {
@@ -360,9 +341,7 @@ table {
     color: var(--colour-complete);
   }
 
-  :is(
-      [data-content='failed']
-    ):after {
+  :is([data-content='failed']):after {
     content: '\f00d';
     font-weight: normal;
     color: var(--colour-danger);
@@ -374,5 +353,3 @@ table {
   }
 }
 // #endregion
-
-

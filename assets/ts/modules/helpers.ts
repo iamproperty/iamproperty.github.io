@@ -182,4 +182,4 @@ export const uniqueID = (index = 1): number => {
   const ID = Math.floor(Math.random() * Date.now() * (index + 1));
 
   return ID;
-}
+};

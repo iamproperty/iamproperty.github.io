@@ -1,10 +1,4 @@
-import { 
-  setupBasicTable,
-  findForm,
-  setupAdvancedTable,
-  setupSubmitTable,
-  paginateTable
-} from '../../modules/table';
+import { setupBasicTable, findForm, setupAdvancedTable, setupSubmitTable, paginateTable } from '../../modules/table';
 
 class iamTableSubmit extends HTMLElement {
   constructor() {
@@ -42,32 +36,28 @@ class iamTableSubmit extends HTMLElement {
     }
   }
 
-
-
   connectedCallback(): void {
-
     const params = new URLSearchParams(window.location.search);
 
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
-    const form = findForm(this,table);
+    const form = findForm(this, table);
 
+    if (params.has('page')) this.setAttribute('data-page', params.get('page'));
+    if (params.has('show')) this.setAttribute('data-show', params.get('show'));
 
-    if(params.has('page')) this.setAttribute('data-page',params.get('page'));
-    if(params.has('show')) this.setAttribute('data-show',params.get('show'));
+    if (params.has('page')) pagination.setAttribute('data-page', params.get('page'));
+    if (params.has('show')) pagination.setAttribute('data-show', params.get('show'));
 
-    if(params.has('page')) pagination.setAttribute('data-page',params.get('page'));
-    if(params.has('show')) pagination.setAttribute('data-show',params.get('show'));
+    setupBasicTable(this, table, form, pagination);
 
+    setupAdvancedTable(this, table, form, pagination);
 
-    setupBasicTable(this,table,form,pagination);
+    setupSubmitTable(this, table, form, pagination);
 
-    setupAdvancedTable(this,table,form,pagination);
-
-    setupSubmitTable(this, table,form,pagination);
-
-    paginateTable(this, table, form, pagination, () => { form.submit(); });
-
+    paginateTable(this, table, form, pagination, () => {
+      form.submit();
+    });
   }
 }
 

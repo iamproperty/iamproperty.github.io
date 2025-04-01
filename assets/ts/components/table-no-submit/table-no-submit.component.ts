@@ -1,10 +1,10 @@
-import { 
+import {
   setupBasicTable,
   findForm,
   setupAdvancedTable,
   setupNoSubmitTable,
   paginateRows,
-  paginateTable
+  paginateTable,
 } from '../../modules/table';
 
 class iamTableNoSubmit extends HTMLElement {
@@ -43,36 +43,29 @@ class iamTableNoSubmit extends HTMLElement {
     }
   }
 
-
-
   connectedCallback(): void {
-
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
 
     const savedTableBody = table.querySelector('tbody').cloneNode(true);
-    
 
-    const form = findForm(this,table);
+    const form = findForm(this, table);
 
+    setupBasicTable(this, table, form, pagination);
 
+    setupAdvancedTable(this, table);
 
-    setupBasicTable(this,table,form,pagination);
-
-    setupAdvancedTable(this,table);
-
-    setupNoSubmitTable(this, table,form,pagination, savedTableBody);
+    setupNoSubmitTable(this, table, form, pagination, savedTableBody);
 
     paginateRows(this);
-    
 
-  if (pagination){
-
-    paginateTable(this, table, form, pagination, () => { paginateRows(this); })
-  }
+    if (pagination) {
+      paginateTable(this, table, form, pagination, () => {
+        paginateRows(this);
+      });
+    }
 
     // #region shared advanced functions
-    
 
     //endregion
 
@@ -80,7 +73,7 @@ class iamTableNoSubmit extends HTMLElement {
     // search
     // filter
     // sort
-    
+
     /*
     // Push up the pagination events
     pagination.addEventListener('update-show', (event) => {
@@ -102,9 +95,8 @@ class iamTableNoSubmit extends HTMLElement {
     });
 
 */
-
   }
-/*
+  /*
   static get observedAttributes(): any {
     return ['data-total', 'data-page', 'data-show'];
   }

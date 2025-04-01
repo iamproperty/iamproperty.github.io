@@ -56,7 +56,6 @@ class iamPagination extends HTMLElement {
     // Set default attributes
     const params = new URLSearchParams(window.location.search);
 
-
     if (!this.hasAttribute('data-total')) this.setAttribute('data-total', 15);
 
     if (!this.hasAttribute('data-page')) this.setAttribute('data-page', params.has('page') ? params.get('page') : 1);
@@ -78,17 +77,12 @@ class iamPagination extends HTMLElement {
     // Select on change will update the data-page attr which will dispatch an event
     select.addEventListener('change', (event) => {
       this.setAttribute('data-show', this.getAttribute('data-increment'));
-
-
-      console.log(select);
-
       this.setAttribute('data-page', event.target.value);
     });
 
     // Next and previous buttons will simply trigger and on change on the select which in turn will dispatch an event
     next.addEventListener('click', () => {
       select.value = parseInt(select.value) + 1;
-
 
       select.dispatchEvent(new Event('change'));
     });
@@ -104,12 +98,11 @@ class iamPagination extends HTMLElement {
     });
 
     // Load more button
-    
+
     const increment = parseInt(this.getAttribute('data-increment'));
     const show = parseInt(this.getAttribute('data-show'));
-    
-    if (show >= parseInt(this.getAttribute('data-total'))) {
 
+    if (show >= parseInt(this.getAttribute('data-total'))) {
       loadMore.remove();
     }
 
@@ -209,7 +202,6 @@ class iamPagination extends HTMLElement {
       case 'data-page': {
         if (oldVal && oldVal != newVal) {
           this.setup();
-
 
           console.log(newVal);
 

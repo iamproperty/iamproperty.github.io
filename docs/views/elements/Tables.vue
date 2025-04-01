@@ -107,7 +107,6 @@
     <h2>Table component</h2>
     <p>The basic styles and behaviour of tables can be upgraded by using the design system table component.</p>
     <a href="/components/tables" class="btn btn-primary mb-5">Tables component</a>
-
   </main>
 </template>
 

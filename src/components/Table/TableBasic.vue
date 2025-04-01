@@ -13,7 +13,8 @@
       this.$nextTick(function () {
         import(`../../../assets/js/components/table-basic/table-basic.component.min.js`)
           .then((module) => {
-            if (!window.customElements.get(`iam-table-basic`)) window.customElements.define(`iam-table-basic`, module.default);
+            if (!window.customElements.get(`iam-table-basic`))
+              window.customElements.define(`iam-table-basic`, module.default);
           })
           .catch((err) => {
             console.log(err.message);
@@ -28,6 +29,6 @@
             console.log(err.message);
           });
       });
-    }
+    },
   };
 </script>

@@ -8,16 +8,11 @@ $darkMode: 'true' !default;
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
-
-
-
 // #region Tables are only stacked on mobile
 :is(#{$selector}):not(.table--fullwidth).table--cta {
-
   @container (width < 23.4375em) {
-  
     tbody tr td:last-child {
-      display: block!important;
+      display: block !important;
     }
   }
 }
@@ -27,8 +22,11 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 :is(#{$selector}) iam-actionbar {
   margin: 0 1.5rem 1rem 1.5rem;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, .11);
-  border-radius: 0.5rem;
+  //
+  @container (width < 23.4375em) {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    border-radius: 0.5rem;
+  }
 }
 :is(#{$selector}).table--fullwidth:has(iam-actionbar) {
   padding-top: 0;
@@ -79,7 +77,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     display: block;
     border: none;
     background: var(--colour-canvas-2);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    //box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
     border-radius: 0.5rem;
     margin-bottom: rem(24);
   }
@@ -130,10 +128,10 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     }
   }
 
-  tr:has([type='checkbox']:hover,[type='checkbox']:focus) {
+  tr:has([type='checkbox']:hover, [type='checkbox']:focus) {
     --row-bg: #eeeeee;
   }
-  tr:has([type='checkbox']:hover:checked,[type='checkbox']:focus:checked,[type='checkbox']:checked) {
+  tr:has([type='checkbox']:hover:checked, [type='checkbox']:focus:checked, [type='checkbox']:checked) {
     --row-bg: #e0e0e0;
   }
 }
@@ -151,7 +149,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
   }
 
   :is(#{$selector}) {
-
     input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
       padding-left: 0 !important;
       margin: 0 !important;
@@ -179,18 +176,16 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 // #region Expandable tables
 :is(#{$selector})[data-expandable] {
-  
   td:has([data-expand-button]),
   .expand-button-heading {
     display: table-cell;
   }
 
-  @mixin fullwidthexpand(){
-
+  @mixin fullwidthexpand() {
     [data-expand-button] {
       margin: 0;
 
-      &:not(:hover,:focus) {
+      &:not(:hover, :focus) {
         background-color: transparent;
         border-color: transparent;
       }
@@ -226,10 +221,8 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
   }
 
   @container (width > 23.4375em) {
-  
     @include fullwidthexpand();
   }
-  
 }
 // #endregion
 
@@ -238,23 +231,17 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
   @container (width < 23.4375em) {
     tr {
       position: relative;
-
     }
     .td--fixed + .td--fixed {
       border: none;
-
     }
   }
 }
 
 :is(#{$selector}) {
-
   @container (width > 23.4375em) {
-
-
     .th--fixed {
-
-/*
+      /*
       &:after {
         top: auto;
         left: 0;
@@ -274,7 +261,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
       top: auto;
       z-index: 3;
       padding: 0 0 0 0;
-      min-width: rem(48 + 12);
+      min-width: rem(48 + 6);
       height: calc(var(--row-height) - 2px);
       text-align: left;
       background: linear-gradient(90deg, var(--row-bg) calc(100% - 1rem), transparent 100%);
@@ -284,49 +271,30 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
       }
     }
 
-
-
-
-
-    /*
-    tr {
-      &:has(.td--fixed) {
-        height: 3.5rem;
-      }
-
-      &:is(:hover, :focus) .td--fixed {
-        background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
-      }
-
-      &:has([data-expand-button]) {
-        height: calc(rem(74) - 2px);
-      }
+    &[data-expandable] .th--fixed + th:not(.th--fixed),
+    &[data-expandable] .td--fixed + td:not(.td--fixed) {
+      padding-left: calc(rem(48 + 6));
     }
-*/
 
-
-    .th--fixed + th:not(.th--fixed),
-    .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 12));
+    &:has([data-selectall]) .th--fixed + th:not(.th--fixed),
+    &:has([data-selectall]) .td--fixed + td:not(.td--fixed) {
+      padding-left: calc(rem(48 + 6));
     }
 
     .th--fixed + .th--fixed + th:not(.th--fixed),
     .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 48 + 12));
+      padding-left: calc(rem(48 + 48 + 6));
     }
-
 
     .th--fixed + .th--fixed + .th--fixed + th:not(.th--fixed),
     .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 48  + 48 + 12));
+      padding-left: calc(rem(48 + 48 + 48 + 6));
     }
-
 
     .th--fixed + .th--fixed,
     .td--fixed + .td--fixed {
       left: rem(48);
     }
-
 
     .dialog__wrapper {
       z-index: 10;
@@ -334,8 +302,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     .dialog__wrapper:has([open]) {
       z-index: 20;
     }
-
-
   }
 }
 // #endregion
@@ -347,7 +313,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 // #endregion
 
-
 // #region sort by column header
 
 $icon-sort: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d='M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z'/></svg>");
@@ -357,13 +322,11 @@ $icon-sort-asc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' 
 $icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d='M174.6 472.6c4.5 4.7 10.8 7.4 17.4 7.4s12.8-2.7 17.4-7.4l168-176c9.2-9.6 8.8-24.8-.8-33.9s-24.8-8.8-33.9 .8L216 396.1 216 56c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 340.1L41.4 263.4c-9.2-9.6-24.3-9.9-33.9-.8s-9.9 24.3-.8 33.9l168 176z'/></svg>");
 
 @mixin column-sort {
-
-
-
   th[data-sort] {
     background-repeat: no-repeat;
     background-size: 1rem 1rem;
     background-position: calc(100% - 0.5rem) 50%;
+    padding-top: 0.75rem;
     cursor: pointer;
 
     &:hover {
@@ -371,7 +334,11 @@ $icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'
       background-image: #{escape-svg($icon-sort)};
     }
   }
-  
+
+  &:has(th[data-sort]) :is(th, td) {
+    padding-left: 0.25rem;
+  }
+
   th[data-sort][data-order-by='asc'] {
     background-image: #{escape-svg($icon-sort-asc)};
   }
@@ -399,7 +366,6 @@ $icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'
   }
 }
 // #endregion
-
 
 // #region filters
 :is(#{$selector}) .table--filtered tbody tr:not(.filtered--show) {

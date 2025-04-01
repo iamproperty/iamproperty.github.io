@@ -43,7 +43,6 @@ main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
 }
 // #endregion
 
-
 // #region Switchview
 iam-actionbar ~ :is([data-view='square'], [data-view='list'], [data-view='small']) {
   display: none;

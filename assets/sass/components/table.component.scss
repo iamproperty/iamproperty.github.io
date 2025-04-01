@@ -4,7 +4,6 @@ $darkMode: 'true' !default;
 
 @use './table-basic.component.scss';
 
-
 // #region Table with actionbar
 @container (width < 23.4375em) {
   .table__wrapper.has-actionbar {
@@ -12,8 +11,6 @@ $darkMode: 'true' !default;
   }
 }
 // #endregion
-
-
 
 // #region Loading via ajax
 :host(.table--loading) {
@@ -41,4 +38,3 @@ $darkMode: 'true' !default;
   }
 }
 // #endregion
-

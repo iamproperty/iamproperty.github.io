@@ -8,7 +8,7 @@ import {
   setupSubmitTable,
   setupAjaxTable,
   loadAjaxTable,
-  paginateTable
+  paginateTable,
 } from '../../modules/table';
 
 class iamTableBasic extends HTMLElement {
@@ -48,40 +48,38 @@ class iamTableBasic extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const pagination = this.shadowRoot.querySelector('iam-pagination');
     const table = this.querySelector('table');
 
-    const form = findForm(this,table);
+    const form = findForm(this, table);
 
     const savedTableBody = table.querySelector('tbody').cloneNode(true);
 
     moveAttributesToComponents(this);
 
-    setupBasicTable(this,table,form,pagination);
-    setupAdvancedTable(this,table,form,pagination);
+    setupBasicTable(this, table, form, pagination);
+    setupAdvancedTable(this, table, form, pagination);
 
-
-    if(this.hasAttribute('data-submit')){
-
-      setupSubmitTable(this, table,form,pagination);
-      paginateTable(this, table, form, pagination, () => { form.submit(); });
+    if (this.hasAttribute('data-submit')) {
+      setupSubmitTable(this, table, form, pagination);
+      paginateTable(this, table, form, pagination, () => {
+        form.submit();
+      });
+    } else if (this.hasAttribute('data-no-submit')) {
+      setupNoSubmitTable(this, table, form, pagination, savedTableBody);
+      paginateTable(this, table, form, pagination, () => {
+        paginateRows(this);
+      });
+    } else if (this.hasAttribute('data-ajax')) {
+      setupAjaxTable(this, table, form, pagination);
+      paginateTable(this, table, form, pagination, () => {
+        loadAjaxTable(this, table, form, pagination);
+      });
+    } else {
+      paginateTable(this, table, form, pagination, () => {
+        paginateRows(this);
+      });
     }
-    else if(this.hasAttribute('data-no-submit')){
-
-      setupNoSubmitTable(this, table,form,pagination, savedTableBody);
-      paginateTable(this, table, form, pagination, () => { paginateRows(this); })
-    }
-    else if(this.hasAttribute('data-ajax')){
-
-      setupAjaxTable(this, table,form, pagination);
-      paginateTable(this, table, form, pagination, () => { loadAjaxTable(this, table, form, pagination) })
-    }
-    else {
-
-      paginateTable(this, table, form, pagination, () => { paginateRows(this); })
-    }
-
   }
 }
 

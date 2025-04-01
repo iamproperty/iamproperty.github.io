@@ -13,7 +13,8 @@
       this.$nextTick(function () {
         import(`../../../assets/js/components/table-submit/table-submit.component.min.js`)
           .then((module) => {
-            if (!window.customElements.get(`iam-table-submit`)) window.customElements.define(`iam-table-submit`, module.default);
+            if (!window.customElements.get(`iam-table-submit`))
+              window.customElements.define(`iam-table-submit`, module.default);
           })
           .catch((err) => {
             console.log(err.message);
@@ -28,6 +29,6 @@
             console.log(err.message);
           });
       });
-    }
+    },
   };
 </script>

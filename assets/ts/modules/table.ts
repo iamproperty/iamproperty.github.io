@@ -1,6 +1,5 @@
 import { zeroPad, isNumeric, ucfirst, resolvePath, uniqueID } from './helpers';
 
-
 // #region Helpers
 export const formatCell = (format, cellOutput): any => {
   switch (format) {
@@ -60,43 +59,37 @@ const filterFilters = function (form): object {
 };
 
 export const moveAttributesToComponents = (component): void => {
-
   let form = document.createElement('form');
-  
+
   if (component.hasAttribute('data-filterby')) {
     form = document.querySelector(`#${component.getAttribute('data-filterby')}`);
-  } else if(component.closest('form')) {
+  } else if (component.closest('form')) {
     form = component.closest('form');
-  } 
-  else {
+  } else {
     table.parentNode.insertBefore(form, table.nextSibling);
   }
 
-  
-  if(form.hasAttribute('data-ajax'))
-    component.setAttribute('data-ajax',form.getAttribute('data-ajax'))
+  if (form.hasAttribute('data-ajax')) component.setAttribute('data-ajax', form.getAttribute('data-ajax'));
 
-  if(form.hasAttribute('data-schema'))
-    component.setAttribute('data-schema',form.getAttribute('data-schema'))
-
-}
+  if (form.hasAttribute('data-schema')) component.setAttribute('data-schema', form.getAttribute('data-schema'));
+};
 
 export const paginateTable = (component, table, form, pagination, callback): void => {
+  if (!form.querySelector('[name=show]'))
+    form.insertAdjacentHTML(
+      'beforeend',
+      `<input name="show" type="hidden" value="${component.getAttribute('data-show')}" />`
+    );
 
-  if(!form.querySelector('[name=show]'))
-    form.insertAdjacentHTML('beforeend',`<input name="show" type="hidden" value="${component.getAttribute('data-show')}" />`);
-
-
-  if(!form.querySelector('[name=page]')) 
-    form.insertAdjacentHTML('beforeend',`<input name="page" type="hidden" value="${component.getAttribute('data-page')}" />`);
-
+  if (!form.querySelector('[name=page]'))
+    form.insertAdjacentHTML(
+      'beforeend',
+      `<input name="page" type="hidden" value="${component.getAttribute('data-page')}" />`
+    );
 
   pagination.addEventListener('update-show', (event) => {
-
     if (form.querySelector('[name=show]').value != event.detail.show) {
-
       form.querySelector('[name=show]').value = event.detail.show;
-
 
       const updateEvent = new CustomEvent('update-show', { detail: { show: event.detail.show } });
       component.dispatchEvent(updateEvent);
@@ -108,11 +101,7 @@ export const paginateTable = (component, table, form, pagination, callback): voi
   });
 
   pagination.addEventListener('update-page', (event) => {
-
-    console.log(event)
-
     if (form.querySelector('[name=page]').value != event.detail.page) {
-
       form.querySelector('[name=page]').value = event.detail.page;
 
       const updateEvent = new CustomEvent('update-page', { detail: { page: event.detail.page } });
@@ -130,62 +119,56 @@ export const paginateTable = (component, table, form, pagination, callback): voi
       }
     }
   });
-}
-
+};
 
 export const findForm = (component, table): HTMLElement => {
-
   let form = document.createElement('form');
-  
+
   if (component.hasAttribute('data-filterby')) {
     form = document.querySelector(`#${component.getAttribute('data-filterby')}`);
-  } else if(component.closest('form')) {
+  } else if (component.closest('form')) {
     form = component.closest('form');
-  } 
-  else {
+  } else {
     table.parentNode.insertBefore(form, table.nextSibling);
   }
 
   return form;
-}
+};
 // #endregion
 
-export const setupBasicTable = (component,table,form,pagination): void => {
-
-  
+export const setupBasicTable = (component, table, form, pagination): void => {
   const tableWrapper = component.shadowRoot.querySelector('.table__wrapper');
 
-  if (!component.hasAttribute('data-total')) component.setAttribute('data-total', component.querySelectorAll('tbody tr').length);
+  if (!component.hasAttribute('data-total'))
+    component.setAttribute('data-total', component.querySelectorAll('tbody tr').length);
   if (!component.hasAttribute('data-page')) component.setAttribute('data-page', 1);
   if (!component.hasAttribute('data-show')) component.setAttribute('data-show', 5);
-  if (!component.hasAttribute('data-increment')) component.setAttribute('data-increment', component.getAttribute('data-show'));
+  if (!component.hasAttribute('data-increment'))
+    component.setAttribute('data-increment', component.getAttribute('data-show'));
 
-  transferAttributes(component,pagination);
+  transferAttributes(component, pagination);
 
   addDataAttributes(table);
-  createMobileButton(component,table);
+  createMobileButton(component, table);
 
   // Max height
   if (component.classList.contains('mh-sm')) tableWrapper.classList.add('mh-sm');
   if (component.classList.contains('mh-md')) tableWrapper.classList.add('mh-md');
   if (component.classList.contains('mh-lg')) tableWrapper.classList.add('mh-lg');
 
-
   if (component.classList.contains('table--cta')) {
-
     getLargestLastColWidth(component, table);
     getRowHeight(component, table);
   }
-}
-
+};
 
 // #region Basic table fnctions
-export const transferAttributes = (component,pagination): void => {
-
-  pagination.setAttribute('data-total', component.getAttribute('data-total'));
-  pagination.setAttribute('data-page', component.getAttribute('data-page'));
-  pagination.setAttribute('data-show', component.getAttribute('data-show'));
-  pagination.setAttribute('data-increment', component.getAttribute('data-show'));
+export const transferAttributes = (component, pagination): void => {
+  if (component.hasAttribute('data-total')) pagination.setAttribute('data-total', component.getAttribute('data-total'));
+  if (component.hasAttribute('data-page')) pagination.setAttribute('data-page', component.getAttribute('data-page'));
+  if (component.hasAttribute('data-show')) pagination.setAttribute('data-show', component.getAttribute('data-show'));
+  if (component.hasAttribute('data-increment'))
+    pagination.setAttribute('data-increment', component.getAttribute('data-show'));
 
   if (component.hasAttribute('data-page-jump')) pagination.setAttribute('data-page-jump', 'true');
   if (component.hasAttribute('data-per-page')) pagination.setAttribute('data-per-page', 'true');
@@ -193,18 +176,16 @@ export const transferAttributes = (component,pagination): void => {
   if (component.hasAttribute('data-loading')) pagination.setAttribute('data-loading', 'true');
 
   if (component.classList.contains('table--fullwidth')) pagination.setAttribute('data-minimal', 'true');
-}
+};
 
 export const updateAttributes = (component, pagination): void => {
-
   component.setAttribute('data-total', pagination.getAttribute('data-total'));
   component.setAttribute('data-page', pagination.getAttribute('data-page'));
   component.setAttribute('data-show', pagination.getAttribute('data-show'));
   component.setAttribute('data-increment', pagination.getAttribute('data-show'));
-}
+};
 
 export const paginateRows = (component): void => {
-
   const total = component.getAttribute('data-total');
   const page = component.getAttribute('data-page');
   const show = component.getAttribute('data-show');
@@ -216,19 +197,13 @@ export const paginateRows = (component): void => {
   const start = end - show;
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-    
-
-    if(index >= start && index < end){
+    if (index >= start && index < end) {
       row.classList.add('show');
-    }
-    else {
+    } else {
       row.classList.remove('show');
     }
-
-
   });
-
-}
+};
 
 export const addDataAttributes = (table): void => {
   const colHeadings = Array.from(table.querySelectorAll('thead th'));
@@ -296,11 +271,11 @@ export const createMobileButton = (component, table): void => {
     }
   });
 
-  Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
+  Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
     const preExpanded = row.getAttribute('data-view') === 'full' ? 'aria-expanded' : '';
     row.insertAdjacentHTML(
       'afterbegin',
-      `<td class="td--fixed td--expand"><button class="btn btn-compact btn-secondary" data-expand-button ${preExpanded}>Expand</button></td>`
+      `<td class="td--fixed td--expand"><button class="btn btn-compact btn-secondary" data-expand-button ${preExpanded} data-index="${index}">Expand</button></td>`
     );
   });
 
@@ -315,17 +290,15 @@ export const createMobileButton = (component, table): void => {
       else tableRow.setAttribute('data-view', 'full');
 
       button.blur();
+
+      component.dispatchEvent(new CustomEvent('row-expanded', { detail: { row: button.getAttribute('data-index') } }));
     }
   });
-
-
 };
 
 export const getLargestLastColWidth = (component, table): void => {
-
   let largestWidth = 0;
 
-console.log(table)
   Array.from(table.querySelectorAll('tbody tr')).forEach((row) => {
     const htmlStyles = window.getComputedStyle(document.querySelector('html'));
     const lastColChild = row.querySelector(':scope > *:last-child > *:first-child');
@@ -342,7 +315,6 @@ console.log(table)
 };
 
 export const getRowHeight = (component, table): void => {
-
   function outputsize(): void {
     Array.from(table.querySelectorAll('tr')).forEach((row) => {
       const rowHeight = row.offsetHeight;
@@ -352,61 +324,56 @@ export const getRowHeight = (component, table): void => {
   }
 
   new ResizeObserver(outputsize).observe(table);
-}
+};
 // #endregion
 
 export const setupAdvancedTable = (component, table): void => {
+  if (
+    component.querySelector('iam-actionbar[data-selectall]') ||
+    document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`)
+  ) {
+    const actionbar = component.querySelector('iam-actionbar[data-selectall]')
+      ? component.querySelector('iam-actionbar[data-selectall]')
+      : document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`);
 
-  if (component.querySelector('iam-actionbar[data-selectall]') || document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`)) {
-
-    const actionbar = component.querySelector('iam-actionbar[data-selectall]') ? component.querySelector('iam-actionbar[data-selectall]') : document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`);
-
-    addSelectboxes(component, table,actionbar);
+    addSelectboxes(component, table, actionbar);
   }
 
-
-
-  component.querySelectorAll('.dialog__wrapper .btn-compact').forEach(btn => {
-    btn.classList.add('btn-sm')
-    btn.classList.add('m-0')
+  component.querySelectorAll('.dialog__wrapper .btn-compact').forEach((btn) => {
+    btn.classList.add('btn-sm');
+    btn.classList.add('m-0');
   });
-}
+};
 // #region Advanced table functions
-export const addSelectboxes = (component, table,actionbar): void => {
-
+export const addSelectboxes = (component, table, actionbar): void => {
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
-
-    if(row.querySelector('.expand-button-heading'))
+    if (row.querySelector('.expand-button-heading'))
       row.querySelector('.expand-button-heading').insertAdjacentHTML('afterend', `<th class="th--fixed"></th>`);
-    else
-      row.insertAdjacentHTML('afterbegin', `<th class="th--fixed"></th>`);
+    else row.insertAdjacentHTML('afterbegin', `<th class="th--fixed"></th>`);
   });
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
-
-    row.setAttribute('data-index',index+1);
+    row.setAttribute('data-index', index + 1);
     if (!row.querySelector('.selectrow')) {
       const rowID = `row${uniqueID(index)}`;
 
-      if(row.querySelector('.td--expand'))
-        row.querySelector('.td--expand').insertAdjacentHTML(
-          'afterend',
-          `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
-        );
+      if (row.querySelector('.td--expand'))
+        row
+          .querySelector('.td--expand')
+          .insertAdjacentHTML(
+            'afterend',
+            `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
+          );
       else
         row.insertAdjacentHTML(
           'afterbegin',
           `<td class="td--fixed selectrow selected"><input type="checkbox" name="row" id="${rowID}" ${row.hasAttribute('data-selected') ? `checked="true"` : ''}/><label for="${rowID}"><span class="visually-hidden">Select row</span></label></td>`
         );
-  
-    
-
     }
   });
 
   table.addEventListener('change', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('.selectrow input')) {
-
       const input = event.target.closest('.selectrow input');
       const row = event.target.closest('tr');
 
@@ -415,19 +382,13 @@ export const addSelectboxes = (component, table,actionbar): void => {
 
       actionbar.setAttribute('data-selected', count == countChecked ? 'all' : countChecked);
 
-
-      console.log(row.getAttribute('data-index'));
-
-
-
       const dispatchedEvent = new CustomEvent('row-selected', {
         detail: {
           rowIndex: row.getAttribute('data-index'),
-          checked: input.checked ? true : false
+          checked: input.checked ? true : false,
         },
       });
       component.dispatchEvent(dispatchedEvent);
-
     }
   });
 
@@ -439,7 +400,6 @@ export const addSelectboxes = (component, table,actionbar): void => {
 
       const dispatchedEvent = new CustomEvent('all-rows-unselected');
       component.dispatchEvent(dispatchedEvent);
-
     } else if (event.detail.selected == 'all') {
       Array.from(table.querySelectorAll('.selectrow input[type="checkbox"]')).forEach((input) => {
         input.checked = true;
@@ -449,8 +409,7 @@ export const addSelectboxes = (component, table,actionbar): void => {
       component.dispatchEvent(dispatchedEvent);
     }
   });
-
-}
+};
 
 // Export CSV Data
 export const addExportEventListeners = (button, table): void | boolean => {
@@ -505,25 +464,21 @@ export const exportAsCSV = function (table): void {
   document.body.removeChild(tempLink);
 };
 
-
 // #endregion
 
 export const setupNoSubmitTable = (component, table, form, pagination, savedTableBody): void => {
-
   sortViaHeaders(component, table);
 
   createSearchDataList(component, table);
 
   form.addEventListener('change', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
-      
       sortTable(table, form, savedTableBody);
     }
   });
 
   addFilterEventListeners(component, table, form, pagination, savedTableBody);
-
-}
+};
 
 // #region No submit table functions
 export const sortViaHeaders = (component, table): void => {
@@ -557,13 +512,14 @@ export const sortViaHeaders = (component, table): void => {
           ref: heading.getAttribute('data-ref'),
         },
       });
-      
+
       component.dispatchEvent(dispatchedEvent);
 
       const sortBy = heading.textContent.trim();
       const order = heading.getAttribute('data-order-by');
 
-      if (!component.hasAttribute('data-submit')) { // TODO
+      if (!component.hasAttribute('data-submit')) {
+        // TODO
         sortTableByValues(table, sortBy, order);
       }
     }
@@ -582,7 +538,6 @@ export const createSearchDataList = (component, table): void => {
 
   const searchableTerms = {};
   table.querySelectorAll('tbody td:not(.td--fixed)').forEach((td) => {
-    
     if (td.querySelector('.td__content'))
       searchableTerms[td.querySelector('.td__content').textContent] = td.querySelector('.td__content').textContent;
     else searchableTerms[td.textContent] = td.textContent;
@@ -686,7 +641,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
 
   // Check what conditions are set on the table to see what the form actions are
   const formSubmit = function (event, paginate = false): void | boolean {
-
     if (form.classList.contains('processing')) return false;
 
     Array.from(form.querySelectorAll('iam-applied-filters')).forEach((element) => {
@@ -714,11 +668,10 @@ export const addFilterEventListeners = (component, table, form, pagination, save
       form.classList.remove('processing');
     }
 
-    
     filterTable(component, table, form, pagination);
     populateDataQueries(component, table, form);
-    
-/*
+
+    /*
     // Pass post data back to the page
     if (form.hasAttribute('data-ajax-post')) {
       const formData = new FormData(form);
@@ -751,20 +704,19 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     });
   }
 
-  if (component.querySelector('iam-actionbar') && !component.querySelector('iam-actionbar').closest('form')){
-
+  if (component.querySelector('iam-actionbar') && !component.querySelector('iam-actionbar').closest('form')) {
     component.querySelector('iam-actionbar').addEventListener('change', (event) => {
-
-      if(!form.querySelector('.duplicate-actionbar')){
-
-        form.insertAdjacentHTML('beforeend',`<div class="duplicate-actionbar" style="visibility: hidden; pointer-events: none; position: absolute;"></div>`);
+      if (!form.querySelector('.duplicate-actionbar')) {
+        form.insertAdjacentHTML(
+          'beforeend',
+          `<div class="duplicate-actionbar" style="visibility: hidden; pointer-events: none; position: absolute;"></div>`
+        );
       }
 
       form.querySelector('.duplicate-actionbar').innerHTML = component.querySelector('iam-actionbar').innerHTML;
       filterTable(component, table, form, pagination);
     });
   }
-  
 
   form.addEventListener('keyup', (event) => {
     clearTimeout(timer);
@@ -778,7 +730,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
 
   form.addEventListener('change', (event) => {
     clearTimeout(timer);
-
 
     if (event && event.target instanceof HTMLElement && event.target.closest('input[data-search]')) {
       formSubmit(event);
@@ -975,11 +926,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
 };
 
 export const filterTable = (component, table, form, pagination): void => {
-
-
-  console.log('hei');
-
-
   table.classList.remove('table--filtered');
 
   const filters = filterFilters(form);
@@ -1182,7 +1128,7 @@ export const filterTable = (component, table, form, pagination): void => {
   }
 };
 
-export const populateDataQueries = (component,table, form): void | boolean => {
+export const populateDataQueries = (component, table, form): void | boolean => {
   const dataQueries = Array.from(form.querySelectorAll('[data-query]'));
 
   dataQueries.forEach((queryElement) => {
@@ -1244,37 +1190,26 @@ export const populateDataQueries = (component,table, form): void | boolean => {
 };
 // #endregion
 
-
 export const setupSubmitTable = (component, table, form, pagination): void => {
+  form.setAttribute('method', 'get');
 
-  form.setAttribute('method','get');
+  const actionbar = component.querySelector('iam-actionbar');
 
-  const actionbar = component.querySelector('iam-actionbar')
-
-  if (actionbar){
-
+  if (actionbar) {
     actionbar.addEventListener('change', (event) => {
-
       form.submit();
     });
   }
-
-  
-
-}
-
+};
 
 // #region submit tables functions
 
-
-// #endregion 
+// #endregion
 
 export const setupAjaxTable = (component, table, form, pagination): void => {
-
   loadAjaxTable(component, table, form, pagination);
 
-  const actionbar = component.querySelector('iam-actionbar')
-
+  const actionbar = component.querySelector('iam-actionbar');
 
   form.addEventListener('submit', (event) => {
     loadAjaxTable(component, table, form, pagination);
@@ -1282,41 +1217,45 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
     event.preventDefault();
   });
 
-  if (actionbar){
-
+  if (actionbar) {
     actionbar.addEventListener('change', (event) => {
       loadAjaxTable(component, table, form, pagination);
     });
   }
-
-}
+};
 // #region ajax tables functions
 
 export const loadAjaxTable = async function (component, table, form, pagination): void {
-
-
   // Add actionbar inputs into form
-  if (component.querySelector('iam-actionbar') && !component.querySelector('iam-actionbar').closest('form')){
-
-    if(!form.querySelector('.duplicate-actionbar'))
-      form.insertAdjacentHTML('beforeend',`<div class="duplicate-actionbar" style="visibility: hidden; pointer-events: none; position: absolute;"></div>`);
+  if (component.querySelector('iam-actionbar') && !component.querySelector('iam-actionbar').closest('form')) {
+    if (!form.querySelector('.duplicate-actionbar'))
+      form.insertAdjacentHTML(
+        'beforeend',
+        `<div class="duplicate-actionbar" style="visibility: hidden; pointer-events: none; position: absolute;"></div>`
+      );
 
     form.querySelector('.duplicate-actionbar').innerHTML = component.querySelector('iam-actionbar').innerHTML;
   }
 
-  // Add pagination inputs into form 
-  if(!form.querySelector('input[name=show]'))
-    form.insertAdjacentHTML('beforeend',`<input name="show" type="hidden" value="${component.getAttribute('data-show')}" />`);
+  // Add pagination inputs into form
+  if (!form.querySelector('input[name=show]'))
+    form.insertAdjacentHTML(
+      'beforeend',
+      `<input name="show" type="hidden" value="${component.getAttribute('data-show')}" />`
+    );
 
-  if(!form.querySelector('input[name=page]')) 
-    form.insertAdjacentHTML('beforeend',`<input name="page" type="hidden" value="${component.getAttribute('data-page')}" />`);
+  if (!form.querySelector('input[name=page]'))
+    form.insertAdjacentHTML(
+      'beforeend',
+      `<input name="page" type="hidden" value="${component.getAttribute('data-page')}" />`
+    );
 
   form.querySelector('input[name=page]').value = component.getAttribute('data-page');
   form.querySelector('input[name=show]').value = component.getAttribute('data-show');
 
   // Construct form data to send to api
   const formData = new FormData(form);
-  
+
   const queryString = new URLSearchParams(formData).toString();
   const columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');
   const tbody = table.querySelector('tbody');
@@ -1453,11 +1392,9 @@ export const loadAjaxTable = async function (component, table, form, pagination)
             tbody.appendChild(table_row);
           });
 
-          
-          
           component.setAttribute('data-total', parseInt(totalNumber));
           component.setAttribute('data-page', parseInt(currentPage));
-            
+
           pagination.setAttribute('data-total', totalNumber);
           pagination.setAttribute('data-page', currentPage);
 
@@ -1481,9 +1418,8 @@ export const loadAjaxTable = async function (component, table, form, pagination)
             formData: queryString,
           });
 
-          setupBasicTable(component,table,pagination);
-          setupAdvancedTable(component,table,pagination);
-
+          setupBasicTable(component, table, form, pagination);
+          setupAdvancedTable(component, table, form, pagination);
         } else {
           tbody.innerHTML = '<tr><td colspan="100%"><span>Error loading table</span></td></tr>';
         }
@@ -1491,21 +1427,12 @@ export const loadAjaxTable = async function (component, table, form, pagination)
         // Remove loading on the pagination
         pagination.removeAttribute('data-loading');
         form.classList.remove('processing');
-
-
       });
   } catch (error) {
     console.log(error);
   }
 };
 // #endregion
-
-
-
-
-
-
-
 
 /*
 // Pagination - still needed?
