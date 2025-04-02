@@ -1,169 +1,166 @@
-// @ts-nocheck
 // Create a link between two input/selects with one acting as setting a minimum value and the second a maximum
 // The link between the two will prevent the max input field form setting a lower value than the min and vice versa
-function inputRange(inputWrapper){
+function inputRange(inputWrapper): void {
+  inputWrapper.addEventListener(
+    'change',
+    function () {
+      const min = parseInt(inputWrapper.querySelector('[data-min] select,[data-min] input').value);
+      const max = parseInt(inputWrapper.querySelector('[data-max] select,[data-max] input').value);
 
-  inputWrapper.addEventListener('change', function(e){
+      // Set attributes for input fields
+      Array.from(inputWrapper.querySelectorAll('[data-min] input')).forEach((input) => {
+        input.setAttribute('max', max);
+      });
 
-    var min = parseInt(inputWrapper.querySelector('[data-min] select,[data-min] input').value);
-    var max = parseInt(inputWrapper.querySelector('[data-max] select,[data-max] input').value);
+      Array.from(inputWrapper.querySelectorAll('[data-max] input')).forEach((input) => {
+        input.setAttribute('min', min);
+      });
 
-    // Set attributes for input fields
-    Array.from(inputWrapper.querySelectorAll('[data-min] input')).forEach((input, index) => {
+      // Hide select options if they are higher or lower than the min and max values
+      Array.from(inputWrapper.querySelectorAll('[data-min] select option')).forEach((option) => {
+        if (parseInt(option.getAttribute('value')) > max) option.classList.add('d-none');
+        else option.classList.remove('d-none');
+      });
 
-      input.setAttribute('max',max);
-    });
-
-    Array.from(inputWrapper.querySelectorAll('[data-max] input')).forEach((input, index) => {
-
-      input.setAttribute('min',min);
-    });
-
-    // Hide select options if they are higher or lower than the min and max values
-    Array.from(inputWrapper.querySelectorAll('[data-min] select option')).forEach((option, index) => {
-
-      if(parseInt(option.getAttribute('value')) > max)
-        option.classList.add('d-none');
-      else
-        option.classList.remove('d-none');
-    });
-
-    Array.from(inputWrapper.querySelectorAll('[data-max] select option')).forEach((option, index) => {
-
-      if(parseInt(option.getAttribute('value')) < min)
-        option.classList.add('d-none');
-      else
-        option.classList.remove('d-none');
-    });
-
-  }, false);
+      Array.from(inputWrapper.querySelectorAll('[data-max] select option')).forEach((option) => {
+        if (parseInt(option.getAttribute('value')) < min) option.classList.add('d-none');
+        else option.classList.remove('d-none');
+      });
+    },
+    false
+  );
 }
 
-function inputRedirect(inputWrapper){
+function inputRedirect(inputWrapper): void {
+  inputWrapper.addEventListener(
+    'change',
+    function () {
+      if (inputWrapper.matches('[data-value-if]')) {
+        const url = inputWrapper.getAttribute('data-redirect');
+        const desiredValue = inputWrapper.getAttribute('data-value-if');
 
-
-  inputWrapper.addEventListener('change', function(e){
-
-    if(inputWrapper.matches('[data-value-if]')) {
-
-      const url = inputWrapper.getAttribute('data-redirect');
-      const desiredValue = inputWrapper.getAttribute('data-value-if');
-
-      if(inputWrapper.value == desiredValue)
-        document.location.href = url;
-    }
-    else {
-
-      if(typeof inputWrapper.value != "undefined")
-        document.location.href = inputWrapper.value;
-    }
-
-  }, false);
+        if (inputWrapper.value == desiredValue) document.location.href = url;
+      } else {
+        if (typeof inputWrapper.value != 'undefined') document.location.href = inputWrapper.value;
+      }
+    },
+    false
+  );
 }
 
 //
-function multipleFileUploads(wrapper){
-
+function multipleFileUploads(wrapper): void {
   const fileTenplate = wrapper.querySelector('.row');
   const clone = fileTenplate.cloneNode(true);
   const addButton = wrapper.querySelector('[data-add]');
 
-  wrapper.addEventListener('click', function(e){
-    for (var target = e.target; target && target != this; target = target.parentNode) {
-      if (target.matches('[data-add]')) {  // Add a new row upload file input fields
+  wrapper.addEventListener(
+    'click',
+    function (e) {
+      for (let target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[data-add]')) {
+          // Add a new row upload file input fields
 
-        const tempClone = clone.cloneNode(true);
-        wrapper.insertBefore(tempClone,target);
+          const tempClone = clone.cloneNode(true);
+          wrapper.insertBefore(tempClone, target);
 
-        if(addButton.matches('[data-maxfiles]') && Array.from(wrapper.querySelectorAll(':scope > .row')).length >= addButton.dataset.maxfiles)
-          addButton.setAttribute('disabled','disabled');
+          if (
+            addButton.matches('[data-maxfiles]') &&
+            Array.from(wrapper.querySelectorAll(':scope > .row')).length >= addButton.dataset.maxfiles
+          )
+            addButton.setAttribute('disabled', 'disabled');
 
-      break;
+          break;
+        }
+        if (target.matches('[data-delete]')) {
+          // Delete the current row
+
+          const row = target.closest('.row');
+          row.remove();
+
+          if (
+            addButton.matches('[data-maxfiles]') &&
+            Array.from(wrapper.querySelectorAll(':scope > .row')).length < addButton.dataset.maxfiles
+          )
+            addButton.removeAttribute('disabled');
+
+          break;
+        }
       }
-      if (target.matches('[data-delete]')) { // Delete the current row
-
-        let row = target.closest('.row');
-        row.remove();
-
-        if(addButton.matches('[data-maxfiles]') && Array.from(wrapper.querySelectorAll(':scope > .row')).length < addButton.dataset.maxfiles)
-          addButton.removeAttribute('disabled');
-
-      break;
-      }
-    }
-
-  }, false);
+    },
+    false
+  );
 }
 
 // Acts as an overall initialise function to trigger other functions.
-function form(formElement) {
-
+function form(formElement): void {
   // Check for input range groups
-  Array.from(formElement.querySelectorAll('[data-input-range]')).forEach((arrayElement, index) => {
+  Array.from(formElement.querySelectorAll('[data-input-range]')).forEach((arrayElement) => {
     inputRange(arrayElement);
   });
 
-  Array.from(formElement.querySelectorAll('[data-redirect]')).forEach((arrayElement, index) => {
+  Array.from(formElement.querySelectorAll('[data-redirect]')).forEach((arrayElement) => {
     inputRedirect(arrayElement);
   });
 
-  Array.from(formElement.querySelectorAll('.multiple-file-uploads')).forEach((arrayElement, index) => {
+  Array.from(formElement.querySelectorAll('.multiple-file-uploads')).forEach((arrayElement) => {
     multipleFileUploads(arrayElement);
   });
 
-
   // Check the file size of a file when uploaded in case it exceeds the max file size set
-  formElement.addEventListener('change', function(e){
-    for (var target = e.target; target && target != this; target = target.parentNode) {
-      if (target.matches('[type="file"][data-filesize]') && target.files && target.files[0]) {
-
+  formElement.addEventListener(
+    'change',
+    function (e) {
+      for (let target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches('[type="file"][data-filesize]') && target.files && target.files[0]) {
           const maxAllowedSize = target.dataset.filesize;
           if (target.files[0].size > maxAllowedSize) {
-
             target.value = '';
             alert('File too large');
           }
-        break;
+          break;
+        }
       }
-    }
-  }, false);
-
+    },
+    false
+  );
 
   // When a form is updated we may want to update some of the existing input fields; setting active fields when some data is selected.
-  formElement.addEventListener('change', function(e){
+  formElement.addEventListener(
+    'change',
+    function () {
+      // Remove disabled attribute when a pre-selected input field equals a certain value
+      Array.from(
+        formElement.querySelectorAll('select[data-activeif][data-equals],input[data-activeif][data-equals]')
+      ).forEach((arrayElement) => {
+        const group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
+        const selector = arrayElement.dataset.activeif;
+        const value = arrayElement.dataset.equals;
+        const testElement = group.querySelector(`select[data-id="${selector}"],input[data-id="${selector}"]`);
 
-    // Remove disabled attribute when a pre-selected input field equals a certain value
-    Array.from(formElement.querySelectorAll('select[data-activeif][data-equals],input[data-activeif][data-equals]')).forEach((arrayElement, index) => {
+        if (testElement.value == value) {
+          arrayElement.removeAttribute('disabled');
+        } else {
+          arrayElement.setAttribute('disabled', 'disabled');
+          arrayElement.value = '';
+        }
+      });
 
-      let group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
-      let selector = arrayElement.dataset.activeif;
-      let value = arrayElement.dataset.equals;
-      let testElement = group.querySelector(`select[data-id="${selector}"],input[data-id="${selector}"]`);
+      // Show this input wrapper when a pre-selected input field equals a certain value
+      Array.from(formElement.querySelectorAll('.form-control__wrapper[data-displayif][data-equals]')).forEach(
+        (arrayElement) => {
+          const group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
+          const selector = arrayElement.dataset.activeif;
+          const value = arrayElement.dataset.equals;
+          const testElement = group.querySelector(`select[data-id="${selector}"],input[data-id="${selector}"]`);
 
-      if(testElement.value == value){
-        arrayElement.removeAttribute('disabled');
-      }
-      else {
-        arrayElement.setAttribute('disabled','disabled');
-        arrayElement.value = '';
-      }
-    });
-
-    // Show this input wrapper when a pre-selected input field equals a certain value
-    Array.from(formElement.querySelectorAll('.form-control__wrapper[data-displayif][data-equals]')).forEach((arrayElement, index) => {
-
-      let group = arrayElement.closest('[data-group]') ? arrayElement.closest('[data-group]') : formElement;
-      let selector = arrayElement.dataset.activeif;
-      let value = arrayElement.dataset.equals;
-      let testElement = group.querySelector(`select[data-id="${selector}"],input[data-id="${selector}"]`);
-
-      if(testElement.value == value)
-        arrayElement.classList.remove('d-none');
-      else
-        arrayElement.classList.add('d-none');
-    });
-
-  }, false);
+          if (testElement.value == value) arrayElement.classList.remove('d-none');
+          else arrayElement.classList.add('d-none');
+        }
+      );
+    },
+    false
+  );
 }
 
-export default form
+export default form;

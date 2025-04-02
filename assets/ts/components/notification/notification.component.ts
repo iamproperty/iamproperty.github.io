@@ -1,34 +1,24 @@
-// @ts-nocheck
-import setupNotification, { closeNotification } from "../../modules/notification";
+import setupNotification, { closeNotification } from '../../modules/notification';
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
-  "event": "customElementRegistered",
-  "element": "Notification"
+  event: 'customElementRegistered',
+  element: 'Notification',
 });
 
-
 class iamNotification extends HTMLElement {
-
-  constructor(){
+  constructor() {
     super();
-    this.attachShadow({ mode: 'open'});
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
+    this.attachShadow({ mode: 'open' });
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+    const coreCSS = document.body.hasAttribute('data-core-css')
+      ? document.body.getAttribute('data-core-css')
+      : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/notification.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/notification.global.css";`;
-
-    const buttons = this.querySelectorAll('a,button');
-
-    Array.from(buttons).forEach((button, index) => {
-
-      button.setAttribute('slot','btns');
-      button.classList.add('link');
-    });
-
-    if(buttons.length || this.hasAttribute('data-dismiss'))
-      this.classList.add('notification--dismissable');
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -40,33 +30,29 @@ class iamNotification extends HTMLElement {
 
     <div class="notification">
       <div class="notification__icon"><slot name="icon"></slot></div>
-      <div class="notification__inner"><div class="notification__text"><slot></slot></div>${ buttons.length ? `<div class="notification__btns"><slot name="btns"></slot></div>` : '' }</div>
-      ${ this.hasAttribute('data-dismiss') ? `<div class="notification__dismiss"><button data-dismiss-button part="dismiss-btn">Dismiss</button></div>` : ''}
+      <div class="notification__inner"><div class="notification__text"><slot></slot></div><div class="notification__btns"><slot name="btns"></slot></div></div>
+      <div class="notification__dismiss"></div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     // insert extra CSS
-    if(!document.getElementById('notificationHolder'))
-      document.head.insertAdjacentHTML('beforeend',`<style id="notificationHolder">${loadExtraCSS}</style>`);
+    if (!document.getElementById('notificationHolder'))
+      document.head.insertAdjacentHTML('beforeend', `<style id="notificationHolder">${loadExtraCSS}</style>`);
   }
 
-	connectedCallback() {
-    
-    const dismissBtn = this.shadowRoot.querySelector('[data-dismiss-button]');
-    const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : 'white'
-    
-    if(this.hasAttribute('data-type'))
-      this.classList.add(`bg-${statusBG}`);
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const wrapper = this;
+    const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : 'white';
+
+    if (this.hasAttribute('data-type')) this.classList.add(`bg-${statusBG}`);
     else {
       this.classList.add(`colour-${statusBG}`);
     }
-    
-    const wrapper = this;
 
-    if(!this.querySelector('i')){
-      
-      switch(statusBG) {
+    if (!this.querySelector('i')) {
+      switch (statusBG) {
         case 'danger':
           this.innerHTML += '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>';
           break;
@@ -81,13 +67,37 @@ class iamNotification extends HTMLElement {
       }
     }
 
-    setupNotification(wrapper);
+    const buttons = this.querySelectorAll('a,button');
 
-    if(dismissBtn){
-      dismissBtn.addEventListener('click', function(e){
-        closeNotification(wrapper);
-      }, false);
+    Array.from(buttons).forEach((button) => {
+      button.setAttribute('slot', 'btns');
+      button.classList.add('link');
+    });
+
+    if (buttons.length || this.hasAttribute('data-dismiss')) {
+      this.classList.add('notification--dismissable');
     }
+
+    if (!buttons.length) {
+      this.shadowRoot?.querySelector('.notification__btns')?.classList.add('empty');
+    } else {
+      this.shadowRoot?.querySelector('.notification__btns')?.classList.remove('empty');
+    }
+
+    if (this.hasAttribute('data-dismiss')) {
+      this.shadowRoot.querySelector('.notification__dismiss')?.innerHTML =
+        `<button data-dismiss-button part="dismiss-btn">Dismiss</button>`;
+
+      this.shadowRoot.querySelector('.notification__dismiss [data-dismiss-button]').addEventListener(
+        'click',
+        function () {
+          closeNotification(wrapper);
+        },
+        false
+      );
+    }
+
+    setupNotification(this);
   }
 }
 

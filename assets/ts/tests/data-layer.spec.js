@@ -1,6 +1,6 @@
 // @ts-nocheck
-import '@testing-library/jest-dom'
-import createDataLayer from "../modules/data-layer";
+import '@testing-library/jest-dom';
+import createDataLayer from '../modules/data-layer';
 
 describe('createDataLayer', () => {
   // Mocking the window object for testing
@@ -62,7 +62,6 @@ describe('createDataLayer', () => {
         detailsTitle: 'Summary Text',
       },
     ]);
-
   });
 
   // More test cases for other scenarios can be added here...

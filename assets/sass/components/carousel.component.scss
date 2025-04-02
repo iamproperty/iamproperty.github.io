@@ -1,34 +1,32 @@
-@use "../_func" as *;
-@use "../elements/buttons.scss" as *;
+@use '../_func' as *;
+@use '../elements/buttons.scss' as *;
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 // #region default carousel
 
 :host {
-
   display: block;
   overflow: visible;
-  container-type: inline-size; 
+  container-type: inline-size;
 }
 
 .carousel {
-
-  margin-inline: calc(var(--carousel-spacing,1.5rem) * -1);
+  margin-inline: calc(var(--carousel-spacing, 1.5rem) * -1);
   margin-bottom: 2rem;
   display: block;
   overflow: visible;
 
   .carousel__wrapper {
-
     position: relative;
     overflow-x: clip;
   }
 
   .carousel__inner {
-
     --gutter-x: #{$grid-gutter-width};
     overflow-x: auto;
     padding-bottom: 1rem;
@@ -37,13 +35,13 @@
 
   .carousel__content {
     display: flex;
-    flex-wrap: nowrap!important;
+    flex-wrap: nowrap !important;
     margin-inline-end: 0;
-    padding-inline-start: var(--carousel-spacing,1.5rem);
-    padding-inline-end: var(--carousel-spacing,1.5rem);
+    padding-inline-start: var(--carousel-spacing, 1.5rem);
+    padding-inline-end: var(--carousel-spacing, 1.5rem);
 
-    margin-right: calc(-.5* var(--gutter-x));
-    margin-left: calc(-.5* var(--gutter-x));
+    margin-right: calc(-0.5 * var(--gutter-x));
+    margin-left: calc(-0.5 * var(--gutter-x));
   }
 
   .col > *:last-child {
@@ -54,93 +52,81 @@
 
 ::slotted(div) {
   scroll-snap-align: start;
-  scroll-margin-left: calc(var(--carousel-spacing,1.5rem) - .5rem);
+  scroll-margin-left: calc(var(--carousel-spacing, 1.5rem) - 0.5rem);
 
   flex-shrink: 0;
   width: calc(100% + var(--last-item-extra, 0px));
-  
+
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   margin-top: var(--gutter-y);
 }
 
 ::slotted(div:last-child) {
-  
   padding-inline-end: 1.5rem;
   --last-item-extra: 1rem;
 }
 
-
 @container (min-width: 36em) {
-
   .carousel {
-
-    margin-inline: calc(var(--carousel-spacing,2.5rem) * -1);
+    margin-inline: calc(var(--carousel-spacing, 2.5rem) * -1);
 
     .carousel__content {
-
-      padding-inline-start: var(--carousel-spacing,2.5rem);
-      padding-inline-end: var(--carousel-spacing,2.5rem);    
+      padding-inline-start: var(--carousel-spacing, 2.5rem);
+      padding-inline-end: var(--carousel-spacing, 2.5rem);
     }
   }
 
-  :host([data-smcols]) ::slotted(div){
+  :host([data-smcols]) ::slotted(div) {
     scroll-snap-align: unset;
     flex: 0 0 auto;
   }
 
-  :host([data-smcols="2"]) ::slotted(div){
+  :host([data-smcols='2']) ::slotted(div) {
     width: calc(50% + var(--last-item-extra, 0px));
   }
 
-  :host([data-smcols="3"]) ::slotted(div){
+  :host([data-smcols='3']) ::slotted(div) {
     width: calc(33.3333333333% + var(--last-item-extra, 0px));
   }
-  :host([data-smcols="4"]) ::slotted(div){
+  :host([data-smcols='4']) ::slotted(div) {
     width: calc(25% + var(--last-item-extra, 0px));
   }
 
-  :host([data-smcols="2"]) ::slotted(div:nth-child(odd)),
-  :host([data-smcols="3"]) ::slotted(div:nth-child(3n+1)),
-  :host([data-smcols="4"]) ::slotted(div:nth-child(4n+1)){
+  :host([data-smcols='2']) ::slotted(div:nth-child(odd)),
+  :host([data-smcols='3']) ::slotted(div:nth-child(3n + 1)),
+  :host([data-smcols='4']) ::slotted(div:nth-child(4n + 1)) {
     scroll-snap-align: start;
   }
 
   ::slotted(div) {
-    scroll-margin-left: calc(var(--carousel-spacing,2.5rem) - .5rem);
+    scroll-margin-left: calc(var(--carousel-spacing, 2.5rem) - 0.5rem);
   }
 
   ::slotted(div:last-child) {
-    
     padding-inline-end: 2.5rem;
     --last-item-extra: 2rem;
   }
 }
 
 @container (min-width: 62em) {
-
   .carousel {
     margin-inline: 0;
     position: relative;
   }
   .carousel__wrapper {
-    
     overflow: hidden;
 
-    margin-inline: calc(-0.5 * $grid-gutter-width);   
+    margin-inline: calc(-0.5 * $grid-gutter-width);
   }
   .carousel__inner {
-    
-    
   }
   .carousel__content {
-      
-    padding-inline: 0!important;
-    margin-inline: 0!important;
+    padding-inline: 0 !important;
+    margin-inline: 0 !important;
   }
 
   ::slotted(div) {
-    
     margin-left: 0;
     scroll-margin-left: 0;
   }
@@ -150,38 +136,36 @@
     --last-item-extra: 0px;
   }
 
-  
-  :host([data-mdcols]) ::slotted(div){
+  :host([data-mdcols]) ::slotted(div) {
     scroll-snap-align: unset;
     flex: 0 0 auto;
   }
 
-  :host([data-mdcols="2"]) ::slotted(div){
+  :host([data-mdcols='2']) ::slotted(div) {
     width: calc(50% + var(--last-item-extra, 0px));
   }
 
-  :host([data-mdcols="3"]) ::slotted(div){
+  :host([data-mdcols='3']) ::slotted(div) {
     width: calc(33.3333333333% + var(--last-item-extra, 0px));
   }
-  :host([data-mdcols="4"]) ::slotted(div){
+  :host([data-mdcols='4']) ::slotted(div) {
     width: calc(25% + var(--last-item-extra, 0px));
   }
-  :host([data-mdcols="5"]) ::slotted(div){
+  :host([data-mdcols='5']) ::slotted(div) {
     width: calc(20% + var(--last-item-extra, 0px));
   }
-  :host([data-mdcols="6"]) ::slotted(div){
+  :host([data-mdcols='6']) ::slotted(div) {
     width: calc(16.6666666667% + var(--last-item-extra, 0px));
   }
 
-  :host([data-mdcols="2"]) ::slotted(div:nth-child(odd)),
-  :host([data-mdcols="3"]) ::slotted(div:nth-child(3n+1)),
-  :host([data-mdcols="4"]) ::slotted(div:nth-child(4n+1)),
-  :host([data-mdcols="5"]) ::slotted(div:nth-child(5n+1)),
-  :host([data-mdcols="6"]) ::slotted(div:nth-child(6n+1)){
+  :host([data-mdcols='2']) ::slotted(div:nth-child(odd)),
+  :host([data-mdcols='3']) ::slotted(div:nth-child(3n + 1)),
+  :host([data-mdcols='4']) ::slotted(div:nth-child(4n + 1)),
+  :host([data-mdcols='5']) ::slotted(div:nth-child(5n + 1)),
+  :host([data-mdcols='6']) ::slotted(div:nth-child(6n + 1)) {
     scroll-snap-align: start;
   }
 }
-
 
 // #endregion
 
@@ -206,13 +190,12 @@
   padding-bottom: 0.5rem;
 }
 
-.btn-next, 
+.btn-next,
 .btn-prev {
+  margin: 0 !important;
 
-  margin: 0!important;
-  
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     right: 0;
     top: 0;
@@ -229,20 +212,15 @@
     -webkit-mask-position: 55% 50%;
     transform: rotate(0deg);
   }
-
 }
 
 .btn-prev {
-
   &:after {
-
     transform: rotate(180deg);
   }
 }
 
-
 @container (min-width: 62em) {
-
   .carousel__btns {
     padding-bottom: 0;
   }
@@ -250,13 +228,13 @@
     position: absolute;
     top: 50%;
     left: 0;
-    margin: -2rem 0 0 -3rem!important;
+    margin: -2rem 0 0 -3rem !important;
   }
   .btn-next {
     position: absolute;
     top: 50%;
     right: 0;
-    margin: -2rem -3rem 0 0!important;
+    margin: -2rem -3rem 0 0 !important;
   }
 }
 
@@ -269,7 +247,6 @@
   margin-bottom: 1rem;
   text-align: center;
   max-width: 30rem;
-  
 
   @container (min-width: 36em) {
     width: 100%;
@@ -288,7 +265,7 @@
     border-radius: 50%;
     text-indent: -50rem;
     overflow: hidden;
-    background: #A5ECFD;
+    background: #a5ecfd;
     margin-inline: rem(6);
     cursor: pointer;
     border: none;
@@ -308,7 +285,7 @@
 }
 
 .carousel__controls > button[aria-current] {
-  --colour-active-thumbnail: var(--colour-info); 
+  --colour-active-thumbnail: var(--colour-info);
   border-color: var(--colour-active-thumbnail);
   background: var(--colour-info);
 
@@ -318,24 +295,21 @@
   margin-inline: rem(2);
 
   &:hover {
-      background: var(--colour-info);
+    background: var(--colour-info);
   }
 }
 // #endregion
 
 // #region progress bar
 .carousel__progress {
-
   text-align: center;
   margin-bottom: 1rem;
   display: none;
 }
 
-
-input[type="range"] {
-
+input[type='range'] {
   --track-size: #{rem(8)};
-  --track-colour: #A5ECFD;
+  --track-colour: #a5ecfd;
   --thumb-colour: var(--colour-info);
   --thumb-size: #{rem(16)};
   --thumb-size-outline: #{rem(0)};
@@ -352,35 +326,44 @@ input[type="range"] {
   appearance: none;
 }
 
-
-// Track Styles 
-input[type="range"]::-webkit-slider-runnable-track {
-
+// Track Styles
+input[type='range']::-webkit-slider-runnable-track {
   background: var(--track-colour);
   height: var(--track-size);
   border-radius: rem(9);
 }
 
-input[type="range"]::-moz-range-track {
+input[type='range']::-moz-range-track {
   background: var(--track-colour);
   height: var(--track-size);
   border-radius: rem(9);
 }
 
 // Extended track functionality
-input[type="range"]::-webkit-slider-runnable-track {
-
-  background: linear-gradient(to right, var(--track-colour), var(--track-colour) var(--start-percent, 0%), var(--thumb-colour) var(--start-percent, 0%), var(--thumb-colour) calc(var(--percent, 0%)), var(--track-colour) calc(var(--percent, 0%)));
+input[type='range']::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    var(--track-colour),
+    var(--track-colour) var(--start-percent, 0%),
+    var(--thumb-colour) var(--start-percent, 0%),
+    var(--thumb-colour) calc(var(--percent, 0%)),
+    var(--track-colour) calc(var(--percent, 0%))
+  );
 }
 
-input[type="range"]::-moz-range-track {
-  
-  background: linear-gradient(to right, var(--track-colour), var(--track-colour) var(--start-percent, 0%), var(--thumb-colour) var(--start-percent, 0%), var(--thumb-colour) calc(var(--percent, 0%)), var(--track-colour) calc(var(--percent, 0%)));
+input[type='range']::-moz-range-track {
+  background: linear-gradient(
+    to right,
+    var(--track-colour),
+    var(--track-colour) var(--start-percent, 0%),
+    var(--thumb-colour) var(--start-percent, 0%),
+    var(--thumb-colour) calc(var(--percent, 0%)),
+    var(--track-colour) calc(var(--percent, 0%))
+  );
 }
-
 
 // Thumb Styles
-input[type="range"]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
   margin-top: rem(-4); /* Centers thumb on the track */
@@ -393,7 +376,7 @@ input[type="range"]::-webkit-slider-thumb {
   pointer-events: all;
 }
 
-input[type="range"]::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
   border: none; /*Removes extra border that FF applies*/
   background-color: var(--thumb-colour); /*Removes default border-radius that FF applies*/
   height: var(--thumb-size);
@@ -404,148 +387,188 @@ input[type="range"]::-moz-range-thumb {
   pointer-events: all;
 }
 
-// Focus Styles 
-input[type="range"]:focus {
+// Focus Styles
+input[type='range']:focus {
   outline: none;
 }
 
-input[type="range"]:hover::-webkit-slider-thumb,
-input[type="range"]:focus::-webkit-slider-thumb {
+input[type='range']:hover::-webkit-slider-thumb,
+input[type='range']:focus::-webkit-slider-thumb {
   outline: var(--thumb-size-outline) solid var(--thumb-colour);
 }
 
-input[type="range"]:active::-webkit-slider-thumb {
+input[type='range']:active::-webkit-slider-thumb {
   outline: var(--thumb-size-outline) solid var(--thumb-colour);
 }
 
-input[type="range"]:hover::-moz-range-thumb,
-input[type="range"]:focus::-moz-range-thumb {
+input[type='range']:hover::-moz-range-thumb,
+input[type='range']:focus::-moz-range-thumb {
   outline: var(--thumb-size-outline) solid var(--thumb-colour);
 }
-input[type="range"]:focus::-moz-range-thumb {
+input[type='range']:focus::-moz-range-thumb {
   outline: var(--thumb-size-outline) solid var(--thumb-colour);
 }
-
-
-
-
 
 // #endregion
 
 // #region Hide buttons and pips
-.carousel__btns:has(~ .carousel__controls button:first-child:nth-child(1):last-child){
+.carousel__btns:has(~ .carousel__controls button:first-child:nth-child(1):last-child) {
   display: none;
 }
 
-.carousel__controls:has(button:nth-child(5)){
+.carousel__controls:has(button:nth-child(5)) {
   display: none;
 }
-.carousel__controls:has(button:nth-child(5)) ~ .carousel__progress{
+.carousel__controls:has(button:nth-child(5)) ~ .carousel__progress {
   display: block;
 }
 
 @container (min-width: 36em) {
-
-  :host([data-smcols="2"]) .carousel__controls > button:not(:nth-child(odd)),
-  :host([data-smcols="3"]) .carousel__controls > button:not(:nth-child(3n+1)),
-  :host([data-smcols="4"]) .carousel__controls > button:not(:nth-child(4n+1)) {
+  :host([data-smcols='2']) .carousel__controls > button:not(:nth-child(odd)),
+  :host([data-smcols='3']) .carousel__controls > button:not(:nth-child(3n + 1)),
+  :host([data-smcols='4']) .carousel__controls > button:not(:nth-child(4n + 1)) {
     display: none;
   }
 
   // Make sure that we dont just have one pip showing
-  :host([data-smcols="2"]) .carousel__controls:has(button:first-child:nth-last-child(2)),
-  :host([data-smcols="3"]) .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))),
-  :host([data-smcols="4"]) .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3), button:first-child:nth-last-child(4))),
-  :host([data-smcols="2"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
-  :host([data-smcols="3"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)), :host([data-smcols="3"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)),
-  :host([data-smcols="4"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)), :host([data-smcols="4"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)), :host([data-smcols="4"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(4)) {
+  :host([data-smcols='2']) .carousel__controls:has(button:first-child:nth-last-child(2)),
+  :host([data-smcols='3'])
+    .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))),
+  :host([data-smcols='4'])
+    .carousel__controls:has(
+      :is(
+        button:first-child:nth-last-child(2),
+        button:first-child:nth-last-child(3),
+        button:first-child:nth-last-child(4)
+      )
+    ),
+  :host([data-smcols='2']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
+  :host([data-smcols='3']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
+  :host([data-smcols='3']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)),
+  :host([data-smcols='4']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
+  :host([data-smcols='4']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)),
+  :host([data-smcols='4']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(4)) {
     display: none;
   }
 
   // Show slider
-  :host([data-smcols]) .carousel__controls{
+  :host([data-smcols]) .carousel__controls {
     display: block;
   }
-  :host([data-smcols]) .carousel__controls ~ .carousel__progress{
-    display: none;
-  }
-  
-  :host([data-smcols="2"]) .carousel__controls:has(button:nth-child(10)),
-  :host([data-smcols="3"]) .carousel__controls:has(button:nth-child(15)),
-  :host([data-smcols="4"]) .carousel__controls:has(button:nth-child(20)){
+  :host([data-smcols]) .carousel__controls ~ .carousel__progress {
     display: none;
   }
 
-  :host([data-smcols="2"]) .carousel__controls:has(button:nth-child(10)) ~ .carousel__progress,
-  :host([data-smcols="3"]) .carousel__controls:has(button:nth-child(15)) ~ .carousel__progress,
-  :host([data-smcols="4"]) .carousel__controls:has(button:nth-child(20)) ~ .carousel__progress{
+  :host([data-smcols='2']) .carousel__controls:has(button:nth-child(10)),
+  :host([data-smcols='3']) .carousel__controls:has(button:nth-child(15)),
+  :host([data-smcols='4']) .carousel__controls:has(button:nth-child(20)) {
+    display: none;
+  }
+
+  :host([data-smcols='2']) .carousel__controls:has(button:nth-child(10)) ~ .carousel__progress,
+  :host([data-smcols='3']) .carousel__controls:has(button:nth-child(15)) ~ .carousel__progress,
+  :host([data-smcols='4']) .carousel__controls:has(button:nth-child(20)) ~ .carousel__progress {
     display: block;
   }
 }
 
 @container (min-width: 62em) {
-
   :host([data-mdcols]) .carousel__controls > button {
-    display: inline-block!important;
-  }
-  
-  :host([data-mdcols]) .carousel__controls {
-    display: block!important;
+    display: inline-block !important;
   }
 
-  :host([data-mdcols="2"]) .carousel__controls > button:not(:nth-child(odd)),
-  :host([data-mdcols="3"]) .carousel__controls > button:not(:nth-child(3n+1)),
-  :host([data-mdcols="4"]) .carousel__controls > button:not(:nth-child(4n+1)),
-  :host([data-mdcols="5"]) .carousel__controls > button:not(:nth-child(5n+1)),
-  :host([data-mdcols="6"]) .carousel__controls > button:not(:nth-child(6n+1)) {
-    display: none!important;
+  :host([data-mdcols]) .carousel__controls {
+    display: block !important;
+  }
+
+  :host([data-mdcols='2']) .carousel__controls > button:not(:nth-child(odd)),
+  :host([data-mdcols='3']) .carousel__controls > button:not(:nth-child(3n + 1)),
+  :host([data-mdcols='4']) .carousel__controls > button:not(:nth-child(4n + 1)),
+  :host([data-mdcols='5']) .carousel__controls > button:not(:nth-child(5n + 1)),
+  :host([data-mdcols='6']) .carousel__controls > button:not(:nth-child(6n + 1)) {
+    display: none !important;
   }
 
   // Make sure that we dont just have one pip showing
-  :host([data-mdcols="2"]) .carousel__controls:has(button:first-child:nth-last-child(2)),
-  :host([data-mdcols="3"]) .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))),
-  :host([data-mdcols="4"]) .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3), button:first-child:nth-last-child(4))),
-  :host([data-mdcols="5"]) .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5))),
-  :host([data-mdcols="6"]) .carousel__controls:has(:is(button:first-child:nth-last-child(2),button:first-child:nth-last-child(3),button:first-child:nth-last-child(4),button:first-child:nth-last-child(5),button:first-child:nth-last-child(6))),
-  :host([data-mdcols="2"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
-  :host([data-mdcols="3"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)), :host([data-mdcols="3"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)),
-  :host([data-mdcols="4"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)), :host([data-mdcols="4"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)), :host([data-mdcols="4"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(4)) 
-  :host([data-mdcols="5"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)), :host([data-mdcols="5"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)), :host([data-mdcols="5"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(4)), :host([data-mdcols="5"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(5)),
-  :host([data-mdcols="6"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)), :host([data-mdcols="6"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)), :host([data-mdcols="6"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(4)), :host([data-mdcols="6"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(5)), :host([data-mdcols="6"]) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(6))
-  {
-  
-  display: none!important;
+  :host([data-mdcols='2']) .carousel__controls:has(button:first-child:nth-last-child(2)),
+  :host([data-mdcols='3'])
+    .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))),
+  :host([data-mdcols='4'])
+    .carousel__controls:has(
+      :is(
+        button:first-child:nth-last-child(2),
+        button:first-child:nth-last-child(3),
+        button:first-child:nth-last-child(4)
+      )
+    ),
+  :host([data-mdcols='5'])
+    .carousel__controls:has(
+      :is(
+        button:first-child:nth-last-child(2),
+        button:first-child:nth-last-child(3),
+        button:first-child:nth-last-child(4),
+        button:first-child:nth-last-child(5)
+      )
+    ),
+  :host([data-mdcols='6'])
+    .carousel__controls:has(
+      :is(
+        button:first-child:nth-last-child(2),
+        button:first-child:nth-last-child(3),
+        button:first-child:nth-last-child(4),
+        button:first-child:nth-last-child(5),
+        button:first-child:nth-last-child(6)
+      )
+    ),
+  :host([data-mdcols='2']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
+  :host([data-mdcols='3']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
+  :host([data-mdcols='3']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)),
+  :host([data-mdcols='4']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
+  :host([data-mdcols='4']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)),
+  :host([data-mdcols='4'])
+    .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(4))
+    :host([data-mdcols='5'])
+    .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
+  :host([data-mdcols='5']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)),
+  :host([data-mdcols='5']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(4)),
+  :host([data-mdcols='5']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(5)),
+  :host([data-mdcols='6']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(2)),
+  :host([data-mdcols='6']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(3)),
+  :host([data-mdcols='6']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(4)),
+  :host([data-mdcols='6']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(5)),
+  :host([data-mdcols='6']) .carousel__btns:has(~ .carousel__controls button:first-child:nth-last-child(6)) {
+    display: none !important;
   }
 
   // Show slider
-  :host([data-mdcols]) .carousel__controls{
-    display: block!important;
+  :host([data-mdcols]) .carousel__controls {
+    display: block !important;
   }
-  :host([data-mdcols]) .carousel__controls ~ .carousel__progress{
-    display: none!important;
-  }
-  
-  :host([data-mdcols="2"]) .carousel__controls:has(button:nth-child(10)),
-  :host([data-mdcols="3"]) .carousel__controls:has(button:nth-child(15)),
-  :host([data-mdcols="4"]) .carousel__controls:has(button:nth-child(20)),
-  :host([data-mdcols="5"]) .carousel__controls:has(button:nth-child(25)),
-  :host([data-mdcols="6"]) .carousel__controls:has(button:nth-child(30)){
-    display: none!important;
+  :host([data-mdcols]) .carousel__controls ~ .carousel__progress {
+    display: none !important;
   }
 
-  :host([data-mdcols="2"]) .carousel__controls:has(button:nth-child(10)) ~ .carousel__progress,
-  :host([data-mdcols="3"]) .carousel__controls:has(button:nth-child(15)) ~ .carousel__progress,
-  :host([data-mdcols="4"]) .carousel__controls:has(button:nth-child(20)) ~ .carousel__progress,
-  :host([data-mdcols="5"]) .carousel__controls:has(button:nth-child(25)) ~ .carousel__progress,
-  :host([data-mdcols="6"]) .carousel__controls:has(button:nth-child(30)) ~ .carousel__progress{
-    display: block!important;
+  :host([data-mdcols='2']) .carousel__controls:has(button:nth-child(10)),
+  :host([data-mdcols='3']) .carousel__controls:has(button:nth-child(15)),
+  :host([data-mdcols='4']) .carousel__controls:has(button:nth-child(20)),
+  :host([data-mdcols='5']) .carousel__controls:has(button:nth-child(25)),
+  :host([data-mdcols='6']) .carousel__controls:has(button:nth-child(30)) {
+    display: none !important;
+  }
+
+  :host([data-mdcols='2']) .carousel__controls:has(button:nth-child(10)) ~ .carousel__progress,
+  :host([data-mdcols='3']) .carousel__controls:has(button:nth-child(15)) ~ .carousel__progress,
+  :host([data-mdcols='4']) .carousel__controls:has(button:nth-child(20)) ~ .carousel__progress,
+  :host([data-mdcols='5']) .carousel__controls:has(button:nth-child(25)) ~ .carousel__progress,
+  :host([data-mdcols='6']) .carousel__controls:has(button:nth-child(30)) ~ .carousel__progress {
+    display: block !important;
   }
 }
 // #endregion
 
-// #region thumbnails 
+// #region thumbnails
 :host(.thumbnails) .carousel__controls {
-  display: flex!important;
+  display: flex !important;
   flex-wrap: wrap;
   max-width: 100%;
   overflow: visible;
@@ -556,7 +579,7 @@ input[type="range"]:focus::-moz-range-thumb {
 
     width: 6rem;
     height: auto;
-    aspect-ratio: var(--carousel-image-aspect-ratio,3 / 2);
+    aspect-ratio: var(--carousel-image-aspect-ratio, 3 / 2);
 
     border-radius: 0;
     position: relative;
@@ -570,7 +593,7 @@ input[type="range"]:focus::-moz-range-thumb {
       object-fit: cover;
       margin: 0;
     }
-    
+
     &[aria-current] {
       outline: 2px solid var(--colour-info);
     }
@@ -578,28 +601,26 @@ input[type="range"]:focus::-moz-range-thumb {
 }
 
 :host(.thumbnails) .carousel {
-
   .carousel__btns {
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
   }
 
-  .btn-next, 
+  .btn-next,
   .btn-prev {
-    
     position: relative;
-    margin: 0!important;
+    margin: 0 !important;
   }
 
   .carousel__progress {
-    display: none!important;
+    display: none !important;
   }
 }
 // #endregion
 
 // #region Turn carousel slide into image holder
-::slotted(div.image__wrapper){
+::slotted(div.image__wrapper) {
   width: 100%;
-  aspect-ratio: var(--carousel-image-aspect-ratio,3 / 2);
+  aspect-ratio: var(--carousel-image-aspect-ratio, 3 / 2);
   position: relative;
 }
 // #endregion

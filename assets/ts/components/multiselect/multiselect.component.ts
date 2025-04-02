@@ -1,20 +1,21 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
-  "event": "customElementRegistered",
-  "element": "mutliselect"
+  event: 'customElementRegistered',
+  element: 'mutliselect',
 });
 
 class iamMultiselect extends HTMLElement {
-
-  constructor(){
+  constructor() {
     super();
-    this.attachShadow({ mode: 'open'});
+    this.attachShadow({ mode: 'open' });
 
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets'
-    const coreCSS = document.body.hasAttribute('data-core-css') ? document.body.getAttribute('data-core-css') : `${assetLocation}/css/core.min.css`;
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+    const coreCSS = document.body.hasAttribute('data-core-css')
+      ? document.body.getAttribute('data-core-css')
+      : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/multiselect.css";`;
 
     const template = document.createElement('template');
@@ -24,7 +25,7 @@ class iamMultiselect extends HTMLElement {
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <label for="search"> <slot name="feedback"></slot></label>
+    <label for="search" class="mb-0"><span class="inner-label label"></span> <slot name="feedback"></slot>
     <div class="outer">
     <div class="wrapper">
       
@@ -37,141 +38,145 @@ class iamMultiselect extends HTMLElement {
       <button id="clear"><span class="visually-hidden">Clear</span></button>
     </div>
     </div>
+    </label>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-	connectedCallback() {
-
-    let multiselect = this;
-    let form = this.closest('form');
-    let wrapper = this.shadowRoot.querySelector('.wrapper');
-    let search = multiselect.shadowRoot.querySelector('#search');
-    let button = multiselect.shadowRoot.querySelector('#clear');
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const multiselect = this;
+    const form = this.closest('form');
+    const wrapper = this.shadowRoot.querySelector('.wrapper');
+    const search = multiselect.shadowRoot.querySelector('#search');
+    const button = multiselect.shadowRoot.querySelector('#clear');
     let order = 0;
-    let label = multiselect.shadowRoot.querySelector('label');
+    const innerLabel = multiselect.shadowRoot.querySelector('label .inner-label');
 
-    
-    label.innerHTML = multiselect.getAttribute('data-label');
+    innerLabel.innerHTML = multiselect.getAttribute('data-label');
 
-    if(multiselect.hasAttribute('placeholder')){
-
+    if (multiselect.hasAttribute('placeholder')) {
       search.setAttribute('placeholder', multiselect.getAttribute('placeholder'));
     }
 
-    multiselect.setAttribute('data-error','true');
+    multiselect.setAttribute('data-error', 'true');
 
     // If in form and is required lets watch for the form being submitted
-    if(form && multiselect.hasAttribute('data-is-required')){
-
-      let observer = new MutationObserver(function(mutations) {
-        mutations.forEach(function(mutationRecord) {
+    if (form && multiselect.hasAttribute('data-is-required')) {
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutationRecord) {
           const targetElement = mutationRecord.target as HTMLElement;
 
           console.log(targetElement);
 
-          if (targetElement.classList.contains("was-validated")) {
+          if (targetElement.classList.contains('was-validated')) {
             wrapper.classList.add('was-validated');
           } else {
             wrapper.classList.remove('was-validated');
-          };
-        })
+          }
+        });
       });
 
-      if (form.classList.contains("was-validated")) {
+      if (form.classList.contains('was-validated')) {
         wrapper.classList.add('was-validated');
       } else {
         wrapper.classList.remove('was-validated');
-      };
+      }
 
       observer.observe(form, {
-        attributes : true,
-        attributeFilter : ['style', 'class']
-       });
+        attributes: true,
+        attributeFilter: ['style', 'class'],
+      });
     }
 
     // Set the correct attributes
-    function setItem(inputToSet){
-
-      if(inputToSet.checked == false){
-
+    function setItem(inputToSet): void {
+      if (inputToSet.checked == false) {
         inputToSet.closest('label').removeAttribute('slot');
         inputToSet.closest('label').removeAttribute('style');
         inputToSet.closest('label').removeAttribute('data-order');
-      }
-      else {
-
+      } else {
         order++;
-        
-        inputToSet.closest('label').setAttribute('slot','checked');
-        inputToSet.closest('label').setAttribute('style',`--order:${order};`);
-        inputToSet.closest('label').setAttribute('data-order',order);
+
+        inputToSet.closest('label').setAttribute('slot', 'checked');
+        inputToSet.closest('label').setAttribute('style', `--order:${order};`);
+        inputToSet.closest('label').setAttribute('data-order', order);
       }
 
       // check for errors
-      if(multiselect.querySelector('label[slot="checked"]')){
+      if (multiselect.querySelector('label[slot="checked"]')) {
         wrapper.classList.add('filled');
         multiselect.removeAttribute('data-error');
 
         search.removeAttribute('placeholder');
-      }
-      else {
+      } else {
         wrapper.classList.remove('filled');
-        multiselect.setAttribute('data-error','true');
+        multiselect.setAttribute('data-error', 'true');
 
-        if(multiselect.hasAttribute('placeholder')){
-
+        if (multiselect.hasAttribute('placeholder')) {
           search.setAttribute('placeholder', multiselect.getAttribute('placeholder'));
         }
       }
-
-
     }
 
     // Set on load
-    Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]:checked`)).forEach((checkbox, index) => {
-
+    Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]:checked`)).forEach((checkbox) => {
       setItem(checkbox);
     });
 
-
     // Filter list
-    search.addEventListener('input', (event) => {
+    search.addEventListener('input', () => {
+      Array.from(multiselect.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
+        const checkbox = label.querySelector('input');
+        const searchValue = checkbox.value;
+        const labelText = label.textContent;
 
-      Array.from(multiselect.querySelectorAll(`label:not([slot="checked"])`)).forEach((label, index) => {
-
-        let checkbox = label.querySelector('input');
-        let searchValue = checkbox.value;
-        let labelText = label.textContent;
-        
-        if(searchValue.toLowerCase().includes(search.value.toLowerCase()) || labelText.toLowerCase().includes(search.value.toLowerCase())){
-          label.removeAttribute('slot')
-        }
-        else {
-          label.setAttribute('slot','notmatched');
+        if (
+          searchValue.toLowerCase().includes(search.value.toLowerCase()) ||
+          labelText.toLowerCase().includes(search.value.toLowerCase())
+        ) {
+          label.removeAttribute('slot');
+        } else {
+          label.setAttribute('slot', 'notmatched');
         }
       });
     });
 
+    // Add a delayed hover effect for non hover devices
+    let hoverTimeout;
+    multiselect.addEventListener('focus', () => {
+      multiselect.classList.add('hover');
+      clearTimeout(hoverTimeout);
+    });
+
+    search.addEventListener('blur', () => {
+      clearTimeout(hoverTimeout);
+      hoverTimeout = setTimeout(function () {
+        multiselect.classList.remove('hover');
+      }, 1000);
+    });
+
     // Set items
     multiselect.addEventListener('change', (event) => {
-
-      if (event && event.target instanceof HTMLElement && event.target.closest('input[type="checkbox"]')){
-        let checkbox = event.target.closest('input[type="checkbox"]');
+      if (event && event.target instanceof HTMLElement && event.target.closest('input[type="checkbox"]')) {
+        const checkbox = event.target.closest('input[type="checkbox"]');
 
         setItem(checkbox);
 
         search.focus();
+        clearTimeout(hoverTimeout);
+        multiselect.classList.add('hover');
+        hoverTimeout = setTimeout(function () {
+          multiselect.classList.remove('hover');
+        }, 5000);
       }
     });
 
     // Clear all
-    button.addEventListener("click", function(event) {
-
-      Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox, index) => {
-
+    button.addEventListener('click', function () {
+      Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
         checkbox.checked = false;
-        
+
         setItem(checkbox);
       });
 
@@ -179,61 +184,53 @@ class iamMultiselect extends HTMLElement {
     });
 
     // Add some keyboard features to keep it accessible
-    multiselect.addEventListener("keydown", function(event) {
-
+    multiselect.addEventListener('keydown', function (event) {
       const activeElement = document.activeElement;
 
-      switch (event.key) { // change to event.key to key to use the above variable
-        case "ArrowUp":
+      switch (
+        event.key // change to event.key to key to use the above variable
+      ) {
+        case 'ArrowUp':
           // Up pressed
           event.preventDefault();
 
-          if(activeElement.hasAttribute('type') && activeElement.getAttribute('type') == "checkbox"){
+          if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
+            const arrCheckboxes = multiselect.querySelectorAll(`label:not([slot="checked"]):not([slot="checked"])`);
 
-            let arrCheckboxes = multiselect.querySelectorAll(`label:not([slot="checked"]):not([slot="checked"])`);
+            const activeIndex = Array.from(arrCheckboxes).indexOf(activeElement.closest('label'));
+            const prevCheckbox = Array.from(arrCheckboxes)[activeIndex - 1];
 
-            let activeIndex = Array.from(arrCheckboxes).indexOf(activeElement.closest('label'));
-            let prevCheckbox =  Array.from(arrCheckboxes)[activeIndex-1];
-            
-            if(prevCheckbox)
-              prevCheckbox.focus();
-            else
-              search.focus();
+            if (prevCheckbox) prevCheckbox.focus();
+            else search.focus();
           }
 
           break;
-        case "ArrowDown":
+        case 'ArrowDown':
           // Down pressed
           event.preventDefault();
 
-          if(activeElement == multiselect){
-
+          if (activeElement == multiselect) {
             multiselect.querySelector('label:not([slot="checked"]):not([slot="checked"])').focus();
+          } else if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
+            const activeValue = activeElement.value;
+
+            const nextCheckbox = multiselect.querySelector(
+              `label:has(input[value="${activeValue}"]) ~ label:not([slot="checked"]):not([slot="checked"])`
+            );
+
+            if (nextCheckbox) nextCheckbox.focus();
           }
-          else if(activeElement.hasAttribute('type') && activeElement.getAttribute('type') == "checkbox"){
 
-            let activeValue = activeElement.value;
-
-            let nextCheckbox = multiselect.querySelector(`label:has(input[value="${activeValue}"]) ~ label:not([slot="checked"]):not([slot="checked"])`);
-
-            if(nextCheckbox)
-              nextCheckbox.focus();
-          }
-        
           break;
-        case "Enter":
-            
+        case 'Enter':
           event.stopPropagation();
           event.preventDefault();
 
-          if(activeElement.hasAttribute('type') && activeElement.getAttribute('type') == "checkbox"){
-            
-            if(activeElement.checked == false)
-              activeElement.checked = true;
-            else
-              activeElement.checked = false;
+          if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
+            if (activeElement.checked == false) activeElement.checked = true;
+            else activeElement.checked = false;
           }
-          
+
           setItem(activeElement);
           search.focus();
 
@@ -241,46 +238,40 @@ class iamMultiselect extends HTMLElement {
       }
     });
 
-    function checkLastTag(){
-
-      if(order == 0)
-        return false;
+    function checkLastTag(): Element | null {
+      if (order == 0) return false;
 
       let lastTag = multiselect.querySelector(`label[data-order="${order}"]`);
 
-      if(!lastTag){
+      if (!lastTag) {
         lastTag = checkLastTag(order--);
       }
 
       return lastTag;
     }
 
-    search.addEventListener("keydown", function(event) {
+    search.addEventListener('keydown', function (event) {
+      switch (
+        event.key // change to event.key to key to use the above variable
+      ) {
+        case 'Enter':
+          const match = multiselect.querySelector(`input[value="${search.value}"]:not(:checked)`);
 
-      switch (event.key) { // change to event.key to key to use the above variable
-        case "Enter":
-          
-          let match = multiselect.querySelector(`input[value="${search.value}"]:not(:checked)`);
-
-          if(!match)
-            search.value = "";
+          if (!match) search.value = '';
 
           search.focus();
 
           break;
-        case "Backspace":
+        case 'Backspace':
+          if (!search.value) {
+            const lastTag = checkLastTag(order);
 
-          if(!search.value){
-
-            let lastTag = checkLastTag(order);
-
-            if(lastTag){
-                
-              let lastTagInput = lastTag.querySelector('input');
+            if (lastTag) {
+              const lastTagInput = lastTag.querySelector('input');
               lastTagInput.checked = false;
               setItem(lastTagInput);
             }
-            
+
             search.focus();
           }
 
@@ -288,15 +279,12 @@ class iamMultiselect extends HTMLElement {
       }
     });
 
-
     // Fix for the inline edit multiselect
-    multiselect.addEventListener("mousedown", (event) => {
-
-      wrapper.setAttribute('data-mousedown','true');
+    multiselect.addEventListener('mousedown', () => {
+      wrapper.setAttribute('data-mousedown', 'true');
     });
 
-    multiselect.addEventListener("mouseup", (event) => {
-
+    multiselect.addEventListener('mouseup', () => {
       wrapper.removeAttribute('data-mousedown');
     });
   }

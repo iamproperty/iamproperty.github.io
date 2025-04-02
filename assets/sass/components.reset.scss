@@ -1,8 +1,0 @@
-@charset "UTF-8";
-
-@use "_fonts";
-@use "_corefiles.scss" with (
-  $root: ":host", // copied directory from iamkey repo
-  $layers: "false"
-);
-

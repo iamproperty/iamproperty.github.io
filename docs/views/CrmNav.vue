@@ -1,7 +1,6 @@
 <template>
   <nav>
     <Nav class="nav--large nav--btn-compact nav--dual-buttons">
-      
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
           <title>iam key</title>
@@ -9,52 +8,51 @@
         </svg>
       </a>
 
-
       <a href="/" class="fw-bold">My day</a>
       <details>
-          <summary>Lettings</summary>
-          <div data-title="Lettings">              
-              
-            <a href="/">Lettings dashboard</a>
-            <details>
-              <summary>Transaction</summary>
-              <div>
-                <a href="/">Transaction dashboard</a>
-                <a href="/">Property match</a>
-                <a href="/">Applicant match</a>
-                <a href="/">Properties</a>
-                <a href="/">Landlords</a>
-                <a href="/">Tenants</a>
-                <a href="/">Applicants</a>
-                <a href="/">Guarantors</a>
-                <a href="/">Letzone <span class="badge bg-warning"><i class="fa-regular fa-stars"></i>Beta</span></a>
-                <a href="/">Letzone</a>
-                <a href="/">Upload to portals</a>
-                <a href="/">E-sign</a>
-              </div>
-            </details>
+        <summary>Lettings</summary>
+        <div data-title="Lettings">
+          <a href="/">Lettings dashboard</a>
+          <details>
+            <summary>Transaction</summary>
+            <div>
+              <a href="/">Transaction dashboard</a>
+              <a href="/">Property match</a>
+              <a href="/">Applicant match</a>
+              <a href="/">Properties</a>
+              <a href="/">Landlords</a>
+              <a href="/">Tenants</a>
+              <a href="/">Applicants</a>
+              <a href="/">Guarantors</a>
+              <a href="/"
+                >Letzone <span class="badge bg-warning"><i class="fa-regular fa-stars"></i>Beta</span></a
+              >
+              <a href="/">Letzone</a>
+              <a href="/">Upload to portals</a>
+              <a href="/">E-sign</a>
+            </div>
+          </details>
 
-            <details>
-              <summary>Property Management</summary>
-              <div data-title="Property Management">
-                <a href="/">Property Management dashboard</a>
-                <a href="/">Create maintenance job</a>
-                <a href="/">Maintenance jobs</a>
-                <a href="/">Feedback centre</a>
-                <a href="/">Invoices</a>
-                <a href="/">Inspections</a>
-                <a href="/">Landlords</a>
-                <a href="/">Tenants</a>
-                <a href="/">Contractors</a>
-                <a href="/">E-sign</a>
-              </div>
-            </details>
-
-          </div>
+          <details>
+            <summary>Property Management</summary>
+            <div data-title="Property Management">
+              <a href="/">Property Management dashboard</a>
+              <a href="/">Create maintenance job</a>
+              <a href="/">Maintenance jobs</a>
+              <a href="/">Feedback centre</a>
+              <a href="/">Invoices</a>
+              <a href="/">Inspections</a>
+              <a href="/">Landlords</a>
+              <a href="/">Tenants</a>
+              <a href="/">Contractors</a>
+              <a href="/">E-sign</a>
+            </div>
+          </details>
+        </div>
       </details>
       <details>
         <summary>Sales</summary>
-        <div data-title="Sales">                
+        <div data-title="Sales">
           <a href="/">Sales Dashboard</a>
           <a href="/">Property match</a>
           <a href="/">Applicant match</a>
@@ -70,9 +68,9 @@
 
       <details>
         <summary>Accounts</summary>
-        <div data-title="Accounts">                
+        <div data-title="Accounts">
           <a href="/">Accounts dashboard</a>
-          
+
           <details>
             <summary>General</summary>
             <div data-title="Sales">
@@ -112,15 +110,13 @@
               <a href="/">Transaction sheet</a>
             </div>
           </details>
-
         </div>
       </details>
       <details>
         <summary>Reporting</summary>
-        <div data-title="Reporting">                 
-          <a href="/">Management information</a>  
+        <div data-title="Reporting">
+          <a href="/">Management information</a>
           <a href="/">Branch activity</a>
-
 
           <details>
             <summary>Reports</summary>
@@ -132,7 +128,6 @@
               <a href="/">Portal batch reports</a>
             </div>
           </details>
-
         </div>
       </details>
       <details>
@@ -146,26 +141,28 @@
         </div>
       </details>
 
-
       <button class="btn btn-secondary btn-compact fa-solid fa-search" slot="dual">Search</button>
 
       <div class="dialog__wrapper dialog-overflow d-none d-md-block" slot="dual">
         <button class="btn btn-secondary btn-compact fa-bell m-0" data-number="2">Notifications</button>
         <dialog class="dialog--list" id="notifications">
-                
-          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         </dialog>
       </div>
 
-      <button class="btn btn-secondary btn-compact fa-bell m-0 d-md-none" slot="dual" data-number="2" data-modal="modal-passive">Notifications</button>
-
-
+      <button
+        class="btn btn-secondary btn-compact fa-bell m-0 d-md-none"
+        slot="dual"
+        data-number="2"
+        data-modal="modal-passive"
+      >
+        Notifications
+      </button>
 
       <div class="dialog__wrapper dialog-overflow" slot="dual">
         <button class="btn btn-secondary btn-compact fa-grid fa-solid m-0">More actions</button>
         <dialog class="dialog--list">
-                
-          <a href="/"><i class="fa-regular fa-upload"></i>Upload lead</a> 
+          <a href="/"><i class="fa-regular fa-upload"></i>Upload lead</a>
           <a href="/"><i class="fa-solid fa-plus"></i>Add viewing</a>
           <a href="/"><i class="fa-solid fa-plus"></i>Order marketing</a>
         </dialog>
@@ -175,11 +172,16 @@
       <a href="/standalone/openview" slot="secondary" class="selected">CRM</a>
       <a href="/standalone/movebutler" slot="secondary">movebutler</a>
       <a href="/standalone/agent" slot="secondary">iamsold</a>
-      
-      <div class="nav--menu" data-title="My account" data-open-title="John Smith" data-icon="fa-user fa-solid" slot="menus">
-  
-            
-        <a href="/">Active branches</a> <!-- Edit Agent Landing Page -->
+
+      <div
+        class="nav--menu"
+        data-title="My account"
+        data-open-title="John Smith"
+        data-icon="fa-user fa-solid"
+        slot="menus"
+      >
+        <a href="/">Active branches</a>
+        <!-- Edit Agent Landing Page -->
         <a href="/" class="mb-0">Account settings</a>
 
         <details>
@@ -198,18 +200,16 @@
         <a href="/cp/account-overview">Help centre</a>
         <a href="/">Log out</a>
       </div>
-
     </Nav>
   </nav>
 </template>
 
-
 <script>
-import Nav from '@/components/Nav/Nav.vue'
+  import Nav from '@/components/Nav/Nav.vue';
 
-export default {
-  components: {
-    Nav
-  }
-}
+  export default {
+    components: {
+      Nav,
+    },
+  };
 </script>

@@ -1,37 +1,33 @@
-// @ts-nocheck
-export const trackComponentRegistered = (componentName: string) => {
+export const trackComponentRegistered = (componentName: string): void => {
   // Data layer Web component created
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    "event": "customElementRegistered",
-    "element": componentName
+    event: 'customElementRegistered',
+    element: componentName,
   });
 };
 
-export const trackComponent = (component:any, componentName:string, trackEvents:any) => {
-
+export const trackComponent = (component: any, componentName: string, trackEvents: any): boolean => {
   // Data layer Web component created
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({
-    "event": "customElementAdded",
-    "element": componentName
+    event: 'customElementAdded',
+    element: componentName,
   });
 
-  trackEvents.forEach((eventName:string) => {
-    component.addEventListener(eventName, function(event:any){
-
-      let eventDetails = {
-        "event": eventName,
-        "element": componentName,
-        "target": event.target
+  trackEvents.forEach((eventName: string) => {
+    component.addEventListener(eventName, function (event: any) {
+      const eventDetails = {
+        event: eventName,
+        element: componentName,
+        target: event.target,
       };
 
-      Object.keys(event.detail).forEach((eventKey:string) => {
-
+      Object.keys(event.detail).forEach((eventKey: string) => {
         const eventDetail = event.detail[eventKey];
         eventDetails[eventKey] = eventDetail;
       });
-      
+
       window.dataLayer.push(eventDetails);
     });
   });

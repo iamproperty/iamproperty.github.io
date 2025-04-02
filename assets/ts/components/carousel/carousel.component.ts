@@ -1,16 +1,16 @@
-// @ts-nocheck
-import {generateThumbnailList,generatePipsHTML,carousel} from "../../modules/carousel";
-import {trackComponent, trackComponentRegistered} from "../_global";
+import { generateThumbnailList, generatePipsHTML, carousel } from '../../modules/carousel';
+import { trackComponent, trackComponentRegistered } from '../_global';
 
-trackComponentRegistered("iam-carousel");
+trackComponentRegistered('iam-carousel');
 
 class iamCarousel extends HTMLElement {
-
-  constructor(){
+  constructor() {
     super();
-    this.attachShadow({ mode: 'open'});
+    this.attachShadow({ mode: 'open' });
 
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
 
     const loadCSS = `@import "${assetLocation}/css/components/carousel.component.css";`;
 
@@ -47,51 +47,46 @@ class iamCarousel extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-	connectedCallback() {
-    
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const carouselComponent = this;
-    const carouselElement = this.shadowRoot.querySelector('.carousel');
-    const row = this.shadowRoot.querySelector('.row');
+    //const carouselElement = this.shadowRoot.querySelector('.carousel');
+    //const row = this.shadowRoot.querySelector('.row');
 
     let thumbnailImages = [];
 
     const carouselControls = this.shadowRoot.querySelector('.carousel__controls');
 
-
-
-    if(carouselComponent.querySelector('[data-thumbnail]')){
+    if (carouselComponent.querySelector('[data-thumbnail]')) {
       thumbnailImages = generateThumbnailList(carouselComponent);
       carouselComponent.classList.add('thumbnails');
     }
 
     // populate the pips
-    carouselControls.innerHTML = generatePipsHTML(carouselComponent,thumbnailImages);
+    carouselControls.innerHTML = generatePipsHTML(carouselComponent, thumbnailImages);
 
-
-    Array.from(carouselComponent.querySelectorAll(':scope > div > img:first-child:last-child, :scope > div > picture:first-child:last-child img')).forEach((image, index) => {
-        
-      image.style.inset = "0 0.5rem 0 0.5rem";
-      image.style.position = "absolute";
-      image.style.width = "calc(100% - 1rem)";
-      image.style.height = "100%";
-      image.style['object-fit'] = "cover";
+    Array.from(
+      carouselComponent.querySelectorAll(
+        ':scope > div > img:first-child:last-child, :scope > div > picture:first-child:last-child img'
+      )
+    ).forEach((image) => {
+      image.style.inset = '0 0.5rem 0 0.5rem';
+      image.style.position = 'absolute';
+      image.style.width = 'calc(100% - 1rem)';
+      image.style.height = '100%';
+      image.style['object-fit'] = 'cover';
 
       image.closest('div').classList.add('image__wrapper');
     });
 
-
     carousel(carouselComponent);
 
-    trackComponent(carouselComponent,"iam-carousel",['pip-clicked','next-clicked','prev-clicked','slider-changed']);
-  }
-
-  attributeChangedCallback(attrName, oldVal, newVal) {
-    
-
-
-
-
-
+    trackComponent(carouselComponent, 'iam-carousel', [
+      'pip-clicked',
+      'next-clicked',
+      'prev-clicked',
+      'slider-changed',
+    ]);
   }
 }
 

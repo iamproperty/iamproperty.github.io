@@ -1,84 +1,84 @@
-@use "../_func.scss" as *;
+@use '../_func' as *;
 
-iam-carousel:defined {
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  > div > *:last-child {
-    margin-bottom: 0!important;
-    padding-bottom: 0!important;
-  }
-}
-
-// Preload
-iam-carousel:not(:defined) {
-  
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: auto;
-  margin-block-end: 2rem;    
-  overflow: auto;
-
-  & > * {
-    width: 100%;
-    display: block;
-    flex: 0 0 100%;
-    padding-inline-end: 1rem;
-  }
-}
-
-// #region Carousel inside of a admin panel
-.admin-panel:has(iam-carousel){
-
-  container-type: inline-size; 
-}
-
-.admin-panel:has(iam-carousel:last-child) iam-carousel::part(carousel) {
-  margin-bottom: -1.5rem;
-}
-
-@container (min-width: 62em) {
-  .admin-panel iam-carousel {
-
-    --carousel-spacing: 1.5rem;
-    margin-inline: -1.5rem;
-
-    & > div {
-      scroll-margin-left: 1.5rem;
-      --last-item-extra: -1.5rem;
-    }
-
-    & > div:first-child {
-      margin-left: 1.5rem;
-    }
-    & > div:last-child {
-      padding-inline-end: 2rem;
-      --last-item-extra: 1.5rem;
+@include layer('components', $layers) {
+  iam-carousel:defined {
+    > div > *:last-child {
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
     }
   }
 
-}
-// #endregion
+  // Preload
+  iam-carousel:not(:defined) {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: auto;
+    margin-block-end: 2rem;
+    overflow: auto;
 
-// #region carousel in dialog 
-
-dialog:has(iam-carousel){
-
-  container-type: inline-size; 
-  --carousel-spacing: 2rem;
-
-  @include media-breakpoint-up(sm) {
-    min-width: rem(600);
-    max-width: rem(600);
-  }
-}
-
-dialog:has(iam-carousel:last-child){
-  iam-carousel::part(carousel) {
-    margin-bottom: 0!important;
+    & > * {
+      width: 100%;
+      display: block;
+      flex: 0 0 100%;
+      padding-inline-end: 1rem;
+    }
   }
 
-  iam-carousel::part(controls) {
-    margin-bottom: 0!important;
-    max-width: calc(100% - 4rem);
+  // #region Carousel inside of a admin panel
+  .admin-panel:has(iam-carousel) {
+    container-type: inline-size;
   }
+
+  .admin-panel:has(iam-carousel:last-child) iam-carousel::part(carousel) {
+    margin-bottom: -1.5rem;
+  }
+
+  @container (min-width: 62em) {
+    .admin-panel iam-carousel {
+      --carousel-spacing: 1.5rem;
+      margin-inline: -1.5rem;
+
+      & > div {
+        scroll-margin-left: 1.5rem;
+        --last-item-extra: -1.5rem;
+      }
+
+      & > div:first-child {
+        margin-left: 1.5rem;
+      }
+      & > div:last-child {
+        padding-inline-end: 2rem;
+        --last-item-extra: 1.5rem;
+      }
+    }
+  }
+  // #endregion
+
+  // #region carousel in dialog
+
+  dialog:has(iam-carousel) {
+    container-type: inline-size;
+    --carousel-spacing: 2rem;
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      min-width: rem(600);
+      max-width: rem(600);
+    }
+  }
+
+  dialog:has(iam-carousel:last-child) {
+    iam-carousel::part(carousel) {
+      margin-bottom: 0 !important;
+    }
+
+    iam-carousel::part(controls) {
+      margin-bottom: 0 !important;
+      max-width: calc(100% - 4rem);
+    }
+  }
+  // #endregion
 }
-// #endregion

@@ -1,268 +1,198 @@
-@use "sass:math";
-@use "../_func.scss" as *;
+@use 'sass:math';
+@use '../_func' as *;
 
-// #region container
-.container {
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  
+@include layer('elements', $layers) {
+  // #region container
+  .container {
     display: block;
     margin-left: auto;
     margin-right: auto;
     padding: var(--container-padding);
-  
-    grid-column: container!important;
-  width: 100%;
 
-  &:not(.container-fluid) {
-    max-width: var(--container-max-width);
-  }
-  
-  .container:not(.container-xs-breakout) {
-    padding-left: 0;
-    padding-right: 0;
-    padding-bottom: 0;
-    padding-top: 0;
-  }
+    grid-column: container !important;
+    width: 100%;
 
-  &[class*="bg-"] {
-    padding-top: #{rem(48)};
-    padding-bottom: #{rem(32)};
-  }
+    &:not(:has(.row)):has([class*='col-']) {
+      display: grid;
+      grid-template-columns:
+        [content-start col-1-start] 1fr [col-1-end col-2-start] 1fr [col-2-end
+        col-3-start] 1fr [col-3-end
+        col-4-start] 1fr [col-4-end
+        col-5-start] 1fr [col-5-end
+        col-6-start] 1fr [col-6-end
+        col-7-start] 1fr [col-7-end
+        col-8-start] 1fr [col-8-end
+        col-9-start] 1fr [col-9-end
+        col-10-start] 1fr [col-10-end
+        col-11-start] 1fr [col-11-end
+        col-12-start] 1fr [col-12-end content-end];
+      column-gap: 1rem;
+    }
 
-  &[class*="bg-"] + .container:not([class*="bg-"]) {
+    [class*='col-span-']:not([class*='-col-span-']):not(:first-child) {
+      --col-start: auto;
+    }
 
-    padding-top: #{rem(32)};
-  }
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      [class*='sm-col-span-']:not(:first-child) {
+        --col-start: auto;
+      }
+    }
 
+    @include media-breakpoint-up(md, $mobileOnly) {
+      [class*='md-col-span-']:not(:first-child) {
+        --col-start: auto;
+      }
+    }
 
-  // Fix the clearing for containers
-  &:before {
-    display: table;
-    clear: both;
-    content: "";
-  }
-  &:after {
-    display: table;
-    clear: both;
-    content: "";
-  }
+    &:not(.container-fluid) {
+      max-width: var(--container-max-width);
+    }
 
-  &.container-xs-breakout {
-    margin-left: -1.25rem;
-    margin-right: -1.25rem;
-    width: calc(100% + 2.5rem);
+    .container:not(.container-xs-breakout) {
+      padding-left: 0;
+      padding-right: 0;
+      padding-bottom: 0;
+      padding-top: 0;
+    }
 
-    @include media-breakpoint-up(sm) {
-      margin-left: auto;
-      margin-right: auto;
-      width: 100%;
+    &[class*='bg-'] {
+      padding-top: #{rem(48)};
+      padding-bottom: #{rem(32)};
+    }
+
+    &[class*='bg-'] + .container:not([class*='bg-']) {
+      padding-top: #{rem(32)};
+    }
+
+    // Fix the clearing for containers
+    &:before {
+      display: table;
+      clear: both;
+      content: '';
+    }
+    &:after {
+      display: table;
+      clear: both;
+      content: '';
+    }
+
+    &.container-xs-breakout {
+      margin-left: -1.25rem;
+      margin-right: -1.25rem;
+      width: calc(100% + 2.5rem);
+
+      @include media-breakpoint-up(sm, $mobileOnly) {
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+      }
     }
   }
-}
 
-:host .container {
-  display: block;
+  :host .container {
+    display: block;
     margin-left: auto;
     margin-right: auto;
     padding: var(--container-padding);
     width: 100%;
-}
-
-
-// replicate container padding-bottom
-main > .row {
-
-  padding-bottom: #{rem(16)};
-
-  &[class*="bg-"] {
-    padding-top: #{rem(48)};
-    padding-bottom: #{rem(32)};
   }
 
-  &[class*="bg-"] + :is(.row, .container):not([class*="bg-"]) {
+  // replicate container padding-bottom
+  main > .row {
+    padding-bottom: #{rem(16)};
 
-    padding-top: #{rem(32)};
-  }
-}
-// #endregion
-
-// #region Circles
-.container {
-
-
-  &:has(.circle){
-      
-    position: relative;
-    z-index: 1;
-  }
-
-  > .circle {
-
-    position: absolute;
-    z-index: var(--index-below);
-    border-width: 3px;
-  }
-
-  // Default pattern
-  &:not([class*="circle-pattern-"]) > .circle {
-    font-size: rem(300);
-    top: rem(-75);
-    left: rem(-200);
-  }
-
-  &:not([class*="circle-pattern-"]) > .circle ~ .circle {
-
-    font-size: rem(350);
-    top: auto;
-    left: auto;
-    right: rem(-100);
-    bottom: rem(-200);
-  }
-
-  @include media-breakpoint-up(sm) {
-    &:not([class*="circle-pattern-"]) > .circle {
-      font-size: rem(450);
-      top: rem(-50);
-      left: rem(-175);
+    &[class*='bg-'] {
+      padding-top: #{rem(48)};
+      padding-bottom: #{rem(32)};
     }
-  
-    &:not([class*="circle-pattern-"]) > .circle ~ .circle {
-  
-      font-size: rem(500);
-      right: rem(-150);
-      bottom: rem(-150);
+
+    &[class*='bg-'] + :is(.row, .container):not([class*='bg-']) {
+      padding-top: #{rem(32)};
     }
   }
+  // #endregion
 
-  // Pattern 2
-  &.circle-pattern-2 > .circle {
-    font-size: rem(300);
-    top: rem(-75);
-    right: rem(-200);
-  }
+  // #region Circles
+  .container {
+    &:has(.circle) {
+      position: relative;
+      z-index: 1;
+    }
 
-  &.circle-pattern-2 > .circle ~ .circle {
-    font-size: rem(450);
-    top: auto;
-    bottom: rem(-50);
-    left: rem(-175);
-  }
+    > .circle {
+      position: absolute;
+      z-index: var(--index-below);
+      border-width: 3px;
+    }
 
-  @include media-breakpoint-up(sm) {
+    // Default pattern
+    &:not([class*='circle-pattern-']) > .circle {
+      font-size: rem(300);
+      top: rem(-75);
+      left: rem(-200);
+    }
+
+    &:not([class*='circle-pattern-']) > .circle ~ .circle {
+      font-size: rem(350);
+      top: auto;
+      left: auto;
+      right: rem(-100);
+      bottom: rem(-200);
+    }
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      &:not([class*='circle-pattern-']) > .circle {
+        font-size: rem(450);
+        top: rem(-50);
+        left: rem(-175);
+      }
+
+      &:not([class*='circle-pattern-']) > .circle ~ .circle {
+        font-size: rem(500);
+        right: rem(-150);
+        bottom: rem(-150);
+      }
+    }
+
+    // Pattern 2
     &.circle-pattern-2 > .circle {
-      font-size: rem(450);
+      font-size: rem(300);
       top: rem(-75);
       right: rem(-200);
     }
+
     &.circle-pattern-2 > .circle ~ .circle {
-      font-size: rem(500);
-      bottom: rem(-75);
-      left: rem(-200);
+      font-size: rem(450);
+      top: auto;
+      bottom: rem(-50);
+      left: rem(-175);
+    }
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      &.circle-pattern-2 > .circle {
+        font-size: rem(450);
+        top: rem(-75);
+        right: rem(-200);
+      }
+      &.circle-pattern-2 > .circle ~ .circle {
+        font-size: rem(500);
+        bottom: rem(-75);
+        left: rem(-200);
+      }
+    }
+
+    // Desktop container adjustment
+    @include media-breakpoint-up(md, $mobileOnly) {
+      > .circle {
+        margin-left: rem(60);
+        margin-right: rem(60);
+      }
     }
   }
-
-  // Desktop container adjustment
-  @include media-breakpoint-up(md) {
-    > .circle {
-      margin-left: rem(60);
-      margin-right: rem(60);
-    }
-  }
+  // #endregion
 }
-// #endregion
-
-
-// #region Curve
-$default-curve-width: 576!default;
-@mixin curve($start: 10, $point-1: 20, $point-2: 95, $end: 70, $padding-top:16)
-{
-  // Constant rules
-  position: relative;
-  
-  // Let vars
-  $height: 100;
-  $width: $default-curve-width;
-  $middle-x: math.div($width,2);
-  $edge: 2;
-  $modify: 1;
-
-  // Rules that will change
-  width: #{$width}px;
-  padding-top: calc(#{($height*$modify)}px + #{$padding-top}px)!important;
-  margin-top: -#{($height*$modify)}px;
-  margin-left: calc(-#{math.div($width,2)}px + 50vw);
-  clip-path: path('#{'M0,'+($start*$modify)+' L'+($edge)+','+($start*$modify)+' C'+$middle-x+','+($point-1*$modify)+' '+$middle-x+','+($point-2*$modify)+' '+($width - $edge)+','+($end*$modify)+' L'+($width + $edge)+','+($end * $modify)+' L'+$width+',5000 L0,5000 Z'}');
-
-  padding-inline: calc((#{math.div($width,2)}px - 50vw) + var(--container-padding-x));
-
-  @include media-breakpoint-up(sm) {
-
-    // Tablet vars
-    $width: 992;
-    $middle-x: math.div($width,2);
-    $modify: 1.5;
-
-    // Tablet CSS rules
-    width: #{$width}px;
-    padding-top: calc(#{($height*$modify)}px + #{$padding-top}px)!important;
-    margin-top: -#{($height*$modify)}px;
-    margin-left: calc(-#{math.div($width,2)}px + 50vw);
-    clip-path: path('#{'M0,'+($start*$modify)+' L'+($edge)+','+($start*$modify)+' C'+$middle-x+','+($point-1*$modify)+' '+$middle-x+','+($point-2*$modify)+' '+($width - $edge)+','+($end*$modify)+' L'+($width + $edge)+','+($end*$modify)+' L'+$width+',5000 L0,5000 Z'}');
-  }
-
-  @include media-breakpoint-up(md) {
-
-    // Desktop vars
-    $width: 1440;
-    $middle-x: math.div($width,2);
-    $modify: 2;
-
-    // Desktop CSS rules
-    width: #{$width}px;
-    max-width: #{$width}px!important;
-    padding-top: calc(#{($height*$modify)}px + #{$padding-top}px)!important;
-    margin-top: -#{($height*$modify)}px;
-    margin-left: calc(-#{math.div($width,2)}px + 50vw);
-    clip-path: path('#{'M0,'+($start*$modify)+' L'+($edge)+','+($start*$modify)+' C'+$middle-x+','+($point-1*$modify)+' '+$middle-x+','+($point-2*$modify)+' '+($width - $edge)+','+($end*$modify)+' L'+($width + $edge)+','+($end*$modify)+' L'+$width+',5000 L0,5000 Z'}');
-  }
-}
-
-.container--curve-below {
-
-  padding-bottom: calc(100px + #{rem(16)});
-
-  @include media-breakpoint-up(sm) {
-    padding-bottom: calc(150px + #{rem(16)});
-  }
-  @include media-breakpoint-up(md) {
-    padding-bottom: calc(200px + #{rem(16)});
-  }
-}
-
-.container--curve {
-
-  @include curve();
-}
-.container--curve--right {
-
-  @include curve(70, 95, 20, 10);
-}
-.container--curve--up {
-
-  @include curve(90,0,0,90,-16);
-}
-.container--curve--down {
-
-  @include curve(0,90,90,0,16);
-}
-
-[class*="container--curve"] {
-
-  position: relative;
-
-  @media (min-width: #{em($device-md-width)}) {
-    margin-left: auto;
-    padding-inline: var(--container-padding-x);
-  }
-}
-// #endregion

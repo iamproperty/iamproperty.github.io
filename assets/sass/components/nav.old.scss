@@ -1,27 +1,21 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 // #region set dark background for mobile view
 .nav .nav__mobile-bar {
-  
   background: var(--colour-primary);
   color: white;
-
-  @if $compatible != "true" {
-    
-    @include invert-colours();
-  }
-
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   width: rem(375);
-  
-  @include media-breakpoint-up(sm) {
+
+  @include invert-colours();
+
+  @include media-breakpoint-up(sm, $mobileOnly) {
     width: 100%;
   }
 
   > .container {
-
     padding-top: rem(16);
     padding-bottom: 1rem;
     flex-shrink: 0;
@@ -32,19 +26,16 @@
 
 // #region General styles
 .nav {
-  
   overflow-x: hidden;
   font-weight: bold;
 
-  &__inner, 
+  &__inner,
   &__menu--account {
-
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
 
     > .container {
-
       padding-top: rem(16);
       padding-bottom: 0;
       flex-shrink: 0;
@@ -61,7 +52,7 @@
   .brand {
     font-size: rem(36);
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       font-size: rem(60);
     }
   }
@@ -71,7 +62,7 @@
   height: rem(36);
   width: auto;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     height: rem(60);
     width: auto;
   }
@@ -79,7 +70,6 @@
 
 .nav__search-btn,
 .nav__menu-btn {
-
   display: flex;
 
   label {
@@ -94,18 +84,16 @@
 
     &:hover,
     &:focus {
-
       color: var(--colour-hover);
     }
 
     &:active {
-
       color: var(--colour-active);
     }
 
     &:before,
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       width: 0%;
       height: 2px;
@@ -113,13 +101,14 @@
       left: 0;
       background: currentColor;
       transform-origin: 50% 50%;
-      transition: transform 0.5s, width 0.5s;
+      transition:
+        transform 0.5s,
+        width 0.5s;
     }
   }
 }
 
 .nav__search-btn {
-
   label {
     text-indent: 0;
     overflow: visible;
@@ -133,7 +122,6 @@
     color: inherit;
 
     &__outline {
-
       stroke-width: 2px;
       stroke: currentColor;
     }
@@ -144,10 +132,9 @@
   display: flex;
 
   label {
-
     border-top: 2px solid currentColor;
     border-bottom: 2px solid currentColor;
-    
+
     &:before,
     &:after {
       width: 100%;
@@ -156,7 +143,6 @@
 }
 
 .nav__account-btn {
-
   label {
     font-size: rem(18);
     text-indent: 0;
@@ -177,7 +163,6 @@
     color: inherit;
 
     &__outline {
-
       stroke-width: 2px;
       stroke: currentColor;
     }
@@ -194,10 +179,10 @@
     position: relative;
     text-decoration: none;
 
-    &.current{
+    &.current {
       border-left: #{rem(6)} solid var(--colour-info);
       margin-left: rem(-20);
-      padding-left: rem(20 - 6)
+      padding-left: rem(20 - 6);
     }
   }
 }
@@ -206,8 +191,7 @@
 
 // #region nav search
 
-@include media-breakpoint-up(md) {
-
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav__menu--search {
     display: none;
   }
@@ -219,7 +203,7 @@
     left: 0;
     width: 100%;
 
-    background: rgba(0,0,0,.6);
+    background: rgba(0, 0, 0, 0.6);
     height: calc(100vh - 5rem);
     display: block;
   }
@@ -235,10 +219,10 @@
     display: flex;
     justify-content: space-between;
   }
-    
+
   .service--active {
     &:before {
-      content: "";
+      content: '';
       height: 1em;
       width: 1em;
       display: inline-block;
@@ -261,26 +245,23 @@
     padding-inline: 1rem;
   }
 
-
   > *:last-child {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
   }
 }
 // #endregion
 
 // #region Nav with background colour applied
-.nav[class*="bg-"] {
-
+.nav[class*='bg-'] {
   .nav__inner {
     background-color: transparent;
   }
   .nav__menu--secondary {
-
     //background-color: white!important;
   }
   .nav__menu--secondary > .container > .list-unstyled > li > a,
   .nav__menu--secondary > .container > .list-unstyled > li > details > summary .link {
-/*
+    /*
     --colour-link: var(--colour-link-theme);
     --colour-hover: var(--colour-hover-theme);
     --colour-active: var(--colour-active-theme);
@@ -303,9 +284,7 @@
   }
 
   > .container > ul > li {
-
-    &:not(:last-child){
-        
+    &:not(:last-child) {
       border-bottom: 1px solid var(--colour-border);
     }
 
@@ -363,10 +342,8 @@
 }
 // #endregion
 
-
 // #region Sticky nav
 .nav {
-
   position: sticky;
   top: 0;
   left: 0;
@@ -374,9 +351,8 @@
   z-index: var(--index-menu);
 
   &.is-stuck {
-
-    -webkit-box-shadow: 0 4px 20px -10px rgba(51,51,51,0.25);
-    box-shadow: 0 4px 20px -10px rgba(51,51,51,0.25);
+    -webkit-box-shadow: 0 4px 20px -10px rgba(51, 51, 51, 0.25);
+    box-shadow: 0 4px 20px -10px rgba(51, 51, 51, 0.25);
   }
 }
 
@@ -384,14 +360,12 @@ nav + main > *:first-child {
   padding-top: 2rem;
 }
 
-
 // #endregion
 
 // #region Show/hide
 .nav__menu,
 .nav__btn,
 .nav__menu--secondary {
-
   display: none;
 }
 
@@ -405,8 +379,7 @@ nav + main > *:first-child {
   width: 100%;
   overscroll-behavior: contain;
 
-  @include media-breakpoint-up(sm) {
-    
+  @include media-breakpoint-up(sm, $mobileOnly) {
     width: rem(375);
   }
 }
@@ -416,33 +389,28 @@ nav + main > *:first-child {
   height: 100vh;
 }
 
-.nav:has(#showMenu:checked){
+.nav:has(#showMenu:checked) {
   min-height: 100vh;
 }
 
 #showMenu:checked ~ .nav__inner,
 #showAccount:checked ~ .nav__menu--account {
-
   height: 100vh;
   overflow: visible;
   overflow-x: auto;
   left: 0;
 
-  @include media-breakpoint-up(sm) {
-    
+  @include media-breakpoint-up(sm, $mobileOnly) {
     left: calc(100% - #{rem(375)});
   }
 }
 
-@include media-breakpoint-up(md) {
-   
+@include media-breakpoint-up(md, $mobileOnly) {
   #showAccount ~ .nav__menu--account {
-
     display: none;
   }
 
   #showAccount:checked ~ .nav__menu--account {
-
     left: 0;
     width: 100%;
     height: auto;
@@ -450,9 +418,9 @@ nav + main > *:first-child {
     top: 6rem;
     border-top: rem(5) solid var(--colour-primary);
     border-bottom: 1px solid var(--colour-border-light);
-    -webkit-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
-    -moz-box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
-    box-shadow: 0px 3px 6px 0px rgba(0,0,0,0.16);
+    -webkit-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+    -moz-box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
   }
 }
 
@@ -463,13 +431,10 @@ nav + main > *:first-child {
   display: block;
 }
 
-
-
 #showMenu:checked ~ div .nav__menu-btn label,
 #showSearch:checked ~ div .nav__search-btn label {
-  
   border: 0;
-  
+
   .icon {
     opacity: 0;
   }
@@ -478,49 +443,42 @@ nav + main > *:first-child {
     transform: rotate(45deg);
   }
   &:after {
-
     width: 100%;
     transform: rotate(-45deg);
   }
 }
 
-@include media-breakpoint-up(sm) {
-    
+@include media-breakpoint-up(sm, $mobileOnly) {
   #showMenu:checked ~ .nav__bg {
-      content: " ";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.5);
-      z-index: 1;
-    
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
   }
 }
 
-@include media-breakpoint-up(md) {
-    
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav__bg {
-      display: none;
+    display: none;
   }
 }
 
 // #endregion
 
 // #region Desktop nav
-@include media-breakpoint-up(md) {
-
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav .nav__mobile-bar {
-
     display: none;
   }
-
 
   .nav__logo {
     height: rem(64);
   }
-  
+
   #showMenu:checked ~ .nav__inner,
   .nav__inner {
     overflow: visible;
@@ -539,13 +497,11 @@ nav + main > *:first-child {
   }
 
   .nav {
-
     .nav__inner > .container {
       padding-bottom: 1rem;
     }
-    
   }
-  
+
   .nav__search-btn,
   .nav__btn {
     order: 2;
@@ -559,8 +515,8 @@ nav + main > *:first-child {
     padding-top: 0;
   }
   .nav__menu > .list-unstyled {
-    margin-left: -1.5rem!important;
-    margin-right: -1.5rem!important;
+    margin-left: -1.5rem !important;
+    margin-right: -1.5rem !important;
     width: calc(100% + 3rem);
     margin-bottom: 0;
     //text-align: right;
@@ -573,8 +529,7 @@ nav + main > *:first-child {
       padding-left: 1rem;
       padding-right: 1rem;
 
-      &:not(:last-child){
-          
+      &:not(:last-child) {
         border-right: 1px solid var(--colour-border);
       }
       > a {
@@ -589,17 +544,16 @@ nav + main > *:first-child {
   }
 
   .nav__account-btn {
-    max-width: fit-content!important;
+    max-width: fit-content !important;
 
     label {
-      
-      border: none!important;
+      border: none !important;
       padding-top: 0.5rem;
       position: relative;
       padding-right: 2.5rem;
 
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         top: calc(50% + 0.5rem);
         right: 0;
@@ -624,16 +578,11 @@ nav + main > *:first-child {
     font-size: rem(15);
     padding-top: 0;
   }
-
-
 }
 // #endregion
 
-
-// #region Nav secondary DESKTOP 
-@include media-breakpoint-up(md) {
-
-
+// #region Nav secondary DESKTOP
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav__menu--secondary {
     background-color: var(--colour-primary);
     @include invert-colours();
@@ -648,8 +597,8 @@ nav + main > *:first-child {
   }
 
   .nav__menu--secondary > .container > .list-unstyled {
-    margin-left: -1rem!important;
-    margin-right: -1rem!important;
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
     width: calc(100% + 2rem);
     margin-bottom: 0;
 
@@ -657,10 +606,10 @@ nav + main > *:first-child {
       display: inline-block;
       padding-left: 1rem;
       padding-right: 1rem;
-      border: none!important;
+      border: none !important;
       padding-block: 0;
       position: relative;
-        
+
       a,
       .nav__section-link {
         display: block;
@@ -676,9 +625,7 @@ nav + main > *:first-child {
       &:hover,
       &:focus,
       &:focus-within {
-
         > .nav__section-link {
-          
           color: var(--colour-selected);
         }
 
@@ -690,20 +637,18 @@ nav + main > *:first-child {
           left: 0;
           padding-top: rem(16);
 
-          -webkit-box-shadow: 0 4px 20px -10px rgba(51,51,51,0.25);
-          box-shadow: 0 4px 20px -10px rgba(51,51,51,0.25);
-          
+          -webkit-box-shadow: 0 4px 20px -10px rgba(51, 51, 51, 0.25);
+          box-shadow: 0 4px 20px -10px rgba(51, 51, 51, 0.25);
+
           @include reset-colours();
 
           --colour-admin: var(--colour-admin-theme);
 
           li {
-            
             padding-inline: rem(24);
           }
 
           li:last-child {
-            
             padding-bottom: rem(16);
           }
 
@@ -736,24 +681,18 @@ nav + main > *:first-child {
   .nav__menu--secondary > .container > .logout-button {
     display: none;
   }
-
 }
 // #endregion
 
-
 // #region Nav account Desktop
 
-
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav__menu--account {
-
     > .container:first-child {
-      
       display: none;
     }
 
     > .container:not(:first-child) {
-
       &:before {
         display: none;
       }
@@ -761,22 +700,20 @@ nav + main > *:first-child {
       display: flex;
       flex-wrap: wrap;
       gap: 2rem;
-      
-    align-items: start;
+
+      align-items: start;
 
       > .row,
       .nav__featured-link,
       .credits {
-
         flex-basis: 22%;
         flex-grow: 1;
         margin: 0;
-
       }
 
       > .row > .col:first-child,
       .nav__featured-link > .row > .col:first-child {
-        max-width: 100%!important;
+        max-width: 100% !important;
         width: 100%;
         flex-shrink: 0;
         min-width: 100%;
@@ -786,17 +723,14 @@ nav + main > *:first-child {
       .logout-button {
         min-width: 100%;
       }
-    } 
+    }
   }
 }
 // #endregion
 
-
 // #region Mega menu
 .nav .list-unstyled > li details.nav__mega-menu {
-
-  @include media-breakpoint-up(md) {
-
+  @include media-breakpoint-up(md, $mobileOnly) {
     position: static;
 
     height: 4.5rem;
@@ -804,39 +738,35 @@ nav + main > *:first-child {
   }
 
   .inner {
-
     z-index: 5;
-    
-    [class*="bg-"]{
 
+    [class*='bg-'] {
       --bs-bg-opacity: 0;
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(md, $mobileOnly) {
         --bs-bg-opacity: 1;
       }
     }
 
-
-    @include media-breakpoint-up(md) {
-
+    @include media-breakpoint-up(md, $mobileOnly) {
       --bs-bg-opacity: 1;
       position: absolute;
       top: 100%;
       left: 50%;
-      width: 100vw!important;
-      max-width: 100vw!important;
+      width: 100vw !important;
+      max-width: 100vw !important;
       -webkit-transform: translateX(-50%);
       -ms-transform: translateX(-50%);
       transform: translateX(-50%);
 
-      background: rgba(0,0,0,.6);
+      background: rgba(0, 0, 0, 0.6);
       height: calc(100vh - 8rem);
 
       pointer-events: none;
       padding-top: 0;
 
       .container {
-        padding: 0 rem(60 - 36) 1rem rem(60 - 36)!important;
-        max-width: rem(1440)!important;
+        padding: 0 rem(60 - 36) 1rem rem(60 - 36) !important;
+        max-width: rem(1440) !important;
         text-align: left;
         pointer-events: all;
         display: flex;
@@ -852,7 +782,6 @@ nav + main > *:first-child {
 
 // #region inline search
 .nav--inline-search {
-
   .nav__menu form {
     position: relative;
     .form-control__wrapper .form-control {
@@ -875,10 +804,10 @@ nav + main > *:first-child {
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     .nav__menu > .list-unstyled {
       text-align: left;
-      margin-right: 0!important;
+      margin-right: 0 !important;
     }
 
     .nav__menu form {
@@ -909,7 +838,7 @@ nav + main > *:first-child {
 // #endregion
 
 // #region nav admin
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav--admin {
     .nav__logo {
       height: 3rem;
@@ -925,17 +854,15 @@ nav + main > *:first-child {
 // #region
 
 .nav--just-account {
-
   .nav__menu,
   .nav__account-btn {
-    display: none!important;
+    display: none !important;
   }
 
-  @include media-breakpoint-up(md) {
-    
+  @include media-breakpoint-up(md, $mobileOnly) {
     .nav__menu,
     .nav__account-btn {
-      display: block!important;
+      display: block !important;
     }
   }
 
@@ -947,8 +874,7 @@ nav + main > *:first-child {
     pointer-events: none;
     background: transparent;
 
-    @include media-breakpoint-up(sm) {
-    
+    @include media-breakpoint-up(sm, $mobileOnly) {
       width: rem(375);
       left: calc(100% - #{rem(375)});
     }

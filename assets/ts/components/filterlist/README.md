@@ -27,6 +27,6 @@ import('../node_modules/@iamproperty/components/assets/js/components/filterlist/
 
 **Properties**
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| data-max-height | string | '' | Optional choice from small, medium or large control of the height of the list. Giving it a scrollable area. |
+| Option          | Type   | Default Value | Description                                                                                                 |
+| --------------- | ------ | ------------- | ----------------------------------------------------------------------------------------------------------- |
+| data-max-height | string | ''            | Optional choice from small, medium or large control of the height of the list. Giving it a scrollable area. |

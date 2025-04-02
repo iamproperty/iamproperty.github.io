@@ -8,7 +8,17 @@
       <p>...</p>
     </div>
 
-    <Carousel :items="items" class="bg-dark circle-pattern-2 visualtest hide-btns" type="card" cardtype="simple" btntype="link" :smcols="2" :mdcols="4" ctatext="Read more" titleclass="text-primary text-uppercase">
+    <Carousel
+      :items="items"
+      class="bg-dark circle-pattern-2 visualtest hide-btns"
+      type="card"
+      cardtype="simple"
+      btntype="link"
+      :smcols="2"
+      :mdcols="4"
+      ctatext="Read more"
+      titleclass="text-primary text-uppercase"
+    >
       <span class="circle circle--stripe text-light opacity-50"></span>
       <h2 class="text-white">Keep up to date with the latest property news</h2>
     </Carousel>
@@ -21,129 +31,129 @@
 </template>
 
 <script>
-import Carousel from '@/components/Carousel/Carousel.vue'
+  import Carousel from '@/components/Carousel/Carousel.vue';
 
-export default {
-  components: {
-    Carousel
-  },
-  data () {
-    return {
-  htmlUsage: `<Carousel :items="items" class="bg-dark circle-pattern-2 hide-btns" type="card" cardType="simple" btnType="link" :smCols="2" :mdCols="4" ctaText="Read more" titleClass="text-primary text-uppercase">
+  export default {
+    components: {
+      Carousel,
+    },
+    data() {
+      return {
+        htmlUsage: `<Carousel :items="items" class="bg-dark circle-pattern-2 hide-btns" type="card" cardType="simple" btnType="link" :smCols="2" :mdCols="4" ctaText="Read more" titleClass="text-primary text-uppercase">
   <span class="circle circle--stripe text-light opacity-50"></span>
   <h2 class="text-white">Keep up to date with the latest property news</h2>
 </Carousel>`,
-      items: [
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        },
-        {
-          image: '/house.jpeg',
-          link: '/examples/related-cards',
-          title: 'News - 24 March 2021',
-          content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
-          details: {
-            readTime: '10 mins'
-          }
-        }
-      ]
-    }
-  }
-}
+        items: [
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+          {
+            image: '/house.jpeg',
+            link: '/examples/related-cards',
+            title: 'News - 24 March 2021',
+            content: `<p>It has survived not only five centuries, but also the leap into electronic typesetting,</p>`,
+            details: {
+              readTime: '10 mins',
+            },
+          },
+        ],
+      };
+    },
+  };
 </script>

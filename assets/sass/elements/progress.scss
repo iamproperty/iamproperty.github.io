@@ -1,213 +1,214 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
-:is(label,.label):has(progress){
-  position: relative;
-  max-width: $input-max-width;
-  margin-bottom: 2rem;
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  padding-right: 3rem;
-}
+@include layer('elements', $layers) {
+  :is(label, .label):has(progress) {
+    position: relative;
+    max-width: $input-max-width;
+    margin-bottom: 2rem;
 
-progress {
-  border-radius: rem(5);
-  display: block;
-  margin-top: rem(8);
-  width: calc(100% + 3rem);
-  height: rem(8);
-  margin-left: 0;
-  border: none;
-}
-
-label[data-percent]:has(progress):before {
-  content: attr(data-percent)'%';
-  vertical-align: 0;
-  line-height: 1;
-  position:absolute;
-  top: auto;
-  left:auto;
-  right:0;
-  bottom: rem(16);
-  color: var(--colour-heading);
-  font-weight: bold;
-}
-
-progress[data-progress]:before {
-  content: attr(data-progress)'%';
-}
-
-progress::-webkit-progress-bar {
-  background-color: var(--colour-light);
-  border-radius: rem(5);
-}
-progress::-webkit-progress-value {
-  background-color: var(--colour, var(--colour-info));
-  border-radius: rem(5);
-}
-
-// #region inline progress
-:is(label, .label):has(.progress--inline){ 
-
-  font-size: 1rem;
-  color: var(--colour-body);
-  
-  &:before {
-    bottom: -0.25em;
+    padding-right: 3rem;
   }
 
-  progress.progress--inline {
+  progress {
+    border-radius: rem(5);
+    display: block;
+    margin-top: rem(8);
+    width: calc(100% + 3rem);
+    height: rem(8);
+    margin-left: 0;
+    border: none;
+  }
 
+  label[data-percent]:not(:has(strong)):has(progress):before {
+    content: attr(data-percent) '%';
+  }
+
+  label[data-percent]:not(:has(strong)):has(progress):before,
+  label[data-percent]:has(progress) strong {
+    vertical-align: 0;
+    line-height: 1;
+    position: absolute;
+    top: auto;
+    left: auto;
+    right: 0;
+    bottom: rem(16);
+    color: var(--colour-heading);
+    font-weight: bold;
+  }
+
+  progress[data-progress]:before {
+    content: attr(data-progress) '%';
+  }
+
+  progress::-webkit-progress-bar {
+    background-color: var(--colour-light);
+    border-radius: rem(5);
+  }
+  progress::-webkit-progress-value {
+    background-color: var(--colour, var(--colour-info));
+    border-radius: rem(5);
+  }
+
+  // #region inline progress
+  :is(label, .label):has(.progress--inline) {
+    font-size: 1rem;
+    color: var(--colour-body);
+
+    &:before {
+      bottom: -0.25em;
+    }
+
+    progress.progress--inline {
+      width: 100%;
+    }
+  }
+
+  // #endregion
+
+  // #region Circular
+  label:has(.progress--circular) {
+    --max-width: #{rem(200)};
+    --pt: #{rem(90)};
+    --pt-percent: 45%;
+    --bar-width: #{rem(20)};
+    --value-fs: #{rem(48)};
+    --value-pb: #{rem(32)};
+    --label-fs: #{rem(18)};
+
+    position: relative;
+    z-index: 1;
+    max-width: var(--max-width);
+    margin-bottom: 2rem;
+
+    padding-right: 0;
+    aspect-ratio: 1/1;
+    height: auto;
     width: 100%;
+    text-align: center;
+    padding-top: min(calc(var(--pt-percent) + var(--value-pb)), calc(var(--pt) + var(--value-pb)));
+    padding-inline: var(--value-pb);
 
+    display: inline-block;
+    font-size: var(--label-fs);
+    line-height: 1;
   }
-}
 
-// #endregion
-
-// #region Circular
-label:has(.progress--circular){
-
-  --max-width: #{rem(200)};
-  --pt: #{rem(90)};
-  --pt-percent: 45%;
-  --bar-width: #{rem(20)};
-  --value-fs: #{rem(48)};
-  --value-pb: #{rem(32)};
-  --label-fs: #{rem(18)};
-
-  position: relative;
-  z-index: 1;
-  max-width: var(--max-width);
-  margin-bottom: 2rem;
-
-  padding-right: 0;
-  aspect-ratio: 1/1;
-  height: auto;
-  width: 100%;
-  text-align: center;
-  padding-top: min(calc(var(--pt-percent) + var(--value-pb)), calc(var(--pt) + var(--value-pb)));
-  padding-inline: var(--value-pb);
-
-  display: inline-block;
-  font-size: var(--label-fs);
-  line-height: 1;
-}
-
-label:has(.progress--circular.progress--md){
-  --max-width: #{rem(170)};
-  --pt: #{rem(76.5)};
-  --pt-percent: 45%;
-  --bar-width: #{rem(20)};
-  --value-pb: #{rem(24)};
-}
-
-label:has(.progress--circular.progress--sm){
-  --max-width: #{rem(120)};
-  --pt: #{rem(54)};
-  --pt-percent: 45%;
-  --bar-width: #{rem(16)};
-  --value-fs: #{rem(24)};
-
-  --value-pb: #{rem(16)};
-  --label-fs: #{rem(12)};
-}
-
-// Responsive-ish settings
-*:has(> label > .progress--circular){
-  
-  container-type: inline-size;
-}
-
-@container (width <= 10.625rem) {
-
-  label:has(.progress--circular:not(.progress--sm):not(.progress--md)){
+  label:has(.progress--circular.progress--md) {
     --max-width: #{rem(170)};
     --pt: #{rem(76.5)};
     --pt-percent: 45%;
     --bar-width: #{rem(20)};
     --value-pb: #{rem(24)};
   }
-}
 
-@container (width <= 7.5rem) {
+  label:has(.progress--circular.progress--sm) {
+    --max-width: #{rem(120)};
+    --pt: #{rem(54)};
+    --pt-percent: 45%;
+    --bar-width: #{rem(16)};
+    --value-fs: #{rem(24)};
 
-  label:has(.progress--circular:not(.progress--sm):not(.progress--md)){
-  --max-width: #{rem(120)};
-  --pt: #{rem(54)};
-  --pt-percent: 45%;
-  --bar-width: #{rem(16)};
-  --value-fs: #{rem(24)};
-
-  --value-pb: #{rem(16)};
-  --label-fs: #{rem(12)};
+    --value-pb: #{rem(16)};
+    --label-fs: #{rem(12)};
   }
+
+  // Responsive-ish settings
+  *:has(> label > .progress--circular) {
+    container-type: inline-size;
+  }
+
+  @container (width <= 10.625rem) {
+    label:has(.progress--circular:not(.progress--sm):not(.progress--md)) {
+      --max-width: #{rem(170)};
+      --pt: #{rem(76.5)};
+      --pt-percent: 45%;
+      --bar-width: #{rem(20)};
+      --value-pb: #{rem(24)};
+    }
+  }
+
+  @container (width <= 7.5rem) {
+    label:has(.progress--circular:not(.progress--sm):not(.progress--md)) {
+      --max-width: #{rem(120)};
+      --pt: #{rem(54)};
+      --pt-percent: 45%;
+      --bar-width: #{rem(16)};
+      --value-fs: #{rem(24)};
+
+      --value-pb: #{rem(16)};
+      --label-fs: #{rem(12)};
+    }
+  }
+
+  label:has(.progress--circular) + label:has(.progress--circular) {
+    margin-left: 2rem;
+  }
+
+  // Needed to allow it to be animated
+  @property --progress {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+  }
+
+  .progress--circular {
+    --progress-shown: var(--progress, 0%);
+    position: absolute;
+    z-index: -2;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background: red;
+    background: conic-gradient(
+      var(--colour, var(--colour-info)) var(--progress-shown),
+      var(--colour-light) var(--progress-shown) calc(100% - var(--progress-shown))
+    );
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: #{rem(3)} #{rem(3)} #{rem(6)} rgba(0, 0, 0, 20%);
+    transition: --progress 1s;
+  }
+
+  .progress--circular::-webkit-progress-bar,
+  .progress--circular::-webkit-progress-value {
+    opacity: 0;
+  }
+
+  .progress--circular::-moz-progress-bar {
+    opacity: 0;
+  }
+
+  label[data-percent]:not(:has(strong)):has(.progress--circular):before,
+  label[data-percent]:has(.progress--circular) strong {
+    top: var(--pt-percent);
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    color: var(--colour-heading);
+    transform: translate(-50%, -50%);
+    font-size: var(--value-fs);
+    line-height: 1;
+    z-index: 2;
+    text-indent: 0;
+  }
+
+  label:has(.progress--circular):after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1/1;
+    width: calc(100% - var(--bar-width) - var(--bar-width));
+    background-color: var(--colour-canvas);
+    border-radius: 50%;
+  }
+
+  // #endregion
 }
-
-
-
-
-label:has(.progress--circular) + label:has(.progress--circular) {
-  margin-left: 2rem;
-}
-
-// Needed to allow it to be animated
-@property --progress {
-  syntax: '<percentage>';
-  inherits: false;
-  initial-value: 0%;
-}
-
-.progress--circular {
-
-  --progress-shown: var(--progress, 0%);
-  position: absolute;
-  z-index: -2;
-  top: 0;
-  left: 0;
-  margin: 0;
-  background: red;
-  background: conic-gradient(var(--colour, var(--colour-info)) var(--progress-shown), var(--colour-light) var(--progress-shown) calc(100% - var(--progress-shown)));
-  height: 100%;
-  width: 100%;
-  border-radius: 50%;
-  box-shadow: #{rem(3)} #{rem(3)} #{rem(6)} rgba(0, 0, 0, 20%);
-  transition: --progress 1s;
-}
-
-.progress--circular::-webkit-progress-bar,
-.progress--circular::-webkit-progress-value {
-  opacity: 0;
-}
-
-
-.progress--circular::-moz-progress-bar {
-  opacity: 0;
-}
-
-label[data-percent]:has(.progress--circular):before {
-
-  top: var(--pt-percent);
-  left:50%;
-  right:auto;
-  bottom: auto;
-  color: var(--colour-heading);
-  transform: translate(-50%,-50%);
-  font-size: var(--value-fs);
-  line-height: 1;
-  z-index: 2;
-  text-indent: 0;
-}
-
-label:has(.progress--circular):after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  aspect-ratio: 1/1;
-  width: calc(100% - var(--bar-width) - var(--bar-width));
-  background-color: var(--colour-canvas);
-  border-radius: 50%;
-}
-
-// #endregion

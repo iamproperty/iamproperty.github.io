@@ -1,9 +1,9 @@
-@use "_func" as *;
+@use '_func' as *;
 
-$printMedia: print!default;
+$printMedia: print !default;
 @media #{$printMedia} {
   :root {
-  --content-max-width: 100%;
+    --content-max-width: 100%;
   }
   html {
     font-size: 11pt;
@@ -24,23 +24,23 @@ $printMedia: print!default;
   .print-header {
     background-image: linear-gradient(45deg, var(--colour-secondary) 0%, transparent 80%) !important;
   }
-  p a[href^=http]:after,
-  p a[href^=mailto]:after,
+  p a[href^='http']:after,
+  p a[href^='mailto']:after,
   a.youtube-embed:after {
-    content: " (" attr(href) ")";
-    display: inline!important;
+    content: ' (' attr(href) ')';
+    display: inline !important;
     color: inherit;
     mask: none;
     -webkit-mask: none;
     background: none;
   }
 
-  // Nav fixes 
+  // Nav fixes
   .nav {
     position: relative;
-    box-shadow: none!important;
+    box-shadow: none !important;
   }
-  .nav [class*="col"]:not(.nav__logo){
+  .nav [class*='col']:not(.nav__logo) {
     display: none;
   }
   nav + main > *:first-child {
@@ -48,15 +48,17 @@ $printMedia: print!default;
   }
 }
 @media print {
-  
   html {
     padding: 0;
   }
-  
-  tr, img, svg, li {
+
+  tr,
+  img,
+  svg,
+  li {
     break-inside: avoid;
   }
-  [class*="bg-"]:not(.print-header) {
-    background: none!important;
+  [class*='bg-']:not(.print-header) {
+    background: none !important;
   }
 }

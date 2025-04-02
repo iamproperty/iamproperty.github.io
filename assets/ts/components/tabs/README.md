@@ -28,7 +28,7 @@ import('../node_modules/@iamproperty/components/assets/js/components/tabs/tabs.c
 
 ### Tab Properties
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| title  | String | - | Used for the heading of the component |
-| disabled  | Boolean | - | Used to apply disabled state for a tab (tab content will not be reachable) |
+| Option   | Type    | Default Value | Description                                                                |
+| -------- | ------- | ------------- | -------------------------------------------------------------------------- |
+| title    | String  | -             | Used for the heading of the component                                      |
+| disabled | Boolean | -             | Used to apply disabled state for a tab (tab content will not be reachable) |

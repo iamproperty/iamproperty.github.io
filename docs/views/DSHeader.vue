@@ -11,50 +11,47 @@
 </template>
 
 <style lang="scss" scoped>
+  .ds-header {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 
-.ds-header{
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+    grid-column: container;
 
-  grid-column: container;
-  
-  @media screen and (min-width: 62em){
-      
-    min-height: 19rem;
-    padding-top: 7rem;
+    @media screen and (min-width: 62em) {
+      min-height: 19rem;
+      padding-top: 7rem;
+    }
+
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+      width: auto;
+      object-fit: cover;
+      grid-column: none;
+    }
   }
-
-  img {
-    
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 100%;
-    width: auto;
-    object-fit: cover;
-    grid-column: none;
-  }
-}
 </style>
 
 <script>
-export default {
-  name: 'DSHeader',
-  props: {
-    image: {
-      type: String,
-      required: false
+  export default {
+    name: 'DSHeader',
+    props: {
+      image: {
+        type: String,
+        required: false,
+      },
+      section: {
+        type: String,
+        default: 'foundations',
+        required: false,
+      },
     },
-    section: {
-      type: String,
-      default: 'foundations',
-      required: false
-    }
-  }
-}
+  };
 </script>

@@ -1,7 +1,6 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 .outer {
-  
   position: relative;
   max-width: var(--input-max-width, 50rem);
   display: block;
@@ -13,12 +12,11 @@ label {
 }
 
 .wrapper {
-
   margin-bottom: rem(24);
   max-width: var(--input-max-width, 50rem);
 
   &:after {
-    content: "";
+    content: '';
     display: block;
     position: absolute;
     top: 100%;
@@ -28,7 +26,6 @@ label {
   }
 
   input {
-    
     margin-bottom: rem(8);
   }
 
@@ -43,13 +40,12 @@ label {
     display: none;
   }
 
-  &.was-validated .feedback{
+  &.was-validated .feedback {
     display: block;
   }
 }
 
 .wrapper.filled {
-  
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -63,7 +59,7 @@ label {
   border: 2px solid var(--colour-primary);
   border-radius: rem(8);
 
-  &:is(:focus-within,.focus-within):not(:disabled) {
+  &:is(:focus-within, .focus-within):not(:disabled) {
     border-color: var(--colour-info);
     outline: 0;
     box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
@@ -76,17 +72,17 @@ label {
     display: inline-block;
     width: 0;
     flex-grow: 1;
-    padding: 0 rem(8) 0 0!important;
+    padding: 0 rem(8) 0 0 !important;
     margin-inline: rem(3);
     order: 999;
     margin-bottom: rem(8);
   }
 
   .feedback {
-    display: none!important;
+    display: none !important;
   }
 
-  &:is(:focus,.focus):not(:disabled) {
+  &:is(:focus, .focus):not(:disabled) {
     border-color: var(--colour-info);
     outline: 0;
     box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
@@ -94,7 +90,6 @@ label {
 }
 
 button {
-  
   position: absolute;
   top: 0.75rem;
   right: 0.5rem;
@@ -126,32 +121,34 @@ button {
   }
 }
 
-
 .wrapper:is(:focus-within) .dropdown {
-
   display: var(--display-panel, none);
 }
 
-.wrapper .dropdown:hover {
-
-  display: var(--display-panel, none);
+@media (hover: hover) {
+  .wrapper .dropdown:hover {
+    display: var(--display-panel, none);
+  }
 }
 
+@media (hover: none) {
+  :host(.hover) .wrapper .dropdown {
+    display: block;
+  }
+}
 
 // Inline edit
 :host-context(:focus-within) {
   input {
-    background-color: none!important;
+    background-color: none !important;
   }
 }
 :host-context(iam-inline-edit) {
-
   display: block;
   --display-btns: none;
 
   label:hover + .outer:not(:focus-within) .wrapper:not([data-mousedown]),
-  .outer:not(:focus-within) .wrapper:not([data-mousedown]):hover{
-    
+  .outer:not(:focus-within) .wrapper:not([data-mousedown]):hover {
     background-color: var(--colour-light);
 
     input {
@@ -167,8 +164,7 @@ button {
     margin-bottom: 0;
   }
 
-  .wrapper:not(.filled):not(:focus-within):not([data-mousedown]){
-
+  .wrapper:not(.filled):not(:focus-within):not([data-mousedown]) {
     input {
       border: none;
       background: none;
