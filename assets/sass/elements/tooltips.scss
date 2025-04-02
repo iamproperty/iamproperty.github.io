@@ -18,6 +18,7 @@
   > strong:first-child {
     display: block;
     padding-bottom: 1rem;
+    color: inherit;
   }
 
   @include media-breakpoint-up(sm, $mobileOnly) {
