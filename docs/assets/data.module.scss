@@ -1,72 +1,79 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:string';
 
-@use '../../assets/sass/_func.scss' as *;
+@use '../../assets/sass/_functions/functions.scss' as *;
 
+@use '../../assets/sass/_functions/variables_old.scss' as *;
+@use '../../assets/sass/_functions/mixins.scss' as *;
+@use '../../assets/sass/_functions/bs_utilities' as *;
+@use '../../assets/sass/_functions/utility-mixins' as *;
 
 // Utility generator
 // Used to generate utilities & print utilities
 @mixin print-utility($utility, $infix, $is-rfs-media-query: false) {
-  $values: map-get($utility, values);
+  $values: map.get($utility, values);
 
   // If the values are a list or string, convert it into a map
-  @if type-of($values) == "string" or (length($values) != 0 and type-of(nth($values, 1)) != "list") {
-    $values: zip($values, $values);
+  @if meta.type-of($values) == 'string' or (list.length($values) != 0 and meta.type-of(list.nth($values, 1)) != 'list')
+  {
+    $values: list.zip($values, $values);
   }
 
   @each $key, $value in $values {
-    $properties: map-get($utility, property);
+    $properties: map.get($utility, property);
 
     // Multiple properties are possible, for example with vertical or horizontal margins or paddings
-    @if type-of($properties) == "string" {
-      $properties: append((), $properties);
+    @if meta.type-of($properties) == 'string' {
+      $properties: list.append((), $properties);
     }
 
     // Use custom class if present
-    $property-class: if(map-has-key($utility, class), map-get($utility, class), nth($properties, 1));
-    $property-class: if($property-class == null, "", $property-class);
+    $property-class: if(map.has-key($utility, class), map.get($utility, class), list.nth($properties, 1));
+    $property-class: if($property-class == null, '', $property-class);
 
     // State params to generate pseudo-classes
-    $state: if(map-has-key($utility, state), map-get($utility, state), ());
+    $state: if(map.has-key($utility, state), map.get($utility, state), ());
 
-    $infix: if($property-class == "" and str-slice($infix, 1, 1) == "-", str-slice($infix, 2), $infix);
+    $infix: if($property-class == '' and string.slice($infix, 1, 1) == '-', string.slice($infix, 2), $infix);
 
     // Don't prefix if value key is null (eg. with shadow class)
-    $property-class-modifier: if($key, if($property-class == "" and $infix == "", "", "-") + $key, "");
+    $property-class-modifier: if($key, if($property-class == '' and $infix == '', '', '-') + $key, '');
 
-    @if map-get($utility, rfs) {
+    @if map.get($utility, rfs) {
       // Inside the media query
       @if $is-rfs-media-query {
         $val: rfs-value($value);
 
         // Do not render anything if fluid and non fluid values are the same
         $value: if($val == rfs-fluid-value($value), null, $val);
-      }
-      @else {
+      } @else {
         $value: rfs-fluid-value($value);
       }
     }
 
-    $is-rtl: map-get($utility, rtl);
+    $is-rtl: map.get($utility, rtl);
 
     @if $value != null {
       @if $is-rtl == false {
         /* rtl:begin:remove */
       }
-      
+
       $string: '';
       @each $property in $properties {
-        $string: $string+#{$property}+': '+$value+if($enable-important-utilities, '!important;\\n', ';\\n');
+        $string: $string + #{$property} + ': ' + $value + if($enable-important-utilities, '!important;\\n', ';\\n');
       }
       --ut-#{$property-class + $infix + $property-class-modifier}: '#{$string}';
 
       @each $pseudo in $state {
-
         $string: '';
         @each $property in $properties {
-          $string: $string+#{$property}+': '+$value+if($enable-important-utilities, '!important;\\n', ';\\n');
+          $string: $string + #{$property} + ': ' + $value + if($enable-important-utilities, '!important;\\n', ';\\n');
         }
         --ut-#{$property-class + $infix + $property-class-modifier}-#{$pseudo}: '#{$string}; ';
       }
-      
+
       @if $is-rtl == false {
         /* rtl:end:remove */
       }
@@ -74,17 +81,15 @@
   }
 }
 
-
-
 // Export the SCSS vars
 :export {
   // Headings
   @each $var, $value in $heading-sizes {
-    #{$var}: #{$value}
+    #{$var}: #{$value};
   }
 
   @each $var, $value in $heading-sizes {
-    #{$var}_rem: #{rem($value)}
+    #{$var}_rem: #{rem($value)};
   }
 
   text_mw: $content-max-width-px;
@@ -102,29 +107,27 @@
   ut_mh_lg_px: $ut-mh-lg-px;
   ut_mh_lg: $ut-mh-lg;
 
-
-
   @each $color, $value in $theme-colors {
-    themeColour_#{$color}: #{$value}
+    themeColour_#{$color}: #{$value};
   }
   @each $color, $value in $non-theme-colors {
-    nonThemeColour_#{$color}: #{$value}
+    nonThemeColour_#{$color}: #{$value};
   }
   @each $color, $value in $dark-mode-colors {
-    darkModeColour_#{$color}: #{$value}
+    darkModeColour_#{$color}: #{$value};
   }
   @each $color, $value in $dark-mode-functional-colors {
-    darkModeFunctionalColour_#{$color}: #{$value}
+    darkModeFunctionalColour_#{$color}: #{$value};
   }
   @each $color, $value in $wider-colours {
-    widerColour_#{$color}: #{$value}
+    widerColour_#{$color}: #{$value};
   }
   @each $color, $value in $wider-colours-hover {
-    widerColourHover_#{$color}: #{$value}
+    widerColourHover_#{$color}: #{$value};
   }
 
   @each $color, $value in $wider-colours-active {
-    widerColourActive_#{$color}: #{$value}
+    widerColourActive_#{$color}: #{$value};
   }
 
   @each $var, $value in $vars {
@@ -135,26 +138,28 @@
   }
   heading_lh: $headings-line-height;
   heading_mb: $headings-margin-bottom;
-  @each $breakpoint in map-keys($grid-breakpoints) {
-
+  @each $breakpoint in map.keys($grid-breakpoints) {
     // Generate media query if needed
 
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-  
-      // Loop over each utility property
-      @each $key, $utility in $utilities {
-        // The utility can be disabled with `false`, thus check if the utility is a map first
-        // Only proceed if responsive media queries are enabled or if it's the base media query
-        @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "") {
-          @include print-utility($utility, $infix);
-        }
-        @if type-of($utility) == "map" and map-get($utility, print) == true {
-          @include print-utility($utility, "-print");
-        }
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    // Loop over each utility property
+    @each $key, $utility in $utilities {
+      // The utility can be disabled with `false`, thus check if the utility is a map first
+      // Only proceed if responsive media queries are enabled or if it's the base media query
+      @if meta.type-of($utility) == 'map' and (map.get($utility, responsive) or $infix == '') {
+        @include print-utility($utility, $infix);
       }
-    
+      @if meta.type-of($utility) == 'map' and map.get($utility, print) == true {
+        @include print-utility($utility, '-print');
+      }
+    }
   }
   @each $key, $ratio in $aspect-ratios {
     aspect-ratio-#{$key}: #{$ratio};
+  }
+
+  @each $key, $details in $new_utilities {
+    -ut-mixin-#{$key}: #{$details};
   }
 }

@@ -1,23 +1,103 @@
-@import "elements/brand.scss";
-@import "elements/icons.scss";
-@import "elements/media.scss";
-@import "elements/type.scss";
+@use './func' as *;
+
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+$optionalText: 'true' !default;
+
+@use 'elements/brand.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/icons.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/media.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/type.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
 // elements
-@import "elements/lists.scss";
-@import "elements/tooltips.scss";
-@import "elements/container.scss";
-@import "elements/table.element.scss";
+@use 'elements/lists.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/tooltips.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/container.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/table.element.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
 
-@import "elements/links.scss";
-@import "elements/buttons";
-@import "elements/dialog.scss";
-@import "elements/popover.scss";
-@import "elements/modal.scss";
-@import "elements/admin-panel.scss";
-  
-@import "elements/forms.scss";
+@use 'elements/links.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/buttons' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/dialog.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/popover.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/modal.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/admin-panel.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
 
-@import "elements/badge-tag.scss";
-@import "elements/details.scss";
+@use 'elements/forms.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly,
+  $optionalText: $optionalText
+);
 
-@import "elements/progress.scss";
+@use 'elements/badge-tag.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'elements/details.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+
+@use 'elements/progress.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);

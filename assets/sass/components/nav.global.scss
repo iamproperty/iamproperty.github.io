@@ -1,31 +1,28 @@
 @use 'sass:math';
-@use "../_func" as *;
+@use '../_func' as *;
+
+$darkMode: 'true' !default;
 
 body:has(iam-nav.open:not(.nav--sticky):not(.nav--xs-sticky)) {
   max-height: 100vh;
   overflow: hidden;
-
 }
 
 body {
-  
   --nav-height: #{rem(96)};
   --sticky-padding: 0px;
 
-  &:has(iam-nav a[slot="secondary"]){
-    
+  &:has(iam-nav a[slot='secondary']) {
     --nav-height: #{rem(96 + 40)};
   }
 
   &:has(iam-nav.nav--sticky) {
-    
     --sticky-padding: var(--nav-height);
   }
 }
 
 // #region Create the correct padding top of the page
 nav:has(iam-nav) {
-
   min-height: #{rem(96)};
   display: block;
   position: relative;
@@ -39,36 +36,32 @@ nav:has(iam-nav) {
   }
 }
 
-@include media-breakpoint-up(md) {
-  nav:has(iam-nav a[slot="secondary"]){
-    
+@include media-breakpoint-up(md, $mobileOnly) {
+  nav:has(iam-nav a[slot='secondary']) {
     min-height: #{rem(96 + 40)};
   }
 }
 
 nav:has(iam-nav.nav--sticky) {
-
   iam-nav {
     position: fixed;
   }
 }
 
 @media screen and (max-width: 36em) {
-
   body:has(iam-nav.open:not(.nav--xs-sticky)) {
     max-height: 100vh;
     overflow: hidden;
   }
 
   nav:has(iam-nav.nav--xs-sticky) {
-
     iam-nav {
       position: fixed;
     }
   }
 }
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(sm, $mobileOnly) {
   body:has(iam-nav.open:not(.nav--sticky)) {
     max-height: 100vh;
     overflow: hidden;
@@ -78,15 +71,13 @@ nav:has(iam-nav.nav--sticky) {
 
 // #region General styles
 iam-nav {
-
   --nav-height: #{rem(96)};
 
-  &:has(a[slot="secondary"]){
-    
+  &:has(a[slot='secondary']) {
     --nav-height: #{rem(96 + 40)};
   }
 
-  overscroll-behavior: contain!important;
+  overscroll-behavior: contain !important;
   background-color: var(--colour-canvas);
   display: block;
   margin-left: auto;
@@ -111,8 +102,7 @@ iam-nav {
     }
   }
 
-  a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
-    
+  a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
     text-decoration: none;
 
     .badge {
@@ -122,52 +112,47 @@ iam-nav {
       margin-top: -0.8rem;
     }
 
-    &:where(:hover,:focus,.selected,[aria-current="page"]) {
+    &:where(:hover, :focus, .selected, [aria-current='page']) {
       text-decoration: underline;
       text-underline-offset: 0.3em;
       text-decoration-thickness: 2px;
       text-decoration-color: var(--colour-underline);
     }
     &:active {
-      text-decoration-color: #A2D393!important;
+      text-decoration-color: #a2d393 !important;
     }
     &.selected,
-    &[aria-current="page"] {
-      text-decoration-color: var(--colour-info)!important;
+    &[aria-current='page'] {
+      text-decoration-color: var(--colour-info) !important;
     }
   }
 }
 
-
 iam-nav details {
-
   padding-bottom: 0;
-  
-  > summary {
 
+  > summary {
     text-decoration: none;
 
-    &:where(:hover,:focus,.selected) {
+    &:where(:hover, :focus, .selected) {
       text-decoration: underline;
       text-underline-offset: 0.3em;
       text-decoration-thickness: 2px;
       text-decoration-color: var(--colour-underline);
     }
     &:active {
-      text-decoration-color: #A2D393!important;
-    }  
+      text-decoration-color: #a2d393 !important;
+    }
   }
 
   &[open] > summary {
-    
     text-decoration: underline;
     text-underline-offset: 0.3em;
     text-decoration-thickness: 2px;
     text-decoration-color: var(--colour-success);
   }
 
-  &:has([aria-current="page"]:not([data-duplicate])) > summary {
-    
+  &:has([aria-current='page']:not([data-duplicate])) > summary {
     text-decoration: underline;
     text-underline-offset: 0.3em;
     text-decoration-thickness: 2px;
@@ -177,14 +162,13 @@ iam-nav details {
 
 // #endregion
 
-
 // #region mobile and tablet mega menu
 
 @mixin mobDetails() {
   background-color: var(--colour-canvas);
-    
-  @include light-mode() {
-    background-color: #EEEEEE;
+
+  @include light-mode($darkMode) {
+    background-color: #eeeeee;
   }
 
   margin-left: -1.5rem;
@@ -194,19 +178,16 @@ iam-nav details {
   position: relative;
 
   summary {
-
     background-color: var(--colour-white);
 
-          
-    @include dark-mode() {
-      
+    @include dark-mode($darkMode) {
       background-color: var(--colour-canvas-2);
     }
-    display:block;
+    display: block;
     border: none;
     color: var(--colour-link);
     margin: 0;
-    
+
     margin-left: -1.5rem;
     margin-right: -1.5rem;
     padding: 1.5rem 4rem 1.5rem 1.5rem;
@@ -217,26 +198,26 @@ iam-nav details {
     font-weight: normal;
 
     &:after {
-      content: "\f055";
+      content: '\f055';
       display: block;
       font-size: rem(24);
       font-weight: 300;
       position: absolute;
       top: 1.5rem;
       right: 1.5rem;
-      font-family: "Font Awesome 6 Pro";
+      font-family: 'Font Awesome 6 Pro';
       line-height: 1em;
     }
   }
 
   &[open] > summary:after {
-    content: "\f056";
+    content: '\f056';
     font-weight: bold;
   }
 
   a {
     text-decoration: none;
-    display:block;
+    display: block;
     border: none;
     color: var(--colour-link);
     margin: 0;
@@ -249,20 +230,19 @@ iam-nav details {
     font-weight: normal;
 
     &:after {
-      background: var(--colour-border)!important;
-      top: calc(100% - 2px)!important;
-      width: 100%!important;
+      background: var(--colour-border) !important;
+      top: calc(100% - 2px) !important;
+      width: 100% !important;
     }
   }
 
   // Hide cards
-  a:has(iam-card){ 
-    display: none!important;
+  a:has(iam-card) {
+    display: none !important;
   }
 
   > div a:last-child {
-    
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
   }
 
   > div a:last-child:after {
@@ -270,7 +250,7 @@ iam-nav details {
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     top: calc(100% - 2px);
     left: 1.5rem;
@@ -284,12 +264,10 @@ iam-nav details {
 
 @media screen and (max-width: 62em) {
   iam-nav details {
-
     @include mobDetails();
 
-    // Sub details 
+    // Sub details
     details {
-
       &:after {
         display: none;
       }
@@ -316,16 +294,15 @@ iam-nav details {
       }
     }
 
-    details[open] + details:before{
-      
-      content: "";
+    details[open] + details:before {
+      content: '';
       display: block;
       background: var(--colour-canvas-2);
-        padding-top: 1.5rem;
-        margin-left: -1.5rem;
-        margin-right: -1.5rem;
+      padding-top: 1.5rem;
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
     }
-  } 
+  }
 }
 
 // #endregion
@@ -333,45 +310,36 @@ iam-nav details {
 // #region tablet mega menu tweaks
 
 @mixin tabletDetails() {
-  
   padding-right: rem(40);
   margin-right: rem(-40);
 
   &:after {
-    
     width: calc(100% - 4rem);
   }
-  
+
   summary {
-      
     padding-right: rem(40);
     margin-right: rem(-40);
 
     &:after {
-      
       right: 2.5rem;
     }
   }
 }
 
 @media screen and (max-width: 62em) and (min-width: 36em) {
-
   iam-nav details {
-
     @include tabletDetails();
   }
 
   iam-nav details details[open] + details:before {
-    
     padding-right: rem(40);
     margin-right: rem(-40);
   }
 }
 
 @media screen and (min-width: 62em) {
-
   iam-nav .nav--menu details {
-    
     @include mobDetails();
     @include tabletDetails();
   }
@@ -380,15 +348,13 @@ iam-nav details {
 // #endregion
 
 // #region Desktop mega menu
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   iam-nav > details,
   iam-nav *:not(.nav--menu) > details {
-
     width: auto;
 
     > summary {
-
-      display:block;
+      display: block;
       border: none;
       color: var(--colour-link);
       margin: 0;
@@ -400,23 +366,22 @@ iam-nav details {
       font-weight: normal;
       white-space: nowrap;
       padding-right: rem(24);
-      
+
       &:after {
-        content: "\f078";
+        content: '\f078';
         display: block;
         font-size: rem(16);
         font-weight: 300;
         position: absolute;
         top: 50%;
-        transform: translate(0,-50%);
+        transform: translate(0, -50%);
         right: 0;
-        font-family: "Font Awesome 6 Pro";
+        font-family: 'Font Awesome 6 Pro';
         line-height: 1em;
       }
     }
 
-    &:not(:first-child) > summary{
-
+    &:not(:first-child) > summary {
       margin-left: 1.5rem;
     }
 
@@ -430,39 +395,38 @@ iam-nav details {
       top: 100%;
       left: 0;
       width: 100%;
-      padding-inline: max(var(--padding-inline), calc((100% - var(--container-max-width)) / 2 + var(--padding-inline)))!important;
+      padding-inline: max(
+        var(--padding-inline),
+        calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
+      ) !important;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
 
-      
-      @include light-mode() {
+      @include light-mode($darkMode) {
         background: var(--colour-white);
         @include reset-colours();
       }
-      @include dark-mode() {
-
+      @include dark-mode($darkMode) {
         @include invert-colours();
       }
     }
 
     &[open] > div:has(details) {
-
-      
       background: var(--colour-canvas-2);
-      
-      @include light-mode() {
-        background: #EEEEEE;
+
+      @include light-mode($darkMode) {
+        background: #eeeeee;
       }
-      
+
       > a {
-        display: inline-block!important;
-        margin-right: 2rem!important;
+        display: inline-block !important;
+        margin-right: 2rem !important;
 
         &:first-child {
           margin-right: 0;
         }
 
         &:after {
-          display: none!important;
+          display: none !important;
         }
       }
 
@@ -474,11 +438,11 @@ iam-nav details {
 
         summary {
           display: inline-block;
-          margin-left: 0!important;
+          margin-left: 0 !important;
           margin-right: 2rem;
         }
-        
-        &:first-child summary{
+
+        &:first-child summary {
           margin-left: 0;
         }
       }
@@ -487,7 +451,7 @@ iam-nav details {
     &[open] > div:not(:has(details)) {
       background: var(--colour-canvas);
 
-      @include light-mode() {
+      @include light-mode($darkMode) {
         background: var(--colour-white);
         --colour-canvas-2: white;
       }
@@ -498,7 +462,7 @@ iam-nav details {
       column-gap: rem(110);
 
       > a {
-        margin-right: 0!important;
+        margin-right: 0 !important;
         display: block;
         max-height: 6rem;
 
@@ -507,7 +471,7 @@ iam-nav details {
         }
       }
 
-      a:has(iam-card){
+      a:has(iam-card) {
         display: inline-block;
       }
 
@@ -519,39 +483,42 @@ iam-nav details {
         left: 0;
         width: 100%;
         color: var(--colour-white);
-        padding-inline: max(var(--padding-inline), calc((100% - var(--container-max-width)) / 2 + var(--padding-inline)))!important;
+        padding-inline: max(
+          var(--padding-inline),
+          calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
+        ) !important;
         font-size: rem(32);
         font-weight: bold;
         line-height: rem(88);
 
         --gradient-direction: 90deg;
         background-color: var(--colour-info-theme);
-        background-image: linear-gradient(var(--gradient-direction), var(--colour-primary-theme) 0, transparent 100%) !important;
+        background-image: linear-gradient(
+          var(--gradient-direction),
+          var(--colour-primary-theme) 0,
+          transparent 100%
+        ) !important;
       }
-      
-      &:has(iam-card){
-          
+
+      &:has(iam-card) {
         column-gap: rem(16);
-        
+
         a:not(:has(iam-card)) {
-          margin-right: rem(94)!important;
+          margin-right: rem(94) !important;
         }
 
-        a:has(iam-card){
-
+        a:has(iam-card) {
           &:after {
             display: none;
           }
         }
         a:not(:has(iam-card)) + a:has(iam-card) {
-            
           break-before: column;
         }
       }
     }
 
-    a:not([slot="logo"]):not(.btn):not(:has(iam-card)) {
-
+    a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
       font-size: 1rem;
       line-height: rem(24);
       padding-block: 1.5rem;
@@ -559,33 +526,32 @@ iam-nav details {
       font-weight: normal;
       display: block;
       margin: 0;
-      
-      &:where(:hover,:focus,.selected,[aria-current="page"]) {
+
+      &:where(:hover, :focus, .selected, [aria-current='page']) {
         text-decoration: underline;
         text-underline-offset: 0.3em;
         text-decoration-thickness: 2px;
         text-decoration-color: var(--colour-underline);
       }
       &:active {
-        text-decoration-color: #A2D393!important;
+        text-decoration-color: #a2d393 !important;
       }
       &.selected,
-      &[aria-current="page"] {
+      &[aria-current='page'] {
         text-decoration-color: var(--colour-info);
       }
 
       &:after {
-        content: "";
+        content: '';
         display: block;
         height: 2px;
-        width: 100%!important;
+        width: 100% !important;
         top: calc(100% - 2px);
-        background-color: var(--colour-border)!important;
+        background-color: var(--colour-border) !important;
       }
     }
 
     details > summary {
-
       padding-right: 0;
       background: transparent;
 
@@ -595,13 +561,12 @@ iam-nav details {
     }
 
     details:not(:first-child) > summary {
-        
       margin-left: rem(32);
     }
   }
 
-  nav:has(iam-nav.open){
-    min-height: 100vh!important;
+  nav:has(iam-nav.open) {
+    min-height: 100vh !important;
     max-height: 100vh;
     overflow: auto;
 
@@ -614,28 +579,24 @@ iam-nav details {
 }
 
 // 4 columns on large screens
-@media screen and (min-width: 80em) { // 1280
+@media screen and (min-width: 80em) {
+  // 1280
   iam-nav.nav--large *:not(.nav--menu) > details {
-
     &[open] > div:not(:has(details)) {
-
       columns: 4;
       column-gap: rem(110);
     }
   }
 }
 
-
 // #endregion
 
 // #region Search
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   iam-nav {
-
     &.search-open {
-
-      > *:not([slot="logo"]):not([slot="secondary"]):not([slot="search"]) {
-        display: none!important;
+      > *:not([slot='logo']):not([slot='secondary']):not([slot='search']) {
+        display: none !important;
       }
     }
   }
@@ -643,22 +604,22 @@ iam-nav details {
 // #endregion
 
 // #region Dual navbar in desktop
-@include media-breakpoint-up(md) {
-  iam-nav:has([slot="dual"]) {
-    .brand:has(~ [slot="dual"]) {
-      margin-right: rem(24)!important;
+@include media-breakpoint-up(md, $mobileOnly) {
+  iam-nav:has([slot='dual']) {
+    .brand:has(~ [slot='dual']) {
+      margin-right: rem(24) !important;
     }
 
-    *:not([slot="dual"]):has(+ [slot="dual"]) + [slot="dual"] {
-      margin-left: auto!important;
+    *:not([slot='dual']):has(+ [slot='dual']) + [slot='dual'] {
+      margin-left: auto !important;
     }
 
-    .btn[slot="dual"] {
+    .btn[slot='dual'] {
       margin-left: 0;
     }
 
     &::part(btn-menu) {
-      margin-left: 1rem!important;
+      margin-left: 1rem !important;
     }
   }
 }
@@ -666,9 +627,7 @@ iam-nav details {
 
 // #region compact menus on mobile
 iam-nav > .dialog__wrapper {
-
   .dialog--list {
-
     a {
       font-size: 1rem;
     }
@@ -676,18 +635,14 @@ iam-nav > .dialog__wrapper {
 }
 
 @media screen and (max-width: 62em) {
-
-
   iam-nav > .dialog__wrapper:not(.dialog--xs) {
-
     width: 100%;
 
     .btn-compact {
-      display: none!important;
+      display: none !important;
     }
     .dialog--list {
-      
-      display: contents!important;
+      display: contents !important;
 
       a {
         font-size: 1rem;
@@ -699,26 +654,24 @@ iam-nav > .dialog__wrapper {
   iam-nav .btn-compact {
     --compact-size: 2rem;
     all: unset;
-    display: block!important;
-    font-size: rem(14)!important;
-    line-height: rem(32)!important;
-    height: rem(32)!important;
-    min-height: rem(32)!important;
-    max-height: rem(32)!important;
-    width: 100%!important;
-    margin: 0!important;
+    display: block !important;
+    font-size: rem(14) !important;
+    line-height: rem(32) !important;
+    height: rem(32) !important;
+    min-height: rem(32) !important;
+    max-height: rem(32) !important;
+    width: 100% !important;
+    margin: 0 !important;
     cursor: pointer;
     color: var(--colour-link);
-    font-weight: normal!important;
+    font-weight: normal !important;
 
-
-    &:where(:hover,:focus,.selected,[aria-current=page]) {
+    &:where(:hover, :focus, .selected, [aria-current='page']) {
       text-decoration: underline;
       text-underline-offset: 0.3em;
       text-decoration-thickness: 2px;
       text-decoration-color: var(--colour-underline);
     }
-
 
     &:before {
       display: inline-block;
@@ -726,7 +679,7 @@ iam-nav > .dialog__wrapper {
       position: static;
       margin-right: 0.5rem;
       font-size: 0.875rem !important;
-      text-decoration: none!important;
+      text-decoration: none !important;
     }
 
     &:after {
@@ -736,52 +689,47 @@ iam-nav > .dialog__wrapper {
 }
 // #endregion
 
-// #region navbar additional menus 
+// #region navbar additional menus
 
 iam-nav .nav--menu {
+  outline: none !important;
 
-  outline: none!important;
-  
   &::-webkit-scrollbar {
     width: 6px;
   }
-   
-  &::-webkit-scrollbar-track {
-    border: 0!important;
-  }
-   
-  &::-webkit-scrollbar-thumb {
-    border: 0!important;
-  }
-  
-  hr {
 
+  &::-webkit-scrollbar-track {
+    border: 0 !important;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 0 !important;
+  }
+
+  hr {
     width: 100% !important;
     border-top: 2px solid var(--colour-border) !important;
   }
   a {
-
     display: block !important;
     line-height: 1.25rem !important;
     padding: 1.5rem 0 !important;
-    margin: 0!important;
+    margin: 0 !important;
 
-    &:not(.mb-0):not(:has(+a)){
-      margin: 0 0 rem(36) 0!important;
+    &:not(.mb-0):not(:has(+ a)) {
+      margin: 0 0 rem(36) 0 !important;
     }
-    
+
     flex-shrink: 0;
     font-size: 1rem !important;
     font-weight: normal !important;
 
-    &:has( + a ) {
-      margin-bottom: 0!important;
+    &:has(+ a) {
+      margin-bottom: 0 !important;
     }
 
-
     &:after {
-
-      content: "";
+      content: '';
       display: block;
       height: 2px;
       width: 100% !important;
@@ -796,7 +744,7 @@ iam-nav .nav--menu {
   }
 
   &.closed * {
-    display: none!important;
+    display: none !important;
   }
 }
 

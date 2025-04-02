@@ -1,7 +1,8 @@
-@use "../_func" as *;
+@use '../_func' as *;
+
+@include margins();
 
 :host {
-  
   container-type: inline-size;
   display: block;
 }
@@ -10,30 +11,31 @@
   display: block;
 
   @include container-up(sm) {
-
     display: flex;
     align-items: center;
-    justify-content: space-between!important;
+    justify-content: space-between !important;
     padding-top: rem(32);
   }
 
   > div {
-    
     display: flex;
     align-items: center;
+  }
+
+  *:has(.prev:disabled):has(.next:disabled) {
+    display: none;
   }
 }
 
 // #region page jump and per page
 .pagination div:is(.page-jump, .per-page) {
-
   border: 1px solid var(--colour-light);
   height: rem(52);
 
   display: none;
   align-items: center;
   padding-inline: 1rem;
-  
+
   .select--minimal {
     height: calc(3.25rem - 1em);
     line-height: calc(3.25rem - 1em);
@@ -41,9 +43,9 @@
     font-weight: bold;
   }
 
-  div:has(> select){
+  div:has(> select) {
     margin-bottom: 0;
-    
+
     &:after {
       top: 50%;
     }
@@ -51,8 +53,7 @@
 }
 
 .page-jump {
-  
-  border-right: none!important;
+  border-right: none !important;
 }
 
 .total-pages {
@@ -61,28 +62,28 @@
 
 :host([data-page-jump][data-minimal]) {
   .page-jump {
-    display: flex!important;
+    display: flex !important;
   }
 }
 @include container-up(sm) {
-:host([data-page-jump]) {
-  .page-jump {
-    display: flex!important;
+  :host([data-page-jump]) {
+    .page-jump {
+      display: flex !important;
+    }
   }
-}
 }
 
 @include container-up(sm) {
   :host([data-per-page]:not([data-page-jump][data-item-count])) {
     .per-page {
-      display: flex!important;
+      display: flex !important;
     }
   }
 }
 @include container-up(md) {
   :host([data-per-page][data-page-jump][data-item-count]) {
     .per-page {
-      display: flex!important;
+      display: flex !important;
     }
   }
 }
@@ -97,14 +98,13 @@
 }
 
 @include container-up(sm) {
-
   .pagination > .item-count {
     display: none;
   }
 
   :host([data-item-count]) {
     .pagination > .item-count {
-      display: flex!important;
+      display: flex !important;
       margin: 0;
     }
   }
@@ -113,7 +113,6 @@
 
 // #region buttons
 *:where(.prev, .next) {
-
   border: 1px solid var(--colour-light);
   line-height: rem(52);
   height: rem(52);
@@ -122,35 +121,33 @@
   background: none;
   padding-inline: 1rem;
   color: var(--colour-body);
-  
-  @include container-up(sm) {
 
+  @include container-up(sm) {
     display: inline-block;
   }
 
   &:after {
     margin-left: 0.5em;
     font-size: 0.8rem;
-    content: "\f054";
-    font-family: "Font Awesome 6 Pro";
-    color:var(--colour-info);
+    content: '\f054';
+    font-family: 'Font Awesome 6 Pro';
+    color: var(--colour-info);
   }
 
-  &:is(:hover,:focus):not(:disabled){
+  &:is(:hover, :focus):not(:disabled) {
     background-color: var(--pagination-link-color);
     color: var(--colour-hover);
   }
 
-  &:is(:active):not(:disabled){
+  &:is(:active):not(:disabled) {
     background-color: var(--pagination-link-color);
     color: var(--colour-active);
   }
 
   &:disabled {
-    
     &:after,
     &:before {
-      color: inherit!important;
+      color: inherit !important;
     }
   }
 }
@@ -160,17 +157,15 @@
     justify-content: flex-end;
 
     @include container-up(sm) {
-
       justify-content: space-between;
     }
   }
-  *:where(.prev, .next){
-    display: inline-block!important;
+  *:where(.prev, .next) {
+    display: inline-block !important;
   }
 }
 
 .prev {
-
   border-right: none;
   &:after {
     display: none;
@@ -178,9 +173,9 @@
   &:before {
     margin-right: 0.5em;
     font-size: 0.8rem;
-    content: "\f053";
-    font-family: "Font Awesome 6 Pro";
-    color:var(--colour-info);
+    content: '\f053';
+    font-family: 'Font Awesome 6 Pro';
+    color: var(--colour-info);
   }
 }
 // #endregion
@@ -197,39 +192,38 @@
     align-items: center;
     justify-content: flex-end;
   }
-  *:is(.mobile-controls,.item-count) {
+  *:is(.mobile-controls, .item-count) {
     display: none;
   }
 }
 
 @include container-up(sm) {
   .mobile-controls {
-    display: none!important;
+    display: none !important;
   }
   :host([data-item-count]) {
     .item-count {
-      display: flex!important;
+      display: flex !important;
     }
   }
 }
 
 .fa-spin {
-  display: none!important;
+  display: none !important;
   font-size: rem(48);
   color: var(--colour-info);
 }
 
 :host([data-loading]) {
-
   .mobile-controls {
     padding-top: rem(32);
   }
   .item-count,
   .mobile-controls > *:not(.fa-spin) {
-    display: none!important;
+    display: none !important;
   }
   .fa-spin {
-    display: block!important;
+    display: block !important;
     margin: auto;
   }
 }

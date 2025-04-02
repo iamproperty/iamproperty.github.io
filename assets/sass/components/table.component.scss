@@ -1,0 +1,171 @@
+@use '../_func.scss' as *;
+
+// #region Table wrapper - Add via JS if needed, provides a safe space to scroll
+:host {
+  --wrapper-padding: #{rem(32)};
+  --bg-colour: #ffffff;
+  display: block;
+  background: white;
+  padding: var(--wrapper-padding);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+  border-radius: rem(10);
+  margin-bottom: rem(32);
+  overflow: hidden;
+
+  &:before {
+    display: none !important;
+  }
+
+  @media screen and (prefers-color-scheme: dark) {
+    background: var(--colour-canvas-2);
+  }
+
+  @media (forced-colors: active) {
+    --wrapper-padding: 0;
+    background: var(--colour-canvas-2);
+  }
+}
+
+::slotted(table) {
+  margin-bottom: 0 !important;
+}
+
+.table__wrapper {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
+}
+// #endregion
+
+// #region Tables are only stacked on mobile
+@container (width < 23.4375em) {
+  :host(:not(.table--fullwidth)) {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    margin-bottom: 0;
+    background: var(--colour-canvas-2);
+    border-radius: 0;
+
+    .table__wrapper:not(.table--fullwidth) {
+      overflow: hidden;
+      max-height: none !important;
+    }
+
+    background: none;
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+
+    ::slotted(table) {
+      overflow: visible !important;
+      margin-inline: 1.5rem;
+      margin-bottom: 1.5rem !important;
+      width: calc(100% - 3rem) !important;
+      display: block;
+    }
+
+    .table--cta {
+      border-bottom: 0;
+
+      &:after {
+        content: none;
+        display: none !important;
+      }
+    }
+  }
+}
+// #endregion
+
+// #region CTA column
+@container (width > 23.4375em) {
+  :host {
+    --cta-width: 8rem;
+  }
+
+  :host(.table--loading) {
+    --cta-width: 1.5rem !important;
+  }
+
+  .table--cta {
+    position: relative;
+  }
+
+  .table--cta .table__wrapper {
+    overflow-y: hidden;
+    margin-bottom: 0;
+  }
+}
+// #endregion
+
+// #region Max height tables
+.table__wrapper:is(.mh-sm, .mh-md, .mh-lg) {
+  position: relative;
+
+  &::before {
+    top: calc(100% - 1.2rem);
+    bottom: 2px;
+    height: 1.2rem;
+    border-bottom: 2px solid var(--colour-border);
+    margin-bottom: -1.2rem;
+  }
+}
+
+// If table CTA class is set then undo max-height
+.table--cta > .table__wrapper:is(.mh-sm, .mh-md, .mh-lg) {
+  max-height: none;
+  position: static;
+
+  &::before {
+    display: none;
+  }
+}
+//#endregion
+
+// #region Table with actionbar
+@container (width < 23.4375em) {
+  .table__wrapper.has-actionbar {
+    margin-top: calc(-100vh - -6.75rem) !important;
+  }
+}
+// #endregion
+
+// #region Loading via ajax
+:host(.table--loading) {
+  pointer-events: none;
+  position: relative;
+
+  ::slotted(table) {
+    min-height: 20rem;
+    opacity: 0.5;
+  }
+
+  &::after {
+    content: 'Loading...';
+    position: absolute;
+    top: rem(100);
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-weight: bold;
+    color: var(--colour-heading);
+    font-size: 1.5rem;
+    text-shadow: 0px 0px 10px var(--colour-canvas-2);
+    padding-inline: 2rem;
+    text-shadow: 0px 0px 10px var(--colour-canvas-2);
+    background: radial-gradient(var(--colour-canvas-2), transparent);
+  }
+}
+// #endregion
+
+// #region pagination
+@container (width < 23.4375em) {
+  .pagination--table {
+    margin-inline: rem(24);
+    width: auto;
+  }
+  :host(.table--fullwidth) .pagination--table {
+    margin-inline: 0;
+  }
+}
+// #endregion

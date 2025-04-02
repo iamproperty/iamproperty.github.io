@@ -1,30 +1,37 @@
 <template>
   <main>
-    
     <DSHeader :image="headerImg" section="components">
       <h1>Modals</h1>
     </DSHeader>
 
     <div class="container">
       <h2>Introduction</h2>
-      <p class="lead">Modals are user interface elements that concentrate the user’s attention on a specific task or information by displaying a window that overlays the page content.</p>
+      <p class="lead">
+        Modals are user interface elements that concentrate the user’s attention on a specific task or information by
+        displaying a window that overlays the page content.
+      </p>
       <h3>Overview</h3>
-      <p>Modals are widely used in user interfaces to convey important information, obtain user input, confirm actions, or present critical alerts. They help maintain user focus, provide clear guidance, and ensure that users are actively engaged in the specific task or information presented within the modal window.</p>
-      <p class="note mb-4"><strong>Note:</strong> The traditional modal use the bootstrap approach of <kbd>data-modal="[modal_id]"</kbd> on a button to show the targeted dialog with matching id. Supports backdrop click or escape key to hide. Add a div with class <kbd>mh-lg</kbd> to allow scrollable content.</p>
-
+      <p>
+        Modals are widely used in user interfaces to convey important information, obtain user input, confirm actions,
+        or present critical alerts. They help maintain user focus, provide clear guidance, and ensure that users are
+        actively engaged in the specific task or information presented within the modal window.
+      </p>
+      <p class="note mb-4">
+        <strong>Note:</strong> The traditional modal use the bootstrap approach of <kbd>data-modal="[modal_id]"</kbd> on
+        a button to show the targeted dialog with matching id. Supports backdrop click or escape key to hide. Add a div
+        with class <kbd>mh-lg</kbd> to allow scrollable content.
+      </p>
     </div>
 
-
-    
     <div class="container">
-      
       <DialogUsage></DialogUsage>
 
-      <p>For more context of when to use modals and when not to, see the <a href="/dialogs/dialog">dialog</a> page for further details. </p>
+      <p>
+        For more context of when to use modals and when not to, see the
+        <a href="/dialogs/dialog">dialog</a> page for further details.
+      </p>
     </div>
 
-
-    
     <div class="container">
       <ModalVariants></ModalVariants>
     </div>
@@ -32,12 +39,19 @@
     <!-- #region Passive -->
     <div class="container">
       <h3>Passive</h3>
-      <p>Provides information, feedback, or context to the user without explicitly prompting for input or demanding a decision. Can be used to display critical information, important notifications, or alerts that require user awareness but not immediate action.</p>
+      <p>
+        Provides information, feedback, or context to the user without explicitly prompting for input or demanding a
+        decision. Can be used to display critical information, important notifications, or alerts that require user
+        awareness but not immediate action.
+      </p>
 
       <div class="row">
         <div class="col-sm-6">
           <img :src="modalPassive" alt="" class="mb-3" />
-          <p>Passive dialogs are used to inform about crucial information, no action is needed. They can be dismissed by pressing the ‘X’ icon.</p>
+          <p>
+            Passive dialogs are used to inform about crucial information, no action is needed. They can be dismissed by
+            pressing the ‘X’ icon.
+          </p>
         </div>
       </div>
       <h4>Anatomy</h4>
@@ -46,12 +60,18 @@
         <li>Backdrop</li>
         <li>Optional label</li>
         <li>Title (H3 styles)</li>
-        <li>Body: contains the information and/or controls needed to complete the dialog’s task. It can include message text and components.</li>
+        <li>
+          Body: contains the information and/or controls needed to complete the dialog’s task. It can include message
+          text and components.
+        </li>
         <li>Dismiss button</li>
         <li>Dialog container</li>
       </ol>
       <h4>Dismissal</h4>
-      <p>The passive modal is less restrictive about dismissal, the body content is less urgent and doesn’t require an action from the user. It can be dismissed by clicking the ‘X’ button or clicking anywhere outside the modal.</p>
+      <p>
+        The passive modal is less restrictive about dismissal, the body content is less urgent and doesn’t require an
+        action from the user. It can be dismissed by clicking the ‘X’ button or clicking anywhere outside the modal.
+      </p>
     </div>
 
     <div class="container pb-5 mb-5">
@@ -61,39 +81,88 @@
     <dialog id="modal-passive">
       <span>Optional label</span>
       <span class="h3">Passive modal title</span>
-      
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-      
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
+        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+      </p>
     </dialog>
-
-
 
     <!-- #endregion -->
 
     <!-- #region Transactional -->
     <div class="container" id="transactional">
       <h3>Transactional</h3>
-      <p>A transactional modal dialog is a type of modal dialog that is used when a user’s action or decision has significant consequences or irreversible effects. Its key characteristic is to ensure that the user fully understands the implications of their action before proceeding.</p>
+      <p>
+        A transactional modal dialog is a type of modal dialog that is used when a user’s action or decision has
+        significant consequences or irreversible effects. Its key characteristic is to ensure that the user fully
+        understands the implications of their action before proceeding.
+      </p>
 
       <div class="row">
         <div class="col-sm-6">
           <img :src="modalTransactional" alt="" class="mb-3" />
-          <p>Transactional dialog requires user action </p>
+          <p>Transactional dialog requires user action</p>
         </div>
       </div>
       <h4>Anatomy</h4>
@@ -102,44 +171,59 @@
         <li>Backdrop</li>
         <li>Dialog container</li>
         <li>Title (H3 styles)</li>
-        <li>Actions The main actions needed to complete or cancel the dialog task. Use descriptive words for the actions like Add, Delete, Save and avoid vague words like Done or OK.</li>
+        <li>
+          Actions The main actions needed to complete or cancel the dialog task. Use descriptive words for the actions
+          like Add, Delete, Save and avoid vague words like Done or OK.
+        </li>
         <li>Icon (optional)</li>
-        <li> Body: Contains the information and/or controls needed to complete the dialog’s task. It can include message text and components.</li>
+        <li>
+          Body: Contains the information and/or controls needed to complete the dialog’s task. It can include message
+          text and components.
+        </li>
       </ol>
       <h4>Dismissal</h4>
-      <p>The transactional modal is intentionally restrictive because it requires an action. To dismiss it, the user has to use one of the two action buttons. The primary button should complete the action the modal is urging, but the secondary button should offer them the option not to.</p>
+      <p>
+        The transactional modal is intentionally restrictive because it requires an action. To dismiss it, the user has
+        to use one of the two action buttons. The primary button should complete the action the modal is urging, but the
+        secondary button should offer them the option not to.
+      </p>
     </div>
-    
+
     <div class="container pb-5 mb-5">
       <h4>Preview</h4>
       <button data-modal="modal-transactional" class="btn btn-secondary">Open Modal</button>
     </div>
     <dialog id="modal-transactional" class="dialog--transactional">
-
       <i class="fa-light fa-circle"><i class="fa-regular fa-trash-can"></i></i>
-      
+
       <span class="h3">Delete property file</span>
-      <p>Continually will permanently delete this property. Are <br class="d-none d-sm-block"/>you sure you’d like to continue?</p>
-  
+      <p>
+        Continually will permanently delete this property. Are <br class="d-none d-sm-block" />you sure you’d like to
+        continue?
+      </p>
+
       <form>
         <button class="btn btn-secondary" formmethod="dialog">Cancel</button>
         <button class="btn btn-primary">Delete</button>
       </form>
     </dialog>
 
-
     <!-- #endregion -->
-
 
     <!-- #region Acknowledgement -->
     <div class="container" id="acknowledgement">
       <h3>Acknowledgement</h3>
-      <p>The purpose of an acknowledgment modal dialog is to obtain explicit consent or confirmation from the user regarding specific information or conditions. It ensures that users are aware of important details and have actively acknowledged them, providing legal or compliance requirements, and establishing a clear understanding between the user and the system or platform.</p>
+      <p>
+        The purpose of an acknowledgment modal dialog is to obtain explicit consent or confirmation from the user
+        regarding specific information or conditions. It ensures that users are aware of important details and have
+        actively acknowledged them, providing legal or compliance requirements, and establishing a clear understanding
+        between the user and the system or platform.
+      </p>
 
       <div class="row">
         <div class="col-sm-6">
           <img :src="modalAcknowledgement" alt="" class="mb-3" />
-          <p>The system needs acknowledgment from the user. Users must press ‘OK’ to dismiss the dialog </p>
+          <p>The system needs acknowledgment from the user. Users must press ‘OK’ to dismiss the dialog</p>
         </div>
       </div>
       <h4>Anatomy</h4>
@@ -148,22 +232,28 @@
         <li>Backdrop</li>
         <li>Dialog container</li>
         <li>Title (H3 styles)</li>
-        <li>Actions: The main actions needed to complete or navigate the dialog task. </li>
+        <li>Actions: The main actions needed to complete or navigate the dialog task.</li>
         <li>Icon (optional)</li>
         <li>Text</li>
       </ol>
       <h4>Dismissal</h4>
-      <p>The transactional modal is intentionally restrictive because it requires an action to acknowledge the message - for legal or compliance reasons. To dismiss it, the user has to press the primary button so the System has confirmation that the user acknowledges the message.</p>
+      <p>
+        The transactional modal is intentionally restrictive because it requires an action to acknowledge the message -
+        for legal or compliance reasons. To dismiss it, the user has to press the primary button so the System has
+        confirmation that the user acknowledges the message.
+      </p>
     </div>
-    
+
     <div class="container pb-5 mb-5">
       <h4>Preview</h4>
       <button data-modal="modal-ack" class="btn btn-secondary">Open Modal</button>
     </div>
     <dialog id="modal-ack" class="dialog--acknowledgement">
       <span class="h3">Acknowledgment modal title</span>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.</p>
-  
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+      </p>
+
       <form>
         <button class="btn btn-primary">OK</button>
       </form>
@@ -172,11 +262,13 @@
     <!-- #endregion -->
 
     <h3>Multi-step</h3>
-    <p>The purpose of a multi-step modal dialog is to provide users with a sense of assurance that their requested action is being processed and to keep them informed about the progress. It helps manage user expectations, reduce uncertainty, and provide a responsive user experience during tasks that require time to complete.</p>
+    <p>
+      The purpose of a multi-step modal dialog is to provide users with a sense of assurance that their requested action
+      is being processed and to keep them informed about the progress. It helps manage user expectations, reduce
+      uncertainty, and provide a responsive user experience during tasks that require time to complete.
+    </p>
 
     <a href="/components/multistep" class="btn btn-secondary">Multi-step Component</a>
-
-
 
     <div class="container mt-5">
       <h2>Implementation</h2>
@@ -187,7 +279,6 @@
         </details>
       </Tabs>
     </div>
-
 
     <div class="container pt-3">
       <h2>Event Tracking</h2>
@@ -203,7 +294,7 @@
           <tr>
             <td>openModal</td>
             <td>
-              Element with the <code>data-modal</code> attribute is clicked,<br/>
+              Element with the <code>data-modal</code> attribute is clicked,<br />
               Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is closed
             </td>
             <td>The modal ID</td>
@@ -211,9 +302,9 @@
           <tr>
             <td>closeModal</td>
             <td>
-              Button with the class of <code>dialog__close</code> is clicked,<br/>
-              Button with the <code>formmethod</code> attribute of <code>dialog</code> is clicked,<br/>
-              While a <code>dialog</code> is open and the backdrop is clicked,<br/>
+              Button with the class of <code>dialog__close</code> is clicked,<br />
+              Button with the <code>formmethod</code> attribute of <code>dialog</code> is clicked,<br />
+              While a <code>dialog</code> is open and the backdrop is clicked,<br />
               Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is open
             </td>
             <td>The modal ID</td>
@@ -261,111 +352,101 @@
 </template>
 
 <style lang="scss">
+  html #app #visualtest:target ~ main > {
+    dialog {
+      display: block !important;
+      position: static;
+      margin-bottom: 3rem;
+      position: relative;
+    }
 
-html #app #visualtest:target ~ main > {
-  dialog {
-    display: block!important;
-    position: static;
-    margin-bottom: 3rem;
-    position: relative;
+    #modal-multi {
+      display: flex !important;
+      position: relative;
+      grid-column: full-width;
+    }
   }
-
-  #modal-multi {
-    
-    display: flex!important;
-    position: relative;
-    grid-column: full-width;
-  }
-}
-
 </style>
 
 <script>
-import Tabs from '@/components/Tabs/Tabs.vue'
-import DSHeader from '../DSHeader.vue'
-import ModalVariants from '../ModalVariants.vue'
-import headerImg from '../../img/type-header.png'
-import DialogUsage from '../DialogUsage.vue'
-import modalPassive from '../../img/dialogs/modal-passive.png'
-import modalPassiveAnatomy from '../../img/dialogs/passive-modal-anatomy.png'
-import modalTransactional from '../../img/dialogs/modal-transactional.png'
-import modalTransactionalAnatomy from '../../img/dialogs/transactional-modal-anatomy.png'
-import modalMulti from '../../img/dialogs/modal-multi.png'
-import modalMultiAnatomy from '../../img/dialogs/multi-modal-anatomy.png'
-import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scroll.png'
-import modalAcknowledgement from '../../img/dialogs/modal-acknowledgement.png'
-import modalAcknowledgementAnatomy from '../../img/dialogs/acknowledgement-modal-anatomy.png'
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import DSHeader from '../DSHeader.vue';
+  import ModalVariants from '../ModalVariants.vue';
+  import headerImg from '../../img/type-header.png';
+  import DialogUsage from '../DialogUsage.vue';
+  import modalPassive from '../../img/dialogs/modal-passive.png';
+  import modalPassiveAnatomy from '../../img/dialogs/passive-modal-anatomy.png';
+  import modalTransactional from '../../img/dialogs/modal-transactional.png';
+  import modalTransactionalAnatomy from '../../img/dialogs/transactional-modal-anatomy.png';
+  import modalMulti from '../../img/dialogs/modal-multi.png';
+  import modalMultiAnatomy from '../../img/dialogs/multi-modal-anatomy.png';
+  import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scroll.png';
+  import modalAcknowledgement from '../../img/dialogs/modal-acknowledgement.png';
+  import modalAcknowledgementAnatomy from '../../img/dialogs/acknowledgement-modal-anatomy.png';
 
-import {createDialog} from '../../../assets/ts/modules/dialogs';
+  import { createDialog } from '../../../assets/ts/modules/dialogs';
 
-
-export default {
-  components: {
-    DSHeader,
-    ModalVariants,
-    Tabs,
-    DialogUsage,
-    modalPassive,
-    modalPassiveAnatomy,
-    modalTransactional,
-    modalTransactionalAnatomy,
-    modalMulti,
-    modalMultiAnatomy,
-    modalMultiAnatomyScroll,
-    modalAcknowledgement,
-    modalAcknowledgementAnatomy
-  },
-  data () {
-    return {
-      headerImg: headerImg,
-      modalPassive: modalPassive,
-      modalPassiveAnatomy: modalPassiveAnatomy,
-      modalTransactional: modalTransactional,
-      modalTransactionalAnatomy: modalTransactionalAnatomy,
-      modalMulti: modalMulti,
-      modalMultiAnatomy: modalMultiAnatomy,
-      modalMultiAnatomyScroll: modalMultiAnatomyScroll,
-      modalAcknowledgement: modalAcknowledgement,
-      modalAcknowledgementAnatomy: modalAcknowledgementAnatomy,
-      htmlUsage: `<button data-modal="modal" class="btn btn-secondary">Open Modal</button>
+  export default {
+    components: {
+      DSHeader,
+      ModalVariants,
+      Tabs,
+      DialogUsage,
+      modalPassive,
+      modalPassiveAnatomy,
+      modalTransactional,
+      modalTransactionalAnatomy,
+      modalMulti,
+      modalMultiAnatomy,
+      modalMultiAnatomyScroll,
+      modalAcknowledgement,
+      modalAcknowledgementAnatomy,
+    },
+    data() {
+      return {
+        headerImg: headerImg,
+        modalPassive: modalPassive,
+        modalPassiveAnatomy: modalPassiveAnatomy,
+        modalTransactional: modalTransactional,
+        modalTransactionalAnatomy: modalTransactionalAnatomy,
+        modalMulti: modalMulti,
+        modalMultiAnatomy: modalMultiAnatomy,
+        modalMultiAnatomyScroll: modalMultiAnatomyScroll,
+        modalAcknowledgement: modalAcknowledgement,
+        modalAcknowledgementAnatomy: modalAcknowledgementAnatomy,
+        htmlUsage: `<button data-modal="modal" class="btn btn-secondary">Open Modal</button>
 
 <dialog id="modal">
   <h3>Dialog Content (Modal)</h3>
   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 </dialog>
-      `
-    }
-  },
-  mounted(){
-    this.$nextTick(function () {
+      `,
+      };
+    },
+    mounted() {
+      this.$nextTick(function () {
+        Array.from(document.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
+          let parent = dialog.closest('.dialog__wrapper');
 
-      Array.from(document.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
+          if (!parent) {
+            dialog.removeAttribute('open');
+            dialog.showModal();
+            dialog.focus();
 
-        let parent = dialog.closest('.dialog__wrapper');
-
-        if(!parent){
-            
-          dialog.removeAttribute('open');
-          dialog.showModal();
-          dialog.focus();
-
-          createDialog(dialog);
-        }
-      });
-
-      var hash = window.location.hash;
-
-      if(hash == "#visualtest"){
-
-        Array.from(document.querySelectorAll('dialog')).forEach((dialog,index) => {
-
-          dialog.setAttribute('open','open');
-          createDialog(dialog);
+            createDialog(dialog);
+          }
         });
 
-      }
-    })
-  }
-}
+        var hash = window.location.hash;
+
+        if (hash == '#visualtest') {
+          Array.from(document.querySelectorAll('dialog')).forEach((dialog, index) => {
+            dialog.setAttribute('open', 'open');
+            createDialog(dialog);
+          });
+        }
+      });
+    },
+  };
 </script>

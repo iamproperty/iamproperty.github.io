@@ -1,48 +1,53 @@
-@use "sass:math";
-@use "../_func" as *;
+@use 'sass:math';
+@use '../_func' as *;
 
-nav:has(iam-nav) {
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  grid-column: container;
-}
-iam-nav {
-
-  display: block;
-  padding: var(--container-padding);
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  max-width: 100%;
-  margin-inline: auto;
-  column-grid: container;
-  
-  .brand {
-    font-size: rem(48);
-    height: rem(48);
-    padding: 0;
-    text-decoration: none;
-    min-width: min(var(--svg-width), 14rem);
+@include layer('components', $layers) {
+  nav:has(iam-nav) {
+    grid-column: container;
   }
+  iam-nav {
+    display: block;
+    padding: var(--container-padding);
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    max-width: 100%;
+    margin-inline: auto;
+    column-grid: container;
 
-  @include media-breakpoint-up(md) {
-    padding-inline: max(var(--padding-inline), calc((100% - var(--container-max-width)) / 2 + var(--padding-inline)))!important;
-  }
-}
-
-@media (scripting: enabled) {
-
-  iam-nav:not(:defined) {
-
-    > *:not([slot="logo"]) {
-      display: none;
-    }
-    
-    &:not(:target) > *:not(.brand) {
-      display: none;
+    .brand {
+      font-size: rem(48);
+      height: rem(48);
+      padding: 0;
+      text-decoration: none;
+      min-width: min(var(--svg-width), 14rem);
     }
 
-    @include media-breakpoint-up(md) {
-      &:has([slot="secondary"]){
-        padding-top: rem(64);
+    @include media-breakpoint-up(md, $mobileOnly) {
+      padding-inline: max(
+        var(--padding-inline),
+        calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
+      ) !important;
+    }
+  }
+
+  @media (scripting: enabled) {
+    iam-nav:not(:defined) {
+      > *:not([slot='logo']) {
+        display: none;
+      }
+
+      &:not(:target) > *:not(.brand) {
+        display: none;
+      }
+
+      @include media-breakpoint-up(md, $mobileOnly) {
+        &:has([slot='secondary']) {
+          padding-top: rem(64);
+        }
       }
     }
   }

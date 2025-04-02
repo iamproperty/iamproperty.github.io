@@ -1,5 +1,5 @@
 @use 'true' as *;
-@import '../../sass/func';
+@use '../../sass/func' as *;
 
 /*#region em*/
 @include describe('em [func]') {
@@ -80,7 +80,6 @@
   }
 }
 /*#endregion*/
-
 
 /*#region vw*/
 @include describe('vw [func]') {
@@ -190,42 +189,6 @@
       }
       @include expect {
         color: #ffffff;
-      }
-    }
-  }
-}
-/*#endregion*/
-
-/*#region breakpoint-max*/
-@include describe('breakpoint-max [func]') {
-  @include it('breakpoint-max func creates a max-width media query') {
-    // Assert the expected results
-    @include assert {
-      @include output {
-        $name: 'sm';
-        $max: breakpoint-max($name);
-        @media (max-width: $max) {
-          color: red;
-        }
-      }
-      @include expect {
-        @media (max-width: 35.98em) {
-          color: red;
-        }
-      }
-    }
-    @include assert {
-      @include output {
-        $name: 'md';
-        $max: breakpoint-max($name);
-        @media (max-width: $max) {
-          color: red;
-        }
-      }
-      @include expect {
-        @media (max-width: 61.98em) {
-          color: red;
-        }
       }
     }
   }

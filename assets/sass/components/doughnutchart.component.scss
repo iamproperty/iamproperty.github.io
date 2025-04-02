@@ -1,0 +1,205 @@
+@use '../_func.scss' as *;
+@use 'charts.module.scss' as *;
+@use '../elements/buttons.scss' as *;
+
+.d-block {
+  display: block;
+}
+
+@for $i from 1 to 11 {
+  .chart__wrapper .doughnut path:nth-child(11n - #{11 - $i}) {
+    fill: var(#{'--chart-colour-' + $i + '-set'});
+  }
+}
+
+.chart__wrapper {
+  order: 1;
+}
+
+// #region chart key
+.chart__key {
+  --key-border-radius: 50%;
+  order: 2;
+  margin-bottom: 0;
+
+  .btn-action {
+    font-size: rem(12);
+    margin-right: rem(-6) !important;
+    border-color: transparent !important;
+  }
+
+  .btn-action:not(:hover):not(:focus) {
+    border-color: transparent !important;
+    background: transparent !important;
+  }
+}
+// #endregion
+
+// #region Horizontal
+:host(.chart--horizontal) {
+  .chart__outer {
+    flex-direction: row;
+
+    .chart__key {
+      flex-direction: column;
+      justify-content: center;
+      overflow: visible;
+
+      .btn-action {
+        margin-right: rem(0) !important;
+        margin-bottom: rem(-12) !important;
+      }
+    }
+  }
+}
+
+:host(.chart--horizontal.chart--show-totals) {
+  .chart__outer .chart__key {
+    .btn-action {
+      min-width: 100%;
+      display: flex;
+      align-items: center;
+      min-width: 100%;
+    }
+
+    .btn-action[data-numeric]:before {
+      flex-shrink: 0;
+    }
+
+    .btn-action[data-numeric]:after {
+      content: attr(data-numeric);
+      display: inline-block;
+      flex-grow: 1;
+      flex-shrink: 0;
+      min-width: 6ch;
+      text-align: right;
+    }
+  }
+}
+
+// #endregion
+
+// #region doughnut chart
+:host(.chart--lg) {
+  --doughnut-size: #{rem(286)};
+}
+
+:host {
+  --doughnut-size: #{rem(236)};
+}
+
+:host(.chart--sm) {
+  --doughnut-size: #{rem(190)};
+}
+
+.chart__outer {
+  .chart__yaxis,
+  .line {
+    display: none;
+  }
+  table {
+    display: none;
+  }
+
+  .chart {
+    display: flex;
+    align-items: center;
+  }
+
+  .doughnuts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .doughnut {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    min-width: rem(190);
+    flex: 1 1 auto;
+    display: inline-block;
+    max-width: var(--doughnut-size);
+
+    @container (min-width: #{em($device-xs-width,16)}) {
+      width: var(--doughnut-size);
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .doughnut svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .doughnut > .doughnut__title {
+    &:before {
+      content: attr(data-numeric);
+      display: block;
+      text-align: center;
+      color: var(--colour-heading);
+      font-size: 3rem;
+    }
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: all;
+    background: var(--bg-colour, var(--colour-canvas));
+    border-radius: 50%;
+    z-index: var(--index-focus);
+    padding: 1rem;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 67%;
+
+    span {
+      text-align: center;
+      display: block;
+    }
+  }
+
+  .doughnut svg:has(path:nth-child(1):hover) ~ .tooltips > [part='popover']:nth-child(1),
+  .doughnut svg:has(path:nth-child(2):hover) ~ .tooltips > [part='popover']:nth-child(2),
+  .doughnut svg:has(path:nth-child(3):hover) ~ .tooltips > [part='popover']:nth-child(3),
+  .doughnut svg:has(path:nth-child(4):hover) ~ .tooltips > [part='popover']:nth-child(4),
+  .doughnut svg:has(path:nth-child(5):hover) ~ .tooltips > [part='popover']:nth-child(5),
+  .doughnut svg:has(path:nth-child(6):hover) ~ .tooltips > [part='popover']:nth-child(6),
+  .doughnut svg:has(path:nth-child(7):hover) ~ .tooltips > [part='popover']:nth-child(7),
+  .doughnut svg:has(path:nth-child(8):hover) ~ .tooltips > [part='popover']:nth-child(8),
+  .doughnut svg:has(path:nth-child(9):hover) ~ .tooltips > [part='popover']:nth-child(9),
+  .doughnut svg:has(path:nth-child(10):hover) ~ .tooltips > [part='popover']:nth-child(10),
+  [part='popover']:hover {
+    opacity: 1;
+    z-index: var(--index-above);
+    pointer-events: all;
+    z-index: 99;
+
+    &:before {
+      display: none;
+    }
+  }
+
+  @for $i from 1 to 10 {
+    .doughnut:has([part='popover'] > :is(button, a))
+      svg:has(path:nth-child(#{$i}):hover)
+      ~ .tooltips
+      > [part='popover']:nth-child(#{$i}),
+    .doughnut:has([part='popover'] > :is(button, a)) [part='popover']:nth-child(#{$i}):hover {
+      top: var(--middle-#{$i}-y, 50%);
+      left: var(--middle-#{$i}-x, 50%);
+
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+// #endregion

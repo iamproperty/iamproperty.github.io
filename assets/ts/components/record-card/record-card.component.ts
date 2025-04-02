@@ -1,18 +1,18 @@
-// @ts-nocheck
-import {trackComponent, trackComponentRegistered} from "../_global";
-import {cardHTML,setupCard} from "../../modules/card.module";
+import { trackComponent, trackComponentRegistered } from '../_global';
+import { cardHTML, setupCard } from '../../modules/card.module';
 
-trackComponentRegistered("iam-record-card");
+trackComponentRegistered('iam-record-card');
 
 class iamRecordCard extends HTMLElement {
-
-  constructor(){
+  constructor() {
     super();
-    this.attachShadow({ mode: 'open'});
+    this.attachShadow({ mode: 'open' });
 
-    const assetLocation = document.body.hasAttribute('data-assets-location') ? document.body.getAttribute('data-assets-location') : '/assets';
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
     const loadCSS = `@import "${assetLocation}/css/components/record-card.component.css";`;
-    
+
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
@@ -26,56 +26,44 @@ class iamRecordCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-	async connectedCallback() {
+  async connectedCallback(): void {
+    const cardHead = this.shadowRoot.querySelector('.card__head');
+    setupCard(this);
 
-    const cardComponent = this;
-    const cardHead =  cardComponent.shadowRoot.querySelector('.card__head');
-    setupCard(cardComponent);
-
-    Array.from(cardComponent.querySelectorAll(':scope > *:not([slot])')).forEach((element,index)=>{
-
-      element.setAttribute('slot','details');
+    Array.from(this.querySelectorAll(':scope > *:not([slot])')).forEach((element) => {
+      element.setAttribute('slot', 'details');
     });
 
-    if(cardComponent.hasAttribute('data-avatar')){
-
-      cardHead.innerHTML += `<img src="${cardComponent.getAttribute('data-avatar')}" alt="" loading="lazy" class="card__avatar" part="avatar" />`;
+    if (this.hasAttribute('data-avatar')) {
+      cardHead.innerHTML += `<img src="${this.getAttribute('data-avatar')}" alt="" loading="lazy" class="card__avatar" part="avatar" />`;
     }
-  
 
-    trackComponent(cardComponent,"iam-record-card",[]);
+    trackComponent(this, 'iam-record-card', []);
   }
 
-  static get observedAttributes() {
-    return ["data-image"];
+  static get observedAttributes(): any {
+    return ['data-image'];
   }
-  
-  attributeChangedCallback(attrName, oldVal, newVal) {
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
-      case "data-image": {
-
-        if(oldVal != newVal){
-
+      case 'data-image': {
+        if (oldVal != newVal) {
           const cardHeadImg = this.shadowRoot.querySelector('.card__head img');
 
-          if(cardHeadImg)
-            cardHeadImg.setAttribute('src',newVal);
+          if (cardHeadImg) cardHeadImg.setAttribute('src', newVal);
         }
         break;
       }
-      case "data-avatar": {
-
-        if(oldVal != newVal){
-
+      case 'data-avatar': {
+        if (oldVal != newVal) {
           const cardHeadImg = this.shadowRoot.querySelector('.card__avatar');
 
-          if(cardHeadImg)
-            cardHeadImg.setAttribute('src',newVal);
+          if (cardHeadImg) cardHeadImg.setAttribute('src', newVal);
         }
         break;
       }
     }
-
   }
 }
 

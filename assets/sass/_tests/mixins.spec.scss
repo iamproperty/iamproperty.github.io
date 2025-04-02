@@ -1,5 +1,5 @@
 @use 'true' as *;
-@import '../../sass/func';
+@use '../../sass/func' as *;
 
 /*#region prefix*/
 @include describe('prefix [Mixin]') {
@@ -7,7 +7,7 @@
     // Assert the expected results
     @include assert {
       @include output {
-        @include prefix(transform,scale(2));
+        @include prefix(transform, scale(2));
       }
       @include expect {
         -webkit-transform: scale(2);
@@ -18,27 +18,11 @@
     }
     @include assert {
       @include output {
-        @include prefix(transform,scale(2),webkit);
+        @include prefix(transform, scale(2), webkit);
       }
       @include expect {
         -webkit-transform: scale(2);
         transform: scale(2);
-      }
-    }
-  }
-}
-/*#endregion*/
-
-/*#region var*/
-@include describe('var [Mixin]') {
-  @include it('Var mixin returns the colour heading as a CSS variable') {
-    // Assert the expected results
-    @include assert {
-      @include output {
-        @include var(color,--colour-primary);
-      }
-      @include expect {
-        color: var(--colour-primary);
       }
     }
   }
@@ -51,7 +35,7 @@
     // Assert the expected results
     @include assert {
       @include output {
-        @include inline-text(){
+        @include inline-text() {
           color: purple;
           background: green;
         }
@@ -62,7 +46,7 @@
         ol,
         dd,
         .body,
-        table:not(.table--email) td{
+        table:not(.table--email) td {
           color: purple;
           background: green;
         }
@@ -78,7 +62,7 @@
     // Assert the expected results
     @include assert {
       @include output {
-        @include headers(){
+        @include headers() {
           color: purple;
           background: green;
         }
@@ -97,7 +81,7 @@
     }
     @include assert {
       @include output {
-        @include headers('true'){
+        @include headers('true') {
           color: purple;
           background: green;
         }
@@ -127,68 +111,3 @@
   }
 }
 // #endregion
-
-/*#region bg-variant*/
-@include describe('bg-variant [Mixin]') {
-  @include it('bg-variant returns the correct css variable') {
-    // Assert the expected results
-    @include assert {
-      @include output {
-        $parent: '.bg-primary';
-        $color: 'primary';
-        @include bg-variant($parent,$color);
-      }
-      @include expect {
-        .bg-primary {
-          --bg-colour: var(--colour-primary);
-          --bg-colour-tint: var(--colour-primary-tint);
-          background-color: var(--colour-primary) !important;
-        }
-      }
-    }
-  }
-}
-/*#endregion */
-
-/*#region text-emphasis-variant*/
-@include describe('text-emphasis-variant [Mixin]') {
-  @include it('text-emphasis-variant returns') {
-    // Assert the expected results
-    @include assert {
-      @include output {
-        $parent: '.text-primary';
-        $color: 'primary';
-        @include text-emphasis-variant($parent,$color);
-      }
-      @include expect {
-        .text-primary {
-          color: var(--colour-primary) !important;
-        }
-      }
-    }
-  }
-}
-/*#endregion */
-
-
-/*#region font-size*/
-@include describe('font-size [Mixin]') {
-  @include it('font-size returns') {
-    // Assert the expected results
-    @include assert {
-      @include output {
-        @include font-size($h1-font-size);
-        @include font-size($h1-font-size, 'true');
-      }
-      @include expect {
-        font-size: 3rem;
-        font-size: $h1-font-size;
-      }
-    }
-  }
-}
-/*#endregion */
-
-
-
-

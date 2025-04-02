@@ -15,7 +15,7 @@ import('../node_modules/@iamproperty/components/assets/js/components/actionbar/a
 
 ```
 <iam-actionbar data-selectall data-search>
-  
+
   <div class="dialog__wrapper">
     <button class="btn btn-action mb-0 me-0">Quick filter</button>
     <dialog class="dialog--list">
@@ -45,11 +45,12 @@ import('../node_modules/@iamproperty/components/assets/js/components/actionbar/a
 
 </iam-actionbar>
 ```
+
 **Properties**
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| data-selectall | - | - | Optional flag to include the select all button |
-| data-search | - | - | Optional flag to include the search button and functionality |
-| data-switchviews | - | - | Optional flag to include the switch views buttons |
-| data-view | String | square | Required if you have the above flag set. Can be set to wither 'square','list' or 'small'. |
+| Option           | Type   | Default Value | Description                                                                               |
+| ---------------- | ------ | ------------- | ----------------------------------------------------------------------------------------- |
+| data-selectall   | -      | -             | Optional flag to include the select all button                                            |
+| data-search      | -      | -             | Optional flag to include the search button and functionality                              |
+| data-switchviews | -      | -             | Optional flag to include the switch views buttons                                         |
+| data-view        | String | square        | Required if you have the above flag set. Can be set to wither 'square','list' or 'small'. |

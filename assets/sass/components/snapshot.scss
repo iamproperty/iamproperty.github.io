@@ -1,34 +1,29 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
 .snapshot {
-
   > .row {
-
     padding-bottom: 1rem;
-
   }
 
   > .row > .col {
-
     margin-bottom: 1rem;
     min-width: rem(150);
     position: relative;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     > .row > .col:nth-child(8) ~ .col {
       max-width: 25%;
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     > .row > .col:nth-child(8) ~ .col {
       max-width: 12.5%;
     }
   }
 
   &__item {
-
     position: relative;
     display: flex;
     flex-direction: column;
@@ -36,11 +31,10 @@
     height: 100%;
     padding: 1rem;
 
-    &:not([class*="bg-"]){
+    &:not([class*='bg-']) {
       border: 1px solid var(--colour-border);
     }
   }
-
 
   a {
     position: absolute;
@@ -60,7 +54,7 @@
     padding-bottom: 1rem;
 
     &:after {
-      content: ":";
+      content: ':';
     }
   }
 

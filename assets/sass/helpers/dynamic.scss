@@ -1,15 +1,15 @@
 body.js-enabled .js-hide {
-  display: none!important;
+  display: none !important;
 }
 
 body:not(.js-enabled) .js-show {
-  display: none!important;
+  display: none !important;
 }
 
 :host-context(body.js-enabled) .js-hide {
-  display: none!important;
+  display: none !important;
 }
 
 :host-context(body:not(.js-enabled)) .js-show {
-  display: none!important;
+  display: none !important;
 }

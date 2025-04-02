@@ -1,9 +1,8 @@
-@use "../_func.scss" as *;
+@use '../_func.scss' as *;
 
 .applied-filters {
-
   &:not(.applied-filters--compact):not(:empty):before {
-    content: "Applied filters";
+    content: 'Applied filters';
     font-weight: bold;
     font-size: rem(18);
     line-height: rem(22);
@@ -12,15 +11,12 @@
   }
 }
 
-
 :host(.applied-filters--hide-title) {
-
   .applied-filters:before {
     display: none;
   }
 }
 :host(.applied-filters--show-set) {
-
   .tag--not-set {
     display: none;
   }

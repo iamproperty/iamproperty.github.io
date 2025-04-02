@@ -1,23 +1,26 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-figure {
-  margin: 0 0 1rem;
-}
+@include layer('elements', $layers) {
+  figure {
+    margin: 0 0 1rem;
+  }
 
-img,
-svg {
-  vertical-align: middle;
-}
+  img,
+  svg {
+    vertical-align: middle;
+  }
 
+  img {
+    max-width: 100%;
+  }
 
-
-img {
-  max-width: 100%;
-}
-
-.ratio {
-  > img:first-child:last-child {
-    object-fit: cover;
+  .ratio {
+    > img:first-child:last-child {
+      object-fit: cover;
+    }
   }
 }

@@ -1,44 +1,47 @@
-@use "../_func" as *;
+@use '../_func' as *;
 
-iam-multiselect .tag[slot="checked"]{
-  margin-bottom: rem(8);
-  order: var(--order, 1);
-  margin-inline: rem(3);
-}
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-iam-multiselect .tag:not([slot="checked"]){
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  text-align: left;
-  border-radius: 0;
-  padding-inline: 1rem;
-  outline: none;
-  padding-block: 0.5rem;
-
-  &:not(:hover,:focus,:active,:focus-within){
-    background: none!important;
+@include layer('components', $layers) {
+  iam-multiselect .tag[slot='checked'] {
+    margin-bottom: rem(8);
+    order: var(--order, 1);
+    margin-inline: rem(3);
   }
 
-  &::after {
-    display: none;
+  iam-multiselect .tag:not([slot='checked']) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+    border-radius: 0;
+    padding-inline: 1rem;
+    outline: none;
+    padding-block: 0.5rem;
+
+    &:not(:hover, :focus, :active, :focus-within) {
+      background: none !important;
+    }
+
+    &::after {
+      display: none;
+    }
   }
-}
 
-iam-multiselect:has(label:not([slot="checked"]):not([slot="notmatched"])) {
+  iam-multiselect:has(label:not([slot='checked']):not([slot='notmatched'])) {
+    --display-panel: block;
+  }
 
-  --display-panel: block;
-}
+  iam-multiselect:has(label[slot='checked']) {
+    --display-button: block;
+  }
 
-iam-multiselect:has(label[slot="checked"]) {
-
-  --display-button: block;
-}
-
-@include dark-mode() {
-  iam-multiselect :is(.tag,.badge):not([slot="checked"]){
-
-    color: var(--colour-heading);
+  @include dark-mode($darkMode) {
+    iam-multiselect :is(.tag, .badge):not([slot='checked']) {
+      color: var(--colour-heading);
+    }
   }
 }

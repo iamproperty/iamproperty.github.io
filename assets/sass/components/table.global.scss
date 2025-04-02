@@ -1,14 +1,15 @@
-@use "../_func.scss" as *;
+@use '../_func.scss' as *;
+
+$darkMode: 'true' !default;
 
 // #region Container type
-*:has(> iam-table){
+*:has(> iam-table) {
   container-type: inline-size;
 }
 // #endregion
 
 // #region Basic table stuff
 iam-table {
-  
   --hover-background: var(--colour-light);
   --row-bg: var(--colour-canvas-2);
   thead tr {
@@ -17,9 +18,8 @@ iam-table {
   tbody tr {
     background: var(--row-bg);
 
-    &:is(:hover,:focus-within,.hover) {
-
-      --bg-colour-rgb: 238,238,238;
+    &:is(:hover, :focus-within, .hover) {
+      --bg-colour-rgb: 238, 238, 238;
       --row-bg: var(--hover-background);
       background: var(--row-bg);
     }
@@ -34,7 +34,6 @@ iam-table {
 // #region Tables are only stacked on mobile
 @container (width < 23.4375em) {
   iam-table:not(.table--fullwidth) {
-
     thead {
       display: none;
     }
@@ -44,7 +43,7 @@ iam-table {
       overflow: visible;
 
       tr td:first-child {
-        padding-top:0;
+        padding-top: 0;
       }
     }
 
@@ -61,26 +60,23 @@ iam-table {
       & + tr {
         margin-top: rem(32);
       }
-      
-      &:is(:hover,:focus,.hover) {
-        
-        --row-bg: var(--colour-canvas-2);
 
+      &:is(:hover, :focus, .hover) {
+        --row-bg: var(--colour-canvas-2);
       }
     }
 
     :is(td, th) {
       display: block;
-      @include var(border-color,--colour-border);
+      @include var(border-color, --colour-border);
 
       padding-right: 0;
 
-      &:nth-child(1){
-        
+      &:nth-child(1) {
         border-top: none;
       }
 
-      &[data-label]:not([data-label=""]):before {
+      &[data-label]:not([data-label='']):before {
         content: attr(data-label);
         color: var(--colour-heading);
         padding: 0 0 rem(6) 0;
@@ -91,7 +87,7 @@ iam-table {
     }
 
     td:first-child::after {
-      top: 1.75rem!important;
+      top: 1.75rem !important;
     }
 
     td::after {
@@ -104,11 +100,10 @@ iam-table {
 
     tbody tr td:not(:first-child) {
       border-top: var(--border-width) solid currentColor;
-      border-color: var(--colour-border)!important;
+      border-color: var(--colour-border) !important;
     }
-    
-    tr:not([data-view="full"]) td p {
 
+    tr:not([data-view='full']) td p {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
@@ -121,53 +116,49 @@ iam-table {
       position: relative;
     }
     td:has([data-expand-button]) + td {
-      border-top: none!important;
-      padding-top: 0!important;
+      border-top: none !important;
+      padding-top: 0 !important;
     }
     [data-expand-button] {
       top: 0;
       right: 0;
-      background: transparent!important;
+      background: transparent !important;
       border: none;
       position: absolute;
       overflow: hidden;
       --compact-size: #{rem(32)};
 
       &:before {
-        font-family: "Font Awesome 6 Pro";
-        content: "\f055";
-        font-weight: 300!important;
+        font-family: 'Font Awesome 6 Pro';
+        content: '\f055';
+        font-weight: 300 !important;
         font-size: rem(28);
-        line-height: var(--compact-size)!important;
-      
+        line-height: var(--compact-size) !important;
       }
 
-      &[aria-expanded]{
-
+      &[aria-expanded] {
         &:before {
-            
-          content: "\f056";
-          font-weight: 900!important;
+          content: '\f056';
+          font-weight: 900 !important;
         }
       }
     }
 
-    .dialog__wrapper:not([slot="overflow"]) {
+    .dialog__wrapper:not([slot='overflow']) {
       margin-top: -0.5rem;
       margin-left: -1rem;
       z-index: 10;
     }
   }
 
-  iam-table:not(.table--fullwidth) tbody tr:not([data-view="full"]) {
-
-    td:not(.td--fixed) + td:not(.td--fixed) + td + td{
+  iam-table:not(.table--fullwidth) tbody tr:not([data-view='full']) {
+    td:not(.td--fixed) + td:not(.td--fixed) + td + td {
       display: none;
     }
   }
 
   iam-table.table--cta:not(.table--fullwidth) tr td:not(:first-child):last-child {
-    display: block!important;
+    display: block !important;
     position: static;
     width: 100%;
     min-width: 100%;
@@ -185,20 +176,17 @@ iam-table {
 
 // #region CTA column
 @container (width > 23.4375em) {
-
   iam-table.table--cta:not(.table--loading):has(tr:first-child td:first-child:last-child) {
     padding-right: calc(var(--wrapper-padding) + 1.5rem);
   }
-  
-  iam-table.table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
 
+  iam-table.table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
     tr > th:nth-last-child(2),
     tr > td:nth-last-child(2) {
       padding-right: var(--cta-width);
     }
 
     tr > *:not(:first-child):last-child {
-
       position: absolute;
       left: calc(100% - var(--cta-width));
       top: auto;
@@ -225,8 +213,7 @@ iam-table {
 // #endregion
 
 // #region Max height tables
-iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
-
+iam-table:is(.mh-sm, .mh-md, .mh-lg):not(.table--cta) {
   position: relative;
 
   thead {
@@ -237,7 +224,7 @@ iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
     background-color: var(--row-bg);
 
     &:before {
-      content: "";
+      content: '';
       position: absolute;
       bottom: 0;
       left: 0;
@@ -255,48 +242,45 @@ iam-table:is(.mh-sm,.mh-md,.mh-lg):not(.table--cta) {
     tr:last-child td {
       border-bottom: 0;
     }
-
   }
 }
 //#endregion
 
-// #region Statuses 
+// #region Statuses
 table {
-  
   .hide-status:after {
     display: none;
   }
 
-  :not(.hide-status):is([data-content="low"],
-    [data-content="medium"],
-    [data-content="high"],
-    [data-content="unknown"],
-    [data-content="due"],
-    [data-content="overdue"],
-    [data-content="incomplete"],
-    [data-content="requires approval"],
-    [data-content="upcoming"],
-    [data-content="approval required"],
-    [data-content="warning"],
-    [data-content="verified"],
-    [data-content="not started"],
-    [data-content="to do"],
-    [data-content="on track"],
-    [data-content="completed"],
-    [data-content="complete"],
-    .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty)
+  :not(.hide-status):is(
+      [data-content='low'],
+      [data-content='medium'],
+      [data-content='high'],
+      [data-content='unknown'],
+      [data-content='due'],
+      [data-content='overdue'],
+      [data-content='incomplete'],
+      [data-content='requires approval'],
+      [data-content='upcoming'],
+      [data-content='approval required'],
+      [data-content='warning'],
+      [data-content='verified'],
+      [data-content='not started'],
+      [data-content='to do'],
+      [data-content='on track'],
+      [data-content='completed'],
+      [data-content='complete'],
+      .alert-status:not([data-content='0']):not([data-content='']):not(:empty)
     ) {
-    
     position: relative;
     padding-left: 1.5rem;
 
     &::before {
-      margin-left: -1.5rem!important;
+      margin-left: -1.5rem !important;
     }
 
     &:after {
-
-      font-family: "Font Awesome 6 Pro";
+      font-family: 'Font Awesome 6 Pro';
       position: absolute;
       top: 1rem;
       left: 0;
@@ -308,75 +292,76 @@ table {
     }
   }
 
-  [data-content="high"]:after {
-    content: "\f325";
+  [data-content='high']:after {
+    content: '\f325';
     font-weight: normal;
     color: var(--colour-danger);
   }
 
-  [data-content="medium"]:after {
-
-    content: "\f7a4";
+  [data-content='medium']:after {
+    content: '\f7a4';
     font-weight: normal;
     color: var(--colour-warning);
   }
 
-  [data-content="low"]:after {
-
-    content: "\e404";
+  [data-content='low']:after {
+    content: '\e404';
     font-weight: normal;
     color: var(--colour-complete);
   }
 
-  [data-content="unknown"]:after {
-
-    content: "\e404";
+  [data-content='unknown']:after {
+    content: '\e404';
     font-weight: normal;
     color: var(--colour-muted);
   }
 
-  :is([data-content="overdue"],[data-content="due"],[data-content="incomplete"]):after {
-
-    content: "\f024";
+  :is([data-content='overdue'], [data-content='due'], [data-content='incomplete']):after {
+    content: '\f024';
     color: var(--colour-danger);
   }
 
-  :is([data-content="not started"],[data-content="to do"],[data-content="on track"]):after {
-
-    content: "\f024";
+  :is([data-content='not started'], [data-content='to do'], [data-content='on track']):after {
+    content: '\f024';
     color: var(--colour-muted);
   }
 
-  :is([data-content="requires approval"],[data-content="approval required"],[data-content="action required"],[data-content="upcoming"]):after {
-
-    content: "\f024";
+  :is(
+      [data-content='requires approval'],
+      [data-content='approval required'],
+      [data-content='action required'],
+      [data-content='upcoming']
+    ):after {
+    content: '\f024';
     color: var(--colour-warning);
   }
 
-  :is([data-content="warning"]):after {
-
-    content: "\f071";
+  :is([data-content='warning']):after {
+    content: '\f071';
     color: var(--colour-warning);
   }
 
-  :is([data-content="manually verified"],[data-content="verified"],[data-content="completed"],[data-content="complete"]):after {
-    
-    content: "\f00c";
+  :is(
+      [data-content='manually verified'],
+      [data-content='verified'],
+      [data-content='completed'],
+      [data-content='complete']
+    ):after {
+    content: '\f00c';
     font-weight: normal;
     color: var(--colour-complete);
   }
 
-  .alert-status:not([data-content="0"]):not([data-content=""]):not(:empty):after {
-
-    content: "\f0f3";
+  .alert-status:not([data-content='0']):not([data-content='']):not(:empty):after {
+    content: '\f0f3';
     color: var(--colour-primary);
   }
 }
 // #endregion
 
-// #region filters 
+// #region filters
 iam-table .table--filtered tbody tr:not(.filtered--show) {
-  display: none!important;
+  display: none !important;
 }
 
 iam-table table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
@@ -384,25 +369,22 @@ iam-table table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~
 }
 // #endregion
 
-// #region Table with actionbar 
+// #region Table with actionbar
 
 iam-table {
+  input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
+    padding-left: 0 !important;
+    margin: 0 !important;
 
-  input:is([type="radio"],[type="checkbox"]) + label:not(.radio--tick) {
-    padding-left: 0!important;
-    margin: 0!important;
-
-  
     &:before,
     &:after {
       top: 0.75rem !important;
-      left: 0.25rem!important;
+      left: 0.25rem !important;
     }
   }
 
-  &:has([type="checkbox"]:checked) tr:has([type="checkbox"]){
-    
-    [type="checkbox"] {
+  &:has([type='checkbox']:checked) tr:has([type='checkbox']) {
+    [type='checkbox'] {
       width: 100vw;
       height: 100%;
       max-height: var(--row-height);
@@ -416,47 +398,43 @@ iam-table {
   }
 
   @container (width > 23.4375em) {
-    tr:has([type="checkbox"]:checked){
-      height: calc(4.625rem - 2px)
+    tr:has([type='checkbox']:checked) {
+      height: calc(4.625rem - 2px);
     }
   }
 
-  tr:has([type="checkbox"]:checked){
-    --row-bg: #E0E0E0;
+  tr:has([type='checkbox']:checked) {
+    --row-bg: #e0e0e0;
   }
 }
 
 @container (width < 23.4375em) {
-
-  iam-table:has([slot="before"]) {
-
+  iam-table:has([slot='before']) {
     iam-actionbar {
-      @include light-mode(){
+      @include light-mode($darkMode) {
         background-color: #e6eaec;
       }
     }
     .actionbar__sticky + * {
-      margin-top: 0!important;
+      margin-top: 0 !important;
     }
   }
 
   iam-table {
-
-    input:is([type="radio"],[type="checkbox"]) + label:not(.radio--tick) {
-      padding-left: 0!important;
-      margin: 0!important;
+    input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
+      padding-left: 0 !important;
+      margin: 0 !important;
       min-height: 2rem;
-    
+
       &:before,
       &:after {
         top: 0.25rem !important;
-        left: 0!important;
+        left: 0 !important;
       }
     }
 
-    &:has([type="checkbox"]:checked) tr:has([type="checkbox"]){
-    
-      [type="checkbox"] {
+    &:has([type='checkbox']:checked) tr:has([type='checkbox']) {
+      [type='checkbox'] {
         width: 100%;
         height: 100%;
         max-height: 100%;
@@ -470,7 +448,6 @@ iam-table {
 
 // #region Expandable tables
 iam-table.table--fullwidth:not([data-expandable]) {
-
   th.expand-button-heading {
     display: none;
   }
@@ -480,9 +457,7 @@ iam-table.table--fullwidth:not([data-expandable]) {
 }
 
 @container (width > 23.4375em) {
-
   iam-table:not([data-expandable]) {
-
     th.expand-button-heading {
       display: none;
     }
@@ -491,20 +466,18 @@ iam-table.table--fullwidth:not([data-expandable]) {
     }
   }
 
-  iam-table[data-expandable]{
-
-    [data-expand-button]{
+  iam-table[data-expandable] {
+    [data-expand-button] {
       margin: 0;
       &:before {
-
-        font-family: "Font Awesome 6 Pro";
-        content: "\f078";
+        font-family: 'Font Awesome 6 Pro';
+        content: '\f078';
         font-weight: 500;
       }
 
-      &[aria-expanded]{
+      &[aria-expanded] {
         &:before {
-          content: "\f077";
+          content: '\f077';
         }
       }
     }
@@ -513,7 +486,7 @@ iam-table.table--fullwidth:not([data-expandable]) {
       display: none;
     }
 
-    tr:not([data-view="full"]) td p {   
+    tr:not([data-view='full']) td p {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
@@ -525,22 +498,17 @@ iam-table.table--fullwidth:not([data-expandable]) {
 
 // #region fixed columns
 @container (width < 23.4375em) {
-  
   iam-table:not(.table--fullwidth) {
-    .td--fixed + td:not(.td--fixed){
-
+    .td--fixed + td:not(.td--fixed) {
       border-top: none;
     }
   }
 }
 @container (width > 23.4375em) {
-
   iam-table {
-
     --width-adjust: 0px;
 
-    &:has([type="checkbox"]){
-
+    &:has([type='checkbox']) {
       --width-adjust: -1rem;
     }
 
@@ -552,7 +520,7 @@ iam-table.table--fullwidth:not([data-expandable]) {
       &:after {
         top: auto;
         left: 0;
-        content: "";
+        content: '';
         position: absolute;
         width: 100%;
         height: calc(var(--row-height) - 2px);
@@ -572,48 +540,42 @@ iam-table.table--fullwidth:not([data-expandable]) {
       text-align: left;
       background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
 
-      &:has([open]){
+      &:has([open]) {
         z-index: 4;
       }
     }
 
     tr {
-
       &:has(.td--fixed) {
         height: 3.5rem;
       }
 
-      &:is(:hover,:focus) .td--fixed{
+      &:is(:hover, :focus) .td--fixed {
         background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
       }
-        
+
       &:has([data-expand-button]) {
         height: calc(rem(74) - 2px);
       }
     }
 
-
     .th--fixed + th:not(.th--fixed),
-    .td--fixed + td:not(.td--fixed){
-
+    .td--fixed + td:not(.td--fixed) {
       padding-left: calc(rem(48 + 24) + var(--width-adjust));
     }
 
     .th--fixed:not(.expand-button-heading) + .th--fixed + th:not(.th--fixed),
-    .td--fixed:not(.td--expand) + .td--fixed + td:not(.td--fixed){
-
+    .td--fixed:not(.td--expand) + .td--fixed + td:not(.td--fixed) {
       padding-left: calc(rem(48 + 4 + 48 + 24) + var(--width-adjust));
     }
 
     &[data-expandable] .th--fixed + .th--fixed + th:not(.th--fixed),
-    &[data-expandable] .td--fixed + .td--fixed + td:not(.td--fixed){
-
+    &[data-expandable] .td--fixed + .td--fixed + td:not(.td--fixed) {
       padding-left: calc(rem(48 + 4 + 48 + 24) + var(--width-adjust));
     }
 
     .th--fixed + .th--fixed,
     .td--fixed + .td--fixed {
-      
       padding-left: calc(rem(48 + 4) + var(--width-adjust));
       min-width: calc(rem(48 + 4 + 48 + 24) + var(--width-adjust));
     }
@@ -624,34 +586,87 @@ iam-table.table--fullwidth:not([data-expandable]) {
       z-index: 5;
     }
 
-    .dialog__wrapper{
+    .dialog__wrapper {
       z-index: 10;
     }
-    .dialog__wrapper:has([open]){
+    .dialog__wrapper:has([open]) {
       z-index: 20;
     }
 
-    &[data-expandable] input:is([type=radio],[type=checkbox])+label:before,
-    &[data-expandable] input:is([type=radio],[type=checkbox])+label:after {
+    &[data-expandable] input:is([type='radio'], [type='checkbox']) + label:before,
+    &[data-expandable] input:is([type='radio'], [type='checkbox']) + label:after {
       left: 1.25rem !important;
     }
   }
 
   iam-table:not([data-expandable]) {
-
     th.expand-button-heading + th {
-      padding-left: 0!important
+      padding-left: 0 !important;
     }
     td.td--expand + td {
-      padding-left: 0!important
+      padding-left: 0 !important;
     }
-    
+
     th.expand-button-heading + .th--fixed {
-      min-width: calc(rem(48 + 24) + var(--width-adjust))!important
+      min-width: calc(rem(48 + 24) + var(--width-adjust)) !important;
     }
     td.td--expand + .td--fixed {
-      min-width: calc(rem(48 + 24) + var(--width-adjust))!important
+      min-width: calc(rem(48 + 24) + var(--width-adjust)) !important;
     }
   }
 }
 // #endregion
+
+// #region sort by column header
+
+$icon-sort: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d='M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z'/></svg>");
+
+$icon-sort-asc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d='M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z'/></svg>");
+
+$icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d='M174.6 472.6c4.5 4.7 10.8 7.4 17.4 7.4s12.8-2.7 17.4-7.4l168-176c9.2-9.6 8.8-24.8-.8-33.9s-24.8-8.8-33.9 .8L216 396.1 216 56c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 340.1L41.4 263.4c-9.2-9.6-24.3-9.9-33.9-.8s-9.9 24.3-.8 33.9l168 176z'/></svg>");
+
+@mixin column-sort {
+  &:has(th[data-sort]) th,
+  td {
+    padding-block: 0.75rem;
+    padding-left: 0.5rem;
+    padding-right: 2.5rem;
+  }
+
+  th[data-sort] {
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+    background-position: calc(100% - 0.5rem) 50%;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--colour-light);
+      background-image: $icon-sort;
+    }
+  }
+
+  th[data-sort][data-order-by='asc'] {
+    background-image: $icon-sort-asc;
+  }
+  th[data-sort][data-order-by='desc'] {
+    background-image: $icon-sort-desc;
+  }
+}
+
+iam-table {
+  &.table--fullwidth {
+    @include column-sort;
+  }
+
+  @container (width >= 32em) {
+    @include column-sort;
+  }
+}
+
+// #endregion
+
+@for $i from 1 through 30 {
+  iam-table [data-hide-col#{$i}] + table :is(thead, tbody) :is(th, td):nth-child(#{$i}) {
+    display: none;
+  }
+}

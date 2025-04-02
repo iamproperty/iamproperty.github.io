@@ -1,17 +1,17 @@
 <template>
   <main>
-    
     <div class="container pb-0">
-      
       <ul class="breadcrumb mb-0">
         <li><a href="/components/form">Form components</a></li>
       </ul>
       <h1>Toggle buttons</h1>
-      <p>We can create toggle buttons by using a combination of checkboxes and button classes. Like other buttons it defaults to primary button style but adding <strong>.btn-secondary</strong> or <strong>.btn-tertiary</strong> updates the styles.</p>
-      
+      <p>
+        We can create toggle buttons by using a combination of checkboxes and button classes. Like other buttons it
+        defaults to primary button style but adding
+        <strong>.btn-secondary</strong> or <strong>.btn-tertiary</strong> updates the styles.
+      </p>
     </div>
     <div class="container visualtest pt-2">
-
       <Input type="checkbox-btn" id="test7" label="Label"></Input>
 
       <pre><code>&lt;input type="checkbox" autocomplete="off" name="test8" id="test8" class="btn-check">
@@ -26,13 +26,23 @@
       </div>
 
       <h2>Multi option toggle buttons</h2>
-      <p class="visualtest-hide">We can create toggle buttons with more than one option by using a combination of radio fields and button classes.</p>
-      
+      <p class="visualtest-hide">
+        We can create toggle buttons with more than one option by using a combination of radio fields and button
+        classes.
+      </p>
+
       <div class="btn-group d-block col-md-8">
-        <Input type="radio-btn" id="test9" name="radio5" label="Option 1" labelclass="btn-tertiary col-4" checked="checked"></Input>
+        <Input
+          type="radio-btn"
+          id="test9"
+          name="radio5"
+          label="Option 1"
+          labelclass="btn-tertiary col-4"
+          checked="checked"
+        ></Input>
         <Input type="radio-btn" id="test9a" name="radio5" label="Option 2" labelclass="btn-tertiary col-4"></Input>
         <Input type="radio-btn" id="test9b" name="radio5" label="Option 3" labelclass="btn-tertiary col-4"></Input>
-        <hr/>
+        <hr />
         <div class="conditional conditional-1">
           <p>Content 1.</p>
         </div>
@@ -57,26 +67,23 @@
   &lt;div class="conditional conditional-3">&lt;p>Content 3.&lt;/p>&lt;/div>
 &lt;/div></code></pre>
     </div>
-    
-    
   </main>
 </template>
 
-
 <script>
-import Input from '@/components/Input/Input.vue'
-import Readme from '@/components/Input/README.md'
+  import Input from '@/components/Input/Input.vue';
+  import Readme from '@/components/Input/README.md';
 
-export default {
-  components: {
-    Input,
-    Readme
-  },
-  data () {
-    return {
-      message:'input field value',
-      htmlUsage: `...`,
-    }
-  }
-}
+  export default {
+    components: {
+      Input,
+      Readme,
+    },
+    data() {
+      return {
+        message: 'input field value',
+        htmlUsage: `...`,
+      };
+    },
+  };
 </script>

@@ -6,6 +6,4 @@
   </main>
 </template>
 <!-- Javascript -->
-<script>
-
-</script>
+<script></script>

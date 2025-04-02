@@ -33,15 +33,15 @@ import('../node_modules/@iamproperty/components/assets/js/components/notificatio
 
 **Properties**
 
-| Option | Type | Default Value | Description |
-| ------ | ---- | ------------- | ----------- |
-| data-status | String | info | Choose from danger,succes and warning. This will change the colour of the notification box and which icon is shown. |
-| data-type | String | inline | Choose from alert and toast. This will change the behavour of the component. |
-| data-dismiss | Boolean | - | Adds a close button which will remove the alert box after clicking it. |
-| data-timeout | Boolean | - | Adds a timer for how long the notification will appear. |
+| Option       | Type    | Default Value | Description                                                                                                         |
+| ------------ | ------- | ------------- | ------------------------------------------------------------------------------------------------------------------- |
+| data-status  | String  | info          | Choose from danger,succes and warning. This will change the colour of the notification box and which icon is shown. |
+| data-type    | String  | inline        | Choose from alert and toast. This will change the behavour of the component.                                        |
+| data-dismiss | Boolean | -             | Adds a close button which will remove the alert box after clicking it.                                              |
+| data-timeout | Boolean | -             | Adds a timer for how long the notification will appear.                                                             |
 
 **Slots**
 
-| Option | Default Value | Description |
-| ------ | ------------- | ----------- |
-| default | - | This is the content of the notification box |
+| Option  | Default Value | Description                                 |
+| ------- | ------------- | ------------------------------------------- |
+| default | -             | This is the content of the notification box |

@@ -1,174 +1,175 @@
-@use "../func" as *;
+@use 'sass:map';
 
-#{$root} {
+@use '../func' as *;
 
-  @media (prefers-reduced-motion: no-preference) {
-    scroll-behavior: smooth;
-  }
+$root: ':root' !default;
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  // Print out the $vars array setup in the variables file so they can be used as CSS vars
-  // Custom variable values only support SassScript inside `#{}`.
-  @each $var, $value in $vars {
-    #{$var}: #{$value};
-  }
+@layer legacy, reset, elements, components, templates, overrides, utilities;
 
-  // Add in media query based updates to the global vars like updating the heading 1 font size
-  @include media-breakpoint-up(sm) {
-    
-    @each $var, $value in $varsSM {
-      #{$var}: #{$value};
-    }
-  }
-
-  @include media-breakpoint-up(md) {
-    
-    @each $var, $value in $varsMD {
-      #{$var}: #{$value};
-    }
-  }
-
-  @media screen and (min-width: 36em) {
-    @each $var, $value in map-get($vars-responsive,"sm") {
-      #{'--'+$var}: #{$value};
-    }
-  }
-  @media screen and (min-width: 62em) {
-    @each $var, $value in map-get($vars-responsive,"md") {
-      #{'--'+$var}: #{$value};
-    }
-  }
-  
-
-  // Wider colours
-  @each $colour, $value in $wider-colours {
-    --wider-colour-#{$colour}: #{$value};
-  }
-  @each $colour, $value in $wider-colours-hover {
-    --wider-colour-#{$colour}-hover: #{$value};
-  }
-  @each $colour, $value in $wider-colours-active {
-    --wider-colour-#{$colour}-active: #{$value};
-  }
-
-  // Extra vars needed
-  --content-max-width: #{$content-max-width};
-  --colour-brand: var(--colour-primary);
-
-  // Cards variables
-  --card-top-padding: 2rem;
-  --card-right-padding: #{rem(16+16+24)};
-  --card-bottom-padding: 2rem;
-  --card-left-padding: 1rem;
-  --card-border-radius: #{rem(8)};
-  --card-box-shadow: #{rem(2)} #{rem(3)} #{rem(6)} rgba(0,0,0,0.2);
-  --nav-height: #{rem(96)};
-  --code-color: #d63384;
-
-  // Default borders
-  --border-width: 1px;
-  --border-style: solid;
-  --border-color: var(--colour-border);
-
-  --container-max-width: #{rem(1280)};
-  --padding-inline: 1.5rem;
-
-  @include media-breakpoint-up(sm) {
-    --padding-inline: 2.5rem;
-  }
-  @include media-breakpoint-up(md) {
-    --padding-inline: 5.25rem;
-
-    &:has(.nav--large) {
-      --container-max-width: #{rem(1920)}!important;
-      --padding-inline: #{rem(56)}!important;
-      --container-padding-x-md: #{rem(56)}!important;
-      --container-padding-md: var(--container-padding-top) var(--container-padding-x-md) var(--container-padding-bottom) var(--container-padding-x-md);
-      --container-padding: var(--container-padding-md);
-    }
-  }
-}
-
-.reset-colours {
-
-  @each $color, $value in $theme-colors {
-    --colour-#{$color}: #{$value};
-  }
-  @include reset-colours();
-}
-
-// Dark mode; functional colours get updated
-@include dark-mode() {
+@include layer('reset', $layers) {
   #{$root} {
-    
-    @each $color, $value in $dark-mode-colors {
-      --colour-#{$color}: #{$value};
+    // Print out the $vars array setup in the variables file so they can be used as CSS vars
+    // Custom variable values only support SassScript inside `#{}`.
+    @each $var, $value in $vars {
+      #{$var}: #{$value};
     }
-    @include invert-colours();
+
+    // Wider colours
+    @each $colour, $value in $wider-colours {
+      --wider-colour-#{$colour}: #{$value};
+    }
+    @each $colour, $value in $wider-colours-hover {
+      --wider-colour-#{$colour}-hover: #{$value};
+    }
+    @each $colour, $value in $wider-colours-active {
+      --wider-colour-#{$colour}-active: #{$value};
+    }
+
+    // Extra vars needed
+    --content-max-width: #{$content-max-width};
+    --colour-brand: var(--colour-primary);
+
+    // Cards variables
+    --card-top-padding: 2rem;
+    --card-right-padding: #{rem(16+16+24)};
+    --card-bottom-padding: 2rem;
+    --card-left-padding: 1rem;
+    --card-border-radius: #{rem(8)};
+    --card-box-shadow: #{rem(2)} #{rem(3)} #{rem(6)} rgba(0, 0, 0, 0.2);
+    --nav-height: #{rem(96)};
+    --code-color: #d63384;
+
+    // Default borders
+    --border-width: 1px;
+    --border-style: solid;
+    --border-color: var(--colour-border);
+
+    --container-max-width: #{rem(1280)};
+    --padding-inline: 1.5rem;
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
+    }
+
+    // Add in media query based updates to the global vars like updating the heading 1 font size
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      @each $var, $value in $varsSM {
+        #{$var}: #{$value};
+      }
+    }
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      @each $var, $value in $varsMD {
+        #{$var}: #{$value};
+      }
+    }
+
+    @media screen and (min-width: 36em) {
+      @each $var, $value in map.get($vars-responsive, 'sm') {
+        #{'--'+$var}: #{$value};
+      }
+    }
+    @media screen and (min-width: 62em) {
+      @each $var, $value in map.get($vars-responsive, 'md') {
+        #{'--'+$var}: #{$value};
+      }
+    }
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      --padding-inline: 2.5rem;
+    }
+    @include media-breakpoint-up(md, $mobileOnly) {
+      --padding-inline: 5.25rem;
+
+      &:has(.nav--large) {
+        --container-max-width: #{rem(1920)} !important;
+        --padding-inline: #{rem(56)} !important;
+        --container-padding-x-md: #{rem(56)} !important;
+        --container-padding-md: var(--container-padding-top) var(--container-padding-x-md)
+          var(--container-padding-bottom) var(--container-padding-x-md);
+        --container-padding: var(--container-padding-md);
+      }
+    }
   }
-}
 
-@include light-mode() {
-
-  // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  html:not(.dark-theme) [class*="bg-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(.bg-canvas-2):not(.invert-colours) {
-
+  .reset-colours {
     @each $color, $value in $theme-colors {
       --colour-#{$color}: #{$value};
     }
     @include reset-colours();
-    --colour-body: var(--colour-primary);
-    color: var(--colour-body);
   }
 
-  // Override the colours when on a dark background, similiar to dark mode but on a module level
-  [class*="bg-"]:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
-  .invert-colours {
-    
-    @include invert-colours();
-
-    color: #{$colour-inverted};
-  }
-}
-
-@include dark-mode() {
-
-  // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-  [class*="bg-"]:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
-
-    @include reset-colours();
-    --colour-body: #{$primary};
-    color: var(--colour-body);
-  }
-
-  @each $color, $value in $theme-colors {
-
-    .bg-#{$color}[class*="gradient-"] {
-
-      background-color: var(--colour-#{$color}-theme) !important;
+  // Dark mode; functional colours get updated
+  @include dark-mode($darkMode) {
+    #{$root} {
+      @each $color, $value in $dark-mode-colors {
+        --colour-#{$color}: #{$value};
+      }
+      @include invert-colours();
     }
   }
-  
-  [class*="bg-"][class*="gradient-"]:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
+
+  @include light-mode($darkMode) {
+    // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
+    html:not(.dark-theme)
+      [class*='bg-']:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(
+        .bg-canvas-2
+      ):not(.invert-colours) {
+      @each $color, $value in $theme-colors {
+        --colour-#{$color}: #{$value};
+      }
+      @include reset-colours();
+      --colour-body: var(--colour-primary);
+      color: var(--colour-body);
+    }
+
+    // Override the colours when on a dark background, similiar to dark mode but on a module level
+    [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(
+        .bg-canvas
+      ):not(.bg-canvas-2):not(.prevent-invert),
+    .invert-colours {
+      @include invert-colours();
+
+      color: #{$colour-inverted};
+    }
+  }
+
+  @include dark-mode($darkMode) {
+    // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
+    [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
+      @include reset-colours();
+      --colour-body: #{$primary};
+      color: var(--colour-body);
+    }
 
     @each $color, $value in $theme-colors {
-      --colour-#{$color}: #{$value};
+      .bg-#{$color}[class*='gradient-'] {
+        background-color: var(--colour-#{$color}-theme) !important;
+      }
     }
-    @include reset-colours();
-    --colour-body: var(--colour-primary-theme);
-    color: var(--colour-body);
+
+    [class*='bg-'][class*='gradient-']:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
+      @each $color, $value in $theme-colors {
+        --colour-#{$color}: #{$value};
+      }
+      @include reset-colours();
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-body);
+    }
+
+    [class*='bg-'][class*='gradient-']:not(.bg-info):not(.bg-success):not(.bg-warning):not(.prevent-invert) {
+      @include invert-colours();
+
+      color: #{$colour-inverted};
+    }
   }
 
-  [class*="bg-"][class*="gradient-"]:not(.bg-info):not(.bg-success):not(.bg-warning):not(.prevent-invert) {
-    
-    @include invert-colours();
-
-    color: #{$colour-inverted};
-  }
-}
-
-
-@media (forced-colors: active) {
-  #{$root} {
-    --contrast-outline-width: 1px;
+  @media (forced-colors: active) {
+    #{$root} {
+      --contrast-outline-width: 1px;
+    }
   }
 }
