@@ -164,11 +164,11 @@ $darkMode: 'true' !default;
 iam-collapsible-side {
   > * {
     padding-left: rem(24);
-  
+
     @include media-breakpoint-up(sm) {
       padding-left: rem(40);
     }
-  
+
     @include media-breakpoint-up(md) {
       padding-left: var(--container-padding-x-md);
     }
@@ -180,8 +180,8 @@ iam-collapsible-side {
   }
 }
 
-.vertical-tabs [class*="link"],
-iam-collapsible-side [class*="link"] {
+.vertical-tabs [class*='link'],
+iam-collapsible-side [class*='link'] {
   display: block !important;
   line-height: rem(20) !important;
   padding: rem(16) rem(24) rem(16) rem(24) !important;
@@ -193,13 +193,14 @@ iam-collapsible-side [class*="link"] {
   border-bottom: 2px solid var(--colour-border) !important;
   border-right: 2px solid var(--colour-border) !important;
   margin-right: rem(-40) !important;
-  z-index: 2;;
+  z-index: 2;
 
   &::after {
     display: none !important;
   }
 
-  i { // icon
+  i {
+    // icon
     margin-right: rem(8) !important;
   }
 
@@ -214,15 +215,17 @@ iam-collapsible-side [class*="link"] {
 
 .vertical-tabs a,
 iam-collapsible-side a {
-  &:hover, &:focus, &[aria-expanded] {
-    &:not([class*="active"]) {
+  &:hover,
+  &:focus,
+  &[aria-expanded] {
+    &:not([class*='active']) {
       background-color: var(--colour-light) !important;
     }
   }
 }
 
-.vertical-tabs [class*="active"],
-iam-collapsible-side [class*="active"] {
+.vertical-tabs [class*='active'],
+iam-collapsible-side [class*='active'] {
   background-color: var(--colour-activeLink) !important;
   border-right-color: var(--colour-activeLinkBorder) !important;
   border-right-width: 3px !important;
@@ -275,7 +278,6 @@ iam-collapsible-side {
     }
   }
 
-  
   @include media-breakpoint-up(sm) {
     .parent {
       li:not(:first-of-type) {

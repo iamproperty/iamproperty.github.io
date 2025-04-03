@@ -42,7 +42,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
 
       </div>
     `;
-    
+
     if (this.shadowRoot) {
       this.shadowRoot.appendChild(template.content.cloneNode(true));
     }
@@ -62,13 +62,13 @@ class iamCollapsibleSideMenu extends HTMLElement {
     if (this.hasAttribute('data-css')) {
       const styles = this.shadowRoot.querySelector('.styles') as HTMLStyleElement;
       if (styles) {
-          styles.insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
+        styles.insertAdjacentHTML('beforeend', `@import "${this.getAttribute('data-css')}";`);
       }
     }
 
     // Set side nav title
     if (!this.hasAttribute('data-title')) {
-        this.setAttribute('data-title', 'configuration');
+      this.setAttribute('data-title', 'configuration');
     }
 
     sideMenuContent.insertAdjacentHTML('afterbegin', `<span class="h3">${this.getAttribute('data-title')}</span>`);
@@ -76,12 +76,12 @@ class iamCollapsibleSideMenu extends HTMLElement {
 
     const titleElement = this.querySelector(':scope > :is(h1,h2,h3,h4,h5,h6)') as HTMLElement;
     if (titleElement) {
-        titleElement.classList.add('h4', 'main-content__title');
+      titleElement.classList.add('h4', 'main-content__title');
     }
 
     if (this.hasAttribute('open') && window.innerWidth > 992) {
-        sideMenu.classList.add('open');
-        button.setAttribute('aria-expanded', 'true');
+      sideMenu.classList.add('open');
+      button.setAttribute('aria-expanded', 'true');
     }
 
     // Open the menu
@@ -135,25 +135,25 @@ class iamCollapsibleSideMenu extends HTMLElement {
       }
     });
 
-    const sideMenuParentGroups = this.querySelectorAll('.parent')
-    const sideMenuParentGroupsTopLinks = this.querySelectorAll('.parent > li:first-of-type')
+    const sideMenuParentGroups = this.querySelectorAll('.parent');
+    const sideMenuParentGroupsTopLinks = this.querySelectorAll('.parent > li:first-of-type');
 
-    sideMenuParentGroupsTopLinks?.forEach(parentLink => {
+    sideMenuParentGroupsTopLinks?.forEach((parentLink) => {
       parentLink.addEventListener('click', () => {
-        if (!parentLink || !parentLink.parentElement) return false // make sure elements exist
+        if (!parentLink || !parentLink.parentElement) return false; // make sure elements exist
 
         if (parentLink.parentElement.classList.contains('reveal')) {
-          parentLink.parentElement.classList.remove('reveal') // remove if clicking a revealed parent
-        }
-        else { // remove other reveals and add reveal to this one
-          sideMenuParentGroups?.forEach(parentGroup => {
-            parentGroup.classList.remove('reveal')
-          })
+          parentLink.parentElement.classList.remove('reveal'); // remove if clicking a revealed parent
+        } else {
+          // remove other reveals and add reveal to this one
+          sideMenuParentGroups?.forEach((parentGroup) => {
+            parentGroup.classList.remove('reveal');
+          });
 
-          parentLink.parentElement.classList.add('reveal')
+          parentLink.parentElement.classList.add('reveal');
         }
-      })
-    })
+      });
+    });
   }
 }
 

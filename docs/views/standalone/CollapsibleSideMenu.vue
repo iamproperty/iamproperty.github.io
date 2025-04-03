@@ -27,10 +27,12 @@
         <a slot="menu" href="/" class="router-link-active router-link-exact-active">Vue's Active Class</a>
         <a slot="menu" href="/" class="link">Example link</a>
         <a slot="menu" href="/" class="link">Example link with a really long name in here for some reason</a>
-      
+
         <ul slot="menu" class="parent">
           <li><a class="link">Parent link</a></li>
-          <li><a href="/" class="link"><i class="fa-light fa-house"></i>Example link</a></li>
+          <li>
+            <a href="/" class="link"><i class="fa-light fa-house"></i>Example link</a>
+          </li>
           <li><a href="/" class="link">Example link with a really long name in here for some reason</a></li>
           <li><a href="/" class="link">Sub link 1</a></li>
           <li><a href="/" class="link">Sub link 2</a></li>

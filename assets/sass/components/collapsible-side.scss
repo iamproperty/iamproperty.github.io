@@ -50,7 +50,7 @@ $darkMode: 'true' !default;
   height: calc(100% - var(--nav-height));
   padding: 0 rem(40) 0 0;
   transition: width 1s;
-  
+
   &:before {
     content: '';
     position: absolute;
