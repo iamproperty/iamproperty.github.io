@@ -1,12 +1,17 @@
+<script lang="ts" setup>
+  import CollapsibleSideMenu from '@/components/CollapsibleSideMenu/CollapsibleSideMenu.vue';
+  import CrmNav from '../CrmNav.vue';
+</script>
+
 <template>
   <div>
     <CrmNav></CrmNav>
 
     <main>
-      <CollapsibleSideMenu data-title="Configuration" open open-always>
+      <CollapsibleSideMenu data-title="Configuration" open>
         <div slot="menu">
           <label for="test1">Active branch</label>
-          <select class="form-select" name="test1" id="test1">
+          <select id="test1" class="form-select" name="test1">
             <option value="1" selected>Newcastle</option>
             <option value="2">Two</option>
             <option value="2">Three</option>
@@ -15,9 +20,26 @@
         </div>
 
         <hr slot="menu" />
-        <a href="/" slot="menu">Agency settings</a>
-        <a href="/" slot="menu">Control panel</a>
-        <a href="/" slot="menu" class="selected">Contact us</a>
+
+        <a slot="menu" href="/" class="link"><i class="fa-light fa-alien"></i>Control panel</a>
+        <a slot="menu" href="/" class="link selected">Contact us</a>
+        <a slot="menu" href="/" class="link active">Active Class</a>
+        <a slot="menu" href="/" class="router-link-active router-link-exact-active">Vue's Active Class</a>
+        <a slot="menu" href="/" class="link">Example link</a>
+        <a slot="menu" href="/" class="link">Example link with a really long name in here for some reason</a>
+
+        <ul slot="menu" class="parent">
+          <li><a class="link">Parent link</a></li>
+          <li>
+            <a href="/" class="link"><i class="fa-light fa-house"></i>Example link</a>
+          </li>
+          <li><a href="/" class="link">Example link with a really long name in here for some reason</a></li>
+          <li><a href="/" class="link">Sub link 1</a></li>
+          <li><a href="/" class="link">Sub link 2</a></li>
+          <li><a href="/" class="link active">Sub link (active)</a></li>
+          <li><a href="/" class="router-link-active router-link-exact-active">Sub link (vue active)</a></li>
+        </ul>
+        <a slot="menu" href="/" class="link">Further sub links after group</a>
 
         <h1>Inspections</h1>
         <p>
@@ -32,17 +54,3 @@
     </main>
   </div>
 </template>
-
-<script>
-  import Nav from '@/components/Nav/Nav.vue';
-  import CollapsibleSideMenu from '@/components/CollapsibleSideMenu/CollapsibleSideMenu.vue';
-  import CrmNav from '../CrmNav.vue';
-
-  export default {
-    components: {
-      Nav,
-      CollapsibleSideMenu,
-      CrmNav,
-    },
-  };
-</script>
