@@ -1,9 +1,14 @@
+<script lang="ts" setup>
+  import CollapsibleSideMenu from '@/components/CollapsibleSideMenu/CollapsibleSideMenu.vue';
+  import CrmNav from '../CrmNav.vue';
+</script>
+
 <template>
   <div>
     <CrmNav></CrmNav>
 
     <main>
-      <CollapsibleSideMenu data-title="Configuration" open open-always>
+      <CollapsibleSideMenu data-title="Configuration" open>
         <div slot="menu">
           <label for="test1">Active branch</label>
           <select id="test1" class="form-select" name="test1">
@@ -47,17 +52,3 @@
     </main>
   </div>
 </template>
-
-<script>
-  import Nav from '@/components/Nav/Nav.vue';
-  import CollapsibleSideMenu from '@/components/CollapsibleSideMenu/CollapsibleSideMenu.vue';
-  import CrmNav from '../CrmNav.vue';
-
-  export default {
-    components: {
-      Nav,
-      CollapsibleSideMenu,
-      CrmNav,
-    },
-  };
-</script>

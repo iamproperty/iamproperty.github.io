@@ -39,27 +39,29 @@
 // #region Side menu
 .side-menu {
   position: absolute;
+  z-index: 20;
   top: 0;
   left: 0;
   height: 100%;
   min-height: calc(100vh - var(--nav-height));
-  width: rem(30);
+  width: rem(70);
   height: calc(100% - var(--nav-height));
-  background-color: var(--colour-canvas);
+  padding: 0 rem(40) 0 0;
   transition: width 1s;
-
+  
   &:before {
     content: '';
     position: absolute;
+    z-index: 1;
     top: 0;
-    right: 0;
+    right: rem(40);
     height: 100%;
     border-right: 2px solid var(--colour-border);
   }
 
   @include media-breakpoint-up(sm) {
     left: 0;
-    width: rem(40);
+    width: rem(80);
   }
 
   @include media-breakpoint-up(md) {
@@ -69,7 +71,7 @@
     top: var(--nav-height);
 
     &:not(.open).hover {
-      width: rem(304);
+      width: rem(344);
 
       .btn[class*='fa-']:before {
         content: '\f023' !important;
@@ -81,13 +83,14 @@
     display: var(--btn-display, block);
     position: absolute;
     top: rem(32);
-    right: 0;
+    right: rem(40);
     margin-bottom: 0;
     margin-right: rem(-20);
     background-color: var(--colour-canvas-2);
     border: 2px solid var(--colour-border);
     z-index: 99;
     color: var(--colour-primary-theme);
+    transition: opacity $btn-transition-duration;
 
     &[aria-expanded] {
       // Change icon
@@ -103,7 +106,7 @@
 
   &:is(:hover, :focus-within, :active) .btn {
     border: 2px solid var(--colour-border);
-    color: var(--colour-primary-theme);
+    color: var(--colour-primary);
 
     @include media-breakpoint-up(md) {
       opacity: 1;
@@ -111,13 +114,13 @@
   }
 
   &:is(.open) {
-    width: calc(100% - var(--container-padding-x));
+    width: calc(100% - var(--container-padding-x) + rem(40));
 
     @include media-breakpoint-up(sm) {
-      width: rem(382);
+      width: rem(422);
     }
     @include media-breakpoint-up(md) {
-      width: rem(304);
+      width: rem(344);
     }
   }
 
@@ -125,14 +128,16 @@
   .side-menu-content {
     position: absolute;
     top: 0;
-    right: 0;
-    padding: rem(32) rem(40) 0 0;
+    right: rem(40);
+    padding: rem(32) rem(40) rem(40) 0;
     width: rem(351);
+    background-color: var(--colour-canvas);
     opacity: 0;
     transition: opacity 1s;
     min-height: 100%;
     overflow: auto;
     max-height: 100%;
+    scrollbar-width: thin;
 
     .h3 {
       padding-left: rem(24);
@@ -175,6 +180,8 @@
 
 // #region main content
 .main-content {
+  position: relative;
+  z-index: 10;
   padding-top: rem(24);
   padding-left: rem(60);
 
