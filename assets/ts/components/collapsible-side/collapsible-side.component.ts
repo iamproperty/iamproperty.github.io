@@ -85,7 +85,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     }
 
     // Open the menu
-    button.addEventListener('click', (event) => {
+    button.addEventListener('click', () => {
       if (!sideMenu.classList.contains('open')) {
         sideMenuContent.classList.remove('closed');
 
@@ -110,7 +110,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     });
 
     // Mimic hover event on desktop so that we can control when classes are set and which order
-    sideMenu.addEventListener('mouseenter', (event) => {
+    sideMenu.addEventListener('mouseenter', () => {
       if (window.innerWidth > 992) {
         if (!sideMenu.classList.contains('open')) sideMenuContent.classList.remove('closed');
 
@@ -118,13 +118,13 @@ class iamCollapsibleSideMenu extends HTMLElement {
       }
     });
 
-    sideMenu.addEventListener('mousemove', (event) => {
+    sideMenu.addEventListener('mousemove', () => {
       if (window.innerWidth > 992) {
         if (!sideMenu.classList.contains('open')) sideMenuContent.classList.remove('closed');
       }
     });
 
-    sideMenu.addEventListener('mouseleave', (event) => {
+    sideMenu.addEventListener('mouseleave', () => {
       if (window.innerWidth > 992) {
         sideMenu.classList.remove('hover');
 

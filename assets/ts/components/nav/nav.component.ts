@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -18,7 +16,7 @@ class iamNav extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css')
       ? document.body.getAttribute('data-core-css')
       : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/nav.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/nav.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
 
     const template = document.createElement('template');
@@ -63,7 +61,7 @@ class iamNav extends HTMLElement {
       document.head.insertAdjacentHTML('beforeend', `<style id="navGlobal">${loadExtraCSS}</style>`);
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     // Load external CSS if needed
     if (this.hasAttribute('data-css'))
       this.shadowRoot
@@ -72,6 +70,7 @@ class iamNav extends HTMLElement {
 
     const menuButton = this.shadowRoot.querySelector('.btn-menu');
     const menu = this.shadowRoot.querySelector('.menu');
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const iamNav = this;
     const backdrop = this.shadowRoot.querySelector('.backdrop');
     const buttonsHolder = this.shadowRoot.querySelector('.buttons-holder');
@@ -225,14 +224,14 @@ class iamNav extends HTMLElement {
     );
 
     // Allow outside JS to close the menu
-    this.addEventListener('request-close', (event) => {
+    this.addEventListener('request-close', () => {
       menuButton.removeAttribute('aria-expanded');
       menu.classList.remove('open');
       iamNav.classList.remove('open');
     });
 
     // Close the menu on the click of the backdrop on desktop
-    backdrop.addEventListener('click', (event) => {
+    backdrop.addEventListener('click', () => {
       const openMenu = this.querySelector('details[open] summary');
 
       if (openMenu) openMenu.click();
@@ -275,7 +274,7 @@ class iamNav extends HTMLElement {
           });
 
           // Close any other dropdowns on the same level
-          Array.from(wrapper.querySelectorAll(':scope > details')).forEach((detailsArrayElement, index) => {
+          Array.from(wrapper.querySelectorAll(':scope > details')).forEach((detailsArrayElement) => {
             if (detailsArrayElement != details) detailsArrayElement.removeAttribute('open');
           });
 
@@ -334,14 +333,14 @@ class iamNav extends HTMLElement {
         searchButton.setAttribute('aria-expanded', true);
       }
 
-      searchButton.addEventListener('click', (event) => {
+      searchButton.addEventListener('click', () => {
         searchDialog.setAttribute('open', 'open');
         this.classList.add('search-open');
 
         searchButton.setAttribute('aria-expanded', true);
       });
 
-      searchClose.addEventListener('click', (event) => {
+      searchClose.addEventListener('click', () => {
         searchDialog.removeAttribute('open');
         this.classList.remove('search-open');
 

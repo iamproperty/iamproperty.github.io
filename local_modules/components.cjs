@@ -22,7 +22,7 @@ fs.watch(watchFolder, { recursive: true }, (event, filename) => {
 
       if (stat.isFile() && component !== prevComp && !filename.endsWith('.min.js') && !filename.endsWith('.map')) {
         
-        exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.js --sourcemap`);
+        exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
         console.log(`${component} compiled`);
 
         prevComp = component;
@@ -53,7 +53,7 @@ fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
 
       if (stat.isFile() && component !== prevComp && !filename.endsWith('.min.js') && !filename.endsWith('.map')) {
         
-        exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.js --sourcemap`);
+        exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
         console.log(`${component} compiled`);
 
         prevComp = component;
@@ -88,7 +88,7 @@ fs.watch(watchSassFolder, { recursive: true }, (event, filename) => {
 
       if (stat.isFile() && component !== prevSassComp && !filename.endsWith('.map')) {
         
-        exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.js --sourcemap`);
+        exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
         console.log(`${component} compiled`);
 
         prevSassComp = component;

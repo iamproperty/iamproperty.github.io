@@ -1,5 +1,8 @@
 @use '../_func.scss' as *;
 
+@include margins();
+@include visually-hidden();
+
 :host {
   background-color: #fcfcfc;
 }
@@ -20,13 +23,12 @@ slot[name='selectall'] {
   top: 50%;
   left: rem(24);
   margin-left: 0;
-
-  @include media-breakpoint-up(sm) {
-    left: rem(32);
-  }
-
   transform: translate(0, -50%);
   z-index: 10;
+
+  @include media-breakpoint-up(sm, $mobileOnly) {
+    left: rem(32);
+  }
 
   .btn-action:not(:last-child) {
     margin-right: rem(4) !important;
@@ -42,7 +44,7 @@ slot[name='selectall'] {
     height: rem(40);
   }
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     width: auto;
     overflow: visible;
   }
@@ -65,11 +67,11 @@ slot[name='selectall'] {
   justify-content: flex-end;
   align-items: center;
   height: rem(68);
+  inset: 0;
 
   @supports selector(:has(*)) {
     position: absolute;
   }
-  inset: 0;
 
   @include container-up(sm) {
     padding: 0 rem(32);
@@ -82,30 +84,30 @@ slot[name='selectall'] {
 
 .actionbar--selected {
   background-color: var(--colour-canvas);
+  pointer-events: none;
+  display: flex;
 
-  @include light-mode {
+  @include light-mode($darkMode) {
     background-color: #e6eaec;
   }
-
-  display: flex;
 
   @supports selector(:has(*)) {
     opacity: 0;
   }
-  pointer-events: none;
 }
 
 .actionbar--search {
   background-color: var(--colour-canvas);
 
-  @include light-mode {
-    background-color: #e6eaec;
-  }
   display: flex;
   z-index: 2;
   position: relative;
   opacity: 0;
   pointer-events: none;
+
+  @include light-mode($darkMode) {
+    background-color: #e6eaec;
+  }
 }
 
 // Show selected bar
@@ -155,6 +157,11 @@ slot[name='selectall'] {
   order: 2;
 }
 
+::slotted(:not([slot])) {
+  align-self: center !important;
+  margin-block: 0;
+}
+
 // buttons only for single items
 ::slotted([data-single]) {
   pointer-events: none;
@@ -187,6 +194,9 @@ slot[name='selectall'] {
   align-items: center;
   width: rem(210);
 
+  overflow: visible;
+  position: relative;
+
   @include container-up(sm) {
     width: rem(450);
   }
@@ -194,9 +204,6 @@ slot[name='selectall'] {
   @include container-up(md) {
     width: rem(750);
   }
-
-  overflow: visible;
-  position: relative;
 
   .body {
     display: contents;
@@ -276,4 +283,63 @@ slot[name='selectall'] {
     line-height: rem(40 - 8 - 8) !important;
   }
 }
+// #endregion
+
+// #region filter columns
+.filter-columns,
+.checklist-btns {
+  display: none;
+}
+
+:host([data-filter-columns]) .filter-columns {
+  display: block;
+}
+
+:host([data-filter-columns-save]) .filter-columns {
+  display: block;
+}
+
+:host([data-filter-columns-save]) .checklist-btns {
+  display: block;
+  text-align: right;
+  padding-top: 0.5rem;
+
+  #saveColumns {
+    margin-left: 0.25rem;
+  }
+  #saveColumns:not(:hover, :focus, :active) {
+    background-color: var(--colour-warning);
+  }
+  #cancelColumns:not(:hover, :focus, :active) {
+    border-color: var(--colour-border);
+  }
+}
+
+.fa-table-columns:has(+ dialog input:not(:checked)) {
+  overflow: visible;
+  text-indent: -200vw;
+
+  &:after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--colour-info);
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+  }
+}
+
+:host([data-filter-columns-save]) .fa-table-columns:after {
+  display: none !important;
+}
+
+@for $i from 1 through 30 {
+  :host([data-filter-columns-save][data-hide-col#{$i}]) .fa-table-columns:after {
+    display: block !important;
+  }
+}
+
 // #endregion

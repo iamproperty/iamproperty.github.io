@@ -12,16 +12,49 @@ var cssSize = formatBytes(cssStat.size);
 summary['css_size'] = cssSize;
 console.log("- CSS: "+cssSize);
 
+var cssStatMob = fs.statSync(path.join('./assets/css/mobile.min.css'));
+var cssSizeMob = formatBytes(cssStatMob.size);
+summary['css_mob_size'] = cssSizeMob;
+console.log("- Mobile CSS: "+cssSizeMob);
+
 var cssStatCore = fs.statSync(path.join('./assets/css/core.min.css'));
 var cssCoreSize = formatBytes(cssStatCore.size);
 summary['css_core_size'] = cssCoreSize;
 console.log("- Core CSS: "+cssCoreSize);
+
+
+var cssStatCoreMob = fs.statSync(path.join('./assets/css/mobile-core.min.css'));
+var cssCoreMobSize = formatBytes(cssStatCoreMob.size);
+summary['css_core_mob_size'] = cssCoreMobSize;
+console.log("- Core Mobile CSS: "+cssCoreMobSize);
 
 // JS
 var jsStat = fs.statSync(path.join('./assets/js/scripts.bundle.min.js'));
 var jsSize = formatBytes(jsStat.size);
 summary['js_size'] = jsSize;
 console.log("- JS: "+jsSize);
+
+var totalJSstat = jsStat.size;
+
+var components = require('../components.json');
+
+Array.from(components).forEach((component) => {
+
+  var compStat = fs.statSync(path.join(`./assets/js/components/${component}/${component}.component.min.js`));
+  var compSize = formatBytes(compStat.size);
+  summary[`${component}_size`] = compSize;
+  console.log(`-- ${component} component: `+compSize);
+
+  totalJSstat += compStat.size;
+});
+
+var totalJSsize = formatBytes(totalJSstat);
+
+summary[`Total_JS_size`] = totalJSsize;
+console.log(`- Total JS size: `+totalJSsize);
+
+
+
 
 //SVGs
 var logoStat = fs.statSync(path.join('./assets/svg/logo.svg'));
@@ -66,5 +99,14 @@ fonts_size = formatBytes(fonts_size);
 summary['fonts_size'] = fonts_size;
 summary['fonts_count'] = fonts_count;
 console.log("- Fonts("+fonts_count+"): "+fonts_size);
+
+const date = new Date()
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+let currentDate = `${day}-${month}-${year}`;
+
+summary['fulldate'] = date;
+summary['date'] = currentDate;
 
 fs.writeFile('audit.json', JSON.stringify(summary,null,2), (err) => {  if (err) throw err; });

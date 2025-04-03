@@ -176,15 +176,6 @@ const routes = [
         searchterms: 'unordered, ordered, tick, breadcrumb',
       },
       {
-        path: 'buttons',
-        name: 'Buttons & links',
-        meta: {
-          title: 'Buttons & links | Elements | iamkey',
-        },
-        component: () => import('./views/elements/Buttons.vue'),
-        searchterms: 'anchor, prompt, secondary button, primary button, compact',
-      },
-      {
         path: 'badges',
         name: 'Badges (Beta)',
         meta: {
@@ -244,6 +235,52 @@ const routes = [
         },
         component: () => import('./views/elements/Details.vue'),
         searchterms: 'details, accordion, summary',
+      },
+    ],
+  },
+  {
+    path: '/links',
+    name: 'links',
+    meta: {
+      title: 'Elements | iamkey',
+    },
+    component: () => import('./views/Elements.vue'),
+    children: [
+      {
+        path: 'text-links',
+        name: 'Text Links',
+        meta: {
+          title: 'Links | Elements | iamkey',
+        },
+        component: () => import('./views/links/Links.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'buttons',
+        name: 'Buttons',
+        meta: {
+          title: 'Buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/Buttons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'action-buttons',
+        name: 'Action buttons',
+        meta: {
+          title: 'Action buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/ActionButtons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'compact-buttons',
+        name: 'Compact buttons',
+        meta: {
+          title: 'Compact buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/CompactButtons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
       },
     ],
   },
@@ -436,6 +473,14 @@ const routes = [
         component: () => import('./views/components/AppliedFiltersDoc.vue'),
       },
       {
+        path: 'bento-grid',
+        name: 'Bento grid (Beta)',
+        meta: {
+          title: 'Bento grid | Components | iamkey',
+        },
+        component: () => import('./views/components/BentoGridDoc.vue'),
+      },
+      {
         path: 'carousel',
         name: 'Carousel',
         meta: {
@@ -486,6 +531,16 @@ const routes = [
         },
         component: () => import('./views/components/InlineEdit.vue'),
         searchterms: 'form, input, inline',
+      },
+      {
+        path: 'menu',
+        name: 'Menu (Beta)',
+        meta: {
+          title: 'Menu | Components | iamkey',
+          beta: true,
+          standalone: true,
+        },
+        component: () => import('./views/components/MenuDoc.vue'),
       },
       {
         path: 'multistep',
@@ -709,6 +764,14 @@ const routes = [
         },
         component: () => import('./views/charts/BarChart.vue'),
       },
+      {
+        path: 'doughnutchart',
+        name: 'Doughnut chart',
+        meta: {
+          title: 'Doughnut chart | Components | iamkey',
+        },
+        component: () => import('./views/charts/DoughnutChart.vue'),
+      },
     ],
   },
   {
@@ -845,6 +908,15 @@ const routes = [
     },
     searchterms:
       'npm, install, assets, static, sass, modules, vue, branch, commands, contributing, code, web server, develoment, unit tests, regression tests, workflow',
+  },
+  {
+    path: '/audit-results',
+    component: () => import('./views/Audit.vue'),
+    name: 'Audit',
+    meta: {
+      title: 'Audit | iamkey',
+    },
+    searchterms: 'Audit, npm, build, pr, Pull request',
   },
   {
     /* Examples */ path: '/examples',
@@ -1138,6 +1210,14 @@ const routes = [
           title: 'Inspections | iamkey',
         },
         component: () => import('./views/standalone/Inspections.vue'),
+      },
+      {
+        path: 'competitor-analysis',
+        name: 'Competitor analysis',
+        meta: {
+          title: 'Competitor analysis | iamkey',
+        },
+        component: () => import('./views/standalone/competitor-analysis.vue'),
       },
     ],
   },

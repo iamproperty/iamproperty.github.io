@@ -43,7 +43,7 @@ class iamActionbar extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css')
       ? document.body.getAttribute('data-core-css')
       : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/actionbar.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/actionbar.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/actionbar.global.css";`;
 
     const template = document.createElement('template');
@@ -68,6 +68,18 @@ class iamActionbar extends HTMLElement {
                 <slot name="menu"></slot>
               </dialog>
             </div>
+
+
+            <div class="dialog__wrapper dialog__wrapper--right filter-columns">
+              <button class="btn btn-secondary btn-compact btn-sm mb-0 me-0 fa-regular fa-table-columns" title="Select colums">Filter</button>
+              <dialog class="dialog--list">
+                <div class="pb-0 mb-0 checklists">
+                  
+                </div>
+                <div class="text-right checklist-btns"><button id="cancelColumns" class="btn btn-action">Cancel</button><button id="saveColumns" class="btn btn-action btn-secondary">Save</button></div>
+              </dialog>
+            </div>
+
             <button class="btn btn-secondary btn-compact btn-sm fa-search" data-search="" part="search-btn">Search</button>
           </div>
         </div>
@@ -85,6 +97,7 @@ class iamActionbar extends HTMLElement {
           </div>
         </div>
       </div>
+
       <div class="actionbar--search">
         <button data-search class="btn btn-compact fa-xmark-large btn-secondary m-0" >Close</button>
 
@@ -106,6 +119,7 @@ class iamActionbar extends HTMLElement {
 
   connectedCallback(): void {
     const actionbarWrapper = this.shadowRoot?.querySelector('.actionbar__wrapper');
+    const checklistHolder = this.shadowRoot?.querySelector('.checklists');
 
     // #region select all
     if (this.hasAttribute('data-selectall')) {
@@ -235,7 +249,7 @@ class iamActionbar extends HTMLElement {
     // #endregion
 
     // Make sure dialogs created in the shadow dom work
-    Array.from(this.shadowRoot.querySelectorAll('.body')).forEach((element, index) => {
+    Array.from(this.shadowRoot.querySelectorAll('.body')).forEach((element) => {
       extendDialogs(element);
     });
 
@@ -386,6 +400,84 @@ class iamActionbar extends HTMLElement {
     // Check buttons on load and when the wrapper element gets resized.
     hideButtons();
     new ResizeObserver(hideButtons).observe(actionbarWrapper);
+    // #endregion
+
+    // #region cloumn filters
+
+    const setColumnFilters = (): void => {
+      let columnsHidden = '';
+      Array.from(checklistHolder?.querySelectorAll('label input')).forEach((element, index) => {
+        columnsHidden += this.hasAttribute(`data-hide-col${index + 1}`) ? `${index + 1},` : '';
+      });
+
+      const dispatchedEvent = new CustomEvent('columm-filters-set', {
+        detail: {
+          columnsHidden: columnsHidden.slice(0, -1),
+        },
+      });
+
+      this.dispatchEvent(dispatchedEvent);
+    };
+
+    if (this.hasAttribute('data-filter-columns') || this.hasAttribute('data-filter-columns-save')) {
+      const columns = this.closest('iam-table').querySelectorAll('thead th');
+
+      Array.from(columns).forEach((element, index) => {
+        if (element.textContent) {
+          checklistHolder?.insertAdjacentHTML(
+            'beforeend',
+            `<label class="m-0" title="Change the display of "><input name="hideCol${index + 1}" value="${index + 1}" type="checkbox" ${this.hasAttribute('data-hide-col' + (index + 1)) ? '' : 'checked'} /> ${element.textContent}</label>`
+          );
+        }
+      });
+    }
+
+    if (this.hasAttribute('data-filter-columns') && !this.hasAttribute('data-filter-columns-save')) {
+      checklistHolder?.addEventListener('change', (event) => {
+        if (event && event.target instanceof HTMLElement && event.target.closest('input')) {
+          const checkbox = event.target.closest('input');
+
+          if (checkbox?.checked == false) {
+            this.setAttribute('data-hide-col' + checkbox?.value, 'true');
+          } else {
+            this.removeAttribute('data-hide-col' + checkbox?.value);
+          }
+
+          setColumnFilters();
+        }
+      });
+    }
+
+    if (this.hasAttribute('data-filter-columns-save')) {
+      const checklistHolder = this.shadowRoot?.querySelector('.checklists');
+      const checklistSave = this.shadowRoot?.querySelector('#saveColumns');
+      const checklistCancel = this.shadowRoot?.querySelector('#cancelColumns');
+
+      checklistSave?.addEventListener('click', (event) => {
+        Array.from(checklistHolder?.querySelectorAll('label input')).forEach((checkbox) => {
+          if (checkbox?.checked == false) {
+            this.setAttribute('data-hide-col' + checkbox?.value, 'true');
+          } else {
+            this.removeAttribute('data-hide-col' + checkbox?.value);
+          }
+        });
+
+        setColumnFilters();
+        checklistSave.closest('dialog')?.close();
+      });
+
+      // Revert back to what was previously saved
+      checklistCancel?.addEventListener('click', (event) => {
+        const checklistHolder = this.shadowRoot?.querySelector('.checklists');
+
+        Array.from(checklistHolder?.querySelectorAll('label input')).forEach((element, index) => {
+          element.checked = this.hasAttribute(`data-hide-col${index + 1}`) ? false : true;
+        });
+
+        setColumnFilters();
+        checklistSave.closest('dialog')?.close();
+      });
+    }
     // #endregion
   }
 

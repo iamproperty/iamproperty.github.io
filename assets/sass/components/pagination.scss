@@ -1,5 +1,7 @@
 @use '../_func' as *;
 
+@include margins();
+
 :host {
   container-type: inline-size;
   display: block;
@@ -18,6 +20,10 @@
   > div {
     display: flex;
     align-items: center;
+  }
+
+  *:has(.prev:disabled):has(.next:disabled) {
+    display: none;
   }
 }
 

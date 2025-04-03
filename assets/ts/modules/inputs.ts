@@ -1,15 +1,14 @@
-// @ts-nocheck
-import hibpCheck from '../vendor/hibp';
+import hibpCheck from '../vendor/hibp.js';
 
-const extendInputs = (body) => {
-  function loadInput() {
+const extendInputs = (body): void => {
+  function loadInput(): void {
     // maxlength counter init
-    Array.from(document.querySelectorAll('input[maxlength],textarea[maxlength]')).forEach((input, index) => {
+    Array.from(document.querySelectorAll('input[maxlength],textarea[maxlength]')).forEach((input) => {
       const wrapper = input.parentElement;
       setMaxlengthVars(input, wrapper);
     });
 
-    Array.from(document.querySelectorAll('label input')).forEach((input, index) => {
+    Array.from(document.querySelectorAll('label input')).forEach((input) => {
       if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required')) {
         if (input.parentNode.tagName.toLowerCase() == 'span')
           input.parentElement.insertAdjacentHTML('beforebegin', `<span class="optional-text"></span>`);
@@ -21,14 +20,14 @@ const extendInputs = (body) => {
     if (document.querySelector('input[type="date"]')) {
       const today = new Date();
 
-      function formatDate(date) {
+      function formatDate(date): string {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
       }
 
-      Array.from(document.querySelectorAll('input[type="date"]')).forEach((input, index) => {
+      Array.from(document.querySelectorAll('input[type="date"]')).forEach((input) => {
         const startDate = today;
 
         if (input.hasAttribute('data-start')) {
@@ -48,7 +47,7 @@ const extendInputs = (body) => {
         if (input.hasAttribute('data-allowed-days')) {
           const allowedDays = JSON.parse(`[${input.getAttribute('data-allowed-days')}]`);
 
-          input.addEventListener('input', function (e) {
+          input.addEventListener('input', function () {
             const day = new Date(this.value).getUTCDay();
 
             if (allowedDays.includes(day)) input.setCustomValidity('');
@@ -63,7 +62,7 @@ const extendInputs = (body) => {
     loadInput();
   }
 
-  document.onreadystatechange = () => {
+  document.onreadystatechange = (): void => {
     if (document.readyState === 'complete') {
       loadInput();
     }
@@ -72,7 +71,6 @@ const extendInputs = (body) => {
   body.addEventListener('input', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('input,textarea,select')) {
       const input = event.target.closest('input,textarea,select');
-      const wrapper = input.parentElement;
 
       // Output the color hex
       if (input.hasAttribute('type') && input.getAttribute('type') == 'color')
@@ -98,13 +96,12 @@ const extendInputs = (body) => {
 
     if (event && event.target instanceof HTMLElement && event.target.closest('dialog [type="radio"]')) {
       const dialog = event.target.closest('dialog');
-      const radio = event.target.closest('dialog [type="radio"]');
 
-      Array.from(dialog.querySelectorAll('[type="radio"][autofocus]')).forEach((input, index) => {
+      Array.from(dialog.querySelectorAll('[type="radio"][autofocus]')).forEach((input) => {
         input.removeAttribute('autofocus');
       });
 
-      Array.from(dialog.querySelectorAll('[type="radio"]:checked')).forEach((input, index) => {
+      Array.from(dialog.querySelectorAll('[type="radio"]:checked')).forEach((input) => {
         input.setAttribute('autofocus', true);
       });
     }
@@ -132,7 +129,7 @@ const extendInputs = (body) => {
   });
 };
 
-export const setMaxlengthVars = (input) => {
+export const setMaxlengthVars = (input): void => {
   const wrapper = input.parentElement;
   const maxlength = input.getAttribute('maxlength');
 
@@ -148,14 +145,14 @@ export const setMaxlengthVars = (input) => {
   span.setAttribute('data-count', input.value.length);
 };
 
-export const changeType = (input, type) => {
+export const changeType = (input, type): void => {
   if (input.hasAttribute('type') && input.getAttribute('type') == 'password')
     input.setAttribute('data-password-type', true);
 
   input.setAttribute('type', type);
 };
 
-export const checkPWDStrength = (input, check = 'no') => {
+export const checkPWDStrength = (input, check = 'no'): void => {
   const pwdChecker = document.getElementById(input.getAttribute('data-strength-checker'));
   const password = input.value;
   const minChars = input.hasAttribute('minlength') ? input.getAttribute('minlength') : 12;
@@ -187,7 +184,7 @@ export const checkPWDStrength = (input, check = 'no') => {
       checkhibpCheck(event, input);
     });
 
-    function checkhibpCheck(event, input) {
+    function checkhibpCheck(event, input): void {
       if (event.detail) {
         // found
         checkPWDStrength(input, 'danger');

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import fileupload from '../../modules/fileupload';
 
 // Data layer Web component created
@@ -36,14 +35,14 @@ class iamFileupload extends HTMLElement {
       <hr/>
       <slot></slot>
       <div class="files" part="files"><slot name="files"></slot></div>
-      <span class="invalid-feedback ext">Some files did not match the accpeted extension type.</span>
-      <span class="invalid-feedback size">Some files Were too large to upload.</span>
+      <span class="invalid-feedback ext">Some files did not match the accepted extension type.</span>
+      <span class="invalid-feedback size">Some files were too large to upload.</span>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     this.innerHTML += '<i class="fa-regular fa-arrow-up-from-bracket me-2" aria-hidden="true" slot="btn"></i>';
 
     const wrapper = this.shadowRoot.querySelector('.file-upload');
@@ -56,11 +55,11 @@ class iamFileupload extends HTMLElement {
     fileupload(this, wrapper);
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-filename'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-filename': {
         if (oldVal != newVal) {

@@ -5,7 +5,6 @@
 @use '_func' as *;
 
 $mobileOnly: 'true';
-$compatible: 'true';
 
 // Update the breakpoints to just one to remove some utility classes
 $grid-breakpoints: (

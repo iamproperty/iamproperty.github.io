@@ -7,8 +7,9 @@ const fs = require('fs')
 const { babel } = require('@rollup/plugin-babel')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 const replace = require('@rollup/plugin-replace')
-const banner = require('./banner.js')
+const banner = require('./banner.cjs')
 
+const BUNDLE = process.env.BUNDLE === 'true'
 const ESM = process.env.ESM === 'true'
 
 let fileDest = `scripts${ESM ? '.esm' : ''}`
@@ -26,18 +27,40 @@ const globals = {
   '@popperjs/core': 'Popper'
 }
 
+if (BUNDLE) {
+  fileDest += '.bundle'
+  // Remove last entry in external array to bundle Popper
+  external.pop()
+  delete globals['@popperjs/core']
+  plugins.push(
+    replace({
+      'process.env.NODE_ENV': '"production"',
+      preventAssignment: true
+    }),
+    nodeResolve()
+  )
+}
 
 plugins.push(minify());
 
-const rollupConfig = [];
+const rollupConfig = [
+  {
+    input: path.resolve(__dirname, `assets/js/scripts.js`),
+    output: {
+      banner,
+      file: path.resolve(__dirname, `assets/js/${fileDest}.js`),
+      format: ESM ? 'esm' : 'umd',
+      globals
+    },
+    external,
+    plugins
+  }
+];
 
 
+var components = require('./components.json');
 
-const components = [process.env.COMPONENT];
-
-console.log(components)
-
-components.forEach((component) => {
+Array.from(components).forEach((component) => {
 
   let css = '';
   let extraCSS = '';

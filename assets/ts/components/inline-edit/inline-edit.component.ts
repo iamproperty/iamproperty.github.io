@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -42,12 +40,11 @@ class iamInlineEdit extends HTMLElement {
     shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const inlineEdit = this;
     const saveButton = this.shadowRoot.querySelector('#save');
     const cancelButton = this.shadowRoot.querySelector('#cancel');
-
-    const label = this.querySelector('label');
     const input = this.querySelector('input, textarea, select');
     const preview = this.querySelector('.preview');
 
@@ -59,7 +56,7 @@ class iamInlineEdit extends HTMLElement {
     let originalValue = input.value;
 
     // cancel
-    cancelButton.addEventListener('click', (event) => {
+    cancelButton.addEventListener('click', () => {
       input.value = originalValue;
 
       input.blur();
@@ -75,7 +72,7 @@ class iamInlineEdit extends HTMLElement {
     });
 
     // Save
-    saveButton.addEventListener('click', (event) => {
+    saveButton.addEventListener('click', () => {
       if (inlineEdit.querySelector(':invalid')) {
         inlineEdit.classList.add('was-validated');
 
@@ -123,7 +120,7 @@ class iamInlineEdit extends HTMLElement {
     }
 
     // Saved
-    inlineEdit.addEventListener('inline-edit-saved', (event) => {
+    inlineEdit.addEventListener('inline-edit-saved', () => {
       setTimeout(() => {
         statusSaving.classList.add('d-none');
         statusSaved.classList.remove('d-none');
@@ -147,7 +144,7 @@ class iamInlineEdit extends HTMLElement {
 
     // enter key saves
     if (input.tagName === 'SELECT') {
-      input.addEventListener('change', (event) => {
+      input.addEventListener('change', () => {
         originalValue = input.value;
 
         const saveEvent = new CustomEvent('inline-edit-save', {
@@ -163,13 +160,13 @@ class iamInlineEdit extends HTMLElement {
     }
 
     if (input.tagName != 'SELECT') {
-      input.addEventListener('focus', (event) => {
+      input.addEventListener('focus', () => {
         input.select();
       });
     }
 
     //blur it should autosave
-    input.addEventListener('blur', (event) => {
+    input.addEventListener('blur', () => {
       if (input.value != originalValue) {
         if (inlineEdit.hasAttribute('data-autosave')) {
           originalValue = input.value;

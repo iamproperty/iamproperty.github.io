@@ -1,0 +1,57 @@
+@use '../_func' as *;
+
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('elements', $layers) {
+  // #region Tertiary Button
+
+  .btn.btn-tertiary {
+    background-color: transparent;
+    border: none;
+    color: var(--colour-link);
+    margin: 0 var(--btn-margin) var(--btn-margin) 0;
+    padding: 0;
+    font-size: rem(18);
+    font-weight: normal;
+    line-height: rem(24);
+    min-height: rem(24);
+    position: relative;
+
+    &:after {
+      position: absolute;
+      content: '';
+      top: 100%;
+      left: 50%;
+      height: 2px;
+      width: 100%;
+      transform: translate(-50%, 0);
+      background: var(--colour-underline);
+      transition: width 0.5s;
+    }
+
+    &.text-decoration-none:after {
+      width: 0%;
+    }
+
+    [class*='fa-'] {
+      margin-left: 0;
+      margin-right: 0.5rem;
+    }
+    [class*='fa-']:not(:first-child) {
+      margin-left: 0.5rem;
+      margin-right: 0;
+    }
+
+    &:is(:hover, :focus, .hover, :focus-within):not([disabled], :disabled, :active, .active) {
+      &:after {
+        width: 60% !important;
+      }
+    }
+    &:is(:active, .active):not([disabled], :disabled) {
+      color: var(--colour-active);
+    }
+  }
+  // #endregion
+}

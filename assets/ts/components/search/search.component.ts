@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Cookies from 'js-cookie';
 import { safeID, resolvePath, isTraversable } from '../../modules/helpers';
 
@@ -33,6 +32,9 @@ class iamSearch extends HTMLElement {
     }
     .optional-text {
       display: none;
+    } 
+    .js-hide {
+      display: none !important;
     }
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
@@ -41,7 +43,8 @@ class iamSearch extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
+  async connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const searchWrapper = this;
     const inputField = this.querySelector('input');
     const valueSchema = this.hasAttribute('data-value-schema') ? this.getAttribute('data-value-schema') : 'value';
@@ -49,6 +52,7 @@ class iamSearch extends HTMLElement {
     const loopSchema = this.hasAttribute('data-schema') ? this.getAttribute('data-schema') : '';
     let datalist = this.querySelector('datalist');
     const searched = [];
+    let ajaxURL = this.getAttribute('data-url');
 
     // Clone original input field, re-name and use for display purposes
     const displayInputField = inputField.cloneNode();
@@ -73,7 +77,7 @@ class iamSearch extends HTMLElement {
 
     // Search the endpoint when 3 characters has been added
     if (searchWrapper.hasAttribute('data-url')) {
-      displayInputField.addEventListener('input', (event) => {
+      displayInputField.addEventListener('input', () => {
         if (displayInputField.value.length == 3 && !searched.includes(displayInputField.value)) {
           search(displayInputField.value);
           searched.push(displayInputField.value);
@@ -81,7 +85,7 @@ class iamSearch extends HTMLElement {
       });
     }
 
-    function checkMatch() {
+    function checkMatch(): void {
       const match = datalist.querySelector(`option[value="${displayInputField.value}"]`);
       const subMatch = datalist.querySelector(`option[value*="${displayInputField.value}" i]`);
 
@@ -97,12 +101,11 @@ class iamSearch extends HTMLElement {
     }
 
     // on change update oringinal field with the actual value and use displayed input for the nice display text
-    displayInputField.addEventListener('input', (event) => {
+    displayInputField.addEventListener('input', () => {
       checkMatch();
     });
 
-    const search = async (searchterm) => {
-      let ajaxURL = searchWrapper.getAttribute('data-url');
+    const search = async (searchterm): any => {
       ajaxURL += `${encodeURI(searchterm)}`;
 
       // Setup controller vars if not already set
@@ -134,7 +137,7 @@ class iamSearch extends HTMLElement {
             const loopValues = resolvePath(response, loopSchema, '');
 
             if (isTraversable(loopValues) && typeof loopValues.forEach == 'function') {
-              loopValues.forEach((item, index) => {
+              loopValues.forEach((item) => {
                 const actualValue = resolvePath(item, valueSchema, '');
                 const displayValue = resolvePath(item, displaySchema, '').replace('\n', ', ');
 
@@ -146,7 +149,7 @@ class iamSearch extends HTMLElement {
             } else if (typeof loopValues == 'object') {
               for (const [key, value] of Object.entries(loopValues)) {
                 if (isTraversable(value) && typeof value.forEach == 'function') {
-                  value.forEach((item, index) => {
+                  value.forEach((item) => {
                     const actualValue = resolvePath(item, valueSchema, '');
                     const displayValue = resolvePath(item, displaySchema, '').replace('\n', ', ');
 

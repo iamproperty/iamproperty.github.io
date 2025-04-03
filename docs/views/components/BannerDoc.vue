@@ -37,7 +37,6 @@
       <h2>HTML code examples</h2>
       <pre><code class="javascript">{{htmlUsage}}</code></pre>
     </div>
-
     <div class="container">
       <h2>Vue Banner component reference</h2>
       <Readme></Readme>

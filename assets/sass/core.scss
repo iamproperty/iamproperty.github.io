@@ -1,7 +1,16 @@
 @charset "UTF-8";
 
-@use '_fonts';
-@use '_corefiles.scss';
-@import '_utilities';
+$root: ':root' !default;
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+$optionalText: 'true' !default;
 
-@import '_utility-mixins';
+@use '_fonts';
+@use '_corefiles.scss' with (
+  $root: $root,
+  $layers: $layers,
+  $mobileOnly: $mobileOnly,
+  $darkMode: $darkMode,
+  $optionalText: $optionalText
+);

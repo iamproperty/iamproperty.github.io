@@ -1,4 +1,3 @@
-// @ts-nocheck
 import tabs from '../../modules/tabs';
 
 // Data layer Web component created
@@ -19,7 +18,7 @@ class iamTabs extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css')
       ? document.body.getAttribute('data-core-css')
       : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/tabs.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/tabs.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -45,7 +44,7 @@ class iamTabs extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const classList = this.classList.toString().replace('container', '');
     this.shadowRoot.querySelector('.tabs').setAttribute('class', `tabs ${classList}`);
 
