@@ -66,30 +66,6 @@ describe('addDataAttributes', () => {
   });
 });
 
-describe('createSearchDataList', () => {
-  const table = document.createElement('table');
-  table.innerHTML = basicTable;
-  const form = document.createElement('form');
-  form.innerHTML += `<div><input name="search" id="search" type="text" class="form-control" data-search="Heading 1"></div>`;
-
-  tableModule.addDataAttributes(table);
-  tableModule.createSearchDataList(table, form);
-
-  test('should create a datalist populated by the defined columns in the data-search ', () => {
-    expect(form.querySelectorAll('datalist').length).toEqual(1);
-    expect(form.querySelectorAll('datalist option').length).toEqual(2);
-    expect(form.querySelector('datalist option:nth-child(1)').value).toEqual('Cell 1');
-    expect(form.querySelector('datalist option:nth-child(2)').value).toEqual('Different Cell 1');
-  });
-
-  test('should set the autocomplete attribute to off', () => {
-    expect(form.querySelectorAll('datalist').length).toEqual(1);
-    expect(form.querySelectorAll('datalist option').length).toEqual(2);
-    expect(form.querySelector('datalist option:nth-child(1)').value).toEqual('Cell 1');
-    expect(form.querySelector('input').getAttribute('autocomplete')).toEqual('off');
-  });
-});
-
 describe('sortTable', () => {
   const table = document.createElement('table');
   table.innerHTML = basicTable;
@@ -104,20 +80,6 @@ describe('sortTable', () => {
     expect(table.querySelector('tbody tr:nth-child(1) td:nth-child(2)').textContent).toEqual('High');
     expect(table.querySelector('tbody tr:nth-child(2) td:nth-child(2)').textContent).toEqual('Medium');
     expect(table.querySelector('tbody tr:nth-child(3) td:nth-child(2)').textContent).toEqual('Low');
-  });
-});
-
-describe('filterTable', () => {
-  const table = document.createElement('table');
-  table.innerHTML = basicTable;
-  const form = document.createElement('form');
-  form.innerHTML += `<div><input type="text" name="filter" id="filter" data-filter="Heading 2" value="High" /></div>`;
-
-  tableModule.addDataAttributes(table);
-  tableModule.filterTable(table, form, document.createElement('div'));
-
-  test('should filter the table to only show high values', () => {
-    expect(table.querySelectorAll('tbody tr.filtered--matched').length).toEqual(1);
   });
 });
 

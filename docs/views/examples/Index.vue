@@ -3,7 +3,15 @@
     <div class="container">
       <h1>Examples</h1>
       <p>A series of examples of how the components can be used and integrated into apps.</p>
-      <h2 id="tables">Actinbars</h2>
+      <h2 id="tables">Tables</h2>
+      <ul class="mb-5">
+        <li><a href="/examples/basic-table">Tables</a></li>
+        <li><a href="/examples/no-submit-table">No Submit Tables</a></li>
+        <li><a href="/examples/submit-table">Submit Tables</a></li>
+        <li><a href="/examples/ajax-table">Ajax Tables</a></li>
+        <li><a href="/examples/full-table">full Tables</a></li>
+      </ul>
+      <h2 id="tables">Actionbars</h2>
       <ul>
         <li><a href="/examples/actionbar-table">Actionbar in table</a></li>
         <li><a href="/examples/actionbar-top">Actionbar at top</a></li>

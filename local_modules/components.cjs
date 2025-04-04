@@ -20,6 +20,18 @@ fs.watch(watchFolder, { recursive: true }, (event, filename) => {
 
       let component = filename.split('\\')[0];
 
+      if(component == "table"){
+
+        exec(`rollup --environment COMPONENT:table-no-submit --config rollup-component.config.cjs --sourcemap`);
+        console.log(`table-no-submit compiled`);
+
+        exec(`rollup --environment COMPONENT:table-submit --config rollup-component.config.cjs --sourcemap`);
+        console.log(`table-submit compiled`);
+
+        exec(`rollup --environment COMPONENT:table-ajax --config rollup-component.config.cjs --sourcemap`);
+        console.log(`table-ajax compiled`);
+      }
+
       if (stat.isFile() && component !== prevComp && !filename.endsWith('.min.js') && !filename.endsWith('.map')) {
         
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
@@ -56,6 +68,20 @@ fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
         console.log(`${component} compiled`);
 
+        if(component == "table"){
+
+          exec(`rollup --environment COMPONENT:table-no-submit --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-no-submit compiled`);
+
+          exec(`rollup --environment COMPONENT:table-submit --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-submit compiled`);
+
+          exec(`rollup --environment COMPONENT:table-ajax --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-ajax compiled`);
+        }
+
+
+
         prevComp = component;
         clearTimeout(compTimeout);
         compTimeout = setTimeout(function(){
@@ -91,12 +117,27 @@ fs.watch(watchSassFolder, { recursive: true }, (event, filename) => {
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
         console.log(`${component} compiled`);
 
+
+        if(component == "table"){
+
+          exec(`rollup --environment COMPONENT:table-no-submit --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-no-submit compiled`);
+
+          exec(`rollup --environment COMPONENT:table-submit --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-submit compiled`);
+
+          exec(`rollup --environment COMPONENT:table-ajax --config rollup-component.config.cjs --sourcemap`);
+          console.log(`table-ajax compiled`);
+        }
+
         prevSassComp = component;
         clearTimeout(sassCompTimeout);
         sassCompTimeout = setTimeout(function(){
           prevSassComp = "";
         }, 100);
       }
+
+
 
     })
   }

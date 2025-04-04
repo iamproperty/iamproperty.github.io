@@ -1,17 +1,13 @@
 import {
-  moveAttributesToComponents,
-  findForm,
   setupBasicTable,
+  findForm,
   setupAdvancedTable,
-  paginateRows,
-  setupNoSubmitTable,
-  setupSubmitTable,
   setupAjaxTable,
-  loadAjaxTable,
   paginateTable,
+  loadAjaxTable,
 } from '../../modules/table';
 
-class iamTableBasic extends HTMLElement {
+class iamTableAjax extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -36,14 +32,14 @@ class iamTableBasic extends HTMLElement {
           <slot></slot>
         </div>
       </div>
-      <iam-pagination part="pagination" class="pagination--table" ></iam-pagination>
+      <iam-pagination part="pagination" class="pagination--table" ${this.hasAttribute('data-page') ? `data-page="${this.getAttribute('data-page')}"` : ''} ></iam-pagination>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
     // insert extra CSS
-    if (!document.getElementById('tableExtras')) {
-      document.head.insertAdjacentHTML('beforeend', `<style id="tableExtras">${loadExtraCSS}</style>`);
+    if (!document.getElementById('tableSingleExtras') && !document.getElementById('tableExtras')) {
+      document.head.insertAdjacentHTML('beforeend', `<style id="tableSingleExtras">${loadExtraCSS}</style>`);
     }
   }
 
@@ -53,34 +49,16 @@ class iamTableBasic extends HTMLElement {
 
     const form = findForm(this, table);
 
-    const savedTableBody = table.querySelector('tbody').cloneNode(true);
-
-    moveAttributesToComponents(this);
-
     setupBasicTable(this, table, form, pagination);
+
     setupAdvancedTable(this, table, form, pagination);
 
-    if (this.hasAttribute('data-submit')) {
-      setupSubmitTable(this, table, form, pagination);
-      paginateTable(this, table, form, pagination, () => {
-        form.submit();
-      });
-    } else if (this.hasAttribute('data-no-submit')) {
-      setupNoSubmitTable(this, table, form, pagination, savedTableBody);
-      paginateTable(this, table, form, pagination, () => {
-        paginateRows(this);
-      });
-    } else if (this.hasAttribute('data-ajax')) {
-      setupAjaxTable(this, table, form, pagination);
-      paginateTable(this, table, form, pagination, () => {
-        loadAjaxTable(this, table, form, pagination);
-      });
-    } else {
-      paginateTable(this, table, form, pagination, () => {
-        paginateRows(this);
-      });
-    }
+    setupAjaxTable(this, table, form, pagination);
+
+    paginateTable(component, table, form, pagination, () => {
+      loadAjaxTable(component, table, form, pagination);
+    });
   }
 }
 
-export default iamTableBasic;
+export default iamTableAjax;

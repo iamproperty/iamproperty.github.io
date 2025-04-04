@@ -22,8 +22,9 @@
     align-items: center;
   }
 
-  *:has(.prev:disabled):has(.next:disabled) {
+  &:has(.prev:disabled):has(.next:disabled) {
     display: none;
+    padding: 0;
   }
 }
 

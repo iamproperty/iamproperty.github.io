@@ -281,6 +281,7 @@ slot[name='selectall'] {
     min-width: rem(40) !important;
     max-width: rem(40) !important;
     line-height: rem(40 - 8 - 8) !important;
+    pointer-events: all !important;
   }
 }
 // #endregion

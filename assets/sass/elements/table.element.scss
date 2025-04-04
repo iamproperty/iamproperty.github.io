@@ -51,6 +51,15 @@ $darkMode: 'true' !default;
     overflow: auto;
   }
 
+  div:has(> table:first-child:last-child) {
+    overflow: auto;
+    margin-bottom: rem(32);
+
+    table {
+      margin-bottom: 0;
+    }
+  }
+
   :is(td, th) {
     padding: rem(12) rem(32) rem(12) 0;
 
@@ -69,13 +78,6 @@ $darkMode: 'true' !default;
     p {
       font-size: inherit;
       padding: 0;
-      @container (width > 23.4375em) {
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        min-width: rem(300);
-      }
     }
   }
 

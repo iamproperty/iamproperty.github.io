@@ -220,7 +220,7 @@ const routes = [
       },
       {
         path: 'tables',
-        name: 'Tables (BETA)',
+        name: 'Table Element',
         meta: {
           title: 'Tables | Elements | iamkey',
         },
@@ -611,7 +611,7 @@ const routes = [
         path: 'tables',
         name: 'Tables',
         meta: {
-          title: 'Tables | Elements | iamkey',
+          title: 'Tables | Components | iamkey',
         },
         component: () => import('./views/components/Tables.vue'),
         searchterms: 'expandable, scrollable, rows, columns',
@@ -932,6 +932,22 @@ const routes = [
       {
         path: '',
         component: () => import('./views/examples/Index.vue'),
+      },
+      {
+        path: 'basic-table',
+        component: () => import('./views/examples/BasicTable.vue'),
+      },
+      {
+        path: 'no-submit-table',
+        component: () => import('./views/examples/NoSubmitTableDoc.vue'),
+      },
+      {
+        path: 'submit-table',
+        component: () => import('./views/examples/SubmitTableDoc.vue'),
+      },
+      {
+        path: 'ajax-table',
+        component: () => import('./views/examples/AjaxTableDoc.vue'),
       },
       {
         path: 'actionbar-table',

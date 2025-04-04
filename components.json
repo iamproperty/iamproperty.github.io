@@ -1,6 +1,10 @@
 [
   "accordion",
   "header",
+  "table-basic",
+  "table-no-submit",
+  "table-submit",
+  "table-ajax",
   "table",
   "tabs",
   "card",

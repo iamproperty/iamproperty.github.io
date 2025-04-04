@@ -305,7 +305,7 @@
                 <th data-output="{buying_position}">Buying position</th>
                 <th data-output="<p>{lastComplianceNote}</p>">Last compliance note</th>
                 <th data-output="{locked_to}">Locked to</th>
-                <th data-output="{followup}" data-format="datetime">Follow up</th>
+                <th data-output="{followup}">Follow up</th>
                 <th data-output="<a href='/admin/properties/{property_id}?tab=compliance'>View property</a>"></th>
               </tr>
             </thead>
