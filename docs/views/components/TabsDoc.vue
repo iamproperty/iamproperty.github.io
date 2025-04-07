@@ -606,7 +606,7 @@
     border-radius: 5px;
 
     li {
-      width: 33.33%;
+      width: 100%;
       padding: 1rem;
     }
   }
@@ -660,6 +660,13 @@
     &.disabled {
       cursor: not-allowed;
       opacity: 0.4;
+    }
+  }
+  @media screen and (min-width: 62em) {
+    .states-wrap {
+      li {
+        width: 33.33%;
+      }
     }
   }
 </style>
