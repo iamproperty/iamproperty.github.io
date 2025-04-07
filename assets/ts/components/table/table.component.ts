@@ -9,7 +9,7 @@ class iamTable extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css')
       ? document.body.getAttribute('data-core-css')
       : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/table.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/table.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/table.global.css";`;
 
     const template = document.createElement('template');
@@ -138,7 +138,7 @@ class iamTable extends HTMLElement {
     }
 
     // Event listeners
-    tableModule.addTableEventListeners(this.table);
+    tableModule.addTableEventListeners(this.table, this);
     tableModule.addFilterEventListeners(this.table, this.form, this.pagination, this, this.savedTableBody);
     tableModule.addPaginationEventListeners(this.table, this.form, this.pagination, this);
     tableModule.addExportEventListeners(this.shadowRoot.querySelector('[data-export]'), this.table);

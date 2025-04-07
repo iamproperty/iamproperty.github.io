@@ -1,4 +1,9 @@
+<script setup>
+  import TrackEvents from '../TrackEvents.vue';
+</script>
+
 <template>
+  <TrackEvents selector="iam-table" :events="['sort-by-heading']"></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Tables</h1>
@@ -1078,7 +1083,7 @@
       <div class="demo">
         <div class="row">
           <div class="col-sm-6 col-md-4 ms-auto">
-            <Table>
+            <Table class="table--fullwidth">
               <Actionbar data-selectall="" data-search="" slot="before">
                 <div class="dialog__wrapper show">
                   <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -1371,7 +1376,7 @@
         the same as the ‘Expandable’ variant.
       </p>
     </div>
-    <div class="container visualtest">
+    <div class="container visualtest pb-5">
       <div class="demo">
         <div class="row">
           <div class="col-sm-6 col-md-4 ms-auto">
@@ -1462,11 +1467,80 @@
       </div>
     </div>
 
-    <br />
+    <h2>Sorting using column headers</h2>
+    <p>
+      Data tables can be configured to allow the user to sort columns of data ascending or descending by clicking them.
+      When the user opens the table it should be clear which column determines the order of the data and whether it is
+      ascending or descending. This is shown by an arrow adjacent to the column header name.
+    </p>
 
-    <br />
+    <div class="container visualtest pb-5">
+      <div class="demo">
+        <Table class="table--cta table--fullwidth">
+          <Actionbar data-search="" slot="before">
+            <button class="btn btn-action fa-box-archive">Archive</button
+            ><button class="btn btn-action fa-trash-can">Export to .csv</button>
+          </Actionbar>
+          <table>
+            <thead>
+              <tr>
+                <th>Negotiator</th>
+                <th>Property address</th>
+                <th data-sort>Vendor</th>
+                <th data-sort>Appointment date</th>
+                <th data-sort>Valuation price</th>
+                <th>Fee amount (£)</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tom Smith</td>
+                <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+                <td>a Kevin Milne</td>
+                <td>29/12/2024<br />12:30</td>
+                <td>£0.00</td>
+                <td>£0.00</td>
+                <td><a href="/">View</a></td>
+              </tr>
+              <tr>
+                <td>Tom Smith</td>
+                <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+                <td>b Kevin Milne</td>
+                <td>29/12/2024<br />12:30</td>
+                <td>£0.00</td>
+                <td>£0.00</td>
+                <td><a href="/">View</a></td>
+              </tr>
+              <tr>
+                <td>Tom Smith</td>
+                <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+                <td>c Kevin Milne</td>
+                <td>29/12/2024<br />12:30</td>
+                <td>£0.00</td>
+                <td>£0.00</td>
+                <td><a href="/">View</a></td>
+              </tr>
+              <tr>
+                <td>Tom Smith</td>
+                <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+                <td>d Kevin Milne</td>
+                <td>29/12/2024<br />12:30</td>
+                <td>£0.00</td>
+                <td>£0.00</td>
+                <td><a href="/">View</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </Table>
+      </div>
+    </div>
 
-    <br />
+    <h3>Mobile behaviour</h3>
+    <p>
+      On mobile, sorting should be handled via the action bar only. We should specify the most popular sorting options.
+      This can be presented in a popover dialog.
+    </p>
 
     <div class="container">
       <h2>Max height table</h2>
