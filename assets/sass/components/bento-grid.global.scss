@@ -1,0 +1,269 @@
+@use '../_func.scss' as *;
+
+iam-bento-grid {
+  details {
+    summary {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      max-width: 100%;
+      padding: 1.5rem;
+      margin-bottom: 0;
+
+      [role='presentation'] {
+        display: block;
+        font-family: var(--font-body);
+        font-weight: normal;
+        font-size: 1rem;
+        position: relative;
+        width: fit-content;
+        transition: opacity 1s;
+
+        &:before {
+          display: block;
+          content: ' ';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          width: fit-content;
+          height: 0;
+          border: 1px solid currentColor;
+          transform: translate(-50%, 0);
+          transition: 1s;
+        }
+
+        &:after {
+          display: inline-block;
+          content: '\f061';
+          top: 100%;
+          margin-left: 0.5em;
+          line-height: 1em;
+          font-size: 1em;
+          font-family: 'Font Awesome 6 Pro';
+        }
+      }
+
+      &::after {
+        opacity: 0;
+        content: '\e092';
+        pointer-events: all;
+        left: auto;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        line-height: 1em;
+        font-size: 0.5em;
+
+        font-family: 'Font Awesome 6 Pro';
+        font-weight: 300;
+      }
+
+      &:hover {
+        [role='presentation'] {
+          display: block;
+          font-family: var(--font-body);
+          font-weight: normal;
+          font-size: 1rem;
+          position: relative;
+          width: fit-content;
+
+          &:before {
+            width: 80%;
+          }
+        }
+      }
+    }
+
+    &[style]:before {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 60%;
+      left: 70%;
+      height: 50%;
+      aspect-ratio: 2 / 1;
+
+      background-image: var(--bg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 0.5rem;
+      transition: 1s;
+
+      -webkit-box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.5);
+      -moz-box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.5);
+      box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.5);
+    }
+/*
+    &:hover:before {
+      left: 35%;
+      top: 25%;
+      height: 75%;
+    }
+*/
+    &[open]:before {
+      top: 100%;
+      left: 100%;
+      /*
+      left: 50% !important;
+      top: 30% !important;
+      height: 70% !important;
+      */
+    }
+
+    &::details-content {
+      opacity: 0;
+
+      padding: 0 1.5rem 1.5rem 1.5rem;
+      transition: 1s;
+
+      overflow: auto;
+    }
+  }
+
+  details {
+    summary:hover {
+      [role='presentation'] {
+        opacity: 1;
+      }
+    }
+  }
+
+
+  details[open] {
+
+    position: relative;
+
+    &:not(.animating)::details-content {
+      opacity: 1;
+    }
+
+    > *:last-child {
+      //padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    summary {
+      pointer-events: none;
+      width: 100%;
+      max-width: 100%;
+      height: fit-content;
+
+      [role='presentation'] {
+        opacity: 0;
+      }
+
+      [role='presentation'] {
+        margin-bottom: -2rem;
+      }
+
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
+
+}
+
+@supports selector(::details-content) {
+  .notice {
+    display: none;
+  }
+}
+
+
+iam-bento-grid {
+@container (width > 40em) {
+    details {
+  
+      summary {
+        
+        padding-right: 30%;
+      }
+
+
+      &[style]:before {
+        top: 40%;
+        left: 60%;
+        height: 75%;
+      }
+  
+      &[style]:hover:before {
+        top: 35%;
+        left: 57%;
+        height: 75%;
+      }
+  
+      &[open][style]:before {
+        
+        top: 100%;
+        left: 100%;
+      }
+    }
+  }
+
+}
+
+
+
+iam-bento-grid {
+  @container (width > 54em) {
+  
+    &:has(details:nth-child(5)){
+      details {
+        
+        --height: 33%;
+
+      }
+    }
+    details {
+      summary {
+
+        padding-right: 30%;
+
+        [role='presentation'] {
+
+          opacity: 0;
+        }
+        
+        :is(:hover,:focus) [role='presentation'] {
+
+          opacity: 1;
+        }
+  
+        &::after {
+
+          top: 1.5rem;
+          right: 1.5rem;
+          line-height: 1em;
+          font-size: 1em;
+        }
+      }
+  
+      &[style]:before {
+        top: 38%;
+        left: 45%;
+        height: 80%;
+      }
+  
+      &[style]:hover:before {
+        top: 35%;
+        left: 38%;
+        height: 80%;
+      }
+  
+      &[open][style]:before {
+        
+        left: calc(50% + 0.5rem)!important;
+        top: 30% !important;
+        height: 80% !important;
+      }
+
+      overflow: hidden;
+      
+    }
+
+
+    
+  }
+
+}

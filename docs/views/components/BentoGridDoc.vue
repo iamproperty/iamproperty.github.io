@@ -1,65 +1,62 @@
 <script setup>
   import BentoGrid from '@/components/BentoGrid/BentoGrid.vue';
+
+
+  import Integration from '../Integration.vue';
+  import Versions from '../Versions.vue';
+  import TrackEvents from '../TrackEvents.vue';
+
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/cards-header.png';
 </script>
+
 <template>
+  <TrackEvents
+    selector="iam-bento-grid"
+    :events="['opened']"
+  ></TrackEvents>
   <main>
-    <div class="container">
-      <ul class="breadcrumb mb-0 d-sm-none">
-        <li><a href="/components">Components</a></li>
-      </ul>
-      <h1>Bento Grid</h1>
-      <p>Provides a list of items that can be expanded individually to provide more information.</p>
+
+    <DSHeader :image="headerImg" section="components">
+      <h1>Bento grid</h1>
+    </DSHeader>
+
+
+    <p class="lead md-col-end-7">A flexible, modular layout component that supports a variety of content types, ensuring that the content is organised visually into clean, structured units that adjust dynamically based on screen size or content changes.</p>
 
       <BentoGrid>
-        <details name="bento" style="--bg: url('/img/signin-bg.png')">
-          <summary>The teams</summary>
-          <p>
-            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
-            tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-            semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien
-            ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean
-            fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec
-            non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque
-            egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan
-            porttitor, facilisis luctus, metus
-          </p>
-          <p>
-            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
-            tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-            semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien
-            ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean
-            fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec
-            non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque
-            egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan
-            porttitor, facilisis luctus, metus
-          </p>
-          <p>
-            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
-            tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-            semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien
-            ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean
-            fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec
-            non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque
-            egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan
-            porttitor, facilisis luctus, metus
-          </p>
+        <details name="bento" style="--bg: url('/iamsold-screenshot.png')">
+          <summary>The power of auction</summary>
+          <ul class="tick-list">
+            <li>Faster timescales with 56-day completions*</li>
+            <li>A 95% success rate, meaning fewer fall throughs</li>
+            <li>7-day payment terms^</li>
+            <li>A service more than a third of sellers are calling out for</li>
+          </ul>
+          <a href="" class="btn btn-secondary">Explore auction</a>
         </details>
 
-        <details name="bento">
-          <summary>How we work</summary>
+        <details name="bento" style="--bg: url('/crm-screenshot.png')">
+          <summary>Make your own rules</summary>
           <p>some text</p>
         </details>
 
-        <details name="bento">
-          <summary>Areas we cover</summary>
+        <details name="bento" style="--bg: url('/movebutler-screenshot.png')">
+          <summary>Get your clients maving faster</summary>
           <p>some text</p>
         </details>
 
-        <details name="bento">
-          <summary>Our design system</summary>
+
+        <details name="bento" style="--bg: url('/market-appraisal-screenshot.png')">
+          <summary>Stand our from the crowd</summary>
+          <p>some text</p>
+        </details>
+        
+        <details name="bento" style="--bg: url('/market-appraisal-screenshot.png')">
+          <summary>Stand our from the crowd</summary>
           <p>some text</p>
         </details>
       </BentoGrid>
-    </div>
+
   </main>
 </template>

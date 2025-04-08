@@ -19,6 +19,7 @@ class iamAccordion extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
     const loadCSS = `@import "${assetLocation}/css/components/bento-grid.component.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/bento-grid.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -32,6 +33,9 @@ class iamAccordion extends HTMLElement {
     </div>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
+
+    if (!document.getElementById('bentogridGlobal'))
+      document.head.insertAdjacentHTML('beforeend', `<style id="bentogridGlobal">${loadExtraCSS}</style>`);
   }
 
   connectedCallback(): void {

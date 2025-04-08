@@ -11,34 +11,49 @@
   display: block;
 }
 
+.wrapper {
+
+  margin-bottom: 2rem;
+}
+
+
 ::slotted(details) {
   margin-bottom: 1rem;
   border-radius: 1rem;
   padding: 0 !important;
   position: relative;
   overflow: hidden;
+
+  display: block;
+  width: 100%;
+  min-height: rem(200);
 }
 
-@container (width > 40em) {
+
+
+
+@container (width > 54em) {
   .wrapper {
-    aspect-ratio: 1.75 / 1;
+    aspect-ratio: 1.81 / 1;
     position: relative;
     display: block;
     overflow: hidden;
     border-radius: 1rem;
-
     --content-max-width: 28rem;
+
+    --height: 50%;
   }
 
   ::slotted(details) {
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(60% - 0.5rem) !important;
-    height: calc(50% - 0.5rem);
+    width: calc(58.5% - 0.5rem) !important;
+    height: calc(var(--height) - 0.5rem);
     z-index: 1;
     border-radius: 1rem;
     margin: 0;
+    aspect-ratio: unset;
   }
 
   ::slotted(details.animating) {
@@ -48,22 +63,31 @@
 
   ::slotted(details:nth-child(2)) {
     top: 0;
-    left: calc(60% + 0.5rem);
-    width: calc(40% - 0.5rem) !important;
-    height: calc(50% - 0.5rem);
+    left: calc(58.5% + 0.5rem);
+    width: calc(41.5% - 0.5rem) !important;
+    height: calc(var(--height) - 0.5rem);
   }
   ::slotted(details:nth-child(3)) {
-    top: calc(50% + 0.5rem);
+    top: calc(var(--height) + 0.5rem);
     left: 0;
     width: calc(50% - 0.5rem) !important;
-    height: calc(50% - 0.5rem);
+    height: calc(var(--height) - 0.5rem);
   }
   ::slotted(details:nth-child(4)) {
     top: calc(50% + 0.5rem);
-    left: calc(50% + 0.5rem);
+    left: calc(var(--height) + 0.5rem);
     width: calc(50% - 0.5rem) !important;
-    height: calc(50% - 0.5rem);
+    height: calc(var(--height) - 0.5rem);
   }
+
+  ::slotted(details:nth-child(5)) {
+    top: calc(50% + 0.5rem);
+    left: calc((var(--height)*2) + 0.5rem);
+    width: calc(50% - 0.5rem) !important;
+    height: calc(var(--height) - 0.5rem);
+  }
+
+
 
   ::slotted(details[open]) {
     top: 0;
@@ -80,12 +104,22 @@
     left: 50%;
     height: 100%;
     width: 100%;
-    background: red;
   }
 
   ::slotted(details[open]:not(.animating)) {
     overflow: auto;
     overflow-x: clip;
     overscroll-behavior: contain;
+  }
+
+  :host(:has(details:nth-child(5))) {
+
+
+    
+  }
+
+  :host(:has(details)) .wrapper {
+    aspect-ratio: 3 / 1;
+
   }
 }
