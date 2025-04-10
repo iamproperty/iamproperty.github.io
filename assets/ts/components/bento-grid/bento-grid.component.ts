@@ -7,10 +7,10 @@ declare global {
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
   event: 'customElementRegistered',
-  element: 'accordion',
+  element: 'bento-grid',
 });
 
-class iamAccordion extends HTMLElement {
+class iamBentoGrid extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -63,9 +63,25 @@ class iamAccordion extends HTMLElement {
         setTimeout(() => {
           details?.classList.remove('animating');
         }, 1100);
+
+        if (details?.hasAttribute('open')) {
+          const customEvent = new CustomEvent('item-closed', {
+            detail: {
+              title: summary?.textContent,
+            },
+          });
+          this.dispatchEvent(customEvent);
+        } else {
+          const customEvent = new CustomEvent('item-opened', {
+            detail: {
+              title: summary?.textContent,
+            },
+          });
+          this.dispatchEvent(customEvent);
+        }
       }
     });
   }
 }
 
-export default iamAccordion;
+export default iamBentoGrid;
