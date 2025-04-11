@@ -21,8 +21,8 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     min-width: 10rem;
   }
 
-  /*
-  thead tr {
+
+  tbody tr {
     background: var(--row-bg);
 
     &:is(:hover, :focus-within, .hover) {
@@ -31,7 +31,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
       background: var(--row-bg);
     }
   }
-*/
+
   /*
   &[data-expandable] [data-expand-button][aria-expanded] {
     background-color: transparent;

@@ -22,7 +22,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 :is(#{$selector}) iam-actionbar {
   margin: 0 1.5rem 1rem 1.5rem;
-  //
+  
   @container (width < 23.4375em) {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
     border-radius: 0.5rem;
@@ -32,6 +32,12 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
   padding-top: 0;
 }
 :is(#{$selector}).table--fullwidth iam-actionbar {
+  margin: -2rem -2rem 2rem -2rem;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+:is(#{$selector}).table--fullwidth iam-actionbar:has(+ table input:checked) {
   margin: -2rem -2rem 2rem -2rem;
   box-shadow: none;
   border-radius: 0;
@@ -105,6 +111,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     &:after {
       top: 0.75rem !important;
       left: 0.25rem !important;
+      --border-radius: 0.25rem;
     }
   }
 
@@ -183,7 +190,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
   @mixin fullwidthexpand() {
     [data-expand-button] {
-      margin: 0;
+      margin: 0.25rem 0 0 0;
 
       &:not(:hover, :focus) {
         background-color: transparent;
@@ -264,31 +271,22 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
       min-width: rem(48 + 6);
       height: calc(var(--row-height) - 2px);
       text-align: left;
-      background: linear-gradient(90deg, var(--row-bg) calc(100% - 1rem), transparent 100%);
+      background: var(--row-bg);
 
       &:has([open]) {
         z-index: 4;
       }
     }
 
-    &[data-expandable] .th--fixed + th:not(.th--fixed),
-    &[data-expandable] .td--fixed + td:not(.td--fixed) {
+    .th--fixed:has(+ th:not(.th--fixed)),
+    .td--fixed:has(+ td:not(.td--fixed)) {
+
+      background: linear-gradient(90deg, var(--row-bg) calc(100% - 1rem), transparent 100%);
+    }
+
+    .th--fixed + th:not(.th--fixed),
+    .td--fixed + td:not(.td--fixed) {
       padding-left: calc(rem(48 + 6));
-    }
-
-    &:has([data-selectall]) .th--fixed + th:not(.th--fixed),
-    &:has([data-selectall]) .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 6));
-    }
-
-    .th--fixed + .th--fixed + th:not(.th--fixed),
-    .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 48 + 6));
-    }
-
-    .th--fixed + .th--fixed + .th--fixed + th:not(.th--fixed),
-    .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 48 + 48 + 6));
     }
 
     .th--fixed + .th--fixed,
@@ -296,6 +294,22 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
       left: rem(48);
     }
 
+    .th--fixed + .th--fixed + th:not(.th--fixed),
+    .td--fixed + .td--fixed + td:not(.td--fixed) {
+      padding-left: calc(rem(48 + 48 + 6));
+    }
+
+
+    .th--fixed + .th--fixed + .th--fixed,
+    .td--fixed + .td--fixed + .td--fixed {
+      left: rem(48 + 48);
+    }
+
+    .th--fixed + .th--fixed + .th--fixed + th:not(.th--fixed),
+    .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
+      padding-left: calc(rem(48 + 48 + 48 + 6));
+    }
+    
     .dialog__wrapper {
       z-index: 10;
     }
@@ -375,4 +389,25 @@ $icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'
 :is(#{$selector}) table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
   //display: none;
 }
+// #endregion
+
+// #region max height tables
+
+
+iam-table-basic:is(.mh-lg,.mh-md,.mh-sm) {
+
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+
+    tr {
+        
+      background: var(--row-bg);
+      background: linear-gradient(0deg,var(--colour-primary) 2px, var(--row-bg) 2px);
+      border: none;
+    }
+  }
+}
+
 // #endregion

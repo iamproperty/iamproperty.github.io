@@ -87,7 +87,7 @@
       </table>
 
       <h2>Components</h2>
-      <p>Variations of the table component has been created towork best</p>
+      <p>The table component has many variations for flexibility as our applications have different needs.</p>
 
       <div>
         <table>
@@ -105,8 +105,7 @@
               <td>n/a</td>
               <td>n/a</td>
               <td>
-                There isn't a requirement to use a component to display a table aslong as you dont require pagination or
-                any other functionality. <br /><br />See the <a href="/elements/tables">table element page</a>.
+                There isn't a requirement to use a component to display a table aslong as you don’t require pagination or any other functionality.<br /><br />See the <a href="/elements/tables">table element page</a>.
               </td>
             </tr>
             <tr>
@@ -114,9 +113,7 @@
               <td class="text-nowrap">iam-table-basic</td>
               <td>n/a</td>
               <td>
-                This component doesn't feature any functionality that requires the data of the table to reload.
-                Pagination will work be showing and hiding rows that have already been loaded in the page. This
-                component wont support the use of an actionbar or any other functionality other than pagination.
+                This component doesn't feature any functionality that requires the data of the table to reload. Pagination will work by showing and hiding rows that have already been loaded in the page. This component won't support the use of an action bar or any other functionality other than pagination.
               </td>
             </tr>
             <tr>
@@ -124,8 +121,7 @@
               <td class="text-nowrap">iam-table-no-submit</td>
               <td class="text-nowrap">data-no-submit</td>
               <td>
-                This component doesn't feature any functionality that requires the data of the table to reload. Features
-                like the pagination, sorting and filtering is done on the page on existing table rows.
+                This component doesn't feature any functionality that requires the data of the table to reload. Features like the pagination, sorting and filtering are done on the page on existing table rows.
               </td>
             </tr>
             <tr>
@@ -133,8 +129,7 @@
               <td class="text-nowrap">iam-table-submit</td>
               <td class="text-nowrap">data-submit</td>
               <td>
-                Any interaction with this component will submit the associated form data to the server. Using this
-                component requires more work for the backend develop but also gives them more control.
+                Any interaction with this component will submit the associated form data to the server. Using this component requires more work for the backend developer but also gives them more control.
               </td>
             </tr>
             <tr>
@@ -142,8 +137,7 @@
               <td class="text-nowrap">iam-table-ajax</td>
               <td class="text-nowrap">data-ajax</td>
               <td>
-                Any interaction with this component will trigger and ajax call which in turn will reload the table but
-                not the page.
+                Any interaction with this component will trigger an ajax call which in turn will reload the table but not the page.
               </td>
             </tr>
             <tr>
@@ -151,8 +145,7 @@
               <td class="text-nowrap">iam-table</td>
               <td>n/a</td>
               <td>
-                This component is usefull for when you intend to use multiple table component on the same page/user
-                journey. Reducing down duplication and taking advantage of cached files.
+                This component is useful for when you intend to use multiple table components on the same page/user journey. Reducing down duplication and taking advantage of cached files.
               </td>
             </tr>
           </tbody>
@@ -1064,8 +1057,8 @@
           </div>
           <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
           <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
-          <button class="btn btn-action fa-box-archive show">Archive</button
-          ><button class="btn btn-action fa-trash-can show">Delete</button>
+          <button class="btn btn-action fa-box-archive show" slot="selectall">Archive</button
+          ><button class="btn btn-action fa-trash-can show" slot="selectall">Delete</button>
           <hr />
           <button class="btn btn-action" slot="overflow">Cancel</button>
         </Actionbar>
