@@ -64,6 +64,13 @@ Array.from(components).forEach((component) => {
 
   let css = '';
   let extraCSS = '';
+
+
+  let componentFileName = component;
+
+  if (componentFileName == "table-no-submit" || componentFileName == "table-submit" || componentFileName == "table-ajax"){
+    componentFileName = "table";
+  }
   
   try {
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.css`))) {
@@ -72,9 +79,9 @@ Array.from(components).forEach((component) => {
       css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       css = css.replace("\uFEFF","");
     }
-    else if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.component.css`))) {
+    else if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.component.css`))) {
       
-      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.component.css`), 'utf8');
+      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.component.css`), 'utf8');
       css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       css = css.replace("\uFEFF","");
     }
@@ -83,9 +90,12 @@ Array.from(components).forEach((component) => {
   }
 
   try {
-    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.global.css`))) {
+
+
+
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.global.css`))) {
       
-      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.global.css`), 'utf8');
+      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.global.css`), 'utf8');
       extraCSS = extraCSS.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       extraCSS = extraCSS.replace("\uFEFF","");
     }

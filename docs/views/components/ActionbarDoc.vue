@@ -854,7 +854,7 @@
     </p>
 
     <p>When clicked a dialog popover can be displayed to show the column sorting options.</p>
-    
+
     <h3>Filter on save</h3>
     <div class="container bg-light visualtest mb-5">
       <Table class="table--fullwidth">

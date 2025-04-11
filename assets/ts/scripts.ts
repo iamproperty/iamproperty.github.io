@@ -9,6 +9,8 @@ const components = [
   'accordion',
   'header',
   'table',
+  'table-basic',
+  'table-no-submit',
   'tabs',
   'card',
   'filter-card',
@@ -47,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   extendDialogs(document.body);
   extendInputs(document.body);
-
+/*
   const prefix = 'iam';
   const options = {
     rootMargin: '50px',
@@ -62,9 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const callback = (entries: any): void => {
       entries.forEach((entry: any) => {
         if (entry.intersectionRatio > 0) {
-          console.log(component);
 
-          import(/* @vite-ignore */ `../js/components/${component}/${component}${componentExt}`)
+          import(`../js/components/${component}/${component}${componentExt}`)
             .then((module) => {
               if (!window.customElements.get(`${prefix}-${component}`))
                 window.customElements.define(`${prefix}-${component}`, module.default);
@@ -81,4 +82,5 @@ document.addEventListener('DOMContentLoaded', function () {
     const intObserver = new IntersectionObserver(callback, options);
     intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
   });
+  */
 });
