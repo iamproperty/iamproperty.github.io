@@ -22,7 +22,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 :is(#{$selector}) iam-actionbar {
   margin: 0 1.5rem 1rem 1.5rem;
-  
+
   @container (width < 23.4375em) {
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
     border-radius: 0.5rem;
@@ -280,7 +280,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
     .th--fixed:has(+ th:not(.th--fixed)),
     .td--fixed:has(+ td:not(.td--fixed)) {
-
       background: linear-gradient(90deg, var(--row-bg) calc(100% - 1rem), transparent 100%);
     }
 
@@ -299,7 +298,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
       padding-left: calc(rem(48 + 48 + 6));
     }
 
-
     .th--fixed + .th--fixed + .th--fixed,
     .td--fixed + .td--fixed + .td--fixed {
       left: rem(48 + 48);
@@ -309,7 +307,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
       padding-left: calc(rem(48 + 48 + 48 + 6));
     }
-    
+
     .dialog__wrapper {
       z-index: 10;
     }
@@ -393,18 +391,15 @@ $icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'
 
 // #region max height tables
 
-
-iam-table-basic:is(.mh-lg,.mh-md,.mh-sm) {
-
+iam-table-basic:is(.mh-lg, .mh-md, .mh-sm) {
   thead {
     position: sticky;
     top: 0;
     z-index: 9999;
 
     tr {
-        
       background: var(--row-bg);
-      background: linear-gradient(0deg,var(--colour-primary) 2px, var(--row-bg) 2px);
+      background: linear-gradient(0deg, var(--colour-primary) 2px, var(--row-bg) 2px);
       border: none;
     }
   }

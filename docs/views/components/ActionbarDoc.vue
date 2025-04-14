@@ -2,7 +2,6 @@
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
-
 </script>
 
 <template>
@@ -1019,12 +1018,6 @@
       </Table>
     </div>
 
-
-
-
- 
-
-
     <Integration component="actionbar" componentName="iam-actionbar">
       <template #web-component>
         <pre><code>{{`<iam-actionbar data-selectall data-search>
@@ -1125,7 +1118,10 @@
               <td></td>
               <td>String (Element ID)</td>
               <td>No</td>
-              <td>Combined with the data-selectall attribute, this sets the div that is watched for checkboxes being checked. Useful for when the actionbar is NOT comibned with a table but rather a set of cards.</td>
+              <td>
+                Combined with the data-selectall attribute, this sets the div that is watched for checkboxes being
+                checked. Useful for when the actionbar is NOT comibned with a table but rather a set of cards.
+              </td>
             </tr>
             <tr>
               <th>data-search</th>
@@ -1161,7 +1157,10 @@
               <td>false</td>
               <td>Flag</td>
               <td>No</td>
-              <td>Optional flag to increase the safe area for buttons to be displayed before being added to the overflow menu</td>
+              <td>
+                Optional flag to increase the safe area for buttons to be displayed before being added to the overflow
+                menu
+              </td>
             </tr>
             <tr>
               <th>data-filter-columns</th>
@@ -1175,7 +1174,10 @@
               <td>false</td>
               <td>Flag</td>
               <td>No</td>
-              <td>Optional flag to show the filter columns menu, which allows for columns to be hidden when the saved button is clicked</td>
+              <td>
+                Optional flag to show the filter columns menu, which allows for columns to be hidden when the saved
+                button is clicked
+              </td>
             </tr>
 
             <tr>
@@ -1185,12 +1187,9 @@
               <td>No</td>
               <td>Hide the column {$i}</td>
             </tr>
-
-
           </tbody>
         </table>
       </template>
-
 
       <template #slots>
         <table>
@@ -1236,7 +1235,7 @@
             </tr>
             <tr>
               <th>selected</th>
-              <td>The div shown when the selected checkbox </td>
+              <td>The div shown when the selected checkbox</td>
             </tr>
 
             <tr>
@@ -1269,11 +1268,9 @@
               <th>filter-columns</th>
               <td>The input that contains the search value</td>
             </tr>
-
           </tbody>
         </table>
       </template>
-
 
       <template #dispatched-events>
         <table>
@@ -1287,7 +1284,7 @@
           <tbody>
             <tr>
               <th>switch-view</th>
-              <td>When a user switches the view </td>
+              <td>When a user switches the view</td>
               <td>{ detail: { view: btn.textContent } }</td>
             </tr>
             <tr>
@@ -1327,7 +1324,7 @@
           <tbody>
             <tr>
               <th>switch-view</th>
-              <td>When a user switches the view </td>
+              <td>When a user switches the view</td>
               <td>{ detail: { view: btn.textContent } }</td>
             </tr>
             <tr>
@@ -1349,7 +1346,6 @@
         </table>
       </template>
     </Integration>
-    
 
     <Versions pdf="/pdfs/actionbar.pdf">
       <table>
@@ -1374,7 +1370,6 @@
         </tbody>
       </table>
     </Versions>
-
   </main>
 </template>
 

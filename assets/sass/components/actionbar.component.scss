@@ -157,7 +157,7 @@ slot[name='selectall'] {
   margin-bottom: 0 !important;
   margin-left: rem(16) !important;
   margin-right: 0 !important;
-  place-self: unset!important;
+  place-self: unset !important;
 }
 
 ::slotted(.btn:not(.btn-action)) {
