@@ -1057,8 +1057,8 @@
           </div>
           <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
           <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
-          <button class="btn btn-action fa-box-archive show" slot="selectall">Archive</button
-          ><button class="btn btn-action fa-trash-can show" slot="selectall">Delete</button>
+          <button class="btn btn-action fa-box-archive show" slot="selected">Archive</button
+          ><button class="btn btn-action fa-trash-can show" slot="selected">Delete</button>
           <hr />
           <button class="btn btn-action" slot="overflow">Cancel</button>
         </Actionbar>

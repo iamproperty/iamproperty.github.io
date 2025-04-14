@@ -40,16 +40,13 @@ class iamActionbar extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
+
     const loadCSS = `@import "${assetLocation}/css/components/actionbar.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/actionbar.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
@@ -62,7 +59,7 @@ class iamActionbar extends HTMLElement {
           <slot></slot>
           <div class="body">
             <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
-              <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
+              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0">More actions</button>
               <dialog class="dialog--list" part="overflow">
                 <slot name="overflow"></slot>
                 <slot name="menu"></slot>
@@ -89,7 +86,7 @@ class iamActionbar extends HTMLElement {
           <slot name="selected"></slot>
           <div class="body">
             <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
-              <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
+              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0">More actions</button>
               <dialog class="dialog--list" part="selected-overflow">
                 <slot name="selected-overflow"></slot>
               </dialog>
@@ -186,7 +183,7 @@ class iamActionbar extends HTMLElement {
         if (view == 'list') icon = 'fa-grip-lines';
         else if (view == 'small') icon = 'fa-bars';
 
-        btns += `<button class="btn btn-action btn-compact mb-0 fa-regular ${icon}">${view}</button>`;
+        btns += `<button class="btn btn-action btn-compact btn-sm mb-0 fa-regular ${icon}">${view}</button>`;
       });
 
       actionbarWrapper?.insertAdjacentHTML('afterbegin', `<div class="views m-0">${btns}</div>`);

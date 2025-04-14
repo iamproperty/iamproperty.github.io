@@ -14,7 +14,11 @@ $darkMode: 'true' !default;
 
     &:has(dialog[open], dialog:popover-open) > button {
       background: var(--colour-btn-secondary-bg-hover);
-      color: var(--colour-btn-secondary-hover);
+
+      &:not(.btn-action){
+
+        color: var(--colour-btn-secondary-hover);
+      }
       filter: brightness(85%);
       transition:
         background 0.1s,

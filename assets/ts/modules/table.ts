@@ -60,6 +60,7 @@ const filterFilters = function (form): object {
 
 export const moveAttributesToComponents = (component): void => {
   let form = document.createElement('form');
+  const table = component.querySelector('table');
 
   if (component.hasAttribute('data-filterby')) {
     form = document.querySelector(`#${component.getAttribute('data-filterby')}`);

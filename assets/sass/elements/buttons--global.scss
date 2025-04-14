@@ -69,6 +69,7 @@ $darkMode: 'true' !default;
     margin-bottom: var(--btn-margin);
 
     transition:
+      border 0.5s,
       background 0.5s,
       color 0.5s;
     height: auto;

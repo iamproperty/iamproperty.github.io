@@ -1,7 +1,13 @@
 @use '../_func.scss' as *;
 
+@use '../elements/forms.scss' as *;
+@use '../elements/buttons.scss' as *;
+@use '../elements/dialog.scss' as *;
+@use '../elements/popover.scss' as *;
+
 @include margins();
 @include visually-hidden();
+@include display();
 
 :host {
   background-color: #fcfcfc;
@@ -151,6 +157,7 @@ slot[name='selectall'] {
   margin-bottom: 0 !important;
   margin-left: rem(16) !important;
   margin-right: 0 !important;
+  place-self: unset!important;
 }
 
 ::slotted(.btn:not(.btn-action)) {
