@@ -65,7 +65,7 @@ class iamTableBasic extends HTMLElement {
       paginateTable(this, table, form, pagination, () => {
         form.submit();
       });
-    } else if (this.hasAttribute('data-no-submit')) {
+    } else if (this.hasAttribute('data-no-submit') || this.hasAttribute('data-nosubmit')) {
       setupNoSubmitTable(this, table, form, pagination, savedTableBody);
       paginateTable(this, table, form, pagination, () => {
         paginateRows(this);
@@ -76,6 +76,7 @@ class iamTableBasic extends HTMLElement {
         loadAjaxTable(this, table, form, pagination);
       });
     } else {
+      paginateRows(this);
       paginateTable(this, table, form, pagination, () => {
         paginateRows(this);
       });

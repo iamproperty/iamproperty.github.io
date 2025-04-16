@@ -5,12 +5,21 @@ $darkMode: 'true' !default;
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 // #region Basic table stuff
+
+
+
 :is(#{$selector}) {
   --hover-background: var(--colour-light);
   --row-bg: var(--colour-canvas-2);
 
   table {
     margin-bottom: 0;
+  }
+
+  table thead tr th {
+    position: relative;
+    padding-right: 2rem !important;
+    padding-left: 0rem !important;
   }
 
   td {
@@ -199,11 +208,11 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 :is(#{$selector}).table--cta {
   @container (width > 23.4375em) {
-    padding-right: calc(var(--wrapper-padding) + 1.5rem);
+    padding-right: calc(var(--wrapper-padding) + 1.5rem)!important;
 
     tr > th:nth-last-child(2),
     tr > td:nth-last-child(2) {
-      padding-right: var(--cta-width);
+      padding-right: var(--cta-width)!important;
     }
 
     tr > *:not(:first-child):last-child {
@@ -222,6 +231,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
         white-space: nowrap;
         padding-right: 0.2rem;
         padding-bottom: 0;
+        margin: 0;
       }
     }
 

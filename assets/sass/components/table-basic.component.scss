@@ -35,6 +35,10 @@ $darkMode: 'true' !default;
   }
 }
 
+:host-context(.admin-panel) .table__container {
+  display: contents;
+}
+
 :host(.mh-sm) {
   max-height: none !important;
 }
