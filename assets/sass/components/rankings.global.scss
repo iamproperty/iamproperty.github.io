@@ -1,0 +1,84 @@
+@use 'sass:map';
+
+@use '../_func.scss' as *;
+
+@use '../elements/type.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+iam-rankings {
+
+  table {
+    display: block;
+    width: 100%;
+    font-weight: normal;
+    counter-reset: countItem;
+  }
+  thead {
+    display: none;
+  }
+  tbody {
+    display: contents;
+  }
+
+  :is(td,th) {
+    font-weight: normal;
+  }
+
+  tr.current {
+    background-color: var(--colour-light);
+  }
+  tr.current :is(td,th) {
+    font-weight: bolder;
+  }
+
+  tr {
+    display: flex;
+    width: 100%;
+    position: relative;
+    
+
+    &:before {
+      counter-increment: countItem; /* Increment the value of section counter by 1 */
+      content: counter(countItem)".";
+      font-size: rem(32);
+      line-height: rem(40);
+      font-weight: bolder;
+      color: var(--colour-primary);
+      width: rem(48);
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+
+    > *:first-child {
+      width: 100%;
+      margin-right: 0;
+      padding-right: 0;
+    }
+
+    > *:last-child {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    progress {
+      width: 100%;
+      height: 1rem ;
+    }
+  }
+
+
+  @each $index, $value in $chart-colors {
+    tr:nth-child(#{$index}) progress{
+      --colour: var(--chart-colour-#{$index}, #{$value});
+    }
+    
+  }
+
+
+}

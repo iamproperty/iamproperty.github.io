@@ -567,6 +567,15 @@ const routes = [
         component: () => import('./views/components/NoteFeedDoc.vue'),
       },
       {
+        path: 'rank',
+        name: 'Rank',
+        meta: {
+          title: 'Rank | Components | iamkey',
+        },
+        component: () => import('./views/components/RankDoc.vue'),
+        searchterms: 'rank, ranking, score',
+      },
+      {
         path: 'pagination',
         name: 'Pagination',
         meta: {

@@ -765,3 +765,33 @@ $ut-mh-md: #{rem($ut-mh-md-px)};
 $ut-mh-lg-px: 600;
 $ut-mh-lg: #{rem($ut-mh-lg-px)};
 // #endregion
+
+
+
+$chart-colour-1: map.get($wider-colours, '3') !default;
+$chart-colour-2: map.get($wider-colours, '4') !default;
+$chart-colour-3: map.get($wider-colours, '5') !default;
+$chart-colour-4: map.get($wider-colours, '6') !default;
+$chart-colour-5: map.get($wider-colours, '7') !default;
+$chart-colour-6: map.get($wider-colours, '8') !default;
+$chart-colour-7: map.get($wider-colours, '9') !default;
+$chart-colour-8: map.get($wider-colours, '10') !default;
+$chart-colour-9: map.get($wider-colours, '11') !default;
+$chart-colour-10: map.get($wider-colours, '12') !default;
+
+$chart-colors: ();
+$chart-colors: map.merge(
+  (
+    1: $chart-colour-1,
+    2: $chart-colour-2,
+    3: $chart-colour-3,
+    4: $chart-colour-4,
+    5: $chart-colour-5,
+    6: $chart-colour-6,
+    7: $chart-colour-7,
+    8: $chart-colour-8,
+    9: $chart-colour-9,
+    10: $chart-colour-10,
+  ),
+  $chart-colors
+);
