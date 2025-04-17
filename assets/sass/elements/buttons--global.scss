@@ -70,6 +70,7 @@ $darkMode: 'true' !default;
     background: none;
     
     transition:
+      border 0.5s,
       background 0.5s,
       color 0.5s;
     height: auto;

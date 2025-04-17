@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   extendDialogs(document.body);
   extendInputs(document.body);
-/*
+  /*
   const prefix = 'iam';
   const options = {
     rootMargin: '50px',

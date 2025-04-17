@@ -40,16 +40,13 @@ class iamActionbar extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
+
     const loadCSS = `@import "${assetLocation}/css/components/actionbar.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/actionbar.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
@@ -62,7 +59,7 @@ class iamActionbar extends HTMLElement {
           <slot></slot>
           <div class="body">
             <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
-              <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
+              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0">More actions</button>
               <dialog class="dialog--list" part="overflow">
                 <slot name="overflow"></slot>
                 <slot name="menu"></slot>
@@ -89,7 +86,7 @@ class iamActionbar extends HTMLElement {
           <slot name="selected"></slot>
           <div class="body">
             <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
-              <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
+              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0">More actions</button>
               <dialog class="dialog--list" part="selected-overflow">
                 <slot name="selected-overflow"></slot>
               </dialog>
@@ -108,6 +105,9 @@ class iamActionbar extends HTMLElement {
         </div>
 
       </div>
+    </div>
+    <div class="no-columns">
+      <span class="d-block">No columns selected</span>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -186,7 +186,7 @@ class iamActionbar extends HTMLElement {
         if (view == 'list') icon = 'fa-grip-lines';
         else if (view == 'small') icon = 'fa-bars';
 
-        btns += `<button class="btn btn-action btn-compact mb-0 fa-regular ${icon}">${view}</button>`;
+        btns += `<button class="btn btn-action btn-compact btn-sm mb-0 fa-regular ${icon}">${view}</button>`;
       });
 
       actionbarWrapper?.insertAdjacentHTML('afterbegin', `<div class="views m-0">${btns}</div>`);
@@ -410,6 +410,8 @@ class iamActionbar extends HTMLElement {
         columnsHidden += this.hasAttribute(`data-hide-col${index + 1}`) ? `${index + 1},` : '';
       });
 
+      this.setAttribute('data-columns-shown', checklistHolder.querySelectorAll('input:checked').length);
+
       const dispatchedEvent = new CustomEvent('columm-filters-set', {
         detail: {
           columnsHidden: columnsHidden.slice(0, -1),
@@ -431,6 +433,8 @@ class iamActionbar extends HTMLElement {
         }
       });
     }
+
+    this.setAttribute('data-columns-shown', checklistHolder.querySelectorAll('input:checked').length);
 
     if (this.hasAttribute('data-filter-columns') && !this.hasAttribute('data-filter-columns-save')) {
       checklistHolder?.addEventListener('change', (event) => {

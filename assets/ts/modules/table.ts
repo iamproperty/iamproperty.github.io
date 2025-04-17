@@ -265,12 +265,13 @@ export const createMobileButton = (component, table): void => {
 
   if (table.querySelectorAll('thead tr th').length < 4 && !component.hasAttribute('data-expandable')) return false;
 
-
-
   //If the expand column already exists we don't need to add a new one.
   Array.from(table.querySelectorAll('thead tr')).forEach((row) => {
     if (!table.querySelectorAll('thead tr th.expand-button-heading').length) {
-      row.insertAdjacentHTML('afterbegin', `<th class="${component.hasAttribute('data-expandable') ? 'th--fixed ' : '' }expand-button-heading"></th>`);
+      row.insertAdjacentHTML(
+        'afterbegin',
+        `<th class="${component.hasAttribute('data-expandable') ? 'th--fixed ' : ''}expand-button-heading"></th>`
+      );
     }
   });
 
@@ -278,11 +279,10 @@ export const createMobileButton = (component, table): void => {
     const preExpanded = row.getAttribute('data-view') === 'full' ? 'aria-expanded' : '';
     row.insertAdjacentHTML(
       'afterbegin',
-      `<td class="${component.hasAttribute('data-expandable') ? 'td--fixed ' : '' }td--expand"><button class="btn btn-compact btn-secondary btn-sm" data-expand-button ${preExpanded} data-index="${index}">Expand</button></td>`
+      `<td class="${component.hasAttribute('data-expandable') ? 'td--fixed ' : ''}td--expand"><button class="btn btn-compact btn-secondary btn-sm" data-expand-button ${preExpanded} data-index="${index}">Expand</button></td>`
     );
   });
 
-  
   table.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-expand-button]')) {
       const button = event.target.closest('[data-expand-button]');
@@ -349,19 +349,13 @@ export const setupAdvancedTable = (component, table): void => {
 
     const tr = btn.closest('tr');
     const td = btn.closest('td');
-    
 
-
-    const trChildren = Array.prototype.slice.call( tr.children );
-    const cellIndex = trChildren.indexOf( td );
+    const trChildren = Array.prototype.slice.call(tr.children);
+    const cellIndex = trChildren.indexOf(td);
 
     td.classList.add('td--fixed');
-    table.querySelector(`thead tr th:nth-child(${cellIndex+1})`).classList.add('th--fixed');
-
+    table.querySelector(`thead tr th:nth-child(${cellIndex + 1})`).classList.add('th--fixed');
   });
-
-
-
 };
 // #region Advanced table functions
 export const addSelectboxes = (component, table, actionbar): void => {
