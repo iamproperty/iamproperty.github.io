@@ -67,7 +67,8 @@ $darkMode: 'true' !default;
     padding: var(--btn-padding-block) var(--btn-padding-inline);
     border-radius: rem(24);
     margin-bottom: var(--btn-margin);
-
+    background: none;
+    
     transition:
       background 0.5s,
       color 0.5s;

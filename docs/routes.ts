@@ -220,7 +220,7 @@ const routes = [
       },
       {
         path: 'tables',
-        name: 'Tables (BETA)',
+        name: 'Table Element',
         meta: {
           title: 'Tables | Elements | iamkey',
         },
@@ -567,6 +567,15 @@ const routes = [
         component: () => import('./views/components/NoteFeedDoc.vue'),
       },
       {
+        path: 'rank',
+        name: 'Rank',
+        meta: {
+          title: 'Rank | Components | iamkey',
+        },
+        component: () => import('./views/components/RankDoc.vue'),
+        searchterms: 'rank, ranking, score',
+      },
+      {
         path: 'pagination',
         name: 'Pagination',
         meta: {
@@ -611,7 +620,7 @@ const routes = [
         path: 'tables',
         name: 'Tables',
         meta: {
-          title: 'Tables | Elements | iamkey',
+          title: 'Tables | Components | iamkey',
         },
         component: () => import('./views/components/Tables.vue'),
         searchterms: 'expandable, scrollable, rows, columns',
@@ -932,6 +941,22 @@ const routes = [
       {
         path: '',
         component: () => import('./views/examples/Index.vue'),
+      },
+      {
+        path: 'basic-table',
+        component: () => import('./views/examples/BasicTable.vue'),
+      },
+      {
+        path: 'no-submit-table',
+        component: () => import('./views/examples/NoSubmitTableDoc.vue'),
+      },
+      {
+        path: 'submit-table',
+        component: () => import('./views/examples/SubmitTableDoc.vue'),
+      },
+      {
+        path: 'ajax-table',
+        component: () => import('./views/examples/AjaxTableDoc.vue'),
       },
       {
         path: 'actionbar-table',
