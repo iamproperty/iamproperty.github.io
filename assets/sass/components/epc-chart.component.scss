@@ -1,0 +1,57 @@
+@use '../_func' as *;
+@use '../elements/buttons.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// #region <Default Epc Chart>
+
+:host {
+  display: block;
+  overflow: visible;
+  container-type: inline-size;
+}
+
+.carousel {
+  margin-inline: calc(var(--carousel-spacing, 1.5rem) * -1);
+  margin-bottom: 2rem;
+  display: block;
+  overflow: visible;
+
+  .carousel__wrapper {
+    position: relative;
+    overflow-x: clip;
+  }
+
+  .carousel__inner {
+    --gutter-x: #{$grid-gutter-width};
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .carousel__content {
+    display: flex;
+    flex-wrap: nowrap !important;
+    margin-inline-end: 0;
+    padding-inline-start: var(--carousel-spacing, 1.5rem);
+    padding-inline-end: var(--carousel-spacing, 1.5rem);
+
+    margin-right: calc(-0.5 * var(--gutter-x));
+    margin-left: calc(-0.5 * var(--gutter-x));
+  }
+
+  .col>*:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+::slotted(div) {
+  background: red !important;
+}
+
+// #endregion <Default Epc Chart>

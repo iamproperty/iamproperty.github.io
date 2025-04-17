@@ -1149,6 +1149,15 @@ const routes = [
         component: () => import('./views/standalone/CollapsibleSideMenu.vue'),
       },
       {
+        path: 'epc-chart-generator',
+        name: 'EPC Chart Generator Example',
+        meta: {
+          title: 'EPC Chart Generator | Components | iamkey',
+        },
+        component: () => import('./views/standalone/EpcChartGenerator.vue'),
+        searchterms: 'epc',
+      },
+      {
         path: 'crm-mb',
         name: 'CRM - MB',
         meta: {
