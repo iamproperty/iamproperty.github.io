@@ -350,4 +350,25 @@ slot[name='selectall'] {
   }
 }
 
+.no-columns {
+  display: none;
+}
+
+:host([data-filter-columns]),
+:host([data-filter-columns-save]) {
+  position: relative;
+}
+
+:host([data-filter-columns][data-columns-shown="0"]) .actionbar__wrapper + .no-columns,
+:host([data-filter-columns-save][data-columns-shown="0"]) .actionbar__wrapper + .no-columns {
+
+  display: flex;
+  padding: 2rem 2rem 0 2rem;
+  text-align: center;
+  background: white;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 15rem;
+}
+
 // #endregion

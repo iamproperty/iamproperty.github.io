@@ -106,6 +106,9 @@ class iamActionbar extends HTMLElement {
 
       </div>
     </div>
+    <div class="no-columns">
+      <span class="d-block">No columns selected</span>
+    </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
@@ -407,6 +410,8 @@ class iamActionbar extends HTMLElement {
         columnsHidden += this.hasAttribute(`data-hide-col${index + 1}`) ? `${index + 1},` : '';
       });
 
+      this.setAttribute('data-columns-shown', checklistHolder.querySelectorAll('input:checked').length);
+
       const dispatchedEvent = new CustomEvent('columm-filters-set', {
         detail: {
           columnsHidden: columnsHidden.slice(0, -1),
@@ -428,6 +433,8 @@ class iamActionbar extends HTMLElement {
         }
       });
     }
+
+    this.setAttribute('data-columns-shown', checklistHolder.querySelectorAll('input:checked').length);
 
     if (this.hasAttribute('data-filter-columns') && !this.hasAttribute('data-filter-columns-save')) {
       checklistHolder?.addEventListener('change', (event) => {
