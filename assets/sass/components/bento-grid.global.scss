@@ -17,10 +17,11 @@ iam-bento-grid {
         font-size: 1rem;
         position: relative;
         width: fit-content;
-        transition: opacity 1s;
+        transition: opacity 0.8s;
+        will-change: opacity;
 
         @media screen and (prefers-reduced-motion: no-preference) {
-          transition: opacity 1s;
+          transition: opacity 0.8s;
         }
 
         &:before {
@@ -33,9 +34,10 @@ iam-bento-grid {
           height: 0;
           border: 1px solid currentColor;
           transform: translate(-50%, 0);
+          will-change: transform;
 
           @media screen and (prefers-reduced-motion: no-preference) {
-            transition: 1s;
+            transition: 0.8s;
           }
         }
 
@@ -99,8 +101,10 @@ iam-bento-grid {
       -moz-box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.5);
       box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.5);
 
+      will-change: top, left, height;
+
       @media screen and (prefers-reduced-motion: no-preference) {
-        transition: 1s;
+        transition: 0.8s;
       }
     }
 
@@ -113,9 +117,10 @@ iam-bento-grid {
       opacity: 0;
       padding: 0 1.5rem 1.5rem 1.5rem;
       overflow: auto;
+      will-change: top, left, height;
 
       @media screen and (prefers-reduced-motion: no-preference) {
-        transition: 1s;
+        transition: 0.8s;
       }
     }
   }
