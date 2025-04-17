@@ -474,7 +474,7 @@ const routes = [
       },
       {
         path: 'bento-grid',
-        name: 'Bento grid (Beta)',
+        name: 'Bento grid',
         meta: {
           title: 'Bento grid | Components | iamkey',
         },

@@ -2,7 +2,7 @@
   import { onMounted } from 'vue';
 
   onMounted(() => {
-    import(`../../../assets/js/components/bento-grid/bento-grid.component.js`)
+    import(`../../../assets/js/components/bento-grid/bento-grid.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-bento-grid`))
           window.customElements.define(`iam-bento-grid`, module.default);
