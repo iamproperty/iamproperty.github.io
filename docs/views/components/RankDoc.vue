@@ -101,6 +101,10 @@
       <h2 class="bg-light">Price reductions</h2>
       <rank>1st</rank>
     </div>
+    <div class="admin-panel md-col-start-9 md-col-end-12">
+      <h2 class="bg-light">Price reductions</h2>
+      <rank>5th</rank>
+    </div>
 
 
     <Integration component="rank" componentName="rank">

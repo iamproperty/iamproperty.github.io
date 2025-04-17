@@ -233,7 +233,7 @@ class iamRank extends HTMLElement {
 
         </svg>
 
-        <span class="position h2"><slot></slot></span>
+        <span class="position h2" part="position"><slot></slot></span>
       </div>
 
       
