@@ -1,0 +1,66 @@
+@use 'sass:map';
+@use '../_func.scss' as *;
+
+
+
+@use '../elements/type.scss' as *;
+
+@include max-height();
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.podium {
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  max-width: 30rem;
+  margin: auto;
+
+  > div {
+    flex-basis: 33.33%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    order: 1;
+
+    iam-rank {
+
+      margin: 0;
+      width: 100%;
+    }
+
+    > span {
+      display: block;
+      font-size: rem(14);
+      line-height: 1;
+      font-weight: 700;
+      margin: 0;
+      padding-block: 0.5rem;
+      text-align: center;
+      max-width: 100%;
+      //margin-inline: -1rem;
+      overflow: hidden;
+    }
+  }
+
+
+  > div:nth-child(1) {
+    order: 2;
+    padding: 0;
+  }
+
+  > div:nth-child(2) {
+    
+    padding: 1rem 1rem 0 0;
+  }
+
+  > div:nth-child(3) {
+    order: 3;
+    padding: 1rem 0 0 1rem;
+  }
+}

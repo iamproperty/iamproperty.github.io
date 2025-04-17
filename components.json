@@ -30,5 +30,7 @@
   "marketing",
   "barchart",
   "doughnutchart",
-  "bento-grid"
+  "bento-grid",
+  "rank",
+  "ranking"
 ]
