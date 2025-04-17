@@ -40,7 +40,7 @@
 
 <div class="admin-panel md-col-end-4">
       <h2 class="bg-light">Cancelled sales</h2>
-      <Rankings>
+      <Rankings data-max="12">
 
           <table>
             <thead>
