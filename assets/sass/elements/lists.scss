@@ -53,6 +53,10 @@ $darkMode: 'true' !default;
     max-width: $content-max-width;
   }
 
+  .tick-list--white {
+    --tick-colour: white;
+  }
+
   .tick-list {
     padding-left: 0;
 
@@ -72,7 +76,7 @@ $darkMode: 'true' !default;
         font-size: 1.25em;
         line-height: 1;
 
-        color: var(--colour-complete);
+        color: var(--tick-colour, var(--colour-complete));
         font-family: 'Font Awesome 6 Pro';
         font-size: 400;
       }
