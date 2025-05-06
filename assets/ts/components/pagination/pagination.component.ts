@@ -83,6 +83,7 @@ class iamPagination extends HTMLElement {
     // Next and previous buttons will simply trigger and on change on the select which in turn will dispatch an event
     next.addEventListener('click', () => {
       select.value = parseInt(select.value) + 1;
+
       select.dispatchEvent(new Event('change'));
     });
 
@@ -96,8 +97,17 @@ class iamPagination extends HTMLElement {
       this.setAttribute('data-increment', event.target.value);
     });
 
+    // Load more button
+
+    const increment = parseInt(this.getAttribute('data-increment'));
+    const show = parseInt(this.getAttribute('data-show'));
+
+    if (show >= parseInt(this.getAttribute('data-total'))) {
+      loadMore.remove();
+    }
+
     loadMore.addEventListener('click', () => {
-      const newValue = parseInt(this.getAttribute('data-show')) + parseInt(this.getAttribute('data-increment'));
+      const newValue = show + increment;
       this.setAttribute('data-show', newValue);
 
       if (newValue > parseInt(this.getAttribute('data-total'))) {
@@ -167,14 +177,14 @@ class iamPagination extends HTMLElement {
     switch (attrName) {
       case 'data-total': {
         if (oldVal != newVal) {
-          this.setAttribute('data-page', 1);
+          //this.setAttribute('data-page', 1);
           this.setup();
         }
         break;
       }
       case 'data-show': {
         if (oldVal != newVal) {
-          this.setAttribute('data-page', 1);
+          //this.setAttribute('data-page', 1);
           this.setup();
           this.dispatchEvent(new CustomEvent('update-show', { detail: { show: newVal } }));
         }
@@ -183,7 +193,7 @@ class iamPagination extends HTMLElement {
       case 'data-increment': {
         if (oldVal != newVal) {
           this.setAttribute('data-show', newVal);
-          this.setAttribute('data-page', 1);
+          //this.setAttribute('data-page', 1);
           this.setup();
           this.dispatchEvent(new CustomEvent('update-show', { detail: { show: newVal } }));
         }
@@ -192,6 +202,9 @@ class iamPagination extends HTMLElement {
       case 'data-page': {
         if (oldVal && oldVal != newVal) {
           this.setup();
+
+          console.log(newVal);
+
           // Dispact the event for other components to use as triggers
           this.dispatchEvent(new CustomEvent('update-page', { detail: { page: newVal } }));
         }

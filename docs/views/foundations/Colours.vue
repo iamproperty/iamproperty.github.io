@@ -56,8 +56,8 @@
         </p>
         <p>
           We use dark blue ({{ $shared.themeColours.Primary.toUpperCase() }}) is used primarily for body text and
-          headings, and white (#fcfcfc) for page background or body text and
-          headings the are overlaid on dark backgrounds.
+          headings, and white (#fcfcfc) for page background or body text and headings the are overlaid on dark
+          backgrounds.
         </p>
       </div>
 
