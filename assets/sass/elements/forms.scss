@@ -964,7 +964,8 @@ $optionalText: 'true' !default;
   }
 
   input:checked + .conditional,
-  input:checked + label + .conditional {
+  input:checked + label + .conditional,
+  label:has(:checked) + .conditional {
     display: block;
     clear: both;
   }
@@ -978,7 +979,12 @@ $optionalText: 'true' !default;
   input.conditional-input-2:checked ~ .conditional-2,
   input.conditional-input-3:checked ~ .conditional-3,
   input.conditional-input-4:checked ~ .conditional-4,
-  input.conditional-input-5:checked ~ .conditional-5 {
+  input.conditional-input-5:checked ~ .conditional-5,
+  label:has(input.conditional-input-1:checked) ~ .conditional-1,
+  label:has(input.conditional-input-2:checked) ~ .conditional-2,
+  label:has(input.conditional-input-3:checked) ~ .conditional-3,
+  label:has(input.conditional-input-4:checked) ~ .conditional-4,
+  label:has(input.conditional-input-5:checked) ~ .conditional-5 {
     display: block;
     clear: both;
   }

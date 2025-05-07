@@ -85,6 +85,12 @@ $optionalText: 'true' !default;
   $optionalText: $optionalText
 );
 
+@use 'elements/toggle-button.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+
 @use 'elements/badge-tag.scss' with (
   $layers: $layers,
   $darkMode: $darkMode,
