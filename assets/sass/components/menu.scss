@@ -5,17 +5,27 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('components', $layers) {
-  $menuPadding: 1rem !default;
-  $menuBorder: none !default;
-  $menuBorderRadius: 1rem !default;
-  $menuBoxShadow: 0px 2px 9px rgba(0, 0, 0, 0.1) !default;
+  $menuPadding: 0.5rem !default;
+
 
   iam-menu:defined {
     --menu-padding: #{$menuPadding};
     --border-color: var(--colour-border);
     --menu-item-margin: 0 0 0.5rem 0;
-    border: #{$menuBorder};
-    border-radius: #{$menuBorderRadius};
-    box-shadow: #{$menuBoxShadow};
+
+  }
+
+  iam-menu i {
+    width: 1.25rem;
+  }
+
+  iam-menu > button:not(.open) + iam-menu:not([popover]) {
+    display: none;
+  }
+
+  iam-menu > button + iam-menu:not([popover]) > *:is(button,a,label) {
+    padding-left: 2rem;
   }
 }
+
+
