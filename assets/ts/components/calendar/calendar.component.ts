@@ -76,23 +76,23 @@ class iamCalendar extends HTMLElement {
 
     if(sundayFirst)
       return `<tr>
-    <th class="sunday">Sunday</th>
-    <th class="monday">Monday</th>
-    <th class="tuesday">Tuesday</th>
-    <th class="wednesday">Wednesday</th>
-    <th class="thursday">Thursday</th>
-    <th class="friday">Friday</th>
-    <th class="saturday">Saturday</th>
+    <th class="sunday"><span class="long-day-name">Sunday</span><span class="short-day-name" role="presentation">Sun</span></th>
+    <th class="monday"><span class="long-day-name">Monday</span><span class="short-day-name" role="presentation">Mon</span></th>
+    <th class="tuesday"><span class="long-day-name">Tuesday</span><span class="short-day-name" role="presentation">Tues</span></th>
+    <th class="wednesday"><span class="long-day-name">Wednesday</span><span class="short-day-name" role="presentation">Wed</span></th>
+    <th class="thursday"><span class="long-day-name">Thursday</span><span class="short-day-name" role="presentation">Thurs</span></th>
+    <th class="friday"><span class="long-day-name">Friday</span><span class="short-day-name" role="presentation">Fri</span></th>
+    <th class="saturday"><span class="long-day-name">Saturday</span><span class="short-day-name" role="presentation">Sat</span></th>
   </tr>`;
       
     return `<tr>
-  <th class="monday">Monday</th>
-  <th class="tuesday">Tuesday</th>
-  <th class="wednesday">Wednesday</th>
-  <th class="thursday">Thursday</th>
-  <th class="friday">Friday</th>
-  <th class="saturday">Saturday</th>
-  <th class="sunday">Sunday</th>
+    <th class="monday"><span class="long-day-name">Monday</span><span class="short-day-name" role="presentation">Mon</span></th>
+    <th class="tuesday"><span class="long-day-name">Tuesday</span><span class="short-day-name" role="presentation">Tues</span></th>
+    <th class="wednesday"><span class="long-day-name">Wednesday</span><span class="short-day-name" role="presentation">Wed</span></th>
+    <th class="thursday"><span class="long-day-name">Thursday</span><span class="short-day-name" role="presentation">Thurs</span></th>
+    <th class="friday"><span class="long-day-name">Friday</span><span class="short-day-name" role="presentation">Fri</span></th>
+    <th class="saturday"><span class="long-day-name">Saturday</span><span class="short-day-name" role="presentation">Sat</span></th>
+    <th class="sunday"><span class="long-day-name">Sunday</span><span class="short-day-name" role="presentation">Sun</span></th>
 </tr>`;
   }
 
@@ -282,7 +282,7 @@ class iamCalendar extends HTMLElement {
   addEvents(): void {
 
 
-    function adjustEvent(component, element): void {
+    function adjustEvent(component, element, continued: false): void {
 
       const datetime = element.getAttribute('datetime');
 
@@ -298,14 +298,16 @@ class iamCalendar extends HTMLElement {
       if(timeTd){
 
         if(!timeTd.querySelector('slot'))
-          timeTd.insertAdjacentHTML('afterbegin',`<slot name="${datetime}"></slot>`)
+          timeTd.insertAdjacentHTML('afterbegin',`<slot name="${datetime}" class="${continued ? 'continued': ''}"></slot>`)
+
+
       }
 
       // Add CSS properties so we can control the size of the event elements
       if(element.hasAttribute('data-hours'))
         element.style.setProperty('--event-height',`${element.getAttribute('data-hours')}rem`);
       
-      if(element.hasAttribute('data-days')){
+      if(element.hasAttribute('data-days') && !element.classList.contains('processed')){
 
         const eventDayTotal = element.getAttribute('data-days')
 
@@ -328,13 +330,9 @@ class iamCalendar extends HTMLElement {
           cloneElement.setAttribute('data-days',difference);
 
 
-
-          console.log(element.getAttribute('data-days'));
-
           const newDate = new Date(datetime);
           newDate.setDate(newDate.getDate() + parseInt(element.getAttribute('data-days')));
 
-          console.log(newDate);
 
           const newMonth = newDate.getMonth();
           const newYear = newDate.getFullYear();
@@ -346,12 +344,50 @@ class iamCalendar extends HTMLElement {
 
           cloneElement.setAttribute('data-original-datetime',cloneElement.getAttribute('datetime'));
           cloneElement.setAttribute('datetime',strCloneEvent);
-
-
+          //cloneElement.classList.add('continued');
 
           element.after(cloneElement);
-          adjustEvent(component, cloneElement)
+          adjustEvent(component, cloneElement,true);
         }
+        else {
+  
+          for (let i = 1; i < eventDayTotal; i++) {
+            
+            const cloneElement = element.cloneNode(true);
+
+            cloneElement.removeAttribute('data-days');
+            cloneElement.removeAttribute('style');
+              
+            cloneElement.classList.add('continued');
+            cloneElement.classList.add('processed');
+              
+
+            const newDate = new Date(datetime);
+            newDate.setDate(newDate.getDate() + i);
+
+
+            const newMonth = newDate.getMonth();
+            const newYear = newDate.getFullYear();
+            const newDay = newDate.getDate();
+
+            const strCloneEvent = `${newYear}-${String(newMonth+1).padStart(2, "0")}-${String(newDay).padStart(2, "0")}`;
+
+
+            cloneElement.setAttribute('data-original-datetime',cloneElement.getAttribute('datetime'));
+            cloneElement.setAttribute('datetime',strCloneEvent);
+
+
+            element.after(cloneElement);
+            adjustEvent(component, cloneElement, true)
+          }
+
+
+          console.log(element.getAttribute('data-days'));
+
+          console.log(element);
+        }
+
+        element.classList.add('processed');
       }
 
       // Work out if we need to offset the start of displaying the events due to previous days overlapping

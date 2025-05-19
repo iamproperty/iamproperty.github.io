@@ -19,7 +19,9 @@
   border-left: 1px solid black;
   margin-bottom: 4rem;
 
+  container-type: inline-size;
 }
+
 .calendar > table {
   width: 100%;
   border-collapse: collapse;
@@ -48,6 +50,19 @@
   > thead > tr > th,
   > tbody > tr > td {
     border-right: 1px solid black;
+  }
+
+  thead .long-day-name {
+    display: none;
+  }
+
+  @container (min-width: 36em) {
+    thead .short-day-name {
+      display: none;
+    }
+    thead .long-day-name {
+      display: inline;
+    }
   }
 
   > tbody > tr > td {
@@ -149,6 +164,11 @@ select:has(option[value="month"]:checked) ~ .calendar > table > tbody {
     position: absolute;
     top: 0;
     left: 0;
+
+    .day-of-week,
+    .month {
+      display: none;
+    }
   }
 
   > tr > td > br {
@@ -287,7 +307,7 @@ select:has(option[value="list"]:checked) ~ .calendar > table {
   > tbody > tr > td > *:not(.table--day) {
     display: none;
   }
-  > tbody > tr > td:has(slot) > time {
+  > tbody > tr > td:has(slot:not(.continued)) > time {
     display: block!important;
     background-color: red;
   }
@@ -297,6 +317,10 @@ select:has(option[value="list"]:checked) ~ .calendar > table {
     width: 100%;
 
     tr:has(td:empty){
+      
+      display: none;
+    }
+    tr:has(slot.continued){
       
       display: none;
     }
@@ -318,13 +342,28 @@ select:has(option[value="list"]:checked) ~ .calendar > table {
   max-width: var(--event-max-width, 700%)!important;
 }
 
+:host([data-view="month"]) ::slotted(button.continued) {
+  opacity: 0;
+  pointer-events: none;
+}
+
 :host([data-view="week"]) ::slotted(button) {
   height: var(--event-height);
+  min-width: 100%;
   width: var(--event-width, 100%);
-  min-width: var(--event-width, 100%);
-  max-width: var(--event-width, 100%);
+  max-width: var(--event-max-width, 700%)!important;
 }
+
+:host([data-view="week"]) ::slotted(button.continued) {
+  opacity: 0;
+  pointer-events: none;
+}
+
 :host([data-view="day"]) ::slotted(button) {
   height: var(--event-height);
+}
+
+:host([data-view="list"]) ::slotted(button.continued) {
+  display: none;
 }
 // #endregion
