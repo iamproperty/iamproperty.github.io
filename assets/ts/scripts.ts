@@ -13,6 +13,7 @@ const components = [
   'table-no-submit',
   'tabs',
   'card',
+  'calendar',
   'filter-card',
   'video-card',
   'record-card',
