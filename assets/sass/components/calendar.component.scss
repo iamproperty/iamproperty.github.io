@@ -1,0 +1,330 @@
+@use '../_func.scss' as *;
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.calendar__title {
+  font-size: 2rem;
+}
+
+.calendar {
+  
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  
+  border-left: 1px solid black;
+  margin-bottom: 4rem;
+
+}
+.calendar > table {
+  width: 100%;
+  border-collapse: collapse;
+  //display: grid;
+
+  max-height: unset;
+  //overflow: hidden;
+  //overflow-block: auto;
+  display: block;
+
+  > thead,
+  > tbody {
+
+    display: contents;
+  }
+  > thead > tr,
+  > tbody > tr {
+      
+    display: grid;
+    width: calc(100% - 1px);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    //border-right: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+
+  > thead > tr > th,
+  > tbody > tr > td {
+    border-right: 1px solid black;
+  }
+
+  > tbody > tr > td {
+
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    position: relative;
+
+    &.selected {
+      background-color: pink;
+    }
+    &.today {
+      background-color: yellow;
+    }
+    &.prev-month {
+      background-color: grey;
+    }
+    &.next-month {
+      background-color: grey;
+    }
+  }
+}
+
+.table--day {
+
+  border-collapse: collapse;
+  width: 100%;
+
+  th {
+    height: 1rem;
+    width: 5ch;
+    text-align: left;
+    vertical-align: top;
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+
+  td {
+    height: 1rem;
+    width: auto;
+    position: relative;
+    font-size: 1rem;
+    line-height: 1;
+
+    slot {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: block;
+      height: 100%;
+    }
+  }
+
+  td:has(slot) {
+    
+    z-index: 1;
+  }
+
+  .hour0,
+  .hour1,
+  .hour2,
+  .hour3,
+  .hour4,
+  .hour5,
+  .hour6,
+  .hour7,
+  .hour8 {
+    display: none;
+  }
+
+  .hour19,
+  .hour20,
+  .hour21,
+  .hour22,
+  .hour23 {
+    display: none;
+  }
+}
+
+
+
+// #region month view
+select:has(option[value="month"]:checked) ~ .calendar > table > tbody {
+
+  //pointer-events: none;
+
+  > tr > td {
+
+    overflow-x: visible;
+    overflow-y: clip;
+    aspect-ratio: unset;
+    padding-top: 100%;
+    position: relative;
+  }
+
+  > tr > td > time {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  > tr > td > br {
+    display: none;
+  }
+
+  .table--day {
+
+    width: 100%;
+    position: absolute;
+    top: calc(var(--event-offset, 0rem) + 2rem);
+    left: 0;
+
+
+    tr:has(td:empty){
+      
+      display: none;
+    }
+
+    th {
+      display: none;
+    }
+    
+    td {
+      width: auto;
+      position: relative;
+      //padding-top: var(--event-offset, 0);
+      pointer-events: all;
+
+      slot {
+        position: static;
+      }
+    }
+
+  }
+}
+// #endregion
+
+// #region week view
+select:has(option[value="week"]:checked) ~ .calendar {
+
+  padding-left: 3rem;
+}
+
+select:has(option[value="week"]:checked) ~ .calendar > table > thead {
+  display: none;
+}
+select:has(option[value="week"]:checked) ~ .calendar > table > tbody {
+  
+  > tr:not(:has(> td.selected)) {
+
+    display: none;
+  }
+  
+
+  > tr > th,
+  > tr > td {
+    
+    aspect-ratio: unset;
+  }
+
+
+  > tr > td {
+    
+    overflow: visible;
+  }
+
+
+  .table--day {
+    display: table;
+
+  }
+
+  > tr > td:not(:first-child) .table--day > tbody > tr > th {
+    display: none;
+  }
+
+  > tr > td:first-child .table--day > tbody > tr > th {
+    width: 0;
+    span {
+      margin-left: -3rem;
+      font-size: 0.8rem;
+      line-height: 1rem;
+    }
+  }
+}
+// #endregion
+
+// #region Day view
+select:has(option[value="day"]:checked) ~ .calendar > table {
+  
+  > thead {
+
+    display: none;
+  }
+
+  > tbody > tr:not(:has(> td.selected)) {
+
+    display: none;
+  }
+
+  > tbody > tr:has(> td.selected) {
+
+    grid-template-columns: 1fr;
+  }
+
+  > tbody > tr > td:not(.selected) {
+    display: none;
+  }
+
+  > tbody > tr > td {
+    
+    aspect-ratio: unset;
+  }
+
+  .table--day {
+    display: table;
+  }
+}
+// #endregion
+
+// #region List view
+
+select:has(option[value="list"]:checked) ~ .calendar > table {
+  
+  > thead {
+    display: none;
+  }
+
+  > tbody,
+  > tbody > tr,
+  > tbody > tr > td {
+    display: contents;
+  }
+
+  > tbody > tr > td > *:not(.table--day) {
+    display: none;
+  }
+  > tbody > tr > td:has(slot) > time {
+    display: block!important;
+    background-color: red;
+  }
+
+  .table--day {
+
+    width: 100%;
+
+    tr:has(td:empty){
+      
+      display: none;
+    }
+  }
+}
+
+// #endregion
+
+
+// #region Calendar Event button
+::slotted(button){
+
+  border: none!important;
+}
+
+:host([data-view="month"]) ::slotted(button) {
+  width: var(--event-width, 100%);
+  min-width: 100%;
+  max-width: var(--event-max-width, 700%)!important;
+}
+
+:host([data-view="week"]) ::slotted(button) {
+  height: var(--event-height);
+  width: var(--event-width, 100%);
+  min-width: var(--event-width, 100%);
+  max-width: var(--event-width, 100%);
+}
+:host([data-view="day"]) ::slotted(button) {
+  height: var(--event-height);
+}
+// #endregion
