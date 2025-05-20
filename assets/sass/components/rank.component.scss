@@ -10,9 +10,7 @@
   box-sizing: border-box;
 }
 
-
 :host {
-
   display: block;
   text-align: center;
   margin-bottom: 2rem;
@@ -21,7 +19,6 @@
 }
 
 .rank {
-
   position: relative;
   display: flex;
 
@@ -39,11 +36,11 @@
   .position {
     margin: 0;
     padding: 0;
-    line-height: 1!important;
+    line-height: 1 !important;
   }
-  
+
   .position:after {
-    content: var(--rank-sub-text, "Your rank");
+    content: var(--rank-sub-text, 'Your rank');
     display: block;
     font-size: rem(map.get($heading-sizes, 'lead_fs'));
     line-height: 1;
@@ -61,11 +58,9 @@
   }
 }
 
-
-:host([data-position="1st"]),
-:host([data-position="2nd"]),
-:host([data-position="3rd"]) {
-
+:host([data-position='1st']),
+:host([data-position='2nd']),
+:host([data-position='3rd']) {
   .rank {
     border-width: 0;
     overflow: hidden;
@@ -76,22 +71,19 @@
   }
 }
 
-:host([data-position="1st"]) {
-
+:host([data-position='1st']) {
   .rank {
-
-    background: #FFEE56;
+    background: #ffee56;
   }
-  
+
   .rank svg:nth-child(1) {
     display: block;
   }
 }
 
-:host([data-position="2nd"]) {
-
+:host([data-position='2nd']) {
   .rank {
-    background: #EDEDED;
+    background: #ededed;
   }
 
   .rank svg:nth-child(2) {
@@ -99,10 +91,9 @@
   }
 }
 
-:host([data-position="3rd"]) {
-
+:host([data-position='3rd']) {
   .rank {
-    background: #FFE798;
+    background: #ffe798;
   }
 
   .rank svg:nth-child(3) {

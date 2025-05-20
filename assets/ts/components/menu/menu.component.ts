@@ -36,7 +36,7 @@ class iamMenu extends HTMLElement {
     if (menuID && menuButton) {
       this.setAttribute('role', 'menu');
       this.style['position-anchor'] = `--${menuID}`;
-      
+
       menuButton?.setAttribute('aria-haspopup', 'true');
       menuButton?.style['anchor-name'] = `--${menuID}`;
       menuButton?.setAttribute('aria-controls', menuID);
@@ -74,7 +74,6 @@ class iamMenu extends HTMLElement {
             break;
           case 32: // Space
           case 13: // Enter
-
             break;
           case 35: // end
             event.stopPropagation();
@@ -135,44 +134,41 @@ class iamMenu extends HTMLElement {
     });
 
     this.addEventListener('toggle', (e) => {
-
       const updateEvent = new CustomEvent(e.newState, { detail: { id: this.getAttribute('id'), target: e.target } });
       this.dispatchEvent(updateEvent);
 
-      if(this.hasAttribute('popover-open')){
+      if (this.hasAttribute('popover-open')) {
         e.preventDefault();
         this.removeAttribute('popover-open');
         this.hidePopover();
       }
     });
 
-    
-
     this.addEventListener('click', (event) => {
-      if (event && event.target instanceof HTMLElement && event.target.closest('button:has(+ iam-menu:not([popover]))')) {
-        
+      if (
+        event &&
+        event.target instanceof HTMLElement &&
+        event.target.closest('button:has(+ iam-menu:not([popover]))')
+      ) {
         const button = event.target.closest('button:has(+ iam-menu)');
 
         button?.classList.toggle('open');
-      }
-      else if (event && event.target instanceof HTMLElement && event.target.closest('button.selectable')) {
-        
+      } else if (event && event.target instanceof HTMLElement && event.target.closest('button.selectable')) {
         const button = event.target.closest('button.selectable');
-        if(this.hasAttribute('multiple')){
+        if (this.hasAttribute('multiple')) {
           button.classList.toggle('selected');
-        }
-        else if(button?.classList.contains('selected')){
-
-          this.querySelectorAll('.selected').forEach((item) => { item.classList.remove('selected') });
-        }
-        else {
-
-          this.querySelectorAll('.selected').forEach((item)=> { item.classList.remove('selected') });
+        } else if (button?.classList.contains('selected')) {
+          this.querySelectorAll('.selected').forEach((item) => {
+            item.classList.remove('selected');
+          });
+        } else {
+          this.querySelectorAll('.selected').forEach((item) => {
+            item.classList.remove('selected');
+          });
           button.classList.add('selected');
         }
       }
     });
-
 
     // safari and firefox anchor fix for cards
     if (!CSS.supports('top', 'anchor(top)')) {

@@ -7,21 +7,18 @@ $darkMode: 'true' !default;
 @include layer('components', $layers) {
   $menuPadding: 0.5rem !default;
 
-
   iam-menu:defined {
     --menu-padding: #{$menuPadding};
     --border-color: var(--colour-border);
     --menu-item-margin: 0 0 0.5rem 0;
-
   }
 
   iam-menu i {
     width: 1.25rem;
   }
 
-
   // #region sub menu
-  
+
   iam-menu > button:has(+ iam-menu) {
     position: relative;
 
@@ -41,18 +38,15 @@ $darkMode: 'true' !default;
       -webkit-mask-repeat: no-repeat;
       -webkit-mask-position: 50% 50%;
       vertical-align: bottom;
-      
+
       position: absolute;
       top: calc(50% - 0.5rem);
       right: 0.5rem;
-      
     }
   }
 
   iam-menu > button:has(+ iam-menu:not([popover])) {
-
     &:after {
-      
       rotate: 90deg;
     }
   }
@@ -77,17 +71,12 @@ $darkMode: 'true' !default;
     }
   }
 
-
-
-
   iam-menu > button:not(.open) + iam-menu:not([popover]) {
     display: none;
   }
 
-  iam-menu > button + iam-menu:not([popover]) > *:is(button,a,label) {
+  iam-menu > button + iam-menu:not([popover]) > *:is(button, a, label) {
     padding-left: 2rem;
   }
   // #endregion
 }
-
-

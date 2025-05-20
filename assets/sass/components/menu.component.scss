@@ -22,13 +22,10 @@
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
 }
 
-
 :host(:popover-open),
 :host([popover-open]) {
-  
   display: block;
 }
-
 
 :host(:not([popover])) {
   position: static;
@@ -52,9 +49,7 @@
   max-height: rem(400);
 }
 
-
-
-::slotted(*:is(button,a,label,span)) {
+::slotted(*:is(button, a, label, span)) {
   //all: unset !important;
   background: unset !important;
   border: unset !important;
@@ -71,66 +66,52 @@
   text-align: var(--menu-item-text-align, left) !important;
 }
 
-::slotted(*:is(button,a,label)) {
-
+::slotted(*:is(button, a, label)) {
   padding-inline: var(--menu-item-padding, 0.5rem);
   cursor: var(--menu-item-cursor, pointer) !important;
 }
 
 ::slotted(*:is(span):first-child) {
-
   padding-top: 0 !important;
 }
 
-::slotted(*:is(button,a,label,span):last-child) {
+::slotted(*:is(button, a, label, span):last-child) {
   margin-bottom: 0 !important;
 }
 
 // Radio buttons
 
 ::slotted(*:is(label)) {
-
   --radio-size: #{rem(20)};
   --radio-inner-size: #{rem(12)};
   --radio-inner-top: #{rem(12)};
   --radio-inner-left: #{rem(12)};
-  
+
   --checkbox-tick-size: #{rem(12)};
   --checkbox-inner-size: #{rem(10)};
   --checkbox-inner-top: #{rem(6)};
   --checkbox-inner-left: #{rem(8)};
   padding-left: rem(36) !important;
-
 }
-
-
-
 
 // States
 
-::slotted(*:is(button,a,label):is(.selected)) {
-
-  background: #E9F8FC !important;
+::slotted(*:is(button, a, label):is(.selected)) {
+  background: #e9f8fc !important;
   border-left: 4px solid var(--colour-info) !important;
   border-radius: 0.25rem !important;
 }
 
-::slotted(*:is(button,a,label):is(:hover,.hover, :focus,.focus)) {
+::slotted(*:is(button, a, label):is(:hover, .hover, :focus, .focus)) {
   //all: unset !important;
   background: var(--colour-light) !important;
   border-radius: 0.25rem !important;
 }
 
-::slotted(*:is(button,a,label):is(:active,.active)) {
-
+::slotted(*:is(button, a, label):is(:active, .active)) {
   background: rgba(224, 224, 224, 1) !important;
   border-radius: 0.25rem !important;
 }
-
-
-
-
-
 
 ::slotted(hr) {
   height: 1px !important;
@@ -140,9 +121,8 @@
   padding: 0 !important;
 }
 
-// #region sub menu 
+// #region sub menu
 ::slotted(iam-menu:not([popover])) {
-  
   border: none !important;
   border-radius: 0 !important;
   box-shadow: none !important;
@@ -152,7 +132,6 @@
 }
 
 ::slotted(iam-menu[popover]) {
-  
   top: anchor(top);
   left: calc(anchor(right) + 1rem);
 }
