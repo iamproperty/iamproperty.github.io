@@ -1,7 +1,22 @@
 <script setup>
+  import TrackEvents from '../TrackEvents.vue';
 import menuAnatomy from "../../img/menu-anatomy.png";
+
+import Integration from '../Integration.vue';
+import Versions from '../Versions.vue';
+import DSHeader from '../DSHeader.vue';
+import headerImg from '../../img/cards-header.png';
+import Menu from '@/components/Menu/Menu.vue';
+
 </script>
 <template>
+  <TrackEvents
+    selector="iam-menu"
+    :events="[
+      'open',
+      'closed',
+    ]"
+  ></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Menu</h1>
@@ -373,6 +388,8 @@ import menuAnatomy from "../../img/menu-anatomy.png";
     <p>Default items are clickable items that usually perform actions like navigating, deleting, etc.</p>
 
 
+    <div class="container visualtest">
+      
     <Menu class="mb-3">
       <button><i class="fa-regular fa-edit"></i> Edit</button>
       <button><i class="fa-solid fa-edit"></i> Duplicate</button>
@@ -380,6 +397,7 @@ import menuAnatomy from "../../img/menu-anatomy.png";
       <button><i class="fa-solid fa-trash"></i> Delete</button>
       
     </Menu>
+    </div>
 
     <h4>States</h4>
     <div class="container visualtest pe-none">
@@ -424,11 +442,14 @@ import menuAnatomy from "../../img/menu-anatomy.png";
     <p>Selectable items are used primarily in advanced selects to show which item is currently selected.</p>
 
 
+    <div class="container visualtest">
+      
     <Menu class="mb-3" multiple>
       <button class="selectable selected">1 Oak Road, Newcastle upon Tyne, NE1 6QT </button>
       <button class="selectable">1 Oak Road, Newcastle upon Tyne, NE1 6QT </button>
       <button class="selectable">1 Oak Road, Newcastle upon Tyne, NE1 6QT </button>
     </Menu>
+    </div>
 
     <h4>States</h4>
     <div class="container visualtest pe-none">
@@ -494,6 +515,8 @@ import menuAnatomy from "../../img/menu-anatomy.png";
     <h3>Radio button items</h3>
     <p>Radio button items are used when only one option at a time can be selected from a small list of items. For example for a filter.</p>
 
+    <div class="container visualtest">
+      
     <Menu class="mb-3">
       <label><input type="radio" name="radio-buttons" />All</label>
       <label><input type="radio" name="radio-buttons" />Not started</label>
@@ -501,17 +524,21 @@ import menuAnatomy from "../../img/menu-anatomy.png";
       <label><input type="radio" name="radio-buttons" />Complete</label>
     </Menu>
 
+    </div>
 
     <h3>Checkbox items</h3>
     <p>Checkbox items are used when multiple options at a time can be selected from a small list of items. For example for a filter.</p>
 
 
+    <div class="container visualtest">
+      
     <Menu class="mb-3">
       <label><input type="checkbox" name="checkbox" indeterminate="" />All</label>
       <label><input type="checkbox" name="checkbox2" checked />Not started</label>
       <label><input type="checkbox" name="checkbox3" checked />In progress</label>
       <label><input type="checkbox" name="checkbox4" />Complete</label>
     </Menu>
+    </div>
 
 
     <h3>Expandable items (extend)</h3>
@@ -521,6 +548,7 @@ import menuAnatomy from "../../img/menu-anatomy.png";
     <p>Expandable items extend the menu to show the options.</p>
 
 
+    <div class="container visualtest">
     <Menu class="mb-3 menu--lg">
       <button><i class="fa-regular fa-upload"></i> Export as .CSV</button>
       <button><i class="fa-solid fa-share"></i> Share</button>
@@ -532,9 +560,13 @@ import menuAnatomy from "../../img/menu-anatomy.png";
       </Menu>
     </Menu>
 
+      
+    </div>
     <h3>Popover</h3>
 
 
+
+    <div class="container visualtest">
     <Menu class="mb-3 menu--lg">
       <button><i class="fa-regular fa-upload"></i> Export as .CSV</button>
       <button><i class="fa-solid fa-share"></i> Share</button>
@@ -545,74 +577,213 @@ import menuAnatomy from "../../img/menu-anatomy.png";
         <button><i class="fa-regular fa-sort"></i> Sort by</button>
       </Menu>
     </Menu>
+      
+    </div>
 
-    <div class="container visualtest">
-      <button class="btn btn-secondary" popovertarget="my-menu">Menu</button>
+    <h4>Behaviour</h4>
 
-      <Menu id="my-menu" popover>
-        <button><i class="fa-regular fa-eye"></i> Action 1</button>
-        <button>Action 1</button>
-        <button>Action 1</button>
-        <button>Action 1</button>
-        <a href="/components/menu">Link 1</a>
-        <hr />
-        <details>
-          <summary class="fa-regular fa-arrow-down">Menu</summary>
-          <button>Action 1</button>
-          <button>Action 1</button>
-          <button>Action 1</button>
-        </details>
-        <a href="/components/menu">Link 2</a>
 
-        <button popovertarget="sub-menu" class="fa-regular fa-arrow-right">Menu</button>
-        <Menu id="sub-menu" popover>
-          <button>Action 1</button>
-          <button>Action 1</button>
-          <button>Action 1</button>
-        </Menu>
+
+    <p>Clicking the expandable item or pressing space or enter on the keyboard should open the additional popover. </p>
+    <p>The additional popover can be closed in a variety of ways:</p>
+    <ul>
+      <li>Expand trigger: users can dismiss the additional popover by clicking the expand item again</li>
+      <li>Outside click: clicking outside the pop-up area should dismiss the pop over and initial menu</li>
+      <li>User Interaction: clicking another item on the original menu should close the additional popover and open the other popover. Also clicking any item that closes the original menu should also close the additional popover.</li>
+    </ul>
+    <p>To make this popover accessible for keyboard users, menus can be opened via space, enter, or using the up and down arrow keys when the trigger is focused.</p>
+
+    <p>Menus can be dismissed in a variety of ways, depending on how it is built and its use case:</p>
+
+    <ul>
+      <li>Expand trigger: users can dismiss the additional popover by pressing enter or space on expand item again</li>
+      <li>Tab outside the menu: pressing tab to focus outside the additional popover</li>
+      <li>Escape key: pressing the escape (Esc) key</li>
+      <li>User interaction: pressing enter or space another item on the original menu should close the additional popover and open the other popover. Also pressing enter or space any item that closes the original menu should also close the additional popover.</li>
+    </ul>
+
+<!-- Kept for testing purposes
+    <button popovertarget="example" class="btn"><i class="fa-regular fa-sort"></i> Sort by</button>
+    <Menu id="example" class="mb-3 menu--lg" popover>
+      <button><i class="fa-regular fa-upload"></i> Export as .CSV</button>
+      <button><i class="fa-solid fa-share"></i> Share</button>
+      <button popovertarget="submenu2"><i class="fa-regular fa-sort"></i> Sort by</button>
+      <Menu id="submenu2" class="menu--lg" popover>
+        <button><i class="fa-regular fa-upload"></i> Export as .CSV</button>
+        <button><i class="fa-solid fa-share"></i> Share</button>
+        <button><i class="fa-regular fa-sort"></i> Sort by</button>
       </Menu>
-    </div>
+    </Menu>
+-->
 
-    <div class="container">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h3>Web component</h3></summary>
-        </details>
-        <details>
-          <summary><h3>Vue component</h3></summary>
-        </details>
-        <!--
-        <details>
-          <summary><h3>HTML</h3></summary>
-          <pre><code class="javascript">{{`<div class="container"></div>`}}</code></pre>
-        </details>
-      -->
-      </Tabs>
-    </div>
-    <div class="bg-light version-control">
-      <div class="container">
+    
+    <Integration component="menu" componentName="iam-menu">
+      <template #web-component>
+        <pre><code>{{`<iam-menu class="mb-3 menu--lg">
+  <button><i class="fa-regular fa-upload"></i> Export as .CSV</button>
+  <button><i class="fa-solid fa-share"></i> Share</button>
+</iam-menu>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Menu from '@/components/Menu/Menu.vue</script>
+        
+<Menu class="mb-3 menu--lg">
+  <button><i class="fa-regular fa-upload"></i> Export as .CSV</button>
+  <button><i class="fa-solid fa-share"></i> Share</button>
+</Menu>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
         <table>
           <thead>
             <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Design System Version</th>
-              <th>Notable updates</th>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
             </tr>
           </thead>
-          <tbody class="text-body">
+          <tbody>
             <tr>
-              <td>V1 added</td>
-              <td>23.08.2023</td>
-              <td>v3.7.10</td>
-              <td>N/A</td>
+              <th>id</th>
+              <td></td>
+              <td>String</td>
+              <td>Yes (needed to allow it to be opened via a button)</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>popover</th>
+              <td></td>
+              <td>Flag</td>
+              <td>No</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/actionbar.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+      </template>
+
+      <template #classes>
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>.menu-sm</th>
+              <td>Setes a width on the menu</td>
+            </tr>
+            <tr>
+              <th>.menu-md</th>
+              <td>Setes a width on the menu</td>
+            </tr>
+            <tr>
+              <th>.menu-lg</th>
+              <td>Setes a width on the menu</td>
+            </tr>
+            <tr>
+              <th>.menu--height-sm</th>
+              <td>Sets a height on the menu</td>
+            </tr>
+            <tr>
+              <th>.menu--height-lg</th>
+              <td>Sets a height on the menu</td>
+            </tr>
+            <tr>
+              <th>.selectable (on the button)</th>
+              <td>Allows for the button to have a selected class when clicked</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #parts>
+        <table>
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>inner</th>
+              <td>A container div</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #dispatched-events>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>open</th>
+              <td>When the menu is opened</td>
+            </tr>
+            <tr>
+              <th>closed</th>
+              <td>When the menu is closed</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #criteria>
+        <ul>
+          <li>The menu should be keyboard controllable</li>
+          <li>Child buttons and input fields should be kept extendable via JavaScript events</li>
+        </ul>
+      </template>
+      <template #data-layer>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>open</th>
+              <td>When the menu is opened</td>
+            </tr>
+            <tr>
+              <th>closed</th>
+              <td>When the menu is closed</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+    </Integration>
+    <Versions pdf="/pdfs/menu.pdf">
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
+            <td>V1 added</td>
+            <td>10.04.2025</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </Versions>
   </main>
 </template>
 
@@ -649,24 +820,3 @@ import menuAnatomy from "../../img/menu-anatomy.png";
 
 
 </style>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/cards-header.png';
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Menu from '@/components/Menu/Menu.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Menu,
-      Tabs,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-      };
-    },
-    mounted() {},
-  };
-</script>

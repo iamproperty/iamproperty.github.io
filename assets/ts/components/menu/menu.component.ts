@@ -40,13 +40,6 @@ class iamMenu extends HTMLElement {
       menuButton?.setAttribute('aria-haspopup', 'true');
       menuButton?.style['anchor-name'] = `--${menuID}`;
       menuButton?.setAttribute('aria-controls', menuID);
-
-      /*
-      subMenus.forEach((item, index) => {
-        item.setAttribute('role', 'menu');
-      });
-*/
-
     }
 
     menuItems.forEach((item, index) => {
@@ -81,13 +74,6 @@ class iamMenu extends HTMLElement {
             break;
           case 32: // Space
           case 13: // Enter
-            if (activeItem.matches('summary') && !activeItem.parentElement.matches('details[open]')) {
-              activeItem.parentElement.setAttribute('open', true);
-              const subMenuItems = activeItem
-                .closest('details')
-                .querySelectorAll('a, button, :scope details > summary');
-              Array.from(subMenuItems)[0].focus();
-            }
 
             break;
           case 35: // end
@@ -149,6 +135,9 @@ class iamMenu extends HTMLElement {
     });
 
     this.addEventListener('toggle', (e) => {
+
+      const updateEvent = new CustomEvent(e.newState, { detail: { id: this.getAttribute('id'), target: e.target } });
+      this.dispatchEvent(updateEvent);
 
       if(this.hasAttribute('popover-open')){
         e.preventDefault();
