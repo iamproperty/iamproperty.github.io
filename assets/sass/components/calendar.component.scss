@@ -86,6 +86,11 @@
   }
 }
 
+.week-view-only {
+  display: none;
+}
+
+// #region Default view when in Day view
 .table--day {
 
   border-collapse: collapse;
@@ -99,6 +104,11 @@
     font-size: 1rem;
     line-height: 1rem;
   }
+  
+  thead > tr > th:first-child {
+    opacity: 0;
+    pointer-events: none;
+  }
 
   td {
     height: 1rem;
@@ -107,21 +117,36 @@
     font-size: 1rem;
     line-height: 1;
 
-    slot {
+    span {
+        
+      display: flex;
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
+    }
+
+    slot {
+      
       width: 100%;
       display: block;
       height: 100%;
     }
+
+    /*
+    span:has(slot + slot){
+      slot {
+        max-width: 50%;
+        overflow-y: visible;
+        overflow-x: clip;
+      }
+    }
+      */
   }
 
   td:has(slot) {
     
     z-index: 1;
   }
-
+/*
   .hour0,
   .hour1,
   .hour2,
@@ -141,14 +166,45 @@
   .hour23 {
     display: none;
   }
+    */
 }
+// #endregion
 
+// #region Day view
+select:has(option[value="day"]:checked) ~ .calendar > table {
+  
+  > thead,
+  > tbody > tr:not(:has(> td.selected)),
+  > tbody > tr > td:not(.selected),
+  > tbody > tr > td > time {
+
+    display: none;
+  }
+
+  > tbody > tr:has(> td.selected) {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  > tbody > tr > td {
+    
+    aspect-ratio: unset;
+  }
+
+}
+// #endregion
 
 
 // #region month view
+select:has(option[value="month"]:checked) ~ .calendar > table {
+  
+
+}
 select:has(option[value="month"]:checked) ~ .calendar > table > tbody {
 
   //pointer-events: none;
+
 
   > tr > td {
 
@@ -171,9 +227,6 @@ select:has(option[value="month"]:checked) ~ .calendar > table > tbody {
     }
   }
 
-  > tr > td > br {
-    display: none;
-  }
 
   .table--day {
 
@@ -183,7 +236,7 @@ select:has(option[value="month"]:checked) ~ .calendar > table > tbody {
     left: 0;
 
 
-    tr:has(td:empty){
+    tr:not(:has(slot)){
       
       display: none;
     }
@@ -201,6 +254,7 @@ select:has(option[value="month"]:checked) ~ .calendar > table > tbody {
       slot {
         position: static;
       }
+
     }
 
   }
@@ -211,18 +265,36 @@ select:has(option[value="month"]:checked) ~ .calendar > table > tbody {
 select:has(option[value="week"]:checked) ~ .calendar {
 
   padding-left: 3rem;
+  position: relative;
+    
+
+  .week-view-only {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
+
+
+
 
 select:has(option[value="week"]:checked) ~ .calendar > table > thead {
   display: none;
 }
 select:has(option[value="week"]:checked) ~ .calendar > table > tbody {
   
+
   > tr:not(:has(> td.selected)) {
 
     display: none;
   }
   
+  > tr {
+    
+  overflow: auto;
+
+  }
 
   > tr > th,
   > tr > td {
@@ -240,52 +312,13 @@ select:has(option[value="week"]:checked) ~ .calendar > table > tbody {
   .table--day {
     display: table;
 
-  }
-
-  > tr > td:not(:first-child) .table--day > tbody > tr > th {
-    display: none;
-  }
-
-  > tr > td:first-child .table--day > tbody > tr > th {
-    width: 0;
-    span {
-      margin-left: -3rem;
-      font-size: 0.8rem;
-      line-height: 1rem;
+    thead {
+      display: none;
     }
   }
-}
-// #endregion
 
-// #region Day view
-select:has(option[value="day"]:checked) ~ .calendar > table {
-  
-  > thead {
-
+  > tr > td .table--day > tbody > tr > th {
     display: none;
-  }
-
-  > tbody > tr:not(:has(> td.selected)) {
-
-    display: none;
-  }
-
-  > tbody > tr:has(> td.selected) {
-
-    grid-template-columns: 1fr;
-  }
-
-  > tbody > tr > td:not(.selected) {
-    display: none;
-  }
-
-  > tbody > tr > td {
-    
-    aspect-ratio: unset;
-  }
-
-  .table--day {
-    display: table;
   }
 }
 // #endregion
@@ -307,6 +340,7 @@ select:has(option[value="list"]:checked) ~ .calendar > table {
   > tbody > tr > td > *:not(.table--day) {
     display: none;
   }
+
   > tbody > tr > td:has(slot:not(.continued)) > time {
     display: block!important;
     background-color: red;
@@ -316,14 +350,35 @@ select:has(option[value="list"]:checked) ~ .calendar > table {
 
     width: 100%;
 
-    tr:has(td:empty){
-      
+    tr {
+      display: block;
+      position: relative;
+      height: 1rem;
+      padding-left: 3rem;
+
+      th {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      td {
+        display: contents;
+
+        slot {
+          display: block;
+        }
+      }
+    }
+
+    tr:not(:has(slot)){
       display: none;
     }
     tr:has(slot.continued){
       
       display: none;
     }
+
   }
 }
 

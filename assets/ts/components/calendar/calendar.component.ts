@@ -45,6 +45,44 @@ class iamCalendar extends HTMLElement {
     </div>
 
     <div class="calendar" part="calendar">
+
+      <div class="week-view-only">
+      <table class="" role="presentation"><tbody>
+      <tr><th>All day</th></tr>
+      <tr><th>12am</th></tr>
+      <tr><th>1am</th></tr>
+      <tr><th>2am</th></tr>
+      <tr><th>3am</th></tr>
+      <tr><th>4am</th></tr>
+      <tr><th>5am</th></tr>
+      <tr><th>6</th></tr>
+      <tr><th>7</th></tr>
+      <tr><th>8</th></tr>
+      <tr><th>9</th></tr>
+      <tr><th>10</th></tr>
+      <tr><th>11</th></tr>
+      <tr><th>12</th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      <tr><th></th></tr>
+      </tbody></table>
+      </div>
+
+
       <table>
 
         <thead>
@@ -128,6 +166,7 @@ class iamCalendar extends HTMLElement {
     const month = date.getMonth();
     const year = date.getFullYear();
     const day = date.getDate();
+    const dayOfWeek = date.getDay() ? date.getDay(): 7;
 
     if(view == "week"){
 
@@ -147,7 +186,7 @@ class iamCalendar extends HTMLElement {
     
     if(view == "day"){
       
-      return `${this.getOrdinalNumber(day)} ${this.monthArray[month]} ${year}`;
+      return `${this.dayArray[dayOfWeek]} ${this.getOrdinalNumber(day)} ${this.monthArray[month]} ${year}`;
     }
 
     return `${this.monthArray[month]} ${year}`;
@@ -182,6 +221,19 @@ class iamCalendar extends HTMLElement {
     const nextMonth = nextMonthDate.getMonth();
     const nextMonthYear = nextMonthDate.getFullYear();
 
+    // Get calendars
+    const calendars = [];
+
+    if(this.querySelector('button:not(data-calendar)')){
+      calendars.push('Default');
+
+    }
+
+    Array.from(this.querySelectorAll('button[data-calendar]')).forEach((element) => {
+
+      if(!(calendars.includes(element.getAttribute('data-calendar'))))
+        calendars.push(element.getAttribute('data-calendar'));
+    })
 
 
     // Create tbody string by looping through the number of days in month plus some days before and after
@@ -201,14 +253,14 @@ class iamCalendar extends HTMLElement {
         const adjustedLoopDay = daysPrevMonth - (startDay - 1 - i);
         const adjustedLoopDate = `${prevMonthYear}-${String(prevMonth+1).padStart(2, "0")}-${String(adjustedLoopDay).padStart(2, "0")}`
           
-        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[prevMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(adjustedLoopDay)}</span> <span class="month">${this.monthArray[prevMonth]}</span></time><br/><br/>`;
-        tbodyContent += this.addDay(adjustedLoopDate);
+        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[prevMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(adjustedLoopDay)}</span> <span class="month">${this.monthArray[prevMonth]}</span></time>`;
+        //tbodyContent += this.addDay(adjustedLoopDate);
       }
 
       if(i >= startDay && loopDay <= daysThisMonth){
         
-        tbodyContent += `<time datetime="${loopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[month]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(loopDay)}</span> <span class="month">${this.monthArray[month]}</span></time><br/><br/>`;
-        tbodyContent += this.addDay(loopDate);
+        tbodyContent += `<time datetime="${loopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[month]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(loopDay)}</span> <span class="month">${this.monthArray[month]}</span></time>`;
+        tbodyContent += this.addDay(loopDate, calendars);
       }
 
       // next month
@@ -217,50 +269,68 @@ class iamCalendar extends HTMLElement {
         const adjustedLoopDay = i - (startDay - 1) - daysThisMonth;
         const adjustedLoopDate = `${nextMonthYear}-${String(nextMonth+1).padStart(2, "0")}-${String(adjustedLoopDay).padStart(2, "0")}`
           
-        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[nextMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(adjustedLoopDay)}</span> <span class="month">${this.monthArray[nextMonth]}</span></time><br/><br/>`;
-        tbodyContent += this.addDay(adjustedLoopDate);
+        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[nextMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(adjustedLoopDay)}</span> <span class="month">${this.monthArray[nextMonth]}</span></time>`;
+        //tbodyContent += this.addDay(adjustedLoopDate);
       }
 
       tbodyContent += '</td>';
 
       // Close row and start a new one
-      if(((sundayFirst ? i+1 : i) % 7) === 0 && i != loopDays)
+      if(((sundayFirst ? i+1 : i) % 7) === 0 && i != loopDays){
         tbodyContent += `</tr><tr>`;
+      }
+        
     }
     tbodyContent += '</tr>';
 
     return tbodyContent;
   }
 
-  addDay(day): string {
+  addDay(day, calendars: []): string {
 
-    return `<table class="table--day">
-    <tr><th><span>All day</span></th><td datetime="${day}"></td></tr>
-    <tr class="hour0"><th><span>12am</span></th><td datetime="${day}T00:00"></td></tr>
-    <tr class="hour1"><th><span>1am</span></th><td datetime="${day}T01:00"></td></tr>
-    <tr class="hour2"><th><span>2am</span></th><td datetime="${day}T02:00"></td></tr>
-    <tr class="hour3"><th><span>3am</span></th><td datetime="${day}T03:00"></td></tr>
-    <tr class="hour4"><th><span>4am</span></th><td datetime="${day}T04:00"></td></tr>
-    <tr class="hour5"><th><span>5am</span></th><td datetime="${day}T05:00"></td></tr>
-    <tr class="hour6"><th><span>6am</span></th><td datetime="${day}T06:00"></td></tr>
-    <tr class="hour7"><th><span>7am</span></th><td datetime="${day}T07:00"></td></tr>
-    <tr class="hour8"><th><span>8am</span></th><td datetime="${day}T08:00"></td></tr>
-    <tr class="hour9"><th><span>9am</span></th><td datetime="${day}T09:00"></td></tr>
-    <tr class="hour10"><th><span>10am</span></th><td datetime="${day}T10:00"></td></tr>
-    <tr class="hour11"><th><span>11am</span></th><td datetime="${day}T11:00"></td></tr>
-    <tr class="hour12"><th><span>12pm</span></th><td datetime="${day}T12:00"></td></tr>
-    <tr class="hour13"><th><span>1pm</span></th><td datetime="${day}T13:00"></td></tr>
-    <tr class="hour14"><th><span>2pm</span></th><td datetime="${day}T14:00"></td></tr>
-    <tr class="hour15"><th><span>3pm</span></th><td datetime="${day}T15:00"></td></tr>
-    <tr class="hour16"><th><span>4pm</span></th><td datetime="${day}T16:00"></td></tr>
-    <tr class="hour17"><th><span>5pm</span></th><td datetime="${day}T17:00"></td></tr>
-    <tr class="hour18"><th><span>6pm</span></th><td datetime="${day}T18:00"></td></tr>
-    <tr class="hour19"><th><span>7pm</span></th><td datetime="${day}T19:00"></td></tr>
-    <tr class="hour20"><th><span>8pm</span></th><td datetime="${day}T20:00"></td></tr>
-    <tr class="hour21"><th><span>9pm</span></th><td datetime="${day}T21:00"></td></tr>
-    <tr class="hour22"><th><span>10pm</span></th><td datetime="${day}T22:00"></td></tr>
-    <tr class="hour23"><th><span>11pm</span></th><td datetime="${day}T23:00"></td></tr>
-    </table>`;
+    let htmlTable = '<table class="table--day">';
+    htmlTable += `<thead><tr><th>time</th>`;
+    calendars.forEach(calendarTitle => {
+      
+      htmlTable += `<th>${calendarTitle}</th>`;
+    });
+    htmlTable += `</tr></thead>`;
+
+    htmlTable += `<tbody>`;
+
+    htmlTable += `<tr class="allday"><th>All day</th>`;
+    calendars.forEach(calendarTitle => {
+      
+      htmlTable += `<td datetime="${day}" data-calendar="${calendarTitle}"></td>`;
+    });
+    htmlTable += `</tr>`;
+
+
+    htmlTable += `<tr class="hour0"><th>12am</th><td datetime="${day}T00:00"></td></tr>`;
+
+    for (let i = 1; i < 12; i++) {
+
+      htmlTable += `<tr class="hour${i}"><th>${i}am</th>`;
+      calendars.forEach(calendarTitle => {
+      
+        htmlTable += `<td datetime="${day}T${String(i).padStart(2, "0")}:00" data-calendar="${calendarTitle}"></td>`;
+      });
+      htmlTable += `</tr>`;
+    }
+
+    for (let i = 12; i < 24; i++) {
+
+      htmlTable += `<tr class="hour${i}"><th>${i}pm</th>`;
+      calendars.forEach(calendarTitle => {
+      
+        htmlTable += `<td datetime="${day}T${String(i).padStart(2, "0")}:00" data-calendar="${calendarTitle}"></td>`;
+      });
+      htmlTable += `</tr>`;
+    }
+    htmlTable += `</tbody>`;
+    htmlTable += '</table>';
+
+    return htmlTable;
   }
 
   /*
@@ -281,7 +351,6 @@ class iamCalendar extends HTMLElement {
 
   addEvents(): void {
 
-
     function adjustEvent(component, element, continued: false): void {
 
       const datetime = element.getAttribute('datetime');
@@ -289,18 +358,21 @@ class iamCalendar extends HTMLElement {
       const date = new Date(datetime);
       const dayOfWeek = date.getDay() ? date.getDay(): 7;
 
-      const timeTd = component.shadowRoot.querySelector(`.table--day td[datetime="${datetime}"]`);
+      const timeTd = component.shadowRoot.querySelector(`.table--day td[datetime="${datetime}"]${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
       const dateTd = timeTd?.parentElement?.closest('td');
 
-      element.setAttribute('slot',datetime);
+
+
+      element.setAttribute('slot',`${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}`);
       
       // Add matching slot to the event element to have it show in the correct place on the calendar
       if(timeTd){
 
-        if(!timeTd.querySelector('slot'))
-          timeTd.insertAdjacentHTML('afterbegin',`<slot name="${datetime}" class="${continued ? 'continued': ''}"></slot>`)
-
-
+        if(!timeTd.querySelector(`slot[name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}"]`)){
+          timeTd.insertAdjacentHTML('beforeEnd',`<slot name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}" class="${continued ? 'continued': ''}"></slot>`)
+        
+          
+        }
       }
 
       // Add CSS properties so we can control the size of the event elements
@@ -381,16 +453,13 @@ class iamCalendar extends HTMLElement {
             adjustEvent(component, cloneElement, true)
           }
 
-
-          console.log(element.getAttribute('data-days'));
-
-          console.log(element);
         }
 
         element.classList.add('processed');
       }
 
       // Work out if we need to offset the start of displaying the events due to previous days overlapping
+      /*
       if(dateTd){
         dateTd.setAttribute('data-events',parseInt(timeTd.getAttribute('data-events') ? timeTd.getAttribute('data-events') : 0)+1);
         const prevDateCell = dateTd?.previousSibling;
@@ -399,6 +468,7 @@ class iamCalendar extends HTMLElement {
           dateTd.style.setProperty('--event-offset',`${prevDateCell.getAttribute('data-events') ? prevDateCell.getAttribute('data-events') : 0}rem`);
         }
       }
+        */
     }
 
 
@@ -464,8 +534,8 @@ class iamCalendar extends HTMLElement {
   connectedCallback(): void {
 
     const title = this.shadowRoot?.querySelector('.calendar__title');
-    const tbody = this.shadowRoot?.querySelector('tbody');
-    const thead = this.shadowRoot?.querySelector('thead');
+    const tbody = this.shadowRoot?.querySelector('.calendar > table > tbody');
+    const thead = this.shadowRoot?.querySelector('.calendar > table > thead');
     const datePicker = this.shadowRoot?.querySelector(`#date`);
     const viewPicker = this.shadowRoot?.querySelector(`#view`);
 
@@ -486,8 +556,13 @@ class iamCalendar extends HTMLElement {
     const year = today.getFullYear();
     const strToday = `${year}-${String(month+1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
 
-    
-    this.setAttribute('data-view', "month");
+    // Setup the view, month being default
+    if(this.hasAttribute('data-view'))
+      viewPicker.value = this.getAttribute('data-view');
+    else {
+      this.setAttribute('data-view', "month");
+      viewPicker.value = "month";
+    }
 
     // Add calendar events
     title?.innerHTML = this.getTitle(strToday,viewPicker.value);
@@ -531,6 +606,26 @@ class iamCalendar extends HTMLElement {
       tbody?.innerHTML = this.createCalendar(datePicker.value, strToday);
       this.addEvents();
     });
+
+    console.log(this.shadowRoot.querySelectorAll('.calendar > table > tr > td'));
+
+    Array.from(this.shadowRoot.querySelectorAll('.calendar > table > tbody > tr > td')).forEach(td => {
+      
+      console.log(td)
+
+      td?.addEventListener('click', (event)=> {
+
+        if(event.target == td){
+          
+          console.log('hey');
+        }
+
+
+      });
+
+    });
+
+
 
     // TODO
     trackComponent(this, 'iam-calendar', [
