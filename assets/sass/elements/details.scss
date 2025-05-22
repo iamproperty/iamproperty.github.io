@@ -119,7 +119,7 @@ $darkMode: 'true' !default;
 
       font-size: rem(18);
       line-height: var(--line-height);
-      padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
+      padding-bottom: map.get($heading-sizes, 'h3_pb');
       font-weight: 700;
       max-width: 100%;
 
@@ -139,9 +139,7 @@ $darkMode: 'true' !default;
       }
 
       @include media-breakpoint-up(sm, $mobileOnly) {
-        font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
-        --line-height: #{rem(map.get($heading-sizes, 'h3_lh_sm'))};
-        padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
+
         font-weight: 900;
       }
     }
