@@ -30,6 +30,7 @@ $darkMode: 'true' !default;
   @include gap();
   @include text();
   @include colours();
+  @include gradients();
   @include wider-colours();
   @include pointer-events();
   @include rounded();
