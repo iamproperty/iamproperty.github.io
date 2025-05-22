@@ -24,7 +24,6 @@ class iamMenu extends HTMLElement {
     const menuID = this.hasAttribute('id') ? this.getAttribute('id') : false;
     const menuButton = document.querySelector(`[popovertarget="${menuID}"]`);
 
-    //const menuInner = this.shadowRoot.querySelector('.menu--inner');
     const topLevelmenuItems = this.querySelectorAll(':scope > a, :scope > button, :scope > details > summary');
     const menuItems = this.querySelectorAll('a, button');
     const subMenus = this.querySelectorAll('details');
@@ -141,6 +140,17 @@ class iamMenu extends HTMLElement {
         e.preventDefault();
         this.removeAttribute('popover-open');
         this.hidePopover();
+      }
+
+      if(this.matches(':popover-open') && document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)){
+
+        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.setAttribute('aria-pressed','true');
+        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.classList.add('active');
+      }
+      else {
+
+        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.removeAttribute('aria-pressed');
+        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.classList.remove('active');
       }
     });
 

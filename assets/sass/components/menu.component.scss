@@ -22,6 +22,12 @@
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
 }
 
+:host(.menu--fill) {
+  width: anchor-size(width);
+  min-width: anchor-size(width);
+  max-width: anchor-size(width);
+}
+
 :host(:popover-open),
 :host([popover-open]) {
   display: block;
@@ -73,6 +79,7 @@
 
 ::slotted(*:is(span):first-child) {
   padding-top: 0 !important;
+  font-weight: 700 !important;
 }
 
 ::slotted(*:is(button, a, label, span):last-child) {
@@ -100,6 +107,17 @@
   background: #e9f8fc !important;
   border-left: 4px solid var(--colour-info) !important;
   border-radius: 0.25rem !important;
+
+  
+  padding-left: calc(var(--menu-item-padding, 0.5rem) - 4px)!important;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::slotted(*:is(button, a, label):is(.selected):not(:hover, .hover)) {
+  
+    color: black!important;
+  }
 }
 
 ::slotted(*:is(button, a, label):is(:hover, .hover, :focus, .focus)) {
@@ -111,6 +129,14 @@
 ::slotted(*:is(button, a, label):is(:active, .active)) {
   background: rgba(224, 224, 224, 1) !important;
   border-radius: 0.25rem !important;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::slotted(*:is(button, a, label):is(:active, .active)) {
+  
+    color: black!important;
+  }
 }
 
 ::slotted(hr) {
