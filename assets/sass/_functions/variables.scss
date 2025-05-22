@@ -480,16 +480,16 @@ $vars: map.merge((
 
 /* Headings variables are setup this way so that we can export them into the vue documentation */
 $heading-sizes: (
-  /* H1 */ 'h1_fs': round(calc(var(--body-fs, 1rem) * var(--type-scale) * var(--type-scale) * var(--type-scale) * var(--type-scale) * var(--type-scale) * var(--type-scale)), 0.25rem),
+  /* H1 */ 'h1_fs': round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 6)), 0.25rem),
   'h1_lh': round(calc(1em * var(--type-scale)), 0.25rem),
   'h1_pb': round(calc(1em * var(--type-scale)), 0.25rem),
-  /* H2 */ 'h2_fs': round(calc(var(--body-fs, 1rem) * var(--type-scale) * var(--type-scale) * var(--type-scale) * var(--type-scale) * var(--type-scale)), 0.25rem),
+  /* H2 */ 'h2_fs': round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 5)), 0.25rem),
   'h2_lh': round(calc(1em * var(--type-scale)), 0.25rem),
   'h2_pb': round(calc(1em * var(--type-scale)), 0.25rem),
-  /* H3 */ 'h3_fs': round(calc(var(--body-fs, 1rem) * var(--type-scale) * var(--type-scale) * var(--type-scale)), 0.25rem),
+  /* H3 */ 'h3_fs': round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 3)), 0.25rem),
   'h3_lh': round(up, calc(1em * var(--type-scale)), 0.25rem),
   'h3_pb': round(up, calc(1em * var(--type-scale)), 0.25rem),
-  /* H4 */ 'h4_fs': round(calc(var(--body-fs, 1rem) * var(--type-scale) * var(--type-scale)), 0.25rem),
+  /* H4 */ 'h4_fs': round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 2)), 0.25rem),
   'h4_lh': round(up, calc(1em * var(--type-scale)), 0.25rem),
   'h4_pb': round(up, calc(1em * var(--type-scale)), 0.25rem),
   'lead_fs': 18,

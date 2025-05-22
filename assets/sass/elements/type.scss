@@ -95,7 +95,6 @@ $darkMode: 'true' !default;
     line-height: rem(map.get($heading-sizes, 'small_lh'));
     padding-bottom: rem(map.get($heading-sizes, 'small_pb'));
     max-width: var(--content-max-width);
-    font-family: arial, sans-serif;
     font-weight: normal;
   }
 

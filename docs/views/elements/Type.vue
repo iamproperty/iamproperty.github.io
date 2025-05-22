@@ -108,7 +108,7 @@
     <div class="container visualtest">
       <h2>Typography - Body</h2>
       <p class="lead">
-        Our body font is Qantas. It should be used for all supporting copy or information. All body will have a
+        Our body font is Qanelas. It should be used for all supporting copy or information. All body will have a
         max-width of {{ $shared.cssVars.text_mw_rem }} ({{ $shared.cssVars.text_mw }}px) applied to aid readability.
       </p>
 
@@ -136,10 +136,29 @@
               >
             </div>
           </div>
+
           <!-- Body -->
           <div class="row">
             <div class="col-12 col-sm-7 mb-2">
               <p class="lead pb-1">BODY</p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna
+                aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+              </p>
+
+            </div>
+            <div class="col-12 col-sm-4 mb-5 ms-auto">
+              <p class="small extra-small pb-2">
+                body<br />Font-family: Qanelas<br />Font-weight: Normal<br />Font-size:
+                {{ $shared.cssVars.body_fs_rem }} ({{ $shared.cssVars.body_fs }}px)<br />Letter-spacing: 0px<br />Line-height: auto
+              </p>
+            </div>
+          </div>
+
+          <!-- Paragraph -->
+          <div class="row">
+            <div class="col-12 col-sm-7 mb-2">
+              <p class="lead pb-1">PARAGRAPH</p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.<span
@@ -184,7 +203,7 @@
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <p class="small extra-small pb-2">
-                .small, small<br />Font-family: Arial<br />Font-weight: Medium<br />Font-size:
+                .small, small<br />Font-family: Qanelas<br />Font-weight: Medium<br />Font-size:
                 {{ $shared.cssVars.small_fs_rem }} ({{ $shared.cssVars.small_fs }}px)<br />Letter-spacing: 0px<br />Line-height:
                 {{ $shared.cssVars.small_lh_rem }} ({{ $shared.cssVars.small_lh }}px)<br />Padding-bottom:
                 {{ $shared.cssVars.small_pb_rem }} ({{ $shared.cssVars.small_pb }}px)
@@ -199,7 +218,7 @@
       <h3 class="h4 pb-2">Blockquote</h3>
       <blockquote>
         <p>
-          Our body font is Qantas. It should be used for all supporting copy or information. All body will have a
+          Our body font is Qanelas. It should be used for all supporting copy or information. All body will have a
           max-width of 50rem (800px) applied to aid readability.
         </p>
         <cite>Citation</cite>
