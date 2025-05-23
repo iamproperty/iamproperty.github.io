@@ -26,7 +26,11 @@
     </p>
 
     <BentoGrid>
-      <details name="bento" class="bg-info gradient-primary gradient-direction-angle invert-colours " style="--bg: url('/iamsold-screenshot.png')">
+      <details
+        name="bento"
+        class="bg-info gradient-primary gradient-direction-angle invert-colours"
+        style="--bg: url('/iamsold-screenshot.png')"
+      >
         <summary>The power of auction</summary>
         <ul class="tick-list tick-list--white">
           <li>Faster timescales with 56-day completions*</li>
@@ -59,7 +63,11 @@
         <a href="" class="btn btn-secondary">Explore auction</a>
       </details>
 
-      <details name="bento" class="bg-success gradient-primary gradient-direction-angle invert-colours " style="--bg: url('/market-appraisal-screenshot.png')">
+      <details
+        name="bento"
+        class="bg-success gradient-primary gradient-direction-angle invert-colours"
+        style="--bg: url('/market-appraisal-screenshot.png')"
+      >
         <summary>Stand our from the crowd</summary>
         <ul class="tick-list tick-list--white">
           <li>Faster timescales with 56-day completions*</li>

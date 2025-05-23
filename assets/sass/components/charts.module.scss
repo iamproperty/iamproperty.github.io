@@ -2,8 +2,6 @@
 
 @use '../_func' as *;
 
-
-
 $chart-colour-1-hover: map.get($wider-colours-hover, '3') !default;
 $chart-colour-2-hover: map.get($wider-colours-hover, '4') !default;
 $chart-colour-3-hover: map.get($wider-colours-hover, '5') !default;

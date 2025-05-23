@@ -285,7 +285,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
     .th--fixed + th:not(.th--fixed),
     .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 6))!important;
+      padding-left: calc(rem(48 + 6)) !important;
     }
 
     .th--fixed + .th--fixed,
@@ -295,7 +295,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
     .th--fixed + .th--fixed + th:not(.th--fixed),
     .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 48 + 6))!important;
+      padding-left: calc(rem(48 + 48 + 6)) !important;
     }
 
     .th--fixed + .th--fixed + .th--fixed,
@@ -305,7 +305,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
     .th--fixed + .th--fixed + .th--fixed + th:not(.th--fixed),
     .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 48 + 48 + 6))!important;
+      padding-left: calc(rem(48 + 48 + 48 + 6)) !important;
     }
 
     .dialog__wrapper {
@@ -348,7 +348,7 @@ $icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'
   }
 
   &:has(th[data-sort]) :is(th, td) {
-    padding-left: 0.25rem!important;
+    padding-left: 0.25rem !important;
   }
 
   th[data-sort][data-order-by='asc'] {

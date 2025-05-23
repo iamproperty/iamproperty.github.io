@@ -1,17 +1,36 @@
+@use '../_func.scss' as *;
+
 :host {
+  //all: unset;
   inset: auto;
-  top: anchor(top);
-  left: calc(anchor(right) + var(--menu-offset, 0.25rem));
+  top: anchor(bottom);
+  left: anchor(left);
   position: fixed;
   position-try-fallbacks: flip-block, flip-inline;
   width: max-content;
-  min-width: calc(anchor-size(width) + 2rem);
 
-  max-height: var(--menu-max-height, min-contents);
+  height: min-content;
+  max-height: var(--menu-max-height, min(100vh - 6rem));
   background: var(--menu-bg, canvas);
   margin: var(--menu-margin, 0);
-  padding: var(--menu-padding, 0.25rem);
+  padding: var(--menu-padding, 0.5rem);
   border: var(--menu-border, 2px solid grey);
+  overflow: auto;
+
+  border: none !important;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+}
+
+:host(.menu--fill) {
+  width: anchor-size(width);
+  min-width: anchor-size(width);
+  max-width: anchor-size(width);
+}
+
+:host(:popover-open),
+:host([popover-open]) {
+  display: block;
 }
 
 :host(:not([popover])) {
@@ -19,60 +38,132 @@
   display: block;
 }
 
-.menu--inner {
-  display: contents;
+:host(.menu--sm) {
+  width: rem(160);
+}
+:host(.menu--md) {
+  width: rem(240);
+}
+:host(.menu--lg) {
+  width: rem(320);
 }
 
-::slotted(*:not(iam-menu)) {
+:host(.menu--height-sm) {
+  max-height: rem(200);
+}
+:host(.menu--height-lg) {
+  max-height: rem(400);
+}
+
+::slotted(*:is(button, a, label, span)) {
   //all: unset !important;
   background: unset !important;
   border: unset !important;
-  color: inherit !important;
+  color: var(--colour-primary) !important;
   font-weight: inherit !important;
   font-family: inherit !important;
   font-size: 1rem !important;
+  line-height: rem(19) !important;
   display: block !important;
   margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
-  padding: var(--menu-item-padding, 0) !important;
+  padding-block: var(--menu-item-padding, 0.5rem) !important;
   width: var(--menu-item-width, 100%) !important;
+  max-width: var(--menu-item-width, 100%) !important;
   text-align: var(--menu-item-text-align, left) !important;
+}
+
+::slotted(*:is(button, a, label)) {
+  padding-inline: var(--menu-item-padding, 0.5rem);
   cursor: var(--menu-item-cursor, pointer) !important;
 }
 
-::slotted(details) {
-  margin: 0 !important;
-  padding: 0 !important;
-}
-::slotted(*:not(iam-menu):not([class*='fa-'])):before {
-  display: none !important;
-}
-::slotted(*[class*='fa-']):before {
-  font-family: var(--fa-font-family, 'Font Awesome 6 Pro');
-}
-::slotted(*:not(iam-menu)):after {
-  display: none !important;
+::slotted(*:is(span):first-child) {
+  padding-top: 0 !important;
+  font-weight: 700 !important;
 }
 
-::slotted(*:not(iam-menu):focus) {
-  color: var(--menuFocusColor, LinkText) !important;
+::slotted(*:is(button, a, label, span):last-child) {
+  margin-bottom: 0 !important;
 }
-::slotted(*:not(iam-menu):not(details):hover) {
-  color: var(--menuHoverColor, LinkText) !important;
+
+// Radio buttons
+
+::slotted(*:is(label)) {
+  --radio-size: #{rem(20)};
+  --radio-inner-size: #{rem(12)};
+  --radio-inner-top: #{rem(12)};
+  --radio-inner-left: #{rem(12)};
+
+  --checkbox-tick-size: #{rem(12)};
+  --checkbox-inner-size: #{rem(10)};
+  --checkbox-inner-top: #{rem(6)};
+  --checkbox-inner-left: #{rem(8)};
+  padding-left: rem(36) !important;
 }
-::slotted(*:not(iam-menu):not(details):active) {
-  color: var(--menuActiveColor, ActiveText) !important;
+
+// States
+
+::slotted(*:is(button, a, label):is(.selected)) {
+  background: #e9f8fc !important;
+  border-left: 4px solid var(--colour-info) !important;
+  border-radius: 0.25rem !important;
+
+  
+  padding-left: calc(var(--menu-item-padding, 0.5rem) - 4px)!important;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::slotted(*:is(button, a, label):is(.selected):not(:hover, .hover)) {
+  
+    color: black!important;
+  }
+}
+
+::slotted(*:is(button, a, label):is(:hover, .hover, :focus, .focus)) {
+  //all: unset !important;
+  background: var(--colour-light) !important;
+  border-radius: 0.25rem !important;
+}
+
+::slotted(*:is(button, a, label):is(:active, .active)) {
+  background: rgba(224, 224, 224, 1) !important;
+  border-radius: 0.25rem !important;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::slotted(*:is(button, a, label):is(:active, .active)) {
+  
+    color: black!important;
+  }
 }
 
 ::slotted(hr) {
-  height: 2px !important;
+  height: 1px !important;
   background-color: var(--menu-hr-border-color, var(--border-color, grey)) !important;
-  margin-left: calc(var(--menu-padding, 0.25rem) * -1) !important;
-  margin-right: calc(var(--menu-padding, 0.25rem) * -1) !important;
-  width: calc(100% + var(--menu-padding, 0.25rem) * 2) !important;
-  margin-top: var(--menu-hr-margin, 0.75rem) !important;
-  margin-bottom: var(--menu-hr-margin, 1rem) !important;
+  width: 100%;
+  margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
   padding: 0 !important;
 }
+
+// #region sub menu
+::slotted(iam-menu:not([popover])) {
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
+
+::slotted(iam-menu[popover]) {
+  top: anchor(top);
+  left: calc(anchor(right) + 1rem);
+}
+// #endregion
+
+/*
 
 ::slotted([popovertarget]):before {
   text-align: center;
@@ -99,3 +190,4 @@
   -webkit-mask-position: 50% 50%;
   z-index: 2;
 }
+*/
