@@ -36,6 +36,13 @@ $darkMode: 'true' !default;
   @include media-breakpoint-up(md, $mobileOnly) {
     padding-left: 5.25rem !important;
   }
+
+  &.inline {
+    .side-menu {
+      position: absolute;
+      top: 0;
+    }
+  }
 }
 
 // #region Side menu
@@ -77,6 +84,7 @@ $darkMode: 'true' !default;
 
       .btn[class*='fa-']:before {
         content: '\f023' !important;
+        transform: rotate(0);
       }
     }
   }
@@ -236,5 +244,66 @@ $darkMode: 'true' !default;
 @include media-breakpoint-up(md, $mobileOnly) {
   :host([open-always]) {
     --btn-display: none;
+  }
+}
+
+:host([inline]) {
+  width: 100%;
+  max-width: 100%;
+
+  @include media-breakpoint-up(md, $mobileOnly) {
+    max-width: min(var(--container-max-width), 100% - 19rem);
+  }
+}
+
+:host([menu-right]) {
+  .container {
+    padding-right: 0 !important;
+    
+    @include media-breakpoint-up(md, $mobileOnly) {
+      padding-right: 5.25rem !important;
+    }
+  }
+
+  @include media-breakpoint-up(md, $mobileOnly) {
+    .container:has(.side-menu.open) {
+      margin-right: max(19rem, calc(50% - calc(var(--container-max-width) / 2)));
+      margin-left: 0;
+    }
+  }
+
+  .side-menu {
+    left: auto;
+    right: -2.5rem;
+    padding: 0 0 0 rem(40);
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      right: 0;
+    }
+
+    &::before {
+      right: 100%;
+    }
+
+    .btn {
+      right: 100%;
+
+      &:before {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  
+  .main-content {
+    padding-left: var(--container-padding-x);
+    padding-right: rem(60);
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      padding-right: rem(80);
+    }
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      padding-right: 0;
+    }
   }
 }

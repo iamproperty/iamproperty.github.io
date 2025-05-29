@@ -1108,12 +1108,28 @@ const routes = [
         searchterms: 'iamsold, iam sold',
       },
       {
-        path: 'collapsible-side-menu',
-        name: 'Collapsible Side Menu example',
+        path: 'collapsible-side-menu-default',
+        name: 'Collapsible Side Menu default example',
         meta: {
-          title: 'Collapsible Side Menu example| iamkey',
+          title: 'Collapsible Side Menu default example | iamkey',
         },
-        component: () => import('./views/standalone/CollapsibleSideMenu.vue'),
+        component: () => import('./views/standalone/CollapsibleSideMenuDefault.vue'),
+      },
+      {
+        path: 'collapsible-side-menu-inline',
+        name: 'Collapsible Side Menu inline example',
+        meta: {
+          title: 'Collapsible Side Menu inline example | iamkey',
+        },
+        component: () => import('./views/standalone/CollapsibleSideMenuInline.vue'),
+      },
+      {
+        path: 'collapsible-side-menu-disableCollapse',
+        name: 'Collapsible Side Menu disable collapse example',
+        meta: {
+          title: 'Collapsible Side Menu disable collapse example | iamkey',
+        },
+        component: () => import('./views/standalone/CollapsibleSideMenuDisableCollapse.vue'),
       },
       {
         path: 'crm-mb',

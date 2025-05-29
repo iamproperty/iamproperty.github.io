@@ -218,9 +218,7 @@ iam-collapsible-side a {
   &:hover,
   &:focus,
   &[aria-expanded] {
-    &:not([class*='active']) {
-      background-color: var(--colour-light) !important;
-    }
+    background-color: var(--colour-activeLink) !important;
   }
 }
 
@@ -260,6 +258,7 @@ iam-collapsible-side {
       display: none;
 
       a {
+        background-color: var(--colour-light) !important;
         padding-left: rem(90) !important;
       }
     }

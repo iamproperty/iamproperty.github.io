@@ -51,6 +51,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
   connectedCallback(): void {
     if (!this.shadowRoot) return;
 
+    const container = this.shadowRoot.querySelector('.container');
     const sideMenu = this.shadowRoot.querySelector('.side-menu');
     const sideMenuContent = this.shadowRoot.querySelector('.side-menu-content');
     const mainContent = this.shadowRoot.querySelector('.main-content');
@@ -82,6 +83,14 @@ class iamCollapsibleSideMenu extends HTMLElement {
     if (this.hasAttribute('open') && window.innerWidth > 992) {
       sideMenu.classList.add('open');
       button.setAttribute('aria-expanded', 'true');
+    }
+
+    if (this.hasAttribute('inline')) {
+      container.classList.add('inline');
+    }
+
+    if (this.hasAttribute('menu-right')) {
+      sideMenu.classList.add('menu-right');
     }
 
     // Open the menu
