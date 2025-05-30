@@ -1,8 +1,6 @@
 @use 'sass:map';
 @use '../_func.scss' as *;
 
-
-
 @use '../elements/type.scss' as *;
 
 @include max-height();
@@ -14,7 +12,6 @@
 }
 
 .podium {
-
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -29,7 +26,6 @@
     order: 1;
 
     iam-rank {
-
       margin: 0;
       width: 100%;
     }
@@ -48,14 +44,12 @@
     }
   }
 
-
   > div:nth-child(1) {
     order: 2;
     padding: 0;
   }
 
   > div:nth-child(2) {
-    
     padding: 1rem 1rem 0 0;
   }
 
