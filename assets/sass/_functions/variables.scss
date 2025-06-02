@@ -760,8 +760,6 @@ $ut-mh-lg-px: 600;
 $ut-mh-lg: #{rem($ut-mh-lg-px)};
 // #endregion
 
-
-
 $chart-colour-1: map.get($wider-colours, '3') !default;
 $chart-colour-2: map.get($wider-colours, '4') !default;
 $chart-colour-3: map.get($wider-colours, '5') !default;
@@ -789,4 +787,3 @@ $chart-colors: map.merge(
   ),
   $chart-colors
 );
-
