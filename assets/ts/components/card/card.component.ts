@@ -57,7 +57,36 @@ class iamCard extends HTMLElement {
         <slot name="btns"></slot>
       </div>
     </div>`;
+
+      // safari and firefox anchor fix for cards
+      if (!CSS.supports('top', 'anchor(top)')) {
+
+
+        const actionButton = this.shadowRoot?.querySelector('[popovertarget="actions"]');
+        const actionPopover = this.shadowRoot?.querySelector('[popover]');
+
+        actionButton?.addEventListener('click', (event) => {
+
+          this.style.setProperty('overflow', 'visible');
+          this.style.setProperty('z-index', '999999');
+
+          const viewportOffset = actionButton.getBoundingClientRect();
+          const top = viewportOffset.top;
+          const left = viewportOffset.left;
+
+          actionPopover.style.setProperty('display', 'block');
+          actionPopover.style.setProperty('top', top + 'px');
+          actionPopover.style.setProperty('left', (left - 100) + 'px');
+        });
+
+        document.addEventListener("scroll", (event) => {
+
+          actionPopover.style.setProperty('display', 'none');
+        });
+
+      }
     }
+
 
     // Make sure slotted buttons and links have correct button classes
     Array.from(cardComponent.querySelectorAll('[slot="btns"]')).forEach((button) => {

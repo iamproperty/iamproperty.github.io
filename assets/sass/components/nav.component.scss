@@ -579,13 +579,11 @@ $darkMode: 'true' !default;
     font-weight: $headings-font-weight;
     color: $headings-color;
     clear: both;
-    font-size: rem(map.get($heading-sizes, 'h3_fs'));
-    line-height: rem(map.get($heading-sizes, 'h3_lh'));
+    font-size: map.get($heading-sizes, 'h3_fs');
+    line-height: map.get($heading-sizes, 'h3_lh');
     max-width: var(--content-max-width);
 
     @include media-breakpoint-up(sm, $mobileOnly) {
-      font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
-      line-height: rem(map.get($heading-sizes, 'h3_lh_sm'));
       margin-right: -2.5rem;
       padding-right: 2.5rem;
       width: calc(100% + 4rem);

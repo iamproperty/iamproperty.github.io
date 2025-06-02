@@ -1,5 +1,7 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
+import {loadYouTubeScripts,createYoutTubeVideo} from '../../modules/videos';
+
 
 trackComponentRegistered('iam-video-card');
 
@@ -73,7 +75,7 @@ class iamVideoCard extends HTMLElement {
       // Load the scripts only once
       if (!document.body.classList.contains('youtubeLoaded')) {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const loaded = await this.loadYouTubeScripts();
+        const loaded = await loadYouTubeScripts();
       }
       cardHead.addEventListener('click', function () {
         const customEvent = new CustomEvent('play-video', {
@@ -81,7 +83,7 @@ class iamVideoCard extends HTMLElement {
         });
         cardComponent.dispatchEvent(customEvent);
 
-        cardComponent.createYoutTubeVideo(embed);
+        createYoutTubeVideo(embed,this.getAttribute('[data-youtbue]'));
         dialog.showModal();
       });
 
@@ -126,81 +128,6 @@ class iamVideoCard extends HTMLElement {
     }
 
     trackComponent(cardComponent, 'iam-video-card', ['play-video', 'close-video']);
-  }
-
-  loadYouTubeScripts(): any {
-    return new Promise((resolve, reject) => {
-      const image = new Image();
-      image.onload = function (): any {
-        // This code loads the IFrame Player API code asynchronously.
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        document.body.classList.add('youtubeLoaded');
-        resolve(true);
-      };
-      image.onerror = function (): any {
-        reject(false);
-      };
-      image.src = 'https://youtube.com/favicon.ico';
-    });
-  }
-
-  createYoutTubeVideo(target): void | boolean {
-    if (typeof window.player == 'undefined') {
-      window.player = [];
-    }
-
-    const link_id = target.getAttribute('id');
-    const video_id = this.getAttribute('data-youtube');
-
-    console.log(window.player);
-
-    if (typeof window.player[link_id] != 'undefined' && typeof window.player[link_id].pauseVideo == 'function') {
-      window.player[link_id].playVideo();
-
-      return false;
-    }
-
-    // This function creates an <iframe> (and YouTube player) after the API code downloads.
-    //function onYouTubeIframeAPIReady() {
-
-    window.player[link_id] = new YT.Player(link_id, {
-      height: '100%',
-      width: '100%',
-      videoId: video_id,
-      playerVars: {
-        modestbranding: 1,
-        playsinline: 1,
-        rel: 0,
-        showinfo: 0,
-      },
-      events: {
-        onReady: onPlayerReady,
-        onStateChange: onPlayerStateChange,
-      },
-    });
-    //}
-    //onYouTubeIframeAPIReady();
-
-    // The API will call this function when the video player is ready.
-    function onPlayerReady(event): void {
-      // Play the video straight away
-      event.target.playVideo();
-    }
-
-    // The API calls this function when the player's state changes.
-    // The function indicates that when playing a video (state=1)
-    let done = false;
-    function onPlayerStateChange(event): void {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-        const link = document.getElementById(link_id);
-        link.classList.add('player-ready');
-
-        done = true;
-      }
-    }
   }
 
   static get observedAttributes(): any {

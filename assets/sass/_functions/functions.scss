@@ -174,7 +174,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
 // Color contrast
 // See https://github.com/twbs/bootstrap/pull/30168
 
-// A list of pre-calculated numbers of pow(divide((divide($value, 255) + .055), 1.055), 2.4). (from 0 to 255)
+// A list of pre-calculated numbers of Pow(divide((divide($value, 255) + .055), 1.055), 2.4). (from 0 to 255)
 // stylelint-disable-next-line scss/dollar-variable-default, scss/dollar-variable-pattern
 $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0.0027 0.003 0.0033 0.0037 0.004 0.0044
   0.0048 0.0052 0.0056 0.006 0.0065 0.007 0.0075 0.008 0.0086 0.0091 0.0097 0.0103 0.011 0.0116 0.0123 0.013 0.0137
@@ -359,7 +359,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @return map.get($spacers, $int);
 }
 
-@function pow($x, $n) {
+@function Pow($x, $n) {
   $ret: 1;
 
   @if $n >= 0 {
@@ -384,8 +384,8 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
     + "See https://github.com/sass/sass/issues/1122 for further informations.";
   }
 
-  $pow: pow(10, $digits);
-  @return math.div(round($float * $pow), $pow);
+  $Pow: Pow(10, $digits);
+  @return math.div(round($float * $Pow), $Pow);
 }
 
 // converts pixels to em (context sets the current size of the font)
@@ -393,8 +393,8 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @return #{math.div($pixels, $context)}em;
 }
 
-@function rem($pixels, $context: 16) {
-  @return #{math.div($pixels, $context)}rem;
+@function rem($pixels) {
+  @return #{math.div($pixels, 16)}rem;
 }
 
 @function vw($pixels, $context: 16) {

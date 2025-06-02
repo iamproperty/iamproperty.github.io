@@ -12,18 +12,29 @@
       </p>
     </div>
     <div class="container visualtest pt-2">
-      <Input type="checkbox-btn" id="test7" label="Label"></Input>
 
-      <pre><code>&lt;input type="checkbox" autocomplete="off" name="test8" id="test8" class="btn-check">
-&lt;label for="test8" class="btn">Label&lt;/label></code></pre>
+      <label class="toggle">
+        <input type="checkbox" name="checkbox1"/>
+        Edit content overlay
+      </label>
+      <pre><code>{{ `<label class="toggle">
+  <input type="checkbox" />
+  Edit content overlay
+</label>` }}</code></pre>
 
       <h2>Conditional reveal</h2>
       <p class="visualtest-hide">Like other checkboxes we can add in conditional content revealed when checked.</p>
 
-      <Input type="checkbox-btn" id="test8" label="Label"></Input>
+      <label class="toggle">
+        <input type="checkbox" name="checkbox2"/>
+        Edit content overlay
+      </label>
+      
       <div class="conditional">
         <p>Content 1.</p>
       </div>
+
+
 
       <h2>Multi option toggle buttons</h2>
       <p class="visualtest-hide">
@@ -32,17 +43,22 @@
       </p>
 
       <div class="btn-group d-block col-md-8">
-        <Input
-          type="radio-btn"
-          id="test9"
-          name="radio5"
-          label="Option 1"
-          labelclass="btn-tertiary col-4"
-          checked="checked"
-        ></Input>
-        <Input type="radio-btn" id="test9a" name="radio5" label="Option 2" labelclass="btn-tertiary col-4"></Input>
-        <Input type="radio-btn" id="test9b" name="radio5" label="Option 3" labelclass="btn-tertiary col-4"></Input>
+
+        <label class="toggle">
+          <input type="radio" name="radio" class="conditional-input-1"/>
+          Option 1
+        </label>
+        <label class="toggle">
+          <input type="radio" name="radio" class="conditional-input-2"/>
+          Option 2
+        </label>
+        <label class="toggle">
+          <input type="radio" name="radio" class="conditional-input-3"/>
+          Option 3
+        </label>
+
         <hr />
+
         <div class="conditional conditional-1">
           <p>Content 1.</p>
         </div>
