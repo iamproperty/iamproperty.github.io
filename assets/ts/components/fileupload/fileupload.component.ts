@@ -66,7 +66,7 @@ class iamFileupload extends HTMLElement {
           const filesWrapper = this.shadowRoot.querySelector('.files');
 
           if (newVal != null && newVal != 'null' && newVal != '')
-            filesWrapper.innerHTML = `<span class="file">${newVal} <button data-file="${newVal}">Remove</button></span>`;
+            filesWrapper.innerHTML = `<span class="file" part="file">${newVal} <button data-file="${newVal}" part="file__remove">Remove</button></span>`;
         }
         break;
       }

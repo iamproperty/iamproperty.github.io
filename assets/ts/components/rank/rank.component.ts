@@ -247,17 +247,12 @@ class iamRank extends HTMLElement {
   }
 
   connectedCallback(): void {
-
-
     const position = this.hasAttribute('data-position') ? this.getAttribute('data-position') : this.textContent?.trim();
-    
+
     this.setAttribute('data-position', position);
 
-
-    
     trackComponent(this, 'iam-rank', ['select-card']);
   }
-
 }
 
 export default iamRank;

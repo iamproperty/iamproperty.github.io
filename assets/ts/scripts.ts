@@ -4,6 +4,7 @@ import extendDialogs from './modules/dialogs';
 import createDataLayer from './modules/data-layer';
 import extendInputs from './modules/inputs';
 import createDynamicEvents from './modules/dynamicEvents';
+import videoSupport from './modules/videos';
 
 const components = [
   'accordion',
@@ -39,7 +40,7 @@ const components = [
 ];
 
 // Attach classes to dom elements
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async():void => {
   createDataLayer();
   createDynamicEvents();
 
@@ -49,6 +50,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   extendDialogs(document.body);
   extendInputs(document.body);
+
+  videoSupport(document.body);
+
+
+
   /*
   const prefix = 'iam';
   const options = {

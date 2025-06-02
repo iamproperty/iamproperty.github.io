@@ -33,8 +33,6 @@ class iamRankings extends HTMLElement {
   }
 
   connectedCallback(): void {
-
-
     const firstText = this.shadowRoot?.querySelector('.first-position');
     const secondText = this.shadowRoot?.querySelector('.second-position');
     const thirdText = this.shadowRoot?.querySelector('.third-position');
@@ -44,19 +42,15 @@ class iamRankings extends HTMLElement {
     secondText?.innerHTML = this.querySelector('tbody tr:nth-child(2) :is(td,th):nth-child(1)')?.textContent;
     thirdText?.innerHTML = this.querySelector('tbody tr:nth-child(3) :is(td,th):nth-child(1)')?.textContent;
 
-
-    
     this.querySelectorAll('tbody tr').forEach((element) => {
-
       const value = element.querySelector('td:last-child')?.textContent?.trim();
 
-      if(!element.querySelector(':first-child progress'))
+      if (!element.querySelector(':first-child progress'))
         element.querySelector(':first-child')?.innerHTML += `<progress max="${max}" value="${value}"></progress>`;
     });
 
     trackComponent(this, 'iam-rank', ['select-card']);
   }
-
 }
 
 export default iamRankings;

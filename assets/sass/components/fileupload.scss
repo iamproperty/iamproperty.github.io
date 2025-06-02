@@ -22,9 +22,9 @@
     display: block;
     padding-bottom: 2rem;
 
-    font-size: rem(map.get($heading-sizes, 'h4_fs'));
-    line-height: rem(map.get($heading-sizes, 'h4_lh'));
-    padding-bottom: rem(map.get($heading-sizes, 'h4_pb'));
+    font-size: map.get($heading-sizes, 'h4_fs');
+    line-height: map.get($heading-sizes, 'h4_lh');
+    padding-bottom: map.get($heading-sizes, 'h4_pb');
     max-width: var(--content-max-width);
   }
 
@@ -75,6 +75,7 @@
       height: rem(18);
       width: rem(18);
       background: transparent;
+      color: inherit;
 
       &:after {
         content: '';

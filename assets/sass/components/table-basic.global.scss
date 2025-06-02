@@ -6,8 +6,6 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 // #region Basic table stuff
 
-
-
 :is(#{$selector}) {
   --hover-background: var(--colour-light);
   --row-bg: var(--colour-canvas-2);
@@ -207,11 +205,11 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 :is(#{$selector}).table--cta {
   @container (width > 23.4375em) {
-    padding-right: calc(var(--wrapper-padding) + 1.5rem)!important;
+    padding-right: calc(var(--wrapper-padding) + 1.5rem) !important;
 
     tr > th:nth-last-child(2),
     tr > td:nth-last-child(2) {
-      padding-right: var(--cta-width)!important;
+      padding-right: var(--cta-width) !important;
     }
 
     tr > *:not(:first-child):last-child {
