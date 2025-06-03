@@ -46,7 +46,7 @@ figure {
   }
 }
 
-img {
+::slotted(img) {
   pointer-events: none;
   position: absolute;
   inset: 0;

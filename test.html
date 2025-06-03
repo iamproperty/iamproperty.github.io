@@ -89,9 +89,9 @@
       @import "/assets/css/components/component.reset.css" layer(component);
     </style>-->
 
-    <link rel="preload" as="style" href="/assets/css/core.min.css">
+    <link rel="preload" as="style" href="/assets/css/style.min.css">
     <style>
-      @import "/assets/css/core.min.css";
+      @import "/assets/css/style.min.css";
     </style>  
 
 
@@ -111,28 +111,30 @@
         // Load components - Each component will load once the first of its type has been loaded
         components.forEach((component) => {
 
+          console.log(component);
+
           if(document.getElementsByTagName(`${prefix}-${component}`).length === 0)
             return;
 
-          let callback = (entries) => {
-            entries.forEach((entry) => {
+          //let callback = (entries) => {
+            //entries.forEach((entry) => {
               
-              if(entry.intersectionRatio > 0){
+              //if(entry.intersectionRatio > 0){
 
-                import(`/assets/js/components/${component}${componentExt}`).then(module => {
+                import(`/assets/js/components/${component}/${component}${componentExt}`).then(module => {
                   if (!window.customElements.get(`${prefix}-${component}`))
                     window.customElements.define(`${prefix}-${component}`, module.default);
                 }).catch((err) => {
                   console.log(err.message);
                 });  
 
-                intObserver.unobserve(entry.target);
-              }
-            });
-          };
+                //intObserver.unobserve(entry.target);
+              //}
+            //});
+          //};
 
-          const intObserver = new IntersectionObserver(callback, options);
-          intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
+          //const intObserver = new IntersectionObserver(callback, options);
+          //intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
         });
       }
       registerComponents();
