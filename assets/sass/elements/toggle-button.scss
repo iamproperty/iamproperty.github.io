@@ -5,10 +5,9 @@ $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @include layer('elements', $layers) {
-
-// #region toggle
+  // #region toggle
   .toggle {
-    --outline-width: 0.25rem!important;
+    --outline-width: 0.25rem !important;
     padding-left: 3.25rem !important;
   }
 
@@ -21,14 +20,14 @@ $darkMode: 'true' !default;
     left: 0.25rem !important;
   }
 
-  label.toggle:has(:is(input[type='checkbox'],input[type="radio"]):not([disabled]):checked):before {
+  label.toggle:has(:is(input[type='checkbox'], input[type='radio']):not([disabled]):checked):before {
     background: var(--colour-primary-theme) !important;
   }
 
   .toggle:after {
     position: absolute !important;
     content: '' !important;
-    display: block!important;
+    display: block !important;
     top: 0.5rem !important;
     height: 1em !important;
     width: 1em !important;
@@ -40,7 +39,7 @@ $darkMode: 'true' !default;
     border-radius: 0.5em;
   }
 
-  label.toggle:has(:is(input[type='checkbox'],input[type='radio']):not([disabled]):not([disabled]):checked):after {
+  label.toggle:has(:is(input[type='checkbox'], input[type='radio']):not([disabled]):not([disabled]):checked):after {
     background: var(--colour-primary-theme) !important;
     background-color: white !important;
     -webkit-transform: translateX(1rem) !important;
@@ -50,6 +49,6 @@ $darkMode: 'true' !default;
   // #endregion
 
   label.toggle:has(+ label.toggle) {
-    margin-bottom: 0!important;
+    margin-bottom: 0 !important;
   }
 }

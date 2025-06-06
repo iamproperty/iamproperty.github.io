@@ -142,13 +142,10 @@ class iamMenu extends HTMLElement {
         this.hidePopover();
       }
 
-      if(this.matches(':popover-open') && document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)){
-
-        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.setAttribute('aria-pressed','true');
+      if (this.matches(':popover-open') && document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)) {
+        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.setAttribute('aria-pressed', 'true');
         document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.classList.add('active');
-      }
-      else {
-
+      } else {
         document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.removeAttribute('aria-pressed');
         document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.classList.remove('active');
       }
