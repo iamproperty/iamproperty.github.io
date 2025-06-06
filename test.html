@@ -100,7 +100,7 @@
 
       function registerComponents () {
 
-        const components = ['nav','card','marketing','menu'];
+        const components = ['nav','card','content','menu'];
         const prefix = "iam"
         const options = {
           rootMargin: '50px',
@@ -139,42 +139,6 @@
       }
       registerComponents();
       
-
-      function generateNewJokes(contentDiv) {
-        const newXHRRequest = new XMLHttpRequest();
-        newXHRRequest.open(
-          "GET",
-          `http://localhost:8000/wp-json/wp/v2/posts/1`,
-          true
-        );
-
-        newXHRRequest.onload = function () {
-
-          let output = "";
-
-          console.log(this)
-
-          if (this.status === 200) {
-            const response = JSON.parse(this.responseText);
-            
-
-            output += `${response.content.rendered}`;
-            
-          }
-          else {
-
-              output += `<li>Sorry! Couldn't get jokes</li>`;
-          }
-          
-            contentDiv.innerHTML = output;
-            registerComponents();
-        };
-
-        newXHRRequest.send();
-      }
-
-      generateNewJokes(document.querySelector("#temp"));
-
     });
     </script>
 
@@ -255,9 +219,9 @@
   <div class="container pt-5">
     
 
-    <div id="temp" class="content" data-content-url="http://localhost:8000/wp-json/wp/v2/posts/1" data-content-schema="content">
+    <iam-content data-url="http://localhost:8000/wp-json/wp/v2/posts/1">
       <a href="http://localhost:8000/hello-world/" target="_blank">View content</a>
-    </div>
+    </iam-content>
 
   </div>
 
