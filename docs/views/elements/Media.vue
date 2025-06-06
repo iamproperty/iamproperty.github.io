@@ -46,14 +46,17 @@
 
       <div class="row">
         <div class="col-6 col-sm-4 col-md-3 mb-4">
-          
-          <a href="https://www.youtube.com/watch?v=lROFZaJcVug" class="text-decoration-none youtube-link" data-youtube="lROFZaJcVug"><img src="/img/thumbnail.png" alt="" /></a>
-          
+          <a
+            href="https://www.youtube.com/watch?v=lROFZaJcVug"
+            class="text-decoration-none youtube-link"
+            data-youtube="lROFZaJcVug"
+            ><img src="/img/thumbnail.png" alt=""
+          /></a>
         </div>
         <div class="col-6 col-sm-4 col-md-3 mb-4">
-          
-          <a href="https://vimeo.com/946718698" class="text-decoration-none vimeo-link" data-vimeo="946718698"><img src="/img/thumbnail.png" alt="" /></a>
-          
+          <a href="https://vimeo.com/946718698" class="text-decoration-none vimeo-link" data-vimeo="946718698"
+            ><img src="/img/thumbnail.png" alt=""
+          /></a>
         </div>
       </div>
       <p>

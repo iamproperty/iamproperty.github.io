@@ -12,9 +12,8 @@
       </p>
     </div>
     <div class="container visualtest pt-2">
-
       <label class="toggle">
-        <input type="checkbox" name="checkbox1"/>
+        <input type="checkbox" name="checkbox1" />
         Edit content overlay
       </label>
       <pre><code>{{ `<label class="toggle">
@@ -26,15 +25,13 @@
       <p class="visualtest-hide">Like other checkboxes we can add in conditional content revealed when checked.</p>
 
       <label class="toggle">
-        <input type="checkbox" name="checkbox2"/>
+        <input type="checkbox" name="checkbox2" />
         Edit content overlay
       </label>
-      
+
       <div class="conditional">
         <p>Content 1.</p>
       </div>
-
-
 
       <h2>Multi option toggle buttons</h2>
       <p class="visualtest-hide">
@@ -43,17 +40,16 @@
       </p>
 
       <div class="btn-group d-block col-md-8">
-
         <label class="toggle">
-          <input type="radio" name="radio" class="conditional-input-1"/>
+          <input type="radio" name="radio" class="conditional-input-1" />
           Option 1
         </label>
         <label class="toggle">
-          <input type="radio" name="radio" class="conditional-input-2"/>
+          <input type="radio" name="radio" class="conditional-input-2" />
           Option 2
         </label>
         <label class="toggle">
-          <input type="radio" name="radio" class="conditional-input-3"/>
+          <input type="radio" name="radio" class="conditional-input-3" />
           Option 3
         </label>
 
