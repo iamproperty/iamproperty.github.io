@@ -54,6 +54,11 @@ $darkMode: 'true' !default;
 
   // #region Undefined web components
 
+  iam-header {
+    
+    grid-column: container;
+  }
+
   @include media-breakpoint-up(md, $mobileOnly) {
     iam-header:not(:defined) {
       min-height: rem(470);
