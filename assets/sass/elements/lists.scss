@@ -329,56 +329,56 @@ $darkMode: 'true' !default;
 
   .list--steps-vertical {
     @extend .list--steps;
-  
+
     flex-direction: column;
     align-items: flex-start;
     padding: 0 0 0 rem(32);
     gap: rem(40);
     text-align: left;
-    
+
     li {
       padding-top: 0;
-      padding-left: rem(32); 
+      padding-left: rem(32);
       width: 100%;
-      text-indent: 0;  
+      text-indent: 0;
       overflow: visible;
       margin-bottom: rem(18);
       margin-top: rem(8);
       display: flex;
-      align-items: center; 
-      min-height: rem(24); 
-  
+      align-items: center;
+      min-height: rem(24);
+
       &:before {
         top: 50%;
         left: 0;
         margin-left: 0;
-        margin-top: rem(-12); 
+        margin-top: rem(-12);
         flex-shrink: 0;
       }
-  
+
       &:not(:last-child):after {
         left: rem(11);
-        top: rem(36); 
+        top: rem(36);
         width: 2px;
-        height: calc(100% + rem(16)); 
+        height: calc(100% + rem(16));
       }
     }
-    
+
     @include container-up(sm) {
       padding-left: rem(40);
-      
+
       li {
         padding-left: rem(36);
-  
+
         &:not(:last-child):after {
           left: rem(12);
           top: rem(36);
           width: 2px;
-          height: calc(100% + rem(16)); 
+          height: calc(100% + rem(16));
         }
       }
     }
-  
+
     @include container-up(md) {
       li {
         max-width: none;

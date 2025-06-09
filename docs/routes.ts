@@ -179,9 +179,9 @@ const routes = [
         path: 'stepper',
         name: 'Stepper',
         meta: {
-          title: 'Stepper | Elements | iamkey'
+          title: 'Stepper | Elements | iamkey',
         },
-        component: () => import('./views/components/StepperDocV2.vue')
+        component: () => import('./views/components/StepperDocV2.vue'),
       },
       {
         path: 'badges',

@@ -1,7 +1,6 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
-import {loadYouTubeScripts,createYoutTubeVideo} from '../../modules/videos';
-
+import { loadYouTubeScripts, createYoutTubeVideo } from '../../modules/videos';
 
 trackComponentRegistered('iam-video-card');
 
@@ -83,7 +82,7 @@ class iamVideoCard extends HTMLElement {
         });
         cardComponent.dispatchEvent(customEvent);
 
-        createYoutTubeVideo(embed,this.getAttribute('[data-youtbue]'));
+        createYoutTubeVideo(embed, this.getAttribute('[data-youtbue]'));
         dialog.showModal();
       });
 

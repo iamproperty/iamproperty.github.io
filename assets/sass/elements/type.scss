@@ -17,15 +17,14 @@ $darkMode: 'true' !default;
   // #region headings
 
   %heading {
-
     margin-top: 0; // 1
     margin-bottom: 0;
     font-family: $headings-font-family;
     font-style: $headings-font-style;
     font-weight: bold;
 
-    line-height: round(calc(1em * var(--type-scale)),0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)),0.25rem);
+    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
     color: $headings-color;
     clear: both;
     display: block;
@@ -40,11 +39,9 @@ $darkMode: 'true' !default;
   }
 
   :is(.h1, h1) {
-
     font-size: map.get($heading-sizes, 'h1_fs');
     font-weight: 900;
   }
-
 
   :is(h2, .h2) {
     font-size: map.get($heading-sizes, 'h2_fs');
@@ -55,16 +52,16 @@ $darkMode: 'true' !default;
     font-size: map.get($heading-sizes, 'h3_fs');
     max-width: var(--content-max-width);
 
-    line-height: round(calc(1em * var(--type-scale)),0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)),0.25rem);
+    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
   }
 
   :is(.h4, h4, .h5, h5, .h6, h6) {
     font-size: map.get($heading-sizes, 'h4_fs');
     max-width: var(--content-max-width);
-    
-    line-height: round(calc(1em * var(--type-scale)),0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)),0.25rem);
+
+    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
   }
   // #endregion
 
