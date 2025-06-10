@@ -27,12 +27,10 @@ class iamMenu extends HTMLElement {
     let topLevelmenuItems = this.querySelectorAll(':scope > a, :scope > button, :scope > details > summary');
     let menuItems = this.querySelectorAll('a, button');
 
-    if(this.closest('.menu__wrapper')){
-
-      menuItems = this.shadowRoot.querySelector("slot").assignedElements({ flatten: true });
+    if (this.closest('.menu__wrapper')) {
+      menuItems = this.shadowRoot.querySelector('slot').assignedElements({ flatten: true });
       topLevelmenuItems = menuItems;
     }
-
 
     const subMenus = this.querySelectorAll('details');
 
@@ -145,7 +143,7 @@ class iamMenu extends HTMLElement {
       this.dispatchEvent(updateEvent);
 
       // Fix the focus
-      if(this.closest('.menu__wrapper')){
+      if (this.closest('.menu__wrapper')) {
         menuItems[0].focus();
       }
 
@@ -155,13 +153,10 @@ class iamMenu extends HTMLElement {
         this.hidePopover();
       }
 
-      if(this.matches(':popover-open') && document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)){
-
-        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.setAttribute('aria-pressed','true');
+      if (this.matches(':popover-open') && document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)) {
+        document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.setAttribute('aria-pressed', 'true');
         document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.classList.add('active');
-      }
-      else {
-
+      } else {
         document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.removeAttribute('aria-pressed');
         document.querySelector(`[popovertarget="${this.getAttribute('id')}"]`)?.classList.remove('active');
       }
@@ -193,9 +188,6 @@ class iamMenu extends HTMLElement {
       }
     });
 
-
-
-
     // safari and firefox anchor fix for cards
     if (!CSS.supports('top', 'anchor(top)')) {
       document.addEventListener('click', (event) => {
@@ -213,10 +205,6 @@ class iamMenu extends HTMLElement {
         }
       });
     }
-
-
-
-
   }
 }
 

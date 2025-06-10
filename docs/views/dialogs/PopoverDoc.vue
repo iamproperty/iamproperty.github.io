@@ -273,7 +273,10 @@
 
     <div class="container visualtest">
       <PopoverLists></PopoverLists>
-      <p class="note"><strong>Note:</strong> This is to be depreciated and should be replaced with the <a href="/components/menu">menu component</a>.</p>
+      <p class="note">
+        <strong>Note:</strong> This is to be depreciated and should be replaced with the
+        <a href="/components/menu">menu component</a>.
+      </p>
     </div>
 
     <div class="container">

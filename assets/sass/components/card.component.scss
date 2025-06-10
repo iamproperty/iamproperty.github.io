@@ -146,14 +146,12 @@ slot[name='secondary'] {
 
 // #region Multi-action card
 .menu__wrapper {
-
   position: absolute;
   right: 1rem;
   bottom: 2rem;
   width: 3rem !important;
   left: auto;
   z-index: 999;
-
 
   > .btn:before {
     content: '\f142';

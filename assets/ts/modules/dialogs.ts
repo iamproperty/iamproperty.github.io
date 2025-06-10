@@ -132,13 +132,10 @@ const extendDialogs = (body): void => {
 
     // Popover
     if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')) {
-
       const btn = event.target.closest('.dialog__wrapper > button');
       const parent = btn.parentNode;
 
-      if(parent.querySelector('dialog')){
-
-        
+      if (parent.querySelector('dialog')) {
         event.stopPropagation();
 
         let dataEvent = 'openPopover';
@@ -221,7 +218,6 @@ const extendDialogs = (body): void => {
       !event.target.closest('dialog[open]') &&
       !event.target.closest('.dialog__wrapper > button')
     ) {
-    
       if (document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]'))
         document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]').close();
 
@@ -229,7 +225,6 @@ const extendDialogs = (body): void => {
         btnElement.removeAttribute('aria-expanded');
       });
     }
-    
   });
 
   return null;

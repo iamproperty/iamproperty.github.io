@@ -36,18 +36,15 @@ class iamCard extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    if (!window.customElements.get(`iam-menu`)){
-
-      import(/* @vite-ignore */`${assetLocation}/js/components/menu/menu.component.js`)
-          .then((module) => {
-            window.customElements.define(`iam-menu`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
+    if (!window.customElements.get(`iam-menu`)) {
+      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
+        .then((module) => {
+          window.customElements.define(`iam-menu`, module.default);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     }
-      
-
 
     setupCard(cardComponent);
 
@@ -77,13 +74,10 @@ class iamCard extends HTMLElement {
 
       // safari and firefox anchor fix for cards
       if (!CSS.supports('top', 'anchor(top)')) {
-
-
         const actionButton = this.shadowRoot?.querySelector('[popovertarget="actions"]');
         const actionPopover = this.shadowRoot?.querySelector('[popover]');
 
         actionButton?.addEventListener('click', (event) => {
-
           this.style.setProperty('overflow', 'visible');
           this.style.setProperty('z-index', '999999');
 
@@ -93,17 +87,14 @@ class iamCard extends HTMLElement {
 
           actionPopover.style.setProperty('display', 'block');
           actionPopover.style.setProperty('top', top + 'px');
-          actionPopover.style.setProperty('left', (left - 100) + 'px');
+          actionPopover.style.setProperty('left', left - 100 + 'px');
         });
 
-        document.addEventListener("scroll", (event) => {
-
+        document.addEventListener('scroll', (event) => {
           actionPopover.style.setProperty('display', 'none');
         });
-
       }
     }
-
 
     // Make sure slotted buttons and links have correct button classes
     Array.from(cardComponent.querySelectorAll('[slot="btns"]')).forEach((button) => {

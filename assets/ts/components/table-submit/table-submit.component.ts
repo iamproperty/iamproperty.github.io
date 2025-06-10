@@ -53,17 +53,15 @@ class iamTableSubmit extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    if (!window.customElements.get(`iam-menu`)){
-
-      import(/* @vite-ignore */`${assetLocation}/js/components/menu/menu.component.js`)
-          .then((module) => {
-            window.customElements.define(`iam-menu`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
+    if (!window.customElements.get(`iam-menu`)) {
+      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
+        .then((module) => {
+          window.customElements.define(`iam-menu`, module.default);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     }
-
 
     setupBasicTable(this, table, form, pagination);
 

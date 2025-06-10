@@ -121,40 +121,36 @@ class iamActionbar extends HTMLElement {
     const actionbarWrapper = this.shadowRoot?.querySelector('.actionbar__wrapper');
     const checklistHolder = this.shadowRoot?.querySelector('.checklists');
 
-
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    if (!window.customElements.get(`iam-menu`)){
-
-      import(/* @vite-ignore */`${assetLocation}/js/components/menu/menu.component.js`)
-          .then((module) => {
-            window.customElements.define(`iam-menu`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
+    if (!window.customElements.get(`iam-menu`)) {
+      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
+        .then((module) => {
+          window.customElements.define(`iam-menu`, module.default);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     }
 
     const dialog = this.querySelector('.dialog__wrapper dialog');
 
     // Transform dialog into a menu custom element
-    if(dialog){
-
+    if (dialog) {
       const btn = dialog.parentElement.querySelector('.btn');
       const id = `menu${uniqueID(1)}`;
 
-      dialog.setAttribute('id',id);
-      dialog.setAttribute('popover','auto');
-      btn.setAttribute('popovertarget',id);
+      dialog.setAttribute('id', id);
+      dialog.setAttribute('popover', 'auto');
+      btn.setAttribute('popovertarget', id);
 
       dialog.outerHTML = dialog.outerHTML.replace(/<dialog/g, '<iam-menu').replace(/<\/dialog>/g, '</iam-menu>');
 
       dialog.parentElement?.classList.add('menu__wrapper');
       dialog.parentElement?.classList.remove('dialog__wrapper');
     }
-
 
     // #region select all
     if (this.hasAttribute('data-selectall')) {
@@ -282,7 +278,6 @@ class iamActionbar extends HTMLElement {
       }
     });
     // #endregion
-
 
     // #region Reponsive safe area
     const hideButtons = (): void => {

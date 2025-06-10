@@ -344,19 +344,16 @@ export const setupAdvancedTable = (component, table): void => {
   }
 
   component.querySelectorAll('.dialog__wrapper .btn-compact').forEach((btn, index) => {
-
-
     const wrapper = btn.closest('.dialog__wrapper');
     const dialog = wrapper.querySelector('dialog');
 
     // Transform dialog into a menu custom element
-    if(dialog){
-
+    if (dialog) {
       const id = `menu${uniqueID(index)}`;
 
-      dialog.setAttribute('id',id);
-      dialog.setAttribute('popover','auto');
-      btn.setAttribute('popovertarget',id);
+      dialog.setAttribute('id', id);
+      dialog.setAttribute('popover', 'auto');
+      btn.setAttribute('popovertarget', id);
 
       dialog.outerHTML = dialog.outerHTML.replace(/<dialog/g, '<iam-menu').replace(/<\/dialog>/g, '</iam-menu>');
     }
