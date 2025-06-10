@@ -1,7 +1,9 @@
 @use '../_func.scss' as *;
 @use 'card.module.scss' as *;
 @use '../elements/dialog.scss' as *;
-@use '../elements/popover.scss' as *;
+@use '../elements/popover.scss' as * with (
+  $layers: 'false'
+);
 @use '../elements/buttons.scss' as *;
 
 :host {
@@ -143,7 +145,8 @@ slot[name='secondary'] {
 // #endregion
 
 // #region Multi-action card
-.dialog__wrapper {
+.menu__wrapper {
+
   position: absolute;
   right: 1rem;
   bottom: 2rem;
@@ -151,41 +154,10 @@ slot[name='secondary'] {
   left: auto;
   z-index: 999;
 
+
   > .btn:before {
     content: '\f142';
     font-family: 'Font Awesome 6 Pro';
-  }
-
-  > [popover] {
-    display: var(--menu-display, none);
-    position: fixed;
-    top: anchor(top);
-    position-anchor: --anchor-el;
-    left: anchor(right);
-    right: auto;
-    margin: 0 0 0 #{rem(4)};
-    padding: rem(16);
-
-    &::backdrop {
-      display: none;
-    }
-  }
-
-  > [popover]:popover-open {
-    display: block !important;
-  }
-
-  &:has([popover]:popover-open) > button {
-    background-color: var(--colour);
-  }
-
-  > button[popovertarget] {
-    margin: 0;
-    anchor-name: --anchor-el;
-
-    &:not(:hover, :focus, :focus-within, :active) {
-      background: var(--ellipsis-bg);
-    }
   }
 }
 

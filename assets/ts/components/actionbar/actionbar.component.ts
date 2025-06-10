@@ -1,4 +1,4 @@
-import extendDialogs from '../../modules/dialogs';
+import { uniqueID } from '../../modules/helpers';
 
 // Data layer Web component created
 declare global {
@@ -58,23 +58,23 @@ class iamActionbar extends HTMLElement {
         <div class="safe-area">
           <slot></slot>
           <div class="body">
-            <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
-              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0">More actions</button>
-              <dialog class="dialog--list" part="overflow">
+            <div class="menu__wrapper  menu__wrapper --right dialog-overflow d-none show">
+              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0" popovertarget="overflow" style="anchor-name: --anchor-overflow;">More actions</button>
+              <iam-menu class="dialog--list" part="overflow" id="overflow" style="position-anchor: --anchor-overflow;" popover>
                 <slot name="overflow"></slot>
                 <slot name="menu"></slot>
-              </dialog>
+              </iam-menu>
             </div>
 
 
-            <div class="dialog__wrapper dialog__wrapper--right filter-columns">
-              <button class="btn btn-secondary btn-compact btn-sm mb-0 me-0 fa-regular fa-table-columns" title="Select colums">Filter</button>
-              <dialog class="dialog--list">
+            <div class="menu__wrapper  menu__wrapper --right filter-columns">
+              <button class="btn btn-secondary btn-compact btn-sm mb-0 me-0 fa-regular fa-table-columns" title="Select colums" popovertarget="filter" style="anchor-name: --anchor-filter;">Filter</button>
+              <iam-menu class="dialog--list" id="filter" style="position-anchor: --anchor-filter;" popover>
                 <div class="pb-0 mb-0 checklists">
                   
                 </div>
                 <div class="text-right checklist-btns"><button id="cancelColumns" class="btn btn-action">Cancel</button><button id="saveColumns" class="btn btn-action btn-secondary">Save</button></div>
-              </dialog>
+              </iam-menu>
             </div>
 
             <button class="btn btn-secondary btn-compact btn-sm fa-search" data-search="" part="search-btn">Search</button>
@@ -85,11 +85,11 @@ class iamActionbar extends HTMLElement {
         <div class="safe-area">
           <slot name="selected"></slot>
           <div class="body">
-            <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
-              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0">More actions</button>
-              <dialog class="dialog--list" part="selected-overflow">
+            <div class="menu__wrapper  menu__wrapper --right dialog-overflow d-none show">
+              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0" popovertarget="selected-overflow" style="anchor-name: --anchor-selected-overflow;">More actions</button>
+              <iam-menu class="dialog--list" part="selected-overflow" id="selected-overflow" style="position-anchor: --anchor-selected-overflow;" popover>
                 <slot name="selected-overflow"></slot>
-              </dialog>
+              </iam-menu>
             </div>
           </div>
         </div>
@@ -120,6 +120,41 @@ class iamActionbar extends HTMLElement {
   connectedCallback(): void {
     const actionbarWrapper = this.shadowRoot?.querySelector('.actionbar__wrapper');
     const checklistHolder = this.shadowRoot?.querySelector('.checklists');
+
+
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+
+    if (!window.customElements.get(`iam-menu`)){
+
+      import(/* @vite-ignore */`${assetLocation}/js/components/menu/menu.component.js`)
+          .then((module) => {
+            window.customElements.define(`iam-menu`, module.default);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+    }
+
+    const dialog = this.querySelector('.dialog__wrapper dialog');
+
+    // Transform dialog into a menu custom element
+    if(dialog){
+
+      const btn = dialog.parentElement.querySelector('.btn');
+      const id = `menu${uniqueID(1)}`;
+
+      dialog.setAttribute('id',id);
+      dialog.setAttribute('popover','auto');
+      btn.setAttribute('popovertarget',id);
+
+      dialog.outerHTML = dialog.outerHTML.replace(/<dialog/g, '<iam-menu').replace(/<\/dialog>/g, '</iam-menu>');
+
+      dialog.parentElement?.classList.add('menu__wrapper');
+      dialog.parentElement?.classList.remove('dialog__wrapper');
+    }
+
 
     // #region select all
     if (this.hasAttribute('data-selectall')) {
@@ -248,10 +283,6 @@ class iamActionbar extends HTMLElement {
     });
     // #endregion
 
-    // Make sure dialogs created in the shadow dom work
-    Array.from(this.shadowRoot.querySelectorAll('.body')).forEach((element) => {
-      extendDialogs(element);
-    });
 
     // #region Reponsive safe area
     const hideButtons = (): void => {
@@ -294,7 +325,7 @@ class iamActionbar extends HTMLElement {
       if (wrapperWidth < 576) {
         Array.from(
           this.querySelectorAll(
-            ':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)'
+            ':scope > .btn:not(.js-updated), :scope > .menu__wrapper  > .btn[class*="fa-"]:first-child:not(.js-updated)'
           )
         ).forEach((element: HTMLElement) => {
           element.className = element.className.replace(' btn-compact', ' _btn-compact');
@@ -303,7 +334,7 @@ class iamActionbar extends HTMLElement {
         });
       } else {
         Array.from(
-          this.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')
+          this.querySelectorAll(':scope > .btn.js-updated, :scope > .menu__wrapper  > .btn.js-updated:first-child')
         ).forEach((element: HTMLElement) => {
           element.classList.remove('btn-compact');
           element.classList.remove('js-updated');
@@ -342,7 +373,7 @@ class iamActionbar extends HTMLElement {
 
         // Foreach element this isn't an action button or dialog wrapper add to the width, these will not be moved into the overflow slot
         for (let i = 0; i < elements.length; i++) {
-          if (!elements[i].classList.contains('btn-action') && !elements[i].classList.contains('dialog__wrapper')) {
+          if (!elements[i].classList.contains('btn-action') && !elements[i].classList.contains('menu__wrapper ')) {
             tempWidth += elements[i].offsetWidth;
             tempWidth += elementMargin;
           }
@@ -350,7 +381,7 @@ class iamActionbar extends HTMLElement {
 
         // Foreach dialog wrapper decide if safe in safe area or move into the overflow slot, dialog wrappers have priority over the action buttons
         for (let i = 0; i < elements.length; i++) {
-          if (elements[i].classList.contains('dialog__wrapper')) {
+          if (elements[i].classList.contains('menu__wrapper ')) {
             elements[i].classList.add('show');
             tempWidth += elements[i].offsetWidth;
             tempWidth += elementMargin / 2;
@@ -384,7 +415,7 @@ class iamActionbar extends HTMLElement {
 
         // Decide which elements go into the overflow slot
         for (let i = 0; i < elements.length; i++) {
-          if (elements[i].classList.contains('btn-action') || elements[i].classList.contains('dialog__wrapper')) {
+          if (elements[i].classList.contains('btn-action') || elements[i].classList.contains('menu__wrapper ')) {
             if (!elements[i].classList.contains('show')) {
               // Move to the slot by changing the attribute
               elements[i].setAttribute('slot', overflowSlot);

@@ -343,7 +343,24 @@ export const setupAdvancedTable = (component, table): void => {
     addSelectboxes(component, table, actionbar);
   }
 
-  component.querySelectorAll('.dialog__wrapper .btn-compact').forEach((btn) => {
+  component.querySelectorAll('.dialog__wrapper .btn-compact').forEach((btn, index) => {
+
+
+    const wrapper = btn.closest('.dialog__wrapper');
+    const dialog = wrapper.querySelector('dialog');
+
+    // Transform dialog into a menu custom element
+    if(dialog){
+
+      const id = `menu${uniqueID(index)}`;
+
+      dialog.setAttribute('id',id);
+      dialog.setAttribute('popover','auto');
+      btn.setAttribute('popovertarget',id);
+
+      dialog.outerHTML = dialog.outerHTML.replace(/<dialog/g, '<iam-menu').replace(/<\/dialog>/g, '</iam-menu>');
+    }
+
     btn.classList.add('btn-sm');
     btn.classList.add('m-0');
 

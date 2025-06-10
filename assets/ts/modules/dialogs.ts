@@ -132,80 +132,86 @@ const extendDialogs = (body): void => {
 
     // Popover
     if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')) {
-      event.stopPropagation();
 
       const btn = event.target.closest('.dialog__wrapper > button');
       const parent = btn.parentNode;
-      let dataEvent = 'openPopover';
-      const popover = parent.querySelector(':scope > dialog');
 
-      // close open dialogs
-      if (
-        document.querySelector('*:not([data-keep-open]) > dialog[open]') &&
-        document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover
-      ) {
-        // Check that the ope dialog isn't a parent of the dialog being opened
-        if (btn.closest('dialog[open]') != document.querySelector('*:not([data-keep-open]) > dialog[open]')) {
-          document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
-        }
-      }
+      if(parent.querySelector('dialog')){
 
-      // Remove active class from exiting active buttons
-      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement) => {
-        btnElement.removeAttribute('aria-expanded');
-      });
+        
+        event.stopPropagation();
 
-      if (popover.hasAttribute('open')) {
-        popover.close();
-        dataEvent = 'closePopover';
+        let dataEvent = 'openPopover';
+        const popover = parent.querySelector(':scope > dialog');
 
-        popover.removeAttribute('style');
-        btn.removeAttribute('aria-expanded');
-      } else {
-        popover.show();
-        btn.setAttribute('aria-expanded', true);
-
-        const position = btn.getBoundingClientRect();
-        let topOffset = position.top;
-        let leftOffset = position.left;
-
-        if (btn.closest('iam-table')) {
-          const container = btn.closest('iam-table').parentNode.getBoundingClientRect();
-
-          topOffset -= container.top;
-          leftOffset -= container.left;
+        // close open dialogs
+        if (
+          document.querySelector('*:not([data-keep-open]) > dialog[open]') &&
+          document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover
+        ) {
+          // Check that the ope dialog isn't a parent of the dialog being opened
+          if (btn.closest('dialog[open]') != document.querySelector('*:not([data-keep-open]) > dialog[open]')) {
+            document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
+          }
         }
 
-        if (popover.classList.contains('dialog--fix')) {
-          popover.setAttribute(
-            'style',
-            `position:fixed;top: ${topOffset}px; left: ${leftOffset}px; margin: 3rem 0 0 0;`
-          );
+        // Remove active class from exiting active buttons
+        Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement) => {
+          btnElement.removeAttribute('aria-expanded');
+        });
+
+        if (popover.hasAttribute('open')) {
+          popover.close();
+          dataEvent = 'closePopover';
+
+          popover.removeAttribute('style');
+          btn.removeAttribute('aria-expanded');
+        } else {
+          popover.show();
+          btn.setAttribute('aria-expanded', true);
+
+          const position = btn.getBoundingClientRect();
+          let topOffset = position.top;
+          let leftOffset = position.left;
+
+          if (btn.closest('iam-table')) {
+            const container = btn.closest('iam-table').parentNode.getBoundingClientRect();
+
+            topOffset -= container.top;
+            leftOffset -= container.left;
+          }
+
+          if (popover.classList.contains('dialog--fix')) {
+            popover.setAttribute(
+              'style',
+              `position:fixed;top: ${topOffset}px; left: ${leftOffset}px; margin: 3rem 0 0 0;`
+            );
+          }
         }
+
+        // When the dialog is fixed it could dip under the viewport
+        // Lets check the dimensions and transform it to appear above
+        let boundingRec = popover.getBoundingClientRect();
+        const popoverBottom = boundingRec.bottom - window.scrollY;
+        const windowPos = window.innerHeight - window.scrollY;
+        if (popoverBottom > windowPos) {
+          const currentStyle = popover.hasAttribute('style') ? popover.getAttribute('style') + ' ' : '';
+          popover.setAttribute('style', currentStyle + `transform: translate(0, calc(-100% - 4rem))`);
+
+          // Check that the dialog doesn't go over the top of the page
+          boundingRec = popover.getBoundingClientRect();
+          const popoverTop = boundingRec.top - window.scrollY;
+
+          if (popoverTop < 100) popover.removeAttribute('style');
+        }
+
+        window.dataLayer = window.dataLayer || [];
+
+        window.dataLayer.push({
+          event: dataEvent,
+          id: btn.textContent,
+        });
       }
-
-      // When the dialog is fixed it could dip under the viewport
-      // Lets check the dimensions and transform it to appear above
-      let boundingRec = popover.getBoundingClientRect();
-      const popoverBottom = boundingRec.bottom - window.scrollY;
-      const windowPos = window.innerHeight - window.scrollY;
-      if (popoverBottom > windowPos) {
-        const currentStyle = popover.hasAttribute('style') ? popover.getAttribute('style') + ' ' : '';
-        popover.setAttribute('style', currentStyle + `transform: translate(0, calc(-100% - 4rem))`);
-
-        // Check that the dialog doesn't go over the top of the page
-        boundingRec = popover.getBoundingClientRect();
-        const popoverTop = boundingRec.top - window.scrollY;
-
-        if (popoverTop < 100) popover.removeAttribute('style');
-      }
-
-      window.dataLayer = window.dataLayer || [];
-
-      window.dataLayer.push({
-        event: dataEvent,
-        id: btn.textContent,
-      });
     }
 
     // Close popovers when clicked away
@@ -215,6 +221,7 @@ const extendDialogs = (body): void => {
       !event.target.closest('dialog[open]') &&
       !event.target.closest('.dialog__wrapper > button')
     ) {
+    
       if (document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]'))
         document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]').close();
 
@@ -222,6 +229,7 @@ const extendDialogs = (body): void => {
         btnElement.removeAttribute('aria-expanded');
       });
     }
+    
   });
 
   return null;
