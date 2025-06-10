@@ -58,7 +58,7 @@ $darkMode: 'true' !default;
     position: relative;
     font-weight: bold;
 
-    &:not(.text-decoration-none)  {
+    &:not(.text-decoration-none) {
       &:after {
         position: absolute;
         content: '';
@@ -160,8 +160,7 @@ $darkMode: 'true' !default;
   // #endregion
 }
 
-:is(.youtube-link[data-youtube], .vimeo-link[data-vimeo]){
-
+:is(.youtube-link[data-youtube], .vimeo-link[data-vimeo]) {
   position: relative;
 
   &:before {

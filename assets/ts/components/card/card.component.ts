@@ -32,6 +32,20 @@ class iamCard extends HTMLElement {
     const cardComponent = this;
     const cardBody = cardComponent.shadowRoot.querySelector('.card__body');
 
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+
+    if (!window.customElements.get(`iam-menu`)) {
+      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
+        .then((module) => {
+          window.customElements.define(`iam-menu`, module.default);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+
     setupCard(cardComponent);
 
     // Add Illustration HTML
@@ -51,22 +65,19 @@ class iamCard extends HTMLElement {
 
     // Add the dialog wrapper HTML
     if (cardComponent.querySelector('[slot="btns"]')) {
-      cardComponent.shadowRoot.innerHTML += `<div class="dialog__wrapper">
-      <button class="btn btn-secondary btn-compact fa-ellipsis-vertical" popovertarget="actions" title="Further actions" type="button">Open further actions</button>
-      <div class="dialog--fix dialog--list" id="actions" popover>
+      cardComponent.shadowRoot.innerHTML += `<div class="menu__wrapper">
+      <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0" popovertarget="actions" style="anchor-name: --anchor-el;" title="Further actions" type="button">Open further actions</button>
+      <iam-menu class="dialog--fix dialog--list" id="actions" style="position-anchor: --anchor-el;" popover>
         <slot name="btns"></slot>
-      </div>
+      </iam-menu>
     </div>`;
 
       // safari and firefox anchor fix for cards
       if (!CSS.supports('top', 'anchor(top)')) {
-
-
         const actionButton = this.shadowRoot?.querySelector('[popovertarget="actions"]');
         const actionPopover = this.shadowRoot?.querySelector('[popover]');
 
         actionButton?.addEventListener('click', (event) => {
-
           this.style.setProperty('overflow', 'visible');
           this.style.setProperty('z-index', '999999');
 
@@ -76,17 +87,14 @@ class iamCard extends HTMLElement {
 
           actionPopover.style.setProperty('display', 'block');
           actionPopover.style.setProperty('top', top + 'px');
-          actionPopover.style.setProperty('left', (left - 100) + 'px');
+          actionPopover.style.setProperty('left', left - 100 + 'px');
         });
 
-        document.addEventListener("scroll", (event) => {
-
+        document.addEventListener('scroll', (event) => {
           actionPopover.style.setProperty('display', 'none');
         });
-
       }
     }
-
 
     // Make sure slotted buttons and links have correct button classes
     Array.from(cardComponent.querySelectorAll('[slot="btns"]')).forEach((button) => {
@@ -107,8 +115,8 @@ class iamCard extends HTMLElement {
       });
     }
 
-    if (cardComponent.shadowRoot.querySelector('.dialog__wrapper')) {
-      const element = cardComponent.shadowRoot.querySelector('.dialog__wrapper');
+    if (cardComponent.shadowRoot.querySelector('.menu__wrapper')) {
+      const element = cardComponent.shadowRoot.querySelector('.menu__wrapper');
 
       element.addEventListener('mouseenter', () => {
         cardComponent.classList.add('prevent-hover');

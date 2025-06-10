@@ -9,7 +9,7 @@
     name: 'Card',
     created() {
       this.$nextTick(function () {
-        import(`../../../assets/js/components/card/card.component.min.js`)
+        import(`../../../assets/js/components/card/card.component.js`)
           .then((module) => {
             if (!window.customElements.get(`iam-card`)) window.customElements.define(`iam-card`, module.default);
           })

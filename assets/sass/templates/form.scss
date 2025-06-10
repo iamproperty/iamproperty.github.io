@@ -35,8 +35,6 @@ $darkMode: 'true' !default;
       line-height: map.get($heading-sizes, 'h3_lh');
       padding-bottom: map.get($heading-sizes, 'h3_pb');
       max-width: var(--content-max-width);
-
-
     }
 
     @include light-mode($darkMode) {

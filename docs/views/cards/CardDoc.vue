@@ -618,7 +618,7 @@
 
     <h3>Multi-action card</h3>
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4">
         <div class="col video-col">
           <span class="pb-3 d-block text-uppercase">Default State</span>
 
