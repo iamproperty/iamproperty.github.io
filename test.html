@@ -89,9 +89,9 @@
       @import "/assets/css/components/component.reset.css" layer(component);
     </style>-->
 
-    <link rel="preload" as="style" href="/assets/css/core.min.css">
+    <link rel="preload" as="style" href="/assets/css/style.min.css">
     <style>
-      @import "/assets/css/core.min.css";
+      @import "/assets/css/style.min.css";
     </style>  
 
 
@@ -100,7 +100,7 @@
 
       function registerComponents () {
 
-        const components = ['nav','card','marketing','menu'];
+        const components = ['nav','card','content','menu'];
         const prefix = "iam"
         const options = {
           rootMargin: '50px',
@@ -111,68 +111,34 @@
         // Load components - Each component will load once the first of its type has been loaded
         components.forEach((component) => {
 
+          console.log(component);
+
           if(document.getElementsByTagName(`${prefix}-${component}`).length === 0)
             return;
 
-          let callback = (entries) => {
-            entries.forEach((entry) => {
+          //let callback = (entries) => {
+            //entries.forEach((entry) => {
               
-              if(entry.intersectionRatio > 0){
+              //if(entry.intersectionRatio > 0){
 
-                import(`/assets/js/components/${component}${componentExt}`).then(module => {
+                import(`/assets/js/components/${component}/${component}${componentExt}`).then(module => {
                   if (!window.customElements.get(`${prefix}-${component}`))
                     window.customElements.define(`${prefix}-${component}`, module.default);
                 }).catch((err) => {
                   console.log(err.message);
                 });  
 
-                intObserver.unobserve(entry.target);
-              }
-            });
-          };
+                //intObserver.unobserve(entry.target);
+              //}
+            //});
+          //};
 
-          const intObserver = new IntersectionObserver(callback, options);
-          intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
+          //const intObserver = new IntersectionObserver(callback, options);
+          //intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
         });
       }
       registerComponents();
       
-
-      function generateNewJokes(contentDiv) {
-        const newXHRRequest = new XMLHttpRequest();
-        newXHRRequest.open(
-          "GET",
-          `http://localhost:8000/wp-json/wp/v2/posts/1`,
-          true
-        );
-
-        newXHRRequest.onload = function () {
-
-          let output = "";
-
-          console.log(this)
-
-          if (this.status === 200) {
-            const response = JSON.parse(this.responseText);
-            
-
-            output += `${response.content.rendered}`;
-            
-          }
-          else {
-
-              output += `<li>Sorry! Couldn't get jokes</li>`;
-          }
-          
-            contentDiv.innerHTML = output;
-            registerComponents();
-        };
-
-        newXHRRequest.send();
-      }
-
-      generateNewJokes(document.querySelector("#temp"));
-
     });
     </script>
 
@@ -253,9 +219,9 @@
   <div class="container pt-5">
     
 
-    <div id="temp" class="content" data-content-url="http://localhost:8000/wp-json/wp/v2/posts/1" data-content-schema="content">
+    <iam-content data-url="http://localhost:8000/wp-json/wp/v2/posts/1">
       <a href="http://localhost:8000/hello-world/" target="_blank">View content</a>
-    </div>
+    </iam-content>
 
   </div>
 
