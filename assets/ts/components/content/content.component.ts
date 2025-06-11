@@ -31,7 +31,7 @@ class iamContent extends HTMLElement {
 
     const registerComponents = (contentComponent):void => {
 
-      const components = ['card','marketing'];
+      const components = ['card','marketing','notification'];
 
       const assetLocation = document.body.hasAttribute('data-assets-location')
         ? document.body.getAttribute('data-assets-location')
@@ -39,6 +39,14 @@ class iamContent extends HTMLElement {
 
       // Load components - Each component will load once the first of its type has been loaded
       components.forEach((component) => {
+
+        if (component == 'notification') {
+
+          document.querySelectorAll('[data-notification]').forEach((element) => {
+
+            element.outerHTML = element.outerHTML.replace(/<div/g, '<iam-notification').replace(/<\/div>/g, '</iam-notification>');
+          });
+        }
 
         if(contentComponent.getElementsByTagName(`iam-${component}`).length === 0)
           return;
