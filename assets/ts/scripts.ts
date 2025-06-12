@@ -4,11 +4,14 @@ import extendDialogs from './modules/dialogs';
 import createDataLayer from './modules/data-layer';
 import extendInputs from './modules/inputs';
 import createDynamicEvents from './modules/dynamicEvents';
+import videoSupport from './modules/videos';
 
 const components = [
   'accordion',
   'header',
   'table',
+  'table-basic',
+  'table-no-submit',
   'tabs',
   'card',
   'filter-card',
@@ -37,7 +40,7 @@ const components = [
 ];
 
 // Attach classes to dom elements
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async():void => {
   createDataLayer();
   createDynamicEvents();
 
@@ -48,6 +51,11 @@ document.addEventListener('DOMContentLoaded', function () {
   extendDialogs(document.body);
   extendInputs(document.body);
 
+  videoSupport(document.body);
+
+
+
+  /*
   const prefix = 'iam';
   const options = {
     rootMargin: '50px',
@@ -62,9 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const callback = (entries: any): void => {
       entries.forEach((entry: any) => {
         if (entry.intersectionRatio > 0) {
-          console.log(component);
 
-          import(/* @vite-ignore */ `../js/components/${component}/${component}${componentExt}`)
+          import(`../js/components/${component}/${component}${componentExt}`)
             .then((module) => {
               if (!window.customElements.get(`${prefix}-${component}`))
                 window.customElements.define(`${prefix}-${component}`, module.default);
@@ -81,4 +88,5 @@ document.addEventListener('DOMContentLoaded', function () {
     const intObserver = new IntersectionObserver(callback, options);
     intObserver.observe(document.getElementsByTagName(`${prefix}-${component}`)[0]);
   });
+  */
 });

@@ -20,17 +20,11 @@
 
 @include layer('elements') {
   .h1 {
-    --line-height: #{rem(map.get($heading-sizes, 'h1_lh'))};
+    --line-height: #{map.get($heading-sizes, 'h1_lh')};
 
-    font-size: rem(map.get($heading-sizes, 'h1_fs'));
-    padding-bottom: rem(map.get($heading-sizes, 'h1_pb'));
+    font-size: map.get($heading-sizes, 'h1_fs');
+    padding-bottom: map.get($heading-sizes, 'h1_pb');
     font-weight: 900;
-
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      font-size: rem(map.get($heading-sizes, 'h1_fs_sm'));
-      --line-height: #{rem(map.get($heading-sizes, 'h1_lh_sm'))};
-      padding-bottom: rem(map.get($heading-sizes, 'h1_pb_sm'));
-    }
   }
 }
 

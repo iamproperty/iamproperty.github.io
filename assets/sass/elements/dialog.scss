@@ -11,8 +11,7 @@ $darkMode: 'true' !default;
     display: block;
   }
 
-  // #region Default styling of both modals and popovers
-  [popover],
+  // #region Default styling of both modals
   dialog {
     --dialog-padding: #{rem(24)};
 
@@ -29,7 +28,6 @@ $darkMode: 'true' !default;
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
   }
 
-  [popover]:popover-open,
   dialog[open] {
     display: flex;
     flex-direction: column;

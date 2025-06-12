@@ -176,6 +176,14 @@ const routes = [
         searchterms: 'unordered, ordered, tick, breadcrumb',
       },
       {
+        path: 'stepper',
+        name: 'Stepper',
+        meta: {
+          title: 'Stepper | Elements | iamkey'
+        },
+        component: () => import('./views/components/StepperDocV2.vue')
+      },
+      {
         path: 'badges',
         name: 'Badges (Beta)',
         meta: {
@@ -220,7 +228,7 @@ const routes = [
       },
       {
         path: 'tables',
-        name: 'Tables (BETA)',
+        name: 'Table Element',
         meta: {
           title: 'Tables | Elements | iamkey',
         },
@@ -474,7 +482,7 @@ const routes = [
       },
       {
         path: 'bento-grid',
-        name: 'Bento grid (Beta)',
+        name: 'Bento grid',
         meta: {
           title: 'Bento grid | Components | iamkey',
         },
@@ -534,7 +542,7 @@ const routes = [
       },
       {
         path: 'menu',
-        name: 'Menu (Beta)',
+        name: 'Menu',
         meta: {
           title: 'Menu | Components | iamkey',
           beta: true,
@@ -567,6 +575,15 @@ const routes = [
         component: () => import('./views/components/NoteFeedDoc.vue'),
       },
       {
+        path: 'rank',
+        name: 'Rank',
+        meta: {
+          title: 'Rank | Components | iamkey',
+        },
+        component: () => import('./views/components/RankDoc.vue'),
+        searchterms: 'rank, ranking, score',
+      },
+      {
         path: 'pagination',
         name: 'Pagination',
         meta: {
@@ -592,14 +609,6 @@ const routes = [
         component: () => import('./views/components/SearchDoc.vue'),
       },
       {
-        path: 'stepper',
-        name: 'Stepper (Deprecation warning)',
-        meta: {
-          title: 'Stepper | Components | iamkey',
-        },
-        component: () => import('./views/components/StepperDoc.vue'),
-      },
-      {
         path: 'slider',
         name: 'Slider',
         meta: {
@@ -611,7 +620,7 @@ const routes = [
         path: 'tables',
         name: 'Tables',
         meta: {
-          title: 'Tables | Elements | iamkey',
+          title: 'Tables | Components | iamkey',
         },
         component: () => import('./views/components/Tables.vue'),
         searchterms: 'expandable, scrollable, rows, columns',
@@ -932,6 +941,22 @@ const routes = [
       {
         path: '',
         component: () => import('./views/examples/Index.vue'),
+      },
+      {
+        path: 'basic-table',
+        component: () => import('./views/examples/BasicTable.vue'),
+      },
+      {
+        path: 'no-submit-table',
+        component: () => import('./views/examples/NoSubmitTableDoc.vue'),
+      },
+      {
+        path: 'submit-table',
+        component: () => import('./views/examples/SubmitTableDoc.vue'),
+      },
+      {
+        path: 'ajax-table',
+        component: () => import('./views/examples/AjaxTableDoc.vue'),
       },
       {
         path: 'actionbar-table',

@@ -17,19 +17,18 @@ $darkMode: 'true' !default;
   // #region headings
 
   %heading {
-    --line-height: #{$headings-line-height};
-    // From bootstrap reboot
+
     margin-top: 0; // 1
-    margin-bottom: $headings-margin-bottom;
+    margin-bottom: 0;
     font-family: $headings-font-family;
     font-style: $headings-font-style;
     font-weight: bold;
-    line-height: var(--line-height);
+
+    line-height: round(calc(1em * var(--type-scale)),0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)),0.25rem);
     color: $headings-color;
-    // END:Bootstap reboot
     clear: both;
     display: block;
-    padding-bottom: 2rem;
 
     [class*='fa-'] {
       margin-right: 0.5rem;
@@ -41,60 +40,31 @@ $darkMode: 'true' !default;
   }
 
   :is(.h1, h1) {
-    --line-height: #{rem(map.get($heading-sizes, 'h1_lh'))};
 
-    font-size: rem(map.get($heading-sizes, 'h1_fs'));
-    padding-bottom: rem(map.get($heading-sizes, 'h1_pb'));
+    font-size: map.get($heading-sizes, 'h1_fs');
     font-weight: 900;
-
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      font-size: rem(map.get($heading-sizes, 'h1_fs_sm'));
-      --line-height: #{rem(map.get($heading-sizes, 'h1_lh_sm'))};
-      padding-bottom: rem(map.get($heading-sizes, 'h1_pb_sm'));
-    }
   }
 
-  :is(h2, .h2) {
-    font-size: rem(map.get($heading-sizes, 'h2_fs'));
-    --line-height: #{rem(map.get($heading-sizes, 'h2_lh'))};
-    padding-bottom: rem(map.get($heading-sizes, 'h1_pb'));
-    font-weight: 900;
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      font-size: rem(map.get($heading-sizes, 'h2_fs_sm'));
-      --line-height: #{rem(map.get($heading-sizes, 'h2_lh_sm'))};
-      padding-bottom: rem(map.get($heading-sizes, 'h2_pb_sm'));
-    }
+  :is(h2, .h2) {
+    font-size: map.get($heading-sizes, 'h2_fs');
+    font-weight: 900;
   }
 
   :is(h3, .h3) {
-    font-size: rem(map.get($heading-sizes, 'h3_fs'));
-    --line-height: #{rem(map.get($heading-sizes, 'h3_lh'))};
-    padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
+    font-size: map.get($heading-sizes, 'h3_fs');
     max-width: var(--content-max-width);
-    font-weight: 900;
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
-      --line-height: #{rem(map.get($heading-sizes, 'h3_lh_sm'))};
-      padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
-    }
+    line-height: round(calc(1em * var(--type-scale)),0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)),0.25rem);
   }
 
   :is(.h4, h4, .h5, h5, .h6, h6) {
-    font-size: rem(map.get($heading-sizes, 'h4_fs'));
-    --line-height: #{rem(map.get($heading-sizes, 'h4_lh'))};
-    padding-bottom: rem(map.get($heading-sizes, 'h4_pb'));
+    font-size: map.get($heading-sizes, 'h4_fs');
     max-width: var(--content-max-width);
-
-    /* The values for mobile and tablet are exactly the same, but if that changes this block needs to be re-instated 
-  @include media-breakpoint-up(sm,$mobileOnly) {
-
-    font-size: rem(map.get($heading-sizes,"h4_fs_sm"));
-    line-height: rem(map.get($heading-sizes,"h4_lh_sm"));
-    padding-bottom: rem(map.get($heading-sizes,"h4_pb_sm"));
-  }
-  */
+    
+    line-height: round(calc(1em * var(--type-scale)),0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)),0.25rem);
   }
   // #endregion
 
@@ -125,7 +95,6 @@ $darkMode: 'true' !default;
     line-height: rem(map.get($heading-sizes, 'small_lh'));
     padding-bottom: rem(map.get($heading-sizes, 'small_pb'));
     max-width: var(--content-max-width);
-    font-family: arial, sans-serif;
     font-weight: normal;
   }
 

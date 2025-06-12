@@ -476,32 +476,26 @@ $fonts: map.merge(
   $vars: map.merge((--font-#{$font}: #{$value}), $vars);
 }
 
+
+$vars: map.merge((
+  '--type-scale': 1.2,
+  '--body-fs': 1rem,
+),$vars);
+
 /* Headings variables are setup this way so that we can export them into the vue documentation */
 $heading-sizes: (
-  /* H1 */ 'h1_fs': 48,
-  'h1_lh': 56,
-  'h1_pb': 48,
-  'h1_fs_sm': 64,
-  'h1_lh_sm': 72,
-  'h1_pb_sm': 64,
-  /* H2 */ 'h2_fs': 36,
-  'h2_lh': 44,
-  'h2_pb': 40,
-  'h2_fs_sm': 48,
-  'h2_lh_sm': 56,
-  'h2_pb_sm': 48,
-  /* H3 */ 'h3_fs': 28,
-  'h3_lh': 36,
-  'h3_pb': 40,
-  'h3_fs_sm': 32,
-  'h3_lh_sm': 40,
-  'h3_pb_sm': 40,
-  /* H4 */ 'h4_fs': 24,
-  'h4_lh': 32,
-  'h4_pb': 32,
-  'h4_fs_sm': 24,
-  'h4_lh_sm': 32,
-  'h4_pb_sm': 32,
+  /* H1 */ 'h1_fs': round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 6)), 0.25rem),
+  'h1_lh': round(calc(1em * var(--type-scale)), 0.25rem),
+  'h1_pb': round(calc(1em * var(--type-scale)), 0.25rem),
+  /* H2 */ 'h2_fs': round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 5)), 0.25rem),
+  'h2_lh': round(calc(1em * var(--type-scale)), 0.25rem),
+  'h2_pb': round(calc(1em * var(--type-scale)), 0.25rem),
+  /* H3 */ 'h3_fs': round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 3)), 0.25rem),
+  'h3_lh': round(up, calc(1em * var(--type-scale)), 0.25rem),
+  'h3_pb': round(up, calc(1em * var(--type-scale)), 0.25rem),
+  /* H4 */ 'h4_fs': round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 2)), 0.25rem),
+  'h4_lh': round(up, calc(1em * var(--type-scale)), 0.25rem),
+  'h4_pb': round(up, calc(1em * var(--type-scale)), 0.25rem),
   'lead_fs': 18,
   'lead_lh': 28,
   'lead_pb': 48,
@@ -515,12 +509,12 @@ $heading-sizes: (
 );
 
 /* H2 */
-$h1-font-size: rem(map.get($heading-sizes, 'h1_fs'));
-$h2-font-size: rem(map.get($heading-sizes, 'h2_fs'));
-$h3-font-size: rem(map.get($heading-sizes, 'h3_fs'));
-$h4-font-size: rem(map.get($heading-sizes, 'h4_fs'));
-$h5-font-size: rem(map.get($heading-sizes, 'h4_fs'));
-$h6-font-size: rem(map.get($heading-sizes, 'h4_fs'));
+$h1-font-size: map.get($heading-sizes, 'h1_fs');
+$h2-font-size: map.get($heading-sizes, 'h2_fs');
+$h3-font-size: map.get($heading-sizes, 'h3_fs');
+$h4-font-size: map.get($heading-sizes, 'h4_fs');
+$h5-font-size: map.get($heading-sizes, 'h4_fs');
+$h6-font-size: map.get($heading-sizes, 'h4_fs');
 
 $font-sizes: (
   1: $h1-font-size,
@@ -769,3 +763,31 @@ $ut-mh-md: #{rem($ut-mh-md-px)};
 $ut-mh-lg-px: 600;
 $ut-mh-lg: #{rem($ut-mh-lg-px)};
 // #endregion
+
+$chart-colour-1: map.get($wider-colours, '3') !default;
+$chart-colour-2: map.get($wider-colours, '4') !default;
+$chart-colour-3: map.get($wider-colours, '5') !default;
+$chart-colour-4: map.get($wider-colours, '6') !default;
+$chart-colour-5: map.get($wider-colours, '7') !default;
+$chart-colour-6: map.get($wider-colours, '8') !default;
+$chart-colour-7: map.get($wider-colours, '9') !default;
+$chart-colour-8: map.get($wider-colours, '10') !default;
+$chart-colour-9: map.get($wider-colours, '11') !default;
+$chart-colour-10: map.get($wider-colours, '12') !default;
+
+$chart-colors: ();
+$chart-colors: map.merge(
+  (
+    1: $chart-colour-1,
+    2: $chart-colour-2,
+    3: $chart-colour-3,
+    4: $chart-colour-4,
+    5: $chart-colour-5,
+    6: $chart-colour-6,
+    7: $chart-colour-7,
+    8: $chart-colour-8,
+    9: $chart-colour-9,
+    10: $chart-colour-10,
+  ),
+  $chart-colors
+);

@@ -31,16 +31,12 @@ $darkMode: 'true' !default;
 
     // Make H2's look like H3's
     :is(h2, .h2) {
-      font-size: rem(map.get($heading-sizes, 'h3_fs'));
-      line-height: rem(map.get($heading-sizes, 'h3_lh'));
-      padding-bottom: rem(map.get($heading-sizes, 'h3_pb'));
+      font-size: map.get($heading-sizes, 'h3_fs');
+      line-height: map.get($heading-sizes, 'h3_lh');
+      padding-bottom: map.get($heading-sizes, 'h3_pb');
       max-width: var(--content-max-width);
 
-      @include media-breakpoint-up(sm, $mobileOnly) {
-        font-size: rem(map.get($heading-sizes, 'h3_fs_sm'));
-        line-height: rem(map.get($heading-sizes, 'h3_lh_sm'));
-        padding-bottom: rem(map.get($heading-sizes, 'h3_pb_sm'));
-      }
+
     }
 
     @include light-mode($darkMode) {

@@ -128,7 +128,7 @@ function fileupload(fileupload: Element, wrapper: Element): void {
     filesWrapper.innerHTML = '';
 
     for (const file of input.files) {
-      filesWrapper.innerHTML += `<span class="file" part="file">${file.name} <button data-file="${file.name}">Remove</button></span>`;
+      filesWrapper.innerHTML += `<span class="file" part="file">${file.name} <button data-file="${file.name}" part="file__remove">Remove</button></span>`;
     }
 
     const elementChangeEvent = new CustomEvent('elementchange', { detail: { files: input.files } });
@@ -144,7 +144,7 @@ function fileupload(fileupload: Element, wrapper: Element): void {
     const filename = fileupload.getAttribute('data-filename');
 
     if (filename)
-      filesWrapper.innerHTML = `<span class="file">${filename} <button data-file="${filename}">Remove</button></span>`;
+      filesWrapper.innerHTML = `<span class="file" part="file">${filename} <button data-file="${filename}" part="file__remove">Remove</button></span>`;
   }
 }
 

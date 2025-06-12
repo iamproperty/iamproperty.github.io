@@ -7,10 +7,10 @@ declare global {
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
   event: 'customElementRegistered',
-  element: 'accordion',
+  element: 'bento-grid',
 });
 
-class iamAccordion extends HTMLElement {
+class iamBentoGrid extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -19,6 +19,7 @@ class iamAccordion extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
     const loadCSS = `@import "${assetLocation}/css/components/bento-grid.component.css";`;
+    const loadExtraCSS = `@import "${assetLocation}/css/components/bento-grid.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -32,6 +33,9 @@ class iamAccordion extends HTMLElement {
     </div>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
+
+    if (!document.getElementById('bentogridGlobal'))
+      document.head.insertAdjacentHTML('beforeend', `<style id="bentogridGlobal">${loadExtraCSS}</style>`);
   }
 
   connectedCallback(): void {
@@ -59,9 +63,25 @@ class iamAccordion extends HTMLElement {
         setTimeout(() => {
           details?.classList.remove('animating');
         }, 1100);
+
+        if (details?.hasAttribute('open')) {
+          const customEvent = new CustomEvent('item-closed', {
+            detail: {
+              title: summary?.textContent,
+            },
+          });
+          this.dispatchEvent(customEvent);
+        } else {
+          const customEvent = new CustomEvent('item-opened', {
+            detail: {
+              title: summary?.textContent,
+            },
+          });
+          this.dispatchEvent(customEvent);
+        }
       }
     });
   }
 }
 
-export default iamAccordion;
+export default iamBentoGrid;

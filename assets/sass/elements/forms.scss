@@ -326,8 +326,8 @@ $optionalText: 'true' !default;
     clear: both;
     display: block;
     float: none;
-    font-size: rem(map.get($heading-sizes, 'h4_fs'));
-    line-height: rem(map.get($heading-sizes, 'h4_lh'));
+    font-size: map.get($heading-sizes, 'h4_fs');
+    line-height: map.get($heading-sizes, 'h4_lh');
     padding-bottom: 0.5rem;
     max-width: var(--content-max-width);
     min-width: 100%;
@@ -762,8 +762,8 @@ $optionalText: 'true' !default;
         border: 2px solid var(--colour-check-border, var(--colour-primary));
         background: var(--colour-check-bg, transparent);
         border-radius: var(--border-radius);
-        height: rem(24);
-        width: rem(24);
+        height: var(--radio-size, #{rem(24)});
+        width: var(--radio-size, #{rem(24)});
         display: inline-block;
         position: absolute;
         top: rem(10 - 2);
@@ -783,10 +783,14 @@ $optionalText: 'true' !default;
         border-radius: var(--border-radius);
         height: rem(14);
         width: rem(14);
+
+        height: var(--radio-inner-size, #{rem(14)});
+        width: var(--radio-inner-size, #{rem(14)});
+
         display: none;
         position: absolute;
-        top: rem(15 - 2);
-        left: calc(#{rem(5)} + var(--outline-width));
+        top: var(--radio-inner-top, #{rem(15 - 2)});
+        left: var(--radio-inner-left, calc(#{rem(5)} + var(--outline-width)));
       }
 
       &.radio--tick {
@@ -854,19 +858,19 @@ $optionalText: 'true' !default;
       &:after {
         content: '\f00c';
         position: absolute;
-        font-size: 1em;
+        font-size: var(--checkbox-tick-size, 1em);
         line-height: 1;
         color: var(--colour-primary-theme);
         font-family: 'Font Awesome 6 Pro';
         font-weight: bold;
-        height: rem(24);
-        width: rem(24);
+        height: var(--checkbox-inner-size, #{rem(24)});
+        width: var(--checkbox-inner-size, #{rem(24)});
         line-height: rem(26);
         background: none !important;
         border: none !important;
         outline: none !important;
-        top: rem(10 - 2);
-        left: var(--outline-width);
+        top: var(--checkbox-inner-top, #{rem(10 - 2)});
+        left: var(--checkbox-inner-left, var(--outline-width));
         text-align: center;
       }
     }
@@ -881,19 +885,19 @@ $optionalText: 'true' !default;
       &:after {
         content: '\f068';
         position: absolute;
-        font-size: 1em;
+        font-size: var(--checkbox-tick-size, 1em);
         line-height: 1;
         color: var(--colour-primary-theme);
         font-family: 'Font Awesome 6 Pro';
         font-weight: bold;
-        height: rem(24);
-        width: rem(24);
+        height: var(--checkbox-inner-size, #{rem(24)});
+        width: var(--checkbox-inner-size, #{rem(24)});
         line-height: rem(26);
         background: none !important;
         border: none !important;
         outline: none !important;
-        top: rem(10 - 2);
-        left: var(--outline-width);
+        top: var(--checkbox-inner-top, #{rem(10 - 2)});
+        left: var(--checkbox-inner-left, var(--outline-width));
         text-align: center;
       }
     }
@@ -964,7 +968,8 @@ $optionalText: 'true' !default;
   }
 
   input:checked + .conditional,
-  input:checked + label + .conditional {
+  input:checked + label + .conditional,
+  label:has(:checked) + .conditional {
     display: block;
     clear: both;
   }
@@ -978,7 +983,12 @@ $optionalText: 'true' !default;
   input.conditional-input-2:checked ~ .conditional-2,
   input.conditional-input-3:checked ~ .conditional-3,
   input.conditional-input-4:checked ~ .conditional-4,
-  input.conditional-input-5:checked ~ .conditional-5 {
+  input.conditional-input-5:checked ~ .conditional-5,
+  label:has(input.conditional-input-1:checked) ~ .conditional-1,
+  label:has(input.conditional-input-2:checked) ~ .conditional-2,
+  label:has(input.conditional-input-3:checked) ~ .conditional-3,
+  label:has(input.conditional-input-4:checked) ~ .conditional-4,
+  label:has(input.conditional-input-5:checked) ~ .conditional-5 {
     display: block;
     clear: both;
   }

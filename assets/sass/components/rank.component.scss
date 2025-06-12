@@ -1,0 +1,102 @@
+@use 'sass:map';
+
+@use '../_func.scss' as *;
+
+@use '../elements/type.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+  text-align: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 10rem;
+}
+
+.rank {
+  position: relative;
+  display: flex;
+
+  aspect-ratio: 1/1;
+  width: 100%;
+  height: auto;
+  max-width: 10rem;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1rem solid var(--colour-info);
+  border-radius: 50%;
+
+  .position {
+    margin: 0;
+    padding: 0;
+    line-height: 1 !important;
+  }
+
+  .position:after {
+    content: var(--rank-sub-text, 'Your rank');
+    display: block;
+    font-size: rem(map.get($heading-sizes, 'lead_fs'));
+    line-height: 1;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+  }
+
+  svg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    display: none;
+  }
+}
+
+:host([data-position='1st']),
+:host([data-position='2nd']),
+:host([data-position='3rd']) {
+  .rank {
+    border-width: 0;
+    overflow: hidden;
+  }
+
+  .position {
+    display: none;
+  }
+}
+
+:host([data-position='1st']) {
+  .rank {
+    background: #ffee56;
+  }
+
+  .rank svg:nth-child(1) {
+    display: block;
+  }
+}
+
+:host([data-position='2nd']) {
+  .rank {
+    background: #ededed;
+  }
+
+  .rank svg:nth-child(2) {
+    display: block;
+  }
+}
+
+:host([data-position='3rd']) {
+  .rank {
+    background: #ffe798;
+  }
+
+  .rank svg:nth-child(3) {
+    display: block;
+  }
+}
