@@ -247,7 +247,7 @@ $optionalText: 'true' !default;
     input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
     textarea,
     output,
-    select:not(.select--minimal)
+    select:not(.select--minimal, .btn)
   ) {
     display: block;
     width: 100%;
@@ -618,7 +618,7 @@ $optionalText: 'true' !default;
     border-color: var(--colour-danger) !important;
   }
 
-  .was-validated select:is(:invalid, .is-invalid, [aria-invalid], :-internal-autofill-selected) {
+  .was-validated select:not(.btn):is(:invalid, .is-invalid, [aria-invalid], :-internal-autofill-selected) {
     $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:
@@ -1013,7 +1013,7 @@ $optionalText: 'true' !default;
 
   // #region Select
 
-  select {
+  select:not(.btn) {
     $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:

@@ -1,4 +1,3 @@
-import S from '../../../js/components/tabs/tabs.component.min';
 import { trackComponent, trackComponentRegistered } from '../_global';
 
 trackComponentRegistered('iam-calendar');
@@ -14,85 +13,151 @@ class iamCalendar extends HTMLElement {
 
     const loadCSS = `@import "${assetLocation}/css/components/calendar.component.css";`;
 
+
+    const weekViewOnly = `<div class="week-view-only ">
+      <table class="table--day" role="presentation"><tbody>
+      <tr><th>All day</th></tr>
+      <tr><th>00</th></tr>
+      <tr><th>01</th></tr>
+      <tr><th>02</th></tr>
+      <tr><th>03</th></tr>
+      <tr><th>04</th></tr>
+      <tr><th>05</th></tr>
+      <tr><th>06</th></tr>
+      <tr><th>07</th></tr>
+      <tr><th>08</th></tr>
+      <tr><th>09</th></tr>
+      <tr><th>10</th></tr>
+      <tr><th>11</th></tr>
+      <tr><th>12</th></tr>
+      <tr><th>13</th></tr>
+      <tr><th>14</th></tr>
+      <tr><th>15</th></tr>
+      <tr><th>16</th></tr>
+      <tr><th>17</th></tr>
+      <tr><th>18</th></tr>
+      <tr><th>19</th></tr>
+      <tr><th>20</th></tr>
+      <tr><th>21</th></tr>
+      <tr><th>22</th></tr>
+      <tr><th>23</th></tr>
+      </tbody></table>
+      </div>`;
+
     const template = document.createElement('template');
+
+
     template.innerHTML = `
     <style>
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
+    <div class="calendar__container">
 
+    <div class="calendar__controls">
+      <button id="today-button" class="btn btn-action">Today</button>
+      <button id="prev-button" class="btn btn-action fa-chevron-left border-0"><span class="visually-hidden">previous</span></button>
+      <button id="next-button" class="btn btn-action fa-chevron-right border-0"><span class="visually-hidden">Next</span></button>
+    
+      <div class="calendar__datepicker">
+        <span class="calendar__title"></span>
+        <input type="date" id="date" name="date" />
+      </div>
+      
+      <hr />
 
-<select name="view" id="view">
-  <option value="month">Month</option>
-  <option value="week">Week</option>
-  <option value="day">Day</option>
-  <option value="list">List</option>
-</select>
+      <select name="view" id="view" class="btn btn-action">
 
+        <button>
+          <selectedcontent></selectedcontent> <i class="fa-regular fa-chevron-down"></i>
+        </button>
 
-<label for="date">Date:
-<input type="date" id="date" name="date" />
-</label>
+        <option value="month"><i class="fa-light fa-calendar-days"></i>Month</option>
+        <option value="week"><i class="fa-light fa-calendar-week"></i>Week</option>
+        <option value="day"><i class="fa-light fa-calendar-day"></i>Day</option>
+        <option value="list"><i class="fa-light fa-list"></i>List</option>
+      </select>
 
-<button id="prev-button">previous</button>
+      <label class="tag tag--toggle"><input type="checkbox" name="split" value="true">Split view</label>
 
-<button id="next-button">Next</button>
+      <button id="filters-button" class="btn btn-action"><i class="fa-light fa-sliders"></i><span class="visually-hidden">Filters</span></button>
 
-<button id="today-button">Today</button>
-
-    <div class="calendar__toolbar">
-      <span class="calendar__title"></span>
+      <button id="settings-button" class="btn btn-action"><i class="fa-light fa-gear"></i><span class="visually-hidden">Settings</span></button>
+      
     </div>
 
-    <div class="calendar" part="calendar">
 
-      <div class="week-view-only">
-      <table class="" role="presentation"><tbody>
-      <tr><th>All day</th></tr>
-      <tr><th>12am</th></tr>
-      <tr><th>1am</th></tr>
-      <tr><th>2am</th></tr>
-      <tr><th>3am</th></tr>
-      <tr><th>4am</th></tr>
-      <tr><th>5am</th></tr>
-      <tr><th>6</th></tr>
-      <tr><th>7</th></tr>
-      <tr><th>8</th></tr>
-      <tr><th>9</th></tr>
-      <tr><th>10</th></tr>
-      <tr><th>11</th></tr>
-      <tr><th>12</th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      <tr><th></th></tr>
-      </tbody></table>
+      <dialog id="settings">
+        <button class="dialog__close">Close</button>
+        <span class="h3">Calendar settings</span>
+
+        <hr/>
+        <fieldset>
+          <span class="label">Show weekends</span>
+          <input type="radio" name="weekends" id="weekends-yes" tabindex="-1">
+          <label for="weekends-yes" class="d-inline-block">Yes</label>
+          <input type="radio" name="weekends" id="weekends-no" tabindex="-1">
+          <label for="weekends-no" class="d-inline-block">No</label>
+        </fieldset>
+        <hr/>
+        <button class="btn btn-primary">Save settings</button>
+        <button class="btn btn-secondary">Cancel</button>
+
+      </dialog>
+
+    
+      <div class="calendar__wrapper">
+
+        <div id="week-view-corner" class="calendar">
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  All day
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="week-view-header" class="calendar">
+          <table>
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
+        ${weekViewOnly}
+
+        <div class="calendar" id="calendar" part="calendar">
+          <table>
+            <thead>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+
       </div>
 
 
-      <table>
+      <div class="split calendar" id="split" part="split">
 
-        <thead>
+        <table>
 
-        </thead>
-        <tbody>
+          <thead>
 
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+
+          </tbody>
+        </table>
+      </div>
+
       <slot></slot>
+
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -192,6 +257,20 @@ class iamCalendar extends HTMLElement {
     return `${this.monthArray[month]} ${year}`;
   }
 
+  createWeekViewHeader(component): string {
+
+    let tbodyContent = `<tr>`;
+    
+    component.shadowRoot.querySelectorAll('#calendar > table > tbody > tr:has(td.selected) > td > time').forEach((element) => {
+      tbodyContent += `<td><time>${element.innerHTML}</time></td>`;
+    });
+    
+
+    tbodyContent += `</tr>`;
+
+    return tbodyContent;
+  }
+
   createCalendar(selectedDate, today, sundayFirst: false): string {
 
     const date = new Date(selectedDate);
@@ -245,7 +324,7 @@ class iamCalendar extends HTMLElement {
       const loopDate = `${year}-${String(month+1).padStart(2, "0")}-${String(loopDay).padStart(2, "0")}`
       const dayOfWeek = i%7;
 
-      tbodyContent += `<td class="${loopDate == today ? 'today' : ''} ${loopDate == selectedDateStr ? 'selected' : ''} ${i < startDay ? 'prev-month' : ''} ${loopDay > daysThisMonth ? 'next-month' : ''}">`;
+      tbodyContent += `<td class="day--${this.dayArray[dayOfWeek].toLowerCase()} ${loopDate == today ? 'today' : ''} ${loopDate == selectedDateStr ? 'selected' : ''} ${i < startDay ? 'prev-month' : ''} ${loopDay > daysThisMonth ? 'next-month' : ''}">`;
 
       // prev month
       if(i < startDay){
@@ -253,13 +332,13 @@ class iamCalendar extends HTMLElement {
         const adjustedLoopDay = daysPrevMonth - (startDay - 1 - i);
         const adjustedLoopDate = `${prevMonthYear}-${String(prevMonth+1).padStart(2, "0")}-${String(adjustedLoopDay).padStart(2, "0")}`
           
-        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[prevMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(adjustedLoopDay)}</span> <span class="month">${this.monthArray[prevMonth]}</span></time>`;
+        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[prevMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${adjustedLoopDay}</span> <span class="month">${this.monthArray[prevMonth]}</span></time>`;
         //tbodyContent += this.addDay(adjustedLoopDate);
       }
 
       if(i >= startDay && loopDay <= daysThisMonth){
         
-        tbodyContent += `<time datetime="${loopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[month]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(loopDay)}</span> <span class="month">${this.monthArray[month]}</span></time>`;
+        tbodyContent += `<time datetime="${loopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[month]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${loopDay}</span> <span class="month">${this.monthArray[month]}</span></time>`;
         tbodyContent += this.addDay(loopDate, calendars);
       }
 
@@ -269,7 +348,7 @@ class iamCalendar extends HTMLElement {
         const adjustedLoopDay = i - (startDay - 1) - daysThisMonth;
         const adjustedLoopDate = `${nextMonthYear}-${String(nextMonth+1).padStart(2, "0")}-${String(adjustedLoopDay).padStart(2, "0")}`
           
-        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[nextMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${this.getOrdinalNumber(adjustedLoopDay)}</span> <span class="month">${this.monthArray[nextMonth]}</span></time>`;
+        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[nextMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${adjustedLoopDay}</span> <span class="month">${this.monthArray[nextMonth]}</span></time>`;
         //tbodyContent += this.addDay(adjustedLoopDate);
       }
 
@@ -358,7 +437,9 @@ class iamCalendar extends HTMLElement {
       const date = new Date(datetime);
       const dayOfWeek = date.getDay() ? date.getDay(): 7;
 
-      const timeTd = component.shadowRoot.querySelector(`.table--day td[datetime="${datetime}"]${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
+      const timeTd = component.shadowRoot.querySelector(`#calendar .table--day td[datetime="${datetime}"]${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
+      const timeTdSplit = component.shadowRoot.querySelector(`#split .table--day td[datetime="${datetime}"]${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
+      const timeTdHeader = component.shadowRoot.querySelector(`#week-view-header .table--day td[datetime="${datetime}"]${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
       const dateTd = timeTd?.parentElement?.closest('td');
 
 
@@ -370,14 +451,49 @@ class iamCalendar extends HTMLElement {
 
         if(!timeTd.querySelector(`slot[name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}"]`)){
           timeTd.insertAdjacentHTML('beforeEnd',`<slot name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}" class="${continued ? 'continued': ''}"></slot>`)
+        }
+
+        let hours = dateTd.hasAttribute('data-hours') ? parseFloat(dateTd.getAttribute('data-hours')) : 0;
+        hours += element.hasAttribute('data-hours') ? parseFloat(element.getAttribute('data-hours')) : 0;
+
+        dateTd.setAttribute('data-hours', hours);
         
-          
+        
+        dateTd.classList.add('has-event');
+
+        if(hours > 2)
+          dateTd.classList.add('multi-events');
+
+        if(hours > 4)
+          dateTd.classList.add('busy-day');
+
+        if(element.hasAttribute('data-days'))
+          dateTd.classList.add('all-day');
+
+        if(element.classList.contains('continued'))
+          dateTd.classList.add('continued-day');
+      }
+
+        console.log(timeTdSplit);
+      if(timeTdSplit){
+
+
+        if(!timeTdSplit.querySelector(`slot[name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-split]"`)){
+          timeTdSplit.insertAdjacentHTML('beforeEnd',`<slot name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-split" class="${continued ? 'continued': ''}"></slot>`)
+        }
+      }
+
+      // TO DO: only do on all day events
+      if(timeTdHeader){
+
+        if(!timeTdHeader.querySelector(`slot[name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-header]"`)){
+          timeTdHeader.insertAdjacentHTML('beforeEnd',`<slot name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-header" class="${continued ? 'continued': ''}"></slot>`)
         }
       }
 
       // Add CSS properties so we can control the size of the event elements
-      if(element.hasAttribute('data-hours'))
-        element.style.setProperty('--event-height',`${element.getAttribute('data-hours')}rem`);
+      //if(element.hasAttribute('data-hours'))
+      //  element.style.setProperty('--event-height',`${element.getAttribute('data-hours')}rem`);
       
       if(element.hasAttribute('data-days') && !element.classList.contains('processed')){
 
@@ -391,6 +507,7 @@ class iamCalendar extends HTMLElement {
         element.style.setProperty('--event-max-width',`${(8 - dayOfWeek) * 100}%`);
 
         // - duplicate the original and add to new week
+        /*
         if(eventDayTotal - (8 - dayOfWeek) > 0){
 
           element.setAttribute('data-days',(8 - dayOfWeek));
@@ -422,7 +539,7 @@ class iamCalendar extends HTMLElement {
           adjustEvent(component, cloneElement,true);
         }
         else {
-  
+        */
           for (let i = 1; i < eventDayTotal; i++) {
             
             const cloneElement = element.cloneNode(true);
@@ -431,7 +548,6 @@ class iamCalendar extends HTMLElement {
             cloneElement.removeAttribute('style');
               
             cloneElement.classList.add('continued');
-            cloneElement.classList.add('processed');
               
 
             const newDate = new Date(datetime);
@@ -450,12 +566,14 @@ class iamCalendar extends HTMLElement {
 
 
             element.after(cloneElement);
-            adjustEvent(component, cloneElement, true)
+            adjustEvent(component, cloneElement, true);
+            copyEvent(component, cloneElement);
+
+            cloneElement.classList.add('processed');
           }
+        
+        //}
 
-        }
-
-        element.classList.add('processed');
       }
 
       // Work out if we need to offset the start of displaying the events due to previous days overlapping
@@ -471,10 +589,73 @@ class iamCalendar extends HTMLElement {
         */
     }
 
+    function copyEvent(component, element): void{
 
-    Array.from(this.querySelectorAll('button[datetime]')).forEach(element => {
+      const slotName = element.getAttribute('slot');
+
+
+      if(!element.classList.contains('processed')){
+
+        const splitElement = element.cloneNode(true);
+        splitElement.setAttribute('slot',`${slotName}-split`);
+
+
+        const headerElement = element.cloneNode(true);
+        headerElement.setAttribute('slot',`${slotName}-header`);
+
+
+
+        splitElement.classList.add('split');
+        headerElement.classList.add('header');
+
+        component.insertBefore(splitElement, element);
+        component.insertBefore(headerElement, element);
+      }
+    }
+
+    Array.from(this.querySelectorAll('button[datetime]:not(.split, .header)')).forEach(element => {
       
       adjustEvent(this, element);
+      copyEvent(this, element);
+      
+      element.classList.add('processed');
+    });
+  }
+
+  addJSEvents(tbody, tbodySplit, component): void {
+
+
+    const title = this.shadowRoot?.querySelector('.calendar__title');
+    const datePicker = component.shadowRoot?.querySelector(`#date`);
+    const viewPicker = component.shadowRoot?.querySelector(`#view`);
+
+    Array.from(tbody.querySelectorAll(':scope > tr > td')).forEach((element) => {
+
+      element.addEventListener('click', (event) => {
+
+        const elementDate = element.querySelector('time').getAttribute('datetime');
+        datePicker.value = elementDate;
+
+        Array.from(tbody.querySelectorAll(':scope > tr > td')).forEach((innerelement) => {
+          innerelement.classList.remove('selected');
+        });
+
+        Array.from(tbodySplit.querySelectorAll(':scope > tr > td')).forEach((innerelement) => {
+          innerelement.classList.remove('selected');
+        });
+
+        element.classList.add('selected');
+        tbodySplit.querySelector(`td:has([datetime="${elementDate}"])`).classList.add('selected');
+
+        console.log(component.shadowRoot.querySelector('[name="split"]:checked'));
+
+
+        if(!component.shadowRoot.querySelector('[name="split"]:checked')){
+            
+          viewPicker.value = "day";
+          title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
+        }
+      });
     });
   }
 
@@ -507,8 +688,6 @@ class iamCalendar extends HTMLElement {
         monday.setDate(monday.getDate() -7);
 
 
-      console.log(monday);
-
       const date = monday.getDate();
       const month = monday.getMonth() + 1;
       const year = monday.getFullYear();
@@ -534,19 +713,27 @@ class iamCalendar extends HTMLElement {
   connectedCallback(): void {
 
     const title = this.shadowRoot?.querySelector('.calendar__title');
-    const tbody = this.shadowRoot?.querySelector('.calendar > table > tbody');
-    const thead = this.shadowRoot?.querySelector('.calendar > table > thead');
+    const tbody = this.shadowRoot?.querySelector('#calendar > table > tbody');
+    const thead = this.shadowRoot?.querySelector('#calendar > table > thead');
+    const tbodySplit = this.shadowRoot?.querySelector('#split > table > tbody');
+    const theadSplit = this.shadowRoot?.querySelector('#split > table > thead');
+    const weekViewHeader = this.shadowRoot?.querySelector('#week-view-header > table > tbody');
     const datePicker = this.shadowRoot?.querySelector(`#date`);
     const viewPicker = this.shadowRoot?.querySelector(`#view`);
+    
+      const wrapper = this.shadowRoot.querySelector('.calendar__wrapper');
 
     const todayButton = this.shadowRoot?.querySelector('#today-button');
     const prevButton = this.shadowRoot?.querySelector('#prev-button');
     const nextButton = this.shadowRoot?.querySelector('#next-button');
+    const settingsButton = this.shadowRoot?.querySelector('#settings-button');
+    const settingsDialog = this.shadowRoot?.querySelector('#settings');
 
     const sundayFirst = this.hasAttribute('data-sunday-first');
 
     // set the table head
     thead?.innerHTML = this.createThead(sundayFirst);
+    theadSplit?.innerHTML = this.createThead(sundayFirst);
 
 
     // Get a formatted version of todays date
@@ -566,66 +753,129 @@ class iamCalendar extends HTMLElement {
 
     // Add calendar events
     title?.innerHTML = this.getTitle(strToday,viewPicker.value);
-    tbody?.innerHTML = this.createCalendar(strToday, strToday, sundayFirst);
+
+
+    const calendarHtml = this.createCalendar(strToday, strToday, sundayFirst);
+    tbody?.innerHTML = calendarHtml;
+    tbodySplit?.innerHTML = calendarHtml;
+    weekViewHeader?.innerHTML = calendarHtml;
+
+
+
     this.addEvents();
+    this.addJSEvents(tbody, tbodySplit, this);
 
     datePicker.value = strToday;
     datePicker?.addEventListener('change', ()=> {
 
       title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
-      tbody?.innerHTML = this.createCalendar(datePicker.value, strToday);
+      const calendarHtml = this.createCalendar(datePicker.value, strToday);
+      tbody?.innerHTML = calendarHtml;
+      tbodySplit?.innerHTML = calendarHtml;
+      weekViewHeader?.innerHTML = calendarHtml;
+
       this.addEvents();
+    this.addJSEvents(tbody, tbodySplit, this);
     });
 
     viewPicker?.addEventListener('change', ()=> {
 
       title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
       this.setAttribute('data-view', viewPicker.value);
+
+      if(viewPicker.value == "week")
+        wrapper.scrollTo(0,300); // TO DO work out how much to scroll by
+      else if(viewPicker.value == "day"){
+        wrapper.scrollTo(0,200); // TO DO work out how much to scroll by
+      }
+
     });
 
     todayButton?.addEventListener('click', ()=> {
 
       datePicker.value = strToday;
       title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
-      tbody?.innerHTML = this.createCalendar(datePicker.value, strToday);
+      const calendarHtml = this.createCalendar(datePicker.value, strToday);
+      tbody?.innerHTML = calendarHtml;
+      tbodySplit?.innerHTML = calendarHtml;
+      weekViewHeader?.innerHTML = calendarHtml;
+
       this.addEvents();
+    this.addJSEvents(tbody, tbodySplit, this);
     });
 
     prevButton?.addEventListener('click', ()=> {
 
       datePicker.value = this.paginateDate("prev",viewPicker.value,datePicker.value);
       title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
-      tbody?.innerHTML = this.createCalendar(datePicker.value, strToday);
+      const calendarHtml = this.createCalendar(datePicker.value, strToday);
+      tbody?.innerHTML = calendarHtml;
+      tbodySplit?.innerHTML = calendarHtml;
+      weekViewHeader?.innerHTML = calendarHtml;
+
       this.addEvents();
+    this.addJSEvents(tbody, tbodySplit, this);
     });
 
     nextButton?.addEventListener('click', ()=> {
 
       datePicker.value = this.paginateDate("next",viewPicker.value,datePicker.value);
       title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
-      tbody?.innerHTML = this.createCalendar(datePicker.value, strToday);
+      
+      const calendarHtml = this.createCalendar(datePicker.value, strToday);
+      tbody?.innerHTML = calendarHtml;
+      tbodySplit?.innerHTML = calendarHtml;
+      weekViewHeader?.innerHTML = calendarHtml;
+
       this.addEvents();
+    this.addJSEvents(tbody, tbodySplit, this);
     });
 
-    console.log(this.shadowRoot.querySelectorAll('.calendar > table > tr > td'));
 
-    Array.from(this.shadowRoot.querySelectorAll('.calendar > table > tbody > tr > td')).forEach(td => {
-      
-      console.log(td)
 
-      td?.addEventListener('click', (event)=> {
+    // #region Settings
 
-        if(event.target == td){
+
+    settingsButton?.addEventListener('click', ()=> {
+
+      settingsDialog.showModal();
+      settingsDialog.focus();
+
+    });
+
+    if(this.hasAttribute('data-hide-weekends'))
+      settingsDialog.querySelector('#weekends-no').checked = true;
+    else
+      settingsDialog.querySelector('#weekends-yes').checked = true;
+
+    settingsDialog?.addEventListener('click', (event)=> {
+
+      if (event && event.target.matches('button')) {
+
+
+        if(event.target.matches('.btn-primary')){
           
-          console.log('hey');
+          if(settingsDialog.querySelector('#weekends-no:checked'))
+            this.setAttribute('data-hide-weekends','true');
+          else
+            this.removeAttribute('data-hide-weekends');
         }
 
-
-      });
-
+        settingsDialog.close();
+      }
     });
 
 
+    // #endregion
+
+    
+    // scroll
+
+    setTimeout(() => {
+
+      wrapper.scrollTo(0,300);
+    }, "100");
+        
 
     // TODO
     trackComponent(this, 'iam-calendar', [

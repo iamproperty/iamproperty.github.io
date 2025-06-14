@@ -32,8 +32,18 @@
       
       <button data-modal="event" data-hours="1" datetime="2025-05-20T18:00" data-calendar="Calendar 2" style="background: purple;" title="16 July 2025, duaration 2 hours and 30 mins">Conference 2</button>
 
+      <button data-modal="event" data-hours="1" datetime="2025-06-12T18:00" style="background: purple;" title="11 June 2025, duaration 2 hours and 30 mins">Conference 2</button>
+
+      <button data-modal="event" data-hours="1" datetime="2025-06-12T19:00" style="background: purple;" title="11 June 2025, duaration 2 hours and 30 mins">Conference 2</button>
+
+      <button data-modal="event" data-hours="1" datetime="2025-06-12" style="background: pink;" title="11 June 2025, duaration 2 hours and 30 mins">Conference 2</button>
+
+      <button data-modal="event" data-hours="1" datetime="2025-06-11T19:00" style="background: purple;" title="11 June 2025, duaration 2 hours and 30 mins">Conference 2</button>
+
+      <button data-modal="event" data-days="5" datetime="2025-06-13" style="background: pink;" data-calendar="Calendar 2" title="11 June 2025, duaration 2 hours and 30 mins">All day</button>
+
       
-      <dialog id="event"> 
+      <dialog id="event">
         hello
       </dialog>
       
