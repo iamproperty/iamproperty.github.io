@@ -41,7 +41,7 @@ const components = [
 ];
 
 // Attach classes to dom elements
-document.addEventListener('DOMContentLoaded', async():void => {
+document.addEventListener('DOMContentLoaded', async (): void => {
   createDataLayer();
   createDynamicEvents();
 
@@ -53,8 +53,6 @@ document.addEventListener('DOMContentLoaded', async():void => {
   extendInputs(document.body);
 
   videoSupport(document.body);
-
-
 
   /*
   const prefix = 'iam';

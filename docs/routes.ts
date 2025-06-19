@@ -176,6 +176,14 @@ const routes = [
         searchterms: 'unordered, ordered, tick, breadcrumb',
       },
       {
+        path: 'stepper',
+        name: 'Stepper',
+        meta: {
+          title: 'Stepper | Elements | iamkey'
+        },
+        component: () => import('./views/components/StepperDocV2.vue')
+      },
+      {
         path: 'badges',
         name: 'Badges (Beta)',
         meta: {
@@ -608,14 +616,6 @@ const routes = [
           title: 'Search | Components | iamkey',
         },
         component: () => import('./views/components/SearchDoc.vue'),
-      },
-      {
-        path: 'stepper',
-        name: 'Stepper (Deprecation warning)',
-        meta: {
-          title: 'Stepper | Components | iamkey',
-        },
-        component: () => import('./views/components/StepperDoc.vue'),
       },
       {
         path: 'slider',
