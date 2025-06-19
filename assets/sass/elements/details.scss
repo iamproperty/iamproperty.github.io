@@ -139,7 +139,6 @@ $darkMode: 'true' !default;
       }
 
       @include media-breakpoint-up(sm, $mobileOnly) {
-
         font-weight: 900;
       }
     }

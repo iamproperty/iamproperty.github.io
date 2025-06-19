@@ -1,30 +1,23 @@
-const videoSupport = async(body): void => {
-
-if (document.querySelector('.youtube-link[data-youtube]') && !document.body.classList.contains('youtubeLoaded')) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const loaded = await loadYouTubeScripts();
-}
-setTimeout(async() => {
-  
+const videoSupport = async (body): void => {
   if (document.querySelector('.youtube-link[data-youtube]') && !document.body.classList.contains('youtubeLoaded')) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const loaded = await loadYouTubeScripts();
   }
-}, "2000");
+  setTimeout(async () => {
+    if (document.querySelector('.youtube-link[data-youtube]') && !document.body.classList.contains('youtubeLoaded')) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const loaded = await loadYouTubeScripts();
+    }
+  }, '2000');
 
-
-  body.addEventListener('click', async(event) => {
-
+  body.addEventListener('click', async (event) => {
     let target = (event.target as HTMLElement).closest<HTMLElement>('.youtube-link[data-youtube]');
 
-    if(!target){
+    if (!target) {
       target = (event.target as HTMLElement).closest<HTMLElement>('.vimeo-link[data-vimeo]');
     }
-      
 
-    if(target && target.hasAttribute('data-youtube')){
-
-
+    if (target && target.hasAttribute('data-youtube')) {
       event.preventDefault();
 
       if (!document.body.classList.contains('youtubeLoaded')) {
@@ -33,7 +26,7 @@ setTimeout(async() => {
       }
 
       const link_id = 'youtube-' + target.getAttribute('data-youtube');
-        
+
       if (!document.getElementById(`${link_id}-dialog`)) {
         document.body.insertAdjacentHTML(
           'beforeend',
@@ -49,7 +42,7 @@ setTimeout(async() => {
       });
       target.dispatchEvent(customEvent);
       window.dataLayer.push(customEvent.detail);
-      
+
       createYoutTubeVideo(embed, target.getAttribute('data-youtube'));
       dialog.showModal();
 
@@ -67,14 +60,11 @@ setTimeout(async() => {
         target.dispatchEvent(customEvent);
         window.dataLayer.push(customEvent.detail);
       });
-      
-    }
-    else if(target && target.hasAttribute('data-vimeo')){
-
+    } else if (target && target.hasAttribute('data-vimeo')) {
       event.preventDefault();
 
       const link_id = 'vimeo-' + target.getAttribute('data-youtube');
-        
+
       if (!document.getElementById(`${link_id}-dialog`)) {
         document.body.insertAdjacentHTML(
           'beforeend',
@@ -84,7 +74,6 @@ setTimeout(async() => {
 
       const dialog = document.getElementById(`${link_id}-dialog`);
       const embed = document.getElementById(link_id);
-
 
       const videoId = target.getAttribute('data-vimeo');
 
@@ -99,7 +88,6 @@ setTimeout(async() => {
 
       dialog.showModal();
 
-
       dialog.addEventListener('close', () => {
         embed.innerHTML = ``; // Remove the video since we cant pause it
 
@@ -110,16 +98,11 @@ setTimeout(async() => {
         window.dataLayer.push(customEvent.detail);
       });
     }
-
-    
   });
+};
 
-}
-
-
-export const loadYouTubeScripts = async(): any => {
+export const loadYouTubeScripts = async (): any => {
   return new Promise((resolve, reject) => {
-
     const image = new Image();
     image.onload = function (): any {
       // This code loads the IFrame Player API code asynchronously.
@@ -135,10 +118,9 @@ export const loadYouTubeScripts = async(): any => {
     };
     image.src = 'https://youtube.com/favicon.ico';
   });
-}
+};
 
-
-export const createYoutTubeVideo = async(target, video_id): void | boolean => {
+export const createYoutTubeVideo = async (target, video_id): void | boolean => {
   if (typeof window.player == 'undefined') {
     window.player = [];
   }
@@ -189,6 +171,6 @@ export const createYoutTubeVideo = async(target, video_id): void | boolean => {
       done = true;
     }
   }
-}
+};
 
 export default videoSupport;

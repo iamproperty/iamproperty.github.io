@@ -1,35 +1,37 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+  import { ref } from 'vue';
 
-import DSHeader from '../DSHeader.vue';
-import Readme from '@/components/CollapsibleSideMenu/README.md';
-import WebReadme from '~/ts/components/collapsible-side/README.md';
-import Tabs from '@/components/Tabs/Tabs.vue';
+  import DSHeader from '../DSHeader.vue';
+  import Readme from '@/components/CollapsibleSideMenu/README.md';
+  import WebReadme from '~/ts/components/collapsible-side/README.md';
+  import Tabs from '@/components/Tabs/Tabs.vue';
 
-import CollapsibleSideMenu from '@/components/CollapsibleSideMenu/CollapsibleSideMenu.vue';
+  import CollapsibleSideMenu from '@/components/CollapsibleSideMenu/CollapsibleSideMenu.vue';
 
-import Integration from '../Integration.vue';
-import Versions from '../Versions.vue';
+  import Integration from '../Integration.vue';
+  import Versions from '../Versions.vue';
 
-const headerImg = ref<string>('/docs/img/type-header.png')
-const Anatomy = ref<string>('/docs/img/collapsible-side-menu/collapse-sidemenu-anatomy.png')
-const States = ref<string>('/docs/img/collapsible-side-menu/collapse-sidemenu-states.png')
-const DesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Desktop - Expanded State.png')
-const DesktopCollapsed = ref<string>('/docs/img/collapsible-side-menu/Desktop - Collapsed State.png')
-const DesktopCollapsedHover = ref<string>('/docs/img/collapsible-side-menu/Desktop - Collapsed Hover State.png')
-const TabletExpanded = ref<string>('/docs/img/collapsible-side-menu/Tablet - Expanded State.png')
-const TabletCollapsed = ref<string>('/docs/img/collapsible-side-menu/Tablet - Collapsed State.png')
-const MobileExpanded = ref<string>('/docs/img/collapsible-side-menu/Mobile - Expanded State.png')
-const MobileCollapsed = ref<string>('/docs/img/collapsible-side-menu/Mobile - Collapsed State.png')
-const DisableDesktopCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Desktop.png')
-const DisableTabletCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Tablet.png')
-const DisableMobileCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Mobile.png')
-const InlineDesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Inline Desktop - Expanded State.png')
-const InlineDesktopCollapsed = ref<string>('/docs/img/collapsible-side-menu/Inline Desktop - Collapsed State.png')
-const InlineDesktopCollapsedHover = ref<string>('/docs/img/collapsible-side-menu/Inline Desktop - Collapsed Hover State.png')
+  const headerImg = ref<string>('/docs/img/type-header.png');
+  const Anatomy = ref<string>('/docs/img/collapsible-side-menu/collapse-sidemenu-anatomy.png');
+  const States = ref<string>('/docs/img/collapsible-side-menu/collapse-sidemenu-states.png');
+  const DesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Desktop - Expanded State.png');
+  const DesktopCollapsed = ref<string>('/docs/img/collapsible-side-menu/Desktop - Collapsed State.png');
+  const DesktopCollapsedHover = ref<string>('/docs/img/collapsible-side-menu/Desktop - Collapsed Hover State.png');
+  const TabletExpanded = ref<string>('/docs/img/collapsible-side-menu/Tablet - Expanded State.png');
+  const TabletCollapsed = ref<string>('/docs/img/collapsible-side-menu/Tablet - Collapsed State.png');
+  const MobileExpanded = ref<string>('/docs/img/collapsible-side-menu/Mobile - Expanded State.png');
+  const MobileCollapsed = ref<string>('/docs/img/collapsible-side-menu/Mobile - Collapsed State.png');
+  const DisableDesktopCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Desktop.png');
+  const DisableTabletCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Tablet.png');
+  const DisableMobileCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Mobile.png');
+  const InlineDesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Inline Desktop - Expanded State.png');
+  const InlineDesktopCollapsed = ref<string>('/docs/img/collapsible-side-menu/Inline Desktop - Collapsed State.png');
+  const InlineDesktopCollapsedHover = ref<string>(
+    '/docs/img/collapsible-side-menu/Inline Desktop - Collapsed Hover State.png'
+  );
 
-const message = ref<string>('input field value')
-const htmlUsage = ref<string>(`...`)
+  const message = ref<string>('input field value');
+  const htmlUsage = ref<string>(`...`);
 </script>
 
 <template>
@@ -126,18 +128,35 @@ const htmlUsage = ref<string>(`...`)
     </div>
 
     <div class="container">
-      <a href="/standalone/collapsible-side-menu-default" class="btn btn-secondary" target="_blank">View standalone example</a>
+      <a href="/standalone/collapsible-side-menu-default" class="btn btn-secondary" target="_blank"
+        >View standalone example</a
+      >
     </div>
 
     <div class="container pt-5 pb-0">
       <h2>Behaviour</h2>
 
       <h3>Desktop</h3>
-      <p>On desktop, the menu should default to the 'expanded' state with the 'expand' button hidden. It should be left or right aligned alongside page content.</p>
-      <p>Hovering over the 'expanded' state container should show the 'collapse' button. Selecting the 'collapse' button should change the menu into the 'collapsed' state.</p>
-      <p>Hovering over the 'collapsed' container area should open the 'collapsed - hover state'. Selecting the 'expand' button on either the 'collapsed' or 'collapsed - hover state' should return the menu to the 'expanded' state.</p>
-      <p>The height of the menu should stretch to the full height of the (page - navbar). The menu can include any relevant content such as a optional H3 header, quick filter, and sub navigational items.</p>
-      <p>The side menu should take up 25% of the screen on desktop when expanded. If the height of the content within the menu exceeds the menu height, the content should scroll within the menu.</p>
+      <p>
+        On desktop, the menu should default to the 'expanded' state with the 'expand' button hidden. It should be left
+        or right aligned alongside page content.
+      </p>
+      <p>
+        Hovering over the 'expanded' state container should show the 'collapse' button. Selecting the 'collapse' button
+        should change the menu into the 'collapsed' state.
+      </p>
+      <p>
+        Hovering over the 'collapsed' container area should open the 'collapsed - hover state'. Selecting the 'expand'
+        button on either the 'collapsed' or 'collapsed - hover state' should return the menu to the 'expanded' state.
+      </p>
+      <p>
+        The height of the menu should stretch to the full height of the (page - navbar). The menu can include any
+        relevant content such as a optional H3 header, quick filter, and sub navigational items.
+      </p>
+      <p>
+        The side menu should take up 25% of the screen on desktop when expanded. If the height of the content within the
+        menu exceeds the menu height, the content should scroll within the menu.
+      </p>
 
       <p>EXPANDED STATE</p>
       <img :src="DesktopExpanded" class="mb-4" />
@@ -147,10 +166,23 @@ const htmlUsage = ref<string>(`...`)
       <img :src="DesktopCollapsedHover" class="mb-4" />
 
       <h3>Tablet</h3>
-      <p>On tablet, the menu should default to the 'collapsed' state with the 'expand' button visible. It should be left or right aligned alongside page content.</p>
-      <p>Selecting the 'expand' button or 'collapsed' state container should change the menu into the 'expanded' state. If the user selects elsewhere whilst the side menu is open it should collapse the side menu and load the other content.</p>
-      <p>The height of the menu should stretch to the full height of the (page - navbar). The menu can include any relevant content such as a optional H3 header, quick filter, and sub navigational items.</p>
-      <p>The side menu should take up 50% of the screen on desktop when expanded. If the height of the content within the menu exceeds the menu height, the content should scroll within the menu.</p>
+      <p>
+        On tablet, the menu should default to the 'collapsed' state with the 'expand' button visible. It should be left
+        or right aligned alongside page content.
+      </p>
+      <p>
+        Selecting the 'expand' button or 'collapsed' state container should change the menu into the 'expanded' state.
+        If the user selects elsewhere whilst the side menu is open it should collapse the side menu and load the other
+        content.
+      </p>
+      <p>
+        The height of the menu should stretch to the full height of the (page - navbar). The menu can include any
+        relevant content such as a optional H3 header, quick filter, and sub navigational items.
+      </p>
+      <p>
+        The side menu should take up 50% of the screen on desktop when expanded. If the height of the content within the
+        menu exceeds the menu height, the content should scroll within the menu.
+      </p>
 
       <p>COLLAPSED STATE</p>
       <img :src="TabletCollapsed" class="mb-4" />
@@ -158,11 +190,25 @@ const htmlUsage = ref<string>(`...`)
       <img :src="TabletExpanded" class="mb-4" />
 
       <h3>Mobile</h3>
-      <p>On mobile, the menu should default to the 'collapsed' state with the 'expand' button visible. It should be left aligned alongside page content.</p>
+      <p>
+        On mobile, the menu should default to the 'collapsed' state with the 'expand' button visible. It should be left
+        aligned alongside page content.
+      </p>
       <p>On mobile we should use the small compact secondary button for the expand and collapse function.</p>
-      <p>Selecting the 'expand' button or 'collapsed' state container should change the menu into the 'expanded' state. If the user selects elsewhere whilst the side menu is open it should collapse the side menu and load the other content.</p>
-      <p>The height of the menu should stretch to the full height of the (page - navbar). The menu has an optional H3 header, quick filter, and sub navigational items.</p>
-      <p>The side menu should take up the (full width - 1/2 small compact secondary button) of the screen on mobile when expanded. If the height of the content within the menu exceeds the menu height, the content should scroll within the menu.</p>
+      <p>
+        Selecting the 'expand' button or 'collapsed' state container should change the menu into the 'expanded' state.
+        If the user selects elsewhere whilst the side menu is open it should collapse the side menu and load the other
+        content.
+      </p>
+      <p>
+        The height of the menu should stretch to the full height of the (page - navbar). The menu has an optional H3
+        header, quick filter, and sub navigational items.
+      </p>
+      <p>
+        The side menu should take up the (full width - 1/2 small compact secondary button) of the screen on mobile when
+        expanded. If the height of the content within the menu exceeds the menu height, the content should scroll within
+        the menu.
+      </p>
 
       <p>COLLAPSED STATE</p>
       <img :src="MobileCollapsed" class="mb-4" />
@@ -173,25 +219,36 @@ const htmlUsage = ref<string>(`...`)
     <div class="container pt-5 pb-0">
       <h2>Standalone: Inline & Menu right</h2>
       <p>The menu can be used inline and aligned to the left or right of the container.</p>
-      <p>The menu will only alter the width of the main page content when the container the menu sits within is small enough that it can't house both the side menu and main page content.</p>
-      <a href="/standalone/collapsible-side-menu-inline" class="btn btn-secondary" target="_blank">View standalone example</a>
+      <p>
+        The menu will only alter the width of the main page content when the container the menu sits within is small
+        enough that it can't house both the side menu and main page content.
+      </p>
+      <a href="/standalone/collapsible-side-menu-inline" class="btn btn-secondary" target="_blank"
+        >View standalone example</a
+      >
     </div>
 
     <div class="container pt-5 pb-0">
       <h2>Standalone: Disable collapse</h2>
       <p>We can disable collapse for desktop but retain it for mobile and tablet.</p>
-      <a href="/standalone/collapsible-side-menu-disableCollapse" class="btn btn-secondary" target="_blank">View standalone example</a>
+      <a href="/standalone/collapsible-side-menu-disableCollapse" class="btn btn-secondary" target="_blank"
+        >View standalone example</a
+      >
     </div>
 
     <div class="container pt-5 pb-0">
       <h2>Vertical tabs</h2>
-      <p>Vertical tabs are used to navigate to other pages linked to the one the user is accessing. For example. When on a record for a property in the CRM, vertical tabs could be used to link various pages relating to the property record together like overview, viewings, appraisals, marketing, compliance etc.</p>
+      <p>
+        Vertical tabs are used to navigate to other pages linked to the one the user is accessing. For example. When on
+        a record for a property in the CRM, vertical tabs could be used to link various pages relating to the property
+        record together like overview, viewings, appraisals, marketing, compliance etc.
+      </p>
       <p>They should primarily only be used within the collapsible side menu.</p>
 
       <h2>Scroll behaviour on vertical tabs</h2>
       <p>The list of tab should scroll vertically if they overflow the height of the side menu tab area.</p>
     </div>
-    
+
     <Integration component="collapsible-side" componentName="iam-collapsible-side">
       <template #web-component>
         <pre><code>{{`
@@ -361,7 +418,6 @@ const htmlUsage = ref<string>(`...`)
         </tbody>
       </table>
     </Versions>
-    
   </main>
 </template>
 

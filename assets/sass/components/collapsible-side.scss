@@ -259,7 +259,7 @@ $darkMode: 'true' !default;
 :host([menu-right]) {
   .container {
     padding-right: 0 !important;
-    
+
     @include media-breakpoint-up(md, $mobileOnly) {
       padding-right: 5.25rem !important;
     }
@@ -293,7 +293,7 @@ $darkMode: 'true' !default;
       }
     }
   }
-  
+
   .main-content {
     padding-left: var(--container-padding-x);
     padding-right: rem(60);

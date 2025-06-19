@@ -476,11 +476,13 @@ $fonts: map.merge(
   $vars: map.merge((--font-#{$font}: #{$value}), $vars);
 }
 
-
-$vars: map.merge((
-  '--type-scale': 1.2,
-  '--body-fs': 1rem,
-),$vars);
+$vars: map.merge(
+  (
+    '--type-scale': 1.2,
+    '--body-fs': 1rem,
+  ),
+  $vars
+);
 
 /* Headings variables are setup this way so that we can export them into the vue documentation */
 $heading-sizes: (
