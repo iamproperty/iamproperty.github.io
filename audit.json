@@ -1,7 +1,7 @@
 {
-  "css_size": "179kb",
+  "css_size": "180kb",
   "css_mob_size": "163kb",
-  "css_core_size": "132kb",
+  "css_core_size": "133kb",
   "css_core_mob_size": "125kb",
   "js_size": "20kb",
   "accordion_size": "1kb",
@@ -13,7 +13,7 @@
   "table_size": "61kb",
   "tabs_size": "11kb",
   "card_size": "28kb",
-  "calendar_size": "91kb",
+  "calendar_size": "99kb",
   "filter-card_size": "7kb",
   "video-card_size": "10kb",
   "record-card_size": "9kb",
@@ -39,12 +39,12 @@
   "bento-grid_size": "7kb",
   "rank_size": "67kb",
   "rankings_size": "11kb",
-  "Total_JS_size": "840kb",
+  "Total_JS_size": "848kb",
   "logo_size": "25kb",
   "img_size": "1MB",
   "img_count": 4,
   "fonts_size": "56kb",
   "fonts_count": 3,
-  "fulldate": "2025-06-13T11:42:12.553Z",
-  "date": "13-6-2025"
+  "fulldate": "2025-06-16T12:04:13.423Z",
+  "date": "16-6-2025"
 }

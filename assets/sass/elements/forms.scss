@@ -570,12 +570,12 @@ $optionalText: 'true' !default;
 
     .suffix
       ~ :is(
-        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']),
+        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not([type='time']),
         textarea,
         output
       ),
     :is(
-        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']),
+        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not([type='time']),
         textarea,
         output
       ):has(~ .suffix) {
@@ -1313,7 +1313,7 @@ $optionalText: 'true' !default;
     color: transparent;
     cursor: pointer;
     height: auto;
-    left: 8em;
+    left: 4em;
     position: absolute;
     right: 0;
     top: 0;

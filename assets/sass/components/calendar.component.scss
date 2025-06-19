@@ -76,6 +76,9 @@
     --fa: "\f013";
     --fa--fa: "\f013\f013";
 }
+.fa-clock {
+  --fa: "\f017";
+}
 // #endregion
 
 // #region controls
@@ -251,6 +254,17 @@ hr {
 
 // #region settings
 
+#workday {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  label {
+    flex-grow: 1;
+  }
+}
 
 .btn-primary,
 .btn-secondary {
@@ -280,12 +294,10 @@ hr {
 
 #week-view-corner,
 #week-view-header,
-.week-view-only,
+#week-view-side,
 #split.calendar > table {
   display: none;
 }
-
-
 
 
 
@@ -298,6 +310,7 @@ hr {
 
   border-collapse: collapse;
   width: 100%;
+  color: var(--colour-heading);
 
   th {
     height: rem(36);
@@ -314,39 +327,23 @@ hr {
   }
 
   tr {
-    border-bottom: 1px solid var(--colour-border);
+    //border-bottom: 1px solid var(--colour-border);
   }
 
   td {
-    height: rem(36);
+    height: auto;
     width: auto;
     position: relative;
     font-size: 1rem;
     line-height: 1;
 
-    span {
-        
-      display: flex;
-      position: absolute;
-      inset: 0;
-    }
-
     slot {
       
       width: 100%;
       display: block;
-      height: 100%;
     }
 
-    /*
-    span:has(slot + slot){
-      slot {
-        max-width: 50%;
-        overflow-y: visible;
-        overflow-x: clip;
-      }
-    }
-      */
+ 
   }
 
   td:has(slot) {
@@ -376,55 +373,6 @@ hr {
     */
 }
 // #endregion
-
-// #region Day view
-.calendar__controls:has(select option[value="day"]:checked) ~ .calendar__wrapper {
-
-  display: block;
-  max-height: 20rem;
-  overflow: auto;
-}
-
-.calendar__controls:has(select option[value="day"]:checked) ~ .calendar__wrapper #calendar > table {
-  
-  > thead,
-  > tbody > tr:not(:has(> td.selected)),
-  > tbody > tr > td:not(.selected),
-  > tbody > tr > td > time {
-
-    display: none;
-  }
-
-  > tbody > tr:has(> td.selected) {
-
-    grid-template-columns: 1fr;
-  }
-
-  > tbody > tr > td.selected  {
-
-    display: contents;
-
-    .table--day thead {
-      position: sticky;
-      top: 0;
-    }
-
-    .table--day tbody th {
-      
-      position: sticky;
-      left: 0;
-    }
-  }
-
-
-  > tbody > tr > td {
-    
-    aspect-ratio: unset;
-  }
-
-}
-// #endregion
-
 
 // #region month view
 .calendar__controls:has(select option[value="month"]:checked) ~ .calendar__wrapper #calendar > table {
@@ -468,7 +416,6 @@ hr {
     }
   }
 
-
   > tbody > tr > td {
     padding: 0.25rem;
     overflow-x: visible;
@@ -498,7 +445,6 @@ hr {
       display: inline-block;
     }
   }
-
 
   > tbody > tr > td {
     overflow: hidden;
@@ -606,22 +552,76 @@ hr {
 
     height: 50rem;
 
+    > tbody > tr > td {
+      pointer-events: none;
+      overflow: visible;
+    }
+
     .table--day {
       display: none;
     }
     .table--day:has(slot) {
       display: block;
-
-      > tbody,
-      > tbody > tr {
-        display: contents;
-      }
+      position: absolute;
+      top: 2rem;
+      left: 0;
 
       > thead,
       > tbody > tr > th,
       > tbody > tr > td:not(:has(slot)) {
         display: none;
       }
+      > tbody,
+      > tbody > tr {
+        display: block;
+      }
+
+      > tbody > tr > td:has(slot) {
+        border: 0;    
+        padding-inline: .25rem;
+        display: block;
+        overflow: visible;
+
+        slot {
+          pointer-events: all;
+        overflow: visible;
+        }
+      }
+
+      .multiple-event ~ .has-event {
+        display: none;
+      }
+
+      .has-event ~ .has-event ~ .has-event {
+        display: none;
+      }
+
+      .has-event ~ .multiple-event td:has([slot]) span:has([slot]) ~ span:has([slot]),
+      .has-event ~ .multiple-event td:has([slot]) ~ td:has([slot]) {
+        display: none;
+      }
+    }
+
+    > tbody > tr > td[data-more]:after {
+      content: "+"attr(data-more)" more";
+      position: absolute;
+      left: 0.25rem;
+      bottom: .75rem;
+      text-decoration: underline;
+      line-height: 1;
+      text-underline-offset: 0.2em;
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    ::slotted(button) {
+      width: var(--event-width, 100%)!important;
+      max-width: var(--event-max-width, 100%)!important;
+    }
+
+    > tbody > tr > td:not(:first-child) ::slotted(button.continued) {
+      opacity: 0!important;
+      pointer-events: none!important;
     }
   }
 }
@@ -635,77 +635,32 @@ hr {
     > table > tbody > tr > td {
       height: 3rem;
     }
-  } 
+  }
 }
 // #endregion
 
-// #region week view 
+// #region week view :
 
-.calendar__controls:has(select option[value="week"]:checked) ~ .calendar__wrapper {
-  
-  //padding-left: 3rem;
-  position: relative;
-    
-  height: 28rem;
-  overflow: auto;
-  margin-bottom: 3rem;
-
-
-  table {
-    max-width: auto;
-    display: table;
-  }
-
-  #week-view-corner {
-    display: block;
-    top: 0;
-    left: 0;
-    position: sticky;
-    width: 3rem;
-    height: 3.9rem;
-
-    overflow: hidden;
-    float: left;
-
-    z-index: 100;
-
-    background: pink;
-
-  }
-
-  .week-view-only {
-    display: block;
-    left: 0;
-    position: sticky;
-    width: 3rem;
-
-    overflow: hidden;
-    float: left;
-
-    z-index: 98;
-
-    background: green;
-
-    .table--day > tbody > tr:first-child {
-      display: none;
-    }
-  }
+.calendar__controls:has(select option[value="week"]:checked) ~ .calendar__wrapper  {
 
   #week-view-header {
     display: block;
     position: sticky;
     top: 0;
-    //left: 0;
     margin: 0;
+    padding-left: var(--side-panel-width);
+    margin-bottom: -1px;
 
-    //padding-left: 3rem;
+    border-top: 1px solid var(--colour-border);
+    border-left: 1px solid var(--colour-border);
 
    // width: 100%;
-    background-color: red;
+    background-color: white;
     z-index: 99;
 
     > table {
       width: 100%;
+      margin-top: -1px;
     }
 
     .table--day tr:not(.allday) {
@@ -716,8 +671,102 @@ hr {
       position: relative;
     }
   }
+}
+
+.calendar__controls:has(select :is(option[value="day"], option[value="week"]):checked) ~ .calendar__wrapper {
+  
+  --side-panel-width: #{rem(72)};
+  position: relative;
+  height: 40rem;
+  overflow: auto;
+  margin-bottom: 3rem;
+
+  .calendar {
+
+    > table {
+      display: table;
+      width: 100%;
+      min-width: 49rem;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    // Only show the selected week
+    > table > thead,
+    > table > tbody > tr:not(:has(.selected)) {
+      display: none!important;
+    }
+
+    > table > tbody > tr:not(:has(.selected)) {
+      display: none!important;
+    }
+    > table > tbody > tr:has(.selected) > td {
+      
+      border: 1px solid var(--colour-border);
+      
+
+      time {
+        white-space: nowrap;
+        font-weight: bold;
+        color: var(--colour-heading);
+        font-size: rem(14);
+        line-height: rem(18);
+        padding: rem(2);
+        overflow: hidden;
+      display: block;
+      }
+
+      .day-of-week {
+        
+        float: left;
+      }
+      .day {
+        display: inline-block;
+        padding-left: 1rem;
+        float: right;
+      }
+      .month {
+        display: none;
+      }
+    }
+  }
+
+
+  #week-view-side {
+    display: block;
+    left: 0;
+    position: sticky;
+    width: calc(var(--side-panel-width) + 1px);
+    overflow: hidden;
+    float: left;
+    z-index: 98;
+    background: white;
+
+    margin-right: -1px;
+
+    .table--day {
+      
+      margin: 0px;
+      width: 100%;
+    }
+
+    .table--day > tbody > tr:first-child {
+      display: none;
+    }
+
+
+    .table--day > tbody > tr > th
+    {
+      display: table-cell;
+      border: 1px solid var(--colour-border);
+      border-right: none;
+    }
+  }
 
   #calendar {
+
+    width: calc(100% - var(--side-panel-width));
+    float: left;
 
     > table > tbody > tr {
       display: table-row;
@@ -730,124 +779,241 @@ hr {
       display: none!important;
     }
     .table--day tr:has(slot) td:not(:has(slot)){
-      display: none;
+      //display: none;
     }
   }
 
-
-}
-
-.calendar__controls:has(select option[value="week"]:checked) ~ .calendar__wrapper #calendar,
-#week-view-header.calendar {
-
-
-  > table > tbody > tr > td > time {
-
-    display: block;
-    height: rem(24);
-    max-height: rem(24);
-    overflow: hidden;
+  #calendar .table--day tr:has(.out-of-hours) {
+    background: rgba(245, 245, 245, 1);
   }
-
-  .week-view-only {
-    display: block;
-    position: absolute;
-    top: calc(rem(24) + 1px);
-    left: 0;
-    //display: none;
-  }
-}
-
-
-.calendar__controls:has(select option[value="week"]:checked) ~ .calendar__wrapper #calendar > table > thead {
-  display: none;
-}
-.calendar__controls:has(select option[value="week"]:checked) ~ .calendar__wrapper #calendar > table > tbody,
-#week-view-header.calendar > table > tbody {
-  
-
-  > tr:not(:has(> td.selected)) {
-
-    display: none;
-  }
-  
-  > tr {
-    
-  //overflow: auto;
-
-  }
-
-  > tr > th,
-  > tr > td {
-    
-    aspect-ratio: unset;
-
-
-  }
-
-
-  > tr > td {
-    
-    overflow: visible;
-  }
-
 
   .table--day {
-    display: table;
+    
+    margin: -2px;
+    width: calc(100% + 4px);
+  }
+  .table--day > thead,
+  .table--day > tbody > tr > th {
+    display: none;
+  }
 
-    thead {
+  .table--day > thead > tr,
+  .table--day > tbody > tr {
+    
+    border: 1px solid var(--colour-border);
+    padding: 0;
+  }
+
+  .table--day > tbody > tr > th,
+  .table--day > tbody > tr > td {
+    height: rem(72);
+    padding: 0;
+  }
+
+  .table--day > tbody > tr > td > span{
+    height: rem(17.5);
+    display: block;
+
+    &.dragover {
+      background: pink;
+    }
+  }
+  .table--day > tbody > tr > td > span:nth-child(2){
+    border-bottom: 1px dashed var(--colour-border);
+    margin-bottom: -1px;
+  }
+
+  .table--day > tbody > tr > td > span ::slotted(button){
+    height: var(--event-height, #{rem(17.5)});
+    line-height: rem(18)!important;
+    padding-top: rem(4)!important;
+    white-space: normal!important;
+
+    display: inline-flex!important; /* keep the inline nature of buttons */
+    align-items: flex-start!important;
+
+    resize: vertical;
+
+    &:before {
       display: none;
     }
   }
 
-  > tr > td .table--day > tbody > tr > th {
-    display: none;
+  .table--day > tbody > tr.allday > th {
+    display: block;
+    position: absolute;
+    width: 4.5rem;
+    right: 100%;
+    margin-top: -1px;
+    margin-right: 2px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    height: 100%;
+  }
+  .table--day > tbody > tr.allday > td{
+    height: #{rem(26)}!important;
+  }
+  .table--day > tbody > tr.allday > td > span ::slotted(button){
+    height: var(--event-height, #{rem(25)})!important;
+    line-height: rem(25)!important;
+    padding: 0!important;
+
+    
+  }
+  .table--day > tbody > tr > td > span ::slotted(button.resizing){
+    background: black!important;
+  }
+
+}
+// #endregion
+
+// #region Day view
+.calendar__controls:has(select option[value="day"]:checked) ~ .calendar__wrapper {
+
+  #week-view-side {
+    
+    padding-top: rem(26);
+  }
+  #week-view-side .table--day>tbody>tr:first-child {
+
+    display: table-row;
+
+    th {
+      
+    height: rem(26);
+    }
+  }
+
+  #calendar > table {
+    
+    --side-panel-width: #{rem(72)};
+    table-layout: fixed;
+    width: 100%;
+    max-width: 100%;
+    
+
+    > thead,
+    > tbody > tr:not(:has(> td.selected)),
+    > tbody > tr > td:not(.selected),
+    > tbody > tr > td > time {
+
+      display: none;
+    }
+
+    > tbody > tr:has(> td.selected) {
+
+      display: block;
+    }
+
+    > tbody > tr > td.selected  {
+
+      display: contents;
+    }
+
+    .table--day {
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+
+      //border-collapse: separate;
+      border-collapse: separate;
+      border-spacing: 0;
+
+      thead {
+        display: table-header-group!important;
+      }
+      thead th {
+        position: sticky;
+        top: 0;
+        background: pink;
+        z-index: 99;
+        height: rem(26);
+      }
+
+      >thead>tr>th:first-child {
+        display: none;
+      }
+      tbody tr:first-child {
+        
+        position: sticky;
+        top: rem(26);
+        
+        border-collapse: collapse;
+        background: pink;
+        z-index: 99;
+        display: table-row!important;
+      }
+
+      tbody th {
+        
+        display: none;
+      }
+
+      th,
+      td {
+        border-right: 1px solid var(--colour-border);
+        border-bottom: 1px solid var(--colour-border);
+        height: rem(72);
+
+        &:first-child {
+
+          border-left: 1px solid var(--colour-border);
+        }
+      }
+    }
   }
 }
 
-.calendar__controls:has(select option[value="week"]:checked) ~ .calendar__wrapper {
+// #endregion
+
+// #region Current time indicator
+.calendar__controls:has(select :is(option[value="day"], option[value="week"]):checked) ~ .calendar__wrapper {
   position: relative;
 
-
-  .week-view-only:before {
-    content: "11:10";
-    display: block;
-    width: 3rem;
-    position: absolute;
-    top: calc(0rem + (2.25rem * 11.2));
-    left: 0;
-    z-index: 101;
-
-    transform: translate(0,-50%);
-    background-color: purple;
+  [data-hour][data-time] {
+    position: relative;
+    //overflow: hidden;
   }
 
-  &:before {
+  [data-hour][data-time]:before {
+      
+    content: attr(data-time);
+    position: absolute;
+    top: var(--minute-pos, 25%);
+    left: 0;
+    width: var(--side-panel-width);
+    transform: translate(0, -50%);
+    text-align: right;
+  }
+
+  [data-hour][data-time]:after {
+      
     content: "";
-    display: block;
+    position: absolute;
+    top: var(--minute-pos, 25%);
+    right: 0;
+    margin-right: -4px;
     width: 4px;
     height: 4px;
-    background-color: red;
-    position: absolute;
-    top: calc(3.75rem + (2.25rem * 11.2));
-    left: calc(3rem + 2px);
-
-    margin-top: -1px;
-    
     border-radius: 50%;
+    background: var(--colour-info);
+    transform: translate(0, -50%);
   }
 
-  &:after {
+  [data-hour][data-time] ~ td:before {   
+      
     content: "";
-    display: block;
-    width: calc(100% - 5px - 3rem);
-    height: 2px;
-    background-color: red;
     position: absolute;
-    top: calc(3.75rem + (2.25rem * 11.2));
-    left: calc(3rem + 3px);
+    top: var(--minute-pos, 25%);
+    left: 0;
+    margin-left: -1px;
+    margin-right: -1px;
+    width: calc(100% + 2px);
+    height: 1px;
+    border: 1px solid var(--colour-info);
+    transform: translate(0, -50%);
+    z-index: 99;
   }
-
 }
 // #endregion
 
@@ -857,6 +1023,8 @@ hr {
 .calendar__controls:has(select option[value="month"]:checked) ~ #split.calendar > table {
   
   display: table;
+  width: 100%;
+    margin-bottom: 2rem;
 
   > thead {
     display: none;
@@ -868,13 +1036,13 @@ hr {
     display: contents;
   }
 
-  > tbody > tr > td > *:not(.table--day) {
+  > tbody > tr > td:not(.selected) {
+
     display: none;
   }
-
-  > tbody > tr > td:has(slot) > time {
-    display: block!important;
-    background-color: red;
+    
+  > tbody > tr > td > *:not(.table--day) {
+    display: none;
   }
 
   .table--day {
@@ -882,15 +1050,9 @@ hr {
     width: 100%;
 
     tr {
-      display: block;
-      position: relative;
-      height: 1rem;
-      padding-left: 3rem;
 
       th {
-        position: absolute;
-        top: 0;
-        left: 0;
+        display: none;
       }
 
       td {
@@ -904,13 +1066,12 @@ hr {
 
     tr:not(:has(slot)){
       display: none;
-
-      time {
-        
-        display: none;
-      }
     }
+  }
 
+  ::slotted(button) {
+
+    margin-bottom: 0.5rem!important;
   }
 }
 
@@ -925,14 +1086,6 @@ hr {
 
     display: block!important;
 
-
-    > table {
-
-      > tbody > tr > td:not(.selected) {
-
-        display: none;
-      }
-    }
   } 
 }
 // #endregion
@@ -955,13 +1108,13 @@ hr {
 // #region Calendar Event button
 ::slotted(button){
 
-  border: none!important;
+  //border: none!important;
 }
 
 :host([data-view="month"]) ::slotted(button) {
-  width: var(--event-width, 100%);
-  min-width: 100%;
-  max-width: var(--event-max-width, 700%)!important;
+  //width: var(--event-width, 100%);
+  //min-width: 100%;
+  //max-width: var(--event-max-width, 700%)!important;
 }
 
 :host([data-view="month"]) ::slotted(button.continued) {
@@ -969,6 +1122,7 @@ hr {
   //pointer-events: none;
 }
 
+/*
 :host([data-view="week"]) ::slotted(button) {
   height: var(--event-height);
   min-width: 100%;
@@ -980,7 +1134,8 @@ hr {
   opacity: 0;
   pointer-events: none;
 }
-
+  */
+/*
 :host([data-view="day"]) ::slotted(button) {
   height: var(--event-height);
 }
@@ -988,4 +1143,6 @@ hr {
 :host([data-view="list"]) ::slotted(button.continued) {
   display: none;
 }
+  */
+
 // #endregion
