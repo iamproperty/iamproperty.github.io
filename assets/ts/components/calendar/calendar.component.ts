@@ -1,4 +1,5 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
+import { uniqueID } from '../../modules/helpers';
 
 trackComponentRegistered('iam-calendar');
 
@@ -15,7 +16,7 @@ class iamCalendar extends HTMLElement {
 
 
     const weekViewOnly = `<table class="table--day" role="presentation"><tbody>
-      <tr><th>All day</th></tr>
+      <tr class="allday"><th>All day</th></tr>
       <tr><th data-hour="0">00</th></tr>
       <tr><th data-hour="1">01</th></tr>
       <tr><th data-hour="2">02</th></tr>
@@ -54,15 +55,17 @@ class iamCalendar extends HTMLElement {
 
       <div class="calendar__controls">
         <button id="today-button" class="btn btn-action">Today</button>
+
+
         <button id="prev-button" class="btn btn-action fa-chevron-left border-0"><span class="visually-hidden">previous</span></button>
-        <button id="next-button" class="btn btn-action fa-chevron-right border-0"><span class="visually-hidden">Next</span></button>
-      
         <div class="calendar__datepicker">
           <span class="calendar__title"></span>
           <input type="date" id="date" name="date" />
         </div>
-        
-        <hr />
+        <button id="next-button" class="btn btn-action fa-chevron-right border-0"><span class="visually-hidden">Next</span></button>
+      
+        <hr/>
+  
 
         <select name="view" id="view" class="btn btn-action">
 
@@ -74,6 +77,7 @@ class iamCalendar extends HTMLElement {
           <option value="week"><i class="fa-light fa-calendar-week"></i>Week</option>
           <option value="day"><i class="fa-light fa-calendar-day"></i>Day</option>
           <option value="list"><i class="fa-light fa-list"></i>List</option>
+          <option value="year"><i class="fa-light fa-calendars"></i>Year</option>
         </select>
 
         <label class="tag tag--toggle"><input type="checkbox" name="split" value="true">Split view</label>
@@ -111,6 +115,21 @@ class iamCalendar extends HTMLElement {
     
       <div class="calendar__wrapper">
         
+        <div id="week-view-corner" class="calendar">
+          <table>
+            <thead>
+            <tr>
+              <th class="column-header">Empty</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr class="allday">
+                <th>All day</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
         <div id="week-view-header" class="calendar">
           <table>
             <thead>
@@ -122,7 +141,7 @@ class iamCalendar extends HTMLElement {
 
         <div id="week-view-side">${weekViewOnly}</div>
 
-        <div class="calendar" id="calendar" part="calendar">
+        <div class="calendar month-wrapper" id="calendar" part="calendar">
           <table>
             <thead>
             </thead>
@@ -131,21 +150,10 @@ class iamCalendar extends HTMLElement {
           </table>
         </div>
 
+        <div id="year-view">
+        </div>
       </div>
 
-
-      <div class="split calendar" id="split" part="split">
-
-        <table>
-
-          <thead>
-
-          </thead>
-          <tbody>
-
-          </tbody>
-        </table>
-      </div>
 
       <slot></slot>
 
@@ -164,29 +172,34 @@ class iamCalendar extends HTMLElement {
         few: "rd",
         other: "th"
     };
+
+    this.calendars = ['Default']; // TO DO allow for these to be set via the component data attributes
+    this.eventTypes = []; // TO DO allow for these to be set via the component data attributes
+
+    this.pauseObserver = false;
   }
 
   createThead(sundayFirst: false): string {
 
     if(sundayFirst)
       return `<tr>
-    <th class="sunday"><span class="long-day-name">Sunday</span><span class="short-day-name" role="presentation">Sun</span></th>
-    <th class="monday"><span class="long-day-name">Monday</span><span class="short-day-name" role="presentation">Mon</span></th>
-    <th class="tuesday"><span class="long-day-name">Tuesday</span><span class="short-day-name" role="presentation">Tues</span></th>
-    <th class="wednesday"><span class="long-day-name">Wednesday</span><span class="short-day-name" role="presentation">Wed</span></th>
-    <th class="thursday"><span class="long-day-name">Thursday</span><span class="short-day-name" role="presentation">Thurs</span></th>
-    <th class="friday"><span class="long-day-name">Friday</span><span class="short-day-name" role="presentation">Fri</span></th>
-    <th class="saturday"><span class="long-day-name">Saturday</span><span class="short-day-name" role="presentation">Sat</span></th>
+    <th class="column-header sunday"><span class="long-day-name">Sunday</span><span class="short-day-name" role="presentation">Sun</span></th>
+    <th class="column-header monday"><span class="long-day-name">Monday</span><span class="short-day-name" role="presentation">Mon</span></th>
+    <th class="column-header tuesday"><span class="long-day-name">Tuesday</span><span class="short-day-name" role="presentation">Tues</span></th>
+    <th class="column-header wednesday"><span class="long-day-name">Wednesday</span><span class="short-day-name" role="presentation">Wed</span></th>
+    <th class="column-header thursday"><span class="long-day-name">Thursday</span><span class="short-day-name" role="presentation">Thurs</span></th>
+    <th class="column-header friday"><span class="long-day-name">Friday</span><span class="short-day-name" role="presentation">Fri</span></th>
+    <th class="column-header saturday"><span class="long-day-name">Saturday</span><span class="short-day-name" role="presentation">Sat</span></th>
   </tr>`;
       
     return `<tr>
-    <th class="monday"><span class="long-day-name">Monday</span><span class="short-day-name" role="presentation">Mon</span></th>
-    <th class="tuesday"><span class="long-day-name">Tuesday</span><span class="short-day-name" role="presentation">Tues</span></th>
-    <th class="wednesday"><span class="long-day-name">Wednesday</span><span class="short-day-name" role="presentation">Wed</span></th>
-    <th class="thursday"><span class="long-day-name">Thursday</span><span class="short-day-name" role="presentation">Thurs</span></th>
-    <th class="friday"><span class="long-day-name">Friday</span><span class="short-day-name" role="presentation">Fri</span></th>
-    <th class="saturday"><span class="long-day-name">Saturday</span><span class="short-day-name" role="presentation">Sat</span></th>
-    <th class="sunday"><span class="long-day-name">Sunday</span><span class="short-day-name" role="presentation">Sun</span></th>
+    <th class="column-header monday"><span class="long-day-name">Monday</span><span class="short-day-name" role="presentation">Mon</span></th>
+    <th class="column-header tuesday"><span class="long-day-name">Tuesday</span><span class="short-day-name" role="presentation">Tues</span></th>
+    <th class="column-header wednesday"><span class="long-day-name">Wednesday</span><span class="short-day-name" role="presentation">Wed</span></th>
+    <th class="column-header thursday"><span class="long-day-name">Thursday</span><span class="short-day-name" role="presentation">Thurs</span></th>
+    <th class="column-header friday"><span class="long-day-name">Friday</span><span class="short-day-name" role="presentation">Fri</span></th>
+    <th class="column-header saturday"><span class="long-day-name">Saturday</span><span class="short-day-name" role="presentation">Sat</span></th>
+    <th class="column-header sunday"><span class="long-day-name">Sunday</span><span class="short-day-name" role="presentation">Sun</span></th>
 </tr>`;
   }
 
@@ -239,10 +252,13 @@ class iamCalendar extends HTMLElement {
 
       return `${this.getOrdinalNumber(mondayDay)} ${mondayMonth != sundayMonth ? this.monthArray[sundayMonth] : ''} ${mondayYear != sundayYear ? mondayYear : ''} - ${this.getOrdinalNumber(sundayDay)} ${this.monthArray[sundayMonth]} ${sundayYear}`;
     }
-    
-    if(view == "day" || view == "list"){
+    else if(view == "day"){
       
       return `${this.dayArray[dayOfWeek]} ${this.getOrdinalNumber(day)} ${this.monthArray[month]} ${year}`;
+    }
+    else if(view == "year"){
+      
+      return `${year}`;
     }
 
     return `${this.monthArray[month]} ${year}`;
@@ -276,17 +292,15 @@ class iamCalendar extends HTMLElement {
     const nextMonthYear = nextMonthDate.getFullYear();
 
     // Get calendars
-    const calendars = [];
+    
+    if(!this.hasAttribute('data-calendars')){
+      Array.from(this.querySelectorAll('button[data-calendar]')).forEach((element) => {
 
-    if(this.querySelector('button:not(data-calendar)'))
-      calendars.push('Default');
-
-    Array.from(this.querySelectorAll('button[data-calendar]')).forEach((element) => {
-
-      // Scan through the buttons and look forunique calendar names
-      if(!(calendars.includes(element.getAttribute('data-calendar'))))
-        calendars.push(element.getAttribute('data-calendar'));
-    })
+        // Scan through the buttons and look forunique calendar names
+        if(!(this.calendars.includes(element.getAttribute('data-calendar'))))
+          this.calendars.push(element.getAttribute('data-calendar'));
+      })
+    }
 
     // Create tbody string by looping through the number of days in month plus some days before and after
     let tbodyContent = `<tr>`;
@@ -305,14 +319,14 @@ class iamCalendar extends HTMLElement {
         const adjustedLoopDay = daysPrevMonth - (startDay - 1 - i);
         const adjustedLoopDate = `${prevMonthYear}-${String(prevMonth+1).padStart(2, "0")}-${String(adjustedLoopDay).padStart(2, "0")}`
           
-        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[prevMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${adjustedLoopDay}</span> <span class="month">${this.monthArray[prevMonth]}</span></time>`;
-        tbodyContent += this.addDay(adjustedLoopDate, calendars);
+        tbodyContent += `<time class="column-header" datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[prevMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${adjustedLoopDay}</span> <span class="month">${this.monthArray[prevMonth]}</span></time>`;
+        tbodyContent += this.addDay(adjustedLoopDate, this.calendars);
       }
 
       if(i >= startDay && loopDay <= daysThisMonth){
         
-        tbodyContent += `<time datetime="${loopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[month]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${loopDay}</span> <span class="month">${this.monthArray[month]}</span></time>`;
-        tbodyContent += this.addDay(loopDate, calendars);
+        tbodyContent += `<time class="column-header" datetime="${loopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[month]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${loopDay}</span> <span class="month">${this.monthArray[month]}</span></time>`;
+        tbodyContent += this.addDay(loopDate, this.calendars);
       }
 
       // next month days
@@ -321,8 +335,8 @@ class iamCalendar extends HTMLElement {
         const adjustedLoopDay = i - (startDay - 1) - daysThisMonth;
         const adjustedLoopDate = `${nextMonthYear}-${String(nextMonth+1).padStart(2, "0")}-${String(adjustedLoopDay).padStart(2, "0")}`
           
-        tbodyContent += `<time datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[nextMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${adjustedLoopDay}</span> <span class="month">${this.monthArray[nextMonth]}</span></time>`;
-        tbodyContent += this.addDay(adjustedLoopDate, calendars);
+        tbodyContent += `<time class="column-header" datetime="${adjustedLoopDate}" title="${this.dayArray[dayOfWeek]} ${loopDay} ${this.monthArray[nextMonth]} ${year}"><span class="day-of-week">${this.dayArray[dayOfWeek]} </span><span class="day">${adjustedLoopDay}</span> <span class="month">${this.monthArray[nextMonth]}</span></time>`;
+        tbodyContent += this.addDay(adjustedLoopDate, this.calendars);
       }
 
       tbodyContent += '</td>';
@@ -344,7 +358,7 @@ class iamCalendar extends HTMLElement {
     htmlTable += `<thead><tr><th>time</th>`;
     calendars.forEach(calendarTitle => {
       
-      htmlTable += `<th>${calendarTitle}</th>`;
+      htmlTable += `<th class="column-header">${calendarTitle}</th>`;
     });
     htmlTable += `</tr></thead>`;
 
@@ -373,14 +387,104 @@ class iamCalendar extends HTMLElement {
 
   addEvents(): void {
 
-    function setDefaultEventValues(component, element): void {
+    function setDefaultEventValues(component, element, index): void {
 
-      // TO DO: set default variables and supportive elements
-      // ids
-      // wrap span around text
-      // make sure datetime is set
-      // dtata-start
-      // data-hours, data-days
+      const datetime = element.getAttribute('datetime')
+      const datetimeArr = datetime.split('T');
+      let id = element.getAttribute('id');
+
+      // Add ID
+      if(!element.hasAttribute('id')){
+        id = `event${uniqueID(index)}`;
+        element.setAttribute('id',id);
+      }
+
+      // Wrap content in span for formatting in week/day view
+      if(!element.querySelector('span:not(.tooltip__content')){
+        element.innerHTML = `<span>${element.innerHTML}</span>`;
+      }
+
+      // Add event type enum so we can set the correct colours
+      //if(!element.hasAttribute('data-event-type-enum') && element.hasAttribute('data-event-type')){
+
+        const eventType = element.getAttribute('data-event-type');
+
+        if(!component.eventTypes.includes(eventType))
+          component.eventTypes.push(eventType);
+
+        element.setAttribute('data-event-type-enum', component.eventTypes.indexOf(eventType) + 1);
+      //}
+
+      // Add calendar enum so we can set the correct colours
+      if(element.hasAttribute('data-calendar')){
+
+        const calendar = element.getAttribute('data-calendar');
+
+        if(!component.calendars.includes(calendar))
+          component.calendars.push(calendar);
+
+        element.setAttribute('data-calendar-enum', component.calendars.indexOf(calendar) + 1);
+      }
+      
+      if(!element.hasAttribute('data-calendar-enum')){
+        element.setAttribute('data-calendar-enum', 1);
+      }
+
+      if(!element.hasAttribute('data-hours') && !element.hasAttribute('data-days')){
+
+        if(datetimeArr[1]){
+          element.setAttribute('data-hours', 1);
+        }
+        else {
+          
+          element.setAttribute('data-days', 1);
+        }
+      }
+
+
+
+      let getRoundedDate = (minutes, d=new Date()) => {
+
+        let ms = 1000 * 60 * minutes; // convert minutes to ms
+        let roundedDate = new Date(Math.round(d.getTime() / ms) * ms);
+
+
+        const newMonth = roundedDate.getMonth();
+        const newYear = roundedDate.getFullYear();
+        const newDay = roundedDate.getDate();
+        const newMinutes = roundedDate.getMinutes();
+        const newHour = roundedDate.getHours();
+
+        const strRoundedDate = `${newYear}-${String(newMonth+1).padStart(2, "0")}-${String(newDay).padStart(2, "0")}T${String(newHour).padStart(2, "0")}:${String(newMinutes).padStart(2, "0")}`;
+
+
+        return strRoundedDate;
+      }
+
+
+      if(datetimeArr[1]){
+        element.setAttribute('data-start', datetimeArr[1]);
+        element.querySelector(':scope > span').setAttribute('data-start', datetimeArr[1]);
+
+        const roundedDatetime = getRoundedDate(15, new Date(datetime));
+        element.setAttribute('datetime',roundedDatetime);
+
+
+        console.log(roundedDatetime);
+      }
+
+
+      if(element.querySelector('.tooltip__content')){
+
+        const tooltip = element.querySelector('.tooltip__content');
+
+        tooltip.style.positionAnchor = `--${id}`;
+
+        element.style.anchorName = `--${id}`
+      }
+
+
+      element.classList.add('defaults-added');
     }
 
     function adjustEvent(component, element, continued: false): void {
@@ -391,9 +495,18 @@ class iamCalendar extends HTMLElement {
       const dayOfWeek = date.getDay() ? date.getDay(): 7;
 
       // Locate where we need to add slots for the buttons to go - We need duplicate slots for the split view and fixed header
-      const timeTd = component.shadowRoot.querySelector(`#calendar .table--day td:has(span[datetime="${datetime}"])${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
-      const timeTdSplit = component.shadowRoot.querySelector(`#split .table--day td:has(span[datetime="${datetime}"])${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
+      const timeTd = component.shadowRoot.querySelector(`.month-wrapper .table--day td:has(span[datetime="${datetime}"])${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
       const timeTdHeader = component.shadowRoot.querySelector(`#week-view-header .table--day td:has(span[datetime="${datetime}"])${element.hasAttribute('data-calendar') ? `[data-calendar="${element.getAttribute('data-calendar').replace('_','')}"]` : ''}`);
+      
+      if(timeTdHeader && timeTdHeader.closest('tr').classList.contains("allday")){
+
+        // Add the alldays slot for the fixed header 
+        if(!timeTdHeader.querySelector(`slot[name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-header]"`)){
+          timeTdHeader.querySelector(`span[datetime="${datetime}"]`).insertAdjacentHTML('beforeEnd',`<slot name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-header" class="${continued ? 'continued': ''}"></slot>`)
+        }
+      }
+      
+      
       const dateTd = timeTd?.parentElement?.closest('td');
 
       // original event needs a slot name adding
@@ -439,25 +552,9 @@ class iamCalendar extends HTMLElement {
           dateTd.classList.add('continued-day');
       }
 
-      if(timeTdSplit){
-
-        // Add the slot need for the mobile split view
-        if(!timeTdSplit.querySelector(`slot[name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-split]"`)){
-          timeTdSplit.querySelector(`span[datetime="${datetime}"]`).insertAdjacentHTML('beforeEnd',`<slot name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-split" class="${continued ? 'continued': ''}"></slot>`)
-        }
-      }
-
-      if(timeTdHeader && timeTdHeader.closest('tr').classList.contains("allday")){
-
-        // Add the alldays slot for the fixed header 
-        if(!timeTdHeader.querySelector(`slot[name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-header]"`)){
-          timeTdHeader.querySelector(`span[datetime="${datetime}"]`).insertAdjacentHTML('beforeEnd',`<slot name="${datetime}${element.hasAttribute('data-calendar') ? `-${element.getAttribute('data-calendar').replace('_','')}` : ''}-header" class="${continued ? 'continued': ''}"></slot>`)
-        }
-      }
-
       // Add CSS properties so we can control the size of the event elements for day and week view
       if(element.hasAttribute('data-hours'))
-        element.style.setProperty('--event-height',`${element.getAttribute('data-hours') * (1.09375 * 4)}rem`);
+        element.style.setProperty('--event-height',`${parseInt(element.getAttribute('data-hours')) * (1.09375 * 4)}rem`);
       
       if(element.hasAttribute('data-days') && !element.classList.contains('processed')){
 
@@ -465,14 +562,30 @@ class iamCalendar extends HTMLElement {
 
         element.style.setProperty('--event-width',`${eventDayTotal * 100}%`);
         element.style.setProperty('--event-max-width',`${(8 - dayOfWeek) * 100}%`);
+        element.classList.add('allday-event');
+
 
         // Create a duplicate event for each day the orginal 
         for (let i = 1; i < eventDayTotal; i++) {
-            
+          
           const cloneElement = element.cloneNode(true);
           cloneElement.removeAttribute('data-days');
           cloneElement.removeAttribute('style');
           cloneElement.classList.add('continued');
+          cloneElement.classList.add('allday-event');
+
+          
+          const id = `event${uniqueID(i)}`;
+          cloneElement.setAttribute('id',id);
+          
+          
+          if(cloneElement.querySelector('.tooltip__content')){
+
+            const tooltip = cloneElement.querySelector('.tooltip__content');
+            tooltip.style.positionAnchor = `--${id}`;
+            cloneElement.style.anchorName = `--${id}`
+          }
+
             
           const newDate = new Date(datetime);
           newDate.setDate(newDate.getDate() + i);
@@ -484,17 +597,18 @@ class iamCalendar extends HTMLElement {
 
           const strCloneEvent = `${newYear}-${String(newMonth+1).padStart(2, "0")}-${String(newDay).padStart(2, "0")}`;
 
-          cloneElement.setAttribute('data-original-datetime',cloneElement.getAttribute('datetime'));
+          cloneElement.setAttribute('data-original-datetime',element.getAttribute('datetime'));
           cloneElement.setAttribute('datetime',strCloneEvent);
 
           element.after(cloneElement); // Add after original
           adjustEvent(component, cloneElement, true);
-          copyEvent(component, cloneElement);
 
           if(newDayOfWeek == 1){ // Monday
 
             cloneElement.style.setProperty('--event-width',`${(eventDayTotal - i) * 100}%`);
             cloneElement.style.setProperty('--event-max-width',`${(8 - newDayOfWeek) * 100}%`);
+
+            cloneElement.classList.remove('continued');
           }
         }
       }
@@ -503,46 +617,39 @@ class iamCalendar extends HTMLElement {
       element.classList.add('processed');
     }
 
-    function copyEvent(component, element): void{
-      // Create the events needed to display the split view and the weekly header
-      const slotName = element.getAttribute('slot');
-      const id = element.getAttribute('id');
+    this.pauseObserver = true;
 
-      if(!element.classList.contains('processed')){
-
-        const splitElement = element.cloneNode(true);
-        splitElement.setAttribute('slot',`${slotName}-split`);
-        splitElement.setAttribute('id',`${id}-split`);
-        splitElement.classList.add('split');
-        component.insertBefore(splitElement, element);
-
-        const headerElement = element.cloneNode(true);
-        headerElement.setAttribute('slot',`${slotName}-header`);
-        headerElement.setAttribute('id',`${id}-header`);
-        headerElement.classList.add('header');
-        component.insertBefore(headerElement, element);
-      }
-    }
-
-    Array.from(this.querySelectorAll('button[datetime]:not(.split, .header)')).forEach(element => {
+    Array.from(this.querySelectorAll('button[datetime]')).forEach((element, index) => {
       
-      setDefaultEventValues(this,element);
+      setDefaultEventValues(this,element,index);
       adjustEvent(this, element);
-      copyEvent(this, element);
-      
-      element.classList.add('processed');
-    });
+
+    });   
+    
+    setTimeout(() => {
+      this.pauseObserver = false;
+    }, "500");
+
   }
 
-  addJSEvents(tbody, tbodySplit, component): void {
+  addJSEvents(component): void {
 
     // Add events to the newly created calendar 
     const title = component.shadowRoot?.querySelector('.calendar__title');
     const datePicker = component.shadowRoot?.querySelector(`#date`);
     const viewPicker = component.shadowRoot?.querySelector(`#view`);
+    const yearView = this.shadowRoot?.querySelector('#year-view');
+
+    const today = new Date();
+    const date = today.getDate();
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    const strToday = `${year}-${String(month+1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
+
+    const tbody = component.shadowRoot?.querySelector('#calendar > table > tbody');
 
     // clicking on the day istelf
-    Array.from(tbody.querySelectorAll(':scope > tr > td:has(slot)')).forEach((element) => {
+    Array.from(component.shadowRoot.querySelectorAll('.month-wrapper > table > tbody > tr > td:has(slot)')).forEach((element) => {
 
       element.addEventListener('click', (event) => {
 
@@ -555,18 +662,35 @@ class iamCalendar extends HTMLElement {
             innerelement.classList.remove('selected');
           });
 
-          Array.from(tbodySplit.querySelectorAll(':scope > tr > td')).forEach((innerelement) => {
-            innerelement.classList.remove('selected');
-          });
-
           element.classList.add('selected');
-          tbodySplit.querySelector(`td:has([datetime="${elementDate}"])`).classList.add('selected');
 
           // Go to day if the in month view with out split view enabled
-          if(!component.shadowRoot.querySelector('[name="split"]:checked') && viewPicker.value == "month"){
+
+          if(component.shadowRoot.querySelector('[name="split"]:checked') && viewPicker.value == "month"){
+
+            Array.from(component.querySelectorAll(`[data-slot]`)).forEach((button) => {
+              button.setAttribute('slot',button.getAttribute('data-slot'));
+            });
+
+            Array.from(component.querySelectorAll(`[slot^="${datePicker.value}"]`)).forEach((button) => {
+
+              button.setAttribute('data-slot',button.getAttribute('slot'));
+              button.removeAttribute('slot');
+            });
+
+          }
+          else if(!component.shadowRoot.querySelector('[name="split"]:checked') && viewPicker.value == "month"){
               
             viewPicker.value = "day";
             title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
+            component.scrollIntoPlace();
+          }
+          if(viewPicker.value == "year"){
+
+            viewPicker.value = "month";
+            yearView?.innerHTML = '';
+            tbody?.innerHTML = component.createCalendar(datePicker.value, strToday);
+            component.addEvents();
           }
         }
       });
@@ -619,54 +743,76 @@ class iamCalendar extends HTMLElement {
       }
     });
 
-    component.querySelectorAll(`button:not([draggable])`).forEach((element) => {
+    if(component.hasAttribute('data-drag')) {
+      
+      component.querySelectorAll(`button:not([draggable])`).forEach((element) => {
 
-      element.setAttribute('draggable','true');
-      element.addEventListener("dragstart", (ev) => {
-        ev.dataTransfer.setData("text", ev.target.id); // save the id for when dropped
-      });
+        element.setAttribute('draggable','true');
+        element.addEventListener("dragstart", (ev) => {
+          ev.dataTransfer.setData("text", ev.target.id); // save the id for when dropped
+        });
 
-      // set onbserver
-      resizeObserver.observe(element);
+        // set onbserver
+        resizeObserver.observe(element);
 
-      element.addEventListener("mousedown", (ev) => {
-        element.classList.add('mousedown');
-      });
+        element.addEventListener("mousedown", (ev) => {
+          element.classList.add('mousedown');
+        });
 
-      element.addEventListener("click", (ev) => {
-        
-        if(element.classList.contains('resizing')){
-            
-          ev.stopPropagation();
-          ev.stopImmediatePropagation();
-
-          element.classList.remove('mousedown');
-          element.classList.remove('resizing');
+        element.addEventListener("click", (ev) => {
           
-          // Work out the evnt length in hours and set the height
-          const span = this.shadowRoot.querySelector(`span[datetime="${element.getAttribute('datetime')}"]`);
-          const spanStyles = window.getComputedStyle(span);
-          const hours = Math.round(parseInt(element.style.height)/parseInt(spanStyles.getPropertyValue("height"))) / 4;
+          if(element.classList.contains('resizing')){
+              
+            ev.stopPropagation();
+            ev.stopImmediatePropagation();
 
-          element.setAttribute('data-hours',hours);
-          element.style.setProperty('--event-height',`${hours * (1.09375 * 4)}rem`);
+            element.classList.remove('mousedown');
+            element.classList.remove('resizing');
+            
+            // Work out the evnt length in hours and set the height
+            const span = this.shadowRoot.querySelector(`span[datetime="${element.getAttribute('datetime')}"]`);
+            const spanStyles = window.getComputedStyle(span);
+            const hours = Math.round(parseInt(element.style.height)/parseInt(spanStyles.getPropertyValue("height"))) / 4;
 
-          element.style.height = "";
+            element.setAttribute('data-hours',hours);
+            element.style.setProperty('--event-height',`${hours * (1.09375 * 4)}rem`);
 
-          // to do dispatch event
-        }
+            element.style.height = "";
+
+            // to do dispatch event
+          }
+        });
+
       });
+    }
 
-    });
+    component.querySelectorAll(`button`).forEach((element) => {
 
-
-
-    component.shadowRoot?.querySelectorAll(`#calendar .table--day td span`).forEach((element) => {
       element.addEventListener("contextmenu", (event) => { 
 
         event.preventDefault();
-        
-        console.log('menu')
+        event.stopPropagation();
+
+      });
+    });
+
+    component.shadowRoot?.querySelectorAll(`.month-wrapper > table > tbody > tr > td`).forEach((element) => {
+
+      element.addEventListener("contextmenu", (event) => { 
+
+        event.preventDefault();
+
+        const customEvent = new CustomEvent('right-click', {
+        detail: {
+          'clientX': event.clientX,
+          'clientY': event.clientY,
+          'element': element,
+          'datetime': element.querySelector('time').getAttribute('datetime')
+          },
+        });
+
+        console.log(element);
+        this.dispatchEvent(customEvent);
 
       });
     });
@@ -674,7 +820,7 @@ class iamCalendar extends HTMLElement {
 
   paginateDate(direction, view, currentDate): string {
 
-    if(view == "month") {
+    if(view == "month" || view == "list") {
 
       const selectedDate = new Date(currentDate);
 
@@ -698,7 +844,7 @@ class iamCalendar extends HTMLElement {
       if(direction == "next")
         monday.setDate(monday.getDate() + 7);
       else
-        monday.setDate(monday.getDate() -7);
+        monday.setDate(monday.getDate() - 7);
 
 
       const date = monday.getDate();
@@ -708,6 +854,23 @@ class iamCalendar extends HTMLElement {
 
       return strNextWeek;
     }
+    else if(view == "year"){
+
+      const selectedDate = new Date(currentDate);
+
+      if(direction == "next")
+        selectedDate.setYear(selectedDate.getFullYear() + 1);
+      else
+        selectedDate.setYear(selectedDate.getFullYear() - 1);
+
+      const year = selectedDate.getFullYear();
+      const month = selectedDate.getMonth() + 1;
+
+      const strNextMonth = `${year}-${String(month).padStart(2, "0")}-01`;
+      
+      return strNextMonth;
+    }
+
     const nextDay = new Date(currentDate);
 
     if(direction == "next")
@@ -790,6 +953,10 @@ class iamCalendar extends HTMLElement {
 
       settingsDialog.showModal();
       settingsDialog.focus();
+
+      const customEvent = new CustomEvent('open-settings');
+
+      this.dispatchEvent(customEvent);
     });
 
     // On clicking the save button, adjust the data attributes
@@ -809,7 +976,14 @@ class iamCalendar extends HTMLElement {
           this.setAttribute('data-end-time', settingsDialog.querySelector('#end-time').value);
 
           this.setWeekDay();
+
+          const customEvent = new CustomEvent('save-settings');
+          this.dispatchEvent(customEvent);
+
         }
+
+        const customEvent = new CustomEvent('close-settings');
+        this.dispatchEvent(customEvent);
 
         settingsDialog.close();
       }
@@ -817,7 +991,18 @@ class iamCalendar extends HTMLElement {
   }
 
   setTime(): void {
-    
+
+    if(!this.hasAttribute('data-time')){
+
+      const today = new Date();
+      
+      const hour = today.getHours();
+      const minute = today.getMinutes();
+      const time = `${hour}:${minute}`;
+
+      this.setAttribute('data-time',time);
+    }
+
     if(this.hasAttribute('data-time')){
 
       const time = this.getAttribute('data-time');
@@ -827,29 +1012,66 @@ class iamCalendar extends HTMLElement {
       this.shadowRoot?.querySelectorAll(`[data-hour="${hour}"]`).forEach((element) => {
 
         element.setAttribute('data-time',time);
+        element.classList.add('column-header');
         element.closest('tr')?.style.setProperty('--minute-pos',((minute / 60) * 100) + '%');
       });
     }
   }
 
+  getYearView(selectedDate, today, sundayFirst: false): string {
+    
+    let yearViewStr = "";
+
+    for(let i = 0; i < 12; i++){
+  
+      console.log(selectedDate);
+      const selectedDateObj = new Date(selectedDate);
+      const selectedYear = selectedDateObj.getFullYear();
+      const selectedFormattedDate = `${selectedYear}-${String(i+1).padStart(2, "0")}-01`;
+
+      yearViewStr += `<div class='month-wrapper'>
+        <time class="column-header">${this.monthArray[i]}</time>
+        <table>
+          <thead>
+            ${this.createThead(sundayFirst)}
+          </thead>
+          <tbody>
+            ${this.createCalendar(selectedFormattedDate, today, sundayFirst)}
+          </tbody>
+        </table>
+      </div>`;
+    }
+
+    return yearViewStr;
+  }
+
+
+
   connectedCallback(): void {
 
+    // To to transform the below into variables of component to make more re-usable
     const title = this.shadowRoot?.querySelector('.calendar__title');
     const tbody = this.shadowRoot?.querySelector('#calendar > table > tbody');
     const thead = this.shadowRoot?.querySelector('#calendar > table > thead');
-    const tbodySplit = this.shadowRoot?.querySelector('#split > table > tbody');
-    const theadSplit = this.shadowRoot?.querySelector('#split > table > thead');
+    //const tbodySplit = this.shadowRoot?.querySelector('#split > table > tbody');
+    //const theadSplit = this.shadowRoot?.querySelector('#split > table > thead');
     const weekViewHeader = this.shadowRoot?.querySelector('#week-view-header > table > tbody');
+    const yearView = this.shadowRoot?.querySelector('#year-view');
     const datePicker = this.shadowRoot?.querySelector(`#date`);
     const viewPicker = this.shadowRoot?.querySelector(`#view`);
     const todayButton = this.shadowRoot?.querySelector('#today-button');
+    const filtersButton = this.shadowRoot?.querySelector('#filters-button');
     const prevButton = this.shadowRoot?.querySelector('#prev-button');
     const nextButton = this.shadowRoot?.querySelector('#next-button');
     const sundayFirst = this.hasAttribute('data-sunday-first');
 
+    const splitButton = this.shadowRoot?.querySelector(`[name="split"]`);
+    
+    
+
     // set the table head - starting by monday by default but can be changed to sunday
     thead?.innerHTML = this.createThead(sundayFirst);
-    theadSplit?.innerHTML = this.createThead(sundayFirst);
+    //theadSplit?.innerHTML = this.createThead(sundayFirst);
 
     // Get a formatted version of todays date
     const today = new Date();
@@ -868,48 +1090,164 @@ class iamCalendar extends HTMLElement {
       viewPicker.value = "month";
     }
 
+    if(this.hasAttribute('data-views'))
+      viewPicker?.setAttribute('data-views', this.getAttribute('data-views'));
+
+    // Create the calendars
+    if(this.hasAttribute('data-calendars')){
+
+      this.calendars = this.getAttribute('data-calendars').split(',');
+
+      this.calendars.forEach((item,index) => {
+        this.calendars[index] = item.trim();
+      });
+    }
+
+
+
     // Setup the settings dialog
     this.setupSettings();
 
-    // TODO configure the filter button
+    
 
     // Setup the calendar then adjust and add events 
     title?.innerHTML = this.getTitle(strToday,viewPicker.value);
+
     const calendarHtml = this.createCalendar(strToday, strToday, sundayFirst);
     tbody?.innerHTML = calendarHtml;
-    tbodySplit?.innerHTML = calendarHtml;
+    //tbodySplit?.innerHTML = calendarHtml;
     weekViewHeader?.innerHTML = calendarHtml;
+    
+    
+    if(viewPicker.value == "year"){
 
+      yearView?.innerHTML = this.getYearView(datePicker.value, strToday, sundayFirst);
+      tbody?.innerHTML = '';
+    }
+    
     this.addEvents();
-    this.addJSEvents(tbody, tbodySplit, this);
+    this.addJSEvents(this);
     this.setWeekDay(); // Working hours
     this.setTime(); // Month and day view has a current time indicator
     this.scrollIntoPlace(); // Scroll into place - month and day view needs have the weekday hours in place
-
+    
     // #region Add events for the basic top controls
+
+    // Remove the slot attribute on selected days when in split mode
+    splitButton?.addEventListener('change', ()=> {
+
+      if(splitButton.checked){
+        Array.from(this.querySelectorAll(`[slot^="${datePicker.value}"]`)).forEach((button) => {
+
+          button.setAttribute('data-slot',button.getAttribute('slot'));
+          button.removeAttribute('slot');
+        });
+      }
+      else {
+        Array.from(this.querySelectorAll(`[data-slot]`)).forEach((button) => {
+          button.setAttribute('slot',button.getAttribute('data-slot'));
+        });
+      }
+    });
+
+    const resizeObserver = new ResizeObserver((entries) => {
+    
+      const splitButtonDisplayed = window.getComputedStyle(splitButton?.parentElement, null).display;
+      if(splitButtonDisplayed == "none"){
+
+        Array.from(this.querySelectorAll(`[data-slot]`)).forEach((button) => {
+          button.setAttribute('slot',button.getAttribute('data-slot'));
+        });
+        splitButton.checked = false;
+      }
+    });
+
+    resizeObserver.observe(this);
+
     viewPicker?.addEventListener('change', ()=> {
 
       title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
       this.setAttribute('data-view', viewPicker.value);
 
+      if(viewPicker.value == "week"){
+
+        Array.from(this.querySelectorAll(`.allday-event`)).forEach((button) => {
+
+          button.setAttribute('slot',button.getAttribute('slot')+'-header');
+        });
+      }
+      else {
+        Array.from(this.querySelectorAll(`.allday-event`)).forEach((button) => {
+
+          button.setAttribute('slot',button.getAttribute('slot')?.replace('-header',''));
+        });
+      }
+
+
       if(viewPicker.value == "week" || viewPicker.value == "day")
         this.scrollIntoPlace();
+      
+      if(viewPicker.value != "month"){
 
-      // TO DO dispatch event
+        Array.from(this.querySelectorAll(`[data-slot^="${datePicker.value}"]`)).forEach((button) => {
+          button.setAttribute('slot',button.getAttribute('data-slot'));
+        });
+      }
+
+      if(viewPicker.value == "year"){
+
+        yearView?.innerHTML = this.getYearView(datePicker.value, strToday, sundayFirst);
+        tbody?.innerHTML = '';
+        this.addEvents();
+        this.addJSEvents(this);
+        this.setWeekDay(); // Working hours
+        this.setTime(); // Month and day view has a current time indicator
+        this.scrollIntoPlace();
+      }
+      else if(tbody?.innerHTML == "") {
+        yearView?.innerHTML = '';
+        tbody?.innerHTML = this.createCalendar(datePicker.value, strToday);
+        this.addEvents();
+        this.addJSEvents(this);
+        this.setWeekDay(); // Working hours
+        this.setTime(); // Month and day view has a current time indicator
+        this.scrollIntoPlace();
+      }
+
+      const customEvent = new CustomEvent('change-view', {
+      detail: {
+        'view': viewPicker.value,
+        'date': datePicker.value
+        },
+      });
+
+      this.dispatchEvent(customEvent);
     });
 
     
     function resetCalendar(component): void{
 
-      const calendarHtml = component.createCalendar(datePicker.value, strToday);
-      tbody?.innerHTML = calendarHtml;
-      tbodySplit?.innerHTML = calendarHtml;
-      weekViewHeader?.innerHTML = calendarHtml;
+      if(viewPicker.value == "year"){
 
-      component.addEvents();
-      component.addJSEvents(tbody, tbodySplit, component);
-      component.setWeekDay();
-      component.setTime();
+        yearView?.innerHTML = component.getYearView(datePicker.value, strToday, sundayFirst);
+        tbody?.innerHTML = '';
+        component.addEvents();
+        component.addJSEvents(component);
+        component.setWeekDay(); // Working hours
+        component.setTime(); // Month and day view has a current time indicator
+      }
+      else {
+
+        const calendarHtml = component.createCalendar(datePicker.value, strToday);
+        tbody?.innerHTML = calendarHtml;
+        //tbodySplit?.innerHTML = calendarHtml;
+        weekViewHeader?.innerHTML = calendarHtml;
+
+        component.addEvents();
+        component.addJSEvents(component);
+        component.setWeekDay();
+        component.setTime();
+      }
     }
 
     function updateCalendar(component): void{
@@ -932,8 +1270,49 @@ class iamCalendar extends HTMLElement {
       else 
         resetCalendar(this);
 
-      // TO DO dispatch event
+      const customEvent = new CustomEvent('change-date', {
+      detail: {
+        'view': viewPicker.value,
+        'date': datePicker.value
+        },
+      });
+
+      this.dispatchEvent(customEvent);
     });
+
+    filtersButton?.addEventListener('click', ()=> {
+
+      const customEvent = new CustomEvent('open-filters',);
+      this.dispatchEvent(customEvent);
+    });
+
+    // HTML Observer
+    const htmlUpdated = (mutationList: any, observer: any): void => {
+
+      
+
+
+      observer.disconnect();
+
+      console.log(this.pauseObserver);
+
+      if(this.pauseObserver == false){
+      
+        for (const mutation of mutationList) {
+
+          if (mutation.type == 'characterData' || (mutation.type == 'childList' && mutation.addedNodes.length) || mutation.type === 'attributes') {
+            
+            //resetCalendar(this);
+            this.addEvents();
+          }
+        }
+      }
+
+      observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
+    };
+
+    const observer = new MutationObserver(htmlUpdated);
+    observer.observe(this, { childList: true, characterData: true, subtree: true, attributes: true });
 
     todayButton?.addEventListener('click', ()=> {
 
@@ -945,7 +1324,14 @@ class iamCalendar extends HTMLElement {
       else 
         resetCalendar(this);
 
-      // TO DO dispatch event
+      const customEvent = new CustomEvent('change-date-today', {
+      detail: {
+        'view': viewPicker.value,
+        'date': datePicker.value
+        },
+      });
+
+      this.dispatchEvent(customEvent);
     });
 
     prevButton?.addEventListener('click', ()=> {
@@ -958,7 +1344,14 @@ class iamCalendar extends HTMLElement {
       else 
         resetCalendar(this);
 
-      // TO DO dispatch event
+      const customEvent = new CustomEvent('change-date-previous', {
+      detail: {
+        'view': viewPicker.value,
+        'date': datePicker.value
+        },
+      });
+
+      this.dispatchEvent(customEvent);
     });
 
     nextButton?.addEventListener('click', ()=> {
@@ -966,22 +1359,101 @@ class iamCalendar extends HTMLElement {
       datePicker.value = this.paginateDate("next",viewPicker.value,datePicker.value);
       title?.innerHTML = this.getTitle(datePicker.value,viewPicker.value);
       
+      console.log(datePicker.value)
+
       if(this.shadowRoot.querySelector(`td:has(time[datetime="${datePicker.value}"]):not(.prev-month, .next-month)`))
         updateCalendar(this);
       else 
         resetCalendar(this);
 
-      // TO DO dispatch event
+      const customEvent = new CustomEvent('change-date-next', {
+      detail: {
+        'view': viewPicker.value,
+        'date': datePicker.value
+        },
+      });
+
+      this.dispatchEvent(customEvent);
     });
     // #endregion
 
     // TODO
     trackComponent(this, 'iam-calendar', [
-      'pip-clicked',
-      'next-clicked',
-      'prev-clicked',
-      'slider-changed',
+      'open-filters',
+      'change-view',
+      'change-date',
+      'change-date-today',
+      'change-date-previous',
+      'change-date-next',
+      'open-settings',
+      'close-settings',
+      'save-settings'
     ]);
+  }
+
+  static get observedAttributes(): any {
+    return ['data-calendars','data-view'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
+    
+    this.pauseObserver = true;
+
+    switch (attrName) {
+      case 'data-calendars': {
+        if (oldVal != newVal) {
+
+
+          const tbody = this.shadowRoot?.querySelector('#calendar > table > tbody');
+          const weekViewHeader = this.shadowRoot?.querySelector('#week-view-header > table > tbody');
+          const datePicker = this.shadowRoot?.querySelector(`#date`);
+
+          // Get a formatted version of todays date
+          const today = new Date();
+          const date = today.getDate();
+          const month = today.getMonth();
+          const year = today.getFullYear();
+          const strToday = `${year}-${String(month+1).padStart(2, "0")}-${String(date).padStart(2, "0")}`;
+
+
+          if(this.hasAttribute('data-calendars')){
+
+            this.calendars = this.getAttribute('data-calendars').split(',');
+
+            this.calendars.forEach((item,index) => {
+              this.calendars[index] = item.trim();
+            });
+          }
+
+          const calendarHtml = this.createCalendar(datePicker.value, strToday);
+          tbody?.innerHTML = calendarHtml;
+          weekViewHeader?.innerHTML = calendarHtml;
+
+          this.addEvents();
+          this.addJSEvents(this);
+          this.setWeekDay();
+          this.setTime();
+          
+        }
+        break;
+      };
+      case 'data-view': {
+        if (oldVal != newVal) {
+
+          const viewPicker = this.shadowRoot?.querySelector(`#view`);
+          
+          viewPicker.value = newVal;
+          viewPicker.dispatchEvent(new Event('change'));
+        }
+        break;
+      }
+    }
+
+    setTimeout(() => {
+      this.pauseObserver = false;
+    }, "500");
+
+    
   }
 }
 
