@@ -564,6 +564,11 @@ input[type='range']:focus::-moz-range-thumb {
     display: block !important;
   }
 }
+
+:host(.hide-btns) .carousel__btns,
+:host(.hide-controls) .carousel__controls {
+  display: none;
+}
 // #endregion
 
 // #region thumbnails
