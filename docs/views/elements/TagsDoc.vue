@@ -125,7 +125,7 @@
       the tag elements to pick up
     </p>
 
-    <h2>Action Tags</h2>
+    <h3>Action Tags</h3>
     <p>
       An action tag allows users to access configuration options by triggering a menu or modal when clicked or tapped.
       The tag label dynamically updates to reflect the selected option, providing a clear visual cue of the current
