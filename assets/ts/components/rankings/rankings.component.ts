@@ -19,29 +19,37 @@ class iamRankings extends HTMLElement {
     ${loadCSS}
     </style>
     <div class="podium">
-      <div><iam-rank>1st</iam-rank><span class="first-position"></span></div>
-      <div><iam-rank>2nd</iam-rank><span class="second-position"></span></div>
-      <div><iam-rank>3rd</iam-rank><span class="third-position"></span></div>
+      <div>
+        <iam-rank class="rank--trophy first-position">1st</iam-rank>
+      </div>
+      <div>
+        <iam-rank class="second-position">2nd</iam-rank>
+      </div>
+      <div>
+        <iam-rank class="third-position">3rd</iam-rank>
+      </div>
     </div>
     <div class="mh-md" part="leaderboard"><slot></slot></div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-
+    
     // insert extra CSS
     if (!document.getElementById('rankingsGlobal'))
       document.head.insertAdjacentHTML('beforeend', `<style id="rankingsGlobal">${loadExtraCSS}</style>`);
   }
 
   connectedCallback(): void {
+
+    
     const firstText = this.shadowRoot?.querySelector('.first-position');
     const secondText = this.shadowRoot?.querySelector('.second-position');
     const thirdText = this.shadowRoot?.querySelector('.third-position');
+
+    firstText?.setAttribute('data-title', this.querySelector('tbody tr:nth-child(1) :is(td,th):nth-child(1)')?.textContent);
+    secondText?.setAttribute('data-title', this.querySelector('tbody tr:nth-child(2) :is(td,th):nth-child(1)')?.textContent);
+    thirdText?.setAttribute('data-title', this.querySelector('tbody tr:nth-child(3) :is(td,th):nth-child(1)')?.textContent);
+
     const max = this.hasAttribute('data-max') ? this.getAttribute('data-max') : 100;
-
-    firstText?.innerHTML = this.querySelector('tbody tr:nth-child(1) :is(td,th):nth-child(1)')?.textContent;
-    secondText?.innerHTML = this.querySelector('tbody tr:nth-child(2) :is(td,th):nth-child(1)')?.textContent;
-    thirdText?.innerHTML = this.querySelector('tbody tr:nth-child(3) :is(td,th):nth-child(1)')?.textContent;
-
     this.querySelectorAll('tbody tr').forEach((element) => {
       const value = element.querySelector('td:last-child')?.textContent?.trim();
 
@@ -49,7 +57,14 @@ class iamRankings extends HTMLElement {
         element.querySelector(':first-child')?.innerHTML += `<progress max="${max}" value="${value}"></progress>`;
     });
 
-    trackComponent(this, 'iam-rank', ['select-card']);
+
+    if(this.classList.contains('show-gold')){
+
+      const firstRow = this.querySelector('tbody tr th');
+
+      firstRow?.insertAdjacentHTML('afterbegin',`<iam-rank class="rank--medal first-position">1st</iam-rank>`);
+    }
+
   }
 }
 

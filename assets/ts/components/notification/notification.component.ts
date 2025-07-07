@@ -67,7 +67,6 @@ class iamNotification extends HTMLElement {
       }
     }
 
-    console.log('hey2')
     const buttons = this.querySelectorAll('a,button');
 
     Array.from(buttons).forEach((button) => {

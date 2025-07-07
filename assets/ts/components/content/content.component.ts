@@ -78,7 +78,7 @@ class iamContent extends HTMLElement {
         true
       );
 
-      newXHRRequest.onload = function () {
+      newXHRRequest.onload = function(): void {
 
         if (this.status === 200) {
           const response = JSON.parse(this.responseText);
