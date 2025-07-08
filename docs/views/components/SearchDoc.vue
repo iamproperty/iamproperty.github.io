@@ -1,40 +1,141 @@
+<script setup lang="ts">
+
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/cards-header.png';
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  
+  import Search from '@/components/Search/Search.vue';
+  import VueReadme from '@/components/Multiselect/README.md';
+  import WebReadme from '~/ts/components/multiselect/README.md';
+
+
+
+
+  import Integration from '../Integration.vue';
+  import Versions from '../Versions.vue';
+  import TrackEvents from '../TrackEvents.vue';
+
+
+import searchAnatomy from '../../img/search-anatomy.png';
+
+
+</script>
+
 <template>
+
+  <TrackEvents
+    selector="iam-carousel"
+    :events="['pip-clicked', 'next-clicked', 'prev-clicked', 'slider-changed']"
+  ></TrackEvents>
   <main>
+
+
     <DSHeader :image="headerImg" section="components">
       <h1>Search</h1>
     </DSHeader>
 
+
+
     <p class="lead">
-      The search select field is an interactive element typically used in forms to allow users to filter a list of
-      predefined options and select one of those options.
+      The search field is an element typically used in forms, tables to filter data.
     </p>
 
-    <p>The options are presented in a browser default drop-down menu when the field clicked or tapped.</p>
+    <h2>Anatomy</h2>
 
-    <p>
-      Search selects are useful when there are a lot of options in the list. The search functionality makes it simpler
-      for the user to find the desired option quicker than a standard select.
-    </p>
+    <p>Search uses an the existing input field (with suffix) with two optional features.</p>
+
+    <img :src="searchAnatomy" class="mb-5" />
+
+    <ul class="mb-5">
+      <li>Input field (with suffix)</li>
+      <li>Browser default popover</li>
+      <li>Clear field button - compact quiet action button</li>
+    </ul>
+
+
+    <h2>Behaviour</h2>
+
+    <p>The field should be able to trigger the search in one of three ways:</p>
+    <ul class="mb-3">
+      <li><strong>Automatically:</strong> typing automatically triggers the search and updates the results</li>
+      <li><strong>Manually:</strong> pressing enter/clicking search icon, or tabbing away from search</li>
+      <li><strong>After delay:</strong> after a certain amount of characters have been entered or after a specified amount of time</li>
+    </ul>
+
+    <p>The user should be able to clear the field via the clear field icon.</p>
+
+    <p>There is an optional feature of searches to include a browser default popover that presents any valid or suggested values that the user can click to fill the search field.</p>
+
+
 
     <div class="container visualtest">
-      <Search>
-        <label
-          >Property address
-          <span>
-            <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-            <span class="suffix fa-regular fa-chevron-down"></span>
-          </span>
-        </label>
-        <datalist id="properties">
-          <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-          <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-          <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-          <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-          <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-          <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
-        </datalist>
-      </Search>
+
+      <div class="md-col-end-5 mb-4">
+        <span class="d-block pb-2">DEFAULT</span>
+        <Search class="">
+          <label
+            >Property address
+            <span>
+              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
+              <span class="suffix fa-regular fa-chevron-down"></span>
+            </span>
+          </label>
+          <datalist id="properties">
+            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
+            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
+            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
+            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
+            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
+            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+          </datalist>
+        </Search>
+      </div>
+        
+
+      <div class="md-col-end-5 mb-4">
+        <span class="d-block pb-2">DEFAULT</span>
+        <Search class="">
+          <label
+            >Property address
+            <span>
+              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
+              <span class="suffix fa-regular fa-chevron-down"></span>
+            </span>
+          </label>
+          <datalist id="properties">
+            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
+            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
+            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
+            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
+            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
+            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+          </datalist>
+        </Search>
+      </div>
+
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <h2 class="mt-4">Behaviour</h2>
     <ul>
@@ -158,32 +259,3 @@
   @use '../../../assets/sass/func' as *;
 </style>
 
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/cards-header.png';
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Table from '@/components/Table/Table.vue';
-  import Search from '@/components/Search/Search.vue';
-  import VueReadme from '@/components/Multiselect/README.md';
-  import WebReadme from '~/ts/components/multiselect/README.md';
-
-  export default {
-    components: {
-      DSHeader,
-      headerImg,
-      Tabs,
-      Table,
-      Search,
-      VueReadme,
-      WebReadme,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-      };
-    },
-    mounted() {
-      this.$nextTick(function () {});
-    },
-  };
-</script>

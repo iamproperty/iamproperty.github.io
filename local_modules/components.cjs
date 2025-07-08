@@ -20,18 +20,6 @@ fs.watch(watchFolder, { recursive: true }, (event, filename) => {
 
       let component = filename.split('\\')[0];
 
-      if(component == "table"){
-
-        exec(`rollup --environment COMPONENT:table-no-submit --config rollup-component.config.cjs --sourcemap`);
-        console.log(`table-no-submit compiled`);
-
-        exec(`rollup --environment COMPONENT:table-submit --config rollup-component.config.cjs --sourcemap`);
-        console.log(`table-submit compiled`);
-
-        exec(`rollup --environment COMPONENT:table-ajax --config rollup-component.config.cjs --sourcemap`);
-        console.log(`table-ajax compiled`);
-      }
-
       if (stat.isFile() && component !== prevComp && !filename.endsWith('.min.js') && !filename.endsWith('.map')) {
         
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
