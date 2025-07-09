@@ -155,7 +155,7 @@ podium positions.</p>
       First Place
     </h4>
 
-    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium show-gold">
+    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium">
       <table>
         <thead>
           <tr>
@@ -177,7 +177,7 @@ podium positions.</p>
       Standard
     </h4>
 
-    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium">
+    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium hide-gold">
       <table>
         <thead>
           <tr>
@@ -199,7 +199,7 @@ podium positions.</p>
       First Place, highlighted
     </h4>
 
-    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium show-gold">
+    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium">
       <table>
         <thead>
           <tr>
@@ -221,7 +221,7 @@ podium positions.</p>
       Highlighted
     </h4>
 
-    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium">
+    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium hide-gold">
       <table>
         <thead>
           <tr>
@@ -230,7 +230,7 @@ podium positions.</p>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="highlighted">
             <th>Pinnacle Homes</th>
             <td>11</td>
           </tr>
@@ -242,7 +242,7 @@ podium positions.</p>
 
     <div class="md-col-end-5">
       <strong>Position and value</strong>
-      <Rankings data-max="12" class="hide-podium hide-progress">
+      <Rankings data-max="12" class="hide-podium hide-progress hide-gold">
         <table>
           <thead>
             <tr>
@@ -263,7 +263,7 @@ podium positions.</p>
 
     <div class="md-col-start-7 md-col-end-11">
       <strong>Position and progress indicator</strong>
-      <Rankings data-max="12" class="hide-podium hide-value">
+      <Rankings data-max="12" class="hide-podium hide-value hide-gold">
         <table>
           <thead>
             <tr>
@@ -284,7 +284,7 @@ podium positions.</p>
 
     <div class="md-col-end-5 mb-5">
       <strong>Position only</strong>
-      <Rankings data-max="12" class="hide-podium hide-value hide-progress">
+      <Rankings data-max="12" class="hide-podium hide-value hide-progress hide-gold">
         <table>
           <thead>
             <tr>
@@ -316,7 +316,7 @@ podium positions.</p>
             </tr>
           </thead>
           <tbody>
-            <tr class="show-gold">
+            <tr>
               <th>Pinnacle Homes</th>
               <td>11</td>
             </tr>
@@ -381,7 +381,7 @@ podium positions.</p>
             </tr>
           </thead>
           <tbody>
-            <tr class="show-gold">
+            <tr>
               <th>Pinnacle Homes</th>
               <td>11</td>
             </tr>
@@ -438,7 +438,7 @@ podium positions.</p>
             </tr>
           </thead>
           <tbody>
-            <tr class="show-gold">
+            <tr>
               <th>Pinnacle Homes</th>
               <td>11</td>
             </tr>
@@ -499,7 +499,7 @@ podium positions.</p>
             </tr>
           </thead>
           <tbody>
-            <tr class="show-gold">
+            <tr>
               <th>Pinnacle Homes</th>
               <td>11</td>
             </tr>
@@ -547,7 +547,7 @@ podium positions.</p>
 
     <div class="admin-panel md-col-start-7">
       <h2 class="bg-light">Ranking list only</h2>
-      <Rankings data-max="12" class="leaderboard-scroll md-col-end-8 mb-5 hide-podium show-gold">
+      <Rankings data-max="12" class="leaderboard-scroll md-col-end-8 mb-5 hide-podium">
         <table>
           <thead>
             <tr>
@@ -556,7 +556,7 @@ podium positions.</p>
             </tr>
           </thead>
           <tbody>
-            <tr class="show-gold">
+            <tr>
               <th>Pinnacle Homes</th>
               <td>11</td>
             </tr>
@@ -725,8 +725,8 @@ podium positions.</p>
               <td>Hides the leaderboard</td>
             </tr>
             <tr>
-              <th>.show-gold</th>
-              <td>Displays the gold medal in the leaderboard</td>
+              <th>.hide-gold</th>
+              <td>Hides the gold medal in the leaderboard for first place</td>
             </tr>
             <tr>
               <th>.leaderboard-scroll</th>

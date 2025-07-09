@@ -73,15 +73,14 @@
   text-align: center;
   align-items: center;
   flex-direction: column;
-      justify-content: center;
-
+  justify-content: center;
   padding-top: rem(12);
   padding-inline: rem(5);
   padding-bottom: rem(12);
-
   height: rem(84);
-
   position: relative;
+  border-radius: 0 0 4px 4px;
+  overflow: hidden;
 
 
   &:before {
@@ -286,7 +285,8 @@
   }
   
   .title {
-  font-weight: bold;
+    font-weight: bold;
+
     &:before {
       content: 1;
       color: color-mix(in srgb, #F6B818, transparent 90%);

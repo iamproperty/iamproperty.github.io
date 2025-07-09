@@ -58,7 +58,7 @@ class iamRankings extends HTMLElement {
     });
 
 
-    if(this.classList.contains('show-gold')){
+    if(!this.classList.contains('hide-gold')){
 
       const firstRow = this.querySelector('tbody tr th');
 
