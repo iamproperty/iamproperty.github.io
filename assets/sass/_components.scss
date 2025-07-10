@@ -42,6 +42,8 @@ $darkMode: 'true' !default;
   $mobileOnly: $mobileOnly
 );
 
+@use 'components/milestone.scss';
+
 @include layer('components', $layers) {
   // Make sure the first
   main {

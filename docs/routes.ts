@@ -650,6 +650,15 @@ const routes = [
         },
         component: () => import('./views/components/TestimonialDoc.vue'),
       },
+      {
+        path: 'milestones',
+        name: 'Milestones (Beta)',
+        meta: {
+          title: 'Milestones | Components | iamkey',
+        },
+        component: () => import('./views/components/MilestonesDoc.vue'),
+        searchterms: 'expanded, list',
+      },
     ],
   },
   {

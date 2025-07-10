@@ -1,0 +1,47 @@
+iam-milestones { 
+
+  ul {
+    padding-left: 0;
+    margin-top: 2rem;
+  }
+
+  summary,
+  li {
+    display: flex;
+    gap: 1rem;
+
+    &:before {
+      content:'';
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid var(--colour-primary);
+      border-radius: 50%;
+      font-family: "Font Awesome 6 Pro";
+      color: #fff;
+      font-size: 0.7rem;
+    }
+
+    &.complete {
+      &:before {
+        content: "\f00c";
+        border-color: var(--colour-success);
+        background: var(--colour-success);
+        text-align: center;
+      }
+    }
+  }
+
+    summary {
+      &:before {
+        width: 1.25rem;
+        height: 1.25rem;
+        font-size: 0.9rem;
+        line-height: 1.2;
+      }
+
+      + p {
+        padding-bottom: 0;
+      }
+    }
+}

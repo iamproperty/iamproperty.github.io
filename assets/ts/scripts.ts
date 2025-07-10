@@ -38,6 +38,7 @@ const components = [
   'barchart',
   'doughnutchart',
   'bento-grid',
+  'milestones'
 ];
 
 // Attach classes to dom elements
