@@ -69,8 +69,8 @@ iam-actionbar {
   }
 
   // Dialog wrapper
-  .dialog__wrapper[slot='selected-overflow'] > button,
-  .dialog__wrapper[slot='overflow'] > button {
+  .menu__wrapper [slot='selected-overflow'] > button,
+  .menu__wrapper [slot='overflow'] > button {
     background: none;
     border: none;
     text-indent: 0;
@@ -90,8 +90,8 @@ iam-actionbar {
     border: none;
     margin: 0 !important;
   }
-  .dialog__wrapper[slot='selected-overflow'] dialog[open],
-  .dialog__wrapper[slot='overflow'] dialog[open] {
+  .menu__wrapper [slot='selected-overflow'] dialog[open],
+  .menu__wrapper [slot='overflow'] dialog[open] {
     display: contents;
   }
 }

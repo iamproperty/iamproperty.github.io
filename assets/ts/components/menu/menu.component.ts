@@ -24,8 +24,14 @@ class iamMenu extends HTMLElement {
     const menuID = this.hasAttribute('id') ? this.getAttribute('id') : false;
     const menuButton = document.querySelector(`[popovertarget="${menuID}"]`);
 
-    const topLevelmenuItems = this.querySelectorAll(':scope > a, :scope > button, :scope > details > summary');
-    const menuItems = this.querySelectorAll('a, button');
+    let topLevelmenuItems = this.querySelectorAll(':scope > a, :scope > button, :scope > details > summary');
+    let menuItems = this.querySelectorAll('a, button');
+
+    if (this.closest('.menu__wrapper')) {
+      menuItems = this.shadowRoot.querySelector('slot').assignedElements({ flatten: true });
+      topLevelmenuItems = menuItems;
+    }
+
     const subMenus = this.querySelectorAll('details');
 
     let subNextIndex;
@@ -135,6 +141,11 @@ class iamMenu extends HTMLElement {
     this.addEventListener('toggle', (e) => {
       const updateEvent = new CustomEvent(e.newState, { detail: { id: this.getAttribute('id'), target: e.target } });
       this.dispatchEvent(updateEvent);
+
+      // Fix the focus
+      if (this.closest('.menu__wrapper')) {
+        menuItems[0].focus();
+      }
 
       if (this.hasAttribute('popover-open')) {
         e.preventDefault();

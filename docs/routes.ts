@@ -506,6 +506,14 @@ const routes = [
         component: () => import('./views/components/ChartsDoc.vue'),
       },
       {
+        path: 'content',
+        name: 'Content (Beta)',
+        meta: {
+          title: 'Content | Components | iamkey',
+        },
+        component: () => import('./views/components/ContentDoc.vue'),
+      },
+      {
         path: 'filterlist',
         name: 'Filter list (Beta)',
         meta: {
