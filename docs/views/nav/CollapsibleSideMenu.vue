@@ -14,20 +14,20 @@
   const headerImg = ref<string>('/docs/img/type-header.png');
   const Anatomy = ref<string>('/docs/img/collapsible-side-menu/collapse-sidemenu-anatomy.png');
   const States = ref<string>('/docs/img/collapsible-side-menu/collapse-sidemenu-states.png');
-  const DesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Desktop - Expanded State.png');
-  const DesktopCollapsed = ref<string>('/docs/img/collapsible-side-menu/Desktop - Collapsed State.png');
-  const DesktopCollapsedHover = ref<string>('/docs/img/collapsible-side-menu/Desktop - Collapsed Hover State.png');
-  const TabletExpanded = ref<string>('/docs/img/collapsible-side-menu/Tablet - Expanded State.png');
-  const TabletCollapsed = ref<string>('/docs/img/collapsible-side-menu/Tablet - Collapsed State.png');
-  const MobileExpanded = ref<string>('/docs/img/collapsible-side-menu/Mobile - Expanded State.png');
-  const MobileCollapsed = ref<string>('/docs/img/collapsible-side-menu/Mobile - Collapsed State.png');
-  const DisableDesktopCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Desktop.png');
-  const DisableTabletCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Tablet.png');
-  const DisableMobileCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable Collapse - Mobile.png');
-  const InlineDesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Inline Desktop - Expanded State.png');
-  const InlineDesktopCollapsed = ref<string>('/docs/img/collapsible-side-menu/Inline Desktop - Collapsed State.png');
+  const DesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Desktop-Expanded-State.png');
+  const DesktopCollapsed = ref<string>('/docs/img/collapsible-side-menu/Desktop-Collapsed-State.png');
+  const DesktopCollapsedHover = ref<string>('/docs/img/collapsible-side-menu/Desktop-Collapsed-Hover-State.png');
+  const TabletExpanded = ref<string>('/docs/img/collapsible-side-menu/Tablet-Expanded-State.png');
+  const TabletCollapsed = ref<string>('/docs/img/collapsible-side-menu/Tablet-Collapsed-State.png');
+  const MobileExpanded = ref<string>('/docs/img/collapsible-side-menu/Mobile-Expanded-State.png');
+  const MobileCollapsed = ref<string>('/docs/img/collapsible-side-menu/Mobile-Collapsed-State.png');
+  const DisableDesktopCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable-Collapse-Desktop.png');
+  const DisableTabletCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable-Collapse-Tablet.png');
+  const DisableMobileCollapse = ref<string>('/docs/img/collapsible-side-menu/Disable-Collapse-Mobile.png');
+  const InlineDesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Inline-Desktop-Expanded-State.png');
+  const InlineDesktopCollapsed = ref<string>('/docs/img/collapsible-side-menu/Inline-Desktop-Collapsed-State.png');
   const InlineDesktopCollapsedHover = ref<string>(
-    '/docs/img/collapsible-side-menu/Inline Desktop - Collapsed Hover State.png'
+    '/docs/img/collapsible-side-menu/Inline-Desktop-Collapsed-Hover-State.png'
   );
 
   const message = ref<string>('input field value');
