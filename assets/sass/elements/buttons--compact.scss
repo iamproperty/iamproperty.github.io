@@ -45,6 +45,10 @@ $darkMode: 'true' !default;
 
     &[class*='fa-']:before {
       line-height: calc(var(--compact-size) - #{rem(4)});
+
+      @include dark-mode($darkMode) {
+        color: white;
+      }
     }
 
     &.btn-sm {

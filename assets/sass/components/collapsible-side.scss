@@ -36,32 +36,41 @@ $darkMode: 'true' !default;
   @include media-breakpoint-up(md, $mobileOnly) {
     padding-left: 5.25rem !important;
   }
+
+  &.inline {
+    .side-menu {
+      position: absolute;
+      top: 0;
+    }
+  }
 }
 
 // #region Side menu
 .side-menu {
   position: absolute;
+  z-index: 20;
   top: 0;
   left: 0;
   height: 100%;
   min-height: calc(100vh - var(--nav-height));
-  width: rem(30);
+  width: rem(70);
   height: calc(100% - var(--nav-height));
-  background-color: var(--colour-canvas);
+  padding: 0 rem(40) 0 0;
   transition: width 1s;
 
   &:before {
     content: '';
     position: absolute;
+    z-index: 1;
     top: 0;
-    right: 0;
+    right: rem(40);
     height: 100%;
     border-right: 2px solid var(--colour-border);
   }
 
   @include media-breakpoint-up(sm, $mobileOnly) {
     left: 0;
-    width: rem(40);
+    width: rem(80);
   }
 
   @include media-breakpoint-up(md, $mobileOnly) {
@@ -71,10 +80,11 @@ $darkMode: 'true' !default;
     top: var(--nav-height);
 
     &:not(.open).hover {
-      width: rem(304);
+      width: rem(344);
 
       .btn[class*='fa-']:before {
         content: '\f023' !important;
+        transform: rotate(0);
       }
     }
   }
@@ -83,13 +93,14 @@ $darkMode: 'true' !default;
     display: var(--btn-display, block);
     position: absolute;
     top: rem(32);
-    right: 0;
+    right: rem(40);
     margin-bottom: 0;
     margin-right: rem(-20);
     background-color: var(--colour-canvas-2);
     border: 2px solid var(--colour-border);
     z-index: 99;
     color: var(--colour-primary-theme);
+    transition: opacity 0.2s;
 
     &[aria-expanded] {
       // Change icon
@@ -105,7 +116,7 @@ $darkMode: 'true' !default;
 
   &:is(:hover, :focus-within, :active) .btn {
     border: 2px solid var(--colour-border);
-    color: var(--colour-primary-theme);
+    color: var(--colour-primary);
 
     @include media-breakpoint-up(md, $mobileOnly) {
       opacity: 1;
@@ -113,29 +124,30 @@ $darkMode: 'true' !default;
   }
 
   &:is(.open) {
-    width: calc(100% - var(--container-padding-x));
+    width: calc(100% - var(--container-padding-x) + rem(40));
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      width: rem(382);
+    @include media-breakpoint-up(sm) {
+      width: rem(422);
     }
-    @include media-breakpoint-up(md, $mobileOnly) {
-      width: rem(304);
+    @include media-breakpoint-up(md) {
+      width: rem(344);
     }
   }
 
   // Content
-
   .side-menu-content {
     position: absolute;
     top: 0;
-    right: 0;
-    padding: rem(32) rem(40) 0 0;
+    right: rem(40);
+    padding: rem(32) rem(40) rem(40) 0;
     width: rem(351);
+    background-color: var(--colour-canvas);
     opacity: 0;
     transition: opacity 1s;
     min-height: 100%;
     overflow: auto;
     max-height: 100%;
+    scrollbar-width: thin;
 
     .h3 {
       padding-left: rem(24);
@@ -172,90 +184,13 @@ $darkMode: 'true' !default;
   }
 }
 
-// Links
-::slotted(*[slot='menu']) {
-  padding-left: rem(24);
-
-  @include media-breakpoint-up(sm, $mobileOnly) {
-    padding-left: rem(40);
-  }
-
-  @include media-breakpoint-up(md, $mobileOnly) {
-    padding-left: var(--container-padding-x-md);
-  }
-}
-
-::slotted(hr) {
-  border-bottom: 2px solid var(--colour-border) !important;
-  margin-right: rem(-40) !important;
-}
-
-::slotted(a[slot='menu']) {
-  display: block;
-
-  display: block !important;
-  line-height: rem(20) !important;
-  padding: rem(16) rem(40) rem(16) rem(24) !important;
-  margin: 0 !important;
-  flex-shrink: 0;
-  font-size: 1rem !important;
-  font-weight: normal !important;
-  text-decoration: none;
-
-  border-right: 2px solid var(--colour-border) !important;
-  border-bottom: 2px solid var(--colour-border) !important;
-
-  margin-right: rem(-40) !important;
-
-  @include media-breakpoint-up(sm, $mobileOnly) {
-    padding-left: rem(40) !important;
-  }
-
-  @include media-breakpoint-up(md, $mobileOnly) {
-    padding-left: var(--container-padding-x-md) !important;
-  }
-  &:after {
-    display: none;
-  }
-}
-
-::slotted(a[slot='menu']:where(:hover, :focus, [aria-expanded])) {
-  background-color: var(--side-link-hover) !important;
-}
-
-::slotted(a[slot='menu']:active) {
-  background-color: var(--side-link-hover) !important;
-  font-weight: bold !important;
-}
-
-::slotted(a[slot='menu'][aria-expanded]) {
-  background-color: var(--side-link-hover) !important;
-  font-weight: bold !important;
-  margin-right: #{rem(-40)} !important;
-  position: relative;
-
-  border-right: 2px solid var(--colour-info) !important;
-
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: calc(100% + 4px);
-    margin-top: -2px;
-    width: 2px;
-    border-right: 2px solid var(--colour-info);
-    margin-right: -2px;
-
-    @media (forced-colors: active) {
-      border-right: 10px solid var(--colour-info);
-    }
-  }
-}
+// links moved to links.scss
 // #endregion
 
 // #region main content
 .main-content {
+  position: relative;
+  z-index: 10;
   padding-top: rem(24);
   padding-left: rem(60);
 
@@ -309,5 +244,66 @@ $darkMode: 'true' !default;
 @include media-breakpoint-up(md, $mobileOnly) {
   :host([open-always]) {
     --btn-display: none;
+  }
+}
+
+:host([inline]) {
+  width: 100%;
+  max-width: 100%;
+
+  @include media-breakpoint-up(md, $mobileOnly) {
+    max-width: min(var(--container-max-width), 100% - 19rem);
+  }
+}
+
+:host([menu-right]) {
+  .container {
+    padding-right: 0 !important;
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      padding-right: 5.25rem !important;
+    }
+  }
+
+  @include media-breakpoint-up(md, $mobileOnly) {
+    .container:has(.side-menu.open) {
+      margin-right: max(19rem, calc(50% - calc(var(--container-max-width) / 2)));
+      margin-left: 0;
+    }
+  }
+
+  .side-menu {
+    left: auto;
+    right: -2.5rem;
+    padding: 0 0 0 rem(40);
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      right: 0;
+    }
+
+    &::before {
+      right: 100%;
+    }
+
+    .btn {
+      right: 100%;
+
+      &:before {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .main-content {
+    padding-left: var(--container-padding-x);
+    padding-right: rem(60);
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      padding-right: rem(80);
+    }
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      padding-right: 0;
+    }
   }
 }
