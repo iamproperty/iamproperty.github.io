@@ -11,7 +11,7 @@
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
 
-  const headerImg = ref<string>('/docs/img/type-header.png');
+  import headerImg from '../../img/type-header.png';
   const Anatomy = ref<string>('/docs/img/collapsible-side-menu/collapse-sidemenu-anatomy.png');
   const States = ref<string>('/docs/img/collapsible-side-menu/collapse-sidemenu-states.png');
   const DesktopExpanded = ref<string>('/docs/img/collapsible-side-menu/Desktop-Expanded-State.png');
