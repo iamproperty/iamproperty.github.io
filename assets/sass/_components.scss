@@ -1,141 +1,185 @@
 @use 'sass:math';
 @use '_func' as *;
 
-@use 'components/nav.preload';
-@use 'components/carousel.config';
-@use 'components/multiselect.preload';
-@use 'components/inline-edit.preload';
-@use 'components/charts.config.scss';
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-// Make sure the first
-main {
-  position: relative;
+@use 'components/nav.preload' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'components/carousel.config' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'components/multiselect.preload' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'components/inline-edit.preload' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'components/charts.config.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+@use 'components/menu.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
 
-  > *:first-child {
-    padding-top: 2rem;
+@use 'components/tabs.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+
+@include layer('components', $layers) {
+  // Make sure the first
+  main {
+    position: relative;
+
+    > *:first-child {
+      padding-top: 2rem;
+    }
   }
-}
 
-// #region Undefined web components
+  // #region Undefined web components
 
-@include media-breakpoint-up(md) {
-  iam-header:not(:defined) {
-    min-height: rem(470);
+  iam-header {
+    
+    grid-column: container;
   }
-}
 
-// #region Cards
-.card:not(:defined) {
-  box-shadow: var(--card-box-shadow);
-  border-radius: var(--card-border-radius);
-  padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
-}
+  @include media-breakpoint-up(md, $mobileOnly) {
+    iam-header:not(:defined) {
+      min-height: rem(470);
+    }
+  }
 
-.row
-  [class*='col']:has(
-    label:first-child:last-child .card:defined:first-child:last-child,
-    button:first-child:last-child .card:defined:first-child:last-child,
-    a:first-child:last-child .card:defined:first-child:last-child
-  ) {
-  display: flex;
-}
+  // #region Cards
+  .card:not(:defined) {
+    box-shadow: var(--card-box-shadow);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
+  }
 
-iam-card:has([type='checkbox']:checked) {
-  --hover-outline-colour: var(--colour-info);
-  --outline-colour: var(--colour-info);
-}
+  .row
+    [class*='col']:has(
+      label:first-child:last-child .card:defined:first-child:last-child,
+      button:first-child:last-child .card:defined:first-child:last-child,
+      a:first-child:last-child .card:defined:first-child:last-child
+    ) {
+    display: flex;
+  }
 
-label:has(.card) {
-  padding: 0 !important;
-  margin-right: 0 !important;
+  iam-card:has([type='checkbox']:checked) {
+    --hover-outline-colour: var(--colour-info);
+    --outline-colour: var(--colour-info);
+  }
 
-  &:before,
-  &:after {
+  label:has(.card) {
+    padding: 0 !important;
+    margin-right: 0 !important;
+
+    &:before,
+    &:after {
+      display: none !important;
+    }
+
+    .optional-text {
+      display: none;
+    }
+
+    &:has(:checked) {
+      .card:defined {
+        outline: 2px solid var(--colour, var(--colour-primary));
+        outline-offset: -2px;
+
+        ::part(body) {
+          background: none;
+        }
+
+        ::part(footer) {
+          background: none;
+        }
+      }
+    }
+  }
+
+  iam-filter-card:not(:has(i)) {
+    border-left: 0.75rem solid var(--colour, var(--colour-primary));
+  }
+
+  .card .badge:not([class*='bg-']):not([class*='wider-colour-']) {
+    background-color: var(--colour-canvas);
+    outline: 1px solid var(--colour-light);
+  }
+
+  a[target='_blank'] .card {
+    --icon: var(--icon-new-tab);
+  }
+
+  // #endregion
+
+  // Search
+  iam-search input:not(.is-invalid):not(:invalid) {
+    background: none !important;
+  }
+
+  iam-search .optional-text {
     display: none !important;
   }
 
-  .optional-text {
-    display: none;
-  }
+  // Table dark mode support
+  iam-table {
+    tbody tr {
+      @include dark-mode($darkMode) {
+        --hover-background: var(--colour-canvas);
 
-  &:has(:checked) {
-    .card:defined {
-      outline: 2px solid var(--colour, var(--colour-primary));
-      outline-offset: -2px;
-
-      ::part(body) {
-        background: none;
-      }
-      ::part(footer) {
-        background: none;
+        &:is(:hover, :focus-within, .hover) {
+          background: var(--row-bg);
+        }
       }
     }
   }
-}
 
-iam-filter-card:not(:has(i)) {
-  border-left: 0.75rem solid var(--colour, var(--colour-primary));
-}
-
-.card .badge:not([class*='bg-']):not([class*='wider-colour-']) {
-  background-color: var(--colour-canvas);
-  outline: 1px solid var(--colour-light);
-}
-
-a[target='_blank'] .card {
-  --icon: var(--icon-new-tab);
-}
-
-// #endregion
-
-// Search
-iam-search input:not(.is-invalid):not(:invalid) {
-  background: none !important;
-}
-iam-search .optional-text {
-  display: none !important;
-}
-
-// Table dark mode support
-iam-table {
-  tbody tr {
-    @include dark-mode() {
-      --hover-background: var(--colour-canvas);
-
-      &:is(:hover, :focus-within, .hover) {
-        background: var(--row-bg);
+  @container (width > 23.4375em) {
+    iam-table.table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
+      tr > *:not(:first-child):last-child {
+        @media screen and (prefers-color-scheme: dark) {
+          background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
+        }
       }
     }
   }
-}
 
-@container (width > 23.4375em) {
-  iam-table.table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
-    tr > *:not(:first-child):last-child {
-      @media screen and (prefers-color-scheme: dark) {
-        background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
+  iam-table {
+    tr:has([type='checkbox']:checked) {
+      @include dark-mode($darkMode) {
+        --row-bg: #000000;
       }
     }
   }
-}
 
-iam-table {
-  tr:has([type='checkbox']:checked) {
-    @include dark-mode() {
-      --row-bg: #000000;
-    }
+  iam-pagination {
+    --pagination-link-color: var(--colour-light);
+    --pagination-link-color-active: #e0e0e0;
   }
-}
 
-iam-pagination {
-  --pagination-link-color: var(--colour-light);
-  --pagination-link-color-active: #e0e0e0;
-}
-
-iam-fileupload::part(file) {
-  @include dark-mode() {
-    background: var(--colour-canvas-2);
-    border-color: var(--colour-canvas-2);
-    color: var(--colour-body);
+  iam-fileupload::part(file) {
+    @include dark-mode($darkMode) {
+      background: var(--colour-canvas-2);
+      border-color: var(--colour-canvas-2);
+      color: var(--colour-body);
+    }
   }
 }

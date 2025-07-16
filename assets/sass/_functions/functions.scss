@@ -1,19 +1,25 @@
 @use 'sass:math';
 @use 'sass:map';
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:meta';
+@use 'sass:string';
+
+$escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29')) !default;
 
 // #region from Bootstrap
-// Utility mixins and functions for evaluating source code across our variables, maps, and mixins.
+// Utility color.mix(ins and functions for evaluating source code across our variables, maps, and color.mix(ins.
 
 // Ascending
 // Used to evaluate Sass maps like our grid breakpoints.
-@mixin _assert-ascending($map, $map-name) {
+@mixin assert-ascending($map, $map-name) {
   $prev-key: null;
   $prev-num: null;
   @each $key, $num in $map {
-    @if $prev-num == null or unit($num) == '%' or unit($prev-num) == '%' {
+    @if $prev-num == null or math.unit($num) == '%' or math.unit($prev-num) == '%' {
       // Do nothing
-    } @else if not comparable($prev-num, $num) {
-      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if not math.compatible($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose math.unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
     } @else if $prev-num >= $num {
       @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
     }
@@ -24,10 +30,10 @@
 
 // Starts at zero
 // Used to ensure the min-width of the lowest breakpoint starts at 0.
-@mixin _assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
-  @if length($map) > 0 {
-    $values: map-values($map);
-    $first-value: nth($values, 1);
+@mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
+  @if list.length($map) > 0 {
+    $values: map.values($map);
+    $first-value: list.nth($values, 1);
     @if $first-value != 0 {
       @warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
     }
@@ -36,18 +42,18 @@
 
 // Colors
 @function to-rgb($value) {
-  @return red($value), green($value), blue($value);
+  @return color.channel($value, 'red', rgb), color.channel($value, 'green', rgb), color.channel($value, 'blue', rgb);
 }
 
 // stylelint-disable scss/dollar-variable-pattern
 @function rgba-css-var($identifier, $target) {
   @if $identifier == 'body' and $target == 'bg' {
-    @return rgba(var(--#{$prefix}#{$identifier}-bg-rgb), var(--#{$prefix}#{$target}-opacity));
+    @return rgba(var(--#{$identifier}-bg-rgb), var(--#{$target}-opacity));
   }
   @if $identifier == 'body' and $target == 'text' {
-    @return rgba(var(--#{$prefix}#{$identifier}-color-rgb), var(--#{$prefix}#{$target}-opacity));
+    @return rgba(var(--#{$identifier}-color-rgb), var(--#{$target}-opacity));
   } @else {
-    @return rgba(var(--#{$prefix}#{$identifier}-rgb), var(--#{$prefix}#{$target}-opacity));
+    @return rgba(var(--#{$identifier}-rgb), var(--#{$target}-opacity));
   }
 }
 
@@ -58,25 +64,33 @@
     // allow to pass the $key and $value of the map as an function argument
     $_args: ();
     @each $arg in $args {
-      $_args: append($_args, if($arg == '$key', $key, if($arg == '$value', $value, $arg)));
+      $_args: list.append($_args, if($arg == '$key', $key, if($arg == '$value', $value, $arg)));
     }
 
-    $_map: map-merge(
+    $_map: map.merge(
       $_map,
       (
-        $key: call(get-function($func), $_args...),
+        $key: meta.call(meta.get-function($func), $_args...),
       )
     );
   }
 
   @return $_map;
 }
+
+@function show-css-var($identifier) {
+  @return var(--colour-#{$identifier});
+}
+@function show-css-var-text($identifier) {
+  @return var(--colour-#{$identifier});
+}
+
 // stylelint-enable scss/dollar-variable-pattern
 
 @function varify($list) {
   $result: null;
   @each $entry in $list {
-    $result: append($result, var(--#{$prefix}#{$entry}), space);
+    $result: list.append($result, var(--#{$entry}), space);
   }
   @return $result;
 }
@@ -87,7 +101,7 @@
   $result: ();
   @each $key, $value in $map {
     @if $key != 0 {
-      $result: map-merge($result, ('n' + $key: (-$value)));
+      $result: map.merge($result, ('n' + $key: (-$value)));
     }
   }
   @return $result;
@@ -98,7 +112,7 @@
   $result: ();
   @each $key, $value in $map {
     @if (index($values, $key) != null) {
-      $result: map-merge(
+      $result: map.merge(
         $result,
         (
           $key: $value,
@@ -114,7 +128,7 @@
   $merged-maps: ();
 
   @each $map in $maps {
-    $merged-maps: map-merge($merged-maps, $map);
+    $merged-maps: map.merge($merged-maps, $map);
   }
   @return $merged-maps;
 }
@@ -128,11 +142,11 @@
 // @param {String} $replace ('') - New value
 // @return {String} - Updated string
 @function str-replace($string, $search, $replace: '') {
-  $index: str-index($string, $search);
+  $index: string.index($string, $search);
 
   @if $index {
-    @return str-slice($string, 1, $index - 1) + $replace +
-      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+    @return string.slice($string, 1, $index - 1) + $replace +
+      str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
   }
 
   @return $string;
@@ -143,11 +157,11 @@
 // Requires the use of quotes around data URIs.
 
 @function escape-svg($string) {
-  @if str-index($string, 'data:image/svg+xml') {
+  @if string.index($string, 'data:image/svg+xml') {
     @each $char, $encoded in $escaped-characters {
       // Do not escape the url brackets
-      @if str-index($string, 'url(') == 1 {
-        $string: url('#{str-replace(str-slice($string, 6, -3), $char, $encoded)}');
+      @if string.index($string, 'url(') == 1 {
+        $string: url('#{str-replace(string.slice($string, 6, -3), $char, $encoded)}');
       } @else {
         $string: str-replace($string, $char, $encoded);
       }
@@ -160,7 +174,7 @@
 // Color contrast
 // See https://github.com/twbs/bootstrap/pull/30168
 
-// A list of pre-calculated numbers of pow(divide((divide($value, 255) + .055), 1.055), 2.4). (from 0 to 255)
+// A list of pre-calculated numbers of Pow(divide((divide($value, 255) + .055), 1.055), 2.4). (from 0 to 255)
 // stylelint-disable-next-line scss/dollar-variable-default, scss/dollar-variable-pattern
 $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0.0027 0.003 0.0033 0.0037 0.004 0.0044
   0.0048 0.0052 0.0056 0.006 0.0065 0.007 0.0075 0.008 0.0086 0.0091 0.0097 0.0103 0.011 0.0116 0.0123 0.013 0.0137
@@ -223,7 +237,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 
   @each $name, $value in $rgb {
     $value: if(divide($value, 255) < 0.03928, divide(divide($value, 255), 12.92), nth($_luminance-list, $value + 1));
-    $rgb: map-merge(
+    $rgb: map.merge(
       $rgb,
       (
         $name: $value,
@@ -237,18 +251,18 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 // Return opaque color
 // opaque(#fff, rgba(0, 0, 0, .5)) => #808080
 @function opaque($background, $foreground) {
-  @return mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
+  @return color.mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
 }
 
 // scss-docs-start color-functions
-// Tint a color: mix a color with white
+// Tint a color: color.mix( a color with white
 @function tint-color($color, $weight) {
-  @return mix(white, $color, $weight);
+  @return color.mix(white, $color, $weight);
 }
 
-// Shade a color: mix a color with black
+// Shade a color: color.mix( a color with black
 @function shade-color($color, $weight) {
-  @return mix(black, $color, $weight);
+  @return color.mix(black, $color, $weight);
 }
 
 // Shade the color if the weight is positive, else tint it
@@ -267,11 +281,11 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
     @return $value1;
   }
 
-  @if type-of($value1) == number and type-of($value2) == number and comparable($value1, $value2) {
+  @if meta.type-of($value1) == number and meta.type-of($value2) == number and math.compatible($value1, $value2) {
     @return $value1 + $value2;
   }
 
-  @return if($return-calc == true, calc(#{$value1} + #{$value2}), $value1 + unquote(' + ') + $value2);
+  @return if($return-calc == true, calc(#{$value1} + #{$value2}), $value1 + string.unquote(' + ') + $value2);
 }
 
 @function subtract($value1, $value2, $return-calc: true) {
@@ -287,15 +301,15 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
     @return $value1;
   }
 
-  @if type-of($value1) == number and type-of($value2) == number and comparable($value1, $value2) {
+  @if meta.type-of($value1) == number and meta.type-of($value2) == number and math.compatible($value1, $value2) {
     @return $value1 - $value2;
   }
 
-  @if type-of($value2) != number {
-    $value2: unquote('(') + $value2 + unquote(')');
+  @if meta.type-of($value2) != number {
+    $value2: string.unquote('(') + $value2 + string.unquote(')');
   }
 
-  @return if($return-calc == true, calc(#{$value1} - #{$value2}), $value1 + unquote(' - ') + $value2);
+  @return if($return-calc == true, calc(#{$value1} - #{$value2}), $value1 + string.unquote(' - ') + $value2);
 }
 
 @function divide($dividend, $divisor, $precision: 10) {
@@ -326,8 +340,8 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
     }
   }
   $result: $result * $factor * $sign;
-  $dividend-unit: unit($dividend);
-  $divisor-unit: unit($divisor);
+  $dividend-unit: math.unit($dividend);
+  $divisor-unit: math.unit($divisor);
   $unit-map: (
     'px': 1px,
     'rem': 1rem,
@@ -345,7 +359,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @return map.get($spacers, $int);
 }
 
-@function pow($x, $n) {
+@function Pow($x, $n) {
   $ret: 1;
 
   @if $n >= 0 {
@@ -370,8 +384,8 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
     + "See https://github.com/sass/sass/issues/1122 for further informations.";
   }
 
-  $pow: pow(10, $digits);
-  @return math.div(round($float * $pow), $pow);
+  $Pow: Pow(10, $digits);
+  @return math.div(round($float * $Pow), $Pow);
 }
 
 // converts pixels to em (context sets the current size of the font)
@@ -379,8 +393,8 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @return #{math.div($pixels, $context)}em;
 }
 
-@function rem($pixels, $context: 16) {
-  @return #{math.div($pixels, $context)}rem;
+@function rem($pixels) {
+  @return #{math.div($pixels, 16)}rem;
 }
 
 @function vw($pixels, $context: 16) {
@@ -389,7 +403,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 }
 
 @function strip-px($number) {
-  @if type-of($number) == 'number' and not unitless($number) {
+  @if meta.type-of($number) == 'number' and not math.unitless($number) {
     @return math.div($number, ($number * 0 + 1));
   }
 
@@ -417,7 +431,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 }
 
 @function tint($colour, $percentage) {
-  @return mix(white, $colour, $percentage);
+  @return color.mix(white, $colour, $percentage);
 }
 @function shade($colour, $percent) {
   @return $colour;
@@ -430,8 +444,8 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 
 // Trims the start/left of the string:
 @function str-trimStart($str) {
-  @if (str-slice($str, 1, 1) == ' ') {
-    @return str-trimStart(str-slice($str, 2));
+  @if (string.slice($str, 1, 1) == ' ') {
+    @return str-trimStart(string.slice($str, 2));
   } @else {
     @return $str;
   }
@@ -439,8 +453,8 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 
 // Trims the end/right of the string:
 @function str-trimEnd($str) {
-  @if (str-slice($str, str-length($str), -1) == ' ') {
-    @return str-trimEnd(str-slice($str, 1, -2));
+  @if (string.slice($str, string.length($str), -1) == ' ') {
+    @return str-trimEnd(string.slice($str, 1, -2));
   } @else {
     @return $str;
   }
@@ -455,20 +469,20 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   // empty array/list
   $split-arr: ();
   // first index of separator in string
-  $index: str-index($string, $separator);
+  $index: string.index($string, $separator);
   // loop through string
   @while $index != null {
     // get the substring from the first character to the separator
-    $item: str-slice($string, 1, $index - 1);
+    $item: string.slice($string, 1, $index - 1);
     // push item to array
-    $split-arr: append($split-arr, str-trim($item));
+    $split-arr: list.append($split-arr, str-trim($item));
     // remove item and separator from string
-    $string: str-slice($string, $index + 1);
+    $string: string.slice($string, $index + 1);
     // find new index of separator
-    $index: str-index($string, $separator);
+    $index: string.index($string, $separator);
   }
   // add the remaining string to list (the last item)
-  $split-arr: append($split-arr, str-trim($string));
+  $split-arr: list.append($split-arr, str-trim($string));
 
   @return $split-arr;
 }

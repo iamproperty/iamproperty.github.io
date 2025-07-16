@@ -1,4 +1,3 @@
-// @ts-nocheck
 import filterlist from '../../modules/filterlist';
 
 // Data layer Web component created
@@ -52,7 +51,7 @@ class iamFilterlist extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const classList = this.classList.toString();
     this.shadowRoot.querySelector('.list__wrapper').setAttribute('class', `list__wrapper ${classList}`);
 

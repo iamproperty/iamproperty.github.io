@@ -1,26 +1,23 @@
 @use '../_func.scss' as *;
 
+$darkMode: 'true' !default;
+
 // #region Default view
 iam-actionbar {
+  --actionbar-radius: 0;
   background-color: #fcfcfc;
-
-  @include dark-mode() {
-    background-color: var(--colour-canvas);
-  }
-
   display: block;
   border-top-left-radius: rem(10);
   border-top-right-radius: rem(10);
 
-  --actionbar-radius: 0;
+  @include dark-mode($darkMode) {
+    background-color: var(--colour-canvas);
+  }
 }
 // #endregion
 
 // #region at the top
 main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
-  @include light-mode() {
-    background-color: #e6eaec;
-  }
   border-radius: rem(8);
   margin: var(--container-padding);
   margin-bottom: 2rem;
@@ -30,71 +27,18 @@ main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
     padding-top: 0;
   }
 
-  @include media-breakpoint-up(sm) {
+  @include light-mode($darkMode) {
+    background-color: #e6eaec;
+  }
+
+  @include media-breakpoint-up(sm, $mobileOnly) {
     box-shadow: none;
     margin-inline: 0;
     border-radius: 0;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     padding-inline: calc(50% - #{rem(556)} - 2rem);
-  }
-}
-// #endregion
-
-// #region As part of the iam-table component
-iam-table iam-actionbar {
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
-
-.actionbar__sticky-wrapper {
-  container-type: inline-size;
-
-  @include media-breakpoint-up(sm) {
-    padding: 0 !important;
-  }
-}
-
-@container (width < 23.4375em) {
-  :is(iam-table, .actionbar__sticky-wrapper) > .actionbar__sticky {
-    display: block;
-    position: sticky;
-    left: 0;
-    top: calc(var(--sticky-padding) + #{rem(16)});
-    z-index: var(--index-menu);
-    pointer-events: none;
-
-    &:after {
-      content: '';
-      display: block;
-      width: 100%;
-      height: calc(100vh - #{rem(68 + 24 + 16)});
-      pointer-events: none;
-    }
-
-    & + * {
-      margin-top: calc(-100vh - -6.75rem);
-    }
-  }
-
-  :is(iam-table, .actionbar__sticky) > iam-actionbar {
-    pointer-events: all !important;
-    display: block;
-    border: none;
-    background: var(--colour-canvas-2);
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
-    border-radius: 0.5rem;
-    margin-bottom: rem(24);
-  }
-}
-
-@include container-up(sm) {
-  iam-table iam-actionbar {
-    margin-left: -2rem;
-    margin-right: -2rem;
-    margin-top: -2rem;
-    margin-bottom: 1rem;
   }
 }
 // #endregion
@@ -125,8 +69,8 @@ iam-actionbar {
   }
 
   // Dialog wrapper
-  .dialog__wrapper[slot='selected-overflow'] > button,
-  .dialog__wrapper[slot='overflow'] > button {
+  .menu__wrapper [slot='selected-overflow'] > button,
+  .menu__wrapper [slot='overflow'] > button {
     background: none;
     border: none;
     text-indent: 0;
@@ -146,8 +90,8 @@ iam-actionbar {
     border: none;
     margin: 0 !important;
   }
-  .dialog__wrapper[slot='selected-overflow'] dialog[open],
-  .dialog__wrapper[slot='overflow'] dialog[open] {
+  .menu__wrapper [slot='selected-overflow'] dialog[open],
+  .menu__wrapper [slot='overflow'] dialog[open] {
     display: contents;
   }
 }

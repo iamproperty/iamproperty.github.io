@@ -1,7 +1,15 @@
+@use 'sass:map';
+
 @charset "UTF-8";
 
 // Set mobile only variable so that the media query mixin doesn't print out non mobile rules
 @use '_func' as *;
+
+@use '_corefiles';
+@use '_grid';
+@use '_bs_grid';
+@use '_utilities';
+@use '_utility-mixins';
 
 @include layer('reset') {
   html {
@@ -10,21 +18,13 @@
   }
 }
 
-@import '_corefiles';
-
 @include layer('elements') {
   .h1 {
-    --line-height: #{rem(map-get($heading-sizes, 'h1_lh'))};
+    --line-height: #{map.get($heading-sizes, 'h1_lh')};
 
-    font-size: rem(map-get($heading-sizes, 'h1_fs'));
-    padding-bottom: rem(map-get($heading-sizes, 'h1_pb'));
+    font-size: map.get($heading-sizes, 'h1_fs');
+    padding-bottom: map.get($heading-sizes, 'h1_pb');
     font-weight: 900;
-
-    @include media-breakpoint-up(sm) {
-      font-size: rem(map-get($heading-sizes, 'h1_fs_sm'));
-      --line-height: #{rem(map-get($heading-sizes, 'h1_lh_sm'))};
-      padding-bottom: rem(map-get($heading-sizes, 'h1_pb_sm'));
-    }
   }
 }
 

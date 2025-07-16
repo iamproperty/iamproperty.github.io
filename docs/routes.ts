@@ -76,7 +76,7 @@ const routes = [
       },
       {
         path: 'utilities',
-        name: 'Utility Classes (Beta)',
+        name: 'Utility Classes',
         meta: {
           title: 'Utility Classes | Foundations | iamkey',
         },
@@ -176,13 +176,12 @@ const routes = [
         searchterms: 'unordered, ordered, tick, breadcrumb',
       },
       {
-        path: 'buttons',
-        name: 'Buttons & links',
+        path: 'stepper',
+        name: 'Stepper',
         meta: {
-          title: 'Buttons & links | Elements | iamkey',
+          title: 'Stepper | Elements | iamkey',
         },
-        component: () => import('./views/elements/Buttons.vue'),
-        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+        component: () => import('./views/components/StepperDocV2.vue'),
       },
       {
         path: 'badges',
@@ -229,7 +228,7 @@ const routes = [
       },
       {
         path: 'tables',
-        name: 'Tables (BETA)',
+        name: 'Table Element',
         meta: {
           title: 'Tables | Elements | iamkey',
         },
@@ -244,6 +243,52 @@ const routes = [
         },
         component: () => import('./views/elements/Details.vue'),
         searchterms: 'details, accordion, summary',
+      },
+    ],
+  },
+  {
+    path: '/links',
+    name: 'links',
+    meta: {
+      title: 'Elements | iamkey',
+    },
+    component: () => import('./views/Elements.vue'),
+    children: [
+      {
+        path: 'text-links',
+        name: 'Text Links',
+        meta: {
+          title: 'Links | Elements | iamkey',
+        },
+        component: () => import('./views/links/Links.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'buttons',
+        name: 'Buttons',
+        meta: {
+          title: 'Buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/Buttons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'action-buttons',
+        name: 'Action buttons',
+        meta: {
+          title: 'Action buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/ActionButtons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
+        path: 'compact-buttons',
+        name: 'Compact buttons',
+        meta: {
+          title: 'Compact buttons | Elements | iamkey',
+        },
+        component: () => import('./views/links/CompactButtons.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
       },
     ],
   },
@@ -436,6 +481,14 @@ const routes = [
         component: () => import('./views/components/AppliedFiltersDoc.vue'),
       },
       {
+        path: 'bento-grid',
+        name: 'Bento grid',
+        meta: {
+          title: 'Bento grid | Components | iamkey',
+        },
+        component: () => import('./views/components/BentoGridDoc.vue'),
+      },
+      {
         path: 'carousel',
         name: 'Carousel',
         meta: {
@@ -451,6 +504,14 @@ const routes = [
           title: 'Charts | Components | iamkey',
         },
         component: () => import('./views/components/ChartsDoc.vue'),
+      },
+      {
+        path: 'content',
+        name: 'Content (Beta)',
+        meta: {
+          title: 'Content | Components | iamkey',
+        },
+        component: () => import('./views/components/ContentDoc.vue'),
       },
       {
         path: 'filterlist',
@@ -488,6 +549,16 @@ const routes = [
         searchterms: 'form, input, inline',
       },
       {
+        path: 'menu',
+        name: 'Menu',
+        meta: {
+          title: 'Menu | Components | iamkey',
+          beta: true,
+          standalone: true,
+        },
+        component: () => import('./views/components/MenuDoc.vue'),
+      },
+      {
         path: 'multistep',
         name: 'Multi-Step form',
         meta: {
@@ -510,6 +581,15 @@ const routes = [
           title: 'Note feed | Components | iamkey',
         },
         component: () => import('./views/components/NoteFeedDoc.vue'),
+      },
+      {
+        path: 'rank',
+        name: 'Rank',
+        meta: {
+          title: 'Rank | Components | iamkey',
+        },
+        component: () => import('./views/components/RankDoc.vue'),
+        searchterms: 'rank, ranking, score',
       },
       {
         path: 'pagination',
@@ -564,7 +644,7 @@ const routes = [
         path: 'tables',
         name: 'Tables',
         meta: {
-          title: 'Tables | Elements | iamkey',
+          title: 'Tables | Components | iamkey',
         },
         component: () => import('./views/components/Tables.vue'),
         searchterms: 'expandable, scrollable, rows, columns',
@@ -717,6 +797,14 @@ const routes = [
         },
         component: () => import('./views/charts/BarChart.vue'),
       },
+      {
+        path: 'doughnutchart',
+        name: 'Doughnut chart',
+        meta: {
+          title: 'Doughnut chart | Components | iamkey',
+        },
+        component: () => import('./views/charts/DoughnutChart.vue'),
+      },
     ],
   },
   {
@@ -855,6 +943,15 @@ const routes = [
       'npm, install, assets, static, sass, modules, vue, branch, commands, contributing, code, web server, develoment, unit tests, regression tests, workflow',
   },
   {
+    path: '/audit-results',
+    component: () => import('./views/Audit.vue'),
+    name: 'Audit',
+    meta: {
+      title: 'Audit | iamkey',
+    },
+    searchterms: 'Audit, npm, build, pr, Pull request',
+  },
+  {
     /* Examples */ path: '/examples',
     name: 'Examples',
     meta: {
@@ -868,6 +965,22 @@ const routes = [
       {
         path: '',
         component: () => import('./views/examples/Index.vue'),
+      },
+      {
+        path: 'basic-table',
+        component: () => import('./views/examples/BasicTable.vue'),
+      },
+      {
+        path: 'no-submit-table',
+        component: () => import('./views/examples/NoSubmitTableDoc.vue'),
+      },
+      {
+        path: 'submit-table',
+        component: () => import('./views/examples/SubmitTableDoc.vue'),
+      },
+      {
+        path: 'ajax-table',
+        component: () => import('./views/examples/AjaxTableDoc.vue'),
       },
       {
         path: 'actionbar-table',
@@ -1044,12 +1157,28 @@ const routes = [
         searchterms: 'iamsold, iam sold',
       },
       {
-        path: 'collapsible-side-menu',
-        name: 'Collapsible Side Menu example',
+        path: 'collapsible-side-menu-default',
+        name: 'Collapsible Side Menu default example',
         meta: {
-          title: 'Collapsible Side Menu example| iamkey',
+          title: 'Collapsible Side Menu default example | iamkey',
         },
-        component: () => import('./views/standalone/CollapsibleSideMenu.vue'),
+        component: () => import('./views/standalone/CollapsibleSideMenuDefault.vue'),
+      },
+      {
+        path: 'collapsible-side-menu-inline',
+        name: 'Collapsible Side Menu inline example',
+        meta: {
+          title: 'Collapsible Side Menu inline example | iamkey',
+        },
+        component: () => import('./views/standalone/CollapsibleSideMenuInline.vue'),
+      },
+      {
+        path: 'collapsible-side-menu-disableCollapse',
+        name: 'Collapsible Side Menu disable collapse example',
+        meta: {
+          title: 'Collapsible Side Menu disable collapse example | iamkey',
+        },
+        component: () => import('./views/standalone/CollapsibleSideMenuDisableCollapse.vue'),
       },
       {
         path: 'crm-mb',
@@ -1146,6 +1275,14 @@ const routes = [
           title: 'Inspections | iamkey',
         },
         component: () => import('./views/standalone/Inspections.vue'),
+      },
+      {
+        path: 'competitor-analysis',
+        name: 'Competitor analysis',
+        meta: {
+          title: 'Competitor analysis | iamkey',
+        },
+        component: () => import('./views/standalone/competitor-analysis.vue'),
       },
     ],
   },

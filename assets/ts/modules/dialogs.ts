@@ -1,6 +1,5 @@
-// @ts-nocheck
-const extendDialogs = (body) => {
-  Array.from(body.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
+const extendDialogs = (body): void => {
+  Array.from(body.querySelectorAll('dialog[open]')).forEach((dialog) => {
     const parent = dialog.closest('.dialog__wrapper');
 
     if (!parent) {
@@ -36,7 +35,7 @@ const extendDialogs = (body) => {
       }
 
       // When the modal is opened we want to make sure any duplicate checkboxes are matching the originals
-      Array.from(dialog.querySelectorAll('[data-duplicate]')).forEach((element, index) => {
+      Array.from(dialog.querySelectorAll('[data-duplicate]')).forEach((element) => {
         const id = element.getAttribute('data-duplicate');
         const originalInput = document.getElementById(id);
 
@@ -62,7 +61,7 @@ const extendDialogs = (body) => {
       dialog.close();
 
       // Remove active class from exiting active buttons
-      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement, index) => {
+      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement) => {
         btnElement.classList.remove('active');
       });
 
@@ -86,7 +85,7 @@ const extendDialogs = (body) => {
       const dialog = event.target.closest('dialog[open]');
 
       // Remove active class from exiting active buttons
-      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement, index) => {
+      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement) => {
         btnElement.classList.remove('active');
       });
 
@@ -133,80 +132,83 @@ const extendDialogs = (body) => {
 
     // Popover
     if (event && event.target instanceof HTMLElement && event.target.closest('.dialog__wrapper > button')) {
-      event.stopPropagation();
-
       const btn = event.target.closest('.dialog__wrapper > button');
       const parent = btn.parentNode;
-      let dataEvent = 'openPopover';
-      const popover = parent.querySelector(':scope > dialog');
 
-      // close open dialogs
-      if (
-        document.querySelector('*:not([data-keep-open]) > dialog[open]') &&
-        document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover
-      ) {
-        // Check that the ope dialog isn't a parent of the dialog being opened
-        if (btn.closest('dialog[open]') != document.querySelector('*:not([data-keep-open]) > dialog[open]')) {
-          document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
-        }
-      }
+      if (parent.querySelector('dialog')) {
+        event.stopPropagation();
 
-      // Remove active class from exiting active buttons
-      Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement, index) => {
-        btnElement.removeAttribute('aria-expanded');
-      });
+        let dataEvent = 'openPopover';
+        const popover = parent.querySelector(':scope > dialog');
 
-      if (popover.hasAttribute('open')) {
-        popover.close();
-        dataEvent = 'closePopover';
-
-        popover.removeAttribute('style');
-        btn.removeAttribute('aria-expanded');
-      } else {
-        popover.show();
-        btn.setAttribute('aria-expanded', true);
-
-        const position = btn.getBoundingClientRect();
-        let topOffset = position.top;
-        let leftOffset = position.left;
-
-        if (btn.closest('iam-table')) {
-          const container = btn.closest('iam-table').parentNode.getBoundingClientRect();
-
-          topOffset -= container.top;
-          leftOffset -= container.left;
+        // close open dialogs
+        if (
+          document.querySelector('*:not([data-keep-open]) > dialog[open]') &&
+          document.querySelector('*:not([data-keep-open]) > dialog[open]') != popover
+        ) {
+          // Check that the ope dialog isn't a parent of the dialog being opened
+          if (btn.closest('dialog[open]') != document.querySelector('*:not([data-keep-open]) > dialog[open]')) {
+            document.querySelector('*:not([data-keep-open]) > dialog[open]').close();
+          }
         }
 
-        if (popover.classList.contains('dialog--fix')) {
-          popover.setAttribute(
-            'style',
-            `position:fixed;top: ${topOffset}px; left: ${leftOffset}px; margin: 3rem 0 0 0;`
-          );
+        // Remove active class from exiting active buttons
+        Array.from(document.querySelectorAll('.dialog__wrapper > button')).forEach((btnElement) => {
+          btnElement.removeAttribute('aria-expanded');
+        });
+
+        if (popover.hasAttribute('open')) {
+          popover.close();
+          dataEvent = 'closePopover';
+
+          popover.removeAttribute('style');
+          btn.removeAttribute('aria-expanded');
+        } else {
+          popover.show();
+          btn.setAttribute('aria-expanded', true);
+
+          const position = btn.getBoundingClientRect();
+          let topOffset = position.top;
+          let leftOffset = position.left;
+
+          if (btn.closest('iam-table')) {
+            const container = btn.closest('iam-table').parentNode.getBoundingClientRect();
+
+            topOffset -= container.top;
+            leftOffset -= container.left;
+          }
+
+          if (popover.classList.contains('dialog--fix')) {
+            popover.setAttribute(
+              'style',
+              `position:fixed;top: ${topOffset}px; left: ${leftOffset}px; margin: 3rem 0 0 0;`
+            );
+          }
         }
+
+        // When the dialog is fixed it could dip under the viewport
+        // Lets check the dimensions and transform it to appear above
+        let boundingRec = popover.getBoundingClientRect();
+        const popoverBottom = boundingRec.bottom - window.scrollY;
+        const windowPos = window.innerHeight - window.scrollY;
+        if (popoverBottom > windowPos) {
+          const currentStyle = popover.hasAttribute('style') ? popover.getAttribute('style') + ' ' : '';
+          popover.setAttribute('style', currentStyle + `transform: translate(0, calc(-100% - 4rem))`);
+
+          // Check that the dialog doesn't go over the top of the page
+          boundingRec = popover.getBoundingClientRect();
+          const popoverTop = boundingRec.top - window.scrollY;
+
+          if (popoverTop < 100) popover.removeAttribute('style');
+        }
+
+        window.dataLayer = window.dataLayer || [];
+
+        window.dataLayer.push({
+          event: dataEvent,
+          id: btn.textContent,
+        });
       }
-
-      // When the dialog is fixed it could dip under the viewport
-      // Lets check the dimensions and transform it to appear above
-      let boundingRec = popover.getBoundingClientRect();
-      const popoverBottom = boundingRec.bottom - window.scrollY;
-      const windowPos = window.innerHeight - window.scrollY;
-      if (popoverBottom > windowPos) {
-        const currentStyle = popover.hasAttribute('style') ? popover.getAttribute('style') + ' ' : '';
-        popover.setAttribute('style', currentStyle + `transform: translate(0, calc(-100% - 4rem))`);
-
-        // Check that the dialog doesn't go over the top of the page
-        boundingRec = popover.getBoundingClientRect();
-        const popoverTop = boundingRec.top - window.scrollY;
-
-        if (popoverTop < 100) popover.removeAttribute('style');
-      }
-
-      window.dataLayer = window.dataLayer || [];
-
-      window.dataLayer.push({
-        event: dataEvent,
-        id: btn.textContent,
-      });
     }
 
     // Close popovers when clicked away
@@ -219,18 +221,16 @@ const extendDialogs = (body) => {
       if (document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]'))
         document.querySelector('.dialog__wrapper:not([data-keep-open]) > dialog[open]').close();
 
-      Array.from(document.querySelectorAll('.dialog__wrapper:not([data-keep-open]) > button')).forEach(
-        (btnElement, index) => {
-          btnElement.removeAttribute('aria-expanded');
-        }
-      );
+      Array.from(document.querySelectorAll('.dialog__wrapper:not([data-keep-open]) > button')).forEach((btnElement) => {
+        btnElement.removeAttribute('aria-expanded');
+      });
     }
   });
 
   return null;
 };
 
-export const createDialog = (dialog) => {
+export const createDialog = (dialog): void => {
   // If you are using Vue eevents and bindings its recommended to add in the .mh-lg div manually to the dialog
   if (!dialog.querySelector(':scope .mh-lg') && !dialog.querySelector('iam-multi-step')) {
     dialog.innerHTML = `<div class="mh-lg">${dialog.innerHTML}</div>`;

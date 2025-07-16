@@ -5,7 +5,7 @@
   const slots = useSlots();
   const props = defineProps(['component', 'componentName']);
 
-  const showInstall = slots['web-component'] || slots['vue-component'] ? true : false;
+  const showInstall = slots['web-component'] || slots['vue-component'] || slots['html-element'] ? true : false;
   const showLayout = slots['slots'] ? true : false;
   const showModify = slots['attr'] ? true : false;
   const showStyle = slots['classes'] || slots['parts'] || slots['vars'] ? true : false;
@@ -38,12 +38,16 @@
   console.log(err.message);
 });</code></pre>
 
-      <strong class="label">Add the below HTML code to where you want the component to live.</strong>
+      <strong class="label" v-if="slots['web-component'] || slots['vue-component']"
+        >Add the below HTML code to where you want the component to live.</strong
+      >
 
       <slot name="web-component"></slot>
 
       <h4 v-if="slots['vue-component']" class="pt-2">Vue component</h4>
       <slot name="vue-component"></slot>
+
+      <slot name="html-element"></slot>
     </details>
     <details v-if="showLayout">
       <summary><h3>Layout</h3></summary>
@@ -77,7 +81,7 @@
       <slot name="vars"></slot>
       <small v-if="slots['vars']" class="d-block pb-5"
         >There are more CSS Variables used within the component and can be found when inspecting the shadow dom. The
-        below are the more notable ones that may effect the styling of the component in a more complicated way.</small
+        above are the more notable ones that may effect the styling of the component in a more complicated way.</small
       >
     </details>
     <details v-if="showExtend">

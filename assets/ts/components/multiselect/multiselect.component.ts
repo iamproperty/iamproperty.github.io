@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -45,7 +43,8 @@ class iamMultiselect extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const multiselect = this;
     const form = this.closest('form');
     const wrapper = this.shadowRoot.querySelector('.wrapper');
@@ -91,7 +90,7 @@ class iamMultiselect extends HTMLElement {
     }
 
     // Set the correct attributes
-    function setItem(inputToSet) {
+    function setItem(inputToSet): void {
       if (inputToSet.checked == false) {
         inputToSet.closest('label').removeAttribute('slot');
         inputToSet.closest('label').removeAttribute('style');
@@ -121,13 +120,13 @@ class iamMultiselect extends HTMLElement {
     }
 
     // Set on load
-    Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]:checked`)).forEach((checkbox, index) => {
+    Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]:checked`)).forEach((checkbox) => {
       setItem(checkbox);
     });
 
     // Filter list
-    search.addEventListener('input', (event) => {
-      Array.from(multiselect.querySelectorAll(`label:not([slot="checked"])`)).forEach((label, index) => {
+    search.addEventListener('input', () => {
+      Array.from(multiselect.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
         const checkbox = label.querySelector('input');
         const searchValue = checkbox.value;
         const labelText = label.textContent;
@@ -145,12 +144,12 @@ class iamMultiselect extends HTMLElement {
 
     // Add a delayed hover effect for non hover devices
     let hoverTimeout;
-    multiselect.addEventListener('focus', (event) => {
+    multiselect.addEventListener('focus', () => {
       multiselect.classList.add('hover');
       clearTimeout(hoverTimeout);
     });
 
-    search.addEventListener('blur', (event) => {
+    search.addEventListener('blur', () => {
       clearTimeout(hoverTimeout);
       hoverTimeout = setTimeout(function () {
         multiselect.classList.remove('hover');
@@ -165,12 +164,17 @@ class iamMultiselect extends HTMLElement {
         setItem(checkbox);
 
         search.focus();
+        clearTimeout(hoverTimeout);
+        multiselect.classList.add('hover');
+        hoverTimeout = setTimeout(function () {
+          multiselect.classList.remove('hover');
+        }, 5000);
       }
     });
 
     // Clear all
-    button.addEventListener('click', function (event) {
-      Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox, index) => {
+    button.addEventListener('click', function () {
+      Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
         checkbox.checked = false;
 
         setItem(checkbox);
@@ -234,7 +238,7 @@ class iamMultiselect extends HTMLElement {
       }
     });
 
-    function checkLastTag() {
+    function checkLastTag(): Element | null {
       if (order == 0) return false;
 
       let lastTag = multiselect.querySelector(`label[data-order="${order}"]`);
@@ -276,11 +280,11 @@ class iamMultiselect extends HTMLElement {
     });
 
     // Fix for the inline edit multiselect
-    multiselect.addEventListener('mousedown', (event) => {
+    multiselect.addEventListener('mousedown', () => {
       wrapper.setAttribute('data-mousedown', 'true');
     });
 
-    multiselect.addEventListener('mouseup', (event) => {
+    multiselect.addEventListener('mouseup', () => {
       wrapper.removeAttribute('data-mousedown');
     });
   }

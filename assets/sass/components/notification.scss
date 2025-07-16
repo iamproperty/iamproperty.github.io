@@ -1,5 +1,7 @@
 @use '../_func' as *;
 
+$darkMode: 'true' !default;
+
 :host,
 .iam-notification {
   display: block;
@@ -9,14 +11,16 @@
   margin-bottom: 1rem;
   font-size: rem(15);
   border: rem(2) solid var(--colour, var(--colour-info));
+  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
-  @include light-mode() {
+  @include light-mode($darkMode) {
     background: #e9f9fd;
   }
 
-  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-
-  ::slotted(i),
+  &::slotted(strong) {
+    color: green;
+  }
+  &::slotted(i),
   i {
     color: var(--colour, currentColor);
   }
@@ -86,7 +90,7 @@
   display: flex;
   flex-wrap: nowrap;
 
-  @include light-mode() {
+  @include light-mode($darkMode) {
     color: var(--colour-heading);
   }
 

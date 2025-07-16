@@ -1,190 +1,258 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-// #region popover styling
-.dialog__wrapper {
-  position: relative;
-  display: inline-block;
-  margin-bottom: calc(var(--btn-margin) - 0.25rem);
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  &:has(dialog[open], dialog:popover-open) > button {
-    background: var(--colour-btn-secondary-bg-hover);
-    color: var(--colour-btn-secondary-hover);
-    filter: brightness(85%);
-    transition:
-      background 0.1s,
-      color 0.1s;
-    //color: var(--colour-btn);
-    border-radius: 1.5rem;
-  }
+@include layer('elements', $layers) {
+  // #region popover styling
+  .dialog__wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: calc(var(--btn-margin) - 0.25rem);
 
-  > .btn:first-child {
-    margin-bottom: 0.25rem;
+    &:has(dialog[open], dialog:popover-open) > button {
+      background: var(--colour-btn-secondary-bg-hover);
 
-    &:not(.btn-compact):not([class*='fa-']):after {
-      content: '';
-
-      display: inline-block;
-      margin-left: 1em;
-      margin-bottom: -0.15em;
-      height: 1em;
-      width: 1em;
-      z-index: var(--index-focus);
-      background: currentColor;
-      mask-image: var(--icon-arrow);
-      mask-size: 100%;
-      mask-repeat: no-repeat;
-      mask-position: 50% 50%;
-      -webkit-mask-image: var(--icon-arrow);
-      -webkit-mask-size: 100%;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: 50% 50%;
-
-      transform: rotate(90deg);
+      &:not(.btn-action) {
+        color: var(--colour-btn-secondary-hover);
+      }
+      filter: brightness(85%);
+      transition:
+        background 0.1s,
+        color 0.1s;
+      //color: var(--colour-btn);
+      border-radius: 1.5rem;
     }
 
-    &[aria-expanded]:not([data-number]):after {
-      transform: rotate(270deg);
-    }
-  }
+    > .btn:first-child {
+      //margin-bottom: 0.25rem;
 
-  > :is(dialog[open], dialog:popover-open) {
-    left: 0;
-    top: 100%;
-    z-index: var(--index-floating);
-    min-width: rem(320);
-    border-radius: rem(16);
-    width: rem(320);
-    padding: rem(24);
+      &:not(.btn-compact):not([class*='fa-']):after {
+        content: '';
 
-    @include media-breakpoint-up(sm) {
-      width: rem(335);
-    }
-    @include media-breakpoint-up(md) {
-      width: rem(360);
-    }
+        display: inline-block;
+        margin-left: 1em;
 
-    &.dialog--list {
-      width: fit-content !important;
+        height: 1em;
+        width: 1em;
+        z-index: var(--index-focus);
+        background: currentColor;
+        mask-image: var(--icon-arrow);
+        mask-size: 100%;
+        mask-repeat: no-repeat;
+        mask-position: 50% 50%;
+        -webkit-mask-image: var(--icon-arrow);
+        -webkit-mask-size: 100%;
+        -webkit-mask-repeat: no-repeat;
+        -webkit-mask-position: 50% 50%;
 
-      @include media-breakpoint-up(sm) {
-        width: max-content !important;
+        transform: rotate(90deg);
       }
 
-      min-width: rem(140) !important;
-      max-width: rem(280) !important;
+      &[aria-expanded]:not([data-number]):after {
+        transform: rotate(270deg);
+      }
+
+      &:has(+ dialog[open]):not([data-number]):after {
+        transform: rotate(270deg);
+      }
+    }
+
+    > [popover] {
+      display: var(--menu-display, none);
+      position: fixed;
+      top: anchor(bottom) !important;
+
+      left: anchor(left) !important;
+
+      position-try-fallbacks: flip-block, flip-inline !important;
+
+      //right: auto;
+      margin: 0 0 0 #{rem(4)};
       padding: rem(16);
-      margin: 0;
 
-      hr {
-        height: 2px;
-        background: var(--colour-border);
-        margin-left: -#{rem(16)};
-        margin-right: -#{rem(16)};
-        margin-block: 0.25rem;
-      }
-
-      .radio--tick {
-        margin-right: 0;
-        padding-left: 1.5rem;
-        margin-bottom: 0;
-
-        &:before {
-          left: 0;
-          font-size: 1em;
-          top: 0.75rem;
-        }
-      }
-
-      a {
-        padding: #{rem(6)};
-
-        &:not(:hover, :focus, :active) {
-          border-color: transparent;
-        }
-        margin: 0;
-
-        &:after {
-          display: none;
-        }
-      }
-
-      .btn-action {
-        &:not(:hover, :focus, :active) {
-          border-color: transparent;
-        }
-        margin: 0;
+      &::backdrop {
+        display: none;
       }
     }
 
-    :is(dialog[open], dialog:popover-open) {
-      display: contents;
+    > [popover]:popover-open {
+      display: block !important;
     }
-  }
 
-  &.dialog__wrapper--right > :is(dialog[open], dialog:popover-open) {
-    right: 0;
-    left: auto;
-  }
+    &:has([popover]:popover-open) > button {
+      background-color: var(--colour);
+    }
 
-  &.dialog__wrapper--sm > :is(dialog[open], dialog:popover-open) {
-    width: rem(239);
-  }
-
-  &.dialog__wrapper--lg > :is(dialog[open], dialog:popover-open) {
-    width: rem(319);
-  }
-
-  @include media-breakpoint-up(sm) {
-    &.dialog__wrapper--sm-left > dialog[open] {
+    > :is(dialog[open], dialog:popover-open) {
       left: 0;
-      right: auto;
+      margin-top: -1rem;
+      top: 100%;
+      z-index: var(--index-floating);
+      min-width: rem(320);
+      border-radius: rem(16);
+      width: rem(320);
+      padding: rem(24);
+
+      @include media-breakpoint-up(sm, $mobileOnly) {
+        width: rem(335);
+      }
+      @include media-breakpoint-up(md, $mobileOnly) {
+        width: rem(360);
+      }
+
+      &.dialog--list {
+        width: fit-content !important;
+        min-width: rem(160) !important;
+        max-width: rem(240) !important;
+        padding: var(--menu-padding, 0.5rem);
+        margin: 0;
+        background: var(--menu-bg, canvas);
+        border: var(--menu-border, 2px solid grey);
+        overflow: auto;
+        border: none !important;
+        border-radius: 0.5rem;
+        box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+
+        @include media-breakpoint-up(sm, $mobileOnly) {
+          width: max-content !important;
+        }
+
+        hr {
+          height: 1px !important;
+          background-color: var(--menu-hr-border-color, var(--border-color, grey)) !important;
+          width: 100%;
+          margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
+          padding: 0 !important;
+        }
+
+        .radio--tick {
+          margin-right: 0;
+          padding-left: 1.5rem;
+          margin-bottom: 0;
+
+          &:before {
+            left: 0;
+            font-size: 1em;
+            top: 0.75rem;
+          }
+        }
+
+        a {
+          padding: #{rem(6)};
+
+          &:not(:hover, :focus, :active) {
+            border-color: transparent;
+          }
+          margin: 0;
+
+          &:after {
+            display: none;
+          }
+        }
+
+        .btn-action {
+          background: unset;
+          border: unset;
+          color: var(--colour-primary);
+          font-weight: inherit;
+          font-family: inherit;
+          font-size: 1rem;
+          line-height: rem(19);
+          display: block;
+          margin: var(--menu-item-margin, 0 0 0.25rem 0);
+          padding-block: var(--menu-item-padding, 0.5rem);
+          width: var(--menu-item-width, 100%);
+          max-width: var(--menu-item-width, 100%);
+          text-align: var(--menu-item-text-align, left);
+
+          &:not(:hover, :focus, :active) {
+            border-color: transparent;
+          }
+
+          &:is(:hover, :focus) {
+            background: var(--colour-light) !important;
+            border-radius: 0.25rem !important;
+          }
+
+          &:is(:active) {
+            background: rgba(224, 224, 224, 1) !important;
+            border-radius: 0.25rem !important;
+          }
+        }
+      }
+
+      :is(dialog[open], dialog:popover-open) {
+        display: contents;
+      }
     }
-    &.dialog__wrapper--sm-right > dialog[open] {
+
+    &.dialog__wrapper--right > :is(dialog[open], dialog:popover-open) {
       right: 0;
       left: auto;
     }
-    &.dialog__wrapper--sm > dialog[open] {
-      width: rem(265);
+
+    &.dialog__wrapper--sm > :is(dialog[open], dialog:popover-open) {
+      width: rem(239);
     }
-    &.dialog__wrapper--lg > dialog[open] {
-      width: rem(452);
+
+    &.dialog__wrapper--lg > :is(dialog[open], dialog:popover-open) {
+      width: rem(319);
+    }
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      &.dialog__wrapper--sm-left > dialog[open] {
+        left: 0;
+        right: auto;
+      }
+      &.dialog__wrapper--sm-right > dialog[open] {
+        right: 0;
+        left: auto;
+      }
+      &.dialog__wrapper--sm > dialog[open] {
+        width: rem(265);
+      }
+      &.dialog__wrapper--lg > dialog[open] {
+        width: rem(452);
+      }
+    }
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      &.dialog__wrapper--md-left > dialog[open] {
+        left: 0;
+        right: auto;
+      }
+      &.dialog__wrapper--md-right > dialog[open] {
+        right: 0;
+        left: auto;
+      }
+      &.dialog__wrapper--sm > dialog[open] {
+        width: rem(266);
+      }
+      &.dialog__wrapper--lg > dialog[open] {
+        width: rem(454);
+      }
     }
   }
 
-  @include media-breakpoint-up(md) {
-    &.dialog__wrapper--md-left > dialog[open] {
-      left: 0;
-      right: auto;
-    }
-    &.dialog__wrapper--md-right > dialog[open] {
-      right: 0;
-      left: auto;
-    }
-    &.dialog__wrapper--sm > dialog[open] {
-      width: rem(266);
-    }
-    &.dialog__wrapper--lg > dialog[open] {
-      width: rem(454);
-    }
-  }
-}
-
-// Show hide the indidual or multiple label
-.dialog__wrapper :is(.empty, .individual) {
-  display: none;
-}
-
-@supports selector(:has(*)) {
+  // Show hide the indidual or multiple label
   .dialog__wrapper :is(.empty, .individual) {
-    display: inline;
+    display: none;
   }
-}
 
-.dialog__wrapper:has(input:checked) .empty,
-.dialog__wrapper:not(:has(input:checked)) .individual,
-.dialog__wrapper:has(input:checked ~ input:checked) .individual,
-.dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
-  display: none;
+  @supports selector(:has(*)) {
+    .dialog__wrapper :is(.empty, .individual) {
+      display: inline;
+    }
+  }
+
+  .dialog__wrapper:has(input:checked) .empty,
+  .dialog__wrapper:not(:has(input:checked)) .individual,
+  .dialog__wrapper:has(input:checked ~ input:checked) .individual,
+  .dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
+    display: none;
+  }
+  // #endregion
 }
-// #endregion

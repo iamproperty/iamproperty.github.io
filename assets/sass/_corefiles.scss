@@ -1,49 +1,56 @@
 @use 'sass:math';
 @use '_func' as *;
 
-@mixin bsgrid() {
-  @if $disable-bs-grid == 'false' {
-    @content;
-  } @else {
-    // Grid Disabled
-  }
-}
-
-@layer reset, elements, components, templates, utilities, overrides;
-
 $root: ':root' !default;
 $layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+$optionalText: 'true' !default;
 
 // Foundations
-@include layer('reset') {
-  @import 'foundations/root.scss';
-  @import 'foundations/reboot.scss';
-  @import 'foundations/grid.scss';
-}
+@use 'foundations/root.scss' with (
+  $root: $root,
+  $layers: $layers,
+  $mobileOnly: $mobileOnly,
+  $darkMode: $darkMode
+);
 
-@include bsgrid() {
-  @import 'foundations/bs_grid.scss';
-}
+@use 'foundations/reboot.scss' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly,
+  $darkMode: $darkMode
+);
 
-@include layer('elements') {
-  @import '_elements.scss';
-}
+// Elements
+@use '_elements.scss' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly,
+  $darkMode: $darkMode,
+  $optionalText: $optionalText
+);
 
-@include layer('components') {
-  // Deal with preloaded state of native components
-  @import '_components.scss';
-}
+// Components
+@use '_components.scss' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly,
+  $darkMode: $darkMode
+);
 
-@include layer('templates') {
-  @import 'templates/form.scss';
-  @import 'templates/auth.scss';
-}
+// Templates
+@use 'templates/form.scss' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly,
+  $darkMode: $darkMode
+);
 
-@include layer('utilities') {
-  @import '_utilities.scss';
-}
+@use 'templates/auth.scss' with (
+  $layers: $layers,
+  $mobileOnly: $mobileOnly,
+  $darkMode: $darkMode
+);
 
-@include layer('overrides') {
+// Overrides
+@include layer('overrides', $layers) {
   @media (prefers-reduced-motion) {
     * {
       transition: unset;

@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -18,7 +16,7 @@ class iamMarketing extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css')
       ? document.body.getAttribute('data-core-css')
       : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/marketing.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/marketing.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -36,7 +34,7 @@ class iamMarketing extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     this.classList.add('invert-colours');
 
     if (this.hasAttribute('data-img')) {

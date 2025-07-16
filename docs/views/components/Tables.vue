@@ -1,4 +1,30 @@
+<script setup>
+  import TrackEvents from '../TrackEvents.vue';
+
+  import TableBasic from '@/components/Table/TableBasic.vue';
+  import TableNoSubmit from '@/components/Table/TableNoSubmit.vue';
+
+  import Integration from '../Integration.vue';
+  import Versions from '../Versions.vue';
+</script>
+
 <template>
+  <TrackEvents
+    selector="iam-table,iam-table-basic,iam-table-no-submit,iam-table-submit,iam-ajax"
+    :events="[
+      'update-show',
+      'update-page',
+      'row-expanded',
+      'row-selected',
+      'all-rows-selected',
+      'all-rows-unselected',
+      'sort-by-heading',
+      'search-submit',
+      'update-show',
+      'update-page',
+      'row-expmded',
+    ]"
+  ></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Tables</h1>
@@ -10,7 +36,6 @@
         additional functionality, as needed by your product’s users.
       </p>
 
-      <h2>Overview</h2>
       <p>
         The data table’s features are ideal for organising and displaying data in a UI. Linked filter and sort buttons
         can align the table content with user needs, rows can be scrolled horizontally on desktop/tablet to reveal
@@ -22,7 +47,7 @@
         table display settings, and other utilities.
       </p>
 
-      <table>
+      <table class="mb-5">
         <thead>
           <tr>
             <th>Variant</th>
@@ -60,6 +85,79 @@
           </tr>
         </tbody>
       </table>
+
+      <h2>Components</h2>
+      <p>The table component has many variations for flexibility as our applications have different needs.</p>
+
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Component behaviour</th>
+              <th>Component</th>
+              <th>Attribute</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>No component</td>
+              <td>n/a</td>
+              <td>n/a</td>
+              <td>
+                There isn't a requirement to use a component to display a table aslong as you don’t require pagination
+                or any other functionality.<br /><br />See the <a href="/elements/tables">table element page</a>.
+              </td>
+            </tr>
+            <tr>
+              <td>Basic</td>
+              <td class="text-nowrap">iam-table-basic</td>
+              <td>n/a</td>
+              <td>
+                This component doesn't feature any functionality that requires the data of the table to reload.
+                Pagination will work by showing and hiding rows that have already been loaded in the page. This
+                component won't support the use of an action bar or any other functionality other than pagination.
+              </td>
+            </tr>
+            <tr>
+              <td>Single page</td>
+              <td class="text-nowrap">iam-table-no-submit</td>
+              <td class="text-nowrap">data-no-submit</td>
+              <td>
+                This component doesn't feature any functionality that requires the data of the table to reload. Features
+                like the pagination, sorting and filtering are done on the page on existing table rows.
+              </td>
+            </tr>
+            <tr>
+              <td>Submit page</td>
+              <td class="text-nowrap">iam-table-submit</td>
+              <td class="text-nowrap">data-submit</td>
+              <td>
+                Any interaction with this component will submit the associated form data to the server. Using this
+                component requires more work for the backend developer but also gives them more control.
+              </td>
+            </tr>
+            <tr>
+              <td>AJAX</td>
+              <td class="text-nowrap">iam-table-ajax</td>
+              <td class="text-nowrap">data-ajax</td>
+              <td>
+                Any interaction with this component will trigger an ajax call which in turn will reload the table but
+                not the page.
+              </td>
+            </tr>
+            <tr>
+              <td>Full</td>
+              <td class="text-nowrap">iam-table</td>
+              <td>n/a</td>
+              <td>
+                This component is useful for when you intend to use multiple table components on the same page/user
+                journey. Reducing down duplication and taking advantage of cached files.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div class="container pt-4 pb-5">
       <h2>Anatomy</h2>
@@ -113,72 +211,70 @@
       </p>
     </div>
 
-    <div class="container visualtest">
-      <div class="demo">
-        <Table class="table--cta table--fullwidth">
-          <table>
-            <thead>
-              <tr>
-                <th>Client name</th>
-                <th>Date added</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </Table>
-      </div>
+    <div class="container visualtest bg-light">
+      <TableBasic class="table--cta">
+        <table>
+          <thead>
+            <tr>
+              <th class="text-nowrap">Client name</th>
+              <th class="text-nowrap">Date added</th>
+              <th>Status</th>
+              <th class="text-nowrap">Lorum ipsum</th>
+              <th class="text-nowrap">Lorum ipsum</th>
+              <th class="text-nowrap">Lorum ipsum</th>
+              <th class="text-nowrap">Lorum ipsum</th>
+              <th class="text-nowrap">Lorum ipsum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Successful</td>
+              <td>Lorem ipsum dolor sit amet velit</td>
+              <td>Lorem ipsum dolor sit amet velit</td>
+              <td>Lorem ipsum dolor sit amet velit</td>
+              <td>Lorem ipsum dolor sit amet velit</td>
+              <td>Lorem ipsum dolor sit amet velit</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Failed</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Successful</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Successful</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableBasic>
     </div>
 
     <div class="container pb-0 pt-5">
@@ -188,61 +284,59 @@
       </p>
     </div>
 
-    <div class="container visualtest">
-      <div class="demo">
-        <div class="row">
-          <div class="col-sm-6 col-md-4 ms-auto">
-            <Table class="table--cta">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Client</th>
-                    <th>Date added</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Tom Smith</td>
-                    <td>10.05.23</td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td><a href="/">Manage client</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </Table>
-          </div>
-          <div class="col-sm-6 col-md-4 me-auto">
-            <Table class="table--cta">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Client</th>
-                    <th>Date added</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-view="full">
-                    <td>Tom Smith</td>
-                    <td>10.05.23</td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td><a href="/">Manage client</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </Table>
-          </div>
+    <div class="container visualtest bg-light">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 ms-auto">
+          <TableBasic class="table--cta">
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Status</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tom Smith</td>
+                  <td>10.05.23</td>
+                  <td>Successful</td>
+                  <td>Lorum ipsum</td>
+                  <td>Lorum ipsum</td>
+                  <td><a href="/">Manage client</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </TableBasic>
+        </div>
+        <div class="col-sm-6 col-md-4 me-auto">
+          <TableBasic class="table--cta">
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Status</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-view="full">
+                  <td>Tom Smith</td>
+                  <td>10.05.23</td>
+                  <td>Successful</td>
+                  <td>Lorum ipsum</td>
+                  <td>Lorum ipsum</td>
+                  <td><a href="/">Manage client</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </TableBasic>
         </div>
       </div>
     </div>
@@ -252,86 +346,86 @@
       <p>
         The expandable data table efficiently presents large data in a small space. Use the expanded section for more
         details, and if it becomes crowded, consider directing users to a dedicated page, side panel, or modal for
-        further information. The user can expand/collapse rows by clicking the arrow ‘expand’ button.
+        further information. The user can expand/collapse rows by clicking the arrow ‘expand’ button. In the collapsed
+        state, rows (with a paragraph) are limited to 2 lines of information and an ellipses is used to indicate further
+        information.
       </p>
     </div>
 
-    <div class="container visualtest">
-      <div class="demo">
-        <Table class="table--cta table--fullwidth" data-expandable>
-          <table>
-            <thead>
-              <tr>
-                <th>Client name</th>
-                <th>Date added</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
-                    aliqua. Excepteur sint occaecat cupidatat.
-                  </p>
-                </td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
-                    aliqua. Excepteur sint occaecat cupidatat.
-                  </p>
-                </td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </Table>
-      </div>
+    <div class="container visualtest bg-light">
+      <TableNoSubmit class="table--cta table--fullwidth" data-expandable>
+        <table>
+          <thead>
+            <tr>
+              <th>Client name</th>
+              <th>Date added</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-view="full">
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableNoSubmit>
     </div>
 
     <div class="container pb-0 pt-5">
@@ -342,70 +436,68 @@
     </div>
 
     <div class="container visualtest">
-      <div class="demo">
-        <div class="row">
-          <div class="col-sm-6 col-md-4 ms-auto">
-            <Table class="table--cta" data-expandable>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Client</th>
-                    <th>Date added</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Tom Smith</td>
-                    <td>10.05.23</td>
-                    <td>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        magna aliqua. Excepteur sint occaecat cupidatat.
-                      </p>
-                    </td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td><a href="/">Manage client</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </Table>
-          </div>
-          <div class="col-sm-6 col-md-4 me-auto">
-            <Table class="table--cta" data-expandable>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Client</th>
-                    <th>Date added</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-view="full">
-                    <td>Tom Smith</td>
-                    <td>10.05.23</td>
-                    <td>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        magna aliqua. Excepteur sint occaecat cupidatat.
-                      </p>
-                    </td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td><a href="/">Manage client</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </Table>
-          </div>
+      <div class="row">
+        <div class="col-sm-6 col-md-4 ms-auto">
+          <TableNoSubmit class="table--cta" data-expandable>
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tom Smith</td>
+                  <td>10.05.23</td>
+                  <td>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                      aliqua. Excepteur sint occaecat cupidatat.
+                    </p>
+                  </td>
+                  <td>Lorum ipsum</td>
+                  <td>Lorum ipsum</td>
+                  <td><a href="/">Manage client</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </TableNoSubmit>
+        </div>
+        <div class="col-sm-6 col-md-4 me-auto">
+          <TableNoSubmit class="table--cta" data-expandable>
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-view="full">
+                  <td>Tom Smith</td>
+                  <td>10.05.23</td>
+                  <td>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                      aliqua. Excepteur sint occaecat cupidatat.
+                    </p>
+                  </td>
+                  <td>Lorum ipsum</td>
+                  <td>Lorum ipsum</td>
+                  <td><a href="/">Manage client</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </TableNoSubmit>
         </div>
       </div>
     </div>
@@ -422,123 +514,110 @@
       <p>Actions applied to the chosen selected items are found in the Action bar.</p>
     </div>
 
-    <div class="container visualtest">
-      <div class="demo">
-        <Table class="table--cta table--fullwidth">
-          <Actionbar data-selectall="" data-search="" slot="before">
-            <div class="dialog__wrapper show">
-              <button class="btn btn-action mb-0 me-0">Quick filter</button>
-              <dialog class="dialog--list">
-                <div class="pb-0 mb-0">
-                  <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" /><label
-                    for="follow-up-oldest"
-                    class="radio--tick"
-                    >Follow up date (Oldest to newest)</label
-                  ><input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest" /><label
-                    for="follow-up-newest"
-                    class="radio--tick"
-                    >Follow up date (Newest to oldest)</label
-                  ><input
-                    type="radio"
-                    name="sort"
-                    data-sort=""
-                    id="date-instructed-oldest"
-                    autofocus=""
-                    value="date-instructed-oldest"
-                  /><label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label
-                  ><input
-                    type="radio"
-                    name="sort"
-                    data-sort=""
-                    id="date-instructed-newest"
-                    value="date-instructed-newest"
-                  /><label for="date-instructed-newest" class="radio--tick mb-0"
-                    >Date Instructed (Newest to oldest)</label
-                  >
-                </div>
-              </dialog>
-            </div>
-            <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
-            <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
-            <button class="btn btn-action fa-box-archive show">Archive</button
-            ><button class="btn btn-action fa-trash-can show">Delete</button>
-            <hr />
-            <button class="btn btn-action" slot="overflow">Cancel</button>
-          </Actionbar>
+    <div class="container visualtest bg-light">
+      <TableNoSubmit class="table--cta table--fullwidth">
+        <Actionbar data-selectall="" data-search="" slot="before">
+          <div class="dialog__wrapper show">
+            <button class="btn btn-action mb-0 me-0">Quick filter</button>
+            <dialog class="dialog--list">
+              <div class="pb-0 mb-0">
+                <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" /><label
+                  for="follow-up-oldest"
+                  class="radio--tick"
+                  >Follow up date (Oldest to newest)</label
+                ><input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest" /><label
+                  for="follow-up-newest"
+                  class="radio--tick"
+                  >Follow up date (Newest to oldest)</label
+                ><input
+                  type="radio"
+                  name="sort"
+                  data-sort=""
+                  id="date-instructed-oldest"
+                  autofocus=""
+                  value="date-instructed-oldest"
+                /><label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label
+                ><input
+                  type="radio"
+                  name="sort"
+                  data-sort=""
+                  id="date-instructed-newest"
+                  value="date-instructed-newest"
+                /><label for="date-instructed-newest" class="radio--tick mb-0"
+                  >Date Instructed (Newest to oldest)</label
+                >
+              </div>
+            </dialog>
+          </div>
+          <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
+        </Actionbar>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Client name</th>
-                <th>Date added</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
-                    aliqua. Excepteur sint occaecat cupidatat.
-                  </p>
-                </td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
-                    aliqua. Excepteur sint occaecat cupidatat.
-                  </p>
-                </td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </Table>
-      </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Client name</th>
+              <th>Date added</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+              </td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+              </td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableNoSubmit>
     </div>
 
     <div class="container pt-5 pb-0">
@@ -550,11 +629,11 @@
       </p>
     </div>
 
-    <div class="container visualtest">
+    <div class="container visualtest bg-light">
       <div class="demo">
         <div class="row">
           <div class="col-sm-6 col-md-4 ms-auto">
-            <Table>
+            <TableNoSubmit>
               <Actionbar data-selectall="" data-search="" slot="before" class="">
                 <div class="dialog__wrapper show">
                   <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -630,10 +709,10 @@
                   </tr>
                 </tbody>
               </table>
-            </Table>
+            </TableNoSubmit>
           </div>
           <div class="col-sm-6 col-md-4 me-auto">
-            <Table>
+            <TableNoSubmit>
               <Actionbar data-selectall="" data-search="" slot="before" class="">
                 <div class="dialog__wrapper show">
                   <button class="btn btn-action mb-0 me-0">Quick filter</button>
@@ -708,7 +787,7 @@
                   </tr>
                 </tbody>
               </table>
-            </Table>
+            </TableNoSubmit>
           </div>
         </div>
       </div>
@@ -725,7 +804,7 @@
 
     <div class="container visualtest">
       <div class="demo">
-        <Table class="table--cta table--fullwidth">
+        <TableNoSubmit class="table--cta table--fullwidth">
           <table>
             <thead>
               <tr>
@@ -838,7 +917,7 @@
               </tr>
             </tbody>
           </table>
-        </Table>
+        </TableNoSubmit>
       </div>
     </div>
 
@@ -853,7 +932,7 @@
       <div class="demo">
         <div class="row">
           <div class="col-sm-6 col-md-4 ms-auto">
-            <Table>
+            <TableNoSubmit>
               <table>
                 <thead>
                   <tr>
@@ -892,10 +971,10 @@
                   </tr>
                 </tbody>
               </table>
-            </Table>
+            </TableNoSubmit>
           </div>
           <div class="col-sm-6 col-md-4 me-auto">
-            <Table>
+            <TableNoSubmit>
               <table>
                 <thead>
                   <tr>
@@ -934,7 +1013,7 @@
                   </tr>
                 </tbody>
               </table>
-            </Table>
+            </TableNoSubmit>
           </div>
         </div>
       </div>
@@ -948,123 +1027,121 @@
       </p>
     </div>
 
-    <div class="container visualtest">
-      <div class="demo">
-        <Table class="table--cta table--fullwidth" data-expandable>
-          <Actionbar data-selectall="" data-search="" slot="before">
-            <div class="dialog__wrapper show">
-              <button class="btn btn-action mb-0 me-0">Quick filter</button>
-              <dialog class="dialog--list">
-                <div class="pb-0 mb-0">
-                  <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" /><label
-                    for="follow-up-oldest"
-                    class="radio--tick"
-                    >Follow up date (Oldest to newest)</label
-                  ><input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest" /><label
-                    for="follow-up-newest"
-                    class="radio--tick"
-                    >Follow up date (Newest to oldest)</label
-                  ><input
-                    type="radio"
-                    name="sort"
-                    data-sort=""
-                    id="date-instructed-oldest"
-                    autofocus=""
-                    value="date-instructed-oldest"
-                  /><label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label
-                  ><input
-                    type="radio"
-                    name="sort"
-                    data-sort=""
-                    id="date-instructed-newest"
-                    value="date-instructed-newest"
-                  /><label for="date-instructed-newest" class="radio--tick mb-0"
-                    >Date Instructed (Newest to oldest)</label
-                  >
-                </div>
-              </dialog>
-            </div>
-            <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
-            <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
-            <button class="btn btn-action fa-box-archive show">Archive</button
-            ><button class="btn btn-action fa-trash-can show">Delete</button>
-            <hr />
-            <button class="btn btn-action" slot="overflow">Cancel</button>
-          </Actionbar>
+    <div class="container visualtest bg-light">
+      <TableNoSubmit class="table--cta table--fullwidth" data-expandable>
+        <Actionbar data-selectall="" data-search="" slot="before">
+          <div class="dialog__wrapper show">
+            <button class="btn btn-action mb-0 me-0">Quick filter</button>
+            <dialog class="dialog--list">
+              <div class="pb-0 mb-0">
+                <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" /><label
+                  for="follow-up-oldest"
+                  class="radio--tick"
+                  >Follow up date (Oldest to newest)</label
+                ><input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest" /><label
+                  for="follow-up-newest"
+                  class="radio--tick"
+                  >Follow up date (Newest to oldest)</label
+                ><input
+                  type="radio"
+                  name="sort"
+                  data-sort=""
+                  id="date-instructed-oldest"
+                  autofocus=""
+                  value="date-instructed-oldest"
+                /><label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label
+                ><input
+                  type="radio"
+                  name="sort"
+                  data-sort=""
+                  id="date-instructed-newest"
+                  value="date-instructed-newest"
+                /><label for="date-instructed-newest" class="radio--tick mb-0"
+                  >Date Instructed (Newest to oldest)</label
+                >
+              </div>
+            </dialog>
+          </div>
+          <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
+          <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
+          <button class="btn btn-action fa-box-archive show" slot="selected">Archive</button
+          ><button class="btn btn-action fa-trash-can show" slot="selected">Delete</button>
+          <hr />
+          <button class="btn btn-action" slot="overflow">Cancel</button>
+        </Actionbar>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Client name</th>
-                <th>Date added</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
-                    aliqua. Excepteur sint occaecat cupidatat.
-                  </p>
-                </td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
-                    aliqua. Excepteur sint occaecat cupidatat.
-                  </p>
-                </td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </Table>
-      </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Client name</th>
+              <th>Date added</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableNoSubmit>
     </div>
 
     <div class="container pt-4 pb-0">
@@ -1074,165 +1151,155 @@
         same as the ‘Expandable’ variant.
       </p>
     </div>
-    <div class="container visualtest">
-      <div class="demo">
-        <div class="row">
-          <div class="col-sm-6 col-md-4 ms-auto">
-            <Table>
-              <Actionbar data-selectall="" data-search="" slot="before">
-                <div class="dialog__wrapper show">
-                  <button class="btn btn-action mb-0 me-0">Quick filter</button>
-                  <dialog class="dialog--list">
-                    <div class="pb-0 mb-0">
-                      <input
-                        type="radio"
-                        name="sort"
-                        data-sort=""
-                        id="follow-up-oldest"
-                        value="follow-up-oldest"
-                      /><label for="follow-up-oldest" class="radio--tick">Follow up date (Oldest to newest)</label
-                      ><input
-                        type="radio"
-                        name="sort"
-                        data-sort=""
-                        id="follow-up-newest"
-                        value="follow-up-newest"
-                      /><label for="follow-up-newest" class="radio--tick">Follow up date (Newest to oldest)</label
-                      ><input
-                        type="radio"
-                        name="sort"
-                        data-sort=""
-                        id="date-instructed-oldest"
-                        autofocus=""
-                        value="date-instructed-oldest"
-                      /><label for="date-instructed-oldest" class="radio--tick"
-                        >Date Instructed (Oldest to newest)</label
-                      ><input
-                        type="radio"
-                        name="sort"
-                        data-sort=""
-                        id="date-instructed-newest"
-                        value="date-instructed-newest"
-                      /><label for="date-instructed-newest" class="radio--tick mb-0"
-                        >Date Instructed (Newest to oldest)</label
-                      >
-                    </div>
-                  </dialog>
-                </div>
-                <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
-                <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
-                <button class="btn btn-action fa-box-archive show">Archive</button
-                ><button class="btn btn-action fa-trash-can show">Delete</button>
-                <hr />
-                <button class="btn btn-action" slot="overflow">Cancel</button>
-              </Actionbar>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Client</th>
-                    <th>Date added</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Tom Smith</td>
-                    <td>10.05.23</td>
-                    <td>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        magna aliqua. Excepteur sint occaecat cupidatat.
-                      </p>
-                    </td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td><a href="/">Manage client</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </Table>
-          </div>
-          <div class="col-sm-6 col-md-4 me-auto">
-            <Table>
-              <Actionbar data-selectall="" data-search="" slot="before">
-                <div class="dialog__wrapper show">
-                  <button class="btn btn-action mb-0 me-0">Quick filter</button>
-                  <dialog class="dialog--list">
-                    <div class="pb-0 mb-0">
-                      <input
-                        type="radio"
-                        name="sort"
-                        data-sort=""
-                        id="follow-up-oldest"
-                        value="follow-up-oldest"
-                      /><label for="follow-up-oldest" class="radio--tick">Follow up date (Oldest to newest)</label
-                      ><input
-                        type="radio"
-                        name="sort"
-                        data-sort=""
-                        id="follow-up-newest"
-                        value="follow-up-newest"
-                      /><label for="follow-up-newest" class="radio--tick">Follow up date (Newest to oldest)</label
-                      ><input
-                        type="radio"
-                        name="sort"
-                        data-sort=""
-                        id="date-instructed-oldest"
-                        autofocus=""
-                        value="date-instructed-oldest"
-                      /><label for="date-instructed-oldest" class="radio--tick"
-                        >Date Instructed (Oldest to newest)</label
-                      ><input
-                        type="radio"
-                        name="sort"
-                        data-sort=""
-                        id="date-instructed-newest"
-                        value="date-instructed-newest"
-                      /><label for="date-instructed-newest" class="radio--tick mb-0"
-                        >Date Instructed (Newest to oldest)</label
-                      >
-                    </div>
-                  </dialog>
-                </div>
-                <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
-                <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
-                <button class="btn btn-action fa-box-archive show">Archive</button
-                ><button class="btn btn-action fa-trash-can show">Delete</button>
-                <hr />
-                <button class="btn btn-action" slot="overflow">Cancel</button>
-              </Actionbar>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Client</th>
-                    <th>Date added</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-view="full">
-                    <td>Tom Smith</td>
-                    <td>10.05.23</td>
-                    <td>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        magna aliqua. Excepteur sint occaecat cupidatat.
-                      </p>
-                    </td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td><a href="/">Manage client</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </Table>
-          </div>
+    <div class="container visualtest bg-light">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 ms-auto">
+          <TableNoSubmit class="table--cta">
+            <Actionbar data-selectall="" data-search="" slot="before">
+              <div class="dialog__wrapper show">
+                <button class="btn btn-action mb-0 me-0">Quick filter</button>
+                <dialog class="dialog--list">
+                  <div class="pb-0 mb-0">
+                    <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" /><label
+                      for="follow-up-oldest"
+                      class="radio--tick"
+                      >Follow up date (Oldest to newest)</label
+                    ><input
+                      type="radio"
+                      name="sort"
+                      data-sort=""
+                      id="follow-up-newest"
+                      value="follow-up-newest"
+                    /><label for="follow-up-newest" class="radio--tick">Follow up date (Newest to oldest)</label
+                    ><input
+                      type="radio"
+                      name="sort"
+                      data-sort=""
+                      id="date-instructed-oldest"
+                      autofocus=""
+                      value="date-instructed-oldest"
+                    /><label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label
+                    ><input
+                      type="radio"
+                      name="sort"
+                      data-sort=""
+                      id="date-instructed-newest"
+                      value="date-instructed-newest"
+                    /><label for="date-instructed-newest" class="radio--tick mb-0"
+                      >Date Instructed (Newest to oldest)</label
+                    >
+                  </div>
+                </dialog>
+              </div>
+              <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
+              <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
+              <button class="btn btn-action fa-box-archive show">Archive</button
+              ><button class="btn btn-action fa-trash-can show">Delete</button>
+              <hr />
+              <button class="btn btn-action" slot="overflow">Cancel</button>
+            </Actionbar>
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Tom Smith</td>
+                  <td>10.05.23</td>
+                  <td>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                      aliqua. Excepteur sint occaecat cupidatat.
+                    </p>
+                  </td>
+                  <td>Lorum ipsum</td>
+                  <td>Lorum ipsum</td>
+                  <td><a href="/">Manage client</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </TableNoSubmit>
+        </div>
+        <div class="col-sm-6 col-md-4 me-auto">
+          <TableNoSubmit class="table--cta">
+            <Actionbar data-selectall="" data-search="" slot="before">
+              <div class="dialog__wrapper show">
+                <button class="btn btn-action mb-0 me-0">Quick filter</button>
+                <dialog class="dialog--list">
+                  <div class="pb-0 mb-0">
+                    <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" /><label
+                      for="follow-up-oldest"
+                      class="radio--tick"
+                      >Follow up date (Oldest to newest)</label
+                    ><input
+                      type="radio"
+                      name="sort"
+                      data-sort=""
+                      id="follow-up-newest"
+                      value="follow-up-newest"
+                    /><label for="follow-up-newest" class="radio--tick">Follow up date (Newest to oldest)</label
+                    ><input
+                      type="radio"
+                      name="sort"
+                      data-sort=""
+                      id="date-instructed-oldest"
+                      autofocus=""
+                      value="date-instructed-oldest"
+                    /><label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label
+                    ><input
+                      type="radio"
+                      name="sort"
+                      data-sort=""
+                      id="date-instructed-newest"
+                      value="date-instructed-newest"
+                    /><label for="date-instructed-newest" class="radio--tick mb-0"
+                      >Date Instructed (Newest to oldest)</label
+                    >
+                  </div>
+                </dialog>
+              </div>
+              <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
+              <button class="btn btn-action fa-pen-to-square show" data-single="">Edit</button>
+              <button class="btn btn-action fa-box-archive show">Archive</button
+              ><button class="btn btn-action fa-trash-can show">Delete</button>
+              <hr />
+              <button class="btn btn-action" slot="overflow">Cancel</button>
+            </Actionbar>
+            <table>
+              <thead>
+                <tr>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-view="full">
+                  <td>Tom Smith</td>
+                  <td>10.05.23</td>
+                  <td>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                      aliqua. Excepteur sint occaecat cupidatat.
+                    </p>
+                  </td>
+                  <td>Lorum ipsum</td>
+                  <td>Lorum ipsum</td>
+                  <td><a href="/">Manage client</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </TableNoSubmit>
         </div>
       </div>
     </div>
@@ -1245,123 +1312,121 @@
       </p>
     </div>
 
-    <div class="container visualtest">
-      <div class="demo">
-        <Table class="table--cta table--fullwidth" data-expandable>
-          <table>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Client name</th>
-                <th>Date added</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th>Lorum ipsum</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="dialog__wrapper">
-                    <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
-                    <dialog class="dialog--fix dialog--list">
-                      <button class="btn btn-action" data-single="">View task</button>
-                      <button class="btn btn-action" data-single="">Mark as completed</button>
-                      <button class="btn btn-action" data-single="">Delete task</button>
-                    </dialog>
-                  </div>
-                </td>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
-                    aliqua. Excepteur sint occaecat cupidatat.
-                  </p>
-                </td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="dialog__wrapper">
-                    <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
-                    <dialog class="dialog--fix dialog--list">
-                      <button class="btn btn-action" data-single="">View task</button>
-                      <button class="btn btn-action" data-single="">Mark as completed</button>
-                      <button class="btn btn-action" data-single="">Delete task</button>
-                    </dialog>
-                  </div>
-                </td>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
-                    aliqua. Excepteur sint occaecat cupidatat.
-                  </p>
-                </td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="dialog__wrapper">
-                    <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
-                    <dialog class="dialog--fix dialog--list">
-                      <button class="btn btn-action" data-single="">View task</button>
-                      <button class="btn btn-action" data-single="">Mark as completed</button>
-                      <button class="btn btn-action" data-single="">Delete task</button>
-                    </dialog>
-                  </div>
-                </td>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="dialog__wrapper">
-                    <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
-                    <dialog class="dialog--fix dialog--list">
-                      <button class="btn btn-action" data-single="">View task</button>
-                      <button class="btn btn-action" data-single="">Mark as completed</button>
-                      <button class="btn btn-action" data-single="">Delete task</button>
-                    </dialog>
-                  </div>
-                </td>
-                <td>Tom Smith</td>
-                <td>10.05.23</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td>Lorum ipsum</td>
-                <td><a href="/">Manage client</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </Table>
-      </div>
+    <div class="container visualtest bg-light">
+      <TableNoSubmit class="table--cta table--fullwidth" data-expandable>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Client name</th>
+              <th>Date added</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th>Lorum ipsum</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="dialog__wrapper">
+                  <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
+                  <dialog class="dialog--fix dialog--list">
+                    <button class="btn btn-action" data-single="">View task</button>
+                    <button class="btn btn-action" data-single="">Mark as completed</button>
+                    <button class="btn btn-action" data-single="">Delete task</button>
+                  </dialog>
+                </div>
+              </td>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="dialog__wrapper">
+                  <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
+                  <dialog class="dialog--fix dialog--list">
+                    <button class="btn btn-action" data-single="">View task</button>
+                    <button class="btn btn-action" data-single="">Mark as completed</button>
+                    <button class="btn btn-action" data-single="">Delete task</button>
+                  </dialog>
+                </div>
+              </td>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="dialog__wrapper">
+                  <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
+                  <dialog class="dialog--fix dialog--list">
+                    <button class="btn btn-action" data-single="">View task</button>
+                    <button class="btn btn-action" data-single="">Mark as completed</button>
+                    <button class="btn btn-action" data-single="">Delete task</button>
+                  </dialog>
+                </div>
+              </td>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="dialog__wrapper">
+                  <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
+                  <dialog class="dialog--fix dialog--list">
+                    <button class="btn btn-action" data-single="">View task</button>
+                    <button class="btn btn-action" data-single="">Mark as completed</button>
+                    <button class="btn btn-action" data-single="">Delete task</button>
+                  </dialog>
+                </div>
+              </td>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td><a href="/">Manage client</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableNoSubmit>
     </div>
 
     <div class="container pt-4 pb-0">
@@ -1371,102 +1436,167 @@
         the same as the ‘Expandable’ variant.
       </p>
     </div>
-    <div class="container visualtest">
-      <div class="demo">
-        <div class="row">
-          <div class="col-sm-6 col-md-4 ms-auto">
-            <Table>
-              <table>
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Client</th>
-                    <th>Date added</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="dialog__wrapper">
-                        <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
-                        <dialog class="dialog--fix dialog--list">
-                          <button class="btn btn-action" data-single="">View task</button>
-                          <button class="btn btn-action" data-single="">Mark as completed</button>
-                          <button class="btn btn-action" data-single="">Delete task</button>
-                        </dialog>
-                      </div>
-                    </td>
-                    <td>Tom Smith</td>
-                    <td>10.05.23</td>
-                    <td>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        magna aliqua. Excepteur sint occaecat cupidatat.
-                      </p>
-                    </td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td><a href="/">Manage client</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </Table>
-          </div>
-          <div class="col-sm-6 col-md-4 me-auto">
-            <Table>
-              <table>
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>Client</th>
-                    <th>Date added</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th>Lorum ipsum</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-view="full">
-                    <td>
-                      <div class="dialog__wrapper">
-                        <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
-                        <dialog class="dialog--fix dialog--list">
-                          <button class="btn btn-action" data-single="">View task</button>
-                          <button class="btn btn-action" data-single="">Mark as completed</button>
-                          <button class="btn btn-action" data-single="">Delete task</button>
-                        </dialog>
-                      </div>
-                    </td>
-                    <td>Tom Smith</td>
-                    <td>10.05.23</td>
-                    <td>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        magna aliqua. Excepteur sint occaecat cupidatat.
-                      </p>
-                    </td>
-                    <td>Lorum ipsum</td>
-                    <td>Lorum ipsum</td>
-                    <td><a href="/">Manage client</a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </Table>
-          </div>
+    <div class="container visualtest mb-5 bg-light">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 ms-auto">
+          <TableNoSubmit>
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="dialog__wrapper">
+                      <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
+                      <dialog class="dialog--fix dialog--list">
+                        <button class="btn btn-action" data-single="">View task</button>
+                        <button class="btn btn-action" data-single="">Mark as completed</button>
+                        <button class="btn btn-action" data-single="">Delete task</button>
+                      </dialog>
+                    </div>
+                  </td>
+                  <td>Tom Smith</td>
+                  <td>10.05.23</td>
+                  <td>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                      aliqua. Excepteur sint occaecat cupidatat.
+                    </p>
+                  </td>
+                  <td>Lorum ipsum</td>
+                  <td>Lorum ipsum</td>
+                  <td><a href="/">Manage client</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </TableNoSubmit>
+        </div>
+        <div class="col-sm-6 col-md-4 me-auto">
+          <TableNoSubmit>
+            <table>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Client</th>
+                  <th>Date added</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th>Lorum ipsum</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-view="full">
+                  <td>
+                    <div class="dialog__wrapper">
+                      <button class="btn btn-secondary btn-compact fa-ellipsis-vertical">Lorum ipsum</button>
+                      <dialog class="dialog--fix dialog--list">
+                        <button class="btn btn-action" data-single="">View task</button>
+                        <button class="btn btn-action" data-single="">Mark as completed</button>
+                        <button class="btn btn-action" data-single="">Delete task</button>
+                      </dialog>
+                    </div>
+                  </td>
+                  <td>Tom Smith</td>
+                  <td>10.05.23</td>
+                  <td>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                      aliqua. Excepteur sint occaecat cupidatat.
+                    </p>
+                  </td>
+                  <td>Lorum ipsum</td>
+                  <td>Lorum ipsum</td>
+                  <td><a href="/">Manage client</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </TableNoSubmit>
         </div>
       </div>
     </div>
 
-    <br />
+    <h2>Sorting using column headers</h2>
+    <p>
+      Data tables can be configured to allow the user to sort columns of data ascending or descending by clicking them.
+      When the user opens the table it should be clear which column determines the order of the data and whether it is
+      ascending or descending. This is shown by an arrow adjacent to the column header name.
+    </p>
 
-    <br />
+    <div class="container visualtest mb-5 bg-light">
+      <TableNoSubmit class="table--cta table--fullwidth">
+        <Actionbar data-search="" slot="before">
+          <button class="btn btn-action fa-box-archive">Archive</button
+          ><button class="btn btn-action fa-trash-can">Export to .csv</button>
+        </Actionbar>
+        <table>
+          <thead>
+            <tr>
+              <th>Negotiator</th>
+              <th>Property address</th>
+              <th data-sort>Vendor</th>
+              <th data-sort>Appointment date</th>
+              <th data-sort>Valuation price</th>
+              <th>Fee amount (£)</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td>a Kevin Milne</td>
+              <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td><a href="/">View</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td>b Kevin Milne</td>
+              <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td><a href="/">View</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td>c Kevin Milne</td>
+              <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td><a href="/">View</a></td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10 Summerhill Terrace, Newcastle upon Tyne NE4</td>
+              <td>d Kevin Milne</td>
+              <td>29/12/2024<br />12:30</td>
+              <td>£0.00</td>
+              <td>£0.00</td>
+              <td><a href="/">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </TableNoSubmit>
+    </div>
 
-    <br />
+    <h3>Mobile behaviour</h3>
+    <p>
+      On mobile, sorting should be handled via the action bar only. We should specify the most popular sorting options.
+      This can be presented in a popover dialog.
+    </p>
 
     <div class="container">
       <h2>Max height table</h2>
@@ -1484,7 +1614,7 @@
     <Tabs class="container">
       <details>
         <summary><h3>Max height small</h3></summary>
-        <Table class="mh-sm table--fullwidth">
+        <TableBasic class="mh-sm table--fullwidth" data-show="100">
           <table>
             <thead>
               <tr>
@@ -1579,11 +1709,11 @@
               </tr>
             </tbody>
           </table>
-        </Table>
+        </TableBasic>
       </details>
       <details>
         <summary><h3>Max height medium</h3></summary>
-        <Table class="mh-md table--fullwidth">
+        <TableBasic class="mh-md table--fullwidth" data-show="100">
           <table>
             <thead>
               <tr>
@@ -1678,11 +1808,11 @@
               </tr>
             </tbody>
           </table>
-        </Table>
+        </TableBasic>
       </details>
       <details>
         <summary><h3>Max height large</h3></summary>
-        <Table class="mh-lg table--fullwidth">
+        <TableBasic class="mh-lg table--fullwidth" data-show="100">
           <table>
             <thead>
               <tr>
@@ -1817,7 +1947,7 @@
               </tr>
             </tbody>
           </table>
-        </Table>
+        </TableBasic>
       </details>
     </Tabs>
 
@@ -1853,77 +1983,298 @@
       </p>
     </div>
 
-    <div class="container">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h2>Web component</h2></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
-        </details>
-        <details>
-          <summary><h2>HTML</h2></summary>
-          <pre><code class="javascript">{{htmlUsage}}</code></pre>
-        </details>
-      </Tabs>
-    </div>
-    <div class="bg-light version-control">
-      <div class="container">
+    <Integration component="carousel" componentName="iam-carousel">
+      <template #web-component>
+        <pre><code>{{`<iam-table>
+  <table>
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</iam-table>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Table from '@/components/Table/Table.vue</script>
+        
+<Table>
+  <table>
+    <thead>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</Table>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
         <table>
           <thead>
             <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Notable updates</th>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
             </tr>
           </thead>
-          <tbody class="text-body">
+          <tbody>
             <tr>
-              <td>V2</td>
-              <td>15.09.2023</td>
+              <th>data-show (Passed down to the pagination)</th>
+              <td>15</td>
+              <td>Number</td>
+              <td>No</td>
+              <td>Set the number rows shown on page load</td>
+            </tr>
+            <tr>
+              <th>data-increment (Passed down to the pagination)</th>
+              <td>15</td>
+              <td>Number</td>
+              <td>No</td>
+              <td>Set the number rows added to the page when loading more</td>
+            </tr>
+            <tr>
+              <th>data-page (Passed down to the pagination)</th>
+              <td>1</td>
+              <td>Number</td>
+              <td>No</td>
+              <td>Set the page shown</td>
+            </tr>
+            <tr>
+              <th>data-total (Passed down to the pagination)</th>
+              <td></td>
+              <td>Number</td>
+              <td>Yes</td>
               <td>
-                Added multiple variants to the tables: Default, Expansion, Selection, Overflow, Expansion + Selection,
-                Expansion + Overflow. Added various mobile card states. Added in some rules around behaviours,
-                formatting and dimension.
+                Set the total of results that could be shown, used to work button actions. If the total is calculated
+                via javascript and by querying the dom by default.
               </td>
             </tr>
             <tr>
-              <td>V1.1</td>
-              <td>25.05.2023</td>
-              <td>Max heights have been enabled</td>
+              <th>data-expand (on each row)</th>
+              <td></td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>
+                This attribute when added creates a button on desktop for the row to be expanded to show more content.
+              </td>
             </tr>
             <tr>
-              <td>V1 added</td>
-              <td>15.05.2023</td>
-              <td>N/A</td>
+              <th>data-selectall (on ationbar)</th>
+              <td></td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>Creates a select box for each row</td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/tables.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+      </template>
+
+      <template #classes>
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>.table-fullwidth</th>
+              <td>The table will always be fullwidth even on mobile phones.</td>
+            </tr>
+            <tr>
+              <th>.table-cta</th>
+              <td>Fixes the last column of the table to the right so the rows CTA is always visible.</td>
+            </tr>
+            <tr>
+              <th>.mh-sm</th>
+              <td>
+                Set a small max height onto the table, when used set a large data-total attribute so that the pagination
+                doesn't show.
+              </td>
+            </tr>
+            <tr>
+              <th>.mh-md</th>
+              <td>
+                Set a medium max height onto the table, when used set a large data-total attribute so that the
+                pagination doesn't show.
+              </td>
+            </tr>
+            <tr>
+              <th>.mh-large</th>
+              <td>
+                Set a large max height onto the table, when used set a large data-total attribute so that the pagination
+                doesn't show.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #parts>
+        <table>
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>container</th>
+              <td>A container div</td>
+            </tr>
+            <tr>
+              <th>wrapper</th>
+              <td>A wrapper div</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #dispatched-events>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>update-show</th>
+              <td>When a user clicks on the load more button</td>
+            </tr>
+            <tr>
+              <th>update-page</th>
+              <td>When a updates the page via either a button or other method</td>
+            </tr>
+            <tr>
+              <th>row-expanded</th>
+              <td>When a a row has been expanded on mobile or desktop</td>
+            </tr>
+            <tr>
+              <th>row-selected</th>
+              <td>
+                When the checkbox for a row has been selected or unselected. No other functionality triggered by
+                default.
+              </td>
+            </tr>
+            <tr>
+              <th>all-rows-selected</th>
+              <td>All rows have been selected. No other functionality triggered by default.</td>
+            </tr>
+            <tr>
+              <th>all-rows-unselected</th>
+              <td>All rows have been selected. No other functionality triggered by default.</td>
+            </tr>
+
+            <tr>
+              <th>sort-by-heading</th>
+              <td>A column heading has been pressed to sort by that column</td>
+            </tr>
+
+            <tr>
+              <th>search-submit</th>
+              <td>The table has been searched via javascript or an ajax call.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #criteria>
+        <ul>
+          <li>The pagination should only show when it it needed.</li>
+          <li>The main row CTA should always be shown.</li>
+          <li>The mobile view of the row should only show the basics until expanded</li>
+        </ul>
+      </template>
+      <template #data-layer>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>update-show</th>
+              <td>When a user clicks on the load more button</td>
+            </tr>
+            <tr>
+              <th>update-page</th>
+              <td>When a updates the page via either a button or other method</td>
+            </tr>
+            <tr>
+              <th>row-expanded</th>
+              <td>When a a row has been expanded on mobile or desktop</td>
+            </tr>
+            <tr>
+              <th>row-selected</th>
+              <td>
+                When the checkbox for a row has been selected or unselected. No other functionality triggered by
+                default.
+              </td>
+            </tr>
+            <tr>
+              <th>all-rows-selected</th>
+              <td>All rows have been selected. No other functionality triggered by default.</td>
+            </tr>
+            <tr>
+              <th>all-rows-unselected</th>
+              <td>All rows have been selected. No other functionality triggered by default.</td>
+            </tr>
+
+            <tr>
+              <th>sort-by-heading</th>
+              <td>A column heading has been pressed to sort by that column</td>
+            </tr>
+
+            <tr>
+              <th>search-submit</th>
+              <td>The table has been searched via javascript or an ajax call.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+    </Integration>
+    <Versions pdf="/pdfs/tables.pdf">
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
+            <td>V1.2 added</td>
+            <td>07.03.2025</td>
+            <td>Added new variant that allows users to sort the table data via clicking the column headers.</td>
+          </tr>
+          <tr>
+            <td>V1.1 added</td>
+            <td>5.09.2023</td>
+            <td>
+              Added multiple variants to the tables: Default, Expansion, Selection, Overflow, Expansion + Selection,
+              Expansion + Overflow. Added various mobile card states. Added in some rules around behaviours, formatting
+              and dimension.
+            </td>
+          </tr>
+          <tr>
+            <td>V1 added</td>
+            <td>15.05.2023</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </Versions>
   </main>
 </template>
-
-<style lang="scss" scoped>
-  @use '../../../assets/sass/func' as *;
-
-  .demo {
-    background-color: #f2f2f2;
-    padding: 3rem 1.5rem;
-
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
-
-    @media screen and (min-width: 36em) {
-      margin-left: 0rem;
-      margin-right: 0rem;
-    }
-  }
-</style>
 
 <script>
   import Tabs from '@/components/Tabs/Tabs.vue';

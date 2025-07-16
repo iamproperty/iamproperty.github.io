@@ -1,5 +1,4 @@
-// @ts-nocheck
-function fileupload(fileupload: Element, wrapper: Element) {
+function fileupload(fileupload: Element, wrapper: Element): void {
   const filesWrapper = wrapper.querySelector('.files');
   const dropArea = wrapper.querySelector('.drop-area');
   const input = fileupload.querySelector('input');
@@ -11,7 +10,7 @@ function fileupload(fileupload: Element, wrapper: Element) {
   const cloneInput = input.cloneNode();
   dropArea.append(cloneInput);
 
-  const checkFileExt = function (filename) {
+  const checkFileExt = function (filename): boolean {
     if (!input.hasAttribute('accept')) return true;
 
     const nameExtension = filename.split('.').pop();
@@ -24,8 +23,6 @@ function fileupload(fileupload: Element, wrapper: Element) {
 
   wrapper.addEventListener('click', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('.btn-primary')) {
-      const button = event.target.closest('.btn-primary');
-
       // If the input allows multiples then use the buffer clone input
 
       errorMsgExt.classList.remove('d-block');
@@ -52,11 +49,14 @@ function fileupload(fileupload: Element, wrapper: Element) {
 
       const changeEvent = new Event('change');
       input.dispatchEvent(changeEvent);
+
+      const fileRemovedEvent = new CustomEvent('fileRemoved', { detail: { removedFile: button?.dataset.file } });
+      fileupload.dispatchEvent(fileRemovedEvent);
     }
   });
 
   // Buffer input change event
-  cloneInput.addEventListener('change', (event) => {
+  cloneInput.addEventListener('change', () => {
     if (input.hasAttribute('multiple')) {
       const filesArray = [...input.files, ...cloneInput.files];
 
@@ -92,19 +92,19 @@ function fileupload(fileupload: Element, wrapper: Element) {
     input.dispatchEvent(changeEvent);
   });
 
-  cloneInput.addEventListener('dragenter', (event) => {
+  cloneInput.addEventListener('dragenter', () => {
     cloneInput.classList.add('focus');
   });
 
-  cloneInput.addEventListener('dragleave', (event) => {
+  cloneInput.addEventListener('dragleave', () => {
     cloneInput.classList.remove('focus');
   });
 
-  cloneInput.addEventListener('drop', (event) => {
+  cloneInput.addEventListener('drop', () => {
     cloneInput.classList.remove('focus');
   });
 
-  input.addEventListener('change', (event) => {
+  input.addEventListener('change', () => {
     if (input.files.length == 1) {
       const file = input.files[0];
 
@@ -128,7 +128,7 @@ function fileupload(fileupload: Element, wrapper: Element) {
     filesWrapper.innerHTML = '';
 
     for (const file of input.files) {
-      filesWrapper.innerHTML += `<span class="file" part="file">${file.name} <button data-file="${file.name}">Remove</button></span>`;
+      filesWrapper.innerHTML += `<span class="file" part="file">${file.name} <button data-file="${file.name}" part="file__remove">Remove</button></span>`;
     }
 
     const elementChangeEvent = new CustomEvent('elementchange', { detail: { files: input.files } });
@@ -144,7 +144,7 @@ function fileupload(fileupload: Element, wrapper: Element) {
     const filename = fileupload.getAttribute('data-filename');
 
     if (filename)
-      filesWrapper.innerHTML = `<span class="file">${filename} <button data-file="${filename}">Remove</button></span>`;
+      filesWrapper.innerHTML = `<span class="file" part="file">${filename} <button data-file="${filename}" part="file__remove">Remove</button></span>`;
   }
 }
 

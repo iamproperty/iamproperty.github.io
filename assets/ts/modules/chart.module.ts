@@ -1,6 +1,8 @@
+import { ucfirst, unsnake } from './helpers';
+
 // #region Functions that setup and trigger other functions
 
-export const addClasses = (chartElement: any, chartOuter: any) => {
+export const addClasses = (chartElement: any, chartOuter: any): boolean => {
   // add colour classes
   for (let i = 1; i <= 10; i++) {
     if (chartElement.hasAttribute(`data-colour-${i}`)) {
@@ -19,7 +21,12 @@ export const addClasses = (chartElement: any, chartOuter: any) => {
   return true;
 };
 
-export const setupChart = (chartElement: any, chartOuter: any, tableElement: any) => {
+export const setupChart = (chartElement: any, chartOuter: any, tableElement: any): boolean => {
+  if (chartElement.tagName == 'IAM-DOUGHNUTCHART') {
+    setupDoughnutChart(chartElement, chartOuter, tableElement);
+    return true;
+  }
+
   // #region Reset the chart
   // empty divs to re-populate
   const chartKey = chartOuter.querySelector('.chart__key');
@@ -51,10 +58,32 @@ export const setupChart = (chartElement: any, chartOuter: any, tableElement: any
 
   return true;
 };
+
+export const setupDoughnutChart = (chartElement: any, chartOuter: any, tableElement: any): boolean => {
+  // #region Reset the chart
+  // empty divs to re-populate
+  const chartKey = chartOuter.querySelector('.chart__key');
+  chartKey.innerHTML = '';
+
+  // Remove old input fields
+  Array.from(chartOuter.querySelectorAll(':scope > input[type="checkbox"],:scope > input[type="radio"]')).map(
+    (element: any) => {
+      element.remove();
+    }
+  );
+  // #endregion
+
+  setCellData(chartElement, tableElement);
+
+  createChartKey(chartOuter, tableElement, chartKey);
+  createdoughnuts(chartOuter);
+
+  return true;
+};
 // #endregion
 
 // #region Event handlers and observers
-export const setEventListener = function (chartElement: any, chartOuter: any) {
+export const setEventListener = function (chartElement: any, chartOuter: any): void {
   const chart = chartOuter.querySelector('.chart');
   chart.addEventListener('mousemove', (event: any) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('td:not(:first-child')) {
@@ -101,14 +130,18 @@ export const setEventListener = function (chartElement: any, chartOuter: any) {
 
     shadowTable.innerHTML = table.innerHTML;
     setCellData(chartElement, shadowTable);
+
+    if (chartElement.tagName == 'IAM-DOUGHNUTCHART') {
+      createdoughnuts(chartOuter);
+    }
   });
 };
 
-export const setEventObservers = function (chartElement: any, chartOuter: any) {
+export const setEventObservers = function (chartElement: any, chartOuter: any): boolean {
   const table = chartElement.querySelector('table');
   const shadowTable = chartOuter.querySelector('table');
 
-  const attributesUpdated = (mutationList: any, observer: any) => {
+  const attributesUpdated = (mutationList: any, observer: any): void => {
     observer.disconnect();
     observer2.disconnect();
 
@@ -123,7 +156,7 @@ export const setEventObservers = function (chartElement: any, chartOuter: any) {
     observer2.observe(chartElement, { attributes: true });
   };
 
-  const tableUpdated = (mutationList: any, observer: any) => {
+  const tableUpdated = (mutationList: any, observer: any): void => {
     observer.disconnect();
     observer2.disconnect();
 
@@ -146,10 +179,19 @@ export const setEventObservers = function (chartElement: any, chartOuter: any) {
 
   return true;
 };
+
+function getCoordinatesForPercent(percent: number, doughnutCount: number): any {
+  // This moves the start point to the top middle point like a clock
+  if (doughnutCount > 1) percent = percent - 0.25;
+
+  const x = Math.cos(2 * Math.PI * percent);
+  const y = Math.sin(2 * Math.PI * percent);
+  return [x * 100, y * 100];
+}
 // #endregion
 
 // #region GET functions
-export const getChartData = function (chartElement: any) {
+export const getChartData = function (chartElement: any): any {
   const table = chartElement.shadowRoot.querySelector('.chart__wrapper table');
 
   const min: any = chartElement.hasAttribute('data-min') ? chartElement.getAttribute('data-min') : 0;
@@ -177,7 +219,7 @@ export const getChartData = function (chartElement: any) {
   return { min, max, yaxis, xaxis, guidelines };
 };
 
-function getLargestValue(chartElement: any, table: any) {
+function getLargestValue(chartElement: any, table: any): number {
   const selector = chartElement.classList.contains('chart--stacked') ? 'tbody tr' : 'tbody td:not(:first-child)';
 
   const values = Array.from(table.querySelectorAll(selector)).map((element: any) => {
@@ -192,7 +234,7 @@ function getLargestValue(chartElement: any, table: any) {
   return Math.ceil(largestValue);
 }
 
-const getValues = function (value: number, min: any, max: any, start?: number) {
+const getValues = function (value: number, min: any, max: any, start?: number): any {
   let cleanValue: string | number = String(value);
   cleanValue = cleanValue.replace('£', '');
   cleanValue = cleanValue.replace('%', '');
@@ -227,19 +269,34 @@ const getValues = function (value: number, min: any, max: any, start?: number) {
 // #endregion
 
 // #region SET functions - set data attributes and classes
-export const setCellData = function (chartElement: any, table: any) {
+export const setCellData = function (chartElement: any, table: any): void {
   Array.from(table.querySelectorAll('tbody tr')).forEach((tr: any) => {
     let rowValue = 0;
     // Set the data numeric value if not set
     Array.from(tr.querySelectorAll('td:not(:first-child)')).forEach((td: any) => {
-      const value = parseFloat(td.textContent.replace('£', '').replace('%', '').replace(',', ''));
+      // Ignore the buttons and links inside
+      const copyTD = td.cloneNode(true);
+      Array.from(copyTD.querySelectorAll('*')).forEach((element: any) => {
+        element.remove();
+      });
+
+      const value = parseFloat(copyTD.textContent.replace('£', '').replace('%', '').replace(',', ''));
 
       td.setAttribute('data-numeric', value);
-      td.setAttribute('data-value', td.textContent);
+      td.setAttribute('data-value', copyTD.textContent);
 
       const display = getComputedStyle(td).display;
 
       if (display != 'none') rowValue += value;
+
+      Array.from(td.querySelectorAll('a, button')).forEach((element: any, index: number) => {
+        if (index == 0) {
+          element.insertAdjacentHTML('beforeBegin', '<hr/>');
+        }
+
+        element.classList.add('btn');
+        element.classList.add('btn-tertiary');
+      });
     });
 
     tr.setAttribute('data-numeric', rowValue);
@@ -303,7 +360,7 @@ export const setCellData = function (chartElement: any, table: any) {
   });
 };
 
-export const setLongestLabel = function (chartOuter: any) {
+export const setLongestLabel = function (chartOuter: any): void {
   const chartWrapper = chartOuter.querySelector('.chart__wrapper');
   const chartSpacer = chartOuter.querySelector('.chart__spacer span');
   const table = chartOuter.querySelector('.chart table');
@@ -318,14 +375,18 @@ export const setLongestLabel = function (chartOuter: any) {
   chartSpacer.innerHTML = longestLabel;
 };
 
-export const setLongestValue = function (chartOuter: any) {
+export const setLongestValue = function (chartOuter: any): void {
   const chartWrapper = chartOuter.querySelector('.chart__wrapper');
   const table = chartOuter.querySelector('.chart table');
 
   let longestValue = '';
-  Array.from(table.querySelectorAll('tbody tr td:not(:first-child) span')).forEach((td: any) => {
-    if (typeof td.textContent != 'undefined' && td.textContent.length > longestValue.length)
-      longestValue = td.textContent;
+  Array.from(table.querySelectorAll('tbody tr td:not(:first-child)')).forEach((td: any) => {
+    if (
+      typeof td.getAttribute('data-value') != 'undefined' &&
+      td.getAttribute('data-value').length > longestValue.length
+    ) {
+      longestValue = td.getAttribute('data-value');
+    }
   });
   chartWrapper.setAttribute('data-longest-value', longestValue);
 };
@@ -333,7 +394,7 @@ export const setLongestValue = function (chartOuter: any) {
 
 // #region CREATE function
 
-export const createChartKey = function (chartOuter: any, tableElement: any, chartKey: any) {
+export const createChartKey = function (chartOuter: any, tableElement: any, chartKey: any): boolean {
   const chartID = `chart-${Date.now() + (Math.floor(Math.random() * 100) + 1)}`;
   //const chartOuter = chartElement.querySelector('.chart__outer');
 
@@ -361,7 +422,7 @@ function createChartKeyItem(
   chartKey: any,
   chartOuter: any,
   previousInput: any
-) {
+): any {
   const input = document.createElement('input');
   input.setAttribute('name', `${chartID}-dataset-${index}`);
   input.setAttribute('id', `${chartID}-dataset-${index}`);
@@ -380,14 +441,19 @@ function createChartKeyItem(
   label.setAttribute('for', `${chartID}-dataset-${index}`);
   label.setAttribute('data-label', `${text}`);
   label.setAttribute('part', `key`);
+
+  const total = chartOuter.querySelector(`tbody tr td:nth-child(${index + 1})`)?.getAttribute('data-numeric');
+
+  label.setAttribute('data-numeric', total);
   label.innerHTML = `${text}`;
   chartKey.append(label);
 
   return previousInput;
 }
 
-export const createChartGuidelines = function (chartElement: any, chartGuidelines: any) {
-  let { min, max, yaxis, guidelines } = getChartData(chartElement);
+export const createChartGuidelines = function (chartElement: any, chartGuidelines: any): any {
+  const { min, max, yaxis } = getChartData(chartElement);
+  let { guidelines } = getChartData(chartElement);
 
   if (!guidelines.length) guidelines = yaxis;
 
@@ -400,7 +466,7 @@ export const createChartGuidelines = function (chartElement: any, chartGuideline
   }
 };
 
-export const createChartYaxis = function (chartElement: any, chartYaxis: any) {
+export const createChartYaxis = function (chartElement: any, chartYaxis: any): void {
   const { min, max, yaxis } = getChartData(chartElement);
 
   chartYaxis.innerHTML = '';
@@ -412,7 +478,7 @@ export const createChartYaxis = function (chartElement: any, chartYaxis: any) {
   }
 };
 
-export const createXaxis = function (chartOuter: any) {
+export const createXaxis = function (chartOuter: any): void {
   const chart = chartOuter.querySelector('.chart');
   let chartXaxis = chartOuter.querySelector('.chart__xaxis');
 
@@ -424,7 +490,7 @@ export const createXaxis = function (chartOuter: any) {
   chart.prepend(chartXaxis);
 };
 
-export const createTooltips = function (chartOuter: any) {
+export const createTooltips = function (chartOuter: any): void {
   const titles = chartOuter.querySelectorAll(
     'thead th[title], tbody th[title]:first-child, tbody td[title]:first-child'
   );
@@ -437,6 +503,92 @@ export const createTooltips = function (chartOuter: any) {
     //title.removeAttribute('title'); // TODO add a supports query for anchor positioning
   });
 };
+
+export const createdoughnuts = function (chartOuter: any): void {
+  let returnString = '';
+  const chartInner = chartOuter.querySelector('.chart');
+  let doughnutWrapper = chartOuter.querySelector('.doughnuts');
+
+  if (!doughnutWrapper) {
+    doughnutWrapper = document.createElement('div');
+    doughnutWrapper.setAttribute('class', 'doughnuts');
+    chartInner.append(doughnutWrapper);
+  }
+
+  Array.from(chartInner.querySelectorAll('tbody tr')).forEach((item: any, index) => {
+    let paths = '';
+    let tooltips = '';
+    let cumulativePercent = 0;
+    let total = 0;
+    const titleKey = item.querySelectorAll('td')[0];
+    const title = titleKey.innerHTML;
+    let doughnutCount = 0;
+    const rowTotal = item.getAttribute('data-numeric');
+
+    // Work out the total amount
+    Array.from(item.querySelectorAll('td')).forEach((td: any, subindex) => {
+      const display = getComputedStyle(td).display;
+
+      if (subindex != 0 && display != 'none') {
+        let value = td.getAttribute('data-numeric');
+
+        value = value.replace('£', '');
+        value = value.replace('%', '');
+        value = value.replace(',', '');
+        value = Number.parseInt(value);
+
+        total += value;
+        doughnutCount++;
+      }
+    });
+
+    // Create the paths
+    Array.from(item.querySelectorAll('td')).forEach((td: any, subindex) => {
+      const display = getComputedStyle(td).display;
+
+      if (subindex != 0 && doughnutCount == 1 && display != 'none') {
+        const pathData = `M 0 0 L 100 0 A 100 100 0 1 1 100 -0.01 L 0 0`;
+
+        paths += `<path d="${pathData}" style="${td.getAttribute('style')} --path-index: ${subindex};"></path>`;
+        tooltips += `<span class="h5 mb-0" part="popover">${ucfirst(unsnake(td.getAttribute('data-label'))).trim()}<br/>${td.hasAttribute('data-second') ? `${td.getAttribute('data-second-label')}: ${td.getAttribute('data-second')}<br/>` : ''}${td.querySelector('[part="popover"]')?.innerHTML}</span>`;
+      } else if (subindex != 0) {
+        let value = td.getAttribute('data-numeric');
+        const hide = display == 'none' ? 'display: none;' : '';
+
+        value = value.replace('£', '');
+        value = value.replace('%', '');
+        value = value.replace(',', '');
+        value = Number.parseInt(value);
+
+        const percent = value / total;
+        const [startX, startY] = getCoordinatesForPercent(cumulativePercent, doughnutCount);
+        const [endX, endY] = getCoordinatesForPercent(cumulativePercent + percent, doughnutCount);
+        const largeArcFlag = percent > 0.5 ? 1 : 0; // if the slice is more than 50%, take the large arc (the long way around)
+        const pathData = [
+          `M 0 0`,
+          `L ${startX ? startX.toFixed(0) : 0} ${startY ? startY.toFixed(0) : 0}`, // Move
+          `A 100 100 0 ${largeArcFlag} 1 ${endX ? endX.toFixed(0) : 0} ${endY ? endY.toFixed(0) : 0}`, // Arc
+          `L 0 0`, // Line
+        ].join(' ');
+
+        paths += `<path d="${pathData}" style="${td.getAttribute('style')} --path-index: ${subindex};${hide}"></path>`;
+        tooltips += `<span class="h5 mb-0" part="popover">${ucfirst(unsnake(td.getAttribute('data-label'))).trim()}<br/>${td.hasAttribute('data-second') ? `${td.getAttribute('data-second-label')}: ${td.getAttribute('data-second')}<br/>` : ''}${td.querySelector('[part="popover"]')?.innerHTML}</span>`;
+
+        // each slice starts where the last slice ended, so keep a cumulative percent
+        if (display != 'none') cumulativePercent += percent;
+      }
+    });
+
+    returnString += `<div class="doughnut">
+  <svg viewBox="-105 -105 210 210" preserveAspectRatio="none" style="--row-index: ${index + 1};">${paths}</svg>
+  <div class="doughnut__title" data-numeric="${rowTotal}"><span class="h5 mb-0">${title}</span></div>
+  <div class="tooltips">${tooltips}</div>
+</div>`;
+  });
+
+  doughnutWrapper.innerHTML = returnString;
+};
+
 // #endregion
 
 export default setupChart;

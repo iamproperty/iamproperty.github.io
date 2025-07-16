@@ -1,4 +1,11 @@
+<script setup>
+  import Integration from '../Integration.vue';
+  import Versions from '../Versions.vue';
+  import TrackEvents from '../TrackEvents.vue';
+</script>
+
 <template>
+  <TrackEvents selector="iam-actionbar" :events="['columm-filters-set']"></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Action bar</h1>
@@ -147,7 +154,7 @@
               <div class="dialog__wrapper">
                 <button class="btn btn-action mb-0 me-0">Quick filter</button>
                 <dialog class="dialog--list">
-                  <div class="pb-0">
+                  <div class="mb-0">
                     <input type="radio" name="sorta" data-sort="" id="follow-up-oldesta" value="follow-up-oldest" />
                     <label for="follow-up-oldesta" class="radio--tick">Option 1</label>
 
@@ -194,7 +201,7 @@
               <div class="dialog__wrapper">
                 <button class="btn btn-action mb-0 me-0">Quick filter</button>
                 <dialog class="dialog--list">
-                  <div class="pb-0">
+                  <div class="mb-0">
                     <input type="radio" name="sortb" data-sort="" id="follow-up-oldestb" value="follow-up-oldest" />
                     <label for="follow-up-oldestb" class="radio--tick">Option 1</label>
 
@@ -241,7 +248,7 @@
               <div class="dialog__wrapper">
                 <button class="btn btn-action mb-0 me-0">Quick filter</button>
                 <dialog class="dialog--list">
-                  <div class="pb-0">
+                  <div class="mb-0">
                     <input type="radio" name="sortc" data-sort="" id="follow-up-oldestc" value="follow-up-oldest" />
                     <label for="follow-up-oldestc" class="radio--tick">Option 1</label>
 
@@ -296,7 +303,7 @@
           <div class="dialog__wrapper">
             <button class="btn btn-action mb-0 me-0">Quick filter</button>
             <dialog class="dialog--list">
-              <div class="pb-0">
+              <div class="mb-0">
                 <input type="radio" name="sortd" data-sort="" id="follow-up-oldestd" value="follow-up-oldest" />
                 <label for="follow-up-oldestd" class="radio--tick">Option 1</label>
 
@@ -357,7 +364,7 @@
           <div class="dialog__wrapper">
             <button class="btn btn-action mb-0 me-0">Quick filter</button>
             <dialog class="dialog--list">
-              <div class="pb-0">
+              <div class="mb-0">
                 <input type="radio" name="sorte" data-sort="" id="follow-up-oldeste" value="follow-up-oldest" />
                 <label for="follow-up-oldeste" class="radio--tick">Option 1</label>
 
@@ -426,7 +433,7 @@
           <div class="dialog__wrapper">
             <button class="btn btn-action mb-0 me-0">Quick filter</button>
             <dialog class="dialog--list">
-              <div class="pb-0">
+              <div class="mb-0">
                 <input type="radio" name="sortf" data-sort="" id="follow-up-oldestf" value="follow-up-oldest" />
                 <label for="follow-up-oldestf" class="radio--tick">Option 1</label>
 
@@ -468,7 +475,7 @@
           <div class="dialog__wrapper">
             <button class="btn btn-action mb-0 me-0">Quick filter</button>
             <dialog class="dialog--list">
-              <div class="pb-0">
+              <div class="mb-0">
                 <input type="radio" name="sorth" data-sort="" id="follow-up-oldesth" value="follow-up-oldest" />
                 <label for="follow-up-oldesth" class="radio--tick">Option 1</label>
 
@@ -621,7 +628,7 @@
           <div class="dialog__wrapper">
             <button class="btn btn-action mb-0 me-0">Quick filter</button>
             <dialog class="dialog--list">
-              <div class="pb-0">
+              <div class="mb-0">
                 <input type="radio" name="sorti" data-sort="" id="follow-up-oldesti" value="follow-up-oldest" />
                 <label for="follow-up-oldesti" class="radio--tick">Option 1</label>
 
@@ -835,48 +842,534 @@
       </div>
     </div>
 
-    <div class="container">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h3>Web component</h3></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h3>Vue component</h3></summary>
-          <Readme></Readme>
-        </details>
-        <!--
-        <details>
-          <summary><h3>HTML</h3></summary>
-          <pre><code class="javascript">{{`<div class="container"></div>`}}</code></pre>
-        </details>
-      -->
-      </Tabs>
-    </div>
-    <div class="bg-light version-control">
-      <div class="container">
+    <h2>Column filter</h2>
+
+    <p>
+      When an action bar is used with a table we can add a column filter. The column filter allows the user to customise
+      what columns they show or hide in the table. There should be an option to save this filter so if the user leaves
+      the page and returns the column filter is still applied.
+    </p>
+
+    <p class="note mb-5">
+      <strong>Note:</strong> Saving the filters should be done as part of your appplications logic and not part of the
+      component. The application logic can listen out for 'columm-filters-set' custom event dispatched on the actionbar.
+    </p>
+
+    <p>When clicked a dialog popover can be displayed to show the column sorting options.</p>
+
+    <h3>Filter on save</h3>
+    <div class="container bg-light visualtest mb-5">
+      <Table class="table--fullwidth" data-nosubmit>
+        <Actionbar slot="before" data-search="" data-filter-columns-save data-hide-col1></Actionbar>
+
         <table>
           <thead>
             <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Design System Version</th>
-              <th>Notable updates</th>
+              <th>Client name</th>
+              <th>Property address</th>
+              <th>Vendor</th>
+              <th>Appointment date</th>
+              <th>Price</th>
             </tr>
           </thead>
-          <tbody class="text-body">
+          <tbody>
             <tr>
-              <td>V1 added</td>
-              <td>23.08.2023</td>
-              <td>v3.7.10</td>
-              <td>N/A</td>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/actionbar.pdf" download>Download latest designs</a>
-      </div>
+      </Table>
     </div>
+    <h3>Filter on change</h3>
+    <div class="container bg-light visualtest">
+      <Table class="table--fullwidth">
+        <Actionbar slot="before" data-search="" data-filter-columns></Actionbar>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Client name</th>
+              <th>Property address</th>
+              <th>Vendor</th>
+              <th>Appointment date</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>Tom Smith</td>
+              <td>10.05.23</td>
+              <td>Lorum ipsum</td>
+              <td>Lorum ipsum</td>
+              <td>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut magna
+                  aliqua. Excepteur sint occaecat cupidatat.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </Table>
+    </div>
+
+    <Integration component="actionbar" componentName="iam-actionbar">
+      <template #web-component>
+        <pre><code>{{`<iam-actionbar data-selectall data-search>
+
+  <div class="dialog__wrapper">
+    <button class="btn btn-action mb-0 me-0">Quick filter</button>
+    <dialog class="dialog--list">
+      <div class="pb-0">
+        <input type="radio" name="sorta" data-sort="" id="follow-up-oldesta" value="follow-up-oldest">
+        <label for="follow-up-oldesta" class="radio--tick">Option 1</label>
+
+        <input type="radio" name="sorta" data-sort="" id="follow-up-newesta" value="follow-up-newest">
+        <label for="follow-up-newesta" class="radio--tick">Option 2</label>
+
+        <input type="radio" name="sorta" data-sort="" id="date-instructed-oldesta" value="date-instructed-oldest" checked="" autofocus="true">
+        <label for="date-instructed-oldesta" class="radio--tick">Option 3</label>
+
+        <input type="radio" name="sorta" data-sort="" id="date-instructed-newesta" value="date-instructed-newest">
+        <label for="date-instructed-newesta" class="radio--tick mb-0">Option 4</label>
+      </div>
+    </dialog>
+  </div>
+
+  <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
+
+  <button class="btn btn-action fa-pen-to-square" data-single slot="selected">Edit</button>
+  <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
+  <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
+  <hr slot="selected" />
+  <button class="btn btn-action" slot="selected">Cancel</button>
+
+</iam-actionbar>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Carousel from '@/components/Actionbar/Actionbar.vue</script>
+        
+<Actionbar data-selectall data-search>
+
+  <div class="dialog__wrapper">
+    <button class="btn btn-action mb-0 me-0">Quick filter</button>
+    <dialog class="dialog--list">
+      <div class="pb-0">
+        <input type="radio" name="sorta" data-sort="" id="follow-up-oldesta" value="follow-up-oldest">
+        <label for="follow-up-oldesta" class="radio--tick">Option 1</label>
+
+        <input type="radio" name="sorta" data-sort="" id="follow-up-newesta" value="follow-up-newest">
+        <label for="follow-up-newesta" class="radio--tick">Option 2</label>
+
+        <input type="radio" name="sorta" data-sort="" id="date-instructed-oldesta" value="date-instructed-oldest" checked="" autofocus="true">
+        <label for="date-instructed-oldesta" class="radio--tick">Option 3</label>
+
+        <input type="radio" name="sorta" data-sort="" id="date-instructed-newesta" value="date-instructed-newest">
+        <label for="date-instructed-newesta" class="radio--tick mb-0">Option 4</label>
+      </div>
+    </dialog>
+  </div>
+
+  <button class="btn btn-primary btn-sm fa-plus" id="uploadBtn">Upload document</button>
+
+  <button class="btn btn-action fa-pen-to-square" data-single slot="selected">Edit</button>
+  <button class="btn btn-action fa-box-archive" slot="selected">Archive</button>
+  <button class="btn btn-action fa-trash-can" slot="selected">Delete</button>
+  <hr slot="selected" />
+  <button class="btn btn-action" slot="selected">Cancel</button>
+
+</Actionbar>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
+        <table>
+          <thead>
+            <tr>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>data-selectall</th>
+              <td>false</td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>Optional flag to include the select all button</td>
+            </tr>
+            <tr>
+              <th>data-selected</th>
+              <td>0</td>
+              <td>Number | 'All'</td>
+              <td>No</td>
+              <td>Combined with the data-selectall attribute, it will display the number of items selected.</td>
+            </tr>
+            <tr>
+              <th>data-select-watch</th>
+              <td></td>
+              <td>String (Element ID)</td>
+              <td>No</td>
+              <td>
+                Combined with the data-selectall attribute, this sets the div that is watched for checkboxes being
+                checked. Useful for when the actionbar is NOT comibned with a table but rather a set of cards.
+              </td>
+            </tr>
+            <tr>
+              <th>data-search</th>
+              <td>false</td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>Optional flag to include the search button and functionality</td>
+            </tr>
+            <tr>
+              <th>data-search</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>Pre-define the search value</td>
+            </tr>
+            <tr>
+              <th>data-switchviews</th>
+              <td>false</td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>Optional flag to include the switch views buttons</td>
+            </tr>
+            <tr>
+              <th>data-view</th>
+              <td>squate</td>
+              <td>String {'square','list','small'}</td>
+              <td>No</td>
+              <td>Optional flag to include the switch views buttons</td>
+            </tr>
+
+            <tr>
+              <th>data-large-safe-area</th>
+              <td>false</td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>
+                Optional flag to increase the safe area for buttons to be displayed before being added to the overflow
+                menu
+              </td>
+            </tr>
+            <tr>
+              <th>data-filter-columns</th>
+              <td>false</td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>Optional flag to show the filter columns menu, which allows for columns to be hidden</td>
+            </tr>
+            <tr>
+              <th>data-filter-columns-save</th>
+              <td>false</td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>
+                Optional flag to show the filter columns menu, which allows for columns to be hidden when the saved
+                button is clicked
+              </td>
+            </tr>
+
+            <tr>
+              <th>data-hide-col{$i}</th>
+              <td>false</td>
+              <td>Flag</td>
+              <td>No</td>
+              <td>Hide the column {$i}</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #slots>
+        <table>
+          <thead>
+            <tr>
+              <th>Slot</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Default</th>
+              <td>The main actionbar</td>
+            </tr>
+            <tr>
+              <th>Overflow</th>
+              <td>Where butttons get moved to when there isn't enough room in the mian actionbar</td>
+            </tr>
+            <tr>
+              <th>selected</th>
+              <td>A secondary actionbar only shown when there are selected items</td>
+            </tr>
+            <tr>
+              <th>selected-overflow</th>
+              <td>Items that dont fit in the selected slot get moved into here.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #parts>
+        <table>
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>actionbar</th>
+              <td>A wrapper div</td>
+            </tr>
+            <tr>
+              <th>selected</th>
+              <td>The div shown when the selected checkbox</td>
+            </tr>
+
+            <tr>
+              <th>searchbar-open</th>
+              <td>Button that opens the searchbar</td>
+            </tr>
+            <tr>
+              <th>searchbar</th>
+              <td>The div shown when the searchbar-open button clicked</td>
+            </tr>
+
+            <tr>
+              <th>searchbar-close</th>
+              <td>Cloes the searchber</td>
+            </tr>
+
+            <tr>
+              <th>search</th>
+              <td>Wrapper for the search input and nutton</td>
+            </tr>
+            <tr>
+              <th>search-btn</th>
+              <td>Button to dispatch the search event</td>
+            </tr>
+            <tr>
+              <th>search-input</th>
+              <td>The input that contains the search value</td>
+            </tr>
+            <tr>
+              <th>filter-columns</th>
+              <td>The input that contains the search value</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #dispatched-events>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>switch-view</th>
+              <td>When a user switches the view</td>
+              <td>{ detail: { view: btn.textContent } }</td>
+            </tr>
+            <tr>
+              <th>search-submit</th>
+              <td>The search bar has submitted</td>
+              <td>{ detail: { search: searchBar.querySelector('input').value } }</td>
+            </tr>
+            <tr>
+              <th>columm-filters-set</th>
+              <td>When columns have been set to hid or show</td>
+              <td>detail: { columnsHidden: columnsHidden.slice(0, -1) }</td>
+            </tr>
+            <tr>
+              <th>selected</th>
+              <td>One or more items have been selected</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #criteria>
+        <ul>
+          <li>The majority of items should be aligned to the right</li>
+          <li>If there is not enough space t display all the buttons then some should be added to an overflow menu</li>
+        </ul>
+      </template>
+      <template #data-layer>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>switch-view</th>
+              <td>When a user switches the view</td>
+              <td>{ detail: { view: btn.textContent } }</td>
+            </tr>
+            <tr>
+              <th>search-submit</th>
+              <td>The search bar has submitted</td>
+              <td>{ detail: { search: searchBar.querySelector('input').value } }</td>
+            </tr>
+            <tr>
+              <th>columm-filters-set</th>
+              <td>When columns have been set to hid or show</td>
+              <td>detail: { columnsHidden: columnsHidden.slice(0, -1) }</td>
+            </tr>
+            <tr>
+              <th>selected</th>
+              <td>One or more items have been selected</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+    </Integration>
+
+    <Versions pdf="/pdfs/actionbar.pdf">
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
+            <td>V1.1 added</td>
+            <td>10.03.2025</td>
+            <td>Added option for column filter and saving column filter.</td>
+          </tr>
+          <tr>
+            <td>V1 added</td>
+            <td>23.08.2023</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </Versions>
   </main>
 </template>
 

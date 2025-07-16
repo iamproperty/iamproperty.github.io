@@ -1,4 +1,3 @@
-// @ts-nocheck
 import setupNotification, { closeNotification } from '../../modules/notification';
 
 // Data layer Web component created
@@ -43,6 +42,7 @@ class iamNotification extends HTMLElement {
   }
 
   connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const wrapper = this;
     const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : 'white';
 
@@ -54,22 +54,22 @@ class iamNotification extends HTMLElement {
     if (!this.querySelector('i')) {
       switch (statusBG) {
         case 'danger':
-          this.innerHTML += '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>';
+          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>');
           break;
         case 'warning':
-          this.innerHTML += '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>';
+          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>');
           break;
         case 'success':
-          this.innerHTML += '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>';
+          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>');
           break;
         default:
-          this.innerHTML += '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>';
+          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>');
       }
     }
 
     const buttons = this.querySelectorAll('a,button');
 
-    Array.from(buttons).forEach((button, index) => {
+    Array.from(buttons).forEach((button) => {
       button.setAttribute('slot', 'btns');
       button.classList.add('link');
     });
@@ -90,7 +90,7 @@ class iamNotification extends HTMLElement {
 
       this.shadowRoot.querySelector('.notification__dismiss [data-dismiss-button]').addEventListener(
         'click',
-        function (e) {
+        function () {
           closeNotification(wrapper);
         },
         false

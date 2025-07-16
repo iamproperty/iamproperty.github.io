@@ -1,0 +1,82 @@
+@use '../_func' as *;
+
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+@include layer('components', $layers) {
+  $menuPadding: 0.5rem !default;
+
+  iam-menu:defined {
+    --menu-padding: #{$menuPadding};
+    --border-color: var(--colour-border);
+    --menu-item-margin: 0 0 0.5rem 0;
+  }
+
+  iam-menu i {
+    width: 1.25rem;
+  }
+
+  // #region sub menu
+
+  iam-menu > button:has(+ iam-menu) {
+    position: relative;
+
+    &:after {
+      content: '';
+      height: var(--btn-line-height);
+      width: rem(16);
+      height: rem(16);
+      display: inline-block;
+      background: currentColor;
+      mask-image: var(--icon-arrow);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-arrow);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+      vertical-align: bottom;
+
+      position: absolute;
+      top: calc(50% - 0.5rem);
+      right: 0.5rem;
+    }
+  }
+
+  iam-menu > button:has(+ iam-menu:not([popover])) {
+    &:after {
+      rotate: 90deg;
+    }
+  }
+
+  iam-menu > button.open:has(+ iam-menu:not([popover])) {
+    position: relative;
+
+    &:after {
+      top: calc(50% - 0.5rem);
+      right: 0.5rem;
+      rotate: 270deg;
+    }
+  }
+
+  iam-menu > button:has(+ iam-menu:popover-open) {
+    position: relative;
+
+    &:after {
+      top: calc(50% - 0.5rem);
+      right: 0.5rem;
+      rotate: 180deg;
+    }
+  }
+
+  iam-menu > button:not(.open) + iam-menu:not([popover]) {
+    display: none;
+  }
+
+  iam-menu > button + iam-menu:not([popover]) > *:is(button, a, label) {
+    padding-left: 2rem;
+  }
+  // #endregion
+}

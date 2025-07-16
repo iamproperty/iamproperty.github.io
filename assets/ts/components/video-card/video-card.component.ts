@@ -1,6 +1,6 @@
-// @ts-nocheck
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
+import { loadYouTubeScripts, createYoutTubeVideo } from '../../modules/videos';
 
 trackComponentRegistered('iam-video-card');
 
@@ -30,7 +30,8 @@ class iamVideoCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
+  async connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const cardComponent = this;
     const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
 
@@ -72,7 +73,8 @@ class iamVideoCard extends HTMLElement {
     if (cardComponent.hasAttribute('data-youtube')) {
       // Load the scripts only once
       if (!document.body.classList.contains('youtubeLoaded')) {
-        const loaded = await this.loadYouTubeScripts();
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const loaded = await loadYouTubeScripts();
       }
       cardHead.addEventListener('click', function () {
         const customEvent = new CustomEvent('play-video', {
@@ -80,11 +82,11 @@ class iamVideoCard extends HTMLElement {
         });
         cardComponent.dispatchEvent(customEvent);
 
-        cardComponent.createYoutTubeVideo(embed);
+        createYoutTubeVideo(embed, this.getAttribute('[data-youtbue]'));
         dialog.showModal();
       });
 
-      dialog.addEventListener('close', (event) => {
+      dialog.addEventListener('close', () => {
         if (
           window.player[embed.getAttribute('id')] &&
           typeof window.player[embed.getAttribute('id')].pauseVideo == 'function'
@@ -114,7 +116,7 @@ class iamVideoCard extends HTMLElement {
         dialog.showModal();
       });
 
-      dialog.addEventListener('close', (event) => {
+      dialog.addEventListener('close', () => {
         embed.innerHTML = ``; // Remove the video since we cant pause it
 
         const customEvent = new CustomEvent('close-video', {
@@ -127,86 +129,11 @@ class iamVideoCard extends HTMLElement {
     trackComponent(cardComponent, 'iam-video-card', ['play-video', 'close-video']);
   }
 
-  loadYouTubeScripts() {
-    return new Promise((resolve, reject) => {
-      const image = new Image();
-      image.onload = function () {
-        // This code loads the IFrame Player API code asynchronously.
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        const firstScriptTag = document.getElementsByTagName('script')[0];
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-        document.body.classList.add('youtubeLoaded');
-        resolve(true);
-      };
-      image.onerror = function () {
-        reject(false);
-      };
-      image.src = 'https://youtube.com/favicon.ico';
-    });
-  }
-
-  createYoutTubeVideo(target) {
-    if (typeof window.player == 'undefined') {
-      window.player = [];
-    }
-
-    const link_id = target.getAttribute('id');
-    const video_id = this.getAttribute('data-youtube');
-
-    console.log(window.player);
-
-    if (typeof window.player[link_id] != 'undefined' && typeof window.player[link_id].pauseVideo == 'function') {
-      window.player[link_id].playVideo();
-
-      return false;
-    }
-
-    // This function creates an <iframe> (and YouTube player) after the API code downloads.
-    //function onYouTubeIframeAPIReady() {
-
-    window.player[link_id] = new YT.Player(link_id, {
-      height: '100%',
-      width: '100%',
-      videoId: video_id,
-      playerVars: {
-        modestbranding: 1,
-        playsinline: 1,
-        rel: 0,
-        showinfo: 0,
-      },
-      events: {
-        onReady: onPlayerReady,
-        onStateChange: onPlayerStateChange,
-      },
-    });
-    //}
-    //onYouTubeIframeAPIReady();
-
-    // The API will call this function when the video player is ready.
-    function onPlayerReady(event) {
-      // Play the video straight away
-      event.target.playVideo();
-    }
-
-    // The API calls this function when the player's state changes.
-    // The function indicates that when playing a video (state=1)
-    let done = false;
-    function onPlayerStateChange(event) {
-      if (event.data == YT.PlayerState.PLAYING && !done) {
-        const link = document.getElementById(link_id);
-        link.classList.add('player-ready');
-
-        done = true;
-      }
-    }
-  }
-
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-image'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-image': {
         if (oldVal != newVal) {

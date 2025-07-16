@@ -42,7 +42,7 @@
             <span class="lead text-primary d-block pb-0">Default background</span>
             <span>CSS Variable: --colour-canvas</span><br />
             <span>CSS Variable: --colour-canvas-2</span><br />
-            <span>Hex code: {{ $shared.themeColours.Canvas.toUpperCase() }}</span>
+            <span>Hex code: #fcfcfc</span>
           </div>
         </div>
       </div>
@@ -56,8 +56,8 @@
         </p>
         <p>
           We use dark blue ({{ $shared.themeColours.Primary.toUpperCase() }}) is used primarily for body text and
-          headings, and white ({{ $shared.themeColours.Canvas.toUpperCase() }}) for page background or body text and
-          headings the are overlaid on dark backgrounds.
+          headings, and white (#fcfcfc) for page background or body text and headings the are overlaid on dark
+          backgrounds.
         </p>
       </div>
 
@@ -73,7 +73,7 @@
             <div class="colour-block bg-white border"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Off-white</span>
             <span>CSS Variable: --colour-white</span><br />
-            <span>Hex code: {{ $shared.themeColours.White.toUpperCase() }}</span>
+            <span>Hex code: #fcfcfc</span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-warning border"><span>Text</span></div>
@@ -242,7 +242,7 @@
             </div>
             <span class="lead text-primary d-block pb-0">Off-white</span>
             <span>CSS Variable: --colour-white</span><br />
-            <span>Hex code: {{ $shared.themeColours.White.toUpperCase() }}</span>
+            <span>Hex code: #fcfcfc;</span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-warning"><span>Text</span></div>
@@ -653,8 +653,7 @@
 </template>
 
 <style lang="scss">
-  $compatible: 'false';
-  @import '../../../assets/sass/_func';
+  @use '../../../assets/sass/_func' as *;
 
   @layer utilities {
     @for $i from 1 through 10 {
@@ -831,9 +830,7 @@
           .prevent-invert
         ),
       .invert-colours {
-        @if $compatible != 'true' {
-          @include invert-colours();
-        }
+        @include invert-colours();
 
         color: #{$colour-inverted};
       }

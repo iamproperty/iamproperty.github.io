@@ -1,0 +1,40 @@
+@use '../_func.scss' as *;
+
+$darkMode: 'true' !default;
+
+@use './table-basic.component.scss';
+
+// #region Table with actionbar
+@container (width < 23.4375em) {
+  .table__wrapper.has-actionbar {
+    margin-top: calc(-100vh - -6.75rem) !important;
+  }
+}
+// #endregion
+
+// #region Loading via ajax
+:host(.table--loading) {
+  pointer-events: none;
+  position: relative;
+
+  ::slotted(table) {
+    min-height: 20rem;
+    opacity: 0.5;
+  }
+
+  &::after {
+    content: 'Loading...';
+    position: absolute;
+    top: rem(100);
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-weight: bold;
+    color: var(--colour-heading);
+    font-size: 1.5rem;
+    text-shadow: 0px 0px 10px var(--colour-canvas-2);
+    padding-inline: 2rem;
+    text-shadow: 0px 0px 10px var(--colour-canvas-2);
+    background: radial-gradient(var(--colour-canvas-2), transparent);
+  }
+}
+// #endregion

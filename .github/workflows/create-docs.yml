@@ -4,9 +4,9 @@ name: Build vue docs and deploy
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ['master']
   pull_request:
-    branches: ["master"]
+    branches: ['master']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -19,7 +19,7 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: true
 
 jobs:
@@ -29,10 +29,10 @@ jobs:
       name: github-pages
       url: https://iamproperty.github.io
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [18.x]
 
     steps:
       - name: Checkout
@@ -47,10 +47,10 @@ jobs:
       - run: npm run deploy:fonts
       - run: npm run deploy:404
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist repository
           path: 'dist'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4

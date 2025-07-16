@@ -1,375 +1,108 @@
 @use '../_func.scss' as *;
 
-// #region Container type
-*:has(> iam-table) {
-  container-type: inline-size;
-}
-// #endregion
+$darkMode: 'true' !default;
 
-// #region Basic table stuff
-iam-table {
-  --hover-background: var(--colour-light);
-  --row-bg: var(--colour-canvas-2);
-  thead tr {
-    background: var(--row-bg);
-  }
-  tbody tr {
-    background: var(--row-bg);
+@use './table-basic.global.scss' with (
+  $darkMode: $darkMode
+);
 
-    &:is(:hover, :focus-within, .hover) {
-      --bg-colour-rgb: 238, 238, 238;
-      --row-bg: var(--hover-background);
-      background: var(--row-bg);
-    }
-  }
-
-  &[data-expandable] [data-expand-button][aria-expanded] {
-    background-color: transparent;
-  }
-}
-// #endregion
+$selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
 
 // #region Tables are only stacked on mobile
+:is(#{$selector}):not(.table--fullwidth).table--cta {
+  @container (width < 23.4375em) {
+    tbody tr td:last-child {
+      display: block !important;
+    }
+  }
+}
+// #endregion
+
+// #region As part of the iam-table component
+
+:is(#{$selector}) iam-actionbar {
+  margin: 0 1.5rem 1rem 1.5rem;
+
+  @container (width < 23.4375em) {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    border-radius: 0.5rem;
+  }
+}
+:is(#{$selector}).table--fullwidth:has(iam-actionbar) {
+  padding-top: 0;
+}
+:is(#{$selector}).table--fullwidth iam-actionbar {
+  margin: -2rem -2rem 2rem -2rem;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+:is(#{$selector}).table--fullwidth iam-actionbar:has(+ table input:checked) {
+  margin: -2rem -2rem 2rem -2rem;
+  box-shadow: none;
+  border-radius: 0;
+
+  @include light-mode($darkMode) {
+    background-color: #e6eaec;
+  }
+}
+
+// Actionbar
+.actionbar__sticky-wrapper {
+  container-type: inline-size;
+
+  @include media-breakpoint-up(sm, $mobileOnly) {
+    padding: 0 !important;
+  }
+}
+
 @container (width < 23.4375em) {
-  iam-table:not(.table--fullwidth) {
-    thead {
-      display: none;
-    }
-
-    tbody {
-      display: block;
-      overflow: visible;
-
-      tr td:first-child {
-        padding-top: 0;
-      }
-    }
-
-    tr {
-      display: block;
-      position: relative;
-      border: none;
-      background: var(--row-bg);
-      padding: var(--wrapper-padding);
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
-      border-radius: rem(8);
-      height: auto;
-
-      & + tr {
-        margin-top: rem(32);
-      }
-
-      &:is(:hover, :focus, .hover) {
-        --row-bg: var(--colour-canvas-2);
-      }
-    }
-
-    :is(td, th) {
-      display: block;
-      @include var(border-color, --colour-border);
-
-      padding-right: 0;
-
-      &:nth-child(1) {
-        border-top: none;
-      }
-
-      &[data-label]:not([data-label='']):before {
-        content: attr(data-label);
-        color: var(--colour-heading);
-        padding: 0 0 rem(6) 0;
-        margin-bottom: 0;
-        display: block;
-        font-weight: bold;
-      }
-    }
-
-    td:first-child::after {
-      top: 1.75rem !important;
-    }
-
-    td::after {
-      top: 2.5rem;
-    }
-
-    .td--fixed {
-      padding-right: 50%;
-    }
-
-    tbody tr td:not(:first-child) {
-      border-top: var(--border-width) solid currentColor;
-      border-color: var(--colour-border) !important;
-    }
-
-    tr:not([data-view='full']) td p {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
-
-    td:has([data-expand-button]) {
-      height: 0;
-      padding: 0;
-      position: relative;
-    }
-    td:has([data-expand-button]) + td {
-      border-top: none !important;
-      padding-top: 0 !important;
-    }
-    [data-expand-button] {
-      top: 0;
-      right: 0;
-      background: transparent !important;
-      border: none;
-      position: absolute;
-      overflow: hidden;
-      --compact-size: #{rem(32)};
-
-      &:before {
-        font-family: 'Font Awesome 6 Pro';
-        content: '\f055';
-        font-weight: 300 !important;
-        font-size: rem(28);
-        line-height: var(--compact-size) !important;
-      }
-
-      &[aria-expanded] {
-        &:before {
-          content: '\f056';
-          font-weight: 900 !important;
-        }
-      }
-    }
-
-    .dialog__wrapper:not([slot='overflow']) {
-      margin-top: -0.5rem;
-      margin-left: -1rem;
-      z-index: 10;
-    }
-  }
-
-  iam-table:not(.table--fullwidth) tbody tr:not([data-view='full']) {
-    td:not(.td--fixed) + td:not(.td--fixed) + td + td {
-      display: none;
-    }
-  }
-
-  iam-table.table--cta:not(.table--fullwidth) tr td:not(:first-child):last-child {
-    display: block !important;
-    position: static;
-    width: 100%;
-    min-width: 100%;
-    margin-left: 0;
-    padding-left: 0;
-    text-align: left;
-    min-height: 0;
-
-    &:after {
-      display: none;
-    }
-  }
-}
-// #endregion
-
-// #region CTA column
-@container (width > 23.4375em) {
-  iam-table.table--cta:not(.table--loading):has(tr:first-child td:first-child:last-child) {
-    padding-right: calc(var(--wrapper-padding) + 1.5rem);
-  }
-
-  iam-table.table--cta:not(.table--loading):not(:has(tr:first-child td:first-child:last-child)) {
-    tr > th:nth-last-child(2),
-    tr > td:nth-last-child(2) {
-      padding-right: var(--cta-width);
-    }
-
-    tr > *:not(:first-child):last-child {
-      position: absolute;
-      left: calc(100% - var(--cta-width));
-      top: auto;
-      background: transparent;
-      width: var(--cta-width);
-      min-height: calc(var(--row-height) - 2px);
-      text-align: right;
-      background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
-      cursor: default;
-      padding-bottom: 0;
-
-      a {
-        white-space: nowrap;
-        padding-right: 0.2rem;
-        padding-bottom: 0;
-      }
-    }
-
-    tbody tr:hover > *:not(:first-child):last-child {
-      background: linear-gradient(90deg, transparent 0%, var(--row-bg) 1.25rem);
-    }
-  }
-}
-// #endregion
-
-// #region Max height tables
-iam-table:is(.mh-sm, .mh-md, .mh-lg):not(.table--cta) {
-  position: relative;
-
-  thead {
+  :is(#{$selector}):is(.actionbar__sticky-wrapper) > .actionbar__sticky {
+    display: block;
     position: sticky;
-    top: 0;
     left: 0;
-    z-index: 1;
-    background-color: var(--row-bg);
-
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--colour-primary);
-    }
-  }
-  tbody {
-    position: relative;
-
-    tr:first-child td {
-      border-top: 0;
-    }
-    tr:last-child td {
-      border-bottom: 0;
-    }
-  }
-}
-//#endregion
-
-// #region Statuses
-table {
-  .hide-status:after {
-    display: none;
-  }
-
-  :not(.hide-status):is(
-      [data-content='low'],
-      [data-content='medium'],
-      [data-content='high'],
-      [data-content='unknown'],
-      [data-content='due'],
-      [data-content='overdue'],
-      [data-content='incomplete'],
-      [data-content='requires approval'],
-      [data-content='upcoming'],
-      [data-content='approval required'],
-      [data-content='warning'],
-      [data-content='verified'],
-      [data-content='not started'],
-      [data-content='to do'],
-      [data-content='on track'],
-      [data-content='completed'],
-      [data-content='complete'],
-      .alert-status:not([data-content='0']):not([data-content='']):not(:empty)
-    ) {
-    position: relative;
-    padding-left: 1.5rem;
-
-    &::before {
-      margin-left: -1.5rem !important;
-    }
+    top: calc(var(--sticky-padding) + #{rem(16)});
+    z-index: var(--index-menu);
+    pointer-events: none;
 
     &:after {
-      font-family: 'Font Awesome 6 Pro';
-      position: absolute;
-      top: 1rem;
-      left: 0;
-      font-size: rem(16);
-      line-height: 1;
-      height: rem(16);
-      width: rem(16);
-      display: inline-block;
+      content: '';
+      display: block;
+      width: 100%;
+      height: calc(100vh - #{rem(68 + 24 + 16)});
+      pointer-events: none;
+    }
+
+    & + * {
+      margin-top: calc(-100vh - -6.75rem);
     }
   }
 
-  [data-content='high']:after {
-    content: '\f325';
-    font-weight: normal;
-    color: var(--colour-danger);
-  }
-
-  [data-content='medium']:after {
-    content: '\f7a4';
-    font-weight: normal;
-    color: var(--colour-warning);
-  }
-
-  [data-content='low']:after {
-    content: '\e404';
-    font-weight: normal;
-    color: var(--colour-complete);
-  }
-
-  [data-content='unknown']:after {
-    content: '\e404';
-    font-weight: normal;
-    color: var(--colour-muted);
-  }
-
-  :is([data-content='overdue'], [data-content='due'], [data-content='incomplete']):after {
-    content: '\f024';
-    color: var(--colour-danger);
-  }
-
-  :is([data-content='not started'], [data-content='to do'], [data-content='on track']):after {
-    content: '\f024';
-    color: var(--colour-muted);
-  }
-
-  :is(
-      [data-content='requires approval'],
-      [data-content='approval required'],
-      [data-content='action required'],
-      [data-content='upcoming']
-    ):after {
-    content: '\f024';
-    color: var(--colour-warning);
-  }
-
-  :is([data-content='warning']):after {
-    content: '\f071';
-    color: var(--colour-warning);
-  }
-
-  :is(
-      [data-content='manually verified'],
-      [data-content='verified'],
-      [data-content='completed'],
-      [data-content='complete']
-    ):after {
-    content: '\f00c';
-    font-weight: normal;
-    color: var(--colour-complete);
-  }
-
-  .alert-status:not([data-content='0']):not([data-content='']):not(:empty):after {
-    content: '\f0f3';
-    color: var(--colour-primary);
+  :is(#{$selector}):is(.actionbar__sticky) > iam-actionbar {
+    pointer-events: all !important;
+    display: block;
+    border: none;
+    background: var(--colour-canvas-2);
+    //box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    border-radius: 0.5rem;
+    margin-bottom: rem(24);
   }
 }
-// #endregion
 
-// #region filters
-iam-table .table--filtered tbody tr:not(.filtered--show) {
-  display: none !important;
-}
-
-iam-table table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
-  display: none;
+@include container-up(sm) {
+  :is(#{$selector}).table--fullwidth iam-actionbar,
+  :is(#{$selector}) iam-actionbar {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+  }
 }
 // #endregion
 
 // #region Table with actionbar
 
-iam-table {
+:is(#{$selector}) {
   input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
     padding-left: 0 !important;
     margin: 0 !important;
@@ -378,6 +111,7 @@ iam-table {
     &:after {
       top: 0.75rem !important;
       left: 0.25rem !important;
+      --border-radius: 0.25rem;
     }
   }
 
@@ -401,15 +135,18 @@ iam-table {
     }
   }
 
-  tr:has([type='checkbox']:checked) {
+  tr:has([type='checkbox']:hover, [type='checkbox']:focus) {
+    --row-bg: #eeeeee;
+  }
+  tr:has([type='checkbox']:hover:checked, [type='checkbox']:focus:checked, [type='checkbox']:checked) {
     --row-bg: #e0e0e0;
   }
 }
 
 @container (width < 23.4375em) {
-  iam-table:has([slot='before']) {
+  :is(#{$selector}) {
     iam-actionbar {
-      @include light-mode() {
+      @include light-mode($darkMode) {
         background-color: #e6eaec;
       }
     }
@@ -418,7 +155,7 @@ iam-table {
     }
   }
 
-  iam-table {
+  :is(#{$selector}) {
     input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
       padding-left: 0 !important;
       margin: 0 !important;
@@ -445,28 +182,21 @@ iam-table {
 // #endregion
 
 // #region Expandable tables
-iam-table.table--fullwidth:not([data-expandable]) {
-  th.expand-button-heading {
-    display: none;
-  }
-  td:has([data-expand-button]) {
-    display: none;
-  }
-}
-
-@container (width > 23.4375em) {
-  iam-table:not([data-expandable]) {
-    th.expand-button-heading {
-      display: none;
-    }
-    td.td--expand {
-      display: none;
-    }
+:is(#{$selector})[data-expandable] {
+  td:has([data-expand-button]),
+  .expand-button-heading {
+    display: table-cell;
   }
 
-  iam-table[data-expandable] {
+  @mixin fullwidthexpand() {
     [data-expand-button] {
-      margin: 0;
+      margin: 0.25rem 0 0 0;
+
+      &:not(:hover, :focus) {
+        background-color: transparent;
+        border-color: transparent;
+      }
+
       &:before {
         font-family: 'Font Awesome 6 Pro';
         content: '\f078';
@@ -489,32 +219,36 @@ iam-table.table--fullwidth:not([data-expandable]) {
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
+      min-width: 10rem;
     }
+  }
+
+  &.table--fullwidth {
+    @include fullwidthexpand();
+  }
+
+  @container (width > 23.4375em) {
+    @include fullwidthexpand();
   }
 }
 // #endregion
 
 // #region fixed columns
-@container (width < 23.4375em) {
-  iam-table:not(.table--fullwidth) {
-    .td--fixed + td:not(.td--fixed) {
-      border-top: none;
+:is(#{$selector}):not(.table--fullwidth) {
+  @container (width < 23.4375em) {
+    tr {
+      position: relative;
+    }
+    .td--fixed + .td--fixed {
+      border: none;
     }
   }
 }
-@container (width > 23.4375em) {
-  iam-table {
-    --width-adjust: 0px;
 
-    &:has([type='checkbox']) {
-      --width-adjust: -1rem;
-    }
-
+:is(#{$selector}) {
+  @container (width > 23.4375em) {
     .th--fixed {
-      min-width: calc(rem(48 + 24) + var(--width-adjust));
-      position: absolute;
-      padding: 0;
-
+      /*
       &:after {
         top: auto;
         left: 0;
@@ -524,64 +258,54 @@ iam-table.table--fullwidth:not([data-expandable]) {
         height: calc(var(--row-height) - 2px);
         background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
       }
+        */
     }
 
+    .th--fixed,
     .td--fixed {
-      position: absolute;
       position: absolute;
       left: auto;
       top: auto;
       z-index: 3;
-      padding: rem(4) 0 0 0;
-      min-width: rem(48 + 24);
+      padding: 0 0 0 0;
+      min-width: rem(48 + 6);
       height: calc(var(--row-height) - 2px);
       text-align: left;
-      background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
+      background: var(--row-bg);
 
       &:has([open]) {
         z-index: 4;
       }
     }
 
-    tr {
-      &:has(.td--fixed) {
-        height: 3.5rem;
-      }
-
-      &:is(:hover, :focus) .td--fixed {
-        background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
-      }
-
-      &:has([data-expand-button]) {
-        height: calc(rem(74) - 2px);
-      }
+    .th--fixed:has(+ th:not(.th--fixed)),
+    .td--fixed:has(+ td:not(.td--fixed)) {
+      background: linear-gradient(90deg, var(--row-bg) calc(100% - 1rem), transparent 100%);
     }
 
     .th--fixed + th:not(.th--fixed),
     .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 24) + var(--width-adjust));
-    }
-
-    .th--fixed:not(.expand-button-heading) + .th--fixed + th:not(.th--fixed),
-    .td--fixed:not(.td--expand) + .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 4 + 48 + 24) + var(--width-adjust));
-    }
-
-    &[data-expandable] .th--fixed + .th--fixed + th:not(.th--fixed),
-    &[data-expandable] .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: calc(rem(48 + 4 + 48 + 24) + var(--width-adjust));
+      padding-left: calc(rem(48 + 6)) !important;
     }
 
     .th--fixed + .th--fixed,
     .td--fixed + .td--fixed {
-      padding-left: calc(rem(48 + 4) + var(--width-adjust));
-      min-width: calc(rem(48 + 4 + 48 + 24) + var(--width-adjust));
+      left: rem(48);
     }
 
-    .th--fixed:has(+ .th--fixed),
-    .td--fixed:has(+ .td--fixed) {
-      min-width: calc(rem(48 + 4) + var(--width-adjust));
-      z-index: 5;
+    .th--fixed + .th--fixed + th:not(.th--fixed),
+    .td--fixed + .td--fixed + td:not(.td--fixed) {
+      padding-left: calc(rem(48 + 48 + 6)) !important;
+    }
+
+    .th--fixed + .th--fixed + .th--fixed,
+    .td--fixed + .td--fixed + .td--fixed {
+      left: rem(48 + 48);
+    }
+
+    .th--fixed + .th--fixed + .th--fixed + th:not(.th--fixed),
+    .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
+      padding-left: calc(rem(48 + 48 + 48 + 6)) !important;
     }
 
     .dialog__wrapper {
@@ -590,27 +314,95 @@ iam-table.table--fullwidth:not([data-expandable]) {
     .dialog__wrapper:has([open]) {
       z-index: 20;
     }
+  }
+}
+// #endregion
 
-    &[data-expandable] input:is([type='radio'], [type='checkbox']) + label:before,
-    &[data-expandable] input:is([type='radio'], [type='checkbox']) + label:after {
-      left: 1.25rem !important;
+// #region
+:is(#{$selector})td:has(.dialog__wrapper) {
+  padding-top: 0.25rem;
+}
+
+// #endregion
+
+// #region sort by column header
+
+$icon-sort: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d='M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-96-96c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L128 370.7 128 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 306.7 41.4-41.4c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-96 96zm352-333.3c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L448 141.3 448 448c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-306.7-41.4 41.4c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l96-96c12.5-12.5 32.8-12.5 45.3 0l96 96z'/></svg>");
+
+$icon-sort-asc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d='M209.4 39.4C204.8 34.7 198.6 32 192 32s-12.8 2.7-17.4 7.4l-168 176c-9.2 9.6-8.8 24.8 .8 33.9s24.8 8.8 33.9-.8L168 115.9 168 456c0 13.3 10.7 24 24 24s24-10.7 24-24l0-340.1L342.6 248.6c9.2 9.6 24.3 9.9 33.9 .8s9.9-24.3 .8-33.9l-168-176z'/></svg>");
+
+$icon-sort-desc: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><!--!Font Awesome Pro 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2025 Fonticons, Inc.--><path d='M174.6 472.6c4.5 4.7 10.8 7.4 17.4 7.4s12.8-2.7 17.4-7.4l168-176c9.2-9.6 8.8-24.8-.8-33.9s-24.8-8.8-33.9 .8L216 396.1 216 56c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 340.1L41.4 263.4c-9.2-9.6-24.3-9.9-33.9-.8s-9.9 24.3-.8 33.9l168 176z'/></svg>");
+
+@mixin column-sort {
+  th[data-sort] {
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+    background-position: calc(100% - 0.5rem) 50%;
+    padding-top: 0.75rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--colour-light);
+      background-image: #{escape-svg($icon-sort)};
     }
   }
 
-  iam-table:not([data-expandable]) {
-    th.expand-button-heading + th {
-      padding-left: 0 !important;
-    }
-    td.td--expand + td {
-      padding-left: 0 !important;
-    }
+  &:has(th[data-sort]) :is(th, td) {
+    padding-left: 0.25rem !important;
+  }
 
-    th.expand-button-heading + .th--fixed {
-      min-width: calc(rem(48 + 24) + var(--width-adjust)) !important;
-    }
-    td.td--expand + .td--fixed {
-      min-width: calc(rem(48 + 24) + var(--width-adjust)) !important;
+  th[data-sort][data-order-by='asc'] {
+    background-image: #{escape-svg($icon-sort-asc)};
+  }
+  th[data-sort][data-order-by='desc'] {
+    background-image: #{escape-svg($icon-sort-desc)};
+  }
+}
+
+:is(#{$selector}) {
+  &.table--fullwidth {
+    @include column-sort;
+  }
+
+  @container (width >= 32em) {
+    @include column-sort;
+  }
+}
+
+// #endregion
+
+// #region hide columns
+@for $i from 1 through 30 {
+  :is(#{$selector}) [data-hide-col#{$i}] + table :is(thead, tbody) :is(th, td):nth-child(#{$i}) {
+    display: none;
+  }
+}
+// #endregion
+
+// #region filters
+:is(#{$selector}) .table--filtered tbody tr:not(.filtered--show) {
+  display: none !important;
+}
+
+:is(#{$selector}) table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
+  //display: none;
+}
+// #endregion
+
+// #region max height tables
+
+iam-table-basic:is(.mh-lg, .mh-md, .mh-sm) {
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+
+    tr {
+      background: var(--row-bg);
+      background: linear-gradient(0deg, var(--colour-primary) 2px, var(--row-bg) 2px);
+      border: none;
     }
   }
 }
+
 // #endregion

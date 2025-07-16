@@ -4,17 +4,14 @@
 .nav .nav__mobile-bar {
   background: var(--colour-primary);
   color: white;
-
-  @if $compatible != 'true' {
-    @include invert-colours();
-  }
-
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   width: rem(375);
 
-  @include media-breakpoint-up(sm) {
+  @include invert-colours();
+
+  @include media-breakpoint-up(sm, $mobileOnly) {
     width: 100%;
   }
 
@@ -55,7 +52,7 @@
   .brand {
     font-size: rem(36);
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       font-size: rem(60);
     }
   }
@@ -65,7 +62,7 @@
   height: rem(36);
   width: auto;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     height: rem(60);
     width: auto;
   }
@@ -194,7 +191,7 @@
 
 // #region nav search
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav__menu--search {
     display: none;
   }
@@ -382,7 +379,7 @@ nav + main > *:first-child {
   width: 100%;
   overscroll-behavior: contain;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     width: rem(375);
   }
 }
@@ -403,12 +400,12 @@ nav + main > *:first-child {
   overflow-x: auto;
   left: 0;
 
-  @include media-breakpoint-up(sm) {
+  @include media-breakpoint-up(sm, $mobileOnly) {
     left: calc(100% - #{rem(375)});
   }
 }
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   #showAccount ~ .nav__menu--account {
     display: none;
   }
@@ -451,7 +448,7 @@ nav + main > *:first-child {
   }
 }
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(sm, $mobileOnly) {
   #showMenu:checked ~ .nav__bg {
     content: ' ';
     position: absolute;
@@ -464,7 +461,7 @@ nav + main > *:first-child {
   }
 }
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav__bg {
     display: none;
   }
@@ -473,7 +470,7 @@ nav + main > *:first-child {
 // #endregion
 
 // #region Desktop nav
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav .nav__mobile-bar {
     display: none;
   }
@@ -585,7 +582,7 @@ nav + main > *:first-child {
 // #endregion
 
 // #region Nav secondary DESKTOP
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav__menu--secondary {
     background-color: var(--colour-primary);
     @include invert-colours();
@@ -689,7 +686,7 @@ nav + main > *:first-child {
 
 // #region Nav account Desktop
 
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav__menu--account {
     > .container:first-child {
       display: none;
@@ -733,7 +730,7 @@ nav + main > *:first-child {
 
 // #region Mega menu
 .nav .list-unstyled > li details.nav__mega-menu {
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     position: static;
 
     height: 4.5rem;
@@ -745,12 +742,12 @@ nav + main > *:first-child {
 
     [class*='bg-'] {
       --bs-bg-opacity: 0;
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(md, $mobileOnly) {
         --bs-bg-opacity: 1;
       }
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(md, $mobileOnly) {
       --bs-bg-opacity: 1;
       position: absolute;
       top: 100%;
@@ -807,7 +804,7 @@ nav + main > *:first-child {
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     .nav__menu > .list-unstyled {
       text-align: left;
       margin-right: 0 !important;
@@ -841,7 +838,7 @@ nav + main > *:first-child {
 // #endregion
 
 // #region nav admin
-@include media-breakpoint-up(md) {
+@include media-breakpoint-up(md, $mobileOnly) {
   .nav--admin {
     .nav__logo {
       height: 3rem;
@@ -862,7 +859,7 @@ nav + main > *:first-child {
     display: none !important;
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(md, $mobileOnly) {
     .nav__menu,
     .nav__account-btn {
       display: block !important;
@@ -877,7 +874,7 @@ nav + main > *:first-child {
     pointer-events: none;
     background: transparent;
 
-    @include media-breakpoint-up(sm) {
+    @include media-breakpoint-up(sm, $mobileOnly) {
       width: rem(375);
       left: calc(100% - #{rem(375)});
     }

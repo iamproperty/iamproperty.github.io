@@ -1,4 +1,4 @@
-import extendDialogs from '../../modules/dialogs';
+import { uniqueID } from '../../modules/helpers';
 
 // Data layer Web component created
 declare global {
@@ -40,16 +40,13 @@ class iamActionbar extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/actionbar.css";`;
+
+    const loadCSS = `@import "${assetLocation}/css/components/actionbar.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/actionbar.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
@@ -61,13 +58,25 @@ class iamActionbar extends HTMLElement {
         <div class="safe-area">
           <slot></slot>
           <div class="body">
-            <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
-              <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
-              <dialog class="dialog--list" part="overflow">
+            <div class="menu__wrapper  menu__wrapper --right dialog-overflow d-none show">
+              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0" popovertarget="overflow" style="anchor-name: --anchor-overflow;">More actions</button>
+              <iam-menu class="dialog--list" part="overflow" id="overflow" style="position-anchor: --anchor-overflow;" popover>
                 <slot name="overflow"></slot>
                 <slot name="menu"></slot>
-              </dialog>
+              </iam-menu>
             </div>
+
+
+            <div class="menu__wrapper  menu__wrapper --right filter-columns">
+              <button class="btn btn-secondary btn-compact btn-sm mb-0 me-0 fa-regular fa-table-columns" title="Select colums" popovertarget="filter" style="anchor-name: --anchor-filter;">Filter</button>
+              <iam-menu class="dialog--list" id="filter" style="position-anchor: --anchor-filter;" popover>
+                <div class="pb-0 mb-0 checklists">
+                  
+                </div>
+                <div class="text-right checklist-btns"><button id="cancelColumns" class="btn btn-action">Cancel</button><button id="saveColumns" class="btn btn-action btn-secondary">Save</button></div>
+              </iam-menu>
+            </div>
+
             <button class="btn btn-secondary btn-compact btn-sm fa-search" data-search="" part="search-btn">Search</button>
           </div>
         </div>
@@ -76,15 +85,16 @@ class iamActionbar extends HTMLElement {
         <div class="safe-area">
           <slot name="selected"></slot>
           <div class="body">
-            <div class="dialog__wrapper dialog__wrapper--right dialog-overflow d-none show">
-              <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0">More actions</button>
-              <dialog class="dialog--list" part="selected-overflow">
+            <div class="menu__wrapper  menu__wrapper --right dialog-overflow d-none show">
+              <button class="btn btn-secondary btn-compact btn-sm fa-ellipsis-vertical m-0" popovertarget="selected-overflow" style="anchor-name: --anchor-selected-overflow;">More actions</button>
+              <iam-menu class="dialog--list" part="selected-overflow" id="selected-overflow" style="position-anchor: --anchor-selected-overflow;" popover>
                 <slot name="selected-overflow"></slot>
-              </dialog>
+              </iam-menu>
             </div>
           </div>
         </div>
       </div>
+
       <div class="actionbar--search">
         <button data-search class="btn btn-compact fa-xmark-large btn-secondary m-0" >Close</button>
 
@@ -96,6 +106,9 @@ class iamActionbar extends HTMLElement {
 
       </div>
     </div>
+    <div class="no-columns">
+      <span class="d-block">No columns selected</span>
+    </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 
@@ -106,6 +119,38 @@ class iamActionbar extends HTMLElement {
 
   connectedCallback(): void {
     const actionbarWrapper = this.shadowRoot?.querySelector('.actionbar__wrapper');
+    const checklistHolder = this.shadowRoot?.querySelector('.checklists');
+
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+
+    if (!window.customElements.get(`iam-menu`)) {
+      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
+        .then((module) => {
+          window.customElements.define(`iam-menu`, module.default);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
+
+    const dialog = this.querySelector('.dialog__wrapper dialog');
+
+    // Transform dialog into a menu custom element
+    if (dialog) {
+      const btn = dialog.parentElement.querySelector('.btn');
+      const id = `menu${uniqueID(1)}`;
+
+      dialog.setAttribute('id', id);
+      dialog.setAttribute('popover', 'auto');
+      btn.setAttribute('popovertarget', id);
+
+      dialog.outerHTML = dialog.outerHTML.replace(/<dialog/g, '<iam-menu').replace(/<\/dialog>/g, '</iam-menu>');
+
+      dialog.parentElement?.classList.add('menu__wrapper');
+      dialog.parentElement?.classList.remove('dialog__wrapper');
+    }
 
     // #region select all
     if (this.hasAttribute('data-selectall')) {
@@ -172,7 +217,7 @@ class iamActionbar extends HTMLElement {
         if (view == 'list') icon = 'fa-grip-lines';
         else if (view == 'small') icon = 'fa-bars';
 
-        btns += `<button class="btn btn-action btn-compact mb-0 fa-regular ${icon}">${view}</button>`;
+        btns += `<button class="btn btn-action btn-compact btn-sm mb-0 fa-regular ${icon}">${view}</button>`;
       });
 
       actionbarWrapper?.insertAdjacentHTML('afterbegin', `<div class="views m-0">${btns}</div>`);
@@ -234,11 +279,6 @@ class iamActionbar extends HTMLElement {
     });
     // #endregion
 
-    // Make sure dialogs created in the shadow dom work
-    Array.from(this.shadowRoot.querySelectorAll('.body')).forEach((element, index) => {
-      extendDialogs(element);
-    });
-
     // #region Reponsive safe area
     const hideButtons = (): void => {
       const wrapperWidth = actionbarWrapper.scrollWidth;
@@ -280,7 +320,7 @@ class iamActionbar extends HTMLElement {
       if (wrapperWidth < 576) {
         Array.from(
           this.querySelectorAll(
-            ':scope > .btn:not(.js-updated), :scope > .dialog__wrapper > .btn[class*="fa-"]:first-child:not(.js-updated)'
+            ':scope > .btn:not(.js-updated), :scope > .menu__wrapper  > .btn[class*="fa-"]:first-child:not(.js-updated)'
           )
         ).forEach((element: HTMLElement) => {
           element.className = element.className.replace(' btn-compact', ' _btn-compact');
@@ -289,7 +329,7 @@ class iamActionbar extends HTMLElement {
         });
       } else {
         Array.from(
-          this.querySelectorAll(':scope > .btn.js-updated, :scope > .dialog__wrapper > .btn.js-updated:first-child')
+          this.querySelectorAll(':scope > .btn.js-updated, :scope > .menu__wrapper  > .btn.js-updated:first-child')
         ).forEach((element: HTMLElement) => {
           element.classList.remove('btn-compact');
           element.classList.remove('js-updated');
@@ -328,7 +368,7 @@ class iamActionbar extends HTMLElement {
 
         // Foreach element this isn't an action button or dialog wrapper add to the width, these will not be moved into the overflow slot
         for (let i = 0; i < elements.length; i++) {
-          if (!elements[i].classList.contains('btn-action') && !elements[i].classList.contains('dialog__wrapper')) {
+          if (!elements[i].classList.contains('btn-action') && !elements[i].classList.contains('menu__wrapper ')) {
             tempWidth += elements[i].offsetWidth;
             tempWidth += elementMargin;
           }
@@ -336,7 +376,7 @@ class iamActionbar extends HTMLElement {
 
         // Foreach dialog wrapper decide if safe in safe area or move into the overflow slot, dialog wrappers have priority over the action buttons
         for (let i = 0; i < elements.length; i++) {
-          if (elements[i].classList.contains('dialog__wrapper')) {
+          if (elements[i].classList.contains('menu__wrapper ')) {
             elements[i].classList.add('show');
             tempWidth += elements[i].offsetWidth;
             tempWidth += elementMargin / 2;
@@ -370,7 +410,7 @@ class iamActionbar extends HTMLElement {
 
         // Decide which elements go into the overflow slot
         for (let i = 0; i < elements.length; i++) {
-          if (elements[i].classList.contains('btn-action') || elements[i].classList.contains('dialog__wrapper')) {
+          if (elements[i].classList.contains('btn-action') || elements[i].classList.contains('menu__wrapper ')) {
             if (!elements[i].classList.contains('show')) {
               // Move to the slot by changing the attribute
               elements[i].setAttribute('slot', overflowSlot);
@@ -386,6 +426,88 @@ class iamActionbar extends HTMLElement {
     // Check buttons on load and when the wrapper element gets resized.
     hideButtons();
     new ResizeObserver(hideButtons).observe(actionbarWrapper);
+    // #endregion
+
+    // #region cloumn filters
+
+    const setColumnFilters = (): void => {
+      let columnsHidden = '';
+      Array.from(checklistHolder?.querySelectorAll('label input')).forEach((element, index) => {
+        columnsHidden += this.hasAttribute(`data-hide-col${index + 1}`) ? `${index + 1},` : '';
+      });
+
+      this.setAttribute('data-columns-shown', checklistHolder.querySelectorAll('input:checked').length);
+
+      const dispatchedEvent = new CustomEvent('columm-filters-set', {
+        detail: {
+          columnsHidden: columnsHidden.slice(0, -1),
+        },
+      });
+
+      this.dispatchEvent(dispatchedEvent);
+    };
+
+    if (this.hasAttribute('data-filter-columns') || this.hasAttribute('data-filter-columns-save')) {
+      const columns = this.closest('iam-table').querySelectorAll('thead th');
+
+      Array.from(columns).forEach((element, index) => {
+        if (element.textContent) {
+          checklistHolder?.insertAdjacentHTML(
+            'beforeend',
+            `<label class="m-0" title="Change the display of "><input name="hideCol${index + 1}" value="${index + 1}" type="checkbox" ${this.hasAttribute('data-hide-col' + (index + 1)) ? '' : 'checked'} /> ${element.textContent}</label>`
+          );
+        }
+      });
+    }
+
+    this.setAttribute('data-columns-shown', checklistHolder.querySelectorAll('input:checked').length);
+
+    if (this.hasAttribute('data-filter-columns') && !this.hasAttribute('data-filter-columns-save')) {
+      checklistHolder?.addEventListener('change', (event) => {
+        if (event && event.target instanceof HTMLElement && event.target.closest('input')) {
+          const checkbox = event.target.closest('input');
+
+          if (checkbox?.checked == false) {
+            this.setAttribute('data-hide-col' + checkbox?.value, 'true');
+          } else {
+            this.removeAttribute('data-hide-col' + checkbox?.value);
+          }
+
+          setColumnFilters();
+        }
+      });
+    }
+
+    if (this.hasAttribute('data-filter-columns-save')) {
+      const checklistHolder = this.shadowRoot?.querySelector('.checklists');
+      const checklistSave = this.shadowRoot?.querySelector('#saveColumns');
+      const checklistCancel = this.shadowRoot?.querySelector('#cancelColumns');
+
+      checklistSave?.addEventListener('click', (event) => {
+        Array.from(checklistHolder?.querySelectorAll('label input')).forEach((checkbox) => {
+          if (checkbox?.checked == false) {
+            this.setAttribute('data-hide-col' + checkbox?.value, 'true');
+          } else {
+            this.removeAttribute('data-hide-col' + checkbox?.value);
+          }
+        });
+
+        setColumnFilters();
+        checklistSave.closest('dialog')?.close();
+      });
+
+      // Revert back to what was previously saved
+      checklistCancel?.addEventListener('click', (event) => {
+        const checklistHolder = this.shadowRoot?.querySelector('.checklists');
+
+        Array.from(checklistHolder?.querySelectorAll('label input')).forEach((element, index) => {
+          element.checked = this.hasAttribute(`data-hide-col${index + 1}`) ? false : true;
+        });
+
+        setColumnFilters();
+        checklistSave.closest('dialog')?.close();
+      });
+    }
     // #endregion
   }
 

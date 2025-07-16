@@ -1,146 +1,337 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
-// #region reset
-a {
-  color: var(--#{$prefix}link-color);
-  text-decoration: $link-decoration;
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-  &:hover {
-    color: var(--#{$prefix}link-hover-color);
-    text-decoration: $link-hover-decoration;
-  }
-}
+@include layer('elements', $layers) {
+  // #region reset
+  a {
+    color: var(--link-color);
+    text-decoration: $link-decoration;
 
-// And undo these styles for placeholder links/named anchors (without href).
-// It would be more straightforward to just use a[href] in previous block, but that
-// causes specificity issues in many other styles that are too complex to fix.
-// See https://github.com/twbs/bootstrap/issues/19402
-
-a:not([href]):not([class]) {
-  &,
-  &:hover {
-    color: inherit;
-    text-decoration: none;
-  }
-}
-// #endregion
-
-// global
-a {
-  color: var(--colour-link);
-
-  &:is(:hover, :focus, .hover, :focus-within) {
-    color: var(--colour-hover);
-  }
-
-  &:is(:active, .active) {
-    color: var(--colour-active);
-  }
-}
-
-a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
-.link {
-  background-color: transparent;
-  text-decoration: none;
-  display: inline-block;
-  border: none;
-  color: var(--colour-link);
-  margin: 0 rem(24) rem(24) 0;
-  padding: 0;
-  font-size: rem(18);
-  line-height: rem(24);
-  min-height: rem(24);
-  position: relative;
-  font-weight: bold;
-
-  &:not(.text-decoration-none) {
-    &:after {
-      position: absolute;
-      content: '';
-      top: 100%;
-      left: 50%;
-      height: 2px;
-      width: 100%;
-      transform: translate(-50%, 0);
-      background: var(--colour-underline);
-      transition: width 0.5s;
+    &:hover {
+      color: var(--link-hover-color);
+      text-decoration: $link-hover-decoration;
     }
   }
 
-  [class*='fa-'] {
-    margin-left: 0;
-    margin-right: 0.5rem;
-  }
-  [class*='fa-']:not(:first-child) {
-    margin-left: 0.5rem;
-    margin-right: 0;
-  }
+  // And undo these styles for placeholder links/named anchors (without href).
+  // It would be more straightforward to just use a[href] in previous block, but that
+  // causes specificity issues in many other styles that are too complex to fix.
+  // See https://github.com/twbs/bootstrap/issues/19402
 
-  &:is(:hover, :focus, .hover, :active, .active, :focus-within) {
-    &:after {
-      width: 60%;
+  a:not([href]):not([class]) {
+    &,
+    &:hover {
+      color: inherit;
+      text-decoration: none;
     }
   }
-}
+  // #endregion
 
-@include inline-text() {
-  a:not(.btn) {
-    min-height: none;
-    display: inline;
-    margin: 0;
-    text-decoration: underline;
-
-    &:after {
-      display: none;
-    }
-
-    [class*='fa-'] {
-      margin: 0;
-      display: inline;
-    }
-
-    text-decoration: underline;
-    text-underline-offset: 0.2em;
-    text-decoration-thickness: 2px;
-    font-size: inherit;
+  // global
+  a {
+    color: var(--colour-link);
 
     &:is(:hover, :focus, .hover, :focus-within) {
       color: var(--colour-hover);
-      text-decoration: none;
     }
 
     &:is(:active, .active) {
       color: var(--colour-active);
-      text-decoration: none;
+    }
+  }
+
+  a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
+  .link {
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    color: var(--colour-link);
+    margin: 0 rem(24) rem(24) 0;
+    padding: 0;
+    font-size: rem(18);
+    line-height: rem(24);
+    min-height: rem(24);
+    position: relative;
+    font-weight: bold;
+
+    &:not(.text-decoration-none) {
+      &:after {
+        position: absolute;
+        content: '';
+        top: 100%;
+        left: 50%;
+        height: 2px;
+        width: 100%;
+        transform: translate(-50%, 0);
+        background: var(--colour-underline);
+        transition: width 0.5s;
+      }
+    }
+
+    [class*='fa-'] {
+      margin-left: 0;
+      margin-right: 0.5rem;
+    }
+    [class*='fa-']:not(:first-child) {
+      margin-left: 0.5rem;
+      margin-right: 0;
+    }
+
+    &:not([disabled]):is(:hover, :focus, .hover, :active, .active, :focus-within) {
+      &:after {
+        width: 60%;
+      }
+    }
+
+    &[disabled] {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  @include inline-text() {
+    a:not(.btn) {
+      min-height: none;
+      display: inline;
+      margin: 0;
+      text-decoration: underline;
+      text-underline-offset: 0.25rem;
+      text-decoration-thickness: 0.125rem;
+      font-size: inherit;
+
+      &:after {
+        display: none;
+      }
+
+      [class*='fa-'] {
+        margin: 0;
+        display: inline;
+        --fa-display: inline;
+
+        &:after {
+          content: '\a0';
+        }
+      }
+
+      &:not([disabled]):is(:hover, :focus, .hover, :focus-within) {
+        color: var(--colour-hover);
+        text-decoration: none;
+      }
+
+      &:not([disabled]):is(:active, .active) {
+        color: var(--colour-active);
+        text-decoration: none;
+        filter: brightness(85%);
+      }
+    }
+  }
+
+  // #region Support card component
+  :is(a, button, label):has(.card, iam-card) {
+    border: none;
+    background: none;
+    padding: 0;
+    display: flex;
+    margin-bottom: 1.5rem;
+    outline: none !important;
+    text-decoration: none;
+
+    &:before {
+      display: none;
+    }
+
+    &:not([class*='col']) {
+      margin: 0 0 rem(24) 0;
+    }
+
+    &:not(.d-inline-block):not([class*='col']) {
+      width: 100%;
+    }
+
+    iam-card {
+      width: 100%;
+    }
+  }
+
+  // #endregion
+}
+
+:is(.youtube-link[data-youtube], .vimeo-link[data-vimeo]) {
+  position: relative;
+
+  &:before {
+    content: '';
+    display: block;
+    background-color: var(--video-btn-colour, var(--colour-success));
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    top: calc(50% - 1.5rem);
+    left: calc(50% - 1.5rem);
+    z-index: 2;
+    border-radius: 1.5rem;
+  }
+
+  &:after {
+    $icon-play: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><path d='M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z'/></svg>");
+    --icon: #{$icon-play};
+
+    content: '';
+    display: block;
+    height: 1rem;
+    width: 1rem;
+    position: absolute;
+    top: calc(50% - 0.5rem);
+    left: calc(50% - 0.4rem);
+    z-index: 5;
+    background: var(--colour-primary-theme);
+    mask-image: var(--icon);
+    mask-size: 80%;
+    mask-repeat: no-repeat;
+    mask-position: 50% 50%;
+    -webkit-mask-image: var(--icon);
+    -webkit-mask-size: 80%;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: 50% 50%;
+  }
+
+  &:is(:hover, :focus) {
+    --video-btn-colour: var(--colour-canvas);
+  }
+  &:is(:active) {
+    --video-btn-colour: color-mix(in oklab, var(--colour-success), #000000 20%) !important;
+  }
+}
+
+// #region Sidebar link styling including parent group styling
+iam-collapsible-side {
+  > * {
+    padding-left: rem(24);
+
+    @include media-breakpoint-up(sm) {
+      padding-left: rem(40);
+    }
+
+    @include media-breakpoint-up(md) {
+      padding-left: var(--container-padding-x-md);
+    }
+  }
+
+  hr {
+    border-bottom: 2px solid var(--colour-border) !important;
+    margin-right: rem(-40) !important;
+  }
+}
+
+.vertical-tabs [class*='link'],
+iam-collapsible-side [class*='link'] {
+  display: block !important;
+  line-height: rem(20) !important;
+  padding: rem(16) rem(24) rem(16) rem(24) !important;
+  margin: 0 !important;
+  flex-shrink: 0;
+  font-size: 1rem !important;
+  font-weight: normal !important;
+  text-decoration: none !important;
+  border-bottom: 2px solid var(--colour-border) !important;
+  border-right: 2px solid var(--colour-border) !important;
+  margin-right: rem(-40) !important;
+  z-index: 2;
+
+  &::after {
+    display: none !important;
+  }
+
+  i {
+    // icon
+    margin-right: rem(8) !important;
+  }
+
+  @include media-breakpoint-up(sm) {
+    padding-left: rem(24) !important;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-left: var(--container-padding-x-md) !important;
+  }
+}
+
+.vertical-tabs a,
+iam-collapsible-side a {
+  &:hover,
+  &:focus,
+  &[aria-expanded] {
+    background-color: var(--colour-activeLink) !important;
+  }
+}
+
+.vertical-tabs [class*='active'],
+iam-collapsible-side [class*='active'] {
+  background-color: var(--colour-activeLink) !important;
+  border-right-color: var(--colour-activeLinkBorder) !important;
+  border-right-width: 3px !important;
+}
+
+// Parent links
+.vertical-tabs,
+iam-collapsible-side {
+  .parent {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+
+    li:first-of-type {
+      cursor: pointer;
+
+      a {
+        padding-right: rem(40) !important;
+
+        &::before {
+          position: absolute;
+          display: block;
+          content: '\f055';
+          font-family: 'Font Awesome 6 Pro';
+          right: 20px;
+          font-weight: 300;
+        }
+      }
+    }
+
+    li:not(:first-of-type) {
+      display: none;
+
+      a {
+        background-color: var(--colour-light) !important;
+        padding-left: rem(90) !important;
+      }
+    }
+
+    &.reveal {
+      li:first-of-type {
+        a::before {
+          content: '\f056';
+          font-weight: bold;
+        }
+      }
+
+      li:not(:first-of-type) {
+        display: block;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    .parent {
+      li:not(:first-of-type) {
+        a {
+          padding-left: rem(90) !important;
+        }
+      }
     }
   }
 }
-
-// #region Support card component
-:is(a, button, label):has(.card, iam-card) {
-  &:before {
-    display: none;
-  }
-  border: none;
-  background: none;
-  padding: 0;
-  display: flex;
-  margin-bottom: 1.5rem;
-
-  &:not([class*='col']) {
-    margin: 0 0 rem(24) 0;
-  }
-
-  outline: none !important;
-  text-decoration: none;
-
-  &:not(.d-inline-block):not([class*='col']) {
-    width: 100%;
-  }
-
-  iam-card {
-    width: 100%;
-  }
-}
-
 // #endregion

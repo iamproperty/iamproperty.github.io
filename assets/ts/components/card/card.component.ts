@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
 
@@ -28,12 +27,24 @@ class iamCard extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback() {
+  async connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const cardComponent = this;
-    const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
     const cardBody = cardComponent.shadowRoot.querySelector('.card__body');
-    const cardMenu = cardComponent.shadowRoot.querySelector('.dialog__wrapper');
-    const btn = cardComponent.shadowRoot.querySelector('.dialog__wrapper button');
+
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+
+    if (!window.customElements.get(`iam-menu`)) {
+      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
+        .then((module) => {
+          window.customElements.define(`iam-menu`, module.default);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    }
 
     setupCard(cardComponent);
 
@@ -54,16 +65,39 @@ class iamCard extends HTMLElement {
 
     // Add the dialog wrapper HTML
     if (cardComponent.querySelector('[slot="btns"]')) {
-      cardComponent.shadowRoot.innerHTML += `<div class="dialog__wrapper">
-      <button class="btn btn-secondary btn-compact fa-ellipsis-vertical" popovertarget="actions" title="Further actions" type="button">Open further actions</button>
-      <div class="dialog--fix dialog--list" id="actions" popover>
+      cardComponent.shadowRoot.innerHTML += `<div class="menu__wrapper">
+      <button class="btn btn-secondary btn-compact fa-ellipsis-vertical m-0" popovertarget="actions" style="anchor-name: --anchor-el;" title="Further actions" type="button">Open further actions</button>
+      <iam-menu class="dialog--fix dialog--list" id="actions" style="position-anchor: --anchor-el;" popover>
         <slot name="btns"></slot>
-      </div>
+      </iam-menu>
     </div>`;
+
+      // safari and firefox anchor fix for cards
+      if (!CSS.supports('top', 'anchor(top)')) {
+        const actionButton = this.shadowRoot?.querySelector('[popovertarget="actions"]');
+        const actionPopover = this.shadowRoot?.querySelector('[popover]');
+
+        actionButton?.addEventListener('click', (event) => {
+          this.style.setProperty('overflow', 'visible');
+          this.style.setProperty('z-index', '999999');
+
+          const viewportOffset = actionButton.getBoundingClientRect();
+          const top = viewportOffset.top;
+          const left = viewportOffset.left;
+
+          actionPopover.style.setProperty('display', 'block');
+          actionPopover.style.setProperty('top', top + 'px');
+          actionPopover.style.setProperty('left', left - 100 + 'px');
+        });
+
+        document.addEventListener('scroll', (event) => {
+          actionPopover.style.setProperty('display', 'none');
+        });
+      }
     }
 
     // Make sure slotted buttons and links have correct button classes
-    Array.from(cardComponent.querySelectorAll('[slot="btns"]')).forEach((button, index) => {
+    Array.from(cardComponent.querySelectorAll('[slot="btns"]')).forEach((button) => {
       button.classList.add('btn');
       button.classList.add('btn-action');
     });
@@ -72,23 +106,23 @@ class iamCard extends HTMLElement {
     if (cardComponent.querySelector('[slot="checkbox"],[slot="secondary"]')) {
       const element = cardComponent.querySelector('[slot="checkbox"],[slot="secondary"]');
 
-      element.addEventListener('mouseenter', (event) => {
+      element.addEventListener('mouseenter', () => {
         cardComponent.classList.add('prevent-hover');
       });
 
-      element.addEventListener('mouseleave', (event) => {
+      element.addEventListener('mouseleave', () => {
         cardComponent.classList.remove('prevent-hover');
       });
     }
 
-    if (cardComponent.shadowRoot.querySelector('.dialog__wrapper')) {
-      const element = cardComponent.shadowRoot.querySelector('.dialog__wrapper');
+    if (cardComponent.shadowRoot.querySelector('.menu__wrapper')) {
+      const element = cardComponent.shadowRoot.querySelector('.menu__wrapper');
 
-      element.addEventListener('mouseenter', (event) => {
+      element.addEventListener('mouseenter', () => {
         cardComponent.classList.add('prevent-hover');
       });
 
-      element.addEventListener('mouseleave', (event) => {
+      element.addEventListener('mouseleave', () => {
         cardComponent.classList.remove('prevent-hover');
       });
     }
@@ -96,7 +130,7 @@ class iamCard extends HTMLElement {
     // Dispatch events of selecting checkboxes
     const checkbox = cardComponent.querySelector('input[type="checkbox"]');
     if (checkbox) {
-      checkbox.addEventListener('change', (event) => {
+      checkbox.addEventListener('change', () => {
         if (checkbox.checked) {
           const customEvent = new CustomEvent('select-card', {
             detail: { 'Card value': checkbox.value, 'input name': checkbox.getAttribute('name') },
@@ -114,7 +148,7 @@ class iamCard extends HTMLElement {
     // Dispatch events of click onto secondary buttons
     const secondaryBtn = cardComponent.querySelector('[slot="secondary"]');
     if (secondaryBtn) {
-      secondaryBtn.addEventListener('click', (event) => {
+      secondaryBtn.addEventListener('click', () => {
         const customEvent = new CustomEvent('secondary-button-clicked', {
           detail: { Title: secondaryBtn.getAttribute('title') },
         });
@@ -124,8 +158,8 @@ class iamCard extends HTMLElement {
 
     // Dispatch events of click onto action buttons
     const actionBtns = cardComponent.querySelectorAll('[slot="btns"]');
-    Array.from(actionBtns).forEach((button, index) => {
-      button.addEventListener('click', (event) => {
+    Array.from(actionBtns).forEach((button) => {
+      button.addEventListener('click', () => {
         const customEvent = new CustomEvent('action-button-clicked', {
           detail: { Title: button.getAttribute('title') },
         });
@@ -141,11 +175,11 @@ class iamCard extends HTMLElement {
     ]);
   }
 
-  static get observedAttributes() {
+  static get observedAttributes(): any {
     return ['data-image'];
   }
 
-  attributeChangedCallback(attrName, oldVal, newVal) {
+  attributeChangedCallback(attrName, oldVal, newVal): void {
     switch (attrName) {
       case 'data-total': {
         if (this.shadowRoot.querySelector('.card__total'))

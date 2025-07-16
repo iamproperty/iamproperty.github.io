@@ -1,199 +1,177 @@
 @use 'sass:map';
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
-/* Duplicated from bootstrap reboot so that the type file will compile */
-mark {
-  padding: $mark-padding;
-  background-color: $mark-bg;
-}
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
 
-//@import "../../bootstrap/scss/_type.scss";
-
-// #region headings
-
-%heading {
-  --line-height: #{$headings-line-height};
-  // From bootstrap reboot
-  margin-top: 0; // 1
-  margin-bottom: $headings-margin-bottom;
-  font-family: $headings-font-family;
-  font-style: $headings-font-style;
-  font-weight: bold;
-  line-height: var(--line-height);
-  color: $headings-color;
-  // END:Bootstap reboot
-  clear: both;
-  display: block;
-  padding-bottom: 2rem;
-
-  [class*='fa-'] {
-    margin-right: 0.5rem;
+@include layer('elements', $layers) {
+  /* Duplicated from bootstrap reboot so that the type file will compile */
+  mark {
+    padding: $mark-padding;
+    background-color: $mark-bg;
   }
-}
 
-@include is('h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4') {
-  @extend %heading;
-}
+  //@import "../../bootstrap/scss/_type.scss";
 
-:is(.h1, h1) {
-  --line-height: #{rem(map-get($heading-sizes, 'h1_lh'))};
+  // #region headings
 
-  font-size: rem(map-get($heading-sizes, 'h1_fs'));
-  padding-bottom: rem(map-get($heading-sizes, 'h1_pb'));
-  font-weight: 900;
+  %heading {
+    margin-top: 0; // 1
+    margin-bottom: 0;
+    font-family: $headings-font-family;
+    font-style: $headings-font-style;
+    font-weight: bold;
 
-  @include media-breakpoint-up(sm) {
-    font-size: rem(map-get($heading-sizes, 'h1_fs_sm'));
-    --line-height: #{rem(map-get($heading-sizes, 'h1_lh_sm'))};
-    padding-bottom: rem(map-get($heading-sizes, 'h1_pb_sm'));
+    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
+    color: $headings-color;
+    clear: both;
+    display: block;
+
+    [class*='fa-'] {
+      margin-right: 0.5rem;
+    }
   }
-}
 
-:is(h2, .h2) {
-  font-size: rem(map-get($heading-sizes, 'h2_fs'));
-  --line-height: #{rem(map-get($heading-sizes, 'h2_lh'))};
-  padding-bottom: rem(map-get($heading-sizes, 'h1_pb'));
-  font-weight: 900;
-
-  @include media-breakpoint-up(sm) {
-    font-size: rem(map-get($heading-sizes, 'h2_fs_sm'));
-    --line-height: #{rem(map-get($heading-sizes, 'h2_lh_sm'))};
-    padding-bottom: rem(map-get($heading-sizes, 'h2_pb_sm'));
+  @include is('h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4') {
+    @extend %heading;
   }
-}
 
-:is(h3, .h3) {
-  font-size: rem(map-get($heading-sizes, 'h3_fs'));
-  --line-height: #{rem(map-get($heading-sizes, 'h3_lh'))};
-  padding-bottom: rem(map-get($heading-sizes, 'h3_pb'));
-  max-width: var(--content-max-width);
-  font-weight: 900;
-
-  @include media-breakpoint-up(sm) {
-    font-size: rem(map-get($heading-sizes, 'h3_fs_sm'));
-    --line-height: #{rem(map-get($heading-sizes, 'h3_lh_sm'))};
-    padding-bottom: rem(map-get($heading-sizes, 'h3_pb_sm'));
+  :is(.h1, h1) {
+    font-size: map.get($heading-sizes, 'h1_fs');
+    font-weight: 900;
   }
-}
 
-:is(.h4, h4, .h5, h5, .h6, h6) {
-  font-size: rem(map-get($heading-sizes, 'h4_fs'));
-  --line-height: #{rem(map-get($heading-sizes, 'h4_lh'))};
-  padding-bottom: rem(map-get($heading-sizes, 'h4_pb'));
-  max-width: var(--content-max-width);
-
-  /* The values for mobile and tablet are exactly the same, but if that changes this block needs to be re-instated 
-  @include media-breakpoint-up(sm) {
-
-    font-size: rem(map-get($heading-sizes,"h4_fs_sm"));
-    line-height: rem(map-get($heading-sizes,"h4_lh_sm"));
-    padding-bottom: rem(map-get($heading-sizes,"h4_pb_sm"));
+  :is(h2, .h2) {
+    font-size: map.get($heading-sizes, 'h2_fs');
+    font-weight: 900;
   }
-  */
-}
-// #endregion
 
-p {
-  margin-top: 0;
-  font-size: rem(map-get($heading-sizes, 'body_fs'));
-  line-height: rem(map-get($heading-sizes, 'body_lh'));
-  padding-bottom: rem(map-get($heading-sizes, 'body_end_pb'));
-  max-width: var(--content-max-width);
-  margin-bottom: 0;
-}
+  :is(h3, .h3) {
+    font-size: map.get($heading-sizes, 'h3_fs');
+    max-width: var(--content-max-width);
 
-p:has(+ p) {
-  padding-bottom: rem(map-get($heading-sizes, 'body_pb'));
-}
+    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
+  }
 
-:is(.lead, .strapline) {
-  font-size: rem(map-get($heading-sizes, 'lead_fs'));
-  line-height: rem(map-get($heading-sizes, 'lead_lh'));
-  padding-bottom: rem(map-get($heading-sizes, 'lead_pb'));
-  max-width: var(--content-max-width);
-  font-weight: 700;
-}
+  :is(.h4, h4, .h5, h5, .h6, h6) {
+    font-size: map.get($heading-sizes, 'h4_fs');
+    max-width: var(--content-max-width);
 
-small,
-.small {
-  font-size: rem(map-get($heading-sizes, 'small_fs'));
-  line-height: rem(map-get($heading-sizes, 'small_lh'));
-  padding-bottom: rem(map-get($heading-sizes, 'small_pb'));
-  max-width: var(--content-max-width);
-  font-family: arial, sans-serif;
-  font-weight: normal;
-}
-
-sub,
-sup {
-  position: relative;
-  font-size: 0.75em;
-  line-height: 0;
-  vertical-align: baseline;
-}
-
-sub {
-  bottom: -0.25em;
-}
-sup {
-  top: -0.5em;
-}
-
-abbr[title] {
-  text-decoration: underline dotted; // 1
-  cursor: help; // 2
-  text-decoration-skip-ink: none; // 3
-}
-
-// Address
-
-address {
-  margin-bottom: 1rem;
-  font-style: normal;
-  line-height: inherit;
-}
-
-blockquote {
-}
-
-blockquote {
-  margin: 0;
-  quotes: '“' '”' '‘' '’';
-  padding-bottom: rem(48);
-  overflow: hidden;
+    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
+    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
+  }
+  // #endregion
 
   p {
-    font-size: rem(24);
-    line-height: rem(32);
-    padding-bottom: 0;
+    margin-top: 0;
+    font-size: rem(map.get($heading-sizes, 'body_fs'));
+    line-height: rem(map.get($heading-sizes, 'body_lh'));
+    padding-bottom: rem(map.get($heading-sizes, 'body_end_pb'));
+    max-width: var(--content-max-width);
+    margin-bottom: 0;
   }
 
-  & p:first-child:before {
-    content: open-quote;
-  }
-  & p:last-of-type:after {
-    content: close-quote;
+  p:has(+ p) {
+    padding-bottom: rem(map.get($heading-sizes, 'body_pb'));
   }
 
-  cite {
-    font-size: rem(18);
-    line-height: rem(32);
-    padding-bottom: 0;
-    font-weight: bold;
+  :is(.lead, .strapline) {
+    font-size: rem(map.get($heading-sizes, 'lead_fs'));
+    line-height: rem(map.get($heading-sizes, 'lead_lh'));
+    padding-bottom: rem(map.get($heading-sizes, 'lead_pb'));
+    max-width: var(--content-max-width);
+    font-weight: 700;
+  }
+
+  small,
+  .small {
+    font-size: rem(map.get($heading-sizes, 'small_fs'));
+    line-height: rem(map.get($heading-sizes, 'small_lh'));
+    padding-bottom: rem(map.get($heading-sizes, 'small_pb'));
+    max-width: var(--content-max-width);
+    font-weight: normal;
+  }
+
+  sub,
+  sup {
+    position: relative;
+    font-size: 0.75em;
+    line-height: 0;
+    vertical-align: baseline;
+  }
+
+  sub {
+    bottom: -0.25em;
+  }
+  sup {
+    top: -0.5em;
+  }
+
+  abbr[title] {
+    text-decoration: underline dotted; // 1
+    cursor: help; // 2
+    text-decoration-skip-ink: none; // 3
+  }
+
+  strong {
+    font-weight: bolder;
+    font-family: var(--font-heading);
+    color: var(--colour-heading);
+  }
+
+  // Address
+
+  address {
+    margin-bottom: 1rem;
     font-style: normal;
+    line-height: inherit;
   }
-}
 
-.stat {
-  font-size: rem(64);
-  line-height: rem(72);
-  font-weight: bold;
-  color: $headings-color;
-  display: block;
+  blockquote {
+  }
 
-  text-decoration: underline;
-  text-underline-offset: 0.75rem;
-  text-decoration-color: var(--colour-secondary);
-  text-decoration-thickness: rem(4);
-  margin-bottom: rem(64);
+  blockquote {
+    margin: 0;
+    quotes: '“' '”' '‘' '’';
+    padding-bottom: rem(48);
+    overflow: hidden;
+
+    p {
+      font-size: rem(24);
+      line-height: rem(32);
+      padding-bottom: 0;
+    }
+
+    & p:first-child:before {
+      content: open-quote;
+    }
+    & p:last-of-type:after {
+      content: close-quote;
+    }
+
+    cite {
+      font-size: rem(18);
+      line-height: rem(32);
+      padding-bottom: 0;
+      font-weight: bold;
+      font-style: normal;
+    }
+  }
+
+  .stat {
+    font-size: rem(64);
+    line-height: rem(72);
+    font-weight: bold;
+    color: $headings-color;
+    display: block;
+
+    text-decoration: underline;
+    text-underline-offset: 0.75rem;
+    text-decoration-color: var(--colour-secondary);
+    text-decoration-thickness: rem(4);
+    margin-bottom: rem(64);
+  }
 }
