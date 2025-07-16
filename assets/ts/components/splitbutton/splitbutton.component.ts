@@ -18,7 +18,7 @@ class iamSplitButton extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css')
       ? document.body.getAttribute('data-core-css')
       : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/splitbutton.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/splitbutton.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -28,15 +28,15 @@ class iamSplitButton extends HTMLElement {
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <div class="split-button">
-      <button class="btn">Button</button>
+      <slot></slot>
       <div class="dropdown">
-        <button class="btn" style="border-left:1px solid navy">
-          <i class="fa fa-caret-down"></i>
+        <button class="btn btn-split">
+          <i class="fa fa-angle-down fa-light"></i>
         </button>
-        <div class="dropdown-content">
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
+        <div class="split-menu">
+          <slot name="menu-item">
+
+          </slot>
         </div>
       </div>
     </div>
@@ -45,7 +45,43 @@ class iamSplitButton extends HTMLElement {
   }
 
   connectedCallback() {
-    
+    const dropdown = this.shadowRoot.querySelector('.split-menu');
+    const splitBtn = this.shadowRoot.querySelector('.btn-split')
+    const html = document.querySelector('html');
+    const mainButton = this.querySelector('.btn');
+
+    // if (mainButton.disabled) {
+    //   splitBtn.disabled = true;
+    // }
+
+    splitBtn.className = `btn btn-${this.getAttribute('variant') || 'primary'}`;
+
+    if (mainButton.disabled) {
+      splitBtn.disabled = true;
+    }
+
+    if (mainButton.classList.contains('btn-sm')) {
+      console.log('hit if');
+      splitBtn.classList.add('btn-sm');
+    }
+
+    splitBtn.addEventListener('click', function() {
+      if (!dropdown.classList.contains('open')) {
+        dropdown.classList.add('open');
+      } else {
+        dropdown.classList.remove('open');
+      }
+    });
+
+    splitBtn.addEventListener('click', function(event) {
+      event.stopPropagation(event);
+    });
+
+    html.addEventListener('click', function() {
+      if (dropdown.classList.contains('open')) {
+        dropdown.classList.remove('open');
+      }
+    });
   }
 }
 

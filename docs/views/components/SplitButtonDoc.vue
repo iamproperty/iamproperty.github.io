@@ -23,103 +23,83 @@ space available. The menu should be able to be dismissed by clicking anywhere ou
       </p>
     </div>
 
-    <SplitButton>
-      <button>Hello</button>
-    </SplitButton>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="container">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h2>HTML</h2></summary>
-          <pre><code class="html">{{`<!-- Primary button -->
-<button class="btn btn-primary">Button text</button>
-<a href="/" class="btn btn-primary">Button text</a>
-<a href="/" class="btn btn-primary colour-primary">Button text</a><!-- change the colour -->
-
-<!-- Primary button with icon to the left -->
-<a href="/components/buttons" class="btn btn-primary fa-plus-large">Lorum ipsum</a>
-
-<!-- Primary button with icon to the right -->
-<a href="/components/buttons" class="btn btn-primary"><span>Lorum ipsum</span><i class="fa-plus-large"></i></a>
-
-
-<!-- Primary button (with interactive prompt) -->
-<a href="/components/buttons" class="btn btn-primary btn--prompt">Lorum ipsum</a>
-
-<!-- Primary button (small) -->
-<a href="/components/buttons" class="btn btn-primary btn-sm">Lorum ipsum</a>
-
-<!-- Primary button (compact) -->
-<a href="/components/buttons" class="btn btn-primary btn-compact fa-plus-large">Lorum ipsum</a>
-
-<!-- Primary button (complete) -->
-<a href="/components/buttons" class="btn btn-primary colour-success">Lorum ipsum</a>
-
-<!-- Secondary button -->
-<a href="/components/buttons" class="btn btn-secondary">Lorum ipsum</a>
-
-<!-- Secondary button (opening filter dialog pop-over) -->
-<div class="dialog__wrapper">
-  <button class="btn btn-secondary"><i class="fa-light fa-user"></i>Individual</button>
-  <dialog><p>Dialog content</p></dialog>
-</div>
-
-<!-- Secondary button (opening filter dialog modal) -->
-<button class="btn btn-secondary btn-filter" data-model="example1">Filter by</button>
-<dialog id="example1"><p>Dialog content</p></dialog>
-        
-<!-- Secondary button (form field acting as a button) -->
-<div class="btn btn-secondary">
-  <select>
-    <option>Sort by</option>
-    <option>Option 1</option>
-    <option>Option 2</option>
-  </select>
-</div>
-
-<!-- Secondary button (compact) -->
-<a href="/components/buttons" class="btn btn-secondary colour-secondary btn-compact fa-save">Lorum ipsum</a>
-        
-<!-- Tertiary -->
-<a href="/components/buttons" class="btn btn-tertiary">Lorum ipsum</a>
-`}}</code></pre>
-        </details>
-      </Tabs>
-    </div>
-    <div class="bg-light version-control">
-      <div class="container">
-        <table>
-          <thead>
-            <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Notable updates</th>
-            </tr>
-          </thead>
-          <tbody class="text-body">
-            <tr>
-              <td>V1 added</td>
-              <td>20.02.2025</td>
-              <td>N/A</td>
-            </tr>
-          </tbody>
-        </table>
-        <a href="/pdfs/buttons-links.pdf" download>Download latest designs</a>
+    <div class="container pb-5">
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Primary state</p>
+          <SplitButton>
+            <button class="btn btn-primary"><i class="fa-solid fa-reply"></i> Primary action</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+          </SplitButton>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Disabled state</p>
+          <SplitButton>
+            <button class="btn btn-primary" disabled>Primary action</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+          </SplitButton>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Small version</p>
+          <SplitButton>
+            <button class="btn btn-primary btn-sm">Primary action</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+          </SplitButton>
+        </div>
       </div>
     </div>
-  </main>
+
+    <div class="container pb-0">
+      <h3>Secondary</h3>
+      <p>
+        Use a secondary split button to add related actions to a secondary action on a page. It can either be paired
+        alongside a primary button on used on it’s own to support a secondary actions for the user.
+      </p>
+
+      <p>
+        A filter overlay of 85% brightness will be applied to the default states for the active state.
+      </p>
+
+      <p>
+        The menu should open to the below and to the right by default but should change position depending on screen
+        space available. The menu should be able to be dismissed by clicking anywhere outside the menu
+      </p>
+
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Secondary state</p>
+          <SplitButton variant="secondary">
+            <button class="btn btn-secondary">Primary action</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative action</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative action 2</button>
+          </SplitButton>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Disabled state</p>
+          <SplitButton variant="secondary">
+            <button class="btn btn-secondary" disabled>Primary action</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+          </SplitButton>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <p class="lead pb-2">Small version</p>
+          <SplitButton variant="secondary">
+            <button class="btn btn-secondary btn-sm">Primary action</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+            <button class="split-menu-btn" slot="menu-item">Alternative</button>
+          </SplitButton>
+        </div>
+      </div>
+    </div>
+
+
+
+
+</main>
 </template>
 
 <script>
@@ -134,8 +114,6 @@ space available. The menu should be able to be dismissed by clicking anywhere ou
     components: {
       DSHeader,
       Table,
-      Tabs,
-      Tab,
       SplitButton,
     },
     data() {

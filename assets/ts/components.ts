@@ -25,6 +25,7 @@ const components = [
   'carousel',
   'marketing',
   'barchart',
+  'splitbutton',
 ];
 
 const prefix = 'iam';

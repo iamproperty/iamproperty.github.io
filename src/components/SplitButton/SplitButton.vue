@@ -1,8 +1,7 @@
 <template>
   <!-- Custom element -->
   <iam-splitbutton>
-    <slot></slot>
-
+      <slot></slot>
   </iam-splitbutton>
 </template>
 

@@ -537,6 +537,14 @@ const routes = [
         component: () => import('./views/components/SearchDoc.vue'),
       },
       {
+        path: 'split-button',
+        name: 'Split Button',
+        meta: {
+          title: 'Split Button | Components | iamkey',
+        },
+        component: () => import('./views/components/SplitButtonDoc.vue'),
+      },
+      {
         path: 'stepper',
         name: 'Stepper (Deprecation warning)',
         meta: {
