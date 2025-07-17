@@ -159,10 +159,14 @@
           </Marketing>
           -->
 
-        <Content data-url="http://localhost:8000/wp-json/wp/v2/posts/1">
-          <Marketing class="bg-primary" :data-img="cardImg"><span class="h3">Default content</span></Marketing>
-        </Content>
-      </div>
+          <Content data-url="http://localhost:8080/wp-json/wp/v2/posts/1">
+
+            <Marketing class="bg-primary" :data-img="cardImg"><span class="h3">Default content</span></Marketing>
+            
+          </Content>
+
+
+        </div>
     </main>
     <footer class="bg-light pt-5 pb-5">
       <div class="container">
