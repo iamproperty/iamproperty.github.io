@@ -54,16 +54,28 @@ class iamNotification extends HTMLElement {
     if (!this.querySelector('i')) {
       switch (statusBG) {
         case 'danger':
-          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>');
+          this.insertAdjacentHTML(
+            'beforeend',
+            '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>'
+          );
           break;
         case 'warning':
-          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>');
+          this.insertAdjacentHTML(
+            'beforeend',
+            '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>'
+          );
           break;
         case 'success':
-          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>');
+          this.insertAdjacentHTML(
+            'beforeend',
+            '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>'
+          );
           break;
         default:
-          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>');
+          this.insertAdjacentHTML(
+            'beforeend',
+            '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>'
+          );
       }
     }
 

@@ -9,7 +9,6 @@
   overflow: visible;
 }
 
-
 *,
 *::before,
 *::after {
@@ -20,7 +19,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  
+
   max-width: 30rem;
   margin: auto;
   gap: 1rem;
@@ -45,8 +44,6 @@
   }
 }
 
-
-
 .mh-md {
   display: contents;
 
@@ -55,8 +52,7 @@
   }
 }
 
-:host(.leaderboard-scroll) .mh-md{
-  
+:host(.leaderboard-scroll) .mh-md {
   display: block;
   max-height: calc(var(--leaderboard-height, 25rem) - var(--mh-modifier, 0rem));
 
@@ -65,11 +61,10 @@
   }
 }
 
-
 :host(.hide-podium) .podium {
   display: none;
 }
 
 :host(.hide-leaderboard) .mh-md {
-  display: none!important;
+  display: none !important;
 }
