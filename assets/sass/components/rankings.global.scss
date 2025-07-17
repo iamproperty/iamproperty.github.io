@@ -11,8 +11,6 @@
 }
 
 iam-rankings {
-
-
   table {
     display: block;
     width: calc(100% - 2rem);
@@ -31,7 +29,6 @@ iam-rankings {
   :is(td, th) {
     font-weight: normal;
   }
-
 
   td {
     font-size: rem(28);
@@ -91,7 +88,6 @@ iam-rankings {
   }
 
   tr:has(iam-rank) {
-
     &:before {
       opacity: 0;
     }
@@ -103,8 +99,8 @@ iam-rankings {
     }
   }
 
-  tr:has(+tr.highlighted){
-    border: none!important;
+  tr:has(+ tr.highlighted) {
+    border: none !important;
   }
 
   tr.highlighted {
@@ -112,7 +108,7 @@ iam-rankings {
     margin-block: 1rem;
 
     &:after {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
       display: block;
@@ -120,7 +116,7 @@ iam-rankings {
       z-index: -1;
       margin: -0.75rem;
       border-radius: 0.5rem;
-          box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
     }
   }
 
@@ -129,18 +125,16 @@ iam-rankings {
   }
 
   @each $index, $value in $chart-colors {
-    tr:nth-child(#{$index+1}) progress {
+    tr:nth-child(#{$index + 1}) progress {
       --colour: var(--chart-colour-#{$index}, #{$value});
     }
   }
 }
 
 iam-rankings.hide-progress progress {
-
   display: none;
 }
 
 iam-rankings.hide-value tbody td {
-
   display: none;
 }

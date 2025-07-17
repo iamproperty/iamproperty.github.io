@@ -11,7 +11,6 @@
 }
 
 :host {
-  
   display: block;
   width: 100%;
   max-width: rem(100);
@@ -50,7 +49,6 @@
     line-height: 1 !important;
   }
 
-
   svg {
     position: absolute;
     inset: 0;
@@ -82,9 +80,8 @@
   border-radius: 0 0 4px 4px;
   //overflow: hidden;
 
-
   &:before {
-    content: "1";
+    content: '1';
     position: absolute;
     font-size: rem(72);
     font-weight: bold;
@@ -93,11 +90,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: -1;
-    color: color-mix(in srgb, #FDCB6E, transparent 90%);
+    color: color-mix(in srgb, #fdcb6e, transparent 90%);
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     height: rem(132);
     width: 100%;
@@ -108,9 +105,9 @@
     opacity: 0.2;
 
     z-index: -2;
-    background: #FDCB6E;
+    background: #fdcb6e;
     background: linear-gradient(0deg, rgba(253, 203, 110, 1) 0%, rgba(255, 255, 255, 1) 100%);
-  border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
   }
 
   span {
@@ -126,12 +123,9 @@
   }
 }
 
-
 :host([data-position='1st']),
 :host([data-position='2nd']),
 :host([data-position='3rd']) {
-
-
   position: relative;
   max-width: rem(70);
 
@@ -149,7 +143,6 @@
 }
 
 :host([data-position='1st']:not(.rank--trophy)) {
-
   .rank svg:nth-child(3) {
     display: block;
   }
@@ -160,7 +153,7 @@
     font-family: var(--font-heading);
 
     &:before {
-      color: color-mix(in srgb, #F6B818, transparent 90%);
+      color: color-mix(in srgb, #f6b818, transparent 90%);
     }
 
     &:after {
@@ -169,17 +162,15 @@
   }
 }
 
-
 :host([data-position='2nd']) {
-
   .rank svg:nth-child(2) {
     display: block;
   }
 
   .title {
     &:before {
-      content: "2";
-      color: color-mix(in srgb, #A9A9A9, transparent 90%);
+      content: '2';
+      color: color-mix(in srgb, #a9a9a9, transparent 90%);
     }
 
     &:after {
@@ -189,24 +180,21 @@
 }
 
 :host([data-position='3rd']) {
-
   .rank svg:nth-child(1) {
     display: block;
   }
 
   .title {
     &:before {
-      content: "3";
+      content: '3';
     }
   }
 }
 
 :host([data-position='1st'].rank--trophy) {
-
   max-width: rem(100);
 
   .rank {
-      
     aspect-ratio: 1/1;
     max-width: rem(100);
     margin-bottom: 0;
@@ -215,18 +203,15 @@
   .rank svg:nth-child(4) {
     display: block;
   }
-
 }
 
 :host([data-position='1st']:not(.rank--medal)),
 :host([data-position='2nd']:not(.rank--medal)),
 :host([data-position='3rd']:not(.rank--medal)) {
-
   aspect-ratio: 8/10;
   max-width: rem(125);
-  
-  .wrapper {
 
+  .wrapper {
     width: 100%;
     height: 100%;
     max-width: rem(125);
@@ -234,7 +219,6 @@
     align-items: center;
 
     .rank {
-
       max-width: 56%;
       margin-bottom: 1rem;
     }
@@ -244,53 +228,44 @@
       position: absolute;
       inset: 0;
 
-      svg:nth-child(2){
-        
+      svg:nth-child(2) {
         display: none;
       }
     }
   }
 }
 
-
 :host([data-position='1st']:not(.rank--medal).rank--trophy) {
-
   aspect-ratio: 8/10;
   max-width: rem(150);
   .wrapper {
-    
     max-width: rem(150);
     max-height: rem(180);
     margin-top: -2rem;
   }
   .rank {
-      
     aspect-ratio: 1/1;
     max-width: 80%;
     margin-bottom: 1rem;
   }
 
   .wrapper {
-
     .base {
-
-      svg:nth-child(1){
-        
+      svg:nth-child(1) {
         display: none;
       }
-      svg:nth-child(2){
-        
+      svg:nth-child(2) {
         display: block;
       }
     }
   }
-  
+
   .title {
     font-weight: bold;
 
     &:before {
       content: 1;
-      color: color-mix(in srgb, #F6B818, transparent 90%);
+      color: color-mix(in srgb, #f6b818, transparent 90%);
     }
 
     &:after {

@@ -6,14 +6,14 @@
 
 ### Properties
 
-| Option | Type   | Default Value | Description                                     |
-| ------ | ------ | ------------- | ----------------------------------------------- |
-|        | String | -             |                                                 |
-|        | String | -             |                                                 |
+| Option | Type   | Default Value | Description |
+| ------ | ------ | ------------- | ----------- |
+|        | String | -             |             |
+|        | String | -             |             |
 
 ### Slots
 
-| Option     | Default Value | Description                                                 |
-| ---------- | ------------- | ----------------------------------------------------------- |
-|            | -             |                                                             |
-|            | -             |                                                             |
+| Option | Default Value | Description |
+| ------ | ------------- | ----------- |
+|        | -             |             |
+|        | -             |             |

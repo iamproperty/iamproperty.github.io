@@ -1,10 +1,10 @@
-// @ts-nocheck
+import iamMenu from '../menu/menu.component';
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
   event: 'customElementRegistered',
-  element: 'splitbutton',
+  element: 'split-button',
 });
 
 class iamSplitButton extends HTMLElement {
@@ -18,7 +18,7 @@ class iamSplitButton extends HTMLElement {
     const coreCSS = document.body.hasAttribute('data-core-css')
       ? document.body.getAttribute('data-core-css')
       : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/splitbutton.component.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/split-button.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
@@ -30,58 +30,39 @@ class iamSplitButton extends HTMLElement {
     <div class="split-button">
       <slot></slot>
       <div class="dropdown">
-        <button class="btn btn-split">
+        <button class="btn btn-split" part="dropdown" popovertarget="actions" style="anchor-name: --anchor-el;" title="Further actions">
           <i class="fa fa-angle-down fa-light"></i>
         </button>
-        <div class="split-menu">
+
+        <iam-menu id="actions" style="position-anchor: --anchor-el;" popover>
           <slot name="menu-item">
 
           </slot>
-        </div>
+        </iam-menu>
+
       </div>
     </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  connectedCallback() {
+  connectedCallback(): void {
     const dropdown = this.shadowRoot.querySelector('.split-menu');
-    const splitBtn = this.shadowRoot.querySelector('.btn-split')
+    const splitBtn = this.shadowRoot.querySelector('.btn-split');
     const html = document.querySelector('html');
     const mainButton = this.querySelector('.btn');
 
-    // if (mainButton.disabled) {
-    //   splitBtn.disabled = true;
-    // }
+    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
-    splitBtn.className = `btn btn-${this.getAttribute('variant') || 'primary'}`;
+    splitBtn.className = `${mainButton.className} btn-split`;
 
     if (mainButton.disabled) {
       splitBtn.disabled = true;
     }
 
     if (mainButton.classList.contains('btn-sm')) {
-      console.log('hit if');
       splitBtn.classList.add('btn-sm');
     }
-
-    splitBtn.addEventListener('click', function() {
-      if (!dropdown.classList.contains('open')) {
-        dropdown.classList.add('open');
-      } else {
-        dropdown.classList.remove('open');
-      }
-    });
-
-    splitBtn.addEventListener('click', function(event) {
-      event.stopPropagation(event);
-    });
-
-    html.addEventListener('click', function() {
-      if (dropdown.classList.contains('open')) {
-        dropdown.classList.remove('open');
-      }
-    });
   }
 }
 

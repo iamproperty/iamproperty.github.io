@@ -32,22 +32,29 @@ class iamRankings extends HTMLElement {
     <div class="mh-md" part="leaderboard"><slot></slot></div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
-    
+
     // insert extra CSS
     if (!document.getElementById('rankingsGlobal'))
       document.head.insertAdjacentHTML('beforeend', `<style id="rankingsGlobal">${loadExtraCSS}</style>`);
   }
 
   connectedCallback(): void {
-
-    
     const firstText = this.shadowRoot?.querySelector('.first-position');
     const secondText = this.shadowRoot?.querySelector('.second-position');
     const thirdText = this.shadowRoot?.querySelector('.third-position');
 
-    firstText?.setAttribute('data-title', this.querySelector('tbody tr:nth-child(1) :is(td,th):nth-child(1)')?.textContent);
-    secondText?.setAttribute('data-title', this.querySelector('tbody tr:nth-child(2) :is(td,th):nth-child(1)')?.textContent);
-    thirdText?.setAttribute('data-title', this.querySelector('tbody tr:nth-child(3) :is(td,th):nth-child(1)')?.textContent);
+    firstText?.setAttribute(
+      'data-title',
+      this.querySelector('tbody tr:nth-child(1) :is(td,th):nth-child(1)')?.textContent
+    );
+    secondText?.setAttribute(
+      'data-title',
+      this.querySelector('tbody tr:nth-child(2) :is(td,th):nth-child(1)')?.textContent
+    );
+    thirdText?.setAttribute(
+      'data-title',
+      this.querySelector('tbody tr:nth-child(3) :is(td,th):nth-child(1)')?.textContent
+    );
 
     const max = this.hasAttribute('data-max') ? this.getAttribute('data-max') : 100;
     this.querySelectorAll('tbody tr').forEach((element) => {
@@ -57,14 +64,11 @@ class iamRankings extends HTMLElement {
         element.querySelector(':first-child')?.innerHTML += `<progress max="${max}" value="${value}"></progress>`;
     });
 
-
-    if(!this.classList.contains('hide-gold')){
-
+    if (!this.classList.contains('hide-gold')) {
       const firstRow = this.querySelector('tbody tr th');
 
-      firstRow?.insertAdjacentHTML('afterbegin',`<iam-rank class="rank--medal first-position">1st</iam-rank>`);
+      firstRow?.insertAdjacentHTML('afterbegin', `<iam-rank class="rank--medal first-position">1st</iam-rank>`);
     }
-
   }
 }
 

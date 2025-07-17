@@ -1,8 +1,8 @@
 <template>
   <!-- Custom element -->
-  <iam-splitbutton>
-      <slot></slot>
-  </iam-splitbutton>
+  <iam-split-button>
+    <slot></slot>
+  </iam-split-button>
 </template>
 
 <script>
@@ -12,9 +12,10 @@
     name: 'SplitButton',
     mounted() {
       this.$nextTick(function () {
-        import(`../../../assets/js/components/splitbutton/splitbutton.component.js`)
+        import(`../../../assets/js/components/split-button/split-button.component.js`)
           .then((module) => {
-            if (!window.customElements.get(`iam-splitbutton`)) window.customElements.define(`iam-splitbutton`, module.default);
+            if (!window.customElements.get(`iam-split-button`))
+              window.customElements.define(`iam-split-button`, module.default);
           })
           .catch((err) => {
             console.log(err.message);

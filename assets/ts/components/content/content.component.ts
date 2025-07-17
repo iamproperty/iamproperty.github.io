@@ -1,4 +1,3 @@
-
 class iamContent extends HTMLElement {
   constructor() {
     super();
@@ -24,14 +23,12 @@ class iamContent extends HTMLElement {
   }
 
   connectedCallback(): void {
-    
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const component = this;
     const url = this.getAttribute('data-url');
 
-    const registerComponents = (contentComponent):void => {
-
-      const components = ['card','marketing','notification'];
+    const registerComponents = (contentComponent): void => {
+      const components = ['card', 'marketing', 'notification'];
 
       const assetLocation = document.body.hasAttribute('data-assets-location')
         ? document.body.getAttribute('data-assets-location')
@@ -39,55 +36,38 @@ class iamContent extends HTMLElement {
 
       // Load components - Each component will load once the first of its type has been loaded
       components.forEach((component) => {
-
         if (component == 'notification') {
-
           document.querySelectorAll('[data-notification]').forEach((element) => {
-
-            element.outerHTML = element.outerHTML.replace(/<div/g, '<iam-notification').replace(/<\/div>/g, '</iam-notification>');
+            element.outerHTML = element.outerHTML
+              .replace(/<div/g, '<iam-notification')
+              .replace(/<\/div>/g, '</iam-notification>');
           });
         }
 
-        if(contentComponent.getElementsByTagName(`iam-${component}`).length === 0)
-          return;
+        if (contentComponent.getElementsByTagName(`iam-${component}`).length === 0) return;
 
-        import(/* @vite-ignore */`${assetLocation}/js/components/${component}/${component}.component.js`).then(module => {
-          
-          if (!window.customElements.get(`iam-${component}`))
-            window.customElements.define(`iam-${component}`, module.default);
-        }).catch((err) => {
-          console.log(err.message);
-        });
-
-
-
-
-
-
-
-
+        import(/* @vite-ignore */ `${assetLocation}/js/components/${component}/${component}.component.js`)
+          .then((module) => {
+            if (!window.customElements.get(`iam-${component}`))
+              window.customElements.define(`iam-${component}`, module.default);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
       });
-    }
+    };
 
-    if(url){
-        
+    if (url) {
       const newXHRRequest = new XMLHttpRequest();
-      newXHRRequest.open(
-        "GET",
-        url,
-        true
-      );
+      newXHRRequest.open('GET', url, true);
 
-      newXHRRequest.onload = function(): void {
-
+      newXHRRequest.onload = function (): void {
         if (this.status === 200) {
           const response = JSON.parse(this.responseText);
           component.innerHTML = `${response.content.rendered}`;
 
           registerComponents(component);
         }
-
-
       };
 
       newXHRRequest.send();
