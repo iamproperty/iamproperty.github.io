@@ -17,7 +17,6 @@
   import Thumb3 from '../../img/home-thumb-3.png';
 
   import cardImg from '../../img/cardImg.png';
-
 </script>
 
 <template>
@@ -65,31 +64,31 @@
 
       <span class="h4">Featured</span>
       <Carousel class="reset-colours hide-controls" data-smcols="2" data-mdcols="3">
-          <div>
-            <a href="/client-onbaording">
-              <Card :data-image="Thumb1"
-                >Get moving faster <span>Stay complaint, build revenue and get paid quicker.</span
-                ><span slot="badges" class="badge bg-success">End-to-End onboarding</span></Card
-              >
-            </a>
-          </div>
-          <div>
-            <a href="/client-onbaording">
-              <Card :data-image="Thumb2"
-                >Make your own rules
-                <span>Run your agency your way, with a system that works for you.</span>
-                <span slot="badges" class="badge bg-success">CRM Service</span></Card
-              >
-            </a>
-          </div>
-          <div>
-            <a href="/client-onbaording">
-              <Card :data-image="Thumb3"
-                >Discover the power of auction<span>And offer a service that 36% of your clients desire.</span>
-                <span slot="badges" class="badge bg-success">Auction</span></Card
-              >
-            </a>
-          </div>
+        <div>
+          <a href="/client-onbaording">
+            <Card :data-image="Thumb1"
+              >Get moving faster <span>Stay complaint, build revenue and get paid quicker.</span
+              ><span slot="badges" class="badge bg-success">End-to-End onboarding</span></Card
+            >
+          </a>
+        </div>
+        <div>
+          <a href="/client-onbaording">
+            <Card :data-image="Thumb2"
+              >Make your own rules
+              <span>Run your agency your way, with a system that works for you.</span>
+              <span slot="badges" class="badge bg-success">CRM Service</span></Card
+            >
+          </a>
+        </div>
+        <div>
+          <a href="/client-onbaording">
+            <Card :data-image="Thumb3"
+              >Discover the power of auction<span>And offer a service that 36% of your clients desire.</span>
+              <span slot="badges" class="badge bg-success">Auction</span></Card
+            >
+          </a>
+        </div>
       </Carousel>
     </Header>
 
@@ -100,8 +99,8 @@
 
           <div class="mh-md-lg d-flex">
             <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-              labore et dolore magna aliquyam erat, sed diam voluptua.
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+              et dolore magna aliquyam erat, sed diam voluptua.
               <a href="/find">Find out more</a>.
             </p>
 
@@ -111,9 +110,7 @@
                   <Card
                     >Marketing Toolkit
                     <span>Drive instructions, with smarter prospecting.</span>
-                    <span slot="badges" class="badge bg-warning"
-                      ><i class="fa-regular fa-sparkles"></i> New</span
-                    ></Card
+                    <span slot="badges" class="badge bg-warning"><i class="fa-regular fa-sparkles"></i> New</span></Card
                   >
                 </a>
               </div>
@@ -150,9 +147,8 @@
           </div>
         </div>
       </div>
-        <div class="mb-4 md-col-start-9 md-col-end-12 d-flex">
-          
-          <!--
+      <div class="mb-4 md-col-start-9 md-col-end-12 d-flex">
+        <!--
           <Marketing class="mh-100 mw-100 m-0" :data-img="cardImg">
             <h2 class="h3">Unlock more revenue with our Compliance module</h2>
             <p>
@@ -163,7 +159,7 @@
           </Marketing>
           -->
 
-          <Content data-url="http://localhost:8000/wp-json/wp/v2/posts/1">
+          <Content data-url="http://localhost:8080/wp-json/wp/v2/posts/1">
 
             <Marketing class="bg-primary" :data-img="cardImg"><span class="h3">Default content</span></Marketing>
             

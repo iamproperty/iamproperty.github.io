@@ -1,0 +1,77 @@
+@use '../_func.scss' as *;
+@import '../elements/buttons';
+
+// Main button
+::slotted(button:not([slot])) {
+  float: left;
+  margin-right: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right: none !important;
+  padding-right: 1rem !important;
+}
+
+// Secondary buttons
+::slotted(button[slot]) {
+  background: none !important;
+  display: block !important;
+  float: none !important;
+  border: none !important;
+}
+
+// Drop down button
+.split-button {
+  position: relative;
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+
+    button {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 1px solid rgba(0, 0, 0, 0.2);
+      padding-right: 0;
+      padding-left: 0.75rem;
+      margin-bottom: 0;
+
+      .fa-light {
+        &::before {
+          content: '\f107';
+        }
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}
+
+// Secondary button
+.btn-secondary:not([disabled]) {
+  &:hover,
+  &:active,
+  &:focus {
+    i {
+      color: white !important;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .btn-secondary.btn-split {
+    border-left-color: white !important;
+
+    &:hover,
+    &:active,
+    &:focus {
+      i {
+        color: black !important;
+      }
+    }
+  }
+}
