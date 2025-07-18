@@ -1323,7 +1323,6 @@ $optionalText: 'true' !default;
   // #endregion
 }
 
-
 // #region datalist
 :is(iam-advanced-select, iam-search) {
   position: relative;
@@ -1354,9 +1353,8 @@ $optionalText: 'true' !default;
   }
 }
 :is(iam-advanced-select, iam-search) datalist {
-
   &:empty {
-    display: none!important;
+    display: none !important;
   }
 
   z-index: 99;
@@ -1375,10 +1373,9 @@ $optionalText: 'true' !default;
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
 
   option {
-  
     background-color: white;
     padding: 0.5rem;
-    color: blue!important;
+    color: blue !important;
     cursor: pointer;
     background: unset !important;
     border: unset !important;

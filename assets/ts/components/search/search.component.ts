@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { safeID, resolvePath, isTraversable } from '../../modules/helpers';
-import advancedSelect from '../../modules/advanced-select'
+import advancedSelect from '../../modules/advanced-select';
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
@@ -75,8 +75,6 @@ class iamSearch extends HTMLElement {
 
       displayInputField.setAttribute('list', listID);
     }
-
-    
 
     advancedSelect(this, displayInputField, datalist);
 

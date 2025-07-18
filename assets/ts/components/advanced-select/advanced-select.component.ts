@@ -1,4 +1,4 @@
-import advancedSelect from '../../modules/advanced-select'
+import advancedSelect from '../../modules/advanced-select';
 import { safeID, resolvePath, isTraversable } from '../../modules/helpers';
 
 // Data layer Web component created
@@ -44,7 +44,6 @@ class iamAdvancedSelect extends HTMLElement {
   }
 
   connectedCallback(): void {
-    
     // Clone original input field, re-name and use for display purposes
     const inputField = this.querySelector('input');
     const displayInputField = inputField.cloneNode();
@@ -52,8 +51,6 @@ class iamAdvancedSelect extends HTMLElement {
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
     let datalist = this.querySelector('datalist');
-
-
 
     inputField.after(displayInputField);
 
@@ -69,7 +66,6 @@ class iamAdvancedSelect extends HTMLElement {
 
       displayInputField.setAttribute('list', listID);
     }
-
 
     advancedSelect(this, displayInputField, datalist);
   }

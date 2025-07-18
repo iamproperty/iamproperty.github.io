@@ -5,8 +5,9 @@
     </DSHeader>
 
     <p>Selects allow users to select one or multiple options from a list of options.</p>
-    <p>A selected option can represent a value in a form, or can be used as an action to filter or sort existing content.</p>
-    
+    <p>
+      A selected option can represent a value in a form, or can be used as an action to filter or sort existing content.
+    </p>
 
     <h2>Select types</h2>
 
@@ -56,7 +57,6 @@
       <a href="/form/radio">radio buttons</a> to present options instead.
     </p>
 
-
     <label class="md-col-end-4 mb-5">
       Property type
       <select name="select" required>
@@ -67,9 +67,6 @@
         <option>Option 4</option>
       </select>
     </label>
-
-
-
 
     <h3>Anatomy</h3>
     <p>Selects are composed of 4 required sections and 6 optional sections.</p>
@@ -97,7 +94,6 @@
       <li>Selecting an option should add that value to the field and close the dropdown.</li>
     </ul>
 
-
     <h3>States</h3>
     <div class="container visualtest">
       <div class="md-col-end-5 pb-5">
@@ -112,7 +108,6 @@
             <option>Option 4</option>
           </select>
         </label>
-
       </div>
       <div class="md-col-start-6 md-col-end-10 pb-5">
         <p class="lead pb-2">Active state</p>
@@ -134,13 +129,11 @@
           <select name="select" required>
             <option value="">Select property address</option>
             <option>Option 1</option>
-            <option selected>
-12 Oak Road, Newcastle upon Tyne, NE3 4Q</option>
+            <option selected>12 Oak Road, Newcastle upon Tyne, NE3 4Q</option>
             <option>Option 3</option>
             <option>Option 4</option>
           </select>
         </label>
-
       </div>
       <div class="md-col-start-6 md-col-end-10 pb-5">
         <p class="lead pb-2">Inactive - error state</p>
@@ -179,7 +172,8 @@
     </p>
 
     <p>
-      The options are presented in a scrollable menu (which has a max height). The field can also be used to type and filter options in the scrollable menu
+      The options are presented in a scrollable menu (which has a max height). The field can also be used to type and
+      filter options in the scrollable menu
     </p>
 
     <a href="/components/multiselect" class="btn btn-primary">See multiselect component</a>
@@ -192,7 +186,8 @@
     </p>
 
     <p>
-      Advanced selects are useful when there are a lot of options in the list. The search functionality makes it simpler for the user to find the desired option quicker than a standard select
+      Advanced selects are useful when there are a lot of options in the list. The search functionality makes it simpler
+      for the user to find the desired option quicker than a standard select
     </p>
 
     <a href="/components/advanced-select" class="btn btn-primary">See advanced select component</a>
