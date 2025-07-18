@@ -473,6 +473,15 @@ const routes = [
         searchterms: 'postcode',
       },
       {
+        path: 'advanced-select',
+        name: 'Advanced select',
+        meta: {
+          title: 'Advanced Select | Components | iamkey',
+        },
+        component: () => import('./views/components/AdvancedSelectDoc.vue'),
+        searchterms: '',
+      },
+      {
         path: 'applied-filters',
         name: 'Applied Filters (Beta)',
         meta: {

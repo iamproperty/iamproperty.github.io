@@ -1322,3 +1322,86 @@ $optionalText: 'true' !default;
   }
   // #endregion
 }
+
+
+// #region datalist
+:is(iam-advanced-select, iam-search) {
+  position: relative;
+  display: block;
+
+  label {
+    position: relative;
+  }
+
+  input {
+    padding-right: 3rem;
+
+    &::placeholder {
+      color: pink;
+    }
+  }
+
+  .empty {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 3.75rem;
+    border: none;
+    background: none;
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
+}
+:is(iam-advanced-select, iam-search) datalist {
+
+  &:empty {
+    display: none!important;
+  }
+
+  z-index: 99;
+  top: 100%;
+  position: absolute;
+  background-color: white;
+  border-top: none;
+  font-family: sans-serif;
+  padding: 0.5rem;
+  max-height: 10rem;
+  overflow-y: auto;
+  width: 100%;
+  max-width: var(--input-max-width, 50rem);
+  border: none !important;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+
+  option {
+  
+    background-color: white;
+    padding: 0.5rem;
+    color: blue!important;
+    cursor: pointer;
+    background: unset !important;
+    border: unset !important;
+    color: var(--colour-primary) !important;
+    font-weight: inherit !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    line-height: rem(19) !important;
+    margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
+    padding-block: var(--menu-item-padding, 0.5rem) !important;
+    width: var(--menu-item-width, 100%) !important;
+    max-width: var(--menu-item-width, 100%) !important;
+    text-align: var(--menu-item-text-align, left) !important;
+
+    &:is(:hover, :focus) {
+      background: var(--colour-light) !important;
+      border-radius: 0.25rem !important;
+    }
+
+    &:active {
+      background: rgba(224, 224, 224, 1) !important;
+      border-radius: 0.25rem !important;
+    }
+  }
+}
+// #endregion

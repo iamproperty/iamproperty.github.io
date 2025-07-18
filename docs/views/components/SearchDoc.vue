@@ -7,17 +7,10 @@
   import Search from '@/components/Search/Search.vue';
   import VueReadme from '@/components/Multiselect/README.md';
   import WebReadme from '~/ts/components/multiselect/README.md';
-
-
-
-
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
-
-
-import searchAnatomy from '../../img/search-anatomy.png';
-
+  import searchAnatomy from '../../img/search-anatomy.png';
 
 </script>
 
@@ -77,7 +70,7 @@ import searchAnatomy from '../../img/search-anatomy.png';
             >Property address
             <span>
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              <span class="suffix fa-regular fa-chevron-down"></span>
+              <span class="suffix fa-regular fa-search"></span>
             </span>
           </label>
           <datalist id="properties">
@@ -99,7 +92,7 @@ import searchAnatomy from '../../img/search-anatomy.png';
             >Property address
             <span>
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              <span class="suffix fa-regular fa-chevron-down"></span>
+              <span class="suffix fa-regular fa-search"></span>
             </span>
           </label>
           <datalist id="properties">
@@ -114,53 +107,6 @@ import searchAnatomy from '../../img/search-anatomy.png';
       </div>
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h2 class="mt-4">Behaviour</h2>
-    <ul>
-      <li>
-        Selecting the field should activate the dropdown and set the field to active so the user can begin typing.
-      </li>
-      <li>Selecting the field on mobile should show both the dropdown and keyboard.</li>
-      <li>All valid options from the pre-defined list should be shown in the dropdown below.</li>
-      <li>Typing in the field should begin filtering options that match the term in the dropdown.</li>
-      <li>Selecting an option should add that value to the field and close the dropdown.</li>
-      <li>[data-url] is used for the endpoint address</li>
-      <li>A datalist can be added to provide search values before calling the endpoint</li>
-      <li>
-        Dynamic events can be added to enhance functionalitity i.e. triggering the parent form to submit when a datalist
-        value is selected
-      </li>
-      <li>
-        [data-schema] & [data-value-schema] & [data-display-schema] can be used to change the values used from the
-        endpoint
-      </li>
-      <li>Typing in 3 characters will trigger an ajax call, the same call can't be made twice</li>
-      <li>The ajax call will populate the datalist with new items and will not remove existing items</li>
-      <li>A second hidden input field is created to hide values like ID's</li>
-      <li>We should be allowed to submit the form unless data-prevent-submit is set.</li>
-    </ul>
 
     <h2 class="mt-5">Ajax example</h2>
 
@@ -217,41 +163,132 @@ import searchAnatomy from '../../img/search-anatomy.png';
       </form>
     </div>
 
-    <div class="container pt-5">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h3>Web component</h3></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h3>Vue component</h3></summary>
-          <VueReadme></VueReadme>
-        </details>
-      </Tabs>
-    </div>
 
-    <div class="bg-light version-control mt-5">
-      <div class="container">
+
+
+
+
+
+
+
+
+
+    <Integration component="search" componentName="search">
+      <template #web-component>
+        <pre><code>{{`<iam-search data-url="/existing.json?search=" data-prevent-submit="">
+  <label>Search existing transactions <span><input type="hidden" name="client" autocomplete="off" aria-autocomplete="none" required=""><input type="text" name="clientAlt" autocomplete="off" aria-autocomplete="none" required=""><span class="suffix fa-regular fa-search" aria-hidden="true"></span></span></label>
+  <datalist id="properties"></datalist>
+</iam-search>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Search from '@/components/Search/Search.vue</script>
+
+<Search data-url="/existing.json?search=" data-prevent-submit="">
+  <label>Search existing transactions <span><input type="hidden" name="client" autocomplete="off" aria-autocomplete="none" required=""><input type="text" name="clientAlt" autocomplete="off" aria-autocomplete="none" required=""><span class="suffix fa-regular fa-search" aria-hidden="true"></span></span></label>
+  <datalist id="properties"></datalist>
+</Search>
+`}}</code></pre>
+      </template>
+
+      
+
+      <template #attr>
         <table>
           <thead>
             <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Notable updates</th>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
             </tr>
           </thead>
-          <tbody class="text-body">
+          <tbody>
             <tr>
-              <td>V1 added</td>
-              <td>18.03.2024</td>
-              <td>N/A</td>
+              <th>data-url</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>The URL endpoint used to populate the the datalist</td>
+            </tr>
+            <tr>
+              <th>data-schema</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>How the endpoint should be read</td>
+            </tr>
+            <tr>
+              <th>data-value-schema</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>How the endpoint should save the data as a value</td>
+            </tr>
+            <tr>
+              <th>data-display-schema</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>How the endpoint should display the data</td>
+            </tr>
+            <tr>
+              <th>data-prevent-submit</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>Stop the form from submitting so the Ajax can be used instead</td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/select.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+      </template>
+
+      <template #criteria>
+        <ul>
+          <li>
+            Selecting the field should activate the dropdown and set the field to active so the user can begin typing.
+          </li>
+          <li>Selecting the field on mobile should show both the dropdown and keyboard.</li>
+          <li>All valid options from the pre-defined list should be shown in the dropdown below.</li>
+          <li>Typing in the field should begin filtering options that match the term in the dropdown.</li>
+          <li>Selecting an option should add that value to the field and close the dropdown.</li>
+          <li>[data-url] is used for the endpoint address</li>
+          <li>A datalist can be added to provide search values before calling the endpoint</li>
+          <li>
+            Dynamic events can be added to enhance functionalitity i.e. triggering the parent form to submit when a datalist
+            value is selected
+          </li>
+          <li>
+            [data-schema] & [data-value-schema] & [data-display-schema] can be used to change the values used from the
+            endpoint
+          </li>
+          <li>Typing in 3 characters will trigger an ajax call, the same call can't be made twice</li>
+          <li>The ajax call will populate the datalist with new items and will not remove existing items</li>
+          <li>A second hidden input field is created to hide values like ID's</li>
+          <li>We should be allowed to submit the form unless data-prevent-submit is set.</li>
+        </ul>
+      </template>
+
+    </Integration>
+
+    <Versions pdf="/pdfs/search.pdf">
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
+            <td>V1 added</td>
+            <td>21.05.2025</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </Versions>
   </main>
 </template>
 

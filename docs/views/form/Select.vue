@@ -195,7 +195,7 @@
       Advanced selects are useful when there are a lot of options in the list. The search functionality makes it simpler for the user to find the desired option quicker than a standard select
     </p>
 
-    <a href="/components/search" class="btn btn-primary">See search component</a>
+    <a href="/components/advanced-select" class="btn btn-primary">See advanced select component</a>
 
     <!--
   <div class="container">
