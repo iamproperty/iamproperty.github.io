@@ -110,6 +110,7 @@
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" required />
               <span class="suffix fa-regular fa-search"></span>
             </span>
+            <span class="hint-text">Enter 3 or more characters</span>
           </label>
           <datalist id="properties"></datalist>
         </Search>

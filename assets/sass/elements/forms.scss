@@ -256,7 +256,7 @@ $optionalText: 'true' !default;
     padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
     font-size: var(--input-fs, #{rem(16)});
     line-height: var(--input-lh, #{rem(20)});
-    color: var(--colour-body);
+    color: var(--colour-heading);
     background-color: var(--colour-canvas-2);
     background-clip: padding-box;
     border: 2px solid var(--colour-primary);
@@ -280,9 +280,12 @@ $optionalText: 'true' !default;
     &:is(:focus, .focus):not(:disabled) {
       border-color: var(--colour-info);
       outline: 0;
-      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
     }
 
+    &:is(:focus, .focus):not(:disabled):not(:invalid) {
+      
+      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+    }
     // Add some height to date inputs on iOS
     // https://github.com/twbs/bootstrap/issues/23307
     // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
@@ -1334,24 +1337,44 @@ $optionalText: 'true' !default;
 
   input {
     padding-right: 3rem;
-
-    &::placeholder {
-      color: pink;
-    }
   }
 
   .empty {
+
     position: absolute;
-    bottom: 0.5rem;
+    bottom: 0.4rem;
     right: 3.75rem;
-    border: none;
-    background: none;
+    margin: 0;
+    padding-bottom: 0.2rem;
+
+    :not(:hover,:focus){
+      border: none;
+    }
 
     i {
       font-size: 1.5rem;
     }
   }
+
+  label:after,
+  .hint-text {
+    position: absolute;
+    top: 100%;
+  }
 }
+
+.was-validated :is(iam-advanced-select, iam-search) label:has(:is(input:not([type=radio]):not([type=checkbox]), select)){
+  margin-bottom: 2.5rem;
+
+  input {
+    background: none!important;
+  }
+
+  &:has(:invalid, .is-invalid) .hint-text { 
+    display: none;
+  }
+}
+
 :is(iam-advanced-select, iam-search) datalist {
   &:empty {
     display: none !important;
@@ -1362,7 +1385,6 @@ $optionalText: 'true' !default;
   position: absolute;
   background-color: white;
   border-top: none;
-  font-family: sans-serif;
   padding: 0.5rem;
   max-height: 10rem;
   overflow-y: auto;
@@ -1399,6 +1421,14 @@ $optionalText: 'true' !default;
       background: rgba(224, 224, 224, 1) !important;
       border-radius: 0.25rem !important;
     }
+
+    &.active {
+      border-left: 4px solid var(--colour-info) !important;
+      border-radius: 0.25rem !important;
+      background: hsl(from var(--colour-info) h s l / 10%) !important;
+    }
+
+
   }
 }
 // #endregion

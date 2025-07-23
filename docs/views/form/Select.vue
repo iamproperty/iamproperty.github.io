@@ -69,7 +69,7 @@
     </label>
 
     <h3>Anatomy</h3>
-    <p>Selects are composed of 4 required sections and 6 optional sections.</p>
+    <p>Selects are composed of 4 required sections and 5 optional sections.</p>
 
     <img :src="Anatomy" />
 
@@ -82,7 +82,6 @@
       <li>Helper text (optional).</li>
       <li>Validation message (optional)</li>
       <li>Field value.</li>
-      <li>Clear field button (only for search select)</li>
       <li>Dropdown (browser default)</li>
     </ol>
 
