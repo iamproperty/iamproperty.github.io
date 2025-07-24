@@ -34,5 +34,7 @@
   "bento-grid",
   "rank",
   "rankings",
-  "milestones"
+  "milestone-group",
+  "milestone"
+
 ]
