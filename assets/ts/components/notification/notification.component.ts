@@ -44,7 +44,8 @@ class iamNotification extends HTMLElement {
   connectedCallback(): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const wrapper = this;
-    const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : 'white';
+    const defaultStatusBG = this.hasAttribute('data-type') ? 'white' : 'info';
+    const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : defaultStatusBG;
 
     if (this.hasAttribute('data-type')) this.classList.add(`bg-${statusBG}`);
     else {
