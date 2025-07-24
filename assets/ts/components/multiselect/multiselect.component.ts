@@ -163,6 +163,7 @@ class iamMultiselect extends HTMLElement {
 
         setItem(checkbox);
 
+        search.value = "";
         search.focus();
         clearTimeout(hoverTimeout);
         multiselect.classList.add('hover');
