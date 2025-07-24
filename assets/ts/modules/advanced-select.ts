@@ -104,7 +104,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   // Add the empty button
   displayInputField
     .closest('label')
-    .insertAdjacentHTML('beforeend', '<button class="empty btn btn-action btn-save border-0"><i class="fa-light fa-times me-0"></i></button>');
+    .insertAdjacentHTML('beforeend', '<button class="empty btn btn-action"><i class="fa-light fa-times me-0"></i></button>');
   const closeBtn = advancedSelect.querySelector('.empty');
 
   closeBtn.addEventListener('click', function (e) {
@@ -114,6 +114,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     
     for (const optionInner of datalist.options) {
       optionInner.classList.remove('active')
+      optionInner.removeAttribute('style');
     }
   });
 }

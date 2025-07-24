@@ -1342,13 +1342,20 @@ $optionalText: 'true' !default;
   .empty {
 
     position: absolute;
-    bottom: 0.4rem;
-    right: 3.75rem;
+    bottom: 0.5rem;
+    right: 3.5rem;
     margin: 0;
-    padding-bottom: 0.2rem;
+    aspect-ratio: 1 / 1;
+    
+    width: 2rem;
+    height: 2rem;
+    
+    text-align: center;
+    line-height: 1;
 
-    :not(:hover,:focus){
-      border: none;
+    &:not(:hover,:focus){
+      border-color: transparent;
+      background-color: transparent;
     }
 
     i {
@@ -1422,13 +1429,18 @@ $optionalText: 'true' !default;
       border-radius: 0.25rem !important;
     }
 
+  }
+}
+
+iam-advanced-select datalist {
+  
+  option {
     &.active {
       border-left: 4px solid var(--colour-info) !important;
       border-radius: 0.25rem !important;
       background: hsl(from var(--colour-info) h s l / 10%) !important;
     }
-
-
   }
 }
+
 // #endregion
