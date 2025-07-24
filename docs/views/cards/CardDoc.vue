@@ -9,6 +9,8 @@
   import headerImg from '../../img/cards-header.png';
   import cardImg from '../../img/cardImg.png';
   import cardModes from '../../img/cardModes.png';
+
+  import { card as events } from '../../events.js';
 </script>
 <template>
   <TrackEvents
@@ -824,37 +826,8 @@
       </template>
 
       <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>select-card</th>
-              <td>checkbox is checked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>unselect-card</th>
-              <td>Checkbox is unchecked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>secondary-button-clicked</th>
-              <td>The secondary button is clicked</td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>action-button-clicked</th>
-              <td>One of the buttons in the dialog menu is clicked</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        
+        <span v-html="events"></span>
       </template>
 
       <template #watched-attrs>
@@ -885,37 +858,8 @@
         </ul>
       </template>
       <template #data-layer>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>select-card</th>
-              <td>checkbox is checked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>unselect-card</th>
-              <td>Checkbox is unchecked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>secondary-button-clicked</th>
-              <td>The secondary button is clicked</td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>action-button-clicked</th>
-              <td>One of the buttons in the dialog menu is clicked</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        
+        <span v-html="events"></span>
       </template>
     </Integration>
     <Versions pdf="/pdfs/navigational-card.pdf">

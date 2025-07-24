@@ -74,6 +74,9 @@
         <li class="list-inline-item me-4 ms-0 mb-2">
           <router-link to="/examples">Examples</router-link>
         </li>
+        <li class="list-inline-item me-4 ms-0 mb-2">
+          <router-link to="/data-layer">Data layer</router-link>
+        </li>
       </ul>
     </div>
     <div class="container pt-3">

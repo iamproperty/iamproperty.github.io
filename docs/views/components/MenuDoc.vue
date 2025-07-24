@@ -7,6 +7,8 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/cards-header.png';
   import Menu from '@/components/Menu/Menu.vue';
+
+  import { menu as events } from '../../events.js';
 </script>
 <template>
   <TrackEvents selector="iam-menu" :events="['open', 'closed']"></TrackEvents>
@@ -735,24 +737,7 @@
       </template>
 
       <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>open</th>
-              <td>When the menu is opened</td>
-            </tr>
-            <tr>
-              <th>closed</th>
-              <td>When the menu is closed</td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
 
       <template #criteria>
@@ -762,24 +747,7 @@
         </ul>
       </template>
       <template #data-layer>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>open</th>
-              <td>When the menu is opened</td>
-            </tr>
-            <tr>
-              <th>closed</th>
-              <td>When the menu is closed</td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
     </Integration>
     <Versions pdf="/pdfs/menu.pdf">

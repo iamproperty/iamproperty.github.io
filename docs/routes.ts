@@ -1313,6 +1313,15 @@ const routes = [
     ],
   },
   {
+    path: '/data-layer',
+    component: () => import('./views/DataLayer.vue'),
+    name: 'Data layer',
+    meta: {
+      title: 'Data Layer | iamkey',
+    },
+    searchterms: 'Analytics, tracking',
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
     component: () => import('./views/PageNotFound.vue'),

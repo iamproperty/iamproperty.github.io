@@ -6,6 +6,8 @@
 
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
+
+  import { table as events } from '../../events.js';
 </script>
 
 <template>
@@ -2135,53 +2137,7 @@
       </template>
 
       <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>update-show</th>
-              <td>When a user clicks on the load more button</td>
-            </tr>
-            <tr>
-              <th>update-page</th>
-              <td>When a updates the page via either a button or other method</td>
-            </tr>
-            <tr>
-              <th>row-expanded</th>
-              <td>When a a row has been expanded on mobile or desktop</td>
-            </tr>
-            <tr>
-              <th>row-selected</th>
-              <td>
-                When the checkbox for a row has been selected or unselected. No other functionality triggered by
-                default.
-              </td>
-            </tr>
-            <tr>
-              <th>all-rows-selected</th>
-              <td>All rows have been selected. No other functionality triggered by default.</td>
-            </tr>
-            <tr>
-              <th>all-rows-unselected</th>
-              <td>All rows have been selected. No other functionality triggered by default.</td>
-            </tr>
-
-            <tr>
-              <th>sort-by-heading</th>
-              <td>A column heading has been pressed to sort by that column</td>
-            </tr>
-
-            <tr>
-              <th>search-submit</th>
-              <td>The table has been searched via javascript or an ajax call.</td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
 
       <template #criteria>
@@ -2192,53 +2148,9 @@
         </ul>
       </template>
       <template #data-layer>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>update-show</th>
-              <td>When a user clicks on the load more button</td>
-            </tr>
-            <tr>
-              <th>update-page</th>
-              <td>When a updates the page via either a button or other method</td>
-            </tr>
-            <tr>
-              <th>row-expanded</th>
-              <td>When a a row has been expanded on mobile or desktop</td>
-            </tr>
-            <tr>
-              <th>row-selected</th>
-              <td>
-                When the checkbox for a row has been selected or unselected. No other functionality triggered by
-                default.
-              </td>
-            </tr>
-            <tr>
-              <th>all-rows-selected</th>
-              <td>All rows have been selected. No other functionality triggered by default.</td>
-            </tr>
-            <tr>
-              <th>all-rows-unselected</th>
-              <td>All rows have been selected. No other functionality triggered by default.</td>
-            </tr>
+        
+        <span v-html="events"></span>
 
-            <tr>
-              <th>sort-by-heading</th>
-              <td>A column heading has been pressed to sort by that column</td>
-            </tr>
-
-            <tr>
-              <th>search-submit</th>
-              <td>The table has been searched via javascript or an ajax call.</td>
-            </tr>
-          </tbody>
-        </table>
       </template>
     </Integration>
     <Versions pdf="/pdfs/tables.pdf">
