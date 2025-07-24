@@ -2,6 +2,8 @@
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
+
+  import { actionbar as events } from '../../events.js';
 </script>
 
 <template>
@@ -1273,37 +1275,8 @@
       </template>
 
       <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>switch-view</th>
-              <td>When a user switches the view</td>
-              <td>{ detail: { view: btn.textContent } }</td>
-            </tr>
-            <tr>
-              <th>search-submit</th>
-              <td>The search bar has submitted</td>
-              <td>{ detail: { search: searchBar.querySelector('input').value } }</td>
-            </tr>
-            <tr>
-              <th>columm-filters-set</th>
-              <td>When columns have been set to hid or show</td>
-              <td>detail: { columnsHidden: columnsHidden.slice(0, -1) }</td>
-            </tr>
-            <tr>
-              <th>selected</th>
-              <td>One or more items have been selected</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        
+        <span v-html="events"></span>
       </template>
 
       <template #criteria>
@@ -1313,37 +1286,8 @@
         </ul>
       </template>
       <template #data-layer>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>switch-view</th>
-              <td>When a user switches the view</td>
-              <td>{ detail: { view: btn.textContent } }</td>
-            </tr>
-            <tr>
-              <th>search-submit</th>
-              <td>The search bar has submitted</td>
-              <td>{ detail: { search: searchBar.querySelector('input').value } }</td>
-            </tr>
-            <tr>
-              <th>columm-filters-set</th>
-              <td>When columns have been set to hid or show</td>
-              <td>detail: { columnsHidden: columnsHidden.slice(0, -1) }</td>
-            </tr>
-            <tr>
-              <th>selected</th>
-              <td>One or more items have been selected</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+
+        <span v-html="events"></span>
       </template>
     </Integration>
 
