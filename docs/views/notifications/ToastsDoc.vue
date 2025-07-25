@@ -1,4 +1,40 @@
+
+<script setup>
+  import Notification from '@/components/Notification/Notification.vue';
+  import Readme from '@/components/Notification/README.md';
+  import WebReadme from '../../../assets/ts/components/notification/README.md';
+
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+
+  import NotificationsUsage from '../NotificationsUsage.vue';
+  import toastImg from '../../img/notifications/toast.png';
+  import toastAnatomy from '../../img/notifications/toasts-anatomy.png';
+
+  import toastsAlingment from '../../img/notifications/toastsAlignment.png';
+  import toastsAlingment2 from '../../img/notifications/toastsAlignment2.png';
+
+  import toastsDo from '../../img/notifications/toasts-do.png';
+  import toastsDo2 from '../../img/notifications/toasts-do2.png';
+  import toastsDo3 from '../../img/notifications/toasts-do3.png';
+
+  import toastsDont from '../../img/notifications/toasts-dont.png';
+  import toastsDont2 from '../../img/notifications/toasts-dont2.png';
+  import toastsDont3 from '../../img/notifications/toasts-dont3.png';
+
+
+  import Integration from '../Integration.vue';
+  import Versions from '../Versions.vue';
+  import TrackEvents from '../TrackEvents.vue';
+
+</script>
+
 <template>
+  <TrackEvents
+    selector="iam-notification"
+    :events="['dismiss']"
+  ></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Toasts</h1>
@@ -165,54 +201,121 @@
       <a href="#example">Show in correct page position</a>
     </div>
 
-    <div class="container">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h2>Web component</h2></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
-        </details>
-        <details>
-          <summary><h2>HTML</h2></summary>
-          <pre><code class="html">{{`<div class="iam-notification bg-danger" role="alert" id="example" data-type="toast" data-status="danger" data-dismiss="">
-  <div class="notification">
-    <div class="notification__icon"><i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i></div>
-    <div class="notification__inner">
-      <div class="notification__text"><strong>Just an example</strong><br> Alert message will display here</div>
-      <div class="notification__btns"><a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a></div>
-    </div>
-    <div class="notification__dismiss"><button data-dismiss-button="">Dismiss</button></div>
-  </div>
-</div>`}}</code></pre>
-        </details>
-      </Tabs>
-    </div>
+    
+    <Integration component="carousel" componentName="iam-carousel">
+      <template #web-component>
+        <pre><code>{{`<!-- Inline -->
+<iam-notification data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</iam-notification>
 
-    <div class="bg-light version-control">
-      <div class="container">
+<!-- Alert -->
+<iam-notification data-type="alert" data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</iam-notification>
+
+<!-- Toast -->
+<iam-notification data-type="toast" data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</iam-notification>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Carousel from '@/components/Notification/Notification.vue</script>
+        
+<!-- Inline -->
+<Notification data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</Notification>
+
+<!-- Alert -->
+<Notification data-type="alert" data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</Notification>
+
+<!-- Toast -->
+<Notification data-type="toast" data-status="danger" data-dismiss="">
+<strong>Just an example</strong><br> Alert message will display here <a href="/" data-dismiss-button="" slot="btns" class="link">Retry</a>
+</Notification>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
         <table>
           <thead>
             <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Notable updates</th>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
             </tr>
           </thead>
-          <tbody class="text-body">
+          <tbody>
             <tr>
-              <td>V1 added</td>
-              <td>03.07.2023</td>
-              <td>N/A</td>
+              <th>data-dismiss</th>
+              <td></td>
+              <td>Flag</td>
+              <td>no</td>
+              <td>This attribute adds a dismiss button</td>
+            </tr>
+            <tr>
+              <th>data-status</th>
+              <td></td>
+              <td>String {warning, success, danger}</td>
+              <td>No</td>
+              <td>Controls the colour and style of the notification</td>
+            </tr>
+            <tr>
+              <th>data-type</th>
+              <td></td>
+              <td>String {alert,}</td>
+              <td>No</td>
+              <td>Controls the behaviour of the notification</td>
             </tr>
           </tbody>
         </table>
-        <a href="/pdfs/alerts.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+      </template>
+
+      <template #parts>
+        <table>
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>dismiss-btn</th>
+              <td>Button to close the notification</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      
+      
+    </Integration>
+
+    <Versions pdf="/pdfs/inline-notifications.pdf">
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
+            <td>V1 added</td>
+              <td>03.07.2023</td>
+              <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </Versions>
+
   </main>
 </template>
 
@@ -230,64 +333,3 @@
     display: none;
   }
 </style>
-
-<script>
-  import Notification from '@/components/Notification/Notification.vue';
-  import Readme from '@/components/Notification/README.md';
-  import WebReadme from '../../../assets/ts/components/notification/README.md';
-
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-
-  import NotificationsUsage from '../NotificationsUsage.vue';
-  import toastImg from '../../img/notifications/toast.png';
-  import toastAnatomy from '../../img/notifications/toasts-anatomy.png';
-
-  import toastsAlingment from '../../img/notifications/toastsAlignment.png';
-  import toastsAlingment2 from '../../img/notifications/toastsAlignment2.png';
-
-  import toastsDo from '../../img/notifications/toasts-do.png';
-  import toastsDo2 from '../../img/notifications/toasts-do2.png';
-  import toastsDo3 from '../../img/notifications/toasts-do3.png';
-
-  import toastsDont from '../../img/notifications/toasts-dont.png';
-  import toastsDont2 from '../../img/notifications/toasts-dont2.png';
-  import toastsDont3 from '../../img/notifications/toasts-dont3.png';
-
-  export default {
-    components: {
-      Tabs,
-      Readme,
-      WebReadme,
-      DSHeader,
-      NotificationsUsage,
-      toastImg,
-      Notification,
-      toastAnatomy,
-      toastsAlingment,
-      toastsAlingment2,
-      toastsDo,
-      toastsDo2,
-      toastsDo3,
-      toastsDont,
-      toastsDont2,
-      toastsDont3,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        toastImg: toastImg,
-        toastAnatomy: toastAnatomy,
-        toastsAlingment: toastsAlingment,
-        toastsAlingment2: toastsAlingment2,
-        toastsDo: toastsDo,
-        toastsDo2: toastsDo2,
-        toastsDo3: toastsDo3,
-        toastsDont: toastsDont,
-        toastsDont2: toastsDont2,
-        toastsDont3: toastsDont3,
-      };
-    },
-  };
-</script>
