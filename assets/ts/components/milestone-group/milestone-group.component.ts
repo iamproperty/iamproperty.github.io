@@ -27,7 +27,7 @@ class iamMilestoneGroup extends HTMLElement {
     <style>
     @import "${coreCSS}";
     </style>
-      <div class="milestone-group">
+      <div class="milestone-group" part="milestone-group">
         <slot>
         </slot>
       </div>
