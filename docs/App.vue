@@ -38,6 +38,9 @@
                 list="searchterms"
                 placeholder="Search pages..."
                 class="mt-0"
+                data-change-events='[
+                {"in-list":"#searchterms", "target":"#searchform", "if": "submitForm"}
+                ]'
               />
 
               <button class="suffix mt-0 me-0 mb-0 pe-auto"><i class="fa-regular fa-search"></i></button>

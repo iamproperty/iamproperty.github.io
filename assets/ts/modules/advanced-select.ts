@@ -1,7 +1,6 @@
 function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = false): boolean | void {
   let currentFocus = -1;
 
-  console.log(isSearch);
   if(!isSearch){
     displayInputField.addEventListener('focus', function () {
       displayInputField.setAttribute('placeholder', displayInputField.value);
@@ -45,6 +44,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       const option = event.target.closest('datalist option');
  
       displayInputField.value = option.value;
+      window.triggerDynamicEvent(displayInputField);
+
       datalist.style.display = 'none';
 
       for (const optionInner of datalist.options) {
