@@ -66,7 +66,7 @@
 
   var urlParams = new URLSearchParams(window.location.search);
   let results = [];
-  let searchTerm = urlParams.get('search');
+  let searchTerm = urlParams.get('searchAlt');
   searchTerm = searchTerm ? searchTerm.toLowerCase().trim() : '';
 
   routes.forEach((route) => {

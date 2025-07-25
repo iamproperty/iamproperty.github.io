@@ -43,7 +43,7 @@
                 ]'
               />
 
-              <button class="suffix mt-0 me-0 mb-0"><i class="fa-regular fa-search"></i></button>
+              <button class="suffix mt-0 me-0 mb-0 pe-auto"><i class="fa-regular fa-search"></i></button>
             </span>
           </label>
           <datalist id="searchterms" ref="list">
