@@ -44,7 +44,9 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       const option = event.target.closest('datalist option');
  
       displayInputField.value = option.value;
-      window.triggerDynamicEvent(displayInputField);
+
+      if(typeof window.triggerDynamicEvent == "function")
+        window.triggerDynamicEvent(displayInputField);
 
       datalist.style.display = 'none';
 
