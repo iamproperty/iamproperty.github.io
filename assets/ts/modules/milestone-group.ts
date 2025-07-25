@@ -28,7 +28,7 @@ export const showFuture = function (milestoneGroupElement: Element): void {
 
 }
 
-const toggleInteractionEvent = (eventName, element) => {
+const toggleInteractionEvent = function (eventName: string, element: Element): void {
   const customEvent = new CustomEvent(eventName, {});
 
   element.dispatchEvent(customEvent);

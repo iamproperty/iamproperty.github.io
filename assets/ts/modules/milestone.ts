@@ -56,7 +56,7 @@ export const getMilestoneTasks = function (milestoneElement: Element): void {
     taskWrap.insertAdjacentElement('beforeend', taskItem)
 
     // Fire tracking events
-    taskItem.addEventListener('click', (event) => {
+    taskItem.addEventListener('click', () => {
 
       if (taskItem?.hasAttribute('open')) {
           itemInteractionEvent('milestone-item-closed', task.name, milestoneElement)
@@ -70,7 +70,7 @@ export const getMilestoneTasks = function (milestoneElement: Element): void {
   milestoneElement.appendChild(taskWrap)
 }
 
-const itemInteractionEvent = (eventName, taskName, element) => {
+const itemInteractionEvent = function (eventName: string, taskName: string, element: Element): void {
   const customEvent = new CustomEvent(eventName, {
     detail: {
       title: taskName,
@@ -78,6 +78,7 @@ const itemInteractionEvent = (eventName, taskName, element) => {
   });
 
   element.dispatchEvent(customEvent);
+  
 }
 
 const getSubtasks = function (actions: Array, taskName: Element): void {
