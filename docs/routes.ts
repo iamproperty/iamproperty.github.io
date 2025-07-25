@@ -651,13 +651,20 @@ const routes = [
         component: () => import('./views/components/TestimonialDoc.vue'),
       },
       {
-        path: 'milestones',
+        path: 'milestone',
         name: 'Milestones (Beta)',
         meta: {
           title: 'Milestones | Components | iamkey',
         },
         component: () => import('./views/components/MilestonesDoc.vue'),
-        searchterms: 'expanded, list',
+      },
+      {
+        path: 'milestone-group',
+        name: 'Milestone Group (Beta)',
+        meta: {
+          title: 'Milestone Group | Components | iamkey',
+        },
+        component: () => import('./views/components/MilestoneGroupDoc.vue'),
       },
     ],
   },

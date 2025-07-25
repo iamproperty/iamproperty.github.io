@@ -29,10 +29,10 @@ class iamMilestone extends HTMLElement {
     <style>
     @import "${coreCSS}";
     </style>
-      <div class="milestone-wrap">
-        <slot name="milestone-intro" class="milestone-intro"></slot>
+      <div class="milestone-wrap" part="milestone-wrap">
+        <slot name="milestone-intro" class="milestone-intro" part="milestone-intro"></slot>
         <slot>
-          <div class="task-wrap" part="task-wrap"></div>
+          <div class="task-wrap" part="milestone-task-wrap"></div>
         </slot>
       </div>
     `;

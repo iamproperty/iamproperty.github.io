@@ -1,3 +1,10 @@
+iam-milestone {
+  --milestone-divider-colour: var(--colour-muted);
+  --milestone-panel-border: var(--wider-colour-1-active);
+  --milestone-default-background: #FFFFFF;
+  --milestone-future-background: #F5F5F5;
+}
+
 iam-milestone-group {
   display: flex;
   flex-wrap: wrap;
@@ -53,7 +60,7 @@ iam-milestone-group {
     }
   }
 
-  .milestone {
+  iam-milestone {
 
     + .milestone {
       position: relative;
@@ -62,7 +69,7 @@ iam-milestone-group {
         content: "";
         height: 1.5rem;
         width: 2px;
-        background: #9D9D9D;
+        background: var(--milestone-divider-colour);
         display: block;
         position: absolute;
         top: 0;
@@ -80,17 +87,17 @@ iam-milestone::part(status) {
     margin-bottom: 0.5rem;
 }
 
-.milestone { 
-  border: 2px solid #D6D6D6;
+iam-milestone { 
+  border: 2px solid var(--milestone-panel-border);
   border-radius: 8px;
   display: block;
   width: 100%;
   max-width: 43rem;
-  background: #fff;
+  background: var(--milestone-default-background);
   padding-top: 1rem;
 
   &.current ~ .milestone {
-     background: #F5F5F5;
+     background: var(--milestone-future-background);
   }
 
   h2 {

@@ -5,7 +5,6 @@
 </template>
 
 <style lang="scss">
-  //@import "../../../assets/sass/components/accordion.scss";
 </style>
 
 <script>
@@ -14,7 +13,7 @@
     props: {},
     mounted() {
       this.$nextTick(function () {
-        import(`../../../assets/ts/components/milestone/milestone.component.js`)
+        import(`../../../assets/js/components/milestone/milestone.component.min.js`)
           .then((module) => {
             if (!window.customElements.get(`iam-milestone`))
               window.customElements.define(`iam-milestone`, module.default);

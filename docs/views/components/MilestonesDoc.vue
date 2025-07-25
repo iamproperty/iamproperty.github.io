@@ -56,16 +56,12 @@
             id: "1",
             name: "A task without any subtasks",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu mi, ut pulvinar urna dictum in. Integer sed nunc sit amet nulla fermentum iaculis.",
-            active: true,
-            subtask_order: "1",
             actions: [],
             date_completed: '16/07/2025'
           }, {
             id: "2",
             name: "A task with subtasks",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu mi, ut pulvinar urna dictum in. Integer sed nunc sit amet nulla fermentum iaculis.",
-            active: true,
-            subtask_order: "2",
             actions: [
               {
                 id: "1",
@@ -108,7 +104,7 @@
         A milestone is made up of nested tasks with further nested sub-tasks. The tasks and sub-tasks have a parent-child relationship where children (sub-tasks) can be toggled into view by expanding or collapsing their parent item (tasks) .
       </p>
 
-      <Milestone :data-items="JSON.stringify(individualTaskData)">
+      <Milestone :data-items="JSON.stringify(individualTaskData)" data-status="Current">
           <div slot="milestone-intro">          
             <h2 class="h4">Post Sale</h2>
             <p>You have a Winning bidder! We'll guide the buyer through the next steps, helping ensure everything moves smoothly toward completion. It's all about keeping things on track and making the handover as seamless as possible.</p>
@@ -200,44 +196,10 @@
 
       <p class="md-col-end-7">
         A series of milestone components can be added to a Milestone Group component. This adds the ability to hide and show any items after the current milestone.
+        You can find more information about the Milestone Group component <router-link :to="{ path: 'milestone-group' }">here</router-link>
       </p>
 
-      <MilestoneGroup data-show-all-toggle="true" class="reverse-items milestone-group mb-3">
 
-        <Milestone :data-items="JSON.stringify(taskData)" >
-          <div slot="milestone-intro">          
-            <h2 class="h4">Previous Milestone</h2>
-          </div>
-        </Milestone>
-
-        <Milestone :data-items="JSON.stringify(taskData)" data-status="Current">
-          <div slot="milestone-intro">          
-            <h2 class="h4">Current Milestone Title</h2>
-            <p>Some summary text about this milestone. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu mi, ut pulvinar urna dictum in.</p>
-          </div>
-        </Milestone>
-        
-        <Milestone :data-items="JSON.stringify(taskData)" data-status="Next">
-          <div slot="milestone-intro">          
-            <h2 class="h4">Next Milestone Title</h2>
-          </div>
-        </Milestone>
-        
-        <Milestone :data-items="JSON.stringify(taskData)">
-          <div slot="milestone-intro">          
-            <h2 class="h4">Another future milestone</h2>
-            <p>Some summary text about this milestone. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu mi, ut pulvinar urna dictum in.</p>
-          </div>
-        </Milestone>
-
-        <Milestone>
-          <div slot="milestone-intro">          
-            <h2 class="h4">The Final Milestone</h2>
-          </div>
-        </Milestone>
-
-   
-      </MilestoneGroup>
     </div>
 
      <Integration component="milestone" componentName="iam-milestone">
@@ -261,6 +223,110 @@
 `}}</code></pre>
       </template>
 
+       <template #slots>
+        <table>
+          <thead>
+            <tr>
+              <th>Slot</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Default</th>
+              <td>The default slot is where any tasks within the milestone are rendered</td>
+            </tr>
+            <tr>
+              <th>Milestone Intro</th>
+              <td>The Milestone Intro slot is where the title and summary text for the milestone are rendered.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #attr>
+        <table>
+          <thead>
+            <tr>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>status</th>
+              <td>-</td>
+              <td>String</td>
+              <td>No</td>
+              <td>This property is used to add a status tag to the top of the milestone. e.g. 'Next Milestone' If the value of this attribute is 'Current' then all the milestones after this one will be styled alternatively.</td>
+            </tr>
+            <tr>
+              <th>items</th>
+              <td>-</td>
+              <td>Array</td>
+              <td>No</td>
+              <td>
+                This is a property for adding a task and subtask list into the milestone. A name and description can be passed in for each task as well as an array of subtasks, and an optional date_completed. The date_completed will mark the task or subtask with a green tick, as well as showing the date completed alongside subtasks.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #parts>
+        <table>
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>milestone-wrap</th>
+              <td>The wrapper around all of the milestone content.</td>
+            </tr>
+            <tr>
+              <th>milestone-intro</th>
+              <td>The wrapper around intro content: the title and summary of the milestone.</td>
+            </tr>
+            <tr>
+              <th>milestone-task-wrap</th>
+              <td>The wrapper for tasks that are added to the milestone.</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </template>
+
+      <template #vars>
+        <table>
+          <thead>
+            <tr>
+              <th>Var</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>--milestone-panel-border</th>
+              <td>The border colour of the milestone panel.</td>
+            </tr>
+            <tr>
+              <th>--milestone-default-background</th>
+              <td>The default background colour of a milestone.</td>
+            </tr>
+            <tr>
+              <th>--milestone-future-background</th>
+              <td>The background colour of a milestone after the current milestone.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
       <template #dispatched-events>
         <table>
           <thead>
@@ -272,14 +338,14 @@
           </thead>
           <tbody>
             <tr>
-              <th>item-opened</th>
-              <td>When one of the items in the bento grid has been opened</td>
-              <td>{ "event": "item-opened", "title": "Item summary title"}</td>
+              <th>milestone-item-opened</th>
+              <td>When one of the task items within the milestone has been opened</td>
+              <td>{ "event": "milestone-item-opened", "title": "Item summary title"}</td>
             </tr>
             <tr>
-              <th>item-closed</th>
-              <td>When one of the items in the bento grid has been closed</td>
-              <td>{ "event": "item-closed", "title": "Item summary title"}</td>
+              <th>milestone-item-closed</th>
+              <td>When one of the task items within the milestone has been closed</td>
+              <td>{ "event": "milestone-item-closed", "title": "Item summary title"}</td>
             </tr>
           </tbody>
         </table>
@@ -287,9 +353,13 @@
 
       <template #criteria>
         <ul>
-          <li>The opened bento grid should be display above the other items</li>
-          <li>The clickable area for the bento grid should be large</li>
-          <li>When 'prefer-reduced-motion' is turned on the animations should be turned off</li>
+          <li>A milestone with a status set should show that status at the top of the milestone block</li>
+          <li>Clicking anywhere on a task should open the task content, including a description and a list of subtasks if applicable.</li>
+          <li>A completed task should be shown with a green tick alongside it</li>
+          <li>An open task with subtasks should show a list of those subtasks with an empty circle alongside the name</li>
+          <li>A completed subtask should be shown with a green tick alongside it</li>
+          <li>A completed subtask should be shown with the date it was completed alongside it</li>
+          <li>If a task has subtasks, the number of completed subtasks should be shown alongsidee the task name</li>
         </ul>
       </template>
       <template #data-layer>
@@ -303,14 +373,14 @@
           </thead>
           <tbody>
             <tr>
-              <th>item-opened</th>
-              <td>When one of the items in the bento grid has been opened</td>
-              <td>{ "event": "item-opened", "title": "Item summary title"}</td>
+              <th>milestone-item-opened</th>
+              <td>When one of the task items within the milestone has been opened</td>
+              <td>{ "event": "milestone-item-opened", "title": "Item summary title"}</td>
             </tr>
             <tr>
-              <th>item-closed</th>
-              <td>When one of the items in the bento grid has been closed</td>
-              <td>{ "event": "item-closed", "title": "Item summary title"}</td>
+              <th>milestone-item-closed</th>
+              <td>When one of the task items within the milestone has been closed</td>
+              <td>{ "event": "milestone-item-closed", "title": "Item summary title"}</td>
             </tr>
           </tbody>
         </table>

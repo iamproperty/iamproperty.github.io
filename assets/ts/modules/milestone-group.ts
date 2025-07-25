@@ -16,14 +16,22 @@ export const showFuture = function (milestoneGroupElement: Element): void {
       toggleBtn.innerHTML = 'Show next steps';
 
       milestoneGroupElement.classList.remove('show-all');
+      toggleInteractionEvent('hide-future-items', milestoneGroupElement)
     } else {
       toggleBtn.innerHTML = 'Hide next steps';
 
       milestoneGroupElement.classList.add('show-all');
+      toggleInteractionEvent('show-future-items', milestoneGroupElement)
     }
 
   });
 
+}
+
+const toggleInteractionEvent = (eventName, element) => {
+  const customEvent = new CustomEvent(eventName, {});
+
+  element.dispatchEvent(customEvent);
 }
 
 

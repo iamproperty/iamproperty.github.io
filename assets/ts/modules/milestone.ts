@@ -55,9 +55,29 @@ export const getMilestoneTasks = function (milestoneElement: Element): void {
 
     taskWrap.insertAdjacentElement('beforeend', taskItem)
 
+    // Fire tracking events
+    taskItem.addEventListener('click', (event) => {
+
+      if (taskItem?.hasAttribute('open')) {
+          itemInteractionEvent('milestone-item-closed', task.name, milestoneElement)
+        } else {
+          itemInteractionEvent('milestone-item-opened', task.name, milestoneElement)
+        }
+    });
+
   });
 
   milestoneElement.appendChild(taskWrap)
+}
+
+const itemInteractionEvent = (eventName, taskName, element) => {
+  const customEvent = new CustomEvent(eventName, {
+    detail: {
+      title: taskName,
+    },
+  });
+
+  element.dispatchEvent(customEvent);
 }
 
 const getSubtasks = function (actions: Array, taskName: Element): void {
