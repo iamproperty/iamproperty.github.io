@@ -3,8 +3,6 @@
   import headerImg from '../../img/cards-header.png';
 
   import AdvancedSelect from '@/components/AdvancedSelect/AdvancedSelect.vue';
-  import VueReadme from '@/components/Multiselect/README.md';
-  import WebReadme from '~/ts/components/multiselect/README.md';
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
@@ -13,8 +11,8 @@
 
 <template>
   <TrackEvents
-    selector="iam-carousel"
-    :events="['pip-clicked', 'next-clicked', 'prev-clicked', 'slider-changed']"
+    selector="iam-advanced-select"
+    :events="[]"
   ></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">

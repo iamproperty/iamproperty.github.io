@@ -10,7 +10,6 @@ window.triggerDynamicEvent = (element, event = "change"): void => {
 }
 
 const createDynamicEvents = (): void => {
-  console.log('event2');
   // Change event
   document.addEventListener('change', (event) => {
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-change-events]'))
