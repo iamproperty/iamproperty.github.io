@@ -55,9 +55,6 @@ const checkConditions = (element, event): void | boolean => {
     // Pass the matched datalist element instead of the triggered element
     const match = document.querySelector(`${event['in-list']} option[value="${element.value}"]`);
 
-console.log(match)
-
-
     if (document.querySelector(`${event['in-list']} option[value="${element.value}"]`)) {
       runEvent(match, event, 'if');
     } 

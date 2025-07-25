@@ -958,7 +958,7 @@ const routes = [
     meta: {
       title: 'Audit | iamkey',
     },
-    searchterms: 'Audit, npm, build, pr, Pull request',
+    searchterms: 'Audit, npm, build, Pull request',
   },
   {
     /* Examples */ path: '/examples',
