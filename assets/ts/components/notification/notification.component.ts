@@ -1,11 +1,8 @@
 import setupNotification, { closeNotification } from '../../modules/notification';
+import { trackComponent, trackComponentRegistered } from '../_global';
 
-// Data layer Web component created
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  event: 'customElementRegistered',
-  element: 'Notification',
-});
+trackComponentRegistered('iam-notification');
+
 
 class iamNotification extends HTMLElement {
   constructor() {
@@ -105,12 +102,25 @@ class iamNotification extends HTMLElement {
         'click',
         function () {
           closeNotification(wrapper);
+
+          const customEvent = new CustomEvent('dismiss', {
+            detail: {
+              class: this.classList,
+            },
+          });
+
+          this.dispatchEvent(customEvent);
+
         },
         false
       );
     }
 
     setupNotification(this);
+
+    trackComponent(this, 'iam-notification', [
+      'dismiss'
+    ]);
   }
 }
 
