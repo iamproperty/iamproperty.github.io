@@ -507,6 +507,15 @@ const routes = [
         searchterms: 'slideshow',
       },
       {
+        path: 'calendar',
+        name: 'Calendar (Beta)',
+        meta: {
+          title: 'Calendar | Components | iamkey',
+        },
+        component: () => import('./views/components/CalendarDoc.vue'),
+        searchterms: 'calendar, dat, appointments',
+      },
+      {
         path: 'charts',
         name: 'Charts (Depreciated)',
         meta: {

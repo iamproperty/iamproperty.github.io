@@ -14,6 +14,7 @@ const components = [
   'table-no-submit',
   'tabs',
   'card',
+  'calendar',
   'content',
   'filter-card',
   'video-card',

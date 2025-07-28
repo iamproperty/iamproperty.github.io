@@ -42,6 +42,12 @@ $darkMode: 'true' !default;
   $mobileOnly: $mobileOnly
 );
 
+@use 'components/calendar.config.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+
 @include layer('components', $layers) {
   // Make sure the first
   main {
