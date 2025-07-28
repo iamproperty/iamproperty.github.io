@@ -15,6 +15,7 @@ const components = [
   'tabs',
   'card',
   'calendar',
+  'content',
   'filter-card',
   'video-card',
   'record-card',

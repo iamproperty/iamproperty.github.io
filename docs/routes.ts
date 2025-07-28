@@ -179,9 +179,9 @@ const routes = [
         path: 'stepper',
         name: 'Stepper',
         meta: {
-          title: 'Stepper | Elements | iamkey'
+          title: 'Stepper | Elements | iamkey',
         },
-        component: () => import('./views/components/StepperDocV2.vue')
+        component: () => import('./views/components/StepperDocV2.vue'),
       },
       {
         path: 'badges',
@@ -473,6 +473,15 @@ const routes = [
         searchterms: 'postcode',
       },
       {
+        path: 'advanced-select',
+        name: 'Advanced select',
+        meta: {
+          title: 'Advanced Select | Components | iamkey',
+        },
+        component: () => import('./views/components/AdvancedSelectDoc.vue'),
+        searchterms: '',
+      },
+      {
         path: 'applied-filters',
         name: 'Applied Filters (Beta)',
         meta: {
@@ -513,6 +522,14 @@ const routes = [
           title: 'Charts | Components | iamkey',
         },
         component: () => import('./views/components/ChartsDoc.vue'),
+      },
+      {
+        path: 'content',
+        name: 'Content (Beta)',
+        meta: {
+          title: 'Content | Components | iamkey',
+        },
+        component: () => import('./views/components/ContentDoc.vue'),
       },
       {
         path: 'filterlist',
@@ -616,6 +633,22 @@ const routes = [
           title: 'Search | Components | iamkey',
         },
         component: () => import('./views/components/SearchDoc.vue'),
+      },
+      {
+        path: 'split-button',
+        name: 'Split Button',
+        meta: {
+          title: 'Split Button | Components | iamkey',
+        },
+        component: () => import('./views/components/SplitButtonDoc.vue'),
+      },
+      {
+        path: 'stepper',
+        name: 'Stepper (Deprecation warning)',
+        meta: {
+          title: 'Stepper | Components | iamkey',
+        },
+        component: () => import('./views/components/StepperDoc.vue'),
       },
       {
         path: 'slider',
@@ -934,7 +967,7 @@ const routes = [
     meta: {
       title: 'Audit | iamkey',
     },
-    searchterms: 'Audit, npm, build, pr, Pull request',
+    searchterms: 'Audit, npm, build, Pull request',
   },
   {
     /* Examples */ path: '/examples',
@@ -1142,12 +1175,28 @@ const routes = [
         searchterms: 'iamsold, iam sold',
       },
       {
-        path: 'collapsible-side-menu',
-        name: 'Collapsible Side Menu example',
+        path: 'collapsible-side-menu-default',
+        name: 'Collapsible Side Menu default example',
         meta: {
-          title: 'Collapsible Side Menu example| iamkey',
+          title: 'Collapsible Side Menu default example | iamkey',
         },
-        component: () => import('./views/standalone/CollapsibleSideMenu.vue'),
+        component: () => import('./views/standalone/CollapsibleSideMenuDefault.vue'),
+      },
+      {
+        path: 'collapsible-side-menu-inline',
+        name: 'Collapsible Side Menu inline example',
+        meta: {
+          title: 'Collapsible Side Menu inline example | iamkey',
+        },
+        component: () => import('./views/standalone/CollapsibleSideMenuInline.vue'),
+      },
+      {
+        path: 'collapsible-side-menu-disableCollapse',
+        name: 'Collapsible Side Menu disable collapse example',
+        meta: {
+          title: 'Collapsible Side Menu disable collapse example | iamkey',
+        },
+        component: () => import('./views/standalone/CollapsibleSideMenuDisableCollapse.vue'),
       },
       {
         path: 'crm-mb',
@@ -1271,6 +1320,15 @@ const routes = [
         component: () => import('./views/prototype/Index.vue'),
       },
     ],
+  },
+  {
+    path: '/data-layer',
+    component: () => import('./views/DataLayer.vue'),
+    name: 'Data layer',
+    meta: {
+      title: 'Data Layer | iamkey',
+    },
+    searchterms: 'Analytics, tracking',
   },
   {
     path: '/:pathMatch(.*)*',

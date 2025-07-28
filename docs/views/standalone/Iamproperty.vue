@@ -1,3 +1,24 @@
+<script setup>
+  import Nav from '@/components/Nav/Nav.vue';
+
+  import Header from '@/components/Header/Header.vue';
+  import Carousel from '@/components/Carousel/Carousel.vue';
+  import Marketing from '@/components/Marketing/Marketing.vue';
+  import Content from '@/components/Content/Content.vue';
+
+  import Table from '@/components/Table/Table.vue';
+  import Card from '@/components/Card/Card.vue';
+  import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';
+  import Filterlist from '@/components/Filterlist/Filterlist.vue';
+  import headerImg from '../../img/homepage-banner.png';
+
+  import Thumb1 from '../../img/home-thumb-1.png';
+  import Thumb2 from '../../img/home-thumb-2.png';
+  import Thumb3 from '../../img/home-thumb-3.png';
+
+  import cardImg from '../../img/cardImg.png';
+</script>
+
 <template>
   <div>
     <nav>
@@ -38,100 +59,96 @@
       </Nav>
     </nav>
 
-    <Header :image="headerImg">
+    <Header :image="headerImg" class="mb-0">
       <h1>Welcome, Tom!</h1>
 
       <span class="h4">Featured</span>
-      <Carousel class="reset-colours hide-btns hide-controls">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
-          <div class="col">
-            <a href="/client-onbaording">
-              <Card :data-image="Thumb1"
-                >Get moving faster <span>Stay complaint, build revenue and get paid quicker.</span
-                ><span slot="badges" class="badge bg-success">End-to-End onboarding</span></Card
-              >
-            </a>
-          </div>
-          <div class="col">
-            <a href="/client-onbaording">
-              <Card :data-image="Thumb2"
-                >Make your own rules
-                <span>Run your agency your way, with a system that works for you.</span>
-                <span slot="badges" class="badge bg-success">CRM Service</span></Card
-              >
-            </a>
-          </div>
-          <div class="col">
-            <a href="/client-onbaording">
-              <Card :data-image="Thumb3"
-                >Discover the power of auction<span>And offer a service that 36% of your clients desire.</span>
-                <span slot="badges" class="badge bg-success">Auction</span></Card
-              >
-            </a>
-          </div>
+      <Carousel class="reset-colours hide-controls" data-smcols="2" data-mdcols="3">
+        <div>
+          <a href="/client-onbaording">
+            <Card :data-image="Thumb1"
+              >Get moving faster <span>Stay complaint, build revenue and get paid quicker.</span
+              ><span slot="badges" class="badge bg-success">End-to-End onboarding</span></Card
+            >
+          </a>
+        </div>
+        <div>
+          <a href="/client-onbaording">
+            <Card :data-image="Thumb2"
+              >Make your own rules
+              <span>Run your agency your way, with a system that works for you.</span>
+              <span slot="badges" class="badge bg-success">CRM Service</span></Card
+            >
+          </a>
+        </div>
+        <div>
+          <a href="/client-onbaording">
+            <Card :data-image="Thumb3"
+              >Discover the power of auction<span>And offer a service that 36% of your clients desire.</span>
+              <span slot="badges" class="badge bg-success">Auction</span></Card
+            >
+          </a>
         </div>
       </Carousel>
     </Header>
 
     <main>
-      <div class="row pt-0">
-        <div class="col-12 col-md-8 mb-4">
-          <div class="admin-panel m-0">
-            <h2 class="bg-light">Our Ecosystem Services</h2>
+      <div class="mb-4 md-col-end-8 pt-0">
+        <div class="admin-panel mb-0">
+          <h2 class="bg-light">Our Ecosystem Services</h2>
 
-            <div class="mh-md-lg">
-              <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut
-                labore et dolore magna aliquyam erat, sed diam voluptua.
-                <a href="/find">Find out more</a>.
-              </p>
+          <div class="mh-md-lg d-flex">
+            <p>
+              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+              et dolore magna aliquyam erat, sed diam voluptua.
+              <a href="/find">Find out more</a>.
+            </p>
 
-              <div class="row row-cols-sm-2">
-                <div class="col">
-                  <a href="/client-onbaording">
-                    <Card
-                      >Marketing Toolkit
-                      <span>Drive instructions, with smarter prospecting.</span>
-                      <span slot="badges" class="badge bg-warning"
-                        ><i class="fa-regular fa-sparkles"></i> New</span
-                      ></Card
-                    >
-                  </a>
-                </div>
-                <div class="col">
-                  <a href="/client-onbaording">
-                    <Card>Auction <span>Offer your clients enhanced speed and security.</span></Card>
-                  </a>
-                </div>
-                <div class="col">
-                  <a href="/client-onbaording">
-                    <Card>CRM <span>Take your sales and letting to the next level.</span></Card>
-                  </a>
-                </div>
-                <div class="col">
-                  <a href="/client-onbaording">
-                    <Card
-                      >End-to-End Onboarding
-                      <span>Click on this card to go to your movebutler dashboard.</span>
-                      <span slot="badges" class="badge bg-success">Active</span></Card
-                    >
-                  </a>
-                </div>
-                <div class="col">
-                  <a href="/client-onbaording">
-                    <Card>Fast-Track<span>Here would be the top level description of the task</span></Card>
-                  </a>
-                </div>
-                <div class="col">
-                  <a href="/client-onbaording">
-                    <Card>Digital Valuer Tool <span>Here would be the top level description of the task</span></Card>
-                  </a>
-                </div>
+            <div class="row row-cols-sm-2">
+              <div class="col">
+                <a href="/client-onbaording">
+                  <Card
+                    >Marketing Toolkit
+                    <span>Drive instructions, with smarter prospecting.</span>
+                    <span slot="badges" class="badge bg-warning"><i class="fa-regular fa-sparkles"></i> New</span></Card
+                  >
+                </a>
+              </div>
+              <div class="col">
+                <a href="/client-onbaording">
+                  <Card>Auction <span>Offer your clients enhanced speed and security.</span></Card>
+                </a>
+              </div>
+              <div class="col">
+                <a href="/client-onbaording">
+                  <Card>CRM <span>Take your sales and letting to the next level.</span></Card>
+                </a>
+              </div>
+              <div class="col">
+                <a href="/client-onbaording">
+                  <Card
+                    >End-to-End Onboarding
+                    <span>Click on this card to go to your movebutler dashboard.</span>
+                    <span slot="badges" class="badge bg-success">Active</span></Card
+                  >
+                </a>
+              </div>
+              <div class="col">
+                <a href="/client-onbaording">
+                  <Card>Fast-Track<span>Here would be the top level description of the task</span></Card>
+                </a>
+              </div>
+              <div class="col">
+                <a href="/client-onbaording">
+                  <Card>Digital Valuer Tool <span>Here would be the top level description of the task</span></Card>
+                </a>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-4 mb-4 d-flex">
+      </div>
+      <div class="mb-4 md-col-start-9 md-col-end-12 d-flex">
+        <!--
           <Marketing class="mh-100 mw-100 m-0" :data-img="cardImg">
             <h2 class="h3">Unlock more revenue with our Compliance module</h2>
             <p>
@@ -140,7 +157,11 @@
             </p>
             <button class="btn btn-secondary">Lorem ipsum</button>
           </Marketing>
-        </div>
+          -->
+
+        <Content data-url="http://localhost:8080/wp-json/wp/v2/posts/1">
+          <Marketing class="bg-primary" :data-img="cardImg"><span class="h3">Default content</span></Marketing>
+        </Content>
       </div>
     </main>
     <footer class="bg-light pt-5 pb-5">
@@ -160,58 +181,3 @@
 </template>
 
 <style lang="scss"></style>
-
-<script>
-  import Nav from '@/components/Nav/Nav.vue';
-
-  import Header from '@/components/Header/Header.vue';
-  import Carousel from '@/components/Carousel/Carousel.vue';
-  import Marketing from '@/components/Marketing/Marketing.vue';
-
-  import Table from '@/components/Table/Table.vue';
-  import Card from '@/components/Card/Card.vue';
-  import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';
-  import Filterlist from '@/components/Filterlist/Filterlist.vue';
-  import headerImg from '../../img/homepage-banner.png';
-
-  import Thumb1 from '../../img/home-thumb-1.png';
-  import Thumb2 from '../../img/home-thumb-2.png';
-  import Thumb3 from '../../img/home-thumb-3.png';
-
-  import cardImg from '../../img/cardImg.png';
-
-  export default {
-    components: {
-      Nav,
-      Header,
-      Table,
-      Card,
-      AppliedFilters,
-      Filterlist,
-      Carousel,
-      Marketing,
-    },
-    computed: {
-      checked: {
-        get() {
-          return this.value;
-        },
-        set(value) {
-          this.$emit('input', value);
-        },
-      },
-    },
-    mounted() {
-      setTimeout(() => {}, '100');
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        cardImg: cardImg,
-        Thumb1: Thumb1,
-        Thumb2: Thumb2,
-        Thumb3: Thumb3,
-      };
-    },
-  };
-</script>
