@@ -39,3 +39,6 @@ export { default as Tab } from './components/Tabs/Tab.vue';
 export { default as Testimonial } from './components/Testimonial/Testimonial.vue';
 export { default as Timeline } from './components/Timeline/Timeline.vue';
 export { default as VideoCard } from './components/VideoCard/VideoCard.vue';
+export { default as Milestone } from './components/Milestones/Milestone.vue';
+export { default as MilestoneGroup } from './components/Milestones/MilestoneGroup.vue';
+

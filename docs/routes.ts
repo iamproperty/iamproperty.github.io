@@ -684,6 +684,22 @@ const routes = [
         },
         component: () => import('./views/components/TestimonialDoc.vue'),
       },
+      {
+        path: 'milestone',
+        name: 'Milestones',
+        meta: {
+          title: 'Milestones | Components | iamkey',
+        },
+        component: () => import('./views/components/MilestonesDoc.vue'),
+      },
+      {
+        path: 'milestone-group',
+        name: 'Milestone Group',
+        meta: {
+          title: 'Milestone Group | Components | iamkey',
+        },
+        component: () => import('./views/components/MilestoneGroupDoc.vue'),
+      },
     ],
   },
   {
