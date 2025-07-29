@@ -6,7 +6,7 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Integration from '../Integration.vue';
-
+  import TrackEvents from '../TrackEvents.vue';
 
         const taskData = ref([
           {
@@ -48,6 +48,11 @@
 
 
 <template>
+  <TrackEvents
+    selector="iam-milestone-group"
+    :events="['hide-future-items', 'show-future-items']"
+  ></TrackEvents>
+
   <main>
      <DSHeader :image="headerImg" section="components">
       <h1>Milestone Group</h1>

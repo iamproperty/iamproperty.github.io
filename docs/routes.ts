@@ -652,7 +652,7 @@ const routes = [
       },
       {
         path: 'milestone',
-        name: 'Milestones (Beta)',
+        name: 'Milestones',
         meta: {
           title: 'Milestones | Components | iamkey',
         },
@@ -660,7 +660,7 @@ const routes = [
       },
       {
         path: 'milestone-group',
-        name: 'Milestone Group (Beta)',
+        name: 'Milestone Group',
         meta: {
           title: 'Milestone Group | Components | iamkey',
         },

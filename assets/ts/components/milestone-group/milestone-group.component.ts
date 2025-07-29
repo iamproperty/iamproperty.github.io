@@ -1,16 +1,7 @@
+import { trackComponent, trackComponentRegistered } from '../_global';
 import milestoneGroup from '../../modules/milestone-group';
 
-// Data layer Web component created
-declare global {
-  interface Window {
-    dataLayer: Array<object>;
-  }
-}
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  event: 'customElementRegistered',
-  element: 'milestone-group',
-});
+trackComponentRegistered('iam-milestone-group');
 
 class iamMilestoneGroup extends HTMLElement {
   constructor() {
@@ -36,6 +27,13 @@ class iamMilestoneGroup extends HTMLElement {
   }
 
   connectedCallback(): void {
+    const milestoneGroupComponent = this;
+
+    trackComponent(milestoneGroupComponent, 'iam-milestone-group', [
+      'hide-future-items', 
+      'show-future-items'
+    ]);
+
     milestoneGroup(this);
   }
 }

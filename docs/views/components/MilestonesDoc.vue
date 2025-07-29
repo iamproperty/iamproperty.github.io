@@ -1,12 +1,12 @@
 <script setup>
   import { ref } from 'vue';
 
-  import MilestoneGroup from '@/components/Milestones/MilestoneGroup.vue';
   import Milestone from '@/components/Milestones/Milestone.vue';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import taskStructure from '../../img/milestones/task-structure.png';
   import Integration from '../Integration.vue';
+  import TrackEvents from '../TrackEvents.vue';
 
    const individualTaskData = ref([
           {
@@ -51,32 +51,6 @@
           },
         ]);
 
-        const taskData = ref([
-          {
-            id: "1",
-            name: "A task without any subtasks",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu mi, ut pulvinar urna dictum in. Integer sed nunc sit amet nulla fermentum iaculis.",
-            actions: [],
-            date_completed: '16/07/2025'
-          }, {
-            id: "2",
-            name: "A task with subtasks",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempus arcu mi, ut pulvinar urna dictum in. Integer sed nunc sit amet nulla fermentum iaculis.",
-            actions: [
-              {
-                id: "1",
-                action: "Subtask 1",
-                date_completed: '16/07/2025'
-              },
-              {
-                id: "2",
-                action: "Subtask 2",
-                date_completed: null
-              }
-            ]
-          }
-        ]);
-
 </script>
 
 <style>
@@ -88,6 +62,11 @@
 
 
 <template>
+   <TrackEvents
+    selector="iam-milestone"
+    :events="['milestone-item-closed', 'milestone-item-opened']"
+  ></TrackEvents>
+
   <main>
      <DSHeader :image="headerImg" section="components">
       <h1>Milestones</h1>
@@ -298,6 +277,23 @@
               <td>The wrapper for tasks that are added to the milestone.</td>
             </tr>
 
+          </tbody>
+        </table>
+      </template>
+
+      <template #classes>
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>complete</th>
+              <td>Adding the 'complete' class to the summary element of list item will turn the circle green with a tick inside it.</td>
+            </tr>
           </tbody>
         </table>
       </template>

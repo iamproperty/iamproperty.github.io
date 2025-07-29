@@ -1,16 +1,7 @@
+import { trackComponent, trackComponentRegistered } from '../_global';
 import milestone from '../../modules/milestone';
 
-// Data layer Web component created
-declare global {
-  interface Window {
-    dataLayer: Array<object>;
-  }
-}
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  event: 'customElementRegistered',
-  element: 'milestone',
-});
+trackComponentRegistered('iam-milestone');
 
 class iamMilestone extends HTMLElement {
   constructor() {
@@ -40,6 +31,13 @@ class iamMilestone extends HTMLElement {
   }
 
   connectedCallback(): void {
+    const milestoneComponent = this;
+
+    trackComponent(milestoneComponent, 'iam-milestone', [
+      'milestone-item-closed', 
+      'milestone-item-opened',
+    ]);
+
     milestone(this);
   }
 }
