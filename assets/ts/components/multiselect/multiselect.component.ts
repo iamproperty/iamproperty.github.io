@@ -67,8 +67,6 @@ class iamMultiselect extends HTMLElement {
         mutations.forEach(function (mutationRecord) {
           const targetElement = mutationRecord.target as HTMLElement;
 
-          console.log(targetElement);
-
           if (targetElement.classList.contains('was-validated')) {
             wrapper.classList.add('was-validated');
           } else {
@@ -149,9 +147,30 @@ class iamMultiselect extends HTMLElement {
       clearTimeout(hoverTimeout);
     });
 
-    search.addEventListener('blur', () => {
+    search.addEventListener('blur', (event) => {
+
+      setTimeout(function () {
+        const activeElement = document.activeElement;
+        
+        if(activeElement.getAttribute('type') != 'checkbox'){
+
+          if(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)){
+
+            multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
+            setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
+          }
+          search.value = "";
+
+          Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
+            setItem(checkbox);
+          });
+        }
+        
+      }, 200);
+
       clearTimeout(hoverTimeout);
       hoverTimeout = setTimeout(function () {
+
         multiselect.classList.remove('hover');
       }, 1000);
     });
@@ -191,6 +210,43 @@ class iamMultiselect extends HTMLElement {
       switch (
         event.key // change to event.key to key to use the above variable
       ) {
+        case 'ArrowLeft':
+          // Up pressed
+          event.preventDefault();
+
+          if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
+            const arrCheckboxes = multiselect.querySelectorAll(`label[slot="checked"][slot="checked"]`);
+
+            const activeIndex = Array.from(arrCheckboxes).indexOf(activeElement.closest('label'));
+            const prevCheckbox = Array.from(arrCheckboxes)[activeIndex - 1];
+
+            if (prevCheckbox) prevCheckbox.focus();
+            else search.focus();
+          }
+          else if (activeElement == multiselect){
+
+            const options = Array.from(multiselect.querySelectorAll('label[slot="checked"]')).sort(function(a, b) {
+              return +a.dataset.order - +b.dataset.order;
+            });
+
+            options.pop().focus();
+          }
+
+          break;
+        case 'ArrowRight':
+          // Up pressed
+          event.preventDefault();
+
+          if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
+            const arrCheckboxes = multiselect.querySelectorAll(`label[slot="checked"][slot="checked"]`);
+
+            const activeIndex = Array.from(arrCheckboxes).indexOf(activeElement.closest('label'));
+            const nextCheckbox = Array.from(arrCheckboxes)[activeIndex + 1];
+
+            if (nextCheckbox) nextCheckbox.focus();
+            else search.focus();
+          }
+          break;
         case 'ArrowUp':
           // Up pressed
           event.preventDefault();
@@ -236,6 +292,14 @@ class iamMultiselect extends HTMLElement {
           search.focus();
 
           break;
+        case 'Backspace':
+          if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
+
+            activeElement.checked = false;
+            setItem(activeElement);
+            search.focus();
+          }
+          break;
       }
     });
 
@@ -250,6 +314,7 @@ class iamMultiselect extends HTMLElement {
 
       return lastTag;
     }
+
 
     search.addEventListener('keydown', function (event) {
       switch (

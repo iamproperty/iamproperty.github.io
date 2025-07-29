@@ -9,7 +9,7 @@
   <div id="visualtest"></div>
 
   <nav>
-    <Nav logo="key" logotext="Design system<br/>&amp; framework">
+    <Nav logo="key" logotext="Design system<br/>&amp; framework" class="nav--sticky">
       <a href="/" class="brand brand--key" slot="logo">
         <svg>
           <title>iam key</title>

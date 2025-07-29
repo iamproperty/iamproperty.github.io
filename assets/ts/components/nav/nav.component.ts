@@ -347,6 +347,31 @@ class iamNav extends HTMLElement {
         searchButton.removeAttribute('aria-expanded');
       });
     }
+
+    if(this.classList.contains('nav--sticky')){
+      
+      console.log('hey');
+
+      let oldScrollY = window.scrollY;
+      window.onscroll = function(e) {
+        if(oldScrollY < window.scrollY){
+          document.body.setAttribute('data-direction', "down");
+        } else {
+          document.body.setAttribute('data-direction', "up");
+        }
+
+        if(window.scrollY > 100){
+          document.body.classList.add('past100');
+        }
+        else {
+
+          document.body.classList.remove('past100');
+        }
+        oldScrollY = window.scrollY;
+      }
+
+    }
+
   }
 }
 
