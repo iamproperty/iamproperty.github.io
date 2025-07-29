@@ -12,13 +12,9 @@
       <p></p>
     </div>
     <div class="visualtest container">
-
       <Content data-url="http://localhost:8000/wp-json/wp/v2/posts/1">
-
         <h2>Default content</h2>
       </Content>
     </div>
-
-
   </main>
 </template>

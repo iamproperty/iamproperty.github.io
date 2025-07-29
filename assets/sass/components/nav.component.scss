@@ -6,6 +6,7 @@
 
 @include margins();
 @include sizes();
+@include display();
 
 $layers: 'true' !default;
 $mobileOnly: 'false' !default;

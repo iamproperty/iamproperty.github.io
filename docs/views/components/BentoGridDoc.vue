@@ -11,6 +11,9 @@
   import bentoImg from '../../img/bento-grid.png';
   import bentoHover from '../../img/bento-grid-hover.png';
   import bentoExpand from '../../img/bento-grid-expand.png';
+
+  import { bentogrid as events } from '../../events.js';
+
 </script>
 
 <template>
@@ -124,27 +127,7 @@
       </template>
 
       <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>item-opened</th>
-              <td>When one of the items in the bento grid has been opened</td>
-              <td>{ "event": "item-opened", "title": "Item summary title"}</td>
-            </tr>
-            <tr>
-              <th>item-closed</th>
-              <td>When one of the items in the bento grid has been closed</td>
-              <td>{ "event": "item-closed", "title": "Item summary title"}</td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
 
       <template #criteria>
@@ -155,27 +138,7 @@
         </ul>
       </template>
       <template #data-layer>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>item-opened</th>
-              <td>When one of the items in the bento grid has been opened</td>
-              <td>{ "event": "item-opened", "title": "Item summary title"}</td>
-            </tr>
-            <tr>
-              <th>item-closed</th>
-              <td>When one of the items in the bento grid has been closed</td>
-              <td>{ "event": "item-closed", "title": "Item summary title"}</td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
     </Integration>
     <Versions pdf="/pdfs/bento-grid.pdf">

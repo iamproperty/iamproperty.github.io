@@ -8,6 +8,7 @@
   "table",
   "tabs",
   "card",
+  "calendar",
   "content",
   "filter-card",
   "video-card",
@@ -27,6 +28,7 @@
   "multiselect",
   "multi-step",
   "slider",
+  "split-button",
   "carousel",
   "marketing",
   "barchart",
@@ -34,7 +36,7 @@
   "bento-grid",
   "rank",
   "rankings",
+  "advanced-select",
   "milestone-group",
   "milestone"
-
 ]

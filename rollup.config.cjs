@@ -57,7 +57,6 @@ const rollupConfig = [
   }
 ];
 
-
 var components = require('./components.json');
 
 Array.from(components).forEach((component) => {

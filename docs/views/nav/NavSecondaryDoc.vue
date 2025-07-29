@@ -1,3 +1,22 @@
+
+<script setup>
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Tab from '@/components/Tabs/Tab.vue';
+  import WebReadme from '~/ts/components/nav/README.md';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Table from '@/components/Table/Table.vue';
+
+  import Nav from '@/components/Nav/Nav.vue';
+  import Readme from '@/components/Nav/README.md';
+
+  
+  import Integration from '../Integration.vue';
+  import Versions from '../Versions.vue';
+  import TrackEvents from '../TrackEvents.vue';
+
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -62,46 +81,130 @@
       </Nav>
     </div>
 
-    <div class="container pt-4">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h2>Web component</h2></summary>
-          <WebReadme></WebReadme>
-        </details>
-        <details>
-          <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
-        </details>
-        <!--
-        <details>
-          <summary><h2>HTML</h2></summary>
-          <pre><code class="javascript">{{`<nav></nav>`}}</code></pre>
-        </details>
-      -->
-      </Tabs>
-    </div>
-    <div class="bg-light version-control">
-      <div class="container">
+    <Integration component="nav" componentName="iam-nav">
+      <template #web-component>
+        <pre><code>{{`<nav>
+<iam-nav>
+  <a href="/" class="brand brand--property" slot="logo">
+    <svg>
+      <title>iamproperty</title>
+      <use xlink:href="/svg/logo.svg#logo-property"></use>
+    </svg>
+  </a>
+
+  <a href="/" class="selected">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+
+  <button class="btn btn-primary">Lorem ipsum</button>
+</iam-nav>
+</nav>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Nav from '@/components/nav/nav.vue</script>
+        
+<Nac>
+  <a href="/" class="brand brand--property" slot="logo">
+    <svg>
+      <title>iamproperty</title>
+      <use xlink:href="/svg/logo.svg#logo-property"></use>
+    </svg>
+  </a>
+
+  <a href="/" class="selected">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+  <a href="/">Lorem ipsum</a>
+
+  <button class="btn btn-primary">Lorem ipsum</button>
+</Nav>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
         <table>
           <thead>
             <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Notable updates</th>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
             </tr>
           </thead>
-          <tbody class="text-body">
+          <tbody>
             <tr>
+              <th>data-search-open</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>Flag that opens the search bar on desktop on page load.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #slots>
+        <table>
+          <thead>
+            <tr><th>Option</th><th>Default Value</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>default</td><td>-</td><td>Populates the main nav area</td></tr>
+            <tr><td>logo</td><td>-</td><td>A place to add the logo to the site</td></tr>
+            <tr><td>secondary</td><td>-</td><td>Moves the link upto the top of the navbar on desktop</td></tr>
+            <tr><td>actions</td><td>-</td><td>A place to add buttons</td></tr>
+            <tr><td>dual</td><td>-</td><td>Plave the link or list to the right of the nav, forcing the default slot to the left.</td></tr>
+            <tr><td>search</td><td>-</td><td>A place to include a form with search functionality</td></tr>
+          </tbody>
+        </table>
+      </template>
+<template #classes>
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>.bg-primary</th>
+              <td>will change the background of the navbar without chaning the menu background.</td>
+            </tr>
+            <tr>
+              <th>.nav-sticky</th>
+              <td>will add etxra styling to make the navbar stick to the top of the page</td>
+            </tr>
+            <tr>
+              <th>.nav-xs-sticky</th>
+              <td>will add etxra styling to make the navbar stick to the top of the page BUT only on the mobile view.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+      
+    </Integration>
+    <Versions pdf="/pdfs/navbar-duel.pdf">
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
               <td>V0.1</td>
               <td>25.08.2023</td>
               <td>N/A</td>
             </tr>
-          </tbody>
-        </table>
-        <a href="/pdfs/navbar-secondary.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+        </tbody>
+      </table>
+    </Versions>
+
   </main>
 </template>
 
@@ -119,32 +222,3 @@
     }
   }
 </style>
-
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-  import WebReadme from '~/ts/components/nav/README.md';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Table from '@/components/Table/Table.vue';
-
-  import Nav from '@/components/Nav/Nav.vue';
-  import Readme from '@/components/Nav/README.md';
-
-  export default {
-    components: {
-      Nav,
-      Readme,
-      DSHeader,
-      Table,
-      WebReadme,
-      Tabs,
-      Tab,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-      };
-    },
-  };
-</script>

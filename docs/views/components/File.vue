@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import Integration from '../Integration.vue';
 
+  import { fileupload as events } from '../../events.js';
+
   function filesupload($event) {
     console.log($event);
   }
@@ -185,32 +187,7 @@
       </template>
 
       <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>elementchange</th>
-              <td>Fires whenever the file input changes, so if files are added, or changed.</td>
-              <td>Emits the list of files currently added</td>
-            </tr>
-            <tr>
-              <th>empty</th>
-              <td>Fires when the file input changes, resulting in there being no files selected.</td>
-              <td></td>
-            </tr>
-            <tr>
-              <th>fileremoved</th>
-              <td>Fires when a file is removed from the list by clicking the X icon on an individual file.</td>
-              <td>Emits the name of the removed file</td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
 
       <template #criteria>
@@ -226,7 +203,7 @@
         </ul>
       </template>
       <template #data-layer>
-        <p>No component specific dataLayer events</p>
+        <span v-html="events"></span>
       </template>
     </Integration>
 

@@ -1,11 +1,8 @@
 import setupNotification, { closeNotification } from '../../modules/notification';
+import { trackComponent, trackComponentRegistered } from '../_global';
 
-// Data layer Web component created
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  event: 'customElementRegistered',
-  element: 'Notification',
-});
+trackComponentRegistered('iam-notification');
+
 
 class iamNotification extends HTMLElement {
   constructor() {
@@ -44,7 +41,8 @@ class iamNotification extends HTMLElement {
   connectedCallback(): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const wrapper = this;
-    const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : 'white';
+    const defaultStatusBG = this.hasAttribute('data-type') ? 'white' : 'info';
+    const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : defaultStatusBG;
 
     if (this.hasAttribute('data-type')) this.classList.add(`bg-${statusBG}`);
     else {
@@ -54,20 +52,31 @@ class iamNotification extends HTMLElement {
     if (!this.querySelector('i')) {
       switch (statusBG) {
         case 'danger':
-          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>');
+          this.insertAdjacentHTML(
+            'beforeend',
+            '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>'
+          );
           break;
         case 'warning':
-          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>');
+          this.insertAdjacentHTML(
+            'beforeend',
+            '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>'
+          );
           break;
         case 'success':
-          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>');
+          this.insertAdjacentHTML(
+            'beforeend',
+            '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>'
+          );
           break;
         default:
-          this.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>');
+          this.insertAdjacentHTML(
+            'beforeend',
+            '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>'
+          );
       }
     }
 
-    console.log('hey2')
     const buttons = this.querySelectorAll('a,button');
 
     Array.from(buttons).forEach((button) => {
@@ -93,12 +102,25 @@ class iamNotification extends HTMLElement {
         'click',
         function () {
           closeNotification(wrapper);
+
+          const customEvent = new CustomEvent('dismiss', {
+            detail: {
+              class: this.classList,
+            },
+          });
+
+          this.dispatchEvent(customEvent);
+
         },
         false
       );
     }
 
     setupNotification(this);
+
+    trackComponent(this, 'iam-notification', [
+      'dismiss'
+    ]);
   }
 }
 

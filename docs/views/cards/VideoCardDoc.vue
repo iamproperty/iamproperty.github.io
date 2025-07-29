@@ -9,6 +9,8 @@
   import cardAnatomy from '../../img/video-card-anatomy.png';
   import cardImg from '../../img/cardImg.png';
   import Table from '@/components/Table/Table.vue';
+
+  import { videocard as events } from '../../events.js';
 </script>
 <template>
   <TrackEvents selector="iam-video-card" :events="['play-video', 'close-video']"></TrackEvents>
@@ -299,29 +301,7 @@
       </template>
 
       <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>play-video</th>
-              <td>Card head is clicked</td>
-              <td></td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr>
-              <th>close-video</th>
-              <td>Dialog with video is closed via either pressing esc or clicking on the backdrop</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
 
       <template #watched-attrs>
@@ -354,35 +334,7 @@
         </ul>
       </template>
       <template #data-layer>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>play-video</th>
-              <td>When the card head is clicked</td>
-              <td>
-                {"event": "close-video", "element": "iam-video-card", "target": "iam-video-card", "Video
-                Type":"YoutTube","ID":"lROFZaJcVug"}
-              </td>
-            </tr>
-          </tbody>
-          <tbody>
-            <tr>
-              <th>close-video</th>
-              <td>Dialog with video is closed via either pressing esc or clicking on the backdrop</td>
-              <td>
-                {"event": "close-video", "element": "iam-video-card", "target": "iam-video-card", "Video
-                Type":"YoutTube","ID":"lROFZaJcVug"}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
     </Integration>
     <Versions pdf="/pdfs/video-card.pdf">

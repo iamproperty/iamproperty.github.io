@@ -1,5 +1,8 @@
 @use '../_func' as *;
 
+
+  @include visually-hidden();
+
 .outer {
   position: relative;
   max-width: var(--input-max-width, 50rem);

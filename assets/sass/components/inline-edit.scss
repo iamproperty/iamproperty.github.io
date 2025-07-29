@@ -1,5 +1,7 @@
 @use '../_func' as *;
 
+@include display();
+
 :host {
   max-width: var(--input-max-width, 50rem);
   display: block;
