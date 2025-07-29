@@ -9,7 +9,7 @@
   <div id="visualtest"></div>
 
   <nav>
-    <Nav logo="key" logotext="Design system<br/>&amp; framework">
+    <Nav logo="key" logotext="Design system<br/>&amp; framework" class="nav--sticky">
       <a href="/" class="brand brand--key" slot="logo">
         <svg>
           <title>iam key</title>
@@ -43,7 +43,7 @@
                 ]'
               />
 
-              <button class="suffix mt-0 me-0 mb-0"><i class="fa-regular fa-search"></i></button>
+              <button class="suffix mt-0 me-0 mb-0 pe-auto"><i class="fa-regular fa-search"></i></button>
             </span>
           </label>
           <datalist id="searchterms" ref="list">
@@ -73,6 +73,9 @@
         </li>
         <li class="list-inline-item me-4 ms-0 mb-2">
           <router-link to="/examples">Examples</router-link>
+        </li>
+        <li class="list-inline-item me-4 ms-0 mb-2">
+          <router-link to="/data-layer">Data layer</router-link>
         </li>
       </ul>
     </div>

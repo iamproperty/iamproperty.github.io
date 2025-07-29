@@ -269,6 +269,8 @@ $theme-colors: map.merge(
     'light': $light,
     'canvas': $canvas,
     'white': #fcfcfc,
+    'activeLink': #e8f9fd,
+    'activeLinkBorder': #1dbde6,
   ),
   $theme-colors
 );
@@ -359,6 +361,8 @@ $dark-mode-functional-colors: (
   'btn-secondary-bg-hover': var(--colour-white),
   'btn-secondary-hover': var(--colour-primary-theme),
   'btn-action-hover-bg': var(--colour-canvas-2),
+  'activeLink': #173c45,
+  'activeLinkBorder': #1dbde6,
 );
 
 $wider-colours: (
@@ -472,11 +476,13 @@ $fonts: map.merge(
   $vars: map.merge((--font-#{$font}: #{$value}), $vars);
 }
 
-
-$vars: map.merge((
-  '--type-scale': 1.2,
-  '--body-fs': 1rem,
-),$vars);
+$vars: map.merge(
+  (
+    '--type-scale': 1.2,
+    '--body-fs': 1rem,
+  ),
+  $vars
+);
 
 /* Headings variables are setup this way so that we can export them into the vue documentation */
 $heading-sizes: (

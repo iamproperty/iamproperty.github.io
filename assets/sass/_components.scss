@@ -42,6 +42,13 @@ $darkMode: 'true' !default;
   $mobileOnly: $mobileOnly
 );
 
+@use 'components/milestone.scss';
+@use 'components/calendar.config.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
+
 @include layer('components', $layers) {
   // Make sure the first
   main {
@@ -53,6 +60,10 @@ $darkMode: 'true' !default;
   }
 
   // #region Undefined web components
+
+  iam-header {
+    grid-column: container;
+  }
 
   @include media-breakpoint-up(md, $mobileOnly) {
     iam-header:not(:defined) {

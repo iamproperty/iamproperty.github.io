@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import { safeID, resolvePath, isTraversable } from '../../modules/helpers';
+import advancedSelect from '../../modules/advanced-select';
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
@@ -75,6 +76,8 @@ class iamSearch extends HTMLElement {
       displayInputField.setAttribute('list', listID);
     }
 
+    advancedSelect(this, displayInputField, datalist, true);
+
     // Search the endpoint when 3 characters has been added
     if (searchWrapper.hasAttribute('data-url')) {
       displayInputField.addEventListener('input', () => {
@@ -91,6 +94,7 @@ class iamSearch extends HTMLElement {
 
       if (match) {
         inputField.value = match.getAttribute('data-value');
+        displayInputField.value = match.getAttribute('data-value');
       } else if (displayInputField.value.length > 0 && !subMatch) {
         displayInputField.classList.add('is-invalid');
         displayInputField.closest('label').setAttribute('data-error', 'No results returned');
@@ -141,10 +145,8 @@ class iamSearch extends HTMLElement {
                 const actualValue = resolvePath(item, valueSchema, '');
                 const displayValue = resolvePath(item, displaySchema, '').replace('\n', ', ');
 
-                console.log(displayValue);
-
                 if (!datalist.querySelector(`option[data-value="${actualValue}"]`))
-                  listString += `<option value="${displayValue}" data-value="${actualValue}"></option>`;
+                  listString += `<option value="${displayValue}" data-value="${actualValue}">${displayValue}</option>`;
               });
             } else if (typeof loopValues == 'object') {
               for (const [key, value] of Object.entries(loopValues)) {
@@ -154,7 +156,7 @@ class iamSearch extends HTMLElement {
                     const displayValue = resolvePath(item, displaySchema, '').replace('\n', ', ');
 
                     if (!datalist.querySelector(`option[data-value="${actualValue}"]`))
-                      listString += `<option value="${key}: ${displayValue}" data-value='${actualValue}'></option>`;
+                      listString += `<option value="${key}: ${displayValue}" data-value='${actualValue}'>${key}: ${displayValue}</option>`;
                   });
                 }
               }

@@ -4,31 +4,12 @@
       <h1>Selects</h1>
     </DSHeader>
 
-    <h2>Introduction</h2>
+    <p>Selects allow users to select one or multiple options from a list of options.</p>
     <p>
-      Selects allow users to select one or multiple options from a list of options. A selected option can represent a
-      value in a form, or can be used as an action to filter or sort existing content.
+      A selected option can represent a value in a form, or can be used as an action to filter or sort existing content.
     </p>
 
-    <h2>Anatomy</h2>
-    <p>Selects are composed of 4 required sections and 6 optional sections.</p>
-
-    <img :src="Anatomy" />
-
-    <ol>
-      <li>Field label (optional).</li>
-      <li>Field.</li>
-      <li>Placeholder text (optional).</li>
-      <li>Validation icon (optional).</li>
-      <li>Dropdown button</li>
-      <li>Helper text (optional).</li>
-      <li>Validation message (optional)</li>
-      <li>Field value.</li>
-      <li>Clear field button (only for search select)</li>
-      <li>Dropdown (browser default)</li>
-    </ol>
-
-    <h2 class="mt-4">Select types</h2>
+    <h2>Select types</h2>
 
     <table>
       <thead>
@@ -53,7 +34,7 @@
           </td>
         </tr>
         <tr>
-          <td><a href="#searchselect" class="text-nowrap">Search select</a></td>
+          <td><a href="#advancedselect" class="text-nowrap">Advanced select</a></td>
           <td>
             - Search and select one option from a predefined set of options.<br />- Suitable when there are a lot of
             options in the list. The search functionality makes it simpler for the user to find the desired option
@@ -62,10 +43,8 @@
         </tr>
       </tbody>
     </table>
-
-    <h2 id="standard">Standard select</h2>
     <!-- #region standard -->
-
+    <h2 id="standard">Standard select</h2>
     <p>
       The standard select field is an interactive element typically used in forms to allow users to choose one option
       from a predefined set of options.
@@ -75,36 +54,49 @@
 
     <p>
       Selects are useful when there are several options to choose from. If there are only a few options, consider using
-      radio buttons to present options instead.
+      <a href="/form/radio">radio buttons</a> to present options instead.
     </p>
+
+    <label class="md-col-end-4 mb-5">
+      Property type
+      <select name="select" required>
+        <option value="">Select property address</option>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option 4</option>
+      </select>
+    </label>
+
+    <h3>Anatomy</h3>
+    <p>Selects are composed of 4 required sections and 5 optional sections.</p>
+
+    <img :src="Anatomy" />
+
+    <ol class="mb-5">
+      <li>Field label (optional).</li>
+      <li>Field.</li>
+      <li>Placeholder text (optional).</li>
+      <li>Validation icon (optional).</li>
+      <li>Dropdown button</li>
+      <li>Helper text (optional).</li>
+      <li>Validation message (optional)</li>
+      <li>Field value.</li>
+      <li>Dropdown (browser default)</li>
+    </ol>
+
+    <h3>Behaviour</h3>
+
+    <ul class="mb-5">
+      <li>Selecting the field or chevron should activate the dropdown and set the field to active.</li>
+      <li>All values from the list should be shown in the dropdown.</li>
+      <li>Selecting an option should add that value to the field and close the dropdown.</li>
+    </ul>
 
     <h3>States</h3>
     <div class="container visualtest">
-      <p class="lead pb-2">Inactive state</p>
-      <label>
-        Property type
-        <select name="select" required>
-          <option value="">Select property address</option>
-          <option>Option 1</option>
-          <option>Option 2</option>
-          <option>Option 3</option>
-          <option>Option 4</option>
-        </select>
-      </label>
-      <p class="lead pb-2 mt-4">Active state</p>
-      <label>
-        Property type
-        <select name="select" required>
-          <option value="">Select property address</option>
-          <option selected>Bungalow</option>
-          <option>Option 2</option>
-          <option>Option 3</option>
-          <option>Option 4</option>
-        </select>
-      </label>
-
-      <p class="lead pb-2 mt-4">Inactive - error state</p>
-      <form class="was-validated">
+      <div class="md-col-end-5 pb-5">
+        <p class="lead pb-2">Inactive state</p>
         <label>
           Property type
           <select name="select" required>
@@ -115,7 +107,48 @@
             <option>Option 4</option>
           </select>
         </label>
-      </form>
+      </div>
+      <div class="md-col-start-6 md-col-end-10 pb-5">
+        <p class="lead pb-2">Active state</p>
+        <label>
+          Property type
+          <select name="select" required>
+            <option value="">Select property address</option>
+            <option selected>Bungalow</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+            <option>Option 4</option>
+          </select>
+        </label>
+      </div>
+      <div class="md-col-end-5 pb-5">
+        <p class="lead pb-2">Inactive state</p>
+        <label>
+          Property type
+          <select name="select" required>
+            <option value="">Select property address</option>
+            <option>Option 1</option>
+            <option selected>12 Oak Road, Newcastle upon Tyne, NE3 4Q</option>
+            <option>Option 3</option>
+            <option>Option 4</option>
+          </select>
+        </label>
+      </div>
+      <div class="md-col-start-6 md-col-end-10 pb-5">
+        <p class="lead pb-2">Inactive - error state</p>
+        <form class="was-validated">
+          <label>
+            Property type
+            <select name="select" required>
+              <option value="">Select property address</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+              <option>Option 4</option>
+            </select>
+          </label>
+        </form>
+      </div>
     </div>
     <h3 class="mt-3">Implementation</h3>
     <pre><code>{{ `<label>
@@ -138,27 +171,25 @@
     </p>
 
     <p>
-      The options are presented in a scrollable dropdown list (which has a max height). The field can also be used to
-      type and filter options in the scrollable dropdown list.
+      The options are presented in a scrollable menu (which has a max height). The field can also be used to type and
+      filter options in the scrollable menu
     </p>
 
     <a href="/components/multiselect" class="btn btn-primary">See multiselect component</a>
 
-    <h2 class="mt-4" id="searchselect">Search select</h2>
+    <h2 class="mt-4" id="advancedselect">Advanced select</h2>
 
     <p>
       The search select field is an interactive element typically used in forms to allow users to filter a list of
       predefined options and select one of those options.
     </p>
 
-    <p>The options are presented in a browser default drop-down menu when the field clicked or tapped.</p>
-
     <p>
-      Search selects are useful when there are a lot of options in the list. The search functionality makes it simpler
-      for the user to find the desired option quicker than a standard select.
+      Advanced selects are useful when there are a lot of options in the list. The search functionality makes it simpler
+      for the user to find the desired option quicker than a standard select
     </p>
 
-    <a href="/components/search" class="btn btn-primary">See search component</a>
+    <a href="/components/advanced-select" class="btn btn-primary">See advanced select component</a>
 
     <!--
   <div class="container">

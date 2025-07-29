@@ -6,6 +6,8 @@
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
+
+  import { filtercard as events } from '../../events.js';
 </script>
 <template>
   <TrackEvents selector="iam-filter-card" :events="['select-card', 'unselect-card']"></TrackEvents>
@@ -245,27 +247,7 @@
       </template>
 
       <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>select-card</th>
-              <td>Card is actived via click</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>unselect-card</th>
-              <td>Card is un-actived via click</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-          </tbody>
-        </table>
+        <span v-html="events"></span>
       </template>
 
       <template #criteria>
@@ -274,27 +256,8 @@
         </ul>
       </template>
       <template #data-layer>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>select-card</th>
-              <td>checkbox is checked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-            <tr>
-              <th>unselect-card</th>
-              <td>Checkbox is unchecked</td>
-              <td>{"Card value":"on","input name":"card10"}</td>
-            </tr>
-          </tbody>
-        </table>
+        
+        <span v-html="events"></span>
       </template>
     </Integration>
     <Versions pdf="/pdfs/cards.pdf">

@@ -13,9 +13,11 @@
 iam-rankings {
   table {
     display: block;
-    width: 100%;
+    width: calc(100% - 2rem);
     font-weight: normal;
     counter-reset: countItem;
+    overflow: visible;
+    margin-inline: 1rem;
   }
   thead {
     display: none;
@@ -26,6 +28,11 @@ iam-rankings {
 
   :is(td, th) {
     font-weight: normal;
+  }
+
+  td {
+    font-size: rem(28);
+    color: var(--colour-heading);
   }
 
   tr.current {
@@ -39,6 +46,7 @@ iam-rankings {
     display: flex;
     width: 100%;
     position: relative;
+    z-index: 1;
 
     &:before {
       counter-increment: countItem; /* Increment the value of section counter by 1 */
@@ -68,11 +76,65 @@ iam-rankings {
       width: 100%;
       height: 1rem;
     }
+
+    progress::-webkit-progress-bar {
+      background-color: transparent;
+      border-radius: 0;
+    }
+    progress::-webkit-progress-value {
+      background-color: var(--colour, var(--colour-info));
+      border-radius: 0;
+    }
+  }
+
+  tr:has(iam-rank) {
+    &:before {
+      opacity: 0;
+    }
+    iam-rank {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 2rem;
+    }
+  }
+
+  tr:has(+ tr.highlighted) {
+    border: none !important;
+  }
+
+  tr.highlighted {
+    background: var(--colour-info);
+    margin-block: 1rem;
+
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      display: block;
+      background: var(--colour-info);
+      z-index: -1;
+      margin: -0.75rem;
+      border-radius: 0.5rem;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    }
+  }
+
+  tr:nth-child(1) progress {
+    --colour: var(--wider-colour-7);
   }
 
   @each $index, $value in $chart-colors {
-    tr:nth-child(#{$index}) progress {
+    tr:nth-child(#{$index + 1}) progress {
       --colour: var(--chart-colour-#{$index}, #{$value});
     }
   }
+}
+
+iam-rankings.hide-progress progress {
+  display: none;
+}
+
+iam-rankings.hide-value tbody td {
+  display: none;
 }

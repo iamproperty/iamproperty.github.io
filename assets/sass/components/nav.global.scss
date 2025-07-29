@@ -43,8 +43,16 @@ nav:has(iam-nav) {
 }
 
 nav:has(iam-nav.nav--sticky) {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  transition: transform 1s;
+
   iam-nav {
     position: fixed;
+    outline: 2px solid #EEEEEE;
   }
 }
 
@@ -55,9 +63,22 @@ nav:has(iam-nav.nav--sticky) {
   }
 
   nav:has(iam-nav.nav--xs-sticky) {
+
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    transition: transform 1s;
+
     iam-nav {
       position: fixed;
     }
+  }
+  
+  body[data-direction="down"].past100 nav:has(.nav--xs-sticky){
+
+    transform: translate(0,-110%);
   }
 }
 
@@ -67,6 +88,13 @@ nav:has(iam-nav.nav--sticky) {
     overflow: hidden;
   }
 }
+
+
+body[data-direction="down"].past100 nav:has(.nav--sticky){
+
+  transform: translate(0,-110%);
+}
+
 // #endregion
 
 // #region General styles
@@ -121,6 +149,8 @@ iam-nav {
     &:active {
       text-decoration-color: #a2d393 !important;
     }
+
+    &.active,
     &.selected,
     &[aria-current='page'] {
       text-decoration-color: var(--colour-info) !important;

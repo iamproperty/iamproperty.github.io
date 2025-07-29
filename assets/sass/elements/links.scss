@@ -58,7 +58,7 @@ $darkMode: 'true' !default;
     position: relative;
     font-weight: bold;
 
-    &:not(.text-decoration-none)  {
+    &:not(.text-decoration-none) {
       &:after {
         position: absolute;
         content: '';
@@ -160,8 +160,7 @@ $darkMode: 'true' !default;
   // #endregion
 }
 
-:is(.youtube-link[data-youtube], .vimeo-link[data-vimeo]){
-
+:is(.youtube-link[data-youtube], .vimeo-link[data-vimeo]) {
   position: relative;
 
   &:before {
@@ -207,3 +206,132 @@ $darkMode: 'true' !default;
     --video-btn-colour: color-mix(in oklab, var(--colour-success), #000000 20%) !important;
   }
 }
+
+// #region Sidebar link styling including parent group styling
+iam-collapsible-side {
+  > * {
+    padding-left: rem(24);
+
+    @include media-breakpoint-up(sm) {
+      padding-left: rem(40);
+    }
+
+    @include media-breakpoint-up(md) {
+      padding-left: var(--container-padding-x-md);
+    }
+  }
+
+  hr {
+    border-bottom: 2px solid var(--colour-border) !important;
+    margin-right: rem(-40) !important;
+  }
+}
+
+.vertical-tabs [class*='link'],
+iam-collapsible-side [class*='link'] {
+  display: block !important;
+  line-height: rem(20) !important;
+  padding: rem(16) rem(24) rem(16) rem(24) !important;
+  margin: 0 !important;
+  flex-shrink: 0;
+  font-size: 1rem !important;
+  font-weight: normal !important;
+  text-decoration: none !important;
+  border-bottom: 2px solid var(--colour-border) !important;
+  border-right: 2px solid var(--colour-border) !important;
+  margin-right: rem(-40) !important;
+  z-index: 2;
+
+  &::after {
+    display: none !important;
+  }
+
+  i {
+    // icon
+    margin-right: rem(8) !important;
+  }
+
+  @include media-breakpoint-up(sm) {
+    padding-left: rem(24) !important;
+  }
+
+  @include media-breakpoint-up(md) {
+    padding-left: var(--container-padding-x-md) !important;
+  }
+}
+
+.vertical-tabs a,
+iam-collapsible-side a {
+  &:hover,
+  &:focus,
+  &[aria-expanded] {
+    background-color: var(--colour-activeLink) !important;
+  }
+}
+
+.vertical-tabs [class*='active'],
+iam-collapsible-side [class*='active'] {
+  background-color: var(--colour-activeLink) !important;
+  border-right-color: var(--colour-activeLinkBorder) !important;
+  border-right-width: 3px !important;
+}
+
+// Parent links
+.vertical-tabs,
+iam-collapsible-side {
+  .parent {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none;
+
+    li:first-of-type {
+      cursor: pointer;
+
+      a {
+        padding-right: rem(40) !important;
+
+        &::before {
+          position: absolute;
+          display: block;
+          content: '\f055';
+          font-family: 'Font Awesome 6 Pro';
+          right: 20px;
+          font-weight: 300;
+        }
+      }
+    }
+
+    li:not(:first-of-type) {
+      display: none;
+
+      a {
+        background-color: var(--colour-light) !important;
+        padding-left: rem(90) !important;
+      }
+    }
+
+    &.reveal {
+      li:first-of-type {
+        a::before {
+          content: '\f056';
+          font-weight: bold;
+        }
+      }
+
+      li:not(:first-of-type) {
+        display: block;
+      }
+    }
+  }
+
+  @include media-breakpoint-up(sm) {
+    .parent {
+      li:not(:first-of-type) {
+        a {
+          padding-left: rem(90) !important;
+        }
+      }
+    }
+  }
+}
+// #endregion

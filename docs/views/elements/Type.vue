@@ -17,7 +17,6 @@
       <p>We use a type scale ratio of 1.2, minor third scale, to ensure consistency through type sizing.</p>
     </div>
     <div class="container visualtest">
-
       <div class="row">
         <div class="d-none d-md-block col-md-3">
           <img :src="tabletDesktopImg" alt="Rendered image of a tablet and a desktop PC" loading="lazy" class="mb-5" />
@@ -26,7 +25,8 @@
         <div class="col">
           <div class="row">
             <div class="col-12 col-sm-7 mb-2">
-              <span class="h1">This is heading 1<span
+              <span class="h1"
+                >This is heading 1<span
                   class="lineheight-demo"
                   :style="`height:${$shared.cssVars.h1_pb}!important`"
                 ></span
@@ -34,18 +34,15 @@
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
-                >H1<br />Font-family: Qanelas<br />Font-weight: Bold<br />Font-size:
-                3rem (48px)<br />Letter-spacing: 0px<br />Line-height:
-                3.5rem (56px)<br />Padding-bottom:
-                3.5rem (56px)</span
+                >H1<br />Font-family: Qanelas<br />Font-weight: Bold<br />Font-size: 3rem (48px)<br />Letter-spacing:
+                0px<br />Line-height: 3.5rem (56px)<br />Padding-bottom: 3.5rem (56px)</span
               >
             </div>
-            
           </div>
           <div class="row">
             <div class="col-12 col-sm-7 mb-2">
-              <span
-                class="h2">This is heading 2<span
+              <span class="h2"
+                >This is heading 2<span
                   class="lineheight-demo"
                   :style="`height:${$shared.cssVars.h2_pb}!important`"
                 ></span
@@ -53,13 +50,10 @@
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
-                >H2<br />Font-family: Qanelas<br />Font-weight: Bold<br />Font-size:
-                2.5rem (40px)<br />Letter-spacing: 0px<br />Line-height:
-                3rem (48px)<br />Padding-bottom:
-                3rem (48px)</span
+                >H2<br />Font-family: Qanelas<br />Font-weight: Bold<br />Font-size: 2.5rem (40px)<br />Letter-spacing:
+                0px<br />Line-height: 3rem (48px)<br />Padding-bottom: 3rem (48px)</span
               >
             </div>
-            
           </div>
           <div class="row">
             <div class="col-12 col-sm-7 mb-2">
@@ -74,10 +68,8 @@
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
-                >H3<br />Font-family: Qanelas<br />Font-weight: Semi-Bold <br />Font-size:
-                1.75rem (28px)<br />Letter-spacing: 0px<br />Line-height:
-                2rem (36px)<br />Padding-bottom:
-                2rem (36px)</span
+                >H3<br />Font-family: Qanelas<br />Font-weight: Semi-Bold <br />Font-size: 1.75rem (28px)<br />Letter-spacing:
+                0px<br />Line-height: 2rem (36px)<br />Padding-bottom: 2rem (36px)</span
               >
             </div>
           </div>
@@ -94,10 +86,8 @@
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
-                >H4<br />Font-family: Qanelas<br />Font-weight: Semi-Bold<br />Font-size:
-                1.5rem (24px)<br />Letter-spacing: 0px<br />Line-height:
-                1.75rem (32px)<br />Padding-bottom:
-                1.75rem (32px)</span
+                >H4<br />Font-family: Qanelas<br />Font-weight: Semi-Bold<br />Font-size: 1.5rem (24px)<br />Letter-spacing:
+                0px<br />Line-height: 1.75rem (32px)<br />Padding-bottom: 1.75rem (32px)</span
               >
             </div>
           </div>
@@ -145,12 +135,12 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
               </p>
-
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <p class="small extra-small pb-2">
                 body<br />Font-family: Qanelas<br />Font-weight: Normal<br />Font-size:
-                {{ $shared.cssVars.body_fs_rem }} ({{ $shared.cssVars.body_fs }}px)<br />Letter-spacing: 0px<br />Line-height: auto
+                {{ $shared.cssVars.body_fs_rem }} ({{ $shared.cssVars.body_fs }}px)<br />Letter-spacing: 0px<br />Line-height:
+                auto
               </p>
             </div>
           </div>

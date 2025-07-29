@@ -49,10 +49,14 @@ $darkMode: 'true' !default;
     border-radius: rem(16);
     padding: 0 rem(16);
 
-    &:after {
+    &:not(:has(i)):after {
       content: '\2715';
       margin-left: 0.6em;
       font-weight: bold;
+    }
+
+    i {
+      margin-left: 0.5rem;
     }
 
     &:is(:hover, :focus, .hover, :focus-within, :focus-visible) {

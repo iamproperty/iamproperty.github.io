@@ -14,6 +14,8 @@ const components = [
   'table-no-submit',
   'tabs',
   'card',
+  'calendar',
+  'content',
   'filter-card',
   'video-card',
   'record-card',
@@ -37,10 +39,12 @@ const components = [
   'barchart',
   'doughnutchart',
   'bento-grid',
+  'milestone-group',
+  'milestone'
 ];
 
 // Attach classes to dom elements
-document.addEventListener('DOMContentLoaded', async():void => {
+document.addEventListener('DOMContentLoaded', async (): void => {
   createDataLayer();
   createDynamicEvents();
 
@@ -52,8 +56,6 @@ document.addEventListener('DOMContentLoaded', async():void => {
   extendInputs(document.body);
 
   videoSupport(document.body);
-
-
 
   /*
   const prefix = 'iam';

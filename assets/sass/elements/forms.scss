@@ -247,7 +247,7 @@ $optionalText: 'true' !default;
     input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
     textarea,
     output,
-    select:not(.select--minimal)
+    select:not(.select--minimal, .btn)
   ) {
     display: block;
     width: 100%;
@@ -256,7 +256,7 @@ $optionalText: 'true' !default;
     padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
     font-size: var(--input-fs, #{rem(16)});
     line-height: var(--input-lh, #{rem(20)});
-    color: var(--colour-body);
+    color: var(--colour-heading);
     background-color: var(--colour-canvas-2);
     background-clip: padding-box;
     border: 2px solid var(--colour-primary);
@@ -280,9 +280,12 @@ $optionalText: 'true' !default;
     &:is(:focus, .focus):not(:disabled) {
       border-color: var(--colour-info);
       outline: 0;
-      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
     }
 
+    &:is(:focus, .focus):not(:disabled):not(:invalid) {
+      
+      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+    }
     // Add some height to date inputs on iOS
     // https://github.com/twbs/bootstrap/issues/23307
     // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
@@ -570,12 +573,12 @@ $optionalText: 'true' !default;
 
     .suffix
       ~ :is(
-        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']),
+        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not([type='time']),
         textarea,
         output
       ),
     :is(
-        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']),
+        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not([type='time']),
         textarea,
         output
       ):has(~ .suffix) {
@@ -618,7 +621,7 @@ $optionalText: 'true' !default;
     border-color: var(--colour-danger) !important;
   }
 
-  .was-validated select:is(:invalid, .is-invalid, [aria-invalid], :-internal-autofill-selected) {
+  .was-validated select:not(.btn):is(:invalid, .is-invalid, [aria-invalid], :-internal-autofill-selected) {
     $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:
@@ -1013,7 +1016,7 @@ $optionalText: 'true' !default;
 
   // #region Select
 
-  select {
+  select:not(.btn) {
     $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:
@@ -1313,7 +1316,7 @@ $optionalText: 'true' !default;
     color: transparent;
     cursor: pointer;
     height: auto;
-    left: 8em;
+    left: 4em;
     position: absolute;
     right: 0;
     top: 0;
@@ -1322,3 +1325,122 @@ $optionalText: 'true' !default;
   }
   // #endregion
 }
+
+// #region datalist
+:is(iam-advanced-select, iam-search) {
+  position: relative;
+  display: block;
+
+  label {
+    position: relative;
+  }
+
+  input {
+    padding-right: 3rem;
+  }
+
+  .empty {
+
+    position: absolute;
+    bottom: 0.5rem;
+    right: 3.5rem;
+    margin: 0;
+    aspect-ratio: 1 / 1;
+    
+    width: 2rem;
+    height: 2rem;
+    
+    text-align: center;
+    line-height: 1;
+
+    &:not(:hover,:focus){
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
+
+  label:after,
+  .hint-text {
+    position: absolute;
+    top: 100%;
+  }
+}
+
+.was-validated :is(iam-advanced-select, iam-search) label:has(:is(input:not([type=radio]):not([type=checkbox]), select)){
+  margin-bottom: 2.5rem;
+
+  input {
+    background: none!important;
+  }
+
+  &:has(:invalid, .is-invalid) .hint-text { 
+    display: none;
+  }
+}
+
+:is(iam-advanced-select, iam-search) datalist {
+  &:empty {
+    display: none !important;
+  }
+
+  z-index: 99;
+  top: 100%;
+  position: absolute;
+  background-color: white;
+  border-top: none;
+  padding: 0.5rem;
+  max-height: 10rem;
+  overflow-y: auto;
+  width: 100%;
+  max-width: var(--input-max-width, 50rem);
+  border: none !important;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+
+  option {
+    background-color: white;
+    padding: 0.5rem;
+    color: blue !important;
+    cursor: pointer;
+    background: unset !important;
+    border: unset !important;
+    color: var(--colour-primary) !important;
+    font-weight: inherit !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    line-height: rem(19) !important;
+    margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
+    padding-block: var(--menu-item-padding, 0.5rem) !important;
+    width: var(--menu-item-width, 100%) !important;
+    max-width: var(--menu-item-width, 100%) !important;
+    text-align: var(--menu-item-text-align, left) !important;
+
+    &:is(:hover, :focus) {
+      background: var(--colour-light) !important;
+      border-radius: 0.25rem !important;
+    }
+
+    &:active {
+      background: rgba(224, 224, 224, 1) !important;
+      border-radius: 0.25rem !important;
+    }
+
+  }
+}
+
+iam-advanced-select datalist {
+  
+  option {
+    &.active {
+      border-left: 4px solid var(--colour-info) !important;
+      border-radius: 0.25rem !important;
+      background: hsl(from var(--colour-info) h s l / 10%) !important;
+    }
+  }
+}
+
+// #endregion

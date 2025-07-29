@@ -5,6 +5,10 @@
 
 @include max-height();
 
+:host {
+  overflow: visible;
+}
+
 *,
 *::before,
 *::after {
@@ -15,46 +19,52 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  align-items: flex-start;
+
   max-width: 30rem;
   margin: auto;
+  gap: 1rem;
 
   > div {
-    flex-basis: 33.33%;
-    flex-grow: 0;
-    flex-shrink: 0;
+    flex-basis: 30%;
+    flex-grow: 1;
+    flex-shrink: 1;
     order: 1;
-
-    iam-rank {
-      margin: 0;
-      width: 100%;
-    }
-
-    > span {
-      display: block;
-      font-size: rem(14);
-      line-height: 1;
-      font-weight: 700;
-      margin: 0;
-      padding-block: 0.5rem;
-      text-align: center;
-      max-width: 100%;
-      //margin-inline: -1rem;
-      overflow: hidden;
-    }
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
   }
 
   > div:nth-child(1) {
     order: 2;
-    padding: 0;
-  }
-
-  > div:nth-child(2) {
-    padding: 1rem 1rem 0 0;
   }
 
   > div:nth-child(3) {
     order: 3;
-    padding: 1rem 0 0 1rem;
   }
+}
+
+.mh-md {
+  display: contents;
+
+  &:before {
+    display: none;
+  }
+}
+
+:host(.leaderboard-scroll) .mh-md {
+  display: block;
+  max-height: calc(var(--leaderboard-height, 25rem) - var(--mh-modifier, 0rem));
+
+  &:before {
+    display: block;
+  }
+}
+
+:host(.hide-podium) .podium {
+  display: none;
+}
+
+:host(.hide-leaderboard) .mh-md {
+  display: none !important;
 }
