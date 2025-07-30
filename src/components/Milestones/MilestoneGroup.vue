@@ -1,3 +1,21 @@
+<script setup>
+  import { onMounted } from 'vue';
+
+  const component = 'milestone-group';
+
+  onMounted(() => {
+
+    import(`../../../assets/js/components/${component}/${component}.component.min.js`)
+      .then((module) => {
+        if (!window.customElements.get(`iam-${component}`))
+          window.customElements.define(`iam-${component}`, module.default);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+</script>
+
 <template>
   <iam-milestone-group>
     <slot></slot>
@@ -7,21 +25,3 @@
 <style lang="scss">
 </style>
 
-<script>
-  export default {
-    name: 'MilestoneGroup',
-    props: {},
-    mounted() {
-      this.$nextTick(function () {
-        import(`../../../assets/js/components/milestone-group/milestone-group.component.min.js`)
-          .then((module) => {
-            if (!window.customElements.get(`iam-milestone-group`))
-              window.customElements.define(`iam-milestone-group`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      });
-    },
-  };
-</script>

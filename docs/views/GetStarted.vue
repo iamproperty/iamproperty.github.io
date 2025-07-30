@@ -1,3 +1,8 @@
+<script setup>
+  import workflow from '../img/development-workflow.png';
+
+</script>
+
 <template>
   <main>
     <h1>Getting started</h1>
@@ -98,19 +103,3 @@ for (const [key, value] of Object.entries(iamkey)) {
     <img :src="workflow" alt="" />
   </main>
 </template>
-
-<script>
-  import Readme from '../../README.md';
-  import workflow from '../img/development-workflow.png';
-
-  export default {
-    components: {
-      Readme,
-    },
-    data: function () {
-      return {
-        workflow: workflow,
-      };
-    },
-  };
-</script>

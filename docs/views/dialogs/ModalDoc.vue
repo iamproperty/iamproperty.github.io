@@ -1,3 +1,62 @@
+
+<script setup>
+  import { onMounted } from 'vue';
+
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import DSHeader from '../DSHeader.vue';
+  import ModalVariants from '../ModalVariants.vue';
+  import headerImg from '../../img/type-header.png';
+  import DialogUsage from '../DialogUsage.vue';
+  import modalPassive from '../../img/dialogs/modal-passive.png';
+  import modalPassiveAnatomy from '../../img/dialogs/passive-modal-anatomy.png';
+  import modalTransactional from '../../img/dialogs/modal-transactional.png';
+  import modalTransactionalAnatomy from '../../img/dialogs/transactional-modal-anatomy.png';
+  import modalMulti from '../../img/dialogs/modal-multi.png';
+  import modalMultiAnatomy from '../../img/dialogs/multi-modal-anatomy.png';
+  import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scroll.png';
+  import modalAcknowledgement from '../../img/dialogs/modal-acknowledgement.png';
+  import modalAcknowledgementAnatomy from '../../img/dialogs/acknowledgement-modal-anatomy.png';
+
+  import { createDialog } from '../../../assets/ts/modules/dialogs';
+
+  
+  const htmlUsage = `<button data-modal="modal" class="btn btn-secondary">Open Modal</button>
+
+<dialog id="modal">
+  <h3>Dialog Content (Modal)</h3>
+  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+</dialog>`;
+
+onMounted(() => {
+
+  
+        Array.from(document.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
+          let parent = dialog.closest('.dialog__wrapper');
+
+          if (!parent) {
+            dialog.removeAttribute('open');
+            dialog.showModal();
+            dialog.focus();
+
+            createDialog(dialog);
+          }
+        });
+
+        var hash = window.location.hash;
+
+        if (hash == '#visualtest') {
+          Array.from(document.querySelectorAll('dialog')).forEach((dialog, index) => {
+            dialog.setAttribute('open', 'open');
+            createDialog(dialog);
+          });
+        }
+
+});
+
+      
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -367,86 +426,3 @@
     }
   }
 </style>
-
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import DSHeader from '../DSHeader.vue';
-  import ModalVariants from '../ModalVariants.vue';
-  import headerImg from '../../img/type-header.png';
-  import DialogUsage from '../DialogUsage.vue';
-  import modalPassive from '../../img/dialogs/modal-passive.png';
-  import modalPassiveAnatomy from '../../img/dialogs/passive-modal-anatomy.png';
-  import modalTransactional from '../../img/dialogs/modal-transactional.png';
-  import modalTransactionalAnatomy from '../../img/dialogs/transactional-modal-anatomy.png';
-  import modalMulti from '../../img/dialogs/modal-multi.png';
-  import modalMultiAnatomy from '../../img/dialogs/multi-modal-anatomy.png';
-  import modalMultiAnatomyScroll from '../../img/dialogs/multi-modal-anatomy-scroll.png';
-  import modalAcknowledgement from '../../img/dialogs/modal-acknowledgement.png';
-  import modalAcknowledgementAnatomy from '../../img/dialogs/acknowledgement-modal-anatomy.png';
-
-  import { createDialog } from '../../../assets/ts/modules/dialogs';
-
-  export default {
-    components: {
-      DSHeader,
-      ModalVariants,
-      Tabs,
-      DialogUsage,
-      modalPassive,
-      modalPassiveAnatomy,
-      modalTransactional,
-      modalTransactionalAnatomy,
-      modalMulti,
-      modalMultiAnatomy,
-      modalMultiAnatomyScroll,
-      modalAcknowledgement,
-      modalAcknowledgementAnatomy,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        modalPassive: modalPassive,
-        modalPassiveAnatomy: modalPassiveAnatomy,
-        modalTransactional: modalTransactional,
-        modalTransactionalAnatomy: modalTransactionalAnatomy,
-        modalMulti: modalMulti,
-        modalMultiAnatomy: modalMultiAnatomy,
-        modalMultiAnatomyScroll: modalMultiAnatomyScroll,
-        modalAcknowledgement: modalAcknowledgement,
-        modalAcknowledgementAnatomy: modalAcknowledgementAnatomy,
-        htmlUsage: `<button data-modal="modal" class="btn btn-secondary">Open Modal</button>
-
-<dialog id="modal">
-  <h3>Dialog Content (Modal)</h3>
-  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-</dialog>
-      `,
-      };
-    },
-    mounted() {
-      this.$nextTick(function () {
-        Array.from(document.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
-          let parent = dialog.closest('.dialog__wrapper');
-
-          if (!parent) {
-            dialog.removeAttribute('open');
-            dialog.showModal();
-            dialog.focus();
-
-            createDialog(dialog);
-          }
-        });
-
-        var hash = window.location.hash;
-
-        if (hash == '#visualtest') {
-          Array.from(document.querySelectorAll('dialog')).forEach((dialog, index) => {
-            dialog.setAttribute('open', 'open');
-            createDialog(dialog);
-          });
-        }
-      });
-    },
-  };
-</script>

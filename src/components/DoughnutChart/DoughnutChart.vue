@@ -1,23 +1,24 @@
+<script setup>
+  import { onMounted } from 'vue';
+
+  const component = 'doughnutchart';
+
+  onMounted(() => {
+
+    import(`../../../assets/js/components/${component}/${component}.component.min.js`)
+      .then((module) => {
+        if (!window.customElements.get(`iam-${component}`))
+          window.customElements.define(`iam-${component}`, module.default);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+</script>
+
 <template>
   <iam-doughnutchart>
     <slot></slot>
   </iam-doughnutchart>
 </template>
 
-<script>
-  export default {
-    name: 'Doughnutchart',
-    created() {
-      this.$nextTick(function () {
-        import(`../../../assets/js/components/doughnutchart/doughnutchart.component.min.js`)
-          .then((module) => {
-            if (!window.customElements.get(`iam-doughnutchart`))
-              window.customElements.define(`iam-doughnutchart`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      });
-    },
-  };
-</script>

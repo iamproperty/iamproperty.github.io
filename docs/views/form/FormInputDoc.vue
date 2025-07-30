@@ -1,3 +1,34 @@
+<script setup>
+  import { onMounted } from 'vue';
+  
+  import { setMaxlengthVars } from '../../../assets/ts/modules/inputs';
+
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Input from '@/components/Input/Input.vue';
+  import Readme from '@/components/Input/README.md';
+  import Tabs from '@/components/Tabs/Tabs.vue';
+
+  const message = 'input field value';
+  const htmlUsage = `...`;
+
+onMounted(() => {
+      
+  
+        Array.from(document.querySelectorAll('label input')).forEach((input, index) => {
+          if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
+            input.insertAdjacentHTML('beforebegin', `<span class="optional-text"></span>`);
+        });
+
+        // maxlength counter init
+        Array.from(document.querySelectorAll('input[maxlength]')).forEach((input, index) => {
+          setMaxlengthVars(input);
+        });
+      });
+
+</script>
+
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -624,41 +655,3 @@
   </main>
 </template>
 
-<script>
-  import { setMaxlengthVars } from '../../../assets/ts/modules/inputs';
-
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
-  import Tabs from '@/components/Tabs/Tabs.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Input,
-      Readme,
-      Tabs,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        message: 'input field value',
-        htmlUsage: `...`,
-      };
-    },
-    mounted() {
-      this.$nextTick(function () {
-        Array.from(document.querySelectorAll('label input')).forEach((input, index) => {
-          if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
-            input.insertAdjacentHTML('beforebegin', `<span class="optional-text"></span>`);
-        });
-
-        // maxlength counter init
-        Array.from(document.querySelectorAll('input[maxlength]')).forEach((input, index) => {
-          setMaxlengthVars(input);
-        });
-      });
-    },
-  };
-</script>

@@ -1,3 +1,103 @@
+
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+
+  import isometricGrid from '../../img/illustrations/isometric-grid.png';
+  import optionalStyles from '../../img/illustrations/optional-styles.png';
+  import preferredStyle from '../../img/illustrations/preferred-style.png';
+
+  import illustrationsDo from '../../img/illustrations/illustrations-do.png';
+  import illustrationsDo2 from '../../img/illustrations/illustrations-do-2.png';
+  import illustrationsDo3 from '../../img/illustrations/illustrations-do-3.png';
+  import illustrationsDo4 from '../../img/illustrations/illustrations-do-4.png';
+
+  import illustrationsDont from '../../img/illustrations/illustrations-dont.png';
+  import illustrationsDont2 from '../../img/illustrations/illustrations-dont-2.png';
+  import illustrationsDont3 from '../../img/illustrations/illustrations-dont-3.png';
+  import illustrationsDont4 from '../../img/illustrations/illustrations-dont-4.png';
+  import illustrationsDont5 from '../../img/illustrations/illustrations-dont-5.png';
+
+  import illustrationsCaution from '../../img/illustrations/illustrations-caution.png';
+
+  import illustrationsMarketing from '../../img/illustrations/illustrations-marketing.png';
+  import illustrationsMarketing2 from '../../img/illustrations/illustrations-marketing-2.png';
+  import illustrationsMarketing3 from '../../img/illustrations/illustrations-marketing-3.png';
+
+  import illustrationsUI from '../../img/illustrations/illustrations-ui.png';
+  import illustrationsUI2 from '../../img/illustrations/illustrations-ui-2.png';
+
+  import NFIcon from '../../img/illustrations/nf-icon.png';
+  import NFIcon2 from '../../img/illustrations/nf-icon-2.png';
+  import NFIcon3 from '../../img/illustrations/nf-icon-3.png';
+  import NFIcon4 from '../../img/illustrations/nf-icon-4.png';
+
+  import techPanel from '../../img/illustrations/tech-panel-1.png';
+  import techPanel2 from '../../img/illustrations/tech-panel-2.png';
+  import techPanel3 from '../../img/illustrations/tech-panel-3.png';
+  import techPanel4 from '../../img/illustrations/tech-panel-4.png';
+
+  
+  const blue = [
+    { title: 'Auctioneer', src: '/img/illustrations/auctioneer.png' },
+    { title: 'Branch', src: '/img/illustrations/branch.png' },
+    { title: 'Buyer', src: '/img/illustrations/buyer.png' },
+    { title: 'Company Level', src: '/img/illustrations/company-level.png' },
+    { title: 'Contractors', src: '/img/illustrations/contractors.png' },
+    { title: 'Estate Agents', src: '/img/illustrations/estate-agents.png' },
+    { title: 'Landlords', src: '/img/illustrations/landlords.png' },
+    { title: 'Seller', src: '/img/illustrations/seller.png' },
+    { title: 'Add New Property', src: '/img/illustrations/add-new-property.png' },
+    { title: 'Find Existing Property', src: '/img/illustrations/find-existing-property.png' },
+    { title: 'What’s New (1)', src: '/img/illustrations/whats-new.png' },
+    { title: 'What’s New (2)', src: '/img/illustrations/whats-new-2.png' },
+    { title: 'Information Works', src: '/img/illustrations/information-works.png' },
+  ];
+
+  const green = [
+    { title: 'Auctioneer', src: '/img/illustrations/green/auctioneer.png' },
+    { title: 'Branch', src: '/img/illustrations/green/branch.png' },
+    { title: 'Buyer', src: '/img/illustrations/green/buyer.png' },
+    { title: 'Company Level', src: '/img/illustrations/green/company-level.png' },
+    { title: 'Contractors', src: '/img/illustrations/green/contractors.png' },
+    { title: 'Estate Agents', src: '/img/illustrations/green/estate-agents.png' },
+    { title: 'Landlords', src: '/img/illustrations/green/landlords.png' },
+    { title: 'Seller', src: '/img/illustrations/green/seller.png' },
+    { title: 'Add New Property', src: '/img/illustrations/green/add-new-property.png' },
+    {
+      title: 'Find Existing Property',
+      src: '/img/illustrations/green/find-existing-property.png',
+    },
+    { title: 'What’s New (1)', src: '/img/illustrations/green/whats-new.png' },
+    { title: 'What’s New (2)', src: '/img/illustrations/green/whats-new-2.png' },
+  ];
+
+  const uiIcons = [
+    'fa-angle-up fa-light',
+    'fa-angle-down fa-light',
+    'fa-angle-left fa-light',
+    'fa-angle-right fa-light',
+    'fa-plus fa-regular',
+    'fa-circle-info fa-light',
+    'fa-arrow-up-arrow-down fa-light',
+    'fa-arrows-up-down fa-light',
+    'fa-arrow-down-to-bracket fa-light',
+    'fa-arrow-up-from-square fa-light',
+    'fa-magnifying-glass fa-regular',
+    'fa-pen-to-square fa-light',
+    'fa-check fa-regular',
+    'fa-sliders fa-light',
+    'fa-arrow-up-right-from-square fa-light',
+    'fa-arrows-rotate fa-light',
+    'fa-arrow-rotate-left fa-light',
+    'fa-link fa-light',
+    'fa-xmark fa-light',
+    'fa-bars fa-solid',
+    'fa-arrow-up-right-from-square fa-light',
+  ];
+
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="elements">
@@ -282,134 +382,3 @@
   .example {
   }
 </style>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-
-  import isometricGrid from '../../img/illustrations/isometric-grid.png';
-  import optionalStyles from '../../img/illustrations/optional-styles.png';
-  import preferredStyle from '../../img/illustrations/preferred-style.png';
-
-  import illustrationsDo from '../../img/illustrations/illustrations-do.png';
-  import illustrationsDo2 from '../../img/illustrations/illustrations-do-2.png';
-  import illustrationsDo3 from '../../img/illustrations/illustrations-do-3.png';
-  import illustrationsDo4 from '../../img/illustrations/illustrations-do-4.png';
-
-  import illustrationsDont from '../../img/illustrations/illustrations-dont.png';
-  import illustrationsDont2 from '../../img/illustrations/illustrations-dont-2.png';
-  import illustrationsDont3 from '../../img/illustrations/illustrations-dont-3.png';
-  import illustrationsDont4 from '../../img/illustrations/illustrations-dont-4.png';
-  import illustrationsDont5 from '../../img/illustrations/illustrations-dont-5.png';
-
-  import illustrationsCaution from '../../img/illustrations/illustrations-caution.png';
-
-  import illustrationsMarketing from '../../img/illustrations/illustrations-marketing.png';
-  import illustrationsMarketing2 from '../../img/illustrations/illustrations-marketing-2.png';
-  import illustrationsMarketing3 from '../../img/illustrations/illustrations-marketing-3.png';
-
-  import illustrationsUI from '../../img/illustrations/illustrations-ui.png';
-  import illustrationsUI2 from '../../img/illustrations/illustrations-ui-2.png';
-
-  import NFIcon from '../../img/illustrations/nf-icon.png';
-  import NFIcon2 from '../../img/illustrations/nf-icon-2.png';
-  import NFIcon3 from '../../img/illustrations/nf-icon-3.png';
-  import NFIcon4 from '../../img/illustrations/nf-icon-4.png';
-
-  import techPanel from '../../img/illustrations/tech-panel-1.png';
-  import techPanel2 from '../../img/illustrations/tech-panel-2.png';
-  import techPanel3 from '../../img/illustrations/tech-panel-3.png';
-  import techPanel4 from '../../img/illustrations/tech-panel-4.png';
-
-  export default {
-    components: {
-      DSHeader,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        isometricGrid: isometricGrid,
-        optionalStyles: optionalStyles,
-        preferredStyle: preferredStyle,
-        illustrationsDo: illustrationsDo,
-        illustrationsDo2: illustrationsDo2,
-        illustrationsDo3: illustrationsDo3,
-        illustrationsDo4: illustrationsDo4,
-        illustrationsDont: illustrationsDont,
-        illustrationsDont2: illustrationsDont2,
-        illustrationsDont3: illustrationsDont3,
-        illustrationsDont4: illustrationsDont4,
-        illustrationsDont5: illustrationsDont5,
-        illustrationsCaution: illustrationsCaution,
-        illustrationsMarketing: illustrationsMarketing,
-        illustrationsMarketing2: illustrationsMarketing2,
-        illustrationsMarketing3: illustrationsMarketing3,
-        illustrationsUI: illustrationsUI,
-        illustrationsUI2: illustrationsUI2,
-        NFIcon: NFIcon,
-        NFIcon2: NFIcon2,
-        NFIcon3: NFIcon3,
-        NFIcon4: NFIcon4,
-        techPanel: techPanel,
-        techPanel2: techPanel2,
-        techPanel3: techPanel3,
-        techPanel4: techPanel4,
-        blue: [
-          { title: 'Auctioneer', src: '/img/illustrations/auctioneer.png' },
-          { title: 'Branch', src: '/img/illustrations/branch.png' },
-          { title: 'Buyer', src: '/img/illustrations/buyer.png' },
-          { title: 'Company Level', src: '/img/illustrations/company-level.png' },
-          { title: 'Contractors', src: '/img/illustrations/contractors.png' },
-          { title: 'Estate Agents', src: '/img/illustrations/estate-agents.png' },
-          { title: 'Landlords', src: '/img/illustrations/landlords.png' },
-          { title: 'Seller', src: '/img/illustrations/seller.png' },
-          { title: 'Add New Property', src: '/img/illustrations/add-new-property.png' },
-          { title: 'Find Existing Property', src: '/img/illustrations/find-existing-property.png' },
-          { title: 'What’s New (1)', src: '/img/illustrations/whats-new.png' },
-          { title: 'What’s New (2)', src: '/img/illustrations/whats-new-2.png' },
-          { title: 'Information Works', src: '/img/illustrations/information-works.png' },
-        ],
-        green: [
-          { title: 'Auctioneer', src: '/img/illustrations/green/auctioneer.png' },
-          { title: 'Branch', src: '/img/illustrations/green/branch.png' },
-          { title: 'Buyer', src: '/img/illustrations/green/buyer.png' },
-          { title: 'Company Level', src: '/img/illustrations/green/company-level.png' },
-          { title: 'Contractors', src: '/img/illustrations/green/contractors.png' },
-          { title: 'Estate Agents', src: '/img/illustrations/green/estate-agents.png' },
-          { title: 'Landlords', src: '/img/illustrations/green/landlords.png' },
-          { title: 'Seller', src: '/img/illustrations/green/seller.png' },
-          { title: 'Add New Property', src: '/img/illustrations/green/add-new-property.png' },
-          {
-            title: 'Find Existing Property',
-            src: '/img/illustrations/green/find-existing-property.png',
-          },
-          { title: 'What’s New (1)', src: '/img/illustrations/green/whats-new.png' },
-          { title: 'What’s New (2)', src: '/img/illustrations/green/whats-new-2.png' },
-        ],
-        uiIcons: [
-          'fa-angle-up fa-light',
-          'fa-angle-down fa-light',
-          'fa-angle-left fa-light',
-          'fa-angle-right fa-light',
-          'fa-plus fa-regular',
-          'fa-circle-info fa-light',
-          'fa-arrow-up-arrow-down fa-light',
-          'fa-arrows-up-down fa-light',
-          'fa-arrow-down-to-bracket fa-light',
-          'fa-arrow-up-from-square fa-light',
-          'fa-magnifying-glass fa-regular',
-          'fa-pen-to-square fa-light',
-          'fa-check fa-regular',
-          'fa-sliders fa-light',
-          'fa-arrow-up-right-from-square fa-light',
-          'fa-arrows-rotate fa-light',
-          'fa-arrow-rotate-left fa-light',
-          'fa-link fa-light',
-          'fa-xmark fa-light',
-          'fa-bars fa-solid',
-          'fa-arrow-up-right-from-square fa-light',
-        ],
-      };
-    },
-  };
-</script>

@@ -1,3 +1,13 @@
+<script>
+  const htmlUsage = `<div class="youtube-embed ratio ratio-16x9 mb-5">
+  <a href="https://www.youtube.com/watch?v=lROFZaJcVug" target="_blank" title="Investments Video" data-id="lROFZaJcVug">
+    <img src="https://img.youtube.com/vi/lROFZaJcVug/maxresdefault.jpg" alt="" />
+    <span class="btn btn-secondary">Play Video</span>
+  </a>
+</div>`;
+</script>
+
+
 <template>
   <main>
     <div class="container">
@@ -67,18 +77,3 @@
   </main>
 </template>
 
-<script>
-  export default {
-    components: {},
-    data() {
-      return {
-        htmlUsage: `<div class="youtube-embed ratio ratio-16x9 mb-5">
-  <a href="https://www.youtube.com/watch?v=lROFZaJcVug" target="_blank" title="Investments Video" data-id="lROFZaJcVug">
-    <img src="https://img.youtube.com/vi/lROFZaJcVug/maxresdefault.jpg" alt="" />
-    <span class="btn btn-secondary">Play Video</span>
-  </a>
-</div>`,
-      };
-    },
-  };
-</script>

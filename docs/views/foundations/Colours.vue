@@ -1,3 +1,69 @@
+<script setup>
+  import { onMounted } from 'vue';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import backgroundsImg from '../../img/colour-backgrounds.png';
+  import Tabs from '../../../src/components/Tabs/Tabs.vue';
+  import Tab from '../../../src/components/Tabs/Tab.vue';
+  import Table from '../../../src/components/Table/Table.vue';
+  import UserColours from '../UserColours.vue';
+
+
+
+  let userTheme = 'light-theme';
+  let checked = false;
+  let checked2 = false;
+        
+  const colourNames = {
+    Primary: 'Deep slate',
+    Success: 'Green',
+    Dark: 'Dark',
+    Info: 'Blue',
+    Warning: 'Yellow',
+    Danger: 'Red',
+  };
+
+  const setTheme = function(theme) {
+    localStorage.setItem('user-theme', theme);
+    userTheme = theme;
+
+    checked = theme == 'light-theme' ? true : false;
+    checked2 = theme == 'dark-theme' ? true : false;
+
+    document.documentElement.className = theme;
+  };
+
+  const getTheme = function() {
+    return localStorage.getItem('user-theme');
+  };
+
+  const toggleTheme = function() {
+
+    const activeTheme = localStorage.getItem('user-theme');
+    if (activeTheme === 'light-theme') {
+      setTheme('dark-theme');
+    } else {
+      setTheme('light-theme');
+    }
+  };
+
+  const getMediaPreference = function() {
+    const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (hasDarkPreference) {
+      return 'dark-theme';
+    } else {
+      return 'light-theme';
+    }
+  };
+
+
+  onMounted(() => {
+    const initUserTheme = getMediaPreference();
+    setTheme(initUserTheme);
+  });
+
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg">
@@ -13,7 +79,7 @@
           </div>
           <div class="col ms-auto mw-fit-content">
             <input
-              @change="toggleTheme"
+              @change="toggleTheme()"
               v-model="checked2"
               class="d-none"
               type="checkbox"
@@ -869,74 +935,3 @@
   }
 </style>
 
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import backgroundsImg from '../../img/colour-backgrounds.png';
-  import Tabs from '../../../src/components/Tabs/Tabs.vue';
-  import Tab from '../../../src/components/Tabs/Tab.vue';
-  import Table from '../../../src/components/Table/Table.vue';
-  import UserColours from '../UserColours.vue';
-
-  export default {
-    name: 'ColourDoc',
-    components: {
-      DSHeader,
-      Tabs,
-      Tab,
-      Table,
-      UserColours,
-    },
-    mounted() {
-      const initUserTheme = this.getMediaPreference();
-      this.setTheme(initUserTheme);
-    },
-    methods: {
-      setTheme(theme) {
-        localStorage.setItem('user-theme', theme);
-        this.userTheme = theme;
-
-        this.checked = theme == 'light-theme' ? true : false;
-        this.checked2 = theme == 'dark-theme' ? true : false;
-
-        document.documentElement.className = theme;
-      },
-      getTheme() {
-        return localStorage.getItem('user-theme');
-      },
-      toggleTheme() {
-        const activeTheme = localStorage.getItem('user-theme');
-        if (activeTheme === 'light-theme') {
-          this.setTheme('dark-theme');
-        } else {
-          this.setTheme('light-theme');
-        }
-      },
-      getMediaPreference() {
-        const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (hasDarkPreference) {
-          return 'dark-theme';
-        } else {
-          return 'light-theme';
-        }
-      },
-    },
-    data: function () {
-      return {
-        userTheme: 'light-theme',
-        checked: false,
-        checked2: false,
-        headerImg: headerImg,
-        backgroundsImg: backgroundsImg,
-        colourNames: {
-          Primary: 'Deep slate',
-          Success: 'Green',
-          Dark: 'Dark',
-          Info: 'Blue',
-          Warning: 'Yellow',
-          Danger: 'Red',
-        },
-      };
-    },
-  };
-</script>

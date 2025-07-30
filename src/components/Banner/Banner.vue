@@ -1,3 +1,23 @@
+<script setup>
+
+const props = defineProps({
+  title: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: false,
+  },
+  background: {
+    type: String,
+    default: 'light',
+    required: false,
+  }
+})
+
+</script>
+
 <template>
   <div class="container">
     <div :class="'bg-' + background + ' mb-4'">
@@ -16,23 +36,3 @@
   </div>
 </template>
 
-<script>
-  export default {
-    name: 'Header',
-    props: {
-      title: {
-        type: String,
-        required: true,
-      },
-      image: {
-        type: String,
-        required: false,
-      },
-      background: {
-        type: String,
-        default: 'light',
-        required: false,
-      },
-    },
-  };
-</script>

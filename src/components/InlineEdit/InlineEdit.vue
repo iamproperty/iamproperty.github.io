@@ -4,7 +4,18 @@
   const emit = defineEmits(['save', 'autosave']);
   const $component = ref(null);
 
+  const component = 'inline-edit';
+
   onMounted(() => {
+    import(`../../../assets/js/components/${component}/${component}.component.min.js`)
+      .then((module) => {
+        if (!window.customElements.get(`iam-${component}`))
+          window.customElements.define(`iam-${component}`, module.default);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
     $component.value.addEventListener('inline-edit-save', function (event) {
       emit('save', event);
     });
@@ -13,27 +24,9 @@
       emit('autosave', event);
     });
   });
+
 </script>
 
 <template>
   <iam-inline-edit ref="$component"><slot></slot></iam-inline-edit>
 </template>
-
-<script>
-  export default {
-    components: {},
-    name: 'Inline Edit',
-    mounted() {
-      this.$nextTick(function () {
-        import(`../../../assets/js/components/inline-edit/inline-edit.component.js`)
-          .then((module) => {
-            if (!window.customElements.get(`iam-inline-edit`))
-              window.customElements.define(`iam-inline-edit`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      });
-    },
-  };
-</script>

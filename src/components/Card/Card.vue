@@ -1,22 +1,24 @@
+<script setup>
+  import { onMounted } from 'vue';
+
+  const component = 'card';
+
+  onMounted(() => {
+
+    import(`../../../assets/js/components/${component}/${component}.component.min.js`)
+      .then((module) => {
+        if (!window.customElements.get(`iam-${component}`))
+          window.customElements.define(`iam-${component}`, module.default);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+</script>
+
 <template>
   <iam-card>
     <slot></slot>
   </iam-card>
 </template>
 
-<script>
-  export default {
-    name: 'Card',
-    created() {
-      this.$nextTick(function () {
-        import(`../../../assets/js/components/card/card.component.js`)
-          .then((module) => {
-            if (!window.customElements.get(`iam-card`)) window.customElements.define(`iam-card`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      });
-    },
-  };
-</script>

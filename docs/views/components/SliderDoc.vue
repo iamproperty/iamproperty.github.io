@@ -1,3 +1,23 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import sliderAnatomy from '../../img/slider-anatomy.png';
+  import sliderUsage1 from '../../img/slider-usage-1.png';
+  import sliderUsage2 from '../../img/slider-usage-2.png';
+  import sliderUsage3 from '../../img/slider-usage-3.png';
+  import sliderBehaviour1 from '../../img/slider-behaviour-1.png';
+  import sliderBehaviour2 from '../../img/slider-behaviour-2.png';
+  import sliderBehaviour3 from '../../img/slider-behaviour-3.png';
+  import sliderBehaviour4 from '../../img/slider-behaviour-4.png';
+
+  import Slider from '@/components/Slider/Slider.vue';
+
+  import Readme from '@/components/Slider/README.md';
+  import WebReadme from '~/ts/components/slider/README.md';
+  import Tabs from '@/components/Tabs/Tabs.vue';
+
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -204,52 +224,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import sliderAnatomy from '../../img/slider-anatomy.png';
-  import sliderUsage1 from '../../img/slider-usage-1.png';
-  import sliderUsage2 from '../../img/slider-usage-2.png';
-  import sliderUsage3 from '../../img/slider-usage-3.png';
-  import sliderBehaviour1 from '../../img/slider-behaviour-1.png';
-  import sliderBehaviour2 from '../../img/slider-behaviour-2.png';
-  import sliderBehaviour3 from '../../img/slider-behaviour-3.png';
-  import sliderBehaviour4 from '../../img/slider-behaviour-4.png';
-
-  import Input from '@/components/Input/Input.vue';
-  import Slider from '@/components/Slider/Slider.vue';
-
-  import Readme from '@/components/Slider/README.md';
-  import WebReadme from '~/ts/components/slider/README.md';
-
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Tabs,
-      Tab,
-      Input,
-      Readme,
-      WebReadme,
-      Slider,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        sliderAnatomy: sliderAnatomy,
-        sliderUsage1: sliderUsage1,
-        sliderUsage2: sliderUsage2,
-        sliderUsage3: sliderUsage3,
-        sliderBehaviour1: sliderBehaviour1,
-        sliderBehaviour2: sliderBehaviour2,
-        sliderBehaviour3: sliderBehaviour3,
-        sliderBehaviour4: sliderBehaviour4,
-        message: 'input field value',
-        htmlUsage: `...`,
-      };
-    },
-  };
-</script>

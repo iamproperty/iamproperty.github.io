@@ -1,3 +1,19 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import SelectionControl from '../selectionControls.vue';
+  import headerImg from '../../img/type-header.png';
+  import Input from '@/components/Input/Input.vue';
+  import Readme from '@/components/Input/README.md';
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Card from '@/components/Card/Card.vue';
+
+
+  const message = 'input field value';
+  const htmlUsage = `...`;
+
+</script>
+
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -266,31 +282,3 @@
     flex-direction: column;
   }
 </style>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import SelectionControl from '../selectionControls.vue';
-  import headerImg from '../../img/type-header.png';
-  import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Card from '@/components/Card/Card.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      SelectionControl,
-      Input,
-      Readme,
-      Tabs,
-      Card,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        message: 'input field value',
-        htmlUsage: `...`,
-      };
-    },
-  };
-</script>

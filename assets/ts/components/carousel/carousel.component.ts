@@ -15,7 +15,7 @@ class iamCarousel extends HTMLElement {
     const loadCSS = `@import "${assetLocation}/css/components/carousel.component.css";`;
 
     const template = document.createElement('template');
-    template.innerHTML = `
+    template.innerHTML = /* HTML */ `
     <style>
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}

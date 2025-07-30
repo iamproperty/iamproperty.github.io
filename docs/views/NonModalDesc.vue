@@ -1,3 +1,10 @@
+<script setup>
+  import Table from '@/components/Table/Table.vue';
+  import nonmodalPassive from '../img/dialogs/nonmodal-passive.png';
+  import nonmodalTransactional from '../img/dialogs/nonmodal-transactional.png';
+
+</script>
+
 <template>
   <div class="container">
     <h2>Non-modal</h2>
@@ -87,23 +94,3 @@
     </Table>
   </div>
 </template>
-
-<script>
-  import Table from '@/components/Table/Table.vue';
-  import nonmodalPassive from '../img/dialogs/nonmodal-passive.png';
-  import nonmodalTransactional from '../img/dialogs/nonmodal-transactional.png';
-
-  export default {
-    components: {
-      Table,
-      nonmodalPassive,
-      nonmodalTransactional,
-    },
-    data() {
-      return {
-        nonmodalPassive: nonmodalPassive,
-        nonmodalTransactional: nonmodalTransactional,
-      };
-    },
-  };
-</script>

@@ -1,3 +1,31 @@
+<script setup>
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Tab from '@/components/Tabs/Tab.vue';
+  import Readme from '@/components/Filterlist/README.md';
+  import WebReadme from '~/ts/components/filterlist/README.md';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Filterlist from '@/components/Filterlist/Filterlist.vue';
+
+  const htmlUsage = `<div class="iam-filter-list">
+  <div class="form-control__wrapper">
+    <label for="search" class="visually-hidden">Search</label>
+    <span class="suffix" role="presentation"><slot name="icon"></slot></span>
+    <input name="search" id="search" type="text" class="form-control" autocomplete="off">
+  </div>
+  <div class="list__wrapper">
+    <ul>
+      <li>Olivia Anderson</li>
+      <li>Ethan Ramirez</li>
+      <li>Sophia Patel</li>
+      <li>Noah Jenkins</li>
+      <li>Ava Thompson</li>
+    </ul>
+  </div>
+</div>`;
+
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -81,48 +109,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-  import Readme from '@/components/Filterlist/README.md';
-  import WebReadme from '~/ts/components/filterlist/README.md';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Table from '@/components/Table/Table.vue';
-  import Filterlist from '@/components/Filterlist/Filterlist.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Table,
-      Readme,
-      WebReadme,
-      Tabs,
-      Tab,
-      Filterlist,
-    },
-    mounted() {},
-    data() {
-      return {
-        headerImg: headerImg,
-        htmlUsage: `<div class="iam-filter-list">
-  <div class="form-control__wrapper">
-    <label for="search" class="visually-hidden">Search</label>
-    <span class="suffix" role="presentation"><slot name="icon"></slot></span>
-    <input name="search" id="search" type="text" class="form-control" autocomplete="off">
-  </div>
-  <div class="list__wrapper">
-    <ul>
-      <li>Olivia Anderson</li>
-      <li>Ethan Ramirez</li>
-      <li>Sophia Patel</li>
-      <li>Noah Jenkins</li>
-      <li>Ava Thompson</li>
-    </ul>
-  </div>
-</div>`,
-      };
-    },
-  };
-</script>

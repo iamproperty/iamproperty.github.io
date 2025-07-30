@@ -1,3 +1,12 @@
+<script setup>
+  import Input from '@/components/Input/Input.vue';
+  import Readme from '@/components/Input/README.md';
+
+  const message = 'input field value';
+  const htmlUsage = `...`;
+
+</script>
+
 <template>
   <main>
     <div class="container">
@@ -83,20 +92,3 @@
   </main>
 </template>
 
-<script>
-  import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
-
-  export default {
-    components: {
-      Input,
-      Readme,
-    },
-    data() {
-      return {
-        message: 'input field value',
-        htmlUsage: `...`,
-      };
-    },
-  };
-</script>

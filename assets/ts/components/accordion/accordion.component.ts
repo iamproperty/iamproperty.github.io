@@ -23,7 +23,7 @@ class iamAccordion extends HTMLElement {
       : `${assetLocation}/css/core.min.css`;
 
     const template = document.createElement('template');
-    template.innerHTML = `
+    template.innerHTML = /* HTML */ `
     <style>
     @import "${coreCSS}";
 

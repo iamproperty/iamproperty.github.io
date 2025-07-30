@@ -1,3 +1,27 @@
+<script setup>
+  import Header from '@/components/Header/Header.vue';
+  import Card from '@/components/Card/Card.vue';
+  import headerImg from '../img/homepage-banner.png';
+
+  const items =  [
+    {
+      link: '/foundations',
+      title: 'Foundations',
+      content: `Core variables and principles that are used through out the framework.`,
+    },
+    {
+      link: '/components',
+      title: 'Components',
+      content: `Configurable re-usable parts that build up a page.`,
+    },
+    {
+      link: '/templates',
+      title: 'Templates',
+      content: `Groups of components that can build up a page.`,
+    },
+  ];
+</script>
+
 <template>
   <main>
     <Header :image="headerImg">
@@ -20,40 +44,3 @@
     </a>
   </main>
 </template>
-
-<script>
-  import Header from '@/components/Header/Header.vue';
-  import Card from '@/components/Card/Card.vue';
-
-  import headerImg from '../img/homepage-banner.png';
-
-  export default {
-    name: 'Home',
-    components: {
-      Header,
-      Card,
-    },
-    data() {
-      return {
-        items: [
-          {
-            link: '/foundations',
-            title: 'Foundations',
-            content: `Core variables and principles that are used through out the framework.`,
-          },
-          {
-            link: '/components',
-            title: 'Components',
-            content: `Configurable re-usable parts that build up a page.`,
-          },
-          {
-            link: '/templates',
-            title: 'Templates',
-            content: `Groups of components that can build up a page.`,
-          },
-        ],
-        headerImg: headerImg,
-      };
-    },
-  };
-</script>

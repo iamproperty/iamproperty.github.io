@@ -1,3 +1,71 @@
+
+<script setup>
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import popoverNotip from '../../img/dialogs/popovers-notip.png';
+  import popoverPointer from '../../img/dialogs/popovers-pointer.png';
+
+  import popoverDesktopSm from '../../img/dialogs/popover-desktop-sm.png';
+  import popoverDesktopMd from '../../img/dialogs/popover-desktop-md.png';
+  import popoverDesktopLg from '../../img/dialogs/popover-desktop-lg.png';
+
+  import popoverTabletSm from '../../img/dialogs/popover-tablet-sm.png';
+  import popoverTabletMd from '../../img/dialogs/popover-tablet-md.png';
+  import popoverTabletLg from '../../img/dialogs/popover-tablet-lg.png';
+
+  import popoverMobileSm from '../../img/dialogs/popover-mobile-sm.png';
+  import popoverMobileMd from '../../img/dialogs/popover-mobile-md.png';
+  import popoverMobileLg from '../../img/dialogs/popover-mobile-lg.png';
+
+  import popoverNotipAnatomy from '../../img/dialogs/popover-notip-anatomy.png';
+
+  import popoverNotipAlignmentDo from '../../img/dialogs/popover-notip-alignment-do.png';
+  import popoverNotipAlignmentDont from '../../img/dialogs/popover-notip-alignment-dont.png';
+
+  import popoverNotipDo from '../../img/dialogs/popover-notip-do.png';
+  import popoverNotipDont from '../../img/dialogs/popover-notip-dont.png';
+  import popoverNotipDo2 from '../../img/dialogs/popover-notip-do-2.png';
+  import popoverNotipDont2 from '../../img/dialogs/popover-notip-dont-2.png';
+
+  import popoverPointerAnatomy from '../../img/dialogs/popover-pointer-anatomy.png';
+
+  import popoverPointeralign from '../../img/dialogs/popover-tip-align.png';
+  import popoverPointeralign2 from '../../img/dialogs/popover-tip-align-2.png';
+  import popoverPointeralign3 from '../../img/dialogs/popover-tip-align-3.png';
+  import popoverPointeralignDo from '../../img/dialogs/popover-tip-align-do.png';
+  import popoverPointeralignDont from '../../img/dialogs/popover-tip-align-dont.png';
+
+  import popoverPointerDo from '../../img/dialogs/popover-tip-do.png';
+  import popoverPointerDont from '../../img/dialogs/popover-tip-dont.png';
+
+  import PopoverLists from '../popoverLists.vue';
+
+ 
+  const htmlUsage = `<div class="dialog__wrapper">
+  <button class="btn btn-secondary">Open Popover</button>
+  <dialog>
+    <h3>Dialog Content (Popover)</h3>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+  </dialog>
+</div>
+
+<span class="tooltip"><span class="tooltip__content"><strong>Popover title</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.</span></span>
+`;
+
+  const selected = 'tooltip';
+  const options = [
+          { name: 'Default', id: 'tooltip' },
+          { name: 'shift--left (mobile)', id: 'shift--left' },
+          { name: 'shift--right (mobile)', id: 'shift--right' },
+          { name: 'tooltip--top (all)', id: 'tooltip--top' },
+          { name: 'tooltip--top shift--left (mobile)', id: 'tooltip--top shift--left' },
+          { name: 'tooltip--top shift--right (mobile)', id: 'tooltip--top shift--right' },
+          { name: 'tooltip--left (tablet,desktop)', id: 'tooltip--left' },
+          { name: 'tooltip--right (tablet,desktop)', id: 'tooltip--right' },
+        ];
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -457,132 +525,3 @@
     }
   }
 </style>
-
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import popoverNotip from '../../img/dialogs/popovers-notip.png';
-  import popoverPointer from '../../img/dialogs/popovers-pointer.png';
-
-  import popoverDesktopSm from '../../img/dialogs/popover-desktop-sm.png';
-  import popoverDesktopMd from '../../img/dialogs/popover-desktop-md.png';
-  import popoverDesktopLg from '../../img/dialogs/popover-desktop-lg.png';
-
-  import popoverTabletSm from '../../img/dialogs/popover-tablet-sm.png';
-  import popoverTabletMd from '../../img/dialogs/popover-tablet-md.png';
-  import popoverTabletLg from '../../img/dialogs/popover-tablet-lg.png';
-
-  import popoverMobileSm from '../../img/dialogs/popover-mobile-sm.png';
-  import popoverMobileMd from '../../img/dialogs/popover-mobile-md.png';
-  import popoverMobileLg from '../../img/dialogs/popover-mobile-lg.png';
-
-  import popoverNotipAnatomy from '../../img/dialogs/popover-notip-anatomy.png';
-
-  import popoverNotipAlignmentDo from '../../img/dialogs/popover-notip-alignment-do.png';
-  import popoverNotipAlignmentDont from '../../img/dialogs/popover-notip-alignment-dont.png';
-
-  import popoverNotipDo from '../../img/dialogs/popover-notip-do.png';
-  import popoverNotipDont from '../../img/dialogs/popover-notip-dont.png';
-  import popoverNotipDo2 from '../../img/dialogs/popover-notip-do-2.png';
-  import popoverNotipDont2 from '../../img/dialogs/popover-notip-dont-2.png';
-
-  import popoverPointerAnatomy from '../../img/dialogs/popover-pointer-anatomy.png';
-
-  import popoverPointeralign from '../../img/dialogs/popover-tip-align.png';
-  import popoverPointeralign2 from '../../img/dialogs/popover-tip-align-2.png';
-  import popoverPointeralign3 from '../../img/dialogs/popover-tip-align-3.png';
-  import popoverPointeralignDo from '../../img/dialogs/popover-tip-align-do.png';
-  import popoverPointeralignDont from '../../img/dialogs/popover-tip-align-dont.png';
-
-  import popoverPointerDo from '../../img/dialogs/popover-tip-do.png';
-  import popoverPointerDont from '../../img/dialogs/popover-tip-dont.png';
-
-  import PopoverLists from '../popoverLists.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Tabs,
-      popoverNotip,
-      popoverPointer,
-      popoverMobileSm,
-      popoverMobileMd,
-      popoverMobileLg,
-      popoverTabletSm,
-      popoverTabletMd,
-      popoverTabletLg,
-      popoverDesktopSm,
-      popoverDesktopMd,
-      popoverDesktopLg,
-      popoverNotipAnatomy,
-      popoverNotipAlignmentDo,
-      popoverNotipAlignmentDont,
-      popoverNotipDo,
-      popoverNotipDont,
-      popoverNotipDo2,
-      popoverNotipDont2,
-      popoverPointerAnatomy,
-      popoverPointeralign,
-      popoverPointeralign2,
-      popoverPointeralign3,
-      popoverPointeralignDo,
-      popoverPointeralignDont,
-      popoverPointerDo,
-      popoverPointerDont,
-      PopoverLists,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        popoverNotip: popoverNotip,
-        popoverPointer: popoverPointer,
-        popoverMobileSm: popoverMobileSm,
-        popoverMobileMd: popoverMobileMd,
-        popoverMobileLg: popoverMobileLg,
-        popoverTabletSm: popoverTabletSm,
-        popoverTabletMd: popoverTabletMd,
-        popoverTabletLg: popoverTabletLg,
-        popoverDesktopSm: popoverDesktopSm,
-        popoverDesktopMd: popoverDesktopMd,
-        popoverDesktopLg: popoverDesktopLg,
-        popoverNotipAnatomy: popoverNotipAnatomy,
-        popoverNotipAlignmentDo: popoverNotipAlignmentDo,
-        popoverNotipAlignmentDont: popoverNotipAlignmentDont,
-        popoverNotipDo: popoverNotipDo,
-        popoverNotipDont: popoverNotipDont,
-        popoverNotipDo2: popoverNotipDo2,
-        popoverNotipDont2: popoverNotipDont2,
-        popoverPointerAnatomy: popoverPointerAnatomy,
-        popoverPointeralign: popoverPointeralign,
-        popoverPointeralign2: popoverPointeralign2,
-        popoverPointeralign3: popoverPointeralign3,
-        popoverPointeralignDo: popoverPointeralignDo,
-        popoverPointeralignDont: popoverPointeralignDont,
-        popoverPointerDo: popoverPointerDo,
-        popoverPointerDont: popoverPointerDont,
-        htmlUsage: `<div class="dialog__wrapper">
-  <button class="btn btn-secondary">Open Popover</button>
-  <dialog>
-    <h3>Dialog Content (Popover)</h3>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-  </dialog>
-</div>
-
-<span class="tooltip"><span class="tooltip__content"><strong>Popover title</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.</span></span>
-`,
-        selected: 'tooltip',
-        options: [
-          { name: 'Default', id: 'tooltip' },
-          { name: 'shift--left (mobile)', id: 'shift--left' },
-          { name: 'shift--right (mobile)', id: 'shift--right' },
-          { name: 'tooltip--top (all)', id: 'tooltip--top' },
-          { name: 'tooltip--top shift--left (mobile)', id: 'tooltip--top shift--left' },
-          { name: 'tooltip--top shift--right (mobile)', id: 'tooltip--top shift--right' },
-          { name: 'tooltip--left (tablet,desktop)', id: 'tooltip--left' },
-          { name: 'tooltip--right (tablet,desktop)', id: 'tooltip--right' },
-        ],
-      };
-    },
-  };
-</script>

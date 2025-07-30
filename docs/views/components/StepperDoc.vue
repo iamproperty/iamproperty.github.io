@@ -1,3 +1,23 @@
+<script setup>
+  import Step from '@/components/Stepper/Step.vue';
+  import Stepper from '@/components/Stepper/Stepper.vue';
+  import Readme from '@/components/Stepper/README.md';
+
+  const htmlUsage = `<div class="container">
+   <nav class="stepper" aria-label="Progress">
+      <span class="h6">Client progress</span>
+      <ol class="list-unstyled">
+         <li><a class="bg-success"><span>Customer due diligence</span><em class="visually-hidden"> - status: success</em></a></li>
+         <li><a href="/step" class="bg-success"><span>Legal Preparation</span><em class="visually-hidden"> - status: success</em></a></li>
+         <li><a href="/step" class="current" aria-active><span>Financial Preparation</span></a></li>
+         <li><a href="/step"><span>Surveys</span></a></li>
+      </ol>
+      <span class="h6 stepper__end">Onboarding complete</span>
+   </nav>
+</div>`;
+
+</script>
+
 <template>
   <main>
     <div class="container">
@@ -43,32 +63,3 @@
   </main>
 </template>
 
-<script>
-  import Step from '@/components/Stepper/Step.vue';
-  import Stepper from '@/components/Stepper/Stepper.vue';
-  import Readme from '@/components/Stepper/README.md';
-
-  export default {
-    components: {
-      Step,
-      Stepper,
-      Readme,
-    },
-    data() {
-      return {
-        htmlUsage: `<div class="container">
-   <nav class="stepper" aria-label="Progress">
-      <span class="h6">Client progress</span>
-      <ol class="list-unstyled">
-         <li><a class="bg-success"><span>Customer due diligence</span><em class="visually-hidden"> - status: success</em></a></li>
-         <li><a href="/step" class="bg-success"><span>Legal Preparation</span><em class="visually-hidden"> - status: success</em></a></li>
-         <li><a href="/step" class="current" aria-active><span>Financial Preparation</span></a></li>
-         <li><a href="/step"><span>Surveys</span></a></li>
-      </ol>
-      <span class="h6 stepper__end">Onboarding complete</span>
-   </nav>
-</div>`,
-      };
-    },
-  };
-</script>

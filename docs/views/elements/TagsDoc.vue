@@ -1,3 +1,16 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Anatomy from '../../img/tag-anatomy.png';
+  import TagUsage from '../TagUsage.vue';
+  import DisplayTag from '../../img/DisplayTag.png';
+  import ToggleTag from '../../img/ToggleTag.png';
+  import TagDont from '../../img/TagDont.png';
+  import ActionTagComplex from '../../img/action-tag-complex-options.png';
+  import ActionTagText from '../../img/action-tag-text-list.png';
+  import Integration from '../Integration.vue';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="elements">
@@ -250,40 +263,3 @@
   </main>
 </template>
 
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Anatomy from '../../img/tag-anatomy.png';
-  import Table from '@/components/Table/Table.vue';
-  import TagUsage from '../TagUsage.vue';
-  import DisplayTag from '../../img/DisplayTag.png';
-  import ToggleTag from '../../img/ToggleTag.png';
-  import TagDont from '../../img/TagDont.png';
-  import ActionTagComplex from '../../img/action-tag-complex-options.png';
-  import ActionTagText from '../../img/action-tag-text-list.png';
-  import Integration from '../Integration.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Table,
-      Tabs,
-      Tab,
-      TagUsage,
-      Integration,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        Anatomy: Anatomy,
-        DisplayTag: DisplayTag,
-        ToggleTag: ToggleTag,
-        TagDont: TagDont,
-        ActionTagComplex: ActionTagComplex,
-        ActionTagText: ActionTagText,
-      };
-    },
-  };
-</script>
