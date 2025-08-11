@@ -233,13 +233,15 @@
 
      <template #criteria>
         <ul>
-          <li>A milestone with a status set should show that status at the top of the milestone block</li>
-          <li>Clicking anywhere on a task should open the task content, including a description and a list of subtasks if applicable.</li>
-          <li>A completed task should be shown with a green tick alongside it</li>
-          <li>An open task with subtasks should show a list of those subtasks with an empty circle alongside the name</li>
-          <li>A completed subtask should be shown with a green tick alongside it</li>
-          <li>A completed subtask should be shown with the date it was completed alongside it</li>
-          <li>If a task has subtasks, the number of completed subtasks should be shown alongsidee the task name</li>
+          <li>Each accordion item should show the correct accordion title and accordion content</li>
+          <li>A plus icon should appear to the right hand end of the accordion title</li>
+          <li>When clicking an accordion item's title, the accordion item's content should show.</li>
+          <li>If the accordion does not have the accordion--keep-open class on it, all other items should close when an item is opened.</li>
+          <li>If the accordion DOES have the accordion--keep-open class on it, any previously opened items will stay open until closed.</li>
+          <li>When an accordion item is hovered over, it's background will change to a light grey colour</li>
+          <li>When an accordion item is opened, the icon will change to a minus, and the icon background will have a fill.</li>
+          <li>If a badge is added to an accordion item, it will appear directly at the end of the accordion title.</li>
+          <li>If a badge colour is set, the badge will have the expected background colour.</li>
         </ul>
       </template>
     </Integration>
