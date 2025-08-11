@@ -6,10 +6,6 @@
       type: String,
       required: true,
     },
-    titlecolour: {
-      type: String,
-      required: false,
-    },
     badge: {
       type: [Number, String],
       required: false,

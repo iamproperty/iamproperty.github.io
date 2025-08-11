@@ -175,15 +175,6 @@
               <td>A question or statement</td>
             </tr>
             <tr>
-              <th>titlecolour</th>
-              <td>-</td>
-              <td>String</td>
-              <td>No</td>
-              <td>
-                	Apply a colour the the accordion item title
-              </td>
-            </tr>
-            <tr>
               <th>badge</th>
               <td>-</td>
               <td>String / Number</td>
