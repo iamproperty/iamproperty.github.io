@@ -210,7 +210,7 @@
         const myTimeout = setTimeout(function () {
           let main = document.querySelector('main');
 
-          Array.from(main.querySelectorAll('p,li,h1,h2,h3,h4,h5,h6,span')).forEach((textBlock) => {
+          Array.from(main.querySelectorAll('p,li,h1,h2,h3,h4,h5,h6, p span')).forEach((textBlock) => {
             let text = textBlock.innerHTML;
 
             const regex = new RegExp(`(${searched})`, 'gi');
