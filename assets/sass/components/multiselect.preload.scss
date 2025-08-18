@@ -39,7 +39,7 @@ $darkMode: 'true' !default;
     --display-button: block;
   }
 
-  @include dark-mode($darkMode) {
+  @container style(--theme: dark) {
     iam-multiselect :is(.tag, .badge):not([slot='checked']) {
       color: var(--colour-heading);
     }
