@@ -10,7 +10,7 @@ iam-actionbar {
   border-top-left-radius: rem(10);
   border-top-right-radius: rem(10);
 
-  @include dark-mode($darkMode) {
+  @container style(--theme: dark) {
     background-color: var(--colour-canvas);
   }
 }

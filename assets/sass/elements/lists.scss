@@ -271,7 +271,7 @@ $darkMode: 'true' !default;
       background-color: var(--colour-success);
       border-color: var(--colour-success);
 
-      @include dark-mode($darkMode) {
+      @container style(--theme: dark) {
         background-color: var(--colour-complete);
         border-color: var(--colour-complete);
       }

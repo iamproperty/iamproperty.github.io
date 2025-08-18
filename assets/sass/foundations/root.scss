@@ -95,68 +95,79 @@ $darkMode: 'true' !default;
     }
   }
 
-  .reset-colours {
-    @each $color, $value in $theme-colors {
-      --colour-#{$color}: #{$value};
-    }
-    @include reset-colours();
-  }
+
+
+
+
+
 
   // Dark mode; functional colours get updated
-  @include dark-mode($darkMode) {
-    #{$root} {
+  @media screen and (prefers-color-scheme: light) {
+    :root {
+      --theme: light;
+    }
+  }
+  @media screen and (prefers-color-scheme: dark) {
+    :root {
+      --theme: dark;
+    }
+  }
+  
+
+
+
+
+  // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
+  [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
+    
+    //--theme: dark;
+  }
+
+  // Override the colours when on a dark background, similiar to dark mode but on a module level
+  [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(.bg-canvas-2):not(.prevent-invert),
+  .invert-colours {
+
+    --theme: dark;
+    color: var(--colour-white);
+  }
+
+  
+  @container style(--theme: dark) {
+    * {
       @each $color, $value in $dark-mode-colors {
         --colour-#{$color}: #{$value};
+        --colour-body: var(--colour-white);
       }
       @include invert-colours();
     }
-  }
 
-  @include light-mode($darkMode) {
-    // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-    html:not(.dark-theme)
-      [class*='bg-']:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-admin):not(.bg-canvas):not(
-        .bg-canvas-2
-      ):not(.invert-colours) {
-      @each $color, $value in $theme-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @include reset-colours();
-      --colour-body: rgb(89, 89, 89);
-      color: var(--colour-body);
-    }
-
-    // Override the colours when on a dark background, similiar to dark mode but on a module level
-    [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(
-        .bg-canvas
-      ):not(.bg-canvas-2):not(.prevent-invert),
-    .invert-colours {
-      @include invert-colours();
-
-      color: #{$colour-inverted};
-    }
-  }
-
-  @include dark-mode($darkMode) {
-    // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
     [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
-      @include reset-colours();
-      --colour-body: #{$primary};
-      color: var(--colour-body);
+      
+      --theme: light!important;
+      color: var(--colour-primary-theme)!important;
     }
 
     @each $color, $value in $theme-colors {
       .bg-#{$color}[class*='gradient-'] {
+
         background-color: var(--colour-#{$color}-theme) !important;
+
+        * {
+          --theme: light;
+        }
+        
       }
     }
 
     [class*='bg-'][class*='gradient-']:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
+      
+      --colour-body: var(--colour-primary-theme);
+      
       @each $color, $value in $theme-colors {
         --colour-#{$color}: #{$value};
       }
+
       @include reset-colours();
-      --colour-body: var(--colour-primary-theme);
       color: var(--colour-body);
     }
 
@@ -165,7 +176,26 @@ $darkMode: 'true' !default;
 
       color: #{$colour-inverted};
     }
+    
   }
+
+
+
+  .reset-colours {
+    --theme: light;
+  }
+
+  @container style(--theme: light) {
+    * {
+
+    
+      @each $color, $value in $theme-colors {
+        --colour-#{$color}: #{$value};
+      }
+      @include reset-colours();
+    }
+  }
+
 
   @media (forced-colors: active) {
     #{$root} {

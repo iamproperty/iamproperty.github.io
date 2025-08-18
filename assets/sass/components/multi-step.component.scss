@@ -107,7 +107,7 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include dark-mode($darkMode) {
+  @container style(--theme: dark) {
     button {
       color: rgba($color: #000000, $alpha: 0.5);
 

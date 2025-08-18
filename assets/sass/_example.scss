@@ -35,7 +35,7 @@ $layers: 'true' !default;
       min-height: rem(470);
     }
 
-    @include dark-mode($darkMode) {
+    @container style(--theme: dark) {
       // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
       [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
         color: var(--colour-body);
