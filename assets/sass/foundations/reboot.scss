@@ -117,9 +117,7 @@ $darkMode: 'true' !default;
     color-scheme: light dark;
     @include var(background, --colour-canvas);
     @include var(font-family, --font-body);
-    //@include var(color, --colour-body);
-
-
+    
     width: 100%;
     line-height: 1.2;
     min-height: 100%;

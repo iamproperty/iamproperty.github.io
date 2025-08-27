@@ -76,7 +76,6 @@
     window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',({ matches }) => {
       if (matches) {
         setTheme('light-theme');
-        console.log('light');
       }
     })
 
@@ -93,7 +92,7 @@
       <div class="container bg-dark">
 
         <h1>Text colour</h1>
-        <p>Body teaxt</p>
+        <p>Body text</p>
       </div>
 
     <!-- #region Light mode -->
