@@ -188,7 +188,7 @@ $darkMode: 'true' !default;
       flex-shrink: 0;
     }
 
-    @include dark-mode($darkMode) {
+    @container style(--theme: dark) {
       --colour-link: var(--colour-white);
       @include invert-colours();
     }
@@ -394,7 +394,7 @@ $darkMode: 'true' !default;
       @include reset-colours();
     }
 
-    @include dark-mode($darkMode) {
+    @container style(--theme: dark) {
       @include invert-colours();
     }
 
@@ -486,7 +486,7 @@ $darkMode: 'true' !default;
   :host(.search-open) {
     background: #e6eaec !important;
 
-    @include dark-mode($darkMode) {
+    @container style(--theme: dark) {
       background: var(--colour-canvas-2) !important;
     }
 
@@ -553,7 +553,7 @@ $darkMode: 'true' !default;
     flex-shrink: 0;
   }
 
-  @include dark-mode($darkMode) {
+  @container style(--theme: dark) {
     --colour-link: var(--colour-white);
     @include invert-colours();
   }

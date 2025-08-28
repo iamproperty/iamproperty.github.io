@@ -24,6 +24,7 @@
   };
 
   const setTheme = function(theme) {
+
     localStorage.setItem('user-theme', theme);
     userTheme = theme;
 
@@ -31,6 +32,11 @@
     checked2 = theme == 'dark-theme' ? true : false;
 
     document.documentElement.className = theme;
+
+    if(checked2)
+      document.documentElement.style.setProperty('--theme', 'dark');
+    else
+      document.documentElement.style.setProperty('--theme', 'light');
   };
 
   const getTheme = function() {
@@ -60,6 +66,19 @@
   onMounted(() => {
     const initUserTheme = getMediaPreference();
     setTheme(initUserTheme);
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',({ matches }) => {
+      if (matches) {
+        setTheme('dark-theme');
+      }
+    })
+
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',({ matches }) => {
+      if (matches) {
+        setTheme('light-theme');
+      }
+    })
+
   });
 
 </script>
@@ -70,8 +89,18 @@
       <h1>Colour</h1>
     </DSHeader>
 
+      <div class="container bg-dark">
+
+        <h1>Text colour</h1>
+        <p>Body text</p>
+      </div>
+
     <!-- #region Light mode -->
     <div class="light-mode full-width">
+
+
+
+
       <div class="container">
         <div class="row">
           <div class="col">
@@ -851,16 +880,10 @@
 
   @media screen and (prefers-color-scheme: light) {
     .dark-theme {
-      @each $color, $value in $dark-mode-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @include invert-colours();
 
-      [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
-        @include reset-colours();
-        --colour-body: #{$primary} !important;
-        color: var(--colour-body) !important;
-      }
+      --theme: dark;
+
+      
     }
 
     html #visualtest:target ~ main > .light-mode:not(.visualtest) {
