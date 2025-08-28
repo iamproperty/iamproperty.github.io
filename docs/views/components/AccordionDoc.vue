@@ -1,32 +1,17 @@
 <script setup>
-  import Tabs from '@/components/Tabs/Tabs.vue';
   import Accordion from '@/components/Accordion/Accordion.vue';
   import AccordionItem from '@/components/Accordion/AccordionItem.vue';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Integration from '../Integration.vue';
-
-  const htmlUsage = `<div class="container accordion">
-  <details class="accordion-item">
-    <summary><span class="accordion-header accordion-button h4">How long does the auction last?</span></summary>
-    <div class="accordion-body">
-      <p>Curabitur aliquet quam id dui posuere blandit. Vivamus suscipit tortor eget felis porttitor volutpat. Proin eget tortor risus. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Proin eget tortor risus. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p><p>Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus suscipit tortor eget felis porttitor volutpat.</p><p>Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla quis lorem ut libero malesuada feugiat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Pellentesque in ipsum id orci porta dapibus. Pellentesque in ipsum id orci porta dapibus.</p>
-    </div>
-  </details>
-  <details class="accordion-item">
-    <summary><span class="accordion-header accordion-button h4">How long does the auction last?</span></summary>
-    <div class="accordion-body">
-      <p>Curabitur aliquet quam id dui posuere blandit. Vivamus suscipit tortor eget felis porttitor volutpat. Proin eget tortor risus. Proin eget tortor risus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Proin eget tortor risus. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p><p>Nulla porttitor accumsan tincidunt. Cras ultricies ligula sed magna dictum porta. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Vivamus suscipit tortor eget felis porttitor volutpat. Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vivamus suscipit tortor eget felis porttitor volutpat.</p><p>Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Nulla quis lorem ut libero malesuada feugiat. Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Pellentesque in ipsum id orci porta dapibus. Pellentesque in ipsum id orci porta dapibus.</p>
-    </div>
-  </details>
-</div>`;
+  import TrackEvents from '../TrackEvents.vue';
 
 </script>
 
 <template>
   <TrackEvents
     selector="iam-accordion"
-    :events="[]"
+    :events="['accordion-item-closed', 'accordion-item-opened']"
   ></TrackEvents>
 
   <main>
@@ -82,7 +67,7 @@
           </p>
         </details>
 
-        <AccordionItem badge="hiya"
+        <AccordionItem badge="auction"
           title="Curabitur aliquet quam id dui posuere blandit. Vivamus suscipit tortor eget felis porttitor volutpat?"
         >
           <p>
@@ -234,6 +219,30 @@
           <li>If a badge is added to an accordion item, it will appear directly at the end of the accordion title.</li>
           <li>If a badge colour is set, the badge will have the expected background colour.</li>
         </ul>
+      </template>
+
+        <template #data-layer>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>accordion-item-opened</th>
+              <td>When one of the task items within the accordion has been opened</td>
+              <td>{ "event": "accordion-item-opened", "title": "Item summary title"}</td>
+            </tr>
+            <tr>
+              <th>accordion-item-closed</th>
+              <td>When one of the task items within the accordion has been closed</td>
+              <td>{ "event": "accordion-item-closed", "title": "Item summary title"}</td>
+            </tr>
+          </tbody>
+        </table>
       </template>
     </Integration>
   </main>
