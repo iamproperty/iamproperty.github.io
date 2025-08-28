@@ -117,12 +117,22 @@ $darkMode: 'true' !default;
     color-scheme: light dark;
     @include var(background, --colour-canvas);
     @include var(font-family, --font-body);
-    @include var(color, --colour-body);
+    
     width: 100%;
     line-height: 1.2;
     min-height: 100%;
     -webkit-text-size-adjust: 100%; // 3
     -webkit-tap-highlight-color: rgba($black, 0); // 4
+
+
+    @container style(--theme: dark) {
+
+      color: var(--colour-heading);
+    }
+    @container style(--theme: light) {
+
+      color: var(--colour-body);
+    }
   }
 
   // #region scrollbars
