@@ -114,6 +114,7 @@ const extendInputs = (body): void => {
       event.target.closest('[data-change-type][data-input]:not(select)')
     ) {
       const button = event.target.closest('[data-change-type]');
+      console.log(button)
       const input = document.getElementById(button.getAttribute('data-input'));
       const newType = button.getAttribute('data-change-type');
       button.setAttribute('data-change-type', input.getAttribute('type'));

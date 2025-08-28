@@ -40,7 +40,8 @@ const components = [
   'doughnutchart',
   'bento-grid',
   'milestone-group',
-  'milestone'
+  'milestone',
+  'password-indicator'
 ];
 
 // Attach classes to dom elements
