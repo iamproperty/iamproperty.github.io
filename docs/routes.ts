@@ -532,6 +532,15 @@ const routes = [
         component: () => import('./views/components/ContentDoc.vue'),
       },
       {
+        path: 'dark-mode-switch',
+        name: 'Dark Mode Switch (BETA)',
+        meta: {
+          title: 'Dark Mode Switch | Components | iamkey',
+        },
+        component: () => import('./views/components/darkModeSwitch.vue'),
+        searchterms: 'dark mode',
+      },
+      {
         path: 'filterlist',
         name: 'Filter list (Beta)',
         meta: {
