@@ -537,7 +537,7 @@ const routes = [
         meta: {
           title: 'Dark Mode Switch | Components | iamkey',
         },
-        component: () => import('./views/components/darkModeSwitch.vue'),
+        component: () => import('./views/components/DarkModeSwitch.vue'),
         searchterms: 'dark mode',
       },
       {
