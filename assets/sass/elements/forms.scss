@@ -591,23 +591,6 @@ $optionalText: 'true' !default;
 
   // #endregion
 
-  // #region word counter
-
-  :is(input, textarea)[maxlength] + span {
-    position: relative;
-
-    &:before {
-      counter-reset: variable var(--char-count) var(--maxlength);
-      counter-reset: variable2 var(--maxlength);
-      content: attr(data-count) ' / ' counter(variable2);
-      float: right;
-
-      margin: 0 0 1em 1em;
-    }
-  }
-
-  // #endregion
-
   // #region Form validation
 
   .was-validated *:not(button):is(:invalid, .is-invalid, [aria-invalid]):not(.is-valid) + label,

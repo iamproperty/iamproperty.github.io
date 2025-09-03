@@ -1,7 +1,6 @@
 <script setup>
   import { onMounted } from 'vue';
   
-  import { setMaxlengthVars } from '../../../assets/ts/modules/inputs';
 
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
@@ -21,9 +20,7 @@ onMounted(() => {
         });
 
         // maxlength counter init
-        Array.from(document.querySelectorAll('input[maxlength]')).forEach((input, index) => {
-          setMaxlengthVars(input);
-        });
+
       });
 
 </script>
@@ -354,40 +351,6 @@ onMounted(() => {
         <label :for="`input16`">Input field label</label>
         <span class="suffix">days</span>
         <input type="text" :id="`input16`" :name="`input16`" placeholder="Optional placeholder text" required />
-        <span>Optional helper text</span>
-      </div>
-    </div>
-
-    <div class="container pb-0">
-      <h2>Character/wordcounter</h2>
-      <p>
-        Character or word counters should be used if there is a character or word limit. They display the ratio of
-        characters used and the total character limit.
-      </p>
-    </div>
-    <div class="container visualtest">
-      <div>
-        <label :for="`input17`">Input field label</label>
-        <input
-          type="text"
-          :id="`input17`"
-          :name="`input17`"
-          placeholder="Optional placeholder text"
-          required
-          maxlength="100"
-        />
-        <span>Optional helper text</span>
-      </div>
-      <div>
-        <label :for="`input17`">Input field label</label>
-        <textarea
-          :id="`input17a`"
-          :name="`input17a`"
-          placeholder="Optional placeholder text"
-          required
-          maxlength="150"
-        ></textarea>
-
         <span>Optional helper text</span>
       </div>
     </div>

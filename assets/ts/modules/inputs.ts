@@ -2,11 +2,6 @@ import hibpCheck from '../vendor/hibp.js';
 
 const extendInputs = (body): void => {
   function loadInput(): void {
-    // maxlength counter init
-    Array.from(document.querySelectorAll('input[maxlength],textarea[maxlength]')).forEach((input) => {
-      const wrapper = input.parentElement;
-      setMaxlengthVars(input, wrapper);
-    });
 
     Array.from(document.querySelectorAll('label input')).forEach((input) => {
       if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required')) {
@@ -76,9 +71,6 @@ const extendInputs = (body): void => {
       if (input.hasAttribute('type') && input.getAttribute('type') == 'color')
         input.nextElementSibling.value = input.value;
 
-      if (input.hasAttribute('maxlength') && input.nextElementSibling)
-        input.nextElementSibling.setAttribute('data-count', input.value.length);
-
       if (input.hasAttribute('data-strength-checker')) checkPWDStrength(input);
     }
   });
@@ -127,22 +119,6 @@ const extendInputs = (body): void => {
       }
     }
   });
-};
-
-export const setMaxlengthVars = (input): void => {
-  const wrapper = input.parentElement;
-  const maxlength = input.getAttribute('maxlength');
-
-  wrapper.style.setProperty('--maxlength', maxlength);
-
-  let span = input.nextElementSibling;
-
-  if (!span || (span && span.classList.contains('invalid-feedback'))) {
-    span = document.createElement('span');
-    wrapper.insertBefore(span, input.nextSibling);
-  }
-
-  span.setAttribute('data-count', input.value.length);
 };
 
 export const changeType = (input, type): void => {
