@@ -1,7 +1,6 @@
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/spacing-header.png';
-
 </script>
 
 <template>
@@ -423,4 +422,3 @@
     }
   }
 </style>
-

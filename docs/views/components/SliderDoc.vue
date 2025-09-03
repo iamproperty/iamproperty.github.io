@@ -15,7 +15,6 @@
   import Readme from '@/components/Slider/README.md';
   import WebReadme from '~/ts/components/slider/README.md';
   import Tabs from '@/components/Tabs/Tabs.vue';
-
 </script>
 
 <template>

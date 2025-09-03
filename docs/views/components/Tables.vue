@@ -2148,9 +2148,7 @@
         </ul>
       </template>
       <template #data-layer>
-        
         <span v-html="events"></span>
-
       </template>
     </Integration>
     <Versions pdf="/pdfs/tables.pdf">

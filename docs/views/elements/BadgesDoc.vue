@@ -2,7 +2,6 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import TagUsage from '../TagUsage.vue';
-
 </script>
 
 <template>
@@ -64,4 +63,3 @@
 -->
   </main>
 </template>
-

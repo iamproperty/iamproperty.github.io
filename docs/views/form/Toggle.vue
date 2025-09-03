@@ -4,9 +4,7 @@
 
   const message = 'input field value';
   const htmlUsage = `...`;
-  
 </script>
-
 
 <template>
   <main>
@@ -91,4 +89,3 @@
     </div>
   </main>
 </template>
-

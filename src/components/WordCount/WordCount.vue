@@ -1,7 +1,7 @@
 <script setup>
   import { onMounted } from 'vue';
 
-  const component = 'pagination';
+  const component = 'word-count';
 
   onMounted(() => {
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
@@ -16,5 +16,7 @@
 </script>
 
 <template>
-  <iam-pagination> </iam-pagination>
+  <iam-word-count>
+    <slot></slot>
+  </iam-word-count>
 </template>

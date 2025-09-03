@@ -112,9 +112,7 @@
   const notificationspages = notificationsComponents;
   const cardpages = cardComponents;
   const chartpages = chartComponents;
-
 </script>
-
 
 <template>
   <main>
@@ -186,4 +184,3 @@
     </div>
   </main>
 </template>
-

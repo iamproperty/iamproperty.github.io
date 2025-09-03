@@ -27,12 +27,10 @@ class iamMilestoneGroup extends HTMLElement {
   }
 
   connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const milestoneGroupComponent = this;
 
-    trackComponent(milestoneGroupComponent, 'iam-milestone-group', [
-      'hide-future-items', 
-      'show-future-items'
-    ]);
+    trackComponent(milestoneGroupComponent, 'iam-milestone-group', ['hide-future-items', 'show-future-items']);
 
     milestoneGroup(this);
   }

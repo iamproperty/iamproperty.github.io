@@ -4,11 +4,9 @@
   import Input from '@/components/Input/Input.vue';
   import Readme from '@/components/Input/README.md';
 
-
   const message = 'input field value';
   const htmlUsage = `...`;
   const i = 0;
-
 </script>
 
 <template>
@@ -82,4 +80,3 @@
     </div>
   </main>
 </template>
-

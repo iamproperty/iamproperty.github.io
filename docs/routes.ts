@@ -709,6 +709,14 @@ const routes = [
         },
         component: () => import('./views/components/MilestoneGroupDoc.vue'),
       },
+      {
+        path: 'word-count',
+        name: 'Word Count',
+        meta: {
+          title: 'Word Count | Components | iamkey',
+        },
+        component: () => import('./views/components/WordCountDoc.vue'),
+      },
     ],
   },
   {

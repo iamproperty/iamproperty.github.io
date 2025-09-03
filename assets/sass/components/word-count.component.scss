@@ -1,0 +1,26 @@
+@use '../_func.scss' as *;
+
+// #region word counter
+:host {
+  display: block;
+  max-width: var(--input-max-width, 50rem);
+}
+
+::slotted(span) {
+  position: relative;
+  display: block;
+}
+
+::slotted(span)::before {
+  display: inline-block;
+  //counter-reset: variable var(--char-count) var(--maxlength);
+  //counter-reset: variable2 var(--maxlength);
+  //content: attr(data-count) ' / ' var(--maxlength);
+
+  content: attr(data-count) ' / ' attr(data-max);
+  float: right;
+
+  margin: 0 0 1em 1em;
+}
+
+// #endregion

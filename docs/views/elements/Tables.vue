@@ -1,8 +1,6 @@
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
-  
-
 </script>
 
 <template>
@@ -116,4 +114,3 @@
     <a href="/components/tables" class="btn btn-primary mb-5">Tables component</a>
   </main>
 </template>
-

@@ -9,6 +9,10 @@
   import UserColours from '../UserColours.vue';
   import DarkMode from '../../../src/components/DarkMode/DarkMode.vue'
 
+  let userTheme = 'light-theme';
+  let checked = false;
+  let checked2 = false;
+
   const colourNames = {
     Primary: 'Deep slate',
     Success: 'Green',
@@ -789,10 +793,7 @@
 
   @media screen and (prefers-color-scheme: light) {
     .dark-theme {
-
       --theme: dark;
-
-      
     }
 
     html #visualtest:target ~ main > .light-mode:not(.visualtest) {
@@ -866,4 +867,3 @@
     display: none;
   }
 </style>
-

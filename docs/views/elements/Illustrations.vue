@@ -1,4 +1,3 @@
-
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
@@ -37,7 +36,6 @@
   import techPanel3 from '../../img/illustrations/tech-panel-3.png';
   import techPanel4 from '../../img/illustrations/tech-panel-4.png';
 
-  
   const blue = [
     { title: 'Auctioneer', src: '/img/illustrations/auctioneer.png' },
     { title: 'Branch', src: '/img/illustrations/branch.png' },
@@ -95,7 +93,6 @@
     'fa-bars fa-solid',
     'fa-arrow-up-right-from-square fa-light',
   ];
-
 </script>
 
 <template>

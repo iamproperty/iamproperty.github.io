@@ -1,4 +1,3 @@
-
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
   import DSHeader from '../DSHeader.vue';
@@ -41,7 +40,6 @@
 
   import PopoverLists from '../popoverLists.vue';
 
- 
   const htmlUsage = `<div class="dialog__wrapper">
   <button class="btn btn-secondary">Open Popover</button>
   <dialog>
@@ -55,15 +53,15 @@
 
   const selected = 'tooltip';
   const options = [
-          { name: 'Default', id: 'tooltip' },
-          { name: 'shift--left (mobile)', id: 'shift--left' },
-          { name: 'shift--right (mobile)', id: 'shift--right' },
-          { name: 'tooltip--top (all)', id: 'tooltip--top' },
-          { name: 'tooltip--top shift--left (mobile)', id: 'tooltip--top shift--left' },
-          { name: 'tooltip--top shift--right (mobile)', id: 'tooltip--top shift--right' },
-          { name: 'tooltip--left (tablet,desktop)', id: 'tooltip--left' },
-          { name: 'tooltip--right (tablet,desktop)', id: 'tooltip--right' },
-        ];
+    { name: 'Default', id: 'tooltip' },
+    { name: 'shift--left (mobile)', id: 'shift--left' },
+    { name: 'shift--right (mobile)', id: 'shift--right' },
+    { name: 'tooltip--top (all)', id: 'tooltip--top' },
+    { name: 'tooltip--top shift--left (mobile)', id: 'tooltip--top shift--left' },
+    { name: 'tooltip--top shift--right (mobile)', id: 'tooltip--top shift--right' },
+    { name: 'tooltip--left (tablet,desktop)', id: 'tooltip--left' },
+    { name: 'tooltip--right (tablet,desktop)', id: 'tooltip--right' },
+  ];
 </script>
 
 <template>

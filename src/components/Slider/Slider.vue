@@ -4,7 +4,6 @@
   const component = 'slider';
 
   onMounted(() => {
-
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-${component}`))
@@ -16,10 +15,8 @@
   });
 </script>
 
-
 <template>
   <iam-slider>
     <slot></slot>
   </iam-slider>
 </template>
-

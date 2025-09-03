@@ -1,21 +1,19 @@
 <script setup>
-
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  image: {
-    type: String,
-    required: false,
-  },
-  background: {
-    type: String,
-    default: 'light',
-    required: false,
-  }
-})
-
+  const props = defineProps({
+    title: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: false,
+    },
+    background: {
+      type: String,
+      default: 'light',
+      required: false,
+    },
+  });
 </script>
 
 <template>
@@ -35,4 +33,3 @@ const props = defineProps({
     </div>
   </div>
 </template>
-

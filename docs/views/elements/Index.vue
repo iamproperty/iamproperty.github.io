@@ -86,14 +86,11 @@
     return arr;
   }, {});
 
-
   const pages = elements;
   const formpages = formElements;
   const dialogpages = dialogElements;
   const linkPages = linkElements;
-
 </script>
-
 
 <template>
   <main>

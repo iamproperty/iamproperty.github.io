@@ -26,6 +26,7 @@ const components = [
   'marketing',
   'barchart',
   'splitbutton',
+  'word-count',
 ];
 
 const prefix = 'iam';
