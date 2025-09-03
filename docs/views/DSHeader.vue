@@ -1,18 +1,15 @@
-
 <script setup>
-  const props = defineProps(
-    {
-        image: {
-        type: String,
-        required: false,
-      },
-      section: {
-        type: String,
-        default: 'foundations',
-        required: false,
-      },
-    }
-  );
+  const props = defineProps({
+    image: {
+      type: String,
+      required: false,
+    },
+    section: {
+      type: String,
+      default: 'foundations',
+      required: false,
+    },
+  });
 </script>
 
 <template>

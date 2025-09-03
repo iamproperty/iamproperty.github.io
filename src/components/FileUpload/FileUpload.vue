@@ -7,19 +7,17 @@
   const component = 'fileupload';
 
   const props = defineProps({
-      maxfilesize: {
-        type: Number,
-        required: false,
-      },
-      maxfiles: {
-        type: Number,
-        required: false,
-      },
-    });
+    maxfilesize: {
+      type: Number,
+      required: false,
+    },
+    maxfiles: {
+      type: Number,
+      required: false,
+    },
+  });
 
   onMounted(() => {
-
-
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-${component}`))
@@ -28,7 +26,6 @@
       .catch((err) => {
         console.log(err.message);
       });
-
 
     $component.value.addEventListener('elementChange', function (event) {
       emit('elementChange', event);
@@ -41,7 +38,6 @@
     });
   });
 </script>
-
 
 <template>
   <iam-fileupload ref="$component"><slot></slot></iam-fileupload>

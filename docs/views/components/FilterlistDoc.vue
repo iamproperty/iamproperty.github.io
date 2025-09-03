@@ -23,7 +23,6 @@
     </ul>
   </div>
 </div>`;
-
 </script>
 
 <template>

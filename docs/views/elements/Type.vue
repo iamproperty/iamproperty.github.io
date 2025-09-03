@@ -5,7 +5,6 @@
   import tabletDesktopImg from '../../img/tablet-desktop.png';
   import Tabs from '../../../src/components/Tabs/Tabs.vue';
   import Tab from '../../../src/components/Tabs/Tab.vue';
-
 </script>
 
 <template>

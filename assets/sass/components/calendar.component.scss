@@ -8,7 +8,6 @@
 
 @use '../elements/modal.scss' as *;
 
-
 *,
 *::before,
 *::after {
@@ -22,65 +21,69 @@
   display: inline-block;
 }
 
-.visually-hidden, .visually-hidden-focusable:not(:focus):not(:focus-within) {
-    position: absolute !important;
-    width: 1px !important;
-    height: 1px !important;
-    padding: 0 !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    clip: rect(0, 0, 0, 0) !important;
-    white-space: nowrap !important;
-    border: 0 !important;
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
 }
 
 // #region FA icons
-.fa-regular, .far {
+.fa-regular,
+.far {
   font-weight: 400;
 }
-.fa-light, .fal {
+.fa-light,
+.fal {
   font-weight: 300;
 }
 
-[class*=fa-]:before {
+[class*='fa-']:before {
   content: var(--fa);
-  font-family: "Font Awesome 6 Pro";
+  font-family: 'Font Awesome 6 Pro';
   line-height: 1em;
 }
 
 .fa-calendar-day {
-  --fa: "\f783";
+  --fa: '\f783';
 }
 .fa-calendar-days {
-  --fa: "\f073";
+  --fa: '\f073';
 }
 .fa-calendar-week {
-  --fa: "\f784";
+  --fa: '\f784';
 }
 .fa-calendars {
-  --fa: "\e0d7";
+  --fa: '\e0d7';
 }
 .fa-list {
-  --fa: "\f03a";
+  --fa: '\f03a';
 }
 .fa-chevron-down {
-  --fa: "\f078";
+  --fa: '\f078';
 }
 .fa-chevron-left {
-  --fa: "\f053";
+  --fa: '\f053';
 }
 .fa-chevron-right {
-  --fa: "\f054";
+  --fa: '\f054';
 }
-.fa-sliders{
-  --fa: "\f1de";
+.fa-sliders {
+  --fa: '\f1de';
 }
-.fa-cog, .fa-gear {
-    --fa: "\f013";
-    --fa--fa: "\f013\f013";
+.fa-cog,
+.fa-gear {
+  --fa: '\f013';
+  --fa--fa: '\f013\f013';
 }
 .fa-clock {
-  --fa: "\f017";
+  --fa: '\f017';
 }
 // #endregion
 
@@ -90,29 +93,24 @@
   display: none;
 }
 
-#view[data-views*="month"] option[value="month"]{
+#view[data-views*='month'] option[value='month'] {
   display: flex;
 }
-#view[data-views*="week"] option[value="week"]{
+#view[data-views*='week'] option[value='week'] {
   display: flex;
 }
-#view[data-views*="day"] option[value="day"]{
+#view[data-views*='day'] option[value='day'] {
   display: flex;
 }
-#view[data-views*="list"] option[value="list"]{
-  display: flex;
-}
-
-#view[data-views*="year"] option[value="year"]{
+#view[data-views*='list'] option[value='list'] {
   display: flex;
 }
 
-
-
-
+#view[data-views*='year'] option[value='year'] {
+  display: flex;
+}
 
 .calendar__controls {
-
   display: flex;
   flex-direction: row;
   align-content: center;
@@ -121,8 +119,8 @@
   padding-bottom: 0.5rem;
 }
 
-
-#view, #view::picker(select){
+#view,
+#view::picker(select) {
   appearance: base-select;
 }
 
@@ -131,26 +129,23 @@
 }
 @layer elements {
   #view {
-    
-    margin-bottom: 0.5rem!important;
+    margin-bottom: 0.5rem !important;
 
-    i[class*=fa-] {
+    i[class*='fa-'] {
       margin-right: 0.5rem;
     }
   }
 
-  div:has(>#view)  {
-    
-    margin-bottom: 0!important;
+  div:has(> #view) {
+    margin-bottom: 0 !important;
   }
 }
 
-div:has(>select) #view {
-  
-  margin-bottom: 0.5rem!important;
+div:has(> select) #view {
+  margin-bottom: 0.5rem !important;
 }
 
-#view::picker(select){
+#view::picker(select) {
   border-radius: 0.5rem;
   border-color: var(--colour-border);
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
@@ -201,7 +196,6 @@ div:has(>select) #view {
   }
 
   ::-webkit-calendar-picker-indicator {
-
     width: 100%;
     height: 100%;
     position: absolute;
@@ -222,19 +216,17 @@ div:has(>select) #view {
 
 #filters-button,
 #settings-button {
-
   i {
-    margin-right: 0!important;
+    margin-right: 0 !important;
   }
 
   @container (min-width: 62em) {
-    
     .visually-hidden {
       display: contents;
     }
 
     i {
-      margin-right: 1rem!important;
+      margin-right: 1rem !important;
     }
   }
 }
@@ -243,13 +235,11 @@ div:has(>select) #view {
   display: none;
 }
 
-:host([data-filter]) #filters-button{
-
+:host([data-filter]) #filters-button {
   display: block;
 }
 
 hr {
-  
   display: none;
 }
 
@@ -257,15 +247,12 @@ hr {
   display: none;
 }
 
-
 @container (max-width: 36em) {
-
   #today-button {
     display: none;
   }
 
-  .calendar__controls > *{
-
+  .calendar__controls > * {
     order: 1;
   }
 
@@ -275,20 +262,19 @@ hr {
     width: 100%;
     border: 0;
     height: 0;
-    
-    display: block!important;
-    order: 2!important;
+
+    display: block !important;
+    order: 2 !important;
   }
 
   #prev-button,
   #next-button,
   .calendar__datepicker {
-
     order: 3;
   }
-.calendar__datepicker {
-  margin-inline: 0.5rem;
-}
+  .calendar__datepicker {
+    margin-inline: 0.5rem;
+  }
 
   #prev-button {
     margin-right: 0;
@@ -296,7 +282,6 @@ hr {
   }
 
   #next-button {
-    
     margin-right: auto;
   }
 
@@ -304,7 +289,7 @@ hr {
     margin-left: auto;
   }
 
-  select:has(option[value="month"]:checked) ~ .tag.tag--toggle {
+  select:has(option[value='month']:checked) ~ .tag.tag--toggle {
     display: inline-block;
     margin-bottom: rem(9);
     margin-right: 0;
@@ -312,11 +297,11 @@ hr {
     order: 1;
     margin-left: auto;
 
-    &:not(:has([type=checkbox]:checked)){
-      outline: 1px solid var(--colour-muted)!important;
+    &:not(:has([type='checkbox']:checked)) {
+      outline: 1px solid var(--colour-muted) !important;
     }
 
-    [type=checkbox] {
+    [type='checkbox'] {
       position: absolute;
       top: 0;
       left: 0;
@@ -328,7 +313,7 @@ hr {
     }
   }
 
-  select:has(option[value="month"]:checked) ~ #filters-button {
+  select:has(option[value='month']:checked) ~ #filters-button {
     margin-left: 0.5rem;
   }
 }
@@ -363,7 +348,6 @@ hr {
 
 // To do setup CSS vars
 :host {
-
   --columnHeadingFontSide: #{rem(14)};
   --columnHeadingLineHeight: #{rem(24)};
   --columnHeadingFontWeight: bold;
@@ -388,7 +372,6 @@ time.column-header {
 }
 
 .calendar__container {
-  
   container-type: inline-size;
 }
 
@@ -418,13 +401,16 @@ time.column-header {
 }
 
 // #region month view
-.calendar__controls:has(select :is(option[value="month"],option[value="year"]):checked) ~ .calendar__wrapper :is(#calendar, .month-wrapper){
-
+.calendar__controls:has(select :is(option[value='month'], option[value='year']):checked)
+  ~ .calendar__wrapper
+  :is(#calendar, .month-wrapper) {
   container-type: inline-size;
 }
 
-.calendar__controls:has(select :is(option[value="month"],option[value="year"]):checked) ~ .calendar__wrapper :is(#calendar, .month-wrapper) > table {
-  
+.calendar__controls:has(select :is(option[value='month'], option[value='year']):checked)
+  ~ .calendar__wrapper
+  :is(#calendar, .month-wrapper)
+  > table {
   width: 100%;
   border-collapse: collapse;
   max-height: unset;
@@ -442,7 +428,6 @@ time.column-header {
   }
 
   > thead > tr > th {
-       
     text-align: center;
 
     .long-day-name {
@@ -469,7 +454,6 @@ time.column-header {
   }
 
   > tbody > tr > td > time {
-    
     font-weight: normal;
     position: absolute;
     top: 0.25rem;
@@ -479,7 +463,6 @@ time.column-header {
     .month {
       display: none;
     }
-
   }
 
   > tbody > tr > td {
@@ -487,18 +470,16 @@ time.column-header {
     position: relative;
 
     &:hover {
-      background-color: rgba(238, 238, 238, 1)
+      background-color: rgba(238, 238, 238, 1);
     }
 
     &:active {
       background-color: rgba(224, 224, 224, 1);
     }
 
-
     &.selected {
       background-color: rgba(233, 248, 252, 1);
     }
-    
 
     &.day--saturday:not(.prev-month, .next-month, .selected),
     &.day--sunday:not(.prev-month, .next-month, .selected) {
@@ -514,10 +495,9 @@ time.column-header {
       color: var(--colour-border);
     }
   }
- 
+
   @container (max-width: 36em) {
     .table--day {
-
       display: none;
       thead,
       tbody,
@@ -528,11 +508,9 @@ time.column-header {
     }
 
     > tbody > tr > td {
-
       overflow: visible;
 
       &.has-event .table--day {
-        
         display: block;
         position: absolute;
         top: 2rem;
@@ -545,33 +523,27 @@ time.column-header {
         background: var(--colour-muted);
       }
       &.multi-events .table--day {
-        
-        width: calc(50% - .5rem);
+        width: calc(50% - 0.5rem);
       }
       &.busy-day .table--day {
-        
-        width: calc(75% - .5rem);
+        width: calc(75% - 0.5rem);
       }
       &.all-day .table--day {
-        
-        width: calc(100% - .5rem);
+        width: calc(100% - 0.5rem);
       }
       &.continued-day:not(:first-child) .table--day {
-        
-        width: calc(100% - .25rem);
+        width: calc(100% - 0.25rem);
         left: 0;
         margin-left: -1px;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
       }
       &.all-day:has(+ .continued-day) .table--day {
-        
-        width: calc(100% - .25rem);
+        width: calc(100% - 0.25rem);
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
       }
       &.continued-day:has(+ .continued-day) .table--day {
-        
         width: calc(100% + 2px);
         margin-inline: -1px;
         border-top-right-radius: 0;
@@ -580,7 +552,6 @@ time.column-header {
     }
   }
   @container (min-width: 36em) {
-
     height: 50rem;
 
     > tbody > tr > td {
@@ -608,14 +579,14 @@ time.column-header {
       }
 
       > tbody > tr > td:has(slot) {
-        border: 0;    
-        padding-inline: .25rem;
+        border: 0;
+        padding-inline: 0.25rem;
         display: block;
         overflow: visible;
 
         slot {
           pointer-events: all;
-        overflow: visible;
+          overflow: visible;
         }
       }
 
@@ -634,10 +605,10 @@ time.column-header {
     }
 
     > tbody > tr > td[data-more]:after {
-      content: "+"attr(data-more)" more";
+      content: '+' attr(data-more) ' more';
       position: absolute;
       left: 0.25rem;
-      bottom: .75rem;
+      bottom: 0.75rem;
       text-decoration: underline;
       line-height: 1;
       text-underline-offset: 0.2em;
@@ -646,17 +617,16 @@ time.column-header {
     }
 
     ::slotted(button) {
-      width: var(--event-width, 100%)!important;
-      max-width: var(--event-max-width, 100%)!important;
+      width: var(--event-width, 100%) !important;
+      max-width: var(--event-max-width, 100%) !important;
     }
 
     > tbody > tr > td:not(:first-child) ::slotted(button.continued) {
-      opacity: 0!important;
-      pointer-events: none!important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
 
     .table--day {
-
       width: 100%;
 
       td {
@@ -670,14 +640,12 @@ time.column-header {
         }
       }
     }
-
   }
 }
 @container (max-width: 36em) {
-  .calendar__controls:has([name="split"]:checked) ~ .calendar__wrapper #calendar {
-
+  .calendar__controls:has([name='split']:checked) ~ .calendar__wrapper #calendar {
     > table {
-      height: auto!important;
+      height: auto !important;
     }
 
     > table > tbody > tr > td {
@@ -689,8 +657,7 @@ time.column-header {
 
 // #region week view
 
-.calendar__controls:has(select option[value="week"]:checked) ~ .calendar__wrapper  {
-
+.calendar__controls:has(select option[value='week']:checked) ~ .calendar__wrapper {
   #week-view-header {
     display: block;
     position: sticky;
@@ -703,7 +670,7 @@ time.column-header {
 
     > table {
       width: 100%;
-    background-color: white;
+      background-color: white;
     }
 
     // Only show the all day row
@@ -714,24 +681,20 @@ time.column-header {
 
   #week-view-header .table--day,
   #calendar .table--day {
-      
-    margin: -2px!important;
-    width: calc(100% + 4px)!important;
+    margin: -2px !important;
+    width: calc(100% + 4px) !important;
   }
 
   .calendar {
-
     > table {
       display: table;
       width: 100%;
       min-width: 55rem;
     }
   }
-
 }
 
-.calendar__controls:has(select :is(option[value="day"], option[value="week"]):checked) ~ .calendar__wrapper {
-  
+.calendar__controls:has(select :is(option[value='day'], option[value='week']):checked) ~ .calendar__wrapper {
   --side-panel-width: #{rem(48)};
   position: relative;
   height: 40rem;
@@ -739,10 +702,8 @@ time.column-header {
   margin-bottom: 2rem;
 
   @container (min-width: 36em) {
-
     --side-panel-width: #{rem(72)};
   }
-
 
   #week-view-corner {
     display: block;
@@ -751,23 +712,22 @@ time.column-header {
     left: 0;
     width: calc(var(--side-panel-width) + 1px);
 
-   margin-bottom: -3.5rem!important;
+    margin-bottom: -3.5rem !important;
     z-index: 9999;
 
     table {
-
       min-width: var(--side-panel-width);
     }
 
     thead {
-      display: table-header-group!important;
+      display: table-header-group !important;
       tr {
-        display: table-row!important;
+        display: table-row !important;
       }
       th {
-        display: table-cell!important;
-        height: calc(var(--columnHeadingLineHeight) - 1px)!important;
-        line-height: calc(var(--columnHeadingLineHeight) - 1px)!important;
+        display: table-cell !important;
+        height: calc(var(--columnHeadingLineHeight) - 1px) !important;
+        line-height: calc(var(--columnHeadingLineHeight) - 1px) !important;
         background-color: var(--colour-canvas);
         border: 1px solid var(--colour-border);
         //border-right: 0;
@@ -776,17 +736,17 @@ time.column-header {
       }
     }
     tbody {
-      display: table-row-group!important;
+      display: table-row-group !important;
       tr {
-        display: table-row!important;
+        display: table-row !important;
       }
       th {
-        display: table-cell!important;
-        height: calc(var(--alldayHeight) - 3px)!important;
-        line-height: calc(var(--alldayHeight) - 3px)!important;
+        display: table-cell !important;
+        height: calc(var(--alldayHeight) - 3px) !important;
+        line-height: calc(var(--alldayHeight) - 3px) !important;
         background-color: var(--colour-canvas);
         border: 1px solid var(--colour-border);
-        
+
         text-align: right;
         font-size: var(--columnHeadingFontSide);
 
@@ -799,9 +759,7 @@ time.column-header {
     }
   }
 
-
   .table--day {
-
     border-collapse: collapse;
     width: 100%;
     color: var(--colour-heading);
@@ -823,7 +781,7 @@ time.column-header {
       vertical-align: top;
       font-weight: normal;
     }
-    
+
     td {
       height: auto;
       width: auto;
@@ -836,11 +794,8 @@ time.column-header {
         position: relative;
       }
     }
-  
-
 
     > tbody > tr {
-      
       border: 1px solid var(--colour-border);
       padding: 0;
     }
@@ -851,22 +806,19 @@ time.column-header {
     }
 
     > tbody > tr > td {
-
       padding: 0;
 
       &:hover {
-
         z-index: 6;
       }
     }
 
     > tbody > tr > td:has(slot) {
-
-      padding: 0 0.25rem!important;
-        z-index: 7;
+      padding: 0 0.25rem !important;
+      z-index: 7;
     }
 
-    > tbody > tr > td > span{
+    > tbody > tr > td > span {
       height: rem(17.5);
       display: block;
 
@@ -874,11 +826,10 @@ time.column-header {
         background: pink;
       }
     }
-    > tbody > tr > td > span:nth-child(2){
+    > tbody > tr > td > span:nth-child(2) {
       border-bottom: 1px dashed var(--colour-border);
       margin-bottom: -1px;
     }
-
 
     > tbody > tr.allday > th {
       display: block;
@@ -893,14 +844,12 @@ time.column-header {
       height: calc(var(--columnHeadingLineHeight) + 1px);
     }
 
-    > tbody > tr.allday > td{
-      height: var(--columnHeadingLineHeight)!important;
+    > tbody > tr.allday > td {
+      height: var(--columnHeadingLineHeight) !important;
     }
-
   }
 
   .calendar {
-
     > table {
       display: table;
       width: 100%;
@@ -908,19 +857,16 @@ time.column-header {
       table-layout: fixed;
     }
 
-
     // Only show the selected week
     > table > thead,
     > table > tbody > tr:not(:has(.selected)) {
-      display: none!important;
+      display: none !important;
     }
 
     > table > tbody > tr:has(.selected) > td {
-      
       border: 1px solid var(--colour-border);
 
       .day-of-week {
-        
         float: left;
       }
       .day {
@@ -934,24 +880,21 @@ time.column-header {
     }
 
     .table--day > tbody > tr.allday {
-      height: var(--alldayHeight)!important;
+      height: var(--alldayHeight) !important;
 
       th {
         display: none;
       }
-      
-      td:has(slot) {
 
+      td:has(slot) {
         font-size: var(--columnHeadingFontSide);
         color: var(--colour-heading);
         //white-space: nowrap;
         padding-inline: rem(4);
-        height: var(--alldayHeight)!important;
-        line-height: var(--alldayHeight)!important;
+        height: var(--alldayHeight) !important;
+        line-height: var(--alldayHeight) !important;
       }
-
     }
-
   }
 
   #week-view-side {
@@ -966,10 +909,7 @@ time.column-header {
 
     margin-right: -1px;
 
-
-
     .table--day {
-      
       margin: 0px;
       width: 100%;
     }
@@ -978,9 +918,7 @@ time.column-header {
       display: none;
     }
 
-
-    .table--day > tbody > tr > th
-    {
+    .table--day > tbody > tr > th {
       display: table-cell;
       border: 1px solid var(--colour-border);
       border-right: none;
@@ -988,7 +926,6 @@ time.column-header {
   }
 
   #calendar {
-
     width: calc(100% - var(--side-panel-width));
     float: left;
 
@@ -996,13 +933,12 @@ time.column-header {
       display: table-row;
     }
     time {
-      display: none!important;
-    }
-    
-    .table--day tr.allday {
-      display: none!important;
+      display: none !important;
     }
 
+    .table--day tr.allday {
+      display: none !important;
+    }
   }
 
   #calendar .table--day tr:has(.out-of-hours) {
@@ -1012,70 +948,50 @@ time.column-header {
 // #endregion
 
 // #region Day view
-.calendar__controls:has(select option[value="day"]:checked) ~ .calendar__wrapper {
-
-
+.calendar__controls:has(select option[value='day']:checked) ~ .calendar__wrapper {
   #week-view-corner {
-
     thead {
-      
       th {
         border: 1px solid var(--colour-border);
       }
     }
     tbody {
-      
       th {
         border-right: 1px solid var(--colour-border);
       }
     }
   }
 
-
-
-
-
-
   #week-view-side {
-    
     padding-top: calc(var(--columnHeadingLineHeight) + var(--alldayHeight) + 1px);
-
   }
 
-  #week-view-side .table--day>tbody>tr>th {
-
+  #week-view-side .table--day > tbody > tr > th {
     position: static;
   }
 
   #calendar > table {
-    
     --side-panel-width: #{rem(48)};
     table-layout: fixed;
     width: 100%;
     max-width: 100%;
-    
 
     @container (min-width: 36em) {
-
       --side-panel-width: #{rem(72)};
     }
-
 
     > thead,
     > tbody > tr:not(:has(> td.selected)),
     > tbody > tr > td:not(.selected),
     > tbody > tr > td > time {
-
       display: none;
     }
 
     > tbody > tr:has(> td.selected) {
-
       display: block;
     }
 
-    > tbody > tr > td.selected  {
-
+    > tbody > tr > td.selected {
       display: contents;
     }
 
@@ -1089,7 +1005,7 @@ time.column-header {
       border-spacing: 0;
 
       thead {
-        display: table-header-group!important;
+        display: table-header-group !important;
       }
 
       thead th {
@@ -1099,31 +1015,28 @@ time.column-header {
         background: var(--colour-canvas);
         border-top: 1px solid var(--colour-border);
         border-right: 1px solid var(--colour-border);
-        
-        height: calc(var(--columnHeadingLineHeight) - 1px)!important;
-        line-height: calc(var(--columnHeadingLineHeight) - 1px)!important;
+
+        height: calc(var(--columnHeadingLineHeight) - 1px) !important;
+        line-height: calc(var(--columnHeadingLineHeight) - 1px) !important;
       }
 
-      >thead>tr>th:first-child {
+      > thead > tr > th:first-child {
         display: none;
       }
       tbody tr:first-child {
-        
         position: sticky;
         top: rem(26);
         border-collapse: collapse;
         background: var(--colour-canvas);
         z-index: 99;
-        display: table-row!important;
+        display: table-row !important;
 
         td {
-         
-        border-top: 1px solid var(--colour-border); 
+          border-top: 1px solid var(--colour-border);
         }
       }
 
       tbody th {
-        
         display: none;
       }
 
@@ -1134,32 +1047,29 @@ time.column-header {
         height: rem(72);
 
         &:first-child {
-
           border-left: 1px solid var(--colour-border);
         }
       }
 
-      > tbody > tr > td > span ::slotted(button){
+      > tbody > tr > td > span ::slotted(button) {
         max-width: 100%;
       }
     }
   }
 
-
   .calendar ::slotted(button) {
-    width: 100%!important;
-    max-width: 100%!important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 
 // #endregion
 
 // #region Current time indicator
-.calendar__controls:has(select :is(option[value="day"], option[value="week"]):checked) ~ .calendar__wrapper {
+.calendar__controls:has(select :is(option[value='day'], option[value='week']):checked) ~ .calendar__wrapper {
   position: relative;
-  
-  tr:has([data-hour][data-time]){
-    
+
+  tr:has([data-hour][data-time]) {
     position: relative;
   }
 
@@ -1170,7 +1080,6 @@ time.column-header {
   }
 
   [data-hour][data-time]:before {
-      
     content: attr(data-time);
     position: absolute;
     top: var(--minute-pos, 25%);
@@ -1183,8 +1092,7 @@ time.column-header {
   }
 
   [data-hour][data-time]:after {
-      
-    content: "";
+    content: '';
     position: absolute;
     top: var(--minute-pos, 25%);
     right: 0;
@@ -1196,9 +1104,8 @@ time.column-header {
     transform: translate(0, -50%);
   }
 
-  [data-hour][data-time] ~ td:before {   
-      
-    content: "";
+  [data-hour][data-time] ~ td:before {
+    content: '';
     position: absolute;
     top: var(--minute-pos, 25%);
     left: 0;
@@ -1215,12 +1122,11 @@ time.column-header {
 
 // #region List view
 
-.calendar__controls:has(select option[value="list"]:checked) ~ .calendar__wrapper  #calendar > table,
-.calendar__controls:has(select option[value="month"]:checked) ~ #split.calendar > table {
-  
+.calendar__controls:has(select option[value='list']:checked) ~ .calendar__wrapper #calendar > table,
+.calendar__controls:has(select option[value='month']:checked) ~ #split.calendar > table {
   display: table;
   width: 100%;
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 
   > thead {
     display: none;
@@ -1232,18 +1138,14 @@ time.column-header {
     display: contents;
   }
 
-
-    
   > tbody > tr > td:not(:has(slot:not(.continued))) > *:not(.table--day) {
     display: none;
   }
 
   .table--day {
-
     width: 100%;
 
     tr {
-
       th {
         display: none;
       }
@@ -1261,49 +1163,40 @@ time.column-header {
       }
     }
 
-    tr:not(:has(slot)){
+    tr:not(:has(slot)) {
       display: none;
     }
   }
 
   ::slotted(button) {
-
-    margin-bottom: 0.5rem!important;
+    margin-bottom: 0.5rem !important;
   }
 }
 
-
-.calendar__controls:has(select option[value="month"]:checked) ~ #split.calendar {
-
+.calendar__controls:has(select option[value='month']:checked) ~ #split.calendar {
   display: none;
 }
 
 @container (max-width: 36em) {
-  .calendar__controls:has([name="split"]:checked) ~ #split.calendar {
-
-    display: block!important;
+  .calendar__controls:has([name='split']:checked) ~ #split.calendar {
+    display: block !important;
 
     & > table > tbody > tr > td:not(.selected) {
-
       display: none;
     }
-  } 
+  }
 }
 // #endregion
 
 // #region Year view
 
-.calendar__controls:has(select option[value="year"]:checked) ~ .calendar__wrapper #calendar {
-
+.calendar__controls:has(select option[value='year']:checked) ~ .calendar__wrapper #calendar {
   display: none;
 }
 
-.calendar__controls:has(select option[value="year"]:checked) ~ .calendar__wrapper {
-
-  
+.calendar__controls:has(select option[value='year']:checked) ~ .calendar__wrapper {
 }
-.calendar__controls:has(select option[value="year"]:checked) ~ .calendar__wrapper #year-view {
-
+.calendar__controls:has(select option[value='year']:checked) ~ .calendar__wrapper #year-view {
   display: grid !important;
   grid-template-columns: 1fr 1fr;
   //grid-template-rows: 1fr;
@@ -1312,46 +1205,47 @@ time.column-header {
 
   --table-height: 10rem;
 
-
   .month-wrapper table {
     height: var(--table-height);
     font-size: rem(10);
     margin-bottom: 0;
 
-    thead>tr>th,
+    thead > tr > th,
     .column-header {
-
       font-size: rem(10);
       line-height: rem(12);
     }
 
-    tbody>tr>td.selected {
+    tbody > tr > td.selected {
       background-color: transparent;
     }
   }
 
   @container (min-width: 36em) {
-  
     grid-template-columns: 1fr 1fr 1fr;
     --table-height: 15rem;
   }
 
   @container (min-width: 62em) {
-  
     grid-template-columns: 1fr 1fr 1fr 1fr;
     --table-height: 20rem;
   }
 }
 
-
-
 // #endregion
 
 // #region hide weekends
 
-:host([data-hide-weekends]) .calendar__controls:has(select option[value="month"]:checked) ~ .calendar__wrapper  #calendar > table,
-:host([data-hide-weekends]) .calendar__controls:has(select option[value="week"]:checked) ~ .calendar__wrapper  #calendar > table {
-
+:host([data-hide-weekends])
+  .calendar__controls:has(select option[value='month']:checked)
+  ~ .calendar__wrapper
+  #calendar
+  > table,
+:host([data-hide-weekends])
+  .calendar__controls:has(select option[value='week']:checked)
+  ~ .calendar__wrapper
+  #calendar
+  > table {
   th.saturday,
   td.day--saturday,
   th.sunday,
@@ -1361,9 +1255,7 @@ time.column-header {
 }
 // #endregion
 
-
-
-  // #region scrollbars
+// #region scrollbars
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

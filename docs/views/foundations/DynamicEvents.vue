@@ -208,4 +208,3 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
   </main>
 </template>
-

@@ -9,31 +9,28 @@ export const showFuture = function (milestoneGroupElement: Element): void {
   toggleBtn.innerHTML = 'Show next steps';
   toggleBtn.classList.add('btn', 'btn-tertiary', 'show-all-toggle');
 
-  milestoneGroupElement.appendChild(toggleBtn)
+  milestoneGroupElement.appendChild(toggleBtn);
 
   toggleBtn.addEventListener('click', () => {
-    if(milestoneGroupElement.classList.contains('show-all')) {
+    if (milestoneGroupElement.classList.contains('show-all')) {
       toggleBtn.innerHTML = 'Show next steps';
 
       milestoneGroupElement.classList.remove('show-all');
-      toggleInteractionEvent('hide-future-items', milestoneGroupElement)
+      toggleInteractionEvent('hide-future-items', milestoneGroupElement);
     } else {
       toggleBtn.innerHTML = 'Hide next steps';
 
       milestoneGroupElement.classList.add('show-all');
-      toggleInteractionEvent('show-future-items', milestoneGroupElement)
+      toggleInteractionEvent('show-future-items', milestoneGroupElement);
     }
-
   });
-
-}
+};
 
 const toggleInteractionEvent = function (eventName: string, element: Element): void {
   const customEvent = new CustomEvent(eventName, {});
 
   element.dispatchEvent(customEvent);
-}
-
+};
 
 const milestoneGroup = function (milestoneGroupElement: Element): void {
   showFuture(milestoneGroupElement);

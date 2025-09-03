@@ -4,7 +4,6 @@
   const component = 'rankings';
 
   onMounted(() => {
-
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-${component}`))
@@ -21,4 +20,3 @@
     <slot></slot>
   </iam-rankings>
 </template>
-

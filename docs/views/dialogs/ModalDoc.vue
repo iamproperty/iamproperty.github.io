@@ -1,4 +1,3 @@
-
 <script setup>
   import { onMounted } from 'vue';
 
@@ -19,7 +18,6 @@
 
   import { createDialog } from '../../../assets/ts/modules/dialogs';
 
-  
   const htmlUsage = `<button data-modal="modal" class="btn btn-secondary">Open Modal</button>
 
 <dialog id="modal">
@@ -28,33 +26,28 @@
   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 </dialog>`;
 
-onMounted(() => {
+  onMounted(() => {
+    Array.from(document.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
+      let parent = dialog.closest('.dialog__wrapper');
 
-  
-        Array.from(document.querySelectorAll('dialog[open]')).forEach((dialog, index) => {
-          let parent = dialog.closest('.dialog__wrapper');
+      if (!parent) {
+        dialog.removeAttribute('open');
+        dialog.showModal();
+        dialog.focus();
 
-          if (!parent) {
-            dialog.removeAttribute('open');
-            dialog.showModal();
-            dialog.focus();
+        createDialog(dialog);
+      }
+    });
 
-            createDialog(dialog);
-          }
-        });
+    var hash = window.location.hash;
 
-        var hash = window.location.hash;
-
-        if (hash == '#visualtest') {
-          Array.from(document.querySelectorAll('dialog')).forEach((dialog, index) => {
-            dialog.setAttribute('open', 'open');
-            createDialog(dialog);
-          });
-        }
-
-});
-
-      
+    if (hash == '#visualtest') {
+      Array.from(document.querySelectorAll('dialog')).forEach((dialog, index) => {
+        dialog.setAttribute('open', 'open');
+        createDialog(dialog);
+      });
+    }
+  });
 </script>
 
 <template>

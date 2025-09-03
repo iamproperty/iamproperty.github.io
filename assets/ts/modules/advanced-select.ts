@@ -1,7 +1,7 @@
 function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = false): boolean | void {
   let currentFocus = -1;
 
-  if(!isSearch){
+  if (!isSearch) {
     displayInputField.addEventListener('focus', function () {
       displayInputField.setAttribute('placeholder', displayInputField.value);
       displayInputField.setAttribute('data-value', displayInputField.value);
@@ -12,10 +12,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
       datalist.style.display = 'block';
     });
-  }
-  else {
+  } else {
     displayInputField.addEventListener('focus', function () {
-
       displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
       displayInputField.setAttribute('list', '');
 
@@ -37,28 +35,23 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     if (option.innerHTML == '') option.innerHTML = option.value;
   }
 
-
   advancedSelect.addEventListener('click', function () {
-
     if (event && event.target instanceof HTMLElement && event.target.closest('datalist option')) {
       const option = event.target.closest('datalist option');
- 
+
       displayInputField.value = option.value;
 
-      if(typeof window.triggerDynamicEvent == "function")
-        window.triggerDynamicEvent(displayInputField);
+      if (typeof window.triggerDynamicEvent == 'function') window.triggerDynamicEvent(displayInputField);
 
       datalist.style.display = 'none';
 
       for (const optionInner of datalist.options) {
-        optionInner.classList.remove('active')
+        optionInner.classList.remove('active');
       }
 
       option.classList.add('active');
     }
-
   });
-
 
   displayInputField.addEventListener('input', function () {
     displayInputField.removeAttribute('data-value');
@@ -103,20 +96,22 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     }
   }
 
-
   // Add the empty button
   displayInputField
     .closest('label')
-    .insertAdjacentHTML('beforeend', '<button class="empty btn btn-action"><i class="fa-light fa-times me-0"></i></button>');
+    .insertAdjacentHTML(
+      'beforeend',
+      '<button class="empty btn btn-action"><i class="fa-light fa-times me-0"></i></button>'
+    );
   const closeBtn = advancedSelect.querySelector('.empty');
 
   closeBtn.addEventListener('click', function (e) {
     displayInputField.removeAttribute('placeholder');
     displayInputField.removeAttribute('data-value');
     displayInputField.value = '';
-    
+
     for (const optionInner of datalist.options) {
-      optionInner.classList.remove('active')
+      optionInner.classList.remove('active');
       optionInner.removeAttribute('style');
     }
   });

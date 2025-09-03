@@ -1,6 +1,5 @@
 <script setup>
   import { onMounted } from 'vue';
-  
 
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
@@ -11,20 +10,15 @@
   const message = 'input field value';
   const htmlUsage = `...`;
 
-onMounted(() => {
-      
-  
-        Array.from(document.querySelectorAll('label input')).forEach((input, index) => {
-          if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
-            input.insertAdjacentHTML('beforebegin', `<span class="optional-text"></span>`);
-        });
+  onMounted(() => {
+    Array.from(document.querySelectorAll('label input')).forEach((input, index) => {
+      if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
+        input.insertAdjacentHTML('beforebegin', `<span class="optional-text"></span>`);
+    });
 
-        // maxlength counter init
-
-      });
-
+    // maxlength counter init
+  });
 </script>
-
 
 <template>
   <main>
@@ -617,4 +611,3 @@ onMounted(() => {
     </div>
   </main>
 </template>
-

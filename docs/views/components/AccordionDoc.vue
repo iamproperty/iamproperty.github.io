@@ -5,7 +5,6 @@
   import Readme from '@/components/Accordion/README.md';
   import WebReadme from '~/ts/components/accordion/README.md';
 
-
   const htmlUsage = `<div class="container accordion">
   <details class="accordion-item">
     <summary><span class="accordion-header accordion-button h4">How long does the auction last?</span></summary>
@@ -20,7 +19,6 @@
     </div>
   </details>
 </div>`;
-
 </script>
 
 <template>
@@ -103,4 +101,3 @@
     </Tabs>
   </main>
 </template>
-

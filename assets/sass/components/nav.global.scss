@@ -52,7 +52,7 @@ nav:has(iam-nav.nav--sticky) {
 
   iam-nav {
     position: fixed;
-    outline: 2px solid #EEEEEE;
+    outline: 2px solid #eeeeee;
   }
 }
 
@@ -63,7 +63,6 @@ nav:has(iam-nav.nav--sticky) {
   }
 
   nav:has(iam-nav.nav--xs-sticky) {
-
     position: sticky;
     top: 0;
     left: 0;
@@ -75,10 +74,9 @@ nav:has(iam-nav.nav--sticky) {
       position: fixed;
     }
   }
-  
-  body[data-direction="down"].past100 nav:has(.nav--xs-sticky){
 
-    transform: translate(0,-110%);
+  body[data-direction='down'].past100 nav:has(.nav--xs-sticky) {
+    transform: translate(0, -110%);
   }
 }
 
@@ -89,10 +87,8 @@ nav:has(iam-nav.nav--sticky) {
   }
 }
 
-
-body[data-direction="down"].past100 nav:has(.nav--sticky){
-
-  transform: translate(0,-110%);
+body[data-direction='down'].past100 nav:has(.nav--sticky) {
+  transform: translate(0, -110%);
 }
 
 // #endregion

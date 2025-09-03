@@ -7,12 +7,9 @@
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Card from '@/components/Card/Card.vue';
 
-
   const message = 'input field value';
   const htmlUsage = `...`;
-
 </script>
-
 
 <template>
   <main>

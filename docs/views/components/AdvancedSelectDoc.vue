@@ -10,10 +10,7 @@
 </script>
 
 <template>
-  <TrackEvents
-    selector="iam-advanced-select"
-    :events="[]"
-  ></TrackEvents>
+  <TrackEvents selector="iam-advanced-select" :events="[]"></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Advanced select</h1>

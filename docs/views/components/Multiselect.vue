@@ -6,9 +6,6 @@
   import Multiselect from '@/components/Multiselect/Multiselect.vue';
   import VueReadme from '@/components/Multiselect/README.md';
   import WebReadme from '~/ts/components/multiselect/README.md';
-
-
-
 </script>
 
 <template>

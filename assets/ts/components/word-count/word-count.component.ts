@@ -1,6 +1,5 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
 
-
 trackComponentRegistered('iam-word-count');
 
 class iamCard extends HTMLElement {
@@ -26,7 +25,6 @@ class iamCard extends HTMLElement {
   }
 
   connectedCallback(): void {
-
     const input = this.querySelector('input,textarea,select');
     let span = this.querySelector('[data-count]');
 
@@ -37,46 +35,31 @@ class iamCard extends HTMLElement {
 
     console.log(input.value.split(' ').length);
 
-    if(this.hasAttribute('data-character'))
-      span.setAttribute('data-count', input.value ? input.value.length : '0');
-    else
-      span.setAttribute('data-count', input.value ? input.value.split(' ').length : '0');
-      
-
+    if (this.hasAttribute('data-character')) span.setAttribute('data-count', input.value ? input.value.length : '0');
+    else span.setAttribute('data-count', input.value ? input.value.split(' ').length : '0');
 
     const maxlength = this.getAttribute('data-max');
     this.style.setProperty('--maxlength', maxlength);
     span.setAttribute('data-max', this.getAttribute('data-max'));
 
-
-
-
-
     input.addEventListener('input', (event) => {
-      
       if (this.hasAttribute('data-max') && span && this.hasAttribute('data-character')) {
-
         input?.setAttribute('maxlength', this.getAttribute('data-max'));
         span.setAttribute('data-count', input?.value.length);
-      }
-      else if (this.hasAttribute('data-max') && span) {
-
-        if(input?.value.split(' ').length >= this.getAttribute('data-max')){
+      } else if (this.hasAttribute('data-max') && span) {
+        if (input?.value.split(' ').length >= this.getAttribute('data-max')) {
           event?.preventDefault();
           input?.setAttribute('maxlength', input?.value.length);
-        }
-        else {
+        } else {
           input?.removeAttribute('maxlength');
         }
 
         span.setAttribute('data-count', input?.value.split(' ').length);
         span.setAttribute('data-max', this.getAttribute('data-max'));
       }
-
     });
 
-
-/*
+    /*
 
     // maxlength counter init
     Array.from(document.querySelectorAll('input[maxlength],textarea[maxlength]')).forEach((input) => {
@@ -102,11 +85,7 @@ const wrapper = input.parentElement;
 
 
 */
-
-
-
   }
-
 }
 
 export default iamCard;

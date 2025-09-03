@@ -1,5 +1,5 @@
 <script setup>
-import { carousel as events } from '../../events.js';
+  import { carousel as events } from '../../events.js';
 
   function saveValue(event) {
     // Replace the timeout with an ajax call

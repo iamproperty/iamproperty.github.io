@@ -22,39 +22,36 @@
       <h1>Word Count (Beta)</h1>
     </DSHeader>
 
-    <p>Character or word counters should be used if there is a character or word limit. They display the ratio of characters used and the total character limit.</p>
+    <p>
+      Character or word counters should be used if there is a character or word limit. They display the ratio of
+      characters used and the total character limit.
+    </p>
 
     <WordCount data-max="10" class="mb-5">
-
       <label for="input17">Input field label</label>
-      <input type="text" id="input17" name="input17" placeholder="Optional placeholder text" required="" value="hey">
+      <input type="text" id="input17" name="input17" placeholder="Optional placeholder text" required="" value="hey" />
       <span data-count="0">Optional helper text</span>
     </WordCount>
 
     <WordCount data-max="10" class="mb-5">
-
       <label for="input1">Text area label</label>
-      <textarea type="text" id="input1" name="input1" ></textarea>
-      
+      <textarea type="text" id="input1" name="input1"></textarea>
     </WordCount>
 
     <h2>Character count</h2>
 
-    <p>Adding <strong>data-characters</strong> attribute to the element turns it into a character counter instead of counting full words.</p>
+    <p>
+      Adding <strong>data-characters</strong> attribute to the element turns it into a character counter instead of
+      counting full words.
+    </p>
 
     <WordCount data-max="10" data-character="" class="mb-5">
-
       <label for="input17">Input field label</label>
-      <input type="text" id="input18" name="input18" placeholder="Optional placeholder text" required="" >
+      <input type="text" id="input18" name="input18" placeholder="Optional placeholder text" required="" />
       <span data-count="0">Optional helper text</span>
     </WordCount>
 
-
-
-
-
-
-<Integration component="split-button" componentName="split-button">
+    <Integration component="split-button" componentName="split-button">
       <template #web-component>
         <pre><code>{{`<iam-word-count data-v-7348d146="" data-max="10" class="mb-5" style="--maxlength: 10;">
   <label data-v-7348d146="" for="input17">Input field label</label>
@@ -101,12 +98,6 @@
         </table>
       </template>
     </Integration>
-
-
-
-
-
-
   </main>
 </template>
 

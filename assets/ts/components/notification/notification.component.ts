@@ -3,7 +3,6 @@ import { trackComponent, trackComponentRegistered } from '../_global';
 
 trackComponentRegistered('iam-notification');
 
-
 class iamNotification extends HTMLElement {
   constructor() {
     super();
@@ -110,7 +109,6 @@ class iamNotification extends HTMLElement {
           });
 
           this.dispatchEvent(customEvent);
-
         },
         false
       );
@@ -118,9 +116,7 @@ class iamNotification extends HTMLElement {
 
     setupNotification(this);
 
-    trackComponent(this, 'iam-notification', [
-      'dismiss'
-    ]);
+    trackComponent(this, 'iam-notification', ['dismiss']);
   }
 }
 

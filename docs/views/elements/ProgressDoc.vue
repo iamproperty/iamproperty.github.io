@@ -5,7 +5,6 @@
   import headerImg from '../../img/type-header.png';
   import Table from '@/components/Table/Table.vue';
   import Card from '@/components/Card/Card.vue';
-
 </script>
 
 <template>
@@ -175,4 +174,3 @@
     </div>
   </main>
 </template>
-

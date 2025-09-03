@@ -15,7 +15,6 @@
       <span class="h6 stepper__end">Onboarding complete</span>
    </nav>
 </div>`;
-
 </script>
 
 <template>
@@ -62,4 +61,3 @@
     </div>
   </main>
 </template>
-

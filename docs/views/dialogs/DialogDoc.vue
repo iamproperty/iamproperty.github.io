@@ -11,7 +11,6 @@
   import nonModalImg from '../../img/dialogs/non-modal-demo.png';
 </script>
 
-
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -222,4 +221,3 @@
     </div>
   </main>
 </template>
-
