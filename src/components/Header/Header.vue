@@ -2,20 +2,19 @@
   import { onMounted } from 'vue';
 
   const props = defineProps({
-      title: {
-        type: String,
-        required: true,
-      },
-      image: {
-        type: String,
-        required: false,
-      },
-    });
+    title: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: false,
+    },
+  });
 
   const component = 'header';
 
   onMounted(() => {
-
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-${component}`))

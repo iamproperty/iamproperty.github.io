@@ -4,15 +4,13 @@
 
   const htmlUsage = ``;
   let location = '';
-  let locations= null;
-
+  let locations = null;
 
   const datalist = function (event) {
     console.log(location);
 
     locations = [{ value: 'London' }, { value: 'Leicester' }];
   };
-      
 </script>
 
 <template>
@@ -49,4 +47,3 @@
     </div>
   </main>
 </template>
-

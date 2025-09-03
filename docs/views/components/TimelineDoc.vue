@@ -25,7 +25,6 @@
     <img src="/img/shutterstock_1229155495.f3b0401e.webp" alt="">
   </div>
 </div>`;
-
 </script>
 
 <template>
@@ -76,4 +75,3 @@
     </div>
   </main>
 </template>
-

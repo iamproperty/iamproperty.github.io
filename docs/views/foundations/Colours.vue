@@ -8,12 +8,10 @@
   import Table from '../../../src/components/Table/Table.vue';
   import UserColours from '../UserColours.vue';
 
-
-
   let userTheme = 'light-theme';
   let checked = false;
   let checked2 = false;
-        
+
   const colourNames = {
     Primary: 'Deep slate',
     Success: 'Green',
@@ -23,8 +21,7 @@
     Danger: 'Red',
   };
 
-  const setTheme = function(theme) {
-
+  const setTheme = function (theme) {
     localStorage.setItem('user-theme', theme);
     userTheme = theme;
 
@@ -33,18 +30,15 @@
 
     document.documentElement.className = theme;
 
-    if(checked2)
-      document.documentElement.style.setProperty('--theme', 'dark');
-    else
-      document.documentElement.style.setProperty('--theme', 'light');
+    if (checked2) document.documentElement.style.setProperty('--theme', 'dark');
+    else document.documentElement.style.setProperty('--theme', 'light');
   };
 
-  const getTheme = function() {
+  const getTheme = function () {
     return localStorage.getItem('user-theme');
   };
 
-  const toggleTheme = function() {
-
+  const toggleTheme = function () {
     const activeTheme = localStorage.getItem('user-theme');
     if (activeTheme === 'light-theme') {
       setTheme('dark-theme');
@@ -53,7 +47,7 @@
     }
   };
 
-  const getMediaPreference = function() {
+  const getMediaPreference = function () {
     const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (hasDarkPreference) {
       return 'dark-theme';
@@ -62,25 +56,22 @@
     }
   };
 
-
   onMounted(() => {
     const initUserTheme = getMediaPreference();
     setTheme(initUserTheme);
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',({ matches }) => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
       if (matches) {
         setTheme('dark-theme');
       }
-    })
+    });
 
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',({ matches }) => {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', ({ matches }) => {
       if (matches) {
         setTheme('light-theme');
       }
-    })
-
+    });
   });
-
 </script>
 
 <template>
@@ -89,18 +80,13 @@
       <h1>Colour</h1>
     </DSHeader>
 
-      <div class="container bg-dark">
-
-        <h1>Text colour</h1>
-        <p>Body text</p>
-      </div>
+    <div class="container bg-dark">
+      <h1>Text colour</h1>
+      <p>Body text</p>
+    </div>
 
     <!-- #region Light mode -->
     <div class="light-mode full-width">
-
-
-
-
       <div class="container">
         <div class="row">
           <div class="col">
@@ -880,10 +866,7 @@
 
   @media screen and (prefers-color-scheme: light) {
     .dark-theme {
-
       --theme: dark;
-
-      
     }
 
     html #visualtest:target ~ main > .light-mode:not(.visualtest) {
@@ -957,4 +940,3 @@
     display: none;
   }
 </style>
-

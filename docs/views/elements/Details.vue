@@ -1,5 +1,4 @@
 <script setup>
-
   const htmlUsage = `<div class="brand brand--property">
   <svg>
     <title>iam property</title>
@@ -7,7 +6,6 @@
   </svg>
   <span>the founders<br>of iamsold</span>
 </div>`;
-
 </script>
 
 <template>
@@ -51,4 +49,3 @@
     </div>
   </main>
 </template>
-

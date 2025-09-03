@@ -1,7 +1,5 @@
 <script setup>
   import { onMounted } from 'vue';
-  
-  import { setMaxlengthVars } from '../../../assets/ts/modules/inputs';
 
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
@@ -12,22 +10,15 @@
   const message = 'input field value';
   const htmlUsage = `...`;
 
-onMounted(() => {
-      
-  
-        Array.from(document.querySelectorAll('label input')).forEach((input, index) => {
-          if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
-            input.insertAdjacentHTML('beforebegin', `<span class="optional-text"></span>`);
-        });
+  onMounted(() => {
+    Array.from(document.querySelectorAll('label input')).forEach((input, index) => {
+      if (!input.closest('label').querySelector('.optional-text') && !input.hasAttribute('required'))
+        input.insertAdjacentHTML('beforebegin', `<span class="optional-text"></span>`);
+    });
 
-        // maxlength counter init
-        Array.from(document.querySelectorAll('input[maxlength]')).forEach((input, index) => {
-          setMaxlengthVars(input);
-        });
-      });
-
+    // maxlength counter init
+  });
 </script>
-
 
 <template>
   <main>
@@ -359,40 +350,6 @@ onMounted(() => {
     </div>
 
     <div class="container pb-0">
-      <h2>Character/wordcounter</h2>
-      <p>
-        Character or word counters should be used if there is a character or word limit. They display the ratio of
-        characters used and the total character limit.
-      </p>
-    </div>
-    <div class="container visualtest">
-      <div>
-        <label :for="`input17`">Input field label</label>
-        <input
-          type="text"
-          :id="`input17`"
-          :name="`input17`"
-          placeholder="Optional placeholder text"
-          required
-          maxlength="100"
-        />
-        <span>Optional helper text</span>
-      </div>
-      <div>
-        <label :for="`input17`">Input field label</label>
-        <textarea
-          :id="`input17a`"
-          :name="`input17a`"
-          placeholder="Optional placeholder text"
-          required
-          maxlength="150"
-        ></textarea>
-
-        <span>Optional helper text</span>
-      </div>
-    </div>
-
-    <div class="container pb-0">
       <h2>Inline</h2>
       <p>
         Using the <strong>.form-control-inline or .input--inline</strong> class can control the width of the field
@@ -654,4 +611,3 @@ onMounted(() => {
     </div>
   </main>
 </template>
-

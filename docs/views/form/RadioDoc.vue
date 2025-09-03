@@ -7,10 +7,8 @@
   import Tabs from '@/components/Tabs/Tabs.vue';
   import FilterCard from '@/components/FilterCard/FilterCard.vue';
 
-  
   const message = 'input field value';
   const htmlUsage = `...`;
-
 </script>
 
 <template>
@@ -340,4 +338,3 @@
     </div>
   </main>
 </template>
-

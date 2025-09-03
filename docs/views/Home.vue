@@ -3,7 +3,7 @@
   import Card from '@/components/Card/Card.vue';
   import headerImg from '../img/homepage-banner.png';
 
-  const items =  [
+  const items = [
     {
       link: '/foundations',
       title: 'Foundations',

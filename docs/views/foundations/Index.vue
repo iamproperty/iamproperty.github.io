@@ -24,7 +24,6 @@
   }, {});
 
   const pages = foundations;
-
 </script>
 
 <template>

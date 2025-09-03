@@ -351,25 +351,21 @@ class iamNav extends HTMLElement {
     if(this.classList.contains('nav--sticky')){
       
       let oldScrollY = window.scrollY;
-      window.onscroll = function(e) {
-        if(oldScrollY < window.scrollY){
-          document.body.setAttribute('data-direction', "down");
+      window.onscroll = function (e): void {
+        if (oldScrollY < window.scrollY) {
+          document.body.setAttribute('data-direction', 'down');
         } else {
-          document.body.setAttribute('data-direction', "up");
+          document.body.setAttribute('data-direction', 'up');
         }
 
-        if(window.scrollY > 100){
+        if (window.scrollY > 100) {
           document.body.classList.add('past100');
-        }
-        else {
-
+        } else {
           document.body.classList.remove('past100');
         }
         oldScrollY = window.scrollY;
-      }
-
+      };
     }
-
   }
 }
 

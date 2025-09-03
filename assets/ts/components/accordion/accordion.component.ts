@@ -16,19 +16,19 @@ class iamAccordion extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */ `
-    <style>
-    @import "${coreCSS}";
+      <style>
+        @import '${coreCSS}';
 
-    :host {
-      margin-bottom: 2.5rem;
-      display: block;
-    }
-    
-    ::slotted(details) {
-      --border-radius: 0!important;
-      padding-bottom: 0!important;
-    }    
-    </style>
+        :host {
+          margin-bottom: 2.5rem;
+          display: block;
+        }
+
+        ::slotted(details) {
+          --border-radius: 0 !important;
+          padding-bottom: 0 !important;
+        }
+      </style>
       <slot></slot>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));

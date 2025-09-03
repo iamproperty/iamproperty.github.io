@@ -4,7 +4,6 @@
   const component = 'milestone-group';
 
   onMounted(() => {
-
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-${component}`))
@@ -22,6 +21,4 @@
   </iam-milestone-group>
 </template>
 
-<style lang="scss">
-</style>
-
+<style lang="scss"></style>

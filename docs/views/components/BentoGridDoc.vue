@@ -13,7 +13,6 @@
   import bentoExpand from '../../img/bento-grid-expand.png';
 
   import { bentogrid as events } from '../../events.js';
-
 </script>
 
 <template>

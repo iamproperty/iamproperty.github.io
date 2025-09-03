@@ -10,7 +10,6 @@
   import mobileBehaviourOne from '../../img/stepper/mobile-stepper-behaviour-1.png';
   import mobileBehaviourTwo from '../../img/stepper/mobile-stepper-behaviour-2.png';
   import mobileDimensions from '../../img/stepper/mobile-stepper-dimensions.png';
-
 </script>
 
 <template>
@@ -195,4 +194,3 @@
     </div>
   </main>
 </template>
-

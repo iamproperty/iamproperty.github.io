@@ -247,4 +247,3 @@
     </Integration>
   </main>
 </template>
-

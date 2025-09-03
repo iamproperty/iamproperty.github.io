@@ -148,29 +148,24 @@ class iamMultiselect extends HTMLElement {
     });
 
     search.addEventListener('blur', (event) => {
-
       setTimeout(function () {
         const activeElement = document.activeElement;
-        
-        if(activeElement.getAttribute('type') != 'checkbox'){
 
-          if(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)){
-
+        if (activeElement.getAttribute('type') != 'checkbox') {
+          if (multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)) {
             multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
             setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
           }
-          search.value = "";
+          search.value = '';
 
           Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
             setItem(checkbox);
           });
         }
-        
       }, 200);
 
       clearTimeout(hoverTimeout);
       hoverTimeout = setTimeout(function () {
-
         multiselect.classList.remove('hover');
       }, 1000);
     });
@@ -182,7 +177,7 @@ class iamMultiselect extends HTMLElement {
 
         setItem(checkbox);
 
-        search.value = "";
+        search.value = '';
         search.focus();
         clearTimeout(hoverTimeout);
         multiselect.classList.add('hover');
@@ -222,10 +217,8 @@ class iamMultiselect extends HTMLElement {
 
             if (prevCheckbox) prevCheckbox.focus();
             else search.focus();
-          }
-          else if (activeElement == multiselect){
-
-            const options = Array.from(multiselect.querySelectorAll('label[slot="checked"]')).sort(function(a, b) {
+          } else if (activeElement == multiselect) {
+            const options = Array.from(multiselect.querySelectorAll('label[slot="checked"]')).sort(function (a, b) {
               return +a.dataset.order - +b.dataset.order;
             });
 
@@ -294,7 +287,6 @@ class iamMultiselect extends HTMLElement {
           break;
         case 'Backspace':
           if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
-
             activeElement.checked = false;
             setItem(activeElement);
             search.focus();
@@ -314,7 +306,6 @@ class iamMultiselect extends HTMLElement {
 
       return lastTag;
     }
-
 
     search.addEventListener('keydown', function (event) {
       switch (

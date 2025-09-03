@@ -7,8 +7,6 @@
   import Tabs from '../../../src/components/Tabs/Tabs.vue';
   import Tab from '../../../src/components/Tabs/Tab.vue';
   import Table from '../../../src/components/Table/Table.vue';
-
-
 </script>
 
 <template>
@@ -238,4 +236,3 @@
     </div>
   </main>
 </template>
-

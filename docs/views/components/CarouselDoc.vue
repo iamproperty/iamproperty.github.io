@@ -12,7 +12,6 @@
   import headerImg from '../../img/cards-header.png';
 
   import { carousel as events } from '../../events.js';
-
 </script>
 
 <template>
@@ -358,9 +357,7 @@
       </template>
 
       <template #dispatched-events>
-        
         <span v-html="events"></span>
-
       </template>
 
       <template #criteria>
@@ -372,10 +369,7 @@
         </ul>
       </template>
       <template #data-layer>
-        
         <span v-html="events"></span>
-        
-
       </template>
     </Integration>
     <Versions pdf="/pdfs/carousel.pdf">

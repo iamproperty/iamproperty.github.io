@@ -2,7 +2,6 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/cards-header.png';
   import AddressLookup from '@/components/AddressLookup/AddressLookup.vue';
-
 </script>
 
 <template>
@@ -197,4 +196,3 @@
     </div>
   </main>
 </template>
-
