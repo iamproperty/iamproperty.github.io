@@ -41,6 +41,7 @@ const components = [
   'bento-grid',
   'milestone-group',
   'milestone',
+  'darkmode'
 ];
 
 // Attach classes to dom elements

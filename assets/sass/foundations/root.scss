@@ -106,6 +106,10 @@ $darkMode: 'true' !default;
       --theme: dark;
     }
   }
+  
+  :root:has([name="dark-mode"]:checked){
+    --theme: dark;
+  }
 
   // Override the colours when on a dark background, similiar to dark mode but on a module level
   [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(
