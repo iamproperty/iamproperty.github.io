@@ -1,4 +1,3 @@
-
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Tab from '@/components/Tabs/Tab.vue';
@@ -10,7 +9,6 @@
   import Pagination from '@/components/Pagination/Pagination.vue';
 
   import anatomy from '../../img/pagination-anatomy.png';
-
 </script>
 
 <template>

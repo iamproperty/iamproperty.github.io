@@ -2,7 +2,6 @@
   import Table from '@/components/Table/Table.vue';
   import nonmodalPassive from '../img/dialogs/nonmodal-passive.png';
   import nonmodalTransactional from '../img/dialogs/nonmodal-transactional.png';
-
 </script>
 
 <template>

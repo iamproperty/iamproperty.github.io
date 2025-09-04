@@ -24,7 +24,6 @@
       emit('autosave', event);
     });
   });
-
 </script>
 
 <template>

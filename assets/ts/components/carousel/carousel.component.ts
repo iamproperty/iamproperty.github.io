@@ -16,33 +16,31 @@ class iamCarousel extends HTMLElement {
 
     const template = document.createElement('template');
     template.innerHTML = /* HTML */ `
-    <style>
-    ${loadCSS}
-    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
-    </style>
-    <div class="carousel" part="carousel">
-      <div class="carousel__wrapper">
-        <div class="carousel__inner">
-          <div class="carousel__content" part="content">
-            <slot></slot>
+      <style>
+        ${loadCSS}
+        ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+      </style>
+      <div class="carousel" part="carousel">
+        <div class="carousel__wrapper">
+          <div class="carousel__inner">
+            <div class="carousel__content" part="content">
+              <slot></slot>
+            </div>
           </div>
         </div>
- 
-      </div>
         <div class="carousel__btns" part="btns">
-          <button class="btn btn-secondary btn-compact fa-plus-large btn-prev" data-go="0" disabled  part="prev">Prev</button>
+          <button class="btn btn-secondary btn-compact fa-plus-large btn-prev" data-go="0" disabled part="prev">
+            Prev
+          </button>
           <button class="btn btn-secondary btn-compact fa-plus-large btn-next" data-go="2" part="next">Next</button>
         </div>
 
-        <div class="carousel__controls" part="controls">
-          
-        </div>
+        <div class="carousel__controls" part="controls"></div>
 
         <div class="carousel__progress" part="progress">
-          <input type="range" min="0" max="100" value="1" step="1">
+          <input type="range" min="0" max="100" value="1" step="1" />
         </div>
-
-    </div>
+      </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }

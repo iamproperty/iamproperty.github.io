@@ -1,4 +1,3 @@
-
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Readme from '@/components/AppliedFilters/README.md';

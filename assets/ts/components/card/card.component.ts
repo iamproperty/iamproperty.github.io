@@ -1,5 +1,6 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
+import iamMenu from '../menu/menu.component';
 
 trackComponentRegistered('iam-card');
 
@@ -36,15 +37,7 @@ class iamCard extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    if (!window.customElements.get(`iam-menu`)) {
-      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
-        .then((module) => {
-          window.customElements.define(`iam-menu`, module.default);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
+    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
     setupCard(cardComponent);
 

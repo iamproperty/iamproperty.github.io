@@ -283,7 +283,6 @@ $optionalText: 'true' !default;
     }
 
     &:is(:focus, .focus):not(:disabled):not(:invalid) {
-      
       box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
     }
     // Add some height to date inputs on iOS
@@ -573,12 +572,16 @@ $optionalText: 'true' !default;
 
     .suffix
       ~ :is(
-        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not([type='time']),
+        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
+            [type='time']
+          ),
         textarea,
         output
       ),
     :is(
-        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not([type='time']),
+        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
+            [type='time']
+          ),
         textarea,
         output
       ):has(~ .suffix) {
@@ -586,23 +589,6 @@ $optionalText: 'true' !default;
 
       border-start-end-radius: 0 !important;
       border-end-end-radius: 0 !important;
-    }
-  }
-
-  // #endregion
-
-  // #region word counter
-
-  :is(input, textarea)[maxlength] + span {
-    position: relative;
-
-    &:before {
-      counter-reset: variable var(--char-count) var(--maxlength);
-      counter-reset: variable2 var(--maxlength);
-      content: attr(data-count) ' / ' counter(variable2);
-      float: right;
-
-      margin: 0 0 1em 1em;
     }
   }
 
@@ -1340,20 +1326,19 @@ $optionalText: 'true' !default;
   }
 
   .empty {
-
     position: absolute;
     bottom: 0.5rem;
     right: 3.5rem;
     margin: 0;
     aspect-ratio: 1 / 1;
-    
+
     width: 2rem;
     height: 2rem;
-    
+
     text-align: center;
     line-height: 1;
 
-    &:not(:hover,:focus){
+    &:not(:hover, :focus) {
       border-color: transparent;
       background-color: transparent;
     }
@@ -1370,14 +1355,16 @@ $optionalText: 'true' !default;
   }
 }
 
-.was-validated :is(iam-advanced-select, iam-search) label:has(:is(input:not([type=radio]):not([type=checkbox]), select)){
+.was-validated
+  :is(iam-advanced-select, iam-search)
+  label:has(:is(input:not([type='radio']):not([type='checkbox']), select)) {
   margin-bottom: 2.5rem;
 
   input {
-    background: none!important;
+    background: none !important;
   }
 
-  &:has(:invalid, .is-invalid) .hint-text { 
+  &:has(:invalid, .is-invalid) .hint-text {
     display: none;
   }
 }
@@ -1428,12 +1415,10 @@ $optionalText: 'true' !default;
       background: rgba(224, 224, 224, 1) !important;
       border-radius: 0.25rem !important;
     }
-
   }
 }
 
 iam-advanced-select datalist {
-  
   option {
     &.active {
       border-left: 4px solid var(--colour-info) !important;

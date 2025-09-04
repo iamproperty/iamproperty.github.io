@@ -532,6 +532,15 @@ const routes = [
         component: () => import('./views/components/ContentDoc.vue'),
       },
       {
+        path: 'dark-mode-switch',
+        name: 'Dark Mode Switch (BETA)',
+        meta: {
+          title: 'Dark Mode Switch | Components | iamkey',
+        },
+        component: () => import('./views/components/DarkModeSwitch.vue'),
+        searchterms: 'dark mode',
+      },
+      {
         path: 'filterlist',
         name: 'Filter list (Beta)',
         meta: {
@@ -701,13 +710,21 @@ const routes = [
         component: () => import('./views/components/MilestoneGroupDoc.vue'),
       },
       {
+        path: 'word-count',
+        name: 'Word Count',
+        meta: {
+          title: 'Word Count | Components | iamkey',
+        },
+        component: () => import('./views/components/WordCountDoc.vue'),
+      },
+      {
         path: 'password-indicator',
         name: 'Password Indicator',
         meta: {
           title: 'Password Indicator | Components | iamkey',
         },
         component: () => import('./views/components/PasswordIndicatorDoc.vue'),
-      },
+      }
     ],
   },
   {

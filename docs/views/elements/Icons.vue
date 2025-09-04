@@ -2,7 +2,6 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
 
-
   const statusIcons = [
     {
       title: 'Complete / Verified / Manually verified',
@@ -66,7 +65,6 @@
     'fa-circle-minus fa-light',
   ];
 
-
   const appIcons = [
     { title: 'Calendar', class: 'fa-calendar fa-regular' },
     { title: 'Events', class: 'fa-calendar-lines fa-regular' },
@@ -124,7 +122,6 @@
     { title: 'Tasks', class: 'fa-circle-check fa-light' },
   ];
 
-
   const propertyIcons = [
     { title: 'Bed/Bedroom', class: 'fa-bed-front fa-light' },
     { title: 'Bath/Bathroom', class: 'fa-bath fa-light' },
@@ -180,7 +177,6 @@
 
   const cssScripts = `<script src="https://kit.fontawesome.com/26fdbf0179.js" crossorigin="anonymous" />`;
   const fausage = `<a href="#down">Down <i class="fa-arrow-down fa-light"></i></a>`;
-
 </script>
 
 <template>
@@ -470,4 +466,3 @@
     display: block;
   }
 </style>
-

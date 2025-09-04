@@ -39,5 +39,7 @@
   "advanced-select",
   "milestone-group",
   "milestone",
-  "password-indicator"
+  "password-indicator",
+  "darkmode",
+  "word-count"
 ]

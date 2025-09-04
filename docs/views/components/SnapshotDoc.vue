@@ -1,50 +1,45 @@
-
 <script setup>
   import Snapshot from '@/components/Snapshot/Snapshot.vue';
   import Readme from '@/components/Snapshot/README.md';
 
-  
-  
   const items = [
-          {
-            title: 'Exchanged',
-            number: 1,
-          },
-          {
-            title: 'SSTC',
-            number: 5,
-            link: '#anchor',
-          },
-          {
-            title: 'Green',
-            number: 1,
-            bg: 'success',
-          },
-          {
-            title: 'Amber',
-            number: 1,
-            bg: 'warning',
-          },
-          {
-            title: 'Red',
-            number: 1,
-            bg: 'danger',
-          },
-          {
-            title: 'Opportunities this month',
-            number: 1,
-            bg: 'info',
-          },
-          {
-            title: 'Completions Achieved MTD',
-            number: 1,
-            bg: 'info',
-          },
-        ];
+    {
+      title: 'Exchanged',
+      number: 1,
+    },
+    {
+      title: 'SSTC',
+      number: 5,
+      link: '#anchor',
+    },
+    {
+      title: 'Green',
+      number: 1,
+      bg: 'success',
+    },
+    {
+      title: 'Amber',
+      number: 1,
+      bg: 'warning',
+    },
+    {
+      title: 'Red',
+      number: 1,
+      bg: 'danger',
+    },
+    {
+      title: 'Opportunities this month',
+      number: 1,
+      bg: 'info',
+    },
+    {
+      title: 'Completions Achieved MTD',
+      number: 1,
+      bg: 'info',
+    },
+  ];
 
-
-
-  const htmlUsage= `<div class="container snapshot">
+  const htmlUsage = `<div class="container snapshot">
   <div class="row">
     <div class="col">
       <div class="snapshot__item "><span class="h6 snapshot__title">Exchanged</span><span class="stat">1</span></div>
@@ -70,8 +65,6 @@
     </div>
   </div>
 </div>`;
-
-
 </script>
 
 <template>

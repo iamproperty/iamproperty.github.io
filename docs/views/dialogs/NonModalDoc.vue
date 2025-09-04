@@ -14,9 +14,7 @@
   import cookies from '../../img/dialogs/cookies.png';
   import surveys from '../../img/dialogs/surveys.png';
   import multiForm from '../../img/dialogs/multi-step-form.png';
-
 </script>
-
 
 <template>
   <main>
@@ -183,4 +181,3 @@
     </div>
   </main>
 </template>
-

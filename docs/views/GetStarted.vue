@@ -1,6 +1,5 @@
 <script setup>
   import workflow from '../img/development-workflow.png';
-
 </script>
 
 <template>

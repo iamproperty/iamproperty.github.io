@@ -7,13 +7,12 @@
   import Tab from '../../../src/components/Tabs/Tab.vue';
   import Table from '../../../src/components/Table/Table.vue';
   import UserColours from '../UserColours.vue';
-
-
+  import DarkMode from '../../../src/components/DarkMode/DarkMode.vue'
 
   let userTheme = 'light-theme';
   let checked = false;
   let checked2 = false;
-        
+
   const colourNames = {
     Primary: 'Deep slate',
     Success: 'Green',
@@ -23,64 +22,6 @@
     Danger: 'Red',
   };
 
-  const setTheme = function(theme) {
-
-    localStorage.setItem('user-theme', theme);
-    userTheme = theme;
-
-    checked = theme == 'light-theme' ? true : false;
-    checked2 = theme == 'dark-theme' ? true : false;
-
-    document.documentElement.className = theme;
-
-    if(checked2)
-      document.documentElement.style.setProperty('--theme', 'dark');
-    else
-      document.documentElement.style.setProperty('--theme', 'light');
-  };
-
-  const getTheme = function() {
-    return localStorage.getItem('user-theme');
-  };
-
-  const toggleTheme = function() {
-
-    const activeTheme = localStorage.getItem('user-theme');
-    if (activeTheme === 'light-theme') {
-      setTheme('dark-theme');
-    } else {
-      setTheme('light-theme');
-    }
-  };
-
-  const getMediaPreference = function() {
-    const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (hasDarkPreference) {
-      return 'dark-theme';
-    } else {
-      return 'light-theme';
-    }
-  };
-
-
-  onMounted(() => {
-    const initUserTheme = getMediaPreference();
-    setTheme(initUserTheme);
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',({ matches }) => {
-      if (matches) {
-        setTheme('dark-theme');
-      }
-    })
-
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',({ matches }) => {
-      if (matches) {
-        setTheme('light-theme');
-      }
-    })
-
-  });
-
 </script>
 
 <template>
@@ -89,33 +30,17 @@
       <h1>Colour</h1>
     </DSHeader>
 
-      <div class="container bg-dark">
+    <DarkMode><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
 
-        <h1>Text colour</h1>
-        <p>Body text</p>
-      </div>
+
 
     <!-- #region Light mode -->
     <div class="light-mode full-width">
-
-
-
 
       <div class="container">
         <div class="row">
           <div class="col">
             <h2>Light mode colour palette</h2>
-          </div>
-          <div class="col ms-auto mw-fit-content">
-            <input
-              @change="toggleTheme()"
-              v-model="checked2"
-              class="d-none"
-              type="checkbox"
-              name="dark-mode"
-              id="dark-mode"
-            />
-            <label class="btn btn-secondary" for="dark-mode"><i class="fa-regular fa-moon-stars"></i> Dark mode</label>
           </div>
         </div>
 
@@ -256,19 +181,7 @@
           <div class="col">
             <h2>Dark mode colour palette</h2>
           </div>
-          <div class="col ms-auto mw-fit-content">
-            <input
-              @change="toggleTheme"
-              v-model="checked"
-              class="d-none"
-              type="checkbox"
-              name="light-mode"
-              id="light-mode"
-            />
-            <label class="btn btn-secondary" for="light-mode"
-              ><i class="fa-regular fa-sun-bright"></i> Light mode</label
-            >
-          </div>
+          
         </div>
 
         <p class="lead">
@@ -880,10 +793,7 @@
 
   @media screen and (prefers-color-scheme: light) {
     .dark-theme {
-
       --theme: dark;
-
-      
     }
 
     html #visualtest:target ~ main > .light-mode:not(.visualtest) {
@@ -957,4 +867,3 @@
     display: none;
   }
 </style>
-

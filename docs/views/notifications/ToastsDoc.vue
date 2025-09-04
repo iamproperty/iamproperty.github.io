@@ -1,4 +1,3 @@
-
 <script setup>
   import Notification from '@/components/Notification/Notification.vue';
   import Readme from '@/components/Notification/README.md';
@@ -23,18 +22,13 @@
   import toastsDont2 from '../../img/notifications/toasts-dont2.png';
   import toastsDont3 from '../../img/notifications/toasts-dont3.png';
 
-
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
-
 </script>
 
 <template>
-  <TrackEvents
-    selector="iam-notification"
-    :events="['dismiss']"
-  ></TrackEvents>
+  <TrackEvents selector="iam-notification" :events="['dismiss']"></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Toasts</h1>
@@ -201,7 +195,6 @@
       <a href="#example">Show in correct page position</a>
     </div>
 
-    
     <Integration component="carousel" componentName="iam-carousel">
       <template #web-component>
         <pre><code>{{`<!-- Inline -->
@@ -292,9 +285,6 @@
           </tbody>
         </table>
       </template>
-
-      
-      
     </Integration>
 
     <Versions pdf="/pdfs/inline-notifications.pdf">
@@ -309,13 +299,12 @@
         <tbody class="text-body">
           <tr>
             <td>V1 added</td>
-              <td>03.07.2023</td>
-              <td>N/A</td>
+            <td>03.07.2023</td>
+            <td>N/A</td>
           </tr>
         </tbody>
       </table>
     </Versions>
-
   </main>
 </template>
 

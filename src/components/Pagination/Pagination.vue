@@ -4,7 +4,6 @@
   const component = 'pagination';
 
   onMounted(() => {
-
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-${component}`))
@@ -19,4 +18,3 @@
 <template>
   <iam-pagination> </iam-pagination>
 </template>
-

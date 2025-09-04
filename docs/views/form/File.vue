@@ -9,10 +9,8 @@
   import Readme from '@/components/FileUpload/README.md';
   import WebReadme from '~/ts/components/fileupload/README.md';
 
-
   const message = 'input field value';
   const htmlUsage = `...`;
-
 </script>
 
 <template>
@@ -43,4 +41,3 @@
     </div>
   </main>
 </template>
-

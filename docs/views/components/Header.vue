@@ -5,7 +5,6 @@
   import VueReadme from '@/components/Header/README.md';
   import WebReadme from '~/ts/components/header/README.md';
 
-
   const htmlUsage = `<header class="header">
   <div class="container">
     <ul class="breadcrumb">
@@ -22,7 +21,6 @@
     <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" />
   </picture>
 </header>`;
-
 </script>
 
 <template>
@@ -64,4 +62,3 @@
     </Tabs>
   </main>
 </template>
-

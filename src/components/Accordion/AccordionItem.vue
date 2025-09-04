@@ -6,10 +6,6 @@
       type: String,
       required: true,
     },
-    titlecolour: {
-      type: String,
-      required: false,
-    },
     badge: {
       type: [Number, String],
       required: false,
@@ -22,14 +18,12 @@
     lazy: {
       type: Boolean,
       required: false,
-    }
+    },
   });
 
-  const createID = function(title) {
-    
+  const createID = function (title) {
     return `${safeID(title)}`;
-  }
-
+  };
 </script>
 <template>
   <details :id="createID(title)">

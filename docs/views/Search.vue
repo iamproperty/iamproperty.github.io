@@ -35,7 +35,7 @@
     }
   });
 
-console.log(results);
+  console.log(results);
 </script>
 
 <template>

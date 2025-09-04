@@ -31,12 +31,10 @@ class iamMilestone extends HTMLElement {
   }
 
   connectedCallback(): void {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const milestoneComponent = this;
 
-    trackComponent(milestoneComponent, 'iam-milestone', [
-      'milestone-item-closed', 
-      'milestone-item-opened',
-    ]);
+    trackComponent(milestoneComponent, 'iam-milestone', ['milestone-item-closed', 'milestone-item-opened']);
 
     milestone(this);
   }

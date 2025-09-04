@@ -65,5 +65,3 @@
     </div>
   </main>
 </template>
-
-
