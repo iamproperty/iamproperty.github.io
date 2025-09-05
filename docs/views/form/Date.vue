@@ -118,30 +118,5 @@
       <h3>States</h3>
      
       <img :src="timeStatesImg" class="mb-3" />
-
-      <Integration component="input" componentName="input">
-      <template #web-component>
-        <pre><code>{{`<input type="date"/>
-<span class="suffix fa-regular fa-calendar">
-        `}}</code></pre>
-      </template>
-      <template #vue-component>
-        <pre><code>{{`<script setup>import Input from '@/components/Input/Input.vue';</script>
-        
-<input type="date"/>
-<span class="suffix fa-regular fa-calendar">
-`}}</code></pre>
-      </template>
-
-      <template #dispatched-events>
-        <span v-html="events"></span>
-      </template>
-
-      <template #criteria>
-      </template>
-      <template #data-layer>
-        <span v-html="events"></span>
-      </template>
-    </Integration>
   </main>
 </template>
