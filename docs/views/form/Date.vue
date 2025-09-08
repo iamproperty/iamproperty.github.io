@@ -49,6 +49,18 @@
 
       <h2>Date Picker</h2>
 
+      <form class="was-validated">
+        <label data-error="Only weekday dates upto 7 days in the future are accepted">
+          Date
+          <span
+            ><input type="date" data-start="1" data-period="7" data-allowed-days="1,2,3,4,5" /><span
+              class="suffix fa-regular fa-calendar"
+            ></span
+          ></span>
+          <span>Weekdays only</span>
+        </label>
+      </form>
+
       <h3>Behaviour</h3>
       
       <p class="md-col-end-7">
@@ -81,6 +93,15 @@
       <img :src="dateStatesImg" class="mb-3" />
       
       <h2>Time Picker</h2>
+
+      <form class="was-validated">
+        <label>
+          Time
+          <span
+            ><input type="time" name="appt" min="09:00" max="17:00" /><span class="suffix fa-regular fa-clock"></span
+          ></span>
+        </label>
+      </form>
 
       <h3>Behaviour</h3>
 
