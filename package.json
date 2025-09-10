@@ -46,13 +46,13 @@
     "prettier": "prettier assets/ts assets/sass src docs --write"
   },
   "dependencies": {
-    "eslint": "^9.21.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-vue": "^10.0.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-vue": "^10.4.0",
     "globals": "^15.14.0",
     "js-cookie": "^3.0.5",
     "prettier": "^3.4.2",
-    "typescript-eslint": "^8.26.1",
+    "typescript-eslint": "^8.39.1",
     "unplugin-vue-markdown": "^28.3.1"
   },
   "devDependencies": {

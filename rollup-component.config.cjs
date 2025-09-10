@@ -39,6 +39,7 @@ const components = [process.env.COMPONENT];
 components.forEach((component) => {
 
   let css = '';
+  let menucss = '';
   let extraCSS = '';
 
   
@@ -63,6 +64,34 @@ components.forEach((component) => {
       css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.component.css`), 'utf8');
       css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       css = css.replace("\uFEFF","");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+  try {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.css`))) {
+      
+      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.css`), 'utf8');
+      css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      css = css.replace("\uFEFF","");
+    }
+    else if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.component.css`))) {
+      
+      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.component.css`), 'utf8');
+      css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      css = css.replace("\uFEFF","");
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+
+  try {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/menu.component.css`))) {
+      
+      menucss = fs.readFileSync(path.resolve(__dirname, `assets/css/components/menu.component.css`), 'utf8');
+      menucss = menucss.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      menucss = menucss.replace("\uFEFF","");
     }
   } catch (err) {
     console.error(err);
@@ -95,6 +124,7 @@ components.forEach((component) => {
         'process.env.NODE_ENV': '"production"',
         preventAssignment: true,
         'loadCSS': JSON.stringify(`${css}`),
+        'menuCSS': JSON.stringify(`${menucss}`),
         'loadExtraCSS': JSON.stringify(`${extraCSS}`)
       }),
       minify(),

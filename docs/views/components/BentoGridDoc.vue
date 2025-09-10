@@ -26,7 +26,7 @@
       A flexible, modular layout component that supports a variety of content types, ensuring that the content is
       organised visually into clean, structured units that adjust dynamically based on screen size or content changes.
     </p>
-
+<div class="visualtest">
     <BentoGrid>
       <details
         name="bento"
@@ -80,7 +80,7 @@
         <a href="" class="btn btn-secondary">Explore auction</a>
       </details>
     </BentoGrid>
-
+</div>
     <h2>Behaviour</h2>
 
     <div class="col-end-6">
