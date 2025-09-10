@@ -46,7 +46,7 @@
     "prettier": "prettier assets/ts assets/sass src docs --write"
   },
   "dependencies": {
-    "eslint": "^9.21.0",
+    "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-vue": "^10.0.0",
     "globals": "^15.14.0",
