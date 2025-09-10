@@ -61,7 +61,7 @@
       showing future milestones.
     </p>
 
-    <div class="visualtest container">
+    <div class=" container">
       <h2>Overview</h2>
 
       <p>
@@ -82,6 +82,8 @@
       <p>
         You can find out more about the Milestone component <router-link :to="{ path: 'milestone' }">here</router-link>
       </p>
+      </div>
+      <div class="visualtest">
       <MilestoneGroup data-show-all-toggle="true" class="reverse-items milestone-group mb-3">
         <Milestone :data-items="JSON.stringify(taskData)">
           <div slot="milestone-intro">

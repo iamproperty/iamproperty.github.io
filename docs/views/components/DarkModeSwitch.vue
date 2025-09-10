@@ -20,7 +20,7 @@
 
     <p>The benefits of upgrading to component is the ability to take advantage of local storage to remember the user preferences. There is also the chance to add extra CSS and JS to expand the features of the switch.</p>
 
-    <DarkMode class="mb-4"><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
+    <div class="visualtest"><DarkMode class="mb-4"><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode></div>
 
   </main>
 </template>

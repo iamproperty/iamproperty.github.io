@@ -6,13 +6,13 @@ class iamMenu extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const loadCSS = `@import "${assetLocation}/css/components/menu.component.css";`;
+    const menuCSS = `@import "${assetLocation}/css/components/menu.component.css";`;
 
     const template = document.createElement('template');
 
     template.innerHTML = `
     <style>
-    ${loadCSS}
+    ${menuCSS}
     </style>
     <div class="menu--inner" part="inner">
       <slot></slot>
