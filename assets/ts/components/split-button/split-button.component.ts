@@ -7,6 +7,7 @@ window.dataLayer.push({
   element: 'split-button',
 });
 
+
 class iamSplitButton extends HTMLElement {
   constructor() {
     super();
@@ -35,9 +36,7 @@ class iamSplitButton extends HTMLElement {
         </button>
 
         <iam-menu id="actions" style="position-anchor: --anchor-el;" popover>
-          <slot name="menu-item">
-
-          </slot>
+          <slot name="menu-item"></slot>
         </iam-menu>
 
       </div>
