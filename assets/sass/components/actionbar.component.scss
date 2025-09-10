@@ -290,6 +290,28 @@ slot[name='selectall'] {
     line-height: rem(40 - 8 - 8) !important;
     pointer-events: all !important;
   }
+  .empty {
+    position: absolute;
+    bottom: 0.25rem;
+    right: 3rem;
+    margin: 0;
+    aspect-ratio: 1 / 1;
+
+    width: 2rem;
+    height: 2rem;
+
+    text-align: center;
+    line-height: 1;
+
+    &:not(:hover, :focus) {
+      border-color: transparent;
+      background-color: transparent;
+    }
+
+    i {
+      font-size: 1.5rem;
+    }
+  }
 }
 // #endregion
 
