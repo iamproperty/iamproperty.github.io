@@ -7,7 +7,6 @@ window.dataLayer.push({
   element: 'split-button',
 });
 
-
 class iamSplitButton extends HTMLElement {
   constructor() {
     super();
