@@ -1,7 +1,17 @@
 @use '../_func.scss' as *;
 
+@use '../elements/forms.scss' as *;
+@use '../elements/buttons.scss' as *;
+
 .js-hide {
   display: none !important;
+}
+
+.ms-1 {
+  margin-inline-start: 0.5rem !important;
+}
+.pb-2 {
+  padding-bottom: 1rem !important;
 }
 
 :host {
