@@ -1,14 +1,32 @@
 <script setup>
+  import Nav from '@/components/nav/nav.vue'
   import Card from '@/components/Card/Card.vue';
   import cardImg from '../img/cardImg.png';
 
 </script>
 <template>
+  <nav>
+    <Nav>
+    <a slot="logo" href="/" class="brand brand--property">
+      <svg>
+        <title>iamproperty</title>
+        <use xlink:href="/svg/logo.svg#logo-property"></use>
+      </svg>
+    </a>
+
+    <a href="/" class="selected">Home</a>
+    <a href="/">The team</a>
+    <a href="/">Our principles</a>
+    <a href="/">Articles</a>
+
+    <button class="design btn btn-primary">Design System</button>
+    </Nav>
+  </nav>
   <main>
     <h1 class="text-center">Design for our Customers</h1>
-    <strong class="text-center text-primary pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna alLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna al.</strong>
+    <div class="text-center text-primary pb-4"><strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna alLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna al.</strong></div>
 
-    <div class="container visualtest colour-block bg-info gradient-primary">
+    <div class="container visualtest colour-block bg-info gradient-primary w-full">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none g-10">
         <div class="col bg-white p-4 rounded shadow ">
           <span class="pb-3 d-block text-uppercase">Intuitive</span>
@@ -33,6 +51,58 @@
       </div>
     </div>
 
+    <div class="intuitive">
+      <div>
+        <h2>Intuitive</h2>
+        <p>Our products are made easy to use by intuitive interconnectivity, simplifying complexity, and streamlining efficiency, so our customers can do more quicker and be effective during their day.</p>
+
+        <h4>iamproperty values</h4>
+        <div class="iap-values">
+          <div class="values">Effective</div>
+          <div class="values">Collaborative</div>
+          <div class="values">Customer focused</div>
+        </div>
+      </div>
+      
+      <div class="grey-square"></div>
+    </div>
+
+    <div class="enpowering">
+      <div class="grey-square-enpowering"></div>
+      <div>
+        <h2>Enpowering</h2>
+        <p>Our products empower through incentivising, loyalty and actionable insight which allows customers to take control in shaping their path within the products.</p>
+
+        <h4>iamproperty values</h4>
+        <div class="iap-values">
+          <div class="values">Effective</div>
+          <div class="values">Collaborative</div>
+          <div class="values">Customer focused</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="delightful">
+      <div>
+        <h2>Delightful</h2>
+        <p>Our products are built with meaningful interactions and beautiful design which combine to deliver an enrich experience for our customers across the ecosystem.</p>
+
+        <h4>iamproperty values</h4>
+        <div class="iap-values">
+          <div class="values">Effective</div>
+          <div class="values">Collaborative</div>
+          <div class="values">Customer focused</div>
+        </div>
+      </div>
+      
+      <div class="grey-square"></div>
+    </div>
+
+
+
+    <div class="principles">
+      <h3>Specific team principles</h3>
+    </div>
     <div class="container visualtest">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
         <div class="col">
@@ -41,6 +111,7 @@
             <Card :data-image="cardImg"
               >Financial preparation <span>Here would be the top level description of the task</span></Card
             >
+            <!-- <img src="../img/cardImg.png" alt="Test" /> -->
           </a>
         </div>
 
@@ -98,3 +169,66 @@
     </ul> -->
   </main>
 </template>
+
+<style>
+
+/* nav */
+.design {
+  color: #FFC107;
+}
+
+/* middle */
+.intuitive, .delightful, .enpowering {
+  display: flex;
+  flex-direction: row;
+  padding: 50px 25px 50px 25px;
+
+}
+
+.intuitive > div {
+  flex: 1;
+}
+
+.delightful > div {
+  flex: 1;
+}
+
+.enpowering > div {
+  flex: 1;
+}
+
+.iap-values {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.values {
+  border: 1px solid #9D9D9D;
+  color: #00313C;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.grey-square{
+  background-color: #9D9D9D;
+  width: 548px;
+  height: 302px;
+  border-radius: 12px;
+  margin-left: 20px;
+}
+
+.grey-square-enpowering{
+  background-color: #9D9D9D;
+  width: 548px;
+  height: 302px;
+  border-radius: 12px;
+  margin-right: 20px;
+}
+
+/* bottom */
+.principles {
+  display: flex;
+  justify-content: center;
+}
+</style>
