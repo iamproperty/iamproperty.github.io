@@ -31,10 +31,13 @@
     </p>
 
     <div class="visualtest container">
+         
       <label>Password 
         <span>
           <input type="password" id="password" name="password" required="" autocomplete="on" minlength="8" data-strength-checker="pwdchecker1">
-          <PasswordIndicator></PasswordIndicator>
+          <PasswordIndicator>
+            <button class="suffix fa-solid fa-eye-slash" data-alt-class="suffix fa-solid fa-eye" aria-hidden="true"><span class="visually-hidden">Show password</span></button>
+          </PasswordIndicator>
         </span>
         <span id="pwdchecker1" class="pwd-checker"></span>
       </label>

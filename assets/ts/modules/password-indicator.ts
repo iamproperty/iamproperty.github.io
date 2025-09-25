@@ -1,5 +1,29 @@
-export const passwordIndicator = function (element: Element): void {
+export const changeType = function (element: Element): void {
+    const buttonEle = element.querySelector('button')
+    const associatedInput = element?.parentNode?.querySelector('input');
 
+    element.addEventListener('click', (event) => {
+      const currentType = associatedInput.type;
+
+      const newType = currentType === 'password' ? 'text' : 'password';
+      const isPasswordType = currentType === 'password';
+
+      associatedInput.setAttribute('type', newType);
+      associatedInput.setAttribute('data-password-type', isPasswordType);
+
+      if (buttonEle.hasAttribute('data-alt-class')) {
+        const newClass = buttonEle.getAttribute('data-alt-class');
+        buttonEle.setAttribute('data-alt-class', buttonEle.getAttribute('class'));
+        buttonEle.setAttribute('class', newClass);
+      }
+    
+    });
 }
 
+
+const passwordIndicator = function (element: Element): void {
+  changeType(element)
+};
+
 export default passwordIndicator;
+

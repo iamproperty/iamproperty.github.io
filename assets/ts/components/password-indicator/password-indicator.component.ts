@@ -20,7 +20,7 @@ class iamPasswordIndicator extends HTMLElement {
     <style>
     @import "${coreCSS}";
     </style>
-      <button type="button" class="suffix fa-solid fa-eye-slash" data-alt-class="suffix fa-solid fa-eye" data-change-type="text" data-input="password" aria-hidden="true"><span class="visually-hidden">Show password</span></button>
+     <slot></slot>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }

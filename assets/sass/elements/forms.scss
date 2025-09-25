@@ -584,7 +584,8 @@ $optionalText: 'true' !default;
           ),
         textarea,
         output
-      ):has(~ .suffix) {
+      ):has(~ .suffix),
+      iam-password-indicator ~ input {
       order: 1;
 
       border-start-end-radius: 0 !important;
