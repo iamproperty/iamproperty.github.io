@@ -30,7 +30,7 @@ $darkMode: 'true' !default;
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly
 );
-@use 'components/menu.scss' with (
+@use 'components/menu.global.scss' with (
   $layers: $layers,
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly

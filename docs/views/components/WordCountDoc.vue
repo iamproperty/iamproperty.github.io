@@ -26,7 +26,7 @@
       Character or word counters should be used if there is a character or word limit. They display the ratio of
       characters used and the total character limit.
     </p>
-
+<div class="visualtest">
     <WordCount data-max="10" class="mb-5">
       <label for="input17">Input field label</label>
       <input type="text" id="input17" name="input17" placeholder="Optional placeholder text" required="" value="hey" />
@@ -37,7 +37,7 @@
       <label for="input1">Text area label</label>
       <textarea type="text" id="input1" name="input1"></textarea>
     </WordCount>
-
+</div>
     <h2>Character count</h2>
 
     <p>
@@ -45,12 +45,13 @@
       counting full words.
     </p>
 
+<div class="visualtest">
     <WordCount data-max="10" data-character="" class="mb-5">
       <label for="input17">Input field label</label>
       <input type="text" id="input18" name="input18" placeholder="Optional placeholder text" required="" />
       <span data-count="0">Optional helper text</span>
     </WordCount>
-
+</div>
     <Integration component="split-button" componentName="split-button">
       <template #web-component>
         <pre><code>{{`<iam-word-count data-v-7348d146="" data-max="10" class="mb-5" style="--maxlength: 10;">

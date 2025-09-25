@@ -1,5 +1,7 @@
 @use '../_func.scss' as *;
-@import '../elements/buttons';
+@use '../elements/buttons';
+
+@use '../components/menu.global.scss';
 
 // Main button
 ::slotted(button:not([slot])) {

@@ -340,9 +340,9 @@ const routes = [
       },
       {
         path: 'date',
-        name: 'Form date and time pickers (Beta)',
+        name: 'Date and time pickers',
         meta: {
-          title: 'Form date and time pickers | Elements | iamkey',
+          title: 'Date and time pickers | Elements | iamkey',
         },
         component: () => import('./views/form/Date.vue'),
       },
