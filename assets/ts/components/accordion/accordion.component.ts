@@ -35,17 +35,14 @@ class iamAccordion extends HTMLElement {
   }
 
   connectedCallback(): void {
-  const accordionComponent = this;
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const accordionComponent = this;
 
-    trackComponent(accordionComponent, 'iam-accordion', [
-      'accordion-item-closed', 
-      'accordion-item-opened',
-    ]);
+    trackComponent(accordionComponent, 'iam-accordion', ['accordion-item-closed', 'accordion-item-opened']);
 
     const details: NodeListOf<HTMLElement> = this.querySelectorAll(':scope > details');
 
     if (!this.classList.contains('accordion--keep-open')) {
-
       // Add the toggle listeners.
       details.forEach((targetDetail) => {
         targetDetail.addEventListener('toggle', () => {
@@ -65,12 +62,11 @@ class iamAccordion extends HTMLElement {
       const summaryText = summaryEle?.innerText;
 
       targetDetail.addEventListener('toggle', () => {
-
         if (targetDetail?.hasAttribute('open')) {
-            itemInteractionEvent('accordion-item-opened', summaryText)
-          } else {
-            itemInteractionEvent('accordion-item-closed', summaryText)
-          }
+          itemInteractionEvent('accordion-item-opened', summaryText);
+        } else {
+          itemInteractionEvent('accordion-item-closed', summaryText);
+        }
       });
     });
 
@@ -82,9 +78,7 @@ class iamAccordion extends HTMLElement {
       });
 
       accordionComponent.dispatchEvent(customEvent);
-      
-    }
-
+    };
   }
 }
 

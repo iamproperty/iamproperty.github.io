@@ -246,27 +246,27 @@ table {
   }
 
   :not(.hide-status):is(
-      [data-content='low'],
-      [data-content='medium'],
-      [data-content='high'],
-      [data-content='unknown'],
-      [data-content='due'],
-      [data-content='overdue'],
-      [data-content='incomplete'],
-      [data-content='requires approval'],
-      [data-content='upcoming'],
-      [data-content='approval required'],
-      [data-content='warning'],
-      [data-content='verified'],
-      [data-content='not started'],
-      [data-content='to do'],
-      [data-content='on track'],
-      [data-content='completed'],
-      [data-content='complete'],
-      [data-content='successful'],
-      [data-content='failed'],
-      .alert-status:not([data-content='0']):not([data-content='']):not(:empty)
-    ) {
+    [data-content='low'],
+    [data-content='medium'],
+    [data-content='high'],
+    [data-content='unknown'],
+    [data-content='due'],
+    [data-content='overdue'],
+    [data-content='incomplete'],
+    [data-content='requires approval'],
+    [data-content='upcoming'],
+    [data-content='approval required'],
+    [data-content='warning'],
+    [data-content='verified'],
+    [data-content='not started'],
+    [data-content='to do'],
+    [data-content='on track'],
+    [data-content='completed'],
+    [data-content='complete'],
+    [data-content='successful'],
+    [data-content='failed'],
+    .alert-status:not([data-content='0']):not([data-content='']):not(:empty)
+  ) {
     position: relative;
     padding-left: 1.5rem;
 
@@ -322,11 +322,11 @@ table {
   }
 
   :is(
-      [data-content='requires approval'],
-      [data-content='approval required'],
-      [data-content='action required'],
-      [data-content='upcoming']
-    ):after {
+    [data-content='requires approval'],
+    [data-content='approval required'],
+    [data-content='action required'],
+    [data-content='upcoming']
+  ):after {
     content: '\f024';
     color: var(--colour-warning);
   }
@@ -337,12 +337,12 @@ table {
   }
 
   :is(
-      [data-content='manually verified'],
-      [data-content='verified'],
-      [data-content='completed'],
-      [data-content='complete'],
-      [data-content='successful']
-    ):after {
+    [data-content='manually verified'],
+    [data-content='verified'],
+    [data-content='completed'],
+    [data-content='complete'],
+    [data-content='successful']
+  ):after {
     content: '\f00c';
     font-weight: normal;
     color: var(--colour-complete);

@@ -348,8 +348,7 @@ class iamNav extends HTMLElement {
       });
     }
 
-    if(this.classList.contains('nav--sticky')){
-      
+    if (this.classList.contains('nav--sticky')) {
       let oldScrollY = window.scrollY;
       window.onscroll = function (e): void {
         if (oldScrollY < window.scrollY) {

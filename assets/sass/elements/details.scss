@@ -60,14 +60,13 @@ $darkMode: 'true' !default;
 
       summary {
         &:has(.h2, h2) {
-          --line-height: #{rem(52)}
+          --line-height: #{rem(52)};
         }
 
         &:has(.h4, h4) {
-          --line-height: #{rem(30)}
+          --line-height: #{rem(30)};
         }
       }
-     
     }
 
     summary {
@@ -118,7 +117,6 @@ $darkMode: 'true' !default;
       .badge {
         margin: 0 0 0 0.5rem;
       }
-
     }
 
     &[open] summary {

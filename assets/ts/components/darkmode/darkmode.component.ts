@@ -30,18 +30,16 @@ class iamDarkMode extends HTMLElement {
   }
 
   connectedCallback(): void {
-    
     const label = this.querySelector('label');
 
     const storedTheme = localStorage.getItem('user-theme');
 
     // Work from local storage first then look at the media preferences
     label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
-    if(storedTheme == 'dark-theme'){
+    if (storedTheme == 'dark-theme') {
       label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
       label?.classList.add('dark-theme');
-    }
-    else if(storedTheme == 'light-theme'){
+    } else if (storedTheme == 'light-theme') {
       label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
       label?.classList.remove('dark-theme');
     }
@@ -52,21 +50,15 @@ class iamDarkMode extends HTMLElement {
       label?.classList.remove('dark-theme');
     }
 
-
     this.addEventListener('click', (event) => {
-
       console.log(label?.querySelector('input:checked'));
 
-
-      if(label?.querySelector('input:checked')){
-
+      if (label?.querySelector('input:checked')) {
         label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
         localStorage.setItem('user-theme', 'dark-theme');
         document.documentElement.className = 'dark-theme';
-       label?.classList.add('dark-theme');
-      }
-      else {
-        
+        label?.classList.add('dark-theme');
+      } else {
         label?.innerHTML = `<input type="checkbox" name="dark-mode" /> Light mode`;
         localStorage.setItem('user-theme', 'light-theme');
         document.documentElement.className = 'light-theme';
@@ -74,24 +66,19 @@ class iamDarkMode extends HTMLElement {
       }
     });
 
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',({ matches }) => {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
       if (matches) {
         label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
         label?.classList.add('dark-theme');
       }
     });
 
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change',({ matches }) => {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', ({ matches }) => {
       if (matches) {
         label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
         label?.classList.remove('dark-theme');
       }
     });
-
-
-
-
   }
 }
 

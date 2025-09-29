@@ -80,8 +80,8 @@
         parent-child relationship where children (sub-tasks) can be toggled into view by expanding or collapsing their
         parent item (tasks) .
       </p>
-      </div>
-<div class="visualtest container">
+    </div>
+    <div class="visualtest container">
       <Milestone :data-items="JSON.stringify(individualTaskData)" data-status="Current">
         <div slot="milestone-intro">
           <h2 class="h4">Post Sale</h2>
@@ -92,7 +92,7 @@
           </p>
         </div>
       </Milestone>
-</div>
+    </div>
     <div class="container mt-3">
       <h2>Content</h2>
       <h3>Main elements</h3>
@@ -209,7 +209,7 @@
       </div>
     </div>
 
-    <div class=" container mt-4">
+    <div class="container mt-4">
       <h2>Milestone Group</h2>
 
       <p class="md-col-end-7">

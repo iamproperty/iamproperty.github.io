@@ -7,7 +7,7 @@
   import Tab from '../../../src/components/Tabs/Tab.vue';
   import Table from '../../../src/components/Table/Table.vue';
   import UserColours from '../UserColours.vue';
-  import DarkMode from '../../../src/components/DarkMode/DarkMode.vue'
+  import DarkMode from '../../../src/components/DarkMode/DarkMode.vue';
 
   let userTheme = 'light-theme';
   let checked = false;
@@ -21,7 +21,6 @@
     Warning: 'Yellow',
     Danger: 'Red',
   };
-
 </script>
 
 <template>
@@ -30,13 +29,12 @@
       <h1>Colour</h1>
     </DSHeader>
 
-    <DarkMode><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
-
-
+    <DarkMode
+      ><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode
+    >
 
     <!-- #region Light mode -->
     <div class="light-mode full-width">
-
       <div class="container">
         <div class="row">
           <div class="col">
@@ -181,7 +179,6 @@
           <div class="col">
             <h2>Dark mode colour palette</h2>
           </div>
-          
         </div>
 
         <p class="lead">
