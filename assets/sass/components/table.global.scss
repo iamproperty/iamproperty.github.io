@@ -116,7 +116,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
   }
 
   &:has([type='checkbox']:checked) tr:has([type='checkbox']) {
-    [type='checkbox'] {
+    .td--fixed [type='checkbox'] {
       width: 100vw;
       height: 100%;
       max-height: var(--row-height);

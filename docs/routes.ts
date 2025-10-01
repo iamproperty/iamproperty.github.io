@@ -975,6 +975,22 @@ const routes = [
     component: () => import('./views/BestPracticeDoc.vue'),
   },
   {
+    path: '/nfrs',
+    name: 'NFRs',
+    meta: {
+      title: 'NFRs | Components | iamkey',
+    },
+    component: () => import('./views/NFRsDoc.vue'),
+  },
+  {
+    path: '/launch',
+    name: 'Launch list',
+    meta: {
+      title: 'Launch list | Components | iamkey',
+    },
+    component: () => import('./views/LaunchDoc.vue'),
+  },
+  {
     /* Information */ path: '/information',
     component: () => import('./views/Information.vue'),
     name: 'Information',

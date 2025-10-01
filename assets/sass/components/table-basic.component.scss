@@ -76,6 +76,9 @@ $darkMode: 'true' !default;
       max-height: none !important;
     }
 
+    ::slotted(*) {
+      margin-inline: 1.5rem;
+    }
     ::slotted(table) {
       overflow: visible !important;
       margin-inline: 1.5rem;

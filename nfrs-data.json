@@ -1,0 +1,26 @@
+{
+  "Accessibility": [
+    {
+      "story": "As a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states",
+      "implement": "Use icons, backound patterns, text weight or other decorative measures ",
+      "test": "Use the rendering tab in chrome dev tools and change emulate vision deficiences dropdown. Change the colour theme on your computer to hight contrast",
+      "required": "false"
+    }
+  ],
+  "Usability": [
+    {
+      "story": "As 1 a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states",
+      "implement": "Use icons, backound patterns, text weight or other decorative measures ",
+      "test": "Use the rendering tab in chrome dev tools and change emulate vision deficiences dropdown. Change the colour theme on your computer to hight contrast",
+      "required": "true"
+    }
+  ],
+  "Readability": [
+    {
+      "story": "As 2 a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states",
+      "implement": "Use icons, backound patterns, text weight or other decorative measures ",
+      "test": "Use the rendering tab in chrome dev tools and change emulate vision deficiences dropdown. Change the colour theme on your computer to hight contrast",
+      "required": "true"
+    }
+  ]
+}

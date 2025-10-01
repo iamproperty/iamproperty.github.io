@@ -46,11 +46,11 @@ $darkMode: 'true' !default;
 
   progress::-webkit-progress-bar {
     background-color: var(--colour-light);
-    border-radius: rem(5);
+    border-radius: var(--border-radius, #{rem(5)});
   }
   progress::-webkit-progress-value {
     background-color: var(--colour, var(--colour-info));
-    border-radius: rem(5);
+    border-radius: var(--border-radius, #{rem(5)});
   }
 
   // #region inline progress
