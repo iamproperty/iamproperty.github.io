@@ -5,17 +5,13 @@
   import headerImg from '../../img/type-header.png';
   import Integration from '../Integration.vue';
   import TrackEvents from '../TrackEvents.vue';
-
 </script>
 
 <template>
-  <TrackEvents
-    selector="iam-accordion"
-    :events="['accordion-item-closed', 'accordion-item-opened']"
-  ></TrackEvents>
+  <TrackEvents selector="iam-accordion" :events="['accordion-item-closed', 'accordion-item-opened']"></TrackEvents>
 
   <main>
-     <DSHeader :image="headerImg" section="components">
+    <DSHeader :image="headerImg" section="components">
       <h1>Accordion</h1>
     </DSHeader>
 
@@ -28,17 +24,29 @@
         <li><a href="/components">Components</a></li>
       </ul>
       <h2>Overview</h2>
-      <p>The accordion component organises large content in a compact space using progressive disclosure. Header titles provide a high-level overview, helping users choose which sections to read.</p>
-      <p>While accordions enhance content discovery and efficiency, they can also hide information, so it's important to consider that users may overlook some content.</p>
-    
+      <p>
+        The accordion component organises large content in a compact space using progressive disclosure. Header titles
+        provide a high-level overview, helping users choose which sections to read.
+      </p>
+      <p>
+        While accordions enhance content discovery and efficiency, they can also hide information, so it's important to
+        consider that users may overlook some content.
+      </p>
+
       <h3>When to use</h3>
       <ul>
         <li>To organise related information</li>
         <li>To shorten pages and reduce scrolling when content is not crucial to read in full.</li>
-        <li>When space is at a premium and long content cannot be displayed all at once, like on a mobile interface or in a side panel.</li>
+        <li>
+          When space is at a premium and long content cannot be displayed all at once, like on a mobile interface or in
+          a side panel.
+        </li>
       </ul>
 
-      <p>If a user is likely to read all of the content, then don't use an accordion as it adds the burden of an extra click; instead use a full scrolling page with normal headers.</p>
+      <p>
+        If a user is likely to read all of the content, then don't use an accordion as it adds the burden of an extra
+        click; instead use a full scrolling page with normal headers.
+      </p>
     </div>
     <div class="visualtest container">
       <Accordion>
@@ -67,7 +75,8 @@
           </p>
         </details>
 
-        <AccordionItem badge="auction"
+        <AccordionItem
+          badge="auction"
           title="Curabitur aliquet quam id dui posuere blandit. Vivamus suscipit tortor eget felis porttitor volutpat?"
         >
           <p>
@@ -95,8 +104,7 @@
       </Accordion>
     </div>
 
-    
-     <Integration component="accordion" componentName="iam-accordion">
+    <Integration component="accordion" componentName="iam-accordion">
       <template #web-component>
         <pre><code>{{`<iam-accordion class="container">
   <details id="question1" class="accordion-item">
@@ -123,7 +131,7 @@
 `}}</code></pre>
       </template>
 
-       <template #slots>
+      <template #slots>
         <table>
           <thead>
             <tr>
@@ -164,18 +172,14 @@
               <td>-</td>
               <td>String / Number</td>
               <td>No</td>
-              <td>
-                Add a highlighted badge/tag to the accordion item title
-              </td>
+              <td>Add a highlighted badge/tag to the accordion item title</td>
             </tr>
             <tr>
               <th>badgecolour</th>
               <td>light</td>
               <td>String</td>
               <td>No</td>
-              <td>
-                Apply a colour the badge
-              </td>
+              <td>Apply a colour the badge</td>
             </tr>
             <tr>
               <th>lazy</th>
@@ -183,7 +187,8 @@
               <td>Boolean</td>
               <td>No</td>
               <td>
-                	If set the content of the tab will not loaded intially and will be loaded after the user has clicked on the accordion link.
+                If set the content of the tab will not loaded intially and will be loaded after the user has clicked on
+                the accordion link.
               </td>
             </tr>
           </tbody>
@@ -201,27 +206,38 @@
           <tbody>
             <tr>
               <th>accordion-keep-open</th>
-              <td>Adding a class of accordion-keep-open to the accordion will stop the items from closing when another one is opened.</td>
+              <td>
+                Adding a class of accordion-keep-open to the accordion will stop the items from closing when another one
+                is opened.
+              </td>
             </tr>
           </tbody>
         </table>
       </template>
 
-     <template #criteria>
+      <template #criteria>
         <ul>
           <li>Each accordion item should show the correct accordion title and accordion content</li>
           <li>A plus icon should appear to the right hand end of the accordion title</li>
           <li>When clicking an accordion item's title, the accordion item's content should show.</li>
-          <li>If the accordion does not have the accordion--keep-open class on it, all other items should close when an item is opened.</li>
-          <li>If the accordion DOES have the accordion--keep-open class on it, any previously opened items will stay open until closed.</li>
+          <li>
+            If the accordion does not have the accordion--keep-open class on it, all other items should close when an
+            item is opened.
+          </li>
+          <li>
+            If the accordion DOES have the accordion--keep-open class on it, any previously opened items will stay open
+            until closed.
+          </li>
           <li>When an accordion item is hovered over, it's background will change to a light grey colour</li>
-          <li>When an accordion item is opened, the icon will change to a minus, and the icon background will have a fill.</li>
+          <li>
+            When an accordion item is opened, the icon will change to a minus, and the icon background will have a fill.
+          </li>
           <li>If a badge is added to an accordion item, it will appear directly at the end of the accordion title.</li>
           <li>If a badge colour is set, the badge will have the expected background colour.</li>
         </ul>
       </template>
 
-        <template #data-layer>
+      <template #data-layer>
         <table>
           <thead>
             <tr>

@@ -18,18 +18,25 @@
       Character or word counters should be used if there is a character or word limit. They display the ratio of
       characters used and the total character limit.
     </p>
-<div class="visualtest">
-    <WordCount data-max="10" class="mb-5">
-      <label for="input17">Input field label</label>
-      <input type="text" id="input17" name="input17" placeholder="Optional placeholder text" required="" value="hey" />
-      <span data-count="0">Optional helper text</span>
-    </WordCount>
+    <div class="visualtest">
+      <WordCount data-max="10" class="mb-5">
+        <label for="input17">Input field label</label>
+        <input
+          type="text"
+          id="input17"
+          name="input17"
+          placeholder="Optional placeholder text"
+          required=""
+          value="hey"
+        />
+        <span data-count="0">Optional helper text</span>
+      </WordCount>
 
-    <WordCount data-max="10" class="mb-5">
-      <label for="input1">Text area label</label>
-      <textarea type="text" id="input1" name="input1"></textarea>
-    </WordCount>
-</div>
+      <WordCount data-max="10" class="mb-5">
+        <label for="input1">Text area label</label>
+        <textarea type="text" id="input1" name="input1"></textarea>
+      </WordCount>
+    </div>
     <h2>Character count</h2>
 
     <p>

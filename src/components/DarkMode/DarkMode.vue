@@ -2,11 +2,9 @@
   import { onMounted } from 'vue';
 
   onMounted(() => {
-
     import(`../../../assets/js/components/darkmode/darkmode.component.min.js`)
       .then((module) => {
-        if (!window.customElements.get(`iam-dark-mode`))
-          window.customElements.define(`iam-dark-mode`, module.default);
+        if (!window.customElements.get(`iam-dark-mode`)) window.customElements.define(`iam-dark-mode`, module.default);
       })
       .catch((err) => {
         console.log(err.message);
@@ -19,4 +17,3 @@
     <slot></slot>
   </iam-dark-mode>
 </template>
-

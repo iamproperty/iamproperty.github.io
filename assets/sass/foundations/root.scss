@@ -106,8 +106,8 @@ $darkMode: 'true' !default;
       --theme: dark;
     }
   }
-  
-  :root:has([name="dark-mode"]:checked){
+
+  :root:has([name='dark-mode']:checked) {
     --theme: dark;
   }
 

@@ -579,12 +579,12 @@ $optionalText: 'true' !default;
         output
       ),
     :is(
-        input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
-            [type='time']
-          ),
-        textarea,
-        output
-      ):has(~ .suffix) {
+      input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
+          [type='time']
+        ),
+      textarea,
+      output
+    ):has(~ .suffix) {
       order: 1;
 
       border-start-end-radius: 0 !important;
