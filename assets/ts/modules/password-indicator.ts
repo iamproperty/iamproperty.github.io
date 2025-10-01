@@ -11,9 +11,9 @@ export const changeType = function (element: Element): void {
       associatedInput.setAttribute('type', newType);
       associatedInput.setAttribute('data-password-type', isPasswordType);
 
-      if (buttonEle.hasAttribute('data-alt-class')) {
-        const newClass = buttonEle.getAttribute('data-alt-class');
-        buttonEle.setAttribute('data-alt-class', buttonEle.getAttribute('class'));
+      if (element.hasAttribute('data-alt-class')) {
+        const newClass = element.getAttribute('data-alt-class');
+        element.setAttribute('data-alt-class', buttonEle.getAttribute('class'));
         buttonEle.setAttribute('class', newClass);
       }
     

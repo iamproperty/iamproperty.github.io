@@ -1,4 +1,4 @@
-import { trackComponent, trackComponentRegistered } from '../_global';
+import { trackComponentRegistered } from '../_global';
 import passwordIndicator from '../../modules/password-indicator';
 
 trackComponentRegistered('iam-password-indicator');
@@ -26,13 +26,7 @@ class iamPasswordIndicator extends HTMLElement {
   }
 
   connectedCallback(): void {
-    /* const milestoneComponent = this;
-
-    trackComponent(milestoneComponent, 'iam-milestone', [
-      'milestone-item-closed', 
-      'milestone-item-opened',
-    ]);
- */
+  
     passwordIndicator(this);
   }
 }

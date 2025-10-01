@@ -584,10 +584,16 @@ $optionalText: 'true' !default;
           ),
         textarea,
         output
-      ):has(~ .suffix),
-      iam-password-indicator ~ input {
+      ):has(~ .suffix) {
       order: 1;
 
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
+
+    :is(
+        input
+      ):has(~ iam-password-indicator) {
       border-start-end-radius: 0 !important;
       border-end-end-radius: 0 !important;
     }

@@ -1,24 +1,15 @@
 <script setup>
-  import { ref } from 'vue';
-
   import PasswordIndicator from '@/components/PasswordIndicator/PasswordIndicator.vue';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Integration from '../Integration.vue';
   import TrackEvents from '../TrackEvents.vue';
-
-
 </script>
-
-<style>
-
-</style>
 
 
 <template>
   <TrackEvents
     selector="iam-password-indicator"
-    :events="['hide-future-items', 'show-future-items']"
   ></TrackEvents>
 
   <main>
@@ -27,16 +18,15 @@
     </DSHeader>
 
     <p class="lead md-col-end-7">
-      Password fields hide the field value for security. We can add an optional hide/show button after the field.
-    </p>
+      Password fields hide the field value for security. The password indicator component can be added for the user to hide and show the value of the field.</p>
 
     <div class="visualtest container">
          
-      <label>Password 
+      <label>Password
         <span>
           <input type="password" id="password" name="password" required="" autocomplete="on" minlength="8" data-strength-checker="pwdchecker1">
-          <PasswordIndicator>
-            <button class="suffix fa-solid fa-eye-slash" data-alt-class="suffix fa-solid fa-eye" aria-hidden="true"><span class="visually-hidden">Show password</span></button>
+          <PasswordIndicator data-alt-class="suffix fa-solid fa-eye">
+            <button class="suffix fa-solid fa-eye-slash" aria-hidden="true"><span class="visually-hidden">Show password</span></button>
           </PasswordIndicator>
         </span>
         <span id="pwdchecker1" class="pwd-checker"></span>
@@ -46,32 +36,32 @@
     </div>
     
 
-<!--        <Integration component="milestone-group" componentName="iam-milestone-group">
+  <Integration component="password-indicator" componentName="password-indicator">
       <template #web-component>
-        <pre><code>{{`<iam-milestone-group></iam-milestone-group>`}}</code></pre>
+        <pre><code>{{`
+        <label>
+          Password 
+          <span>
+            <input type="password" id="password" name="password" required="" autocomplete="on" minlength="8" data-strength-checker="pwdchecker1">
+            <iam-password-indicator data-alt-class="suffix fa-solid fa-eye">
+              <button class="suffix fa-solid fa-eye-slash" aria-hidden="true"><span class="visually-hidden">Show password</span></button>
+            </iam-password-indicator>
+          </span>
+        </label>`}}</code></pre>
       </template>
       <template #vue-component>
-        <pre><code>{{`<script setup>import MilestoneGroup from '@/components/Milestones/MilestoneGroup.vue</script>
+        <pre><code>{{`<script setup>import PasswordIndicator from '@/components/PasswordIndicator/PasswordIndicator.vue</script>
         
-<MilestoneGroup></MilestoneGroup>
+      <label>
+        Password 
+        <span>
+          <input type="password" id="password" name="password" required="" autocomplete="on" minlength="8" data-strength-checker="pwdchecker1">
+          <PasswordIndicator data-alt-class="suffix fa-solid fa-eye">
+            <button class="suffix fa-solid fa-eye-slash" aria-hidden="true"><span class="visually-hidden">Show password</span></button>
+          </PasswordIndicator>
+        </span>
+      </label>
 `}}</code></pre>
-      </template>
-
-       <template #slots>
-        <table>
-          <thead>
-            <tr>
-              <th>Slot</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>Default</th>
-              <td>The default slot is where any Milestone components are rendered</td>
-            </tr>
-          </tbody>
-        </table>
       </template>
 
       <template #attr>
@@ -87,127 +77,28 @@
           </thead>
           <tbody>
             <tr>
-              <th>show-all-toggle</th>
-              <td>-</td>
-              <td>Boolean</td>
-              <td>No</td>
-              <td>This property is used to hide any child milestones that are after the current milestone, as well as adding a toggle to show all of the milestones.</td>
+              <th>data-alt-class</th>
+              <td></td>
+              <td>string</td>
+              <td>Yes</td>
+              <td>This should be set in order to switch the classlist of the button and show a different icon</td>
             </tr>
           </tbody>
         </table>
       </template>
 
-      <template #classes>
-        <table>
-          <thead>
-            <tr>
-              <th>Class</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>reverse-items</th>
-              <td>Visually reverses the order of the milestone items in the group so that the last item in the list is first</td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
-
-      <template #parts>
-        <table>
-          <thead>
-            <tr>
-              <th>Part</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>milestone-group</th>
-              <td>The wrapper around all of the milestone group content.</td>
-            </tr>
-
-          </tbody>
-        </table>
-      </template>
-
-      <template #vars>
-        <table>
-          <thead>
-            <tr>
-              <th>Var</th>
-              <th>Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>--milestone-divider-colour</th>
-              <td>The colour used for the dividing line between milestones.</td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
-
-      <template #dispatched-events>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>hide-future-items</th>
-              <td>When the 'Show next' toggle is clicked and all items are currently shown</td>
-              <td>{ "event": "hide-future-items"}</td>
-            </tr>
-            <tr>
-              <th>show-future-items</th>
-              <td>When the 'Show next' toggle is clicked and only current and past items are shown</td>
-              <td>{ "event": "show-future-items"}</td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
-
-      <template #criteria>
+        <template #criteria>
         <ul>
-          <li>A milestone group with the reverrse-items class should show the child items in the reverse order to how they are added.</li>
-          <li>A milestone group with the attribute data-show-all-toggle should show a button with an 'eye icon alongside it'.</li>
-          <li>A milestone group with the attribute data-show-all-toggle should only show the milestone with a current status and all those before it.</li>
-          <li>When the show all toggle is clicked, all items - including future milestones - will show</li>
-          <li>When the show all toggle is clicked, it's icon will change to eye-slash</li>
-          <li>When the show all link is clicked again, future milestones will be hidden</li>
-          <li>A line should appear between each milestone in the group</li>
+          <li>A button should appear alongside the input field</li>
+          <li>By default, the button should have the eye icon with a slash through it (or alternative icon set).</li>
+          <li>By default, any text entered into the input should be obfuscated</li>
+          <li>Clicking the button for the first time should show the text entered into the input.</li>
+          <li>Clicking the button for the first time should change the icon.</li>
+          <li>Clicking the button a second time, should revert the state to default.</li>
+
         </ul>
       </template>
-      <template #data-layer>
-        <table>
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Dispatched</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>hide-future-items</th>
-              <td>When the 'Show next' toggle is clicked and all items are currently shown</td>
-              <td>{ "event": "hide-future-items"}</td>
-            </tr>
-            <tr>
-              <th>show-future-items</th>
-              <td>When the 'Show next' toggle is clicked and only current and past items are shown</td>
-              <td>{ "event": "show-future-items"}</td>
-            </tr>
-          </tbody>
-        </table>
-      </template>
-    </Integration> -->
+    </Integration>
 
   </main>
 </template>
