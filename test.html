@@ -91,7 +91,7 @@
 
     <link rel="preload" as="style" href="/assets/css/style.min.css">
     <style>
-      @import "/assets/css/style.min.css";
+      /*@import "/assets/css/style.min.css";*/
     </style>  
 
 
@@ -100,13 +100,13 @@
 
       function registerComponents () {
 
-        const components = ['nav','card','content','menu'];
+        const components = ['nav','card','content','menu','address-lookup'];
         const prefix = "iam"
         const options = {
           rootMargin: '50px',
           threshold: 0.1
         }
-        const componentExt = ".component.js";
+        const componentExt = ".component.min.js";
 
         // Load components - Each component will load once the first of its type has been loaded
         components.forEach((component) => {
@@ -144,7 +144,7 @@
 
 </head>
 <body>
-
+<!--
   <nav>
     <iam-nav>
       <a href="/" class="brand brand--property" slot="logo"><svg><title>iam key</title><use xlink:href="/svg/logo.svg#logo-property"></use></svg></a>
@@ -159,8 +159,7 @@
 
           <a href="/">Order marketing</a>
 
-          <!-- <a href="/">AuctionBoost</a>Needed? -->
-
+          
       <div class="nav--menu" data-title="My account" data-open-title="Martin Critchlow" data-icon="fa-user fa-solid" slot="menus">
  
         <div>
@@ -174,16 +173,13 @@
             </div>
             <hr class="mt-3">
             
-        <a href="/">Agency settings</a> <!-- Edit Agent Landing Page -->
+            
         <a href="/">Your rewards</a>
         <a href="/">The Success Hub</a>
 
         <a href="/cp/account-overview">Control panel</a>
         
-        <a href="/">Notifications</a><!-- Need notification number? -->
-
-        <a href="/">Quick start guide & FAQ</a><!--Footer -->
-        <a href="/">Contact us</a> <!-- What link? -->
+        
         <a href="/">Log out</a>
 
           
@@ -200,12 +196,289 @@
     </iam-nav>
     </nav>
 
-
+-->
 
 
 
   
   <main>
+
+
+<style>
+
+  html {
+    font-size: 16px;
+    font-family: Inter, Helvetica, Arial, sans-serif;
+    color: #222b33;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    overflow: hidden;
+  }
+
+  iam-address-lookup {
+        --color-grey-900: #222b33;
+    --color-grey-800: #323e4b;
+    --color-grey-700: #415161;
+    --color-grey-600: #506478;
+    --color-grey-500: #607890;
+    --color-grey-400: #798da1;
+    --color-grey-300: #9faebc;
+    --color-grey-200: #c5ced6;
+    --color-grey-150: #d8dee4;
+    --color-grey-100: #e5e9ed;
+    --color-grey-50: #f2f4f6;
+    --color-purple-900: #262884;
+    --color-purple-800: #3632a6;
+    --color-purple-700: #4036c8;
+    --color-purple-600: #4844da;
+    --color-purple-500: #4e56ea;
+    --color-purple-400: #5a73fd;
+    --color-purple-300: #7e9bfa;
+    --color-purple-200: #b0c6fa;
+    --color-purple-100: #d4e1ff;
+    --color-purple-50: #ecf3ff;
+    --color-blue-900: #002e5c;
+    --color-blue-800: #004285;
+    --color-blue-700: #0056ad;
+    --color-blue-600: #006bd6;
+    --color-blue-500: #0080ff;
+    --color-blue-400: #2994ff;
+    --color-blue-300: #66b2ff;
+    --color-blue-200: #a3d1ff;
+    --color-blue-100: #d6eaff;
+    --color-blue-50: #ebf5ff;
+    --color-green-900: #0b4517;
+    --color-green-800: #106421;
+    --color-green-700: #15822b;
+    --color-green-600: #1aa135;
+    --color-green-500: #20c040;
+    --color-green-400: #43ca5e;
+    --color-green-300: #79d98c;
+    --color-green-200: #aee8ba;
+    --color-green-100: #dbf4e0;
+    --color-green-50: #edfaf0;
+    --color-yellow-900: #5c3900;
+    --color-yellow-800: #855300;
+    --color-yellow-700: #ad6c00;
+    --color-yellow-600: #d68600;
+    --color-yellow-500: #ffa000;
+    --color-yellow-400: #ffaf29;
+    --color-yellow-300: #ffc666;
+    --color-yellow-200: #ffdca3;
+    --color-yellow-100: #ffefd6;
+    --color-yellow-50: #fff7eb;
+    --color-orange-900: #5c2200;
+    --color-orange-800: #853200;
+    --color-orange-700: #ad4100;
+    --color-orange-600: #d65000;
+    --color-orange-500: #ff6000;
+    --color-orange-400: #ff7929;
+    --color-orange-300: #ff9f66;
+    --color-orange-200: #ffc5a3;
+    --color-orange-100: #ffe5d6;
+    --color-orange-50: #fff2eb;
+    --color-red-900: #560811;
+    --color-red-800: #7d0c19;
+    --color-red-700: #a21020;
+    --color-red-600: #c91428;
+    --color-red-500: #f01830;
+    --color-red-400: #f23d51;
+    --color-red-300: #f67482;
+    --color-red-200: #f9abb4;
+    --color-red-100: #fcd9dd;
+    --color-red-50: #fdecee;
+    --color-white: #fff;
+    --color-black: var(--color-grey-900);
+    --color-grey-darkest: var(--color-grey-700);
+    --color-grey-dark: var(--color-grey-500);
+    --color-grey-medium: var(--color-grey-400);
+    --color-grey-medium-light: var(--color-grey-300);
+    --color-grey-light: var(--color-grey-100);
+    --color-grey-lightest: var(--color-grey-50);
+    --intent-primary: var(--color-purple-500);
+    --intent-neutral: var(--color-blue-500);
+    --intent-success: var(--color-green-500);
+    --intent-pending: var(--color-yellow-500);
+    --intent-warning: var(--color-orange-500);
+    --intent-danger: var(--color-red-500);
+    --intent-default: var(--color-grey-500);
+    --intent-primary-light: var(--color-purple-300);
+    --intent-neutral-light: var(--color-blue-300);
+    --intent-success-light: var(--color-green-300);
+    --intent-pending-light: var(--color-yellow-300);
+    --intent-warning-light: var(--color-orange-300);
+    --intent-danger-light: var(--color-red-300);
+    --intent-default-light: var(--color-grey-300);
+    --intent-primary-lightest: var(--color-purple-50);
+    --intent-neutral-lightest: var(--color-blue-50);
+    --intent-success-lightest: var(--color-green-50);
+    --intent-pending-lightest: var(--color-yellow-50);
+    --intent-warning-lightest: var(--color-orange-50);
+    --intent-danger-lightest: var(--color-red-50);
+    --intent-default-lightest: var(--color-grey-50);
+    --intent-primary-dark: var(--color-purple-700);
+    --intent-neutral-dark: var(--color-blue-700);
+    --intent-success-dark: var(--color-green-700);
+    --intent-pending-dark: var(--color-yellow-700);
+    --intent-warning-dark: var(--color-orange-700);
+    --intent-danger-dark: var(--color-red-700);
+    --intent-default-dark: var(--color-grey-700);
+    --font-sans-serif: "Inter", Helvetica, Arial, sans-serif;
+    --font-monospace: "Source Code Pro", monospace;
+    --font-size-heading: 1.5rem;
+    --font-size-subheading: 1.25rem;
+    --font-size-small-subheading: 1.125rem;
+    --font-size-default: .9375rem;
+    --font-size-small: .875rem;
+    --font-size-smallest: .8125rem;
+    --font-weight-default: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+    --layout-size-base: 1rem;
+    --layout-size-molecule: 1.25rem;
+    --layout-size-atom: .75rem;
+    --default-border-radius: .25rem;
+    --component-input-bg: var(--color-white);
+    --component-input-focus-bg: var(--color-grey-light);
+    --component-input-shadow: inset 0px -1px 0px var(--color-white);
+    --component-input-border: 1px solid var(--color-grey-150);
+    --component-input-border-focus: 1px solid var(--color-purple-500);
+    --component-steps-gutter-width: 12px;
+    --component-table-min-column-width: 3rem;
+    --nav-menu-background-dark: var(--color-white);
+    --nav-menu-background-accent: var(--color-white);
+    --nav-menu-text: var(--color-grey-medium);
+    --nav-menu-text-hover: var(--color-grey-dark);
+    --nav-menu-icon-primary-accent: var(--color-grey-600);
+    --nav-menu-icon-secondary-accent: var(--color-grey-400);
+    --nav-brand-height: 1.5rem;
+    --page-header-bg: var(--color-white);
+    --page-header-border: 1px solid var(--color-grey-100);
+    --pagination-bg: var(--color-white);
+    --util-border-grey: 1px solid var(--color-grey-100, "#dbdbdb");
+    --util-border-purple: 1px solid var(--color-purple-300, "#9faebc");
+    --util-border-radius: .25rem;
+    --util-box-shadow: 0px 2px 9px rgba(0, 0, 0, .08);
+    --util-screen-width: 100vw;
+    --util-screen-height: 100vh;
+    --util-0: 0;
+    --util-auto: auto;
+    --util-percentage-1: 8.3333%;
+    --util-percentage-2: 16.6667%;
+    --util-percentage-3: 25%;
+    --util-percentage-4: 33.3333%;
+    --util-percentage-5: 41.6667%;
+    --util-percentage-6: 50%;
+    --util-percentage-7: 58.3333%;
+    --util-percentage-8: 66.6667%;
+    --util-percentage-9: 75%;
+    --util-percentage-10: 83.3333%;
+    --util-percentage-11: 91.6667%;
+    --util-percentage-12: 100%;
+    --util-rems-1: .25rem;
+    --util-rems-2: .375rem;
+    --util-rems-3: .5rem;
+    --util-rems-4: .625rem;
+    --util-rems-5: .75rem;
+    --util-rems-6: 1rem;
+    --util-rems-7: 1.25rem;
+    --util-rems-8: 1.5rem;
+    --util-rems-9: 2rem;
+    --util-rems-10: 2.25rem;
+    --util-rems-11: 2.5rem;
+    --util-rems-12: 3rem;
+    --color-blue-light: var(--color-purple-300);
+    --color-blue-light2: var(--color-purple-300);
+    --color-blue-dark: var(--color-purple-700);
+    --color-blue-dark2: var(--color-purple-700);
+    --intent-low: var(--color-grey-light);
+    --intent-secondary: var(--color-purple-500);
+    --intent-secondary-light: var(--color-purple-300);
+    --intent-secondary-dark: var(--color-purple-700);
+    --intent-critical: var(--color-purple-500);
+    --intent-critical-text: var(--color-white);
+    --intent-critical-light: var(--color-purple-300);
+    --intent-critical-light-text: var(--color-black);
+    --intent-critical-dark: var(--color-purple-700);
+    --intent-critical-dark-text: var(--color-white);
+    --layout-size-1_2: .5rem;
+    --layout-size-1_4: .25rem;
+    --layout-size-3_4: .75rem;
+    --layout-size-1_3: calc(1rem / 3);
+    --layout-size-2_3: calc(2rem / 3);
+    --layout-size-2: 2rem;
+    --layout-size-3: 3rem;
+    --component-input-border-bottom: 1px solid var(--color-grey-150);
+    --component-input-border-bottom-focus: 1px solid #000000;
+  }
+
+iam-address-lookup,
+label {
+  font-size: var(--font-size-small);
+    color: var(--color-grey-500);
+}
+
+  iam-address-lookup::part(input),
+  input {
+        flex-grow: 1;
+    border-radius: .125rem;
+    border: var(--component-input-border);
+    height: 2.25rem;
+    min-width: 0;
+
+        display: flex;
+    color: var(--color-black);
+    background: var(--component-input-bg);
+    padding: .5rem .6875rem;
+    margin: 0;
+    font-family: var(--font-sans-serif);
+    font-size: var(--font-size-small);
+    margin-bottom: 0.625rem;
+  }
+  iam-address-lookup::part(input):focus {
+    border: var(--component-input-border-focus);
+    outline: none;
+  }
+  iam-address-lookup::part(suffix) {
+    display: none;
+  }
+
+  iam-address-lookup::part(contents) {
+    display: block;
+    padding-bottom: 2rem;
+  }
+  iam-address-lookup::part(button) {
+    display: inline-flex;
+    position: relative;
+    padding: .5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+    cursor: pointer;
+    border-radius: var(--default-border-radius);
+    border: 1px solid var(--color-grey-100);
+    font-size: var(--font-size-small);
+    font-family: var(--font-sans-serif);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-grey-400);
+    background-color: unset;
+    background-image: linear-gradient(to right, var(--color-white), var(--color-white));
+    outline-color: var(--intent-primary);
+    background-repeat: no-repeat;
+    height: 2.25rem;
+  }
+</style>
+
+
+<iam-address-lookup data-url="/addressess2.json?search=">
+  <label>Address line one <input type="text" name="address-line-1" data-name="address_1" data-name-alt="address_number_name" data-name-2="address_1" required="" value="142"></label>
+  <label>Address line two (Optional) <span class="optional-text"></span><input type="text" name="address-line-2" data-name="address_2"></label><label>Address line three (Optional) <span class="optional-text"></span><input type="text" name="address-line-3" data-name="address_3" id="address-line-3"></label><label>City <input type="text" name="city" data-name="city" id="city" required=""></label><label>County <select name="county" id="county" required=""><option value=""></option><option value="Tyne and Wear">Tyne and Wear</option><option value="Cleveland">Cleveland</option></select></label><div class="row"><label class="col-sm-4">Postcode <input type="text" name="postcode" data-name="address_1" required=""></label></div><label>Country <select name="country" id="country" required=""><option value=""></option><option value="England">England</option><option value="Scotland">Scotland</option><option value="Wales">Wales</option></select></label>
+
+</iam-address-lookup>
+
   <div class="container">
     <div class="row">
       <div class="col-6">
@@ -215,6 +488,7 @@
       </div>
     </div>
   </div>
+
 
   <div class="container pt-5">
     
