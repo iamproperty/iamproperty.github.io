@@ -99,81 +99,63 @@ $darkMode: 'true' !default;
   @media screen and (prefers-color-scheme: light) {
     :root {
       --theme: light;
+      --body-theme: light;
     }
   }
   @media screen and (prefers-color-scheme: dark) {
     :root {
       --theme: dark;
+      --body-theme: dark;
     }
   }
 
-  :root:has([name='dark-mode']:checked) {
+
+  :is(.bg-primary, .bg-danger, .bg-dark) {
     --theme: dark;
+
+    > * {
+      color: var(--colour-heading);
+    }
   }
 
-  // Override the colours when on a dark background, similiar to dark mode but on a module level
-  [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-warning):not(.bg-white):not(.bg-admin):not(
-      .bg-canvas
-    ):not(.bg-canvas-2):not(.prevent-invert),
-  .invert-colours {
-    --theme: dark;
-    color: var(--colour-white);
-  }
 
   @container style(--theme: dark) {
-    * {
+    * > *,
+    [class*='bg-'] {
       @each $color, $value in $dark-mode-colors {
         --colour-#{$color}: #{$value};
-        --colour-body: var(--colour-white);
       }
-      @include invert-colours();
-    }
-
-    [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
-      --theme: light !important;
-      color: var(--colour-primary-theme) !important;
-    }
-
-    @each $color, $value in $theme-colors {
-      .bg-#{$color}[class*='gradient-'] {
-        background-color: var(--colour-#{$color}-theme) !important;
-
-        * {
-          --theme: light;
-        }
-      }
-    }
-
-    [class*='bg-'][class*='gradient-']:not(.bg-primary):not(.bg-dark):not(.bg-danger) {
-      --colour-body: var(--colour-primary-theme);
-
-      @each $color, $value in $theme-colors {
+      @each $color, $value in $dark-mode-functional-colors {
         --colour-#{$color}: #{$value};
       }
-
-      @include reset-colours();
-      color: var(--colour-body);
-    }
-
-    [class*='bg-'][class*='gradient-']:not(.bg-info):not(.bg-success):not(.bg-warning):not(.prevent-invert) {
-      @include invert-colours();
-
-      color: #{$colour-inverted};
     }
   }
 
-  .reset-colours {
-    --theme: light;
+  @container style(--body-theme: dark) {
+
+
+    [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.ds-header):not(iam-header) {
+      --theme: light;
+
+      > * {
+        color: var(--colour-heading);
+      }
+    }    
+
   }
+
 
   @container style(--theme: light) {
-    * {
+    * > * {
       @each $color, $value in $theme-colors {
         --colour-#{$color}: #{$value};
       }
-      @include reset-colours();
+      @each $color, $value in $non-theme-colors {
+        --colour-#{$color}: #{$value};
+      }
     }
   }
+
 
   @media (forced-colors: active) {
     #{$root} {

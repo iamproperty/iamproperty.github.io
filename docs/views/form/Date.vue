@@ -42,7 +42,7 @@
 
     <h2>Date Picker</h2>
 
-    <form class="was-validated">
+    <form class="was-validated visualtest">
       <label data-error="Only weekday dates upto 7 days in the future are accepted">
         Date
         <span
@@ -82,7 +82,7 @@
 
     <h2>Time Picker</h2>
 
-    <form class="was-validated">
+    <form class="was-validated visualtest">
       <label>
         Time
         <span

@@ -61,13 +61,13 @@
             <a href="/components/buttons"><i class="fa-light fa-envelope"></i> unknown printer</a>
           </p>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
+        <div class="col-sm-6 col-md-4  light-mode pt-3">
           <p><a href="/components/buttons" class="hover">industry's standard</a></p>
           <p>
             <a href="/components/buttons" class="hover"><i class="fa-light fa-envelope"></i> unknown printer</a>
           </p>
         </div>
-        <div class="col-sm-6 col-md-4 bg-primary light-mode pt-3">
+        <div class="col-sm-6 col-md-4  light-mode pt-3">
           <p><a href="/components/buttons" disabled>industry's standard</a></p>
           <p>
             <a href="/components/buttons" disabled><i class="fa-light fa-envelope"></i> unknown printer</a>

@@ -13,9 +13,12 @@ $darkMode: 'true' !default;
   border: rem(2) solid var(--colour, var(--colour-info));
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
-  @include light-mode($darkMode) {
+  @container style(--body-theme: light) {
     background: #e9f9fd;
   }
+      @container style(--body-theme: dark) {
+    background: var(--colour-canvas-2);
+    }
 
   &::slotted(strong) {
     color: green;
@@ -31,20 +34,36 @@ $darkMode: 'true' !default;
   border: rem(2) solid transparent;
 }
 
-:host(.colour-warning),
-.iam-notification.colour-warning {
-  background: #fff6e6;
-}
 
-:host(.colour-danger),
-.iam-notification.colour-danger {
-  background: #fcebec;
-}
+  :host(.colour-warning),
+  .iam-notification.colour-warning {
+    @container style(--body-theme: light) {
+      background: #fff6e6;
+    }
+    @container style(--body-theme: dark) {
+    background: var(--colour-canvas-2);
+    }
+  }
 
-:host(.colour-success),
-.iam-notification.colour-success {
-  background: #f8fdf6;
-}
+  :host(.colour-danger),
+  .iam-notification.colour-danger {
+    @container style(--body-theme: light) {
+    background: #fcebec;
+    }
+    @container style(--body-theme: dark) {
+    background: var(--colour-canvas-2);
+    }
+  }
+
+  :host(.colour-success),
+  .iam-notification.colour-success {
+    @container style(--body-theme: light) {
+    background: #f8fdf6;
+    }
+    @container style(--body-theme: dark) {
+    background: var(--colour-canvas-2);
+    }
+  }
 
 :host(.bg-white),
 .iam-notification.bg-white {

@@ -169,6 +169,7 @@ $darkMode: 'true' !default;
   }
 
   .menu {
+    
     overscroll-behavior: contain;
     width: calc(#{rem(375)} - var(--scrollbar-width));
     background-color: var(--colour-canvas-2);
@@ -188,9 +189,15 @@ $darkMode: 'true' !default;
       flex-shrink: 0;
     }
 
+    @container style(--body-theme: light) {
+
+      --theme: light;
+    }
+
     @container style(--theme: dark) {
+
       --colour-link: var(--colour-white);
-      @include invert-colours();
+      //@include invert-colours();
     }
 
     // The menu is always white unless in dark mode
@@ -390,12 +397,15 @@ $darkMode: 'true' !default;
     width: 100%;
 
     @include light-mode($darkMode) {
+      
+      --theme: light;
       background-color: #eeeeee;
       @include reset-colours();
+
     }
 
     @container style(--theme: dark) {
-      @include invert-colours();
+      //@include invert-colours();
     }
 
     .container {

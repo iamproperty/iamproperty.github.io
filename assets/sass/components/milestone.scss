@@ -203,4 +203,14 @@ iam-milestone {
       font-size: 0.75rem;
     }
   }
+
+  @media (prefers-color-scheme: dark) {
+
+    --theme: light;
+    
+    > * {
+      color: var(--colour-heading);
+    }
+    
+  }
 }

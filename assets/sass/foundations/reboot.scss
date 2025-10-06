@@ -125,7 +125,7 @@ $darkMode: 'true' !default;
     -webkit-tap-highlight-color: rgba($black, 0); // 4
 
     @container style(--theme: dark) {
-      color: var(--colour-heading);
+      color: var(--colour-body);
     }
     @container style(--theme: light) {
       color: var(--colour-body);

@@ -40,12 +40,13 @@ $darkMode: 'true' !default;
     --border-radius: #{rem(8)} #{rem(8)} 0 0;
     --icon-top: #{rem(14)};
     --line-height: #{rem(24)};
+      --block-padding: #{rem(14)};
 
     *:not(iam-tabs) > &:not([open]) {
       padding-bottom: rem(42);
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       --inline-padding: #{rem(14)};
       --block-padding: #{rem(14)};
       --icon-top: #{rem(24)};
