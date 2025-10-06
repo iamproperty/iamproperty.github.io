@@ -340,9 +340,9 @@ const routes = [
       },
       {
         path: 'date',
-        name: 'Form date and time pickers (Beta)',
+        name: 'Date and time pickers',
         meta: {
-          title: 'Form date and time pickers | Elements | iamkey',
+          title: 'Date and time pickers | Elements | iamkey',
         },
         component: () => import('./views/form/Date.vue'),
       },
@@ -532,6 +532,15 @@ const routes = [
         component: () => import('./views/components/ContentDoc.vue'),
       },
       {
+        path: 'dark-mode-switch',
+        name: 'Dark Mode Switch (BETA)',
+        meta: {
+          title: 'Dark Mode Switch | Components | iamkey',
+        },
+        component: () => import('./views/components/DarkModeSwitch.vue'),
+        searchterms: 'dark mode',
+      },
+      {
         path: 'filterlist',
         name: 'Filter list (Beta)',
         meta: {
@@ -699,6 +708,14 @@ const routes = [
           title: 'Milestone Group | Components | iamkey',
         },
         component: () => import('./views/components/MilestoneGroupDoc.vue'),
+      },
+      {
+        path: 'word-count',
+        name: 'Word Count',
+        meta: {
+          title: 'Word Count | Components | iamkey',
+        },
+        component: () => import('./views/components/WordCountDoc.vue'),
       },
     ],
   },

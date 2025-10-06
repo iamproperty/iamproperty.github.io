@@ -1,23 +1,22 @@
+<script setup>
+  import { onMounted } from 'vue';
+
+  const component = 'advanced-select';
+
+  onMounted(() => {
+    import(`../../../assets/js/components/${component}/${component}.component.min.js`)
+      .then((module) => {
+        if (!window.customElements.get(`iam-${component}`))
+          window.customElements.define(`iam-${component}`, module.default);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+</script>
+
 <template>
   <iam-advanced-select>
     <slot></slot>
   </iam-advanced-select>
 </template>
-
-<script>
-  export default {
-    name: 'AdvancedSelect',
-    mounted() {
-      this.$nextTick(function () {
-        import(/* @vite-ignore */ `../../../assets/js/components/advanced-select/advanced-select.component.min.js`)
-          .then((module) => {
-            if (!window.customElements.get(`iam-advanced-select`))
-              window.customElements.define(`iam-advanced-select`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      });
-    },
-  };
-</script>

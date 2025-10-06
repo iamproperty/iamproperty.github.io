@@ -1,3 +1,18 @@
+<script setup>
+  import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue';
+  import Readme from '@/components/PropertySearchbar/README.md';
+
+  const htmlUsage = ``;
+  let location = '';
+  let locations = null;
+
+  const datalist = function (event) {
+    console.log(location);
+
+    locations = [{ value: 'London' }, { value: 'Leicester' }];
+  };
+</script>
+
 <template>
   <main>
     <div class="container">
@@ -32,29 +47,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue';
-  import Readme from '@/components/PropertySearchbar/README.md';
-
-  export default {
-    components: {
-      PropertySearchbar,
-      Readme,
-    },
-    data() {
-      return {
-        htmlUsage: ``,
-        location: '',
-        locations: null,
-      };
-    },
-    methods: {
-      datalist: function (event) {
-        console.log(this.location);
-
-        this.locations = [{ value: 'London' }, { value: 'Leicester' }];
-      },
-    },
-  };
-</script>

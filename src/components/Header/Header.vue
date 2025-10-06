@@ -1,3 +1,31 @@
+<script setup>
+  import { onMounted } from 'vue';
+
+  const props = defineProps({
+    title: {
+      type: String,
+      required: true,
+    },
+    image: {
+      type: String,
+      required: false,
+    },
+  });
+
+  const component = 'header';
+
+  onMounted(() => {
+    import(`../../../assets/js/components/${component}/${component}.component.min.js`)
+      .then((module) => {
+        if (!window.customElements.get(`iam-${component}`))
+          window.customElements.define(`iam-${component}`, module.default);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+</script>
+
 <template>
   <!-- Custom element -->
   <iam-header :image="image">
@@ -6,32 +34,3 @@
     <slot></slot>
   </iam-header>
 </template>
-
-<script>
-  // Load web components
-
-  export default {
-    name: 'Header',
-    props: {
-      title: {
-        type: String,
-        required: true,
-      },
-      image: {
-        type: String,
-        required: false,
-      },
-    },
-    mounted() {
-      this.$nextTick(function () {
-        import(`../../../assets/js/components/header/header.component.min.js`)
-          .then((module) => {
-            if (!window.customElements.get(`iam-header`)) window.customElements.define(`iam-header`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      });
-    },
-  };
-</script>

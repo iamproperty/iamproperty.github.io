@@ -1,8 +1,8 @@
 iam-milestone {
   --milestone-divider-colour: var(--colour-muted);
   --milestone-panel-border: var(--wider-colour-1-active);
-  --milestone-default-background: #FFFFFF;
-  --milestone-future-background: #F5F5F5;
+  --milestone-default-background: #ffffff;
+  --milestone-future-background: #f5f5f5;
 }
 
 iam-milestone-group {
@@ -10,21 +10,21 @@ iam-milestone-group {
   flex-wrap: wrap;
   max-width: 43rem;
   gap: 2.75rem;
-  
-  &.reverse-items {
-      flex-direction: column-reverse;
 
-      .milestone + .milestone {
-        &:before {
-          top: auto;
-          bottom: 0;
-          transform: translate(-1px, 2.2rem);
-        }
+  &.reverse-items {
+    flex-direction: column-reverse;
+
+    .milestone + .milestone {
+      &:before {
+        top: auto;
+        bottom: 0;
+        transform: translate(-1px, 2.2rem);
       }
+    }
   }
 
   &[data-show-all-toggle] {
-     .milestone.current ~ .milestone {
+    .milestone.current ~ .milestone {
       display: none;
     }
 
@@ -33,11 +33,11 @@ iam-milestone-group {
         display: block;
       }
 
-       .show-all-toggle {
-          &:before {
-            content: "\f070"
-          }
-       }
+      .show-all-toggle {
+        &:before {
+          content: '\f070';
+        }
+      }
     }
   }
 
@@ -50,7 +50,7 @@ iam-milestone-group {
     position: relative;
 
     &:before {
-      content: "\f06e";
+      content: '\f06e';
       font-family: 'Font Awesome 6 Pro';
       position: absolute;
       left: auto;
@@ -61,12 +61,11 @@ iam-milestone-group {
   }
 
   iam-milestone {
-
     + .milestone {
       position: relative;
 
       &:before {
-        content: "";
+        content: '';
         height: 1.5rem;
         width: 2px;
         background: var(--milestone-divider-colour);
@@ -81,13 +80,13 @@ iam-milestone-group {
 }
 
 iam-milestone::part(status) {
-    text-transform: uppercase;
-    text-align: center;
-    display: block;
-    margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
-iam-milestone { 
+iam-milestone {
   border: 2px solid var(--milestone-panel-border);
   border-radius: 8px;
   display: block;
@@ -97,7 +96,7 @@ iam-milestone {
   padding-top: 1rem;
 
   &.current ~ .milestone {
-     background: var(--milestone-future-background);
+    background: var(--milestone-future-background);
   }
 
   h2 {
@@ -140,20 +139,20 @@ iam-milestone {
     gap: 1rem;
 
     &:before {
-      content:'';
+      content: '';
       display: block;
       width: 1rem;
       height: 1rem;
       border: 2px solid var(--colour-primary);
       border-radius: 50%;
-      font-family: "Font Awesome 6 Pro";
+      font-family: 'Font Awesome 6 Pro';
       color: #fff;
       font-size: 0.7rem;
     }
 
     &.complete {
       &:before {
-        content: "\f00c";
+        content: '\f00c';
         border-color: var(--colour-success);
         background: var(--colour-success);
         text-align: center;
@@ -162,46 +161,56 @@ iam-milestone {
   }
 
   summary {
-      border-top: 1px solid #D6D6D6;
-      padding: 1rem 1.5rem;
-      margin-bottom: 0;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      font-weight: 600;
+    border-top: 1px solid #d6d6d6;
+    padding: 1rem 1.5rem;
+    margin-bottom: 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    font-weight: 600;
 
-      &:before {
-        width: 1.25rem;
-        height: 1.25rem;
-        font-size: 0.9rem;
-        line-height: 1.2;
-      }
-
-      &:after {
-        content: "\f078"
-      }
-
-      + p {
-        padding-bottom: 0;
-      }
+    &:before {
+      width: 1.25rem;
+      height: 1.25rem;
+      font-size: 0.9rem;
+      line-height: 1.2;
     }
 
-    details {
+    &:after {
+      content: '\f078';
+    }
+
+    + p {
       padding-bottom: 0;
+    }
+  }
 
-      &[open] {
-        summary:after {
-          content: "\f077"
-        }
+  details {
+    padding-bottom: 0;
+
+    &[open] {
+      summary:after {
+        content: '\f077';
       }
     }
+  }
 
-    li {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      align-items: center;
+  li {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
 
-      .action-date {
-        font-size: 0.75rem;
-      }
+    .action-date {
+      font-size: 0.75rem;
     }
+  }
+
+  @media (prefers-color-scheme: dark) {
+
+    --theme: light;
+    
+    > * {
+      color: var(--colour-heading);
+    }
+    
+  }
 }

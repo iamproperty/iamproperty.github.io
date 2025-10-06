@@ -28,10 +28,8 @@ class iamAddressLookup extends HTMLElement {
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
     
-    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
     <div class="wrapper">
@@ -40,25 +38,25 @@ class iamAddressLookup extends HTMLElement {
         <div>
         <label class="mb-2">Search <span class="title text-lowercase"></span> <span class="optional">(Optional)</span>
           <span>
-          <input type="text" name="postcode" list="address-lookup__addressess" autocomplete="off" aria-autocomplete="none" placeholder="Postcode" />
-          <span class="suffix fa-regular fa-search"></span>
+          <input type="text" name="postcode" list="address-lookup__addressess" autocomplete="off" aria-autocomplete="none" placeholder="Postcode" part="input" />
+          <span class="suffix fa-regular fa-search" part="suffix"></span>
           </span>
           <span class="invalid-feedback">Required Adddress fields missing</span>
         </label>
 
         </div>
-        <button class="btn btn-tertiary switch-to-manual-btn" type="button">Or enter address manually</button>
+        <button class="btn btn-tertiary switch-to-manual-btn" type="button" part="button">Or enter address manually</button>
       </div>
       <datalist id="address-lookup__addressess"></datalist>
 
       <div class="manual-address pb-2 js-hide">
-        <slot></slot>
-        <button class="btn btn-tertiary switch-to-lookup-btn" type="button">Use postcode lookup</button>
+        <slot part="contents"></slot>
+        <button class="btn btn-tertiary switch-to-lookup-btn" type="button" part="button">Use postcode lookup</button>
         <slot name="after"></slot>
       </div>
       <div class="pre-filled pb-2 js-hide">
         <strong class="title text-primary d-block"></strong>
-        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer" type="button"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button><slot name="prefilled"></slot></p>
+        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer" type="button" part="edit-button"><i class="fa-regular fa-pen-to-square"></i> <span class="visually-hidden">Edit</span></button><slot name="prefilled"></slot></p>
       </div>
     </div>
     `;

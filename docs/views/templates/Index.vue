@@ -1,20 +1,4 @@
-<template>
-  <main>
-    <div class="container">
-      <div class="row row-cols-1 row-cols-md-3">
-        <div v-for="item in pages">
-          <a :href="item.link">
-            <Card>
-              {{ item.title }}
-              <span v-if="item.content" v-html="item.content"></span>
-            </Card>
-          </a>
-        </div>
-      </div>
-    </div>
-  </main>
-</template>
-<script>
+<script setup>
   import Card from '@/components/Card/Card.vue';
   import routes from '../../routes.ts';
 
@@ -39,14 +23,22 @@
     return arr;
   }, {});
 
-  export default {
-    components: {
-      Card,
-    },
-    data() {
-      return {
-        pages: templates,
-      };
-    },
-  };
+  const pages = templates;
 </script>
+
+<template>
+  <main>
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-3">
+        <div v-for="item in pages">
+          <a :href="item.link">
+            <Card>
+              {{ item.title }}
+              <span v-if="item.content" v-html="item.content"></span>
+            </Card>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</template>

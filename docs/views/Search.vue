@@ -1,3 +1,43 @@
+<script setup>
+  import Card from '@/components/Card/Card.vue';
+  import routes from '../routes.ts';
+
+  var urlParams = new URLSearchParams(window.location.search);
+  let results = [];
+  let searchTerm = urlParams.get('searchAlt');
+  searchTerm = searchTerm ? searchTerm.toLowerCase().trim() : '';
+
+  routes.forEach((route) => {
+    let name = route.name ? route.name : '';
+
+    if (
+      name &&
+      name.toLowerCase().trim().includes(searchTerm) &&
+      name != 'Search' &&
+      name != 'Home' &&
+      name != 'NotFound'
+    )
+      results.push(route);
+    else if (route.searchterms && route.searchterms.includes(searchTerm)) results.push(route);
+
+    if (route.children) {
+      for (const [key, value] of Object.entries(route.children)) {
+        let childName = value.name ? value.name : '';
+
+        if (childName && childName.toLowerCase().trim().includes(searchTerm)) {
+          value.path = route.path + '/' + value.path;
+          results.push(value);
+        } else if (value.searchterms && value.searchterms.includes(searchTerm)) {
+          value.path = route.path + '/' + value.path;
+          results.push(value);
+        }
+      }
+    }
+  });
+
+  console.log(results);
+</script>
+
 <template>
   <main>
     <div class="container">
@@ -5,7 +45,7 @@
       <p class="lead">Found {{ results.length }} results for the term '{{ searchTerm }}'</p>
 
       <div class="row" id="search-results">
-        <div v-for="item in results">
+        <div v-for="item in results" v-bind:key="item.path">
           <a :href="`${item.path}?searchterm=${searchTerm.replace(' ', '_')}`">
             <Card>
               {{ item.name }}
@@ -59,53 +99,3 @@
     }
   }
 </style>
-
-<script>
-  import Card from '@/components/Card/Card.vue';
-  import routes from '../routes.ts';
-
-  var urlParams = new URLSearchParams(window.location.search);
-  let results = [];
-  let searchTerm = urlParams.get('searchAlt');
-  searchTerm = searchTerm ? searchTerm.toLowerCase().trim() : '';
-
-  routes.forEach((route) => {
-    let name = route.name ? route.name : '';
-
-    if (
-      name &&
-      name.toLowerCase().trim().includes(searchTerm) &&
-      name != 'Search' &&
-      name != 'Home' &&
-      name != 'NotFound'
-    )
-      results.push(route);
-    else if (route.searchterms && route.searchterms.includes(searchTerm)) results.push(route);
-
-    if (route.children) {
-      for (const [key, value] of Object.entries(route.children)) {
-        let childName = value.name ? value.name : '';
-
-        if (childName && childName.toLowerCase().trim().includes(searchTerm)) {
-          value.path = route.path + '/' + value.path;
-          results.push(value);
-        } else if (value.searchterms && value.searchterms.includes(searchTerm)) {
-          value.path = route.path + '/' + value.path;
-          results.push(value);
-        }
-      }
-    }
-  });
-
-  export default {
-    components: {
-      Card,
-    },
-    data() {
-      return {
-        searchTerm: searchTerm,
-        results: results,
-      };
-    },
-  };
-</script>

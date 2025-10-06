@@ -1,3 +1,9 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/cards-header.png';
+  import AddressLookup from '@/components/AddressLookup/AddressLookup.vue';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -190,33 +196,3 @@
     </div>
   </main>
 </template>
-
-<style lang="scss" scoped>
-  @use '../../../assets/sass/func' as *;
-</style>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/cards-header.png';
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Table from '@/components/Table/Table.vue';
-  import AddressLookup from '@/components/AddressLookup/AddressLookup.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      headerImg,
-      Tabs,
-      Table,
-      AddressLookup,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-      };
-    },
-    mounted() {
-      this.$nextTick(function () {});
-    },
-  };
-</script>

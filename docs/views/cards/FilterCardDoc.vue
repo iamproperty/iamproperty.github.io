@@ -256,7 +256,6 @@
         </ul>
       </template>
       <template #data-layer>
-        
         <span v-html="events"></span>
       </template>
     </Integration>

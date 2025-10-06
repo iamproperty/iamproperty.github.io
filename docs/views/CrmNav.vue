@@ -1,3 +1,7 @@
+<script setup>
+  import Nav from '@/components/Nav/Nav.vue';
+</script>
+
 <template>
   <nav>
     <Nav class="nav--large nav--btn-compact nav--dual-buttons">
@@ -203,13 +207,3 @@
     </Nav>
   </nav>
 </template>
-
-<script>
-  import Nav from '@/components/Nav/Nav.vue';
-
-  export default {
-    components: {
-      Nav,
-    },
-  };
-</script>

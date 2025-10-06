@@ -1,3 +1,16 @@
+<script setup>
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Tab from '@/components/Tabs/Tab.vue';
+  import Readme from '@/components/Pagination/README.md';
+  import WebReadme from '~/ts/components/pagination/README.md';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Table from '@/components/Table/Table.vue';
+  import Pagination from '@/components/Pagination/Pagination.vue';
+
+  import anatomy from '../../img/pagination-anatomy.png';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -944,36 +957,3 @@
     }
   }
 </style>
-
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-  import Readme from '@/components/Pagination/README.md';
-  import WebReadme from '~/ts/components/pagination/README.md';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Table from '@/components/Table/Table.vue';
-  import Pagination from '@/components/Pagination/Pagination.vue';
-
-  import anatomy from '../../img/pagination-anatomy.png';
-
-  export default {
-    components: {
-      DSHeader,
-      Table,
-      Readme,
-      WebReadme,
-      Tabs,
-      Tab,
-      Pagination,
-      anatomy,
-    },
-    mounted() {},
-    data() {
-      return {
-        headerImg: headerImg,
-        anatomy: anatomy,
-      };
-    },
-  };
-</script>

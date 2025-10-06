@@ -1,3 +1,18 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import anatomy from '../../img/file-upload-anatomy.png';
+  import Tabs from '@/components/Tabs/Tabs.vue';
+
+  import Input from '@/components/Input/Input.vue';
+  import FileUpload from '@/components/FileUpload/FileUpload.vue';
+  import Readme from '@/components/FileUpload/README.md';
+  import WebReadme from '~/ts/components/fileupload/README.md';
+
+  const message = 'input field value';
+  const htmlUsage = `...`;
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -26,34 +41,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import anatomy from '../../img/file-upload-anatomy.png';
-  import Tabs from '@/components/Tabs/Tabs.vue';
-
-  import Input from '@/components/Input/Input.vue';
-  import FileUpload from '@/components/FileUpload/FileUpload.vue';
-  import Readme from '@/components/FileUpload/README.md';
-  import WebReadme from '~/ts/components/fileupload/README.md';
-
-  export default {
-    components: {
-      DSHeader,
-      Input,
-      FileUpload,
-      Readme,
-      Tabs,
-      WebReadme,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        anatomy: anatomy,
-        message: 'input field value',
-        htmlUsage: `...`,
-      };
-    },
-  };
-</script>

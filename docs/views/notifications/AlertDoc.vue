@@ -37,11 +37,7 @@
 </script>
 
 <template>
-
-  <TrackEvents
-    selector="iam-notification"
-    :events="['dismiess']"
-  ></TrackEvents>
+  <TrackEvents selector="iam-notification" :events="['dismiess']"></TrackEvents>
 
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -215,8 +211,6 @@
       <a href="#reset">Reset</a>
     </div>
 
-    
-    
     <Integration component="carousel" componentName="iam-carousel">
       <template #web-component>
         <pre><code>{{`<!-- Inline -->
@@ -307,9 +301,6 @@
           </tbody>
         </table>
       </template>
-
-      
-      
     </Integration>
 
     <Versions pdf="/pdfs/inline-notifications.pdf">
@@ -324,17 +315,12 @@
         <tbody class="text-body">
           <tr>
             <td>V1 added</td>
-              <td>03.07.2023</td>
-              <td>N/A</td>
+            <td>03.07.2023</td>
+            <td>N/A</td>
           </tr>
         </tbody>
       </table>
     </Versions>
-
-
-
-
-
   </main>
 </template>
 
@@ -362,4 +348,3 @@
     display: inline-block !important;
   }
 </style>
-

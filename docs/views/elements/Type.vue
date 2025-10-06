@@ -1,3 +1,12 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import mobileImg from '../../img/mobile.png';
+  import tabletDesktopImg from '../../img/tablet-desktop.png';
+  import Tabs from '../../../src/components/Tabs/Tabs.vue';
+  import Tab from '../../../src/components/Tabs/Tab.vue';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="elements">
@@ -304,27 +313,3 @@
     }
   }
 </style>
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import mobileImg from '../../img/mobile.png';
-  import tabletDesktopImg from '../../img/tablet-desktop.png';
-  import Tabs from '../../../src/components/Tabs/Tabs.vue';
-  import Tab from '../../../src/components/Tabs/Tab.vue';
-
-  export default {
-    name: 'TypeDoc',
-    components: {
-      DSHeader,
-      Tabs,
-      Tab,
-    },
-    data: function () {
-      return {
-        headerImg: headerImg,
-        mobileImg: mobileImg,
-        tabletDesktopImg: tabletDesktopImg,
-      };
-    },
-  };
-</script>

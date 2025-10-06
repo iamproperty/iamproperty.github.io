@@ -40,22 +40,41 @@ $darkMode: 'true' !default;
     --border-radius: #{rem(8)} #{rem(8)} 0 0;
     --icon-top: #{rem(14)};
     --line-height: #{rem(24)};
+      --block-padding: #{rem(14)};
 
     *:not(iam-tabs) > &:not([open]) {
       padding-bottom: rem(42);
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      --inline-padding: #{rem(30)};
+    @include media-breakpoint-up(sm) {
+      --inline-padding: #{rem(14)};
+      --block-padding: #{rem(14)};
       --icon-top: #{rem(24)};
       --line-height: #{rem(24)};
+
+      summary {
+        &:has(.h2, h2, .h4, h4) {
+          --inline-padding: #{rem(22)};
+          --block-padding: #{rem(22)};
+        }
+      }
+
+      summary {
+        &:has(.h2, h2) {
+          --line-height: #{rem(52)};
+        }
+
+        &:has(.h4, h4) {
+          --line-height: #{rem(30)};
+        }
+      }
     }
 
     summary {
       border-bottom: 1px solid var(--colour-border);
-      padding-left: var(--inline-padding);
-      padding-right: calc(var(--inline-padding) + #{rem(24)} + #{rem(24)});
-      padding-block: rem(14) !important;
+      padding-left: 0;
+      padding-inline-end: calc(#{var(--inline-padding)} + #{rem(27)} + #{rem(12)});
+      padding-block: var(--block-padding) !important;
       position: relative;
       color: $headings-color;
 
@@ -82,7 +101,7 @@ $darkMode: 'true' !default;
           content: '\f055';
           position: absolute;
           font-size: rem(24);
-          top: calc((#{var(--line-height)} / 2) - #{rem(12)} + #{rem(14)});
+          top: calc((#{var(--line-height)} / 2) - #{rem(12)});
           right: var(--inline-padding);
           width: rem(24);
           height: rem(24);
@@ -90,6 +109,14 @@ $darkMode: 'true' !default;
           font-weight: 300;
           font-family: 'Font Awesome 6 Pro';
         }
+      }
+
+      *:is(h4, .h4, h2, .h2):after {
+        top: calc((#{var(--line-height)} / 2) + #{var(--inline-padding)} - #{rem(14)});
+      }
+
+      .badge {
+        margin: 0 0 0 0.5rem;
       }
     }
 

@@ -1,3 +1,17 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/cards-header.png';
+  import anatomy from '../../img/stepper/stepper-anotomy.png';
+  import behaviourOne from '../../img/stepper/stepper-behaviour-1.png';
+  import behaviourTwo from '../../img/stepper/stepper-behaviour-2.png';
+  import horizontalDimensions from '../../img/stepper/stepper-horizontal-dimensions.png';
+  import verticalDimensions from '../../img/stepper/stepper-vertical-dimensions.png';
+  import mobileAnatomy from '../../img/stepper/mobile-stepper-anatomy.png';
+  import mobileBehaviourOne from '../../img/stepper/mobile-stepper-behaviour-1.png';
+  import mobileBehaviourTwo from '../../img/stepper/mobile-stepper-behaviour-2.png';
+  import mobileDimensions from '../../img/stepper/mobile-stepper-dimensions.png';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -180,38 +194,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/cards-header.png';
-  import anatomy from '../../img/stepper/stepper-anotomy.png';
-  import behaviourOne from '../../img/stepper/stepper-behaviour-1.png';
-  import behaviourTwo from '../../img/stepper/stepper-behaviour-2.png';
-  import horizontalDimensions from '../../img/stepper/stepper-horizontal-dimensions.png';
-  import verticalDimensions from '../../img/stepper/stepper-vertical-dimensions.png';
-  import mobileAnatomy from '../../img/stepper/mobile-stepper-anatomy.png';
-  import mobileBehaviourOne from '../../img/stepper/mobile-stepper-behaviour-1.png';
-  import mobileBehaviourTwo from '../../img/stepper/mobile-stepper-behaviour-2.png';
-  import mobileDimensions from '../../img/stepper/mobile-stepper-dimensions.png';
-
-  export default {
-    components: {
-      DSHeader,
-      headerImg,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        anatomy: anatomy,
-        behaviourOne: behaviourOne,
-        behaviourTwo: behaviourTwo,
-        horizontalDimensions: horizontalDimensions,
-        verticalDimensions: verticalDimensions,
-        mobileAnatomy: mobileAnatomy,
-        mobileBehaviourOne: mobileBehaviourOne,
-        mobileBehaviourTwo: mobileBehaviourTwo,
-        mobileDimensions: mobileDimensions,
-      };
-    },
-  };
-</script>

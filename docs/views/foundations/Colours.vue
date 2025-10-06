@@ -1,8 +1,37 @@
+<script setup>
+  import { onMounted } from 'vue';
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import backgroundsImg from '../../img/colour-backgrounds.png';
+  import Tabs from '../../../src/components/Tabs/Tabs.vue';
+  import Tab from '../../../src/components/Tabs/Tab.vue';
+  import Table from '../../../src/components/Table/Table.vue';
+  import UserColours from '../UserColours.vue';
+  import DarkMode from '../../../src/components/DarkMode/DarkMode.vue';
+
+  let userTheme = 'light-theme';
+  let checked = false;
+  let checked2 = false;
+
+  const colourNames = {
+    Primary: 'Deep slate',
+    Success: 'Green',
+    Dark: 'Dark',
+    Info: 'Blue',
+    Warning: 'Yellow',
+    Danger: 'Red',
+  };
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg">
       <h1>Colour</h1>
     </DSHeader>
+
+    <DarkMode
+      ><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode
+    >
 
     <!-- #region Light mode -->
     <div class="light-mode full-width">
@@ -10,17 +39,6 @@
         <div class="row">
           <div class="col">
             <h2>Light mode colour palette</h2>
-          </div>
-          <div class="col ms-auto mw-fit-content">
-            <input
-              @change="toggleTheme"
-              v-model="checked2"
-              class="d-none"
-              type="checkbox"
-              name="dark-mode"
-              id="dark-mode"
-            />
-            <label class="btn btn-secondary" for="dark-mode"><i class="fa-regular fa-moon-stars"></i> Dark mode</label>
           </div>
         </div>
 
@@ -160,19 +178,6 @@
         <div class="row">
           <div class="col">
             <h2>Dark mode colour palette</h2>
-          </div>
-          <div class="col ms-auto mw-fit-content">
-            <input
-              @change="toggleTheme"
-              v-model="checked"
-              class="d-none"
-              type="checkbox"
-              name="light-mode"
-              id="light-mode"
-            />
-            <label class="btn btn-secondary" for="light-mode"
-              ><i class="fa-regular fa-sun-bright"></i> Light mode</label
-            >
           </div>
         </div>
 
@@ -785,16 +790,7 @@
 
   @media screen and (prefers-color-scheme: light) {
     .dark-theme {
-      @each $color, $value in $dark-mode-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @include invert-colours();
-
-      [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light) {
-        @include reset-colours();
-        --colour-body: #{$primary} !important;
-        color: var(--colour-body) !important;
-      }
+      --theme: dark;
     }
 
     html #visualtest:target ~ main > .light-mode:not(.visualtest) {
@@ -868,75 +864,3 @@
     display: none;
   }
 </style>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import backgroundsImg from '../../img/colour-backgrounds.png';
-  import Tabs from '../../../src/components/Tabs/Tabs.vue';
-  import Tab from '../../../src/components/Tabs/Tab.vue';
-  import Table from '../../../src/components/Table/Table.vue';
-  import UserColours from '../UserColours.vue';
-
-  export default {
-    name: 'ColourDoc',
-    components: {
-      DSHeader,
-      Tabs,
-      Tab,
-      Table,
-      UserColours,
-    },
-    mounted() {
-      const initUserTheme = this.getMediaPreference();
-      this.setTheme(initUserTheme);
-    },
-    methods: {
-      setTheme(theme) {
-        localStorage.setItem('user-theme', theme);
-        this.userTheme = theme;
-
-        this.checked = theme == 'light-theme' ? true : false;
-        this.checked2 = theme == 'dark-theme' ? true : false;
-
-        document.documentElement.className = theme;
-      },
-      getTheme() {
-        return localStorage.getItem('user-theme');
-      },
-      toggleTheme() {
-        const activeTheme = localStorage.getItem('user-theme');
-        if (activeTheme === 'light-theme') {
-          this.setTheme('dark-theme');
-        } else {
-          this.setTheme('light-theme');
-        }
-      },
-      getMediaPreference() {
-        const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (hasDarkPreference) {
-          return 'dark-theme';
-        } else {
-          return 'light-theme';
-        }
-      },
-    },
-    data: function () {
-      return {
-        userTheme: 'light-theme',
-        checked: false,
-        checked2: false,
-        headerImg: headerImg,
-        backgroundsImg: backgroundsImg,
-        colourNames: {
-          Primary: 'Deep slate',
-          Success: 'Green',
-          Dark: 'Dark',
-          Info: 'Blue',
-          Warning: 'Yellow',
-          Danger: 'Red',
-        },
-      };
-    },
-  };
-</script>

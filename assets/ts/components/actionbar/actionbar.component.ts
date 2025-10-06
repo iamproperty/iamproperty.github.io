@@ -102,6 +102,7 @@ class iamActionbar extends HTMLElement {
           <label for="search" class="visually-hidden">Input field label</label>
           <button class="suffix" part="search-btn"><i class="fa-regular fa-search"></i></button>
           <input type="text" id="search" name="search" required="" part="search-input">
+          <button class="empty btn btn-action"><i class="fa-light fa-times me-0" aria-hidden="true"></i></button>
         </div>
 
       </div>
@@ -276,6 +277,15 @@ class iamActionbar extends HTMLElement {
         });
         this.dispatchEvent(submitEvent);
       }
+    });
+
+    const clearBtn = searchBar.querySelector('.empty');
+    const searchInput = searchBar.querySelector('#search');
+
+    clearBtn.addEventListener('click', function (e) {
+      searchInput.removeAttribute('placeholder');
+      searchInput.removeAttribute('data-value');
+      searchInput.value = '';
     });
     // #endregion
 

@@ -1,3 +1,8 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/spacing-header.png';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg">
@@ -417,23 +422,3 @@
     }
   }
 </style>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/spacing-header.png';
-  import Tabs from '../../../src/components/Tabs/Tabs.vue';
-  import Tab from '../../../src/components/Tabs/Tab.vue';
-
-  export default {
-    components: {
-      DSHeader,
-      Tabs,
-      Tab,
-    },
-    data: function () {
-      return {
-        headerImg: headerImg,
-      };
-    },
-  };
-</script>

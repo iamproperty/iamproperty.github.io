@@ -1,3 +1,17 @@
+<script setup>
+  const props = defineProps({
+    image: {
+      type: String,
+      required: false,
+    },
+    section: {
+      type: String,
+      default: 'foundations',
+      required: false,
+    },
+  });
+</script>
+
 <template>
   <div class="bg-primary mb-5 ds-header">
     <img v-if="image" :src="image" alt="" class="d-none d-md-block" />
@@ -38,20 +52,3 @@
     }
   }
 </style>
-
-<script>
-  export default {
-    name: 'DSHeader',
-    props: {
-      image: {
-        type: String,
-        required: false,
-      },
-      section: {
-        type: String,
-        default: 'foundations',
-        required: false,
-      },
-    },
-  };
-</script>

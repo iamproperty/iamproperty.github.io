@@ -1,61 +1,4 @@
-<template>
-  <main>
-    <div class="container">
-      <h1>Elements</h1>
-
-      <div class="row row-cols-1 row-cols-md-3 mb-5">
-        <div v-for="item in pages">
-          <a :href="item.link">
-            <Card>
-              {{ item.title }}
-              <span v-if="item.content" v-html="item.content"></span>
-            </Card>
-          </a>
-        </div>
-      </div>
-
-      <h2>Link and button Elements</h2>
-
-      <div class="row row-cols-1 row-cols-md-3 mb-5">
-        <div v-for="item in linkPages">
-          <a :href="item.link">
-            <Card>
-              {{ item.title }}
-              <span v-if="item.content" v-html="item.content"></span>
-            </Card>
-          </a>
-        </div>
-      </div>
-
-      <h2>Form Elements</h2>
-
-      <div class="row row-cols-1 row-cols-md-3 mb-5">
-        <div v-for="item in formpages">
-          <a :href="item.link">
-            <Card>
-              {{ item.title }}
-              <span v-if="item.content" v-html="item.content"></span>
-            </Card>
-          </a>
-        </div>
-      </div>
-
-      <h2>Dialog Elements</h2>
-
-      <div class="row row-cols-1 row-cols-md-3 mb-5">
-        <div v-for="item in dialogpages">
-          <a :href="item.link">
-            <Card>
-              {{ item.title }}
-              <span v-if="item.content" v-html="item.content"></span>
-            </Card>
-          </a>
-        </div>
-      </div>
-    </div>
-  </main>
-</template>
-<script>
+<script setup>
   import Card from '@/components/Card/Card.vue';
   import routes from '../../routes.ts';
 
@@ -143,17 +86,66 @@
     return arr;
   }, {});
 
-  export default {
-    components: {
-      Card,
-    },
-    data() {
-      return {
-        pages: elements,
-        formpages: formElements,
-        dialogpages: dialogElements,
-        linkPages: linkElements,
-      };
-    },
-  };
+  const pages = elements;
+  const formpages = formElements;
+  const dialogpages = dialogElements;
+  const linkPages = linkElements;
 </script>
+
+<template>
+  <main>
+    <div class="container">
+      <h1>Elements</h1>
+
+      <div class="row row-cols-1 row-cols-md-3 mb-5">
+        <div v-for="item in pages">
+          <a :href="item.link">
+            <Card>
+              {{ item.title }}
+              <span v-if="item.content" v-html="item.content"></span>
+            </Card>
+          </a>
+        </div>
+      </div>
+
+      <h2>Link and button Elements</h2>
+
+      <div class="row row-cols-1 row-cols-md-3 mb-5">
+        <div v-for="item in linkPages">
+          <a :href="item.link">
+            <Card>
+              {{ item.title }}
+              <span v-if="item.content" v-html="item.content"></span>
+            </Card>
+          </a>
+        </div>
+      </div>
+
+      <h2>Form Elements</h2>
+
+      <div class="row row-cols-1 row-cols-md-3 mb-5">
+        <div v-for="item in formpages">
+          <a :href="item.link">
+            <Card>
+              {{ item.title }}
+              <span v-if="item.content" v-html="item.content"></span>
+            </Card>
+          </a>
+        </div>
+      </div>
+
+      <h2>Dialog Elements</h2>
+
+      <div class="row row-cols-1 row-cols-md-3 mb-5">
+        <div v-for="item in dialogpages">
+          <a :href="item.link">
+            <Card>
+              {{ item.title }}
+              <span v-if="item.content" v-html="item.content"></span>
+            </Card>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+</template>

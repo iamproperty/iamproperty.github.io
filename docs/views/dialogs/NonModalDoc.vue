@@ -1,3 +1,21 @@
+<script setup>
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Card from '@/components/Card/Card.vue';
+  import headerImg from '../../img/type-header.png';
+
+  import NonModelDesc from '../NonModalDesc.vue';
+
+  import DSHeader from '../DSHeader.vue';
+
+  import nonmodalPassive from '../../img/dialogs/nonmodal-passive.png';
+
+  import inlineNotification from '../../img/dialogs/inline-notification.png';
+
+  import cookies from '../../img/dialogs/cookies.png';
+  import surveys from '../../img/dialogs/surveys.png';
+  import multiForm from '../../img/dialogs/multi-step-form.png';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -163,48 +181,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Card from '@/components/Card/Card.vue';
-  import headerImg from '../../img/type-header.png';
-
-  import NonModelDesc from '../NonModalDesc.vue';
-
-  import DSHeader from '../DSHeader.vue';
-
-  import nonmodalPassive from '../../img/dialogs/nonmodal-passive.png';
-
-  import inlineNotification from '../../img/dialogs/inline-notification.png';
-
-  import cookies from '../../img/dialogs/cookies.png';
-  import surveys from '../../img/dialogs/surveys.png';
-  import multiForm from '../../img/dialogs/multi-step-form.png';
-
-  export default {
-    components: {
-      DSHeader,
-      NonModelDesc,
-      Tabs,
-      Card,
-      nonmodalPassive,
-      inlineNotification,
-      cookies,
-      surveys,
-      multiForm,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        nonmodalPassive: nonmodalPassive,
-        inlineNotification: inlineNotification,
-        cookies: cookies,
-        surveys: surveys,
-        multiForm: multiForm,
-      };
-    },
-    mounted() {
-      this.$nextTick(function () {});
-    },
-  };
-</script>

@@ -1,3 +1,9 @@
+<script setup>
+  import DSHeader from '../DSHeader.vue';
+  import headerImg from '../../img/type-header.png';
+  import Tabs from '../../../src/components/Tabs/Tabs.vue';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg">
@@ -202,22 +208,3 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
   </main>
 </template>
-
-<script>
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
-  import Tabs from '../../../src/components/Tabs/Tabs.vue';
-
-  export default {
-    name: 'TypeDoc',
-    components: {
-      DSHeader,
-      Tabs,
-    },
-    data: function () {
-      return {
-        headerImg: headerImg,
-      };
-    },
-  };
-</script>

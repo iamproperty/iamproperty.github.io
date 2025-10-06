@@ -1,14 +1,6 @@
-// Data layer Web component created
-declare global {
-  interface Window {
-    dataLayer: Array<object>;
-  }
-}
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  event: 'customElementRegistered',
-  element: 'accordion',
-});
+import { trackComponent, trackComponentRegistered } from '../_global';
+
+trackComponentRegistered('iam-accordion');
 
 class iamAccordion extends HTMLElement {
   constructor() {
@@ -23,29 +15,34 @@ class iamAccordion extends HTMLElement {
       : `${assetLocation}/css/core.min.css`;
 
     const template = document.createElement('template');
-    template.innerHTML = `
-    <style>
-    @import "${coreCSS}";
+    template.innerHTML = /* HTML */ `
+      <style>
+        @import '${coreCSS}';
 
-    :host {
-      margin-bottom: 2.5rem;
-      display: block;
-    }
-    
-    ::slotted(details) {
-      --border-radius: 0!important;
-      padding-bottom: 0!important;
-    }    
-    </style>
+        :host {
+          margin-bottom: 2.5rem;
+          display: block;
+        }
+
+        ::slotted(details) {
+          --border-radius: 0 !important;
+          padding-bottom: 0 !important;
+        }
+      </style>
       <slot></slot>
     `;
     this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback(): void {
-    if (!this.classList.contains('accordion--keep-open')) {
-      const details: NodeListOf<HTMLElement> = this.querySelectorAll(':scope > details');
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const accordionComponent = this;
 
+    trackComponent(accordionComponent, 'iam-accordion', ['accordion-item-closed', 'accordion-item-opened']);
+
+    const details: NodeListOf<HTMLElement> = this.querySelectorAll(':scope > details');
+
+    if (!this.classList.contains('accordion--keep-open')) {
       // Add the toggle listeners.
       details.forEach((targetDetail) => {
         targetDetail.addEventListener('toggle', () => {
@@ -58,6 +55,30 @@ class iamAccordion extends HTMLElement {
         });
       });
     }
+
+    // Fire tracking events
+    details.forEach((targetDetail) => {
+      const summaryEle = targetDetail.querySelector('summary');
+      const summaryText = summaryEle?.innerText;
+
+      targetDetail.addEventListener('toggle', () => {
+        if (targetDetail?.hasAttribute('open')) {
+          itemInteractionEvent('accordion-item-opened', summaryText);
+        } else {
+          itemInteractionEvent('accordion-item-closed', summaryText);
+        }
+      });
+    });
+
+    const itemInteractionEvent = function (eventName: string, itemSummary: string): void {
+      const customEvent = new CustomEvent(eventName, {
+        detail: {
+          title: itemSummary,
+        },
+      });
+
+      accordionComponent.dispatchEvent(customEvent);
+    };
   }
 }
 

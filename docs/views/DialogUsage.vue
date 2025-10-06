@@ -1,3 +1,7 @@
+<script setup>
+  import Table from '@/components/Table/Table.vue';
+</script>
+
 <template>
   <h3>Usage</h3>
 
@@ -50,13 +54,3 @@
     </table>
   </Table>
 </template>
-
-<script>
-  import Table from '@/components/Table/Table.vue';
-
-  export default {
-    components: {
-      Table,
-    },
-  };
-</script>

@@ -1,7 +1,6 @@
 @use '../_func' as *;
 
-
-  @include visually-hidden();
+@include visually-hidden();
 
 .outer {
   position: relative;

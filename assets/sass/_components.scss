@@ -30,7 +30,7 @@ $darkMode: 'true' !default;
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly
 );
-@use 'components/menu.scss' with (
+@use 'components/menu.global.scss' with (
   $layers: $layers,
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly
@@ -148,7 +148,7 @@ $darkMode: 'true' !default;
   // Table dark mode support
   iam-table {
     tbody tr {
-      @include dark-mode($darkMode) {
+      @container style(--theme: dark) {
         --hover-background: var(--colour-canvas);
 
         &:is(:hover, :focus-within, .hover) {
@@ -170,7 +170,7 @@ $darkMode: 'true' !default;
 
   iam-table {
     tr:has([type='checkbox']:checked) {
-      @include dark-mode($darkMode) {
+      @container style(--theme: dark) {
         --row-bg: #000000;
       }
     }
@@ -182,7 +182,7 @@ $darkMode: 'true' !default;
   }
 
   iam-fileupload::part(file) {
-    @include dark-mode($darkMode) {
+    @container style(--theme: dark) {
       background: var(--colour-canvas-2);
       border-color: var(--colour-canvas-2);
       color: var(--colour-body);

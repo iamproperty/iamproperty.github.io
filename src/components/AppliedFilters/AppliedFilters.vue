@@ -1,24 +1,22 @@
+<script setup>
+  import { onMounted } from 'vue';
+
+  const component = 'applied-filters';
+
+  onMounted(() => {
+    import(`../../../assets/js/components/${component}/${component}.component.min.js`)
+      .then((module) => {
+        if (!window.customElements.get(`iam-${component}`))
+          window.customElements.define(`iam-${component}`, module.default);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+</script>
 <template>
   <!-- Custom element -->
   <iam-applied-filters>
     <slot></slot>
   </iam-applied-filters>
 </template>
-
-<script>
-  export default {
-    name: 'Applied Filter',
-    mounted() {
-      this.$nextTick(function () {
-        import(`../../../assets/js/components/applied-filters/applied-filters.component.js`)
-          .then((module) => {
-            if (!window.customElements.get(`iam-applied-filters`))
-              window.customElements.define(`iam-applied-filters`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      });
-    },
-  };
-</script>

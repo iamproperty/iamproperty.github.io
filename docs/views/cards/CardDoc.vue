@@ -826,7 +826,6 @@
       </template>
 
       <template #dispatched-events>
-        
         <span v-html="events"></span>
       </template>
 
@@ -858,7 +857,6 @@
         </ul>
       </template>
       <template #data-layer>
-        
         <span v-html="events"></span>
       </template>
     </Integration>

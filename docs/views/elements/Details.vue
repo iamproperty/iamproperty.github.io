@@ -1,3 +1,13 @@
+<script setup>
+  const htmlUsage = `<div class="brand brand--property">
+  <svg>
+    <title>iam property</title>
+    <use xlink:href="./assets/svg/logo.svg#logo-property"></use>
+  </svg>
+  <span>the founders<br>of iamsold</span>
+</div>`;
+</script>
+
 <template>
   <main>
     <div class="container">
@@ -39,26 +49,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import Logo from '@/foundations/Logo/Logo.vue';
-  import Readme from '@/foundations/Logo/README.md';
-
-  export default {
-    components: {
-      Logo,
-      Readme,
-    },
-    data() {
-      return {
-        htmlUsage: `<div class="brand brand--property">
-  <svg>
-    <title>iam property</title>
-    <use xlink:href="./assets/svg/logo.svg#logo-property"></use>
-  </svg>
-  <span>the founders<br>of iamsold</span>
-</div>`,
-      };
-    },
-  };
-</script>

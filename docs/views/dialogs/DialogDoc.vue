@@ -1,3 +1,16 @@
+<script setup>
+  import Table from '@/components/Table/Table.vue';
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  import Card from '@/components/Card/Card.vue';
+  import DSHeader from '../DSHeader.vue';
+  import DialogUsage from '../DialogUsage.vue';
+  import ModalVariants from '../ModalVariants.vue';
+  import NonModelDesc from '../NonModalDesc.vue';
+  import headerImg from '../../img/type-header.png';
+  import modalImg from '../../img/dialogs/modal-demo.png';
+  import nonModalImg from '../../img/dialogs/non-modal-demo.png';
+</script>
+
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -208,37 +221,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import Table from '@/components/Table/Table.vue';
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Card from '@/components/Card/Card.vue';
-  import DSHeader from '../DSHeader.vue';
-  import DialogUsage from '../DialogUsage.vue';
-  import ModalVariants from '../ModalVariants.vue';
-  import NonModelDesc from '../NonModalDesc.vue';
-  import headerImg from '../../img/type-header.png';
-  import modalImg from '../../img/dialogs/modal-demo.png';
-  import nonModalImg from '../../img/dialogs/non-modal-demo.png';
-
-  export default {
-    components: {
-      DSHeader,
-      DialogUsage,
-      ModalVariants,
-      NonModelDesc,
-      Tabs,
-      Table,
-      Card,
-      modalImg,
-      nonModalImg,
-    },
-    data() {
-      return {
-        headerImg: headerImg,
-        modalImg: modalImg,
-        nonModalImg: nonModalImg,
-      };
-    },
-  };
-</script>

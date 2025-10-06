@@ -13,7 +13,6 @@
   import bentoExpand from '../../img/bento-grid-expand.png';
 
   import { bentogrid as events } from '../../events.js';
-
 </script>
 
 <template>
@@ -27,61 +26,61 @@
       A flexible, modular layout component that supports a variety of content types, ensuring that the content is
       organised visually into clean, structured units that adjust dynamically based on screen size or content changes.
     </p>
+    <div class="visualtest">
+      <BentoGrid>
+        <details
+          name="bento"
+          class="bg-info gradient-primary gradient-direction-angle invert-colours"
+          style="--bg: url('/iamsold-screenshot.png')"
+        >
+          <summary>The power of auction</summary>
+          <ul class="tick-list tick-list--white">
+            <li>Faster timescales with 56-day completions*</li>
+            <li>A 95% success rate, meaning fewer fall throughs</li>
+            <li>7-day payment terms^</li>
+            <li>A service more than a third of sellers are calling out for</li>
+          </ul>
+          <a href="" class="btn btn-secondary">Explore auction</a>
+        </details>
 
-    <BentoGrid>
-      <details
-        name="bento"
-        class="bg-info gradient-primary gradient-direction-angle invert-colours"
-        style="--bg: url('/iamsold-screenshot.png')"
-      >
-        <summary>The power of auction</summary>
-        <ul class="tick-list tick-list--white">
-          <li>Faster timescales with 56-day completions*</li>
-          <li>A 95% success rate, meaning fewer fall throughs</li>
-          <li>7-day payment terms^</li>
-          <li>A service more than a third of sellers are calling out for</li>
-        </ul>
-        <a href="" class="btn btn-secondary">Explore auction</a>
-      </details>
+        <details name="bento" style="--bg: url('/crm-screenshot.png')">
+          <summary>Make your own rules</summary>
+          <ul class="tick-list tick-list--white">
+            <li>Faster timescales with 56-day completions*</li>
+            <li>A 95% success rate, meaning fewer fall throughs</li>
+            <li>7-day payment terms^</li>
+            <li>A service more than a third of sellers are calling out for</li>
+          </ul>
+          <a href="" class="btn btn-secondary">Explore auction</a>
+        </details>
 
-      <details name="bento" style="--bg: url('/crm-screenshot.png')">
-        <summary>Make your own rules</summary>
-        <ul class="tick-list tick-list--white">
-          <li>Faster timescales with 56-day completions*</li>
-          <li>A 95% success rate, meaning fewer fall throughs</li>
-          <li>7-day payment terms^</li>
-          <li>A service more than a third of sellers are calling out for</li>
-        </ul>
-        <a href="" class="btn btn-secondary">Explore auction</a>
-      </details>
+        <details name="bento" style="--bg: url('/movebutler-screenshot.png')">
+          <summary>Get your clients maving faster</summary>
+          <ul class="tick-list tick-list--white">
+            <li>Faster timescales with 56-day completions*</li>
+            <li>A 95% success rate, meaning fewer fall throughs</li>
+            <li>7-day payment terms^</li>
+            <li>A service more than a third of sellers are calling out for</li>
+          </ul>
+          <a href="" class="btn btn-secondary">Explore auction</a>
+        </details>
 
-      <details name="bento" style="--bg: url('/movebutler-screenshot.png')">
-        <summary>Get your clients maving faster</summary>
-        <ul class="tick-list tick-list--white">
-          <li>Faster timescales with 56-day completions*</li>
-          <li>A 95% success rate, meaning fewer fall throughs</li>
-          <li>7-day payment terms^</li>
-          <li>A service more than a third of sellers are calling out for</li>
-        </ul>
-        <a href="" class="btn btn-secondary">Explore auction</a>
-      </details>
-
-      <details
-        name="bento"
-        class="bg-success gradient-primary gradient-direction-angle invert-colours"
-        style="--bg: url('/market-appraisal-screenshot.png')"
-      >
-        <summary>Stand our from the crowd</summary>
-        <ul class="tick-list tick-list--white">
-          <li>Faster timescales with 56-day completions*</li>
-          <li>A 95% success rate, meaning fewer fall throughs</li>
-          <li>7-day payment terms^</li>
-          <li>A service more than a third of sellers are calling out for</li>
-        </ul>
-        <a href="" class="btn btn-secondary">Explore auction</a>
-      </details>
-    </BentoGrid>
-
+        <details
+          name="bento"
+          class="bg-success gradient-primary gradient-direction-angle invert-colours"
+          style="--bg: url('/market-appraisal-screenshot.png')"
+        >
+          <summary>Stand our from the crowd</summary>
+          <ul class="tick-list tick-list--white">
+            <li>Faster timescales with 56-day completions*</li>
+            <li>A 95% success rate, meaning fewer fall throughs</li>
+            <li>7-day payment terms^</li>
+            <li>A service more than a third of sellers are calling out for</li>
+          </ul>
+          <a href="" class="btn btn-secondary">Explore auction</a>
+        </details>
+      </BentoGrid>
+    </div>
     <h2>Behaviour</h2>
 
     <div class="col-end-6">

@@ -1,3 +1,32 @@
+<script setup>
+  import Timeline from '@/components/Timeline/Timeline.vue';
+  import Readme from '@/components/Timeline/README.md';
+
+  const htmlUsage = `<div class="container timeline__container visualtest">
+  <div class="timeline">
+    <div class="timeline__content">
+      <h2>01 Search</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    </div>
+    <img src="/img/shutterstock_1229155495.f3b0401e.webp" alt="">
+  </div>
+  <div class="timeline">
+    <div class="timeline__content">
+      <h2>02 viewing</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    </div>
+    <img src="/img/shutterstock_1229155495.f3b0401e.webp" alt="">
+  </div>
+  <div class="timeline">
+    <div class="timeline__content">
+      <h2>03 buyer information pack</h2>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+    </div>
+    <img src="/img/shutterstock_1229155495.f3b0401e.webp" alt="">
+  </div>
+</div>`;
+</script>
+
 <template>
   <main>
     <div class="container">
@@ -46,42 +75,3 @@
     </div>
   </main>
 </template>
-
-<script>
-  import Timeline from '@/components/Timeline/Timeline.vue';
-  import Readme from '@/components/Timeline/README.md';
-
-  export default {
-    components: {
-      Timeline,
-      Readme,
-    },
-    data() {
-      return {
-        htmlUsage: `<div class="container timeline__container visualtest">
-  <div class="timeline">
-    <div class="timeline__content">
-      <h2>01 Search</h2>
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-    </div>
-    <img src="/img/shutterstock_1229155495.f3b0401e.webp" alt="">
-  </div>
-  <div class="timeline">
-    <div class="timeline__content">
-      <h2>02 viewing</h2>
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-    </div>
-    <img src="/img/shutterstock_1229155495.f3b0401e.webp" alt="">
-  </div>
-  <div class="timeline">
-    <div class="timeline__content">
-      <h2>03 buyer information pack</h2>
-      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-    </div>
-    <img src="/img/shutterstock_1229155495.f3b0401e.webp" alt="">
-  </div>
-</div>`,
-      };
-    },
-  };
-</script>
