@@ -1,5 +1,23 @@
 @use 'sass:map';
 @use '../_func' as *;
+@use '../elements/forms.scss' as *;
+@use '../elements/buttons.scss' as *;
+
+
+@include display();
+
+hr {
+    --border-style: solid;
+    --border-color: var(--colour-border);
+    border: 0;
+    color: rgba(0, 0, 0, 0);
+    margin: 0;
+    border-bottom: none;
+    background-color: currentColor;
+    opacity: 1;
+    clear: both;
+}
+
 // #region file upload field
 
 .file-upload {
