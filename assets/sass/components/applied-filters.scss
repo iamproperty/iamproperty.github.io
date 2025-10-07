@@ -1,4 +1,5 @@
 @use '../_func.scss' as *;
+@use '../elements/badge-tag.scss' as *;
 
 .applied-filters {
   &:not(.applied-filters--compact):not(:empty):before {
