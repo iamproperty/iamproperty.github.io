@@ -36,7 +36,7 @@ $darkMode: 'true' !default;
   $mobileOnly: $mobileOnly
 );
 
-@use 'components/tabs.scss' with (
+@use 'components/tabs.config.scss' with (
   $layers: $layers,
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly

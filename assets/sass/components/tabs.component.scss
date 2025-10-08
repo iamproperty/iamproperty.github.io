@@ -1,4 +1,8 @@
 @use '../_func' as *;
+@use '../elements/links.scss';
+@use '../elements/buttons.scss';
+@use '../components/tabs.config.scss';
+
 
 :host {
   background: transparent;
