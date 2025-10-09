@@ -717,6 +717,14 @@ const routes = [
         },
         component: () => import('./views/components/WordCountDoc.vue'),
       },
+      {
+        path: 'password-indicator',
+        name: 'Password Indicator',
+        meta: {
+          title: 'Password Indicator | Components | iamkey',
+        },
+        component: () => import('./views/components/PasswordIndicatorDoc.vue'),
+      }
     ],
   },
   {

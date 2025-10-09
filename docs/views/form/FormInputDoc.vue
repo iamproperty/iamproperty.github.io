@@ -496,34 +496,8 @@
     <div class="container pb-0">
       <h3 class="h6">Password</h3>
       <p class="pb-3">
-        Password fields hide the field value for security. We can add an optional hide/show button after the field.
+        Password fields hide the field value for security. Please see <RouterLink to="/components/password-indicator">password indicator</RouterLink> for more information.
       </p>
-    </div>
-    <div class="container visualtest">
-      <label
-        >Password
-        <span>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            autocomplete="on"
-            minlength="8"
-            data-strength-checker="pwdchecker1"
-          />
-          <button
-            type="button"
-            class="suffix fa-solid fa-eye-slash"
-            data-alt-class="suffix fa-solid fa-eye"
-            data-change-type="text"
-            data-input="password"
-          >
-            <span class="visually-hidden">Show password</span>
-          </button>
-        </span>
-        <span id="pwdchecker1" class="pwd-checker"></span>
-      </label>
     </div>
 
     <div class="container pb-0">

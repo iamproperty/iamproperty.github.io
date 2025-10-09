@@ -590,6 +590,13 @@ $optionalText: 'true' !default;
       border-start-end-radius: 0 !important;
       border-end-end-radius: 0 !important;
     }
+
+    :is(
+        input
+      ):has(~ iam-password-indicator) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
   }
 
   // #endregion
