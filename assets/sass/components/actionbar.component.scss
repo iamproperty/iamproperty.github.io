@@ -264,7 +264,7 @@ slot[name='selectall'] {
   margin-right: auto !important;
 }
 
-.search-wrapper {
+.show .search-wrapper {
   width: calc(100% - #{rem(44 + 8)});
   max-width: rem(350) !important;
   margin: 0 !important;
@@ -391,5 +391,20 @@ slot[name='selectall'] {
   justify-content: center;
   min-height: 15rem;
 }
+
+::slotted(.tag){
+  margin-bottom: 0!important;
+}
+
+slot[name="filters"]{
+  
+  display: none;
+  
+  @include media-breakpoint-up(md, $mobileOnly) {
+    display: contents;
+  }
+}
+
+
 
 // #endregion

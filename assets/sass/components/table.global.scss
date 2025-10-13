@@ -1,12 +1,15 @@
 @use '../_func.scss' as *;
 
+
 $darkMode: 'true' !default;
 
 @use './table-basic.global.scss' with (
   $darkMode: $darkMode
 );
 
-$selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
+$selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
+
+@include display();
 
 // #region Tables are only stacked on mobile
 :is(#{$selector}):not(.table--fullwidth).table--cta {
@@ -16,6 +19,8 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     }
   }
 }
+
+
 // #endregion
 
 // #region As part of the iam-table component

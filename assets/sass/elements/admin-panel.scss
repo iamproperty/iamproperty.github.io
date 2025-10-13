@@ -91,7 +91,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    :is(iam-table, .iam-table) {
+    :is(iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax, .iam-table) {
       margin: 0 0 rem(32) 0;
       padding: 0;
       box-shadow: none;
@@ -198,7 +198,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    > iam-table {
+    > :is(iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax) {
       overflow: visible;
 
       &:first-child {

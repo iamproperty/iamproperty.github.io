@@ -286,6 +286,7 @@
 
       <div class="container">
         <Table class="table--cta table--minify" data-filterby="tableFilters">
+
           <table>
             <thead>
               <tr>

@@ -129,8 +129,16 @@ export const findForm = (component, table): HTMLElement => {
     form = document.querySelector(`#${component.getAttribute('data-filterby')}`);
   } else if (component.closest('form')) {
     form = component.closest('form');
-  } else {
+  } 
+  else if (component.querySelector('form')){
+    form = component.querySelector('form');
+  }else {
     table.parentNode.insertBefore(form, table.nextSibling);
+  }
+
+
+  if(component.hasAttribute('data-ajax')){
+    form.setAttribute('data-ajax',component.getAttribute('data-ajax'))
   }
 
   return form;
@@ -341,6 +349,7 @@ export const setupAdvancedTable = (component, table): void => {
       : document.querySelector(`iam-actionbar[data-for='${component.getAttribute('id')}']`);
 
     addSelectboxes(component, table, actionbar);
+
   }
 
   component.querySelectorAll('.dialog__wrapper .btn-compact').forEach((btn, index) => {
@@ -725,6 +734,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
         detail: event.details,
       });
       component.dispatchEvent(submitEvent);
+
 
       clearTimeout(timer);
       formSubmit(event);
@@ -1248,7 +1258,28 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
     actionbar.addEventListener('change', (event) => {
       loadAjaxTable(component, table, form, pagination);
     });
+
+    actionbar.addEventListener('search-submit', (event) => {
+      if (form.querySelector('input[data-search]')) {
+        form.querySelector('input[data-search]').value = event.detail.search;
+      } else {
+        form.insertAdjacentHTML(
+          'beforeend',
+          `<input type="hidden" name="search" data-search="${component.querySelector('iam-actionbar[data-search]').getAttribute('data-search')}" value="${event.detail.search}"/>`
+        );
+      }
+
+      const submitEvent = new CustomEvent('search-submit', {
+        detail: event.details,
+      });
+      component.dispatchEvent(submitEvent);
+
+      loadAjaxTable(component, table, form, pagination);
+      console.log('hello');
+    });
   }
+
+
 };
 // #region ajax tables functions
 
@@ -1454,6 +1485,10 @@ export const loadAjaxTable = async function (component, table, form, pagination)
         // Remove loading on the pagination
         pagination.removeAttribute('data-loading');
         form.classList.remove('processing');
+
+        if(table.querySelectorAll('tbody tr').length < parseInt(component.getAttribute('data-show'))){
+          pagination.classList.add('d-none');
+        }
       });
   } catch (error) {
     console.log(error);

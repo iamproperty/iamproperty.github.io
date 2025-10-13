@@ -52,9 +52,9 @@ class iamTableAjax extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-
+/*
     if (!window.customElements.get(`iam-menu`)) {
-      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
+      import( `${assetLocation}/js/components/menu/menu.component.js`)
         .then((module) => {
           window.customElements.define(`iam-menu`, module.default);
         })
@@ -62,15 +62,15 @@ class iamTableAjax extends HTMLElement {
           console.log(err.message);
         });
     }
-
+*/
     setupBasicTable(this, table, form, pagination);
 
     setupAdvancedTable(this, table, form, pagination);
 
     setupAjaxTable(this, table, form, pagination);
 
-    paginateTable(component, table, form, pagination, () => {
-      loadAjaxTable(component, table, form, pagination);
+    paginateTable(this, table, form, pagination, () => {
+      loadAjaxTable(this, table, form, pagination);
     });
   }
 }
