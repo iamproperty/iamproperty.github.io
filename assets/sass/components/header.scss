@@ -1,4 +1,9 @@
 @use '../_func' as *;
+@use '../elements/container.scss' as *;
+
+.container {
+    box-sizing: border-box;
+}
 
 :host {
   padding-top: 0 !important;
