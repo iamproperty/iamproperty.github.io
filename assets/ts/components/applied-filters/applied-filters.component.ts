@@ -24,9 +24,9 @@ class iamAppliedFilters extends HTMLElement {
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
+    
     ${loadCSS}
-    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+    
     </style>
     <div class="applied-filters ${classList}"></div>
     <slot></slot>
