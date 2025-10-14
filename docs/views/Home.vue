@@ -2,6 +2,7 @@
   import Header from '@/components/Header/Header.vue';
   import Card from '@/components/Card/Card.vue';
   import headerImg from '../img/homepage-banner.png';
+import { routerKey } from 'vue-router';
 
   const items = [
     {
@@ -32,15 +33,15 @@
       </p>
     </Header>
 
-    <a
+    <router-link
       v-for="(item, index) in items"
-      :href="item.link"
+      :to="item.link"
       :class="`col-span-12 md-col-span-4 md-col-start-${index == 0 ? '1' : 'auto'}`"
     >
       <Card>
         {{ item.title }}
         <span v-html="item.content"></span>
       </Card>
-    </a>
+    </router-link>
   </main>
 </template>
