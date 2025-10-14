@@ -6,9 +6,7 @@
 
   import Input from '@/components/Input/Input.vue';
   import FileUpload from '@/components/FileUpload/FileUpload.vue';
-  import Readme from '@/components/FileUpload/README.md';
-  import WebReadme from '~/ts/components/fileupload/README.md';
-
+  
   const message = 'input field value';
   const htmlUsage = `...`;
 </script>
