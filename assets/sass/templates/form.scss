@@ -18,6 +18,11 @@ $darkMode: 'true' !default;
     --input-max-width: #{rem(450)};
     --select-max-width: #{rem(500)};
 
+    .container {
+
+      max-width: #{rem(1280)} !important;
+    }
+
     @supports selector(:has(*)) {
       label:has(> :is(.suffix, .prefix)) {
         --input-max-width: #{rem(500)};

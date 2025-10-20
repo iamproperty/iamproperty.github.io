@@ -172,23 +172,7 @@ $darkMode: 'true' !default;
     outline: 2px auto -webkit-focus-ring-color;
   }
 
-  hr {
-    --border-style: solid;
-    --border-color: var(--colour-border);
-    border: 0;
-    color: transparent;
-    margin: 0;
-    border-bottom: none;
-    background-color: currentColor;
-    opacity: 1;
-    clear: both;
 
-    &:after {
-      display: table;
-      clear: both;
-      content: '';
-    }
-  }
 
   [hidden] {
     display: none !important;

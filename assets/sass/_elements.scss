@@ -25,6 +25,11 @@ $optionalText: 'true' !default;
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly
 );
+@use 'elements/hr.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
 // elements
 @use 'elements/lists.scss' with (
   $layers: $layers,

@@ -146,7 +146,7 @@ $darkMode: 'true' !default;
   *:not(.dialog__wrapper) > dialog[open]:is(.dialog--transactional, .dialog--acknowledgement) {
     text-align: center;
 
-    &:before {
+    &:not(.hide-icon):before {
       content: '\f05a';
       font-weight: 300;
       -moz-osx-font-smoothing: grayscale;
@@ -212,10 +212,6 @@ $darkMode: 'true' !default;
         padding-right: 0;
         margin-right: 0;
       }
-    }
-
-    form > :is(button, a) {
-      margin-bottom: 0;
     }
 
     @include media-breakpoint-up(sm, $mobileOnly) {

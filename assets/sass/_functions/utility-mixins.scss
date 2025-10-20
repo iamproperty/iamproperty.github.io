@@ -1316,6 +1316,11 @@ $new_utilities: map.merge(
       color: var(--colour-#{$color}) !important;
     }
 
+    .text-heading {
+      
+      color: var(--colour-heading) !important;
+    }
+
     .bg-#{$color} {
       --bg-opacity: 1;
       --bg-colour: var(--colour-#{$color}) !important;

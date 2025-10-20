@@ -3,7 +3,7 @@
   import Table from '@/components/Table/TableAjax.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Rankings from '@/components/Rankings/Rankings.vue';
-
+  import Search from '@/components/Search/Search.vue';
 </script>
 
 <template>
@@ -11,14 +11,61 @@
   <PCNav></PCNav>
   </nav>
   <main>
-    <h1>Welcome, Bob</h1>
-      <div  class="admin-panel md-col-end-5">
-        <h2 data-v-c2a3d511="" class="bg-light">Ranking component</h2>
-        <Rankings data-v-c2a3d511="" data-max="12" class="leaderboard-scroll hide-podium">
-          <table data-v-c2a3d511=""><thead data-v-c2a3d511=""><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Company</th><th data-v-c2a3d511="">Sales</th></tr></thead><tbody data-v-c2a3d511=""><tr data-v-c2a3d511=""><th data-v-c2a3d511=""><iam-rank class="rank--medal first-position" data-position="1st">1st</iam-rank>Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Meadowbrook Estates<progress max="12" value="9"></progress></th><td data-v-c2a3d511="">9</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">KeyHaven Residential<progress max="12" value="8"></progress></th><td data-v-c2a3d511="">8</td></tr><tr data-v-c2a3d511="" class="highlighted"><th data-v-c2a3d511="">Deacon &amp; partners<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr></tbody></table>
-        </Rankings>
-      </div>
+    <h1 class=" md-col-end-4">Welcome, Bob</h1>
+
+    
+    <Search class="md-col-start-7 ">
+      <label data-v-eb8d413a="">
+        Property address <span class="optional-text"></span><span data-v-eb8d413a="">
+          <input data-v-eb8d413a="" type="hidden" name="client" autocomplete="off" aria-autocomplete="none" list="properties">
+          <input data-v-eb8d413a="" type="text" name="clientAlt" autocomplete="off" aria-autocomplete="none" list="" data-list="">
+          <span data-v-eb8d413a="" class="suffix fa-regular fa-search" aria-hidden="true"></span></span>
+          <button class="empty btn btn-action"><i class="fa-light fa-times me-0" aria-hidden="true"></i></button>
+      </label>
+    </Search>
       
+
+
+    <div  class="admin-panel md-col-end-4 md-row-span-2">
+      <h2 data-v-c2a3d511="" class="bg-light">Ranking component</h2>
+      <Rankings data-v-c2a3d511="" data-max="12" class="leaderboard-scroll hide-podium">
+        <table data-v-c2a3d511=""><thead data-v-c2a3d511=""><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Company</th><th data-v-c2a3d511="">Sales</th></tr></thead><tbody data-v-c2a3d511=""><tr data-v-c2a3d511=""><th data-v-c2a3d511=""><iam-rank class="rank--medal first-position" data-position="1st">1st</iam-rank>Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Meadowbrook Estates<progress max="12" value="9"></progress></th><td data-v-c2a3d511="">9</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">KeyHaven Residential<progress max="12" value="8"></progress></th><td data-v-c2a3d511="">8</td></tr><tr data-v-c2a3d511="" class="highlighted"><th data-v-c2a3d511="">Deacon &amp; partners<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr><tr data-v-c2a3d511=""><th data-v-c2a3d511="">Pinnacle Homes<progress max="12" value="11"></progress></th><td data-v-c2a3d511="">11</td></tr></tbody></table>
+      </Rankings>
+    </div>
+    
+
+    <div  class="admin-panel md-col-start-5 md-col-end-6" >
+      <h2>Opportunity conv rate</h2>
+      
+    </div>
+    
+
+    <div  class="admin-panel md-col-start-8 " >
+      <h2>SLA Contact timeframe</h2>
+      
+    </div>
+    
+    <div  class="admin-panel md-col-start-5 md-col-end-6" >
+      <h2>Opportunities referred</h2>
+      
+    </div>
+    <div  class="admin-panel md-col-start-7 md-col-end-8" >
+      <h2>Opportunities open</h2>
+      
+    </div>
+    
+    <div  class="admin-panel md-col-start-9 md-col-end-10" >
+      <h2>Opportunities instructed</h2>
+      
+    </div>
+    <div  class="admin-panel md-col-start-11 md-col-end-12" >
+      <h2>Opportunities declined</h2>
+      
+    </div>
+    
+
+    
+
     <div class="admin-panel">
       <h2>Your Tasks</h2>
 
@@ -27,12 +74,12 @@
         <form slot="before">
             <Actionbar data-search="">
 
-              <label class="tag tag--toggle" slot="filters"><span class="optional-text"></span><input type="checkbox" name="new" value="true">New prospect</label>
+              <label class="tag tag--toggle" slot="filters"><span class="optional-text"></span><input type="radio" name="casetype" value="new">New prospect</label>
 
-              <label class="tag tag--toggle" slot="filters"><span class="optional-text"></span><input type="checkbox" name="chase" value="true">Chase prospect</label>
+              <label class="tag tag--toggle" slot="filters"><span class="optional-text"></span><input type="radio" name="casetype" value="chase">Chase prospect</label>
 
-              <label class="tag tag--toggle" slot="filters"><span class="optional-text"></span><input type="checkbox" name="collect" value="true">Collect payment</label>
-              <span slot="filters" class="text-nowrap ps-1">Assigned tasks: 80</span>
+              <label class="tag tag--toggle" slot="filters"><span class="optional-text"></span><input type="radio" name="casetype" value="collect">Collect payment</label>
+              <span slot="filters" class="text-nowrap ps-1 me-auto">Assigned tasks: 80</span>
 
               
             </Actionbar>

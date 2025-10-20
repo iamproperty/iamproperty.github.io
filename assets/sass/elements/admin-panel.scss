@@ -34,7 +34,7 @@ $darkMode: 'true' !default;
       display: none;
     }
 
-    > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .admin-panel__heading):first-child {
+    > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6, .admin-panel__heading):not(.lead):first-child {
       --gradient-direction: -90deg !important;
       background-color: var(--colour-success);
 
@@ -49,8 +49,8 @@ $darkMode: 'true' !default;
       border-top-right-radius: rem(8);
     }
 
-    > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):first-child,
-    .admin-panel__heading > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+    > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child,
+    .admin-panel__heading > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead) {
       font-size: rem(18);
       line-height: rem(24);
       font-weight: bold;
@@ -98,7 +98,7 @@ $darkMode: 'true' !default;
       background: none;
     }
 
-    > *:last-child {
+    > *:not([class*="mb-"]):last-child {
       margin-bottom: 0 !important;
     }
 
@@ -119,7 +119,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):first-child
+    > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child
       + :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid) {
       padding-top: var(--padding-top);
       margin-top: calc(var(--padding-top) * -1);
@@ -140,7 +140,7 @@ $darkMode: 'true' !default;
       padding-bottom: var(--padding-bottom);
       margin-bottom: calc(var(--padding-bottom) * -1) !important;
 
-      > *:last-child {
+      > *:not([class*="mb-"]):last-child {
         margin-bottom: 0 !important;
       }
 
@@ -177,7 +177,7 @@ $darkMode: 'true' !default;
 
   // #region Has actionbar
   .admin-panel:has(iam-actionbar) {
-    > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):first-child {
+    > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child {
       margin-bottom: 0;
     }
 
@@ -249,4 +249,32 @@ $darkMode: 'true' !default;
     }
   }
   // #endregion
+  .admin-panel__footer:last-child {
+    background-color: var(--wider-colour);
+    padding-top: var(--padding-top);
+    margin-inline: calc(var(--padding-x) * -1);
+    padding-inline: var(--padding-x);
+    padding-bottom: var(--padding-bottom);
+
+    &:has(strong:last-child){
+      display: flex;
+      align-items: end;
+
+      p {
+        padding-bottom: 0;
+        padding-inline-end: var(--padding-x);
+      }
+
+      strong {
+        white-space: nowrap;
+        margin-inline-start: auto;
+      }
+    }
+  }
+
+  .admin-panel__footer:not([class*="mb-"]):last-child {
+
+    margin-bottom: calc(var(--padding-bottom) * -1)!important;
+  }
+
 }
