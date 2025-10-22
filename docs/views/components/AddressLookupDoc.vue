@@ -2,14 +2,22 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/cards-header.png';
   import AddressLookup from '@/components/AddressLookup/AddressLookup.vue';
+  import Notification from '@/components/Notification/Notification.vue';
 </script>
 
 <template>
   <main>
     <DSHeader :image="headerImg" section="components">
-      <h1>Address lookup (Beta)</h1>
+      <h1>Address lookup UI (Beta)</h1>
     </DSHeader>
 
+    <div>
+      <Notification data-status="warning" >
+        <strong>Use the correct component:</strong> This is the UI component and does not come with any pre-defined values and options. It is preferred that a standardised component is used with agreed upon content and with the correct options already set.
+        <br/><a href="/standardised/addresslookup" class="">Standardised component </a>
+      </Notification>
+        
+    </div>
     <div class="container">
       <p class="lead">...</p>
     </div>

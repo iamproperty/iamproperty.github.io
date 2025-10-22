@@ -434,6 +434,29 @@ const routes = [
     ],
   },
   {
+    /* standardised */path: '/standardised',
+    name: 'Standardised',
+    meta: {
+      title: 'Components | iamkey',
+    },
+    component: () => import('./views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue'),
+      },
+      {
+        path: 'addresslookup',
+        name: 'iamproperty address lookup',
+        meta: {
+          title: 'Address Lookup | Components | iamkey',
+        },
+        component: () => import('./views/standardised/AddressLookupDoc.vue'),
+        searchterms: 'postcode',
+      },
+    ]
+  },
+  {
     /* Components */ path: '/components',
     name: 'Components',
     meta: {
@@ -465,7 +488,7 @@ const routes = [
       },
       {
         path: 'addresslookup',
-        name: 'Address Lookup (Beta)',
+        name: 'Address lookup UI (Beta)',
         meta: {
           title: 'Address Lookup | Components | iamkey',
         },
