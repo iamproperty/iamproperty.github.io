@@ -19,8 +19,8 @@ import AddressLookup from '@/components/AddressLookup/AddressLookup.vue';
   <h1 class="mx-auto">Add opportunity</h1>
   <ol class="list--steps" data-mobile-text="Client details">
     <li class="step--current">Transaction</li>
-    <li>Client</li>
-    <li>Agency</li>
+    <li><a href="/standalone/premium-conveyancing/add-opportunity/client" class="text-decoration-none">Client</a></li>
+    <li><a href="/standalone/premium-conveyancing/add-opportunity/agency" class="text-decoration-none">Agency</a></li>
   </ol>
 </div>
 
@@ -89,5 +89,3 @@ import AddressLookup from '@/components/AddressLookup/AddressLookup.vue';
     
   </main>
 </template>
-
-

@@ -512,8 +512,9 @@ export const setupNoSubmitTable = (component, table, form, pagination, savedTabl
       sortTable(table, form, savedTableBody);
     }
   });
-
+/*
   addFilterEventListeners(component, table, form, pagination, savedTableBody);
+  */
 };
 
 // #region No submit table functions
@@ -737,7 +738,9 @@ export const addFilterEventListeners = (component, table, form, pagination, save
 
 
       clearTimeout(timer);
-      formSubmit(event);
+
+      if(component.tagName != "IAM-TABLE-NO-SUBMIT")
+        formSubmit(event);
     });
   }
 

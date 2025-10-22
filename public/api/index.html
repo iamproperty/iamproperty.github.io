@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        event.preventDefault();
+
+        function json1(id,name){
+            this.id = id;
+            this.name = name;
+        }
+
+        id_list = Array();
+        id_list.push(new json1("1","TEST_1"));
+        id_list.push(new json1("2","TEST_2"));
+        id_list.push(new json1("3","TEST_3"));
+        id_list.push(new json1("4","TEST_4"));
+        id_list.push(new json1("5","TEST_5"));
+
+        id_list = JSON.stringify(id_list);
+        document.write(id_list);
+    });
+ </script>
+ </head>
+ </html>

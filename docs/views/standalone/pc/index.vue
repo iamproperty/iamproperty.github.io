@@ -1,9 +1,78 @@
-<script lang="ts" setup>
+<script lang="js" setup>
+  import { ref, onMounted, defineComponent } from 'vue'
   import PCNav from './components/PCNav.vue';
-  import Table from '@/components/Table/TableAjax.vue';
+  import Table from '@/components/Table/TableNoSubmit.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Rankings from '@/components/Rankings/Rankings.vue';
   import Search from '@/components/Search/Search.vue';
+
+  const cases = ref([]);
+
+  const page = ref(1);
+  const pages = ref(1);
+  const per_page = ref(5);
+  const total = ref();
+
+  const getCases = async (requestObject) => {
+    try {
+
+      const response = await fetch(`/data/premium-conveyancing.json`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(requestObject),
+      }).then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error('Something went wrong on API server!');
+        }
+      });
+
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const filterCases = async (event) => {
+
+
+    const tableComponent = document.querySelector('#table');
+    const form = document.querySelector('#filter');
+    const formData = new FormData(form);
+
+    if(event && event.detail.page)
+      formData.append("page", event.detail.page);
+    else if(tableComponent.hasAttribute('data-page'))
+      formData.append("show", tableComponent.getAttribute('data-page'));
+
+    if(tableComponent.hasAttribute('data-show'))
+      formData.append("show", tableComponent.getAttribute('data-show'));
+
+
+    cases.value = await getCases(Object.fromEntries(formData));
+
+    if(cases.value.meta){
+
+      console.log(cases.value.meta)
+      page.value = cases.value.meta['current_page'];
+      pages.value = cases.value.meta['last_page'];
+      per_page.value = cases.value.meta['per_page'];
+      total.value = cases.value.meta['total'];
+    }
+
+    const updateEvent = new CustomEvent('update-table');
+    tableComponent.dispatchEvent(updateEvent);
+  }
+
+  onMounted(async () => {
+
+    await filterCases();
+
+  });
+
 </script>
 
 <template>
@@ -70,8 +139,9 @@
       <h2>Your Tasks</h2>
 
 
-      <Table class="table--cta table--fullwidth" data-ajax="/data/premium-conveyancing.json">
-        <form slot="before">
+      <Table id="table" class="table--cta table--fullwidth" @search-submit="filterCases" @update-show="filterCases" @update-page="filterCases" :data-page="page" :data-pages="pages" :data-show="per_page" :data-total="total" >
+        <form slot="before" @change="filterCases" id="filter">
+
             <Actionbar data-search="">
 
               <label class="tag tag--toggle" slot="filters"><span class="optional-text"></span><input type="radio" name="casetype" value="new">New prospect</label>
@@ -98,12 +168,25 @@
               <th>Lead client</th>
               <th>Phone number</th>
               <th>Agent</th>
-              <th data-output="<a href='/standalone/premium-conveyancing/case'>View profile</a>"></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              
+            <tr v-for="row in cases['data']" :key="row.id">
+              <td>
+                <div class='dialog__wrapper'>
+                  <button class='btn btn-secondary btn-compact fa-ellipsis-vertical btn-sm m-0' popovertarget='menu3314748953277' aria-haspopup='true' aria-controls='menu3314748953277' style='anchor-name: --menu3314748953277;'>Lorum ipsum</button>
+                  <iam-menu class='dialog--fix dialog--list' id='menu3314748953277' popover='auto' role='menu' style='position-anchor: --menu3314748953277;'><button class='btn btn-action' data-single='' role='menuitem' tabindex='0' autofocus='true'>View task</button><button class='btn btn-action' data-single='' role='menuitem' tabindex='0'>Mark as completed</button><button class='btn btn-action' data-single='' role='menuitem' tabindex='0'>Delete task</button></iam-menu>
+                </div>
+              </td>
+              <td>{{ row.id }}</td>
+              <td>{{ row.created }}</td>
+              <td>{{ row.task }}</td>
+              <td><span class="badge wider-colour-4 mb-0">{{ row.assignee }}</span></td>
+              <td>{{ row.lead }}</td>
+              <td>{{ row.phone }}</td>
+              <td>{{ row.agent }}</td>
+              <td><a href='/standalone/premium-conveyancing/case'>View profile</a></td>
             </tr>
           </tbody>
         </table>
