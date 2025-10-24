@@ -44,4 +44,9 @@ $darkMode: 'true' !default;
       color: var(--colour-heading);
     }
   }
+
+  iam-multiselect[data-single] .tag[slot='checked'],
+  iam-multiselect[data-single] .tag[slot='checked'] * {
+    pointer-events: none!important;
+  }
 }

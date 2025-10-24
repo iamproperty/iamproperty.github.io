@@ -53,13 +53,16 @@ class iamInlineEdit extends HTMLElement {
     const statusNotSaved = this.shadowRoot.querySelector('#notsaved');
 
     // Save the original value for later
-    let originalValue = input.value;
+    let originalValue = input ? input.value : '';
 
     // cancel
     cancelButton.addEventListener('click', () => {
-      input.value = originalValue;
+      if(input){
+          
+        input.value = originalValue;
+        input.blur();
+      }
 
-      input.blur();
       inlineEdit.blur();
 
       inlineEdit.classList.remove('was-validated');
@@ -86,39 +89,83 @@ class iamInlineEdit extends HTMLElement {
         detail: { name: input.getAttribute('name'), value: input.value },
       });
       inlineEdit.dispatchEvent(saveEvent);
-
-      //inlineEdit.setAttribute('data-saving','true');
-      input.disabled = true;
-
-      input.blur();
       inlineEdit.blur();
-
       statusSaving.classList.remove('d-none');
 
-      if (preview) {
-        console.log(input.value);
+      if(input){
+        input.disabled = true;
 
-        preview.innerHTML = input.value;
+        input.blur();
+
+        if (preview) {
+          preview.innerHTML = input.value;
+        }
       }
     });
 
-    // Save
-    if (input.tagName === 'INPUT') {
-      input.addEventListener('keydown', (event) => {
-        switch (
-          event.key // change to event.key to key to use the above variable
-        ) {
-          case 'Enter':
-            event.stopPropagation();
-            event.preventDefault();
+    if(input){
+      // Save
+      if (input.tagName === 'INPUT') {
+        input.addEventListener('keydown', (event) => {
+          switch (
+            event.key // change to event.key to key to use the above variable
+          ) {
+            case 'Enter':
+              event.stopPropagation();
+              event.preventDefault();
 
-            saveButton.click();
+              saveButton.click();
 
-            break;
+              break;
+          }
+        });
+      }
+
+      // enter key saves
+      if (input.tagName === 'SELECT') {
+        input.addEventListener('change', () => {
+          originalValue = input.value;
+
+          const saveEvent = new CustomEvent('inline-edit-save', {
+            detail: { name: input.getAttribute('name'), value: input.value },
+          });
+          inlineEdit.dispatchEvent(saveEvent);
+
+          inlineEdit.setAttribute('data-saving', 'true');
+          input.disabled = true;
+
+          input.blur();
+        });
+      }
+
+      if (input.tagName != 'SELECT') {
+        input.addEventListener('focus', () => {
+          input.select();
+        });
+      }
+
+      //blur it should autosave
+      input.addEventListener('blur', () => {
+        if (input.value != originalValue) {
+          if (inlineEdit.hasAttribute('data-autosave')) {
+            originalValue = input.value;
+
+            const saveEvent = new CustomEvent('inline-edit-autosave', {
+              detail: { name: input.getAttribute('name'), value: input.value },
+            });
+            inlineEdit.dispatchEvent(saveEvent);
+
+            statusSaving.classList.remove('d-none');
+
+            if (preview) {
+              preview.innerHTML = input.value;
+            }
+          } else if (!inlineEdit.querySelector('.inline-feedback')) {
+            statusNotSaved.classList.remove('d-none');
+          }
         }
       });
     }
-
     // Saved
     inlineEdit.addEventListener('inline-edit-saved', () => {
       setTimeout(() => {
@@ -140,51 +187,6 @@ class iamInlineEdit extends HTMLElement {
         statusSaved.classList.add('d-none');
         statusNotSaved.classList.add('d-none');
       }, 1000);
-    });
-
-    // enter key saves
-    if (input.tagName === 'SELECT') {
-      input.addEventListener('change', () => {
-        originalValue = input.value;
-
-        const saveEvent = new CustomEvent('inline-edit-save', {
-          detail: { name: input.getAttribute('name'), value: input.value },
-        });
-        inlineEdit.dispatchEvent(saveEvent);
-
-        inlineEdit.setAttribute('data-saving', 'true');
-        input.disabled = true;
-
-        input.blur();
-      });
-    }
-
-    if (input.tagName != 'SELECT') {
-      input.addEventListener('focus', () => {
-        input.select();
-      });
-    }
-
-    //blur it should autosave
-    input.addEventListener('blur', () => {
-      if (input.value != originalValue) {
-        if (inlineEdit.hasAttribute('data-autosave')) {
-          originalValue = input.value;
-
-          const saveEvent = new CustomEvent('inline-edit-autosave', {
-            detail: { name: input.getAttribute('name'), value: input.value },
-          });
-          inlineEdit.dispatchEvent(saveEvent);
-
-          statusSaving.classList.remove('d-none');
-
-          if (preview) {
-            preview.innerHTML = input.value;
-          }
-        } else if (!inlineEdit.querySelector('.inline-feedback')) {
-          statusNotSaved.classList.remove('d-none');
-        }
-      }
     });
 
     // checkboxes
