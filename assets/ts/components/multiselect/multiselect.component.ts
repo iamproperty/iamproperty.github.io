@@ -54,7 +54,6 @@ class iamMultiselect extends HTMLElement {
     const button = multiselect.shadowRoot.querySelector('#clear');
     let order = 0;
     const innerLabel = multiselect.shadowRoot.querySelector('label .inner-label');
-    //const searched = [];
     const ajaxURL = this.getAttribute('data-url');
     innerLabel.innerHTML = multiselect.getAttribute('data-label');
 
