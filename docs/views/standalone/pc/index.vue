@@ -65,7 +65,7 @@
   const getCases = async (requestObject) => {
     try {
 
-      const response = await fetch(`/property.json`, {
+      const response = await fetch(`/data/premium-conveyancing.json`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
