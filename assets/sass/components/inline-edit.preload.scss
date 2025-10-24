@@ -29,7 +29,7 @@ $darkMode: 'true' !default;
     input,
     textarea,
     select {
-      border: none;
+      border-color: transparent;
       background: none;
       margin-left: -1rem;
       width: calc(100% + 1rem);
@@ -55,16 +55,50 @@ $darkMode: 'true' !default;
 
   // Multi select
 
-  iam-inline-edit:has(iam-multiselect label[slot='checked']) {
+  iam-inline-edit:has(iam-multiselect) {
     --display-btns: none;
+    --display-status: none;
+  }
+
+  td:has(iam-inline-edit) {
+    position: relative;
+    height: 3.5rem;
+
+    &[data-value]:before{
+      content: attr(data-value);
+      display: block;
+      padding-inline: 1rem;
+      opacity: 0;
+    }
+  }
+  td iam-inline-edit:has(iam-multiselect) {
+    --search-display: none;
+    --input-ms: 0;
+
+    position: absolute;
+    inset: 0.1rem 2rem 0.75rem 0;
+
+    &:focus-within {
+      
+      position: absolute;
+    }
   }
 
   iam-inline-edit:not(:focus-within) iam-multiselect:has(label[slot='checked']) {
     --display-button: none;
   }
 
+  td:hover iam-inline-edit iam-multiselect,
+  td iam-inline-edit iam-multiselect.hover,
+  td iam-inline-edit:focus-within iam-multiselect {
+    --search-display: inline-block;
+  }
+
   iam-inline-edit iam-multiselect .tag[slot='checked'] {
     outline: none;
+  }
+  iam-inline-edit iam-multiselect.hover .tag[slot='checked'] {
+    display: none;
   }
 
   // Error message

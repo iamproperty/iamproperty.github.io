@@ -2,6 +2,17 @@
 
 @include visually-hidden();
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host {
+
+  margin-bottom: rem(24);
+}
+
 .outer {
   position: relative;
   max-width: var(--input-max-width, 50rem);
@@ -13,8 +24,11 @@ label {
   padding-bottom: 0.5rem;
 }
 
+.inner-label:empty {
+  display: none;
+}
+
 .wrapper {
-  margin-bottom: rem(24);
   max-width: var(--input-max-width, 50rem);
 
   &:after {
@@ -47,6 +61,13 @@ label {
   }
 }
 
+.wrapper {
+
+  input {
+
+    margin-top: unset;
+  }
+}
 .wrapper.filled {
   display: flex;
   flex-direction: row;
@@ -71,7 +92,7 @@ label {
     all: unset;
     font-size: rem(16);
     line-height: rem(26);
-    display: inline-block;
+    display: var(--search-display,inline-block);
     width: 0;
     flex-grow: 1;
     padding: 0 rem(8) 0 0 !important;
@@ -168,9 +189,9 @@ button {
 
   .wrapper:not(.filled):not(:focus-within):not([data-mousedown]) {
     input {
-      border: none;
+      border-color: transparent;
       background: none;
-      margin-left: -1rem;
+      margin-left: var(--input-ms,-1rem);
       width: calc(100% + 1rem);
       max-width: calc(100% + 1rem);
       box-shadow: none;
@@ -185,4 +206,31 @@ button {
     border: none;
     padding-left: 0;
   }
+}
+
+:host([data-single]){
+
+  .wrapper.filled{
+    
+    slot[name='checked'] {
+      pointer-events: none;
+    }
+  }
+
+  #clear {
+    display: none;
+  }
+  ::slotted([slot='checked'])::after {
+    display: none;
+  }
+}
+:host-context(td){
+
+    input,
+    textarea,
+    select {
+      margin-left: 0!important;
+      width: 100%!important;
+      max-width: 100%!important;
+    }
 }
