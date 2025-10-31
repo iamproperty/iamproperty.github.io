@@ -1,10 +1,15 @@
 <script lang="ts" setup>
+  import { ref, onMounted, defineComponent } from 'vue'
   import PCNav from './components/PCNav.vue';
-  import Table from '@/components/Table/TableAjax.vue';
+  import Table from '@/components/Table/Table.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Notification from '@/components/Notification/Notification.vue';
 
   
+  import InlineEdit from '@/components/InlineEdit/InlineEdit.vue';
+  import Multiselect from '@/components/Multiselect/Multiselect.vue';
+
+
 
 import clientForm from './components/client-form.vue';
 
@@ -15,6 +20,54 @@ const route = useRoute()
 const onward = route.query['onward'] && route.query['onward'] == 'yes' ? true : false;
 
 const alert = route.query['alert'];
+
+
+
+  const tags = ref([]);
+
+  if(localStorage.getItem('tags') != null)
+    tags.value = JSON.parse(localStorage.getItem('tags'));
+
+
+const addColour = () => {
+
+    let i = 2;
+    tags.value.forEach((item, index) => {
+      if(document.querySelector(`[data-content="${item}"]`)){
+        Array.from(document.querySelectorAll(`[data-content="${item}"]`)).forEach((tag)=>{
+
+          tag.classList.add(`wider-colour-${i}`);
+          
+        });
+        
+          if(i > 20)
+            i = 0;
+
+          i++;
+      }
+    });
+  }
+
+
+  onMounted(() => {
+
+    //await filterCases();
+
+    // Make it easier to query the tags later by adding a data attribute
+    Array.from(document.querySelectorAll('iam-inline-edit .tag, iam-inline-edit .badge')).forEach((tag) => {
+
+      tag.setAttribute('data-content', tag.textContent);
+
+      if(!tags.value.includes(tag.textContent)){
+        tags.value.push(tag.textContent);
+        localStorage.setItem('tags',JSON.stringify(tags.value));
+      }
+    });
+
+    addColour();
+  });
+
+
 
 </script>
 
@@ -52,9 +105,20 @@ const alert = route.query['alert'];
     <h1 v-if="alert == 'add-onward'" class="h2" >Onward purchase: 22 Lynx Road, Tynemouth, Newcastle Upon Tyne NE1 5LS</h1>
     <h1 v-else>Sale: 22 Lynx Road, Tynemouth, Newcastle Upon Tyne NE1 5LS</h1>
 
-    <span><span class="badge wider-colour-3 me-3 mb-5">Status: Opportunity</span> ID: <strong class="me-3">56930</strong> <a v-if="alert == 'add-onward'" href="/standalone/premium-conveyancing/case" target="_blank"><i class="fa-regular fa-file"></i>View related sale</a></span>
+    <div class="md-col-end-6">
+      <span class="badge wider-colour-3 me-3 mb-3">Status: Opportunity</span> ID: <strong class="me-3">56930</strong> <a v-if="alert == 'add-onward'" href="/standalone/premium-conveyancing/case" target="_blank"><i class="fa-regular fa-file"></i>View related sale</a>
+    </div>
 
+    <div class="md-col-start-8 text-md-end">
+      
+      <strong>Case assignee: </strong><span class="d-inline-block text-start" data-value="James Lambert"><InlineEdit @inline-edit-save="addColour" >
+                <Multiselect data-label="" data-name="users2" data-url="/users.json?search=" class="mb-0" data-single>
+                  <label class="tag"><input type="checkbox" name="user" value="1234" checked/>James Lambert</label>
+                </Multiselect>
+                </InlineEdit></span>
+    </div>
 
+    
 
     <div class="md-col-end-7">
       <div class="admin-panel mw-fit-content pt-2 px-2 pb-0">
@@ -70,68 +134,71 @@ const alert = route.query['alert'];
     <div class="md-col-start-8 text-md-end">
       
       <a href="/standalone/premium-conveyancing/quote" class="btn btn-secondary mt-1">Decline case</a>
-      <a href="/standalone/premium-conveyancing/quote" class="btn btn-primary fa-plus mt-1">Quote case</a>
+      <a href="/standalone/premium-conveyancing/quote" class="btn btn-primary mt-1">Quote case</a>
     </div>
 
 
 
       <div  class="admin-panel ">
 
-
-        <div class="d-flex">
-          <h2 class="lead text-heading d-block pb-3">Client details</h2>
-
-          <button class="btn btn-secondary btn-compact fa-edit ms-auto mb-0" data-modal="edit-details">Edit</button>
-        </div>
-        <span class="d-block pb-1"><strong>Lead client:</strong> John Smith</span>
-
-        <span class="d-block mb-2">
-          <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Phone:</strong> Vendor</span> 
-          <span class="pe-3 pb-1 d-inline-block"><strong>Email:</strong> Vendor</span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
-        </span>
+        <h2 class="lead text-heading d-block pb-1">Client details</h2>
 
 
-        <hr class="border-1 mb-3"/>
-
-        <div class="d-flex">
-          <h2 class="lead text-heading d-block pb-3">Transaction details</h2>
-
+        <div class="d-flex hover-light p-2 mb-1 rounded mx-minus-2">
+          <div class="d-block">
+            <span class="d-block pb-1"><strong>Lead client:</strong> John Smith</span>
+            <span class="d-block ">
+              <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
+              <span class="pe-3 pb-1 d-inline-block"><strong>Phone:</strong> Vendor</span> 
+              <span class="pe-3 pb-1 d-inline-block"><strong>Email:</strong> Vendor</span>
+              <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
+              <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
+            </span>
+          </div>
           <button class="btn btn-secondary btn-compact fa-edit ms-auto mb-0" data-modal="edit-details">Edit</button>
         </div>
 
+        <hr class="border-1 mb-1"/>
 
-        <span class="d-block mb-2">
-          <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Phone:</strong> Vendor</span> 
-          <span class="pe-3 pb-1 d-inline-block"><strong>Email:</strong> Vendor</span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
-        </span>
+        <div class="d-flex hover-light p-2 mb-1 rounded mx-minus-2">
+          <div class="d-block">
+            <h2 class="lead text-heading d-block pb-3">Transaction details</h2>
+
+            <span class="d-block">
+              <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
+              <span class="pe-3 pb-1 d-inline-block"><strong>Phone:</strong> Vendor</span> 
+              <span class="pe-3 pb-1 d-inline-block"><strong>Email:</strong> Vendor</span>
+              <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
+              <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
+            </span>
+          </div>
+          
+            <button class="btn btn-secondary btn-compact fa-edit ms-auto mb-0" data-modal="edit-details">Edit</button>
+        </div>
+
+
+        <hr class="border-1 mb-1"/>
+
         
-
-        <hr class="border-1 mb-3"/>
-
-        <div class="d-flex">
+        <div class="d-flex hover-light p-2 rounded mx-minus-2">
+          <div class="d-block">
           <h2 class="lead text-heading d-block pb-3">Agency details</h2>
 
-          <button class="btn btn-secondary btn-compact fa-edit ms-auto mb-0" data-modal="edit-details">Edit</button>
-        </div>
 
-
-        <span class="d-block mb-2">
+        <span class="d-block">
           <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
           <span class="pe-3 pb-1 d-inline-block"><strong>Phone:</strong> Vendor</span> 
           <span class="pe-3 pb-1 d-inline-block"><strong>Email:</strong> Vendor</span>
           <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
           <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
         </span>
-        
+        </div>
+          <button class="btn btn-secondary btn-compact fa-edit ms-auto mb-0" data-modal="edit-details">Edit</button>
+        </div>
+
       </div>
       
-    <div class="admin-panel md-col-end-6">
+    <div class="admin-panel md-col-end-6 d-md-flex flex-column">
       <h2 class="bg-light">Local authority: North Tyneside Council</h2>
 
 
@@ -144,7 +211,7 @@ const alert = route.query['alert'];
         <br> Alert message will display here<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>
       </Notification>
 
-      <div class="admin-panel__footer wider-colour-3">
+      <div class="admin-panel__footer wider-colour-3 mt-auto">
         <p>Minimum forecasted time saving on this transaction with Premium Conveyancing</p>
         <strong>25 days saved</strong>
       </div>
@@ -154,18 +221,40 @@ const alert = route.query['alert'];
     <div class="admin-panel md-col-start-7">
       <h2 class="bg-light">Tasks</h2>
 
-      <label>
-        <input type="checkbox" name="task" /> 
-        <strong>New prospect</strong>
-      
-        <span class="d-block mb-2">
-          <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Phone:</strong> Vendor</span> 
-          <span class="pe-3 pb-1 d-inline-block"><strong>Email:</strong> Vendor</span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Assignee:</strong> <span class="badge wider-colour-8 mb-0">Bon Smith</span></span>
-          <span class="pe-3 pb-1 d-inline-block"><strong>Client type:</strong> Vendor</span>
-        </span>
-      </label>
+      <div class="d-flex align-items-start">
+        <!--<span class="lead d-block p-0 me-1"><i class="fa-regular fa-dash p-1"></i></span>-->
+        <span class="lead d-block p-0 me-1"><i class="fa-regular fa-check rounded-circle bg-success p-1"></i></span>
+        <div>
+          <strong class="lead d-block pb-1">Chase prospect</strong>
+        
+          <span class="d-block mb-2">
+            <span class="pe-3 pb-1 d-inline-block"><strong>Task created:</strong> 21.09.25</span>
+            <span class="pe-3 pb-1 d-inline-block"><strong>Time:</strong> 11:00</span> 
+            <span class="pe-3 pb-1 d-inline-block"><strong>Assignee:</strong> <span class="d-inline-block text-start" data-value="Amanda Knight"><InlineEdit @inline-edit-save="addColour" >
+                <Multiselect data-label="" data-name="users2" data-url="/users.json?search=" class="mb-0" data-single>
+                  <label class="tag"><input type="checkbox" name="user" value="1234" checked/>Amanda Knight</label>
+                </Multiselect>
+                </InlineEdit></span></span>
+          </span>
+        </div>
+      </div>
+      <div class="d-flex align-items-start">
+        <span class="lead d-block p-0 me-1"><i class="fa-regular fa-dash p-1"></i></span>
+        <div>
+          <strong class="lead d-block pb-1">New prospect</strong>
+        
+          <span class="d-block mb-2">
+            <span class="pe-3 pb-1 d-inline-block"><strong>Task created:</strong> 21.09.25</span>
+            <span class="pe-3 pb-1 d-inline-block"><strong>Time:</strong> 11:00</span> 
+            <span class="pe-3 pb-1 d-inline-block"><strong>Assignee:</strong> <span class="d-inline-block text-start" data-value="James Lambert"><InlineEdit @inline-edit-save="addColour" >
+                <Multiselect data-label="" data-name="users2" data-url="/users.json?search=" class="mb-0" data-single>
+                  <label class="tag"><input type="checkbox" name="user" value="1234" checked/>James Lambert</label>
+                </Multiselect>
+                </InlineEdit></span></span>
+          </span>
+        </div>
+      </div>
+        
 
     </div>
     <div id="notes" class="admin-panel md-col-end-7">
@@ -217,20 +306,10 @@ const alert = route.query['alert'];
  
     </div> 
 
-    <div class="admin-panel">
+     <div class="admin-panel">
       <h2 class="bg-light">Activity log</h2>
 
       <Table>
-        <form>
-          <Actionbar>
-            <div class="dialog__wrapper" >
-              <button class="btn btn-action mb-0 me-0" >Sort by</button>
-              <dialog class="dialog--list" ><div class="mb-0" ><input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" ><label for="follow-up-oldest" class="radio--tick" >Follow up date (Oldest to newest)</label><hr ><input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest" ><label for="follow-up-newest" class="radio--tick" >Follow up date (Newest to oldest)</label><hr ><input type="radio" name="sort" data-sort="" id="date-instructed-oldest" value="date-instructed-oldest" checked="" autofocus="true" ><label for="date-instructed-oldest" class="radio--tick" >Date Instructed (Oldest to newest)</label><hr ><input type="radio" name="sort" data-sort="" id="date-instructed-newest" value="date-instructed-newest" >
-              <label for="date-instructed-newest" class="radio--tick mb-0" >Date Instructed (Newest to oldest)</label></div>
-            </dialog>
-            </div>
-          </Actionbar>
-        </form>
         <table>
           <thead>
             <tr>
@@ -242,6 +321,16 @@ const alert = route.query['alert'];
               <th>Notes</th>
             </tr>
           </thead>
+          <tbody>
+            <tr>
+              <td>Opportunity</td>
+              <td>Added </td>
+              <td>Branch assignee name</td>
+              <td>21.09.25</td>
+              <td>09:58</td>
+              <td><p class="pb-0">Lorum can refer to a Latin word for a strap, thong, or leash, a type of insect or spider anatomy, a male genital piercing, or a Hungarian card game. It is also the basis for the placeholder text "Lorem ipsum". The term's specific meaning depends entirely on the context in which it is used.</p></td>
+            </tr>
+          </tbody>
         </table>
       </Table>
 

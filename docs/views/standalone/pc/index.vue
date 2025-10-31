@@ -1,4 +1,4 @@
-<script lang="js" setup>
+<script lang="ts" setup>
   import { ref, onMounted, defineComponent } from 'vue'
   import PCNav from './components/PCNav.vue';
   import Table from '@/components/Table/TableNoSubmit.vue';
@@ -105,7 +105,6 @@
 
     if(cases.value.meta){
 
-      console.log(cases.value.meta)
       page.value = cases.value.meta['current_page'];
       pages.value = cases.value.meta['last_page'];
       per_page.value = cases.value.meta['per_page'];

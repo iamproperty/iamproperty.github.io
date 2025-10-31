@@ -60,7 +60,7 @@ $darkMode: 'true' !default;
     --display-status: none;
   }
 
-  td:has(iam-inline-edit) {
+  *:has(> iam-inline-edit) {
     position: relative;
     height: 3.5rem;
 
@@ -69,9 +69,11 @@ $darkMode: 'true' !default;
       display: block;
       padding-inline: 1rem;
       opacity: 0;
+      white-space: nowrap;
     }
   }
-  td iam-inline-edit:has(iam-multiselect) {
+  
+  iam-inline-edit:has(iam-multiselect) {
     --search-display: none;
     --input-ms: 0;
 
@@ -88,9 +90,9 @@ $darkMode: 'true' !default;
     --display-button: none;
   }
 
-  td:hover iam-inline-edit iam-multiselect,
-  td iam-inline-edit iam-multiselect.hover,
-  td iam-inline-edit:focus-within iam-multiselect {
+  *:hover > iam-inline-edit iam-multiselect,
+  iam-inline-edit iam-multiselect.hover,
+  iam-inline-edit:focus-within iam-multiselect {
     --search-display: inline-block;
   }
 
@@ -99,6 +101,10 @@ $darkMode: 'true' !default;
   }
   iam-inline-edit iam-multiselect.hover .tag[slot='checked'] {
     display: none;
+  }
+
+  span iam-inline-edit:has(iam-multiselect) {
+    margin-top: -0.75rem;
   }
 
   // Error message

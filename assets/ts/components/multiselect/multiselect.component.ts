@@ -100,8 +100,8 @@ class iamMultiselect extends HTMLElement {
         inputToSet.closest('label').setAttribute('style', `--order:${order};`);
         inputToSet.closest('label').setAttribute('data-order', order);
 
-        if(inputToSet.closest('td')){
-          inputToSet.closest('td').setAttribute('data-value',  inputToSet.closest('label').textContent)
+        if(inputToSet.closest('[data-value]')){
+          inputToSet.closest('[data-value]').setAttribute('data-value',  inputToSet.closest('label').textContent)
         }
       }
 
