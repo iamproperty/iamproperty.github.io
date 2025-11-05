@@ -11,6 +11,11 @@ $darkMode: 'true' !default;
     margin-inline: rem(3);
   }
 
+  iam-multiselect .tag[slot='checked']:first-child:last-child {
+
+    margin-inline: 0;
+  }
+
   iam-multiselect .tag:not([slot='checked']) {
     display: block;
     width: 100%;

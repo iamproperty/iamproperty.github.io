@@ -28,4 +28,9 @@ $darkMode: 'true' !default;
   [class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
     font-weight: 400;
   }
+
+  .rounded-circle[class*='fa-'][class*='bg-'] {
+    aspect-ratio: 1 / 1;
+    width: calc(1lh + 1rem);
+  }
 }
