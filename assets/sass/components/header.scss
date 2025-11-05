@@ -1,6 +1,10 @@
 @use '../_func' as *;
 @use '../elements/container.scss' as *;
 
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 .container {
     box-sizing: border-box;
 }

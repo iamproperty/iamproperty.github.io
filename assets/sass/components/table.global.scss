@@ -120,7 +120,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 
-  &:has([type='checkbox']:checked) tr:has([type='checkbox']) {
+  &:has([type='checkbox']:checked) tr:has([type='checkbox']):not(:has(.tag)) {
     [type='checkbox'] {
       width: 100vw;
       height: 100%;
@@ -140,10 +140,10 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 
-  tr:has([type='checkbox']:hover, [type='checkbox']:focus) {
+  tr:has([type='checkbox']:hover, [type='checkbox']:focus):not(:has(.tag)) {
     --row-bg: #eeeeee;
   }
-  tr:has([type='checkbox']:hover:checked, [type='checkbox']:focus:checked, [type='checkbox']:checked) {
+  tr:has([type='checkbox']:hover:checked, [type='checkbox']:focus:checked, [type='checkbox']:checked):not(:has(.tag)) {
     --row-bg: #e0e0e0;
   }
 }

@@ -746,6 +746,20 @@ $table-padding-px: 32;
 $table-padding: #{rem($table-padding-px)};
 // #endregion
 
+// #region rounded borders
+$vars: map.merge(
+  (
+    --border-radius-sm: 0.25rem,
+    --border-radius: 0.5rem,
+    --border-radius-lg: 1rem,
+    --border-radius-xl: 1.5rem,
+    --border-radius-2xl: 3rem,
+
+  ),
+  $vars
+);
+// #endregion
+
 $vars-responsive: (
   'sm': (
     'gutter': 2.5rem,

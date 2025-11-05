@@ -117,7 +117,7 @@ $darkMode: 'true' !default;
   }
 
   strong {
-    font-weight: bolder;
+    font-weight: 500;
     font-family: var(--font-heading);
     color: var(--colour-heading);
   }
@@ -128,9 +128,6 @@ $darkMode: 'true' !default;
     margin-bottom: 1rem;
     font-style: normal;
     line-height: inherit;
-  }
-
-  blockquote {
   }
 
   blockquote {

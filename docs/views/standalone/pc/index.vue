@@ -1,4 +1,4 @@
-<script lang="js" setup>
+<script lang="ts" setup>
   import { ref, onMounted, defineComponent } from 'vue'
   import PCNav from './components/PCNav.vue';
   import Table from '@/components/Table/TableNoSubmit.vue';
@@ -6,12 +6,61 @@
   import Rankings from '@/components/Rankings/Rankings.vue';
   import Search from '@/components/Search/Search.vue';
 
+  import InlineEdit from '@/components/InlineEdit/InlineEdit.vue';
+  import Multiselect from '@/components/Multiselect/Multiselect.vue';
+
+
   const cases = ref([]);
 
   const page = ref(1);
   const pages = ref(1);
   const per_page = ref(5);
   const total = ref();
+
+  const tags = ref([]);
+
+  if(localStorage.getItem('tags') != null)
+    tags.value = JSON.parse(localStorage.getItem('tags'));
+
+
+  const addTag = (event) => {
+    Array.from(document.querySelectorAll('td .tag, td .badge')).forEach((tag) => {
+
+      console.log(tag);
+      tag.setAttribute('data-content', tag.textContent);
+
+
+      if(!tags.value.includes(tag.textContent)){
+        tags.value.push(tag.textContent);
+        localStorage.setItem('tags',JSON.stringify(tags.value));
+      }
+
+      if(tag.textContent == "Amanda Knight"){
+        tag.classList.add('wider-colour-1');
+      }
+    });
+
+    addColour();
+  }
+
+  const addColour = (event) => {
+
+    let i = 2;
+    tags.value.forEach((item, index) => {
+      if(document.querySelector(`[data-content="${item}"]`)){
+        Array.from(document.querySelectorAll(`[data-content="${item}"]`)).forEach((tag)=>{
+
+          tag.classList.add(`wider-colour-${i}`);
+          
+        });
+        
+          if(i > 20)
+            i = 0;
+
+          i++;
+      }
+    });
+  }
 
   const getCases = async (requestObject) => {
     try {
@@ -56,7 +105,6 @@
 
     if(cases.value.meta){
 
-      console.log(cases.value.meta)
       page.value = cases.value.meta['current_page'];
       pages.value = cases.value.meta['last_page'];
       per_page.value = cases.value.meta['per_page'];
@@ -71,6 +119,18 @@
 
     await filterCases();
 
+    // Make it easier to query the tags later by adding a data attribute
+    Array.from(document.querySelectorAll('td .tag, td .badge')).forEach((tag) => {
+
+      tag.setAttribute('data-content', tag.textContent);
+
+      if(!tags.value.includes(tag.textContent)){
+        tags.value.push(tag.textContent);
+        localStorage.setItem('tags',JSON.stringify(tags.value));
+      }
+    });
+
+    addColour();
   });
 
 </script>
@@ -182,7 +242,13 @@
               <td>{{ row.id }}</td>
               <td>{{ row.created }}</td>
               <td>{{ row.task }}</td>
-              <td><span class="badge wider-colour-4 mb-0">{{ row.assignee }}</span></td>
+              <td data-value="James Lambert">
+                <InlineEdit @inline-edit-save="addColour">
+                <Multiselect data-label="" data-name="users2" data-url="/users.json?search=" class="mb-0" data-single>
+                  <label class="tag"><input type="checkbox" name="user" value="1234" checked/>James Lambert</label>
+                </Multiselect>
+                </InlineEdit>
+              </td>
               <td>{{ row.lead }}</td>
               <td>{{ row.phone }}</td>
               <td>{{ row.agent }}</td>
