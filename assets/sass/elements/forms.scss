@@ -1320,7 +1320,7 @@ $optionalText: 'true' !default;
 }
 
 // #region datalist
-:is(iam-advanced-select, iam-search) {
+:is(iam-advanced-select, iam-search, .postcode-lookup) {
   position: relative;
   display: block;
 
@@ -1363,7 +1363,7 @@ $optionalText: 'true' !default;
 }
 
 .was-validated
-  :is(iam-advanced-select, iam-search)
+  :is(iam-advanced-select, iam-search, postcode-lookup)
   label:has(:is(input:not([type='radio']):not([type='checkbox']), select)) {
   margin-bottom: 2.5rem;
 
@@ -1376,7 +1376,7 @@ $optionalText: 'true' !default;
   }
 }
 
-:is(iam-advanced-select, iam-search) datalist {
+:is(iam-advanced-select, iam-search, .postcode-lookup) datalist {
   &:empty {
     display: none !important;
   }
@@ -1425,7 +1425,27 @@ $optionalText: 'true' !default;
   }
 }
 
-iam-advanced-select datalist {
+
+:is(iam-advanced-select, iam-search, .postcode-lookup) .datalist__wrapper {
+
+  width: var(--menu-item-width, 100%) !important;
+
+  
+  top: 100%;
+  position: absolute;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+    width: var(--menu-item-width, 100%) !important;
+    max-width: var(--menu-item-width, 100%) !important;
+
+  > datalist {
+    border: none!important;
+    box-shadow: none!important;
+    position: relative;
+  }
+}
+
+:is(iam-advanced-select, iam-search, .postcode-lookup) datalist {
   option {
     &.active {
       border-left: 4px solid var(--colour-info) !important;
@@ -1433,6 +1453,35 @@ iam-advanced-select datalist {
       background: hsl(from var(--colour-info) h s l / 10%) !important;
     }
   }
+
+@for $i from 1 through 10 {
+
+  option {
+    
+    &[data-group="#{$i}"]:not(:has(+ [data-groupby="#{$i}"] + [data-groupby="#{$i}"])) {
+      display: none;
+
+    }
+    &[data-group="#{$i}"]:has(+ [data-groupby="#{$i}"] + [data-groupby="#{$i}"]) {
+      
+      & ~ [data-groupby="#{$i}"] {
+        
+        display: none;
+      }
+    }
+
+    &[data-group="#{$i}"].open {
+      
+      display: none;
+    }
+    &[data-group="#{$i}"].open ~ [data-groupby="#{$i}"]{
+      display: block!important;
+    }
+  }
+}
+
+
+
 }
 
 // #endregion

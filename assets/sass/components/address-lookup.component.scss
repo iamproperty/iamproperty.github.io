@@ -3,6 +3,15 @@
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
 
+
+
+@include layer('utilities', $layers) {
+
+  @include margins();
+}
+
+
+
 .js-hide {
   display: none !important;
 }
@@ -47,3 +56,11 @@ div:has(input[name='postcode']) .suffix {
   background: none;
   cursor: pointer;
 }
+
+// change the datalist
+
+.postcode-lookup > div {
+  position: relative;
+}
+
+

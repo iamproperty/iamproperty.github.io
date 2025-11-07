@@ -1,0 +1,17 @@
+@use '../_func' as *;
+
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+iam-std-address-lookup iam-address-lookup::part(button){
+  display: none;
+}
+
+
+iam-std-address-lookup.show-overseas iam-address-lookup > *:not(.overseas){
+  display: none;
+}
+
+
+

@@ -72,7 +72,7 @@ class iamSearch extends HTMLElement {
       displayInputField.setAttribute('list', listID);
     }
 
-    advancedSelect(this, displayInputField, datalist, true);
+    advancedSelect(this, displayInputField, datalist, false);
 
     // Search the endpoint when 3 characters has been added
     if (searchWrapper.hasAttribute('data-url')) {

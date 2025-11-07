@@ -21,13 +21,13 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     });
   }
 
-  displayInputField.addEventListener('blur', function () {
+  advancedSelect.addEventListener('blur', function () {
     if (displayInputField.hasAttribute('data-value')) {
       displayInputField.value = displayInputField.getAttribute('data-value');
     }
 
     setTimeout(() => {
-      datalist.style.display = 'none';
+      //datalist.style.display = 'none';
     }, 500);
   });
 
@@ -35,21 +35,29 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     if (option.innerHTML == '') option.innerHTML = option.value;
   }
 
-  advancedSelect.addEventListener('click', function () {
-    if (event && event.target instanceof HTMLElement && event.target.closest('datalist option')) {
-      const option = event.target.closest('datalist option');
+  datalist.addEventListener('click', function (event) {
 
-      displayInputField.value = option.value;
+    if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
+      const option = event.target.closest('option');
+      if(option.hasAttribute('data-group')){
 
-      if (typeof window.triggerDynamicEvent == 'function') window.triggerDynamicEvent(displayInputField);
-
-      datalist.style.display = 'none';
-
-      for (const optionInner of datalist.options) {
-        optionInner.classList.remove('active');
+        option.classList.add('open');
+        datalist.style.display = 'block';
       }
+      else {
 
-      option.classList.add('active');
+        displayInputField.value = option.value;
+
+        if (typeof window.triggerDynamicEvent == 'function') window.triggerDynamicEvent(displayInputField);
+
+        datalist.style.display = 'none';
+
+        for (const optionInner of datalist.options) {
+          optionInner.classList.remove('active');
+        }
+
+        option.classList.add('active');
+      }
     }
   });
 
@@ -83,6 +91,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   });
 
   function addActive(x): void {
+    console.log(x)
     if (!x) return false;
     removeActive(x);
     if (currentFocus >= x.length) currentFocus = 0;
@@ -91,6 +100,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   }
 
   function removeActive(x): void {
+    if (!x) return false;
     for (let i = 0; i < x.length; i++) {
       x[i].classList.remove('active');
     }
@@ -103,7 +113,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       'beforeend',
       '<button class="empty btn btn-action"><i class="fa-light fa-times me-0"></i></button>'
     );
-  const closeBtn = advancedSelect.querySelector('.empty');
+  const closeBtn = advancedSelect.querySelector('.empty') ? advancedSelect.querySelector('.empty') : advancedSelect.shadowRoot.querySelector('.empty');
 
   closeBtn.addEventListener('click', function (e) {
     displayInputField.removeAttribute('placeholder');
@@ -115,6 +125,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       optionInner.removeAttribute('style');
     }
   });
+  
+
 }
 
 export default advancedSelect;

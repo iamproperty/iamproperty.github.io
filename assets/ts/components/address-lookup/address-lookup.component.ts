@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import advancedSelect from '../../modules/advanced-select';
 
 // Data layer Web component created
 declare global {
@@ -34,18 +35,19 @@ class iamAddressLookup extends HTMLElement {
 
       <div class="postcode-lookup">
         <div>
-        <label class="mb-2">Search <span class="title text-lowercase"></span> <span class="optional">(Optional)</span>
+        <label class="mb-2">Search <span class="title text-lowercase"></span>
           <span>
-          <input type="text" name="postcode" list="address-lookup__addressess" autocomplete="off" aria-autocomplete="none" placeholder="Postcode" part="input" />
+          <input type="text" name="postcode" list="address-lookup__addressess" autocomplete="one-time-code" aria-autocomplete="none" placeholder="Postcode" part="input" />
           <span class="suffix fa-regular fa-search" part="suffix"></span>
           </span>
           <span class="invalid-feedback">Required Adddress fields missing</span>
         </label>
-
+    
+          <div class="datalist__wrapper"><datalist id="address-lookup__addressess" ></datalist></div>
         </div>
         <button class="btn btn-tertiary switch-to-manual-btn" type="button" part="button">Or enter address manually</button>
+        <slot name="actions"></slot>
       </div>
-      <datalist id="address-lookup__addressess"></datalist>
 
       <div class="manual-address pb-2 js-hide">
         <slot part="contents"></slot>
@@ -66,10 +68,10 @@ class iamAddressLookup extends HTMLElement {
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
     const preFilledWrapper = this.shadowRoot.querySelector('.pre-filled');
-    const list = this.shadowRoot.querySelector('datalist');
+    const list = this.shadowRoot.querySelector('.datalist__wrapper');
     const switchManualBtn = this.shadowRoot.querySelector('.switch-to-manual-btn');
     const switchLookupBtn = this.shadowRoot.querySelector('.switch-to-lookup-btn');
-    const title = this.hasAttribute('data-title') ? this.getAttribute('data-title') : 'Property address';
+    const title = this.hasAttribute('data-title') ? this.getAttribute('data-title') : 'address';
     const preFilledAddressBtn = this.shadowRoot.querySelector('.pre-filled-address + button');
     const dataDisplayText = this.hasAttribute('data-display-text');
 
@@ -158,6 +160,9 @@ class iamAddressLookup extends HTMLElement {
     switchManualBtn.addEventListener('click', () => {
       openManualWrapper();
     });
+    this.addEventListener('open-manual', () => {
+      openManualWrapper();
+    });
     switchLookupBtn.addEventListener('click', () => {
       lookupWrapper.classList.remove('js-hide');
       manualWrapper.classList.add('js-hide');
@@ -165,8 +170,10 @@ class iamAddressLookup extends HTMLElement {
       lookupWrapper.scrollIntoView();
     });
 
-    lookup.addEventListener('keyup', () => {
-      if (lookup.value.length >= 3) search(lookup.value);
+    lookup.addEventListener('keyup', (e) => {
+
+      if (![40,38,13].includes(lookup.value) && lookup.value.length >= 3)
+        search(lookup.value);
     });
 
     lookup.addEventListener('change', () => {
@@ -206,9 +213,27 @@ class iamAddressLookup extends HTMLElement {
       }
     });
 
-    const search = async (postcode): any => {
+    const search = async (searchValue): any => {
+
+      // check if postcode is valid
+
       let ajaxURL = this.getAttribute('data-url');
-      ajaxURL += `${encodeURI(postcode)}`;
+      ajaxURL += `${encodeURI(searchValue)}`;
+
+      const postcode = searchValue; // TODO: remove when postcode comes from response
+
+
+      if(this.hasAttribute('data-postcode')){
+        const regexp = /^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/gmi;
+
+        if (!regexp.test(searchValue)){
+          return false;
+        }
+        else {
+          list.innerHTML = "";
+        }
+      }
+
 
       // Setup controller vars if not already set
       if (!window.controller) window.controller = [];
@@ -236,29 +261,50 @@ class iamAddressLookup extends HTMLElement {
           .then((response) => {
             // populate datalist
             let listString = '';
+            let group = 0;
+            const groups = [];
+
             response.forEach((address) => {
+              group = 0;
               // Deal with agent platform response
               if (typeof address.value == 'object') {
                 const values = JSON.stringify(address.value);
-                listString += `<option value="${address['label']}, ${postcode}" data-values='${values}'></option>`;
+                listString += `<option data-values='${values}'>${address['label']}, ${postcode}</option>`;
               } else {
                 const values = JSON.stringify(address);
 
                 if (dataDisplayText) {
-                  listString += `<option value="${address[dataDisplayText]}, ${postcode}" data-values='${values}'></option>`;
+                  listString += `<option data-values='${values}'>${address[dataDisplayText]}, ${postcode}</option>`;
                 } else {
                   let itemString = '';
                   for (const [key, value] of Object.entries(address)) {
                     if (key == 'address_number_name') itemString += `${value} `;
-                    else if (key != 'postcode' && key != 'address_title')
+                    else if (key != 'postcode' && key != 'address_title' && key != 'group')
                       itemString += `${value}${/^-?\d+$/.test(value) ? '' : ','} `;
+
+                    if(key == "address_1"){
+                      
+                      group = groups.length;
+                      if(!groups.includes(value)){
+
+                        groups.push(value);
+                        group = groups.length;
+                        listString += `<option data-group="${group}" >${value}</option>`; // TODO postcode should come from the response
+                    
+                      }
+                      
+                    }
+
+
                   }
 
-                  listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
+
+                  listString += `<option data-groupby="${group}" data-values='${values}'>${itemString}, ${postcode}</option>`; // TODO postcode should come from the response
+                
                 }
               }
             });
-            list.innerHTML = listString;
+            list.innerHTML = `<datalist>${listString}</datalist>`;
 
             return response;
           });
@@ -266,6 +312,29 @@ class iamAddressLookup extends HTMLElement {
         console.log(error);
       }
     };
+
+
+
+
+    advancedSelect(this, lookup, list, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 }
 
