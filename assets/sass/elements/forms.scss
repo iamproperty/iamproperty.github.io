@@ -462,8 +462,12 @@ $optionalText: 'true' !default;
   // #region prefix
   :is(.prefix, .suffix) {
     display: none;
+  }
+  
+  :not(button):is(.prefix, .suffix) {
     pointer-events: none;
   }
+  
   @supports selector(:has(*)) {
     :is(.prefix, .suffix) {
       display: inline-block;
@@ -1376,29 +1380,31 @@ $optionalText: 'true' !default;
   }
 }
 
+
 :is(iam-advanced-select, iam-search, .postcode-lookup) datalist {
   &:empty {
     display: none !important;
   }
 
-  z-index: 99;
+  z-index: 100;
   top: 100%;
   position: absolute;
   background-color: white;
   border-top: none;
   padding: 0.5rem;
-  max-height: 10rem;
+  max-height: 15rem;
   overflow-y: auto;
   width: 100%;
   max-width: var(--input-max-width, 50rem);
   border: none !important;
   border-radius: 0.5rem;
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+  display: none;
 
   option {
     background-color: white;
     padding: 0.5rem;
-    color: blue !important;
+    
     cursor: pointer;
     background: unset !important;
     border: unset !important;
@@ -1409,9 +1415,16 @@ $optionalText: 'true' !default;
     line-height: rem(19) !important;
     margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
     padding-block: var(--menu-item-padding, 0.5rem) !important;
-    width: var(--menu-item-width, 100%) !important;
-    max-width: var(--menu-item-width, 100%) !important;
+    width: 100% !important;
+    max-width: 100% !important;
     text-align: var(--menu-item-text-align, left) !important;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    text-overflow: ellipsis;
+    overflow: clip;
 
     &:is(:hover, :focus) {
       background: var(--colour-light) !important;
@@ -1422,31 +1435,7 @@ $optionalText: 'true' !default;
       background: rgba(224, 224, 224, 1) !important;
       border-radius: 0.25rem !important;
     }
-  }
-}
 
-
-:is(iam-advanced-select, iam-search, .postcode-lookup) .datalist__wrapper {
-
-  width: var(--menu-item-width, 100%) !important;
-
-  
-  top: 100%;
-  position: absolute;
-  border-radius: 0.5rem;
-  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
-    width: var(--menu-item-width, 100%) !important;
-    max-width: var(--menu-item-width, 100%) !important;
-
-  > datalist {
-    border: none!important;
-    box-shadow: none!important;
-    position: relative;
-  }
-}
-
-:is(iam-advanced-select, iam-search, .postcode-lookup) datalist {
-  option {
     &.active {
       border-left: 4px solid var(--colour-info) !important;
       border-radius: 0.25rem !important;
@@ -1454,34 +1443,114 @@ $optionalText: 'true' !default;
     }
   }
 
-@for $i from 1 through 10 {
+}
 
-  option {
-    
-    &[data-group="#{$i}"]:not(:has(+ [data-groupby="#{$i}"] + [data-groupby="#{$i}"])) {
-      display: none;
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) datalist {
 
-    }
-    &[data-group="#{$i}"]:has(+ [data-groupby="#{$i}"] + [data-groupby="#{$i}"]) {
-      
-      & ~ [data-groupby="#{$i}"] {
-        
-        display: none;
-      }
-    }
+  display: block;
+}
 
-    &[data-group="#{$i}"].open {
-      
-      display: none;
-    }
-    &[data-group="#{$i}"].open ~ [data-groupby="#{$i}"]{
-      display: block!important;
+:is(iam-advanced-select, iam-search, .postcode-lookup > div) .datalist__wrapper {
+
+  top: 100%;
+  position: absolute;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+  width: var(--menu-item-width, 50rem) !important;
+  max-width: var(--menu-item-width, 50rem) !important;
+  z-index: 100;
+  display: none;
+  max-height: 15rem;
+  overflow-y: auto;
+
+  > datalist {
+    border: none!important;
+    box-shadow: none!important;
+    position: relative;
+    display: block!important;
+    border-radius: 0!important;
+    max-height: 100%!important;
+  }
+}
+
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist:not(:empty)),
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.loading),
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.noresults) {
+
+  display: block;
+}
+
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.noresults){
+  datalist {
+
+    &:before {
+      content: "No addresses found";
+      background-color: white;
+      padding: 0.5rem;
+      color: var(--colour-primary) !important;
+      font-weight: inherit !important;
+      font-family: inherit !important;
+      font-size: 1rem !important;
+      line-height: rem(19) !important;
+      padding-block: var(--menu-item-padding, 0.5rem) !important;
     }
   }
 }
 
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.loading) {
 
+  datalist {
 
+    height: 5rem;
+
+    &:before {
+      content: "\f021";
+      font-family: "Font Awesome 6 Pro";
+      font-size: 1.75rem;
+      font-weight: 300;
+      display: block;
+      position: absolute;
+      top: calc(50% - 1rem);
+      left: calc(50% - 1rem);
+      /*transform: translate(-50%,-50%);*/
+
+      animation-name: spin;
+      animation-duration: 4000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+  }
 }
 
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+:is(iam-advanced-select, iam-search, .postcode-lookup) {
+
+  [name="beforeList"] {
+    display: none;
+  }
+
+  [name="beforeList"]:has(+ .showWelshBanner) {
+    display: block;
+  }
+}
 // #endregion

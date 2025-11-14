@@ -4,14 +4,43 @@ $layers: 'true' !default;
 $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
-iam-std-address-lookup iam-address-lookup::part(button){
+iam-std-address-lookup:not([data-allow-manual]) iam-address-lookup::part(manualButton){
   display: none;
 }
 
+iam-std-address-lookup[data-allow-manual] iam-address-lookup:not(.searched)::part(manualButton){
+  display: none;
+}
 
 iam-std-address-lookup.show-overseas iam-address-lookup > *:not(.overseas){
   display: none;
 }
+iam-std-address-lookup:not(.show-overseas) iam-address-lookup > *.overseas {
+  display: none;
+}
 
+iam-std-address-lookup iam-address-lookup {
 
+  --menu-item-width: 31.25rem;
+  max-width: 31.25rem;
 
+}
+iam-address-lookup:not(.show-welsh) .alt{
+  display: none;
+}
+iam-address-lookup.show-welsh .default{
+  display: none;
+}
+[slot="beforeList"] {
+  position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+iam-std-address-lookup iam-address-lookup .atleastone label:after {
+  display: none;
+}
+iam-std-address-lookup iam-address-lookup .atleastone:not(:has(input:valid)) .invalid-feedback {
+  display: block;
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "current_results": "100",
+    "total_results": "582",
+    "current_page": "1",
+    "total_pages": "6",
+    "has_welsh_results": "0",
+    "has_english_results": "1",
+    "welsh_language": "0"
+  },
+  "data": [
+    {
+      "type": "address",
+      "id": "urn:als:address:123456789012",
+      "attributes": {
+        "paf_id": "1",
+        "paf_entry_type": "Standard",
+        "date_added": "2023-11-07T10:30:00",
+        "date_updated": "",
+        "date_removed": "",
+        "building_number": "1",
+        "sub_building_name": "",
+        "building_name": "",
+        "organisation_name": "",
+        "department_name": "",
+        "po_box_number": "",
+        "dependent_thoroughfare": "",
+        "thoroughfare": "Acacia Avenue",
+        "double_dependent_locality": "",
+        "dependent_locality": "Gosforth",
+        "post_town": "NEWCASTLE-UPON-TYNE",
+        "postal_county": {
+          "id": "urn:als:county:a72ndjIq",
+          "county_name": "Tyne & Wear"
+        },
+        "postcode": "NE3 3LU",
+        "country": {
+          "id": "urn:als:country:a72ndjIq",
+          "name": "United Kingdom of Great Britain and Northern Ireland",
+          "alpha-2": "GB",
+          "alpha-3": "GBR",
+          "is_fatf": false,
+          "short_name": "United Kingdom"
+        },
+        "postcode_outward_code": "NE3",
+        "postcode_inward_code": "3LU",
+        "postcode_type": "S",
+        "small_user_organisation": "",
+        "delivery_point_suffix": "",
+        "district": "",
+        "ward": "",
+        "uprn": "123456789012",
+        "udprn": "",
+        "umrrn": "",
+        "usrn": "",
+        "longitude": "123",
+        "latitude": "",
+        "label": "1 Acacia Avenue, Gosforth, NEWCASTLE-UPON-TYNE, NE3 3LU, UNITED KINGDOM"
+      }
+    },
+    {
+      "type": "address",
+      "id": "urn:als:address:123124567890",
+      "attributes": {
+        "paf_id": "2",
+        "paf_entry_type": "Standard",
+        "date_added": "2023-11-07T10:30:01",
+        "date_updated": "",
+        "date_removed": "",
+        "building_number": "2",
+        "sub_building_name": "",
+        "building_name": "",
+        "organisation_name": "",
+        "department_name": "",
+        "po_box_number": "",
+        "dependent_thoroughfare": "",
+        "thoroughfare": "Acacia Avenue",
+        "double_dependent_locality": "",
+        "dependent_locality": "Gosforth",
+        "post_town": "NEWCASTLE-UPON-TYNE",
+        "postal_county": {
+          "id": "urn:als:county:a72ndjIq",
+          "county_name": "Tyne & Wear"
+        },
+        "postcode": "NE3 3LU",
+        "country": {
+          "id": "urn:als:country:a72ndjIq",
+          "name": "United Kingdom of Great Britain and Northern Ireland",
+          "alpha-2": "GB",
+          "alpha-3": "GBR",
+          "is_fatf": false,
+          "short_name": "United Kingdom"
+        },
+        "postcode_outward_code": "NE3",
+        "postcode_inward_code": "3LU",
+        "postcode_type": "S",
+        "small_user_organisation": "",
+        "delivery_point_suffix": "",
+        "district": "",
+        "ward": "",
+        "uprn": "123124567890",
+        "udprn": "",
+        "umrrn": "",
+        "usrn": "",
+        "longitude": "",
+        "latitude": "",
+        "label": "2 Acacia Avenue, NEWCASTLE-UPON-TYNE, Tyne & Wear, NE3 3LU, UNITED KINGDOM"
+      }
+    }
+  ]
+}

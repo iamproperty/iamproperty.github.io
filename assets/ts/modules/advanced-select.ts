@@ -1,33 +1,43 @@
 function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = false): boolean | void {
   let currentFocus = -1;
 
-  if (!isSearch) {
+  const datalistWrapper = datalist.closest('.datalist__wrapper') ? datalist.closest('.datalist__wrapper') : datalist;
+
+  // Hide the default datalist
+  displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
+  displayInputField.setAttribute('list', '');
+  displayInputField.setAttribute('data-placeholder', displayInputField.getAttribute('placeholder'));
+
+  //if (!isSearch) {
     displayInputField.addEventListener('focus', function () {
+      
       displayInputField.setAttribute('placeholder', displayInputField.value);
+
       displayInputField.setAttribute('data-value', displayInputField.value);
       displayInputField.value = '';
 
-      displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
-      displayInputField.setAttribute('list', '');
-
-      datalist.style.display = 'block';
+      //datalistWrapper.style.display = 'block';
     });
-  } else {
+  //} else {
     displayInputField.addEventListener('focus', function () {
-      displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
-      displayInputField.setAttribute('list', '');
 
-      datalist.style.display = 'block';
+      if(displayInputField.value.length > 0){
+          
+        //datalistWrapper.style.display = 'block';
+      }
     });
-  }
+ // }
 
-  advancedSelect.addEventListener('blur', function () {
+  displayInputField.addEventListener('blur', function () {
     if (displayInputField.hasAttribute('data-value')) {
       displayInputField.value = displayInputField.getAttribute('data-value');
     }
 
+
+    console.log('blur')
+
     setTimeout(() => {
-      //datalist.style.display = 'none';
+      //datalistWrapper.style.display = 'none';
     }, 500);
   });
 
@@ -37,27 +47,29 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   datalist.addEventListener('click', function (event) {
 
+    console.log('hi')
+
     if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
       const option = event.target.closest('option');
-      if(option.hasAttribute('data-group')){
+     // if(option.hasAttribute('data-group')){
 
-        option.classList.add('open');
-        datalist.style.display = 'block';
-      }
-      else {
+        //option.classList.add('open');
+        //datalistWrapper.style.display = 'block';
+      //}
+      //else {
 
         displayInputField.value = option.value;
 
         if (typeof window.triggerDynamicEvent == 'function') window.triggerDynamicEvent(displayInputField);
 
-        datalist.style.display = 'none';
+        //datalistWrapper.style.display = 'none';
 
         for (const optionInner of datalist.options) {
           optionInner.classList.remove('active');
         }
 
         option.classList.add('active');
-      }
+      //}
     }
   });
 
@@ -74,7 +86,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     }
   });
 
-  displayInputField.addEventListener('keydown', function (e) {
+  advancedSelect.addEventListener('keydown', function (e) {
+
     if (e.keyCode == 40) {
       currentFocus++;
       addActive(datalist.options);
@@ -91,7 +104,6 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   });
 
   function addActive(x): void {
-    console.log(x)
     if (!x) return false;
     removeActive(x);
     if (currentFocus >= x.length) currentFocus = 0;
@@ -116,7 +128,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   const closeBtn = advancedSelect.querySelector('.empty') ? advancedSelect.querySelector('.empty') : advancedSelect.shadowRoot.querySelector('.empty');
 
   closeBtn.addEventListener('click', function (e) {
-    displayInputField.removeAttribute('placeholder');
+    
+    displayInputField.setAttribute('placeholder', displayInputField.hasAttribute('data-placeholder') ? displayInputField.getAttribute('data-placeholder') : '');
     displayInputField.removeAttribute('data-value');
     displayInputField.value = '';
 

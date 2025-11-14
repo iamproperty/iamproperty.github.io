@@ -10,7 +10,12 @@
   @include margins();
 }
 
-
+.bg-light {
+  background-color: var(--colour-light);
+}
+.text-center {
+  text-align: center;
+}
 
 .js-hide {
   display: none !important;
@@ -21,6 +26,12 @@
 }
 .pb-2 {
   padding-bottom: 1rem !important;
+}
+.p-0 {
+  padding: 0!important;
+}
+.p-2{
+  padding: 1rem !important;
 }
 
 :host {
@@ -63,4 +74,28 @@ div:has(input[name='postcode']) .suffix {
   position: relative;
 }
 
+.postcode-lookup input:not(.is-invalid) {
+  background-image: none!important;
+}
 
+.postcode-lookup:has(input.is-invalid) .invalid-feedback:not(:empty) {
+  display: block!important;
+  margin-bottom: 1rem;
+}
+
+
+.postcode-lookup:has(input.is-invalid) .datalist__wrapper,
+.postcode-lookup:has(input.is-invalid) label:after,
+.postcode-lookup:has(input.is-invalid) .empty,
+.postcode-lookup:has(input.is-invalid) [slot="hint"] {
+  display: none!important;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#paginationWrapper:not(:empty) ~ slot[name="afterList"] {
+  display: none;
+}

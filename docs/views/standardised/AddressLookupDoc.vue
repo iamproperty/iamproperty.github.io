@@ -13,8 +13,17 @@
 
     
     <p class="lead">Content on which values and content need to be added</p>
-    
-    <STDAddressLookup></STDAddressLookup>
+    <form class="was-validated">
+      <select name="country" id="country" required>
+            <option value=""></option>
+            <option value="England">England</option>
+            <option value="Scotland">Scotland</option>
+            <option value="Wales" selected>Wales</option>
+          </select>
+    <STDAddressLookup data-allow-overseas data-allow-manual data-county-required></STDAddressLookup>
+
+    <button>submit</button>
+    </form>
 
     <div class="pb-5">
       <Notification>
