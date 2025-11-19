@@ -1445,7 +1445,7 @@ $optionalText: 'true' !default;
 
 }
 
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) datalist {
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(*:active),:active) datalist {
 
   display: block;
 }
@@ -1471,18 +1471,22 @@ $optionalText: 'true' !default;
     border-radius: 0!important;
     max-height: 100%!important;
   }
+
+  &:focus {
+    outline: none!important;
+  }
 }
 
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist:not(:empty)),
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.loading),
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.noresults) {
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist:not(:empty)),
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.loading),
+:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.noresults),
+:is(iam-advanced-select, iam-search, .postcode-lookup > div) .datalist__wrapper:hover {
 
   display: block;
 }
 
 :is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.noresults){
   datalist {
-
     &:before {
       content: "No addresses found";
       background-color: white;

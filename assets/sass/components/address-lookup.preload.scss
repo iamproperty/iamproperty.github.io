@@ -37,10 +37,19 @@ iam-address-lookup.show-welsh .default{
     z-index: 100;
 }
 
-iam-std-address-lookup iam-address-lookup .atleastone label:after {
+iam-std-address-lookup iam-address-lookup .atleastone label:after,
+iam-std-address-lookup iam-address-lookup .overseas-atleastone label:after {
   display: none;
 }
-iam-std-address-lookup iam-address-lookup .atleastone:not(:has(input:valid)) .invalid-feedback {
+
+.was-validated iam-std-address-lookup iam-address-lookup .atleastone:not(:has(input:valid)) .invalid-feedback,
+.was-validated iam-std-address-lookup iam-address-lookup .overseas-atleastone:not(:has(input:valid)) .invalid-feedback,
+iam-std-address-lookup iam-address-lookup.was-validated .atleastone:not(:has(input:valid)) .invalid-feedback,
+iam-std-address-lookup iam-address-lookup.was-validated .overseas-atleastone:not(:has(input:valid)) .invalid-feedback {
   display: block;
   margin-bottom: 1rem;
+}
+
+iam-std-address-lookup iam-address-lookup input:is(:valid, .is-valid):not(:is(:invalid, .is-invalid)){
+  background: none!important;
 }

@@ -2,6 +2,7 @@
 
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
+@use '../elements/links.scss' as *;
 
 
 
@@ -59,13 +60,29 @@ div:has(input[name='postcode']) .suffix {
   display: var(--req-display, inline-block) !important;
 }
 
+.pre-filled {
+  background: var(--colour-light);
+  border-radius: 1rem;
+}
+
+.pre-filled .title:empty {
+  display: none!important;
+}
 .pre-filled p {
-  padding-bottom: 1rem;
+  display: flex;
+  margin: 0;
+  align-items: center;
+}
+.pre-filled p span{
+  margin-inline-end: auto;
 }
 .pre-filled button {
   border: none;
   background: none;
   cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+  font-size: 1rem;
 }
 
 // change the datalist

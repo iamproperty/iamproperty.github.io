@@ -8,37 +8,26 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   displayInputField.setAttribute('list', '');
   displayInputField.setAttribute('data-placeholder', displayInputField.getAttribute('placeholder'));
 
-  //if (!isSearch) {
-    displayInputField.addEventListener('focus', function () {
-      
+  displayInputField.addEventListener('focus', function () {
+    
+    if(displayInputField.value != ""){
+        
       displayInputField.setAttribute('placeholder', displayInputField.value);
-
       displayInputField.setAttribute('data-value', displayInputField.value);
-      displayInputField.value = '';
+    }
+    displayInputField.value = '';
 
-      //datalistWrapper.style.display = 'block';
-    });
-  //} else {
-    displayInputField.addEventListener('focus', function () {
+  });
 
-      if(displayInputField.value.length > 0){
-          
-        //datalistWrapper.style.display = 'block';
-      }
-    });
- // }
+    
 
   displayInputField.addEventListener('blur', function () {
     if (displayInputField.hasAttribute('data-value')) {
       displayInputField.value = displayInputField.getAttribute('data-value');
     }
 
-
-    console.log('blur')
-
-    setTimeout(() => {
-      //datalistWrapper.style.display = 'none';
-    }, 500);
+    if(displayInputField.hasAttribute('data-placeholder'))
+      displayInputField.setAttribute('placeholder',displayInputField.getAttribute('data-placeholder'));
   });
 
   for (const option of datalist.options) {
@@ -46,8 +35,6 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   }
 
   datalist.addEventListener('click', function (event) {
-
-    console.log('hi')
 
     if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
       const option = event.target.closest('option');
@@ -137,6 +124,10 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       optionInner.classList.remove('active');
       optionInner.removeAttribute('style');
     }
+
+    
+    const updateEvent = new CustomEvent('close-button-pressed');
+    advancedSelect.dispatchEvent(updateEvent);
   });
   
 
