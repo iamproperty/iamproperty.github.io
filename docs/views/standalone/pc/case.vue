@@ -79,46 +79,45 @@
     <CaseDetails></CaseDetails>
 
 
-<CaseMilestones></CaseMilestones>
-<CaseProtocols class="md-col-end-5"></CaseProtocols>
+    <CaseMilestones></CaseMilestones>
+  
+    <CaseProtocols class="md-col-end-5"></CaseProtocols>
 
 
-    <div class="admin-panel md-col-end-6 d-md-flex flex-column">
-      <h2 class="bg-light">Local authority: North Tyneside Council</h2>
-
-
-      <span class="d-block pb-1"><strong>Lead client:</strong> John Smith</span>
-
-      <span class="d-block pb-1"><strong>Lead client:</strong> John Smith</span>
-
-      <Notification data-status="danger" class="colour-danger" role="alert">
-        <strong>Action incomplete</strong>
-        <br> Alert message will display here<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>
-      </Notification>
-
-      <div class="admin-panel__footer wider-colour-3 mt-auto">
-        <p>Minimum forecasted time saving on this transaction with Premium Conveyancing</p>
-        <strong>25 days saved</strong>
-      </div>
-
-    </div>
     
-    <CaseTasks class="md-col-start-7"></CaseTasks>
-    <CaseNotes class="md-col-end-7"></CaseNotes>
-    <CaseDocuments class="md-col-start-8"></CaseDocuments>
+    <hr class="border-0"/>
+   <div class="admin-panel md-col-end-6 d-md-flex flex-column">
+        <h2 class="bg-light">Local authority: North Tyneside Council</h2>
+
+
+        <span class="d-block pb-1"><strong>Lead client:</strong> John Smith</span>
+
+        <span class="d-block pb-1"><strong>Lead client:</strong> John Smith</span>
+
+        <Notification data-status="danger" class="colour-danger" role="alert">
+          <strong>Action incomplete</strong>
+          <br> Alert message will display here<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>
+        </Notification>
+
+        <div class="admin-panel__footer wider-colour-3 mt-auto">
+          <p>Minimum forecasted time saving on this transaction with Premium Conveyancing</p>
+          <strong>25 days saved</strong>
+        </div>
+
+      </div>
+      
+      
+      <CaseTasks class="md-col-start-auto"></CaseTasks>
+
+      <CaseNotes class="md-col-end-7"></CaseNotes>
+      <CaseDocuments class="md-col-start-8"></CaseDocuments>
+  
+
     <CaseActivities class=""></CaseActivities>
 
-    
   </main>
 
-
   <addNote></addNote>
-
-
-
   <EditDetails></EditDetails>
-
-
-
 
 </template>
