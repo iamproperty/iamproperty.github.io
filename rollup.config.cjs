@@ -62,8 +62,9 @@ var components = require('./components.json');
 Array.from(components).forEach((component) => {
 
   let css = '';
+  let menucss = '';
   let extraCSS = '';
-
+  let rankcss = '';
 
   let componentFileName = component;
 
@@ -89,8 +90,23 @@ Array.from(components).forEach((component) => {
   }
 
   try {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/menu.component.css`))) {
+      
+      menucss = fs.readFileSync(path.resolve(__dirname, `assets/css/components/menu.component.css`), 'utf8');
+      menucss = menucss.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      menucss = menucss.replace("\uFEFF","");
+    }
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/rank.component.css`))) {
+      
+      rankcss = fs.readFileSync(path.resolve(__dirname, `assets/css/components/rank.component.css`), 'utf8');
+      rankcss = rankcss.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      rankcss = rankcss.replace("\uFEFF","");
+    }
+  } catch (err) {
+    console.error(err);
+  }
 
-
+  try {
 
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.global.css`))) {
       
@@ -117,6 +133,8 @@ Array.from(components).forEach((component) => {
         'process.env.NODE_ENV': '"production"',
         preventAssignment: true,
         'loadCSS': JSON.stringify(`${css}`),
+        'menuCSS': JSON.stringify(`${menucss}`),
+        'rankCSS': JSON.stringify(`${rankcss}`),
         'loadExtraCSS': JSON.stringify(`${extraCSS}`)
       }),
       minify(),

@@ -13,16 +13,14 @@ class iamNav extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/nav.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style class="styles">
-    @import "${coreCSS}";
+
+    
     ${loadCSS}
     </style>
     <style class="doc-styles">
