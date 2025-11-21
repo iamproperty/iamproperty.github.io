@@ -11,6 +11,11 @@ $darkMode: 'true' !default;
     margin-inline: rem(3);
   }
 
+  iam-multiselect .tag[slot='checked']:first-child:last-child {
+
+    margin-inline: 0;
+  }
+
   iam-multiselect .tag:not([slot='checked']) {
     display: block;
     width: 100%;
@@ -43,5 +48,10 @@ $darkMode: 'true' !default;
     iam-multiselect :is(.tag, .badge):not([slot='checked']) {
       color: var(--colour-heading);
     }
+  }
+
+  iam-multiselect[data-single] .tag[slot='checked'],
+  iam-multiselect[data-single] .tag[slot='checked'] * {
+    pointer-events: none!important;
   }
 }

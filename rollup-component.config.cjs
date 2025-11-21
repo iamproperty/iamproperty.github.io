@@ -41,6 +41,7 @@ components.forEach((component) => {
   let css = '';
   let menucss = '';
   let extraCSS = '';
+  let rankcss = '';
 
   
   let componentFileName = component;
@@ -93,6 +94,12 @@ components.forEach((component) => {
       menucss = menucss.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       menucss = menucss.replace("\uFEFF","");
     }
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/rank.component.css`))) {
+      
+      rankcss = fs.readFileSync(path.resolve(__dirname, `assets/css/components/rank.component.css`), 'utf8');
+      rankcss = rankcss.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
+      rankcss = rankcss.replace("\uFEFF","");
+    }
   } catch (err) {
     console.error(err);
   }
@@ -125,6 +132,7 @@ components.forEach((component) => {
         preventAssignment: true,
         'loadCSS': JSON.stringify(`${css}`),
         'menuCSS': JSON.stringify(`${menucss}`),
+        'rankCSS': JSON.stringify(`${rankcss}`),
         'loadExtraCSS': JSON.stringify(`${extraCSS}`)
       }),
       minify(),

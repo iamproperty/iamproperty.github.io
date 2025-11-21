@@ -13,7 +13,7 @@ $darkMode: 'true' !default;
 
   // #region reset
   button {
-    // stylelint-disable-next-line property-disallowed-list
+    
     border-radius: 0;
     text-transform: none;
     margin: 0; // 1
@@ -53,7 +53,7 @@ $darkMode: 'true' !default;
     --btn-line-height: #{rem(20)};
 
     display: inline-block;
-    font-weight: bold;
+    font-weight: 500;
     text-align: left;
     text-decoration: none;
     vertical-align: middle;
@@ -259,7 +259,7 @@ $darkMode: 'true' !default;
       display: block;
       max-width: 100% !important;
       outline: none;
-      font-weight: bold;
+      font-weight: 500;
       font-size: var(--btn-font-size) !important;
       line-height: var(--btn-line-height) !important;
 

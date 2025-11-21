@@ -1,10 +1,16 @@
 @use '../_func' as *;
+@use '../elements/forms.scss' as *;
+@use '../elements/buttons.scss' as *;
 
 @include margins();
 
 :host {
   container-type: inline-size;
   display: block;
+}
+
+:host(.d-none){
+  display: none;
 }
 
 .pagination {

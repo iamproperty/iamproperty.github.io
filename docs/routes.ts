@@ -717,6 +717,14 @@ const routes = [
         },
         component: () => import('./views/components/WordCountDoc.vue'),
       },
+      {
+        path: 'password-indicator',
+        name: 'Password Indicator',
+        meta: {
+          title: 'Password Indicator | Components | iamkey',
+        },
+        component: () => import('./views/components/PasswordIndicatorDoc.vue'),
+      }
     ],
   },
   {
@@ -1335,6 +1343,101 @@ const routes = [
         },
         component: () => import('./views/standalone/competitor-analysis.vue'),
       },
+      {
+        path: 'premium-conveyancing',
+        name: 'Premium conveyancing dashboard',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/index.vue'),
+      },
+      {
+        path: 'premium-conveyancing/case',
+        name: 'Premium conveyancing case',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/case.vue'),
+      },
+      {
+        path: 'premium-conveyancing/quote',
+        name: 'Premium conveyancing quote',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/quote.vue'),
+      },
+      {
+        path: 'premium-conveyancing/details',
+        name: 'Premium conveyancing quote details',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/details.vue'),
+      },
+      {
+        path: 'premium-conveyancing/instruct',
+        name: 'Premium conveyancing instruct',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/instruct.vue'),
+      },
+      {
+        path: 'premium-conveyancing/bespoke',
+        name: 'Premium conveyancing bespoke',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/bespoke.vue'),
+      },
+
+      {
+        path: 'premium-conveyancing/add-opportunity',
+        name: 'Premium conveyancing Add-opportunity',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/add.vue'),
+      },
+      {
+        path: 'premium-conveyancing/add-opportunity/client',
+        name: 'Premium conveyancing Add-opportunity client',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/client.vue'),
+      },
+      {
+        path: 'premium-conveyancing/add-opportunity/agency',
+        name: 'Premium conveyancing Add-opportunity agency',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/agency.vue'),
+      },
+
+
+      {
+        path: 'premium-conveyancing/add-client',
+        name: 'Premium conveyancing Add client',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/add-client.vue'),
+      },
+
+
+      {
+        path: 'premium-conveyancing/add-onward',
+        name: 'Premium conveyancing Add onward purchase',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/add-onward.vue'),
+      },
+
+
     ],
   },
   {

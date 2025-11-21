@@ -34,7 +34,8 @@
       <label class="tag"><input type="checkbox" name="tags" value="Sarah Brown" />Sarah Brown</label>
     </Multiselect>
 
-    <h2 class="mt-5">Behaviour</h2>
+    
+    <h2 class="mt-3">Behaviour</h2>
     <ul>
       <li>Selecting the field should open the dropdown with all the items in the list.</li>
       <li>Selecting an item from the list should add a tag in the field.</li>
@@ -44,6 +45,24 @@
       <li>When the tag is removed it should add the option back to the list.</li>
       <li>If the user types an invalid value and presses enter it should wipe that value from the field.</li>
     </ul>
+
+    <h2 class="mt-5">Single value</h2>
+    <p>We can re-purpose the multiselect as a way of picking a single value but keeping the visual aesthetic.</p>
+    <Multiselect data-label="Users" data-single>
+      <label class="tag"><input type="checkbox" name="tags" value="James Lambert" checked />James Lambert</label>
+      <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight" />Amanda Knight</label>
+      <label class="tag"><input type="checkbox" name="tags" value="Brian Lord" />Brian Lord</label>
+      <label class="tag"><input type="checkbox" name="tags" value="Claire Lane" />Claire Lane</label>
+      <label class="tag"><input type="checkbox" name="tags" value="John Smith" />John Smith</label>
+      <label class="tag"><input type="checkbox" name="tags" value="James Brown" />James Brown</label>
+      <label class="tag"><input type="checkbox" name="tags" value="Sarah Brown" />Sarah Brown</label>
+    </Multiselect>
+
+    <h2 class="mt-3">Ajax</h2>
+    <p>Populating The multiselect via ajax makes the component much more useful as we can lazy load values in depending upon if they are needed.</p>
+
+    <Multiselect data-label="Users" data-name="users" data-url="/users.json?search=" class="mb-0"></Multiselect>
+    <span class="d-block hint-text mb-3">Enter 3 or more characters</span>
 
     <h2 class="mt-5">States</h2>
 

@@ -1,12 +1,15 @@
 @use '../_func.scss' as *;
 
+
 $darkMode: 'true' !default;
 
 @use './table-basic.global.scss' with (
   $darkMode: $darkMode
 );
 
-$selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
+$selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
+
+@include display();
 
 // #region Tables are only stacked on mobile
 :is(#{$selector}):not(.table--fullwidth).table--cta {
@@ -16,6 +19,8 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     }
   }
 }
+
+
 // #endregion
 
 // #region As part of the iam-table component
@@ -115,7 +120,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     }
   }
 
-  &:has([type='checkbox']:checked) tr:has([type='checkbox']) {
+  &:has([type='checkbox']:checked) tr:has([type='checkbox']):not(:has(.tag)) {
     [type='checkbox'] {
       width: 100vw;
       height: 100%;
@@ -135,10 +140,10 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit';
     }
   }
 
-  tr:has([type='checkbox']:hover, [type='checkbox']:focus) {
+  tr:has([type='checkbox']:hover, [type='checkbox']:focus):not(:has(.tag)) {
     --row-bg: #eeeeee;
   }
-  tr:has([type='checkbox']:hover:checked, [type='checkbox']:focus:checked, [type='checkbox']:checked) {
+  tr:has([type='checkbox']:hover:checked, [type='checkbox']:focus:checked, [type='checkbox']:checked):not(:has(.tag)) {
     --row-bg: #e0e0e0;
   }
 }

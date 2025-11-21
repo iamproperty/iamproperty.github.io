@@ -10,13 +10,13 @@ class iamRank extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    const loadCSS = `@import "${assetLocation}/css/components/rank.component.css";`;
+    const loadRankCSS = `@import "${assetLocation}/css/components/rank.component.css";`;
     //const loadExtraCSS = `@import "${assetLocation}/css/components/rank.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    ${loadCSS}
+    ${loadRankCSS}
     </style>
     <div class="wrapper" part="wrapper">
       <div class="rank" part="rank">

@@ -2,17 +2,9 @@
   import TrackEvents from '../TrackEvents.vue';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
-
   import Integration from '../Integration.vue';
-  import Versions from '../Versions.vue';
-
-  import Rank from '@/components/Rank/Rank.vue';
   import WordCount from '@/components/WordCount/WordCount.vue';
 
-  import podium from '../../img/podium.png';
-
-  import podiumAnatomy from '../../img/podium-anatomy.png';
-  import rankItemAnatomy from '../../img/rank-item-anatomy.png';
 </script>
 
 <template>
@@ -52,14 +44,14 @@
       counting full words.
     </p>
 
-    <div class="visualtest">
-      <WordCount data-max="10" data-character="" class="mb-5">
-        <label for="input17">Input field label</label>
-        <input type="text" id="input18" name="input18" placeholder="Optional placeholder text" required="" />
-        <span data-count="0">Optional helper text</span>
-      </WordCount>
-    </div>
-    <Integration component="split-button" componentName="split-button">
+<div class="visualtest">
+    <WordCount data-max="10" data-character="" class="mb-5">
+      <label for="input17">Input field label</label>
+      <input type="text" id="input18" name="input18" placeholder="Optional placeholder text" required="" />
+      <span data-count="0">Optional helper text</span>
+    </WordCount>
+</div>
+    <Integration component="word-count" componentName="word-count">
       <template #web-component>
         <pre><code>{{`<iam-word-count data-v-7348d146="" data-max="10" class="mb-5" style="--maxlength: 10;">
   <label data-v-7348d146="" for="input17">Input field label</label>
@@ -69,7 +61,7 @@
       <template #vue-component>
         <pre><code>{{`<script setup>import WordCount from '@/components/WordCount/WordCount.vue</script>
         
-<WordCount data-max="10" c>
+<WordCount data-max="10">
   <label for="input17">Input field label</label>
   <input type="text" id="input17" name="input17" placeholder="Optional placeholder text" required="">
 </WordCount>

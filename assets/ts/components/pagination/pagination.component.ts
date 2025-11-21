@@ -5,15 +5,12 @@ class iamPagination extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
+      
     const loadCSS = `@import "${assetLocation}/css/components/pagination.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
     
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
@@ -82,14 +79,15 @@ class iamPagination extends HTMLElement {
 
     // Next and previous buttons will simply trigger and on change on the select which in turn will dispatch an event
     next.addEventListener('click', () => {
-      select.value = parseInt(select.value) + 1;
 
-      select.dispatchEvent(new Event('change'));
+      console.log(parseInt(this.getAttribute('data-page')))
+
+      this.setAttribute('data-page', parseInt(this.getAttribute('data-page')) + 1);
     });
 
     prev.addEventListener('click', () => {
-      select.value = parseInt(select.value) - 1;
-      select.dispatchEvent(new Event('change'));
+      
+      this.setAttribute('data-page', parseInt(this.getAttribute('data-page')) - 1);
     });
 
     // Update how many is shown
