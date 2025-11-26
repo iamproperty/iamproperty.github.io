@@ -1,5 +1,1012 @@
 import iamAddressLookup from '../../../js/components/address-lookup/address-lookup.component.min.js';
 
+const countries = [
+  {
+    "id": "urn:iamproperty:country:AF",
+    "country_name": "Afghanistan"
+  },
+  {
+    "id": "urn:iamproperty:country:AX",
+    "country_name": "Aland Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:AL",
+    "country_name": "Albania"
+  },
+  {
+    "id": "urn:iamproperty:country:DZ",
+    "country_name": "Algeria"
+  },
+  {
+    "id": "urn:iamproperty:country:AS",
+    "country_name": "American Samoa"
+  },
+  {
+    "id": "urn:iamproperty:country:AD",
+    "country_name": "Andorra"
+  },
+  {
+    "id": "urn:iamproperty:country:AO",
+    "country_name": "Angola"
+  },
+  {
+    "id": "urn:iamproperty:country:AI",
+    "country_name": "Anguilla"
+  },
+  {
+    "id": "urn:iamproperty:country:AQ",
+    "country_name": "Antarctica"
+  },
+  {
+    "id": "urn:iamproperty:country:AG",
+    "country_name": "Antigua and Barbuda"
+  },
+  {
+    "id": "urn:iamproperty:country:AR",
+    "country_name": "Argentina"
+  },
+  {
+    "id": "urn:iamproperty:country:AM",
+    "country_name": "Armenia"
+  },
+  {
+    "id": "urn:iamproperty:country:AW",
+    "country_name": "Aruba"
+  },
+  {
+    "id": "urn:iamproperty:country:AU",
+    "country_name": "Australia"
+  },
+  {
+    "id": "urn:iamproperty:country:AT",
+    "country_name": "Austria"
+  },
+  {
+    "id": "urn:iamproperty:country:AZ",
+    "country_name": "Azerbaijan"
+  },
+  {
+    "id": "urn:iamproperty:country:BS",
+    "country_name": "Bahamas"
+  },
+  {
+    "id": "urn:iamproperty:country:BH",
+    "country_name": "Bahrain"
+  },
+  {
+    "id": "urn:iamproperty:country:BD",
+    "country_name": "Bangladesh"
+  },
+  {
+    "id": "urn:iamproperty:country:BB",
+    "country_name": "Barbados"
+  },
+  {
+    "id": "urn:iamproperty:country:BY",
+    "country_name": "Belarus"
+  },
+  {
+    "id": "urn:iamproperty:country:BE",
+    "country_name": "Belgium"
+  },
+  {
+    "id": "urn:iamproperty:country:BZ",
+    "country_name": "Belize"
+  },
+  {
+    "id": "urn:iamproperty:country:BJ",
+    "country_name": "Benin"
+  },
+  {
+    "id": "urn:iamproperty:country:BM",
+    "country_name": "Bermuda"
+  },
+  {
+    "id": "urn:iamproperty:country:BT",
+    "country_name": "Bhutan"
+  },
+  {
+    "id": "urn:iamproperty:country:BO",
+    "country_name": "Bolivia (Plurinational State of)"
+  },
+  {
+    "id": "urn:iamproperty:country:BQ",
+    "country_name": "Bonaire, Sint Eustatius and Saba"
+  },
+  {
+    "id": "urn:iamproperty:country:BA",
+    "country_name": "Bosnia and Herzegovina"
+  },
+  {
+    "id": "urn:iamproperty:country:BW",
+    "country_name": "Botswana"
+  },
+  {
+    "id": "urn:iamproperty:country:BV",
+    "country_name": "Bouvet Island"
+  },
+  {
+    "id": "urn:iamproperty:country:BR",
+    "country_name": "Brazil"
+  },
+  {
+    "id": "urn:iamproperty:country:IO",
+    "country_name": "British Indian Ocean Territory"
+  },
+  {
+    "id": "urn:iamproperty:country:BN",
+    "country_name": "Brunei Darussalam"
+  },
+  {
+    "id": "urn:iamproperty:country:BG",
+    "country_name": "Bulgaria"
+  },
+  {
+    "id": "urn:iamproperty:country:BF",
+    "country_name": "Burkina Faso"
+  },
+  {
+    "id": "urn:iamproperty:country:BI",
+    "country_name": "Burundi"
+  },
+  {
+    "id": "urn:iamproperty:country:KH",
+    "country_name": "Cambodia"
+  },
+  {
+    "id": "urn:iamproperty:country:CM",
+    "country_name": "Cameroon"
+  },
+  {
+    "id": "urn:iamproperty:country:CA",
+    "country_name": "Canada"
+  },
+  {
+    "id": "urn:iamproperty:country:CV",
+    "country_name": "Cabo Verde"
+  },
+  {
+    "id": "urn:iamproperty:country:KY",
+    "country_name": "Cayman Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:CF",
+    "country_name": "Central African Republic"
+  },
+  {
+    "id": "urn:iamproperty:country:TD",
+    "country_name": "Chad"
+  },
+  {
+    "id": "urn:iamproperty:country:CL",
+    "country_name": "Chile"
+  },
+  {
+    "id": "urn:iamproperty:country:CN",
+    "country_name": "China"
+  },
+  {
+    "id": "urn:iamproperty:country:CX",
+    "country_name": "Christmas Island"
+  },
+  {
+    "id": "urn:iamproperty:country:CC",
+    "country_name": "Cocos (Keeling) Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:CO",
+    "country_name": "Colombia"
+  },
+  {
+    "id": "urn:iamproperty:country:KM",
+    "country_name": "Comoros"
+  },
+  {
+    "id": "urn:iamproperty:country:CG",
+    "country_name": "Congo"
+  },
+  {
+    "id": "urn:iamproperty:country:CD",
+    "country_name": "Congo (Democratic Republic of the)"
+  },
+  {
+    "id": "urn:iamproperty:country:CK",
+    "country_name": "Cook Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:CR",
+    "country_name": "Costa Rica"
+  },
+  {
+    "id": "urn:iamproperty:country:CI",
+    "country_name": "Côte d’Ivoire"
+  },
+  {
+    "id": "urn:iamproperty:country:HR",
+    "country_name": "Croatia"
+  },
+  {
+    "id": "urn:iamproperty:country:CU",
+    "country_name": "Cuba"
+  },
+  {
+    "id": "urn:iamproperty:country:CW",
+    "country_name": "Curaçao"
+  },
+  {
+    "id": "urn:iamproperty:country:CY",
+    "country_name": "Cyprus"
+  },
+  {
+    "id": "urn:iamproperty:country:CZ",
+    "country_name": "Czech Republic"
+  },
+  {
+    "id": "urn:iamproperty:country:DK",
+    "country_name": "Denmark"
+  },
+  {
+    "id": "urn:iamproperty:country:DJ",
+    "country_name": "Djibouti"
+  },
+  {
+    "id": "urn:iamproperty:country:DM",
+    "country_name": "Dominica"
+  },
+  {
+    "id": "urn:iamproperty:country:DO",
+    "country_name": "Dominican Republic"
+  },
+  {
+    "id": "urn:iamproperty:country:EC",
+    "country_name": "Ecuador"
+  },
+  {
+    "id": "urn:iamproperty:country:EG",
+    "country_name": "Egypt"
+  },
+  {
+    "id": "urn:iamproperty:country:SV",
+    "country_name": "El Salvador"
+  },
+  {
+    "id": "urn:iamproperty:country:GQ",
+    "country_name": "Equatorial Guinea"
+  },
+  {
+    "id": "urn:iamproperty:country:ER",
+    "country_name": "Eritrea"
+  },
+  {
+    "id": "urn:iamproperty:country:EE",
+    "country_name": "Estonia"
+  },
+  {
+    "id": "urn:iamproperty:country:ET",
+    "country_name": "Ethiopia"
+  },
+  {
+    "id": "urn:iamproperty:country:FK",
+    "country_name": "Falkland Islands (Malvinas)"
+  },
+  {
+    "id": "urn:iamproperty:country:FO",
+    "country_name": "Faroe Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:FJ",
+    "country_name": "Fiji"
+  },
+  {
+    "id": "urn:iamproperty:country:FI",
+    "country_name": "Finland"
+  },
+  {
+    "id": "urn:iamproperty:country:FR",
+    "country_name": "France"
+  },
+  {
+    "id": "urn:iamproperty:country:GF",
+    "country_name": "French Guiana"
+  },
+  {
+    "id": "urn:iamproperty:country:PF",
+    "country_name": "French Polynesia"
+  },
+  {
+    "id": "urn:iamproperty:country:TF",
+    "country_name": "French Southern Territories"
+  },
+  {
+    "id": "urn:iamproperty:country:GA",
+    "country_name": "Gabon"
+  },
+  {
+    "id": "urn:iamproperty:country:GM",
+    "country_name": "Gambia"
+  },
+  {
+    "id": "urn:iamproperty:country:GE",
+    "country_name": "Georgia"
+  },
+  {
+    "id": "urn:iamproperty:country:DE",
+    "country_name": "Germany"
+  },
+  {
+    "id": "urn:iamproperty:country:GH",
+    "country_name": "Ghana"
+  },
+  {
+    "id": "urn:iamproperty:country:GI",
+    "country_name": "Gibraltar"
+  },
+  {
+    "id": "urn:iamproperty:country:GR",
+    "country_name": "Greece"
+  },
+  {
+    "id": "urn:iamproperty:country:GL",
+    "country_name": "Greenland"
+  },
+  {
+    "id": "urn:iamproperty:country:GD",
+    "country_name": "Grenada"
+  },
+  {
+    "id": "urn:iamproperty:country:GP",
+    "country_name": "Guadeloupe"
+  },
+  {
+    "id": "urn:iamproperty:country:GU",
+    "country_name": "Guam"
+  },
+  {
+    "id": "urn:iamproperty:country:GT",
+    "country_name": "Guatemala"
+  },
+  {
+    "id": "urn:iamproperty:country:GG",
+    "country_name": "Guernsey"
+  },
+  {
+    "id": "urn:iamproperty:country:GN",
+    "country_name": "Guinea"
+  },
+  {
+    "id": "urn:iamproperty:country:GW",
+    "country_name": "Guinea-Bissau"
+  },
+  {
+    "id": "urn:iamproperty:country:GY",
+    "country_name": "Guyana"
+  },
+  {
+    "id": "urn:iamproperty:country:HT",
+    "country_name": "Haiti"
+  },
+  {
+    "id": "urn:iamproperty:country:HM",
+    "country_name": "Heard Island and McDonald Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:VA",
+    "country_name": "Holy See"
+  },
+  {
+    "id": "urn:iamproperty:country:HN",
+    "country_name": "Honduras"
+  },
+  {
+    "id": "urn:iamproperty:country:HK",
+    "country_name": "Hong Kong"
+  },
+  {
+    "id": "urn:iamproperty:country:HU",
+    "country_name": "Hungary"
+  },
+  {
+    "id": "urn:iamproperty:country:IS",
+    "country_name": "Iceland"
+  },
+  {
+    "id": "urn:iamproperty:country:IN",
+    "country_name": "India"
+  },
+  {
+    "id": "urn:iamproperty:country:ID",
+    "country_name": "Indonesia"
+  },
+  {
+    "id": "urn:iamproperty:country:IR",
+    "country_name": "Iran (Islamic Republic of)"
+  },
+  {
+    "id": "urn:iamproperty:country:IQ",
+    "country_name": "Iraq"
+  },
+  {
+    "id": "urn:iamproperty:country:IE",
+    "country_name": "Ireland"
+  },
+  {
+    "id": "urn:iamproperty:country:IM",
+    "country_name": "Isle of Man"
+  },
+  {
+    "id": "urn:iamproperty:country:IL",
+    "country_name": "Israel"
+  },
+  {
+    "id": "urn:iamproperty:country:IT",
+    "country_name": "Italy"
+  },
+  {
+    "id": "urn:iamproperty:country:JM",
+    "country_name": "Jamaica"
+  },
+  {
+    "id": "urn:iamproperty:country:JP",
+    "country_name": "Japan"
+  },
+  {
+    "id": "urn:iamproperty:country:JE",
+    "country_name": "Jersey"
+  },
+  {
+    "id": "urn:iamproperty:country:JO",
+    "country_name": "Jordan"
+  },
+  {
+    "id": "urn:iamproperty:country:KZ",
+    "country_name": "Kazakhstan"
+  },
+  {
+    "id": "urn:iamproperty:country:KE",
+    "country_name": "Kenya"
+  },
+  {
+    "id": "urn:iamproperty:country:KI",
+    "country_name": "Kiribati"
+  },
+  {
+    "id": "urn:iamproperty:country:KP",
+    "country_name": "Korea (Democratic People's Republic of)"
+  },
+  {
+    "id": "urn:iamproperty:country:KR",
+    "country_name": "Korea (Republic of)"
+  },
+  {
+    "id": "urn:iamproperty:country:KW",
+    "country_name": "Kuwait"
+  },
+  {
+    "id": "urn:iamproperty:country:KG",
+    "country_name": "Kyrgyzstan"
+  },
+  {
+    "id": "urn:iamproperty:country:LA",
+    "country_name": "Lao People's Democratic Republic"
+  },
+  {
+    "id": "urn:iamproperty:country:LV",
+    "country_name": "Latvia"
+  },
+  {
+    "id": "urn:iamproperty:country:LB",
+    "country_name": "Lebanon"
+  },
+  {
+    "id": "urn:iamproperty:country:LS",
+    "country_name": "Lesotho"
+  },
+  {
+    "id": "urn:iamproperty:country:LR",
+    "country_name": "Liberia"
+  },
+  {
+    "id": "urn:iamproperty:country:LY",
+    "country_name": "Libya"
+  },
+  {
+    "id": "urn:iamproperty:country:LI",
+    "country_name": "Liechtenstein"
+  },
+  {
+    "id": "urn:iamproperty:country:LT",
+    "country_name": "Lithuania"
+  },
+  {
+    "id": "urn:iamproperty:country:LU",
+    "country_name": "Luxembourg"
+  },
+  {
+    "id": "urn:iamproperty:country:MO",
+    "country_name": "Macao"
+  },
+  {
+    "id": "urn:iamproperty:country:MK",
+    "country_name": "Republic of North Macedonia"
+  },
+  {
+    "id": "urn:iamproperty:country:MG",
+    "country_name": "Madagascar"
+  },
+  {
+    "id": "urn:iamproperty:country:MW",
+    "country_name": "Malawi"
+  },
+  {
+    "id": "urn:iamproperty:country:MY",
+    "country_name": "Malaysia"
+  },
+  {
+    "id": "urn:iamproperty:country:MV",
+    "country_name": "Maldives"
+  },
+  {
+    "id": "urn:iamproperty:country:ML",
+    "country_name": "Mali"
+  },
+  {
+    "id": "urn:iamproperty:country:MT",
+    "country_name": "Malta"
+  },
+  {
+    "id": "urn:iamproperty:country:MH",
+    "country_name": "Marshall Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:MQ",
+    "country_name": "Martinique"
+  },
+  {
+    "id": "urn:iamproperty:country:MR",
+    "country_name": "Mauritania"
+  },
+  {
+    "id": "urn:iamproperty:country:MU",
+    "country_name": "Mauritius"
+  },
+  {
+    "id": "urn:iamproperty:country:YT",
+    "country_name": "Mayotte"
+  },
+  {
+    "id": "urn:iamproperty:country:MX",
+    "country_name": "Mexico"
+  },
+  {
+    "id": "urn:iamproperty:country:FM",
+    "country_name": "Micronesia (Federated States of)"
+  },
+  {
+    "id": "urn:iamproperty:country:MD",
+    "country_name": "Moldova (Republic of)"
+  },
+  {
+    "id": "urn:iamproperty:country:MC",
+    "country_name": "Monaco"
+  },
+  {
+    "id": "urn:iamproperty:country:MN",
+    "country_name": "Mongolia"
+  },
+  {
+    "id": "urn:iamproperty:country:ME",
+    "country_name": "Montenegro"
+  },
+  {
+    "id": "urn:iamproperty:country:MS",
+    "country_name": "Montserrat"
+  },
+  {
+    "id": "urn:iamproperty:country:MA",
+    "country_name": "Morocco"
+  },
+  {
+    "id": "urn:iamproperty:country:MZ",
+    "country_name": "Mozambique"
+  },
+  {
+    "id": "urn:iamproperty:country:MM",
+    "country_name": "Myanmar"
+  },
+  {
+    "id": "urn:iamproperty:country:NA",
+    "country_name": "Namibia"
+  },
+  {
+    "id": "urn:iamproperty:country:NR",
+    "country_name": "Nauru"
+  },
+  {
+    "id": "urn:iamproperty:country:NP",
+    "country_name": "Nepal"
+  },
+  {
+    "id": "urn:iamproperty:country:NL",
+    "country_name": "Netherlands"
+  },
+  {
+    "id": "urn:iamproperty:country:NC",
+    "country_name": "New Caledonia"
+  },
+  {
+    "id": "urn:iamproperty:country:NZ",
+    "country_name": "New Zealand"
+  },
+  {
+    "id": "urn:iamproperty:country:NI",
+    "country_name": "Nicaragua"
+  },
+  {
+    "id": "urn:iamproperty:country:NE",
+    "country_name": "Niger"
+  },
+  {
+    "id": "urn:iamproperty:country:NG",
+    "country_name": "Nigeria"
+  },
+  {
+    "id": "urn:iamproperty:country:NU",
+    "country_name": "Niue"
+  },
+  {
+    "id": "urn:iamproperty:country:NF",
+    "country_name": "Norfolk Island"
+  },
+  {
+    "id": "urn:iamproperty:country:MP",
+    "country_name": "Northern Mariana Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:NO",
+    "country_name": "Norway"
+  },
+  {
+    "id": "urn:iamproperty:country:OM",
+    "country_name": "Oman"
+  },
+  {
+    "id": "urn:iamproperty:country:PK",
+    "country_name": "Pakistan"
+  },
+  {
+    "id": "urn:iamproperty:country:PW",
+    "country_name": "Palau"
+  },
+  {
+    "id": "urn:iamproperty:country:PS",
+    "country_name": "Palestine, State of"
+  },
+  {
+    "id": "urn:iamproperty:country:PA",
+    "country_name": "Panama"
+  },
+  {
+    "id": "urn:iamproperty:country:PG",
+    "country_name": "Papua New Guinea"
+  },
+  {
+    "id": "urn:iamproperty:country:PY",
+    "country_name": "Paraguay"
+  },
+  {
+    "id": "urn:iamproperty:country:PE",
+    "country_name": "Peru"
+  },
+  {
+    "id": "urn:iamproperty:country:PH",
+    "country_name": "Philippines"
+  },
+  {
+    "id": "urn:iamproperty:country:PN",
+    "country_name": "Pitcairn"
+  },
+  {
+    "id": "urn:iamproperty:country:PL",
+    "country_name": "Poland"
+  },
+  {
+    "id": "urn:iamproperty:country:PT",
+    "country_name": "Portugal"
+  },
+  {
+    "id": "urn:iamproperty:country:PR",
+    "country_name": "Puerto Rico"
+  },
+  {
+    "id": "urn:iamproperty:country:QA",
+    "country_name": "Qatar"
+  },
+  {
+    "id": "urn:iamproperty:country:RE",
+    "country_name": "Réunion"
+  },
+  {
+    "id": "urn:iamproperty:country:RO",
+    "country_name": "Romania"
+  },
+  {
+    "id": "urn:iamproperty:country:RU",
+    "country_name": "Russian Federation"
+  },
+  {
+    "id": "urn:iamproperty:country:RW",
+    "country_name": "Rwanda"
+  },
+  {
+    "id": "urn:iamproperty:country:BL",
+    "country_name": "Saint Barthélemy"
+  },
+  {
+    "id": "urn:iamproperty:country:SH",
+    "country_name": "Saint Helena, Ascension and Tristan da Cunha"
+  },
+  {
+    "id": "urn:iamproperty:country:KN",
+    "country_name": "Saint Kitts and Nevis"
+  },
+  {
+    "id": "urn:iamproperty:country:LC",
+    "country_name": "Saint Lucia"
+  },
+  {
+    "id": "urn:iamproperty:country:MF",
+    "country_name": "Saint Martin (French part)"
+  },
+  {
+    "id": "urn:iamproperty:country:PM",
+    "country_name": "Saint Pierre and Miquelon"
+  },
+  {
+    "id": "urn:iamproperty:country:VC",
+    "country_name": "Saint Vincent and the Grenadines"
+  },
+  {
+    "id": "urn:iamproperty:country:WS",
+    "country_name": "Samoa"
+  },
+  {
+    "id": "urn:iamproperty:country:SM",
+    "country_name": "San Marino"
+  },
+  {
+    "id": "urn:iamproperty:country:ST",
+    "country_name": "Sao Tome and Principe"
+  },
+  {
+    "id": "urn:iamproperty:country:SA",
+    "country_name": "Saudi Arabia"
+  },
+  {
+    "id": "urn:iamproperty:country:SN",
+    "country_name": "Senegal"
+  },
+  {
+    "id": "urn:iamproperty:country:RS",
+    "country_name": "Serbia"
+  },
+  {
+    "id": "urn:iamproperty:country:SC",
+    "country_name": "Seychelles"
+  },
+  {
+    "id": "urn:iamproperty:country:SL",
+    "country_name": "Sierra Leone"
+  },
+  {
+    "id": "urn:iamproperty:country:SG",
+    "country_name": "Singapore"
+  },
+  {
+    "id": "urn:iamproperty:country:SX",
+    "country_name": "Sint Maarten (Dutch part)"
+  },
+  {
+    "id": "urn:iamproperty:country:SK",
+    "country_name": "Slovakia"
+  },
+  {
+    "id": "urn:iamproperty:country:SI",
+    "country_name": "Slovenia"
+  },
+  {
+    "id": "urn:iamproperty:country:SB",
+    "country_name": "Solomon Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:SO",
+    "country_name": "Somalia"
+  },
+  {
+    "id": "urn:iamproperty:country:ZA",
+    "country_name": "South Africa"
+  },
+  {
+    "id": "urn:iamproperty:country:GS",
+    "country_name": "South Georgia and the South Sandwich Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:SS",
+    "country_name": "South Sudan"
+  },
+  {
+    "id": "urn:iamproperty:country:ES",
+    "country_name": "Spain"
+  },
+  {
+    "id": "urn:iamproperty:country:LK",
+    "country_name": "Sri Lanka"
+  },
+  {
+    "id": "urn:iamproperty:country:SD",
+    "country_name": "Sudan"
+  },
+  {
+    "id": "urn:iamproperty:country:SR",
+    "country_name": "Suriname"
+  },
+  {
+    "id": "urn:iamproperty:country:SJ",
+    "country_name": "Svalbard and Jan Mayen"
+  },
+  {
+    "id": "urn:iamproperty:country:SZ",
+    "country_name": "The Kingdom of Eswatini"
+  },
+  {
+    "id": "urn:iamproperty:country:SE",
+    "country_name": "Sweden"
+  },
+  {
+    "id": "urn:iamproperty:country:CH",
+    "country_name": "Switzerland"
+  },
+  {
+    "id": "urn:iamproperty:country:SY",
+    "country_name": "Syrian Arab Republic"
+  },
+  {
+    "id": "urn:iamproperty:country:TW",
+    "country_name": "Taiwan, Province of China"
+  },
+  {
+    "id": "urn:iamproperty:country:TJ",
+    "country_name": "Tajikistan"
+  },
+  {
+    "id": "urn:iamproperty:country:TZ",
+    "country_name": "Tanzania, United Republic of"
+  },
+  {
+    "id": "urn:iamproperty:country:TH",
+    "country_name": "Thailand"
+  },
+  {
+    "id": "urn:iamproperty:country:TL",
+    "country_name": "Timor-Leste"
+  },
+  {
+    "id": "urn:iamproperty:country:TG",
+    "country_name": "Togo"
+  },
+  {
+    "id": "urn:iamproperty:country:TK",
+    "country_name": "Tokelau"
+  },
+  {
+    "id": "urn:iamproperty:country:TO",
+    "country_name": "Tonga"
+  },
+  {
+    "id": "urn:iamproperty:country:TT",
+    "country_name": "Trinidad and Tobago"
+  },
+  {
+    "id": "urn:iamproperty:country:TN",
+    "country_name": "Tunisia"
+  },
+  {
+    "id": "urn:iamproperty:country:TR",
+    "country_name": "Republic of Türkiye"
+  },
+  {
+    "id": "urn:iamproperty:country:TM",
+    "country_name": "Turkmenistan"
+  },
+  {
+    "id": "urn:iamproperty:country:TC",
+    "country_name": "Turks and Caicos Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:TV",
+    "country_name": "Tuvalu"
+  },
+  {
+    "id": "urn:iamproperty:country:UG",
+    "country_name": "Uganda"
+  },
+  {
+    "id": "urn:iamproperty:country:UA",
+    "country_name": "Ukraine"
+  },
+  {
+    "id": "urn:iamproperty:country:AE",
+    "country_name": "United Arab Emirates"
+  },
+  {
+    "id": "urn:iamproperty:country:GB",
+    "country_name": "United Kingdom of Great Britain and Northern Ireland"
+  },
+  {
+    "id": "urn:iamproperty:country:US",
+    "country_name": "United States of America"
+  },
+  {
+    "id": "urn:iamproperty:country:UM",
+    "country_name": "United States Minor Outlying Islands"
+  },
+  {
+    "id": "urn:iamproperty:country:UY",
+    "country_name": "Uruguay"
+  },
+  {
+    "id": "urn:iamproperty:country:UZ",
+    "country_name": "Uzbekistan"
+  },
+  {
+    "id": "urn:iamproperty:country:VU",
+    "country_name": "Vanuatu"
+  },
+  {
+    "id": "urn:iamproperty:country:VE",
+    "country_name": "Venezuela (Bolivarian Republic of)"
+  },
+  {
+    "id": "urn:iamproperty:country:VN",
+    "country_name": "Viet Nam"
+  },
+  {
+    "id": "urn:iamproperty:country:VG",
+    "country_name": "Virgin Islands (British)"
+  },
+  {
+    "id": "urn:iamproperty:country:VI",
+    "country_name": "Virgin Islands (U.S.)"
+  },
+  {
+    "id": "urn:iamproperty:country:WF",
+    "country_name": "Wallis and Futuna"
+  },
+  {
+    "id": "urn:iamproperty:country:EH",
+    "country_name": "Western Sahara"
+  },
+  {
+    "id": "urn:iamproperty:country:YE",
+    "country_name": "Yemen"
+  },
+  {
+    "id": "urn:iamproperty:country:ZM",
+    "country_name": "Zambia"
+  },
+  {
+    "id": "urn:iamproperty:country:ZW",
+    "country_name": "Zimbabwe"
+  }
+];
+
+const countriesString = '';
+
+countries.forEach((country) => {
+  countriesString += `<option value="${country['is']}" data-value="${country['country_name']}">${country['country_name']}</option>`;
+});
+
+
+
 // Data layer Web component created
 declare global {
   interface Window {
@@ -40,12 +1047,12 @@ class iamSTDAddressLookup extends HTMLElement {
     data-min-chars="5" 
     ${this.hasAttribute('data-manual') ? 'data-manual' : ''} 
     ${this.hasAttribute('data-allow-manual') ? 'data-allow-manual' : ''} 
-    ${this.hasAttribute('data-use') ? `data-use='${this.getAttribute('data-use') }'` : ''} 
-    ${this.hasAttribute('data-use-label') ? `data-use-label='${this.getAttribute('data-use-label') }'` : ''} 
-    ${this.hasAttribute('data-postcode-value') ? `data-postcode-value='${this.getAttribute('data-postcode-value') }'` : ''}
-    ${this.hasAttribute('data-list-class') ? `data-list-class='${this.getAttribute('data-list-class') }'` : ''}
-    ${this.hasAttribute('data-input-class') ? `data-input-class='${this.getAttribute('data-input-class') }'` : ''}
-    ${this.hasAttribute('data-error-msg') ? `data-error-msg='${this.getAttribute('data-error-msg') }'` : ''}
+    ${this.hasAttribute('data-use') ? `data-use='${this.getAttribute('data-use')}'` : ''} 
+    ${this.hasAttribute('data-use-label') ? `data-use-label='${this.getAttribute('data-use-label')}'` : ''} 
+    ${this.hasAttribute('data-postcode-value') ? `data-postcode-value='${this.getAttribute('data-postcode-value')}'` : ''}
+    ${this.hasAttribute('data-list-class') ? `data-list-class='${this.getAttribute('data-list-class')}'` : ''}
+    ${this.hasAttribute('data-input-class') ? `data-input-class='${this.getAttribute('data-input-class')}'` : ''}
+    ${this.hasAttribute('data-error-msg') ? `data-error-msg='${this.getAttribute('data-error-msg')}'` : ''}
     ${this.hasAttribute('data-use-default') ? `data-use-default` : ''}
     ${this.hasAttribute('data-force-manual') ? `data-force-manual` : ''}
     data-postcode-lookup-label="Back to UK postcode lookup">
@@ -80,24 +1087,28 @@ class iamSTDAddressLookup extends HTMLElement {
     <label>Village${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="locality" type="text" maxlength="35"/></label>
     <label>Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="post_town" type="text" maxlength="30"/></label>
     <label>County${this.hasAttribute('data-show-required') && this.hasAttribute('data-county-required') ? '*' : (this.hasAttribute('data-show-required') ? '' : ' (optional)')} 
-    <select name="postal_county" ${this.hasAttribute('data-county-required') ?'data-required':''}>
+    <select name="postal_county" ${this.hasAttribute('data-county-required') ? 'data-required' : ''}>
       <option></option>  
       <option value="urn:als:county:a72ndjIq" data-value="Tyne and Wear">Tyne and Wear</option>
       <option value="urn:als:county:a72ndjI3" data-value="Durham">Durham</option>
     </select></label>
-    <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" data-required data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : '' }/></label>
+    <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" data-required data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
     <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (this.hasAttribute('data-show-required') ? '' : ' (optional)')} 
-      <select name="region" ${this.hasAttribute('data-country-required') ?'data-required':''}>
+      <select name="region" ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
         <option value=""></option>
-        <option value="England">England</option>
-        <option value="Wales">Wales</option>
-        <option value="Scotland">Scotland</option>
-        <option value="Northern Ireland">Northern Ireland</option>
+        <option value="urn:iamproperty:region:qo7jMNaA4" data-value="England">England</option>
+        <option value="urn:iamproperty:region:JPBkFjL6I" data-value="Scotland">Scotland</option>
+        <option value="urn:iamproperty:region:3lqe2D3qO" data-value="Wales">Wales</option>
+        <option value="urn:iamproperty:region:Tm5pOBfK9" data-value="Northern Ireland">Northern Ireland</option>
+        <option value="urn:iamproperty:region:ZwIRAnNJo" data-value="Channel Islands">Channel Islands</option>
+        <option value="urn:iamproperty:region:8CIOi1khw" data-value="Jersey">Jersey</option>
+        <option value="urn:iamproperty:region:qHdx7tNtL" data-value="Guernsey">Guernsey</option>
+        <option value="urn:iamproperty:region:DH6LU70lY" data-value="Isle of Man">Isle of Man</option>
       </select>
     </label>
 
     ${this.hasAttribute('data-allow-overseas') ?
-    `<fieldset class="overseas">
+        `<fieldset class="overseas">
 
       <span class="h3 pb-2">Street address</span>
 
@@ -131,6 +1142,7 @@ class iamSTDAddressLookup extends HTMLElement {
       
       <label>Country <select name="overseas[country_code]" data-overseas-required>
         <option value=""></option>
+        ${countriesString}
         <option value="urn:als:country:ndjIqa72" data-value="Poland">Poland</option>
       </select></label>
     </fieldset>
@@ -139,7 +1151,7 @@ class iamSTDAddressLookup extends HTMLElement {
 
     <div class="bg-light text-center px-3" slot="afterList">
       <p class="p-2">Can't find an address? Check details with the <br/><a href="" class="fa-new"><i class="fa-regular fa-arrow-up-right-from-square"></i>Royal mail address finder</a></p>
-      ${this.hasAttribute('data-allow-overseas') ? `<hr/><p class="p-2">If the address doesn’t exist you can enter manually <br /><button type="button" id="overseasToggleInline" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-edit me-1"></i>Enter address manually</button></p>`: ''}
+      ${this.hasAttribute('data-allow-overseas') ? `<hr/><p class="p-2">If the address doesn’t exist you can enter manually <br /><button type="button" id="overseasToggleInline" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-edit me-1"></i>Enter address manually</button></p>` : ''}
     </div>
     <div class="bg-light text-center px-3" slot="beforeList">
       <p class="p-2"><span class="default">Welsh</span><span class="alt">English</span> language addresses are available <br /><button type="button" id="languageToggle" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-globe me-1"></i>Show addreesses in <span class="default">Welsh</span><span class="alt">English</span></button></p>
@@ -170,14 +1182,14 @@ class iamSTDAddressLookup extends HTMLElement {
 
     overseasToggle?.addEventListener('click', () => {
 
-      if(!this.classList.contains('show-overseas')){
+      if (!this.classList.contains('show-overseas')) {
         openOverseas();
       }
     });
 
     overseasToggleInline?.addEventListener('click', () => {
 
-      if(!this.classList.contains('show-overseas')){
+      if (!this.classList.contains('show-overseas')) {
         openOverseas();
       }
     });
@@ -185,7 +1197,7 @@ class iamSTDAddressLookup extends HTMLElement {
     addressComponent?.addEventListener('switch-to-lookup', () => {
       this.classList.remove('show-overseas');
 
-      
+
       Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
         input.setAttribute('required', 'true');
       });
@@ -193,15 +1205,15 @@ class iamSTDAddressLookup extends HTMLElement {
 
     languageToggle?.addEventListener('click', () => {
 
-      if(!addressComponent.classList.contains('show-welsh')){
+      if (!addressComponent.classList.contains('show-welsh')) {
         addressComponent.classList.add('show-welsh');
-        addressComponent?.setAttribute('data-url-2','&welsh_language=true');
+        addressComponent?.setAttribute('data-url-2', '&welsh_language=true');
       }
       else {
         addressComponent.classList.remove('show-welsh');
-        addressComponent?.setAttribute('data-url-2','&welsh_language=false');
+        addressComponent?.setAttribute('data-url-2', '&welsh_language=false');
       }
-    
+
       const updateEvent = new CustomEvent('search');
       addressComponent.dispatchEvent(updateEvent);
 
@@ -214,9 +1226,9 @@ class iamSTDAddressLookup extends HTMLElement {
       Array.from(atleastone.querySelectorAll('[data-overseas-required]')).forEach((input) => {
         input.setAttribute('required', 'true');
       });
-      
 
-      if(atleastone.querySelector('input:valid, input.is-valid')){
+
+      if (atleastone.querySelector('input:valid, input.is-valid')) {
         Array.from(atleastone.querySelectorAll('input')).forEach(element => {
           element.removeAttribute('required');
         });
@@ -230,7 +1242,7 @@ class iamSTDAddressLookup extends HTMLElement {
 
 
 
-    
+
   }
 }
 
