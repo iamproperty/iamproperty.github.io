@@ -9,12 +9,23 @@
 
 
 <TableBasic data-show="15" data-page="1" data-total="50" data-page-minimal="" data-page-jump="" data-per-page="" data-item-count="" data-increment="15">
-   <Actionbar data-search="" slot="before" data-columns-shown="0">
-      <label class="tag tag--toggle" slot="selectall"><input type="radio" name="instruction" value="pre">Pre-instruction</label><label class="tag tag--toggle" slot="selectall"><input type="radio" name="instruction" value="post">Post-instruction</label><button class="btn btn-action mb-0 me-0 btn-compact js-updated show" type="button" popovertarget="sortbyOptions" aria-haspopup="true" aria-controls="sortbyOptions" style="anchor-name: --sortbyOptions;">Sort by <i class="fa-regular fa-chevron-down m-0" aria-hidden="true"></i></button>
-      <iam-menu id="sortbyOptions" popover="" role="menu" style="position-anchor: --sortbyOptions;"><label><input type="radio" name="order" value="task-asc">Task by ascending order</label><label><input type="radio" name="order" value="task-desc">Task by descending order</label></iam-menu>
-      <button class="btn btn-action mb-0 me-0 text-capitalize btn-compact js-updated show" type="button" popovertarget="filterOptions" aria-haspopup="true" aria-controls="filterOptions" style="anchor-name: --filterOptions;">Filter <i class="fa-regular fa-chevron-down m-0" aria-hidden="true"></i></button>
+  <Actionbar data-search="" slot="before" data-columns-shown="0">
+      <label class="tag tag--toggle" slot="filters"><input type="radio" name="instruction" value="pre">Pre-instruction</label>
+      <label class="tag tag--toggle" slot="filters"><input type="radio" name="instruction" value="post">Post-instruction</label>
+      
+
+      <button class="btn btn-action mb-0 me-0 fa-sort fa-compact-only" type="button" popovertarget="sortbyOptions" aria-haspopup="true" aria-controls="sortbyOptions" style="anchor-name: --sortbyOptions;">Sort by <i class="fa-regular fa-chevron-down m-0" aria-hidden="true"></i></button>
+
+      <iam-menu id="sortOptions" popover="" role="menu" style="position-anchor: --filterOptions;"><label><input type="radio" name="filter" value="my-cases">My cases</label><label><input type="radio" name="filter" value="all-cases">All Cases</label></iam-menu>
+    
+
+      <button class="btn btn-action mb-0 me-0 fa-filter fa-compact-only" type="button" popovertarget="sortbyOptions" aria-haspopup="true" aria-controls="sortbyOptions" style="anchor-name: --filterOptions;">Filter by <i class="fa-regular fa-chevron-down m-0" aria-hidden="true"></i></button>
+
+      
+      
       <iam-menu id="filterOptions" popover="" role="menu" style="position-anchor: --filterOptions;"><label><input type="radio" name="filter" value="my-cases">My cases</label><label><input type="radio" name="filter" value="all-cases">All Cases</label></iam-menu>
-   </Actionbar>
+    
+  </Actionbar>
    <table>
       <thead>
          <tr>
