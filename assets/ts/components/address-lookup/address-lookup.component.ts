@@ -161,6 +161,21 @@ class iamAddressLookup extends HTMLElement {
       manualWrapper.scrollIntoView();
     }
 
+    const atleastoneValidate = (): void => {
+
+      if(atleastone.querySelector('input:valid, input.is-valid')){
+        Array.from(atleastone.querySelectorAll('input')).forEach(element => {
+          element.removeAttribute('required');
+        });
+      }
+      else {
+        Array.from(atleastone.querySelectorAll('input')).forEach((input) => {
+          input.setAttribute('required', 'true');
+        });
+      }
+    }
+
+
     const fillInputs = (values): void => {
 
       lookupWrapper.classList.add('js-hide');
@@ -204,16 +219,7 @@ class iamAddressLookup extends HTMLElement {
 
       if(atleastone){
 
-        if(atleastone.querySelector('input:valid, input.is-valid')){
-          Array.from(atleastone.querySelectorAll('input')).forEach(element => {
-            element.removeAttribute('required');
-          });
-        }
-        else {
-          Array.from(atleastone.querySelectorAll('input')).forEach((input) => {
-            input.setAttribute('required', 'true');
-          });
-        }
+        atleastoneValidate();
       }
 
       if(!this.hasAttribute('data-force-manual'))
@@ -483,7 +489,6 @@ class iamAddressLookup extends HTMLElement {
         }
       }
         
-
       if (e.keyCode == 13){
         const valid = await search(lookup.value);
 
@@ -504,7 +509,6 @@ class iamAddressLookup extends HTMLElement {
           lookup?.classList.add('is-invalid');
           errorMsg?.innerHTML = valid;
         }
-
       }
     });
 
@@ -527,16 +531,7 @@ class iamAddressLookup extends HTMLElement {
       });
       
 
-      if(atleastone.querySelector('input:valid, input.is-valid')){
-        Array.from(atleastone.querySelectorAll('input')).forEach(element => {
-          element.removeAttribute('required');
-        });
-      }
-      else {
-        Array.from(atleastone.querySelectorAll('input')).forEach((input) => {
-          input.setAttribute('required', 'true');
-        });
-      }
+      atleastoneValidate();
     });
 
     postcodeSubmit?.addEventListener('click', async () => {
