@@ -999,10 +999,519 @@ const countries = [
   }
 ];
 
-const countriesString = '';
+const counties = [
+    {
+        "id": "urn:iamproperty:county:ekHuOPAhk",
+        "county": "Monmouthshire"
+    },
+    {
+        "id": "urn:iamproperty:county:AEbmaIiuw",
+        "county": "Cambridgeshire"
+    },
+    {
+        "id": "urn:iamproperty:county:HN2Hekmbp",
+        "county": "South Lanarkshire"
+    },
+    {
+        "id": "urn:iamproperty:county:520Tnh4wg",
+        "county": "Derbyshire"
+    },
+    {
+        "id": "urn:iamproperty:county:l5UCrwlvB",
+        "county": "Devon"
+    },
+    {
+        "id": "urn:iamproperty:county:GCA8Jh6Ic",
+        "county": "Bristol"
+    },
+    {
+        "id": "urn:iamproperty:county:Mi1lAB5uQ",
+        "county": "Rhondda Cynon Taf"
+    },
+    {
+        "id": "urn:iamproperty:county:n4jPkt4qP",
+        "county": "Carmarthenshire"
+    },
+    {
+        "id": "urn:iamproperty:county:XO1G4TTb5",
+        "county": "Aberdeenshire"
+    },
+    {
+        "id": "urn:iamproperty:county:JIaxjhlxx",
+        "county": "North Somerset"
+    },
+    {
+        "id": "urn:iamproperty:county:hLrOnlFfB",
+        "county": "Nottinghamshire"
+    },
+    {
+        "id": "urn:iamproperty:county:oGMGorIRg",
+        "county": "Durham"
+    },
+    {
+        "id": "urn:iamproperty:county:eBaLXgG8Y",
+        "county": "Isle of Wight"
+    },
+    {
+        "id": "urn:iamproperty:county:NMsdqInpw",
+        "county": "Northamptonshire"
+    },
+    {
+        "id": "urn:iamproperty:county:xRBQIke3k",
+        "county": "Warwickshire"
+    },
+    {
+        "id": "urn:iamproperty:county:R7yUpOlb4",
+        "county": "Berwickshire"
+    },
+    {
+        "id": "urn:iamproperty:county:S9DHMO2Hh",
+        "county": "East Sussex"
+    },
+    {
+        "id": "urn:iamproperty:county:rj4pK09x7",
+        "county": "Denbighshire"
+    },
+    {
+        "id": "urn:iamproperty:county:vuduFOMex",
+        "county": "Lanarkshire"
+    },
+    {
+        "id": "urn:iamproperty:county:5W66e6apO",
+        "county": "East Riding of Yorkshire"
+    },
+    {
+        "id": "urn:iamproperty:county:Hb6eqUJQj",
+        "county": "North Ayrshire"
+    },
+    {
+        "id": "urn:iamproperty:county:fwRrCvJ4C",
+        "county": "Greater Manchester"
+    },
+    {
+        "id": "urn:iamproperty:county:aekGxogbo",
+        "county": "East Renfrewshire"
+    },
+    {
+        "id": "urn:iamproperty:county:f3srYWllA",
+        "county": "Cardiff"
+    },
+    {
+        "id": "urn:iamproperty:county:DhVZEpSj5",
+        "county": "West Lothian"
+    },
+    {
+        "id": "urn:iamproperty:county:URWWHN7s0",
+        "county": "Dorset"
+    },
+    {
+        "id": "urn:iamproperty:county:jYK8wiDnY",
+        "county": "Leicestershire"
+    },
+    {
+        "id": "urn:iamproperty:county:048PGRA4X",
+        "county": "Blaenau Gwent"
+    },
+    {
+        "id": "urn:iamproperty:county:wrHCVsCva",
+        "county": "Berkshire"
+    },
+    {
+        "id": "urn:iamproperty:county:cCH4TjJ9q",
+        "county": "Norfolk"
+    },
+    {
+        "id": "urn:iamproperty:county:mvHEsdXhM",
+        "county": "Suffolk"
+    },
+    {
+        "id": "urn:iamproperty:county:faXBprr9q",
+        "county": "East Ayrshire"
+    },
+    {
+        "id": "urn:iamproperty:county:5wGBTbwou",
+        "county": "Conwy"
+    },
+    {
+        "id": "urn:iamproperty:county:5YXi0mQkk",
+        "county": "Cheshire"
+    },
+    {
+        "id": "urn:iamproperty:county:fuYiP18oc",
+        "county": "Bridgend"
+    },
+    {
+        "id": "urn:iamproperty:county:QaX0cXbOV",
+        "county": "West Yorkshire"
+    },
+    {
+        "id": "urn:iamproperty:county:Lo7JLx9og",
+        "county": "South Gloucestershire"
+    },
+    {
+        "id": "urn:iamproperty:county:B64E1f4T3",
+        "county": "Merthyr Tydfil"
+    },
+    {
+        "id": "urn:iamproperty:county:vacNt3Iie",
+        "county": "Banffshire"
+    },
+    {
+        "id": "urn:iamproperty:county:HSETldFbK",
+        "county": "Staffordshire"
+    },
+    {
+        "id": "urn:iamproperty:county:njUDNfLD3",
+        "county": "Western Isles"
+    },
+    {
+        "id": "urn:iamproperty:county:smlxqTdZE",
+        "county": "Bath and North East Somerset"
+    },
+    {
+        "id": "urn:iamproperty:county:2asBQ47Jh",
+        "county": "South Yorkshire"
+    },
+    {
+        "id": "urn:iamproperty:county:5hYXpCuJ7",
+        "county": "Stirling"
+    },
+    {
+        "id": "urn:iamproperty:county:lhFYBMSuq",
+        "county": "Powys"
+    },
+    {
+        "id": "urn:iamproperty:county:PamgW3ebq",
+        "county": "Vale of Glamorgan"
+    },
+    {
+        "id": "urn:iamproperty:county:zIasSsrlZ",
+        "county": "Clackmannanshire"
+    },
+    {
+        "id": "urn:iamproperty:county:WZUQNZxOy",
+        "county": "Lancashire"
+    },
+    {
+        "id": "urn:iamproperty:county:HoTgPpS58",
+        "county": "Hertfordshire"
+    },
+    {
+        "id": "urn:iamproperty:county:oNrluXBHA",
+        "county": "Fife"
+    },
+    {
+        "id": "urn:iamproperty:county:2OxE9CASK",
+        "county": "Neath Port Talbot"
+    },
+    {
+        "id": "urn:iamproperty:county:9J7YezLBA",
+        "county": "Highland"
+    },
+    {
+        "id": "urn:iamproperty:county:7IfpMh1Gx",
+        "county": "Ceredigion"
+    },
+    {
+        "id": "urn:iamproperty:county:ZwQ3mTTE2",
+        "county": "Orkney Islands"
+    },
+    {
+        "id": "urn:iamproperty:county:ZyNmV7NCn",
+        "county": "North Yorkshire"
+    },
+    {
+        "id": "urn:iamproperty:county:LwrVeERzu",
+        "county": "Pembrokeshire"
+    },
+    {
+        "id": "urn:iamproperty:county:porOuVsSM",
+        "county": "Wrexham"
+    },
+    {
+        "id": "urn:iamproperty:county:3o4Rx4sO8",
+        "county": "Renfrewshire"
+    },
+    {
+        "id": "urn:iamproperty:county:loLWjKyk8",
+        "county": "Oxfordshire"
+    },
+    {
+        "id": "urn:iamproperty:county:AN7Bz5tny",
+        "county": "Moray"
+    },
+    {
+        "id": "urn:iamproperty:county:RGzSdoQp3",
+        "county": "Ayrshire"
+    },
+    {
+        "id": "urn:iamproperty:county:nEBK48RIK",
+        "county": "Caithness"
+    },
+    {
+        "id": "urn:iamproperty:county:a90XABrjs",
+        "county": "West Dunbartonshire"
+    },
+    {
+        "id": "urn:iamproperty:county:Qjkb0wsyP",
+        "county": "West Sussex"
+    },
+    {
+        "id": "urn:iamproperty:county:fNJcfheKq",
+        "county": "Cornwall"
+    },
+    {
+        "id": "urn:iamproperty:county:lx0kEWvsb",
+        "county": "Anglesey"
+    },
+    {
+        "id": "urn:iamproperty:county:rkvgiBRHz",
+        "county": "Caerphilly"
+    },
+    {
+        "id": "urn:iamproperty:county:kx0t2zRVP",
+        "county": "Tyne and Wear"
+    },
+    {
+        "id": "urn:iamproperty:county:lVb75qnOW",
+        "county": "Merseyside"
+    },
+    {
+        "id": "urn:iamproperty:county:M7eZzrA8u",
+        "county": "Wiltshire"
+    },
+    {
+        "id": "urn:iamproperty:county:8Uo4sJw3x",
+        "county": "Perth and Kinross"
+    },
+    {
+        "id": "urn:iamproperty:county:73kc3w0cu",
+        "county": "Dumfries & Galloway"
+    },
+    {
+        "id": "urn:iamproperty:county:VFjExDeTO",
+        "county": "Swansea"
+    },
+    {
+        "id": "urn:iamproperty:county:lzsJuaRiS",
+        "county": "Isles of Scilly"
+    },
+    {
+        "id": "urn:iamproperty:county:abvvK0ZwH",
+        "county": "Worcestershire"
+    },
+    {
+        "id": "urn:iamproperty:county:1FKCbFkt2",
+        "county": "Scottish Borders"
+    },
+    {
+        "id": "urn:iamproperty:county:WKaOjrTLM",
+        "county": "Essex"
+    },
+    {
+        "id": "urn:iamproperty:county:0F00szlVA",
+        "county": "South Ayrshire"
+    },
+    {
+        "id": "urn:iamproperty:county:KDtAS0c8U",
+        "county": "Inverclyde"
+    },
+    {
+        "id": "urn:iamproperty:county:Md88sraTz",
+        "county": "Shetland Islands"
+    },
+    {
+        "id": "urn:iamproperty:county:LzzEE6zpp",
+        "county": "Herefordshire"
+    },
+    {
+        "id": "urn:iamproperty:county:lXaRRDNrq",
+        "county": "Angus"
+    },
+    {
+        "id": "urn:iamproperty:county:A5B4FFytC",
+        "county": "Surrey"
+    },
+    {
+        "id": "urn:iamproperty:county:B3siky9El",
+        "county": "Kent"
+    },
+    {
+        "id": "urn:iamproperty:county:V9njlL3kq",
+        "county": "Northumberland"
+    },
+    {
+        "id": "urn:iamproperty:county:WJiolIFFI",
+        "county": "Flintshire"
+    },
+    {
+        "id": "urn:iamproperty:county:4lXGX7NbU",
+        "county": "Gwynedd"
+    },
+    {
+        "id": "urn:iamproperty:county:7gzISbzTK",
+        "county": "Lincolnshire"
+    },
+    {
+        "id": "urn:iamproperty:county:D5GgqTxzN",
+        "county": "East Dunbartonshire"
+    },
+    {
+        "id": "urn:iamproperty:county:hhwXe4hTH",
+        "county": "Somerset"
+    },
+    {
+        "id": "urn:iamproperty:county:nECEnleYv",
+        "county": "Midlothian"
+    },
+    {
+        "id": "urn:iamproperty:county:2jksb8BIf",
+        "county": "Cumbria"
+    },
+    {
+        "id": "urn:iamproperty:county:ttfY8qr15",
+        "county": "Bedfordshire"
+    },
+    {
+        "id": "urn:iamproperty:county:YhQVg1amj",
+        "county": "West Midlands"
+    },
+    {
+        "id": "urn:iamproperty:county:EnbDIubYS",
+        "county": "North Lanarkshire"
+    },
+    {
+        "id": "urn:iamproperty:county:5SdVf3hnm",
+        "county": "Kincardineshire"
+    },
+    {
+        "id": "urn:iamproperty:county:BPedWUQXc",
+        "county": "Dunbartonshire"
+    },
+    {
+        "id": "urn:iamproperty:county:YLngqBWd4",
+        "county": "Hampshire"
+    },
+    {
+        "id": "urn:iamproperty:county:zBZHWiWon",
+        "county": "Buckinghamshire"
+    },
+    {
+        "id": "urn:iamproperty:county:kLes1W5ny",
+        "county": "East Lothian"
+    },
+    {
+        "id": "urn:iamproperty:county:yCMA4ANpN",
+        "county": "Rutland"
+    },
+    {
+        "id": "urn:iamproperty:county:jhourkJ4W",
+        "county": "Torfaen"
+    },
+    {
+        "id": "urn:iamproperty:county:aC8dF3IVE",
+        "county": "Newport"
+    },
+    {
+        "id": "urn:iamproperty:county:AnfqGRnhm",
+        "county": "Argyll & Bute"
+    },
+    {
+        "id": "urn:iamproperty:county:5BjmQe9mS",
+        "county": "Gloucestershire"
+    },
+    {
+        "id": "urn:iamproperty:county:G7WiUO5Sh",
+        "county": "Cleveland"
+    },
+    {
+        "id": "urn:iamproperty:county:zu7zHJPWh",
+        "county": "Shropshire"
+    },
+    {
+        "id": "urn:iamproperty:county:Bt301fwoy",
+        "county": "Greater London"
+    },
+    {
+        "id": "urn:iamproperty:county:LXHPqo5nj",
+        "county": "City of Edinburgh"
+    },
+    {
+        "id": "urn:iamproperty:county:YejLSQLAx",
+        "county": "Aberdeen City"
+    },
+    {
+        "id": "urn:iamproperty:county:o5lgD8dv7",
+        "county": "Dundee City"
+    },
+    {
+        "id": "urn:iamproperty:county:0HPMQtb09",
+        "county": "Falkirk"
+    },
+    {
+        "id": "urn:iamproperty:county:z1rPhQlGB",
+        "county": "Glasgow City"
+    },
+    {
+        "id": "urn:iamproperty:county:CskSiG5W0",
+        "county": "Brecknockshire"
+    },
+    {
+        "id": "urn:iamproperty:county:zulaN5fgu",
+        "county": "Caernarfonshire"
+    },
+    {
+        "id": "urn:iamproperty:county:D1YYNRchZ",
+        "county": "Cardiganshire"
+    },
+    {
+        "id": "urn:iamproperty:county:3DDFfQzoP",
+        "county": "Clwyd"
+    },
+    {
+        "id": "urn:iamproperty:county:hBr4CCduy",
+        "county": "Dyfed"
+    },
+    {
+        "id": "urn:iamproperty:county:7wcgGTpU9",
+        "county": "Antrim"
+    },
+    {
+        "id": "urn:iamproperty:county:PKM8DGZbI",
+        "county": "Armagh"
+    },
+    {
+        "id": "urn:iamproperty:county:LrvLXtQv4",
+        "county": "Down"
+    },
+    {
+        "id": "urn:iamproperty:county:HXDwhW1QG",
+        "county": "Fermanagh"
+    },
+    {
+        "id": "urn:iamproperty:county:eRHjMdT0e",
+        "county": "Londonderry"
+    },
+    {
+        "id": "urn:iamproperty:county:Xqs7aJsen",
+        "county": "Tyrone"
+    },
+    {
+        "id": "urn:iamproperty:county:rYAgcPlXZ",
+        "county": "Middlesex"
+    }
+]
+
+let countriesString = '';
 
 countries.forEach((country) => {
-  countriesString += `<option value="${country['is']}" data-value="${country['country_name']}">${country['country_name']}</option>`;
+  countriesString += `<option value="${country['id']}" data-value="${country['country_name']}">${country['country_name']}</option>`;
+});
+
+let countiesString = '';
+
+counties.forEach((county) => {
+  countiesString += `<option value="${county['id']}" data-value="${county['county']}">${county['county']}</option>`;
 });
 
 
@@ -1089,8 +1598,7 @@ class iamSTDAddressLookup extends HTMLElement {
     <label>County${this.hasAttribute('data-show-required') && this.hasAttribute('data-county-required') ? '*' : (this.hasAttribute('data-show-required') ? '' : ' (optional)')} 
     <select name="postal_county" ${this.hasAttribute('data-county-required') ? 'data-required' : ''}>
       <option></option>  
-      <option value="urn:als:county:a72ndjIq" data-value="Tyne and Wear">Tyne and Wear</option>
-      <option value="urn:als:county:a72ndjI3" data-value="Durham">Durham</option>
+      ${countiesString}
     </select></label>
     <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" data-required data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
     <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (this.hasAttribute('data-show-required') ? '' : ' (optional)')} 
@@ -1133,12 +1641,9 @@ class iamSTDAddressLookup extends HTMLElement {
       <span class="hint d-block mb-2">Main locality, such as the village, suburb, or district</span>
 
 
-      <label class="mb-1">Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[post_town]" type="text" maxlength="30" /></label>
-      
-      <label class="mb-1">State / Province / Region${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[double_dependent_locality]" type="text" /></label>
-      
-      <label class="mb-1">Postcode / ZIP code${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[zip_code]" type="text" /></label>
-      
+      <label>Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[post_town]" type="text" maxlength="30" /></label>
+      <label>State / Province / Region${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[double_dependent_locality]" type="text" /></label>
+      <label>Postcode / ZIP code${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[zip_code]" type="text" /></label>
       
       <label>Country <select name="overseas[country_code]" data-overseas-required>
         <option value=""></option>
