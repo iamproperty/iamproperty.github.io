@@ -38,25 +38,16 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
     if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
       const option = event.target.closest('option');
-     // if(option.hasAttribute('data-group')){
 
-        //option.classList.add('open');
-        //datalistWrapper.style.display = 'block';
-      //}
-      //else {
+      displayInputField.value = option.value;
 
-        displayInputField.value = option.value;
+      if (typeof window.triggerDynamicEvent == 'function') window.triggerDynamicEvent(displayInputField);
 
-        if (typeof window.triggerDynamicEvent == 'function') window.triggerDynamicEvent(displayInputField);
+      for (const optionInner of datalist.options) {
+        optionInner.classList.remove('active');
+      }
 
-        //datalistWrapper.style.display = 'none';
-
-        for (const optionInner of datalist.options) {
-          optionInner.classList.remove('active');
-        }
-
-        option.classList.add('active');
-      //}
+      option.classList.add('active');
     }
   });
 
@@ -125,12 +116,9 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       optionInner.removeAttribute('style');
     }
 
-    
     const updateEvent = new CustomEvent('close-button-pressed');
     advancedSelect.dispatchEvent(updateEvent);
   });
-  
-
 }
 
 export default advancedSelect;

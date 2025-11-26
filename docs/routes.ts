@@ -1478,6 +1478,11 @@ const routes = [
         path: '',
         component: () => import('./views/prototype/Index.vue'),
       },
+      {
+        path: 'address',
+        name: 'Address',
+        component: () => import('./views/prototype/address_finder.vue'),
+      },
     ],
   },
   {

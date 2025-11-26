@@ -40,16 +40,27 @@
   display: block;
 }
 
+:host([data-required]) {
+ // --error-border: var(--colour-danger);
+}
+
 input[name='postcode'] {
   border-color: var(--error-border, var(--colour-primary)) !important;
 }
 
-:is([name='postcode']):is(:focus, .focus):not(:disabled) {
-  border-color: var(--colour-info) !important;
+input[name='postcode'] {
+  background-image: var(--error-bg, none)!important;
+  background-repeat: no-repeat;
+  background-position: right var(--input-padding-inline, #{rem(16)}) center;
+  background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});
+  padding-right: calc(
+    var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)})
+  ) !important;
 }
 
-div:has(input[name='postcode']) .suffix {
-  border-color: var(--error-border, var(--colour-primary)) !important;
+
+:is([name='postcode']):is(:focus, .focus):not(:disabled) {
+  border-color: var(--colour-info) !important;
 }
 
 .invalid-feedback {
@@ -61,8 +72,9 @@ div:has(input[name='postcode']) .suffix {
 }
 
 .pre-filled {
-  background: var(--colour-light);
+  background-color: var(--colour-light);
   border-radius: 1rem;
+  max-width: rem(490);
 }
 
 .pre-filled .title:empty {
@@ -92,12 +104,17 @@ div:has(input[name='postcode']) .suffix {
 }
 
 .postcode-lookup input:not(.is-invalid) {
-  background-image: none!important;
+  //background-image: none!important;
 }
 
 .postcode-lookup:has(input.is-invalid) .invalid-feedback:not(:empty) {
   display: block!important;
   margin-bottom: 1rem;
+}
+
+
+.postcode-lookup .empty {
+  display: var(--error-hide, block);
 }
 
 

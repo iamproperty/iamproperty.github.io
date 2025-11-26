@@ -37,19 +37,45 @@ iam-address-lookup.show-welsh .default{
     z-index: 100;
 }
 
-iam-std-address-lookup iam-address-lookup .atleastone label:after,
-iam-std-address-lookup iam-address-lookup .overseas-atleastone label:after {
+iam-std-address-lookup iam-address-lookup .atleastone label:not(:has([readonly])):after,
+iam-std-address-lookup iam-address-lookup .overseas-atleastone label:not(:has([readonly])):after {
   display: none;
 }
 
-.was-validated iam-std-address-lookup iam-address-lookup .atleastone:not(:has(input:valid)) .invalid-feedback,
-.was-validated iam-std-address-lookup iam-address-lookup .overseas-atleastone:not(:has(input:valid)) .invalid-feedback,
-iam-std-address-lookup iam-address-lookup.was-validated .atleastone:not(:has(input:valid)) .invalid-feedback,
-iam-std-address-lookup iam-address-lookup.was-validated .overseas-atleastone:not(:has(input:valid)) .invalid-feedback {
+iam-std-address-lookup iam-address-lookup .hint {
+  display: block;
+}
+iam-std-address-lookup iam-address-lookup label:has([readonly]) + .hint, 
+iam-std-address-lookup iam-address-lookup label:has([readonly]) + .hint {
+  display: none;
+}
+
+.was-validated iam-std-address-lookup iam-address-lookup .atleastone:not(:has(input:valid)) > .invalid-feedback,
+.was-validated iam-std-address-lookup iam-address-lookup .overseas-atleastone:not(:has(input:valid)) > .invalid-feedback,
+iam-std-address-lookup iam-address-lookup.was-validated .atleastone:not(:has(input:valid)) > .invalid-feedback,
+iam-std-address-lookup iam-address-lookup.was-validated .overseas-atleastone:not(:has(input:valid)) > .invalid-feedback {
   display: block;
   margin-bottom: 1rem;
 }
 
+.was-validated iam-std-address-lookup iam-address-lookup .atleastone:not(:has(input:valid)) > .invalid-feedback + .hint,
+.was-validated iam-std-address-lookup iam-address-lookup .overseas-atleastone:not(:has(input:valid)) > .invalid-feedback + .hint,
+iam-std-address-lookup iam-address-lookup.was-validated .atleastone:not(:has(input:valid)) > .invalid-feedback + .hint,
+iam-std-address-lookup iam-address-lookup.was-validated .overseas-atleastone:not(:has(input:valid)) > .invalid-feedback + .hint {
+  display: none;
+}
+
 iam-std-address-lookup iam-address-lookup input:is(:valid, .is-valid):not(:is(:invalid, .is-invalid)){
-  background: none!important;
+  background-image: none!important;
+}
+
+// For demo purposes
+
+
+iam-std-address-lookup.open-results iam-address-lookup::part(list-wrapper){
+  display: block;
+}
+
+iam-std-address-lookup.open-results iam-address-lookup [slot="preloadedList"]{
+  display: block;
 }

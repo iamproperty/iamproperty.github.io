@@ -218,29 +218,7 @@ $optionalText: 'true' !default;
   }
   // #endregion
 
-  // #region Optional text
-  :is(label:not(.tag), .label) {
-    @if $optionalText == 'true' {
-      &:has(
-          + input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not(
-              [type='file']
-            )
-        ):after {
-        content: ' (Optional)';
-      }
-    }
 
-    &:has(
-        input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not(
-            [type='file']
-          )
-      )
-      .optional-text:before {
-      content: ' (Optional)';
-    }
-  }
-
-  // #endregion
 
   // #region input field
   :is(
@@ -679,7 +657,9 @@ $optionalText: 'true' !default;
 
   .was-validated iam-address-lookup:has([required]:invalid) {
     --error-border: var(--colour-danger);
+    --error-bg: #{escape-svg($icon-error)};
     --error-display: block;
+    --error-hide: none;
   }
 
   // Password checker
@@ -1381,7 +1361,8 @@ $optionalText: 'true' !default;
 }
 
 
-:is(iam-advanced-select, iam-search, .postcode-lookup) datalist {
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup) datalist {
+  
   &:empty {
     display: none !important;
   }
@@ -1391,8 +1372,14 @@ $optionalText: 'true' !default;
   position: absolute;
   background-color: white;
   border-top: none;
+
+  &:not(:empty){
+
   padding: 0.5rem;
-  max-height: 15rem;
+  }
+
+
+  max-height: 25rem;
   overflow-y: auto;
   width: 100%;
   max-width: var(--input-max-width, 50rem);
@@ -1442,15 +1429,18 @@ $optionalText: 'true' !default;
       background: hsl(from var(--colour-info) h s l / 10%) !important;
     }
   }
-
 }
 
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(*:active),:active) datalist {
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active),:active) datalist {
 
   display: block;
+
+  &:empty {
+    display: block !important;
+  }
 }
 
-:is(iam-advanced-select, iam-search, .postcode-lookup > div) .datalist__wrapper {
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper {
 
   top: 100%;
   position: absolute;
@@ -1460,7 +1450,7 @@ $optionalText: 'true' !default;
   max-width: var(--menu-item-width, 50rem) !important;
   z-index: 100;
   display: none;
-  max-height: 15rem;
+  max-height: 25rem;
   overflow-y: auto;
 
   > datalist {
@@ -1477,16 +1467,46 @@ $optionalText: 'true' !default;
   }
 }
 
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist:not(:empty)),
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.loading),
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.noresults),
-:is(iam-advanced-select, iam-search, .postcode-lookup > div) .datalist__wrapper:hover {
+iam-address-lookup [slot="preloadedList"]{
+  border: none!important;
+  box-shadow: none!important;
+  position: relative;
+  display: block!important;
+  border-radius: 0!important;
+  max-height: 100%!important;
+
+  &.noresults {
+    display: block !important;
+  }
+
+  &.noresults:before {
+    content: "No addresses found";
+    background-color: white;
+    padding: 1rem 0.5rem;
+    color: var(--colour-primary) !important;
+    font-weight: inherit !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    line-height: 1.1875rem !important;
+    padding-block: var(--menu-item-padding, 1rem) !important;
+    display: block;
+  }
+}
+
+
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist:not(:empty)),
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.loading),
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.noresults),
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper:hover {
 
   display: block;
 }
 
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.noresults){
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper:has(datalist.noresults){
   datalist {
+
+    display: block;
+
     &:before {
       content: "No addresses found";
       background-color: white;
@@ -1497,11 +1517,12 @@ $optionalText: 'true' !default;
       font-size: 1rem !important;
       line-height: rem(19) !important;
       padding-block: var(--menu-item-padding, 0.5rem) !important;
+      display: block;
     }
   }
 }
 
-:is(iam-advanced-select, iam-search, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.loading) {
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.loading) {
 
   datalist {
 
@@ -1554,6 +1575,9 @@ $optionalText: 'true' !default;
   }
 
   [name="beforeList"]:has(+ .showWelshBanner) {
+    display: block;
+  }
+  .datalist__wrapper.showWelshBanner [name="beforeList"] {
     display: block;
   }
 }
