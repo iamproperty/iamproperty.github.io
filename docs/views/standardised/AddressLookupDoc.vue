@@ -411,7 +411,7 @@
         <pre><code>{{`<iam-std-address-lookup></iam-std-address-lookup>`}}</code></pre>
       </template>
       <template #vue-component>
-        <pre><code>{{`<script setup>import Menu from '@/components/AddressLookup/AddressLookup.vue</script>
+        <pre><code>{{`<script setup>import AddressLookup from '@/components/AddressLookup/AddressLookup.vue</script>
         
 <STDAddressLookup></STDAddressLookup>
 `}}</code></pre>
