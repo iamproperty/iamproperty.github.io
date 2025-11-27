@@ -1663,7 +1663,7 @@ class iamSTDAddressLookup extends HTMLElement {
       ${this.hasAttribute('data-allow-overseas') ? `<hr/><p class="p-2">If the address doesn’t exist you can enter manually <br /><button type="button" id="overseasToggleInline" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-edit me-1"></i>Enter address manually</button></p>` : ''}
     </div>
     <div class="bg-light text-center px-3" slot="beforeList">
-      <p class="p-2"><span class="default">Welsh</span><span class="alt">English</span> language addresses are available <br /><button type="button" id="languageToggle" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-globe me-1"></i>Show addreesses in <span class="default">Welsh</span><span class="alt">English</span></button></p>
+      <p class="p-2"><span class="default">Welsh</span><span class="alt">English</span> language addresses are available <br /><button type="button" id="languageToggle" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-globe me-1"></i>Show addresses in <span class="default">Welsh</span><span class="alt">English</span></button></p>
     </div>
     ${currentContent}
     </iam-address-lookup>`;
@@ -1751,7 +1751,7 @@ class iamSTDAddressLookup extends HTMLElement {
 
 
 
-    
+
 
 
   }

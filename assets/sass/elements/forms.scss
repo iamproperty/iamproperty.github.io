@@ -1574,10 +1574,10 @@ iam-address-lookup [slot="preloadedList"]{
     display: none;
   }
 
-  [name="beforeList"]:has(+ .showWelshBanner) {
+  [name="beforeList"]:has(+ .show-welsh-banner) {
     display: block;
   }
-  .datalist__wrapper.showWelshBanner [name="beforeList"] {
+  .datalist__wrapper.show-welsh-banner [name="beforeList"] {
     display: block;
   }
 }

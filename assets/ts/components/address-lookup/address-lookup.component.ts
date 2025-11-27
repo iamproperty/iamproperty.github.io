@@ -258,7 +258,7 @@ class iamAddressLookup extends HTMLElement {
           list?.classList.remove('noresults');
           lookup?.classList.remove('is-invalid');
           errorMsg?.innerHTML = "";
-          list?.classList.remove('showWelshBanner');
+          list?.classList.remove('show-welsh-banner');
 
           Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
             input.removeAttribute('required');
@@ -361,7 +361,7 @@ class iamAddressLookup extends HTMLElement {
 
             if(response.meta && response.meta.welsh_language){
                       
-              list?.classList.add('showWelshBanner');     
+              list?.classList.add('show-welsh-banner');     
             }
             listWrapper?.focus();
             list?.querySelector('option')?.focus();
@@ -446,7 +446,7 @@ class iamAddressLookup extends HTMLElement {
       list?.classList.remove('noresults');
       lookup?.classList.remove('is-invalid');
       errorMsg?.innerHTML = "";
-      list?.classList.remove('showWelshBanner');
+      list?.classList.remove('show-welsh-banner');
 
       lookup.focus();
       lookup.value = "";
@@ -559,7 +559,7 @@ class iamAddressLookup extends HTMLElement {
       list?.classList.remove('noresults');
       lookup?.classList.remove('is-invalid');
       errorMsg?.innerHTML = "";
-      list?.classList.remove('showWelshBanner');
+      list?.classList.remove('show-welsh-banner');
 
       lookup.focus();
     });

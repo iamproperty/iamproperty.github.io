@@ -204,7 +204,7 @@
 
       <div class="md-col-span-6 md-col-start-auto mb-5">
         <div class="bg-light p-2 mb-3" style="min-height: 34rem;">
-          <STDAddressLookup class="open-results" data-list-class="showWelshBanner" data-postcode-value="CF10 3RB">
+          <STDAddressLookup class="open-results" data-list-class="show-welsh-banner" data-postcode-value="CF10 3RB">
             <datalist slot="preloadedList">
               <option>1 Castle Street, Cardiff CF10 3RB</option>
               <option>2 Castle Street, Cardiff CF10 3RB</option>
@@ -237,7 +237,7 @@
 
       <div class="md-col-span-6 md-col-start-auto mb-5">
         <div class="bg-light p-2 mb-3" style="min-height: 34rem;">
-          <STDAddressLookup class="open-results show-welsh" data-list-class="showWelshBanner" data-postcode-value="CF10 3RB">
+          <STDAddressLookup class="open-results show-welsh" data-list-class="show-welsh-banner" data-postcode-value="CF10 3RB">
             <datalist slot="preloadedList">
               <option>1 Stryd y Castell, Caerdydd CF10 3RB</option>
               <option>2 Stryd y Castell, Caerdydd CF10 3RB</option>
