@@ -1592,17 +1592,17 @@ class iamSTDAddressLookup extends HTMLElement {
 
 
     <span class="h3 pb-2">Locality details</span>
-    <label>Area${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="dependent_locality" type="text" maxlength="35"/></label>
-    <label>Village${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="locality" type="text" maxlength="35"/></label>
-    <label>Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="post_town" type="text" maxlength="30"/></label>
-    <label>County${this.hasAttribute('data-show-required') && this.hasAttribute('data-county-required') ? '*' : (this.hasAttribute('data-show-required') ? '' : ' (optional)')} 
-    <select name="postal_county" ${this.hasAttribute('data-county-required') ? 'data-required' : ''}>
+    <label>Area${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="dependent_locality" type="text" maxlength="35" data-readonly/></label>
+    <label>Village${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="locality" type="text" maxlength="35" data-readonly/></label>
+    <label>Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="post_town" type="text" maxlength="30" data-readonly/></label>
+    <label>County${this.hasAttribute('data-show-required') && this.hasAttribute('data-county-required') ? '*' : (!this.hasAttribute('data-show-required') && !this.hasAttribute('data-county-required') ? ' (optional)' : '')} 
+    <select name="postal_county" ${this.hasAttribute('data-county-required') ? 'data-required' : ''} data-readonly>
       <option></option>  
       ${countiesString}
     </select></label>
     <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" data-required data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
-    <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (this.hasAttribute('data-show-required') ? '' : ' (optional)')} 
-      <select name="region" ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
+    <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (!this.hasAttribute('data-show-required') && !this.hasAttribute('data-county-required') ? ' (optional)' : '')} 
+      <select name="region" data-readonly ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
         <option value=""></option>
         <option value="urn:iamproperty:region:qo7jMNaA4" data-value="England">England</option>
         <option value="urn:iamproperty:region:JPBkFjL6I" data-value="Scotland">Scotland</option>
@@ -1622,6 +1622,10 @@ class iamSTDAddressLookup extends HTMLElement {
 
       <fieldset class="overseas-atleastone">
         <span class="invalid-feedback">You must complete at least one of the highlighted fields.</span>
+
+        <span class="hint mb-4">Please ensure details are provided for at least one of these fields.</span>
+
+
         <label class="mb-1">Flat number${this.hasAttribute('data-show-required') ? '*' : ''} <input name="overseas[sub_building_name]" type="text" data-overseas-required /></label>
         <span class="hint d-block mb-2">Flat, unit or floor number (e.g. Flat 5, or Floor 6)</span>
 
@@ -1746,6 +1750,8 @@ class iamSTDAddressLookup extends HTMLElement {
     });
 
 
+
+    
 
 
   }
