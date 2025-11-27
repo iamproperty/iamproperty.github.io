@@ -1373,9 +1373,9 @@ $optionalText: 'true' !default;
   background-color: white;
   border-top: none;
 
-  &:not(:empty){
+  &:not(:empty):has(option:not(.hide)){
 
-  padding: 0.5rem;
+    padding: 0.5rem;
   }
 
 

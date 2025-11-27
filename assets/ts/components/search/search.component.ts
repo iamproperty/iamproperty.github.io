@@ -48,8 +48,12 @@ class iamSearch extends HTMLElement {
     const displaySchema = this.hasAttribute('data-display-schema') ? this.getAttribute('data-display-schema') : 'label';
     const loopSchema = this.hasAttribute('data-schema') ? this.getAttribute('data-schema') : '';
     let datalist = this.querySelector('datalist');
-    const searched = [];
-    let ajaxURL = this.getAttribute('data-url');
+    let minLength = 0;
+
+    if (searchWrapper.hasAttribute('data-url')) {
+
+      minLength = 3;
+    }
 
     // Clone original input field, re-name and use for display purposes
     const displayInputField = inputField.cloneNode();
@@ -74,38 +78,34 @@ class iamSearch extends HTMLElement {
 
     advancedSelect(this, displayInputField, datalist, false);
 
-    // Search the endpoint when 3 characters has been added
-    if (searchWrapper.hasAttribute('data-url')) {
-      displayInputField.addEventListener('input', () => {
-        if (displayInputField.value.length == 3 && !searched.includes(displayInputField.value)) {
-          search(displayInputField.value);
-          searched.push(displayInputField.value);
-        }
-      });
-    }
 
     function checkMatch(): void {
-      const match = datalist.querySelector(`option[value="${displayInputField.value}"]`);
+      const match = datalist.querySelector(`option[value="${displayInputField.value}" i]`);
       const subMatch = datalist.querySelector(`option[value*="${displayInputField.value}" i]`);
 
       if (match) {
-        inputField.value = match.getAttribute('data-value');
-        displayInputField.value = match.getAttribute('data-value');
-      } else if (displayInputField.value.length > 0 && !subMatch) {
+        inputField.value = match.getAttribute('data-actual-value');
+        console.log(inputField)
+        displayInputField.value = match.getAttribute('data-actual-value');
+
+        displayInputField.classList.remove('is-invalid');
+        displayInputField.closest('label').removeAttribute('data-error');
+      } 
+      else if (displayInputField.value.length >= minLength && !subMatch) {
         displayInputField.classList.add('is-invalid');
         displayInputField.closest('label').setAttribute('data-error', 'No results returned');
-      } else {
+        datalist.innerHTML = '';
+      } 
+      else {
         displayInputField.classList.remove('is-invalid');
         displayInputField.closest('label').removeAttribute('data-error');
       }
     }
 
-    // on change update oringinal field with the actual value and use displayed input for the nice display text
-    displayInputField.addEventListener('input', () => {
-      checkMatch();
-    });
-
+    
     const search = async (searchterm): any => {
+      
+      let ajaxURL = this.getAttribute('data-url');
       ajaxURL += `${encodeURI(searchterm)}`;
 
       // Setup controller vars if not already set
@@ -141,8 +141,8 @@ class iamSearch extends HTMLElement {
                 const actualValue = resolvePath(item, valueSchema, '');
                 const displayValue = resolvePath(item, displaySchema, '').replace('\n', ', ');
 
-                if (!datalist.querySelector(`option[data-value="${actualValue}"]`))
-                  listString += `<option value="${displayValue}" data-value="${actualValue}">${displayValue}</option>`;
+                if (!datalist.querySelector(`option[data-actual-value="${actualValue}"]`))
+                  listString += `<option value="${displayValue}" data-actual-value="${actualValue}">${displayValue}</option>`;
               });
             } else if (typeof loopValues == 'object') {
               for (const [key, value] of Object.entries(loopValues)) {
@@ -151,14 +151,26 @@ class iamSearch extends HTMLElement {
                     const actualValue = resolvePath(item, valueSchema, '');
                     const displayValue = resolvePath(item, displaySchema, '').replace('\n', ', ');
 
-                    if (!datalist.querySelector(`option[data-value="${actualValue}"]`))
-                      listString += `<option value="${key}: ${displayValue}" data-value='${actualValue}'>${key}: ${displayValue}</option>`;
+                    if (!datalist.querySelector(`option[data-actual-value="${actualValue}"]`))
+                      listString += `<option value="${key}: ${displayValue}" data-actual-value='${actualValue}'>${key}: ${displayValue}</option>`;
                   });
                 }
               }
             }
 
             datalist.innerHTML += listString;
+
+            // filter the list on the client side just in case
+            const text = searchterm.toUpperCase();
+            for (const option of datalist.options) {
+              if (option.value.toUpperCase().indexOf(text) > -1) {
+                option.style.display = 'block';
+                option.classList.remove('hide');
+              } else {
+                option.style.display = 'none';
+                option.classList.add('hide');
+              }
+            }
 
             displayInputField.closest('form').classList.add('was-validated');
             checkMatch();
@@ -169,6 +181,53 @@ class iamSearch extends HTMLElement {
         console.log(error);
       }
     };
+
+
+    datalist.addEventListener('click', function (event) {
+
+      if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
+        
+        const option = event.target.closest('option');
+        const value = option?.hasAttribute('data-actual-value') ? option?.getAttribute('data-actual-value') : option?.getAttribute('data-value');
+        inputField.value = value;
+
+        const changeEvent = new CustomEvent('value-change', {
+          detail: { value: value },
+        });
+        searchWrapper.dispatchEvent(changeEvent);
+      }
+    });
+
+    this.addEventListener('close-button-pressed', function (event) {
+
+      datalist.innerHTML = '';
+      inputField?.value = '';
+      
+      displayInputField.classList.remove('is-invalid');
+      displayInputField.closest('label').removeAttribute('data-error');
+    });
+
+
+    // Search the endpoint when 3 characters has been added
+    if (searchWrapper.hasAttribute('data-url')) {
+
+      displayInputField.addEventListener('input', () => {
+
+        if(displayInputField.value.length < minLength){
+          datalist.innerHTML = '';
+        }
+
+        if (displayInputField.value.length == minLength) {
+          search(displayInputField.value);
+        }
+      });
+    }
+    else {
+            // on change update oringinal field with the actual value and use displayed input for the nice display text
+      displayInputField.addEventListener('input', () => {
+        checkMatch();
+      });
+    }
 
     if (searchWrapper.hasAttribute('data-prevent-submit')) {
       const form = searchWrapper.closest('form');

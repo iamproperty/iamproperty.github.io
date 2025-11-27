@@ -1,4 +1,4 @@
-import iamAddressLookup from '../../../js/components/address-lookup/address-lookup.component.min.js';
+import iamAddressLookup from '../address-lookup/address-lookup.component';
 
 const countries = [
   {

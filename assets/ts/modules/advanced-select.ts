@@ -6,7 +6,9 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   // Hide the default datalist
   displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
   displayInputField.setAttribute('list', '');
-  displayInputField.setAttribute('data-placeholder', displayInputField.getAttribute('placeholder'));
+
+  if(displayInputField.hasAttribute('placeholder'))
+    displayInputField.setAttribute('data-placeholder', displayInputField.getAttribute('placeholder'));
 
   displayInputField.addEventListener('focus', function () {
     
@@ -58,8 +60,10 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     for (const option of datalist.options) {
       if (option.value.toUpperCase().indexOf(text) > -1) {
         option.style.display = 'block';
+        option.classList.remove('hide');
       } else {
         option.style.display = 'none';
+        option.classList.add('hide');
       }
     }
   });
@@ -107,7 +111,9 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   closeBtn.addEventListener('click', function (e) {
     
-    displayInputField.setAttribute('placeholder', displayInputField.hasAttribute('data-placeholder') ? displayInputField.getAttribute('data-placeholder') : '');
+    if(displayInputField.hasAttribute('data-placeholder'))
+      displayInputField.setAttribute('placeholder', displayInputField.getAttribute('data-placeholder'));
+
     displayInputField.removeAttribute('data-value');
     displayInputField.value = '';
 
