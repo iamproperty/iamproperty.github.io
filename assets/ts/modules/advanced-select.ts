@@ -10,6 +10,9 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   if(displayInputField.hasAttribute('placeholder'))
     displayInputField.setAttribute('data-placeholder', displayInputField.getAttribute('placeholder'));
 
+  if(displayInputField.hasAttribute('placeholder'))
+    displayInputField.setAttribute('data-original-placeholder', displayInputField.getAttribute('placeholder'));
+
   displayInputField.addEventListener('focus', function () {
     
     if(displayInputField.value != ""){
@@ -107,13 +110,13 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       'beforeend',
       '<button class="empty btn btn-action"><i class="fa-light fa-times me-0"></i></button>'
     );
-  const closeBtn = advancedSelect.querySelector('.empty') ? advancedSelect.querySelector('.empty') : advancedSelect.shadowRoot.querySelector('.empty');
 
-  closeBtn.addEventListener('click', function (e) {
+
+  const emptyField = () => {
+    if(displayInputField.hasAttribute('data-original-placeholder'))
+      displayInputField.setAttribute('placeholder', displayInputField.getAttribute('data-original-placeholder'));
     
-    if(displayInputField.hasAttribute('data-placeholder'))
-      displayInputField.setAttribute('placeholder', displayInputField.getAttribute('data-placeholder'));
-
+    
     displayInputField.removeAttribute('data-value');
     displayInputField.value = '';
 
@@ -124,6 +127,21 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
     const updateEvent = new CustomEvent('close-button-pressed');
     advancedSelect.dispatchEvent(updateEvent);
+  }
+
+
+
+
+  const closeBtn = advancedSelect.querySelector('.empty') ? advancedSelect.querySelector('.empty') : advancedSelect.shadowRoot.querySelector('.empty');
+
+  closeBtn.addEventListener('click', function (e) {
+
+    emptyField();
+  });
+
+  advancedSelect.addEventListener('empty', function (e) {
+
+    emptyField();
   });
 }
 

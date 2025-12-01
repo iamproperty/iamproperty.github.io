@@ -1346,9 +1346,8 @@ $optionalText: 'true' !default;
   }
 }
 
-.was-validated
-  :is(iam-advanced-select, iam-search, postcode-lookup)
-  label:has(:is(input:not([type='radio']):not([type='checkbox']), select)) {
+.was-validated :is(iam-advanced-select, iam-search, postcode-lookup) label:has(:is(input:not([type='radio']):not([type='checkbox']), select)),
+:is(iam-advanced-select, iam-search, postcode-lookup).was-validated label:has(:is(input:not([type='radio']):not([type='checkbox']), select)) {
   margin-bottom: 2.5rem;
 
   input {

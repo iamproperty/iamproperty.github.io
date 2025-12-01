@@ -172,7 +172,7 @@ class iamSearch extends HTMLElement {
               }
             }
 
-            displayInputField.closest('form').classList.add('was-validated');
+            searchWrapper.classList.add('was-validated');
             checkMatch();
 
             return response;
