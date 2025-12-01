@@ -279,6 +279,24 @@ $optionalText: 'true' !default;
     }
   }
 
+  [disabled] :is(
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
+    textarea,
+    output,
+    select:not(.select--minimal, .btn)
+  ) {
+      background-color: #ccd6d8;
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+  }
+
+  [disabled] label {
+
+      cursor: not-allowed;
+      pointer-events: none;
+  }
+
   :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range'])) {
     max-width: $input-max-width;
   }

@@ -202,6 +202,8 @@ class iamSearch extends HTMLElement {
 
       datalist.innerHTML = '';
       inputField?.value = '';
+
+      searchWrapper.classList.remove('was-validated');
       
       displayInputField.classList.remove('is-invalid');
       displayInputField.closest('label').removeAttribute('data-error');

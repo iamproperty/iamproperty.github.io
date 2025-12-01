@@ -108,7 +108,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     .closest('label')
     .insertAdjacentHTML(
       'beforeend',
-      '<button class="empty btn btn-action"><i class="fa-light fa-times me-0"></i></button>'
+      '<button class="empty btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>'
     );
 
 
