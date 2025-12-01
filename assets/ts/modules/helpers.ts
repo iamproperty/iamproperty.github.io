@@ -197,3 +197,11 @@ export const uniqueID = (index = 1): number => {
 
   return ID;
 };
+
+
+export const isValidPostcode = (searchValue: string): boolean => {
+  
+  const regexp = /^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/gmi;
+
+  return regexp.test(searchValue.trim());
+};

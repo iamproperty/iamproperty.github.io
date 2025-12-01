@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import advancedSelect from '../../modules/advanced-select';
+import {isValidPostcode} from '../../modules/helpers';
 
 // Data layer Web component created
 declare global {
@@ -140,7 +141,17 @@ class iamAddressLookup extends HTMLElement {
 
       preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(0, -2);
 
+
+      // If has label then use that
+
       if (preFilled) {
+
+        if(component.querySelector('[name="label"]'))
+          preFilledAddress.innerHTML = component.querySelector('[name="label"]').value;
+
+
+        // If has label then use that
+
         preFilledWrapper.classList.remove('js-hide');
         lookupWrapper.classList.add('js-hide');
         manualWrapper.classList.add('js-hide');
@@ -246,9 +257,8 @@ class iamAddressLookup extends HTMLElement {
       const postcode = searchValue; // TODO: remove when postcode comes from response
 
       if(this.hasAttribute('data-postcode')){
-        const regexp = /^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/gmi;
-
-        if (!regexp.test(searchValue)){
+        
+        if (!isValidPostcode(searchValue)){
           return "Invalid postcode, please enter a valid postcode";
         }
         else {
