@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "7.5.1--beta2",
+  "version": "7.5.1--beta5",
   "scripts": {
     "temp": "rollup --environment COMPONENT:carousel --config rollup-component.config.cjs --sourcemap",
     "reload": "vite --host",
@@ -33,6 +33,7 @@
     "gen:email": "sass assets/sass/email.scss assets/css/email.min.css --style=compressed && node local_modules/email-css.cjs",
     "gen:error": "sass assets/sass/error.scss assets/css/error.min.css --style=compressed && node local_modules/error-css.cjs",
     "test:vue": "jest src",
+    "test:ui": "jest assets/ts/ui-tests",
     "test:unit": "jest assets/ts/tests",
     "test:scss": "jest assets/sass/_tests",
     "test": "npm run test:unit && npm run test:scss",

@@ -54,9 +54,22 @@ export const addGlobalEvents = (body): void => {
     }
   });
 
-  document.addEventListener('submit', (event) => {
-    if (event && event.target instanceof HTMLElement && event.target.matches('form')) {
-      const form = event.target;
+  Array.from(document.querySelectorAll('form')).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (
+        form.querySelector(':invalid')
+      ) {
+        form.classList.add('was-validated');
+        form?.querySelector('input:invalid')?.scrollIntoView();
+        event.preventDefault();
+      }
+    });
+  });
+  
+  document.addEventListener('click', (event) => {
+    
+    if (event && event.target instanceof HTMLElement && event.target.matches('form button:not([type=button])')) {
+      const form = event.target.closest('form');
 
       // Reset password types
       Array.from(form.querySelectorAll('[data-password-type]')).forEach((input) => {
@@ -69,6 +82,7 @@ export const addGlobalEvents = (body): void => {
         form.querySelector('.pwd-checker[data-strength="2"]')
       ) {
         form.classList.add('was-validated');
+        form?.querySelector('input:invalid')?.scrollIntoView();
         event.preventDefault();
       }
 
@@ -182,4 +196,12 @@ export const uniqueID = (index = 1): number => {
   const ID = Math.floor(Math.random() * Date.now() * (index + 1));
 
   return ID;
+};
+
+
+export const isValidPostcode = (searchValue: string): boolean => {
+  
+  const regexp = /^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/gmi;
+
+  return regexp.test(searchValue.trim());
 };

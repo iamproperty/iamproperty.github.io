@@ -21,6 +21,7 @@
   "nav",
   "collapsible-side",
   "address-lookup",
+  "std-address-lookup",
   "fileupload",
   "search",
   "inline-edit",

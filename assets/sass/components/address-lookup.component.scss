@@ -2,6 +2,21 @@
 
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
+@use '../elements/links.scss' as *;
+
+
+
+@include layer('utilities', $layers) {
+
+  @include margins();
+}
+
+.bg-light {
+  background-color: var(--colour-light);
+}
+.text-center {
+  text-align: center;
+}
 
 .js-hide {
   display: none !important;
@@ -13,22 +28,39 @@
 .pb-2 {
   padding-bottom: 1rem !important;
 }
+.p-0 {
+  padding: 0!important;
+}
+.p-2{
+  padding: 1rem !important;
+}
 
 :host {
   margin-bottom: 1rem;
   display: block;
 }
 
+:host([data-required]) {
+ // --error-border: var(--colour-danger);
+}
+
 input[name='postcode'] {
   border-color: var(--error-border, var(--colour-primary)) !important;
 }
 
-:is([name='postcode']):is(:focus, .focus):not(:disabled) {
-  border-color: var(--colour-info) !important;
+input[name='postcode'] {
+  background-image: var(--error-bg, none)!important;
+  background-repeat: no-repeat;
+  background-position: right var(--input-padding-inline, #{rem(16)}) center;
+  background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});
+  padding-right: calc(
+    var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)})
+  ) !important;
 }
 
-div:has(input[name='postcode']) .suffix {
-  border-color: var(--error-border, var(--colour-primary)) !important;
+
+:is([name='postcode']):is(:focus, .focus):not(:disabled) {
+  border-color: var(--colour-info) !important;
 }
 
 .invalid-feedback {
@@ -39,11 +71,69 @@ div:has(input[name='postcode']) .suffix {
   display: var(--req-display, inline-block) !important;
 }
 
+.pre-filled {
+  background-color: var(--colour-light);
+  border-radius: 1rem;
+  max-width: rem(490);
+}
+
+.pre-filled .title:empty {
+  display: none!important;
+}
 .pre-filled p {
-  padding-bottom: 1rem;
+  display: flex;
+  margin: 0;
+  align-items: center;
+}
+.pre-filled p span{
+  margin-inline-end: auto;
 }
 .pre-filled button {
   border: none;
   background: none;
   cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+  font-size: 1rem;
+
+  &:after {
+    background-color: currentColor;
+  }
+}
+
+// change the datalist
+
+.postcode-lookup > div {
+  position: relative;
+}
+
+.postcode-lookup input:not(.is-invalid) {
+  //background-image: none!important;
+}
+
+.postcode-lookup:has(input.is-invalid) .invalid-feedback:not(:empty) {
+  display: block!important;
+  margin-bottom: 1rem;
+}
+
+
+.postcode-lookup .empty {
+  display: var(--error-hide, block);
+}
+
+
+.postcode-lookup:has(input.is-invalid) .datalist__wrapper,
+.postcode-lookup:has(input.is-invalid) label:after,
+.postcode-lookup:has(input.is-invalid) .empty,
+.postcode-lookup:has(input.is-invalid) [slot="hint"] {
+  display: none!important;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#paginationWrapper:not(:empty) ~ slot[name="afterList"] {
+  display: none;
 }

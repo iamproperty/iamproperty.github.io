@@ -107,12 +107,12 @@
           <label
             >Search existing transactions
             <span>
-              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" required />
+              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties3" />
               <span class="suffix fa-regular fa-search"></span>
             </span>
             <span class="hint-text">Enter 3 or more characters</span>
           </label>
-          <datalist id="properties"></datalist>
+          <datalist id="properties3"></datalist>
         </Search>
         <button class="d-none btn btn-primary">Submit</button>
       </form>
@@ -248,6 +248,26 @@
           <li>We should be allowed to submit the form unless data-prevent-submit is set.</li>
         </ul>
       </template>
+
+      <template #dispatched-events>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>value-change</th>
+              <td>When a user selects an option from the filtered dropdown</td>
+              <td>{ detail: { value: 'input value' } }</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
     </Integration>
 
     <Versions pdf="/pdfs/search.pdf">
