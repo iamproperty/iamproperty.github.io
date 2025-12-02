@@ -72,6 +72,10 @@ Array.from(components).forEach((component) => {
     componentFileName = "table";
   }
   
+  if (componentFileName == "std-address-lookup"){
+    componentFileName = "address-lookup";
+  }
+  
   try {
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.css`))) {
       
