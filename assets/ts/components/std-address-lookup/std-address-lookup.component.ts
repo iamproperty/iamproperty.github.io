@@ -1554,6 +1554,8 @@ class iamSTDAddressLookup extends HTMLElement {
     data-url="/standardaddress.json?search_query=" 
     data-postcode="true" 
     data-min-chars="5" 
+    data-title="Find an address by postcode" 
+    data-placeholder="UK, Isle of Man, & Channel Islands " 
     ${this.hasAttribute('data-manual') ? 'data-manual' : ''} 
     ${this.hasAttribute('data-allow-manual') ? 'data-allow-manual' : ''} 
     ${this.hasAttribute('data-use') ? `data-use='${this.getAttribute('data-use')}'` : ''} 
@@ -1748,7 +1750,6 @@ class iamSTDAddressLookup extends HTMLElement {
         });
       }
     });
-
 
 
   }

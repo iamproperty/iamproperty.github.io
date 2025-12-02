@@ -95,6 +95,10 @@ input[name='postcode'] {
   padding: 0;
   white-space: nowrap;
   font-size: 1rem;
+
+  &:after {
+    background-color: currentColor;
+  }
 }
 
 // change the datalist

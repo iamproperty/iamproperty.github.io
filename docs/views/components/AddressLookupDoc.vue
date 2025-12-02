@@ -193,6 +193,9 @@
       <li>Content in the action bar can be stacked.</li>
     </ul>
 
+    <h3>Keyboard options</h3>
+
+    <p>When navigating with the keyboard the tab key shifts between elements inside the popover, with the search results list treated as a single element. While search results are in focus the the up/down arrow keys are used to move between results.</p>
     <div class="mb-5">
       <div class="md-col-span-6 md-col-start-auto pb-4 text-center">
         <img :src="footerImg" class="w-100 mb-1"/>
@@ -204,7 +207,7 @@
       </div>
     </div>
     
-    <h2>Completed address</h2>
+    <h2>Compact address label</h2>
 
     <p>The completed address is shown as a single, compact line of text. This avoids the the use of multiple input fields and makes it clear that the address can’t be edited directly.</p>
     
