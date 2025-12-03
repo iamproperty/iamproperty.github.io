@@ -1602,7 +1602,7 @@ class iamSTDAddressLookup extends HTMLElement {
       <option></option>  
       ${countiesString}
     </select></label>
-    <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" data-required data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
+    <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" required data-required data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
     <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (!this.hasAttribute('data-show-required') && !this.hasAttribute('data-county-required') ? ' (optional)' : '')} 
       <select name="region" data-readonly ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
         <option value=""></option>
