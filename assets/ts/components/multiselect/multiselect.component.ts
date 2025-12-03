@@ -35,7 +35,7 @@ class iamMultiselect extends HTMLElement {
       <div class="admin-panel dropdown" part="dropdown">
         <slot></slot>
       </div>
-      <button id="clear"><span class="visually-hidden">Clear</span></button>
+      <button id="clear" class="btn btn-action "><span class="visually-hidden">Clear</span></button>
     </div>
     </div>
     </label>
