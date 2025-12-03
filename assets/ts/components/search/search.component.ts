@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
 import { safeID, resolvePath, isTraversable } from '../../modules/helpers';
 import advancedSelect from '../../modules/advanced-select';
 
