@@ -2,7 +2,7 @@
 import * as helpers from './modules/helpers';
 import extendDialogs from './modules/dialogs';
 import createDataLayer from './modules/data-layer';
-import extendInputs from './modules/inputs';
+
 import createDynamicEvents from './modules/dynamicEvents';
 import videoSupport from './modules/videos';
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async (): void => {
   helpers.addGlobalEvents(document.body);
 
   extendDialogs(document.body);
-  extendInputs(document.body);
+  
 
   videoSupport(document.body);
 

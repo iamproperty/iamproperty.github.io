@@ -1,9 +1,10 @@
 <script setup>
   import { onMounted } from 'vue';
 
-  const component = 'input';
+  const component = 'password';
 
   onMounted(() => {
+
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-${component}`))
@@ -16,7 +17,7 @@
 </script>
 
 <template>
-  <iam-input>
+  <iam-password>
     <slot></slot>
-  </iam-input>
+  </iam-password>
 </template>

@@ -1,0 +1,102 @@
+@use '../func' as *;
+@use '../elements/prefix.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+:host {
+  display: block;
+  max-width: var(--input-max-width, 50rem);
+}
+
+:host(:not(.mb-0)) {
+  margin-bottom: 1.5rem;
+}
+
+::slotted(input) {
+  margin: 0!important;
+}
+
+::slotted(input.has-prefix) {
+  margin: 0!important;
+  border-start-start-radius: 0!important;
+  border-end-start-radius: 0!important;
+}
+
+::slotted(input.has-suffix) {
+  border-start-end-radius: 0!important;
+  border-end-end-radius: 0!important;
+}
+
+// #region colors
+::slotted(input[type='color']) {
+  width: 3rem !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+::slotted(input[type='color'])::-webkit-color-swatch{
+  border-radius: 0;
+  border: none;
+}
+
+::slotted(output) {
+  border-left: none !important;
+  border-end-start-radius: 0 !important;
+  border-start-start-radius: 0 !important;
+  margin: 0 !important;
+}
+// #endregion
+
+// #region 
+@layer elements {
+::slotted(select:is([slot="prefix"],[slot="suffix"])){
+
+  --option-colour: red;
+
+  //--input-padding-block: 0;
+
+  margin: 0!important;
+
+  padding-top: 0!important;
+  padding-left: 0.25rem!important;
+  padding-bottom: 0!important;
+  padding-right: 2rem!important;
+  
+  margin-right: 0rem !important;
+  border: none !important;
+  //color: white;
+  height: 100%!important;
+  max-height: 100%!important;
+  min-height: 100%!important;
+
+  $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
+
+  background: escape-svg($form-select-indicator-new)!important;
+  background-position: center right!important;
+  background-size: 1.25rem!important;
+  background-repeat: no-repeat!important;
+  background-color: var(--colour-primary)!important;
+  color: var(--colour-white)!important;
+
+  field-sizing: content!important;
+}
+}
+// #endregion
+
+
+.suffix[role="button"] {
+  cursor: pointer;
+}

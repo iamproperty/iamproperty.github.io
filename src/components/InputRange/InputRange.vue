@@ -1,7 +1,7 @@
 <script setup>
   import { onMounted } from 'vue';
 
-  const component = 'input';
+  const component = 'input-range';
 
   onMounted(() => {
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <iam-input>
+  <iam-input-range>
     <slot></slot>
-  </iam-input>
+  </iam-input-range>
 </template>

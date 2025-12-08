@@ -20,7 +20,7 @@
     <div class="pb-5">
       <Notification>
         This is the standardised component which uses an existing UI component which has more flexability built in.
-        <br/><a href="/components/addresslookup" class="">UI component</a>
+        <br/><a href="/form-components/addresslookup" class="">UI component</a>
       </Notification>
       
     </div>

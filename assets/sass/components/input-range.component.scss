@@ -1,0 +1,31 @@
+@use '../_func' as *;
+
+.wrapper {
+  display: flex;
+  max-width: var(--input-max-width, 50rem);
+  gap: calc(var(--gap, 1rem) / 2);
+  align-items: center;
+}
+
+::slotted(*) {
+  flex-grow: 1!important;
+  flex-shrink: 1!important;
+  flex-basis: 50%!important;
+}
+
+::slotted(:first-child) {
+  order: 1;
+}
+
+::slotted(:last-child) {
+  order: 3;
+}
+
+.wrapper:before {
+  content: "";
+  order: 2;
+  width: calc(var(--gap, 1rem) * 1.5);
+  height: 2px;
+  background-color: var(--colour-border);
+  margin-top: 0.5rem;
+}
