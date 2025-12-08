@@ -728,7 +728,7 @@ const routes = [
         meta: {
           title: 'Input | Components | iamkey',
         },
-        component: () => import('./views/form-components/input.vue'),
+        component: () => import('./views/form-components/Input.vue'),
         searchterms: 'form, input, inline',
       },
       {
