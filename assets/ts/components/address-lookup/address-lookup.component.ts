@@ -34,6 +34,14 @@ class iamAddressLookup extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
     <div class="wrapper">
 
+      <div class="matched d-none">
+        <div class="inner">
+          <p><span class="matched-address"></span></p>
+          <button class="link use-matched">Yes, use this address</button>
+          <button class="link use-entered">No, use the address I entered</button>
+        </div>
+        <span class="invalid-feedback">We found a matching address based on the details you entered. Is this address correct?</span>
+      </div>
       <div class="postcode-lookup was-validated">
         <div>
         <label class="mb-1"><span class="title text-lowercase"></span>
@@ -100,6 +108,11 @@ class iamAddressLookup extends HTMLElement {
     const minChars = this.hasAttribute('data-min-chars') ? parseInt(this.getAttribute('data-min-chars')) : 3;
     let pageNumber = 1;
     const atleastone = this.querySelector('.atleastone');
+
+    const matchedAddress = this.shadowRoot.querySelector('.matched-address');
+    const matchedAddressWrapper = this.shadowRoot.querySelector('.matched');
+    const matchedAddressUse = this.shadowRoot.querySelector('.matched .use-matched');
+    const matchedAddressEntered = this.shadowRoot.querySelector('.matched .use-entered');
 
     Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement) => {
       titleElement.innerHTML = title;
@@ -586,6 +599,53 @@ class iamAddressLookup extends HTMLElement {
         }
       }
     });
+    // #endregion
+
+    // #region Matched address
+
+    if(this.hasAttribute('data-matched')){
+
+      matchedAddressWrapper?.classList.remove('d-none');
+
+
+      if(this.hasAttribute('data-matched-label'))
+        matchedAddress?.innerHTML = this.getAttribute('data-matched-label');
+
+      matchedAddressEntered?.addEventListener('click', () => {
+
+        matchedAddressWrapper?.remove();
+
+        const useCheckbox = this.shadowRoot?.querySelector('[name="use"]');
+        useCheckbox.checked = true;
+
+        lookupWrapper.classList.add('js-hide');
+        manualWrapper.classList.remove('js-hide');
+
+        const values = JSON.parse(this.getAttribute('data-use'));
+        
+        Object.keys(values).forEach((key) => {
+          const value = values[key];
+          if (this.querySelector(`[data-name="${key}"]`)) this.querySelector(`[data-name="${key}"]`).value = value;
+          else if (this.querySelector(`[name="${key}"]`)) this.querySelector(`[name="${key}"]`).value = value;
+        });
+        
+        checkFilled(this);
+      });
+
+      
+      matchedAddressUse?.addEventListener('click', () => {
+
+        matchedAddressWrapper?.remove();
+
+        const values = JSON.parse(this.getAttribute('data-matched'));
+
+        fillInputs(values);
+        checkFilled(this);
+      });
+    }
+    else {
+      matchedAddressWrapper?.remove();
+    }
     // #endregion
 
     advancedSelect(this, lookup, list, true);

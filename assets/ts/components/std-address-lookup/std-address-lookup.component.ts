@@ -1566,6 +1566,8 @@ class iamSTDAddressLookup extends HTMLElement {
     ${this.hasAttribute('data-error-msg') ? `data-error-msg='${this.getAttribute('data-error-msg')}'` : ''}
     ${this.hasAttribute('data-use-default') ? `data-use-default` : ''}
     ${this.hasAttribute('data-force-manual') ? `data-force-manual` : ''}
+    ${this.hasAttribute('data-matched') ? `data-matched='${this.getAttribute('data-matched')}'` : ''}
+    ${this.hasAttribute('data-matched-label') ? `data-matched-label='${this.getAttribute('data-matched-label')}'` : ''}
     data-postcode-lookup-label="Back to UK postcode lookup">
 
     <p class="hint pb-2 d-block" slot="hint">Unsure of the postcode? Check with the <a href="https://www.royalmail.com/find-a-postcode" target="_blank"><i class="fa-regular fa-arrow-up-right-from-square"></i>Royal Mail address finder</a></p>
@@ -1750,7 +1752,6 @@ class iamSTDAddressLookup extends HTMLElement {
         });
       }
     });
-
 
   }
 }

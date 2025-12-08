@@ -137,3 +137,23 @@ input[name='postcode'] {
 #paginationWrapper:not(:empty) ~ slot[name="afterList"] {
   display: none;
 }
+
+
+// #region Matched address
+.matched .inner {
+  border: 2px solid var(--colour-danger);
+  background: #fcebec;
+  padding-inline: 1rem;
+  border-radius: 0.5rem;
+}
+.matched:not(.d-none) + .postcode-lookup {
+  display: none;
+}
+.matched .invalid-feedback {
+  display: block !important;
+}
+.matched button {
+
+  --colour-underline: currentColor;
+}
+// #endregion

@@ -410,7 +410,14 @@
     </div>
 
 
+    <h3 class="pt-5">Matched address</h3>
+    <div id="visualtest21" :class="` mb-3 visualtest ${(urlParams.has('target') && urlParams.get('target') == 'visualtest21' ? 'target' : '')}`">
 
+      <div class="md-col-end-6">
+
+        <STDAddressLookup data-use='{"building_number":"2","dependent_thoroughfare":"Airfield View","dependent_locality":"Gosforth", "post_town":"Newcastle upon Tyne","postcode": "NE3 4HD"}' data-matched='{"building_number":"1","dependent_thoroughfare":"Airfield View","dependent_locality":"Gosforth", "post_town":"Newcastle upon Tyne","postcode": "NE3 4HD"}' data-matched-label="1 Airfield View, Gosforth, Newcastle upone Tyne, NE3 4HD"></STDAddressLookup>
+      </div>
+    </div>
 
     <Integration component="address-lookup" componentName="iam-address-lookup">
       <template #web-component>
