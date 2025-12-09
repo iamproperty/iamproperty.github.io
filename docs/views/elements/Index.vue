@@ -134,18 +134,6 @@
         </div>
       </div>
 
-      <h2>Dialog Elements</h2>
-
-      <div class="row row-cols-1 row-cols-md-3 mb-5">
-        <div v-for="item in dialogpages">
-          <a :href="item.link">
-            <Card>
-              {{ item.title }}
-              <span v-if="item.content" v-html="item.content"></span>
-            </Card>
-          </a>
-        </div>
-      </div>
     </div>
   </main>
 </template>

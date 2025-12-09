@@ -1,0 +1,220 @@
+@use '../_func.scss' as *;
+@use '../elements/dialog.scss' as *;
+
+@use '../elements/buttons.scss' as *;
+
+:host{
+  
+  overscroll-behavior: contain;
+
+  display: block;
+  container-type: inline-size;
+
+}
+
+
+dialog[open] {
+  //overflow-y: hidden;
+  width: 90vw;
+  max-width: rem(324); // col-width*4
+
+  //height: 90vh;
+  max-height: min(90vh, #{rem(752)});
+  overscroll-behavior: contain;
+  overflow-y: hidden;
+
+  @include media-breakpoint-up(sm, $mobileOnly) {
+    --dialog-padding: #{rem(32)};
+    min-width: rem(335);
+    width: fit-content;
+    max-width: rem(686);
+  }
+
+  @include media-breakpoint-up(md, $mobileOnly) {
+    min-width: rem(454);
+    width: fit-content;
+    max-width: rem(736);
+  }
+
+  &::before {
+    content: "";
+    top: 0.75rem;
+    bottom: auto;
+    left: 0;
+    right: 6px;
+    height: calc(var(--dialog-padding) - 0.75rem);
+    position: absolute;
+    display: block;
+    background: linear-gradient(0deg, transparent 0%, var(--colour-canvas-2) 100%);
+    z-index: 2;
+  }
+  
+  &::after {
+    content: "";
+    top: auto;
+    bottom: 0.75rem;
+    left: 0;
+    right: 6px;
+    height: calc(var(--dialog-padding) - 0.75rem);
+    position: absolute;
+    display: block;
+    background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
+    z-index: 2;
+  }
+
+  .scroll {
+    margin-inline: calc(var(--dialog-padding) * -1);
+    margin-block: calc(calc(var(--dialog-padding) - 0.75rem) * -1);
+    padding-inline: var(--dialog-padding);
+    padding-block: calc(var(--dialog-padding) - 0.75rem);
+    height: 100%;
+    max-height: 100%;
+    overflow: auto;
+    overscroll-behavior: contain;
+    position: relative;
+    z-index: 1;
+
+    .fa-circle {
+      display: none;
+    }
+  }
+
+
+  // Close button
+  > button:first-child {
+
+    position: absolute;
+    top: calc(var(--dialog-padding) - 0.75rem);
+    right: 6px;
+    z-index: var(--index-floating);
+    margin: 0;
+
+    &:not(:hover,:focus,:active){
+      background-color: Canvas;
+    }
+
+    @container (min-width: 36em) {
+      right: calc(var(--dialog-padding) - 0.75rem);
+    }
+    
+  }
+  
+
+  &:has(.youtube-embed) {
+    padding: 0 !important;
+  }
+
+  &.dialog--fullwidth {
+    max-width: rem(1112);
+  }
+
+  .btn-group {
+    display: none;
+  }
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+  overscroll-behavior: contain;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-top: 4px solid transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  width: 6px;
+  border-radius: 3px;
+}
+
+::slotted(p:last-child){
+  padding-bottom: 0!important;
+}
+::slotted(p:last-of-type){
+  padding-bottom: 0!important;
+}
+::slotted(:last-child){
+  margin-bottom: 0!important;
+}
+
+// #region transactional
+:host(:is([data-type="transactional"],[data-type="acknowledgement"])) dialog[open] {
+  text-align: center;
+
+  .scroll > .fa-circle {
+    display: var(--fa-display, block);
+    line-height: 1;
+    font-size: 3rem;
+    height: 3rem;
+    width: 3rem;
+    margin-top: 0;
+    margin-bottom: rem(24);
+    line-height: 1;
+    color: var(--colour-heading);
+        margin-inline: auto;
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      font-size: 4rem;
+      height: 4rem;
+      width: 4rem;
+    }
+
+    &:has(> i) {
+      position: relative;
+    }
+
+    > i:before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: scale(0.5) translate(-100%, 0);
+    }
+  }
+
+  > button:first-child {
+
+    display: none;
+  }
+  
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: var(--gap);
+    padding-top: 2rem;
+
+    button {
+      margin: 0;
+    }
+  }
+
+  @container (max-width: 36em) {
+    .btn-group {
+      display: flex;
+      flex-direction: column-reverse;
+      button {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+:host([data-type="acknowledgement"]) dialog[open] {
+
+  .btn-group [data-cancel] {
+    display: none;
+  }
+}
+// #endregion

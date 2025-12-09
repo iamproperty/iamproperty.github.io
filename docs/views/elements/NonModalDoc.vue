@@ -14,6 +14,7 @@
   import cookies from '../../img/dialogs/cookies.png';
   import surveys from '../../img/dialogs/surveys.png';
   import multiForm from '../../img/dialogs/multi-step-form.png';
+  import DialogComponents from '../DialogComponents.vue';
 </script>
 
 <template>
@@ -149,15 +150,9 @@
       </p>
     </div>
 
-    <div class="container pt-5 pb-5">
-      <h2>Different Non-Modal dialogs types</h2>
-      <div class="row row-cols-1 row-cols-md-3">
-        <div>
-          <a href="/dialogs/popover"><Card>Dialog (Popover)</Card></a>
-        </div>
-      </div>
-    </div>
-
+    
+    <DialogComponents></DialogComponents>
+    
     <div class="bg-light version-control">
       <div class="container">
         <table>

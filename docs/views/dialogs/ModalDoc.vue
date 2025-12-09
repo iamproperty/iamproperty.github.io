@@ -1,6 +1,7 @@
 <script setup>
   import { onMounted } from 'vue';
 
+  import Modal from '@/components/Modal/Modal.vue';
   import Tabs from '@/components/Tabs/Tabs.vue';
   import DSHeader from '../DSHeader.vue';
   import ModalVariants from '../ModalVariants.vue';
@@ -16,6 +17,7 @@
   import modalAcknowledgement from '../../img/dialogs/modal-acknowledgement.png';
   import modalAcknowledgementAnatomy from '../../img/dialogs/acknowledgement-modal-anatomy.png';
 
+  import Integration from '../Integration.vue';
   import { createDialog } from '../../../assets/ts/modules/dialogs';
 
   const htmlUsage = `<button data-modal="modal" class="btn btn-secondary">Open Modal</button>
@@ -130,7 +132,8 @@
       <h4>Preview</h4>
       <button data-modal="modal-passive" class="btn btn-secondary">Open Modal</button>
     </div>
-    <dialog id="modal-passive">
+
+    <Modal id="modal-passive">
       <span>Optional label</span>
       <span class="h3">Passive modal title</span>
 
@@ -198,8 +201,7 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
         enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
       </p>
-    </dialog>
-
+    </Modal>
     <!-- #endregion -->
 
     <!-- #region Transactional -->
@@ -245,8 +247,8 @@
       <h4>Preview</h4>
       <button data-modal="modal-transactional" class="btn btn-secondary">Open Modal</button>
     </div>
-    <dialog id="modal-transactional" class="dialog--transactional">
-      <i class="fa-light fa-circle"><i class="fa-regular fa-trash-can"></i></i>
+    
+    <Modal id="modal-transactional" data-type="transactional" data-icon="trash-can">
 
       <span class="h3">Delete property file</span>
       <p>
@@ -254,11 +256,7 @@
         continue?
       </p>
 
-      <form>
-        <button class="btn btn-secondary" formmethod="dialog">Cancel</button>
-        <button class="btn btn-primary">Delete</button>
-      </form>
-    </dialog>
+    </Modal>
 
     <!-- #endregion -->
 
@@ -300,16 +298,21 @@
       <h4>Preview</h4>
       <button data-modal="modal-ack" class="btn btn-secondary">Open Modal</button>
     </div>
-    <dialog id="modal-ack" class="dialog--acknowledgement">
+
+    
+
+    
+    <Modal id="modal-ack" data-type="acknowledgement">
+
       <span class="h3">Acknowledgment modal title</span>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
       </p>
 
-      <form>
-        <button class="btn btn-primary">OK</button>
-      </form>
-    </dialog>
+      <button class="btn btn-primary" slot="agreed-button">Submit</button>
+      
+
+    </Modal>
 
     <!-- #endregion -->
 
@@ -322,27 +325,71 @@
 
     <a href="/components/multistep" class="btn btn-secondary">Multi-step Component</a>
 
-    <div class="container mt-5">
-      <h2>Implementation</h2>
-      <Tabs>
-        <details>
-          <summary><h2>HTML</h2></summary>
-          <pre><code class="html">{{htmlUsage}}</code></pre>
-        </details>
-      </Tabs>
-    </div>
 
-    <div class="container pt-3">
-      <h2>Event Tracking</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Event</th>
-            <th>Triggers</th>
-            <th>Details captured</th>
-          </tr>
-        </thead>
-        <tbody>
+
+    <Integration component="Modal" componentName="iam-modal">
+      <template #web-component>
+        <pre><code>{{`<iam-modal>
+  <p>...</p>
+</iam-modal>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Modal from '@/components/Modal/Modal.vue</script>
+        
+<Modal>
+  <p>...</p>
+</Modal>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
+        <table>
+          <thead>
+            <tr>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>data-type</th>
+              <td>Passive</td>
+              <td>String</td>
+              <td>No</td>
+              <td>['passive','transactional','acknowledgement']</td>
+            </tr>
+            <tr>
+              <th>data-icon</th>
+              <td>info</td>
+              <td>String</td>
+              <td>No</td>
+              <td>Changes the visable icon</td>
+            </tr>
+            <tr>
+              <th>data-agreed-text</th>
+              <td>Ok</td>
+              <td>String</td>
+              <td>No</td>
+              <td>Change the text on default agreed button</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+
+      <template #dispatched-events>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
           <tr>
             <td>openModal</td>
             <td>
@@ -361,9 +408,36 @@
             </td>
             <td>The modal ID</td>
           </tr>
-        </tbody>
-      </table>
-    </div>
+          </tbody>
+        </table>
+      </template>
+
+      
+      <template #slots>
+        <table>
+          <thead>
+            <tr>
+              <th>Slot</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Default</th>
+              <td>The main content</td>
+            </tr>
+            <tr>
+              <th>agreed-button</th>
+              <td>Change the agreed button to something more bespoke</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      
+    </Integration>
+
+
 
     <div class="bg-light version-control">
       <div class="container">

@@ -244,6 +244,25 @@ const routes = [
         component: () => import('./views/elements/Details.vue'),
         searchterms: 'details, accordion, summary',
       },
+      {
+        path: 'dialog',
+        name: 'Dialog',
+        meta: {
+          title: 'Dialog | Elements | iamkey',
+        },
+        component: () => import('./views/elements/DialogDoc.vue'),
+        searchterms:
+          'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, inline notification, snackbar, banner, dismissal',
+      },
+      {
+        path: 'nonmodal',
+        name: 'Dialog (Non-Modal)',
+        meta: {
+          title: 'Dialog (Non-Modal) | Elements | iamkey',
+        },
+        component: () => import('./views/elements/NonModalDoc.vue'),
+        searchterms: 'passive, transactional, acknowledgement, popover',
+      },
     ],
   },
   {
@@ -394,33 +413,24 @@ const routes = [
         component: () => import('./views/elements/Index.vue'),
       },
       {
-        path: 'dialog',
-        name: 'Dialog',
-        meta: {
-          title: 'Dialog | Elements | iamkey',
-        },
-        component: () => import('./views/dialogs/DialogDoc.vue'),
-        searchterms:
-          'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, inline notification, snackbar, banner, dismissal',
-      },
-      {
         path: 'modal',
-        name: 'Dialog (Modal)',
+        name: 'Modal',
         meta: {
-          title: 'Dialog (Modal) | Elements | iamkey',
+          title: 'Modal | Elements | iamkey',
         },
         component: () => import('./views/dialogs/ModalDoc.vue'),
         searchterms:
           'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, dismissal',
       },
       {
-        path: 'nonmodal',
-        name: 'Dialog (Non-Modal)',
+        path: 'multi-step-modal',
+        name: 'Multi-step modal',
         meta: {
-          title: 'Dialog (Non-Modal) | Elements | iamkey',
+          title: 'Multi-step Modal | Elements | iamkey',
         },
-        component: () => import('./views/dialogs/NonModalDoc.vue'),
-        searchterms: 'passive, transactional, acknowledgement, popover',
+        component: () => import('./views/dialogs/MultiModalDoc.vue'),
+        searchterms:
+          'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, dismissal',
       },
       {
         path: 'popover',

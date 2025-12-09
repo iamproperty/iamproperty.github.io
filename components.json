@@ -42,5 +42,7 @@
   "milestone",
   "password-indicator",
   "darkmode",
-  "word-count"
+  "word-count",
+  "modal",
+  "multi-step-modal"
 ]

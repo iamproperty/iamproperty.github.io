@@ -20,6 +20,8 @@ $darkMode: 'true' !default;
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly
 );
+@use 'components/multi-step-modal.global';
+
 @use 'components/inline-edit.preload' with (
   $layers: $layers,
   $darkMode: $darkMode,

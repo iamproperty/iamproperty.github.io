@@ -128,12 +128,34 @@
     return arr;
   }, {});
 
+  const dialogElements = routes.reduce(function (arr, route) {
+    // Find the correct group
+    if (route.path === '/dialogs') {
+      arr = route.children;
+
+      const children = route.children.reduce(function (acc, route) {
+        // Remove the index
+        if (route.path) {
+          route.link = '/dialogs/' + route.path;
+          route.title = route.name;
+          route.content = '';
+          acc.push(route);
+        }
+        return acc;
+      }, []);
+
+      arr = children;
+    }
+    return arr;
+  }, {});
+
   const pages = components;
   const standardisedpages = standardisedcomponents;
   const navpages = navComponents;
   const notificationspages = notificationsComponents;
   const cardpages = cardComponents;
   const chartpages = chartComponents;
+  const dialogpages = dialogElements;
 </script>
 
 <template>
@@ -216,6 +238,20 @@
           </a>
         </div>
       </div>
+      
+      <h2>Dialog components</h2>
+
+      <div class="row row-cols-1 row-cols-md-3 mb-5">
+        <div v-for="item in dialogpages">
+          <a :href="item.link">
+            <Card>
+              {{ item.title }}
+              <span v-if="item.content" v-html="item.content"></span>
+            </Card>
+          </a>
+        </div>
+      </div>
+
     </div>
   </main>
 </template>
