@@ -408,6 +408,13 @@
             </td>
             <td>The modal ID</td>
           </tr>
+          <tr>
+            <td>agreed</td>
+            <td>
+              The primary button is pressed on the transactional and acknowledgement modals
+            </td>
+            <td>The modal ID</td>
+          </tr>
           </tbody>
         </table>
       </template>
