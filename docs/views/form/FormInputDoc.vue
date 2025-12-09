@@ -6,7 +6,6 @@
   import Input from '@/components/Input/Input.vue';
   import Readme from '@/components/Input/README.md';
   import Tabs from '@/components/Tabs/Tabs.vue';
-
   const message = 'input field value';
   const htmlUsage = `...`;
 
@@ -496,7 +495,7 @@
     <div class="container pb-0">
       <h3 class="h6">Password</h3>
       <p class="pb-3">
-        Password fields hide the field value for security. Please see <RouterLink to="/components/password-indicator">password indicator</RouterLink> for more information.
+        Password fields hide the field value for security. Please see <RouterLink to="/components/password">password component</RouterLink> for more information.
       </p>
     </div>
 
@@ -510,34 +509,12 @@
     <div class="container visualtest">
       <label for="color"
         >Input field label
-        <div>
-          <input type="color" id="color" name="color" required="" autocomplete="on" />
-          <output></output>
-        </div>
+        <input id="color" type="color" name="color" />
+        
       </label>
+
     </div>
 
-    <div class="container pt-4 pb-0">
-      <h2>Vue component</h2>
-    </div>
-
-    <div class="container pb-0 visualtest">
-      <Input id="vuecomp" label="Input field label" :value="message" v-model="message" maxlength="100"
-        ><span></span
-      ></Input>
-    </div>
-
-    <div class="container pb-4">
-      <h3 class="h6 pb-3">Data binding</h3>
-
-      <p>
-        The data binding within Vue JS can still be used even though we are using a bespoke component and not the
-        default input element.
-      </p>
-      <p>
-        Input field value: <strong>{{ message }}</strong>
-      </p>
-    </div>
 
     <div class="container">
       <h2>Implementation</h2>

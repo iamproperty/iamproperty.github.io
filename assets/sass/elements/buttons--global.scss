@@ -241,10 +241,6 @@ $darkMode: 'true' !default;
     position: relative;
     padding-right: rem(56);
 
-    &:not(.mw-100) {
-      max-width: rem(112 + 40 + 56);
-    }
-
     select {
       all: unset !important;
       margin: calc(rem(-12)) calc(rem(-40)) !important;
@@ -262,6 +258,7 @@ $darkMode: 'true' !default;
       font-weight: 500;
       font-size: var(--btn-font-size) !important;
       line-height: var(--btn-line-height) !important;
+      field-sizing: content!important;
 
       option {
         padding: 0;

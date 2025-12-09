@@ -5,7 +5,6 @@
   import Logo from '@/foundations/Logo/Logo.vue';
   import pkg from '../package.json';
   import * as helpers from '../assets/ts/modules/helpers';
-  import form from '../assets/ts/modules/form';
 
   export default {
     data() {
@@ -27,9 +26,6 @@
     mounted() {
       if (document.querySelector('main')) helpers.checkElements(document.querySelector('main'));
 
-      Array.from(document.querySelectorAll('form')).forEach((arrayElement, index) => {
-        form(arrayElement);
-      });
     },
   };
 </script>

@@ -51,6 +51,10 @@ components.forEach((component) => {
     componentFileName = "table";
   }
   
+  if (componentFileName == "std-address-lookup"){
+    componentFileName = "address-lookup";
+  }
+  
 
   
   try {

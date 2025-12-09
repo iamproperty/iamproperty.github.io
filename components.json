@@ -21,6 +21,7 @@
   "nav",
   "collapsible-side",
   "address-lookup",
+  "std-address-lookup",
   "fileupload",
   "search",
   "inline-edit",
@@ -39,7 +40,9 @@
   "advanced-select",
   "milestone-group",
   "milestone",
-  "password-indicator",
+  "password",
   "darkmode",
-  "word-count"
+  "word-count",
+  "input",
+  "input-range"
 ]

@@ -164,6 +164,16 @@ $optionalText: 'true' !default;
     padding: 0;
   }
 
+  ::-moz-color-swatch {
+    border-radius: 0;
+    border: none;
+  }
+
+  ::-webkit-color-swatch {
+    border-radius: 0;
+    border: none;
+  }
+
   // 1. Inherit font family and line height for file input buttons
   // 2. Correct the inability to style clickable types in iOS and Safari.
 
@@ -218,29 +228,7 @@ $optionalText: 'true' !default;
   }
   // #endregion
 
-  // #region Optional text
-  :is(label:not(.tag), .label) {
-    @if $optionalText == 'true' {
-      &:has(
-          + input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not(
-              [type='file']
-            )
-        ):after {
-        content: ' (Optional)';
-      }
-    }
 
-    &:has(
-        input:not(:disabled):not([readonly]):not(:required):not([type='radio']):not([type='checkbox']):not(
-            [type='file']
-          )
-      )
-      .optional-text:before {
-      content: ' (Optional)';
-    }
-  }
-
-  // #endregion
 
   // #region input field
   :is(
@@ -299,6 +287,30 @@ $optionalText: 'true' !default;
       opacity: 0.4;
       cursor: not-allowed;
     }
+  }
+
+  input[type='color'] {
+
+    padding: 0!important;
+    max-width: 3rem!important;
+  }
+  
+  [disabled] :is(
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
+    textarea,
+    output,
+    select:not(.select--minimal, .btn)
+  ) {
+      background-color: #ccd6d8;
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+  }
+
+  [disabled] label {
+
+      cursor: not-allowed;
+      pointer-events: none;
   }
 
   :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range'])) {
@@ -373,60 +385,21 @@ $optionalText: 'true' !default;
     }
   }
 
-  // #region colors
 
-  input[type='color'] {
-    width: 3rem !important;
-    flex-shrink: 0 !important;
-    flex-grow: 0 !important;
-    border-start-end-radius: 0 !important;
-    border-end-end-radius: 0 !important;
-    padding: 0 !important;
-    overflow: hidden;
-    cursor: pointer !important;
-
-    &::-moz-color-swatch {
-      border-radius: 0;
-      border: none;
-    }
-
-    &::-webkit-color-swatch {
-      border-radius: 0;
-      border: none;
-    }
-  }
-
-  label :is(div, span, fieldset):has(input[type='color'] + output) {
-    display: flex;
-  }
-
-  input[type='color'] + output {
-    border-left: none !important;
-    border-end-start-radius: 0 !important;
-    border-start-start-radius: 0 !important;
-    margin: 0 !important;
-  }
-
-  output {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0 !important;
-  }
-  // #endregion
-
-  div:has(> :is(.form-control-sm, .input--sm)) {
+  *:has(> :is(.form-control-sm, .input--sm)) {
     --input-fs: #{rem(14)};
     --input-lh: #{rem(16)};
     --input-padding-block: #{rem(10)};
     --input-padding-inline: #{rem(14)};
   }
-  div:has(> :is(.form-control-lg, .input--sm)) {
+  *:has(> :is(.form-control-lg, .input--lg)) {
     --input-fs: #{rem(24)};
     --input-lh: #{rem(29)};
     --input-padding-block: #{rem(20)};
     --input-padding-inline: #{rem(22)};
   }
 
-  div:has(> label:first-child):has(> input):has(> :is(.form-control-inline, .input--inline)) {
+  *:has(> label:first-child):has(> input):has(> :is(.form-control-inline, .input--inline)) {
     label {
       flex-shrink: 0;
       white-space: nowrap;
@@ -460,115 +433,10 @@ $optionalText: 'true' !default;
   // #endregion
 
   // #region prefix
-  :is(.prefix, .suffix) {
-    display: none;
-    pointer-events: none;
-  }
+  
   @supports selector(:has(*)) {
-    :is(.prefix, .suffix) {
-      display: inline-block;
-      width: auto;
-      padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-block, #{rem(16)});
-      font-size: var(--input-fs, #{rem(16)});
-      line-height: var(--input-lh, #{rem(20)});
-      color: var(--colour-body);
-      background-color: var(--colour-primary-theme);
-      border: 2px solid var(--colour-primary);
-      color: var(--colour-white);
-      margin-top: 0 !important;
-      margin-bottom: 1rem;
-      border-end-start-radius: rem(8);
-      border-start-start-radius: rem(8);
-      min-width: calc(#{rem(20 + 12 + 12)} + 4px);
-      overflow: hidden;
-      white-space: nowrap;
-      text-align: center;
-      text-overflow: ellipsis;
-      position: relative;
-
-      min-height: calc(
-        var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
-          4px
-      );
-      max-height: calc(
-        var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
-          4px
-      );
-      flex-shrink: 0;
-
-      &:after {
-        display: inline-block;
-        max-width: rem(20);
-      }
-
-      &[class*='fa-'] {
-        width: calc(#{rem(20 + 12 + 12)} + 4px);
-        padding-inline: 0;
-      }
-
-      select {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        cursor: pointer;
-      }
-
-      span {
-        display: none;
-      }
-
-      select:has(option:nth-child(1):checked) ~ span:nth-of-type(1),
-      select:has(option:nth-child(2):checked) ~ span:nth-of-type(2),
-      select:has(option:nth-child(3):checked) ~ span:nth-of-type(3),
-      select:has(option:nth-child(4):checked) ~ span:nth-of-type(4),
-      select:has(option:nth-child(5):checked) ~ span:nth-of-type(5),
-      select:has(option:nth-child(6):checked) ~ span:nth-of-type(6),
-      select:has(option:nth-child(7):checked) ~ span:nth-of-type(7),
-      select:has(option:nth-child(8):checked) ~ span:nth-of-type(8),
-      select:has(option:nth-child(9):checked) ~ span:nth-of-type(9),
-      select:has(option:nth-child(10):checked) ~ span:nth-of-type(10) {
-        display: block;
-      }
-
-      select ~ span:after {
-        content: ' \f078';
-        font-family: 'Font Awesome 6 Pro';
-        font-size: 0.8em;
-        display: inline-block;
-        padding-left: 1em;
-      }
-
-      select:focus-visible ~ span:after {
-        content: '\f077';
-      }
-    }
-
-    .prefix {
-      border-right: none;
-    }
-
-    .suffix {
-      border-left: none;
-      border-end-start-radius: 0;
-      border-start-start-radius: 0;
-      border-start-end-radius: rem(8) !important;
-      border-end-end-radius: rem(8) !important;
-      order: 2;
-    }
-
-    .prefix span {
-      display: none;
-
-      small {
-        font-size: 0.8em;
-      }
-    }
-
-    .prefix
-      ~ :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), textarea, output) {
-      border-end-start-radius: 0 !important;
-      border-start-start-radius: 0 !important;
-    }
+    
+    
 
     .suffix
       ~ :is(
@@ -675,28 +543,10 @@ $optionalText: 'true' !default;
 
   .was-validated iam-address-lookup:has([required]:invalid) {
     --error-border: var(--colour-danger);
+    --error-bg: #{escape-svg($icon-error)};
     --error-display: block;
+    --error-hide: none;
   }
-
-  // Password checker
-  .pwd-checker {
-    display: block;
-    background-repeat: no-repeat !important;
-    background-position: left center;
-    background-size: 1em 1em;
-    padding-left: 1.5rem !important;
-  }
-  .pwd-checker.invalid-feedback {
-    background-image: escape-svg($icon-error);
-  }
-
-  .pwd-checker:not(.invalid-feedback) {
-    background-image: escape-svg($icon-tick) !important;
-  }
-  label:has(.pwd-checker.invalid-feedback):after {
-    display: none !important;
-  }
-  // #endregion
 
   // #region radio/checkbox field
   @supports selector(:has(*)) {
@@ -1143,7 +993,8 @@ $optionalText: 'true' !default;
     }
 
     :is(input, select) ~ span:not(:is(.suffix, .prefix, .invalid-feedback)),
-    span:has(> :is(input, select)) ~ span:not(:is(.suffix, .prefix, .invalid-feedback)) {
+    span:has(> :is(input, select)) ~ span:not(:is(.suffix, .prefix, .invalid-feedback)),
+    .hint-text {
       all: initial;
       font-family: var(--font-body);
       color: var(--colour-body);
@@ -1296,31 +1147,37 @@ $optionalText: 'true' !default;
   // #endregion
 
   // #region Date and time fields
-  :is(input[type='date'], input[type='time']) {
+  :is(input[type='date'],input[type='datetime-local'],input[type='year'],input[type='month'],input[type='week'], input[type='time']) {
     position: relative;
     margin-right: -3rem;
     padding-right: 3rem !important;
     background-position: right 4rem center;
     border-radius: 0.5rem !important;
   }
-  :is(input[type='date'], input[type='time'])::-webkit-calendar-picker-indicator {
+  ::-webkit-calendar-picker-indicator {
     background: transparent;
     bottom: 0;
     color: transparent;
     cursor: pointer;
     height: auto;
-    left: 4em;
+    left: 0;
     position: absolute;
     right: 0;
     top: 0;
     width: auto;
     order: 3;
+    z-index: 98;
+  }
+  ::-webkit-datetime-edit {
+    position: relative;
+    z-index: 99;
+    max-width: fit-content;
   }
   // #endregion
 }
 
 // #region datalist
-:is(iam-advanced-select, iam-search) {
+:is(iam-advanced-select, iam-search, .postcode-lookup) {
   position: relative;
   display: block;
 
@@ -1362,9 +1219,8 @@ $optionalText: 'true' !default;
   }
 }
 
-.was-validated
-  :is(iam-advanced-select, iam-search)
-  label:has(:is(input:not([type='radio']):not([type='checkbox']), select)) {
+.was-validated :is(iam-advanced-select, iam-search, postcode-lookup) label:has(:is(input:not([type='radio']):not([type='checkbox']), select)),
+:is(iam-advanced-select, iam-search, postcode-lookup).was-validated label:has(:is(input:not([type='radio']):not([type='checkbox']), select)) {
   margin-bottom: 2.5rem;
 
   input {
@@ -1376,29 +1232,38 @@ $optionalText: 'true' !default;
   }
 }
 
-:is(iam-advanced-select, iam-search) datalist {
+
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup) datalist {
+  
   &:empty {
     display: none !important;
   }
 
-  z-index: 99;
+  z-index: 100;
   top: 100%;
   position: absolute;
   background-color: white;
   border-top: none;
-  padding: 0.5rem;
-  max-height: 10rem;
+
+  &:not(:empty):has(option:not(.hide)){
+
+    padding: 0.5rem;
+  }
+
+
+  max-height: 25rem;
   overflow-y: auto;
   width: 100%;
   max-width: var(--input-max-width, 50rem);
   border: none !important;
   border-radius: 0.5rem;
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+  display: none;
 
   option {
     background-color: white;
     padding: 0.5rem;
-    color: blue !important;
+    
     cursor: pointer;
     background: unset !important;
     border: unset !important;
@@ -1409,9 +1274,16 @@ $optionalText: 'true' !default;
     line-height: rem(19) !important;
     margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
     padding-block: var(--menu-item-padding, 0.5rem) !important;
-    width: var(--menu-item-width, 100%) !important;
-    max-width: var(--menu-item-width, 100%) !important;
+    width: 100% !important;
+    max-width: 100% !important;
     text-align: var(--menu-item-text-align, left) !important;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    text-overflow: ellipsis;
+    overflow: clip;
 
     &:is(:hover, :focus) {
       background: var(--colour-light) !important;
@@ -1422,11 +1294,7 @@ $optionalText: 'true' !default;
       background: rgba(224, 224, 224, 1) !important;
       border-radius: 0.25rem !important;
     }
-  }
-}
 
-iam-advanced-select datalist {
-  option {
     &.active {
       border-left: 4px solid var(--colour-info) !important;
       border-radius: 0.25rem !important;
@@ -1435,4 +1303,154 @@ iam-advanced-select datalist {
   }
 }
 
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active),:active) datalist {
+
+  display: block;
+
+  &:empty {
+    display: block !important;
+  }
+}
+
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper {
+
+  top: 100%;
+  position: absolute;
+  border-radius: 0.5rem;
+  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+  width: var(--menu-item-width, 50rem) !important;
+  max-width: var(--menu-item-width, 50rem) !important;
+  z-index: 100;
+  display: none;
+  max-height: 25rem;
+  overflow-y: auto;
+
+  > datalist {
+    border: none!important;
+    box-shadow: none!important;
+    position: relative;
+    display: block!important;
+    border-radius: 0!important;
+    max-height: 100%!important;
+  }
+
+  &:focus {
+    outline: none!important;
+  }
+}
+
+iam-address-lookup [slot="preloadedList"]{
+  border: none!important;
+  box-shadow: none!important;
+  position: relative;
+  display: block!important;
+  border-radius: 0!important;
+  max-height: 100%!important;
+
+  &.noresults {
+    display: block !important;
+  }
+
+  &.noresults:before {
+    content: "No addresses found";
+    background-color: white;
+    padding: 1rem 0.5rem;
+    color: var(--colour-primary) !important;
+    font-weight: inherit !important;
+    font-family: inherit !important;
+    font-size: 1rem !important;
+    line-height: 1.1875rem !important;
+    padding-block: var(--menu-item-padding, 1rem) !important;
+    display: block;
+  }
+}
+
+
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist:not(:empty)),
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.loading),
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.noresults),
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper:hover {
+
+  display: block;
+}
+
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper:has(datalist.noresults){
+  datalist {
+
+    display: block;
+
+    &:before {
+      content: "No addresses found";
+      background-color: white;
+      padding: 0.5rem;
+      color: var(--colour-primary) !important;
+      font-weight: inherit !important;
+      font-family: inherit !important;
+      font-size: 1rem !important;
+      line-height: rem(19) !important;
+      padding-block: var(--menu-item-padding, 0.5rem) !important;
+      display: block;
+    }
+  }
+}
+
+:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.loading) {
+
+  datalist {
+
+    height: 5rem;
+
+    &:before {
+      content: "\f021";
+      font-family: "Font Awesome 6 Pro";
+      font-size: 1.75rem;
+      font-weight: 300;
+      display: block;
+      position: absolute;
+      top: calc(50% - 1rem);
+      left: calc(50% - 1rem);
+      /*transform: translate(-50%,-50%);*/
+
+      animation-name: spin;
+      animation-duration: 4000ms;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+    }
+  }
+}
+
+@-ms-keyframes spin {
+    from { -ms-transform: rotate(0deg); }
+    to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from {
+        transform:rotate(0deg);
+    }
+    to {
+        transform:rotate(360deg);
+    }
+}
+
+:is(iam-advanced-select, iam-search, .postcode-lookup) {
+
+  [name="beforeList"] {
+    display: none;
+  }
+
+  [name="beforeList"]:has(+ .show-welsh-banner) {
+    display: block;
+  }
+  .datalist__wrapper.show-welsh-banner [name="beforeList"] {
+    display: block;
+  }
+}
 // #endregion

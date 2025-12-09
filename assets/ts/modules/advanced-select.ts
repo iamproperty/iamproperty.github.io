@@ -1,49 +1,52 @@
 function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = false): boolean | void {
   let currentFocus = -1;
 
-  if (!isSearch) {
-    displayInputField.addEventListener('focus', function () {
+  const datalistWrapper = datalist.closest('.datalist__wrapper') ? datalist.closest('.datalist__wrapper') : datalist;
+
+  // Hide the default datalist
+  displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
+  displayInputField.setAttribute('list', '');
+
+  if(displayInputField.hasAttribute('placeholder'))
+    displayInputField.setAttribute('data-placeholder', displayInputField.getAttribute('placeholder'));
+
+  if(displayInputField.hasAttribute('placeholder'))
+    displayInputField.setAttribute('data-original-placeholder', displayInputField.getAttribute('placeholder'));
+
+  displayInputField.addEventListener('focus', function () {
+    
+    if(displayInputField.value != ""){
+        
       displayInputField.setAttribute('placeholder', displayInputField.value);
       displayInputField.setAttribute('data-value', displayInputField.value);
-      displayInputField.value = '';
+    }
+    displayInputField.value = '';
 
-      displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
-      displayInputField.setAttribute('list', '');
+  });
 
-      datalist.style.display = 'block';
-    });
-  } else {
-    displayInputField.addEventListener('focus', function () {
-      displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
-      displayInputField.setAttribute('list', '');
-
-      datalist.style.display = 'block';
-    });
-  }
+    
 
   displayInputField.addEventListener('blur', function () {
     if (displayInputField.hasAttribute('data-value')) {
       displayInputField.value = displayInputField.getAttribute('data-value');
     }
 
-    setTimeout(() => {
-      datalist.style.display = 'none';
-    }, 500);
+    if(displayInputField.hasAttribute('data-placeholder'))
+      displayInputField.setAttribute('placeholder',displayInputField.getAttribute('data-placeholder'));
   });
 
   for (const option of datalist.options) {
     if (option.innerHTML == '') option.innerHTML = option.value;
   }
 
-  advancedSelect.addEventListener('click', function () {
-    if (event && event.target instanceof HTMLElement && event.target.closest('datalist option')) {
-      const option = event.target.closest('datalist option');
+  datalist.addEventListener('click', function (event) {
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
+      const option = event.target.closest('option');
 
       displayInputField.value = option.value;
 
       if (typeof window.triggerDynamicEvent == 'function') window.triggerDynamicEvent(displayInputField);
-
-      datalist.style.display = 'none';
 
       for (const optionInner of datalist.options) {
         optionInner.classList.remove('active');
@@ -60,13 +63,16 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     for (const option of datalist.options) {
       if (option.value.toUpperCase().indexOf(text) > -1) {
         option.style.display = 'block';
+        option.classList.remove('hide');
       } else {
         option.style.display = 'none';
+        option.classList.add('hide');
       }
     }
   });
 
-  displayInputField.addEventListener('keydown', function (e) {
+  advancedSelect.addEventListener('keydown', function (e) {
+
     if (e.keyCode == 40) {
       currentFocus++;
       addActive(datalist.options);
@@ -91,6 +97,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   }
 
   function removeActive(x): void {
+    if (!x) return false;
     for (let i = 0; i < x.length; i++) {
       x[i].classList.remove('active');
     }
@@ -101,12 +108,15 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     .closest('label')
     .insertAdjacentHTML(
       'beforeend',
-      '<button class="empty btn btn-action"><i class="fa-light fa-times me-0"></i></button>'
+      '<button class="empty btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>'
     );
-  const closeBtn = advancedSelect.querySelector('.empty');
 
-  closeBtn.addEventListener('click', function (e) {
-    displayInputField.removeAttribute('placeholder');
+
+  const emptyField = () => {
+    if(displayInputField.hasAttribute('data-original-placeholder'))
+      displayInputField.setAttribute('placeholder', displayInputField.getAttribute('data-original-placeholder'));
+    
+    
     displayInputField.removeAttribute('data-value');
     displayInputField.value = '';
 
@@ -114,6 +124,24 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       optionInner.classList.remove('active');
       optionInner.removeAttribute('style');
     }
+
+    const updateEvent = new CustomEvent('close-button-pressed');
+    advancedSelect.dispatchEvent(updateEvent);
+  }
+
+
+
+
+  const closeBtn = advancedSelect.querySelector('.empty') ? advancedSelect.querySelector('.empty') : advancedSelect.shadowRoot.querySelector('.empty');
+
+  closeBtn.addEventListener('click', function (e) {
+
+    emptyField();
+  });
+
+  advancedSelect.addEventListener('empty', function (e) {
+
+    emptyField();
   });
 }
 
