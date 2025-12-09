@@ -44,5 +44,6 @@
   "darkmode",
   "word-count",
   "input",
-  "input-range"
+  "input-range",
+  "text-editor"
 ]

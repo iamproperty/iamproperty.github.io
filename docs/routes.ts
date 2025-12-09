@@ -658,6 +658,15 @@ const routes = [
         component: () => import('./views/components/TestimonialDoc.vue'),
       },
       {
+        path: 'text-editor',
+        name: 'Text Editor (Beta)',
+        meta: {
+          title: 'Text Editor | Components | iamkey',
+        },
+        component: () => import('./views/components/TextEditorDoc.vue'),
+        searchterms: '',
+      },
+      {
         path: 'milestone',
         name: 'Milestones',
         meta: {
