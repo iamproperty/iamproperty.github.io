@@ -44,15 +44,41 @@ class iamModal extends HTMLElement {
   }
 
   connectedCallback(): void {
-    const id = this.getAttribute('id');
+
+    const originalDialog = this.querySelector('dialog');
+
+    const id = this.hasAttribute('id') ? this.getAttribute('id') : originalDialog?.getAttribute('id');
     const dialog = this.shadowRoot?.querySelector('dialog');
-    const button = document.querySelector(`[data-modal="${id}"]`);
     const closeButton = this.shadowRoot?.querySelector('[data-close]');
     const cancelButton = this.shadowRoot?.querySelector('[data-cancel]');
     const agreedButton = this.shadowRoot?.querySelector('[data-agreed]');
+    const slottedAgreedButton = this.querySelector('button[slot="agreed-button"]');
     const modalType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'passive';
 
-    button?.addEventListener('click', () => {
+
+    document.addEventListener('click', (e) => {
+      
+      if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
+        openModal();
+      }
+    });
+    
+    // Disable the original event 
+    originalDialog?.addEventListener('command', (e) => {
+
+      if (event.command == "show-modal") {
+        e.preventDefault();
+      }
+    });
+
+    // Move the submit button so that the slot functionality works
+    Array.from(originalDialog?.querySelectorAll('[slot]')).forEach((element) => {
+      this.moveBefore(element, originalDialog);
+    });
+
+
+
+    const openModal = () => {
       dialog?.showModal();
       dialog?.focus();
 
@@ -69,7 +95,7 @@ class iamModal extends HTMLElement {
         event: 'openModal',
         id: id,
       });
-    });
+    }
 
     const closeModal = () => {
       dialog?.close();
@@ -98,6 +124,17 @@ class iamModal extends HTMLElement {
     });
 
     agreedButton?.addEventListener('click', () => {
+
+      const agreedEvent = new CustomEvent('agreed', {
+        detail: { modalId: id },
+      });
+
+      this.dispatchEvent(agreedEvent);
+
+      closeModal();
+    });
+    
+    slottedAgreedButton?.addEventListener('click', () => {
 
       const agreedEvent = new CustomEvent('agreed', {
         detail: { modalId: id },

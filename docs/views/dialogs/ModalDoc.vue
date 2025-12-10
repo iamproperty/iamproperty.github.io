@@ -130,10 +130,12 @@
 
     <div class="container pb-5 mb-5">
       <h4>Preview</h4>
-      <button data-modal="modal-passive" class="btn btn-secondary">Open Modal</button>
+      <button command="show-modal" commandfor="modal-passive" class="btn btn-secondary">Open Modal</button>
     </div>
 
-    <Modal id="modal-passive">
+    <Modal>
+      <dialog id="modal-passive">
+      
       <span>Optional label</span>
       <span class="h3">Passive modal title</span>
 
@@ -201,6 +203,7 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
         enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
       </p>
+      </dialog>
     </Modal>
     <!-- #endregion -->
 
@@ -245,17 +248,17 @@
 
     <div class="container pb-5 mb-5">
       <h4>Preview</h4>
-      <button data-modal="modal-transactional" class="btn btn-secondary">Open Modal</button>
+      <button command="show-modal" commandfor="modal-transactional" class="btn btn-secondary">Open Modal</button>
     </div>
     
-    <Modal id="modal-transactional" data-type="transactional" data-icon="trash-can">
-
-      <span class="h3">Delete property file</span>
-      <p>
-        Continually will permanently delete this property. Are <br class="d-none d-sm-block" />you sure you’d like to
-        continue?
-      </p>
-
+    <Modal data-type="transactional" data-icon="trash-can">
+      <dialog id="modal-transactional">
+        <span class="h3">Delete property file</span>
+        <p>
+          Continually will permanently delete this property. Are <br class="d-none d-sm-block" />you sure you’d like to
+          continue?
+        </p>
+      </dialog>
     </Modal>
 
     <!-- #endregion -->
@@ -296,22 +299,21 @@
 
     <div class="container pb-5 mb-5">
       <h4>Preview</h4>
-      <button data-modal="modal-ack" class="btn btn-secondary">Open Modal</button>
+      <button command="show-modal" commandfor="modal-ack" class="btn btn-secondary">Open Modal</button>
     </div>
 
     
 
     
-    <Modal id="modal-ack" data-type="acknowledgement">
+    <Modal data-type="acknowledgement" class="modal--sm">
+      <dialog id="modal-ack">
+        <span class="h3">Acknowledgment modal title</span>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
+        </p>
 
-      <span class="h3">Acknowledgment modal title</span>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.
-      </p>
-
-      <button class="btn btn-primary" slot="agreed-button">Submit</button>
-      
-
+        <button class="btn btn-primary" slot="agreed-button">Submit</button>
+      </dialog>
     </Modal>
 
     <!-- #endregion -->
@@ -374,6 +376,28 @@
               <td>String</td>
               <td>No</td>
               <td>Change the text on default agreed button</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+
+      <template #class>
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>.modal--sm</th>
+              <td>Keeps the modal on the smaller width</td>
+            </tr>
+            <tr>
+              <th>.modal--lg</th>
+              <td>Keeps the modal on the larger width</td>
             </tr>
           </tbody>
         </table>

@@ -12,6 +12,13 @@
 
 }
 
+::slotted(dialog) {
+  display: contents!important;
+}
+
+::slotted(button) {
+  margin: 0!important;
+}
 
 dialog[open] {
   //overflow-y: hidden;
@@ -112,6 +119,49 @@ dialog[open] {
     display: none;
   }
 }
+
+// Size variants
+// small
+@include media-breakpoint-up(sm, $mobileOnly) {
+
+  :host(.modal--sm) dialog[open] {
+    
+      min-width: rem(335);
+      width: rem(335);
+      max-width: rem(335);
+  }
+}
+
+@include media-breakpoint-up(md, $mobileOnly) {
+
+  :host(.modal--sm) dialog[open] {
+      min-width: rem(454);
+      width: rem(454);
+      max-width: rem(454);
+  }
+}
+
+// large
+@include media-breakpoint-up(sm, $mobileOnly) {
+
+  :host(.modal--lg) dialog[open] {
+      min-width: rem(686);
+      width: rem(686);
+      max-width: rem(686);
+  }
+}
+
+@include media-breakpoint-up(md, $mobileOnly) {
+
+  :host(.modal--lg) dialog[open] {
+      min-width: rem(736);
+      width: rem(736);
+      max-width: rem(736);
+  }
+}
+
+
+
 
 dialog::backdrop {
   background: rgba(0, 0, 0, 0.3);
