@@ -40,9 +40,11 @@
   "advanced-select",
   "milestone-group",
   "milestone",
-  "password-indicator",
+  "password",
   "darkmode",
   "word-count",
   "modal",
-  "multi-step-modal"
+  "multi-step-modal",
+  "input",
+  "input-range"
 ]

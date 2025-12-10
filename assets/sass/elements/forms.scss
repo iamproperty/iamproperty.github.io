@@ -164,6 +164,16 @@ $optionalText: 'true' !default;
     padding: 0;
   }
 
+  ::-moz-color-swatch {
+    border-radius: 0;
+    border: none;
+  }
+
+  ::-webkit-color-swatch {
+    border-radius: 0;
+    border: none;
+  }
+
   // 1. Inherit font family and line height for file input buttons
   // 2. Correct the inability to style clickable types in iOS and Safari.
 
@@ -279,6 +289,12 @@ $optionalText: 'true' !default;
     }
   }
 
+  input[type='color'] {
+
+    padding: 0!important;
+    max-width: 3rem!important;
+  }
+  
   [disabled] :is(
     input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
     textarea,
@@ -369,60 +385,21 @@ $optionalText: 'true' !default;
     }
   }
 
-  // #region colors
 
-  input[type='color'] {
-    width: 3rem !important;
-    flex-shrink: 0 !important;
-    flex-grow: 0 !important;
-    border-start-end-radius: 0 !important;
-    border-end-end-radius: 0 !important;
-    padding: 0 !important;
-    overflow: hidden;
-    cursor: pointer !important;
-
-    &::-moz-color-swatch {
-      border-radius: 0;
-      border: none;
-    }
-
-    &::-webkit-color-swatch {
-      border-radius: 0;
-      border: none;
-    }
-  }
-
-  label :is(div, span, fieldset):has(input[type='color'] + output) {
-    display: flex;
-  }
-
-  input[type='color'] + output {
-    border-left: none !important;
-    border-end-start-radius: 0 !important;
-    border-start-start-radius: 0 !important;
-    margin: 0 !important;
-  }
-
-  output {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0 !important;
-  }
-  // #endregion
-
-  div:has(> :is(.form-control-sm, .input--sm)) {
+  *:has(> :is(.form-control-sm, .input--sm)) {
     --input-fs: #{rem(14)};
     --input-lh: #{rem(16)};
     --input-padding-block: #{rem(10)};
     --input-padding-inline: #{rem(14)};
   }
-  div:has(> :is(.form-control-lg, .input--sm)) {
+  *:has(> :is(.form-control-lg, .input--lg)) {
     --input-fs: #{rem(24)};
     --input-lh: #{rem(29)};
     --input-padding-block: #{rem(20)};
     --input-padding-inline: #{rem(22)};
   }
 
-  div:has(> label:first-child):has(> input):has(> :is(.form-control-inline, .input--inline)) {
+  *:has(> label:first-child):has(> input):has(> :is(.form-control-inline, .input--inline)) {
     label {
       flex-shrink: 0;
       white-space: nowrap;
@@ -456,119 +433,10 @@ $optionalText: 'true' !default;
   // #endregion
 
   // #region prefix
-  :is(.prefix, .suffix) {
-    display: none;
-  }
-  
-  :not(button):is(.prefix, .suffix) {
-    pointer-events: none;
-  }
   
   @supports selector(:has(*)) {
-    :is(.prefix, .suffix) {
-      display: inline-block;
-      width: auto;
-      padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-block, #{rem(16)});
-      font-size: var(--input-fs, #{rem(16)});
-      line-height: var(--input-lh, #{rem(20)});
-      color: var(--colour-body);
-      background-color: var(--colour-primary-theme);
-      border: 2px solid var(--colour-primary);
-      color: var(--colour-white);
-      margin-top: 0 !important;
-      margin-bottom: 1rem;
-      border-end-start-radius: rem(8);
-      border-start-start-radius: rem(8);
-      min-width: calc(#{rem(20 + 12 + 12)} + 4px);
-      overflow: hidden;
-      white-space: nowrap;
-      text-align: center;
-      text-overflow: ellipsis;
-      position: relative;
-
-      min-height: calc(
-        var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
-          4px
-      );
-      max-height: calc(
-        var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
-          4px
-      );
-      flex-shrink: 0;
-
-      &:after {
-        display: inline-block;
-        max-width: rem(20);
-      }
-
-      &[class*='fa-'] {
-        width: calc(#{rem(20 + 12 + 12)} + 4px);
-        padding-inline: 0;
-      }
-
-      select {
-        position: absolute;
-        inset: 0;
-        opacity: 0;
-        cursor: pointer;
-      }
-
-      span {
-        display: none;
-      }
-
-      select:has(option:nth-child(1):checked) ~ span:nth-of-type(1),
-      select:has(option:nth-child(2):checked) ~ span:nth-of-type(2),
-      select:has(option:nth-child(3):checked) ~ span:nth-of-type(3),
-      select:has(option:nth-child(4):checked) ~ span:nth-of-type(4),
-      select:has(option:nth-child(5):checked) ~ span:nth-of-type(5),
-      select:has(option:nth-child(6):checked) ~ span:nth-of-type(6),
-      select:has(option:nth-child(7):checked) ~ span:nth-of-type(7),
-      select:has(option:nth-child(8):checked) ~ span:nth-of-type(8),
-      select:has(option:nth-child(9):checked) ~ span:nth-of-type(9),
-      select:has(option:nth-child(10):checked) ~ span:nth-of-type(10) {
-        display: block;
-      }
-
-      select ~ span:after {
-        content: ' \f078';
-        font-family: 'Font Awesome 6 Pro';
-        font-size: 0.8em;
-        display: inline-block;
-        padding-left: 1em;
-      }
-
-      select:focus-visible ~ span:after {
-        content: '\f077';
-      }
-    }
-
-    .prefix {
-      border-right: none;
-    }
-
-    .suffix {
-      border-left: none;
-      border-end-start-radius: 0;
-      border-start-start-radius: 0;
-      border-start-end-radius: rem(8) !important;
-      border-end-end-radius: rem(8) !important;
-      order: 2;
-    }
-
-    .prefix span {
-      display: none;
-
-      small {
-        font-size: 0.8em;
-      }
-    }
-
-    .prefix
-      ~ :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), textarea, output) {
-      border-end-start-radius: 0 !important;
-      border-start-start-radius: 0 !important;
-    }
+    
+    
 
     .suffix
       ~ :is(
@@ -679,26 +547,6 @@ $optionalText: 'true' !default;
     --error-display: block;
     --error-hide: none;
   }
-
-  // Password checker
-  .pwd-checker {
-    display: block;
-    background-repeat: no-repeat !important;
-    background-position: left center;
-    background-size: 1em 1em;
-    padding-left: 1.5rem !important;
-  }
-  .pwd-checker.invalid-feedback {
-    background-image: escape-svg($icon-error);
-  }
-
-  .pwd-checker:not(.invalid-feedback) {
-    background-image: escape-svg($icon-tick) !important;
-  }
-  label:has(.pwd-checker.invalid-feedback):after {
-    display: none !important;
-  }
-  // #endregion
 
   // #region radio/checkbox field
   @supports selector(:has(*)) {
@@ -1145,7 +993,8 @@ $optionalText: 'true' !default;
     }
 
     :is(input, select) ~ span:not(:is(.suffix, .prefix, .invalid-feedback)),
-    span:has(> :is(input, select)) ~ span:not(:is(.suffix, .prefix, .invalid-feedback)) {
+    span:has(> :is(input, select)) ~ span:not(:is(.suffix, .prefix, .invalid-feedback)),
+    .hint-text {
       all: initial;
       font-family: var(--font-body);
       color: var(--colour-body);
@@ -1298,25 +1147,31 @@ $optionalText: 'true' !default;
   // #endregion
 
   // #region Date and time fields
-  :is(input[type='date'], input[type='time']) {
+  :is(input[type='date'],input[type='datetime-local'],input[type='year'],input[type='month'],input[type='week'], input[type='time']) {
     position: relative;
     margin-right: -3rem;
     padding-right: 3rem !important;
     background-position: right 4rem center;
     border-radius: 0.5rem !important;
   }
-  :is(input[type='date'], input[type='time'])::-webkit-calendar-picker-indicator {
+  ::-webkit-calendar-picker-indicator {
     background: transparent;
     bottom: 0;
     color: transparent;
     cursor: pointer;
     height: auto;
-    left: 4em;
+    left: 0;
     position: absolute;
     right: 0;
     top: 0;
     width: auto;
     order: 3;
+    z-index: 98;
+  }
+  ::-webkit-datetime-edit {
+    position: relative;
+    z-index: 99;
+    max-width: fit-content;
   }
   // #endregion
 }

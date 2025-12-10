@@ -497,24 +497,6 @@ const routes = [
         searchterms: 'options, actions, edit, tinymce, editor',
       },
       {
-        path: 'addresslookup',
-        name: 'Address lookup UI (Beta)',
-        meta: {
-          title: 'Address Lookup | Components | iamkey',
-        },
-        component: () => import('./views/components/AddressLookupDoc.vue'),
-        searchterms: 'postcode',
-      },
-      {
-        path: 'advanced-select',
-        name: 'Advanced select',
-        meta: {
-          title: 'Advanced Select | Components | iamkey',
-        },
-        component: () => import('./views/components/AdvancedSelectDoc.vue'),
-        searchterms: '',
-      },
-      {
         path: 'applied-filters',
         name: 'Applied Filters (Beta)',
         meta: {
@@ -583,14 +565,6 @@ const routes = [
         searchterms: 'reduce, search',
       },
       {
-        path: 'file',
-        name: 'File upload component',
-        meta: {
-          title: 'File upload component | Components | iamkey',
-        },
-        component: () => import('./views/components/File.vue'),
-      },
-      {
         path: 'header',
         name: 'Header (Beta)',
         meta: {
@@ -598,15 +572,6 @@ const routes = [
         },
         component: () => import('./views/components/Header.vue'),
         searchterms: 'introduce, banner',
-      },
-      {
-        path: 'inline-edit',
-        name: 'Inline edit',
-        meta: {
-          title: 'Inline edit | Components | iamkey',
-        },
-        component: () => import('./views/components/InlineEdit.vue'),
-        searchterms: 'form, input, inline',
       },
       {
         path: 'menu',
@@ -625,14 +590,6 @@ const routes = [
           title: 'Multi-step form | Components | iamkey',
         },
         component: () => import('./views/components/MultiStep.vue'),
-      },
-      {
-        path: 'multiselect',
-        name: 'Multiselect',
-        meta: {
-          title: 'Multiselect | Components | iamkey',
-        },
-        component: () => import('./views/components/Multiselect.vue'),
       },
       {
         path: 'notefeed',
@@ -669,14 +626,6 @@ const routes = [
         component: () => import('./views/components/SnapshotDoc.vue'),
       },
       {
-        path: 'search',
-        name: 'Search component',
-        meta: {
-          title: 'Search | Components | iamkey',
-        },
-        component: () => import('./views/components/SearchDoc.vue'),
-      },
-      {
         path: 'split-button',
         name: 'Split Button',
         meta: {
@@ -691,14 +640,6 @@ const routes = [
           title: 'Stepper | Components | iamkey',
         },
         component: () => import('./views/components/StepperDoc.vue'),
-      },
-      {
-        path: 'slider',
-        name: 'Slider',
-        meta: {
-          title: 'Slider | Components | iamkey',
-        },
-        component: () => import('./views/components/SliderDoc.vue'),
       },
       {
         path: 'tables',
@@ -741,6 +682,96 @@ const routes = [
           title: 'Milestone Group | Components | iamkey',
         },
         component: () => import('./views/components/MilestoneGroupDoc.vue'),
+      }
+    ],
+  },
+  {
+    /* Form components */ path: '/form-components',
+    name: 'Form components',
+    meta: {
+      title: 'Form | iamkey',
+    },
+    component: () => import('./views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue'),
+      },
+      {
+        path: 'addresslookup',
+        name: 'Address lookup UI',
+        meta: {
+          title: 'Address Lookup | Components | iamkey',
+        },
+        component: () => import('./views/form-components/AddressLookupDoc.vue'),
+        searchterms: 'postcode',
+      },
+      {
+        path: 'advanced-select',
+        name: 'Advanced select',
+        meta: {
+          title: 'Advanced Select | Components | iamkey',
+        },
+        component: () => import('./views/form-components/AdvancedSelectDoc.vue'),
+        searchterms: '',
+      },
+      {
+        path: 'file',
+        name: 'File upload component',
+        meta: {
+          title: 'File upload component | Components | iamkey',
+        },
+        component: () => import('./views/form-components/File.vue'),
+      },
+      {
+        path: 'inline-edit',
+        name: 'Inline edit',
+        meta: {
+          title: 'Inline edit | Components | iamkey',
+        },
+        component: () => import('./views/form-components/InlineEdit.vue'),
+        searchterms: 'form, input, inline',
+      },
+      {
+        path: 'input',
+        name: 'Input component',
+        meta: {
+          title: 'Input | Components | iamkey',
+        },
+        component: () => import('./views/form-components/Input.vue'),
+        searchterms: 'form, input, inline',
+      },
+      {
+        path: 'input-range',
+        name: 'Input range',
+        meta: {
+          title: 'Input range | Components | iamkey',
+        },
+        component: () => import('./views/form-components/InputRange.vue'),
+      },
+      {
+        path: 'multiselect',
+        name: 'Multiselect',
+        meta: {
+          title: 'Multiselect | Components | iamkey',
+        },
+        component: () => import('./views/form-components/Multiselect.vue'),
+      },
+      {
+        path: 'search',
+        name: 'Search component',
+        meta: {
+          title: 'Search | Components | iamkey',
+        },
+        component: () => import('./views/form-components/SearchDoc.vue'),
+      },
+      {
+        path: 'slider',
+        name: 'Slider',
+        meta: {
+          title: 'Slider | Components | iamkey',
+        },
+        component: () => import('./views/form-components/SliderDoc.vue'),
       },
       {
         path: 'word-count',
@@ -748,17 +779,17 @@ const routes = [
         meta: {
           title: 'Word Count | Components | iamkey',
         },
-        component: () => import('./views/components/WordCountDoc.vue'),
+        component: () => import('./views/form-components/WordCountDoc.vue'),
       },
       {
-        path: 'password-indicator',
-        name: 'Password Indicator',
+        path: 'password',
+        name: 'Password',
         meta: {
-          title: 'Password Indicator | Components | iamkey',
+          title: 'Password | Components | iamkey',
         },
-        component: () => import('./views/components/PasswordIndicatorDoc.vue'),
+        component: () => import('./views/form-components/PasswordDoc.vue'),
       }
-    ],
+    ]
   },
   {
     /* Nav */ path: '/nav',
