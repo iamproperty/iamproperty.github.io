@@ -50,10 +50,15 @@ class iamContent extends HTMLElement {
 
   createPath (composedPath): void {
 
+    console.log(composedPath)
+
     const pathContainer = this.shadowRoot?.querySelector('.path__container');
 
     pathContainer?.innerHTML = '';
 
+    console.log(composedPath[0]);
+
+    this.setAttribute('data-selected', composedPath[0].tagName);
     
     for (const el of composedPath) {
 
@@ -61,10 +66,17 @@ class iamContent extends HTMLElement {
         break;
       }
 
-      if(pathContainer?.innerHTML != "")
-        pathContainer?.innerHTML += " / "
-      
-      pathContainer?.innerHTML += el.tagName;
+      if (typeof el.matches == "function" && el.matches('.content__container')) { // TODO add extra checks
+        break;
+      }
+
+      if(el.tagName){
+        
+        if(pathContainer?.innerHTML != "")
+          pathContainer?.innerHTML += "<span> / </span>"
+        
+        pathContainer?.innerHTML += `<span>${el.tagName}</span>`;
+      }
 
     }
 
@@ -105,7 +117,7 @@ class iamContent extends HTMLElement {
 
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const component = this;
-    const button = this.shadowRoot?.querySelector('[data-element="h1"]');
+    //const button = this.shadowRoot?.querySelector('[data-element="h1"]');
 
 
     const contentContainer = this.shadowRoot?.querySelector('.content__container');
@@ -127,6 +139,13 @@ class iamContent extends HTMLElement {
 
 
     contentContainer.addEventListener('click', (event: MouseEvent) => {
+
+      // clean up empty tags
+      Array.from(component?.querySelectorAll('*:empty')).forEach((element)=>{
+
+        console.log(element);
+        element.remove();
+      });
 
       if(!event.target.matches('iam-text-editor') && !this.classList.contains('selecting')){
 
@@ -154,11 +173,13 @@ class iamContent extends HTMLElement {
 
     document.addEventListener('selectionchange', (event): void => {
 
+      console.log(event)
       component.classList.add('selecting');
 
       clearInterval(selectionInterval);
       selectionInterval = setInterval(function () {
         component?.classList.remove('selecting');
+        clearInterval(selectionInterval);
       }, 1000);
 
       this.createPath(event.composedPath());
@@ -235,20 +256,28 @@ class iamContent extends HTMLElement {
         console.log(original,this.outerHTML)
 
 
-console.log(this.selectedElement);
 
         if(selection?.anchorNode.nodeType == 3){
 
           const selection2 = window.getSelection().getRangeAt(0);
           const selectedText = selection2.extractContents();
           const span = document.createElement(target.getAttribute('data-inline'));
-          span.style.backgroundColor = "yellow";
+          //span.style.backgroundColor = "yellow";
 
           span.appendChild(selectedText);
 
           selection2.insertNode(span);
         }
-        
+
+        //
+        if(this.selectedElement.matches(target.getAttribute('data-inline'))){
+          let content = this.selectedElement.innerHTML;
+
+          this.selectedElement.outerHTML = content;
+        }
+
+        // TODO reset the path
+        this.createPath(event.composedPath());
       }
 
 
