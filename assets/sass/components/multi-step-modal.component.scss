@@ -32,6 +32,15 @@ dialog[open] {
 }
 
 
+::slotted(dialog) {
+  display: contents!important;
+}
+
+::slotted(button) {
+  margin: 0!important;
+}
+
+
 
 // #region Multi step modal
 

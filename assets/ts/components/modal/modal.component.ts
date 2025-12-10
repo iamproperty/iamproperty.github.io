@@ -56,26 +56,6 @@ class iamModal extends HTMLElement {
     const modalType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'passive';
 
 
-    document.addEventListener('click', (e) => {
-      
-      if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
-        openModal();
-      }
-    });
-    
-    // Disable the original event 
-    originalDialog?.addEventListener('command', (e) => {
-
-      if (event.command == "show-modal") {
-        e.preventDefault();
-      }
-    });
-
-    // Move the submit button so that the slot functionality works
-    Array.from(originalDialog?.querySelectorAll('[slot]')).forEach((element) => {
-      this.moveBefore(element, originalDialog);
-    });
-
 
 
     const openModal = () => {
@@ -96,6 +76,26 @@ class iamModal extends HTMLElement {
         id: id,
       });
     }
+
+    document.addEventListener('click', (e) => {
+      
+      if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
+        openModal();
+      }
+    });
+    
+    // Disable the original event 
+    originalDialog?.addEventListener('command', (e) => {
+
+      if (event.command == "show-modal") {
+        e.preventDefault();
+      }
+    });
+
+    // Move the submit button so that the slot functionality works
+    Array.from(originalDialog?.querySelectorAll('[slot]')).forEach((element) => {
+      this.moveBefore(element, originalDialog);
+    });
 
     const closeModal = () => {
       dialog?.close();

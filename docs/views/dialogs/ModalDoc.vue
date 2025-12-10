@@ -325,7 +325,7 @@
       uncertainty, and provide a responsive user experience during tasks that require time to complete.
     </p>
 
-    <a href="/components/multistep" class="btn btn-secondary">Multi-step Component</a>
+    <a href="/dialogs/multi-step-modal" class="btn btn-secondary">Multi-step Component</a>
 
 
 

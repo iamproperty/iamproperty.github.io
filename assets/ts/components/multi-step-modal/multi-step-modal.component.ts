@@ -30,9 +30,12 @@ class iamMultiStepModal extends HTMLElement {
   }
 
   connectedCallback(): void {
+
+    const originalDialog = this.querySelector('dialog');
+
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const MultiStepComponent = this;
-    const id = this.getAttribute('id');
+    const id = this.hasAttribute('id') ? this.getAttribute('id') : originalDialog?.getAttribute('id');
     const dialog = this.shadowRoot?.querySelector('dialog');
     
     const closeButton = this.shadowRoot?.querySelector('[data-close]');
@@ -40,6 +43,42 @@ class iamMultiStepModal extends HTMLElement {
 
     const steps = this.shadowRoot.querySelector('.steps');
     const form = this.querySelector('form');
+
+    const openModal = () => {
+      dialog?.showModal();
+      dialog?.focus();
+
+      const closeEvent = new CustomEvent('modal-opened', {
+        bubbles: true,
+        cancelable: true,
+        detail: { modalId: id },
+      });
+
+      this.dispatchEvent(closeEvent);
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'openModal',
+        id: id,
+      });
+    }
+
+    // Disable the original event 
+    originalDialog?.addEventListener('command', (e) => {
+
+      if (event.command == "show-modal") {
+        e.preventDefault();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+
+      console.log('hi')
+      
+      if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
+        openModal();
+      }
+    });
 
     button?.addEventListener('click', () => {
       dialog?.showModal();

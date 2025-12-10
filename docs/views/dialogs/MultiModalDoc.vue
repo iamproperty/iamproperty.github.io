@@ -97,10 +97,11 @@
 
     <div class="container pb-5 mb-5">
       <h4>Preview</h4>
-      <button data-modal="modal-multi" class="btn btn-secondary">Open Modal</button>
+      <button command="show-modal" commandfor="modal-multi" class="btn btn-secondary">Open Modal</button>
     </div>
 
-      <MultiStepModal id="modal-multi">
+      <MultiStepModal>
+        <dialog id="modal-multi">
         <form>
           <span class="h3">Multi-step modal title</span>
 
@@ -141,6 +142,7 @@
           </fieldset>
           <button class="btn btn-primary colour-success" type="submit">Register</button>
         </form>
+        </dialog>
       </MultiStepModal>
     <!-- #endregion -->
 
