@@ -92,6 +92,13 @@ class iamModal extends HTMLElement {
       }
     });
 
+    originalDialog?.addEventListener('command', (e) => {
+
+      if (event.command == "close") {
+        closeModal();
+      }
+    });
+
     // Move the submit button so that the slot functionality works
     Array.from(originalDialog?.querySelectorAll('[slot]')).forEach((element) => {
       this.moveBefore(element, originalDialog);

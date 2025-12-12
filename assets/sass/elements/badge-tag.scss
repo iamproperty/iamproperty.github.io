@@ -74,7 +74,6 @@ $darkMode: 'true' !default;
     }
   }
 
-  .tag.tag--not-set,
   iam-multiselect:not(:defined) .tag,
   .tag.tag--toggle {
     background: var(--colour-canvas);

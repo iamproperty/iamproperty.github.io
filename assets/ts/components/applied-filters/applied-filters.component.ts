@@ -21,9 +21,7 @@ class iamAppliedFilters extends HTMLElement {
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    
     ${loadCSS}
-    
     </style>
     <div class="applied-filters ${classList}"></div>
     <slot></slot>
