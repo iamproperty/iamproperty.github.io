@@ -26,11 +26,6 @@ $darkMode: 'true' !default;
     border-radius: rem(10);
     padding: var(--dialog-padding);
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-  }
-
-  dialog[open] {
-    display: flex;
-    flex-direction: column;
 
     > *:last-child {
       margin-bottom: 0;
@@ -40,5 +35,44 @@ $darkMode: 'true' !default;
       padding-bottom: 0;
     }
   }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    overscroll-behavior: contain;
+  }
+
+  dialog[open] {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // TODO: when the old modals are depreciated this selector can be simplified
+  *:not(.dialog__wrapper) > dialog[open]:not([popover]) {
+
+    overflow-y: auto;
+    width: 90vw;
+    max-width: rem(324); // col-width*4
+
+    //height: 90vh;
+    max-height: min(90vh, #{rem(752)});
+    overscroll-behavior: contain;
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      --dialog-padding: #{rem(32)};
+      min-width: rem(335);
+      width: fit-content;
+      max-width: rem(686);
+    }
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      min-width: rem(454);
+      width: fit-content;
+      max-width: rem(736);
+    }
+
+  }
   // #endregion
 }
+
+

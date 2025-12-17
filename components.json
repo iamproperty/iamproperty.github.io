@@ -43,6 +43,8 @@
   "password",
   "darkmode",
   "word-count",
+  "modal",
+  "multi-step-modal",
   "input",
   "input-range"
 ]
