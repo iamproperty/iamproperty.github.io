@@ -1,0 +1,81 @@
+@use '../_func.scss' as *;
+
+@layer components {
+
+  :host {
+  } 
+
+  .tooltip__anchor {
+
+    anchor-name: --anchor;
+    background-color: red;
+    position: relative;
+    display: inline-block;
+  }
+
+  .tooltip__content {
+    position: absolute;
+    
+    //bottom: anchor(--anchor top);
+    
+    //left: anchor(--anchor center);
+  
+
+
+    //position-try-fallbacks: flip-inline, flip-block;
+
+    //position-try-fallbacks: --custom-bottom;
+
+
+    position-try-order: position-area(top right), position-area(top), position-area(right), position-area(bottom), position-area(bottom right);
+
+    display: block;
+    z-index: var(--index-floating);
+    position: absolute;
+    //top: calc(100% + 0.5rem);
+    //left: auto;
+    //right: 0.85em;
+    width: #{rem(270)};
+    transform: translate(-50%, 0);
+    background: var(--colour-primary);
+    color: var(--colour-white);
+    padding: rem(24);
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
+margin-bottom: 0.5rem;
+
+    > strong:first-child {
+      display: block;
+      padding-bottom: 1rem;
+      color: inherit;
+    }
+
+    
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      width: #{rem(335)};
+    }
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      width: #{rem(360)};
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -0.5rem;
+      border-width: 0.5rem;
+      border-style: solid;
+      border-color: var(--colour-primary) transparent transparent transparent;
+      margin-bottom: -1px;
+    }
+    
+  }
+
+  @position-try --custom-bottom {
+    
+    top: anchor(--anchor bottom);
+    left: anchor(--anchor center);
+  }
+}

@@ -1,0 +1,26 @@
+@use '../_func.scss' as *;
+
+@layer components {
+
+  :host {
+    background-color: red;
+    display: var(--menu-display, none);
+    position: fixed;
+    top: anchor(bottom);
+    left: anchor(left);
+    margin:  #{rem(4)} 0 0 0;
+    padding: rem(16);
+    max-width: calc(anchor-size(width) * 2) !important;
+
+    &::backdrop {
+      display: none;
+    }
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      width: rem(335);
+    }
+    @include media-breakpoint-up(md, $mobileOnly) {
+      width: rem(360);
+    }
+  } 
+}

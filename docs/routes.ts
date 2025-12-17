@@ -441,6 +441,15 @@ const routes = [
         component: () => import('./views/dialogs/PopoverDoc.vue'),
         searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip',
       },
+      {
+        path: 'tooltip',
+        name: 'Dialog (Tooltip)',
+        meta: {
+          title: 'Dialog (Tooltip) | Elements | iamkey',
+        },
+        component: () => import('./views/dialogs/TooltipDoc.vue'),
+        searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip',
+      },
     ],
   },
   {

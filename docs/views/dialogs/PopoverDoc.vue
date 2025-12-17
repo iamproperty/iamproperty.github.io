@@ -1,5 +1,6 @@
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
+  import Popover from '@/components/Popover/Popover.vue';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import popoverNotip from '../../img/dialogs/popovers-notip.png';
@@ -12,7 +13,7 @@
   import popoverTabletSm from '../../img/dialogs/popover-tablet-sm.png';
   import popoverTabletMd from '../../img/dialogs/popover-tablet-md.png';
   import popoverTabletLg from '../../img/dialogs/popover-tablet-lg.png';
-
+ 
   import popoverMobileSm from '../../img/dialogs/popover-mobile-sm.png';
   import popoverMobileMd from '../../img/dialogs/popover-mobile-md.png';
   import popoverMobileLg from '../../img/dialogs/popover-mobile-lg.png';
@@ -62,6 +63,9 @@
     { name: 'tooltip--left (tablet,desktop)', id: 'tooltip--left' },
     { name: 'tooltip--right (tablet,desktop)', id: 'tooltip--right' },
   ];
+
+  
+  import Integration from '../Integration.vue';
 </script>
 
 <template>
@@ -319,10 +323,11 @@
         </div>
       </div>
     </div>
-
+<!--
     <div class="container visualtest" style="min-height: 25rem">
       <div class="dialog__wrapper" data-keep-open>
         <button class="btn btn-secondary">Open Popover</button>
+        
         <dialog open>
           <h3>Dialog Content (Popover)</h3>
           <p>
@@ -330,8 +335,31 @@
             industry's standard dummy text ever since the 1500s,
           </p>
         </dialog>
+        
       </div>
     </div>
+-->
+    <div class="container visualtest" style="min-height: 25rem">
+      
+        <button class="btn btn-secondary active" popovertarget="popover" popovertargetaction="toggle" aria-pressed="true" style="anchor-name: --button;">Open Popover</button>
+        <p>
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s,
+        </p>
+
+        <Popover id="popover" data-open style="position-anchor: --button; display: flex;">
+        
+          
+          <h3>Dialog Content (Popover)</h3>
+          <p>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s,
+          </p>
+          
+        </Popover>
+    </div>
+
+    
 
     <div class="container">
       <h3>Popover List variant</h3>
@@ -345,112 +373,10 @@
       </p>
     </div>
 
-    <div class="container">
-      <h2>Pointer</h2>
-      <p>
-        The pointer popover is visually attention-grabbing, with a pointer tip that visually indicates the association
-        between the popover and its trigger. The trigger button is small and discreet, so as not to disrupt the content
-        of the page.
-      </p>
 
-      <img :src="popoverPointer" alt="" loading="lazy" class="mb-5" />
 
-      <h3>Anatomy</h3>
 
-      <img :src="popoverPointerAnatomy" alt="" loading="lazy" class="mb-3" />
-      <ol>
-        <li>UI Trigger</li>
-        <li>Container with pointer tip</li>
-        <li>Title (lead text styles)</li>
-        <li>Body: contains the content, could include text, links, icons, etc.</li>
-      </ol>
 
-      <h3>Dismissal</h3>
-
-      <p>Pop ups can be dismissed in a variety of ways, depending on how it is built and its use case.</p>
-
-      <p>
-        <strong>UI trigger:</strong> users can dismiss the pop-up by clicking the UI trigger (button)<br />
-        <strong>Outside Click:</strong> clicking outside the pop-up area should dismiss the pop-up<br />
-        <strong>Escape Key:</strong> Allowing users to dismiss the pop-up by pressing the escape (Esc) key is a common
-        convention. This is especially useful for keyboard-centric users who prefer to navigate without using a
-        mouse.<br />
-        <strong>User Interaction:</strong> Pop-ups may also be designed to be dismissed when users interact with
-        specific elements within the pop-up. For example, if a pop-up includes a form, submitting the form could dismiss
-        the pop-up.
-      </p>
-
-      <h3>Alignment</h3>
-
-      <p>Popovers can be place to the top, right, left or bottom of their related content.</p>
-
-      <img :src="popoverPointeralign" alt="" loading="lazy" class="mb-5" />
-
-      <p>
-        <strong>Shift:</strong> the popover shifts in order to remain in view of the visible area, with the pointer
-        maintaining the context that the popover is attributed to.
-      </p>
-
-      <img :src="popoverPointeralign2" alt="" loading="lazy" class="mb-5" />
-
-      <p class="note mb-4">
-        <strong>Note:</strong> This desired bit of functionality will be done through using the shift classes for the
-        smaller sized devices.
-      </p>
-
-      <div class="row">
-        <div class="col-md-6">
-          <img :src="popoverPointeralignDo" alt="" loading="lazy" class="mb-2" />
-          <p><strong class="d-block text-complete">Do</strong> Align the pointer tip centre with the trigger button</p>
-        </div>
-        <div class="col-md-6">
-          <img :src="popoverPointeralignDont" alt="" loading="lazy" class="mb-2" />
-          <p>
-            <strong class="d-block text-danger">Don't</strong> Don’t misalign the pointer tip with the trigger button
-          </p>
-        </div>
-      </div>
-
-      <h3>Behaviours</h3>
-
-      <div class="row">
-        <div class="col-md-6">
-          <img :src="popoverPointerDo" alt="" loading="lazy" class="mb-2" />
-          <p>
-            <strong class="d-block text-complete">Do</strong> Make popovers short and to the point. Avoid large chunks
-            of text in popovers. Too much text can cause cognitive overload, and users with smaller screens or who are
-            zoomed in can lose their place.
-          </p>
-        </div>
-        <div class="col-md-6">
-          <img :src="popoverPointerDont" alt="" loading="lazy" class="mb-2" />
-          <p>
-            <strong class="d-block text-danger">Don't</strong> Avoid covering the element that the popover is attributed
-            to, as it will lose its context.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="container visualtest tooltip-demo">
-      <h3>The component</h3>
-      <div class="form-control__wrapper">
-        <label class="form-label visually-hidden" for="test1">Label</label>
-
-        <select class="form-select" v-model="selected">
-          <option v-for="option in options" :value="option.id">
-            {{ option.name }}
-          </option>
-        </select>
-      </div>
-
-      <span :class="`tooltip hover ${selected}`" tabindex="0"
-        ><span class="tooltip__content">
-          <strong>Popover title</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut
-          labore et dolore magna aliqua.</span
-        ></span
-      >
-    </div>
 
     <div class="container">
       <Tabs>
@@ -460,6 +386,89 @@
         </details>
       </Tabs>
     </div>
+
+
+    <Integration component="Popover" componentName="iam-popover">
+      <template #web-component>
+        <pre><code>{{`<iam-popover>
+  <p>...</p>
+</iam-modal>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Popover from '@/components/Popover/Popover.vue</script>
+        
+<Popover>
+  <p>...</p>
+</Popover>
+`}}</code></pre>
+      </template>
+
+      <template #attr>
+        <table>
+          <thead>
+            <tr>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>ID</th>
+              <td></td>
+              <td>String</td>
+              <td>Yes</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #dispatched-events>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td>openModal</td>
+            <td>
+              Element with the <code>data-modal</code> attribute is clicked,<br />
+              Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is closed
+            </td>
+            <td>The modal ID</td>
+          </tr>
+          <tr>
+            <td>closeModal</td>
+            <td>
+              Button with the class of <code>dialog__close</code> is clicked,<br />
+              Button with the <code>formmethod</code> attribute of <code>dialog</code> is clicked,<br />
+              While a <code>dialog</code> is open and the backdrop is clicked,<br />
+              Button with a parent of <code>dialog__wrapper</code> is clicked while the target modal is open
+            </td>
+            <td>The modal ID</td>
+          </tr>
+          <tr>
+            <td>agreed</td>
+            <td>
+              The primary button is pressed on the transactional and acknowledgement modals
+            </td>
+            <td>The modal ID</td>
+          </tr>
+          </tbody>
+        </table>
+      </template>
+
+      
+    </Integration>
+
+
 
     <div class="bg-light version-control">
       <div class="container">
@@ -490,36 +499,5 @@
   </main>
 </template>
 
-<style lang="scss" scoped>
-  .tooltip-demo {
-    position: relative;
-    min-height: 40rem;
 
-    .tooltip {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
 
-    .tooltip.shift--left {
-      left: 75%;
-    }
-    .tooltip.shift--right {
-      left: 25%;
-    }
-
-    @media screen and (min-width: 36em) {
-      .tooltip.shift--left {
-        left: 50%;
-      }
-      .tooltip.shift--right {
-        left: 50%;
-      }
-    }
-
-    .form-control__wrapper {
-      width: 12rem;
-    }
-  }
-</style>

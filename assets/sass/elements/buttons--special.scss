@@ -1,0 +1,41 @@
+@use '../_func' as *;
+
+$layers: 'true' !default;
+$mobileOnly: 'false' !default;
+$darkMode: 'true' !default;
+
+
+  // #region btn compact
+  .btn[popovertarget] {
+  
+    position: relative;
+    anchor-name: --button2;
+
+    &:after {
+      content: '';
+
+      display: inline-block;
+      margin-left: 1em;
+
+      height: 1em;
+      width: 1em;
+      z-index: var(--index-focus);
+      background: currentColor;
+      mask-image: var(--icon-arrow);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-arrow);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+
+      transform: rotate(90deg);
+    }
+
+    &[aria-pressed]:after {
+      transform: rotate(270deg);
+    }
+  }
+
+  // #endregion

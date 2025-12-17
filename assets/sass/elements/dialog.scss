@@ -12,7 +12,8 @@ $darkMode: 'true' !default;
   }
 
   // #region Default styling of both modals
-  dialog {
+  dialog,
+  [popover] {
     --dialog-padding: #{rem(24)};
 
     --mh-padding-inline: var(--dialog-padding);
@@ -42,13 +43,15 @@ $darkMode: 'true' !default;
     overscroll-behavior: contain;
   }
 
-  dialog[open] {
+  dialog[open],
+  [popover]:popover-open {
     display: flex;
     flex-direction: column;
   }
 
   // TODO: when the old modals are depreciated this selector can be simplified
-  *:not(.dialog__wrapper) > dialog[open]:not([popover]) {
+  *:not(.dialog__wrapper) > dialog[open],
+  *:not(.dialog__wrapper) > [popover]:popover-open {
 
     overflow-y: auto;
     width: 90vw;
