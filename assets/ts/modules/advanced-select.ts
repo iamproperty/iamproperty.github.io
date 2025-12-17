@@ -24,7 +24,12 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   });
 
+  displayInputField.addEventListener('keyup', function () {
     
+    if(displayInputField.value != ""){
+      displayInputField.setAttribute('data-value', displayInputField.value);
+    }
+  });
 
   displayInputField.addEventListener('blur', function () {
     if (displayInputField.hasAttribute('data-value')) {
@@ -113,6 +118,9 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
 
   const emptyField = () => {
+
+    displayInputField.removeAttribute('placeholder');
+
     if(displayInputField.hasAttribute('data-original-placeholder'))
       displayInputField.setAttribute('placeholder', displayInputField.getAttribute('data-original-placeholder'));
     

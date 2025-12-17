@@ -1212,6 +1212,10 @@ $optionalText: 'true' !default;
     }
   }
 
+  &:has(input:is([name$="Alt"]):not([data-value],[data-placeholder])) .empty {
+    display: none;
+  }
+
   label:after,
   .hint-text {
     position: absolute;
