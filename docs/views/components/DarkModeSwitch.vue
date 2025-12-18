@@ -25,7 +25,7 @@
     </p>
 
     <div class="visualtest">
-      <DarkMode class="mb-4"
+      <DarkMode class="d-block mb-4"
         ><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode
       >
     </div>
