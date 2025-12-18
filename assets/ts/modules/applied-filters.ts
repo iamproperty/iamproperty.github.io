@@ -107,12 +107,12 @@ function createAppliedFilters(container, filters): void {
   checkForChecked(true);
 
   // Create the main event listener for the component watching for inputs to change
-  container.addEventListener('change', function (event) {
-    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')) {
 
+  Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input) => {
+    
+    input.addEventListener('change', function (event) { 
+      
       const setFilter = container.closest('dialog') ? false : true;
-
-      const input = event.target.closest('input[data-filter-text]');
 
       if (!container.hasAttribute('data-keep-same') && !container.querySelector('dialog')) 
         addFilterButton(filters, input, setFilter);
@@ -122,7 +122,7 @@ function createAppliedFilters(container, filters): void {
         const event = new CustomEvent('update');
         container.parentElement.closest('iam-applied-filters')?.dispatchEvent(event);
       }
-    }
+    });
   });
 
 
@@ -149,6 +149,9 @@ function createAppliedFilters(container, filters): void {
         } else {
           input.checked = false;
         }
+
+        const changeEvent = new CustomEvent('change');
+        input?.dispatchEvent(changeEvent);
       }
     }
 

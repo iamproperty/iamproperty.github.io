@@ -1,3 +1,4 @@
+import { doc } from 'prettier';
 import { zeroPad, isNumeric, ucfirst, resolvePath, uniqueID } from './helpers';
 
 // #region Helpers
@@ -102,6 +103,7 @@ export const paginateTable = (component, table, form, pagination, callback): voi
   });
 
   pagination.addEventListener('update-page', (event) => {
+    console.log('update page')
     if (form.querySelector('[name=page]').value != event.detail.page) {
       form.querySelector('[name=page]').value = event.detail.page;
 
@@ -719,7 +721,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     }
       */
   };
-
+/*
   if (component.querySelector('iam-actionbar[data-search]')) {
     component.querySelector('iam-actionbar[data-search]').addEventListener('search-submit', (event) => {
       if (form.querySelector('input[data-search]')) {
@@ -757,7 +759,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
       filterTable(component, table, form, pagination);
     });
   }
-
+*/
   form.addEventListener('keyup', (event) => {
     clearTimeout(timer);
 
@@ -1252,6 +1254,16 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
   const actionbar = component.querySelector('iam-actionbar');
 
   form.addEventListener('submit', (event) => {
+
+    Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element) => {
+
+      const id = element.getAttribute('data-duplicate');
+
+      if (document.querySelector(`[id="${id}"]`)) {
+        document.querySelector(`[id="${id}"]`).checked = element.checked;
+      }
+    });
+
     loadAjaxTable(component, table, form, pagination);
 
     event.preventDefault();
@@ -1263,6 +1275,28 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
       
       loadAjaxTable(component, table, form, pagination);
     }
+
+    if (event && event.target instanceof HTMLElement && event.target.hasAttribute('id')) {
+      const id = event.target.getAttribute('id');
+
+      if (document.querySelector(`[data-duplicate="${id}"]`)) {
+        document.querySelector(`[data-duplicate="${id}"]`).checked = event.target.checked;
+
+        
+        const changeEvent = new CustomEvent('change');
+        document.querySelector(`[data-duplicate="${id}"]`)?.dispatchEvent(changeEvent);
+
+      }
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.hasAttribute('data-duplicate') && !event.target.closest('iam-modal')) {
+      const id = event.target.getAttribute('data-duplicate');
+
+      if (document.querySelector(`[id="${id}"]`)) {
+        document.querySelector(`[id="${id}"]`).checked = event.target.checked;
+      }
+    }
+
   });
 
   if (actionbar) {
@@ -1288,6 +1322,55 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
       loadAjaxTable(component, table, form, pagination);
     });
   }
+
+
+  // mimic fields
+  const fields = [];
+
+  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
+
+    input.addEventListener('change', (event) => {
+
+      loadAjaxTable(component, table, form, pagination);
+    });
+  });
+
+
+  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
+    const mimicField = input.getAttribute('data-mimic');
+
+    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput) => {
+
+      if (!fields.includes(mimicInput)) {
+        fields.push(mimicInput);
+      }
+    });
+  });
+
+  fields.forEach((input) => {
+
+    input.addEventListener('change', (event) => {
+
+      const name = input.getAttribute('name');
+      const mimicInput = document.querySelector(`[data-mimic="${name}"]`);
+      
+      let valueToSend = '';
+      Array.from(document.querySelectorAll(`[name="${name}"]:checked`)).forEach((input) => {
+
+        if(valueToSend == '')
+          valueToSend = input.value;
+        else
+          valueToSend += ',' + input.value;
+      });
+
+      console.log(valueToSend);
+
+      mimicInput.value = valueToSend;
+      const changeEvent = new CustomEvent('change');
+      mimicInput?.dispatchEvent(changeEvent);
+    });
+  });
+
 
 
 };
@@ -1460,11 +1543,11 @@ export const loadAjaxTable = async function (component, table, form, pagination)
             tbody.appendChild(table_row);
           });
 
-          component.setAttribute('data-total', parseInt(totalNumber));
-          component.setAttribute('data-page', parseInt(currentPage));
+          //component.setAttribute('data-total', parseInt(totalNumber));
+          //component.setAttribute('data-page', parseInt(currentPage));
 
-          pagination.setAttribute('data-total', totalNumber);
-          pagination.setAttribute('data-page', currentPage);
+          //pagination.setAttribute('data-total', totalNumber);
+          //pagination.setAttribute('data-page', currentPage);
 
           Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement) => {
             const totalNumber = resolvePath(response, queryElement.getAttribute('data-ajax-query'), '');

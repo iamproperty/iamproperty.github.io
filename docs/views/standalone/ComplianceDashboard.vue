@@ -35,8 +35,9 @@
     </nav>
 
     <main class="main--marketplace">
-      <form id="tableFilters">
-        <div class="container pt-3">
+
+      <form>
+      <div class="container pt-3">
           <div class="row">
             <div class="col">
               <h1 class="h2">Welcome to your Compliance Dashboard, Amy Reading!</h1>
@@ -92,7 +93,9 @@
             </div>
           </div>
         </div>
-
+</form>
+      <form id="tableFilters">
+        <input name="staff" data-mimic="pipeline[]" type="hidden" />
         <div class="container">
           <div class="tabs__links">
             <button class="link active" name="page" value="buyer">Buyer</button>
@@ -274,7 +277,6 @@
                 name="[sla_progress][]"
                 id="sla_progress_due"
                 data-filter-text="SLA progress - Due"
-                data-filter="SLA"
                 value="Due"
                 data-duplicate="due_diligience_incomplete"
               />
@@ -285,7 +287,6 @@
                 name="[sla_progress][]"
                 id="sla_progress_upcoming"
                 data-filter-text="SLA progress - Upcoming"
-                data-filter="SLA"
                 value="Upcoming"
                 data-duplicate="due_diligience_requires_approval"
               />
@@ -297,7 +298,6 @@
                 name="[sla_progress][]"
                 id="sla_progress_track"
                 data-filter-text="SLA progress - On track"
-                data-filter="SLA"
                 value="track"
                 data-duplicate="due_diligience_verified"
               />
