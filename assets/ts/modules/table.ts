@@ -1323,7 +1323,6 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
     });
   }
 
-
   // mimic fields
   const fields = [];
 
@@ -1371,8 +1370,6 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
     });
   });
 
-
-
 };
 // #region ajax tables functions
 
@@ -1406,6 +1403,8 @@ export const loadAjaxTable = async function (component, table, form, pagination)
 
   // Construct form data to send to api
   const formData = new FormData(form);
+
+  formData.set('page_number',formData.get('page')); // Fix for compliance dashbaord
 
   const queryString = new URLSearchParams(formData).toString();
   const columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');
