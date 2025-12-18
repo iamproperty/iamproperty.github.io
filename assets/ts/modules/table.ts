@@ -1257,6 +1257,14 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
     event.preventDefault();
   });
 
+  form.addEventListener('change', (event) => {
+    
+    if(!event.target.closest('iam-modal')){
+      
+      loadAjaxTable(component, table, form, pagination);
+    }
+  });
+
   if (actionbar) {
     actionbar.addEventListener('change', (event) => {
       loadAjaxTable(component, table, form, pagination);
@@ -1278,7 +1286,6 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
       component.dispatchEvent(submitEvent);
 
       loadAjaxTable(component, table, form, pagination);
-      console.log('hello');
     });
   }
 
@@ -1372,12 +1379,12 @@ export const loadAjaxTable = async function (component, table, form, pagination)
     })
       .then((response) => response.json())
       .then((response) => {
-        const schema = form.hasAttribute('data-schema') ? form.getAttribute('data-schema') : 'data';
-        const totalNumberSchema = form.hasAttribute('data-schema-total')
-          ? form.getAttribute('data-schema-total')
+        const schema = component.hasAttribute('data-schema') ? component.getAttribute('data-schema') : 'data';
+        const totalNumberSchema = component.hasAttribute('data-schema-total')
+          ? component.getAttribute('data-schema-total')
           : 'meta.total';
-        const currentPageSchema = form.hasAttribute('data-schema-page')
-          ? form.getAttribute('data-schema-page')
+        const currentPageSchema = component.hasAttribute('data-schema-page')
+          ? component.getAttribute('data-schema-page')
           : 'meta.current_page';
 
         const totalNumber = resolvePath(response, totalNumberSchema, 15);

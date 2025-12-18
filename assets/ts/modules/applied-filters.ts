@@ -196,9 +196,10 @@ function createAppliedFilters(container, filters): void {
     // Force the filters inside of the dialog to effect the filters above
     container.querySelector('.btn-primary')?.addEventListener('click', (e) => {
 
-      
       const event = new CustomEvent('update');
-      container.parentElement.closest('iam-applied-filters').dispatchEvent(event);
+      
+      if(container.parentElement.closest('iam-applied-filters'))
+        container.parentElement.closest('iam-applied-filters').dispatchEvent(event);
 
       if(container.parentElement && container.parentElement.closest('iam-applied-filters') && !container.parentElement.closest('iam-applied-filters').closest('dialog')){
 
@@ -208,8 +209,13 @@ function createAppliedFilters(container, filters): void {
 
 
       checkForChecked(true);
-      if(!container.querySelector('.btn-primary').hasAttribute('command'))
+
+      if(!container.querySelector('.btn-primary').hasAttribute('command')){
+        
         dialog.close();
+        const event = new Event('close');
+        dialog.dispatchEvent(event);
+      }
 
     });
   }

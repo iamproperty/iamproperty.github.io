@@ -109,7 +109,7 @@
           A Filter 
         </label>
         <label>
-          <input type="checkbox" value="Filter" name="filter" data-filter-text="$value" />
+          <input type="checkbox" value="Second Filter" name="filter2" data-filter-text="$value" />
           Second Filter 
         </label>
         </fieldset>
@@ -127,7 +127,7 @@
       
         <label>
           Filter 
-          <input type="text" value="Filter" name="filter" data-filter-text="Filter term: $value" />
+          <input type="text" value="Filter" name="filter3" data-filter-text="Filter term: $value" />
         </label>
         
       </AppliedFilters>
