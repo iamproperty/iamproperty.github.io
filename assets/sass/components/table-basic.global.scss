@@ -484,12 +484,6 @@ table {
     }
   }
 
-  @container (width > 23.4375em) {
-    tr:has([type='checkbox']:checked) {
-      height: calc(4.625rem - 2px);
-    }
-  }
-
   tr:has([type='checkbox']:hover, [type='checkbox']:focus):not(:has(.tag)) {
     --row-bg: #eeeeee;
   }
