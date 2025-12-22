@@ -1,7 +1,18 @@
+<script setup lang="ts">
+  import Nav from '@/components/Nav/Nav.vue';
+  import Table from '@/components/Table/Table.vue';
+  import Card from '@/components/Card/Card.vue';
+  import FilterCard from '@/components/FilterCard/FilterCard.vue';
+  import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';
+  import Filterlist from '@/components/Filterlist/Filterlist.vue';
+
+  import Modal from '@/components/Modal/Modal.vue';
+</script>
+
 <template>
   <div>
     <nav>
-      <iam-nav id="menu" class="bg-primary" data-search>
+      <Nav id="menu" class="bg-primary" data-search>
         <a href="/" class="brand brand--sold" slot="logo">
           <svg>
             <title>iamSold</title>
@@ -20,12 +31,13 @@
         <a href="/admin/awards.html">iamvalued Awards</a>
 
         <a href="https://iamsold.test/admin/logout.html" class="btn btn-primary" slot="actions">Logout</a>
-      </iam-nav>
+      </Nav>
     </nav>
 
     <main class="main--marketplace">
-      <form id="tableFilters" data-ajax="/data/compliance-dashboard.json" data-schema="data.buyerTasks">
-        <div class="container">
+
+      <form>
+      <div class="container pt-3">
           <div class="row">
             <div class="col">
               <h1 class="h2">Welcome to your Compliance Dashboard, Amy Reading!</h1>
@@ -81,7 +93,9 @@
             </div>
           </div>
         </div>
-
+</form>
+      <form id="tableFilters">
+        <input name="staff" data-mimic="pipeline[]" type="hidden" />
         <div class="container">
           <div class="tabs__links">
             <button class="link active" name="page" value="buyer">Buyer</button>
@@ -96,23 +110,51 @@
 
         <div class="container">
           <div class="row tab-focus">
-            <input
-              type="checkbox"
-              name="[sla_progress][]"
-              data-filter="SLA progress"
-              value="Due"
-              id="due_diligience_incomplete"
-              class="d-none"
-            />
-            <input
-              type="checkbox"
-              name="[sla_progress][]"
-              data-filter="SLA progress"
-              value="Upcoming"
-              id="due_diligience_requires_approval"
-              class="d-none"
-            />
-            <input
+            
+            
+            
+
+            <div class="col-sm-4 col-md-3">
+              
+              <label for="due_diligience_incomplete">
+                <input
+                  type="checkbox"
+                  name="[sla_progress][]"
+                  data-filter="SLA progress"
+                  value="Due"
+                  id="due_diligience_incomplete"
+                  class="d-none"
+                />
+                <FilterCard class="card--filter colour-danger card--flag" data-total="" data-query="SLA progress == Overdue"
+                  >Due/Overdue</FilterCard
+                ></label
+              >
+            </div>
+            <div class="col-sm-4 col-md-3">
+              
+              <label for="due_diligience_requires_approval"
+                >
+                <input
+                  type="checkbox"
+                  name="[sla_progress][]"
+                  data-filter="SLA progress"
+                  value="Upcoming"
+                  id="due_diligience_requires_approval"
+                  class="d-none"
+                />
+                <FilterCard
+                  class="card--filter colour-warning card--flag"
+                  data-total=""
+                  data-query="SLA progress == Upcoming"
+                  >Upcoming</FilterCard
+                ></label
+              >
+            </div>
+            <div class="col-sm-4 col-md-3">
+              
+              <label for="due_diligience_verified"
+                >
+                <input
               type="checkbox"
               name="[sla_progress][]"
               data-filter="SLA progress"
@@ -120,31 +162,12 @@
               id="due_diligience_verified"
               class="d-none"
             />
-
-            <div class="col-sm-4 col-md-3">
-              <label for="due_diligience_incomplete"
-                ><Card class="card--filter colour-danger card--flag" data-total="" data-query="SLA progress == Overdue"
-                  >Due/Overdue</Card
-                ></label
-              >
-            </div>
-            <div class="col-sm-4 col-md-3">
-              <label for="due_diligience_requires_approval"
-                ><Card
-                  class="card--filter colour-warning card--flag"
-                  data-total=""
-                  data-query="SLA progress == Upcoming"
-                  >Upcoming</Card
-                ></label
-              >
-            </div>
-            <div class="col-sm-4 col-md-3">
-              <label for="due_diligience_verified"
-                ><Card
+                
+                <FilterCard
                   class="card--filter colour-success card--flag"
-                  data-total=""
+                  data-total="12"
                   data-query="SLA progress == On track"
-                  >On track</Card
+                  >On track</FilterCard
                 ></label
               >
             </div>
@@ -154,7 +177,7 @@
         <div class="container">
           <div class="row align-items-end">
             <div class="col-12 ms-md-auto mw-sm-fit-content">
-              <button class="btn btn-secondary me-0 d-block w-100 btn-filter mb-1" type="button" data-modal="filters">
+              <button class="btn btn-secondary me-0 d-block w-100 btn-filter mb-1" type="button" command="show-modal" commandfor="filters">
                 Filter by <span data-filter-count=""></span>
               </button>
             </div>
@@ -199,12 +222,15 @@
                 </dialog>
               </div>
             </div>
+            <!--
             <div class="col-12 mw-sm-fit-content">
               <button class="btn btn-tertiary me-0" data-clear>Clear filters</button>
             </div>
+            -->
           </div>
         </div>
 
+        <Modal class="modal--sm">
         <dialog id="filters">
           <AppliedFilters class="applied-filters--compact" data-nosubmit>
             <span class="h3 pb-2">Filter by</span>
@@ -278,14 +304,15 @@
               <label for="sla_progress_track">On track</label>
               <hr />
             </div>
-          </AppliedFilters>
           <button class="btn btn-primary d-block mx-auto">Update results</button>
+          </AppliedFilters>
           <hr />
         </dialog>
+        </Modal>
       </form>
 
       <div class="container">
-        <Table class="table--cta table--minify" data-filterby="tableFilters">
+        <Table class="table--cta table--minify" data-ajax="/data/compliance-dashboard.json" data-schema="data.buyerTasks" data-filterby="tableFilters">
 
           <table>
             <thead>
@@ -319,22 +346,13 @@
 </template>
 <style lang="scss"></style>
 
+<!--
 <script>
-  import Nav from '@/components/Nav/Nav.vue';
-  import Table from '@/components/Table/Table.vue';
-  import Card from '@/components/Card/Card.vue';
-  import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';
-  import Filterlist from '@/components/Filterlist/Filterlist.vue';
 
-  import iamNav from '../../../assets/ts/components/nav/nav.component';
 
   export default {
     components: {
-      Nav,
-      Table,
-      Card,
-      AppliedFilters,
-      Filterlist,
+
     },
     computed: {
       checked: {
@@ -353,3 +371,4 @@
     },
   };
 </script>
+-->

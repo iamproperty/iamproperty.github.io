@@ -142,7 +142,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
       height: 3px;
       width: 100%;
       transform: translate(-50%, 0) scale(0, 0); // translate pulls this left so it's centered
-      background: var(--colour-tab-underline);
+      background: var(--colour-tab-underline, var(--colour-info));
       transition: transform 0.4s;
     }
 
@@ -155,7 +155,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     }
 
     &:not(.disabled) {
-      &:is([aria-pressed='true'], :active, .current):after {
+      &:is([aria-pressed='true'], :active, .current, .active):after {
         transform: translate(-50%, 0) scale(1, 1);
       }
     }

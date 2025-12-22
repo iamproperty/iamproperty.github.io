@@ -1,3 +1,4 @@
+import { doc } from 'prettier';
 import { zeroPad, isNumeric, ucfirst, resolvePath, uniqueID } from './helpers';
 
 // #region Helpers
@@ -102,6 +103,7 @@ export const paginateTable = (component, table, form, pagination, callback): voi
   });
 
   pagination.addEventListener('update-page', (event) => {
+    console.log('update page')
     if (form.querySelector('[name=page]').value != event.detail.page) {
       form.querySelector('[name=page]').value = event.detail.page;
 
@@ -719,7 +721,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     }
       */
   };
-
+/*
   if (component.querySelector('iam-actionbar[data-search]')) {
     component.querySelector('iam-actionbar[data-search]').addEventListener('search-submit', (event) => {
       if (form.querySelector('input[data-search]')) {
@@ -757,7 +759,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
       filterTable(component, table, form, pagination);
     });
   }
-
+*/
   form.addEventListener('keyup', (event) => {
     clearTimeout(timer);
 
@@ -1252,9 +1254,49 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
   const actionbar = component.querySelector('iam-actionbar');
 
   form.addEventListener('submit', (event) => {
+
+    Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element) => {
+
+      const id = element.getAttribute('data-duplicate');
+
+      if (document.querySelector(`[id="${id}"]`)) {
+        document.querySelector(`[id="${id}"]`).checked = element.checked;
+      }
+    });
+
     loadAjaxTable(component, table, form, pagination);
 
     event.preventDefault();
+  });
+
+  form.addEventListener('change', (event) => {
+    
+    if(!event.target.closest('iam-modal')){
+      
+      loadAjaxTable(component, table, form, pagination);
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.hasAttribute('id')) {
+      const id = event.target.getAttribute('id');
+
+      if (document.querySelector(`[data-duplicate="${id}"]`)) {
+        document.querySelector(`[data-duplicate="${id}"]`).checked = event.target.checked;
+
+        
+        const changeEvent = new CustomEvent('change');
+        document.querySelector(`[data-duplicate="${id}"]`)?.dispatchEvent(changeEvent);
+
+      }
+    }
+
+    if (event && event.target instanceof HTMLElement && event.target.hasAttribute('data-duplicate') && !event.target.closest('iam-modal')) {
+      const id = event.target.getAttribute('data-duplicate');
+
+      if (document.querySelector(`[id="${id}"]`)) {
+        document.querySelector(`[id="${id}"]`).checked = event.target.checked;
+      }
+    }
+
   });
 
   if (actionbar) {
@@ -1278,10 +1320,55 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
       component.dispatchEvent(submitEvent);
 
       loadAjaxTable(component, table, form, pagination);
-      console.log('hello');
     });
   }
 
+  // mimic fields
+  const fields = [];
+
+  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
+
+    input.addEventListener('change', (event) => {
+
+      loadAjaxTable(component, table, form, pagination);
+    });
+  });
+
+
+  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
+    const mimicField = input.getAttribute('data-mimic');
+
+    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput) => {
+
+      if (!fields.includes(mimicInput)) {
+        fields.push(mimicInput);
+      }
+    });
+  });
+
+  fields.forEach((input) => {
+
+    input.addEventListener('change', (event) => {
+
+      const name = input.getAttribute('name');
+      const mimicInput = document.querySelector(`[data-mimic="${name}"]`);
+      
+      let valueToSend = '';
+      Array.from(document.querySelectorAll(`[name="${name}"]:checked`)).forEach((input) => {
+
+        if(valueToSend == '')
+          valueToSend = input.value;
+        else
+          valueToSend += ',' + input.value;
+      });
+
+      console.log(valueToSend);
+
+      mimicInput.value = valueToSend;
+      const changeEvent = new CustomEvent('change');
+      mimicInput?.dispatchEvent(changeEvent);
+    });
+  });
 
 };
 // #region ajax tables functions
@@ -1316,6 +1403,8 @@ export const loadAjaxTable = async function (component, table, form, pagination)
 
   // Construct form data to send to api
   const formData = new FormData(form);
+
+  formData.set('page_number',formData.get('page')); // Fix for compliance dashbaord
 
   const queryString = new URLSearchParams(formData).toString();
   const columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');
@@ -1372,12 +1461,12 @@ export const loadAjaxTable = async function (component, table, form, pagination)
     })
       .then((response) => response.json())
       .then((response) => {
-        const schema = form.hasAttribute('data-schema') ? form.getAttribute('data-schema') : 'data';
-        const totalNumberSchema = form.hasAttribute('data-schema-total')
-          ? form.getAttribute('data-schema-total')
+        const schema = component.hasAttribute('data-schema') ? component.getAttribute('data-schema') : 'data';
+        const totalNumberSchema = component.hasAttribute('data-schema-total')
+          ? component.getAttribute('data-schema-total')
           : 'meta.total';
-        const currentPageSchema = form.hasAttribute('data-schema-page')
-          ? form.getAttribute('data-schema-page')
+        const currentPageSchema = component.hasAttribute('data-schema-page')
+          ? component.getAttribute('data-schema-page')
           : 'meta.current_page';
 
         const totalNumber = resolvePath(response, totalNumberSchema, 15);
@@ -1453,11 +1542,11 @@ export const loadAjaxTable = async function (component, table, form, pagination)
             tbody.appendChild(table_row);
           });
 
-          component.setAttribute('data-total', parseInt(totalNumber));
-          component.setAttribute('data-page', parseInt(currentPage));
+          //component.setAttribute('data-total', parseInt(totalNumber));
+          //component.setAttribute('data-page', parseInt(currentPage));
 
-          pagination.setAttribute('data-total', totalNumber);
-          pagination.setAttribute('data-page', currentPage);
+          //pagination.setAttribute('data-total', totalNumber);
+          //pagination.setAttribute('data-page', currentPage);
 
           Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement) => {
             const totalNumber = resolvePath(response, queryElement.getAttribute('data-ajax-query'), '');

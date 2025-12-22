@@ -34,7 +34,7 @@ class iamAccordion extends HTMLElement {
 
     const details: NodeListOf<HTMLElement> = this.querySelectorAll(':scope > details');
 
-    if (!this.classList.contains('accordion--keep-open')) {
+    if (!this.classList.contains('accordion--keep-open') && !this.querySelector('details[name]')) {
       // Add the toggle listeners.
       details.forEach((targetDetail) => {
         targetDetail.addEventListener('toggle', () => {

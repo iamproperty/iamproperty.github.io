@@ -675,6 +675,15 @@ $optionalText: 'true' !default;
       }
     }
 
+    fieldset:has(label > input:is([type="radio"],[type="checkbox"])){
+
+      label {
+        margin-bottom: 0!important;
+      }
+
+      margin-bottom: 1.5rem;
+    }
+
     input:is([type='radio'], [type='checkbox']):checked + label,
     label:not(.tag):has(input:is([type='radio'], [type='checkbox']):checked) {
       --tick-colour: var(--colour-info);
