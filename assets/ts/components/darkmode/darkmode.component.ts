@@ -34,14 +34,18 @@ class iamDarkMode extends HTMLElement {
 
     const storedTheme = localStorage.getItem('user-theme');
 
+    console.log(storedTheme);
+
     // Work from local storage first then look at the media preferences
     label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
     if (storedTheme == 'dark-theme') {
       label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
       label?.classList.add('dark-theme');
+      document.documentElement.className = 'dark-theme';
     } else if (storedTheme == 'light-theme') {
       label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
       label?.classList.remove('dark-theme');
+      document.documentElement.className = 'light-theme';
     }
 
     const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -51,8 +55,6 @@ class iamDarkMode extends HTMLElement {
     }
 
     this.addEventListener('click', (event) => {
-      console.log(label?.querySelector('input:checked'));
-
       if (label?.querySelector('input:checked')) {
         label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
         localStorage.setItem('user-theme', 'dark-theme');
@@ -70,6 +72,7 @@ class iamDarkMode extends HTMLElement {
       if (matches) {
         label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
         label?.classList.add('dark-theme');
+        document.documentElement.className = 'dark-theme';
       }
     });
 
@@ -77,6 +80,7 @@ class iamDarkMode extends HTMLElement {
       if (matches) {
         label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
         label?.classList.remove('dark-theme');
+        document.documentElement.className = 'light-theme';
       }
     });
   }

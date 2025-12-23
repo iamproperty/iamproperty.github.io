@@ -73,8 +73,6 @@ class iamMultiStepModal extends HTMLElement {
 
     document.addEventListener('click', (e) => {
 
-      console.log('hi')
-      
       if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
         openModal();
       }

@@ -3,6 +3,9 @@
 
 @use '../_func' as *;
 
+@use 'input' as *;
+
+
 $icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
 
 $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
@@ -20,8 +23,6 @@ $optionalText: 'true' !default;
   }
 
   // 1. Remove the margin in Firefox and Safari
-
-  input,
   select,
   optgroup,
   textarea {
@@ -50,26 +51,7 @@ $optionalText: 'true' !default;
     }
   }
 
-  // Remove the dropdown arrow only from text type inputs built with datalists in Chrome.
-  // See https://stackoverflow.com/a/54997118
-
-  [list]:not([type='date']):not([type='datetime-local']):not([type='month']):not([type='week']):not(
-      [type='time']
-    )::-webkit-calendar-picker-indicator {
-    display: none !important;
-  }
-
-  // 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
-  //    controls in Android 4.
-  // 2. Correct the inability to style clickable types in iOS and Safari.
-  // 3. Opinionated: add "hand" cursor to non-disabled button elements.
-
-  // Remove inner border and padding from Firefox, but don't restore the outline like Normalize.
-
-  ::-moz-focus-inner {
-    padding: 0;
-    border-style: none;
-  }
+  
 
   // 1. Textareas should really only resize vertically so they don't break their (horizontal) containers.
 
@@ -89,97 +71,6 @@ $optionalText: 'true' !default;
     padding: 0; // 2
     margin: 0; // 2
     border: 0; // 2
-  }
-
-  // 1. By using `float: left`, the legend will behave like a block element.
-  //    This way the border of a fieldset wraps around the legend if present.
-  // 2. Fix wrapping bug.
-  //    See https://github.com/twbs/bootstrap/issues/29712
-
-  legend {
-    float: left; // 1
-    width: 100%;
-    padding: 0;
-    margin-bottom: $legend-margin-bottom;
-    @include font-size($legend-font-size);
-    font-weight: $legend-font-weight;
-    line-height: inherit;
-
-    + * {
-      clear: left; // 2
-    }
-  }
-
-  // Fix height of inputs with a type of datetime-local, date, month, week, or time
-  // See https://github.com/twbs/bootstrap/issues/18842
-
-  ::-webkit-datetime-edit-fields-wrapper,
-  ::-webkit-datetime-edit-text,
-  ::-webkit-datetime-edit-minute,
-  ::-webkit-datetime-edit-hour-field,
-  ::-webkit-datetime-edit-day-field,
-  ::-webkit-datetime-edit-month-field,
-  ::-webkit-datetime-edit-year-field {
-    padding: 0;
-  }
-
-  ::-webkit-inner-spin-button {
-    height: auto;
-  }
-
-  // 1. Correct the outline style in Safari.
-  // 2. This overrides the extra rounded corners on search inputs in iOS so that our
-  //    `.form-control` class can properly style them. Note that this cannot simply
-  //    be added to `.form-control` as it's not specific enough. For details, see
-  //    https://github.com/twbs/bootstrap/issues/11586.
-
-  [type='search'] {
-    outline-offset: -2px; // 1
-    -webkit-appearance: textfield; // 2
-  }
-
-  // 1. A few input types should stay LTR
-  // See https://rtlstyling.com/posts/rtl-styling#form-inputs
-  // 2. RTL only output
-  // See https://rtlcss.com/learn/usage-guide/control-directives/#raw
-
-  /* rtl:raw:
-[type="tel"],
-[type="url"],
-[type="email"],
-[type="number"] {
-  direction: ltr;
-}
-*/
-
-  // Remove the inner padding in Chrome and Safari on macOS.
-
-  ::-webkit-search-decoration {
-    -webkit-appearance: none;
-  }
-
-  // Remove padding around color pickers in webkit browsers
-
-  ::-webkit-color-swatch-wrapper {
-    padding: 0;
-  }
-
-  ::-moz-color-swatch {
-    border-radius: 0;
-    border: none;
-  }
-
-  ::-webkit-color-swatch {
-    border-radius: 0;
-    border: none;
-  }
-
-  // 1. Inherit font family and line height for file input buttons
-  // 2. Correct the inability to style clickable types in iOS and Safari.
-
-  ::file-selector-button {
-    font: inherit; // 1
-    -webkit-appearance: button; // 2
   }
 
   // Correct element displays
@@ -232,73 +123,13 @@ $optionalText: 'true' !default;
 
   // #region input field
   :is(
-    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
-    textarea,
-    output,
     select:not(.select--minimal, .btn)
   ) {
-    display: block;
-    width: 100%;
-    display: block;
-    width: 100%;
-    padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
-    font-size: var(--input-fs, #{rem(16)});
-    line-height: var(--input-lh, #{rem(20)});
-    color: var(--colour-heading);
-    background-color: var(--colour-canvas-2);
-    background-clip: padding-box;
-    border: 2px solid var(--colour-primary);
-    appearance: none; // Fix appearance for date inputs in Safari
-    border-radius: rem(8);
-    margin-bottom: rem(24);
-    min-height: calc(
-      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
-        4px
-    );
-    max-height: calc(
-      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
-        4px
-    );
-
-    &:is(textarea) {
-      max-height: 100%;
-    }
-
-    // Customize the `:focus` state to imitate native WebKit styles.
-    &:is(:focus, .focus):not(:disabled) {
-      border-color: var(--colour-info);
-      outline: 0;
-    }
-
-    &:is(:focus, .focus):not(:disabled):not(:invalid) {
-      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
-    }
-    // Add some height to date inputs on iOS
-    // https://github.com/twbs/bootstrap/issues/23307
-    // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
-    &::-webkit-date-and-time-value {
-      // Multiply line-height by 1em if it has no unit
-      height: if(math.unit($input-line-height) == '', $input-line-height * 1em, $input-line-height);
-    }
-
-    // Disabled inputs
-    &:disabled {
-      background-color: #ccd6d8;
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+    
+    @include input();
   }
 
-  input[type='color'] {
-
-    padding: 0!important;
-    max-width: 3rem!important;
-  }
-  
   [disabled] :is(
-    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
-    textarea,
-    output,
     select:not(.select--minimal, .btn)
   ) {
       background-color: #ccd6d8;
@@ -311,18 +142,6 @@ $optionalText: 'true' !default;
 
       cursor: not-allowed;
       pointer-events: none;
-  }
-
-  :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range'])) {
-    max-width: $input-max-width;
-  }
-
-  textarea {
-    --textarea-height-scale: 3;
-    min-height: calc(
-      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) +
-        (var(--input-lh, #{rem(20)}) * var(--textarea-height-scale)) + 4px
-    ) !important;
   }
   // #endregion
 
@@ -673,6 +492,15 @@ $optionalText: 'true' !default;
       label:not(.tag):not(:has(> iam-card)) {
         margin-bottom: 0rem;
       }
+    }
+
+    fieldset:has(label > input:is([type="radio"],[type="checkbox"])){
+
+      label {
+        margin-bottom: 0!important;
+      }
+
+      margin-bottom: 1.5rem;
     }
 
     input:is([type='radio'], [type='checkbox']):checked + label,
@@ -1210,6 +1038,10 @@ $optionalText: 'true' !default;
     i {
       font-size: 1.5rem;
     }
+  }
+
+  &:has(input:is([name$="Alt"]):not([data-value],[data-placeholder])) .empty {
+    display: none;
   }
 
   label:after,

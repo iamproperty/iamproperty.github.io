@@ -303,8 +303,6 @@
     </div>
 
     
-
-    
     <Modal data-type="acknowledgement" class="modal--sm">
       <dialog id="modal-ack">
         <span class="h3">Acknowledgment modal title</span>

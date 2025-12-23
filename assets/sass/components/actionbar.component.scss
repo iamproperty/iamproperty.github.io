@@ -1,5 +1,6 @@
 @use '../_func.scss' as *;
 
+@use '../elements/prefix.scss' as *;
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
 @use '../elements/dialog.scss' as *;
@@ -173,11 +174,13 @@ slot[name='selectall'] {
 ::slotted([data-single]) {
   pointer-events: none;
   opacity: 0.5;
+  cursor: not-allowed;
 }
 
 :host([data-selected='1']) ::slotted([data-single]) {
   pointer-events: all;
   opacity: 1;
+  cursor: pointer;
 }
 
 ::slotted(hr) {
@@ -340,12 +343,17 @@ slot[name='selectall'] {
   #saveColumns:not(:hover, :focus, :active) {
     background-color: var(--colour-warning);
   }
+  #saveColumns:is(:hover, :focus, :active) {
+    background-color: transparent;
+    color: var(--colour-heading);
+    border-color: var(--colour-warning);
+  }
   #cancelColumns:not(:hover, :focus, :active) {
     border-color: var(--colour-border);
   }
 }
 
-.fa-table-columns:has(+ dialog input:not(:checked)) {
+.fa-table-columns:has(+ iam-menu input:not(:checked)) {
   overflow: visible;
   text-indent: -200vw;
 

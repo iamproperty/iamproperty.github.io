@@ -5,7 +5,7 @@ $layers: 'true' !default;
 $mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+@layer elements {
   // non-js fallback
   body:not(.js-enabled) dialog:not([open]):target {
     display: block;
@@ -63,6 +63,7 @@ $darkMode: 'true' !default;
 
     @include media-breakpoint-up(sm, $mobileOnly) {
       --dialog-padding: #{rem(32)};
+      padding: var(--dialog-padding);
       min-width: rem(335);
       width: fit-content;
       max-width: rem(686);
@@ -76,6 +77,12 @@ $darkMode: 'true' !default;
 
   }
   // #endregion
-}
 
+
+  details.bg-light {
+    margin-inline: calc(var(--dialog-padding) * -1);
+    padding-inline: var(--dialog-padding);
+  }
+
+}
 

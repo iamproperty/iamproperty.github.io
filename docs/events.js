@@ -30,6 +30,23 @@ export const actionbar = `<table>
   </tbody>
 </table>`;
 
+export const appliedfilters = `<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Dispatched</th>
+      <th>Details/Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>update</th>
+      <td>When a user clicks on the 'update results' button</td>
+      <td>This is aimed at telling the integrating developer that the visual of the applied filters will now look like the fitlers have been set. So a bespoke function or form submit is needed.</td>
+    </tr>
+  </tbody>
+</table>`;
+
 export const bentogrid = `<table>
   <thead>
     <tr>

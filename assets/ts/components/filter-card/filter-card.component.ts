@@ -74,6 +74,33 @@ class iamFilerCard extends HTMLElement {
 
     trackComponent(cardComponent, 'iam-filter-card', ['select-card', 'unselect-card']);
   }
+
+  static get observedAttributes(): any {
+    return ['data-total'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
+
+    
+
+    switch (attrName) {
+      case 'data-total': {
+        if (oldVal != newVal) {
+           
+          const cardBody = this.shadowRoot.querySelector('.card__body');
+
+          if(!cardBody?.querySelector('.card__total'))
+            cardBody.insertAdjacentHTML('beforeend',`<div class="card__total">${newVal}</div>`);
+          else {
+            cardBody?.querySelector('.card__total')?.innerHTML = newVal;
+          }
+
+
+        }
+        break;
+      }
+    }
+  }
 }
 
 export default iamFilerCard;

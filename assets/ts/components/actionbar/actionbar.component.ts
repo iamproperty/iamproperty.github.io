@@ -266,25 +266,18 @@ class iamActionbar extends HTMLElement {
       this.dispatchEvent(changeEvent);
     });
 
-    console.log(searchBar);
-
     searchBar.addEventListener('click', (event) => {
 
-      console.log(event);
-
-      console.log(event.target.closest('button.suffix'));
-
       if (event && event.target instanceof HTMLElement && event.target.closest('button.suffix')) {
-
-        
 
         const submitEvent = new CustomEvent('search-submit', {
           detail: { search: searchBar.querySelector('input').value },
         });
 
-console.log(this)
-
         this.dispatchEvent(submitEvent);
+
+        searchBar.classList.toggle('show');
+        searchBtn.toggleAttribute('aria-expanded');
       }
     });
 

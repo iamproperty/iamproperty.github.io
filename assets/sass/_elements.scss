@@ -103,6 +103,11 @@ $optionalText: 'true' !default;
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly
 );
+@use 'elements/feature.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);
 @use 'elements/details.scss' with (
   $layers: $layers,
   $darkMode: $darkMode,
