@@ -20,7 +20,7 @@ class iamInput extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="wrapper" part="wrapper">
       <span part="prefix"><slot name="prefix"></slot></span>
-      <slot></slot>
+      <slot part="input-wrapper"></slot>
       <slot part="suffix"><slot name="suffix"></slot></slot>
     </div>
     `;
@@ -63,6 +63,61 @@ class iamInput extends HTMLElement {
       }
     }
     setIcon(inputType);
+
+
+    const setCurrencyRules = () => {
+      
+      input.setAttribute('type','text');
+      input?.setAttribute('data-value',input.value);
+      input.value = new Intl.NumberFormat("en-GB", { 
+        style: "currency", 
+        currency: "GBP",
+        minimumFractionDigits: Number.isInteger(input.value) ? 0 : 2,
+        maximumFractionDigits: Number.isInteger(input.value) ? 0 : 2,
+        trailingZeroDisplay: 'stripIfInteger' // Strip zeros if it's an integer
+      }).format(input.value).replace("£", "");
+    }
+
+
+    // Currency type
+    if(component?.hasAttribute('data-currency')) {
+
+      // Pre set the icons
+      switch (component?.hasAttribute('data-currency')) {
+        case "dollar":
+          component.setAttribute('data-prefix-icon','dollar-sign') ;
+          break;
+        case "euro":
+          component.setAttribute('data-prefix-icon','euro-sign') ;
+          break;
+        default:
+          component.setAttribute('data-prefix-icon','sterling-sign') ;
+          break;
+      }
+
+      setCurrencyRules();
+
+
+      input?.addEventListener('focus',(event) => {
+
+        input.setAttribute('type', 'number')
+
+        input.value = input.getAttribute('data-value');
+        input.setAttribute('value', input.getAttribute('data-value'));
+      });
+
+      input?.addEventListener('input',(event) => {
+
+        input?.setAttribute('data-value',input.value);
+      });
+
+      input?.addEventListener('blur',(event) => {
+
+        setCurrencyRules();
+      });
+    }
+
+
 
     // Colour input field
     if(input?.matches('[type="color"]')){
