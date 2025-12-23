@@ -149,6 +149,13 @@
               <td>No</td>
               <td>Controls the weight of the suffix icon</td>
             </tr>
+            <tr>
+              <th>data-duplicate</th>
+              <td>-</td>
+              <td>String</td>
+              <td>No</td>
+              <td>Add an id of another input field for this input to watch and duplicate its value when chnage event is triggered. Meant to be used with two checkboxes but can also be used on input fields with the type of text or hidden. </td>
+            </tr>
           </tbody>
         </table>
       </template>

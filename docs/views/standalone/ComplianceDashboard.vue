@@ -2,6 +2,7 @@
   import Nav from '@/components/Nav/Nav.vue';
   import Table from '@/components/Table/Table.vue';
   import Card from '@/components/Card/Card.vue';
+  import Input from '@/components/Input/Input.vue';
   import FilterCard from '@/components/FilterCard/FilterCard.vue';
   import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';
   import Filterlist from '@/components/Filterlist/Filterlist.vue';
@@ -95,7 +96,7 @@
         </div>
 </form>
       <form id="tableFilters">
-        <input name="staff" data-mimic="pipeline[]" type="hidden" />
+        <Input data-duplicate="pipeline[]"><input name="staff" type="hidden" /></Input>
         <div class="container">
           <div class="tabs__links">
             <button class="link active" name="page" value="buyer">Buyer</button>
@@ -272,36 +273,41 @@
 
             <span class="h4 pb-1">SLA Progress</span>
             <div>
-              <input
-                type="checkbox"
-                name="[sla_progress][]"
-                id="sla_progress_due"
-                data-filter-text="SLA progress - Due"
-                value="Due"
-                data-duplicate="due_diligience_incomplete"
-              />
-              <label for="sla_progress_due">Due</label>
+
+              <Input data-duplicate="due_diligience_incomplete">
+                <label for="sla_progress_due"><input
+                  type="checkbox"
+                  name="[sla_progress][]"
+                  id="sla_progress_due"
+                  data-filter-text="SLA progress - Due"
+                  value="Due"
+
+                />Due</label>
+              </Input>
+
+              
               <hr />
-              <input
+              <Input data-duplicate="due_diligience_requires_approval">
+              
+              <label for="sla_progress_upcoming"><input
                 type="checkbox"
                 name="[sla_progress][]"
                 id="sla_progress_upcoming"
                 data-filter-text="SLA progress - Upcoming"
                 value="Upcoming"
-                data-duplicate="due_diligience_requires_approval"
-              />
-              <label for="sla_progress_upcoming">Upcoming</label>
+              />Upcoming</label>
+            </Input>
               <hr />
-
-              <input
+              <Input data-duplicate="due_diligience_verified">
+              
+              <label for="sla_progress_track"><input
                 type="checkbox"
                 name="[sla_progress][]"
                 id="sla_progress_track"
                 data-filter-text="SLA progress - On track"
                 value="track"
-                data-duplicate="due_diligience_verified"
-              />
-              <label for="sla_progress_track">On track</label>
+              />On track</label>
+            </Input>
               <hr />
             </div>
           <button class="btn btn-primary d-block mx-auto">Update results</button>

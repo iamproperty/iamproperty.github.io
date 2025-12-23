@@ -216,7 +216,60 @@ class iamInput extends HTMLElement {
         input.showPicker();
     });
     
+    // Duplicate input watches
+    if(component.hasAttribute('data-duplicate')){
 
+      const id = component.getAttribute('data-duplicate');
+      const watchedInputs = document.querySelectorAll(`[name="${id}"], [id="${id}"]`);
+
+      input.addEventListener('change', (event) => {
+        
+        if(input.closest('iam-modal'))
+          return false;
+
+        if(input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')){
+          watchedInput.checked = event.target.checked;
+
+          if(!event.detail && !event.detail?.triggered){
+            const changeEvent = new CustomEvent('change', { detail: {triggered: true} });
+            watchedInput?.dispatchEvent(changeEvent);
+          }
+        }
+      });
+
+      Array.from(watchedInputs).forEach((watchedInput) => {
+
+        watchedInput?.addEventListener('change', (event) => {
+
+          // If both the duplicate input and the watched input are checkboxes
+          if(input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')){
+            input.checked = event.target.checked;
+
+            if(!event.detail && !event.detail?.triggered){
+              const changeEvent = new CustomEvent('change', { detail: {triggered: true} });
+              input?.dispatchEvent(changeEvent);
+            }
+          }
+
+          // if input is not a checkbox BUT the watched input is
+          // Then we need to create the input's value
+          if(!input?.matches('[type="checkbox"]') && watchedInput?.matches('[type="checkbox"]')){
+            
+            let computedValue = '';
+            Array.from(document.querySelectorAll(`[name="${id}"]:checked`)).forEach((loopInput) => {
+
+              computedValue += (computedValue == '' ? '' : ',') + loopInput.value;
+            });
+            input.value = computedValue;
+
+            if(!event.detail && !event.detail?.triggered){
+              const changeEvent = new CustomEvent('change', { detail: {triggered: true} });
+              input?.dispatchEvent(changeEvent);
+            }
+          }
+        });
+      });
+    }
   }
 }
 
