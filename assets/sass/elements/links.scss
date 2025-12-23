@@ -72,6 +72,12 @@ $darkMode: 'true' !default;
       }
     }
 
+    &:not(.text-decoration-none).text-underline-plain {
+      &:after {
+        background: currentColor;
+      }
+    }
+
     [class*='fa-'] {
       margin-left: 0;
       margin-right: 0.5rem;
@@ -94,7 +100,7 @@ $darkMode: 'true' !default;
   }
 
   @include inline-text() {
-    a:not(.btn) {
+    a:not(.btn):not(.link) {
       min-height: none;
       display: inline;
       margin: 0;

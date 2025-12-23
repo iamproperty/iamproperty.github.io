@@ -27,7 +27,7 @@ $darkMode: 'true' !default;
     }
   }
 
-  hr:not(.border-0) {
+  hr[class*="border-"] {
     border-bottom:  var(--border-width) var(--border-style) var(--border-color);
   }
 

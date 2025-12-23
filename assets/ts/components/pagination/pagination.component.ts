@@ -201,8 +201,6 @@ class iamPagination extends HTMLElement {
         if (oldVal && oldVal != newVal) {
           this.setup();
 
-          console.log(newVal);
-
           // Dispact the event for other components to use as triggers
           this.dispatchEvent(new CustomEvent('update-page', { detail: { page: newVal } }));
         }

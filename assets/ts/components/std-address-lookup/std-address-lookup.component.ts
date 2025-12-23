@@ -1554,7 +1554,7 @@ class iamSTDAddressLookup extends HTMLElement {
     data-url="/standardaddress.json?search_query=" 
     data-postcode="true" 
     data-min-chars="5" 
-    data-title="Find an address by postcode" 
+    ${this.hasAttribute('data-title') ? `data-title='${this.getAttribute('data-title')}'` : `data-title='Find an address by postcode'`}
     data-placeholder="UK, Isle of Man, & Channel Islands " 
     ${this.hasAttribute('data-manual') ? 'data-manual' : ''} 
     ${this.hasAttribute('data-allow-manual') ? 'data-allow-manual' : ''} 

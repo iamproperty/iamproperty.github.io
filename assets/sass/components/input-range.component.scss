@@ -1,5 +1,11 @@
 @use '../_func' as *;
 
+
+:host {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
 .wrapper {
   display: flex;
   max-width: var(--input-max-width, 50rem);
@@ -11,6 +17,7 @@
   flex-grow: 1!important;
   flex-shrink: 1!important;
   flex-basis: 50%!important;
+  margin-bottom: 0!important;
 }
 
 ::slotted(:first-child) {

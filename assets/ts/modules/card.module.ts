@@ -25,10 +25,15 @@ export const setupCard = (cardComponent: any): void => {
 
   // Inset the HTML for the data total or icon fallback
   if (cardComponent.hasAttribute('data-total')) {
-    cardBody.insertAdjacentHTML(
-      'beforeend',
-      `<div class="card__total">${cardComponent.getAttribute('data-total')}</div>`
-    );
+
+    if(!cardBody?.querySelector('.card__total'))
+      cardBody.insertAdjacentHTML(
+        'beforeend',
+        `<div class="card__total">${cardComponent.getAttribute('data-total')}</div>`
+      );
+    else {
+      cardBody?.querySelector('.card__total')?.innerHTML = cardComponent.getAttribute('data-total');
+    }
   } else if (cardComponent.querySelector('[slot="total-icon"]')) {
     cardBody.insertAdjacentHTML('beforeend', `<div class="card__total"><slot name="total-icon"></slot></div>`);
   }

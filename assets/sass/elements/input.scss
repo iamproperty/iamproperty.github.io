@@ -1,0 +1,177 @@
+@use 'sass:map';
+@use 'sass:math';
+
+@use '../_func' as *;
+
+
+@layer elements {
+
+  input {
+    margin: 0; // 1
+    font-family: inherit;
+    @include font-size(inherit);
+    line-height: inherit;
+  }
+
+  // Remove the dropdown arrow only from text type inputs built with datalists in Chrome.
+  // See https://stackoverflow.com/a/54997118
+
+  [list]:not([type='date']):not([type='datetime-local']):not([type='month']):not([type='week']):not(
+      [type='time']
+    )::-webkit-calendar-picker-indicator {
+    display: none !important;
+  }
+
+  // 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`
+  //    controls in Android 4.
+  // 2. Correct the inability to style clickable types in iOS and Safari.
+  // 3. Opinionated: add "hand" cursor to non-disabled button elements.
+
+  // Remove inner border and padding from Firefox, but don't restore the outline like Normalize.
+
+  ::-moz-focus-inner {
+    padding: 0;
+    border-style: none;
+  }
+
+  // 1. By using `float: left`, the legend will behave like a block element.
+  //    This way the border of a fieldset wraps around the legend if present.
+  // 2. Fix wrapping bug.
+  //    See https://github.com/twbs/bootstrap/issues/29712
+
+  legend {
+    float: left; // 1
+    width: 100%;
+    padding: 0;
+    margin-bottom: $legend-margin-bottom;
+    @include font-size($legend-font-size);
+    font-weight: $legend-font-weight;
+    line-height: inherit;
+
+    + * {
+      clear: left; // 2
+    }
+  }
+
+  // Fix height of inputs with a type of datetime-local, date, month, week, or time
+  // See https://github.com/twbs/bootstrap/issues/18842
+
+  ::-webkit-datetime-edit-fields-wrapper,
+  ::-webkit-datetime-edit-text,
+  ::-webkit-datetime-edit-minute,
+  ::-webkit-datetime-edit-hour-field,
+  ::-webkit-datetime-edit-day-field,
+  ::-webkit-datetime-edit-month-field,
+  ::-webkit-datetime-edit-year-field {
+    padding: 0;
+  }
+
+  ::-webkit-inner-spin-button {
+    height: auto;
+  }
+
+  // 1. Correct the outline style in Safari.
+  // 2. This overrides the extra rounded corners on search inputs in iOS so that our
+  //    `.form-control` class can properly style them. Note that this cannot simply
+  //    be added to `.form-control` as it's not specific enough. For details, see
+  //    https://github.com/twbs/bootstrap/issues/11586.
+
+  [type='search'] {
+    outline-offset: -2px; // 1
+    -webkit-appearance: textfield; // 2
+  }
+
+  // 1. A few input types should stay LTR
+  // See https://rtlstyling.com/posts/rtl-styling#form-inputs
+  // 2. RTL only output
+  // See https://rtlcss.com/learn/usage-guide/control-directives/#raw
+
+  /* rtl:raw:
+[type="tel"],
+[type="url"],
+[type="email"],
+[type="number"] {
+  direction: ltr;
+}
+*/
+
+  // Remove the inner padding in Chrome and Safari on macOS.
+
+  ::-webkit-search-decoration {
+    -webkit-appearance: none;
+  }
+
+  // Remove padding around color pickers in webkit browsers
+
+  ::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+
+  ::-moz-color-swatch {
+    border-radius: 0;
+    border: none;
+  }
+
+  ::-webkit-color-swatch {
+    border-radius: 0;
+    border: none;
+  }
+
+  // 1. Inherit font family and line height for file input buttons
+  // 2. Correct the inability to style clickable types in iOS and Safari.
+
+  ::file-selector-button {
+    font: inherit; // 1
+    -webkit-appearance: button; // 2
+  }
+
+
+  
+
+  // #region input field
+  :is(
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
+    textarea,
+    output
+  ) {
+    @include input();
+  }
+
+  input[type='color'] {
+
+    padding: 0!important;
+    max-width: 3rem!important;
+  }
+  
+  [disabled] :is(
+    input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
+    textarea,
+    output,
+    select:not(.select--minimal, .btn)
+  ) {
+      background-color: #ccd6d8;
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+  }
+
+  [disabled] label {
+
+      cursor: not-allowed;
+      pointer-events: none;
+  }
+
+  :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range'])) {
+    max-width: $input-max-width;
+  }
+
+  textarea {
+    --textarea-height-scale: 3;
+    min-height: calc(
+      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) +
+        (var(--input-lh, #{rem(20)}) * var(--textarea-height-scale)) + 4px
+    ) !important;
+  }
+  // #endregion
+
+}
