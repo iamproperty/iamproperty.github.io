@@ -71,7 +71,8 @@ $darkMode: 'true' !default;
 
       //right: auto;
       margin: 0 0 0 #{rem(4)};
-      padding: rem(16);
+      //padding: rem(16);
+      padding: rem(24);
 
       &::backdrop {
         display: none;
@@ -94,7 +95,6 @@ $darkMode: 'true' !default;
       min-width: rem(320);
       border-radius: rem(16);
       width: rem(320);
-      padding: rem(24);
 
       @include media-breakpoint-up(sm, $mobileOnly) {
         width: rem(335);
@@ -256,3 +256,4 @@ $darkMode: 'true' !default;
   }
   // #endregion
 }
+

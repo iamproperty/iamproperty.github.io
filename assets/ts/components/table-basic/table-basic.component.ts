@@ -48,7 +48,7 @@ class iamTableBasic extends HTMLElement {
     setupBasicTable(this, table, form, pagination);
 
     paginateTable(this, table, form, pagination, () => {
-      paginateRows(component);
+      paginateRows(this);
     });
   }
 }
