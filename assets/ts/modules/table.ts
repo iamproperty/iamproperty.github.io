@@ -103,7 +103,7 @@ export const paginateTable = (component, table, form, pagination, callback): voi
   });
 
   pagination.addEventListener('update-page', (event) => {
-    console.log('update page')
+    
     if (form.querySelector('[name=page]').value != event.detail.page) {
       form.querySelector('[name=page]').value = event.detail.page;
 
@@ -690,20 +690,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     // Before submitting check if any duplicate checkboxes within the filters dialog needs to upset the original input
     if (event.type == 'submit') {
       form.classList.add('processing');
-      Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element) => {
-        const id = element.getAttribute('data-duplicate');
-        const input = document.getElementById(id);
-        const card = document.querySelector(`[for="${id}"] iam-card`);
-
-        if (input.checked != element.checked) {
-          if (card) {
-            const clickEvent = new Event('click');
-            card.dispatchEvent(clickEvent);
-          } else {
-            input.checked = element.checked;
-          }
-        }
-      });
       form.classList.remove('processing');
     }
 
@@ -721,7 +707,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     }
       */
   };
-/*
+  /*
   if (component.querySelector('iam-actionbar[data-search]')) {
     component.querySelector('iam-actionbar[data-search]').addEventListener('search-submit', (event) => {
       if (form.querySelector('input[data-search]')) {
@@ -800,18 +786,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')) {
       formSubmit(event);
-    }
-
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-mimic]')) {
-      formSubmit(event);
-    }
-
-    if (event && event.target instanceof HTMLElement && event.target.hasAttribute('id')) {
-      const id = event.target.getAttribute('id');
-
-      if (document.querySelector(`[data-duplicate="${id}"]`)) {
-        document.querySelector(`[data-duplicate="${id}"]`).checked = event.target.checked;
-      }
     }
   });
 
@@ -903,68 +877,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     formSubmit(event, true);
   });
 
-  // Mmimic fields
-  const forms = [];
-  const fields = [];
-
-  // Collect the forms that we need to add an event listener for.
-  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
-    const mimicField = input.getAttribute('data-mimic');
-
-    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput) => {
-      const parentForm = mimicInput.closest('form');
-
-      if (!forms.includes(parentForm)) {
-        forms.push(parentForm);
-      }
-
-      if (!fields.includes(mimicField)) {
-        fields.push(mimicField);
-      }
-    });
-  });
-
-  // For each form add change listener
-  forms.forEach((parentForm) => {
-    const updateMimicInput = function (): void {
-      const mimickedAlready = [];
-      const formData = new FormData(parentForm);
-
-      let i = 1;
-      for (const [key, value] of formData) {
-        if (document.querySelector(`[data-mimic="${key}"]`) && !mimickedAlready.includes(key)) {
-          mimickedAlready.push(key);
-          document.querySelector(`[data-mimic="${key}"]`).value = value;
-        } else if (document.querySelector(`[data-mimic="${key}"]`))
-          document.querySelector(`[data-mimic="${key}"]`).value += ',' + value;
-
-        i++;
-      }
-
-      for (const value of mimickedAlready) {
-        const event = new Event('force');
-        form.dispatchEvent(event);
-      }
-
-      // Check for empties
-      for (const field of fields) {
-        if (!formData.has(field) && parentForm.querySelector(`[name="${field}"]`)) {
-          document.querySelector(`[data-mimic="${field}"]`).value = '';
-
-          const event = new Event('force');
-          form.dispatchEvent(event);
-        }
-      }
-    };
-
-    parentForm.addEventListener('force', () => {
-      updateMimicInput();
-    });
-
-    parentForm.addEventListener('change', () => {
-      updateMimicInput();
-    });
-  });
 };
 
 export const filterTable = (component, table, form, pagination): void => {
@@ -1255,12 +1167,14 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
 
   form.addEventListener('submit', (event) => {
 
-    Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element) => {
+    Array.from(form.querySelectorAll('[data-duplicate]')).forEach((loopElement) => {
 
-      const id = element.getAttribute('data-duplicate');
+      const element = loopElement.tagName == "IAM-INPUT" ? loopElement.querySelector('input') : loopElement;
+      const id = loopElement.getAttribute('data-duplicate');
 
-      if (document.querySelector(`[id="${id}"]`)) {
-        document.querySelector(`[id="${id}"]`).checked = element.checked;
+      if (document.querySelector(`[id="${id}"], [name="${id}"]`)) {
+
+        document.querySelector(`[id="${id}"], [name="${id}"]`).checked = element.checked;
       }
     });
 
@@ -1275,28 +1189,15 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
       
       loadAjaxTable(component, table, form, pagination);
     }
+  });
 
-    if (event && event.target instanceof HTMLElement && event.target.hasAttribute('id')) {
-      const id = event.target.getAttribute('id');
+  // watch hidden fields for change events
+  Array.from(form.querySelectorAll('[type="hidden"]')).forEach((input) => {
 
-      if (document.querySelector(`[data-duplicate="${id}"]`)) {
-        document.querySelector(`[data-duplicate="${id}"]`).checked = event.target.checked;
+    input.addEventListener('change', (event) => {
 
-        
-        const changeEvent = new CustomEvent('change');
-        document.querySelector(`[data-duplicate="${id}"]`)?.dispatchEvent(changeEvent);
-
-      }
-    }
-
-    if (event && event.target instanceof HTMLElement && event.target.hasAttribute('data-duplicate') && !event.target.closest('iam-modal')) {
-      const id = event.target.getAttribute('data-duplicate');
-
-      if (document.querySelector(`[id="${id}"]`)) {
-        document.querySelector(`[id="${id}"]`).checked = event.target.checked;
-      }
-    }
-
+      loadAjaxTable(component, table, form, pagination);
+    });
   });
 
   if (actionbar) {
@@ -1322,53 +1223,6 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
       loadAjaxTable(component, table, form, pagination);
     });
   }
-
-  // mimic fields
-  const fields = [];
-
-  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
-
-    input.addEventListener('change', (event) => {
-
-      loadAjaxTable(component, table, form, pagination);
-    });
-  });
-
-
-  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
-    const mimicField = input.getAttribute('data-mimic');
-
-    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput) => {
-
-      if (!fields.includes(mimicInput)) {
-        fields.push(mimicInput);
-      }
-    });
-  });
-
-  fields.forEach((input) => {
-
-    input.addEventListener('change', (event) => {
-
-      const name = input.getAttribute('name');
-      const mimicInput = document.querySelector(`[data-mimic="${name}"]`);
-      
-      let valueToSend = '';
-      Array.from(document.querySelectorAll(`[name="${name}"]:checked`)).forEach((input) => {
-
-        if(valueToSend == '')
-          valueToSend = input.value;
-        else
-          valueToSend += ',' + input.value;
-      });
-
-      console.log(valueToSend);
-
-      mimicInput.value = valueToSend;
-      const changeEvent = new CustomEvent('change');
-      mimicInput?.dispatchEvent(changeEvent);
-    });
-  });
 
 };
 // #region ajax tables functions
