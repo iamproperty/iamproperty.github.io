@@ -353,20 +353,6 @@
     </div>
 
 
-
-
-
-
-    <div class="container">
-      <Tabs>
-        <details>
-          <summary><h2>HTML</h2></summary>
-          <pre><code class="javascript">{{htmlUsage}}</code></pre>
-        </details>
-      </Tabs>
-    </div>
-
-
     <Integration component="Popover" componentName="iam-popover">
       <template #web-component>
         <pre><code>{{`<iam-popover>

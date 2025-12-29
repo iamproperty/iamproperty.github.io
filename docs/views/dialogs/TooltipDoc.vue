@@ -6,8 +6,6 @@
   import headerImg from '../../img/type-header.png';
   import popoverPointer from '../../img/dialogs/popovers-pointer.png';
 
-
-
   import popoverPointerAnatomy from '../../img/dialogs/popover-pointer-anatomy.png';
 
   import popoverPointeralign from '../../img/dialogs/popover-tip-align.png';
@@ -20,6 +18,8 @@
   import popoverPointerDont from '../../img/dialogs/popover-tip-dont.png';
 
   import PopoverLists from '../popoverLists.vue';
+
+  import Integration from '../Integration.vue';
 
   const htmlUsage = `<div class="dialog__wrapper">
   <button class="btn btn-secondary">Open Popover</button>
@@ -163,6 +163,8 @@
       </div>
     </div>
 
+    <!--
+
     <div class="container visualtest tooltip-demo">
       <h3>The component</h3>
       <div class="form-control__wrapper">
@@ -181,7 +183,7 @@
         >
       </span>
     </div>
-
+-->
 
     <h3>The component</h3>
     <label class="sm-col-span-6">Position
@@ -198,15 +200,56 @@
       <Tooltip :class="` ${selected2} show-popover`" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title"></Tooltip>
     </div>
 
+
+    <h4>Inline example</h4>
     <p><Tooltip title="Lorem ipsum dolor sit amet,">Lorem</Tooltip> ipsum dolor sit amet, consectetur adipiscing elit, <Tooltip title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title">sed do incididunt</Tooltip> ut labore et dolore magna aliqua.</p>
-    <div class="container">
-      <Tabs>
-        <details>
-          <summary><h2>HTML</h2></summary>
-          <pre><code class="javascript">{{htmlUsage}}</code></pre>
-        </details>
-      </Tabs>
-    </div>
+    
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <Tooltip title="Ipsum has been the industry's standard dummy text ever since the 1500s,">Lorum Ipsum has been the industry's standard dummy text ever since the 1500s,</Tooltip> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    
+    
+    
+
+    <Integration component="tooltip" componentName="iam-tooltip">
+      <template #web-component>
+        <pre><code>{{`<p><iam-tooltip title="tooltip content">...</iam-tooltip></p>`}}</code></pre>
+      </template>
+      <template #vue-component>
+        <pre><code>{{`<script setup>import Tooltip from '@/components/Tooltip/Tooltip.vue</script>
+
+<p>Tooltip title="tooltip content">...</Tooltip></p>`}}</code></pre>
+      </template>
+
+      <template #attr>
+        <table>
+          <thead>
+            <tr>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>title</th>
+              <td></td>
+              <td>String</td>
+              <td>Yes</td>
+              <td>Is used for the content of the tooltip</td>
+            </tr>
+            <tr>
+              <th>data-heading</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>Is used for the heading of the tooltip</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+    </Integration>
 
     <div class="bg-light version-control">
       <div class="container">

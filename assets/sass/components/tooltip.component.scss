@@ -22,12 +22,13 @@
 
     anchor-name: --anchor;
     position: absolute;
-    display: inline-block;
+    display: block;
     inset: 0;
-    position: absolute;
     height: 100%;
-    width: 1rem;
-    left: calc(50% - 0.5rem);
+    width: 100%;
+    min-width: 1rem;
+    left: auto;
+    right: 0;
   }
 
   :host(:empty) .tooltip__anchor{
