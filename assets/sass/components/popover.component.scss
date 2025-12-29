@@ -3,14 +3,16 @@
 @layer components {
 
   :host {
-    background-color: red;
-    display: var(--menu-display, none);
-    position: fixed;
-    top: anchor(bottom);
-    left: anchor(left);
-    margin:  #{rem(4)} 0 0 0;
+    
     padding: rem(16);
     max-width: calc(anchor-size(width) * 2) !important;
+
+    position: absolute;
+    position-area: bottom span-x-end;
+    margin:  #{rem(4)};
+    padding: rem(16);
+    max-width: calc(anchor-size(width) * 2) !important;
+    position-try-fallbacks: top span-x-end, bottom span-x-start, top span-x-start;
 
     &::backdrop {
       display: none;

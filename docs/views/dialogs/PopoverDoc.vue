@@ -28,16 +28,7 @@
   import popoverNotipDo2 from '../../img/dialogs/popover-notip-do-2.png';
   import popoverNotipDont2 from '../../img/dialogs/popover-notip-dont-2.png';
 
-  import popoverPointerAnatomy from '../../img/dialogs/popover-pointer-anatomy.png';
 
-  import popoverPointeralign from '../../img/dialogs/popover-tip-align.png';
-  import popoverPointeralign2 from '../../img/dialogs/popover-tip-align-2.png';
-  import popoverPointeralign3 from '../../img/dialogs/popover-tip-align-3.png';
-  import popoverPointeralignDo from '../../img/dialogs/popover-tip-align-do.png';
-  import popoverPointeralignDont from '../../img/dialogs/popover-tip-align-dont.png';
-
-  import popoverPointerDo from '../../img/dialogs/popover-tip-do.png';
-  import popoverPointerDont from '../../img/dialogs/popover-tip-dont.png';
 
   import PopoverLists from '../popoverLists.vue';
 
@@ -52,19 +43,7 @@
 <span class="tooltip"><span class="tooltip__content"><strong>Popover title</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.</span></span>
 `;
 
-  const selected = 'tooltip';
-  const options = [
-    { name: 'Default', id: 'tooltip' },
-    { name: 'shift--left (mobile)', id: 'shift--left' },
-    { name: 'shift--right (mobile)', id: 'shift--right' },
-    { name: 'tooltip--top (all)', id: 'tooltip--top' },
-    { name: 'tooltip--top shift--left (mobile)', id: 'tooltip--top shift--left' },
-    { name: 'tooltip--top shift--right (mobile)', id: 'tooltip--top shift--right' },
-    { name: 'tooltip--left (tablet,desktop)', id: 'tooltip--left' },
-    { name: 'tooltip--right (tablet,desktop)', id: 'tooltip--right' },
-  ];
 
-  
   import Integration from '../Integration.vue';
 </script>
 
@@ -347,7 +326,7 @@
           industry's standard dummy text ever since the 1500s,
         </p>
 
-        <Popover id="popover" data-open style="position-anchor: --button; display: flex;">
+        <Popover id="popover" data-open style="position-anchor: --button; display: flex; position-try-fallbacks: unset;">
         
           
           <h3>Dialog Content (Popover)</h3>

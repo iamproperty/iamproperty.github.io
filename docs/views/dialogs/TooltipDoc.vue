@@ -1,4 +1,5 @@
-<script setup>
+<script setup lang="ts"> 
+  import {ref,onMounted } from 'vue';
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Tooltip from '@/components/Tooltip/Tooltip.vue';
   import DSHeader from '../DSHeader.vue';
@@ -31,7 +32,8 @@
 <span class="tooltip"><span class="tooltip__content"><strong>Popover title</strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua.</span></span>
 `;
 
-  const selected = 'tooltip';
+  let selected = ref('tooltip');
+  let selected2 = ref('');
   const options = [
     { name: 'Default', id: 'tooltip' },
     { name: 'shift--left (mobile)', id: 'shift--left' },
@@ -42,6 +44,31 @@
     { name: 'tooltip--left (tablet,desktop)', id: 'tooltip--left' },
     { name: 'tooltip--right (tablet,desktop)', id: 'tooltip--right' },
   ];
+
+  const options2 = [
+    { name: 'Default', id: '' },
+    { name: 'top left', id: 'position-top-left' },
+    { name: 'top center', id: 'position-top-center' },
+    { name: 'top right', id: 'position-top-right' },
+    { name: 'center left', id: 'position-center-left' },
+    { name: 'center right', id: 'position-center-right' },
+    { name: 'bottom left', id: 'position-bottom-left' },
+    { name: 'bottom center', id: 'position-bottom-center' },
+    { name: 'bottom right', id: 'position-bottom-right' },
+  ];
+
+  const handleChange = (event) => {
+
+    selected.value = `${event.target.value}`;
+  }
+
+  const tooltipEl = ref<HTMLInputElement | undefined>();
+
+  const handleChange2 = (event) => {
+
+    const updateEvent = new CustomEvent('update');
+    tooltipEl.value.dispatchEvent(updateEvent);
+  }
 </script>
 
 <template>
@@ -141,7 +168,7 @@
       <div class="form-control__wrapper">
         <label class="form-label visually-hidden" for="test1">Label</label>
 
-        <select class="form-select" v-model="selected">
+        <select class="form-select" v-model="selected" @change="(event) => {handleChange(event)}">
           <option v-for="option in options" :value="option.id">
             {{ option.name }}
           </option>
@@ -154,23 +181,24 @@
         >
       </span>
     </div>
-    <div class="container visualtest tooltip-demo">
-      <h3>The component</h3>
-      <div class="form-control__wrapper">
-        <label class="form-label visually-hidden" for="test1">Label</label>
 
-        <select class="form-select" v-model="selected">
-          <option v-for="option in options" :value="option.id">
-            {{ option.name }}
-          </option>
-        </select>
-      </div>
 
-        <Tooltip title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut
-          labore et dolore magna aliqua." data-heading="Popover title">?
-        </Tooltip>
+    <h3>The component</h3>
+    <label class="sm-col-span-6">Position
+
+    <select  v-model="selected2" @change="(event) => {handleChange2(event)}">
+      <option v-for="option in options2" :value="option.id">
+        {{ option.name }}
+      </option>
+    </select></label>
+  
+
+    <div :class="` visualtest tooltip-demo mb-5`" ref="tooltipEl">
+      
+      <Tooltip :class="` ${selected2} show-popover`" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title"></Tooltip>
     </div>
 
+    <p><Tooltip title="Lorem ipsum dolor sit amet,">Lorem</Tooltip> ipsum dolor sit amet, consectetur adipiscing elit, <Tooltip title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title">sed do incididunt</Tooltip> ut labore et dolore magna aliqua.</p>
     <div class="container">
       <Tabs>
         <details>
@@ -221,6 +249,14 @@
       transform: translate(-50%, -50%);
     }
 
+    iam-tooltip {
+      
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
     .tooltip.shift--left {
       left: 75%;
     }
@@ -239,6 +275,54 @@
 
     .form-control__wrapper {
       width: 12rem;
+    }
+
+
+    .position-top-left {
+      top: 0;
+      left: 0;
+      transform: none;
+    }
+    .position-top-center {
+      top: 0;
+      left: 50%;
+    }
+    .position-top-right {
+      top: 0;
+      left: auto;
+      right: 0;
+      transform: none;
+    }
+
+    .position-center-left {
+
+      left: 0;
+      transform: none;
+    }
+    .position-center-right {
+
+      left: auto;
+      right: 0;
+      transform: none;
+    }
+
+    
+    .position-bottom-left {
+      top: auto;
+      bottom: 1rem;
+      left: 0;
+    }
+    .position-bottom-center {
+      top: auto;
+      bottom: 1rem;
+      left: 50%;
+    }
+    .position-bottom-right {
+      top: auto;
+      bottom: 1rem;
+      left: auto;
+      right: 1rem;
+      transform: none;
     }
   }
 </style>

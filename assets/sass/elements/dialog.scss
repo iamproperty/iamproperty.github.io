@@ -62,8 +62,8 @@ $darkMode: 'true' !default;
     overscroll-behavior: contain;
 
     @include media-breakpoint-up(sm, $mobileOnly) {
-      --dialog-padding: #{rem(32)};
-      padding: var(--dialog-padding);
+      //--dialog-padding: #{rem(32)};
+      //padding: var(--dialog-padding);
       min-width: rem(335);
       width: fit-content;
       max-width: rem(686);
@@ -78,11 +78,9 @@ $darkMode: 'true' !default;
   }
   // #endregion
 
-
   details.bg-light {
     margin-inline: calc(var(--dialog-padding) * -1);
     padding-inline: var(--dialog-padding);
   }
 
 }
-
