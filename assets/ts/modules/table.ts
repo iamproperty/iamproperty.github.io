@@ -153,7 +153,7 @@ export const setupBasicTable = (component, table, form, pagination): void => {
   if (!component.hasAttribute('data-total'))
     component.setAttribute('data-total', component.querySelectorAll('tbody tr').length);
   if (!component.hasAttribute('data-page')) component.setAttribute('data-page', 1);
-  if (!component.hasAttribute('data-show')) component.setAttribute('data-show', 5);
+  if (!component.hasAttribute('data-show')) component.setAttribute('data-show', 15);
   if (!component.hasAttribute('data-increment'))
     component.setAttribute('data-increment', component.getAttribute('data-show'));
 
@@ -1431,10 +1431,6 @@ export const loadAjaxTable = async function (component, table, form, pagination)
         // Remove loading on the pagination
         pagination.removeAttribute('data-loading');
         form.classList.remove('processing');
-
-        if(table.querySelectorAll('tbody tr').length < parseInt(component.getAttribute('data-show'))){
-          pagination.classList.add('d-none');
-        }
       });
   } catch (error) {
     console.log(error);
