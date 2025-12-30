@@ -11,14 +11,18 @@ $darkMode: 'true' !default;
     position: relative;
     anchor-name: --button2;
 
+    > .fa-chevron-down {
+      display: none;
+    }
+
     &:after {
       content: '';
 
       display: inline-block;
       margin-left: 1em;
 
-      height: 1em;
-      width: 1em;
+      height: 0.8em;
+      width: 0.8em;
       z-index: var(--index-focus);
       background: currentColor;
       mask-image: var(--icon-arrow);

@@ -1396,7 +1396,7 @@ export const loadAjaxTable = async function (component, table, form, pagination)
             tbody.appendChild(table_row);
           });
 
-          //component.setAttribute('data-total', parseInt(totalNumber));
+          component.setAttribute('data-total', parseInt(totalNumber));
           //component.setAttribute('data-page', parseInt(currentPage));
 
           //pagination.setAttribute('data-total', totalNumber);

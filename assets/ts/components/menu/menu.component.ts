@@ -40,6 +40,7 @@ class iamMenu extends HTMLElement {
     // Set the needed CSS styles to connect the ID attribute to the anchor name
     if (menuID && menuButton) {
       this.setAttribute('role', 'menu');
+      this.setAttribute('popover', 'auto');
       this.style['position-anchor'] = `--${menuID}`;
 
       menuButton?.setAttribute('aria-haspopup', 'true');

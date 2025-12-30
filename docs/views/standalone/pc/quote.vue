@@ -4,8 +4,34 @@
   import Table from '@/components/Table/Table.vue';
   import Input from '@/components/Input/Input.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
+  import Modal from '@/components/Modal/Modal.vue';
+  import Popover from '@/components/Popover/Popover.vue';
+  import Menu from '@/components/Menu/Menu.vue';
+  import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';
   import Rankings from '@/components/Rankings/Rankings.vue';
   import STDAddressLookup from '@/components/STDAddressLookup/STDAddressLookup.vue';
+
+
+
+
+  const handleSearch = (event) => {
+    console.log(event);
+  }
+
+  const handleSort = (event) => {
+    
+    console.log(event);
+  }
+
+  const handleFilter = (event) => {
+    
+    console.log(event);
+  }
+
+  const handleSubmit = (event) => {
+    
+    console.log(event);
+  }
 
 </script>
 
@@ -112,7 +138,7 @@
 
     <div class="admin-panel mb-5">
       <h2 class="bg-light">Recommended sale quotes</h2>
-      <Table class="table--fullwidth table--cta">
+      <Table  >
       <table>
         <thead>
           <tr>
@@ -199,11 +225,180 @@
     <div class="admin-panel mb-5">
       <h2 class="bg-light">Quote history</h2>
       
-      
       <span class="h3 p-5 d-block m-auto text-center">No case data yet</span>
       
 
     </div>
+
+    <div class="admin-panel mb-5">
+      
+      <h2 class="bg-light">Quote history</h2>
+
+      <Table class="table--fullwidth">
+
+        <Actionbar slot="before" data-search @search-submit="(event) => handleSearch(event)">
+          
+          <button class="btn btn-action m-0 nowrap" type="button" popovertarget="sort" aria-label="Sort the below table by">Sort by</button>
+          <Menu id="sort">
+
+            <input type="radio" name="sort" data-sort="" id="follow-up-oldest" value="follow-up-oldest" @change="(event) => handleSort(event)" />
+            <label for="follow-up-oldest" class="radio--tick">Follow up date (Oldest to newest)</label>
+            
+            <input type="radio" name="sort" data-sort="" id="follow-up-newest" value="follow-up-newest" @change="(event) => handleSort(event)" />
+            <label for="follow-up-newest" class="radio--tick">Follow up date (Newest to oldest)</label>
+            
+              
+            <input
+                type="radio"
+                name="sort"
+                data-sort=""
+                id="date-instructed-oldest"
+                value="date-instructed-oldest"
+                checked=""
+                autofocus="true"
+                @change="(event) => handleSort(event)"
+              />
+            <label for="date-instructed-oldest" class="radio--tick">Date Instructed (Oldest to newest)</label>
+              
+              
+            <input
+                type="radio"
+                name="sort"
+                data-sort=""
+                id="date-instructed-newest"
+                value="date-instructed-newest"
+                @change="(event) => handleSort(event)"
+              />
+            <label for="date-instructed-newest" class="radio--tick">Date Instructed (Newest to oldest)</label>
+            
+          </Menu>
+
+          <button class="btn btn-primary btn-compact fa-sliders" type="button" command="show-modal" commandfor="filters">Filter</button>
+        </Actionbar>
+        <AppliedFilters class="applied-filters--compact" data-nosubmit @filter-clicked="(event) => handleFilter(event)">
+          <Modal class="modal--sm">
+            <dialog id="filters">
+              <AppliedFilters class="applied-filters--compact" data-nosubmit @submit="(event) => handleSubmit(event)">
+                <span class="h3 pb-2">Filter by</span>
+
+                <span class="h4 pb-1">Risk Level</span>
+                <div>
+                  <input
+                    type="checkbox"
+                    name="risk-level-high"
+                    id="risk-level-high"
+                    data-filter-text="Risk Level - High"
+                    data-filter="Risk level"
+                    value="High"
+                  />
+                  <label for="risk-level-high" class="form-label form-check-label">High</label>
+                  <hr />
+                  <input
+                    type="checkbox"
+                    name="risk-level-medium"
+                    id="risk-level-medium"
+                    data-filter-text="Risk Level - Medium"
+                    data-filter="Risk level"
+                    value="Medium"
+                  />
+                  <label for="risk-level-medium" class="form-label form-check-label">Medium</label>
+                  <hr />
+
+                  <input
+                    type="checkbox"
+                    name="risk-level-low"
+                    id="risk-level-low"
+                    data-filter-text="Risk Level - Low"
+                    data-filter="Risk level"
+                    value="Low"
+                  />
+                  <label for="risk-level-low" class="form-label form-check-label">Low</label>
+                  <hr />
+                </div>
+
+                <span class="h4 pb-1">SLA Progress</span>
+                <div>
+
+                  <Input data-duplicate="due_diligience_incomplete">
+                    <label for="sla_progress_due"><input
+                      type="checkbox"
+                      name="[sla_progress][]"
+                      id="sla_progress_due"
+                      data-filter-text="SLA progress - Due"
+                      value="Due"
+
+                    />Due</label>
+                  </Input>
+
+                  
+                  <hr />
+                  <Input data-duplicate="due_diligience_requires_approval">
+                  
+                  <label for="sla_progress_upcoming"><input
+                    type="checkbox"
+                    name="[sla_progress][]"
+                    id="sla_progress_upcoming"
+                    data-filter-text="SLA progress - Upcoming"
+                    value="Upcoming"
+                  />Upcoming</label>
+                </Input>
+                  <hr />
+                  <Input data-duplicate="due_diligience_verified">
+                  
+                  <label for="sla_progress_track"><input
+                    type="checkbox"
+                    name="[sla_progress][]"
+                    id="sla_progress_track"
+                    data-filter-text="SLA progress - On track"
+                    value="track"
+                  />On track</label>
+                </Input>
+                  <hr />
+                </div>
+                <button class="btn btn-primary d-block mt-4 mb-0 mx-auto">Update results</button>
+              </AppliedFilters>
+              <hr />
+            </dialog>
+          </Modal>
+        </AppliedFilters>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Status</th>
+              <th>Quote</th>
+              <th>Activity</th>
+              <th>Solicitor</th>
+              <th>Location</th>
+              <th>Client</th>
+              <th>Expiry date</th>
+              <th>Document</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="pt-0 pe-1 pb-0">
+                <button class="btn btn-secondary btn-compact fa-ellipsis-vertical btn-sm m-0" popovertarget="quote-actions">Actions</button>
+                <Menu id="quote-actions" popover="">
+                  <button class="btn btn-action" data-single="" role="menuitem" tabindex="0" autofocus="true">View task</button>
+                  <button class="btn btn-action" data-single="" role="menuitem" tabindex="0">Mark as completed</button>
+                  <button class="btn btn-action" data-single="" role="menuitem" tabindex="0">Delete task</button>
+                </Menu>
+              </td>
+              <td>Selected</td>
+              <td>Sale</td>
+              <td>Payment link sent</td>
+              <td>Solicitor name</td>
+              <td>Gosforth</td>
+              <td>John Smith</td>
+              <td>18.11.25</td>
+              <td><a href="/details" class="link m-0">sale-quote.pdf</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </Table>
+    </div>
+
 
 
   </main>

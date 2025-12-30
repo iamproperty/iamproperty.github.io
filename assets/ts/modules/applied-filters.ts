@@ -127,6 +127,10 @@ function createAppliedFilters(container, filters): void {
 
 
   const filterClicked = (filter) => {
+
+    if(!filter?.hasAttribute('data-name'))
+      return false;
+
     const names = filter.getAttribute('data-name').split(',');
 
     for (let t = 0; t < names.length; t++) {
@@ -172,6 +176,9 @@ function createAppliedFilters(container, filters): void {
 
         filterClicked(filter);
 
+        const clickedEvent = new CustomEvent('filter-clicked',{'detail':filterName });
+        container.dispatchEvent(clickedEvent);
+
         // If you clicked on the filter on the parent component we want to tell the child component which filter to copy
         if(container.querySelector('dialog iam-applied-filters')) {
           const event = new CustomEvent('filter',{'detail':filterName });
@@ -196,10 +203,14 @@ function createAppliedFilters(container, filters): void {
   });
 
   if(dialog){
+    const primaryButton = container.querySelector('.btn-primary') ? container.querySelector('.btn-primary') : container.shadowRoot.querySelector('.btn-primary');
     // Force the filters inside of the dialog to effect the filters above
-    container.querySelector('.btn-primary')?.addEventListener('click', (e) => {
+    primaryButton?.addEventListener('click', (e) => {
 
       const event = new CustomEvent('update');
+      const submitEvent = new CustomEvent('submit');
+
+      container.dispatchEvent(submitEvent);
       
       if(container.parentElement.closest('iam-applied-filters'))
         container.parentElement.closest('iam-applied-filters').dispatchEvent(event);
