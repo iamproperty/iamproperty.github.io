@@ -40,7 +40,12 @@
       var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
         4px
     );
-    height: stretch;
+
+    @supports (height: stretch) {
+      
+      height: stretch;
+    }
+
 
     flex-shrink: 0;
 
