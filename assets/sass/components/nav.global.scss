@@ -152,6 +152,14 @@ iam-nav {
       text-decoration-color: var(--colour-info) !important;
     }
   }
+
+
+}
+
+@container style(--body-theme: dark) {
+  iam-nav.bg-primary [slot="secondary"] {
+    --colour-link: white;
+  }
 }
 
 iam-nav details {

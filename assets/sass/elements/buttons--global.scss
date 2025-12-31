@@ -239,21 +239,22 @@ $darkMode: 'true' !default;
 
   .btn:has(select) {
     position: relative;
-    padding-right: 4rem;
+    padding: 0;
 
     select {
       all: unset !important;
-      margin: calc(rem(-12)) calc(rem(-40)) !important;
-      margin-right: -4rem !important;
+      
       padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
       
+      padding-right: calc(var(--btn-padding-inline) + 2rem)!important;
+
       border-radius: rem(24) !important;
       appearance: none !important;
       background: none !important;
       border: none !important;
       color: currentColor !important;
       display: block;
-      max-width: 100% !important;
+      //max-width: 100% !important;
       outline: none;
       font-weight: bold;
       font-size: var(--btn-font-size) !important;
