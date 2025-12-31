@@ -35,9 +35,9 @@
 
 
     <hr/>
-    <div class="md-col-span-6 mb-3">
+    <div class="md-col-span-6 mb-3 visualtest">
       <h3>Blank</h3>
-      <div class=" p-3 bg-light visualtest">
+      <div class=" p-3 bg-light">
         <AppliedFilters>
         
       <fieldset>
@@ -62,9 +62,9 @@
         </div>
     </div>
 
-    <div class="md-col-span-6 md-col-start-auto mb-3">
+    <div class="md-col-span-6 md-col-start-auto mb-3 visualtest">
       <h3>Pre-set</h3>
-      <div class=" p-3 bg-light visualtest">
+      <div class=" p-3 bg-light">
 
       <AppliedFilters>
             
@@ -96,10 +96,10 @@
     <h2>Filter types</h2>
 
     <hr/>
-    <div class="md-col-span-6 md-col-start-auto mb-3">
+    <div class="md-col-span-6 md-col-start-auto mb-3 visualtest">
       
       
-      <div class=" p-3 bg-light visualtest">
+      <div class=" p-3 bg-light">
 
       <AppliedFilters>
       
@@ -118,10 +118,10 @@
     </div>
 
 
-    <div class="md-col-span-6 md-col-start-auto mb-3">
+    <div class="md-col-span-6 md-col-start-auto mb-3 visualtest">
       
       
-      <div class=" p-3 bg-light visualtest">
+      <div class=" p-3 bg-light">
 
       <AppliedFilters>
       
@@ -135,10 +135,10 @@
     </div>
 
     <hr/>
-    <div class="md-col-span-6 md-col-start-auto mb-3">
+    <div class="md-col-span-6 md-col-start-auto mb-3 visualtest">
       
       
-      <div class=" p-3 bg-light visualtest">
+      <div class=" p-3 bg-light">
 
       <AppliedFilters>
         

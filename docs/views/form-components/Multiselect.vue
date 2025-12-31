@@ -24,7 +24,7 @@
       type and filter options in the scrollable dropdown list.
     </p>
 
-    <Multiselect data-label="Users">
+    <Multiselect data-label="Users" class="visualtest">
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
       <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight" />Amanda Knight</label>
       <label class="tag"><input type="checkbox" name="tags" value="Brian Lord" />Brian Lord</label>
@@ -48,7 +48,7 @@
 
     <h2 class="mt-5">Single value</h2>
     <p>We can re-purpose the multiselect as a way of picking a single value but keeping the visual aesthetic.</p>
-    <Multiselect data-label="Users" data-single>
+    <Multiselect data-label="Users" data-single class="visualtest">
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" checked />James Lambert</label>
       <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight" />Amanda Knight</label>
       <label class="tag"><input type="checkbox" name="tags" value="Brian Lord" />Brian Lord</label>
@@ -61,13 +61,13 @@
     <h2 class="mt-3">Ajax</h2>
     <p>Populating The multiselect via ajax makes the component much more useful as we can lazy load values in depending upon if they are needed.</p>
 
-    <Multiselect data-label="Users" data-name="users" data-url="/users.json?search=" class="mb-0"></Multiselect>
-    <span class="d-block hint-text mb-3">Enter 3 or more characters</span>
+    <Multiselect data-label="Users" data-name="users" data-url="/users.json?search=" class="mb-0 visualtest"></Multiselect>
+    <span class="hint-text mb-3">Enter 3 or more characters</span>
 
     <h2 class="mt-5">States</h2>
 
     <p class="lead pb-2">Default</p>
-    <Multiselect data-is-required data-error="" data-label="Users">
+    <Multiselect data-is-required data-error="" data-label="Users" class="visualtest">
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
       <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight" />Amanda Knight</label>
       <label class="tag"><input type="checkbox" name="tags" value="Brian Lord" />Brian Lord</label>
@@ -78,7 +78,7 @@
     </Multiselect>
 
     <p class="lead pb-2 mt-4">Selected</p>
-    <Multiselect data-is-required data-error="" data-label="Users">
+    <Multiselect data-is-required data-error="" data-label="Users" class="visualtest">
       <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
       <label class="tag"
         ><input type="checkbox" name="tags" value="Amanda Knight" :checked="true" />Amanda Knight</label
@@ -91,7 +91,7 @@
     </Multiselect>
 
     <p class="lead pb-2 mt-4">Error</p>
-    <form novalidate class="was-validated">
+    <form novalidate class="was-validated visualtest">
       <Multiselect data-is-required data-error="" data-label="Users">
         <label class="tag"><input type="checkbox" name="tags" value="James Lambert" />James Lambert</label>
         <label class="tag"><input type="checkbox" name="tags" value="Amanda Knight" />Amanda Knight</label>

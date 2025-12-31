@@ -10,7 +10,13 @@
   display: flex;
   max-width: var(--input-max-width, 50rem);
   gap: calc(var(--gap, 1rem) / 2);
-  align-items: center;
+
+  flex-direction: column;
+
+  @include media-breakpoint-up(sm) {
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 ::slotted(*) {
@@ -27,12 +33,14 @@
 ::slotted(:last-child) {
   order: 3;
 }
+@include media-breakpoint-up(sm) {
 
-.wrapper:before {
-  content: "";
-  order: 2;
-  width: calc(var(--gap, 1rem) * 1.5);
-  height: 2px;
-  background-color: var(--colour-border);
-  margin-top: 0.5rem;
+  .wrapper:before {
+    content: "";
+    order: 2;
+    width: calc(var(--gap, 1rem) * 1.5);
+    height: 2px;
+    background-color: var(--colour-border);
+    margin-top: 0.5rem;
+  }
 }

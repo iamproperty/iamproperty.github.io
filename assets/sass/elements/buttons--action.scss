@@ -59,7 +59,7 @@ $darkMode: 'true' !default;
   }
 
   // #region Select as button
-  .btn:has(select) {
+  .btn-action:has(select) {
     padding-block: 0;
     padding-right: 2rem;
 
