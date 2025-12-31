@@ -34,6 +34,12 @@
     text-align: center;
     text-overflow: ellipsis;
     position: relative;
+
+
+    height: calc(
+      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+        4px
+    );
     height: stretch;
 
     flex-shrink: 0;
