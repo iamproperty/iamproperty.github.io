@@ -781,5 +781,19 @@ iam-nav .nav--menu {
     display: none !important;
   }
 }
+@layer overrides {
 
+  iam-nav.bg-primary .nav--menu{
+
+    --theme: light;
+
+    @each $color, $value in $theme-colors {
+      --colour-#{$color}: #{$value}!important;
+    }
+    @each $color, $value in $non-theme-colors {
+      --colour-#{$color}: #{$value}!important;
+    }
+        
+  }
+}
 // #endregion
