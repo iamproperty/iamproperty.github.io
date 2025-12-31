@@ -56,7 +56,7 @@ $darkMode: 'true' !default;
     line-height: rem(24);
     min-height: rem(24);
     position: relative;
-    font-weight: 500;
+    font-weight: bold;
 
     &:not(.text-decoration-none) {
       &:after {
@@ -320,7 +320,7 @@ iam-collapsible-side {
       li:first-of-type {
         a::before {
           content: '\f056';
-          font-weight: 500;
+          font-weight: bold;
         }
       }
 

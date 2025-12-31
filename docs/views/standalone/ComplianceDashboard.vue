@@ -56,8 +56,7 @@
                 </button>
                 <dialog>
                   <AppliedFilters class="applied-filters--compact">
-                    <Filterlist data-max-height="small">
-                      <input
+                    <input
                         type="checkbox"
                         name="pipeline[]"
                         id="pipeline1"
@@ -75,6 +74,8 @@
                         data-filter-text="$value"
                         data-filter="Locked to"
                       />
+                    <Filterlist data-max-height="small">
+                      
                       <ul class="list-unstyled mb-0">
                         <li>
                           <div class="form-check ps-0">

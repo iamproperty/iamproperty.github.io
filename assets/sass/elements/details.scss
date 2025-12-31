@@ -127,7 +127,7 @@ $darkMode: 'true' !default;
     &[open] summary :is(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label) {
       &:after {
         content: '\f056';
-        font-weight: 400;
+        font-weight: 900;
       }
     }
 
@@ -147,7 +147,7 @@ $darkMode: 'true' !default;
       font-size: rem(18);
       line-height: var(--line-height);
       padding-bottom: map.get($heading-sizes, 'h3_pb');
-      font-weight: 500;
+      font-weight: 700;
       max-width: 100%;
 
       &:after {

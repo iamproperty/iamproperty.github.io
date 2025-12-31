@@ -53,7 +53,7 @@ $darkMode: 'true' !default;
     --btn-line-height: #{rem(20)};
 
     display: inline-block;
-    font-weight: 500;
+    font-weight: bold;
     text-align: left;
     text-decoration: none;
     vertical-align: middle;
@@ -255,7 +255,7 @@ $darkMode: 'true' !default;
       display: block;
       max-width: 100% !important;
       outline: none;
-      font-weight: 500;
+      font-weight: bold;
       font-size: var(--btn-font-size) !important;
       line-height: var(--btn-line-height) !important;
       field-sizing: content!important;
