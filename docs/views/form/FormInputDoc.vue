@@ -94,9 +94,9 @@
 
     <div class="container visualtest">
       <h4 class="lead text-body text-uppercase pb-2">Default state</h4>
-      <label :for="`input1`">Input field label</label>
+      <label :for="`input1`">Input field label
       <input type="text" :id="`input1`" :name="`input1`" placeholder="Optional placeholder text" required />
-
+</label>
       <h4 class="lead text-body text-uppercase pb-2">Focus state</h4>
       <label :for="`input2`">Input field label</label>
       <input

@@ -810,7 +810,7 @@ $optionalText: 'true' !default;
   // #endregion
 
   // #region label with input field in
-  :is(label:not(.tag), .label):has(:is(input, select)) {
+  :is(label:not(.tag), .label):has(:is(input, select, textarea)) {
     display: block;
     margin-bottom: rem(24);
     max-width: $input-max-width;
