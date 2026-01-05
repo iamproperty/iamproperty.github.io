@@ -10,7 +10,7 @@
     ></Table>
     <form :action="action" :method="method" @submit.prevent="submitForm(...arguments)">
       <input type="hidden" :value="user" name="user" />
-      <Input id="addNote" type="textarea" label="Add note" required class="mw-100"></Input>
+      <label>Add note <Textarea id="addNote" type="textarea" required class="mw-100"></Textarea></label>
       <button class="btn btn-tertiary">Submit note</button>
     </form>
   </div>

@@ -1,0 +1,28 @@
+@use '../_func.scss' as *;
+
+@layer components {
+
+  :host {
+    
+    padding: rem(16);
+    max-width: calc(anchor-size(width) * 2) !important;
+
+    position: absolute;
+    position-area: bottom span-x-end;
+    margin:  #{rem(4)};
+    padding: rem(16);
+    max-width: calc(anchor-size(width) * 2) !important;
+    position-try-fallbacks: top span-x-end, bottom span-x-start, top span-x-start;
+
+    &::backdrop {
+      display: none;
+    }
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      width: rem(335);
+    }
+    @include media-breakpoint-up(md, $mobileOnly) {
+      width: rem(360);
+    }
+  } 
+}

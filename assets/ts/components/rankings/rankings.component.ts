@@ -1,4 +1,5 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
+import iamRank from '../rank/rank.component';
 
 trackComponentRegistered('iam-rankings');
 class iamRankings extends HTMLElement {
@@ -69,7 +70,10 @@ class iamRankings extends HTMLElement {
 
       firstRow?.insertAdjacentHTML('afterbegin', `<iam-rank class="rank--medal first-position">1st</iam-rank>`);
     }
+
+    if (!window.customElements.get(`iam-rank`)) window.customElements.define(`iam-rank`, iamRank);
   }
 }
+
 
 export default iamRankings;

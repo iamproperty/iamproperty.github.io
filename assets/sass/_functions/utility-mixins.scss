@@ -1055,6 +1055,16 @@ $new_utilities: map.merge(
       margin-right: #{$value} !important;
     }
 
+    .mx-minus-#{$key} {
+      margin-left: -#{$value} !important;
+      margin-right: -#{$value} !important;
+    }
+
+    .my-minus-#{$key} {
+      margin-top: -#{$value} !important;
+      margin-bottom: -#{$value} !important;
+    }
+
     .my-#{$key} {
       margin-top: #{$value} !important;
       margin-bottom: #{$value} !important;
@@ -1316,7 +1326,18 @@ $new_utilities: map.merge(
       color: var(--colour-#{$color}) !important;
     }
 
+    .text-heading {
+      
+      color: var(--colour-heading) !important;
+    }
+
     .bg-#{$color} {
+      --bg-opacity: 1;
+      --bg-colour: var(--colour-#{$color}) !important;
+      background-color: var(--colour-#{$color}) !important;
+    }
+
+    .hover-#{$color}:is(:hover,:focus,:focus-within) {
       --bg-opacity: 1;
       --bg-colour: var(--colour-#{$color}) !important;
       background-color: var(--colour-#{$color}) !important;

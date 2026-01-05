@@ -1,3 +1,5 @@
+import Cookies from 'js-cookie';
+
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
 window.dataLayer.push({
@@ -13,15 +15,13 @@ class iamMultiselect extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
+      
     const loadCSS = `@import "${assetLocation}/css/components/multiselect.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
+    
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
@@ -35,7 +35,7 @@ class iamMultiselect extends HTMLElement {
       <div class="admin-panel dropdown" part="dropdown">
         <slot></slot>
       </div>
-      <button id="clear"><span class="visually-hidden">Clear</span></button>
+      <button id="clear" class="btn btn-action "><span class="visually-hidden">Clear</span></button>
     </div>
     </div>
     </label>
@@ -52,7 +52,7 @@ class iamMultiselect extends HTMLElement {
     const button = multiselect.shadowRoot.querySelector('#clear');
     let order = 0;
     const innerLabel = multiselect.shadowRoot.querySelector('label .inner-label');
-
+    const ajaxURL = this.getAttribute('data-url');
     innerLabel.innerHTML = multiselect.getAttribute('data-label');
 
     if (multiselect.hasAttribute('placeholder')) {
@@ -99,6 +99,10 @@ class iamMultiselect extends HTMLElement {
         inputToSet.closest('label').setAttribute('slot', 'checked');
         inputToSet.closest('label').setAttribute('style', `--order:${order};`);
         inputToSet.closest('label').setAttribute('data-order', order);
+
+        if(inputToSet.closest('[data-value]')){
+          inputToSet.closest('[data-value]').setAttribute('data-value',  inputToSet.closest('label').textContent)
+        }
       }
 
       // check for errors
@@ -123,7 +127,8 @@ class iamMultiselect extends HTMLElement {
     });
 
     // Filter list
-    search.addEventListener('input', () => {
+    const filterList = () => {
+
       Array.from(multiselect.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
         const checkbox = label.querySelector('input');
         const searchValue = checkbox.value;
@@ -138,6 +143,19 @@ class iamMultiselect extends HTMLElement {
           label.setAttribute('slot', 'notmatched');
         }
       });
+    }
+
+    search.addEventListener('input', () => {
+
+      if (multiselect.hasAttribute('data-url')) {
+      
+        if (search.value.length == 3) {
+          searchAjax(search.value);
+        }
+      } else {
+          
+        filterList();
+      }
     });
 
     // Add a delayed hover effect for non hover devices
@@ -154,6 +172,7 @@ class iamMultiselect extends HTMLElement {
         if (activeElement.getAttribute('type') != 'checkbox') {
           if (multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)) {
             multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
+
             setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
           }
           search.value = '';
@@ -162,12 +181,19 @@ class iamMultiselect extends HTMLElement {
             setItem(checkbox);
           });
         }
+
+        if (multiselect.hasAttribute('data-url')) {
+          Array.from(multiselect.querySelectorAll(`label:has(input[type="checkbox"]:not(:checked))`)).forEach((checkbox) => {
+
+            checkbox.remove();
+          });
+        }
       }, 200);
 
       clearTimeout(hoverTimeout);
       hoverTimeout = setTimeout(function () {
         multiselect.classList.remove('hover');
-      }, 1000);
+      }, 500);
     });
 
     // Set items
@@ -175,15 +201,30 @@ class iamMultiselect extends HTMLElement {
       if (event && event.target instanceof HTMLElement && event.target.closest('input[type="checkbox"]')) {
         const checkbox = event.target.closest('input[type="checkbox"]');
 
+        if(multiselect.hasAttribute('data-single')){
+          Array.from(multiselect.querySelectorAll(`label[slot="checked"] input`)).forEach((inputToCancel) => {
+            inputToCancel.checked = false;
+            inputToCancel.closest('label').removeAttribute('slot');
+            inputToCancel.closest('label').removeAttribute('style');
+            inputToCancel.closest('label').removeAttribute('data-order');
+          });
+        }
+
         setItem(checkbox);
 
         search.value = '';
-        search.focus();
-        clearTimeout(hoverTimeout);
-        multiselect.classList.add('hover');
-        hoverTimeout = setTimeout(function () {
+        if(!multiselect.hasAttribute('data-single')){
+          search.focus();
+          clearTimeout(hoverTimeout);
+          multiselect.classList.add('hover');
+          hoverTimeout = setTimeout(function () {
+            multiselect.classList.remove('hover');
+          }, 5000);
+        }
+        else{
+
           multiselect.classList.remove('hover');
-        }, 5000);
+        }
       }
     });
 
@@ -344,6 +385,50 @@ class iamMultiselect extends HTMLElement {
     multiselect.addEventListener('mouseup', () => {
       wrapper.removeAttribute('data-mousedown');
     });
+
+    const searchAjax = async (searchterm): any => {
+      const searchAjaxURL = `${ajaxURL}${encodeURI(searchterm)}`;
+
+      // Setup controller vars if not already set
+      if (!window.controller) window.controller = [];
+
+      // Abort if controller already present for this url
+      if (window.controller[searchAjaxURL]) window.controller[searchAjaxURL].abort();
+
+      // Create a new controller so it can be aborted if new fetch made
+      window.controller[searchAjaxURL] = new AbortController();
+      const { signal } = controller[searchAjaxURL];
+
+      try {
+        await fetch(searchAjaxURL, {
+          signal: signal,
+          method: 'get',
+          credentials: 'same-origin',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
+          }),
+        })
+          .then((response) => response.json())
+          .then((response) => {
+
+            let items = '';
+
+            for (let i = 0; i < response['data'].length; i++) {
+              items += `<label class="tag"><input type="checkbox" name="${multiselect.hasAttribute('data-name') ? multiselect.getAttribute('data-name') : 'tags'}" value="${ response['data'][i].value }"/>${ response['data'][i].title }</label>`;
+            }
+
+            multiselect.insertAdjacentHTML('beforeend', `${items}`);
+            
+            filterList();
+            return response;
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
   }
 }
 

@@ -1,0 +1,120 @@
+@use '../_func.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@layer components {
+
+  :host {
+    display: inline;
+    position: relative;
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    text-underline-offset: 0.2em;
+    overflow-anchor: none; 
+    cursor: pointer;
+  }
+
+  .tooltip__anchor {
+
+    anchor-name: --anchor;
+    position: absolute;
+    display: block;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    min-width: 1rem;
+    left: auto;
+    right: 0;
+  }
+
+  :host(:empty) .tooltip__anchor{
+
+    height: 1rem;
+    width: 1rem;
+  }
+
+  :host(:empty) .tooltip__anchor:after {
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 900;
+    content: "\f059";
+    display: block;
+    margin: 0;
+    line-height: 1;
+    color: var(--colour-primary);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+
+  .tooltip__content {
+    position: fixed;
+    position-anchor: --anchor;
+    position-area: center end;
+    position-try-fallbacks:  bottom span-all, top span-all, start;
+
+    container-type: anchored;
+    max-width: #{rem(270)};
+    background: var(--colour-primary);
+    color: var(--colour-white);
+    padding: rem(24);
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
+    margin: 0.75rem;
+    overflow: visible;
+
+    > strong:first-child {
+      display: block;
+      padding-bottom: 1rem;
+      color: inherit;
+    }
+
+    @include media-breakpoint-up(sm, $mobileOnly) {
+      max-width: #{rem(335)};
+    }
+
+    @include media-breakpoint-up(md, $mobileOnly) {
+      max-width: #{rem(360)};
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 50%;
+      left: -0.45rem;   
+      transform: translate(-50%, 0);
+      border-width: 0.5rem;
+      border-style: solid;
+      border-color: transparent var(--colour-primary) transparent transparent;
+      margin-bottom: -0.5rem;
+
+      @container anchored(fallback: top span-all) {
+
+        left: 50%;    
+        bottom: auto;
+        top: 100%;
+        border-color: var(--colour-primary) transparent transparent transparent;
+        margin-bottom: -1px;
+      }
+  
+      @container anchored(fallback: bottom span-all) {
+
+        top: auto;
+        bottom: 100%;
+        left: 50%;    
+        border-color: transparent transparent var(--colour-primary) transparent;
+        margin-bottom: -1px;
+      }
+  
+      @container anchored(fallback: start) {
+
+        display: none;
+      }
+    }
+  }
+}

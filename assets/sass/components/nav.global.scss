@@ -152,6 +152,14 @@ iam-nav {
       text-decoration-color: var(--colour-info) !important;
     }
   }
+
+
+}
+
+@container style(--body-theme: dark) {
+  iam-nav.bg-primary [slot="secondary"] {
+    --colour-link: white;
+  }
 }
 
 iam-nav details {
@@ -773,5 +781,19 @@ iam-nav .nav--menu {
     display: none !important;
   }
 }
+@layer overrides {
 
+  iam-nav.bg-primary .nav--menu{
+
+    --theme: light;
+
+    @each $color, $value in $theme-colors {
+      --colour-#{$color}: #{$value}!important;
+    }
+    @each $color, $value in $non-theme-colors {
+      --colour-#{$color}: #{$value}!important;
+    }
+        
+  }
+}
 // #endregion

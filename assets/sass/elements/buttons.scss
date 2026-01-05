@@ -29,3 +29,9 @@ $darkMode: 'true' !default;
   $darkMode: $darkMode,
   $mobileOnly: $mobileOnly
 );
+
+@use './buttons--special.scss' with (
+  $layers: $layers,
+  $darkMode: $darkMode,
+  $mobileOnly: $mobileOnly
+);

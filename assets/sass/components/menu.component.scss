@@ -7,13 +7,15 @@
   left: anchor(left);
   position: fixed;
   position-try-fallbacks: flip-block, flip-inline;
-  width: max-content;
+  width: max-content!important;
+  min-width: max-content!important;
+  max-width: max-content!important;
 
   height: min-content;
   max-height: var(--menu-max-height, min(100vh - 6rem));
   background: var(--menu-bg, canvas);
   margin: var(--menu-margin, 0);
-  padding: var(--menu-padding, 0.5rem);
+  padding: var(--menu-padding, 0.5rem)!important;
   border: var(--menu-border, 2px solid grey);
   overflow: auto;
 
@@ -23,9 +25,9 @@
 }
 
 :host(.menu--fill) {
-  width: anchor-size(width);
-  min-width: anchor-size(width);
-  max-width: anchor-size(width);
+  width: anchor-size(width)!important;
+  min-width: anchor-size(width)!important;
+  max-width: anchor-size(width)!important;
 }
 
 :host(:popover-open),

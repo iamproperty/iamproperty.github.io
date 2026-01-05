@@ -1,5 +1,8 @@
 function createAppliedFilters(container, filters): void {
-  function addFilterButton(filters, input, notSet = true): void | boolean {
+
+  const dialog = container.closest('dialog');
+
+  const addFilterButton = (filters, input, setFilter = false): void | boolean => {
     let shouldRemoveFilter = false;
     let inputName = input.getAttribute('name');
 
@@ -26,7 +29,7 @@ function createAppliedFilters(container, filters): void {
     filter.classList.add('filter');
     filter.classList.add('tag');
 
-    if (notSet) filter.classList.add('tag--not-set');
+    if (!setFilter) filter.classList.add('tag--not-set');
 
     filter.setAttribute('data-name', inputName);
 
@@ -55,7 +58,7 @@ function createAppliedFilters(container, filters): void {
           childFilter.classList.add('filter');
           childFilter.classList.add('tag');
 
-          if (notSet) filter.classList.add('tag--not-set');
+          if (!setFilter) filter.classList.add('tag--not-set');
 
           childFilter.setAttribute('data-name', name);
           childFilter.innerHTML = filterText.replace('$value', element.value);
@@ -82,107 +85,154 @@ function createAppliedFilters(container, filters): void {
         parentFilter.classList.add('filter');
         parentFilter.classList.add('tag');
 
-        if (notSet) filter.classList.add('tag--not-set');
+        if (!setFilter) filter.classList.add('tag--not-set');
 
         parentFilter.setAttribute('data-name', inputName);
         parentFilter.innerHTML = newFilterText;
         filters.appendChild(parentFilter);
       }
     }
-  }
+  };
 
-  // check for inputs on load
-  Array.from(
-    container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-  ).forEach((input) => {
-    addFilterButton(filters, input, false);
-  });
+  const checkForChecked = (setFilter = false) => {
 
-  const dialog = container.closest('dialog');
-
-  if (dialog) {
-    const observer = new MutationObserver(function (event) {
-      if (event[0].attributeName == 'open') {
-        Array.from(
-          container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-        ).forEach((input) => {
-          addFilterButton(filters, input, false);
-        });
-      }
-    });
-
-    observer.observe(dialog, { attributes: true });
-  }
-
-  container.addEventListener('tags-set', function () {
     filters.innerHTML = '';
     Array.from(
-      container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
+      container.querySelectorAll('input:is([type="checkbox"],[type="radio"]):checked, input:not([type="checkbox"], [type="radio"])')
     ).forEach((input) => {
-      addFilterButton(filters, input, false);
+      addFilterButton(filters, input, setFilter);
+    });
+  };
+  // Check for which inputs have been set, setting true sets the filter as set (blue)
+  checkForChecked(true);
+
+  // Create the main event listener for the component watching for inputs to change
+
+  Array.from(container.querySelectorAll('input[data-filter-text]')).forEach((input) => {
+    
+    input.addEventListener('change', function (event) { 
+      
+      const setFilter = container.closest('dialog') ? false : true;
+
+      if (!container.hasAttribute('data-keep-same') && !container.querySelector('dialog')) 
+        addFilterButton(filters, input, setFilter);
+
+      if(setFilter){
+        
+        const event = new CustomEvent('update');
+        container.parentElement.closest('iam-applied-filters')?.dispatchEvent(event);
+      }
     });
   });
 
-  // check for change in displayed inputs
-  Array.from(
-    container.querySelectorAll('input[type="checkbox"]:checked, input:not([type="checkbox"]):not([type="radio"])')
-  ).forEach((input) => {
-    input.addEventListener('change', function (event) {
-      if (!container.hasAttribute('data-keep-same')) addFilterButton(filters, input);
 
-      event.stopPropagation(); // Don't allow the below event handler to trigger
-    });
-  });
+  const filterClicked = (filter) => {
 
-  // Some change event aren't getting triggered above so this event listener on the container will pick them up. This happens with input in modals
-  container.addEventListener('change', function (event) {
-    if (event && event.target instanceof HTMLElement && event.target.closest('input[data-filter-text]')) {
-      const input = event.target.closest('input[data-filter-text]');
-      if (!container.hasAttribute('data-keep-same')) addFilterButton(filters, input);
+    if(!filter?.hasAttribute('data-name'))
+      return false;
+
+    const names = filter.getAttribute('data-name').split(',');
+
+    for (let t = 0; t < names.length; t++) {
+      const name = names[t];
+      let selector = `[name="${name}"]`;
+
+      if (name.match(/\[(.*)\]/)) {
+        //const newName = name.replace(/\[(.*)\]/, `[]`);
+        const value = name.replace(/.*\[(.*)\]/, `$1`);
+        selector = `[value="${value}"]`;
+      }
+
+      const inputs = container.querySelectorAll(selector);
+
+      for (let i = 0; i < inputs.length; i++) {
+        const input = inputs[i];
+
+        if (input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox') {
+          input.value = '';
+        } else {
+          input.checked = false;
+        }
+
+        const changeEvent = new CustomEvent('change');
+        input?.dispatchEvent(changeEvent);
+      }
     }
-  });
+
+    filter.remove();
+    checkForChecked();
+  };
+
+
+
+
 
   filters.addEventListener(
     'click',
     function (event) {
       if (event && event.target instanceof HTMLElement && event.target.closest('.filter')) {
         const filter = event.target.closest('.filter');
-        const names = filter.getAttribute('data-name').split(',');
+        const filterName = filter.getAttribute('data-name');
 
-        for (let t = 0; t < names.length; t++) {
-          const name = names[t];
-          let selector = `[name="${name}"]`;
+        filterClicked(filter);
 
-          if (name.match(/\[(.*)\]/)) {
-            //const newName = name.replace(/\[(.*)\]/, `[]`);
-            const value = name.replace(/.*\[(.*)\]/, `$1`);
-            selector = `[value="${value}"]`;
-          }
+        const clickedEvent = new CustomEvent('filter-clicked',{'detail':filterName });
+        container.dispatchEvent(clickedEvent);
 
-          const inputs = container.querySelectorAll(selector);
-
-          for (let i = 0; i < inputs.length; i++) {
-            const input = inputs[i];
-
-            if (input.getAttribute('type') != 'radio' && input.getAttribute('type') != 'checkbox') {
-              input.value = '';
-
-              const event = new Event('force');
-              if (!container.hasAttribute('data-nosubmit')) input.closest('form').dispatchEvent(event);
-            } else {
-              input.checked = false;
-
-              const event = new Event('force');
-              if (!container.hasAttribute('data-nosubmit')) input.closest('form').dispatchEvent(event);
-            }
-          }
+        // If you clicked on the filter on the parent component we want to tell the child component which filter to copy
+        if(container.querySelector('dialog iam-applied-filters')) {
+          const event = new CustomEvent('filter',{'detail':filterName });
+          container.querySelector('dialog iam-applied-filters').dispatchEvent(event);
         }
-
-        filter.remove();
       }
     },
     false
   );
+
+  // Listen for 
+  container.addEventListener('filter', (e) => {
+
+    const filter = container.shadowRoot.querySelector(`[data-name="${e.detail}"]`);
+
+    filterClicked(filter);
+  });
+
+  container.addEventListener('set-filters', (e) => {
+
+    checkForChecked(true);
+  });
+
+  if(dialog){
+    const primaryButton = container.querySelector('.btn-primary') ? container.querySelector('.btn-primary') : container.shadowRoot.querySelector('.btn-primary');
+    // Force the filters inside of the dialog to effect the filters above
+    primaryButton?.addEventListener('click', (e) => {
+
+      const event = new CustomEvent('update');
+      const submitEvent = new CustomEvent('submit');
+
+      container.dispatchEvent(submitEvent);
+      
+      if(container.parentElement.closest('iam-applied-filters'))
+        container.parentElement.closest('iam-applied-filters').dispatchEvent(event);
+
+      if(container.parentElement && container.parentElement.closest('iam-applied-filters') && !container.parentElement.closest('iam-applied-filters').closest('dialog')){
+
+        const event = new CustomEvent('set-filters');
+        container.parentElement.closest('iam-applied-filters').dispatchEvent(event);
+      }
+
+
+      checkForChecked(true);
+
+      if(!container.querySelector('.btn-primary').hasAttribute('command')){
+        
+        dialog.close();
+        const event = new Event('close');
+        dialog.dispatchEvent(event);
+      }
+
+    });
+  }
 }
 
 export default createAppliedFilters;

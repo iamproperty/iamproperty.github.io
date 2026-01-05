@@ -10,16 +10,13 @@ class iamNotification extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
+
     const loadCSS = `@import "${assetLocation}/css/components/notification.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/notification.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
     ${this.hasAttribute('data-css') ? `${this.getAttribute('data-css')}` : ``}
     </style>
@@ -29,6 +26,7 @@ class iamNotification extends HTMLElement {
       <div class="notification__inner"><div class="notification__text"><slot></slot></div><div class="notification__btns"><slot name="btns"></slot></div></div>
       <div class="notification__dismiss"></div>
     </div>
+    
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
 

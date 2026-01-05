@@ -5,7 +5,9 @@ import {
   setupNoSubmitTable,
   paginateRows,
   paginateTable,
+  updateAttributes
 } from '../../modules/table';
+import iamMenu from '../menu/menu.component';
 
 class iamTableNoSubmit extends HTMLElement {
   constructor() {
@@ -55,41 +57,13 @@ class iamTableNoSubmit extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    if (!window.customElements.get(`iam-menu`)) {
-      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
-        .then((module) => {
-          window.customElements.define(`iam-menu`, module.default);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
+    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
     setupBasicTable(this, table, form, pagination);
-
     setupAdvancedTable(this, table);
-
     setupNoSubmitTable(this, table, form, pagination, savedTableBody);
 
-    paginateRows(this);
 
-    if (pagination) {
-      paginateTable(this, table, form, pagination, () => {
-        paginateRows(this);
-      });
-    }
-
-    // #region shared advanced functions
-
-    //endregion
-
-    // select all
-    // search
-    // filter
-    // sort
-
-    /*
-    // Push up the pagination events
     pagination.addEventListener('update-show', (event) => {
       const show = event.detail.show;
 
@@ -108,7 +82,15 @@ class iamTableNoSubmit extends HTMLElement {
       updateAttributes(this, pagination);
     });
 
-*/
+
+    // For when the table contents is updated with an ajax call
+    this.addEventListener('update-table', (event) => {
+      
+      setupBasicTable(this, table, form, pagination);
+      setupAdvancedTable(this, table);
+      setupNoSubmitTable(this, table, form, pagination, savedTableBody);
+    });
+
   }
   /*
   static get observedAttributes(): any {

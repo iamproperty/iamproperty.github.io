@@ -52,4 +52,30 @@ $darkMode: 'true' !default;
     }
   }
   // #endregion
+
+  .btn-action:not(.btn-compact).fa-compact-only:before {
+
+    display: none!important;
+  }
+
+  // #region Select as button
+  .btn-action:has(select) {
+    padding-block: 0;
+    padding-right: 2rem;
+
+  
+    select {
+      //all: unset !important;
+      margin: 0rem 0rem !important;
+      padding-right: 2rem!important;
+      margin-right: -2rem !important;
+      //field-sizing: content
+    }
+
+    &:after {
+      top: 0.2rem;
+      right: rem(8);
+    }
+  }
+  // #endregion
 }
