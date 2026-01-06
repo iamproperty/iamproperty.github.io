@@ -17,16 +17,88 @@ $darkMode: 'true' !default;
       #{$var}: #{$value};
     }
 
-    // Wider colours
-    @each $colour, $value in $wider-colours {
-      --wider-colour-#{$colour}: #{$value};
-    }
-    @each $colour, $value in $wider-colours-hover {
-      --wider-colour-#{$colour}-hover: #{$value};
-    }
-    @each $colour, $value in $wider-colours-active {
-      --wider-colour-#{$colour}-active: #{$value};
-    }
+    /* #region Theme colours */
+
+    --colour-primary: #00313c;
+    /* #endregion */
+
+    /* #region Wider colours */
+    --wider-colour-1: #EEEEEE;
+    --wider-colour-2: #EBD7F6;
+    --wider-colour-3: #BEE8F8;
+    --wider-colour-4: #A6DCC7;
+    --wider-colour-5: #FAD0DA;
+    --wider-colour-6: #AFCCF2;
+    --wider-colour-7: #FFD2B4;
+    --wider-colour-8: #CDF0F2;
+    --wider-colour-9: #FFABC2;
+    --wider-colour-10: #DCEAF2;
+    --wider-colour-11: #EEBCB3;
+    --wider-colour-12: #F0BDFF;
+    --wider-colour-13: #FFF8CF;
+    --wider-colour-14: #92E3DF;
+    --wider-colour-15: #FEEAE8;
+    --wider-colour-16: #8BC3A6;
+    --wider-colour-17: #FEF0A6;
+    --wider-colour-18: #FFBDA0;
+    --wider-colour-19: #CBEFE1;
+    --wider-colour-20: #FFDD90;
+    --wider-colour-21: #97DBF2;
+    --wider-colour-22: #FFAF91;
+    --wider-colour-23: #C2DCD9;
+    /* #endregion */
+    /* #region Wider colours hover */
+    --wider-colour-1-hover: #E0E0E0;
+    --wider-colour-2-hover: #DFCCE8;
+    --wider-colour-3-hover: #B6DEED;
+    --wider-colour-4-hover: #98CBB7;
+    --wider-colour-5-hover: #EFC8D1;
+    --wider-colour-6-hover: #A6C1E5;
+    --wider-colour-7-hover: #F4CAAF;
+    --wider-colour-8-hover: #C2E3E5;
+    --wider-colour-9-hover: #F5A2B9;
+    --wider-colour-10-hover: #CFDCE3;
+    --wider-colour-11-hover: #E3B2A9;
+    --wider-colour-12-hover: #E3B2F2;
+    --wider-colour-13-hover: #F0E9C2;
+    --wider-colour-14-hover: #8AD9D6;
+    --wider-colour-15-hover: #F8E1DF;
+    --wider-colour-16-hover: #81B59A;
+    --wider-colour-17-hover: #F2E5A0;
+    --wider-colour-18-hover: #F2B69D;
+    --wider-colour-19-hover: #C2E3D7;
+    --wider-colour-20-hover: #F2D28A;
+    --wider-colour-21-hover: #8FD0E6;
+    --wider-colour-22-hover: #F0A68B;
+    --wider-colour-23-hover: #B9D1CE;
+    /* #endregion */
+    /* #region Wider colours active */
+    --wider-colour-1-active: #D6D6D6;
+    --wider-colour-2-active: #D4C2DD;
+    --wider-colour-3-active: #ABD1DF;
+    --wider-colour-4-active: #95C6B3;
+    --wider-colour-5-active: #E1BBC4;
+    --wider-colour-6-active: #9EB8DA;
+    --wider-colour-7-active: #E6BDA2;
+    --wider-colour-8-active: #B9D8DA;
+    --wider-colour-9-active: #E69AAF;
+    --wider-colour-10-active: #C6D3DA;
+    --wider-colour-11-active: #D6A9A1;
+    --wider-colour-12-active: #D8AAE6;
+    --wider-colour-13-active: #E6DFBA;
+    --wider-colour-14-active: #83CCC9;
+    --wider-colour-15-active: #F4E0DE;
+    --wider-colour-16-active: #7DB095;
+    --wider-colour-17-active: #FEF0A6;
+    --wider-colour-18-active: #E6AA90;
+    --wider-colour-19-active: #CBEFE1;
+    --wider-colour-20-active: #E6C782;
+    --wider-colour-21-active: #88C5DA;
+    --wider-colour-22-active: #E69E83;
+    --wider-colour-23-active: #AFC6C3;
+    /* #endregion */
+
+
 
     // Extra vars needed
     --content-max-width: #{$content-max-width};

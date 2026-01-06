@@ -343,14 +343,16 @@ $new_utilities: map.merge(
 );
 
 @mixin wider-colours() {
-  @each $colour, $value in $wider-colours {
-    .wider-colour-#{$colour} {
-      --wider-colour: var(--wider-colour-#{$colour});
-      --wider-colour-hover: var(--wider-colour-#{$colour}-hover);
-      --wider-colour-active: var(--wider-colour-#{$colour}-active);
-      color: #262626 !important;
-    }
+  
+  @for $i from 1 through 23 {
+  .wider-colour-#{$i} {
+    --wider-colour: var(--wider-colour-#{$i} );
+    --wider-colour-hover: var(--wider-colour-#{$i}-hover);
+    --wider-colour-active: var(--wider-colour-#{$i}-active);
+    color: #262626 !important;
   }
+}
+
 }
 // #endregion
 
@@ -1320,15 +1322,16 @@ $new_utilities: map.merge(
 );
 
 @mixin colours() {
+
+  .text-heading {
+    
+    color: var(--colour-heading) !important;
+  }
+
   @each $color, $value in $theme-colors {
     .text-#{$color} {
       --text-opacity: 1;
       color: var(--colour-#{$color}) !important;
-    }
-
-    .text-heading {
-      
-      color: var(--colour-heading) !important;
     }
 
     .bg-#{$color} {

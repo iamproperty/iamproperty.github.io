@@ -21,6 +21,22 @@
     Warning: 'Yellow',
     Danger: 'Red',
   };
+
+  const getVar = ($var) => {
+    return window.getComputedStyle(document.querySelector('body')).getPropertyValue($var)
+  };
+
+  const widerColours = {};
+  const widerColoursHover = {};
+  const widerColoursActive = {};
+
+  for (let i = 1; i <= 23; i++) {
+    
+    widerColours[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}`);
+    widerColoursHover[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-hover`);
+    widerColoursActive[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-active`);
+  }
+
 </script>
 
 <template>
@@ -85,7 +101,7 @@
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames['Primary'] }}</span>
             <span>CSS Variable: --colour-primary</span><br />
-            <span>Hex code: {{ $shared.themeColours.Primary.toUpperCase() }}</span>
+            <span>Hex code: {{ getVar('--colour-primary').toUpperCase() }}</span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-white border"><span>Text</span></div>
@@ -596,7 +612,7 @@
         </div>
       </div>
 
-      <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in $shared.widerColours" :key="name">
+      <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in widerColours" :key="name">
         <div class="col-12 col-sm pb-2">
           <span>Wider colour {{ name }}</span>
         </div>
@@ -604,11 +620,11 @@
           <div :class="`tag wider-colour-${name}`">{{ colour }}</div>
         </div>
         <div class="col pb-2">
-          <div :class="`tag wider-colour-${name} hover`">{{ $shared.widerColoursHover[name] }}</div>
+          <div :class="`tag wider-colour-${name} hover`">{{ widerColoursHover[name] }}</div>
         </div>
         <div class="col pb-2">
           <div :class="`tag wider-colour-${name} active`">
-            {{ $shared.widerColoursActive[name] }}
+            {{ widerColoursActive[name] }}
           </div>
         </div>
       </div>
