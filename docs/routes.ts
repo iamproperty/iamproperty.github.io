@@ -473,6 +473,15 @@ const routes = [
         component: () => import('./views/standardised/AddressLookupDoc.vue'),
         searchterms: 'postcode',
       },
+      {
+        path: 'iamsold-searchbar',
+        name: 'iamsold property searchbar',
+        meta: {
+          title: 'Property searchbar | Components | iamkey',
+        },
+        component: () => import('./views/standardised/PropertySearchbarDoc.vue'),
+        searchterms: 'postcode',
+      },
     ]
   },
   {

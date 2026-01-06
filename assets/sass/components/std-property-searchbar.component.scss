@@ -1,0 +1,250 @@
+@use '../_func' as *;
+@use '../elements/forms.scss' as*;
+@use '../elements/buttons.scss' as*;
+@use '../_functions/utility-mixins.scss' as*;
+
+
+@include margins();
+
+
+@layer components {
+
+
+:host {
+  display: block;
+  overflow: visible;
+  container-type: inline-size;
+}
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+:host {
+
+  padding-top: 0!important;
+}
+
+// #region Property searchbar
+.property-searchbar {
+  display: grid;
+  gap: var(--gap);
+
+  grid-template-columns: repeat(1, 1fr);
+
+  padding-block: var(--gap);
+  // TODO change to container
+  @container (min-width: 62rem) {
+    
+    grid-template-columns: 15rem repeat(6, 1fr) auto;
+    
+    //padding: var(--gap);
+  }
+
+
+}
+
+fieldset {
+  all: unset;
+  position: relative;
+  grid-column: auto / span 1;
+
+  &:has(#search-term,#type,button){
+    
+    //grid-column: auto / span 2;
+  }
+
+  &:has(button){
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &:has(span slot + slot){
+
+    span {
+
+      display: flex;
+      gap: var(--gap);
+    }
+
+    slot {
+      display: block;
+      width: 100%;
+    }
+  }
+
+
+  @container (min-width: 62rem) {
+
+    grid-column: auto / span 2;
+
+    position: relative;
+    
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: calc(100% + calc(var(--gap) / 2));
+      display: block;
+      height: 100%;
+      width: 1px;
+      background-color: var(--colour-muted);
+      opacity: 0.25;
+    }
+
+    &:has([name="search-term"]){
+    
+      grid-column: auto / span 1;
+    }
+
+
+    &:has(button){
+      
+      grid-column: auto / span 1!important;
+      flex-direction: column;
+
+      &:after {
+        display: none;
+      }
+    }
+
+  }
+}
+
+
+
+// #endregion
+
+
+// #region hide search fields on mobile
+:host(:not(.searchbar--inline)) .property-searchbar:not(:focus-within,:hover) {
+
+  fieldset:not(:first-child) {
+    display: none;
+
+    
+    @container (min-width: 62rem) {
+      display: block;
+    }
+  }
+}
+
+// #region Input fields
+::slotted(label) {
+  font-size: rem(14)!important;
+  line-height: 1!important;
+
+  @container (min-width: 62rem) {
+    margin-bottom: rem(2)!important;
+  }
+}
+
+::slotted(input) {
+  margin-bottom: 0!important;
+
+  @container (min-width: 62rem) {
+
+    border-color: transparent!important;
+    background-color: transparent!important;
+    padding-left: 0!important;
+    padding-right: 1.5rem !important;
+    padding-block: 0.25rem !important;
+    min-height: 1rem!important;
+  }
+}
+
+$form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#00313c' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
+
+::slotted(select:not(.select--minimal,.btn)) {
+    
+  margin-bottom: 0!important;
+
+  min-height: calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem))!important;
+
+  @container (min-width: 62rem) {
+
+    padding-block: 0.25rem !important;
+    min-height: 1rem !important;
+  
+    border-color: transparent !important;
+
+    padding-left: 0 !important;
+
+    padding-right: 1rem !important;
+    background: escape-svg($form-select-indicator-new) right 0 top 0.5rem / 0.75rem 0.75rem no-repeat !important;
+  }
+}
+
+::slotted(select:not(.select--minimal,.btn):not(:focus)) {
+
+
+  box-shadow: none!important;
+
+  @container (min-width: 62rem) {
+      box-shadow: none!important;
+  }
+}
+
+
+// Distance
+
+slot[name="search-term"] {
+  display: block;
+}
+
+slot[name="search-range"] {
+  
+  display: block;
+  
+  position: absolute !important;
+  top: calc(1.5rem) !important;
+  left: auto !important;
+  right: 2px !important;
+
+  @container (min-width: 62rem) {
+    top: calc(1.1rem) !important;
+  }
+}
+
+::slotted(#search_range) {
+  width: fit-content !important;
+  border-color: transparent !important;
+  padding-left: 0.5rem !important;
+  field-sizing: content !important;
+  //background-color: var(--bg-colour) !important;
+  z-index: 99;
+  border: none!important;
+
+  @container (min-width: 62rem) {
+    //padding-right: 0 !important;
+  }
+}
+
+// #endregion
+
+
+// #region Inline version
+
+:host(.searchbar--inline) .property-searchbar{
+
+  padding-inline: var(--gap);
+  border-radius: 1.5rem;
+  background: var(--colour-canvas);
+
+}
+
+:host(.searchbar--inline) ::slotted(#search_range) {
+
+  background: var(--colour-canvas)!important;
+}
+
+
+// #endregion
+
+
+}

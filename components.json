@@ -48,5 +48,6 @@
   "input",
   "input-range",
   "popover",
-  "tooltip"
+  "tooltip",
+  "std-property-searchbar"
 ]

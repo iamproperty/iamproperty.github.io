@@ -700,7 +700,7 @@ $optionalText: 'true' !default;
 
     padding-right: calc(
       var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem)
-    ) !important;
+    );
     option {
       font-size: 1.2em;
     }

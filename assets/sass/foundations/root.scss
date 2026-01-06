@@ -112,7 +112,7 @@ $darkMode: 'true' !default;
   }
 
 
-  :is(.bg-primary, .bg-danger, .bg-dark) {
+  :is(.bg-primary, .bg-danger, .bg-dark):not(.prevent-invert) {
     --theme: dark;
 
     > * {
