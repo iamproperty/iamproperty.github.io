@@ -419,6 +419,15 @@
       </div>
     </div>
 
+    <h3 class="pt-5">Address unkown</h3>
+    <div id="visualtest22" :class="` mb-3 visualtest ${(urlParams.has('target') && urlParams.get('target') == 'visualtest21' ? 'target' : '')}`">
+
+      <div class="md-col-end-6">
+
+        <STDAddressLookup class="searched" data-allow-manual="" data-address-unknown="address-unknown" data-address-unknown-checked></STDAddressLookup>
+      </div>
+    </div>
+
     <Integration component="address-lookup" componentName="iam-address-lookup">
       <template #web-component>
         <pre><code>{{`<iam-std-address-lookup></iam-std-address-lookup>`}}</code></pre>
@@ -472,10 +481,49 @@
             </tr>
             <tr>
               <th>data-required</th>
-              <td></td>
+              <td>true</td>
               <td>Flag</td>
-              <td></td>
+              <td>no</td>
               <td>Makes the address lookup required by adding in required fields into the UI component</td>
+            </tr>
+            <tr>
+              <th>data-address-unknown</th>
+              <td></td>
+              <td>String</td>
+              <td></td>
+              <td>Creates an address unknown checkbox named by the value of the attribute</td>
+            </tr>
+            <tr>
+              <th class="text-nowrap">data-address-unknown-checked</th>
+              <td></td>
+              <td>String</td>
+              <td></td>
+              <td>Checks the address unknown field and removes any required fields</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </template>
+
+        <template #dispatched-events>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>address-unknown</th>
+              <td>When a user checks the address unknown checkbox</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>address-known</th>
+              <td>When a user unchecks the address unknown checkbox</td>
+              <td></td>
             </tr>
           </tbody>
         </table>
