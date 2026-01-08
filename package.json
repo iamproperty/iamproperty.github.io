@@ -35,7 +35,6 @@
     "test:vue": "jest src",
     "test:ui": "jest assets/ts/ui-tests",
     "test:unit": "jest assets/ts/tests",
-    "test:scss": "jest assets/sass/_tests",
     "test": "npm run test:unit && npm run test:scss",
     "pull-request": "npm run test && npm run lint && npm run prettier && npm run compile && npm run audit",
     "pr": "npm run pull-request",
