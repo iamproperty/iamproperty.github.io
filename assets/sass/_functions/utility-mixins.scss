@@ -1328,7 +1328,21 @@ $new_utilities: map.merge(
     color: var(--colour-heading) !important;
   }
 
-  @each $color, $value in $theme-colors {
+  $new-theme-colors: (
+    'primary': var(--colour-primary),
+    'secondary': var(--colour-secondary),
+    'info': var(--colour-info),
+    'warning': var(--colour-warning),
+    'success': var(--colour-success),
+    'complete': var(--colour-complete),
+    'danger': var(--colour-danger),
+    'dark': var(--colour-dark),
+    'light': var(--colour-light),
+    'canvas': var(--colour-canvas),
+    'white': var(--colour-white),
+  );
+
+  @each $color, $value in $new-theme-colors {
     .text-#{$color} {
       --text-opacity: 1;
       color: var(--colour-#{$color}) !important;

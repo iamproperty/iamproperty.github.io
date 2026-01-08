@@ -22,8 +22,29 @@
     Danger: 'Red',
   };
 
-  const getVar = ($var) => {
-    return window.getComputedStyle(document.querySelector('body')).getPropertyValue($var)
+  const secondaryColours = {
+    Success: '--colour-success',
+    Info: '--colour-info',
+    Danger: '--colour-danger',
+    Dark: '--colour-dark'
+  }
+
+  const getVar = (propertyString) => {
+
+    let returnString = window.getComputedStyle(document.querySelector('body')).getPropertyValue(propertyString).toUpperCase();
+
+    returnString = returnString.replace('LIGHT-DARK(','').replace(')','');
+
+    let returnStringArr = returnString.split(",");
+
+    returnString = returnStringArr[0];
+
+    if (returnStringArr[1]) {
+      
+      returnString = `<span class="light-var">${returnStringArr[0]}</span><span class="dark-var">${returnStringArr[1]}</span>`;
+    }
+
+    return returnString;
   };
 
   const widerColours = {};
@@ -45,9 +66,7 @@
       <h1>Colour</h1>
     </DSHeader>
 
-    <DarkMode
-      ><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode
-    >
+    <DarkMode><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
 
     <!-- #region Light mode -->
     <div class="light-mode full-width">
@@ -76,7 +95,7 @@
             <span class="lead text-primary d-block pb-0">Default background</span>
             <span>CSS Variable: --colour-canvas</span><br />
             <span>CSS Variable: --colour-canvas-2</span><br />
-            <span>Hex code: #fcfcfc</span>
+            <span>Hex code: #FCFCFC</span>
           </div>
         </div>
       </div>
@@ -89,7 +108,7 @@
           secondary palette colors throughout to soften the experience and to impart confidence and optimism.
         </p>
         <p>
-          We use dark blue ({{ $shared.themeColours.Primary.toUpperCase() }}) is used primarily for body text and
+          We use dark blue (<span v-html="getVar('--colour-primary')"></span>) is used primarily for body text and
           headings, and white (#fcfcfc) for page background or body text and headings the are overlaid on dark
           backgrounds.
         </p>
@@ -101,19 +120,19 @@
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames['Primary'] }}</span>
             <span>CSS Variable: --colour-primary</span><br />
-            <span>Hex code: {{ getVar('--colour-primary').toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-primary')"></span></span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-white border"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Off-white</span>
             <span>CSS Variable: --colour-white</span><br />
-            <span>Hex code: #fcfcfc</span>
+            <span>Hex code: #FCFCFC</span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-warning border"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Yellow</span>
             <span>CSS Variable: --colour-warning</span><br />
-            <span>Hex code: {{ $shared.themeColours.Warning.toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-warning')"></span></span>
           </div>
         </div>
       </div>
@@ -126,27 +145,25 @@
           feel on-brand and every interaction informative.
         </p>
         <p>
-          We use blue ({{ $shared.themeColours.Info.toUpperCase() }}) for selected states. Yellow ({{
-            $shared.themeColours.Warning.toUpperCase()
-          }}) for primary buttons. Green ({{ $shared.themeColours.Success.toUpperCase() }}) for completed states and
-          positive interactions. Red ({{ $shared.themeColours.Danger.toUpperCase() }}) for incomplete or warning states.
+          We use blue (<span v-html="getVar('--colour-info')"></span>) for selected states. Yellow (<span v-html="getVar('--colour-warning')"></span>) for primary buttons. Green (<span v-html="getVar('--colour-success')"></span>) for completed states and
+          positive interactions. Red (<span v-html="getVar('--colour-danger')"></span>) for incomplete or warning states.
         </p>
       </div>
       <div class="container visualtest">
         <div class="row row-cols-2 row-cols-sm-3">
-          <div class="col pb-2" v-for="(colour, name) in $shared.secondaryColours" :key="name">
+          <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames[name] }}</span>
             <span>CSS Variable: --colour-{{ name.toLowerCase() }}</span
             ><br />
             <span v-if="name == 'Success'">CSS Variable: --colour-secondary</span><br v-if="name == 'Success'" />
-            <span>Hex code: {{ colour.toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar(colour)"></span></span>
           </div>
           <div class="col pb-2">
             <div :class="`colour-block bg-light`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Light</span>
             <span>CSS Variable: --colour-light</span><br />
-            <span>Hex code: {{ $shared.themeColours.Light.toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-light')"></span></span
             ><br />
           </div>
         </div>
@@ -173,14 +190,14 @@
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
             <span class="lead text-primary d-block pb-0">Muted</span>
             <span>CSS Variable: --colour-muted</span><br />
-            <span>Hex code: {{ $shared.nonThemeColours.Muted.toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-muted')"></span></span
             ><br />
           </div>
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-body)"></div>
             <span class="lead text-primary d-block pb-0">Body</span>
             <span>CSS Variable: --colour-body</span><br />
-            <span>Hex code: {{ $shared.nonThemeColours.Body.toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-body')"></span></span
             ><br />
           </div>
         </div>
@@ -215,7 +232,7 @@
             <div class="colour-block bg-canvas border"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Default background</span>
             <span>CSS Variable: --colour-canvas</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Canvas'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-canvas')"></span></span>
           </div>
 
           <div class="col pb-2">
@@ -224,7 +241,7 @@
             </div>
             <span class="lead text-primary d-block pb-0">Background 2</span>
             <span>CSS Variable: --colour-canvas-2</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Canvas-2'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-canvas-2')"></span></span>
           </div>
         </div>
       </div>
@@ -255,7 +272,7 @@
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames['Primary'] }}</span>
             <span>CSS Variable: --colour-primary</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Primary'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-primary')"></span></span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-white border" style="background: var(--colour-white)">
@@ -263,13 +280,13 @@
             </div>
             <span class="lead text-primary d-block pb-0">Off-white</span>
             <span>CSS Variable: --colour-white</span><br />
-            <span>Hex code: #fcfcfc;</span>
+            <span>Hex code: <span v-html="getVar('--colour-white')"></span></span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-warning"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Yellow</span>
             <span>CSS Variable: --colour-warning</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Warning'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-warning')"></span></span>
           </div>
         </div>
       </div>
@@ -291,25 +308,20 @@
 
       <div class="container visualtest">
         <div class="row row-cols-2 row-cols-sm-3">
-          <div class="col pb-2" v-for="(colour, name) in $shared.secondaryColours" :key="name">
+          <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames[name] }}</span>
             <span>CSS Variable: --colour-{{ name.toLowerCase() }}</span
             ><br />
             <span v-if="name == 'Success'">CSS Variable: --colour-secondary</span><br v-if="name == 'Success'" />
-            <span
-              >Hex code:
-              {{
-                $shared.darkModeColours[name] ? $shared.darkModeColours[name].toUpperCase() : colour.toUpperCase()
-              }}</span
-            >
+            <span>Hex code: <span v-html="getVar(colour)"></span></span>
           </div>
 
           <div class="col pb-2">
             <div :class="`colour-block bg-light`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Light</span>
             <span>CSS Variable: --colour-light</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Light'].toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-light')"></span></span
             ><br />
           </div>
         </div>
@@ -329,14 +341,14 @@
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
             <span class="lead text-primary d-block pb-0">Muted</span>
             <span>CSS Variable: --colour-muted</span><br />
-            <span>Hex code: {{ $shared.nonThemeColours.Muted.toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-muted')"></span></span
             ><br />
           </div>
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-body)"></div>
             <span class="lead text-primary d-block pb-0">Body</span>
             <span>CSS Variable: --colour-body</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Body'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-body')"></span></span>
           </div>
         </div>
       </div>
@@ -367,7 +379,7 @@
           </thead>
           <tbody>
             <tr>
-              <th>{{ colourNames['Primary'] }}</th>
+              <th style="vertical-align: middle;">{{ colourNames['Primary'] }}</th>
               <td><span class="colour-circle bg-primary tint-100 light-mode"></span></td>
               <td><span class="colour-circle bg-primary tint-90 light-mode"></span></td>
               <td><span class="colour-circle bg-primary tint-80"></span></td>
@@ -380,7 +392,7 @@
               <td><span class="colour-circle bg-primary tint-10"></span></td>
             </tr>
             <tr>
-              <th>{{ colourNames['Warning'] }}</th>
+              <th style="vertical-align: middle;">{{ colourNames['Warning'] }}</th>
               <td><span class="colour-circle bg-warning"></span></td>
               <td><span class="colour-circle bg-warning tint-90"></span></td>
               <td><span class="colour-circle bg-warning tint-80"></span></td>
@@ -392,8 +404,8 @@
               <td><span class="colour-circle bg-warning tint-20"></span></td>
               <td><span class="colour-circle bg-warning tint-10"></span></td>
             </tr>
-            <tr v-for="(colour, name) in $shared.secondaryColours" :key="name">
-              <th>{{ colourNames[name] }}</th>
+            <tr v-for="(colour, name) in secondaryColours" :key="name">
+              <th style="vertical-align: middle;">{{ colourNames[name] }}</th>
               <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-100`"></span></td>
               <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-90`"></span></td>
               <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-80`"></span></td>
@@ -406,7 +418,7 @@
               <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-10`"></span></td>
             </tr>
             <tr>
-              <th>Pink</th>
+              <th style="vertical-align: middle;">Pink</th>
               <td><span class="colour-circle bg-pink tint-100"></span></td>
               <td><span class="colour-circle bg-pink tint-90"></span></td>
               <td><span class="colour-circle bg-pink tint-80"></span></td>
@@ -503,7 +515,7 @@
           </thead>
           <tbody>
             <tr>
-              <th>Messages</th>
+              <th style="vertical-align: middle;">Messages</th>
               <td><span class="colour-circle bg-info"></span>Inform</td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Success</td>
@@ -511,7 +523,7 @@
               <td><span class="colour-circle bg-danger"></span>Error</td>
             </tr>
             <tr>
-              <th>Status</th>
+              <th style="vertical-align: middle;">Status</th>
               <td></td>
               <td><span class="colour-circle bg-muted" style="background: var(--colour-muted)"></span>Not started</td>
               <td><span class="colour-circle bg-success"></span>Approved</td>
@@ -519,7 +531,7 @@
               <td><span class="colour-circle bg-danger"></span>Incomplete</td>
             </tr>
             <tr>
-              <th>Risk</th>
+              <th style="vertical-align: middle;">Risk</th>
               <td></td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Low</td>
@@ -527,15 +539,15 @@
               <td><span class="colour-circle bg-danger"></span>High</td>
             </tr>
             <tr>
-              <th>Status</th>
+              <th style="vertical-align: middle;">States</th>
               <td><span class="colour-circle bg-info"></span>Selected</td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Positive</td>
               <td></td>
-              <td><span class="colour-circle bg-danger"></span>Warning</td>
+              <td><span class="colour-circle bg-danger"></span>Negative</td>
             </tr>
             <tr>
-              <th>Priority</th>
+              <th style="vertical-align: middle;">Priority</th>
               <td></td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Low</td>
@@ -545,36 +557,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-
-    <div class="container">
-      <h2>Functional colours</h2>
-    </div>
-
-    <div class="container visualtest pb-5">
-      <p class="pb-2">
-        The theme colours can all be assigned by using the bootstrap classes but we also have a series of functional
-        colours that are used across the system.
-      </p>
-
-      <details>
-        <summary><span class="btn btn-tertiary">Colours</span></summary>
-
-        <div class="row row-cols-2 row-cols-sm-4">
-          <div class="col pb-2" v-for="(colour, name) in $shared.extendedColours" :key="name">
-            <div
-              :class="`colour-block ${name == 'Inverted' ? 'border' : ''}`"
-              :style="`background: var(--colour-${name.toLowerCase()});`"
-            ></div>
-            <span class="lead text-primary d-block pb-0">{{ colourNames[name] }}</span>
-            <span>CSS Variable: --colour-{{ name.toLowerCase() }}</span
-            ><br />
-            <span>Value: {{ colour }}</span
-            ><br />
-            <span>Dark mode value: {{ $shared.darkModeColours[name] }}</span>
-          </div>
-        </div>
-      </details>
     </div>
 
     <div class="container">

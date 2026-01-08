@@ -186,10 +186,6 @@ $darkMode: 'true' !default;
       margin-inline: calc(var(--padding-x) * -1);
       margin-bottom: var(--padding-top);
 
-      @include light-mode($darkMode) {
-        background: #eeeeee;
-      }
-
       &:first-child {
         margin-top: calc(var(--padding-top) * -1);
       }

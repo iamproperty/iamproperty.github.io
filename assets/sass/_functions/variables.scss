@@ -258,7 +258,6 @@ $grays: ();
 $theme-colors: ();
 $theme-colors: map.merge(
   (
-    'primary': $primary,
     'secondary': $secondary,
     'info': $info,
     'warning': $warning,
@@ -332,7 +331,6 @@ $non-theme-colors: map.merge(
 }
 
 $dark-mode-colors: (
-  'primary': #b3c1c5,
   'warning': #ffb733,
   'info': #35c5e9,
   'success': #b4e6a5,

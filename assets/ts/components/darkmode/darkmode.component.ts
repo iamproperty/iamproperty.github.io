@@ -30,58 +30,77 @@ class iamDarkMode extends HTMLElement {
   }
 
   connectedCallback(): void {
-    const label = this.querySelector('label');
 
     const storedTheme = localStorage.getItem('user-theme');
-
-    console.log(storedTheme);
+    const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
     // Work from local storage first then look at the media preferences
-    label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
-    if (storedTheme == 'dark-theme') {
-      label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
+    this?.innerHTML = `<label class="toggle"><input type="checkbox" name="dark-mode" /> <span style="all: unset!important;">Light mode</span></label>`;
+
+    const label = this.querySelector('label');
+    const input = this.querySelector('input');
+    const span = this.querySelector('span');
+
+    const setDark = () => {
+      
+      document.documentElement.classList.add('dark-theme');
+      document.documentElement.classList.remove('light-theme');
+
+      input.checked = true;
+      span?.innerHTML = `Dark mode`;
       label?.classList.add('dark-theme');
-      document.documentElement.className = 'dark-theme';
-    } else if (storedTheme == 'light-theme') {
-      label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
-      label?.classList.remove('dark-theme');
-      document.documentElement.className = 'light-theme';
     }
 
-    const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    if (hasDarkPreference) {
-      label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
+    const unsetDark = () => {
+
+      document.documentElement.classList.remove('dark-theme');
+      document.documentElement.classList.add('light-theme');
+
+      input.checked = false;
+      span?.innerHTML = `Light mode`;
       label?.classList.remove('dark-theme');
     }
 
-    this.addEventListener('click', (event) => {
-      if (label?.querySelector('input:checked')) {
-        label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
+    if (storedTheme == 'light-theme') {
+      document.documentElement.classList.add('light-theme');
+    }
+    else if (storedTheme == 'dark-theme') {
+      setDark();
+    }
+    else if(hasDarkPreference) {
+      setDark();
+    }
+
+    input.addEventListener('change', () => {
+      
+      if(input.checked){
         localStorage.setItem('user-theme', 'dark-theme');
-        document.documentElement.className = 'dark-theme';
-        label?.classList.add('dark-theme');
-      } else {
-        label?.innerHTML = `<input type="checkbox" name="dark-mode" /> Light mode`;
-        localStorage.setItem('user-theme', 'light-theme');
-        document.documentElement.className = 'light-theme';
-        label?.classList.remove('dark-theme');
+        setDark();
       }
+      else {
+        localStorage.setItem('user-theme', 'light-theme');
+        unsetDark();
+      }
+
+      // Dispatch event so other toggles can then detect it
+      const customEvent = new CustomEvent('theme-change');
+      document.dispatchEvent(customEvent);
     });
+
+    // Detect if the theme has been changed outside of this toggle; i.e. another toggle or via other javascript
+    document.addEventListener('theme-change', () => {
+
+      if(document.documentElement.classList.contains('dark-theme'))
+        setDark();
+      else
+        unsetDark();
+    })
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', ({ matches }) => {
-      if (matches) {
-        label?.innerHTML = `<input type="checkbox" name="dark-mode" checked="checked" /> Dark mode`;
-        label?.classList.add('dark-theme');
-        document.documentElement.className = 'dark-theme';
-      }
-    });
-
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', ({ matches }) => {
-      if (matches) {
-        label?.innerHTML = `<input type="checkbox" name="dark-mode"  /> Light mode`;
-        label?.classList.remove('dark-theme');
-        document.documentElement.className = 'light-theme';
-      }
+      if (matches)
+        setDark();
+      else 
+        unsetDark();
     });
   }
 }

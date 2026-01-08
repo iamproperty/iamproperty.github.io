@@ -17,9 +17,77 @@ $darkMode: 'true' !default;
       #{$var}: #{$value};
     }
 
-    /* #region Theme colours */
+    color-scheme: light dark;
 
-    --colour-primary: #00313c;
+    --colour-black: #000000;
+    --colour-white: #fcfcfc;
+
+    /* #region Theme colours */
+    --colour-primary-theme: #00313c;
+    --colour-primary: light-dark(#00313c,#b3c1c5);
+
+    --colour-secondary-theme: #b4e6a5;
+    --colour-secondary: #b4e6a5;
+    
+    --colour-success-theme: #b4e6a5;
+    --colour-success: #b4e6a5;
+
+    --colour-info-theme: #1ebee6;
+    --colour-info: light-dark(#1ebee6,#35c5e9);
+
+    --colour-warning-theme: #ffa500;
+    --colour-warning: light-dark(#ffa500,#ffb733);
+
+    --colour-danger-theme: #dc3545;
+    --colour-danger: light-dark(#dc3545,#e7727d);
+
+    --colour-light-theme: #eeeeee;
+    --colour-light: #eeeeee;
+
+    --colour-dark-theme: #46003c;
+    --colour-dark: light-dark(#46003c,#b599b1);
+    /* #endregion */
+
+    /* #region functional colours */
+    --colour-muted: #9d9d9d;
+
+    --colour-canvas: light-dark(#fcfcfc,#262626);
+    --colour-canvas-2: light-dark(#ffffff,#313131);
+    --colour-body-default: light-dark(#595959,#bfbfbf);
+    --colour-body: light-dark(#595959,#bfbfbf);
+    --colour-heading: light-dark(var(--colour-primary-theme),var(--colour-primary));
+    --colour-link: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-focus: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-active: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-border: light-dark(#d8d8d8,var(--colour-white));
+    --colour-brand: light-dark(var(--colour-primary-theme),var(--colour-white));
+
+    --colour-btn: var(--colour-primary-theme);
+    --colour-btn-bg: light-dark(var(--colour-warning-theme),var(--colour-white));
+    --colour-btn-border: light-dark(var(--colour-warning-theme),var(--colour-white));
+    --colour-btn-bg-hover: transparent;
+    --colour-btn-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+
+    --colour-btn-secondary: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-border: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-bg: transparent;
+    --colour-btn-secondary-bg-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-hover: light-dark(var(--colour-inverted),var(--colour-primary-theme));
+    --colour-btn-action-hover-bg: light-dark(var(--colour-light),#313131);
+
+    --colour-activeLink: light-dark(#e8f9fd,#173c45);
+    --colour-activeLinkBorder: light-dark(#1dbde6,#1dbde6);
+
+    --colour-underline: var(--colour-secondary-theme);
+    --colour-selected: var(--colour-info-theme);
+
+    --colour-inverted: #fcfcfc;
+
+    --colour-notification-bg: light-dark(#e9f9fd,var(--colour-canvas-2));
+    --colour-notification-warning-bg: light-dark(#fff6e6,var(--colour-canvas-2));
+    --colour-notification-danger-bg: light-dark(#fcebec,var(--colour-canvas-2));
+    --colour-notification-success-bg: light-dark(#f8fdf6,var(--colour-canvas-2));
     /* #endregion */
 
     /* #region Wider colours */
@@ -99,10 +167,8 @@ $darkMode: 'true' !default;
     /* #endregion */
 
 
-
     // Extra vars needed
     --content-max-width: #{$content-max-width};
-    --colour-brand: var(--colour-primary);
 
     // Cards variables
     --card-top-padding: 2rem;
@@ -169,64 +235,82 @@ $darkMode: 'true' !default;
     }
   }
 
-  // Dark mode; functional colours get updated
-  @media screen and (prefers-color-scheme: light) {
-    :root {
-      --theme: light;
-      --body-theme: light;
-    }
+  .light-theme{
+    color-scheme: light;
   }
-  @media screen and (prefers-color-scheme: dark) {
-    :root {
-      --theme: dark;
-      --body-theme: dark;
+  .dark-theme{
+    color-scheme: dark;
+  }
+
+
+  // On any background colour we change the default text colour to our primary colour to stand out more
+  [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.invert-colours):not(iam-header):not(iam-notification):not(.bg-primary, .bg-danger, .bg-dark) {
+    
+    --colour-heading: var(--colour-primary-theme);
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-primary-theme);
+    
+    > * {
+      
+      color-scheme: light;
     }
   }
 
 
   :is(.bg-primary, .bg-danger, .bg-dark) {
-    --theme: dark;
+
+    --colour-heading: var(--colour-white);
+    --colour-body: var(--colour-white);
+    color: var(--colour-white);
 
     > * {
-      color: var(--colour-heading);
+      
+      color-scheme: dark;
     }
   }
 
+  // #region When the theme is set to dark via the dark mode component
+  // OR when the dark mode is set via the browser or device when no component is present
+  .dark-theme :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
 
-  @container style(--theme: dark) {
-    * > *,
-    [class*='bg-'] {
-      @each $color, $value in $dark-mode-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @each $color, $value in $dark-mode-functional-colors {
-        --colour-#{$color}: #{$value};
-      }
+    --colour-heading: var(--colour-primary-theme);
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-primary-theme);
+
+    // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+    > * {
+      color-scheme: light;
     }
   }
 
-  @container style(--body-theme: dark) {
+  .dark-theme .bg-light {
+    color-scheme: light;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    html:not(.light-theme) :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
 
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
 
-    [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.ds-header):not(iam-header) {
-      --theme: light;
-
+      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
       > * {
-        color: var(--colour-heading);
+        color-scheme: light;
       }
-    }    
+    }
 
+    html:not(.light-theme) .bg-light {
+
+      color-scheme: light;
+    }
   }
+  // #endregion
 
-
-  @container style(--theme: light) {
-    * > * {
-      @each $color, $value in $theme-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @each $color, $value in $non-theme-colors {
-        --colour-#{$color}: #{$value};
-      }
+  .invert-colours {
+    > * {
+      color-scheme: dark;
+      color: var(--colour-white);
     }
   }
 

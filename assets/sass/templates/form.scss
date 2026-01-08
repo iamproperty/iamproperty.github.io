@@ -9,9 +9,7 @@ $darkMode: 'true' !default;
 
 @include layer('templates', $layers) {
   body:has(.template--form) {
-    @include light-mode($darkMode) {
-      background-color: #e9f9fd;
-    }
+    background-color: #e9f9fd;
   }
 
   .template--form {
@@ -42,9 +40,8 @@ $darkMode: 'true' !default;
       max-width: var(--content-max-width);
     }
 
-    @include light-mode($darkMode) {
-      background-color: #e9f9fd;
-    }
+    background-color: #e9f9fd;
+    
 
     .form-panel {
       display: block;
