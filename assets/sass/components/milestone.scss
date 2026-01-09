@@ -206,10 +206,10 @@ iam-milestone {
 
   @media (prefers-color-scheme: dark) {
 
-    --theme: light;
+    color-scheme: light;
     
     > * {
-      color: var(--colour-heading);
+      color: var(--colour-primary-theme);
     }
     
   }

@@ -154,6 +154,9 @@ let app = createApp(template);
 app.config.globalProperties.$shared = shared;
 app.use(router).mount('#app');
 
+
+
+/*
 const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 if (hasDarkPreference) {
@@ -161,3 +164,4 @@ if (hasDarkPreference) {
 } else {
   document.documentElement.className = 'light-theme';
 }
+*/

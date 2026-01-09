@@ -5,7 +5,7 @@ $icon-dark: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
 ::slotted(.toggle):after {
   --icon: #{escape-svg($icon-light)};
-  background: var(--colour-primary-theme);
+  background: red;
   mask-image: var(--icon);
   mask-size: 100%;
   mask-repeat: no-repeat;

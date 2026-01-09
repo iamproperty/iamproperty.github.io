@@ -35,6 +35,21 @@ $darkMode: 'true' !default;
   align-items: center !important;
 }
 
+
+// #region Fix colours 
+
+:host(.bg-primary) .container {
+
+  //color-scheme: dark;
+
+  .menu {
+    
+    //color-scheme: light;
+  }
+}
+
+// #endregion
+
 .btn-menu {
   padding: 0;
   margin: 0 0 0 rem(32);
@@ -48,7 +63,7 @@ $darkMode: 'true' !default;
   border: none;
   width: rem(24);
   text-indent: -1000%;
-  color: var(--colour-brand);
+  color: var(--menu-btn-colour);
 
   i {
     font-size: rem(24);
@@ -117,10 +132,7 @@ $darkMode: 'true' !default;
     }
 
     .btn {
-      @include light-mode($darkMode) {
-        @include reset-colours();
-      }
-
+      
       margin: 0 !important;
       display: flex;
 
@@ -185,6 +197,7 @@ $darkMode: 'true' !default;
   }
 
   .menu {
+
     
     overscroll-behavior: contain;
     width: calc(#{rem(375)} - var(--scrollbar-width));
@@ -203,24 +216,15 @@ $darkMode: 'true' !default;
 
     > * {
       flex-shrink: 0;
+      
+      color-scheme: light;
     }
 
-    @container style(--body-theme: light) {
-
-      --theme: light;
-    }
-
-    @container style(--theme: dark) {
-
-      --colour-link: var(--colour-white);
-      //@include invert-colours();
-    }
 
     // The menu is always white unless in dark mode
-    @include light-mode($darkMode) {
-      background-color: var(--colour-white);
-      @include reset-colours();
-    }
+    
+      background-color: var(--colour-canvas-2);
+      
 
     @media (forced-colors: active) {
       outline: 1px solid white;
@@ -263,9 +267,6 @@ $darkMode: 'true' !default;
     flex-grow: 1;
     position: relative;
 
-    @include light-mode($darkMode) {
-      background-color: #eeeeee;
-    }
 
     .container {
       display: contents;
@@ -412,17 +413,6 @@ $darkMode: 'true' !default;
     left: 0;
     width: 100%;
 
-    @include light-mode($darkMode) {
-      
-      --theme: light;
-      background-color: #eeeeee;
-      @include reset-colours();
-
-    }
-
-    @container style(--theme: dark) {
-      //@include invert-colours();
-    }
 
     .container {
       margin-left: auto;
@@ -579,16 +569,9 @@ $darkMode: 'true' !default;
     flex-shrink: 0;
   }
 
-  @container style(--theme: dark) {
-    //--colour-link: var(--colour-white);
-    //@include invert-colours();
-  }
 
   // The menu is always white unless in dark mode
-  @include light-mode($darkMode) {
-    background-color: var(--colour-white);
-    @include reset-colours();
-  }
+
 
   @media (forced-colors: active) {
     outline: 1px solid white;
@@ -645,7 +628,8 @@ slot[name='menus'] {
 }
 
 ::slotted(.nav--menu.open) {
-  left: calc(100% - (#{rem(375)} - var(--scrollbar-width)));
+  width: calc(#{rem(375)} - var(--modifier));
+  left: calc(100% - (#{rem(375)} - var(--scrollbar-width) - var(--modifier)));
   -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   pointer-events: all;
