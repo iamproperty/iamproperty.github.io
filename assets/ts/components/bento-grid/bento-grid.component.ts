@@ -45,6 +45,7 @@ class iamBentoGrid extends HTMLElement {
 
     Array.from(arrDetails).forEach((details: HTMLDetailsElement) => {
       details.classList.add('bg-primary');
+      details.classList.add('invert-colours');
       const summary = details.querySelector('summary');
 
       summary?.classList.add('h3');

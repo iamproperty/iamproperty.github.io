@@ -2,16 +2,16 @@
 
 @use '../_func' as *;
 
-$chart-colour-1-hover: map.get($wider-colours-hover, '3') !default;
-$chart-colour-2-hover: map.get($wider-colours-hover, '4') !default;
-$chart-colour-3-hover: map.get($wider-colours-hover, '5') !default;
-$chart-colour-4-hover: map.get($wider-colours-hover, '6') !default;
-$chart-colour-5-hover: map.get($wider-colours-hover, '7') !default;
-$chart-colour-6-hover: map.get($wider-colours-hover, '8') !default;
-$chart-colour-7-hover: map.get($wider-colours-hover, '9') !default;
-$chart-colour-8-hover: map.get($wider-colours-hover, '10') !default;
-$chart-colour-9-hover: map.get($wider-colours-hover, '11') !default;
-$chart-colour-10-hover: map.get($wider-colours-hover, '12') !default;
+$chart-colour-1-hover: var(--widericolour-3) !default;
+$chart-colour-2-hover: var(--widericolour-4) !default;
+$chart-colour-3-hover: var(--widericolour-5) !default;
+$chart-colour-4-hover: var(--widericolour-6) !default;
+$chart-colour-5-hover: var(--widericolour-7) !default;
+$chart-colour-6-hover: var(--widericolour-8) !default;
+$chart-colour-7-hover: var(--widericolour-9) !default;
+$chart-colour-8-hover: var(--widericolour-10) !default;
+$chart-colour-9-hover: var(--widericolour-11) !default;
+$chart-colour-10-hover: var(--widericolour-12) !default;
 
 $chart-colors-hover: ();
 $chart-colors-hover: map.merge(
