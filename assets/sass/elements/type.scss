@@ -3,7 +3,7 @@
 
 $layers: 'true' !default;
 
-$darkMode: 'true' !default;
+
 
 @include layer('elements', $layers) {
   /* Duplicated from bootstrap reboot so that the type file will compile */

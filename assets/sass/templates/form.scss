@@ -5,7 +5,7 @@
 
 $layers: 'true' !default;
 
-$darkMode: 'true' !default;
+
 
 @include layer('templates', $layers) {
   body:has(.template--form) {

@@ -2,7 +2,7 @@
 @use '_func' as *;
 
 $layers: 'true' !default;
-$darkMode: 'true' !default;
+
 
 @include layer('utilities', $layers) {
   @include clearfix();

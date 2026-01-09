@@ -4,7 +4,7 @@
 @use '_func' as *;
 
 $layers: 'true' !default;
-$darkMode: 'true' !default;
+
 
 @forward '_functions/variables_old' show $utilities;
 @use '_functions/bs_utilities' as *;

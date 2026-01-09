@@ -4,7 +4,7 @@
 
 $layers: 'true' !default;
 
-$darkMode: 'true' !default;
+
 
 @layer legacy, reset, elements, components, templates, overrides, utilities;
 

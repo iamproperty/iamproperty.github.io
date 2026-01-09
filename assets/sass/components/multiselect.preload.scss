@@ -2,7 +2,7 @@
 
 $layers: 'true' !default;
 
-$darkMode: 'true' !default;
+
 
 @include layer('components', $layers) {
   iam-multiselect .tag[slot='checked'] {

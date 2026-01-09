@@ -2,7 +2,7 @@
 
 $layers: 'true' !default;
 
-$darkMode: 'true' !default;
+
 
 @include layer('elements', $layers) {
   :is(label, .label):has(progress) {

@@ -1,12 +1,11 @@
 @charset "UTF-8";
 
 $layers: 'true' !default;
-$darkMode: 'true' !default;
+
 $optionalText: 'true' !default;
 
 @use '_fonts';
 @use '_corefiles.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
   $optionalText: $optionalText
 );

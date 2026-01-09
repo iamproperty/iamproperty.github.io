@@ -2,42 +2,36 @@
 @use '_func' as *;
 
 $layers: 'true' !default;
-$darkMode: 'true' !default;
+
 $optionalText: 'true' !default;
 
 // Foundations
 @use 'foundations/root.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 @use 'foundations/reboot.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 // Elements
 @use '_elements.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
   $optionalText: $optionalText
 );
 
 // Components
 @use '_components.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 // Templates
 @use 'templates/form.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 @use 'templates/auth.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 // Overrides

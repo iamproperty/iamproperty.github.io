@@ -11,8 +11,7 @@ $layers: 'true' !default;
 );
 
 @use '../../assets/sass/_corefiles.scss' with (
-  $layers: $layers,
-  $darkMode: 'true'
+  $layers: $layers
 );
 
 @use '../../assets/sass/_grid' with (

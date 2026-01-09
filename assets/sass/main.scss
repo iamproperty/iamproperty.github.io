@@ -2,13 +2,8 @@
 
 @use '_fonts';
 @use '_corefiles' with (
-  $layers: 'true',
-  $darkMode: 'true'
+  $layers: 'true'
 );
-@use '_grid' with (
-  $darkMode: 'true'
-);
-@use '_utility-mixins' with (
-  $darkMode: 'true'
-);
+@use '_grid';
+@use '_utility-mixins';
 @use '_print';

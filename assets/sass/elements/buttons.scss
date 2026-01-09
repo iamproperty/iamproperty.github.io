@@ -2,30 +2,24 @@
 
 $layers: 'true' !default;
 
-$darkMode: 'true' !default;
+
 
 @use './buttons--global.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use './buttons--secondary.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use './buttons--tertiary.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use './buttons--action.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use './buttons--compact.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 @use './buttons--special.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );

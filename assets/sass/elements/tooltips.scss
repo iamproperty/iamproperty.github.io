@@ -44,7 +44,7 @@
 
 $layers: 'true' !default;
 
-$darkMode: 'true' !default;
+
 
 @include layer('elements', $layers) {
   abbr[title] {

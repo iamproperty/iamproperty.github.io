@@ -3,7 +3,7 @@
 @use '_func' as *;
 
 $layers: 'true' !default;
-$darkMode: 'true' !default;
+
 
 // #region grid mixins
 @mixin grid-utilities($br: '') {

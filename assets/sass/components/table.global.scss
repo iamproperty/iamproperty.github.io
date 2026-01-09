@@ -1,11 +1,9 @@
 @use '../_func.scss' as *;
 
 
-$darkMode: 'true' !default;
 
-@use './table-basic.global.scss' with (
-  $darkMode: $darkMode
-);
+
+@use './table-basic.global.scss';
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
 

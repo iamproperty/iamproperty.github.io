@@ -2,50 +2,41 @@
 @use '_func' as *;
 
 $layers: 'true' !default;
-$darkMode: 'true' !default;
+
 
 @use 'components/nav.preload' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use 'components/carousel.config' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use 'components/multiselect.preload' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use 'components/multi-step-modal.global';
 
 @use 'components/inline-edit.preload' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use 'components/charts.config.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 @use 'components/menu.global.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 @use 'components/tabs.config.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 @use 'components/address-lookup.preload.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 
 @use 'components/milestone.scss';
 @use 'components/calendar.config.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode
+  $layers: $layers
 );
 
 @include layer('components', $layers) {

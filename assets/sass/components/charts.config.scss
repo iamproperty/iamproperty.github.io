@@ -3,7 +3,7 @@
 
 $layers: 'true' !default;
 
-$darkMode: 'true' !default;
+
 
 @include layer('components', $layers) {
   iam-barchart {
