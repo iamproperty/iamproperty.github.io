@@ -1,11 +1,11 @@
 @use 'sass:map';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   details {
     display: block;
 
@@ -189,7 +189,7 @@ $darkMode: 'true' !default;
       overflow: hidden;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       --dialog-padding: #{rem(32)};
       
     margin-inline: calc(var(--dialog-padding) * -1);

@@ -1,17 +1,7 @@
 @charset "UTF-8";
 
 @use '_fonts';
-@use '_corefiles' with (
-  $layers: 'true',
-  $mobileOnly: 'false',
-  $darkMode: 'true'
-);
-@use '_grid' with (
-  $mobileOnly: 'false',
-  $darkMode: 'true'
-);
-@use '_utility-mixins' with (
-  $mobileOnly: 'false',
-  $darkMode: 'true'
-);
+@use '_corefiles';
+@use '_grid';
+@use '_utility-mixins';
 @use '_print';

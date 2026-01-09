@@ -2,15 +2,14 @@
 
 @use '../func' as *;
 
-$root: ':root' !default;
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
+
 
 @layer legacy, reset, elements, components, templates, overrides, utilities;
 
-@include layer('reset', $layers) {
-  #{$root} {
+@layer reset {
+  :root {
     // Print out the $vars array setup in the variables file so they can be used as CSS vars
     // Custom variable values only support SassScript inside `#{}`.
     @each $var, $value in $vars {
@@ -193,13 +192,13 @@ $darkMode: 'true' !default;
     }
 
     // Add in media query based updates to the global vars like updating the heading 1 font size
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       @each $var, $value in $varsSM {
         #{$var}: #{$value};
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       @each $var, $value in $varsMD {
         #{$var}: #{$value};
       }
@@ -216,10 +215,10 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       --padding-inline: 2.5rem;
     }
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       --padding-inline: 5.25rem;
 
       &:has(.nav--large) {
@@ -316,7 +315,7 @@ $darkMode: 'true' !default;
 
 
   @media (forced-colors: active) {
-    #{$root} {
+    :root {
       --contrast-outline-width: 1px;
     }
   }

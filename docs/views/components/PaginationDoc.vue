@@ -906,9 +906,7 @@
       margin-right: 0rem;
     }
 
-    @include dark-mode('true') {
-      background-color: var(--colour-canvas);
-    }
+    
   }
 
   .demo-bottom {

@@ -7,7 +7,7 @@
 
 
 
-@include layer('utilities', $layers) {
+@layer utilities {
 
   @include margins();
 }

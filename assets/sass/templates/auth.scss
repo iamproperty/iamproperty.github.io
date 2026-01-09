@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('templates', $layers) {
+
+
+
+@layer templates {
   body:has(.template--auth) {
     display: flex;
     flex-direction: row;
@@ -21,7 +21,7 @@ $darkMode: 'true' !default;
     max-width: rem(1280);
     margin-inline: auto;
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       --padding-top: #{rem(40)};
       --brand-size: #{rem(64)};
     }
@@ -34,7 +34,7 @@ $darkMode: 'true' !default;
       padding-bottom: var(--padding-top);
       padding-inline: var(--container-padding-x);
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @include media-breakpoint-up(md) {
         flex: 0 0 auto;
         width: 43.75%;
         padding-inline-end: calc(var(--container-padding-x) - rem(16));
@@ -50,7 +50,7 @@ $darkMode: 'true' !default;
       display: none;
       background-color: var(--colour-primary-theme);
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @include media-breakpoint-up(md) {
         display: block;
         flex: 0 0 auto;
         width: 56.25%;
