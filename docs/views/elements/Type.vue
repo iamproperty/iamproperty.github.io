@@ -5,6 +5,24 @@
   import tabletDesktopImg from '../../img/tablet-desktop.png';
   import Tabs from '../../../src/components/Tabs/Tabs.vue';
   import Tab from '../../../src/components/Tabs/Tab.vue';
+
+  const getVar = (propertyString) => {
+
+    let returnString = window.getComputedStyle(document.querySelector('body')).getPropertyValue(propertyString).toUpperCase();
+
+    returnString = returnString.replace('LIGHT-DARK(','').replace(')','');
+
+    let returnStringArr = returnString.split(",");
+
+    returnString = returnStringArr[0];
+
+    if (returnStringArr[1]) {
+      
+      returnString = `<span class="light-var">${returnStringArr[0]}</span><span class="dark-var">${returnStringArr[1]}</span>`;
+    }
+
+    return returnString;
+  };
 </script>
 
 <template>
@@ -232,19 +250,19 @@
         <div class="colour bg-primary"></div>
         <span class="lead pb-2">Primary text colour</span><br />
         <span>CSS Variable: --colour-primary</span><br />
-        <p>HEX code: {{ $shared.cssVars.themeColour_primary.toUpperCase() }}</p>
+        <p>HEX code: <span v-html="getVar('--colour-primary')"></span></p>
       </div>
       <div class="colour-sample">
         <div class="colour border" :style="`background:${$shared.cssVars.nonThemeColour_inverted}!important`"></div>
         <span class="lead pb-2">Inverted text colour</span><br />
         <span>CSS Variable: --colour-white</span><br />
-        <p>HEX code: {{ $shared.cssVars.nonThemeColour_inverted.toUpperCase() }}</p>
+        <p>HEX code: <span v-html="getVar('--colour-white')"></span></p>
       </div>
       <div class="colour-sample">
         <div class="colour" :style="`background:${$shared.cssVars.nonThemeColour_body}!important`"></div>
         <span class="lead pb-2">Paragraph body text colour</span><br />
         <span>CSS Variable: --colour-body</span><br />
-        <p>HEX code: {{ $shared.cssVars.nonThemeColour_body.toUpperCase() }}</p>
+        <p>HEX code: <span v-html="getVar('--colour-body')"></span></p>
       </div>
     </div>
 

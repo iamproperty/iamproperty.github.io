@@ -60,10 +60,6 @@ $darkMode: 'true' !default;
         overflow: hidden;
       }
 
-      @include light-mode($darkMode) {
-        background-color: #e9f9fd;
-      }
-
       > figure {
         position: relative;
         display: block;
