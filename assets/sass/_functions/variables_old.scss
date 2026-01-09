@@ -6,10 +6,6 @@ $vars: () !default;
 $varsSM: () !default;
 $varsMD: () !default;
 
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
-$optionalText: 'true' !default;
-
 @use 'functions' as *;
 @forward 'variables' show $heading-sizes, $content-max-width-px, $content-max-width, $table-padding, $table-padding-px,
   $td-mw, $td-mw-px, $ut-mh-sm-px, $ut-mh-sm, $ut-mh-md-px, $ut-mh-md, $ut-mh-lg-px, $ut-mh-lg, $non-theme-colors,

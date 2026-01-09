@@ -1,11 +1,11 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('components', $layers) {
+
+
+
+@layer components {
   nav:has(iam-nav) {
     grid-column: container;
   }
@@ -26,7 +26,7 @@ $darkMode: 'true' !default;
       min-width: min(var(--svg-width), 14rem);
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       padding-inline: max(
         var(--padding-inline),
         calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
@@ -44,7 +44,7 @@ $darkMode: 'true' !default;
         display: none;
       }
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @include media-breakpoint-up(md) {
         &:has([slot='secondary']) {
           padding-top: rem(64);
         }

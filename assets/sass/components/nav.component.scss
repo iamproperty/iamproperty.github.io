@@ -24,9 +24,9 @@
     box-sizing: border-box;
 }
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
+
 
 :host {
   display: flex !important;
@@ -108,7 +108,7 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     margin: 0 0 0 rem(48);
     width: auto;
     padding-right: rem(24 + 6);
@@ -119,7 +119,7 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @include media-breakpoint-up(md) {
     width: fit-content;
     height: auto;
     margin: 0 0 0 3rem;
@@ -360,7 +360,7 @@ $darkMode: 'true' !default;
 // #endregion
 
 // #region desktop
-@include media-breakpoint-up(md, $mobileOnly) {
+@include media-breakpoint-up(md) {
   :host {
     //max-width: 100%!important;
     padding-block: 0 !important;
@@ -593,18 +593,18 @@ $darkMode: 'true' !default;
     line-height: map.get($heading-sizes, 'h3_lh');
     max-width: var(--content-max-width);
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       margin-right: -2.5rem;
       padding-right: 2.5rem;
       width: calc(100% + 4rem);
     }
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     padding-right: 2.5rem !important;
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @include media-breakpoint-up(md) {
     height: calc(100vh - var(--nav-height));
     top: calc(var(--nav-height) + 4px);
   }
@@ -644,7 +644,7 @@ slot[name='menus'] {
 // #endregion
 
 // #region compressed nav
-@include media-breakpoint-up(md, $mobileOnly) {
+@include media-breakpoint-up(md) {
   :host(.nav--md-compressed) .buttons-holder button {
     margin-left: 1.5rem !important;
   }
@@ -706,7 +706,7 @@ slot[name='menus'] {
   }
 }
 
-@include media-breakpoint-up(md, $mobileOnly) {
+@include media-breakpoint-up(md) {
   :host(.nav--dual-buttons) {
     slot[name='dual'] {
       display: flex;

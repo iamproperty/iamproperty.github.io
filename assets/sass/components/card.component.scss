@@ -1,9 +1,7 @@
 @use '../_func.scss' as *;
 @use 'card.module.scss' as *;
 @use '../elements/dialog.scss' as *;
-@use '../elements/popover.scss' as * with (
-  $layers: 'false'
-);
+@use '../elements/popover.scss' as *;
 @use '../elements/buttons.scss' as *;
 
 :host {
