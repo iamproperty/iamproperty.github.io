@@ -419,24 +419,6 @@
   }
 }
 
-@mixin dark-mode($darkMode) {
-  @media screen and (prefers-color-scheme: dark) {
-    @if $darkMode == 'true' {
-      @content;
-    }
-  }
-}
-
-@mixin light-mode($darkMode) {
-  @if $darkMode == 'true' {
-    @media screen and (prefers-color-scheme: light) {
-      @content;
-    }
-  } @else {
-    @content;
-  }
-}
-
 @mixin layer($name, $layers: 'true') {
   @if $layers == 'true' {
     @layer #{$name} {
