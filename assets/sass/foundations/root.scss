@@ -2,13 +2,13 @@
 
 @use '../func' as *;
 
-$layers: 'true' !default;
+
 
 
 
 @layer legacy, reset, elements, components, templates, overrides, utilities;
 
-@include layer('reset', $layers) {
+@layer reset {
   :root {
     // Print out the $vars array setup in the variables file so they can be used as CSS vars
     // Custom variable values only support SassScript inside `#{}`.

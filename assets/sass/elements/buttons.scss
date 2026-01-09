@@ -1,25 +1,13 @@
 @use '../_func.scss' as *;
 
-$layers: 'true' !default;
 
 
 
-@use './buttons--global.scss' with (
-  $layers: $layers
-);
-@use './buttons--secondary.scss' with (
-  $layers: $layers
-);
-@use './buttons--tertiary.scss' with (
-  $layers: $layers
-);
-@use './buttons--action.scss' with (
-  $layers: $layers
-);
-@use './buttons--compact.scss' with (
-  $layers: $layers
-);
 
-@use './buttons--special.scss' with (
-  $layers: $layers
-);
+@use './buttons--global.scss';
+@use './buttons--secondary.scss';
+@use './buttons--tertiary.scss';
+@use './buttons--action.scss';
+@use './buttons--compact.scss';
+
+@use './buttons--special.scss';

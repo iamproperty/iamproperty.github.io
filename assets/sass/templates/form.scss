@@ -3,11 +3,11 @@
 
 @use '../_func' as *;
 
-$layers: 'true' !default;
 
 
 
-@include layer('templates', $layers) {
+
+@layer templates {
   body:has(.template--form) {
     background-color: #e9f9fd;
   }

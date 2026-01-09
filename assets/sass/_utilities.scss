@@ -3,13 +3,13 @@
 @use 'sass:meta';
 @use '_func' as *;
 
-$layers: 'true' !default;
+
 
 
 @forward '_functions/variables_old' show $utilities;
 @use '_functions/bs_utilities' as *;
 
-@include layer('utilities', $layers) {
+@layer utilities {
   // Missing classes that exist as mixins
   @include clearfix();
   @include visually-hidden();

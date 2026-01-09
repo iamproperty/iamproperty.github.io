@@ -1,11 +1,11 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$layers: 'true' !default;
 
 
 
-@include layer('elements', $layers) {
+
+@layer elements {
   // #region modal styling
 
   *:not(.dialog__wrapper) > dialog[open] { // change this selector to be a dialog without a popover attribute

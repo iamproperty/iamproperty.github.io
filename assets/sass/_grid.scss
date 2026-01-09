@@ -2,7 +2,7 @@
 @use 'sass:map';
 @use '_func' as *;
 
-$layers: 'true' !default;
+
 
 
 // #region grid mixins
@@ -117,7 +117,7 @@ $layers: 'true' !default;
 }
 // #endregion
 
-@include layer('reset', $layers) {
+@layer reset {
   // #region Main grid setup
   body {
     --excess-space: calc((100% - var(--max-width, #{$max-width})) / 2);

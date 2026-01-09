@@ -1,11 +1,4 @@
 @charset "UTF-8";
 
-$layers: 'true' !default;
-
-$optionalText: 'true' !default;
-
 @use '_fonts';
-@use '_corefiles.scss' with (
-  $layers: $layers,
-  $optionalText: $optionalText
-);
+@use '_corefiles.scss';

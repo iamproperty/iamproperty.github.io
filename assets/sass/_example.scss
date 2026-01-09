@@ -4,11 +4,9 @@
 // Include any local files needed, the _func file will bring in all functions and variables
 @use '_func.scss' as *;
 
-// Sass variables declared
-$layers: 'true' !default;
 
 // Each file should be added to a layer: legacy, reset, elements, components, templates, overrides or utilities
-@include layer('elements') {
+@layer elements {
   // Try to keep the selectors as basic and easy to read as apossible
   .element {
     --css-variable: 3rem;

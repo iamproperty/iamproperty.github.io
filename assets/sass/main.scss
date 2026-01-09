@@ -1,9 +1,7 @@
 @charset "UTF-8";
 
 @use '_fonts';
-@use '_corefiles' with (
-  $layers: 'true'
-);
+@use '_corefiles';
 @use '_grid';
 @use '_utility-mixins';
 @use '_print';

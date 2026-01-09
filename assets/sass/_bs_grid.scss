@@ -1,8 +1,8 @@
 @use '_func' as *;
 
-$layers: 'false' !default;
 
-@include layer('reset', $layers) {
+
+@layer reset {
   // Row
   //
   // Rows contain your columns.

@@ -3,11 +3,11 @@
 
 @use '../_func' as *;
 
-$layers: 'true' !default;
 
 
 
-@include layer('elements', $layers) {
+
+@layer elements {
   
   hr {
     --border-style: solid;

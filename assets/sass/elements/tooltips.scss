@@ -42,11 +42,11 @@
   }
 }
 
-$layers: 'true' !default;
 
 
 
-@include layer('elements', $layers) {
+
+@layer elements {
   abbr[title] {
     text-underline-offset: 0.2em;
   }

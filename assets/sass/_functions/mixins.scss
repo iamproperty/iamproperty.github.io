@@ -419,16 +419,6 @@
   }
 }
 
-@mixin layer($name, $layers: 'true') {
-  @if $layers == 'true' {
-    @layer #{$name} {
-      @content;
-    }
-  } @else {
-    @content;
-  }
-}
-
 @mixin container-up($name) {
   @if $name == 'sm' {
     @container (width > 23.4375em) {

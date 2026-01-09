@@ -1,41 +1,25 @@
 @use 'sass:math';
 @use '_func' as *;
 
-$layers: 'true' !default;
-
-$optionalText: 'true' !default;
 
 // Foundations
-@use 'foundations/root.scss' with (
-  $layers: $layers
-);
+@use 'foundations/root.scss';
 
-@use 'foundations/reboot.scss' with (
-  $layers: $layers
-);
+@use 'foundations/reboot.scss';
 
 // Elements
-@use '_elements.scss' with (
-  $layers: $layers,
-  $optionalText: $optionalText
-);
+@use '_elements.scss';
 
 // Components
-@use '_components.scss' with (
-  $layers: $layers
-);
+@use '_components.scss';
 
 // Templates
-@use 'templates/form.scss' with (
-  $layers: $layers
-);
+@use 'templates/form.scss';
 
-@use 'templates/auth.scss' with (
-  $layers: $layers
-);
+@use 'templates/auth.scss';
 
 // Overrides
-@include layer('overrides', $layers) {
+@layer overrides {
   @media (prefers-reduced-motion) {
     * {
       transition: unset;

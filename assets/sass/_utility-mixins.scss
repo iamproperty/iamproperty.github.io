@@ -1,10 +1,10 @@
 @use 'sass:math';
 @use '_func' as *;
 
-$layers: 'true' !default;
 
 
-@include layer('utilities', $layers) {
+
+@layer utilities {
   @include clearfix();
   @include visually-hidden();
   @include text-truncate();
