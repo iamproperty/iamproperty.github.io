@@ -21,11 +21,11 @@
     color: inherit;
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     width: #{rem(335)};
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @include media-breakpoint-up(md) {
     width: #{rem(360)};
   }
 
@@ -43,7 +43,7 @@
 }
 
 $layers: 'true' !default;
-$mobileOnly: 'false' !default;
+
 $darkMode: 'true' !default;
 
 @include layer('elements', $layers) {
@@ -112,7 +112,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       &:is(.shift--left, .shift--right) span {
         transform: translate(50%, 0);
 

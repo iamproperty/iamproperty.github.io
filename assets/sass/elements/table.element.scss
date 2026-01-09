@@ -1,7 +1,7 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-$mobileOnly: 'false' !default;
+
 $darkMode: 'true' !default;
 
 @include layer('elements', $layers) {
@@ -106,7 +106,7 @@ $darkMode: 'true' !default;
     display: block;
     color: var(--colour-heading);
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       max-width: rem(1048);
     }
   }

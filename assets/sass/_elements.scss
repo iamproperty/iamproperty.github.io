@@ -1,86 +1,70 @@
 @use './func' as *;
 
 $layers: 'true' !default;
-$mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 $optionalText: 'true' !default;
 
 @use 'elements/brand.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/icons.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/media.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/type.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/hr.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 // elements
 @use 'elements/lists.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/tooltips.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/container.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/table.element.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 
 @use 'elements/links.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/buttons' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/dialog.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/popover.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/modal.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/admin-panel.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 
 @use 'elements/prefix.scss';
@@ -88,34 +72,28 @@ $optionalText: 'true' !default;
 @use 'elements/forms.scss' with (
   $layers: $layers,
   $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly,
   $optionalText: $optionalText
 );
 
 @use 'elements/toggle-button.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 
 @use 'elements/badge-tag.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/feature.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'elements/details.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 
 @use 'elements/progress.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );

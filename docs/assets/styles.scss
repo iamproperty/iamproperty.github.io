@@ -5,7 +5,6 @@ $fontPath: '/fonts/';
 
 $root: ':root' !default;
 $layers: 'true' !default;
-$mobileOnly: 'false' !default;
 
 @use '../../assets/sass/_fonts.scss' with (
   $fontPath: $fontPath
@@ -13,26 +12,21 @@ $mobileOnly: 'false' !default;
 
 @use '../../assets/sass/_corefiles.scss' with (
   $layers: $layers,
-  $mobileOnly: $mobileOnly,
   $darkMode: 'true'
 );
 
 @use '../../assets/sass/_grid' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly
+  $layers: $layers
 );
 @use '../../assets/sass/_bs_grid' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly
+  $layers: $layers
 );
 
 @use '../../assets/sass/_utilities' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly
+  $layers: $layers
 );
 @use '../../assets/sass/_utility-mixins' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly
+  $layers: $layers
 );
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');

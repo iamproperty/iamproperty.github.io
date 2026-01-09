@@ -2,60 +2,50 @@
 @use '_func' as *;
 
 $layers: 'true' !default;
-$mobileOnly: 'false' !default;
 $darkMode: 'true' !default;
 
 @use 'components/nav.preload' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'components/carousel.config' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'components/multiselect.preload' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'components/multi-step-modal.global';
 
 @use 'components/inline-edit.preload' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'components/charts.config.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 @use 'components/menu.global.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 
 @use 'components/tabs.config.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 
 @use 'components/address-lookup.preload.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 
 
 @use 'components/milestone.scss';
 @use 'components/calendar.config.scss' with (
   $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
+  $darkMode: $darkMode
 );
 
 @include layer('components', $layers) {
@@ -74,7 +64,7 @@ $darkMode: 'true' !default;
     grid-column: container;
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @include media-breakpoint-up(md) {
     iam-header:not(:defined) {
       min-height: rem(470);
     }

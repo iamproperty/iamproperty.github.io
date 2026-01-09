@@ -194,7 +194,7 @@
       @content;
     }
   } @else if $max == null {
-    @include media-breakpoint-up($lower, 'false', $breakpoints) {
+    @include media-breakpoint-up($lower, $breakpoints) {
       @content;
     }
   } @else if $min == null {
@@ -217,7 +217,7 @@
       @content;
     }
   } @else if $max == null {
-    @include media-breakpoint-up($name, 'false', $breakpoints) {
+    @include media-breakpoint-up($name, $breakpoints) {
       @content;
     }
   } @else if $min == null {
@@ -322,7 +322,7 @@
   @each $breakpoint in map.keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint, $breakpoints);
 
-    @include media-breakpoint-up($breakpoint, 'false', $breakpoints) {
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .col#{$infix} {
         flex: 1 0 0%; // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
@@ -384,7 +384,7 @@
   @each $breakpoint in map-keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint, $breakpoints);
 
-    @include media-breakpoint-up($breakpoint, 'false', $breakpoints) {
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
       @if $columns > 0 {
         @for $i from 1 through $columns {
           .g-col#{$infix}-#{$i} {
@@ -406,20 +406,16 @@
 
 // #endregion
 
-@mixin media-breakpoint-up($name, $mobileOnly: 'false', $breakpoints: $grid-breakpoints) {
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
   @if $min {
-    @if $mobileOnly != 'true' {
-      @media screen and (min-width: $min) {
-        @content;
-      }
+    @media screen and (min-width: $min) {
+      @content;
     }
   } @else if $name == 'xs' {
     @content;
   } @else {
-    @if $mobileOnly != 'true' {
-      @content;
-    }
+    @content;
   }
 }
 
@@ -463,9 +459,7 @@
   } @else if $name == 'xs' {
     @content;
   } @else {
-    @if $mobileOnly != 'true' {
-      @content;
-    }
+    @content;
   }
 }
 

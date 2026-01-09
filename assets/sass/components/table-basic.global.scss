@@ -406,7 +406,7 @@ table {
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     padding: 0 !important;
   }
 }

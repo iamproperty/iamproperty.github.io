@@ -1,7 +1,6 @@
 @use '_func' as *;
 
 $layers: 'false' !default;
-$mobileOnly: 'false' !default;
 
 @include layer('reset', $layers) {
   // Row

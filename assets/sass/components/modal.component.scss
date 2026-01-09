@@ -29,14 +29,14 @@ dialog[open] {
   overscroll-behavior: contain;
   overflow-y: hidden;
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     --dialog-padding: #{rem(32)};
     min-width: rem(335);
     width: fit-content;
     max-width: rem(686);
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @include media-breakpoint-up(md) {
     min-width: rem(454);
     width: fit-content;
     max-width: rem(736);
@@ -121,7 +121,7 @@ dialog[open] {
 
 // Size variants
 // small
-@include media-breakpoint-up(sm, $mobileOnly) {
+@include media-breakpoint-up(sm) {
 
   :host(.modal--sm) dialog[open] {
     
@@ -131,7 +131,7 @@ dialog[open] {
   }
 }
 
-@include media-breakpoint-up(md, $mobileOnly) {
+@include media-breakpoint-up(md) {
 
   :host(.modal--sm) dialog[open] {
       min-width: rem(454);
@@ -141,7 +141,7 @@ dialog[open] {
 }
 
 // large
-@include media-breakpoint-up(sm, $mobileOnly) {
+@include media-breakpoint-up(sm) {
 
   :host(.modal--lg) dialog[open] {
       min-width: rem(686);
@@ -150,7 +150,7 @@ dialog[open] {
   }
 }
 
-@include media-breakpoint-up(md, $mobileOnly) {
+@include media-breakpoint-up(md) {
 
   :host(.modal--lg) dialog[open] {
       min-width: rem(736);
@@ -210,7 +210,7 @@ dialog::backdrop {
     color: var(--colour-heading);
         margin-inline: auto;
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       font-size: 4rem;
       height: 4rem;
       width: 4rem;

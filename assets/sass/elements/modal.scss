@@ -2,7 +2,7 @@
 @use '../_func' as *;
 
 $layers: 'true' !default;
-$mobileOnly: 'false' !default;
+
 $darkMode: 'true' !default;
 
 @include layer('elements', $layers) {
@@ -21,14 +21,14 @@ $darkMode: 'true' !default;
     max-height: min(90vh, #{rem(752)});
     overscroll-behavior: contain;
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       --dialog-padding: #{rem(32)};
       min-width: rem(335);
       width: fit-content;
       max-width: rem(686);
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       min-width: rem(454);
       width: fit-content;
       max-width: rem(736);
@@ -162,7 +162,7 @@ $darkMode: 'true' !default;
       color: var(--colour-heading);
       clear: both;
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @include media-breakpoint-up(md) {
         font-size: 4rem;
       }
     }
@@ -181,7 +181,7 @@ $darkMode: 'true' !default;
       color: var(--colour-heading);
       clear: both;
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @include media-breakpoint-up(md) {
         font-size: 4rem;
       }
 
@@ -212,7 +212,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       :is(button, .btn):has(~ :is(button, .btn):last-child),
       :is(button, .btn):last-child {
         min-width: calc(50% - 1rem);
@@ -231,12 +231,12 @@ $darkMode: 'true' !default;
       display: contents;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       min-width: rem(686);
       max-width: rem(686);
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       min-width: rem(736);
       max-width: rem(736);
     }
@@ -312,7 +312,7 @@ $darkMode: 'true' !default;
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       min-width: rem(452);
       width: rem(452);
       max-width: rem(452);
@@ -333,7 +333,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       min-width: rem(924);
       width: rem(924);
       max-width: rem(924);
