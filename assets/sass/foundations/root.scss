@@ -46,7 +46,6 @@
     --colour-dark-theme: #46003c;
     --colour-dark: light-dark(#46003c,#b599b1);
     /* #endregion */
-
     /* #region functional colours */
     --colour-muted: #9d9d9d;
 
@@ -88,7 +87,6 @@
     --colour-notification-danger-bg: light-dark(#fcebec,var(--colour-canvas-2));
     --colour-notification-success-bg: light-dark(#f8fdf6,var(--colour-canvas-2));
     /* #endregion */
-
     /* #region Wider colours */
     --wider-colour-1: #EEEEEE;
     --wider-colour-2: #EBD7F6;
@@ -164,12 +162,62 @@
     --wider-colour-22-active: #E69E83;
     --wider-colour-23-active: #AFC6C3;
     /* #endregion */
+    /* #region chart colours */
 
+    --chart-colour-1: var(--wider-colour-3);
+    --chart-colour-2: var(--wider-colour-4);
+    --chart-colour-3: var(--wider-colour-5);
+    --chart-colour-4: var(--wider-colour-6);
+    --chart-colour-5: var(--wider-colour-7);
+    --chart-colour-6: var(--wider-colour-8);
+    --chart-colour-7: var(--wider-colour-9);
+    --chart-colour-8: var(--wider-colour-10);
+    --chart-colour-9: var(--wider-colour-11);
+    --chart-colour-10: var(--wider-colour-12);
 
-    // Extra vars needed
-    --content-max-width: #{$content-max-width};
+    --chart-colour-1-hover: var(--wider-colour-3-hover);
+    --chart-colour-2-hover: var(--wider-colour-4-hover);
+    --chart-colour-3-hover: var(--wider-colour-5-hover);
+    --chart-colour-4-hover: var(--wider-colour-6-hover);
+    --chart-colour-5-hover: var(--wider-colour-7-hover);
+    --chart-colour-6-hover: var(--wider-colour-8-hover);
+    --chart-colour-7-hover: var(--wider-colour-9-hover);
+    --chart-colour-8-hover: var(--wider-colour-10-hover);
+    --chart-colour-9-hover: var(--wider-colour-11-hover);
+    --chart-colour-10-hover: var(--wider-colour-12-hover);
 
-    // Cards variables
+    --chart-colour-success: #d2f0c9 !important;
+    --chart-colour-success-hover: #8ad873 !important;
+    --chart-colour-danger: #f5c2c7 !important;
+    --chart-colour-danger-hover: #f5c2e7 !important;
+    --chart-colour-warning: #ffd280 !important;
+    --chart-colour-warning-hover: #ffb020 !important;
+
+    /* #endregion */
+    /* #region Type vars */
+    --font-body: 'Qanelas', arial, sans-serif;
+    --font-heading: 'Qanelas', arial, sans-serif;
+    --heading-weight: bold;
+    --type-scale: 1.2;
+    --body-fs: 1rem;
+    /* #endregion */
+    // #region rounded borders
+    --border-radius-sm: 0.25rem;
+    --border-radius: 0.5rem;
+    --border-radius-lg: 1rem;
+    --border-radius-xl: 1.5rem;
+    --border-radius-2xl: 3rem;
+    // #endregion
+    // #region Z-index
+    --index-below: -1;
+    --index-base: 0;
+    --index-focus: 2;
+    --index-above: 10;
+    --index-floating: 100;
+    --index-menu: 200;
+    --index-overlay: 1000;
+    // #endregion
+    // #region Cards variables
     --card-top-padding: 2rem;
     --card-right-padding: #{rem(16+16+24)};
     --card-bottom-padding: 2rem;
@@ -178,48 +226,45 @@
     --card-box-shadow: #{rem(2)} #{rem(3)} #{rem(6)} rgba(0, 0, 0, 0.2);
     --nav-height: #{rem(96)};
     --code-color: #d63384;
-
-    // Default borders
+    // #endregion 
+    // #region Default borders
     --border-width: 1px;
     --border-style: solid;
     --border-color: var(--colour-border);
-
-    --container-max-width: #{rem(1280)};
+    // #endregion
+    
+    // Extra vars needed
+    --content-max-width: #{rem(800)};
     --padding-inline: 1.5rem;
 
-    @media (prefers-reduced-motion: no-preference) {
-      scroll-behavior: smooth;
-    }
+    --input-max-width: #{rem(800)};
+    --select-max-width: #{rem(800)};
+
+
+    // #region layout
+    --container-max-width: #{rem(1280)};
+    --container-padding-top: 0;
+    --container-padding-bottom: #{rem(16)};
+    --container-padding-x: #{rem(24)};
+    --container-padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom) var(--container-padding-x);
+    // #endregion
+
+
 
     // Add in media query based updates to the global vars like updating the heading 1 font size
-    @include media-breakpoint-up(sm) {
-      @each $var, $value in $varsSM {
-        #{$var}: #{$value};
-      }
-    }
-
-    @include media-breakpoint-up(md) {
-      @each $var, $value in $varsMD {
-        #{$var}: #{$value};
-      }
-    }
-
     @media screen and (min-width: 36em) {
-      @each $var, $value in map.get($vars-responsive, 'sm') {
-        #{'--'+$var}: #{$value};
-      }
-    }
-    @media screen and (min-width: 62em) {
-      @each $var, $value in map.get($vars-responsive, 'md') {
-        #{'--'+$var}: #{$value};
-      }
-    }
-
-    @include media-breakpoint-up(sm) {
+      --container-padding-x: #{rem(40)};
       --padding-inline: 2.5rem;
+      --gutter: 2.5rem;
+      --scale: 1.25;
     }
-    @include media-breakpoint-up(md) {
+    
+    @media screen and (min-width: 62em) {
+
+      --container-padding-x: #{rem(84)};
       --padding-inline: 5.25rem;
+      --gutter: 5.25rem;
+      --scale: 1.414;
 
       &:has(.nav--large) {
         --container-max-width: #{rem(1920)} !important;
@@ -231,6 +276,10 @@
         --container-padding: var(--container-padding-md);
         --gutter: 3.5rem;
       }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
     }
   }
 
@@ -270,16 +319,18 @@
 
   // #region When the theme is set to dark via the dark mode component
   // OR when the dark mode is set via the browser or device when no component is present
+  
   .dark-theme :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
+    
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
 
-    --colour-heading: var(--colour-primary-theme);
-    --colour-body: var(--colour-primary-theme);
-    color: var(--colour-primary-theme);
-
-    // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
-    > * {
-      color-scheme: light;
-    }
+      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+      > * {
+        color-scheme: light;
+      }
+    
   }
 
   .dark-theme .bg-light {

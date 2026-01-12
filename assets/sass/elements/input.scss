@@ -43,9 +43,9 @@
     float: left; // 1
     width: 100%;
     padding: 0;
-    margin-bottom: $legend-margin-bottom;
-    @include font-size($legend-font-size);
-    font-weight: $legend-font-weight;
+    margin-bottom: 0.5rem;
+    @include font-size(1.5rem);
+    font-weight: normal;
     line-height: inherit;
 
     + * {
@@ -162,7 +162,7 @@
   }
 
   :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range'])) {
-    max-width: $input-max-width;
+    max-width: var(--input-max-width);
   }
 
   textarea {

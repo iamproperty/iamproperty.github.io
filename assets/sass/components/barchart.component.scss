@@ -253,7 +253,7 @@
   table {
     width: fit-content !important;
     padding-top: 0;
-    height: var(--chart-height-resp, #{rem(120)});
+    height: var(--chart-height-resp);
   }
 
   tbody {
@@ -279,7 +279,7 @@
   --fc-value-width: #{rem(24)};
 
   table {
-    height: var(--chart-height-lg-set, #{rem(120)});
+    height: var(--chart-height-lg, #{rem(120)});
   }
 }
 

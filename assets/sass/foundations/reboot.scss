@@ -21,7 +21,7 @@
     margin-bottom: 1rem; // 2
     overflow: auto; // 3
     font-size: rem(14);
-    color: $pre-color;
+    color: null;
 
     // Account for some code outputs that place code tags in pre tags
     code {
@@ -121,7 +121,7 @@
     line-height: 1.2;
     min-height: 100%;
     -webkit-text-size-adjust: 100%; // 3
-    -webkit-tap-highlight-color: rgba($black, 0); // 4
+    -webkit-tap-highlight-color: rgba(#000, 0); // 4
 
     color: var(--colour-body);
   }

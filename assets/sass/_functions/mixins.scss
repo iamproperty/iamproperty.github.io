@@ -83,7 +83,7 @@
                 --#{$local-var}: #{$variable};
               }
             }
-            #{$property}: $value if($enable-important-utilities, !important, null);
+            #{$property}: $value !important;
           }
         }
 
@@ -95,7 +95,7 @@
                   --#{$local-var}: #{$variable};
                 }
               }
-              #{$property}: $value if($enable-important-utilities, !important, null);
+              #{$property}: $value !important;
             }
           }
         }
@@ -242,15 +242,7 @@
 // scss-docs-end clearfix
 // Container mixins
 
-@mixin make-container($gutter: $container-padding-x) {
-  --gutter-x: #{$gutter};
-  --gutter-y: 0;
-  width: 100%;
-  padding-right: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
-  padding-left: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
-  margin-right: auto;
-  margin-left: auto;
-}
+
 // Grid system
 //
 // Generate semantic grid columns with these mixins.
@@ -517,21 +509,6 @@
   }
 }
 
-@mixin reset-colours() {
-  @each $color, $value in $non-theme-colors {
-    --colour-#{$color}: #{$value};
-  }
-
-  .text-primary {
-    color: var(--colour-primary) !important;
-  }
-}
-
-@mixin invert-colours() {
-  @each $color, $value in $dark-mode-functional-colors {
-    --colour-#{$color}: #{$value};
-  }
-}
 
 @mixin slotted($el, $isComponent: 'true') {
   @if $isComponent == 'true' {

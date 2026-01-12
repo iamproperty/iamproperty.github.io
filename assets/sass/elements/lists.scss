@@ -25,7 +25,7 @@
   }
 
   dt {
-    font-weight: $dt-font-weight;
+    font-weight: bold;
   }
 
   dd {
@@ -45,12 +45,12 @@
     display: inline-block;
 
     &:not(:last-child) {
-      margin-right: $list-inline-padding;
+      margin-right: 0.5rem;
     }
   }
 
   @include is('ol, ul', '', 'li') {
-    max-width: $content-max-width;
+    max-width: var(--content-max-width);
   }
 
   .tick-list--white {

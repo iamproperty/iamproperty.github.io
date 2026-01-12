@@ -8,11 +8,11 @@
   // #region reset
   a {
     color: var(--link-color);
-    text-decoration: $link-decoration;
+    text-decoration: underline;
 
     &:hover {
       color: var(--link-hover-color);
-      text-decoration: $link-hover-decoration;
+      text-decoration: none;
     }
   }
 

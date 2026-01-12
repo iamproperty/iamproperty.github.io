@@ -8,8 +8,8 @@
 @layer elements {
   /* Duplicated from bootstrap reboot so that the type file will compile */
   mark {
-    padding: $mark-padding;
-    background-color: $mark-bg;
+    padding: 0.1875em;
+    background-color: yellow;
   }
 
   //@import "../../bootstrap/scss/_type.scss";
@@ -19,13 +19,13 @@
   %heading {
     margin-top: 0; // 1
     margin-bottom: 0;
-    font-family: $headings-font-family;
-    font-style: $headings-font-style;
+    font-family: var(--font-heading);
+    font-style: normal;
     font-weight: bold;
 
     line-height: round(calc(1em * var(--type-scale)), 0.25rem);
     padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
-    color: $headings-color;
+    color: var(--colour-heading);
     clear: both;
     display: block;
 
@@ -162,7 +162,7 @@
     font-size: rem(64);
     line-height: rem(72);
     font-weight: bold;
-    color: $headings-color;
+    color: var(--colour-heading);
     display: block;
 
     text-decoration: underline;

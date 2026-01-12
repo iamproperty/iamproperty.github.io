@@ -76,7 +76,7 @@
       padding-inline-end: calc(#{var(--inline-padding)} + #{rem(27)} + #{rem(12)});
       padding-block: var(--block-padding) !important;
       position: relative;
-      color: $headings-color;
+      color: var(--colour-heading);
 
       &:is(:hover, :focus-visible) {
         background: var(--colour-light);
@@ -134,9 +134,9 @@
     summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label)) {
       // h3 purposelessly missed out
 
-      font-family: $headings-font-family;
-      font-style: $headings-font-style;
-      color: $headings-color;
+      font-family: var(--font-heading);
+      font-style: normal;
+      color: var(--colour-heading);
       clear: both;
       display: block;
 
