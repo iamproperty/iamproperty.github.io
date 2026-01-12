@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import { fileURLToPath } from 'url';
 import { resolve, dirname } from 'path';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
 import Markdown from 'unplugin-vue-markdown/vite'
 
@@ -35,7 +36,11 @@ export default ({ mode }) => {
         '~/' : `${resolve(__dirname, 'assets')}/`
       },
     },
+    server: {
+      https: true
+    },
     plugins: [
+      basicSsl(),
       Vue({
         include: [/\.vue$/, /\.md$/],
         template: {

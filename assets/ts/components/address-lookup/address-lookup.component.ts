@@ -261,7 +261,7 @@ class iamAddressLookup extends HTMLElement {
         pageNumber = 1;
 
       let ajaxURL = this.getAttribute('data-url');
-      ajaxURL += `${encodeURI(searchValue)}&page[number]=${pageNumber}&page[size]=${limit}`;
+      ajaxURL += `${encodeURI(searchValue)}&page_number=${pageNumber}&page_size=${limit}`;
       
       if(this.hasAttribute('data-url-2')){
         ajaxURL += this.getAttribute('data-url-2');
@@ -313,12 +313,15 @@ class iamAddressLookup extends HTMLElement {
         return await fetch(ajaxURL, {
           signal: signal,
           method: 'get',
-          credentials: 'same-origin',
           headers: new Headers({
+            'Access-Control-Allow-Origin' : 'https://8mzh15wnrc.execute-api.eu-west-2.amazonaws.com/dev',
+            'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+            'Access-Control-Allow-Credentials' : true,
+            'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT',
             'Content-Type': 'application/json',
-            Accept: 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
+            'Authorization': this.getAttribute('data-auth'),
+            'X-Amz-Security-Token': this.getAttribute('data-token'),
+            'X-Amz-Date': this.getAttribute('data-amz-date')
           }),
         })
           .then((response) => response.json())

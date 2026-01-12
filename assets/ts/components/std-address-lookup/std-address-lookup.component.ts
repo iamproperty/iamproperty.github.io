@@ -1544,6 +1544,8 @@ class iamSTDAddressLookup extends HTMLElement {
     */
   }
 
+
+
   connectedCallback(): void {
 
     if (!window.customElements.get(`iam-address-lookup`)) window.customElements.define(`iam-address-lookup`, iamAddressLookup);
@@ -1551,7 +1553,8 @@ class iamSTDAddressLookup extends HTMLElement {
     const currentContent = this.innerHTML;
     this.innerHTML = `<iam-address-lookup 
     class="${this.getAttribute('class')}" 
-    data-url="/standardaddress.json?search_query=" 
+    ${this.hasAttribute('data-url') ? `data-url='${this.getAttribute('data-url')}?search_string='` : `data-url='/standardaddress.json?search_query='`}
+    data-url="https://dev.als.iamproperty.group?search_string=" 
     data-postcode="true" 
     data-min-chars="5" 
     ${this.hasAttribute('data-title') ? `data-title='${this.getAttribute('data-title')}'` : `data-title='Find an address by postcode'`}
@@ -1568,6 +1571,9 @@ class iamSTDAddressLookup extends HTMLElement {
     ${this.hasAttribute('data-force-manual') ? `data-force-manual` : ''}
     ${this.hasAttribute('data-matched') ? `data-matched='${this.getAttribute('data-matched')}'` : ''}
     ${this.hasAttribute('data-matched-label') ? `data-matched-label='${this.getAttribute('data-matched-label')}'` : ''}
+    ${this.hasAttribute('data-auth') ? `data-auth='${this.getAttribute('data-auth')}'` : ''}
+    ${this.hasAttribute('data-token') ? `data-token='${this.getAttribute('data-token')}'` : ''}
+    ${this.hasAttribute('data-amz-date') ? `data-amz-date='${this.getAttribute('data-amz-date')}'` : ''}
     data-postcode-lookup-label="Back to UK postcode lookup">
 
     <p class="hint pb-2 d-block" slot="hint">Unsure of the postcode? Check with the <a href="https://www.royalmail.com/find-a-postcode" target="_blank"><i class="fa-regular fa-arrow-up-right-from-square"></i>Royal Mail address finder</a></p>
@@ -1786,6 +1792,36 @@ class iamSTDAddressLookup extends HTMLElement {
           this.dispatchEvent(updateEvent);
         }
       });
+    }
+  }
+
+  static get observedAttributes(): any {
+    return ['data-auth','data-amz-date','data-token'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
+
+    const addressComponent = this.querySelector('iam-address-lookup');
+
+    switch (attrName) {
+      case 'data-auth': {
+        if (oldVal != newVal) {
+          addressComponent.setAttribute('data-auth', newVal);
+        }
+        break;
+      }
+      case 'data-amz-date': {
+        if (oldVal != newVal) {
+          addressComponent.setAttribute('data-amz-date', newVal);
+        }
+        break;
+      }
+      case 'data-token': {
+        if (oldVal != newVal) {
+          addressComponent.setAttribute('data-token', newVal);
+        }
+        break;
+      }
     }
   }
 }
