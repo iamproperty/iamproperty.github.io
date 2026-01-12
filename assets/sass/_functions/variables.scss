@@ -148,25 +148,6 @@ $font-sizes: (
   6: $h6-font-size,
 ) !default;
 
-$heading-weight: 700;
-
-$headings-font-family: var(--font-heading);
-$headings-font-weight: var(--heading-weight);
-$headings-color: var(--colour-heading);
-
-$headings-margin-bottom: 0;
-$headings-font-style: normal;
-$headings-line-height: 2rem;
-$display-line-height: $headings-line-height;
-
-$vars: map.merge(
-  (
-    --heading-weight: $heading-weight,
-  ),
-  $vars
-);
-
-
 // #endregion
 
 // #region Buttons
