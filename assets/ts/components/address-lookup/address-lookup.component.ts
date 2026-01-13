@@ -314,11 +314,6 @@ class iamAddressLookup extends HTMLElement {
           signal: signal,
           method: 'get',
           headers: new Headers({
-            'Access-Control-Allow-Origin' : 'https://8mzh15wnrc.execute-api.eu-west-2.amazonaws.com/dev',
-            'Access-Control-Allow-Headers':'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-            'Access-Control-Allow-Credentials' : true,
-            'Access-Control-Allow-Methods': 'DELETE,GET,HEAD,OPTIONS,PATCH,POST,PUT',
-            'Content-Type': 'application/json',
             'Authorization': this.getAttribute('data-auth'),
             'X-Amz-Security-Token': this.getAttribute('data-token'),
             'X-Amz-Date': this.getAttribute('data-amz-date')

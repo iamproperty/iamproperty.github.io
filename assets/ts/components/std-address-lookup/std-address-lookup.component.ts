@@ -1544,8 +1544,6 @@ class iamSTDAddressLookup extends HTMLElement {
     */
   }
 
-
-
   connectedCallback(): void {
 
     if (!window.customElements.get(`iam-address-lookup`)) window.customElements.define(`iam-address-lookup`, iamAddressLookup);
@@ -1554,7 +1552,6 @@ class iamSTDAddressLookup extends HTMLElement {
     this.innerHTML = `<iam-address-lookup 
     class="${this.getAttribute('class')}" 
     ${this.hasAttribute('data-url') ? `data-url='${this.getAttribute('data-url')}?search_string='` : `data-url='/standardaddress.json?search_query='`}
-    data-url="https://dev.als.iamproperty.group?search_string=" 
     data-postcode="true" 
     data-min-chars="5" 
     ${this.hasAttribute('data-title') ? `data-title='${this.getAttribute('data-title')}'` : `data-title='Find an address by postcode'`}
@@ -1796,28 +1793,37 @@ class iamSTDAddressLookup extends HTMLElement {
   }
 
   static get observedAttributes(): any {
-    return ['data-auth','data-amz-date','data-token'];
+    return ['data-url','data-auth','data-amz-date','data-token'];
   }
 
   attributeChangedCallback(attrName, oldVal, newVal): void {
 
     const addressComponent = this.querySelector('iam-address-lookup');
 
+    console.log(this.querySelector('iam-address-lookup'));
+
+
     switch (attrName) {
+      case 'data-url': {
+        if (oldVal != newVal && addressComponent) {
+          addressComponent.setAttribute('data-url', newVal + '?search_string=');
+        }
+        break;
+      }
       case 'data-auth': {
-        if (oldVal != newVal) {
+        if (oldVal != newVal && addressComponent) {
           addressComponent.setAttribute('data-auth', newVal);
         }
         break;
       }
       case 'data-amz-date': {
-        if (oldVal != newVal) {
+        if (oldVal != newVal && addressComponent) {
           addressComponent.setAttribute('data-amz-date', newVal);
         }
         break;
       }
       case 'data-token': {
-        if (oldVal != newVal) {
+        if (oldVal != newVal && addressComponent) {
           addressComponent.setAttribute('data-token', newVal);
         }
         break;
