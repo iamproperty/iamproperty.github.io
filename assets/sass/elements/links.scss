@@ -223,7 +223,7 @@ iam-collapsible-side {
     }
 
     @include media-breakpoint-up(md) {
-      padding-left: var(--container-padding-x-md);
+      padding-left: var(--container-padding-x);
     }
   }
 
@@ -262,7 +262,7 @@ iam-collapsible-side [class*='link'] {
   }
 
   @include media-breakpoint-up(md) {
-    padding-left: var(--container-padding-x-md) !important;
+    padding-left: var(--container-padding-x) !important;
   }
 }
 

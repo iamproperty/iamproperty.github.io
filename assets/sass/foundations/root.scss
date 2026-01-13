@@ -206,8 +206,16 @@
     --h2-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 5)), 0.25rem);
     --h3-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 3)), 0.25rem);
     --h4-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 2)), 0.25rem);
-    --heading-lh: round(calc(1em * var(--type-scale)), 0.25rem);
-    --heading-pb: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h1-lh: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h1-pb: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h2-lh: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h2-pb: round(calc(1em * var(--type-scale)), 0.25rem);
+
+    --h3-lh: round(up, calc(1em * var(--type-scale)), 0.25rem);
+    --h3-pb: round(up, calc(1em * var(--type-scale)), 0.25rem);
+
+    --h4-lh: round(up, calc(1em * var(--type-scale)), 0.25rem);
+    --h4-pb: round(up, calc(1em * var(--type-scale)), 0.25rem);
     // #endregion
     // #region rounded borders
     --border-radius-sm: 0.25rem;
@@ -291,10 +299,9 @@
         --container-max-width: #{rem(1920)} !important;
         --max-width: #{rem(1920)} !important;
         --padding-inline: #{rem(56)} !important;
-        --container-padding-x-md: #{rem(56)} !important;
-        --container-padding-md: var(--container-padding-top) var(--container-padding-x-md)
-          var(--container-padding-bottom) var(--container-padding-x-md);
-        --container-padding: var(--container-padding-md);
+        --container-padding-x: #{rem(56)} !important;
+        --container-padding: var(--container-padding-top) var(--container-padding-x)
+          var(--container-padding-bottom) var(--container-padding-x);
         --gutter: 3.5rem;
       }
     }

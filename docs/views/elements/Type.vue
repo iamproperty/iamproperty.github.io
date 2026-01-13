@@ -25,6 +25,7 @@
   };
 
   const roundNearQtr = (number) => { return (Math.round(number * 4) / 4).toFixed(2); };
+  const roundNearQtrUp = (number) => { return (Math.ceil(number * 4) / 4).toFixed(2); };
 
   const maxWidth = window.getComputedStyle(document.querySelector('body')).getPropertyValue('--content-max-width');
   const maxWidth_px = parseInt(maxWidth) * 16;
@@ -50,17 +51,17 @@
   const h3_fs = parseFloat(body_fs) * roundNearQtr(Math.pow(1.2,3)) +'rem' ;
   const h3_fs_px = parseFloat(h3_fs) * 16;
 
-  const h3_lh = parseFloat(roundNearQtr(parseFloat(h3_fs) * 1.2)) +'rem';
+  const h3_lh = parseFloat(roundNearQtrUp(parseFloat(h3_fs) * 1.2)) +'rem';
   const h3_lh_px = parseFloat(h3_lh) * 16;
-  const h3_pb = parseFloat(roundNearQtr(parseFloat(h3_fs) * 1.2)) +'rem';
+  const h3_pb = parseFloat(roundNearQtrUp(parseFloat(h3_fs) * 1.2)) +'rem';
   const h3_pb_px = parseFloat(h3_pb) * 16;
 
   const h4_fs = parseFloat(body_fs) * roundNearQtr(Math.pow(1.2,2)) +'rem' ;
   const h4_fs_px = parseFloat(h4_fs) * 16;
 
-  const h4_lh = parseFloat(roundNearQtr(parseFloat(h4_fs) * 1.2)) +'rem';
+  const h4_lh = parseFloat(roundNearQtrUp(parseFloat(h4_fs) * 1.2)) +'rem';
   const h4_lh_px = parseFloat(h4_lh) * 16;
-  const h4_pb = parseFloat(roundNearQtr(parseFloat(h4_fs) * 1.2)) +'rem';
+  const h4_pb = parseFloat(roundNearQtrUp(parseFloat(h4_fs) * 1.2)) +'rem';
   const h4_pb_px = parseFloat(h4_pb) * 16;
 
 
@@ -177,7 +178,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, labore et dolore magna aliqua. Ut enim ad minim
                 veniam, nisi ut aliquip ex ea commodo consequat.<span
                   class="lineheight-demo"
-                  :style="`height:1.75rem!important`"
+                  :style="`height:3rem!important`"
                 ></span>
               </p>
             </div>
