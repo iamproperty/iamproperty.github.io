@@ -18,7 +18,7 @@
     text-transform: none;
     margin: 0; // 1
     font-family: inherit;
-    @include font-size(inherit);
+    font-size: inherit;
     line-height: inherit;
   }
 

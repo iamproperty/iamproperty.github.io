@@ -23,7 +23,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   textarea {
     margin: 0; // 1
     font-family: inherit;
-    @include font-size(inherit);
+    font-size: inherit;
     line-height: inherit;
   }
 

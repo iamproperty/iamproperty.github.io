@@ -489,19 +489,8 @@
   }
 }
 
-@mixin font-size($value) {
-  $found: false;
 
-  @each $size, $subvalue in $font-sizes {
-    @if ($value == $subvalue and $found == false) {
-      font-size: var(--fs-#{$size});
-      $found: true;
-    }
-  }
-  @if $found == false {
-    font-size: $value;
-  }
-}
+
 
 @mixin is($selector, $before: '', $after: '') {
   #{$before}:is(#{$selector})#{$after} {

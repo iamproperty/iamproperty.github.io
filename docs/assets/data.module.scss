@@ -93,14 +93,6 @@
   }
 
 
-
-  ut_mh_sm_px: $ut-mh-sm-px;
-  ut_mh_sm: $ut-mh-sm;
-  ut_mh_md_px: $ut-mh-md-px;
-  ut_mh_md: $ut-mh-md;
-  ut_mh_lg_px: $ut-mh-lg-px;
-  ut_mh_lg: $ut-mh-lg;
-
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};
   }
