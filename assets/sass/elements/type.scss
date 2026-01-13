@@ -23,8 +23,8 @@
     font-style: normal;
     font-weight: bold;
 
-    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
+    line-height: var(--heading-lh);
+    padding-bottom: var(--heading-pb);
     color: var(--colour-heading);
     clear: both;
     display: block;
@@ -39,58 +39,52 @@
   }
 
   :is(.h1, h1) {
-    font-size: map.get($heading-sizes, 'h1_fs');
+    font-size: var(--h1-fs);
     font-weight: 900;
   }
 
   :is(h2, .h2) {
-    font-size: map.get($heading-sizes, 'h2_fs');
+    font-size: var(--h2-fs);
     font-weight: 900;
   }
 
   :is(h3, .h3) {
-    font-size: map.get($heading-sizes, 'h3_fs');
+    font-size: var(--h3-fs);
     max-width: var(--content-max-width);
-
-    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
   }
 
   :is(.h4, h4, .h5, h5, .h6, h6) {
-    font-size: map.get($heading-sizes, 'h4_fs');
+    font-size: var(--h4-fs);
     max-width: var(--content-max-width);
-
-    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
   }
   // #endregion
 
   p {
     margin-top: 0;
-    font-size: rem(map.get($heading-sizes, 'body_fs'));
-    line-height: rem(map.get($heading-sizes, 'body_lh'));
-    padding-bottom: rem(map.get($heading-sizes, 'body_end_pb'));
+    font-size: var(--body-fs);
+    line-height: rem(24);
+    padding-bottom: rem(24);
     max-width: var(--content-max-width);
     margin-bottom: 0;
   }
 
   p:has(+ p) {
-    padding-bottom: rem(map.get($heading-sizes, 'body_pb'));
+    padding-bottom: rem(48);
   }
 
   :is(.lead, .strapline) {
-    font-size: rem(map.get($heading-sizes, 'lead_fs'));
-    line-height: rem(map.get($heading-sizes, 'lead_lh'));
-    padding-bottom: rem(map.get($heading-sizes, 'lead_pb'));
+    font-size: rem(18);
+    line-height: rem(28);
+    padding-bottom: rem(48);
     max-width: var(--content-max-width);
     font-weight: 700;
   }
 
   small,
   .small {
-    font-size: rem(map.get($heading-sizes, 'small_fs'));
-    line-height: rem(map.get($heading-sizes, 'small_lh'));
-    padding-bottom: rem(map.get($heading-sizes, 'small_pb'));
+    font-size: rem(14);
+    line-height: rem(24);
+    padding-bottom: rem(48);
     max-width: var(--content-max-width);
     font-weight: normal;
   }

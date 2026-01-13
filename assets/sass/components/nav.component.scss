@@ -589,8 +589,8 @@
     font-weight: var(--heading-weight);
     color: var(--colour-heading);
     clear: both;
-    font-size: map.get($heading-sizes, 'h3_fs');
-    line-height: map.get($heading-sizes, 'h3_lh');
+    font-size: var(--h3-fs);
+    line-height: var(--heading-lh);
     max-width: var(--content-max-width);
 
     @include media-breakpoint-up(sm) {

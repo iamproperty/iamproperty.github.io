@@ -84,14 +84,6 @@
 // Export the SCSS vars
 :export {
   // Headings
-  @each $var, $value in $heading-sizes {
-    #{$var}: #{$value};
-  }
-
-  @each $var, $value in $heading-sizes {
-    #{$var}_rem: #{rem($value)};
-  }
-
 
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};
@@ -126,3 +118,4 @@
     -ut-mixin-#{$key}: #{$details};
   }
 }
+
