@@ -78,35 +78,30 @@
         ></progress
       ></label>
 
-      <h3>Example with alternative text</h3>
-      <label data-percent="70"
-        ><strong>120</strong> Properties<progress
-          max="100"
-          value="70"
-          class="progress--circular"
-          style="--progress: 70%"
-        ></progress
-      ></label>
-    </div>
+      <div class="container mt-3">
+        <h3>Example with alternative text</h3>
+        <label data-percent="70"
+          ><strong>120</strong> Properties<progress
+            max="100"
+            value="70"
+            class="progress--circular"
+            style="--progress: 70%"
+          ></progress
+        ></label>
 
-    <div class="container">
-
-
-
-      <hr />
-
-
-      <div class="row">
-        <div class="col-md-4 text-center">
-          <label class="mb-2" data-percent="70"
-            >Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress
-          ></label>
-          <span class="label"><i class="fa-solid fa-circle-up text-complete"></i> 4% vs previous 30 days</span>
-        </div>
+      </div>
+      <div class="container mt-3">
+        <h3>Example with additional explainer text</h3>
+                  <label class="mb-2" data-percent="70"
+              >Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress
+            ></label>
+            <span class="label"><i class="fa-solid fa-circle-up text-complete"></i> 4% vs previous 30 days</span>
       </div>
     </div>
 
-    <div class="container">
+
+
+    <div class="container mt-3">
       <h2>Change colours</h2>
 
       <label data-percent="10"
@@ -125,7 +120,7 @@
         >Lorem Ipsum is simply dummy<progress max="100" value="100" class="colour-complete"></progress
       ></label>
     </div>
-    <div class="container">
+    <div class="container mt-3">
       <h2>Add a tooltip</h2>
 
       <div class="mw-content">
@@ -147,7 +142,7 @@
       </div>
     </div>
 
-    <div class="container">
+    <div class="container mt-3">
       <h2>Card examples</h2>
 
       <div class="row">
@@ -270,13 +265,11 @@
 
         <template #criteria>
         <ul>
-          <li>A button should appear alongside the input field</li>
-          <li>By default, the button should have the eye icon with a slash through it (or alternative icon set).</li>
-          <li>By default, any text entered into the input should be obfuscated</li>
-          <li>Clicking the button for the first time should show the text entered into the input.</li>
-          <li>Clicking the button for the first time should change the icon.</li>
-          <li>Clicking the button a second time, should revert the state to default.</li>
-
+          <li>A progress bar should appear either horizontally or as a circle with the correct amount filled</li>
+          <li>The colour of the completed progress should change when a colour class is added.</li>
+          <li>For the horizontal progress bar, if a data-percent attribute is added, the percentage will show at the upper-right of the bar.</li>
+          <li>For the horizontal progress bar with the 'progress--inline' class added, if a data-percent attribute is added, the percentage will show to the right of the bar.</li>
+          <li>For the circular progress bar, if a data-percent attribute is added, the percentage will show in the centre of the circle.</li>
         </ul>
       </template>
     </Integration>
