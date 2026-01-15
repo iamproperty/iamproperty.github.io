@@ -136,7 +136,7 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
       --bar-gap: 0;
     }
   }
-  @container (max-width: 63em) {
+  @container (max-width: 62em) {
     :has(tr:nth-child(10)) {
       --bar-gap: 0;
     }

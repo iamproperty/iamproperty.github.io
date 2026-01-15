@@ -2,7 +2,7 @@
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
 
-@include margins();
+@use '../utilities/margins' as *;
 
 :host {
   container-type: inline-size;
@@ -16,7 +16,7 @@
 .pagination {
   display: block;
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     display: flex;
     align-items: center;
     justify-content: space-between !important;
@@ -72,7 +72,7 @@
     display: flex !important;
   }
 }
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   :host([data-page-jump]) {
     .page-jump {
       display: flex !important;
@@ -80,14 +80,14 @@
   }
 }
 
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   :host([data-per-page]:not([data-page-jump][data-item-count])) {
     .per-page {
       display: flex !important;
     }
   }
 }
-@include container-up(md) {
+@media screen and (min-width: 62em) {
   :host([data-per-page][data-page-jump][data-item-count]) {
     .per-page {
       display: flex !important;
@@ -104,7 +104,7 @@
   margin-inline: auto;
 }
 
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   .pagination > .item-count {
     display: none;
   }
@@ -129,7 +129,7 @@
   padding-inline: 1rem;
   color: var(--colour-body);
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     display: inline-block;
   }
 
@@ -163,7 +163,7 @@
   .pagination {
     justify-content: flex-end;
 
-    @include container-up(sm) {
+    @media screen and (min-width: 36em) {
       justify-content: space-between;
     }
   }
@@ -204,7 +204,7 @@
   }
 }
 
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   .mobile-controls {
     display: none !important;
   }

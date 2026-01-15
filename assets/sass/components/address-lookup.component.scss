@@ -5,12 +5,7 @@
 @use '../elements/buttons.scss' as *;
 @use '../elements/links.scss' as *;
 
-
-
-@layer utilities {
-
-  @include margins();
-}
+@use '../utilities/margins.scss' as *;
 
 .bg-light {
   background-color: var(--colour-light);

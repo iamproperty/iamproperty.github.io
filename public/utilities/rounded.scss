@@ -1,0 +1,57 @@
+@layer utilities {
+  .rounded {
+    border-radius: var(--border-radius) !important;
+  }
+
+  .rounded-0 {
+    border-radius: 0 !important;
+  }
+
+  .rounded-1 {
+    border-radius: var(--border-radius-sm) !important;
+  }
+
+  .rounded-2 {
+    border-radius: var(--border-radius) !important;
+  }
+
+  .rounded-3 {
+    border-radius: var(--border-radius-lg) !important;
+  }
+
+  .rounded-4 {
+    border-radius: var(--border-radius-xl) !important;
+  }
+
+  .rounded-5 {
+    border-radius: var(--border-radius-2xl) !important;
+  }
+
+  .rounded-circle {
+    border-radius: 50% !important;
+  }
+
+  .rounded-pill {
+    border-radius: var(--border-radius-pill) !important;
+  }
+
+  .rounded-top {
+    border-top-left-radius: var(--border-radius) !important;
+    border-top-right-radius: var(--border-radius) !important;
+  }
+
+  .rounded-end {
+    border-top-right-radius: var(--border-radius) !important;
+    border-bottom-right-radius: var(--border-radius) !important;
+  }
+
+  .rounded-bottom {
+    border-bottom-right-radius: var(--border-radius) !important;
+    border-bottom-left-radius: var(--border-radius) !important;
+  }
+
+  .rounded-start {
+    border-bottom-left-radius: var(--border-radius) !important;
+    border-top-left-radius: var(--border-radius) !important;
+  }
+}

@@ -101,7 +101,7 @@ class iamActionbar extends HTMLElement {
       </div>
 
       <div class="actionbar--search">
-        <button data-search class="btn btn-compact fa-xmark-large btn-secondary m-0" >Close</button>
+        <button data-search class="btn btn-compact fa-xmark-large btn-secondary mb-0" >Close</button>
 
         <div class="search-wrapper" part="search">
           <label for="search" class="visually-hidden">Input field label</label>

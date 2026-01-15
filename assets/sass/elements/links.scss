@@ -99,7 +99,8 @@
     }
   }
 
-  @include inline-text() {
+  :where(p, ul, ol, dd, .body),
+  table:not(.table--email) td {
     a:not(.btn):not(.link) {
       min-height: none;
       display: inline;

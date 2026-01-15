@@ -134,8 +134,58 @@
     textarea,
     output
   ) {
-    @include input();
+    display: block;
+    width: 100%;
+    display: block;
+    width: 100%;
+    padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
+    font-size: var(--input-fs, #{rem(16)});
+    line-height: var(--input-lh, #{rem(20)});
+    color: var(--colour-heading);
+    background-color: var(--colour-canvas-2);
+    background-clip: padding-box;
+    border: 2px solid var(--colour-primary);
+    appearance: none; // Fix appearance for date inputs in Safari
+    border-radius: rem(8);
+    margin-bottom: rem(24);
+    min-height: calc(
+      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+        4px
+    );
+    max-height: calc(
+      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+        4px
+    );
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    &:is(:focus, .focus):not(:disabled) {
+      border-color: var(--colour-info);
+      outline: 0;
+    }
+
+    &:is(:focus, .focus):not(:disabled):not(:invalid) {
+      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+    }
+    // Add some height to date inputs on iOS
+    // https://github.com/twbs/bootstrap/issues/23307
+    // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
+    &::-webkit-date-and-time-value {
+      // Multiply line-height by 1em if it has no unit
+      height: if(math.unit(1.5) == '', 1.5 * 1em, 1.5);
+    }
+
+    // Disabled inputs
+    &:disabled {
+      background-color: #ccd6d8;
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
   }
+
+  textarea {
+    max-height: 100%;
+  }
+
 
   input[type='color'] {
 

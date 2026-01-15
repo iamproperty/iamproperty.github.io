@@ -1,6 +1,6 @@
 @use '../_func.scss' as *;
 
-@include max-height();
+@use '../utilities/max-height' as *;
 
 
 
