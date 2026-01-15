@@ -33,7 +33,7 @@ slot[name='selectall'] {
   transform: translate(0, -50%);
   z-index: 10;
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     left: rem(32);
   }
 
@@ -51,7 +51,7 @@ slot[name='selectall'] {
     height: rem(40);
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     width: auto;
     overflow: visible;
   }
@@ -402,7 +402,7 @@ slot[name="filters"]{
   
   display: none;
   
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     display: contents;
   }
 }

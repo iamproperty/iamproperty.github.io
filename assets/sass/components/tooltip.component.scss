@@ -74,11 +74,11 @@
       color: inherit;
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       max-width: #{rem(335)};
     }
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       max-width: #{rem(360)};
     }
 

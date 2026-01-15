@@ -291,13 +291,13 @@
         <p>HEX code: <span v-html="getVar('--colour-primary')"></span></p>
       </div>
       <div class="colour-sample">
-        <div class="colour border" :style="`background:${$shared.cssVars.nonThemeColour_inverted}!important`"></div>
+        <div class="colour border bg-white" ></div>
         <span class="lead pb-2">Inverted text colour</span><br />
         <span>CSS Variable: --colour-white</span><br />
         <p>HEX code: <span v-html="getVar('--colour-white')"></span></p>
       </div>
       <div class="colour-sample">
-        <div class="colour" :style="`background:${$shared.cssVars.nonThemeColour_body}!important`"></div>
+        <div class="colour " :style="`background:#595959!important`"></div>
         <span class="lead pb-2">Paragraph body text colour</span><br />
         <span>CSS Variable: --colour-body</span><br />
         <p>HEX code: <span v-html="getVar('--colour-body')"></span></p>

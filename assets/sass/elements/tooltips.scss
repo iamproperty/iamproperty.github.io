@@ -21,11 +21,11 @@
     color: inherit;
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     width: #{rem(335)};
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     width: #{rem(360)};
   }
 
@@ -112,7 +112,7 @@
       }
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       &:is(.shift--left, .shift--right) span {
         transform: translate(50%, 0);
 

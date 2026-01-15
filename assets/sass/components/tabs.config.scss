@@ -196,7 +196,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     display: none;
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     flex-direction: row;
   }
 
@@ -227,7 +227,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
       display: none;
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       margin: 0;
 
       &:not(:first-child) {
@@ -242,7 +242,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 }
 
 // #endregion
-@include media-breakpoint-up(sm) {
+@media screen and (min-width: 36em) {
   :host(.tabs--inline) .tabs__links {
     margin: 0;
     justify-content: center;

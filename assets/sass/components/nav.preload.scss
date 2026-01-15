@@ -26,7 +26,7 @@
       min-width: min(var(--svg-width), 14rem);
     }
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       padding-inline: max(
         var(--padding-inline),
         calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
@@ -44,7 +44,7 @@
         display: none;
       }
 
-      @include media-breakpoint-up(md) {
+      @media screen and (min-width: 62em) {
         &:has([slot='secondary']) {
           padding-top: rem(64);
         }

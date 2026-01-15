@@ -46,7 +46,7 @@
       padding-bottom: rem(42);
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       --inline-padding: #{rem(14)};
       --block-padding: #{rem(14)};
       --icon-top: #{rem(24)};
@@ -189,7 +189,7 @@
       overflow: hidden;
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       --dialog-padding: #{rem(32)};
       
     margin-inline: calc(var(--dialog-padding) * -1);

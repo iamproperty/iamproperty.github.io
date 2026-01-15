@@ -3,12 +3,16 @@
 @charset "UTF-8";
 
 // Set mobile only variable so that the media query mixin doesn't print out non mobile rules
-@use '_func' as *;
+@use '_functions/bs_functions' as *;
+@use '_functions/bs_variables' as *;
+@use '_functions/bs_mixins' as *;
+@use '_functions/utility-mixins' as *;
+
 
 @use '_corefiles';
 @use '_grid';
 @use '_bs_grid';
-@use '_utilities';
+@use '_bs_utilities';
 @use '_utility-mixins';
 
 @layer reset {

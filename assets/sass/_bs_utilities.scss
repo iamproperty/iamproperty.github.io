@@ -1,12 +1,12 @@
 @use 'sass:math';
 @use 'sass:map';
 @use 'sass:meta';
-@use '_func' as *;
+@use '_functions/bs_functions' as *;
 
+@use '_functions/bs_mixins' as *;
+@use '_functions/utility-mixins' as *;
 
-
-
-@forward '_functions/variables_old' show $utilities;
+@use '_functions/bs_variables' as *;
 @use '_functions/bs_utilities' as *;
 
 @layer utilities {

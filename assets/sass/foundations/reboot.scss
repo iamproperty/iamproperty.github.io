@@ -66,14 +66,14 @@
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-    font-size: vw($device-xs-width);
+    font-size: vw(375);
     scroll-padding-top: rem(100);
 
-    @include media-breakpoint-up(sm) {
-      font-size: vw($device-sm-width);
+    @media screen and (min-width: 36em) {
+      font-size: vw(768);
     }
-    @include media-breakpoint-up(md) {
-      font-size: vw($device-md-width);
+    @media screen and (min-width: 62em) {
+      font-size: vw(1280);
     }
 
     
@@ -114,8 +114,8 @@
 
   body {
     margin: 0; // 1
-    @include var(background, --colour-canvas);
-    @include var(font-family, --font-body);
+    background: var(--colour-canvas);
+    font-family: var(--font-body);
 
     width: 100%;
     line-height: 1.2;

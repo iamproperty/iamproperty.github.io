@@ -52,7 +52,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
   }
 
 
-@include media-breakpoint-up(md) {
+@media screen and (min-width: 62em) {
   iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
     > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
       color-scheme: dark;
@@ -124,7 +124,7 @@ nav:has(iam-nav) {
   }
 }
 
-@include media-breakpoint-up(md) {
+@media screen and (min-width: 62em) {
   nav:has(iam-nav a[slot='secondary']) {
     min-height: #{rem(96 + 40)};
   }
@@ -168,7 +168,7 @@ nav:has(iam-nav.nav--sticky) {
   }
 }
 
-@include media-breakpoint-up(sm) {
+@media screen and (min-width: 36em) {
   body:has(iam-nav.open:not(.nav--sticky)) {
     max-height: 100vh;
     overflow: hidden;
@@ -476,7 +476,7 @@ iam-nav details {
 // #endregion
 
 // #region Desktop mega menu
-@include media-breakpoint-up(md) {
+@media screen and (min-width: 62em) {
   iam-nav > details,
   iam-nav *:not(.nav--menu) > details {
     width: auto;
@@ -705,7 +705,7 @@ iam-nav details {
 // #endregion
 
 // #region Search
-@include media-breakpoint-up(md) {
+@media screen and (min-width: 62em) {
   iam-nav {
     &.search-open {
       > *:not([slot='logo']):not([slot='secondary']):not([slot='search']) {
@@ -717,7 +717,7 @@ iam-nav details {
 // #endregion
 
 // #region Dual navbar in desktop
-@include media-breakpoint-up(md) {
+@media screen and (min-width: 62em) {
   iam-nav:has([slot='dual']) {
     .brand:has(~ [slot='dual']) {
       margin-right: rem(24) !important;
