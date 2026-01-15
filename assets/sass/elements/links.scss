@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // #region reset
   a {
     color: var(--link-color);
@@ -56,7 +56,7 @@ $darkMode: 'true' !default;
     line-height: rem(24);
     min-height: rem(24);
     position: relative;
-    font-weight: 500;
+    font-weight: bold;
 
     &:not(.text-decoration-none) {
       &:after {
@@ -69,6 +69,12 @@ $darkMode: 'true' !default;
         transform: translate(-50%, 0);
         background: var(--colour-underline);
         transition: width 0.5s;
+      }
+    }
+
+    &:not(.text-decoration-none).text-underline-plain {
+      &:after {
+        background: currentColor;
       }
     }
 
@@ -94,7 +100,7 @@ $darkMode: 'true' !default;
   }
 
   @include inline-text() {
-    a:not(.btn) {
+    a:not(.btn):not(.link) {
       min-height: none;
       display: inline;
       margin: 0;
@@ -314,7 +320,7 @@ iam-collapsible-side {
       li:first-of-type {
         a::before {
           content: '\f056';
-          font-weight: 500;
+          font-weight: bold;
         }
       }
 

@@ -1,11 +1,11 @@
 @use 'sass:map';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   details {
     display: block;
 
@@ -165,15 +165,13 @@ $darkMode: 'true' !default;
         font-family: 'Font Awesome 6 Pro';
       }
 
-      @include media-breakpoint-up(sm, $mobileOnly) {
-        font-weight: 900;
-      }
+
     }
 
     &[open] summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6)) {
       &:after {
         content: '\f056';
-        font-weight: 900;
+        
       }
     }
   }
@@ -182,12 +180,20 @@ $darkMode: 'true' !default;
     --inline-padding: var(--dialog-padding);
 
     margin-inline: calc(var(--dialog-padding) * -1);
+    padding-inline: var(--dialog-padding);
     width: calc(100% + var(--dialog-padding) + var(--dialog-padding));
 
     &:has(summary:is(:hover, :focus-visible)),
     &[open] {
       background: var(--colour-light);
       overflow: hidden;
+    }
+
+    @include media-breakpoint-up(sm) {
+      --dialog-padding: #{rem(32)};
+      
+    margin-inline: calc(var(--dialog-padding) * -1);
+    padding-inline: var(--dialog-padding);
     }
 
     // Fix the border bottom issue
@@ -213,7 +219,6 @@ $darkMode: 'true' !default;
       --inline-padding: 0;
     }
 
-    padding-inline: var(--dialog-padding);
 
     &::before {
       content: '';

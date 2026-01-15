@@ -10,6 +10,7 @@ import {
   loadAjaxTable,
   paginateTable,
 } from '../../modules/table';
+import iamMenu from '../menu/menu.component';
 
 class iamTableBasic extends HTMLElement {
   constructor() {
@@ -59,15 +60,7 @@ class iamTableBasic extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    if (!window.customElements.get(`iam-menu`)) {
-      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
-        .then((module) => {
-          window.customElements.define(`iam-menu`, module.default);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
+    if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
 
     moveAttributesToComponents(this);
 

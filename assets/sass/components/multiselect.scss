@@ -3,6 +3,8 @@
 
 @use '../elements/forms.scss' as *;
 @use '../elements/admin-panel.scss' as *;
+@use '../elements/buttons.scss' as *;
+@use '../elements/buttons--action.scss' as *;
 
 
 *, *::before, *::after {
@@ -124,10 +126,8 @@ label {
 
 button {
   position: absolute;
-  top: 0.75rem;
   right: 0.5rem;
   border: none;
-  background: none;
   padding-inline: 0.5rem;
   display: var(--display-button, none);
 

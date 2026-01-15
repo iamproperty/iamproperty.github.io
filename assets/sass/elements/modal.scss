@@ -1,21 +1,38 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // #region modal styling
 
-  *:not(.dialog__wrapper) > dialog[open] {
-    overflow-y: hidden;
+  *:not(.dialog__wrapper) > dialog[open] { // change this selector to be a dialog without a popover attribute
+    
+
+    &:has(.mh-lg){
+      overflow-y: hidden!important;
+    }
     width: 90vw;
     max-width: rem(324); // col-width*4
 
     //height: 90vh;
     max-height: min(90vh, #{rem(752)});
     overscroll-behavior: contain;
+
+    @include media-breakpoint-up(sm) {
+      --dialog-padding: #{rem(32)};
+      min-width: rem(335);
+      width: fit-content;
+      max-width: rem(686);
+    }
+
+    @include media-breakpoint-up(md) {
+      min-width: rem(454);
+      width: fit-content;
+      max-width: rem(736);
+    }
 
     // Close button
     > form:first-child {
@@ -83,19 +100,6 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      --dialog-padding: #{rem(32)};
-      min-width: rem(335);
-      width: fit-content;
-      max-width: rem(686);
-    }
-
-    @include media-breakpoint-up(md, $mobileOnly) {
-      min-width: rem(454);
-      width: fit-content;
-      max-width: rem(736);
-    }
-
     &:has(.youtube-embed) {
       padding: 0 !important;
     }
@@ -134,12 +138,6 @@ $darkMode: 'true' !default;
       }
     }
   }
-
-  dialog::backdrop {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
-    overscroll-behavior: contain;
-  }
   // #endregion
 
   // #region Transactional
@@ -164,7 +162,7 @@ $darkMode: 'true' !default;
       color: var(--colour-heading);
       clear: both;
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @include media-breakpoint-up(md) {
         font-size: 4rem;
       }
     }
@@ -183,7 +181,7 @@ $darkMode: 'true' !default;
       color: var(--colour-heading);
       clear: both;
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @include media-breakpoint-up(md) {
         font-size: 4rem;
       }
 
@@ -214,7 +212,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       :is(button, .btn):has(~ :is(button, .btn):last-child),
       :is(button, .btn):last-child {
         min-width: calc(50% - 1rem);
@@ -233,12 +231,12 @@ $darkMode: 'true' !default;
       display: contents;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       min-width: rem(686);
       max-width: rem(686);
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       min-width: rem(736);
       max-width: rem(736);
     }
@@ -314,7 +312,7 @@ $darkMode: 'true' !default;
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       min-width: rem(452);
       width: rem(452);
       max-width: rem(452);
@@ -335,7 +333,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       min-width: rem(924);
       width: rem(924);
       max-width: rem(924);

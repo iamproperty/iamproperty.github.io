@@ -4,6 +4,7 @@ import { addColour } from '../functions.ts';
 
   import InlineEdit from '@/components/InlineEdit/InlineEdit.vue';
   import Multiselect from '@/components/Multiselect/Multiselect.vue';
+  import Menu from '@/components/Menu/Menu.vue';
   
 </script>
 <template>
@@ -12,6 +13,13 @@ import { addColour } from '../functions.ts';
 
   <div class="md-col-end-6">
     <span class="badge wider-colour-3 me-3 mb-3">Status: Opportunity</span> ID: <strong class="me-3">56930</strong> <a v-if="alert == 'add-onward'" href="/standalone/premium-conveyancing/case" target="_blank"><i class="fa-regular fa-file"></i>View related sale</a>
+    <button class="link" popovertarget="actions" style="anchor-name: --actions"><i class="fa-regular fa-clone"></i> View onward purchase <i class="fa-regular fa-chevron-down"></i></button>
+
+    <Menu id="actions" popover style="position-anchor: --actions">
+      <a href="/standalone/premium-conveyancing/case" class="btn btn-action" target="_blank">12 The Avenue, Gosforth, Newcastle Upon Tyne, NE3 5SK</a>
+      <button>12 The Avenue, Gosforth, Newcastle Upon Tyne, NE3 5SK</button>
+    </Menu>
+
   </div>
 
   <div class="md-col-start-8 text-md-end">

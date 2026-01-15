@@ -1,0 +1,92 @@
+@use '../_func.scss' as *;
+
+// #region Multi step modal
+@layer components {
+  iam-multi-step-modal {
+    
+
+    :is(.h1, .h2, .h3, .h4, .h5, .h6) {
+      padding-right: calc(var(--dialog-padding) * 3);
+      padding-bottom: var(--dialog-padding);
+    }
+
+    form {
+      overflow: auto;
+      padding-bottom: var(--dialog-padding);
+        padding-top: var(--dialog-padding);
+      max-height: calc(min(90vh, 47rem) - 6rem);
+    }
+
+    fieldset {
+      > :last-child {
+        margin-bottom: var(--dialog-padding) !important;
+      }
+
+      > p:last-child {
+        padding-bottom: 0 !important;
+        margin-bottom: var(--dialog-padding) !important;
+      }
+    }
+
+    fieldset:not(.active) {
+      display: none;
+    }
+
+    @include media-breakpoint-up(sm) {
+
+
+      .btn--wrapper {
+        margin-top: auto;
+        text-align: right;
+      }
+
+      form {
+        height: calc(100vh - 6rem);
+        padding-left: 0 !important;
+        padding-right: var(--dialog-padding) !important;
+      }
+    }
+
+    @include media-breakpoint-up(md) {
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      fieldset {
+
+        &.active {
+          
+          display: flex;
+        }
+        flex-direction: column;
+        flex-grow: 1;
+        position: relative;
+
+        overflow: auto;
+        margin-bottom: calc(var(--dialog-padding) * -1);
+        padding-right: calc(var(--dialog-padding) - 10px);
+        margin-right: calc((var(--dialog-padding) * -1) + 10px);
+
+        max-height: rem(370);
+
+        &::before {
+          content: '';
+          top: 100%;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: var(--dialog-padding);
+          min-height: var(--dialog-padding);
+          position: sticky;
+          display: block;
+          background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
+          z-index: 2;
+          margin-bottom: calc(var(--dialog-padding) * -1);
+        }
+      }
+    }
+  }
+}
+  // #endregion

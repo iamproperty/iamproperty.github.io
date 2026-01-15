@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "7.5.1--beta1",
+  "version": "7.6.1",
   "scripts": {
     "temp": "rollup --environment COMPONENT:carousel --config rollup-component.config.cjs --sourcemap",
     "reload": "vite --host",
@@ -14,7 +14,7 @@
     "prepack": "npm run build",
     "build:docs": "node local_modules/delete-build-assets.cjs && npm run compile && npm run copy && vue-tsc --noEmit && vite build",
     "preview": "vite preview --host",
-    "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/mobile-core.scss assets/css/mobile-core.min.css --style=compressed && sass assets/sass/mobile.scss assets/css/mobile.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
+    "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.cjs --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
     "compile:ts": "node node_modules/typescript/bin/tsc --project tscompileconfig.json && fix-esm-import-path assets/js",
     "compile": "npm run compile:sass && npm run compile:ts && npm run compile:js",
@@ -33,9 +33,9 @@
     "gen:email": "sass assets/sass/email.scss assets/css/email.min.css --style=compressed && node local_modules/email-css.cjs",
     "gen:error": "sass assets/sass/error.scss assets/css/error.min.css --style=compressed && node local_modules/error-css.cjs",
     "test:vue": "jest src",
+    "test:ui": "jest assets/ts/ui-tests",
     "test:unit": "jest assets/ts/tests",
-    "test:scss": "jest assets/sass/_tests",
-    "test": "npm run test:unit && npm run test:scss",
+    "test": "npm run test:unit",
     "pull-request": "npm run test && npm run lint && npm run prettier && npm run compile && npm run audit",
     "pr": "npm run pull-request",
     "deploy:fonts": "copyfiles -u 2 assets/fonts/**/* public/assets/fonts",
@@ -46,13 +46,13 @@
     "prettier": "prettier assets/ts assets/sass src docs --write"
   },
   "dependencies": {
-    "eslint": "^9.36.0",
+    "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-vue": "^10.4.0",
+    "eslint-plugin-vue": "^10.6.2",
     "globals": "^15.14.0",
     "js-cookie": "^3.0.5",
-    "prettier": "^3.6.2",
-    "typescript-eslint": "^8.44.0",
+    "prettier": "^3.7.4",
+    "typescript-eslint": "^8.47.0",
     "unplugin-vue-markdown": "^28.3.1"
   },
   "devDependencies": {

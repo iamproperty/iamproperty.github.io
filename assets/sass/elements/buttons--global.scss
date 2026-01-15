@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   *,
   *::before,
   *::after {
@@ -53,7 +53,7 @@ $darkMode: 'true' !default;
     --btn-line-height: #{rem(20)};
 
     display: inline-block;
-    font-weight: 500;
+    font-weight: bold;
     text-align: left;
     text-decoration: none;
     vertical-align: middle;
@@ -78,7 +78,7 @@ $darkMode: 'true' !default;
     appearance: none;
     white-space: nowrap;
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       --btn-margin: #{rem(24)};
     }
 
@@ -239,29 +239,27 @@ $darkMode: 'true' !default;
 
   .btn:has(select) {
     position: relative;
-    padding-right: rem(56);
-
-    &:not(.mw-100) {
-      max-width: rem(112 + 40 + 56);
-    }
+    padding: 0;
 
     select {
       all: unset !important;
-      margin: calc(rem(-12)) calc(rem(-40)) !important;
+      
       padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
-      padding-right: rem(56) !important;
-      margin-right: rem(-56) !important;
+      
+      padding-right: calc(var(--btn-padding-inline) + 2rem)!important;
+
       border-radius: rem(24) !important;
       appearance: none !important;
       background: none !important;
       border: none !important;
       color: currentColor !important;
       display: block;
-      max-width: 100% !important;
+      //max-width: 100% !important;
       outline: none;
-      font-weight: 500;
+      font-weight: bold;
       font-size: var(--btn-font-size) !important;
       line-height: var(--btn-line-height) !important;
+      field-sizing: content!important;
 
       option {
         padding: 0;
@@ -273,7 +271,7 @@ $darkMode: 'true' !default;
     &:after {
       position: absolute;
       top: rem(10);
-      right: rem(32);
+      right: 1.5rem;
 
       content: '';
       height: rem(24);

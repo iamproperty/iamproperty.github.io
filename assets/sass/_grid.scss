@@ -2,9 +2,8 @@
 @use 'sass:map';
 @use '_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
 
 // #region grid mixins
 @mixin grid-utilities($br: '') {
@@ -68,6 +67,14 @@ $darkMode: 'true' !default;
 
   .#{$br}col-start-auto {
     --col-start: auto;
+
+    &:first-child {
+      --col-start: col-1;
+    }
+  }
+  
+  hr + .#{$br}col-start-auto {
+    --col-start: col-1;
   }
 
   @for $i from 0 to $columns {
@@ -77,10 +84,18 @@ $darkMode: 'true' !default;
 
     .#{$br}col-end-#{$i + 1} {
       --col-end: col-#{$i + 1}-end;
+
+      & + .#{$br}col-start-auto:not([class*="col-span-"]) {
+        --col-start: col-#{$i + 2}-start;
+      }
     }
 
     .#{$br}col-span-#{$i + 1} {
       --col-end: span #{$i + 1};
+      
+      & + .#{$br}col-start-auto:not([class*="col-span-"]) {
+        --col-start: col-#{$i + 2}-start;
+      }
     }
   }
 }
@@ -102,7 +117,7 @@ $darkMode: 'true' !default;
 }
 // #endregion
 
-@include layer('reset', $layers) {
+@layer reset {
   // #region Main grid setup
   body {
     --excess-space: calc((100% - var(--max-width, #{$max-width})) / 2);

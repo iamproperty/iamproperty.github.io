@@ -41,7 +41,7 @@
     </div>
 
     <div class="demo visualtest">
-      <Nav class="nav--sticky bg-primary demo-open">
+      <Nav class="nav--sticky bg-primary demo-open" style="--modifier:2rem;">
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
             <title>iamproperty</title>

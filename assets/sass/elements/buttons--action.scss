@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // #region Action button
   .btn-action {
     --btn-border-width: #{rem(1)};
@@ -49,6 +49,32 @@ $darkMode: 'true' !default;
       filter: brightness(85%);
       transition: all 0.1s;
       color: var(--colour-heading);
+    }
+  }
+  // #endregion
+
+  .btn-action:not(.btn-compact).fa-compact-only:before {
+
+    display: none!important;
+  }
+
+  // #region Select as button
+  .btn-action:has(select) {
+    padding-block: 0;
+    padding-right: 2rem;
+
+  
+    select {
+      //all: unset !important;
+      margin: 0rem 0rem !important;
+      padding-right: 2rem!important;
+      margin-right: -2rem !important;
+      //field-sizing: content
+    }
+
+    &:after {
+      top: 0.2rem;
+      right: rem(8);
     }
   }
   // #endregion

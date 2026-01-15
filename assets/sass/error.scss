@@ -11,14 +11,14 @@
 @use '_utilities';
 @use '_utility-mixins';
 
-@include layer('reset') {
+@layer reset {
   html {
     --font-body: arial, sans-serif !important;
     --font-heading: arial, sans-serif !important;
   }
 }
 
-@include layer('elements') {
+@layer elements {
   .h1 {
     --line-height: #{map.get($heading-sizes, 'h1_lh')};
 
@@ -28,7 +28,7 @@
   }
 }
 
-@include layer('utilities') {
+@layer utilities {
   .gradient-primary {
     background-image: linear-gradient(
       var(--gradient-direction),

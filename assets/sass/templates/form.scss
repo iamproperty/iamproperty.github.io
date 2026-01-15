@@ -3,15 +3,13 @@
 
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('templates', $layers) {
+
+
+
+@layer templates {
   body:has(.template--form) {
-    @include light-mode($darkMode) {
-      background-color: #e9f9fd;
-    }
+    background-color: #e9f9fd;
   }
 
   .template--form {
@@ -42,9 +40,8 @@ $darkMode: 'true' !default;
       max-width: var(--content-max-width);
     }
 
-    @include light-mode($darkMode) {
-      background-color: #e9f9fd;
-    }
+    background-color: #e9f9fd;
+    
 
     .form-panel {
       display: block;
@@ -55,12 +52,12 @@ $darkMode: 'true' !default;
       outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
       width: 100%;
 
-      @include media-breakpoint-up(sm, $mobileOnly) {
+      @include media-breakpoint-up(sm) {
         max-width: calc(100% - 5rem); // Guess
         margin-inline: auto;
       }
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @include media-breakpoint-up(md) {
         max-width: rem(924); // Guess
         border-radius: 0.5rem;
         padding-inline: rem(94);
@@ -73,7 +70,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       .container--form {
         padding-inline: 0;
         max-width: rem(924) !important;

@@ -1,0 +1,53 @@
+@use '../_func' as *;
+
+
+
+
+
+@layer elements {
+  
+
+  .feature {
+
+    background-color: var(--colour-canvas-2);
+    border: 1px solid var(--colour-border);
+    border-radius: 0.5rem;
+    padding: 1rem 1rem 1rem 1rem;
+
+    strong {
+      display: block;
+      padding-bottom: 0.2em;
+    }
+  }
+
+  .feature[class*="fa-"] {
+
+    padding-left: 4rem;
+    position: relative;
+    
+    &:before {
+      position: absolute;
+      inset: 1rem;
+      content: var(--fa);
+      font-family: "Font Awesome 6 Pro";
+      display: block;
+
+      background-color: var(--colour-success);
+      border-radius: 50%;
+      padding: 0;
+      height: 2rem;
+      line-height: 2rem;
+      width: 2rem;
+      text-align: center;
+    }
+  }
+
+  .feature[class*="fa-rocket"] {
+
+    &:before {
+      
+      padding-right: 0.1rem;
+    }
+  }
+
+}

@@ -5,6 +5,7 @@
 @use 'sass:string';
 
 @use 'variables' as *;
+@use 'functions' as *;
 
 // Utility generator
 // Used to generate utilities & print utilities
@@ -193,7 +194,7 @@
       @content;
     }
   } @else if $max == null {
-    @include media-breakpoint-up($lower, 'false', $breakpoints) {
+    @include media-breakpoint-up($lower, $breakpoints) {
       @content;
     }
   } @else if $min == null {
@@ -216,7 +217,7 @@
       @content;
     }
   } @else if $max == null {
-    @include media-breakpoint-up($name, 'false', $breakpoints) {
+    @include media-breakpoint-up($name, $breakpoints) {
       @content;
     }
   } @else if $min == null {
@@ -321,7 +322,7 @@
   @each $breakpoint in map.keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint, $breakpoints);
 
-    @include media-breakpoint-up($breakpoint, 'false', $breakpoints) {
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
       // Provide basic `.col-{bp}` classes for equal-width flexbox columns
       .col#{$infix} {
         flex: 1 0 0%; // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
@@ -383,7 +384,7 @@
   @each $breakpoint in map-keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint, $breakpoints);
 
-    @include media-breakpoint-up($breakpoint, 'false', $breakpoints) {
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
       @if $columns > 0 {
         @for $i from 1 through $columns {
           .g-col#{$infix}-#{$i} {
@@ -405,46 +406,14 @@
 
 // #endregion
 
-@mixin media-breakpoint-up($name, $mobileOnly: 'false', $breakpoints: $grid-breakpoints) {
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
   @if $min {
-    @if $mobileOnly != 'true' {
-      @media screen and (min-width: $min) {
-        @content;
-      }
+    @media screen and (min-width: $min) {
+      @content;
     }
   } @else if $name == 'xs' {
     @content;
-  } @else {
-    @if $mobileOnly != 'true' {
-      @content;
-    }
-  }
-}
-
-@mixin dark-mode($darkMode) {
-  @media screen and (prefers-color-scheme: dark) {
-    @if $darkMode == 'true' {
-      @content;
-    }
-  }
-}
-
-@mixin light-mode($darkMode) {
-  @if $darkMode == 'true' {
-    @media screen and (prefers-color-scheme: light) {
-      @content;
-    }
-  } @else {
-    @content;
-  }
-}
-
-@mixin layer($name, $layers: 'true') {
-  @if $layers == 'true' {
-    @layer #{$name} {
-      @content;
-    }
   } @else {
     @content;
   }
@@ -462,9 +431,7 @@
   } @else if $name == 'xs' {
     @content;
   } @else {
-    @if $mobileOnly != 'true' {
-      @content;
-    }
+    @content;
   }
 }
 
@@ -587,4 +554,56 @@
   @media screen and (min-width: #{map.get($breakpoints,$name)}) {
     @content;
   }
+}
+@mixin input {
+  display: block;
+    width: 100%;
+    display: block;
+    width: 100%;
+    padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
+    font-size: var(--input-fs, #{rem(16)});
+    line-height: var(--input-lh, #{rem(20)});
+    color: var(--colour-heading);
+    background-color: var(--colour-canvas-2);
+    background-clip: padding-box;
+    border: 2px solid var(--colour-primary);
+    appearance: none; // Fix appearance for date inputs in Safari
+    border-radius: rem(8);
+    margin-bottom: rem(24);
+    min-height: calc(
+      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+        4px
+    );
+    max-height: calc(
+      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+        4px
+    );
+
+    &:is(textarea) {
+      max-height: 100%;
+    }
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    &:is(:focus, .focus):not(:disabled) {
+      border-color: var(--colour-info);
+      outline: 0;
+    }
+
+    &:is(:focus, .focus):not(:disabled):not(:invalid) {
+      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+    }
+    // Add some height to date inputs on iOS
+    // https://github.com/twbs/bootstrap/issues/23307
+    // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
+    &::-webkit-date-and-time-value {
+      // Multiply line-height by 1em if it has no unit
+      height: if(math.unit($input-line-height) == '', $input-line-height * 1em, $input-line-height);
+    }
+
+    // Disabled inputs
+    &:disabled {
+      background-color: #ccd6d8;
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
 }

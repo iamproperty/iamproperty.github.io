@@ -23,6 +23,10 @@ const extendDialogs = (body): void => {
         : button.getAttribute('data-filter');
       const dialog = document.querySelector(`dialog#${modalID}`);
 
+      if(document.querySelector(`iam-modal#${modalID}`)) return false;
+
+      if(document.querySelector(`iam-multi-step-modal#${modalID}`)) return false;
+
       createDialog(dialog);
 
       // Open the modal!
@@ -232,7 +236,7 @@ const extendDialogs = (body): void => {
 
 export const createDialog = (dialog): void => {
   // If you are using Vue eevents and bindings its recommended to add in the .mh-lg div manually to the dialog
-  if (!dialog.querySelector(':scope .mh-lg') && !dialog.querySelector('iam-multi-step')) {
+  if (dialog && !dialog.querySelector(':scope .mh-lg') && !dialog.querySelector('iam-multi-step')) {
     dialog.innerHTML = `<div class="mh-lg">${dialog.innerHTML}</div>`;
 
     const dialogContent = dialog.querySelector('.mh-lg');
@@ -248,7 +252,7 @@ export const createDialog = (dialog): void => {
   }
 
   // Create close button is needed
-  if (!dialog.querySelector(':scope > button:first-child'))
+  if (dialog && !dialog.querySelector(':scope > button:first-child'))
     dialog.insertAdjacentHTML('afterbegin', `<button class="dialog__close">Close</button>`);
 };
 

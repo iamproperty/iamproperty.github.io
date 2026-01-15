@@ -1,18 +1,19 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // non-js fallback
   body:not(.js-enabled) dialog:not([open]):target {
     display: block;
   }
 
   // #region Default styling of both modals
-  dialog {
+  dialog,
+  [popover] {
     --dialog-padding: #{rem(24)};
 
     --mh-padding-inline: var(--dialog-padding);
@@ -26,11 +27,6 @@ $darkMode: 'true' !default;
     border-radius: rem(10);
     padding: var(--dialog-padding);
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-  }
-
-  dialog[open] {
-    display: flex;
-    flex-direction: column;
 
     > *:last-child {
       margin-bottom: 0;
@@ -40,5 +36,51 @@ $darkMode: 'true' !default;
       padding-bottom: 0;
     }
   }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    overscroll-behavior: contain;
+  }
+
+  dialog[open],
+  [popover]:popover-open {
+    display: flex;
+    flex-direction: column;
+  }
+
+  // TODO: when the old modals are depreciated this selector can be simplified
+  *:not(.dialog__wrapper) > dialog[open],
+  *:not(.dialog__wrapper) > [popover]:popover-open {
+
+    overflow-y: auto;
+    width: 90vw;
+    max-width: rem(324); // col-width*4
+
+    //height: 90vh;
+    max-height: min(90vh, #{rem(752)});
+    overscroll-behavior: contain;
+
+    @include media-breakpoint-up(sm) {
+      //--dialog-padding: #{rem(32)};
+      //padding: var(--dialog-padding);
+      min-width: rem(335);
+      width: fit-content;
+      max-width: rem(686);
+    }
+
+    @include media-breakpoint-up(md) {
+      min-width: rem(454);
+      width: fit-content;
+      max-width: rem(736);
+    }
+
+  }
   // #endregion
+
+  details.bg-light {
+    margin-inline: calc(var(--dialog-padding) * -1);
+    padding-inline: var(--dialog-padding);
+  }
+
 }

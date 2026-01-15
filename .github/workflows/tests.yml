@@ -28,4 +28,4 @@ jobs:
       - run: npm install --force
       - run: npm run compile
       - run: npm run test:unit
-      - run: npm run test:scss
+      - run: npm run test:ui

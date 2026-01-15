@@ -1,9 +1,8 @@
 @use '_func' as *;
 
-$layers: 'false' !default;
-$mobileOnly: 'false' !default;
 
-@include layer('reset', $layers) {
+
+@layer reset {
   // Row
   //
   // Rows contain your columns.

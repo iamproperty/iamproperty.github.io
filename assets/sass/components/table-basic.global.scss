@@ -1,6 +1,6 @@
 @use '../_func.scss' as *;
 
-$darkMode: 'true' !default;
+
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
 
@@ -37,7 +37,10 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       background: var(--row-bg);
     }
   }
-
+  
+  :is(td, th) {
+    color: var(--colour-body-default);
+  }
   /*
   &[data-expandable] [data-expand-button][aria-expanded] {
     background-color: transparent;
@@ -220,7 +223,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       width: var(--cta-width);
       min-height: calc(var(--row-height) - 2px);
       text-align: right;
-      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvs-2)) 1.25rem);
+      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
       cursor: default;
       padding-bottom: 0;
 
@@ -233,7 +236,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
 
     tbody tr:hover > *:not(:first-child):last-child {
-      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvs-2)) 1.25rem);
+      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
     }
   }
 }
@@ -357,6 +360,175 @@ table {
   .alert-status:not([data-content='0']):not([data-content='']):not(:empty):after {
     content: '\f0f3';
     color: var(--colour-primary);
+  }
+}
+// #endregion
+
+// #region Tables are only stacked on mobile
+:is(#{$selector}):not(.table--fullwidth).table--cta {
+  @container (width < 23.4375em) {
+    tbody tr td:last-child {
+      display: block !important;
+    }
+  }
+}
+
+
+// #endregion
+
+// #region As part of the iam-table component
+
+:is(#{$selector}) iam-actionbar {
+  margin: 0 1.5rem 1rem 1.5rem;
+
+  @container (width < 23.4375em) {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    border-radius: 0.5rem;
+  }
+}
+:is(#{$selector}).table--fullwidth:has(iam-actionbar) {
+  padding-top: 0;
+}
+:is(#{$selector}).table--fullwidth iam-actionbar {
+  margin: -2rem -2rem 2rem -2rem;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+:is(#{$selector}).table--fullwidth iam-actionbar:has(+ table input:checked) {
+  margin: -2rem -2rem 2rem -2rem;
+  box-shadow: none;
+  border-radius: 0;
+    background-color: #e6eaec;
+}
+
+// Actionbar
+.actionbar__sticky-wrapper {
+  container-type: inline-size;
+
+  @include media-breakpoint-up(sm) {
+    padding: 0 !important;
+  }
+}
+
+@container (width < 23.4375em) {
+  :is(#{$selector}):is(.actionbar__sticky-wrapper) > .actionbar__sticky {
+    display: block;
+    position: sticky;
+    left: 0;
+    top: calc(var(--sticky-padding) + #{rem(16)});
+    z-index: var(--index-menu);
+    pointer-events: none;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: calc(100vh - #{rem(68 + 24 + 16)});
+      pointer-events: none;
+    }
+
+    & + * {
+      margin-top: calc(-100vh - -6.75rem);
+    }
+  }
+
+  :is(#{$selector}):is(.actionbar__sticky) > iam-actionbar {
+    pointer-events: all !important;
+    display: block;
+    border: none;
+    background: var(--colour-canvas-2);
+    //box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    border-radius: 0.5rem;
+    margin-bottom: rem(24);
+  }
+}
+
+@include container-up(sm) {
+  :is(#{$selector}).table--fullwidth iam-actionbar,
+  :is(#{$selector}) iam-actionbar {
+    margin-left: -2rem;
+    margin-right: -2rem;
+    margin-top: -2rem;
+    margin-bottom: 2rem;
+  }
+}
+// #endregion
+
+// #region Table with actionbar
+
+:is(#{$selector}) {
+  input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
+    padding-left: 0 !important;
+    margin: 0 !important;
+
+    &:before,
+    &:after {
+      top: 0.75rem !important;
+      left: 0.25rem !important;
+      --border-radius: 0.25rem;
+    }
+  }
+
+  &:has([type='checkbox']:checked) table{
+    overflow: hidden;
+  }
+  &:has([type='checkbox']:checked) tr:has([type='checkbox']):not(:has(.tag)) {
+    [type='checkbox'] {
+      width: 100vw;
+      height: 100%;
+      max-height: var(--row-height);
+      max-width: 100vw;
+      cursor: pointer;
+      pointer-events: all;
+      top: 0;
+      margin: 0;
+      margin-top: 0rem;
+      position: absolute;
+    }
+  }
+
+  tr:has([type='checkbox']:hover, [type='checkbox']:focus):not(:has(.tag)) {
+    --row-bg: #eeeeee;
+  }
+  tr:has([type='checkbox']:hover:checked, [type='checkbox']:focus:checked, [type='checkbox']:checked):not(:has(.tag)) {
+    --row-bg: #e0e0e0;
+  }
+}
+
+@container (width < 23.4375em) {
+  :is(#{$selector}) {
+    iam-actionbar {
+        background-color: #e6eaec;
+      
+    }
+    .actionbar__sticky + * {
+      margin-top: 0 !important;
+    }
+  }
+
+  :is(#{$selector}) {
+    input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
+      padding-left: 0 !important;
+      margin: 0 !important;
+      min-height: 2rem;
+
+      &:before,
+      &:after {
+        top: 0.25rem !important;
+        left: 0 !important;
+      }
+    }
+
+    &:has([type='checkbox']:checked) tr:has([type='checkbox']) {
+      [type='checkbox'] {
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+        max-width: 100%;
+        margin-top: -2rem;
+      }
+    }
   }
 }
 // #endregion

@@ -1,3 +1,4 @@
+import { doc } from 'prettier';
 import { zeroPad, isNumeric, ucfirst, resolvePath, uniqueID } from './helpers';
 
 // #region Helpers
@@ -102,6 +103,7 @@ export const paginateTable = (component, table, form, pagination, callback): voi
   });
 
   pagination.addEventListener('update-page', (event) => {
+    
     if (form.querySelector('[name=page]').value != event.detail.page) {
       form.querySelector('[name=page]').value = event.detail.page;
 
@@ -151,7 +153,7 @@ export const setupBasicTable = (component, table, form, pagination): void => {
   if (!component.hasAttribute('data-total'))
     component.setAttribute('data-total', component.querySelectorAll('tbody tr').length);
   if (!component.hasAttribute('data-page')) component.setAttribute('data-page', 1);
-  if (!component.hasAttribute('data-show')) component.setAttribute('data-show', 5);
+  if (!component.hasAttribute('data-show')) component.setAttribute('data-show', 15);
   if (!component.hasAttribute('data-increment'))
     component.setAttribute('data-increment', component.getAttribute('data-show'));
 
@@ -688,20 +690,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     // Before submitting check if any duplicate checkboxes within the filters dialog needs to upset the original input
     if (event.type == 'submit') {
       form.classList.add('processing');
-      Array.from(form.querySelectorAll('[data-duplicate]')).forEach((element) => {
-        const id = element.getAttribute('data-duplicate');
-        const input = document.getElementById(id);
-        const card = document.querySelector(`[for="${id}"] iam-card`);
-
-        if (input.checked != element.checked) {
-          if (card) {
-            const clickEvent = new Event('click');
-            card.dispatchEvent(clickEvent);
-          } else {
-            input.checked = element.checked;
-          }
-        }
-      });
       form.classList.remove('processing');
     }
 
@@ -719,7 +707,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     }
       */
   };
-
+  /*
   if (component.querySelector('iam-actionbar[data-search]')) {
     component.querySelector('iam-actionbar[data-search]').addEventListener('search-submit', (event) => {
       if (form.querySelector('input[data-search]')) {
@@ -757,7 +745,7 @@ export const addFilterEventListeners = (component, table, form, pagination, save
       filterTable(component, table, form, pagination);
     });
   }
-
+*/
   form.addEventListener('keyup', (event) => {
     clearTimeout(timer);
 
@@ -798,18 +786,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
 
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-show]')) {
       formSubmit(event);
-    }
-
-    if (event && event.target instanceof HTMLElement && event.target.closest('[data-mimic]')) {
-      formSubmit(event);
-    }
-
-    if (event && event.target instanceof HTMLElement && event.target.hasAttribute('id')) {
-      const id = event.target.getAttribute('id');
-
-      if (document.querySelector(`[data-duplicate="${id}"]`)) {
-        document.querySelector(`[data-duplicate="${id}"]`).checked = event.target.checked;
-      }
     }
   });
 
@@ -901,68 +877,6 @@ export const addFilterEventListeners = (component, table, form, pagination, save
     formSubmit(event, true);
   });
 
-  // Mmimic fields
-  const forms = [];
-  const fields = [];
-
-  // Collect the forms that we need to add an event listener for.
-  Array.from(form.querySelectorAll('[data-mimic]')).forEach((input) => {
-    const mimicField = input.getAttribute('data-mimic');
-
-    Array.from(document.querySelectorAll(`[name="${mimicField}"]`)).forEach((mimicInput) => {
-      const parentForm = mimicInput.closest('form');
-
-      if (!forms.includes(parentForm)) {
-        forms.push(parentForm);
-      }
-
-      if (!fields.includes(mimicField)) {
-        fields.push(mimicField);
-      }
-    });
-  });
-
-  // For each form add change listener
-  forms.forEach((parentForm) => {
-    const updateMimicInput = function (): void {
-      const mimickedAlready = [];
-      const formData = new FormData(parentForm);
-
-      let i = 1;
-      for (const [key, value] of formData) {
-        if (document.querySelector(`[data-mimic="${key}"]`) && !mimickedAlready.includes(key)) {
-          mimickedAlready.push(key);
-          document.querySelector(`[data-mimic="${key}"]`).value = value;
-        } else if (document.querySelector(`[data-mimic="${key}"]`))
-          document.querySelector(`[data-mimic="${key}"]`).value += ',' + value;
-
-        i++;
-      }
-
-      for (const value of mimickedAlready) {
-        const event = new Event('force');
-        form.dispatchEvent(event);
-      }
-
-      // Check for empties
-      for (const field of fields) {
-        if (!formData.has(field) && parentForm.querySelector(`[name="${field}"]`)) {
-          document.querySelector(`[data-mimic="${field}"]`).value = '';
-
-          const event = new Event('force');
-          form.dispatchEvent(event);
-        }
-      }
-    };
-
-    parentForm.addEventListener('force', () => {
-      updateMimicInput();
-    });
-
-    parentForm.addEventListener('change', () => {
-      updateMimicInput();
-    });
-  });
 };
 
 export const filterTable = (component, table, form, pagination): void => {
@@ -1252,9 +1166,38 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
   const actionbar = component.querySelector('iam-actionbar');
 
   form.addEventListener('submit', (event) => {
+
+    Array.from(form.querySelectorAll('[data-duplicate]')).forEach((loopElement) => {
+
+      const element = loopElement.tagName == "IAM-INPUT" ? loopElement.querySelector('input') : loopElement;
+      const id = loopElement.getAttribute('data-duplicate');
+
+      if (document.querySelector(`[id="${id}"], [name="${id}"]`)) {
+
+        document.querySelector(`[id="${id}"], [name="${id}"]`).checked = element.checked;
+      }
+    });
+
     loadAjaxTable(component, table, form, pagination);
 
     event.preventDefault();
+  });
+
+  form.addEventListener('change', (event) => {
+    
+    if(!event.target.closest('iam-modal')){
+      
+      loadAjaxTable(component, table, form, pagination);
+    }
+  });
+
+  // watch hidden fields for change events
+  Array.from(form.querySelectorAll('[type="hidden"]')).forEach((input) => {
+
+    input.addEventListener('change', (event) => {
+
+      loadAjaxTable(component, table, form, pagination);
+    });
   });
 
   if (actionbar) {
@@ -1278,10 +1221,8 @@ export const setupAjaxTable = (component, table, form, pagination): void => {
       component.dispatchEvent(submitEvent);
 
       loadAjaxTable(component, table, form, pagination);
-      console.log('hello');
     });
   }
-
 
 };
 // #region ajax tables functions
@@ -1316,6 +1257,8 @@ export const loadAjaxTable = async function (component, table, form, pagination)
 
   // Construct form data to send to api
   const formData = new FormData(form);
+
+  formData.set('page_number',formData.get('page')); // Fix for compliance dashbaord
 
   const queryString = new URLSearchParams(formData).toString();
   const columns = table.querySelectorAll('thead tr th:not(.expand-button-heading)');
@@ -1372,12 +1315,12 @@ export const loadAjaxTable = async function (component, table, form, pagination)
     })
       .then((response) => response.json())
       .then((response) => {
-        const schema = form.hasAttribute('data-schema') ? form.getAttribute('data-schema') : 'data';
-        const totalNumberSchema = form.hasAttribute('data-schema-total')
-          ? form.getAttribute('data-schema-total')
+        const schema = component.hasAttribute('data-schema') ? component.getAttribute('data-schema') : 'data';
+        const totalNumberSchema = component.hasAttribute('data-schema-total')
+          ? component.getAttribute('data-schema-total')
           : 'meta.total';
-        const currentPageSchema = form.hasAttribute('data-schema-page')
-          ? form.getAttribute('data-schema-page')
+        const currentPageSchema = component.hasAttribute('data-schema-page')
+          ? component.getAttribute('data-schema-page')
           : 'meta.current_page';
 
         const totalNumber = resolvePath(response, totalNumberSchema, 15);
@@ -1454,10 +1397,10 @@ export const loadAjaxTable = async function (component, table, form, pagination)
           });
 
           component.setAttribute('data-total', parseInt(totalNumber));
-          component.setAttribute('data-page', parseInt(currentPage));
+          //component.setAttribute('data-page', parseInt(currentPage));
 
-          pagination.setAttribute('data-total', totalNumber);
-          pagination.setAttribute('data-page', currentPage);
+          //pagination.setAttribute('data-total', totalNumber);
+          //pagination.setAttribute('data-page', currentPage);
 
           Array.from(form.querySelectorAll('[data-ajax-query]')).forEach((queryElement) => {
             const totalNumber = resolvePath(response, queryElement.getAttribute('data-ajax-query'), '');
@@ -1488,10 +1431,6 @@ export const loadAjaxTable = async function (component, table, form, pagination)
         // Remove loading on the pagination
         pagination.removeAttribute('data-loading');
         form.classList.remove('processing');
-
-        if(table.querySelectorAll('tbody tr').length < parseInt(component.getAttribute('data-show'))){
-          pagination.classList.add('d-none');
-        }
       });
   } catch (error) {
     console.log(error);

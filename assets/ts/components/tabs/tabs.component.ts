@@ -23,10 +23,6 @@ class iamTabs extends HTMLElement {
     <style>
     
     ${loadCSS}
-
-    :host(.admin-panel){
-      display: contents!important;
-    }
     
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>

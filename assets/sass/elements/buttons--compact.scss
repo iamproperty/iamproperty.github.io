@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // #region btn compact
   .btn-compact {
     --compact-size: #{rem(48)};
@@ -117,21 +117,21 @@ $darkMode: 'true' !default;
     ):not(.bg-canvas-2):not(.prevent-invert),
   .invert-colours {
     .btn-compact.btn-secondary:not(:hover, :focus, .hover, :focus-within):not(.btn-collapse) {
-      background-color: var(--colour-inverted) !important;
-      border-color: var(--colour-inverted) !important;
-      color: var(--colour-primary-theme);
+      background-color: var(--colour-white) !important;
+      border-color: var(--colour-white) !important;
+      color: var(--colour-heading);
     }
 
     .btn-compact.btn-secondary:is(:hover, :focus, .hover, :focus-within):not([disabled]):not(.btn-collapse) {
       background-color: transparent;
-      border-color: var(--colour-inverted) !important;
-      color: var(--colour-inverted);
+      border-color: var(--colour-white) !important;
+      color: var(--colour-white);
     }
 
     .btn-compact.btn-secondary[disabled] {
-      background-color: var(--colour-inverted) !important;
-      border-color: var(--colour-inverted) !important;
-      color: var(--colour-primary-theme) !important;
+      background-color: var(--colour-white) !important;
+      border-color: var(--colour-white) !important;
+      color: var(--colour-heading) !important;
     }
   }
 
