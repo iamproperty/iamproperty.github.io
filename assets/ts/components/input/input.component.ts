@@ -40,7 +40,7 @@ class iamInput extends HTMLElement {
       this.classList.add('mb-0');
 
 
-    const setIcon = (inputType) => {
+    const setIcon = (inputType): void => {
         
       // Pre set the icons
       switch (inputType) {
@@ -65,7 +65,7 @@ class iamInput extends HTMLElement {
     setIcon(inputType);
 
 
-    const setCurrencyRules = () => {
+    const setCurrencyRules = (): void => {
       
       input.setAttribute('type','text');
       input?.setAttribute('data-value',input.value);
@@ -188,7 +188,7 @@ class iamInput extends HTMLElement {
         return `${year}-${month}-${day}`;
       }
 
-      const checkDayAllowed = (input,allowedDays) => {
+      const checkDayAllowed = (input,allowedDays): void => {
 
         const day = new Date(input.value).getUTCDay();
 
