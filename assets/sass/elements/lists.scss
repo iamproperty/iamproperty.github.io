@@ -34,12 +34,14 @@
   }
 
   .list-unstyled {
-    @include list-unstyled();
+    padding-left: 0;
+    list-style: none;
   }
 
   // Inline turns list items into inline-block
   .list-inline {
-    @include list-unstyled();
+    padding-left: 0;
+    list-style: none;
   }
   .list-inline-item {
     display: inline-block;
@@ -49,7 +51,7 @@
     }
   }
 
-  @include is('ol, ul', '', 'li') {
+  li {
     max-width: var(--content-max-width);
   }
 
@@ -291,7 +293,7 @@
       font-weight: bold;
     }
 
-    @include container-up(sm) {
+    @media screen and (min-width: 36em) {
       padding: 0;
 
       margin-bottom: rem(24);
@@ -320,7 +322,7 @@
       }
     }
 
-    @include container-up(md) {
+    @media screen and (min-width: 62em) {
       li {
         max-width: 20%;
       }
@@ -364,7 +366,7 @@
       }
     }
 
-    @include container-up(sm) {
+    @media screen and (min-width: 36em) {
       padding-left: rem(40);
 
       li {
@@ -379,7 +381,7 @@
       }
     }
 
-    @include container-up(md) {
+    @media screen and (min-width: 62em) {
       li {
         max-width: none;
         margin-bottom: rem(20);

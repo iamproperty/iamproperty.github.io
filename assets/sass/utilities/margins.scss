@@ -1,0 +1,75 @@
+@layer utilities {
+  @for $key from 0 through 5 {
+    $value: var(--spacer-#{$key});
+
+    .m-#{$key} {
+      margin: #{$value} !important;
+    }
+
+    .mx-#{$key} {
+      margin-left: #{$value} !important;
+      margin-right: #{$value} !important;
+    }
+
+    .mx-minus-#{$key} {
+      margin-left: -#{$value} !important;
+      margin-right: -#{$value} !important;
+    }
+
+    .my-minus-#{$key} {
+      margin-top: -#{$value} !important;
+      margin-bottom: -#{$value} !important;
+    }
+
+    .my-#{$key} {
+      margin-top: #{$value} !important;
+      margin-bottom: #{$value} !important;
+    }
+
+    .mt-#{$key} {
+      margin-top: #{$value} !important;
+    }
+
+    .me-#{$key} {
+      margin-right: #{$value} !important;
+    }
+
+    .mb-#{$key} {
+      margin-bottom: #{$value} !important;
+    }
+
+    .ms-#{$key} {
+      margin-left: #{$value} !important;
+    }
+  }
+
+  .m-auto {
+    margin: auto !important;
+  }
+
+  .mx-auto {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  .my-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+
+  .mt-auto {
+    margin-top: auto !important;
+  }
+
+  .me-auto {
+    margin-right: auto !important;
+  }
+
+  .mb-auto {
+    margin-bottom: auto !important;
+  }
+
+  .ms-auto {
+    margin-left: auto !important;
+  }
+}

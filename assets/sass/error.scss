@@ -6,14 +6,13 @@
 @use '_functions/bs_functions' as *;
 @use '_functions/bs_variables' as *;
 @use '_functions/bs_mixins' as *;
-@use '_functions/utility-mixins' as *;
 
 
 @use '_corefiles';
 @use '_grid';
 @use '_bs_grid';
 @use '_bs_utilities';
-@use '_utility-mixins';
+@use '_utilities';
 
 @layer reset {
   html {

@@ -1,0 +1,34 @@
+@layer utilities {
+  @for $key from 0 through 5 {
+    $value: var(--spacer-#{$key});
+    .p-#{$key} {
+      padding: #{$value} !important;
+    }
+
+    .px-#{$key} {
+      padding-left: #{$value} !important;
+      padding-right: #{$value} !important;
+    }
+
+    .py-#{$key} {
+      padding-top: #{$value} !important;
+      padding-bottom: #{$value} !important;
+    }
+
+    .pt-#{$key} {
+      padding-top: #{$value} !important;
+    }
+
+    .pe-#{$key} {
+      padding-right: #{$value} !important;
+    }
+
+    .pb-#{$key} {
+      padding-bottom: #{$value} !important;
+    }
+
+    .ps-#{$key} {
+      padding-left: #{$value} !important;
+    }
+  }
+}

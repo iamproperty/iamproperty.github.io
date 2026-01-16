@@ -6,9 +6,9 @@
 @use '../elements/dialog.scss' as *;
 @use '../elements/popover.scss' as *;
 
-@include margins();
-@include visually-hidden();
-@include display();
+@use '../utilities/margins.scss' as *;
+@use '../utilities/visually-hidden.scss' as *;
+@use '../utilities/display.scss' as *;
 
 :host {
   background-color: #fcfcfc;
@@ -80,7 +80,7 @@ slot[name='selectall'] {
     position: absolute;
   }
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     padding: 0 rem(32);
   }
 }
@@ -184,7 +184,7 @@ slot[name='selectall'] {
   display: none;
   margin-left: 1rem !important;
 
-  @include container-up(md) {
+  @media screen and (min-width: 62em) {
     display: block;
   }
 }
@@ -201,11 +201,11 @@ slot[name='selectall'] {
   overflow: visible;
   position: relative;
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     width: rem(450);
   }
 
-  @include container-up(md) {
+  @media screen and (min-width: 62em) {
     width: rem(750);
   }
 
@@ -217,11 +217,11 @@ slot[name='selectall'] {
 :host([data-large-safe-area]) .safe-area {
   width: rem(260);
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     width: rem(620);
   }
 
-  @include container-up(md) {
+  @media screen and (min-width: 62em) {
     width: rem(1048);
   }
 }
@@ -266,7 +266,7 @@ slot[name='selectall'] {
   max-width: rem(350) !important;
   margin: 0 !important;
 
-  @include container-up(md) {
+  @media screen and (min-width: 62em) {
     max-width: rem(450) !important;
   }
 

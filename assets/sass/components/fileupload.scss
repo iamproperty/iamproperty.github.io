@@ -3,8 +3,7 @@
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
 
-
-@include display();
+@use '../utilities/display' as *;
 
 hr {
     --border-style: solid;
@@ -41,8 +40,8 @@ hr {
     padding-bottom: 2rem;
 
     font-size: var(--h4-fs);
-    line-height: var(--heading-lh);
-    padding-bottom: var(--heading-pb);
+    line-height: var(--h4-lh);
+    padding-bottom: var(--h4-pb);
     max-width: var(--content-max-width);
   }
 

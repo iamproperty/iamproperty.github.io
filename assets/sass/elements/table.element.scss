@@ -83,13 +83,13 @@
 
   th {
     font-weight: bold;
-    @include var(color, --colour-heading);
+    color: var(--colour-heading);
   }
 
   thead {
     tr {
       border-bottom: var(--border-width) solid currentColor;
-      @include var(border-color, --colour-primary);
+      border-color: var(--colour-primary);
     }
     th {
       padding-top: 0;
@@ -128,7 +128,7 @@
 
   tbody tr {
     border-bottom: var(--border-width) solid currentColor;
-    @include var(border-color, --colour-border);
+    border-color: var(--colour-border);
   }
 
   .border-0 > table,

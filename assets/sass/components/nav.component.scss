@@ -14,11 +14,11 @@
 @use '../elements/container.scss' as *;
 
 
-@include colours();
-@include margins();
-@include paddings();
-@include sizes();
-@include display();
+@use '../utilities/colours.scss' as *;
+@use '../utilities/margins.scss' as *;
+@use '../utilities/paddings.scss' as *;
+@use '../utilities/sizes.scss' as *;
+@use '../utilities/display.scss' as *;
 
 *, *::before, *::after {
     box-sizing: border-box;
