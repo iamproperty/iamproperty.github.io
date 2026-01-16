@@ -302,9 +302,9 @@
     --spacer-5: calc(var(--spacer) * 3);
     // #endregion
 
-    --max-height-sm: 12.5rem /* 200px */
-    --max-height-md: 24rem /* 400px */
-    --max-height-lg: 37.5rem /* 600px */
+    --max-height-sm: 12.5rem; /* 200px */
+    --max-height-md: 24rem; /* 400px */
+    --max-height-lg: 37.5rem; /* 600px */
 
     // Add in media query based updates to the global vars like updating the heading 1 font size
     @media screen and (min-width: 36em) {
