@@ -27,7 +27,7 @@
   }
 
   .carousel__inner {
-    --gutter-x: #{$grid-gutter-width};
+    --gutter-x: 1rem;
     overflow-x: auto;
     padding-bottom: 1rem;
     scroll-snap-type: x mandatory;
@@ -117,7 +117,7 @@
   .carousel__wrapper {
     overflow: hidden;
 
-    margin-inline: calc(-0.5 * $grid-gutter-width);
+    margin-inline: calc(-0.5 * 1rem);
   }
   .carousel__inner {
   }
@@ -132,7 +132,7 @@
   }
 
   ::slotted(div:last-child) {
-    padding-inline-end: calc(0.5 * $grid-gutter-width);
+    padding-inline-end: calc(0.5 * 1rem);
     --last-item-extra: 0px;
   }
 

@@ -64,7 +64,7 @@
     container-type: inline-size;
     --carousel-spacing: 2rem;
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       min-width: rem(600);
       max-width: rem(600);
     }

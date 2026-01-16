@@ -120,7 +120,7 @@
     display: inline-block;
     max-width: var(--doughnut-size);
 
-    @container (min-width: #{em($device-xs-width,16)}) {
+    @container (min-width: 36em) {
       width: var(--doughnut-size);
     }
 

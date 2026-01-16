@@ -31,13 +31,13 @@ main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
     background-color: #e6eaec;
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     box-shadow: none;
     margin-inline: 0;
     border-radius: 0;
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     padding-inline: calc(50% - #{rem(556)} - 2rem);
   }
 }

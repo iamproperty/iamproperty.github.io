@@ -76,7 +76,7 @@
     appearance: none;
     white-space: nowrap;
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       --btn-margin: #{rem(24)};
     }
 

@@ -21,14 +21,14 @@
     max-height: min(90vh, #{rem(752)});
     overscroll-behavior: contain;
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       --dialog-padding: #{rem(32)};
       min-width: rem(335);
       width: fit-content;
       max-width: rem(686);
     }
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       min-width: rem(454);
       width: fit-content;
       max-width: rem(736);
@@ -162,7 +162,7 @@
       color: var(--colour-heading);
       clear: both;
 
-      @include media-breakpoint-up(md) {
+      @media screen and (min-width: 62em) {
         font-size: 4rem;
       }
     }
@@ -181,7 +181,7 @@
       color: var(--colour-heading);
       clear: both;
 
-      @include media-breakpoint-up(md) {
+      @media screen and (min-width: 62em) {
         font-size: 4rem;
       }
 
@@ -212,7 +212,7 @@
       }
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       :is(button, .btn):has(~ :is(button, .btn):last-child),
       :is(button, .btn):last-child {
         min-width: calc(50% - 1rem);
@@ -231,12 +231,12 @@
       display: contents;
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       min-width: rem(686);
       max-width: rem(686);
     }
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       min-width: rem(736);
       max-width: rem(736);
     }
@@ -312,7 +312,7 @@
       display: none;
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       min-width: rem(452);
       width: rem(452);
       max-width: rem(452);
@@ -333,7 +333,7 @@
       }
     }
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       min-width: rem(924);
       width: rem(924);
       max-width: rem(924);

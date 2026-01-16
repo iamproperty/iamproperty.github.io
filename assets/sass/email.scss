@@ -2,8 +2,10 @@
 
 // Set mobile only variable so that the media query mixin doesn't print out non mobile rules
 
-@use '_func' as *;
-
+@use '_functions/bs_functions' as *;
+@use '_functions/bs_variables' as *;
+@use '_functions/bs_mixins' as *;
+@use '_functions/utility-mixins' as *;
 
 // Update the breakpoints to just one to remove some utility classes
 $grid-breakpoints: (
@@ -21,7 +23,7 @@ $default-curve-width: 600;
 @import '_corefiles';
 @import '_grid';
 @import '_bs_grid';
-@import '_utilities';
+@import '_bs_utilities';
 @import '_utility-mixins';
 
 :root {

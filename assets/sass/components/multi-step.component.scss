@@ -20,7 +20,7 @@
   min-height: 100%;
   padding-left: var(--dialog-padding);
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     padding-top: var(--dialog-padding);
     padding-left: calc(var(--dialog-padding) + #{rem(282)}) !important;
     display: flex;
@@ -120,7 +120,7 @@
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     width: rem(282);
     height: 100%;
     flex-direction: column;

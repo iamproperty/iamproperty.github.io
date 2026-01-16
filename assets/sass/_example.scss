@@ -24,11 +24,11 @@
     }
 
     // Any media queries should be added after all of the root rulesets
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       min-height: rem(300);
     }
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       min-height: rem(470);
     }
 

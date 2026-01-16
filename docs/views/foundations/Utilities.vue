@@ -269,7 +269,7 @@
     max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     :is(.mh-sm-sm, .mh-sm-md, .mh-sm-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -292,7 +292,7 @@
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     :is(.mh-md-sm, .mh-md-md, .mh-md-lg) {
       overflow: auto;
       overscroll-behavior: contain;

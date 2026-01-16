@@ -6,19 +6,13 @@
 @use 'mixins' as *;
 
 
-
+$breakpoints: (
+  sm: 36em,
+  md: 62em
+);
 
 $new_utilities: ();
 
-$style_breakpoints: ();
-
-@each $bp, $value in $grid-breakpoints {
-  @if $bp != 'xs' {
-    $style_breakpoints: map.merge((#{$bp}: ''), $style_breakpoints);
-  } @else {
-    $style_breakpoints: map.merge((#{$bp}: -#{$bp}), $style_breakpoints);
-  }
-}
 
 // #region Clearfix
 $new_utilities: map.merge(
@@ -159,21 +153,31 @@ $new_utilities: map.merge(
 );
 
 @mixin sticky() {
-  @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
-      .sticky#{$infix}-top {
-        position: sticky;
-        top: 0;
-        z-index: var(--index-floating);
-      }
+  @media screen and (min-width: 36em) {
 
-      .sticky#{$infix}-bottom {
-        position: sticky;
-        bottom: 0;
-        z-index: var(--index-floating);
-      }
+    .sticky-sm-top {
+      position: sticky;
+      top: 0;
+      z-index: var(--index-floating);
+    }
+    .sticky-sm-bottom {
+      position: sticky;
+      bottom: 0;
+      z-index: var(--index-floating);
+    }
+  }
+  @media screen and (min-width: 62em) {
+
+    .sticky-md-top {
+      position: sticky;
+      top: 0;
+      z-index: var(--index-floating);
+    }
+    .sticky-md-bottom {
+      position: sticky;
+      bottom: 0;
+      z-index: var(--index-floating);
     }
   }
 }
@@ -234,7 +238,7 @@ $new_utilities: map.merge(
     max-height: 100%;
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     :is(.mh-sm-sm, .mh-sm-md, .mh-sm-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -257,7 +261,7 @@ $new_utilities: map.merge(
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     :is(.mh-md-sm, .mh-md-md, .mh-md-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -504,47 +508,46 @@ $new_utilities: map.merge(
     display: none !important;
   }
 
-  @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @each $breakpoint,$width in $breakpoints {
+    @media screen and (min-width: $width) {
 
-      .d#{$infix}-inline {
+      .d-#{$breakpoint}-inline {
         display: inline !important;
       }
 
-      .d#{$infix}-inline-block {
+      .d-#{$breakpoint}-inline-block {
         display: inline-block !important;
       }
 
-      .d#{$infix}-block {
+      .d-#{$breakpoint}-block {
         display: block !important;
       }
 
-      .d#{$infix}-grid {
+      .d-#{$breakpoint}-grid {
         display: grid !important;
       }
 
-      .d#{$infix}-table {
+      .d-#{$breakpoint}-table {
         display: table !important;
       }
 
-      .d#{$infix}-table-row {
+      .d-#{$breakpoint}-table-row {
         display: table-row !important;
       }
 
-      .d#{$infix}-table-cell {
+      .d-#{$breakpoint}-table-cell {
         display: table-cell !important;
       }
 
-      .d#{$infix}-flex {
+      .d-#{$breakpoint}-flex {
         display: flex !important;
       }
 
-      .d#{$infix}-inline-flex {
+      .d-#{$breakpoint}-inline-flex {
         display: inline-flex !important;
       }
 
-      .d#{$infix}-none {
+      .d-#{$breakpoint}-none {
         display: none !important;
       }
     }
@@ -561,86 +564,86 @@ $new_utilities: map.merge(
 );
 
 @mixin position() {
-  @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-      .position#{$infix}-static {
+  @each $breakpoint,$width in $breakpoints {
+    @media screen and (min-width: $width) {
+
+      .position-#{$breakpoint}-static {
         position: static !important;
       }
 
-      .position#{$infix}-relative {
+      .position-#{$breakpoint}-relative {
         position: relative !important;
       }
 
-      .position#{$infix}-absolute {
+      .position-#{$breakpoint}-absolute {
         position: absolute !important;
       }
 
-      .position#{$infix}-fixed {
+      .position-#{$breakpoint}-fixed {
         position: fixed !important;
       }
 
-      .position#{$infix}-sticky {
+      .position-#{$breakpoint}-sticky {
         position: sticky !important;
       }
 
-      .top#{$infix}-0 {
+      .top-#{$breakpoint}-0 {
         top: 0 !important;
       }
 
-      .top#{$infix}-50 {
+      .top-#{$breakpoint}-50 {
         top: 50% !important;
       }
 
-      .top#{$infix}-100 {
+      .top-#{$breakpoint}-100 {
         top: 100% !important;
       }
 
-      .bottom#{$infix}-0 {
+      .bottom-#{$breakpoint}-0 {
         bottom: 0 !important;
       }
 
-      .bottom#{$infix}-50 {
+      .bottom-#{$breakpoint}-50 {
         bottom: 50% !important;
       }
 
-      .bottom#{$infix}-100 {
+      .bottom-#{$breakpoint}-100 {
         bottom: 100% !important;
       }
 
-      .start#{$infix}-0 {
+      .start-#{$breakpoint}-0 {
         left: 0 !important;
       }
 
-      .start#{$infix}-50 {
+      .start-#{$breakpoint}-50 {
         left: 50% !important;
       }
 
-      .start#{$infix}-100 {
+      .start-#{$breakpoint}-100 {
         left: 100% !important;
       }
 
-      .end#{$infix}-0 {
+      .end-#{$breakpoint}-0 {
         right: 0 !important;
       }
 
-      .end#{$infix}-50 {
+      .end-#{$breakpoint}-50 {
         right: 50% !important;
       }
 
-      .end#{$infix}-100 {
+      .end-#{$breakpoint}-100 {
         right: 100% !important;
       }
 
-      .translate#{$infix}-middle {
+      .translate-#{$breakpoint}-middle {
         transform: translate(-50%, -50%) !important;
       }
 
-      .translate#{$infix}-middle-x {
+      .translate-#{$breakpoint}-middle-x {
         transform: translateX(-50%) !important;
       }
 
-      .translate#{$infix}-middle-y {
+      .translate-#{$breakpoint}-middle-y {
         transform: translateY(-50%) !important;
       }
     }
@@ -847,147 +850,146 @@ $new_utilities: map.merge(
 );
 
 @mixin flex() {
-  @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @each $breakpoint,$width in $breakpoints {
+    @media screen and (min-width: $width) {
 
-      .flex#{$infix}-fill {
+      .flex-#{$breakpoint}-fill {
         flex: 1 1 auto !important;
       }
 
-      .flex#{$infix}-row {
+      .flex-#{$breakpoint}-row {
         flex-direction: row !important;
       }
 
-      .flex#{$infix}-column {
+      .flex-#{$breakpoint}-column {
         flex-direction: column !important;
       }
 
-      .flex#{$infix}-row-reverse {
+      .flex-#{$breakpoint}-row-reverse {
         flex-direction: row-reverse !important;
       }
 
-      .flex#{$infix}-column-reverse {
+      .flex-#{$breakpoint}-column-reverse {
         flex-direction: column-reverse !important;
       }
 
-      .flex#{$infix}-grow-0 {
+      .flex-#{$breakpoint}-grow-0 {
         flex-grow: 0 !important;
       }
 
-      .flex#{$infix}-grow-1 {
+      .flex-#{$breakpoint}-grow-1 {
         flex-grow: 1 !important;
       }
 
-      .flex#{$infix}-shrink-0 {
+      .flex-#{$breakpoint}-shrink-0 {
         flex-shrink: 0 !important;
       }
 
-      .flex#{$infix}-shrink-1 {
+      .flex-#{$breakpoint}-shrink-1 {
         flex-shrink: 1 !important;
       }
 
-      .flex#{$infix}-wrap {
+      .flex-#{$breakpoint}-wrap {
         flex-wrap: wrap !important;
       }
 
-      .flex#{$infix}-nowrap {
+      .flex-#{$breakpoint}-nowrap {
         flex-wrap: nowrap !important;
       }
 
-      .flex#{$infix}-wrap-reverse {
+      .flex-#{$breakpoint}-wrap-reverse {
         flex-wrap: wrap-reverse !important;
       }
 
-      .justify-content#{$infix}-start {
+      .justify-content-#{$breakpoint}-start {
         justify-content: flex-start !important;
       }
 
-      .justify-content#{$infix}-end {
+      .justify-content-#{$breakpoint}-end {
         justify-content: flex-end !important;
       }
 
-      .justify-content#{$infix}-center {
+      .justify-content-#{$breakpoint}-center {
         justify-content: center !important;
       }
 
-      .justify-content#{$infix}-between {
+      .justify-content-#{$breakpoint}-between {
         justify-content: space-between !important;
       }
 
-      .justify-content#{$infix}-around {
+      .justify-content-#{$breakpoint}-around {
         justify-content: space-around !important;
       }
 
-      .justify-content#{$infix}-evenly {
+      .justify-content-#{$breakpoint}-evenly {
         justify-content: space-evenly !important;
       }
 
-      .align-items#{$infix}-start {
+      .align-items-#{$breakpoint}-start {
         align-items: flex-start !important;
       }
 
-      .align-items#{$infix}-end {
+      .align-items-#{$breakpoint}-end {
         align-items: flex-end !important;
       }
 
-      .align-items#{$infix}-center {
+      .align-items-#{$breakpoint}-center {
         align-items: center !important;
       }
 
-      .align-items#{$infix}-baseline {
+      .align-items-#{$breakpoint}-baseline {
         align-items: baseline !important;
       }
 
-      .align-items#{$infix}-stretch {
+      .align-items-#{$breakpoint}-stretch {
         align-items: stretch !important;
       }
 
-      .align-content#{$infix}-start {
+      .align-content-#{$breakpoint}-start {
         align-content: flex-start !important;
       }
 
-      .align-content#{$infix}-end {
+      .align-content-#{$breakpoint}-end {
         align-content: flex-end !important;
       }
 
-      .align-content#{$infix}-center {
+      .align-content-#{$breakpoint}-center {
         align-content: center !important;
       }
 
-      .align-content#{$infix}-between {
+      .align-content-#{$breakpoint}-between {
         align-content: space-between !important;
       }
 
-      .align-content#{$infix}-around {
+      .align-content-#{$breakpoint}-around {
         align-content: space-around !important;
       }
 
-      .align-content#{$infix}-stretch {
+      .align-content-#{$breakpoint}-stretch {
         align-content: stretch !important;
       }
 
-      .align-self#{$infix}-auto {
+      .align-self-#{$breakpoint}-auto {
         align-self: auto !important;
       }
 
-      .align-self#{$infix}-start {
+      .align-self-#{$breakpoint}-start {
         align-self: flex-start !important;
       }
 
-      .align-self#{$infix}-end {
+      .align-self-#{$breakpoint}-end {
         align-self: flex-end !important;
       }
 
-      .align-self#{$infix}-center {
+      .align-self-#{$breakpoint}-center {
         align-self: center !important;
       }
 
-      .align-self#{$infix}-baseline {
+      .align-self-#{$breakpoint}-baseline {
         align-self: baseline !important;
       }
 
-      .align-self#{$infix}-stretch {
+      .align-self-#{$breakpoint}-stretch {
         align-self: stretch !important;
       }
     }
@@ -1004,39 +1006,38 @@ $new_utilities: map.merge(
 );
 
 @mixin order() {
-  @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+  @each $breakpoint,$width in $breakpoints {
+    @media screen and (min-width: $width) {
 
-      .order#{$infix}-first {
+      .order-#{$breakpoint}-first {
         order: -1 !important;
       }
 
-      .order#{$infix}-0 {
+      .order-#{$breakpoint}-0 {
         order: 0 !important;
       }
 
-      .order#{$infix}-1 {
+      .order-#{$breakpoint}-1 {
         order: 1 !important;
       }
 
-      .order#{$infix}-2 {
+      .order-#{$breakpoint}-2 {
         order: 2 !important;
       }
 
-      .order#{$infix}-3 {
+      .order-#{$breakpoint}-3 {
         order: 3 !important;
       }
 
-      .order#{$infix}-4 {
+      .order-#{$breakpoint}-4 {
         order: 4 !important;
       }
 
-      .order#{$infix}-5 {
+      .order-#{$breakpoint}-5 {
         order: 5 !important;
       }
 
-      .order#{$infix}-last {
+      .order-#{$breakpoint}-last {
         order: 6 !important;
       }
     }
@@ -1053,7 +1054,9 @@ $new_utilities: map.merge(
 );
 
 @mixin margins() {
-  @each $key, $value in $spacers {
+  @for $key from 0 through 5 {
+    $value: var(--spacer-#{$key});
+
     .m-#{$key} {
       margin: #{$value} !important;
     }
@@ -1136,7 +1139,8 @@ $new_utilities: map.merge(
 );
 
 @mixin paddings() {
-  @each $key, $value in $spacers {
+  @for $key from 0 through 5 {
+    $value: var(--spacer-#{$key});
     .p-#{$key} {
       padding: #{$value} !important;
     }
@@ -1179,7 +1183,8 @@ $new_utilities: map.merge(
 );
 
 @mixin gap() {
-  @each $key, $value in $spacers {
+  @for $key from 0 through 5 {
+    $value: var(--spacer-#{$key});
     .gap-#{$key} {
       gap: #{$value} !important;
     }

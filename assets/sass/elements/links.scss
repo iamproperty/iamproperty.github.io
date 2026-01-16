@@ -218,11 +218,11 @@ iam-collapsible-side {
   > * {
     padding-left: rem(24);
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       padding-left: rem(40);
     }
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       padding-left: var(--container-padding-x);
     }
   }
@@ -257,11 +257,11 @@ iam-collapsible-side [class*='link'] {
     margin-right: rem(8) !important;
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     padding-left: rem(24) !important;
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     padding-left: var(--container-padding-x) !important;
   }
 }
@@ -330,7 +330,7 @@ iam-collapsible-side {
     }
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     .parent {
       li:not(:first-of-type) {
         a {

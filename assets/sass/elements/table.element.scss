@@ -106,7 +106,7 @@
     display: block;
     color: var(--colour-heading);
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       max-width: rem(1048);
     }
   }

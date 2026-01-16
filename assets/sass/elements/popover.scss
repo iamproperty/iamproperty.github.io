@@ -96,10 +96,10 @@
       border-radius: rem(16);
       width: rem(320);
 
-      @include media-breakpoint-up(sm) {
+      @media screen and (min-width: 36em) {
         width: rem(335);
       }
-      @include media-breakpoint-up(md) {
+      @media screen and (min-width: 62em) {
         width: rem(360);
       }
 
@@ -116,7 +116,7 @@
         border-radius: 0.5rem;
         box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
 
-        @include media-breakpoint-up(sm) {
+        @media screen and (min-width: 36em) {
           width: max-content !important;
         }
 
@@ -202,7 +202,7 @@
       width: rem(319);
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       &.dialog__wrapper--sm-left > dialog[open] {
         left: 0;
         right: auto;
@@ -219,7 +219,7 @@
       }
     }
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       &.dialog__wrapper--md-left > dialog[open] {
         left: 0;
         right: auto;
