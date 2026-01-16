@@ -1,16 +1,4 @@
 @charset "UTF-8";
 
-$root: ':root' !default;
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
-$optionalText: 'true' !default;
-
 @use '_fonts';
-@use '_corefiles.scss' with (
-  $root: $root,
-  $layers: $layers,
-  $mobileOnly: $mobileOnly,
-  $darkMode: $darkMode,
-  $optionalText: $optionalText
-);
+@use '_corefiles.scss';

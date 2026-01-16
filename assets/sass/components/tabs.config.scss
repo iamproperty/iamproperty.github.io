@@ -1,8 +1,8 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
+
 
 *:not(main):has(> iam-tabs) {
   container-type: inline-size;
@@ -196,7 +196,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     display: none;
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     flex-direction: row;
   }
 
@@ -227,7 +227,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       margin: 0;
 
       &:not(:first-child) {
@@ -242,7 +242,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 }
 
 // #endregion
-@include media-breakpoint-up(sm, $mobileOnly) {
+@include media-breakpoint-up(sm) {
   :host(.tabs--inline) .tabs__links {
     margin: 0;
     justify-content: center;

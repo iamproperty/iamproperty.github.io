@@ -2,9 +2,8 @@
 @use 'sass:map';
 @use '_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
 
 // #region grid mixins
 @mixin grid-utilities($br: '') {
@@ -118,7 +117,7 @@ $darkMode: 'true' !default;
 }
 // #endregion
 
-@include layer('reset', $layers) {
+@layer reset {
   // #region Main grid setup
   body {
     --excess-space: calc((100% - var(--max-width, #{$max-width})) / 2);

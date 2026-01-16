@@ -5,9 +5,8 @@
 
 @use 'mixins' as *;
 
-$layers: 'true' !default;
 
-$mobileOnly: 'false' !default;
+
 
 $new_utilities: ();
 
@@ -154,7 +153,7 @@ $new_utilities: map.merge(
 
 @mixin sticky() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint, $mobileOnly) {
+    @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .sticky#{$infix}-top {
@@ -228,7 +227,7 @@ $new_utilities: map.merge(
     max-height: 100%;
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     :is(.mh-sm-sm, .mh-sm-md, .mh-sm-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -251,7 +250,7 @@ $new_utilities: map.merge(
     }
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @include media-breakpoint-up(md) {
     :is(.mh-md-sm, .mh-md-md, .mh-md-lg) {
       overflow: auto;
       overscroll-behavior: contain;
@@ -343,14 +342,16 @@ $new_utilities: map.merge(
 );
 
 @mixin wider-colours() {
-  @each $colour, $value in $wider-colours {
-    .wider-colour-#{$colour} {
-      --wider-colour: var(--wider-colour-#{$colour});
-      --wider-colour-hover: var(--wider-colour-#{$colour}-hover);
-      --wider-colour-active: var(--wider-colour-#{$colour}-active);
-      color: #262626 !important;
-    }
+  
+  @for $i from 1 through 23 {
+  .wider-colour-#{$i} {
+    --wider-colour: var(--wider-colour-#{$i} );
+    --wider-colour-hover: var(--wider-colour-#{$i}-hover);
+    --wider-colour-active: var(--wider-colour-#{$i}-active);
+    color: #262626 !important;
   }
+}
+
 }
 // #endregion
 
@@ -497,7 +498,7 @@ $new_utilities: map.merge(
   }
 
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint, $mobileOnly) {
+    @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .d#{$infix}-inline {
@@ -554,7 +555,7 @@ $new_utilities: map.merge(
 
 @mixin position() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint, $mobileOnly) {
+    @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
       .position#{$infix}-static {
         position: static !important;
@@ -840,7 +841,7 @@ $new_utilities: map.merge(
 
 @mixin flex() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint, $mobileOnly) {
+    @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .flex#{$infix}-fill {
@@ -997,7 +998,7 @@ $new_utilities: map.merge(
 
 @mixin order() {
   @each $breakpoint in map.keys($grid-breakpoints) {
-    @include media-breakpoint-up($breakpoint, $mobileOnly) {
+    @include media-breakpoint-up($breakpoint) {
       $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 
       .order#{$infix}-first {
@@ -1320,15 +1321,30 @@ $new_utilities: map.merge(
 );
 
 @mixin colours() {
-  @each $color, $value in $theme-colors {
+
+  .text-heading {
+    
+    color: var(--colour-heading) !important;
+  }
+
+  $new-theme-colors: (
+    'primary': var(--colour-primary),
+    'secondary': var(--colour-secondary),
+    'info': var(--colour-info),
+    'warning': var(--colour-warning),
+    'success': var(--colour-success),
+    'complete': var(--colour-complete),
+    'danger': var(--colour-danger),
+    'dark': var(--colour-dark),
+    'light': var(--colour-light),
+    'canvas': var(--colour-canvas),
+    'white': var(--colour-white),
+  );
+
+  @each $color, $value in $new-theme-colors {
     .text-#{$color} {
       --text-opacity: 1;
       color: var(--colour-#{$color}) !important;
-    }
-
-    .text-heading {
-      
-      color: var(--colour-heading) !important;
     }
 
     .bg-#{$color} {

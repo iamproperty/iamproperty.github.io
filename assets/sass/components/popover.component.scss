@@ -18,10 +18,10 @@
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       width: rem(335);
     }
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       width: rem(360);
     }
   } 

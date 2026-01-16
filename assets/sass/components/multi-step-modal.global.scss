@@ -32,7 +32,7 @@
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
 
 
       .btn--wrapper {
@@ -47,7 +47,7 @@
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
 
       form {
         display: flex;

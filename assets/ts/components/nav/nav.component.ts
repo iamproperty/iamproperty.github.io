@@ -40,7 +40,7 @@ class iamNav extends HTMLElement {
           </div>
           <div class="dialog__wrapper d-none" id="search-wrapper"></div>
           <slot name="actions"></slot>
-          <div class="menu__secondary">
+          <div class="menu__secondary bg-light">
             <div class="container">
             <slot name="secondary"></slot>
             </div>

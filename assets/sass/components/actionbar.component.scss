@@ -33,7 +33,7 @@ slot[name='selectall'] {
   transform: translate(0, -50%);
   z-index: 10;
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     left: rem(32);
   }
 
@@ -51,7 +51,7 @@ slot[name='selectall'] {
     height: rem(40);
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @include media-breakpoint-up(sm) {
     width: auto;
     overflow: visible;
   }
@@ -93,10 +93,7 @@ slot[name='selectall'] {
   background-color: var(--colour-canvas);
   pointer-events: none;
   display: flex;
-
-  @include light-mode($darkMode) {
-    background-color: #e6eaec;
-  }
+  background-color: #e6eaec;
 
   @supports selector(:has(*)) {
     opacity: 0;
@@ -111,10 +108,7 @@ slot[name='selectall'] {
   position: relative;
   opacity: 0;
   pointer-events: none;
-
-  @include light-mode($darkMode) {
-    background-color: #e6eaec;
-  }
+  background-color: #e6eaec;
 }
 
 // Show selected bar
@@ -408,7 +402,7 @@ slot[name="filters"]{
   
   display: none;
   
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @include media-breakpoint-up(md) {
     display: contents;
   }
 }

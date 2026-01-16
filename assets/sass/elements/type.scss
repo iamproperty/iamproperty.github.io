@@ -1,11 +1,11 @@
 @use 'sass:map';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   /* Duplicated from bootstrap reboot so that the type file will compile */
   mark {
     padding: $mark-padding;

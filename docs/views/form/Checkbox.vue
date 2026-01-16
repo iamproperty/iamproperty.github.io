@@ -145,7 +145,7 @@
     <div class="container visualtest">
       <div class="row">
         <div class="col-12 col-sm-6">
-          <div class="demo">
+          <div class="demo bg-light">
             <fieldset style="width: 15rem">
               <legend>Field Descriptor</legend>
               <input type="checkbox" name="check1" id="check1" class="focus" />
@@ -163,7 +163,7 @@
           </p>
         </div>
         <div class="col-12 col-sm-6">
-          <div class="demo">
+          <div class="demo bg-light">
             <fieldset style="max-width: 12rem">
               <input type="checkbox" name="check4" id="check4" class="focus" />
               <label for="check4">Label overflowing across multiple lines </label>
@@ -172,7 +172,7 @@
           <p>When a Label is too long for the available horizontal space, it wraps to form another line.</p>
         </div>
         <div class="col-12 col-sm-6">
-          <div class="demo">
+          <div class="demo bg-light">
             <div class="was-validated" style="width: 15rem">
               <fieldset>
                 <legend>Field Descriptor</legend>
@@ -186,7 +186,7 @@
           <p>Validation: Use the form to choose whether the checkbox validates on submit.</p>
         </div>
         <div class="col-12 col-sm-6">
-          <div class="demo">
+          <div class="demo bg-light">
             <div class="was-validated" style="width: 15rem">
               <fieldset>
                 <legend>Field Descriptor</legend>
@@ -257,23 +257,17 @@
 
 <style lang="scss">
   .demo {
-    background-color: #f2f2f2;
-
     border: 1px solid #707070;
     padding: 1rem;
     display: flex;
-
     justify-content: center;
     align-items: center;
-
     margin-bottom: 1rem;
-
     height: 20rem;
   }
 
   .demo > .was-validated {
     display: flex;
-
     justify-content: center;
     align-items: center;
     flex-direction: column;

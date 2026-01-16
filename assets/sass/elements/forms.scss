@@ -10,12 +10,7 @@ $icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' vie
 
 $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
-$optionalText: 'true' !default;
-
-@include layer('elements', $layers) {
+@layer elements {
   // #region RESETS
 
   label {
@@ -587,8 +582,8 @@ $optionalText: 'true' !default;
       --tick-colour: var(--colour-muted);
 
       &:before {
-        background: var(--colour-check-bg, var(--colour-light));
-        outline: var(--outline-width) solid var(--colour-light);
+        background: var(--colour-check-bg, light-dark(var(--colour-light), #444444));
+        outline: var(--outline-width) solid light-dark(var(--colour-light), #444444);
       }
     }
     input:is([type='radio'], [type='checkbox']):is(:active, .active) + label,
@@ -696,7 +691,8 @@ $optionalText: 'true' !default;
       linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top /
         calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem))
         calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem))
-        no-repeat;
+        no-repeat,
+      linear-gradient(to right, var(--colour-canvas-2), var(--colour-canvas-2));
 
     padding-right: calc(
       var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem)

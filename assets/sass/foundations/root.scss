@@ -2,35 +2,172 @@
 
 @use '../func' as *;
 
-$root: ':root' !default;
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
+
 
 @layer legacy, reset, elements, components, templates, overrides, utilities;
 
-@include layer('reset', $layers) {
-  #{$root} {
+@layer reset {
+  :root {
     // Print out the $vars array setup in the variables file so they can be used as CSS vars
     // Custom variable values only support SassScript inside `#{}`.
     @each $var, $value in $vars {
       #{$var}: #{$value};
     }
 
-    // Wider colours
-    @each $colour, $value in $wider-colours {
-      --wider-colour-#{$colour}: #{$value};
-    }
-    @each $colour, $value in $wider-colours-hover {
-      --wider-colour-#{$colour}-hover: #{$value};
-    }
-    @each $colour, $value in $wider-colours-active {
-      --wider-colour-#{$colour}-active: #{$value};
-    }
+    color-scheme: light dark;
+
+    --colour-black: #000000;
+    --colour-white: #fcfcfc;
+
+    /* #region Theme colours */
+    --colour-primary-theme: #00313c;
+    --colour-primary: light-dark(#00313c,#b3c1c5);
+
+    --colour-secondary-theme: #b4e6a5;
+    --colour-secondary: #b4e6a5;
+    
+    --colour-success-theme: #b4e6a5;
+    --colour-success: #b4e6a5;
+
+    --colour-info-theme: #1ebee6;
+    --colour-info: light-dark(#1ebee6,#35c5e9);
+
+    --colour-warning-theme: #ffa500;
+    --colour-warning: light-dark(#ffa500,#ffb733);
+
+    --colour-danger-theme: #dc3545;
+    --colour-danger: light-dark(#dc3545,#e7727d);
+
+    --colour-light-theme: #eeeeee;
+    --colour-light: #eeeeee;
+
+    --colour-dark-theme: #46003c;
+    --colour-dark: light-dark(#46003c,#b599b1);
+    /* #endregion */
+
+    /* #region functional colours */
+    --colour-muted: #9d9d9d;
+
+    --colour-canvas: light-dark(#fcfcfc,#262626);
+    --colour-canvas-2: light-dark(#ffffff,#313131);
+    --colour-body-default: light-dark(#595959,#bfbfbf);
+    --colour-body: light-dark(#595959,#bfbfbf);
+    --colour-heading: light-dark(var(--colour-primary-theme),var(--colour-primary));
+    --colour-link: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-focus: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-active: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-border: light-dark(#d8d8d8,var(--colour-white));
+    --colour-brand: light-dark(var(--colour-primary-theme),var(--colour-white));
+
+    --colour-btn: var(--colour-primary-theme);
+    --colour-btn-bg: light-dark(var(--colour-warning-theme),var(--colour-white));
+    --colour-btn-border: light-dark(var(--colour-warning-theme),var(--colour-white));
+    --colour-btn-bg-hover: transparent;
+    --colour-btn-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+
+    --colour-btn-secondary: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-border: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-bg: transparent;
+    --colour-btn-secondary-bg-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-hover: light-dark(var(--colour-inverted),var(--colour-primary-theme));
+    --colour-btn-action-hover-bg: light-dark(var(--colour-light),#313131);
+
+    --colour-activeLink: light-dark(#e8f9fd,#173c45);
+    --colour-activeLinkBorder: light-dark(#1dbde6,#1dbde6);
+
+    --colour-underline: var(--colour-secondary-theme);
+    --colour-selected: var(--colour-info-theme);
+
+    --colour-inverted: #fcfcfc;
+
+    --colour-notification-bg: light-dark(#e9f9fd,var(--colour-canvas-2));
+    --colour-notification-warning-bg: light-dark(#fff6e6,var(--colour-canvas-2));
+    --colour-notification-danger-bg: light-dark(#fcebec,var(--colour-canvas-2));
+    --colour-notification-success-bg: light-dark(#f8fdf6,var(--colour-canvas-2));
+    /* #endregion */
+
+    /* #region Wider colours */
+    --wider-colour-1: #EEEEEE;
+    --wider-colour-2: #EBD7F6;
+    --wider-colour-3: #BEE8F8;
+    --wider-colour-4: #A6DCC7;
+    --wider-colour-5: #FAD0DA;
+    --wider-colour-6: #AFCCF2;
+    --wider-colour-7: #FFD2B4;
+    --wider-colour-8: #CDF0F2;
+    --wider-colour-9: #FFABC2;
+    --wider-colour-10: #DCEAF2;
+    --wider-colour-11: #EEBCB3;
+    --wider-colour-12: #F0BDFF;
+    --wider-colour-13: #FFF8CF;
+    --wider-colour-14: #92E3DF;
+    --wider-colour-15: #FEEAE8;
+    --wider-colour-16: #8BC3A6;
+    --wider-colour-17: #FEF0A6;
+    --wider-colour-18: #FFBDA0;
+    --wider-colour-19: #CBEFE1;
+    --wider-colour-20: #FFDD90;
+    --wider-colour-21: #97DBF2;
+    --wider-colour-22: #FFAF91;
+    --wider-colour-23: #C2DCD9;
+    /* #endregion */
+    /* #region Wider colours hover */
+    --wider-colour-1-hover: #E0E0E0;
+    --wider-colour-2-hover: #DFCCE8;
+    --wider-colour-3-hover: #B6DEED;
+    --wider-colour-4-hover: #98CBB7;
+    --wider-colour-5-hover: #EFC8D1;
+    --wider-colour-6-hover: #A6C1E5;
+    --wider-colour-7-hover: #F4CAAF;
+    --wider-colour-8-hover: #C2E3E5;
+    --wider-colour-9-hover: #F5A2B9;
+    --wider-colour-10-hover: #CFDCE3;
+    --wider-colour-11-hover: #E3B2A9;
+    --wider-colour-12-hover: #E3B2F2;
+    --wider-colour-13-hover: #F0E9C2;
+    --wider-colour-14-hover: #8AD9D6;
+    --wider-colour-15-hover: #F8E1DF;
+    --wider-colour-16-hover: #81B59A;
+    --wider-colour-17-hover: #F2E5A0;
+    --wider-colour-18-hover: #F2B69D;
+    --wider-colour-19-hover: #C2E3D7;
+    --wider-colour-20-hover: #F2D28A;
+    --wider-colour-21-hover: #8FD0E6;
+    --wider-colour-22-hover: #F0A68B;
+    --wider-colour-23-hover: #B9D1CE;
+    /* #endregion */
+    /* #region Wider colours active */
+    --wider-colour-1-active: #D6D6D6;
+    --wider-colour-2-active: #D4C2DD;
+    --wider-colour-3-active: #ABD1DF;
+    --wider-colour-4-active: #95C6B3;
+    --wider-colour-5-active: #E1BBC4;
+    --wider-colour-6-active: #9EB8DA;
+    --wider-colour-7-active: #E6BDA2;
+    --wider-colour-8-active: #B9D8DA;
+    --wider-colour-9-active: #E69AAF;
+    --wider-colour-10-active: #C6D3DA;
+    --wider-colour-11-active: #D6A9A1;
+    --wider-colour-12-active: #D8AAE6;
+    --wider-colour-13-active: #E6DFBA;
+    --wider-colour-14-active: #83CCC9;
+    --wider-colour-15-active: #F4E0DE;
+    --wider-colour-16-active: #7DB095;
+    --wider-colour-17-active: #FEF0A6;
+    --wider-colour-18-active: #E6AA90;
+    --wider-colour-19-active: #CBEFE1;
+    --wider-colour-20-active: #E6C782;
+    --wider-colour-21-active: #88C5DA;
+    --wider-colour-22-active: #E69E83;
+    --wider-colour-23-active: #AFC6C3;
+    /* #endregion */
+
 
     // Extra vars needed
     --content-max-width: #{$content-max-width};
-    --colour-brand: var(--colour-primary);
 
     // Cards variables
     --card-top-padding: 2rem;
@@ -55,13 +192,13 @@ $darkMode: 'true' !default;
     }
 
     // Add in media query based updates to the global vars like updating the heading 1 font size
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       @each $var, $value in $varsSM {
         #{$var}: #{$value};
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       @each $var, $value in $varsMD {
         #{$var}: #{$value};
       }
@@ -78,10 +215,10 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @include media-breakpoint-up(sm) {
       --padding-inline: 2.5rem;
     }
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @include media-breakpoint-up(md) {
       --padding-inline: 5.25rem;
 
       &:has(.nav--large) {
@@ -97,70 +234,88 @@ $darkMode: 'true' !default;
     }
   }
 
-  // Dark mode; functional colours get updated
-  @media screen and (prefers-color-scheme: light) {
-    :root {
-      --theme: light;
-      --body-theme: light;
-    }
+  .light-theme{
+    color-scheme: light;
   }
-  @media screen and (prefers-color-scheme: dark) {
-    :root {
-      --theme: dark;
-      --body-theme: dark;
+  .dark-theme{
+    color-scheme: dark;
+  }
+
+
+  // On any background colour we change the default text colour to our primary colour to stand out more
+  [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.invert-colours):not(iam-header):not(iam-notification):not(.bg-primary, .bg-danger, .bg-dark) {
+    
+    --colour-heading: var(--colour-primary-theme);
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-primary-theme);
+    
+    > * {
+      
+      color-scheme: light;
     }
   }
 
 
   :is(.bg-primary, .bg-danger, .bg-dark) {
-    --theme: dark;
+
+    --colour-heading: var(--colour-white);
+    --colour-body: var(--colour-white);
+    color: var(--colour-white);
 
     > * {
-      color: var(--colour-heading);
+      
+      color-scheme: dark;
     }
   }
 
+  // #region When the theme is set to dark via the dark mode component
+  // OR when the dark mode is set via the browser or device when no component is present
+  .dark-theme :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
 
-  @container style(--theme: dark) {
-    * > *,
-    [class*='bg-'] {
-      @each $color, $value in $dark-mode-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @each $color, $value in $dark-mode-functional-colors {
-        --colour-#{$color}: #{$value};
-      }
+    --colour-heading: var(--colour-primary-theme);
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-primary-theme);
+
+    // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+    > * {
+      color-scheme: light;
     }
   }
 
-  @container style(--body-theme: dark) {
+  .dark-theme .bg-light {
+    color-scheme: light;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    html:not(.light-theme) :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
 
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
 
-    [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.ds-header):not(iam-header) {
-      --theme: light;
-
+      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
       > * {
-        color: var(--colour-heading);
+        color-scheme: light;
       }
-    }    
+    }
 
+    html:not(.light-theme) .bg-light {
+
+      color-scheme: light;
+    }
   }
+  // #endregion
 
-
-  @container style(--theme: light) {
-    * > * {
-      @each $color, $value in $theme-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @each $color, $value in $non-theme-colors {
-        --colour-#{$color}: #{$value};
-      }
+  .invert-colours {
+    > * {
+      color-scheme: dark;
+      color: var(--colour-white);
     }
   }
 
 
   @media (forced-colors: active) {
-    #{$root} {
+    :root {
       --contrast-outline-width: 1px;
     }
   }

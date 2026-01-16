@@ -1,8 +1,8 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
+
 
 iam-std-address-lookup:not([data-allow-manual]) iam-address-lookup::part(manualButton){
   display: none;
@@ -78,4 +78,14 @@ iam-std-address-lookup.open-results iam-address-lookup::part(list-wrapper){
 
 iam-std-address-lookup.open-results iam-address-lookup [slot="preloadedList"]{
   display: block;
+}
+
+iam-address-lookup label[slot="actions"]:has([type="checkbox"]){
+  margin-bottom: 0;
+  padding-top: 0;
+
+  &:before,
+  &:after {
+    top: -0.2rem;
+  }
 }
