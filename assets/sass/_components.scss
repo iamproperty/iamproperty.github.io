@@ -1,64 +1,27 @@
 @use 'sass:math';
 @use '_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@use 'components/nav.preload' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/carousel.config' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/multiselect.preload' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
+
+
+@use 'components/nav.preload';
+@use 'components/carousel.config';
+@use 'components/multiselect.preload';
 @use 'components/multi-step-modal.global';
 
-@use 'components/inline-edit.preload' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/charts.config.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
-@use 'components/menu.global.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
+@use 'components/inline-edit.preload';
+@use 'components/charts.config.scss';
+@use 'components/menu.global.scss';
 
-@use 'components/tabs.config.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
+@use 'components/tabs.config.scss';
 
-@use 'components/address-lookup.preload.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
+@use 'components/address-lookup.preload.scss';
 
 
 @use 'components/milestone.scss';
-@use 'components/calendar.config.scss' with (
-  $layers: $layers,
-  $darkMode: $darkMode,
-  $mobileOnly: $mobileOnly
-);
+@use 'components/calendar.config.scss';
 
-@include layer('components', $layers) {
+@layer components {
   // Make sure the first
   main {
     position: relative;
@@ -74,7 +37,7 @@ $darkMode: 'true' !default;
     grid-column: container;
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @media screen and (min-width: 62em) {
     iam-header:not(:defined) {
       min-height: rem(470);
     }

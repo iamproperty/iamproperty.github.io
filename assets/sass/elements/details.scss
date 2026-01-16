@@ -1,11 +1,11 @@
 @use 'sass:map';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   details {
     display: block;
 
@@ -46,7 +46,7 @@ $darkMode: 'true' !default;
       padding-bottom: rem(42);
     }
 
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       --inline-padding: #{rem(14)};
       --block-padding: #{rem(14)};
       --icon-top: #{rem(24)};
@@ -76,7 +76,7 @@ $darkMode: 'true' !default;
       padding-inline-end: calc(#{var(--inline-padding)} + #{rem(27)} + #{rem(12)});
       padding-block: var(--block-padding) !important;
       position: relative;
-      color: $headings-color;
+      color: var(--colour-heading);
 
       &:is(:hover, :focus-visible) {
         background: var(--colour-light);
@@ -134,9 +134,9 @@ $darkMode: 'true' !default;
     summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label)) {
       // h3 purposelessly missed out
 
-      font-family: $headings-font-family;
-      font-style: $headings-font-style;
-      color: $headings-color;
+      font-family: var(--font-heading);
+      font-style: normal;
+      color: var(--colour-heading);
       clear: both;
       display: block;
 
@@ -146,7 +146,7 @@ $darkMode: 'true' !default;
 
       font-size: rem(18);
       line-height: var(--line-height);
-      padding-bottom: map.get($heading-sizes, 'h3_pb');
+      padding-bottom: var(--heading-pb);
       font-weight: 700;
       max-width: 100%;
 
@@ -189,7 +189,7 @@ $darkMode: 'true' !default;
       overflow: hidden;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       --dialog-padding: #{rem(32)};
       
     margin-inline: calc(var(--dialog-padding) * -1);

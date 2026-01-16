@@ -253,7 +253,7 @@
   table {
     width: fit-content !important;
     padding-top: 0;
-    height: var(--chart-height-resp, #{rem(120)});
+    height: var(--chart-height-resp);
   }
 
   tbody {
@@ -279,12 +279,12 @@
   --fc-value-width: #{rem(24)};
 
   table {
-    height: var(--chart-height-lg-set, #{rem(120)});
+    height: var(--chart-height-lg, #{rem(120)});
   }
 }
 
 .chart__wrapper {
-  @container (min-width: #{em($device-xs-width,16)}) {
+  @container (min-width: 36em) {
     --fc-group-width: #{rem(22)};
     --fc-value-width: #{rem(24)};
   }

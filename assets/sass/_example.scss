@@ -4,12 +4,9 @@
 // Include any local files needed, the _func file will bring in all functions and variables
 @use '_func.scss' as *;
 
-// Sass variables declared
-$root: ':root' !default;
-$layers: 'true' !default;
 
 // Each file should be added to a layer: legacy, reset, elements, components, templates, overrides or utilities
-@include layer('elements') {
+@layer elements {
   // Try to keep the selectors as basic and easy to read as apossible
   .element {
     --css-variable: 3rem;
@@ -27,11 +24,11 @@ $layers: 'true' !default;
     }
 
     // Any media queries should be added after all of the root rulesets
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       min-height: rem(300);
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
       min-height: rem(470);
     }
 
@@ -43,7 +40,7 @@ $layers: 'true' !default;
     }
 
     @media (forced-colors: active) {
-      #{$root} {
+      :root {
         --contrast-outline-width: 1px;
       }
     }

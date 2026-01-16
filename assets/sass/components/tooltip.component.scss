@@ -74,11 +74,11 @@
       color: inherit;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       max-width: #{rem(335)};
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
       max-width: #{rem(360)};
     }
 

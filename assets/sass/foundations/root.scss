@@ -2,37 +2,236 @@
 
 @use '../func' as *;
 
-$root: ':root' !default;
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
+
 
 @layer legacy, reset, elements, components, templates, overrides, utilities;
 
-@include layer('reset', $layers) {
-  #{$root} {
-    // Print out the $vars array setup in the variables file so they can be used as CSS vars
-    // Custom variable values only support SassScript inside `#{}`.
-    @each $var, $value in $vars {
-      #{$var}: #{$value};
-    }
+@layer reset {
+  :root {
 
-    // Wider colours
-    @each $colour, $value in $wider-colours {
-      --wider-colour-#{$colour}: #{$value};
-    }
-    @each $colour, $value in $wider-colours-hover {
-      --wider-colour-#{$colour}-hover: #{$value};
-    }
-    @each $colour, $value in $wider-colours-active {
-      --wider-colour-#{$colour}-active: #{$value};
-    }
+    color-scheme: light dark;
 
-    // Extra vars needed
-    --content-max-width: #{$content-max-width};
-    --colour-brand: var(--colour-primary);
+    --colour-black: #000000;
+    --colour-white: #fcfcfc;
 
-    // Cards variables
+    /* #region Theme colours */
+    --colour-primary-theme: #00313c;
+    --colour-primary: light-dark(#00313c,#b3c1c5);
+
+    --colour-secondary-theme: #b4e6a5;
+    --colour-secondary: #b4e6a5;
+    
+    --colour-success-theme: #b4e6a5;
+    --colour-success: #b4e6a5;
+
+    --colour-complete: #0f9d58;
+    --colour-complete-theme: #0f9d58;
+
+    --colour-info-theme: #1ebee6;
+    --colour-info: light-dark(#1ebee6,#35c5e9);
+
+    --colour-warning-theme: #ffa500;
+    --colour-warning: light-dark(#ffa500,#ffb733);
+
+    --colour-danger-theme: #dc3545;
+    --colour-danger: light-dark(#dc3545,#e7727d);
+
+    --colour-light-theme: #eeeeee;
+    --colour-light: #eeeeee;
+
+    --colour-dark-theme: #46003c;
+    --colour-dark: light-dark(#46003c,#b599b1);
+    /* #endregion */
+    /* #region functional colours */
+    --colour-muted: #9d9d9d;
+
+    --colour-canvas: light-dark(#fcfcfc,#262626);
+    --colour-canvas-2: light-dark(#ffffff,#313131);
+    --colour-body-default: light-dark(#595959,#bfbfbf);
+    --colour-body: light-dark(#595959,#bfbfbf);
+    --colour-heading: light-dark(var(--colour-primary-theme),var(--colour-primary));
+    --colour-link: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-focus: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-active: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-border: light-dark(#d8d8d8,var(--colour-white));
+    --colour-brand: light-dark(var(--colour-primary-theme),var(--colour-white));
+
+    --colour-btn: var(--colour-primary-theme);
+    --colour-btn-bg: light-dark(var(--colour-warning-theme),var(--colour-white));
+    --colour-btn-border: light-dark(var(--colour-warning-theme),var(--colour-white));
+    --colour-btn-bg-hover: transparent;
+    --colour-btn-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+
+    --colour-btn-secondary: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-border: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-bg: transparent;
+    --colour-btn-secondary-bg-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary-hover: light-dark(var(--colour-inverted),var(--colour-primary-theme));
+    --colour-btn-action-hover-bg: light-dark(var(--colour-light),#313131);
+
+    --colour-activeLink: light-dark(#e8f9fd,#173c45);
+    --colour-activeLinkBorder: light-dark(#1dbde6,#1dbde6);
+
+    --colour-underline: var(--colour-secondary-theme);
+    --colour-selected: var(--colour-info-theme);
+
+    --colour-inverted: #fcfcfc;
+
+    --colour-notification-bg: light-dark(#e9f9fd,var(--colour-canvas-2));
+    --colour-notification-warning-bg: light-dark(#fff6e6,var(--colour-canvas-2));
+    --colour-notification-danger-bg: light-dark(#fcebec,var(--colour-canvas-2));
+    --colour-notification-success-bg: light-dark(#f8fdf6,var(--colour-canvas-2));
+    /* #endregion */
+    /* #region Wider colours */
+    --wider-colour-1: #EEEEEE;
+    --wider-colour-2: #EBD7F6;
+    --wider-colour-3: #BEE8F8;
+    --wider-colour-4: #A6DCC7;
+    --wider-colour-5: #FAD0DA;
+    --wider-colour-6: #AFCCF2;
+    --wider-colour-7: #FFD2B4;
+    --wider-colour-8: #CDF0F2;
+    --wider-colour-9: #FFABC2;
+    --wider-colour-10: #DCEAF2;
+    --wider-colour-11: #EEBCB3;
+    --wider-colour-12: #F0BDFF;
+    --wider-colour-13: #FFF8CF;
+    --wider-colour-14: #92E3DF;
+    --wider-colour-15: #FEEAE8;
+    --wider-colour-16: #8BC3A6;
+    --wider-colour-17: #FEF0A6;
+    --wider-colour-18: #FFBDA0;
+    --wider-colour-19: #CBEFE1;
+    --wider-colour-20: #FFDD90;
+    --wider-colour-21: #97DBF2;
+    --wider-colour-22: #FFAF91;
+    --wider-colour-23: #C2DCD9;
+    /* #endregion */
+    /* #region Wider colours hover */
+    --wider-colour-1-hover: #E0E0E0;
+    --wider-colour-2-hover: #DFCCE8;
+    --wider-colour-3-hover: #B6DEED;
+    --wider-colour-4-hover: #98CBB7;
+    --wider-colour-5-hover: #EFC8D1;
+    --wider-colour-6-hover: #A6C1E5;
+    --wider-colour-7-hover: #F4CAAF;
+    --wider-colour-8-hover: #C2E3E5;
+    --wider-colour-9-hover: #F5A2B9;
+    --wider-colour-10-hover: #CFDCE3;
+    --wider-colour-11-hover: #E3B2A9;
+    --wider-colour-12-hover: #E3B2F2;
+    --wider-colour-13-hover: #F0E9C2;
+    --wider-colour-14-hover: #8AD9D6;
+    --wider-colour-15-hover: #F8E1DF;
+    --wider-colour-16-hover: #81B59A;
+    --wider-colour-17-hover: #F2E5A0;
+    --wider-colour-18-hover: #F2B69D;
+    --wider-colour-19-hover: #C2E3D7;
+    --wider-colour-20-hover: #F2D28A;
+    --wider-colour-21-hover: #8FD0E6;
+    --wider-colour-22-hover: #F0A68B;
+    --wider-colour-23-hover: #B9D1CE;
+    /* #endregion */
+    /* #region Wider colours active */
+    --wider-colour-1-active: #D6D6D6;
+    --wider-colour-2-active: #D4C2DD;
+    --wider-colour-3-active: #ABD1DF;
+    --wider-colour-4-active: #95C6B3;
+    --wider-colour-5-active: #E1BBC4;
+    --wider-colour-6-active: #9EB8DA;
+    --wider-colour-7-active: #E6BDA2;
+    --wider-colour-8-active: #B9D8DA;
+    --wider-colour-9-active: #E69AAF;
+    --wider-colour-10-active: #C6D3DA;
+    --wider-colour-11-active: #D6A9A1;
+    --wider-colour-12-active: #D8AAE6;
+    --wider-colour-13-active: #E6DFBA;
+    --wider-colour-14-active: #83CCC9;
+    --wider-colour-15-active: #F4E0DE;
+    --wider-colour-16-active: #7DB095;
+    --wider-colour-17-active: #FEF0A6;
+    --wider-colour-18-active: #E6AA90;
+    --wider-colour-19-active: #CBEFE1;
+    --wider-colour-20-active: #E6C782;
+    --wider-colour-21-active: #88C5DA;
+    --wider-colour-22-active: #E69E83;
+    --wider-colour-23-active: #AFC6C3;
+    /* #endregion */
+    /* #region chart colours */
+
+    --chart-colour-1: var(--wider-colour-3);
+    --chart-colour-2: var(--wider-colour-4);
+    --chart-colour-3: var(--wider-colour-5);
+    --chart-colour-4: var(--wider-colour-6);
+    --chart-colour-5: var(--wider-colour-7);
+    --chart-colour-6: var(--wider-colour-8);
+    --chart-colour-7: var(--wider-colour-9);
+    --chart-colour-8: var(--wider-colour-10);
+    --chart-colour-9: var(--wider-colour-11);
+    --chart-colour-10: var(--wider-colour-12);
+
+    --chart-colour-1-hover: var(--wider-colour-3-hover);
+    --chart-colour-2-hover: var(--wider-colour-4-hover);
+    --chart-colour-3-hover: var(--wider-colour-5-hover);
+    --chart-colour-4-hover: var(--wider-colour-6-hover);
+    --chart-colour-5-hover: var(--wider-colour-7-hover);
+    --chart-colour-6-hover: var(--wider-colour-8-hover);
+    --chart-colour-7-hover: var(--wider-colour-9-hover);
+    --chart-colour-8-hover: var(--wider-colour-10-hover);
+    --chart-colour-9-hover: var(--wider-colour-11-hover);
+    --chart-colour-10-hover: var(--wider-colour-12-hover);
+
+    --chart-colour-success: #d2f0c9 !important;
+    --chart-colour-success-hover: #8ad873 !important;
+    --chart-colour-danger: #f5c2c7 !important;
+    --chart-colour-danger-hover: #f5c2e7 !important;
+    --chart-colour-warning: #ffd280 !important;
+    --chart-colour-warning-hover: #ffb020 !important;
+
+    /* #endregion */
+    /* #region Type vars */
+    --font-body: 'Qanelas', arial, sans-serif;
+    --font-heading: 'Qanelas', arial, sans-serif;
+    --heading-weight: bold;
+    --type-scale: 1.2;
+    --body-fs: 1rem;
+    /* #endregion */
+    // #region heading
+    --h1-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 6)), 0.25rem);
+    --h2-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 5)), 0.25rem);
+    --h3-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 3)), 0.25rem);
+    --h4-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 2)), 0.25rem);
+    --h1-lh: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h1-pb: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h2-lh: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h2-pb: round(calc(1em * var(--type-scale)), 0.25rem);
+
+    --h3-lh: round(up, calc(1em * var(--type-scale)), 0.25rem);
+    --h3-pb: round(up, calc(1em * var(--type-scale)), 0.25rem);
+
+    --h4-lh: round(up, calc(1em * var(--type-scale)), 0.25rem);
+    --h4-pb: round(up, calc(1em * var(--type-scale)), 0.25rem);
+    // #endregion
+    // #region rounded borders
+    --border-radius-sm: 0.25rem;
+    --border-radius: 0.5rem;
+    --border-radius-lg: 1rem;
+    --border-radius-xl: 1.5rem;
+    --border-radius-2xl: 3rem;
+    // #endregion
+    // #region Z-index
+    --index-below: -1;
+    --index-base: 0;
+    --index-focus: 2;
+    --index-above: 10;
+    --index-floating: 100;
+    --index-menu: 200;
+    --index-overlay: 1000;
+    // #endregion
+    // #region Cards variables
     --card-top-padding: 2rem;
     --card-right-padding: #{rem(16+16+24)};
     --card-bottom-padding: 2rem;
@@ -41,126 +240,169 @@ $darkMode: 'true' !default;
     --card-box-shadow: #{rem(2)} #{rem(3)} #{rem(6)} rgba(0, 0, 0, 0.2);
     --nav-height: #{rem(96)};
     --code-color: #d63384;
-
-    // Default borders
+    // #endregion 
+    // #region Default borders
     --border-width: 1px;
     --border-style: solid;
     --border-color: var(--colour-border);
+    // #endregion
+    
+ 
+    // #region layout
+    --gap: #{rem(16)};
+    --gutter: #{rem(24)};
+    --max-width: #{rem(1280)};
+    --content-max-width: #{rem(800)};
+    --input-max-width: #{rem(800)};
+    --select-max-width: #{rem(800)};
 
     --container-max-width: #{rem(1280)};
+    --container-padding-top: 0;
+    --container-padding-bottom: #{rem(16)};
     --padding-inline: 1.5rem;
+    --container-padding-x: #{rem(24)};
+    --container-padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom) var(--container-padding-x);
+    // #endregion
 
-    @media (prefers-reduced-motion: no-preference) {
-      scroll-behavior: smooth;
-    }
+    // #region icons
+    $icon-arrow: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><path d='M6.5,2l9,9-9,9' style='fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px'/></svg>");
+    $icon-close: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>");
+    $icon-question: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'><path d='M14 21.5v-3c0-0.281-0.219-0.5-0.5-0.5h-3c-0.281 0-0.5 0.219-0.5 0.5v3c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5zM18 11c0-2.859-3-5-5.688-5-2.547 0-4.453 1.094-5.797 3.328-0.141 0.219-0.078 0.5 0.125 0.656l2.063 1.563c0.078 0.063 0.187 0.094 0.297 0.094 0.141 0 0.297-0.063 0.391-0.187 0.734-0.938 1.047-1.219 1.344-1.437 0.266-0.187 0.781-0.375 1.344-0.375 1 0 1.922 0.641 1.922 1.328 0 0.812-0.422 1.219-1.375 1.656-1.109 0.5-2.625 1.797-2.625 3.313v0.562c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5v0c0-0.359 0.453-1.125 1.188-1.547 1.188-0.672 2.812-1.578 2.812-3.953zM24 14c0 6.625-5.375 12-12 12s-12-5.375-12-12 5.375-12 12-12 12 5.375 12 12z'/></svg>");
+
+    $icon-new-tab: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='M304 24c0 13.3 10.7 24 24 24H430.1L207 271c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l223-223V184c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24H328c-13.3 0-24 10.7-24 24zM72 32C32.2 32 0 64.2 0 104V440c0 39.8 32.2 72 72 72H408c39.8 0 72-32.2 72-72V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V440c0 13.3-10.7 24-24 24H72c-13.3 0-24-10.7-24-24V104c0-13.3 10.7-24 24-24H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H72z'/></svg>");
+
+    --icon-arrow: #{escape-svg($icon-arrow)};
+    --icon-close: #{escape-svg($icon-close)};
+    --icon-question: #{escape-svg($icon-question)};
+    --icon-new-tab: #{escape-svg($icon-new-tab)};
+
+    // #endregion
+
+    // #region spacing
+    --spacer: 1rem;
+    --spacer-0: 0;
+    --spacer-1: calc(var(--spacer) * 0.5);
+    --spacer-2: var(--spacer);
+    --spacer-3: calc(var(--spacer) * 1.5);
+    --spacer-4: calc(var(--spacer) * 2);
+    --spacer-5: calc(var(--spacer) * 3);
+    // #endregion
 
     // Add in media query based updates to the global vars like updating the heading 1 font size
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      @each $var, $value in $varsSM {
-        #{$var}: #{$value};
-      }
-    }
-
-    @include media-breakpoint-up(md, $mobileOnly) {
-      @each $var, $value in $varsMD {
-        #{$var}: #{$value};
-      }
-    }
-
     @media screen and (min-width: 36em) {
-      @each $var, $value in map.get($vars-responsive, 'sm') {
-        #{'--'+$var}: #{$value};
-      }
-    }
-    @media screen and (min-width: 62em) {
-      @each $var, $value in map.get($vars-responsive, 'md') {
-        #{'--'+$var}: #{$value};
-      }
-    }
-
-    @include media-breakpoint-up(sm, $mobileOnly) {
+      --container-padding-x: #{rem(40)};
       --padding-inline: 2.5rem;
+      --gutter: 2.5rem;
+      --scale: 1.25;
     }
-    @include media-breakpoint-up(md, $mobileOnly) {
+    
+    @media screen and (min-width: 62em) {
+
+      --container-padding-x: #{rem(84)};
       --padding-inline: 5.25rem;
+      --gutter: 5.25rem;
+      --scale: 1.414;
 
       &:has(.nav--large) {
         --container-max-width: #{rem(1920)} !important;
         --max-width: #{rem(1920)} !important;
         --padding-inline: #{rem(56)} !important;
-        --container-padding-x-md: #{rem(56)} !important;
-        --container-padding-md: var(--container-padding-top) var(--container-padding-x-md)
-          var(--container-padding-bottom) var(--container-padding-x-md);
-        --container-padding: var(--container-padding-md);
+        --container-padding-x: #{rem(56)} !important;
+        --container-padding: var(--container-padding-top) var(--container-padding-x)
+          var(--container-padding-bottom) var(--container-padding-x);
         --gutter: 3.5rem;
       }
     }
-  }
 
-  // Dark mode; functional colours get updated
-  @media screen and (prefers-color-scheme: light) {
-    :root {
-      --theme: light;
-      --body-theme: light;
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
     }
   }
-  @media screen and (prefers-color-scheme: dark) {
-    :root {
-      --theme: dark;
-      --body-theme: dark;
+
+  .light-theme{
+    color-scheme: light;
+  }
+  .dark-theme{
+    color-scheme: dark;
+  }
+
+
+  // On any background colour we change the default text colour to our primary colour to stand out more
+  [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.invert-colours):not(iam-header):not(iam-notification):not(.bg-primary, .bg-danger, .bg-dark) {
+    
+    --colour-heading: var(--colour-primary-theme);
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-primary-theme);
+    
+    > * {
+      
+      color-scheme: light;
     }
   }
 
 
   :is(.bg-primary, .bg-danger, .bg-dark) {
-    --theme: dark;
+
+    --colour-heading: var(--colour-white);
+    --colour-body: var(--colour-white);
+    color: var(--colour-white);
 
     > * {
-      color: var(--colour-heading);
+      
+      color-scheme: dark;
     }
   }
 
+  // #region When the theme is set to dark via the dark mode component
+  // OR when the dark mode is set via the browser or device when no component is present
+  
+  .dark-theme :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
+    
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
 
-  @container style(--theme: dark) {
-    * > *,
-    [class*='bg-'] {
-      @each $color, $value in $dark-mode-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @each $color, $value in $dark-mode-functional-colors {
-        --colour-#{$color}: #{$value};
-      }
-    }
-  }
-
-  @container style(--body-theme: dark) {
-
-
-    [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.ds-header):not(iam-header) {
-      --theme: light;
-
+      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
       > * {
-        color: var(--colour-heading);
+        color-scheme: light;
       }
-    }    
-
+    
   }
 
+  .dark-theme .bg-light {
+    color-scheme: light;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    html:not(.light-theme) :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
 
-  @container style(--theme: light) {
-    * > * {
-      @each $color, $value in $theme-colors {
-        --colour-#{$color}: #{$value};
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
+
+      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+      > * {
+        color-scheme: light;
       }
-      @each $color, $value in $non-theme-colors {
-        --colour-#{$color}: #{$value};
-      }
+    }
+
+    html:not(.light-theme) .bg-light {
+
+      color-scheme: light;
+    }
+  }
+  // #endregion
+
+  .invert-colours {
+    > * {
+      color-scheme: dark;
+      color: var(--colour-white);
     }
   }
 
 
   @media (forced-colors: active) {
-    #{$root} {
+    :root {
       --contrast-outline-width: 1px;
     }
   }

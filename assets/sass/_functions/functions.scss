@@ -30,15 +30,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
 
 // Starts at zero
 // Used to ensure the min-width of the lowest breakpoint starts at 0.
-@mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
-  @if list.length($map) > 0 {
-    $values: map.values($map);
-    $first-value: list.nth($values, 1);
-    @if $first-value != 0 {
-      @warn "First breakpoint in #{$map-name} must start at 0, but starts at #{$first-value}.";
-    }
-  }
-}
+
 
 // Colors
 @function to-rgb($value) {
@@ -157,6 +149,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
 // Requires the use of quotes around data URIs.
 
 @function escape-svg($string) {
+  $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29'));
   @if string.index($string, 'data:image/svg+xml') {
     @each $char, $encoded in $escaped-characters {
       // Do not escape the url brackets
@@ -199,7 +192,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   $color-contrast-light: $color-contrast-light,
   $min-contrast-ratio: $min-contrast-ratio
 ) {
-  $foregrounds: $color-contrast-light, $color-contrast-dark, $white, $black;
+  $foregrounds: $color-contrast-light, $color-contrast-dark, #fff, #000;
   $max-ratio: 0;
   $max-ratio-color: null;
 
@@ -355,9 +348,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 }
 // #endregion
 
-@function spacing($int) {
-  @return map.get($spacers, $int);
-}
+
 
 @function Pow($x, $n) {
   $ret: 1;
@@ -435,11 +426,6 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 }
 @function shade($colour, $percent) {
   @return $colour;
-}
-
-@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
-  $next: breakpoint-next($name, $breakpoints);
-  @return if($next, breakpoint-min($next, $breakpoints), null);
 }
 
 // Trims the start/left of the string:

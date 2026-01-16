@@ -58,7 +58,7 @@ class iamModal extends HTMLElement {
 
 
 
-    const openModal = () => {
+    const openModal = (): void => {
       dialog?.showModal();
       dialog?.focus();
 
@@ -109,7 +109,7 @@ class iamModal extends HTMLElement {
       this.moveBefore(element, originalDialog);
     });
 
-    const closeModal = () => {
+    const closeModal = (): void => {
       dialog?.close();
       
       const closeEvent = new CustomEvent('modal-closed', {

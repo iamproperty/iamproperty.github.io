@@ -3,8 +3,7 @@
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
 
-
-@include display();
+@use '../utilities/display' as *;
 
 hr {
     --border-style: solid;
@@ -30,19 +29,19 @@ hr {
 
   .file-upload__title {
     margin-top: 0; // 1
-    margin-bottom: $headings-margin-bottom;
-    font-family: $headings-font-family;
-    font-style: $headings-font-style;
-    font-weight: $headings-font-weight;
-    line-height: $headings-line-height;
-    color: $headings-color;
+    margin-bottom: 0;
+    font-family: var(--font-heading);
+    font-style: normal;
+    font-weight: var(--heading-weight);
+    line-height: 2rem;
+    color: var(--colour-heading);
     clear: both;
     display: block;
     padding-bottom: 2rem;
 
-    font-size: map.get($heading-sizes, 'h4_fs');
-    line-height: map.get($heading-sizes, 'h4_lh');
-    padding-bottom: map.get($heading-sizes, 'h4_pb');
+    font-size: var(--h4-fs);
+    line-height: var(--h4-lh);
+    padding-bottom: var(--h4-pb);
     max-width: var(--content-max-width);
   }
 

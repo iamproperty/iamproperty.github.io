@@ -6,13 +6,8 @@
 @use '../elements/buttons.scss' as *;
 @use '../elements/buttons--action.scss' as *;
 
-
-*, *::before, *::after {
-    box-sizing: border-box;
-}
-
-@include visually-hidden();
-@include display();
+@use '../utilities/visually-hidden' as *;
+@use '../utilities/display' as *;
 
 *,
 *::before,

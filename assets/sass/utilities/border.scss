@@ -1,0 +1,81 @@
+@layer utilities {
+  .border {
+    border: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-0 {
+    border: 0 !important;
+  }
+
+  .border-top {
+    border-top: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-top-0 {
+    border-top: 0 !important;
+  }
+
+  .border-end {
+    border-right: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-end-0 {
+    border-right: 0 !important;
+  }
+
+  .border-bottom {
+    border-bottom: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-bottom-0 {
+    border-bottom: 0 !important;
+  }
+
+  .border-start {
+    border-left: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-start-0 {
+    border-left: 0 !important;
+  }
+
+  .border-1 {
+    --border-width: 1px;
+  }
+
+  .border-2 {
+    --border-width: 2px;
+  }
+
+  .border-3 {
+    --border-width: 3px;
+  }
+
+  .border-4 {
+    --border-width: 4px;
+  }
+
+  .border-5 {
+    --border-width: 5px;
+  }
+
+  .border-opacity-10 {
+    --border-opacity: 0.1;
+  }
+
+  .border-opacity-25 {
+    --border-opacity: 0.25;
+  }
+
+  .border-opacity-50 {
+    --border-opacity: 0.5;
+  }
+
+  .border-opacity-75 {
+    --border-opacity: 0.75;
+  }
+
+  .border-opacity-100 {
+    --border-opacity: 1;
+  }
+}

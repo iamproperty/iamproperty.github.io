@@ -94,7 +94,7 @@ function createAppliedFilters(container, filters): void {
     }
   };
 
-  const checkForChecked = (setFilter = false) => {
+  const checkForChecked = (setFilter = false): void => {
 
     filters.innerHTML = '';
     Array.from(
@@ -126,7 +126,7 @@ function createAppliedFilters(container, filters): void {
   });
 
 
-  const filterClicked = (filter) => {
+  const filterClicked = (filter): void => {
 
     if(!filter?.hasAttribute('data-name'))
       return false;

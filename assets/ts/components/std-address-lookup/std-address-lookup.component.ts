@@ -1604,7 +1604,7 @@ class iamSTDAddressLookup extends HTMLElement {
       <option></option>  
       ${countiesString}
     </select></label>
-    <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" required data-required data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
+    <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" ${!this.hasAttribute('data-required') || this.hasAttribute('data-required') && this.getAttribute('data-required') == 'false' ? 'required data-required' : ''} data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
     <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (!this.hasAttribute('data-show-required') && !this.hasAttribute('data-county-required') ? ' (optional)' : '')} 
       <select name="region" data-readonly ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
         <option value=""></option>
@@ -1661,7 +1661,7 @@ class iamSTDAddressLookup extends HTMLElement {
     </fieldset>
 
     <button slot="actions" type="button" id="overseasToggle" class="link toggleOverseas">Use overseas address</button>` : ''}
-
+    ${this.hasAttribute('data-address-unknown') ? `<label slot="actions"><input type="checkbox" value="true" name="${this.getAttribute('data-address-unknown')}" ${this.hasAttribute('data-address-unknown-checked') ? 'checked="checked"' : '' }/> Address unknown</label>` : ``}
     <div class="bg-light text-center px-3" slot="afterList">
       <p class="p-2">Can't find an address? Check details with the <br/><a href="" class="fa-new"><i class="fa-regular fa-arrow-up-right-from-square"></i>Royal mail address finder</a></p>
       ${this.hasAttribute('data-allow-overseas') ? `<hr/><p class="p-2">If the address doesn’t exist you can enter manually <br /><button type="button" id="overseasToggleInline" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-edit me-1"></i>Enter address manually</button></p>` : ''}
@@ -1680,7 +1680,7 @@ class iamSTDAddressLookup extends HTMLElement {
     const overseasFields = this.querySelector('.overseas');
 
 
-    const openOverseas = () => {
+    const openOverseas = (): void => {
       const updateEvent = new CustomEvent('open-manual');
       addressComponent.dispatchEvent(updateEvent);
       this.classList.add('show-overseas');
@@ -1731,6 +1731,7 @@ class iamSTDAddressLookup extends HTMLElement {
       addressComponent.dispatchEvent(updateEvent);
 
       languageToggle.focus();
+
     });
 
 
@@ -1753,6 +1754,39 @@ class iamSTDAddressLookup extends HTMLElement {
       }
     });
 
+
+    // If the address unknown checkbox if checked then remove any required fields so you can post the form
+    if(this.hasAttribute('data-address-unknown')){
+      const addressUnknownInput = this.querySelector(`[name="${this.getAttribute('data-address-unknown')}"]`);
+
+      if(addressUnknownInput && addressUnknownInput.checked) {
+        
+        Array.from(this.querySelectorAll('[required]')).forEach(element => {
+          element.removeAttribute('required');
+          element.setAttribute('data-not-unknown-required','true');
+        });
+      }
+
+      addressUnknownInput?.addEventListener('change',(event) => {
+        if(addressUnknownInput.checked) {
+          Array.from(this.querySelectorAll('[required]')).forEach(element => {
+            element.removeAttribute('required');
+            element.setAttribute('data-not-unknown-required','true');
+          });
+
+          const updateEvent = new CustomEvent('address-unknown');
+          this.dispatchEvent(updateEvent);
+        }
+        else {
+          Array.from(this.querySelectorAll('[data-not-unknown-required')).forEach(element => {
+            element.setAttribute('required','true');
+          });
+          
+          const updateEvent = new CustomEvent('address-known');
+          this.dispatchEvent(updateEvent);
+        }
+      });
+    }
   }
 }
 

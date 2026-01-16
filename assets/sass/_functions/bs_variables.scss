@@ -6,15 +6,19 @@ $vars: () !default;
 $varsSM: () !default;
 $varsMD: () !default;
 
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
-$optionalText: 'true' !default;
-
 @use 'functions' as *;
 @forward 'variables' show $heading-sizes, $content-max-width-px, $content-max-width, $table-padding, $table-padding-px,
-  $td-mw, $td-mw-px, $ut-mh-sm-px, $ut-mh-sm, $ut-mh-md-px, $ut-mh-md, $ut-mh-lg-px, $ut-mh-lg, $non-theme-colors,
-  $dark-mode-colors, $dark-mode-functional-colors, $wider-colours, $wider-colours-hover, $wider-colours-active,
-  $grid-breakpoints;
+  $td-mw, $td-mw-px, $non-theme-colors, $dark-mode-colors, $dark-mode-functional-colors, $wider-colours, $wider-colours-hover, $wider-colours-active;
+
+$grid-row-columns: 6 !default;
+$grid-breakpoints: (
+  xs: 0,
+  sm: 36em,
+  /* 576 */ md: 62em /* 992 */,
+);
+
+$breakpoints: $grid-breakpoints;
+
 
 // #region Boostrap
 // Color system
@@ -462,7 +466,7 @@ $container-max-widths: (
 // Set the number of columns and specify the width of the gutters.
 
 $grid-columns: 12 !default;
-$grid-gutter-width: 1.5rem !default;
+$grid-gutter-width: 1rem !default;
 $grid-row-columns: 6 !default;
 
 // Container padding

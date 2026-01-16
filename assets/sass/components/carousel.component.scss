@@ -27,7 +27,7 @@
   }
 
   .carousel__inner {
-    --gutter-x: #{$grid-gutter-width};
+    --gutter-x: 1rem;
     overflow-x: auto;
     padding-bottom: 1rem;
     scroll-snap-type: x mandatory;
@@ -117,7 +117,7 @@
   .carousel__wrapper {
     overflow: hidden;
 
-    margin-inline: calc(-0.5 * $grid-gutter-width);
+    margin-inline: calc(-0.5 * 1rem);
   }
   .carousel__inner {
   }
@@ -132,7 +132,7 @@
   }
 
   ::slotted(div:last-child) {
-    padding-inline-end: calc(0.5 * $grid-gutter-width);
+    padding-inline-end: calc(0.5 * 1rem);
     --last-item-extra: 0px;
   }
 
@@ -202,11 +202,11 @@
     height: 100%;
     width: 100%;
     background: currentColor;
-    mask-image: escape-svg($accordion-button-icon);
+    mask-image:  var(--icon-arrow);
     mask-size: 50%;
     mask-repeat: no-repeat;
     mask-position: 50% 60%;
-    -webkit-mask-image: escape-svg($accordion-button-icon);
+    -webkit-mask-image:  var(--icon-arrow);
     -webkit-mask-size: 50%;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: 55% 50%;

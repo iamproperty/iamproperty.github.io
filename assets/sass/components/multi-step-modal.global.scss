@@ -32,7 +32,7 @@
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
 
 
       .btn--wrapper {
@@ -47,7 +47,7 @@
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
 
       form {
         display: flex;

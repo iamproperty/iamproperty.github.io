@@ -1,9 +1,9 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
+
 
 @layer elements {
   // non-js fallback
@@ -61,7 +61,7 @@ $darkMode: 'true' !default;
     max-height: min(90vh, #{rem(752)});
     overscroll-behavior: contain;
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       //--dialog-padding: #{rem(32)};
       //padding: var(--dialog-padding);
       min-width: rem(335);
@@ -69,7 +69,7 @@ $darkMode: 'true' !default;
       max-width: rem(686);
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
       min-width: rem(454);
       width: fit-content;
       max-width: rem(736);

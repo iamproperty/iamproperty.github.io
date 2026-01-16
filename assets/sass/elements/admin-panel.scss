@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   .admin-panel {
     --padding-x: #{rem(24)};
     --padding-top: #{rem(16)};
@@ -58,7 +58,7 @@ $darkMode: 'true' !default;
     }
 
     > :is(.admin-panel__heading):first-child {
-      display: flex;
+      display: flex!important;
       flex-wrap: wrap;
       gap: 1rem;
       align-items: center;
@@ -164,7 +164,7 @@ $darkMode: 'true' !default;
       grid-template-columns: subgrid !important;
 
       > *:not(:first-child) {
-        grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
+        grid-column: var(--col-start, col-1-start) / var(--col-end, col-12-end);
       }
     }
   }
@@ -185,10 +185,6 @@ $darkMode: 'true' !default;
       background: var(--colour-canvas);
       margin-inline: calc(var(--padding-x) * -1);
       margin-bottom: var(--padding-top);
-
-      @include light-mode($darkMode) {
-        background: #eeeeee;
-      }
 
       &:first-child {
         margin-top: calc(var(--padding-top) * -1);

@@ -1,0 +1,9 @@
+@layer utilities {
+  .pe-none {
+    pointer-events: none !important;
+  }
+
+  .pe-auto {
+    pointer-events: auto !important;
+  }
+}

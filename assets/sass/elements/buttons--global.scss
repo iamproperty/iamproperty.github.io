@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   *,
   *::before,
   *::after {
@@ -18,7 +18,7 @@ $darkMode: 'true' !default;
     text-transform: none;
     margin: 0; // 1
     font-family: inherit;
-    @include font-size(inherit);
+    font-size: inherit;
     line-height: inherit;
   }
 
@@ -30,15 +30,13 @@ $darkMode: 'true' !default;
   }
 
   button,
-[type="button"], // 1
-[type="reset"],
-[type="submit"] {
+  [type="button"], // 1
+  [type="reset"],
+  [type="submit"] {
     -webkit-appearance: button; // 2
 
-    @if $enable-button-pointers {
-      &:not(:disabled) {
-        cursor: pointer; // 3
-      }
+    &:not(:disabled) {
+      cursor: pointer; // 3
     }
   }
   // #endregion
@@ -78,7 +76,7 @@ $darkMode: 'true' !default;
     appearance: none;
     white-space: nowrap;
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       --btn-margin: #{rem(24)};
     }
 
@@ -88,7 +86,7 @@ $darkMode: 'true' !default;
     }
 
     &:is(.colour-primary, .colour-dark, .colour-danger, .colour-black) {
-      --colour-btn: #{$colour-inverted};
+      --colour-btn: #fcfcfc;
     }
 
     &:not(.border-0) {

@@ -1,6 +1,6 @@
 @use '../_func.scss' as *;
 
-$darkMode: 'true' !default;
+
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
 
@@ -37,7 +37,10 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       background: var(--row-bg);
     }
   }
-
+  
+  :is(td, th) {
+    color: var(--colour-body-default);
+  }
   /*
   &[data-expandable] [data-expand-button][aria-expanded] {
     background-color: transparent;
@@ -220,7 +223,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       width: var(--cta-width);
       min-height: calc(var(--row-height) - 2px);
       text-align: right;
-      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvs-2)) 1.25rem);
+      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
       cursor: default;
       padding-bottom: 0;
 
@@ -233,7 +236,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
 
     tbody tr:hover > *:not(:first-child):last-child {
-      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvs-2)) 1.25rem);
+      background: linear-gradient(90deg, transparent 0%, var(--row-bg, var(--colour-canvas-2)) 1.25rem);
     }
   }
 }
@@ -396,17 +399,14 @@ table {
   margin: -2rem -2rem 2rem -2rem;
   box-shadow: none;
   border-radius: 0;
-
-  @include light-mode($darkMode) {
     background-color: #e6eaec;
-  }
 }
 
 // Actionbar
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @media screen and (min-width: 36em) {
     padding: 0 !important;
   }
 }
@@ -444,7 +444,7 @@ table {
   }
 }
 
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   :is(#{$selector}).table--fullwidth iam-actionbar,
   :is(#{$selector}) iam-actionbar {
     margin-left: -2rem;
@@ -499,9 +499,8 @@ table {
 @container (width < 23.4375em) {
   :is(#{$selector}) {
     iam-actionbar {
-      @include light-mode($darkMode) {
         background-color: #e6eaec;
-      }
+      
     }
     .actionbar__sticky + * {
       margin-top: 0 !important;

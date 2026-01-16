@@ -1,6 +1,6 @@
 @use '../_func' as *;
 
-$darkMode: 'true' !default;
+
 
 :host,
 .iam-notification {
@@ -12,18 +12,19 @@ $darkMode: 'true' !default;
   font-size: rem(15);
   border: rem(2) solid var(--colour, var(--colour-info));
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+  background: var(--colour-notification-bg);
 
-  @container style(--body-theme: light) {
-    background: #e9f9fd;
-  }
-      @container style(--body-theme: dark) {
-    background: var(--colour-canvas-2);
-    }
 
   ::slotted(i),
   i {
     color: var(--colour, currentColor);
   }
+}
+
+:host(:not(.bg-danger)){
+  
+  color-scheme: light;
+  color: var(--colour-heading);
 }
 
 :host([data-type]),
@@ -32,34 +33,21 @@ $darkMode: 'true' !default;
 }
 
 
-  :host(.colour-warning),
-  .iam-notification.colour-warning {
-    @container style(--body-theme: light) {
-      background: #fff6e6;
-    }
-    @container style(--body-theme: dark) {
-    background: var(--colour-canvas-2);
-    }
-  }
+:host(.colour-warning),
+.iam-notification.colour-warning {
+  background: var(--colour-notification-warning-bg);
+}
 
   :host(.colour-danger),
   .iam-notification.colour-danger {
-    @container style(--body-theme: light) {
-    background: #fcebec;
-    }
-    @container style(--body-theme: dark) {
-    background: var(--colour-canvas-2);
-    }
+    
+  background: var(--colour-notification-danger-bg);
   }
 
   :host(.colour-success),
   .iam-notification.colour-success {
-    @container style(--body-theme: light) {
-    background: #f8fdf6;
-    }
-    @container style(--body-theme: dark) {
-    background: var(--colour-canvas-2);
-    }
+    
+  background: var(--colour-notification-success-bg);
   }
 
 :host(.bg-white),
@@ -110,10 +98,7 @@ $darkMode: 'true' !default;
   margin-inline: auto;
   display: flex;
   flex-wrap: nowrap;
-
-  @include light-mode($darkMode) {
-    color: var(--colour-heading);
-  }
+  color: var(--colour-heading);
 
   .notification__icon {
     margin-inline-end: rem(16);

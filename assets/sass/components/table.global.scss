@@ -1,15 +1,13 @@
 @use '../_func.scss' as *;
 
 
-$darkMode: 'true' !default;
 
-@use './table-basic.global.scss' with (
-  $darkMode: $darkMode
-);
+
+@use './table-basic.global.scss';
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
 
-@include display();
+@use '../utilities/display' as *;
 
 // #region Tables are only stacked on mobile
 :is(#{$selector}):not(.table--fullwidth).table--cta {

@@ -48,7 +48,7 @@
   }
 }
 
-@include media-breakpoint-up(md, $mobileOnly) {
+@media screen and (min-width: 62em) {
   :host {
     position: relative;
   }
