@@ -54,7 +54,7 @@
     td {
       // part=value
 
-      height: var(--bar-height, #{rem(24)});
+      height: var(--bar-height, 1.5rem);
       bottom: 0;
       left: var(--bottom, 0%);
       width: var(--comparison, var(--percent));
@@ -68,8 +68,8 @@
       position: static;
       transform: none;
       display: block !important;
-      height: var(--bar-height, #{rem(24)});
-      line-height: var(--bar-height, #{rem(24)});
+      height: var(--bar-height, 1.5rem);
+      line-height: var(--bar-height, 1.5rem);
       max-width: var(--xaxis-max-width, none);
 
       > *:not([popover]) {
@@ -264,19 +264,19 @@
     min-width: fit-content;
     width: fit-content;
     max-width: fit-content;
-    padding-right: var(--fc-group-width, #{rem(16)});
+    padding-right: var(--fc-group-width, 1rem);
   }
 
   [part='value'] {
-    min-width: var(--fc-value-width, #{rem(12)});
-    width: var(--fc-value-width, #{rem(12)});
-    max-width: var(--fc-value-width, #{rem(12)});
+    min-width: var(--fc-value-width, 0.75rem);
+    width: var(--fc-value-width, 0.75rem);
+    max-width: var(--fc-value-width, 0.75rem);
   }
 }
 
 :host(.chart--fit-content:not(.chart--horizontal).chart--no-scale) {
   --fc-group-width: #{rem(22)};
-  --fc-value-width: #{rem(24)};
+  --fc-value-width: 1.5rem;
 
   table {
     height: var(--chart-height-lg, #{rem(120)});
@@ -286,7 +286,7 @@
 .chart__wrapper {
   @container (min-width: 36em) {
     --fc-group-width: #{rem(22)};
-    --fc-value-width: #{rem(24)};
+    --fc-value-width: 1.5rem;
   }
 }
 
@@ -305,7 +305,7 @@ button.tooltip {
   z-index: var(--index-floating);
   background: var(--colour-primary);
   color: var(--colour-white);
-  padding: rem(24);
+  padding: 1.5rem;
 
   border-radius: 0.5rem;
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
@@ -329,7 +329,7 @@ button.tooltip {
 
   overflow: visible;
 
-  width: calc(anchor-size(width) + var(--container-padding-x) + var(--container-padding-x) + #{rem(24)}) !important;
+  width: calc(anchor-size(width) + var(--container-padding-x) + var(--container-padding-x) + 1.5rem) !important;
 
   &::after {
     content: '';

@@ -20,7 +20,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between !important;
-    padding-top: rem(32);
+    padding-top: 2rem;
   }
 
   > div {
@@ -46,7 +46,7 @@
   .select--minimal {
     height: calc(3.25rem - 1em);
     line-height: calc(3.25rem - 1em);
-    margin-left: rem(-16);
+    margin-left: -1rem;
     font-weight: bold;
   }
 
@@ -100,7 +100,7 @@
 .pagination > .item-count {
   display: block;
   text-align: center;
-  margin-bottom: rem(16);
+  margin-bottom: 1rem;
   margin-inline: auto;
 }
 
@@ -194,7 +194,7 @@
 
 :host([data-minimal]) {
   .pagination {
-    padding-top: rem(24);
+    padding-top: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -217,13 +217,13 @@
 
 .fa-spin {
   display: none !important;
-  font-size: rem(48);
+  font-size: 3rem;
   color: var(--colour-info);
 }
 
 :host([data-loading]) {
   .mobile-controls {
-    padding-top: rem(32);
+    padding-top: 2rem;
   }
   .item-count,
   .mobile-controls > *:not(.fa-spin) {

@@ -6,7 +6,7 @@
 
 @layer elements {
   .icon--xs {
-    font-size: rem(16);
+    font-size: 1rem;
   }
 
   .icon--sm {
@@ -14,7 +14,7 @@
   }
 
   .icon--compact {
-    font-size: rem(20);
+    font-size: 1.25rem;
   }
 
   .icon--md {
@@ -22,7 +22,7 @@
   }
 
   .icon--lg {
-    font-size: rem(40);
+    font-size: 2.5rem;
   }
 
   [class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {

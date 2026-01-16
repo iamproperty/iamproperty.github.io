@@ -70,9 +70,9 @@
       position-try-fallbacks: flip-block, flip-inline !important;
 
       //right: auto;
-      margin: 0 0 0 #{rem(4)};
-      //padding: rem(16);
-      padding: rem(24);
+      margin: 0 0 0 0.25rem;
+      //padding: 1rem;
+      padding: 1.5rem;
 
       &::backdrop {
         display: none;
@@ -93,7 +93,7 @@
       top: 100%;
       z-index: var(--index-floating);
       min-width: rem(320);
-      border-radius: rem(16);
+      border-radius: 1rem;
       width: rem(320);
 
       @media screen and (min-width: 36em) {

@@ -107,7 +107,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   :is(label:not(.tag), .label) {
     font-size: rem(18);
     line-height: rem(21);
-    margin-bottom: rem(8);
+    margin-bottom: 0.5rem;
     font-weight: normal;
     color: var(--colour-heading);
     display: block;
@@ -123,22 +123,22 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     width: 100%;
     display: block;
     width: 100%;
-    padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
-    font-size: var(--input-fs, #{rem(16)});
-    line-height: var(--input-lh, #{rem(20)});
+    padding: var(--input-padding-block, 0.75rem) var(--input-padding-inline, 1rem);
+    font-size: var(--input-fs, 1rem);
+    line-height: var(--input-lh, 1.25rem);
     color: var(--colour-heading);
     background-color: var(--colour-canvas-2);
     background-clip: padding-box;
     border: 2px solid var(--colour-primary);
     appearance: none; // Fix appearance for date inputs in Safari
-    border-radius: rem(8);
-    margin-bottom: rem(24);
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
     min-height: calc(
-      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
         4px
     );
     max-height: calc(
-      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
         4px
     );
 
@@ -204,7 +204,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   div:has(> label:first-child):has(> input) {
     position: relative;
     max-width: var(--input-max-width);
-    margin-bottom: rem(24);
+    margin-bottom: 1.5rem;
 
     input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
     output,
@@ -232,21 +232,21 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
     input ~ *:not(output) {
       order: 5;
-      margin-top: rem(8);
+      margin-top: 0.5rem;
     }
   }
 
 
   *:has(> :is(.form-control-sm, .input--sm)) {
     --input-fs: #{rem(14)};
-    --input-lh: #{rem(16)};
+    --input-lh: 1rem;
     --input-padding-block: #{rem(10)};
     --input-padding-inline: #{rem(14)};
   }
   *:has(> :is(.form-control-lg, .input--lg)) {
-    --input-fs: #{rem(24)};
+    --input-fs: 1.5rem;
     --input-lh: #{rem(29)};
-    --input-padding-block: #{rem(20)};
+    --input-padding-block: 1.25rem;
     --input-padding-inline: #{rem(22)};
   }
 
@@ -272,11 +272,11 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       font-weight: 300;
       content: '\f023';
       position: absolute;
-      font-size: var(--input-lh, #{rem(20)});
-      height: var(--input-lh, #{rem(20)});
-      width: var(--input-lh, #{rem(20)});
-      bottom: calc(var(--input-padding-block, #{rem(12)}) + 2px);
-      right: calc(var(--input-padding-block, #{rem(16)}) + 2px);
+      font-size: var(--input-lh, 1.25rem);
+      height: var(--input-lh, 1.25rem);
+      width: var(--input-lh, 1.25rem);
+      bottom: calc(var(--input-padding-block, 0.75rem) + 2px);
+      right: calc(var(--input-padding-block, 1rem) + 2px);
       text-align: center;
     }
   }
@@ -351,10 +351,10 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   .was-validated input:is(:invalid, .is-invalid, [aria-invalid], :-internal-autofill-selected) {
     background-image: var(--icon-error);
     background-repeat: no-repeat;
-    background-position: right var(--input-padding-inline, #{rem(16)}) center;
-    background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});
+    background-position: right var(--input-padding-inline, 1rem) center;
+    background-size: var(--input-lh, 1.25rem) var(--input-lh, 1.25rem);
     padding-right: calc(
-      var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)})
+      var(--input-lh, 1.25rem) + var(--input-padding-inline, 1rem) + var(--input-padding-inline, 1rem)
     ) !important;
   }
 
@@ -365,21 +365,21 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   .was-validated input:is(:valid, .is-valid):not(:is(:invalid, .is-invalid)) {
     background-image: var(--icon-tick);
     background-repeat: no-repeat;
-    background-position: right var(--input-padding-inline, #{rem(16)}) center;
-    background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});
+    background-position: right var(--input-padding-inline, 1rem) center;
+    background-size: var(--input-lh, 1.25rem) var(--input-lh, 1.25rem);
     padding-right: calc(
-      var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)})
+      var(--input-lh, 1.25rem) + var(--input-padding-inline, 1rem) + var(--input-padding-inline, 1rem)
     ) !important;
   }
 
   .invalid-feedback {
     color: var(--colour-danger);
-    margin-top: rem(8);
+    margin-top: 0.5rem;
     background-image: var(--icon-error);
     background-repeat: no-repeat;
     background-position: left top 1px;
-    background-size: var(--input-fs, #{rem(16)}) var(--input-fs, #{rem(16)});
-    padding-left: calc(var(--input-fs, #{rem(16)}) + #{rem(8)});
+    background-size: var(--input-fs, 1rem) var(--input-fs, 1rem);
+    padding-left: calc(var(--input-fs, 1rem) + 0.5rem);
     display: none;
   }
 
@@ -414,17 +414,17 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
     :is(div, fieldset, label:not(.tag)):has(> input:is([type='radio'], [type='checkbox'])):not(:has(label input)) {
       position: relative;
-      margin-bottom: rem(24);
+      margin-bottom: 1.5rem;
     }
 
     :is(div, fieldset, label:not(.tag)):has(> input[type='radio']) {
       --border-radius: 50%;
-      --outline-width: #{rem(8)};
+      --outline-width: 0.5rem;
     }
 
     :is(div, fieldset, label:not(.tag)):has(> input[type='checkbox']) {
-      --border-radius: #{rem(4)};
-      --outline-width: #{rem(4)};
+      --border-radius: 0.25rem;
+      --outline-width: 0.25rem;
     }
 
     input:is([type='radio'], [type='checkbox']) + label:not(:has(> iam-card)),
@@ -433,13 +433,13 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
       color: var(--colour-heading);
       position: relative;
-      font-size: rem(16);
-      line-height: rem(20);
-      padding-left: rem(40);
+      font-size: 1rem;
+      line-height: 1.25rem;
+      padding-left: 2.5rem;
       padding-top: rem(10);
       padding-bottom: rem(10);
-      margin-bottom: rem(24);
-      margin-right: rem(24);
+      margin-bottom: 1.5rem;
+      margin-right: 1.5rem;
       cursor: pointer;
 
       &:has(+ span) {
@@ -459,8 +459,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         border: 2px solid var(--colour-check-border, var(--colour-primary));
         background: var(--colour-check-bg, transparent);
         border-radius: var(--border-radius);
-        height: var(--radio-size, #{rem(24)});
-        width: var(--radio-size, #{rem(24)});
+        height: var(--radio-size, 1.5rem);
+        width: var(--radio-size, 1.5rem);
         display: inline-block;
         position: absolute;
         top: rem(10 - 2);
@@ -569,8 +569,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         color: var(--colour-primary-theme);
         font-family: 'Font Awesome 6 Pro';
         font-weight: bold;
-        height: var(--checkbox-inner-size, #{rem(24)});
-        width: var(--checkbox-inner-size, #{rem(24)});
+        height: var(--checkbox-inner-size, 1.5rem);
+        width: var(--checkbox-inner-size, 1.5rem);
         line-height: rem(26);
         background: none !important;
         border: none !important;
@@ -596,8 +596,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         color: var(--colour-primary-theme);
         font-family: 'Font Awesome 6 Pro';
         font-weight: bold;
-        height: var(--checkbox-inner-size, #{rem(24)});
-        width: var(--checkbox-inner-size, #{rem(24)});
+        height: var(--checkbox-inner-size, 1.5rem);
+        width: var(--checkbox-inner-size, 1.5rem);
         line-height: rem(26);
         background: none !important;
         border: none !important;
@@ -732,7 +732,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       linear-gradient(to right, var(--colour-canvas-2), var(--colour-canvas-2));
 
     padding-right: calc(
-      var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-lh, 1.25rem)
+      var(--input-padding-inline, 1rem) + var(--input-padding-inline, 1rem) + var(--input-lh, 1.25rem)
     ) !important;
     option {
       font-size: 1.2em;
@@ -762,7 +762,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 
   div:has(> select) {
-    margin-bottom: rem(24);
+    margin-bottom: 1.5rem;
 
     select {
       margin-bottom: 0 !important;
@@ -845,11 +845,11 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   // #region label with input field in
   :is(label:not(.tag), .label):has(:is(input, select, textarea)) {
     display: block;
-    margin-bottom: rem(24);
+    margin-bottom: 1.5rem;
     max-width: var(--input-max-width);
 
     :is(input:not([type='range']), select, textarea) {
-      margin-top: rem(8);
+      margin-top: 0.5rem;
       margin-bottom: 0 !important;
     }
 
@@ -859,7 +859,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       all: initial;
       font-family: var(--font-body);
       color: var(--colour-body);
-      margin-top: rem(8);
+      margin-top: 0.5rem;
       display: block;
       line-height: 1.2;
     }
@@ -875,7 +875,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     }
 
     :is(.suffix, .prefix):not(.mt-0) {
-      margin: rem(8) 0 0 0 !important;
+      margin: 0.5rem 0 0 0 !important;
     }
   }
 
@@ -886,12 +886,12 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     &:has(:is(:invalid, .is-invalid)):after {
       content: 'This field is required';
       color: var(--colour-danger);
-      margin-top: rem(8);
+      margin-top: 0.5rem;
       background-image: var(--icon-error);
       background-repeat: no-repeat;
       background-position: left top 1px;
-      background-size: var(--input-fs, #{rem(16)}) var(--input-fs, #{rem(16)});
-      padding-left: calc(var(--input-fs, #{rem(16)}) + #{rem(8)});
+      background-size: var(--input-fs, 1rem) var(--input-fs, 1rem);
+      padding-left: calc(var(--input-fs, 1rem) + 0.5rem);
       display: block;
       width: 100%;
       font-size: 1rem;
@@ -911,16 +911,16 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
   // #region input range
   input[type='range'] {
-    --track-size: #{rem(8)};
+    --track-size: 0.5rem;
     --track-colour: var(--colour-light);
     --thumb-colour: var(--colour-info);
-    --thumb-size: #{rem(24)};
+    --thumb-size: 1.5rem;
     width: 100%;
     background: transparent;
     cursor: pointer;
-    margin-top: rem(32);
-    margin-bottom: rem(32);
-    height: rem(32);
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    height: 2rem;
     border-radius: 50%;
     accent-color: var(--thumb-colour);
     -webkit-appearance: none;

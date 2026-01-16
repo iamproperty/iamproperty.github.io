@@ -130,7 +130,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
     .th--fixed + .th--fixed,
     .td--fixed + .td--fixed {
-      left: rem(48);
+      left: 3rem;
     }
 
     .th--fixed + .th--fixed + th:not(.th--fixed),

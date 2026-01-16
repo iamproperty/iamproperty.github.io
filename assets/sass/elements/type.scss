@@ -68,20 +68,20 @@
   p {
     margin-top: 0;
     font-size: var(--body-fs);
-    line-height: rem(24);
-    padding-bottom: rem(48);
+    line-height: 1.5rem;
+    padding-bottom: 3rem;
     max-width: var(--content-max-width);
     margin-bottom: 0;
   }
 
   p:has(+ p) {
-    padding-bottom: rem(24);
+    padding-bottom: 1.5rem;
   }
 
   :is(.lead, .strapline) {
     font-size: rem(18);
     line-height: rem(28);
-    padding-bottom: rem(48);
+    padding-bottom: 3rem;
     max-width: var(--content-max-width);
     font-weight: 700;
   }
@@ -89,8 +89,8 @@
   small,
   .small {
     font-size: rem(14);
-    line-height: rem(24);
-    padding-bottom: rem(48);
+    line-height: 1.5rem;
+    padding-bottom: 3rem;
     max-width: var(--content-max-width);
     font-weight: normal;
   }
@@ -133,12 +133,12 @@
   blockquote {
     margin: 0;
     quotes: '“' '”' '‘' '’';
-    padding-bottom: rem(48);
+    padding-bottom: 3rem;
     overflow: hidden;
 
     p {
-      font-size: rem(24);
-      line-height: rem(32);
+      font-size: 1.5rem;
+      line-height: 2rem;
       padding-bottom: 0;
     }
 
@@ -151,7 +151,7 @@
 
     cite {
       font-size: rem(18);
-      line-height: rem(32);
+      line-height: 2rem;
       padding-bottom: 0;
       font-weight: bold;
       font-style: normal;
@@ -168,7 +168,7 @@
     text-decoration: underline;
     text-underline-offset: 0.75rem;
     text-decoration-color: var(--colour-secondary);
-    text-decoration-thickness: rem(4);
+    text-decoration-thickness: 0.25rem;
     margin-bottom: rem(64);
   }
 }

@@ -526,22 +526,22 @@
     width: 100%;
     display: block;
     width: 100%;
-    padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
-    font-size: var(--input-fs, #{rem(16)});
-    line-height: var(--input-lh, #{rem(20)});
+    padding: var(--input-padding-block, 0.75rem) var(--input-padding-inline, 1rem);
+    font-size: var(--input-fs, 1rem);
+    line-height: var(--input-lh, 1.25rem);
     color: var(--colour-heading);
     background-color: var(--colour-canvas-2);
     background-clip: padding-box;
     border: 2px solid var(--colour-primary);
     appearance: none; // Fix appearance for date inputs in Safari
-    border-radius: rem(8);
-    margin-bottom: rem(24);
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
     min-height: calc(
-      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
         4px
     );
     max-height: calc(
-      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
         4px
     );
 

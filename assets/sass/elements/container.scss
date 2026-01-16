@@ -61,12 +61,12 @@
     }
 
     &[class*='bg-'] {
-      padding-top: #{rem(48)};
-      padding-bottom: #{rem(32)};
+      padding-top: 3rem;
+      padding-bottom: 2rem;
     }
 
     &[class*='bg-'] + .container:not([class*='bg-']) {
-      padding-top: #{rem(32)};
+      padding-top: 2rem;
     }
 
     // Fix the clearing for containers
@@ -104,15 +104,15 @@
 
   // replicate container padding-bottom
   main > .row {
-    padding-bottom: #{rem(16)};
+    padding-bottom: 1rem;
 
     &[class*='bg-'] {
-      padding-top: #{rem(48)};
-      padding-bottom: #{rem(32)};
+      padding-top: 3rem;
+      padding-bottom: 2rem;
     }
 
     &[class*='bg-'] + :is(.row, .container):not([class*='bg-']) {
-      padding-top: #{rem(32)};
+      padding-top: 2rem;
     }
   }
   // #endregion

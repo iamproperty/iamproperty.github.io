@@ -18,7 +18,7 @@ iam-actionbar {
 
 // #region at the top
 main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
-  border-radius: rem(8);
+  border-radius: 0.5rem;
   margin: var(--container-padding);
   margin-bottom: 2rem;
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.2);
@@ -63,7 +63,7 @@ iam-actionbar[data-view='small'] ~ [data-view='small'] {
 iam-actionbar {
   .actionbar__text {
     font-size: rem(18);
-    line-height: rem(40);
+    line-height: 2.5rem;
     color: var(--colour-heading);
     display: inline-block;
   }

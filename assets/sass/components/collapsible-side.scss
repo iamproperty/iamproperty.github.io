@@ -54,7 +54,7 @@
   min-height: calc(100vh - var(--nav-height));
   width: rem(70);
   height: calc(100% - var(--nav-height));
-  padding: 0 rem(40) 0 0;
+  padding: 0 2.5rem 0 0;
   transition: width 1s;
 
   &:before {
@@ -62,7 +62,7 @@
     position: absolute;
     z-index: 1;
     top: 0;
-    right: rem(40);
+    right: 2.5rem;
     height: 100%;
     border-right: 2px solid var(--colour-border);
   }
@@ -91,8 +91,8 @@
   .btn {
     display: var(--btn-display, block);
     position: absolute;
-    top: rem(32);
-    right: rem(40);
+    top: 2rem;
+    right: 2.5rem;
     margin-bottom: 0;
     margin-right: rem(-20);
     background-color: var(--colour-canvas-2);
@@ -122,7 +122,7 @@
   }
 
   &:is(.open) {
-    width: calc(100% - var(--container-padding-x) + rem(40));
+    width: calc(100% - var(--container-padding-x) + 2.5rem);
 
     @media screen and (min-width: 36em) {
       width: rem(422);
@@ -136,8 +136,8 @@
   .side-menu-content {
     position: absolute;
     top: 0;
-    right: rem(40);
-    padding: rem(32) rem(40) rem(40) 0;
+    right: 2.5rem;
+    padding: 2rem 2.5rem 2.5rem 0;
     width: rem(351);
     background-color: var(--colour-canvas);
     opacity: 0;
@@ -148,12 +148,12 @@
     scrollbar-width: thin;
 
     .h3 {
-      padding-left: rem(24);
+      padding-left: 1.5rem;
     }
 
     @media screen and (min-width: 36em) {
       .h3 {
-        padding-left: rem(40);
+        padding-left: 2.5rem;
       }
 
       width: rem(382);
@@ -189,7 +189,7 @@
 .main-content {
   position: relative;
   z-index: 10;
-  padding-top: rem(24);
+  padding-top: 1.5rem;
   padding-left: rem(60);
 
   @media screen and (min-width: 36em) {
@@ -197,7 +197,7 @@
   }
 
   @media screen and (min-width: 62em) {
-    padding-top: rem(40) !important;
+    padding-top: 2.5rem !important;
     padding-left: 0;
   }
 
@@ -205,7 +205,7 @@
     padding-top: 0.75rem;
 
     border-bottom: 2px solid var(--colour-border);
-    margin-bottom: rem(40) !important;
+    margin-bottom: 2.5rem !important;
 
     @media screen and (min-width: 62em) {
       display: none;
@@ -215,7 +215,7 @@
 
 ::slotted(.main-content__title) {
   border-bottom: 2px solid var(--colour-border);
-  margin-bottom: rem(40) !important;
+  margin-bottom: 2.5rem !important;
   max-width: 100% !important;
   display: block;
 }
@@ -273,7 +273,7 @@
   .side-menu {
     left: auto;
     right: -2.5rem;
-    padding: 0 0 0 rem(40);
+    padding: 0 0 0 2.5rem;
 
     @media screen and (min-width: 62em) {
       right: 0;

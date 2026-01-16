@@ -50,11 +50,11 @@
     display: inline-block;
     border: none;
     color: var(--colour-link);
-    margin: 0 rem(24) rem(24) 0;
+    margin: 0 1.5rem 1.5rem 0;
     padding: 0;
     font-size: rem(18);
-    line-height: rem(24);
-    min-height: rem(24);
+    line-height: 1.5rem;
+    min-height: 1.5rem;
     position: relative;
     font-weight: bold;
 
@@ -152,7 +152,7 @@
     }
 
     &:not([class*='col']) {
-      margin: 0 0 rem(24) 0;
+      margin: 0 0 1.5rem 0;
     }
 
     &:not(.d-inline-block):not([class*='col']) {
@@ -217,10 +217,10 @@
 // #region Sidebar link styling including parent group styling
 iam-collapsible-side {
   > * {
-    padding-left: rem(24);
+    padding-left: 1.5rem;
 
     @media screen and (min-width: 36em) {
-      padding-left: rem(40);
+      padding-left: 2.5rem;
     }
 
     @media screen and (min-width: 62em) {
@@ -237,8 +237,8 @@ iam-collapsible-side {
 .vertical-tabs [class*='link'],
 iam-collapsible-side [class*='link'] {
   display: block !important;
-  line-height: rem(20) !important;
-  padding: rem(16) rem(24) rem(16) rem(24) !important;
+  line-height: 1.25rem !important;
+  padding: 1rem 1.5rem 1rem 1.5rem !important;
   margin: 0 !important;
   flex-shrink: 0;
   font-size: 1rem !important;
@@ -255,11 +255,11 @@ iam-collapsible-side [class*='link'] {
 
   i {
     // icon
-    margin-right: rem(8) !important;
+    margin-right: 0.5rem !important;
   }
 
   @media screen and (min-width: 36em) {
-    padding-left: rem(24) !important;
+    padding-left: 1.5rem !important;
   }
 
   @media screen and (min-width: 62em) {
@@ -295,7 +295,7 @@ iam-collapsible-side {
       cursor: pointer;
 
       a {
-        padding-right: rem(40) !important;
+        padding-right: 2.5rem !important;
 
         &::before {
           position: absolute;

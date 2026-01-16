@@ -10,7 +10,7 @@
     --btn-border-width: #{rem(1)};
     --btn-padding-block: #{rem(5)};
     --btn-padding-inline: #{rem(5)};
-    --btn-margin: #{rem(8)};
+    --btn-margin: 0.5rem;
 
     &:not(.btn-primary) {
       color: var(--colour-heading);
@@ -21,10 +21,10 @@
       border: var(--btn-border-width) solid var(--colour-muted);
     }
 
-    border-radius: rem(4) !important;
+    border-radius: 0.25rem !important;
     font-weight: 400 !important;
     font-size: 1rem;
-    line-height: rem(20);
+    line-height: 1.25rem;
 
     &.btn[class*='fa-']:before {
       content: var(--fa);
@@ -74,7 +74,7 @@
 
     &:after {
       top: 0.2rem;
-      right: rem(8);
+      right: 0.5rem;
     }
   }
   // #endregion

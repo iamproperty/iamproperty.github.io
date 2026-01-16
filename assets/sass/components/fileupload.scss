@@ -21,7 +21,7 @@ hr {
 
 .file-upload {
   max-width: rem(400) !important;
-  padding-bottom: rem(16);
+  padding-bottom: 1rem;
 
   .drop-area > input {
     display: none;
@@ -54,13 +54,13 @@ hr {
   span {
     display: block;
     width: 100%;
-    padding: var(--input-padding-block, #{rem(12)}) var(--input-padding-inline, #{rem(16)});
-    font-size: var(--input-fs, #{rem(16)});
-    line-height: var(--input-lh, #{rem(20)});
+    padding: var(--input-padding-block, 0.75rem) var(--input-padding-inline, 1rem);
+    font-size: var(--input-fs, 1rem);
+    line-height: var(--input-lh, 1.25rem);
     border: 2px solid var(--colour-primary-theme);
     appearance: none; // Fix appearance for date inputs in Safari
-    border-radius: rem(8);
-    margin-bottom: rem(16);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
     color: var(--colour-primary);
     border-color: #d8d8d8;
     background: #d8d8d8;
@@ -130,7 +130,7 @@ hr {
     border: 2px dashed var(--colour-primary-theme);
     color: transparent;
     position: relative;
-    padding: rem(24) rem(32) rem(24) rem(32);
+    padding: 1.5rem 2rem 1.5rem 2rem;
     user-select: none;
     max-width: 100%;
     min-width: 100%;
@@ -148,7 +148,7 @@ hr {
   .drop-area::before {
     content: 'Drag and drop files here or click to upload';
     position: absolute;
-    inset: rem(24) rem(32) rem(24) rem(32);
+    inset: 1.5rem 2rem 1.5rem 2rem;
     z-index: 1;
     pointer-events: none;
   }

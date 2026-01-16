@@ -259,9 +259,9 @@
   }
 
   button {
-    width: rem(8);
-    height: rem(8);
-    min-height: rem(8);
+    width: 0.5rem;
+    height: 0.5rem;
+    min-height: 0.5rem;
     border-radius: 50%;
     text-indent: -50rem;
     overflow: hidden;
@@ -289,9 +289,9 @@
   border-color: var(--colour-active-thumbnail);
   background: var(--colour-info);
 
-  width: rem(16);
-  height: rem(16);
-  min-height: rem(16);
+  width: 1rem;
+  height: 1rem;
+  min-height: 1rem;
   margin-inline: rem(2);
 
   &:hover {
@@ -308,10 +308,10 @@
 }
 
 input[type='range'] {
-  --track-size: #{rem(8)};
+  --track-size: 0.5rem;
   --track-colour: #a5ecfd;
   --thumb-colour: var(--colour-info);
-  --thumb-size: #{rem(16)};
+  --thumb-size: 1rem;
   --thumb-size-outline: #{rem(0)};
   width: 90%;
   max-width: rem(172);
@@ -319,7 +319,7 @@ input[type='range'] {
   background: transparent;
   cursor: pointer;
   margin: 0;
-  height: rem(16);
+  height: 1rem;
   border-radius: 50%;
   accent-color: var(--thumb-colour);
   -webkit-appearance: none;
@@ -588,7 +588,7 @@ input[type='range']:focus::-moz-range-thumb {
 
     border-radius: 0;
     position: relative;
-    border-radius: rem(4);
+    border-radius: 0.25rem;
 
     img {
       position: absolute;

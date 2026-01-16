@@ -41,10 +41,10 @@
 
     background-color: var(--colour-canvas-2);
     border: var(--btn-border-width) solid var(--colour-muted);
-    border-radius: rem(4) !important;
+    border-radius: 0.25rem !important;
     font-weight: 400 !important;
     font-size: 1rem;
-    line-height: rem(20);
+    line-height: 1.25rem;
     padding: calc(var(--btn-padding-block) - var(--btn-border-width))
       calc(var(--btn-padding-inline) - var(--btn-border-width));
     color: var(--colour-heading);

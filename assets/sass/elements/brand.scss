@@ -12,8 +12,8 @@
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    padding-right: rem(16);
-    padding-bottom: rem(16);
+    padding-right: 1rem;
+    padding-bottom: 1rem;
     min-width: 100%;
     min-width: Min(100%, var(--svg-width));
     font-size: rem(64);
@@ -59,7 +59,7 @@
     span {
       white-space: nowrap;
       font-size: 1rem;
-      padding-left: rem(16);
+      padding-left: 1rem;
       line-height: 1;
       font-weight: bold;
       display: inline-block;
