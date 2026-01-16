@@ -18,7 +18,7 @@
 }
 
 :host {
-  max-width: $input-max-width;
+  max-width: var(--input-max-width);
   display: block;
 }
 

@@ -151,7 +151,7 @@
       var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
       [container-end full-width-end];
 
-    @media screen and (min-width: #{em($max-width-px * $max-scale-up)}) {
+    @media screen and (min-width: #{em(1280 * 1.125)}) {
       grid-template-columns:
         [full-width-start] calc(var(--excess-space) - var(--gap, #{$gap}))
         [container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))

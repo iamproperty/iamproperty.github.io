@@ -8,11 +8,11 @@
   // #region reset
   a {
     color: var(--link-color);
-    text-decoration: $link-decoration;
+    text-decoration: underline;
 
     &:hover {
       color: var(--link-hover-color);
-      text-decoration: $link-hover-decoration;
+      text-decoration: none;
     }
   }
 
@@ -223,7 +223,7 @@ iam-collapsible-side {
     }
 
     @include media-breakpoint-up(md) {
-      padding-left: var(--container-padding-x-md);
+      padding-left: var(--container-padding-x);
     }
   }
 
@@ -262,7 +262,7 @@ iam-collapsible-side [class*='link'] {
   }
 
   @include media-breakpoint-up(md) {
-    padding-left: var(--container-padding-x-md) !important;
+    padding-left: var(--container-padding-x) !important;
   }
 }
 

@@ -202,11 +202,11 @@
     height: 100%;
     width: 100%;
     background: currentColor;
-    mask-image: escape-svg($accordion-button-icon);
+    mask-image:  var(--icon-arrow);
     mask-size: 50%;
     mask-repeat: no-repeat;
     mask-position: 50% 60%;
-    -webkit-mask-image: escape-svg($accordion-button-icon);
+    -webkit-mask-image:  var(--icon-arrow);
     -webkit-mask-size: 50%;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: 55% 50%;

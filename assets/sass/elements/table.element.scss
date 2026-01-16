@@ -12,9 +12,9 @@
   }
 
   caption {
-    padding-top: $table-cell-padding-y;
-    padding-bottom: $table-cell-padding-y;
-    color: $table-caption-color;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: gray;
     text-align: left;
   }
 
@@ -23,7 +23,7 @@
   // 3. Fix alignment for Safari
 
   th {
-    font-weight: $table-th-font-weight; // 1
+    font-weight: normal; // 1
     text-align: inherit; // 2
     text-align: -webkit-match-parent; // 3
   }
@@ -115,7 +115,7 @@
     thead {
       th:not(:empty) {
         white-space: nowrap;
-        min-width: #{$td-mw};
+        min-width: rem(120);
       }
       th.th--mw-md {
         min-width: rem(240);

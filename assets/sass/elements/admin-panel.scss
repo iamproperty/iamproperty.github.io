@@ -58,7 +58,7 @@
     }
 
     > :is(.admin-panel__heading):first-child {
-      display: flex;
+      display: flex!important;
       flex-wrap: wrap;
       gap: 1rem;
       align-items: center;

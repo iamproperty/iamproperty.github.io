@@ -6,9 +6,9 @@
   display: block;
 }
 
-@for $i from 1 to 11 {
+@for $i from 1 through 10 {
   .chart__wrapper .doughnut path:nth-child(11n - #{11 - $i}) {
-    fill: var(#{'--chart-colour-' + $i + '-set'});
+    fill: var(#{'--chart-colour-' + $i});
   }
 }
 

@@ -46,7 +46,6 @@
     --colour-dark-theme: #46003c;
     --colour-dark: light-dark(#46003c,#b599b1);
     /* #endregion */
-
     /* #region functional colours */
     --colour-muted: #9d9d9d;
 
@@ -88,7 +87,6 @@
     --colour-notification-danger-bg: light-dark(#fcebec,var(--colour-canvas-2));
     --colour-notification-success-bg: light-dark(#f8fdf6,var(--colour-canvas-2));
     /* #endregion */
-
     /* #region Wider colours */
     --wider-colour-1: #EEEEEE;
     --wider-colour-2: #EBD7F6;
@@ -164,12 +162,78 @@
     --wider-colour-22-active: #E69E83;
     --wider-colour-23-active: #AFC6C3;
     /* #endregion */
+    /* #region chart colours */
 
+    --chart-colour-1: var(--wider-colour-3);
+    --chart-colour-2: var(--wider-colour-4);
+    --chart-colour-3: var(--wider-colour-5);
+    --chart-colour-4: var(--wider-colour-6);
+    --chart-colour-5: var(--wider-colour-7);
+    --chart-colour-6: var(--wider-colour-8);
+    --chart-colour-7: var(--wider-colour-9);
+    --chart-colour-8: var(--wider-colour-10);
+    --chart-colour-9: var(--wider-colour-11);
+    --chart-colour-10: var(--wider-colour-12);
 
-    // Extra vars needed
-    --content-max-width: #{$content-max-width};
+    --chart-colour-1-hover: var(--wider-colour-3-hover);
+    --chart-colour-2-hover: var(--wider-colour-4-hover);
+    --chart-colour-3-hover: var(--wider-colour-5-hover);
+    --chart-colour-4-hover: var(--wider-colour-6-hover);
+    --chart-colour-5-hover: var(--wider-colour-7-hover);
+    --chart-colour-6-hover: var(--wider-colour-8-hover);
+    --chart-colour-7-hover: var(--wider-colour-9-hover);
+    --chart-colour-8-hover: var(--wider-colour-10-hover);
+    --chart-colour-9-hover: var(--wider-colour-11-hover);
+    --chart-colour-10-hover: var(--wider-colour-12-hover);
 
-    // Cards variables
+    --chart-colour-success: #d2f0c9 !important;
+    --chart-colour-success-hover: #8ad873 !important;
+    --chart-colour-danger: #f5c2c7 !important;
+    --chart-colour-danger-hover: #f5c2e7 !important;
+    --chart-colour-warning: #ffd280 !important;
+    --chart-colour-warning-hover: #ffb020 !important;
+
+    /* #endregion */
+    /* #region Type vars */
+    --font-body: 'Qanelas', arial, sans-serif;
+    --font-heading: 'Qanelas', arial, sans-serif;
+    --heading-weight: bold;
+    --type-scale: 1.2;
+    --body-fs: 1rem;
+    /* #endregion */
+    // #region heading
+    --h1-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 6)), 0.25rem);
+    --h2-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 5)), 0.25rem);
+    --h3-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 3)), 0.25rem);
+    --h4-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 2)), 0.25rem);
+    --h1-lh: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h1-pb: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h2-lh: round(calc(1em * var(--type-scale)), 0.25rem);
+    --h2-pb: round(calc(1em * var(--type-scale)), 0.25rem);
+
+    --h3-lh: round(up, calc(1em * var(--type-scale)), 0.25rem);
+    --h3-pb: round(up, calc(1em * var(--type-scale)), 0.25rem);
+
+    --h4-lh: round(up, calc(1em * var(--type-scale)), 0.25rem);
+    --h4-pb: round(up, calc(1em * var(--type-scale)), 0.25rem);
+    // #endregion
+    // #region rounded borders
+    --border-radius-sm: 0.25rem;
+    --border-radius: 0.5rem;
+    --border-radius-lg: 1rem;
+    --border-radius-xl: 1.5rem;
+    --border-radius-2xl: 3rem;
+    // #endregion
+    // #region Z-index
+    --index-below: -1;
+    --index-base: 0;
+    --index-focus: 2;
+    --index-above: 10;
+    --index-floating: 100;
+    --index-menu: 200;
+    --index-overlay: 1000;
+    // #endregion
+    // #region Cards variables
     --card-top-padding: 2rem;
     --card-right-padding: #{rem(16+16+24)};
     --card-bottom-padding: 2rem;
@@ -178,59 +242,72 @@
     --card-box-shadow: #{rem(2)} #{rem(3)} #{rem(6)} rgba(0, 0, 0, 0.2);
     --nav-height: #{rem(96)};
     --code-color: #d63384;
-
-    // Default borders
+    // #endregion 
+    // #region Default borders
     --border-width: 1px;
     --border-style: solid;
     --border-color: var(--colour-border);
-
-    --container-max-width: #{rem(1280)};
+    // #endregion
+    
+    // Extra vars needed
+    --content-max-width: #{rem(800)};
     --padding-inline: 1.5rem;
 
-    @media (prefers-reduced-motion: no-preference) {
-      scroll-behavior: smooth;
-    }
+    --input-max-width: #{rem(800)};
+    --select-max-width: #{rem(800)};
+
+
+    // #region layout
+    --container-max-width: #{rem(1280)};
+    --container-padding-top: 0;
+    --container-padding-bottom: #{rem(16)};
+    --container-padding-x: #{rem(24)};
+    --container-padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom) var(--container-padding-x);
+    // #endregion
+
+    // #region icons
+    $icon-arrow: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><path d='M6.5,2l9,9-9,9' style='fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px'/></svg>");
+    $icon-close: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>");
+    $icon-question: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 28'><path d='M14 21.5v-3c0-0.281-0.219-0.5-0.5-0.5h-3c-0.281 0-0.5 0.219-0.5 0.5v3c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5zM18 11c0-2.859-3-5-5.688-5-2.547 0-4.453 1.094-5.797 3.328-0.141 0.219-0.078 0.5 0.125 0.656l2.063 1.563c0.078 0.063 0.187 0.094 0.297 0.094 0.141 0 0.297-0.063 0.391-0.187 0.734-0.938 1.047-1.219 1.344-1.437 0.266-0.187 0.781-0.375 1.344-0.375 1 0 1.922 0.641 1.922 1.328 0 0.812-0.422 1.219-1.375 1.656-1.109 0.5-2.625 1.797-2.625 3.313v0.562c0 0.281 0.219 0.5 0.5 0.5h3c0.281 0 0.5-0.219 0.5-0.5v0c0-0.359 0.453-1.125 1.188-1.547 1.188-0.672 2.812-1.578 2.812-3.953zM24 14c0 6.625-5.375 12-12 12s-12-5.375-12-12 5.375-12 12-12 12 5.375 12 12z'/></svg>");
+
+    $icon-new-tab: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='M304 24c0 13.3 10.7 24 24 24H430.1L207 271c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l223-223V184c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24H328c-13.3 0-24 10.7-24 24zM72 32C32.2 32 0 64.2 0 104V440c0 39.8 32.2 72 72 72H408c39.8 0 72-32.2 72-72V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V440c0 13.3-10.7 24-24 24H72c-13.3 0-24-10.7-24-24V104c0-13.3 10.7-24 24-24H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H72z'/></svg>");
+
+    --icon-arrow: #{escape-svg($icon-arrow)};
+    --icon-close: #{escape-svg($icon-close)};
+    --icon-question: #{escape-svg($icon-question)};
+    --icon-new-tab: #{escape-svg($icon-new-tab)};
+
+    // #endregion
+
 
     // Add in media query based updates to the global vars like updating the heading 1 font size
-    @include media-breakpoint-up(sm) {
-      @each $var, $value in $varsSM {
-        #{$var}: #{$value};
-      }
-    }
-
-    @include media-breakpoint-up(md) {
-      @each $var, $value in $varsMD {
-        #{$var}: #{$value};
-      }
-    }
-
     @media screen and (min-width: 36em) {
-      @each $var, $value in map.get($vars-responsive, 'sm') {
-        #{'--'+$var}: #{$value};
-      }
-    }
-    @media screen and (min-width: 62em) {
-      @each $var, $value in map.get($vars-responsive, 'md') {
-        #{'--'+$var}: #{$value};
-      }
-    }
-
-    @include media-breakpoint-up(sm) {
+      --container-padding-x: #{rem(40)};
       --padding-inline: 2.5rem;
+      --gutter: 2.5rem;
+      --scale: 1.25;
     }
-    @include media-breakpoint-up(md) {
+    
+    @media screen and (min-width: 62em) {
+
+      --container-padding-x: #{rem(84)};
       --padding-inline: 5.25rem;
+      --gutter: 5.25rem;
+      --scale: 1.414;
 
       &:has(.nav--large) {
         --container-max-width: #{rem(1920)} !important;
         --max-width: #{rem(1920)} !important;
         --padding-inline: #{rem(56)} !important;
-        --container-padding-x-md: #{rem(56)} !important;
-        --container-padding-md: var(--container-padding-top) var(--container-padding-x-md)
-          var(--container-padding-bottom) var(--container-padding-x-md);
-        --container-padding: var(--container-padding-md);
+        --container-padding-x: #{rem(56)} !important;
+        --container-padding: var(--container-padding-top) var(--container-padding-x)
+          var(--container-padding-bottom) var(--container-padding-x);
         --gutter: 3.5rem;
       }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      scroll-behavior: smooth;
     }
   }
 
@@ -270,16 +347,18 @@
 
   // #region When the theme is set to dark via the dark mode component
   // OR when the dark mode is set via the browser or device when no component is present
+  
   .dark-theme :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
+    
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
 
-    --colour-heading: var(--colour-primary-theme);
-    --colour-body: var(--colour-primary-theme);
-    color: var(--colour-primary-theme);
-
-    // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
-    > * {
-      color-scheme: light;
-    }
+      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+      > * {
+        color-scheme: light;
+      }
+    
   }
 
   .dark-theme .bg-light {

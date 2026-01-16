@@ -157,6 +157,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
 // Requires the use of quotes around data URIs.
 
 @function escape-svg($string) {
+  $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29'));
   @if string.index($string, 'data:image/svg+xml') {
     @each $char, $encoded in $escaped-characters {
       // Do not escape the url brackets
@@ -199,7 +200,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   $color-contrast-light: $color-contrast-light,
   $min-contrast-ratio: $min-contrast-ratio
 ) {
-  $foregrounds: $color-contrast-light, $color-contrast-dark, $white, $black;
+  $foregrounds: $color-contrast-light, $color-contrast-dark, #fff, #000;
   $max-ratio: 0;
   $max-ratio-color: null;
 
@@ -355,9 +356,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
 }
 // #endregion
 
-@function spacing($int) {
-  @return map.get($spacers, $int);
-}
+
 
 @function Pow($x, $n) {
   $ret: 1;

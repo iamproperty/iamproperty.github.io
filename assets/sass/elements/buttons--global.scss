@@ -18,7 +18,7 @@
     text-transform: none;
     margin: 0; // 1
     font-family: inherit;
-    @include font-size(inherit);
+    font-size: inherit;
     line-height: inherit;
   }
 
@@ -30,15 +30,13 @@
   }
 
   button,
-[type="button"], // 1
-[type="reset"],
-[type="submit"] {
+  [type="button"], // 1
+  [type="reset"],
+  [type="submit"] {
     -webkit-appearance: button; // 2
 
-    @if $enable-button-pointers {
-      &:not(:disabled) {
-        cursor: pointer; // 3
-      }
+    &:not(:disabled) {
+      cursor: pointer; // 3
     }
   }
   // #endregion
@@ -88,7 +86,7 @@
     }
 
     &:is(.colour-primary, .colour-dark, .colour-danger, .colour-black) {
-      --colour-btn: #{$colour-inverted};
+      --colour-btn: #fcfcfc;
     }
 
     &:not(.border-0) {

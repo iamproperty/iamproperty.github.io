@@ -30,7 +30,7 @@
     }
 
     &:is(.bg-primary, .bg-dark, .bg-danger) {
-      color: #{$colour-inverted} !important;
+      color: #fcfcfc !important;
     }
   }
 

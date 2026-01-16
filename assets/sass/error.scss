@@ -18,16 +18,6 @@
   }
 }
 
-@layer elements {
-  .h1 {
-    --line-height: #{map.get($heading-sizes, 'h1_lh')};
-
-    font-size: map.get($heading-sizes, 'h1_fs');
-    padding-bottom: map.get($heading-sizes, 'h1_pb');
-    font-weight: 900;
-  }
-}
-
 @layer utilities {
   .gradient-primary {
     background-image: linear-gradient(

@@ -7,7 +7,7 @@
 @layer elements {
   :is(label, .label):has(progress) {
     position: relative;
-    max-width: $input-max-width;
+    max-width: var(--input-max-width);
     margin-bottom: 2rem;
 
     padding-right: 3rem;

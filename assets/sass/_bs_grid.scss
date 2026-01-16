@@ -1,5 +1,8 @@
-@use '_func' as *;
-
+@use 'sass:map';
+@use '_functions/functions' as *;
+@use '_functions/variables_old' as *; // Variables file from bootstrap
+@use '_functions/mixins' as *;
+@use '_functions/utility-mixins' as *;
 
 
 @layer reset {

@@ -584,13 +584,13 @@
     z-index: 1;
     padding: rem(24) 1.5rem;
     margin: 0 -1.5rem;
-    font-family: $headings-font-family;
-    font-style: $headings-font-style;
-    font-weight: $headings-font-weight;
-    color: $headings-color;
+    font-family: var(--font-heading);
+    font-style: normal;
+    font-weight: var(--heading-weight);
+    color: var(--colour-heading);
     clear: both;
-    font-size: map.get($heading-sizes, 'h3_fs');
-    line-height: map.get($heading-sizes, 'h3_lh');
+    font-size: var(--h3-fs);
+    line-height: var(--heading-lh);
     max-width: var(--content-max-width);
 
     @include media-breakpoint-up(sm) {

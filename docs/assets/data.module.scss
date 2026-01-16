@@ -84,28 +84,6 @@
 // Export the SCSS vars
 :export {
   // Headings
-  @each $var, $value in $heading-sizes {
-    #{$var}: #{$value};
-  }
-
-  @each $var, $value in $heading-sizes {
-    #{$var}_rem: #{rem($value)};
-  }
-
-  text_mw: $content-max-width-px;
-  text_mw_rem: $content-max-width;
-  table_padding_px: $table-padding-px;
-  table_padding: $table-padding;
-
-  td_mw_px: $td-mw-px;
-  td_mw: $td-mw;
-
-  ut_mh_sm_px: $ut-mh-sm-px;
-  ut_mh_sm: $ut-mh-sm;
-  ut_mh_md_px: $ut-mh-md-px;
-  ut_mh_md: $ut-mh-md;
-  ut_mh_lg_px: $ut-mh-lg-px;
-  ut_mh_lg: $ut-mh-lg;
 
   @each $var, $value in $vars {
     #{str-replace($var,'-','_')}: #{$value};
@@ -140,3 +118,4 @@
     -ut-mixin-#{$key}: #{$details};
   }
 }
+

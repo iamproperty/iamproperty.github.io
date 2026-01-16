@@ -124,9 +124,9 @@ iam-rankings {
     --colour: var(--wider-colour-7);
   }
 
-  @each $index, $value in $chart-colors {
-    tr:nth-child(#{$index + 1}) progress {
-      --colour: var(--chart-colour-#{$index}, #{$value});
+  @for $i from 1 through 10 {
+    tr:nth-child(#{$i}) progress {
+      --colour: var(--chart-colour-#{$i});
     }
   }
 }

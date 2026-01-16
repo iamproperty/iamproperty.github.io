@@ -64,8 +64,8 @@
         position: relative;
         display: block;
         margin-top: calc(var(--padding-top) * -1);
-        margin-inline: calc(var(--container-padding-x-md) * -1);
-        min-width: calc(100% + var(--container-padding-x-md) + var(--container-padding-x-md));
+        margin-inline: calc(var(--container-padding-x) * -1);
+        min-width: calc(100% + var(--container-padding-x) + var(--container-padding-x));
         margin-bottom: rem(40);
         max-height: rem(400);
         clip-path: ellipse(70% 80% at 50% 20%);

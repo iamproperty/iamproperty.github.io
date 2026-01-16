@@ -8,8 +8,8 @@
 @layer elements {
   /* Duplicated from bootstrap reboot so that the type file will compile */
   mark {
-    padding: $mark-padding;
-    background-color: $mark-bg;
+    padding: 0.1875em;
+    background-color: yellow;
   }
 
   //@import "../../bootstrap/scss/_type.scss";
@@ -19,13 +19,11 @@
   %heading {
     margin-top: 0; // 1
     margin-bottom: 0;
-    font-family: $headings-font-family;
-    font-style: $headings-font-style;
+    font-family: var(--font-heading);
+    font-style: normal;
     font-weight: bold;
 
-    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
-    color: $headings-color;
+    color: var(--colour-heading);
     clear: both;
     display: block;
 
@@ -39,58 +37,60 @@
   }
 
   :is(.h1, h1) {
-    font-size: map.get($heading-sizes, 'h1_fs');
+    font-size: var(--h1-fs);
+    line-height: var(--h1-lh);
+    padding-bottom: var(--h1-pb);
     font-weight: 900;
   }
 
   :is(h2, .h2) {
-    font-size: map.get($heading-sizes, 'h2_fs');
+    font-size: var(--h2-fs);
+    line-height: var(--h2-lh);
+    padding-bottom: var(--h2-pb);
     font-weight: 900;
   }
 
   :is(h3, .h3) {
-    font-size: map.get($heading-sizes, 'h3_fs');
+    font-size: var(--h3-fs);
+    line-height: var(--h3-lh);
+    padding-bottom: var(--h3-pb);
     max-width: var(--content-max-width);
-
-    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
   }
 
   :is(.h4, h4, .h5, h5, .h6, h6) {
-    font-size: map.get($heading-sizes, 'h4_fs');
+    font-size: var(--h4-fs);
+    line-height: var(--h4-lh);
+    padding-bottom: var(--h4-pb);
     max-width: var(--content-max-width);
-
-    line-height: round(calc(1em * var(--type-scale)), 0.25rem);
-    padding-bottom: round(calc(1em * var(--type-scale)), 0.25rem);
   }
   // #endregion
 
   p {
     margin-top: 0;
-    font-size: rem(map.get($heading-sizes, 'body_fs'));
-    line-height: rem(map.get($heading-sizes, 'body_lh'));
-    padding-bottom: rem(map.get($heading-sizes, 'body_end_pb'));
+    font-size: var(--body-fs);
+    line-height: rem(24);
+    padding-bottom: rem(48);
     max-width: var(--content-max-width);
     margin-bottom: 0;
   }
 
   p:has(+ p) {
-    padding-bottom: rem(map.get($heading-sizes, 'body_pb'));
+    padding-bottom: rem(24);
   }
 
   :is(.lead, .strapline) {
-    font-size: rem(map.get($heading-sizes, 'lead_fs'));
-    line-height: rem(map.get($heading-sizes, 'lead_lh'));
-    padding-bottom: rem(map.get($heading-sizes, 'lead_pb'));
+    font-size: rem(18);
+    line-height: rem(28);
+    padding-bottom: rem(48);
     max-width: var(--content-max-width);
     font-weight: 700;
   }
 
   small,
   .small {
-    font-size: rem(map.get($heading-sizes, 'small_fs'));
-    line-height: rem(map.get($heading-sizes, 'small_lh'));
-    padding-bottom: rem(map.get($heading-sizes, 'small_pb'));
+    font-size: rem(14);
+    line-height: rem(24);
+    padding-bottom: rem(48);
     max-width: var(--content-max-width);
     font-weight: normal;
   }
@@ -162,7 +162,7 @@
     font-size: rem(64);
     line-height: rem(72);
     font-weight: bold;
-    color: $headings-color;
+    color: var(--colour-heading);
     display: block;
 
     text-decoration: underline;
