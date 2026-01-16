@@ -45,7 +45,7 @@ dialog[open] {
 // #region Multi step modal
 
   dialog[open] {
-    padding: 6rem rem(24) 0 rem(24);
+    padding: 6rem 1.5rem 0 1.5rem;
 
     @media screen and (min-width: 36em) {
       min-width: rem(452);
@@ -175,9 +175,9 @@ dialog[open] {
     background: transparent;
     border: none;
     color: rgba($color: #ffffff, $alpha: 0.5);
-    height: rem(24);
-    line-height: rem(24);
-    width: rem(24);
+    height: 1.5rem;
+    line-height: 1.5rem;
+    width: 1.5rem;
     text-indent: 300%;
     overflow: hidden;
     z-index: 2;
@@ -193,9 +193,9 @@ dialog[open] {
       content: counter(section);
 
       border: 1px solid currentColor;
-      height: rem(24);
-      line-height: rem(24);
-      width: rem(24);
+      height: 1.5rem;
+      line-height: 1.5rem;
+      width: 1.5rem;
       text-align: center;
       display: inline-block;
       text-indent: 0;

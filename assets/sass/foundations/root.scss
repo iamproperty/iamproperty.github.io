@@ -236,7 +236,7 @@
     --card-right-padding: #{rem(16+16+24)};
     --card-bottom-padding: 2rem;
     --card-left-padding: 1rem;
-    --card-border-radius: #{rem(8)};
+    --card-border-radius: 0.5rem;
     --card-box-shadow: #{rem(2)} #{rem(3)} #{rem(6)} rgba(0, 0, 0, 0.2);
     --nav-height: #{rem(96)};
     --code-color: #d63384;
@@ -249,8 +249,8 @@
     
  
     // #region layout
-    --gap: #{rem(16)};
-    --gutter: #{rem(24)};
+    --gap: 1rem;
+    --gutter: 1.5rem;
     --max-width: #{rem(1280)};
     --content-max-width: #{rem(800)};
     --input-max-width: #{rem(800)};
@@ -258,9 +258,9 @@
 
     --container-max-width: #{rem(1280)};
     --container-padding-top: 0;
-    --container-padding-bottom: #{rem(16)};
+    --container-padding-bottom: 1rem;
     --padding-inline: 1.5rem;
-    --container-padding-x: #{rem(24)};
+    --container-padding-x: 1.5rem;
     --container-padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom) var(--container-padding-x);
     // #endregion
 
@@ -302,9 +302,13 @@
     --spacer-5: calc(var(--spacer) * 3);
     // #endregion
 
+    --max-height-sm: 12.5rem /* 200px */
+    --max-height-md: 24rem /* 400px */
+    --max-height-lg: 37.5rem /* 600px */
+
     // Add in media query based updates to the global vars like updating the heading 1 font size
     @media screen and (min-width: 36em) {
-      --container-padding-x: #{rem(40)};
+      --container-padding-x: 2.5rem;
       --padding-inline: 2.5rem;
       --gutter: 2.5rem;
       --scale: 1.25;

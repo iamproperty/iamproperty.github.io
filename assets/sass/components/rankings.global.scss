@@ -51,11 +51,11 @@ iam-rankings {
     &:before {
       counter-increment: countItem; /* Increment the value of section counter by 1 */
       content: counter(countItem) '.';
-      font-size: rem(32);
-      line-height: rem(40);
+      font-size: 2rem;
+      line-height: 2.5rem;
       font-weight: bolder;
       color: var(--colour-primary);
-      width: rem(48);
+      width: 3rem;
       text-align: center;
       margin-top: 0.5rem;
     }

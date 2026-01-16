@@ -43,8 +43,8 @@ html {
 
 .container:not(.container-fluid) {
   max-width: 600px;
-  padding-left: #{rem(48)};
-  padding-right: #{rem(48)};
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 .table--email,

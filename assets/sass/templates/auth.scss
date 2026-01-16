@@ -13,7 +13,7 @@
   }
 
   .template--auth {
-    --padding-top: #{rem(24)};
+    --padding-top: 1.5rem;
     --brand-size: #{rem(36)};
 
     display: flex;
@@ -22,7 +22,7 @@
     margin-inline: auto;
 
     @media screen and (min-width: 62em) {
-      --padding-top: #{rem(40)};
+      --padding-top: 2.5rem;
       --brand-size: #{rem(64)};
     }
 
@@ -37,7 +37,7 @@
       @media screen and (min-width: 62em) {
         flex: 0 0 auto;
         width: 43.75%;
-        padding-inline-end: calc(var(--container-padding-x) - rem(16));
+        padding-inline-end: calc(var(--container-padding-x) - 1rem);
       }
 
       .brand {
@@ -66,7 +66,7 @@
         margin-top: calc(var(--padding-top) * -1);
         margin-inline: calc(var(--container-padding-x) * -1);
         min-width: calc(100% + var(--container-padding-x) + var(--container-padding-x));
-        margin-bottom: rem(40);
+        margin-bottom: 2.5rem;
         max-height: rem(400);
         clip-path: ellipse(70% 80% at 50% 20%);
         rotate: -5deg;
@@ -94,7 +94,7 @@
 
       img {
         margin-inline: rem(-24);
-        min-width: calc(100% + rem(24) + rem(24));
+        min-width: calc(100% + 1.5rem + 1.5rem);
         margin-top: rem(-12);
         max-height: rem(424);
         object-fit: cover;

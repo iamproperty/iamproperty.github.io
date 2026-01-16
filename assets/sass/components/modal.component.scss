@@ -30,7 +30,7 @@ dialog[open] {
   overflow-y: hidden;
 
   @media screen and (min-width: 36em) {
-    --dialog-padding: #{rem(32)};
+    --dialog-padding: 2rem;
     min-width: rem(335);
     width: fit-content;
     max-width: rem(686);
@@ -205,7 +205,7 @@ dialog::backdrop {
     height: 3rem;
     width: 3rem;
     margin-top: 0;
-    margin-bottom: rem(24);
+    margin-bottom: 1.5rem;
     line-height: 1;
     color: var(--colour-heading);
         margin-inline: auto;

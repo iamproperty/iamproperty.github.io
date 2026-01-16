@@ -17,7 +17,7 @@
 
 :host {
 
-  margin-bottom: rem(24);
+  margin-bottom: 1.5rem;
 }
 
 .outer {
@@ -49,7 +49,7 @@ label {
   }
 
   input {
-    margin-bottom: rem(8);
+    margin-bottom: 0.5rem;
   }
 
   .feedback {
@@ -81,13 +81,13 @@ label {
   flex-wrap: wrap;
   align-items: flex-start;
   min-height: calc(0.75rem + 0.75rem + 1.25rem + 4px);
-  padding: #{rem(8)} #{rem(32)} #{rem(0)} #{rem(13)};
-  font-size: var(--input-fs, #{rem(16)});
-  line-height: var(--input-lh, #{rem(20)});
+  padding: 0.5rem 2rem 0 #{rem(13)};
+  font-size: var(--input-fs, 1rem);
+  line-height: var(--input-lh, 1.25rem);
   color: var(--colour-body);
   background-color: var(--colour-canvas-2);
   border: 2px solid var(--colour-primary);
-  border-radius: rem(8);
+  border-radius: 0.5rem;
 
   &:is(:focus-within, .focus-within):not(:disabled) {
     border-color: var(--colour-info);
@@ -97,15 +97,15 @@ label {
 
   input {
     all: unset;
-    font-size: rem(16);
+    font-size: 1rem;
     line-height: rem(26);
     display: var(--search-display,inline-block);
     width: 0;
     flex-grow: 1;
-    padding: 0 rem(8) 0 0 !important;
+    padding: 0 0.5rem 0 0 !important;
     margin-inline: rem(3);
     order: 999;
-    margin-bottom: rem(8);
+    margin-bottom: 0.5rem;
   }
 
   .feedback {

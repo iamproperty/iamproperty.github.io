@@ -14,7 +14,7 @@
   // #region Default styling of both modals
   dialog,
   [popover] {
-    --dialog-padding: #{rem(24)};
+    --dialog-padding: 1.5rem;
 
     --mh-padding-inline: var(--dialog-padding);
     color: inherit;
@@ -62,7 +62,7 @@
     overscroll-behavior: contain;
 
     @media screen and (min-width: 36em) {
-      //--dialog-padding: #{rem(32)};
+      //--dialog-padding: 2rem;
       //padding: var(--dialog-padding);
       min-width: rem(335);
       width: fit-content;

@@ -87,7 +87,7 @@ input[type='range'] + input[type='range']::-moz-range-track {
 
   &[data-elements='2'] {
     justify-content: space-between;
-    --max-width: calc(50% - #{rem(48)});
+    --max-width: calc(50% - 3rem);
     --padding-top: 2rem;
     position: relative;
 
@@ -97,7 +97,7 @@ input[type='range'] + input[type='range']::-moz-range-track {
       width: rem(64);
       height: 2px;
       top: calc(50% - 1px);
-      left: calc(50% - #{rem(32)});
+      left: calc(50% - 2rem);
       background-color: var(--colour-border);
     }
 

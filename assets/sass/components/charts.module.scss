@@ -50,7 +50,7 @@
   --index-menu: 200;
   --index-overlay: 1000;
   --key-label-width: 100%;
-  --label-size: #{rem(12)};
+  --label-size: 0.75rem;
   --line-thickness: 1px;
   --yaxis-width: auto;
   --yaxis-point-display: block;
@@ -195,7 +195,7 @@
       text-align: right;
       //font-size: var(--label-size);
       font-weight: var(--chart-yaxis-fw, normal);
-      font-size: var(--chart-yaxis-fs, #{rem(12)});
+      font-size: var(--chart-yaxis-fs, 0.75rem);
       color: var(--colour-body);
     }
 
@@ -307,7 +307,7 @@
   //color: var(--colour-primary-theme);
   white-space: pre;
   text-align: left;
-  box-shadow: var(--chart-details-shadow, 0 #{rem(2)} #{rem(12)} rgba(0, 0, 0, 0.25));
+  box-shadow: var(--chart-details-shadow, 0 #{rem(2)} 0.75rem rgba(0, 0, 0, 0.25));
   transform: translate(-50%, -100%);
 
   &::before {

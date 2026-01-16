@@ -11,7 +11,7 @@
 
 :host {
   padding-top: 0 !important;
-  margin-bottom: rem(32);
+  margin-bottom: 2rem;
   background-color: transparent !important;
   display: block !important;
 }
@@ -78,7 +78,7 @@
 
 // Web component CSS
 ::slotted(.breadcrumb) {
-  margin-top: rem(24) !important;
+  margin-top: 1.5rem !important;
   margin-bottom: -0.5rem !important;
 
   @media screen and (min-width: 62em) {
