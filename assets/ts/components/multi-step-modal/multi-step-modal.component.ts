@@ -44,7 +44,7 @@ class iamMultiStepModal extends HTMLElement {
     const steps = this.shadowRoot.querySelector('.steps');
     const form = this.querySelector('form');
 
-    const openModal = () => {
+    const openModal = (): void => {
       dialog?.showModal();
       dialog?.focus();
 
@@ -97,7 +97,7 @@ class iamMultiStepModal extends HTMLElement {
       });
     });
 
-    const closeModal = () => {
+    const closeModal = (): void => {
       dialog?.close();
       
       const closeEvent = new CustomEvent('modal-closed', {

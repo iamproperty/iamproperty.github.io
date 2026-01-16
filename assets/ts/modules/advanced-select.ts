@@ -117,7 +117,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     );
 
 
-  const emptyField = () => {
+  const emptyField = (): void => {
 
     displayInputField.removeAttribute('placeholder');
 
