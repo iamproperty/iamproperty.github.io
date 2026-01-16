@@ -21,7 +21,7 @@
             <th>CSS</th>
             <td>{{ $shared.audit.css_size }}</td>
             <td>{{ $shared.benchmark.css_size }}</td>
-            <td>The base CSS plus the standard grid, components and the mixin utilities</td>
+            <td>The base CSS plus the standard grid, components and the utilities</td>
           </tr>
           <tr>
             <th>Core CSS</th>
