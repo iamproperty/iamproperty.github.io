@@ -61,25 +61,26 @@
 
   /* Reset & Defaults */
   html {
+    --root-fs-px: 375;
     -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
     height: 100%;
     width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
-    font-size: vw(375);
+    font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
     scroll-padding-top: rem(100);
 
     @media screen and (min-width: 36em) {
-      font-size: vw(768);
+      --root-fs-px: 768;
     }
     @media screen and (min-width: 62em) {
-      font-size: vw(1280);
+      --root-fs-px: 1280;
     }
 
     
       @media (min-width: #{em(1280)}) {
-        font-size: 100%;
-        font-size: vw(1280);
+        //font-size: 100%;
+        --root-fs-px: 1280;
 
         &:has(.nav--large) {
           font-size: 100%;
@@ -106,7 +107,8 @@
         // 1920
 
         &:has(.nav--large) {
-          font-size: vw(1920);
+          --root-fs-px: 1920;
+          font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
         }
       }
     

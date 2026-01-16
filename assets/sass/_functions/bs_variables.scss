@@ -6,9 +6,7 @@ $vars: () !default;
 $varsSM: () !default;
 $varsMD: () !default;
 
-@use 'functions' as *;
-@forward 'variables' show $heading-sizes, $content-max-width-px, $content-max-width, $table-padding, $table-padding-px,
-  $td-mw, $td-mw-px, $non-theme-colors, $dark-mode-colors, $dark-mode-functional-colors, $wider-colours, $wider-colours-hover, $wider-colours-active;
+@use 'bs_functions' as *;
 
 $grid-row-columns: 6 !default;
 $grid-breakpoints: (

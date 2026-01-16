@@ -337,19 +337,19 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:
-      escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top
+      var(--icon-select) right var(--input-padding-block, 0.75rem) top
         var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
       linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top /
         calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem))
         calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem))
         no-repeat,
-      escape-svg($icon-error) right var(--input-padding-block, 3.5rem) top var(--input-padding-block, 0.75rem) /
+      var(--icon-error) right var(--input-padding-block, 3.5rem) top var(--input-padding-block, 0.75rem) /
         var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat;
     padding-right: 6rem !important;
   }
 
   .was-validated input:is(:invalid, .is-invalid, [aria-invalid], :-internal-autofill-selected) {
-    background-image: escape-svg($icon-error);
+    background-image: var(--icon-error);
     background-repeat: no-repeat;
     background-position: right var(--input-padding-inline, #{rem(16)}) center;
     background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});
@@ -363,7 +363,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 
   .was-validated input:is(:valid, .is-valid):not(:is(:invalid, .is-invalid)) {
-    background-image: escape-svg($icon-tick);
+    background-image: var(--icon-tick);
     background-repeat: no-repeat;
     background-position: right var(--input-padding-inline, #{rem(16)}) center;
     background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});
@@ -375,7 +375,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   .invalid-feedback {
     color: var(--colour-danger);
     margin-top: rem(8);
-    background-image: escape-svg($icon-error);
+    background-image: var(--icon-error);
     background-repeat: no-repeat;
     background-position: left top 1px;
     background-size: var(--input-fs, #{rem(16)}) var(--input-fs, #{rem(16)});
@@ -394,7 +394,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
   .was-validated iam-address-lookup:has([required]:invalid) {
     --error-border: var(--colour-danger);
-    --error-bg: #{escape-svg($icon-error)};
+    --error-bg: #{var(--icon-error)};
     --error-display: block;
     --error-hide: none;
   }
@@ -723,7 +723,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:
-      escape-svg($form-select-indicator-new) right var(--input-padding-block, 0.75rem) top
+      var(--icon-select) right var(--input-padding-block, 0.75rem) top
         var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
       linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top /
         calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem))
@@ -887,7 +887,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       content: 'This field is required';
       color: var(--colour-danger);
       margin-top: rem(8);
-      background-image: escape-svg($icon-error);
+      background-image: var(--icon-error);
       background-repeat: no-repeat;
       background-position: left top 1px;
       background-size: var(--input-fs, #{rem(16)}) var(--input-fs, #{rem(16)});
