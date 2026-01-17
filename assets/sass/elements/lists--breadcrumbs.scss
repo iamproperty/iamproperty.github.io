@@ -3,8 +3,8 @@
 
 @layer elements {
   
-  :ia(.breadcrumb, .breadcrumbs) {
-    font-size: 1.125rem; /* 14/16 */
+  :is(.breadcrumb, .breadcrumbs) {
+    font-size: 0.875rem; /* 14/16 */
     padding-left: 0;
     list-style: none;
 

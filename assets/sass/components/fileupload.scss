@@ -84,7 +84,7 @@ hr {
     button {
       position: absolute;
       top: calc(50% - #{rem(9)});
-      right: 1.125rem; /* 14/16 */
+      right: 0.875rem; /* 14/16 */
       z-index: var(--index-floating);
       text-indent: 300%;
       overflow: hidden;

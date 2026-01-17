@@ -444,7 +444,7 @@ table {
   }
 }
 
-@media screen and (min-width: 36em) {
+@container (width > 36em) {
   :is(#{$selector}).table--fullwidth iam-actionbar,
   :is(#{$selector}) iam-actionbar {
     margin-left: -2rem;

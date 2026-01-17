@@ -69,7 +69,7 @@
 
   small,
   .small {
-    font-size: 1.125rem; /* 14/16 */
+    font-size: 0.875rem; /* 14/16 */
     line-height: 1.5rem;
     padding-bottom: 3rem;
     max-width: var(--content-max-width);

@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../_func.scss' as *;
 
-@use '../elements/type.scss' as *;
+@use '../elements/type' as *;
 
 @use '../utilities/max-height' as *;
 

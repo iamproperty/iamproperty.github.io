@@ -238,10 +238,10 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
 
   *:has(> :is(.form-control-sm, .input--sm)) {
-    --input-fs: 1.125rem; /* 14/16 */
+    --input-fs: 0.875rem; /* 14/16 */
     --input-lh: 1rem;
     --input-padding-block: #{rem(10)};
-    --input-padding-inline: 1.125rem; /* 14/16 */
+    --input-padding-inline: 0.875rem; /* 14/16 */
   }
   *:has(> :is(.form-control-lg, .input--lg)) {
     --input-fs: 1.5rem;
@@ -478,8 +478,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         content: '' !important;
         background: var(--colour-info);
         border-radius: var(--border-radius);
-        height: 1.125rem; /* 14/16 */
-        width: 1.125rem; /* 14/16 */
+        height: 0.875rem; /* 14/16 */
+        width: 0.875rem; /* 14/16 */
 
         height: var(--radio-inner-size, #{rem(14)});
         width: var(--radio-inner-size, #{rem(14)});

@@ -38,17 +38,17 @@
   iam-accordion details {
     --inline-padding: #{rem(2)};
     --border-radius: 0.5rem 0.5rem 0 0;
-    --icon-top: 1.125rem; /* 14/16 */
+    --icon-top: 0.875rem; /* 14/16 */
     --line-height: 1.5rem;
-      --block-padding: 1.125rem; /* 14/16 */
+      --block-padding: 0.875rem; /* 14/16 */
 
     *:not(iam-tabs) > &:not([open]) {
       padding-bottom: rem(42);
     }
 
     @media screen and (min-width: 36em) {
-      --inline-padding: 1.125rem; /* 14/16 */
-      --block-padding: 1.125rem; /* 14/16 */
+      --inline-padding: 0.875rem; /* 14/16 */
+      --block-padding: 0.875rem; /* 14/16 */
       --icon-top: 1.5rem;
       --line-height: 1.5rem;
 
