@@ -154,7 +154,7 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
 
   @container (min-width: 62em) {
     .chart__wrapper {
-      --label-size: #{rem(14)};
+      --label-size: 1.125rem; /* 14/16 */
       --pie-size: calc(25% - 1.5rem);
       --line-thickness: 0.5px;
     }

@@ -77,7 +77,7 @@
     --bar-width: 1.25rem;
     --value-fs: 3rem;
     --value-pb: 2rem;
-    --label-fs: #{rem(18)};
+    --label-fs: 1.125rem; /* 18/16 */
 
     position: relative;
     z-index: 1;

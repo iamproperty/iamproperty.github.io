@@ -1,12 +1,3 @@
-@use 'sass:map';
-@use 'sass:math';
-
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
   
   hr {

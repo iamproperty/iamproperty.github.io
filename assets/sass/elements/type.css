@@ -1,23 +1,8 @@
-@use 'sass:map';
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
-  /* Duplicated from bootstrap reboot so that the type file will compile */
-  mark {
-    padding: 0.1875em;
-    background-color: yellow;
-  }
 
-  //@import "../../bootstrap/scss/_type.scss";
-
-  // #region headings
-
-  %heading {
-    margin-top: 0; // 1
+  /* #region Headings */
+  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4) {
+    margin-top: 0; 
     margin-bottom: 0;
     font-family: var(--font-heading);
     font-style: normal;
@@ -27,13 +12,9 @@
     clear: both;
     display: block;
 
-    [class*='fa-'] {
+    & [class*='fa-'] {
       margin-right: 0.5rem;
     }
-  }
-
-  :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6,.display-1,.display-2, .display-3, .display-4) {
-    @extend %heading;
   }
 
   :is(.h1, h1) {
@@ -63,7 +44,7 @@
     padding-bottom: var(--h4-pb);
     max-width: var(--content-max-width);
   }
-  // #endregion
+  /* #endregion */
 
   p {
     margin-top: 0;
@@ -79,16 +60,16 @@
   }
 
   :is(.lead, .strapline) {
-    font-size: rem(18);
-    line-height: rem(28);
-    padding-bottom: 3rem;
+    font-size: 1.125rem; /* 18/16 */
+    line-height: 1.75rem; /* 28/16 */
+   padding-bottom: 3rem;
     max-width: var(--content-max-width);
     font-weight: 700;
   }
 
   small,
   .small {
-    font-size: rem(14);
+    font-size: 1.125rem; /* 14/16 */
     line-height: 1.5rem;
     padding-bottom: 3rem;
     max-width: var(--content-max-width);
@@ -111,9 +92,9 @@
   }
 
   abbr[title] {
-    text-decoration: underline dotted; // 1
-    cursor: help; // 2
-    text-decoration-skip-ink: none; // 3
+    text-decoration: underline dotted;
+    cursor: help;
+    text-decoration-skip-ink: none;
   }
 
   strong {
@@ -121,8 +102,6 @@
     font-family: var(--font-heading);
     color: var(--colour-heading);
   }
-
-  // Address
 
   address {
     margin-bottom: 1rem;
@@ -136,7 +115,7 @@
     padding-bottom: 3rem;
     overflow: hidden;
 
-    p {
+    & p {
       font-size: 1.5rem;
       line-height: 2rem;
       padding-bottom: 0;
@@ -149,8 +128,8 @@
       content: close-quote;
     }
 
-    cite {
-      font-size: rem(18);
+    & cite {
+      font-size: 1.125rem; /* 18/16 */
       line-height: 2rem;
       padding-bottom: 0;
       font-weight: bold;
@@ -158,9 +137,14 @@
     }
   }
 
+  mark {
+    padding: 0.1875em;
+    background-color: yellow;
+  }
+
   .stat {
-    font-size: rem(64);
-    line-height: rem(72);
+    font-size: 4rem /* 64/16 */;
+    line-height: 4.5rem; /* 72/16 */
     font-weight: bold;
     color: var(--colour-heading);
     display: block;
@@ -169,6 +153,6 @@
     text-underline-offset: 0.75rem;
     text-decoration-color: var(--colour-secondary);
     text-decoration-thickness: 0.25rem;
-    margin-bottom: rem(64);
+    margin-bottom: 4rem /* 64/16 */;
   }
 }

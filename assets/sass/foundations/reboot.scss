@@ -1,57 +1,7 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-
-
-
-
 @layer reset {
-  // Code
-  pre,
-  code,
-  kbd,
-  samp {
-    font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
-    font-size: 1rem;
-  }
-
-  pre {
-    display: block;
-    margin-top: 0; // 1
-    margin-bottom: 1rem; // 2
-    overflow: auto; // 3
-    font-size: rem(14);
-    color: null;
-
-    // Account for some code outputs that place code tags in pre tags
-    code {
-      font-size: inherit;
-      color: inherit;
-      word-break: normal;
-    }
-  }
-
-  code {
-    font-size: rem(14);
-    color: #d63384;
-    word-wrap: break-word;
-
-    // Streamline the style when inside anchors to avoid broken underline and more
-    a > & {
-      color: inherit;
-    }
-  }
-
-  kbd {
-    padding: 0.1875rem 0.375rem;
-    font-size: rem(14);
-
-    kbd {
-      padding: 0;
-      font-size: 1rem;
-      font-weight: normal;
-    }
-  }
 
   *,
   *::before,

@@ -62,7 +62,7 @@ iam-actionbar[data-view='small'] ~ [data-view='small'] {
 // #region Child elements
 iam-actionbar {
   .actionbar__text {
-    font-size: rem(18);
+    font-size: 1.125rem; /* 18/16 */
     line-height: 2.5rem;
     color: var(--colour-heading);
     display: inline-block;

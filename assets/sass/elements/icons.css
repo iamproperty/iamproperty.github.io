@@ -1,16 +1,10 @@
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
   .icon--xs {
     font-size: 1rem;
   }
 
   .icon--sm {
-    font-size: rem(18);
+    font-size: 1.125rem; /* 18/16 */;
   }
 
   .icon--compact {
@@ -18,7 +12,7 @@
   }
 
   .icon--md {
-    font-size: rem(28);
+    font-size: 1.75rem; /* 28/16 */
   }
 
   .icon--lg {

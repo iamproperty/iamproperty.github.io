@@ -105,7 +105,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
   // #region Form label
   :is(label:not(.tag), .label) {
-    font-size: rem(18);
+    font-size: 1.125rem; /* 18/16 */
     line-height: rem(21);
     margin-bottom: 0.5rem;
     font-weight: normal;
@@ -238,10 +238,10 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
 
   *:has(> :is(.form-control-sm, .input--sm)) {
-    --input-fs: #{rem(14)};
+    --input-fs: 1.125rem; /* 14/16 */
     --input-lh: 1rem;
     --input-padding-block: #{rem(10)};
-    --input-padding-inline: #{rem(14)};
+    --input-padding-inline: 1.125rem; /* 14/16 */
   }
   *:has(> :is(.form-control-lg, .input--lg)) {
     --input-fs: 1.5rem;
@@ -478,8 +478,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         content: '' !important;
         background: var(--colour-info);
         border-radius: var(--border-radius);
-        height: rem(14);
-        width: rem(14);
+        height: 1.125rem; /* 14/16 */
+        width: 1.125rem; /* 14/16 */
 
         height: var(--radio-inner-size, #{rem(14)});
         width: var(--radio-inner-size, #{rem(14)});

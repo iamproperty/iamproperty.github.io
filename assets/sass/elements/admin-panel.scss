@@ -51,7 +51,7 @@
 
     > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child,
     .admin-panel__heading > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead) {
-      font-size: rem(18);
+      font-size: 1.125rem; /* 18/16 */
       line-height: 1.5rem;
       font-weight: bold;
       padding: 1rem 1.5rem;

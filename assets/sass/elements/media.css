@@ -1,9 +1,3 @@
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
   figure {
     margin: 0 0 1rem;
@@ -19,7 +13,7 @@
   }
 
   .ratio {
-    > img:first-child:last-child {
+    & > img:first-child:last-child {
       object-fit: cover;
     }
   }

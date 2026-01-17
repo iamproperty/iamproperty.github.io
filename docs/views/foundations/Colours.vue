@@ -656,7 +656,12 @@
 </template>
 
 <style lang="scss">
+  @use 'sass:color';
   @use '../../../assets/sass/_func' as *;
+
+  @function tint($colour, $percentage) {
+    @return color.mix(white, $colour, $percentage);
+  }
 
   @layer utilities {
     @for $i from 1 through 10 {

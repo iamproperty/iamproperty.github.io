@@ -23,8 +23,8 @@
   }
 
   .icon {
-    font-size: rem(18) !important;
-    height: rem(18) !important;
+    font-size: 1.125rem !important;
+    height: 1.125rem !important;
     margin: 0 0 0.5rem 0 !important;
     font-weight: 400 !important;
     display: block !important;
@@ -59,7 +59,7 @@
 
 ::slotted(i) {
   display: block !important;
-  font-size: rem(18) !important;
+  font-size: 1.125rem !important;
   margin: 0 0 0.5rem 0 !important;
 }
 
