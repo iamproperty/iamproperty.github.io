@@ -1,0 +1,91 @@
+@use 'sass:map';
+@use '../func' as *;
+
+@layer reset {
+  .light-theme{
+    color-scheme: light;
+  }
+  .dark-theme{
+    color-scheme: dark;
+  }
+
+
+  // On any background colour we change the default text colour to our primary colour to stand out more
+  [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.invert-colours):not(iam-header):not(iam-notification):not(.bg-primary, .bg-danger, .bg-dark) {
+    
+    --colour-heading: var(--colour-primary-theme);
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-primary-theme);
+    
+    > * {
+      
+      color-scheme: light;
+    }
+  }
+
+  :is(.bg-primary, .bg-danger, .bg-dark) {
+
+    --colour-heading: var(--colour-white);
+    --colour-body: var(--colour-white);
+    color: var(--colour-white);
+
+    > * {
+      
+      color-scheme: dark;
+    }
+  }
+
+  // #region When the theme is set to dark via the dark mode component
+  // OR when the dark mode is set via the browser or device when no component is present
+  
+  .dark-theme :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
+    
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
+
+      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+      > * {
+        color-scheme: light;
+      }
+    
+  }
+
+  .dark-theme .bg-light {
+    color-scheme: light;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    html:not(.light-theme) :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
+
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
+
+      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+      > * {
+        color-scheme: light;
+      }
+    }
+
+    html:not(.light-theme) .bg-light {
+
+      color-scheme: light;
+    }
+  }
+  // #endregion
+
+  .invert-colours {
+    > * {
+      color-scheme: dark;
+      color: var(--colour-white);
+    }
+  }
+
+
+  @media (forced-colors: active) {
+    :root {
+      --contrast-outline-width: 1px;
+    }
+  }
+}

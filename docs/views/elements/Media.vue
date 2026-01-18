@@ -1,10 +1,17 @@
-<script>
+<script setup>
   const htmlUsage = `<div class="youtube-embed ratio ratio-16x9 mb-5">
   <a href="https://www.youtube.com/watch?v=lROFZaJcVug" target="_blank" title="Investments Video" data-id="lROFZaJcVug">
     <img src="https://img.youtube.com/vi/lROFZaJcVug/maxresdefault.jpg" alt="" />
     <span class="btn btn-secondary">Play Video</span>
   </a>
 </div>`;
+
+const aspectRatios = {
+  '1x1': '100%',
+  '4x3': 'calc(3 / 4 * 100%)',
+  '16x9': 'calc(9 / 16 * 100%)',
+  '21x9': 'calc(9 / 21 * 100%)'
+}
 </script>
 
 <template>
@@ -32,7 +39,7 @@
           <h3 class="h5">Default Image</h3>
           <img src="/code.jpeg" alt="" />
         </div>
-        <div class="col-6 col-sm-4 col-md-3 mb-4" v-for="(ratio, name) in $shared.aspectRatios" :key="name">
+        <div class="col-6 col-sm-4 col-md-3 mb-4" v-for="(ratio, name) in aspectRatios" :key="name">
           <h3 class="h5">{{ name }} ratio image</h3>
           <div :class="`ratio ratio-${name}`">
             <img src="/code.jpeg" alt="" />

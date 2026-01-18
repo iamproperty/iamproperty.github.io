@@ -18,7 +18,7 @@ iam-actionbar {
 
 // #region at the top
 main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
-  border-radius: rem(8);
+  border-radius: 0.5rem;
   margin: var(--container-padding);
   margin-bottom: 2rem;
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.2);
@@ -31,13 +31,13 @@ main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
     background-color: #e6eaec;
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     box-shadow: none;
     margin-inline: 0;
     border-radius: 0;
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     padding-inline: calc(50% - #{rem(556)} - 2rem);
   }
 }
@@ -62,8 +62,8 @@ iam-actionbar[data-view='small'] ~ [data-view='small'] {
 // #region Child elements
 iam-actionbar {
   .actionbar__text {
-    font-size: rem(18);
-    line-height: rem(40);
+    font-size: 1.125rem; /* 18/16 */
+    line-height: 2.5rem;
     color: var(--colour-heading);
     display: inline-block;
   }

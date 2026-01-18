@@ -181,7 +181,7 @@
   @import '../../../assets/sass/_func.scss';
 
   html {
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       font-size: 1vw;
     }
     @media (min-width: #{em(1440)}) {
@@ -197,7 +197,7 @@
   }
   main {
     background: white;
-    @include media-breakpoint-up(sm) {
+    @media screen and (min-width: 36em) {
       margin-top: 1rem;
       width: calc(100% - 2rem);
       max-width: 96rem;
@@ -206,13 +206,13 @@
       padding-bottom: 2rem;
       border-radius: 0.5rem;
     }
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       .container {
         padding: 0 rem(28) rem(16) rem(28);
       }
     }
   }
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     .drawer {
       width: calc(100% - 2rem);
       max-width: 96rem;

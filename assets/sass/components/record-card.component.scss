@@ -20,7 +20,7 @@
     &:before {
       font-family: var(--record-icon-font, 'Font Awesome 6 Pro');
       font-weight: normal;
-      font-size: rem(24);
+      font-size: 1.5rem;
       content: var(--record-icon);
       display: block;
       position: absolute;
@@ -53,7 +53,7 @@
   &:before {
     font-family: var(--font-body);
     font-weight: normal;
-    font-size: rem(32);
+    font-size: 2rem;
     content: attr(data-initials);
     display: block;
     position: absolute;
@@ -121,7 +121,7 @@
   display: block !important;
   font-weight: normal !important;
   font-size: rem(14) !important;
-  line-height: rem(24) !important;
+  line-height: 1.5rem !important;
 }
 
 ::slotted(span:not(.badge):not([class*='pt-'])) {
@@ -132,7 +132,7 @@
   display: block !important;
   font-weight: normal !important;
   font-size: rem(14) !important;
-  line-height: rem(24) !important;
+  line-height: 1.5rem !important;
 }
 
 :host([data-initials]) {

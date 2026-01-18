@@ -656,45 +656,50 @@
 </template>
 
 <style lang="scss">
+  @use 'sass:color';
   @use '../../../assets/sass/_func' as *;
+
+  @function tint($colour, $percentage) {
+    @return color.mix(white, $colour, $percentage);
+  }
 
   @layer utilities {
     @for $i from 1 through 10 {
       .bg-primary.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($primary, $tint) !important;
+        background-color: tint(#00313c, $tint) !important;
       }
     }
     @for $i from 1 through 10 {
       .bg-warning.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($warning, $tint) !important;
+        background-color: tint(#ffa500, $tint) !important;
       }
     }
 
     @for $i from 1 through 10 {
       .bg-info.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($info, $tint) !important;
+        background-color: tint(#1ebee6, $tint) !important;
       }
     }
 
     @for $i from 1 through 10 {
       .bg-danger.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($danger, $tint) !important;
+        background-color: tint(#dc3545, $tint) !important;
       }
     }
     @for $i from 1 through 10 {
       .bg-success.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($success, $tint) !important;
+        background-color: tint(#b4e6a5, $tint) !important;
       }
     }
     @for $i from 1 through 10 {
       .bg-dark.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($dark, $tint) !important;
+        background-color: tint(#46003c, $tint) !important;
       }
     }
     @for $i from 1 through 10 {
@@ -801,34 +806,7 @@
   }
 
   @media screen and (prefers-color-scheme: dark) {
-    .light-theme {
-      @each $color, $value in $theme-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @include reset-colours();
-
-      // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-      [class*='bg-']:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-canvas):not(
-          .bg-canvas-2
-        ):not(.invert-colours) {
-        @each $color, $value in $theme-colors {
-          --colour-#{$color}: #{$value};
-        }
-        @include reset-colours();
-        --colour-body: var(--colour-primary);
-        color: var(--colour-body);
-      }
-
-      // Override the colours when on a dark background, similiar to dark mode but on a module level
-      [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(
-          .prevent-invert
-        ),
-      .invert-colours {
-        @include invert-colours();
-
-        color: #{$colour-inverted};
-      }
-    }
+    
 
     html #visualtest:target ~ main > .dark-mode:not(.visualtest) {
       display: block !important;

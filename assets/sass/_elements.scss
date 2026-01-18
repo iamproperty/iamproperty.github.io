@@ -1,31 +1,28 @@
 @use './func' as *;
 
-@use 'elements/brand.scss';
-@use 'elements/icons.scss';
-@use 'elements/media.scss';
-@use 'elements/type.scss';
-@use 'elements/hr.scss';
-// elements
+@use 'elements/brand';
+@use 'elements/icons';
+@use 'elements/media';
+@use 'elements/type';
+@use 'elements/hr';
 @use 'elements/lists.scss';
+@use 'elements/lists--tick-list';
+@use 'elements/lists--breadcrumbs';
+@use 'elements/lists--steps';
 @use 'elements/tooltips.scss';
 @use 'elements/container.scss';
 @use 'elements/table.element.scss';
-
 @use 'elements/links.scss';
 @use 'elements/buttons';
 @use 'elements/dialog.scss';
 @use 'elements/popover.scss';
 @use 'elements/modal.scss';
 @use 'elements/admin-panel.scss';
-
 @use 'elements/prefix.scss';
-
 @use 'elements/forms.scss';
-
 @use 'elements/toggle-button.scss';
-
 @use 'elements/badge-tag.scss';
 @use 'elements/feature.scss';
 @use 'elements/details.scss';
-
 @use 'elements/progress.scss';
+@use 'elements/code';

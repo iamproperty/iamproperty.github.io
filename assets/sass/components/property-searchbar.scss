@@ -5,7 +5,7 @@
   fieldset {
     position: relative;
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       position: relative;
       padding-right: 1.5rem;
 
@@ -26,18 +26,18 @@
   .form-control__wrapper {
     margin-bottom: 1rem;
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       margin-bottom: 0;
     }
   }
 
   .form-label,
   label {
-    font-size: rem(14);
+    font-size: 0.875rem; /* 14/16 */
     text-transform: uppercase;
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     .row .row {
       .form-label {
         display: none;
@@ -64,7 +64,7 @@
     right: 0.5rem;
     width: 5rem;
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       right: 1.5rem;
     }
 
@@ -78,7 +78,7 @@
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     .property-searchbar__btn {
       align-items: flex-end;
     }
@@ -88,7 +88,7 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       margin: 0;
       padding-left: 3.5rem;
       padding-right: 3.5rem;
@@ -109,8 +109,8 @@
   box-shadow: 0 2px 4px 0 rgb(0 0 0 / 24%);
   position: relative;
 
-  @include media-breakpoint-up(md) {
-    border-radius: rem(48);
+  @media screen and (min-width: 62em) {
+    border-radius: 3rem;
     padding: 1.5rem 2.5rem;
 
     .form-label,

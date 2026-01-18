@@ -5,8 +5,8 @@
 :host,
 .iam-notification {
   display: block;
-  padding: rem(22) rem(24) rem(22) rem(24 - 8) !important;
-  border-radius: rem(8);
+  padding: rem(22) 1.5rem rem(22) rem(24 - 8) !important;
+  border-radius: 0.5rem;
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
   font-size: rem(15);
@@ -53,7 +53,7 @@
 :host(.bg-white),
 .iam-notification.bg-white {
   border: none;
-  border-left: rem(8) solid var(--colour-info);
+  border-left: 0.5rem solid var(--colour-info);
 
   ::slotted(i),
   i {
@@ -101,11 +101,11 @@
   color: var(--colour-heading);
 
   .notification__icon {
-    margin-inline-end: rem(16);
+    margin-inline-end: 1rem;
     flex-grow: 0;
 
     ::slotted(i) {
-      font-size: rem(18);
+      font-size: 1.125rem; /* 18/16 */
     }
   }
 
@@ -137,19 +137,19 @@
     ::slotted(a),
     ::slotted(button),
     > * {
-      margin: rem(16) rem(16) 0 0 !important;
+      margin: 1rem 1rem 0 0 !important;
     }
 
     @container (width > 23.4375em) {
       display: flex;
       align-items: center;
       border-left: 1px solid currentColor;
-      margin-left: rem(32);
+      margin-left: 2rem;
 
       ::slotted(a),
       ::slotted(button),
       > * {
-        margin: 0 0 0 rem(32) !important;
+        margin: 0 0 0 2rem !important;
       }
     }
   }
@@ -166,8 +166,8 @@
       text-indent: 300%;
       overflow: hidden;
       border: none;
-      height: rem(18);
-      width: rem(18);
+      height: 1.125rem; /* 18/16 */
+      width: 1.125rem; /* 18/16 */
       background: transparent;
       display: inline-block;
       position: relative;
@@ -179,8 +179,8 @@
         left: 0;
         position: absolute;
         display: block;
-        height: rem(18);
-        width: rem(18);
+        height: 1.125rem; /* 18/16 */
+        width: 1.125rem; /* 18/16 */
         z-index: var(--index-focus);
         background: currentColor;
         mask-image: var(--icon-close);
@@ -195,7 +195,7 @@
     }
 
     @container (width > 23.4375em) {
-      padding-left: rem(32);
+      padding-left: 2rem;
       display: flex;
       align-items: center;
     }

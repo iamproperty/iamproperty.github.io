@@ -1,0 +1,41 @@
+@layer elements {
+  
+  hr {
+    --border-style: solid;
+    --border-color: var(--colour-border);
+    border: 0;
+    color: transparent;
+    margin: 0;
+    border-bottom: none;
+    background-color: currentColor;
+    opacity: 1;
+    clear: both;
+
+    &:after {
+      display: table;
+      clear: both;
+      content: '';
+    }
+  }
+
+  hr[class*="border-"] {
+    border-bottom:  var(--border-width) var(--border-style) var(--border-color);
+  }
+
+  .hr--vertical {
+
+    height: calc(100% + 0.5rem);
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: -0.25rem;
+    margin-bottom: -0.25rem;
+    background-color: var(--colour-muted);
+    width: 1px;
+  }
+
+  .btn-action + .hr--vertical {
+    height: 2.5rem;
+  }
+}

@@ -3,28 +3,21 @@
 @charset "UTF-8";
 
 // Set mobile only variable so that the media query mixin doesn't print out non mobile rules
-@use '_func' as *;
+@use '_functions/bs_functions' as *;
+@use '_functions/bs_variables' as *;
+@use '_functions/bs_mixins' as *;
+
 
 @use '_corefiles';
 @use '_grid';
 @use '_bs_grid';
+@use '_bs_utilities';
 @use '_utilities';
-@use '_utility-mixins';
 
 @layer reset {
   html {
     --font-body: arial, sans-serif !important;
     --font-heading: arial, sans-serif !important;
-  }
-}
-
-@layer elements {
-  .h1 {
-    --line-height: #{map.get($heading-sizes, 'h1_lh')};
-
-    font-size: map.get($heading-sizes, 'h1_fs');
-    padding-bottom: map.get($heading-sizes, 'h1_pb');
-    font-weight: 900;
   }
 }
 

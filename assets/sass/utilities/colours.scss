@@ -1,0 +1,43 @@
+@layer utilities {
+  .text-heading {
+    
+    color: var(--colour-heading) !important;
+  }
+
+  $theme-colors: (
+    'primary': var(--colour-primary),
+    'secondary': var(--colour-secondary),
+    'info': var(--colour-info),
+    'warning': var(--colour-warning),
+    'success': var(--colour-success),
+    'complete': var(--colour-complete),
+    'danger': var(--colour-danger),
+    'dark': var(--colour-dark),
+    'light': var(--colour-light),
+    'canvas': var(--colour-canvas),
+    'white': var(--colour-white),
+  );
+
+  @each $color, $value in $theme-colors {
+    .text-#{$color} {
+      --text-opacity: 1;
+      color: var(--colour-#{$color}) !important;
+    }
+
+    .bg-#{$color} {
+      --bg-opacity: 1;
+      --bg-colour: var(--colour-#{$color}) !important;
+      background-color: var(--colour-#{$color}) !important;
+    }
+
+    .hover-#{$color}:is(:hover,:focus,:focus-within) {
+      --bg-opacity: 1;
+      --bg-colour: var(--colour-#{$color}) !important;
+      background-color: var(--colour-#{$color}) !important;
+    }
+
+    .colour-#{$color} {
+      --colour: var(--colour-#{$color}) !important;
+    }
+  }
+}

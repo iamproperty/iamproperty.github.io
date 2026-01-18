@@ -12,9 +12,9 @@
   }
 
   caption {
-    padding-top: $table-cell-padding-y;
-    padding-bottom: $table-cell-padding-y;
-    color: $table-caption-color;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: gray;
     text-align: left;
   }
 
@@ -23,7 +23,7 @@
   // 3. Fix alignment for Safari
 
   th {
-    font-weight: $table-th-font-weight; // 1
+    font-weight: normal; // 1
     text-align: inherit; // 2
     text-align: -webkit-match-parent; // 3
   }
@@ -45,15 +45,15 @@
     --border-width: 2px;
     --inner-border-width: 2px;
     width: 100%;
-    font-size: rem(16);
+    font-size: 1rem;
     border: none;
-    margin-bottom: rem(32);
+    margin-bottom: 2rem;
     overflow: auto;
   }
 
   div:has(> table:first-child:last-child) {
     overflow: auto;
-    margin-bottom: rem(32);
+    margin-bottom: 2rem;
 
     table {
       margin-bottom: 0;
@@ -61,14 +61,14 @@
   }
 
   :is(td, th) {
-    padding: rem(12) rem(32) rem(12) 0;
+    padding: 0.75rem 2rem 0.75rem 0;
 
     font-weight: normal;
     text-align: left;
     vertical-align: top;
     border: none;
-    font-size: rem(16);
-    line-height: rem(20);
+    font-size: 1rem;
+    line-height: 1.25rem;
     color: var(--colour-body);
 
     &:last-child {
@@ -83,13 +83,13 @@
 
   th {
     font-weight: bold;
-    @include var(color, --colour-heading);
+    color: var(--colour-heading);
   }
 
   thead {
     tr {
       border-bottom: var(--border-width) solid currentColor;
-      @include var(border-color, --colour-primary);
+      border-color: var(--colour-primary);
     }
     th {
       padding-top: 0;
@@ -106,7 +106,7 @@
     display: block;
     color: var(--colour-heading);
 
-    @include media-breakpoint-up(md) {
+    @media screen and (min-width: 62em) {
       max-width: rem(1048);
     }
   }
@@ -115,7 +115,7 @@
     thead {
       th:not(:empty) {
         white-space: nowrap;
-        min-width: #{$td-mw};
+        min-width: rem(120);
       }
       th.th--mw-md {
         min-width: rem(240);
@@ -128,7 +128,7 @@
 
   tbody tr {
     border-bottom: var(--border-width) solid currentColor;
-    @include var(border-color, --colour-border);
+    border-color: var(--colour-border);
   }
 
   .border-0 > table,

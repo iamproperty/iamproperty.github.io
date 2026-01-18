@@ -2,9 +2,9 @@
 @use 'card.module.scss' as *;
 
 :host {
-  --top-padding: #{rem(24)};
+  --top-padding: 1.5rem;
   --right-padding: 1rem;
-  --bottom-padding: #{rem(24)};
+  --bottom-padding: 1.5rem;
   --left-padding: 1rem;
 
   &:has(.card__total) .card__body {
@@ -18,13 +18,13 @@
   }
 
   &.card--has-icon {
-    --bottom-padding: #{rem(16)};
+    --bottom-padding: 1rem;
     border: none;
   }
 
   .icon {
-    font-size: rem(18) !important;
-    height: rem(18) !important;
+    font-size: 1.125rem !important;
+    height: 1.125rem !important;
     margin: 0 0 0.5rem 0 !important;
     font-weight: 400 !important;
     display: block !important;
@@ -59,7 +59,7 @@
 
 ::slotted(i) {
   display: block !important;
-  font-size: rem(18) !important;
+  font-size: 1.125rem !important;
   margin: 0 0 0.5rem 0 !important;
 }
 
@@ -73,10 +73,10 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
-    font-size: rem(16);
+    font-size: 1rem;
     line-height: 1;
-    height: rem(16);
-    width: rem(16);
+    height: 1rem;
+    width: 1rem;
     display: inline-block;
     font-weight: normal;
     color: var(--colour, var(--colour-primary));

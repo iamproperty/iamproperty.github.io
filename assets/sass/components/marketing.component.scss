@@ -58,7 +58,7 @@ img {
   mix-blend-mode: multiply;
 }
 
-@include slotted('*', $isComponent) {
+::slotted {
   position: relative;
   z-index: 2;
   text-align: center;

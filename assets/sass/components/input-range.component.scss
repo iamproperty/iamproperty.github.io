@@ -13,7 +13,7 @@
 
   flex-direction: column;
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     flex-direction: row;
     align-items: center;
   }
@@ -33,7 +33,7 @@
 ::slotted(:last-child) {
   order: 3;
 }
-@include media-breakpoint-up(sm) {
+@media screen and (min-width: 36em) {
 
   .wrapper:before {
     content: "";

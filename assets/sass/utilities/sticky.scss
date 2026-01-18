@@ -1,0 +1,39 @@
+@layer utilities {
+  .sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: var(--index-floating);
+  }
+  .sticky-bottom {
+    position: sticky;
+    bottom: 0;
+    z-index: var(--index-floating);
+  }
+
+  @media screen and (min-width: 36em) {
+
+    .sticky-sm-top {
+      position: sticky;
+      top: 0;
+      z-index: var(--index-floating);
+    }
+    .sticky-sm-bottom {
+      position: sticky;
+      bottom: 0;
+      z-index: var(--index-floating);
+    }
+  }
+  @media screen and (min-width: 62em) {
+
+    .sticky-md-top {
+      position: sticky;
+      top: 0;
+      z-index: var(--index-floating);
+    }
+    .sticky-md-bottom {
+      position: sticky;
+      bottom: 0;
+      z-index: var(--index-floating);
+    }
+  }
+}

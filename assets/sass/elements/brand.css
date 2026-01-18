@@ -1,0 +1,80 @@
+@layer elements {
+  :is(.brand, .logo) {
+    --svg-width: 2.923076923076923em; /* 380/130 */
+
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    min-width: 100%;
+    min-width: min(100%, var(--svg-width));
+    font-size: 4rem;
+    color: var(--colour-brand);
+
+    /* Restrict the logo colours so that only text-secondary can be defined */
+    &[class*='text-']:not(.text-secondary) {
+      color: inherit !important;
+    }
+
+    svg {
+      fill: currentColor;
+      height: 1em;
+      width: 100%;
+      max-width: var(--svg-width);
+    }
+
+    & span {
+      white-space: nowrap;
+      font-size: 1rem;
+      padding-left: 1rem;
+      line-height: 1;
+      font-weight: bold;
+      display: inline-block;
+      text-decoration: none;
+    }
+  }
+
+  .brand--sold {
+    --svg-width: 1.9em; /* 247/130 */
+  }
+
+  .brand--key {
+    --svg-width: 1.753846153846154em; /* 228/130 */
+  }
+
+  :is(.brand--compliance,.brand--movebutler) {
+    --svg-width: 5.692307692307692em; /* 740/130 */
+  }
+
+  .brand--medwaylaw {
+    --svg-width: 3.576923076923077em; /* 465/130*/
+  }
+
+  .brand--openview {
+    --svg-width: 5.337078651685393em; /* 475/89 */
+  }
+
+  .brand--crm {
+    --svg-width: 2.808988764044944em; /* 250/89 */
+  }
+
+  a.brand:not(:hover, :focus, :active) {
+    color: var(--colour-brand);
+  }
+
+  a:not(:hover, :focus, :active) .brand {
+    color: var(--colour-brand);
+  }
+
+  :is(a.brand:hover, a.brand:focus, a.brand:active) {
+    
+    color: currentColor !important;
+  }
+  
+  :is(a:hover, a:focus, a:active) .brand {
+    color: currentColor !important;
+  }
+}
+

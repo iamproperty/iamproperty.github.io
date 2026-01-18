@@ -6,17 +6,17 @@
 
 @layer elements {
   .admin-panel {
-    --padding-x: #{rem(24)};
-    --padding-top: #{rem(16)};
-    --padding-bottom: #{rem(16)};
+    --padding-x: 1.5rem;
+    --padding-top: 1rem;
+    --padding-bottom: 1rem;
     --mh-modifier: #{rem(56 + 16)};
     --mh-padding-inline: var(--padding-x);
     display: block;
     padding: var(--padding-top) var(--padding-x) var(--padding-bottom) var(--padding-x);
     box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
     background-color: var(--colour-canvas-2);
-    border-radius: rem(8);
-    margin-bottom: rem(24);
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
     overflow: hidden;
 
@@ -45,24 +45,24 @@
 
       margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
       display: block;
-      border-top-left-radius: rem(8);
-      border-top-right-radius: rem(8);
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
     }
 
     > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead):first-child,
     .admin-panel__heading > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6):not(.lead) {
-      font-size: rem(18);
-      line-height: rem(24);
+      font-size: 1.125rem; /* 18/16 */
+      line-height: 1.5rem;
       font-weight: bold;
-      padding: rem(16) rem(24);
+      padding: 1rem 1.5rem;
     }
 
     > :is(.admin-panel__heading):first-child {
-      display: flex;
+      display: flex!important;
       flex-wrap: wrap;
       gap: 1rem;
       align-items: center;
-      padding: rem(16) rem(24);
+      padding: 1rem 1.5rem;
 
       > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
         padding: 0;
@@ -92,7 +92,7 @@
     }
 
     :is(iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax, .iam-table) {
-      margin: 0 0 rem(32) 0;
+      margin: 0 0 2rem 0;
       padding: 0;
       box-shadow: none;
       background: none;
@@ -108,7 +108,7 @@
 
     p {
       max-width: 100%;
-      padding-bottom: rem(24);
+      padding-bottom: 1.5rem;
     }
 
     > :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid) {
@@ -164,7 +164,7 @@
       grid-template-columns: subgrid !important;
 
       > *:not(:first-child) {
-        grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
+        grid-column: var(--col-start, col-1-start) / var(--col-end, col-12-end);
       }
     }
   }
@@ -172,7 +172,7 @@
   [class*='col'].admin-panel:first-child:last-child:not(
       :has(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid)
     ) {
-    min-height: calc(100% - #{rem(24)});
+    min-height: calc(100% - 1.5rem);
   }
 
   // #region Has actionbar

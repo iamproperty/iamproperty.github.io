@@ -30,7 +30,7 @@
   }
 
   iam-calendar {
-    margin-bottom: rem(16);
+    margin-bottom: 1rem;
   }
 
   iam-calendar button {
@@ -38,15 +38,15 @@
 
     display: block;
     width: 100%;
-    //height:  rem(24);
+    //height:  1.5rem;
     border: none;
     border-left: 4px solid color-mix(in srgb, var(--event-colour, var(--wider-colour-1)), black 28%);
     border-radius: 4px;
-    padding: rem(4);
+    padding: 0.25rem;
 
-    font-size: rem(14);
-    line-height: rem(18);
-    margin-bottom: rem(8);
+    font-size: 0.875rem; /* 14/16 */
+    line-height: 1.125rem; /* 18/16 */
+    margin-bottom: 0.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
@@ -75,7 +75,7 @@
       width: rem(250);
       background: var(--colour-primary);
       color: var(--colour-white);
-      padding: rem(12);
+      padding: 0.75rem;
       border-radius: 0.5rem;
       box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
       //top: auto;
@@ -83,7 +83,7 @@
       left: 50%;
 
       //transform: translate(-50%,0);
-      font-size: rem(14);
+      font-size: 0.875rem; /* 14/16 */
       line-height: 1.2;
 
       white-space: normal;
@@ -168,7 +168,7 @@
     &:after {
       position: absolute;
       top: 0;
-      right: rem(4);
+      right: 0.25rem;
       content: '\f363';
       font-family: 'Font Awesome 6 Pro';
       font-weight: 300;
@@ -181,7 +181,7 @@
 
     > span {
       display: block;
-      height: rem(18);
+      height: 1.125rem; /* 18/16 */
       white-space: nowrap;
 
       overflow: hidden;
@@ -192,7 +192,7 @@
     &[data-start] > span:before {
       content: attr(data-start);
       display: inline-block;
-      margin-right: rem(4);
+      margin-right: 0.25rem;
     }
 
     /*
@@ -209,8 +209,8 @@
 
   iam-calendar:is([data-view='week'], [data-view='day']) button:not(.allday-event) {
     height: var(--event-height, #{rem(17.5)});
-    line-height: rem(18) !important;
-    padding-top: rem(4) !important;
+    line-height: 1.125rem !important;
+    padding-top: 0.25rem !important;
     white-space: normal !important;
 
     display: inline-flex !important; /* keep the inline nature of buttons */
@@ -244,7 +244,7 @@
   iam-calendar:is([data-view='week'], [data-view='day']) button.allday-event {
     > span {
       display: block;
-      height: rem(18);
+      height: 1.125rem; /* 18/16 */
       //white-space: nowrap;
 
       overflow: hidden;
@@ -255,7 +255,7 @@
     &[data-start] > span:before {
       content: attr(data-start);
       display: inline-block;
-      margin-right: rem(4);
+      margin-right: 0.25rem;
     }
   }
 

@@ -5,12 +5,7 @@
 @use '../elements/buttons.scss' as *;
 @use '../elements/links.scss' as *;
 
-
-
-@layer utilities {
-
-  @include margins();
-}
+@use '../utilities/margins.scss' as *;
 
 .bg-light {
   background-color: var(--colour-light);
@@ -52,10 +47,10 @@ input[name='postcode'] {
 input[name='postcode'] {
   background-image: var(--error-bg, none)!important;
   background-repeat: no-repeat;
-  background-position: right var(--input-padding-inline, #{rem(16)}) center;
-  background-size: var(--input-lh, #{rem(20)}) var(--input-lh, #{rem(20)});
+  background-position: right var(--input-padding-inline, 1rem) center;
+  background-size: var(--input-lh, 1.25rem) var(--input-lh, 1.25rem);
   padding-right: calc(
-    var(--input-lh, #{rem(20)}) + var(--input-padding-inline, #{rem(16)}) + var(--input-padding-inline, #{rem(16)})
+    var(--input-lh, 1.25rem) + var(--input-padding-inline, 1rem) + var(--input-padding-inline, 1rem)
   ) !important;
 }
 

@@ -20,7 +20,7 @@
   min-height: 100%;
   padding-left: var(--dialog-padding);
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     padding-top: var(--dialog-padding);
     padding-left: calc(var(--dialog-padding) + #{rem(282)}) !important;
     display: flex;
@@ -64,9 +64,9 @@
     background: transparent;
     border: none;
     color: rgba($color: #ffffff, $alpha: 0.5);
-    height: rem(24);
-    line-height: rem(24);
-    width: rem(24);
+    height: 1.5rem;
+    line-height: 1.5rem;
+    width: 1.5rem;
     text-indent: 300%;
     overflow: hidden;
     z-index: 2;
@@ -82,9 +82,9 @@
       content: counter(section);
 
       border: 1px solid currentColor;
-      height: rem(24);
-      line-height: rem(24);
-      width: rem(24);
+      height: 1.5rem;
+      line-height: 1.5rem;
+      width: 1.5rem;
       text-align: center;
       display: inline-block;
       text-indent: 0;
@@ -120,7 +120,7 @@
     }
   }
 
-  @include media-breakpoint-up(md) {
+  @media screen and (min-width: 62em) {
     width: rem(282);
     height: 100%;
     flex-direction: column;
@@ -136,7 +136,7 @@
       text-indent: 0;
       text-align: left;
       padding-left: 2rem;
-      font-size: rem(18);
+      font-size: 1.125rem; /* 18/16 */
       outline-width: 1px;
     }
   }

@@ -13,10 +13,10 @@
     color: var(--colour-link);
     margin: 0 var(--btn-margin) var(--btn-margin) 0;
     padding: 0;
-    font-size: rem(18);
+    font-size: 1.125rem; /* 18/16 */
     font-weight: normal;
-    line-height: rem(24);
-    min-height: rem(24);
+    line-height: 1.5rem;
+    min-height: 1.5rem;
     position: relative;
 
     &:after {

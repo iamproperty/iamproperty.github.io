@@ -1683,7 +1683,7 @@ class iamSTDAddressLookup extends HTMLElement {
     const overseasFields = this.querySelector('.overseas');
 
 
-    const openOverseas = () => {
+    const openOverseas = (): void => {
       const updateEvent = new CustomEvent('open-manual');
       addressComponent.dispatchEvent(updateEvent);
       this.classList.add('show-overseas');

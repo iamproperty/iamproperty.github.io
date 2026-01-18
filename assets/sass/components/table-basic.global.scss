@@ -86,7 +86,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
         border: none;
         position: absolute;
         overflow: hidden;
-        --compact-size: #{rem(32)};
+        --compact-size: 2rem;
 
         &:before {
           font-family: 'Font Awesome 6 Pro';
@@ -129,11 +129,11 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       background: var(--row-bg);
       padding: var(--wrapper-padding);
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
-      border-radius: rem(8);
+      border-radius: 0.5rem;
       height: auto;
 
       & + tr {
-        margin-top: rem(32);
+        margin-top: 2rem;
       }
 
       &:is(:hover, :focus, .hover) {
@@ -282,10 +282,10 @@ table {
       position: absolute;
       top: var(--status-pt, 1rem);
       left: 0;
-      font-size: rem(16);
+      font-size: 1rem;
       line-height: 1;
-      height: rem(16);
-      width: rem(16);
+      height: 1rem;
+      width: 1rem;
       display: inline-block;
     }
   }
@@ -406,7 +406,7 @@ table {
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     padding: 0 !important;
   }
 }
@@ -416,7 +416,7 @@ table {
     display: block;
     position: sticky;
     left: 0;
-    top: calc(var(--sticky-padding) + #{rem(16)});
+    top: calc(var(--sticky-padding) + 1rem);
     z-index: var(--index-menu);
     pointer-events: none;
 
@@ -440,11 +440,11 @@ table {
     background: var(--colour-canvas-2);
     //box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
     border-radius: 0.5rem;
-    margin-bottom: rem(24);
+    margin-bottom: 1.5rem;
   }
 }
 
-@include container-up(sm) {
+@container (width > 36em) {
   :is(#{$selector}).table--fullwidth iam-actionbar,
   :is(#{$selector}) iam-actionbar {
     margin-left: -2rem;

@@ -153,9 +153,8 @@
     <h3>Fixed</h3>
     <p>
       We can set a fixed max height for the height of the admin panel. There are three fixed heights. Small with a max
-      height of {{ $shared.cssVars.ut_mh_sm }} ({{ $shared.cssVars.ut_mh_sm_px }}px), medium with a max height of
-      {{ $shared.cssVars.ut_mh_md }} ({{ $shared.cssVars.ut_mh_md_px }}px), and large with a max height of
-      {{ $shared.cssVars.ut_mh_lg }} ({{ $shared.cssVars.ut_mh_lg_px }}px). A fade equal to the padding at the bottom
+      height of 12.5rem (200px), medium with a max height of 25rem (400px), and large with a max height of
+      37.5rem (600px). A fade equal to the padding at the bottom
       (min 1rem) should be added when the content is scrollable.
     </p>
 

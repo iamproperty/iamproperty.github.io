@@ -6,7 +6,7 @@
 
 @layer components {
   iam-multiselect .tag[slot='checked'] {
-    margin-bottom: rem(8);
+    margin-bottom: 0.5rem;
     order: var(--order, 1);
     margin-inline: rem(3);
   }

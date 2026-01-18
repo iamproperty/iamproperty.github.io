@@ -41,7 +41,7 @@ class iamDarkMode extends HTMLElement {
     const input = this.querySelector('input');
     const span = this.querySelector('span');
 
-    const setDark = () => {
+    const setDark = (): void => {
       
       document.documentElement.classList.add('dark-theme');
       document.documentElement.classList.remove('light-theme');
@@ -51,7 +51,7 @@ class iamDarkMode extends HTMLElement {
       label?.classList.add('dark-theme');
     }
 
-    const unsetDark = () => {
+    const unsetDark = (): void => {
 
       document.documentElement.classList.remove('dark-theme');
       document.documentElement.classList.add('light-theme');

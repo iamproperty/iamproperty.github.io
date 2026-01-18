@@ -91,15 +91,15 @@
 // Radio buttons
 
 ::slotted(*:is(label)) {
-  --radio-size: #{rem(20)};
-  --radio-inner-size: #{rem(12)};
-  --radio-inner-top: #{rem(12)};
-  --radio-inner-left: #{rem(12)};
+  --radio-size: 1.25rem;
+  --radio-inner-size: 0.75rem;
+  --radio-inner-top: 0.75rem;
+  --radio-inner-left: 0.75rem;
 
-  --checkbox-tick-size: #{rem(12)};
+  --checkbox-tick-size: 0.75rem;
   --checkbox-inner-size: #{rem(10)};
   --checkbox-inner-top: #{rem(6)};
-  --checkbox-inner-left: #{rem(8)};
+  --checkbox-inner-left: 0.5rem;
   padding-left: rem(36) !important;
 }
 

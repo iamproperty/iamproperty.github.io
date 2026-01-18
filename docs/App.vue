@@ -190,6 +190,9 @@
     display: none;
   }
 
+main > .breadcrumb:first-child + * {
+    padding-top: 2rem;
+}
 </style>
 
 <script>

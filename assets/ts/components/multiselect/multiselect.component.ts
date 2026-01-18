@@ -127,7 +127,7 @@ class iamMultiselect extends HTMLElement {
     });
 
     // Filter list
-    const filterList = () => {
+    const filterList = (): void => {
 
       Array.from(multiselect.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
         const checkbox = label.querySelector('input');
