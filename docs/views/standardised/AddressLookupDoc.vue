@@ -7,8 +7,6 @@
   import Versions from '../Versions.vue';
 
   let urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams.has('target')); // true
-    console.log(urlParams.get('yourParam')); // "MyParam"
 </script>
 
 <template>
@@ -949,39 +947,3 @@ Then I can see a link to the Royal Mail Postcode Lookup page at the bottom of th
 
   </main>
 </template>
-
-<style>
-
-  body:has(.visualtest.target) nav,
-  body:has(.visualtest.target) footer,
-  main:has(.visualtest.target) > *:not(.target) {
-
-    display: none!important;
-  }
-
-  main:has(.visualtest.target) > *.target .visualtest-hide {
-
-    display: none!important;
-  }
-
-  main:has(.visualtest.target) > *.target {
-
-    --col-start: col-1;
-  }
-          
-
-  @layer utilities {
-      
-    main:has(.visualtest.target) > *:is(.d-flex,.d-block):not(.target) {
-
-      display: none!important;
-    }
-
-    
-    main:has(.visualtest.target) > *.target .visualtest-hide:is(.d-flex,.d-block) {
-
-      display: none!important;
-    }
-
-  }
-</style>

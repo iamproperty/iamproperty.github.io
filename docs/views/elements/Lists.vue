@@ -7,8 +7,8 @@
       <h1>Lists</h1>
       <p>Our lists have been kept very basic using default styles.</p>
     </div>
-    <div class="container visualtest">
       <h2>Unordered lists</h2>
+    <div class=" visualtest mb-5">
       <ul>
         <li>List item 1</li>
         <li>List item 2</li>
@@ -16,8 +16,8 @@
         <li>List item 4</li>
       </ul>
     </div>
-    <div class="container visualtest">
       <h2>Ordered lists</h2>
+    <div class="visualtest mb-5">
       <ol>
         <li>List item 1</li>
         <li>List item 2</li>
@@ -25,8 +25,8 @@
         <li>List item 4</li>
       </ol>
     </div>
-    <div class="container visualtest">
       <h2>Tick lists</h2>
+    <div class=" visualtest mb-5">
       <ul class="tick-list">
         <li>List item 1</li>
         <li>List item 2</li>
@@ -37,8 +37,8 @@
         <li class="tick--incomplete">List item with a class of tick--incomplete</li>
       </ul>
     </div>
-    <div class="container visualtest">
       <h2>Breadcrumb</h2>
+    <div class=" visualtest mb-5">
       <ol class="breadcrumb">
         <li><a href="/home">Home</a></li>
         <li><a href="/section">Section</a></li>
@@ -46,8 +46,8 @@
       </ol>
     </div>
 
-    <div class="container visualtest">
       <h2>Step list</h2>
+    <div class="container visualtest mb-5">
       <ol class="list--steps" data-mobile-text="Client details">
         <li class="step--complete">Property details</li>
         <li class="step--current">Client details</li>

@@ -9,6 +9,7 @@
   import UserColours from '../UserColours.vue';
   import DarkMode from '../../../src/components/DarkMode/DarkMode.vue';
 
+
   let userTheme = 'light-theme';
   let checked = false;
   let checked2 = false;
@@ -58,6 +59,9 @@
     widerColoursActive[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-active`);
   }
 
+  let urlParams = new URLSearchParams(window.location.search);
+  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
+  
 </script>
 
 <template>
@@ -69,7 +73,7 @@
     <DarkMode><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
 
     <!-- #region Light mode -->
-    <div class="light-mode full-width">
+    <div class="light-mode full-width visualtest--container">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -88,7 +92,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div class="colour-block bg-canvas border"><span>Text</span></div>
@@ -114,7 +118,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
@@ -149,7 +153,7 @@
           positive interactions. Red (<span v-html="getVar('--colour-danger')"></span>) for incomplete or warning states.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
@@ -184,7 +188,7 @@
           differentiate between the background and a piece of content.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3 pb-2">
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
@@ -206,7 +210,7 @@
     <!-- #endregion Light mode -->
 
     <!-- #region Dark mode -->
-    <div class="dark-mode full-width">
+    <div class="dark-mode full-width visualtest--container">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -226,7 +230,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div class="colour-block bg-canvas border"><span>Text</span></div>
@@ -266,7 +270,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
@@ -306,7 +310,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
@@ -335,7 +339,7 @@
           differentiate between the background and a piece of content.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3 pb-2">
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
@@ -359,7 +363,7 @@
       <h2>Colour tints</h2>
     </div>
 
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest5' ? 'target' : '')}`">
       <div class="overflow-auto mb-3">
         <table class="colour-tints table--fullwidth border-0 mb-0">
           <thead>
@@ -443,7 +447,7 @@
         background elements sparingly.
       </p>
     </div>
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest6' ? 'target' : '')}`">
       <div class="row row-cols-2 row-cols-sm-3">
         <div class="col pb-2">
           <div class="colour-block bg-info gradient-success"></div>
@@ -500,7 +504,7 @@
     <div class="container">
       <h2>Semantic colour</h2>
     </div>
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest7' ? 'target' : '')}`">
       <div class="overflow-auto mb-3">
         <table class="semantic-colours table--fullwidth border-0 mb-0">
           <thead>
@@ -573,7 +577,7 @@
       <h2>Wider colour pallete</h2>
     </div>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest8' ? 'target' : '')}`">
       <p class="pb-2">
         The wider colour palette is a range of colours that can be used in instances where colours can help with
         categorisation - calendar events, user types, applied filters, etc. They should not be used for status
@@ -620,8 +624,10 @@
       </p>
     </div>
 
-    <UserColours></UserColours>
 
+<div :class="`container visualtest pb-5 ${(target == 'visualtest9' ? 'target' : '')}`">
+    <UserColours></UserColours>
+</div>
     <div class="bg-light version-control">
       <div class="container ct-inline">
         <table>

@@ -1,6 +1,10 @@
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
+
+  let urlParams = new URLSearchParams(window.location.search);
+  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
+
 </script>
 
 <template>
@@ -22,7 +26,7 @@
       be applied to the default states for the active state.
     </p>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest1' ? 'target' : '')}`">
       <div class="row">
         <div class="col-5 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -85,7 +89,7 @@
     <p>
       Use a small primary compact button when there isn’t enough space for a default compact primary compact button.
     </p>
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest2' ? 'target' : '')}`">
       <div class="row">
         <div class="col-5 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -170,7 +174,7 @@
       overlay of 85% brightness will be applied to the default states for the active state.
     </p>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest3' ? 'target' : '')}`">
       <div class="row">
         <div class="col-5 col-sm-3 pb-2 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -253,7 +257,7 @@
       Use a small secondary compact button when there isn’t enough space for a default compact secondary compact button.
     </p>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest4' ? 'target' : '')}`">
       <div class="row">
         <div class="col-5 col-sm-3 pb-2 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -353,7 +357,7 @@
       active state.
     </p>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest5' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-3 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -381,7 +385,7 @@
       for the active state.
     </p>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest6' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-3 pe-none">
           <p class="lead pb-2">Default state</p>
@@ -409,7 +413,7 @@
       for the active state.
     </p>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest7' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-3 pe-none">
           <p class="lead pb-2">Default state</p>
