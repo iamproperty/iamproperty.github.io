@@ -1,0 +1,30 @@
+@layer elements {
+  .icon--xs {
+    font-size: 1rem;
+  }
+
+  .icon--sm {
+    font-size: 1.125rem; /* 18/16 */;
+  }
+
+  .icon--compact {
+    font-size: 1.25rem;
+  }
+
+  .icon--md {
+    font-size: 1.75rem; /* 28/16 */
+  }
+
+  .icon--lg {
+    font-size: 2.5rem;
+  }
+
+  [class*='fa-']:not(.fa-regular, .fa-light, .fa-solid, .btn) {
+    font-weight: 400;
+  }
+
+  .rounded-circle[class*='fa-'][class*='bg-'] {
+    aspect-ratio: 1 / 1;
+    width: calc(1lh + 1rem);
+  }
+}

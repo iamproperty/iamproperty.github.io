@@ -1,20 +1,20 @@
 @use 'sass:map';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   details {
     display: block;
 
     &:not([open]) {
-      padding-bottom: rem(32);
+      padding-bottom: 2rem;
     }
 
     summary {
-      font-size: rem(18);
+      font-size: 1.125rem; /* 18/16 */
       line-height: rem(21);
       font-weight: normal;
       color: var(--colour-heading);
@@ -31,26 +31,26 @@ $darkMode: 'true' !default;
     }
 
     &[open] summary {
-      margin-bottom: rem(16);
+      margin-bottom: 1rem;
     }
   }
 
   iam-accordion details {
     --inline-padding: #{rem(2)};
-    --border-radius: #{rem(8)} #{rem(8)} 0 0;
-    --icon-top: #{rem(14)};
-    --line-height: #{rem(24)};
-      --block-padding: #{rem(14)};
+    --border-radius: 0.5rem 0.5rem 0 0;
+    --icon-top: 0.875rem; /* 14/16 */
+    --line-height: 1.5rem;
+      --block-padding: 0.875rem; /* 14/16 */
 
     *:not(iam-tabs) > &:not([open]) {
       padding-bottom: rem(42);
     }
 
-    @include media-breakpoint-up(sm) {
-      --inline-padding: #{rem(14)};
-      --block-padding: #{rem(14)};
-      --icon-top: #{rem(24)};
-      --line-height: #{rem(24)};
+    @media screen and (min-width: 36em) {
+      --inline-padding: 0.875rem; /* 14/16 */
+      --block-padding: 0.875rem; /* 14/16 */
+      --icon-top: 1.5rem;
+      --line-height: 1.5rem;
 
       summary {
         &:has(.h2, h2, .h4, h4) {
@@ -73,10 +73,10 @@ $darkMode: 'true' !default;
     summary {
       border-bottom: 1px solid var(--colour-border);
       padding-left: 0;
-      padding-inline-end: calc(#{var(--inline-padding)} + #{rem(27)} + #{rem(12)});
+      padding-inline-end: calc(#{var(--inline-padding)} + #{rem(27)} + 0.75rem);
       padding-block: var(--block-padding) !important;
       position: relative;
-      color: $headings-color;
+      color: var(--colour-heading);
 
       &:is(:hover, :focus-visible) {
         background: var(--colour-light);
@@ -100,12 +100,12 @@ $darkMode: 'true' !default;
         &:after {
           content: '\f055';
           position: absolute;
-          font-size: rem(24);
-          top: calc((#{var(--line-height)} / 2) - #{rem(12)});
+          font-size: 1.5rem;
+          top: calc((#{var(--line-height)} / 2) - 0.75rem);
           right: var(--inline-padding);
-          width: rem(24);
-          height: rem(24);
-          line-height: rem(24);
+          width: 1.5rem;
+          height: 1.5rem;
+          line-height: 1.5rem;
           font-weight: 300;
           font-family: 'Font Awesome 6 Pro';
         }
@@ -134,9 +134,9 @@ $darkMode: 'true' !default;
     summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label)) {
       // h3 purposelessly missed out
 
-      font-family: $headings-font-family;
-      font-style: $headings-font-style;
-      color: $headings-color;
+      font-family: var(--font-heading);
+      font-style: normal;
+      color: var(--colour-heading);
       clear: both;
       display: block;
 
@@ -144,9 +144,9 @@ $darkMode: 'true' !default;
         margin-right: 0.5rem;
       }
 
-      font-size: rem(18);
+      font-size: 1.125rem; /* 18/16 */
       line-height: var(--line-height);
-      padding-bottom: map.get($heading-sizes, 'h3_pb');
+      padding-bottom: var(--heading-pb);
       font-weight: 700;
       max-width: 100%;
 
@@ -154,13 +154,13 @@ $darkMode: 'true' !default;
         content: '\f055';
         display: block;
         position: absolute;
-        font-size: rem(24);
-        top: calc((#{var(--line-height)} / 2) - #{rem(12)} + #{rem(14)});
+        font-size: 1.5rem;
+        top: calc((#{var(--line-height)} / 2) - 0.75rem + #{rem(14)});
         right: var(--inline-padding);
-        width: rem(24);
-        height: rem(24);
+        width: 1.5rem;
+        height: 1.5rem;
         margin: 0;
-        line-height: rem(24);
+        line-height: 1.5rem;
         font-weight: 300;
         font-family: 'Font Awesome 6 Pro';
       }
@@ -189,8 +189,8 @@ $darkMode: 'true' !default;
       overflow: hidden;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      --dialog-padding: #{rem(32)};
+    @media screen and (min-width: 36em) {
+      --dialog-padding: 2rem;
       
     margin-inline: calc(var(--dialog-padding) * -1);
     padding-inline: var(--dialog-padding);

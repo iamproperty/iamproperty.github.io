@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('templates', $layers) {
+
+
+
+@layer templates {
   body:has(.template--auth) {
     display: flex;
     flex-direction: row;
@@ -13,7 +13,7 @@ $darkMode: 'true' !default;
   }
 
   .template--auth {
-    --padding-top: #{rem(24)};
+    --padding-top: 1.5rem;
     --brand-size: #{rem(36)};
 
     display: flex;
@@ -21,8 +21,8 @@ $darkMode: 'true' !default;
     max-width: rem(1280);
     margin-inline: auto;
 
-    @include media-breakpoint-up(md, $mobileOnly) {
-      --padding-top: #{rem(40)};
+    @media screen and (min-width: 62em) {
+      --padding-top: 2.5rem;
       --brand-size: #{rem(64)};
     }
 
@@ -34,10 +34,10 @@ $darkMode: 'true' !default;
       padding-bottom: var(--padding-top);
       padding-inline: var(--container-padding-x);
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @media screen and (min-width: 62em) {
         flex: 0 0 auto;
         width: 43.75%;
-        padding-inline-end: calc(var(--container-padding-x) - rem(16));
+        padding-inline-end: calc(var(--container-padding-x) - 1rem);
       }
 
       .brand {
@@ -50,7 +50,7 @@ $darkMode: 'true' !default;
       display: none;
       background-color: var(--colour-primary-theme);
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @media screen and (min-width: 62em) {
         display: block;
         flex: 0 0 auto;
         width: 56.25%;
@@ -64,9 +64,9 @@ $darkMode: 'true' !default;
         position: relative;
         display: block;
         margin-top: calc(var(--padding-top) * -1);
-        margin-inline: calc(var(--container-padding-x-md) * -1);
-        min-width: calc(100% + var(--container-padding-x-md) + var(--container-padding-x-md));
-        margin-bottom: rem(40);
+        margin-inline: calc(var(--container-padding-x) * -1);
+        min-width: calc(100% + var(--container-padding-x) + var(--container-padding-x));
+        margin-bottom: 2.5rem;
         max-height: rem(400);
         clip-path: ellipse(70% 80% at 50% 20%);
         rotate: -5deg;
@@ -94,7 +94,7 @@ $darkMode: 'true' !default;
 
       img {
         margin-inline: rem(-24);
-        min-width: calc(100% + rem(24) + rem(24));
+        min-width: calc(100% + 1.5rem + 1.5rem);
         margin-top: rem(-12);
         max-height: rem(424);
         object-fit: cover;

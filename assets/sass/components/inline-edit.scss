@@ -1,7 +1,7 @@
 @use '../_func' as *;
 @use '../elements/buttons--action.scss' as *;
 
-@include display();
+@use '../utilities/display' as *;
 
 *,
 *::before,

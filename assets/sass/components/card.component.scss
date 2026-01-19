@@ -1,9 +1,7 @@
 @use '../_func.scss' as *;
 @use 'card.module.scss' as *;
 @use '../elements/dialog.scss' as *;
-@use '../elements/popover.scss' as * with (
-  $layers: 'false'
-);
+@use '../elements/popover.scss' as *;
 @use '../elements/buttons.scss' as *;
 
 :host {
@@ -41,8 +39,8 @@
     position: absolute;
     right: var(--card-icon-right);
     bottom: var(--card-bottom-padding);
-    height: rem(24);
-    width: rem(24);
+    height: 1.5rem;
+    width: 1.5rem;
     background: var(--colour-warning);
     border-radius: 50%;
   }
@@ -91,7 +89,7 @@
     .card__illustration {
       height: rem(64);
       width: rem(64);
-      margin-right: rem(24);
+      margin-right: 1.5rem;
       margin-top: rem(-20);
       margin-bottom: rem(-20);
       position: relative;
@@ -112,7 +110,7 @@
 
 // #region border left
 :host([class*='colour-']) {
-  border-left: rem(12) solid var(--colour, var(--colour-primary));
+  border-left: 0.75rem solid var(--colour, var(--colour-primary));
 }
 // #endregion
 
@@ -137,9 +135,9 @@ slot[name='secondary'] {
   position: absolute !important;
   top: 0.5rem;
   right: 0.5rem;
-  width: rem(32);
-  height: rem(32);
-  height: rem(40);
+  width: 2rem;
+  height: 2rem;
+  height: 2.5rem;
   overflow: hidden;
 }
 // #endregion

@@ -17,17 +17,17 @@
     justify-content: center;
     align-items: center;
     width: auto;
-    padding: 0 rem(12);
-    font-size: var(--input-fs, #{rem(16)});
-    line-height: var(--input-lh, #{rem(20)});
+    padding: 0 0.75rem;
+    font-size: var(--input-fs, 1rem);
+    line-height: var(--input-lh, 1.25rem);
     color: var(--colour-body);
     background-color: var(--colour-primary-theme);
     border: 2px solid var(--colour-primary);
     color: var(--colour-white);
     margin: 0 !important;
     //margin-bottom: 1rem;
-    border-end-start-radius: rem(8);
-    border-start-start-radius: rem(8);
+    border-end-start-radius: 0.5rem;
+    border-start-start-radius: 0.5rem;
     min-width: calc(#{rem(20 + 12 + 12)} + 4px);
     overflow: hidden;
     white-space: nowrap;
@@ -37,7 +37,7 @@
 
 
     height: calc(
-      var(--input-padding-block, #{rem(12)}) + var(--input-padding-block, #{rem(12)}) + var(--input-lh, #{rem(20)}) +
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
         4px
     );
 
@@ -51,7 +51,7 @@
 
     &:after {
       display: inline-block;
-      max-width: rem(20);
+      max-width: 1.25rem;
     }
 
     &[class*='fa-'] {
@@ -104,8 +104,8 @@
       border-left: none;
       border-end-start-radius: 0;
       border-start-start-radius: 0;
-      border-start-end-radius: rem(8) !important;
-      border-end-end-radius: rem(8) !important;
+      border-start-end-radius: 0.5rem !important;
+      border-end-end-radius: 0.5rem !important;
       order: 2;
     }
 

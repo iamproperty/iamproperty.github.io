@@ -4,13 +4,13 @@
 
   :host {
     
-    padding: rem(16);
+    padding: 1rem;
     max-width: calc(anchor-size(width) * 2) !important;
 
     position: absolute;
     position-area: bottom span-x-end;
-    margin:  #{rem(4)};
-    padding: rem(16);
+    margin:  0.25rem;
+    padding: 1rem;
     max-width: calc(anchor-size(width) * 2) !important;
     position-try-fallbacks: top span-x-end, bottom span-x-start, top span-x-start;
 
@@ -18,10 +18,10 @@
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       width: rem(335);
     }
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
       width: rem(360);
     }
   } 

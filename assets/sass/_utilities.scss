@@ -1,53 +1,31 @@
 @use 'sass:math';
-@use 'sass:map';
-@use 'sass:meta';
 @use '_func' as *;
 
-$root: ':root' !default;
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
-
-@forward '_functions/variables_old' show $utilities;
-@use '_functions/bs_utilities' as *;
-
-@include layer('utilities', $layers) {
-  // Missing classes that exist as mixins
-  @include clearfix();
-  @include visually-hidden();
-  @include text-truncate();
-  @include ratio();
-  @include fixed();
-  @include sticky();
-  @include max-height();
-  @include js-display();
-  @include line-clamp();
-
-  // Loop over each breakpoint
-  @each $breakpoint in map.keys($grid-breakpoints) {
-    // Generate media query if needed
-    @include media-breakpoint-up($breakpoint, $mobileOnly) {
-      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
-
-      // Loop over each utility property
-      @each $key, $utility in $utilities {
-        // The utility can be disabled with `false`, thus check if the utility is a map first
-        // Only proceed if responsive media queries are enabled or if it's the base media query
-        @if meta.type-of($utility) == 'map' and (map.get($utility, responsive) or $infix == '') {
-          @include generate-utility($utility, $infix);
-        }
-      }
-    }
-  }
-
-  // Print utilities
-  @media print {
-    @each $key, $utility in $utilities {
-      // The utility can be disabled with `false`, thus check if the utility is a map first
-      // Then check if the utility needs print styles
-      @if meta.type-of($utility) == 'map' and map.get($utility, print) == true {
-        @include generate-utility($utility, '-print');
-      }
-    }
-  }
-}
+@use './utilities/clearfix.scss';
+@use './utilities/visually-hidden.scss';
+@use './utilities/text-truncate.scss';
+@use './utilities/ratio';
+@use './utilities/fixed';
+@use './utilities/sticky';
+@use './utilities/max-height';
+@use './utilities/js-display';
+@use './utilities/line-clamp';
+@use './utilities/align';
+@use './utilities/wider-colours';
+@use './utilities/opacity';
+@use './utilities/overflow';
+@use './utilities/display';
+@use './utilities/position';
+@use './utilities/border';
+@use './utilities/sizes';
+@use './utilities/flex';
+@use './utilities/order';
+@use './utilities/margins';
+@use './utilities/paddings';
+@use './utilities/gap';
+@use './utilities/text';
+@use './utilities/colours';
+@use './utilities/gradients';
+@use './utilities/pointer-events';
+@use './utilities/rounded';
+@use './utilities/visible';

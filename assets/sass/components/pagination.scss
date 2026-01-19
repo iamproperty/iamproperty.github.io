@@ -2,7 +2,7 @@
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
 
-@include margins();
+@use '../utilities/margins' as *;
 
 :host {
   container-type: inline-size;
@@ -16,11 +16,11 @@
 .pagination {
   display: block;
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     display: flex;
     align-items: center;
     justify-content: space-between !important;
-    padding-top: rem(32);
+    padding-top: 2rem;
   }
 
   > div {
@@ -46,7 +46,7 @@
   .select--minimal {
     height: calc(3.25rem - 1em);
     line-height: calc(3.25rem - 1em);
-    margin-left: rem(-16);
+    margin-left: -1rem;
     font-weight: bold;
   }
 
@@ -72,7 +72,7 @@
     display: flex !important;
   }
 }
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   :host([data-page-jump]) {
     .page-jump {
       display: flex !important;
@@ -80,14 +80,14 @@
   }
 }
 
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   :host([data-per-page]:not([data-page-jump][data-item-count])) {
     .per-page {
       display: flex !important;
     }
   }
 }
-@include container-up(md) {
+@media screen and (min-width: 62em) {
   :host([data-per-page][data-page-jump][data-item-count]) {
     .per-page {
       display: flex !important;
@@ -100,11 +100,11 @@
 .pagination > .item-count {
   display: block;
   text-align: center;
-  margin-bottom: rem(16);
+  margin-bottom: 1rem;
   margin-inline: auto;
 }
 
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   .pagination > .item-count {
     display: none;
   }
@@ -129,7 +129,7 @@
   padding-inline: 1rem;
   color: var(--colour-body);
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     display: inline-block;
   }
 
@@ -163,7 +163,7 @@
   .pagination {
     justify-content: flex-end;
 
-    @include container-up(sm) {
+    @media screen and (min-width: 36em) {
       justify-content: space-between;
     }
   }
@@ -194,7 +194,7 @@
 
 :host([data-minimal]) {
   .pagination {
-    padding-top: rem(24);
+    padding-top: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -204,7 +204,7 @@
   }
 }
 
-@include container-up(sm) {
+@media screen and (min-width: 36em) {
   .mobile-controls {
     display: none !important;
   }
@@ -217,13 +217,13 @@
 
 .fa-spin {
   display: none !important;
-  font-size: rem(48);
+  font-size: 3rem;
   color: var(--colour-info);
 }
 
 :host([data-loading]) {
   .mobile-controls {
-    padding-top: rem(32);
+    padding-top: 2rem;
   }
   .item-count,
   .mobile-controls > *:not(.fa-spin) {

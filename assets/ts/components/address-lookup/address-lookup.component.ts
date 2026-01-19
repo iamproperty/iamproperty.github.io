@@ -51,7 +51,7 @@ class iamAddressLookup extends HTMLElement {
           </span>
         </label>
     
-          <span class="invalid-feedback mb-2">${this.hasAttribute('data-error-msg') ? this.getAttribute('data-error-msg') : 'Required address fields'}</span>
+          <span class="invalid-feedback mb-2" id="invalid-feedback-address-lookup">${this.hasAttribute('data-error-msg') ? this.getAttribute('data-error-msg') : 'Required address fields'}</span>
 
           <div class="datalist__wrapper ${this.hasAttribute('data-list-class') ? this.getAttribute('data-list-class') : ''}" tabindex="0" part="list-wrapper">
             <slot name="beforeList"></slot>
@@ -103,7 +103,7 @@ class iamAddressLookup extends HTMLElement {
     const preFilledAddressRemoveBtn = this.shadowRoot.querySelector('[part="remove-button"]');
     const dataDisplayText = this.hasAttribute('data-display-text');
     const postcodeSubmit = this.shadowRoot?.querySelector('#postcode__submit');
-    const errorMsg = this.shadowRoot?.querySelector('.invalid-feedback');
+    const errorMsg = this.shadowRoot?.querySelector('#invalid-feedback-address-lookup');
     const paginationWrapper = this.shadowRoot?.querySelector('#paginationWrapper');
     const minChars = this.hasAttribute('data-min-chars') ? parseInt(this.getAttribute('data-min-chars')) : 3;
     let pageNumber = 1;
@@ -201,7 +201,7 @@ class iamAddressLookup extends HTMLElement {
 
 
     const fillInputs = (values): void => {
-
+  
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
@@ -506,6 +506,9 @@ class iamAddressLookup extends HTMLElement {
       if (![40,38,13].includes(e.keyCode) && lookup.value.length >= minChars){
         const valid = await search(lookup.value);
 
+        console.log(errorMsg)
+        console.log(valid)
+
         if(valid != true){
           lookup?.classList.add('is-invalid');
           errorMsg?.innerHTML = valid;
@@ -649,6 +652,24 @@ class iamAddressLookup extends HTMLElement {
     // #endregion
 
     advancedSelect(this, lookup, list, true);
+  }
+
+  static get observedAttributes(): any {
+    return ['data-url'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
+
+    const addressComponent = this.querySelector('iam-address-lookup');
+
+    switch (attrName) {
+      case 'data-url': {
+        if (oldVal != newVal && addressComponent) {
+          addressComponent.setAttribute('data-url', newVal + '?search_string=');
+        }
+        break;
+      }
+    }
   }
 }
 

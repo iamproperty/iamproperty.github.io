@@ -1,0 +1,2103 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:string';
+
+@use 'bs_variables' as *;
+@use 'bs_functions' as *;
+
+// Utility generator
+// Used to generate utilities & print utilities
+@mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
+  $values: map.get($utility, values);
+
+  // If the values are a list or string, convert it into a map
+  @if meta.type-of($values) == 'string' or meta.type-of(list.nth($values, 1)) != 'list' {
+    $values: list.zip($values, $values);
+  }
+
+  @each $key, $value in $values {
+    $properties: map.get($utility, property);
+
+    // Multiple properties are possible, for example with vertical or horizontal margins or paddings
+    @if meta.type-of($properties) == 'string' {
+      $properties: list.append((), $properties);
+    }
+
+    // Use custom class if present
+    $property-class: if(map.has-key($utility, class), map.get($utility, class), list.nth($properties, 1));
+    $property-class: if($property-class == null, '', $property-class);
+
+    // Use custom CSS variable name if present, otherwise default to `class`
+    $css-variable-name: if(
+      map.has-key($utility, css-variable-name),
+      map.get($utility, css-variable-name),
+      map.get($utility, class)
+    );
+
+    // State params to generate pseudo-classes
+    $state: if(map.has-key($utility, state), map.get($utility, state), ());
+
+    $infix: if($property-class == '' and string.slice($infix, 1, 1) == '-', string.slice($infix, 2), $infix);
+
+    // Don't prefix if value key is null (eg. with shadow class)
+    $property-class-modifier: if($key, if($property-class == '' and $infix == '', '', '-') + $key, '');
+
+    @if map.get($utility, rfs) {
+      // Inside the media query
+      @if $is-rfs-media-query {
+        $val: rfs-value($value);
+
+        // Do not render anything if fluid and non fluid values are the same
+        $value: if($val == rfs-fluid-value($value), null, $val);
+      } @else {
+        $value: rfs-fluid-value($value);
+      }
+    }
+
+    $is-css-var: map.get($utility, css-var);
+    $is-local-vars: map.get($utility, local-vars);
+    $is-rtl: map.get($utility, rtl);
+
+    @if $value != null {
+      @if $is-rtl == false {
+        /* rtl:begin:remove */
+      }
+
+      @if $is-css-var {
+        .#{$property-class + $infix + $property-class-modifier} {
+          --#{$css-variable-name}: #{$value};
+        }
+
+        @each $pseudo in $state {
+          .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+            --#{$css-variable-name}: #{$value};
+          }
+        }
+      } @else {
+        .#{$property-class + $infix + $property-class-modifier} {
+          @each $property in $properties {
+            @if $is-local-vars {
+              @each $local-var, $variable in $is-local-vars {
+                --#{$local-var}: #{$variable};
+              }
+            }
+            #{$property}: $value !important;
+          }
+        }
+
+        @each $pseudo in $state {
+          .#{$property-class + $infix + $property-class-modifier}-#{$pseudo}:#{$pseudo} {
+            @each $property in $properties {
+              @if $is-local-vars {
+                @each $local-var, $variable in $is-local-vars {
+                  --#{$local-var}: #{$variable};
+                }
+              }
+              #{$property}: $value !important;
+            }
+          }
+        }
+      }
+
+      @if $is-rtl == false {
+        /* rtl:end:remove */
+      }
+    }
+  }
+}
+
+// #endregion
+
+// #region Boostrap Grid breakpoints
+// Breakpoint viewport sizes and media queries.
+//
+// Breakpoints are defined as a map of (name: minimum width), order from small to large:
+//
+//    (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)
+//
+// The map defined in the `$grid-breakpoints` global variable is used as the `$breakpoints` argument by default.
+
+// Name of the next breakpoint, or null for the last breakpoint.
+//
+//    >> breakpoint-next(sm)
+//    md
+//    >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    md
+//    >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl xxl))
+//    md
+@function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  @if not $n {
+    @error "breakpoint `#{$name}` not found in `#{$breakpoints}`";
+  }
+  @return if($n < length($breakpoint-names), list.nth($breakpoint-names, $n + 1), null);
+}
+
+// Minimum breakpoint width. Null for the smallest (first) breakpoint.
+//
+//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    576px
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+  $min: map.get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+// Maximum breakpoint width.
+// The maximum value is reduced by 0.02px to work around the limitations of
+// `min-` and `max-` prefixes and viewports with fractional widths.
+// See https://www.w3.org/TR/mediaqueries-4/#mq-min-max
+// Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
+// See https://bugs.webkit.org/show_bug.cgi?id=178261
+//
+//    >> breakpoint-max(md, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    767.98px
+/*
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+  $max: map.get($breakpoints, $name);
+  @return if($max and $max > 0, $max - 0.02, null);
+}
+*/
+// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
+// Useful for making responsive utilities.
+//
+//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    ""  (Returns a blank string)
+//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
+//    "-sm"
+@function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
+  @return if(breakpoint-min($name, $breakpoints) == null, '', '-#{$name}');
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($lower, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}
+
+// Media between the breakpoint's minimum and maximum widths.
+// No minimum for the smallest breakpoint, and no maximum for the largest one.
+// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+@mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  $next: breakpoint-next($name, $breakpoints);
+  $max: breakpoint-max($next, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($name, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($next, $breakpoints) {
+      @content;
+    }
+  }
+}
+// #endregion
+
+// #region Bootstrap layout
+// scss-docs-start clearfix
+/*
+@mixin clearfix() {
+  &::after {
+    display: block;
+    clear: both;
+    content: '';
+  }
+}
+  */
+// scss-docs-end clearfix
+// Container mixins
+
+
+// Grid system
+//
+// Generate semantic grid columns with these mixins.
+
+@mixin make-row($gutter: $grid-gutter-width) {
+  --gutter-x: #{$gutter};
+  --gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  // TODO: Revisit calc order after https://github.com/react-bootstrap/react-bootstrap/issues/6039 is fixed
+  margin-top: calc(-1 * var(--gutter-y)); // stylelint-disable-line function-disallowed-list
+  margin-right: calc(-0.5 * var(--gutter-x)); // stylelint-disable-line function-disallowed-list
+  margin-left: calc(-0.5 * var(--gutter-x)); // stylelint-disable-line function-disallowed-list
+}
+
+@mixin make-col-ready() {
+  // Add box sizing if only the grid is loaded
+  box-sizing: if(meta.variable-exists(include-column-box-sizing) and $include-column-box-sizing, border-box, null);
+  // Prevent columns from becoming too narrow when at smaller grid tiers by
+  // always setting `width: 100%;`. This works because we set the width
+  // later on to override this initial width.
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%; // Prevent `.col-auto`, `.col` (& responsive variants) from breaking out the grid
+  padding-right: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
+  padding-left: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
+  margin-top: var(--gutter-y);
+}
+
+@mixin make-col($size: false, $columns: $grid-columns) {
+  @if $size {
+    flex: 0 0 auto;
+    $width: math.div($size, 12);
+    width: math.percentage($width);
+  } @else {
+    flex: 1 1 0;
+    max-width: 100%;
+  }
+}
+
+@mixin make-col-auto() {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+@mixin make-col-offset($size, $columns: $grid-columns) {
+  $num: math.div($size, $columns);
+  margin-left: if($num == 0, 0, math.percentage($num));
+}
+
+// Row columns
+//
+// Specify on a parent element(e.g., .row) to force immediate children into NN
+// number of columns. Supports wrapping to new lines, but does not do a Masonry
+// style grid.
+@mixin row-cols($count) {
+  > * {
+    flex: 0 0 auto;
+    width: math.div(100%, $count);
+  }
+}
+
+// Framework grid generation
+//
+// Used only by Bootstrap to generate the correct number of grid classes given
+// any value of `$grid-columns`.
+
+@mixin make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
+  @each $breakpoint in map.keys($breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+      // Provide basic `.col-{bp}` classes for equal-width flexbox columns
+      .col#{$infix} {
+        flex: 1 0 0%; // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
+      }
+
+      .row-cols#{$infix}-auto > * {
+        @include make-col-auto();
+      }
+
+      @if $grid-row-columns > 0 {
+        @for $i from 1 through $grid-row-columns {
+          .row-cols#{$infix}-#{$i} {
+            @include row-cols($i);
+          }
+        }
+      }
+
+      .col#{$infix}-auto {
+        @include make-col-auto();
+      }
+
+      @if $columns > 0 {
+        @for $i from 1 through $columns {
+          .col#{$infix}-#{$i} {
+            @include make-col($i, $columns);
+          }
+        }
+
+        // `$columns - 1` because offsetting by the width of an entire row isn't possible
+        @for $i from 0 through ($columns - 1) {
+          @if not($infix == '' and $i == 0) {
+            // Avoid emitting useless .offset-0
+            .offset#{$infix}-#{$i} {
+              @include make-col-offset($i, $columns);
+            }
+          }
+        }
+      }
+
+      // Gutters
+      //
+      // Make use of `.g-*`, `.gx-*` or `.gy-*` utilities to change spacing between the columns.
+      @each $key, $value in $gutters {
+        .g#{$infix}-#{$key},
+        .gx#{$infix}-#{$key} {
+          --gutter-x: #{$value};
+        }
+
+        .g#{$infix}-#{$key},
+        .gy#{$infix}-#{$key} {
+          --gutter-y: #{$value};
+        }
+      }
+    }
+  }
+}
+
+@mixin make-cssgrid($columns: $grid-columns, $breakpoints: $grid-breakpoints) {
+  @each $breakpoint in map-keys($breakpoints) {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+    @include media-breakpoint-up($breakpoint, $breakpoints) {
+      @if $columns > 0 {
+        @for $i from 1 through $columns {
+          .g-col#{$infix}-#{$i} {
+            grid-column: auto / span $i;
+          }
+        }
+
+        // Start with `1` because `0` is and invalid value.
+        // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+        @for $i from 1 through ($columns - 1) {
+          .g-start#{$infix}-#{$i} {
+            grid-column-start: $i;
+          }
+        }
+      }
+    }
+  }
+}
+
+// #endregion
+
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media screen and (min-width: $min) {
+      @content;
+    }
+  } @else if $name == 'xs' {
+    @content;
+  } @else {
+    @content;
+  }
+}
+
+@mixin container-up($name) {
+  @if $name == 'sm' {
+    @container (width > 23.4375em) {
+      @content;
+    }
+  } @else if $name == 'md' {
+    @container (width > 48em) {
+      @content;
+    }
+  } @else if $name == 'xs' {
+    @content;
+  } @else {
+    @content;
+  }
+}
+
+// Example: @include prefix(transition, transform 1.5s, webkit ms o);
+@mixin prefix($property, $value, $prefixes: (webkit ms o)) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+
+  // Output standard non-prefixed declaration
+  #{$property}: $value;
+}
+
+// Used to make it possible to use css properties but still support IE11
+@mixin var($property, $varName, $important: '') {
+  #{$property}: var(#{$varName}) #{$important};
+}
+
+@mixin inline-text() {
+  p,
+  ul,
+  ol,
+  dd,
+  .body,
+  table:not(.table--email) td {
+    @content;
+  }
+}
+
+@mixin headers($includeClasses: 'false') {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @content;
+  }
+
+  @if $includeClasses == 'true' {
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6 {
+      @content;
+    }
+  }
+}
+
+@mixin bg-variant($parent, $color, $ignore-warning: false) {
+  #{$parent} {
+    --bg-colour: var(--colour-#{str-replace($parent, '.bg-', '')});
+    --bg-colour-tint: var(--colour-#{str-replace($parent, '.bg-', '')}-tint);
+
+    @include var(background-color, --colour-#{str-replace($parent, '.bg-', '')}, !important);
+  }
+}
+@mixin text-emphasis-variant($parent, $color, $ignore-warning: false) {
+  #{$parent} {
+    @include var(color, --colour-#{str-replace($parent, '.text-', '')}, '!important');
+  }
+}
+
+
+
+
+@mixin is($selector, $before: '', $after: '') {
+  #{$before}:is(#{$selector})#{$after} {
+    @content;
+  }
+}
+
+
+@mixin slotted($el, $isComponent: 'true') {
+  @if $isComponent == 'true' {
+    ::slotted(#{$el}) {
+      @content;
+    }
+  } @else {
+    #{$el} {
+      @content;
+    }
+  }
+}
+
+@mixin list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+@mixin breakpoint($name, $breakpoints: $breakpoints) {
+  @media screen and (min-width: #{map.get($breakpoints,$name)}) {
+    @content;
+  }
+}
+@mixin input {
+  display: block;
+    width: 100%;
+    display: block;
+    width: 100%;
+    padding: var(--input-padding-block, 0.75rem) var(--input-padding-inline, 1rem);
+    font-size: var(--input-fs, 1rem);
+    line-height: var(--input-lh, 1.25rem);
+    color: var(--colour-heading);
+    background-color: var(--colour-canvas-2);
+    background-clip: padding-box;
+    border: 2px solid var(--colour-primary);
+    appearance: none; // Fix appearance for date inputs in Safari
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    min-height: calc(
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
+        4px
+    );
+    max-height: calc(
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
+        4px
+    );
+
+    &:is(textarea) {
+      max-height: 100%;
+    }
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    &:is(:focus, .focus):not(:disabled) {
+      border-color: var(--colour-info);
+      outline: 0;
+    }
+
+    &:is(:focus, .focus):not(:disabled):not(:invalid) {
+      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+    }
+    // Add some height to date inputs on iOS
+    // https://github.com/twbs/bootstrap/issues/23307
+    // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
+    &::-webkit-date-and-time-value {
+      // Multiply line-height by 1em if it has no unit
+      height: if(math.unit(1.5) == '', 1.5 * 1em, 1.5);
+    }
+
+    // Disabled inputs
+    &:disabled {
+      background-color: #ccd6d8;
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+}
+
+
+$breakpoints: (
+  sm: 36em,
+  md: 62em
+);
+
+$new_utilities: ();
+
+
+// #region Clearfix
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'clearfix': 'Clear the floats from both sides',
+  )
+);
+
+@mixin clearfix() {
+  .clearfix {
+    &::after {
+      display: block;
+      clear: both;
+      content: '';
+    }
+  }
+}
+// #endregion
+
+// #region visually-hidden
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'visually-hidden': 'Hide an element from the standard user but not from screen readers',
+  )
+);
+
+@mixin visually-hidden() {
+  .visually-hidden,
+  .visually-hidden-focusable:not(:focus):not(:focus-within) {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important; // Fix for https://github.com/twbs/bootstrap/issues/25686
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+}
+// #endregion
+
+// #region text-truncate
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'text-truncate': 'Keep the text onto one line and add an ellipsis if needed',
+  )
+);
+
+@mixin text-truncate() {
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+// #endregion
+
+// #region ratio
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'ratio': 'Use pre-defined aspect ratios to generate the sizing or elements',
+  )
+);
+
+@mixin ratio() {
+  .ratio {
+    position: relative;
+    width: 100%;
+
+    &::before {
+      display: block;
+      padding-top: var(--aspect-ratio);
+      content: '';
+    }
+
+    > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .ratio-1x1 {
+    --aspect-ratio: 100%;
+  }
+  .ratio-4x3 {
+    --aspect-ratio: calc(3 / 4 * 100%);
+  }
+  .ratio-16x9 {
+    --aspect-ratio: calc(9 / 16 * 100%);
+  }
+  .ratio-21x9 {
+    --aspect-ratio: calc(9 / 21 * 100%);
+  }
+}
+// #endregion
+
+// #region fixed
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'fixed': 'Fix elements to either the top or bottom',
+  )
+);
+
+@mixin fixed() {
+  .fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: var(--index-floating);
+  }
+
+  .fixed-bottom {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: var(--index-floating);
+  }
+}
+// #endregion
+
+// #region sticky
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'sticky': 'Make elements stick to either the top or bottom',
+  )
+);
+
+@mixin sticky() {
+
+  @media screen and (min-width: 36em) {
+
+    .sticky-sm-top {
+      position: sticky;
+      top: 0;
+      z-index: var(--index-floating);
+    }
+    .sticky-sm-bottom {
+      position: sticky;
+      bottom: 0;
+      z-index: var(--index-floating);
+    }
+  }
+  @media screen and (min-width: 62em) {
+
+    .sticky-md-top {
+      position: sticky;
+      top: 0;
+      z-index: var(--index-floating);
+    }
+    .sticky-md-bottom {
+      position: sticky;
+      bottom: 0;
+      z-index: var(--index-floating);
+    }
+  }
+}
+// #endregion
+
+// #region max-height
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'max-height':
+      'Set a pre-defined max height on an element, note this will create a scrollable area if the content is larger than the max height.',
+  )
+);
+
+@mixin max-height() {
+  :is(.mh-sm, .mh-md, .mh-lg, .mh-sm-sm, .mh-sm-md, .mh-sm-lg, .mh-md-sm, .mh-md-md, .mh-md-lg, .mh-fluid) {
+    &:not(iam-table):not(.table__wrapper) {
+      padding-inline: var(--mh-padding-inline, 0);
+      margin-inline: calc(var(--mh-padding-inline, 0) * -1);
+    }
+
+    &::before {
+      top: calc(100% - 1.5rem);
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1.5rem;
+      position: sticky;
+      display: block;
+      background: linear-gradient(180deg, transparent 0%, var(--colour-canvas-2) 100%);
+      z-index: 2;
+      margin-bottom: -1.5rem;
+    }
+  }
+
+  :is(.mh-sm, .mh-md, .mh-lg, .mh-fluid) {
+    overflow: auto;
+    overscroll-behavior: contain;
+
+    &::before {
+      content: '';
+    }
+  }
+
+  .mh-sm {
+    max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+  }
+
+  .mh-md {
+    max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
+  }
+
+  .mh-lg {
+    max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
+  }
+
+  .mh-fluid {
+    max-height: 100%;
+  }
+
+  @media screen and (min-width: 36em) {
+    :is(.mh-sm-sm, .mh-sm-md, .mh-sm-lg) {
+      overflow: auto;
+      overscroll-behavior: contain;
+
+      &::before {
+        content: '';
+      }
+    }
+
+    .mh-sm-sm {
+      max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+    }
+
+    .mh-sm-md {
+      max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
+    }
+
+    .mh-sm-lg {
+      max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    :is(.mh-md-sm, .mh-md-md, .mh-md-lg) {
+      overflow: auto;
+      overscroll-behavior: contain;
+
+      &::before {
+        content: '';
+      }
+    }
+
+    .mh-md-sm {
+      max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+    }
+
+    .mh-md-md {
+      max-height: calc(#{rem(400)} - var(--mh-modifier, 0rem));
+    }
+
+    .mh-md-lg {
+      max-height: calc(#{rem(600)} - var(--mh-modifier, 0rem));
+    }
+  }
+}
+// #endregion
+
+// #region js-display
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'js-display': 'Show and hide elements depending upon if javascript is running or not',
+  )
+);
+
+@mixin js-display() {
+  @media (scripting: enabled) {
+    .js-show {
+      display: none !important;
+    }
+  }
+
+  @media (scripting: none) {
+    .js-hide {
+      display: none !important;
+    }
+  }
+}
+// #endregion
+
+// #region Line clamp
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'line-clamp': 'Restricts a texts height to a number of lines (1-5)',
+  )
+);
+
+@mixin line-clamp() {
+  .line-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: hidden;
+    overflow: hidden;
+  }
+
+  .line-clamp--2 {
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp--3 {
+    -webkit-line-clamp: 3;
+  }
+
+  .line-clamp--4 {
+    -webkit-line-clamp: 4;
+  }
+
+  .line-clamp--5 {
+    -webkit-line-clamp: 5;
+  }
+}
+// #endregion
+
+// #region Wider colours
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'wider-colours': 'Apply the wider range of colours in our design system',
+  )
+);
+
+@mixin wider-colours() {
+  
+  @for $i from 1 through 23 {
+  .wider-colour-#{$i} {
+    --wider-colour: var(--wider-colour-#{$i} );
+    --wider-colour-hover: var(--wider-colour-#{$i}-hover);
+    --wider-colour-active: var(--wider-colour-#{$i}-active);
+    color: #262626 !important;
+  }
+}
+
+}
+// #endregion
+
+// #region Align
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'align': 'Change the alignment of the text ',
+  )
+);
+
+@mixin align() {
+  .align-baseline {
+    vertical-align: baseline !important;
+  }
+
+  .align-top {
+    vertical-align: top !important;
+  }
+
+  .align-middle {
+    vertical-align: middle !important;
+  }
+
+  .align-bottom {
+    vertical-align: bottom !important;
+  }
+
+  .align-text-bottom {
+    vertical-align: text-bottom !important;
+  }
+
+  .align-text-top {
+    vertical-align: text-top !important;
+  }
+}
+// #endregion
+
+// #region Opacity
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'opacity': 'Apply the opacity of an element by intervals of 25%',
+  )
+);
+
+@mixin opacity() {
+  .opacity-0 {
+    opacity: 0 !important;
+  }
+
+  .opacity-25 {
+    opacity: 0.25 !important;
+  }
+
+  .opacity-50 {
+    opacity: 0.5 !important;
+  }
+
+  .opacity-75 {
+    opacity: 0.75 !important;
+  }
+
+  .opacity-100 {
+    opacity: 1 !important;
+  }
+}
+// #endregion
+
+// #region Overflow
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'overflow': 'Update the overflow of an element',
+  )
+);
+
+@mixin overflow() {
+  .overflow-auto {
+    overflow: auto !important;
+  }
+
+  .overflow-hidden {
+    overflow: hidden !important;
+  }
+
+  .overflow-visible {
+    overflow: visible !important;
+  }
+
+  .overflow-scroll {
+    overflow: scroll !important;
+  }
+}
+// #endregion
+
+// #region Display
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'display': 'Update the display of an element, can be applied at different breakpoints',
+  )
+);
+
+@mixin display() {
+  .d-inline {
+    display: inline !important;
+  }
+
+  .d-inline-block {
+    display: inline-block !important;
+  }
+
+  .d-block {
+    display: block !important;
+  }
+
+  .d-grid {
+    display: grid !important;
+  }
+
+  .d-table {
+    display: table !important;
+  }
+
+  .d-table-row {
+    display: table-row !important;
+  }
+
+  .d-table-cell {
+    display: table-cell !important;
+  }
+
+  .d-flex {
+    display: flex !important;
+  }
+
+  .d-inline-flex {
+    display: inline-flex !important;
+  }
+
+  .d-none {
+    display: none !important;
+  }
+
+  @each $breakpoint,$width in $breakpoints {
+    @media screen and (min-width: $width) {
+
+      .d-#{$breakpoint}-inline {
+        display: inline !important;
+      }
+
+      .d-#{$breakpoint}-inline-block {
+        display: inline-block !important;
+      }
+
+      .d-#{$breakpoint}-block {
+        display: block !important;
+      }
+
+      .d-#{$breakpoint}-grid {
+        display: grid !important;
+      }
+
+      .d-#{$breakpoint}-table {
+        display: table !important;
+      }
+
+      .d-#{$breakpoint}-table-row {
+        display: table-row !important;
+      }
+
+      .d-#{$breakpoint}-table-cell {
+        display: table-cell !important;
+      }
+
+      .d-#{$breakpoint}-flex {
+        display: flex !important;
+      }
+
+      .d-#{$breakpoint}-inline-flex {
+        display: inline-flex !important;
+      }
+
+      .d-#{$breakpoint}-none {
+        display: none !important;
+      }
+    }
+  }
+}
+// #endregion
+
+// #region Position
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'position': 'Update the position of an element, can be applied at different breakpoints',
+  )
+);
+
+@mixin position() {
+  @each $breakpoint,$width in $breakpoints {
+    @media screen and (min-width: $width) {
+
+      .position-#{$breakpoint}-static {
+        position: static !important;
+      }
+
+      .position-#{$breakpoint}-relative {
+        position: relative !important;
+      }
+
+      .position-#{$breakpoint}-absolute {
+        position: absolute !important;
+      }
+
+      .position-#{$breakpoint}-fixed {
+        position: fixed !important;
+      }
+
+      .position-#{$breakpoint}-sticky {
+        position: sticky !important;
+      }
+
+      .top-#{$breakpoint}-0 {
+        top: 0 !important;
+      }
+
+      .top-#{$breakpoint}-50 {
+        top: 50% !important;
+      }
+
+      .top-#{$breakpoint}-100 {
+        top: 100% !important;
+      }
+
+      .bottom-#{$breakpoint}-0 {
+        bottom: 0 !important;
+      }
+
+      .bottom-#{$breakpoint}-50 {
+        bottom: 50% !important;
+      }
+
+      .bottom-#{$breakpoint}-100 {
+        bottom: 100% !important;
+      }
+
+      .start-#{$breakpoint}-0 {
+        left: 0 !important;
+      }
+
+      .start-#{$breakpoint}-50 {
+        left: 50% !important;
+      }
+
+      .start-#{$breakpoint}-100 {
+        left: 100% !important;
+      }
+
+      .end-#{$breakpoint}-0 {
+        right: 0 !important;
+      }
+
+      .end-#{$breakpoint}-50 {
+        right: 50% !important;
+      }
+
+      .end-#{$breakpoint}-100 {
+        right: 100% !important;
+      }
+
+      .translate-#{$breakpoint}-middle {
+        transform: translate(-50%, -50%) !important;
+      }
+
+      .translate-#{$breakpoint}-middle-x {
+        transform: translateX(-50%) !important;
+      }
+
+      .translate-#{$breakpoint}-middle-y {
+        transform: translateY(-50%) !important;
+      }
+    }
+  }
+}
+// #endregion
+
+// #region Border
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'border': 'Apply a border and adjust its settings',
+  )
+);
+
+@mixin border() {
+  .border {
+    border: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-0 {
+    border: 0 !important;
+  }
+
+  .border-top {
+    border-top: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-top-0 {
+    border-top: 0 !important;
+  }
+
+  .border-end {
+    border-right: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-end-0 {
+    border-right: 0 !important;
+  }
+
+  .border-bottom {
+    border-bottom: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-bottom-0 {
+    border-bottom: 0 !important;
+  }
+
+  .border-start {
+    border-left: var(--border-width) var(--border-style) var(--border-color) !important;
+  }
+
+  .border-start-0 {
+    border-left: 0 !important;
+  }
+
+  .border-1 {
+    --border-width: 1px;
+  }
+
+  .border-2 {
+    --border-width: 2px;
+  }
+
+  .border-3 {
+    --border-width: 3px;
+  }
+
+  .border-4 {
+    --border-width: 4px;
+  }
+
+  .border-5 {
+    --border-width: 5px;
+  }
+
+  .border-opacity-10 {
+    --border-opacity: 0.1;
+  }
+
+  .border-opacity-25 {
+    --border-opacity: 0.25;
+  }
+
+  .border-opacity-50 {
+    --border-opacity: 0.5;
+  }
+
+  .border-opacity-75 {
+    --border-opacity: 0.75;
+  }
+
+  .border-opacity-100 {
+    --border-opacity: 1;
+  }
+}
+// #endregion
+
+// #region Sizes
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'sizes': 'Apply sizing rules to an element',
+  )
+);
+
+@mixin sizes() {
+  .w-25 {
+    width: 25% !important;
+  }
+
+  .w-50 {
+    width: 50% !important;
+  }
+
+  .w-75 {
+    width: 75% !important;
+  }
+
+  .w-100 {
+    width: 100% !important;
+  }
+
+  .w-auto {
+    width: auto !important;
+  }
+
+  .mw-100 {
+    max-width: 100% !important;
+  }
+
+  .mw-fit-content {
+    max-width: fit-content !important;
+  }
+
+  .mw-content {
+    max-width: var(--content-max-width) !important;
+  }
+
+  .vw-100 {
+    width: 100vw !important;
+  }
+
+  .min-vw-100 {
+    min-width: 100vw !important;
+  }
+
+  .h-25 {
+    height: 25% !important;
+  }
+
+  .h-50 {
+    height: 50% !important;
+  }
+
+  .h-75 {
+    height: 75% !important;
+  }
+
+  .h-100 {
+    height: 100% !important;
+  }
+
+  .h-auto {
+    height: auto !important;
+  }
+
+  .mh-100 {
+    max-height: 100% !important;
+  }
+
+  .vh-100 {
+    height: 100vh !important;
+  }
+
+  .min-vh-100 {
+    min-height: 100vh !important;
+  }
+
+  .min-100 {
+    min-width: 100% !important;
+  }
+
+  .min-fit-content {
+    min-width: fit-content !important;
+  }
+
+  .object-cover {
+    object-fit: cover !important;
+  }
+
+  .object-contain {
+    object-fit: contain !important;
+  }
+}
+// #endregion
+
+// #region Flex
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'flex': 'Update the flex rules of an element, can be applied at different breakpoints',
+  )
+);
+
+@mixin flex() {
+  @each $breakpoint,$width in $breakpoints {
+    @media screen and (min-width: $width) {
+
+      .flex-#{$breakpoint}-fill {
+        flex: 1 1 auto !important;
+      }
+
+      .flex-#{$breakpoint}-row {
+        flex-direction: row !important;
+      }
+
+      .flex-#{$breakpoint}-column {
+        flex-direction: column !important;
+      }
+
+      .flex-#{$breakpoint}-row-reverse {
+        flex-direction: row-reverse !important;
+      }
+
+      .flex-#{$breakpoint}-column-reverse {
+        flex-direction: column-reverse !important;
+      }
+
+      .flex-#{$breakpoint}-grow-0 {
+        flex-grow: 0 !important;
+      }
+
+      .flex-#{$breakpoint}-grow-1 {
+        flex-grow: 1 !important;
+      }
+
+      .flex-#{$breakpoint}-shrink-0 {
+        flex-shrink: 0 !important;
+      }
+
+      .flex-#{$breakpoint}-shrink-1 {
+        flex-shrink: 1 !important;
+      }
+
+      .flex-#{$breakpoint}-wrap {
+        flex-wrap: wrap !important;
+      }
+
+      .flex-#{$breakpoint}-nowrap {
+        flex-wrap: nowrap !important;
+      }
+
+      .flex-#{$breakpoint}-wrap-reverse {
+        flex-wrap: wrap-reverse !important;
+      }
+
+      .justify-content-#{$breakpoint}-start {
+        justify-content: flex-start !important;
+      }
+
+      .justify-content-#{$breakpoint}-end {
+        justify-content: flex-end !important;
+      }
+
+      .justify-content-#{$breakpoint}-center {
+        justify-content: center !important;
+      }
+
+      .justify-content-#{$breakpoint}-between {
+        justify-content: space-between !important;
+      }
+
+      .justify-content-#{$breakpoint}-around {
+        justify-content: space-around !important;
+      }
+
+      .justify-content-#{$breakpoint}-evenly {
+        justify-content: space-evenly !important;
+      }
+
+      .align-items-#{$breakpoint}-start {
+        align-items: flex-start !important;
+      }
+
+      .align-items-#{$breakpoint}-end {
+        align-items: flex-end !important;
+      }
+
+      .align-items-#{$breakpoint}-center {
+        align-items: center !important;
+      }
+
+      .align-items-#{$breakpoint}-baseline {
+        align-items: baseline !important;
+      }
+
+      .align-items-#{$breakpoint}-stretch {
+        align-items: stretch !important;
+      }
+
+      .align-content-#{$breakpoint}-start {
+        align-content: flex-start !important;
+      }
+
+      .align-content-#{$breakpoint}-end {
+        align-content: flex-end !important;
+      }
+
+      .align-content-#{$breakpoint}-center {
+        align-content: center !important;
+      }
+
+      .align-content-#{$breakpoint}-between {
+        align-content: space-between !important;
+      }
+
+      .align-content-#{$breakpoint}-around {
+        align-content: space-around !important;
+      }
+
+      .align-content-#{$breakpoint}-stretch {
+        align-content: stretch !important;
+      }
+
+      .align-self-#{$breakpoint}-auto {
+        align-self: auto !important;
+      }
+
+      .align-self-#{$breakpoint}-start {
+        align-self: flex-start !important;
+      }
+
+      .align-self-#{$breakpoint}-end {
+        align-self: flex-end !important;
+      }
+
+      .align-self-#{$breakpoint}-center {
+        align-self: center !important;
+      }
+
+      .align-self-#{$breakpoint}-baseline {
+        align-self: baseline !important;
+      }
+
+      .align-self-#{$breakpoint}-stretch {
+        align-self: stretch !important;
+      }
+    }
+  }
+}
+// #endregion
+
+// #region Order
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'order': 'Update the order of an element, can be applied at different breakpoints',
+  )
+);
+
+@mixin order() {
+  @each $breakpoint,$width in $breakpoints {
+    @media screen and (min-width: $width) {
+
+      .order-#{$breakpoint}-first {
+        order: -1 !important;
+      }
+
+      .order-#{$breakpoint}-0 {
+        order: 0 !important;
+      }
+
+      .order-#{$breakpoint}-1 {
+        order: 1 !important;
+      }
+
+      .order-#{$breakpoint}-2 {
+        order: 2 !important;
+      }
+
+      .order-#{$breakpoint}-3 {
+        order: 3 !important;
+      }
+
+      .order-#{$breakpoint}-4 {
+        order: 4 !important;
+      }
+
+      .order-#{$breakpoint}-5 {
+        order: 5 !important;
+      }
+
+      .order-#{$breakpoint}-last {
+        order: 6 !important;
+      }
+    }
+  }
+}
+// #endregion
+
+// #region Margins
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'margins': 'Adjust the margins of an element',
+  )
+);
+
+@mixin margins() {
+  @for $key from 0 through 5 {
+    $value: var(--spacer-#{$key});
+
+    .m-#{$key} {
+      margin: #{$value} !important;
+    }
+
+    .mx-#{$key} {
+      margin-left: #{$value} !important;
+      margin-right: #{$value} !important;
+    }
+
+    .mx-minus-#{$key} {
+      margin-left: -#{$value} !important;
+      margin-right: -#{$value} !important;
+    }
+
+    .my-minus-#{$key} {
+      margin-top: -#{$value} !important;
+      margin-bottom: -#{$value} !important;
+    }
+
+    .my-#{$key} {
+      margin-top: #{$value} !important;
+      margin-bottom: #{$value} !important;
+    }
+
+    .mt-#{$key} {
+      margin-top: #{$value} !important;
+    }
+
+    .me-#{$key} {
+      margin-right: #{$value} !important;
+    }
+
+    .mb-#{$key} {
+      margin-bottom: #{$value} !important;
+    }
+
+    .ms-#{$key} {
+      margin-left: #{$value} !important;
+    }
+  }
+
+  .m-auto {
+    margin: auto !important;
+  }
+
+  .mx-auto {
+    margin-right: auto !important;
+    margin-left: auto !important;
+  }
+
+  .my-auto {
+    margin-top: auto !important;
+    margin-bottom: auto !important;
+  }
+
+  .mt-auto {
+    margin-top: auto !important;
+  }
+
+  .me-auto {
+    margin-right: auto !important;
+  }
+
+  .mb-auto {
+    margin-bottom: auto !important;
+  }
+
+  .ms-auto {
+    margin-left: auto !important;
+  }
+}
+// #endregion
+
+// #region Paddings
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'paddings': 'Adjust the paddings of an element',
+  )
+);
+
+@mixin paddings() {
+  @for $key from 0 through 5 {
+    $value: var(--spacer-#{$key});
+    .p-#{$key} {
+      padding: #{$value} !important;
+    }
+
+    .px-#{$key} {
+      padding-left: #{$value} !important;
+      padding-right: #{$value} !important;
+    }
+
+    .py-#{$key} {
+      padding-top: #{$value} !important;
+      padding-bottom: #{$value} !important;
+    }
+
+    .pt-#{$key} {
+      padding-top: #{$value} !important;
+    }
+
+    .pe-#{$key} {
+      padding-right: #{$value} !important;
+    }
+
+    .pb-#{$key} {
+      padding-bottom: #{$value} !important;
+    }
+
+    .ps-#{$key} {
+      padding-left: #{$value} !important;
+    }
+  }
+}
+// #endregion
+
+// #region Gap
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'gap': 'Update the gap sizing of an element with the display flex',
+  )
+);
+
+@mixin gap() {
+  @for $key from 0 through 5 {
+    $value: var(--spacer-#{$key});
+    .gap-#{$key} {
+      gap: #{$value} !important;
+    }
+  }
+}
+// #endregion
+
+// #region Text
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'text': 'Apply the text settings',
+  )
+);
+
+@mixin text() {
+  .font-monospace {
+    font-family: var(--font-monospace) !important;
+  }
+
+  .font-body {
+    font-family: var(--font-body) !important;
+  }
+
+  .fs-1 {
+    font-size: rfs-fluid-value(2.5rem) !important;
+  }
+
+  .fs-2 {
+    font-size: rfs-fluid-value(2rem) !important;
+  }
+
+  .fs-3 {
+    font-size: rfs-fluid-value(1.75rem) !important;
+  }
+
+  .fs-4 {
+    font-size: rfs-fluid-value(1.5rem) !important;
+  }
+
+  .fs-5 {
+    font-size: rfs-fluid-value(1.25rem) !important;
+  }
+
+  .fs-6 {
+    font-size: rfs-fluid-value(1rem) !important;
+  }
+
+  .fst-italic {
+    font-style: italic !important;
+  }
+
+  .fst-normal {
+    font-style: normal !important;
+  }
+
+  .fw-light {
+    font-weight: 300 !important;
+  }
+
+  .fw-lighter {
+    font-weight: lighter !important;
+  }
+
+  .fw-normal {
+    font-weight: 400 !important;
+  }
+
+  .fw-bold {
+    font-weight: 700 !important;
+  }
+
+  .fw-semibold {
+    font-weight: 600 !important;
+  }
+
+  .fw-bolder {
+    font-weight: bolder !important;
+  }
+
+  .lh-0 {
+    line-height: 0 !important;
+  }
+
+  .lh-1 {
+    line-height: 1 !important;
+  }
+
+  .text-start {
+    text-align: left !important;
+  }
+
+  .text-end {
+    text-align: right !important;
+  }
+
+  .text-center {
+    text-align: center !important;
+  }
+
+  .text-decoration-none {
+    text-decoration: none !important;
+  }
+
+  .text-decoration-underline {
+    text-decoration: underline !important;
+  }
+
+  .text-decoration-line-through {
+    text-decoration: line-through !important;
+  }
+
+  .text-lowercase {
+    text-transform: lowercase !important;
+  }
+
+  .text-uppercase {
+    text-transform: uppercase !important;
+  }
+
+  .text-capitalize {
+    text-transform: capitalize !important;
+  }
+
+  .text-wrap {
+    white-space: normal !important;
+  }
+
+  .text-nowrap {
+    white-space: nowrap !important;
+  }
+
+  .text-break {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+}
+// #endregion
+
+// #region Colours
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'colours': 'Applu our design system colours by either text colour or background',
+  )
+);
+
+@mixin colours() {
+
+  .text-heading {
+    
+    color: var(--colour-heading) !important;
+  }
+
+  $theme-colors: (
+    'primary': var(--colour-primary),
+    'secondary': var(--colour-secondary),
+    'info': var(--colour-info),
+    'warning': var(--colour-warning),
+    'success': var(--colour-success),
+    'complete': var(--colour-complete),
+    'danger': var(--colour-danger),
+    'dark': var(--colour-dark),
+    'light': var(--colour-light),
+    'canvas': var(--colour-canvas),
+    'white': var(--colour-white),
+  );
+
+  @each $color, $value in $theme-colors {
+    .text-#{$color} {
+      --text-opacity: 1;
+      color: var(--colour-#{$color}) !important;
+    }
+
+    .bg-#{$color} {
+      --bg-opacity: 1;
+      --bg-colour: var(--colour-#{$color}) !important;
+      background-color: var(--colour-#{$color}) !important;
+    }
+
+    .hover-#{$color}:is(:hover,:focus,:focus-within) {
+      --bg-opacity: 1;
+      --bg-colour: var(--colour-#{$color}) !important;
+      background-color: var(--colour-#{$color}) !important;
+    }
+
+    .colour-#{$color} {
+      --colour: var(--colour-#{$color}) !important;
+    }
+  }
+}
+// #endregion
+
+// #region gradients
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'gradients': 'Add gradients to backgrounds',
+  )
+);
+
+@mixin gradients() {
+  .bg-gradient {
+    background-image: var(--gradient) !important;
+  }
+
+  .gradient-success {
+    --gradient-direction: 180deg;
+    background-image: linear-gradient(
+      var(--gradient-direction),
+      var(--colour-success-theme) 0,
+      transparent 100%
+    ) !important;
+  }
+
+  .gradient-primary {
+    --gradient-direction: 180deg;
+    background-image: linear-gradient(
+      var(--gradient-direction),
+      var(--colour-primary-theme) 0,
+      transparent 100%
+    ) !important;
+  }
+
+  .gradient-info {
+    --gradient-direction: 180deg;
+    background-image: linear-gradient(
+      var(--gradient-direction),
+      var(--colour-info-theme) 0,
+      transparent 100%
+    ) !important;
+  }
+
+  .gradient-direction-left {
+    --gradient-direction: 90deg;
+  }
+
+  .gradient-direction-angle {
+    --gradient-direction: 135deg;
+  }
+}
+// #endregion
+
+// #region Pointer-events
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'pointer-events': 'Disable or enable point events',
+  )
+);
+
+@mixin pointer-events() {
+  .pe-none {
+    pointer-events: none !important;
+  }
+
+  .pe-auto {
+    pointer-events: auto !important;
+  }
+}
+// #endregion
+
+// #region Rounded
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'rounded': 'Add rounded corners',
+  )
+);
+
+@mixin rounded() {
+  .rounded {
+    border-radius: var(--border-radius) !important;
+  }
+
+  .rounded-0 {
+    border-radius: 0 !important;
+  }
+
+  .rounded-1 {
+    border-radius: var(--border-radius-sm) !important;
+  }
+
+  .rounded-2 {
+    border-radius: var(--border-radius) !important;
+  }
+
+  .rounded-3 {
+    border-radius: var(--border-radius-lg) !important;
+  }
+
+  .rounded-4 {
+    border-radius: var(--border-radius-xl) !important;
+  }
+
+  .rounded-5 {
+    border-radius: var(--border-radius-2xl) !important;
+  }
+
+  .rounded-circle {
+    border-radius: 50% !important;
+  }
+
+  .rounded-pill {
+    border-radius: var(--border-radius-pill) !important;
+  }
+
+  .rounded-top {
+    border-top-left-radius: var(--border-radius) !important;
+    border-top-right-radius: var(--border-radius) !important;
+  }
+
+  .rounded-end {
+    border-top-right-radius: var(--border-radius) !important;
+    border-bottom-right-radius: var(--border-radius) !important;
+  }
+
+  .rounded-bottom {
+    border-bottom-right-radius: var(--border-radius) !important;
+    border-bottom-left-radius: var(--border-radius) !important;
+  }
+
+  .rounded-start {
+    border-bottom-left-radius: var(--border-radius) !important;
+    border-top-left-radius: var(--border-radius) !important;
+  }
+}
+// #endregion
+
+// #region Visible
+$new_utilities: map.merge(
+  $new_utilities,
+  (
+    'visible': 'Change the visibility of elements',
+  )
+);
+
+@mixin visible() {
+  .visible {
+    visibility: visible !important;
+  }
+
+  .invisible {
+    visibility: hidden !important;
+  }
+}
+// #endregion

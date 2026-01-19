@@ -2,7 +2,7 @@
 
 @use '../_func.scss' as *;
 
-@use '../elements/type.scss' as *;
+@use '../elements/type' as *;
 
 *,
 *::before,
@@ -72,9 +72,9 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding-top: rem(12);
+  padding-top: 0.75rem;
   padding-inline: rem(5);
-  padding-bottom: rem(12);
+  padding-bottom: 0.75rem;
   height: rem(84);
   position: relative;
   border-radius: 0 0 4px 4px;

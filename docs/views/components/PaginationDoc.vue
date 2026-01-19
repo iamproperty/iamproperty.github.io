@@ -887,7 +887,7 @@
     margin-left: -1.5rem;
     margin-right: -1.5rem;
 
-    @include container-up(sm) {
+    @container (min-width: 36em) { 
       margin-left: 0rem;
       margin-right: 0rem;
     }
@@ -901,14 +901,12 @@
     margin-left: -1.5rem;
     margin-right: -1.5rem;
 
-    @include container-up(sm) {
+    @container (min-width: 36em) { 
       margin-left: 0rem;
       margin-right: 0rem;
     }
 
-    @include dark-mode('true') {
-      background-color: var(--colour-canvas);
-    }
+    
   }
 
   .demo-bottom {

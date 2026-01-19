@@ -1,8 +1,8 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+
+
+
 
 *:not(main):has(> iam-tabs) {
   container-type: inline-size;
@@ -119,7 +119,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     --is-current: 0;
     font-weight: bold;
     font-family: var(--font-heading);
-    font-size: rem(18);
+    font-size: 1.125rem; /* 18/16 */
     cursor: pointer;
     margin: 0;
     padding: 1.5rem 1.5rem 0.5rem 1.5rem;
@@ -184,8 +184,8 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   padding: 0;
   margin: calc(var(--padding-top) * -1) calc(var(--padding-x) * -1) var(--padding-top) calc(var(--padding-x) * -1);
 
-  border-top-left-radius: rem(8);
-  border-top-right-radius: rem(8);
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid var(--colour-border);
@@ -196,14 +196,14 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     display: none;
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @media screen and (min-width: 36em) {
     flex-direction: row;
   }
 
   .link:not(.text-decoration-none):not(.btn) {
     margin: 0;
     //margin-left: calc(var(--wrapper-padding) * -1);
-    padding: #{rem(16)} var(--padding-x);
+    padding: 1rem var(--padding-x);
     width: 100%;
     position: relative;
     text-align: left;
@@ -227,7 +227,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       margin: 0;
 
       &:not(:first-child) {
@@ -242,7 +242,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 }
 
 // #endregion
-@include media-breakpoint-up(sm, $mobileOnly) {
+@media screen and (min-width: 36em) {
   :host(.tabs--inline) .tabs__links {
     margin: 0;
     justify-content: center;
