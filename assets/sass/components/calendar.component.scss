@@ -1,12 +1,12 @@
-@use '../_func.scss' as *;
-@use '../elements/buttons.scss' as *;
-@use '../elements/badge-tag.scss' as *;
-@use '../elements/type.scss' as *;
-@use '../elements/forms.scss' as *;
+@use '../_func' as *;
+@use '../elements/buttons' as *;
+@use '../elements/badge-tag' as *;
+@use '../elements/type';
+@use '../elements/forms' as *;
 
-@use '../elements/dialog.scss' as *;
+@use '../elements/dialog' as *;
 
-@use '../elements/modal.scss' as *;
+@use '../elements/modal' as *;
 
 *,
 *::before,
