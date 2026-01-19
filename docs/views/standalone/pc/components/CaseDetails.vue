@@ -1,8 +1,33 @@
+<script setup>
+  
+  import Tooltip from '@/components/Tooltip/Tooltip.vue';
+</script>
 <template>
   
   <div  class="admin-panel ">
 
     <h2 class="lead text-heading d-block pb-1">Client details</h2>
+
+    <div class="d-flex align-items-baseline">
+      <span><Tooltip title="Hidden text">All party consent: </Tooltip></span>
+      <label class="btn btn-action ms-1">
+        <select class="btn btn-action">
+          <button><selectedcontent></selectedcontent></button>
+          <option>Unkown</option>
+          <option>Required</option>
+          <option>Not Required</option>
+        </select>
+      </label>
+      <span class="lead m-0 p-0">Lead client: </span>
+      <label class="btn btn-action ms-1">
+        <select>
+          <button><selectedcontent></selectedcontent></button>
+          <option>John Smith</option>
+          <option value="Amy Smith">Amy Smith <span>email@email.co.uk</span></option>
+        </select>
+      </label>
+    </div>
+
 
     <div class="d-flex hover-light p-2 mb-1 rounded mx-minus-2">
       <div class="d-block">
