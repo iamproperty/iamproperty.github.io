@@ -1551,7 +1551,7 @@ class iamSTDAddressLookup extends HTMLElement {
     const currentContent = this.innerHTML;
     this.innerHTML = `<iam-address-lookup 
     class="${this.getAttribute('class')}" 
-    data-url="/standardaddress.json?search_query=" 
+    ${this.hasAttribute('data-url') ? `data-url='${this.getAttribute('data-url')}?search_query='` : `data-url='/stand-ardaddress.json?search_query='`}
     data-postcode="true" 
     data-min-chars="5" 
     ${this.hasAttribute('data-title') ? `data-title='${this.getAttribute('data-title')}'` : `data-title='Find an address by postcode'`}
@@ -1678,7 +1678,6 @@ class iamSTDAddressLookup extends HTMLElement {
     const languageToggle = this.querySelector('#languageToggle');
     const atleastone = this.querySelector('.overseas-atleastone');
     const overseasFields = this.querySelector('.overseas');
-
 
     const openOverseas = (): void => {
       const updateEvent = new CustomEvent('open-manual');
