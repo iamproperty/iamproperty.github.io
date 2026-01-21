@@ -14,18 +14,25 @@
   </nav>
   <main>
     <h1>Details: 22 Lynx Road, Tynemouth, Newcastle Upon Tyne NE1 5LS</h1>
-      <div  class="admin-panel md-col-end-5">
-        <h2 data-v-c2a3d511="" class="bg-light">Ranking component</h2>
-        
-      </div>
-      
-    <div class="admin-panel">
-      <h2>Your Tasks</h2>
 
-
-    </div>
-
-    <h2>Quote summary: <span>{{ quote }}</span></h2>
-    <button class="link">Clear quote</button>
+    <h2 class="h3">Details</h2>
+ 
+    <h3 class="h4">Summary of comparison conveyancing quotation</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td>Average completion time</td>
+          <td class="text-end">days</td>
+        </tr>
+        <tr>
+          <td>Customer rating</td>
+          <td class="text-end">
+            <label><input type="range" step="1" min="5" max="10" class="rating"></label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    
   </main>
 </template>
