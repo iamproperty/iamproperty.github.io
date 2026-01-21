@@ -6,12 +6,27 @@
   
   <div  class="admin-panel ">
 
+
+      <label class="btn btn-primary">
+        <select>
+          <button><selectedcontent></selectedcontent></button>
+          <option>Unkown</option>
+          <option>Required</option>
+          <hr />
+          <option>Not Required</option>
+        </select>
+      </label>
+
+
+
+
+
     <h2 class="lead text-heading d-block pb-1">Client details</h2>
 
     <div class="d-flex align-items-baseline">
       <span><Tooltip title="Hidden text">All party consent: </Tooltip></span>
       <label class="btn btn-action ms-1">
-        <select class="btn btn-action">
+        <select>
           <button><selectedcontent></selectedcontent></button>
           <option>Unkown</option>
           <option>Required</option>
@@ -21,9 +36,8 @@
       <span class="lead m-0 p-0">Lead client: </span>
       <label class="btn btn-action ms-1">
         <select>
-          <button><selectedcontent></selectedcontent></button>
           <option>John Smith</option>
-          <option value="Amy Smith">Amy Smith <span>email@email.co.uk</span></option>
+          <option value="Amy Smith" data-email="email@email.co.uk">Amy Smith</option>
         </select>
       </label>
     </div>
