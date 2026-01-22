@@ -3,9 +3,14 @@
   import PCNav from './components/PCNav.vue';
   import Table from '@/components/Table/TableAjax.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
-  import Rankings from '@/components/Rankings/Rankings.vue';
+  import Rating from '@/components/Rating/Rating.vue';
 
   const quote = ref(0);
+
+  const handleRating = (event:any) => {
+
+    console.log(event)
+  };
 </script>
 
 <template>
@@ -27,7 +32,7 @@
         <tr>
           <td>Customer rating</td>
           <td class="text-end">
-            <label><input type="range" step="1" min="5" max="10" class="rating"></label>
+            <Rating class="colour-complete rating--sm"><input type="number" step="1" value="3" min="0" max="5" disabled @input="handleRating"></Rating>
           </td>
         </tr>
       </tbody>

@@ -3,6 +3,7 @@
 
 @use '../_func' as *;
 
+@use './label' as *;
 @use './input' as *;
 
 
@@ -13,9 +14,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 @layer elements {
   // #region RESETS
 
-  label {
-    display: inline-block; // 1
-  }
 
   // 1. Remove the margin in Firefox and Safari
   select,
@@ -102,19 +100,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   // Always hide an element with the `hidden` HTML attribute.
 
   // #endregion
-
-  // #region Form label
-  :is(label:not(.tag), .label) {
-    font-size: 1.125rem; /* 18/16 */
-    line-height: rem(21);
-    margin-bottom: 0.5rem;
-    font-weight: normal;
-    color: var(--colour-heading);
-    display: block;
-  }
-  // #endregion
-
-
 
   // #region input field
   :is(select:not(.select--minimal, .btn)) {
