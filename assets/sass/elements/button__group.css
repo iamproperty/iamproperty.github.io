@@ -1,0 +1,31 @@
+@layer elements {
+
+  .btn__group {
+
+    display: flex;
+    flex-direction: column;
+
+    .btn {
+      margin-inline-end: 0;
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
+      white-space: normal;
+    }
+
+    
+  }
+  @container (min-width: 62em) {
+    .btn__group {
+      flex-direction: row;
+      column-gap: var(--gap);
+
+      .btn {
+        
+      max-width: fit-content;
+      white-space: nowrap;
+      }
+    }
+  }
+}
+
