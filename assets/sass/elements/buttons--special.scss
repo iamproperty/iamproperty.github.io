@@ -40,6 +40,115 @@
 
   // #endregion
 
+  // #region Select as button
+
+  .btn:has(select) {
+    position: relative;
+    padding: 0;
+    max-width: fit-content;
+    min-width: fit-content;
+    width: fit-content;
+
+    select {
+      all: unset !important;
+      padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
+      padding-right: calc(var(--btn-padding-inline) + 2rem)!important;
+      border-radius: 1.5rem !important;
+      appearance: none !important;
+      background: none !important;
+      border: none !important;
+      color: currentColor !important;
+      display: block;
+      outline: none;
+      font-weight: inherit!important;
+      font-size: var(--btn-font-size)!important;
+      line-height: var(--btn-line-height) !important;
+      field-sizing: content!important;
+
+      appearance: base-select!important;
+
+      option {
+        font-size: 1rem;
+        text-align: left;
+        color: var(--colour-primary);
+        padding-inline: var(--menu-item-padding, 0.5rem);
+        padding-block: var(--menu-item-padding, 0.5rem) !important;
+
+        border-radius: .25rem !important;
+        &:not(:last-child){
+          margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
+        }
+        
+        &:hover {
+          background: var(--colour-light) !important;
+        }
+
+        &:after {
+          content: attr(data-email);
+        }
+      }
+    }
+
+    select::picker-icon {
+      display: none;
+    }  
+    select::picker(select) {
+      appearance: base-select;
+      background: var(--menu-bg, canvas);
+      margin-block: var(--menu-margin, 0.25rem);
+      padding: var(--menu-padding, 0.5rem)!important;
+      border: none !important;
+      border-radius: 0.5rem;
+      box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
+    }
+
+    hr {
+      
+      height: 1px !important;
+      background-color: var(--menu-hr-border-color, var(--border-color, grey)) !important;
+      width: 100%;
+      margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
+      padding: 0 !important;
+    }
+    select option::checkmark {
+      display: none;
+    }
+    /*
+    select option:checked::checkmark {
+      content: '✔';
+      color: #2196f3;
+    }
+    */
+    select selectedcontent span {
+      display: none;
+    }
+
+    &:after {
+      position: absolute;
+      top: rem(10);
+      right: 1.5rem;
+      content: '';
+      height: 1.5rem;
+      width: 1rem;
+      display: inline-block;
+      background: currentColor;
+      mask-image: var(--icon-arrow);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-arrow);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+      vertical-align: bottom;
+      margin-left: 1rem;
+      transform: rotate(90deg);
+      pointer-events: none;
+    }
+  }
+  // #endregion
+
   // #region btn that is a select
   .btn-action:has(select) {
     padding-block: 0;
@@ -51,42 +160,11 @@
       padding-right: 2rem!important;
       margin-right: -2rem !important;
       font-size: 1rem!important;
-      appearance: base-select!important;
     }
-    select::picker(select) {
-      appearance: base-select;
-      background: var(--menu-bg, canvas);
-      margin: var(--menu-margin, 0);
-      padding: var(--menu-padding, 0.5rem)!important;
-      border: none !important;
-      border-radius: 0.5rem;
-      box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
-    }
-    select::picker-icon {
-      display: none;
-    }    
 
     &:after {
       top: 0.2rem;
       right: 0.5rem;
-    }
-
-    select option {
-      padding-right: 0.25rem;
-      padding-block: 0.25rem;
-    }
-    select option::checkmark {
-      min-width: 1rem;
-      margin-left: 0.25em;
-      display: none;
-    }
-    select option:checked::checkmark {
-      content: '✔';
-      color: #2196f3;
-    }
-
-    select selectedcontent span {
-      display: none;
     }
   }
   // #endregion
