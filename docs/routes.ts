@@ -416,7 +416,7 @@ const routes = [
         path: 'modal',
         name: 'Modal',
         meta: {
-          title: 'Modal | Elements | iamkey',
+          title: 'Modal | Dialogs | iamkey',
         },
         component: () => import('./views/dialogs/ModalDoc.vue'),
         searchterms:
@@ -426,7 +426,7 @@ const routes = [
         path: 'multi-step-modal',
         name: 'Multi-step modal',
         meta: {
-          title: 'Multi-step Modal | Elements | iamkey',
+          title: 'Multi-step Modal | Dialogs | iamkey',
         },
         component: () => import('./views/dialogs/MultiModalDoc.vue'),
         searchterms:
@@ -436,7 +436,7 @@ const routes = [
         path: 'popover',
         name: 'Dialog (Popover)',
         meta: {
-          title: 'Dialog (Popover) | Elements | iamkey',
+          title: 'Dialog (Popover) | Dialogs | iamkey',
         },
         component: () => import('./views/dialogs/PopoverDoc.vue'),
         searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip',
@@ -445,11 +445,19 @@ const routes = [
         path: 'tooltip',
         name: 'Dialog (Tooltip)',
         meta: {
-          title: 'Dialog (Tooltip) | Elements | iamkey',
+          title: 'Dialog (Tooltip) | Dialogs | iamkey',
         },
         component: () => import('./views/dialogs/TooltipDoc.vue'),
         searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip',
       },
+      {
+        path: 'video-modal',
+        name: 'Video modal',
+        meta: {
+          title: 'Video modal | Dialogs | iamkey',
+        },
+        component: () => import('./views/dialogs/VideoModalDoc.vue'),
+      }
     ],
   },
   {
@@ -1415,6 +1423,14 @@ const routes = [
           title: 'Competitor analysis | iamkey',
         },
         component: () => import('./views/standalone/competitor-analysis.vue'),
+      },
+      {
+        path: 'refer-to-standalone',
+        name: 'Movebutler refer to standalone conveyancing',
+        meta: {
+          title: 'Movebutler refer to standalone conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/refer.vue'),
       },
       {
         path: 'premium-conveyancing',

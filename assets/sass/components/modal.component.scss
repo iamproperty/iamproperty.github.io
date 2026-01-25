@@ -19,6 +19,7 @@
   margin: 0!important;
 }
 
+@layer components {
 dialog[open] {
   //overflow-y: hidden;
   width: 90vw;
@@ -47,7 +48,7 @@ dialog[open] {
     top: 0.75rem;
     bottom: auto;
     left: 0;
-    right: 6px;
+    right: 0.5rem;
     height: calc(var(--dialog-padding) - 0.75rem);
     position: absolute;
     display: block;
@@ -90,13 +91,13 @@ dialog[open] {
   > button:first-child {
 
     position: absolute;
-    top: calc(var(--dialog-padding) - 0.75rem);
-    right: 6px;
+    top: 0.5rem;
+    right: 0.5rem;
     z-index: var(--index-floating);
     margin: 0;
 
     &:not(:hover,:focus,:active){
-      background-color: Canvas;
+      background-color: var(--colour-canvas);
     }
 
     @container (min-width: 36em) {
@@ -118,7 +119,7 @@ dialog[open] {
     display: none;
   }
 }
-
+}
 // Size variants
 // small
 @media screen and (min-width: 36em) {

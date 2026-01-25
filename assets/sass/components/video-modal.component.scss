@@ -1,0 +1,25 @@
+@use './modal.component.scss';
+
+@layer components {
+  
+  dialog {
+    width: calc(100% - 6rem) !important;
+    max-width: 50rem !important;
+    padding: 0;
+    aspect-ratio: 16 / 9;
+
+    &[open]::before {
+      
+      display: none;
+    }
+    
+    &[open]::after {
+
+      display: none;
+    }
+  }
+  ::slotted(.embed) {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+  }
+}
