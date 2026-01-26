@@ -5,17 +5,15 @@
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Rankings from '@/components/Rankings/Rankings.vue';
   import Search from '@/components/Search/Search.vue';
-
   import InlineEdit from '@/components/InlineEdit/InlineEdit.vue';
   import Multiselect from '@/components/Multiselect/Multiselect.vue';
-
-
+  import VideoModal from '@/components/VideoModal/VideoModal.vue';
 </script>
 
 <template>
   <nav>
-  
-    
+
+
   </nav>
   <main>
     <div>
@@ -67,25 +65,25 @@
 
       <div class="admin-panel__footer bg-success mt-auto">
         <p class="h4 md-col-end-5">Minimum forecasted time saving on this transaction with Premium Conveyancing:</p>
-        
+
         <strong class="h2 md-col-start-8">29 days saved</strong>
       </div>
     </div>
 
     <div class="btn__group mb-2">
-        
+
       <button class="btn btn-primary">Refer premium conveyancing</button>
       <button class="btn btn-secondary">Continue to transaction overview</button>
     </div>
-    
+
     <span class="feature fa-rocket-launch md-col-span-4 md-col-start-1">
       <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
     </span>
-    
+
     <span class="feature fa-rocket-launch md-col-span-4 md-col-start-auto">
       <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
     </span>
-    
+
     <span class="feature fa-rocket-launch md-col-span-4 md-col-start-auto">
       <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
     </span>
@@ -93,13 +91,15 @@
     <hr class="mb-3"/>
 
     <div class="md-col-end-5">
-        
+
       <h2 class="h3">Watch our video explainer</h2>
 
-      <a href="https://www.youtube.com/watch?v=lROFZaJcVug" class="text-decoration-none youtube-link d-block" data-youtube="lROFZaJcVug">
+      <a href="https://www.youtube.com/watch?v=lROFZaJcVug" class="text-decoration-none youtube-link d-block" command="show-modal" commandfor="video"> <!-- TODO: move youtube-link class so it gets added via js-->
         <span class="ratio ratio-16x9"><img src="/img/thumbnail.png" alt=""></span>
       </a>
     </div>
+
+    <VideoModal id="video" data-youtube="lROFZaJcVug"></VideoModal>
 
     <div class="md-col-start-7 grid">
 
