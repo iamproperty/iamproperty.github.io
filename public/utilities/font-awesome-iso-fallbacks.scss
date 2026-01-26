@@ -1,0 +1,32 @@
+@layer utilities {
+  .fa-right {
+    --iso: '\2192';
+  }
+  .fa-chevron-right {
+    --iso: '\003e';
+  }
+  .fa-left {
+    --iso: '\2190';
+  }
+  .fa-chevron-left {
+    --iso: '\003c';
+  }
+  .fa-up {
+    --iso: '\2191';
+  }
+  .fa-chevron-up {
+    --iso: '\2227';
+  }
+  .fa-down {
+    --iso: '\2193';
+  }
+  .fa-chevron-down {
+    --iso: '\2228';
+  }
+  .fa-plus {
+    --iso: '\002b';
+  }
+  .fa-bars {
+    --iso: '\039e';
+  }
+}
