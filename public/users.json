@@ -2,7 +2,8 @@
   "data": [
     { 
       "value": "1234",
-      "title": "James Lambert"
+      "title": "James Lambert",
+      "email": "james.lambert@iamproperty.com"
     },
     { 
       "value": "1234",

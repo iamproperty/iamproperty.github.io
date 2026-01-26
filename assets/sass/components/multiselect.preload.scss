@@ -9,6 +9,12 @@
     margin-bottom: 0.5rem;
     order: var(--order, 1);
     margin-inline: rem(3);
+
+    &:not(:has(i)):after {
+      content: '\2715';
+      margin-left: 0.6em;
+      font-weight: bold;
+    }
   }
 
   iam-multiselect .tag[slot='checked']:first-child:last-child {

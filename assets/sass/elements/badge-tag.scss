@@ -49,12 +49,6 @@
     border-radius: 1rem;
     padding: 0 1rem;
 
-    &:not(:has(i)):after {
-      content: '\2715';
-      margin-left: 0.6em;
-      font-weight: bold;
-    }
-
     i {
       margin-left: 0.5rem;
     }
@@ -71,6 +65,13 @@
     &:disabled {
       background: var(--wider-colour-1) !important;
       color: #99adb1 !important;
+    }
+
+    &:has([readonly]) {
+      pointer-events: none;
+    }
+    &:has([readonly]):after {
+      display: none!important;
     }
   }
 
