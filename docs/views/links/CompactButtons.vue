@@ -5,6 +5,20 @@
   let urlParams = new URLSearchParams(window.location.search);
   const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
 
+
+  const iso = [
+    'fa-left',
+    'fa-chevron-left',
+    'fa-right',
+    'fa-chevron-right',
+    'fa-up',
+    'fa-chevron-up',
+    'fa-down',
+    'fa-chevron-down',
+    'fa-plus',
+    'fa-bars'
+  ];
+
 </script>
 
 <template>
@@ -30,26 +44,26 @@
       <div class="row">
         <div class="col-5 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Default state</p>
-          <a href="/components/buttons" class="btn btn-primary btn-compact fa-chevron-right">Lorum ipsum</a>
+          <a href="/components/buttons" class="btn btn-primary btn-compact fa-chevron-right">compact button with an arrow</a>
         </div>
         <div class="col-7 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Hover/Focus state</p>
-          <a href="/components/buttons" class="btn btn-primary hover btn-compact fa-chevron-right">Lorum ipsum</a>
+          <a href="/components/buttons" class="btn btn-primary hover btn-compact fa-chevron-right">compact button</a>
         </div>
         <div class="col-7 col-sm-3 pb-3 pe-none">
           <p class="lead pb-2">Active state</p>
-          <a href="/components/buttons" class="btn btn-primary active btn-compact fa-chevron-right">Lorum ipsum</a>
+          <a href="/components/buttons" class="btn btn-primary active btn-compact fa-chevron-right">Home<span class="visually-hidden">page</span></a>
         </div>
         <div class="col-7 col-sm-3 pb-3">
           <p class="lead pb-2">Disabled state</p>
-          <a href="/components/buttons" class="btn btn-primary btn-compact fa-chevron-right" disabled>Lorum ipsum</a>
+          <a href="/components/buttons" class="btn btn-primary btn-compact fa-chevron-right" disabled>Forward</a>
         </div>
       </div>
 
       <div class="row">
         <div class="col-5 col-sm-3 pe-none">
           <a href="/components/buttons" class="btn btn-primary colour-primary btn-compact fa-chevron-right"
-            >Lorum ipsum</a
+            >application</a
           >
         </div>
         <div class="col-7 col-sm-3 pe-none">
@@ -442,6 +456,21 @@
       <li>Add a native browser ‘blocked’ symbol when the user hovers over the button</li>
     </ul>
 
+    <h2>Fallback icons</h2>
+    
+    <template v-for="value in iso" :key="value">
+    <div class="col-span-6 sm-col-span-4 md-col-span-3 mb-2" >
+      <p class="lead pb-1">.{{value}}</p>
+      <a href="/components/buttons" :class="`btn btn-primary btn-compact ${value}`">compact button with icon</a>
+    </div>
+    <div class="col-span-6 sm-col-span-4 md-col-span-3 col-start-auto mb-2 compact-button-fallback">
+      <p class="lead pb-1">ISO fallback</p>
+      <a href="/components/buttons" :class="`btn btn-primary btn-compact ${value}`">compact button with icon</a>
+    </div>
+    </template>
+      
+    <hr class="mb-3" />
+
     <div class="bg-light version-control">
       <div class="container">
         <table>
@@ -471,3 +500,26 @@
     </div>
   </main>
 </template>
+
+<style lang="scss">
+
+@layer elements {
+
+
+  .compact-button-fallback {
+
+    .btn-compact {
+        
+        @container style(--fa-font-regular) {
+          font-size: 1.5rem!important;
+
+          &:before {
+            font-family: monospace!important;
+            content: var(--iso)!important;
+          }
+        }
+    }
+
+  }
+}
+</style>
