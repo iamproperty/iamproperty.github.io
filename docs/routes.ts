@@ -797,6 +797,14 @@ const routes = [
           title: 'Password | Components | iamkey',
         },
         component: () => import('./views/form-components/PasswordDoc.vue'),
+      },
+      {
+        path: 'tag',
+        name: 'Tag',
+        meta: {
+          title: 'Tag | Components | iamkey',
+        },
+        component: () => import('./views/form-components/TagComponentDoc.vue'),
       }
     ]
   },
