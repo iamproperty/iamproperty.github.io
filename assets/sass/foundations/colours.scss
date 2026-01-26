@@ -11,7 +11,7 @@
 
 
   // On any background colour we change the default text colour to our primary colour to stand out more
-  [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.invert-colours):not(iam-header):not(iam-notification):not(.bg-primary, .bg-danger, .bg-dark) {
+  [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.invert-colours):not(iam-header):not(iam-notification):not(.bg-primary, .bg-danger, .bg-dark, .gradient-primary) {
     
     --colour-heading: var(--colour-primary-theme);
     --colour-body: var(--colour-primary-theme);
@@ -23,7 +23,7 @@
     }
   }
 
-  :is(.bg-primary, .bg-danger, .bg-dark) {
+  :is(.bg-primary, .bg-danger, .bg-dark, .gradient-primary) {
 
     --colour-heading: var(--colour-white);
     --colour-body: var(--colour-white);

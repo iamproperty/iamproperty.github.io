@@ -1,11 +1,8 @@
 @use '../_func' as *;
 
 
-
-
-
 @layer elements {
-  // #region btn compact
+
   .btn-compact {
     --compact-size: 3rem;
 
@@ -24,7 +21,8 @@
     min-height: var(--compact-size) !important;
     max-height: var(--compact-size) !important;
 
-    line-height: var(--compact-size) !important;
+        align-content: center;
+        line-height: 1 !important;
 
     text-indent: -500px;
     overflow: hidden;
@@ -34,6 +32,7 @@
     &:before {
       content: var(--fa);
       position: absolute;
+      display: block;
       top: 0;
       left: 0;
       width: 100%;
@@ -135,5 +134,54 @@
     }
   }
 
-  // #endregion
+  /* #region Detect font awesome has been loaded and if not show the inner text */
+  .btn-compact {
+    
+    &:is(
+      .fa-left,
+      .fa-chevron-left,
+      .fa-right,
+      .fa-chevron-right,
+      .fa-up,
+      .fa-chevron-up,
+      .fa-down,
+      .fa-chevron-down,
+      .fa-plus,
+      .fa-bars
+    ) {
+      --iso-display: block;
+      --iso-font-size: 1.5rem;
+      --iso-border-radius: 50%;
+      --iso-text-indent: -500px;
+    }
+    
+    @container style(--font-body) {
+
+      font-size: var(--iso-font-size, 0.6rem)!important;
+      border-radius: var(--iso-border-radius, 0)!important;
+      text-indent: var(--iso-text-indent, 0px);
+      white-space: initial;
+
+      &:before {
+        display: var(--iso-display, none);
+        font-family: monospace!important;
+        content: var(--iso)!important;
+      }
+    }
+    
+    @container style(--fa-font-regular) {
+
+      text-indent: -500px;
+      font-size: 1rem!important;
+      border-radius: 50%!important;
+
+      &:before {
+        font-family: "Font Awesome 6 Pro"!important;
+        content: var(--fa)!important;
+        display: block;
+      }
+    }
+    
+  }
+  /* #endregion */
 }

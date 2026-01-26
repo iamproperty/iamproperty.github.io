@@ -227,6 +227,24 @@ const routes = [
         searchterms: 'admin, tabs',
       },
       {
+        path: 'highlight',
+        name: 'Highlight',
+        meta: {
+          title: 'Highlight | Elements | iamkey',
+        },
+        component: () => import('./views/elements/Highlight.vue'),
+        searchterms: 'highlight, promo, add',
+      },
+      {
+        path: 'feature',
+        name: 'Feature',
+        meta: {
+          title: 'Feature | Elements | iamkey',
+        },
+        component: () => import('./views/elements/Feature.vue'),
+        searchterms: 'highlight, promo, add',
+      },
+      {
         path: 'tables',
         name: 'Table Element',
         meta: {
@@ -805,6 +823,14 @@ const routes = [
           title: 'Password | Components | iamkey',
         },
         component: () => import('./views/form-components/PasswordDoc.vue'),
+      },
+      {
+        path: 'tag',
+        name: 'Tag',
+        meta: {
+          title: 'Tag | Components | iamkey',
+        },
+        component: () => import('./views/form-components/TagComponentDoc.vue'),
       }
     ]
   },
