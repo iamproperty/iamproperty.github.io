@@ -227,6 +227,24 @@ const routes = [
         searchterms: 'admin, tabs',
       },
       {
+        path: 'highlight',
+        name: 'Highlight',
+        meta: {
+          title: 'Highlight | Elements | iamkey',
+        },
+        component: () => import('./views/elements/Highlight.vue'),
+        searchterms: 'highlight, promo, add',
+      },
+      {
+        path: 'feature',
+        name: 'Feature',
+        meta: {
+          title: 'Feature | Elements | iamkey',
+        },
+        component: () => import('./views/elements/Feature.vue'),
+        searchterms: 'highlight, promo, add',
+      },
+      {
         path: 'tables',
         name: 'Table Element',
         meta: {
@@ -1423,6 +1441,14 @@ const routes = [
           title: 'Competitor analysis | iamkey',
         },
         component: () => import('./views/standalone/competitor-analysis.vue'),
+      },
+      {
+        path: 'refer-to-standalone',
+        name: 'Movebutler refer to standalone conveyancing',
+        meta: {
+          title: 'Movebutler refer to standalone conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/refer.vue'),
       },
       {
         path: 'premium-conveyancing',
