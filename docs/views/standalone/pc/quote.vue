@@ -63,24 +63,21 @@
     </div>
 
     <div class="admin-panel">
-      <div class="d-flex align-items-center mb-2">
-        <i class="icon bg-success fa-location-dot me-3" aria-hidden="true"></i>
-        <strong class="me-3">Average search times:</strong>
+      
+      <span class="feature fa-location-dot d-flex align-items-center">
+        <strong>Average search times:</strong>
         <strong class="ms-auto">21 days</strong>
-      </div>
-      <hr class="border-1 mb-2" />
-      <div class="d-flex align-items-center mb-2">
-        <i class="icon bg-success fa-location-dot me-3" aria-hidden="true"></i>
-        <strong class="me-3">Average search times:</strong>
+      </span>
+      <span class="feature fa-location-dot d-flex align-items-center">
+        <strong>Average search times:</strong>
         <strong class="ms-auto">21 days</strong>
-      </div>
-      <hr class="border-1 mb-2" />
-      <div class="d-flex align-items-center mb-2">
-        <i class="icon bg-success fa-location-dot me-3" aria-hidden="true"></i>
-        <strong class="me-3">Average search times:</strong>
+      </span>
+      <span class="feature fa-location-dot d-flex align-items-center">
+        <strong>Average search times:</strong>
         <strong class="ms-auto">21 days</strong>
-      </div>
-      <hr class="border-1 mb-2" />
+      </span>
+
+
       <div class="admin-panel__footer bg-success mt-auto">
         <p>For the Sale transaction, the minimum forecasted time<br/> saving with Premium Conveyancing is:</p><strong class="h4">29 days saved</strong>
       </div>

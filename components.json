@@ -49,5 +49,7 @@
   "input",
   "input-range",
   "popover",
-  "tooltip"
+  "tooltip",
+  "video-modal"
+  "tag"
 ]

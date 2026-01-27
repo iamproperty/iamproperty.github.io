@@ -1,6 +1,8 @@
 @use 'sass:math';
 @use '_func' as *;
 
+@use './utilities/font-awesome-iso-fallbacks';
+
 @use './utilities/clearfix.scss';
 @use './utilities/visually-hidden.scss';
 @use './utilities/text-truncate.scss';
