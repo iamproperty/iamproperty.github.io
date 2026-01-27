@@ -101,6 +101,7 @@ dialog[open] {
     }
 
     @container (min-width: 36em) {
+      top: calc(var(--dialog-padding) - 0.75rem);
       right: calc(var(--dialog-padding) - 0.75rem);
     }
     
