@@ -1,13 +1,6 @@
 <script lang="ts" setup>
-  import { ref, onMounted, defineComponent } from 'vue'
-  import PCNav from './components/PCNav.vue';
-  import Table from '@/components/Table/TableNoSubmit.vue';
-  import Actionbar from '@/components/Actionbar/Actionbar.vue';
-  import Rankings from '@/components/Rankings/Rankings.vue';
-  import Search from '@/components/Search/Search.vue';
-  import InlineEdit from '@/components/InlineEdit/InlineEdit.vue';
-  import Multiselect from '@/components/Multiselect/Multiselect.vue';
   import VideoModal from '@/components/VideoModal/VideoModal.vue';
+  import Tooltip from '@/components/Tooltip/Tooltip.vue';
 </script>
 
 <template>
@@ -25,7 +18,7 @@
         <span class="badge">Eligible for Premium Conveyancing</span>
         <div class="highlight bg-success gradient-primary gradient-direction-angle">
           <p>£20 in Love2shop vouchers per Premium Conveyancing instruction</p>
-          <img src="/img/illustrations/branch.png" alt="" loading="lazy">
+          <img src="/img/illustrations/minimal-cost.png" alt="" loading="lazy">
         </div>
       </div>
     </div>
@@ -106,14 +99,17 @@
 
       <h2 class="h3">Service KPIs on completion</h2>
       <div class="highlight highlight--raised col-start-1 col-end-5 md-col-start-7 md-col-end-8 mb-2">
+        <Tooltip data-heading="CSAT:" title="Percentage of customers that are happy with their Premium Conveyancing service"><i class="fa-regular fa-info"></i></Tooltip>
         <span class="h2 pb-0">96%</span>
         <span class="h4">CSAT</span>
       </div>
       <div class="highlight highlight--raised col-start-6 col-end-12 md-col-start-9 md-col-end-12 mb-2">
+        <Tooltip data-heading="Fall through rate:" title="Percentage of fall throughs for customers using Premium Conveyancing service"><i class="fa-regular fa-info"></i></Tooltip>
         <span class="h2 pb-0">9%</span>
         <span class="h4">Fall through rate</span>
       </div>
       <div class="highlight highlight--raised  mb-1">
+        <Tooltip data-heading="Time to completion:" title="Average number of days taken to complete using the Premium Conveyancing service"><i class="fa-regular fa-info"></i></Tooltip>
         <span class="h2 pb-0">x days</span>
         <span class="h4">Avg. time to completion</span>
       </div>
