@@ -1,7 +1,5 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
-import { cardHTML, setupCard } from '../../modules/card.module';
-import iamMenu from '../menu/menu.component';
-import Modal from '../../../../src/components/Modal/Modal.vue';
+import { openModal, closeModal, closeButtonHtml } from '../../modules/modal';
 
 trackComponentRegistered('iam-card');
 
@@ -24,7 +22,7 @@ class iamModal extends HTMLElement {
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
     <dialog>
-      <button class="btn btn-compact btn-secondary fa-xmark-large" data-close>Close</button>
+      ${closeButtonHtml}
       <div class="scroll">
         <i class="fa-light fa-circle" aria-hidden="true">
           <i class="fa-regular fa-${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'info'}" aria-hidden="true"></i>
@@ -56,31 +54,10 @@ class iamModal extends HTMLElement {
     const modalType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'passive';
 
 
-
-
-    const openModal = (): void => {
-      dialog?.showModal();
-      dialog?.focus();
-
-      const closeEvent = new CustomEvent('modal-opened', {
-        bubbles: true,
-        cancelable: true,
-        detail: { modalId: id },
-      });
-
-      this.dispatchEvent(closeEvent);
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'openModal',
-        id: id,
-      });
-    }
-
     document.addEventListener('click', (e) => {
       
       if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
-        openModal();
+        openModal(id, this);
       }
     });
     
@@ -95,13 +72,13 @@ class iamModal extends HTMLElement {
     originalDialog?.addEventListener('command', (e) => {
 
       if (event.command == "close") {
-        closeModal();
+        closeModal(id, this);
       }
     });
 
     originalDialog?.addEventListener('close', (e) => {
 
-      closeModal();
+      closeModal(id, this);
     });
 
     // Move the submit button so that the slot functionality works
@@ -109,30 +86,12 @@ class iamModal extends HTMLElement {
       this.moveBefore(element, originalDialog);
     });
 
-    const closeModal = (): void => {
-      dialog?.close();
-      
-      const closeEvent = new CustomEvent('modal-closed', {
-        bubbles: true,
-        cancelable: true,
-        detail: { modalId: id },
-      });
-
-      this.dispatchEvent(closeEvent);
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'closeModal',
-        id: id,
-      });
-    }
-
     closeButton?.addEventListener('click', () => {
-      closeModal();
+      closeModal(id, this);
     });
 
     cancelButton?.addEventListener('click', () => {
-      closeModal();
+      closeModal(id, this);
     });
 
     agreedButton?.addEventListener('click', () => {
@@ -143,7 +102,7 @@ class iamModal extends HTMLElement {
 
       this.dispatchEvent(agreedEvent);
 
-      closeModal();
+      closeModal(id, this);
     });
     
     slottedAgreedButton?.addEventListener('click', () => {
@@ -154,11 +113,11 @@ class iamModal extends HTMLElement {
 
       this.dispatchEvent(agreedEvent);
 
-      closeModal();
+      closeModal(id, this);
     });
 
     this.addEventListener('close-modal', () => {
-      closeModal();
+      closeModal(id, this);
     });
 
     this.addEventListener('click', (event) => {
@@ -178,7 +137,7 @@ class iamModal extends HTMLElement {
           event.clientY > dialogDimensions.bottom
         ) {
           if (!event.target.closest('dialog *'))
-            closeModal(); // Weird bug when interacting with radio input fields within dialogs cuases it to close
+            closeModal(id, this); // Weird bug when interacting with radio input fields within dialogs cuases it to close
         }
       }
     });

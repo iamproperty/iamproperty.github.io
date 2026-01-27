@@ -14,6 +14,7 @@
     padding: var(--container-padding);
 
     grid-column: container !important;
+    container-type: inline-size;
     width: 100%;
 
     &:not(:has(.row)):has([class*='col-']) {

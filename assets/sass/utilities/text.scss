@@ -81,6 +81,11 @@
 
   .text-center {
     text-align: center !important;
+
+    > * {
+        
+      margin-inline: auto;
+    }
   }
 
   .text-decoration-none {

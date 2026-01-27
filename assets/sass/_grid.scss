@@ -211,7 +211,7 @@ $breakpoints: (
     }
   }
 
-  *:has([class*='order-']) > *:not([class*='order-']) {
+  *:has([class*='order-']:not([class*="border-"])) > *:not([class*='order-']) {
     order: 99;
   }
 
