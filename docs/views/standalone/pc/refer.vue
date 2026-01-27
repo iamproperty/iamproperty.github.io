@@ -16,13 +16,17 @@
 
   </nav>
   <main>
+
+    <div class="text-md-end">
+      <span class="badge">Eligible for Premium Conveyancing</span>
+    </div>
+        
     <div>
       <div class="md-col-end-6 ">
         <h1 class="h2 pb-3">Get exchange-ready faster</h1>
         <p class="lead">Cut transaction times by up to 5 weeks by applying Premium Conveyancing.</p>
       </div>
       <div class=" md-col-start-7">
-        <span class="badge">Eligible for Premium Conveyancing</span>
         <div class="highlight bg-success gradient-primary gradient-direction-angle">
           <p>£20 in Love2shop vouchers per Premium Conveyancing instruction</p>
           <img src="/img/illustrations/branch.png" alt="" loading="lazy">
@@ -121,7 +125,7 @@
 
     </div>
 
-    <VideoModal id="video" data-youtube="lROFZaJcVug"></VideoModal>
+    <VideoModal id="video" data-vimeo="1028915961"></VideoModal>
 
   </main>
 </template>

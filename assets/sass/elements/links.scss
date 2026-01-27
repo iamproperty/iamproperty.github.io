@@ -171,7 +171,7 @@
   // #endregion
 }
 
-:is(.youtube-link[data-youtube], .vimeo-link[data-vimeo]) {
+:is(.youtube-link, .vimeo-link) {
   position: relative;
 
   &:before {
