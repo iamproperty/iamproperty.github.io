@@ -14,23 +14,25 @@
     }
 
     &:has(> img){
-      padding-right: 12.5rem;
+      padding-right: 13rem;
       position: relative;
-      min-height: 10rem;
+      min-height: 8rem;
       align-items: center;
-      display: flex;
     }
 
     & > img {
-      width: 12.5rem;
+      width: 16rem;
       position: absolute;
       top: auto;
       left: auto;
       bottom: 0;
       right: 0;
-      margin-right: -2rem;
+      margin-right: -3rem;
       margin-bottom: -4rem!important;
+    }
 
+    p:last-child, p:has(+ img:last-child) {
+      padding-bottom: 0;
     }
 
     & > iam-tooltip:empty:first-child {

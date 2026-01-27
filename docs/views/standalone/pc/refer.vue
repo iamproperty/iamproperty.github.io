@@ -19,9 +19,9 @@
         <h1 class="h2 pb-3">Get exchange-ready faster</h1>
         <p class="lead">Cut transaction times by up to 5 weeks by applying Premium Conveyancing.</p>
       </div>
-      <div class=" md-col-start-7">
+      <div class=" md-col-start-8">
         <div class="highlight bg-success gradient-primary gradient-direction-angle">
-          <p>£20 in Love2shop vouchers per Premium Conveyancing instruction</p>
+          <p>£20 in Love2shop vouchers<wbr /> per Premium Conveyancing instruction</p>
           <img src="/img/illustrations/minimal-cost.png" alt="" loading="lazy">
         </div>
       </div>
@@ -65,6 +65,25 @@
 
         <strong class="h2 md-col-start-8">29 days saved</strong>
       </div>
+    </div>
+    <div class="admin-panel">
+      <div class="d-flex align-items-start mb-2">
+        
+        <h2 class="h4 me-auto pb-2">Eligibility</h2>
+        <span class="badge bg-danger mb-2">Not eligible<span class="d-none d-sm-inline"> for Premium Conveyancing</span></span>
+      </div>
+
+        <div class="list-wrapper">
+            <ul class="tick-list columns-sm-2">
+              <li class="tick--danger">Residential property type</li>
+              <li>Private Treaty onboarded route</li>
+              <li>No solicitor selected</li>
+
+                <li>Lead vendor is present</li>
+                <li>Lead vendor is not prospective</li>
+                <li>Lead vendor is individual legal type</li>
+            </ul>
+        </div>
     </div>
 
     <div class="container">
