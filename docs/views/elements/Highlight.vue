@@ -17,6 +17,11 @@
       <p>Current Skipton council local authority search times</p>
     </div>
 
+    <div class="bg-danger highlight ">
+      <span class="h4 pb-0">19 days</span>
+      <p>Current Skipton council local authority search times</p>
+    </div>
+
     <div class="highlight bg-success gradient-primary gradient-direction-angle">
       <p>£20 in Love2shop vouchers per Premium Conveyancing instruction</p>
       <img src="/img/illustrations/branch.png" alt="" loading="lazy">

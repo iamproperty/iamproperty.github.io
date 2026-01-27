@@ -53,7 +53,14 @@
 
     &:not(.bg-primary, .gradient-primary){
       
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
       background-color: color-mix(in oklab, var(--highlight-colour), var(--colour-mix, #FCFCFC) var(--tint)) !important;
+
+      & > * {
+        color-scheme: light;
+      }
     }
 
     &:not(.bg-primary, .gradient-primary, .highlight--raised){
