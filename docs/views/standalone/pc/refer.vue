@@ -70,11 +70,14 @@
       </div>
     </div>
 
-    <div class="btn__group mb-2">
+    <div class="container">
+      <div class="btn__group">
 
-      <button class="btn btn-primary">Refer premium conveyancing</button>
-      <button class="btn btn-secondary">Continue to transaction overview</button>
+        <button class="btn btn-primary">Refer premium conveyancing</button>
+        <button class="btn btn-secondary">Continue to transaction overview</button>
+      </div>
     </div>
+
 
     <span class="feature fa-rocket-launch md-col-span-4 md-col-start-1">
       <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
@@ -99,8 +102,6 @@
       </a>
     </div>
 
-    <VideoModal id="video" data-youtube="lROFZaJcVug"></VideoModal>
-
     <div class="md-col-start-7 grid">
 
       <h2 class="h3">Service KPIs on completion</h2>
@@ -119,6 +120,8 @@
       <small class="x-small pb-3">KPI figures from August 25</small>
 
     </div>
+
+    <VideoModal id="video" data-youtube="lROFZaJcVug"></VideoModal>
 
   </main>
 </template>
