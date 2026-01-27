@@ -25,7 +25,7 @@
         <span class="badge">Eligible for Premium Conveyancing</span>
         <div class="highlight bg-success gradient-primary gradient-direction-angle">
           <p>£20 in Love2shop vouchers per Premium Conveyancing instruction</p>
-          <img src="/img/illustrations/branch.png" alt="" loading="lazy">
+          <img src="/img/illustrations/minimal-cost.png" alt="" loading="lazy">
         </div>
       </div>
     </div>
