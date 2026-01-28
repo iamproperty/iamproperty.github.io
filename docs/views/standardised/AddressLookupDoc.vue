@@ -426,12 +426,12 @@
       </div>
     </div>
 
-    <Integration component="address-lookup" componentName="iam-address-lookup">
+    <Integration component="std-address-lookup" componentName="iam-std-address-lookup">
       <template #web-component>
         <pre><code>{{`<iam-std-address-lookup></iam-std-address-lookup>`}}</code></pre>
       </template>
       <template #vue-component>
-        <pre><code>{{`<script setup>import AddressLookup from '@/components/AddressLookup/AddressLookup.vue</script>
+        <pre><code>{{`<script setup>import AddressLookup from '@/components/STDAddressLookup/STDAddressLookup.vue</script>
         
 <STDAddressLookup></STDAddressLookup>
 `}}</code></pre>

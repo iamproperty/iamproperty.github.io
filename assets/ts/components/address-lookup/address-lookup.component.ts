@@ -114,6 +114,8 @@ class iamAddressLookup extends HTMLElement {
     const matchedAddressUse = this.shadowRoot.querySelector('.matched .use-matched');
     const matchedAddressEntered = this.shadowRoot.querySelector('.matched .use-entered');
 
+    let cacheSearchQuery = '';
+
     Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement) => {
       titleElement.innerHTML = title;
     });
@@ -252,6 +254,9 @@ class iamAddressLookup extends HTMLElement {
 
     const search = async (searchValue, paginate = false): any => {
 
+      if(searchValue == cacheSearchQuery)
+        return true;
+
       // check if postcode is valid
       const limit = this.hasAttribute('data-limit') ? parseInt(this.getAttribute('data-limit')) : 100;
       
@@ -308,6 +313,8 @@ class iamAddressLookup extends HTMLElement {
       // Create a new controller so it can be aborted if new fetch made
       window.controller[ajaxURL] = new AbortController();
       const { signal } = controller[ajaxURL];
+      // Cache the search value to prevent further calls
+      cacheSearchQuery = searchValue;
 
       try {
         return await fetch(ajaxURL, {
@@ -332,10 +339,24 @@ class iamAddressLookup extends HTMLElement {
               
               // Deal with agent platform response
               if (typeof address.attributes == 'object' && address.attributes.label) {
+                
+                if(address.id)
+                  address.attributes.id = address.id;
+
+                if(address.relationships)
+                  address.attributes = Object.assign(address.attributes, address.relationships);
+
+
                 const values = JSON.stringify(address.attributes);
                 listString += `<option data-values='${values}' >${address.attributes.label}</option>`;
               }
               else if (typeof address.value == 'object') {
+                if(address.id)
+                  address.attributes.id = address.id;
+
+                if(address.relationships)
+                  address.attributes = Object.assign(address.attributes, address.relationships);
+
                 const values = JSON.stringify(address.value);
                 listString += `<option data-values='${values}'>${address['label']}, ${postcode}</option>`;
               } else {
@@ -505,9 +526,6 @@ class iamAddressLookup extends HTMLElement {
 
       if (![40,38,13].includes(e.keyCode) && lookup.value.length >= minChars){
         const valid = await search(lookup.value);
-
-        console.log(errorMsg)
-        console.log(valid)
 
         if(valid != true){
           lookup?.classList.add('is-invalid');
