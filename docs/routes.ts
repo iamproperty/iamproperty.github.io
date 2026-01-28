@@ -825,6 +825,14 @@ const routes = [
         component: () => import('./views/form-components/PasswordDoc.vue'),
       },
       {
+        path: 'rating',
+        name: 'Rating',
+        meta: {
+          title: 'Rating | Components | iamkey',
+        },
+        component: () => import('./views/form-components/RatingDoc.vue'),
+      },
+      {
         path: 'tag',
         name: 'Tag',
         meta: {
