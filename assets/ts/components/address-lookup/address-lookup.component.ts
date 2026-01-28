@@ -291,7 +291,7 @@ class iamAddressLookup extends HTMLElement {
 
       // Create a new controller so it can be aborted if new fetch made
       window.controller[ajaxURL] = new AbortController();
-      const { signal } = controller[ajaxURL];
+      const { signal } = window.controller[ajaxURL];
 
       try {
         return await fetch(ajaxURL, {
@@ -382,9 +382,31 @@ class iamAddressLookup extends HTMLElement {
             return true;
           });
       } catch (error) {
+        if (error?.name === 'AbortError') {
+          return true;
+        }
         console.log(error);
         return 'There has been a problem. Please try again in a few moments.';
       }
+    };
+
+    let searchTimer: number | undefined;
+
+    const triggerSearch = (raw: string, paginate = false, immediate = false) => {
+      const value = (raw ?? '').trim();
+
+      if (value.length < minChars) return;
+
+      if (immediate) {
+        if (searchTimer) window.clearTimeout(searchTimer);
+        void search(value, paginate);
+        return;
+      }
+
+      if (searchTimer) window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(() => {
+        void search(value, paginate);
+      }, 200);
     };
 
     // #endregion
@@ -487,34 +509,9 @@ class iamAddressLookup extends HTMLElement {
       lookupWrapper.scrollIntoView();
     });
 
-    lookup.addEventListener('keyup', async (e) => {
-      if (![40, 38, 13].includes(e.keyCode) && lookup.value.length >= minChars) {
-        const valid = await search(lookup.value);
-
-        if (valid != true) {
-          lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
-        }
-      }
-
-      if (e.keyCode == 13) {
-        const valid = await search(lookup.value);
-
-        if (valid != true) {
-          lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
-        }
-      }
-    });
-
-    lookup.addEventListener('change', async () => {
-      if (lookup.value.length >= minChars) {
-        const valid = await search(lookup.value);
-
-        if (valid != true) {
-          lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
-        }
+    lookup.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        triggerSearch(lookup.value, false, true);
       }
     });
 
@@ -531,7 +528,10 @@ class iamAddressLookup extends HTMLElement {
         }
         list?.classList.remove('loading', 'noresults');
         cacheSearchQuery = '';
+        return;
       }
+
+      triggerSearch(v);
     });
 
     list.addEventListener('click', (e) => {
@@ -553,22 +553,8 @@ class iamAddressLookup extends HTMLElement {
       atleastoneValidate();
     });
 
-    postcodeSubmit?.addEventListener('click', async () => {
-      const valid = await search(lookup.value);
-
-      if (valid != true) {
-        lookup?.classList.add('is-invalid');
-        errorMsg?.innerHTML = valid;
-      }
-    });
-
-    this?.addEventListener('search', async () => {
-      const valid = await search(lookup.value);
-
-      if (valid != true) {
-        lookup?.classList.add('is-invalid');
-        errorMsg?.innerHTML = valid;
-      }
+    postcodeSubmit?.addEventListener('click', () => {
+      triggerSearch(lookup.value, false, true);
     });
 
     this?.addEventListener('close-button-pressed', () => {
@@ -582,16 +568,12 @@ class iamAddressLookup extends HTMLElement {
       lookup.focus();
     });
 
-    paginationWrapper?.addEventListener('click', async (e) => {
-      if (e.target.tagName == 'BUTTON') {
-        const valid = await search(lookup.value, true);
-
-        if (valid != true) {
-          lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
-        }
+    paginationWrapper?.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') {
+        triggerSearch(lookup.value, true, true);
       }
     });
+
     // #endregion
 
     // #region Matched address
