@@ -55,10 +55,10 @@ document.addEventListener('DOMContentLoaded', async (): void => {
   helpers.addBodyClasses(document.body);
   helpers.addGlobalEvents(document.body);
 
-  extendDialogs(document.body);
+  //extendDialogs(document.body);
   
 
-  videoSupport(document.body);
+  //videoSupport(document.body);
 
   /*
   const prefix = 'iam';

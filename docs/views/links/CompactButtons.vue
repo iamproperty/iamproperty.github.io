@@ -16,7 +16,8 @@
     'fa-down',
     'fa-chevron-down',
     'fa-plus',
-    'fa-bars'
+    'fa-bars',
+    'fa-edit'
   ];
 
 </script>
