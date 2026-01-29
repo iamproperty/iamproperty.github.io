@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import advancedSelect from '../../modules/advanced-select';
-import {isValidPostcode} from '../../modules/helpers';
+import { isValidPostcode } from '../../modules/helpers';
 
 // Data layer Web component created
 declare global {
@@ -22,14 +22,14 @@ class iamAddressLookup extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    
+
     const loadCSS = `@import "${assetLocation}/css/components/address-lookup.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
     ${loadCSS}
-    
+
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
     <div class="wrapper">
@@ -46,11 +46,10 @@ class iamAddressLookup extends HTMLElement {
         <div>
         <label class="mb-1"><span class="title text-lowercase"></span>
           <span>
-          <input type="text" name="postcode" class="${this.hasAttribute('data-input-class') ? this.getAttribute('data-input-class') : ''}" list="address-lookup__addressess" autocomplete="one-time-code" aria-autocomplete="none" placeholder="${this?.hasAttribute('data-placeholder') ? this?.getAttribute('data-placeholder') : 'Postcode'}" value="${this.hasAttribute('data-postcode-value')? this.getAttribute('data-postcode-value') : ''}" part="input" />
+          <input type="text" name="postcode" class="${this.hasAttribute('data-input-class') ? this.getAttribute('data-input-class') : ''}" list="address-lookup__addressess" autocomplete="one-time-code" aria-autocomplete="none" placeholder="${this?.hasAttribute('data-placeholder') ? this?.getAttribute('data-placeholder') : 'Postcode'}" value="${this.hasAttribute('data-postcode-value') ? this.getAttribute('data-postcode-value') : ''}" part="input" />
           <button id="postcode__submit" class="suffix fa-regular fa-search" part="suffix"></button>
           </span>
         </label>
-    
           <span class="invalid-feedback mb-2" id="invalid-feedback-address-lookup">${this.hasAttribute('data-error-msg') ? this.getAttribute('data-error-msg') : 'Required address fields'}</span>
 
           <div class="datalist__wrapper ${this.hasAttribute('data-list-class') ? this.getAttribute('data-list-class') : ''}" tabindex="0" part="list-wrapper">
@@ -70,7 +69,7 @@ class iamAddressLookup extends HTMLElement {
 
       <div class="manual-address pb-2 js-hide">
         <slot part="contents"></slot>
-        <button class="btn btn-tertiary switch-to-lookup-btn" type="button" part="button">${this.hasAttribute('data-postcode-lookup-label')? this.getAttribute('data-postcode-lookup-label') : 'Use postcode lookup'}</button>
+        <button class="btn btn-tertiary switch-to-lookup-btn" type="button" part="button">${this.hasAttribute('data-postcode-lookup-label') ? this.getAttribute('data-postcode-lookup-label') : 'Use postcode lookup'}</button>
         <slot name="after"></slot>
       </div>
       <div class="pre-filled p-2 js-hide">
@@ -94,7 +93,9 @@ class iamAddressLookup extends HTMLElement {
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
     const preFilledWrapper = this.shadowRoot.querySelector('.pre-filled');
-    const list = this.querySelector('datalist[slot="preloadedList"]') ? this.querySelector('datalist[slot="preloadedList"]') : this.shadowRoot.querySelector('.datalist__wrapper datalist');
+    const list = this.querySelector('datalist[slot="preloadedList"]')
+      ? this.querySelector('datalist[slot="preloadedList"]')
+      : this.shadowRoot.querySelector('.datalist__wrapper datalist');
     const listWrapper = this.shadowRoot.querySelector('.datalist__wrapper');
     const switchManualBtn = this.shadowRoot.querySelector('.switch-to-manual-btn');
     const switchLookupBtn = this.shadowRoot.querySelector('.switch-to-lookup-btn');
@@ -122,48 +123,38 @@ class iamAddressLookup extends HTMLElement {
 
     // #region functions
     function checkFilled(component): void {
-      
       const preFilledAddress = component.shadowRoot.querySelector('.pre-filled-address');
       let preFilled = true;
       preFilledAddress.innerHTML = '';
 
-      
       Array.from(
         component.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')
       ).forEach((input) => {
         let value = input.hasAttribute('data-value') ? input.getAttribute('data-value') : input.value;
 
-        if(input.tagName == "SELECT" && component.querySelector(`[value="${input.value}"][data-value]`))
+        if (input.tagName == 'SELECT' && component.querySelector(`[value="${input.value}"][data-value]`))
           value = component.querySelector(`[value="${input.value}"][data-value]`).getAttribute('data-value');
 
-        if (!value){
-
-          if(input.closest('.atleastone')){
-
-            if(!atleastone.querySelector('input:valid, input.is-valid')){
+        if (!value) {
+          if (input.closest('.atleastone')) {
+            if (!atleastone.querySelector('input:valid, input.is-valid')) {
               preFilled = false;
             }
-          }
-          else {
+          } else {
             preFilled = false;
           }
-          
-        } 
-        else {
+        } else {
           preFilledAddress.innerHTML += value + (/^-?\d+$/.test(value) ? ' ' : ', ');
         }
       });
 
       preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(0, -2);
 
-
       // If has label then use that
 
       if (preFilled) {
-
-        if(component.querySelector('[name="label"]'))
+        if (component.querySelector('[name="label"]'))
           preFilledAddress.innerHTML = component.querySelector('[name="label"]').value;
-
 
         // If has label then use that
 
@@ -174,13 +165,10 @@ class iamAddressLookup extends HTMLElement {
     }
 
     function openManualWrapper(): void {
-
-      
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
       Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input) => {
-
         input.setAttribute('required', 'true');
       });
 
@@ -188,50 +176,42 @@ class iamAddressLookup extends HTMLElement {
     }
 
     const atleastoneValidate = (): void => {
-
-      if(atleastone.querySelector('input:valid, input.is-valid')){
-        Array.from(atleastone.querySelectorAll('input')).forEach(element => {
+      if (atleastone.querySelector('input:valid, input.is-valid')) {
+        Array.from(atleastone.querySelectorAll('input')).forEach((element) => {
           element.removeAttribute('required');
         });
-      }
-      else {
+      } else {
         Array.from(atleastone.querySelectorAll('input')).forEach((input) => {
           input.setAttribute('required', 'true');
         });
       }
-    }
-
+    };
 
     const fillInputs = (values): void => {
-  
       lookupWrapper.classList.add('js-hide');
       manualWrapper.classList.remove('js-hide');
 
       Object.keys(values).forEach((key) => {
         const value = values[key];
         let input = false;
-        if (this.querySelector(`[data-name="${key}"]`))
-          input = this.querySelector(`[data-name="${key}"]`);
-        else if (this.querySelector(`[data-name-alt="${key}"]`))
-          input = this.querySelector(`[data-name-alt="${key}"]`);
-        else if (this.querySelector(`[name="${key}"]`))
-          input = this.querySelector(`[name="${key}"]`);
+        if (this.querySelector(`[data-name="${key}"]`)) input = this.querySelector(`[data-name="${key}"]`);
+        else if (this.querySelector(`[data-name-alt="${key}"]`)) input = this.querySelector(`[data-name-alt="${key}"]`);
+        else if (this.querySelector(`[name="${key}"]`)) input = this.querySelector(`[name="${key}"]`);
 
-        if(input && input.tagName == "SELECT" && value.id){
+        if (input && input.tagName == 'SELECT' && value.id) {
           input.value = value.id;
-          
-        }
-        else if(input && value != ''){
-          
+        } else if (input && value != '') {
           input.value = value;
 
-          if(input.hasAttribute('data-readonly')){
+          if (input.hasAttribute('data-readonly')) {
             input.setAttribute('readonly', true);
             input.classList.add('is-valid');
           }
-        }
-        else if(value != ""){
-          this.insertAdjacentHTML('beforeend',`<input type="hidden" class="inserted" data-hidden name="${key}" value="${value}" />`);
+        } else if (value != '') {
+          this.insertAdjacentHTML(
+            'beforeend',
+            `<input type="hidden" class="inserted" data-hidden name="${key}" value="${value}" />`
+          );
         }
 
         if (this.querySelector(`[data-name-2="${key}"]`))
@@ -243,49 +223,48 @@ class iamAddressLookup extends HTMLElement {
       });
       lookup.removeAttribute('required');
 
-      if(atleastone){
-
+      if (atleastone) {
         atleastoneValidate();
       }
 
-      if(!this.hasAttribute('data-force-manual'))
-        checkFilled(this);
-    }
+      if (!this.hasAttribute('data-force-manual')) checkFilled(this);
+    };
 
     const search = async (searchValue, paginate = false): any => {
-
-      if(searchValue == cacheSearchQuery)
-        return true;
+      if (!paginate && searchValue === cacheSearchQuery) {
+        if (list?.children?.length) {
+          list?.classList.remove('loading');
+          list?.classList.remove('noresults');
+          listWrapper?.focus();
+          list?.querySelector('option')?.focus();
+          return true;
+        }
+      }
 
       // check if postcode is valid
       const limit = this.hasAttribute('data-limit') ? parseInt(this.getAttribute('data-limit')) : 100;
-      
-      if(paginate)
-        pageNumber++;
-      else
-        pageNumber = 1;
+
+      if (paginate) pageNumber++;
+      else pageNumber = 1;
 
       let ajaxURL = this.getAttribute('data-url');
       ajaxURL += `${encodeURI(searchValue)}&page[number]=${pageNumber}&page[size]=${limit}`;
-      
-      if(this.hasAttribute('data-url-2')){
+
+      if (this.hasAttribute('data-url-2')) {
         ajaxURL += this.getAttribute('data-url-2');
       }
 
       const postcode = searchValue; // TODO: remove when postcode comes from response
 
-      if(this.hasAttribute('data-postcode')){
-        
-        if (!isValidPostcode(searchValue)){
-          return "Invalid postcode, please enter a valid postcode";
-        }
-        else {
-          if(!paginate)
-            list.innerHTML = "";
+      if (this.hasAttribute('data-postcode')) {
+        if (!isValidPostcode(searchValue)) {
+          return 'Invalid postcode, please enter a valid postcode';
+        } else {
+          if (!paginate) list.innerHTML = '';
           list?.classList.add('loading');
           list?.classList.remove('noresults');
           lookup?.classList.remove('is-invalid');
-          errorMsg?.innerHTML = "";
+          errorMsg?.innerHTML = '';
           list?.classList.remove('show-welsh-banner');
 
           Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
@@ -312,9 +291,7 @@ class iamAddressLookup extends HTMLElement {
 
       // Create a new controller so it can be aborted if new fetch made
       window.controller[ajaxURL] = new AbortController();
-      const { signal } = controller[ajaxURL];
-      // Cache the search value to prevent further calls
-      cacheSearchQuery = searchValue;
+      const { signal } = window.controller[ajaxURL];
 
       try {
         return await fetch(ajaxURL, {
@@ -336,25 +313,19 @@ class iamAddressLookup extends HTMLElement {
             const addresses = response['data'] ? response['data'] : response;
 
             addresses.forEach((address) => {
-              
               // Deal with agent platform response
               if (typeof address.attributes == 'object' && address.attributes.label) {
-                
-                if(address.id)
-                  address.attributes.id = address.id;
+                if (address.id) address.attributes.id = address.id;
 
-                if(address.relationships)
+                if (address.relationships)
                   address.attributes = Object.assign(address.attributes, address.relationships);
-
 
                 const values = JSON.stringify(address.attributes);
                 listString += `<option data-values='${values}' >${address.attributes.label}</option>`;
-              }
-              else if (typeof address.value == 'object') {
-                if(address.id)
-                  address.attributes.id = address.id;
+              } else if (typeof address.value == 'object') {
+                if (address.id) address.attributes.id = address.id;
 
-                if(address.relationships)
+                if (address.relationships)
                   address.attributes = Object.assign(address.attributes, address.relationships);
 
                 const values = JSON.stringify(address.value);
@@ -375,37 +346,35 @@ class iamAddressLookup extends HTMLElement {
                   listString += `<option data-values='${values}'>${itemString}, ${postcode}</option>`; // TODO postcode should come from the response
                 }
               }
-
-
             });
 
-            if(paginate)
-              list.innerHTML += listString;
-            else
-              list.innerHTML = listString;
+            if (paginate) list.innerHTML += listString;
+            else list.innerHTML = listString;
 
-            if(addresses.length){
+            // Cache the search value to prevent further calls
+            cacheSearchQuery = searchValue;
+
+            if (addresses.length) {
               list?.classList.remove('loading');
-              
-            }
-            else {
-              
+            } else {
               list?.classList.remove('loading');
               list?.classList.add('noresults');
             }
 
             // pagination
-            if(response.meta && response.meta.current_page && response.meta.total_pages && response.meta.total_pages > response.meta.current_page){
-
-              paginationWrapper?.innerHTML = `<div class="bg-light text-center p-2"><p class="m-0">Showing 1-${response.meta.current_page * limit} of ${response.meta.total_results} addresses <br /><button type="button" data-next="${response.meta.current_page+1}" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-eye me-1"></i>Show more addresses</button></p></div>`;
-            }
-            else {
+            if (
+              response.meta &&
+              response.meta.current_page &&
+              response.meta.total_pages &&
+              response.meta.total_pages > response.meta.current_page
+            ) {
+              paginationWrapper?.innerHTML = `<div class="bg-light text-center p-2"><p class="m-0">Showing 1-${response.meta.current_page * limit} of ${response.meta.total_results} addresses <br /><button type="button" data-next="${response.meta.current_page + 1}" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-eye me-1"></i>Show more addresses</button></p></div>`;
+            } else {
               paginationWrapper?.innerHTML = '';
             }
 
-            if(response.meta && response.meta.welsh_language){
-                      
-              list?.classList.add('show-welsh-banner');     
+            if (response.meta && response.meta.welsh_language) {
+              list?.classList.add('show-welsh-banner');
             }
             listWrapper?.focus();
             list?.querySelector('option')?.focus();
@@ -413,22 +382,42 @@ class iamAddressLookup extends HTMLElement {
             return true;
           });
       } catch (error) {
-        console.log(error)
-        return "There has been a problem. Please try again in a few moments.";
+        if (error?.name === 'AbortError') {
+          return true;
+        }
+        console.log(error);
+        return 'There has been a problem. Please try again in a few moments.';
       }
+    };
+
+    let searchTimer: number | undefined;
+
+    const triggerSearch = (raw: string, paginate = false, immediate = false) => {
+      const value = (raw ?? '').trim();
+
+      if (value.length < minChars) return;
+
+      if (immediate) {
+        if (searchTimer) window.clearTimeout(searchTimer);
+        void search(value, paginate);
+        return;
+      }
+
+      if (searchTimer) window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(() => {
+        void search(value, paginate);
+      }, 200);
     };
 
     // #endregion
 
-    // #region check attributes and trigger functions 
-    if(!this.hasAttribute('data-force-manual'))
-      checkFilled(this);
+    // #region check attributes and trigger functions
+    if (!this.hasAttribute('data-force-manual')) checkFilled(this);
 
     this.addEventListener('filled', () => {
-      if(!this.hasAttribute('data-force-manual'))
-        checkFilled(this);
+      if (!this.hasAttribute('data-force-manual')) checkFilled(this);
     });
-    
+
     if (this.hasAttribute('data-use')) {
       const useLabel = this.hasAttribute('data-use-label') ? this.getAttribute('data-use-label') : 'Use saved address';
       const useCheckbox = `<div><input type="checkbox" name="use" id="use" value="yes"><label for="use">${useLabel}</label></div>`;
@@ -444,7 +433,7 @@ class iamAddressLookup extends HTMLElement {
             manualWrapper.classList.remove('js-hide');
 
             const values = JSON.parse(this.getAttribute('data-use'));
-            
+
             Object.keys(values).forEach((key) => {
               const value = values[key];
               if (this.querySelector(`[data-name="${key}"]`)) this.querySelector(`[data-name="${key}"]`).value = value;
@@ -454,8 +443,7 @@ class iamAddressLookup extends HTMLElement {
         }
       });
 
-
-      if(this.hasAttribute('data-use-default')){
+      if (this.hasAttribute('data-use-default')) {
         lookupWrapper.querySelector('[name="use"]').checked = true;
 
         const values = JSON.parse(this.getAttribute('data-use'));
@@ -467,13 +455,12 @@ class iamAddressLookup extends HTMLElement {
       fillInputs({});
     }
 
-    if(this.classList.contains('show-pagination'))
+    if (this.classList.contains('show-pagination'))
       paginationWrapper?.innerHTML = `<div class="bg-light text-center p-2"><p class="m-0">Showing 1-500 of 585 addresses <br /><button type="button" data-next="2" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-eye me-1"></i>Show more addresses</button></p></div>`;
-      
-    if(this.classList.contains('scroll-to-bottom-results'))
-      paginationWrapper.scrollIntoView({container: 'nearest'});
+
+    if (this.classList.contains('scroll-to-bottom-results')) paginationWrapper.scrollIntoView({ container: 'nearest' });
     // #endregion
-  
+
     // #region event listeners
     preFilledAddressBtn.addEventListener('click', () => {
       preFilledWrapper.classList.add('js-hide');
@@ -485,18 +472,18 @@ class iamAddressLookup extends HTMLElement {
       lookupWrapper.classList.remove('js-hide');
       manualWrapper.classList.add('js-hide');
 
-      list.innerHTML = "";
+      list.innerHTML = '';
       list?.classList.remove('loading');
       list?.classList.remove('noresults');
       lookup?.classList.remove('is-invalid');
-      errorMsg?.innerHTML = "";
+      errorMsg?.innerHTML = '';
       list?.classList.remove('show-welsh-banner');
 
       lookup.focus();
-      lookup.value = "";
+      lookup.value = '';
 
-      if(lookup?.hasAttribute('data-placeholder'))
-        lookup.setAttribute('placeholder',lookup?.getAttribute('data-placeholder'));
+      if (lookup?.hasAttribute('data-placeholder'))
+        lookup.setAttribute('placeholder', lookup?.getAttribute('data-placeholder'));
 
       const updateEvent = new CustomEvent('switch-to-lookup');
       this.dispatchEvent(updateEvent);
@@ -522,43 +509,33 @@ class iamAddressLookup extends HTMLElement {
       lookupWrapper.scrollIntoView();
     });
 
-    lookup.addEventListener('keyup', async (e) => {
-
-      if (![40,38,13].includes(e.keyCode) && lookup.value.length >= minChars){
-        const valid = await search(lookup.value);
-
-        if(valid != true){
-          lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
-        }
-      }
-        
-      if (e.keyCode == 13){
-        const valid = await search(lookup.value);
-
-        if(valid != true){
-          lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
-        }
+    lookup.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        triggerSearch(lookup.value, false, true);
       }
     });
 
-    lookup.addEventListener('change', async () => {
+    lookup.addEventListener('input', () => {
+      lookup.classList.remove('is-invalid');
+      if (errorMsg) errorMsg.innerHTML = '';
 
-      if (lookup.value.length >= minChars) {
+      const v = (lookup.value ?? '').trim();
 
-        const valid = await search(lookup.value);
-
-        if(valid != true){
-          lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
+      if (v.length < minChars) {
+        list.innerHTML = '';
+        if (paginationWrapper) {
+          paginationWrapper.innerHTML = '';
         }
+        list?.classList.remove('loading', 'noresults');
+        cacheSearchQuery = '';
+        return;
       }
+
+      triggerSearch(v);
     });
 
     list.addEventListener('click', (e) => {
-      if(e.target.tagName == "OPTION"){
-
+      if (e.target.tagName == 'OPTION') {
         const values = JSON.parse(e.target.getAttribute('data-values'));
 
         fillInputs(values);
@@ -569,71 +546,44 @@ class iamAddressLookup extends HTMLElement {
     });
 
     atleastone?.addEventListener('input', (e) => {
-
       Array.from(atleastone.querySelectorAll('[data-required]')).forEach((input) => {
         input.setAttribute('required', 'true');
       });
-      
 
       atleastoneValidate();
     });
 
-    postcodeSubmit?.addEventListener('click', async () => {
-      const valid = await search(lookup.value);
-
-      if(valid != true){
-        lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
-      }
-    });
-
-    this?.addEventListener('search', async () => {
-      const valid = await search(lookup.value);
-
-      if(valid != true){
-        lookup?.classList.add('is-invalid');
-          errorMsg?.innerHTML = valid;
-      }
+    postcodeSubmit?.addEventListener('click', () => {
+      triggerSearch(lookup.value, false, true);
     });
 
     this?.addEventListener('close-button-pressed', () => {
-
-      list.innerHTML = "";
+      list.innerHTML = '';
       list?.classList.remove('loading');
       list?.classList.remove('noresults');
       lookup?.classList.remove('is-invalid');
-      errorMsg?.innerHTML = "";
+      errorMsg?.innerHTML = '';
       list?.classList.remove('show-welsh-banner');
 
       lookup.focus();
     });
-        
-    paginationWrapper?.addEventListener('click', async (e) => {
 
-      if(e.target.tagName == "BUTTON"){
-
-        const valid = await search(lookup.value, true);
-
-        if(valid != true){
-          lookup?.classList.add('is-invalid');
-            errorMsg?.innerHTML = valid;
-        }
+    paginationWrapper?.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') {
+        triggerSearch(lookup.value, true, true);
       }
     });
+
     // #endregion
 
     // #region Matched address
 
-    if(this.hasAttribute('data-matched')){
-
+    if (this.hasAttribute('data-matched')) {
       matchedAddressWrapper?.classList.remove('d-none');
 
-
-      if(this.hasAttribute('data-matched-label'))
-        matchedAddress?.innerHTML = this.getAttribute('data-matched-label');
+      if (this.hasAttribute('data-matched-label')) matchedAddress?.innerHTML = this.getAttribute('data-matched-label');
 
       matchedAddressEntered?.addEventListener('click', () => {
-
         matchedAddressWrapper?.remove();
 
         const useCheckbox = this.shadowRoot?.querySelector('[name="use"]');
@@ -643,19 +593,17 @@ class iamAddressLookup extends HTMLElement {
         manualWrapper.classList.remove('js-hide');
 
         const values = JSON.parse(this.getAttribute('data-use'));
-        
+
         Object.keys(values).forEach((key) => {
           const value = values[key];
           if (this.querySelector(`[data-name="${key}"]`)) this.querySelector(`[data-name="${key}"]`).value = value;
           else if (this.querySelector(`[name="${key}"]`)) this.querySelector(`[name="${key}"]`).value = value;
         });
-        
+
         checkFilled(this);
       });
 
-      
       matchedAddressUse?.addEventListener('click', () => {
-
         matchedAddressWrapper?.remove();
 
         const values = JSON.parse(this.getAttribute('data-matched'));
@@ -663,8 +611,7 @@ class iamAddressLookup extends HTMLElement {
         fillInputs(values);
         checkFilled(this);
       });
-    }
-    else {
+    } else {
       matchedAddressWrapper?.remove();
     }
     // #endregion
@@ -677,7 +624,6 @@ class iamAddressLookup extends HTMLElement {
   }
 
   attributeChangedCallback(attrName, oldVal, newVal): void {
-
     const addressComponent = this.querySelector('iam-address-lookup');
 
     switch (attrName) {
