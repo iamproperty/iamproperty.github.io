@@ -211,27 +211,6 @@
     </Modal>
     <!-- #endregion -->
 
-
-
-    <div class="container pb-5 mb-5">
-      <h4>Preview</h4>
-      <button command="show-modal" commandfor="modal-passive2" class="btn btn-secondary">Open Modal</button>
-    </div>
-
-    <Modal class="modal--lg" id="modal-passive2" @agreed="handleAgreed">
-  
-      <span class="h3">Close case</span>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
-        enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.
-      </p>
-
-      <div class="btn__group text-end">
-        <button class="btn btn-secondary" command="close" commandfor="modal-passive2">Cancel</button>
-        <button class="btn btn-primary" type="submit">Close case</button>
-      </div>
-    </Modal>
-
     <!-- #region Transactional -->
     <div class="container" id="transactional">
       <h3>Transactional</h3>
