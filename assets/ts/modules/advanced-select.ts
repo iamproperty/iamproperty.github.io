@@ -64,16 +64,20 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   displayInputField.addEventListener('input', function () {
     displayInputField.removeAttribute('data-value');
     currentFocus = -1;
-    const text = displayInputField.value.toUpperCase();
-    for (const option of datalist.options) {
-      if (option.value.toUpperCase().indexOf(text) > -1) {
-        option.style.display = 'block';
-        option.classList.remove('hide');
-      } else {
-        option.style.display = 'none';
-        option.classList.add('hide');
-      }
+
+    if(advancedSelect.tagName != "IAM-ADDRESS-LOOKUP"){
+      const text = displayInputField.value.toUpperCase();
+      for (const option of datalist.options) {
+        if (option.value.toUpperCase().indexOf(text) > -1) {
+          option.style.display = 'block';
+          option.classList.remove('hide');
+        } else {
+          option.style.display = 'none';
+          option.classList.add('hide');
+        }
+      }      
     }
+
   });
 
   advancedSelect.addEventListener('keydown', function (e) {

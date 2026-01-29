@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "7.6.3--beta3",
+  "version": "7.6.3--beta4",
   "scripts": {
     "temp": "rollup --environment COMPONENT:carousel --config rollup-component.config.cjs --sourcemap",
     "reload": "vite --host",
