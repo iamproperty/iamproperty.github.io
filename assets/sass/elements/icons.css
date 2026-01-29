@@ -1,4 +1,16 @@
 @layer elements {
+  .icon {
+    font-size: 1rem;
+    font-family: "Font Awesome 6 Pro";
+    font-weight: 400;
+    font-style: normal;
+
+    &:before {
+      
+        content: var(--fa);
+    }
+  }
+
   .icon--xs {
     font-size: 1rem;
   }
@@ -23,8 +35,14 @@
     font-weight: 400;
   }
 
-  .rounded-circle[class*='fa-'][class*='bg-'] {
+  .icon[class*='fa-'][class*='bg-'] {
     aspect-ratio: 1 / 1;
-    width: calc(1lh + 1rem);
+    width: calc(1lh + 0.5rem);
+    min-width: calc(1lh + 0.5rem);
+    max-width: calc(1lh + 0.5rem);
+    text-align: center;
+    padding: 0.25rem;
+    border-radius: 50% !important;
+    display: inline-block;
   }
 }

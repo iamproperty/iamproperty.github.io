@@ -628,8 +628,8 @@ slot[name='menus'] {
 }
 
 ::slotted(.nav--menu.open) {
-  width: calc(#{rem(375)} - var(--modifier));
-  left: calc(100% - (#{rem(375)} - var(--scrollbar-width) - var(--modifier)));
+  width: calc(#{rem(375)} - var(--modifier, 0px));
+  left: calc(100% - (#{rem(375)} - var(--scrollbar-width, 0px) - var(--modifier, 0px)));
   -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   pointer-events: all;

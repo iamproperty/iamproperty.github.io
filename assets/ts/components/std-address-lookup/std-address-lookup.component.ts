@@ -2,1502 +2,1502 @@ import iamAddressLookup from '../address-lookup/address-lookup.component';
 
 const countries = [
   {
-    "id": "urn:iamproperty:country:AF",
+    "id": "urn:als:country:AF",
     "country_name": "Afghanistan"
   },
   {
-    "id": "urn:iamproperty:country:AX",
+    "id": "urn:als:country:AX",
     "country_name": "Aland Islands"
   },
   {
-    "id": "urn:iamproperty:country:AL",
+    "id": "urn:als:country:AL",
     "country_name": "Albania"
   },
   {
-    "id": "urn:iamproperty:country:DZ",
+    "id": "urn:als:country:DZ",
     "country_name": "Algeria"
   },
   {
-    "id": "urn:iamproperty:country:AS",
+    "id": "urn:als:country:AS",
     "country_name": "American Samoa"
   },
   {
-    "id": "urn:iamproperty:country:AD",
+    "id": "urn:als:country:AD",
     "country_name": "Andorra"
   },
   {
-    "id": "urn:iamproperty:country:AO",
+    "id": "urn:als:country:AO",
     "country_name": "Angola"
   },
   {
-    "id": "urn:iamproperty:country:AI",
+    "id": "urn:als:country:AI",
     "country_name": "Anguilla"
   },
   {
-    "id": "urn:iamproperty:country:AQ",
+    "id": "urn:als:country:AQ",
     "country_name": "Antarctica"
   },
   {
-    "id": "urn:iamproperty:country:AG",
+    "id": "urn:als:country:AG",
     "country_name": "Antigua and Barbuda"
   },
   {
-    "id": "urn:iamproperty:country:AR",
+    "id": "urn:als:country:AR",
     "country_name": "Argentina"
   },
   {
-    "id": "urn:iamproperty:country:AM",
+    "id": "urn:als:country:AM",
     "country_name": "Armenia"
   },
   {
-    "id": "urn:iamproperty:country:AW",
+    "id": "urn:als:country:AW",
     "country_name": "Aruba"
   },
   {
-    "id": "urn:iamproperty:country:AU",
+    "id": "urn:als:country:AU",
     "country_name": "Australia"
   },
   {
-    "id": "urn:iamproperty:country:AT",
+    "id": "urn:als:country:AT",
     "country_name": "Austria"
   },
   {
-    "id": "urn:iamproperty:country:AZ",
+    "id": "urn:als:country:AZ",
     "country_name": "Azerbaijan"
   },
   {
-    "id": "urn:iamproperty:country:BS",
+    "id": "urn:als:country:BS",
     "country_name": "Bahamas"
   },
   {
-    "id": "urn:iamproperty:country:BH",
+    "id": "urn:als:country:BH",
     "country_name": "Bahrain"
   },
   {
-    "id": "urn:iamproperty:country:BD",
+    "id": "urn:als:country:BD",
     "country_name": "Bangladesh"
   },
   {
-    "id": "urn:iamproperty:country:BB",
+    "id": "urn:als:country:BB",
     "country_name": "Barbados"
   },
   {
-    "id": "urn:iamproperty:country:BY",
+    "id": "urn:als:country:BY",
     "country_name": "Belarus"
   },
   {
-    "id": "urn:iamproperty:country:BE",
+    "id": "urn:als:country:BE",
     "country_name": "Belgium"
   },
   {
-    "id": "urn:iamproperty:country:BZ",
+    "id": "urn:als:country:BZ",
     "country_name": "Belize"
   },
   {
-    "id": "urn:iamproperty:country:BJ",
+    "id": "urn:als:country:BJ",
     "country_name": "Benin"
   },
   {
-    "id": "urn:iamproperty:country:BM",
+    "id": "urn:als:country:BM",
     "country_name": "Bermuda"
   },
   {
-    "id": "urn:iamproperty:country:BT",
+    "id": "urn:als:country:BT",
     "country_name": "Bhutan"
   },
   {
-    "id": "urn:iamproperty:country:BO",
+    "id": "urn:als:country:BO",
     "country_name": "Bolivia (Plurinational State of)"
   },
   {
-    "id": "urn:iamproperty:country:BQ",
+    "id": "urn:als:country:BQ",
     "country_name": "Bonaire, Sint Eustatius and Saba"
   },
   {
-    "id": "urn:iamproperty:country:BA",
+    "id": "urn:als:country:BA",
     "country_name": "Bosnia and Herzegovina"
   },
   {
-    "id": "urn:iamproperty:country:BW",
+    "id": "urn:als:country:BW",
     "country_name": "Botswana"
   },
   {
-    "id": "urn:iamproperty:country:BV",
+    "id": "urn:als:country:BV",
     "country_name": "Bouvet Island"
   },
   {
-    "id": "urn:iamproperty:country:BR",
+    "id": "urn:als:country:BR",
     "country_name": "Brazil"
   },
   {
-    "id": "urn:iamproperty:country:IO",
+    "id": "urn:als:country:IO",
     "country_name": "British Indian Ocean Territory"
   },
   {
-    "id": "urn:iamproperty:country:BN",
+    "id": "urn:als:country:BN",
     "country_name": "Brunei Darussalam"
   },
   {
-    "id": "urn:iamproperty:country:BG",
+    "id": "urn:als:country:BG",
     "country_name": "Bulgaria"
   },
   {
-    "id": "urn:iamproperty:country:BF",
+    "id": "urn:als:country:BF",
     "country_name": "Burkina Faso"
   },
   {
-    "id": "urn:iamproperty:country:BI",
+    "id": "urn:als:country:BI",
     "country_name": "Burundi"
   },
   {
-    "id": "urn:iamproperty:country:KH",
+    "id": "urn:als:country:KH",
     "country_name": "Cambodia"
   },
   {
-    "id": "urn:iamproperty:country:CM",
+    "id": "urn:als:country:CM",
     "country_name": "Cameroon"
   },
   {
-    "id": "urn:iamproperty:country:CA",
+    "id": "urn:als:country:CA",
     "country_name": "Canada"
   },
   {
-    "id": "urn:iamproperty:country:CV",
+    "id": "urn:als:country:CV",
     "country_name": "Cabo Verde"
   },
   {
-    "id": "urn:iamproperty:country:KY",
+    "id": "urn:als:country:KY",
     "country_name": "Cayman Islands"
   },
   {
-    "id": "urn:iamproperty:country:CF",
+    "id": "urn:als:country:CF",
     "country_name": "Central African Republic"
   },
   {
-    "id": "urn:iamproperty:country:TD",
+    "id": "urn:als:country:TD",
     "country_name": "Chad"
   },
   {
-    "id": "urn:iamproperty:country:CL",
+    "id": "urn:als:country:CL",
     "country_name": "Chile"
   },
   {
-    "id": "urn:iamproperty:country:CN",
+    "id": "urn:als:country:CN",
     "country_name": "China"
   },
   {
-    "id": "urn:iamproperty:country:CX",
+    "id": "urn:als:country:CX",
     "country_name": "Christmas Island"
   },
   {
-    "id": "urn:iamproperty:country:CC",
+    "id": "urn:als:country:CC",
     "country_name": "Cocos (Keeling) Islands"
   },
   {
-    "id": "urn:iamproperty:country:CO",
+    "id": "urn:als:country:CO",
     "country_name": "Colombia"
   },
   {
-    "id": "urn:iamproperty:country:KM",
+    "id": "urn:als:country:KM",
     "country_name": "Comoros"
   },
   {
-    "id": "urn:iamproperty:country:CG",
+    "id": "urn:als:country:CG",
     "country_name": "Congo"
   },
   {
-    "id": "urn:iamproperty:country:CD",
+    "id": "urn:als:country:CD",
     "country_name": "Congo (Democratic Republic of the)"
   },
   {
-    "id": "urn:iamproperty:country:CK",
+    "id": "urn:als:country:CK",
     "country_name": "Cook Islands"
   },
   {
-    "id": "urn:iamproperty:country:CR",
+    "id": "urn:als:country:CR",
     "country_name": "Costa Rica"
   },
   {
-    "id": "urn:iamproperty:country:CI",
+    "id": "urn:als:country:CI",
     "country_name": "Côte d’Ivoire"
   },
   {
-    "id": "urn:iamproperty:country:HR",
+    "id": "urn:als:country:HR",
     "country_name": "Croatia"
   },
   {
-    "id": "urn:iamproperty:country:CU",
+    "id": "urn:als:country:CU",
     "country_name": "Cuba"
   },
   {
-    "id": "urn:iamproperty:country:CW",
+    "id": "urn:als:country:CW",
     "country_name": "Curaçao"
   },
   {
-    "id": "urn:iamproperty:country:CY",
+    "id": "urn:als:country:CY",
     "country_name": "Cyprus"
   },
   {
-    "id": "urn:iamproperty:country:CZ",
+    "id": "urn:als:country:CZ",
     "country_name": "Czech Republic"
   },
   {
-    "id": "urn:iamproperty:country:DK",
+    "id": "urn:als:country:DK",
     "country_name": "Denmark"
   },
   {
-    "id": "urn:iamproperty:country:DJ",
+    "id": "urn:als:country:DJ",
     "country_name": "Djibouti"
   },
   {
-    "id": "urn:iamproperty:country:DM",
+    "id": "urn:als:country:DM",
     "country_name": "Dominica"
   },
   {
-    "id": "urn:iamproperty:country:DO",
+    "id": "urn:als:country:DO",
     "country_name": "Dominican Republic"
   },
   {
-    "id": "urn:iamproperty:country:EC",
+    "id": "urn:als:country:EC",
     "country_name": "Ecuador"
   },
   {
-    "id": "urn:iamproperty:country:EG",
+    "id": "urn:als:country:EG",
     "country_name": "Egypt"
   },
   {
-    "id": "urn:iamproperty:country:SV",
+    "id": "urn:als:country:SV",
     "country_name": "El Salvador"
   },
   {
-    "id": "urn:iamproperty:country:GQ",
+    "id": "urn:als:country:GQ",
     "country_name": "Equatorial Guinea"
   },
   {
-    "id": "urn:iamproperty:country:ER",
+    "id": "urn:als:country:ER",
     "country_name": "Eritrea"
   },
   {
-    "id": "urn:iamproperty:country:EE",
+    "id": "urn:als:country:EE",
     "country_name": "Estonia"
   },
   {
-    "id": "urn:iamproperty:country:ET",
+    "id": "urn:als:country:ET",
     "country_name": "Ethiopia"
   },
   {
-    "id": "urn:iamproperty:country:FK",
+    "id": "urn:als:country:FK",
     "country_name": "Falkland Islands (Malvinas)"
   },
   {
-    "id": "urn:iamproperty:country:FO",
+    "id": "urn:als:country:FO",
     "country_name": "Faroe Islands"
   },
   {
-    "id": "urn:iamproperty:country:FJ",
+    "id": "urn:als:country:FJ",
     "country_name": "Fiji"
   },
   {
-    "id": "urn:iamproperty:country:FI",
+    "id": "urn:als:country:FI",
     "country_name": "Finland"
   },
   {
-    "id": "urn:iamproperty:country:FR",
+    "id": "urn:als:country:FR",
     "country_name": "France"
   },
   {
-    "id": "urn:iamproperty:country:GF",
+    "id": "urn:als:country:GF",
     "country_name": "French Guiana"
   },
   {
-    "id": "urn:iamproperty:country:PF",
+    "id": "urn:als:country:PF",
     "country_name": "French Polynesia"
   },
   {
-    "id": "urn:iamproperty:country:TF",
+    "id": "urn:als:country:TF",
     "country_name": "French Southern Territories"
   },
   {
-    "id": "urn:iamproperty:country:GA",
+    "id": "urn:als:country:GA",
     "country_name": "Gabon"
   },
   {
-    "id": "urn:iamproperty:country:GM",
+    "id": "urn:als:country:GM",
     "country_name": "Gambia"
   },
   {
-    "id": "urn:iamproperty:country:GE",
+    "id": "urn:als:country:GE",
     "country_name": "Georgia"
   },
   {
-    "id": "urn:iamproperty:country:DE",
+    "id": "urn:als:country:DE",
     "country_name": "Germany"
   },
   {
-    "id": "urn:iamproperty:country:GH",
+    "id": "urn:als:country:GH",
     "country_name": "Ghana"
   },
   {
-    "id": "urn:iamproperty:country:GI",
+    "id": "urn:als:country:GI",
     "country_name": "Gibraltar"
   },
   {
-    "id": "urn:iamproperty:country:GR",
+    "id": "urn:als:country:GR",
     "country_name": "Greece"
   },
   {
-    "id": "urn:iamproperty:country:GL",
+    "id": "urn:als:country:GL",
     "country_name": "Greenland"
   },
   {
-    "id": "urn:iamproperty:country:GD",
+    "id": "urn:als:country:GD",
     "country_name": "Grenada"
   },
   {
-    "id": "urn:iamproperty:country:GP",
+    "id": "urn:als:country:GP",
     "country_name": "Guadeloupe"
   },
   {
-    "id": "urn:iamproperty:country:GU",
+    "id": "urn:als:country:GU",
     "country_name": "Guam"
   },
   {
-    "id": "urn:iamproperty:country:GT",
+    "id": "urn:als:country:GT",
     "country_name": "Guatemala"
   },
   {
-    "id": "urn:iamproperty:country:GG",
+    "id": "urn:als:country:GG",
     "country_name": "Guernsey"
   },
   {
-    "id": "urn:iamproperty:country:GN",
+    "id": "urn:als:country:GN",
     "country_name": "Guinea"
   },
   {
-    "id": "urn:iamproperty:country:GW",
+    "id": "urn:als:country:GW",
     "country_name": "Guinea-Bissau"
   },
   {
-    "id": "urn:iamproperty:country:GY",
+    "id": "urn:als:country:GY",
     "country_name": "Guyana"
   },
   {
-    "id": "urn:iamproperty:country:HT",
+    "id": "urn:als:country:HT",
     "country_name": "Haiti"
   },
   {
-    "id": "urn:iamproperty:country:HM",
+    "id": "urn:als:country:HM",
     "country_name": "Heard Island and McDonald Islands"
   },
   {
-    "id": "urn:iamproperty:country:VA",
+    "id": "urn:als:country:VA",
     "country_name": "Holy See"
   },
   {
-    "id": "urn:iamproperty:country:HN",
+    "id": "urn:als:country:HN",
     "country_name": "Honduras"
   },
   {
-    "id": "urn:iamproperty:country:HK",
+    "id": "urn:als:country:HK",
     "country_name": "Hong Kong"
   },
   {
-    "id": "urn:iamproperty:country:HU",
+    "id": "urn:als:country:HU",
     "country_name": "Hungary"
   },
   {
-    "id": "urn:iamproperty:country:IS",
+    "id": "urn:als:country:IS",
     "country_name": "Iceland"
   },
   {
-    "id": "urn:iamproperty:country:IN",
+    "id": "urn:als:country:IN",
     "country_name": "India"
   },
   {
-    "id": "urn:iamproperty:country:ID",
+    "id": "urn:als:country:ID",
     "country_name": "Indonesia"
   },
   {
-    "id": "urn:iamproperty:country:IR",
+    "id": "urn:als:country:IR",
     "country_name": "Iran (Islamic Republic of)"
   },
   {
-    "id": "urn:iamproperty:country:IQ",
+    "id": "urn:als:country:IQ",
     "country_name": "Iraq"
   },
   {
-    "id": "urn:iamproperty:country:IE",
+    "id": "urn:als:country:IE",
     "country_name": "Ireland"
   },
   {
-    "id": "urn:iamproperty:country:IM",
+    "id": "urn:als:country:IM",
     "country_name": "Isle of Man"
   },
   {
-    "id": "urn:iamproperty:country:IL",
+    "id": "urn:als:country:IL",
     "country_name": "Israel"
   },
   {
-    "id": "urn:iamproperty:country:IT",
+    "id": "urn:als:country:IT",
     "country_name": "Italy"
   },
   {
-    "id": "urn:iamproperty:country:JM",
+    "id": "urn:als:country:JM",
     "country_name": "Jamaica"
   },
   {
-    "id": "urn:iamproperty:country:JP",
+    "id": "urn:als:country:JP",
     "country_name": "Japan"
   },
   {
-    "id": "urn:iamproperty:country:JE",
+    "id": "urn:als:country:JE",
     "country_name": "Jersey"
   },
   {
-    "id": "urn:iamproperty:country:JO",
+    "id": "urn:als:country:JO",
     "country_name": "Jordan"
   },
   {
-    "id": "urn:iamproperty:country:KZ",
+    "id": "urn:als:country:KZ",
     "country_name": "Kazakhstan"
   },
   {
-    "id": "urn:iamproperty:country:KE",
+    "id": "urn:als:country:KE",
     "country_name": "Kenya"
   },
   {
-    "id": "urn:iamproperty:country:KI",
+    "id": "urn:als:country:KI",
     "country_name": "Kiribati"
   },
   {
-    "id": "urn:iamproperty:country:KP",
+    "id": "urn:als:country:KP",
     "country_name": "Korea (Democratic People's Republic of)"
   },
   {
-    "id": "urn:iamproperty:country:KR",
+    "id": "urn:als:country:KR",
     "country_name": "Korea (Republic of)"
   },
   {
-    "id": "urn:iamproperty:country:KW",
+    "id": "urn:als:country:KW",
     "country_name": "Kuwait"
   },
   {
-    "id": "urn:iamproperty:country:KG",
+    "id": "urn:als:country:KG",
     "country_name": "Kyrgyzstan"
   },
   {
-    "id": "urn:iamproperty:country:LA",
+    "id": "urn:als:country:LA",
     "country_name": "Lao People's Democratic Republic"
   },
   {
-    "id": "urn:iamproperty:country:LV",
+    "id": "urn:als:country:LV",
     "country_name": "Latvia"
   },
   {
-    "id": "urn:iamproperty:country:LB",
+    "id": "urn:als:country:LB",
     "country_name": "Lebanon"
   },
   {
-    "id": "urn:iamproperty:country:LS",
+    "id": "urn:als:country:LS",
     "country_name": "Lesotho"
   },
   {
-    "id": "urn:iamproperty:country:LR",
+    "id": "urn:als:country:LR",
     "country_name": "Liberia"
   },
   {
-    "id": "urn:iamproperty:country:LY",
+    "id": "urn:als:country:LY",
     "country_name": "Libya"
   },
   {
-    "id": "urn:iamproperty:country:LI",
+    "id": "urn:als:country:LI",
     "country_name": "Liechtenstein"
   },
   {
-    "id": "urn:iamproperty:country:LT",
+    "id": "urn:als:country:LT",
     "country_name": "Lithuania"
   },
   {
-    "id": "urn:iamproperty:country:LU",
+    "id": "urn:als:country:LU",
     "country_name": "Luxembourg"
   },
   {
-    "id": "urn:iamproperty:country:MO",
+    "id": "urn:als:country:MO",
     "country_name": "Macao"
   },
   {
-    "id": "urn:iamproperty:country:MK",
+    "id": "urn:als:country:MK",
     "country_name": "Republic of North Macedonia"
   },
   {
-    "id": "urn:iamproperty:country:MG",
+    "id": "urn:als:country:MG",
     "country_name": "Madagascar"
   },
   {
-    "id": "urn:iamproperty:country:MW",
+    "id": "urn:als:country:MW",
     "country_name": "Malawi"
   },
   {
-    "id": "urn:iamproperty:country:MY",
+    "id": "urn:als:country:MY",
     "country_name": "Malaysia"
   },
   {
-    "id": "urn:iamproperty:country:MV",
+    "id": "urn:als:country:MV",
     "country_name": "Maldives"
   },
   {
-    "id": "urn:iamproperty:country:ML",
+    "id": "urn:als:country:ML",
     "country_name": "Mali"
   },
   {
-    "id": "urn:iamproperty:country:MT",
+    "id": "urn:als:country:MT",
     "country_name": "Malta"
   },
   {
-    "id": "urn:iamproperty:country:MH",
+    "id": "urn:als:country:MH",
     "country_name": "Marshall Islands"
   },
   {
-    "id": "urn:iamproperty:country:MQ",
+    "id": "urn:als:country:MQ",
     "country_name": "Martinique"
   },
   {
-    "id": "urn:iamproperty:country:MR",
+    "id": "urn:als:country:MR",
     "country_name": "Mauritania"
   },
   {
-    "id": "urn:iamproperty:country:MU",
+    "id": "urn:als:country:MU",
     "country_name": "Mauritius"
   },
   {
-    "id": "urn:iamproperty:country:YT",
+    "id": "urn:als:country:YT",
     "country_name": "Mayotte"
   },
   {
-    "id": "urn:iamproperty:country:MX",
+    "id": "urn:als:country:MX",
     "country_name": "Mexico"
   },
   {
-    "id": "urn:iamproperty:country:FM",
+    "id": "urn:als:country:FM",
     "country_name": "Micronesia (Federated States of)"
   },
   {
-    "id": "urn:iamproperty:country:MD",
+    "id": "urn:als:country:MD",
     "country_name": "Moldova (Republic of)"
   },
   {
-    "id": "urn:iamproperty:country:MC",
+    "id": "urn:als:country:MC",
     "country_name": "Monaco"
   },
   {
-    "id": "urn:iamproperty:country:MN",
+    "id": "urn:als:country:MN",
     "country_name": "Mongolia"
   },
   {
-    "id": "urn:iamproperty:country:ME",
+    "id": "urn:als:country:ME",
     "country_name": "Montenegro"
   },
   {
-    "id": "urn:iamproperty:country:MS",
+    "id": "urn:als:country:MS",
     "country_name": "Montserrat"
   },
   {
-    "id": "urn:iamproperty:country:MA",
+    "id": "urn:als:country:MA",
     "country_name": "Morocco"
   },
   {
-    "id": "urn:iamproperty:country:MZ",
+    "id": "urn:als:country:MZ",
     "country_name": "Mozambique"
   },
   {
-    "id": "urn:iamproperty:country:MM",
+    "id": "urn:als:country:MM",
     "country_name": "Myanmar"
   },
   {
-    "id": "urn:iamproperty:country:NA",
+    "id": "urn:als:country:NA",
     "country_name": "Namibia"
   },
   {
-    "id": "urn:iamproperty:country:NR",
+    "id": "urn:als:country:NR",
     "country_name": "Nauru"
   },
   {
-    "id": "urn:iamproperty:country:NP",
+    "id": "urn:als:country:NP",
     "country_name": "Nepal"
   },
   {
-    "id": "urn:iamproperty:country:NL",
+    "id": "urn:als:country:NL",
     "country_name": "Netherlands"
   },
   {
-    "id": "urn:iamproperty:country:NC",
+    "id": "urn:als:country:NC",
     "country_name": "New Caledonia"
   },
   {
-    "id": "urn:iamproperty:country:NZ",
+    "id": "urn:als:country:NZ",
     "country_name": "New Zealand"
   },
   {
-    "id": "urn:iamproperty:country:NI",
+    "id": "urn:als:country:NI",
     "country_name": "Nicaragua"
   },
   {
-    "id": "urn:iamproperty:country:NE",
+    "id": "urn:als:country:NE",
     "country_name": "Niger"
   },
   {
-    "id": "urn:iamproperty:country:NG",
+    "id": "urn:als:country:NG",
     "country_name": "Nigeria"
   },
   {
-    "id": "urn:iamproperty:country:NU",
+    "id": "urn:als:country:NU",
     "country_name": "Niue"
   },
   {
-    "id": "urn:iamproperty:country:NF",
+    "id": "urn:als:country:NF",
     "country_name": "Norfolk Island"
   },
   {
-    "id": "urn:iamproperty:country:MP",
+    "id": "urn:als:country:MP",
     "country_name": "Northern Mariana Islands"
   },
   {
-    "id": "urn:iamproperty:country:NO",
+    "id": "urn:als:country:NO",
     "country_name": "Norway"
   },
   {
-    "id": "urn:iamproperty:country:OM",
+    "id": "urn:als:country:OM",
     "country_name": "Oman"
   },
   {
-    "id": "urn:iamproperty:country:PK",
+    "id": "urn:als:country:PK",
     "country_name": "Pakistan"
   },
   {
-    "id": "urn:iamproperty:country:PW",
+    "id": "urn:als:country:PW",
     "country_name": "Palau"
   },
   {
-    "id": "urn:iamproperty:country:PS",
+    "id": "urn:als:country:PS",
     "country_name": "Palestine, State of"
   },
   {
-    "id": "urn:iamproperty:country:PA",
+    "id": "urn:als:country:PA",
     "country_name": "Panama"
   },
   {
-    "id": "urn:iamproperty:country:PG",
+    "id": "urn:als:country:PG",
     "country_name": "Papua New Guinea"
   },
   {
-    "id": "urn:iamproperty:country:PY",
+    "id": "urn:als:country:PY",
     "country_name": "Paraguay"
   },
   {
-    "id": "urn:iamproperty:country:PE",
+    "id": "urn:als:country:PE",
     "country_name": "Peru"
   },
   {
-    "id": "urn:iamproperty:country:PH",
+    "id": "urn:als:country:PH",
     "country_name": "Philippines"
   },
   {
-    "id": "urn:iamproperty:country:PN",
+    "id": "urn:als:country:PN",
     "country_name": "Pitcairn"
   },
   {
-    "id": "urn:iamproperty:country:PL",
+    "id": "urn:als:country:PL",
     "country_name": "Poland"
   },
   {
-    "id": "urn:iamproperty:country:PT",
+    "id": "urn:als:country:PT",
     "country_name": "Portugal"
   },
   {
-    "id": "urn:iamproperty:country:PR",
+    "id": "urn:als:country:PR",
     "country_name": "Puerto Rico"
   },
   {
-    "id": "urn:iamproperty:country:QA",
+    "id": "urn:als:country:QA",
     "country_name": "Qatar"
   },
   {
-    "id": "urn:iamproperty:country:RE",
+    "id": "urn:als:country:RE",
     "country_name": "Réunion"
   },
   {
-    "id": "urn:iamproperty:country:RO",
+    "id": "urn:als:country:RO",
     "country_name": "Romania"
   },
   {
-    "id": "urn:iamproperty:country:RU",
+    "id": "urn:als:country:RU",
     "country_name": "Russian Federation"
   },
   {
-    "id": "urn:iamproperty:country:RW",
+    "id": "urn:als:country:RW",
     "country_name": "Rwanda"
   },
   {
-    "id": "urn:iamproperty:country:BL",
+    "id": "urn:als:country:BL",
     "country_name": "Saint Barthélemy"
   },
   {
-    "id": "urn:iamproperty:country:SH",
+    "id": "urn:als:country:SH",
     "country_name": "Saint Helena, Ascension and Tristan da Cunha"
   },
   {
-    "id": "urn:iamproperty:country:KN",
+    "id": "urn:als:country:KN",
     "country_name": "Saint Kitts and Nevis"
   },
   {
-    "id": "urn:iamproperty:country:LC",
+    "id": "urn:als:country:LC",
     "country_name": "Saint Lucia"
   },
   {
-    "id": "urn:iamproperty:country:MF",
+    "id": "urn:als:country:MF",
     "country_name": "Saint Martin (French part)"
   },
   {
-    "id": "urn:iamproperty:country:PM",
+    "id": "urn:als:country:PM",
     "country_name": "Saint Pierre and Miquelon"
   },
   {
-    "id": "urn:iamproperty:country:VC",
+    "id": "urn:als:country:VC",
     "country_name": "Saint Vincent and the Grenadines"
   },
   {
-    "id": "urn:iamproperty:country:WS",
+    "id": "urn:als:country:WS",
     "country_name": "Samoa"
   },
   {
-    "id": "urn:iamproperty:country:SM",
+    "id": "urn:als:country:SM",
     "country_name": "San Marino"
   },
   {
-    "id": "urn:iamproperty:country:ST",
+    "id": "urn:als:country:ST",
     "country_name": "Sao Tome and Principe"
   },
   {
-    "id": "urn:iamproperty:country:SA",
+    "id": "urn:als:country:SA",
     "country_name": "Saudi Arabia"
   },
   {
-    "id": "urn:iamproperty:country:SN",
+    "id": "urn:als:country:SN",
     "country_name": "Senegal"
   },
   {
-    "id": "urn:iamproperty:country:RS",
+    "id": "urn:als:country:RS",
     "country_name": "Serbia"
   },
   {
-    "id": "urn:iamproperty:country:SC",
+    "id": "urn:als:country:SC",
     "country_name": "Seychelles"
   },
   {
-    "id": "urn:iamproperty:country:SL",
+    "id": "urn:als:country:SL",
     "country_name": "Sierra Leone"
   },
   {
-    "id": "urn:iamproperty:country:SG",
+    "id": "urn:als:country:SG",
     "country_name": "Singapore"
   },
   {
-    "id": "urn:iamproperty:country:SX",
+    "id": "urn:als:country:SX",
     "country_name": "Sint Maarten (Dutch part)"
   },
   {
-    "id": "urn:iamproperty:country:SK",
+    "id": "urn:als:country:SK",
     "country_name": "Slovakia"
   },
   {
-    "id": "urn:iamproperty:country:SI",
+    "id": "urn:als:country:SI",
     "country_name": "Slovenia"
   },
   {
-    "id": "urn:iamproperty:country:SB",
+    "id": "urn:als:country:SB",
     "country_name": "Solomon Islands"
   },
   {
-    "id": "urn:iamproperty:country:SO",
+    "id": "urn:als:country:SO",
     "country_name": "Somalia"
   },
   {
-    "id": "urn:iamproperty:country:ZA",
+    "id": "urn:als:country:ZA",
     "country_name": "South Africa"
   },
   {
-    "id": "urn:iamproperty:country:GS",
+    "id": "urn:als:country:GS",
     "country_name": "South Georgia and the South Sandwich Islands"
   },
   {
-    "id": "urn:iamproperty:country:SS",
+    "id": "urn:als:country:SS",
     "country_name": "South Sudan"
   },
   {
-    "id": "urn:iamproperty:country:ES",
+    "id": "urn:als:country:ES",
     "country_name": "Spain"
   },
   {
-    "id": "urn:iamproperty:country:LK",
+    "id": "urn:als:country:LK",
     "country_name": "Sri Lanka"
   },
   {
-    "id": "urn:iamproperty:country:SD",
+    "id": "urn:als:country:SD",
     "country_name": "Sudan"
   },
   {
-    "id": "urn:iamproperty:country:SR",
+    "id": "urn:als:country:SR",
     "country_name": "Suriname"
   },
   {
-    "id": "urn:iamproperty:country:SJ",
+    "id": "urn:als:country:SJ",
     "country_name": "Svalbard and Jan Mayen"
   },
   {
-    "id": "urn:iamproperty:country:SZ",
+    "id": "urn:als:country:SZ",
     "country_name": "The Kingdom of Eswatini"
   },
   {
-    "id": "urn:iamproperty:country:SE",
+    "id": "urn:als:country:SE",
     "country_name": "Sweden"
   },
   {
-    "id": "urn:iamproperty:country:CH",
+    "id": "urn:als:country:CH",
     "country_name": "Switzerland"
   },
   {
-    "id": "urn:iamproperty:country:SY",
+    "id": "urn:als:country:SY",
     "country_name": "Syrian Arab Republic"
   },
   {
-    "id": "urn:iamproperty:country:TW",
+    "id": "urn:als:country:TW",
     "country_name": "Taiwan, Province of China"
   },
   {
-    "id": "urn:iamproperty:country:TJ",
+    "id": "urn:als:country:TJ",
     "country_name": "Tajikistan"
   },
   {
-    "id": "urn:iamproperty:country:TZ",
+    "id": "urn:als:country:TZ",
     "country_name": "Tanzania, United Republic of"
   },
   {
-    "id": "urn:iamproperty:country:TH",
+    "id": "urn:als:country:TH",
     "country_name": "Thailand"
   },
   {
-    "id": "urn:iamproperty:country:TL",
+    "id": "urn:als:country:TL",
     "country_name": "Timor-Leste"
   },
   {
-    "id": "urn:iamproperty:country:TG",
+    "id": "urn:als:country:TG",
     "country_name": "Togo"
   },
   {
-    "id": "urn:iamproperty:country:TK",
+    "id": "urn:als:country:TK",
     "country_name": "Tokelau"
   },
   {
-    "id": "urn:iamproperty:country:TO",
+    "id": "urn:als:country:TO",
     "country_name": "Tonga"
   },
   {
-    "id": "urn:iamproperty:country:TT",
+    "id": "urn:als:country:TT",
     "country_name": "Trinidad and Tobago"
   },
   {
-    "id": "urn:iamproperty:country:TN",
+    "id": "urn:als:country:TN",
     "country_name": "Tunisia"
   },
   {
-    "id": "urn:iamproperty:country:TR",
+    "id": "urn:als:country:TR",
     "country_name": "Republic of Türkiye"
   },
   {
-    "id": "urn:iamproperty:country:TM",
+    "id": "urn:als:country:TM",
     "country_name": "Turkmenistan"
   },
   {
-    "id": "urn:iamproperty:country:TC",
+    "id": "urn:als:country:TC",
     "country_name": "Turks and Caicos Islands"
   },
   {
-    "id": "urn:iamproperty:country:TV",
+    "id": "urn:als:country:TV",
     "country_name": "Tuvalu"
   },
   {
-    "id": "urn:iamproperty:country:UG",
+    "id": "urn:als:country:UG",
     "country_name": "Uganda"
   },
   {
-    "id": "urn:iamproperty:country:UA",
+    "id": "urn:als:country:UA",
     "country_name": "Ukraine"
   },
   {
-    "id": "urn:iamproperty:country:AE",
+    "id": "urn:als:country:AE",
     "country_name": "United Arab Emirates"
   },
   {
-    "id": "urn:iamproperty:country:GB",
+    "id": "urn:als:country:GB",
     "country_name": "United Kingdom of Great Britain and Northern Ireland"
   },
   {
-    "id": "urn:iamproperty:country:US",
+    "id": "urn:als:country:US",
     "country_name": "United States of America"
   },
   {
-    "id": "urn:iamproperty:country:UM",
+    "id": "urn:als:country:UM",
     "country_name": "United States Minor Outlying Islands"
   },
   {
-    "id": "urn:iamproperty:country:UY",
+    "id": "urn:als:country:UY",
     "country_name": "Uruguay"
   },
   {
-    "id": "urn:iamproperty:country:UZ",
+    "id": "urn:als:country:UZ",
     "country_name": "Uzbekistan"
   },
   {
-    "id": "urn:iamproperty:country:VU",
+    "id": "urn:als:country:VU",
     "country_name": "Vanuatu"
   },
   {
-    "id": "urn:iamproperty:country:VE",
+    "id": "urn:als:country:VE",
     "country_name": "Venezuela (Bolivarian Republic of)"
   },
   {
-    "id": "urn:iamproperty:country:VN",
+    "id": "urn:als:country:VN",
     "country_name": "Viet Nam"
   },
   {
-    "id": "urn:iamproperty:country:VG",
+    "id": "urn:als:country:VG",
     "country_name": "Virgin Islands (British)"
   },
   {
-    "id": "urn:iamproperty:country:VI",
+    "id": "urn:als:country:VI",
     "country_name": "Virgin Islands (U.S.)"
   },
   {
-    "id": "urn:iamproperty:country:WF",
+    "id": "urn:als:country:WF",
     "country_name": "Wallis and Futuna"
   },
   {
-    "id": "urn:iamproperty:country:EH",
+    "id": "urn:als:country:EH",
     "country_name": "Western Sahara"
   },
   {
-    "id": "urn:iamproperty:country:YE",
+    "id": "urn:als:country:YE",
     "country_name": "Yemen"
   },
   {
-    "id": "urn:iamproperty:country:ZM",
+    "id": "urn:als:country:ZM",
     "country_name": "Zambia"
   },
   {
-    "id": "urn:iamproperty:country:ZW",
+    "id": "urn:als:country:ZW",
     "country_name": "Zimbabwe"
   }
 ];
 
 const counties = [
     {
-        "id": "urn:iamproperty:county:ekHuOPAhk",
+        "id": "urn:als:county:ekHuOPAhk",
         "county": "Monmouthshire"
     },
     {
-        "id": "urn:iamproperty:county:AEbmaIiuw",
+        "id": "urn:als:county:AEbmaIiuw",
         "county": "Cambridgeshire"
     },
     {
-        "id": "urn:iamproperty:county:HN2Hekmbp",
+        "id": "urn:als:county:HN2Hekmbp",
         "county": "South Lanarkshire"
     },
     {
-        "id": "urn:iamproperty:county:520Tnh4wg",
+        "id": "urn:als:county:520Tnh4wg",
         "county": "Derbyshire"
     },
     {
-        "id": "urn:iamproperty:county:l5UCrwlvB",
+        "id": "urn:als:county:l5UCrwlvB",
         "county": "Devon"
     },
     {
-        "id": "urn:iamproperty:county:GCA8Jh6Ic",
+        "id": "urn:als:county:GCA8Jh6Ic",
         "county": "Bristol"
     },
     {
-        "id": "urn:iamproperty:county:Mi1lAB5uQ",
+        "id": "urn:als:county:Mi1lAB5uQ",
         "county": "Rhondda Cynon Taf"
     },
     {
-        "id": "urn:iamproperty:county:n4jPkt4qP",
+        "id": "urn:als:county:n4jPkt4qP",
         "county": "Carmarthenshire"
     },
     {
-        "id": "urn:iamproperty:county:XO1G4TTb5",
+        "id": "urn:als:county:XO1G4TTb5",
         "county": "Aberdeenshire"
     },
     {
-        "id": "urn:iamproperty:county:JIaxjhlxx",
+        "id": "urn:als:county:JIaxjhlxx",
         "county": "North Somerset"
     },
     {
-        "id": "urn:iamproperty:county:hLrOnlFfB",
+        "id": "urn:als:county:hLrOnlFfB",
         "county": "Nottinghamshire"
     },
     {
-        "id": "urn:iamproperty:county:oGMGorIRg",
+        "id": "urn:als:county:oGMGorIRg",
         "county": "Durham"
     },
     {
-        "id": "urn:iamproperty:county:eBaLXgG8Y",
+        "id": "urn:als:county:eBaLXgG8Y",
         "county": "Isle of Wight"
     },
     {
-        "id": "urn:iamproperty:county:NMsdqInpw",
+        "id": "urn:als:county:NMsdqInpw",
         "county": "Northamptonshire"
     },
     {
-        "id": "urn:iamproperty:county:xRBQIke3k",
+        "id": "urn:als:county:xRBQIke3k",
         "county": "Warwickshire"
     },
     {
-        "id": "urn:iamproperty:county:R7yUpOlb4",
+        "id": "urn:als:county:R7yUpOlb4",
         "county": "Berwickshire"
     },
     {
-        "id": "urn:iamproperty:county:S9DHMO2Hh",
+        "id": "urn:als:county:S9DHMO2Hh",
         "county": "East Sussex"
     },
     {
-        "id": "urn:iamproperty:county:rj4pK09x7",
+        "id": "urn:als:county:rj4pK09x7",
         "county": "Denbighshire"
     },
     {
-        "id": "urn:iamproperty:county:vuduFOMex",
+        "id": "urn:als:county:vuduFOMex",
         "county": "Lanarkshire"
     },
     {
-        "id": "urn:iamproperty:county:5W66e6apO",
+        "id": "urn:als:county:5W66e6apO",
         "county": "East Riding of Yorkshire"
     },
     {
-        "id": "urn:iamproperty:county:Hb6eqUJQj",
+        "id": "urn:als:county:Hb6eqUJQj",
         "county": "North Ayrshire"
     },
     {
-        "id": "urn:iamproperty:county:fwRrCvJ4C",
+        "id": "urn:als:county:fwRrCvJ4C",
         "county": "Greater Manchester"
     },
     {
-        "id": "urn:iamproperty:county:aekGxogbo",
+        "id": "urn:als:county:aekGxogbo",
         "county": "East Renfrewshire"
     },
     {
-        "id": "urn:iamproperty:county:f3srYWllA",
+        "id": "urn:als:county:f3srYWllA",
         "county": "Cardiff"
     },
     {
-        "id": "urn:iamproperty:county:DhVZEpSj5",
+        "id": "urn:als:county:DhVZEpSj5",
         "county": "West Lothian"
     },
     {
-        "id": "urn:iamproperty:county:URWWHN7s0",
+        "id": "urn:als:county:URWWHN7s0",
         "county": "Dorset"
     },
     {
-        "id": "urn:iamproperty:county:jYK8wiDnY",
+        "id": "urn:als:county:jYK8wiDnY",
         "county": "Leicestershire"
     },
     {
-        "id": "urn:iamproperty:county:048PGRA4X",
+        "id": "urn:als:county:048PGRA4X",
         "county": "Blaenau Gwent"
     },
     {
-        "id": "urn:iamproperty:county:wrHCVsCva",
+        "id": "urn:als:county:wrHCVsCva",
         "county": "Berkshire"
     },
     {
-        "id": "urn:iamproperty:county:cCH4TjJ9q",
+        "id": "urn:als:county:cCH4TjJ9q",
         "county": "Norfolk"
     },
     {
-        "id": "urn:iamproperty:county:mvHEsdXhM",
+        "id": "urn:als:county:mvHEsdXhM",
         "county": "Suffolk"
     },
     {
-        "id": "urn:iamproperty:county:faXBprr9q",
+        "id": "urn:als:county:faXBprr9q",
         "county": "East Ayrshire"
     },
     {
-        "id": "urn:iamproperty:county:5wGBTbwou",
+        "id": "urn:als:county:5wGBTbwou",
         "county": "Conwy"
     },
     {
-        "id": "urn:iamproperty:county:5YXi0mQkk",
+        "id": "urn:als:county:5YXi0mQkk",
         "county": "Cheshire"
     },
     {
-        "id": "urn:iamproperty:county:fuYiP18oc",
+        "id": "urn:als:county:fuYiP18oc",
         "county": "Bridgend"
     },
     {
-        "id": "urn:iamproperty:county:QaX0cXbOV",
+        "id": "urn:als:county:QaX0cXbOV",
         "county": "West Yorkshire"
     },
     {
-        "id": "urn:iamproperty:county:Lo7JLx9og",
+        "id": "urn:als:county:Lo7JLx9og",
         "county": "South Gloucestershire"
     },
     {
-        "id": "urn:iamproperty:county:B64E1f4T3",
+        "id": "urn:als:county:B64E1f4T3",
         "county": "Merthyr Tydfil"
     },
     {
-        "id": "urn:iamproperty:county:vacNt3Iie",
+        "id": "urn:als:county:vacNt3Iie",
         "county": "Banffshire"
     },
     {
-        "id": "urn:iamproperty:county:HSETldFbK",
+        "id": "urn:als:county:HSETldFbK",
         "county": "Staffordshire"
     },
     {
-        "id": "urn:iamproperty:county:njUDNfLD3",
+        "id": "urn:als:county:njUDNfLD3",
         "county": "Western Isles"
     },
     {
-        "id": "urn:iamproperty:county:smlxqTdZE",
+        "id": "urn:als:county:smlxqTdZE",
         "county": "Bath and North East Somerset"
     },
     {
-        "id": "urn:iamproperty:county:2asBQ47Jh",
+        "id": "urn:als:county:2asBQ47Jh",
         "county": "South Yorkshire"
     },
     {
-        "id": "urn:iamproperty:county:5hYXpCuJ7",
+        "id": "urn:als:county:5hYXpCuJ7",
         "county": "Stirling"
     },
     {
-        "id": "urn:iamproperty:county:lhFYBMSuq",
+        "id": "urn:als:county:lhFYBMSuq",
         "county": "Powys"
     },
     {
-        "id": "urn:iamproperty:county:PamgW3ebq",
+        "id": "urn:als:county:PamgW3ebq",
         "county": "Vale of Glamorgan"
     },
     {
-        "id": "urn:iamproperty:county:zIasSsrlZ",
+        "id": "urn:als:county:zIasSsrlZ",
         "county": "Clackmannanshire"
     },
     {
-        "id": "urn:iamproperty:county:WZUQNZxOy",
+        "id": "urn:als:county:WZUQNZxOy",
         "county": "Lancashire"
     },
     {
-        "id": "urn:iamproperty:county:HoTgPpS58",
+        "id": "urn:als:county:HoTgPpS58",
         "county": "Hertfordshire"
     },
     {
-        "id": "urn:iamproperty:county:oNrluXBHA",
+        "id": "urn:als:county:oNrluXBHA",
         "county": "Fife"
     },
     {
-        "id": "urn:iamproperty:county:2OxE9CASK",
+        "id": "urn:als:county:2OxE9CASK",
         "county": "Neath Port Talbot"
     },
     {
-        "id": "urn:iamproperty:county:9J7YezLBA",
+        "id": "urn:als:county:9J7YezLBA",
         "county": "Highland"
     },
     {
-        "id": "urn:iamproperty:county:7IfpMh1Gx",
+        "id": "urn:als:county:7IfpMh1Gx",
         "county": "Ceredigion"
     },
     {
-        "id": "urn:iamproperty:county:ZwQ3mTTE2",
+        "id": "urn:als:county:ZwQ3mTTE2",
         "county": "Orkney Islands"
     },
     {
-        "id": "urn:iamproperty:county:ZyNmV7NCn",
+        "id": "urn:als:county:ZyNmV7NCn",
         "county": "North Yorkshire"
     },
     {
-        "id": "urn:iamproperty:county:LwrVeERzu",
+        "id": "urn:als:county:LwrVeERzu",
         "county": "Pembrokeshire"
     },
     {
-        "id": "urn:iamproperty:county:porOuVsSM",
+        "id": "urn:als:county:porOuVsSM",
         "county": "Wrexham"
     },
     {
-        "id": "urn:iamproperty:county:3o4Rx4sO8",
+        "id": "urn:als:county:3o4Rx4sO8",
         "county": "Renfrewshire"
     },
     {
-        "id": "urn:iamproperty:county:loLWjKyk8",
+        "id": "urn:als:county:loLWjKyk8",
         "county": "Oxfordshire"
     },
     {
-        "id": "urn:iamproperty:county:AN7Bz5tny",
+        "id": "urn:als:county:AN7Bz5tny",
         "county": "Moray"
     },
     {
-        "id": "urn:iamproperty:county:RGzSdoQp3",
+        "id": "urn:als:county:RGzSdoQp3",
         "county": "Ayrshire"
     },
     {
-        "id": "urn:iamproperty:county:nEBK48RIK",
+        "id": "urn:als:county:nEBK48RIK",
         "county": "Caithness"
     },
     {
-        "id": "urn:iamproperty:county:a90XABrjs",
+        "id": "urn:als:county:a90XABrjs",
         "county": "West Dunbartonshire"
     },
     {
-        "id": "urn:iamproperty:county:Qjkb0wsyP",
+        "id": "urn:als:county:Qjkb0wsyP",
         "county": "West Sussex"
     },
     {
-        "id": "urn:iamproperty:county:fNJcfheKq",
+        "id": "urn:als:county:fNJcfheKq",
         "county": "Cornwall"
     },
     {
-        "id": "urn:iamproperty:county:lx0kEWvsb",
+        "id": "urn:als:county:lx0kEWvsb",
         "county": "Anglesey"
     },
     {
-        "id": "urn:iamproperty:county:rkvgiBRHz",
+        "id": "urn:als:county:rkvgiBRHz",
         "county": "Caerphilly"
     },
     {
-        "id": "urn:iamproperty:county:kx0t2zRVP",
+        "id": "urn:als:county:kx0t2zRVP",
         "county": "Tyne and Wear"
     },
     {
-        "id": "urn:iamproperty:county:lVb75qnOW",
+        "id": "urn:als:county:lVb75qnOW",
         "county": "Merseyside"
     },
     {
-        "id": "urn:iamproperty:county:M7eZzrA8u",
+        "id": "urn:als:county:M7eZzrA8u",
         "county": "Wiltshire"
     },
     {
-        "id": "urn:iamproperty:county:8Uo4sJw3x",
+        "id": "urn:als:county:8Uo4sJw3x",
         "county": "Perth and Kinross"
     },
     {
-        "id": "urn:iamproperty:county:73kc3w0cu",
+        "id": "urn:als:county:73kc3w0cu",
         "county": "Dumfries & Galloway"
     },
     {
-        "id": "urn:iamproperty:county:VFjExDeTO",
+        "id": "urn:als:county:VFjExDeTO",
         "county": "Swansea"
     },
     {
-        "id": "urn:iamproperty:county:lzsJuaRiS",
+        "id": "urn:als:county:lzsJuaRiS",
         "county": "Isles of Scilly"
     },
     {
-        "id": "urn:iamproperty:county:abvvK0ZwH",
+        "id": "urn:als:county:abvvK0ZwH",
         "county": "Worcestershire"
     },
     {
-        "id": "urn:iamproperty:county:1FKCbFkt2",
+        "id": "urn:als:county:1FKCbFkt2",
         "county": "Scottish Borders"
     },
     {
-        "id": "urn:iamproperty:county:WKaOjrTLM",
+        "id": "urn:als:county:WKaOjrTLM",
         "county": "Essex"
     },
     {
-        "id": "urn:iamproperty:county:0F00szlVA",
+        "id": "urn:als:county:0F00szlVA",
         "county": "South Ayrshire"
     },
     {
-        "id": "urn:iamproperty:county:KDtAS0c8U",
+        "id": "urn:als:county:KDtAS0c8U",
         "county": "Inverclyde"
     },
     {
-        "id": "urn:iamproperty:county:Md88sraTz",
+        "id": "urn:als:county:Md88sraTz",
         "county": "Shetland Islands"
     },
     {
-        "id": "urn:iamproperty:county:LzzEE6zpp",
+        "id": "urn:als:county:LzzEE6zpp",
         "county": "Herefordshire"
     },
     {
-        "id": "urn:iamproperty:county:lXaRRDNrq",
+        "id": "urn:als:county:lXaRRDNrq",
         "county": "Angus"
     },
     {
-        "id": "urn:iamproperty:county:A5B4FFytC",
+        "id": "urn:als:county:A5B4FFytC",
         "county": "Surrey"
     },
     {
-        "id": "urn:iamproperty:county:B3siky9El",
+        "id": "urn:als:county:B3siky9El",
         "county": "Kent"
     },
     {
-        "id": "urn:iamproperty:county:V9njlL3kq",
+        "id": "urn:als:county:V9njlL3kq",
         "county": "Northumberland"
     },
     {
-        "id": "urn:iamproperty:county:WJiolIFFI",
+        "id": "urn:als:county:WJiolIFFI",
         "county": "Flintshire"
     },
     {
-        "id": "urn:iamproperty:county:4lXGX7NbU",
+        "id": "urn:als:county:4lXGX7NbU",
         "county": "Gwynedd"
     },
     {
-        "id": "urn:iamproperty:county:7gzISbzTK",
+        "id": "urn:als:county:7gzISbzTK",
         "county": "Lincolnshire"
     },
     {
-        "id": "urn:iamproperty:county:D5GgqTxzN",
+        "id": "urn:als:county:D5GgqTxzN",
         "county": "East Dunbartonshire"
     },
     {
-        "id": "urn:iamproperty:county:hhwXe4hTH",
+        "id": "urn:als:county:hhwXe4hTH",
         "county": "Somerset"
     },
     {
-        "id": "urn:iamproperty:county:nECEnleYv",
+        "id": "urn:als:county:nECEnleYv",
         "county": "Midlothian"
     },
     {
-        "id": "urn:iamproperty:county:2jksb8BIf",
+        "id": "urn:als:county:2jksb8BIf",
         "county": "Cumbria"
     },
     {
-        "id": "urn:iamproperty:county:ttfY8qr15",
+        "id": "urn:als:county:ttfY8qr15",
         "county": "Bedfordshire"
     },
     {
-        "id": "urn:iamproperty:county:YhQVg1amj",
+        "id": "urn:als:county:YhQVg1amj",
         "county": "West Midlands"
     },
     {
-        "id": "urn:iamproperty:county:EnbDIubYS",
+        "id": "urn:als:county:EnbDIubYS",
         "county": "North Lanarkshire"
     },
     {
-        "id": "urn:iamproperty:county:5SdVf3hnm",
+        "id": "urn:als:county:5SdVf3hnm",
         "county": "Kincardineshire"
     },
     {
-        "id": "urn:iamproperty:county:BPedWUQXc",
+        "id": "urn:als:county:BPedWUQXc",
         "county": "Dunbartonshire"
     },
     {
-        "id": "urn:iamproperty:county:YLngqBWd4",
+        "id": "urn:als:county:YLngqBWd4",
         "county": "Hampshire"
     },
     {
-        "id": "urn:iamproperty:county:zBZHWiWon",
+        "id": "urn:als:county:zBZHWiWon",
         "county": "Buckinghamshire"
     },
     {
-        "id": "urn:iamproperty:county:kLes1W5ny",
+        "id": "urn:als:county:kLes1W5ny",
         "county": "East Lothian"
     },
     {
-        "id": "urn:iamproperty:county:yCMA4ANpN",
+        "id": "urn:als:county:yCMA4ANpN",
         "county": "Rutland"
     },
     {
-        "id": "urn:iamproperty:county:jhourkJ4W",
+        "id": "urn:als:county:jhourkJ4W",
         "county": "Torfaen"
     },
     {
-        "id": "urn:iamproperty:county:aC8dF3IVE",
+        "id": "urn:als:county:aC8dF3IVE",
         "county": "Newport"
     },
     {
-        "id": "urn:iamproperty:county:AnfqGRnhm",
+        "id": "urn:als:county:AnfqGRnhm",
         "county": "Argyll & Bute"
     },
     {
-        "id": "urn:iamproperty:county:5BjmQe9mS",
+        "id": "urn:als:county:5BjmQe9mS",
         "county": "Gloucestershire"
     },
     {
-        "id": "urn:iamproperty:county:G7WiUO5Sh",
+        "id": "urn:als:county:G7WiUO5Sh",
         "county": "Cleveland"
     },
     {
-        "id": "urn:iamproperty:county:zu7zHJPWh",
+        "id": "urn:als:county:zu7zHJPWh",
         "county": "Shropshire"
     },
     {
-        "id": "urn:iamproperty:county:Bt301fwoy",
+        "id": "urn:als:county:Bt301fwoy",
         "county": "Greater London"
     },
     {
-        "id": "urn:iamproperty:county:LXHPqo5nj",
+        "id": "urn:als:county:LXHPqo5nj",
         "county": "City of Edinburgh"
     },
     {
-        "id": "urn:iamproperty:county:YejLSQLAx",
+        "id": "urn:als:county:YejLSQLAx",
         "county": "Aberdeen City"
     },
     {
-        "id": "urn:iamproperty:county:o5lgD8dv7",
+        "id": "urn:als:county:o5lgD8dv7",
         "county": "Dundee City"
     },
     {
-        "id": "urn:iamproperty:county:0HPMQtb09",
+        "id": "urn:als:county:0HPMQtb09",
         "county": "Falkirk"
     },
     {
-        "id": "urn:iamproperty:county:z1rPhQlGB",
+        "id": "urn:als:county:z1rPhQlGB",
         "county": "Glasgow City"
     },
     {
-        "id": "urn:iamproperty:county:CskSiG5W0",
+        "id": "urn:als:county:CskSiG5W0",
         "county": "Brecknockshire"
     },
     {
-        "id": "urn:iamproperty:county:zulaN5fgu",
+        "id": "urn:als:county:zulaN5fgu",
         "county": "Caernarfonshire"
     },
     {
-        "id": "urn:iamproperty:county:D1YYNRchZ",
+        "id": "urn:als:county:D1YYNRchZ",
         "county": "Cardiganshire"
     },
     {
-        "id": "urn:iamproperty:county:3DDFfQzoP",
+        "id": "urn:als:county:3DDFfQzoP",
         "county": "Clwyd"
     },
     {
-        "id": "urn:iamproperty:county:hBr4CCduy",
+        "id": "urn:als:county:hBr4CCduy",
         "county": "Dyfed"
     },
     {
-        "id": "urn:iamproperty:county:7wcgGTpU9",
+        "id": "urn:als:county:7wcgGTpU9",
         "county": "Antrim"
     },
     {
-        "id": "urn:iamproperty:county:PKM8DGZbI",
+        "id": "urn:als:county:PKM8DGZbI",
         "county": "Armagh"
     },
     {
-        "id": "urn:iamproperty:county:LrvLXtQv4",
+        "id": "urn:als:county:LrvLXtQv4",
         "county": "Down"
     },
     {
-        "id": "urn:iamproperty:county:HXDwhW1QG",
+        "id": "urn:als:county:HXDwhW1QG",
         "county": "Fermanagh"
     },
     {
-        "id": "urn:iamproperty:county:eRHjMdT0e",
+        "id": "urn:als:county:eRHjMdT0e",
         "county": "Londonderry"
     },
     {
-        "id": "urn:iamproperty:county:Xqs7aJsen",
+        "id": "urn:als:county:Xqs7aJsen",
         "county": "Tyrone"
     },
     {
-        "id": "urn:iamproperty:county:rYAgcPlXZ",
+        "id": "urn:als:county:rYAgcPlXZ",
         "county": "Middlesex"
     }
 ]
@@ -1551,7 +1551,7 @@ class iamSTDAddressLookup extends HTMLElement {
     const currentContent = this.innerHTML;
     this.innerHTML = `<iam-address-lookup 
     class="${this.getAttribute('class')}" 
-    ${this.hasAttribute('data-url') ? `data-url='${this.getAttribute('data-url')}?search_query='` : `data-url='/stand-ardaddress.json?search_query='`}
+    ${this.hasAttribute('data-url') ? `data-url='${this.getAttribute('data-url')}?search_query='` : `data-url='/standardaddress.json?search_query='`}
     data-postcode="true" 
     data-min-chars="5" 
     ${this.hasAttribute('data-title') ? `data-title='${this.getAttribute('data-title')}'` : `data-title='Find an address by postcode'`}
@@ -1608,14 +1608,14 @@ class iamSTDAddressLookup extends HTMLElement {
     <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (!this.hasAttribute('data-show-required') && !this.hasAttribute('data-county-required') ? ' (optional)' : '')} 
       <select name="region" data-readonly ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
         <option value=""></option>
-        <option value="urn:iamproperty:region:qo7jMNaA4" data-value="England">England</option>
-        <option value="urn:iamproperty:region:JPBkFjL6I" data-value="Scotland">Scotland</option>
-        <option value="urn:iamproperty:region:3lqe2D3qO" data-value="Wales">Wales</option>
-        <option value="urn:iamproperty:region:Tm5pOBfK9" data-value="Northern Ireland">Northern Ireland</option>
-        <option value="urn:iamproperty:region:ZwIRAnNJo" data-value="Channel Islands">Channel Islands</option>
-        <option value="urn:iamproperty:region:8CIOi1khw" data-value="Jersey">Jersey</option>
-        <option value="urn:iamproperty:region:qHdx7tNtL" data-value="Guernsey">Guernsey</option>
-        <option value="urn:iamproperty:region:DH6LU70lY" data-value="Isle of Man">Isle of Man</option>
+        <option value="urn:als:region:qo7jMNaA4" data-value="England">England</option>
+        <option value="urn:als:region:JPBkFjL6I" data-value="Scotland">Scotland</option>
+        <option value="urn:als:region:3lqe2D3qO" data-value="Wales">Wales</option>
+        <option value="urn:als:region:Tm5pOBfK9" data-value="Northern Ireland">Northern Ireland</option>
+        <option value="urn:als:region:ZwIRAnNJo" data-value="Channel Islands">Channel Islands</option>
+        <option value="urn:als:region:8CIOi1khw" data-value="Jersey">Jersey</option>
+        <option value="urn:als:region:qHdx7tNtL" data-value="Guernsey">Guernsey</option>
+        <option value="urn:als:region:DH6LU70lY" data-value="Isle of Man">Isle of Man</option>
       </select>
     </label>
 

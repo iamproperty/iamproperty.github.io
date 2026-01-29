@@ -19,6 +19,7 @@
   }
 
   hr[class*="border-"] {
+    border: none;
     border-bottom:  var(--border-width) var(--border-style) var(--border-color);
   }
 

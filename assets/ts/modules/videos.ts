@@ -125,10 +125,10 @@ export const createYoutTubeVideo = async (target, video_id): void | boolean => {
     window.player = [];
   }
 
-  const link_id = target.getAttribute('id');
+  //const link_id = target.getAttribute('id');
 
-  if (typeof window.player[link_id] != 'undefined' && typeof window.player[link_id].pauseVideo == 'function') {
-    window.player[link_id].playVideo();
+  if (typeof window.player[video_id] != 'undefined' && typeof window.player[video_id].pauseVideo == 'function') {
+    window.player[video_id].playVideo();
 
     return false;
   }
@@ -136,7 +136,7 @@ export const createYoutTubeVideo = async (target, video_id): void | boolean => {
   // This function creates an <iframe> (and YouTube player) after the API code downloads.
   //function onYouTubeIframeAPIReady() {
 
-  window.player[link_id] = new YT.Player(link_id, {
+  window.player[video_id] = new YT.Player(video_id, {
     height: '100%',
     width: '100%',
     videoId: video_id,
@@ -165,7 +165,7 @@ export const createYoutTubeVideo = async (target, video_id): void | boolean => {
   let done = false;
   function onPlayerStateChange(event): void {
     if (event.data == YT.PlayerState.PLAYING && !done) {
-      const link = document.getElementById(link_id);
+      const link = document.getElementById(video_id);
       link.classList.add('player-ready');
 
       done = true;

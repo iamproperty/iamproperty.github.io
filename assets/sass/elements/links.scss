@@ -58,6 +58,10 @@
     position: relative;
     font-weight: bold;
 
+    &:last-child {
+      margin-right: 0;
+    }
+
     &:not(.text-decoration-none) {
       &:after {
         position: absolute;
@@ -167,7 +171,7 @@
   // #endregion
 }
 
-:is(.youtube-link[data-youtube], .vimeo-link[data-vimeo]) {
+:is(.youtube-link, .vimeo-link) {
   position: relative;
 
   &:before {

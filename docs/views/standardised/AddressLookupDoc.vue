@@ -7,8 +7,6 @@
   import Versions from '../Versions.vue';
 
   let urlParams = new URLSearchParams(window.location.search);
-    console.log(urlParams.has('target')); // true
-    console.log(urlParams.get('yourParam')); // "MyParam"
 </script>
 
 <template>
@@ -428,12 +426,12 @@
       </div>
     </div>
 
-    <Integration component="address-lookup" componentName="iam-address-lookup">
+    <Integration component="std-address-lookup" componentName="iam-std-address-lookup">
       <template #web-component>
         <pre><code>{{`<iam-std-address-lookup></iam-std-address-lookup>`}}</code></pre>
       </template>
       <template #vue-component>
-        <pre><code>{{`<script setup>import AddressLookup from '@/components/AddressLookup/AddressLookup.vue</script>
+        <pre><code>{{`<script setup>import AddressLookup from '@/components/STDAddressLookup/STDAddressLookup.vue</script>
         
 <STDAddressLookup></STDAddressLookup>
 `}}</code></pre>
@@ -949,39 +947,3 @@ Then I can see a link to the Royal Mail Postcode Lookup page at the bottom of th
 
   </main>
 </template>
-
-<style>
-
-  body:has(.visualtest.target) nav,
-  body:has(.visualtest.target) footer,
-  main:has(.visualtest.target) > *:not(.target) {
-
-    display: none!important;
-  }
-
-  main:has(.visualtest.target) > *.target .visualtest-hide {
-
-    display: none!important;
-  }
-
-  main:has(.visualtest.target) > *.target {
-
-    --col-start: col-1;
-  }
-          
-
-  @layer utilities {
-      
-    main:has(.visualtest.target) > *:is(.d-flex,.d-block):not(.target) {
-
-      display: none!important;
-    }
-
-    
-    main:has(.visualtest.target) > *.target .visualtest-hide:is(.d-flex,.d-block) {
-
-      display: none!important;
-    }
-
-  }
-</style>

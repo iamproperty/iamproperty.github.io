@@ -66,6 +66,8 @@
 
 
 
+  let urlParams = new URLSearchParams(window.location.search);
+  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
 
 
 </script>
@@ -88,7 +90,7 @@
       </p>
       <p>We use a type scale ratio of 1.2, minor third scale, to ensure consistency through type sizing.</p>
     </div>
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
       <div class="row">
         <div class="d-none d-md-block col-md-3">
           <img :src="tabletDesktopImg" alt="Rendered image of a tablet and a desktop PC" loading="lazy" class="mb-5" />
@@ -160,13 +162,14 @@
       </div>
     </div>
 
-    <div class="container visualtest">
+    <div class="container">
       <h2>Typography - Body</h2>
       <p class="lead">
         Our body font is Qanelas. It should be used for all supporting copy or information. All body will have a
         max-width of 50rem (800px) applied to aid readability.
       </p>
-
+    </div>
+    <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
       <div class="row">
         <div class="d-none d-md-block col-md-3"></div>
         <div class="col">
@@ -269,8 +272,8 @@
       </div>
     </div>
 
-    <div class="container visualtest">
-      <h3 class="h4 pb-2">Blockquote</h3>
+    <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
+      <h3 class="h4 pb-2 visualtest-hide">Blockquote</h3>
       <blockquote>
         <p>
           Our body font is Qanelas. It should be used for all supporting copy or information. All body will have a
@@ -278,11 +281,13 @@
         </p>
         <cite>Citation</cite>
       </blockquote>
-      <h3 class="h4 pb-2">Stat</h3>
+    </div>
+    <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
+      <h3 class="h4 pb-2 visualtest-hide">Stat</h3>
       <span class="stat">3,886</span>
     </div>
 
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest5' ? 'target' : '')}`">
       <h2>Typography - colour</h2>
       <div class="colour-sample">
         <div class="colour bg-primary"></div>

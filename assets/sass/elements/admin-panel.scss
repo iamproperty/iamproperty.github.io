@@ -1,9 +1,6 @@
 @use '../_func' as *;
 
 
-
-
-
 @layer elements {
   .admin-panel {
     --padding-x: 1.5rem;
@@ -19,6 +16,16 @@
     margin-bottom: 1.5rem;
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
     overflow: hidden;
+    
+    &:has(
+      :is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-'])
+    ) {
+      display: grid;
+
+      > * {
+        grid-column: var(--col-start, col-1-start) / var(--col-end, col-12-end);
+      }
+    }
 
     @container style(--theme: dark) {
       background-color: var(--colour-canvas-2);
@@ -55,6 +62,7 @@
       line-height: 1.5rem;
       font-weight: bold;
       padding: 1rem 1.5rem;
+      max-width: unset;
     }
 
     > :is(.admin-panel__heading):first-child {
@@ -245,26 +253,22 @@
     }
   }
   // #endregion
+  .admin-panel:has(.admin-panel__footer){
+
+    //container-type: inline-size;
+  }
   .admin-panel__footer:last-child {
     background-color: var(--wider-colour);
     padding-top: var(--padding-top);
     margin-inline: calc(var(--padding-x) * -1);
     padding-inline: var(--padding-x);
-    padding-bottom: var(--padding-bottom);
+    padding-bottom: 0;
 
-    &:has(strong:last-child){
-      display: flex;
-      align-items: end;
+    & > *:last-child {
+      margin-bottom: 0;
+      padding-bottom: var(--padding-bottom);
 
-      p {
-        padding-bottom: 0;
-        padding-inline-end: var(--padding-x);
-      }
-
-      strong {
-        white-space: nowrap;
-        margin-inline-start: auto;
-      }
+      align-self: center;
     }
   }
 

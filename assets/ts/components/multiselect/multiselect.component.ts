@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import { filterList } from '../../modules/dropdown';
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
@@ -126,25 +127,6 @@ class iamMultiselect extends HTMLElement {
       setItem(checkbox);
     });
 
-    // Filter list
-    const filterList = (): void => {
-
-      Array.from(multiselect.querySelectorAll(`label:not([slot="checked"])`)).forEach((label) => {
-        const checkbox = label.querySelector('input');
-        const searchValue = checkbox.value;
-        const labelText = label.textContent;
-
-        if (
-          searchValue.toLowerCase().includes(search.value.toLowerCase()) ||
-          labelText.toLowerCase().includes(search.value.toLowerCase())
-        ) {
-          label.removeAttribute('slot');
-        } else {
-          label.setAttribute('slot', 'notmatched');
-        }
-      });
-    }
-
     search.addEventListener('input', () => {
 
       if (multiselect.hasAttribute('data-url')) {
@@ -154,7 +136,7 @@ class iamMultiselect extends HTMLElement {
         }
       } else {
           
-        filterList();
+        filterList(multiselect, search);
       }
     });
 
@@ -422,7 +404,7 @@ class iamMultiselect extends HTMLElement {
 
             multiselect.insertAdjacentHTML('beforeend', `${items}`);
             
-            filterList();
+            filterList(multiselect, search);
             return response;
           });
       } catch (error) {

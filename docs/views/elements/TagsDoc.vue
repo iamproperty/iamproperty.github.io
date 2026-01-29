@@ -108,7 +108,7 @@
 
     <h3 class="mt-4">Display tag colour palette</h3>
     <p>Display tags can use any colour from the wider colour palette.</p>
-    <div class="container visualtest">
+    <div class="container">
       <details>
         <summary>Colour Reference</summary>
         <div class="row row-cols-2 row-cols-sm-4 d-none d-sm-flex">

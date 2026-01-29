@@ -11,7 +11,7 @@
 
     <p class="lead">Basic styles and behaviour of tables.</p>
 
-    <table class="mb-5">
+    <table class="mb-5 visualtest">
       <thead>
         <tr>
           <th>Client name</th>
@@ -60,12 +60,24 @@
 
     <h3>Add an overflow Scroll</h3>
     <p>To add a scroll bar to a table the table needs to be wrapped in a div element with nothing else in it.</p>
-    <div>
+    <div class="visualtest">
       <table>
         <thead>
           <tr>
             <th>Client name</th>
             <th>Date added</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
+            <th>Lorum ipsum</th>
             <th>Lorum ipsum</th>
             <th>Lorum ipsum</th>
             <th>Lorum ipsum</th>
@@ -80,10 +92,14 @@
             <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
-          </tr>
-          <tr>
-            <td>Tom Smith</td>
-            <td>10.05.23</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
@@ -96,10 +112,54 @@
             <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
           </tr>
           <tr>
             <td>Tom Smith</td>
             <td>10.05.23</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+          </tr>
+          <tr>
+            <td>Tom Smith</td>
+            <td>10.05.23</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
+            <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>
             <td>Lorum ipsum</td>

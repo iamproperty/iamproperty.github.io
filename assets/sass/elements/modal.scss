@@ -260,18 +260,6 @@
 
   // #endregion
 
-  dialog:has(.embed) {
-    width: calc(100% - 6rem) !important;
-    max-width: 50rem !important;
-    padding: 0;
-    aspect-ratio: 16 / 9;
-
-    .embed {
-      aspect-ratio: 16 / 9;
-      width: 100%;
-    }
-  }
-
   // #region Multi step modal
 
   *:not(.dialog__wrapper) > dialog:has(iam-multi-step)[open] {

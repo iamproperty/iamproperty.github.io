@@ -62,6 +62,26 @@
       <button class="btn btn-secondary">Decline case</button>
     </div>
 
+    <div class="admin-panel">
+      
+      <span class="feature fa-location-dot d-flex align-items-center">
+        <strong>Average search times:</strong>
+        <strong class="ms-auto">21 days</strong>
+      </span>
+      <span class="feature fa-location-dot d-flex align-items-center">
+        <strong>Average search times:</strong>
+        <strong class="ms-auto">21 days</strong>
+      </span>
+      <span class="feature fa-location-dot d-flex align-items-center">
+        <strong>Average search times:</strong>
+        <strong class="ms-auto">21 days</strong>
+      </span>
+
+
+      <div class="admin-panel__footer bg-success mt-auto">
+        <p>For the Sale transaction, the minimum forecasted time<br/> saving with Premium Conveyancing is:</p><strong class="h4">29 days saved</strong>
+      </div>
+    </div>
 
     <hr/>
     <div class="d-flex flex-sm-row flex-column gap-2 mb-4">

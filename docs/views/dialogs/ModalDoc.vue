@@ -50,6 +50,10 @@
       });
     }
   });
+
+  const handleAgreed = (e) => {
+    console.log(e);
+  }
 </script>
 
 <template>

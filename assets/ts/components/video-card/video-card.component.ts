@@ -82,7 +82,7 @@ class iamVideoCard extends HTMLElement {
         });
         cardComponent.dispatchEvent(customEvent);
 
-        createYoutTubeVideo(embed, this.getAttribute('[data-youtbue]'));
+        createYoutTubeVideo(embed, this.getAttribute('[data-youtube]'));
         dialog.showModal();
       });
 

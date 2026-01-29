@@ -1,0 +1,52 @@
+@layer elements {
+
+  .btn__group {
+
+    display: flex;
+    flex-direction: column;
+
+    .btn {
+      margin-inline-end: 0;
+      width: 100%;
+      max-width: 100%;
+      text-align: center;
+      white-space: normal;
+    }
+
+
+    .btn-secondary {
+      order: 2;
+    }
+    .btn-primary {
+      order: 1;
+    }
+  }
+  @container (min-width: 36em) {
+    .btn__group {
+      flex-direction: row;
+      column-gap: var(--gap);
+
+      .btn {
+          
+        max-width: fit-content;
+        white-space: nowrap;
+      }
+
+        
+      .btn-secondary {
+        order: 1;
+      }
+      .btn-primary {
+        order: 2;
+      }
+    }
+    .btn__group.text-end {
+      justify-content: flex-end;
+    }
+    iam-modal .btn__group:last-child .btn,
+    dialog .btn__group:last-child .btn {
+      margin-bottom: 0;
+    }
+  }
+}
+

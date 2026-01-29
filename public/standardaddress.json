@@ -29,19 +29,7 @@
         "double_dependent_locality": "",
         "dependent_locality": "Gosforth",
         "post_town": "NEWCASTLE-UPON-TYNE",
-        "postal_county": {
-          "id": "urn:als:county:a72ndjIq",
-          "county_name": "Tyne & Wear"
-        },
         "postcode": "NE3 3LU",
-        "country": {
-          "id": "urn:als:country:a72ndjIq",
-          "name": "United Kingdom of Great Britain and Northern Ireland",
-          "alpha-2": "GB",
-          "alpha-3": "GBR",
-          "is_fatf": false,
-          "short_name": "United Kingdom"
-        },
         "postcode_outward_code": "NE3",
         "postcode_inward_code": "3LU",
         "postcode_type": "S",
@@ -56,6 +44,20 @@
         "longitude": "123",
         "latitude": "",
         "label": "1 Acacia Avenue, Gosforth, NEWCASTLE-UPON-TYNE, NE3 3LU, UNITED KINGDOM"
+      },
+      "relationships": {
+        "postal_county": {
+          "id": "urn:als:county:a72ndjIq",
+          "county_name": "Tyne & Wear"
+        },
+        "country": {
+          "id": "urn:als:country:a72ndjIq",
+          "name": "United Kingdom of Great Britain and Northern Ireland",
+          "alpha-2": "GB",
+          "alpha-3": "GBR",
+          "is_fatf": false,
+          "short_name": "United Kingdom"
+        }
       }
     },
     {
@@ -78,19 +80,7 @@
         "double_dependent_locality": "",
         "dependent_locality": "Gosforth",
         "post_town": "NEWCASTLE-UPON-TYNE",
-        "postal_county": {
-          "id": "urn:als:county:a72ndjIq",
-          "county_name": "Tyne & Wear"
-        },
         "postcode": "NE3 3LU",
-        "country": {
-          "id": "urn:als:country:a72ndjIq",
-          "name": "United Kingdom of Great Britain and Northern Ireland",
-          "alpha-2": "GB",
-          "alpha-3": "GBR",
-          "is_fatf": false,
-          "short_name": "United Kingdom"
-        },
         "postcode_outward_code": "NE3",
         "postcode_inward_code": "3LU",
         "postcode_type": "S",
@@ -105,6 +95,20 @@
         "longitude": "",
         "latitude": "",
         "label": "2 Acacia Avenue, NEWCASTLE-UPON-TYNE, Tyne & Wear, NE3 3LU, UNITED KINGDOM"
+      },
+      "relationships": {
+        "postal_county": {
+          "id": "urn:als:county:a72ndjIq",
+          "county_name": "Tyne & Wear"
+        },
+        "country": {
+          "id": "urn:als:country:a72ndjIq",
+          "name": "United Kingdom of Great Britain and Northern Ireland",
+          "alpha-2": "GB",
+          "alpha-3": "GBR",
+          "is_fatf": false,
+          "short_name": "United Kingdom"
+        }
       }
     }
   ]

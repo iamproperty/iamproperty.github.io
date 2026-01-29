@@ -1,6 +1,8 @@
 @use 'sass:math';
 @use '_func' as *;
 
+@use './utilities/font-awesome-iso-fallbacks';
+
 @use './utilities/clearfix.scss';
 @use './utilities/visually-hidden.scss';
 @use './utilities/text-truncate.scss';
@@ -29,3 +31,4 @@
 @use './utilities/pointer-events';
 @use './utilities/rounded';
 @use './utilities/visible';
+@use './utilities/columns';
