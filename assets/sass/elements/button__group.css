@@ -13,18 +13,39 @@
       white-space: normal;
     }
 
-    
+
+    .btn-secondary {
+      order: 2;
+    }
+    .btn-primary {
+      order: 1;
+    }
   }
-  @container (min-width: 62em) {
+  @container (min-width: 36em) {
     .btn__group {
       flex-direction: row;
       column-gap: var(--gap);
 
       .btn {
-        
-      max-width: fit-content;
-      white-space: nowrap;
+          
+        max-width: fit-content;
+        white-space: nowrap;
       }
+
+        
+      .btn-secondary {
+        order: 1;
+      }
+      .btn-primary {
+        order: 2;
+      }
+    }
+    .btn__group.text-end {
+      justify-content: flex-end;
+    }
+    iam-modal .btn__group:last-child .btn,
+    dialog .btn__group:last-child .btn {
+      margin-bottom: 0;
     }
   }
 }

@@ -20,18 +20,15 @@
 
   @each $color, $value in $theme-colors {
     .text-#{$color} {
-      --text-opacity: 1;
       color: var(--colour-#{$color}) !important;
     }
 
     .bg-#{$color} {
-      --bg-opacity: 1;
       --bg-colour: var(--colour-#{$color}) !important;
       background-color: var(--colour-#{$color}) !important;
     }
 
     .hover-#{$color}:is(:hover,:focus,:focus-within) {
-      --bg-opacity: 1;
       --bg-colour: var(--colour-#{$color}) !important;
       background-color: var(--colour-#{$color}) !important;
     }
@@ -39,5 +36,9 @@
     .colour-#{$color} {
       --colour: var(--colour-#{$color}) !important;
     }
+  }
+
+  .text-body {
+    color: var(--colour-body);
   }
 }
