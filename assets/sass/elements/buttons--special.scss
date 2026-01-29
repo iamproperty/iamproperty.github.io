@@ -11,10 +11,11 @@
       display: none;
     }
 
-    &:after {
+    &:not(:has(i)):after {
       content: '';
 
       display: inline-block;
+      margin-right: -0.5em;
       margin-left: 1em;
 
       height: 0.8em;
