@@ -1092,7 +1092,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   z-index: 100;
   top: 100%;
   position: absolute;
-  background-color: white;
+  background-color: var(--colour-canvas);
   border-top: none;
 
   &:not(:empty):has(option:not(.hide)){
@@ -1111,7 +1111,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   display: none;
 
   option {
-    background-color: white;
+    background-color: var(--colour-canvas);
     padding: 0.5rem;
     
     cursor: pointer;
@@ -1121,9 +1121,9 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     font-weight: inherit !important;
     font-family: inherit !important;
     font-size: 1rem !important;
-    line-height: rem(19) !important;
+    line-height: rem(24) !important;
     margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
-    padding-block: var(--menu-item-padding, 0.5rem) !important;
+    padding-block: var(--menu-item-padding, 0.25rem) !important;
     width: 100% !important;
     max-width: 100% !important;
     text-align: var(--menu-item-text-align, left) !important;
@@ -1137,6 +1137,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
     &:is(:hover, :focus) {
       background: var(--colour-light) !important;
+      color: #595959 !important;
       border-radius: 0.25rem !important;
     }
 
@@ -1153,6 +1154,32 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 }
 
+.dark-theme :is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup) datalist {
+
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light-theme) :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
+
+    --colour-heading: var(--colour-primary-theme);
+    --colour-body: var(--colour-primary-theme);
+    color: var(--colour-primary-theme);
+
+    // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+    > * {
+      color-scheme: light;
+    }
+  }
+
+  html:not(.light-theme) .bg-light {
+
+    color-scheme: light;
+  }
+}
+
+
+
 :is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active),:active) datalist {
 
   display: block;
@@ -1168,7 +1195,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   position: absolute;
   border-radius: 0.5rem;
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
-  width: var(--menu-item-width, 50rem) !important;
+  width: 100% !important;
   max-width: var(--menu-item-width, 50rem) !important;
   z-index: 100;
   display: none;

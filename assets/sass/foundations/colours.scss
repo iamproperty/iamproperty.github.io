@@ -53,6 +53,11 @@
 
   .dark-theme .bg-light {
     color-scheme: light;
+    --colour-body: #595959;
+
+    p {
+      color: var(--colour-body);
+    }
   }
   
   @media (prefers-color-scheme: dark) {
@@ -71,6 +76,11 @@
     html:not(.light-theme) .bg-light {
 
       color-scheme: light;
+      --colour-body: #595959;
+
+      p {
+        color: var(--colour-body);
+      }
     }
   }
   // #endregion
