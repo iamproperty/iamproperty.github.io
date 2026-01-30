@@ -131,7 +131,6 @@
   // #region input field
   :is(
     input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
-    textarea,
     output
   ) {
     display: block;
@@ -182,11 +181,6 @@
     }
   }
 
-  textarea {
-    max-height: 100%;
-  }
-
-
   input[type='color'] {
 
     padding: 0!important;
@@ -195,7 +189,6 @@
   
   [disabled] :is(
     input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']),
-    textarea,
     output,
     select:not(.select--minimal, .btn)
   ) {
@@ -215,13 +208,6 @@
     max-width: var(--input-max-width);
   }
 
-  textarea {
-    --textarea-height-scale: 3;
-    min-height: calc(
-      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) +
-        (var(--input-lh, 1.25rem) * var(--textarea-height-scale)) + 4px
-    ) !important;
-  }
   // #endregion
 
 }

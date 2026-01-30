@@ -1786,6 +1786,38 @@ class iamSTDAddressLookup extends HTMLElement {
         }
       });
     }
+
+
+    // If inside conditional
+    
+
+    if(this.closest('.conditional')){
+
+
+      Array.from(this.querySelectorAll('[required]')).forEach((input) => {
+
+        input.setAttribute('data-conditional-required','true');
+        input.removeAttribute('required');
+      });
+      
+      Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
+
+        input.setAttribute('data-conditional-data-required','true');
+        input.removeAttribute('data-required');
+      });
+      
+      const conditionalStyles = window.getComputedStyle(this.closest('.conditional'));
+
+      if(conditionalStyles.getPropertyValue("display") == 'block'){
+        Array.from(this.querySelectorAll('[data-conditional-data-required]')).forEach((input) => {
+          input.setAttribute('data-required', 'true');
+        });
+        Array.from(this.querySelectorAll('[data-conditional-required]')).forEach((input) => {
+          input.setAttribute('required', 'true');
+        });
+      }
+    }
+
   }
 }
 

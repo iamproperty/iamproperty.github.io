@@ -50,21 +50,30 @@
       outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
       width: 100%;
 
-      @media screen and (min-width: 36em) {
+      > *:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    @media screen and (min-width: 36em) {
+      .form-panel {
         max-width: calc(100% - 5rem); // Guess
         margin-inline: auto;
       }
+    }
 
-      @media screen and (min-width: 62em) {
+    @media screen and (min-width: 62em) {
+      .form-panel {
         max-width: rem(924); // Guess
         border-radius: 0.5rem;
         padding-inline: rem(94);
         padding-block: 2.5rem;
         margin-bottom: 2rem;
       }
-
-      > *:last-child {
-        margin-bottom: 0 !important;
+      
+      .form-panel--sm {
+        max-width: 40rem; /* 640px */
+        padding-inline: 2rem;
       }
     }
 

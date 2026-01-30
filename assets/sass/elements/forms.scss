@@ -5,6 +5,7 @@
 
 @use './label' as *;
 @use './input' as *;
+@use './textarea' as *;
 
 
 $icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
@@ -17,8 +18,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
   // 1. Remove the margin in Firefox and Safari
   select,
-  optgroup,
-  textarea {
+  optgroup {
     margin: 0; // 1
     font-family: inherit;
     font-size: inherit;
@@ -45,13 +45,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 
   
-
-  // 1. Textareas should really only resize vertically so they don't break their (horizontal) containers.
-
-  textarea {
-    resize: vertical; // 1
-  }
-
   // 1. Browsers set a default `min-width: min-content;` on fieldsets,
   //    unlike e.g. `<div>`s, which have `min-width: 0;` by default.
   //    So we reset that to ensure fieldsets behave more like a standard block element.
@@ -165,6 +158,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   // #region legend
   fieldset {
     width: 100%;
+    position: relative;
   }
   legend {
     font-family: var(--font-heading);
@@ -209,7 +203,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       width: 100%;
     }
 
-    :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), textarea, output) {
+    :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), output) {
       flex-shrink: 1;
       flex-grow: 1;
       width: 0;
@@ -279,14 +273,12 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
             [type='time']
           ),
-        textarea,
         output
       ),
     :is(
       input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
           [type='time']
         ),
-      textarea,
       output
     ):has(~ .suffix) {
       order: 1;
@@ -660,7 +652,9 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
   input:checked + .conditional,
   input:checked + label + .conditional,
-  label:has(:checked) + .conditional {
+  label:has(:checked) + .conditional,
+  .was-validated .conditional:has(input[required]:invalid),
+  .was-validated .conditional:focus-within {
     display: block;
     clear: both;
   }
@@ -833,7 +827,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     margin-bottom: 1.5rem;
     max-width: var(--input-max-width);
 
-    :is(input:not([type='range']), select, textarea) {
+    :is(input:not([type='range']), select) {
       margin-top: 0.5rem;
       margin-bottom: 0 !important;
     }
