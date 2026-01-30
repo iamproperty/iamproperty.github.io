@@ -16,6 +16,11 @@
     text-underline-offset: 0.2em;
     overflow-anchor: none; 
     cursor: pointer;
+    display: inline-block;
+    width: 1rem;
+    height: 1lh;
+    min-height: 1rem;
+    vertical-align: text-top;
   }
 
   .tooltip__anchor {
@@ -37,6 +42,8 @@
     width: 1rem;
     background-color: var(--colour, var(--colour-info));
     border-radius: 50%;
+    top: 50%;
+    translate: 0% -50%;
   }
   :host(:empty) .tooltip__anchor:after {
     font-family: "Font Awesome 6 Pro";

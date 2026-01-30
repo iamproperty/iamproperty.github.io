@@ -73,6 +73,10 @@
         padding-inline: 0;
         max-width: rem(924) !important;
       }
+
+      .form-panel .btn__group {
+        margin-bottom: 0;
+      }
     }
 
     [data-loading] {

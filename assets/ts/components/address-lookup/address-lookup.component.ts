@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
 import advancedSelect from '../../modules/advanced-select';
 import { isValidPostcode } from '../../modules/helpers';
 
