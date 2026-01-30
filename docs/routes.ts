@@ -416,6 +416,15 @@ const routes = [
         component: () => import('./views/form/FormValidationDoc.vue'),
         searchterms: 'error, success, message',
       },
+      {
+        path: 'textarea',
+        name: 'Textarea',
+        meta: {
+          title: 'Textarea | Elements | iamkey',
+        },
+        component: () => import('./views/form/TextareaDoc.vue'),
+        searchterms: 'input, long',
+      },
     ],
   },
   {
@@ -731,6 +740,15 @@ const routes = [
       {
         path: '',
         component: () => import('./views/components/Index.vue'),
+      },
+      {
+        path: 'form',
+        name: 'Form component (beta)',
+        meta: {
+          title: 'Form component | Components | iamkey',
+        },
+        component: () => import('./views/form-components/FormDoc.vue'),
+        searchterms: '',
       },
       {
         path: 'addresslookup',
@@ -1465,6 +1483,22 @@ const routes = [
           title: 'Movebutler refer to standalone conveyancing | iamkey',
         },
         component: () => import('./views/standalone/pc/refer.vue'),
+      },
+      {
+        path: 'form-to-standalone',
+        name: 'Movebutler refer form',
+        meta: {
+          title: 'Movebutler refer form to standalone conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/form.vue'),
+      },
+      {
+        path: 'successfull-to-standalone',
+        name: 'Movebutler successfull refer form',
+        meta: {
+          title: 'Movebutler successfull refer form to standalone conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/successfull.vue'),
       },
       {
         path: 'premium-conveyancing',

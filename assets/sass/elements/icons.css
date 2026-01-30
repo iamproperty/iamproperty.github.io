@@ -37,11 +37,11 @@
 
   .icon[class*='fa-'][class*='bg-'] {
     aspect-ratio: 1 / 1;
-    width: calc(1lh + 0.5rem);
-    min-width: calc(1lh + 0.5rem);
-    max-width: calc(1lh + 0.5rem);
+    width: calc(1lh + 0.5em);
+    min-width: calc(1lh + 0.5em);
+    max-width: calc(1lh + 0.5em);
     text-align: center;
-    padding: 0.25rem;
+    padding: 0.25em;
     border-radius: 50% !important;
     display: inline-block;
   }
