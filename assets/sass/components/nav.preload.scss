@@ -1,11 +1,11 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('components', $layers) {
+
+
+
+@layer components {
   nav:has(iam-nav) {
     grid-column: container;
   }
@@ -19,14 +19,14 @@ $darkMode: 'true' !default;
     column-grid: container;
 
     .brand {
-      font-size: rem(48);
-      height: rem(48);
+      font-size: 3rem;
+      height: 3rem;
       padding: 0;
       text-decoration: none;
       min-width: min(var(--svg-width), 14rem);
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
       padding-inline: max(
         var(--padding-inline),
         calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
@@ -44,7 +44,7 @@ $darkMode: 'true' !default;
         display: none;
       }
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @media screen and (min-width: 62em) {
         &:has([slot='secondary']) {
           padding-top: rem(64);
         }

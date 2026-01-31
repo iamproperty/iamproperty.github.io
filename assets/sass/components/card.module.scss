@@ -11,8 +11,8 @@
   border-radius: var(--card-border-radius);
   position: relative;
   font-weight: bold;
-  font-size: rem(18);
-  line-height: rem(24);
+  font-size: 1.125rem; /* 18/16 */
+  line-height: 1.5rem;
   color: var(--colour-primary);
   //min-height: calc(100% - 2rem);
   width: 100%;
@@ -73,7 +73,7 @@
 }
 
 ::slotted(i) {
-  font-size: rem(24) !important;
+  font-size: 1.5rem !important;
   margin: -3px var(--card-icon-right) 0 0 !important;
   vertical-align: middle !important;
 }
@@ -87,17 +87,17 @@
 ::slotted(span:not(.badge)) {
   display: block !important;
   font-weight: normal !important;
-  font-size: rem(16) !important;
+  font-size: 1rem !important;
 }
 ::slotted(small) {
-  padding-top: rem(16) !important;
+  padding-top: 1rem !important;
   display: block !important;
   font-weight: normal !important;
   padding-bottom: 0 !important;
   color: var(--colour-body);
 }
 ::slotted(span:not(.badge):not([class*='pt-'])) {
-  padding-top: rem(24) !important;
+  padding-top: 1.5rem !important;
 }
 
 ::slotted(:is(a, button)[slot='footer']) {
@@ -111,9 +111,9 @@
 }
 
 .card__total {
-  font-size: rem(48);
-  line-height: rem(48);
-  padding-right: rem(16);
+  font-size: 3rem;
+  line-height: 3rem;
+  padding-right: 1rem;
   margin-top: 0.5rem;
 
   i {

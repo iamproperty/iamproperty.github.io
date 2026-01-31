@@ -1,6 +1,13 @@
 @use '../_func' as *;
+@use '../elements/buttons--action.scss' as *;
 
-@include display();
+@use '../utilities/display' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 :host {
   max-width: var(--input-max-width, 50rem);

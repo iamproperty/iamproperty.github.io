@@ -1,9 +1,97 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$darkMode: 'true' !default;
 
-body:has(iam-nav.open:not(.nav--sticky):not(.nav--xs-sticky)) {
+
+// Default colour 
+iam-nav {
+
+  > :not([slot="logo"],[slot="secondary"]) {
+    color-scheme: light;
+  }
+
+  > [slot="secondary"] {
+    color-scheme: light;
+  }
+
+  > .nav--menu {
+    --colour-heading: var(--colour-primary-theme);
+    color-scheme: light;
+  }
+}
+
+iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+
+  > :not([slot="logo"],[slot="secondary"]) {
+    color-scheme: light;
+  }
+}
+
+.dark-theme iam-nav {
+
+  > :not([slot="logo"],[slot="secondary"]) {
+    color-scheme: dark;
+  }
+  
+  > .nav--menu {
+    --colour-heading: var(--colour-white);
+    color-scheme: dark;
+  }
+}
+
+.dark-theme iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+
+  --menu-btn-colour: var(--colour-white);
+}
+  
+  @media (prefers-color-scheme: dark) {
+    html:not(.light-theme) iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+
+      --menu-btn-colour: var(--colour-heading);
+    }
+  }
+
+
+@media screen and (min-width: 62em) {
+  iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+    > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
+      color-scheme: dark;
+    }
+
+    > details > div {
+      color-scheme: light;
+    }
+  }
+
+  .dark-theme iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+
+    > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
+      color-scheme: light;
+    }
+
+    
+    > details > div {
+      color-scheme: dark;
+    }
+
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not(.light-theme) iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+      > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
+        color-scheme: light;
+      }
+
+        
+      > details > div {
+        color-scheme: dark;
+      }
+    }
+  }
+
+}
+
+body:has(iam-nav.open:not(.nav--sticky,.demo-open):not(.nav--xs-sticky)) {
   max-height: 100vh;
   overflow: hidden;
 }
@@ -36,7 +124,7 @@ nav:has(iam-nav) {
   }
 }
 
-@include media-breakpoint-up(md, $mobileOnly) {
+@media screen and (min-width: 62em) {
   nav:has(iam-nav a[slot='secondary']) {
     min-height: #{rem(96 + 40)};
   }
@@ -57,7 +145,7 @@ nav:has(iam-nav.nav--sticky) {
 }
 
 @media screen and (max-width: 36em) {
-  body:has(iam-nav.open:not(.nav--xs-sticky)) {
+  body:has(iam-nav.open:not(.nav--xs-sticky,.demo-open)) {
     max-height: 100vh;
     overflow: hidden;
   }
@@ -80,7 +168,7 @@ nav:has(iam-nav.nav--sticky) {
   }
 }
 
-@include media-breakpoint-up(sm, $mobileOnly) {
+@media screen and (min-width: 36em) {
   body:has(iam-nav.open:not(.nav--sticky)) {
     max-height: 100vh;
     overflow: hidden;
@@ -107,14 +195,14 @@ iam-nav {
   margin-left: auto;
   margin-right: auto;
   padding: var(--container-padding);
-  padding-top: rem(24);
-  padding-bottom: rem(24);
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
   width: 100%;
   //max-width: rem(1280);
 
   .brand {
-    font-size: rem(48);
-    height: rem(48);
+    font-size: 3rem;
+    height: 3rem;
     padding: 0;
     text-decoration: none;
     min-width: min(var(--svg-width), 14rem);
@@ -151,6 +239,14 @@ iam-nav {
     &[aria-current='page'] {
       text-decoration-color: var(--colour-info) !important;
     }
+  }
+
+
+}
+
+@container style(--body-theme: dark) {
+  iam-nav.bg-primary [slot="secondary"] {
+    --colour-link: white;
   }
 }
 
@@ -191,11 +287,6 @@ iam-nav details {
 // #region mobile and tablet mega menu
 
 @mixin mobDetails() {
-  background-color: var(--colour-canvas);
-
-  @include light-mode($darkMode) {
-    background-color: #eeeeee;
-  }
 
   margin-left: -1.5rem;
   margin-right: -1.5rem;
@@ -204,11 +295,13 @@ iam-nav details {
   position: relative;
 
   summary {
-    background-color: var(--colour-white);
+    background-color: var(--colour-canvas-2);
 
+    /*
     @container style(--theme: dark) {
       background-color: var(--colour-canvas-2);
     }
+      */
     display: block;
     border: none;
     color: var(--colour-link);
@@ -226,7 +319,7 @@ iam-nav details {
     &:after {
       content: '\f055';
       display: block;
-      font-size: rem(24);
+      font-size: 1.5rem;
       font-weight: 300;
       position: absolute;
       top: 1.5rem;
@@ -289,6 +382,11 @@ iam-nav details {
 }
 
 @media screen and (max-width: 62em) {
+
+  iam-nav details {
+
+    background-color: #eeeeee;
+  }
   iam-nav details {
     @include mobDetails();
 
@@ -299,16 +397,20 @@ iam-nav details {
       }
 
       summary {
-        padding: 0 1.5rem rem(24) 3.5rem;
+        padding: 0 1.5rem 1.5rem 3.5rem;
         position: relative;
       }
 
       summary:after {
         left: 1.5rem;
-        font-size: rem(16);
+        font-size: 1rem;
         top: rem(3);
         transform: none;
         font-weight: 400;
+      }
+
+      > div {
+        color-scheme: light;
       }
     }
 
@@ -336,16 +438,16 @@ iam-nav details {
 // #region tablet mega menu tweaks
 
 @mixin tabletDetails() {
-  padding-right: rem(40);
-  margin-right: rem(-40);
+  padding-right: 2.5rem;
+  margin-right: -2.5rem;
 
   &:after {
     width: calc(100% - 4rem);
   }
 
   summary {
-    padding-right: rem(40);
-    margin-right: rem(-40);
+    padding-right: 2.5rem;
+    margin-right: -2.5rem;
 
     &:after {
       right: 2.5rem;
@@ -359,7 +461,7 @@ iam-nav details {
   }
 
   iam-nav details details[open] + details:before {
-    padding-right: rem(40);
+    padding-right: 2.5rem;
     margin-right: rem(-40);
   }
 }
@@ -374,7 +476,7 @@ iam-nav details {
 // #endregion
 
 // #region Desktop mega menu
-@include media-breakpoint-up(md, $mobileOnly) {
+@media screen and (min-width: 62em) {
   iam-nav > details,
   iam-nav *:not(.nav--menu) > details {
     width: auto;
@@ -391,12 +493,12 @@ iam-nav details {
       position: relative;
       font-weight: normal;
       white-space: nowrap;
-      padding-right: rem(24);
+      padding-right: 1.5rem;
 
       &:after {
         content: '\f078';
         display: block;
-        font-size: rem(16);
+        font-size: 1rem;
         font-weight: 300;
         position: absolute;
         top: 50%;
@@ -427,21 +529,10 @@ iam-nav details {
       ) !important;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
 
-      @container style(--theme: light) {
-        background: var(--colour-white);
-        @include reset-colours();
-      }
-      @container style(--theme: dark) {
-        @include invert-colours();
-      }
     }
 
     &[open] > div:has(details) {
       background: var(--colour-canvas-2);
-
-      @include light-mode($darkMode) {
-        background: #eeeeee;
-      }
 
       > a {
         display: inline-block !important;
@@ -477,10 +568,6 @@ iam-nav details {
     &[open] > div:not(:has(details)) {
       background: var(--colour-canvas);
 
-      @include light-mode($darkMode) {
-        background: var(--colour-white);
-        --colour-canvas-2: white;
-      }
 
       padding-top: rem(40 + 88);
       padding-bottom: rem(64);
@@ -513,7 +600,7 @@ iam-nav details {
           var(--padding-inline),
           calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
         ) !important;
-        font-size: rem(32);
+        font-size: 2rem;
         font-weight: bold;
         line-height: rem(88);
 
@@ -527,7 +614,7 @@ iam-nav details {
       }
 
       &:has(iam-card) {
-        column-gap: rem(16);
+        column-gap: 1rem;
 
         a:not(:has(iam-card)) {
           margin-right: rem(94) !important;
@@ -546,7 +633,7 @@ iam-nav details {
 
     a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
       font-size: 1rem;
-      line-height: rem(24);
+      line-height: 1.5rem;
       padding-block: 1.5rem;
       position: relative;
       font-weight: normal;
@@ -587,7 +674,7 @@ iam-nav details {
     }
 
     details:not(:first-child) > summary {
-      margin-left: rem(32);
+      margin-left: 2rem;
     }
   }
 
@@ -618,7 +705,7 @@ iam-nav details {
 // #endregion
 
 // #region Search
-@include media-breakpoint-up(md, $mobileOnly) {
+@media screen and (min-width: 62em) {
   iam-nav {
     &.search-open {
       > *:not([slot='logo']):not([slot='secondary']):not([slot='search']) {
@@ -630,10 +717,10 @@ iam-nav details {
 // #endregion
 
 // #region Dual navbar in desktop
-@include media-breakpoint-up(md, $mobileOnly) {
+@media screen and (min-width: 62em) {
   iam-nav:has([slot='dual']) {
     .brand:has(~ [slot='dual']) {
-      margin-right: rem(24) !important;
+      margin-right: 1.5rem !important;
     }
 
     *:not([slot='dual']):has(+ [slot='dual']) + [slot='dual'] {
@@ -682,10 +769,10 @@ iam-nav > .dialog__wrapper {
     all: unset;
     display: block !important;
     font-size: rem(14) !important;
-    line-height: rem(32) !important;
-    height: rem(32) !important;
-    min-height: rem(32) !important;
-    max-height: rem(32) !important;
+    line-height: 2rem !important;
+    height: 2rem !important;
+    min-height: 2rem !important;
+    max-height: 2rem !important;
     width: 100% !important;
     margin: 0 !important;
     cursor: pointer;
@@ -773,5 +860,6 @@ iam-nav .nav--menu {
     display: none !important;
   }
 }
+
 
 // #endregion

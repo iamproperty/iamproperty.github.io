@@ -1,13 +1,14 @@
 @use '../_func.scss' as *;
 
+@use '../elements/prefix.scss' as *;
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
 @use '../elements/dialog.scss' as *;
 @use '../elements/popover.scss' as *;
 
-@include margins();
-@include visually-hidden();
-@include display();
+@use '../utilities/margins.scss' as *;
+@use '../utilities/visually-hidden.scss' as *;
+@use '../utilities/display.scss' as *;
 
 :host {
   background-color: #fcfcfc;
@@ -27,30 +28,30 @@ slot[name='selectall'] {
   display: block;
   position: absolute !important;
   top: 50%;
-  left: rem(24);
+  left: 1.5rem;
   margin-left: 0;
   transform: translate(0, -50%);
   z-index: 10;
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
-    left: rem(32);
+  @media screen and (min-width: 36em) {
+    left: 2rem;
   }
 
   .btn-action:not(:last-child) {
-    margin-right: rem(4) !important;
+    margin-right: 0.25rem !important;
   }
 }
 
 .selectall,
 slot[name='selectall'] {
-  width: rem(40);
+  width: 2.5rem;
   overflow: hidden;
 
   label {
-    height: rem(40);
+    height: 2.5rem;
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @media screen and (min-width: 36em) {
     width: auto;
     overflow: visible;
   }
@@ -62,13 +63,13 @@ slot[name='selectall'] {
 
 :host([data-search]) .actionbar [data-search] {
   display: block;
-  margin: 0 0 0 rem(16);
+  margin: 0 0 0 1rem;
 }
 
 :is(.actionbar, .actionbar--selected, .actionbar--search) {
   border-top-left-radius: var(--actionbar-radius, #{rem(10)});
   border-top-right-radius: var(--actionbar-radius, #{rem(10)});
-  padding: 0 rem(24);
+  padding: 0 1.5rem;
   flex-wrap: nowrap;
   justify-content: flex-end;
   align-items: center;
@@ -79,8 +80,8 @@ slot[name='selectall'] {
     position: absolute;
   }
 
-  @include container-up(sm) {
-    padding: 0 rem(32);
+  @media screen and (min-width: 36em) {
+    padding: 0 2rem;
   }
 }
 
@@ -92,10 +93,7 @@ slot[name='selectall'] {
   background-color: var(--colour-canvas);
   pointer-events: none;
   display: flex;
-
-  @include light-mode($darkMode) {
-    background-color: #e6eaec;
-  }
+  background-color: #e6eaec;
 
   @supports selector(:has(*)) {
     opacity: 0;
@@ -110,10 +108,7 @@ slot[name='selectall'] {
   position: relative;
   opacity: 0;
   pointer-events: none;
-
-  @include light-mode($darkMode) {
-    background-color: #e6eaec;
-  }
+  background-color: #e6eaec;
 }
 
 // Show selected bar
@@ -155,7 +150,7 @@ slot[name='selectall'] {
 ::slotted(.btn) {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
-  margin-left: rem(16) !important;
+  margin-left: 1rem !important;
   margin-right: 0 !important;
   place-self: unset !important;
 }
@@ -173,21 +168,23 @@ slot[name='selectall'] {
 ::slotted([data-single]) {
   pointer-events: none;
   opacity: 0.5;
+  cursor: not-allowed;
 }
 
 :host([data-selected='1']) ::slotted([data-single]) {
   pointer-events: all;
   opacity: 1;
+  cursor: pointer;
 }
 
 ::slotted(hr) {
-  height: rem(32);
+  height: 2rem;
   color: #9d9d9d !important;
   width: 1px;
   display: none;
   margin-left: 1rem !important;
 
-  @include container-up(md) {
+  @media screen and (min-width: 62em) {
     display: block;
   }
 }
@@ -204,11 +201,11 @@ slot[name='selectall'] {
   overflow: visible;
   position: relative;
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     width: rem(450);
   }
 
-  @include container-up(md) {
+  @media screen and (min-width: 62em) {
     width: rem(750);
   }
 
@@ -220,11 +217,11 @@ slot[name='selectall'] {
 :host([data-large-safe-area]) .safe-area {
   width: rem(260);
 
-  @include container-up(sm) {
+  @media screen and (min-width: 36em) {
     width: rem(620);
   }
 
-  @include container-up(md) {
+  @media screen and (min-width: 62em) {
     width: rem(1048);
   }
 }
@@ -260,33 +257,33 @@ slot[name='selectall'] {
 // #region Search bar
 .actionbar--search .btn {
   margin: 0;
-  margin-left: rem(-12) !important;
+  margin-left: -0.75rem !important;
   margin-right: auto !important;
 }
 
-.search-wrapper {
+.show .search-wrapper {
   width: calc(100% - #{rem(44 + 8)});
   max-width: rem(350) !important;
   margin: 0 !important;
 
-  @include container-up(md) {
+  @media screen and (min-width: 62em) {
     max-width: rem(450) !important;
   }
 
   input {
-    padding-top: rem(8);
-    padding-bottom: rem(8);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 
-    min-height: rem(40) !important;
-    max-height: rem(40) !important;
+    min-height: 2.5rem !important;
+    max-height: 2.5rem !important;
   }
 
   :is(.prefix, .suffix) {
-    padding: rem(8) !important;
-    min-height: rem(40) !important;
-    max-height: rem(40) !important;
-    min-width: rem(40) !important;
-    max-width: rem(40) !important;
+    padding: 0.5rem !important;
+    min-height: 2.5rem !important;
+    max-height: 2.5rem !important;
+    min-width: 2.5rem !important;
+    max-width: 2.5rem !important;
     line-height: rem(40 - 8 - 8) !important;
     pointer-events: all !important;
   }
@@ -340,12 +337,17 @@ slot[name='selectall'] {
   #saveColumns:not(:hover, :focus, :active) {
     background-color: var(--colour-warning);
   }
+  #saveColumns:is(:hover, :focus, :active) {
+    background-color: transparent;
+    color: var(--colour-heading);
+    border-color: var(--colour-warning);
+  }
   #cancelColumns:not(:hover, :focus, :active) {
     border-color: var(--colour-border);
   }
 }
 
-.fa-table-columns:has(+ dialog input:not(:checked)) {
+.fa-table-columns:has(+ iam-menu input:not(:checked)) {
   overflow: visible;
   text-indent: -200vw;
 
@@ -391,5 +393,20 @@ slot[name='selectall'] {
   justify-content: center;
   min-height: 15rem;
 }
+
+::slotted(.tag){
+  margin-bottom: 0!important;
+}
+
+slot[name="filters"]{
+  
+  display: none;
+  
+  @media screen and (min-width: 62em) {
+    display: contents;
+  }
+}
+
+
 
 // #endregion

@@ -1,8 +1,17 @@
 @use '../_func' as *;
+@use '../elements/container.scss' as *;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.container {
+    box-sizing: border-box;
+}
 
 :host {
   padding-top: 0 !important;
-  margin-bottom: rem(32);
+  margin-bottom: 2rem;
   background-color: transparent !important;
   display: block !important;
 }
@@ -19,7 +28,7 @@
   position: relative;
   height: auto;
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @media screen and (min-width: 62em) {
     padding-top: rem(84);
   }
 
@@ -69,10 +78,10 @@
 
 // Web component CSS
 ::slotted(.breadcrumb) {
-  margin-top: rem(24) !important;
+  margin-top: 1.5rem !important;
   margin-bottom: -0.5rem !important;
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @media screen and (min-width: 62em) {
     position: absolute !important;
     top: 0 !important;
     left: 5.25rem !important;

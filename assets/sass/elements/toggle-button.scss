@@ -1,15 +1,15 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // #region toggle
   .toggle {
     --outline-width: 0.25rem !important;
     padding-left: 3.25rem !important;
-    max-width: fit-content!important;
+    max-width: fit-content !important;
   }
 
   .toggle:before {

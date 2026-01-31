@@ -1,13 +1,13 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   :is(label, .label):has(progress) {
     position: relative;
-    max-width: $input-max-width;
+    max-width: var(--input-max-width);
     margin-bottom: 2rem;
 
     padding-right: 3rem;
@@ -16,9 +16,9 @@ $darkMode: 'true' !default;
   progress {
     border-radius: rem(5);
     display: block;
-    margin-top: rem(8);
+    margin-top: 0.5rem;
     width: calc(100% + 3rem);
-    height: rem(8);
+    height: 0.5rem;
     margin-left: 0;
     border: none;
   }
@@ -35,7 +35,7 @@ $darkMode: 'true' !default;
     top: auto;
     left: auto;
     right: 0;
-    bottom: rem(16);
+    bottom: 1rem;
     color: var(--colour-heading);
     font-weight: bold;
   }
@@ -74,10 +74,10 @@ $darkMode: 'true' !default;
     --max-width: #{rem(200)};
     --pt: #{rem(90)};
     --pt-percent: 45%;
-    --bar-width: #{rem(20)};
-    --value-fs: #{rem(48)};
-    --value-pb: #{rem(32)};
-    --label-fs: #{rem(18)};
+    --bar-width: 1.25rem;
+    --value-fs: 3rem;
+    --value-pb: 2rem;
+    --label-fs: 1.125rem; /* 18/16 */
 
     position: relative;
     z-index: 1;
@@ -101,19 +101,19 @@ $darkMode: 'true' !default;
     --max-width: #{rem(170)};
     --pt: #{rem(76.5)};
     --pt-percent: 45%;
-    --bar-width: #{rem(20)};
-    --value-pb: #{rem(24)};
+    --bar-width: 1.25rem;
+    --value-pb: 1.5rem;
   }
 
   label:has(.progress--circular.progress--sm) {
     --max-width: #{rem(120)};
     --pt: #{rem(54)};
     --pt-percent: 45%;
-    --bar-width: #{rem(16)};
-    --value-fs: #{rem(24)};
+    --bar-width: 1rem;
+    --value-fs: 1.5rem;
 
-    --value-pb: #{rem(16)};
-    --label-fs: #{rem(12)};
+    --value-pb: 1rem;
+    --label-fs: 0.75rem;
   }
 
   // Responsive-ish settings
@@ -126,8 +126,8 @@ $darkMode: 'true' !default;
       --max-width: #{rem(170)};
       --pt: #{rem(76.5)};
       --pt-percent: 45%;
-      --bar-width: #{rem(20)};
-      --value-pb: #{rem(24)};
+      --bar-width: 1.25rem;
+      --value-pb: 1.5rem;
     }
   }
 
@@ -136,11 +136,11 @@ $darkMode: 'true' !default;
       --max-width: #{rem(120)};
       --pt: #{rem(54)};
       --pt-percent: 45%;
-      --bar-width: #{rem(16)};
-      --value-fs: #{rem(24)};
+      --bar-width: 1rem;
+      --value-fs: 1.5rem;
 
-      --value-pb: #{rem(16)};
-      --label-fs: #{rem(12)};
+      --value-pb: 1rem;
+      --label-fs: 0.75rem;
     }
   }
 

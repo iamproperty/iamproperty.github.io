@@ -1,4 +1,6 @@
-import Cookies from 'js-cookie';
+import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
+import advancedSelect from '../../modules/advanced-select';
+import { isValidPostcode } from '../../modules/helpers';
 
 // Data layer Web component created
 declare global {
@@ -20,45 +22,66 @@ class iamAddressLookup extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
-    const loadCSS = `@import "${assetLocation}/css/components/address-lookup.css";`;
+
+    const loadCSS = `@import "${assetLocation}/css/components/address-lookup.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
     ${loadCSS}
-    
-    ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
+
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
     <div class="wrapper">
 
-      <div class="postcode-lookup">
-        <div>
-        <label class="mb-2">Search <span class="title text-lowercase"></span> <span class="optional">(Optional)</span>
-          <span>
-          <input type="text" name="postcode" list="address-lookup__addressess" autocomplete="off" aria-autocomplete="none" placeholder="Postcode" />
-          <span class="suffix fa-regular fa-search"></span>
-          </span>
-          <span class="invalid-feedback">Required Adddress fields missing</span>
-        </label>
-
+      <div class="matched d-none">
+        <div class="inner">
+          <p><span class="matched-address"></span></p>
+          <button class="link use-matched">Yes, use this address</button>
+          <button class="link use-entered">No, use the address I entered</button>
         </div>
-        <button class="btn btn-tertiary switch-to-manual-btn" type="button">Or enter address manually</button>
+        <span class="invalid-feedback">We found a matching address based on the details you entered. Is this address correct?</span>
       </div>
-      <datalist id="address-lookup__addressess"></datalist>
+      <div class="postcode-lookup was-validated">
+        <div>
+        <label class="mb-1"><span class="title text-lowercase"></span>
+          <span>
+          <input type="text" name="postcode" class="${this.hasAttribute('data-input-class') ? this.getAttribute('data-input-class') : ''}" list="address-lookup__addressess" autocomplete="one-time-code" aria-autocomplete="none" placeholder="${this?.hasAttribute('data-placeholder') ? this?.getAttribute('data-placeholder') : 'Postcode'}" value="${this.hasAttribute('data-postcode-value') ? this.getAttribute('data-postcode-value') : ''}" part="input" />
+          <button id="postcode__submit" class="suffix fa-regular fa-search" part="suffix"></button>
+          </span>
+        </label>
+          <span class="invalid-feedback mb-2" id="invalid-feedback-address-lookup">${this.hasAttribute('data-error-msg') ? this.getAttribute('data-error-msg') : 'Required address fields'}</span>
+
+          <div class="datalist__wrapper ${this.hasAttribute('data-list-class') ? this.getAttribute('data-list-class') : ''}" tabindex="0" part="list-wrapper">
+            <slot name="beforeList"></slot>
+            <slot name="preloadedList"></slot>
+            <datalist id="address-lookup__addressess" class=""></datalist>
+            <div id="paginationWrapper"></div>
+            <slot name="afterList"></slot>
+          </div>
+        </div>
+        <slot name="hint"></slot>
+        <div class="actions">
+          <button class="btn btn-tertiary switch-to-manual-btn" type="button" part="manualButton">Or enter address manually</button>
+          <slot name="actions"></slot>
+        </div>
+      </div>
 
       <div class="manual-address pb-2 js-hide">
-        <slot></slot>
-        <button class="btn btn-tertiary switch-to-lookup-btn" type="button">Use postcode lookup</button>
+        <slot part="contents"></slot>
+        <button class="btn btn-tertiary switch-to-lookup-btn" type="button" part="button">${this.hasAttribute('data-postcode-lookup-label') ? this.getAttribute('data-postcode-lookup-label') : 'Use postcode lookup'}</button>
         <slot name="after"></slot>
       </div>
-      <div class="pre-filled pb-2 js-hide">
+      <div class="pre-filled p-2 js-hide">
         <strong class="title text-primary d-block"></strong>
-        <p><span class="pre-filled-address"></span><button class="text-primary text-decoration-none ms-1 cursor-pointer" type="button"><i class="fa-regular fa-pen-to-square"></i><span class="visually-hidden">Edit</span></button><slot name="prefilled"></slot></p>
+        <p><span class="pre-filled-address"></span>
+        <button class="link m-0 text-primary ms-2 cursor-pointer" type="button" part="edit-button">
+          <i class="fa-regular fa-pen-to-square m-0"></i> <span class="visually-hidden">Edit</span>
+        </button>
+        <button class="link m-0 text-primary ms-2 cursor-pointer" type="button" part="remove-button">
+          <i class="fa-regular fa-trash m-0"></i> <span class="visually-hidden">Remove</span>
+        </button>
+        <slot name="prefilled"></slot></p>
       </div>
     </div>
     `;
@@ -70,17 +93,35 @@ class iamAddressLookup extends HTMLElement {
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
     const preFilledWrapper = this.shadowRoot.querySelector('.pre-filled');
-    const list = this.shadowRoot.querySelector('datalist');
+    const list = this.querySelector('datalist[slot="preloadedList"]')
+      ? this.querySelector('datalist[slot="preloadedList"]')
+      : this.shadowRoot.querySelector('.datalist__wrapper datalist');
+    const listWrapper = this.shadowRoot.querySelector('.datalist__wrapper');
     const switchManualBtn = this.shadowRoot.querySelector('.switch-to-manual-btn');
     const switchLookupBtn = this.shadowRoot.querySelector('.switch-to-lookup-btn');
-    const title = this.hasAttribute('data-title') ? this.getAttribute('data-title') : 'Property address';
-    const preFilledAddressBtn = this.shadowRoot.querySelector('.pre-filled-address + button');
+    const title = this.hasAttribute('data-title') ? this.getAttribute('data-title') : 'Find an address';
+    const preFilledAddressBtn = this.shadowRoot.querySelector('[part="edit-button"]');
+    const preFilledAddressRemoveBtn = this.shadowRoot.querySelector('[part="remove-button"]');
     const dataDisplayText = this.hasAttribute('data-display-text');
+    const postcodeSubmit = this.shadowRoot?.querySelector('#postcode__submit');
+    const errorMsg = this.shadowRoot?.querySelector('#invalid-feedback-address-lookup');
+    const paginationWrapper = this.shadowRoot?.querySelector('#paginationWrapper');
+    const minChars = this.hasAttribute('data-min-chars') ? parseInt(this.getAttribute('data-min-chars')) : 3;
+    let pageNumber = 1;
+    const atleastone = this.querySelector('.atleastone');
+
+    const matchedAddress = this.shadowRoot.querySelector('.matched-address');
+    const matchedAddressWrapper = this.shadowRoot.querySelector('.matched');
+    const matchedAddressUse = this.shadowRoot.querySelector('.matched .use-matched');
+    const matchedAddressEntered = this.shadowRoot.querySelector('.matched .use-entered');
+
+    let cacheSearchQuery = '';
 
     Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement) => {
       titleElement.innerHTML = title;
     });
 
+    // #region functions
     function checkFilled(component): void {
       const preFilledAddress = component.shadowRoot.querySelector('.pre-filled-address');
       let preFilled = true;
@@ -89,24 +130,292 @@ class iamAddressLookup extends HTMLElement {
       Array.from(
         component.querySelectorAll('input[required],input[data-required],select[required],select[data-required]')
       ).forEach((input) => {
-        const value = input.value;
+        let value = input.hasAttribute('data-value') ? input.getAttribute('data-value') : input.value;
 
-        if (!value) preFilled = false;
-        else preFilledAddress.innerHTML += value + (/^-?\d+$/.test(value) ? ' ' : ', ');
+        if (input.tagName == 'SELECT' && component.querySelector(`[value="${input.value}"][data-value]`))
+          value = component.querySelector(`[value="${input.value}"][data-value]`).getAttribute('data-value');
+
+        if (!value) {
+          if (input.closest('.atleastone')) {
+            if (!atleastone.querySelector('input:valid, input.is-valid')) {
+              preFilled = false;
+            }
+          } else {
+            preFilled = false;
+          }
+        } else {
+          preFilledAddress.innerHTML += value + (/^-?\d+$/.test(value) ? ' ' : ', ');
+        }
       });
 
       preFilledAddress.innerHTML = preFilledAddress.innerHTML.slice(0, -2);
 
+      // If has label then use that
+
       if (preFilled) {
+        if (component.querySelector('[name="label"]'))
+          preFilledAddress.innerHTML = component.querySelector('[name="label"]').value;
+
+        // If has label then use that
+
         preFilledWrapper.classList.remove('js-hide');
         lookupWrapper.classList.add('js-hide');
         manualWrapper.classList.add('js-hide');
       }
     }
-    checkFilled(this);
+
+    function openManualWrapper(): void {
+      lookupWrapper.classList.add('js-hide');
+      manualWrapper.classList.remove('js-hide');
+
+      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input) => {
+        input.setAttribute('required', 'true');
+      });
+
+      manualWrapper.scrollIntoView();
+    }
+
+    const atleastoneValidate = (): void => {
+      if (atleastone.querySelector('input:valid, input.is-valid')) {
+        Array.from(atleastone.querySelectorAll('input')).forEach((element) => {
+          element.removeAttribute('required');
+        });
+      } else {
+        Array.from(atleastone.querySelectorAll('input')).forEach((input) => {
+          input.setAttribute('required', 'true');
+        });
+      }
+    };
+
+    const fillInputs = (values): void => {
+      lookupWrapper.classList.add('js-hide');
+      manualWrapper.classList.remove('js-hide');
+
+      Object.keys(values).forEach((key) => {
+        const value = values[key];
+        let input = false;
+        if (this.querySelector(`[data-name="${key}"]`)) input = this.querySelector(`[data-name="${key}"]`);
+        else if (this.querySelector(`[data-name-alt="${key}"]`)) input = this.querySelector(`[data-name-alt="${key}"]`);
+        else if (this.querySelector(`[name="${key}"]`)) input = this.querySelector(`[name="${key}"]`);
+
+        if (input && input.tagName == 'SELECT' && value.id) {
+          input.value = value.id;
+        } else if (input && value != '') {
+          input.value = value;
+
+          if (input.hasAttribute('data-readonly')) {
+            input.setAttribute('readonly', true);
+            input.classList.add('is-valid');
+          }
+        } else if (value != '') {
+          this.insertAdjacentHTML(
+            'beforeend',
+            `<input type="hidden" class="inserted" data-hidden name="${key}" value="${value}" />`
+          );
+        }
+
+        if (this.querySelector(`[data-name-2="${key}"]`))
+          this.querySelector(`[data-name-2="${key}"]`).value += ' ' + value;
+      });
+
+      Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
+        input.setAttribute('required', 'true');
+      });
+      lookup.removeAttribute('required');
+
+      if (atleastone) {
+        atleastoneValidate();
+      }
+
+      if (!this.hasAttribute('data-force-manual')) checkFilled(this);
+    };
+
+    const search = async (searchValue, paginate = false): any => {
+      if (!paginate && searchValue === cacheSearchQuery) {
+        if (list?.children?.length) {
+          list?.classList.remove('loading');
+          list?.classList.remove('noresults');
+          listWrapper?.focus();
+          list?.querySelector('option')?.focus();
+          return true;
+        }
+      }
+
+      // check if postcode is valid
+      const limit = this.hasAttribute('data-limit') ? parseInt(this.getAttribute('data-limit')) : 100;
+
+      if (paginate) pageNumber++;
+      else pageNumber = 1;
+
+      let ajaxURL = this.getAttribute('data-url');
+      ajaxURL += `${encodeURI(searchValue)}&page[number]=${pageNumber}&page[size]=${limit}`;
+
+      if (this.hasAttribute('data-url-2')) {
+        ajaxURL += this.getAttribute('data-url-2');
+      }
+
+      const postcode = searchValue; // TODO: remove when postcode comes from response
+
+      if (this.hasAttribute('data-postcode')) {
+        if (!isValidPostcode(searchValue)) {
+          return 'Invalid postcode, please enter a valid postcode';
+        } else {
+          if (!paginate) list.innerHTML = '';
+          list?.classList.add('loading');
+          list?.classList.remove('noresults');
+          lookup?.classList.remove('is-invalid');
+          errorMsg?.innerHTML = '';
+          list?.classList.remove('show-welsh-banner');
+
+          Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
+            input.removeAttribute('required');
+          });
+          Array.from(this.querySelectorAll('[data-readonly]')).forEach((input) => {
+            input.removeAttribute('readonly');
+            input.classList.remove('is-valid');
+          });
+          Array.from(this.querySelectorAll('.inserted')).forEach((input) => {
+            input.remove();
+          });
+        }
+      }
+
+      this.classList.add('searched');
+      this.classList.add('was-validated');
+
+      // Setup controller vars if not already set
+      if (!window.controller) window.controller = [];
+
+      // Abort if controller already present for this url
+      if (window.controller[ajaxURL]) window.controller[ajaxURL].abort();
+
+      // Create a new controller so it can be aborted if new fetch made
+      window.controller[ajaxURL] = new AbortController();
+      const { signal } = window.controller[ajaxURL];
+
+      try {
+        return await fetch(ajaxURL, {
+          signal: signal,
+          method: 'get',
+          credentials: 'same-origin',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
+          }),
+        })
+          .then((response) => response.json())
+          .then((response) => {
+            // populate datalist
+            let listString = '';
+
+            const addresses = response['data'] ? response['data'] : response;
+
+            addresses.forEach((address) => {
+              // Deal with agent platform response
+              if (typeof address.attributes == 'object' && address.attributes.label) {
+                if (address.id) address.attributes.id = address.id;
+
+                if (address.relationships)
+                  address.attributes = Object.assign(address.attributes, address.relationships);
+
+                const values = JSON.stringify(address.attributes);
+                listString += `<option data-values='${values}' >${address.attributes.label}</option>`;
+              } else if (typeof address.value == 'object') {
+                if (address.id) address.attributes.id = address.id;
+
+                if (address.relationships)
+                  address.attributes = Object.assign(address.attributes, address.relationships);
+
+                const values = JSON.stringify(address.value);
+                listString += `<option data-values='${values}'>${address['label']}, ${postcode}</option>`;
+              } else {
+                const values = JSON.stringify(address);
+
+                if (dataDisplayText) {
+                  listString += `<option data-values='${values}'>${address[dataDisplayText]}, ${postcode}</option>`;
+                } else {
+                  let itemString = '';
+                  for (const [key, value] of Object.entries(address)) {
+                    if (key == 'address_number_name') itemString += `${value} `;
+                    else if (key != 'postcode' && key != 'address_title' && key != 'group')
+                      itemString += `${value}${/^-?\d+$/.test(value) ? '' : ','} `;
+                  }
+
+                  listString += `<option data-values='${values}'>${itemString}, ${postcode}</option>`; // TODO postcode should come from the response
+                }
+              }
+            });
+
+            if (paginate) list.innerHTML += listString;
+            else list.innerHTML = listString;
+
+            // Cache the search value to prevent further calls
+            cacheSearchQuery = searchValue;
+
+            if (addresses.length) {
+              list?.classList.remove('loading');
+            } else {
+              list?.classList.remove('loading');
+              list?.classList.add('noresults');
+            }
+
+            // pagination
+            if (
+              response.meta &&
+              response.meta.current_page &&
+              response.meta.total_pages &&
+              response.meta.total_pages > response.meta.current_page
+            ) {
+              paginationWrapper?.innerHTML = `<div class="bg-light text-center p-2"><p class="m-0">Showing 1-${response.meta.current_page * limit} of ${response.meta.total_results} addresses <br /><button type="button" data-next="${response.meta.current_page + 1}" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-eye me-1"></i>Show more addresses</button></p></div>`;
+            } else {
+              paginationWrapper?.innerHTML = '';
+            }
+
+            if (response.meta && response.meta.welsh_language) {
+              list?.classList.add('show-welsh-banner');
+            }
+            listWrapper?.focus();
+            list?.querySelector('option')?.focus();
+
+            return true;
+          });
+      } catch (error) {
+        if (error?.name === 'AbortError') {
+          return true;
+        }
+        console.log(error);
+        return 'There has been a problem. Please try again in a few moments.';
+      }
+    };
+
+    let searchTimer: number | undefined;
+
+    const triggerSearch = (raw: string, paginate = false, immediate = false) => {
+      const value = (raw ?? '').trim();
+
+      if (value.length < minChars) return;
+
+      if (immediate) {
+        if (searchTimer) window.clearTimeout(searchTimer);
+        void search(value, paginate);
+        return;
+      }
+
+      if (searchTimer) window.clearTimeout(searchTimer);
+      searchTimer = window.setTimeout(() => {
+        void search(value, paginate);
+      }, 200);
+    };
+
+    // #endregion
+
+    // #region check attributes and trigger functions
+    if (!this.hasAttribute('data-force-manual')) checkFilled(this);
 
     this.addEventListener('filled', () => {
-      checkFilled(this);
+      if (!this.hasAttribute('data-force-manual')) checkFilled(this);
     });
 
     if (this.hasAttribute('data-use')) {
@@ -133,143 +442,198 @@ class iamAddressLookup extends HTMLElement {
           }
         }
       });
+
+      if (this.hasAttribute('data-use-default')) {
+        lookupWrapper.querySelector('[name="use"]').checked = true;
+
+        const values = JSON.parse(this.getAttribute('data-use'));
+        fillInputs(values);
+      }
     }
 
     if (this.hasAttribute('data-manual')) {
-      lookupWrapper.classList.add('js-hide');
-      manualWrapper.classList.remove('js-hide');
-
-      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input) => {
-        input.setAttribute('required', 'true');
-      });
+      fillInputs({});
     }
 
-    function openManualWrapper(): void {
-      lookupWrapper.classList.add('js-hide');
-      manualWrapper.classList.remove('js-hide');
+    if (this.classList.contains('show-pagination'))
+      paginationWrapper?.innerHTML = `<div class="bg-light text-center p-2"><p class="m-0">Showing 1-500 of 585 addresses <br /><button type="button" data-next="2" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-eye me-1"></i>Show more addresses</button></p></div>`;
 
-      Array.from(manualWrapper.querySelectorAll('[data-required]')).forEach((input) => {
-        input.setAttribute('required', 'true');
-      });
+    if (this.classList.contains('scroll-to-bottom-results')) paginationWrapper.scrollIntoView({ container: 'nearest' });
+    // #endregion
 
-      manualWrapper.scrollIntoView();
-    }
-
+    // #region event listeners
     preFilledAddressBtn.addEventListener('click', () => {
       preFilledWrapper.classList.add('js-hide');
       openManualWrapper();
     });
-    switchManualBtn.addEventListener('click', () => {
-      openManualWrapper();
-    });
-    switchLookupBtn.addEventListener('click', () => {
+
+    preFilledAddressRemoveBtn.addEventListener('click', () => {
+      preFilledWrapper.classList.add('js-hide');
       lookupWrapper.classList.remove('js-hide');
       manualWrapper.classList.add('js-hide');
+
+      list.innerHTML = '';
+      list?.classList.remove('loading');
+      list?.classList.remove('noresults');
+      lookup?.classList.remove('is-invalid');
+      errorMsg?.innerHTML = '';
+      list?.classList.remove('show-welsh-banner');
+
+      lookup.focus();
+      lookup.value = '';
+
+      if (lookup?.hasAttribute('data-placeholder'))
+        lookup.setAttribute('placeholder', lookup?.getAttribute('data-placeholder'));
+
+      const updateEvent = new CustomEvent('switch-to-lookup');
+      this.dispatchEvent(updateEvent);
 
       lookupWrapper.scrollIntoView();
     });
 
-    lookup.addEventListener('keyup', () => {
-      if (lookup.value.length >= 3) search(lookup.value);
+    switchManualBtn.addEventListener('click', () => {
+      openManualWrapper();
     });
 
-    lookup.addEventListener('change', () => {
-      if (lookup.value.length >= 3) {
-        search(lookup.value);
+    this.addEventListener('open-manual', () => {
+      openManualWrapper();
+    });
 
-        if (list.querySelector(`[value="${lookup.value}"]`)) {
-          lookupWrapper.classList.add('js-hide');
-          manualWrapper.classList.remove('js-hide');
+    switchLookupBtn.addEventListener('click', () => {
+      lookupWrapper.classList.remove('js-hide');
+      manualWrapper.classList.add('js-hide');
 
-          const values = JSON.parse(list.querySelector(`[value="${lookup.value}"]`).getAttribute('data-values'));
+      const updateEvent = new CustomEvent('switch-to-lookup');
+      this.dispatchEvent(updateEvent);
 
-          Object.keys(values).forEach((key) => {
-            const value = values[key];
-            if (this.querySelector(`[data-name="${key}"]`) && value != '')
-              this.querySelector(`[data-name="${key}"]`).value = value;
-            else if (this.querySelector(`[data-name-alt="${key}"]`) && value != '')
-              this.querySelector(`[data-name-alt="${key}"]`).value = value;
-            else if (this.querySelector(`[name="${key}"]`) && value != '')
-              this.querySelector(`[name="${key}"]`).value = value;
+      lookupWrapper.scrollIntoView();
+    });
 
-            if (this.querySelector(`[data-name-2="${key}"]`))
-              this.querySelector(`[data-name-2="${key}"]`).value += ' ' + value;
-          });
+    lookup.addEventListener('keyup', (e) => {
+      if (e.keyCode === 13) {
+        triggerSearch(lookup.value, false, true);
+      }
+    });
 
-          // Focus on first input
-          this.querySelector('[name]').focus();
+    lookup.addEventListener('input', () => {
+      lookup.classList.remove('is-invalid');
+      if (errorMsg) errorMsg.innerHTML = '';
 
-          Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
-            input.setAttribute('required', 'true');
-          });
-          lookup.removeAttribute('required');
+      const v = (lookup.value ?? '').trim();
 
-          if (this.shadowRoot.querySelector('[name="use"]'))
-            this.shadowRoot.querySelector('[name="use"]').checked = false;
+      if (v.length < minChars) {
+        list.innerHTML = '';
+        if (paginationWrapper) {
+          paginationWrapper.innerHTML = '';
         }
+        list?.classList.remove('loading', 'noresults');
+        cacheSearchQuery = '';
+        return;
+      }
+
+      triggerSearch(v);
+    });
+
+    list.addEventListener('click', (e) => {
+      if (e.target.tagName == 'OPTION') {
+        const values = JSON.parse(e.target.getAttribute('data-values'));
+
+        fillInputs(values);
+
+        if (this.shadowRoot.querySelector('[name="use"]'))
+          this.shadowRoot.querySelector('[name="use"]').checked = false;
       }
     });
 
-    const search = async (postcode): any => {
-      let ajaxURL = this.getAttribute('data-url');
-      ajaxURL += `${encodeURI(postcode)}`;
+    atleastone?.addEventListener('input', (e) => {
+      Array.from(atleastone.querySelectorAll('[data-required]')).forEach((input) => {
+        input.setAttribute('required', 'true');
+      });
 
-      // Setup controller vars if not already set
-      if (!window.controller) window.controller = [];
+      atleastoneValidate();
+    });
 
-      // Abort if controller already present for this url
-      if (window.controller[ajaxURL]) window.controller[ajaxURL].abort();
+    postcodeSubmit?.addEventListener('click', () => {
+      triggerSearch(lookup.value, false, true);
+    });
 
-      // Create a new controller so it can be aborted if new fetch made
-      window.controller[ajaxURL] = new AbortController();
-      const { signal } = controller[ajaxURL];
+    this?.addEventListener('close-button-pressed', () => {
+      list.innerHTML = '';
+      list?.classList.remove('loading');
+      list?.classList.remove('noresults');
+      lookup?.classList.remove('is-invalid');
+      errorMsg?.innerHTML = '';
+      list?.classList.remove('show-welsh-banner');
 
-      try {
-        await fetch(ajaxURL, {
-          signal: signal,
-          method: 'get',
-          credentials: 'same-origin',
-          headers: new Headers({
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
-          }),
-        })
-          .then((response) => response.json())
-          .then((response) => {
-            // populate datalist
-            let listString = '';
-            response.forEach((address) => {
-              // Deal with agent platform response
-              if (typeof address.value == 'object') {
-                const values = JSON.stringify(address.value);
-                listString += `<option value="${address['label']}, ${postcode}" data-values='${values}'></option>`;
-              } else {
-                const values = JSON.stringify(address);
+      lookup.focus();
+    });
 
-                if (dataDisplayText) {
-                  listString += `<option value="${address[dataDisplayText]}, ${postcode}" data-values='${values}'></option>`;
-                } else {
-                  let itemString = '';
-                  for (const [key, value] of Object.entries(address)) {
-                    if (key == 'address_number_name') itemString += `${value} `;
-                    else if (key != 'postcode' && key != 'address_title')
-                      itemString += `${value}${/^-?\d+$/.test(value) ? '' : ','} `;
-                  }
-
-                  listString += `<option value="${itemString}${postcode}" data-values='${values}'></option>`;
-                }
-              }
-            });
-            list.innerHTML = listString;
-
-            return response;
-          });
-      } catch (error) {
-        console.log(error);
+    paginationWrapper?.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON') {
+        triggerSearch(lookup.value, true, true);
       }
-    };
+    });
+
+    // #endregion
+
+    // #region Matched address
+
+    if (this.hasAttribute('data-matched')) {
+      matchedAddressWrapper?.classList.remove('d-none');
+
+      if (this.hasAttribute('data-matched-label')) matchedAddress?.innerHTML = this.getAttribute('data-matched-label');
+
+      matchedAddressEntered?.addEventListener('click', () => {
+        matchedAddressWrapper?.remove();
+
+        const useCheckbox = this.shadowRoot?.querySelector('[name="use"]');
+        useCheckbox.checked = true;
+
+        lookupWrapper.classList.add('js-hide');
+        manualWrapper.classList.remove('js-hide');
+
+        const values = JSON.parse(this.getAttribute('data-use'));
+
+        Object.keys(values).forEach((key) => {
+          const value = values[key];
+          if (this.querySelector(`[data-name="${key}"]`)) this.querySelector(`[data-name="${key}"]`).value = value;
+          else if (this.querySelector(`[name="${key}"]`)) this.querySelector(`[name="${key}"]`).value = value;
+        });
+
+        checkFilled(this);
+      });
+
+      matchedAddressUse?.addEventListener('click', () => {
+        matchedAddressWrapper?.remove();
+
+        const values = JSON.parse(this.getAttribute('data-matched'));
+
+        fillInputs(values);
+        checkFilled(this);
+      });
+    } else {
+      matchedAddressWrapper?.remove();
+    }
+    // #endregion
+
+    advancedSelect(this, lookup, list, true);
+  }
+
+  static get observedAttributes(): any {
+    return ['data-url'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
+    const addressComponent = this.querySelector('iam-address-lookup');
+
+    switch (attrName) {
+      case 'data-url': {
+        if (oldVal != newVal && addressComponent) {
+          addressComponent.setAttribute('data-url', newVal + '?search_string=');
+        }
+        break;
+      }
+    }
   }
 }
 

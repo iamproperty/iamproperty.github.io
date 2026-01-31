@@ -1,21 +1,38 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // #region modal styling
 
-  *:not(.dialog__wrapper) > dialog[open] {
-    overflow-y: hidden;
+  *:not(.dialog__wrapper) > dialog[open] { // change this selector to be a dialog without a popover attribute
+    
+
+    &:has(.mh-lg){
+      overflow-y: hidden!important;
+    }
     width: 90vw;
     max-width: rem(324); // col-width*4
 
     //height: 90vh;
     max-height: min(90vh, #{rem(752)});
     overscroll-behavior: contain;
+
+    @media screen and (min-width: 36em) {
+      --dialog-padding: 2rem;
+      min-width: rem(335);
+      width: fit-content;
+      max-width: rem(686);
+    }
+
+    @media screen and (min-width: 62em) {
+      min-width: rem(454);
+      width: fit-content;
+      max-width: rem(736);
+    }
 
     // Close button
     > form:first-child {
@@ -32,8 +49,8 @@ $darkMode: 'true' !default;
       text-indent: 300%;
       overflow: hidden;
       border: none;
-      height: rem(20);
-      width: rem(20);
+      height: 1.25rem;
+      width: 1.25rem;
       background: transparent;
 
       &:after {
@@ -42,8 +59,8 @@ $darkMode: 'true' !default;
         left: 0;
         position: absolute;
         display: block;
-        height: rem(20);
-        width: rem(20);
+        height: 1.25rem;
+        width: 1.25rem;
         z-index: var(--index-focus);
         background: currentColor;
         mask-image: var(--icon-close);
@@ -58,18 +75,18 @@ $darkMode: 'true' !default;
 
       & + * {
         padding-right: var(--dialog-padding);
-        margin-right: rem(20);
+        margin-right: 1.25rem;
         display: block;
       }
 
       & + span:not(.h1, .h2, .h3, .h4, .h5, .h6) {
-        padding-bottom: rem(8);
+        padding-bottom: 0.5rem;
         line-height: rem(19);
       }
 
       & + span:not(.h1, .h2, .h3, .h4, .h5, .h6) + * {
         padding-right: var(--dialog-padding);
-        margin-right: rem(20);
+        margin-right: 1.25rem;
         display: block;
       }
 
@@ -81,19 +98,6 @@ $darkMode: 'true' !default;
           display: none;
         }
       }
-    }
-
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      --dialog-padding: #{rem(32)};
-      min-width: rem(335);
-      width: fit-content;
-      max-width: rem(686);
-    }
-
-    @include media-breakpoint-up(md, $mobileOnly) {
-      min-width: rem(454);
-      width: fit-content;
-      max-width: rem(736);
     }
 
     &:has(.youtube-embed) {
@@ -134,19 +138,13 @@ $darkMode: 'true' !default;
       }
     }
   }
-
-  dialog::backdrop {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(4px);
-    overscroll-behavior: contain;
-  }
   // #endregion
 
   // #region Transactional
   *:not(.dialog__wrapper) > dialog[open]:is(.dialog--transactional, .dialog--acknowledgement) {
     text-align: center;
 
-    &:before {
+    &:not(.hide-icon):before {
       content: '\f05a';
       font-weight: 300;
       -moz-osx-font-smoothing: grayscale;
@@ -159,12 +157,12 @@ $darkMode: 'true' !default;
       font-family: 'Font Awesome 6 Pro';
       font-size: 3rem;
       margin-top: 0;
-      margin-bottom: rem(24);
+      margin-bottom: 1.5rem;
       line-height: 1;
       color: var(--colour-heading);
       clear: both;
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @media screen and (min-width: 62em) {
         font-size: 4rem;
       }
     }
@@ -178,12 +176,12 @@ $darkMode: 'true' !default;
       line-height: 1;
       font-size: 3rem;
       margin-top: 0;
-      margin-bottom: rem(24);
+      margin-bottom: 1.5rem;
       line-height: 1;
       color: var(--colour-heading);
       clear: both;
 
-      @include media-breakpoint-up(md, $mobileOnly) {
+      @media screen and (min-width: 62em) {
         font-size: 4rem;
       }
 
@@ -214,11 +212,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    form > :is(button, a) {
-      margin-bottom: 0;
-    }
-
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       :is(button, .btn):has(~ :is(button, .btn):last-child),
       :is(button, .btn):last-child {
         min-width: calc(50% - 1rem);
@@ -237,12 +231,12 @@ $darkMode: 'true' !default;
       display: contents;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       min-width: rem(686);
       max-width: rem(686);
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
       min-width: rem(736);
       max-width: rem(736);
     }
@@ -265,18 +259,6 @@ $darkMode: 'true' !default;
   }
 
   // #endregion
-
-  dialog:has(.embed) {
-    width: calc(100% - 6rem) !important;
-    max-width: 50rem !important;
-    padding: 0;
-    aspect-ratio: 16 / 9;
-
-    .embed {
-      aspect-ratio: 16 / 9;
-      width: 100%;
-    }
-  }
 
   // #region Multi step modal
 
@@ -318,7 +300,7 @@ $darkMode: 'true' !default;
       display: none;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       min-width: rem(452);
       width: rem(452);
       max-width: rem(452);
@@ -339,7 +321,7 @@ $darkMode: 'true' !default;
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
       min-width: rem(924);
       width: rem(924);
       max-width: rem(924);

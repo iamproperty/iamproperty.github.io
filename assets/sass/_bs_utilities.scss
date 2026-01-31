@@ -1,0 +1,51 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+@use '_functions/bs_functions' as *;
+
+@use '_functions/bs_mixins' as *;
+
+@use '_functions/bs_variables' as *;
+@use '_functions/bs_utilities' as *;
+
+
+@layer utilities {
+  // Missing classes that exist as mixins
+  @include clearfix();
+  @include visually-hidden();
+  @include text-truncate();
+  @include ratio();
+  @include fixed();
+  @include sticky();
+  @include max-height();
+  @include js-display();
+  @include line-clamp();
+
+  // Loop over each breakpoint
+  @each $breakpoint in map.keys($grid-breakpoints) {
+    // Generate media query if needed
+    @include media-breakpoint-up($breakpoint) {
+      $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+      // Loop over each utility property
+      @each $key, $utility in $utilities {
+        // The utility can be disabled with `false`, thus check if the utility is a map first
+        // Only proceed if responsive media queries are enabled or if it's the base media query
+        @if meta.type-of($utility) == 'map' and (map.get($utility, responsive) or $infix == '') {
+          @include generate-utility($utility, $infix);
+        }
+      }
+    }
+  }
+
+  // Print utilities
+  @media print {
+    @each $key, $utility in $utilities {
+      // The utility can be disabled with `false`, thus check if the utility is a map first
+      // Then check if the utility needs print styles
+      @if meta.type-of($utility) == 'map' and map.get($utility, print) == true {
+        @include generate-utility($utility, '-print');
+      }
+    }
+  }
+}

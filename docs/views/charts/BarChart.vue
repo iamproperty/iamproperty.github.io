@@ -6,7 +6,7 @@
   import Versions from '../Versions.vue';
   import headerImg from '../../img/cards-header.png';
 
-  const arrColours = ['3', '4', '5', '6', '7', '8', '9', '11', '12'];
+  const arrColours = ['3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 </script>
 
 <template>
@@ -429,16 +429,13 @@
         <span class="label">Wider colour</span>
       </div>
     </div>
-    <template v-for="(colour, name) in $shared.widerColours" :key="name">
-      <div class="row row-cols-3 row-cols-sm-4" v-if="arrColours.includes(name)">
+    <template v-for="(name, index) in arrColours" :key="name">
+      <div class="row row-cols-3 row-cols-sm-4" >
         <div class="col-12 col-sm pb-2">
-          <span>Chart colour {{ parseInt(name) - 2 }}</span>
+          <span>Chart colour {{ index + 1 }}</span>
         </div>
         <div class="col-12 col-sm pb-2">
           <span>Wider colour {{ name }}</span>
-        </div>
-        <div class="col pb-2">
-          <div :class="`tag wider-colour-${name}`">{{ colour }}</div>
         </div>
       </div>
     </template>

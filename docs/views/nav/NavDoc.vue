@@ -123,7 +123,7 @@
       <template #vue-component>
         <pre><code>{{`<script setup>import Nav from '@/components/nav/nav.vue</script>
         
-<Nac>
+<Nav>
   <a href="/" class="brand brand--property" slot="logo">
     <svg>
       <title>iamproperty</title>

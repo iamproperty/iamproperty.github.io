@@ -1,10 +1,10 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   *,
   *::before,
   *::after {
@@ -13,12 +13,12 @@ $darkMode: 'true' !default;
 
   // #region reset
   button {
-    // stylelint-disable-next-line property-disallowed-list
+    
     border-radius: 0;
     text-transform: none;
     margin: 0; // 1
     font-family: inherit;
-    @include font-size(inherit);
+    font-size: inherit;
     line-height: inherit;
   }
 
@@ -30,27 +30,25 @@ $darkMode: 'true' !default;
   }
 
   button,
-[type="button"], // 1
-[type="reset"],
-[type="submit"] {
+  [type="button"], // 1
+  [type="reset"],
+  [type="submit"] {
     -webkit-appearance: button; // 2
 
-    @if $enable-button-pointers {
-      &:not(:disabled) {
-        cursor: pointer; // 3
-      }
+    &:not(:disabled) {
+      cursor: pointer; // 3
     }
   }
   // #endregion
 
   // #region button primary
   .btn {
-    --btn-margin: #{rem(16)};
-    --btn-padding-block: #{rem(12)};
-    --btn-padding-inline: #{rem(40)};
+    --btn-margin: 1rem;
+    --btn-padding-block: 0.75rem;
+    --btn-padding-inline: 2.5rem;
     --btn-border-width: #{rem(2)};
-    --btn-font-size: #{rem(18)};
-    --btn-line-height: #{rem(20)};
+    --btn-font-size: 1.125rem; /* 18/16 */
+    --btn-line-height: 1.25rem;
 
     display: inline-block;
     font-weight: bold;
@@ -65,7 +63,7 @@ $darkMode: 'true' !default;
     font-size: var(--btn-font-size);
     line-height: var(--btn-line-height);
     padding: var(--btn-padding-block) var(--btn-padding-inline);
-    border-radius: rem(24);
+    border-radius: 1.5rem;
     margin-bottom: var(--btn-margin);
     background: none;
 
@@ -78,8 +76,8 @@ $darkMode: 'true' !default;
     appearance: none;
     white-space: nowrap;
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      --btn-margin: #{rem(24)};
+    @media screen and (min-width: 36em) {
+      --btn-margin: 1.5rem;
     }
 
     &:not(.btn-secondary)[class*='colour-'] {
@@ -88,7 +86,7 @@ $darkMode: 'true' !default;
     }
 
     &:is(.colour-primary, .colour-dark, .colour-danger, .colour-black) {
-      --colour-btn: #{$colour-inverted};
+      --colour-btn: #fcfcfc;
     }
 
     &:not(.border-0) {
@@ -107,7 +105,7 @@ $darkMode: 'true' !default;
 
       background: var(--colour-btn-bg-hover);
       color: var(--colour-btn-hover);
-      border-radius: rem(24);
+      border-radius: 1.5rem;
     }
 
     a:is(:active, .active):not([disabled]) &,
@@ -117,7 +115,7 @@ $darkMode: 'true' !default;
         background 0.1s,
         color 0.1s;
       color: var(--colour-btn);
-      border-radius: rem(24);
+      border-radius: 1.5rem;
     }
 
     a:disabled &,
@@ -141,8 +139,8 @@ $darkMode: 'true' !default;
 
     a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
     &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
-      padding-left: rem(40);
-      padding-right: rem(40);
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
 
       &:before {
         content: '\f00c';
@@ -160,10 +158,10 @@ $darkMode: 'true' !default;
 
   // #region button small and tag
   .btn.btn-sm {
-    --btn-padding-block: #{rem(8)};
-    --btn-padding-inline: #{rem(32)};
-    --btn-margin: #{rem(8)};
-    --btn-font-size: #{rem(16)};
+    --btn-padding-block: 0.5rem;
+    --btn-padding-inline: 2rem;
+    --btn-margin: 0.5rem;
+    --btn-font-size: 1rem;
   }
   // #endregion
 
@@ -210,7 +208,7 @@ $darkMode: 'true' !default;
     &:after {
       content: '';
       height: var(--btn-line-height);
-      width: rem(16);
+      width: 1rem;
       display: inline-block;
       background: currentColor;
       mask-image: var(--icon-arrow);
@@ -235,76 +233,7 @@ $darkMode: 'true' !default;
   }
   // #endregion
 
-  // #region Select as button
-
-  .btn:has(select) {
-    position: relative;
-    padding-right: rem(56);
-
-    &:not(.mw-100) {
-      max-width: rem(112 + 40 + 56);
-    }
-
-    select {
-      all: unset !important;
-      margin: calc(rem(-12)) calc(rem(-40)) !important;
-      padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
-      padding-right: rem(56) !important;
-      margin-right: rem(-56) !important;
-      border-radius: rem(24) !important;
-      appearance: none !important;
-      background: none !important;
-      border: none !important;
-      color: currentColor !important;
-      display: block;
-      max-width: 100% !important;
-      outline: none;
-      font-weight: bold;
-      font-size: var(--btn-font-size) !important;
-      line-height: var(--btn-line-height) !important;
-
-      option {
-        padding: 0;
-        text-align: left;
-        color: var(--colour-primary);
-      }
-    }
-
-    &:after {
-      position: absolute;
-      top: rem(10);
-      right: rem(32);
-
-      content: '';
-      height: rem(24);
-      width: rem(16);
-      display: inline-block;
-      background: currentColor;
-      mask-image: var(--icon-arrow);
-      mask-size: 100%;
-      mask-repeat: no-repeat;
-      mask-position: 50% 50%;
-      -webkit-mask-image: var(--icon-arrow);
-      -webkit-mask-size: 100%;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: 50% 50%;
-      vertical-align: bottom;
-      margin-left: 1rem;
-      transform: rotate(90deg);
-      pointer-events: none;
-    }
-
-    &.active:after {
-      transform: rotate(-90deg);
-    }
-  }
-
-  .btn:has(select:focus):after {
-    transform: rotate(-90deg);
-  }
-
-  // #endregion
-
+  
   // #region button that opens up a filter dialog
   .btn-filter {
     &:after {

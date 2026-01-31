@@ -4,13 +4,29 @@
 
 @use '../bs_grid' as *;
 
-@include margins();
-@include sizes();
-@include display();
+@use '../elements/forms.scss' as *;
+@use '../elements/buttons.scss' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+@use '../elements/brand.css';
+
+@use '../elements/dialog.scss' as *;
+@use '../elements/modal.scss' as *;
+@use '../elements/container.scss' as *;
+
+
+@use '../utilities/colours.scss' as *;
+@use '../utilities/margins.scss' as *;
+@use '../utilities/paddings.scss' as *;
+@use '../utilities/sizes.scss' as *;
+@use '../utilities/display.scss' as *;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
+
+
 
 :host {
   display: flex !important;
@@ -19,30 +35,45 @@ $darkMode: 'true' !default;
   align-items: center !important;
 }
 
+
+// #region Fix colours 
+
+:host(.bg-primary) .container {
+
+  //color-scheme: dark;
+
+  .menu {
+    
+    //color-scheme: light;
+  }
+}
+
+// #endregion
+
 .btn-menu {
   padding: 0;
-  margin: 0 0 0 rem(32);
+  margin: 0 0 0 2rem;
   text-align: center;
-  height: rem(48);
-  padding-block: rem(12);
-  line-height: rem(24);
+  height: 3rem;
+  padding-block: 0.75rem;
+  line-height: 1.5rem;
   overflow: hidden;
   position: relative;
   background: none;
   border: none;
-  width: rem(24);
+  width: 1.5rem;
   text-indent: -1000%;
-  color: var(--colour-brand);
+  color: var(--menu-btn-colour);
 
   i {
-    font-size: rem(24);
-    line-height: rem(24);
+    font-size: 1.5rem;
+    line-height: 1.5rem;
     position: absolute;
     text-indent: 0px;
 
-    width: rem(24);
+    width: 1.5rem;
     text-align: center;
-    top: rem(12);
+    top: 0.75rem;
     right: 0;
     margin: 0 !important;
     transition: none !important;
@@ -77,8 +108,8 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
-    margin: 0 0 0 rem(48);
+  @media screen and (min-width: 36em) {
+    margin: 0 0 0 3rem;
     width: auto;
     padding-right: rem(24 + 6);
     text-indent: 0;
@@ -88,7 +119,7 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @media screen and (min-width: 62em) {
     width: fit-content;
     height: auto;
     margin: 0 0 0 3rem;
@@ -101,10 +132,7 @@ $darkMode: 'true' !default;
     }
 
     .btn {
-      @include light-mode($darkMode) {
-        @include reset-colours();
-      }
-
+      
       margin: 0 !important;
       display: flex;
 
@@ -169,6 +197,8 @@ $darkMode: 'true' !default;
   }
 
   .menu {
+
+    
     overscroll-behavior: contain;
     width: calc(#{rem(375)} - var(--scrollbar-width));
     background-color: var(--colour-canvas-2);
@@ -176,7 +206,7 @@ $darkMode: 'true' !default;
     height: calc(100vh - #{rem(96)});
     left: 100%;
     top: 0;
-    padding: 0 rem(24) 0 rem(24);
+    padding: 0 1.5rem 0 1.5rem;
     z-index: var(--index-menu);
     overflow: auto;
     transition: all 1s ease-out;
@@ -186,18 +216,15 @@ $darkMode: 'true' !default;
 
     > * {
       flex-shrink: 0;
+      
+      color-scheme: light;
     }
 
-    @container style(--theme: dark) {
-      --colour-link: var(--colour-white);
-      @include invert-colours();
-    }
 
     // The menu is always white unless in dark mode
-    @include light-mode($darkMode) {
-      background-color: var(--colour-white);
-      @include reset-colours();
-    }
+    
+      background-color: var(--colour-canvas-2);
+      
 
     @media (forced-colors: active) {
       outline: 1px solid white;
@@ -240,9 +267,6 @@ $darkMode: 'true' !default;
     flex-grow: 1;
     position: relative;
 
-    @include light-mode($darkMode) {
-      background-color: #eeeeee;
-    }
 
     .container {
       display: contents;
@@ -251,8 +275,8 @@ $darkMode: 'true' !default;
 
   ::slotted(a:not([slot='logo']):not(.btn-compact):not(.btn-primary)) {
     display: block !important;
-    line-height: rem(20) !important;
-    padding: rem(24) 0 !important;
+    line-height: 1.25rem !important;
+    padding: 1.5rem 0 !important;
     margin: 0 !important;
     flex-shrink: 0;
     font-size: 1rem !important;
@@ -270,17 +294,17 @@ $darkMode: 'true' !default;
 
   *:is(.has-search, .has-actions) .menu__primary {
     display: block;
-    padding-bottom: rem(48);
+    padding-bottom: 3rem;
   }
 
   .menu:not(.has-secondary) .menu__primary {
     display: block;
-    padding-bottom: rem(48);
+    padding-bottom: 3rem;
   }
 
   ::slotted(.btn:not(.btn-compact):not(.btn-primary)) {
     display: block !important;
-    margin: 0 0 rem(24) 0 !important;
+    margin: 0 0 1.5rem 0 !important;
     width: 100% !important;
     max-width: 100% !important;
     text-align: center !important;
@@ -289,7 +313,7 @@ $darkMode: 'true' !default;
 
   .has-actions slot[name='actions'] {
     display: block;
-    padding-bottom: rem(24);
+    padding-bottom: 1.5rem;
   }
 
   slot[name='actions']::slotted(.btn) {
@@ -299,7 +323,7 @@ $darkMode: 'true' !default;
   // Search
   .dialog__wrapper {
     width: 100%;
-    margin: 0 0 rem(48) 0 !important;
+    margin: 0 0 3rem 0 !important;
     flex-shrink: 0;
 
     > .btn {
@@ -318,12 +342,12 @@ $darkMode: 'true' !default;
 // #region tablet tweaks
 @media screen and (max-width: 62em) and (min-width: 36em) {
   .menu {
-    padding-right: rem(40) !important;
+    padding-right: 2.5rem !important;
   }
 
   .has-secondary .menu__secondary {
     margin-right: rem(-40) !important;
-    padding-right: rem(40) !important;
+    padding-right: 2.5rem !important;
 
     &:before {
       width: calc(100% - 4rem) !important;
@@ -336,14 +360,14 @@ $darkMode: 'true' !default;
 // #endregion
 
 // #region desktop
-@include media-breakpoint-up(md, $mobileOnly) {
+@media screen and (min-width: 62em) {
   :host {
     //max-width: 100%!important;
     padding-block: 0 !important;
   }
 
   :host > .container {
-    padding-block: rem(24) !important;
+    padding-block: 1.5rem !important;
     padding-inline: 0 !important;
     max-width: 100%;
     display: flex;
@@ -389,21 +413,13 @@ $darkMode: 'true' !default;
     left: 0;
     width: 100%;
 
-    @include light-mode($darkMode) {
-      background-color: #eeeeee;
-      @include reset-colours();
-    }
-
-    @container style(--theme: dark) {
-      @include invert-colours();
-    }
 
     .container {
       margin-left: auto;
       margin-right: auto;
       padding: var(--container-padding) !important;
-      padding-top: rem(8) !important;
-      padding-bottom: rem(8) !important;
+      padding-top: 0.5rem !important;
+      padding-bottom: 0.5rem !important;
       text-align: right;
     }
   }
@@ -423,7 +439,7 @@ $darkMode: 'true' !default;
   }
 
   ::slotted(a:not([slot='logo']):not(.btn-compact):not(.btn-primary)) {
-    font-size: rem(16) !important;
+    font-size: 1rem !important;
     font-weight: normal !important;
 
     &:after {
@@ -432,21 +448,21 @@ $darkMode: 'true' !default;
   }
 
   ::slotted(a:not([slot='logo']):not([slot='dual'])) {
-    margin-left: rem(32) !important;
+    margin-left: 2rem !important;
   }
 
   ::slotted(.btn-primary) {
-    margin-left: rem(48) !important;
+    margin-left: 3rem !important;
   }
 
   .has-actions slot[name='actions'] {
     display: block;
-    padding-left: rem(48);
+    padding-left: 3rem;
   }
 
   // Search bar
   slot[name='actions']::slotted(.btn) {
-    margin-left: rem(12) !important;
+    margin-left: 0.75rem !important;
   }
 
   :host([data-search]) slot[name='actions'] {
@@ -454,7 +470,7 @@ $darkMode: 'true' !default;
   }
 
   #search-wrapper {
-    margin-left: rem(24) !important;
+    margin-left: 1.5rem !important;
     position: static;
   }
 
@@ -469,7 +485,7 @@ $darkMode: 'true' !default;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding-block: rem(24);
+    padding-block: 1.5rem;
     padding-inline: 0;
     background-color: transparent;
 
@@ -541,7 +557,7 @@ $darkMode: 'true' !default;
   height: calc(100vh - #{rem(96)});
   left: 100%;
   top: 0;
-  padding: 0 rem(24) 0 rem(24);
+  padding: 0 1.5rem 0 1.5rem;
   z-index: var(--index-menu);
   overflow: auto;
   transition: all 1s ease-out;
@@ -553,16 +569,9 @@ $darkMode: 'true' !default;
     flex-shrink: 0;
   }
 
-  @container style(--theme: dark) {
-    --colour-link: var(--colour-white);
-    @include invert-colours();
-  }
 
   // The menu is always white unless in dark mode
-  @include light-mode($darkMode) {
-    background-color: var(--colour-white);
-    @include reset-colours();
-  }
+
 
   @media (forced-colors: active) {
     outline: 1px solid white;
@@ -573,31 +582,31 @@ $darkMode: 'true' !default;
     width: calc(100% + 3rem);
     border-top: 2px solid var(--colour-border);
     z-index: 1;
-    padding: rem(24) 1.5rem;
+    padding: 1.5rem 1.5rem;
     margin: 0 -1.5rem;
-    font-family: $headings-font-family;
-    font-style: $headings-font-style;
-    font-weight: $headings-font-weight;
-    color: $headings-color;
+    font-family: var(--font-heading);
+    font-style: normal;
+    font-weight: var(--heading-weight);
+    color: var(--colour-heading);
     clear: both;
-    font-size: map.get($heading-sizes, 'h3_fs');
-    line-height: map.get($heading-sizes, 'h3_lh');
+    font-size: var(--h3-fs);
+    line-height: var(--heading-lh);
     max-width: var(--content-max-width);
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       margin-right: -2.5rem;
       padding-right: 2.5rem;
       width: calc(100% + 4rem);
     }
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @media screen and (min-width: 36em) {
     padding-right: 2.5rem !important;
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @media screen and (min-width: 62em) {
     height: calc(100vh - var(--nav-height));
-    top: var(--nav-height);
+    top: calc(var(--nav-height) + 4px);
   }
 }
 
@@ -619,7 +628,8 @@ slot[name='menus'] {
 }
 
 ::slotted(.nav--menu.open) {
-  left: calc(100% - (#{rem(375)} - var(--scrollbar-width)));
+  width: calc(#{rem(375)} - var(--modifier, 0px));
+  left: calc(100% - (#{rem(375)} - var(--scrollbar-width, 0px) - var(--modifier, 0px)));
   -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   pointer-events: all;
@@ -634,7 +644,7 @@ slot[name='menus'] {
 // #endregion
 
 // #region compressed nav
-@include media-breakpoint-up(md, $mobileOnly) {
+@media screen and (min-width: 62em) {
   :host(.nav--md-compressed) .buttons-holder button {
     margin-left: 1.5rem !important;
   }
@@ -696,7 +706,7 @@ slot[name='menus'] {
   }
 }
 
-@include media-breakpoint-up(md, $mobileOnly) {
+@media screen and (min-width: 62em) {
   :host(.nav--dual-buttons) {
     slot[name='dual'] {
       display: flex;

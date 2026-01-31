@@ -7,17 +7,9 @@ class iamAccordion extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open' });
 
-    const assetLocation = document.body.hasAttribute('data-assets-location')
-      ? document.body.getAttribute('data-assets-location')
-      : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
-
     const template = document.createElement('template');
     template.innerHTML = /* HTML */ `
       <style>
-        @import '${coreCSS}';
 
         :host {
           margin-bottom: 2.5rem;
@@ -35,17 +27,14 @@ class iamAccordion extends HTMLElement {
   }
 
   connectedCallback(): void {
-  const accordionComponent = this;
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const accordionComponent = this;
 
-    trackComponent(accordionComponent, 'iam-accordion', [
-      'accordion-item-closed', 
-      'accordion-item-opened',
-    ]);
+    trackComponent(accordionComponent, 'iam-accordion', ['accordion-item-closed', 'accordion-item-opened']);
 
     const details: NodeListOf<HTMLElement> = this.querySelectorAll(':scope > details');
 
-    if (!this.classList.contains('accordion--keep-open')) {
-
+    if (!this.classList.contains('accordion--keep-open') && !this.querySelector('details[name]')) {
       // Add the toggle listeners.
       details.forEach((targetDetail) => {
         targetDetail.addEventListener('toggle', () => {
@@ -65,12 +54,11 @@ class iamAccordion extends HTMLElement {
       const summaryText = summaryEle?.innerText;
 
       targetDetail.addEventListener('toggle', () => {
-
         if (targetDetail?.hasAttribute('open')) {
-            itemInteractionEvent('accordion-item-opened', summaryText)
-          } else {
-            itemInteractionEvent('accordion-item-closed', summaryText)
-          }
+          itemInteractionEvent('accordion-item-opened', summaryText);
+        } else {
+          itemInteractionEvent('accordion-item-closed', summaryText);
+        }
       });
     });
 
@@ -82,9 +70,7 @@ class iamAccordion extends HTMLElement {
       });
 
       accordionComponent.dispatchEvent(customEvent);
-      
-    }
-
+    };
   }
 }
 

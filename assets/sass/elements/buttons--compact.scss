@@ -1,19 +1,16 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
-  // #region btn compact
+@layer elements {
+
   .btn-compact {
-    --compact-size: #{rem(48)};
+    --compact-size: 3rem;
 
     padding: 0 !important;
-    margin-bottom: rem(8);
+    margin-bottom: 0.5rem;
 
     &:not(:last-child) {
-      margin-right: rem(8);
+      margin-right: 0.5rem;
     }
     text-align: center;
 
@@ -24,27 +21,29 @@ $darkMode: 'true' !default;
     min-height: var(--compact-size) !important;
     max-height: var(--compact-size) !important;
 
-    line-height: var(--compact-size) !important;
+        align-content: center;
+        line-height: 1 !important;
 
     text-indent: -500px;
     overflow: hidden;
     position: relative;
-    font-size: rem(16);
+    font-size: 1rem;
 
     &:before {
       content: var(--fa);
       position: absolute;
+      display: block;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       text-indent: 0;
-      line-height: calc(var(--compact-size) - #{rem(4)});
+      line-height: calc(var(--compact-size) - 0.25rem);
       font-weight: 900;
     }
 
     &[class*='fa-']:before {
-      line-height: calc(var(--compact-size) - #{rem(4)});
+      line-height: calc(var(--compact-size) - 0.25rem);
 
       @container style(--theme: dark) {
         color: white;
@@ -52,13 +51,13 @@ $darkMode: 'true' !default;
     }
 
     &.btn-sm {
-      --compact-size: #{rem(40)};
+      --compact-size: 2.5rem;
       font-size: 1rem;
       padding: 0 !important;
     }
 
     &.btn-action {
-      --compact-size: #{rem(32)};
+      --compact-size: 2rem;
       font-size: 1rem;
 
       &:before {
@@ -117,23 +116,81 @@ $darkMode: 'true' !default;
     ):not(.bg-canvas-2):not(.prevent-invert),
   .invert-colours {
     .btn-compact.btn-secondary:not(:hover, :focus, .hover, :focus-within):not(.btn-collapse) {
-      background-color: var(--colour-inverted) !important;
-      border-color: var(--colour-inverted) !important;
-      color: var(--colour-primary-theme);
+      background-color: var(--colour-white) !important;
+      border-color: var(--colour-white) !important;
+      color: var(--colour-heading);
     }
 
     .btn-compact.btn-secondary:is(:hover, :focus, .hover, :focus-within):not([disabled]):not(.btn-collapse) {
       background-color: transparent;
-      border-color: var(--colour-inverted) !important;
-      color: var(--colour-inverted);
+      border-color: var(--colour-white) !important;
+      color: var(--colour-white);
     }
 
     .btn-compact.btn-secondary[disabled] {
-      background-color: var(--colour-inverted) !important;
-      border-color: var(--colour-inverted) !important;
-      color: var(--colour-primary-theme) !important;
+      background-color: var(--colour-white) !important;
+      border-color: var(--colour-white) !important;
+      color: var(--colour-heading) !important;
     }
   }
 
-  // #endregion
+  /* #region Detect font awesome has been loaded and if not show the inner text */
+  .btn-compact {
+    
+    &:is(
+      .fa-left,
+      .fa-chevron-left,
+      .fa-right,
+      .fa-chevron-right,
+      .fa-up,
+      .fa-chevron-up,
+      .fa-down,
+      .fa-chevron-down,
+      .fa-plus,
+      .fa-bars,
+      .fa-edit
+    ) {
+      --iso-display: block;
+      --iso-font-size: 1.5rem;
+      --iso-border-radius: 50%;
+      --iso-text-indent: -500px;
+    }
+    
+    @container style(--font-body) {
+
+      font-size: var(--iso-font-size, 0.6rem)!important;
+      text-indent: var(--iso-text-indent, 0px);
+      white-space: initial;
+
+      &:not(.btn-action){
+        
+        border-radius: var(--iso-border-radius, 0.25rem)!important;
+      }
+
+      &:before {
+        display: var(--iso-display, none);
+        font-family: monospace!important;
+        content: var(--iso)!important;
+      }
+    }
+    
+    @container style(--fa-font-regular) {
+
+      text-indent: -500px;
+      font-size: 1rem!important;
+
+      &:not(.btn-action){
+        border-radius: 50%!important;
+      }
+      
+
+      &:before {
+        font-family: "Font Awesome 6 Pro"!important;
+        content: var(--fa)!important;
+        display: block;
+      }
+    }
+    
+  }
+  /* #endregion */
 }

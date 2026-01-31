@@ -2,9 +2,14 @@
 @use 'sass:map';
 @use '_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
+$columns: 12;
+$rows-per-page: 20;
+$grid-utility-count: 10;
+
+$breakpoints: (
+  sm: 36em,
+  /* 576 */ md: 62em /* 992 */,
+);
 
 // #region grid mixins
 @mixin grid-utilities($br: '') {
@@ -68,6 +73,14 @@ $darkMode: 'true' !default;
 
   .#{$br}col-start-auto {
     --col-start: auto;
+
+    &:first-child {
+      --col-start: col-1;
+    }
+  }
+  
+  hr + .#{$br}col-start-auto {
+    --col-start: col-1;
   }
 
   @for $i from 0 to $columns {
@@ -77,10 +90,18 @@ $darkMode: 'true' !default;
 
     .#{$br}col-end-#{$i + 1} {
       --col-end: col-#{$i + 1}-end;
+
+      & + .#{$br}col-start-auto:not([class*="col-span-"]) {
+        --col-start: col-#{$i + 2}-start;
+      }
     }
 
     .#{$br}col-span-#{$i + 1} {
       --col-end: span #{$i + 1};
+      
+      & + .#{$br}col-start-auto:not([class*="col-span-"]) {
+        --col-start: col-#{$i + 2}-start;
+      }
     }
   }
 }
@@ -102,21 +123,16 @@ $darkMode: 'true' !default;
 }
 // #endregion
 
-@include layer('reset', $layers) {
+@layer reset {
   // #region Main grid setup
   body {
-    --excess-space: calc((100% - var(--max-width, #{$max-width})) / 2);
+    --excess-space: calc((100% - var(--max-width)) / 2);
     --col-size: calc(
       (
-          100% - max(0%, var(--excess-space)) - max(0%, var(--excess-space)) - var(--gutter, #{$gutter}) - var(
-              --gutter,
-              #{$gutter}
-            ) -
-            (var(--gap, #{$gap}) * (#{$columns - 1}))
-        ) /
-        #{$columns}
+          100% - max(0%, var(--excess-space)) - max(0%, var(--excess-space)) - var(--gutter) - var(--gutter) - (var(--gap) * (#{$columns - 1}))
+        ) / #{$columns}
     );
-    column-gap: var(--gap, #{$gap});
+    column-gap: var(--gap);
     display: grid;
     margin-inline: 0;
     width: 100%;
@@ -130,20 +146,20 @@ $darkMode: 'true' !default;
       $templateColumns: $templateColumns + 'var(--col-size) [col-' + $i + '-end col-'+ ($i + 1)+'-start] ';
     }
     grid-template-columns:
-      [full-width-start container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+      [full-width-start container-start] calc(var(--gutter) - var(--gap))
       [content-start col-1-start]
       #{$templateColumns}
-      var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+      var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
       [container-end full-width-end];
 
-    @media screen and (min-width: #{em($max-width-px * $max-scale-up)}) {
+    @media screen and (min-width: #{em(1280 * 1.125)}) {
       grid-template-columns:
-        [full-width-start] calc(var(--excess-space) - var(--gap, #{$gap}))
-        [container-start] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
+        [full-width-start] calc(var(--excess-space) - var(--gap))
+        [container-start] calc(var(--gutter) - var(--gap))
         [content-start col-1-start]
         #{$templateColumns}
-        var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter, #{$gutter}) - var(--gap, #{$gap}))
-        [container-end] calc(var(--excess-space) - var(--gap, #{$gap})) [full-width-end];
+        var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
+        [container-end] calc(var(--excess-space) - var(--gap)) [full-width-end];
     }
 
     & * {
@@ -195,15 +211,17 @@ $darkMode: 'true' !default;
     }
   }
 
-  *:has([class*='order-']) > *:not([class*='order-']) {
+  *:has([class*='order-']:not([class*="border-"])) > *:not([class*='order-']) {
     order: 99;
   }
 
   @include grid-utilities();
-  @each $br, $value in $breakpoints {
-    @include breakpoint($br) {
-      @include grid-utilities(#{$br + '-'});
-    }
+  
+  @media screen and (min-width: 36em) {
+    @include grid-utilities(#{'sm-'});
+  }
+  @media screen and (min-width: 62em) {
+    @include grid-utilities(#{'md-'});
   }
   // #endregion
 
@@ -232,10 +250,11 @@ $darkMode: 'true' !default;
   }
 
   @include grid-columns();
-  @each $br, $value in $breakpoints {
-    @include breakpoint($br) {
-      @include grid-columns(#{$br + '-'});
-    }
+  @media screen and (min-width: 36em) {
+    @include grid-columns(#{'sm-'});
+  }
+  @media screen and (min-width: 62em) {
+    @include grid-columns(#{'md-'});
   }
   // #endregion
 
@@ -245,10 +264,11 @@ $darkMode: 'true' !default;
   }
 
   @include grid-rows();
-  @each $br, $value in $breakpoints {
-    @include breakpoint($br) {
-      @include grid-rows(#{$br + '-'});
-    }
+  @media screen and (min-width: 36em) {
+    @include grid-rows(#{'sm-'});
+  }
+  @media screen and (min-width: 62em) {
+    @include grid-rows(#{'md-'});
   }
   // #endregion
 
@@ -265,17 +285,25 @@ $darkMode: 'true' !default;
       grid-column: auto / span #{math.floor($count)};
     }
   }
+  
+  @media screen and (min-width: 36em) {
+    @for $i from 1 to math.floor(math.div($columns, 2)) + 1 {
+      $count: math.div($columns, $i);
 
-  @each $br, $value in $breakpoints {
-    @include breakpoint($br) {
-      @for $i from 1 to math.floor(math.div($columns, 2)) + 1 {
-        $count: math.div($columns, $i);
-
-        .#{$br}-cols-#{$i} > * {
-          grid-column: auto / span #{math.floor($count)};
-        }
+      .sm-cols-#{$i} > * {
+        grid-column: auto / span #{math.floor($count)};
       }
     }
   }
+  @media screen and (min-width: 62em) {
+    @for $i from 1 to math.floor(math.div($columns, 2)) + 1 {
+      $count: math.div($columns, $i);
+
+      .md-cols-#{$i} > * {
+        grid-column: auto / span #{math.floor($count)};
+      }
+    }
+  }
+
   // #endregion
 }

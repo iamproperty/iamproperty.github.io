@@ -1,6 +1,10 @@
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
+  
+  let urlParams = new URLSearchParams(window.location.search);
+  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
+
 </script>
 
 <template>
@@ -23,7 +27,7 @@
     </div>
 
     <!-- #region Primary button -->
-    <div class="container visualtest pb-5 pe-none mb-5">
+    <div :class="`container visualtest pb-5 pe-none mb-5 ${(target == 'visualtest1' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-4 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -70,7 +74,7 @@
       action adds a new record. The icon can be added before or after the button copy. Whichever is most relevant.
     </p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest2' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -117,7 +121,7 @@
       and signify that the button will navigate the user to another page.
     </p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest3' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -161,7 +165,7 @@
     <h3>Primary button (small)</h3>
     <p>When there is limited space a small button variant can be used.</p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest4' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -208,7 +212,7 @@
       submit/complete a task.
     </p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest5' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -235,7 +239,7 @@
       brightness will be applied to the default states for the active state.
     </p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest6' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-4 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -270,7 +274,7 @@
       action adds a new event. The icon can be added before or after the button copy. Whichever is most relevant.
     </p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest7' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -305,7 +309,7 @@
       and signify that the button will navigate the user to another page.
     </p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest8' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -337,7 +341,7 @@
     <h3>Secondary button (opening filter dialog pop-over)</h3>
     <p>Secondary buttons can be used to open a filter dialog pop-over.</p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest9' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -411,7 +415,7 @@
     <h3>Secondary button (opening filter dialog modal)</h3>
     <p>Secondary buttons can be used to open a filter dialog modal.</p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest10' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -452,7 +456,7 @@
     <h3>Secondary button (form field acting as a button)</h3>
     <p>Form fields can be set-up to act like a button to improve consistency when used alongside other buttons.</p>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest11' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -523,7 +527,7 @@
     <h3>Secondary button (small)</h3>
     <p>When there is limited space a small button variant can be used.</p>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest12' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -562,7 +566,7 @@
       </p>
     </div>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest13' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -596,7 +600,7 @@
       <p>An icon can be added to support a tertiary button for links like information downloads (pdfs, csvs etc.)</p>
     </div>
 
-    <div class="container visualtest pb-5 pe-none">
+    <div :class="`container visualtest pb-5 pe-none ${(target == 'visualtest14' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
@@ -632,7 +636,7 @@
       </p>
     </div>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest15' ? 'target' : '')}`">
       <div class="row">
         <div class="col-sm-6 col-md-4 pe-none">
           <p class="lead pb-2">Default state</p>

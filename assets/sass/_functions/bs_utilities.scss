@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-@use 'variables_old' as *;
+@use './bs_variables' as *;
 
 // #region Bootstrap
 $utilities: () !default;

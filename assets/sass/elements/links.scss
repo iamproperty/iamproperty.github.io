@@ -1,18 +1,18 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // #region reset
   a {
     color: var(--link-color);
-    text-decoration: $link-decoration;
+    text-decoration: underline;
 
     &:hover {
       color: var(--link-hover-color);
-      text-decoration: $link-hover-decoration;
+      text-decoration: none;
     }
   }
 
@@ -50,13 +50,17 @@ $darkMode: 'true' !default;
     display: inline-block;
     border: none;
     color: var(--colour-link);
-    margin: 0 rem(24) rem(24) 0;
+    margin: 0 1.5rem 1.5rem 0;
     padding: 0;
-    font-size: rem(18);
-    line-height: rem(24);
-    min-height: rem(24);
+    font-size: 1.125rem; /* 18/16 */
+    line-height: 1.5rem;
+    min-height: 1.5rem;
     position: relative;
     font-weight: bold;
+
+    &:last-child {
+      margin-right: 0;
+    }
 
     &:not(.text-decoration-none) {
       &:after {
@@ -69,6 +73,12 @@ $darkMode: 'true' !default;
         transform: translate(-50%, 0);
         background: var(--colour-underline);
         transition: width 0.5s;
+      }
+    }
+
+    &:not(.text-decoration-none).text-underline-plain {
+      &:after {
+        background: currentColor;
       }
     }
 
@@ -93,8 +103,9 @@ $darkMode: 'true' !default;
     }
   }
 
-  @include inline-text() {
-    a:not(.btn) {
+  :where(p, ul, ol, dd, .body),
+  table:not(.table--email) td {
+    a:not(.btn):not(.link) {
       min-height: none;
       display: inline;
       margin: 0;
@@ -145,7 +156,7 @@ $darkMode: 'true' !default;
     }
 
     &:not([class*='col']) {
-      margin: 0 0 rem(24) 0;
+      margin: 0 0 1.5rem 0;
     }
 
     &:not(.d-inline-block):not([class*='col']) {
@@ -160,7 +171,7 @@ $darkMode: 'true' !default;
   // #endregion
 }
 
-:is(.youtube-link[data-youtube], .vimeo-link[data-vimeo]) {
+:is(.youtube-link, .vimeo-link) {
   position: relative;
 
   &:before {
@@ -210,14 +221,14 @@ $darkMode: 'true' !default;
 // #region Sidebar link styling including parent group styling
 iam-collapsible-side {
   > * {
-    padding-left: rem(24);
+    padding-left: 1.5rem;
 
-    @include media-breakpoint-up(sm) {
-      padding-left: rem(40);
+    @media screen and (min-width: 36em) {
+      padding-left: 2.5rem;
     }
 
-    @include media-breakpoint-up(md) {
-      padding-left: var(--container-padding-x-md);
+    @media screen and (min-width: 62em) {
+      padding-left: var(--container-padding-x);
     }
   }
 
@@ -230,8 +241,8 @@ iam-collapsible-side {
 .vertical-tabs [class*='link'],
 iam-collapsible-side [class*='link'] {
   display: block !important;
-  line-height: rem(20) !important;
-  padding: rem(16) rem(24) rem(16) rem(24) !important;
+  line-height: 1.25rem !important;
+  padding: 1rem 1.5rem 1rem 1.5rem !important;
   margin: 0 !important;
   flex-shrink: 0;
   font-size: 1rem !important;
@@ -248,15 +259,15 @@ iam-collapsible-side [class*='link'] {
 
   i {
     // icon
-    margin-right: rem(8) !important;
+    margin-right: 0.5rem !important;
   }
 
-  @include media-breakpoint-up(sm) {
-    padding-left: rem(24) !important;
+  @media screen and (min-width: 36em) {
+    padding-left: 1.5rem !important;
   }
 
-  @include media-breakpoint-up(md) {
-    padding-left: var(--container-padding-x-md) !important;
+  @media screen and (min-width: 62em) {
+    padding-left: var(--container-padding-x) !important;
   }
 }
 
@@ -288,7 +299,7 @@ iam-collapsible-side {
       cursor: pointer;
 
       a {
-        padding-right: rem(40) !important;
+        padding-right: 2.5rem !important;
 
         &::before {
           position: absolute;
@@ -324,7 +335,7 @@ iam-collapsible-side {
     }
   }
 
-  @include media-breakpoint-up(sm) {
+  @media screen and (min-width: 36em) {
     .parent {
       li:not(:first-of-type) {
         a {

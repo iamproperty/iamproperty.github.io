@@ -13,7 +13,7 @@ export const addClasses = (chartElement: any, chartOuter: any): boolean => {
 
     Array.from(chartOuter.querySelectorAll(`[data-colour-${i}]`)).forEach((element: HTMLElement) => {
       const colour = element.getAttribute(`data-colour-${i}`);
-      element.style.setProperty(`--chart-colour-${i}-set`, `var(--chart-colour-${colour})`);
+      element.style.setProperty(`--chart-colour-${i}`, `var(--chart-colour-${colour})`);
       element.style.setProperty(`--chart-colour-${i}-hover`, `var(--chart-colour-${colour}-hover)`);
     });
   }

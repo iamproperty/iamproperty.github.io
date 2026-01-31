@@ -13,28 +13,24 @@ The `createDataLayer()` function should be called in the JavaScript code of the 
 ## Events Tracked
 
 1.  **"Pageview" Event**
-
     - Description: This event is automatically pushed to the `window.dataLayer` array during the function's execution, representing the initial pageview with the current document title.
     - Event Data:
       - `event`: "Pageview"
       - `pageTitle`: The title of the current document.
 
 2.  **"closeDetails" Event**
-
     - Description: This event is triggered when a click occurs on an element with the attribute `[open] summary`, indicating that a summary element with the `[open]` attribute is being closed.
     - Event Data:
       - `event`: "closeDetails"
       - `detailsTitle`: The text content of the `summary` element associated with the clicked element. If the `summary` element doesn't have any text content, an empty string is used.
 
 3.  **"openDetails" Event**
-
     - Description: This event is triggered when a click occurs on a `summary` element (not associated with `[open]` attribute), indicating that a summary element is being opened.
     - Event Data:
       - `event`: "openDetails"
       - `detailsTitle`: The text content of the clicked `summary` element. If the `summary` element doesn't have any text content, an empty string is used.
 
 4.  **"linkClicked" Event**
-
     - Description: This event is triggered when a click occurs on an `a` (anchor) element.
     - Event Data:
       - `event`: "linkClicked"
@@ -43,7 +39,6 @@ The `createDataLayer()` function should be called in the JavaScript code of the 
       - `href`: The value of the `href` attribute of the `a` element. If the `a` element doesn't have an `href` attribute, an empty string is used.
 
 5.  **"buttonClicked" Event**
-
     - Description: This event is triggered when a click occurs on a `button` element.
     - Event Data:
       - `event`: "buttonClicked"

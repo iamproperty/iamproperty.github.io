@@ -1,29 +1,30 @@
 @use '../_func' as *;
 
-$darkMode: 'true' !default;
+
 
 :host,
 .iam-notification {
   display: block;
-  padding: rem(22) rem(24) rem(22) rem(24 - 8) !important;
-  border-radius: rem(8);
+  padding: rem(22) 1.5rem rem(22) rem(24 - 8) !important;
+  border-radius: 0.5rem;
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
   font-size: rem(15);
   border: rem(2) solid var(--colour, var(--colour-info));
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+  background: var(--colour-notification-bg);
 
-  @include light-mode($darkMode) {
-    background: #e9f9fd;
-  }
 
-  &::slotted(strong) {
-    color: green;
-  }
-  &::slotted(i),
+  ::slotted(i),
   i {
     color: var(--colour, currentColor);
   }
+}
+
+:host(:not(.bg-danger)){
+  
+  color-scheme: light;
+  color: var(--colour-heading);
 }
 
 :host([data-type]),
@@ -31,30 +32,38 @@ $darkMode: 'true' !default;
   border: rem(2) solid transparent;
 }
 
+
 :host(.colour-warning),
 .iam-notification.colour-warning {
-  background: #fff6e6;
+  background: var(--colour-notification-warning-bg);
 }
 
-:host(.colour-danger),
-.iam-notification.colour-danger {
-  background: #fcebec;
-}
+  :host(.colour-danger),
+  .iam-notification.colour-danger {
+    
+  background: var(--colour-notification-danger-bg);
+  }
 
-:host(.colour-success),
-.iam-notification.colour-success {
-  background: #f8fdf6;
-}
+  :host(.colour-success),
+  .iam-notification.colour-success {
+    
+  background: var(--colour-notification-success-bg);
+  }
 
 :host(.bg-white),
 .iam-notification.bg-white {
   border: none;
-  border-left: rem(8) solid var(--colour-info);
+  border-left: 0.5rem solid var(--colour-info);
 
   ::slotted(i),
   i {
     color: var(--colour-info);
   }
+}
+
+:host(.bg-danger) .notification{
+
+  color: var(--colour-white);
 }
 
 // Alerts
@@ -85,21 +94,16 @@ $darkMode: 'true' !default;
 
 .notification {
   container-type: inline-size;
-  max-width: rem(1112);
-  margin-inline: auto;
   display: flex;
   flex-wrap: nowrap;
-
-  @include light-mode($darkMode) {
-    color: var(--colour-heading);
-  }
+  color: var(--colour-heading);
 
   .notification__icon {
-    margin-inline-end: rem(16);
+    margin-inline-end: 1rem;
     flex-grow: 0;
 
     ::slotted(i) {
-      font-size: rem(18);
+      font-size: 1.125rem; /* 18/16 */
     }
   }
 
@@ -131,19 +135,19 @@ $darkMode: 'true' !default;
     ::slotted(a),
     ::slotted(button),
     > * {
-      margin: rem(16) rem(16) 0 0 !important;
+      margin: 1rem 1rem 0 0 !important;
     }
 
     @container (width > 23.4375em) {
       display: flex;
       align-items: center;
       border-left: 1px solid currentColor;
-      margin-left: rem(32);
+      margin-left: 2rem;
 
       ::slotted(a),
       ::slotted(button),
       > * {
-        margin: 0 0 0 rem(32) !important;
+        margin: 0 0 0 2rem !important;
       }
     }
   }
@@ -160,8 +164,8 @@ $darkMode: 'true' !default;
       text-indent: 300%;
       overflow: hidden;
       border: none;
-      height: rem(18);
-      width: rem(18);
+      height: 1.125rem; /* 18/16 */
+      width: 1.125rem; /* 18/16 */
       background: transparent;
       display: inline-block;
       position: relative;
@@ -173,8 +177,8 @@ $darkMode: 'true' !default;
         left: 0;
         position: absolute;
         display: block;
-        height: rem(18);
-        width: rem(18);
+        height: 1.125rem; /* 18/16 */
+        width: 1.125rem; /* 18/16 */
         z-index: var(--index-focus);
         background: currentColor;
         mask-image: var(--icon-close);
@@ -189,7 +193,7 @@ $darkMode: 'true' !default;
     }
 
     @container (width > 23.4375em) {
-      padding-left: rem(32);
+      padding-left: 2rem;
       display: flex;
       align-items: center;
     }

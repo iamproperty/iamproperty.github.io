@@ -1,0 +1,72 @@
+@use '../_func' as *;
+
+@layer elements {
+  
+
+  .feature {
+
+    --padding: 1rem;
+    background-color: var(--colour-canvas-2);
+    border: 1px solid var(--colour-border);
+    border-radius: 0.5rem;
+    padding: var(--padding);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    min-height: 2rem;
+
+    &:not(.d-flex) > strong:first-child {
+      display: block;
+      padding-bottom: 0.2em;
+    }
+
+    &.d-flex {
+      gap: 0.5rem;
+    }
+  }
+
+  .admin-panel .feature {
+    --padding: 0rem;
+    border: 0;
+    margin-top: 0.5rem;
+    border-radius: 0;
+
+    &:has(+ .feature) {
+      border-bottom: 1px solid var(--colour-border);
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      min-height: 3rem;
+    }
+  }
+
+  .feature[class*="fa-"] {
+
+    padding-left: calc(var(--padding) + 3rem);
+    position: relative;
+    
+    &:before {
+      position: absolute;
+      inset: var(--padding);
+      content: var(--fa);
+      font-family: "Font Awesome 6 Pro";
+      display: block;
+
+      background-color: var(--colour-success);
+      color: var(--colour-primary-theme);
+      border-radius: 50%;
+      padding: 0;
+      height: 2rem;
+      line-height: 2rem;
+      width: 2rem;
+      text-align: center;
+    }
+  }
+
+  .feature[class*="fa-rocket"] {
+
+    &:before {
+      
+      padding-right: 0.1rem;
+    }
+  }
+
+}

@@ -7,7 +7,8 @@
   import Tab from '../../../src/components/Tabs/Tab.vue';
   import Table from '../../../src/components/Table/Table.vue';
   import UserColours from '../UserColours.vue';
-  import DarkMode from '../../../src/components/DarkMode/DarkMode.vue'
+  import DarkMode from '../../../src/components/DarkMode/DarkMode.vue';
+
 
   let userTheme = 'light-theme';
   let checked = false;
@@ -22,6 +23,45 @@
     Danger: 'Red',
   };
 
+  const secondaryColours = {
+    Success: '--colour-success',
+    Info: '--colour-info',
+    Danger: '--colour-danger',
+    Dark: '--colour-dark'
+  }
+
+  const getVar = (propertyString) => {
+
+    let returnString = window.getComputedStyle(document.querySelector('body')).getPropertyValue(propertyString).toUpperCase();
+
+    returnString = returnString.replace('LIGHT-DARK(','').replace(')','');
+
+    let returnStringArr = returnString.split(",");
+
+    returnString = returnStringArr[0];
+
+    if (returnStringArr[1]) {
+      
+      returnString = `<span class="light-var">${returnStringArr[0]}</span><span class="dark-var">${returnStringArr[1]}</span>`;
+    }
+
+    return returnString;
+  };
+
+  const widerColours = {};
+  const widerColoursHover = {};
+  const widerColoursActive = {};
+
+  for (let i = 1; i <= 23; i++) {
+    
+    widerColours[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}`);
+    widerColoursHover[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-hover`);
+    widerColoursActive[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-active`);
+  }
+
+  let urlParams = new URLSearchParams(window.location.search);
+  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
+  
 </script>
 
 <template>
@@ -32,11 +72,8 @@
 
     <DarkMode><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
 
-
-
     <!-- #region Light mode -->
-    <div class="light-mode full-width">
-
+    <div class="light-mode full-width visualtest--container">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -55,14 +92,14 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div class="colour-block bg-canvas border"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Default background</span>
             <span>CSS Variable: --colour-canvas</span><br />
             <span>CSS Variable: --colour-canvas-2</span><br />
-            <span>Hex code: #fcfcfc</span>
+            <span>Hex code: #FCFCFC</span>
           </div>
         </div>
       </div>
@@ -75,31 +112,31 @@
           secondary palette colors throughout to soften the experience and to impart confidence and optimism.
         </p>
         <p>
-          We use dark blue ({{ $shared.themeColours.Primary.toUpperCase() }}) is used primarily for body text and
+          We use dark blue (<span v-html="getVar('--colour-primary')"></span>) is used primarily for body text and
           headings, and white (#fcfcfc) for page background or body text and headings the are overlaid on dark
           backgrounds.
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames['Primary'] }}</span>
             <span>CSS Variable: --colour-primary</span><br />
-            <span>Hex code: {{ $shared.themeColours.Primary.toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-primary')"></span></span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-white border"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Off-white</span>
             <span>CSS Variable: --colour-white</span><br />
-            <span>Hex code: #fcfcfc</span>
+            <span>Hex code: #FCFCFC</span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-warning border"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Yellow</span>
             <span>CSS Variable: --colour-warning</span><br />
-            <span>Hex code: {{ $shared.themeColours.Warning.toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-warning')"></span></span>
           </div>
         </div>
       </div>
@@ -112,27 +149,25 @@
           feel on-brand and every interaction informative.
         </p>
         <p>
-          We use blue ({{ $shared.themeColours.Info.toUpperCase() }}) for selected states. Yellow ({{
-            $shared.themeColours.Warning.toUpperCase()
-          }}) for primary buttons. Green ({{ $shared.themeColours.Success.toUpperCase() }}) for completed states and
-          positive interactions. Red ({{ $shared.themeColours.Danger.toUpperCase() }}) for incomplete or warning states.
+          We use blue (<span v-html="getVar('--colour-info')"></span>) for selected states. Yellow (<span v-html="getVar('--colour-warning')"></span>) for primary buttons. Green (<span v-html="getVar('--colour-success')"></span>) for completed states and
+          positive interactions. Red (<span v-html="getVar('--colour-danger')"></span>) for incomplete or warning states.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
-          <div class="col pb-2" v-for="(colour, name) in $shared.secondaryColours" :key="name">
+          <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames[name] }}</span>
             <span>CSS Variable: --colour-{{ name.toLowerCase() }}</span
             ><br />
             <span v-if="name == 'Success'">CSS Variable: --colour-secondary</span><br v-if="name == 'Success'" />
-            <span>Hex code: {{ colour.toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar(colour)"></span></span>
           </div>
           <div class="col pb-2">
             <div :class="`colour-block bg-light`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Light</span>
             <span>CSS Variable: --colour-light</span><br />
-            <span>Hex code: {{ $shared.themeColours.Light.toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-light')"></span></span
             ><br />
           </div>
         </div>
@@ -153,20 +188,20 @@
           differentiate between the background and a piece of content.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3 pb-2">
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
             <span class="lead text-primary d-block pb-0">Muted</span>
             <span>CSS Variable: --colour-muted</span><br />
-            <span>Hex code: {{ $shared.nonThemeColours.Muted.toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-muted')"></span></span
             ><br />
           </div>
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-body)"></div>
             <span class="lead text-primary d-block pb-0">Body</span>
             <span>CSS Variable: --colour-body</span><br />
-            <span>Hex code: {{ $shared.nonThemeColours.Body.toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-body')"></span></span
             ><br />
           </div>
         </div>
@@ -175,13 +210,12 @@
     <!-- #endregion Light mode -->
 
     <!-- #region Dark mode -->
-    <div class="dark-mode full-width">
+    <div class="dark-mode full-width visualtest--container">
       <div class="container">
         <div class="row">
           <div class="col">
             <h2>Dark mode colour palette</h2>
           </div>
-          
         </div>
 
         <p class="lead">
@@ -196,13 +230,13 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div class="colour-block bg-canvas border"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Default background</span>
             <span>CSS Variable: --colour-canvas</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Canvas'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-canvas')"></span></span>
           </div>
 
           <div class="col pb-2">
@@ -211,7 +245,7 @@
             </div>
             <span class="lead text-primary d-block pb-0">Background 2</span>
             <span>CSS Variable: --colour-canvas-2</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Canvas-2'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-canvas-2')"></span></span>
           </div>
         </div>
       </div>
@@ -236,13 +270,13 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames['Primary'] }}</span>
             <span>CSS Variable: --colour-primary</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Primary'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-primary')"></span></span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-white border" style="background: var(--colour-white)">
@@ -250,13 +284,13 @@
             </div>
             <span class="lead text-primary d-block pb-0">Off-white</span>
             <span>CSS Variable: --colour-white</span><br />
-            <span>Hex code: #fcfcfc;</span>
+            <span>Hex code: <span v-html="getVar('--colour-white')"></span></span>
           </div>
           <div class="col pb-2">
             <div class="colour-block bg-warning"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Yellow</span>
             <span>CSS Variable: --colour-warning</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Warning'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-warning')"></span></span>
           </div>
         </div>
       </div>
@@ -276,27 +310,22 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
-          <div class="col pb-2" v-for="(colour, name) in $shared.secondaryColours" :key="name">
+          <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">{{ colourNames[name] }}</span>
             <span>CSS Variable: --colour-{{ name.toLowerCase() }}</span
             ><br />
             <span v-if="name == 'Success'">CSS Variable: --colour-secondary</span><br v-if="name == 'Success'" />
-            <span
-              >Hex code:
-              {{
-                $shared.darkModeColours[name] ? $shared.darkModeColours[name].toUpperCase() : colour.toUpperCase()
-              }}</span
-            >
+            <span>Hex code: <span v-html="getVar(colour)"></span></span>
           </div>
 
           <div class="col pb-2">
             <div :class="`colour-block bg-light`"><span>Text</span></div>
             <span class="lead text-primary d-block pb-0">Light</span>
             <span>CSS Variable: --colour-light</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Light'].toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-light')"></span></span
             ><br />
           </div>
         </div>
@@ -310,20 +339,20 @@
           differentiate between the background and a piece of content.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3 pb-2">
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
             <span class="lead text-primary d-block pb-0">Muted</span>
             <span>CSS Variable: --colour-muted</span><br />
-            <span>Hex code: {{ $shared.nonThemeColours.Muted.toUpperCase() }}</span
+            <span>Hex code: <span v-html="getVar('--colour-muted')"></span></span
             ><br />
           </div>
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-body)"></div>
             <span class="lead text-primary d-block pb-0">Body</span>
             <span>CSS Variable: --colour-body</span><br />
-            <span>Hex code: {{ $shared.darkModeColours['Body'].toUpperCase() }}</span>
+            <span>Hex code: <span v-html="getVar('--colour-body')"></span></span>
           </div>
         </div>
       </div>
@@ -334,7 +363,7 @@
       <h2>Colour tints</h2>
     </div>
 
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest5' ? 'target' : '')}`">
       <div class="overflow-auto mb-3">
         <table class="colour-tints table--fullwidth border-0 mb-0">
           <thead>
@@ -354,7 +383,7 @@
           </thead>
           <tbody>
             <tr>
-              <th>{{ colourNames['Primary'] }}</th>
+              <th style="vertical-align: middle;">{{ colourNames['Primary'] }}</th>
               <td><span class="colour-circle bg-primary tint-100 light-mode"></span></td>
               <td><span class="colour-circle bg-primary tint-90 light-mode"></span></td>
               <td><span class="colour-circle bg-primary tint-80"></span></td>
@@ -367,7 +396,7 @@
               <td><span class="colour-circle bg-primary tint-10"></span></td>
             </tr>
             <tr>
-              <th>{{ colourNames['Warning'] }}</th>
+              <th style="vertical-align: middle;">{{ colourNames['Warning'] }}</th>
               <td><span class="colour-circle bg-warning"></span></td>
               <td><span class="colour-circle bg-warning tint-90"></span></td>
               <td><span class="colour-circle bg-warning tint-80"></span></td>
@@ -379,8 +408,8 @@
               <td><span class="colour-circle bg-warning tint-20"></span></td>
               <td><span class="colour-circle bg-warning tint-10"></span></td>
             </tr>
-            <tr v-for="(colour, name) in $shared.secondaryColours" :key="name">
-              <th>{{ colourNames[name] }}</th>
+            <tr v-for="(colour, name) in secondaryColours" :key="name">
+              <th style="vertical-align: middle;">{{ colourNames[name] }}</th>
               <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-100`"></span></td>
               <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-90`"></span></td>
               <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-80`"></span></td>
@@ -393,7 +422,7 @@
               <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-10`"></span></td>
             </tr>
             <tr>
-              <th>Pink</th>
+              <th style="vertical-align: middle;">Pink</th>
               <td><span class="colour-circle bg-pink tint-100"></span></td>
               <td><span class="colour-circle bg-pink tint-90"></span></td>
               <td><span class="colour-circle bg-pink tint-80"></span></td>
@@ -418,7 +447,7 @@
         background elements sparingly.
       </p>
     </div>
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest6' ? 'target' : '')}`">
       <div class="row row-cols-2 row-cols-sm-3">
         <div class="col pb-2">
           <div class="colour-block bg-info gradient-success"></div>
@@ -475,7 +504,7 @@
     <div class="container">
       <h2>Semantic colour</h2>
     </div>
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest7' ? 'target' : '')}`">
       <div class="overflow-auto mb-3">
         <table class="semantic-colours table--fullwidth border-0 mb-0">
           <thead>
@@ -490,7 +519,7 @@
           </thead>
           <tbody>
             <tr>
-              <th>Messages</th>
+              <th style="vertical-align: middle;">Messages</th>
               <td><span class="colour-circle bg-info"></span>Inform</td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Success</td>
@@ -498,7 +527,7 @@
               <td><span class="colour-circle bg-danger"></span>Error</td>
             </tr>
             <tr>
-              <th>Status</th>
+              <th style="vertical-align: middle;">Status</th>
               <td></td>
               <td><span class="colour-circle bg-muted" style="background: var(--colour-muted)"></span>Not started</td>
               <td><span class="colour-circle bg-success"></span>Approved</td>
@@ -506,7 +535,7 @@
               <td><span class="colour-circle bg-danger"></span>Incomplete</td>
             </tr>
             <tr>
-              <th>Risk</th>
+              <th style="vertical-align: middle;">Risk</th>
               <td></td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Low</td>
@@ -514,15 +543,15 @@
               <td><span class="colour-circle bg-danger"></span>High</td>
             </tr>
             <tr>
-              <th>Status</th>
+              <th style="vertical-align: middle;">States</th>
               <td><span class="colour-circle bg-info"></span>Selected</td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Positive</td>
               <td></td>
-              <td><span class="colour-circle bg-danger"></span>Warning</td>
+              <td><span class="colour-circle bg-danger"></span>Negative</td>
             </tr>
             <tr>
-              <th>Priority</th>
+              <th style="vertical-align: middle;">Priority</th>
               <td></td>
               <td></td>
               <td><span class="colour-circle bg-success"></span>Low</td>
@@ -532,36 +561,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-
-    <div class="container">
-      <h2>Functional colours</h2>
-    </div>
-
-    <div class="container visualtest pb-5">
-      <p class="pb-2">
-        The theme colours can all be assigned by using the bootstrap classes but we also have a series of functional
-        colours that are used across the system.
-      </p>
-
-      <details>
-        <summary><span class="btn btn-tertiary">Colours</span></summary>
-
-        <div class="row row-cols-2 row-cols-sm-4">
-          <div class="col pb-2" v-for="(colour, name) in $shared.extendedColours" :key="name">
-            <div
-              :class="`colour-block ${name == 'Inverted' ? 'border' : ''}`"
-              :style="`background: var(--colour-${name.toLowerCase()});`"
-            ></div>
-            <span class="lead text-primary d-block pb-0">{{ colourNames[name] }}</span>
-            <span>CSS Variable: --colour-{{ name.toLowerCase() }}</span
-            ><br />
-            <span>Value: {{ colour }}</span
-            ><br />
-            <span>Dark mode value: {{ $shared.darkModeColours[name] }}</span>
-          </div>
-        </div>
-      </details>
     </div>
 
     <div class="container">
@@ -578,7 +577,7 @@
       <h2>Wider colour pallete</h2>
     </div>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest8' ? 'target' : '')}`">
       <p class="pb-2">
         The wider colour palette is a range of colours that can be used in instances where colours can help with
         categorisation - calendar events, user types, applied filters, etc. They should not be used for status
@@ -599,7 +598,7 @@
         </div>
       </div>
 
-      <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in $shared.widerColours" :key="name">
+      <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in widerColours" :key="name">
         <div class="col-12 col-sm pb-2">
           <span>Wider colour {{ name }}</span>
         </div>
@@ -607,11 +606,11 @@
           <div :class="`tag wider-colour-${name}`">{{ colour }}</div>
         </div>
         <div class="col pb-2">
-          <div :class="`tag wider-colour-${name} hover`">{{ $shared.widerColoursHover[name] }}</div>
+          <div :class="`tag wider-colour-${name} hover`">{{ widerColoursHover[name] }}</div>
         </div>
         <div class="col pb-2">
           <div :class="`tag wider-colour-${name} active`">
-            {{ $shared.widerColoursActive[name] }}
+            {{ widerColoursActive[name] }}
           </div>
         </div>
       </div>
@@ -625,8 +624,10 @@
       </p>
     </div>
 
-    <UserColours></UserColours>
 
+<div :class="`container visualtest pb-5 ${(target == 'visualtest9' ? 'target' : '')}`">
+    <UserColours></UserColours>
+</div>
     <div class="bg-light version-control">
       <div class="container ct-inline">
         <table>
@@ -661,45 +662,50 @@
 </template>
 
 <style lang="scss">
+  @use 'sass:color';
   @use '../../../assets/sass/_func' as *;
+
+  @function tint($colour, $percentage) {
+    @return color.mix(white, $colour, $percentage);
+  }
 
   @layer utilities {
     @for $i from 1 through 10 {
       .bg-primary.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($primary, $tint) !important;
+        background-color: tint(#00313c, $tint) !important;
       }
     }
     @for $i from 1 through 10 {
       .bg-warning.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($warning, $tint) !important;
+        background-color: tint(#ffa500, $tint) !important;
       }
     }
 
     @for $i from 1 through 10 {
       .bg-info.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($info, $tint) !important;
+        background-color: tint(#1ebee6, $tint) !important;
       }
     }
 
     @for $i from 1 through 10 {
       .bg-danger.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($danger, $tint) !important;
+        background-color: tint(#dc3545, $tint) !important;
       }
     }
     @for $i from 1 through 10 {
       .bg-success.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($success, $tint) !important;
+        background-color: tint(#b4e6a5, $tint) !important;
       }
     }
     @for $i from 1 through 10 {
       .bg-dark.tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint($dark, $tint) !important;
+        background-color: tint(#46003c, $tint) !important;
       }
     }
     @for $i from 1 through 10 {
@@ -806,34 +812,7 @@
   }
 
   @media screen and (prefers-color-scheme: dark) {
-    .light-theme {
-      @each $color, $value in $theme-colors {
-        --colour-#{$color}: #{$value};
-      }
-      @include reset-colours();
-
-      // Reset the colours of lighter backgrounds to make sure they aren't over written by dark mode. Some other tweaks to colours are applied
-      [class*='bg-']:not(.bg-primary):not(.bg-dark):not(.bg-danger):not(.bg-white):not(.bg-canvas):not(
-          .bg-canvas-2
-        ):not(.invert-colours) {
-        @each $color, $value in $theme-colors {
-          --colour-#{$color}: #{$value};
-        }
-        @include reset-colours();
-        --colour-body: var(--colour-primary);
-        color: var(--colour-body);
-      }
-
-      // Override the colours when on a dark background, similiar to dark mode but on a module level
-      [class*='bg-']:not(.bg-info):not(.bg-success):not(.bg-light):not(.bg-white):not(.bg-canvas):not(.bg-canvas-2):not(
-          .prevent-invert
-        ),
-      .invert-colours {
-        @include invert-colours();
-
-        color: #{$colour-inverted};
-      }
-    }
+    
 
     html #visualtest:target ~ main > .dark-mode:not(.visualtest) {
       display: block !important;

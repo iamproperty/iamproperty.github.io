@@ -13,16 +13,14 @@ class iamNav extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
     const loadCSS = `@import "${assetLocation}/css/components/nav.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/nav.global.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style class="styles">
-    @import "${coreCSS}";
+
+    
     ${loadCSS}
     </style>
     <style class="doc-styles">
@@ -42,7 +40,7 @@ class iamNav extends HTMLElement {
           </div>
           <div class="dialog__wrapper d-none" id="search-wrapper"></div>
           <slot name="actions"></slot>
-          <div class="menu__secondary">
+          <div class="menu__secondary bg-light">
             <div class="container">
             <slot name="secondary"></slot>
             </div>
@@ -348,8 +346,7 @@ class iamNav extends HTMLElement {
       });
     }
 
-    if(this.classList.contains('nav--sticky')){
-      
+    if (this.classList.contains('nav--sticky')) {
       let oldScrollY = window.scrollY;
       window.onscroll = function (e): void {
         if (oldScrollY < window.scrollY) {

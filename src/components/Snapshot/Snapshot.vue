@@ -14,7 +14,7 @@
 </template>
 
 <style lang="scss">
-  @import '../../../assets/sass/components/snapshot.scss';
+  @use '../../../assets/sass/components/snapshot.scss';
 </style>
 
 <script>

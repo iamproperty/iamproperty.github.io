@@ -1,10 +1,2 @@
-$optionalText: 'true' !default;
-
-// Declare global vars variable
-
 @forward '_functions/functions';
 
-@forward '_functions/variables';
-
-@forward '_functions/mixins';
-@forward '_functions/utility-mixins';

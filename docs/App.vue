@@ -1,8 +1,12 @@
 <script setup>
   import pkg from '../package.json';
   import Nav from '../src/components/Nav/Nav.vue';
+  import DarkMode from '../src/components/DarkMode/DarkMode.vue';
 
   const version = pkg.version;
+
+  
+  
 </script>
 
 <template>
@@ -83,6 +87,9 @@
         </li>
       </ul>
     </div>
+    <DarkMode class="d-block mb-4"
+        ><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode
+      >
     <div class="container pt-3">
       <p>Version: {{ version }}</p>
     </div>
@@ -101,6 +108,9 @@
     }
   }
 
+  .ds-header {
+    --colour-heading: var(--colour-white);
+  }
   mark {
     padding-inline: 0;
   }
@@ -151,6 +161,83 @@
   .demo {
     grid-column: container;
   }
+
+  .dark-theme .ds-header {
+
+    > * {
+      color-scheme: dark;
+      --colour-heading: var(--colour-white)!important;
+      color: var(--colour-white)!important;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not(.light-theme) .ds-header {
+
+      > * {
+        color-scheme: dark;
+        --colour-heading: var(--colour-white)!important;
+        color: var(--colour-white)!important;
+      }
+    }
+  }
+
+  
+  span:has(.dark-var, .light-var) {
+    display: contents!important;
+  }
+  html:not(.dark-theme) .dark-var {
+    display: none;
+  }
+
+  html:not(.light-theme) .light-var {
+    display: none;
+  }
+
+main > .breadcrumb:first-child + * {
+    padding-top: 2rem;
+}
+
+
+
+ /* region broken down visual tests */
+
+  body:has(.visualtest.target) nav,
+  body:has(.visualtest.target) footer,
+  main:has(.visualtest.target) > *:not(.target, .visualtest--container),
+  main:has(.visualtest.target) > .visualtest--container > *:not(.target) {
+
+    display: none!important;
+  }
+
+  main:has(.visualtest.target) > *.target .visualtest-hide {
+
+    display: none!important;
+  }
+
+  main:has(.visualtest.target) > *.target {
+
+    --col-start: col-1;
+  }
+          
+
+  @layer utilities {
+      
+    main:has(.visualtest.target) > *:is(.d-flex,.d-block):not(.target) {
+
+      display: none!important;
+    }
+
+    
+    main:has(.visualtest.target) > *.target .visualtest-hide:is(.d-flex,.d-block) {
+
+      display: none!important;
+    }
+
+  }
+
+  /* #endregion */
+
 </style>
 
 <script>

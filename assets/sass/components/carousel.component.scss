@@ -27,7 +27,7 @@
   }
 
   .carousel__inner {
-    --gutter-x: #{$grid-gutter-width};
+    --gutter-x: 1rem;
     overflow-x: auto;
     padding-bottom: 1rem;
     scroll-snap-type: x mandatory;
@@ -117,7 +117,7 @@
   .carousel__wrapper {
     overflow: hidden;
 
-    margin-inline: calc(-0.5 * $grid-gutter-width);
+    margin-inline: calc(-0.5 * 1rem);
   }
   .carousel__inner {
   }
@@ -132,7 +132,7 @@
   }
 
   ::slotted(div:last-child) {
-    padding-inline-end: calc(0.5 * $grid-gutter-width);
+    padding-inline-end: calc(0.5 * 1rem);
     --last-item-extra: 0px;
   }
 
@@ -202,11 +202,11 @@
     height: 100%;
     width: 100%;
     background: currentColor;
-    mask-image: escape-svg($accordion-button-icon);
+    mask-image:  var(--icon-arrow);
     mask-size: 50%;
     mask-repeat: no-repeat;
     mask-position: 50% 60%;
-    -webkit-mask-image: escape-svg($accordion-button-icon);
+    -webkit-mask-image:  var(--icon-arrow);
     -webkit-mask-size: 50%;
     -webkit-mask-repeat: no-repeat;
     -webkit-mask-position: 55% 50%;
@@ -259,9 +259,9 @@
   }
 
   button {
-    width: rem(8);
-    height: rem(8);
-    min-height: rem(8);
+    width: 0.5rem;
+    height: 0.5rem;
+    min-height: 0.5rem;
     border-radius: 50%;
     text-indent: -50rem;
     overflow: hidden;
@@ -289,9 +289,9 @@
   border-color: var(--colour-active-thumbnail);
   background: var(--colour-info);
 
-  width: rem(16);
-  height: rem(16);
-  min-height: rem(16);
+  width: 1rem;
+  height: 1rem;
+  min-height: 1rem;
   margin-inline: rem(2);
 
   &:hover {
@@ -308,10 +308,10 @@
 }
 
 input[type='range'] {
-  --track-size: #{rem(8)};
+  --track-size: 0.5rem;
   --track-colour: #a5ecfd;
   --thumb-colour: var(--colour-info);
-  --thumb-size: #{rem(16)};
+  --thumb-size: 1rem;
   --thumb-size-outline: #{rem(0)};
   width: 90%;
   max-width: rem(172);
@@ -319,7 +319,7 @@ input[type='range'] {
   background: transparent;
   cursor: pointer;
   margin: 0;
-  height: rem(16);
+  height: 1rem;
   border-radius: 50%;
   accent-color: var(--thumb-colour);
   -webkit-appearance: none;
@@ -588,7 +588,7 @@ input[type='range']:focus::-moz-range-thumb {
 
     border-radius: 0;
     position: relative;
-    border-radius: rem(4);
+    border-radius: 0.25rem;
 
     img {
       position: absolute;

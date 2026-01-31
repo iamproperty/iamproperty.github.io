@@ -42,7 +42,7 @@
     </div>
 
     <div class="demo visualtest pe-none">
-      <Nav data-css="/assets/css/components/nav.docs.css">
+      <Nav data-css="/assets/css/components/nav.docs.css" >
         <a href="/" class="brand brand--property" slot="logo">
           <svg>
             <title>iamproperty</title>

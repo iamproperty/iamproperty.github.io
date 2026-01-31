@@ -1,4 +1,5 @@
 import { uniqueID } from '../../modules/helpers';
+import iamMenu from '../menu/menu.component';
 
 // Data layer Web component created
 declare global {
@@ -41,6 +42,9 @@ class iamActionbar extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
+    
+      if (!window.customElements.get(`iam-menu`)) window.customElements.define(`iam-menu`, iamMenu);
+
     const loadCSS = `@import "${assetLocation}/css/components/actionbar.component.css";`;
     const loadExtraCSS = `@import "${assetLocation}/css/components/actionbar.global.css";`;
 
@@ -55,6 +59,7 @@ class iamActionbar extends HTMLElement {
     
       <div class="actionbar" part="actionbar">
         <slot name="selectall"></slot>
+        <slot name="filters"></slot>
         <div class="safe-area">
           <slot></slot>
           <div class="body">
@@ -96,7 +101,7 @@ class iamActionbar extends HTMLElement {
       </div>
 
       <div class="actionbar--search">
-        <button data-search class="btn btn-compact fa-xmark-large btn-secondary m-0" >Close</button>
+        <button data-search class="btn btn-compact fa-xmark-large btn-secondary mb-0" >Close</button>
 
         <div class="search-wrapper" part="search">
           <label for="search" class="visually-hidden">Input field label</label>
@@ -125,16 +130,6 @@ class iamActionbar extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-
-    if (!window.customElements.get(`iam-menu`)) {
-      import(/* @vite-ignore */ `${assetLocation}/js/components/menu/menu.component.js`)
-        .then((module) => {
-          window.customElements.define(`iam-menu`, module.default);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    }
 
     const dialog = this.querySelector('.dialog__wrapper dialog');
 
@@ -270,12 +265,19 @@ class iamActionbar extends HTMLElement {
       });
       this.dispatchEvent(changeEvent);
     });
+
     searchBar.addEventListener('click', (event) => {
+
       if (event && event.target instanceof HTMLElement && event.target.closest('button.suffix')) {
+
         const submitEvent = new CustomEvent('search-submit', {
           detail: { search: searchBar.querySelector('input').value },
         });
+
         this.dispatchEvent(submitEvent);
+
+        searchBar.classList.toggle('show');
+        searchBtn.toggleAttribute('aria-expanded');
       }
     });
 

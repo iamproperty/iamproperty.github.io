@@ -1,0 +1,28 @@
+@use '../_func.scss' as *;
+
+@layer components {
+
+  :host {
+    
+    padding: 1rem;
+    max-width: calc(anchor-size(width) * 2) !important;
+
+    position: absolute;
+    position-area: bottom span-x-end;
+    margin:  0.25rem;
+    padding: 1rem;
+    max-width: calc(anchor-size(width) * 2) !important;
+    position-try-fallbacks: top span-x-end, bottom span-x-start, top span-x-start;
+
+    &::backdrop {
+      display: none;
+    }
+
+    @media screen and (min-width: 36em) {
+      width: rem(335);
+    }
+    @media screen and (min-width: 62em) {
+      width: rem(360);
+    }
+  } 
+}

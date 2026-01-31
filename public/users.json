@@ -1,0 +1,33 @@
+{
+  "data": [
+    { 
+      "value": "1234",
+      "title": "James Lambert",
+      "email": "james.lambert@iamproperty.com"
+    },
+    { 
+      "value": "1234",
+      "title": "Amanda Knight"
+    },
+    { 
+      "value": "1234",
+      "title": "Brian Lord"
+    },
+    { 
+      "value": "1234",
+      "title": "Claire Lane"
+    },
+    { 
+      "value": "1234",
+      "title": "John Smith"
+    },
+    { 
+      "value": "1234",
+      "title": "James Brown"
+    },
+    { 
+      "value": "1234",
+      "title": "Sarah Brown"
+    }
+  ]
+}

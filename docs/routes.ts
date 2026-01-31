@@ -227,6 +227,24 @@ const routes = [
         searchterms: 'admin, tabs',
       },
       {
+        path: 'highlight',
+        name: 'Highlight',
+        meta: {
+          title: 'Highlight | Elements | iamkey',
+        },
+        component: () => import('./views/elements/Highlight.vue'),
+        searchterms: 'highlight, promo, add',
+      },
+      {
+        path: 'feature',
+        name: 'Feature',
+        meta: {
+          title: 'Feature | Elements | iamkey',
+        },
+        component: () => import('./views/elements/Feature.vue'),
+        searchterms: 'highlight, promo, add',
+      },
+      {
         path: 'tables',
         name: 'Table Element',
         meta: {
@@ -243,6 +261,25 @@ const routes = [
         },
         component: () => import('./views/elements/Details.vue'),
         searchterms: 'details, accordion, summary',
+      },
+      {
+        path: 'dialog',
+        name: 'Dialog',
+        meta: {
+          title: 'Dialog | Elements | iamkey',
+        },
+        component: () => import('./views/elements/DialogDoc.vue'),
+        searchterms:
+          'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, inline notification, snackbar, banner, dismissal',
+      },
+      {
+        path: 'nonmodal',
+        name: 'Dialog (Non-Modal)',
+        meta: {
+          title: 'Dialog (Non-Modal) | Elements | iamkey',
+        },
+        component: () => import('./views/elements/NonModalDoc.vue'),
+        searchterms: 'passive, transactional, acknowledgement, popover',
       },
     ],
   },
@@ -379,6 +416,15 @@ const routes = [
         component: () => import('./views/form/FormValidationDoc.vue'),
         searchterms: 'error, success, message',
       },
+      {
+        path: 'textarea',
+        name: 'Textarea',
+        meta: {
+          title: 'Textarea | Elements | iamkey',
+        },
+        component: () => import('./views/form/TextareaDoc.vue'),
+        searchterms: 'input, long',
+      },
     ],
   },
   {
@@ -394,44 +440,75 @@ const routes = [
         component: () => import('./views/elements/Index.vue'),
       },
       {
-        path: 'dialog',
-        name: 'Dialog',
-        meta: {
-          title: 'Dialog | Elements | iamkey',
-        },
-        component: () => import('./views/dialogs/DialogDoc.vue'),
-        searchterms:
-          'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, inline notification, snackbar, banner, dismissal',
-      },
-      {
         path: 'modal',
-        name: 'Dialog (Modal)',
+        name: 'Modal',
         meta: {
-          title: 'Dialog (Modal) | Elements | iamkey',
+          title: 'Modal | Dialogs | iamkey',
         },
         component: () => import('./views/dialogs/ModalDoc.vue'),
         searchterms:
           'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, dismissal',
       },
       {
-        path: 'nonmodal',
-        name: 'Dialog (Non-Modal)',
+        path: 'multi-step-modal',
+        name: 'Multi-step modal',
         meta: {
-          title: 'Dialog (Non-Modal) | Elements | iamkey',
+          title: 'Multi-step Modal | Dialogs | iamkey',
         },
-        component: () => import('./views/dialogs/NonModalDoc.vue'),
-        searchterms: 'passive, transactional, acknowledgement, popover',
+        component: () => import('./views/dialogs/MultiModalDoc.vue'),
+        searchterms:
+          'focused, direct, helpful, response, notify, passive, transactional, acknowledgement, multi-step, dismissal',
       },
       {
         path: 'popover',
         name: 'Dialog (Popover)',
         meta: {
-          title: 'Dialog (Popover) | Elements | iamkey',
+          title: 'Dialog (Popover) | Dialogs | iamkey',
         },
         component: () => import('./views/dialogs/PopoverDoc.vue'),
         searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip',
       },
+      {
+        path: 'tooltip',
+        name: 'Dialog (Tooltip)',
+        meta: {
+          title: 'Dialog (Tooltip) | Dialogs | iamkey',
+        },
+        component: () => import('./views/dialogs/TooltipDoc.vue'),
+        searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip',
+      },
+      {
+        path: 'video-modal',
+        name: 'Video modal',
+        meta: {
+          title: 'Video modal | Dialogs | iamkey',
+        },
+        component: () => import('./views/dialogs/VideoModalDoc.vue'),
+      }
     ],
+  },
+  {
+    /* standardised */path: '/standardised',
+    name: 'Standardised',
+    meta: {
+      title: 'Components | iamkey',
+    },
+    component: () => import('./views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue'),
+      },
+      {
+        path: 'addresslookup',
+        name: 'iamproperty address lookup',
+        meta: {
+          title: 'Address Lookup | Components | iamkey',
+        },
+        component: () => import('./views/standardised/AddressLookupDoc.vue'),
+        searchterms: 'postcode',
+      },
+    ]
   },
   {
     /* Components */ path: '/components',
@@ -462,24 +539,6 @@ const routes = [
         },
         component: () => import('./views/components/ActionbarDoc.vue'),
         searchterms: 'options, actions, edit, tinymce, editor',
-      },
-      {
-        path: 'addresslookup',
-        name: 'Address Lookup (Beta)',
-        meta: {
-          title: 'Address Lookup | Components | iamkey',
-        },
-        component: () => import('./views/components/AddressLookupDoc.vue'),
-        searchterms: 'postcode',
-      },
-      {
-        path: 'advanced-select',
-        name: 'Advanced select',
-        meta: {
-          title: 'Advanced Select | Components | iamkey',
-        },
-        component: () => import('./views/components/AdvancedSelectDoc.vue'),
-        searchterms: '',
       },
       {
         path: 'applied-filters',
@@ -550,14 +609,6 @@ const routes = [
         searchterms: 'reduce, search',
       },
       {
-        path: 'file',
-        name: 'File upload component',
-        meta: {
-          title: 'File upload component | Components | iamkey',
-        },
-        component: () => import('./views/components/File.vue'),
-      },
-      {
         path: 'header',
         name: 'Header (Beta)',
         meta: {
@@ -565,15 +616,6 @@ const routes = [
         },
         component: () => import('./views/components/Header.vue'),
         searchterms: 'introduce, banner',
-      },
-      {
-        path: 'inline-edit',
-        name: 'Inline edit',
-        meta: {
-          title: 'Inline edit | Components | iamkey',
-        },
-        component: () => import('./views/components/InlineEdit.vue'),
-        searchterms: 'form, input, inline',
       },
       {
         path: 'menu',
@@ -592,14 +634,6 @@ const routes = [
           title: 'Multi-step form | Components | iamkey',
         },
         component: () => import('./views/components/MultiStep.vue'),
-      },
-      {
-        path: 'multiselect',
-        name: 'Multiselect',
-        meta: {
-          title: 'Multiselect | Components | iamkey',
-        },
-        component: () => import('./views/components/Multiselect.vue'),
       },
       {
         path: 'notefeed',
@@ -636,14 +670,6 @@ const routes = [
         component: () => import('./views/components/SnapshotDoc.vue'),
       },
       {
-        path: 'search',
-        name: 'Search component',
-        meta: {
-          title: 'Search | Components | iamkey',
-        },
-        component: () => import('./views/components/SearchDoc.vue'),
-      },
-      {
         path: 'split-button',
         name: 'Split Button',
         meta: {
@@ -658,14 +684,6 @@ const routes = [
           title: 'Stepper | Components | iamkey',
         },
         component: () => import('./views/components/StepperDoc.vue'),
-      },
-      {
-        path: 'slider',
-        name: 'Slider',
-        meta: {
-          title: 'Slider | Components | iamkey',
-        },
-        component: () => import('./views/components/SliderDoc.vue'),
       },
       {
         path: 'tables',
@@ -708,6 +726,105 @@ const routes = [
           title: 'Milestone Group | Components | iamkey',
         },
         component: () => import('./views/components/MilestoneGroupDoc.vue'),
+      }
+    ],
+  },
+  {
+    /* Form components */ path: '/form-components',
+    name: 'Form components',
+    meta: {
+      title: 'Form | iamkey',
+    },
+    component: () => import('./views/Components.vue'),
+    children: [
+      {
+        path: '',
+        component: () => import('./views/components/Index.vue'),
+      },
+      {
+        path: 'form',
+        name: 'Form component (beta)',
+        meta: {
+          title: 'Form component | Components | iamkey',
+        },
+        component: () => import('./views/form-components/FormDoc.vue'),
+        searchterms: '',
+      },
+      {
+        path: 'addresslookup',
+        name: 'Address lookup UI',
+        meta: {
+          title: 'Address Lookup | Components | iamkey',
+        },
+        component: () => import('./views/form-components/AddressLookupDoc.vue'),
+        searchterms: 'postcode',
+      },
+      {
+        path: 'advanced-select',
+        name: 'Advanced select',
+        meta: {
+          title: 'Advanced Select | Components | iamkey',
+        },
+        component: () => import('./views/form-components/AdvancedSelectDoc.vue'),
+        searchterms: '',
+      },
+      {
+        path: 'file',
+        name: 'File upload component',
+        meta: {
+          title: 'File upload component | Components | iamkey',
+        },
+        component: () => import('./views/form-components/File.vue'),
+      },
+      {
+        path: 'inline-edit',
+        name: 'Inline edit',
+        meta: {
+          title: 'Inline edit | Components | iamkey',
+        },
+        component: () => import('./views/form-components/InlineEdit.vue'),
+        searchterms: 'form, input, inline',
+      },
+      {
+        path: 'input',
+        name: 'Input component',
+        meta: {
+          title: 'Input | Components | iamkey',
+        },
+        component: () => import('./views/form-components/Input.vue'),
+        searchterms: 'form, input, inline',
+      },
+      {
+        path: 'input-range',
+        name: 'Input range',
+        meta: {
+          title: 'Input range | Components | iamkey',
+        },
+        component: () => import('./views/form-components/InputRange.vue'),
+      },
+      {
+        path: 'multiselect',
+        name: 'Multiselect',
+        meta: {
+          title: 'Multiselect | Components | iamkey',
+        },
+        component: () => import('./views/form-components/Multiselect.vue'),
+      },
+      {
+        path: 'search',
+        name: 'Search component',
+        meta: {
+          title: 'Search | Components | iamkey',
+        },
+        component: () => import('./views/form-components/SearchDoc.vue'),
+      },
+      {
+        path: 'slider',
+        name: 'Slider',
+        meta: {
+          title: 'Slider | Components | iamkey',
+        },
+        component: () => import('./views/form-components/SliderDoc.vue'),
       },
       {
         path: 'word-count',
@@ -715,9 +832,33 @@ const routes = [
         meta: {
           title: 'Word Count | Components | iamkey',
         },
-        component: () => import('./views/components/WordCountDoc.vue'),
+        component: () => import('./views/form-components/WordCountDoc.vue'),
       },
-    ],
+      {
+        path: 'password',
+        name: 'Password',
+        meta: {
+          title: 'Password | Components | iamkey',
+        },
+        component: () => import('./views/form-components/PasswordDoc.vue'),
+      },
+      {
+        path: 'rating',
+        name: 'Rating',
+        meta: {
+          title: 'Rating | Components | iamkey',
+        },
+        component: () => import('./views/form-components/RatingDoc.vue'),
+      },
+      {
+        path: 'tag',
+        name: 'Tag',
+        meta: {
+          title: 'Tag | Components | iamkey',
+        },
+        component: () => import('./views/form-components/TagComponentDoc.vue'),
+      }
+    ]
   },
   {
     /* Nav */ path: '/nav',
@@ -1351,6 +1492,125 @@ const routes = [
         },
         component: () => import('./views/standalone/competitor-analysis.vue'),
       },
+      {
+        path: 'refer-to-standalone',
+        name: 'Movebutler refer to standalone conveyancing',
+        meta: {
+          title: 'Movebutler refer to standalone conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/refer.vue'),
+      },
+      {
+        path: 'form-to-standalone',
+        name: 'Movebutler refer form',
+        meta: {
+          title: 'Movebutler refer form to standalone conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/form.vue'),
+      },
+      {
+        path: 'successfull-to-standalone',
+        name: 'Movebutler successfull refer form',
+        meta: {
+          title: 'Movebutler successfull refer form to standalone conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/successfull.vue'),
+      },
+      {
+        path: 'premium-conveyancing',
+        name: 'Premium conveyancing dashboard',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/index.vue'),
+      },
+      {
+        path: 'premium-conveyancing/case',
+        name: 'Premium conveyancing case',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/case.vue'),
+      },
+      {
+        path: 'premium-conveyancing/quote',
+        name: 'Premium conveyancing quote',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/quote.vue'),
+      },
+      {
+        path: 'premium-conveyancing/details',
+        name: 'Premium conveyancing quote details',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/details.vue'),
+      },
+      {
+        path: 'premium-conveyancing/instruct',
+        name: 'Premium conveyancing instruct',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/instruct.vue'),
+      },
+      {
+        path: 'premium-conveyancing/bespoke',
+        name: 'Premium conveyancing bespoke',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/bespoke.vue'),
+      },
+
+      {
+        path: 'premium-conveyancing/add-opportunity',
+        name: 'Premium conveyancing Add-opportunity',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/add.vue'),
+      },
+      {
+        path: 'premium-conveyancing/add-opportunity/client',
+        name: 'Premium conveyancing Add-opportunity client',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/client.vue'),
+      },
+      {
+        path: 'premium-conveyancing/add-opportunity/agency',
+        name: 'Premium conveyancing Add-opportunity agency',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/agency.vue'),
+      },
+
+
+      {
+        path: 'premium-conveyancing/add-client',
+        name: 'Premium conveyancing Add client',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/add-client.vue'),
+      },
+
+
+      {
+        path: 'premium-conveyancing/add-onward',
+        name: 'Premium conveyancing Add onward purchase',
+        meta: {
+          title: 'Premium conveyancing | iamkey',
+        },
+        component: () => import('./views/standalone/pc/add-onward.vue'),
+      },
+
+
     ],
   },
   {
@@ -1367,6 +1627,11 @@ const routes = [
       {
         path: '',
         component: () => import('./views/prototype/Index.vue'),
+      },
+      {
+        path: 'address',
+        name: 'Address',
+        component: () => import('./views/prototype/address_finder.vue'),
       },
     ],
   },

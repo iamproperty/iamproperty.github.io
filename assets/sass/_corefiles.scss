@@ -1,56 +1,26 @@
 @use 'sass:math';
 @use '_func' as *;
 
-$root: ':root' !default;
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
-$optionalText: 'true' !default;
 
 // Foundations
-@use 'foundations/root.scss' with (
-  $root: $root,
-  $layers: $layers,
-  $mobileOnly: $mobileOnly,
-  $darkMode: $darkMode
-);
+@use 'foundations/root.scss';
+@use 'foundations/colours.scss';
 
-@use 'foundations/reboot.scss' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly,
-  $darkMode: $darkMode
-);
+@use 'foundations/reboot.scss';
 
 // Elements
-@use '_elements.scss' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly,
-  $darkMode: $darkMode,
-  $optionalText: $optionalText
-);
+@use '_elements.scss';
 
 // Components
-@use '_components.scss' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly,
-  $darkMode: $darkMode
-);
+@use '_components.scss';
 
 // Templates
-@use 'templates/form.scss' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly,
-  $darkMode: $darkMode
-);
+@use 'templates/form.scss';
 
-@use 'templates/auth.scss' with (
-  $layers: $layers,
-  $mobileOnly: $mobileOnly,
-  $darkMode: $darkMode
-);
+@use 'templates/auth.scss';
 
 // Overrides
-@include layer('overrides', $layers) {
+@layer overrides {
   @media (prefers-reduced-motion) {
     * {
       transition: unset;

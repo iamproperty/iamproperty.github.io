@@ -1,0 +1,54 @@
+<script lang="ts" setup>
+  import { ref } from 'vue'
+
+import { addColour } from '../functions.ts';
+
+  import InlineEdit from '@/components/InlineEdit/InlineEdit.vue';
+  import Multiselect from '@/components/Multiselect/Multiselect.vue';
+  import Menu from '@/components/Menu/Menu.vue';
+  
+  import Notification from '@/components/Notification/Notification.vue';
+
+  import Tag from '@/components/Tag/Tag.vue';
+
+  const assignee = ref('');
+
+const tagChanged = (e:any):void => {
+
+  console.log(e);
+  assignee.value = e.detail.title;
+}
+</script>
+<template>
+  <h1 v-if="alert == 'add-onward'" class="h2" >Onward purchase: 22 Lynx Road, Tynemouth, Newcastle Upon Tyne NE1 5LS</h1>
+  <h1 v-else>Sale: 22 Lynx Road, Tynemouth, Newcastle Upon Tyne NE1 5LS</h1>
+
+  <div class="md-col-end-6">
+    <span class="badge wider-colour-3 me-3 mb-3">Status: Opportunity</span> ID: <strong class="me-3">56930</strong> <a v-if="alert == 'add-onward'" href="/standalone/premium-conveyancing/case" target="_blank"><i class="fa-regular fa-file"></i>View related sale</a>
+    <button class="link" popovertarget="actions" style="anchor-name: --actions"><i class="fa-regular fa-clone"></i> View onward purchase <i class="fa-regular fa-chevron-down"></i></button>
+
+    <Menu id="actions" popover style="position-anchor: --actions">
+      <a href="/standalone/premium-conveyancing/case" class="btn btn-action" target="_blank">12 The Avenue, Gosforth, Newcastle Upon Tyne, NE3 5SK</a>
+      <button>12 The Avenue, Gosforth, Newcastle Upon Tyne, NE3 5SK</button>
+    </Menu>
+
+  </div>
+
+  
+    <Notification v-if="assignee != ''" data-type="toast" data-status="success" class="colour-success" data-timeout="9000" role="alert"> 
+      <strong>Case 123 assigned to {{ assignee }}</strong>
+      <br/>{{ assignee }} had been added to this case.
+      <i class="fa-regular fa-circle-check" aria-hidden="true" slot="icon"></i>
+    </Notification>
+
+
+  <div class="md-col-start-8 text-md-end">
+      
+      <strong>Case assignee: </strong>
+      
+      <Tag data-url="/users.json" @tag-changed="tagChanged">
+        <label class="tag checked"><input type="radio" name="tags" value="Amanda Knight" checked>Amanda Knight</label>
+      </Tag>
+      
+    </div>
+</template>

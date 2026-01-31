@@ -11,13 +11,13 @@
     position: relative;
   }
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @media screen and (min-width: 36em) {
     > .row > .col:nth-child(8) ~ .col {
       max-width: 25%;
     }
   }
 
-  @include media-breakpoint-up(md, $mobileOnly) {
+  @media screen and (min-width: 62em) {
     > .row > .col:nth-child(8) ~ .col {
       max-width: 12.5%;
     }

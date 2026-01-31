@@ -7,13 +7,15 @@
   left: anchor(left);
   position: fixed;
   position-try-fallbacks: flip-block, flip-inline;
-  width: max-content;
+  width: max-content!important;
+  min-width: max-content!important;
+  max-width: max-content!important;
 
   height: min-content;
   max-height: var(--menu-max-height, min(100vh - 6rem));
   background: var(--menu-bg, canvas);
   margin: var(--menu-margin, 0);
-  padding: var(--menu-padding, 0.5rem);
+  padding: var(--menu-padding, 0.5rem)!important;
   border: var(--menu-border, 2px solid grey);
   overflow: auto;
 
@@ -23,9 +25,9 @@
 }
 
 :host(.menu--fill) {
-  width: anchor-size(width);
-  min-width: anchor-size(width);
-  max-width: anchor-size(width);
+  width: anchor-size(width)!important;
+  min-width: anchor-size(width)!important;
+  max-width: anchor-size(width)!important;
 }
 
 :host(:popover-open),
@@ -89,15 +91,15 @@
 // Radio buttons
 
 ::slotted(*:is(label)) {
-  --radio-size: #{rem(20)};
-  --radio-inner-size: #{rem(12)};
-  --radio-inner-top: #{rem(12)};
-  --radio-inner-left: #{rem(12)};
+  --radio-size: 1.25rem;
+  --radio-inner-size: 0.75rem;
+  --radio-inner-top: 0.75rem;
+  --radio-inner-left: 0.75rem;
 
-  --checkbox-tick-size: #{rem(12)};
+  --checkbox-tick-size: 0.75rem;
   --checkbox-inner-size: #{rem(10)};
   --checkbox-inner-top: #{rem(6)};
-  --checkbox-inner-left: #{rem(8)};
+  --checkbox-inner-left: 0.5rem;
   padding-left: rem(36) !important;
 }
 

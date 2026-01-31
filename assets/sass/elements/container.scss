@@ -1,11 +1,11 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   // #region container
   .container {
     display: block;
@@ -14,6 +14,7 @@ $darkMode: 'true' !default;
     padding: var(--container-padding);
 
     grid-column: container !important;
+    container-type: inline-size;
     width: 100%;
 
     &:not(:has(.row)):has([class*='col-']) {
@@ -37,13 +38,13 @@ $darkMode: 'true' !default;
       --col-start: auto;
     }
 
-    @include media-breakpoint-up(sm, $mobileOnly) {
+    @media screen and (min-width: 36em) {
       [class*='sm-col-span-']:not(:first-child) {
         --col-start: auto;
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 62em) {
       [class*='md-col-span-']:not(:first-child) {
         --col-start: auto;
       }
@@ -61,12 +62,12 @@ $darkMode: 'true' !default;
     }
 
     &[class*='bg-'] {
-      padding-top: #{rem(48)};
-      padding-bottom: #{rem(32)};
+      padding-top: 3rem;
+      padding-bottom: 2rem;
     }
 
     &[class*='bg-'] + .container:not([class*='bg-']) {
-      padding-top: #{rem(32)};
+      padding-top: 2rem;
     }
 
     // Fix the clearing for containers
@@ -86,7 +87,7 @@ $darkMode: 'true' !default;
       margin-right: -1.25rem;
       width: calc(100% + 2.5rem);
 
-      @include media-breakpoint-up(sm, $mobileOnly) {
+      @media screen and (min-width: 36em) {
         margin-left: auto;
         margin-right: auto;
         width: 100%;
@@ -104,15 +105,15 @@ $darkMode: 'true' !default;
 
   // replicate container padding-bottom
   main > .row {
-    padding-bottom: #{rem(16)};
+    padding-bottom: 1rem;
 
     &[class*='bg-'] {
-      padding-top: #{rem(48)};
-      padding-bottom: #{rem(32)};
+      padding-top: 3rem;
+      padding-bottom: 2rem;
     }
 
     &[class*='bg-'] + :is(.row, .container):not([class*='bg-']) {
-      padding-top: #{rem(32)};
+      padding-top: 2rem;
     }
   }
   // #endregion
@@ -143,55 +144,6 @@ $darkMode: 'true' !default;
       left: auto;
       right: rem(-100);
       bottom: rem(-200);
-    }
-
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      &:not([class*='circle-pattern-']) > .circle {
-        font-size: rem(450);
-        top: rem(-50);
-        left: rem(-175);
-      }
-
-      &:not([class*='circle-pattern-']) > .circle ~ .circle {
-        font-size: rem(500);
-        right: rem(-150);
-        bottom: rem(-150);
-      }
-    }
-
-    // Pattern 2
-    &.circle-pattern-2 > .circle {
-      font-size: rem(300);
-      top: rem(-75);
-      right: rem(-200);
-    }
-
-    &.circle-pattern-2 > .circle ~ .circle {
-      font-size: rem(450);
-      top: auto;
-      bottom: rem(-50);
-      left: rem(-175);
-    }
-
-    @include media-breakpoint-up(sm, $mobileOnly) {
-      &.circle-pattern-2 > .circle {
-        font-size: rem(450);
-        top: rem(-75);
-        right: rem(-200);
-      }
-      &.circle-pattern-2 > .circle ~ .circle {
-        font-size: rem(500);
-        bottom: rem(-75);
-        left: rem(-200);
-      }
-    }
-
-    // Desktop container adjustment
-    @include media-breakpoint-up(md, $mobileOnly) {
-      > .circle {
-        margin-left: rem(60);
-        margin-right: rem(60);
-      }
     }
   }
   // #endregion

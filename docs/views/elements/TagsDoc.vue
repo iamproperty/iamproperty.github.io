@@ -9,6 +9,17 @@
   import ActionTagComplex from '../../img/action-tag-complex-options.png';
   import ActionTagText from '../../img/action-tag-text-list.png';
   import Integration from '../Integration.vue';
+
+    const widerColours = {};
+  const widerColoursHover = {};
+  const widerColoursActive = {};
+
+  for (let i = 1; i <= 23; i++) {
+    
+    widerColours[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}`);
+    widerColoursHover[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-hover`);
+    widerColoursActive[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-active`);
+  }
 </script>
 
 <template>
@@ -97,7 +108,7 @@
 
     <h3 class="mt-4">Display tag colour palette</h3>
     <p>Display tags can use any colour from the wider colour palette.</p>
-    <div class="container visualtest">
+    <div class="container">
       <details>
         <summary>Colour Reference</summary>
         <div class="row row-cols-2 row-cols-sm-4 d-none d-sm-flex">
@@ -113,7 +124,7 @@
           </div>
         </div>
 
-        <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in $shared.widerColours" :key="name">
+        <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in widerColours" :key="name">
           <div class="col-12 col-sm pb-2">
             <span>Wider colour {{ name }}</span>
           </div>
@@ -121,11 +132,11 @@
             <div :class="`tag wider-colour-${name}`">{{ colour }}</div>
           </div>
           <div class="col-12 col-sm pb-2">
-            <div :class="`tag wider-colour-${name} hover`">{{ $shared.widerColoursHover[name] }}</div>
+            <div :class="`tag wider-colour-${name} hover`">{{ widerColoursHover[name] }}</div>
           </div>
           <div class="col-12 col-sm pb-2">
             <div :class="`tag wider-colour-${name} active`">
-              {{ $shared.widerColoursActive[name] }}
+              {{ widerColoursActive[name] }}
             </div>
           </div>
         </div>

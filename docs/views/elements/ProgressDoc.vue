@@ -1,10 +1,9 @@
 <script setup>
-  import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
-  import Table from '@/components/Table/Table.vue';
   import Card from '@/components/Card/Card.vue';
+  import Integration from '../Integration.vue';
+
 </script>
 
 <template>
@@ -13,27 +12,49 @@
       <h1>Progress (Beta)</h1>
     </DSHeader>
 
-    <div class="container">
-      <h2>Default</h2>
+      <h2>Horizontal Bar</h2>
+      <h3>Default</h3>
+      <p>The default version of the progress bar will show as a horizontal bar, with the label text aligned to the left, and the percentage amount aligned to the right.</p>
 
+    <div class="container visualtest">
       <label data-percent="70">Missed opportunities<progress max="100" value="70"></progress></label>
     </div>
-    <div class="container">
-      <h2>Rank</h2>
 
-      <label data-percent="70"
-        ><strong>120</strong> Properties<progress
-          max="100"
-          value="70"
-          class="progress--circular"
-          style="--progress: 70%"
-        ></progress
+      <h3>Inline</h3>
+      <p>When the inline class is added, the progress bar will leave room for the percentage value to sit to the right of it instead of above.</p>
+      
+    <div class="container visualtest">
+      <label data-percent="100"
+        ><span class="line-clamp"
+          >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+          industry's standard dummy text ever since the 1500s.</span
+        ><progress max="100" value="100" class="progress--inline"></progress
       ></label>
     </div>
+      <h3>Inline with no text</h3>
+    <div class="container visualtest">
 
-    <div class="container">
-      <h2>Circular</h2>
+      <label class="hide-text" data-percent="70"
+        ><span class="visually-hidden">Missed opportunities</span
+        ><progress max="100" value="70" class="progress--inline"></progress
+      ></label>
+    </div>
+     <h2>Circular</h2>
+      <p>The circular progress bar will display any copy added inside the label in the centre of the circle. If a data-percent attrbiute is added, this will be shown first.</p>
 
+      <p class="note mb-5">
+        <strong>Note:</strong> For the circular progress bar a CSS variable (<code>--progress</code>) needs to be
+        supplied on the progress element.
+      </p>
+
+      <h3>Examples showing percentage text</h3>
+
+      <p class="note mb-5">
+        <strong>Note:</strong> A data-percent attribute is needed on the label for the value to display in firefox.
+      </p>
+
+    <div class="container visualtest">
+ 
       <label data-percent="70"
         >Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress
       ></label>
@@ -57,47 +78,31 @@
           style="--progress: 10%"
         ></progress
       ></label>
+    </div>
+        <h3>Example with alternative text</h3>
+      <div class="container visualtest mt-3">
+        <label data-percent="70"
+          ><strong>120</strong> Properties<progress
+            max="100"
+            value="70"
+            class="progress--circular"
+            style="--progress: 70%"
+          ></progress
+        ></label>
 
-      <hr />
-
-      <p class="note mb-5">
-        <strong>Note:</strong> For the circular progress bar a CSS variable (<code>--progress</code>) needs to be
-        supplied on the progress element.
-      </p>
-
-      <p class="note mb-5">
-        <strong>Note:</strong> A data-percent attribute is needed on the label for the value to display in firefox.
-      </p>
-
-      <div class="row">
-        <div class="col-md-4 text-center">
-          <label class="mb-2" data-percent="70"
-            >Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress
-          ></label>
-          <span class="label"><i class="fa-solid fa-circle-up text-complete"></i> 4% vs previous 30 days</span>
-        </div>
       </div>
-    </div>
-    <div class="container">
-      <h2>Inline</h2>
+        <h3>Example with additional explainer text</h3>
+      <div class="container visualtest mt-3">
+                  <label class="mb-2" data-percent="70"
+              >Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress
+            ></label>
+            <span class="label"><i class="fa-solid fa-circle-up text-complete"></i> 4% vs previous 30 days</span>
+      </div>
 
-      <label data-percent="100"
-        ><span class="line-clamp"
-          >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-          industry's standard dummy text ever since the 1500s.</span
-        ><progress max="100" value="100" class="progress--inline"></progress
-      ></label>
-    </div>
-    <div class="container">
-      <h2>Inline with no text</h2>
 
-      <label class="hide-text" data-percent="70"
-        ><span class="visually-hidden">Missed opportunities</span
-        ><progress max="100" value="70" class="progress--inline"></progress
-      ></label>
-    </div>
-    <div class="container">
       <h2>Change colours</h2>
+
+    <div class="container visualtest mt-3">
 
       <label data-percent="10"
         >Lorem Ipsum is simply dummy<progress max="100" value="10" class="colour-danger"></progress
@@ -115,8 +120,8 @@
         >Lorem Ipsum is simply dummy<progress max="100" value="100" class="colour-complete"></progress
       ></label>
     </div>
-    <div class="container">
       <h2>Add a tooltip</h2>
+    <div class="container mt-3 visualtest">
 
       <div class="mw-content">
         <div class="row">
@@ -137,8 +142,8 @@
       </div>
     </div>
 
-    <div class="container">
       <h2>Card examples</h2>
+    <div class="container visualtest mt-3">
 
       <div class="row">
         <div class="col-md-4">
@@ -172,5 +177,102 @@
         </div>
       </div>
     </div>
+
+      <Integration component="progress" componentName="progress">
+      <template #html-element>
+
+        <pre><code>{{`<label data-percent="90">Lorem Ipsum is simply dummy
+  <progress max="100" value="90" class="colour-success"></progress>
+</label>`}}</code></pre>
+
+<pre>
+  <code>{{ `<label class="mb-2" data-percent="70">Missed
+    <progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress>
+  </label>` }}
+  </code>
+</pre>
+
+      </template>
+
+      <template #attr>
+        <p>The max and value attributes are part of the HTML element and are not custom.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Attributes</th>
+              <th>Default</th>
+              <th>Options/Type</th>
+              <th>Required</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>max</th>
+              <td>100</td>
+              <td>number</td>
+              <td>Yes</td>
+              <td>This is the maximum possible value of the progress bar</td>
+            </tr>
+            <tr>
+              <th>value</th>
+              <td></td>
+              <td>number</td>
+              <td>Yes</td>
+              <td>This is the current progress</td>
+            </tr>
+            <tr>
+              <th>data-percent</th>
+              <td></td>
+              <td>number</td>
+              <td>Yes</td>
+              <td>This attribute should be added to the label element and set to the current progress percentage in order to show a text version of the percentage.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+      <template #classes>
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>progress--circular</th>
+              <td>
+                Adding the progress--circular class to the progress element makes the progress bar into a circle. This should be used in conjuction with a CSS variable set to the current percentage set on the progress element. e.g. style="--progress: 10%".
+              </td>
+            </tr>
+            <tr>
+              <th>progress--inline</th>
+              <td>
+                Adding the progress--inline class to the progress element positions the percentage amount of progress to the right of the bar, rather than above it.
+              </td>
+            </tr>
+            <tr>
+              <th>colour-{colour identifier}</th>
+              <td>
+                Adding a class such as colour-warning or colour-complete to the progress bar element will change the colour of the bar.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+        <template #criteria>
+        <ul>
+          <li>A progress bar should appear either horizontally or as a circle with the correct amount filled</li>
+          <li>The colour of the completed progress should change when a colour class is added.</li>
+          <li>For the horizontal progress bar, if a data-percent attribute is added, the percentage will show at the upper-right of the bar.</li>
+          <li>For the horizontal progress bar with the 'progress--inline' class added, if a data-percent attribute is added, the percentage will show to the right of the bar.</li>
+          <li>For the circular progress bar, if a data-percent attribute is added, the percentage will show in the centre of the circle.</li>
+        </ul>
+      </template>
+    </Integration>
+
   </main>
 </template>

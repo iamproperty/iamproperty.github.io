@@ -1,12 +1,12 @@
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('elements', $layers) {
+
+
+
+@layer elements {
   :is(.badge, .tag) {
-    font-size: rem(16);
+    font-size: 1rem;
     line-height: rem(26);
     border: none !important;
     //outline: 1px solid var(--colour-canvas);
@@ -30,13 +30,13 @@ $darkMode: 'true' !default;
     }
 
     &:is(.bg-primary, .bg-dark, .bg-danger) {
-      color: #{$colour-inverted} !important;
+      color: #fcfcfc !important;
     }
   }
 
   .badge {
     border-radius: rem(6);
-    padding: 0 rem(8);
+    padding: 0 0.5rem;
 
     &--rounded {
       border-radius: 1rem;
@@ -46,14 +46,8 @@ $darkMode: 'true' !default;
   }
 
   .tag {
-    border-radius: rem(16);
-    padding: 0 rem(16);
-
-    &:not(:has(i)):after {
-      content: '\2715';
-      margin-left: 0.6em;
-      font-weight: bold;
-    }
+    border-radius: 1rem;
+    padding: 0 1rem;
 
     i {
       margin-left: 0.5rem;
@@ -72,9 +66,15 @@ $darkMode: 'true' !default;
       background: var(--wider-colour-1) !important;
       color: #99adb1 !important;
     }
+
+    &:has([readonly]) {
+      pointer-events: none;
+    }
+    &:has([readonly]):after {
+      display: none!important;
+    }
   }
 
-  .tag.tag--not-set,
   iam-multiselect:not(:defined) .tag,
   .tag.tag--toggle {
     background: var(--colour-canvas);

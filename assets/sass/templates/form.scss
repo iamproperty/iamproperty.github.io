@@ -3,20 +3,23 @@
 
 @use '../_func' as *;
 
-$layers: 'true' !default;
-$mobileOnly: 'false' !default;
-$darkMode: 'true' !default;
 
-@include layer('templates', $layers) {
+
+
+
+@layer templates {
   body:has(.template--form) {
-    @include light-mode($darkMode) {
-      background-color: #e9f9fd;
-    }
+    background-color: #e9f9fd;
   }
 
   .template--form {
     --input-max-width: #{rem(450)};
     --select-max-width: #{rem(500)};
+
+    .container {
+
+      max-width: #{rem(1280)} !important;
+    }
 
     @supports selector(:has(*)) {
       label:has(> :is(.suffix, .prefix)) {
@@ -31,15 +34,12 @@ $darkMode: 'true' !default;
 
     // Make H2's look like H3's
     :is(h2, .h2) {
-      font-size: map.get($heading-sizes, 'h3_fs');
-      line-height: map.get($heading-sizes, 'h3_lh');
-      padding-bottom: map.get($heading-sizes, 'h3_pb');
+      font-size: var(--h3-fs);
       max-width: var(--content-max-width);
     }
 
-    @include light-mode($darkMode) {
-      background-color: #e9f9fd;
-    }
+    background-color: #e9f9fd;
+    
 
     .form-panel {
       display: block;
@@ -50,28 +50,41 @@ $darkMode: 'true' !default;
       outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
       width: 100%;
 
-      @include media-breakpoint-up(sm, $mobileOnly) {
-        max-width: calc(100% - 5rem); // Guess
-        margin-inline: auto;
-      }
-
-      @include media-breakpoint-up(md, $mobileOnly) {
-        max-width: rem(924); // Guess
-        border-radius: 0.5rem;
-        padding-inline: rem(94);
-        padding-block: rem(40);
-        margin-bottom: rem(32);
-      }
-
       > *:last-child {
         margin-bottom: 0 !important;
       }
     }
 
-    @include media-breakpoint-up(md, $mobileOnly) {
+    @media screen and (min-width: 36em) {
+      .form-panel {
+        max-width: calc(100% - 5rem); // Guess
+        margin-inline: auto;
+      }
+    }
+
+    @media screen and (min-width: 62em) {
+      .form-panel {
+        max-width: rem(924); // Guess
+        border-radius: 0.5rem;
+        padding-inline: rem(94);
+        padding-block: 2.5rem;
+        margin-bottom: 2rem;
+      }
+      
+      .form-panel--sm {
+        max-width: 40rem; /* 640px */
+        padding-inline: 2rem;
+      }
+    }
+
+    @media screen and (min-width: 62em) {
       .container--form {
         padding-inline: 0;
         max-width: rem(924) !important;
+      }
+
+      .form-panel .btn__group {
+        margin-bottom: 0;
       }
     }
 

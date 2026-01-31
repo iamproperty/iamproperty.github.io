@@ -5,6 +5,71 @@
   import tabletDesktopImg from '../../img/tablet-desktop.png';
   import Tabs from '../../../src/components/Tabs/Tabs.vue';
   import Tab from '../../../src/components/Tabs/Tab.vue';
+
+  const getVar = (propertyString) => {
+
+    let returnString = window.getComputedStyle(document.querySelector('body')).getPropertyValue(propertyString).toUpperCase();
+
+    returnString = returnString.replace('LIGHT-DARK(','').replace(')','');
+
+    let returnStringArr = returnString.split(",");
+
+    returnString = returnStringArr[0];
+
+    if (returnStringArr[1]) {
+      
+      returnString = `<span class="light-var">${returnStringArr[0]}</span><span class="dark-var">${returnStringArr[1]}</span>`;
+    }
+
+    return returnString;
+  };
+
+  const roundNearQtr = (number) => { return (Math.round(number * 4) / 4).toFixed(2); };
+  const roundNearQtrUp = (number) => { return (Math.ceil(number * 4) / 4).toFixed(2); };
+
+  const maxWidth = window.getComputedStyle(document.querySelector('body')).getPropertyValue('--content-max-width');
+  const maxWidth_px = parseInt(maxWidth) * 16;
+
+  const body_fs = window.getComputedStyle(document.querySelector('body')).getPropertyValue('--body-fs');
+
+  const h1_fs = parseFloat(body_fs) * roundNearQtr(Math.pow(1.2,6)) +'rem' ;
+  const h1_fs_px = parseFloat(h1_fs) * 16;
+  
+  const h1_lh = parseFloat(roundNearQtr(parseFloat(h1_fs) * 1.2)) +'rem';
+  const h1_lh_px = parseFloat(h1_lh) * 16;
+  const h1_pb = parseFloat(roundNearQtr(parseFloat(h1_fs) * 1.2)) +'rem';
+  const h1_pb_px = parseFloat(h1_pb) * 16;
+
+  const h2_fs = parseFloat(body_fs) * roundNearQtr(Math.pow(1.2,5)) +'rem' ;
+  const h2_fs_px = parseFloat(h2_fs) * 16;
+
+  const h2_lh = parseFloat(roundNearQtr(parseFloat(h2_fs) * 1.2)) +'rem';
+  const h2_lh_px = parseFloat(h2_lh) * 16;
+  const h2_pb = parseFloat(roundNearQtr(parseFloat(h2_fs) * 1.2)) +'rem';
+  const h2_pb_px = parseFloat(h2_pb) * 16;
+
+  const h3_fs = parseFloat(body_fs) * roundNearQtr(Math.pow(1.2,3)) +'rem' ;
+  const h3_fs_px = parseFloat(h3_fs) * 16;
+
+  const h3_lh = parseFloat(roundNearQtrUp(parseFloat(h3_fs) * 1.2)) +'rem';
+  const h3_lh_px = parseFloat(h3_lh) * 16;
+  const h3_pb = parseFloat(roundNearQtrUp(parseFloat(h3_fs) * 1.2)) +'rem';
+  const h3_pb_px = parseFloat(h3_pb) * 16;
+
+  const h4_fs = parseFloat(body_fs) * roundNearQtr(Math.pow(1.2,2)) +'rem' ;
+  const h4_fs_px = parseFloat(h4_fs) * 16;
+
+  const h4_lh = parseFloat(roundNearQtrUp(parseFloat(h4_fs) * 1.2)) +'rem';
+  const h4_lh_px = parseFloat(h4_lh) * 16;
+  const h4_pb = parseFloat(roundNearQtrUp(parseFloat(h4_fs) * 1.2)) +'rem';
+  const h4_pb_px = parseFloat(h4_pb) * 16;
+
+
+
+  let urlParams = new URLSearchParams(window.location.search);
+  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
+
+
 </script>
 
 <template>
@@ -16,7 +81,7 @@
     <div class="container">
       <h2>Typography - Headings</h2>
       <p class="lead">
-        Most headings will have a max-width of {{ $shared.cssVars.text_mw_rem }} ({{ $shared.cssVars.text_mw }}px)
+        Most headings will have a max-width of {{maxWidth}} ({{ maxWidth_px }}px)
         applied to aid readability, with the exception of H1 and H2, which will have an auto width.
       </p>
       <p class="lead">
@@ -25,7 +90,7 @@
       </p>
       <p>We use a type scale ratio of 1.2, minor third scale, to ensure consistency through type sizing.</p>
     </div>
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
       <div class="row">
         <div class="d-none d-md-block col-md-3">
           <img :src="tabletDesktopImg" alt="Rendered image of a tablet and a desktop PC" loading="lazy" class="mb-5" />
@@ -34,69 +99,62 @@
         <div class="col">
           <div class="row">
             <div class="col-12 col-sm-7 mb-2">
-              <span class="h1"
-                >This is heading 1<span
+              <span class="h1">This is heading 1<span
                   class="lineheight-demo"
-                  :style="`height:${$shared.cssVars.h1_pb}!important`"
+                  :style="`height:${h1_pb}!important`"
                 ></span
               ></span>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
-                >H1<br />Font-family: Qanelas<br />Font-weight: Bold<br />Font-size: 3rem (48px)<br />Letter-spacing:
-                0px<br />Line-height: 3.5rem (56px)<br />Padding-bottom: 3.5rem (56px)</span
+                >H1<br />Font-family: Qanelas<br />Font-weight: Bold<br />Font-size: {{ h1_fs }} ({{h1_fs_px}}px)<br />Letter-spacing:
+                0px<br />Line-height: {{ h1_lh }} ({{h1_lh_px}}px)<br />Padding-bottom: {{ h1_pb }} ({{h1_pb_px}}px)</span
               >
             </div>
           </div>
           <div class="row">
             <div class="col-12 col-sm-7 mb-2">
-              <span class="h2"
-                >This is heading 2<span
+              <span class="h2">This is heading 2<span
                   class="lineheight-demo"
-                  :style="`height:${$shared.cssVars.h2_pb}!important`"
+                  :style="`height:${h2_pb}!important`"
                 ></span
               ></span>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
-                >H2<br />Font-family: Qanelas<br />Font-weight: Bold<br />Font-size: 2.5rem (40px)<br />Letter-spacing:
-                0px<br />Line-height: 3rem (48px)<br />Padding-bottom: 3rem (48px)</span
+                >H2<br />Font-family: Qanelas<br />Font-weight: Bold<br />Font-size: {{ h2_fs }} ({{h2_fs_px}}px)<br />Letter-spacing:
+                0px<br />Line-height: {{ h2_lh }} ({{h2_lh_px}}px)<br />Padding-bottom: {{ h2_pb }} ({{h2_pb_px}}px)</span
               >
             </div>
           </div>
           <div class="row">
             <div class="col-12 col-sm-7 mb-2">
-              <span
-                class="h3"
-                :style="`font-size:${$shared.cssVars.h3_fs}!important;line-height:${$shared.cssVars.h3_lh}!important;padding-bottom:${$shared.cssVars.h3_pb}!important;`"
-                >This is heading 3<span
+              <span class="h3">This is heading 3<span
                   class="lineheight-demo"
-                  :style="`height:${$shared.cssVars.h3_pb}!important`"
+                  :style="`height:${h3_pb}!important`"
                 ></span
               ></span>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
-                >H3<br />Font-family: Qanelas<br />Font-weight: Semi-Bold <br />Font-size: 1.75rem (28px)<br />Letter-spacing:
-                0px<br />Line-height: 2rem (36px)<br />Padding-bottom: 2rem (36px)</span
+                >H3<br />Font-family: Qanelas<br />Font-weight: Semi-Bold <br />Font-size: {{ h3_fs }} ({{h3_fs_px}}px)<br />Letter-spacing:
+                0px<br />Line-height: {{ h3_lh }} ({{h3_lh_px}}px)<br />Padding-bottom: {{ h3_pb }} ({{h3_pb_px}}px)</span
               >
             </div>
           </div>
           <div class="row">
             <div class="col-12 col-sm-7 mb-2">
-              <span
-                class="h4"
-                :style="`font-size:${$shared.cssVars.h4_fs}!important;line-height:${$shared.cssVars.h3_lh}!important;padding-bottom:${$shared.cssVars.h4_pb}!important;`"
-                >This is heading 4<span
+              <span class="h4">This is heading 4
+                <span
                   class="lineheight-demo"
-                  :style="`height:${$shared.cssVars.h4_pb}!important`"
+                  :style="`height:${h4_pb}!important`"
                 ></span
               ></span>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
-                >H4<br />Font-family: Qanelas<br />Font-weight: Semi-Bold<br />Font-size: 1.5rem (24px)<br />Letter-spacing:
-                0px<br />Line-height: 1.75rem (32px)<br />Padding-bottom: 1.75rem (32px)</span
+                >H4<br />Font-family: Qanelas<br />Font-weight: Semi-Bold<br />Font-size: {{ h4_fs }} ({{h4_fs_px}}px)<br />Letter-spacing:
+                0px<br />Line-height: {{ h4_lh }} ({{h4_lh_px}}px)<br />Padding-bottom: {{ h4_pb }} ({{h4_pb_px}}px)</span
               >
             </div>
           </div>
@@ -104,13 +162,14 @@
       </div>
     </div>
 
-    <div class="container visualtest">
+    <div class="container">
       <h2>Typography - Body</h2>
       <p class="lead">
         Our body font is Qanelas. It should be used for all supporting copy or information. All body will have a
-        max-width of {{ $shared.cssVars.text_mw_rem }} ({{ $shared.cssVars.text_mw }}px) applied to aid readability.
+        max-width of 50rem (800px) applied to aid readability.
       </p>
-
+    </div>
+    <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
       <div class="row">
         <div class="d-none d-md-block col-md-3"></div>
         <div class="col">
@@ -122,16 +181,16 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, labore et dolore magna aliqua. Ut enim ad minim
                 veniam, nisi ut aliquip ex ea commodo consequat.<span
                   class="lineheight-demo"
-                  :style="`height:${$shared.cssVars.lead_pb_rem}!important`"
+                  :style="`height:3rem!important`"
                 ></span>
               </p>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <span class="small extra-small"
                 >.lead<br />Font-family: Qanelas<br />Font-weight: Semi-Bold<br />Font-size:
-                {{ $shared.cssVars.lead_fs_rem }} ({{ $shared.cssVars.lead_fs }}px)<br />Letter-spacing: 0px<br />Line-height:
-                {{ $shared.cssVars.lead_lh_rem }} ({{ $shared.cssVars.lead_lh }}px)<br />Padding-bottom:
-                {{ $shared.cssVars.lead_pb_rem }} ({{ $shared.cssVars.lead_pb }}px)</span
+                1.125rem (18px)<br />Letter-spacing: 0px<br />Line-height:
+                1.75rem (28px)<br />Padding-bottom:
+                3rem (48px)</span
               >
             </div>
           </div>
@@ -148,7 +207,7 @@
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <p class="small extra-small pb-2">
                 body<br />Font-family: Qanelas<br />Font-weight: Normal<br />Font-size:
-                {{ $shared.cssVars.body_fs_rem }} ({{ $shared.cssVars.body_fs }}px)<br />Letter-spacing: 0px<br />Line-height:
+                1rem (16px)<br />Letter-spacing: 0px<br />Line-height:
                 auto
               </p>
             </div>
@@ -162,7 +221,7 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.<span
                   class="lineheight-demo"
-                  :style="`height:${$shared.cssVars.body_pb_rem}!important`"
+                  :style="`height:1.5rem!important`"
                 ></span>
               </p>
 
@@ -170,20 +229,20 @@
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.<span
                   class="lineheight-demo"
-                  :style="`height:${$shared.cssVars.body_end_pb_rem}!important`"
+                  :style="`height:3rem!important`"
                 ></span>
               </p>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <p class="small extra-small pb-2">
                 p<br />Font-family: Qanelas<br />Font-weight: Normal<br />Font-size:
-                {{ $shared.cssVars.body_fs_rem }} ({{ $shared.cssVars.body_fs }}px)<br />Letter-spacing: 0px<br />Line-height:
-                {{ $shared.cssVars.body_lh_rem }} ({{ $shared.cssVars.body_lh }}px)<br />Padding-bottom:
-                {{ $shared.cssVars.body_pb_end_rem }} ({{ $shared.cssVars.body_end_pb }}px)
+                1rem (16px)<br />Letter-spacing: 0px<br />Line-height:
+                1.5rem (24px)<br />
+                Padding-bottom: 3rem (48px)
               </p>
 
               <p class="small extra-small">
-                p:has(+ p)<br />Padding-bottom: {{ $shared.cssVars.body_pb_rem }} ({{ $shared.cssVars.body_pb }}px)
+                p:has(+ p)<br />Padding-bottom: 1.5rem (24px)
               </p>
             </div>
           </div>
@@ -196,16 +255,16 @@
                 Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
                 consequat.<span
                   class="lineheight-demo"
-                  :style="`height:${$shared.cssVars.small_pb_rem}!important`"
+                  :style="`height:3rem!important`"
                 ></span>
               </p>
             </div>
             <div class="col-12 col-sm-4 mb-5 ms-auto">
               <p class="small extra-small pb-2">
                 .small, small<br />Font-family: Qanelas<br />Font-weight: Medium<br />Font-size:
-                {{ $shared.cssVars.small_fs_rem }} ({{ $shared.cssVars.small_fs }}px)<br />Letter-spacing: 0px<br />Line-height:
-                {{ $shared.cssVars.small_lh_rem }} ({{ $shared.cssVars.small_lh }}px)<br />Padding-bottom:
-                {{ $shared.cssVars.small_pb_rem }} ({{ $shared.cssVars.small_pb }}px)
+                0.875rem (14px)<br />Letter-spacing: 0px<br />Line-height:
+                1.5rem (24px)<br />Padding-bottom:
+                3rem (48px)
               </p>
             </div>
           </div>
@@ -213,8 +272,8 @@
       </div>
     </div>
 
-    <div class="container visualtest">
-      <h3 class="h4 pb-2">Blockquote</h3>
+    <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
+      <h3 class="h4 pb-2 visualtest-hide">Blockquote</h3>
       <blockquote>
         <p>
           Our body font is Qanelas. It should be used for all supporting copy or information. All body will have a
@@ -222,29 +281,31 @@
         </p>
         <cite>Citation</cite>
       </blockquote>
-      <h3 class="h4 pb-2">Stat</h3>
+    </div>
+    <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
+      <h3 class="h4 pb-2 visualtest-hide">Stat</h3>
       <span class="stat">3,886</span>
     </div>
 
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest5' ? 'target' : '')}`">
       <h2>Typography - colour</h2>
       <div class="colour-sample">
         <div class="colour bg-primary"></div>
         <span class="lead pb-2">Primary text colour</span><br />
         <span>CSS Variable: --colour-primary</span><br />
-        <p>HEX code: {{ $shared.cssVars.themeColour_primary.toUpperCase() }}</p>
+        <p>HEX code: <span v-html="getVar('--colour-primary')"></span></p>
       </div>
       <div class="colour-sample">
-        <div class="colour border" :style="`background:${$shared.cssVars.nonThemeColour_inverted}!important`"></div>
+        <div class="colour border bg-white" ></div>
         <span class="lead pb-2">Inverted text colour</span><br />
         <span>CSS Variable: --colour-white</span><br />
-        <p>HEX code: {{ $shared.cssVars.nonThemeColour_inverted.toUpperCase() }}</p>
+        <p>HEX code: <span v-html="getVar('--colour-white')"></span></p>
       </div>
       <div class="colour-sample">
-        <div class="colour" :style="`background:${$shared.cssVars.nonThemeColour_body}!important`"></div>
+        <div class="colour " :style="`background:#595959!important`"></div>
         <span class="lead pb-2">Paragraph body text colour</span><br />
         <span>CSS Variable: --colour-body</span><br />
-        <p>HEX code: {{ $shared.cssVars.nonThemeColour_body.toUpperCase() }}</p>
+        <p>HEX code: <span v-html="getVar('--colour-body')"></span></p>
       </div>
     </div>
 
