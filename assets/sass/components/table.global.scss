@@ -40,17 +40,13 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
   margin: -2rem -2rem 2rem -2rem;
   box-shadow: none;
   border-radius: 0;
-
-  @include light-mode($darkMode) {
-    background-color: #e6eaec;
-  }
 }
 
 // Actionbar
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
-  @include media-breakpoint-up(sm, $mobileOnly) {
+  @container (width < 23.4375em) {
     padding: 0 !important;
   }
 }
@@ -88,7 +84,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
   }
 }
 
-@include container-up(sm) {
+@container (width < 23.4375em) {
   :is(#{$selector}).table--fullwidth iam-actionbar,
   :is(#{$selector}) iam-actionbar {
     margin-left: -2rem;
@@ -145,9 +141,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 @container (width < 23.4375em) {
   :is(#{$selector}) {
     iam-actionbar {
-      @include light-mode($darkMode) {
-        background-color: #e6eaec;
-      }
+
     }
     .actionbar__sticky + * {
       margin-top: 0 !important;

@@ -1,25 +1,151 @@
 {
   "Accessibility": [
     {
-      "story": "As a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states",
+      "story": "As a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states  ",
       "implement": "Use icons, backound patterns, text weight or other decorative measures ",
-      "test": "Use the rendering tab in chrome dev tools and change emulate vision deficiences dropdown. Change the colour theme on your computer to hight contrast",
-      "required": "false"
+      "test": "Use the rendering tab in chrome dev tools and change the emulate vision deficiences dropdown. <br/><br/>Change the colour theme on your computer to hight contrast",
+      "required": "true"
+    },
+    {
+      "story": "As a visually impaired user I will need to have  non-text content described to me",
+      "implement": "- Give non decorative images an alt tag which describes whats in the image<br/>- Videos have a transcript with it",
+      "test": "Right click on the image and check for alt tag <br/><br/>Check video elements for a transcript or close captions.",
+      "required": "true"
+    },
+    {
+      "story": "As a user with colour vision deficiency, I want all text and interactive elements to have sufficient colour contrast",
+      "implement": "- Test the colour contrasts before implementing them",
+      "test": "Use https://webaim.org/resources/contrastchecker/ tool to check the colours being used have enough of a contrast",
+      "required": "true"
+    },
+    {
+      "story": "As a neurodiverse I want to be able to switch the colour palette.",
+      "implement": "-Create a dark mode pallette <br/>-Dont implement CSS that will break the default colours in a them.",
+      "test": "Test the site in dark and light modes. Change the colour theme of the OS to a high contrast.",
+      "required": "true"
+    },
+    {
+      "story": "As a user I want to be able to limit or disable animation or movement.",
+      "implement": "Add a prefer reduced motion media query in which chnages animation times.",
+      "test": "The the rendering chrome devtools emulate reduced motion and check animations are slowed down.",
+      "required": "true"
+    },
+    {
+      "story": "As a neurodiverse user I would want to have all instructions with limited jargon and acronyms.",
+      "implement": "- User clear headings and labels<br/>- Use plain language. <br/>- Use tooltips or inline definition for reoccurring acronyms.",
+      "test": "Ensure all instructional text, helper text, and error messages are simple, direct, and easy to understand through content review and visual inspection.",
+      "required": "true"
+    },
+    {
+      "story": "As a user, I want form fields to have clear labels, helpful error messages and autocomplete support. ",
+      "implement": "- Use visible labels<br/>- Group related fields<br/>- Error messaging, say what's wrong and how to how to fix it.<br/>- System to pre-fill known data where appropriate.",
+      "test": "- Each form field includes a visible label.<br/>- Labels clearly describes the input expected.<br/>- Labels are positioned above fields and are consistent in style.<br/>- Screen readers recognise groups as related. <br/>- Error messages appear inline next to or below the field<br/>- Error messages describe the issue clearly.",
+      "required": "true"
+    },
+    {
+      "story": "As a neurodiverse user I want to see icons supporting actions to make it easier to scan.",
+      "implement": "Add supporting icons to important links and buttons.",
+      "test": "- Icons match their intended action<br/>- Icon and text combinations are consistent across screens.",
+      "required": "true"
+    },
+    {
+      "story": "As an assistive technology user I only want descriptive text for non-decorative imagery.",
+      "implement": "Do not add an alt tag to images that a decorative only. ",
+      "test": "Use the WAVE tool to inspect the page, this will give you a list of image without and alt tag. Look through the list and see if any of these images would need an alt tag.",
+      "required": "true"
+    },
+    {
+      "story": "As a keyboard user I should be able to tab into interactive elements on the page.",
+      "implement": "Make sure CSS added or HTML attributes dont disable the default behaviour.<br/><br/>Using display: none will remove the ability to tab into link or buttons inside.<br/><br/>changing the tabindex again can remove the ability to tab into it.",
+      "test": "Click into page and try to tab into the button or link.",
+      "required": "true"
+    },
+    {
+      "story": "As an assistive technology user the correct semantic element should be used or the correct role is applied to the element.",
+      "implement": "Keep things simple, only add attributes like role or any aria attributes if youre 100% sure its correct. ",
+      "test": "Inspect the element on the page using dev tools and review element type. It is best for a FE dev to give guidance.",
+      "required": "true"
+    },
+    {
+      "story": "As a user with limited motor functions I would need an alternative to drag and drop functionality.",
+      "implement": "Provide alternative buttons that can be simply pressed; i.e. instead of dragging down a down button is provided. ",
+      "test": "Try and complete the tool without dragging. For bous points try to do it with just a keyboard.",
+      "required": "true"
+    },
+    {
+      "story": "As a touch user I expect interactable elements to be a big enough size to be easily pressed.",
+      "implement": "Add extra padding via CSS to the button element; negative margins can possibly be used to maintain the layout.",
+      "test": "Right click onto the element and use the computed tab in dev tools. There you can get the actual size in pixels and aslong as one of the measurements is 140 pixels its big enough.",
+      "required": "true"
     }
   ],
   "Usability": [
     {
-      "story": "As 1 a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states",
-      "implement": "Use icons, backound patterns, text weight or other decorative measures ",
-      "test": "Use the rendering tab in chrome dev tools and change emulate vision deficiences dropdown. Change the colour theme on your computer to hight contrast",
+      "story": "As a user I expect prompt and clear feedback on my actions",
+      "implement": "Use design system feedback types where appropriate. Confirmations in this form of toasts, inlines, or state changes. Error feedback with explanation and where appropriate recovery guidance. Loading or in-progress states for actions taking longer.",
+      "test": "Feedback appears within acceptable timeframes: Immediate visual response on interaction and loading state shown for delayed actions.",
+      "required": "true"
+    },
+    {
+      "story": "As a user, I want text and labels to be clear, well-spaced, and easy to read.",
+      "implement": "Follow the design system standards. ",
+      "test": "All text meets design system standards with all text meeting minimum font sizing, spacing and contrast requirements. ",
+      "required": "true"
+    },
+    {
+      "story": "As a user I need the ability to complete tasks quickly making non-required steps optional.",
+      "implement": "Do not add in extra steps, allowing certain steps to be optional. ",
+      "test": "Try to complete the task with as few steps as possible.",
+      "required": "true"
+    },
+    {
+      "story": "As a user I want to be clear how many steps are with in a form and where I am within a multi-step form.",
+      "implement": "Add a stepper list element",
+      "test": "Check the list element is on the correct step of the process",
+      "required": "true"
+    },
+    {
+      "story": "As a user, I want to see familiar components and patterns as standard.",
+      "implement": "Use the design system as much as possible.",
+      "test": "Review other parts of the application to see if components are being re-used.",
+      "required": "true"
+    },
+    {
+      "story": "As a user, I want to confirm when deleting or removing items/data.",
+      "implement": "Add a prompt with an extra button to 'delete' an item. ",
+      "test": "Use the application and review when a button has the terms delete, archive or remove that a prompt appears.",
+      "required": "true"
+    },
+    {
+      "story": "As a user, I want to be made aware when process is expected to take longer than expected.",
+      "implement": "Add some kind of warning to page. Maybe a notification component. Or a spinner component for loading times.",
+      "test": "When a page is being loaded does it feel like its taking a long time.",
       "required": "true"
     }
   ],
   "Readability": [
     {
-      "story": "As 2 a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states",
-      "implement": "Use icons, backound patterns, text weight or other decorative measures ",
-      "test": "Use the rendering tab in chrome dev tools and change emulate vision deficiences dropdown. Change the colour theme on your computer to hight contrast",
+      "story": "As a user, I want all text to be displayed in a legible font and size.",
+      "implement": "Font size should be above 16px unless its small text.",
+      "test": "Right click on the text and inspect the element in the computed tab it will tell the font size.",
+      "required": "true"
+    },
+    {
+      "story": "As a user, I want to view information which is displayed in a logical order.",
+      "implement": "Add content to the page in a linear order.",
+      "test": "Review the page and see if the order makes sense.",
+      "required": "true"
+    },
+    {
+      "story": "As a user, I expect Iconography to be used in a consistent manner.",
+      "implement": "Use icons that come from the designated icon set. In out cae font awesome.",
+      "test": "Check the designated icon set to see if it is part of it.",
+      "required": "true"
+    },
+    {
+      "story": "As a user, I want the consistent naming conventions and use of language.",
+      "implement": "Use consistent terminology within product. No interchangeable synonyms for the same thing, unless intentionally distinct. Ensure language is plain and user-centred.",
+      "test": "Naming conventions are consistent for the same actions across the product, screens, components and messages. Labels, headings and helper text use consistent and clear user-centred language.",
       "required": "true"
     }
   ]

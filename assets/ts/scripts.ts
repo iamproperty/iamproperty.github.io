@@ -5,6 +5,7 @@ import createDataLayer from './modules/data-layer';
 
 import createDynamicEvents from './modules/dynamicEvents';
 import videoSupport from './modules/videos';
+import integrationTests from './modules/integration-tests';
 
 const components = [
   'accordion',
@@ -45,6 +46,19 @@ const components = [
   'password-indicator'
 
 ];
+
+const testDomains = ["localhost"];
+
+if (testDomains.includes(window.location.hostname)) {
+
+  import(`../js/modules/integration-tests.js`)
+    .then((module) => {
+      window.iamTest = ():void => { integrationTests() };
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+}
 
 // Attach classes to dom elements
 document.addEventListener('DOMContentLoaded', async (): void => {

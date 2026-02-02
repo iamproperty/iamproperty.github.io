@@ -136,11 +136,11 @@ nav:has(iam-nav.nav--sticky) {
   left: 0;
   right: 0;
   z-index: 9999;
-  transition: transform 1s;
 
   iam-nav {
     position: fixed;
     outline: 2px solid #eeeeee;
+  transition: margin 1s;
   }
 }
 
@@ -148,6 +148,7 @@ nav:has(iam-nav.nav--sticky) {
   body:has(iam-nav.open:not(.nav--xs-sticky,.demo-open)) {
     max-height: 100vh;
     overflow: hidden;
+    margin-top: 0rem;
   }
 
   nav:has(iam-nav.nav--xs-sticky) {
@@ -156,7 +157,7 @@ nav:has(iam-nav.nav--sticky) {
     left: 0;
     right: 0;
     z-index: 9999;
-    transition: transform 1s;
+    transition: margin 1s;
 
     iam-nav {
       position: fixed;
@@ -164,7 +165,8 @@ nav:has(iam-nav.nav--sticky) {
   }
 
   body[data-direction='down'].past100 nav:has(.nav--xs-sticky) {
-    transform: translate(0, -110%);
+    
+  margin-top: -8rem;
   }
 }
 
@@ -175,8 +177,10 @@ nav:has(iam-nav.nav--sticky) {
   }
 }
 
-body[data-direction='down'].past100 nav:has(.nav--sticky) {
-  transform: translate(0, -110%);
+body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
+  //transform: translate(0, -100%);
+
+  margin-top: -8rem;
 }
 
 // #endregion

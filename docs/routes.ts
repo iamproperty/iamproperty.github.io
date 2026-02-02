@@ -338,6 +338,7 @@ const routes = [
     component: () => import('./views/Elements.vue'),
     children: [
       {
+        name: 'form-index',
         path: '',
         component: () => import('./views/elements/Index.vue'),
       },
@@ -436,6 +437,7 @@ const routes = [
     component: () => import('./views/Elements.vue'),
     children: [
       {
+        name: 'dialogs-index',
         path: '',
         component: () => import('./views/elements/Index.vue'),
       },
@@ -496,6 +498,7 @@ const routes = [
     component: () => import('./views/Components.vue'),
     children: [
       {
+        name: 'standardised-index',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
@@ -519,6 +522,7 @@ const routes = [
     component: () => import('./views/Components.vue'),
     children: [
       {
+        name: 'components-index',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
@@ -738,6 +742,7 @@ const routes = [
     component: () => import('./views/Components.vue'),
     children: [
       {
+        name: 'form-components-index',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
@@ -869,6 +874,7 @@ const routes = [
     component: () => import('./views/Components.vue'),
     children: [
       {
+        name: 'nav-index',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
@@ -932,6 +938,7 @@ const routes = [
     component: () => import('./views/Components.vue'),
     children: [
       {
+        name: 'cards-index',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
@@ -978,6 +985,7 @@ const routes = [
     component: () => import('./views/Components.vue'),
     children: [
       {
+        name: 'charts-index',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
@@ -1008,6 +1016,7 @@ const routes = [
     component: () => import('./views/Components.vue'),
     children: [
       {
+        name: 'notifications-index',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
@@ -1062,6 +1071,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "templates" */ './views/Templates.vue'),
     children: [
       {
+        name: 'templates-index',
         path: '',
         component: () => import('./views/templates/Index.vue'),
       },
@@ -1108,37 +1118,12 @@ const routes = [
     ],
   },
   {
-    path: '/best-practice',
-    name: 'Best practice',
+    path: '/integration',
+    name: 'Integration Guide',
     meta: {
-      title: 'Best practice | Components | iamkey',
-    },
-    component: () => import('./views/BestPracticeDoc.vue'),
-  },
-  {
-    path: '/nfrs',
-    name: 'NFRs',
-    meta: {
-      title: 'NFRs | Components | iamkey',
-    },
-    component: () => import('./views/NFRsDoc.vue'),
-  },
-  {
-    path: '/launch',
-    name: 'Launch list',
-    meta: {
-      title: 'Launch list | Components | iamkey',
+      title: 'Integration Guide | Components | iamkey',
     },
     component: () => import('./views/LaunchDoc.vue'),
-  },
-  {
-    /* Information */ path: '/information',
-    component: () => import('./views/Information.vue'),
-    name: 'Information',
-    meta: {
-      title: 'Information | iamkey',
-    },
-    searchterms: 'guidance, XD library, framework, bootstrap, library, integration',
   },
   {
     path: '/get-started',
@@ -1171,6 +1156,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "examples" */ './views/Examples.vue'),
     children: [
       {
+        name: 'examples-index',
         path: '',
         component: () => import('./views/examples/Index.vue'),
       },
@@ -1236,6 +1222,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "examples" */ './views/Standalone.vue'),
     children: [
       {
+        name: 'standalone-index',
         path: '',
         component: () => import('./views/standalone/Index.vue'),
       },
@@ -1625,6 +1612,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "prototypes" */ './views/Prototype.vue'),
     children: [
       {
+        name: 'prototypes-index',
         path: '',
         component: () => import('./views/prototype/Index.vue'),
       },

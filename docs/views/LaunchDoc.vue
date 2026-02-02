@@ -29,6 +29,19 @@ const launch = ($event) => {
 
   // Save to device
   localStorage.setItem('checkedStories', JSON.stringify(arrSaved.value));
+
+  document.querySelector('.progress__wrapper progress').setAttribute('class', 'colour-danger');
+
+  if(percent.value > 60)
+    document.querySelector('.progress__wrapper progress').setAttribute('class', 'colour-warning');
+
+  if(percent.value > 80)
+    document.querySelector('.progress__wrapper progress').setAttribute('class', 'colour-success');
+  
+  if(percent.value == 100)
+    document.querySelector('.progress__wrapper progress').setAttribute('class', 'colour-complete');
+
+
 };
 
 const clear = ($event) => {
@@ -37,6 +50,12 @@ const clear = ($event) => {
 
   arrSaved.value = [];
   localStorage.setItem('checkedStories', JSON.stringify(arrSaved.value));
+  document.querySelector('.progress__wrapper progress').removeAttribute('class');
+
+  Array.from(document.querySelectorAll('tr:has([data-required=true]) input[type="checkbox"]')).forEach((checkbox) => {
+  
+    checkbox.checked = false;
+  });
 };
 
 const isSaved = (story) => {
@@ -80,55 +99,64 @@ onMounted(() => {
 });
 </script>
 <template>
-  <main>
-    <h1>NFR's Launch list</h1>
-    <p class="md-col-end-8">Our non-functional requirements can be used to test the readiness of an application. Designed to measure the usability and inclusiviness of web pages.</p>
-    <div class="md-col-start-9 text-end"><button class=" btn btn-secondary" @click="($event) => clear($event)">Clear</button></div>
+  <main class="integration-launch-list">
+    <h1>Integration launch list</h1>
+    <p class="lead">Our non-functional requirements can be used to test the readiness of an application. Designed to measure the usability and inclusiviness of web pages.</p>
 
+    <label class="md-col-end-6 pb-5">
+      Application/Page:
+      <input id="filename" name="filename" type="text" value="Application 1" required />
+    </label>
 
-    
 
     <template v-for="(group, title) in $shared.nfrs" v-bind:key="title">
       <Table data-show="99">
       <h2>{{ title }}</h2>
 
-      <table v-for="nfr in group" v-bind:key="nfr.story">
+      <table>
         <thead>
           <tr>
             <th>Story</th>
             <th>Implement</th>
             <th>Test</th>
-            <th>Required</th>
             <th>Status</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="nfr in group" v-bind:key="nfr.story">
-            <td>{{ nfr.story }}</td>
-            <td>{{ nfr.implement }}</td>
-            <td>{{ nfr.test }}</td>
-            <td :data-required="`${nfr.required}`">{{ nfr.required == "true" ? `Yes` : `No` }}</td>
-            <td><label>Passed <input type="checkbox" :name="`check-${i++}`" :checked="isSaved(nfr.story)"  @change="($event) => launch($event)" /></label></td>
+            <td :data-required="`${nfr.required}`">{{ nfr.story }}{{ nfr.required == "true" ? `` : ` (Optional)` }}</td>
+            <td v-html="nfr.implement"></td>
+            <td v-html="nfr.test"></td>
+            <td><label class="me-0">Passed <input type="checkbox" :name="`check-${i++}`" :checked="isSaved(nfr.story)"  @change="($event) => launch($event)" /></label></td>
           </tr>
         </tbody>
       </table>
       </Table>
     </template>
 
-    <label class="md-col-end-6 pt-5">
-      File Name:
-      <input id="filename" name="filename" type="text" value="Application 1" required />
-    </label>
-    <button class=" btn btn-primary" @click="($event) => submit($event)">Save CSV</button>
+
+    <div class="text-end mb-5"><button class="btn btn-primary" @click="($event) => submit($event)">Save to CSV</button></div>
 
     <div class="progress__wrapper">
+
+
       <label :data-percent="percent">NFRs Passed<progress :max="total" :value="checked"></progress></label>
+      <button class=" btn btn-action m-0" @click="($event) => clear($event)">Clear</button>
     </div>
 
     
   </main>
 </template>
+<style>
 
+body:has(.integration-launch-list) {
+  
+  --max-width: 200rem;
+  --container-max-width: 200rem;
+}
+
+
+</style>
 <style lang="scss" scoped>
 
 main:has(.progress__wrapper){
@@ -140,19 +168,44 @@ main:has(.progress__wrapper){
   position: sticky;
   bottom: 0;
   left: 0;
+  height: 2.5rem;
+  padding-inline: 2rem;
 
-  label {
+
+  > label {
     text-indent: -100%;
     margin: 0;
     padding: 0;
     max-width: 100%;
+    position: absolute;
+    inset: 0 1rem;
   }
 
   progress {
     --border-radius: 0;
-    height: 3rem;
+    position: absolute;
+    height: auto;
     margin: 0;
     max-width: 100%;
+    inset: 0;
+  }
+
+  button {
+    
+    position: absolute;
+    height: auto;
+    margin: 0;
+    max-width: 100%;
+    z-index: 99;
+    top: 50%;
+    right: 2rem;
+    left: auto;
+    bottom: auto;
+    translate: 0 -50%;
+  }
+
+  &:has(progress[value="0"]){
+    display: none;
   }
 
 }
@@ -160,6 +213,15 @@ label[data-percent]:not(:has(strong)):has(progress):before {
   
   text-indent: 0;
   top: 50%;
-  right: 0.5rem;
+  right: 5rem;
+  bottom: auto;
+  z-index: 2;
+  line-height: 1em;
+  height: 1em;
+  translate: 0 -50%;
+}
+label[data-percent]:not(:has(strong)):has(progress.colour-complete):before {
+  
+  color: white;
 }
 </style>
