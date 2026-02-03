@@ -1556,7 +1556,7 @@ class iamSTDAddressLookup extends HTMLElement {
     data-min-chars="5" 
     ${this.hasAttribute('data-title') ? `data-title='${this.getAttribute('data-title')}'` : `data-title='Find an address by postcode'`}
     data-placeholder="UK, Isle of Man, & Channel Islands " 
-    ${this.hasAttribute('data-manual') ? 'data-manual' : ''} 
+    ${this.hasAttribute('data-manual') ? 'data-manual' : ''}  
     ${this.hasAttribute('data-allow-manual') ? 'data-allow-manual' : ''} 
     ${this.hasAttribute('data-use') ? `data-use='${this.getAttribute('data-use')}'` : ''} 
     ${this.hasAttribute('data-use-label') ? `data-use-label='${this.getAttribute('data-use-label')}'` : ''} 
@@ -1568,6 +1568,7 @@ class iamSTDAddressLookup extends HTMLElement {
     ${this.hasAttribute('data-force-manual') ? `data-force-manual` : ''}
     ${this.hasAttribute('data-matched') ? `data-matched='${this.getAttribute('data-matched')}'` : ''}
     ${this.hasAttribute('data-matched-label') ? `data-matched-label='${this.getAttribute('data-matched-label')}'` : ''}
+    ${this.hasAttribute('data-disabled') ? 'data-disabled="disabled"' : ''} 
     data-postcode-lookup-label="Back to UK postcode lookup">
 
     <p class="hint pb-2 d-block" slot="hint">Unsure of the postcode? Check with the <a href="https://www.royalmail.com/find-a-postcode" target="_blank"><i class="fa-regular fa-arrow-up-right-from-square"></i>Royal Mail address finder</a></p>
@@ -1661,7 +1662,7 @@ class iamSTDAddressLookup extends HTMLElement {
     </fieldset>
 
     <button slot="actions" type="button" id="overseasToggle" class="link toggleOverseas">Use overseas address</button>` : ''}
-    ${this.hasAttribute('data-address-unknown') ? `<label slot="actions"><input type="checkbox" value="true" name="${this.getAttribute('data-address-unknown')}" ${this.hasAttribute('data-address-unknown-checked') ? 'checked="checked"' : '' }/> Address unknown</label>` : ``}
+    ${this.hasAttribute('data-address-unknown') ? `<label slot="actions" id="address_unknown_checkbox"><input type="checkbox" value="true" name="${this.getAttribute('data-address-unknown')}" ${this.hasAttribute('data-address-unknown-checked') ? 'checked="checked"' : '' }/> Address unknown</label>` : ``}
     <div class="bg-light text-center px-3" slot="afterList">
       <p class="p-2">Can't find an address? Check details with the <br/><a href="" class="fa-new"><i class="fa-regular fa-arrow-up-right-from-square"></i>Royal mail address finder</a></p>
       ${this.hasAttribute('data-allow-overseas') ? `<hr/><p class="p-2">If the address doesn’t exist you can enter manually <br /><button type="button" id="overseasToggleInline" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-edit me-1"></i>Enter address manually</button></p>` : ''}
@@ -1678,6 +1679,7 @@ class iamSTDAddressLookup extends HTMLElement {
     const languageToggle = this.querySelector('#languageToggle');
     const atleastone = this.querySelector('.overseas-atleastone');
     const overseasFields = this.querySelector('.overseas');
+    const addressUnknownCheckbox = this.querySelector('#address_unknown_checkbox input');
 
     const openOverseas = (): void => {
       const updateEvent = new CustomEvent('open-manual');
@@ -1818,6 +1820,53 @@ class iamSTDAddressLookup extends HTMLElement {
       }
     }
 
+
+    // Addres unknown
+
+    const toggleAddressFields = () => {
+
+        
+      if(addressUnknownCheckbox.checked){
+        Array.from(this.querySelectorAll('input:not([name="address-unknown"]), select')).forEach((input) => {
+
+          input.setAttribute('disabled','disabled');
+          input.setAttribute('data-unknown-disabled','true');
+
+          addressComponent.setAttribute('data-disabled','disabled');
+        });
+      }
+      else {
+        Array.from(this.querySelectorAll('[data-unknown-disabled]')).forEach((input) => {
+
+          addressComponent.removeAttribute('data-disabled','disabled');
+          input.removeAttribute('disabled');
+          input.removeAttribute('data-unknown-disabled');
+        });
+      }
+    }
+    toggleAddressFields();
+
+    addressUnknownCheckbox?.addEventListener('change', (e) => {
+
+      toggleAddressFields();
+    });
+  }
+
+  static get observedAttributes(): any {
+    return ['data-url'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
+    const addressComponent = this.querySelector('iam-address-lookup');
+
+    switch (attrName) {
+      case 'data-url': {
+        if (oldVal != newVal && addressComponent) {
+          addressComponent.setAttribute('data-url', newVal + '?search_string=');
+        }
+        break;
+      }
+    }
   }
 }
 

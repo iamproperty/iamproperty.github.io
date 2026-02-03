@@ -617,19 +617,26 @@ class iamAddressLookup extends HTMLElement {
     // #endregion
 
     advancedSelect(this, lookup, list, true);
+
+    if (this.hasAttribute('data-disabled'))
+      lookup?.setAttribute('disabled','disabled');
   }
 
   static get observedAttributes(): any {
-    return ['data-url'];
+    return ['data-disabled'];
   }
 
   attributeChangedCallback(attrName, oldVal, newVal): void {
-    const addressComponent = this.querySelector('iam-address-lookup');
+    const lookup = this.shadowRoot.querySelector('[name="postcode"]');
 
     switch (attrName) {
-      case 'data-url': {
-        if (oldVal != newVal && addressComponent) {
-          addressComponent.setAttribute('data-url', newVal + '?search_string=');
+      case 'data-disabled': {
+      console.log(newVal);
+        if (oldVal != newVal && newVal == 'disabled') {
+          lookup?.setAttribute('disabled','disabled');
+        }
+        else if (oldVal != newVal) {
+          lookup?.removeAttribute('disabled');
         }
         break;
       }

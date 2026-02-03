@@ -1029,6 +1029,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     padding-right: 3rem;
   }
 
+
   .empty {
     position: absolute;
     bottom: 0.5rem;
@@ -1050,6 +1051,11 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     i {
       font-size: 1.5rem;
     }
+  }
+  
+  &:has([name="postcode"][disabled]) .empty{
+
+    display: none;
   }
 
   &:has(input:is([name$="Alt"]):not([data-value],[data-placeholder])) .empty {
