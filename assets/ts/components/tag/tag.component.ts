@@ -66,8 +66,6 @@ class iamTag extends HTMLElement {
       }
     });
 
-
-
     this.addEventListener('change', (event) => {
       if (event && event.target instanceof HTMLElement && event.target.closest('input[type="radio"],input[type="checkbox"]')) {
         const checkbox = event.target.closest('input[type="radio"],input[type="checkbox"]');
@@ -99,23 +97,7 @@ class iamTag extends HTMLElement {
     });
 
     // TODO Add keyboard actions
-    search.addEventListener('keydown', (event) => {
-
-      switch ( event.keyCode ) {
-        case 40: // down
-          
-          console.log('down')
-          this.querySelector('label:not([slot="checked"]) input')?.focus();
-
-          break;
-      }
-
-
-
-    });
-    
-
-    addKeyboardEvents(this);
+    addKeyboardEvents(this, search);
   }
 }
 

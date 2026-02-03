@@ -2,6 +2,7 @@
 
 @layer elements {
   
+  // #region Dropdown
   .dropdown {
     position: absolute;
     top: calc(100% + 0.5rem);
@@ -19,6 +20,30 @@
     }
   }
 
+  // #endregion
+  
+  // #region Needed for the component files
+  :is(iam-tag,iam-multiselect):has(label:not([slot='checked'])) {
+    --display-panel: block;
+  }
+
+  :is(iam-tag,iam-multiselect):has(label[slot='checked']) {
+    --display-button: block;
+  }
+
+  :is(iam-tag,iam-multiselect)[data-single] .tag[slot='checked'],
+  :is(iam-tag,iam-multiselect)[data-single] .tag[slot='checked'] * {
+    pointer-events: none!important;
+  }
+
+  @container style(--theme: dark) {
+    :host :is(.tag, .badge):not([slot='checked']) {
+      color: var(--colour-heading);
+    }
+  }
+  // #endregion
+
+  // #region Indivitual options
   .dropdown__option[slot='checked'] {
     order: var(--order, 1);
   }
@@ -58,5 +83,5 @@
       }
     }
   }
-
+  // #endregion
 }
