@@ -1,4 +1,4 @@
-import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
+import Cookies from '../../../node_modules/js-cookie/dist/js.cookie.mjs';
 
 export const filterList = (component, search): void => {
 
