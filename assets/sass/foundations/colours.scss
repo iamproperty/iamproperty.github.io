@@ -23,18 +23,21 @@
     }
   }
 
-  :is(.bg-primary, .bg-danger, .bg-dark, .gradient-primary) {
+  @scope (:is(.bg-primary, .bg-danger, .bg-dark, .gradient-primary)) to ([class*='bg-']) {
+    
+    :scope {
+        
+      --colour-heading: var(--colour-white);
+      --colour-body: var(--colour-white);
+      color: var(--colour-white);
 
-    --colour-heading: var(--colour-white);
-    --colour-body: var(--colour-white);
-    color: var(--colour-white);
-
-    > * {
+    }
+    
+    :scope > * {
       
       color-scheme: dark;
     }
   }
-
   // #region When the theme is set to dark via the dark mode component
   // OR when the dark mode is set via the browser or device when no component is present
   
