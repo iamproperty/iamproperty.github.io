@@ -5,6 +5,8 @@
     display: flex;
     flex-direction: column;
     row-gap: var(--gap);
+    reading-flow: source-order;
+    margin-bottom: 1.5rem;
 
     .btn {
       margin-inline-end: 0;
@@ -15,32 +17,61 @@
       margin: 0;
     }
 
+    .btn-tertiary {
+      max-width: fit-content;
+      margin-inline: auto;
+      order: 3;
+      reading-order: 3;
+    }
     .btn-secondary {
       order: 2;
+      reading-order: 2;
     }
     .btn-primary {
       order: 1;
+      reading-order: 1;
+    }
+
+    .btn-compact {
+
+      max-width: fit-content;
+      margin-inline: auto;
     }
   }
   @container (min-width: 36em) {
     .btn__group {
       flex-direction: row;
       row-gap: 0;
-      column-gap: var(--gap);
-      margin-bottom: 1.5rem;
+      gap: var(--gap);
+      flex-wrap: wrap;
 
       .btn {
           
         max-width: fit-content;
         white-space: nowrap;
+        margin-block: auto;
       }
 
-        
-      .btn-secondary {
+      
+      .btn-tertiary {
+        max-width: fit-content;
+        margin-inline: 0;
+        margin-block: auto;
         order: 1;
+        reading-order: 1;
+      }
+      .btn-secondary {
+        order: 2;
+        reading-order: 2;
       }
       .btn-primary {
-        order: 2;
+        order: 3;
+        reading-order: 3;
+      }
+      .btn-compact {
+        
+        margin-inline: 0;
+        margin-block: auto;
       }
     }
     .btn__group.text-end {

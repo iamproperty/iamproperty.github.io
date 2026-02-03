@@ -310,6 +310,15 @@ const routes = [
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
       },
       {
+        path: 'button-group',
+        name: 'Button group (beta)',
+        meta: {
+          title: 'Button group | Elements | iamkey',
+        },
+        component: () => import('./views/links/ButtonGroup.vue'),
+        searchterms: 'anchor, prompt, secondary button, primary button, compact',
+      },
+      {
         path: 'action-buttons',
         name: 'Action buttons',
         meta: {
