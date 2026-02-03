@@ -49,8 +49,11 @@
       </div>
     </div>
     <div class="container bg-primary container-example mb-5 visualtest">
-      <div class="contents bg-contents d-flex justify-content-center align-items-center">
+      <p class="mx-auto text-center">This text should be white</p>
+      <input type="test" />
+      <div class="contents bg-test d-flex justify-content-center align-items-center">
         <span class="h5 mb-0 pb-0">Content of the next div</span>
+      <input type="test" />
       </div>
     </div>
     
@@ -65,14 +68,18 @@
 
     aspect-ratio: 3 / 1;
     background: rgba(0, 0, 0, 0.2);
-    display: flex;
+    //display: flex;
     border: 1px dashed black;
 
     .contents {
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.2);
+      //background: rgba(0, 0, 0, 0.2);
       border: 1px dashed black;
+    }
+
+    .bg-test {
+      background-color: white;
     }
   }
 
