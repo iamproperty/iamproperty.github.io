@@ -11,46 +11,49 @@
   box-sizing: border-box;
 }
 
-.wrapper {
+@layer components {
+  .wrapper {
 
-  position: relative;
-  display: inline-block;
-  margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
 
-  input {
-    position: absolute;
-    min-height: unset;
-    top: 50%;
-    left: 0;
-    transform: translate(0,-50%);
-    z-index: -99;
-    opacity: 0;
+    input {
+      position: absolute;
+      min-height: unset;
+      top: 50%;
+      left: 0;
+      transform: translate(0,-50%);
+      z-index: -99;
+      opacity: 0;
+    }
   }
-}
 
-::slotted(*) {
-  margin-bottom: 0!important;
-}
+  ::slotted(*) {
+    margin-bottom: 0!important;
+  }
 
 
-input:focus {
- 
-  opacity: 1;
-  z-index: 99;
-}
+  input:focus {
+  
+    opacity: 1;
+    z-index: 99;
+  }
 
-.wrapper:is(:focus-within) .dropdown {
-  display: var(--display-panel, none);
-}
-
-@media (hover: hover) {
-  .wrapper .dropdown:hover {
+  .wrapper:is(:focus-within) .dropdown {
     display: var(--display-panel, none);
   }
-}
 
-@media (hover: none) {
-  :host(.hover) .wrapper .dropdown {
-    display: block;
+  @media (hover: hover) {
+    .wrapper .dropdown:hover {
+      display: var(--display-panel, none);
+    }
   }
+
+  @media (hover: none) {
+    :host(.hover) .wrapper .dropdown {
+      display: block;
+    }
+  }
+
 }

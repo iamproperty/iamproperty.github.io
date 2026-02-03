@@ -1,5 +1,4 @@
-import Cookies from 'js-cookie';
-import { filterList } from '../../modules/dropdown';
+import { searchAjax, filterList, addKeyboardEvents } from '../../modules/dropdown';
 
 // Data layer Web component created
 window.dataLayer = window.dataLayer || [];
@@ -55,6 +54,12 @@ class iamMultiselect extends HTMLElement {
     const innerLabel = multiselect.shadowRoot.querySelector('label .inner-label');
     const ajaxURL = this.getAttribute('data-url');
     innerLabel.innerHTML = multiselect.getAttribute('data-label');
+
+    // Make sure the dropdown options are set
+    Array.from(this.querySelectorAll(':scope > label')).forEach((label) => {
+      label.classList.add('dropdown__option');
+      label?.querySelector('i')?.remove();
+    });
 
     if (multiselect.hasAttribute('placeholder')) {
       search.setAttribute('placeholder', multiselect.getAttribute('placeholder'));
@@ -132,7 +137,7 @@ class iamMultiselect extends HTMLElement {
       if (multiselect.hasAttribute('data-url')) {
       
         if (search.value.length == 3) {
-          searchAjax(search.value);
+          searchAjax(multiselect, search, filterList);
         }
       } else {
           
@@ -222,6 +227,7 @@ class iamMultiselect extends HTMLElement {
     });
 
     // Add some keyboard features to keep it accessible
+    addKeyboardEvents(this, search);
     multiselect.addEventListener('keydown', function (event) {
       const activeElement = document.activeElement;
 
@@ -263,38 +269,6 @@ class iamMultiselect extends HTMLElement {
             else search.focus();
           }
           break;
-        case 'ArrowUp':
-          // Up pressed
-          event.preventDefault();
-
-          if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
-            const arrCheckboxes = multiselect.querySelectorAll(`label:not([slot="checked"]):not([slot="checked"])`);
-
-            const activeIndex = Array.from(arrCheckboxes).indexOf(activeElement.closest('label'));
-            const prevCheckbox = Array.from(arrCheckboxes)[activeIndex - 1];
-
-            if (prevCheckbox) prevCheckbox.focus();
-            else search.focus();
-          }
-
-          break;
-        case 'ArrowDown':
-          // Down pressed
-          event.preventDefault();
-
-          if (activeElement == multiselect) {
-            multiselect.querySelector('label:not([slot="checked"]):not([slot="checked"])').focus();
-          } else if (activeElement.hasAttribute('type') && activeElement.getAttribute('type') == 'checkbox') {
-            const activeValue = activeElement.value;
-
-            const nextCheckbox = multiselect.querySelector(
-              `label:has(input[value="${activeValue}"]) ~ label:not([slot="checked"]):not([slot="checked"])`
-            );
-
-            if (nextCheckbox) nextCheckbox.focus();
-          }
-
-          break;
         case 'Enter':
           event.stopPropagation();
           event.preventDefault();
@@ -317,6 +291,7 @@ class iamMultiselect extends HTMLElement {
           break;
       }
     });
+
 
     function checkLastTag(): Element | null {
       if (order == 0) return false;
@@ -368,49 +343,6 @@ class iamMultiselect extends HTMLElement {
       wrapper.removeAttribute('data-mousedown');
     });
 
-    const searchAjax = async (searchterm): any => {
-      const searchAjaxURL = `${ajaxURL}${encodeURI(searchterm)}`;
-
-      // Setup controller vars if not already set
-      if (!window.controller) window.controller = [];
-
-      // Abort if controller already present for this url
-      if (window.controller[searchAjaxURL]) window.controller[searchAjaxURL].abort();
-
-      // Create a new controller so it can be aborted if new fetch made
-      window.controller[searchAjaxURL] = new AbortController();
-      const { signal } = controller[searchAjaxURL];
-
-      try {
-        await fetch(searchAjaxURL, {
-          signal: signal,
-          method: 'get',
-          credentials: 'same-origin',
-          headers: new Headers({
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
-          }),
-        })
-          .then((response) => response.json())
-          .then((response) => {
-
-            let items = '';
-
-            for (let i = 0; i < response['data'].length; i++) {
-              items += `<label class="tag"><input type="checkbox" name="${multiselect.hasAttribute('data-name') ? multiselect.getAttribute('data-name') : 'tags'}" value="${ response['data'][i].value }"/>${ response['data'][i].title }</label>`;
-            }
-
-            multiselect.insertAdjacentHTML('beforeend', `${items}`);
-            
-            filterList(multiselect, search);
-            return response;
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
   }
 }
 
