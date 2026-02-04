@@ -1823,33 +1823,34 @@ class iamSTDAddressLookup extends HTMLElement {
 
     // Addres unknown
 
-    const toggleAddressFields = () => {
+    if(this.hasAttribute('data-address-unknown')) {
+      const toggleAddressFields = () => {
 
-        
-      if(addressUnknownCheckbox.checked){
-        Array.from(this.querySelectorAll('input:not([name="address-unknown"]), select')).forEach((input) => {
+        if(addressUnknownCheckbox.checked){
+          Array.from(this.querySelectorAll(`input:not([name="${this.getAttribute('data-address-unknown')}"]), select`)).forEach((input) => {
 
-          input.setAttribute('disabled','disabled');
-          input.setAttribute('data-unknown-disabled','true');
+            input.setAttribute('disabled','disabled');
+            input.setAttribute('data-unknown-disabled','true');
 
-          addressComponent.setAttribute('data-disabled','disabled');
-        });
+            addressComponent.setAttribute('data-disabled','disabled');
+          });
+        }
+        else {
+          Array.from(this.querySelectorAll('[data-unknown-disabled]')).forEach((input) => {
+
+            addressComponent.removeAttribute('data-disabled','disabled');
+            input.removeAttribute('disabled');
+            input.removeAttribute('data-unknown-disabled');
+          });
+        }
       }
-      else {
-        Array.from(this.querySelectorAll('[data-unknown-disabled]')).forEach((input) => {
-
-          addressComponent.removeAttribute('data-disabled','disabled');
-          input.removeAttribute('disabled');
-          input.removeAttribute('data-unknown-disabled');
-        });
-      }
-    }
-    toggleAddressFields();
-
-    addressUnknownCheckbox?.addEventListener('change', (e) => {
-
       toggleAddressFields();
-    });
+
+      addressUnknownCheckbox?.addEventListener('change', (e) => {
+
+        toggleAddressFields();
+      });
+    }
   }
 
   static get observedAttributes(): any {
