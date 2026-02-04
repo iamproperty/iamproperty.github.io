@@ -327,8 +327,31 @@
       uncertainty, and provide a responsive user experience during tasks that require time to complete.
     </p>
 
-    <a href="/dialogs/multi-step-modal" class="btn btn-secondary">Multi-step Component</a>
+    <a href="/dialogs/multi-step-modal" class="btn btn-secondary mb-5">Multi-step Component</a>
 
+    <!-- #region Adding buttons -->
+
+    <div class="bg-light container">
+      
+    <h2>Adding buttons</h2>
+    <p>To ensure that the modal component can be integrated flexibly there are numerous ways to add buttons. The transactional and acknowledgement type modals will have buttons created by default with text that can be updated via the two attributes; <code>[data-cancel-text]</code> and <code>[data-agree-text]</code>. Alternatively you can use the 'agreed-button' slot to add a primary button to override the default one; useful to add extra functionality to the submit function.</p>
+
+    <p>Buttons can be added to the default modal types by adding the correct elements to the component. A close button can be added by adding the <code>command</code> and <code>commandfor</code> attributes. While also adding a form with buttons inside will also work. Use the <code>formmethod</code> attribute with the value of 'dialog' on a button if you want it to serve as a close button only. </p>
+
+    <h3 class="pb-2">Command and commandfor attributes</h3>
+<pre class="mb-5"><code>{{ `<div class="btn__group text-end">
+  <button class="btn btn-secondary" command="close" commandfor="modal-passive2">Cancel</button>
+  <button class="btn btn-primary" type="submit">Close case</button>
+</div>` }}</code></pre>
+
+    <h3 class="pb-2">Form inside</h3>
+<pre><code>{{ `<form><div class="btn__group text-end">
+  <button class="btn btn-secondary" formmethod="dialog">Cancel</button>
+  <button class="btn btn-primary" type="submit">Close case</button>
+</div></form>` }}</code></pre>
+    
+    </div>
+    
 
 
     <Integration component="Modal" componentName="iam-modal">
@@ -371,6 +394,13 @@
               <td>String</td>
               <td>No</td>
               <td>Changes the visable icon</td>
+            </tr>
+            <tr>
+              <th>data-cancel-text</th>
+              <td>Cancel</td>
+              <td>String</td>
+              <td>No</td>
+              <td>Change the text on default cancel button</td>
             </tr>
             <tr>
               <th>data-agreed-text</th>
