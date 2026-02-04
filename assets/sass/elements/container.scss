@@ -6,16 +6,21 @@
 
 
 @layer elements {
+  // #region contain
   // #region container
   .container {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    padding: var(--container-padding);
 
-    grid-column: container !important;
     container-type: inline-size;
     width: 100%;
+
+    &:not([class*='col-']){
+
+      grid-column: container !important;
+      padding: var(--container-padding);
+    }
 
     &:not(:has(.row)):has([class*='col-']) {
       display: grid;
