@@ -38,6 +38,9 @@
       margin-inline: auto;
     }
   }
+  :is(iam-form,form) .btn__group{
+    padding-top: 1rem;
+  }
   @container (min-width: 36em) {
     .btn__group {
       flex-direction: row;
@@ -76,6 +79,10 @@
     }
     .btn__group.text-end {
       justify-content: flex-end;
+    }
+    :is(iam-form,form) .btn__group{
+      justify-content: flex-end;
+      padding-top: 3rem;
     }
     iam-modal .btn__group:last-child .btn,
     dialog .btn__group:last-child .btn {

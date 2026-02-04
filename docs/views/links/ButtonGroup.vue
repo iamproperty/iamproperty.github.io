@@ -50,13 +50,27 @@
         <button class="btn btn-primary">Primary button</button>
       </div>
 
-      <p>To align the button to the right for forms you need to apply the <code>.text-end</code> class.</p>
+      <p>To align the button to the right for forms you need to apply the <code>.text-end</code> class. By default the buttons are aligned right when the button group inside a form.</p>
         
       <div class="btn__group text-end mb-5">
         <button class="btn btn-tertiary">Tertiary button</button>
         <button class="btn btn-secondary">Secondary button</button>
         <button class="btn btn-primary">Primary button</button>
       </div>
+      <form>
+        <label>
+          Label
+          <input type="text" name="text" />
+        </label>
+        <label>
+          Label
+          <input type="text" name="text" />
+        </label>
+        <div class="btn__group">
+          <button class="btn btn-secondary">Back button</button>
+          <button class="btn btn-primary">Submit button</button>
+        </div>
+      </form>
     </div>
 
 
