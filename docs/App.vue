@@ -27,7 +27,7 @@
       <router-link to="/elements">Elements</router-link>
       <router-link to="/components">Components</router-link>
       <router-link to="/templates">Templates</router-link>
-      <router-link to="/integration">Integration</router-link>
+      <router-link to="/launch">Launch list</router-link>
 
       <form novalidate method="GET" slot="search" id="searchform" action="/search">
         <Search>

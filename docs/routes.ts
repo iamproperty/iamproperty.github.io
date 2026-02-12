@@ -1118,10 +1118,10 @@ const routes = [
     ],
   },
   {
-    path: '/integration',
-    name: 'Integration Guide',
+    path: '/launch',
+    name: 'Launch list',
     meta: {
-      title: 'Integration Guide | Components | iamkey',
+      title: 'Launch list | Components | iamkey',
     },
     component: () => import('./views/LaunchDoc.vue'),
   },

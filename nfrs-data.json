@@ -1,9 +1,29 @@
 {
+  "Best practice": [
+    {
+      "story": "Only one h1 is used on a page and it should be the first heading on the page.",
+      "implement": "",
+      "test": "",
+      "required": "true"
+    },
+    {
+      "story": "Only one .btn-primary is used per form/page.",
+      "implement": "",
+      "test": "",
+      "required": "true"
+    },
+    {
+      "story": "Buttons and links should have a title attribute set when the text of the button doesn't describe the action.",
+      "implement": "",
+      "test": "",
+      "required": "true"
+    }
+  ],
   "Accessibility": [
     {
-      "story": "As a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states  ",
-      "implement": "Use icons, backound patterns, text weight or other decorative measures ",
-      "test": "Use the rendering tab in chrome dev tools and change the emulate vision deficiences dropdown. <br/><br/>Change the colour theme on your computer to hight contrast",
+      "story": "As a user with colour vision deficiency I can't rely on colour alone to differentiate elements and states",
+      "implement": "Use icons, background patterns, text weight or other decorative measures",
+      "test": "Use the rendering tab in chrome DevTools and change the emulate vision deficiences dropdown. <br/><br/>Change the colour theme on your computer to high contrast",
       "required": "true"
     },
     {
@@ -19,15 +39,15 @@
       "required": "true"
     },
     {
-      "story": "As a neurodiverse I want to be able to switch the colour palette.",
-      "implement": "-Create a dark mode pallette <br/>-Dont implement CSS that will break the default colours in a them.",
+      "story": "As a neurodiverse user I want to be able to switch the colour palette.",
+      "implement": "- Create a dark mode pallette <br/>- Dont implement CSS that will break the default colours in a them.",
       "test": "Test the site in dark and light modes. Change the colour theme of the OS to a high contrast.",
       "required": "true"
     },
     {
       "story": "As a user I want to be able to limit or disable animation or movement.",
-      "implement": "Add a prefer reduced motion media query in which chnages animation times.",
-      "test": "The the rendering chrome devtools emulate reduced motion and check animations are slowed down.",
+      "implement": "Add a prefer reduced motion media query in which changes animation times.",
+      "test": "Use the rendering tab within chrome DevTools to emulate reduced motion and check animations have slowed down.",
       "required": "true"
     },
     {
@@ -37,7 +57,7 @@
       "required": "true"
     },
     {
-      "story": "As a user, I want form fields to have clear labels, helpful error messages and autocomplete support. ",
+      "story": "As a user, I want form fields to have clear labels, helpful error messages and autocomplete support.",
       "implement": "- Use visible labels<br/>- Group related fields<br/>- Error messaging, say what's wrong and how to how to fix it.<br/>- System to pre-fill known data where appropriate.",
       "test": "- Each form field includes a visible label.<br/>- Labels clearly describes the input expected.<br/>- Labels are positioned above fields and are consistent in style.<br/>- Screen readers recognise groups as related. <br/>- Error messages appear inline next to or below the field<br/>- Error messages describe the issue clearly.",
       "required": "true"
@@ -51,7 +71,7 @@
     {
       "story": "As an assistive technology user I only want descriptive text for non-decorative imagery.",
       "implement": "Do not add an alt tag to images that a decorative only. ",
-      "test": "Use the WAVE tool to inspect the page, this will give you a list of image without and alt tag. Look through the list and see if any of these images would need an alt tag.",
+      "test": "Use the WAVE tool to inspect the page, this will give you a list of image without an alt tag. Look through the list and see if any of these images would need an alt tag.",
       "required": "true"
     },
     {
@@ -62,20 +82,20 @@
     },
     {
       "story": "As an assistive technology user the correct semantic element should be used or the correct role is applied to the element.",
-      "implement": "Keep things simple, only add attributes like role or any aria attributes if youre 100% sure its correct. ",
-      "test": "Inspect the element on the page using dev tools and review element type. It is best for a FE dev to give guidance.",
+      "implement": "Keep things simple, only add attributes like role or any aria attributes if youre 100% sure its correct.",
+      "test": "Inspect the element on the page using DevTools and review element type. It is best for a FE dev to give guidance.",
       "required": "true"
     },
     {
       "story": "As a user with limited motor functions I would need an alternative to drag and drop functionality.",
-      "implement": "Provide alternative buttons that can be simply pressed; i.e. instead of dragging down a down button is provided. ",
-      "test": "Try and complete the tool without dragging. For bous points try to do it with just a keyboard.",
+      "implement": "Provide alternative buttons that can be simply pressed; i.e. instead of dragging down a down button is provided.",
+      "test": "Try and complete the tool without dragging. For bonus points try to do it with just a keyboard.",
       "required": "true"
     },
     {
       "story": "As a touch user I expect interactable elements to be a big enough size to be easily pressed.",
       "implement": "Add extra padding via CSS to the button element; negative margins can possibly be used to maintain the layout.",
-      "test": "Right click onto the element and use the computed tab in dev tools. There you can get the actual size in pixels and aslong as one of the measurements is 140 pixels its big enough.",
+      "test": "Right click onto the element and use the computed tab in DevTools. There you can get the actual size in pixels and as long as one of the both measurements are larger than 24px it is big enough.",
       "required": "true"
     }
   ],
@@ -88,13 +108,13 @@
     },
     {
       "story": "As a user, I want text and labels to be clear, well-spaced, and easy to read.",
-      "implement": "Follow the design system standards. ",
-      "test": "All text meets design system standards with all text meeting minimum font sizing, spacing and contrast requirements. ",
+      "implement": "Follow the design system standards.",
+      "test": "All text meets design system standards with all text meeting minimum font sizing, spacing and contrast requirements.",
       "required": "true"
     },
     {
       "story": "As a user I need the ability to complete tasks quickly making non-required steps optional.",
-      "implement": "Do not add in extra steps, allowing certain steps to be optional. ",
+      "implement": "Do not add in extra mandatory steps, allowing certain steps to be optional.",
       "test": "Try to complete the task with as few steps as possible.",
       "required": "true"
     },
@@ -112,7 +132,7 @@
     },
     {
       "story": "As a user, I want to confirm when deleting or removing items/data.",
-      "implement": "Add a prompt with an extra button to 'delete' an item. ",
+      "implement": "Add a prompt with an extra button to 'delete' an item.",
       "test": "Use the application and review when a button has the terms delete, archive or remove that a prompt appears.",
       "required": "true"
     },
@@ -126,7 +146,7 @@
   "Readability": [
     {
       "story": "As a user, I want all text to be displayed in a legible font and size.",
-      "implement": "Font size should be above 16px unless its small text.",
+      "implement": "Font size should be above 16px unless its small text (14px). Note: that with our scaling technique applied the font size may vary and fall under under 16px.",
       "test": "Right click on the text and inspect the element in the computed tab it will tell the font size.",
       "required": "true"
     },
@@ -138,7 +158,7 @@
     },
     {
       "story": "As a user, I expect Iconography to be used in a consistent manner.",
-      "implement": "Use icons that come from the designated icon set. In out cae font awesome.",
+      "implement": "Use icons that come from the designated icon set. In out case font awesome.",
       "test": "Check the designated icon set to see if it is part of it.",
       "required": "true"
     },

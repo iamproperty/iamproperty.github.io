@@ -71,7 +71,7 @@ const submit = ($event) => {
   Array.from(document.querySelectorAll('tr:has(input[type="checkbox"]) td[data-label="Story"]')).forEach((td) => {
   
     const row = td.closest('tr');
-    rows.push([td.innerHTML, row.querySelector('input[type="checkbox"]:checked') ? true : false])
+    rows.push([`"${td.innerHTML}"`, row.querySelector('input[type="checkbox"]:checked') ? true : false])
   });
 
 
@@ -100,7 +100,7 @@ onMounted(() => {
 </script>
 <template>
   <main class="integration-launch-list">
-    <h1>Integration launch list</h1>
+    <h1>Launch list</h1>
     <p class="lead">Our non-functional requirements can be used to test the readiness of an application. Designed to measure the usability and inclusiviness of web pages.</p>
 
     <label class="md-col-end-6 pb-5">
@@ -158,6 +158,50 @@ body:has(.integration-launch-list) {
 
 </style>
 <style lang="scss" scoped>
+
+@layer components {
+ 
+html table :is(th,td):last-child{
+  width: 1%;
+  padding-right: 0 !important;
+}
+ 
+}
+
+:is(th,td):empty {
+  background-color: red;
+}
+
+table :is(th,td):nth-child(2) {
+
+  display: none;
+}
+
+table:has(td:nth-child(2):not(:empty)) :is(th,td):nth-child(2) {
+
+  display: table-cell;
+}
+
+table :is(th,td):nth-child(3) {
+
+  display: none;
+}
+
+table:has(td:nth-child(3):not(:empty)) :is(th,td):nth-child(3) {
+
+  display: table-cell;
+}
+
+table :is(th,td):nth-child(4) {
+
+  display: none;
+}
+
+table:has(td:nth-child(4):not(:empty)) :is(th,td):nth-child(4) {
+
+  display: table-cell;
+}
+
 
 main:has(.progress__wrapper){
   padding-bottom: 0;
