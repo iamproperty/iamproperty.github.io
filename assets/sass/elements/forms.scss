@@ -1020,6 +1020,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 :is(iam-advanced-select, iam-search, .postcode-lookup) {
   position: relative;
   display: block;
+  max-width: var(--input-max-width);
 
   label {
     position: relative;
