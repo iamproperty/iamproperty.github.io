@@ -1,0 +1,224 @@
+@use '../_func.scss' as *;
+
+@use '../_grid' as *;
+@use '../elements/dialog' as *;
+@use '../elements/forms' as *;
+
+@use '../elements/type' as *;
+@use '../elements/buttons' as *;
+@use '../utilities/margins';
+@use '../utilities/paddings';
+@use '../utilities/colours.scss';
+@use '../utilities/visually-hidden.scss';
+
+@use '../utilities/font-awesome-iso-fallbacks.scss';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host {
+  
+  display: block!important;
+}
+
+
+
+#wrapper {
+
+
+}
+
+.fa-chevron-up {
+  --fa: "\f077";
+}
+
+.fa-chevron-down {
+  --fa: "\f078";
+}
+
+.fa-trash {
+  --fa: "\f1f8";
+}
+
+.fa-plus {
+  --fa: "\2b";
+}
+
+.fa-arrows-from-dotted-line {
+  --fa: "\e0a3";
+}
+
+[class*="fa-"]{
+
+  &:before {
+    content: var(--fa);
+    font-weight: 600;
+    font-family: "Font Awesome 6 Pro";
+  }
+}
+
+
+
+[commandfor="editBucketsDialog"] {
+  display: none;
+}
+:host([data-buckets]) [commandfor="editBucketsDialog"] {
+  display: block;
+}
+
+dialog {
+  width: 90%;
+  max-width: 60rem;
+  container-type: inline-size;
+}
+
+#buckets {
+  
+  display: block!important;
+}
+
+.bucket {
+  display: block;
+  min-height: 10rem;
+  background-color: blue;
+  margin-bottom: 2rem;
+  padding: 1rem;
+
+}
+
+#items {
+  
+  display: block!important;
+}
+
+#items [data-bucket] {
+  
+  display: block;
+
+  form {
+    --btns-width: 2.5rem;
+    --col-size: calc((100% - (var(--gap) * 11)) / 12);
+    column-gap: var(--gap);
+    grid-column: var(--col-start, col-1-start) / var(--col-end, col-12-end);
+    grid-template-columns: [content-start col-1-start] var(--col-size) [col-1-end col-2-start] var(--col-size) [col-2-end col-3-start] var(--col-size) [col-3-end col-4-start] var(--col-size) [col-4-end col-5-start] var(--col-size) [col-5-end col-6-start] var(--col-size) [col-6-end col-7-start] var(--col-size) [col-7-end col-8-start] var(--col-size) [col-8-end col-9-start] var(--col-size) [col-9-end col-10-start] var(--col-size) [col-10-end col-11-start] var(--col-size) [col-11-end col-12-start] var(--col-size) [col-12-end content-end];
+
+    padding-right: calc(var(--btns-width) + 0.5rem);
+    position: relative;
+
+    .btn__group {
+      position: absolute;
+      top: 0.25rem;
+      right: 0;
+      gap: 0;
+      width: var(--btns-width);
+      padding-top: 1.75rem;
+      margin: 0;
+
+      .btn:not(.fa-trash){
+        display: none;
+      }
+    }
+
+    &:not(:where(main)):has(>[class*=col-]) {
+      .btn__group {
+        left: 100%;
+        margin-left: 0.5rem;
+        right: auto;
+      }
+    }
+  }
+}
+
+:host([data-order]) #items [data-bucket] form {
+
+  --btns-width: 10rem;
+
+  .btn:not(.fa-trash) {
+    display: inline-block;
+  }
+}
+
+.bucket:empty {
+  display: block;
+  min-height: 10rem;
+  background-color: red;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+#wrapper {
+  container-type: inline-size;
+  
+  display: block;
+
+  .btn__group {
+    justify-content: flex-end;
+  }
+}
+
+// #region edit buckets
+
+.bucket--edit {
+
+  padding-right: 10.25rem;
+  position: relative;
+
+  .btn__group {
+    position: absolute;
+    top: 0.25rem;
+    right: 0;
+    gap: 0;
+    padding: 0;
+  }
+}
+
+.bucket--edit:not(:last-child) {
+  border-bottom: 1px solid var(--colour-border);
+  margin-bottom: 1rem;
+}
+
+
+.criteria {
+  display: flex;
+  gap: 1rem;
+  padding-right: 5.25rem;
+  position: relative;
+
+  .btn__group {
+    position: absolute;
+    top: 0.25rem;
+    right: 0;
+    gap: 0;
+    padding: 0;
+  }
+
+  label {
+    flex-grow: 1;
+  }
+  label:nth-child(2) {
+    flex-grow: 0;
+  }
+}
+
+.bucket--edit:not(.bucket--expanded) {
+  > label > span { // TODO add a selector if the input matches the only criteria item
+    display: none;
+  }
+  .criteria {
+    display: none;
+  }
+  .criteria label:nth-child(3):has(:disabled){
+    display: none;
+  }
+}
+
+.bucket--edit.bucket--expanded {
+
+  .btn__group .fa-arrows-from-dotted-line {
+    --fa: "\e0a6";
+  }
+}
+// #endregion
