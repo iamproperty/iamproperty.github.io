@@ -485,6 +485,17 @@ class iamAddressLookup extends HTMLElement {
       if (lookup?.hasAttribute('data-placeholder'))
         lookup.setAttribute('placeholder', lookup?.getAttribute('data-placeholder'));
 
+      // empty fields
+      Array.from(this.querySelectorAll('input, select')).forEach((input) => {
+        input.value = '';
+      });
+
+      lookup.value = "";
+
+      // uncheck box
+      if (this.shadowRoot.querySelector('[name="use"]'))
+          this.shadowRoot.querySelector('[name="use"]').checked = false;
+
       const updateEvent = new CustomEvent('switch-to-lookup');
       this.dispatchEvent(updateEvent);
 
@@ -631,7 +642,6 @@ class iamAddressLookup extends HTMLElement {
 
     switch (attrName) {
       case 'data-disabled': {
-      console.log(newVal);
         if (oldVal != newVal && newVal == 'disabled') {
           lookup?.setAttribute('disabled','disabled');
         }

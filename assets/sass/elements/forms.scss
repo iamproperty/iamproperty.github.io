@@ -1067,6 +1067,10 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     position: absolute;
     top: 100%;
   }
+
+  label[for="use"]:after {
+    top: var(--checkbox-inner-top, 0.5rem);
+  }
 }
 
 .was-validated :is(iam-advanced-select, iam-search, postcode-lookup) label:has(:is(input:not([type='radio']):not([type='checkbox']), select)),
