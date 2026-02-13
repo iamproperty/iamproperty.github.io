@@ -1200,11 +1200,13 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   border-radius: 0.5rem;
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
   width: 100% !important;
-  max-width: var(--menu-item-width, 50rem) !important;
+  //max-width: var(--menu-item-width, 50rem) !important;
   z-index: 100;
   display: none;
   max-height: 25rem;
   overflow-y: auto;
+  
+  max-width: var(--input-max-width) !important;
 
   > datalist {
     border: none!important;
