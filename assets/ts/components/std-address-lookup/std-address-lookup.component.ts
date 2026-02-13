@@ -1516,6 +1516,8 @@ counties.forEach((county) => {
 
 
 
+
+
 // Data layer Web component created
 declare global {
   interface Window {
@@ -1689,9 +1691,13 @@ class iamSTDAddressLookup extends HTMLElement {
       Array.from(addressComponent.querySelectorAll('[data-required]')).forEach((input) => {
         input.removeAttribute('required');
       });
-      Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
-        input.setAttribute('required', 'true');
-      });
+
+      if(overseasFields){
+          
+        Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
+          input.setAttribute('required', 'true');
+        });
+      }
     }
 
     overseasToggle?.addEventListener('click', () => {
@@ -1700,6 +1706,7 @@ class iamSTDAddressLookup extends HTMLElement {
         openOverseas();
       }
     });
+
 
     overseasToggleInline?.addEventListener('click', () => {
 
@@ -1712,9 +1719,12 @@ class iamSTDAddressLookup extends HTMLElement {
       this.classList.remove('show-overseas');
 
 
-      Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
-        input.setAttribute('required', 'true');
-      });
+      if(overseasFields) {
+        Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
+          input.setAttribute('required', 'true');
+        });        
+      }
+
     });
 
     languageToggle?.addEventListener('click', () => {
