@@ -7,6 +7,12 @@
 
 @use '../utilities/margins.scss' as *;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 .bg-light {
   background-color: var(--colour-light);
 }
