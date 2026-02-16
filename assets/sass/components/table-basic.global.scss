@@ -93,6 +93,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
           --fa: '\f055'!important;
           font-family: 'Font Awesome 6 Pro';
           display: block!important;
+
           font-weight: 300 !important;
           font-size: rem(28);
           line-height: var(--compact-size) !important;
@@ -475,6 +476,33 @@ table {
     }
   }
 
+  td:not(.selectrow) input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
+    
+    &:before,
+    &:after {
+      top: 0 !important;
+      left: 0.25rem !important;
+      --border-radius: 0.25rem;
+    }
+  }
+
+  td:not(.selectrow):has(label:not(.radio--tick) input:is([type='radio'], [type='checkbox'])) + td {
+
+    border-top: 0;
+  }
+  td:not(.selectrow) label:not(.radio--tick):has(input:is([type='radio'], [type='checkbox'])) {
+    
+    padding-inline: 0;
+    margin-right: 0;
+
+    &:before,
+    &:after {
+      top: 0 !important;
+      left: 0.25rem !important;
+      --border-radius: 0.25rem;
+    }
+  }
+
   &:has([type='checkbox']:checked) table{
     overflow: hidden;
   }
@@ -536,5 +564,93 @@ table {
     }
   }
 }
+}
+// #endregion
+
+
+// #region Highlighted row
+:is(#{$selector}):not(.table--fullwidth) {
+
+
+  tr:has(td label input:is([type="checkbox"])):has(+ .tr--highlight) td {
+
+    padding-bottom: 1.5rem;
+  }
+
+  .tr--highlight {
+    --row-bg: var(--colour-success);
+    --padding-block: 0.5rem;
+
+    td:has(i) {
+      color: var(--colour-primary-theme);
+      padding-left: 0.5rem;
+      font-style: italic;
+      position: relative;
+      padding-left: 2.5rem;
+      padding-right: 2rem;
+      padding-block: var(--padding-block);
+
+      i {
+        position: absolute;
+        top: 0.5rem;
+        left: 1rem;
+      }
+    }
+  }
+
+  tr:has(td label input:is([type="checkbox"])) + .tr--highlight td:has(i){
+
+    padding-left: 4.5rem;
+    
+      i {
+        left: 3rem;
+      }
+  }
+
+
+  tr:has(+ .tr--highlight) {
+    border-bottom: 0;
+  }
+
+  @container (width < 23.4375em) {
+    .tr--highlight {
+      display: none;
+    }
+    tr[data-highlight]:before {
+
+      font-family: 'Font Awesome 6 Pro';
+      content: '\f005';
+      font-weight: bold;
+      position: absolute;
+      left: 1rem;
+      z-index: 99;
+      top: anchor(--my-anchor top);
+      left: anchor(--my-anchor left);
+      margin-top: 1rem;
+      margin-left: 2rem;
+      position-anchor: --my-anchor;
+      color: var(--colour-primary-theme);
+    }
+    tr[data-highlight]:after {
+      content: attr(data-highlight);
+      background: var(--colour-success);
+      color: var(--colour-primary-theme);
+      display: block;
+      width: calc(100% + 4rem);
+      margin-top: 0.5rem;
+      margin-inline: -2rem;
+      padding-inline: 2rem;
+      margin-bottom: -2rem;
+      padding-block: 1rem;
+
+      border-bottom-left-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+
+      font-style: italic;
+      padding-left: 3.5rem;
+
+      anchor-name: --my-anchor;
+    }
+  }
 }
 // #endregion
