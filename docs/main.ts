@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import routes from './routes';
 import audit from '../audit.json';
 import benchmark from '../benchmark.json';
+import nfrs from '../nfrs-data.json';
 
 if (import.meta.env.DEV) document.body.setAttribute('data-ext-location', '');
 
@@ -51,6 +52,7 @@ router.afterEach((to, from) => {
 export const shared = {
   audit: audit,
   benchmark: benchmark,
+  nfrs: nfrs
 };
 
 let template =

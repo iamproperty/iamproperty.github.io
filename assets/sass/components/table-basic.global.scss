@@ -6,6 +6,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
 // #region Basic table stuff
 
+@layer components {
 :is(#{$selector}) {
   --hover-background: var(--colour-light);
   --row-bg: var(--colour-canvas-2);
@@ -89,17 +90,21 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
         --compact-size: 2rem;
 
         &:before {
-          display: block !important;
+          --fa: '\f055'!important;
           font-family: 'Font Awesome 6 Pro';
-          content: '\f055' !important;
+          display: block!important;
+
           font-weight: 300 !important;
           font-size: rem(28);
           line-height: var(--compact-size) !important;
         }
 
         &[aria-expanded] {
+            --fa: '\f056'!important;
+        }
+        &[aria-expanded] {
           &:before {
-            content: '\f056';
+            --fa: '\f056'!important;
             font-weight: 900 !important;
           }
         }
@@ -558,6 +563,7 @@ table {
       }
     }
   }
+}
 }
 // #endregion
 
