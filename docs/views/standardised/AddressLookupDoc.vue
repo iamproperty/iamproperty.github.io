@@ -450,6 +450,13 @@
           </thead>
           <tbody>
             <tr>
+              <th>data-name</th>
+              <td></td>
+              <td>String</td>
+              <td>No</td>
+              <td>Update the names of the input fields to have a prepended groupding name. So setting the data-name to 'temporary_address' would then set the 'postcode' field to become 'temporary_address[postcode]'.</td>
+            </tr>
+            <tr>
               <th>data-allow-manual</th>
               <td></td>
               <td>String</td>

@@ -43,7 +43,7 @@
     <h2>Date Picker</h2>
 
     <form class="was-validated visualtest">
-      <label data-error="Only weekday dates upto 7 days in the future are accepted">
+      <label class="label--sm" data-error="Only weekday dates upto 7 days in the future are accepted">
         Date
         <span
           ><input type="date" data-start="1" data-period="7" data-allowed-days="1,2,3,4,5" /><span

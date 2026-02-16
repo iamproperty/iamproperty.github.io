@@ -10,6 +10,7 @@
         <li><a href="/examples/submit-table">Submit Tables</a></li>
         <li><a href="/examples/ajax-table">Ajax Tables</a></li>
         <li><a href="/examples/full-table">full Tables</a></li>
+        <li><a href="/examples/table-highlight">Table with a highlighted row</a></li>
       </ul>
       <h2 id="tables">Actionbars</h2>
       <ul>

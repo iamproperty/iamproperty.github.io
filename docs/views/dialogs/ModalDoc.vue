@@ -262,6 +262,12 @@
           Continually will permanently delete this property. Are <br class="d-none d-sm-block" />you sure you’d like to
           continue?
         </p>
+        <a href="/delete"
+            slot="agreed-button"
+            class="btn btn-primary"
+        >
+            Add client
+      </a>
       </dialog>
     </Modal>
 
