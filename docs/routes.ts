@@ -1184,6 +1184,10 @@ const routes = [
         component: () => import('./views/examples/AjaxTableDoc.vue'),
       },
       {
+        path: 'table-highlight',
+        component: () => import('./views/examples/HighlightRow.vue'),
+      },
+      {
         path: 'actionbar-table',
         component: () => import('./views/examples/ActionbarTable.vue'),
       },
