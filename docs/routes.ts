@@ -1229,6 +1229,11 @@ const routes = [
         path: 'stats-carousel',
         component: () => import('./views/examples/StatCarousel.vue'),
       },
+      {
+        path: 'address',
+        name: 'Address',
+        component: () => import('./views/examples/address_finder.vue'),
+      },
     ],
   },
   {
@@ -1618,30 +1623,6 @@ const routes = [
         component: () => import('./views/standalone/pc/add-onward.vue'),
       },
 
-
-    ],
-  },
-  {
-    /* Prototype */ path: '/prototype',
-    name: 'Prototype',
-    meta: {
-      title: 'Prototypes | iamkey',
-    },
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "prototypes" */ './views/Prototype.vue'),
-    children: [
-      {
-        name: 'prototypes-index',
-        path: '',
-        component: () => import('./views/prototype/Index.vue'),
-      },
-      {
-        path: 'address',
-        name: 'Address',
-        component: () => import('./views/prototype/address_finder.vue'),
-      },
     ],
   },
   {

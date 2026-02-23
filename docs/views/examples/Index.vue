@@ -13,18 +13,22 @@
         <li><a href="/examples/table-highlight">Table with a highlighted row</a></li>
       </ul>
       <h2 id="tables">Actionbars</h2>
-      <ul>
+      <ul class="mb-5">
         <li><a href="/examples/actionbar-table">Actionbar in table</a></li>
         <li><a href="/examples/actionbar-top">Actionbar at top</a></li>
         <li><a href="/examples/actionbar-panel">Actionbar in a panel</a></li>
       </ul>
       <h2 id="tables">Pagination</h2>
-      <ul>
+      <ul class="mb-5">
         <li><a href="/examples/pagination">Pagination</a></li>
       </ul>
       <h2 id="charts">Charts</h2>
-      <ul>
+      <ul class="mb-5">
         <li><a href="/examples/barcharts">Bar Charts</a></li>
+      </ul>
+      <h2 id="address">Address lookup</h2>
+      <ul class="mb-5">
+        <li><a href="/examples/address">STD Address lookup</a></li>
       </ul>
     </div>
     <div class="container">
