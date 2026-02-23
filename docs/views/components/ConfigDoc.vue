@@ -10,7 +10,7 @@
     <DSHeader :image="headerImg" section="components">
       <h1>Config (Beta)</h1>
     </DSHeader>
-<!--
+
     <h2>Basic example</h2>
     <div class="admin-panel">
       <h2 class="bg-light">Fee bands</h2>
@@ -33,7 +33,7 @@
         </form>
       </Config>
     </div>
--->
+<!--
     <h2 class="pt-5">Fees example</h2>
     <Config data-import="/config2.json" data-name="config" data-buckets="type,partner,assigned" data-validate-add data-order>
 
@@ -62,5 +62,6 @@
       </form>
     </Config>
 
+  -->
   </main>
 </template>
