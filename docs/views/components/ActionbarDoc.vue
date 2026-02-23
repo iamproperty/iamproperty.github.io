@@ -135,6 +135,13 @@
           </div>
           <p>Search bar expanded</p>
         </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          
+          <label class="tag tag--toggle" slot="filters"><input type="radio" name="toggle-tag" value="true" checked>Live (5)</label>
+          <label class="tag tag--toggle" slot="filters"><input type="radio" name="toggle-tag" value="true" >Complete (5)</label>
+          
+          <p>Toggle tags</p>
+        </div>
       </div>
       <h4>Overflow menu options</h4>
 
@@ -862,7 +869,10 @@
     <h3>Filter on save</h3>
     <div class="container bg-light visualtest mb-5">
       <Table class="table--fullwidth" data-nosubmit>
-        <Actionbar slot="before" data-search="" data-filter-columns-save data-hide-col1></Actionbar>
+        <Actionbar slot="before" data-search="" data-filter-columns-save data-hide-col1>
+          <label class="tag tag--toggle" slot="filters"><input type="radio" name="tag" value="true">Default</label>
+          <label class="tag tag--toggle" slot="filters"><input type="radio" name="tag" value="true" checked>Selected</label>
+        </Actionbar>
 
         <table>
           <thead>

@@ -105,3 +105,11 @@ iam-actionbar:has(.selectall input:checked) {
   --selectall-actionbar-opactiy: 0;
   --selectall-action-pe: none;
 }
+
+// #region filters 
+
+iam-actionbar [slot="filters"]:not(:has(+[slot="filters"])) {
+  margin-inline-end: auto!important;
+}
+
+// #endregion
