@@ -249,6 +249,7 @@ class iamActionbar extends HTMLElement {
       if (event && event.target instanceof HTMLElement && event.target.closest('button[data-search]')) {
         searchBar.classList.toggle('show');
         searchBtn.toggleAttribute('aria-expanded');
+        searchInput.focus();
       }
     });
 
