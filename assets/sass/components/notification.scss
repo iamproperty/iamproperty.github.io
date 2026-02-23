@@ -33,22 +33,12 @@
 }
 
 
-:host(.colour-warning),
-.iam-notification.colour-warning {
-  background: var(--colour-notification-warning-bg);
+:host([class*="colour-"]) {
+  
+  --bg-colour: color-mix(in oklab, var(--colour), #ffffff 80%) !important;
+  background: light-dark(var(--bg-colour),var(--colour-canvas-2));
 }
 
-  :host(.colour-danger),
-  .iam-notification.colour-danger {
-    
-  background: var(--colour-notification-danger-bg);
-  }
-
-  :host(.colour-success),
-  .iam-notification.colour-success {
-    
-  background: var(--colour-notification-success-bg);
-  }
 
 :host(.bg-white),
 .iam-notification.bg-white {
