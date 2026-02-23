@@ -1,0 +1,35 @@
+{
+  "meta": {
+    
+  },
+  "data": [
+    {
+      "type": "type",
+      "id": "1",
+      "attributes": {
+        "name": "type 1"
+      }
+    },
+    {
+      "type": "type",
+      "id": "2",
+      "attributes": {
+        "name": "type 2"
+      }
+    },
+    {
+      "type": "type",
+      "id": "3",
+      "attributes": {
+        "name": "type 3"
+      }
+    },
+    {
+      "type": "type",
+      "id": "4",
+      "attributes": {
+        "name": "type 4"
+      }
+    }
+  ]
+}

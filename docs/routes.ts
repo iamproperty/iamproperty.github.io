@@ -739,6 +739,14 @@ const routes = [
           title: 'Milestone Group | Components | iamkey',
         },
         component: () => import('./views/components/MilestoneGroupDoc.vue'),
+      },
+      {
+        path: 'config',
+        name: 'Config (Beta)',
+        meta: {
+          title: 'Config | Components | iamkey',
+        },
+        component: () => import('./views/components/ConfigDoc.vue'),
       }
     ],
   },
