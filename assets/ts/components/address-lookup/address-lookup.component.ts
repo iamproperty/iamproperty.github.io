@@ -315,12 +315,27 @@ class iamAddressLookup extends HTMLElement {
             addresses.forEach((address) => {
               // Deal with agent platform response
               if (typeof address.attributes == 'object' && address.attributes.label) {
+                const attributes = {};
+
                 if (address.id) address.attributes.id = address.id;
 
                 if (address.relationships)
                   address.attributes = Object.assign(address.attributes, address.relationships);
 
-                const values = JSON.stringify(address.attributes);
+                Object.keys(address.attributes).forEach((key) => {
+
+                  const attribute = address.attributes[key];
+
+                  if(typeof attribute == 'object'){
+                    attributes[key] = attribute?.id;
+                  }
+                  else {
+                    attributes[key] = attribute;
+                  }
+                });
+
+                const values = JSON.stringify(attributes);
+
                 listString += `<option data-values='${values}' >${address.attributes.label}</option>`;
               } else if (typeof address.value == 'object') {
                 if (address.id) address.attributes.id = address.id;
