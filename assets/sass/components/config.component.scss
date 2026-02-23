@@ -1,8 +1,9 @@
 @use '../_func.scss' as *;
 
 @use '../_grid' as *;
-@use '../elements/dialog' as *;
+
 @use '../elements/forms' as *;
+@use '../elements/admin-panel' as *;
 
 @use '../elements/type' as *;
 @use '../elements/buttons' as *;
@@ -20,17 +21,10 @@
 }
 
 :host {
-  
   display: block!important;
 }
 
-
-
-#wrapper {
-
-
-}
-
+// #region enable icons
 .fa-chevron-up {
   --fa: "\f077";
 }
@@ -47,8 +41,13 @@
   --fa: "\2b";
 }
 
-.fa-arrows-from-dotted-line {
-  --fa: "\e0a3";
+.fa-pen-to-square {
+  --fa: "\f044";
+}
+
+.fa-floppy-disk {
+  
+  --fa: "\f0c7";
 }
 
 [class*="fa-"]{
@@ -59,22 +58,36 @@
     font-family: "Font Awesome 6 Pro";
   }
 }
+// #endregion
 
+// #region basic structure
 
-
-[commandfor="editBucketsDialog"] {
-  display: none;
-}
-:host([data-buckets]) [commandfor="editBucketsDialog"] {
-  display: block;
-}
-
-dialog {
-  width: 90%;
-  max-width: 60rem;
+#wrapper {
   container-type: inline-size;
-}
+  display: flex;
+  flex-direction: column;
 
+  .admin-panel {
+    order: 1;
+    justify-content: flex-end;
+    display: flex;
+    max-width: fit-content;
+    gap: 0.75rem;
+    padding: 1rem;
+
+    > * {
+      margin: 0;
+    }
+  }
+
+  #items {
+    order: 2;
+    display: block!important;
+  }
+}
+// #endregion
+
+// #region buckets
 #buckets {
   
   display: block!important;
@@ -86,13 +99,34 @@ dialog {
   background-color: blue;
   margin-bottom: 2rem;
   padding: 1rem;
-
 }
 
-#items {
-  
-  display: block!important;
+.bucket:empty {
+  display: block;
+  min-height: 10rem;
+  background-color: red;
+  margin-bottom: 2rem;
+  padding: 1rem;
 }
+
+.bucket__wrapper {
+
+  padding-right: 10.25rem;
+  position: relative;
+  border-bottom: 1px solid var(--colour-border);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+
+  > .btn__group {
+    position: absolute;
+    top: 0.25rem;
+    right: 0;
+    gap: 0;
+    padding: 0;
+  }
+}
+// #endregion
+
 
 #items [data-bucket] {
   
@@ -141,46 +175,7 @@ dialog {
   }
 }
 
-.bucket:empty {
-  display: block;
-  min-height: 10rem;
-  background-color: red;
-  margin-bottom: 2rem;
-  padding: 1rem;
-}
-
-#wrapper {
-  container-type: inline-size;
-  
-  display: block;
-
-  .btn__group {
-    justify-content: flex-end;
-  }
-}
-
-// #region edit buckets
-
-.bucket--edit {
-
-  padding-right: 10.25rem;
-  position: relative;
-
-  .btn__group {
-    position: absolute;
-    top: 0.25rem;
-    right: 0;
-    gap: 0;
-    padding: 0;
-  }
-}
-
-.bucket--edit:not(:last-child) {
-  border-bottom: 1px solid var(--colour-border);
-  margin-bottom: 1rem;
-}
-
-
+// #region criteria
 .criteria {
   display: flex;
   gap: 1rem;
@@ -202,8 +197,10 @@ dialog {
     flex-grow: 0;
   }
 }
+// #endregion
 
-.bucket--edit:not(.bucket--expanded) {
+// #region expand criteria
+.bucket__wrapper:not(.bucket--expanded) {
   > label > span { // TODO add a selector if the input matches the only criteria item
     display: none;
   }
@@ -215,10 +212,23 @@ dialog {
   }
 }
 
-.bucket--edit.bucket--expanded {
+.bucket__wrapper.bucket--expanded {
 
-  .btn__group .fa-arrows-from-dotted-line {
+  .btn__group .fa-pen-to-square {
     --fa: "\e0a6";
   }
 }
+// #endregion
+
+// #region Disable top and bottom buttons
+
+#buckets .bucket__wrapper:first-child .btn__group [data-direction="up"],
+#buckets .bucket__wrapper:last-child .btn__group [data-direction="down"],
+[data-bucket] form:first-child .btn__group [data-direction="up"],
+[data-bucket] form:last-child .btn__group [data-direction="down"] {
+
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 // #endregion
