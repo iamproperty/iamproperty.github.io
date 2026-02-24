@@ -1,6 +1,6 @@
 import iamAddressLookup from '../address-lookup/address-lookup.component';
 
-const countries = [
+export const countries = [
   {
     "id": "urn:als:country:AF",
     "country_name": "Afghanistan"
@@ -999,7 +999,7 @@ const countries = [
   }
 ];
 
-const counties = [
+export const counties = [
     {
         "id": "urn:als:county:ekHuOPAhk",
         "county": "Monmouthshire"
@@ -1500,12 +1500,54 @@ const counties = [
         "id": "urn:als:county:rYAgcPlXZ",
         "county": "Middlesex"
     }
-]
+];
+
+export const regions = [
+  {
+    "id": "urn:als:region:qo7jMNaA4",
+    "region": "England"
+  },
+  {
+    "id": "urn:als:region:JPBkFjL6I",
+    "region": "Scotland"
+  },
+  {
+    "id": "urn:als:region:3lqe2D3qO",
+    "region": "Wales"
+  },
+  {
+    "id": "urn:als:region:Tm5pOBfK9",
+    "region": "Northern Ireland"
+  },
+  {
+    "id": "urn:als:region:ZwIRAnNJo",
+    "region": "Channel Islands"
+  },
+  {
+    "id": "urn:als:region:8CIOi1khw",
+    "region": "Jersey"
+  },
+  {
+    "id": "urn:als:region:qHdx7tNtL",
+    "region": "Guernsey"
+  },
+  {
+    "id": "urn:als:region:DH6LU70lY",
+    "region": "Isle of Man"
+  }
+];
+
 
 let countriesString = '';
 
 countries.forEach((country) => {
   countriesString += `<option value="${country['id']}" data-value="${country['country_name']}">${country['country_name']}</option>`;
+});
+
+let regionsString = '';
+
+regions.forEach((region) => {
+  regionsString += `<option value="${region['id']}" data-value="${region['region']}">${region['region']}</option>`;
 });
 
 let countiesString = '';
@@ -1611,14 +1653,7 @@ class iamSTDAddressLookup extends HTMLElement {
     <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (!this.hasAttribute('data-show-required') && !this.hasAttribute('data-county-required') ? ' (optional)' : '')} 
       <select name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[region]` : 'region' }" data-readonly ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
         <option value=""></option>
-        <option value="urn:als:region:qo7jMNaA4" data-value="England">England</option>
-        <option value="urn:als:region:JPBkFjL6I" data-value="Scotland">Scotland</option>
-        <option value="urn:als:region:3lqe2D3qO" data-value="Wales">Wales</option>
-        <option value="urn:als:region:Tm5pOBfK9" data-value="Northern Ireland">Northern Ireland</option>
-        <option value="urn:als:region:ZwIRAnNJo" data-value="Channel Islands">Channel Islands</option>
-        <option value="urn:als:region:8CIOi1khw" data-value="Jersey">Jersey</option>
-        <option value="urn:als:region:qHdx7tNtL" data-value="Guernsey">Guernsey</option>
-        <option value="urn:als:region:DH6LU70lY" data-value="Isle of Man">Isle of Man</option>
+        ${regionsString}
       </select>
     </label>
 

@@ -5,6 +5,7 @@
   import Notification from '@/components/Notification/Notification.vue';
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
+  
 
   let urlParams = new URLSearchParams(window.location.search);
 </script>
@@ -510,7 +511,166 @@
 
       </template>
 
-        <template #dispatched-events>
+      <template #data>
+        <h4>
+          Form fields
+        </h4>
+        <p class="note mb-5"><strong>Note:</strong> If a <code>data-name</code> attribute is set on the component the the input name are changed to be <strong>data_name[input_name]</strong>.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Label</th>
+              <th>Input name</th>
+              <th>Input type</th>
+              <th>Validation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Flat number</th>
+              <td>sub_building_name</td>
+              <td>text</td>
+              <td>As least one field required*</td>
+            </tr>
+            <tr>
+              <th>Building name</th>
+              <td>building_name</td>
+              <td>text</td>
+              <td>As least one field required*, maxlength="50"</td>
+            </tr>
+            <tr>
+              <th>House Number</th>
+              <td>building_number</td>
+              <td>text</td>
+              <td>As least one field required*, maxlength="50"</td>
+            </tr>
+            <tr>
+              <th>Street 1</th>
+              <td>dependent_thoroughfare</td>
+              <td>text</td>
+              <td>As least one field required*, maxlength="81"</td>
+            </tr>
+            <tr>
+              <th>Street 2</th>
+              <td>thoroughfare</td>
+              <td>text</td>
+              <td>As least one field required*, maxlength="81"</td>
+            </tr>
+            <tr>
+              <th>Area</th>
+              <td>dependent_locality</td>
+              <td>text</td>
+              <td>maxlength="35"</td>
+            </tr>
+            <tr>
+              <th>Village</th>
+              <td>locality</td>
+              <td>text</td>
+              <td>maxlength="35"</td>
+            </tr>
+            <tr>
+              <th>Town / City</th>
+              <td>post_town</td>
+              <td>text</td>
+              <td>maxlength="30"</td>
+            </tr>
+            <tr>
+              <th>County</th>
+              <td>region</td>
+              <td>text</td>
+              <td>Required if 'data-county-required' attribute set on component</td>
+            </tr>
+            <tr>
+              <th>Postcode</th>
+              <td>postcode</td>
+              <td>text (lookup)</td>
+              <td>Required, maxlength="8",<br/><br/> Regex: <code>/^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/gmi</code></td>
+            </tr>
+            <tr>
+              <th>Country</th>
+              <td>region</td>
+              <td>select</td>
+              <td>Required if 'data-country-required' attribute set on component,<br/><br/> Example of values in dropdown: <code>urn:als:region:qo7jMNaA4</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>* As least one field of the following field is required: Flat number, Building name, House Number, Street 1, Street 2</p>
+
+        <h4>
+          Overseas form fields
+        </h4>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Label</th>
+              <th>Input name</th>
+              <th>Input type</th>
+              <th>Validation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Flat number</th>
+              <td>overseas[sub_building_name]</td>
+              <td>text</td>
+              <td>As least one field required*</td>
+            </tr>
+            <tr>
+              <th>Building name</th>
+              <td>overseas[building_name]</td>
+              <td>text</td>
+              <td>As least one field required*, maxlength="50"</td>
+            </tr>
+            <tr>
+              <th>House Number</th>
+              <td>overseas[building_number]</td>
+              <td>text</td>
+              <td>As least one field required*, maxlength="50"</td>
+            </tr>
+            <tr>
+              <th>Street name</th>
+              <td>overseas[thoroughfare]</td>
+              <td>text</td>
+              <td>As least one field required*, maxlength="81"</td>
+            </tr>
+            <tr>
+              <th>Locality (Main locality, such as the village, suburb, or district)</th>
+              <td>overseas[dependent_locality]</td>
+              <td>text</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Town / City</th>
+              <td>overseas[post_town]</td>
+              <td>text</td>
+              <td>maxlength="30"</td>
+            </tr>
+            <tr>
+              <th>State / Province / Region</th>
+              <td>overseas[double_dependent_locality]</td>
+              <td>text</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Postcode / ZIP code</th>
+              <td>overseas[zip_code]</td>
+              <td>text</td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Country</th>
+              <td>overseas[country_code]</td>
+              <td>select</td>
+              <td>Required,<br/><br/> Example of values in dropdown: <code>urn:als:country:GB</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </template>
+
+      <template #dispatched-events>
         <table>
           <thead>
             <tr>
@@ -931,6 +1091,11 @@ Then I can see a link to the Royal Mail Postcode Lookup page at the bottom of th
         <!-- #endregion -->
       </template>
 
+      <template #examples>
+        <ul>
+          <li><a href="/examples/address">STD Address lookup</a></li>
+        </ul>
+      </template>
 
     </Integration>
     <Versions pdf="/pdfs/address_finder_standardised.pdf">
