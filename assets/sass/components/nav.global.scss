@@ -289,102 +289,102 @@ iam-nav details {
 // #endregion
 
 // #region mobile and tablet mega menu
-
-@mixin mobDetails() {
-
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  padding-inline: 1.5rem;
-  width: auto;
-  position: relative;
-
-  summary {
-    background-color: var(--colour-canvas-2);
-
-    /*
-    @container style(--theme: dark) {
-      background-color: var(--colour-canvas-2);
-    }
-      */
-    display: block;
-    border: none;
-    color: var(--colour-link);
-    margin: 0;
+iam-nav details {
+  @container style(--mobDetails) {
 
     margin-left: -1.5rem;
     margin-right: -1.5rem;
-    padding: 1.5rem 4rem 1.5rem 1.5rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    min-height: 1.5rem;
+    padding-inline: 1.5rem;
+    width: auto;
     position: relative;
-    font-weight: normal;
 
-    &:after {
-      content: '\f055';
+    summary {
+      background-color: var(--colour-canvas-2);
+
+      /*
+      @container style(--theme: dark) {
+        background-color: var(--colour-canvas-2);
+      }
+        */
       display: block;
-      font-size: 1.5rem;
-      font-weight: 300;
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      font-family: 'Font Awesome 6 Pro';
-      line-height: 1em;
+      border: none;
+      color: var(--colour-link);
+      margin: 0;
+
+      margin-left: -1.5rem;
+      margin-right: -1.5rem;
+      padding: 1.5rem 4rem 1.5rem 1.5rem;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      min-height: 1.5rem;
+      position: relative;
+      font-weight: normal;
+
+      &:after {
+        content: '\f055';
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 300;
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        font-family: 'Font Awesome 6 Pro';
+        line-height: 1em;
+      }
     }
-  }
 
-  &[open] > summary:after {
-    content: '\f056';
-    font-weight: bold;
-  }
+    &[open] > summary:after {
+      content: '\f056';
+      font-weight: bold;
+    }
 
-  a {
-    text-decoration: none;
-    display: block;
-    border: none;
-    color: var(--colour-link);
-    margin: 0;
-    margin-left: 3rem;
-    padding: 1.5rem 0 1.5rem 0;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    min-height: 1.5rem;
-    position: relative;
-    font-weight: normal;
+    a {
+      text-decoration: none;
+      display: block;
+      border: none;
+      color: var(--colour-link);
+      margin: 0;
+      margin-left: 3rem;
+      padding: 1.5rem 0 1.5rem 0;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      min-height: 1.5rem;
+      position: relative;
+      font-weight: normal;
+
+      &:after {
+        background: var(--colour-border) !important;
+        top: calc(100% - 2px) !important;
+        width: 100% !important;
+      }
+    }
+
+    // Hide cards
+    a:has(iam-card) {
+      display: none !important;
+    }
+
+    > div a:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    > div a:last-child:after {
+      display: none;
+    }
 
     &:after {
-      background: var(--colour-border) !important;
-      top: calc(100% - 2px) !important;
-      width: 100% !important;
+      content: '';
+      position: absolute;
+      top: calc(100% - 2px);
+      left: 1.5rem;
+      height: 2px;
+      width: calc(100% - 3rem);
+      display: block;
+      height: 2px;
+      background-color: var(--colour-border) !important;
     }
-  }
-
-  // Hide cards
-  a:has(iam-card) {
-    display: none !important;
-  }
-
-  > div a:last-child {
-    margin-bottom: 0 !important;
-  }
-
-  > div a:last-child:after {
-    display: none;
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: calc(100% - 2px);
-    left: 1.5rem;
-    height: 2px;
-    width: calc(100% - 3rem);
-    display: block;
-    height: 2px;
-    background-color: var(--colour-border) !important;
   }
 }
-
 @media screen and (max-width: 62em) {
 
   iam-nav details {
@@ -392,7 +392,7 @@ iam-nav details {
     background-color: #eeeeee;
   }
   iam-nav details {
-    @include mobDetails();
+    --mobDetails: 'true';
 
     // Sub details
     details {
@@ -440,28 +440,30 @@ iam-nav details {
 // #endregion
 
 // #region tablet mega menu tweaks
+iam-nav details {
 
-@mixin tabletDetails() {
-  padding-right: 2.5rem;
-  margin-right: -2.5rem;
-
-  &:after {
-    width: calc(100% - 4rem);
-  }
-
-  summary {
+  @container style(--tabletDetails) {
     padding-right: 2.5rem;
     margin-right: -2.5rem;
 
     &:after {
-      right: 2.5rem;
+      width: calc(100% - 4rem);
+    }
+
+    summary {
+      padding-right: 2.5rem;
+      margin-right: -2.5rem;
+
+      &:after {
+        right: 2.5rem;
+      }
     }
   }
 }
 
 @media screen and (max-width: 62em) and (min-width: 36em) {
   iam-nav details {
-    @include tabletDetails();
+    --tabletDetails: 'true';
   }
 
   iam-nav details details[open] + details:before {
@@ -472,8 +474,8 @@ iam-nav details {
 
 @media screen and (min-width: 62em) {
   iam-nav .nav--menu details {
-    @include mobDetails();
-    @include tabletDetails();
+    --mobDetails: 'true';
+    --tabletDetails: 'true';
   }
 }
 
