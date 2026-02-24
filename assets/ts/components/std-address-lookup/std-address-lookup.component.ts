@@ -1694,7 +1694,6 @@ class iamSTDAddressLookup extends HTMLElement {
       <label>Country <select name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][country_code]` : 'overseas[country_code]' }" data-overseas-required>
         <option value=""></option>
         ${countriesString}
-        <option value="urn:als:country:ndjIqa72" data-value="Poland">Poland</option>
       </select></label>
     </fieldset>
 
