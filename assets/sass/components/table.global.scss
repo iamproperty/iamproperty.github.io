@@ -181,42 +181,17 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     display: table-cell;
   }
 
+  
   &.table--fullwidth {
-    [data-expand-button] {
-      margin: 0.25rem 0 0 0;
-
-      &:not(:hover, :focus) {
-        background-color: transparent;
-        border-color: transparent;
-      }
-
-      &:before {
-        font-family: 'Font Awesome 6 Pro';
-        content: '\f078';
-        font-weight: 500;
-      }
-
-      &[aria-expanded] {
-        &:before {
-          content: '\f077';
-        }
-      }
-    }
-
-    tr:not(:has(p)) [data-expand-button] {
-      display: none;
-    }
-
-    tr:not([data-view='full']) td p {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      min-width: 10rem;
-    }
+    --expand: 'true';
   }
 
   @container (width > 23.4375em) {
+    --expand: 'true';
+  }
+
+  @container style(--expand) {
+
     [data-expand-button] {
       margin: 0.25rem 0 0 0;
 
@@ -347,41 +322,42 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
 // #region sort by column header
 
-
-@mixin column-sort {
-  th[data-sort] {
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-    background-position: calc(100% - 0.5rem) 50%;
-    padding-top: 0.75rem;
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--colour-light);
-      background-image: var(--icon-sort);
-    }
-  }
-
-  &:has(th[data-sort]) :is(th, td) {
-    padding-left: 0.25rem !important;
-  }
-
-  th[data-sort][data-order-by='asc'] {
-    background-image: var(--icon-sort-asc);
-  }
-  th[data-sort][data-order-by='desc'] {
-    background-image: var(--icon-sort-desc);
-  }
-}
-
 :is(#{$selector}) {
+
   &.table--fullwidth {
-    @include column-sort;
+    --sort: 'true';
   }
 
   @container (width >= 32em) {
-    @include column-sort;
+    --sort: 'true';
   }
+
+  @container style(--sort) {
+    th[data-sort] {
+      background-repeat: no-repeat;
+      background-size: 1rem 1rem;
+      background-position: calc(100% - 0.5rem) 50%;
+      padding-top: 0.75rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--colour-light);
+        background-image: var(--icon-sort);
+      }
+    }
+
+    &:has(th[data-sort]) :is(th, td) {
+      padding-left: 0.25rem !important;
+    }
+
+    th[data-sort][data-order-by='asc'] {
+      background-image: var(--icon-sort-asc);
+    }
+    th[data-sort][data-order-by='desc'] {
+      background-image: var(--icon-sort-desc);
+    }
+  }
+
 }
 
 // #endregion
