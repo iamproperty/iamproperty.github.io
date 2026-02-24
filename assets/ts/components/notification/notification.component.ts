@@ -35,6 +35,14 @@ class iamNotification extends HTMLElement {
       document.head.insertAdjacentHTML('beforeend', `<style id="notificationHolder">${loadExtraCSS}</style>`);
   }
 
+  addColour = (component, status):void => {
+
+    if (component.hasAttribute('data-type')) 
+      component.classList.add(`bg-${status}`);
+    else 
+      component.classList.add(`colour-${status}`);
+  }
+
   addIcon = (component, status):void => {
 
     switch (status) {
@@ -90,12 +98,8 @@ class iamNotification extends HTMLElement {
     const defaultStatusBG = this.hasAttribute('data-type') ? 'white' : 'info';
     const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : defaultStatusBG;
 
-    if (this.hasAttribute('data-type')) this.classList.add(`bg-${statusBG}`);
-    else {
-      this.classList.add(`colour-${statusBG}`);
-    }
+    this.addColour(this, statusBG);
 
-    
     if (!this.querySelector('i')) {
       this.addIcon(this, statusBG);
     }
@@ -143,26 +147,8 @@ class iamNotification extends HTMLElement {
           this.classList.remove('bg-white');
           this.querySelector('i')?.remove();
 
-          switch (newVal) {
-            case 'danger':
-
-              this.classList.add('bg-danger');
-              this.addIcon(this, 'danger');
-              break;
-            case 'warning':
-            
-              this.classList.add('bg-warning');
-              this.addIcon(this, 'warning');
-              break;
-            case 'success':
-              
-              this.classList.add('bg-success');
-              this.addIcon(this, 'success');
-              break;
-            default:
-              this.classList.add('bg-white');
-              this.addIcon(this, 'info');
-          }
+          this.addColour(this, newVal);
+          this.addIcon(this, newVal);
         }
         break;
       }
