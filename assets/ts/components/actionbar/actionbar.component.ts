@@ -208,20 +208,20 @@ class iamActionbar extends HTMLElement {
       const viewList = this.getAttribute('data-switchviews')?.split(',');
 
       viewList?.forEach((view) => {
-        let icon = 'fa-grid-2';
+        let icon = 'fa-grid';
 
-        if (view == 'list') icon = 'fa-grip-lines';
-        else if (view == 'small') icon = 'fa-bars';
+        if (view == 'list') icon = 'fa-list';
+        else if (view == 'small') icon = 'fa-table';
 
-        btns += `<button class="btn btn-action btn-compact btn-sm mb-0 fa-regular ${icon}">${view}</button>`;
+        btns += `<button class="tag tag--toggle mb-0" data-view="${view}"><i class="fa-regular ${icon} m-0"></i><span class="visually-hidden">${view}</span></button>`;
       });
 
       actionbarWrapper?.insertAdjacentHTML('afterbegin', `<div class="views m-0">${btns}</div>`);
       const views = this.shadowRoot?.querySelector('.views');
 
       views?.addEventListener('click', (event) => {
-        if (event && event.target instanceof HTMLElement && event.target.closest('.btn-action')) {
-          const btn = event.target.closest('.btn-action');
+        if (event && event.target instanceof HTMLElement && event.target.closest('.tag--toggle')) {
+          const btn = event.target.closest('.tag--toggle');
 
           this.setAttribute('data-view', btn.textContent);
 
@@ -249,6 +249,7 @@ class iamActionbar extends HTMLElement {
       if (event && event.target instanceof HTMLElement && event.target.closest('button[data-search]')) {
         searchBar.classList.toggle('show');
         searchBtn.toggleAttribute('aria-expanded');
+        searchInput.focus();
       }
     });
 

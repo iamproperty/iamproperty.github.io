@@ -3,6 +3,7 @@
 @use '../elements/prefix.scss' as *;
 @use '../elements/forms.scss' as *;
 @use '../elements/buttons.scss' as *;
+@use '../elements/badge-tag.scss' as *;
 @use '../elements/dialog.scss' as *;
 @use '../elements/popover.scss' as *;
 
@@ -42,6 +43,14 @@ slot[name='selectall'] {
   }
 }
 
+:host([data-view="square"]) .views [data-view="square"],
+:host([data-view="list"]) .views [data-view="list"],
+:host([data-view="small"]) .views [data-view="small"] {
+
+  background: #e9f9fd;
+  outline: 1px solid #1ebee6;
+}
+
 .selectall,
 slot[name='selectall'] {
   width: 2.5rem;
@@ -69,7 +78,7 @@ slot[name='selectall'] {
 :is(.actionbar, .actionbar--selected, .actionbar--search) {
   border-top-left-radius: var(--actionbar-radius, #{rem(10)});
   border-top-right-radius: var(--actionbar-radius, #{rem(10)});
-  padding: 0 1.5rem;
+  padding: 0 1rem;
   flex-wrap: nowrap;
   justify-content: flex-end;
   align-items: center;
@@ -81,7 +90,7 @@ slot[name='selectall'] {
   }
 
   @media screen and (min-width: 36em) {
-    padding: 0 2rem;
+    padding: 0 1.5rem;
   }
 }
 
@@ -361,6 +370,8 @@ slot[name='selectall'] {
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
+    mask-image:unset;
+    -webkit-mask-image:unset;
   }
 }
 
@@ -406,7 +417,5 @@ slot[name="filters"]{
     display: contents;
   }
 }
-
-
 
 // #endregion

@@ -396,13 +396,13 @@ table {
   padding-top: 0;
 }
 :is(#{$selector}).table--fullwidth iam-actionbar {
-  margin: -2rem -2rem 2rem -2rem;
+  margin: -2rem -1.5rem 2rem -1.5rem;
   box-shadow: none;
   border-radius: 0;
 }
 
 :is(#{$selector}).table--fullwidth iam-actionbar:has(+ table input:checked) {
-  margin: -2rem -2rem 2rem -2rem;
+  margin: -2rem -1.5rem 2rem -1.5rem;
   box-shadow: none;
   border-radius: 0;
     background-color: #e6eaec;
@@ -453,8 +453,8 @@ table {
 @container (width > 36em) {
   :is(#{$selector}).table--fullwidth iam-actionbar,
   :is(#{$selector}) iam-actionbar {
-    margin-left: -2rem;
-    margin-right: -2rem;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
     margin-top: -2rem;
     margin-bottom: 2rem;
   }
