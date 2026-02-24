@@ -1,5 +1,6 @@
 @use '../func' as *;
 @use '../elements/prefix.scss' as *;
+@use '../elements/input.scss' as *;
 
 *,
 *::before,
@@ -99,3 +100,37 @@
 .suffix[role="button"] {
   cursor: pointer;
 }
+
+
+// #region mask
+.mask__wrapper {
+  display: contents;
+
+  .mask {
+    display: none;
+  }
+}
+:host([data-currency]) .mask__wrapper {
+  position: relative;
+  display: block;
+
+  .mask {
+    position: absolute;
+    display: none;
+    inset: 2px;
+    right: 3rem;
+    pointer-events: none;
+    border: none;
+    margin: 0;
+    border-radius: 0.5rem;
+    width: calc(100% - 4px);
+    height: calc(100% - 4px);
+    min-height: calc(100% - 4px);
+    z-index: 999;
+  }
+}
+
+:host([data-currency]:not(.focus)) .mask__wrapper .mask {
+  display: block
+}
+// #endregion

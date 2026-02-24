@@ -20,7 +20,7 @@ class iamInput extends HTMLElement {
     <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
     <div class="wrapper" part="wrapper">
       <span part="prefix"><slot name="prefix"></slot></span>
-      <slot part="input-wrapper"></slot>
+      <span class="mask__wrapper"><input type="text" name="mask" class="mask" /><slot part="input-wrapper"></slot></span>
       <slot part="suffix"><slot name="suffix"></slot></slot>
     </div>
     `;
@@ -31,6 +31,7 @@ class iamInput extends HTMLElement {
     
     const component = this;
     const input = this.querySelector('input');
+    const mask = this.shadowRoot.querySelector('.mask');
     const inputType = input?.hasAttribute('type') ? input?.getAttribute('type') : 'text';
     const prefixIcon = this.shadowRoot?.querySelector('[part="prefix"]');
     const suffixIcon = this.shadowRoot?.querySelector('[part="suffix"]');
@@ -66,10 +67,8 @@ class iamInput extends HTMLElement {
 
 
     const setCurrencyRules = (): void => {
-      let originalValue = input.value.replace(',','');
+      let originalValue = input.value;
 
-      input?.setAttribute('data-value',originalValue);
-      input.setAttribute('type','text');
       originalValue = new Intl.NumberFormat("en-GB", { 
         style: "currency", 
         currency: "GBP",
@@ -77,7 +76,7 @@ class iamInput extends HTMLElement {
         maximumFractionDigits: Number.isInteger(originalValue) ? 0 : 2,
         trailingZeroDisplay: 'stripIfInteger' // Strip zeros if it's an integer
       }).format(originalValue).replace("£", "");
-      input.value = originalValue;
+      mask.value = originalValue;
     }
 
 
@@ -102,23 +101,15 @@ class iamInput extends HTMLElement {
 
       input?.addEventListener('focus',(event) => {
 
-        input.setAttribute('type', 'number')
-
-        input.value = input.getAttribute('data-value');
-        input.setAttribute('value', input.getAttribute('data-value'));
-      });
-
-      input?.addEventListener('input',(event) => {
-
-        input?.setAttribute('data-value',input.value);
+        this.classList.add('focus');
       });
 
       input?.addEventListener('blur',(event) => {
 
         setCurrencyRules();
+        this.classList.remove('focus');
       });
     }
-
 
 
     // Colour input field

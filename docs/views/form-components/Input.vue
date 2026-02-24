@@ -95,6 +95,14 @@
       </label>
 
       
+      <h2 class="pt-5 pb-3">Currency </h2>
+      <label>Input field label
+
+        <Input data-currency>
+          <input type="number" name="amount" value="100000" />
+        </Input>
+      </label>
+
     </div>
 
     <Integration component="fileupload" componentName="iam-fileupload">
