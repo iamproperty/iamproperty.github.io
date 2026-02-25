@@ -11,7 +11,6 @@
   
   :is(.prefix, .suffix) {
     --fa-display: flex;
-    display: inline-block;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -93,6 +92,21 @@
 
     select:focus-visible ~ span:after {
       content: '\f077';
+    }
+        
+    @container style(--font-body) {
+
+      &::before {
+        content: var(--iso)!important;
+      }
+      
+    }
+
+    @container style(--fa-font-regular) {
+
+      &::before {
+        content: var(--fa)!important;
+      }
     }
   }
 
