@@ -1,26 +1,26 @@
 @use '../_func' as *;
 @use '../elements/container.scss' as *;
+@use '../elements/admin-panel' as *;
 
 *, *::before, *::after {
     box-sizing: border-box;
 }
 
 .container {
-    box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 4;
 }
 
 :host {
   padding-top: 0 !important;
   margin-bottom: 2rem;
-  background-color: transparent !important;
   display: block !important;
 }
 
 .header-banner {
   padding-top: rem(44);
-
   max-width: rem(1920);
-
   min-height: rem(400);
   margin-inline: auto;
   display: block;
@@ -43,28 +43,30 @@
     overflow: hidden;
     min-height: rem(400);
     max-height: rem(400);
-
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      z-index: -1;
-      inset: 0;
-      background: linear-gradient(300deg, rgba(30, 190, 230, 1) 0%, rgba(0, 49, 60, 1) 100%);
-      opacity: 0.85;
-    }
+    z-index: 3;
 
     img {
       display: block;
       position: absolute;
-      z-index: -2;
+      z-index: 1;
       inset: 0;
       object-fit: cover;
       object-position: 50% 50%;
       width: 100%;
       height: 100%;
     }
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      background: linear-gradient(300deg, rgba(30, 190, 230, 1) 0%, rgba(0, 49, 60, 1) 100%);
+      opacity: 0.85;
+    }
   }
+
 }
 
 :host(.header--contain) {
@@ -88,7 +90,89 @@
   }
 }
 
-::slotted(*:last-child) {
+::slotted(*:not(.btn__group):last-child) {
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
 }
+
+
+// #region badge
+
+slot[name="badge"] {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+// #endregion
+
+// #region panel 
+:host(.has-panel) .admin-panel{
+
+  display: block;
+  text-align: center;
+}
+::slotted([slot="panel"]) {
+  
+  color-scheme: light !important;
+  --colour-heading: var(--colour-primary-theme);
+  --colour-body: var(--colour-primary-theme);
+  color: var(--colour-primary-theme);
+}
+
+:host(.has-panel) slot[name="panel"]{
+  container-type: inline-size;
+    anchor-name: --anchor;
+}
+
+:host(.has-panel) slot[name="badge"] {
+  
+  position-anchor: --anchor;
+  top: calc(anchor(top) + 1rem);
+  left: calc(anchor(left) + 1rem);
+  z-index: 999;
+}
+
+@media screen and (min-width: 62em) {
+      
+  :host(.has-panel) {
+    .container {
+      display: grid;
+      column-gap: var(--gap);
+      grid-template-columns: repeat(12, 1fr);
+    }
+  }
+  :host(.has-panel) slot{
+
+    display: block;
+    grid-column-start: 1;
+    grid-column-end: 7;
+  }
+
+  :host(.has-panel) slot[name="panel"]{
+
+    grid-column-start: 8;
+    grid-column-end: 13;
+  }
+
+  :host(.has-panel) .admin-panel{
+
+    text-align: center;
+  }
+}
+// #endregion
+
+// #region gradient background
+:host {
+  overflow: hidden;
+}
+.gradient-background {
+  position: absolute;
+  left: 75%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 54rem; /* 874px */
+  aspect-ratio: 1 / 1;
+}
+// #endregion

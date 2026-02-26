@@ -13,6 +13,7 @@
     margin-bottom: 1.5rem;
     display: inline-block;
     min-height: 2rem;
+    width: 100%;
 
     &:not(.d-flex) > strong:first-child {
       display: block;
@@ -50,7 +51,7 @@
       font-family: "Font Awesome 6 Pro";
       display: block;
 
-      background-color: var(--colour-success);
+      background-color: var(--colour, var(--colour-success));
       color: var(--colour-primary-theme);
       border-radius: 50%;
       padding: 0;
@@ -61,11 +62,44 @@
     }
   }
 
-  .feature[class*="fa-rocket"] {
+  :is(.feature--danger, .feature--warning, .feature--success, .feature--complete) {
+    padding-left: calc(var(--padding) + 3rem);
+    position: relative;
 
     &:before {
-      
-      padding-right: 0.1rem;
+      position: absolute;
+      inset: var(--padding);
+      font-family: "Font Awesome 6 Pro";
+      display: block;
+      font-weight: 900;
+      font-size: 2rem;
+      border-radius: 50%;
+      padding: 0;
+      height: 2rem;
+      line-height: 2rem;
+      width: 2rem;
+      text-align: center;
+    }
+  }
+  .feature--danger {
+    
+    &:before {
+      content: '\f06a';
+      color: var(--colour, var(--colour-danger));
+    }
+  }
+  .feature--warning {
+    
+    &:before {
+      content: '\f071';
+      color: var(--colour, var(--colour-warning));
+    }
+  }
+  :is(.feature--success,.feature--success) {
+    
+    &:before {
+        content: '\f058';
+      color: var(--colour, var(--colour-complete));
     }
   }
 

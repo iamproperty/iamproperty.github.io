@@ -84,7 +84,7 @@
       overflow: visible !important;
       margin-inline: 1.5rem;
       margin-bottom: 1.5rem !important;
-      width: calc(100% - 3rem) !important;
+      width: var(--table-width, calc(100% - 3rem)) !important;
       display: block;
     }
 

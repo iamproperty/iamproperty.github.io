@@ -106,7 +106,7 @@
       background: none;
     }
 
-    > *:not([class*="mb-"]):last-child {
+    > *:not([class*="mb-"]):not(.btn__group):last-child {
       margin-bottom: 0 !important;
     }
 

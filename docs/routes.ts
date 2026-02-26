@@ -1320,14 +1320,6 @@ const routes = [
         searchterms: 'iamproperty',
       },
       {
-        path: 'movebutler',
-        name: 'Movebutler',
-        meta: {
-          title: 'Movebutler | IAM Key',
-        },
-        component: () => import('./views/standalone/Movebutler.vue'),
-      },
-      {
         path: 'agent',
         name: 'Agent Platform',
         meta: {
@@ -1602,8 +1594,6 @@ const routes = [
         },
         component: () => import('./views/standalone/pc/agency.vue'),
       },
-
-
       {
         path: 'premium-conveyancing/add-client',
         name: 'Premium conveyancing Add client',
@@ -1612,8 +1602,6 @@ const routes = [
         },
         component: () => import('./views/standalone/pc/add-client.vue'),
       },
-
-
       {
         path: 'premium-conveyancing/add-onward',
         name: 'Premium conveyancing Add onward purchase',
@@ -1622,7 +1610,35 @@ const routes = [
         },
         component: () => import('./views/standalone/pc/add-onward.vue'),
       },
-
+      {
+        path: 'movebutler',
+        name: 'movebutler',
+        meta: {
+          title: 'Standalone | iamkey',
+        },
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "examples" */ './views/standalone/movebutler/index.vue'),
+        children: [
+          {
+            path: '',
+            name: 'movebutler homepage',
+            meta: {
+              title: 'Premium conveyancing | iamkey',
+            },
+            component: () => import(/* webpackChunkName: "examples" */ './views/standalone/movebutler/Movebutler.vue'),
+          },
+          {
+            path: 'refer-pc',
+            name: 'Movebutler refer pc',
+            meta: {
+              title: 'Premium conveyancing | iamkey',
+            },
+            component: () => import('./views/standalone/movebutler/refer-pc.vue'),
+          },
+        ],
+      }
     ],
   },
   {

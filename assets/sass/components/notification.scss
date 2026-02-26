@@ -5,7 +5,7 @@
 :host,
 .iam-notification {
   display: block;
-  padding: rem(22) 1.5rem rem(22) rem(24 - 8) !important;
+  padding: rem(22) 1.5rem rem(22) rem(24 - 8);
   border-radius: 0.5rem;
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
@@ -81,6 +81,8 @@
 :host([data-type='toast'].notification--dismissable) {
   max-width: rem(454);
 }
+
+
 
 .notification {
   container-type: inline-size;
@@ -189,3 +191,21 @@
     }
   }
 }
+
+// #region no icon
+:host(.notification--no-icon) {
+  .notification__icon {
+    display: none;
+  }
+}
+// #endregion
+
+
+// #region no background
+:host(.notification--no-bg){
+  box-shadow: none;
+  background: none!important;
+  padding: 0;
+  border: 0 !important;
+}
+// #endregion

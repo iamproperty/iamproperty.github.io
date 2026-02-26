@@ -114,6 +114,10 @@
     'visible': {
       'url': '/utilities/visible.scss',
       'desc': 'Change the visibility of elements',
+    },
+    'shadow': {
+      'url': '/utilities/shadow.scss',
+      'desc': '',
     }
   };
 

@@ -34,7 +34,8 @@
 
     .btn-tertiary {
       max-width: fit-content;
-      margin-inline: auto;
+      margin-block: 0!important;
+      margin-inline: auto!important;
       order: 3;
       reading-order: 3;
     }
@@ -66,7 +67,7 @@
 
       .btn-tertiary {
         max-width: fit-content;
-        margin-inline: 0;
+        margin-inline: 0!important;
         margin-block: auto;
         order: 1;
       }

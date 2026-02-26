@@ -48,5 +48,22 @@
       </div>
     </div>
 
+    <div class="visualtest">
+      <span class="feature fa-rocket-launch">
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+      </span>
+    </div>
+    <div class="visualtest">
+        
+      <span class="feature feature--danger">
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+      </span>
+      <span class="feature feature--warning">
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+      </span>
+      <span class="feature feature--success">
+        <strong>Order searches in advance </strong>Reduce transaction time on <strong>5 Avenue</strong> by <strong>19 days</strong> by ordering searches up front.
+      </span>
+    </div>
   </main>
 </template>
