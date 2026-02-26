@@ -6,7 +6,6 @@
   .chart__key .key:nth-child(11n - #{11 - $i}),
   .chart__outer table tbody tr td:not(:first-child):nth-child(11n - #{11 - ($i+1)}) {
     --chart-colour: var(#{'--chart-colour-' + $i});
-    --chart-colour-hover: var(#{'--chart-colour-' + $i + '-hover'});
   }
 
   .chart__outer
@@ -15,7 +14,6 @@
     tr:nth-child(#{$i}):has(td:nth-child(2):last-child):not([data-colour]):not([data-colour-1])
     td:nth-child(2) {
     --chart-colour: var(#{'--chart-colour-' + $i});
-    --chart-colour-hover: var(#{'--chart-colour-' + $i + '-hover'});
   }
 }
 // #endregion
@@ -450,7 +448,7 @@
         }
 
         &:hover {
-          background: var(--chart-colour-hover);
+          background: color-mix(in oklab, var(--chart-colour), #000000 5%);
         }
 
         &:has(span:empty),
@@ -553,10 +551,6 @@
 :host(:is(.chart-colour--success, .chart-colour--danger, .chart-colour--wraning)) td.chart-colour--success,
 .chart-colour--success td {
   --chart-colour: var(--chart-colour-success) !important;
-
-  &:hover {
-    --chart-colour-hover: var(--chart-colour-success-hover) !important;
-  }
 }
 
 :host(.chart-colour--danger) td,
@@ -564,10 +558,6 @@
 .chart-colour--danger,
 .chart-colour--danger td {
   --chart-colour: var(--chart-colour-danger) !important;
-
-  &:hover {
-    --chart-colour-hover: var(--chart-colour-danger-hover) !important;
-  }
 }
 
 :host(.chart-colour--warning) td,
@@ -575,10 +565,6 @@
 .chart-colour--warning,
 .chart-colour--warning td {
   --chart-colour: var(--chart-colour-warning) !important;
-
-  &:hover {
-    --chart-colour-hover: var(--chart-colour-warning-hover) !important;
-  }
 }
 // #endregion
 
