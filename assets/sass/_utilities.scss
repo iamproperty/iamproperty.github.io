@@ -3,9 +3,9 @@
 
 @use './utilities/font-awesome-iso-fallbacks';
 
-@use './utilities/clearfix.scss';
-@use './utilities/visually-hidden.scss';
-@use './utilities/text-truncate.scss';
+@use './utilities/clearfix';
+@use './utilities/visually-hidden';
+@use './utilities/text-truncate';
 @use './utilities/ratio';
 @use './utilities/fixed';
 @use './utilities/sticky';

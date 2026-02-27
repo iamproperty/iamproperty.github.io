@@ -1,15 +1,15 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
-@use '../elements/prefix.scss' as *;
-@use '../elements/forms.scss' as *;
-@use '../elements/buttons.scss' as *;
-@use '../elements/badge-tag.scss' as *;
-@use '../elements/dialog.scss' as *;
-@use '../elements/popover.scss' as *;
+@use '../elements/prefix' as *;
+@use '../elements/forms' as *;
+@use '../elements/buttons' as *;
+@use '../elements/badge-tag' as *;
+@use '../elements/dialog' as *;
+@use '../elements/popover' as *;
 
-@use '../utilities/margins.scss' as *;
-@use '../utilities/visually-hidden.scss' as *;
-@use '../utilities/display.scss' as *;
+@use '../utilities/margins' as *;
+@use '../utilities/visually-hidden' as *;
+@use '../utilities/display' as *;
 
 :host {
   background-color: #fcfcfc;
