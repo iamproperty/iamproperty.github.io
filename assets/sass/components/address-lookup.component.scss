@@ -1,11 +1,11 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
-@use '../elements/forms.scss' as *;
-@use '../elements/prefix.scss' as *;
-@use '../elements/buttons.scss' as *;
-@use '../elements/links.scss' as *;
+@use '../elements/forms' as *;
+@use '../elements/prefix' as *;
+@use '../elements/buttons' as *;
+@use '../elements/links' as *;
 
-@use '../utilities/margins.scss' as *;
+@use '../utilities/margins' as *;
 
 *,
 *::before,

@@ -1,9 +1,9 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 
 
 
-@use './table-basic.global.scss';
+@use './table-basic.global';
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
 

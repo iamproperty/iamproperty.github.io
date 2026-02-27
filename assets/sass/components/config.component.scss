@@ -1,4 +1,4 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 @use '../_grid' as *;
 
@@ -9,10 +9,10 @@
 @use '../elements/buttons' as *;
 @use '../utilities/margins';
 @use '../utilities/paddings';
-@use '../utilities/colours.scss';
-@use '../utilities/visually-hidden.scss';
+@use '../utilities/colours';
+@use '../utilities/visually-hidden';
 
-@use '../utilities/font-awesome-iso-fallbacks.scss';
+@use '../utilities/font-awesome-iso-fallbacks';
 
 *,
 *::before,
