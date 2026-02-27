@@ -54,11 +54,11 @@
     }
 
     &:is(:hover, :focus, .hover, :focus-within, :focus-visible) {
-      background: var(--wider-colour-hover, var(--wider-colour-1-hover));
+      background: color-mix(in oklab, var(--colour), #000000 5%);
     }
 
     &:is(:active, .active) {
-      background: var(--wider-colour-active, var(--wider-colour-1-active));
+      background: color-mix(in oklab, var(--colour), #000000 10%);
     }
 
     &:has(input:disabled),
