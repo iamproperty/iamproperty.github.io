@@ -1,14 +1,14 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 
 
 
 
-@use './buttons--global.scss';
-@use './buttons--secondary.scss';
-@use './buttons--tertiary.scss';
-@use './buttons--action.scss';
+@use './buttons--global';
+@use './buttons--secondary';
+@use './buttons--tertiary';
+@use './buttons--action';
 @use './buttons--compact';
 
-@use './buttons--special.scss';
+@use './buttons--special';
 @use './button__group.css';

@@ -1,5 +1,5 @@
 @use '../_func' as *;
-@use '../elements/container.scss' as *;
+@use '../elements/container' as *;
 @use '../elements/admin-panel' as *;
 
 *, *::before, *::after {
