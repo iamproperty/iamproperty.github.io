@@ -1,8 +1,8 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 
 
-@use './table-basic.component.scss';
+@use './table-basic.component';
 
 // #region Table with actionbar
 @container (width < 23.4375em) {

@@ -1,33 +1,26 @@
-@use '../_func' as *;
-
-
 @layer elements {
 
   .btn-compact {
     --compact-size: 3rem;
-
     padding: 0 !important;
     margin-bottom: 0.5rem;
-
-    &:not(:last-child) {
-      margin-right: 0.5rem;
-    }
     text-align: center;
-
     width: var(--compact-size);
     min-width: var(--compact-size);
     max-width: var(--compact-size);
     height: var(--compact-size) !important;
     min-height: var(--compact-size) !important;
     max-height: var(--compact-size) !important;
-
     align-content: center;
     line-height: 1 !important;
-
     text-indent: -500px;
     overflow: hidden;
     position: relative;
     font-size: 1rem;
+
+    &:not(:last-child) {
+      margin-right: 0.5rem;
+    }
 
     &:before {
       content: var(--fa);

@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../_func' as *;
-@use '../elements/forms.scss' as *;
-@use '../elements/buttons.scss' as *;
+@use '../elements/forms' as *;
+@use '../elements/buttons' as *;
 
 @use '../utilities/display' as *;
 

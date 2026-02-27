@@ -1,7 +1,7 @@
 @use '../_func' as *;
-@use '../elements/links.scss';
-@use '../elements/buttons.scss';
-@use '../components/tabs.config.scss';
+@use '../elements/links';
+@use '../elements/buttons';
+@use '../components/tabs.config';
 
 
 :host {

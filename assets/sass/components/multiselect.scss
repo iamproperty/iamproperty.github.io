@@ -1,11 +1,11 @@
 @use '../_func' as *;
 
 
-@use '../elements/forms.scss' as *;
-@use '../elements/admin-panel.scss' as *;
-@use '../elements/buttons.scss' as *;
-@use '../elements/buttons--action.scss' as *;
-@use '../elements/dropdown.scss' as *;
+@use '../elements/forms' as *;
+@use '../elements/admin-panel' as *;
+@use '../elements/buttons' as *;
+@use '../elements/buttons--action' as *;
+@use '../elements/dropdown' as *;
 
 @use '../utilities/visually-hidden' as *;
 @use '../utilities/display' as *;
