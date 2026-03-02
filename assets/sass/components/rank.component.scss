@@ -209,12 +209,12 @@
 :host([data-position='2nd']:not(.rank--medal)),
 :host([data-position='3rd']:not(.rank--medal)) {
   aspect-ratio: 8/10;
-  max-width: rem(125);
+  max-width: 7.8125rem;
 
   .wrapper {
     width: 100%;
     height: 100%;
-    max-width: rem(125);
+    max-width: 7.8125rem;
     max-height: 9.375rem; /* 150*/ 
     align-items: center;
 
@@ -240,7 +240,7 @@
   max-width: 9.375rem; /* 150*/ 
   .wrapper {
     max-width: 9.375rem; /* 150*/ 
-    max-height: rem(180);
+    max-height: 11.25rem;
     margin-top: -2rem;
   }
   .rank {
