@@ -430,7 +430,7 @@ table {
       content: '';
       display: block;
       width: 100%;
-      height: calc(100vh - #{rem(68 + 24 + 16)});
+      height: calc(100vh - 6.75rem); /* 68 + 24 + 16 */ 
       pointer-events: none;
     }
 
