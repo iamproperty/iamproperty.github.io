@@ -127,7 +127,7 @@
 
     &:after {
       position: absolute;
-      top: rem(10);
+      top: 0.625rem; /* 10 */
       right: 1.5rem;
       content: '';
       height: 1.5rem;

@@ -22,7 +22,7 @@
 
   @media screen and (min-width: 62em) {
     padding-top: var(--dialog-padding);
-    padding-left: calc(var(--dialog-padding) + #{rem(282)}) !important;
+    padding-left: calc(var(--dialog-padding) + 17.625rem) !important;
     display: flex;
     flex-direction: column;
   }
@@ -121,7 +121,7 @@
   }
 
   @media screen and (min-width: 62em) {
-    width: rem(282);
+    width: 17.625rem;
     height: 100%;
     flex-direction: column;
     justify-content: center;

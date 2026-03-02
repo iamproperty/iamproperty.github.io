@@ -76,7 +76,7 @@ input[name='postcode'] {
 .pre-filled {
   background-color: var(--colour-light);
   border-radius: 1rem;
-  max-width: rem(490);
+  max-width: 30.625rem; /* (490) */
 }
 
 .pre-filled .title:empty {

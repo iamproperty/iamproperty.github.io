@@ -275,17 +275,17 @@
 }
 
 :host(.chart--fit-content:not(.chart--horizontal).chart--no-scale) {
-  --fc-group-width: #{rem(22)};
+  --fc-group-width: 1.375rem; /* 22 */
   --fc-value-width: 1.5rem;
 
   table {
-    height: var(--chart-height-lg, #{rem(120)});
+    height: var(--chart-height-lg, 7.5rem); /* 120 */
   }
 }
 
 .chart__wrapper {
   @container (min-width: 36em) {
-    --fc-group-width: #{rem(22)};
+    --fc-group-width: 1.375rem; /* 22 */
     --fc-value-width: 1.5rem;
   }
 }

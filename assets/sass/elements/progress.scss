@@ -106,7 +106,7 @@
   }
 
   label:has(.progress--circular.progress--sm) {
-    --max-width: #{rem(120)};
+    --max-width: 7.5rem; /* 120 */
     --pt: #{rem(54)};
     --pt-percent: 45%;
     --bar-width: 1rem;
@@ -133,7 +133,7 @@
 
   @container (width <= 7.5rem) {
     label:has(.progress--circular:not(.progress--sm):not(.progress--md)) {
-      --max-width: #{rem(120)};
+      --max-width: 7.5rem; /* 120 */
       --pt: #{rem(54)};
       --pt-percent: 45%;
       --bar-width: 1rem;

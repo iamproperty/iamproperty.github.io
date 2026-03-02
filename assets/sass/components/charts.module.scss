@@ -305,7 +305,7 @@
   //color: var(--colour-primary-theme);
   white-space: pre;
   text-align: left;
-  box-shadow: var(--chart-details-shadow, 0 #{rem(2)} 0.75rem rgba(0, 0, 0, 0.25));
+  box-shadow: var(--chart-details-shadow, 0 0.125rem 0.75rem rgba(0, 0, 0, 0.25));
   transform: translate(-50%, -100%);
 
   &::before {
@@ -433,7 +433,7 @@
         height: var(--percent, 0%);
         bottom: var(--bottom, 0%);
         width: 100%;
-        max-width: #{rem(120)};
+        max-width: 7.5rem; /* 120 */
         position: relative;
         padding: 0;
         background: var(--chart-colour);

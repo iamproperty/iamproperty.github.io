@@ -24,7 +24,7 @@
 
   .btn-action {
     font-size: 0.75rem;
-    margin-right: rem(-6) !important;
+    margin-right: -0.375rem !important; /* -6 */
     border-color: transparent !important;
   }
 
@@ -46,8 +46,8 @@
       overflow: visible;
 
       .btn-action {
-        margin-right: rem(0) !important;
-        margin-bottom: rem(-12) !important;
+        margin-right: 0 !important;
+        margin-bottom: -0.75 !important; /* -12 */
       }
     }
   }
@@ -81,15 +81,15 @@
 
 // #region doughnut chart
 :host(.chart--lg) {
-  --doughnut-size: #{rem(286)};
+  --doughnut-size: 17.875rem; /* 286 */
 }
 
 :host {
-  --doughnut-size: #{rem(236)};
+  --doughnut-size: 14.75rem; /* 236 */
 }
 
 :host(.chart--sm) {
-  --doughnut-size: #{rem(190)};
+  --doughnut-size: 11.875rem; /* 190 */;
 }
 
 .chart__outer {
@@ -115,7 +115,7 @@
   .doughnut {
     position: relative;
     aspect-ratio: 1 / 1;
-    min-width: rem(190);
+    min-width: 11.875rem; /* 190 */;
     flex: 1 1 auto;
     display: inline-block;
     max-width: var(--doughnut-size);

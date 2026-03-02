@@ -92,9 +92,9 @@
       margin-top: -1rem;
       top: 100%;
       z-index: var(--index-floating);
-      min-width: rem(320);
+      min-width: 20rem; /* 320 */
       border-radius: 1rem;
-      width: rem(320);
+      width: 20rem; /* 320 */
 
       @media screen and (min-width: 36em) {
         width: rem(335);
@@ -141,7 +141,7 @@
         }
 
         a {
-          padding: #{rem(6)};
+          padding: 0.375rem; /* 6 */
 
           &:not(:hover, :focus, :active) {
             border-color: transparent;
