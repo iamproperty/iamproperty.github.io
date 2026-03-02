@@ -219,7 +219,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   *:has(> :is(.form-control-sm, .input--sm)) {
     --input-fs: 0.875rem; /* 14/16 */
     --input-lh: 1rem;
-    --input-padding-block: #{rem(10)};
+    --input-padding-block: #{0.625rem};
     --input-padding-inline: 0.875rem; /* 14/16 */
   }
   *:has(> :is(.form-control-lg, .input--lg)) {
@@ -413,8 +413,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       font-size: 1rem;
       line-height: 1.25rem;
       padding-left: 2.5rem;
-      padding-top: rem(10);
-      padding-bottom: rem(10);
+      padding-top: 0.625rem; /* 10 */
+      padding-bottom: 0.625rem; /* 10 */
       margin-bottom: 1.5rem;
       margin-right: 1.5rem;
       cursor: pointer;
@@ -548,7 +548,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         font-weight: bold;
         height: var(--checkbox-inner-size, 1.5rem);
         width: var(--checkbox-inner-size, 1.5rem);
-        line-height: rem(26);
+        line-height: 1.625rem; /* 26 */
         background: none !important;
         border: none !important;
         outline: none !important;
@@ -575,7 +575,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         font-weight: bold;
         height: var(--checkbox-inner-size, 1.5rem);
         width: var(--checkbox-inner-size, 1.5rem);
-        line-height: rem(26);
+        line-height: 1.625rem; /* 26 */
         background: none !important;
         border: none !important;
         outline: none !important;

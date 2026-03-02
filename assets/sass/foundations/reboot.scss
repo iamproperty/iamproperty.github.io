@@ -18,7 +18,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
     font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
-    scroll-padding-top: rem(100);
+    scroll-padding-top: 6.25rem; /* 100 */
 
     @media screen and (min-width: 36em) {
       --root-fs-px: 768;

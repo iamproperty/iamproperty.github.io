@@ -5,12 +5,12 @@
 :host,
 .iam-notification {
   display: block;
-  padding: rem(22) 1.5rem rem(22) rem(24 - 8);
+  padding: 1.375rem 1.5rem 1.375rem 1rem;
   border-radius: 0.5rem;
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
-  font-size: rem(15);
-  border: rem(2) solid var(--colour, var(--colour-info));
+  font-size: 0.9375rem;
+  border: 2px solid var(--colour, var(--colour-info));
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
   background: var(--colour-notification-bg);
 
@@ -29,7 +29,7 @@
 
 :host([data-type]),
 .iam-notification[data-type] {
-  border: rem(2) solid transparent;
+  border: 2px solid transparent;
 }
 
 
@@ -75,11 +75,11 @@
   display: block;
 
   width: 100%;
-  max-width: rem(360);
+  max-width: 22.5rem;
 }
 
 :host([data-type='toast'].notification--dismissable) {
-  max-width: rem(454);
+  max-width: 28.375rem;
 }
 
 

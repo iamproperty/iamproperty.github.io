@@ -94,7 +94,7 @@ input[type='range'] + input[type='range']::-moz-range-track {
     &:before {
       content: '';
       position: absolute;
-      width: rem(64);
+      width: 4rem; /* 64 */
       height: 2px;
       top: calc(50% - 1px);
       left: calc(50% - 2rem);

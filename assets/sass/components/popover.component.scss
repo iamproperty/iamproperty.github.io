@@ -19,10 +19,10 @@
     }
 
     @media screen and (min-width: 36em) {
-      width: rem(335);
+      width: 20.9375rem; /*(335);*/
     }
     @media screen and (min-width: 62em) {
-      width: rem(360);
+      width: 22.5rem; /* (360); */
     }
   } 
 }

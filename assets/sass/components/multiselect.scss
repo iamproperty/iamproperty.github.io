@@ -83,7 +83,7 @@
     flex-wrap: wrap;
     align-items: flex-start;
     min-height: calc(0.75rem + 0.75rem + 1.25rem + 4px);
-    padding: 0.5rem 2rem 0 #{rem(13)};
+    padding: 0.5rem 2rem 0 0.8125rem;
     font-size: var(--input-fs, 1rem);
     line-height: var(--input-lh, 1.25rem);
     color: var(--colour-body);
@@ -100,12 +100,12 @@
     input {
       all: unset;
       font-size: 1rem;
-      line-height: rem(26);
+      line-height: 1.625rem; /* 26 */
       display: var(--search-display,inline-block);
       width: 0;
       flex-grow: 1;
       padding: 0 0.5rem 0 0 !important;
-      margin-inline: rem(3);
+      margin-inline: 0.1875rem; /* 3 */
       order: 999;
       margin-bottom: 0.5rem;
     }
@@ -228,7 +228,7 @@
   ::slotted([slot='checked']) {
     margin-bottom: 0.5rem;
     order: var(--order, 1);
-    margin-inline: rem(3);
+    margin-inline: 0.1875rem; /* 3 */
   }
 
   ::slotted([slot='checked'])::after {

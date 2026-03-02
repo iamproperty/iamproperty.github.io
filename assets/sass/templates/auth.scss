@@ -67,7 +67,7 @@
         margin-inline: calc(var(--container-padding-x) * -1);
         min-width: calc(100% + var(--container-padding-x) + var(--container-padding-x));
         margin-bottom: 2.5rem;
-        max-height: rem(400);
+        max-height: 25rem; /* 400 */
         clip-path: ellipse(70% 80% at 50% 20%);
         rotate: -5deg;
 

@@ -37,7 +37,7 @@
 // #region page jump and per page
 .pagination div:is(.page-jump, .per-page) {
   border: 1px solid var(--colour-light);
-  height: rem(52);
+  height: 3.25rem; /* (52); */
 
   display: none;
   align-items: center;
@@ -121,8 +121,8 @@
 // #region buttons
 *:where(.prev, .next) {
   border: 1px solid var(--colour-light);
-  line-height: rem(52);
-  height: rem(52);
+  line-height: 3.25rem; /* (52); */
+  height: 3.25rem; /* (52); */
   margin: 0;
   display: none;
   background: none;

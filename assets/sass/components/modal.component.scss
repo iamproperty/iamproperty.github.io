@@ -23,24 +23,24 @@
   dialog[open] {
     //overflow-y: hidden;
     width: 90vw;
-    max-width: rem(324); // col-width*4
+    max-width: 20.25rem; /* col-width*4 324px */
 
     //height: 90vh;
-    max-height: min(90vh, #{rem(752)});
+    max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
     overflow-y: hidden;
 
     @media screen and (min-width: 36em) {
       --dialog-padding: 2rem;
-      min-width: rem(335);
+      min-width: 20.9375rem;
       width: fit-content;
-      max-width: rem(686);
+      max-width: 42.875rem;
     }
 
     @media screen and (min-width: 62em) {
-      min-width: rem(454);
+      min-width: 28.375rem;
       width: fit-content;
-      max-width: rem(736);
+      max-width: 46rem;
     }
 
     &::before {
@@ -113,7 +113,7 @@
     }
 
     &.dialog--fullwidth {
-      max-width: rem(1112);
+      max-width: 69.5rem;
     }
 
     .btn__group {
@@ -126,18 +126,18 @@
 
     :host(.modal--sm) dialog[open] {
       
-        min-width: rem(335);
-        width: rem(335);
-        max-width: rem(335);
+        min-width: 20.9375rem;
+        width: 20.9375rem;
+        max-width: 20.9375rem;
     }
   }
 
   @media screen and (min-width: 62em) {
 
     :host(.modal--sm) dialog[open] {
-        min-width: rem(454);
-        width: rem(454);
-        max-width: rem(454);
+        min-width: 28.375rem;
+        width: 28.375rem;
+        max-width: 28.375rem;
     }
   }
 
@@ -145,18 +145,18 @@
   @media screen and (min-width: 36em) {
 
     :host(.modal--lg) dialog[open] {
-        min-width: rem(686);
-        width: rem(686);
-        max-width: rem(686);
+        min-width: 42.875rem;
+        width: 42.875rem;
+        max-width: 42.875rem;
     }
   }
 
   @media screen and (min-width: 62em) {
 
     :host(.modal--lg) dialog[open] {
-        min-width: rem(736);
-        width: rem(736);
-        max-width: rem(736);
+        min-width: 46rem;
+        width: 46rem;
+        max-width: 46rem;
     }
   }
 

@@ -20,7 +20,7 @@ hr {
 // #region file upload field
 
 .file-upload {
-  max-width: rem(400) !important;
+  max-width: 25rem !important; /* 400 */
   padding-bottom: 1rem;
 
   .drop-area > input {
@@ -46,7 +46,7 @@ hr {
   }
 
   .helper-text {
-    max-width: rem(270);
+    max-width: 16.875rem; /* (270); */
   }
 }
 
@@ -64,7 +64,7 @@ hr {
     color: var(--colour-primary);
     border-color: #d8d8d8;
     background: #d8d8d8;
-    max-width: rem(400) !important;
+    max-width: 25rem!important; /*(400) */
     position: relative;
 
     @media (forced-colors: active) {
@@ -83,7 +83,7 @@ hr {
 
     button {
       position: absolute;
-      top: calc(50% - #{rem(9)});
+      top: calc(50% - 0.5625rem);
       right: 0.875rem; /* 14/16 */
       z-index: var(--index-floating);
       text-indent: 300%;
@@ -118,15 +118,15 @@ hr {
 }
 
 :host(.fileupload--drag-drop) .file-upload {
-  max-width: rem(800) !important;
+  max-width: 50rem !important; /* 800 */
 
   .helper-text {
-    max-width: rem(800) !important;
+    max-width: 50rem !important; /* 800 */
   }
 
   .drop-area > input {
     display: block;
-    min-height: rem(200);
+    min-height: 12.5rem; /* 200 */
     border: 2px dashed var(--colour-primary-theme);
     color: transparent;
     position: relative;

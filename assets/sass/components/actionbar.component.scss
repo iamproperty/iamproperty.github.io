@@ -18,7 +18,7 @@
 .actionbar__wrapper {
   position: relative;
   z-index: 10;
-  height: rem(68);
+  height: 4.25rem; /* 68 */
   container-type: inline-size;
 }
 
@@ -76,13 +76,13 @@ slot[name='selectall'] {
 }
 
 :is(.actionbar, .actionbar--selected, .actionbar--search) {
-  border-top-left-radius: var(--actionbar-radius, #{rem(10)});
-  border-top-right-radius: var(--actionbar-radius, #{rem(10)});
+  border-top-left-radius: var(--actionbar-radius, 0.625rem);
+  border-top-right-radius: var(--actionbar-radius, 0.625rem);
   padding: 0 1rem;
   flex-wrap: nowrap;
   justify-content: flex-end;
   align-items: center;
-  height: rem(68);
+  height: 4.25rem; /* 68 */
   inset: 0;
 
   @supports selector(:has(*)) {
@@ -205,17 +205,17 @@ slot[name='selectall'] {
   flex-wrap: nowrap;
   justify-content: flex-end;
   align-items: center;
-  width: rem(210);
+  width: 13.125rem; /* 210 */
 
   overflow: visible;
   position: relative;
 
   @media screen and (min-width: 36em) {
-    width: rem(450);
+    width: 28.125rem; /* (450) */
   }
 
   @media screen and (min-width: 62em) {
-    width: rem(750);
+    width: 46.875rem; /* (750) */
   }
 
   .body {
@@ -224,19 +224,19 @@ slot[name='selectall'] {
 }
 
 :host([data-large-safe-area]) .safe-area {
-  width: rem(260);
+  width: 16.25rem; /* (260) */
 
   @media screen and (min-width: 36em) {
-    width: rem(620);
+    width: 38.75rem; /*(620) */
   }
 
   @media screen and (min-width: 62em) {
-    width: rem(1048);
+    width: 65.5rem; /* (1048) */
   }
 }
 
 :host([data-switchviews]) .safe-area {
-  width: rem(144);
+  width: 9rem; /* (144) */
 }
 // #endregion
 
@@ -271,12 +271,12 @@ slot[name='selectall'] {
 }
 
 .show .search-wrapper {
-  width: calc(100% - #{rem(44 + 8)});
-  max-width: rem(350) !important;
+  width: calc(100% - 3.25rem); /* 44 + 8 */
+  max-width: 21.875rem!important; /* (350) */
   margin: 0 !important;
 
   @media screen and (min-width: 62em) {
-    max-width: rem(450) !important;
+    max-width: 28.125rem!important; /* (450) */
   }
 
   input {
@@ -293,7 +293,7 @@ slot[name='selectall'] {
     max-height: 2.5rem !important;
     min-width: 2.5rem !important;
     max-width: 2.5rem !important;
-    line-height: rem(40 - 8 - 8) !important;
+    line-height: 1.5rem!important; /* 40 - 8 - 8 */
     pointer-events: all !important;
   }
   .empty {
