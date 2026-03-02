@@ -138,17 +138,17 @@
 
     // Default pattern
     &:not([class*='circle-pattern-']) > .circle {
-      font-size: rem(300);
-      top: rem(-75);
-      left: rem(-200);
+      font-size: 18.75rem; /* (300) */
+      top: -4.6875rem;
+      left: -12.5rem; /* -200 */
     }
 
     &:not([class*='circle-pattern-']) > .circle ~ .circle {
-      font-size: rem(350);
+      font-size: 21.875rem;
       top: auto;
       left: auto;
-      right: rem(-100);
-      bottom: rem(-200);
+      right: -6.25rem;
+      bottom: -12.5rem; /* -200 */
     }
   }
   // #endregion

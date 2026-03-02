@@ -73,7 +73,7 @@
   flex-direction: column;
   justify-content: center;
   padding-top: 0.75rem;
-  padding-inline: rem(5);
+  padding-inline: 0.3125rem; /* 5 */ 
   padding-bottom: 0.75rem;
   height: 5.25rem; /* 84 */
   position: relative;
@@ -96,7 +96,7 @@
   &:after {
     content: '';
     position: absolute;
-    height: rem(132);
+    height: 8.25rem;
     width: 100%;
     display: block;
     bottom: 0;
@@ -215,7 +215,7 @@
     width: 100%;
     height: 100%;
     max-width: rem(125);
-    max-height: rem(150);
+    max-height: 9.375rem; /* 150*/ 
     align-items: center;
 
     .rank {
@@ -237,9 +237,9 @@
 
 :host([data-position='1st']:not(.rank--medal).rank--trophy) {
   aspect-ratio: 8/10;
-  max-width: rem(150);
+  max-width: 9.375rem; /* 150*/ 
   .wrapper {
-    max-width: rem(150);
+    max-width: 9.375rem; /* 150*/ 
     max-height: rem(180);
     margin-top: -2rem;
   }

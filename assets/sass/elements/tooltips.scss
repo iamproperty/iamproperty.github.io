@@ -38,7 +38,7 @@
         top: calc(100% + 0.5rem);
         left: auto;
         right: 0.85em;
-        width: #{rem(270)};
+        width: 16.875rem; /* 270 */ 
         transform: translate(50%, 0);
         background: var(--colour-primary);
         color: var(--colour-white);
@@ -53,11 +53,11 @@
         }
 
         @media screen and (min-width: 36em) {
-          width: #{rem(335)};
+          width: 20.9375rem; /* 335 */ 
         }
 
         @media screen and (min-width: 62em) {
-          width: #{rem(360)};
+          width: 22.5rem; /* 360 */ 
         }
 
         &::after {

@@ -13,21 +13,21 @@
   }
 
   .template--form {
-    --input-max-width: #{rem(450)};
-    --select-max-width: #{rem(500)};
+    --input-max-width: 28.125rem;
+    --select-max-width: 31.25rem
 
     .container {
 
-      max-width: #{rem(1280)} !important;
+      max-width: 80rem !important;
     }
 
     @supports selector(:has(*)) {
       label:has(> :is(.suffix, .prefix)) {
-        --input-max-width: #{rem(500)};
+        --input-max-width: 31.25rem
         max-width: var(--input-max-width);
       }
       div:has(> :is(.suffix, .prefix)) {
-        --input-max-width: #{rem(500)};
+        --input-max-width: 31.25rem
         max-width: var(--input-max-width);
       }
     }
@@ -64,9 +64,9 @@
 
     @media screen and (min-width: 62em) {
       .form-panel {
-        max-width: rem(924); // Guess
+        max-width: 57.75rem; /* 924 */  // Guess
         border-radius: 0.5rem;
-        padding-inline: rem(94);
+        padding-inline: 5.875rem;
         padding-block: 2.5rem;
         margin-bottom: 2rem;
       }
@@ -80,7 +80,7 @@
     @media screen and (min-width: 62em) {
       .container--form {
         padding-inline: 0;
-        max-width: rem(924) !important;
+        max-width: 57.75rem !important;
       }
 
       .form-panel .btn__group {

@@ -15,23 +15,23 @@
       overflow-y: hidden!important;
     }
     width: 90vw;
-    max-width: rem(324); // col-width*4
+    max-width: 20.25rem; /* 324 */  // col-width*4
 
     //height: 90vh;
-    max-height: min(90vh, #{rem(752)});
+    max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
 
     @media screen and (min-width: 36em) {
       --dialog-padding: 2rem;
-      min-width: rem(335);
+      min-width: 20.9375rem; /* 335 */ 
       width: fit-content;
-      max-width: rem(686);
+      max-width: 42.875rem; /* 686 */ 
     }
 
     @media screen and (min-width: 62em) {
-      min-width: rem(454);
+      min-width: 28.375rem; /* 454 */ 
       width: fit-content;
-      max-width: rem(736);
+      max-width: 46rem; /* 736 */ 
     }
 
     // Close button
@@ -81,7 +81,7 @@
 
       & + span:not(.h1, .h2, .h3, .h4, .h5, .h6) {
         padding-bottom: 0.5rem;
-        line-height: rem(19);
+        line-height: 1.1875rem; /* 19 */ 
       }
 
       & + span:not(.h1, .h2, .h3, .h4, .h5, .h6) + * {
@@ -105,7 +105,7 @@
     }
 
     &.dialog--fullwidth {
-      max-width: rem(1112);
+      max-width: 69.5rem; /* 1112*/ 
     }
 
     @media screen and (max-width: 36em) {
@@ -232,13 +232,13 @@
     }
 
     @media screen and (min-width: 36em) {
-      min-width: rem(686);
-      max-width: rem(686);
+      min-width: 42.875rem; /* 686 */ 
+      max-width: 42.875rem; /* 686 */ 
     }
 
     @media screen and (min-width: 62em) {
-      min-width: rem(736);
-      max-width: rem(736);
+      min-width: 46rem; /* 736 */ 
+      max-width: 46rem; /* 736 */ 
     }
   }
   // #endregion
@@ -301,9 +301,9 @@
     }
 
     @media screen and (min-width: 36em) {
-      min-width: rem(452);
-      width: rem(452);
-      max-width: rem(452);
+      min-width: 28.25rem; /* 452 */ 
+      width: 28.25rem; /* 452 */ 
+      max-width: 28.25rem; /* 452 */ 
 
       & > button:first-child {
         top: calc(var(--dialog-padding) * 3.25) !important;
@@ -322,17 +322,17 @@
     }
 
     @media screen and (min-width: 62em) {
-      min-width: rem(924);
-      width: rem(924);
-      max-width: rem(924);
+      min-width: 57.75rem; /* 924 */ 
+      width: 57.75rem; /* 924 */ 
+      max-width: 57.75rem; /* 924 */ 
 
       & > button:first-child {
         top: calc(var(--dialog-padding) * 1) !important;
       }
 
-      @media (min-height: #{rem(500)}) {
-        height: rem(478);
-        max-height: rem(478);
+      @media (min-height: 31.25rem) {
+        height: 29.875rem; /* 478 */ 
+        max-height: 29.875rem; /* 478 */ 
       }
 
       form {

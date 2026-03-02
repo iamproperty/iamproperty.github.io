@@ -792,7 +792,7 @@ $new_utilities: map.merge(
   }
 
   .mh-sm {
-    max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+    max-height: calc(12.5rem - var(--mh-modifier, 0rem));
   }
 
   .mh-md {
@@ -818,7 +818,7 @@ $new_utilities: map.merge(
     }
 
     .mh-sm-sm {
-      max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+      max-height: calc(12.5rem - var(--mh-modifier, 0rem));
     }
 
     .mh-sm-md {
@@ -841,7 +841,7 @@ $new_utilities: map.merge(
     }
 
     .mh-md-sm {
-      max-height: calc(#{rem(200)} - var(--mh-modifier, 0rem));
+      max-height: calc(12.5rem - var(--mh-modifier, 0rem));
     }
 
     .mh-md-md {
