@@ -161,11 +161,11 @@
     // #endregion
     // #region Cards variables
     --card-top-padding: 2rem;
-    --card-right-padding: #{rem(16+16+24)};
+    --card-right-padding: 3.5rem; /* 16+16+24 */
     --card-bottom-padding: 2rem;
     --card-left-padding: 1rem;
     --card-border-radius: 0.5rem;
-    --card-box-shadow: #{rem(2)} #{rem(3)} #{rem(6)} rgba(0, 0, 0, 0.2);
+    --card-box-shadow: 2px 0.1875rem 0.375rem rgba(0, 0, 0, 0.2);
     --nav-height: 6rem; /* 96 */
     --code-color: #d63384;
     // #endregion 
@@ -179,12 +179,12 @@
     // #region layout
     --gap: 1rem;
     --gutter: 1.5rem;
-    --max-width: #{rem(1280)};
-    --content-max-width: #{rem(800)};
-    --input-max-width: #{rem(800)};
-    --select-max-width: #{rem(800)};
+    --max-width: 80rem;
+    --content-max-width: 50rem;
+    --input-max-width: 50rem;
+    --select-max-width: 50rem;
 
-    --container-max-width: #{rem(1280)};
+    --container-max-width: 80rem;
     --container-padding-top: 0;
     --container-padding-bottom: 1rem;
     --padding-inline: 1.5rem;
@@ -244,16 +244,16 @@
     
     @media screen and (min-width: 62em) {
 
-      --container-padding-x: #{rem(84)};
+      --container-padding-x: 5.25rem;
       --padding-inline: 5.25rem;
       --gutter: 5.25rem;
       --scale: 1.414;
 
       &:has(.nav--large) {
-        --container-max-width: #{rem(1920)} !important;
-        --max-width: #{rem(1920)} !important;
-        --padding-inline: #{rem(56)} !important;
-        --container-padding-x: #{rem(56)} !important;
+        --container-max-width: 120rem !important;
+        --max-width: 120rem !important;
+        --padding-inline: 3.5rem !important;
+        --container-padding-x: 3.5rem !important;
         --container-padding: var(--container-padding-top) var(--container-padding-x)
           var(--container-padding-bottom) var(--container-padding-x);
         --gutter: 3.5rem;

@@ -27,7 +27,7 @@ $default-curve-width: 600;
 @import '_utility-mixins';
 
 :root {
-  --container-padding-x: #{rem(66)};
+  --container-padding-x: 4.125rem;
 }
 
 html {

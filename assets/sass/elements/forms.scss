@@ -224,9 +224,9 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
   *:has(> :is(.form-control-lg, .input--lg)) {
     --input-fs: 1.5rem;
-    --input-lh: #{rem(29)};
+    --input-lh: 1.8125rem; /* 29 */ 
     --input-padding-block: 1.25rem;
-    --input-padding-inline: #{rem(22)};
+    --input-padding-inline: 1.375rem; /* 22 */ 
   }
 
   *:has(> label:first-child):has(> input):has(> :is(.form-control-inline, .input--inline)) {
@@ -440,7 +440,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         width: var(--radio-size, 1.5rem);
         display: inline-block;
         position: absolute;
-        top: rem(10 - 2);
+        top: 0.5rem;
         left: var(--outline-width);
       }
 
@@ -458,13 +458,13 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         height: 0.875rem; /* 14/16 */
         width: 0.875rem; /* 14/16 */
 
-        height: var(--radio-inner-size, #{rem(14)});
-        width: var(--radio-inner-size, #{rem(14)});
+        height: var(--radio-inner-size, 0.875rem);
+        width: var(--radio-inner-size, 0.875rem);
 
         display: none;
         position: absolute;
-        top: var(--radio-inner-top, #{rem(15 - 2)});
-        left: var(--radio-inner-left, calc(#{rem(5)} + var(--outline-width)));
+        top: var(--radio-inner-top, 0.8125rem);
+        left: var(--radio-inner-left, calc(0.3125rem + var(--outline-width)));
       }
 
       &.radio--tick {
@@ -552,7 +552,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         background: none !important;
         border: none !important;
         outline: none !important;
-        top: var(--checkbox-inner-top, #{rem(10 - 2)});
+        top: var(--checkbox-inner-top, 0.5rem);
         left: var(--checkbox-inner-left, var(--outline-width));
         text-align: center;
       }
@@ -579,7 +579,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         background: none !important;
         border: none !important;
         outline: none !important;
-        top: var(--checkbox-inner-top, #{rem(10 - 2)});
+        top: var(--checkbox-inner-top, 0.5rem);
         left: var(--checkbox-inner-left, var(--outline-width));
         text-align: center;
       }
@@ -935,7 +935,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    margin-top: rem(-8); /* Centers thumb on the track */
+    margin-top: -0.5rem; /* Centers thumb on the track */
     background-color: var(--thumb-colour);
     height: var(--thumb-size);
     width: var(--thumb-size);
@@ -1125,7 +1125,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     font-weight: inherit !important;
     font-family: inherit !important;
     font-size: 1rem !important;
-    line-height: rem(24) !important;
+    line-height: 1.5rem !important;
     margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
     padding-block: var(--menu-item-padding, 0.25rem) !important;
     width: 100% !important;
@@ -1270,7 +1270,7 @@ iam-address-lookup [slot="preloadedList"]{
       font-weight: inherit !important;
       font-family: inherit !important;
       font-size: 1rem !important;
-      line-height: rem(19) !important;
+      line-height: 1.1875rem !important;
       padding-block: var(--menu-item-padding, 0.5rem) !important;
       display: block;
     }
