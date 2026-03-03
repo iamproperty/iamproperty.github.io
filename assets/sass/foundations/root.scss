@@ -46,25 +46,25 @@
     --colour-canvas-2: light-dark(#ffffff,#313131);
     --colour-body-default: light-dark(#595959,#bfbfbf);
     --colour-body: light-dark(#595959,#bfbfbf);
-    --colour-heading: light-dark(var(--colour-primary-theme),var(--colour-primary));
-    --colour-link: light-dark(var(--colour-primary-theme),var(--colour-white));
-    --colour-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
-    --colour-focus: light-dark(var(--colour-primary-theme),var(--colour-white));
-    --colour-active: light-dark(var(--colour-primary-theme),var(--colour-white));
-    --colour-border: light-dark(#d8d8d8,var(--colour-white));
-    --colour-brand: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-heading: light-dark(#00313c,#00313c);
+    --colour-link: light-dark(#00313c,#fcfcfc);
+    --colour-hover: light-dark(#00313c,#fcfcfc);
+    --colour-focus: light-dark(#00313c,#fcfcfc);
+    --colour-active: light-dark(#00313c,#fcfcfc);
+    --colour-border: light-dark(#d8d8d8,#fcfcfc);
+    --colour-brand: light-dark(#00313c,#fcfcfc);
 
     --colour-btn: var(--colour-primary-theme);
-    --colour-btn-bg: light-dark(var(--colour-warning-theme),var(--colour-white));
-    --colour-btn-border: light-dark(var(--colour-warning-theme),var(--colour-white));
+    --colour-btn-bg: light-dark(#ffa500,#fcfcfc);
+    --colour-btn-border: light-dark(#ffa500,#fcfcfc);
     --colour-btn-bg-hover: transparent;
-    --colour-btn-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-hover: light-dark(#00313c,#fcfcfc);
 
-    --colour-btn-secondary: light-dark(var(--colour-primary-theme),var(--colour-white));
-    --colour-btn-secondary-border: light-dark(var(--colour-primary-theme),var(--colour-white));
+    --colour-btn-secondary: light-dark(#00313c,#fcfcfc);
+    --colour-btn-secondary-border: light-dark(#00313c,#fcfcfc);
     --colour-btn-secondary-bg: transparent;
-    --colour-btn-secondary-bg-hover: light-dark(var(--colour-primary-theme),var(--colour-white));
-    --colour-btn-secondary-hover: light-dark(var(--colour-inverted),var(--colour-primary-theme));
+    --colour-btn-secondary-bg-hover: light-dark(#00313c,#fcfcfc);
+    --colour-btn-secondary-hover: light-dark(#fcfcfc,#00313c);
     --colour-btn-action-hover-bg: light-dark(var(--colour-light),#313131);
 
     --colour-activeLink: light-dark(#e8f9fd,#173c45);

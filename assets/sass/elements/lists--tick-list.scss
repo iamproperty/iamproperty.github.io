@@ -48,6 +48,14 @@
       border-radius: 50%;
       transform: scale(0.8);
     }
+    .tick--loading:before {
+      content: '\f3f4';
+      font-weight: var(--icon-weight, 900);
+      color: var(--colour-heading);
+      animation: spin 1.5s infinite steps(10);
+      line-height: 1.25;
+      font-size: 1em;
+    }
 
     li[class*='bg-'] {
       padding: 1rem;

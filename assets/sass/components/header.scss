@@ -29,7 +29,7 @@
   height: auto;
 
   @media screen and (min-width: 62em) {
-    padding-top: 5.25rem; /* 84 */
+    //padding-top: 5.25rem; /* 84 */
   }
 
   > picture {
@@ -111,13 +111,20 @@ slot[name="badge"] {
 
   display: block;
   text-align: center;
+  margin-bottom: 1rem;
 }
 ::slotted([slot="panel"]) {
   
   color-scheme: light !important;
   --colour-heading: var(--colour-primary-theme);
   --colour-body: var(--colour-primary-theme);
+  --colour-underline: var(--colour-secondary-theme);
   color: var(--colour-primary-theme);
+}
+
+::slotted(img[slot="panel"]) {
+  
+  max-width: 4.75rem!important; /* TODO: magic number 1 column */
 }
 
 :host(.has-panel) slot[name="panel"]{
@@ -142,15 +149,22 @@ slot[name="badge"] {
       grid-template-columns: repeat(12, 1fr);
     }
   }
-  :host(.has-panel) slot{
+  :host(.has-panel) slot:not([name]){
 
     display: block;
     grid-column-start: 1;
     grid-column-end: 7;
   }
 
+  :host(.has-panel) slot[name="before"]{
+
+    display: block;
+    grid-column-start: 1;
+    grid-column-end: 13;
+  }
   :host(.has-panel) slot[name="panel"]{
 
+    display: block;
     grid-column-start: 8;
     grid-column-end: 13;
   }

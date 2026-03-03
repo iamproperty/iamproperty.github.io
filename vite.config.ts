@@ -12,6 +12,12 @@ const __dirname = dirname(__filename);
 export default ({ mode }) => {
 
   return defineConfig({
+    server: {
+      port: 3000,
+      watch: {
+        ignored: ["!**/assets/js/**"],
+      },
+    },
     build: mode === 'lib' ? {
       lib: {
         entry: resolve(__dirname, 'src/index.js'),

@@ -59,6 +59,7 @@ class iamHeader extends HTMLElement {
         <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="" />
       </picture>
       <div class="container">
+        <slot name="before"></slot>
         <slot></slot>
         <slot name="badge"></slot>
         <slot name="panel" class="admin-panel"></slot>

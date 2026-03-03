@@ -36,7 +36,14 @@
 :host([class*="colour-"]) {
   
   --bg-colour: color-mix(in oklab, var(--colour), #ffffff 80%) !important;
-  background: light-dark(var(--bg-colour),var(--colour-canvas-2));
+  background: var(--bg-colour);
+
+  
+  --colour-heading: var(--colour-primary-theme);
+  --colour-body: var(--colour-primary-theme);
+  > * {
+    color-scheme: light;
+  }
 }
 
 

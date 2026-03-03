@@ -1635,7 +1635,23 @@ const routes = [
             meta: {
               title: 'Premium conveyancing | iamkey',
             },
-            component: () => import('./views/standalone/movebutler/refer-pc.vue'),
+            component: () => import('./views/standalone/movebutler/refer-pc/default.vue'),
+          },
+          {
+            path: 'refer-pc-loading',
+            name: 'Movebutler refer pc - loading',
+            meta: {
+              title: 'Premium conveyancing | iamkey',
+            },
+            component: () => import('./views/standalone/movebutler/refer-pc/loading.vue'),
+          },
+          {
+            path: 'refer-pc-no-alerts',
+            name: 'Movebutler refer pc - no alerts',
+            meta: {
+              title: 'Premium conveyancing | iamkey',
+            },
+            component: () => import('./views/standalone/movebutler/refer-pc/no-alerts.vue'),
           },
         ],
       }
