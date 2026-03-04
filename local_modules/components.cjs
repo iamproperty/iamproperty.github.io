@@ -4,12 +4,12 @@ const { exec } = require('node:child_process');
 let prevComp;
 let compTimeout;
 
-const watchFolder = __dirname.replace('local_modules','\assets\\js\\components');
+const watchFolder = __dirname.replace('local_modules','\assets\\ts\\components');
 console.log(`Watching for file changes on ${watchFolder}`);
 
 fs.watch(watchFolder, { recursive: true }, (event, filename) => {
 
-  let correctfilename = __dirname.replace('local_modules','\assets\\js\\components\\')+filename;
+  let correctfilename = __dirname.replace('local_modules','\assets\\ts\\components\\')+filename;
 
   if (event === 'change') {
     fs.stat (correctfilename, function (err, stat) {
@@ -20,9 +20,10 @@ fs.watch(watchFolder, { recursive: true }, (event, filename) => {
 
       let component = filename.split('\\')[0];
 
-      if (stat.isFile() && component !== prevComp && !filename.endsWith('.min.js') && !filename.endsWith('.map')) {
+      if (stat.isFile() && component !== prevComp) {
         
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
+        console.log(`${filename} changed`);
         console.log(`${component} compiled`);
 
         prevComp = component;
@@ -35,12 +36,12 @@ fs.watch(watchFolder, { recursive: true }, (event, filename) => {
   }
 });
 
-const watchFolderModules = __dirname.replace('local_modules','\assets\\js\\modules');
+const watchFolderModules = __dirname.replace('local_modules','\assets\\ts\\modules');
 console.log(`Watching for file changes on ${watchFolderModules}`);
 
 fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
 
-  let correctfilename = __dirname.replace('local_modules','\assets\\js\\modules\\')+filename;
+  let correctfilename = __dirname.replace('local_modules','\assets\\ts\\modules\\')+filename;
 
   if (event === 'change') {
     fs.stat (correctfilename, function (err, stat) {
@@ -51,9 +52,10 @@ fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
 
       let component = filename.split('.')[0];
 
-      if (stat.isFile() && component !== prevComp && !filename.endsWith('.min.js') && !filename.endsWith('.map')) {
+      if (stat.isFile() && component !== prevComp) {
         
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
+        console.log(`${filename} changed`);
         console.log(`${component} compiled`);
 
         if(component == "table"){
@@ -84,12 +86,12 @@ fs.watch(watchFolderModules, { recursive: true }, (event, filename) => {
 let prevSassComp;
 let sassCompTimeout;
 
-const watchSassFolder = __dirname.replace('local_modules','\assets\\css\\components');
+const watchSassFolder = __dirname.replace('local_modules','\assets\\sass\\components');
 console.log(`Watching for file changes on ${watchSassFolder}`);
 
 fs.watch(watchSassFolder, { recursive: true }, (event, filename) => {
 
-  let correctfilename = __dirname.replace('local_modules','\assets\\css\\components\\')+filename;
+  let correctfilename = __dirname.replace('local_modules','\assets\\sass\\components\\')+filename;
 
   if (event === 'change') {
     fs.stat (correctfilename, function (err, stat) {
@@ -100,10 +102,11 @@ fs.watch(watchSassFolder, { recursive: true }, (event, filename) => {
 
       let component = filename.split('.')[0];
 
-      if (stat.isFile() && component !== prevSassComp && !filename.endsWith('.map')) {
+      if (stat.isFile() && component !== prevComp && !filename.endsWith('.preload.scss') && !filename.endsWith('.global.scss')) {
         
         exec(`rollup --environment COMPONENT:${component} --config rollup-component.config.cjs --sourcemap`);
         console.log(`${component} compiled`);
+        console.log(`${filename} changed`);
 
 
         if(component == "table"){
@@ -118,14 +121,12 @@ fs.watch(watchSassFolder, { recursive: true }, (event, filename) => {
           console.log(`table-ajax compiled`);
         }
 
-        prevSassComp = component;
+        prevComp = component;
         clearTimeout(sassCompTimeout);
         sassCompTimeout = setTimeout(function(){
-          prevSassComp = "";
+          prevComp = "";
         }, 100);
       }
-
-
 
     })
   }

@@ -13,10 +13,7 @@ export default ({ mode }) => {
 
   return defineConfig({
     server: {
-      port: 3000,
-      watch: {
-        ignored: ["!**/assets/js/**"],
-      },
+      //hmr: false
     },
     build: mode === 'lib' ? {
       lib: {
