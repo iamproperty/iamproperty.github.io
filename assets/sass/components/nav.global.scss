@@ -390,11 +390,11 @@ iam-nav details {
 
     background-color: #eeeeee;
   }
-  iam-nav details {
+  iam-nav {
     --mobDetails: 'true';
 
     // Sub details
-    details {
+    details details {
       &:after {
         display: none;
       }
@@ -417,7 +417,7 @@ iam-nav details {
       }
     }
 
-    a + details > summary {
+    details a + details > summary {
       padding-top: 1.5rem;
 
       &:after {
@@ -425,7 +425,7 @@ iam-nav details {
       }
     }
 
-    details[open] + details:before {
+    details details[open] + details:before {
       content: '';
       display: block;
       background: var(--colour-canvas-2);
@@ -461,7 +461,7 @@ iam-nav details {
 }
 
 @media screen and (max-width: 62em) and (min-width: 36em) {
-  iam-nav details {
+  iam-nav {
     --tabletDetails: 'true';
   }
 
@@ -472,7 +472,7 @@ iam-nav details {
 }
 
 @media screen and (min-width: 62em) {
-  iam-nav .nav--menu details {
+  iam-nav .nav--menu {
     --mobDetails: 'true';
     --tabletDetails: 'true';
   }
