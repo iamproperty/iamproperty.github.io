@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 @use '../elements/type' as *;
 
@@ -31,7 +31,7 @@ iam-rankings {
   }
 
   td {
-    font-size: rem(28);
+    font-size: 1.75rem;
     color: var(--colour-heading);
   }
 

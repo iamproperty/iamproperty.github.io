@@ -3,21 +3,22 @@
 
 
 // Foundations
-@use 'foundations/root.scss';
-@use 'foundations/colours.scss';
+@use 'foundations/root';
+@use 'foundations/animations';
+@use 'foundations/colours';
 
-@use 'foundations/reboot.scss';
+@use 'foundations/reboot';
 
 // Elements
-@use '_elements.scss';
+@use '_elements';
 
 // Components
-@use '_components.scss';
+@use '_components';
 
 // Templates
-@use 'templates/form.scss';
+@use 'templates/form';
 
-@use 'templates/auth.scss';
+@use 'templates/auth';
 
 // Overrides
 @layer overrides {

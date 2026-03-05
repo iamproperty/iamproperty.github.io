@@ -1,11 +1,17 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
-@use '../elements/forms.scss' as *;
-@use '../elements/prefix.scss' as *;
-@use '../elements/buttons.scss' as *;
-@use '../elements/links.scss' as *;
+@use '../elements/forms' as *;
+@use '../elements/prefix' as *;
+@use '../elements/buttons' as *;
+@use '../elements/links' as *;
 
-@use '../utilities/margins.scss' as *;
+@use '../utilities/margins' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 .bg-light {
   background-color: var(--colour-light);
@@ -70,7 +76,7 @@ input[name='postcode'] {
 .pre-filled {
   background-color: var(--colour-light);
   border-radius: 1rem;
-  max-width: rem(490);
+  max-width: 30.625rem; /* (490) */
 }
 
 .pre-filled .title:empty {

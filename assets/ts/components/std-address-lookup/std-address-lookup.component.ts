@@ -1,6 +1,6 @@
 import iamAddressLookup from '../address-lookup/address-lookup.component';
 
-const countries = [
+export const countries = [
   {
     "id": "urn:als:country:AF",
     "country_name": "Afghanistan"
@@ -999,7 +999,7 @@ const countries = [
   }
 ];
 
-const counties = [
+export const counties = [
     {
         "id": "urn:als:county:ekHuOPAhk",
         "county": "Monmouthshire"
@@ -1500,7 +1500,43 @@ const counties = [
         "id": "urn:als:county:rYAgcPlXZ",
         "county": "Middlesex"
     }
-]
+];
+
+export const regions = [
+  {
+    "id": "urn:als:region:qo7jMNaA4",
+    "region": "England"
+  },
+  {
+    "id": "urn:als:region:JPBkFjL6I",
+    "region": "Scotland"
+  },
+  {
+    "id": "urn:als:region:3lqe2D3qO",
+    "region": "Wales"
+  },
+  {
+    "id": "urn:als:region:Tm5pOBfK9",
+    "region": "Northern Ireland"
+  },
+  {
+    "id": "urn:als:region:ZwIRAnNJo",
+    "region": "Channel Islands"
+  },
+  {
+    "id": "urn:als:region:8CIOi1khw",
+    "region": "Jersey"
+  },
+  {
+    "id": "urn:als:region:qHdx7tNtL",
+    "region": "Guernsey"
+  },
+  {
+    "id": "urn:als:region:DH6LU70lY",
+    "region": "Isle of Man"
+  }
+];
+
 
 let countriesString = '';
 
@@ -1508,11 +1544,19 @@ countries.forEach((country) => {
   countriesString += `<option value="${country['id']}" data-value="${country['country_name']}">${country['country_name']}</option>`;
 });
 
+let regionsString = '';
+
+regions.forEach((region) => {
+  regionsString += `<option value="${region['id']}" data-value="${region['region']}">${region['region']}</option>`;
+});
+
 let countiesString = '';
 
 counties.forEach((county) => {
   countiesString += `<option value="${county['id']}" data-value="${county['county']}">${county['county']}</option>`;
 });
+
+
 
 
 
@@ -1556,7 +1600,7 @@ class iamSTDAddressLookup extends HTMLElement {
     data-min-chars="5" 
     ${this.hasAttribute('data-title') ? `data-title='${this.getAttribute('data-title')}'` : `data-title='Find an address by postcode'`}
     data-placeholder="UK, Isle of Man, & Channel Islands " 
-    ${this.hasAttribute('data-manual') ? 'data-manual' : ''} 
+    ${this.hasAttribute('data-manual') ? 'data-manual' : ''}  
     ${this.hasAttribute('data-allow-manual') ? 'data-allow-manual' : ''} 
     ${this.hasAttribute('data-use') ? `data-use='${this.getAttribute('data-use')}'` : ''} 
     ${this.hasAttribute('data-use-label') ? `data-use-label='${this.getAttribute('data-use-label')}'` : ''} 
@@ -1568,6 +1612,7 @@ class iamSTDAddressLookup extends HTMLElement {
     ${this.hasAttribute('data-force-manual') ? `data-force-manual` : ''}
     ${this.hasAttribute('data-matched') ? `data-matched='${this.getAttribute('data-matched')}'` : ''}
     ${this.hasAttribute('data-matched-label') ? `data-matched-label='${this.getAttribute('data-matched-label')}'` : ''}
+    ${this.hasAttribute('data-disabled') ? 'data-disabled="disabled"' : ''} 
     data-postcode-lookup-label="Back to UK postcode lookup">
 
     <p class="hint pb-2 d-block" slot="hint">Unsure of the postcode? Check with the <a href="https://www.royalmail.com/find-a-postcode" target="_blank"><i class="fa-regular fa-arrow-up-right-from-square"></i>Royal Mail address finder</a></p>
@@ -1578,44 +1623,37 @@ class iamSTDAddressLookup extends HTMLElement {
 
       <span class="hint mb-4">Please ensure details are provided for at least one of these fields.</span>
 
-      <label class="mb-1">Flat number <input name="sub_building_name" type="text" data-readonly data-required /></label>
+      <label class="mb-1">Flat number <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[sub_building_name]` : 'sub_building_name' }" type="text" data-readonly data-required /></label>
       <span class="hint mb-2">Flat, unit or floor number (e.g. Flat 5, or Floor 6)</span>
       
-      <label class="mb-1">Building name <input name="building_name" type="text" data-required maxlength="50"/></label>
+      <label class="mb-1">Building name <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[building_name]` : 'building_name' }" type="text" data-required maxlength="50"/></label>
       <span class="hint mb-2">Name of the house or building</span>
 
-      <label>House Number <input name="building_number" type="text" data-required data-readonly maxlength="50"/></label>
+      <label>House Number <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[building_number]` : 'building_number' }" type="text" data-required data-readonly maxlength="50"/></label>
       <span class="hint mb-2">House or street number (e.g. 42)</span>
 
-      <label class="mb-1">Street 1 <input name="dependent_thoroughfare" type="text" data-readonly data-required maxlength="81"/></label>
+      <label class="mb-1">Street 1 <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[dependent_thoroughfare]` : 'dependent_thoroughfare' }" type="text" data-readonly data-required maxlength="81"/></label>
       <span class="hint mb-2">Additional street name </span>
 
-      <label class="mb-1">Street 2 <input name="thoroughfare" type="text" data-readonly data-required maxlength="81"/></label>
+      <label class="mb-1">Street 2 <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[thoroughfare]` : 'thoroughfare' }" type="text" data-readonly data-required maxlength="81"/></label>
       <span class="hint mb-2">Primary street name</span>
     </fieldset>
 
 
     <span class="h3 pb-2">Locality details</span>
-    <label>Area${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="dependent_locality" type="text" maxlength="35" data-readonly/></label>
-    <label>Village${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="locality" type="text" maxlength="35" data-readonly/></label>
-    <label>Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="post_town" type="text" maxlength="30" data-readonly/></label>
+    <label>Area${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[dependent_locality]` : 'dependent_locality' }" type="text" maxlength="35" data-readonly/></label>
+    <label>Village${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[locality]` : 'locality' }" type="text" maxlength="35" data-readonly/></label>
+    <label>Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[post_town]` : 'post_town' }" type="text" maxlength="30" data-readonly/></label>
     <label>County${this.hasAttribute('data-show-required') && this.hasAttribute('data-county-required') ? '*' : (!this.hasAttribute('data-show-required') && !this.hasAttribute('data-county-required') ? ' (optional)' : '')} 
-    <select name="postal_county" ${this.hasAttribute('data-county-required') ? 'data-required' : ''} data-readonly>
+    <select name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[postal_county]` : 'postal_county' }" ${this.hasAttribute('data-county-required') ? 'data-required' : ''} data-readonly>
       <option></option>  
       ${countiesString}
     </select></label>
-    <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="postcode" type="text" ${!this.hasAttribute('data-required') || this.hasAttribute('data-required') && this.getAttribute('data-required') == 'false' ? 'required data-required' : ''} data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
+    <label>Postcode${this.hasAttribute('data-show-required') ? '*' : ''} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[postcode]` : 'postcode' }" type="text" ${!this.hasAttribute('data-required') || this.hasAttribute('data-required') && this.getAttribute('data-required') == 'false' ? 'required data-required' : ''} data-readonly maxlength="8" ${this.hasAttribute('data-required') ? ' required' : ''}/></label>
     <label>Country${this.hasAttribute('data-show-required') && this.hasAttribute('data-country-required') ? '*' : (!this.hasAttribute('data-show-required') && !this.hasAttribute('data-county-required') ? ' (optional)' : '')} 
-      <select name="region" data-readonly ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
+      <select name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[region]` : 'region' }" data-readonly ${this.hasAttribute('data-country-required') ? 'data-required' : ''}>
         <option value=""></option>
-        <option value="urn:als:region:qo7jMNaA4" data-value="England">England</option>
-        <option value="urn:als:region:JPBkFjL6I" data-value="Scotland">Scotland</option>
-        <option value="urn:als:region:3lqe2D3qO" data-value="Wales">Wales</option>
-        <option value="urn:als:region:Tm5pOBfK9" data-value="Northern Ireland">Northern Ireland</option>
-        <option value="urn:als:region:ZwIRAnNJo" data-value="Channel Islands">Channel Islands</option>
-        <option value="urn:als:region:8CIOi1khw" data-value="Jersey">Jersey</option>
-        <option value="urn:als:region:qHdx7tNtL" data-value="Guernsey">Guernsey</option>
-        <option value="urn:als:region:DH6LU70lY" data-value="Isle of Man">Isle of Man</option>
+        ${regionsString}
       </select>
     </label>
 
@@ -1630,38 +1668,37 @@ class iamSTDAddressLookup extends HTMLElement {
         <span class="hint mb-4">Please ensure details are provided for at least one of these fields.</span>
 
 
-        <label class="mb-1">Flat number${this.hasAttribute('data-show-required') ? '*' : ''} <input name="overseas[sub_building_name]" type="text" data-overseas-required /></label>
+        <label class="mb-1">Flat number${this.hasAttribute('data-show-required') ? '*' : ''} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][sub_building_name]` : 'overseas[sub_building_name]' }" type="text" data-overseas-required /></label>
         <span class="hint d-block mb-2">Flat, unit or floor number (e.g. Flat 5, or Floor 6)</span>
 
-        <label class="mb-1">Building name${this.hasAttribute('data-show-required') ? '*' : ''} <input name="overseas[building_name]" type="text" data-overseas-required maxlength="50" /></label>
+        <label class="mb-1">Building name${this.hasAttribute('data-show-required') ? '*' : ''} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][building_name]` : 'overseas[building_name]' }" type="text" data-overseas-required maxlength="50" /></label>
         <span class="hint d-block mb-2">Name of the house or building</span>
 
-        <label class="mb-1">House number${this.hasAttribute('data-show-required') ? '*' : ''} <input name="overseas[building_number]" type="text" data-overseas-required maxlength="50" /></label>
+        <label class="mb-1">House number${this.hasAttribute('data-show-required') ? '*' : ''} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][building_number]` : 'overseas[building_number]' }" type="text" data-overseas-required maxlength="50" /></label>
         <span class="hint d-block mb-2">House or street number (e.g. 42)</span>
 
-        <label class="mb-2">Street name${this.hasAttribute('data-show-required') ? '*' : ''} <input name="overseas[thoroughfare]" type="text" data-overseas-required maxlength="81" /></label>
+        <label class="mb-2">Street name${this.hasAttribute('data-show-required') ? '*' : ''} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][thoroughfare]` : 'overseas[thoroughfare]' }" type="text" data-overseas-required maxlength="81" /></label>
       </fieldset>
       <span class="h3 pb-2">Locality details</span>
 
 
 
-      <label class="mb-1">Locality${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[dependent_locality]" type="text" /></label>
+      <label class="mb-1">Locality${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][dependent_locality]` : 'overseas[dependent_locality]' }" type="text" /></label>
       <span class="hint d-block mb-2">Main locality, such as the village, suburb, or district</span>
 
 
-      <label>Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[post_town]" type="text" maxlength="30" /></label>
-      <label>State / Province / Region${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[double_dependent_locality]" type="text" /></label>
-      <label>Postcode / ZIP code${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="overseas[zip_code]" type="text" /></label>
+      <label>Town / City${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][post_town]` : 'overseas[post_town]' }" type="text" maxlength="30" /></label>
+      <label>State / Province / Region${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][double_dependent_locality]` : 'overseas[double_dependent_locality]' }" type="text" /></label>
+      <label>Postcode / ZIP code${this.hasAttribute('data-show-required') ? '' : ' (optional)'} <input name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][zip_code]` : 'overseas[zip_code]' }" type="text" /></label>
       
-      <label>Country <select name="overseas[country_code]" data-overseas-required>
+      <label>Country <select name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[overseas][country_code]` : 'overseas[country_code]' }" data-overseas-required>
         <option value=""></option>
         ${countriesString}
-        <option value="urn:als:country:ndjIqa72" data-value="Poland">Poland</option>
       </select></label>
     </fieldset>
 
     <button slot="actions" type="button" id="overseasToggle" class="link toggleOverseas">Use overseas address</button>` : ''}
-    ${this.hasAttribute('data-address-unknown') ? `<label slot="actions"><input type="checkbox" value="true" name="${this.getAttribute('data-address-unknown')}" ${this.hasAttribute('data-address-unknown-checked') ? 'checked="checked"' : '' }/> Address unknown</label>` : ``}
+    ${this.hasAttribute('data-address-unknown') ? `<label slot="actions" id="address_unknown_checkbox"><input type="checkbox" value="true" name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[${this.getAttribute('data-address-unknown')}]` : this.getAttribute('data-address-unknown') }" ${this.hasAttribute('data-address-unknown-checked') ? 'checked="checked"' : '' }/> Address unknown</label>` : ``}
     <div class="bg-light text-center px-3" slot="afterList">
       <p class="p-2">Can't find an address? Check details with the <br/><a href="" class="fa-new"><i class="fa-regular fa-arrow-up-right-from-square"></i>Royal mail address finder</a></p>
       ${this.hasAttribute('data-allow-overseas') ? `<hr/><p class="p-2">If the address doesn’t exist you can enter manually <br /><button type="button" id="overseasToggleInline" class="mt-1 mb-0 btn btn-action"><i class="fa-regular fa-edit me-1"></i>Enter address manually</button></p>` : ''}
@@ -1678,6 +1715,7 @@ class iamSTDAddressLookup extends HTMLElement {
     const languageToggle = this.querySelector('#languageToggle');
     const atleastone = this.querySelector('.overseas-atleastone');
     const overseasFields = this.querySelector('.overseas');
+    const addressUnknownCheckbox = this.querySelector('#address_unknown_checkbox input');
 
     const openOverseas = (): void => {
       const updateEvent = new CustomEvent('open-manual');
@@ -1687,9 +1725,13 @@ class iamSTDAddressLookup extends HTMLElement {
       Array.from(addressComponent.querySelectorAll('[data-required]')).forEach((input) => {
         input.removeAttribute('required');
       });
-      Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
-        input.setAttribute('required', 'true');
-      });
+
+      if(overseasFields){
+          
+        Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
+          input.setAttribute('required', 'true');
+        });
+      }
     }
 
     overseasToggle?.addEventListener('click', () => {
@@ -1698,6 +1740,8 @@ class iamSTDAddressLookup extends HTMLElement {
         openOverseas();
       }
     });
+
+    
 
     overseasToggleInline?.addEventListener('click', () => {
 
@@ -1710,9 +1754,12 @@ class iamSTDAddressLookup extends HTMLElement {
       this.classList.remove('show-overseas');
 
 
-      Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
-        input.setAttribute('required', 'true');
-      });
+      if(overseasFields) {
+        Array.from(overseasFields.querySelectorAll('[data-overseas-required]')).forEach((input) => {
+          input.setAttribute('required', 'true');
+        });        
+      }
+
     });
 
     languageToggle?.addEventListener('click', () => {
@@ -1756,7 +1803,7 @@ class iamSTDAddressLookup extends HTMLElement {
 
     // If the address unknown checkbox if checked then remove any required fields so you can post the form
     if(this.hasAttribute('data-address-unknown')){
-      const addressUnknownInput = this.querySelector(`[name="${this.getAttribute('data-address-unknown')}"]`);
+      const addressUnknownInput = this.querySelector(`[name="${this.hasAttribute('data-name') ? `${this.hasAttribute('data-name')}[${this.getAttribute('data-address-unknown')}]` : this.getAttribute('data-address-unknown')}"]`);
 
       if(addressUnknownInput && addressUnknownInput.checked) {
         
@@ -1785,6 +1832,86 @@ class iamSTDAddressLookup extends HTMLElement {
           this.dispatchEvent(updateEvent);
         }
       });
+    }
+
+
+    // If inside conditional
+    
+
+    if(this.closest('.conditional')){
+
+
+      Array.from(this.querySelectorAll('[required]')).forEach((input) => {
+
+        input.setAttribute('data-conditional-required','true');
+        input.removeAttribute('required');
+      });
+      
+      Array.from(this.querySelectorAll('[data-required]')).forEach((input) => {
+
+        input.setAttribute('data-conditional-data-required','true');
+        input.removeAttribute('data-required');
+      });
+      
+      const conditionalStyles = window.getComputedStyle(this.closest('.conditional'));
+
+      if(conditionalStyles.getPropertyValue("display") == 'block'){
+        Array.from(this.querySelectorAll('[data-conditional-data-required]')).forEach((input) => {
+          input.setAttribute('data-required', 'true');
+        });
+        Array.from(this.querySelectorAll('[data-conditional-required]')).forEach((input) => {
+          input.setAttribute('required', 'true');
+        });
+      }
+    }
+
+
+    // Addres unknown
+
+    if(this.hasAttribute('data-address-unknown')) {
+      const toggleAddressFields = () => {
+
+        if(addressUnknownCheckbox.checked){
+          Array.from(this.querySelectorAll(`input:not([name="${this.hasAttribute('data-name') ? `${this.getAttribute('data-name')}[${this.getAttribute('data-address-unknown')}]` : this.getAttribute('data-address-unknown') }"]), select`)).forEach((input) => {
+
+            input.setAttribute('disabled','disabled');
+            input.setAttribute('data-unknown-disabled','true');
+
+            addressComponent.setAttribute('data-disabled','disabled');
+          });
+        }
+        else {
+          Array.from(this.querySelectorAll('[data-unknown-disabled]')).forEach((input) => {
+
+            addressComponent.removeAttribute('data-disabled','disabled');
+            input.removeAttribute('disabled');
+            input.removeAttribute('data-unknown-disabled');
+          });
+        }
+      }
+      toggleAddressFields();
+
+      addressUnknownCheckbox?.addEventListener('change', (e) => {
+
+        toggleAddressFields();
+      });
+    }
+  }
+
+  static get observedAttributes(): any {
+    return ['data-url'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
+    const addressComponent = this.querySelector('iam-address-lookup');
+
+    switch (attrName) {
+      case 'data-url': {
+        if (oldVal != newVal && addressComponent) {
+          addressComponent.setAttribute('data-url', newVal + '?search_string=');
+        }
+        break;
+      }
     }
   }
 }

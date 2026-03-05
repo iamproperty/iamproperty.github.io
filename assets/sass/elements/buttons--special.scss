@@ -15,7 +15,7 @@
       content: '';
 
       display: inline-block;
-      margin-right: -0.5em;
+      margin-right: 0.25em;
       margin-left: 1em;
 
       height: 0.8em;
@@ -127,7 +127,7 @@
 
     &:after {
       position: absolute;
-      top: rem(10);
+      top: 0.625rem; /* 10 */
       right: 1.5rem;
       content: '';
       height: 1.5rem;

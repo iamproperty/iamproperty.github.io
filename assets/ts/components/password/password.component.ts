@@ -20,7 +20,7 @@ class iamPassword extends HTMLElement {
       <style>
       ${loadCSS}
       </style>
-      <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
       <div class="wrapper">
         <slot></slot>
         <button type="button" class="suffix fa-solid fa-eye-slash" data-alt-class="suffix fa-solid fa-eye" aria-hidden="true"><span class="visually-hidden">Show password</span></button>

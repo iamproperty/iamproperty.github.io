@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import Cookies from '../../../node_modules/js-cookie/dist/js.cookie.mjs';
 
 export const filterList = (component, search): void => {
 
@@ -27,8 +27,11 @@ export const searchAjax = async (component, search, callback): any => {
 
   console.log(firstInput);
 
-  const inputType = firstInput.getAttribute('type');
-  const inputName = firstInput.getAttribute('name');
+  const inputType = firstInput && firstInput.hasAttribute('type') ? firstInput.getAttribute('type') : 'checkbox';
+  let inputName = firstInput && firstInput.hasAttribute('name') ? firstInput.getAttribute('name') : 'tags';
+
+  if(component.hasAttribute('data-name'))
+    inputName = component.hasAttribute('data-name');
 
   const searchAjaxURL = `${ajaxURL}?search_query=${encodeURI(searchterm)}`;
 
@@ -62,7 +65,7 @@ export const searchAjax = async (component, search, callback): any => {
         for (let i = 0; i < response['data'].length; i++) {
 
           if(!component.querySelector(`[value="${response['data'][i].value}"]`))
-            items += `<label class="tag"><input type="${inputType}" name="${component.hasAttribute('data-name') ? component.getAttribute('data-name') : inputName}" value="${ response['data'][i].value }"/>${ response['data'][i].title }</label>`;
+            items += `<label class="tag dropdown__option"><input type="${inputType}" name="${component.hasAttribute('data-name') ? component.getAttribute('data-name') : inputName}" value="${ response['data'][i].value }"/>${ response['data'][i].title }</label>`;
         }
 
         component.insertAdjacentHTML('beforeend', `${items}`);
@@ -101,4 +104,113 @@ export const setTag = (tag):void => {
     tagIndex = 1;
 
   tag?.classList.add(`wider-colour-${tagIndex + 1}`);
+}
+
+export const addKeyboardEvents = (dropdown, search):void => {
+
+
+
+  search.addEventListener('keydown', (e) => {
+
+    switch ( e.keyCode ) {
+      case 40: // down
+        e.stopPropagation();
+        e.preventDefault();
+
+        dropdown.querySelector('label:not([slot="checked"]) input')?.focus();
+
+        break;
+    }
+  });
+
+  dropdown.addEventListener('keydown', (event) => {
+
+    const topLevelmenuItems = dropdown.querySelectorAll(':scope > a, :scope > button, :scope > details > summary, :scope > label:not([slot="checked"]) > input');
+    const menuItems = dropdown.querySelectorAll('a, button, input, label:not([slot="checked"]) > input');
+
+    const activeElement = document.activeElement;
+
+    if (event && event.target instanceof HTMLElement && event.target.closest('a, button, summary, label:not([slot="checked"]) > input')) {
+      const activeItem = document.activeElement;
+      const prevIndex = Array.from(topLevelmenuItems).indexOf(activeItem) - 1;
+      const nextIndex = Array.from(topLevelmenuItems).indexOf(activeItem) + 1;
+
+      switch (
+        event.keyCode // change to event.key to key to use the above variable
+      ) {
+        case 27: // Esc
+          if (activeItem.closest('details')) {
+            event.stopPropagation();
+            event.preventDefault();
+            activeItem.closest('details').removeAttribute('open');
+            activeItem.closest('details').querySelector(':scope summary').focus();
+          } else {
+            event.stopPropagation();
+            //menuButton.focus();
+          }
+
+          break;
+        case 32: // Space
+        case 13: // Enter
+
+          break;
+        case 35: // end
+          event.stopPropagation();
+          event.preventDefault();
+
+          dropdown.querySelector('details[open]')?.removeAttribute('open');
+
+          Array.from(menuItems)[menuItems.length - 1].focus();
+
+          break;
+        case 36: // home
+          event.stopPropagation();
+          event.preventDefault();
+
+          dropdown.querySelector('details[open]')?.removeAttribute('open');
+
+          Array.from(menuItems)[0].focus();
+
+          break;
+        case 38: // up
+          event.stopPropagation();
+          event.preventDefault();
+
+          if (Array.from(topLevelmenuItems).indexOf(activeItem) > -1) {
+            if (Array.from(topLevelmenuItems)[prevIndex] != undefined)
+              Array.from(topLevelmenuItems)[prevIndex].focus();
+            else Array.from(topLevelmenuItems)[topLevelmenuItems.length - 1].focus();
+          } else if (activeItem.closest('details')) {
+            const subMenuItems = activeItem
+              .closest('details')
+              .querySelectorAll('a, button, :scope details > summary');
+            subPrevIndex = Array.from(subMenuItems).indexOf(activeItem) - 1;
+
+            if (Array.from(subMenuItems)[subPrevIndex] != undefined) Array.from(subMenuItems)[subPrevIndex].focus();
+            else Array.from(subMenuItems)[subMenuItems.length - 1].focus();
+          }
+
+          break;
+        case 40: // down
+          event.stopPropagation();
+          event.preventDefault();
+
+          if (Array.from(topLevelmenuItems).indexOf(activeItem) > -1) {
+            if (Array.from(topLevelmenuItems)[nextIndex] != undefined)
+              Array.from(topLevelmenuItems)[nextIndex].focus();
+            else Array.from(topLevelmenuItems)[0].focus();
+          } else if (activeItem.closest('details')) {
+            const subMenuItems = activeItem.closest('details')?.querySelectorAll('a, button, :scope details > summary');
+            subNextIndex = Array.from(subMenuItems).indexOf(activeItem) + 1;
+
+            if (Array.from(subMenuItems)[subNextIndex] != undefined) Array.from(subMenuItems)[subNextIndex].focus();
+            else Array.from(subMenuItems)[0].focus();
+          }
+
+          break;
+      }
+    }
+  });
+
+
 }

@@ -171,9 +171,20 @@ export const setupBasicTable = (component, table, form, pagination): void => {
     getLargestLastColWidth(component, table);
     getRowHeight(component, table);
   }
+
+  highlightRows(component);
 };
 
 // #region Basic table fnctions
+export const highlightRows = (component): void => {
+
+  Array.from(component.querySelectorAll('tr[data-highlight]')).forEach((row) => {
+    row.insertAdjacentHTML('afterend',`<tr role="presentation" class="tr--highlight">
+          <td colspan="100%"><i class="fa-solid fa-star"></i> ${row.getAttribute('data-highlight')}</td>
+        </tr>`);
+  });
+}
+
 export const transferAttributes = (component, pagination): void => {
   if (component.hasAttribute('data-total')) pagination.setAttribute('data-total', component.getAttribute('data-total'));
   if (component.hasAttribute('data-page')) pagination.setAttribute('data-page', component.getAttribute('data-page'));
@@ -289,7 +300,7 @@ export const createMobileButton = (component, table): void => {
     const preExpanded = row.getAttribute('data-view') === 'full' ? 'aria-expanded' : '';
     row.insertAdjacentHTML(
       'afterbegin',
-      `<td class="${component.hasAttribute('data-expandable') ? 'td--fixed ' : ''}td--expand"><button class="btn btn-compact btn-secondary btn-sm" data-expand-button ${preExpanded} data-index="${index}">Expand</button></td>`
+      `<td class="${component.hasAttribute('data-expandable') ? 'td--fixed ' : ''}td--expand"><button class="btn btn-compact btn-secondary btn-sm fa-circle-plus" data-expand-button ${preExpanded} data-index="${index}">Expand</button></td>`
     );
   });
 
@@ -299,6 +310,16 @@ export const createMobileButton = (component, table): void => {
       const tableRow = button.closest('tr');
 
       button.toggleAttribute('aria-expanded');
+
+      if(button.classList.contains('fa-circle-plus')){
+        button.classList.remove('fa-circle-plus');
+        button.classList.add('fa-circle-minus');
+      }
+      else {
+        
+        button.classList.remove('fa-circle-minus');
+        button.classList.add('fa-circle-plus');
+      }
 
       if (tableRow.getAttribute('data-view') == 'full') tableRow.setAttribute('data-view', 'default');
       else tableRow.setAttribute('data-view', 'full');

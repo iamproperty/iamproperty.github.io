@@ -1,5 +1,5 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
-import { searchAjax, filterList, setTag } from '../../modules/dropdown';
+import { searchAjax, filterList, setTag, addKeyboardEvents } from '../../modules/dropdown';
 
 trackComponentRegistered('iam-tag');
 
@@ -38,10 +38,14 @@ class iamTag extends HTMLElement {
     const input = this.querySelector(':checked');
     const inputName = input?.getAttribute('name');
     let tag = this.querySelector('label:has(:checked)');
-
     setTag(tag);
-    
 
+    // Make sure the dropdown options are set
+    Array.from(this.querySelectorAll(':scope > label')).forEach((label) => {
+      label.classList.add('dropdown__option');
+    });
+
+    
     this.addEventListener('click',()=>{
       if (event && event.target instanceof HTMLElement && event.target.closest('label:has(:checked)')) {
         
@@ -61,8 +65,6 @@ class iamTag extends HTMLElement {
         filterList(this, search);
       }
     });
-
-
 
     this.addEventListener('change', (event) => {
       if (event && event.target instanceof HTMLElement && event.target.closest('input[type="radio"],input[type="checkbox"]')) {
@@ -94,13 +96,8 @@ class iamTag extends HTMLElement {
       }
     });
 
-
-
     // TODO Add keyboard actions
-
-
-
-
+    addKeyboardEvents(this, search);
   }
 }
 

@@ -1,5 +1,5 @@
-@use '../_func.scss' as *;
-@use 'card.module.scss' as *;
+@use '../_func' as *;
+@use 'card.module' as *;
 
 :host {
   --card-head-height: 9rem;
@@ -18,7 +18,7 @@
 :host([data-record]) {
   .card__head {
     &:before {
-      font-family: var(--record-icon-font, 'Font Awesome 6 Pro');
+      font-family: var(--record-icon-font, 'Font Awesome 7 Pro');
       font-weight: normal;
       font-size: 1.5rem;
       content: var(--record-icon);
@@ -29,9 +29,9 @@
       bottom: 0;
       background-color: var(--record-colour);
       border-radius: 50%;
-      height: rem(64);
-      line-height: rem(64);
-      width: rem(64);
+      height: 4rem; /* 64 */
+      line-height: 4rem; /* 64 */
+      width: 4rem; /* 64 */
       text-align: center;
       transform: translate(-50%, 0);
     }
@@ -62,10 +62,10 @@
     bottom: 0;
     background-color: var(--record-colour);
     border-radius: 50%;
-    height: rem(64);
-    margin-top: rem(-64);
-    line-height: rem(64);
-    width: rem(64);
+    height: 4rem; /* 64 */
+    margin-top: -4rem;
+    line-height: 4rem; /* 64 */
+    width: 4rem; /* 64 */
     text-align: center;
     transform: translate(-50%, 0);
   }
@@ -83,9 +83,9 @@
     left: 50%;
     bottom: 0;
     border-radius: 50%;
-    height: rem(64);
-    line-height: rem(64);
-    width: rem(64);
+    height: 4rem; /* 64 */
+    line-height: 4rem; /* 64 */
+    width: 4rem; /* 64 */
     text-align: center;
     transform: translate(-50%, 0);
     margin: 0;
@@ -120,7 +120,7 @@
 ::slotted(span:not(.badge)) {
   display: block !important;
   font-weight: normal !important;
-  font-size: rem(14) !important;
+  font-size: 0.875rem !important;
   line-height: 1.5rem !important;
 }
 
@@ -131,7 +131,7 @@
 ::slotted(*:not(.badge)) {
   display: block !important;
   font-weight: normal !important;
-  font-size: rem(14) !important;
+  font-size: 0.875rem !important;
   line-height: 1.5rem !important;
 }
 

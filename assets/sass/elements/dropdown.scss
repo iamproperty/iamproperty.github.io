@@ -1,0 +1,87 @@
+@use '../_func' as *;
+
+@layer elements {
+  
+  // #region Dropdown
+  .dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    padding: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    z-index: 99;
+    display: none;
+    max-height: 15.25rem !important;
+    overflow: auto;
+
+    &:before {
+      display: none;
+    }
+  }
+
+  // #endregion
+  
+  // #region Needed for the component files
+  :is(iam-tag,iam-multiselect):has(label:not([slot='checked'])) {
+    --display-panel: block;
+  }
+
+  :is(iam-tag,iam-multiselect):has(label[slot='checked']) {
+    --display-button: block;
+  }
+
+  :is(iam-tag,iam-multiselect)[data-single] .tag[slot='checked'],
+  :is(iam-tag,iam-multiselect)[data-single] .tag[slot='checked'] * {
+    pointer-events: none!important;
+  }
+
+  @container style(--theme: dark) {
+    :host :is(.tag, .badge):not([slot='checked']) {
+      color: var(--colour-heading);
+    }
+  }
+  // #endregion
+
+  // #region Indivitual options
+  .dropdown__option[slot='checked'] {
+    order: var(--order, 1);
+  }
+
+  .dropdown__option:not([slot='checked']) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    text-align: left;
+    border-radius: 0;
+    padding-inline: 1rem;
+    outline: none;
+    padding-block: 0.5rem;
+
+    padding-bottom: 0.25em;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    &:not(:hover, :focus, :active, :focus-within) {
+      background: none !important;
+    }
+
+    &::after {
+      display: none;
+    }
+
+    &[data-email] {
+
+      &::after {
+        content: attr(data-email);
+        display: block;
+        line-height: 1;
+        padding-bottom: 0.25em;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+    }
+  }
+  // #endregion
+}

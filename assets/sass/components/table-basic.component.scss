@@ -1,4 +1,4 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 @use '../utilities/max-height' as *;
 
@@ -18,7 +18,7 @@
   background: var(--colour-canvas-2);
   padding: var(--wrapper-padding);
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
-  border-radius: rem(10);
+  border-radius: 0.625rem; /* 10 */
   margin-bottom: 2rem;
   overflow: hidden;
 
@@ -77,11 +77,14 @@
       max-height: none !important;
     }
 
+    ::slotted(*) {
+      margin-inline: 1.5rem;
+    }
     ::slotted(table) {
       overflow: visible !important;
       margin-inline: 1.5rem;
       margin-bottom: 1.5rem !important;
-      width: calc(100% - 3rem) !important;
+      width: var(--table-width, calc(100% - 3rem)) !important;
       display: block;
     }
 

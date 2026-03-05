@@ -3,8 +3,6 @@
     .wider-colour-#{$i} {
       --colour: var(--wider-colour-#{$i} );
       --wider-colour: var(--wider-colour-#{$i} );
-      --wider-colour-hover: var(--wider-colour-#{$i}-hover);
-      --wider-colour-active: var(--wider-colour-#{$i}-active);
       color: #262626 !important;
     }
   }

@@ -50,7 +50,7 @@ iam-tabs::part(next-button) {
 iam-tabs.tabs--guided::part(next-button) {
   @container (width > 62em) {
     position: absolute;
-    top: rem(150);
+    top: 9.375rem; /* 150*/ 
     right: 0;
     display: block;
   }

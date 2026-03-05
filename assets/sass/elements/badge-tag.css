@@ -1,0 +1,101 @@
+@layer elements {
+  :is(.badge, .tag) {
+    font-size: 1rem;
+    line-height: 1.625rem; /* 26 */
+    border: none !important;
+    margin: 0;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    max-width: fit-content;
+    color: #262626;
+    position: relative;
+    background: var(--wider-colour, var(--wider-colour-1));
+    margin-bottom: 1rem;
+
+    &:has(+ :is(.badge, .tag)) {
+      margin-right: 0.375rem; /* 6 */
+    }
+
+    &:empty {
+      display: none;
+    }
+
+    &:is(.bg-primary, .bg-dark, .bg-danger) {
+      color: #fcfcfc !important;
+    }
+  }
+
+  .badge {
+    border-radius: 0.375rem; /* 6 */
+    padding: 0 0.5rem;
+  }
+
+  .badge--rounded {
+    border-radius: 1rem;
+    min-width: 1.625rem;
+    padding: 0;
+  }
+
+  .tag {
+    border-radius: 1rem;
+    padding: 0 1rem;
+
+    i {
+      margin-left: 0.5rem;
+    }
+
+    &:is(:hover, :focus, .hover, :focus-within, :focus-visible) {
+      background: color-mix(in oklab, var(--colour), #000000 5%);
+    }
+
+    &:is(:active, .active) {
+      background: color-mix(in oklab, var(--colour), #000000 10%);
+    }
+
+    &:has(input:disabled),
+    &:disabled {
+      background: var(--wider-colour-1) !important;
+      color: #99adb1 !important;
+    }
+
+    &:has([readonly]) {
+      pointer-events: none;
+    }
+    &:has([readonly]):after {
+      display: none!important;
+    }
+  }
+
+  iam-multiselect:not(:defined) .tag,
+  .tag.tag--toggle {
+    background: var(--colour-canvas);
+    outline: 1px solid var(--colour-border);
+  }
+
+  .tag.tag--toggle {
+    &:after {
+      display: none;
+    }
+
+    &:is(:hover, :focus) {
+      background: #eeeeee;
+    }
+
+    &:is(:active) {
+      background: #e0e0e0;
+    }
+
+    &:has(input:checked),
+    &.selected {
+      background: #e9f9fd;
+      outline: 1px solid #1ebee6;
+    }
+  }
+
+  /* Quick fix for badges in buttons */
+  .btn :is(.badge, .tag) {
+    position: relative;
+    top: -1px;
+  }
+}

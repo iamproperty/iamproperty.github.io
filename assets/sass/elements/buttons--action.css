@@ -1,0 +1,54 @@
+@layer elements {
+  /* #region Action button */
+  .btn-action {
+    --btn-border-width: 1px;
+    --btn-padding-block: 0.3125rem /* 5px */;
+    --btn-padding-inline: 0.3125rem /* 5px */;
+    --btn-margin: 0.5rem;
+
+    border-radius: 0.25rem !important;
+    font-weight: 400 !important;
+    font-size: 1rem;
+    line-height: 1.25rem;
+
+    &:not(.btn-primary) {
+      color: var(--colour-heading);
+    }
+
+    &:not(.btn-primary):not(.border-0) {
+      background-color: var(--colour-canvas-2);
+      border: var(--btn-border-width) solid var(--colour-muted);
+    }
+
+    &.btn[class*='fa-']:before {
+      content: var(--fa);
+      margin-right: 0.375rem; /* 6 */
+    }
+
+    a:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
+    &:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+      background: var(--colour-btn-action-hover-bg);
+    }
+
+    .btn-primary:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
+    &.btn-primary:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+      filter: brightness(90%);
+      background: var(--colour-btn-bg);
+      border: var(--btn-border-width) solid var(--colour-btn-border);
+      color: var(--colour-btn);
+    }
+
+    a:is(:active, .active):not([disabled]):not(.btn-primary) &,
+    &:is(:active, .active):not([disabled]):not(.btn-primary) {
+      filter: brightness(85%);
+      transition: all 0.1s;
+      color: var(--colour-heading);
+    }
+  }
+  /* #endregion */
+
+  .btn-action:not(.btn-compact).fa-compact-only:before {
+
+    display: none!important;
+  }
+}

@@ -1,0 +1,235 @@
+@use '../_func' as *;
+
+@use '../_grid' as *;
+
+@use '../elements/forms' as *;
+@use '../elements/admin-panel' as *;
+
+@use '../elements/type' as *;
+@use '../elements/buttons' as *;
+@use '../utilities/margins';
+@use '../utilities/paddings';
+@use '../utilities/colours';
+@use '../utilities/visually-hidden';
+
+@use '../utilities/font-awesome-iso-fallbacks';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block!important;
+}
+
+// #region enable icons
+.fa-chevron-up {
+  --fa: "\f077";
+}
+
+.fa-chevron-down {
+  --fa: "\f078";
+}
+
+.fa-trash {
+  --fa: "\f1f8";
+}
+
+.fa-plus {
+  --fa: "\2b";
+}
+
+.fa-pen-to-square {
+  --fa: "\f044";
+}
+
+.fa-floppy-disk {
+  
+  --fa: "\f0c7";
+}
+
+[class*="fa-"]{
+
+  &:before {
+    content: var(--fa);
+    font-weight: 600;
+    font-family: "Font Awesome 7 Pro";
+  }
+}
+// #endregion
+
+// #region basic structure
+
+#wrapper {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+
+  .admin-panel {
+    order: 1;
+    justify-content: flex-end;
+    display: flex;
+    max-width: fit-content;
+    gap: 0.75rem;
+    padding: 1rem;
+
+    > * {
+      margin: 0;
+    }
+  }
+
+  #items {
+    order: 2;
+    display: block!important;
+  }
+}
+// #endregion
+
+// #region buckets
+#buckets {
+  
+  display: block!important;
+}
+
+.bucket {
+  display: block;
+  min-height: 10rem;
+  background-color: blue;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.bucket:empty {
+  display: block;
+  min-height: 10rem;
+  background-color: red;
+  margin-bottom: 2rem;
+  padding: 1rem;
+}
+
+.bucket__wrapper {
+
+  padding-right: 10.25rem;
+  position: relative;
+  border-bottom: 1px solid var(--colour-border);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+
+  > .btn__group {
+    position: absolute;
+    top: 0.25rem;
+    right: 0;
+    gap: 0;
+    padding: 0;
+  }
+}
+// #endregion
+
+// #region item
+#items [data-bucket] {
+  
+  display: block;
+
+  form {
+    --btns-width: 2.5rem;
+    --col-size: calc((100% - (var(--gap) * 11)) / 12);
+    column-gap: var(--gap);
+    grid-column: var(--col-start, col-1-start) / var(--col-end, col-12-end);
+    grid-template-columns: [content-start col-1-start] var(--col-size) [col-1-end col-2-start] var(--col-size) [col-2-end col-3-start] var(--col-size) [col-3-end col-4-start] var(--col-size) [col-4-end col-5-start] var(--col-size) [col-5-end col-6-start] var(--col-size) [col-6-end col-7-start] var(--col-size) [col-7-end col-8-start] var(--col-size) [col-8-end col-9-start] var(--col-size) [col-9-end col-10-start] var(--col-size) [col-10-end col-11-start] var(--col-size) [col-11-end col-12-start] var(--col-size) [col-12-end content-end];
+
+    padding-right: calc(var(--btns-width) + 0.5rem);
+    position: relative;
+
+    .btn__group {
+      position: absolute;
+      top: 0.25rem;
+      right: 0;
+      gap: 0;
+      width: var(--btns-width);
+      padding-top: 1.75rem;
+      margin: 0;
+
+      .btn:not(.fa-trash){
+        display: none;
+      }
+    }
+
+    &:not(:where(main)):has(>[class*=col-]) {
+      .btn__group {
+        left: 100%;
+        margin-left: 0.5rem;
+        right: auto;
+      }
+    }
+  }
+}
+
+:host([data-order]) #items [data-bucket] form {
+
+  --btns-width: 10rem;
+
+  .btn:not(.fa-trash) {
+    display: inline-block;
+  }
+}
+// #endregion
+
+// #region criteria
+.criteria {
+  display: flex;
+  gap: 1rem;
+  padding-right: 5.25rem;
+  position: relative;
+
+  .btn__group {
+    position: absolute;
+    top: 0.25rem;
+    right: 0;
+    gap: 0;
+    padding: 0;
+  }
+
+  label {
+    flex-grow: 1;
+  }
+  label:nth-child(2) {
+    flex-grow: 0;
+  }
+}
+// #endregion
+
+// #region expand criteria
+.bucket__wrapper:not(.bucket--expanded) {
+  > label > span { // TODO add a selector if the input matches the only criteria item
+    display: none;
+  }
+  .criteria {
+    display: none;
+  }
+  .criteria label:nth-child(3):has(:disabled){
+    display: none;
+  }
+}
+
+.bucket__wrapper.bucket--expanded {
+
+  .btn__group .fa-pen-to-square {
+    --fa: "\e0a6";
+  }
+}
+// #endregion
+
+// #region Disable top and bottom buttons
+
+#buckets .bucket__wrapper:first-child .btn__group [data-direction="up"],
+#buckets .bucket__wrapper:last-child .btn__group [data-direction="down"],
+[data-bucket] form:first-child .btn__group [data-direction="up"],
+[data-bucket] form:last-child .btn__group [data-direction="down"] {
+
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// #endregion

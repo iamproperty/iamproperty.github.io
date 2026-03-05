@@ -12,6 +12,8 @@
     </DSHeader>
     <p class="lead">Highlight a piece of content so that attention is drawn to it; useful for promos, adds or important stats.</p>
 
+    
+    <div class="visualtest">
     <div class="bg-warning highlight ">
       <span class="h4 pb-0">19 days</span>
       <p>Current Skipton council local authority search times</p>
@@ -33,7 +35,7 @@
       <small class="x-small d-block pb-1">by using Premium Conveyancing</small>
       <span class="h3 d-block">25 days</span>
     </div>
-
+  </div>
 
   </main>
 </template>

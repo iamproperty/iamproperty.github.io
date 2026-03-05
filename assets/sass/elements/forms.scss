@@ -5,6 +5,7 @@
 
 @use './label' as *;
 @use './input' as *;
+@use './textarea' as *;
 
 
 $icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
@@ -17,8 +18,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
   // 1. Remove the margin in Firefox and Safari
   select,
-  optgroup,
-  textarea {
+  optgroup {
     margin: 0; // 1
     font-family: inherit;
     font-size: inherit;
@@ -45,13 +45,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 
   
-
-  // 1. Textareas should really only resize vertically so they don't break their (horizontal) containers.
-
-  textarea {
-    resize: vertical; // 1
-  }
-
   // 1. Browsers set a default `min-width: min-content;` on fieldsets,
   //    unlike e.g. `<div>`s, which have `min-width: 0;` by default.
   //    So we reset that to ensure fieldsets behave more like a standard block element.
@@ -165,6 +158,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   // #region legend
   fieldset {
     width: 100%;
+    position: relative;
   }
   legend {
     font-family: var(--font-heading);
@@ -209,7 +203,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       width: 100%;
     }
 
-    :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), textarea, output) {
+    :is(input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']), output) {
       flex-shrink: 1;
       flex-grow: 1;
       width: 0;
@@ -225,14 +219,14 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   *:has(> :is(.form-control-sm, .input--sm)) {
     --input-fs: 0.875rem; /* 14/16 */
     --input-lh: 1rem;
-    --input-padding-block: #{rem(10)};
+    --input-padding-block: #{0.625rem};
     --input-padding-inline: 0.875rem; /* 14/16 */
   }
   *:has(> :is(.form-control-lg, .input--lg)) {
     --input-fs: 1.5rem;
-    --input-lh: #{rem(29)};
+    --input-lh: 1.8125rem; /* 29 */ 
     --input-padding-block: 1.25rem;
-    --input-padding-inline: #{rem(22)};
+    --input-padding-inline: 1.375rem; /* 22 */ 
   }
 
   *:has(> label:first-child):has(> input):has(> :is(.form-control-inline, .input--inline)) {
@@ -253,7 +247,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     max-width: var(--input-max-width);
 
     &:after {
-      font-family: 'Font Awesome 6 Pro';
+      font-family: 'Font Awesome 7 Pro';
       font-weight: 300;
       content: '\f023';
       position: absolute;
@@ -279,14 +273,12 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
             [type='time']
           ),
-        textarea,
         output
       ),
     :is(
       input:not([type='checkbox']):not([type='radio']):not([type='file']):not([type='range']):not([type='date']):not(
           [type='time']
         ),
-      textarea,
       output
     ):has(~ .suffix) {
       order: 1;
@@ -421,8 +413,8 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       font-size: 1rem;
       line-height: 1.25rem;
       padding-left: 2.5rem;
-      padding-top: rem(10);
-      padding-bottom: rem(10);
+      padding-top: 0.625rem; /* 10 */
+      padding-bottom: 0.625rem; /* 10 */
       margin-bottom: 1.5rem;
       margin-right: 1.5rem;
       cursor: pointer;
@@ -448,7 +440,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         width: var(--radio-size, 1.5rem);
         display: inline-block;
         position: absolute;
-        top: rem(10 - 2);
+        top: 0.5rem;
         left: var(--outline-width);
       }
 
@@ -466,13 +458,13 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         height: 0.875rem; /* 14/16 */
         width: 0.875rem; /* 14/16 */
 
-        height: var(--radio-inner-size, #{rem(14)});
-        width: var(--radio-inner-size, #{rem(14)});
+        height: var(--radio-inner-size, 0.875rem);
+        width: var(--radio-inner-size, 0.875rem);
 
         display: none;
         position: absolute;
-        top: var(--radio-inner-top, #{rem(15 - 2)});
-        left: var(--radio-inner-left, calc(#{rem(5)} + var(--outline-width)));
+        top: var(--radio-inner-top, 0.8125rem);
+        left: var(--radio-inner-left, calc(0.3125rem + var(--outline-width)));
       }
 
       &.radio--tick {
@@ -482,7 +474,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
           font-size: 1.5em;
           line-height: 1;
           color: var(--tick-colour);
-          font-family: 'Font Awesome 6 Pro';
+          font-family: 'Font Awesome 7 Pro';
 
           background: none !important;
           border: none !important;
@@ -552,15 +544,15 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         font-size: var(--checkbox-tick-size, 1em);
         line-height: 1;
         color: var(--colour-primary-theme);
-        font-family: 'Font Awesome 6 Pro';
+        font-family: 'Font Awesome 7 Pro';
         font-weight: bold;
         height: var(--checkbox-inner-size, 1.5rem);
         width: var(--checkbox-inner-size, 1.5rem);
-        line-height: rem(26);
+        line-height: 1.625rem; /* 26 */
         background: none !important;
         border: none !important;
         outline: none !important;
-        top: var(--checkbox-inner-top, #{rem(10 - 2)});
+        top: var(--checkbox-inner-top, 0.5rem);
         left: var(--checkbox-inner-left, var(--outline-width));
         text-align: center;
       }
@@ -579,15 +571,15 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         font-size: var(--checkbox-tick-size, 1em);
         line-height: 1;
         color: var(--colour-primary-theme);
-        font-family: 'Font Awesome 6 Pro';
+        font-family: 'Font Awesome 7 Pro';
         font-weight: bold;
         height: var(--checkbox-inner-size, 1.5rem);
         width: var(--checkbox-inner-size, 1.5rem);
-        line-height: rem(26);
+        line-height: 1.625rem; /* 26 */
         background: none !important;
         border: none !important;
         outline: none !important;
-        top: var(--checkbox-inner-top, #{rem(10 - 2)});
+        top: var(--checkbox-inner-top, 0.5rem);
         left: var(--checkbox-inner-left, var(--outline-width));
         text-align: center;
       }
@@ -660,7 +652,9 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
   input:checked + .conditional,
   input:checked + label + .conditional,
-  label:has(:checked) + .conditional {
+  label:has(:checked) + .conditional,
+  .was-validated .conditional:has(input[required]:invalid),
+  .was-validated .conditional:focus-within {
     display: block;
     clear: both;
   }
@@ -807,7 +801,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       font-size: 0.8em;
       line-height: 1em;
       content: '\f078';
-      font-family: 'Font Awesome 6 Pro';
+      font-family: 'Font Awesome 7 Pro';
       position: absolute;
       top: 40%;
       transform: translate(0, -50%);
@@ -833,7 +827,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     margin-bottom: 1.5rem;
     max-width: var(--input-max-width);
 
-    :is(input:not([type='range']), select, textarea) {
+    :is(input:not([type='range']), select) {
       margin-top: 0.5rem;
       margin-bottom: 0 !important;
     }
@@ -941,7 +935,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
-    margin-top: rem(-8); /* Centers thumb on the track */
+    margin-top: -0.5rem; /* Centers thumb on the track */
     background-color: var(--thumb-colour);
     height: var(--thumb-size);
     width: var(--thumb-size);
@@ -1054,8 +1048,13 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     }
 
     i {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
+  }
+  
+  &:has([name="postcode"][disabled]) .empty{
+
+    display: none;
   }
 
   &:has(input:is([name$="Alt"]):not([data-value],[data-placeholder])) .empty {
@@ -1066,6 +1065,10 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   .hint-text {
     position: absolute;
     top: 100%;
+  }
+
+  label[for="use"]:after {
+    top: var(--checkbox-inner-top, 0.5rem);
   }
 }
 
@@ -1121,7 +1124,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     font-weight: inherit !important;
     font-family: inherit !important;
     font-size: 1rem !important;
-    line-height: rem(24) !important;
+    line-height: 1.5rem !important;
     margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
     padding-block: var(--menu-item-padding, 0.25rem) !important;
     width: 100% !important;
@@ -1196,11 +1199,13 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   border-radius: 0.5rem;
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
   width: 100% !important;
-  max-width: var(--menu-item-width, 50rem) !important;
+  //max-width: var(--menu-item-width, 50rem) !important;
   z-index: 100;
   display: none;
   max-height: 25rem;
   overflow-y: auto;
+  
+  max-width: var(--input-max-width) !important;
 
   > datalist {
     border: none!important;
@@ -1264,7 +1269,7 @@ iam-address-lookup [slot="preloadedList"]{
       font-weight: inherit !important;
       font-family: inherit !important;
       font-size: 1rem !important;
-      line-height: rem(19) !important;
+      line-height: 1.1875rem !important;
       padding-block: var(--menu-item-padding, 0.5rem) !important;
       display: block;
     }
@@ -1279,7 +1284,7 @@ iam-address-lookup [slot="preloadedList"]{
 
     &:before {
       content: "\f021";
-      font-family: "Font Awesome 6 Pro";
+      font-family: "Font Awesome 7 Pro";
       font-size: 1.75rem;
       font-weight: 300;
       display: block;

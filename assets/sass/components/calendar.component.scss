@@ -46,7 +46,7 @@
 
 [class*='fa-']:before {
   content: var(--fa);
-  font-family: 'Font Awesome 6 Pro';
+  font-family: 'Font Awesome 7 Pro';
   line-height: 1em;
 }
 
@@ -185,7 +185,7 @@ div:has(> select) #view {
 .calendar__datepicker {
   display: inline-block;
   position: relative;
-  margin-bottom: rem(9);
+  margin-bottom: 0.5625rem; /* 9 */
   //margin-right: auto;
 
   input {
@@ -208,7 +208,7 @@ div:has(> select) #view {
 
 .calendar__title {
   display: inline-block;
-  line-height: rem(36);
+  line-height: 2.25rem; /* 36 */
   margin-bottom: 0;
   color: var(--colour-primary);
   pointer-events: none;
@@ -291,7 +291,7 @@ hr {
 
   select:has(option[value='month']:checked) ~ .tag.tag--toggle {
     display: inline-block;
-    margin-bottom: rem(9);
+    margin-bottom: 0.5625rem; /* 9 */
     margin-right: 0;
     line-height: 2rem;
     order: 1;
@@ -352,7 +352,7 @@ hr {
   --columnHeadingLineHeight: 1.5rem;
   --columnHeadingFontWeight: bold;
 
-  --alldayHeight: #{rem(28)};
+  --alldayHeight: 1.75rem; /* 28 */
 
   background-color: var(--colour-canvas);
 }
@@ -394,7 +394,7 @@ time.column-header {
   width: 1.25rem;
   height: 1.25rem;
   line-height: 1.25rem;
-  margin-top: rem(2);
+  margin-top: 0.125rem; /* 2 */
   text-align: left;
   border-radius: 50%;
   display: inline-block;
@@ -702,7 +702,7 @@ time.column-header {
   margin-bottom: 2rem;
 
   @container (min-width: 36em) {
-    --side-panel-width: #{rem(72)};
+    --side-panel-width: 4.5rem; /* 72 */
   }
 
   #week-view-corner {
@@ -802,7 +802,7 @@ time.column-header {
 
     > tbody > tr > th,
     > tbody > tr > td {
-      height: rem(72);
+      height: 4.5rem; /* 72 */
     }
 
     > tbody > tr > td {
@@ -819,7 +819,7 @@ time.column-header {
     }
 
     > tbody > tr > td > span {
-      height: rem(17.5);
+      height: 1.09375rem; /* 17.5 */
       display: block;
 
       &.dragover {
@@ -977,7 +977,7 @@ time.column-header {
     max-width: 100%;
 
     @container (min-width: 36em) {
-      --side-panel-width: #{rem(72)};
+      --side-panel-width: 4.5rem; /* 72 */
     }
 
     > thead,
@@ -1025,7 +1025,7 @@ time.column-header {
       }
       tbody tr:first-child {
         position: sticky;
-        top: rem(26);
+        top: 1.625rem; /* 26 */
         border-collapse: collapse;
         background: var(--colour-canvas);
         z-index: 99;
@@ -1044,7 +1044,7 @@ time.column-header {
       tbody td {
         border-bottom: 1px solid var(--colour-border);
         border-right: 1px solid var(--colour-border);
-        height: rem(72);
+        height: 4.5rem; /* 72 */
 
         &:first-child {
           border-left: 1px solid var(--colour-border);
@@ -1207,12 +1207,12 @@ time.column-header {
 
   .month-wrapper table {
     height: var(--table-height);
-    font-size: rem(10);
+    font-size: 0.625rem; /* 10 */
     margin-bottom: 0;
 
     thead > tr > th,
     .column-header {
-      font-size: rem(10);
+      font-size: 0.625rem; /* 10 */
       line-height: 0.75rem;
     }
 

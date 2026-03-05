@@ -51,5 +51,7 @@
   "popover",
   "tooltip",
   "video-modal",
-  "tag"
+  "tag",
+  "form",
+  "config"
 ]

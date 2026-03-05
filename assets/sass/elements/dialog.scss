@@ -24,7 +24,7 @@
     overscroll-behavior: contain;
     background: var(--colour-canvas-2);
     box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
-    border-radius: rem(10);
+    border-radius: 0.625rem; /* 10 */
     padding: var(--dialog-padding);
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
@@ -55,24 +55,24 @@
 
     overflow-y: auto;
     width: 90vw;
-    max-width: rem(324); // col-width*4
+    max-width: 20.25rem; // col-width*4
 
     //height: 90vh;
-    max-height: min(90vh, #{rem(752)});
+    max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
 
     @media screen and (min-width: 36em) {
       //--dialog-padding: 2rem;
       //padding: var(--dialog-padding);
-      min-width: rem(335);
+      min-width: 20.9375rem;
       width: fit-content;
-      max-width: rem(686);
+      max-width: 42.875rem;
     }
 
     @media screen and (min-width: 62em) {
-      min-width: rem(454);
+      min-width: 28.375rem;
       width: fit-content;
-      max-width: rem(736);
+      max-width: 46rem;
     }
 
   }

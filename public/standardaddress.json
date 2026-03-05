@@ -47,11 +47,11 @@
       },
       "relationships": {
         "postal_county": {
-          "id": "urn:als:county:a72ndjIq",
+          "id": "urn:als:county:kx0t2zRVP",
           "county_name": "Tyne & Wear"
         },
         "country": {
-          "id": "urn:als:country:a72ndjIq",
+          "id": "urn:als:country:GB",
           "name": "United Kingdom of Great Britain and Northern Ireland",
           "alpha-2": "GB",
           "alpha-3": "GBR",
@@ -98,11 +98,11 @@
       },
       "relationships": {
         "postal_county": {
-          "id": "urn:als:county:a72ndjIq",
+          "id": "urn:als:county:kx0t2zRVP",
           "county_name": "Tyne & Wear"
         },
         "country": {
-          "id": "urn:als:country:a72ndjIq",
+          "id": "urn:als:country:GB",
           "name": "United Kingdom of Great Britain and Northern Ireland",
           "alpha-2": "GB",
           "alpha-3": "GBR",

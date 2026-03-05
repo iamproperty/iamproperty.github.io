@@ -11,10 +11,10 @@
       position: relative;
       list-style: none;
       padding-bottom: 1rem;
-      padding-left: 2.25rem;
+      padding-left: 1.75em;
 
       &:before {
-        content: '\f00c';
+        content: '\f058';
         position: absolute;
         top: 0;
         left: 0;
@@ -24,20 +24,20 @@
         line-height: 1;
 
         color: var(--tick-colour, var(--colour-complete));
-        font-family: 'Font Awesome 6 Pro';
-        font-size: 400;
+        font-family: 'Font Awesome 7 Pro';
+        font-weight: var(--icon-weight, 900);
       }
     }
 
     .tick--warning:before {
       content: '\f071';
-      font-weight: 300;
+      font-weight: var(--icon-weight, 900);
       color: var(--colour-warning);
     }
 
     .tick--danger:before {
       content: '\f06a';
-      font-weight: 300;
+      font-weight: var(--icon-weight, 900);
       color: var(--colour-danger);
     }
 
@@ -47,6 +47,14 @@
       -webkit-mask-image: none;
       border-radius: 50%;
       transform: scale(0.8);
+    }
+    .tick--loading:before {
+      content: '\f3f4';
+      font-weight: var(--icon-weight, 900);
+      color: var(--colour-heading);
+      animation: spin 1.5s infinite steps(10);
+      line-height: 1.25;
+      font-size: 1em;
     }
 
     li[class*='bg-'] {
@@ -76,6 +84,10 @@
     }
   }
 
+  .bg-primary .tick-list {
+    
+    --icon-weight: 900;
+  }
   /* #endregion */
 
 }

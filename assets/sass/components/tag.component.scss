@@ -1,78 +1,59 @@
 @use '../_func' as *;
 @use '../elements/forms';
-
-@use '../elements/admin-panel.scss' as *;
-
-
+@use '../elements/admin-panel' as *;
+@use '../elements/dropdown' as *;
 @use '../utilities/visually-hidden' as *;
 @use '../utilities/display' as *;
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
+@layer components {
+  .wrapper {
 
-.wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
 
-  position: relative;
-  display: inline-block;
-  margin-bottom: 1rem;
-
-  input {
-    position: absolute;
-    min-height: unset;
-    top: 50%;
-    left: 0;
-    transform: translate(0,-50%);
-    z-index: -99;
-    opacity: 0;
+    input {
+      position: absolute;
+      min-height: unset;
+      top: 50%;
+      left: 0;
+      transform: translate(0,-50%);
+      z-index: -99;
+      opacity: 0;
+    }
   }
-}
 
-::slotted(*) {
-  margin-bottom: 0!important;
-}
-
-
-
-
-input:focus {
- 
-  opacity: 1;
-  z-index: 99;
-}
-
-
-.dropdown {
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  padding: 0;
-  left: 0;
-  width: 100%;
-  margin: 0;
-  z-index: 99;
-  display: none;
-  max-height: rem(244) !important;
-  overflow: auto;
-
-  &:before {
-    display: none;
+  ::slotted(*) {
+    margin-bottom: 0!important;
   }
-}
 
-.wrapper:is(:focus-within) .dropdown {
-  display: var(--display-panel, none);
-}
 
-@media (hover: hover) {
-  .wrapper .dropdown:hover {
+  input:focus {
+  
+    opacity: 1;
+    z-index: 99;
+  }
+
+  .wrapper:is(:focus-within) .dropdown {
     display: var(--display-panel, none);
   }
-}
 
-@media (hover: none) {
-  :host(.hover) .wrapper .dropdown {
-    display: block;
+  @media (hover: hover) {
+    .wrapper .dropdown:hover {
+      display: var(--display-panel, none);
+    }
   }
+
+  @media (hover: none) {
+    :host(.hover) .wrapper .dropdown {
+      display: block;
+    }
+  }
+
 }

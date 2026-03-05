@@ -79,6 +79,10 @@
       font-size: inherit;
       padding: 0;
     }
+
+    &.th--sm {
+      width: 1px;
+    }
   }
 
   th {
@@ -99,7 +103,7 @@
 
   // Error messages
   tr td[colspan='100%']:first-child:last-child span {
-    max-width: rem(624);
+    max-width: 39rem;
     font-weight: bold;
     padding: 3rem;
     text-align: center;
@@ -107,7 +111,7 @@
     color: var(--colour-heading);
 
     @media screen and (min-width: 62em) {
-      max-width: rem(1048);
+      max-width: 65.5rem;
     }
   }
 
@@ -115,13 +119,13 @@
     thead {
       th:not(:empty) {
         white-space: nowrap;
-        min-width: rem(120);
+        min-width: 7.5rem;
       }
       th.th--mw-md {
-        min-width: rem(240);
+        min-width: 15rem; /* 240 */
       }
       th.th--mw-lg {
-        min-width: rem(360);
+        min-width: 22.5rem; /* 360 */ 
       }
     }
   }

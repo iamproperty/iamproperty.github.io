@@ -20,7 +20,7 @@ class iamModal extends HTMLElement {
     
     ${loadCSS}
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
     <dialog>
       ${closeButtonHtml}
       <div class="scroll">
@@ -43,7 +43,7 @@ class iamModal extends HTMLElement {
     const originalDialog = this.querySelector('dialog');
 
     const id = this.hasAttribute('id') ? this.getAttribute('id') : originalDialog?.getAttribute('id');
-    const dialog = this.shadowRoot?.querySelector('dialog');
+    let dialog = this.shadowRoot?.querySelector('dialog');
     const closeButton = this.shadowRoot?.querySelector('[data-close]');
     const cancelButton = this.shadowRoot?.querySelector('[data-cancel]');
     const agreedButton = this.querySelector('button[slot="agreed-button"]') ? this.querySelector('button[slot="agreed-button"]') : this.shadowRoot?.querySelector('[data-agreed]');

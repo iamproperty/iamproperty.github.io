@@ -1,4 +1,4 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 
 
@@ -7,8 +7,8 @@ iam-actionbar {
   --actionbar-radius: 0;
   background-color: #fcfcfc;
   display: block;
-  border-top-left-radius: rem(10);
-  border-top-right-radius: rem(10);
+  border-top-left-radius: 0.625rem; /* 10 */
+  border-top-right-radius: 0.625rem; /* 10 */
 
   @media (prefers-color-scheme: dark) {
     background-color: var(--colour-canvas);
@@ -38,7 +38,7 @@ main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
   }
 
   @media screen and (min-width: 62em) {
-    padding-inline: calc(50% - #{rem(556)} - 2rem);
+    padding-inline: calc(50% - 34.75rem - 2rem); /* 556px */
   }
 }
 // #endregion
@@ -105,3 +105,11 @@ iam-actionbar:has(.selectall input:checked) {
   --selectall-actionbar-opactiy: 0;
   --selectall-action-pe: none;
 }
+
+// #region filters 
+
+iam-actionbar [slot="filters"]:not(:has(+[slot="filters"])) {
+  margin-inline-end: auto!important;
+}
+
+// #endregion

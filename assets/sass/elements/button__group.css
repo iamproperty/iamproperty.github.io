@@ -4,44 +4,127 @@
 
     display: flex;
     flex-direction: column;
+    row-gap: var(--gap);
+    reading-flow: source-order;
+    margin-bottom: 1.5rem;
 
+    .btn-compact {
+
+      max-width: fit-content;
+      margin-inline: auto;
+    }
+
+  }
+  :where(.btn__group, iam-modal) {
+    
+    reading-flow: source-order;
+    
     .btn {
       margin-inline-end: 0;
       width: 100%;
       max-width: 100%;
       text-align: center;
       white-space: normal;
+      margin: 0;
+
+      &:not(:last-child) {
+        margin-right: 0;
+      }
     }
 
-
+    .btn-tertiary {
+      max-width: fit-content;
+      margin-block: 0!important;
+      margin-inline: auto!important;
+      order: 3;
+      reading-order: 3;
+    }
     .btn-secondary {
       order: 2;
+      reading-order: 2;
     }
     .btn-primary {
       order: 1;
+      reading-order: 1;
+      margin: 0;
+
+      &:not(:last-child) {
+        
+        margin: 0;
+      }
     }
+  }
+
+  :is(iam-form,form) .btn__group{
+    padding-top: 1rem;
   }
   @container (min-width: 36em) {
     .btn__group {
       flex-direction: row;
-      column-gap: var(--gap);
+      row-gap: 0;
+      gap: var(--gap);
+      flex-wrap: wrap;
 
-      .btn {
-          
+      .btn-tertiary {
         max-width: fit-content;
-        white-space: nowrap;
-      }
-
-        
-      .btn-secondary {
+        margin-inline: 0!important;
+        margin-block: auto;
         order: 1;
       }
-      .btn-primary {
+      .btn-secondary {
         order: 2;
+      }
+      .btn-primary {
+        order: 3;
+      }
+
+      .btn-compact {
+        
+        margin-inline: 0;
+        margin-block: auto;
+      }
+    }
+    :where(iam-modal, .btn__group) {
+
+      .btn {
+        max-width: fit-content;
+        white-space: nowrap;
+        margin-block: auto;
+      }
+    }
+    .btn__group {
+      
+      .btn-tertiary {
+        reading-order: 1;
+      }
+      .btn-secondary {
+        reading-order: 2;
+      }
+      .btn-primary {
+        reading-order: 3;
+      }
+    }
+    iam-modal {
+      
+      .btn-tertiary {
+        reading-order: 3;
+        order: 1;
+      }
+      .btn-secondary {
+        order: 2;
+        reading-order: 2;
+      }
+      .btn-primary {
+        order: 3;
+        reading-order: 1;
       }
     }
     .btn__group.text-end {
       justify-content: flex-end;
+    }
+    :is(iam-form,form) .btn__group{
+      justify-content: flex-end;
+      padding-top: 3rem;
     }
     iam-modal .btn__group:last-child .btn,
     dialog .btn__group:last-child .btn {

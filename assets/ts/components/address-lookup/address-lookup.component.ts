@@ -1,4 +1,4 @@
-import Cookies from 'js-cookie';
+import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
 import advancedSelect from '../../modules/advanced-select';
 import { isValidPostcode } from '../../modules/helpers';
 
@@ -31,7 +31,7 @@ class iamAddressLookup extends HTMLElement {
     ${loadCSS}
 
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
     <div class="wrapper">
 
       <div class="matched d-none">
@@ -315,12 +315,27 @@ class iamAddressLookup extends HTMLElement {
             addresses.forEach((address) => {
               // Deal with agent platform response
               if (typeof address.attributes == 'object' && address.attributes.label) {
+                const attributes = {};
+
                 if (address.id) address.attributes.id = address.id;
 
                 if (address.relationships)
                   address.attributes = Object.assign(address.attributes, address.relationships);
 
-                const values = JSON.stringify(address.attributes);
+                Object.keys(address.attributes).forEach((key) => {
+
+                  const attribute = address.attributes[key];
+
+                  if(typeof attribute == 'object'){
+                    attributes[key] = attribute?.id;
+                  }
+                  else {
+                    attributes[key] = attribute;
+                  }
+                });
+
+                const values = JSON.stringify(attributes);
+
                 listString += `<option data-values='${values}' >${address.attributes.label}</option>`;
               } else if (typeof address.value == 'object') {
                 if (address.id) address.attributes.id = address.id;
@@ -485,6 +500,17 @@ class iamAddressLookup extends HTMLElement {
       if (lookup?.hasAttribute('data-placeholder'))
         lookup.setAttribute('placeholder', lookup?.getAttribute('data-placeholder'));
 
+      // empty fields
+      Array.from(this.querySelectorAll('input, select')).forEach((input) => {
+        input.value = '';
+      });
+
+      lookup.value = "";
+
+      // uncheck box
+      if (this.shadowRoot.querySelector('[name="use"]'))
+          this.shadowRoot.querySelector('[name="use"]').checked = false;
+
       const updateEvent = new CustomEvent('switch-to-lookup');
       this.dispatchEvent(updateEvent);
 
@@ -617,19 +643,25 @@ class iamAddressLookup extends HTMLElement {
     // #endregion
 
     advancedSelect(this, lookup, list, true);
+
+    if (this.hasAttribute('data-disabled'))
+      lookup?.setAttribute('disabled','disabled');
   }
 
   static get observedAttributes(): any {
-    return ['data-url'];
+    return ['data-disabled'];
   }
 
   attributeChangedCallback(attrName, oldVal, newVal): void {
-    const addressComponent = this.querySelector('iam-address-lookup');
+    const lookup = this.shadowRoot.querySelector('[name="postcode"]');
 
     switch (attrName) {
-      case 'data-url': {
-        if (oldVal != newVal && addressComponent) {
-          addressComponent.setAttribute('data-url', newVal + '?search_string=');
+      case 'data-disabled': {
+        if (oldVal != newVal && newVal == 'disabled') {
+          lookup?.setAttribute('disabled','disabled');
+        }
+        else if (oldVal != newVal) {
+          lookup?.removeAttribute('disabled');
         }
         break;
       }

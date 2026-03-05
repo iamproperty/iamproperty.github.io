@@ -234,7 +234,7 @@ iam-collapsible-side {
 
   hr {
     border-bottom: 2px solid var(--colour-border) !important;
-    margin-right: rem(-40) !important;
+    margin-right: -2.5rem !important;
   }
 }
 
@@ -250,7 +250,7 @@ iam-collapsible-side [class*='link'] {
   text-decoration: none !important;
   border-bottom: 2px solid var(--colour-border) !important;
   border-right: 2px solid var(--colour-border) !important;
-  margin-right: rem(-40) !important;
+  margin-right: -2.5rem !important;
   z-index: 2;
 
   &::after {
@@ -305,7 +305,7 @@ iam-collapsible-side {
           position: absolute;
           display: block;
           content: '\f055';
-          font-family: 'Font Awesome 6 Pro';
+          font-family: 'Font Awesome 7 Pro';
           right: 20px;
           font-weight: 300;
         }
@@ -317,7 +317,7 @@ iam-collapsible-side {
 
       a {
         background-color: var(--colour-light) !important;
-        padding-left: rem(90) !important;
+        padding-left: 5.625rem !important;
       }
     }
 
@@ -339,7 +339,7 @@ iam-collapsible-side {
     .parent {
       li:not(:first-of-type) {
         a {
-          padding-left: rem(90) !important;
+          padding-left: 5.625rem !important;
         }
       }
     }

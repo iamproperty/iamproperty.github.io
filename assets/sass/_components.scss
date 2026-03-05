@@ -6,21 +6,19 @@
 
 @use 'components/nav.preload';
 @use 'components/carousel.config';
-@use 'components/multiselect.preload';
-@use 'components/tag.preload';
 @use 'components/multi-step-modal.global';
 
 @use 'components/inline-edit.preload';
-@use 'components/charts.config.scss';
-@use 'components/menu.global.scss';
+@use 'components/charts.config';
+@use 'components/menu.global';
 
-@use 'components/tabs.config.scss';
+@use 'components/tabs.config';
 
-@use 'components/address-lookup.preload.scss';
+@use 'components/address-lookup.preload';
 
 
-@use 'components/milestone.scss';
-@use 'components/calendar.config.scss';
+@use 'components/milestone';
+@use 'components/calendar.config';
 
 @layer components {
   // Make sure the first
@@ -40,7 +38,7 @@
 
   @media screen and (min-width: 62em) {
     iam-header:not(:defined) {
-      min-height: rem(470);
+      min-height: 29.375rem;
     }
   }
 

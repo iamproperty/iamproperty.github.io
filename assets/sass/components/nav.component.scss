@@ -4,21 +4,21 @@
 
 @use '../bs_grid' as *;
 
-@use '../elements/forms.scss' as *;
-@use '../elements/buttons.scss' as *;
+@use '../elements/forms' as *;
+@use '../elements/buttons' as *;
 
 @use '../elements/brand.css';
 
-@use '../elements/dialog.scss' as *;
-@use '../elements/modal.scss' as *;
-@use '../elements/container.scss' as *;
+@use '../elements/dialog' as *;
+@use '../elements/modal' as *;
+@use '../elements/container' as *;
 
 
-@use '../utilities/colours.scss' as *;
-@use '../utilities/margins.scss' as *;
-@use '../utilities/paddings.scss' as *;
-@use '../utilities/sizes.scss' as *;
-@use '../utilities/display.scss' as *;
+@use '../utilities/colours' as *;
+@use '../utilities/margins' as *;
+@use '../utilities/paddings' as *;
+@use '../utilities/sizes' as *;
+@use '../utilities/display' as *;
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -111,7 +111,7 @@
   @media screen and (min-width: 36em) {
     margin: 0 0 0 3rem;
     width: auto;
-    padding-right: rem(24 + 6);
+    padding-right: 1.875rem; /* 24 + 6 */
     text-indent: 0;
 
     &[aria-expanded] {
@@ -170,10 +170,10 @@
 
   .menu__outer {
     position: absolute;
-    top: rem(96);
+    top: 6rem; /* 96 */
     left: 0;
     width: 100%;
-    height: calc(100vh - #{rem(96)});
+    height: calc(100vh - 6rem);
     overflow: hidden;
     pointer-events: none;
     transition: background 0.5s;
@@ -200,10 +200,10 @@
 
     
     overscroll-behavior: contain;
-    width: calc(#{rem(375)} - var(--scrollbar-width));
+    width: calc(23.4375rem - var(--scrollbar-width));
     background-color: var(--colour-canvas-2);
     position: absolute;
-    height: calc(100vh - #{rem(96)});
+    height: calc(100vh - 6rem);
     left: 100%;
     top: 0;
     padding: 0 1.5rem 0 1.5rem;
@@ -242,7 +242,7 @@
     }
 
     &.open {
-      left: calc(100% - (#{rem(375)} - var(--scrollbar-width)));
+      left: calc(100% - (23.4375rem - var(--scrollbar-width)));
       -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
       box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
       pointer-events: all;
@@ -346,7 +346,7 @@
   }
 
   .has-secondary .menu__secondary {
-    margin-right: rem(-40) !important;
+    margin-right: -2.5rem !important;
     padding-right: 2.5rem !important;
 
     &:before {
@@ -375,7 +375,7 @@
     align-items: center;
 
     &:has(.has-secondary) {
-      padding-top: rem(24 + 40) !important;
+      padding-top: 4rem !important; /* 24 + 40 */
     }
 
     > * {
@@ -425,7 +425,7 @@
   }
 
   ::slotted(a[slot='secondary']) {
-    font-size: rem(14) !important;
+    font-size: 0.875rem !important;
 
     &:after {
       top: calc(100% - 0.25em) !important;
@@ -551,10 +551,10 @@
 ::slotted(.nav--menu) {
   pointer-events: all;
   overscroll-behavior: contain;
-  width: calc(#{rem(375)} - var(--scrollbar-width));
+  width: calc(23.4375rem - var(--scrollbar-width));
   background-color: var(--colour-canvas-2);
   position: absolute;
-  height: calc(100vh - #{rem(96)});
+  height: calc(100vh - 6rem);
   left: 100%;
   top: 0;
   padding: 0 1.5rem 0 1.5rem;
@@ -618,7 +618,7 @@ slot[name='menus'] {
   height: 100vh;
   overflow: hidden;
   pointer-events: none;
-  width: calc(#{rem(375)} - var(--scrollbar-width));
+  width: calc(23.4375rem - var(--scrollbar-width));
 }
 
 ::slotted(.nav--menu[data-open-title]) {
@@ -628,8 +628,8 @@ slot[name='menus'] {
 }
 
 ::slotted(.nav--menu.open) {
-  width: calc(#{rem(375)} - var(--modifier, 0px));
-  left: calc(100% - (#{rem(375)} - var(--scrollbar-width, 0px) - var(--modifier, 0px)));
+  width: calc(23.4375rem - var(--modifier, 0px));
+  left: calc(100% - (23.4375rem - var(--scrollbar-width, 0px) - var(--modifier, 0px)));
   -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   pointer-events: all;

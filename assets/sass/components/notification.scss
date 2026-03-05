@@ -5,12 +5,12 @@
 :host,
 .iam-notification {
   display: block;
-  padding: rem(22) 1.5rem rem(22) rem(24 - 8) !important;
+  padding: 1.375rem 1.5rem 1.375rem 1rem;
   border-radius: 0.5rem;
   box-shadow: 2px 6px 12px rgba(0, 0, 0, 0.2);
   margin-bottom: 1rem;
-  font-size: rem(15);
-  border: rem(2) solid var(--colour, var(--colour-info));
+  font-size: 0.9375rem;
+  border: 2px solid var(--colour, var(--colour-info));
   outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
   background: var(--colour-notification-bg);
 
@@ -29,26 +29,23 @@
 
 :host([data-type]),
 .iam-notification[data-type] {
-  border: rem(2) solid transparent;
+  border: 2px solid transparent;
 }
 
 
-:host(.colour-warning),
-.iam-notification.colour-warning {
-  background: var(--colour-notification-warning-bg);
+:host([class*="colour-"]) {
+  
+  --bg-colour: color-mix(in oklab, var(--colour), #ffffff 80%) !important;
+  background: var(--bg-colour);
+
+  
+  --colour-heading: var(--colour-primary-theme);
+  --colour-body: var(--colour-primary-theme);
+  > * {
+    color-scheme: light;
+  }
 }
 
-  :host(.colour-danger),
-  .iam-notification.colour-danger {
-    
-  background: var(--colour-notification-danger-bg);
-  }
-
-  :host(.colour-success),
-  .iam-notification.colour-success {
-    
-  background: var(--colour-notification-success-bg);
-  }
 
 :host(.bg-white),
 .iam-notification.bg-white {
@@ -85,12 +82,14 @@
   display: block;
 
   width: 100%;
-  max-width: rem(360);
+  max-width: 22.5rem;
 }
 
 :host([data-type='toast'].notification--dismissable) {
-  max-width: rem(454);
+  max-width: 28.375rem;
 }
+
+
 
 .notification {
   container-type: inline-size;
@@ -199,3 +198,21 @@
     }
   }
 }
+
+// #region no icon
+:host(.notification--no-icon) {
+  .notification__icon {
+    display: none;
+  }
+}
+// #endregion
+
+
+// #region no background
+:host(.notification--no-bg){
+  box-shadow: none;
+  background: none!important;
+  padding: 0;
+  border: 0 !important;
+}
+// #endregion

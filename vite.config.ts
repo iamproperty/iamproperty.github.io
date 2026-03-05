@@ -12,6 +12,9 @@ const __dirname = dirname(__filename);
 export default ({ mode }) => {
 
   return defineConfig({
+    server: {
+      //hmr: false
+    },
     build: mode === 'lib' ? {
       lib: {
         entry: resolve(__dirname, 'src/index.js'),

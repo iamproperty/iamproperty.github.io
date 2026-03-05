@@ -1,4 +1,4 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 :host {
   --card-icon-right: 1rem;
@@ -117,7 +117,7 @@
   margin-top: 0.5rem;
 
   i {
-    font-family: var(--fa-style-family, 'Font Awesome 6 Pro');
+    font-family: var(--fa-style-family, 'Font Awesome 7 Pro');
     font-weight: var(--fa-style, 900);
 
     display: block !important;

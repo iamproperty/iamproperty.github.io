@@ -17,7 +17,7 @@ class iamInput extends HTMLElement {
     <style>
     ${loadCSS}
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
     <div class="wrapper" part="wrapper">
       <span part="prefix"><slot name="prefix"></slot></span>
       <slot part="input-wrapper"></slot>
@@ -66,16 +66,18 @@ class iamInput extends HTMLElement {
 
 
     const setCurrencyRules = (): void => {
-      
+      let originalValue = input.value.replace(',','');
+
+      input?.setAttribute('data-value',originalValue);
       input.setAttribute('type','text');
-      input?.setAttribute('data-value',input.value);
-      input.value = new Intl.NumberFormat("en-GB", { 
+      originalValue = new Intl.NumberFormat("en-GB", { 
         style: "currency", 
         currency: "GBP",
-        minimumFractionDigits: Number.isInteger(input.value) ? 0 : 2,
-        maximumFractionDigits: Number.isInteger(input.value) ? 0 : 2,
+        minimumFractionDigits: Number.isInteger(originalValue) ? 0 : 2,
+        maximumFractionDigits: Number.isInteger(originalValue) ? 0 : 2,
         trailingZeroDisplay: 'stripIfInteger' // Strip zeros if it's an integer
-      }).format(input.value).replace("£", "");
+      }).format(originalValue).replace("£", "");
+      input.value = originalValue;
     }
 
 
