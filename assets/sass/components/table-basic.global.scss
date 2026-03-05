@@ -451,8 +451,7 @@ table {
 }
 
 @container (width > 36em) {
-  :is(#{$selector}).table--fullwidth iam-actionbar,
-  :is(#{$selector}) iam-actionbar {
+  :is(#{$selector}).table--fullwidth iam-actionbar  {
     margin-left: -1.5rem;
     margin-right: -1.5rem;
     margin-top: -2rem;

@@ -15,7 +15,7 @@ class iamPagination extends HTMLElement {
     
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
     <div class="pagination d-none">
   
       <div class="minimal" part="minimal">

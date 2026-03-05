@@ -85,8 +85,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 }
 
 @container (width < 23.4375em) {
-  :is(#{$selector}).table--fullwidth iam-actionbar,
-  :is(#{$selector}) iam-actionbar {
+  :is(#{$selector}).table--fullwidth iam-actionbar {
     margin-left: -2rem;
     margin-right: -2rem;
     margin-top: -2rem;

@@ -17,7 +17,7 @@ class iamMultiStepModal extends HTMLElement {
     <style>
     ${loadCSS}
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
     <dialog>
       <button class="btn btn-compact btn-secondary fa-xmark-large" data-close>Close</button>
       <div class="steps" parts="steps">

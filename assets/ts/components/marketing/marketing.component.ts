@@ -21,7 +21,7 @@ class iamMarketing extends HTMLElement {
     ${loadCSS}
     
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
     <div class="marketing">
       
       <slot></slot>

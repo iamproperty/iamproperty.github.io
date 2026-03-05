@@ -26,7 +26,7 @@ class iamTabs extends HTMLElement {
     
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
     <div class="tabs" part="tabs">
       <div class="tabs__dropdown" part="tab-dropdown"></div>
 

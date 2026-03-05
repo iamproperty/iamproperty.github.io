@@ -21,7 +21,7 @@ class iamCollapsibleSideMenu extends HTMLElement {
     <style class="styles">
     ${loadCSS}
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
       <div class="container" part="container">
 
         <div class="side-menu" part="side-menu">
