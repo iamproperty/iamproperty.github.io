@@ -91,7 +91,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
         &:before {
           --fa: '\f055'!important;
-          font-family: 'Font Awesome 6 Pro';
+          font-family: 'Font Awesome 7 Pro';
           display: block!important;
 
           font-weight: 300 !important;
@@ -284,7 +284,7 @@ table {
     }
 
     &:after {
-      font-family: 'Font Awesome 6 Pro';
+      font-family: 'Font Awesome 7 Pro';
       position: absolute;
       top: var(--status-pt, 1rem);
       left: 0;
@@ -618,7 +618,7 @@ table {
     }
     tr[data-highlight]:before {
 
-      font-family: 'Font Awesome 6 Pro';
+      font-family: 'Font Awesome 7 Pro';
       content: '\f005';
       font-weight: bold;
       position: absolute;

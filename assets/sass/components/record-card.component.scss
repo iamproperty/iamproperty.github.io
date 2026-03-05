@@ -18,7 +18,7 @@
 :host([data-record]) {
   .card__head {
     &:before {
-      font-family: var(--record-icon-font, 'Font Awesome 6 Pro');
+      font-family: var(--record-icon-font, 'Font Awesome 7 Pro');
       font-weight: normal;
       font-size: 1.5rem;
       content: var(--record-icon);

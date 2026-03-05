@@ -157,7 +157,7 @@
       
 
       &:before {
-        font-family: "Font Awesome 6 Pro"!important;
+        font-family: "Font Awesome 7 Pro"!important;
         content: var(--fa)!important;
         display: block;
       }

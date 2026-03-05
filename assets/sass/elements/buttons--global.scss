@@ -32,6 +32,7 @@
   }
   // #endregion
 
+
   // #region button primary
   .btn {
     --btn-margin: 1rem;
@@ -135,7 +136,7 @@
 
       &:before {
         content: '\f00c';
-        font-family: 'Font Awesome 6 Pro';
+        font-family: 'Font Awesome 7 Pro';
         margin-right: 1rem;
         font-style: inherit;
         width: 1rem;
@@ -160,7 +161,7 @@
   .btn {
     &[class*='fa-']:before {
       content: var(--fa);
-      font-family: 'Font Awesome 6 Pro';
+      font-family: 'Font Awesome 7 Pro';
       line-height: 1em;
     }
 
@@ -181,7 +182,8 @@
     }
 
     i[class*='fa-'] {
-      font-family: 'Font Awesome 6 Pro';
+      --fa-width: 1em;
+      font-family: 'Font Awesome 7 Pro';
       margin-right: 1rem;
       line-height: 1em;
       font-style: inherit;
@@ -193,6 +195,7 @@
     }
   }
   // #endregion
+
 
   // #region button with prompt
   .btn.btn--prompt {
@@ -237,7 +240,7 @@
       z-index: var(--index-focus);
       color: currentColor;
       font-weight: 300;
-      font-family: 'Font Awesome 6 Pro';
+      font-family: 'Font Awesome 7 Pro';
     }
   }
   // #endregion
