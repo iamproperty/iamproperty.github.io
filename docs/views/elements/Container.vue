@@ -50,10 +50,8 @@
     </div>
     <div class="container bg-primary container-example mb-5 visualtest">
       <p class="mx-auto text-center">This text should be white</p>
-      <input type="test" />
       <div class="contents bg-test d-flex justify-content-center align-items-center">
         <span class="h5 mb-0 pb-0">Content of the next div</span>
-      <input type="test" />
       </div>
     </div>
     
