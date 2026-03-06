@@ -9,11 +9,11 @@
 
 <template>
   <main>
+    <Header>
     <ul class="breadcrumbs pt-0">
       <li><a href="/standalone/movebutler">Dashboard</a></li>
       <li>Premium Conveyancing</li>
     </ul>
-    <Header>
       <h1 class="pb-4">Upfront information alerts on 24 Lynx road</h1>
       <ul class="tick-list h4 mb-0 pb-3">
         <li class="tick--danger pb-1">21 days for current area search times</li>

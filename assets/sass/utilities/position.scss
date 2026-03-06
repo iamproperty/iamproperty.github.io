@@ -1,4 +1,26 @@
 @layer utilities {
+
+
+  .position-static {
+    position: static !important;
+  }
+
+  .position-relative {
+    position: relative !important;
+  }
+
+  .position-absolute {
+    position: absolute !important;
+  }
+
+  .position-fixed {
+    position: fixed !important;
+  }
+
+  .position-sticky {
+    position: sticky !important;
+  }
+
   $breakpoints: (
     sm: 36em,
     md: 62em,
@@ -24,66 +46,6 @@
 
       .position-#{$breakpoint}-sticky {
         position: sticky !important;
-      }
-
-      .top-#{$breakpoint}-0 {
-        top: 0 !important;
-      }
-
-      .top-#{$breakpoint}-50 {
-        top: 50% !important;
-      }
-
-      .top-#{$breakpoint}-100 {
-        top: 100% !important;
-      }
-
-      .bottom-#{$breakpoint}-0 {
-        bottom: 0 !important;
-      }
-
-      .bottom-#{$breakpoint}-50 {
-        bottom: 50% !important;
-      }
-
-      .bottom-#{$breakpoint}-100 {
-        bottom: 100% !important;
-      }
-
-      .start-#{$breakpoint}-0 {
-        left: 0 !important;
-      }
-
-      .start-#{$breakpoint}-50 {
-        left: 50% !important;
-      }
-
-      .start-#{$breakpoint}-100 {
-        left: 100% !important;
-      }
-
-      .end-#{$breakpoint}-0 {
-        right: 0 !important;
-      }
-
-      .end-#{$breakpoint}-50 {
-        right: 50% !important;
-      }
-
-      .end-#{$breakpoint}-100 {
-        right: 100% !important;
-      }
-
-      .translate-#{$breakpoint}-middle {
-        transform: translate(-50%, -50%) !important;
-      }
-
-      .translate-#{$breakpoint}-middle-x {
-        transform: translateX(-50%) !important;
-      }
-
-      .translate-#{$breakpoint}-middle-y {
-        transform: translateY(-50%) !important;
       }
     }
   }

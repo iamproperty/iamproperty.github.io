@@ -21,7 +21,7 @@
 .header-banner {
   padding-top: 2.75rem; /* 44*/
   max-width: 120rem; /* 1920 */
-  min-height: 25rem; /* 400 */
+  //min-height: 25rem; /* 400 */
   margin-inline: auto;
   display: block;
 
@@ -91,10 +91,22 @@
 }
 
 ::slotted(*:not(.btn__group):last-child) {
-  padding-bottom: 0 !important;
-  margin-bottom: 0 !important;
+  //padding-bottom: 0 !important;
+  //margin-bottom: 0 !important;
 }
 
+// #region Breadcrumbs
+:host(.has-breadcrumbs) {
+
+  .header-banner {
+    padding-top: 1rem;
+  }
+
+  ::slotted(.breadcrumbs) {
+    margin-bottom: 2rem!important;
+  }
+}
+// #endregion
 
 // #region badge
 
@@ -107,12 +119,14 @@ slot[name="badge"] {
 // #endregion
 
 // #region panel 
-:host(.has-panel) .admin-panel{
+:host(.has-panel) [name="panel"]{
 
   display: block;
   text-align: center;
   margin-bottom: 1rem;
+  max-height: fit-content;
 }
+
 ::slotted([slot="panel"]) {
   
   color-scheme: light !important;
@@ -176,16 +190,60 @@ slot[name="badge"] {
 }
 // #endregion
 
+
+// #region toolbox 
+:host(.has-toolbox) {
+
+  margin-bottom: 4rem;
+}
+:host(.has-toolbox) [name="toolbox"]{
+
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  margin-bottom: -3rem;
+  width: fit-content;
+  margin-inline: auto;
+
+  gap: 0.5rem;
+}
+
+::slotted([slot="toolbox"]) {
+
+  margin: 0!important;
+  
+  color-scheme: light !important;
+  --colour-heading: var(--colour-primary-theme);
+  --colour-body: var(--colour-primary-theme);
+  --colour-underline: var(--colour-secondary-theme);
+  color: var(--colour-primary-theme);
+}
+
+::slotted(hr[slot="toolbox"]) {
+
+  display: inline-block;
+  vertical-align: top !important;
+  margin-top: -0.25rem !important;
+  margin-bottom: -0.25rem !important;
+  background-color: var(--colour-muted) !important;
+  width: 1px !important;
+  height: 2.5rem !important;
+}
+
+// #endregion
+
 // #region gradient background
-:host {
+.gradient-overflow {
   overflow: hidden;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
 }
 .gradient-background {
   position: absolute;
   left: 75%;
   top: 50%;
   transform: translate(-50%, -50%);
-  z-index: 2;
   width: 54rem; /* 874px */
   aspect-ratio: 1 / 1;
 }

@@ -35,7 +35,7 @@
       font-weight: 900;
     }
 
-    &[class*='fa-']:before {
+    [class*='fa-']:before {
       line-height: calc(var(--compact-size) - 0.25rem);
 
       @container style(--theme: dark) {

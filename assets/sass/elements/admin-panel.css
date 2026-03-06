@@ -172,6 +172,10 @@
         grid-column: var(--col-start, col-1-start) / var(--col-end, col-12-end);
       }
     }
+
+    & > hr {
+      margin-inline: calc(var(--padding-x) * -1);
+    }
   }
 
   [class*='col'].admin-panel:first-child:last-child:not(
@@ -270,4 +274,37 @@
 
     margin-bottom: calc(var(--padding-bottom) * -1)!important;
   }
+
+  /* #region */
+  .sub-panel {
+    background: var(--colour-canvas);
+    padding: var(--spacer-1);
+    border: 1px solid var(--colour-border);
+    border-radius: 0.25rem;
+    font-weight: normal;
+    margin-bottom: 1rem;
+
+    & > :is(h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6) {
+
+      font-size: 1rem;
+      line-height: 1;
+      margin-bottom: 0;
+      padding-bottom: 0.5rem;
+      font-weight: normal;
+    }
+
+    strong {
+      font-weight: normal;
+    }
+
+    .logo {
+      height: 1.5rem;
+      width: 1.5rem;
+      object-fit: contain;
+      padding: 0;
+      margin: 0 auto 0.25rem auto;
+      display: block;
+    }
+  }
+  /* #endregion */
 }

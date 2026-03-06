@@ -1653,6 +1653,14 @@ const routes = [
             },
             component: () => import('./views/standalone/movebutler/refer-pc/no-alerts.vue'),
           },
+          {
+            path: 'transaction-overview',
+            name: 'Transaction overview',
+            meta: {
+              title: 'Premium conveyancing | iamkey',
+            },
+            component: () => import('./views/standalone/movebutler/transaction-overview.vue'),
+          },
         ],
       }
     ],
