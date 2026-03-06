@@ -57,9 +57,11 @@ class iamHeader extends HTMLElement {
           </g>
         </svg>
       </div>
-      <picture>
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="" />
-      </picture>
+      <div class="picture-overflow">
+        <picture>
+          <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" lazy="" />
+        </picture>
+      </div>
       <div class="container">
         <slot name="before"></slot>
         <slot></slot>

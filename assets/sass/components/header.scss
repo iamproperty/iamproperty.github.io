@@ -32,7 +32,14 @@
     //padding-top: 5.25rem; /* 84 */
   }
 
-  > picture {
+  > .picture-overflow {
+    overflow: hidden;
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+  }
+      
+  > .picture-overflow picture {
     display: block;
     position: absolute;
     top: 0;
@@ -43,7 +50,6 @@
     overflow: hidden;
     min-height: 25rem; /* 400 */
     max-height: 25rem; /* 400 */
-    z-index: 3;
 
     img {
       display: block;
