@@ -9,6 +9,10 @@ window.dataLayer.push({
 });
 
 class iamAdvancedSelect extends HTMLElement {
+  static get observedAttributes(): string[] {
+    return ['value'];
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -45,12 +49,15 @@ class iamAdvancedSelect extends HTMLElement {
 
   connectedCallback(): void {
     // Clone original input field, re-name and use for display purposes
-    const inputField = this.querySelector('input');
-    const displayInputField = inputField.cloneNode();
+    const inputField = this.querySelector('input') as HTMLInputElement | null;
+    if (!inputField) return;
+
+    const displayInputField = inputField.cloneNode() as HTMLInputElement;
     displayInputField.setAttribute('name', `${inputField.getAttribute('name')}Alt`);
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
-    let datalist = this.querySelector('datalist');
+
+    let datalist = this.querySelector('datalist') as HTMLDataListElement | null;
 
     inputField.after(displayInputField);
 
@@ -62,12 +69,30 @@ class iamAdvancedSelect extends HTMLElement {
       datalist = document.createElement('datalist');
       const listID = safeID('list');
       datalist.setAttribute('id', listID);
-      searchWrapper.appendChild(datalist);
+      this.appendChild(datalist);
 
       displayInputField.setAttribute('list', listID);
+    } else {
+      displayInputField.setAttribute('list', datalist.id);
     }
 
     advancedSelect(this, displayInputField, datalist);
+
+    // Apply initial value passed to the component host
+    const initialValue = this.getAttribute('value') || '';
+
+    inputField.value = initialValue;
+    displayInputField.value = initialValue;
+  }
+
+  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
+    if (name !== 'value' || oldValue === newValue) return;
+
+    const inputField = this.querySelector('input') as HTMLInputElement | null;
+    const displayInputField = this.querySelector(`input[name="${inputField?.getAttribute('name')}Alt"]`) as HTMLInputElement | null;
+
+    if (inputField) inputField.value = newValue || '';
+    if (displayInputField) displayInputField.value = newValue || '';
   }
 }
 
