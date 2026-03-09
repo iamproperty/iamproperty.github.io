@@ -9,10 +9,6 @@ window.dataLayer.push({
 });
 
 class iamAdvancedSelect extends HTMLElement {
-  static get observedAttributes(): string[] {
-    return ['value'];
-  }
-
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -72,29 +68,28 @@ class iamAdvancedSelect extends HTMLElement {
       this.appendChild(datalist);
 
       displayInputField.setAttribute('list', listID);
-    } else {
-      displayInputField.setAttribute('list', datalist.id);
     }
 
     advancedSelect(this, displayInputField, datalist);
 
     // Apply initial value passed to the component host
     const initialValue = this.getAttribute('value') || '';
+    if (!initialValue) return;
 
     inputField.value = initialValue;
-    displayInputField.value = initialValue;
-  }
+    inputField.setAttribute('value', initialValue);
 
-  attributeChangedCallback(name: string, oldValue: string | null, newValue: string | null): void {
-    if (name !== 'value' || oldValue === newValue) return;
+    displayInputField.value = '';
+    displayInputField.setAttribute('placeholder', initialValue);
+    displayInputField.setAttribute('data-value', initialValue);
 
-    const inputField = this.querySelector('input') as HTMLInputElement | null;
-    const displayInputField = this.querySelector(`input[name="${inputField?.getAttribute('name')}Alt"]`) as HTMLInputElement | null;
-
-    if (inputField) inputField.value = newValue || '';
-    if (displayInputField) displayInputField.value = newValue || '';
+    if (datalist) {
+      Array.from(datalist.querySelectorAll('option')).forEach((option) => {
+        const isMatch = option.getAttribute('value') === initialValue;
+        option.classList.toggle('active', isMatch);
+      });
+    }
   }
 }
-
 
 export default iamAdvancedSelect;
