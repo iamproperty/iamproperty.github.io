@@ -51,10 +51,6 @@
       <a href="/" class="btn btn-action fa-plus" slot="toolbox">Add document</a>
     
     </Header>
-
-
-
-    
       
     <div class="bg-primary pt-2 px-3 mb-2 rounded">
       <div class="md-col-end-8">
@@ -72,6 +68,19 @@
         <li class="tick--warning  pb-1">2 title alerts</li>
       </ul>
 
+    </div>
+
+    <div class="admin-panel">
+      <div class="text-end">
+        <span class="badge mb-1">Premium Conveyancing</span>
+        <span class="badge wider-colour-3 mb-1">Case status: instructed</span>
+      </div>
+      <p class="lead text-heading pb-2">Conveyancing case</p>
+      <div class="d-flex align-items-center">
+          
+        <p class="me-auto pb-0">Solicitor office: <strong class="pe-2">JD Conveyancing </strong> Branch assignee: <strong class="pe-2">Chris Holmes</strong> Lead vendor: <strong class="pe-2">John Smith</strong></p>
+        <button class="btn btn-compact fa-chevron-right btn-sm ms-2 mb-0" title="View case">Submit</button>
+      </div>
     </div>
     
 

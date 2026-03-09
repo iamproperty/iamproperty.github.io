@@ -170,7 +170,7 @@ class iamModal extends HTMLElement {
     });
 
 
-    if (modalType == 'transactional'){
+    if (modalType == 'transactional' || modalType == 'acknowledgement' ){
       this.shadowRoot?.querySelector('.scroll')?.insertAdjacentHTML('afterbegin',
         `<i class="fa-light fa-circle" aria-hidden="true">
           <i class="fa-regular fa-${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'info'}" aria-hidden="true"></i>
