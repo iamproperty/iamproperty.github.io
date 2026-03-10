@@ -121,10 +121,14 @@
   // #endregion
 
   // #region btn with colour success
-  .btn.colour-success {
+  .btn.btn-complete {
+    --colour: var(--colour-success);
     --colour-btn-bg-hover: var(--colour);
     --colour-btn-border-hover: var(--colour);
     --colour-btn-hover: var(--colour-primary-theme);
+    --colour-btn-bg: var(--colour);
+    --colour-btn-border: var(--colour);
+
     position: relative;
     padding-left: 3.5rem; /*56 */
     padding-right: 3.5rem; /*56 */
