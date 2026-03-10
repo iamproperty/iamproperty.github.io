@@ -7,7 +7,6 @@
   "private": false,
   "version": "7.7.0",
   "scripts": {
-    "temp": "rollup --environment COMPONENT:carousel --config rollup-component.config.cjs --sourcemap",
     "reload": "vite --host",
     "dev": "npm run copy && node local_modules/delete-assets.cjs && vite --host",
     "build": "npm run test && node local_modules/delete-build-assets.cjs && npm run compile && vue-tsc --noEmit && vite build --mode lib",
@@ -17,7 +16,7 @@
     "compile:sass": "sass assets/sass/main.scss assets/css/style.min.css --style=compressed && sass assets/sass/core.scss assets/css/core.min.css --style=compressed && sass assets/sass/components:assets/css/components --style=compressed && sass assets/sass/elements:assets/css/elements --style=compressed",
     "compile:js": "rollup --environment BUNDLE:true --config rollup.config.cjs --sourcemap && terser --compress passes=2 --mangle --comments \"/^!/\" --source-map \"content=assets/js/scripts.bundle.js.map,includeSources,url=scripts.bundle.min.js.map\" --output assets/js/scripts.bundle.min.js assets/js/scripts.bundle.js",
     "compile:ts": "node node_modules/typescript/bin/tsc --project tscompileconfig.json && fix-esm-import-path assets/js",
-    "compile": "npm run compile:sass && npm run compile:ts && npm run compile:js",
+    "compile": "npm run compile:sass && npm run compile:ts",
     "watch:ts": "tsc-watch -p tscompileconfig.json --onCompilationComplete \"fix-esm-import-path assets/js\"",
     "watch:sass": "sass --watch assets/sass/main.scss:assets/css/style.min.css assets/sass/core.scss:assets/css/core.min.css assets/sass/error.scss:assets/css/error.min.css assets/sass/components:assets/css/components assets/sass/components.reset.scss:assets/css/components.reset.min.css --style=compressed",
     "watch": "concurrently \"npm run dev\" \"npm run watch:ts\" \"npm run watch:sass\" \"node local_modules/components.cjs\"",
