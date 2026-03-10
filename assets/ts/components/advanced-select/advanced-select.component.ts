@@ -65,7 +65,7 @@ class iamAdvancedSelect extends HTMLElement {
       datalist = document.createElement('datalist');
       const listID = safeID('list');
       datalist.setAttribute('id', listID);
-      this.appendChild(datalist);
+      searchWrapper.appendChild(datalist);
 
       displayInputField.setAttribute('list', listID);
     }
