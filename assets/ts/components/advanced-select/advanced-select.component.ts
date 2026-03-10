@@ -45,12 +45,15 @@ class iamAdvancedSelect extends HTMLElement {
 
   connectedCallback(): void {
     // Clone original input field, re-name and use for display purposes
-    const inputField = this.querySelector('input');
-    const displayInputField = inputField.cloneNode();
+    const inputField = this.querySelector('input') as HTMLInputElement | null;
+    if (!inputField) return;
+
+    const displayInputField = inputField.cloneNode() as HTMLInputElement;
     displayInputField.setAttribute('name', `${inputField.getAttribute('name')}Alt`);
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
-    let datalist = this.querySelector('datalist');
+
+    let datalist = this.querySelector('datalist') as HTMLDataListElement | null;
 
     inputField.after(displayInputField);
 
@@ -68,8 +71,25 @@ class iamAdvancedSelect extends HTMLElement {
     }
 
     advancedSelect(this, displayInputField, datalist);
+
+    // Apply initial value passed to the component host
+    const initialValue = this.getAttribute('value') || '';
+    if (!initialValue) return;
+
+    inputField.value = initialValue;
+    inputField.setAttribute('value', initialValue);
+
+    displayInputField.value = '';
+    displayInputField.setAttribute('placeholder', initialValue);
+    displayInputField.setAttribute('data-value', initialValue);
+
+    if (datalist) {
+      Array.from(datalist.querySelectorAll('option')).forEach((option) => {
+        const isMatch = option.getAttribute('value') === initialValue;
+        option.classList.toggle('active', isMatch);
+      });
+    }
   }
 }
-
 
 export default iamAdvancedSelect;

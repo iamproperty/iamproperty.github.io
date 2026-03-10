@@ -1,6 +1,13 @@
 <script setup>
   import { onMounted } from 'vue';
 
+  defineProps({
+    value: {
+      type: String,
+      default: '',
+    },
+  });
+
   const component = 'advanced-select';
 
   onMounted(() => {
@@ -16,7 +23,7 @@
 </script>
 
 <template>
-  <iam-advanced-select>
+  <iam-advanced-select :value="value">
     <slot></slot>
   </iam-advanced-select>
 </template>
