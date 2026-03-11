@@ -68,6 +68,8 @@ class iamAdvancedSelect extends HTMLElement {
       searchWrapper.appendChild(datalist);
 
       displayInputField.setAttribute('list', listID);
+    } else {
+      displayInputField.setAttribute('list', datalist.id);
     }
 
     advancedSelect(this, displayInputField, datalist);

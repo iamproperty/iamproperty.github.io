@@ -7,10 +7,12 @@
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
   import selectAnatomy from '../../img/advanced-select-anatomy.png';
+
+  import { advancedselect as events } from '../../events.js';
 </script>
 
 <template>
-  <TrackEvents selector="iam-advanced-select" :events="[]"></TrackEvents>
+  <TrackEvents selector="iam-advanced-select" :events="['update-value']"></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
       <h1>Advanced select</h1>
@@ -136,6 +138,10 @@
   </datalist>
 </AdvancedSelect>
 `}}</code></pre>
+      </template>
+
+      <template #dispatched-events>
+        <span v-html="events"></span>
       </template>
     </Integration>
 

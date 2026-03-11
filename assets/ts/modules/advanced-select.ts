@@ -45,7 +45,6 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   }
 
   datalist.addEventListener('click', function (event) {
-
     if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
       const option = event.target.closest('option');
 
@@ -58,6 +57,12 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       }
 
       option.classList.add('active');
+
+      setTimeout(() => {
+        advancedSelect.dispatchEvent(new CustomEvent('update-value', {
+          detail: { value: option.value },
+        }));
+      }, 0);
     }
   });
 
