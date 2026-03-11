@@ -5,7 +5,7 @@
     "name": "iamproperty"
   },
   "private": false,
-  "version": "7.7.0",
+  "version": "7.7.1--beta1",
   "scripts": {
     "reload": "vite --host",
     "dev": "npm run copy && node local_modules/delete-assets.cjs && vite --host",
