@@ -6,6 +6,7 @@
   import Notification from '@/components/Notification/Notification.vue';
   import VideoModal from '@/components/VideoModal/VideoModal.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
+  import Tabs from '@/components/Tabs/Tabs.vue';
 
   const handleSubmit = function(){
     console.log('submit');
@@ -78,36 +79,93 @@
         <h2>Title insight</h2>
         <span class="badge mb-0">Ai insight <i class="fa-regular fa-sparkle"></i></span>
       </div>
-      <Actionbar>
-        <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked>Title ID 1</label>
-        <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2">Title ID 2</label>
-      </Actionbar>
-      <p>There are agent actions available that can help mitigate delay, view these below.</p>
-      <Table class="md-md">
-        <table>
-          <thead>
-            <tr>
-              <th class="th--sm">Category</th>
-              <th>Description</th>
-              <th>Agent actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="border-0 no-hover">
-              <th class="text-nowrap">Class of title</th>
-              <td>
-                Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
-              </td>
-              <td>
-                <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
-              </td>
-              <td>
-                <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </Table>
+      
+      
+
+      <Tabs class="tabs--toggle">
+
+        <details>
+          <summary>Title ID 1</summary>
+            <Actionbar>
+
+              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked>Title ID 1</label>
+              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2">Title ID 2</label>
+
+              <a href="/" class="btn btn-action fa-cart">Order another title  register</a>
+              <a href="/" class="btn btn-action fa-cart">Download title register</a>
+            </Actionbar>
+          <Table class="md-md">
+
+            <table>
+              <thead>
+                <tr>
+                  <th class="th--sm">Category</th>
+                  <th>Description</th>
+                  <th>Agent actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-0 no-hover">
+                  <th class="text-nowrap">Class of title</th>
+                  <td>
+                    Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
+                  </td>
+                  <td>
+                    <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
+                  </td>
+                  <td>
+                    <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Table>
+
+        </details>
+        <details>
+          <summary>Title ID 2</summary>
+          
+            <Actionbar>
+
+              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked>Title ID 1</label>
+              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2">Title ID 2</label>
+
+              <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
+              <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
+            </Actionbar>
+          <Table class="md-md">
+
+            <table>
+              <thead>
+                <tr>
+                  <th class="th--sm">Category</th>
+                  <th>Description</th>
+                  <th>Agent actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-0 no-hover">
+                  <th class="text-nowrap">Class of title</th>
+                  <td>
+                    Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
+                  </td>
+                  <td>
+                    <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
+                  </td>
+                  <td>
+                    <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Table>
+
+        </details>
+      </Tabs>
+
+      
+
+
     </div>
 
     <Modal data-type="acknowledgement" class="modal--lg modal--no-cancel" data-agreed-text="Close">

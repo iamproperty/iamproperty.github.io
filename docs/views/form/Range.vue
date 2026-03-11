@@ -1,9 +1,6 @@
 <script setup>
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
-  import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
-  import Slider from '@/components/Slider/Slider.vue';
 
   const message = 'input field value';
   const htmlUsage = `...`;

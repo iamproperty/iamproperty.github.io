@@ -1,9 +1,6 @@
 <script setup>
   import Notification from '@/components/Notification/Notification.vue';
-  import Readme from '@/components/Notification/README.md';
-  import WebReadme from '../../../assets/ts/components/notification/README.md';
 
-  import Tabs from '@/components/Tabs/Tabs.vue';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
 

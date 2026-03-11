@@ -1,7 +1,5 @@
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
-  import Readme from '@/components/AppliedFilters/README.md';
-  import WebReadme from '~/ts/components/applied-filters/README.md';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import AppliedFilters from '@/components/AppliedFilters/AppliedFilters.vue';

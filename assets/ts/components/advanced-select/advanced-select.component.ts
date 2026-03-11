@@ -70,6 +70,9 @@ class iamAdvancedSelect extends HTMLElement {
       displayInputField.setAttribute('list', listID);
     }
 
+    if(datalist.querySelector(`[value="${inputField.value}"]`))
+      datalist.querySelector(`[value="${inputField.value}"]`)?.classList.add('active');
+
     advancedSelect(this, displayInputField, datalist);
 
     // Apply initial value passed to the component host

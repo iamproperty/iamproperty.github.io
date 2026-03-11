@@ -97,6 +97,29 @@
       </div>
     </div>
 
+    <div class="container visualtest">
+      <div class="md-col-end-5 mb-4">
+        <span class="d-block pb-2">Pre-filled</span>
+        <AdvancedSelect class="">
+          <label
+            >Property address
+            <span>
+              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO" />
+              <span class="suffix fa-regular fa-chevron-down"></span>
+            </span>
+          </label>
+          <datalist id="properties">
+            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
+            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
+            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
+            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
+            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
+            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+          </datalist>
+        </AdvancedSelect>
+      </div>
+    </div>
+
     <Integration component="advanced-select" componentName="advanced-select">
       <template #web-component>
         <pre><code>{{`<iam-advanced-select class="">
