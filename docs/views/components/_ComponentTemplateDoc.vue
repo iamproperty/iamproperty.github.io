@@ -11,11 +11,9 @@
       <Tabs>
         <details>
           <summary><h3>Web component</h3></summary>
-          <WebReadme></WebReadme>
         </details>
         <details>
           <summary><h3>Vue component</h3></summary>
-          <Readme></Readme>
         </details>
         <details>
           <summary><h3>HTML</h3></summary>
@@ -56,8 +54,6 @@
 
   // Component - Replace the card references to new component
   import Card from '@/components/Card/Card.vue';
-  import Readme from '@/components/Card/README.md';
-  import WebReadme from '~/ts/components/card/README.md';
 
   export default {
     components: {
@@ -65,8 +61,6 @@
       headerImg,
       Tabs,
       Card,
-      Readme,
-      WebReadme,
     },
     data() {
       return {
