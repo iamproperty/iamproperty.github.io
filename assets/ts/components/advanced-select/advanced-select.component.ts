@@ -49,6 +49,8 @@ class iamAdvancedSelect extends HTMLElement {
     if (!inputField) return;
 
     const displayInputField = inputField.cloneNode() as HTMLInputElement;
+    displayInputField.value = '';
+    displayInputField.removeAttribute('value');
     displayInputField.setAttribute('name', `${inputField.getAttribute('name')}Alt`);
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
@@ -68,30 +70,46 @@ class iamAdvancedSelect extends HTMLElement {
       searchWrapper.appendChild(datalist);
 
       displayInputField.setAttribute('list', listID);
+    } else {
+      displayInputField.setAttribute('list', datalist.id);
     }
 
-    if(datalist.querySelector(`[value="${inputField.value}"]`))
+    if (datalist && datalist.querySelector(`[value="${inputField.value}"]`)) {
       datalist.querySelector(`[value="${inputField.value}"]`)?.classList.add('active');
+    }
 
     advancedSelect(this, displayInputField, datalist);
 
-    // Apply initial value passed to the component host
-    const initialValue = this.getAttribute('value') || '';
-    if (!initialValue) return;
+    // Apply initial value passed to the component host or original input
+    const initialValue = this.getAttribute('value') || inputField.value || '';
+
+    if (!initialValue)
+      return;
 
     inputField.value = initialValue;
     inputField.setAttribute('value', initialValue);
 
-    displayInputField.value = '';
-    displayInputField.setAttribute('placeholder', initialValue);
-    displayInputField.setAttribute('data-value', initialValue);
+    let displayValue = initialValue;
 
     if (datalist) {
+      const selectedOption = Array.from(datalist.querySelectorAll('option')).find((option) => {
+        return option.getAttribute('value') === initialValue;
+      }) as HTMLOptionElement | undefined;
+
+      if (selectedOption) {
+        displayValue = selectedOption.textContent?.trim() || selectedOption.value;
+      }
+
       Array.from(datalist.querySelectorAll('option')).forEach((option) => {
         const isMatch = option.getAttribute('value') === initialValue;
         option.classList.toggle('active', isMatch);
       });
     }
+
+    displayInputField.value = displayValue;
+    displayInputField.setAttribute('placeholder', displayValue);
+    displayInputField.setAttribute('data-value', displayValue);
+    displayInputField.removeAttribute('value');
   }
 }
 

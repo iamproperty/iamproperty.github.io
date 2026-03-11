@@ -86,12 +86,12 @@
             </span>
           </label>
           <datalist id="properties">
-            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+            <option value="1">1 Oak Road, Newcastle upon Tyne, NE2 6TY</option>
+            <option value="2">4 Beach Avenue, Newcastle upon Tyne, NE6 9PO</option>
+            <option value="3">4 Main Street, Newcastle upon Tyne, NE4 9JK</option>
+            <option value="4">6 Oak Ridge, Newcastle upon Tyne, NE1 1DU</option>
+            <option value="5">13 Oak Lane, Newcastle upon Tyne, NE3 6GH</option>
+            <option value="6">14 Main Road, Newcastle upon Tyne, NE1 6TU</option>
           </datalist>
         </AdvancedSelect>
       </div>
@@ -104,17 +104,17 @@
           <label
             >Property address
             <span>
-              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO" />
+              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" value="3"/>
               <span class="suffix fa-regular fa-chevron-down"></span>
             </span>
           </label>
           <datalist id="properties">
-            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+            <option value="1">1 Oak Road, Newcastle upon Tyne, NE2 6TY</option>
+            <option value="2">4 Beach Avenue, Newcastle upon Tyne, NE6 9PO</option>
+            <option value="3">4 Main Street, Newcastle upon Tyne, NE4 9JK</option>
+            <option value="4">6 Oak Ridge, Newcastle upon Tyne, NE1 1DU</option>
+            <option value="5">13 Oak Lane, Newcastle upon Tyne, NE3 6GH</option>
+            <option value="6">14 Main Road, Newcastle upon Tyne, NE1 6TU</option>
           </datalist>
         </AdvancedSelect>
       </div>
