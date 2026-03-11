@@ -89,6 +89,10 @@ class iamAdvancedSelect extends HTMLElement {
 
     let displayValue = initialValue;
 
+    displayInputField.value = '';
+    displayInputField.setAttribute('placeholder', displayValue);
+    displayInputField.setAttribute('data-value', displayValue);
+
     if (datalist) {
       const selectedOption = Array.from(datalist.querySelectorAll('option')).find((option) => {
         return option.getAttribute('value') === initialValue;
@@ -103,10 +107,6 @@ class iamAdvancedSelect extends HTMLElement {
         option.classList.toggle('active', isMatch);
       });
     }
-
-    displayInputField.value = '';
-    displayInputField.setAttribute('placeholder', displayValue);
-    displayInputField.setAttribute('data-value', displayValue);
   }
 }
 
