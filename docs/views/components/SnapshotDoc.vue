@@ -1,6 +1,5 @@
 <script setup>
   import Snapshot from '@/components/Snapshot/Snapshot.vue';
-  import Readme from '@/components/Snapshot/README.md';
 
   const items = [
     {
@@ -90,7 +89,6 @@
 
     <div class="container">
       <h2>Vue Accordion component reference</h2>
-      <Readme></Readme>
     </div>
   </main>
 </template>

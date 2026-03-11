@@ -4,8 +4,6 @@
   import Tabs from '@/components/Tabs/Tabs.vue';
 
   import Multiselect from '@/components/Multiselect/Multiselect.vue';
-  import VueReadme from '@/components/Multiselect/README.md';
-  import WebReadme from '~/ts/components/multiselect/README.md';
 </script>
 
 <template>
@@ -107,11 +105,9 @@
     <Tabs class="container">
       <details>
         <summary><h2>Web component</h2></summary>
-        <WebReadme></WebReadme>
       </details>
       <details>
         <summary><h2>Vue component</h2></summary>
-        <VueReadme></VueReadme>
       </details>
     </Tabs>
 

@@ -1,9 +1,6 @@
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
   import Header from '@/components/Header/Header.vue';
-  import VueReadme from '@/components/Header/README.md';
-  import WebReadme from '~/ts/components/header/README.md';
 
   const htmlUsage = `<header class="header">
   <div class="container">
@@ -53,11 +50,9 @@
       </details>
       <details>
         <summary><h2>Web component</h2></summary>
-        <WebReadme></WebReadme>
       </details>
       <details>
         <summary><h2>Vue component</h2></summary>
-        <VueReadme></VueReadme>
       </details>
     </Tabs>
   </main>
