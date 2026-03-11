@@ -87,11 +87,9 @@ class iamAdvancedSelect extends HTMLElement {
     inputField.value = initialValue;
     inputField.setAttribute('value', initialValue);
 
-    let displayValue = initialValue;
-
     displayInputField.value = '';
-    displayInputField.setAttribute('placeholder', displayValue);
-    displayInputField.setAttribute('data-value', displayValue);
+    displayInputField.setAttribute('placeholder', initialValue);
+    displayInputField.setAttribute('data-value', initialValue);
 
     if (datalist) {
       const selectedOption = Array.from(datalist.querySelectorAll('option')).find((option) => {
