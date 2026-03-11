@@ -49,6 +49,8 @@ class iamAdvancedSelect extends HTMLElement {
     if (!inputField) return;
 
     const displayInputField = inputField.cloneNode() as HTMLInputElement;
+    displayInputField.value = '';
+    displayInputField.removeAttribute('value');
     displayInputField.setAttribute('name', `${inputField.getAttribute('name')}Alt`);
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
@@ -87,9 +89,7 @@ class iamAdvancedSelect extends HTMLElement {
     inputField.value = initialValue;
     inputField.setAttribute('value', initialValue);
 
-    displayInputField.value = '';
-    displayInputField.setAttribute('placeholder', initialValue);
-    displayInputField.setAttribute('data-value', initialValue);
+    let displayValue = initialValue;
 
     if (datalist) {
       const selectedOption = Array.from(datalist.querySelectorAll('option')).find((option) => {
@@ -105,6 +105,11 @@ class iamAdvancedSelect extends HTMLElement {
         option.classList.toggle('active', isMatch);
       });
     }
+
+    displayInputField.value = displayValue;
+    displayInputField.setAttribute('placeholder', displayValue);
+    displayInputField.setAttribute('data-value', displayValue);
+    displayInputField.removeAttribute('value');
   }
 }
 
