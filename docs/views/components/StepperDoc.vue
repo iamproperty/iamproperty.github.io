@@ -1,7 +1,6 @@
 <script setup>
   import Step from '@/components/Stepper/Step.vue';
   import Stepper from '@/components/Stepper/Stepper.vue';
-  import Readme from '@/components/Stepper/README.md';
 
   const htmlUsage = `<div class="container">
    <nav class="stepper" aria-label="Progress">
@@ -57,7 +56,6 @@
 
     <div class="container">
       <h2>Vue Stepper component reference</h2>
-      <Readme></Readme>
     </div>
   </main>
 </template>
