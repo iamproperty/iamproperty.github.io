@@ -24,13 +24,6 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   });
 
-  displayInputField.addEventListener('keyup', function () {
-    
-    if(displayInputField.value != ""){
-      displayInputField.setAttribute('data-value', displayInputField.value);
-    }
-  });
-
   displayInputField.addEventListener('blur', function () {
     if (displayInputField.hasAttribute('data-value')) {
       displayInputField.value = displayInputField.getAttribute('data-value');
@@ -46,9 +39,20 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   datalist.addEventListener('click', function (event) {
     if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
-      const option = event.target.closest('option');
+      const option = event.target.closest('option') as HTMLOptionElement;
+      const optionText = option.textContent?.trim() || option.value;
 
-      displayInputField.value = option.value;
+      // Store actual value on the original input
+      const originalInput = advancedSelect.querySelector('input[type="hidden"]') as HTMLInputElement | null;
+      if (originalInput) {
+        originalInput.value = option.value;
+        originalInput.setAttribute('value', option.value);
+      }
+
+      // Show label text in the visible field
+      displayInputField.value = optionText;
+      displayInputField.setAttribute('data-value', optionText);
+      displayInputField.setAttribute('placeholder', optionText);
 
       if (typeof window.triggerDynamicEvent == 'function') window.triggerDynamicEvent(displayInputField);
 
@@ -60,7 +64,10 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
       setTimeout(() => {
         advancedSelect.dispatchEvent(new CustomEvent('update-value', {
-          detail: { value: option.value },
+          detail: {
+            value: option.value,
+            text: optionText,
+          },
         }));
       }, 0);
     }
@@ -70,19 +77,21 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     displayInputField.removeAttribute('data-value');
     currentFocus = -1;
 
-    if(advancedSelect.tagName != "IAM-ADDRESS-LOOKUP"){
+    if (advancedSelect.tagName != "IAM-ADDRESS-LOOKUP") {
       const text = displayInputField.value.toUpperCase();
+
       for (const option of datalist.options) {
-        if (option.value.toUpperCase().indexOf(text) > -1) {
+        const optionText = (option.textContent || option.value).toUpperCase();
+
+        if (optionText.indexOf(text) > -1) {
           option.style.display = 'block';
           option.classList.remove('hide');
         } else {
           option.style.display = 'none';
           option.classList.add('hide');
         }
-      }      
+      }
     }
-
   });
 
   advancedSelect.addEventListener('keydown', function (e) {
@@ -127,6 +136,12 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
 
   const emptyField = (): void => {
+    const originalInput = advancedSelect.querySelector('input[type="hidden"]') as HTMLInputElement | null;
+
+    if (originalInput) {
+      originalInput.value = '';
+      originalInput.setAttribute('value', '');
+    }
 
     displayInputField.removeAttribute('placeholder');
 
@@ -139,15 +154,21 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
     for (const optionInner of datalist.options) {
       optionInner.classList.remove('active');
+      optionInner.classList.remove('hide');
       optionInner.removeAttribute('style');
     }
 
     const updateEvent = new CustomEvent('close-button-pressed');
     advancedSelect.dispatchEvent(updateEvent);
+
+    // Notify consumers the value was cleared
+    advancedSelect.dispatchEvent(new CustomEvent('update-value', {
+      detail: {
+        value: '',
+        text: '',
+      },
+    }));
   }
-
-
-
 
   const closeBtn = advancedSelect.querySelector('.empty') ? advancedSelect.querySelector('.empty') : advancedSelect.shadowRoot.querySelector('.empty');
 
