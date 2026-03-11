@@ -44,11 +44,17 @@ class iamVideoCard extends HTMLElement {
 
     setupCard(cardComponent);
     
-    if (cardComponent.querySelector('[data-youtube]'))
+    if (cardComponent.querySelector('[data-youtube]')){
+      
       cardComponent.setAttribute('data-youtube',cardComponent.querySelector('[data-youtube]').getAttribute('data-youtube'));
+      cardComponent.querySelector('[data-youtube]')?.remove();
+    }
 
-    if (cardComponent.querySelector('[data-vimeo]'))
+    if (cardComponent.querySelector('[data-vimeo]')){
+      
       cardComponent.setAttribute('data-vimeo', cardComponent.querySelector('[data-vimeo]').getAttribute('data-vimeo'));
+      cardComponent.querySelector('[data-vimeo]')?.remove();
+    }
     
     
 
