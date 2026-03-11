@@ -1,6 +1,5 @@
 <script setup>
   import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
 
   const message = 'input field value';
   const htmlUsage = `...`;

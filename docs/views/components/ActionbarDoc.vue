@@ -1424,8 +1424,6 @@
   // Component - Replace the card references to new component
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Card from '@/components/Card/Card.vue';
-  import Readme from '@/components/Actionbar/README.md';
-  import WebReadme from '~/ts/components/actionbar/README.md';
 
   import anatomy from '../../img/actionbar/actionbar-anatomy.png';
   import tablelist from '../../img/actionbar/actionbar-tablelist.png';
@@ -1459,8 +1457,6 @@
       Table,
       Actionbar,
       Card,
-      Readme,
-      WebReadme,
       anatomy,
       PopoverLists,
       tablelist,
