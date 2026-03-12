@@ -216,15 +216,15 @@
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Default state</p>
-          <a href="/components/buttons" class="btn btn-primary colour-success">Lorum ipsum</a>
+          <a href="/components/buttons" class="btn btn-complete">Lorum ipsum</a>
         </div>
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Hover/Focus state</p>
-          <a href="/components/buttons" class="btn btn-primary hover colour-success">Lorum ipsum</a>
+          <a href="/components/buttons" class="btn btn-complete hover">Lorum ipsum</a>
         </div>
         <div class="col-sm-6 col-md-4">
           <p class="lead pb-2">Active state</p>
-          <a href="/components/buttons" class="btn btn-primary active colour-success">Lorum ipsum</a>
+          <a href="/components/buttons" class="btn btn-complete active">Lorum ipsum</a>
         </div>
       </div>
     </div>

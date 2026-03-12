@@ -171,50 +171,72 @@
   // #endregion
 }
 
-:is(.youtube-link, .vimeo-link) {
+:is(.video-link, .youtube-link, .vimeo-link) {
   position: relative;
+--compact-size: 3rem;
 
-  &:before {
-    content: '';
+  &:before, 
+  &:after {
+    content: "\f04b";
+    font-family: "Font Awesome 7 Pro" !important;
     display: block;
-    background-color: var(--video-btn-colour, var(--colour-success));
-    height: 3rem;
-    width: 3rem;
     position: absolute;
-    top: calc(50% - 1.5rem);
-    left: calc(50% - 1.5rem);
-    z-index: 2;
-    border-radius: 1.5rem;
+
+    text-indent: 0;
+    line-height: calc(var(--compact-size) - .25rem);
+    font-weight: 900;
+    font-size: 1rem !important;
+    text-align: center;
+
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 4;
+    transform: translate(-50%, -50%);
+
+
+    --compact-size: 3rem;
+    padding: 0 !important;
+    margin-bottom: .5rem;
+    text-align: center;
+    width: var(--compact-size);
+    min-width: var(--compact-size);
+    max-width: var(--compact-size);
+    height: var(--compact-size) !important;
+    min-height: var(--compact-size) !important;
+    max-height: var(--compact-size) !important;
+    align-content: center;
+    line-height: 1 !important;
+    overflow: hidden;
   }
 
   &:after {
-    $icon-play: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 384 512'><path d='M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z'/></svg>");
-    --icon: #{$icon-play};
 
-    content: '';
-    display: block;
-    height: 1rem;
-    width: 1rem;
+    border-radius: 50% !important;
     position: absolute;
-    top: calc(50% - 0.5rem);
-    left: calc(50% - 0.4rem);
-    z-index: 5;
-    background: var(--colour-primary-theme);
-    mask-image: var(--icon);
-    mask-size: 80%;
-    mask-repeat: no-repeat;
-    mask-position: 50% 50%;
-    -webkit-mask-image: var(--icon);
-    -webkit-mask-size: 80%;
-    -webkit-mask-repeat: no-repeat;
-    -webkit-mask-position: 50% 50%;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    background-color: var(--colour-success);
+    border: 1px solid var(--colour-success);
   }
 
-  &:is(:hover, :focus) {
-    --video-btn-colour: var(--colour-canvas);
+
+  
+  &:is(:hover, :focus):not(:active) {
+    &:after {
+
+      background-color: var(--colour-white);
+      border-color: var(--colour-white);
+    }
   }
   &:is(:active) {
-    --video-btn-colour: color-mix(in oklab, var(--colour-success), #000000 20%) !important;
+    
+    &:after {
+
+      filter: brightness(85%);
+    }
   }
 }
 

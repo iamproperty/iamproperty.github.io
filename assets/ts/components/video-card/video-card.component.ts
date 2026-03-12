@@ -1,6 +1,7 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
-import { loadYouTubeScripts, createYoutTubeVideo } from '../../modules/videos';
+import { videoHTML, loadYouTubeScripts, createYoutTubeVideo,openYoutubeVideo,openVimeoVideo } from '../../modules/videos';
+import { openModal,closeModal,closeButtonHtml } from '../../modules/modal';
 
 trackComponentRegistered('iam-video-card');
 
@@ -21,9 +22,11 @@ class iamVideoCard extends HTMLElement {
     
     ${loadCSS}
     </style>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
     ${cardHTML}
     <dialog>
-      <div class="embed"></div>
+      ${closeButtonHtml}
+      ${videoHTML}
     </dialog>
     `;
 
@@ -34,97 +37,73 @@ class iamVideoCard extends HTMLElement {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const cardComponent = this;
     const cardHead = cardComponent.shadowRoot.querySelector('.card__head');
+    const closeButton = this.shadowRoot?.querySelector('[data-close]');
 
-    const randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-    const link_id = randLetter + Date.now();
-
-    let dialog;
-    let embed;
+    this.insertAdjacentHTML('beforeend', `<div class="embed" slot="video"></div>`);
+    const embed = this.querySelector('.embed');
 
     setupCard(cardComponent);
-
-    // Check if youtube or vimeo video link is present
-    if (cardComponent.querySelector('[data-youtube]'))
-      cardComponent.setAttribute(
-        'data-youtube',
-        cardComponent.querySelector('[data-youtube]').getAttribute('data-youtube')
-      );
-
-    if (cardComponent.querySelector('[data-vimeo]'))
-      cardComponent.setAttribute('data-vimeo', cardComponent.querySelector('[data-vimeo]').getAttribute('data-vimeo'));
-
-    // General dialog stuff
-    if (cardComponent.hasAttribute('data-youtube') || cardComponent.hasAttribute('data-vimeo')) {
-      cardHead.setAttribute('tabindex', '0');
-
-      // Add dialog to page
-      if (!document.getElementById(`${link_id}-dialog`)) {
-        document.body.insertAdjacentHTML(
-          'beforeend',
-          `<dialog id="${link_id}-dialog"><div class="embed" id="${link_id}"></div></dialog>`
-        );
-      }
-
-      dialog = document.getElementById(`${link_id}-dialog`);
-      embed = document.getElementById(link_id);
+    
+    if (cardComponent.querySelector('[data-youtube]')){
+      
+      cardComponent.setAttribute('data-youtube',cardComponent.querySelector('[data-youtube]').getAttribute('data-youtube'));
+      cardComponent.querySelector('[data-youtube]')?.remove();
     }
 
-    // Youtube
-    if (cardComponent.hasAttribute('data-youtube')) {
-      // Load the scripts only once
-      if (!document.body.classList.contains('youtubeLoaded')) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const loaded = await loadYouTubeScripts();
+    if (cardComponent.querySelector('[data-vimeo]')){
+      
+      cardComponent.setAttribute('data-vimeo', cardComponent.querySelector('[data-vimeo]').getAttribute('data-vimeo'));
+      cardComponent.querySelector('[data-vimeo]')?.remove();
+    }
+    
+    
+
+    cardHead.insertAdjacentHTML(
+          'beforeend',
+          `<button class="btn btn-compact fa-play colour-success">Play</button>`
+        );
+
+        
+    const button = cardHead?.querySelector('button');
+
+    cardHead.tabIndex = 6;
+    button?.tabIndex = -1;
+
+    cardHead.addEventListener('click', () => {
+      
+      if(this.hasAttribute('data-youtube')){
+        const youtubeId = this.getAttribute('data-youtube');
+        embed?.setAttribute('id',youtubeId);
+        openYoutubeVideo(this);
+        openModal(this);
       }
-      cardHead.addEventListener('click', function () {
-        const customEvent = new CustomEvent('play-video', {
-          detail: { 'Video Type': 'YoutTube', ID: cardComponent.getAttribute('data-youtube') },
-        });
-        cardComponent.dispatchEvent(customEvent);
+      else if(this.hasAttribute('data-vimeo')) {
+        openVimeoVideo(this);
+        openModal(this);
+      }
+    });
 
-        createYoutTubeVideo(embed, this.getAttribute('[data-youtube]'));
-        dialog.showModal();
-      });
+    closeButton?.addEventListener('click', () => {
+      closeModal(this);
 
-      dialog.addEventListener('close', () => {
-        if (
-          window.player[embed.getAttribute('id')] &&
-          typeof window.player[embed.getAttribute('id')].pauseVideo == 'function'
-        ) {
-          window.player[embed.getAttribute('id')].pauseVideo();
+      if(this.hasAttribute('data-youtube')){
+        const youtubeId = this.getAttribute('data-youtube');
+
+        if (window.player[youtubeId] && typeof window.player[youtubeId].pauseVideo == 'function') {
+          window.player[youtubeId].pauseVideo();
         }
-
-        const customEvent = new CustomEvent('close-video', {
-          detail: { 'Video Type': 'YoutTube', ID: cardComponent.getAttribute('data-youtube') },
-        });
-        cardComponent.dispatchEvent(customEvent);
-      });
-    } else if (cardComponent.hasAttribute('data-vimeo')) {
-      // Vimeo
-
-      cardHead.addEventListener('click', function () {
-        const videoId = cardComponent.getAttribute('data-vimeo');
-
-        const customEvent = new CustomEvent('play-video', {
-          detail: { 'Video Type': 'Vimeo', ID: videoId },
-        });
-        cardComponent.dispatchEvent(customEvent);
-
-        if (!embed.querySelector('iframe'))
-          embed.innerHTML = `<iframe src="https://player.vimeo.com/video/${videoId}?autoplay=1" width="100%" height="100%" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
-
-        dialog.showModal();
-      });
-
-      dialog.addEventListener('close', () => {
+      }
+      else if(this.hasAttribute('data-vimeo')) {
+        
         embed.innerHTML = ``; // Remove the video since we cant pause it
 
         const customEvent = new CustomEvent('close-video', {
-          detail: { 'Video Type': 'Vimeo', ID: cardComponent.getAttribute('data-vimeo') },
+          detail: { 'Video Type': 'Vimeo', ID: this.getAttribute('data-vimeo') },
         });
-        cardComponent.dispatchEvent(customEvent);
-      });
-    }
+        this.dispatchEvent(customEvent);
+        window.dataLayer.push(customEvent.detail);
+      }
+    });
 
     trackComponent(cardComponent, 'iam-video-card', ['play-video', 'close-video']);
   }
