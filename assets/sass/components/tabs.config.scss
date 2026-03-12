@@ -11,6 +11,10 @@
 iam-tabs {
   --colour-tab-underline: var(--colour-info);
 
+  details[open] {
+    padding-top: 2rem;
+  }
+
   details:not([open]) {
     padding-bottom: 0;
   }
@@ -65,7 +69,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 
   .tabs__links__wrapper {
     position: relative;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
 
     &:after {
       content: '';

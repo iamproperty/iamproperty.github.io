@@ -45,6 +45,25 @@ class iamTabs extends HTMLElement {
     this.shadowRoot.querySelector('.tabs').setAttribute('class', `tabs ${classList}`);
 
     tabs(this);
+
+    // #region Allow togle tags to control the tabs
+    Array.from(this.querySelectorAll('details[id]')).forEach((details) => {
+      const detailsID = details.getAttribute('id');
+
+      Array.from(document.querySelectorAll(`[command="show-tab"][commandfor="${detailsID}"]`)).forEach((radioField) => {
+
+        radioField.closest('label').addEventListener('click', (e) => {
+        
+          details.setAttribute('open','open');
+
+          Array.from(document.querySelectorAll(`input[type="radio"][command="show-tab"][commandfor="${detailsID}"]`)).forEach((input) => {
+
+            input.checked = true;
+          });
+        });
+      });
+    });
+    // #endregion
   }
 }
 

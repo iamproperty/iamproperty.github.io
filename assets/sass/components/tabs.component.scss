@@ -7,3 +7,28 @@
 :host {
   background: transparent;
 }
+
+:host(.tabs--hidden) {
+
+  .tabs__links__wrapper{
+    display: none;
+  }
+}
+
+:host(.tabs--sm-hidden) {
+  @container (min-width: 36em) {
+
+    .tabs__links__wrapper{
+      display: none;
+    }
+  }
+}
+
+:host(.tabs--md-hidden) {
+  @container (min-width: 62em) {
+
+    .tabs__links__wrapper{
+      display: none;
+    }
+  }
+}
