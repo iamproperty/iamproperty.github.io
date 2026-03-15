@@ -123,6 +123,7 @@ class iamSearch extends HTMLElement {
           signal: signal,
           method: 'get',
           credentials: 'same-origin',
+          mode: 'no-cors',
           headers: new Headers({
             'Content-Type': 'application/json',
             Accept: 'application/json',

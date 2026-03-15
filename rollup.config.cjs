@@ -76,6 +76,10 @@ Array.from(components).forEach((component) => {
     componentFileName = "address-lookup";
   }
   
+  if (componentFileName == "std-nav"){
+    componentFileName = "nav";
+  }
+  
   try {
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.css`))) {
       

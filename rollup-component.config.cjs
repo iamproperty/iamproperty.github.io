@@ -55,6 +55,10 @@ components.forEach((component) => {
     componentFileName = "address-lookup";
   }
   
+  if (componentFileName == "std-nav"){
+    componentFileName = "nav";
+  }
+  
 
   
   try {

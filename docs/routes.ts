@@ -1261,6 +1261,22 @@ const routes = [
         component: () => import('./views/standalone/Index.vue'),
       },
       {
+        path: 'hub',
+        name: 'iamproperty hub',
+        meta: {
+          title: 'iamproperty hub | iamkey',
+        },
+        component: () => import('./views/standalone/eco/hub.vue'),
+      },
+      {
+        path: 'eco-product',
+        name: 'iamproperty hub product',
+        meta: {
+          title: 'iamproperty hub | iamkey',
+        },
+        component: () => import('./views/standalone/eco/product.vue'),
+      },
+      {
         path: 'navbar',
         name: 'navbar example',
         meta: {
