@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-// #region default carousel
+/* #region default carousel */
 
 :host {
   display: block;
@@ -167,9 +167,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Remove the scrollbar
+/* #region Remove the scrollbar */
 .carousel__inner {
   // FireFox
   scrollbar-width: none;
@@ -181,9 +181,9 @@
   // Chrome, Safari, Edge
   display: none;
 }
-// #endregion
+/* #endregion */
 
-// #region Direction button
+/* #region Direction button */
 
 .carousel__btns {
   text-align: center;
@@ -238,9 +238,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region carousel controls/pips
+/* #region carousel controls/pips */
 .carousel .carousel__controls {
   overflow: hidden;
   margin-inline: auto;
@@ -298,9 +298,9 @@
     background: var(--colour-info);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region progress bar
+/* #region progress bar */
 .carousel__progress {
   text-align: center;
   margin-bottom: 1rem;
@@ -409,9 +409,9 @@ input[type='range']:focus::-moz-range-thumb {
   outline: var(--thumb-size-outline) solid var(--thumb-colour);
 }
 
-// #endregion
+/* #endregion */
 
-// #region Hide buttons and pips
+/* #region Hide buttons and pips */
 .carousel__btns:has(~ .carousel__controls button:first-child:nth-child(1):last-child) {
   display: none;
 }
@@ -569,9 +569,9 @@ input[type='range']:focus::-moz-range-thumb {
 :host(.hide-controls) .carousel__controls {
   display: none;
 }
-// #endregion
+/* #endregion */
 
-// #region thumbnails
+/* #region thumbnails */
 :host(.thumbnails) .carousel__controls {
   display: flex !important;
   flex-wrap: wrap;
@@ -620,12 +620,12 @@ input[type='range']:focus::-moz-range-thumb {
     display: none !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Turn carousel slide into image holder
+/* #region Turn carousel slide into image holder */
 ::slotted(div.image__wrapper) {
   width: 100%;
   aspect-ratio: var(--carousel-image-aspect-ratio, 3 / 2);
   position: relative;
 }
-// #endregion
+/* #endregion */

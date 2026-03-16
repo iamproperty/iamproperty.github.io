@@ -5,7 +5,7 @@
 
 
 @layer elements {
-  // #region reset
+  /* #region reset */
   table {
     caption-side: bottom;
     border-collapse: collapse;
@@ -38,9 +38,9 @@
     border-style: solid;
     border-width: 0;
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Default table
+  /* #region Default table */
   table {
     --border-width: 2px;
     --inner-border-width: 2px;
@@ -140,5 +140,5 @@
     --border-width: 0px;
     --inner-border-width: 0px;
   }
-  // #endregion
+  /* #endregion */
 }

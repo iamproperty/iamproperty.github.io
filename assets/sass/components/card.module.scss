@@ -104,7 +104,7 @@
   margin-bottom: var(--card-footer-bottom-padding) !important;
 }
 
-// #region Show total number
+/* #region Show total number */
 .card__body:has(.card__total) {
   --card-head-top-padding: 1rem;
   --card-head-bottom-padding: 1.5rem;
@@ -133,9 +133,9 @@
   line-height: 2.5rem;
 }
 
-// #endregion
+/* #endregion */
 
-// #region badges
+/* #region badges */
 .card__head:has(img) ~ .card__badges {
   position: absolute;
   top: 0;
@@ -148,4 +148,4 @@
   padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) 0 var(--card-left-padding);
   margin-bottom: -1.5rem;
 }
-// #endregion
+/* #endregion */

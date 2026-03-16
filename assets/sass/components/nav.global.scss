@@ -109,7 +109,7 @@ body {
   }
 }
 
-// #region Create the correct padding top of the page
+/* #region Create the correct padding top of the page */
 nav:has(iam-nav) {
   min-height: 6rem; /* 96 */
   display: block;
@@ -183,9 +183,9 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
   margin-top: -8rem;
 }
 
-// #endregion
+/* #endregion */
 
-// #region General styles
+/* #region General styles */
 iam-nav {
   --nav-height: 6rem; /* 96 */
 
@@ -285,9 +285,9 @@ iam-nav details {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region mobile and tablet mega menu
+/* #region mobile and tablet mega menu */
 iam-nav details {
   @container style(--mobDetails) {
 
@@ -436,9 +436,9 @@ iam-nav details {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region tablet mega menu tweaks
+/* #region tablet mega menu tweaks */
 iam-nav details {
 
   @container style(--tabletDetails) {
@@ -478,9 +478,9 @@ iam-nav details {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Desktop mega menu
+/* #region Desktop mega menu */
 @media screen and (min-width: 62em) {
   iam-nav > details,
   iam-nav *:not(.nav--menu) > details {
@@ -707,9 +707,9 @@ iam-nav details {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Search
+/* #region Search */
 @media screen and (min-width: 62em) {
   iam-nav {
     &.search-open {
@@ -719,9 +719,9 @@ iam-nav details {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Dual navbar in desktop
+/* #region Dual navbar in desktop */
 @media screen and (min-width: 62em) {
   iam-nav:has([slot='dual']) {
     .brand:has(~ [slot='dual']) {
@@ -741,9 +741,9 @@ iam-nav details {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region compact menus on mobile
+/* #region compact menus on mobile */
 iam-nav > .dialog__wrapper {
   .dialog--list {
     a {
@@ -805,9 +805,9 @@ iam-nav > .dialog__wrapper {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region navbar additional menus
+/* #region navbar additional menus */
 
 iam-nav .nav--menu {
   outline: none !important;
@@ -867,4 +867,4 @@ iam-nav .nav--menu {
 }
 
 
-// #endregion
+/* #endregion */

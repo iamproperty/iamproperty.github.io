@@ -38,7 +38,7 @@
       color-scheme: dark;
     }
   }
-  // #region When the theme is set to dark via the dark mode component
+  /* #region When the theme is set to dark via the dark mode component */
   // OR when the dark mode is set via the browser or device when no component is present
   
   .dark-theme :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
@@ -86,7 +86,7 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 
   .invert-colours {
     > * {

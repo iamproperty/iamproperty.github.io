@@ -13,7 +13,7 @@
   font-size: 1.5rem;
 }
 
-// #region video-card--top
+/* #region video-card--top */
 :host(:not(.video-card--top)) .card__head {
   order: 2;
 }
@@ -46,4 +46,4 @@
     }
   }
 }
-// #endregion
+/* #endregion */

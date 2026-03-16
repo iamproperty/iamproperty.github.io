@@ -36,7 +36,7 @@
 }
 
 
-// #region Fix colours 
+/* #region Fix colours  */
 
 :host(.bg-primary) .container {
 
@@ -48,7 +48,7 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
 .btn-menu {
   padding: 0;
@@ -162,7 +162,7 @@
   }
 }
 
-// #region mobile and tablet menu
+/* #region mobile and tablet menu */
 @media screen and (max-width: 62em) {
   :host > .container {
     display: contents;
@@ -337,9 +337,9 @@
     display: contents;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region tablet tweaks
+/* #region tablet tweaks */
 @media screen and (max-width: 62em) and (min-width: 36em) {
   .menu {
     padding-right: 2.5rem !important;
@@ -357,9 +357,9 @@
     width: auto !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region desktop
+/* #region desktop */
 @media screen and (min-width: 62em) {
   :host {
     //max-width: 100%!important;
@@ -545,9 +545,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Menus
+/* #region Menus */
 ::slotted(.nav--menu) {
   pointer-events: all;
   overscroll-behavior: contain;
@@ -641,9 +641,9 @@ slot[name='menus'] {
     backdrop-filter: blur(2px);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region compressed nav
+/* #region compressed nav */
 @media screen and (min-width: 62em) {
   :host(.nav--md-compressed) .buttons-holder button {
     margin-left: 1.5rem !important;
@@ -662,9 +662,9 @@ slot[name='menus'] {
     margin-left: 1.5rem !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Compact button
+/* #region Compact button */
 @media screen and (min-width: 62em) {
   :host(.nav--btn-compact:not(.nav--large)) {
     .btn-menu .btn {
@@ -694,9 +694,9 @@ slot[name='menus'] {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Dual with buttons
+/* #region Dual with buttons */
 @media screen and (max-width: 62em) {
   :host(.nav--dual-buttons) {
     slot[name='dual'] {
@@ -715,4 +715,4 @@ slot[name='menus'] {
     }
   }
 }
-// #endregion
+/* #endregion */

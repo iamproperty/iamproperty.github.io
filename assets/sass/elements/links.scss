@@ -5,7 +5,7 @@
 
 
 @layer elements {
-  // #region reset
+  /* #region reset */
   a {
     color: var(--link-color);
     text-decoration: underline;
@@ -28,7 +28,7 @@
       text-decoration: none;
     }
   }
-  // #endregion
+  /* #endregion */
 
   // global
   a {
@@ -141,7 +141,7 @@
     }
   }
 
-  // #region Support card component
+  /* #region Support card component */
   :is(a, button, label):has(.card, iam-card) {
     border: none;
     background: none;
@@ -168,7 +168,7 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 }
 
 :is(.video-link, .youtube-link, .vimeo-link) {
@@ -240,7 +240,7 @@
   }
 }
 
-// #region Sidebar link styling including parent group styling
+/* #region Sidebar link styling including parent group styling */
 iam-collapsible-side {
   > * {
     padding-left: 1.5rem;
@@ -367,4 +367,4 @@ iam-collapsible-side {
     }
   }
 }
-// #endregion
+/* #endregion */

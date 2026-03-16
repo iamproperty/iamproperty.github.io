@@ -5,7 +5,7 @@
 
 
 @layer elements {
-  // #region toggle
+  /* #region toggle */
   .toggle {
     --outline-width: 0.25rem !important;
     padding-left: 3.25rem !important;
@@ -47,7 +47,7 @@
     -ms-transform: translateX(1rem) !important;
     transform: translateX(1rem) !important;
   }
-  // #endregion
+  /* #endregion */
 
   label.toggle:has(+ label.toggle) {
     margin-bottom: 0 !important;

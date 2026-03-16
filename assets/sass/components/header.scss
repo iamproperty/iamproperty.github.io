@@ -101,7 +101,7 @@
   //margin-bottom: 0 !important;
 }
 
-// #region Breadcrumbs
+/* #region Breadcrumbs */
 :host(.has-breadcrumbs) {
 
   .header-banner {
@@ -112,9 +112,9 @@
     margin-bottom: 2rem!important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region badge
+/* #region badge */
 
 slot[name="badge"] {
   display: block;
@@ -122,9 +122,9 @@ slot[name="badge"] {
   top: 0;
   left: 0;
 }
-// #endregion
+/* #endregion */
 
-// #region panel 
+/* #region panel  */
 :host(.has-panel) [name="panel"]{
 
   display: block;
@@ -194,10 +194,10 @@ slot[name="badge"] {
     text-align: center;
   }
 }
-// #endregion
+/* #endregion */
 
 
-// #region toolbox 
+/* #region toolbox  */
 :host(.has-toolbox) {
 
   margin-bottom: 4rem;
@@ -236,9 +236,9 @@ slot[name="badge"] {
   height: 2.5rem !important;
 }
 
-// #endregion
+/* #endregion */
 
-// #region gradient background
+/* #region gradient background */
 .gradient-overflow {
   overflow: hidden;
   position: absolute;
@@ -253,4 +253,4 @@ slot[name="badge"] {
   width: 54rem; /* 874px */
   aspect-ratio: 1 / 1;
 }
-// #endregion
+/* #endregion */

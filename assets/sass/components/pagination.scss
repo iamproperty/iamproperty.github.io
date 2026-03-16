@@ -34,7 +34,7 @@
   }
 }
 
-// #region page jump and per page
+/* #region page jump and per page */
 .pagination div:is(.page-jump, .per-page) {
   border: 1px solid var(--colour-light);
   height: 3.25rem; /* (52); */
@@ -94,9 +94,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Item count
+/* #region Item count */
 .pagination > .item-count {
   display: block;
   text-align: center;
@@ -116,9 +116,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region buttons
+/* #region buttons */
 *:where(.prev, .next) {
   border: 1px solid var(--colour-light);
   line-height: 3.25rem; /* (52); */
@@ -185,9 +185,9 @@
     color: var(--colour-info);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region mobile button
+/* #region mobile button */
 .mobile-controls {
   display: block;
 }
@@ -234,4 +234,4 @@
     margin: auto;
   }
 }
-// #endregion
+/* #endregion */

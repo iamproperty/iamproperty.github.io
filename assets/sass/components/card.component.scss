@@ -29,7 +29,7 @@
   }
 }
 
-// #region Right arrow
+/* #region Right arrow */
 :host(.show-icon) .card__body {
   --card-right-padding: 3.5rem;
 
@@ -78,9 +78,9 @@
     background: var(--hover-icon-colour, #ffffff);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region illustration
+/* #region illustration */
 .card__body {
   &:has(.card__illustration) {
     align-items: center;
@@ -106,15 +106,15 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region border left
+/* #region border left */
 :host([class*='colour-']) {
   border-left: 0.75rem solid var(--colour, var(--colour-primary));
 }
-// #endregion
+/* #endregion */
 
-// #region secondary button
+/* #region secondary button */
 slot[name='secondary'] {
   display: block;
   position: absolute;
@@ -128,9 +128,9 @@ slot[name='secondary'] {
   background: none !important;
   color: var(--colour-btn) !important;
 }
-// #endregion
+/* #endregion */
 
-// #region checkbox
+/* #region checkbox */
 ::slotted([slot='checkbox']) {
   position: absolute !important;
   top: 0.5rem;
@@ -140,9 +140,9 @@ slot[name='secondary'] {
   height: 2.5rem;
   overflow: hidden;
 }
-// #endregion
+/* #endregion */
 
-// #region Multi-action card
+/* #region Multi-action card */
 .menu__wrapper {
   position: absolute;
   right: 1rem;
@@ -179,4 +179,4 @@ slot[name='secondary'] {
   outline-offset: -2px;
   border-radius: var(--card-border-radius) !important;
 }
-// #endregion
+/* #endregion */

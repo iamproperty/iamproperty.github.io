@@ -1,6 +1,6 @@
 @use '../_func' as *;
 
-// #region word counter
+/* #region word counter */
 :host {
   display: block;
   max-width: var(--input-max-width, 50rem);
@@ -23,4 +23,4 @@
   margin: 0 0 1em 1em;
 }
 
-// #endregion
+/* #endregion */

@@ -2,7 +2,7 @@
 @use 'charts.module' as *;
 @use '../elements/buttons' as *;
 
-// #region Bar chart (Horizontal)
+/* #region Bar chart (Horizontal) */
 :host(.chart--horizontal) .chart__outer {
   tbody {
     --chart-direction: 90deg;
@@ -120,9 +120,9 @@
     display: none !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region stacked
+/* #region stacked */
 :host(.chart--stacked) .chart__wrapper {
   table tbody tr {
     --bar-gap: 0;
@@ -157,9 +157,9 @@
     content: none;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region animation
+/* #region animation */
 
 #{'.chart--animate.animating.inview'} {
   --animation-left: 2s;
@@ -189,9 +189,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Display data modifier class
+/* #region Display data modifier class */
 :host(.chart--display-data) {
   table tbody tr {
     td:not(:first-child) {
@@ -240,7 +240,7 @@
     padding-top: 1rem;
   }
 }
-// #endregion
+/* #endregion */
 
 :host(.chart--fit-content:not(.chart--horizontal)) {
   width: 100%;
@@ -290,7 +290,7 @@
   }
 }
 
-// #region tooltip
+/* #region tooltip */
 button.tooltip {
   &:after {
     content: '?';
@@ -344,4 +344,4 @@ button.tooltip {
   }
 }
 
-// #endregion
+/* #endregion */

@@ -11,7 +11,7 @@
     display: block;
   }
 
-  // #region Default styling of both modals
+  /* #region Default styling of both modals */
   dialog,
   [popover] {
     --dialog-padding: 1.5rem;
@@ -76,7 +76,7 @@
     }
 
   }
-  // #endregion
+  /* #endregion */
 
   details.bg-light {
     margin-inline: calc(var(--dialog-padding) * -1);
