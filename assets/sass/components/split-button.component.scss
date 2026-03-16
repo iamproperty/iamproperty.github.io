@@ -1,7 +1,7 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 @use '../elements/buttons';
 
-@use '../components/menu.global.scss';
+@use '../components/menu.global';
 
 // Main button
 ::slotted(button:not([slot])) {

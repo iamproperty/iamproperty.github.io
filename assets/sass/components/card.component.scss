@@ -1,8 +1,8 @@
-@use '../_func.scss' as *;
-@use 'card.module.scss' as *;
-@use '../elements/dialog.scss' as *;
-@use '../elements/popover.scss' as *;
-@use '../elements/buttons.scss' as *;
+@use '../_func' as *;
+@use 'card.module' as *;
+@use '../elements/dialog' as *;
+@use '../elements/popover' as *;
+@use '../elements/buttons' as *;
 
 :host {
   --card-right-padding: 1rem;
@@ -87,11 +87,11 @@
     display: flex;
 
     .card__illustration {
-      height: rem(64);
-      width: rem(64);
+      height: 4rem; /* 64 */
+      width: 4rem; /* 64 */
       margin-right: 1.5rem;
-      margin-top: rem(-20);
-      margin-bottom: rem(-20);
+      margin-top: -1.25rem; /* -20 */
+      margin-bottom: -1.25rem; /* -20 */
       position: relative;
 
       img {
@@ -153,7 +153,7 @@ slot[name='secondary'] {
 
   > .btn:before {
     content: '\f142';
-    font-family: 'Font Awesome 6 Pro';
+    font-family: 'Font Awesome 7 Pro';
   }
 }
 

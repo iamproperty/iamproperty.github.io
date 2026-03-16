@@ -37,7 +37,7 @@ class iamAdvancedSelect extends HTMLElement {
       display: none !important;
     }
     </style>
-    <link rel="stylesheet" href="https://kit.fontawesome.com/26fdbf0179.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
     <slot></slot>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -45,12 +45,17 @@ class iamAdvancedSelect extends HTMLElement {
 
   connectedCallback(): void {
     // Clone original input field, re-name and use for display purposes
-    const inputField = this.querySelector('input');
-    const displayInputField = inputField.cloneNode();
+    const inputField = this.querySelector('input') as HTMLInputElement | null;
+    if (!inputField) return;
+
+    const displayInputField = inputField.cloneNode() as HTMLInputElement;
+    displayInputField.value = '';
+    displayInputField.removeAttribute('value');
     displayInputField.setAttribute('name', `${inputField.getAttribute('name')}Alt`);
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
-    let datalist = this.querySelector('datalist');
+
+    let datalist = this.querySelector('datalist') as HTMLDataListElement | null;
 
     inputField.after(displayInputField);
 
@@ -65,11 +70,47 @@ class iamAdvancedSelect extends HTMLElement {
       searchWrapper.appendChild(datalist);
 
       displayInputField.setAttribute('list', listID);
+    } else {
+      displayInputField.setAttribute('list', datalist.id);
+    }
+
+    if (datalist && datalist.querySelector(`[value="${inputField.value}"]`)) {
+      datalist.querySelector(`[value="${inputField.value}"]`)?.classList.add('active');
     }
 
     advancedSelect(this, displayInputField, datalist);
+
+    // Apply initial value passed to the component host or original input
+    const initialValue = this.getAttribute('value') || inputField.value || '';
+
+    if (!initialValue)
+      return;
+
+    inputField.value = initialValue;
+    inputField.setAttribute('value', initialValue);
+
+    let displayValue = initialValue;
+
+    if (datalist) {
+      const selectedOption = Array.from(datalist.querySelectorAll('option')).find((option) => {
+        return option.getAttribute('value') === initialValue;
+      }) as HTMLOptionElement | undefined;
+
+      if (selectedOption) {
+        displayValue = selectedOption.textContent?.trim() || selectedOption.value;
+      }
+
+      Array.from(datalist.querySelectorAll('option')).forEach((option) => {
+        const isMatch = option.getAttribute('value') === initialValue;
+        option.classList.toggle('active', isMatch);
+      });
+    }
+
+    displayInputField.value = displayValue;
+    displayInputField.setAttribute('placeholder', displayValue);
+    displayInputField.setAttribute('data-value', displayValue);
+    displayInputField.removeAttribute('value');
   }
 }
-
 
 export default iamAdvancedSelect;

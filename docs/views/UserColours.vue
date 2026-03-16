@@ -1,5 +1,5 @@
 <template>
-  <div class="container visualtest pb-5">
+  <div class="container pb-5">
     <div class="row">
       <div class="col pb-3 flex-grow-0">
         <div class="wider-colour-2 empty-state">

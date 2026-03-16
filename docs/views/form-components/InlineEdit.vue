@@ -300,11 +300,9 @@
       <Tabs>
         <details>
           <summary><h2>Web component</h2></summary>
-          <WebReadme></WebReadme>
         </details>
         <details>
           <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
         </details>
       </Tabs>
     </div>
@@ -347,8 +345,6 @@
 <script>
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Tab from '@/components/Tabs/Tab.vue';
-  import Readme from '@/components/InlineEdit/README.md';
-  import WebReadme from '~/ts/components/inline-edit/README.md';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Anatomy from '../../img/inline-edit-anatomy.png';
@@ -360,8 +356,6 @@
     components: {
       DSHeader,
       Table,
-      Readme,
-      WebReadme,
       Tabs,
       Tab,
       InlineEdit,

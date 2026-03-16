@@ -1,6 +1,5 @@
 <script setup>
   import Banner from '@/components/Banner/Banner.vue';
-  import Readme from '@/components/Banner/README.md';
 
   const htmlUsage = `<div class="container">
   <div class="bg-light mb-4">
@@ -61,7 +60,6 @@
     </div>
     <div class="container">
       <h2>Vue Banner component reference</h2>
-      <Readme></Readme>
     </div>
   </main>
 </template>

@@ -35,44 +35,75 @@ class iamNotification extends HTMLElement {
       document.head.insertAdjacentHTML('beforeend', `<style id="notificationHolder">${loadExtraCSS}</style>`);
   }
 
+  addColour = (component, status):void => {
+
+    if (component.hasAttribute('data-type')) 
+      component.classList.add(`bg-${status}`);
+    else 
+      component.classList.add(`colour-${status}`);
+  }
+
+  addIcon = (component, status):void => {
+
+    switch (status) {
+      case 'danger':
+        component.insertAdjacentHTML(
+          'beforeend',
+          '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>'
+        );
+        break;
+      case 'warning':
+        component.insertAdjacentHTML(
+          'beforeend',
+          '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>'
+        );
+        break;
+      case 'success':
+        component.insertAdjacentHTML(
+          'beforeend',
+          '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>'
+        );
+        break;
+      default:
+        component.insertAdjacentHTML(
+          'beforeend',
+          '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>'
+        );
+    }
+  }
+
+  addDismissBtn = (component):void => {
+    component.shadowRoot.querySelector('.notification__dismiss')?.innerHTML = `<button data-dismiss-button part="dismiss-btn">Dismiss</button>`;
+
+    component.shadowRoot.querySelector('.notification__dismiss [data-dismiss-button]').addEventListener(
+      'click',
+      function () {
+        closeNotification(component);
+
+        const customEvent = new CustomEvent('dismiss', {
+          detail: {
+            class: component.classList,
+          },
+        });
+
+        component.dispatchEvent(customEvent);
+      },
+      false
+    );
+  }
+
   connectedCallback(): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const wrapper = this;
     const defaultStatusBG = this.hasAttribute('data-type') ? 'white' : 'info';
     const statusBG = this.hasAttribute('data-status') ? this.getAttribute('data-status') : defaultStatusBG;
 
-    if (this.hasAttribute('data-type')) this.classList.add(`bg-${statusBG}`);
-    else {
-      this.classList.add(`colour-${statusBG}`);
-    }
+    this.addColour(this, statusBG);
 
     if (!this.querySelector('i')) {
-      switch (statusBG) {
-        case 'danger':
-          this.insertAdjacentHTML(
-            'beforeend',
-            '<i class="fa-solid fa-circle-exclamation" aria-hidden="true" slot="icon"></i>'
-          );
-          break;
-        case 'warning':
-          this.insertAdjacentHTML(
-            'beforeend',
-            '<i class="fa-solid fa-triangle-exclamation" aria-hidden="true" slot="icon"></i>'
-          );
-          break;
-        case 'success':
-          this.insertAdjacentHTML(
-            'beforeend',
-            '<i class="fa-solid fa-check-circle" aria-hidden="true" slot="icon"></i>'
-          );
-          break;
-        default:
-          this.insertAdjacentHTML(
-            'beforeend',
-            '<i class="fa-solid fa-circle-info" aria-hidden="true" slot="icon"></i>'
-          );
-      }
+      this.addIcon(this, statusBG);
     }
+    
 
     const buttons = this.querySelectorAll('a,button');
 
@@ -92,30 +123,50 @@ class iamNotification extends HTMLElement {
     }
 
     if (this.hasAttribute('data-dismiss')) {
-      this.shadowRoot.querySelector('.notification__dismiss')?.innerHTML =
-        `<button data-dismiss-button part="dismiss-btn">Dismiss</button>`;
 
-      this.shadowRoot.querySelector('.notification__dismiss [data-dismiss-button]').addEventListener(
-        'click',
-        function () {
-          closeNotification(wrapper);
-
-          const customEvent = new CustomEvent('dismiss', {
-            detail: {
-              class: this.classList,
-            },
-          });
-
-          this.dispatchEvent(customEvent);
-        },
-        false
-      );
+      this.addDismissBtn(this);
     }
 
     setupNotification(this);
 
     trackComponent(this, 'iam-notification', ['dismiss']);
   }
+  
+  static get observedAttributes(): any {
+    return ['data-status','data-dismiss'];
+  }
+
+  attributeChangedCallback(attrName, oldVal, newVal): void {
+    switch (attrName) {
+      case 'data-status': {
+        if (oldVal != newVal) {
+          
+          this.classList.remove('bg-danger');
+          this.classList.remove('bg-warning');
+          this.classList.remove('bg-success');
+          this.classList.remove('bg-white');
+          this.querySelector('i')?.remove();
+
+          this.addColour(this, newVal);
+          this.addIcon(this, newVal);
+        }
+        break;
+      }
+      case 'data-dismiss': {
+        if (oldVal != newVal) {
+          if (this.hasAttribute('data-dismiss')) {
+            
+            this.addDismissBtn(this);
+          }
+          else {
+            this.shadowRoot.querySelector('.notification__dismiss')?.innerHTML = '';
+          }
+        }
+        break;
+      }
+    }
+  }
+
 }
 
 export default iamNotification;

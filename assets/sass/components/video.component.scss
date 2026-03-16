@@ -1,0 +1,75 @@
+@use '../foundations/animations';
+@use '../elements/buttons--global';
+@use '../elements/buttons--compact';
+@use '../utilities/colours';
+
+@layer components {
+  .video-wrapper {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    background-color: var(--colour-light);
+    margin-bottom: 2rem;
+    cursor: pointer;
+
+    &:before {
+      font-family: 'Font Awesome 7 Pro';
+      content: '\f3f4';
+      position: absolute;
+      font-weight: 900;
+      color: var(--colour-heading);
+      animation: spin 1.5s infinite steps(10);
+      font-size: 1.5em;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      z-index: 1;
+    }
+
+    img {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      width: calc(100% + 2px);
+      height: 100%;
+      object-fit: cover;
+      margin-inline: -1px;
+    }
+
+    button {
+      
+      pointer-events: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 4;
+      transform: translate(-50%, -50%);
+    }
+
+    &:is(:hover,:focus):not(:active) button {
+      --colour-btn-bg: var(--colour-white)!important;
+      --colour-btn-border: var(--colour-white)!important;
+    }
+    &:is(:active) button {
+      filter: brightness(85%);
+    }
+  }
+
+  dialog .video-wrapper {
+    margin-bottom: 0;
+  }
+}
+
+::slotted(.embed) {
+  
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  aspect-ratio: 16 / 9;
+  width: calc(100% + 2px);
+  height: 100%;
+  margin-inline: -1px;
+  margin-block: 0;
+}

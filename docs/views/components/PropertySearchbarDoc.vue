@@ -1,6 +1,5 @@
 <script setup>
   import PropertySearchbar from '@/components/PropertySearchbar/PropertySearchbar.vue';
-  import Readme from '@/components/PropertySearchbar/README.md';
 
   const htmlUsage = ``;
   let location = '';
@@ -43,7 +42,6 @@
 
     <div class="container">
       <h2>Vue Property Searchbar component reference</h2>
-      <Readme></Readme>
     </div>
   </main>
 </template>

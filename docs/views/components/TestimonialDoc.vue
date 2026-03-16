@@ -1,6 +1,5 @@
 <script setup>
   import Testimonial from '@/components/Testimonial/Testimonial.vue';
-  import Readme from '@/components/Testimonial/README.md';
 
   const items = [
     {
@@ -82,7 +81,6 @@
 
     <div class="container">
       <h2>Vue Header component reference</h2>
-      <Readme></Readme>
     </div>
   </main>
 </template>

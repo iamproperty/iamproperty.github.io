@@ -12,17 +12,18 @@
       <h1>Progress (Beta)</h1>
     </DSHeader>
 
-    <div class="container">
       <h2>Horizontal Bar</h2>
       <h3>Default</h3>
       <p>The default version of the progress bar will show as a horizontal bar, with the label text aligned to the left, and the percentage amount aligned to the right.</p>
 
+    <div class="container visualtest">
       <label data-percent="70">Missed opportunities<progress max="100" value="70"></progress></label>
     </div>
 
-    <div class="container">
       <h3>Inline</h3>
       <p>When the inline class is added, the progress bar will leave room for the percentage value to sit to the right of it instead of above.</p>
+      
+    <div class="container visualtest">
       <label data-percent="100"
         ><span class="line-clamp"
           >Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -30,17 +31,15 @@
         ><progress max="100" value="100" class="progress--inline"></progress
       ></label>
     </div>
-    <div class="container">
       <h3>Inline with no text</h3>
+    <div class="container visualtest">
 
       <label class="hide-text" data-percent="70"
         ><span class="visually-hidden">Missed opportunities</span
         ><progress max="100" value="70" class="progress--inline"></progress
       ></label>
     </div>
-
-    <div class="container">
-      <h2>Circular</h2>
+     <h2>Circular</h2>
       <p>The circular progress bar will display any copy added inside the label in the centre of the circle. If a data-percent attrbiute is added, this will be shown first.</p>
 
       <p class="note mb-5">
@@ -54,7 +53,9 @@
         <strong>Note:</strong> A data-percent attribute is needed on the label for the value to display in firefox.
       </p>
 
-            <label data-percent="70"
+    <div class="container visualtest">
+ 
+      <label data-percent="70"
         >Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress
       ></label>
 
@@ -77,9 +78,9 @@
           style="--progress: 10%"
         ></progress
       ></label>
-
-      <div class="container mt-3">
+    </div>
         <h3>Example with alternative text</h3>
+      <div class="container visualtest mt-3">
         <label data-percent="70"
           ><strong>120</strong> Properties<progress
             max="100"
@@ -90,19 +91,18 @@
         ></label>
 
       </div>
-      <div class="container mt-3">
         <h3>Example with additional explainer text</h3>
+      <div class="container visualtest mt-3">
                   <label class="mb-2" data-percent="70"
               >Missed<progress max="100" value="70" class="progress--circular" style="--progress: 70%"></progress
             ></label>
             <span class="label"><i class="fa-solid fa-circle-up text-complete"></i> 4% vs previous 30 days</span>
       </div>
-    </div>
 
 
-
-    <div class="container mt-3">
       <h2>Change colours</h2>
+
+    <div class="container visualtest mt-3">
 
       <label data-percent="10"
         >Lorem Ipsum is simply dummy<progress max="100" value="10" class="colour-danger"></progress
@@ -120,8 +120,8 @@
         >Lorem Ipsum is simply dummy<progress max="100" value="100" class="colour-complete"></progress
       ></label>
     </div>
-    <div class="container mt-3">
       <h2>Add a tooltip</h2>
+    <div class="container mt-3 visualtest">
 
       <div class="mw-content">
         <div class="row">
@@ -142,8 +142,8 @@
       </div>
     </div>
 
-    <div class="container mt-3">
       <h2>Card examples</h2>
+    <div class="container visualtest mt-3">
 
       <div class="row">
         <div class="col-md-4">

@@ -1,6 +1,5 @@
 <script setup>
   import Timeline from '@/components/Timeline/Timeline.vue';
-  import Readme from '@/components/Timeline/README.md';
 
   const htmlUsage = `<div class="container timeline__container visualtest">
   <div class="timeline">
@@ -71,7 +70,6 @@
 
     <div class="container">
       <h2>Vue Header component reference</h2>
-      <Readme></Readme>
     </div>
   </main>
 </template>

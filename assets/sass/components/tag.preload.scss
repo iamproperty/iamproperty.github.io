@@ -1,0 +1,20 @@
+@use '../_func' as *;
+
+
+@layer components {
+  
+  iam-tag:has(label:not([slot='checked']):not([slot='notmatched'])) {
+    --display-panel: block;
+  }
+
+  iam-tag:has(label[slot='checked']) {
+    --display-button: block;
+  }
+
+  @container style(--theme: dark) {
+    iam-tag :is(.tag, .badge):not([slot='checked']) {
+      color: var(--colour-heading);
+    }
+  }
+
+}

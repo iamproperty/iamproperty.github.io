@@ -4,8 +4,6 @@
   import Tabs from '@/components/Tabs/Tabs.vue';
 
   import Search from '@/components/Search/Search.vue';
-  import VueReadme from '@/components/Multiselect/README.md';
-  import WebReadme from '~/ts/components/multiselect/README.md';
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';

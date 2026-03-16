@@ -27,7 +27,7 @@
       <router-link to="/elements">Elements</router-link>
       <router-link to="/components">Components</router-link>
       <router-link to="/templates">Templates</router-link>
-      <router-link to="/best-practice">Best practice</router-link>
+      <router-link to="/launch">Launch list</router-link>
 
       <form novalidate method="GET" slot="search" id="searchform" action="/search">
         <Search>
@@ -63,9 +63,6 @@
   <footer class="bg-primary mb-0">
     <div class="container pt-4 d-print-none">
       <ul class="list-unstyled list-inline ms-auto d-block mb-0">
-        <li class="list-inline-item me-4 ms-0 mb-2">
-          <router-link to="/information">Information</router-link>
-        </li>
         <li class="list-inline-item me-4 ms-0 mb-2">
           <router-link to="/get-started">Get started</router-link>
         </li>
@@ -193,6 +190,47 @@
 main > .breadcrumb:first-child + * {
     padding-top: 2rem;
 }
+
+
+
+ /* region broken down visual tests */
+
+  body:has(.visualtest.target) nav,
+  body:has(.visualtest.target) footer,
+  main:has(.visualtest.target) > *:not(.target, .visualtest--container),
+  main:has(.visualtest.target) > .visualtest--container > *:not(.target) {
+
+    display: none!important;
+  }
+
+  main:has(.visualtest.target) > *.target .visualtest-hide {
+
+    display: none!important;
+  }
+
+  main:has(.visualtest.target) > *.target {
+
+    --col-start: col-1;
+  }
+          
+
+  @layer utilities {
+      
+    main:has(.visualtest.target) > *:is(.d-flex,.d-block):not(.target) {
+
+      display: none!important;
+    }
+
+    
+    main:has(.visualtest.target) > *.target .visualtest-hide:is(.d-flex,.d-block) {
+
+      display: none!important;
+    }
+
+  }
+
+  /* #endregion */
+
 </style>
 
 <script>

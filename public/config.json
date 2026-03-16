@@ -1,0 +1,41 @@
+{
+  "meta": {
+    
+  },
+  "data": [
+    {
+      "type": "fee",
+      "id": "2",
+      "attributes": {
+        "name": "json_name2",
+        "amount": 12,
+        "partner": "partner1"
+      }
+    },
+    {
+      "type": "fee",
+      "id": "1",
+      "attributes": {
+        "name": "json_name1",
+        "amount": 15
+      }
+    },
+    {
+      "type": "fee",
+      "id": "3",
+      "attributes": {
+        "name": "json_name3",
+        "amount": 15
+      }
+    },
+    {
+      "type": "fee",
+      "id": "4",
+      "attributes": {
+        "name": "json_name4",
+        "amount": 15,
+        "type": 2
+      }
+    }
+  ]
+}

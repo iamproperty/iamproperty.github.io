@@ -1,6 +1,6 @@
 @use '../_func' as *;
-@use '../elements/forms.scss' as *;
-@use '../elements/buttons.scss' as *;
+@use '../elements/forms' as *;
+@use '../elements/buttons' as *;
 
 @use '../utilities/margins' as *;
 
@@ -37,7 +37,7 @@
 // #region page jump and per page
 .pagination div:is(.page-jump, .per-page) {
   border: 1px solid var(--colour-light);
-  height: rem(52);
+  height: 3.25rem; /* (52); */
 
   display: none;
   align-items: center;
@@ -121,8 +121,8 @@
 // #region buttons
 *:where(.prev, .next) {
   border: 1px solid var(--colour-light);
-  line-height: rem(52);
-  height: rem(52);
+  line-height: 3.25rem; /* (52); */
+  height: 3.25rem; /* (52); */
   margin: 0;
   display: none;
   background: none;
@@ -137,7 +137,7 @@
     margin-left: 0.5em;
     font-size: 0.8rem;
     content: '\f054';
-    font-family: 'Font Awesome 6 Pro';
+    font-family: 'Font Awesome 7 Pro';
     color: var(--colour-info);
   }
 
@@ -181,7 +181,7 @@
     margin-right: 0.5em;
     font-size: 0.8rem;
     content: '\f053';
-    font-family: 'Font Awesome 6 Pro';
+    font-family: 'Font Awesome 7 Pro';
     color: var(--colour-info);
   }
 }

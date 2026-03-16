@@ -1,5 +1,5 @@
-@use '../_func.scss' as *;
-@use '../elements/badge-tag.scss' as *;
+@use '../_func' as *;
+@use '../elements/badge-tag' as *;
 
 .applied-filters:not(:empty) {
   padding: 1px 1px 1rem 1px;

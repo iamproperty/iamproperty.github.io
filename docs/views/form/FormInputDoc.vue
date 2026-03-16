@@ -4,7 +4,6 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
   import Tabs from '@/components/Tabs/Tabs.vue';
   const message = 'input field value';
   const htmlUsage = `...`;
@@ -357,12 +356,11 @@
       </p>
     </div>
     <div class="container visualtest">
-      <div class="row">
-        <div class="col-2">
-          <label :for="`input18`">Title</label>
-          <input type="text" :id="`input18`" :name="`input18`" required class="form-control-inline" />
-        </div>
-      </div>
+
+          <label class="label--sm">Title
+            <input type="text" :name="`input18`" required class="form-control-inline" />
+          </label>
+
     </div>
 
     <div class="container pb-0">
@@ -373,12 +371,10 @@
     </div>
 
     <div class="container visualtest">
-      <div class="row">
-        <div class="col-4 col-sm-2 col-md-1">
-          <label :for="`input19`">Title</label>
-          <input type="text" :id="`input19`" :name="`input19`" required />
-        </div>
-      </div>
+      <label class="label--sm">Title
+            <input type="text" :name="`input18`" required class="form-control-inline" />
+          </label>
+
       <div class="row">
         <div class="col-12 col-sm-6 col-md-3">
           <label :for="`input20`">Surname</label>
@@ -534,7 +530,6 @@
         </details>
         <details>
           <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
         </details>
       </Tabs>
     </div>

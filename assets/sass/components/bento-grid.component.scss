@@ -1,4 +1,4 @@
-@use '../_func.scss' as *;
+@use '../_func' as *;
 
 *,
 *::before,
@@ -24,7 +24,7 @@
 
   display: block;
   width: 100%;
-  min-height: rem(200);
+  min-height: 12.5rem; /* 200 */
 }
 
 @container (width > 54em) {

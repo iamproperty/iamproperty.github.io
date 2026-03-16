@@ -2,7 +2,7 @@
 @use '../_func' as *;
 
 .timeline {
-  --breakpoint: (100% - #{rem(992)});
+  --breakpoint: (100% - 62rem);
   --pl: clamp(0rem, var(--breakpoint) * -1000, 4rem);
   --line-pos: clamp(1rem, var(--breakpoint) * 1000, 50%);
   --circle-pos: 1rem;
@@ -57,12 +57,12 @@
   }
 
   > * {
-    max-width: rem(math.div(1112, 2) - 96);
+    max-width: 28.75rem; /* (1112/2) - 96 */
     order: 1;
   }
 
   > img {
-    max-width: min(100%, #{rem(math.div(1112, 2) - 96)});
+    max-width: min(100%, 28.75rem);
     margin-bottom: 2rem;
   }
 

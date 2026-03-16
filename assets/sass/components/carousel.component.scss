@@ -1,5 +1,5 @@
 @use '../_func' as *;
-@use '../elements/buttons.scss' as *;
+@use '../elements/buttons' as *;
 
 *,
 *::before,
@@ -266,7 +266,7 @@
     text-indent: -50rem;
     overflow: hidden;
     background: #a5ecfd;
-    margin-inline: rem(6);
+    margin-inline: 0.375rem; /* 6 */
     cursor: pointer;
     border: none;
 
@@ -292,7 +292,7 @@
   width: 1rem;
   height: 1rem;
   min-height: 1rem;
-  margin-inline: rem(2);
+  margin-inline: 0.125rem; /* 2 */
 
   &:hover {
     background: var(--colour-info);
@@ -312,9 +312,9 @@ input[type='range'] {
   --track-colour: #a5ecfd;
   --thumb-colour: var(--colour-info);
   --thumb-size: 1rem;
-  --thumb-size-outline: #{rem(0)};
+  --thumb-size-outline: 0;
   width: 90%;
-  max-width: rem(172);
+  max-width: 10.75rem; /* 172 */
 
   background: transparent;
   cursor: pointer;
@@ -330,13 +330,13 @@ input[type='range'] {
 input[type='range']::-webkit-slider-runnable-track {
   background: var(--track-colour);
   height: var(--track-size);
-  border-radius: rem(9);
+  border-radius: 0.5625rem; /* 9 */
 }
 
 input[type='range']::-moz-range-track {
   background: var(--track-colour);
   height: var(--track-size);
-  border-radius: rem(9);
+  border-radius: 0.5625rem; /* 9 */
 }
 
 // Extended track functionality
@@ -366,7 +366,7 @@ input[type='range']::-moz-range-track {
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
-  margin-top: rem(-4); /* Centers thumb on the track */
+  margin-top: -0.25rem; /* Centers thumb on the track */
   background-color: var(--thumb-colour);
   height: var(--thumb-size);
   width: var(--thumb-size);

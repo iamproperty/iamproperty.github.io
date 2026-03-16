@@ -1,6 +1,5 @@
 <script setup>
   import Logo from '@/foundations/Logo/Logo.vue';
-  import Readme from '@/foundations/Logo/README.md';
 
   const htmlUsage = `<div class="brand brand--property">
   <svg>
@@ -123,7 +122,6 @@
 
     <div class="container">
       <h2>Vue Logo component reference</h2>
-      <Readme></Readme>
     </div>
   </main>
 </template>

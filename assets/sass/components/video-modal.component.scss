@@ -1,0 +1,27 @@
+@use './modal.component';
+@use './video.component';
+
+@layer components {
+  
+  dialog {
+    width: calc(100% - 6rem) !important;
+    max-width: 50rem !important;
+    padding: 0;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+
+    &[open]::before {
+      
+      display: none;
+    }
+    
+    &[open]::after {
+
+      display: none;
+    }
+
+    .video-wrapper button {
+      display: none;
+    }
+  }
+}

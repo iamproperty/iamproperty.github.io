@@ -3,9 +3,14 @@
   import PCNav from './components/PCNav.vue';
   import Table from '@/components/Table/TableAjax.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
-  import Rankings from '@/components/Rankings/Rankings.vue';
+  import Rating from '@/components/Rating/Rating.vue';
 
   const quote = ref(0);
+
+  const handleRating = (event:any) => {
+
+    console.log(event)
+  };
 </script>
 
 <template>
@@ -14,18 +19,25 @@
   </nav>
   <main>
     <h1>Details: 22 Lynx Road, Tynemouth, Newcastle Upon Tyne NE1 5LS</h1>
-      <div  class="admin-panel md-col-end-5">
-        <h2 data-v-c2a3d511="" class="bg-light">Ranking component</h2>
-        
-      </div>
-      
-    <div class="admin-panel">
-      <h2>Your Tasks</h2>
 
-
-    </div>
-
-    <h2>Quote summary: <span>{{ quote }}</span></h2>
-    <button class="link">Clear quote</button>
+    <h2 class="h3">Details</h2>
+ 
+    <h3 class="h4">Summary of comparison conveyancing quotation</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td>Average completion time</td>
+          <td class="text-end">days</td>
+        </tr>
+        <tr>
+          <td>Customer rating</td>
+          <td class="text-end">
+            <Rating class="colour-complete rating--sm"><input type="number" step="1" value="3" min="0" max="5" disabled @input="handleRating"></Rating>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    
   </main>
 </template>

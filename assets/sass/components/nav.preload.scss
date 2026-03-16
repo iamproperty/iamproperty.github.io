@@ -46,7 +46,7 @@
 
       @media screen and (min-width: 62em) {
         &:has([slot='secondary']) {
-          padding-top: rem(64);
+          padding-top: 4rem; /* 64 */
         }
       }
     }

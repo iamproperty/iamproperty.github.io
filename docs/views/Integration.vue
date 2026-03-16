@@ -55,6 +55,11 @@
       <h4 v-if="slots['slots']">Slots</h4>
       <slot name="slots"></slot>
     </details>
+    <details v-if="slots['data']">
+      <summary><h3>Data</h3></summary>
+
+      <slot name="data"></slot>
+    </details>
     <details v-if="showModify">
       <summary><h3>Modify</h3></summary>
 
@@ -162,6 +167,11 @@
         >Data layer events are pushed to a basic JavaScript object that can be picked up by seperate JavaScript which is
         usually a 3rd party like Google Analytics.</small
       >
+    </details>
+    <details v-if="slots['examples']">
+      <summary>Examples</summary>
+      <h3>Examples</h3>
+      <slot name="examples"></slot>
     </details>
   </Tabs>
 </template>

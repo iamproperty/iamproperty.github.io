@@ -30,10 +30,10 @@
     display: flex;
     user-select: none;
     touch-action: pan-x;
-    height: rem(230);
+    height: 14.375rem; /* 230 */ 
 
     @media screen and (min-width: 36em) {
-      height: rem(340);
+      height: 21.25rem; /* 340 */ 
     }
     @media screen and (min-width: 62em) {
       min-height: 100%;

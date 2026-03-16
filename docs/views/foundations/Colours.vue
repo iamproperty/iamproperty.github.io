@@ -9,6 +9,7 @@
   import UserColours from '../UserColours.vue';
   import DarkMode from '../../../src/components/DarkMode/DarkMode.vue';
 
+
   let userTheme = 'light-theme';
   let checked = false;
   let checked2 = false;
@@ -48,16 +49,15 @@
   };
 
   const widerColours = {};
-  const widerColoursHover = {};
-  const widerColoursActive = {};
 
   for (let i = 1; i <= 23; i++) {
     
     widerColours[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}`);
-    widerColoursHover[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-hover`);
-    widerColoursActive[i] = window.getComputedStyle(document.querySelector('body')).getPropertyValue(`--wider-colour-${i}-active`);
   }
 
+  let urlParams = new URLSearchParams(window.location.search);
+  const target = urlParams.has('Target') ? urlParams.get('Target') : (urlParams.has('target') ? urlParams.get('target') : '');
+  
 </script>
 
 <template>
@@ -69,7 +69,7 @@
     <DarkMode><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
 
     <!-- #region Light mode -->
-    <div class="light-mode full-width">
+    <div class="light-mode full-width visualtest--container">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -88,7 +88,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div class="colour-block bg-canvas border"><span>Text</span></div>
@@ -114,7 +114,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
@@ -149,7 +149,7 @@
           positive interactions. Red (<span v-html="getVar('--colour-danger')"></span>) for incomplete or warning states.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
@@ -184,7 +184,7 @@
           differentiate between the background and a piece of content.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3 pb-2">
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
@@ -206,7 +206,7 @@
     <!-- #endregion Light mode -->
 
     <!-- #region Dark mode -->
-    <div class="dark-mode full-width">
+    <div class="dark-mode full-width visualtest--container">
       <div class="container">
         <div class="row">
           <div class="col">
@@ -226,7 +226,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest1' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div class="colour-block bg-canvas border"><span>Text</span></div>
@@ -266,7 +266,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest2' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2">
             <div :class="`colour-block bg-primary`"><span>Text</span></div>
@@ -306,7 +306,7 @@
         </p>
       </div>
 
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest3' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3">
           <div class="col pb-2" v-for="(colour, name) in secondaryColours" :key="name">
             <div :class="`colour-block bg-${name.toLowerCase()}`"><span>Text</span></div>
@@ -335,7 +335,7 @@
           differentiate between the background and a piece of content.
         </p>
       </div>
-      <div class="container visualtest">
+      <div :class="`container visualtest ${(target == 'visualtest4' ? 'target' : '')}`">
         <div class="row row-cols-2 row-cols-sm-3 pb-2">
           <div class="col pb-2">
             <div :class="`colour-block`" style="background: var(--colour-muted)"></div>
@@ -359,7 +359,7 @@
       <h2>Colour tints</h2>
     </div>
 
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest5' ? 'target' : '')}`">
       <div class="overflow-auto mb-3">
         <table class="colour-tints table--fullwidth border-0 mb-0">
           <thead>
@@ -380,55 +380,55 @@
           <tbody>
             <tr>
               <th style="vertical-align: middle;">{{ colourNames['Primary'] }}</th>
-              <td><span class="colour-circle bg-primary tint-100 light-mode"></span></td>
-              <td><span class="colour-circle bg-primary tint-90 light-mode"></span></td>
-              <td><span class="colour-circle bg-primary tint-80"></span></td>
-              <td><span class="colour-circle bg-primary tint-70"></span></td>
-              <td><span class="colour-circle bg-primary tint-60"></span></td>
-              <td><span class="colour-circle bg-primary tint-50"></span></td>
-              <td><span class="colour-circle bg-primary tint-40"></span></td>
-              <td><span class="colour-circle bg-primary tint-30"></span></td>
-              <td><span class="colour-circle bg-primary tint-20"></span></td>
-              <td><span class="colour-circle bg-primary tint-10"></span></td>
+              <td><span class="colour-circle colour-primary tint-100 light-mode"></span></td>
+              <td><span class="colour-circle colour-primary tint-90 light-mode"></span></td>
+              <td><span class="colour-circle colour-primary tint-80"></span></td>
+              <td><span class="colour-circle colour-primary tint-70"></span></td>
+              <td><span class="colour-circle colour-primary tint-60"></span></td>
+              <td><span class="colour-circle colour-primary tint-50"></span></td>
+              <td><span class="colour-circle colour-primary tint-40"></span></td>
+              <td><span class="colour-circle colour-primary tint-30"></span></td>
+              <td><span class="colour-circle colour-primary tint-20"></span></td>
+              <td><span class="colour-circle colour-primary tint-10"></span></td>
             </tr>
             <tr>
               <th style="vertical-align: middle;">{{ colourNames['Warning'] }}</th>
-              <td><span class="colour-circle bg-warning"></span></td>
-              <td><span class="colour-circle bg-warning tint-90"></span></td>
-              <td><span class="colour-circle bg-warning tint-80"></span></td>
-              <td><span class="colour-circle bg-warning tint-70"></span></td>
-              <td><span class="colour-circle bg-warning tint-60"></span></td>
-              <td><span class="colour-circle bg-warning tint-50"></span></td>
-              <td><span class="colour-circle bg-warning tint-40"></span></td>
-              <td><span class="colour-circle bg-warning tint-30"></span></td>
-              <td><span class="colour-circle bg-warning tint-20"></span></td>
-              <td><span class="colour-circle bg-warning tint-10"></span></td>
+              <td><span class="colour-circle colour-warning tint-100"></span></td>
+              <td><span class="colour-circle colour-warning tint-90"></span></td>
+              <td><span class="colour-circle colour-warning tint-80"></span></td>
+              <td><span class="colour-circle colour-warning tint-70"></span></td>
+              <td><span class="colour-circle colour-warning tint-60"></span></td>
+              <td><span class="colour-circle colour-warning tint-50"></span></td>
+              <td><span class="colour-circle colour-warning tint-40"></span></td>
+              <td><span class="colour-circle colour-warning tint-30"></span></td>
+              <td><span class="colour-circle colour-warning tint-20"></span></td>
+              <td><span class="colour-circle colour-warning tint-10"></span></td>
             </tr>
             <tr v-for="(colour, name) in secondaryColours" :key="name">
               <th style="vertical-align: middle;">{{ colourNames[name] }}</th>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-100`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-90`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-80`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-70`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-60`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-50`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-40`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-30`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-20`"></span></td>
-              <td><span :class="`colour-circle bg-${name.toLowerCase()} tint-10`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-100`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-90`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-80`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-70`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-60`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-50`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-40`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-30`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-20`"></span></td>
+              <td><span :class="`colour-circle colour-${name.toLowerCase()} tint-10`"></span></td>
             </tr>
             <tr>
               <th style="vertical-align: middle;">Pink</th>
-              <td><span class="colour-circle bg-pink tint-100"></span></td>
-              <td><span class="colour-circle bg-pink tint-90"></span></td>
-              <td><span class="colour-circle bg-pink tint-80"></span></td>
-              <td><span class="colour-circle bg-pink tint-70"></span></td>
-              <td><span class="colour-circle bg-pink tint-60"></span></td>
-              <td><span class="colour-circle bg-pink tint-50"></span></td>
-              <td><span class="colour-circle bg-pink tint-40"></span></td>
-              <td><span class="colour-circle bg-pink tint-30"></span></td>
-              <td><span class="colour-circle bg-pink tint-20"></span></td>
-              <td><span class="colour-circle bg-pink tint-10"></span></td>
+              <td><span class="colour-circle colour-pink tint-100"></span></td>
+              <td><span class="colour-circle colour-pink tint-90"></span></td>
+              <td><span class="colour-circle colour-pink tint-80"></span></td>
+              <td><span class="colour-circle colour-pink tint-70"></span></td>
+              <td><span class="colour-circle colour-pink tint-60"></span></td>
+              <td><span class="colour-circle colour-pink tint-50"></span></td>
+              <td><span class="colour-circle colour-pink tint-40"></span></td>
+              <td><span class="colour-circle colour-pink tint-30"></span></td>
+              <td><span class="colour-circle colour-pink tint-20"></span></td>
+              <td><span class="colour-circle colour-pink tint-10"></span></td>
             </tr>
           </tbody>
         </table>
@@ -443,7 +443,7 @@
         background elements sparingly.
       </p>
     </div>
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest6' ? 'target' : '')}`">
       <div class="row row-cols-2 row-cols-sm-3">
         <div class="col pb-2">
           <div class="colour-block bg-info gradient-success"></div>
@@ -500,7 +500,7 @@
     <div class="container">
       <h2>Semantic colour</h2>
     </div>
-    <div class="container visualtest">
+    <div :class="`container visualtest ${(target == 'visualtest7' ? 'target' : '')}`">
       <div class="overflow-auto mb-3">
         <table class="semantic-colours table--fullwidth border-0 mb-0">
           <thead>
@@ -573,7 +573,7 @@
       <h2>Wider colour pallete</h2>
     </div>
 
-    <div class="container visualtest pb-5">
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest8' ? 'target' : '')}`">
       <p class="pb-2">
         The wider colour palette is a range of colours that can be used in instances where colours can help with
         categorisation - calendar events, user types, applied filters, etc. They should not be used for status
@@ -602,12 +602,10 @@
           <div :class="`tag wider-colour-${name}`">{{ colour }}</div>
         </div>
         <div class="col pb-2">
-          <div :class="`tag wider-colour-${name} hover`">{{ widerColoursHover[name] }}</div>
+          <div :class="`tag wider-colour-${name} hover`">5% darker</div>
         </div>
         <div class="col pb-2">
-          <div :class="`tag wider-colour-${name} active`">
-            {{ widerColoursActive[name] }}
-          </div>
+          <div :class="`tag wider-colour-${name} active`">10% darker</div>
         </div>
       </div>
     </div>
@@ -620,8 +618,10 @@
       </p>
     </div>
 
-    <UserColours></UserColours>
 
+<div :class="`container visualtest pb-5 ${(target == 'visualtest9' ? 'target' : '')}`">
+    <UserColours></UserColours>
+</div>
     <div class="bg-light version-control">
       <div class="container ct-inline">
         <table>
@@ -656,57 +656,39 @@
 </template>
 
 <style lang="scss">
+  @use 'sass:color';
   @use '../../../assets/sass/_func' as *;
+
+  @function tint($colour, $percentage) {
+    @return color.mix(white, $colour, $percentage);
+  }
 
   @layer utilities {
     @for $i from 1 through 10 {
-      .bg-primary.tint-#{$i}0 {
+      .tint-#{$i}0 {
         $tint: 100%-($i * 10%);
-        background-color: tint(#00313c, $tint) !important;
-      }
-    }
-    @for $i from 1 through 10 {
-      .bg-warning.tint-#{$i}0 {
-        $tint: 100%-($i * 10%);
-        background-color: tint(#ffa500, $tint) !important;
+        background-color: color-mix(in oklab, var(--colour), #ffffff #{$tint}) !important;
       }
     }
 
-    @for $i from 1 through 10 {
-      .bg-info.tint-#{$i}0 {
-        $tint: 100%-($i * 10%);
-        background-color: tint(#1ebee6, $tint) !important;
-      }
-    }
-
-    @for $i from 1 through 10 {
-      .bg-danger.tint-#{$i}0 {
-        $tint: 100%-($i * 10%);
-        background-color: tint(#dc3545, $tint) !important;
-      }
-    }
-    @for $i from 1 through 10 {
-      .bg-success.tint-#{$i}0 {
-        $tint: 100%-($i * 10%);
-        background-color: tint(#b4e6a5, $tint) !important;
-      }
-    }
-    @for $i from 1 through 10 {
-      .bg-dark.tint-#{$i}0 {
-        $tint: 100%-($i * 10%);
-        background-color: tint(#46003c, $tint) !important;
-      }
-    }
-    @for $i from 1 through 10 {
-      .bg-pink.tint-#{$i}0 {
-        $tint: 100%-($i * 10%);
-        background-color: tint(#ffd2d2, $tint) !important;
-      }
-    }
-    .bg-pink {
-      background-color: #ffd2d2 !important;
+    .colour-pink {
+      --colour: #ffd2d2 !important;
     }
   }
+
+  .colour-tints {
+    @container (width >= 60em) {
+      thead th:not(:empty){
+        min-width: 1px;
+      }
+    }
+  }
+
+  .dark-theme .colour-dark.tint-100,
+  .dark-theme .colour-dark.tint-90 {
+    display: none;
+  }
+
   .colour-blocks {
     display: flex;
     flex-wrap: wrap;

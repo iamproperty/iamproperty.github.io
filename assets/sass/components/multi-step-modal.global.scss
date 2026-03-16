@@ -69,7 +69,7 @@
         padding-right: calc(var(--dialog-padding) - 10px);
         margin-right: calc((var(--dialog-padding) * -1) + 10px);
 
-        max-height: rem(370);
+        max-height: 23.125rem; /* 370 */
 
         &::before {
           content: '';

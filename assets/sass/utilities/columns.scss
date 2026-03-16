@@ -1,0 +1,62 @@
+@layer utilities {
+
+  [class*='columns-']{
+    column-gap: var(--gap, 1rem);
+
+    > li {
+      break-inside: avoid-column; 
+    }
+  }
+
+  .columns-2 {
+    
+    column-count: 2;
+  }
+
+  .columns-3 {
+    
+    column-count: 3;
+  }
+
+  .columns-4 {
+    
+    column-count: 4;
+  }
+
+  
+  @media screen and (min-width: 36em) {
+
+    .columns-sm-2 {
+    
+      column-count: 2;
+    }
+
+    .columns-sm-3 {
+      
+      column-count: 3;
+    }
+
+    .columns-sm-4 {
+      
+      column-count: 4;
+    }
+  }
+  
+  @media screen and (min-width: 62em) {
+    .columns-md-2 {
+    
+      column-count: 2;
+    }
+
+    .columns-md-3 {
+      
+      column-count: 3;
+    }
+
+    .columns-md-4 {
+      
+      column-count: 4;
+    }
+  }
+
+}

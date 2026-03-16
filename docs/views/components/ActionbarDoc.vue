@@ -135,6 +135,13 @@
           </div>
           <p>Search bar expanded</p>
         </div>
+        <div class="col-12 col-sm-6 col-md-3">
+          
+          <label class="tag tag--toggle" slot="filters"><input type="radio" name="toggle-tag" value="true" checked>Live (5)</label>
+          <label class="tag tag--toggle" slot="filters"><input type="radio" name="toggle-tag" value="true" >Complete (5)</label>
+          
+          <p>Toggle tags</p>
+        </div>
       </div>
       <h4>Overflow menu options</h4>
 
@@ -862,7 +869,10 @@
     <h3>Filter on save</h3>
     <div class="container bg-light visualtest mb-5">
       <Table class="table--fullwidth" data-nosubmit>
-        <Actionbar slot="before" data-search="" data-filter-columns-save data-hide-col1></Actionbar>
+        <Actionbar slot="before" data-search="" data-filter-columns-save data-hide-col1>
+          <label class="tag tag--toggle" slot="filters"><input type="radio" name="tag" value="true">Default</label>
+          <label class="tag tag--toggle" slot="filters"><input type="radio" name="tag" value="true" checked>Selected</label>
+        </Actionbar>
 
         <table>
           <thead>
@@ -1300,6 +1310,21 @@
         </thead>
         <tbody class="text-body">
           <tr>
+            <td>V1.3 added</td>
+            <td>10.03.2025</td>
+            <td>- Changed behaviour of search so when clicked it defaults to active to save the user clicking again<br/>
+- Reduced minimum padding above and below bar to 1rem (16px) and left and right of the bar to 1.5rem (24px) to align with the admin panel<br/>
+- Changed style of view toggles to match the toggle tag<br/>
+- Added toggle tags as a usable component in action bar<br/>
+- Change Figma component to slot component to allow for further customisation of content within the action bar<br/>
+- Add option to add to bottom of page</td>
+          </tr>
+          <tr>
+            <td>V1.2 added</td>
+            <td>29.10.2025</td>
+            <td>Updated popovers to menus</td>
+          </tr>
+          <tr>
             <td>V1.1 added</td>
             <td>10.03.2025</td>
             <td>Added option for column filter and saving column filter.</td>
@@ -1399,8 +1424,6 @@
   // Component - Replace the card references to new component
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Card from '@/components/Card/Card.vue';
-  import Readme from '@/components/Actionbar/README.md';
-  import WebReadme from '~/ts/components/actionbar/README.md';
 
   import anatomy from '../../img/actionbar/actionbar-anatomy.png';
   import tablelist from '../../img/actionbar/actionbar-tablelist.png';
@@ -1434,8 +1457,6 @@
       Table,
       Actionbar,
       Card,
-      Readme,
-      WebReadme,
       anatomy,
       PopoverLists,
       tablelist,

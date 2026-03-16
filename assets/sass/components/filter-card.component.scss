@@ -1,5 +1,5 @@
-@use '../_func.scss' as *;
-@use 'card.module.scss' as *;
+@use '../_func' as *;
+@use 'card.module' as *;
 
 :host {
   --top-padding: 1.5rem;
@@ -23,8 +23,8 @@
   }
 
   .icon {
-    font-size: rem(18) !important;
-    height: rem(18) !important;
+    font-size: 1.125rem !important;
+    height: 1.125rem !important;
     margin: 0 0 0.5rem 0 !important;
     font-weight: 400 !important;
     display: block !important;
@@ -59,7 +59,7 @@
 
 ::slotted(i) {
   display: block !important;
-  font-size: rem(18) !important;
+  font-size: 1.125rem !important;
   margin: 0 0 0.5rem 0 !important;
 }
 
@@ -69,7 +69,7 @@
 
   &:after {
     content: var(--card-flag-icon, '\f024');
-    font-family: 'Font Awesome 6 Pro';
+    font-family: 'Font Awesome 7 Pro';
     position: absolute;
     top: 1rem;
     right: 1rem;

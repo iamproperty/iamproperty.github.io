@@ -2,14 +2,11 @@
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Tab from '@/components/Tabs/Tab.vue';
-  import WebReadme from '~/ts/components/nav/README.md';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Table from '@/components/Table/Table.vue';
 
   import Nav from '@/components/Nav/Nav.vue';
-  import Readme from '@/components/Nav/README.md';
-
   
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';

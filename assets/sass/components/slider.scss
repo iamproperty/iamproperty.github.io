@@ -1,7 +1,7 @@
 @use '../_func' as *;
 
 @use '../bs_grid' as *;
-@use '../elements/forms.scss' as *;
+@use '../elements/forms' as *;
 
 .row {
   align-items: center;
@@ -78,7 +78,7 @@ input[type='range'] + input[type='range']::-moz-range-track {
   display: flex;
 
   justify-content: flex-end;
-  --max-width: #{rem(100)};
+  --max-width: 6.25rem;
   --padding-top: 0.75rem;
 
   > span {
@@ -94,7 +94,7 @@ input[type='range'] + input[type='range']::-moz-range-track {
     &:before {
       content: '';
       position: absolute;
-      width: rem(64);
+      width: 4rem; /* 64 */
       height: 2px;
       top: calc(50% - 1px);
       left: calc(50% - 2rem);
@@ -111,7 +111,7 @@ input[type='range'] + input[type='range']::-moz-range-track {
     }
 
     span + span {
-      left: calc(50% + #{rem(64)});
+      left: calc(50% + 4rem);
     }
   }
 }

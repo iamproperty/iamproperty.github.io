@@ -11,6 +11,10 @@
 iam-tabs {
   --colour-tab-underline: var(--colour-info);
 
+  details[open] {
+    padding-top: 2rem;
+  }
+
   details:not([open]) {
     padding-bottom: 0;
   }
@@ -50,7 +54,7 @@ iam-tabs::part(next-button) {
 iam-tabs.tabs--guided::part(next-button) {
   @container (width > 62em) {
     position: absolute;
-    top: rem(150);
+    top: 9.375rem; /* 150*/ 
     right: 0;
     display: block;
   }
@@ -65,7 +69,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 
   .tabs__links__wrapper {
     position: relative;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
 
     &:after {
       content: '';
@@ -119,7 +123,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     --is-current: 0;
     font-weight: bold;
     font-family: var(--font-heading);
-    font-size: rem(18);
+    font-size: 1.125rem; /* 18/16 */
     cursor: pointer;
     margin: 0;
     padding: 1.5rem 1.5rem 0.5rem 1.5rem;

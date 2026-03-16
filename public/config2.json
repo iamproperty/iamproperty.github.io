@@ -1,0 +1,73 @@
+{
+  "meta": {
+    
+  },
+  "data": [
+    {
+      "id": "1",
+      "type": "bucket",
+      "attributes": {
+        "name": "bucket 1",
+        "desc": "short description of the bucket",
+        "criteria": [
+          {
+            "id": 3,
+            "attributes": {
+              "attribute": "vat",
+              "rule": "equals",
+              "match": "exempt"
+            }
+          }
+        ],
+        "items": [
+          {
+            "id":2,
+            "attributes": {
+              "name": "fee name",
+              "type": "fee",
+              "vat": "exempt",
+              "amount": 1200
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "2",
+      "type": "bucket",
+      "attributes": {
+        "name": "bucket 2",
+        "desc": "short description of the bucket",
+        "criteria": [
+          {
+            "id":3,
+            "attributes": {
+              "attribute": "vat",
+              "rule": "not",
+              "match": "exempt"
+            }
+          }
+        ],
+        "items": [
+          {
+            "id":2,
+            "attributes": {
+              "name": "fee 2",
+              "type": "fee",
+              "vat": "exempt",
+              "amount": 1000
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "3",
+      "type": "item",
+      "attributes": {
+        "name": "fee 3",
+        "desc": "short description of the bucket"
+      }
+    }
+  ]
+}

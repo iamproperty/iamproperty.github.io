@@ -1,0 +1,20 @@
+@layer elements {
+  figure {
+    margin: 0 0 1rem;
+  }
+
+  img,
+  svg {
+    vertical-align: middle;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .ratio {
+    & > img:first-child:last-child {
+      object-fit: cover;
+    }
+  }
+}

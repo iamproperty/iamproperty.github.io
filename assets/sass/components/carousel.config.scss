@@ -65,8 +65,8 @@
     --carousel-spacing: 2rem;
 
     @media screen and (min-width: 36em) {
-      min-width: rem(600);
-      max-width: rem(600);
+      min-width: 37.5rem; /* 600 */
+      max-width: 37.5rem; /* 600 */
     }
   }
 

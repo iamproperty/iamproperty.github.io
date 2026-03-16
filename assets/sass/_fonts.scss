@@ -1,7 +1,7 @@
 $fontPath: '../fonts/' !default;
 
 @font-face {
-  font-family: 'Qanelas';
+  font-family: "Qanelas";
   src:
     url($fontPath + 'qanelas-medium-webfont.woff2') format('woff2'),
     url($fontPath + 'qanelas-medium-webfont.woff') format('woff');
@@ -10,7 +10,7 @@ $fontPath: '../fonts/' !default;
 }
 
 @font-face {
-  font-family: 'Qanelas';
+  font-family: "Qanelas";
   src:
     url($fontPath + 'qanelas-semibold-webfont.woff2') format('woff2'),
     url($fontPath + 'qanelas-semibold-webfont.woff') format('woff');
@@ -19,7 +19,7 @@ $fontPath: '../fonts/' !default;
 }
 
 @font-face {
-  font-family: 'Qanelas';
+  font-family: "Qanelas";
   src:
     url($fontPath + 'qanelas-bold-webfont.woff2') format('woff2'),
     url($fontPath + 'qanelas-bold-webfont.woff') format('woff');

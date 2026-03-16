@@ -1,8 +1,5 @@
 <script setup>
   import Tabs from '@/components/Tabs/Tabs.vue';
-  import Tab from '@/components/Tabs/Tab.vue';
-  import Readme from '@/components/Filterlist/README.md';
-  import WebReadme from '~/ts/components/filterlist/README.md';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Filterlist from '@/components/Filterlist/Filterlist.vue';
@@ -73,11 +70,9 @@
       <Tabs>
         <details>
           <summary><h2>Web component</h2></summary>
-          <WebReadme></WebReadme>
         </details>
         <details>
           <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
         </details>
         <details>
           <summary><h2>HTML</h2></summary>

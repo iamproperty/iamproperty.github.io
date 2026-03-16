@@ -1,0 +1,7 @@
+// #region no shadow
+@layer utilities {
+  .shadow-none {
+    box-shadow: none!important;
+  }
+}
+// #endregion

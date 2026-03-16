@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+  import { ref } from 'vue'
 
 import { addColour } from '../functions.ts';
 
@@ -6,6 +7,17 @@ import { addColour } from '../functions.ts';
   import Multiselect from '@/components/Multiselect/Multiselect.vue';
   import Menu from '@/components/Menu/Menu.vue';
   
+  import Notification from '@/components/Notification/Notification.vue';
+
+  import Tag from '@/components/Tag/Tag.vue';
+
+  const assignee = ref('');
+
+const tagChanged = (e:any):void => {
+
+  console.log(e);
+  assignee.value = e.detail.title;
+}
 </script>
 <template>
   <h1 v-if="alert == 'add-onward'" class="h2" >Onward purchase: 22 Lynx Road, Tynemouth, Newcastle Upon Tyne NE1 5LS</h1>
@@ -22,15 +34,21 @@ import { addColour } from '../functions.ts';
 
   </div>
 
+  
+    <Notification v-if="assignee != ''" data-type="toast" data-status="success" class="colour-success" data-timeout="9000" role="alert"> 
+      <strong>Case 123 assigned to {{ assignee }}</strong>
+      <br/>{{ assignee }} had been added to this case.
+      <i class="fa-regular fa-circle-check" aria-hidden="true" slot="icon"></i>
+    </Notification>
+
+
   <div class="md-col-start-8 text-md-end">
       
-      <strong>Case assignee: </strong><span class="d-inline-block text-start" data-value="James Lambert"><InlineEdit @inline-edit-save="addColour(tags)" >
-                
-        
-                <Multiselect data-label="" data-name="users2" data-url="/users.json?search=" class="mb-0" data-single>
-                  <label class="tag"><input type="checkbox" name="user" value="1234" checked/>James Lambert</label>
-                </Multiselect>
-                  
-                </InlineEdit></span>
+      <strong>Case assignee: </strong>
+      
+      <Tag data-url="/users.json" @tag-changed="tagChanged">
+        <label class="tag checked"><input type="radio" name="tags" value="Amanda Knight" checked>Amanda Knight</label>
+      </Tag>
+      
     </div>
 </template>
