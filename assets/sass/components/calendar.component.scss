@@ -34,7 +34,7 @@
   border: 0 !important;
 }
 
-// #region FA icons
+/* #region FA icons */
 .fa-regular,
 .far {
   font-weight: 400;
@@ -85,9 +85,9 @@
 .fa-clock {
   --fa: '\f017';
 }
-// #endregion
+/* #endregion */
 
-// #region controls
+/* #region controls */
 
 #view[data-views] option {
   display: none;
@@ -317,9 +317,9 @@ hr {
     margin-left: 0.5rem;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region settings
+/* #region settings */
 
 #workday {
   display: flex;
@@ -344,7 +344,7 @@ hr {
   text-align: center;
 }
 
-// #endregion
+/* #endregion */
 
 // To do setup CSS vars
 :host {
@@ -400,7 +400,7 @@ time.column-header {
   display: inline-block;
 }
 
-// #region month view
+/* #region month view */
 .calendar__controls:has(select :is(option[value='month'], option[value='year']):checked)
   ~ .calendar__wrapper
   :is(#calendar, .month-wrapper) {
@@ -653,9 +653,9 @@ time.column-header {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region week view
+/* #region week view */
 
 .calendar__controls:has(select option[value='week']:checked) ~ .calendar__wrapper {
   #week-view-header {
@@ -945,9 +945,9 @@ time.column-header {
     background: rgba(245, 245, 245, 1);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Day view
+/* #region Day view */
 .calendar__controls:has(select option[value='day']:checked) ~ .calendar__wrapper {
   #week-view-corner {
     thead {
@@ -1063,9 +1063,9 @@ time.column-header {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Current time indicator
+/* #region Current time indicator */
 .calendar__controls:has(select :is(option[value='day'], option[value='week']):checked) ~ .calendar__wrapper {
   position: relative;
 
@@ -1118,9 +1118,9 @@ time.column-header {
     z-index: 98;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region List view
+/* #region List view */
 
 .calendar__controls:has(select option[value='list']:checked) ~ .calendar__wrapper #calendar > table,
 .calendar__controls:has(select option[value='month']:checked) ~ #split.calendar > table {
@@ -1186,9 +1186,9 @@ time.column-header {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Year view
+/* #region Year view */
 
 .calendar__controls:has(select option[value='year']:checked) ~ .calendar__wrapper #calendar {
   display: none;
@@ -1232,9 +1232,9 @@ time.column-header {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region hide weekends
+/* #region hide weekends */
 
 :host([data-hide-weekends])
   .calendar__controls:has(select option[value='month']:checked)
@@ -1253,9 +1253,9 @@ time.column-header {
     display: none;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region scrollbars
+/* #region scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

@@ -6,7 +6,7 @@
 
 
 @layer elements {
-  // #region modal styling
+  /* #region modal styling */
 
   *:not(.dialog__wrapper) > dialog[open] { // change this selector to be a dialog without a popover attribute
     
@@ -138,9 +138,9 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Transactional
+  /* #region Transactional */
   *:not(.dialog__wrapper) > dialog[open]:is(.dialog--transactional, .dialog--acknowledgement) {
     text-align: center;
 
@@ -220,9 +220,9 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region youTube video
+  /* #region youTube video */
   *:not(.dialog__wrapper) > dialog[open]:has(.youtube-embed) {
     display: block;
 
@@ -241,9 +241,9 @@
       max-width: 46rem; /* 736 */ 
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region admin panel dialog
+  /* #region admin panel dialog */
   dialog:has(> .admin-panel) {
     .dialog__close {
       margin-top: -0.8rem;
@@ -258,9 +258,9 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 
-  // #region Multi step modal
+  /* #region Multi step modal */
 
   *:not(.dialog__wrapper) > dialog:has(iam-multi-step)[open] {
     padding: 0;
@@ -371,9 +371,9 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 
-  // #region mobile fullwidth view For multi step modal
+  /* #region mobile fullwidth view For multi step modal */
   @media screen and (max-width: 36em) {
     dialog[open]:has(iam-multi-step) {
       min-width: 100%;
@@ -411,5 +411,5 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 }

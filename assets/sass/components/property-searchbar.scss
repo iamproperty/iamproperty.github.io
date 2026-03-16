@@ -1,6 +1,6 @@
 @use '../_func' as *;
 
-// #region Property searchbar
+/* #region Property searchbar */
 .property-searchbar {
   fieldset {
     position: relative;
@@ -95,9 +95,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Heror searchbar
+/* #region Heror searchbar */
 .property-searchbar--hero .property-searchbar {
 
 
@@ -136,4 +136,4 @@
     }
   }
 }
-// #endregion
+/* #endregion */

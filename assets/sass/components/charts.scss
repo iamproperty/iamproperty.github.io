@@ -55,7 +55,7 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
 //$dumbbell-chart: 'input[type="radio"]:not([value="none"])[value="dumbbell"]:checked ~ .chart__wrapper';
 //$waffle-chart: 'input[type="radio"]:not([value="none"])[value="waffle"]:checked ~ .chart__wrapper';
 
-// #region Basic setup - including: container setup, css vars
+/* #region Basic setup - including: container setup, css vars */
 
 ::slotted(table) {
   display: none !important;
@@ -160,9 +160,9 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region figure caption elements
+/* #region figure caption elements */
 .chart__title {
   font-size: 2rem;
   font-weight: 700;
@@ -178,9 +178,9 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
   position: relative;
   padding-top: 0.25rem;
 }
-// #endregion
+/* #endregion */
 
-// #region Apply chart colours
+/* #region Apply chart colours */
 @for $i from 1 to 10 {
   .chart__key .key:nth-child(10n - #{10 - $i}),
   .chart__outer table tbody tr td:not(:first-child):nth-child(10n - #{10 - ($i+1)}) {
@@ -209,9 +209,9 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
   td:not(:first-child):nth-child(10n + 1) {
   --chart-colour: var(#{'--chart-colour-10-set'});
 }
-// #endregion
+/* #endregion */
 
-// #region Chart type switcher
+/* #region Chart type switcher */
 .chart__outer > [type='radio'] {
   opacity: 0;
   position: absolute;
@@ -284,9 +284,9 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
     display: block;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Chart key
+/* #region Chart key */
 .chart__outer > input[type='checkbox'] {
   opacity: 0;
   position: absolute;
@@ -344,9 +344,9 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Hide data sets
+/* #region Hide data sets */
 .chart__outer > input[type='checkbox']:not(:checked) ~ .chart__key .key {
   opacity: 0.25;
 }
@@ -382,16 +382,16 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
     display: block !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Second table
+/* #region Second table */
 .chart:has(.chart__outer) > table {
   order: 10;
   display: none;
 }
-// #endregion Second table
+/* #endregion */ Second table
 
-// #region Default column chart (Also applies to line chart)
+/* #region Default column chart (Also applies to line chart) */
 .chart__wrapper {
   display: block;
   display: flex;
@@ -737,9 +737,9 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
     display: none;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Bar chart
+/* #region Bar chart */
 @mixin barchart($selector) {
   #{$selector} {
     tbody {
@@ -837,9 +837,9 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
 @container (max-width: 36em) {
   @include barchart('.chart__outer ' + $responsive-chart);
 }
-// #endregion
+/* #endregion */
 
-// #region stacked
+/* #region stacked */
 input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrapper {
   table tbody tr {
     --bar-gap: 0;
@@ -852,9 +852,9 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Scatter and line chart
+/* #region Scatter and line chart */
 #{'.chart__outer ' + $scatter-line-chart} {
   table tbody {
     justify-content: space-between;
@@ -979,9 +979,9 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
     z-index: var(--index-above);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Line chart
+/* #region Line chart */
 #{'.chart__outer ' + $line-chart} {
   .chart__lines ~ table tbody {
     tr {
@@ -1003,9 +1003,9 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
     z-index: var(--index-above);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Pie chart
+/* #region Pie chart */
 #{'.chart__outer ' + $pie-chart} {
   margin-bottom: 2rem;
 
@@ -1110,11 +1110,11 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Modifiers
+/* #region Modifiers */
 
-// #region Display data modifier class
+/* #region Display data modifier class */
 :host(.chart--display-data) {
   table tbody tr {
     td:not(:first-child) {
@@ -1159,9 +1159,9 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
     opacity: 1;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region show chart totals
+/* #region show chart totals */
 :host(.chart--show-totals) {
   .chart__key {
     .key {
@@ -1182,11 +1182,11 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #endregion
+/* #endregion */
 
-// #region aniamtion
+/* #region aniamtion */
 
 #{'.chart--animate.animating.inview'} {
   --animation-left: 2s;
@@ -1225,15 +1225,15 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
 }
 */
 
-// #region Animate bar and column chart
+/* #region Animate bar and column chart */
 #{'.chart--animate.animating ' + $default-chart} {
   table tbody tr td:not(:first-child) {
     overflow: hidden;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region scatter and line charts
+/* #region scatter and line charts */
 
 #{'.chart--animate:not(.inview) ' + $scatter-line-chart} {
   table tbody tr td:not(:first-child) {
@@ -1271,9 +1271,9 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
     d: var(--path);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region pie charts
+/* #region pie charts */
 #{'.chart--animate ' + $pie-chart} {
   .pie path {
     transition: calc(2s * var(--second-fraction, 1)) ease-out;
@@ -1293,6 +1293,6 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
   }
 }
 */
-// #endregion
+/* #endregion */
 
-// #endregion
+/* #endregion */

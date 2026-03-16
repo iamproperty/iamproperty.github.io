@@ -22,7 +22,7 @@
   container-type: inline-size;
 }
 
-// #region View states (Default, search, selected)
+/* #region View states (Default, search, selected) */
 .views,
 .selectall,
 slot[name='selectall'] {
@@ -153,9 +153,9 @@ slot[name='selectall'] {
   opacity: 0;
   pointer-events: none;
 }
-// #endregion
+/* #endregion */
 
-// #region Slotted elements
+/* #region Slotted elements */
 ::slotted(.btn) {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -197,9 +197,9 @@ slot[name='selectall'] {
     display: block;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region safe area
+/* #region safe area */
 .safe-area {
   display: flex;
   flex-wrap: nowrap;
@@ -238,9 +238,9 @@ slot[name='selectall'] {
 :host([data-switchviews]) .safe-area {
   width: 9rem; /* (144) */
 }
-// #endregion
+/* #endregion */
 
-// #region overflow dialog
+/* #region overflow dialog */
 ::slotted(.btn-compact[slot='selected-overflow']),
 ::slotted(.btn-compact[slot='overflow']) {
   max-width: none !important;
@@ -261,9 +261,9 @@ slot[name='selectall'] {
   margin-left: 0.5rem;
   margin-right: -0.5rem;
 }
-// #endregion
+/* #endregion */
 
-// #region Search bar
+/* #region Search bar */
 .actionbar--search .btn {
   margin: 0;
   margin-left: -0.75rem !important;
@@ -319,9 +319,9 @@ slot[name='selectall'] {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region filter columns
+/* #region filter columns */
 .filter-columns,
 .checklist-btns {
   display: none;
@@ -418,4 +418,4 @@ slot[name="filters"]{
   }
 }
 
-// #endregion
+/* #endregion */

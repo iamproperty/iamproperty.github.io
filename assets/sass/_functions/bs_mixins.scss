@@ -108,9 +108,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Boostrap Grid breakpoints
+/* #region Boostrap Grid breakpoints */
 // Breakpoint viewport sizes and media queries.
 //
 // Breakpoints are defined as a map of (name: minimum width), order from small to large:
@@ -226,9 +226,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Bootstrap layout
+/* #region Bootstrap layout */
 // scss-docs-start clearfix
 /*
 @mixin clearfix() {
@@ -396,7 +396,7 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
@@ -583,7 +583,7 @@ $breakpoints: (
 $new_utilities: ();
 
 
-// #region Clearfix
+/* #region Clearfix */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -600,9 +600,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region visually-hidden
+/* #region visually-hidden */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -624,9 +624,9 @@ $new_utilities: map.merge(
     border: 0 !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region text-truncate
+/* #region text-truncate */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -641,9 +641,9 @@ $new_utilities: map.merge(
     white-space: nowrap;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region ratio
+/* #region ratio */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -684,9 +684,9 @@ $new_utilities: map.merge(
     --aspect-ratio: calc(9 / 21 * 100%);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region fixed
+/* #region fixed */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -711,9 +711,9 @@ $new_utilities: map.merge(
     z-index: var(--index-floating);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region sticky
+/* #region sticky */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -750,9 +750,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region max-height
+/* #region max-height */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -853,9 +853,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region js-display
+/* #region js-display */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -876,9 +876,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Line clamp
+/* #region Line clamp */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -911,9 +911,9 @@ $new_utilities: map.merge(
     -webkit-line-clamp: 5;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Wider colours
+/* #region Wider colours */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -933,9 +933,9 @@ $new_utilities: map.merge(
 }
 
 }
-// #endregion
+/* #endregion */
 
-// #region Align
+/* #region Align */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -968,9 +968,9 @@ $new_utilities: map.merge(
     vertical-align: text-top !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Opacity
+/* #region Opacity */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -999,9 +999,9 @@ $new_utilities: map.merge(
     opacity: 1 !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Overflow
+/* #region Overflow */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1026,9 +1026,9 @@ $new_utilities: map.merge(
     overflow: scroll !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Display
+/* #region Display */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1122,9 +1122,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Position
+/* #region Position */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1218,9 +1218,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Border
+/* #region Border */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1309,9 +1309,9 @@ $new_utilities: map.merge(
     --border-opacity: 1;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Sizes
+/* #region Sizes */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1408,9 +1408,9 @@ $new_utilities: map.merge(
     object-fit: contain !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Flex
+/* #region Flex */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1564,9 +1564,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Order
+/* #region Order */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1612,9 +1612,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Margins
+/* #region Margins */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1697,9 +1697,9 @@ $new_utilities: map.merge(
     margin-left: auto !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Paddings
+/* #region Paddings */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1741,9 +1741,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Gap
+/* #region Gap */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1759,9 +1759,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Text
+/* #region Text */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1891,9 +1891,9 @@ $new_utilities: map.merge(
     word-break: break-word !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Colours
+/* #region Colours */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1945,9 +1945,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region gradients
+/* #region gradients */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1995,9 +1995,9 @@ $new_utilities: map.merge(
     --gradient-direction: 135deg;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Pointer-events
+/* #region Pointer-events */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -2014,9 +2014,9 @@ $new_utilities: map.merge(
     pointer-events: auto !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Rounded
+/* #region Rounded */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -2081,9 +2081,9 @@ $new_utilities: map.merge(
     border-top-left-radius: var(--border-radius) !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Visible
+/* #region Visible */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -2100,4 +2100,4 @@ $new_utilities: map.merge(
     visibility: hidden !important;
   }
 }
-// #endregion
+/* #endregion */

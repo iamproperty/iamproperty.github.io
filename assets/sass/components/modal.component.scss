@@ -195,7 +195,7 @@
     margin-bottom: 0!important;
   }
 
-  // #region transactional
+  /* #region transactional */
   :host(:is([data-type="transactional"],[data-type="acknowledgement"])) dialog[open] {
     text-align: center;
 
@@ -248,6 +248,6 @@
       display: none;
     }
   }
-  // #endregion
+  /* #endregion */
 
 }

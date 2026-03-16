@@ -30,7 +30,7 @@
     }
   }
 
-  // #region Undefined web components
+  /* #region Undefined web components */
 
   iam-header {
     grid-column: full-width;
@@ -42,7 +42,7 @@
     }
   }
 
-  // #region Cards
+  /* #region Cards */
   .card:not(:defined) {
     box-shadow: var(--card-box-shadow);
     border-radius: var(--card-border-radius);
@@ -105,7 +105,7 @@
     --icon: var(--icon-new-tab);
   }
 
-  // #endregion
+  /* #endregion */
 
   // Search
   iam-search input:not(.is-invalid):not(:invalid) {

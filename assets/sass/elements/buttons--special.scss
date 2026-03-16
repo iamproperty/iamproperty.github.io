@@ -1,7 +1,7 @@
 @use '../_func' as *;
 
 @layer elements {
-  // #region btn compact
+  /* #region btn compact */
   .btn[popovertarget] {
   
     position: relative;
@@ -39,9 +39,9 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 
-  // #region Select as button
+  /* #region Select as button */
 
   .btn:has(select) {
     position: relative;
@@ -148,9 +148,9 @@
       pointer-events: none;
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region btn that is a select
+  /* #region btn that is a select */
   .btn-action:has(select) {
     padding-block: 0;
     padding-right: 2rem;
@@ -168,5 +168,5 @@
       right: 0.5rem;
     }
   }
-  // #endregion
+  /* #endregion */
 }

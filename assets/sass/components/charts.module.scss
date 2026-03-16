@@ -16,9 +16,9 @@
     --chart-colour: var(#{'--chart-colour-' + $i});
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Basic setup - including: container setup, css vars
+/* #region Basic setup - including: container setup, css vars */
 
 ::slotted(table) {
   display: none !important;
@@ -98,9 +98,9 @@
     opacity: 0;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Chart key
+/* #region Chart key */
 .chart__outer > input[type='checkbox'] {
   opacity: 0;
   position: absolute;
@@ -164,9 +164,9 @@
     opacity: 0.25;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region y-axis
+/* #region y-axis */
 :host([data-yaxis]) {
   --yaxis-display: flex;
 }
@@ -202,9 +202,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region X-axis
+/* #region X-axis */
 .chart__xaxis {
   margin-bottom: 1rem;
   display: flex;
@@ -231,9 +231,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Guidelines
+/* #region Guidelines */
 .chart__guidelines {
   position: absolute;
   top: 0;
@@ -284,9 +284,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region tooltip
+/* #region tooltip */
 
 [part='popover'] {
   //part="popover"
@@ -342,9 +342,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Default column chart (Also applies to line chart)
+/* #region Default column chart (Also applies to line chart) */
 .chart__wrapper {
   display: block;
   display: flex;
@@ -544,9 +544,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Chart colour overide classes
+/* #region Chart colour overide classes */
 :host(.chart-colour--success) td,
 :host(:is(.chart-colour--success, .chart-colour--danger, .chart-colour--wraning)) td.chart-colour--success,
 .chart-colour--success td {
@@ -566,9 +566,9 @@
 .chart-colour--warning td {
   --chart-colour: var(--chart-colour-warning) !important;
 }
-// #endregion
+/* #endregion */
 
-// #region Hide data sets
+/* #region Hide data sets */
 .chart__outer > input[type='checkbox']:not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child) {
   //display: none;
 }
@@ -585,4 +585,4 @@
     opacity: 0;
   }
 }
-// #endregion
+/* #endregion */

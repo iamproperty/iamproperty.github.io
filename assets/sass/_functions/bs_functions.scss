@@ -7,7 +7,7 @@
 
 $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29')) !default;
 
-// #region from Bootstrap
+/* #region from Bootstrap */
 // Utility color.mix(ins and functions for evaluating source code across our variables, maps, and color.mix(ins.
 
 // Ascending
@@ -354,7 +354,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   }
   @return $result;
 }
-// #endregion
+/* #endregion */
 
 
 

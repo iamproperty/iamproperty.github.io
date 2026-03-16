@@ -6,7 +6,7 @@
 
 
 @layer elements {
-  // #region popover styling
+  /* #region popover styling */
   .dialog__wrapper {
     position: relative;
     display: inline-block;
@@ -254,6 +254,6 @@
   .dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
     display: none;
   }
-  // #endregion
+  /* #endregion */
 }
 

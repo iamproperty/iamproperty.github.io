@@ -4,15 +4,15 @@
 
 @use './table-basic.component';
 
-// #region Table with actionbar
+/* #region Table with actionbar */
 @container (width < 23.4375em) {
   .table__wrapper.has-actionbar {
     margin-top: calc(-100vh - -6.75rem) !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Loading via ajax
+/* #region Loading via ajax */
 :host(.table--loading) {
   pointer-events: none;
   position: relative;
@@ -48,4 +48,4 @@
 
 
 
-// #endregion
+/* #endregion */
