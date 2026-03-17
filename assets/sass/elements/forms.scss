@@ -310,7 +310,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 
   .was-validated select:not(.btn):is(:invalid, .is-invalid, [aria-invalid], :-internal-autofill-selected) {
-    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http:/* www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default; */
+    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:
       var(--icon-select) right var(--input-padding-block, 0.75rem) top
@@ -698,7 +698,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   /* #region Select */
 
   select:not(.select--minimal, .btn) {
-    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http:/* www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default; */
+    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
 
     background:
       var(--icon-select) right var(--input-padding-block, 0.75rem) top
