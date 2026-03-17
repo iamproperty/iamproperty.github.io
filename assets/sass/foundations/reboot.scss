@@ -12,7 +12,7 @@
   /* Reset & Defaults */
   html {
     --root-fs-px: 375;
-    -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
+    -webkit-font-smoothing: antialiased; /*  Fix for Safari/iOS */
     height: 100%;
     width: 100%;
     overflow-x: hidden;
@@ -29,7 +29,7 @@
 
     
       @media (min-width: #{em(1280)}) {
-        //font-size: 100%;
+        /* font-size: 100%; */
         --root-fs-px: 1280;
 
         &:has(.nav--large) {
@@ -46,7 +46,7 @@
       }
 
       @media (min-width: #{em(1680)}) {
-        //font-size: 131.25%;
+        /* font-size: 131.25%; */
       }
 
       @media print {
@@ -54,7 +54,7 @@
       }
 
       @media screen and (min-width: 120em) {
-        // 1920
+        /*  1920 */
 
         &:has(.nav--large) {
           --root-fs-px: 1920;
@@ -65,15 +65,15 @@
   }
 
   body {
-    margin: 0; // 1
+    margin: 0; /*  1 */
     background: var(--colour-canvas);
     font-family: var(--font-body);
 
     width: 100%;
     line-height: 1.2;
     min-height: 100%;
-    -webkit-text-size-adjust: 100%; // 3
-    -webkit-tap-highlight-color: rgba(#000, 0); // 4
+    -webkit-text-size-adjust: 100%; /*  3 */
+    -webkit-tap-highlight-color: rgba(#000, 0); /*  4 */
 
     color: var(--colour-body);
   }
@@ -97,7 +97,7 @@
     border-left: 4px solid var(--colour-canvas-2);
   }
 
-  //#endregion
+  /* #endregion */
 
   body > footer,
   body > #app > footer {
@@ -140,7 +140,7 @@
     max-width: 100%;
   }
 
-  // Details reset
+  /*  Details reset */
   summary {
     list-style: none;
   }

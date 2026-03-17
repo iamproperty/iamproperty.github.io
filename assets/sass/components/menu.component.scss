@@ -1,7 +1,7 @@
 @use '../_func' as *;
 
 :host {
-  //all: unset;
+  /* all: unset; */
   inset: auto;
   top: anchor(bottom);
   left: anchor(left);
@@ -58,7 +58,7 @@
 }
 
 ::slotted(*:is(button, a, label, span)) {
-  //all: unset !important;
+  /* all: unset !important; */
   background: unset !important;
   border: unset !important;
   color: var(--colour-primary) !important;
@@ -88,7 +88,7 @@
   margin-bottom: 0 !important;
 }
 
-// Radio buttons
+/*  Radio buttons */
 
 ::slotted(*:is(label)) {
   --radio-size: 1.25rem;
@@ -103,7 +103,7 @@
   padding-left: 2.25rem; /* 36 */
 }
 
-// States
+/*  States */
 
 ::slotted(*:is(button, a, label):is(.selected)) {
   background: #e9f8fc !important;
@@ -120,7 +120,7 @@
 }
 
 ::slotted(*:is(button, a, label):is(:hover, .hover, :focus, .focus)) {
-  //all: unset !important;
+  /* all: unset !important; */
   background: var(--colour-light) !important;
   border-radius: 0.25rem !important;
 }
@@ -175,7 +175,7 @@
   content: '' !important;
   height: 1.2em;
   width: 1.2em;
-  --icon-arrow: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3e%3cpath d='M6.5,2l9,9-9,9' style='fill:none;stroke:%23000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:3px'/%3e%3c/svg%3e");
+  --icon-arrow: url("data:image/svg+xml,%3csvg xmlns='http:/* www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'%3e%3cpath d='M6.5,2l9,9-9,9' style='fill:none;stroke:%23000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:3px'/%3e%3c/svg%3e"); */
   background: var(--menu-after-bg, currentColor) !important;
   mask-image: var(--menu-down-icon, var(--icon-arrow));
   mask-size: 50%;

@@ -5,7 +5,7 @@
 
 
 
-// Host
+/*  Host */
 :host {
   --side-link-hover: light-dark(#eeeeee,var(--colour-canvas-2));
   grid-column: full-width;
@@ -101,7 +101,7 @@
     transition: opacity 0.2s;
 
     &[aria-expanded] {
-      // Change icon
+      /*  Change icon */
       &[class*='fa-']:before {
         content: '\f053' !important;
       }
@@ -132,7 +132,7 @@
     }
   }
 
-  // Content
+  /*  Content */
   .side-menu-content {
     position: absolute;
     top: 0;
@@ -182,7 +182,7 @@
   }
 }
 
-// links moved to links
+/*  links moved to links */
 /* #endregion */
 
 /* #region main content */

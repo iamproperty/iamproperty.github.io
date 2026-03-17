@@ -132,7 +132,7 @@
     }
 
     summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label)) {
-      // h3 purposelessly missed out
+      /*  h3 purposelessly missed out */
 
       font-family: var(--font-heading);
       font-style: normal;
@@ -196,7 +196,7 @@
     padding-inline: var(--dialog-padding);
     }
 
-    // Fix the border bottom issue
+    /*  Fix the border bottom issue */
     &:has(+ details[open]),
     &:has(summary:is(:hover, :focus-visible)),
     &:has(+ details summary:is(:hover, :focus-visible)),

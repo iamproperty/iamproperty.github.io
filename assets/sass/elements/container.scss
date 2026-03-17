@@ -75,7 +75,7 @@
       padding-top: 2rem;
     }
 
-    // Fix the clearing for containers
+    /* Fix the clearing for containers */
     &:before {
       display: table;
       clear: both;
@@ -108,7 +108,7 @@
     width: 100%;
   }
 
-  // replicate container padding-bottom
+  /* replicate container padding-bottom */
   main > .row {
     padding-bottom: 1rem;
 
@@ -136,7 +136,7 @@
       border-width: 3px;
     }
 
-    // Default pattern
+    /* Default pattern */
     &:not([class*='circle-pattern-']) > .circle {
       font-size: 18.75rem; /* (300) */
       top: -4.6875rem;

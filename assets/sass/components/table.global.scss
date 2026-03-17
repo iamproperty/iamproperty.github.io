@@ -42,7 +42,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
   border-radius: 0;
 }
 
-// Actionbar
+/*  Actionbar */
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
@@ -78,7 +78,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     display: block;
     border: none;
     background: var(--colour-canvas-2);
-    //box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11); */
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
   }
@@ -312,7 +312,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 }
 /* #endregion */
 
-// #region
+/*  #region */
 :is(#{$selector})td:has(.dialog__wrapper) {
   padding-top: 0.25rem;
 }
@@ -375,7 +375,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 }
 
 :is(#{$selector}) table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
-  //display: none;
+  /* display: none; */
 }
 /* #endregion */
 

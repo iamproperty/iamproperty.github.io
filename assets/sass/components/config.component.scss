@@ -202,7 +202,7 @@
 
 /* #region expand criteria */
 .bucket__wrapper:not(.bucket--expanded) {
-  > label > span { // TODO add a selector if the input matches the only criteria item
+  > label > span { /*  TODO add a selector if the input matches the only criteria item */
     display: none;
   }
   .criteria {

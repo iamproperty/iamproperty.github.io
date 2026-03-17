@@ -150,7 +150,7 @@
     }
   }
 
-  // Inline edit
+  /*  Inline edit */
   :host-context(:focus-within) {
     input {
       background-color: none !important;

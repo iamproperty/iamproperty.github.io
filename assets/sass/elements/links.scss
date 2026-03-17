@@ -16,10 +16,10 @@
     }
   }
 
-  // And undo these styles for placeholder links/named anchors (without href).
-  // It would be more straightforward to just use a[href] in previous block, but that
-  // causes specificity issues in many other styles that are too complex to fix.
-  // See https://github.com/twbs/bootstrap/issues/19402
+  /*  And undo these styles for placeholder links/named anchors (without href). */
+  /*  It would be more straightforward to just use a[href] in previous block, but that */
+  /*  causes specificity issues in many other styles that are too complex to fix. */
+  /*  See https://github.com/twbs/bootstrap/issues/19402 */
 
   a:not([href]):not([class]) {
     &,
@@ -30,7 +30,7 @@
   }
   /* #endregion */
 
-  // global
+  /*  global */
   a {
     color: var(--colour-link);
 
@@ -280,7 +280,7 @@ iam-collapsible-side [class*='link'] {
   }
 
   i {
-    // icon
+    /*  icon */
     margin-right: 0.5rem !important;
   }
 
@@ -309,7 +309,7 @@ iam-collapsible-side [class*='active'] {
   border-right-width: 3px !important;
 }
 
-// Parent links
+/*  Parent links */
 .vertical-tabs,
 iam-collapsible-side {
   .parent {

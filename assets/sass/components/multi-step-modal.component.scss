@@ -17,16 +17,16 @@ dialog[open] {
   --dialog-padding: 1.5rem;
   box-sizing: border-box;
   padding-top: calc(var(--dialog-padding) * 4);
-  //display: block;
-  //position: relative;
-  //margin-right: 0 !important;
-  //min-height: 100%;
+  /* display: block; */
+  /* position: relative; */
+  /* margin-right: 0 !important; */
+  /* min-height: 100%; */
   padding-left: var(--dialog-padding);
 
   @media screen and (min-width: 62em) {
     padding-top: var(--dialog-padding);
     padding-left: calc(var(--dialog-padding) + 17.625rem) !important;
-    //display: flex;
+    /* display: flex; */
     flex-direction: column;
   }
 }

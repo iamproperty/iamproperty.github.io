@@ -8,16 +8,16 @@
 @layer elements {
   /* #region modal styling */
 
-  *:not(.dialog__wrapper) > dialog[open] { // change this selector to be a dialog without a popover attribute
+  *:not(.dialog__wrapper) > dialog[open] { /*  change this selector to be a dialog without a popover attribute */
     
 
     &:has(.mh-lg){
       overflow-y: hidden!important;
     }
     width: 90vw;
-    max-width: 20.25rem; /* 324 */  // col-width*4
+    max-width: 20.25rem; /* 324 */  /*  col-width*4 */
 
-    //height: 90vh;
+    /* height: 90vh; */
     max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
 
@@ -34,7 +34,7 @@
       max-width: 46rem; /* 736 */ 
     }
 
-    // Close button
+    /*  Close button */
     > form:first-child {
       position: static;
     }

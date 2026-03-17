@@ -8,89 +8,89 @@
 @use './textarea' as *;
 
 
-$icon-error: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>");
+$icon-error: url("data:image/svg+xml,<svg xmlns='http:/* www.w3.org/2000/svg' viewBox='0 0 512 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M256 32a224 224 0 1 1 0 448 224 224 0 1 1 0-448zm0 480A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-384c-8.8 0-16 7.2-16 16V272c0 8.8 7.2 16 16 16s16-7.2 16-16V144c0-8.8-7.2-16-16-16zm24 224a24 24 0 1 0 -48 0 24 24 0 1 0 48 0z' fill='#dc3545'/></svg>"); */
 
-$icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>");
+$icon-tick: url("data:image/svg+xml,<svg xmlns='http:/* www.w3.org/2000/svg' viewBox='0 0 448 512'><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d='M441 103c9.4 9.4 9.4 24.6 0 33.9L177 401c-9.4 9.4-24.6 9.4-33.9 0L7 265c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l119 119L407 103c9.4-9.4 24.6-9.4 33.9 0z' fill='#0f9d58' /></svg>"); */
 
 @layer elements {
   /* #region RESETS */
 
 
-  // 1. Remove the margin in Firefox and Safari
+  /*  1. Remove the margin in Firefox and Safari */
   select,
   optgroup {
-    margin: 0; // 1
+    margin: 0; /*  1 */
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
   }
 
-  // Remove the inheritance of text transform in Firefox
+  /*  Remove the inheritance of text transform in Firefox */
   select {
     text-transform: none;
   }
-  // Set the cursor for non-`<button>` buttons
-  //
-  // Details at https://github.com/twbs/bootstrap/pull/30562
+  /*  Set the cursor for non-`<button>` buttons */
+  /*  */
+  /*  Details at https://github.com/twbs/bootstrap/pull/30562 */
 
   select {
-    // Remove the inheritance of word-wrap in Safari.
-    // See https://github.com/twbs/bootstrap/issues/24990
+    /*  Remove the inheritance of word-wrap in Safari. */
+    /*  See https://github.com/twbs/bootstrap/issues/24990 */
     word-wrap: normal;
 
-    // Undo the opacity change from Chrome
+    /*  Undo the opacity change from Chrome */
     &:disabled {
       opacity: 1;
     }
   }
 
   
-  // 1. Browsers set a default `min-width: min-content;` on fieldsets,
-  //    unlike e.g. `<div>`s, which have `min-width: 0;` by default.
-  //    So we reset that to ensure fieldsets behave more like a standard block element.
-  //    See https://github.com/twbs/bootstrap/issues/12359
-  //    and https://html.spec.whatwg.org/multipage/#the-fieldset-and-legend-elements
-  // 2. Reset the default outline behavior of fieldsets so they don't affect page layout.
+  /*  1. Browsers set a default `min-width: min-content;` on fieldsets, */
+  /*     unlike e.g. `<div>`s, which have `min-width: 0;` by default. */
+  /*     So we reset that to ensure fieldsets behave more like a standard block element. */
+  /*     See https://github.com/twbs/bootstrap/issues/12359 */
+  /*     and https://html.spec.whatwg.org/multipage/#the-fieldset-and-legend-elements */
+  /*  2. Reset the default outline behavior of fieldsets so they don't affect page layout. */
 
   fieldset {
-    min-width: 0; // 1
-    padding: 0; // 2
-    margin: 0; // 2
-    border: 0; // 2
+    min-width: 0; /*  1 */
+    padding: 0; /*  2 */
+    margin: 0; /*  2 */
+    border: 0; /*  2 */
   }
 
-  // Correct element displays
+  /*  Correct element displays */
 
   output {
     display: inline-block;
   }
 
-  // Remove border from iframe
+  /*  Remove border from iframe */
 
   iframe {
     border: 0;
   }
 
-  // Summary
-  //
-  // 1. Add the correct display in all browsers
+  /*  Summary */
+  /*  */
+  /*  1. Add the correct display in all browsers */
 
   summary {
-    display: list-item; // 1
+    display: list-item; /*  1 */
     cursor: pointer;
   }
 
-  // Progress
-  //
-  // Add the correct vertical alignment in Chrome, Firefox, and Opera.
+  /*  Progress */
+  /*  */
+  /*  Add the correct vertical alignment in Chrome, Firefox, and Opera. */
 
   progress {
     vertical-align: baseline;
   }
 
-  // Hidden attribute
-  //
-  // Always hide an element with the `hidden` HTML attribute.
+  /*  Hidden attribute */
+  /*  */
+  /*  Always hide an element with the `hidden` HTML attribute. */
 
   /* #endregion */
 
@@ -108,7 +108,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     background-color: var(--colour-canvas-2);
     background-clip: padding-box;
     border: 2px solid var(--colour-primary);
-    appearance: none; // Fix appearance for date inputs in Safari
+    appearance: none; /*  Fix appearance for date inputs in Safari */
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     min-height: calc(
@@ -121,7 +121,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     );
 
 
-    // Customize the `:focus` state to imitate native WebKit styles.
+    /*  Customize the `:focus` state to imitate native WebKit styles. */
     &:is(:focus, .focus):not(:disabled) {
       border-color: var(--colour-info);
       outline: 0;
@@ -131,7 +131,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
     }
     
-    // Disabled inputs
+    /*  Disabled inputs */
     &:disabled {
       background-color: #ccd6d8;
       opacity: 0.4;
@@ -311,7 +311,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
 
   .was-validated select:not(.btn):is(:invalid, .is-invalid, [aria-invalid], :-internal-autofill-selected) {
-    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
+    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http:/* www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default; */
 
     background:
       var(--icon-select) right var(--input-padding-block, 0.75rem) top
@@ -360,7 +360,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     display: none;
   }
 
-  // Postcode lookup validation
+  /*  Postcode lookup validation */
   iam-address-lookup:has([required]) {
     --req-display: none;
   }
@@ -496,7 +496,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       }
     }
 
-    // multiple radio's together
+    /*  multiple radio's together */
     :is(div, fieldset):has(> :is(input[type='radio'], input[type='checkbox']):nth-of-type(2)) {
       label:not(.tag):not(:has(> iam-card)) {
         margin-bottom: 0rem;
@@ -611,7 +611,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       }
     }
 
-    // Disabled
+    /*  Disabled */
     input:is([type='radio'], [type='checkbox']):disabled + label,
     label:not(.tag):has(input:is([type='radio'], [type='checkbox']):disabled) {
       opacity: 0.4;
@@ -684,14 +684,14 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     border-radius: 0.35rem;
   }
   select[multiple]::-webkit-scrollbar {
-    width: 0.7rem; // manage scrollbar width here
+    width: 0.7rem; /*  manage scrollbar width here */
   }
   select[multiple]::-webkit-scrollbar * {
-    background-color: transparent; // manage scrollbar background color here
+    background-color: transparent; /*  manage scrollbar background color here */
   }
   select[multiple]::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
-    //background-color:#000000!important; // manage scrollbar thumb background color here
+    /* background-color:#000000!important; // manage scrollbar thumb background color here */
     border-radius: 0.35rem;
   }
   /* #endregion */
@@ -699,7 +699,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   /* #region Select */
 
   select:not(.select--minimal, .btn) {
-    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
+    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http:/* www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default; */
 
     background:
       var(--icon-select) right var(--input-padding-block, 0.75rem) top
@@ -733,7 +733,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       border-color: black;
     }
 
-    // Remove outline from select box in FF
+    /*  Remove outline from select box in FF */
     &:-moz-focusring {
       color: transparent;
       text-shadow: 0 0 0 inherit;
@@ -774,7 +774,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     }
 
     &:hover {
-      //border: none;
+      /* border: none; */
       background: var(--colour-light);
     }
 
@@ -918,7 +918,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     left: 0;
   }
 
-  // Track Styles
+  /*  Track Styles */
   input[type='range']::-webkit-slider-runnable-track {
     background: var(--track-colour);
     height: var(--track-size);
@@ -931,7 +931,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     border-radius: 0.5rem;
   }
 
-  // Thumb Styles
+  /*  Thumb Styles */
   input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
@@ -956,7 +956,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     pointer-events: all;
   }
 
-  // Focus Styles
+  /*  Focus Styles */
   input[type='range']:focus {
     outline: none;
   }
@@ -1169,7 +1169,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     --colour-body: var(--colour-primary-theme);
     color: var(--colour-primary-theme);
 
-    // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+    /*  Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten */
     > * {
       color-scheme: light;
     }
@@ -1199,7 +1199,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   border-radius: 0.5rem;
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
   width: 100% !important;
-  //max-width: var(--menu-item-width, 50rem) !important;
+  /* max-width: var(--menu-item-width, 50rem) !important; */
   z-index: 100;
   display: none;
   max-height: 25rem;

@@ -21,7 +21,7 @@
 @use 'components/calendar.config';
 
 @layer components {
-  // Make sure the first
+  /*  Make sure the first */
   main {
     position: relative;
 
@@ -107,7 +107,7 @@
 
   /* #endregion */
 
-  // Search
+  /*  Search */
   iam-search input:not(.is-invalid):not(:invalid) {
     background: none !important;
   }
@@ -116,7 +116,7 @@
     display: none !important;
   }
 
-  // Table dark mode support
+  /*  Table dark mode support */
   iam-table {
     tbody tr {
       @container style(--theme: dark) {

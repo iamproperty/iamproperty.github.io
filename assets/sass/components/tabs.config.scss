@@ -142,10 +142,10 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
       position: absolute;
       content: '';
       bottom: 0;
-      left: 50%; // half way across
+      left: 50%; /*  half way across */
       height: 3px;
       width: 100%;
-      transform: translate(-50%, 0) scale(0, 0); // translate pulls this left so it's centered
+      transform: translate(-50%, 0) scale(0, 0); /*  translate pulls this left so it's centered */
       background: var(--colour-tab-underline, var(--colour-info));
       transition: transform 0.4s;
     }
@@ -206,7 +206,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 
   .link:not(.text-decoration-none):not(.btn) {
     margin: 0;
-    //margin-left: calc(var(--wrapper-padding) * -1);
+    /* margin-left: calc(var(--wrapper-padding) * -1); */
     padding: 1rem var(--padding-x);
     width: 100%;
     position: relative;

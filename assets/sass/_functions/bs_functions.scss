@@ -8,16 +8,16 @@
 $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29')) !default;
 
 /* #region from Bootstrap */
-// Utility color.mix(ins and functions for evaluating source code across our variables, maps, and color.mix(ins.
+/*  Utility color.mix(ins and functions for evaluating source code across our variables, maps, and color.mix(ins. */
 
-// Ascending
-// Used to evaluate Sass maps like our grid breakpoints.
+/*  Ascending */
+/*  Used to evaluate Sass maps like our grid breakpoints. */
 @mixin assert-ascending($map, $map-name) {
   $prev-key: null;
   $prev-num: null;
   @each $key, $num in $map {
     @if $prev-num == null or math.unit($num) == '%' or math.unit($prev-num) == '%' {
-      // Do nothing
+      /*  Do nothing */
     } @else if not math.compatible($prev-num, $num) {
       @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose math.unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
     } @else if $prev-num >= $num {
@@ -28,8 +28,8 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   }
 }
 
-// Starts at zero
-// Used to ensure the min-width of the lowest breakpoint starts at 0.
+/*  Starts at zero */
+/*  Used to ensure the min-width of the lowest breakpoint starts at 0. */
 @mixin assert-starts-at-zero($map, $map-name: '$grid-breakpoints') {
   @if list.length($map) > 0 {
     $values: map.values($map);
@@ -40,12 +40,12 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   }
 }
 
-// Colors
+/*  Colors */
 @function to-rgb($value) {
   @return color.channel($value, 'red', rgb), color.channel($value, 'green', rgb), color.channel($value, 'blue', rgb);
 }
 
-// stylelint-disable scss/dollar-variable-pattern
+/*  stylelint-disable scss/dollar-variable-pattern */
 @function rgba-css-var($identifier, $target) {
   @if $identifier == 'body' and $target == 'bg' {
     @return rgba(var(--#{$identifier}-bg-rgb), var(--#{$target}-opacity));
@@ -61,7 +61,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   $_map: ();
 
   @each $key, $value in $map {
-    // allow to pass the $key and $value of the map as an function argument
+    /*  allow to pass the $key and $value of the map as an function argument */
     $_args: ();
     @each $arg in $args {
       $_args: list.append($_args, if($arg == '$key', $key, if($arg == '$value', $value, $arg)));
@@ -85,7 +85,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   @return var(--colour-#{$identifier});
 }
 
-// stylelint-enable scss/dollar-variable-pattern
+/*  stylelint-enable scss/dollar-variable-pattern */
 
 @function varify($list) {
   $result: null;
@@ -95,8 +95,8 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   @return $result;
 }
 
-// Internal Bootstrap function to turn maps into its negative variant.
-// It prefixes the keys with `n` and makes the value negative.
+/*  Internal Bootstrap function to turn maps into its negative variant. */
+/*  It prefixes the keys with `n` and makes the value negative. */
 @function negativify-map($map) {
   $result: ();
   @each $key, $value in $map {
@@ -107,7 +107,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   @return $result;
 }
 
-// Get multiple keys from a sass map
+/*  Get multiple keys from a sass map */
 @function map-get-multiple($map, $values) {
   $result: ();
   @each $key, $value in $map {
@@ -123,7 +123,7 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   @return $result;
 }
 
-// Merge multiple maps
+/*  Merge multiple maps */
 @function map-merge-multiple($maps...) {
   $merged-maps: ();
 
@@ -133,14 +133,14 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   @return $merged-maps;
 }
 
-// Replace `$search` with `$replace` in `$string`
-// Used on our SVG icon backgrounds for custom forms.
-//
-// @author Hugo Giraudel
-// @param {String} $string - Initial string
-// @param {String} $search - Substring to replace
-// @param {String} $replace ('') - New value
-// @return {String} - Updated string
+/*  Replace `$search` with `$replace` in `$string` */
+/*  Used on our SVG icon backgrounds for custom forms. */
+/*  */
+/*  @author Hugo Giraudel */
+/*  @param {String} $string - Initial string */
+/*  @param {String} $search - Substring to replace */
+/*  @param {String} $replace ('') - New value */
+/*  @return {String} - Updated string */
 @function str-replace($string, $search, $replace: '') {
   $index: string.index($string, $search);
 
@@ -152,15 +152,15 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   @return $string;
 }
 
-// See https://codepen.io/kevinweber/pen/dXWoRw
-//
-// Requires the use of quotes around data URIs.
+/*  See https://codepen.io/kevinweber/pen/dXWoRw */
+/*  */
+/*  Requires the use of quotes around data URIs. */
 
 @function escape-svg($string) {
   $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29'));
   @if string.index($string, 'data:image/svg+xml') {
     @each $char, $encoded in $escaped-characters {
-      // Do not escape the url brackets
+      /*  Do not escape the url brackets */
       @if string.index($string, 'url(') == 1 {
         $string: url('#{str-replace(string.slice($string, 6, -3), $char, $encoded)}');
       } @else {
@@ -172,11 +172,11 @@ $escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), ('
   @return $string;
 }
 
-// Color contrast
-// See https://github.com/twbs/bootstrap/pull/30168
+/*  Color contrast */
+/*  See https://github.com/twbs/bootstrap/pull/30168 */
 
-// A list of pre-calculated numbers of Pow(divide((divide($value, 255) + .055), 1.055), 2.4). (from 0 to 255)
-// stylelint-disable-next-line scss/dollar-variable-default, scss/dollar-variable-pattern
+/*  A list of pre-calculated numbers of Pow(divide((divide($value, 255) + .055), 1.055), 2.4). (from 0 to 255) */
+/*  stylelint-disable-next-line scss/dollar-variable-default, scss/dollar-variable-pattern */
 $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0.0027 0.003 0.0033 0.0037 0.004 0.0044
   0.0048 0.0052 0.0056 0.006 0.0065 0.007 0.0075 0.008 0.0086 0.0091 0.0097 0.0103 0.011 0.0116 0.0123 0.013 0.0137
   0.0144 0.0152 0.016 0.0168 0.0176 0.0185 0.0194 0.0203 0.0212 0.0222 0.0232 0.0242 0.0252 0.0262 0.0273 0.0284 0.0296
@@ -226,9 +226,9 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @return if($l1 > $l2, divide($l1 + 0.05, $l2 + 0.05), divide($l2 + 0.05, $l1 + 0.05));
 }
 
-// Return WCAG2.1 relative luminance
-// See https://www.w3.org/TR/WCAG/#dfn-relative-luminance
-// See https://www.w3.org/TR/WCAG/#dfn-contrast-ratio
+/*  Return WCAG2.1 relative luminance */
+/*  See https://www.w3.org/TR/WCAG/#dfn-relative-luminance */
+/*  See https://www.w3.org/TR/WCAG/#dfn-contrast-ratio */
 @function luminance($color) {
   $rgb: (
     'r': red($color),
@@ -249,30 +249,30 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @return (map-get($rgb, 'r') * 0.2126) + (map-get($rgb, 'g') * 0.7152) + (map-get($rgb, 'b') * 0.0722);
 }
 
-// Return opaque color
-// opaque(#fff, rgba(0, 0, 0, .5)) => #808080
+/*  Return opaque color */
+/*  opaque(#fff, rgba(0, 0, 0, .5)) => #808080 */
 @function opaque($background, $foreground) {
   @return color.mix(rgba($foreground, 1), $background, opacity($foreground) * 100);
 }
 
-// scss-docs-start color-functions
-// Tint a color: color.mix( a color with white
+/*  scss-docs-start color-functions */
+/*  Tint a color: color.mix( a color with white */
 @function tint-color($color, $weight) {
   @return color.mix(white, $color, $weight);
 }
 
-// Shade a color: color.mix( a color with black
+/*  Shade a color: color.mix( a color with black */
 @function shade-color($color, $weight) {
   @return color.mix(black, $color, $weight);
 }
 
-// Shade the color if the weight is positive, else tint it
+/*  Shade the color if the weight is positive, else tint it */
 @function shift-color($color, $weight) {
   @return if($weight > 0, shade-color($color, $weight), tint-color($color, -$weight));
 }
-// scss-docs-end color-functions
+/*  scss-docs-end color-functions */
 
-// Return valid calc
+/*  Return valid calc */
 @function add($value1, $value2, $return-calc: true) {
   @if $value1 == null {
     @return $value2;
@@ -380,14 +380,14 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @if $digits > $sass-precision {
     @warn "Sass sets default precision to #{$sass-precision} digits, and there is no way to change that for now."
     + "The returned number will have #{$sass-precision} digits, even if you asked for `#{$digits}`."
-    + "See https://github.com/sass/sass/issues/1122 for further informations.";
+    + "See https:/* github.com/sass/sass/issues/1122 for further informations."; */
   }
 
   $Pow: Pow(10, $digits);
   @return math.div(round($float * $Pow), $Pow);
 }
 
-// converts pixels to em (context sets the current size of the font)
+/*  converts pixels to em (context sets the current size of the font) */
 @function em($pixels, $context: 16) {
   @return #{math.div($pixels, $context)}em;
 }
@@ -409,7 +409,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @return $number;
 }
 
-// prevent colours being changed via sass functions
+/*  prevent colours being changed via sass functions */
 @function darken($colour, $percent) {
   @return $colour;
 }
@@ -441,7 +441,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   @return if($next, breakpoint-min($next, $breakpoints), null);
 }
 
-// Trims the start/left of the string:
+/*  Trims the start/left of the string: */
 @function str-trimStart($str) {
   @if (string.slice($str, 1, 1) == ' ') {
     @return str-trimStart(string.slice($str, 2));
@@ -450,7 +450,7 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   }
 }
 
-// Trims the end/right of the string:
+/*  Trims the end/right of the string: */
 @function str-trimEnd($str) {
   @if (string.slice($str, string.length($str), -1) == ' ') {
     @return str-trimEnd(string.slice($str, 1, -2));
@@ -459,28 +459,28 @@ $_luminance-list: 0.0008 0.001 0.0011 0.0013 0.0015 0.0017 0.002 0.0022 0.0025 0
   }
 }
 
-// Trims both the start and end of the string:
+/*  Trims both the start and end of the string: */
 @function str-trim($str) {
   @return str-trimStart(str-trimEnd($str));
 }
 
 @function str-split($string, $separator) {
-  // empty array/list
+  /*  empty array/list */
   $split-arr: ();
-  // first index of separator in string
+  /*  first index of separator in string */
   $index: string.index($string, $separator);
-  // loop through string
+  /*  loop through string */
   @while $index != null {
-    // get the substring from the first character to the separator
+    /*  get the substring from the first character to the separator */
     $item: string.slice($string, 1, $index - 1);
-    // push item to array
+    /*  push item to array */
     $split-arr: list.append($split-arr, str-trim($item));
-    // remove item and separator from string
+    /*  remove item and separator from string */
     $string: string.slice($string, $index + 1);
-    // find new index of separator
+    /*  find new index of separator */
     $index: string.index($string, $separator);
   }
-  // add the remaining string to list (the last item)
+  /*  add the remaining string to list (the last item) */
   $split-arr: list.append($split-arr, str-trim($string));
 
   @return $split-arr;
