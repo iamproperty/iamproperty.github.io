@@ -21,16 +21,11 @@
 .header-banner {
   padding-top: 2.75rem; /* 44*/
   max-width: 120rem; /* 1920 */
-  /* min-height: 25rem; /* 400 */ */
   margin-inline: auto;
   display: block;
 
   position: relative;
   height: auto;
-
-  @media screen and (min-width: 62em) {
-    /* padding-top: 5.25rem; /* 84 */ */
-  }
 
   > .picture-overflow {
     overflow: hidden;
