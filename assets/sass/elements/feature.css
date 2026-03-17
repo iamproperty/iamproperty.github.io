@@ -1,8 +1,5 @@
-@use '../_func' as *;
-
 @layer elements {
   
-
   .feature {
 
     --padding: 1rem;
@@ -130,8 +127,6 @@
     }
   }
 
-
-
   .feature--loading {
     
     &:before {
@@ -176,5 +171,4 @@
         translate: 0 -50%;
       }
   }
-
 }
