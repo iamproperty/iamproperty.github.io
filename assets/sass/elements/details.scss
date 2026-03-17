@@ -2,9 +2,6 @@
 @use '../_func' as *;
 
 
-
-
-
 @layer elements {
   details {
     display: block;
@@ -40,34 +37,10 @@
     --border-radius: 0.5rem 0.5rem 0 0;
     --icon-top: 0.875rem; /* 14/16 */
     --line-height: 1.5rem;
-      --block-padding: 0.875rem; /* 14/16 */
+    --block-padding: 0.875rem; /* 14/16 */
 
     *:not(iam-tabs) > &:not([open]) {
       padding-bottom: 2.625rem; /* 42 */ 
-    }
-
-    @media screen and (min-width: 36em) {
-      --inline-padding: 0.875rem; /* 14/16 */
-      --block-padding: 0.875rem; /* 14/16 */
-      --icon-top: 1.5rem;
-      --line-height: 1.5rem;
-
-      summary {
-        &:has(.h2, h2, .h4, h4) {
-          --inline-padding: 1.375rem; /* 22 */ 
-          --block-padding: 1.375rem; /* 22 */ 
-        }
-      }
-
-      summary {
-        &:has(.h2, h2) {
-          --line-height: 3.25rem; /* 52 */ 
-        }
-
-        &:has(.h4, h4) {
-          --line-height: 1.875rem; /* 30 */ 
-        }
-      }
     }
 
     summary {
@@ -176,6 +149,32 @@
     }
   }
 
+  @media screen and (min-width: 36em) {
+    iam-accordion details {
+      --inline-padding: 0.875rem; /* 14/16 */
+      --block-padding: 0.875rem; /* 14/16 */
+      --icon-top: 1.5rem;
+      --line-height: 1.5rem;
+
+      summary {
+        &:has(.h2, h2, .h4, h4) {
+          --inline-padding: 1.375rem; /* 22 */ 
+          --block-padding: 1.375rem; /* 22 */ 
+        }
+      }
+
+      summary {
+        &:has(.h2, h2) {
+          --line-height: 3.25rem; /* 52 */ 
+        }
+
+        &:has(.h4, h4) {
+          --line-height: 1.875rem; /* 30 */ 
+        }
+      }
+    }
+  }
+
   dialog iam-accordion details {
     --inline-padding: var(--dialog-padding);
 
@@ -189,12 +188,6 @@
       overflow: hidden;
     }
 
-    @media screen and (min-width: 36em) {
-      --dialog-padding: 2rem;
-      
-    margin-inline: calc(var(--dialog-padding) * -1);
-    padding-inline: var(--dialog-padding);
-    }
 
     /*  Fix the border bottom issue */
     &:has(+ details[open]),
@@ -222,6 +215,14 @@
 
     &::before {
       content: '';
+    }
+  }
+
+  @media screen and (min-width: 36em) {
+    dialog iam-accordion details {
+      --dialog-padding: 2rem;
+      margin-inline: calc(var(--dialog-padding) * -1);
+      padding-inline: var(--dialog-padding);
     }
   }
 }
