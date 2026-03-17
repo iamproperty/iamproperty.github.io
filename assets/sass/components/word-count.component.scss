@@ -13,9 +13,9 @@
 
 ::slotted(span)::before {
   display: inline-block;
-  //counter-reset: variable var(--char-count) var(--maxlength);
-  //counter-reset: variable2 var(--maxlength);
-  //content: attr(data-count) ' / ' var(--maxlength);
+  /* counter-reset: variable var(--char-count) var(--maxlength); */
+  /* counter-reset: variable2 var(--maxlength); */
+  /* content: attr(data-count) ' / ' var(--maxlength); */
 
   content: attr(data-count) ' / ' attr(data-max);
   float: right;

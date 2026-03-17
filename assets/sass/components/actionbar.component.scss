@@ -120,7 +120,7 @@ slot[name='selectall'] {
   background-color: #e6eaec;
 }
 
-// Show selected bar
+/*  Show selected bar */
 .actionbar {
   opacity: var(--selectall-actionbar-opacity, 1);
   pointer-events: var(--selectall-actionbar-pe, all);
@@ -143,7 +143,7 @@ slot[name='selectall'] {
   pointer-events: all;
 }
 
-// Show search bar
+/*  Show search bar */
 .actionbar--search.show {
   opacity: 1;
   pointer-events: all;
@@ -173,7 +173,7 @@ slot[name='selectall'] {
   margin-block: 0;
 }
 
-// buttons only for single items
+/*  buttons only for single items */
 ::slotted([data-single]) {
   pointer-events: none;
   opacity: 0.5;

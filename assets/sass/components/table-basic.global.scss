@@ -408,7 +408,7 @@ table {
     background-color: #e6eaec;
 }
 
-// Actionbar
+/*  Actionbar */
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
@@ -444,7 +444,7 @@ table {
     display: block;
     border: none;
     background: var(--colour-canvas-2);
-    //box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11); */
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
   }

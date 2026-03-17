@@ -2,25 +2,25 @@
 @use '_func' as *;
 
 
-// Foundations
+/*  Foundations */
 @use 'foundations/root';
 @use 'foundations/animations';
 @use 'foundations/colours';
 
 @use 'foundations/reboot';
 
-// Elements
+/*  Elements */
 @use '_elements';
 
-// Components
+/*  Components */
 @use '_components';
 
-// Templates
+/*  Templates */
 @use 'templates/form';
 
 @use 'templates/auth';
 
-// Overrides
+/*  Overrides */
 @layer overrides {
   @media (prefers-reduced-motion) {
     * {

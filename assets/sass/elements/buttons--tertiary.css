@@ -1,12 +1,5 @@
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
   /* #region Tertiary Button */
-
   .btn.btn-tertiary {
     background-color: transparent;
     border: none;
@@ -35,11 +28,12 @@
       width: 0%;
     }
 
-    [class*='fa-'] {
+    &[class*='fa-'] {
       margin-left: 0;
       margin-right: 0.5rem;
     }
-    [class*='fa-']:not(:first-child) {
+    
+    &[class*='fa-']:not(:first-child) {
       margin-left: 0.5rem;
       margin-right: 0;
     }

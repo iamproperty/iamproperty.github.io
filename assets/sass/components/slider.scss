@@ -22,7 +22,7 @@
   display: block;
 }
 
-// Track
+/*  Track */
 input[type='range']::-webkit-slider-runnable-track {
   background: linear-gradient(
     to right,
@@ -45,7 +45,7 @@ input[type='range']::-moz-range-track {
   );
 }
 
-// Two input fields
+/*  Two input fields */
 input[type='range'] + input[type='range'] {
   position: absolute;
   top: 0;

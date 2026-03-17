@@ -43,7 +43,7 @@
 }
 
 :host([data-required]) {
- // --error-border: var(--colour-danger);
+ /*  --error-border: var(--colour-danger); */
 }
 
 input[name='postcode'] {
@@ -103,14 +103,14 @@ input[name='postcode'] {
   }
 }
 
-// change the datalist
+/*  change the datalist */
 
 .postcode-lookup > div {
   position: relative;
 }
 
 .postcode-lookup input:not(.is-invalid) {
-  //background-image: none!important;
+  /* background-image: none!important; */
 }
 
 .postcode-lookup:has(input.is-invalid) .invalid-feedback:not(:empty) {

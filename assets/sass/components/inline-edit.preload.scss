@@ -22,7 +22,7 @@
     --display-status: none;
   }
 
-  // Inactive state
+  /*  Inactive state */
   iam-inline-edit:defined:not(:focus-within):not([data-saving]):not(.was-validated:has(:invalid)) {
     --display-btns: none;
 
@@ -43,7 +43,7 @@
     --display-btns: none;
   }
 
-  // Hover state
+  /*  Hover state */
   iam-inline-edit:defined:not(:focus-within):not([data-saving]):not(.was-validated:has(:invalid)):hover {
     input,
     textarea,
@@ -53,7 +53,7 @@
     }
   }
 
-  // Multi select
+  /*  Multi select */
 
   iam-inline-edit:has(iam-multiselect) {
     --display-btns: none;
@@ -133,7 +133,7 @@
     margin-top: -0.6rem;
   }
 
-  // Error message
+  /*  Error message */
 
   iam-inline-edit.was-validated
     label:has(:is(input:not([type='radio']):not([type='checkbox']), select)):has(:is(:invalid, .is-invalid)):after {

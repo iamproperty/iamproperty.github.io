@@ -33,27 +33,27 @@ $chart-colors: map.merge(
 $chart-height: 56.25% !default;
 $chart-height-lg: 42.86% !default;
 
-// Selectors
+/*  Selectors */
 $default-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"]):checked ~ .chart__wrapper';
 $bar-chart: 'input[type=radio]:is([value="bar"],[value="comparison"]):not([value=none]):not([value=pie]):checked~.chart__wrapper';
 
-//$comparison-chart: 'input[type=radio][value="comparison"]:not([value=none]):not([value=pie]):checked~.chart__wrapper';
-//$comparison-chart-key: 'input[type=radio][value="comparison"]:not([value=none]):not([value=pie]):checked~.chart__key';
+/* $comparison-chart: 'input[type=radio][value="comparison"]:not([value=none]):not([value=pie]):checked~.chart__wrapper'; */
+/* $comparison-chart-key: 'input[type=radio][value="comparison"]:not([value=none]):not([value=pie]):checked~.chart__key'; */
 
 $responsive-chart: 'input[type=radio][value="responsive"]:not([value=none]):not([value=pie]):checked~.chart__wrapper';
 $scatter-line-chart: 'input[type="radio"]:not([value="pie"]):is([value="line"],[value="scatter"],[value="bubble"],[value="radar"],[value="proportional"],[value="combo"]):checked ~ .chart__wrapper';
 
 $line-chart: 'input[type="radio"]:not([value="pie"])[value="line"]:checked ~ .chart__wrapper';
-//$bubble-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="bubble"]:checked ~ .chart__wrapper';
-//$radar-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="radar"]:checked ~ .chart__wrapper';
-//$proportional-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="proportional"]:checked ~ .chart__wrapper';
-//$proportional-chart-key: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="proportional"]:checked ~ .chart__key';
+/* $bubble-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="bubble"]:checked ~ .chart__wrapper'; */
+/* $radar-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="radar"]:checked ~ .chart__wrapper'; */
+/* $proportional-chart: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="proportional"]:checked ~ .chart__wrapper'; */
+/* $proportional-chart-key: 'input[type="radio"]:not([value="none"]):not([value="pie"])[value="proportional"]:checked ~ .chart__key'; */
 $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="polar"]):checked ~ .chart__wrapper';
-//$polar-chart: 'input[type="radio"]:not([value="none"])[value="polar"]:checked ~ .chart__wrapper';
-//$tree-chart: 'input[type="radio"]:not([value="none"])[value="treemap"]:checked ~ .chart__wrapper';
-//$tree-chart-key: 'input[type="radio"]:not([value="none"])[value="treemap"]:checked ~ .chart__key';
-//$dumbbell-chart: 'input[type="radio"]:not([value="none"])[value="dumbbell"]:checked ~ .chart__wrapper';
-//$waffle-chart: 'input[type="radio"]:not([value="none"])[value="waffle"]:checked ~ .chart__wrapper';
+/* $polar-chart: 'input[type="radio"]:not([value="none"])[value="polar"]:checked ~ .chart__wrapper'; */
+/* $tree-chart: 'input[type="radio"]:not([value="none"])[value="treemap"]:checked ~ .chart__wrapper'; */
+/* $tree-chart-key: 'input[type="radio"]:not([value="none"])[value="treemap"]:checked ~ .chart__key'; */
+/* $dumbbell-chart: 'input[type="radio"]:not([value="none"])[value="dumbbell"]:checked ~ .chart__wrapper'; */
+/* $waffle-chart: 'input[type="radio"]:not([value="none"])[value="waffle"]:checked ~ .chart__wrapper'; */
 
 /* #region Basic setup - including: container setup, css vars */
 
@@ -64,13 +64,13 @@ $pie-chart: 'input[type="radio"]:not([value="none"]):is([value="pie"],[value="po
 .chart__outer {
   container-type: inline-size;
 
-  // CSS vars that can be overwritten by declaring them without the -set on the end of the variable i.e. --chart-colour-1: red; would overwrite --chart-colour-1-set
+  /*  CSS vars that can be overwritten by declaring them without the -set on the end of the variable i.e. --chart-colour-1: red; would overwrite --chart-colour-1-set */
   --body-colour-set: var(--body-colour, white);
   --text-colour-set: var(--text-colour, black);
   --chart-height-set: var(--chart-height, #{$chart-height});
   --chart-height-lg-set: var(--chart-height-lg, #{$chart-height-lg});
   --chart-height-resp: var(--chart-height-set);
-  // Non-configurable css vars
+  /*  Non-configurable css vars */
   --index-below: -1;
   --index-base: 0;
   --index-focus: 2;
@@ -296,7 +296,7 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
 .chart__key {
   padding: 0 0 0 0;
   margin-bottom: 1.5rem;
-  //background: var(--colour-key-bg, rgb(220, 220, 220));
+  /* background: var(--colour-key-bg, rgb(220, 220, 220)); */
   display: flex;
   overflow: auto;
   scroll-snap-type: x mandatory;
@@ -361,7 +361,7 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
 
 @for $i from 1 to 10 {
   .chart__outer > input[type='checkbox']:nth-of-type(#{$i}):focus ~ .chart__key .key:nth-of-type(#{$i}) {
-    //outline: 3px solid var(--chart-colour);
+    /* outline: 3px solid var(--chart-colour); */
   }
 
   .chart__outer > input[type='checkbox']:nth-of-type(#{$i}):not(:checked) ~ .chart__key .key:nth-of-type(#{$i}) {
@@ -475,7 +475,7 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
       border-bottom: 1px dashed #eeeeee;
       pointer-events: none;
       z-index: var(--index-below);
-      //overflow: hidden;
+      /* overflow: hidden; */
 
       &:not(.guideline--target) span {
         display: none;
@@ -513,7 +513,7 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
   table {
     display: block;
     width: 100% !important;
-    padding-top: var(--chart-height-resp); // 16:9 ratio
+    padding-top: var(--chart-height-resp); /*  16:9 ratio */
     position: relative;
     margin-bottom: 0;
     overflow: visible;
@@ -561,7 +561,7 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
         overflow: hidden;
         text-overflow: ellipsis;
         font-size: var(--label-size);
-        //display: none;
+        /* display: none; */
         text-align: center;
 
         @container (min-width: 62em) {
@@ -651,7 +651,7 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
       }
     }
 
-    // change the look of chart when crowded
+    /*  change the look of chart when crowded */
     @container (max-width: 36em) {
       tbody:has(tr:nth-child(5) td:nth-child(4)) tr,
       tbody:has(tr:nth-child(10)) tr {
@@ -685,7 +685,7 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
         }
       }
     }
-    // Hide labels when it gets crowded
+    /*  Hide labels when it gets crowded */
     @container (min-width: 62em) {
       tbody:has(tr:nth-child(25)) {
         tr td:first-child {
@@ -720,7 +720,7 @@ input[type='radio']:not([value='none']):not([value='pie']):checked
       }
     }
 
-    // Hide items when theres too many too display
+    /*  Hide items when theres too many too display */
     tbody:has(tr:nth-child(1001)) {
       tr {
         display: none;
@@ -1253,10 +1253,10 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
   }
 }
 
-// Line chart
+/*  Line chart */
 #{'.chart--animate.animating '+$line-chart}
-//#{'.chart--animate '+proportional-chart},
-//#{'.chart--animate '+combo-chart}
+/* #{'.chart--animate '+proportional-chart}, */
+/* #{'.chart--animate '+combo-chart} */
 {
   .line path {
     transition: 2s ease-out;
@@ -1264,8 +1264,8 @@ input[type='radio']:not([value='pie'])[value='stacked']:checked ~ .chart__wrappe
 }
 
 #{'.chart--animate:not(.inview) '+$line-chart}
-//#{'.chart--animate:not(.inview) '+proportional-chart},
-//#{'.chart--animate:not(.inview) '+combo-chart}
+/* #{'.chart--animate:not(.inview) '+proportional-chart}, */
+/* #{'.chart--animate:not(.inview) '+combo-chart} */
 {
   .line path {
     d: var(--path);

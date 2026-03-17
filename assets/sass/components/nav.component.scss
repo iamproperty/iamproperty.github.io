@@ -40,11 +40,11 @@
 
 :host(.bg-primary) .container {
 
-  //color-scheme: dark;
+  /* color-scheme: dark; */
 
   .menu {
     
-    //color-scheme: light;
+    /* color-scheme: light; */
   }
 }
 
@@ -221,7 +221,7 @@
     }
 
 
-    // The menu is always white unless in dark mode
+    /*  The menu is always white unless in dark mode */
     
       background-color: var(--colour-canvas-2);
       
@@ -320,7 +320,7 @@
     margin-top: 0 !important;
   }
 
-  // Search
+  /*  Search */
   .dialog__wrapper {
     width: 100%;
     margin: 0 0 3rem 0 !important;
@@ -362,7 +362,7 @@
 /* #region desktop */
 @media screen and (min-width: 62em) {
   :host {
-    //max-width: 100%!important;
+    /* max-width: 100%!important; */
     padding-block: 0 !important;
   }
 
@@ -460,7 +460,7 @@
     padding-left: 3rem;
   }
 
-  // Search bar
+  /*  Search bar */
   slot[name='actions']::slotted(.btn) {
     margin-left: 0.75rem !important;
   }
@@ -525,7 +525,7 @@
     }
   }
 
-  // backdrop
+  /*  backdrop */
   .backdrop {
     content: '';
     display: block;
@@ -570,7 +570,7 @@
   }
 
 
-  // The menu is always white unless in dark mode
+  /*  The menu is always white unless in dark mode */
 
 
   @media (forced-colors: active) {

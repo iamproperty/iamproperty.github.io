@@ -63,7 +63,7 @@
   color: var(--colour-white);
 }
 
-// Alerts
+/*  Alerts */
 :host([data-type='alert']),
 .iam-notification[data-type='alert'] {
   border-radius: 0;
@@ -75,7 +75,7 @@
   margin-bottom: 0;
 }
 
-// Toasts
+/*  Toasts */
 :host([data-type='toast']),
 .iam-notification[data-type='toast'] {
   margin: auto;

@@ -1,12 +1,5 @@
-@use 'sass:math';
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
-  // non-js fallback
+  /*  non-js fallback */
   body:not(.js-enabled) dialog:not([open]):target {
     display: block;
   }
@@ -49,21 +42,17 @@
     flex-direction: column;
   }
 
-  // TODO: when the old modals are depreciated this selector can be simplified
+  /*  TODO: when the old modals are depreciated this selector can be simplified */
   *:not(.dialog__wrapper) > dialog[open],
   *:not(.dialog__wrapper) > [popover]:popover-open {
 
     overflow-y: auto;
     width: 90vw;
-    max-width: 20.25rem; // col-width*4
-
-    //height: 90vh;
+    max-width: 20.25rem; /*  col-width*4 */
     max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
 
     @media screen and (min-width: 36em) {
-      //--dialog-padding: 2rem;
-      //padding: var(--dialog-padding);
       min-width: 20.9375rem;
       width: fit-content;
       max-width: 42.875rem;
@@ -74,13 +63,13 @@
       width: fit-content;
       max-width: 46rem;
     }
-
   }
+
+  
   /* #endregion */
 
   details.bg-light {
     margin-inline: calc(var(--dialog-padding) * -1);
     padding-inline: var(--dialog-padding);
   }
-
 }

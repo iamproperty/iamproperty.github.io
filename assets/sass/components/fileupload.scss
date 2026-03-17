@@ -28,7 +28,7 @@ hr {
   }
 
   .file-upload__title {
-    margin-top: 0; // 1
+    margin-top: 0; /*  1 */
     margin-bottom: 0;
     font-family: var(--font-heading);
     font-style: normal;
@@ -58,7 +58,7 @@ hr {
     font-size: var(--input-fs, 1rem);
     line-height: var(--input-lh, 1.25rem);
     border: 2px solid var(--colour-primary-theme);
-    appearance: none; // Fix appearance for date inputs in Safari
+    appearance: none; /*  Fix appearance for date inputs in Safari */
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     color: var(--colour-primary);
