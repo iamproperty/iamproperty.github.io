@@ -68,7 +68,7 @@ iam-actionbar {
     display: inline-block;
   }
 
-  // Dialog wrapper
+  /*  Dialog wrapper */
   .menu__wrapper [slot='selected-overflow'] > button,
   .menu__wrapper [slot='overflow'] > button {
     background: none;
@@ -97,7 +97,7 @@ iam-actionbar {
 }
 /* #endregion */
 
-// Select all done with vue
+/*  Select all done with vue */
 
 iam-actionbar:has(.selectall input:checked) {
   --selectall-opacity: 1;

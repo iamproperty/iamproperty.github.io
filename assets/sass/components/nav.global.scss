@@ -3,7 +3,7 @@
 
 
 
-// Default colour 
+/*  Default colour  */
 iam-nav {
 
   > :not([slot="logo"],[slot="secondary"]) {
@@ -178,7 +178,7 @@ nav:has(iam-nav.nav--sticky) {
 }
 
 body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
-  //transform: translate(0, -100%);
+  /* transform: translate(0, -100%); */
 
   margin-top: -8rem;
 }
@@ -358,7 +358,7 @@ iam-nav details {
       }
     }
 
-    // Hide cards
+    /*  Hide cards */
     a:has(iam-card) {
       display: none !important;
     }
@@ -393,7 +393,7 @@ iam-nav details {
   iam-nav {
     --mobDetails: 'true';
 
-    // Sub details
+    /*  Sub details */
     details details {
       &:after {
         display: none;
@@ -696,9 +696,9 @@ iam-nav details {
   }
 }
 
-// 4 columns on large screens
+/*  4 columns on large screens */
 @media screen and (min-width: 80em) {
-  // 1280
+  /*  1280 */
   iam-nav.nav--large *:not(.nav--menu) > details {
     &[open] > div:not(:has(details)) {
       columns: 4;

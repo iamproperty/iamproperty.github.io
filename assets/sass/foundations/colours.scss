@@ -10,7 +10,7 @@
   }
 
 
-  // On any background colour we change the default text colour to our primary colour to stand out more
+  /*  On any background colour we change the default text colour to our primary colour to stand out more */
   [class*='bg-']:not(.bg-canvas):not(.bg-canvas-2):not(.bg-light):not(.invert-colours):not(iam-header):not(iam-notification):not(.bg-primary, .bg-danger, .bg-dark, .gradient-primary) {
     
     --colour-heading: var(--colour-primary-theme);
@@ -38,7 +38,7 @@
     }
   }
   /* #region When the theme is set to dark via the dark mode component */
-  // OR when the dark mode is set via the browser or device when no component is present
+  /*  OR when the dark mode is set via the browser or device when no component is present */
   
   .dark-theme :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
     
@@ -46,7 +46,7 @@
       --colour-body: var(--colour-primary-theme);
       color: var(--colour-primary-theme);
 
-      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+      /*  Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten */
       > * {
         color-scheme: light;
       }
@@ -69,7 +69,7 @@
       --colour-body: var(--colour-primary-theme);
       color: var(--colour-primary-theme);
 
-      // Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten
+      /*  Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten */
       > * {
         color-scheme: light;
       }

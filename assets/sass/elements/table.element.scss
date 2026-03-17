@@ -18,14 +18,14 @@
     text-align: left;
   }
 
-  // 1. Removes font-weight bold by inheriting
-  // 2. Matches default `<td>` alignment by inheriting `text-align`.
-  // 3. Fix alignment for Safari
+  /*  1. Removes font-weight bold by inheriting */
+  /*  2. Matches default `<td>` alignment by inheriting `text-align`. */
+  /*  3. Fix alignment for Safari */
 
   th {
-    font-weight: normal; // 1
-    text-align: inherit; // 2
-    text-align: -webkit-match-parent; // 3
+    font-weight: normal; /*  1 */
+    text-align: inherit; /*  2 */
+    text-align: -webkit-match-parent; /*  3 */
   }
 
   thead,
@@ -101,7 +101,7 @@
     }
   }
 
-  // Error messages
+  /*  Error messages */
   tr td[colspan='100%']:first-child:last-child span {
     max-width: 39rem;
     font-weight: bold;

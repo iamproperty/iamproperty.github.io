@@ -1,18 +1,18 @@
 @charset "UTF-8";
 
-// Set mobile only variable so that the media query mixin doesn't print out non mobile rules
+/*  Set mobile only variable so that the media query mixin doesn't print out non mobile rules */
 
 @use '_functions/bs_functions' as *;
 @use '_functions/bs_variables' as *;
 @use '_functions/bs_mixins' as *;
 @use '_functions/utility-mixins' as *;
 
-// Update the breakpoints to just one to remove some utility classes
+/*  Update the breakpoints to just one to remove some utility classes */
 $grid-breakpoints: (
   xs: 0,
 );
 
-// Simplify the grid
+/*  Simplify the grid */
 $grid-columns: 4;
 
 $device-xs-width: 600;

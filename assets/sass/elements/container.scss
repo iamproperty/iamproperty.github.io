@@ -1,12 +1,5 @@
-@use 'sass:math';
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
-  /* #region contain */
+
   /* #region container */
   .container {
     display: block;
@@ -75,7 +68,7 @@
       padding-top: 2rem;
     }
 
-    // Fix the clearing for containers
+    /* Fix the clearing for containers */
     &:before {
       display: table;
       clear: both;
@@ -108,7 +101,7 @@
     width: 100%;
   }
 
-  // replicate container padding-bottom
+  /* replicate container padding-bottom */
   main > .row {
     padding-bottom: 1rem;
 
@@ -119,36 +112,6 @@
 
     &[class*='bg-'] + :is(.row, .container):not([class*='bg-']) {
       padding-top: 2rem;
-    }
-  }
-  /* #endregion */
-
-  /* #region Circles */
-  .container {
-    &:has(.circle) {
-      position: relative;
-      z-index: 1;
-    }
-
-    > .circle {
-      position: absolute;
-      z-index: var(--index-below);
-      border-width: 3px;
-    }
-
-    // Default pattern
-    &:not([class*='circle-pattern-']) > .circle {
-      font-size: 18.75rem; /* (300) */
-      top: -4.6875rem;
-      left: -12.5rem; /* -200 */
-    }
-
-    &:not([class*='circle-pattern-']) > .circle ~ .circle {
-      font-size: 21.875rem;
-      top: auto;
-      left: auto;
-      right: -6.25rem;
-      bottom: -12.5rem; /* -200 */
     }
   }
   /* #endregion */

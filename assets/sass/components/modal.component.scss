@@ -21,11 +21,11 @@
 
 @layer components {
   dialog[open] {
-    //overflow-y: hidden;
+    /* overflow-y: hidden; */
     width: 90vw;
     max-width: 20.25rem; /* col-width*4 324px */
 
-    //height: 90vh;
+    /* height: 90vh; */
     max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
     overflow-y: hidden;
@@ -87,7 +87,7 @@
     }
 
 
-    // Close button
+    /*  Close button */
     > button:first-child {
 
       position: absolute;
@@ -120,8 +120,8 @@
       display: none;
     }
   }
-  // Size variants
-  // small
+  /*  Size variants */
+  /*  small */
   @media screen and (min-width: 36em) {
 
     :host(.modal--sm) dialog[open] {
@@ -141,7 +141,7 @@
     }
   }
 
-  // large
+  /*  large */
   @media screen and (min-width: 36em) {
 
     :host(.modal--lg) dialog[open] {

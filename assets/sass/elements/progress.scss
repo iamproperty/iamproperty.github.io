@@ -116,7 +116,7 @@
     --label-fs: 0.75rem;
   }
 
-  // Responsive-ish settings
+  /*  Responsive-ish settings */
   *:has(> label > .progress--circular) {
     container-type: inline-size;
   }
@@ -148,7 +148,7 @@
     margin-left: 2rem;
   }
 
-  // Needed to allow it to be animated
+  /*  Needed to allow it to be animated */
   @property --progress {
     syntax: '<percentage>';
     inherits: false;

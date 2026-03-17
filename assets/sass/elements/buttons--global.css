@@ -1,33 +1,24 @@
 @layer elements {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
 
   /* #region reset */
   button {
-    
     border-radius: 0;
     text-transform: none;
-    margin: 0; // 1
+    margin: 0;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
   }
 
-  [role='button'] {
-    cursor: pointer;
-  }
   button:focus:not(:focus-visible) {
     outline: 0;
   }
 
-  :is(button,[type="button"],[type="reset"],[type="submit"]) {
-    -webkit-appearance: button; // 2
+  :is(button,[type="button"],[type="reset"],[type="submit"],[role='button']) {
+    -webkit-appearance: button;
 
     &:not(:disabled) {
-      cursor: pointer; // 3
+      cursor: pointer;
     }
   }
   /* #endregion */
@@ -89,34 +80,34 @@
     &:not(:last-child) {
       margin-right: var(--btn-margin);
     }
+  }
 
-    a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
-    &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
-      outline: 0;
-      text-decoration: none;
+  a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) .btn,
+  .btn:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+    outline: 0;
+    text-decoration: none;
 
-      background: var(--colour-btn-bg-hover);
-      color: var(--colour-btn-hover);
-      border-radius: 1.5rem;
-    }
+    background: var(--colour-btn-bg-hover);
+    color: var(--colour-btn-hover);
+    border-radius: 1.5rem;
+  }
 
-    a:is(:active, .active):not([disabled]) &,
-    &:is(:active, .active):not([disabled]) {
-      filter: brightness(85%);
-      transition:
-        background 0.1s,
-        color 0.1s;
-      color: var(--colour-btn);
-      border-radius: 1.5rem;
-    }
+  a:is(:active, .active):not([disabled]) .btn,
+  .btn:is(:active, .active):not([disabled]) {
+    filter: brightness(85%);
+    transition:
+      background 0.1s,
+      color 0.1s;
+    color: var(--colour-btn);
+    border-radius: 1.5rem;
+  }
 
-    a:disabled &,
-    &:disabled,
-    [disabled] &,
-    &[disabled] {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+  a:disabled .btn,
+  .btn:disabled,
+  [disabled] .btn,
+  .btn[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
   }
   /* #endregion */
 
@@ -132,22 +123,22 @@
     position: relative;
     padding-left: 3.5rem; /*56 */
     padding-right: 3.5rem; /*56 */
+  }
 
-    a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
-    &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
+  a:is(:hover, :focus, .hover):not([disabled], :active, .active) .btn.btn-complete,
+  .btn.btn-complete:is(:hover, :focus, .hover):not([disabled], :active, .active) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
 
-      &:before {
-        content: '\f00c';
-        font-family: 'Font Awesome 7 Pro';
-        margin-right: 1rem;
-        font-style: inherit;
-        width: 1rem;
-        display: inline-block;
-        height: var(--btn-line-height);
-        vertical-align: bottom;
-      }
+    &:before {
+      content: '\f00c';
+      font-family: 'Font Awesome 7 Pro';
+      margin-right: 1rem;
+      font-style: inherit;
+      width: 1rem;
+      display: inline-block;
+      height: var(--btn-line-height);
+      vertical-align: bottom;
     }
   }
   /* #endregion */
@@ -168,10 +159,10 @@
       font-family: 'Font Awesome 7 Pro';
     }
 
-    &.btn[class*='fa-after'] {
+    &[class*='fa-after'] {
       padding-right: 4rem;
     }
-    &.btn[class*='fa-after']:before {
+    &[class*='fa-after']:before {
       margin-right: 0;
       margin-right: 0.375rem; /* 6 */
       position: absolute;
@@ -199,7 +190,6 @@
   }
   /* #endregion */
 
-
   /* #region button with prompt */
   .btn.btn--prompt {
     &:after {
@@ -219,18 +209,17 @@
       vertical-align: bottom;
       margin-left: 1rem;
     }
-
-    a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
-    &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
-      &:after {
-        margin-left: 1.5rem;
-        margin-right: -0.5rem;
-      }
+  }
+    
+  a:is(:hover, :focus, .hover):not([disabled], :active, .active) .btn.btn--prompt,
+  .btn.btn--prompt:is(:hover, :focus, .hover):not([disabled], :active, .active) {
+    &:after {
+      margin-left: 1.5rem;
+      margin-right: -0.5rem;
     }
   }
   /* #endregion */
 
-  
   /* #region button that opens up a filter dialog */
   .btn-filter {
     &:after {

@@ -120,7 +120,7 @@
 
     .form-control,
     .form-select {
-      margin-left: -0.5rem; // Add a negative margin too keep text inline but also allow for a padding left so that the focus state looks presentable
+      margin-left: -0.5rem; /*  Add a negative margin too keep text inline but also allow for a padding left so that the focus state looks presentable */
       border: none;
       padding-top: 0.25rem;
       padding-bottom: 0.25rem;

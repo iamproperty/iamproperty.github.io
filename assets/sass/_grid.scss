@@ -54,7 +54,7 @@ $breakpoints: (
   }
 
   .#{$br}flow-dense {
-    // Apply to a wrapper div of the items
+    /*  Apply to a wrapper div of the items */
     grid-auto-flow: dense;
   }
 
@@ -107,14 +107,14 @@ $breakpoints: (
 }
 
 @mixin grid-rows($br: '') {
-  // Assign how many rows an item takes
+  /*  Assign how many rows an item takes */
   @for $i from 0 to $grid-utility-count {
     .#{$br}row-span-#{$i + 1} {
       --row-span: #{$i + 1};
     }
   }
 
-  // Move the item to a set row
+  /*  Move the item to a set row */
   @for $i from 0 to $rows-per-page {
     .#{$br}row-start-#{$i + 1} {
       --row-start: #{$i + 1};

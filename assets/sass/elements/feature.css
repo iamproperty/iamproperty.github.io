@@ -1,8 +1,5 @@
-@use '../_func' as *;
-
 @layer elements {
   
-
   .feature {
 
     --padding: 1rem;
@@ -74,7 +71,7 @@
       display: block;
       font-weight: 900;
       font-size: 2rem;
-      //border-radius: 50%;
+      /* border-radius: 50%; */
       width: 4.8rem; /* TODO unmagic this number, should be 1 column width */
       padding: 0;
       height: 100%;
@@ -130,8 +127,6 @@
     }
   }
 
-
-
   .feature--loading {
     
     &:before {
@@ -176,5 +171,4 @@
         translate: 0 -50%;
       }
   }
-
 }
