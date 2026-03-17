@@ -53,7 +53,7 @@
     border-radius: var(--border-radius, 0.3125rem);
   }
 
-  // #region inline progress
+  /* #region inline progress */
   :is(label, .label):has(.progress--inline) {
     font-size: 1rem;
     color: var(--colour-body);
@@ -67,9 +67,9 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 
-  // #region Circular
+  /* #region Circular */
   label:has(.progress--circular) {
     --max-width: 12.5rem;
     --pt: 5.625rem;
@@ -210,5 +210,5 @@
     border-radius: 50%;
   }
 
-  // #endregion
+  /* #endregion */
 }

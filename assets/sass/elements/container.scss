@@ -6,8 +6,8 @@
 
 
 @layer elements {
-  // #region contain
-  // #region container
+  /* #region contain */
+  /* #region container */
   .container {
     display: block;
     margin-left: auto;
@@ -121,9 +121,9 @@
       padding-top: 2rem;
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Circles
+  /* #region Circles */
   .container {
     &:has(.circle) {
       position: relative;
@@ -151,5 +151,5 @@
       bottom: -12.5rem; /* -200 */
     }
   }
-  // #endregion
+  /* #endregion */
 }

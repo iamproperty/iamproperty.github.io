@@ -127,7 +127,7 @@
     --type-scale: 1.2;
     --body-fs: 1rem;
     /* #endregion */
-    // #region heading
+    /* #region heading */
     --h1-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 6)), 0.25rem);
     --h2-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 5)), 0.25rem);
     --h3-fs: round(calc(var(--body-fs, 1rem) * pow(var(--type-scale), 3)), 0.25rem);
@@ -142,15 +142,15 @@
 
     --h4-lh: round(up, calc(1em * var(--type-scale)), 0.25rem);
     --h4-pb: round(up, calc(1em * var(--type-scale)), 0.25rem);
-    // #endregion
-    // #region rounded borders
+    /* #endregion */
+    /* #region rounded borders */
     --border-radius-sm: 0.25rem;
     --border-radius: 0.5rem;
     --border-radius-lg: 1rem;
     --border-radius-xl: 1.5rem;
     --border-radius-2xl: 3rem;
-    // #endregion
-    // #region Z-index
+    /* #endregion */
+    /* #region Z-index */
     --index-below: -1;
     --index-base: 0;
     --index-focus: 2;
@@ -158,8 +158,8 @@
     --index-floating: 100;
     --index-menu: 200;
     --index-overlay: 1000;
-    // #endregion
-    // #region Cards variables
+    /* #endregion */
+    /* #region Cards variables */
     --card-top-padding: 2rem;
     --card-right-padding: 3.5rem; /* 16+16+24 */
     --card-bottom-padding: 2rem;
@@ -168,15 +168,15 @@
     --card-box-shadow: 2px 0.1875rem 0.375rem rgba(0, 0, 0, 0.2);
     --nav-height: 6rem; /* 96 */
     --code-color: #d63384;
-    // #endregion 
-    // #region Default borders
+    /* #endregion */ 
+    /* #region Default borders */
     --border-width: 1px;
     --border-style: solid;
     --border-color: var(--colour-border);
-    // #endregion
+    /* #endregion */
     
  
-    // #region layout
+    /* #region layout */
     --gap: 1rem;
     --gutter: 1.5rem;
     --max-width: 80rem;
@@ -190,9 +190,9 @@
     --padding-inline: 1.5rem;
     --container-padding-x: 1.5rem;
     --container-padding: var(--container-padding-top) var(--container-padding-x) var(--container-padding-bottom) var(--container-padding-x);
-    // #endregion
+    /* #endregion */
 
-    // #region icons
+    /* #region icons */
     $icon-arrow: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><path d='M6.5,2l9,9-9,9' style='fill:none;stroke:#000000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px'/></svg>");
     $icon-close: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>");
     $icon-new-tab: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path d='M304 24c0 13.3 10.7 24 24 24H430.1L207 271c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l223-223V184c0 13.3 10.7 24 24 24s24-10.7 24-24V24c0-13.3-10.7-24-24-24H328c-13.3 0-24 10.7-24 24zM72 32C32.2 32 0 64.2 0 104V440c0 39.8 32.2 72 72 72H408c39.8 0 72-32.2 72-72V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V440c0 13.3-10.7 24-24 24H72c-13.3 0-24-10.7-24-24V104c0-13.3 10.7-24 24-24H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H72z'/></svg>");
@@ -219,9 +219,9 @@
     --icon-tick: #{escape-svg($icon-tick)};
 
     --fa-secondary-opacity: 0.1;
-    // #endregion
+    /* #endregion */
 
-    // #region spacing
+    /* #region spacing */
     --spacer: 1rem;
     --spacer-0: 0;
     --spacer-1: calc(var(--spacer) * 0.5);
@@ -229,7 +229,7 @@
     --spacer-3: calc(var(--spacer) * 1.5);
     --spacer-4: calc(var(--spacer) * 2);
     --spacer-5: calc(var(--spacer) * 3);
-    // #endregion
+    /* #endregion */
 
     --max-height-sm: 12.5rem; /* 200px */
     --max-height-md: 25rem; /* 400px */

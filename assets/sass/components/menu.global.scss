@@ -17,7 +17,7 @@
     width: 1.25rem;
   }
 
-  // #region sub menu
+  /* #region sub menu */
 
   iam-menu > button:has(+ iam-menu) {
     position: relative;
@@ -78,5 +78,5 @@
   iam-menu > button + iam-menu:not([popover]) > *:is(button, a, label) {
     padding-left: 2rem;
   }
-  // #endregion
+  /* #endregion */
 }

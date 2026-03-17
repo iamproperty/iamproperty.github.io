@@ -16,7 +16,7 @@
   order: 1;
 }
 
-// #region chart key
+/* #region chart key */
 .chart__key {
   --key-border-radius: 50%;
   order: 2;
@@ -33,10 +33,10 @@
     background: transparent !important;
   }
 }
-// #endregion
+/* #endregion */
 
 
-// #region Horizontal
+/* #region Horizontal */
 :host(.chart--horizontal) {
   .chart__outer {
     flex-direction: row;
@@ -78,9 +78,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region doughnut chart
+/* #region doughnut chart */
 :host(.chart--lg) {
   --doughnut-size: 17.875rem; /* 286 */
 }
@@ -203,4 +203,4 @@
     }
   }
 }
-// #endregion
+/* #endregion */

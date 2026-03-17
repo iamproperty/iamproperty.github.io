@@ -37,7 +37,7 @@
   border-end-end-radius: 0!important;
 }
 
-// #region colors
+/* #region colors */
 ::slotted(input[type='color']) {
   width: 3rem !important;
   flex-shrink: 0 !important;
@@ -59,9 +59,9 @@
   border-start-start-radius: 0 !important;
   margin: 0 !important;
 }
-// #endregion
+/* #endregion */
 
-// #region 
+/* #region  */
 @layer elements {
 ::slotted(select:is([slot="prefix"],[slot="suffix"])){
 
@@ -94,7 +94,7 @@
   field-sizing: content!important;
 }
 }
-// #endregion
+/* #endregion */
 
 
 .suffix[role="button"] {

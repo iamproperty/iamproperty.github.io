@@ -18,7 +18,7 @@ $grid-breakpoints: (
 $breakpoints: $grid-breakpoints;
 
 
-// #region Boostrap
+/* #region Boostrap */
 // Color system
 
 // scss-docs-start gray-color-variables
@@ -1700,4 +1700,4 @@ $utilities-border-colors: map-loop($utilities-border, rgba-css-var, '$key', 'bor
 $negative-spacers: if($enable-negative-margins, negativify-map($spacers), null) !default;
 
 $gutters: $spacers !default;
-// #endregion
+/* #endregion */

@@ -63,7 +63,7 @@
   margin: 0 0 0.5rem 0 !important;
 }
 
-// #region card with a flag
+/* #region card with a flag */
 :host(.card--flag) {
   position: relative;
 
@@ -82,9 +82,9 @@
     color: var(--colour, var(--colour-primary));
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Show total number
+/* #region Show total number */
 .card__body:has(.card__total) {
   --card-head-top-padding: 2rem;
   --card-head-bottom-padding: 2rem;
@@ -96,4 +96,4 @@
   order: -1;
 }
 
-// #endregion
+/* #endregion */

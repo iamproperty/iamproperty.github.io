@@ -154,7 +154,7 @@
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
   }
 
-  // #region preview element
+  /* #region preview element */
 
   iam-inline-edit:has(.preview) {
     position: relative;
@@ -199,5 +199,5 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 }

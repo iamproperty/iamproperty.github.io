@@ -28,7 +28,7 @@
     }
   }
 
-  // #region Carousel inside of a admin panel
+  /* #region Carousel inside of a admin panel */
   .admin-panel:has(iam-carousel) {
     container-type: inline-size;
   }
@@ -56,9 +56,9 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region carousel in dialog
+  /* #region carousel in dialog */
 
   dialog:has(iam-carousel) {
     container-type: inline-size;
@@ -80,5 +80,5 @@
       max-width: calc(100% - 4rem);
     }
   }
-  // #endregion
+  /* #endregion */
 }

@@ -78,7 +78,7 @@
     color: var(--colour-body);
   }
 
-  // #region scrollbars
+  /* #region scrollbars */
   :is(div, form, fieldset, textarea, details, iam-menu)::-webkit-scrollbar {
     width: 10px;
     height: 10px;

@@ -2,7 +2,7 @@
 
 @use './bs_variables' as *;
 
-// #region Bootstrap
+/* #region Bootstrap */
 $utilities: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $utilities: map.merge(
@@ -712,9 +712,9 @@ $utilities: map.merge(
   ),
   $utilities
 );
-// #endregion
+/* #endregion */
 
-// #region Sizing
+/* #region Sizing */
 /* Enhance the max width utility to include fit-content which can come in handy for flex-box based layouts. */
 $utilities: map.merge(
   $utilities,
@@ -756,7 +756,7 @@ $utilities: map.merge(
 );
 //  #endregion
 
-// #region Add to line height classes
+/* #region Add to line height classes */
 $utilities: map.merge(
   $utilities,
   (
@@ -776,27 +776,27 @@ $utilities: map.merge(
   )
 );
 
-// #endregion
+/* #endregion */
 
-// #region Remove Border colour utitlity classes
+/* #region Remove Border colour utitlity classes */
 $utilities: map.merge(
   $utilities,
   (
     'border-color': null,
   )
 );
-// #endregion
+/* #endregion */
 
-// #region Remove floats - They are too unpredictable and it is preferred to use flex or grid
+/* #region Remove floats - They are too unpredictable and it is preferred to use flex or grid */
 $utilities: map.merge(
   $utilities,
   (
     'float': null,
   )
 );
-// #endregion
+/* #endregion */
 
-// #region Fonts
+/* #region Fonts */
 $utilities: map.merge(
   $utilities,
   (
@@ -812,7 +812,7 @@ $utilities: map.merge(
 );
 //  #endregion
 
-// #region Gradient colours
+/* #region Gradient colours */
 $utilities: map.merge(
   $utilities,
   (
@@ -859,9 +859,9 @@ $utilities: map.merge(
     ),
   )
 );
-// #endregion
+/* #endregion */
 
-// #region Tint helper classes
+/* #region Tint helper classes */
 $utilities: map.merge(
   $utilities,
   (
@@ -904,9 +904,9 @@ $utilities: map.merge(
     ),
   )
 );
-// #endregion
+/* #endregion */
 
-// #region Max height classes
+/* #region Max height classes */
 $utilities: map.merge(
   $utilities,
   (
@@ -919,4 +919,4 @@ $utilities: map.merge(
     ),
   )
 );
-// #endregion
+/* #endregion */

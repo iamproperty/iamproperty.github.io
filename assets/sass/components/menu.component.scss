@@ -144,7 +144,7 @@
   padding: 0 !important;
 }
 
-// #region sub menu
+/* #region sub menu */
 ::slotted(iam-menu:not([popover])) {
   border: none !important;
   border-radius: 0 !important;
@@ -158,7 +158,7 @@
   top: anchor(top);
   left: calc(anchor(right) + 1rem);
 }
-// #endregion
+/* #endregion */
 
 /*
 

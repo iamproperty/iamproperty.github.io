@@ -44,7 +44,7 @@
   }
 }
 
-// #region Side menu
+/* #region Side menu */
 .side-menu {
   position: absolute;
   z-index: 20;
@@ -183,9 +183,9 @@
 }
 
 // links moved to links
-// #endregion
+/* #endregion */
 
-// #region main content
+/* #region main content */
 .main-content {
   position: relative;
   z-index: 10;
@@ -226,9 +226,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Desktop open state
+/* #region Desktop open state */
 @media screen and (min-width: 62em) {
   .container:has(.side-menu.open) {
     padding-left: 2rem !important;
@@ -237,7 +237,7 @@
     max-width: min(var(--container-max-width), 100% - 19rem);
   }
 }
-// #endregion
+/* #endregion */
 
 @media screen and (min-width: 62em) {
   :host([open-always]) {
