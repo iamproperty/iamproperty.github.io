@@ -1,0 +1,191 @@
+@layer utilities {
+  .font-monospace {
+    font-family: var(--font-monospace) !important;
+  }
+
+  .font-body {
+    font-family: var(--font-body) !important;
+  }
+
+  .fs-1 {
+    font-size: rfs-fluid-value(2.5rem) !important;
+  }
+
+  .fs-2 {
+    font-size: rfs-fluid-value(2rem) !important;
+  }
+
+  .fs-3 {
+    font-size: rfs-fluid-value(1.75rem) !important;
+  }
+
+  .fs-4 {
+    font-size: rfs-fluid-value(1.5rem) !important;
+  }
+
+  .fs-5 {
+    font-size: rfs-fluid-value(1.25rem) !important;
+  }
+
+  .fs-6 {
+    font-size: rfs-fluid-value(1rem) !important;
+  }
+
+  .fst-italic {
+    font-style: italic !important;
+  }
+
+  .fst-normal {
+    font-style: normal !important;
+  }
+
+  .fw-light {
+    font-weight: 300 !important;
+  }
+
+  .fw-lighter {
+    font-weight: lighter !important;
+  }
+
+  .fw-normal {
+    font-weight: 400 !important;
+  }
+
+  .fw-bold {
+    font-weight: 700 !important;
+  }
+
+  .fw-semibold {
+    font-weight: 600 !important;
+  }
+
+  .fw-bolder {
+    font-weight: bolder !important;
+  }
+
+  .lh-0 {
+    line-height: 0 !important;
+  }
+
+  .lh-1 {
+    line-height: 1 !important;
+  }
+
+  .text-start {
+    text-align: left !important;
+  }
+
+  .text-end {
+    text-align: right !important;
+  }
+
+  .text-center {
+    text-align: center !important;
+
+    > * {
+        
+      margin-inline: auto;
+    }
+  }
+
+  .text-decoration-none {
+    text-decoration: none !important;
+  }
+
+  .text-decoration-underline {
+    text-decoration: underline !important;
+  }
+
+  .text-decoration-line-through {
+    text-decoration: line-through !important;
+  }
+
+  .text-lowercase {
+    text-transform: lowercase !important;
+  }
+
+  .text-uppercase {
+    text-transform: uppercase !important;
+  }
+
+  .text-capitalize {
+    text-transform: capitalize !important;
+  }
+
+  .text-wrap {
+    white-space: normal !important;
+  }
+
+  .text-nowrap {
+    white-space: nowrap !important;
+  }
+
+  .text-break {
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+
+  @media screen and (min-width: 36em) {
+    .text-sm-start {
+      text-align: left !important;
+    }
+
+    .text-sm-end {
+      text-align: right !important;
+    }
+
+    .text-sm-center {
+      text-align: center !important;
+
+      > * {
+          
+        margin-inline: auto;
+      }
+    }
+
+    .text-sm-wrap {
+      white-space: normal !important;
+    }
+
+    .text-sm-nowrap {
+      white-space: nowrap !important;
+    }
+
+    .text-sm-break {
+      word-wrap: break-word !important;
+      word-break: break-word !important;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    .text-md-start {
+      text-align: left !important;
+    }
+
+    .text-md-end {
+      text-align: right !important;
+    }
+
+    .text-md-center {
+      text-align: center !important;
+
+      > * {
+          
+        margin-inline: auto;
+      }
+    }
+
+    .text-md-wrap {
+      white-space: normal !important;
+    }
+
+    .text-md-nowrap {
+      white-space: nowrap !important;
+    }
+
+    .text-md-break {
+      word-wrap: break-word !important;
+      word-break: break-word !important;
+    }
+  }
+}

@@ -1,0 +1,68 @@
+@layer utilities {
+
+  .position-static {
+    position: static !important;
+  }
+
+  .position-relative {
+    position: relative !important;
+  }
+
+  .position-absolute {
+    position: absolute !important;
+  }
+
+  .position-fixed {
+    position: fixed !important;
+  }
+
+  .position-sticky {
+    position: sticky !important;
+  }
+
+  @media screen and (min-width: 36em) {
+
+    .position-sm-static {
+      position: static !important;
+    }
+
+    .position-sm-relative {
+      position: relative !important;
+    }
+
+    .position-sm-absolute {
+      position: absolute !important;
+    }
+
+    .position-sm-fixed {
+      position: fixed !important;
+    }
+
+    .position-sm-sticky {
+      position: sticky !important;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+
+    .position-md-static {
+      position: static !important;
+    }
+
+    .position-md-relative {
+      position: relative !important;
+    }
+
+    .position-md-absolute {
+      position: absolute !important;
+    }
+
+    .position-md-fixed {
+      position: fixed !important;
+    }
+
+    .position-md-sticky {
+      position: sticky !important;
+    }
+  }
+}

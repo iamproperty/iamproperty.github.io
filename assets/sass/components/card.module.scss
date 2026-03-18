@@ -148,4 +148,7 @@
   padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) 0 var(--card-left-padding);
   margin-bottom: -1.5rem;
 }
+.card__head:not(:has(img)) ~ .card__badges {
+  text-align: end;
+}
 /* #endregion */

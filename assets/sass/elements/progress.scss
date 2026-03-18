@@ -1,9 +1,3 @@
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
   :is(label, .label):has(progress) {
     position: relative;

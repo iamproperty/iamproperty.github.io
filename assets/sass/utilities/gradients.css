@@ -1,0 +1,40 @@
+@layer utilities {
+  .bg-gradient {
+    background-image: var(--gradient) !important;
+  }
+
+  .gradient-success {
+    --gradient-direction: 180deg;
+    background-image: linear-gradient(
+      var(--gradient-direction),
+      var(--colour-success-theme) 0,
+      transparent 100%
+    ) !important;
+  }
+
+  .gradient-primary {
+    --gradient-direction: 180deg;
+    background-image: linear-gradient(
+      var(--gradient-direction),
+      var(--colour-primary-theme) 0,
+      transparent 100%
+    ) !important;
+  }
+
+  .gradient-info {
+    --gradient-direction: 180deg;
+    background-image: linear-gradient(
+      var(--gradient-direction),
+      var(--colour-info-theme) 0,
+      transparent 100%
+    ) !important;
+  }
+
+  .gradient-direction-left {
+    --gradient-direction: 90deg;
+  }
+
+  .gradient-direction-angle {
+    --gradient-direction: 135deg;
+  }
+}

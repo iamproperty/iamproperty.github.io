@@ -1,9 +1,3 @@
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
   /* #region toggle */
   .toggle {
