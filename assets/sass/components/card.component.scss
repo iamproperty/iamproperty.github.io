@@ -59,6 +59,11 @@
   }
 }
 
+:host(.show-icon) .card__footer {
+  
+  --card-right-padding: 3.5rem;
+}
+
 :host(:is(:hover, :focus, .hover):not(.prevent-hover):not([class*='colour-'])) {
   .card__body {
     &:before {
