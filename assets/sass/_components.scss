@@ -5,6 +5,7 @@
 
 
 @use 'components/nav.preload';
+@use 'components/header.preload';
 @use 'components/carousel.config';
 @use 'components/multi-step-modal.global';
 
@@ -27,18 +28,6 @@
 
     > *:first-child {
       padding-top: 2rem;
-    }
-  }
-
-  /* #region Undefined web components */
-
-  iam-header {
-    grid-column: full-width;
-  }
-
-  @media screen and (min-width: 62em) {
-    iam-header:not(:defined) {
-      min-height: 29.375rem;
     }
   }
 

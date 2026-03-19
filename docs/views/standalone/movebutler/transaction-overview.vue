@@ -62,57 +62,63 @@
         <button class="btn btn-action">Link/unlink CRM client</button>
         <button class="btn btn-action btn-primary fa-plus">Add client</button>
       </Actionbar>
-      <Table>
-
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Client</th>
-              <th>Client type</th>
-              <th>Date added</th>
-              <th>Added by</th>
-              <th>Onboarding status</th>
-              <th>Latest risk level</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-              </td>
-              <td><i class="fa-regular fa-star"></i> John Smith</td>
-              <td>Vendor</td>
-              <td>27/08/25</td>
-              <td>Agent name</td>
-              <td>Incomplete</td>
-              <td>Incomplete</td>
-              <td><a href="/">Manage client</a></td>
-            </tr>
-            <tr>
-              <td>
-              </td>
-              <td><i class="fa-regular fa-star"></i> John Smith</td>
-              <td>Vendor</td>
-              <td>27/08/25</td>
-              <td>Agent name</td>
-              <td>Incomplete</td>
-              <td>Incomplete</td>
-              <td><a href="/">Manage client</a></td>
-            </tr>
-            <tr>
-              <td>
-              </td>
-              <td><i class="fa-regular fa-star"></i> John Smith</td>
-              <td>Vendor</td>
-              <td>27/08/25</td>
-              <td>Agent name</td>
-              <td>Incomplete</td>
-              <td>Incomplete</td>
-              <td><a href="/">Manage client</a></td>
-            </tr>
-          </tbody>
-        </table>
+      <Table class="table--cta table--fullwidth">
+      <table class="table--filtered">
+                <thead>
+                <tr style="--row-height: 37px;">
+                    <th class="th--fixed"></th>
+                    <th>Client name</th>
+                    <th>Date added</th>
+                    <th>Added by</th>
+                    <th>Client type</th>
+                    <th>Onboarding status</th>
+                    <th>Latest risk level</th>
+                    <!--[if BLOCK]><![endif]-->                        <th>Due diligence</th>
+                    <!--[if ENDBLOCK]><![endif]-->
+                    <th>Residential address</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--[if BLOCK]><![endif]-->                    <tr class="filtered--matched filtered--show show" style="--row-height: 97px;">
+                        <td class="td--fixed" data-label="">
+                            <div class="dialog__wrapper">
+                                <button class="btn btn-secondary btn-compact fa fa-ellipsis-vertical btn-sm m-0" popovertarget="menu751614186369" aria-haspopup="true" aria-controls="menu751614186369" style="anchor-name: --menu751614186369;"></button>
+                                <iam-menu class="dialog--list" x-data="" id="menu751614186369" popover="auto" role="menu" style="position-anchor: --menu751614186369;">
+                                  
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                    <!--[if BLOCK]><![endif]-->                                        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                    <!--[if ENDBLOCK]><![endif]-->
+                                </iam-menu>
+                            </div>
+                        </td>
+                        <td data-label="Client name">
+                            <!--[if BLOCK]><![endif]-->                                <i class="far fa-solid fa-star"></i>
+                            <!--[if ENDBLOCK]><![endif]-->
+                            Martin Wright
+                            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                        </td>
+                        <td data-label="Date added">27.01.26</td>
+                        <td data-label="Added by">Testing Account</td>
+                        <td data-label="Client type">Vendor</td>
+                        <td data-label="Onboarding status">Risk assessment complete</td>
+                        <td data-label="Latest risk level" data-content="low">
+                            Low
+                        </td>
+                        <!--[if BLOCK]><![endif]-->                            <td data-label="Due diligence" data-content="incomplete">
+                                Incomplete
+                            </td>
+                        <!--[if ENDBLOCK]><![endif]-->
+                        <td data-label="Residential address">Lee Dam, 95 Katie Brook, TS10 3NS</td>
+                        <td data-label="" class="px-3">
+                            <a href="http://my.iamproperty.test/ic/risk-assessments/140/view" class="text-nowrap btn btn-tertiary">
+                                Manage client
+                            </a>
+                        </td>
+                    </tr>
+                <!--[if ENDBLOCK]><![endif]-->
+                </tbody>
+      </table>
       </Table>
     </div>
     

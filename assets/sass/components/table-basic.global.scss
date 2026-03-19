@@ -223,7 +223,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
     tr > *:not(:first-child):last-child {
       position: absolute;
-      left: calc(100% - var(--cta-width));
+      left: calc(100% - var(--cta-width) + 1px);
       top: auto;
       background: transparent;
       width: var(--cta-width);
