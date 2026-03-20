@@ -188,7 +188,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       border-color: var(--colour-border) !important;
     }
 
-    tr:not([data-view='full']) td p {
+    tr:not([data-view='full']):has(p.three-lines) td p {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;

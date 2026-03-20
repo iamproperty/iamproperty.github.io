@@ -433,5 +433,63 @@
       </div>
 
     </div>
+
+
+    <div class="admin-panel">
+      <Table data-expandable class="table--fullwidth">
+      <table>
+            <thead>
+                <tr>
+                    <th class="author">Added by</th>
+                    <th class="date">Date added</th>
+                    <th>Note</th>
+                    <th class="expand-button-heading"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+              <tr class="show">
+                
+                    <td data-label="Added by">
+                                                    <a href="http://my.iamproperty.test/ic/user/3/view">
+                                Testing Account
+                            </a>
+
+                            <span class="text-nowrap">Komodo Newcastle Office</span>
+                                            </td>
+
+                    <td data-label="Date added">20 Mar 2026 12:54</td>
+
+                    <td data-label="Note"><p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p></td>
+                <td class="td--expand"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down mt-0" data-expand-button="" data-index="0">Expand</button></td>
+
+                </tr>
+          <tr class="show">
+            
+            <td data-label="Added by">
+                                            <a href="http://my.iamproperty.test/ic/user/3/view">
+                        Testing Account
+                    </a>
+
+                    <span class="text-nowrap">Komodo Newcastle Office</span>
+                                    </td>
+
+            <td data-label="Date added">20 Mar 2026 12:19</td>
+
+            <td data-label="Note"><p>yo</p></td>
+            <td class="td--expand"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down mt-0" data-expand-button="" data-index="0">Expand</button></td>
+          </tr>
+                            
+        </tbody>
+      </table>
+      </Table>
+    </div>
+
+
+
+
+
   </main>
 </template>

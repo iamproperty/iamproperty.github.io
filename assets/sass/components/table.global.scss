@@ -212,11 +212,15 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       }
     }
 
-    tr:not(:has(p)) [data-expand-button] {
-      display: none;
+    tr:not(:has(p.three-lines)) [data-expand-button] {
+      display: none!important;
     }
 
-    tr:not([data-view='full']) td p {
+    tr td p:last-child {
+      padding-bottom: 0!important;
+    }
+
+    tr:not([data-view='full']):has(p.three-lines) td p {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
