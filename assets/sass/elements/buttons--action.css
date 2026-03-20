@@ -24,6 +24,23 @@
       content: var(--fa);
       margin-right: 0.375rem; /* 6 */
     }
+    &.icon-only {
+      position: relative;
+      text-indent: -300vw;
+      overflow: hidden;
+      min-width: 1.75rem;
+
+      &:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        min-width: 1.75rem;
+        text-align: center;
+        text-indent: 0;
+        padding-inline: 0.25rem;
+        line-height: 1.85rem;
+      }
+    }
 
     a:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
     &:not(.btn-primary):is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {

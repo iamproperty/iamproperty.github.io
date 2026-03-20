@@ -5,6 +5,7 @@
 
 
 @use 'components/nav.preload';
+@use 'components/header.preload';
 @use 'components/carousel.config';
 @use 'components/multi-step-modal.global';
 
@@ -21,7 +22,7 @@
 @use 'components/calendar.config';
 
 @layer components {
-  // Make sure the first
+  /*  Make sure the first */
   main {
     position: relative;
 
@@ -30,19 +31,7 @@
     }
   }
 
-  // #region Undefined web components
-
-  iam-header {
-    grid-column: container;
-  }
-
-  @media screen and (min-width: 62em) {
-    iam-header:not(:defined) {
-      min-height: 29.375rem;
-    }
-  }
-
-  // #region Cards
+  /* #region Cards */
   .card:not(:defined) {
     box-shadow: var(--card-box-shadow);
     border-radius: var(--card-border-radius);
@@ -105,9 +94,9 @@
     --icon: var(--icon-new-tab);
   }
 
-  // #endregion
+  /* #endregion */
 
-  // Search
+  /*  Search */
   iam-search input:not(.is-invalid):not(:invalid) {
     background: none !important;
   }
@@ -116,7 +105,7 @@
     display: none !important;
   }
 
-  // Table dark mode support
+  /*  Table dark mode support */
   iam-table {
     tbody tr {
       @container style(--theme: dark) {

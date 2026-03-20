@@ -1,8 +1,6 @@
-@use '../_func' as *;
-
 @layer elements {
   
-  // #region Dropdown
+  /* #region Dropdown */
   .dropdown {
     position: absolute;
     top: calc(100% + 0.5rem);
@@ -20,9 +18,9 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
   
-  // #region Needed for the component files
+  /* #region Needed for the component files */
   :is(iam-tag,iam-multiselect):has(label:not([slot='checked'])) {
     --display-panel: block;
   }
@@ -41,9 +39,9 @@
       color: var(--colour-heading);
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Indivitual options
+  /* #region Indivitual options */
   .dropdown__option[slot='checked'] {
     order: var(--order, 1);
   }
@@ -83,5 +81,5 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 }

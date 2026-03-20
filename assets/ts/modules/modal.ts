@@ -1,6 +1,7 @@
-export const openModal = (id, modal): void => {
+export const openModal = (modal): void => {
 
   const dialog = modal.shadowRoot?.querySelector('dialog');
+  const id = modal.hasAttribute('id') ? modal.getAttribute('id') : 'unknown';
 
   dialog?.showModal();
   dialog?.focus();
@@ -20,9 +21,10 @@ export const openModal = (id, modal): void => {
   });
 }
 
-export const closeModal = (id, modal): void => {
+export const closeModal = (modal): void => {
 
   const dialog = modal.shadowRoot?.querySelector('dialog');
+  const id = modal.hasAttribute('id') ? modal.getAttribute('id') : 'unknown';
 
   dialog?.close();
   

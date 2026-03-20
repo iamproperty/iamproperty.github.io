@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
-// #region default carousel
+/* #region default carousel */
 
 :host {
   display: block;
@@ -167,23 +167,23 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Remove the scrollbar
+/* #region Remove the scrollbar */
 .carousel__inner {
-  // FireFox
+  /*  FireFox */
   scrollbar-width: none;
-  // IE10+
+  /*  IE10+ */
   -ms-overflow-style: none;
 }
 
 .carousel__inner::-webkit-scrollbar {
-  // Chrome, Safari, Edge
+  /*  Chrome, Safari, Edge */
   display: none;
 }
-// #endregion
+/* #endregion */
 
-// #region Direction button
+/* #region Direction button */
 
 .carousel__btns {
   text-align: center;
@@ -238,9 +238,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region carousel controls/pips
+/* #region carousel controls/pips */
 .carousel .carousel__controls {
   overflow: hidden;
   margin-inline: auto;
@@ -298,9 +298,9 @@
     background: var(--colour-info);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region progress bar
+/* #region progress bar */
 .carousel__progress {
   text-align: center;
   margin-bottom: 1rem;
@@ -326,7 +326,7 @@ input[type='range'] {
   appearance: none;
 }
 
-// Track Styles
+/*  Track Styles */
 input[type='range']::-webkit-slider-runnable-track {
   background: var(--track-colour);
   height: var(--track-size);
@@ -339,7 +339,7 @@ input[type='range']::-moz-range-track {
   border-radius: 0.5625rem; /* 9 */
 }
 
-// Extended track functionality
+/*  Extended track functionality */
 input[type='range']::-webkit-slider-runnable-track {
   background: linear-gradient(
     to right,
@@ -362,7 +362,7 @@ input[type='range']::-moz-range-track {
   );
 }
 
-// Thumb Styles
+/*  Thumb Styles */
 input[type='range']::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
   appearance: none;
@@ -387,7 +387,7 @@ input[type='range']::-moz-range-thumb {
   pointer-events: all;
 }
 
-// Focus Styles
+/*  Focus Styles */
 input[type='range']:focus {
   outline: none;
 }
@@ -409,9 +409,9 @@ input[type='range']:focus::-moz-range-thumb {
   outline: var(--thumb-size-outline) solid var(--thumb-colour);
 }
 
-// #endregion
+/* #endregion */
 
-// #region Hide buttons and pips
+/* #region Hide buttons and pips */
 .carousel__btns:has(~ .carousel__controls button:first-child:nth-child(1):last-child) {
   display: none;
 }
@@ -430,7 +430,7 @@ input[type='range']:focus::-moz-range-thumb {
     display: none;
   }
 
-  // Make sure that we dont just have one pip showing
+  /*  Make sure that we dont just have one pip showing */
   :host([data-smcols='2']) .carousel__controls:has(button:first-child:nth-last-child(2)),
   :host([data-smcols='3'])
     .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))),
@@ -451,7 +451,7 @@ input[type='range']:focus::-moz-range-thumb {
     display: none;
   }
 
-  // Show slider
+  /*  Show slider */
   :host([data-smcols]) .carousel__controls {
     display: block;
   }
@@ -489,7 +489,7 @@ input[type='range']:focus::-moz-range-thumb {
     display: none !important;
   }
 
-  // Make sure that we dont just have one pip showing
+  /*  Make sure that we dont just have one pip showing */
   :host([data-mdcols='2']) .carousel__controls:has(button:first-child:nth-last-child(2)),
   :host([data-mdcols='3'])
     .carousel__controls:has(:is(button:first-child:nth-last-child(2), button:first-child:nth-last-child(3))),
@@ -540,7 +540,7 @@ input[type='range']:focus::-moz-range-thumb {
     display: none !important;
   }
 
-  // Show slider
+  /*  Show slider */
   :host([data-mdcols]) .carousel__controls {
     display: block !important;
   }
@@ -569,9 +569,9 @@ input[type='range']:focus::-moz-range-thumb {
 :host(.hide-controls) .carousel__controls {
   display: none;
 }
-// #endregion
+/* #endregion */
 
-// #region thumbnails
+/* #region thumbnails */
 :host(.thumbnails) .carousel__controls {
   display: flex !important;
   flex-wrap: wrap;
@@ -620,12 +620,12 @@ input[type='range']:focus::-moz-range-thumb {
     display: none !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Turn carousel slide into image holder
+/* #region Turn carousel slide into image holder */
 ::slotted(div.image__wrapper) {
   width: 100%;
   aspect-ratio: var(--carousel-image-aspect-ratio, 3 / 2);
   position: relative;
 }
-// #endregion
+/* #endregion */

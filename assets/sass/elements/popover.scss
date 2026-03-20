@@ -6,7 +6,7 @@
 
 
 @layer elements {
-  // #region popover styling
+  /* #region popover styling */
   .dialog__wrapper {
     position: relative;
     display: inline-block;
@@ -22,12 +22,12 @@
       transition:
         background 0.1s,
         color 0.1s;
-      //color: var(--colour-btn);
+      /* color: var(--colour-btn); */
       border-radius: 1.5rem;
     }
 
     > .btn:first-child {
-      //margin-bottom: 0.25rem;
+      /* margin-bottom: 0.25rem; */
 
       &:not(.btn-compact):not([class*='fa-']):after {
         content: '';
@@ -69,9 +69,9 @@
 
       position-try-fallbacks: flip-block, flip-inline !important;
 
-      //right: auto;
+      /* right: auto; */
       margin: 0 0 0 0.25rem;
-      //padding: 1rem;
+      /* padding: 1rem; */
       padding: 1.5rem;
 
       &::backdrop {
@@ -237,7 +237,7 @@
     }
   }
 
-  // Show hide the indidual or multiple label
+  /*  Show hide the indidual or multiple label */
   .dialog__wrapper :is(.empty, .individual) {
     display: none;
   }
@@ -254,6 +254,6 @@
   .dialog__wrapper:not(:has(input:checked ~ input:checked)) .multiple {
     display: none;
   }
-  // #endregion
+  /* #endregion */
 }
 

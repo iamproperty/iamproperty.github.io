@@ -1,20 +1,11 @@
-@use 'sass:map';
-@use 'sass:math';
-
-@use '../_func' as *;
-
-
 @layer elements {
 
-
   textarea {
-
     --textarea-height-scale: 3;
 
-    margin: 0; // 1
+    margin: 0; /*  1 */
     font-family: inherit;
-  
-    resize: vertical; // 1
+    resize: vertical; /*  1 */
     display: block;
     width: 100%;
     display: block;
@@ -26,12 +17,11 @@
     background-color: var(--colour-canvas-2);
     background-clip: padding-box;
     border: 2px solid var(--colour-primary);
-    appearance: none; // Fix appearance for date inputs in Safari
+    appearance: none; /*  Fix appearance for date inputs in Safari */
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     max-height: 100%;
 
-    
     &:not([rows]){
       
       min-height: calc(
@@ -57,7 +47,7 @@
       ) !important;
     }
 
-    // Customize the `:focus` state to imitate native WebKit styles.
+    /*  Customize the `:focus` state to imitate native WebKit styles. */
     &:is(:focus, .focus):not(:disabled) {
       border-color: var(--colour-info);
       outline: 0;
@@ -67,8 +57,7 @@
       box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
     }
     
-
-    // Disabled inputs
+    /*  Disabled inputs */
     &:disabled {
       background-color: #ccd6d8;
       opacity: 0.4;
@@ -93,5 +82,4 @@
       margin-bottom: 0 !important;
     }
   }
-
 }

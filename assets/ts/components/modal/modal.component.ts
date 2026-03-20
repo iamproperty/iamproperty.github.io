@@ -62,14 +62,14 @@ class iamModal extends HTMLElement {
     document.addEventListener('click', (e) => {
       
       if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
-        openModal(id, this);
+        openModal(this);
       }
     });
 
     document.addEventListener('click', (e) => {
       
       if(e.target.matches(`[command="close"][commandfor="${id}"]`)){
-        closeModal(id, this);
+        closeModal(this);
       }
     });
     

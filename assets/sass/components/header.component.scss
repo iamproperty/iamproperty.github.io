@@ -3,7 +3,7 @@
 @use '../elements/admin-panel' as *;
 
 *, *::before, *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .container {
@@ -14,23 +14,21 @@
 
 :host {
   padding-top: 0 !important;
-  margin-bottom: 2rem;
   display: block !important;
+
+  .container {
+    padding-bottom: var(--padding-bottom)!important;
+  }
 }
 
 .header-banner {
-  padding-top: 2.75rem; /* 44*/
+  padding-top: var(--padding-top);
   max-width: 120rem; /* 1920 */
-  //min-height: 25rem; /* 400 */
   margin-inline: auto;
   display: block;
 
   position: relative;
   height: auto;
-
-  @media screen and (min-width: 62em) {
-    //padding-top: 5.25rem; /* 84 */
-  }
 
   > .picture-overflow {
     overflow: hidden;
@@ -84,7 +82,7 @@
   }
 }
 
-// Web component CSS
+/*  Web component CSS */
 ::slotted(.breadcrumb) {
   margin-top: 1.5rem !important;
   margin-bottom: -0.5rem !important;
@@ -96,12 +94,7 @@
   }
 }
 
-::slotted(*:not(.btn__group):last-child) {
-  //padding-bottom: 0 !important;
-  //margin-bottom: 0 !important;
-}
-
-// #region Breadcrumbs
+/* #region Breadcrumbs */
 :host(.has-breadcrumbs) {
 
   .header-banner {
@@ -112,9 +105,9 @@
     margin-bottom: 2rem!important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region badge
+/* #region badge */
 
 slot[name="badge"] {
   display: block;
@@ -122,9 +115,9 @@ slot[name="badge"] {
   top: 0;
   left: 0;
 }
-// #endregion
+/* #endregion */
 
-// #region panel 
+/* #region panel  */
 :host(.has-panel) [name="panel"]{
 
   display: block;
@@ -194,13 +187,14 @@ slot[name="badge"] {
     text-align: center;
   }
 }
-// #endregion
+/* #endregion */
 
 
-// #region toolbox 
+/* #region toolbox  */
 :host(.has-toolbox) {
 
-  margin-bottom: 4rem;
+  --padding-bottom: 1rem!important;
+  margin-bottom: 4rem!important;
 }
 :host(.has-toolbox) [name="toolbox"]{
 
@@ -210,7 +204,6 @@ slot[name="badge"] {
   margin-bottom: -3rem;
   width: fit-content;
   margin-inline: auto;
-
   gap: 0.5rem;
 }
 
@@ -236,9 +229,9 @@ slot[name="badge"] {
   height: 2.5rem !important;
 }
 
-// #endregion
+/* #endregion */
 
-// #region gradient background
+/* #region gradient background */
 .gradient-overflow {
   overflow: hidden;
   position: absolute;
@@ -253,4 +246,4 @@ slot[name="badge"] {
   width: 54rem; /* 874px */
   aspect-ratio: 1 / 1;
 }
-// #endregion
+/* #endregion */

@@ -14,7 +14,7 @@
   font-size: 1.125rem; /* 18/16 */
   line-height: 1.5rem;
   color: var(--colour-primary);
-  //min-height: calc(100% - 2rem);
+  /* min-height: calc(100% - 2rem); */
   width: 100%;
   text-align: left;
   display: flex;
@@ -61,10 +61,10 @@
 }
 
 .card__body {
-  //position: relative;
+  /* position: relative; */
   padding: var(--card-head-top-padding) var(--card-right-padding) var(--card-head-bottom-padding)
     var(--card-left-padding);
-  //z-index: -1;
+  /* z-index: -1; */
 }
 
 .card__footer {
@@ -104,7 +104,7 @@
   margin-bottom: var(--card-footer-bottom-padding) !important;
 }
 
-// #region Show total number
+/* #region Show total number */
 .card__body:has(.card__total) {
   --card-head-top-padding: 1rem;
   --card-head-bottom-padding: 1.5rem;
@@ -133,9 +133,9 @@
   line-height: 2.5rem;
 }
 
-// #endregion
+/* #endregion */
 
-// #region badges
+/* #region badges */
 .card__head:has(img) ~ .card__badges {
   position: absolute;
   top: 0;
@@ -148,4 +148,7 @@
   padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) 0 var(--card-left-padding);
   margin-bottom: -1.5rem;
 }
-// #endregion
+.card__head:not(:has(img)) ~ .card__badges {
+  text-align: end;
+}
+/* #endregion */

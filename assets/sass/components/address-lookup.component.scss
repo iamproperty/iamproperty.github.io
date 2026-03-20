@@ -43,7 +43,7 @@
 }
 
 :host([data-required]) {
- // --error-border: var(--colour-danger);
+ /*  --error-border: var(--colour-danger); */
 }
 
 input[name='postcode'] {
@@ -103,14 +103,14 @@ input[name='postcode'] {
   }
 }
 
-// change the datalist
+/*  change the datalist */
 
 .postcode-lookup > div {
   position: relative;
 }
 
 .postcode-lookup input:not(.is-invalid) {
-  //background-image: none!important;
+  /* background-image: none!important; */
 }
 
 .postcode-lookup:has(input.is-invalid) .invalid-feedback:not(:empty) {
@@ -141,7 +141,7 @@ input[name='postcode'] {
 }
 
 
-// #region Matched address
+/* #region Matched address */
 .matched .inner {
   border: 2px solid var(--colour-danger);
   background: #fcebec;
@@ -158,4 +158,4 @@ input[name='postcode'] {
 
   --colour-underline: currentColor;
 }
-// #endregion
+/* #endregion */

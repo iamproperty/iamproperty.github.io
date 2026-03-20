@@ -34,7 +34,7 @@
   border: 0 !important;
 }
 
-// #region FA icons
+/* #region FA icons */
 .fa-regular,
 .far {
   font-weight: 400;
@@ -85,9 +85,9 @@
 .fa-clock {
   --fa: '\f017';
 }
-// #endregion
+/* #endregion */
 
-// #region controls
+/* #region controls */
 
 #view[data-views] option {
   display: none;
@@ -186,7 +186,7 @@ div:has(> select) #view {
   display: inline-block;
   position: relative;
   margin-bottom: 0.5625rem; /* 9 */
-  //margin-right: auto;
+  /* margin-right: auto; */
 
   input {
     position: absolute;
@@ -317,9 +317,9 @@ hr {
     margin-left: 0.5rem;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region settings
+/* #region settings */
 
 #workday {
   display: flex;
@@ -344,9 +344,9 @@ hr {
   text-align: center;
 }
 
-// #endregion
+/* #endregion */
 
-// To do setup CSS vars
+/*  To do setup CSS vars */
 :host {
   --columnHeadingFontSide: 0.875rem; /* 14/16 */
   --columnHeadingLineHeight: 1.5rem;
@@ -400,7 +400,7 @@ time.column-header {
   display: inline-block;
 }
 
-// #region month view
+/* #region month view */
 .calendar__controls:has(select :is(option[value='month'], option[value='year']):checked)
   ~ .calendar__wrapper
   :is(#calendar, .month-wrapper) {
@@ -449,7 +449,7 @@ time.column-header {
     overflow-x: visible;
     overflow-y: clip;
     aspect-ratio: unset;
-    //padding-top: 100%;
+    /* padding-top: 100%; */
     position: relative;
   }
 
@@ -555,7 +555,7 @@ time.column-header {
     height: 50rem;
 
     > tbody > tr > td {
-      //pointer-events: none;
+      /* pointer-events: none; */
       overflow: visible;
     }
 
@@ -653,9 +653,9 @@ time.column-header {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region week view
+/* #region week view */
 
 .calendar__controls:has(select option[value='week']:checked) ~ .calendar__wrapper {
   #week-view-header {
@@ -673,7 +673,7 @@ time.column-header {
       background-color: white;
     }
 
-    // Only show the all day row
+    /*  Only show the all day row */
     .table--day > tbody > tr:not(.allday) {
       display: none;
     }
@@ -730,7 +730,7 @@ time.column-header {
         line-height: calc(var(--columnHeadingLineHeight) - 1px) !important;
         background-color: var(--colour-canvas);
         border: 1px solid var(--colour-border);
-        //border-right: 0;
+        /* border-right: 0; */
         text-indent: -300%;
         overflow: hidden;
       }
@@ -857,7 +857,7 @@ time.column-header {
       table-layout: fixed;
     }
 
-    // Only show the selected week
+    /*  Only show the selected week */
     > table > thead,
     > table > tbody > tr:not(:has(.selected)) {
       display: none !important;
@@ -889,7 +889,7 @@ time.column-header {
       td:has(slot) {
         font-size: var(--columnHeadingFontSide);
         color: var(--colour-heading);
-        //white-space: nowrap;
+        /* white-space: nowrap; */
         padding-inline: 0.25rem;
         height: var(--alldayHeight) !important;
         line-height: var(--alldayHeight) !important;
@@ -945,9 +945,9 @@ time.column-header {
     background: rgba(245, 245, 245, 1);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Day view
+/* #region Day view */
 .calendar__controls:has(select option[value='day']:checked) ~ .calendar__wrapper {
   #week-view-corner {
     thead {
@@ -1000,7 +1000,7 @@ time.column-header {
       max-width: 100%;
       table-layout: fixed;
 
-      //border-collapse: separate;
+      /* border-collapse: separate; */
       border-collapse: separate;
       border-spacing: 0;
 
@@ -1063,9 +1063,9 @@ time.column-header {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Current time indicator
+/* #region Current time indicator */
 .calendar__controls:has(select :is(option[value='day'], option[value='week']):checked) ~ .calendar__wrapper {
   position: relative;
 
@@ -1075,7 +1075,7 @@ time.column-header {
 
   [data-hour][data-time] {
     position: relative;
-    //overflow: hidden;
+    /* overflow: hidden; */
     color: var(--colour-canvas);
   }
 
@@ -1118,9 +1118,9 @@ time.column-header {
     z-index: 98;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region List view
+/* #region List view */
 
 .calendar__controls:has(select option[value='list']:checked) ~ .calendar__wrapper #calendar > table,
 .calendar__controls:has(select option[value='month']:checked) ~ #split.calendar > table {
@@ -1186,9 +1186,9 @@ time.column-header {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Year view
+/* #region Year view */
 
 .calendar__controls:has(select option[value='year']:checked) ~ .calendar__wrapper #calendar {
   display: none;
@@ -1199,7 +1199,7 @@ time.column-header {
 .calendar__controls:has(select option[value='year']:checked) ~ .calendar__wrapper #year-view {
   display: grid !important;
   grid-template-columns: 1fr 1fr;
-  //grid-template-rows: 1fr;
+  /* grid-template-rows: 1fr; */
   gap: 1rem;
   margin-bottom: 2rem;
 
@@ -1232,9 +1232,9 @@ time.column-header {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region hide weekends
+/* #region hide weekends */
 
 :host([data-hide-weekends])
   .calendar__controls:has(select option[value='month']:checked)
@@ -1253,9 +1253,9 @@ time.column-header {
     display: none;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region scrollbars
+/* #region scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -1269,4 +1269,4 @@ time.column-header {
   background-color: #c1c1c1;
   width: 6px;
 }
-//#endregion
+/* #endregion */

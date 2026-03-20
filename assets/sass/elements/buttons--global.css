@@ -1,39 +1,30 @@
 @layer elements {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
 
-  // #region reset
+  /* #region reset */
   button {
-    
     border-radius: 0;
     text-transform: none;
-    margin: 0; // 1
+    margin: 0;
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
   }
 
-  [role='button'] {
-    cursor: pointer;
-  }
   button:focus:not(:focus-visible) {
     outline: 0;
   }
 
-  :is(button,[type="button"],[type="reset"],[type="submit"]) {
-    -webkit-appearance: button; // 2
+  :is(button,[type="button"],[type="reset"],[type="submit"],[role='button']) {
+    -webkit-appearance: button;
 
     &:not(:disabled) {
-      cursor: pointer; // 3
+      cursor: pointer;
     }
   }
-  // #endregion
+  /* #endregion */
 
 
-  // #region button primary
+  /* #region button primary */
   .btn {
     --btn-margin: 1rem;
     --btn-padding-block: 0.75rem;
@@ -89,85 +80,89 @@
     &:not(:last-child) {
       margin-right: var(--btn-margin);
     }
-
-    a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) &,
-    &:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
-      outline: 0;
-      text-decoration: none;
-
-      background: var(--colour-btn-bg-hover);
-      color: var(--colour-btn-hover);
-      border-radius: 1.5rem;
-    }
-
-    a:is(:active, .active):not([disabled]) &,
-    &:is(:active, .active):not([disabled]) {
-      filter: brightness(85%);
-      transition:
-        background 0.1s,
-        color 0.1s;
-      color: var(--colour-btn);
-      border-radius: 1.5rem;
-    }
-
-    a:disabled &,
-    &:disabled,
-    [disabled] &,
-    &[disabled] {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
   }
-  // #endregion
 
-  // #region btn with colour success
-  .btn.colour-success {
+  a:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) .btn,
+  .btn:is(:hover, :focus, .hover, :focus-within):not([disabled], :active, .active) {
+    outline: 0;
+    text-decoration: none;
+
+    background: var(--colour-btn-bg-hover);
+    color: var(--colour-btn-hover);
+    border-radius: 1.5rem;
+  }
+
+  a:is(:active, .active):not([disabled]) .btn,
+  .btn:is(:active, .active):not([disabled]) {
+    filter: brightness(85%);
+    transition:
+      background 0.1s,
+      color 0.1s;
+    color: var(--colour-btn);
+    border-radius: 1.5rem;
+  }
+
+  a:disabled .btn,
+  .btn:disabled,
+  [disabled] .btn,
+  .btn[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  /* #endregion */
+
+  /* #region btn with colour success */
+  .btn.btn-complete {
+    --colour: var(--colour-success);
     --colour-btn-bg-hover: var(--colour);
     --colour-btn-border-hover: var(--colour);
     --colour-btn-hover: var(--colour-primary-theme);
+    --colour-btn-bg: var(--colour);
+    --colour-btn-border: var(--colour);
+
     position: relative;
     padding-left: 3.5rem; /*56 */
     padding-right: 3.5rem; /*56 */
+  }
 
-    a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
-    &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
-      padding-left: 2.5rem;
-      padding-right: 2.5rem;
+  a:is(:hover, :focus, .hover):not([disabled], :active, .active) .btn.btn-complete,
+  .btn.btn-complete:is(:hover, :focus, .hover):not([disabled], :active, .active) {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
 
-      &:before {
-        content: '\f00c';
-        font-family: 'Font Awesome 7 Pro';
-        margin-right: 1rem;
-        font-style: inherit;
-        width: 1rem;
-        display: inline-block;
-        height: var(--btn-line-height);
-        vertical-align: bottom;
-      }
+    &:before {
+      content: '\f00c';
+      font-family: 'Font Awesome 7 Pro';
+      margin-right: 1rem;
+      font-style: inherit;
+      width: 1rem;
+      display: inline-block;
+      height: var(--btn-line-height);
+      vertical-align: bottom;
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region button small and tag
+  /* #region button small and tag */
   .btn.btn-sm {
     --btn-padding-block: 0.5rem;
     --btn-padding-inline: 2rem;
     --btn-margin: 0.5rem;
     --btn-font-size: 1rem;
   }
-  // #endregion
+  /* #endregion */
 
-  // #region button with icon
+  /* #region button with icon */
   .btn {
     &[class*='fa-']:before {
       content: var(--fa);
       font-family: 'Font Awesome 7 Pro';
     }
 
-    &.btn[class*='fa-after'] {
+    &[class*='fa-after'] {
       padding-right: 4rem;
     }
-    &.btn[class*='fa-after']:before {
+    &[class*='fa-after']:before {
       margin-right: 0;
       margin-right: 0.375rem; /* 6 */
       position: absolute;
@@ -193,10 +188,9 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 
-
-  // #region button with prompt
+  /* #region button with prompt */
   .btn.btn--prompt {
     &:after {
       content: '';
@@ -215,19 +209,18 @@
       vertical-align: bottom;
       margin-left: 1rem;
     }
-
-    a:is(:hover, :focus, .hover):not([disabled], :active, .active) &,
-    &:is(:hover, :focus, .hover):not([disabled], :active, .active) {
-      &:after {
-        margin-left: 1.5rem;
-        margin-right: -0.5rem;
-      }
+  }
+    
+  a:is(:hover, :focus, .hover):not([disabled], :active, .active) .btn.btn--prompt,
+  .btn.btn--prompt:is(:hover, :focus, .hover):not([disabled], :active, .active) {
+    &:after {
+      margin-left: 1.5rem;
+      margin-right: -0.5rem;
     }
   }
-  // #endregion
+  /* #endregion */
 
-  
-  // #region button that opens up a filter dialog
+  /* #region button that opens up a filter dialog */
   .btn-filter {
     &:after {
       content: '\f1de';
@@ -242,5 +235,5 @@
       font-family: 'Font Awesome 7 Pro';
     }
   }
-  // #endregion
+  /* #endregion */
 }

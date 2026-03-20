@@ -80,20 +80,20 @@
         <span class="badge mb-0">Ai insight <i class="fa-regular fa-sparkle"></i></span>
       </div>
       
-      
+      <Tabs class="tabs--md-hidden">
 
-      <Tabs class="tabs--toggle">
-
-        <details>
+        <details id="titleid1" name="insights" class="pt-0">
           <summary>Title ID 1</summary>
-            <Actionbar>
+          <Actionbar>
 
-              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked>Title ID 1</label>
-              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2">Title ID 2</label>
+            <!-- we have to duplicate the tab links in each tab and connect them up using the command and commandfo attributes -->
+            <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked command="show-tab" commandfor="titleid1">Title ID 1</label>
+            <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2" command="show-tab" commandfor="titleid2">Title ID 2</label>
 
-              <a href="/" class="btn btn-action fa-cart">Order another title  register</a>
-              <a href="/" class="btn btn-action fa-cart">Download title register</a>
-            </Actionbar>
+            <!-- Add the class of icon-only to the below links/buttons when there is 4 or more items in the tabs -->
+            <a href="/" class="btn btn-action fa-cart-shopping icon-only">Order another title  register</a>
+            <a href="/" class="btn btn-action fa-download icon-only">Download title register</a>
+          </Actionbar>
           <Table class="md-md">
 
             <table>
@@ -122,13 +122,13 @@
           </Table>
 
         </details>
-        <details>
+        <details id="titleid2" name="insights" class="pt-0">
           <summary>Title ID 2</summary>
           
             <Actionbar>
 
-              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked>Title ID 1</label>
-              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2">Title ID 2</label>
+              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="1" checked command="show-tab" commandfor="titleid1">Title ID 1</label>
+              <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="2" command="show-tab" commandfor="titleid2">Title ID 2</label>
 
               <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
               <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
@@ -138,7 +138,7 @@
             <table>
               <thead>
                 <tr>
-                  <th class="th--sm">Category</th>
+                  <th class="th--sm">Category 2</th>
                   <th>Description</th>
                   <th>Agent actions</th>
                 </tr>
@@ -163,8 +163,160 @@
         </details>
       </Tabs>
 
-      
+    </div>
 
+    <div class="admin-panel">
+      <div class="admin-panel__heading bg-primary gradient-info mb-0">
+        <h2>Title insight</h2>
+        <span class="badge mb-0">Ai insight <i class="fa-regular fa-sparkle"></i></span>
+      </div>
+      
+      <Tabs class="tabs--md-hidden">
+
+        <details id="titleid3" name="insights2" class="pt-0">
+          <summary>Title ID 1</summary>
+          <Actionbar>
+
+            <a href="/" class="btn btn-action"><i class="fa-regular fa-cart-shopping"></i>Order another title  register</a>
+            <a href="/" class="btn btn-action"><i class="fa-regular fa-download"></i>Download title register</a>
+          </Actionbar>
+          <Table class="md-md">
+
+            <table>
+              <thead>
+                <tr>
+                  <th class="th--sm">Category</th>
+                  <th>Description</th>
+                  <th>Agent actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-0 no-hover">
+                  <th class="text-nowrap">Class of title</th>
+                  <td>
+                    Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
+                  </td>
+                  <td>
+                    <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
+                  </td>
+                  <td>
+                    <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Table>
+
+        </details>
+        <details id="titleid4" name="insights2" class="pt-0">
+          <summary>Title ID 2</summary>
+          
+            <Actionbar>
+
+              <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
+              <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
+            </Actionbar>
+          <Table class="md-md">
+
+            <table>
+              <thead>
+                <tr>
+                  <th class="th--sm">Category 2</th>
+                  <th>Description</th>
+                  <th>Agent actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-0 no-hover">
+                  <th class="text-nowrap">Class of title</th>
+                  <td>
+                    Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
+                  </td>
+                  <td>
+                    <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
+                  </td>
+                  <td>
+                    <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Table>
+
+        </details>
+        <details id="titleid5" name="insights2" class="pt-0">
+          <summary>Title ID 2</summary>
+          
+            <Actionbar>
+
+              <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
+              <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
+            </Actionbar>
+          <Table class="md-md">
+
+            <table>
+              <thead>
+                <tr>
+                  <th class="th--sm">Category 2</th>
+                  <th>Description</th>
+                  <th>Agent actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-0 no-hover">
+                  <th class="text-nowrap">Class of title</th>
+                  <td>
+                    Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
+                  </td>
+                  <td>
+                    <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
+                  </td>
+                  <td>
+                    <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Table>
+
+        </details>
+        <details id="titleid6" name="insights2" class="pt-0">
+          <summary>Title ID 2</summary>
+          
+            <Actionbar>
+
+              <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
+              <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
+            </Actionbar>
+          <Table class="md-md">
+
+            <table>
+              <thead>
+                <tr>
+                  <th class="th--sm">Category 2</th>
+                  <th>Description</th>
+                  <th>Agent actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-0 no-hover">
+                  <th class="text-nowrap">Class of title</th>
+                  <td>
+                    Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
+                  </td>
+                  <td>
+                    <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
+                  </td>
+                  <td>
+                    <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </Table>
+
+        </details>
+      </Tabs>
 
     </div>
 

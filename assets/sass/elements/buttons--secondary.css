@@ -1,11 +1,5 @@
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
-  // #region secondary button
+  /* #region secondary button */
   .btn-secondary {
     color: var(--colour-btn-secondary);
 
@@ -20,5 +14,5 @@
     background: var(--colour-btn-secondary-bg-hover);
     color: var(--colour-btn-secondary-hover);
   }
-  // #endregion
+  /* #endregion */
 }

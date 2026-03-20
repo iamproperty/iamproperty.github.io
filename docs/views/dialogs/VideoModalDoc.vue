@@ -16,9 +16,12 @@
     <a href="https://www.youtube.com/watch?v=lROFZaJcVug" class="text-decoration-none youtube-link d-block" command="show-modal" commandfor="video"> <!-- TODO: move youtube-link class so it gets added via js-->
       <span class="ratio ratio-16x9"><img src="/img/thumbnail.png" alt=""></span>
     </a>
-    <VideoModal id="video" data-youtube="lROFZaJcVug">
-      
-    </VideoModal>
+    <VideoModal id="video" data-youtube="lROFZaJcVug"></VideoModal>
+
+    <a href="https://www.youtube.com/watch?v=lROFZaJcVug" class="text-decoration-none youtube-link d-block" command="show-modal" commandfor="video"> <!-- TODO: move youtube-link class so it gets added via js-->
+      <span class="ratio ratio-16x9"><img src="/img/thumbnail.png" alt=""></span>
+    </a>
+    <VideoModal id="video2" data-vimedo="1028915961"></VideoModal>
     
 
   </main>

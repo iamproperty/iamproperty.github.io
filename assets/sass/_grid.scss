@@ -11,7 +11,7 @@ $breakpoints: (
   /* 576 */ md: 62em /* 992 */,
 );
 
-// #region grid mixins
+/* #region grid mixins */
 @mixin grid-utilities($br: '') {
   .#{$br}inline-start {
     justify-self: start;
@@ -54,7 +54,7 @@ $breakpoints: (
   }
 
   .#{$br}flow-dense {
-    // Apply to a wrapper div of the items
+    /*  Apply to a wrapper div of the items */
     grid-auto-flow: dense;
   }
 
@@ -107,24 +107,24 @@ $breakpoints: (
 }
 
 @mixin grid-rows($br: '') {
-  // Assign how many rows an item takes
+  /*  Assign how many rows an item takes */
   @for $i from 0 to $grid-utility-count {
     .#{$br}row-span-#{$i + 1} {
       --row-span: #{$i + 1};
     }
   }
 
-  // Move the item to a set row
+  /*  Move the item to a set row */
   @for $i from 0 to $rows-per-page {
     .#{$br}row-start-#{$i + 1} {
       --row-start: #{$i + 1};
     }
   }
 }
-// #endregion
+/* #endregion */
 
 @layer reset {
-  // #region Main grid setup
+  /* #region Main grid setup */
   body {
     --excess-space: calc((100% - var(--max-width)) / 2);
     --col-size: calc(
@@ -199,9 +199,9 @@ $breakpoints: (
     grid-column: full-width;
     grid-template-columns: subgrid;
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Grid utility classes
+  /* #region Grid utility classes */
   .grid {
     display: grid !important;
     grid-template-columns: subgrid !important;
@@ -234,9 +234,9 @@ $breakpoints: (
   @media screen and (min-width: 62em) {
     @include grid-utilities(#{'md-'});
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Create the columns
+  /* #region Create the columns */
   :is([class*='col-start-'], [class*='col-end-'], [class*='col-span-']) {
     grid-column: var(--col-start, col-1-start) / var(--col-end, col-#{$columns}-end);
   }
@@ -267,9 +267,9 @@ $breakpoints: (
   @media screen and (min-width: 62em) {
     @include grid-columns(#{'md-'});
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Create rows
+  /* #region Create rows */
   :where([class*='row-'], [class*='rows-']) {
     grid-row: var(--row-start, auto) / span var(--row-span, 1);
   }
@@ -281,9 +281,9 @@ $breakpoints: (
   @media screen and (min-width: 62em) {
     @include grid-rows(#{'md-'});
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Create the Columns wrappers
+  /* #region Create the Columns wrappers */
   [class*='cols-']:not(.row) {
     display: grid;
     grid-template-columns: subgrid;
@@ -316,5 +316,5 @@ $breakpoints: (
     }
   }
 
-  // #endregion
+  /* #endregion */
 }

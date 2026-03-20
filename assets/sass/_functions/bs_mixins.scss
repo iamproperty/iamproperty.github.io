@@ -7,12 +7,12 @@
 @use 'bs_variables' as *;
 @use 'bs_functions' as *;
 
-// Utility generator
-// Used to generate utilities & print utilities
+/*  Utility generator */
+/*  Used to generate utilities & print utilities */
 @mixin generate-utility($utility, $infix, $is-rfs-media-query: false) {
   $values: map.get($utility, values);
 
-  // If the values are a list or string, convert it into a map
+  /*  If the values are a list or string, convert it into a map */
   @if meta.type-of($values) == 'string' or meta.type-of(list.nth($values, 1)) != 'list' {
     $values: list.zip($values, $values);
   }
@@ -20,36 +20,36 @@
   @each $key, $value in $values {
     $properties: map.get($utility, property);
 
-    // Multiple properties are possible, for example with vertical or horizontal margins or paddings
+    /*  Multiple properties are possible, for example with vertical or horizontal margins or paddings */
     @if meta.type-of($properties) == 'string' {
       $properties: list.append((), $properties);
     }
 
-    // Use custom class if present
+    /*  Use custom class if present */
     $property-class: if(map.has-key($utility, class), map.get($utility, class), list.nth($properties, 1));
     $property-class: if($property-class == null, '', $property-class);
 
-    // Use custom CSS variable name if present, otherwise default to `class`
+    /*  Use custom CSS variable name if present, otherwise default to `class` */
     $css-variable-name: if(
       map.has-key($utility, css-variable-name),
       map.get($utility, css-variable-name),
       map.get($utility, class)
     );
 
-    // State params to generate pseudo-classes
+    /*  State params to generate pseudo-classes */
     $state: if(map.has-key($utility, state), map.get($utility, state), ());
 
     $infix: if($property-class == '' and string.slice($infix, 1, 1) == '-', string.slice($infix, 2), $infix);
 
-    // Don't prefix if value key is null (eg. with shadow class)
+    /*  Don't prefix if value key is null (eg. with shadow class) */
     $property-class-modifier: if($key, if($property-class == '' and $infix == '', '', '-') + $key, '');
 
     @if map.get($utility, rfs) {
-      // Inside the media query
+      /*  Inside the media query */
       @if $is-rfs-media-query {
         $val: rfs-value($value);
 
-        // Do not render anything if fluid and non fluid values are the same
+        /*  Do not render anything if fluid and non fluid values are the same */
         $value: if($val == rfs-fluid-value($value), null, $val);
       } @else {
         $value: rfs-fluid-value($value);
@@ -108,25 +108,25 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Boostrap Grid breakpoints
-// Breakpoint viewport sizes and media queries.
-//
-// Breakpoints are defined as a map of (name: minimum width), order from small to large:
-//
-//    (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)
-//
-// The map defined in the `$grid-breakpoints` global variable is used as the `$breakpoints` argument by default.
+/* #region Boostrap Grid breakpoints */
+/*  Breakpoint viewport sizes and media queries. */
+/*  */
+/*  Breakpoints are defined as a map of (name: minimum width), order from small to large: */
+/*  */
+/*     (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px) */
+/*  */
+/*  The map defined in the `$grid-breakpoints` global variable is used as the `$breakpoints` argument by default. */
 
-// Name of the next breakpoint, or null for the last breakpoint.
-//
-//    >> breakpoint-next(sm)
-//    md
-//    >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
-//    md
-//    >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl xxl))
-//    md
+/*  Name of the next breakpoint, or null for the last breakpoint. */
+/*  */
+/*     >> breakpoint-next(sm) */
+/*     md */
+/*     >> breakpoint-next(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)) */
+/*     md */
+/*     >> breakpoint-next(sm, $breakpoint-names: (xs sm md lg xl xxl)) */
+/*     md */
 @function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
   $n: index($breakpoint-names, $name);
   @if not $n {
@@ -135,43 +135,43 @@
   @return if($n < length($breakpoint-names), list.nth($breakpoint-names, $n + 1), null);
 }
 
-// Minimum breakpoint width. Null for the smallest (first) breakpoint.
-//
-//    >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
-//    576px
+/*  Minimum breakpoint width. Null for the smallest (first) breakpoint. */
+/*  */
+/*     >> breakpoint-min(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)) */
+/*     576px */
 @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
   $min: map.get($breakpoints, $name);
   @return if($min != 0, $min, null);
 }
 
-// Maximum breakpoint width.
-// The maximum value is reduced by 0.02px to work around the limitations of
-// `min-` and `max-` prefixes and viewports with fractional widths.
-// See https://www.w3.org/TR/mediaqueries-4/#mq-min-max
-// Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari.
-// See https://bugs.webkit.org/show_bug.cgi?id=178261
-//
-//    >> breakpoint-max(md, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
-//    767.98px
+/*  Maximum breakpoint width. */
+/*  The maximum value is reduced by 0.02px to work around the limitations of */
+/*  `min-` and `max-` prefixes and viewports with fractional widths. */
+/*  See https://www.w3.org/TR/mediaqueries-4/#mq-min-max */
+/*  Uses 0.02px rather than 0.01px to work around a current rounding bug in Safari. */
+/*  See https://bugs.webkit.org/show_bug.cgi?id=178261 */
+/*  */
+/*     >> breakpoint-max(md, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)) */
+/*     767.98px */
 /*
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
   $max: map.get($breakpoints, $name);
   @return if($max and $max > 0, $max - 0.02, null);
 }
 */
-// Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front.
-// Useful for making responsive utilities.
-//
-//    >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
-//    ""  (Returns a blank string)
-//    >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px))
-//    "-sm"
+/*  Returns a blank string if smallest breakpoint, otherwise returns the name with a dash in front. */
+/*  Useful for making responsive utilities. */
+/*  */
+/*     >> breakpoint-infix(xs, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)) */
+/*     ""  (Returns a blank string) */
+/*     >> breakpoint-infix(sm, (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)) */
+/*     "-sm" */
 @function breakpoint-infix($name, $breakpoints: $grid-breakpoints) {
   @return if(breakpoint-min($name, $breakpoints) == null, '', '-#{$name}');
 }
 
-// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
-// Makes the @content apply to the given breakpoint and narrower.
+/*  Media of at most the maximum breakpoint width. No query for the largest breakpoint. */
+/*  Makes the @content apply to the given breakpoint and narrower. */
 @mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
   $max: breakpoint-max($name, $breakpoints);
   @if $max {
@@ -183,8 +183,8 @@
   }
 }
 
-// Media that spans multiple breakpoint widths.
-// Makes the @content apply between the min and max breakpoints
+/*  Media that spans multiple breakpoint widths. */
+/*  Makes the @content apply between the min and max breakpoints */
 @mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($lower, $breakpoints);
   $max: breakpoint-max($upper, $breakpoints);
@@ -204,9 +204,9 @@
   }
 }
 
-// Media between the breakpoint's minimum and maximum widths.
-// No minimum for the smallest breakpoint, and no maximum for the largest one.
-// Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
+/*  Media between the breakpoint's minimum and maximum widths. */
+/*  No minimum for the smallest breakpoint, and no maximum for the largest one. */
+/*  Makes the @content apply only to the given breakpoint, not viewports any wider or narrower. */
 @mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
   $next: breakpoint-next($name, $breakpoints);
@@ -226,10 +226,10 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Bootstrap layout
-// scss-docs-start clearfix
+/* #region Bootstrap layout */
+/*  scss-docs-start clearfix */
 /*
 @mixin clearfix() {
   &::after {
@@ -239,36 +239,36 @@
   }
 }
   */
-// scss-docs-end clearfix
-// Container mixins
+/*  scss-docs-end clearfix */
+/*  Container mixins */
 
 
-// Grid system
-//
-// Generate semantic grid columns with these mixins.
+/*  Grid system */
+/*  */
+/*  Generate semantic grid columns with these mixins. */
 
 @mixin make-row($gutter: $grid-gutter-width) {
   --gutter-x: #{$gutter};
   --gutter-y: 0;
   display: flex;
   flex-wrap: wrap;
-  // TODO: Revisit calc order after https://github.com/react-bootstrap/react-bootstrap/issues/6039 is fixed
-  margin-top: calc(-1 * var(--gutter-y)); // stylelint-disable-line function-disallowed-list
-  margin-right: calc(-0.5 * var(--gutter-x)); // stylelint-disable-line function-disallowed-list
-  margin-left: calc(-0.5 * var(--gutter-x)); // stylelint-disable-line function-disallowed-list
+  /*  TODO: Revisit calc order after https://github.com/react-bootstrap/react-bootstrap/issues/6039 is fixed */
+  margin-top: calc(-1 * var(--gutter-y)); /*  stylelint-disable-line function-disallowed-list */
+  margin-right: calc(-0.5 * var(--gutter-x)); /*  stylelint-disable-line function-disallowed-list */
+  margin-left: calc(-0.5 * var(--gutter-x)); /*  stylelint-disable-line function-disallowed-list */
 }
 
 @mixin make-col-ready() {
-  // Add box sizing if only the grid is loaded
+  /*  Add box sizing if only the grid is loaded */
   box-sizing: if(meta.variable-exists(include-column-box-sizing) and $include-column-box-sizing, border-box, null);
-  // Prevent columns from becoming too narrow when at smaller grid tiers by
-  // always setting `width: 100%;`. This works because we set the width
-  // later on to override this initial width.
+  /*  Prevent columns from becoming too narrow when at smaller grid tiers by */
+  /*  always setting `width: 100%;`. This works because we set the width */
+  /*  later on to override this initial width. */
   flex-shrink: 0;
   width: 100%;
-  max-width: 100%; // Prevent `.col-auto`, `.col` (& responsive variants) from breaking out the grid
-  padding-right: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
-  padding-left: calc(var(--gutter-x) * 0.5); // stylelint-disable-line function-disallowed-list
+  max-width: 100%; /*  Prevent `.col-auto`, `.col` (& responsive variants) from breaking out the grid */
+  padding-right: calc(var(--gutter-x) * 0.5); /*  stylelint-disable-line function-disallowed-list */
+  padding-left: calc(var(--gutter-x) * 0.5); /*  stylelint-disable-line function-disallowed-list */
   margin-top: var(--gutter-y);
 }
 
@@ -293,11 +293,11 @@
   margin-left: if($num == 0, 0, math.percentage($num));
 }
 
-// Row columns
-//
-// Specify on a parent element(e.g., .row) to force immediate children into NN
-// number of columns. Supports wrapping to new lines, but does not do a Masonry
-// style grid.
+/*  Row columns */
+/*  */
+/*  Specify on a parent element(e.g., .row) to force immediate children into NN */
+/*  number of columns. Supports wrapping to new lines, but does not do a Masonry */
+/*  style grid. */
 @mixin row-cols($count) {
   > * {
     flex: 0 0 auto;
@@ -305,19 +305,19 @@
   }
 }
 
-// Framework grid generation
-//
-// Used only by Bootstrap to generate the correct number of grid classes given
-// any value of `$grid-columns`.
+/*  Framework grid generation */
+/*  */
+/*  Used only by Bootstrap to generate the correct number of grid classes given */
+/*  any value of `$grid-columns`. */
 
 @mixin make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
   @each $breakpoint in map.keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint, $breakpoints);
 
     @include media-breakpoint-up($breakpoint, $breakpoints) {
-      // Provide basic `.col-{bp}` classes for equal-width flexbox columns
+      /*  Provide basic `.col-{bp}` classes for equal-width flexbox columns */
       .col#{$infix} {
-        flex: 1 0 0%; // Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4
+        flex: 1 0 0%; /*  Flexbugs #4: https://github.com/philipwalton/flexbugs#flexbug-4 */
       }
 
       .row-cols#{$infix}-auto > * {
@@ -343,10 +343,10 @@
           }
         }
 
-        // `$columns - 1` because offsetting by the width of an entire row isn't possible
+        /*  `$columns - 1` because offsetting by the width of an entire row isn't possible */
         @for $i from 0 through ($columns - 1) {
           @if not($infix == '' and $i == 0) {
-            // Avoid emitting useless .offset-0
+            /*  Avoid emitting useless .offset-0 */
             .offset#{$infix}-#{$i} {
               @include make-col-offset($i, $columns);
             }
@@ -354,9 +354,9 @@
         }
       }
 
-      // Gutters
-      //
-      // Make use of `.g-*`, `.gx-*` or `.gy-*` utilities to change spacing between the columns.
+      /*  Gutters */
+      /*  */
+      /*  Make use of `.g-*`, `.gx-*` or `.gy-*` utilities to change spacing between the columns. */
       @each $key, $value in $gutters {
         .g#{$infix}-#{$key},
         .gx#{$infix}-#{$key} {
@@ -384,8 +384,8 @@
           }
         }
 
-        // Start with `1` because `0` is and invalid value.
-        // Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible.
+        /*  Start with `1` because `0` is and invalid value. */
+        /*  Ends with `$columns - 1` because offsetting by the width of an entire row isn't possible. */
         @for $i from 1 through ($columns - 1) {
           .g-start#{$infix}-#{$i} {
             grid-column-start: $i;
@@ -396,7 +396,7 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
   $min: breakpoint-min($name, $breakpoints);
@@ -427,17 +427,17 @@
   }
 }
 
-// Example: @include prefix(transition, transform 1.5s, webkit ms o);
+/*  Example: @include prefix(transition, transform 1.5s, webkit ms o); */
 @mixin prefix($property, $value, $prefixes: (webkit ms o)) {
   @each $prefix in $prefixes {
     #{'-' + $prefix + '-' + $property}: $value;
   }
 
-  // Output standard non-prefixed declaration
+  /*  Output standard non-prefixed declaration */
   #{$property}: $value;
 }
 
-// Used to make it possible to use css properties but still support IE11
+/*  Used to make it possible to use css properties but still support IE11 */
 @mixin var($property, $varName, $important: '') {
   #{$property}: var(#{$varName}) #{$important};
 }
@@ -533,7 +533,7 @@
     background-color: var(--colour-canvas-2);
     background-clip: padding-box;
     border: 2px solid var(--colour-primary);
-    appearance: none; // Fix appearance for date inputs in Safari
+    appearance: none; /*  Fix appearance for date inputs in Safari */
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     min-height: calc(
@@ -549,7 +549,7 @@
       max-height: 100%;
     }
 
-    // Customize the `:focus` state to imitate native WebKit styles.
+    /*  Customize the `:focus` state to imitate native WebKit styles. */
     &:is(:focus, .focus):not(:disabled) {
       border-color: var(--colour-info);
       outline: 0;
@@ -558,15 +558,15 @@
     &:is(:focus, .focus):not(:disabled):not(:invalid) {
       box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
     }
-    // Add some height to date inputs on iOS
-    // https://github.com/twbs/bootstrap/issues/23307
-    // TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved
+    /*  Add some height to date inputs on iOS */
+    /*  https://github.com/twbs/bootstrap/issues/23307 */
+    /*  TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved */
     &::-webkit-date-and-time-value {
-      // Multiply line-height by 1em if it has no unit
+      /*  Multiply line-height by 1em if it has no unit */
       height: if(math.unit(1.5) == '', 1.5 * 1em, 1.5);
     }
 
-    // Disabled inputs
+    /*  Disabled inputs */
     &:disabled {
       background-color: #ccd6d8;
       opacity: 0.4;
@@ -583,7 +583,7 @@ $breakpoints: (
 $new_utilities: ();
 
 
-// #region Clearfix
+/* #region Clearfix */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -600,9 +600,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region visually-hidden
+/* #region visually-hidden */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -617,16 +617,16 @@ $new_utilities: map.merge(
     width: 1px !important;
     height: 1px !important;
     padding: 0 !important;
-    margin: -1px !important; // Fix for https://github.com/twbs/bootstrap/issues/25686
+    margin: -1px !important; /*  Fix for https://github.com/twbs/bootstrap/issues/25686 */
     overflow: hidden !important;
     clip: rect(0, 0, 0, 0) !important;
     white-space: nowrap !important;
     border: 0 !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region text-truncate
+/* #region text-truncate */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -641,9 +641,9 @@ $new_utilities: map.merge(
     white-space: nowrap;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region ratio
+/* #region ratio */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -684,9 +684,9 @@ $new_utilities: map.merge(
     --aspect-ratio: calc(9 / 21 * 100%);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region fixed
+/* #region fixed */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -711,9 +711,9 @@ $new_utilities: map.merge(
     z-index: var(--index-floating);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region sticky
+/* #region sticky */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -750,9 +750,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region max-height
+/* #region max-height */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -853,9 +853,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region js-display
+/* #region js-display */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -876,9 +876,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Line clamp
+/* #region Line clamp */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -911,9 +911,9 @@ $new_utilities: map.merge(
     -webkit-line-clamp: 5;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Wider colours
+/* #region Wider colours */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -933,9 +933,9 @@ $new_utilities: map.merge(
 }
 
 }
-// #endregion
+/* #endregion */
 
-// #region Align
+/* #region Align */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -968,9 +968,9 @@ $new_utilities: map.merge(
     vertical-align: text-top !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Opacity
+/* #region Opacity */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -999,9 +999,9 @@ $new_utilities: map.merge(
     opacity: 1 !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Overflow
+/* #region Overflow */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1026,9 +1026,9 @@ $new_utilities: map.merge(
     overflow: scroll !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Display
+/* #region Display */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1122,9 +1122,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Position
+/* #region Position */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1218,9 +1218,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Border
+/* #region Border */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1309,9 +1309,9 @@ $new_utilities: map.merge(
     --border-opacity: 1;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Sizes
+/* #region Sizes */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1408,9 +1408,9 @@ $new_utilities: map.merge(
     object-fit: contain !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Flex
+/* #region Flex */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1564,9 +1564,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Order
+/* #region Order */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1612,9 +1612,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Margins
+/* #region Margins */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1697,9 +1697,9 @@ $new_utilities: map.merge(
     margin-left: auto !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Paddings
+/* #region Paddings */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1741,9 +1741,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Gap
+/* #region Gap */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1759,9 +1759,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Text
+/* #region Text */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1891,9 +1891,9 @@ $new_utilities: map.merge(
     word-break: break-word !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Colours
+/* #region Colours */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1945,9 +1945,9 @@ $new_utilities: map.merge(
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region gradients
+/* #region gradients */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -1995,9 +1995,9 @@ $new_utilities: map.merge(
     --gradient-direction: 135deg;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Pointer-events
+/* #region Pointer-events */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -2014,9 +2014,9 @@ $new_utilities: map.merge(
     pointer-events: auto !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Rounded
+/* #region Rounded */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -2081,9 +2081,9 @@ $new_utilities: map.merge(
     border-top-left-radius: var(--border-radius) !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Visible
+/* #region Visible */
 $new_utilities: map.merge(
   $new_utilities,
   (
@@ -2100,4 +2100,4 @@ $new_utilities: map.merge(
     visibility: hidden !important;
   }
 }
-// #endregion
+/* #endregion */

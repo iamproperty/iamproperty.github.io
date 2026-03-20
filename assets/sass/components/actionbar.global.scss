@@ -2,7 +2,7 @@
 
 
 
-// #region Default view
+/* #region Default view */
 iam-actionbar {
   --actionbar-radius: 0;
   background-color: #fcfcfc;
@@ -14,9 +14,9 @@ iam-actionbar {
     background-color: var(--colour-canvas);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region at the top
+/* #region at the top */
 main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
   border-radius: 0.5rem;
   margin: var(--container-padding);
@@ -41,9 +41,9 @@ main > .actionbar__sticky-wrapper > .actionbar__sticky > iam-actionbar {
     padding-inline: calc(50% - 34.75rem - 2rem); /* 556px */
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Switchview
+/* #region Switchview */
 iam-actionbar ~ :is([data-view='square'], [data-view='list'], [data-view='small']) {
   display: none;
 }
@@ -57,9 +57,9 @@ iam-actionbar[data-view='list'] ~ [data-view='list'] {
 iam-actionbar[data-view='small'] ~ [data-view='small'] {
   display: block;
 }
-// #endregion
+/* #endregion */
 
-// #region Child elements
+/* #region Child elements */
 iam-actionbar {
   .actionbar__text {
     font-size: 1.125rem; /* 18/16 */
@@ -68,7 +68,7 @@ iam-actionbar {
     display: inline-block;
   }
 
-  // Dialog wrapper
+  /*  Dialog wrapper */
   .menu__wrapper [slot='selected-overflow'] > button,
   .menu__wrapper [slot='overflow'] > button {
     background: none;
@@ -95,9 +95,9 @@ iam-actionbar {
     display: contents;
   }
 }
-// #endregion
+/* #endregion */
 
-// Select all done with vue
+/*  Select all done with vue */
 
 iam-actionbar:has(.selectall input:checked) {
   --selectall-opacity: 1;
@@ -106,10 +106,10 @@ iam-actionbar:has(.selectall input:checked) {
   --selectall-action-pe: none;
 }
 
-// #region filters 
+/* #region filters  */
 
 iam-actionbar [slot="filters"]:not(:has(+[slot="filters"])) {
   margin-inline-end: auto!important;
 }
 
-// #endregion
+/* #endregion */

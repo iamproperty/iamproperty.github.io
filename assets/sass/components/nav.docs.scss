@@ -30,7 +30,7 @@
     display: contents;
   }
   .menu {
-    //position: relative;
+    /* position: relative; */
     position: absolute;
     --scrollbar-width: 17px;
     top: 6rem; /* 96 */
@@ -38,7 +38,7 @@
     right: 0;
     -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
     box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
-    //height: auto;
+    /* height: auto; */
     width: 100%;
     max-width: calc(23.4375rem - var(--scrollbar-width));
     transition: none;

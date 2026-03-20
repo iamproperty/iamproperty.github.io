@@ -747,6 +747,14 @@ const routes = [
           title: 'Config | Components | iamkey',
         },
         component: () => import('./views/components/ConfigDoc.vue'),
+      },
+      {
+        path: 'video',
+        name: 'Video (Beta)',
+        meta: {
+          title: 'Video | Components | iamkey',
+        },
+        component: () => import('./views/components/VideoDoc.vue'),
       }
     ],
   },

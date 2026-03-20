@@ -9,7 +9,7 @@
     color: var(--colour-heading);
     display: block;
 
-    > iam-rating {
+    & > iam-rating {
       
       margin-top: 0.25rem!important;
     }

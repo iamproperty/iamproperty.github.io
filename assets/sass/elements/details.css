@@ -1,10 +1,3 @@
-@use 'sass:map';
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
   details {
     display: block;
@@ -40,40 +33,16 @@
     --border-radius: 0.5rem 0.5rem 0 0;
     --icon-top: 0.875rem; /* 14/16 */
     --line-height: 1.5rem;
-      --block-padding: 0.875rem; /* 14/16 */
+    --block-padding: 0.875rem; /* 14/16 */
 
     *:not(iam-tabs) > &:not([open]) {
       padding-bottom: 2.625rem; /* 42 */ 
     }
 
-    @media screen and (min-width: 36em) {
-      --inline-padding: 0.875rem; /* 14/16 */
-      --block-padding: 0.875rem; /* 14/16 */
-      --icon-top: 1.5rem;
-      --line-height: 1.5rem;
-
-      summary {
-        &:has(.h2, h2, .h4, h4) {
-          --inline-padding: 1.375rem; /* 22 */ 
-          --block-padding: 1.375rem; /* 22 */ 
-        }
-      }
-
-      summary {
-        &:has(.h2, h2) {
-          --line-height: 3.25rem; /* 52 */ 
-        }
-
-        &:has(.h4, h4) {
-          --line-height: 1.875rem; /* 30 */ 
-        }
-      }
-    }
-
     summary {
       border-bottom: 1px solid var(--colour-border);
       padding-left: 0;
-      padding-inline-end: calc(#{var(--inline-padding)} + 1.6875rem + 0.75rem);
+      padding-inline-end: calc(var(--inline-padding) + 1.6875rem + 0.75rem);
       padding-block: var(--block-padding) !important;
       position: relative;
       color: var(--colour-heading);
@@ -101,7 +70,7 @@
           content: '\f055';
           position: absolute;
           font-size: 1.5rem;
-          top: calc((#{var(--line-height)} / 2) - 0.75rem);
+          top: calc((var(--line-height) / 2) - 0.75rem);
           right: var(--inline-padding);
           width: 1.5rem;
           height: 1.5rem;
@@ -112,7 +81,7 @@
       }
 
       *:is(h4, .h4, h2, .h2):after {
-        top: calc((#{var(--line-height)} / 2) + #{var(--inline-padding)} - 0.875rem);
+        top: calc((var(--line-height) / 2) + var(--inline-padding) - 0.875rem);
       }
 
       .badge {
@@ -132,7 +101,7 @@
     }
 
     summary:not(:has(h1, h2, h4, h5, h6, .h1, .h2, .h4, .h5, .h6, .label)) {
-      // h3 purposelessly missed out
+      /*  h3 purposelessly missed out */
 
       font-family: var(--font-heading);
       font-style: normal;
@@ -155,7 +124,7 @@
         display: block;
         position: absolute;
         font-size: 1.5rem;
-        top: calc((#{var(--line-height)} / 2) - 0.75rem + 0.875rem);
+        top: calc((var(--line-height) / 2) - 0.75rem + 0.875rem);
         right: var(--inline-padding);
         width: 1.5rem;
         height: 1.5rem;
@@ -176,6 +145,32 @@
     }
   }
 
+  @media screen and (min-width: 36em) {
+    iam-accordion details {
+      --inline-padding: 0.875rem; /* 14/16 */
+      --block-padding: 0.875rem; /* 14/16 */
+      --icon-top: 1.5rem;
+      --line-height: 1.5rem;
+
+      summary {
+        &:has(.h2, h2, .h4, h4) {
+          --inline-padding: 1.375rem; /* 22 */ 
+          --block-padding: 1.375rem; /* 22 */ 
+        }
+      }
+
+      summary {
+        &:has(.h2, h2) {
+          --line-height: 3.25rem; /* 52 */ 
+        }
+
+        &:has(.h4, h4) {
+          --line-height: 1.875rem; /* 30 */ 
+        }
+      }
+    }
+  }
+
   dialog iam-accordion details {
     --inline-padding: var(--dialog-padding);
 
@@ -189,14 +184,8 @@
       overflow: hidden;
     }
 
-    @media screen and (min-width: 36em) {
-      --dialog-padding: 2rem;
-      
-    margin-inline: calc(var(--dialog-padding) * -1);
-    padding-inline: var(--dialog-padding);
-    }
 
-    // Fix the border bottom issue
+    /*  Fix the border bottom issue */
     &:has(+ details[open]),
     &:has(summary:is(:hover, :focus-visible)),
     &:has(+ details summary:is(:hover, :focus-visible)),
@@ -222,6 +211,14 @@
 
     &::before {
       content: '';
+    }
+  }
+
+  @media screen and (min-width: 36em) {
+    dialog iam-accordion details {
+      --dialog-padding: 2rem;
+      margin-inline: calc(var(--dialog-padding) * -1);
+      padding-inline: var(--dialog-padding);
     }
   }
 }

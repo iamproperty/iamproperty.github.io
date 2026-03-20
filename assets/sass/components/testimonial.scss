@@ -9,7 +9,7 @@
     --testimonial-spacing: 2rem;
   }
 
-  // Circle
+  /*  Circle */
   > div:first-child {
     position: relative;
     overflow: hidden;
@@ -71,7 +71,7 @@
     }
   }
 
-  // Make space for the circle
+  /*  Make space for the circle */
   h2 {
     padding: 2rem var(--testimonial-padding) 0 var(--testimonial-padding);
 
@@ -98,7 +98,7 @@
     }
   }
 
-  // Only show 1 blockquote at a time
+  /*  Only show 1 blockquote at a time */
   @for $i from 1 through 10 {
     &[data-show='#{$i}'] blockquote:not(:nth-child(#{$i})) {
       display: var(--display-none);

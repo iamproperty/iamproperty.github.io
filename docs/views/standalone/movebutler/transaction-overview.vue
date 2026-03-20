@@ -6,6 +6,9 @@
   import Notification from '@/components/Notification/Notification.vue';
   import VideoModal from '@/components/VideoModal/VideoModal.vue';
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
+  import Card from '@/components/Card/Card.vue';
+  import Tabs from '@/components/Tabs/Tabs.vue';
+  
   
 </script>
 
@@ -51,7 +54,76 @@
       <a href="/" class="btn btn-action fa-plus" slot="toolbox">Add document</a>
     
     </Header>
-      
+    
+
+    <div class="admin-panel">
+      <h2 class="bg-light">Clients</h2>
+      <Actionbar>
+        <button class="btn btn-action">Link/unlink CRM client</button>
+        <button class="btn btn-action btn-primary fa-plus">Add client</button>
+      </Actionbar>
+      <Table class="table--cta table--fullwidth">
+      <table class="table--filtered">
+                <thead>
+                <tr style="--row-height: 37px;">
+                    <th class="th--fixed"></th>
+                    <th>Client name</th>
+                    <th>Date added</th>
+                    <th>Added by</th>
+                    <th>Client type</th>
+                    <th>Onboarding status</th>
+                    <th>Latest risk level</th>
+                    <!--[if BLOCK]><![endif]-->                        <th>Due diligence</th>
+                    <!--[if ENDBLOCK]><![endif]-->
+                    <th>Residential address</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--[if BLOCK]><![endif]-->                    <tr class="filtered--matched filtered--show show" style="--row-height: 97px;">
+                        <td class="td--fixed" data-label="">
+                            <div class="dialog__wrapper">
+                                <button class="btn btn-secondary btn-compact fa fa-ellipsis-vertical btn-sm m-0" popovertarget="menu751614186369" aria-haspopup="true" aria-controls="menu751614186369" style="anchor-name: --menu751614186369;"></button>
+                                <iam-menu class="dialog--list" x-data="" id="menu751614186369" popover="auto" role="menu" style="position-anchor: --menu751614186369;">
+                                  
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                    <!--[if BLOCK]><![endif]-->                                        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                    <!--[if ENDBLOCK]><![endif]-->
+                                </iam-menu>
+                            </div>
+                        </td>
+                        <td data-label="Client name">
+                            <!--[if BLOCK]><![endif]-->                                <i class="far fa-solid fa-star"></i>
+                            <!--[if ENDBLOCK]><![endif]-->
+                            Martin Wright
+                            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                        </td>
+                        <td data-label="Date added">27.01.26</td>
+                        <td data-label="Added by">Testing Account</td>
+                        <td data-label="Client type">Vendor</td>
+                        <td data-label="Onboarding status">Risk assessment complete</td>
+                        <td data-label="Latest risk level" data-content="low">
+                            Low
+                        </td>
+                        <!--[if BLOCK]><![endif]-->                            <td data-label="Due diligence" data-content="incomplete">
+                                Incomplete
+                            </td>
+                        <!--[if ENDBLOCK]><![endif]-->
+                        <td data-label="Residential address">Lee Dam, 95 Katie Brook, TS10 3NS</td>
+                        <td data-label="" class="px-3">
+                            <a href="http://my.iamproperty.test/ic/risk-assessments/140/view" class="text-nowrap btn btn-tertiary">
+                                Manage client
+                            </a>
+                        </td>
+                    </tr>
+                <!--[if ENDBLOCK]><![endif]-->
+                </tbody>
+      </table>
+      </Table>
+    </div>
+    
+
+
     <div class="bg-primary pt-2 px-3 mb-2 rounded">
       <div class="md-col-end-8">
         <h2 class="h3 text-info pb-2">Save up to 41 days on this transaction</h2>
@@ -70,19 +142,190 @@
 
     </div>
 
-    <div class="admin-panel">
-      <div class="text-end">
-        <span class="badge mb-1">Premium Conveyancing</span>
-        <span class="badge wider-colour-3 mb-1">Case status: instructed</span>
-      </div>
-      <p class="lead text-heading pb-2">Conveyancing case</p>
-      <div class="d-flex align-items-center">
-          
+    <a href="/">
+      <Card>
+        
+
+        <div slot="badges" >
+          <div class="text-end">
+            <span class="badge mb-1">Premium Conveyancing</span>
+            <span class="badge wider-colour-3 mb-1">Case status: instructed</span>
+          </div>
+        </div>
+        <p class="lead text-heading pb-2">Conveyancing case</p>
+        
         <p class="me-auto pb-0">Solicitor office: <strong class="pe-2">JD Conveyancing </strong> Branch assignee: <strong class="pe-2">Chris Holmes</strong> Lead vendor: <strong class="pe-2">John Smith</strong></p>
-        <button class="btn btn-compact fa-chevron-right btn-sm ms-2 mb-0" title="View case">Submit</button>
-      </div>
-    </div>
-    
+
+      
+      </Card>
+    </a>
+
+    <Tabs>
+      <details>
+        <summary>Insights</summary>
+        <div class="admin-panel">
+          <h3 class="bg-light">Title insight</h3>
+          <Tabs class="tabs--md-hidden">
+
+            <details id="titleid1" name="insights" class="pt-0">
+              <summary>Title ID 1</summary>
+              <Actionbar>
+
+                <!-- we have to duplicate the tab links in each tab and connect them up using the command and commandfo attributes -->
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked command="show-tab" commandfor="titleid1">Title ID 1</label>
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2" command="show-tab" commandfor="titleid2">Title ID 2</label>
+
+                <!-- Add the class of icon-only to the below links/buttons when there is 4 or more items in the tabs -->
+                <a href="/" class="btn btn-action fa-cart-shopping icon-only">Order another title  register</a>
+                <a href="/" class="btn btn-action fa-download icon-only">Download title register</a>
+              </Actionbar>
+              <Table class="md-md">
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="th--sm">Category</th>
+                      <th>Description</th>
+                      <th>Agent actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-0 no-hover">
+                      <th class="text-nowrap">Class of title</th>
+                      <td>
+                        Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
+                      </td>
+                      <td>
+                        <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
+                      </td>
+                      <td>
+                        <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </Table>
+
+            </details>
+            <details id="titleid2" name="insights" class="pt-0">
+              <summary>Title ID 2</summary>
+              
+                <Actionbar>
+
+                  <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="1" checked command="show-tab" commandfor="titleid1">Title ID 1</label>
+                  <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="2" command="show-tab" commandfor="titleid2">Title ID 2</label>
+
+                  <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
+                  <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
+                </Actionbar>
+              <Table class="md-md">
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="th--sm">Category 2</th>
+                      <th>Description</th>
+                      <th>Agent actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="border-0 no-hover">
+                      <th class="text-nowrap">Class of title</th>
+                      <td>
+                        Indicates the level of assurance the Land Registry can provide regarding the owner's legal right to the property.
+                      </td>
+                      <td>
+                        <Notification data-status="danger" class="notification--no-bg mb-0">2</Notification>
+                      </td>
+                      <td>
+                        <button class="btn btn-tertiary" command="show-modal" commandfor="actions">View actions</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </Table>
+
+            </details>
+          </Tabs>
+        </div>
+      </details>
+      <details>
+        <summary>Transaction</summary>
+
+        <div class="admin-panel">
+          <h3 class="bg-light">Documents and forms</h3>
+          <Tabs class="tabs--md-hidden">
+
+            <details id="documents" name="insights" class="pt-0">
+              <summary>Documents</summary>
+              <Actionbar>
+
+                <!-- we have to duplicate the tab links in each tab and connect them up using the command and commandfo attributes -->
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked command="show-tab" commandfor="documents">Documents</label>
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2" command="show-tab" commandfor="forms">Forms</label>
+
+                <!-- Add the class of icon-only to the below links/buttons when there is 4 or more items in the tabs -->
+                <a href="/" class="btn btn-action fa-cart-shopping icon-only">Order another title  register</a>
+                <a href="/" class="btn btn-action fa-download icon-only">Download title register</a>
+              </Actionbar>
+              <div class="d-flex gap-3 ">
+                
+              <a href="">
+                <Card>
+                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
+                  Property information questionnaire
+
+                  <label slot="footer" data-percent="50">
+                    24 Lynx road, NE2 6AT
+                    <progress max="100" value="50" class="progress--inline"></progress>
+                  </label>
+                </Card>
+              </a>
+              <a href="">
+                <Card>
+                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
+                  Property information questionnaire
+
+                  <label slot="footer" data-percent="50">
+                    24 Lynx road, NE2 6AT
+                    <progress max="100" value="50" class="progress--inline"></progress>
+                  </label>
+                </Card>
+              </a>
+              <a href="">
+                <Card>
+                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
+                  Property information questionnaire
+
+                  <label slot="footer" data-percent="50">
+                    24 Lynx road, NE2 6AT
+                    <progress max="100" value="50" class="progress--inline"></progress>
+                  </label>
+                </Card>
+              </a>
+
+              </div>
+            </details>
+            <details id="forms" name="insights" class="pt-0">
+              <summary>Forms</summary>
+              
+              <Actionbar>
+
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="1" checked command="show-tab" commandfor="documents">Documents</label>
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="2" command="show-tab" commandfor="forms">Forms</label>
+
+                <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
+                <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
+              </Actionbar>
+              
+
+            </details>
+          </Tabs>
+        </div>
+      </details>
+    </Tabs>
+
+    <small class="mw-100">AI generated insights are provided for general information only and may not always be complete or 100% accurate. Any suggested timeframes or indications of transaction complexity are estimates based on available data and do not constitute legal advice. Information should always be independently checked and reviewed with a qualified legal professional.</small>
 
     <div class="md-col-end-6">
       <div class="admin-panel">
@@ -98,7 +341,9 @@
             <span class="col-start-1 col-end-5 pb-1">Price: <strong>£180,000</strong></span>
             <span class="col-start-6 col-end-12 pb-1">Council tax band: <strong>B</strong></span>
           </div>
-          
+        </div>
+        <div class="sub-panel">
+          <h3>Part B</h3>
           <span class="pb-1">Average broadband speed:</span>
 
           <div class="d-flex gap-1 pb-2">
@@ -116,23 +361,23 @@
             </span>
           </div>
 
-          <span class="pb-1">Mobile signal/coverage:</span>
+          <span class="d-block pb-1">Mobile signal/coverage:</span>
 
           <div class="d-flex gap-1 pb-1">
             <span>
-              <img src="/img/logos/ee.png" class="logo" />
+              <span class="d-block pb-1">EE</span>
               <i class="fa-duotone fa-solid fa-signal-weak text-heading"></i>
             </span>
             <span>
-              <img src="/img/logos/three.png" class="logo" />
+              <span class="d-block pb-1">Three</span>
               <i class="fa-duotone fa-solid fa-signal-fair text-heading"></i>
             </span>
             <span>
-              <img src="/img/logos/o2.png" class="logo" />
+              <span class="d-block pb-1">O2</span>
               <i class="fa-duotone fa-solid fa-signal-good text-heading"></i>
             </span>
             <span>
-              <img src="/img/logos/vodaphone.png" class="logo" />
+              <span class="d-block pb-1">Vodaphone</span>
               <i class="fa-duotone fa-solid fa-signal-strong text-heading"></i>
             </span>
           </div>
@@ -142,6 +387,7 @@
 
         <div class="sub-panel">
           <h3>Part C</h3>
+          <span class="d-block pb-1">Listed: <strong class="me-2">No</strong> Planning applications: <strong>3</strong></span>
           <span class="d-block pb-1">Covenants: <i class="fa-solid fa-exclamation-circle text-danger"></i> <strong>2</strong></span>
           <span class="d-flex"><span class="text-nowrap me-1">Flood risk:</span> <strong>Hasn’t flood in last 5 years, no flooding or sea defences at the property, 1 source of risk from local pond.</strong></span>
         </div>
@@ -162,6 +408,30 @@
         <small class="d-block pb-1">Description: Fell 1 no. Poplar tree (T1) as it is growing out of a disused railway embankment at a vulnerable angle in a material of a questionable adhesive nature, and due to its size, poses an unacceptable risk</small>
         <a href="/" class="btn btn-tertiary mb-0">View <i class="fa-regular fa-arrow-up-right-from-square me-0"></i></a>
       </div>
+
+      <div class="admin-panel">
+        <h2 class=" bg-light">Local planning permission and development proposals</h2>
+        <table class="mb-1">
+          <tbody>
+            <tr class="border-0">
+              <td class="fw-normal text-body pt-0 "><i class="fa-regular fa-trees"></i> Environmental rating:</td>
+              <td class="text-heading pt-0">Current: B (83), Potential: B (83)</td>
+            </tr>
+            <tr class="border-0">
+              <td class="fw-normal text-body pt-0"><i class="fa-regular fa-trees"></i> Environmental rating:</td>
+              <td class="text-heading pt-0">Current: B (83), Potential: B (83)</td>
+            </tr>
+            <tr class="border-0">
+              <td class="fw-normal text-body pt-0"><i class="fa-regular fa-trees"></i> Environmental rating:</td>
+              <td class="text-heading pt-0">Current: B (83), Potential: B (83)</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-end">
+          <a href="/" class="mb-1">View all features <i class="fa-light fa-up-right-from-square me-0"></i></a>
+        </div>
+      </div>
+
     </div>
   </main>
 </template>

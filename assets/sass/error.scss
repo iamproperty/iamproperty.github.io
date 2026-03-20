@@ -1,8 +1,6 @@
-@use 'sass:map';
-
 @charset "UTF-8";
 
-// Set mobile only variable so that the media query mixin doesn't print out non mobile rules
+/*  Set mobile only variable so that the media query mixin doesn't print out non mobile rules */
 @use '_functions/bs_functions' as *;
 @use '_functions/bs_variables' as *;
 @use '_functions/bs_mixins' as *;

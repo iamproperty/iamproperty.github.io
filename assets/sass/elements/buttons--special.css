@@ -1,13 +1,11 @@
-@use '../_func' as *;
-
 @layer elements {
-  // #region btn compact
+  /* #region btn compact */
   .btn[popovertarget] {
   
     position: relative;
     anchor-name: --button2;
 
-    > .fa-chevron-down {
+    & > .fa-chevron-down {
       display: none;
     }
 
@@ -39,10 +37,9 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 
-  // #region Select as button
-
+  /* #region Select as button */
   .btn:has(select) {
     position: relative;
     padding: 0;
@@ -92,7 +89,8 @@
 
     select::picker-icon {
       display: none;
-    }  
+    }
+
     select::picker(select) {
       appearance: base-select;
       background: var(--menu-bg, canvas);
@@ -105,22 +103,17 @@
     }
 
     hr {
-      
       height: 1px !important;
       background-color: var(--menu-hr-border-color, var(--border-color, grey)) !important;
       width: 100%;
       margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
       padding: 0 !important;
     }
+
     select option::checkmark {
       display: none;
     }
-    /*
-    select option:checked::checkmark {
-      content: '✔';
-      color: #2196f3;
-    }
-    */
+    
     select selectedcontent span {
       display: none;
     }
@@ -148,9 +141,9 @@
       pointer-events: none;
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region btn that is a select
+  /* #region btn that is a select */
   .btn-action:has(select) {
     padding-block: 0;
     padding-right: 2rem;
@@ -168,5 +161,5 @@
       right: 0.5rem;
     }
   }
-  // #endregion
+  /* #endregion */
 }

@@ -32,7 +32,7 @@
       }
     }
 
-    // Make H2's look like H3's
+    /*  Make H2's look like H3's */
     :is(h2, .h2) {
       font-size: var(--h3-fs);
       max-width: var(--content-max-width);
@@ -57,14 +57,14 @@
 
     @media screen and (min-width: 36em) {
       .form-panel {
-        max-width: calc(100% - 5rem); // Guess
+        max-width: calc(100% - 5rem); /*  Guess */
         margin-inline: auto;
       }
     }
 
     @media screen and (min-width: 62em) {
       .form-panel {
-        max-width: 57.75rem; /* 924 */  // Guess
+        max-width: 57.75rem; /* 924 */  /*  Guess */
         border-radius: 0.5rem;
         padding-inline: 5.875rem;
         padding-block: 2.5rem;

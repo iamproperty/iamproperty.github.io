@@ -11,22 +11,22 @@
   box-sizing: border-box;
 }
 
-// #region Multi
+/* #region Multi */
 
 dialog[open] {
   --dialog-padding: 1.5rem;
   box-sizing: border-box;
   padding-top: calc(var(--dialog-padding) * 4);
-  //display: block;
-  //position: relative;
-  //margin-right: 0 !important;
-  //min-height: 100%;
+  /* display: block; */
+  /* position: relative; */
+  /* margin-right: 0 !important; */
+  /* min-height: 100%; */
   padding-left: var(--dialog-padding);
 
   @media screen and (min-width: 62em) {
     padding-top: var(--dialog-padding);
     padding-left: calc(var(--dialog-padding) + 17.625rem) !important;
-    //display: flex;
+    /* display: flex; */
     flex-direction: column;
   }
 }
@@ -42,7 +42,7 @@ dialog[open] {
 
 
 
-// #region Multi step modal
+/* #region Multi step modal */
 
   dialog[open] {
     padding: 6rem 1.5rem 0 1.5rem;
@@ -87,9 +87,9 @@ dialog[open] {
   
   }
 
-  // #endregion
+  /* #endregion */
 
-  // #region mobile fullwidth view For multi step modal
+  /* #region mobile fullwidth view For multi step modal */
   @media screen and (max-width: 36em) {
     dialog[open] {
       min-width: 100%;
@@ -127,7 +127,7 @@ dialog[open] {
       }
     }
   }
-  // #endregion
+  /* #endregion */
 
 
 
@@ -139,7 +139,7 @@ dialog[open] {
 
 
 
-// #region steps
+/* #region steps */
 .steps {
   width: 100%;
   position: absolute;
@@ -252,4 +252,4 @@ dialog[open] {
     }
   }
 }
-// #endregion
+/* #endregion */

@@ -1,0 +1,155 @@
+
+@layer elements {
+  /* #region global */
+  a {
+    color: var(--colour-link);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--link-hover-color);
+      text-decoration: none;
+    }
+    &:is(:hover, :focus, .hover, :focus-within) {
+      color: var(--colour-hover);
+    }
+
+    &:is(:active, .active) {
+      color: var(--colour-active);
+    }
+  }
+
+  a:not([href]):not([class]),
+  a:not([href]):not([class]):hover {
+    color: inherit;
+    text-decoration: none;
+  }
+  /* #endregion */
+
+  a:where(:not(.btn):not(.brand):not(:has(.card)):not(:has(iam-card))),
+  .link {
+    background-color: transparent;
+    text-decoration: none;
+    display: inline-block;
+    border: none;
+    color: var(--colour-link);
+    margin: 0 1.5rem 1.5rem 0;
+    padding: 0;
+    font-size: 1.125rem; /* 18/16 */
+    line-height: 1.5rem;
+    min-height: 1.5rem;
+    position: relative;
+    font-weight: bold;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:not(.text-decoration-none) {
+      &:after {
+        position: absolute;
+        content: '';
+        top: 100%;
+        left: 50%;
+        height: 2px;
+        width: 100%;
+        transform: translate(-50%, 0);
+        background: var(--colour-underline);
+        transition: width 0.5s;
+      }
+    }
+
+    &:not(.text-decoration-none).text-underline-plain {
+      &:after {
+        background: currentColor;
+      }
+    }
+
+    &[class*='fa-'] {
+      margin-left: 0;
+      margin-right: 0.5rem;
+    }
+    
+    &[class*='fa-']:not(:first-child) {
+      margin-left: 0.5rem;
+      margin-right: 0;
+    }
+
+    &:not([disabled]):is(:hover, :focus, .hover, :active, .active, :focus-within) {
+      &:after {
+        width: 60%;
+      }
+    }
+
+    &[disabled] {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  :where(p, ul, ol, dd, .body),
+  table:not(.table--email) td {
+    a:not(.btn):not(.link) {
+      min-height: none;
+      display: inline;
+      margin: 0;
+      text-decoration: underline;
+      text-underline-offset: 0.25rem;
+      text-decoration-thickness: 0.125rem;
+      font-size: inherit;
+
+      &:after {
+        display: none;
+      }
+
+      [class*='fa-'] {
+        margin: 0;
+        display: inline;
+        --fa-display: inline;
+
+        &:after {
+          content: '\a0';
+        }
+      }
+
+      &:not([disabled]):is(:hover, :focus, .hover, :focus-within) {
+        color: var(--colour-hover);
+        text-decoration: none;
+      }
+
+      &:not([disabled]):is(:active, .active) {
+        color: var(--colour-active);
+        text-decoration: none;
+        filter: brightness(85%);
+      }
+    }
+  }
+
+  /* #region Support card component */
+  :is(a, button, label):has(.card, iam-card) {
+    border: none;
+    background: none;
+    padding: 0;
+    display: flex;
+    margin-bottom: 1.5rem;
+    outline: none !important;
+    text-decoration: none;
+
+    &:before {
+      display: none;
+    }
+
+    &:not([class*='col']) {
+      margin: 0 0 1.5rem 0;
+    }
+
+    &:not(.d-inline-block):not([class*='col']) {
+      width: 100%;
+    }
+
+    iam-card {
+      width: 100%;
+    }
+  }
+
+  /* #endregion */
+}
