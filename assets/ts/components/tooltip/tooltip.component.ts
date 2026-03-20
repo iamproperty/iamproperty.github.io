@@ -18,8 +18,8 @@ class iamTooltip extends HTMLElement {
     <style>
     ${loadCSS}
     </style>
-    <slot></slot>
     <div class="tooltip__anchor">
+      <slot></slot>
     </div>
     <div class="tooltip__content" id="tooltip"></div>
     `;

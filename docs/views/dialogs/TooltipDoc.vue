@@ -196,7 +196,7 @@
   
 
     <div :class="` visualtest tooltip-demo mb-5`" ref="tooltipEl">
-      
+      Test tooltip
       <Tooltip :class="` ${selected2} show-popover`" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title"></Tooltip>
     </div>
 
@@ -216,7 +216,7 @@
       <template #vue-component>
         <pre><code>{{`<script setup>import Tooltip from '@/components/Tooltip/Tooltip.vue</script>
 
-<p>Tooltip title="tooltip content">...</Tooltip></p>`}}</code></pre>
+<p><Tooltip title="tooltip content">...</Tooltip></p>`}}</code></pre>
       </template>
 
       <template #attr>

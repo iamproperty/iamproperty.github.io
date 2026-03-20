@@ -11,7 +11,7 @@
   :host {
     display: inline;
     position: relative;
-    overflow-anchor: none; 
+    overflow-anchor: none;
     cursor: pointer;
     margin-right: 0.25rem;
   }
@@ -30,23 +30,23 @@
   }
 
   .tooltip__anchor {
-
     anchor-name: --anchor;
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .tooltip__anchor {
-
+  :host(:empty) .tooltip__anchor {
     height: 1rem;
     width: 1rem;
     background-color: var(--icon-colour, var(--colour-info));
     border-radius: 50%;
-    margin-bottom: calc(calc(1lh - 1rem) / 2);
+    margin-bottom: calc((1lh - 1rem) / 2);
     vertical-align: bottom;
   }
-  
-  .tooltip__anchor:after {
+
+  :host(:empty) .tooltip__anchor::after {
     font-family: "Font Awesome 7 Pro";
     font-weight: 900;
     content: "\?";
@@ -62,31 +62,26 @@
     font-weight: bold;
   }
 
-  :host([data-type="info"]) .tooltip__anchor:after {
-
+  :host([data-type="info"]:empty) .tooltip__anchor::after {
     content: "\f129";
   }
 
-  ::slotted(i:first-child:last-child){
-    height: 1rem;
-    width: 1rem;
-    background-color: var(--icon-colour, var(--colour-info));
-    color: var(--colour-primary);
-    font-size: 0.6em;
-    line-height: 1rem!important;
-    text-align: center;
-    border-radius: 50%;
+  ::slotted(i:first-child:last-child),
+  ::slotted(span:first-child:last-child) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: bottom;
   }
-
 
   .tooltip__content {
     position: fixed;
     position-anchor: --anchor;
     position-area: center end;
-    position-try-fallbacks:  bottom span-all, top span-all, start;
+    position-try-fallbacks: bottom span-all, top span-all, start;
 
     container-type: anchored;
-    max-width: 16.875rem; /* 270 */ 
+    max-width: 16.875rem;
     background: var(--colour-primary);
     color: var(--colour-white);
     padding: 1.5rem;
@@ -103,18 +98,18 @@
     }
 
     @media screen and (min-width: 36em) {
-      max-width: 20.9375rem; /* 335 */ 
+      max-width: 20.9375rem;
     }
 
     @media screen and (min-width: 62em) {
-      max-width: 22.5rem; /* 360 */ 
+      max-width: 22.5rem;
     }
 
     &::after {
       content: '';
       position: absolute;
       bottom: 50%;
-      left: -0.45rem;   
+      left: -0.45rem;
       transform: translate(-50%, 0);
       border-width: 0.5rem;
       border-style: solid;
@@ -122,25 +117,22 @@
       margin-bottom: -0.5rem;
 
       @container anchored(fallback: top span-all) {
-
-        left: 50%;    
+        left: 50%;
         bottom: auto;
         top: 100%;
         border-color: var(--colour-primary) transparent transparent transparent;
         margin-bottom: -1px;
       }
-  
-      @container anchored(fallback: bottom span-all) {
 
+      @container anchored(fallback: bottom span-all) {
         top: auto;
         bottom: 100%;
-        left: 50%;    
+        left: 50%;
         border-color: transparent transparent var(--colour-primary) transparent;
         margin-bottom: -1px;
       }
-  
-      @container anchored(fallback: start) {
 
+      @container anchored(fallback: start) {
         display: none;
       }
     }
