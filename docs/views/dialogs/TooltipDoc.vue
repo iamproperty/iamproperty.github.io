@@ -196,7 +196,7 @@
   
 
     <div :class="` visualtest tooltip-demo mb-5`" ref="tooltipEl">
-      Test tooltip
+      
       <Tooltip :class="` ${selected2} show-popover`" title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title"></Tooltip>
     </div>
 

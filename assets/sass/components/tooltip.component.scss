@@ -81,7 +81,7 @@
     position-try-fallbacks: bottom span-all, top span-all, start;
 
     container-type: anchored;
-    max-width: 16.875rem;
+    max-width: 16.875rem; /* 270 */ 
     background: var(--colour-primary);
     color: var(--colour-white);
     padding: 1.5rem;
@@ -98,11 +98,11 @@
     }
 
     @media screen and (min-width: 36em) {
-      max-width: 20.9375rem;
+      max-width: 20.9375rem; /* 335 */ 
     }
 
     @media screen and (min-width: 62em) {
-      max-width: 22.5rem;
+      max-width: 22.5rem;  /* 360 */
     }
 
     &::after {
