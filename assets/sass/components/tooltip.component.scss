@@ -9,69 +9,32 @@
 @layer components {
 
   :host {
-    display: inline;
+    max-width: max-content;
+    display: inline-block;
     position: relative;
     overflow-anchor: none;
     cursor: pointer;
-    margin-right: 0.25rem;
   }
-
-  slot {
-    display: inline;
-  }
-
-  :host(:empty) {
-    display: inline-block;
-    width: 1rem;
-    height: 1lh;
-    min-height: 1rem;
-    vertical-align: text-top;
-    margin-right: 0;
+  
+  :host(:hover) {
+    
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-style: dashed;
   }
 
   .tooltip__anchor {
     anchor-name: --anchor;
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
   }
 
-  :host(:empty) .tooltip__anchor {
-    height: 1rem;
-    width: 1rem;
-    background-color: var(--icon-colour, var(--colour-info));
-    border-radius: 50%;
-    margin-bottom: calc((1lh - 1rem) / 2);
-    vertical-align: bottom;
-  }
-
-  :host(:empty) .tooltip__anchor::after {
-    font-family: "Font Awesome 7 Pro";
-    font-weight: 900;
-    content: "\?";
-    display: block;
-    margin: 0;
-    line-height: 1;
-    color: var(--colour-white);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    font-size: 0.6em;
-    font-weight: bold;
-  }
-
-  :host([data-type="info"]:empty) .tooltip__anchor::after {
-    content: "\f129";
-  }
-
-  ::slotted(i:first-child:last-child),
-  ::slotted(span:first-child:last-child) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    vertical-align: bottom;
+  ::slotted([slot="icon"]){
+    display: inline!important;
+    color: var(--icon-colour, var(--colour-info));
+    font-size: 1em;
+    width: 1em;
+    height: 1lh;
   }
 
   .tooltip__content {
