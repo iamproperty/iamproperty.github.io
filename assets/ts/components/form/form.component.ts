@@ -3,7 +3,7 @@ import { searchAjax, filterList, setTag } from '../../modules/dropdown';
 
 trackComponentRegistered('iam-tag');
 
-class iamTag extends HTMLElement {
+class iamForm extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -31,6 +31,42 @@ class iamTag extends HTMLElement {
 
     return true;
   };
+
+  checkConditions = (conditions):boolean => {
+
+    let meetsCondition = true;
+
+    JSON.parse(conditions).forEach((condition) => {
+      if(this.querySelector(`#${condition['if']}`).value != condition['equals'])
+        meetsCondition = false;
+    });
+
+    return meetsCondition;
+  }
+
+  showIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-show-if]')).forEach((element) => {
+
+      if(!this.checkConditions(element.getAttribute('data-show-if')))
+        element.classList.add('d-none');
+      else 
+        element.classList.remove('d-none');
+
+    });
+  }
+
+  disabledIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-disabled-if]')).forEach((element) => {
+
+      if(!this.checkConditions(element.getAttribute('data-disabled-if')))
+        element.setAttribute('disabled','disabled');
+      else 
+        element.removeAttribute('disabled');
+
+    });
+  }
 
   connectedCallback(): void {
 
@@ -96,7 +132,20 @@ class iamTag extends HTMLElement {
           input.setAttribute('data-required', 'true');
       });
     });
+
+    // #region if
+
+    this.showIf();
+    this.disabledIf();
+
+    form.addEventListener('change', (e) => {
+
+      this.showIf();
+      this.disabledIf();
+    });
+
+    // #endregion
   }
 }
 
-export default iamTag;
+export default iamForm;

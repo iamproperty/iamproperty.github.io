@@ -56,7 +56,8 @@ class iamModal extends HTMLElement {
 
       this.dispatchEvent(agreedEvent);
 
-      closeModal(this);
+      if(!this.querySelector(':invalid'))
+        closeModal(this);
     }
 
     document.addEventListener('click', (e) => {

@@ -8,6 +8,7 @@
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Card from '@/components/Card/Card.vue';
   import Tabs from '@/components/Tabs/Tabs.vue';
+  import Form from '@/components/Form/Form.vue';
   
   
 </script>
@@ -122,7 +123,26 @@
       </Table>
     </div>
     
-
+<Modal class="modal--lg">
+    <dialog id="notes-modal">
+        <h2>Add note</h2>
+        <p>You are adding a note for the transaction: .</p>
+        <Form>
+            <form class="fill-row" method="POST" action="/">
+                
+                <label class="transaction-note hidden">
+                    Add note
+                    <textarea class="isg-input" name="content" placeholder="Add note..." rows="10" required></textarea>
+                    <span class="invalid-feedback">Text required before saving a note</span>
+                </label>
+                <div class="btn__group mb-0">
+                    <button command="close" commandfor="notes-modal" class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-primary create-note">Add note</button>
+                </div>
+            </form>
+        </Form>
+    </dialog>
+</Modal>
 
     <div class="bg-primary pt-2 px-3 mb-2 rounded">
       <div class="md-col-end-8">
@@ -436,6 +456,10 @@
 
 
     <div class="admin-panel">
+      <iam-actionbar>
+        <a href="{{ route('ic.transactions.print-notes', $transaction) }}" target="_blank" class="btn btn-action">Print all notes</a>
+        <button command="show-modal" commandfor="notes-modal" class="btn btn-action btn-primary fa-plus">Add note</button>
+    </iam-actionbar>
       <Table data-expandable class="table--fullwidth">
       <table>
             <thead>

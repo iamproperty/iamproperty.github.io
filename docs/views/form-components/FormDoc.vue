@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import Integration from '../Integration.vue';
+  import Form from '@/components/Form/Form.vue';
 
   import { fileupload as events } from '../../events.js';
 
@@ -18,6 +19,68 @@
         ..
       </p>
     </div>
+
+    <Form>
+
+      <form>
+      <label>
+        Category
+        <select name="category" id="add-document-category">
+            <option value="">Please select an option</option>
+            <option value="App\Client">Client Document</option>
+            <option value="App\Transaction">Transaction Document</option>
+        </select>
+      </label>
+
+      <label>
+        Select document type
+        <select name="document_type_id[]" id="document_type_id-0" data-disabled-if='[{"if":"add-document-category","equals":"App\\Transaction"}]'>
+          <option value=""></option>
+          <option value="17" data-show-if='[{"if":"add-document-category","equals":"App\\Transaction"}]'>Title plan</option>
+          <option value="18">Title register</option>
+          <option value="19">Monthly Invoice</option>
+          <option value="20">Monthly Transactions</option>
+          <option value="21">AML Quick Search</option>
+          <option value="22">AML Full Search</option>
+          <option value="23">PRS Search</option>
+          <option value="24">Title Plan</option>
+          <option value="25">Title Register</option>
+          <option value="26">International Client Search</option>
+          <option value="27">Client Risk Assessement</option>
+          <option value="28">Company Logo</option>
+          <option value="29">Photo ID</option>
+          <option value="30">Authenticated photo ID</option>
+          <option value="31">Non-photo ID</option>
+          <option value="32">Authenticated non-photo ID</option>
+          <option value="33">Proof of address</option>
+          <option value="34">Authenticated proof of address</option>
+          <option value="35">Other</option>
+          <option value="36">Company document</option>
+          <option value="37">Billing Invoice</option>
+          <option value="38">Billing Transactions</option>
+          <option value="39">Power of Attorney</option>
+          <option value="40">Appointment as personal representative</option>
+          <option value="41">Will</option>
+          <option value="42">Death certificate</option>
+          <option value="43">Solicitor Contract</option>
+          <option value="44">Solicitor Logo</option>
+          <option value="45">Solicitor Client Care Letter</option>
+          <option value="46">Client Billing Invoice</option>
+          <option value="47">Biometric Online ID Verification</option>
+          <option value="48">Biometric Online ID Verification Selfie Image</option>
+          <option value="49">Biometric Online ID Verification Instructions Image</option>
+          <option value="50">Biometric Online ID Verification Performed Image</option>
+          <option value="51">Biometric Online ID Verification ID document Image</option>
+          <option value="52">Company Statement</option>
+          <option value="53">Conveyancing Quote</option>
+          <option value="54">Instruction Document</option>
+          <option value="55">Conveyancing Document</option>
+          <option value="56">Solicitor Invoice</option>
+        </select>
+      </label>
+    
+    </form>
+    </Form>
 
 
 
