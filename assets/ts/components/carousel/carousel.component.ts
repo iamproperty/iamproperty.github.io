@@ -79,6 +79,21 @@ class iamCarousel extends HTMLElement {
 
     carousel(carouselComponent);
 
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutationRecord) {
+        const targetElement = mutationRecord.target as HTMLElement;
+
+        updateCarousel(targetElement);
+      });
+    });
+
+    observer.observe(carouselComponent, {
+      attributes: false,
+      childList: true,
+      subtree: true,
+    });
+
+
     trackComponent(carouselComponent, 'iam-carousel', [
       'pip-clicked',
       'next-clicked',
