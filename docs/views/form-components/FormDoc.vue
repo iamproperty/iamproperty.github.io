@@ -34,7 +34,7 @@
 
       <label>
         Select document type
-        <select name="document_type_id[]" id="document_type_id-0" data-disabled-if='[{"if":"add-document-category","equals":"App\\Transaction"}]'>
+        <select name="document_type_id[]" id="document_type_id-0" data-enabled-if='[{"if":"add-document-category","equals":"App\\Transaction"}]'>
           <option value=""></option>
           <option value="17" data-show-if='[{"if":"add-document-category","equals":"App\\Transaction"}]'>Title plan</option>
           <option value="18">Title register</option>

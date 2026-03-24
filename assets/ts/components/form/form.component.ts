@@ -56,14 +56,62 @@ class iamForm extends HTMLElement {
     });
   }
 
+  hideIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-hide-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-hide-if')))
+        element.classList.add('d-none');
+      else 
+        element.classList.remove('d-none');
+
+    });
+  }
+
   disabledIf = ():void => {
 
     Array.from(this.querySelectorAll('[data-disabled-if]')).forEach((element) => {
 
-      if(!this.checkConditions(element.getAttribute('data-disabled-if')))
+      if(this.checkConditions(element.getAttribute('data-disabled-if')))
         element.setAttribute('disabled','disabled');
       else 
         element.removeAttribute('disabled');
+
+    });
+  }
+
+  enabledIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-enabled-if]')).forEach((element) => {
+
+      if(!this.checkConditions(element.getAttribute('data-enabled-if')))
+        element.setAttribute('disabled','disabled');
+      else 
+        element.removeAttribute('disabled');
+
+    });
+  }
+
+  requiredIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-required-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-required-if')))
+        element.setAttribute('required','required');
+      else
+        element.removeAttribute('required');
+
+    });
+  }
+
+  readonlyIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-readonly-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-readonly-if')))
+        element.setAttribute('readonly','readonly');
+      else
+        element.removeAttribute('readonly');
 
     });
   }
@@ -84,13 +132,10 @@ class iamForm extends HTMLElement {
 
       if (!this.isFormValid(form)) {
 
-      console.log('hey2');
-
         e.preventDefault();
         form?.querySelector('input:invalid')?.scrollIntoView();
       }
     });
-
 
     // conditional reveal required fields
     Array.from(form.querySelectorAll('.conditional [required]')).forEach((input) => {
@@ -106,8 +151,22 @@ class iamForm extends HTMLElement {
       input.removeAttribute('data-required');
     });
 
+    this.showIf();
+    this.hideIf();
+    this.disabledIf();
+    this.enabledIf();
+    this.requiredIf();
+    this.readonlyIf();
+    
+
     form.addEventListener('change', () => {
 
+      this.showIf();
+      this.hideIf();
+      this.disabledIf();
+      this.enabledIf();
+      this.requiredIf();
+      this.readonlyIf();
 
       Array.from(form.querySelectorAll('.conditional [data-conditional-required], .conditional [data-conditional-data-required]')).forEach((input) => {
 
@@ -132,19 +191,6 @@ class iamForm extends HTMLElement {
           input.setAttribute('data-required', 'true');
       });
     });
-
-    // #region if
-
-    this.showIf();
-    this.disabledIf();
-
-    form.addEventListener('change', (e) => {
-
-      this.showIf();
-      this.disabledIf();
-    });
-
-    // #endregion
   }
 }
 
