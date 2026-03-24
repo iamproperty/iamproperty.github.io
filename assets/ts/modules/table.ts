@@ -297,11 +297,31 @@ export const createMobileButton = (component, table): void => {
   });
 
   Array.from(table.querySelectorAll('tbody tr')).forEach((row, index) => {
+
+
+    Array.from(row.querySelectorAll('p')).forEach((p, index) => {
+
+      const lineHeight = window.getComputedStyle(p, null).getPropertyValue('line-height');
+      console.log(parseInt(lineHeight));
+      const lines = Math.ceil(p.offsetHeight / parseInt(lineHeight));
+      p.setAttribute('data-lines',lines);
+      if(lines >= 3){
+        p.classList.add('three-lines');
+      }
+    });
+
+
+    if(row.querySelector('p')){
+      row.setAttribute('data-view', 'default');
+    }
+
     const preExpanded = row.getAttribute('data-view') === 'full' ? 'aria-expanded' : '';
-    row.insertAdjacentHTML(
-      'afterbegin',
-      `<td class="${component.hasAttribute('data-expandable') ? 'td--fixed ' : ''}td--expand"><button class="btn btn-compact btn-secondary btn-sm fa-circle-plus" data-expand-button ${preExpanded} data-index="${index}">Expand</button></td>`
-    );
+    if (!row.querySelectorAll('td.td--expand').length) {
+      row.insertAdjacentHTML(
+        'afterbegin',
+        `<td class="${component.hasAttribute('data-expandable') ? 'td--fixed ' : ''}td--expand"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down" data-expand-button ${preExpanded} data-index="${index}">Expand</button></td>`
+      );
+    }
   });
 
   table.addEventListener('click', (event) => {
@@ -311,14 +331,14 @@ export const createMobileButton = (component, table): void => {
 
       button.toggleAttribute('aria-expanded');
 
-      if(button.classList.contains('fa-circle-plus')){
-        button.classList.remove('fa-circle-plus');
-        button.classList.add('fa-circle-minus');
+      if(button.classList.contains('fa-chevron-down')){
+        button.classList.remove('fa-chevron-down');
+        button.classList.add('fa-chevron-up');
       }
       else {
         
-        button.classList.remove('fa-circle-minus');
-        button.classList.add('fa-circle-plus');
+        button.classList.remove('fa-chevron-up');
+        button.classList.add('fa-chevron-down');
       }
 
       if (tableRow.getAttribute('data-view') == 'full') tableRow.setAttribute('data-view', 'default');

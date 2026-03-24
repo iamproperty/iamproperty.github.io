@@ -1,4 +1,4 @@
-import { generateThumbnailList, generatePipsHTML, carousel } from '../../modules/carousel';
+import { generateThumbnailList, generatePipsHTML, carousel, updateCarousel } from '../../modules/carousel';
 import { trackComponent, trackComponentRegistered } from '../_global';
 
 trackComponentRegistered('iam-carousel');
@@ -78,6 +78,21 @@ class iamCarousel extends HTMLElement {
     });
 
     carousel(carouselComponent);
+
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutationRecord) {
+        const targetElement = mutationRecord.target as HTMLElement;
+
+        updateCarousel(targetElement);
+      });
+    });
+
+    observer.observe(carouselComponent, {
+      attributes: false,
+      childList: true,
+      subtree: true,
+    });
+
 
     trackComponent(carouselComponent, 'iam-carousel', [
       'pip-clicked',

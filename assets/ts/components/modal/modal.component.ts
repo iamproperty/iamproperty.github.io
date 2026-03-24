@@ -56,7 +56,8 @@ class iamModal extends HTMLElement {
 
       this.dispatchEvent(agreedEvent);
 
-      closeModal(id, this);
+      if(!this.querySelector(':invalid'))
+        closeModal(this);
     }
 
     document.addEventListener('click', (e) => {
@@ -94,7 +95,7 @@ class iamModal extends HTMLElement {
 
       e.preventDefault();
 
-      closeModal(id, this);
+      closeModal(this);
     });
 
     // Move the submit button so that the slot functionality works
@@ -105,11 +106,11 @@ class iamModal extends HTMLElement {
     }
 
     closeButton?.addEventListener('click', () => {
-      closeModal(id, this);
+      closeModal(this);
     });
 
     cancelButton?.addEventListener('click', () => {
-      closeModal(id, this);
+      closeModal(this);
     });
 
     agreedButton?.addEventListener('click', () => {
@@ -119,7 +120,7 @@ class iamModal extends HTMLElement {
     
 
     this.addEventListener('close-modal', () => {
-      closeModal(id, this);
+      closeModal(this);
     });
 
     // Hijack the default form submission 
@@ -127,7 +128,7 @@ class iamModal extends HTMLElement {
 
       if(e.submitter && e.submitter.hasAttribute('formmethod') && e.submitter.getAttribute('formmethod') =="dialog"){
         
-        closeModal(id, this);
+        closeModal(this);
       }
       else {
         agreed();
@@ -164,7 +165,7 @@ class iamModal extends HTMLElement {
           event.clientY > dialogDimensions.bottom
         ) {
           if (!event.target.closest('dialog *'))
-            closeModal(id, this); // Weird bug when interacting with radio input fields within dialogs cuases it to close
+            closeModal(this); // Weird bug when interacting with radio input fields within dialogs cuases it to close
         }
       }
     });

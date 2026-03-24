@@ -8,6 +8,7 @@
   import Actionbar from '@/components/Actionbar/Actionbar.vue';
   import Card from '@/components/Card/Card.vue';
   import Tabs from '@/components/Tabs/Tabs.vue';
+  import Form from '@/components/Form/Form.vue';
   
   
 </script>
@@ -55,6 +56,126 @@
     
     </Header>
     
+    
+    <div class="md-auto-grid">
+      <div class="admin-panel">
+        <h2 class="bg-light">Material information</h2>
+
+        <div class="sub-panel">
+          <h3>Part A</h3>
+
+          <div class="sub-grid pb-1">
+            <span class="col-start-1 col-end-5 pb-1">Tenure type: <strong>Freehold</strong></span>
+            <span class="col-start-6 col-end-12 pb-1">EPC rating: <strong>C (79), potential B (83)</strong></span>
+              
+            <span class="col-start-1 col-end-5 pb-1">Price: <strong>£180,000</strong></span>
+            <span class="col-start-6 col-end-12 pb-1">Council tax band: <strong>B</strong></span>
+          </div>
+        </div>
+        <div class="sub-panel">
+          <h3>Part B</h3>
+          <span class="pb-1">Average broadband speed:</span>
+
+          <div class="d-flex gap-1 pb-2">
+            <span>
+              <strong>Standard</strong><br/>
+              <i class="fa-duotone fa-solid fa-wifi-weak text-heading"></i> <strong>17 mb/s</strong>
+            </span>
+            <span>
+              <strong>Superfast</strong><br/>
+              <i class="fa-duotone fa-solid fa-wifi-fair text-heading"></i> <strong>N/A</strong>
+            </span>
+            <span>
+              <strong>Ultrafast</strong><br/>
+              <i class="fa-duotone fa-solid fa-wifi-strong text-heading"></i> <strong>1000 mb/s</strong>
+            </span>
+          </div>
+
+          <span class="d-block pb-1">Mobile signal/coverage:</span>
+
+          <div class="d-flex gap-1 pb-1">
+            <span>
+              <span class="d-block pb-1">EE</span>
+              <i class="fa-duotone fa-solid fa-signal-weak text-heading"></i>
+            </span>
+            <span>
+              <span class="d-block pb-1">Three</span>
+              <i class="fa-duotone fa-solid fa-signal-fair text-heading"></i>
+            </span>
+            <span>
+              <span class="d-block pb-1">O2</span>
+              <i class="fa-duotone fa-solid fa-signal-good text-heading"></i>
+            </span>
+            <span>
+              <span class="d-block pb-1">Vodaphone</span>
+              <i class="fa-duotone fa-solid fa-signal-strong text-heading"></i>
+            </span>
+          </div>
+
+
+        </div>
+
+        <div class="sub-panel">
+          <h3>Part C</h3>
+          <span class="d-block pb-1">Listed: <strong class="me-2">No</strong> Planning applications: <strong>3</strong></span>
+          <span class="d-block pb-1">Covenants: <i class="fa-solid fa-exclamation-circle text-danger"></i> <strong>2</strong></span>
+          <span class="d-flex"><span class="text-nowrap me-1">Flood risk:</span> <strong>Hasn’t flood in last 5 years, no flooding or sea defences at the property, 1 source of risk from local pond.</strong></span>
+        </div>
+      </div>
+      <div class="admin-panel">
+        <h2 class="bg-light">Material information</h2>
+
+        <div class="sub-panel">
+          <h3>Part B</h3>
+          <span class="pb-1">Average broadband speed:</span>
+
+          <div class="d-flex gap-1 pb-2">
+            <span>
+              <strong>Standard</strong><br/>
+              <i class="fa-duotone fa-solid fa-wifi-weak text-heading"></i> <strong>17 mb/s</strong>
+            </span>
+            <span>
+              <strong>Superfast</strong><br/>
+              <i class="fa-duotone fa-solid fa-wifi-fair text-heading"></i> <strong>N/A</strong>
+            </span>
+            <span>
+              <strong>Ultrafast</strong><br/>
+              <i class="fa-duotone fa-solid fa-wifi-strong text-heading"></i> <strong>1000 mb/s</strong>
+            </span>
+          </div>
+
+          <span class="d-block pb-1">Mobile signal/coverage:</span>
+
+          <div class="d-flex gap-1 pb-1">
+            <span>
+              <span class="d-block pb-1">EE</span>
+              <i class="fa-duotone fa-solid fa-signal-weak text-heading"></i>
+            </span>
+            <span>
+              <span class="d-block pb-1">Three</span>
+              <i class="fa-duotone fa-solid fa-signal-fair text-heading"></i>
+            </span>
+            <span>
+              <span class="d-block pb-1">O2</span>
+              <i class="fa-duotone fa-solid fa-signal-good text-heading"></i>
+            </span>
+            <span>
+              <span class="d-block pb-1">Vodaphone</span>
+              <i class="fa-duotone fa-solid fa-signal-strong text-heading"></i>
+            </span>
+          </div>
+
+
+        </div>
+
+        <div class="sub-panel">
+          <h3>Part C</h3>
+          <span class="d-block pb-1">Listed: <strong class="me-2">No</strong> Planning applications: <strong>3</strong></span>
+          <span class="d-block pb-1">Covenants: <i class="fa-solid fa-exclamation-circle text-danger"></i> <strong>2</strong></span>
+          <span class="d-flex"><span class="text-nowrap me-1">Flood risk:</span> <strong>Hasn’t flood in last 5 years, no flooding or sea defences at the property, 1 source of risk from local pond.</strong></span>
+        </div>
+      </div>
+    </div>
 
     <div class="admin-panel">
       <h2 class="bg-light">Clients</h2>
@@ -62,61 +183,86 @@
         <button class="btn btn-action">Link/unlink CRM client</button>
         <button class="btn btn-action btn-primary fa-plus">Add client</button>
       </Actionbar>
-      <Table>
-
-        <table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Client</th>
-              <th>Client type</th>
-              <th>Date added</th>
-              <th>Added by</th>
-              <th>Onboarding status</th>
-              <th>Latest risk level</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-              </td>
-              <td><i class="fa-regular fa-star"></i> John Smith</td>
-              <td>Vendor</td>
-              <td>27/08/25</td>
-              <td>Agent name</td>
-              <td>Incomplete</td>
-              <td>Incomplete</td>
-              <td><a href="/">Manage client</a></td>
-            </tr>
-            <tr>
-              <td>
-              </td>
-              <td><i class="fa-regular fa-star"></i> John Smith</td>
-              <td>Vendor</td>
-              <td>27/08/25</td>
-              <td>Agent name</td>
-              <td>Incomplete</td>
-              <td>Incomplete</td>
-              <td><a href="/">Manage client</a></td>
-            </tr>
-            <tr>
-              <td>
-              </td>
-              <td><i class="fa-regular fa-star"></i> John Smith</td>
-              <td>Vendor</td>
-              <td>27/08/25</td>
-              <td>Agent name</td>
-              <td>Incomplete</td>
-              <td>Incomplete</td>
-              <td><a href="/">Manage client</a></td>
-            </tr>
-          </tbody>
-        </table>
+      <Table class="table--cta table--fullwidth">
+      <table class="table--filtered">
+                <thead>
+                <tr style="--row-height: 37px;">
+                    <th class="th--fixed"></th>
+                    <th>Client name</th>
+                    <th>Date added</th>
+                    <th>Added by</th>
+                    <th>Client type</th>
+                    <th>Onboarding status</th>
+                    <th>Latest risk level</th>
+                    <!--[if BLOCK]><![endif]-->                        <th>Due diligence</th>
+                    <!--[if ENDBLOCK]><![endif]-->
+                    <th>Residential address</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <!--[if BLOCK]><![endif]-->                    <tr class="filtered--matched filtered--show show" style="--row-height: 97px;">
+                        <td class="td--fixed" data-label="">
+                            <div class="dialog__wrapper">
+                                <button class="btn btn-secondary btn-compact fa fa-ellipsis-vertical btn-sm m-0" popovertarget="menu751614186369" aria-haspopup="true" aria-controls="menu751614186369" style="anchor-name: --menu751614186369;"></button>
+                                <iam-menu class="dialog--list" x-data="" id="menu751614186369" popover="auto" role="menu" style="position-anchor: --menu751614186369;">
+                                  
+                                    <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                    <!--[if BLOCK]><![endif]-->                                        <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                                    <!--[if ENDBLOCK]><![endif]-->
+                                </iam-menu>
+                            </div>
+                        </td>
+                        <td data-label="Client name">
+                            <!--[if BLOCK]><![endif]-->                                <i class="far fa-solid fa-star"></i>
+                            <!--[if ENDBLOCK]><![endif]-->
+                            Martin Wright
+                            <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+                        </td>
+                        <td data-label="Date added">27.01.26</td>
+                        <td data-label="Added by">Testing Account</td>
+                        <td data-label="Client type">Vendor</td>
+                        <td data-label="Onboarding status">Risk assessment complete</td>
+                        <td data-label="Latest risk level" data-content="low">
+                            Low
+                        </td>
+                        <!--[if BLOCK]><![endif]-->                            <td data-label="Due diligence" data-content="incomplete">
+                                Incomplete
+                            </td>
+                        <!--[if ENDBLOCK]><![endif]-->
+                        <td data-label="Residential address">Lee Dam, 95 Katie Brook, TS10 3NS</td>
+                        <td data-label="" class="px-3">
+                            <a href="http://my.iamproperty.test/ic/risk-assessments/140/view" class="text-nowrap btn btn-tertiary">
+                                Manage client
+                            </a>
+                        </td>
+                    </tr>
+                <!--[if ENDBLOCK]><![endif]-->
+                </tbody>
+      </table>
       </Table>
     </div>
     
-
+<Modal class="modal--lg">
+    <dialog id="notes-modal">
+        <h2>Add note</h2>
+        <p>You are adding a note for the transaction: .</p>
+        <Form>
+            <form class="fill-row" method="POST" action="/">
+                
+                <label class="transaction-note hidden">
+                    Add note
+                    <textarea class="isg-input" name="content" placeholder="Add note..." rows="10" required></textarea>
+                    <span class="invalid-feedback">Text required before saving a note</span>
+                </label>
+                <div class="btn__group mb-0">
+                    <button command="close" commandfor="notes-modal" class="btn btn-secondary">Cancel</button>
+                    <button class="btn btn-primary create-note">Add note</button>
+                </div>
+            </form>
+        </Form>
+    </dialog>
+</Modal>
 
     <div class="bg-primary pt-2 px-3 mb-2 rounded">
       <div class="md-col-end-8">
@@ -427,5 +573,67 @@
       </div>
 
     </div>
+
+
+    <div class="admin-panel">
+      <iam-actionbar>
+        <a href="{{ route('ic.transactions.print-notes', $transaction) }}" target="_blank" class="btn btn-action">Print all notes</a>
+        <button command="show-modal" commandfor="notes-modal" class="btn btn-action btn-primary fa-plus">Add note</button>
+    </iam-actionbar>
+      <Table data-expandable class="table--fullwidth">
+      <table>
+            <thead>
+                <tr>
+                    <th class="author">Added by</th>
+                    <th class="date">Date added</th>
+                    <th>Note</th>
+                    <th class="expand-button-heading"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+              <tr class="show">
+                
+                    <td data-label="Added by">
+                                                    <a href="http://my.iamproperty.test/ic/user/3/view">
+                                Testing Account
+                            </a>
+
+                            <span class="text-nowrap">Komodo Newcastle Office</span>
+                                            </td>
+
+                    <td data-label="Date added">20 Mar 2026 12:54</td>
+
+                    <td data-label="Note"><p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p></td>
+                <td class="td--expand"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down mt-0" data-expand-button="" data-index="0">Expand</button></td>
+
+                </tr>
+          <tr class="show">
+            
+            <td data-label="Added by">
+                                            <a href="http://my.iamproperty.test/ic/user/3/view">
+                        Testing Account
+                    </a>
+
+                    <span class="text-nowrap">Komodo Newcastle Office</span>
+                                    </td>
+
+            <td data-label="Date added">20 Mar 2026 12:19</td>
+
+            <td data-label="Note"><p>yo</p></td>
+            <td class="td--expand"><button class="btn btn-compact btn-secondary btn-sm fa-chevron-down mt-0" data-expand-button="" data-index="0">Expand</button></td>
+          </tr>
+                            
+        </tbody>
+      </table>
+      </Table>
+    </div>
+
+
+
+
+
   </main>
 </template>

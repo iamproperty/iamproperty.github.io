@@ -270,4 +270,32 @@ export const carousel = function (carouselComponent): void {
   );
 };
 
+export const updateCarousel = function (carouselComponent): void {
+
+  const carouselElement = carouselComponent.shadowRoot.querySelector('.carousel');
+  const carouselInner = carouselElement.querySelector('.carousel__inner');
+  const carouselControls = carouselElement.querySelector('.carousel__controls');
+  const carouselProgress = carouselElement.querySelector('.carousel__progress [type="range"]');
+  const itemCount = carouselComponent.querySelectorAll(':scope > div').length;
+
+  let scrollArea = carouselInner.clientWidth;
+  let itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
+  let visibleItems = Math.round(scrollArea / itemWidth);
+
+  carouselProgress.setAttribute('min', 1);
+  carouselProgress.setAttribute('step', visibleItems);
+
+  let progressMax = getProgressMax(itemCount, visibleItems);
+
+  carouselProgress.setAttribute('max', progressMax);
+  carouselProgress.value = 1;
+
+  let percent = getProgressPercent(1, progressMax);
+
+  carouselProgress.style.setProperty('--percent', percent + '%');
+
+  carouselControls.innerHTML = generatePipsHTML(carouselComponent, []);
+
+}
+
 export default carousel;

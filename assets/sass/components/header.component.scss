@@ -3,7 +3,7 @@
 @use '../elements/admin-panel' as *;
 
 *, *::before, *::after {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .container {
@@ -14,12 +14,15 @@
 
 :host {
   padding-top: 0 !important;
-  margin-bottom: 2rem;
   display: block !important;
+
+  .container {
+    padding-bottom: var(--padding-bottom)!important;
+  }
 }
 
 .header-banner {
-  padding-top: 2.75rem; /* 44*/
+  padding-top: var(--padding-top);
   max-width: 120rem; /* 1920 */
   margin-inline: auto;
   display: block;
@@ -89,11 +92,6 @@
     top: 0 !important;
     left: 5.25rem !important;
   }
-}
-
-::slotted(*:not(.btn__group):last-child) {
-  /* padding-bottom: 0 !important; */
-  /* margin-bottom: 0 !important; */
 }
 
 /* #region Breadcrumbs */
@@ -195,7 +193,8 @@ slot[name="badge"] {
 /* #region toolbox  */
 :host(.has-toolbox) {
 
-  margin-bottom: 4rem;
+  --padding-bottom: 1rem!important;
+  margin-bottom: 4rem!important;
 }
 :host(.has-toolbox) [name="toolbox"]{
 
@@ -205,7 +204,6 @@ slot[name="badge"] {
   margin-bottom: -3rem;
   width: fit-content;
   margin-inline: auto;
-
   gap: 0.5rem;
 }
 

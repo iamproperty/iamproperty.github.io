@@ -14,7 +14,7 @@ class iamHeader extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
-    const loadCSS = `@import "${assetLocation}/css/components/header.css";`;
+    const loadCSS = `@import "${assetLocation}/css/components/header.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = /*HTML*/`

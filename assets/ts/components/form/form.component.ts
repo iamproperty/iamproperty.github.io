@@ -3,7 +3,7 @@ import { searchAjax, filterList, setTag } from '../../modules/dropdown';
 
 trackComponentRegistered('iam-tag');
 
-class iamTag extends HTMLElement {
+class iamForm extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
@@ -32,6 +32,112 @@ class iamTag extends HTMLElement {
     return true;
   };
 
+  checkConditions = (conditions):boolean => {
+
+    let meetsCondition = true;
+
+    JSON.parse(conditions).forEach((condition) => {
+      if(this.querySelector(`#${condition['if']}`).value != condition['equals'])
+        meetsCondition = false;
+    });
+
+    return meetsCondition;
+  }
+
+  showIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-show-if]')).forEach((element) => {
+
+      if(!this.checkConditions(element.getAttribute('data-show-if')))
+        element.classList.add('d-none');
+      else 
+        element.classList.remove('d-none');
+
+    });
+  }
+
+  hideIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-hide-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-hide-if')))
+        element.classList.add('d-none');
+      else 
+        element.classList.remove('d-none');
+
+    });
+  }
+
+  disabledIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-disabled-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-disabled-if')))
+        element.setAttribute('disabled','disabled');
+      else 
+        element.removeAttribute('disabled');
+
+    });
+  }
+
+  enabledIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-enabled-if]')).forEach((element) => {
+
+      if(!this.checkConditions(element.getAttribute('data-enabled-if')))
+        element.setAttribute('disabled','disabled');
+      else 
+        element.removeAttribute('disabled');
+
+    });
+  }
+
+  requiredIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-required-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-required-if')))
+        element.setAttribute('required','required');
+      else
+        element.removeAttribute('required');
+
+    });
+  }
+
+  readonlyIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-readonly-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-readonly-if')))
+        element.setAttribute('readonly','readonly');
+      else
+        element.removeAttribute('readonly');
+
+    });
+  }
+
+  writeIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-write-if]')).forEach((element) => {
+
+      if(!this.checkConditions(element.getAttribute('data-write-if')))
+        element.setAttribute('readonly','readonly');
+      else
+        element.removeAttribute('readonly');
+
+    });
+  }
+
+  emptyIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-empty-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-empty-if')))
+        element.value = "";
+
+    });
+  }
+
   connectedCallback(): void {
 
     const form = this.querySelector('form');
@@ -48,13 +154,10 @@ class iamTag extends HTMLElement {
 
       if (!this.isFormValid(form)) {
 
-      console.log('hey2');
-
         e.preventDefault();
         form?.querySelector('input:invalid')?.scrollIntoView();
       }
     });
-
 
     // conditional reveal required fields
     Array.from(form.querySelectorAll('.conditional [required]')).forEach((input) => {
@@ -70,8 +173,26 @@ class iamTag extends HTMLElement {
       input.removeAttribute('data-required');
     });
 
+    this.showIf();
+    this.hideIf();
+    this.disabledIf();
+    this.enabledIf();
+    this.requiredIf();
+    this.readonlyIf();
+    this.writeIf();
+    this.emptyIf();
+    
+
     form.addEventListener('change', () => {
 
+      this.showIf();
+      this.hideIf();
+      this.disabledIf();
+      this.enabledIf();
+      this.requiredIf();
+      this.readonlyIf();
+      this.writeIf();
+      this.emptyIf();
 
       Array.from(form.querySelectorAll('.conditional [data-conditional-required], .conditional [data-conditional-data-required]')).forEach((input) => {
 
@@ -99,4 +220,4 @@ class iamTag extends HTMLElement {
   }
 }
 
-export default iamTag;
+export default iamForm;

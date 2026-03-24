@@ -317,4 +317,37 @@ $breakpoints: (
   }
 
   /* #endregion */
+
+  .auto-grid {
+    display: flex;
+    column-gap: var(--gap);
+
+    > * {
+      display: block!important;
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: 36em) {
+    .sm-auto-grid {
+      display: flex;
+      column-gap: var(--gap);
+
+      > * {
+        display: block!important;
+        width: 100%;
+      }
+    }
+  }
+  @media screen and (min-width: 62em) {
+    .md-auto-grid {
+      display: flex;
+      column-gap: var(--gap);
+
+      > * {
+        display: block!important;
+        width: 100%;
+      }
+    }
+  }
 }
