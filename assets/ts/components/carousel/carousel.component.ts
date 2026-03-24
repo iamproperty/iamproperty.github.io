@@ -1,4 +1,4 @@
-import { generateThumbnailList, generatePipsHTML, carousel } from '../../modules/carousel';
+import { generateThumbnailList, generatePipsHTML, carousel, updateCarousel } from '../../modules/carousel';
 import { trackComponent, trackComponentRegistered } from '../_global';
 
 trackComponentRegistered('iam-carousel');

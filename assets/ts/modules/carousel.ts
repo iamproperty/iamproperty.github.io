@@ -270,4 +270,8 @@ export const carousel = function (carouselComponent): void {
   );
 };
 
+export const updateCarousel = function (carouselComponent): void {
+
+}
+
 export default carousel;

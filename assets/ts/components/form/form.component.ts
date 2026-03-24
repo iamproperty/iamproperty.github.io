@@ -116,6 +116,28 @@ class iamForm extends HTMLElement {
     });
   }
 
+  writeIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-write-if]')).forEach((element) => {
+
+      if(!this.checkConditions(element.getAttribute('data-write-if')))
+        element.setAttribute('readonly','readonly');
+      else
+        element.removeAttribute('readonly');
+
+    });
+  }
+
+  emptyIf = ():void => {
+
+    Array.from(this.querySelectorAll('[data-empty-if]')).forEach((element) => {
+
+      if(this.checkConditions(element.getAttribute('data-empty-if')))
+        element.value = "";
+
+    });
+  }
+
   connectedCallback(): void {
 
     const form = this.querySelector('form');
@@ -157,6 +179,8 @@ class iamForm extends HTMLElement {
     this.enabledIf();
     this.requiredIf();
     this.readonlyIf();
+    this.writeIf();
+    this.emptyIf();
     
 
     form.addEventListener('change', () => {
@@ -167,6 +191,8 @@ class iamForm extends HTMLElement {
       this.enabledIf();
       this.requiredIf();
       this.readonlyIf();
+      this.writeIf();
+      this.emptyIf();
 
       Array.from(form.querySelectorAll('.conditional [data-conditional-required], .conditional [data-conditional-data-required]')).forEach((input) => {
 
