@@ -59,6 +59,16 @@
     padding-bottom: 1.5rem;
   }
 
+  /* #region CMS support */
+  p:empty {
+    display: none;
+  }
+
+  p:has(a:first-child:last-child){
+    display: contents;
+  }
+  /* #endregion */
+
   :is(.lead, .strapline) {
     font-size: 1.125rem; /* 18/16 */
     line-height: 1.75rem; /* 28/16 */

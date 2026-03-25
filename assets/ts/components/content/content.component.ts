@@ -15,17 +15,27 @@ class iamContent extends HTMLElement {
 
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="content__container">
-      <slot></slot>
-    </div>
+    <slot></slot>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  addTitle = (title) => {
+
+    if(this.hasAttribute('data-title-tag')){
+
+      return `<${this.getAttribute('data-title-tag')} class="${this.getAttribute('data-title-class')}">${title}</${this.getAttribute('data-title-tag')}>`;
+    }
+
+    return '';
   }
 
   connectedCallback(): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const component = this;
     const url = this.getAttribute('data-url');
+
+    const addTitle = this.addTitle;
 
     const registerComponents = (contentComponent): void => {
       const components = ['card', 'marketing', 'notification'];
@@ -64,6 +74,8 @@ class iamContent extends HTMLElement {
       newXHRRequest.onload = function (): void {
         if (this.status === 200) {
           const response = JSON.parse(this.responseText);
+
+          component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
           component.innerHTML = `${response.content.rendered}`;
 
           registerComponents(component);

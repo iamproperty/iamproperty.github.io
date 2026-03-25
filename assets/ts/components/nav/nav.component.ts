@@ -177,7 +177,7 @@ class iamNav extends HTMLElement {
     });
 
     // Has secondary link
-    if (this.querySelector('a[slot="secondary"]')) {
+    if (this.querySelector('[slot="secondary"]')) {
       menu.classList.add('has-secondary');
     }
 

@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "current_results": "100",
+    "total_results": "582",
+    "current_page": "1",
+    "total_pages": "6",
+    "has_welsh_results": "1",
+    "has_english_results": "1",
+    "welsh_language": "0"
+  },
+  "data": [
+    {
+      "type": "feature",
+      "id": "leadgen",
+      "attributes": {
+        "title": "Lead generation"
+      }
+    },
+    {
+      "type": "feature",
+      "id": "onboarding",
+      "attributes": {
+        "title": "Onboarding"
+      }
+    },
+    {
+      "type": "feature",
+      "id": "crm",
+      "attributes": {
+        "title": "CRM"
+      }
+    },
+    {
+      "type": "feature",
+      "id": "auction",
+      "attributes": {
+        "title": "Auction"
+      }
+    },
+    {
+      "type": "feature",
+      "id": "conveyancing",
+      "attributes": {
+        "title": "Conveyancing"
+      }
+    }
+  ]
+}
