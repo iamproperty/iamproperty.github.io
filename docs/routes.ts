@@ -1266,7 +1266,7 @@ const routes = [
         meta: {
           title: 'iamproperty hub | iamkey',
         },
-        component: () => import('./views/standalone/eco/hub.vue'),
+        component: () => import('./views/standalone/eco/Hub.vue'),
       },
       {
         path: 'eco-product',
