@@ -1,5 +1,11 @@
 @use '../_func' as *;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :host {
   /* all: unset; */
   inset: auto;
@@ -42,12 +48,18 @@
 
 :host(.menu--sm) {
   width: 10rem;
+  min-width: 10rem!important;
+  max-width: 10rem!important;
 }
 :host(.menu--md) {
   width: 15rem; /* 240 */
+  min-width: 15rem!important;
+  max-width: 15rem!important;
 }
 :host(.menu--lg) {
   width: 20rem; /* 320 */
+  min-width: 20rem!important;
+  max-width: 20rem!important;
 }
 
 :host(.menu--height-sm) {
