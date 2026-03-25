@@ -82,6 +82,10 @@
       background: #eeeeee;
     }
 
+    &:has(:hover, :focus) {
+      background: #eeeeee!important;
+    }
+
     &:is(:active) {
       background: #e0e0e0;
     }

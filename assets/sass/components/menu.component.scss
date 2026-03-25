@@ -57,7 +57,7 @@
   max-height: 25rem; /* 400 */
 }
 
-::slotted(*:is(button, a, label, span)) {
+::slotted(*:is(button, a, label, span, iam-button)) {
   /* all: unset !important; */
   background: unset !important;
   border: unset !important;
@@ -74,7 +74,7 @@
   text-align: var(--menu-item-text-align, left) !important;
 }
 
-::slotted(*:is(button, a, label)) {
+::slotted(*:is(button, a, label, iam-button)) {
   padding-inline: var(--menu-item-padding, 0.5rem);
   cursor: var(--menu-item-cursor, pointer) !important;
 }
@@ -84,7 +84,7 @@
   font-weight: 700 !important;
 }
 
-::slotted(*:is(button, a, label, span):last-child) {
+::slotted(*:is(button, a, label, span, iam-button):last-child) {
   margin-bottom: 0 !important;
 }
 
@@ -119,13 +119,13 @@
   }
 }
 
-::slotted(*:is(button, a, label):is(:hover, .hover, :focus, .focus)) {
+::slotted(*:is(button, a, label, iam-button):is(:hover, .hover, :focus, .focus)) {
   /* all: unset !important; */
   background: var(--colour-light) !important;
   border-radius: 0.25rem !important;
 }
 
-::slotted(*:is(button, a, label):is(:active, .active)) {
+::slotted(*:is(button, a, label, iam-button):is(:active, .active)) {
   background: rgba(224, 224, 224, 1) !important;
   border-radius: 0.25rem !important;
 }

@@ -570,6 +570,14 @@ const routes = [
         component: () => import('./views/components/BentoGridDoc.vue'),
       },
       {
+        path: 'button',
+        name: 'Button',
+        meta: {
+          title: 'Button | Components | iamkey',
+        },
+        component: () => import('./views/components/ButtonDoc.vue'),
+      },
+      {
         path: 'carousel',
         name: 'Carousel',
         meta: {

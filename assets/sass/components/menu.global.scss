@@ -17,6 +17,13 @@
     width: 1.25rem;
   }
 
+  iam-menu {
+    iam-button button {
+
+      all: unset!important;
+    }
+  }
+
   /* #region sub menu */
 
   iam-menu > button:has(+ iam-menu) {

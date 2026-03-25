@@ -9,6 +9,8 @@
   import Card from '@/components/Card/Card.vue';
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Form from '@/components/Form/Form.vue';
+  import Menu from '@/components/Menu/Menu.vue';
+  import IamButton from '@/components/Button/Button.vue';
   
   
 </script>
@@ -47,7 +49,7 @@
         </div>
       </div>
 
-      <a href="/" class="btn btn-action fa-file" slot="toolbox">View property report</a>
+      <button class="btn btn-action fa-file" popovertarget="property-report" slot="toolbox">View property report</button>
       <button class="btn btn-action fa-file" command="show-modal" commandfor="send" slot="toolbox">Action button</button>
       <hr slot="toolbox" class="d-none d-sm-block"/>
       <a href="/" class="btn btn-action fa-plus" slot="toolbox">Add client</a>
@@ -55,6 +57,11 @@
       <a href="/" class="btn btn-action fa-plus" slot="toolbox">Add document</a>
     
     </Header>
+
+    <Menu id="property-report">
+      <a href="/report" class="btn btn-action">View report</a>
+      <IamButton data-copy-text="/report"><button class="btn btn-action">Copy report link</button></IamButton>
+    </Menu>
     
     
     <div class="md-auto-grid">

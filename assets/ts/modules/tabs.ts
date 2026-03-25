@@ -162,6 +162,13 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
     });
   });
 
+  details.forEach((detailsElement, index) => {
+    detailsElement.addEventListener("toggle", function() {
+      if(detailsElement.open)
+        detailsElement.querySelector('button,input').focus();
+    });
+  });
+
   nextButton?.addEventListener('click', (e) => {
     e.preventDefault();
 
@@ -213,7 +220,9 @@ export const toggleTab = function (details: Array, button: Element): boolean | v
   details.forEach((detail, detailsIndex) => {
     const detailsOpen = button.getAttribute('data-index') == detailsIndex ? true : false;
 
-    if (detailsOpen) detail.setAttribute('open', detailsOpen);
+    if (detailsOpen) {
+      detail.setAttribute('open', detailsOpen);
+    }
     else detail.removeAttribute('open');
   });
 };
