@@ -9,7 +9,7 @@
       display: none;
     }
 
-    &:not(:has(i)):after {
+    &:not(:has(i)):not(.no-icon):after {
       content: '';
 
       display: inline-block;

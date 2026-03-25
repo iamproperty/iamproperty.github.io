@@ -166,7 +166,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
 
     &:is([aria-pressed='true'], .current) {
       pointer-events: none;
-      outline: var(--contrast-outline-width, 0px) solid var(--colour-primary-theme) !important;
+      //outline: var(--contrast-outline-width, 0px) solid var(--colour-primary-theme) !important;
     }
   }
 }
@@ -194,7 +194,7 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
   flex-direction: column;
   border-bottom: 1px solid var(--colour-border);
   overflow: hidden;
-  outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
+  //outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
 
   &:after {
     display: none;

@@ -65,7 +65,7 @@
   }
 
   p:has(a:first-child:last-child){
-    display: contents;
+    /* display: contents; */
   }
   /* #endregion */
 

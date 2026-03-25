@@ -49,7 +49,7 @@
         </div>
       </div>
 
-      <button class="btn btn-action fa-file" popovertarget="property-report" slot="toolbox">View property report</button>
+      <button class="btn btn-action fa-file no-icon" popovertarget="property-report" slot="toolbox">View property report</button>
       <button class="btn btn-action fa-file" command="show-modal" commandfor="send" slot="toolbox">Action button</button>
       <hr slot="toolbox" class="d-none d-sm-block"/>
       <a href="/" class="btn btn-action fa-plus" slot="toolbox">Add client</a>
@@ -63,127 +63,6 @@
       <IamButton data-copy-text="/report"><button class="btn btn-action">Copy report link</button></IamButton>
     </Menu>
     
-    
-    <div class="md-auto-grid">
-      <div class="admin-panel">
-        <h2 class="bg-light">Material information</h2>
-
-        <div class="sub-panel">
-          <h3>Part A</h3>
-
-          <div class="sub-grid pb-1">
-            <span class="col-start-1 col-end-5 pb-1">Tenure type: <strong>Freehold</strong></span>
-            <span class="col-start-6 col-end-12 pb-1">EPC rating: <strong>C (79), potential B (83)</strong></span>
-              
-            <span class="col-start-1 col-end-5 pb-1">Price: <strong>£180,000</strong></span>
-            <span class="col-start-6 col-end-12 pb-1">Council tax band: <strong>B</strong></span>
-          </div>
-        </div>
-        <div class="sub-panel">
-          <h3>Part B</h3>
-          <span class="pb-1">Average broadband speed:</span>
-
-          <div class="d-flex gap-1 pb-2">
-            <span>
-              <strong>Standard</strong><br/>
-              <i class="fa-duotone fa-solid fa-wifi-weak text-heading"></i> <strong>17 mb/s</strong>
-            </span>
-            <span>
-              <strong>Superfast</strong><br/>
-              <i class="fa-duotone fa-solid fa-wifi-fair text-heading"></i> <strong>N/A</strong>
-            </span>
-            <span>
-              <strong>Ultrafast</strong><br/>
-              <i class="fa-duotone fa-solid fa-wifi-strong text-heading"></i> <strong>1000 mb/s</strong>
-            </span>
-          </div>
-
-          <span class="d-block pb-1">Mobile signal/coverage:</span>
-
-          <div class="d-flex gap-1 pb-1">
-            <span>
-              <span class="d-block pb-1">EE</span>
-              <i class="fa-duotone fa-solid fa-signal-weak text-heading"></i>
-            </span>
-            <span>
-              <span class="d-block pb-1">Three</span>
-              <i class="fa-duotone fa-solid fa-signal-fair text-heading"></i>
-            </span>
-            <span>
-              <span class="d-block pb-1">O2</span>
-              <i class="fa-duotone fa-solid fa-signal-good text-heading"></i>
-            </span>
-            <span>
-              <span class="d-block pb-1">Vodaphone</span>
-              <i class="fa-duotone fa-solid fa-signal-strong text-heading"></i>
-            </span>
-          </div>
-
-
-        </div>
-
-        <div class="sub-panel">
-          <h3>Part C</h3>
-          <span class="d-block pb-1">Listed: <strong class="me-2">No</strong> Planning applications: <strong>3</strong></span>
-          <span class="d-block pb-1">Covenants: <i class="fa-solid fa-exclamation-circle text-danger"></i> <strong>2</strong></span>
-          <span class="d-flex"><span class="text-nowrap me-1">Flood risk:</span> <strong>Hasn’t flood in last 5 years, no flooding or sea defences at the property, 1 source of risk from local pond.</strong></span>
-        </div>
-      </div>
-      <div class="admin-panel">
-        <h2 class="bg-light">Material information</h2>
-
-        <div class="sub-panel">
-          <h3>Part B</h3>
-          <span class="pb-1">Average broadband speed:</span>
-
-          <div class="d-flex gap-1 pb-2">
-            <span>
-              <strong>Standard</strong><br/>
-              <i class="fa-duotone fa-solid fa-wifi-weak text-heading"></i> <strong>17 mb/s</strong>
-            </span>
-            <span>
-              <strong>Superfast</strong><br/>
-              <i class="fa-duotone fa-solid fa-wifi-fair text-heading"></i> <strong>N/A</strong>
-            </span>
-            <span>
-              <strong>Ultrafast</strong><br/>
-              <i class="fa-duotone fa-solid fa-wifi-strong text-heading"></i> <strong>1000 mb/s</strong>
-            </span>
-          </div>
-
-          <span class="d-block pb-1">Mobile signal/coverage:</span>
-
-          <div class="d-flex gap-1 pb-1">
-            <span>
-              <span class="d-block pb-1">EE</span>
-              <i class="fa-duotone fa-solid fa-signal-weak text-heading"></i>
-            </span>
-            <span>
-              <span class="d-block pb-1">Three</span>
-              <i class="fa-duotone fa-solid fa-signal-fair text-heading"></i>
-            </span>
-            <span>
-              <span class="d-block pb-1">O2</span>
-              <i class="fa-duotone fa-solid fa-signal-good text-heading"></i>
-            </span>
-            <span>
-              <span class="d-block pb-1">Vodaphone</span>
-              <i class="fa-duotone fa-solid fa-signal-strong text-heading"></i>
-            </span>
-          </div>
-
-
-        </div>
-
-        <div class="sub-panel">
-          <h3>Part C</h3>
-          <span class="d-block pb-1">Listed: <strong class="me-2">No</strong> Planning applications: <strong>3</strong></span>
-          <span class="d-block pb-1">Covenants: <i class="fa-solid fa-exclamation-circle text-danger"></i> <strong>2</strong></span>
-          <span class="d-flex"><span class="text-nowrap me-1">Flood risk:</span> <strong>Hasn’t flood in last 5 years, no flooding or sea defences at the property, 1 source of risk from local pond.</strong></span>
-        </div>
-      </div>
-    </div>
-
     <div class="admin-panel">
       <h2 class="bg-light">Clients</h2>
       <Actionbar>
