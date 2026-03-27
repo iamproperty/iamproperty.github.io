@@ -19,7 +19,7 @@
         margin-left: 0.5em;
         line-height: 1em;
         font-size: 1em;
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
       }
     }
 
@@ -76,7 +76,7 @@
           height: 1.5rem;
           line-height: 1.5rem;
           font-weight: 300;
-          font-family: 'Font Awesome 7 Pro';
+          font-family: var(--fa-family-classic);
         }
       }
 
@@ -131,7 +131,7 @@
         margin: 0;
         line-height: 1.5rem;
         font-weight: 300;
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
       }
 
 

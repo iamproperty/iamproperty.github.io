@@ -158,7 +158,7 @@ slot[name='secondary'] {
 
   > .btn:before {
     content: '\f142';
-    font-family: 'Font Awesome 7 Pro';
+    font-family: var(--fa-family-classic);
   }
 }
 

@@ -132,7 +132,7 @@
 
     &:before {
       content: '\f00c';
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       margin-right: 1rem;
       font-style: inherit;
       width: 1rem;
@@ -156,7 +156,7 @@
   .btn {
     &[class*='fa-']:before {
       content: var(--fa);
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
     }
 
     &[class*='fa-after'] {
@@ -177,7 +177,7 @@
 
     i[class*='fa-'] {
       --fa-width: 1em;
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       margin-right: 1rem;
       line-height: 1em;
       font-style: inherit;
@@ -232,7 +232,7 @@
       z-index: var(--index-focus);
       color: currentColor;
       font-weight: 300;
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
     }
   }
   /* #endregion */

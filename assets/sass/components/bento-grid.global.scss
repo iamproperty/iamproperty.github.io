@@ -48,7 +48,7 @@ iam-bento-grid {
           margin-left: 0.5em;
           line-height: 1em;
           font-size: 1em;
-          font-family: 'Font Awesome 7 Pro';
+          font-family: var(--fa-family-classic);
         }
       }
 
@@ -63,7 +63,7 @@ iam-bento-grid {
         line-height: 1em;
         font-size: 0.5em;
 
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         font-weight: 300;
       }
 

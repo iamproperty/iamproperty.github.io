@@ -200,7 +200,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       }
 
       &:before {
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         content: '\f078';
         font-weight: 500;
       }

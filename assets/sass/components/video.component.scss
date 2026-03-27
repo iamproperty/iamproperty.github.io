@@ -15,7 +15,7 @@
     cursor: pointer;
 
     &:before {
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       content: '\f3f4';
       position: absolute;
       font-weight: 900;
