@@ -3,6 +3,15 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   const datalistWrapper = datalist.closest('.datalist__wrapper') ? datalist.closest('.datalist__wrapper') : datalist;
 
+  datalistWrapper.setAttribute('slot','datalist');
+
+  if(advancedSelect.querySelector('.suffix')){
+    advancedSelect.querySelector('.suffix')?.setAttribute('slot','suffix');
+    advancedSelect.shadowRoot.querySelector('.suffix')?.innerHTML = '<slot name="suffix"></slot>';
+    advancedSelect.shadowRoot.querySelector('.suffix')?.classList = "";
+  }
+
+
   // Hide the default datalist
   displayInputField.setAttribute('data-list', displayInputField.getAttribute('list'));
   displayInputField.setAttribute('list', '');
@@ -12,6 +21,23 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   if(displayInputField.hasAttribute('placeholder'))
     displayInputField.setAttribute('data-original-placeholder', displayInputField.getAttribute('placeholder'));
+
+  
+
+  const checkIfEmpty = (): void => {
+
+    if(displayInputField.value == ""){
+      advancedSelect.classList.add('has-empty-input');
+      displayInputField.classList.add('empty');
+    }
+    else {
+      advancedSelect.classList.remove('has-empty-input');
+      displayInputField.classList.remove('empty');
+    }
+
+  };
+  
+  checkIfEmpty();
 
   displayInputField.addEventListener('focus', function () {
     
@@ -61,7 +87,8 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
       }
 
       option.classList.add('active');
-
+      
+      checkIfEmpty();
       setTimeout(() => {
         advancedSelect.dispatchEvent(new CustomEvent('update-value', {
           detail: {
@@ -73,9 +100,12 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     }
   });
 
+
   displayInputField.addEventListener('input', function () {
     displayInputField.removeAttribute('data-value');
     currentFocus = -1;
+    
+    checkIfEmpty();
 
     if (advancedSelect.tagName != "IAM-ADDRESS-LOOKUP") {
       const text = displayInputField.value.toUpperCase();
@@ -127,13 +157,19 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   }
 
   // Add the empty button
-  displayInputField
-    .closest('label')
-    .insertAdjacentHTML(
+  if(displayInputField.closest('.input__wrapper')){
+    displayInputField.closest('.input__wrapper').insertAdjacentHTML(
       'beforeend',
-      '<button class="empty btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>'
+      '<button class="clear-search btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>'
     );
-
+  }
+  else if(advancedSelect.shadowRoot.querySelector('.input__wrapper')){
+    console.log(advancedSelect.shadowRoot.querySelector('.input__wrapper'));
+    advancedSelect.shadowRoot.querySelector('.input__wrapper').insertAdjacentHTML(
+      'beforeend',
+      '<button class="clear-search btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>'
+    );
+  }
 
   const emptyField = (): void => {
     const originalInput = advancedSelect.querySelector('input[type="hidden"]') as HTMLInputElement | null;
@@ -151,6 +187,7 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
     
     displayInputField.removeAttribute('data-value');
     displayInputField.value = '';
+    displayInputField.classList.add('empty');
 
     for (const optionInner of datalist.options) {
       optionInner.classList.remove('active');
@@ -168,9 +205,12 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
         text: '',
       },
     }));
+
+    
+    checkIfEmpty();
   }
 
-  const closeBtn = advancedSelect.querySelector('.empty') ? advancedSelect.querySelector('.empty') : advancedSelect.shadowRoot.querySelector('.empty');
+  const closeBtn = advancedSelect.querySelector('.clear-search') ? advancedSelect.querySelector('.clear-search') : advancedSelect.shadowRoot.querySelector('.clear-search');
 
   closeBtn.addEventListener('click', function (e) {
 

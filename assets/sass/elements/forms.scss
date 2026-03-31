@@ -5,6 +5,7 @@
 
 @use './label' as *;
 @use './input' as *;
+@use './select' as *;
 @use './textarea' as *;
 
 
@@ -13,35 +14,6 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
 
 @layer elements {
   /* #region RESETS */
-
-
-  /*  1. Remove the margin in Firefox and Safari */
-  select,
-  optgroup {
-    margin: 0; /*  1 */
-    font-family: inherit;
-    font-size: inherit;
-    line-height: inherit;
-  }
-
-  /*  Remove the inheritance of text transform in Firefox */
-  select {
-    text-transform: none;
-  }
-  /*  Set the cursor for non-`<button>` buttons */
-  /*  */
-  /*  Details at https://github.com/twbs/bootstrap/pull/30562 */
-
-  select {
-    /*  Remove the inheritance of word-wrap in Safari. */
-    /*  See https://github.com/twbs/bootstrap/issues/24990 */
-    word-wrap: normal;
-
-    /*  Undo the opacity change from Chrome */
-    &:disabled {
-      opacity: 1;
-    }
-  }
 
   
   /*  1. Browsers set a default `min-width: min-content;` on fieldsets, */
@@ -94,59 +66,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   /* #endregion */
 
   /* #region input field */
-  :is(select:not(.select--minimal, .btn)) {
-    
-    display: block;
-    width: 100%;
-    display: block;
-    width: 100%;
-    padding: var(--input-padding-block, 0.75rem) var(--input-padding-inline, 1rem);
-    font-size: var(--input-fs, 1rem);
-    line-height: var(--input-lh, 1.25rem);
-    color: var(--colour-heading);
-    background-color: var(--colour-canvas-2);
-    background-clip: padding-box;
-    border: 2px solid var(--colour-primary);
-    appearance: none; /*  Fix appearance for date inputs in Safari */
-    border-radius: 0.5rem;
-    margin-bottom: 1.5rem;
-    min-height: calc(
-      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
-        4px
-    );
-    max-height: calc(
-      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
-        4px
-    );
-
-
-    /*  Customize the `:focus` state to imitate native WebKit styles. */
-    &:is(:focus, .focus):not(:disabled) {
-      border-color: var(--colour-info);
-      outline: 0;
-    }
-
-    &:is(:focus, .focus):not(:disabled):not(:invalid) {
-      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
-    }
-    
-    /*  Disabled inputs */
-    &:disabled {
-      background-color: #ccd6d8;
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
-  }
-
-  [disabled] :is(
-    select:not(.select--minimal, .btn)
-  ) {
-      background-color: #ccd6d8;
-      opacity: 0.4;
-      cursor: not-allowed;
-      pointer-events: none;
-  }
-
+  
   [disabled] label {
 
       cursor: not-allowed;
@@ -253,6 +173,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
       font-size: var(--input-lh, 1.25rem);
       height: var(--input-lh, 1.25rem);
       width: var(--input-lh, 1.25rem);
+      top: auto!important;
       bottom: calc(var(--input-padding-block, 0.75rem) + 2px);
       right: calc(var(--input-padding-block, 1rem) + 2px);
       text-align: center;
@@ -289,6 +210,12 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     :is(
         input
       ):has(~ iam-password-indicator) {
+      border-start-end-radius: 0 !important;
+      border-end-end-radius: 0 !important;
+    }
+
+    label:has(.suffix) input {
+      
       border-start-end-radius: 0 !important;
       border-end-end-radius: 0 !important;
     }
@@ -678,140 +605,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
   }
   /* #endregion */
 
-  /* #region Multi-select */
-  select[multiple] {
-    border-radius: 0.35rem;
-  }
-  select[multiple]::-webkit-scrollbar {
-    width: 0.7rem; /*  manage scrollbar width here */
-  }
-  select[multiple]::-webkit-scrollbar * {
-    background-color: transparent; /*  manage scrollbar background color here */
-  }
-  select[multiple]::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    /* background-color:#000000!important; // manage scrollbar thumb background color here */
-    border-radius: 0.35rem;
-  }
-  /* #endregion */
-
-  /* #region Select */
-
-  select:not(.select--minimal, .btn) {
-    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
-
-    background:
-      var(--icon-select) right var(--input-padding-block, 0.75rem) top
-        var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
-      linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top /
-        calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem))
-        calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem))
-        no-repeat,
-      linear-gradient(to right, var(--colour-canvas-2), var(--colour-canvas-2));
-
-    padding-right: calc(
-      var(--input-padding-inline, 1rem) + var(--input-padding-inline, 1rem) + var(--input-lh, 1.25rem)
-    ) !important;
-    option {
-      font-size: 1.2em;
-    }
-
-    box-shadow: inset -2px 0px 0px var(--colour-primary-theme);
-
-    max-width: var(--select-max-width);
-
-    &[multiple],
-    &[size]:not([size='1']) {
-      background: none;
-      max-height: none !important;
-    }
-
-    &:disabled {
-
-      background-color: gray;
-      border-color: black;
-    }
-
-    /*  Remove outline from select box in FF */
-    &:-moz-focusring {
-      color: transparent;
-      text-shadow: 0 0 0 inherit;
-    }
-  }
-
-  div:has(> select) {
-    margin-bottom: 1.5rem;
-
-    select {
-      margin-bottom: 0 !important;
-    }
-  }
-
-  .select--minimal {
-    all: unset;
-    font-size: inherit;
-    line-height: inherit;
-    background: none;
-    border: 2px solid transparent;
-    display: inline-block;
-    padding: 0.4em calc(1em + 0.8ch) 0.4rem var(--select-padding-left, 0.4em) !important;
-    font-weight: normal !important;
-    margin: -0.4em 0 !important;
-    border-radius: 0.25em;
-
-    color: var(--colour-body);
-
-    height: auto;
-    cursor: pointer;
-    font-family: var(--font-body) !important;
-
-    option {
-      background-color: var(--colour-canvas);
-      padding-left: 1em;
-      font-size: inherit;
-      line-height: inherit;
-    }
-
-    &:hover {
-      /* border: none; */
-      background: var(--colour-light);
-    }
-
-    &:is(:focus, .focus):not(:disabled) {
-      border-color: var(--colour-info);
-      outline: 0;
-      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
-    }
-  }
-
-  *:has(> .select--minimal) {
-    position: relative;
-    display: inline-block !important;
-    width: auto !important;
-    font-size: inherit !important;
-    line-height: 1 !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-
-    font-family: var(--font-body) !important;
-
-    &:after {
-      font-size: 0.8em;
-      line-height: 1em;
-      content: '\f078';
-      font-family: 'Font Awesome 7 Pro';
-      position: absolute;
-      top: 40%;
-      transform: translate(0, -50%);
-      right: calc(0.8ch);
-      pointer-events: none;
-
-      color: var(--colour-body);
-    }
-  }
-  /* #endregion */
-
+  
   /* #region file upload */
   iam-fileupload {
     input {
@@ -1013,325 +807,45 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     max-width: fit-content;
   }
   /* #endregion */
-}
 
-/* #region datalist */
-:is(iam-advanced-select, iam-search, .postcode-lookup) {
-  position: relative;
-  display: block;
+  /* #region Input wrapper */
 
-  label {
+  .input__wrapper {
+
+    margin-top: 0.5rem;
+    display: block;
     position: relative;
-  }
 
-  input {
-    padding-right: 3rem;
+    input {
+      margin: 0!important;
+    }
   }
+  /* #endregion */
 
-  .empty {
+  /* #region Clear seach button */
+
+  .clear-search {
+    display: var(--error-hide, block);
     position: absolute;
-    bottom: 0.5rem;
-    right: 3.5rem;
+    top: 50%;
+    transform: translate(0,-50%);
+    right: 0.5rem;
     margin: 0;
     aspect-ratio: 1 / 1;
 
-    width: 2rem;
-    height: 2rem;
-
-    text-align: center;
-    line-height: 1;
-
     &:not(:hover, :focus) {
-      border-color: transparent;
-      background-color: transparent;
-    }
-
-    i {
-      font-size: 1.2rem;
+      border-color: transparent!important;
+      background-color: transparent!important;
     }
   }
-  
-  &:has([name="postcode"][disabled]) .empty{
+      
+  .input__wrapper:has(input[disabled],input.empty) .clear-search {
 
     display: none;
   }
 
-  &:has(input:is([name$="Alt"]):not([data-value],[data-placeholder])) .empty {
+  .input__wrapper:has(input:is([name$="Alt"]):not([data-value],[data-placeholder])) .clear-search {
     display: none;
   }
-
-  label:after,
-  .hint-text {
-    position: absolute;
-    top: 100%;
-  }
-
-  label[for="use"]:after {
-    top: var(--checkbox-inner-top, 0.5rem);
-  }
+  /* #endregion */
 }
-
-.was-validated :is(iam-advanced-select, iam-search, postcode-lookup) label:has(:is(input:not([type='radio']):not([type='checkbox']), select)),
-:is(iam-advanced-select, iam-search, postcode-lookup).was-validated label:has(:is(input:not([type='radio']):not([type='checkbox']), select)) {
-  margin-bottom: 2.5rem;
-
-  input {
-    background: none !important;
-  }
-
-  &:has(:invalid, .is-invalid) .hint-text {
-    display: none;
-  }
-}
-
-
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup) datalist {
-  
-  &:empty {
-    display: none !important;
-  }
-
-  z-index: 100;
-  top: 100%;
-  position: absolute;
-  background-color: var(--colour-canvas);
-  border-top: none;
-
-  &:not(:empty):has(option:not(.hide)){
-
-    padding: 0.5rem;
-  }
-
-
-  max-height: 25rem;
-  overflow-y: auto;
-  width: 100%;
-  max-width: var(--input-max-width, 50rem);
-  border: none !important;
-  border-radius: 0.5rem;
-  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
-  display: none;
-
-  option {
-    background-color: var(--colour-canvas);
-    padding: 0.5rem;
-    
-    cursor: pointer;
-    background: unset !important;
-    border: unset !important;
-    color: var(--colour-primary) !important;
-    font-weight: inherit !important;
-    font-family: inherit !important;
-    font-size: 1rem !important;
-    line-height: 1.5rem !important;
-    margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
-    padding-block: var(--menu-item-padding, 0.25rem) !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    text-align: var(--menu-item-text-align, left) !important;
-
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    white-space: normal;
-    text-overflow: ellipsis;
-    overflow: clip;
-
-    &:is(:hover, :focus) {
-      background: var(--colour-light) !important;
-      color: #595959 !important;
-      border-radius: 0.25rem !important;
-    }
-
-    &:active {
-      background: rgba(224, 224, 224, 1) !important;
-      border-radius: 0.25rem !important;
-    }
-
-    &.active {
-      border-left: 4px solid var(--colour-info) !important;
-      border-radius: 0.25rem !important;
-      background: hsl(from var(--colour-info) h s l / 10%) !important;
-    }
-  }
-}
-
-.dark-theme :is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup) datalist {
-
-  color-scheme: dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  html:not(.light-theme) :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
-
-    --colour-heading: var(--colour-primary-theme);
-    --colour-body: var(--colour-primary-theme);
-    color: var(--colour-primary-theme);
-
-    /*  Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten */
-    > * {
-      color-scheme: light;
-    }
-  }
-
-  html:not(.light-theme) .bg-light {
-
-    color-scheme: light;
-  }
-}
-
-
-
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active),:active) datalist {
-
-  display: block;
-
-  &:empty {
-    display: block !important;
-  }
-}
-
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper {
-
-  top: 100%;
-  position: absolute;
-  border-radius: 0.5rem;
-  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
-  width: 100% !important;
-  /* max-width: var(--menu-item-width, 50rem) !important; */
-  z-index: 100;
-  display: none;
-  max-height: 25rem;
-  overflow-y: auto;
-  
-  max-width: var(--input-max-width) !important;
-
-  > datalist {
-    border: none!important;
-    box-shadow: none!important;
-    position: relative;
-    display: block!important;
-    border-radius: 0!important;
-    max-height: 100%!important;
-  }
-
-  &:focus {
-    outline: none!important;
-  }
-}
-
-iam-address-lookup [slot="preloadedList"]{
-  border: none!important;
-  box-shadow: none!important;
-  position: relative;
-  display: block!important;
-  border-radius: 0!important;
-  max-height: 100%!important;
-
-  &.noresults {
-    display: block !important;
-  }
-
-  &.noresults:before {
-    content: "No addresses found";
-    background-color: white;
-    padding: 1rem 0.5rem;
-    color: var(--colour-primary) !important;
-    font-weight: inherit !important;
-    font-family: inherit !important;
-    font-size: 1rem !important;
-    line-height: 1.1875rem !important;
-    padding-block: var(--menu-item-padding, 1rem) !important;
-    display: block;
-  }
-}
-
-
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist:not(:empty)),
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.loading),
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(*:active)) .datalist__wrapper:has(datalist.noresults),
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper:hover {
-
-  display: block;
-}
-
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div) .datalist__wrapper:has(datalist.noresults){
-  datalist {
-
-    display: block;
-
-    &:before {
-      content: "No addresses found";
-      background-color: white;
-      padding: 0.5rem;
-      color: var(--colour-primary) !important;
-      font-weight: inherit !important;
-      font-family: inherit !important;
-      font-size: 1rem !important;
-      line-height: 1.1875rem !important;
-      padding-block: var(--menu-item-padding, 0.5rem) !important;
-      display: block;
-    }
-  }
-}
-
-:is(iam-advanced-select, iam-search, iam-address-lookup, .postcode-lookup > div):is(:focus-within,:has(option:active)) .datalist__wrapper:has(datalist.loading) {
-
-  datalist {
-
-    height: 5rem;
-
-    &:before {
-      content: "\f021";
-      font-family: "Font Awesome 7 Pro";
-      font-size: 1.75rem;
-      font-weight: 300;
-      display: block;
-      position: absolute;
-      top: calc(50% - 1rem);
-      left: calc(50% - 1rem);
-      /*transform: translate(-50%,-50%);*/
-
-      animation-name: spin;
-      animation-duration: 4000ms;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-    }
-  }
-}
-
-@-ms-keyframes spin {
-    from { -ms-transform: rotate(0deg); }
-    to { -ms-transform: rotate(360deg); }
-}
-@-moz-keyframes spin {
-    from { -moz-transform: rotate(0deg); }
-    to { -moz-transform: rotate(360deg); }
-}
-@-webkit-keyframes spin {
-    from { -webkit-transform: rotate(0deg); }
-    to { -webkit-transform: rotate(360deg); }
-}
-@keyframes spin {
-    from {
-        transform:rotate(0deg);
-    }
-    to {
-        transform:rotate(360deg);
-    }
-}
-
-:is(iam-advanced-select, iam-search, .postcode-lookup) {
-
-  [name="beforeList"] {
-    display: none;
-  }
-
-  [name="beforeList"]:has(+ .show-welsh-banner) {
-    display: block;
-  }
-  .datalist__wrapper.show-welsh-banner [name="beforeList"] {
-    display: block;
-  }
-}
-/* #endregion */

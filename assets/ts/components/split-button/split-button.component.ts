@@ -25,7 +25,7 @@ class iamSplitButton extends HTMLElement {
     </style>
     <div class="split-button">
       <slot></slot>
-      <div class="dropdown">
+      <div class="menu__wrapper">
         <button class="btn btn-split" part="dropdown" popovertarget="actions" style="anchor-name: --anchor-el;" title="Further actions">
           <i class="fa fa-angle-down fa-light"></i>
         </button>

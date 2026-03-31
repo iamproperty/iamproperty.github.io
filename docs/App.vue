@@ -30,10 +30,9 @@
       <router-link to="/launch">Launch list</router-link>
 
       <form novalidate method="GET" slot="search" id="searchform" action="/search">
-        <Search>
-          <label class="mb-0"
-            ><span class="visually-hidden">Search pages</span>
-            <span>
+        
+          <label class="mb-0"><span class="visually-hidden">Search pages</span>
+            <Search>
               <input
                 type="text"
                 name="search"
@@ -48,12 +47,11 @@
               />
 
               <button class="suffix mt-0 me-0 mb-0 pe-auto"><i class="fa-regular fa-search"></i></button>
-            </span>
+              <datalist id="searchterms" ref="list">
+                <option v-for="item in refinedResults" :value="item" :data-value="item"></option>
+              </datalist>
+            </Search>
           </label>
-          <datalist id="searchterms" ref="list">
-            <option v-for="item in refinedResults" :value="item" :data-value="item"></option>
-          </datalist>
-        </Search>
       </form>
     </Nav>
   </nav>

@@ -1,0 +1,59 @@
+@use '../_func' as *;
+@use '../elements/forms';
+@use '../elements/dropdown';
+
+@use '../elements/prefix';
+
+:host {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+
+  .input__wrapper {
+    flex-grow: 1;
+    position: relative;
+    margin-top: 0!important;
+  }
+
+  .suffix {
+    flex-grow: 0;
+  }
+}
+
+:host(.has-label){
+
+  .wrapper {
+    display: contents!important;
+  }
+  .suffix {
+    display: none;
+  }
+}
+
+:host(.has-empty-input){
+  .clear-search {
+    display: none!important;
+  }
+}
+
+::slotted(input){
+  
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  margin-top: 0!important;
+}
+
+::slotted(label){
+  
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+  margin-top: 0!important;
+}
+
+::slotted(button){
+  margin-top: 0!important;
+}

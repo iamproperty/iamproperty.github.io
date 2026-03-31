@@ -1,0 +1,238 @@
+@use 'sass:map';
+@use 'sass:math';
+
+@use '../_func' as *;
+
+
+@layer elements {
+  /*  1. Remove the margin in Firefox and Safari */
+  select,
+  optgroup {
+    margin: 0; /*  1 */
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  select {
+    text-transform: none;
+    word-wrap: normal;
+
+    /*  Undo the opacity change from Chrome */
+    &:disabled {
+      opacity: 1;
+    }
+  }
+
+  /* #region Select */
+
+  select:not(.select--minimal, .btn) {
+    $form-select-indicator-new: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m2 5 6 6 6-6'/></svg>") !default;
+
+    background:
+      var(--icon-select) right var(--input-padding-block, 0.75rem) top
+        var(--input-padding-block, 0.75rem) / var(--input-lh, 1.25rem) var(--input-lh, 1.25rem) no-repeat,
+      linear-gradient(to left, var(--colour-primary-theme), var(--colour-primary-theme) 100%) right top /
+        calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem))
+        calc(var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.8rem) + var(--input-lh, 1.25rem))
+        no-repeat,
+      linear-gradient(to right, var(--colour-canvas-2), var(--colour-canvas-2));
+
+    padding-right: calc(
+      var(--input-padding-inline, 1rem) + var(--input-padding-inline, 1rem) + var(--input-lh, 1.25rem)
+    ) !important;
+    option {
+      font-size: 1.2em;
+    }
+
+    box-shadow: inset -2px 0px 0px var(--colour-primary-theme);
+
+    max-width: var(--select-max-width);
+
+    &[multiple],
+    &[size]:not([size='1']) {
+      background: none;
+      max-height: none !important;
+    }
+
+    &:disabled {
+
+      background-color: gray;
+      border-color: black;
+    }
+
+    /*  Remove outline from select box in FF */
+    &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 inherit;
+    }
+  }
+
+  div:has(> select) {
+    margin-bottom: 1.5rem;
+
+    select {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .select--minimal {
+    all: unset;
+    font-size: inherit;
+    line-height: inherit;
+    background: none;
+    border: 2px solid transparent;
+    display: inline-block;
+    padding: 0.4em calc(1em + 0.8ch) 0.4rem var(--select-padding-left, 0.4em) !important;
+    font-weight: normal !important;
+    margin: -0.4em 0 !important;
+    border-radius: 0.25em;
+
+    color: var(--colour-body);
+
+    height: auto;
+    cursor: pointer;
+    font-family: var(--font-body) !important;
+
+    option {
+      background-color: var(--colour-canvas);
+      padding-left: 1em;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    &:hover {
+      /* border: none; */
+      background: var(--colour-light);
+    }
+
+    &:is(:focus, .focus):not(:disabled) {
+      border-color: var(--colour-info);
+      outline: 0;
+      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+    }
+  }
+
+  *:has(> .select--minimal) {
+    position: relative;
+    display: inline-block !important;
+    width: auto !important;
+    font-size: inherit !important;
+    line-height: 1 !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    font-family: var(--font-body) !important;
+
+    &:after {
+      font-size: 0.8em;
+      line-height: 1em;
+      content: '\f078';
+      font-family: 'Font Awesome 7 Pro';
+      position: absolute;
+      top: 40%;
+      transform: translate(0, -50%);
+      right: calc(0.8ch);
+      pointer-events: none;
+
+      color: var(--colour-body);
+    }
+  }
+  /* #endregion */
+
+
+  select:not(.select--minimal, .btn) {
+    
+    display: block;
+    width: 100%;
+    display: block;
+    width: 100%;
+    padding: var(--input-padding-block, 0.75rem) var(--input-padding-inline, 1rem);
+    font-size: var(--input-fs, 1rem);
+    line-height: var(--input-lh, 1.25rem);
+    color: var(--colour-heading);
+    background-color: var(--colour-canvas-2);
+    background-clip: padding-box;
+    border: 2px solid var(--colour-primary);
+    appearance: none; /*  Fix appearance for date inputs in Safari */
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    min-height: calc(
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
+        4px
+    );
+    max-height: calc(
+      var(--input-padding-block, 0.75rem) + var(--input-padding-block, 0.75rem) + var(--input-lh, 1.25rem) +
+        4px
+    );
+
+
+    /*  Customize the `:focus` state to imitate native WebKit styles. */
+    &:is(:focus, .focus):not(:disabled) {
+      border-color: var(--colour-info);
+      outline: 0;
+    }
+
+    &:is(:focus, .focus):not(:disabled):not(:invalid) {
+      box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
+    }
+    
+    /*  Disabled inputs */
+    &:disabled {
+      background-color: #ccd6d8;
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+  
+  [disabled] select:not(.select--minimal, .btn) {
+    background-color: #ccd6d8;
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* #region make select look like dropdown */
+  select {
+    appearance: base-select!important;
+  }
+
+  select::picker-icon {
+    display: none;
+  }
+
+  select::picker(select) {
+    appearance: base-select;
+  }
+
+  select option::checkmark {
+    display: none;
+  }
+  
+  select selectedcontent span {
+    display: none;
+  }
+
+  /* #endregion */
+
+
+
+
+  /* #region Multi-select */
+  select[multiple] {
+    border-radius: 0.35rem;
+  }
+  select[multiple]::-webkit-scrollbar {
+    width: 0.7rem; /*  manage scrollbar width here */
+  }
+  select[multiple]::-webkit-scrollbar * {
+    background-color: transparent; /*  manage scrollbar background color here */
+  }
+  select[multiple]::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    /* background-color:#000000!important; // manage scrollbar thumb background color here */
+    border-radius: 0.35rem;
+  }
+  /* #endregion */
+}

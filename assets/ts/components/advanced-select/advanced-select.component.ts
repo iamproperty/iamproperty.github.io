@@ -16,34 +16,26 @@ class iamAdvancedSelect extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-    const coreCSS = document.body.hasAttribute('data-core-css')
-      ? document.body.getAttribute('data-core-css')
-      : `${assetLocation}/css/core.min.css`;
+
+    const loadCSS = `@import "${assetLocation}/css/components/advanced-select.component.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    @import "${coreCSS}";
-    input {
-      background: red;
-    }
-    input:not(.is-invalid):not(:invalid) {
-      background: none!important;
-    }
-    .optional-text {
-      display: none;
-    } 
-    .js-hide {
-      display: none !important;
-    }
+    ${loadCSS}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
-    <slot></slot>
+    <span class="wrapper"><span class="input__wrapper"><slot></slot></span><span class="suffix fa-regular fa-chevron-down"></span></span>
+    <slot name="datalist"></slot>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   connectedCallback(): void {
+
+    // Make the datalist a dropdown
+    this.classList.add('dropdown__wrapper');
+
     // Clone original input field, re-name and use for display purposes
     const inputField = this.querySelector('input') as HTMLInputElement | null;
     if (!inputField) return;
@@ -54,6 +46,9 @@ class iamAdvancedSelect extends HTMLElement {
     displayInputField.setAttribute('name', `${inputField.getAttribute('name')}Alt`);
     inputField.removeAttribute('data-change-events');
     displayInputField.removeAttribute('id');
+
+    if(this.querySelector('label'))
+      this.classList.add('has-label');
 
     let datalist = this.querySelector('datalist') as HTMLDataListElement | null;
 

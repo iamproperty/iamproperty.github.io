@@ -165,7 +165,7 @@ export const setTabsEventHandlers = function (tabsElement: Element): void {
   details.forEach((detailsElement, index) => {
     detailsElement.addEventListener("toggle", function() {
       if(detailsElement.open)
-        detailsElement.querySelector('button,input').focus();
+        detailsElement.querySelector('button,input')?.focus();
     });
   });
 

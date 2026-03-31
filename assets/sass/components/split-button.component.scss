@@ -1,6 +1,8 @@
 @use '../_func' as *;
 @use '../elements/buttons';
 
+@use '../elements/dropdown';
+
 @use '../components/menu.global';
 
 /*  Main button */
@@ -25,7 +27,7 @@
 .split-button {
   position: relative;
 
-  .dropdown {
+  .menu__wrapper {
     position: relative;
     display: inline-block;
 

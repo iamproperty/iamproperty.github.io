@@ -11,6 +11,12 @@
 @use '../utilities/visually-hidden' as *;
 @use '../utilities/display' as *;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :host {
   background-color: #fcfcfc;
 }
@@ -264,7 +270,7 @@ slot[name='selectall'] {
 /* #endregion */
 
 /* #region Search bar */
-.actionbar--search .btn {
+.actionbar--search > .btn {
   margin: 0;
   margin-left: -0.75rem !important;
   margin-right: auto !important;
@@ -274,17 +280,25 @@ slot[name='selectall'] {
   width: calc(100% - 3.25rem); /* 44 + 8 */
   max-width: 21.875rem!important; /* (350) */
   margin: 0 !important;
+  display: flex;
 
   @media screen and (min-width: 62em) {
     max-width: 28.125rem!important; /* (450) */
   }
 
+  .input__wrapper {
+    flex-grow: 1;
+  }
   input {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 
     min-height: 2.5rem !important;
     max-height: 2.5rem !important;
+      
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+    margin-top: 0!important;
   }
 
   :is(.prefix, .suffix) {
