@@ -7,7 +7,7 @@
   /* #region Default styling of both modals */
   dialog,
   [popover] {
-    --dialog-padding: 1.5rem;
+    --dialog-padding: 0.5rem;
 
     --mh-padding-inline: var(--dialog-padding);
     color: inherit;
