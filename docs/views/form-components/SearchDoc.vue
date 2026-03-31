@@ -56,44 +56,40 @@
     <div class="container visualtest">
       <div class="md-col-end-5 mb-4">
         <span class="d-block pb-2">DEFAULT</span>
-        <Search class="">
+        
           <label
             >Property address
-            <span>
+            <Search class="">
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              <span class="suffix fa-regular fa-search"></span>
-            </span>
+              <datalist id="properties">
+                <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
+                <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
+                <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
+                <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
+                <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
+                <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+              </datalist>
+            </Search>
           </label>
-          <datalist id="properties">
-            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
-          </datalist>
-        </Search>
       </div>
 
       <div class="md-col-end-5 mb-4">
         <span class="d-block pb-2">DEFAULT</span>
-        <Search class="">
+        
           <label
             >Property address
-            <span>
+            <Search class="">
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              <span class="suffix fa-regular fa-search"></span>
-            </span>
+              <datalist id="properties">
+                <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
+                <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
+                <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
+                <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
+                <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
+                <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+              </datalist>
+            </Search>
           </label>
-          <datalist id="properties">
-            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
-          </datalist>
-        </Search>
       </div>
     </div>
 
@@ -101,17 +97,14 @@
 
     <div class="container visualtest">
       <form novalidate method="GET" id="search-property">
-        <Search data-url="/existing.json?search=" data-prevent-submit>
           <label
             >Search existing transactions
-            <span>
+            <Search data-url="/existing.json?search=" data-prevent-submit>
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties3" />
-              <span class="suffix fa-regular fa-search"></span>
-            </span>
+              <datalist id="properties3"></datalist>
+            </Search>
             <span class="hint-text">Enter 3 or more characters</span>
           </label>
-          <datalist id="properties3"></datalist>
-        </Search>
         <button class="d-none btn btn-primary">Submit</button>
       </form>
     </div>
@@ -123,15 +116,16 @@
     </p>
     <div class="container visualtest">
       <form novalidate method="GET" id="search-iamsold">
-        <Search
-          data-url="/iamsold.json?search="
-          data-value-schema="url"
-          data-display-schema="title"
-          data-schema="data.results"
-        >
+        
           <label
             >Search existing transactions
-            <span>
+            
+            <Search
+              data-url="/iamsold.json?search="
+              data-value-schema="url"
+              data-display-schema="title"
+              data-schema="data.results"
+            >
               <input
                 type="text"
                 name="url"
@@ -144,12 +138,12 @@
                   ]'
                 list="iamsold-pages"
               />
-              <button class="suffix me-0 mb-0"><i class="fa-regular fa-search"></i></button>
-            </span>
+              <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search"></button>
+                
+              <datalist id="iamsold-pages"></datalist>
+            </Search>
           </label>
 
-          <datalist id="iamsold-pages"></datalist>
-        </Search>
       </form>
     </div>
 

@@ -134,6 +134,14 @@
     }
   }
 
+  .dropdown {
+    display: none;
+    
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+  }
+
   .wrapper:is(:focus-within) .dropdown {
     display: var(--display-panel, none);
   }

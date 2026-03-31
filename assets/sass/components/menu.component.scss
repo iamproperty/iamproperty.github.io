@@ -9,8 +9,8 @@
 :host {
   /* all: unset; */
   inset: auto;
-  top: anchor(bottom);
-  left: anchor(left);
+  top: anchor(bottom)!important;
+  left: anchor(left)!important;
   position: fixed;
   position-try-fallbacks: flip-block, flip-inline;
   width: max-content!important;
@@ -19,15 +19,8 @@
 
   height: min-content;
   max-height: var(--menu-max-height, min(100vh - 6rem));
-  background: var(--menu-bg, canvas);
-  margin: var(--menu-margin, 0);
-  padding: var(--menu-padding, 0.5rem)!important;
-  border: var(--menu-border, 2px solid grey);
   overflow: auto;
-
   border: none !important;
-  border-radius: 0.5rem;
-  box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
 }
 
 :host(.menu--fill) {
@@ -167,7 +160,7 @@
 }
 
 ::slotted(iam-menu[popover]) {
-  top: anchor(top);
-  left: calc(anchor(right) + 1rem);
+  top: anchor(top)!important;
+  left: calc(anchor(right) + 1rem)!important;
 }
 /* #endregion */

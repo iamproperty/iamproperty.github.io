@@ -18,29 +18,29 @@ class iamSearch extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
+    const loadCSS = `@import "${assetLocation}/css/components/search.component.css";`;
+
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    input {
-      background: red;
-    }
-    input:not(.is-invalid):not(:invalid) {
-      background: none!important;
-    }
-    .optional-text {
-      display: none;
-    } 
-    .js-hide {
-      display: none !important;
-    }
+    ${loadCSS}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
-    <slot></slot>
+    <span class="wrapper"><span class="input__wrapper"><slot></slot></span><span class="suffix fa-regular fa-search"></span></span>
+    <slot name="datalist"></slot>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   async connectedCallback(): void {
+
+    // Make the datalist a dropdown
+    this.classList.add('dropdown__wrapper');
+
+    
+    if(this.querySelector('label'))
+      this.classList.add('has-label');
+
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const searchWrapper = this;
     const inputField = this.querySelector('input');

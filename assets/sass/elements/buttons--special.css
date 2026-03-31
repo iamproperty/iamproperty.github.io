@@ -48,6 +48,7 @@
     width: fit-content;
 
     select {
+      
       all: unset !important;
       padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
       padding-right: calc(var(--btn-padding-inline) + 2rem)!important;
@@ -64,60 +65,8 @@
       field-sizing: content!important;
 
       appearance: base-select!important;
-
-      option {
-        font-size: 1rem;
-        text-align: left;
-        color: var(--colour-primary);
-        padding-inline: var(--menu-item-padding, 0.5rem);
-        padding-block: var(--menu-item-padding, 0.5rem) !important;
-
-        border-radius: .25rem !important;
-        &:not(:last-child){
-          margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
-        }
-        
-        &:hover {
-          background: var(--colour-light) !important;
-        }
-
-        &:after {
-          content: attr(data-email);
-        }
-      }
-    }
-
-    select::picker-icon {
-      display: none;
-    }
-
-    select::picker(select) {
-      appearance: base-select;
-      background: var(--menu-bg, canvas);
-      margin-block: var(--menu-margin, 0.25rem);
-      padding: var(--menu-padding, 0.5rem)!important;
-      border: none !important;
-      border-radius: 0.5rem;
-      box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
-      font-size: 1rem;
-    }
-
-    hr {
-      height: 1px !important;
-      background-color: var(--menu-hr-border-color, var(--border-color, grey)) !important;
-      width: 100%;
-      margin: var(--menu-item-margin, 0 0 0.25rem 0) !important;
-      padding: 0 !important;
-    }
-
-    select option::checkmark {
-      display: none;
     }
     
-    select selectedcontent span {
-      display: none;
-    }
-
     &:after {
       position: absolute;
       top: 0.625rem; /* 10 */

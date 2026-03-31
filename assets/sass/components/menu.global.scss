@@ -1,17 +1,6 @@
 @use '../_func' as *;
 
-
-
-
-
 @layer components {
-  $menuPadding: 0.5rem !default;
-
-  iam-menu:defined {
-    --menu-padding: #{$menuPadding};
-    --border-color: var(--colour-border);
-    --menu-item-margin: 0 0 0.5rem 0;
-  }
 
   iam-menu i {
     width: 1.25rem;
