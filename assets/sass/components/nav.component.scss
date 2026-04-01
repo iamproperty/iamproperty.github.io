@@ -544,6 +544,17 @@
       backdrop-filter: blur(2px);
     }
   }
+
+  :host(.open-secondary) .backdrop{
+
+    z-index: 1;
+    top: 0;
+  }
+
+  :host(.open-secondary) .has-secondary .menu__secondary {
+
+    z-index: 2;
+  }
 }
 /* #endregion */
 
