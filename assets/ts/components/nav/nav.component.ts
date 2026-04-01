@@ -279,9 +279,13 @@ class iamNav extends HTMLElement {
           if (this.querySelectorAll(':scope > details[open]').length) {
             backdrop.classList.add('show');
             iamNav.classList.add('open');
+
+            if(this.querySelectorAll(':scope > details[open][slot="secondary"]').length)
+              iamNav.classList.add('open-secondary');
           } else {
             backdrop.classList.remove('show');
             iamNav.classList.remove('open');
+            iamNav.classList.remove('open-secondary');
           }
 
           event.preventDefault();

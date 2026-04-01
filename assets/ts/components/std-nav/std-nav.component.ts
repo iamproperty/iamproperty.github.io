@@ -81,13 +81,50 @@ class iamSTDNav extends HTMLElement {
     </iam-nav>`;
   }
 
+  populateLinks = (data):void => {
+
+    let html = ``;
+
+    data.forEach((link) => {
+
+    html += `
+      <a href="${link.url}">${link.title}</a>`;
+
+    });
+
+    return html;
+  }
+
+  populateSections = (data):void => {
+
+    let html = ``;
+
+    data.forEach((section) => {
+
+      html += `<span class="section ${section.class}">
+        <span class="lead text-heading d-block">${section.enabled == "false" && section.marketing ? section.marketing : section.title}</span>
+        ${this.populateLinks(section.links)}
+      </span>`;
+    });
+
+
+
+
+    return html;
+  }
+
   populateNav = (data):void => {
 
     let html = ``;
 
     data.forEach((feature) => {
 
-      html += `<a href="/">${feature.attributes.title}</a>`;
+      if(feature.attributes.sections)
+        html += `<details><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${this.populateSections(feature.attributes.sections)}</div></details>`;
+      else if(feature.attributes.links)
+        html += `<details><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${this.populateLinks(feature.attributes.links)}</div></details>`;
+      else 
+        html += `<a href="/">${feature.attributes.title}</a>`;
     });
 
     return html;
@@ -116,7 +153,6 @@ class iamSTDNav extends HTMLElement {
       </svg>
     </a>
     ${this.populateNav(data)}
-    <button class="btn btn-primary fa-user" data-modal="modal-transactional" slot="actions">My account</button>
     </iam-nav>`;
   }
 
@@ -142,7 +178,7 @@ class iamSTDNav extends HTMLElement {
           return data;
         }
 
-        console.log(data);
+        //console.log(data);
 
         if(this.closest('iam-nav')){
           this.transformToSecondary(data);

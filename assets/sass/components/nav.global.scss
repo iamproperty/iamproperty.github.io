@@ -363,6 +363,11 @@ iam-nav details {
       display: none !important;
     }
 
+    > div .lead {
+
+      padding: 1rem 0 0 3rem!important;
+    }
+
     > div a:last-child {
       margin-bottom: 0 !important;
     }
@@ -381,6 +386,16 @@ iam-nav details {
       display: block;
       height: 2px;
       background-color: var(--colour-border) !important;
+    }
+
+    /* secondary nav */
+
+    &[slot="secondary"] {
+      background-color: transparent;
+
+      summary {
+        background-color: transparent;
+      }
     }
   }
 }
@@ -482,8 +497,8 @@ iam-nav details {
 
 /* #region Desktop mega menu */
 @media screen and (min-width: 62em) {
-  iam-nav > details,
-  iam-nav *:not(.nav--menu) > details {
+  iam-nav > details:not([slot="secondary"]),
+  iam-nav *:not(.nav--menu) > details:not([slot="secondary"]) {
     width: auto;
 
     > summary {
@@ -533,6 +548,11 @@ iam-nav details {
         calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
       ) !important;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+
+      .lead {
+
+        padding: 1rem 0 0 0!important;
+      }
 
     }
 
@@ -589,6 +609,7 @@ iam-nav details {
         }
       }
 
+
       a:has(iam-card) {
         display: inline-block;
       }
@@ -632,6 +653,43 @@ iam-nav details {
         }
         a:not(:has(iam-card)) + a:has(iam-card) {
           break-before: column;
+        }
+      }
+    }
+
+    &[open] > div:has(span.section) {
+
+      display: flex;
+        
+      > span.section {
+        display: block;
+        flex-grow: 1;
+
+        .lead {
+          column-span: all;
+        }
+      } 
+
+      > span.section.double {
+
+        display: block;
+        width: calc(66.66% - 6.875rem);
+        columns: 2;
+        column-gap: 6.875rem;
+
+        .lead {
+          column-span: all;
+        }
+      }
+
+      > span.section:first-child:last-child {
+        display: block;
+        width: calc(66.66% - 6.875rem);
+        columns: 3;
+        column-gap: 6.875rem;
+
+        .lead {
+          column-span: all;
         }
       }
     }
@@ -694,6 +752,76 @@ iam-nav details {
   html:has(iam-nav.open:not(.demo-open)) {
     overflow: hidden;
   }
+
+  iam-nav > details[slot="secondary"]{
+    display: inline-block;
+    position: relative;
+    width: auto;
+
+    summary {
+      display: inline-block;
+      margin-left: 1.5rem;
+      margin-bottom: 0!important;
+
+      &:after {
+        display: none;
+      }
+    }
+
+    div {
+      text-align: left;
+
+      a {
+        white-space: nowrap;
+        text-decoration: none;
+
+        font-size: 1rem !important;
+        line-height: 1.5rem !important;
+        margin: 0;
+        padding: var(--option-padding) !important;
+
+      }
+
+      .lead {
+        --colour-heading: var(--colour-body);
+        font-size: 0.87rem !important;
+        line-height: 1.5rem !important;
+        margin: 0;
+        padding: var(--option-padding) !important;
+      }
+      a:after {
+        width: 0;
+      }
+
+      .section + .section {
+        border-top: 1px solid var(--colour-border);
+        display: block;
+        padding-top: 0.5rem;
+        margin-top: 0.5rem;
+      }
+    }
+    
+  }
+
+  iam-nav > details[slot="secondary"]::details-content {
+    display: none;
+  }
+
+  iam-nav > details[slot="secondary"][open]::details-content {
+    display: block;
+    background: var(--dropdown-bg);
+    margin-block: var(--dropdown-margin-block);
+    padding: var(--dropdown-padding);
+    border-radius: var(--dropdown-border-radius);
+    box-shadow: var(--dropdown-box-shadow);
+
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 1.5rem;
+  }
+
+  
+    
 }
 
 /*  4 columns on large screens */

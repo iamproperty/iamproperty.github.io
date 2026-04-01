@@ -1,19 +1,113 @@
 {
   "meta": {
-    "current_results": "100",
-    "total_results": "582",
-    "current_page": "1",
-    "total_pages": "6",
-    "has_welsh_results": "1",
-    "has_english_results": "1",
-    "welsh_language": "0"
+
   },
   "data": [
     {
       "type": "feature",
       "id": "leadgen",
       "attributes": {
-        "title": "Lead generation"
+        "title": "Lead generation",
+        "enabled": "true",
+        "sections" : [
+          {
+            "title": "Marketing Toolkit features",
+            "marketing": "Win more instructions, maximise results and dominate your market.",
+            "enabled": "false",
+            "links": [
+              {
+                "title": "Marketing Toolkit all features",
+                "url": "https://iamp.datasystem.co.uk/Welcome",
+                "marketing": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                "enabled": "true"
+              },
+              {
+                "title": "On-market prospecting",
+                "url": "https://iamp.datasystem.co.uk/DirectMail/Triggers",
+                "marketing": "https://iamproperty.com/ecosystem/marketing-toolkit/on-market-prospecting/",
+                "enabled": "true"
+              },
+              {
+                "title": "Off-market prospecting",
+                "url": "https://iamp.datasystem.co.uk/DirectMail/Advanced",
+                "marketing": "https://iamproperty.com/ecosystem/marketing-toolkit/off-market-prospecting/",
+                "enabled": "true"
+              },
+              {
+                "title": "Recent sales success",
+                "url": "https://iamp.datasystem.co.uk/DirectMail/RecentSuccess",
+                "marketing": "https://iamproperty.com/ecosystem/marketing-toolkit/prospecting-triggers-and-automations/",
+                "enabled": "true"
+              },
+              {
+                "title": "Recent listings",
+                "url": "https://iamp.datasystem.co.uk/DirectMail/JustListed",
+                "marketing": "/tbc",
+                "enabled": "true"
+              },
+              {
+                "title": "Trigger automation",
+                "url": "https://iamp.datasystem.co.uk/Admin/JobAutomation?sg_Id=11&s_Id=3004&tt_Id=-1&isnew=1",
+                "enabled": "true"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "feature",
+      "id": "ma",
+      "attributes": {
+        "title": "Market Appraisals",
+        "sections" : [
+          {
+            "title": "CRM features:",
+            "links": [
+              {
+                "title": "Book sales appraisal",
+                "url": "https://crm.iamproperty.com/Create/Sales/Appraisal "
+              },
+              {
+                "title": "Book lettings appraisal",
+                "url": "https://crm.iamproperty.com/Create/Lettings/Appraisal "
+              }
+            ]
+          },
+          {
+            "title": "Marketing Toolkit features:",
+            "class": "double",
+            "links": [
+              {
+                "title": "Marketing appraisal overview",
+                "url": "https://iamp.datasystem.co.uk/MarketAppraisals/Sales/Overview?sg_Id=12&s_Id=4001&tt_Id=1&isnew=1"
+              },
+              {
+                "title": "Add  sales appraisal",
+                "url": "https://iamp.datasystem.co.uk/MarketAppraisals/Sales/Appraisals/New?s_Id=4003"
+              },
+              {
+                "title": "Sales presentation reporting",
+                "url": "/sales"
+              },
+              {
+                "title": "Lettings presentations",
+                "url": "/lettings"
+              },
+              {
+                "title": "Lettings presentations reporting",
+                "url": "/sales"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "feature",
+      "id": "insights",
+      "attributes": {
+        "title": "Insights"
       }
     },
     {
