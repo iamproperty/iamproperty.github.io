@@ -8,7 +8,7 @@
   "version": "7.7.1--beta15",
   "scripts": {
     "reload": "vite --host",
-    "dev": "npm run copy && node local_modules/delete-assets.cjs && vite --host",
+    "dev": "npm run copy && node local_modules/delete-assets.cjs && npm run compile && npm run watch",
     "build": "npm run test && node local_modules/delete-build-assets.cjs && npm run compile && vue-tsc --noEmit && vite build --mode lib",
     "prepack": "npm run build",
     "build:docs": "node local_modules/delete-build-assets.cjs && npm run compile && npm run copy && vue-tsc --noEmit && vite build",
@@ -19,7 +19,7 @@
     "compile": "npm run compile:sass && npm run compile:ts && npm run compile:js",
     "watch:ts": "tsc-watch -p tscompileconfig.json",
     "watch:sass": "sass --watch assets/sass/main.scss:assets/css/style.min.css assets/sass/core.scss:assets/css/core.min.css assets/sass/error.scss:assets/css/error.min.css assets/sass/components:assets/css/components assets/sass/components.reset.scss:assets/css/components.reset.min.css --style=compressed",
-    "watch": "concurrently \"npm run dev\" \"npm run watch:ts\" \"npm run watch:sass\" \"node local_modules/components.cjs\"",
+    "watch": "concurrently \"vite --host\" \"npm run watch:ts\" \"npm run watch:sass\" \"node local_modules/components.cjs\"",
     "watch2": "npm run watch:ts && npm run watch:sass && node local_modules/components.cjs && npm run dev",
     "copy:svg": "copyfiles -u 2 assets/svg/**/* public/svg && copyfiles -u 2 assets/svg/icons.svg public/svg && copyfiles -u 2 assets/svg/logo.svg public/svg",
     "copy:img": "copyfiles -u 2 assets/img/* public/img && copyfiles -u 2 assets/img/**/* public/img && copyfiles -u 2 assets/img/**/**/* public/img",

@@ -1159,16 +1159,6 @@ const routes = [
     component: () => import('./views/LaunchDoc.vue'),
   },
   {
-    path: '/get-started',
-    component: () => import('./views/GetStarted.vue'),
-    name: 'Get started',
-    meta: {
-      title: 'Get started | iamkey',
-    },
-    searchterms:
-      'npm, install, assets, static, sass, modules, vue, branch, commands, contributing, code, web server, develoment, unit tests, regression tests, workflow',
-  },
-  {
     path: '/audit-results',
     component: () => import('./views/Audit.vue'),
     name: 'Audit',
