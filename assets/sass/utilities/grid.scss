@@ -1,6 +1,11 @@
 @use 'sass:math';
 @use 'sass:map';
-@use '_func' as *;
+
+@use 'sass:meta';
+@use 'sass:list';
+@use 'sass:string';
+
+
 
 $columns: 12;
 $rows-per-page: 20;
@@ -123,7 +128,7 @@ $breakpoints: (
 }
 /* #endregion */
 
-@layer reset {
+@layer utilities {
   /* #region Main grid setup */
   body {
     --excess-space: calc((100% - var(--max-width)) / 2);
@@ -242,7 +247,7 @@ $breakpoints: (
   }
 
   *:not(:where(html, body)):has(
-      :is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-'])
+      :is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-']):not([class*='row-cols-'])
     ) {
     display: grid;
     grid-template-columns: subgrid;
@@ -293,7 +298,7 @@ $breakpoints: (
     $count: math.div($columns, $i);
 
     .cols-#{$i} > * {
-      grid-column: auto / span #{math.floor($count)};
+      grid-column: auto / span #{math.floor($count)}!important;
     }
   }
   
@@ -318,8 +323,10 @@ $breakpoints: (
 
   /* #endregion */
 
+  /* #region auto grid */
   .auto-grid {
     display: flex;
+    flex-wrap: nowrap;
     column-gap: var(--gap);
 
     > * {
@@ -350,4 +357,108 @@ $breakpoints: (
       }
     }
   }
+  /* #endregion */
+
+  /* #region Bootstrap grid */
+  .row {
+    
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: calc(-0.5 * var(--gap)); /*  stylelint-disable-line function-disallowed-list */
+    margin-left: calc(-0.5 * var(--gap)); /*  stylelint-disable-line function-disallowed-list */
+
+    > * {
+      
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 100%;
+      padding-right: calc(var(--gap) * 0.5);
+      padding-left: calc(var(--gap) * 0.5);
+    }
+  }
+  
+  @for $i from 1 through 12 {
+    .col-#{$i} {
+      flex: 0 0 auto;
+      $width: math.div($i, 12);
+      width: math.percentage($width);
+    }
+  }
+
+  .row-cols-auto {
+
+    display: flex;
+    flex: 0 0 auto;
+    width: auto;
+
+    > * {
+      display: block!important;
+      width: 100%;
+    }
+  }
+  
+  @for $i from 1 through 4 {
+    .row-cols-#{$i} {
+      
+      display: flex;
+
+      > * {
+        display: block!important;
+        width: math.div(100%, $i);
+      }
+    }
+  }
+
+
+  @media screen and (min-width: 36em) {
+    
+    @for $i from 1 through 4 {
+      .row-cols-sm-#{$i} {
+        > * {
+          flex: 0 0 auto;
+          width: calc(100% / #{$i});
+        }
+      }
+    }
+    
+    .col-sm-auto {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    @for $i from 1 through 12 {
+      .col-sm-#{$i} {
+        flex: 0 0 auto;
+        $width: math.div($i, 12);
+        width: math.percentage($width);
+      }
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+    
+    @for $i from 1 through 4 {
+      .row-cols-md-#{$i} {
+        > * {
+          flex: 0 0 auto;
+          width: calc(100% / #{$i});
+        }
+      }
+    }
+    
+    .col-md-auto {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    @for $i from 1 through 12 {
+      .col-md-#{$i} {
+        flex: 0 0 auto;
+        $width: math.div($i, 12);
+        width: math.percentage($width);
+      }
+    }
+  }
+
+  /* #endregion */
 }
