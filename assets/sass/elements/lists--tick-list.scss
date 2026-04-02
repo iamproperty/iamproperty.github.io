@@ -54,7 +54,7 @@
     }
 
     .tick--incomplete:before {
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       background: var(--colour-admin);
       mask-image: none;
       -webkit-mask-image: none;
@@ -65,7 +65,7 @@
       display: none;
     }
     .tick--loading:before {
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       content: '\f3f4';
       font-weight: var(--icon-weight, 900);
       color: var(--colour-heading);

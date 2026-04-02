@@ -166,7 +166,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     max-width: var(--input-max-width);
 
     &:after {
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       font-weight: 300;
       content: '\f023';
       position: absolute;
@@ -400,7 +400,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
           font-size: 1.5em;
           line-height: 1;
           color: var(--tick-colour);
-          font-family: 'Font Awesome 7 Pro';
+          font-family: var(--fa-family-classic);
 
           background: none !important;
           border: none !important;
@@ -470,7 +470,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         font-size: var(--checkbox-tick-size, 1em);
         line-height: 1;
         color: var(--colour-primary-theme);
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         font-weight: bold;
         height: var(--checkbox-inner-size, 1.5rem);
         width: var(--checkbox-inner-size, 1.5rem);
@@ -497,7 +497,7 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
         font-size: var(--checkbox-tick-size, 1em);
         line-height: 1;
         color: var(--colour-primary-theme);
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         font-weight: bold;
         height: var(--checkbox-inner-size, 1.5rem);
         width: var(--checkbox-inner-size, 1.5rem);

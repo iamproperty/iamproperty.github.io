@@ -46,7 +46,7 @@
 
 [class*='fa-']:before {
   content: var(--fa);
-  font-family: 'Font Awesome 7 Pro';
+  font-family: var(--fa-family-classic);
   line-height: 1em;
 }
 

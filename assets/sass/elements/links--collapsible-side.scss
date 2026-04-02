@@ -86,7 +86,7 @@
             position: absolute;
             display: block;
             content: '\f055';
-            font-family: 'Font Awesome 7 Pro';
+            font-family: var(--fa-family-classic);
             right: 20px;
             font-weight: 300;
           }

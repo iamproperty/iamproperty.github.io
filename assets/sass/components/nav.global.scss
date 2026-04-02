@@ -327,7 +327,7 @@ iam-nav details {
         position: absolute;
         top: 1.5rem;
         right: 1.5rem;
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         line-height: 1em;
       }
     }
@@ -524,7 +524,7 @@ iam-nav details {
         top: 50%;
         transform: translate(0, -50%);
         right: 0;
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         line-height: 1em;
       }
     }
