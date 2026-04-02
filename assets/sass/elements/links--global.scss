@@ -131,8 +131,12 @@
     padding: 0;
     display: flex;
     margin-bottom: 1.5rem;
-    outline: none !important;
     text-decoration: none;
+
+    &:not(:focus){
+
+      outline: none !important;
+    }
 
     &:before {
       display: none;
