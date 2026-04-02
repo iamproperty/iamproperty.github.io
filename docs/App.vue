@@ -62,7 +62,7 @@
     <div class="container pt-4 d-print-none">
       <ul class="list-unstyled list-inline ms-auto d-block mb-0">
         <li class="list-inline-item me-4 ms-0 mb-2">
-          <router-link to="/get-started">Get started</router-link>
+          <a href="https://github.com/iamproperty/iamproperty.github.io" target="_blank">Get started</a>
         </li>
         <li class="list-inline-item me-4 ms-0 mb-2">
           <a href="/brand-guidelines.pdf" target="_blank" download>Brand guidelines</a>
