@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../func' as *;
 
-@layer legacy, reset, elements, components, templates, overrides, utilities;
+@layer legacy, reset, elements, components, templates, overrides, utilities, debug;
 
 @layer reset {
   :root {
