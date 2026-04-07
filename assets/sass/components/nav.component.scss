@@ -200,7 +200,7 @@
 
     
     overscroll-behavior: contain;
-    width: calc(23.4375rem - var(--scrollbar-width));
+    width: 23.4375rem;
     background-color: var(--colour-canvas-2);
     position: absolute;
     height: calc(100vh - 6rem);
@@ -242,7 +242,7 @@
     }
 
     &.open {
-      left: calc(100% - (23.4375rem - var(--scrollbar-width)));
+      left: calc(100% - 23.4375rem);
       -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
       box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
       pointer-events: all;
@@ -410,10 +410,11 @@
     display: block;
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    width: 100svw;
+    translate: -50svw 0;
 
-
+    
     .container {
       margin-left: auto;
       margin-right: auto;
@@ -562,7 +563,7 @@
 ::slotted(.nav--menu) {
   pointer-events: all;
   overscroll-behavior: contain;
-  width: calc(23.4375rem - var(--scrollbar-width));
+  width: 23.4375rem;
   background-color: var(--colour-canvas-2);
   position: absolute;
   height: calc(100vh - 6rem);
@@ -629,7 +630,7 @@ slot[name='menus'] {
   height: 100vh;
   overflow: hidden;
   pointer-events: none;
-  width: calc(23.4375rem - var(--scrollbar-width));
+  width: 23.4375rem;
 }
 
 ::slotted(.nav--menu[data-open-title]) {
@@ -640,7 +641,7 @@ slot[name='menus'] {
 
 ::slotted(.nav--menu.open) {
   width: calc(23.4375rem - var(--modifier, 0px));
-  left: calc(100% - (23.4375rem - var(--scrollbar-width, 0px) - var(--modifier, 0px)));
+  left: calc(100% - (23.4375rem - var(--modifier, 0px)));
   -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   pointer-events: all;

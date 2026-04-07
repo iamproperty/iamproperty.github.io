@@ -181,12 +181,6 @@ class iamNav extends HTMLElement {
       menu.classList.add('has-secondary');
     }
 
-    // Create a scroll width variable to help with the sizing of the menu with in the CSS
-    document.documentElement.style.setProperty(
-      '--scrollbar-width',
-      window.innerWidth - document.documentElement.offsetWidth + 'px'
-    );
-
     // Open and close the menu
     menuButton.addEventListener(
       'click',
