@@ -165,13 +165,6 @@
     &:is(:focus, .focus):not(:disabled):not(:invalid) {
       box-shadow: 0 0 0 0.1rem rgba(30, 190, 230, 0.25);
     }
-    /*  Add some height to date inputs on iOS */
-    /*  https://github.com/twbs/bootstrap/issues/23307 */
-    /*  TODO: we can remove this workaround once https://bugs.webkit.org/show_bug.cgi?id=198959 is resolved */
-    &::-webkit-date-and-time-value {
-      /*  Multiply line-height by 1em if it has no unit */
-      height: if(math.unit(1.5) == '', 1.5 * 1em, 1.5);
-    }
 
     /*  Disabled inputs */
     &:disabled {
