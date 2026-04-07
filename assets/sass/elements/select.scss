@@ -144,7 +144,6 @@
 
   select:not(.select--minimal, .btn) {
     
-    display: block;
     width: 100%;
     display: block;
     width: 100%;
@@ -155,7 +154,6 @@
     background-color: var(--colour-canvas-2);
     background-clip: padding-box;
     border: 2px solid var(--colour-primary);
-    appearance: none; /*  Fix appearance for date inputs in Safari */
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     min-height: calc(
@@ -194,8 +192,10 @@
   }
 
   /* #region make select look like dropdown */
-  select {
-    appearance: base-select!important;
+  @media (hover: hover) {
+    select {
+      appearance: base-select!important;
+    }
   }
 
   select::picker-icon {
