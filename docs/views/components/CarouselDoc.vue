@@ -1,6 +1,7 @@
 <script setup>
   import Carousel from '@/components/Carousel/Carousel.vue';
   import Card from '@/components/Card/Card.vue';
+  import Modal from '@/components/Modal/Modal.vue';
 
   import cardImg from '../../img/cardImg.png';
 
@@ -134,8 +135,9 @@
     <h2>Carousel with Image Thumbnails</h2>
 
     <div class="container pb-5 mb-5">
-      <button data-modal="modal-carousel" class="btn btn-secondary">Open Carousel inside of dialog</button>
+      <button command="show-modal" commandfor="modal-carousel" class="btn btn-secondary">Open Carousel inside of dialog</button>
     </div>
+    <Modal>
     <dialog id="modal-carousel">
       <span class="h3">Carousel with Image Thumbnails</span>
 
@@ -160,7 +162,7 @@
         </div>
       </Carousel>
     </dialog>
-
+    </Modal>
     <Integration component="carousel" componentName="iam-carousel">
       <template #web-component>
         <pre><code>{{`<iam-carousel>

@@ -39,25 +39,6 @@
 
   /* #region carousel in dialog */
 
-  dialog:has(iam-carousel) {
-    container-type: inline-size;
-    --carousel-spacing: 2rem;
-
-    @media screen and (min-width: 36em) {
-      min-width: 37.5rem; /* 600 */
-      max-width: 37.5rem; /* 600 */
-    }
-  }
-
-  dialog:has(iam-carousel:last-child) {
-    iam-carousel::part(carousel) {
-      margin-bottom: 0 !important;
-    }
-
-    iam-carousel::part(controls) {
-      margin-bottom: 0 !important;
-      max-width: calc(100% - 4rem);
-    }
-  }
+  
   /* #endregion */
 }

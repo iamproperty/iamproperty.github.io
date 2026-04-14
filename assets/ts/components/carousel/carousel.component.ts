@@ -1,4 +1,3 @@
-import { generateThumbnailList, generatePipsHTML, carousel, updateCarousel } from '../../modules/carousel';
 import { trackComponent, trackComponentRegistered } from '../_global';
 
 trackComponentRegistered('iam-carousel');
@@ -24,6 +23,7 @@ class iamCarousel extends HTMLElement {
         <div class="carousel" part="carousel">
           <slot></slot>
         </div>
+        <div class="carousel__controls"></div>
         <div id="carousel__progress" class="carousel__progress">
           <input type="range" min="0" max="100" value="0" step="1" />
         </div>
@@ -38,6 +38,38 @@ class iamCarousel extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
+  generateThumbnailList = (carouselComponent): any => {
+    const thumbnailImages = [];
+
+    Array.from(carouselComponent.querySelectorAll(':scope > :is(div,iam-card)')).forEach((slide, index) => {
+      if (slide.hasAttribute('data-thumbnail')) {
+        thumbnailImages[index] = slide.getAttribute('data-thumbnail');
+      }
+    });
+
+    return thumbnailImages;
+  };
+
+  generatePipsHTML = (carouselComponent, thumbnailImages): string => {
+    const itemCount = carouselComponent.querySelectorAll(':scope > :is(div,iam-card)').length;
+
+    let pips = '';
+    for (let i = 1; i <= itemCount; i++) {
+      let pipContent = null;
+      let pipClass = '';
+
+      if (thumbnailImages.length && thumbnailImages[i - 1]) {
+        pipClass = 'has-thumbnail';
+        pipContent = `<img src="${thumbnailImages[i - 1]}" alt="Slide ${i}" height="148"/>`;
+      } else {
+        pipContent = `Slide ${i}`;
+      }
+
+      pips += `<button class="control-${i} ${pipClass}" data-slide="${i}" ${i == 1 ? 'aria-current' : ''}>${pipContent}</button>`;
+    }
+
+    return pips;
+  };
 
   progressPercent = (value, total):string => {
 
@@ -168,6 +200,35 @@ class iamCarousel extends HTMLElement {
         left: scrollTo,
         behavior: 'smooth',
       });
+    });
+
+
+    // Thumbnails
+    const carouselControls = this.shadowRoot.querySelector('.carousel__controls');
+
+    if (carouselElement.querySelector('[data-thumbnail]')) {
+      const thumbnailImages = this.generateThumbnailList(carouselElement);
+      carouselElement.classList.add('thumbnails');
+      carouselControls.innerHTML = this.generatePipsHTML(carouselElement, thumbnailImages);
+    }
+
+    carouselControls.addEventListener('click', (event) => {
+
+      carouselControls?.querySelector('[aria-current]')?.removeAttribute('aria-current');
+      if(event.target.closest('button[data-slide]')){
+
+
+        event.target.closest('button[data-slide]').setAttribute('aria-current','true');
+
+        const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * event.target.closest('button[data-slide]').getAttribute('data-slide'));
+
+        carouselElement.scrollTo({
+          top: 0,
+          left: scrollTo,
+          behavior: 'smooth',
+        });
+      }
+
     });
 
   }

@@ -594,4 +594,41 @@
 
   }
 
+
+  /* #region thumbnails */
+
+  .carousel__controls {
+    display: flex !important;
+    flex-wrap: wrap;
+    max-width: 100%;
+    overflow: visible;
+
+    button {
+      padding: 0;
+      margin: 0 0.2rem 0.4rem;
+
+      width: 6rem;
+      height: auto;
+      aspect-ratio: var(--carousel-image-aspect-ratio, 3 / 2);
+
+      border-radius: 0;
+      position: relative;
+      border-radius: 0.25rem;
+
+      img {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        margin: 0;
+      }
+
+      &[aria-current] {
+        outline: 2px solid var(--colour-info);
+      }
+    }
+  }
+
+  /* #endregion */
 }
