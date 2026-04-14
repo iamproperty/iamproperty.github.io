@@ -1,17 +1,19 @@
-export const cardHTML = `<div class="card__head" part="head">
-  <slot name="head"></slot>
-</div>
-<div class="card__badges"><slot name="badges"></slot></div>
-<slot name="checkbox" class="activate-prevent-hover"></slot>
-<div class="card__body" part="body">
-  <slot></slot>
-  <slot name="secondary" part="secondary"></slot>
-</div>
-<div class="card__details" part="details">
-  <slot name="details"></slot>
-</div>
-<div class="card__footer" part="footer">
-  <slot name="footer"></slot>
+export const cardHTML = `<div class="wrapper">
+  <div class="card__head" part="head">
+    <slot name="head"></slot>
+  </div>
+  <div class="card__badges"><slot name="badges"></slot></div>
+  <slot name="checkbox" class="activate-prevent-hover"></slot>
+  <div class="card__body" part="body">
+    <slot></slot>
+    <slot name="secondary" part="secondary"></slot>
+  </div>
+  <div class="card__details" part="details">
+    <slot name="details"></slot>
+  </div>
+  <div class="card__footer" part="footer">
+    <slot name="footer"></slot>
+  </div>
 </div>`;
 
 export const setupCard = (cardComponent: any): void => {

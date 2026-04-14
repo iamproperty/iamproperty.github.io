@@ -35,10 +35,19 @@ class iamContent extends HTMLElement {
     const component = this;
     const url = this.getAttribute('data-url');
 
+    const transform = this.getAttribute('data-transform');
+
+    let elementAttributes = '';
+
+
+    for (const attr of this.attributes) {
+      elementAttributes += `${attr.name}="${attr.value}" `;
+    }
+
     const addTitle = this.addTitle;
 
     const registerComponents = (contentComponent): void => {
-      const components = ['card', 'marketing', 'notification'];
+      const components = ['carousel', 'card', 'marketing', 'notification'];
 
       const assetLocation = document.body.hasAttribute('data-assets-location')
         ? document.body.getAttribute('data-assets-location')
@@ -76,7 +85,14 @@ class iamContent extends HTMLElement {
           const response = JSON.parse(this.responseText);
 
           component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
-          component.innerHTML = `${response.content.rendered}`;
+          
+          if(transform){
+          
+            component.innerHTML = `<${transform} ${elementAttributes}>${response.content.rendered}</${transform}>`;  
+            component.removeAttribute('class');
+          }
+          else
+            component.innerHTML = `${response.content.rendered}`;
 
           registerComponents(component);
         }

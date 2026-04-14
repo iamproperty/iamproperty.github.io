@@ -1,9 +1,6 @@
 @use '../_func' as *;
 
 
-
-
-
 @layer components {
   iam-carousel:defined {
     > div > *:last-child {
@@ -33,29 +30,11 @@
     container-type: inline-size;
   }
 
-  .admin-panel:has(iam-carousel:last-child) iam-carousel::part(carousel) {
-    margin-bottom: -1.5rem;
+  .admin-panel:has(iam-carousel:last-child) {
+    --carousel-mb: 0rem;
   }
 
-  @container (min-width: 62em) {
-    .admin-panel iam-carousel {
-      --carousel-spacing: 1.5rem;
-      margin-inline: -1.5rem;
-
-      & > div {
-        scroll-margin-left: 1.5rem;
-        --last-item-extra: -1.5rem;
-      }
-
-      & > div:first-child {
-        margin-left: 1.5rem;
-      }
-      & > div:last-child {
-        padding-inline-end: 2rem;
-        --last-item-extra: 1.5rem;
-      }
-    }
-  }
+  
   /* #endregion */
 
   /* #region carousel in dialog */

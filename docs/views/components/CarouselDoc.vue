@@ -32,83 +32,23 @@
     </p>
 
     <h2>Carousel anatomy</h2>
-    <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
-      <div>
-        <Card :data-image="cardImg"
-          >Financial preparation <span>Here would be the top level description of the task</span></Card
-        >
-      </div>
+    <Carousel class="visualtest" data-smcols="2" data-mdcols="2">
+      
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
     </Carousel>
 
     <ul class="pb-5">

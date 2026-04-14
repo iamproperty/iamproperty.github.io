@@ -7,8 +7,14 @@
   --card-footer-bottom-padding: 1.5rem;
   --card-head-height: 6rem;
 
-  box-shadow: var(--card-box-shadow);
   border-radius: var(--card-border-radius);
+  margin-bottom: 2rem;
+}
+
+.wrapper {
+
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow);
   position: relative;
   font-weight: bold;
   font-size: 1.125rem; /* 18/16 */
@@ -24,7 +30,6 @@
   background: var(--colour-canvas-2);
   outline: 2px solid var(--outline-colour, --colour-canvas-2);
   outline-offset: -2px;
-  margin-bottom: 2rem;
 
   > * {
     width: 100%;

@@ -6,6 +6,7 @@
   import Content from '@/components/Content/Content.vue';
   
   import Search from '@/components/Search/Search.vue';
+  import Carousel from '@/components/Carousel/Carousel.vue';
   
 </script>
 <template>
@@ -52,8 +53,11 @@
     </div>
 
     <div class="admin-panel bg-white md-col-end-8">
+      <h2>Latest marketing</h2>
+      <h3 class="lead pb-2">Featured articles</h3>
       
-      <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/98" data-title-tag="h2" data-title-class="bg-primary gradient-info"></Content>
+      <Content data-transform="iam-carousel" data-smcols="3" data-mdcols="3" data-url="http://localhost:8080/wp-json/wp/v2/pages/98"></Content>
+      
     </div>
 
     <div class="admin-panel bg-white md-col-start-9">

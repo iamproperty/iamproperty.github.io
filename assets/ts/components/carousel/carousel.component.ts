@@ -20,86 +20,156 @@ class iamCarousel extends HTMLElement {
         ${loadCSS}
         ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
       </style>
-      <div class="carousel" part="carousel">
-        <div class="carousel__wrapper">
-          <div class="carousel__inner">
-            <div class="carousel__content" part="content">
-              <slot></slot>
-            </div>
-          </div>
+      <div class="carousel-wrapper">
+        <div class="carousel" part="carousel">
+          <slot></slot>
         </div>
-        <div class="carousel__btns" part="btns">
-          <button class="btn btn-secondary btn-compact fa-plus-large btn-prev" data-go="0" disabled part="prev">
-            Prev
-          </button>
-          <button class="btn btn-secondary btn-compact fa-plus-large btn-next" data-go="2" part="next">Next</button>
+        <div id="carousel__progress" class="carousel__progress">
+          <input type="range" min="0" max="100" value="0" step="1" />
         </div>
-
-        <div class="carousel__controls" part="controls"></div>
-
-        <div class="carousel__progress" part="progress">
-          <input type="range" min="0" max="100" value="1" step="1" />
+        <div id="carousel__progress-sm" class="carousel__progress">
+          <input type="range" min="0" max="100" value="0" step="1" />
+        </div>
+        <div id="carousel__progress-md" class="carousel__progress">
+          <input type="range" min="0" max="100" value="0" step="1" />
         </div>
       </div>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
+
+  progressPercent = (value, total):string => {
+
+    return ((value) / (total)) * 100 + '%'
+  }
+
   connectedCallback(): void {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const carouselComponent = this;
-    //const carouselElement = this.shadowRoot.querySelector('.carousel');
-    //const row = this.shadowRoot.querySelector('.row');
+    
+    const carouselElement = this.shadowRoot?.querySelector('.carousel');
+    const carouselProgress = this.shadowRoot.querySelector('#carousel__progress [type="range"]');
+    const carouselProgressSM = this.shadowRoot.querySelector('#carousel__progress-sm [type="range"]');
+    const carouselProgressMD = this.shadowRoot.querySelector('#carousel__progress-md [type="range"]');
+    const itemCount = this.querySelectorAll(':scope > *').length;
+    
+    const progressPercent = this.progressPercent;
 
-    let thumbnailImages = [];
+    let stepperInterval,
+      stepperEvent = 'mouseup',
+      stepperStart = 'mousedown';
 
-    const carouselControls = this.shadowRoot.querySelector('.carousel__controls');
-
-    if (carouselComponent.querySelector('[data-thumbnail]')) {
-      thumbnailImages = generateThumbnailList(carouselComponent);
-      carouselComponent.classList.add('thumbnails');
+    if ('ontouchstart' in document.documentElement) {
+      stepperEvent = 'touchend';
+      stepperStart = 'touchstart';
     }
 
-    // populate the pips
-    carouselControls.innerHTML = generatePipsHTML(carouselComponent, thumbnailImages);
-
-    Array.from(
-      carouselComponent.querySelectorAll(
-        ':scope > div > img:first-child:last-child, :scope > div > picture:first-child:last-child img'
-      )
-    ).forEach((image) => {
-      image.style.inset = '0 0.5rem 0 0.5rem';
-      image.style.position = 'absolute';
-      image.style.width = 'calc(100% - 1rem)';
-      image.style.height = '100%';
-      image.style['object-fit'] = 'cover';
-
-      image.closest('div').classList.add('image__wrapper');
+    carouselElement?.innerHTML = this.innerHTML;
+    carouselElement?.setAttribute('data-smcols',this.getAttribute('data-smcols'));
+    carouselElement?.setAttribute('data-mdcols',this.getAttribute('data-mdcols'));
+    
+    carouselProgress.setAttribute('max', itemCount);
+    carouselProgress.style.setProperty('--percent', progressPercent(carouselProgress.value, itemCount));
+    
+    carouselProgress.addEventListener(stepperStart, () => {
+      clearInterval(stepperInterval);
+      stepperInterval = setInterval(function () {
+          
+        carouselProgress.style.setProperty('--percent', progressPercent(carouselProgress.value, itemCount));
+      }, 10);
     });
 
-    carousel(carouselComponent);
+    carouselProgress.addEventListener(stepperEvent, function () {
+      clearInterval(stepperInterval);
+    });
 
-    const observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutationRecord) {
-        const targetElement = mutationRecord.target as HTMLElement;
+    carouselProgress.addEventListener('change', () => {
 
-        updateCarousel(targetElement);
+      clearInterval(stepperInterval);
+      carouselProgress.style.setProperty('--percent', progressPercent(carouselProgress.value, itemCount));
+      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * (carouselProgress.value-1));
+
+      carouselElement.scrollTo({
+        top: 0,
+        left: scrollTo,
+        behavior: 'smooth',
       });
     });
 
-    observer.observe(carouselComponent, {
-      attributes: false,
-      childList: true,
-      subtree: true,
+
+    // SM Progress bar
+
+    const smStep = this.getAttribute('data-smcols') ? this.getAttribute('data-smcols') : 1;
+    const smItemCount = Math.floor(itemCount / smStep) * smStep;
+
+    carouselProgressSM.setAttribute('max', smItemCount);
+    carouselProgressSM.setAttribute('step', smStep);
+
+    carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, smItemCount));
+    
+    carouselProgressSM.addEventListener(stepperStart, () => {
+      clearInterval(stepperInterval);
+      stepperInterval = setInterval(function () {
+        carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, smItemCount));
+      });
     });
 
+    carouselProgressSM.addEventListener(stepperEvent, function () {
+      clearInterval(stepperInterval);
+    });
 
-    trackComponent(carouselComponent, 'iam-carousel', [
-      'pip-clicked',
-      'next-clicked',
-      'prev-clicked',
-      'slider-changed',
-    ]);
+    carouselProgressSM.addEventListener('change', () => {
+
+      clearInterval(stepperInterval);
+
+      carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, smItemCount));
+      const scrollTo = Math.floor((carouselElement.scrollWidth / smItemCount) * carouselProgressSM.value);
+
+      console.log(carouselProgressSM.value);
+
+      carouselElement.scrollTo({
+        top: 0,
+        left: scrollTo,
+        behavior: 'smooth',
+      });
+    });
+
+    // MD Progress bar
+
+    const mdStep = this.getAttribute('data-smcols') ? this.getAttribute('data-smcols') : 1;
+    const mdItemCount = Math.floor(itemCount / mdStep) * mdStep;
+
+    carouselProgressMD.setAttribute('max', mdItemCount);
+    carouselProgressMD.setAttribute('step', mdStep);
+
+    carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, mdItemCount));
+    
+    carouselProgressMD.addEventListener(stepperStart, () => {
+      clearInterval(stepperInterval);
+      stepperInterval = setInterval(function () {
+        carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, mdItemCount));
+      });
+    });
+
+    carouselProgressMD.addEventListener(stepperEvent, function () {
+      clearInterval(stepperInterval);
+    });
+
+    carouselProgressMD.addEventListener('change', () => {
+
+      clearInterval(stepperInterval);
+
+      carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, mdItemCount));
+      const scrollTo = Math.floor((carouselElement.scrollWidth / mdItemCount) * carouselProgressMD.value);
+
+      console.log(carouselProgressMD.value);
+
+      carouselElement.scrollTo({
+        top: 0,
+        left: scrollTo,
+        behavior: 'smooth',
+      });
+    });
+
   }
 }
 
