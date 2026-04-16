@@ -8,6 +8,7 @@
   --card-right-padding: 1rem;
   /* --card-head-height: 10rem; */
   --card-icon-right: 1rem;
+  position: relative;
 }
 
 :host(:is(:hover, :focus, .hover):not(.prevent-hover)) {
@@ -184,4 +185,30 @@ slot[name='secondary'] {
   outline-offset: -2px;
   border-radius: var(--card-border-radius) !important;
 }
+/* #endregion */
+
+/* #region link */
+slot[name="link"] {
+
+  position: absolute;
+  display: block;
+  inset: 0;
+  z-index: 1;
+}
+
+::slotted([slot="link"]) {
+
+  position: absolute!important;
+  display: block!important;
+  inset: 0!important;
+  z-index: 1!important;
+  margin: 0!important;
+  text-indent: -300%!important;
+  overflow: hidden!important;
+}
+::slotted([slot="link"]):after {
+
+  display: none!important;
+}
+
 /* #endregion */

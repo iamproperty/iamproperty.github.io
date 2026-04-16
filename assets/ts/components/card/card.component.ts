@@ -22,6 +22,7 @@ class iamCard extends HTMLElement {
     ${loadCSS}
     </style>
     ${cardHTML}
+    <slot name="link"></slot>
     <slot name="primary-action"></slot>
     `;
 
