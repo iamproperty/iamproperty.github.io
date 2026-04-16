@@ -18,7 +18,7 @@
 
 :host(:is(:active, .active):not(.prevent-hover)) {
   --card-icon-right: var(--card-icon-right-overide, 0.5rem);
-  outline: none;
+  //outline: none;
 }
 
 :host(.prevent-hover) {

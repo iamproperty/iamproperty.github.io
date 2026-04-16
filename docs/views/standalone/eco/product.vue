@@ -5,7 +5,7 @@
   
 </script>
 <template>
-  <nav>
+  <nav class="nav--sticky">
     <Nav>
       <a href="/" class="brand brand--property" slot="logo">
         <svg>

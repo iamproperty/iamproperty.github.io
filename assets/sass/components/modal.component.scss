@@ -29,6 +29,7 @@
     max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
     overflow-y: hidden;
+    place-self: center;
 
     @media screen and (min-width: 36em) {
       --dialog-padding: 2rem;

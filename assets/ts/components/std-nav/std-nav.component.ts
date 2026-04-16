@@ -12,9 +12,7 @@ declare global {
 class iamSTDNav extends HTMLElement {
   constructor() {
     super();
-    
   }
-
 
   loadNavData = async(): any => {
 
@@ -61,7 +59,7 @@ class iamSTDNav extends HTMLElement {
     }
   }
 
-  defaultToSecondary = () => {
+  defaultToSecondary = (): void => {
 
     // Set links and details to secondary slot
     Array.from(this.querySelectorAll(':scope > a, :scope > details')).forEach((element) => {
@@ -73,12 +71,17 @@ class iamSTDNav extends HTMLElement {
     this.outerHTML = `${defaultContent}`;
   }
 
-  defaultToNav = () => {
+  defaultToNav = ():void => {
 
     const defaultContent = this.innerHTML;
     this.innerHTML = `<iam-nav>
     ${defaultContent} 
     </iam-nav>`;
+  }
+
+  defaultToStandalone = ():void => {
+    const defaultContent = this.innerHTML;
+    this.wrapper.innerHTML = `<div class="container">${defaultContent}</div>`;
   }
 
   populateLinks = (data):void => {
@@ -120,9 +123,9 @@ class iamSTDNav extends HTMLElement {
     data.forEach((feature) => {
 
       if(feature.attributes.sections)
-        html += `<details><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${this.populateSections(feature.attributes.sections)}</div></details>`;
+        html += `<details name="megamenu"><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${this.populateSections(feature.attributes.sections)}</div></details>`;
       else if(feature.attributes.links)
-        html += `<details><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${this.populateLinks(feature.attributes.links)}</div></details>`;
+        html += `<details name="megamenu"><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${this.populateLinks(feature.attributes.links)}</div></details>`;
       else 
         html += `<a href="/">${feature.attributes.title}</a>`;
     });
@@ -130,7 +133,7 @@ class iamSTDNav extends HTMLElement {
     return html;
   }
 
-  transformToSecondary = (data) => {
+  transformToSecondary = (data):void => {
 
     this.innerHTML = this.populateNav(data);
 
@@ -144,7 +147,19 @@ class iamSTDNav extends HTMLElement {
     this.outerHTML = `${defaultContent}`;
   }
 
-  transformToNav = (data) => {
+  transformToStandalone = (data):void => {
+
+    this.wrapper.innerHTML = `<div class="container"><details><summary>Products</summary><div class="iam-nav">${this.populateNav(data)}</div></details></div>`;
+  
+    // Set links and details to secondary slot
+    Array.from(this.wrapper.querySelectorAll('.iam-nav > a, .iam-nav > details')).forEach((element) => {
+
+      element.setAttribute('slot','secondary');
+    });
+
+  }
+
+  transformToNav = (data):void => {
     this.innerHTML = `<iam-nav>
     <a href="/" class="brand brand--property" slot="logo">
       <svg>
@@ -158,34 +173,39 @@ class iamSTDNav extends HTMLElement {
 
   async connectedCallback(): void {
     
+    this.wrapper = this.shadowRoot?.querySelector('.wrapper');
 
     if (!window.customElements.get(`iam-nav`))
         window.customElements.define(`iam-nav`, iamNav);
 
 
-    if(!this.closest('iam-nav')){
+    if(this.hasAttribute('data-hub')){
       this.defaultToNav();
+    }
+    else if (!this.closest('iam-nav')){
+      this.defaultToStandalone();
+    }
+    else {
+      //this.defaultToSecondary(); TODO: change this to show default content but still be able to update
     }
 
     const data = await this.loadNavData().then(
       (data) => {
         if(typeof data == 'string'){
           
-          if(this.closest('iam-nav')){
-            this.defaultToSecondary();
-          }
-          
           return data;
         }
 
         //console.log(data);
-
-        if(this.closest('iam-nav')){
-          this.transformToSecondary(data);
+        if(this.hasAttribute('data-hub')){
+          this.transformToNav(data);
+        }
+        else if(!this.closest('iam-nav')){
+          this.transformToStandalone(data);
         }
         else {
-
-          this.transformToNav(data);
+          this.transformToSecondary(data);
+          //this.transformToNav(data);
         }
 
         return true;

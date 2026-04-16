@@ -59,8 +59,6 @@ components.forEach((component) => {
     componentFileName = "nav";
   }
   
-
-  
   try {
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.css`))) {
       
@@ -77,23 +75,6 @@ components.forEach((component) => {
   } catch (err) {
     console.error(err);
   }
-  try {
-    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.css`))) {
-      
-      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.css`), 'utf8');
-      css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
-      css = css.replace("\uFEFF","");
-    }
-    else if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.component.css`))) {
-      
-      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.component.css`), 'utf8');
-      css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
-      css = css.replace("\uFEFF","");
-    }
-  } catch (err) {
-    console.error(err);
-  }
-
 
   try {
     if (fs.existsSync(path.resolve(__dirname, `assets/css/components/menu.component.css`))) {

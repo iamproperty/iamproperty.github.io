@@ -4,7 +4,7 @@
 
 
 /*  Default colour  */
-iam-nav {
+:is(iam-nav,.iam-nav) {
 
   > :not([slot="logo"],[slot="secondary"]) {
     color-scheme: light;
@@ -20,14 +20,14 @@ iam-nav {
   }
 }
 
-iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+:is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
 
   > :not([slot="logo"],[slot="secondary"]) {
     color-scheme: light;
   }
 }
 
-.dark-theme iam-nav {
+.dark-theme :is(iam-nav,.iam-nav) {
 
   > :not([slot="logo"],[slot="secondary"]) {
     color-scheme: dark;
@@ -39,13 +39,13 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
   }
 }
 
-.dark-theme iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+.dark-theme :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
 
   --menu-btn-colour: var(--colour-white);
 }
   
   @media (prefers-color-scheme: dark) {
-    html:not(.light-theme) iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+    html:not(.light-theme) :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
 
       --menu-btn-colour: var(--colour-heading);
     }
@@ -53,7 +53,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
 
 
 @media screen and (min-width: 62em) {
-  iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+  :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
     > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
       color-scheme: dark;
     }
@@ -63,7 +63,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
     }
   }
 
-  .dark-theme iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+  .dark-theme :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
 
     > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
       color-scheme: light;
@@ -77,7 +77,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
   }
 
   @media (prefers-color-scheme: dark) {
-    html:not(.light-theme) iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+    html:not(.light-theme) :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
       > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
         color-scheme: light;
       }
@@ -91,7 +91,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
 
 }
 
-body:has(iam-nav.open:not(.nav--sticky,.demo-open):not(.nav--xs-sticky)) {
+body:has(:is(iam-nav,.iam-nav).open:not(.nav--sticky,.demo-open):not(.nav--xs-sticky)) {
   max-height: 100vh;
   overflow: hidden;
 }
@@ -100,22 +100,22 @@ body {
   --nav-height: 6rem; /* 96 */
   --sticky-padding: 0px;
 
-  &:has(iam-nav a[slot='secondary']) {
+  &:has(:is(iam-nav,.iam-nav) a[slot='secondary']) {
     --nav-height: 8.5rem; /* 96 + 40 */
   }
 
-  &:has(iam-nav.nav--sticky) {
+  &:has(:is(iam-nav,.iam-nav).nav--sticky) {
     --sticky-padding: var(--nav-height);
   }
 }
 
 /* #region Create the correct padding top of the page */
-nav:has(iam-nav) {
+nav:has(:is(iam-nav,.iam-nav)) {
   min-height: 6rem; /* 96 */
   display: block;
   position: relative;
 
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     position: absolute;
     top: 0;
     left: 0;
@@ -125,19 +125,19 @@ nav:has(iam-nav) {
 }
 
 @media screen and (min-width: 62em) {
-  nav:has(iam-nav [slot='secondary']) {
+  nav:has(:is(iam-nav,.iam-nav) [slot='secondary']) {
     min-height: 8.5rem; /* 96 + 40 */
   }
 }
 
-nav:has(iam-nav.nav--sticky) {
+nav:has(:is(iam-nav,.iam-nav).nav--sticky) {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 9999;
 
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     position: fixed;
     outline: 2px solid #eeeeee;
   transition: margin 1s;
@@ -145,13 +145,13 @@ nav:has(iam-nav.nav--sticky) {
 }
 
 @media screen and (max-width: 36em) {
-  body:has(iam-nav.open:not(.nav--xs-sticky,.demo-open)) {
+  body:has(:is(iam-nav,.iam-nav).open:not(.nav--xs-sticky,.demo-open)) {
     max-height: 100vh;
     overflow: hidden;
     margin-top: 0rem;
   }
 
-  nav:has(iam-nav.nav--xs-sticky) {
+  nav:has(:is(iam-nav,.iam-nav).nav--xs-sticky) {
     position: sticky;
     top: 0;
     left: 0;
@@ -159,7 +159,7 @@ nav:has(iam-nav.nav--sticky) {
     z-index: 9999;
     transition: margin 1s;
 
-    iam-nav {
+    :is(iam-nav,.iam-nav) {
       position: fixed;
     }
   }
@@ -171,7 +171,7 @@ nav:has(iam-nav.nav--sticky) {
 }
 
 @media screen and (min-width: 36em) {
-  body:has(iam-nav.open:not(.nav--sticky)) {
+  body:has(:is(iam-nav,.iam-nav).open:not(.nav--sticky)) {
     max-height: 100vh;
     overflow: hidden;
   }
@@ -186,7 +186,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 /* #endregion */
 
 /* #region General styles */
-iam-nav {
+:is(iam-nav,.iam-nav) {
   --nav-height: 6rem; /* 96 */
 
   &:has([slot='secondary']) {
@@ -248,12 +248,12 @@ iam-nav {
 }
 
 @container style(--body-theme: dark) {
-  iam-nav.bg-primary [slot="secondary"] {
+  :is(iam-nav,.iam-nav).bg-primary [slot="secondary"] {
     --colour-link: white;
   }
 }
 
-iam-nav details {
+:is(iam-nav,.iam-nav) details {
   padding-bottom: 0;
 
   > summary {
@@ -288,7 +288,7 @@ iam-nav details {
 /* #endregion */
 
 /* #region mobile and tablet mega menu */
-iam-nav details {
+:is(iam-nav,.iam-nav) details {
   @container style(--mobDetails) {
 
     margin-left: -1.5rem;
@@ -401,11 +401,11 @@ iam-nav details {
 }
 @media screen and (max-width: 62em) {
 
-  iam-nav details {
+  :is(iam-nav,.iam-nav) details {
 
     background-color: #eeeeee;
   }
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     --mobDetails: 'true';
 
     /*  Sub details */
@@ -454,7 +454,7 @@ iam-nav details {
 /* #endregion */
 
 /* #region tablet mega menu tweaks */
-iam-nav details {
+:is(iam-nav,.iam-nav) details {
 
   @container style(--tabletDetails) {
     padding-right: 2.5rem;
@@ -476,18 +476,18 @@ iam-nav details {
 }
 
 @media screen and (max-width: 62em) and (min-width: 36em) {
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     --tabletDetails: 'true';
   }
 
-  iam-nav details details[open] + details:before {
+  :is(iam-nav,.iam-nav) details details[open] + details:before {
     padding-right: 2.5rem;
     margin-right: -2.5rem; /* -40 */
   }
 }
 
 @media screen and (min-width: 62em) {
-  iam-nav .nav--menu {
+  :is(iam-nav,.iam-nav) .nav--menu {
     --mobDetails: 'true';
     --tabletDetails: 'true';
   }
@@ -497,8 +497,8 @@ iam-nav details {
 
 /* #region Desktop mega menu */
 @media screen and (min-width: 62em) {
-  iam-nav > details:not([slot="secondary"]),
-  iam-nav *:not(.nav--menu) > details:not([slot="secondary"]) {
+  :is(iam-nav,.iam-nav) > details:not([slot="secondary"]),
+  :is(iam-nav,.iam-nav) *:not(.nav--menu) > details:not([slot="secondary"]) {
     width: auto;
 
     > summary {
@@ -741,7 +741,7 @@ iam-nav details {
     }
   }
 
-  nav:has(iam-nav.open) {
+  nav:has(:is(iam-nav,.iam-nav).open) {
     min-height: 100vh !important;
     max-height: 100vh;
     overflow: auto;
@@ -749,11 +749,12 @@ iam-nav details {
     margin-bottom: calc((100vh - var(--nav-height)) * -1);
   }
 
-  html:has(iam-nav.open:not(.demo-open)) {
+  html:has(:is(iam-nav,.iam-nav).open:not(.demo-open)) {
     overflow: hidden;
   }
 
-  iam-nav > details[slot="secondary"]{
+  // Updated secondary nav
+  :is(iam-nav,.iam-nav) > details[slot="secondary"]{
     display: inline-block;
     position: relative;
     width: auto;
@@ -803,11 +804,11 @@ iam-nav details {
     
   }
 
-  iam-nav > details[slot="secondary"]::details-content {
+  :is(iam-nav,.iam-nav) > details[slot="secondary"]::details-content {
     display: none;
   }
 
-  iam-nav > details[slot="secondary"][open]::details-content {
+  :is(iam-nav,.iam-nav) > details[slot="secondary"][open]::details-content {
     display: block;
     background: var(--dropdown-bg);
     margin-block: var(--dropdown-margin-block);
@@ -827,7 +828,7 @@ iam-nav details {
 /*  4 columns on large screens */
 @media screen and (min-width: 80em) {
   /*  1280 */
-  iam-nav.nav--large *:not(.nav--menu) > details {
+  :is(iam-nav,.iam-nav).nav--large *:not(.nav--menu) > details {
     &[open] > div:not(:has(details)) {
       columns: 4;
       column-gap: 6.875rem;
@@ -839,7 +840,7 @@ iam-nav details {
 
 /* #region Search */
 @media screen and (min-width: 62em) {
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     &.search-open {
       > *:not([slot='logo']):not([slot='secondary']):not([slot='search']) {
         display: none !important;
@@ -851,7 +852,7 @@ iam-nav details {
 
 /* #region Dual navbar in desktop */
 @media screen and (min-width: 62em) {
-  iam-nav:has([slot='dual']) {
+  :is(iam-nav,.iam-nav):has([slot='dual']) {
     .brand:has(~ [slot='dual']) {
       margin-right: 1.5rem !important;
     }
@@ -872,7 +873,7 @@ iam-nav details {
 /* #endregion */
 
 /* #region compact menus on mobile */
-iam-nav > .dialog__wrapper {
+:is(iam-nav,.iam-nav) > .dialog__wrapper {
   .dialog--list {
     a {
       font-size: 1rem;
@@ -881,7 +882,7 @@ iam-nav > .dialog__wrapper {
 }
 
 @media screen and (max-width: 62em) {
-  iam-nav > .dialog__wrapper:not(.dialog--xs) {
+  :is(iam-nav,.iam-nav) > .dialog__wrapper:not(.dialog--xs) {
     width: 100%;
 
     .btn-compact {
@@ -896,8 +897,8 @@ iam-nav > .dialog__wrapper {
     }
   }
 
-  iam-nav > .dialog__wrapper:not(.dialog--xs) .dialog--list a,
-  iam-nav .btn-compact {
+  :is(iam-nav,.iam-nav) > .dialog__wrapper:not(.dialog--xs) .dialog--list a,
+  :is(iam-nav,.iam-nav) .btn-compact {
     --compact-size: 2rem;
     all: unset;
     display: block !important;
@@ -937,7 +938,7 @@ iam-nav > .dialog__wrapper {
 
 /* #region navbar additional menus */
 
-iam-nav .nav--menu {
+:is(iam-nav,.iam-nav) .nav--menu {
   outline: none !important;
 
   &::-webkit-scrollbar {

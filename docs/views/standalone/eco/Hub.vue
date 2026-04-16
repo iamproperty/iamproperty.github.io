@@ -12,7 +12,7 @@
 <template>
   
   <nav>
-    <STDNav>
+    <STDNav data-hub>
       
       <a href="/" class="brand brand--property" slot="logo">
         <svg>

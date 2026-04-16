@@ -92,8 +92,8 @@
 
     &:has(input:checked),
     &.selected {
-      background: #e9f9fd;
-      outline: 1px solid #1ebee6;
+      background: #e9f9fd!important;
+      outline: 1px solid #1ebee6!important;
     }
   }
 

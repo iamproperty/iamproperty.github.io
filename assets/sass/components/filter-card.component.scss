@@ -44,10 +44,10 @@
   }
 }
 
-:host-context(:is(:checked, .checked)),
-:host(:is(:active, .active)) {
-  outline: 2px solid var(--colour, var(--colour-primary));
-  outline-offset: -2px;
+:host-context(:is(:checked, .checked)) .wrapper,
+:host(:is(:active, .active)) .wrapper {
+  outline: 2px solid var(--colour, var(--colour-primary))!important;
+  outline-offset: -2px!important;
 
   .card__body {
     background: none;

@@ -301,6 +301,10 @@ $breakpoints: (
     }
   }
   
+  .col {
+    flex: 1 0 0%;
+  }
+
   @for $i from 1 through 12 {
     .col-#{$i} {
       flex: 0 0 auto;
@@ -328,6 +332,7 @@ $breakpoints: (
 
       > * {
         display: block!important;
+        flex: 0 0 auto;
         width: math.div(100%, $i);
       }
     }

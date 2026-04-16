@@ -28,7 +28,7 @@
         col-9-start] 1fr [col-9-end
         col-10-start] 1fr [col-10-end
         col-11-start] 1fr [col-11-end
-        col-12-start] 1fr [col-12-end content-end];
+        col-12-start] 1fr [col-12-end content-end]!important;
       column-gap: 1rem;
     }
 
