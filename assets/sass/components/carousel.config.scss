@@ -27,7 +27,7 @@
 
   /* #region Carousel inside of a admin panel */
   .admin-panel:has(iam-carousel) {
-    container-type: inline-size;
+    //container-type: inline-size;
   }
 
   .admin-panel:has(iam-carousel:last-child) {

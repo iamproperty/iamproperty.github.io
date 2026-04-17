@@ -10,6 +10,9 @@
 
 @layer components {
 
+  :host {
+    width: 100%;
+  }
   .carousel-wrapper {
 
     padding-inline: 1.5rem;

@@ -20,7 +20,7 @@ class iamContent extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  addTitle = (title) => {
+  addTitle = (title):void => {
 
     if(this.hasAttribute('data-title-tag')){
 
@@ -30,12 +30,45 @@ class iamContent extends HTMLElement {
     return '';
   }
 
+  fixContent = (component):void => {
+
+    const transform = component.getAttribute('data-transform');
+    let wrapper = component;
+
+    if(transform){
+
+      component.querySelectorAll(`${transform} > *:empty`).forEach((element) => {
+        element.remove();
+      });
+
+      wrapper = component.querySelector(`${transform}`);
+    }
+    else {
+
+      component.querySelectorAll(`:scope > *:empty`).forEach((element) => {
+        element.remove();
+      });
+    }
+    
+    const itemClass = component.getAttribute('data-items-class');
+
+    if(itemClass){
+        
+      wrapper.querySelectorAll(`:scope > *`).forEach((element) => {
+        element.classList.add(itemClass);
+      });
+    }
+
+  }
+
   connectedCallback(): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const component = this;
     const url = this.getAttribute('data-url');
 
     const transform = this.getAttribute('data-transform');
+
+    const fixContent = this.fixContent;
 
     let elementAttributes = '';
 
@@ -86,6 +119,7 @@ class iamContent extends HTMLElement {
 
           component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
           
+
           if(transform){
           
             component.innerHTML = `<${transform} ${elementAttributes}>${response.content.rendered}</${transform}>`;  
@@ -93,7 +127,8 @@ class iamContent extends HTMLElement {
           }
           else
             component.innerHTML = `${response.content.rendered}`;
-
+            
+          fixContent(component);
           registerComponents(component);
         }
       };

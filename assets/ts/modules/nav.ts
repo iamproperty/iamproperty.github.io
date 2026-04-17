@@ -32,7 +32,7 @@ export const populateNav = (data):void => {
 
   data.forEach((feature) => {
 
-    if(feature.attributes.sections)
+    if(feature.attributes.sections.length)
       html += `<details name="megamenu"><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateSections(feature.attributes.sections)}</div></details>`;
     else if(feature.attributes.links)
       html += `<details name="megamenu"><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateLinks(feature.attributes.links)}</div></details>`;
@@ -49,8 +49,9 @@ export const populateSections = (data):void => {
 
   data.forEach((section) => {
 
-    html += `<span class="section ${section.class}">
-      <span class="lead text-heading d-block">${section.enabled == "false" && section.marketing ? section.marketing : section.title}</span>
+    html += `<span class="section">
+      ${section.title ? `<span class="lead text-heading section-title" data-product="${section.id}" data-title>${section.title}</span>` : ''}
+      ${section.description ? `<span class="lead section-desc" data-product="${section.id}">! ${section.description}</span>` : ''}
       ${populateLinks(section.links)}
     </span>`;
   });
@@ -64,7 +65,7 @@ export const populateLinks = (data):void => {
   data.forEach((link) => {
 
   html += `
-    <a href="${link.url}">${link.title}</a>`;
+    <a href="${link.destinations.unlinked}" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}">${link.title}</a>`;
 
   });
 
@@ -73,7 +74,7 @@ export const populateLinks = (data):void => {
 
 export const loadNavData = async(Cookies): any => {
 
-  const ajaxURL = '/nav.json';
+  const ajaxURL = 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
 
   // Setup controller vars if not already set
   if (!window.controller) window.controller = [];
@@ -86,27 +87,17 @@ export const loadNavData = async(Cookies): any => {
   const { signal } = window.controller[ajaxURL];
 
   try {
-    return await fetch(ajaxURL, {
-      signal: signal,
-      method: 'get',
-      credentials: 'same-origin',
-      headers: new Headers({
-        'Content-Type': 'application/json',
+    const response = await fetch(ajaxURL, {
+      signal,
+      method: 'GET',
+      headers: {
         Accept: 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN'),
-      }),
-    })
-    .then((response) => response.json())
-    .then((response) => {
-      // populate datalist
-      let listString = '';
-
-      const data = response['data'] ? response['data'] : response;
-
-
-      return data;
+      },
     });
+
+    const json = await response.json();
+    const data = json.data ? json.data : json;
+    return data;
   } catch (error) {
     if (error?.name === 'AbortError') {
       return true;
@@ -116,5 +107,57 @@ export const loadNavData = async(Cookies): any => {
   }
 }
 
+export const loadUserData = async(Cookies): any => {
+
+  const ajaxURL = '/user.json';
+
+  // Setup controller vars if not already set
+  if (!window.controller) window.controller = [];
+
+  // Abort if controller already present for this url
+  if (window.controller[ajaxURL]) window.controller[ajaxURL].abort();
+
+  // Create a new controller so it can be aborted if new fetch made
+  window.controller[ajaxURL] = new AbortController();
+  const { signal } = window.controller[ajaxURL];
+
+  try {
+    const response = await fetch(ajaxURL, {
+      signal,
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+      },
+    });
+
+    const json = await response.json();
+    const data = json.data ? json.data : json;
+    return data;
+  } catch (error) {
+    if (error?.name === 'AbortError') {
+      return true;
+    }
+    console.log(error);
+    return 'There has been a problem. Please try again in a few moments.';
+  }
+}
+
+export const setEnabledLinks = (component,data):void => {
+
+  console.log(data);
+
+
+
+  
+  component.querySelectorAll(`[data-product][data-feature]`).forEach((element) => {
+    const isEnabled = data.attributes.products[element.getAttribute('data-product')].features[element.getAttribute('data-feature')];
+    element.setAttribute('data-is-enabled',isEnabled);
+    if(isEnabled && element.getAttribute('data-enabled')){
+      element.setAttribute('href',element.getAttribute('data-enabled'));
+      element.removeAttribute('target');
+    }
+  });
+
+}
 
 export default navbar;

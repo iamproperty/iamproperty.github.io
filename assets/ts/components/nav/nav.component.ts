@@ -20,7 +20,6 @@ class iamNav extends HTMLElement {
     template.innerHTML = `
     <style class="styles">
 
-    
     ${loadCSS}
     </style>
     <style class="doc-styles">

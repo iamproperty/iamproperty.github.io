@@ -1,142 +1,272 @@
 {
-  "meta": {
+    "jsonapi": {
+        "version": "1.1"
+    },
+    "meta": {
+        "schemaVersion": "2026-04-16",
+        "navigationType": "ecosystem-switcher",
+        "owner": "hub"
+    },
+    "data": [
+        {
+            "type": "navigation-group",
+            "id": "leadgen",
+            "attributes": {
+                "title": "Lead generation",
+                "sections": [
+                    {
+                        "id": "leadgen-mtk-features",
+                        "title": "Marketing Toolkit features",
+                        "description": "Win more instructions, maximise results and dominate your market.",
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "mtk-all-features",
+                                "title": "Marketing Toolkit all features",
+                                "productKey": "mtk",
+                                "featureKey": "allFeatures",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamp.datasystem.co.uk/Welcome",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-on-market-prospecting",
+                                "title": "On-market prospecting",
+                                "productKey": "mtk",
+                                "featureKey": "onMarketProspecting",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamp.datasystem.co.uk/DirectMail/Triggers",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/on-market-prospecting/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/on-market-prospecting/"
+                                }
+                            },
+                            {
+                                "id": "mtk-off-market-prospecting",
+                                "title": "Off-market prospecting",
+                                "productKey": "mtk",
+                                "featureKey": "offMarketProspecting",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamp.datasystem.co.uk/DirectMail/Advanced",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/off-market-prospecting/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/off-market-prospecting/"
+                                }
+                            },
+                            {
+                                "id": "mtk-recent-sales-success",
+                                "title": "Recent sales success",
+                                "productKey": "mtk",
+                                "featureKey": "recentSalesSuccess",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamp.datasystem.co.uk/DirectMail/RecentSuccess",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/prospecting-triggers-and-automations/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/prospecting-triggers-and-automations/"
+                                }
+                            },
+                            {
+                                "id": "mtk-recent-listings",
+                                "title": "Recent listings",
+                                "productKey": "mtk",
+                                "featureKey": "recentListings",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamp.datasystem.co.uk/DirectMail/JustListed",
+                                    "linkedDisabled": null,
+                                    "unlinked": null
+                                }
+                            },
+                            {
+                                "id": "mtk-trigger-automation",
+                                "title": "Trigger automation",
+                                "productKey": "mtk",
+                                "featureKey": "triggerAutomation",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamp.datasystem.co.uk/Admin/JobAutomation?sg_Id=11&s_Id=3004&tt_Id=-1&isnew=1",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "ma",
+            "attributes": {
+                "title": "Market Appraisals",
+                "sections": [
+                    {
+                        "id": "ma-crm-features",
+                        "title": "CRM features",
+                        "description": null,
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "crm-book-sales-appraisal",
+                                "title": "Book sales appraisal",
+                                "productKey": "crm",
+                                "featureKey": "bookSalesAppraisal",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://crm.iamproperty.com/Create/Sales/Appraisal",
+                                    "linkedDisabled": null,
+                                    "unlinked": null
+                                }
+                            },
+                            {
+                                "id": "crm-book-lettings-appraisal",
+                                "title": "Book lettings appraisal",
+                                "productKey": "crm",
+                                "featureKey": "bookLettingsAppraisal",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://crm.iamproperty.com/Create/Lettings/Appraisal",
+                                    "linkedDisabled": null,
+                                    "unlinked": null
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "id": "ma-mtk-features",
+                        "title": "Marketing Toolkit features",
+                        "description": null,
+                        "layout": "double",
+                        "links": [
+                            {
+                                "id": "mtk-market-appraisal-overview",
+                                "title": "Marketing appraisal overview",
+                                "productKey": "mtk",
+                                "featureKey": "marketAppraisalsOverview",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamp.datasystem.co.uk/MarketAppraisals/Sales/Overview?sg_Id=12&s_Id=4001&tt_Id=1&isnew=1",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-add-sales-appraisal",
+                                "title": "Add sales appraisal",
+                                "productKey": "mtk",
+                                "featureKey": "addSalesAppraisal",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamp.datasystem.co.uk/MarketAppraisals/Sales/Appraisals/New?s_Id=4003",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-sales-presentation-reporting",
+                                "title": "Sales presentation reporting",
+                                "productKey": "mtk",
+                                "featureKey": "salesPresentationReporting",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "/sales",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-lettings-presentations",
+                                "title": "Lettings presentations",
+                                "productKey": "mtk",
+                                "featureKey": "lettingsPresentations",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "/lettings",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            },
+                            {
+                                "id": "mtk-lettings-presentation-reporting",
+                                "title": "Lettings presentations reporting",
+                                "productKey": "mtk",
+                                "featureKey": "lettingsPresentationReporting",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "/sales",
+                                    "linkedDisabled": "https://iamproperty.com/ecosystem/marketing-toolkit/",
+                                    "unlinked": "https://iamproperty.com/ecosystem/marketing-toolkit/"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "insights",
+            "attributes": {
+                "title": "Insights",
+                "sections": []
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "onboarding",
+            "attributes": {
+                "title": "Onboarding",
+                "sections": []
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "crm",
+            "attributes": {
+                "title": "CRM",
+                "sections": []
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "auction",
+            "attributes": {
+                "title": "Auction",
+                "sections": [
 
-  },
-  "data": [
-    {
-      "type": "feature",
-      "id": "leadgen",
-      "attributes": {
-        "title": "Lead generation",
-        "enabled": "true",
-        "sections" : [
-          {
-            "title": "Marketing Toolkit features",
-            "marketing": "Win more instructions, maximise results and dominate your market.",
-            "enabled": "false",
-            "links": [
-              {
-                "title": "Marketing Toolkit all features",
-                "url": "https://iamp.datasystem.co.uk/Welcome",
-                "marketing": "https://iamproperty.com/ecosystem/marketing-toolkit/",
-                "enabled": "true"
-              },
-              {
-                "title": "On-market prospecting",
-                "url": "https://iamp.datasystem.co.uk/DirectMail/Triggers",
-                "marketing": "https://iamproperty.com/ecosystem/marketing-toolkit/on-market-prospecting/",
-                "enabled": "true"
-              },
-              {
-                "title": "Off-market prospecting",
-                "url": "https://iamp.datasystem.co.uk/DirectMail/Advanced",
-                "marketing": "https://iamproperty.com/ecosystem/marketing-toolkit/off-market-prospecting/",
-                "enabled": "true"
-              },
-              {
-                "title": "Recent sales success",
-                "url": "https://iamp.datasystem.co.uk/DirectMail/RecentSuccess",
-                "marketing": "https://iamproperty.com/ecosystem/marketing-toolkit/prospecting-triggers-and-automations/",
-                "enabled": "true"
-              },
-              {
-                "title": "Recent listings",
-                "url": "https://iamp.datasystem.co.uk/DirectMail/JustListed",
-                "marketing": "/tbc",
-                "enabled": "true"
-              },
-              {
-                "title": "Trigger automation",
-                "url": "https://iamp.datasystem.co.uk/Admin/JobAutomation?sg_Id=11&s_Id=3004&tt_Id=-1&isnew=1",
-                "enabled": "true"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "type": "feature",
-      "id": "ma",
-      "attributes": {
-        "title": "Market Appraisals",
-        "sections" : [
-          {
-            "title": "CRM features:",
-            "links": [
-              {
-                "title": "Book sales appraisal",
-                "url": "https://crm.iamproperty.com/Create/Sales/Appraisal "
-              },
-              {
-                "title": "Book lettings appraisal",
-                "url": "https://crm.iamproperty.com/Create/Lettings/Appraisal "
-              }
-            ]
-          },
-          {
-            "title": "Marketing Toolkit features:",
-            "class": "double",
-            "links": [
-              {
-                "title": "Marketing appraisal overview",
-                "url": "https://iamp.datasystem.co.uk/MarketAppraisals/Sales/Overview?sg_Id=12&s_Id=4001&tt_Id=1&isnew=1"
-              },
-              {
-                "title": "Add  sales appraisal",
-                "url": "https://iamp.datasystem.co.uk/MarketAppraisals/Sales/Appraisals/New?s_Id=4003"
-              },
-              {
-                "title": "Sales presentation reporting",
-                "url": "/sales"
-              },
-              {
-                "title": "Lettings presentations",
-                "url": "/lettings"
-              },
-              {
-                "title": "Lettings presentations reporting",
-                "url": "/sales"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    {
-      "type": "feature",
-      "id": "insights",
-      "attributes": {
-        "title": "Insights"
-      }
-    },
-    {
-      "type": "feature",
-      "id": "onboarding",
-      "attributes": {
-        "title": "Onboarding"
-      }
-    },
-    {
-      "type": "feature",
-      "id": "crm",
-      "attributes": {
-        "title": "CRM"
-      }
-    },
-    {
-      "type": "feature",
-      "id": "auction",
-      "attributes": {
-        "title": "Auction"
-      }
-    },
-    {
-      "type": "feature",
-      "id": "conveyancing",
-      "attributes": {
-        "title": "Conveyancing"
-      }
-    }
-  ]
+                  {
+                        "id": "leadgen-mtk-features",
+                        "title": "Marketing Toolkit features",
+                        "description": "Win more instructions, maximise results and dominate your market.",
+                        "layout": "default",
+                        "links": [
+                            {
+                                "id": "mtk-all-features",
+                                "title": "Auction dashboard",
+                                "productKey": "mtk",
+                                "featureKey": "allFeatures",
+                                "isAvailable": true,
+                                "destinations": {
+                                    "linkedEnabled": "https://iamproperty.com/ecosystem/auction/",
+                                    "linkedDisabled": "https://my.iamproperty.com/ias",
+                                    "unlinked": "https://my.iamproperty.com/ias"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "type": "navigation-group",
+            "id": "conveyancing",
+            "attributes": {
+                "title": "Conveyancing",
+                "sections": []
+            }
+        }
+    ]
 }

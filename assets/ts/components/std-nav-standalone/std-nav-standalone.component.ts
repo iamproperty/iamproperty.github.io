@@ -1,4 +1,4 @@
-import {populateNav,loadNavData} from '../../modules/nav';
+import {populateNav,loadNavData,loadUserData,setEnabledLinks} from '../../modules/nav';
 import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
 
 // Data layer Web component created
@@ -55,6 +55,7 @@ class iamSTDNavStandalone extends HTMLElement {
 
   async connectedCallback(): void {
     
+    const component = this;
     this.wrapper = this.shadowRoot?.querySelector('.wrapper');
     this.defaultToStandalone();
     
@@ -67,6 +68,14 @@ class iamSTDNavStandalone extends HTMLElement {
 
         this.transformToStandalone(data);
 
+        return true;
+      }
+    );
+
+    const userData = await loadUserData(Cookies).then(
+      (data) => {
+
+        setEnabledLinks(component,data);
         return true;
       }
     );

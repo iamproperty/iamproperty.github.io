@@ -20,6 +20,10 @@
           <use xlink:href="/svg/logo.svg#logo-property"></use>
         </svg>
       </a>
+
+      <a href="/">Onboarding</a>
+      
+      <div class="nav--menu" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid" slot="menus"><div><label for="test1">Active branch</label><select class="form-select" name="test1" id="test1"><option selected="" value="1">Newcastle</option><option value="2">Two</option><option value="2">Three</option><option value="2">Four</option></select></div><hr class="mt-3"><a href="/">Agency settings</a><a href="/">Control panel</a><a href="/" class="mb-4">Contact us</a></div>
       
     </STDNav>
   </nav>
@@ -32,16 +36,6 @@
     </div>
 
     <div class="admin-panel bg-white">
-    <div class="md-col-end-5">
-
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/72" data-title-tag="span" data-title-class="h4 pb-2">
-          <h2 class="h4 pb-2">Success hub</h2>
-        </Content>
-      </div>
-    </div>
-
-    <div class="admin-panel bg-white">
-      
       
       <div class="md-col-end-5">
 
@@ -49,9 +43,9 @@
           <h2 class="h4 pb-2">Success hub</h2>
         </Content>
       </div>
-      <div class="md-col-start-6 d-md-flex gap-2">
+      <div class="md-col-start-6">
 
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/81">
+        <Content data-transform="iam-carousel" data-items-class="card--sm" data-smcols="2" data-mdcols="2" data-url="http://localhost:8080/wp-json/wp/v2/pages/81">
           <Card>
               
             <span>The brand new inspections reveal</span>
@@ -74,7 +68,7 @@
       <h2>Latest marketing</h2>
       <h3 class="lead pb-2">Featured articles</h3>
       
-      <Content data-transform="iam-carousel" data-smcols="3" data-mdcols="3" data-url="http://localhost:8080/wp-json/wp/v2/pages/98"></Content>
+      <Content data-transform="iam-carousel" data-smcols="2" data-mdcols="2" data-url="http://localhost:8080/wp-json/wp/v2/pages/98"></Content>
       
     </div>
 
