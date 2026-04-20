@@ -49,7 +49,7 @@ export const populateSections = (data):void => {
 
   data.forEach((section) => {
 
-    html += `<span class="section">
+    html += `<span class="section section--${section.layout}">
       ${section.title ? `<span class="lead text-heading section-title" data-product="${section.id}" data-title>${section.title}</span>` : ''}
       ${section.description ? `<span class="lead section-desc" data-product="${section.id}">! ${section.description}</span>` : ''}
       ${populateLinks(section.links)}
@@ -64,8 +64,8 @@ export const populateLinks = (data):void => {
 
   data.forEach((link) => {
 
-  html += `
-    <a href="${link.destinations.unlinked}" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}">${link.title}</a>`;
+
+    html += `<a href="${link.destinations.unlinked}" target="_blank" data-product="${link.productKey}" data-feature="${link.featureKey}" data-enabled="${link.destinations.linkedEnabled}" data-disabled="${link.destinations.linkedDisabled}">${link.title}</a>`;
 
   });
 
@@ -74,7 +74,8 @@ export const populateLinks = (data):void => {
 
 export const loadNavData = async(Cookies): any => {
 
-  const ajaxURL = 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
+  //const ajaxURL = 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
+  const ajaxURL = '/nav.json';
 
   // Setup controller vars if not already set
   if (!window.controller) window.controller = [];

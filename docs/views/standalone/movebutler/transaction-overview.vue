@@ -465,6 +465,7 @@
 
 
     <div class="admin-panel">
+      <h3>hi</h3>
       <iam-actionbar>
         <a href="{{ route('ic.transactions.print-notes', $transaction) }}" target="_blank" class="btn btn-action">Print all notes</a>
         <button command="show-modal" commandfor="notes-modal" class="btn btn-action btn-primary fa-plus">Add note</button>

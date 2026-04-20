@@ -22,8 +22,6 @@ class iamSTDNav extends HTMLElement {
     </iam-nav>`;
   }
 
-
-  
   transformToNav = (data):void => {
     
     // Remove current links
@@ -35,7 +33,7 @@ class iamSTDNav extends HTMLElement {
 
     const defaultContent = this.querySelector('iam-nav').innerHTML;
 
-    this.innerHTML = `<iam-nav>
+    this.innerHTML = `<iam-nav ${(this.hasAttribute('class') ? `class="${this.getAttribute('class')}"`:'')}>
     ${defaultContent}
     ${populateNav(data)}
     </iam-nav>`;
@@ -52,6 +50,8 @@ class iamSTDNav extends HTMLElement {
     const defaultContent = this.innerHTML;
     this.outerHTML = `${defaultContent}`;
   }
+
+
 
   transformToSecondary = (data):void => {
 

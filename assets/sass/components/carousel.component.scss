@@ -138,6 +138,17 @@
   }
   /* #endregion */
 
+  @container style(--hide-carousel-btns) {
+    .carousel {
+    
+      --button-height: 0rem;
+    }
+    .carousel::scroll-button(*) {
+    
+      display: none!important;
+    }
+  }
+
   /* #region markers */
   .carousel {
     &::scroll-marker-group {

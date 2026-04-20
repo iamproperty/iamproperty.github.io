@@ -119,7 +119,7 @@ nav:has(:is(iam-nav,.iam-nav)) {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100svw;
     z-index: var(--index-menu);
   }
 }
@@ -257,7 +257,8 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
   }
 
-  .section [data-title].section-desc {
+  /* #region standard nav sections */
+  .section [data-title].section-title {
 
     display: block;
   }
@@ -265,8 +266,8 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
     display: none;
   }
-  /* standard nav sections */
-  .section:has([data-product][data-feature][data-is-enabled="true"]):has([data-product].section-desc) {
+
+  .section:not(:has([data-product][data-feature][data-is-enabled="true"])):has([data-product].section-desc) {
 
     [data-product].section-title {
 
@@ -278,6 +279,15 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     }
   }
 
+  .section:has([href="null"]):not(:has(a:not([href="null"]))){
+
+    display: none!important;
+  }
+
+  .section [href="null"]{
+    display: none!important;
+  }
+  /* #endregion */
 }
 
 @container style(--body-theme: dark) {
@@ -581,6 +591,10 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
         calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
       ) !important;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+      max-height: calc(100vh - var(--nav-height));
+      width: 100svw;
+      overflow: auto;
+      flex-wrap: wrap;
 
       .lead {
 
@@ -703,7 +717,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
         }
       } 
 
-      > span.section.double {
+      > span.section.section--double {
 
         display: block;
         width: calc(66.66% - 6.875rem);
@@ -777,7 +791,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
   nav:has(:is(iam-nav,.iam-nav).open) {
     min-height: 100vh !important;
     max-height: 100vh;
-    overflow: auto;
+    overflow: visible;
 
     margin-bottom: calc((100vh - var(--nav-height)) * -1);
   }
@@ -1024,7 +1038,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
   }
 
   &.closed * {
-    display: none !important;
+    //display: none !important;
   }
 }
 

@@ -106,7 +106,7 @@
                     {
                         "id": "ma-crm-features",
                         "title": "CRM features",
-                        "description": null,
+                        "description": "Market Appraisals that help you stand out",
                         "layout": "default",
                         "links": [
                             {
@@ -138,7 +138,7 @@
                     {
                         "id": "ma-mtk-features",
                         "title": "Marketing Toolkit features",
-                        "description": null,
+                        "description": "Smarter decisions, powered by data.",
                         "layout": "double",
                         "links": [
                             {
