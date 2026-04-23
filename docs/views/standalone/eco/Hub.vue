@@ -39,7 +39,7 @@
       
       <div class="md-col-end-5">
 
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/72" data-title-tag="span" data-title-class="h4 pb-2">
+        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=featured-learning" data-title-tag="span" data-title-class="h4 pb-2">
           <h2 class="h4 pb-2">Success hub</h2>
         </Content>
       </div>

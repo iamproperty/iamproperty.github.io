@@ -115,7 +115,10 @@ class iamContent extends HTMLElement {
 
       newXHRRequest.onload = function (): void {
         if (this.status === 200) {
-          const response = JSON.parse(this.responseText);
+          let response = JSON.parse(this.responseText);
+
+          if(Array.isArray(response))
+            response = response[0];
 
           component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
           
@@ -125,8 +128,11 @@ class iamContent extends HTMLElement {
             component.innerHTML = `<${transform} ${elementAttributes}>${response.content.rendered}</${transform}>`;  
             component.removeAttribute('class');
           }
-          else
+          else {
+            
             component.innerHTML = `${response.content.rendered}`;
+            console.log(response.content);
+          }
             
           fixContent(component);
           registerComponents(component);
