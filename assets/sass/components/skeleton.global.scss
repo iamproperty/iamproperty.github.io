@@ -1,0 +1,27 @@
+@layer components {
+  
+  iam-skeleton {
+    --bone-height: 0.8125rem; /* 13px */;
+    --colour-heading: #D9D9D9;
+    --colour-underline: #D9D9D9;
+    container-type: inline-size;
+  }
+
+  iam-bone {
+    background-color: #D9D9D9; /* TODO: needs to be a variable */
+    border: unset;
+    display: block;
+    width: 100%;
+    min-height: var(--bone-height);
+    pointer-events: none!important;
+    margin-bottom: 1rem;
+
+    &:not(.btn,.badge,.tag){
+        
+      height: var(--bone-height);
+      border-radius: 0.5rem;
+    }
+  }
+
+  
+}

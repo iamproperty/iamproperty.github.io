@@ -1,0 +1,104 @@
+@layer components {
+  
+  ::slotted(.heading) {
+    
+    --bone-height: var(--h2-fs);
+  }
+
+  /* #region Cards */
+  :host(.hasCard) {
+    display: flex;
+    column-gap: 1rem;
+    flex-direction: column;
+  }
+
+  @container (min-width: 36em) {
+    :host(.hasCard) {
+
+      flex-direction: row;
+    }
+  }
+
+  ::slotted(.card) {
+
+    background-color: var(--colour-light)!important;
+    height: unset!important;
+    min-height: unset!important;
+    aspect-ratio: 1.2/1;
+    border: 1px solid var(--colour-border);
+    display: flex!important;
+    padding: 1rem 0.75rem;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    &:before {
+      
+      margin-bottom: 0.75rem;
+    }
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      background-color: #D9D9D9; /* TODO: needs to be a variable */
+      display: block;
+      width: auto;
+      height: var(--bone-height);
+      border-radius: 0.5rem;
+    }
+  }
+  /* #endregion */
+
+  /* search */
+  ::slotted(.search) {
+
+    background-color: var(--colour-white)!important;
+    height: 3rem!important;
+    min-height: 3rem!important;
+    border: 1px solid var(--colour-border)!important;
+    border-radius: 1.5rem!important;
+  }
+
+  /* buttons */
+  ::slotted(.btn) {
+    min-width: 19rem!important; /* 304px*/
+    width: 19rem!important; /* 304px*/
+    //min-height: calc(var(--btn-line-height) + var(--btn-padding-block) + var(--btn-padding-block))!important;
+  }
+
+  ::slotted(:is(.btn,.badge,.tag):empty):before { 
+    content: "\00a0"; 
+    margin: 0;
+  }
+
+  :host(:is(.hasBtn, .hasBadge, .hasTag)) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  ::slotted(:is(.badge,.tag)) {
+    min-width: 5rem!important; /* 80px */
+    width: 5rem!important; /* 80px */
+  }
+
+  ::slotted(.link) {
+    
+    min-width: 8rem!important; /* 128px */
+    width: 8rem!important; /* 128px */
+  }
+  ::slotted(.link):after {
+
+    margin-top: 0.25rem;
+  }
+
+  /* spinner */
+  :host(.hasSpinner) ::slotted(*) {
+
+    width: var(--spinner-size)!important;
+    margin-inline: auto!important;
+  }
+
+  ::slotted(.spinner){
+    
+    background-color: transparent!important;
+  }
+}

@@ -281,6 +281,15 @@ const routes = [
         component: () => import('./views/elements/NonModalDoc.vue'),
         searchterms: 'passive, transactional, acknowledgement, popover',
       },
+      {
+        path: 'spinner',
+        name: 'Spinnner',
+        meta: {
+          title: 'Spinner | Elements | iamkey',
+        },
+        component: () => import('./views/elements/SpinnerDoc.vue'),
+        searchterms: 'loading',
+      },
     ],
   },
   {
@@ -763,6 +772,14 @@ const routes = [
           title: 'Video | Components | iamkey',
         },
         component: () => import('./views/components/VideoDoc.vue'),
+      },
+      {
+        path: 'skeleton',
+        name: 'Skeleton (Beta)',
+        meta: {
+          title: 'Skeleton | Components | iamkey',
+        },
+        component: () => import('./views/components/SkeletonDoc.vue'),
       }
     ],
   },
