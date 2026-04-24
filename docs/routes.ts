@@ -1151,6 +1151,40 @@ const routes = [
     ],
   },
   {
+    /* Patterns */ path: '/patterns',
+    name: 'Patterns',
+    meta: {
+      title: 'Patterns | iamkey',
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "patterns" */ './views/Patterns.vue'),
+    children: [
+      {
+        name: 'patterns-index',
+        path: '',
+        component: () => import('./views/patterns/Index.vue'),
+      },
+      {
+        path: 'input-fields',
+        name: 'Input fields (Beta)',
+        meta: {
+          title: 'Input fields | Components | iamkey',
+        },
+        component: () => import('./views/patterns/InputsDoc.vue'),
+      },
+      {
+        path: 'loading-states',
+        name: 'Loading states (Beta)',
+        meta: {
+          title: 'Loading states| Components | iamkey',
+        },
+        component: () => import('./views/patterns/LoadingDoc.vue'),
+      },
+    ],
+  },
+  {
     path: '/launch',
     name: 'Launch list',
     meta: {

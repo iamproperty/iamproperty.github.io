@@ -26,8 +26,7 @@
       <router-link to="/foundations">Foundations</router-link>
       <router-link to="/elements">Elements</router-link>
       <router-link to="/components">Components</router-link>
-      <router-link to="/templates">Templates</router-link>
-      <router-link to="/launch">Launch list</router-link>
+      <router-link to="/patterns">Patterns & templates</router-link>
 
       <form novalidate method="GET" slot="search" id="searchform" action="/search">
         
@@ -61,6 +60,11 @@
   <footer class="bg-primary mb-0">
     <div class="container pt-4 d-print-none">
       <ul class="list-unstyled list-inline ms-auto d-block mb-0">
+        
+      
+        <li class="list-inline-item me-4 ms-0 mb-2">
+          <router-link to="/launch">Launch list</router-link>
+        </li>
         <li class="list-inline-item me-4 ms-0 mb-2">
           <a href="https://github.com/iamproperty/iamproperty.github.io" target="_blank">Get started</a>
         </li>
