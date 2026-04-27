@@ -95,11 +95,6 @@
     top: 100%;
     left: 0;
 
-    
-    &:empty {
-      display: block !important;
-    }
-
     &:empty:before {
       content: "No results found"; /* TODO Allow for text to be overwritten */
       background-color: white;

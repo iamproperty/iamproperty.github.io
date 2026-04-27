@@ -37,6 +37,9 @@ class iamSearch extends HTMLElement {
     // Make the datalist a dropdown
     this.classList.add('dropdown__wrapper');
 
+    if(this.querySelector('input.input--sm'))
+      this.classList.add('hasInputSm');
+
     
     if(this.querySelector('label'))
       this.classList.add('has-label');
@@ -79,9 +82,12 @@ class iamSearch extends HTMLElement {
     advancedSelect(this, displayInputField, datalist, false);
 
 
-    function checkMatch(): void {
+    const checkMatch = (): void => {
       const match = datalist.querySelector(`option[value="${displayInputField.value}" i]`);
       const subMatch = datalist.querySelector(`option[value*="${displayInputField.value}" i]`);
+
+      console.log(match);
+
 
       if (match) {
         inputField.value = match.getAttribute('data-actual-value');
@@ -105,6 +111,9 @@ class iamSearch extends HTMLElement {
     
     const search = async (searchterm): any => {
       
+      if(!this.getAttribute('data-url'))
+        return false;
+
       let ajaxURL = this.getAttribute('data-url');
       ajaxURL += `${encodeURI(searchterm)}`;
 
