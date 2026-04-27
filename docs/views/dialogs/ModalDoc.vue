@@ -143,6 +143,17 @@
       <span>Optional label</span>
       <span class="h3">Passive modal title</span>
 
+      <label class="text-body">
+
+        <input type="checkbox" name="checkbox">
+
+        <p>text</p>
+        <ul>
+          <li>hi</li>
+        </ul>
+      </label>
+
+
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua. Ut
         enim ad minim exercitation ullamco laboris nisi ut aliquip ex ea commodo.

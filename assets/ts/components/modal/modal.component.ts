@@ -49,14 +49,14 @@ class iamModal extends HTMLElement {
     const agreedButton = this.querySelector('button[slot="agreed-button"]') ? this.querySelector('button[slot="agreed-button"]') : this.shadowRoot?.querySelector('[data-agreed]');
     const modalType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'passive';
 
-    const agreed = () => {
+    const agreed = (close = true) => {
       const agreedEvent = new CustomEvent('agreed', {
         detail: { modalId: id },
       });
 
       this.dispatchEvent(agreedEvent);
 
-      if(!this.querySelector(':invalid'))
+      if(!this.querySelector(':invalid') && close)
         closeModal(this);
     }
 
@@ -131,7 +131,7 @@ class iamModal extends HTMLElement {
         closeModal(this);
       }
       else {
-        agreed();
+        agreed(false);
       }
     });
 
