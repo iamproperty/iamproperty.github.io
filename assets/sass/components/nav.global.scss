@@ -810,6 +810,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       display: inline-block;
       margin-left: 1.5rem;
       margin-bottom: 0!important;
+      font-size: 1rem;
 
       &:after {
         display: none;
@@ -832,6 +833,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
       .lead {
         --colour-heading: var(--colour-body);
+        color: var(--colour-body);
         font-size: 0.87rem !important;
         line-height: 1.5rem !important;
         margin: 0;
@@ -841,7 +843,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
         width: 0;
       }
 
-      .section + .section {
+      .section:has(a:not([href=null])) + .section {
         border-top: 1px solid var(--colour-border);
         display: block;
         padding-top: 0.5rem;

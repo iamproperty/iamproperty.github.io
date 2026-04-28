@@ -109,7 +109,7 @@
   }
 
   @media screen and (min-width: 36em) {
-    margin: 0 0 0 3rem;
+    margin: 0 0 0 2rem;
     width: auto;
     padding-right: 1.875rem; /* 24 + 6 */
     text-indent: 0;
@@ -122,7 +122,7 @@
   @media screen and (min-width: 62em) {
     width: fit-content;
     height: auto;
-    margin: 0 0 0 3rem;
+    margin: 0 0 0 2rem;
     padding: 0 !important;
     text-indent: 0;
     padding-right: 0 !important;
@@ -549,6 +549,7 @@
 
     z-index: 1;
     top: 0;
+    height: 100vh;
   }
 
   :host(.open-secondary) .has-secondary .menu__secondary {
@@ -556,7 +557,7 @@
     z-index: 2;
   }
 }
-/* #endregion */
+/* #endregion */ 
 
 /* #region Menus */
 ::slotted(.nav--menu) {
@@ -617,7 +618,7 @@
 
   @media screen and (min-width: 62em) {
     height: calc(100vh - var(--nav-height));
-    top: calc(var(--nav-height) + 4px);
+    top: var(--nav-height);
   }
 }
 

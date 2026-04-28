@@ -51,8 +51,6 @@ class iamSTDNav extends HTMLElement {
     this.outerHTML = `${defaultContent}`;
   }
 
-
-
   transformToSecondary = (data):void => {
 
     this.innerHTML = populateNav(data);
