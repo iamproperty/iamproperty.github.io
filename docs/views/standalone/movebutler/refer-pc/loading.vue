@@ -26,7 +26,7 @@
       
       <span class="badge bg-success" slot="badge">Recommendation</span>
       
-      <img slot="panel" src="/img/illustrations/auctioneer.png" alt="" loading="lazy">
+      <img slot="panel" class="panel-img--lg" src="/img/illustrations/auctioneer.png" alt="" loading="lazy">
 
       <span class="h3 pb-2" slot="panel">Save days</span>
       <p slot="panel" class="pb-2">Forecasted time saved if this transaction uses Premium Conveyancing. <a href="#details">Find out more</a></p>

@@ -140,6 +140,11 @@ slot[name="badge"] {
   max-width: 4.75rem!important; /* TODO: magic number 1 column */
 }
 
+::slotted(img.panel-img--lg[slot="panel"]) {
+  
+  max-width: 14.25rem!important; /* TODO: magic number 2 column */
+}
+
 :host(.has-panel) slot[name="panel"]{
   container-type: inline-size;
     anchor-name: --anchor;
