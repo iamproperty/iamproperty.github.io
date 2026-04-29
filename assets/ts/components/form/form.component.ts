@@ -147,6 +147,8 @@ class iamForm extends HTMLElement {
 
   limitCheckboxes = (event?:Event):void => {
 
+    
+
     const target = event?.target instanceof HTMLInputElement ? event.target : null;
     const changedCheckbox = target?.matches('input[type="checkbox"]') ? target : null;
     const checkboxLimitGroup = changedCheckbox?.closest('[data-checkbox-limit]');
@@ -158,13 +160,27 @@ class iamForm extends HTMLElement {
         ];
 
     checkboxLimitGroups.forEach((group) => {
-
+      
       const limit = this.getCheckboxLimit(group);
       const checked = Array.from(group.querySelectorAll('input[type="checkbox"]:checked'));
+      const notChecked = Array.from(group.querySelectorAll('input[type="checkbox"]:not(:checked)'));
+
+      notChecked.forEach((checkbox) => {
+
+        checkbox.setAttribute('disabled','disabled');
+      });
+      
+      if(checked.length < limit){
+        notChecked.forEach((checkbox) => {
+
+          checkbox.removeAttribute('disabled');
+        });
+      }
 
       if(checked.length <= limit)
         return;
-
+      
+      
       if(changedCheckbox?.checked && group.contains(changedCheckbox)) {
         changedCheckbox.checked = false;
         return;
