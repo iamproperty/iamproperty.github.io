@@ -138,6 +138,45 @@ class iamForm extends HTMLElement {
     });
   }
 
+  getCheckboxLimit = (element):number => {
+
+    const limit = parseInt(element.getAttribute('data-checkbox-limit') || '10', 10);
+
+    return !isNaN(limit) && limit > 0 ? limit : 10;
+  }
+
+  limitCheckboxes = (event?:Event):void => {
+
+    const target = event?.target instanceof HTMLInputElement ? event.target : null;
+    const changedCheckbox = target?.matches('input[type="checkbox"]') ? target : null;
+    const checkboxLimitGroup = changedCheckbox?.closest('[data-checkbox-limit]');
+    const checkboxLimitGroups = checkboxLimitGroup
+      ? [checkboxLimitGroup]
+      : [
+          ...(this.hasAttribute('data-checkbox-limit') ? [this] : []),
+          ...Array.from(this.querySelectorAll('[data-checkbox-limit]')),
+        ];
+
+    checkboxLimitGroups.forEach((group) => {
+
+      const limit = this.getCheckboxLimit(group);
+      const checked = Array.from(group.querySelectorAll('input[type="checkbox"]:checked'));
+
+      if(checked.length <= limit)
+        return;
+
+      if(changedCheckbox?.checked && group.contains(changedCheckbox)) {
+        changedCheckbox.checked = false;
+        return;
+      }
+
+      checked.slice(limit).forEach((checkbox) => {
+
+        checkbox.checked = false;
+      });
+    });
+  }
+
   connectedCallback(): void {
 
     const form = this.querySelector('form');
@@ -181,9 +220,10 @@ class iamForm extends HTMLElement {
     this.readonlyIf();
     this.writeIf();
     this.emptyIf();
+    this.limitCheckboxes();
     
 
-    form.addEventListener('change', () => {
+    form.addEventListener('change', (event) => {
 
       this.showIf();
       this.hideIf();
@@ -193,6 +233,7 @@ class iamForm extends HTMLElement {
       this.readonlyIf();
       this.writeIf();
       this.emptyIf();
+      this.limitCheckboxes(event);
 
       Array.from(form.querySelectorAll('.conditional [data-conditional-required], .conditional [data-conditional-data-required]')).forEach((input) => {
 

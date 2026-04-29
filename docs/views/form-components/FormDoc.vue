@@ -83,7 +83,17 @@
     </form>
     </Form>
 
-
+    <h2 class="pt-5">Limit the number of checkboxes</h2>
+    <Form>
+      <form>
+        <fieldset data-checkbox-limit="2">
+          <label><input type="checkbox" name="test" value="1"/> 1</label>
+          <label><input type="checkbox" name="test" value="2"/> 2</label>
+          <label><input type="checkbox" name="test" value="3"/> 3</label>
+          <label><input type="checkbox" name="test" value="4"/> 4</label>
+        </fieldset>
+      </form>
+    </Form>
 
     <Integration component="fileupload" componentName="iam-fileupload">
       <template #web-component>
