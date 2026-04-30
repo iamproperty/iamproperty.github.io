@@ -58,5 +58,7 @@
   "video",
   "button",
   "std-nav",
-  "std-nav-standalone"
+  "std-nav-standalone",
+  "skeleton",
+  "bone"
 ]

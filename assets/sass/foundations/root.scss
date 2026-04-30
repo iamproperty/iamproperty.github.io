@@ -236,22 +236,24 @@
     --max-height-lg: 37.5rem; /* 600px */
 
 
+    /* #region Dropdown */
     --dropdown-bg: var(--colour-canvas-2);
     --dropdown-margin-block: 0.25rem;
     --dropdown-padding: 0.5rem;
     --dropdown-border-radius: 0.5rem;
     --dropdown-box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
-
     --option-border-radius: 0.25rem;
-
---option-color: var(--colour-primary);
-    
+    --option-color: var(--colour-primary);
     --option-bg-hover: var(--colour-light);
     --option-padding: 0.5rem;
     --option-color-hover: #595959; /* Magic number */
     --option-bg-active: hsl(from var(--colour-info) h s l / 10%);
-    
     --option-border-left-active: 4px solid var(--colour-info);
+    /* #endregion */
+
+    /* #region Spinner */
+    --spinner-size: 7rem; /* 112px */
+    /* #endregion */
 
     /*  Add in media query based updates to the global vars like updating the heading 1 font size */
     @media screen and (min-width: 36em) {

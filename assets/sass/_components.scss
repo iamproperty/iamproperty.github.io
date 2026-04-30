@@ -20,6 +20,7 @@
 
 @use 'components/milestone';
 @use 'components/calendar.config';
+@use 'components/skeleton.global';
 
 @layer components {
   /*  Make sure the first */
