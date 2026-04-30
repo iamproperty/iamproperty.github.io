@@ -86,9 +86,6 @@ class iamSearch extends HTMLElement {
       const match = datalist.querySelector(`option[value="${displayInputField.value}" i]`);
       const subMatch = datalist.querySelector(`option[value*="${displayInputField.value}" i]`);
 
-      console.log(match);
-
-
       if (match) {
         inputField.value = match.getAttribute('data-actual-value');
         console.log(inputField)

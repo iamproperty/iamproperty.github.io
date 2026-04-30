@@ -8,7 +8,7 @@
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
   import searchAnatomy from '../../img/search-anatomy.png';
-  import styleisedSearchAnatomy from '../../img/stylised-search-anatomy.png';
+  import stylisedSearchAnatomy from '../../img/stylised-search-anatomy.png';
 </script>
 
 <template>
@@ -180,7 +180,7 @@
 
     <p>Stylised search uses the same behaviours as the standard search but is styled in a more visually appealing way. The stylised search also comes with the option to include a drop shadow into the field.</p>
     
-    <img :src="styleisedSearchAnatomy" class="mb-5" />
+    <img :src="stylisedSearchAnatomy" class="mb-5" />
 
     <ol class="mb-5">
       <li>Input field (with optional drop shadow )</li>
