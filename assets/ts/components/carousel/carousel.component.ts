@@ -5,37 +5,6 @@ trackComponentRegistered('iam-carousel');
 class iamCarousel extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
-
-    const assetLocation = document.body.hasAttribute('data-assets-location')
-      ? document.body.getAttribute('data-assets-location')
-      : '/assets';
-
-    const loadCSS = `@import "${assetLocation}/css/components/carousel.component.css";`;
-
-    const template = document.createElement('template');
-    template.innerHTML = /* HTML */ `
-      <style>
-        ${loadCSS}
-        ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
-      </style>
-      <div class="carousel-wrapper">
-        <div class="carousel" part="carousel">
-          <slot></slot>
-        </div>
-        <div class="carousel__controls"></div>
-        <div id="carousel__progress" class="carousel__progress">
-          <input type="range" min="0" max="100" value="0" step="1" />
-        </div>
-        <div id="carousel__progress-sm" class="carousel__progress">
-          <input type="range" min="0" max="100" value="0" step="1" />
-        </div>
-        <div id="carousel__progress-md" class="carousel__progress">
-          <input type="range" min="0" max="100" value="0" step="1" />
-        </div>
-      </div>
-    `;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   generateThumbnailList = (carouselComponent): any => {
@@ -78,12 +47,27 @@ class iamCarousel extends HTMLElement {
 
   connectedCallback(): void {
     
-    const carouselElement = this.shadowRoot?.querySelector('.carousel');
-    const carouselProgress = this.shadowRoot.querySelector('#carousel__progress [type="range"]');
-    const carouselProgressSM = this.shadowRoot.querySelector('#carousel__progress-sm [type="range"]');
-    const carouselProgressMD = this.shadowRoot.querySelector('#carousel__progress-md [type="range"]');
-    const itemCount = this.querySelectorAll(':scope > *').length;
-    
+    this.insertAdjacentHTML('beforeend',`
+      <div class="carousel__controls">
+        <div class="carousel__pips"></div>
+        <div class="carousel__progress carousel__progress-xs">
+          <input type="range" min="0" max="100" value="0" step="1" />
+        </div>
+        <div class="carousel__progress carousel__progress-sm">
+          <input type="range" min="0" max="100" value="0" step="1" />
+        </div>
+        <div class="carousel__progress carousel__progress-md">
+          <input type="range" min="0" max="100" value="0" step="1" />
+        </div>
+      </div>
+    `)
+ 
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const carouselElement = this;
+    const carouselProgress = this.querySelector('.carousel__progress-xs [type="range"]');
+    const carouselProgressSM = this.querySelector('.carousel__progress-sm [type="range"]');
+    const carouselProgressMD = this.querySelector('.carousel__progress-md [type="range"]');
+    const itemCount = this.querySelectorAll(':scope > *:not(.carousel__controls)').length;
     const progressPercent = this.progressPercent;
 
     let stepperInterval,
@@ -95,13 +79,10 @@ class iamCarousel extends HTMLElement {
       stepperStart = 'touchstart';
     }
 
-    carouselElement?.innerHTML = this.innerHTML;
-    carouselElement?.setAttribute('data-smcols',this.getAttribute('data-smcols'));
-    carouselElement?.setAttribute('data-mdcols',this.getAttribute('data-mdcols'));
-    
+
     carouselProgress.setAttribute('max', itemCount);
     carouselProgress.style.setProperty('--percent', progressPercent(carouselProgress.value, itemCount));
-    
+   
     carouselProgress.addEventListener(stepperStart, () => {
       clearInterval(stepperInterval);
       stepperInterval = setInterval(function () {
@@ -126,10 +107,9 @@ class iamCarousel extends HTMLElement {
         behavior: 'smooth',
       });
     });
-
-
+    
+  
     // SM Progress bar
-
     const smStep = this.getAttribute('data-smcols') ? this.getAttribute('data-smcols') : 1;
     const smItemCount = Math.floor(itemCount / smStep) * smStep;
 
@@ -155,8 +135,6 @@ class iamCarousel extends HTMLElement {
 
       carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, smItemCount));
       const scrollTo = Math.floor((carouselElement.scrollWidth / smItemCount) * carouselProgressSM.value);
-
-      console.log(carouselProgressSM.value);
 
       carouselElement.scrollTo({
         top: 0,
@@ -193,8 +171,6 @@ class iamCarousel extends HTMLElement {
       carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, mdItemCount));
       const scrollTo = Math.floor((carouselElement.scrollWidth / mdItemCount) * carouselProgressMD.value);
 
-      console.log(carouselProgressMD.value);
-
       carouselElement.scrollTo({
         top: 0,
         left: scrollTo,
@@ -204,17 +180,17 @@ class iamCarousel extends HTMLElement {
 
 
     // Thumbnails
-    const carouselControls = this.shadowRoot.querySelector('.carousel__controls');
+    const carouselPips = this.querySelector('.carousel__pips');
 
     if (carouselElement.querySelector('[data-thumbnail]')) {
       const thumbnailImages = this.generateThumbnailList(carouselElement);
       carouselElement.classList.add('thumbnails');
-      carouselControls.innerHTML = this.generatePipsHTML(carouselElement, thumbnailImages);
+      carouselPips.innerHTML = this.generatePipsHTML(carouselElement, thumbnailImages);
     }
 
-    carouselControls.addEventListener('click', (event) => {
+    carouselPips.addEventListener('click', (event) => {
 
-      carouselControls?.querySelector('[aria-current]')?.removeAttribute('aria-current');
+      carouselPips?.querySelector('[aria-current]')?.removeAttribute('aria-current');
       if(event.target.closest('button[data-slide]')){
 
 
