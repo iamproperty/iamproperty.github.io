@@ -62,10 +62,10 @@
   iam-carousel > * {
 
     container-type: scroll-state;
-    grid-column: auto;
+    grid-column: auto!important;
     min-height: 100%;
     margin: 0;
-    scroll-snap-align: start;
+    scroll-snap-align: start!important;
   }
   /* #endregion */
 
