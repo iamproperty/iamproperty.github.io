@@ -1,2 +1,47 @@
 
 @use 'advanced-select.component';
+
+@layer components {
+  :host(.search--stylised) ::slotted(input) {
+    
+    outline: 1px solid var(--colour-border)!important;
+  
+    border: none!important;
+    border-radius: 1.5rem!important; /* 24px */
+    padding-left: 3rem!important; /* Magic number */
+    background-color: var(--colour-canvas);
+  }
+  :host(.search--stylised) ::slotted(input.input--sm) {
+    
+    padding-left: 2.5rem!important; /* Magic number */
+  }
+
+  :host(.search--stylised) ::slotted(input:is(:focus)) {
+    
+    outline: 1px solid var(--colour-info)!important;
+  }
+
+  :host(.search--stylised) ::slotted(button) {
+    
+
+    background: transparent!important;
+    border-color: transparent!important;
+    color: var(--colour-heading)!important;
+    position: absolute!important;
+    top: 0;
+    left: 0;
+  }
+
+  :host(.hasInputSm) ::slotted(button) {
+
+    min-width: 2.5rem!important;
+  }
+
+  :host(.search--stylised) .clear-search {
+
+    border-radius: 50% !important;
+    outline: none !important;
+    border: none !important;
+  }
+
+}
