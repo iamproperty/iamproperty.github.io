@@ -8,6 +8,7 @@
   import Search from '@/components/Search/Search.vue';
   import Carousel from '@/components/Carousel/Carousel.vue';
   
+  
 </script>
 <template>
   
@@ -29,38 +30,22 @@
   </nav>
   <main class="bg-primary">
 
-    <div class="d-md-flex align-items-end pb-2">
+    
+    
+    <h1 class="pb-3">Welcome, </h1>
+      
+      
 
-      <h1 class="pb-0 me-auto my-1">iamproperty hub</h1>
-      <a href="/" class="my-1">Need product support?</a>
+
+    <div class="md-col-end-6">
+      <div class="admin-panel bg-white">
+        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=learning" data-title-tag="h2" data-title-class="bg-light">
+          <p>Loading..</p>
+        </Content>
+      </div>
     </div>
+    <div class="md-col-end-6">
 
-    <div class="admin-panel bg-white">
-      
-      <div class="md-col-end-5">
-
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=featured-learning" data-title-tag="span" data-title-class="h4 pb-2">
-          <h2 class="h4 pb-2">Success hub</h2>
-        </Content>
-      </div>
-      <div class="md-col-start-6">
-
-        <Content data-transform="iam-carousel" data-items-class="card--sm" data-smcols="2" data-mdcols="2" data-url="http://localhost:8080/wp-json/wp/v2/pages/81">
-          <Card>
-              
-            <span>The brand new inspections reveal</span>
-            
-            <a href="/test" slot="link">View card</a>
-          </Card>
-          <Card>
-            
-              
-            <span>The brand new inspections reveal</span>
-            
-          </Card>
-        </Content>
-      </div>
-      
       
     </div>
 

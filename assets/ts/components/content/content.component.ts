@@ -1,3 +1,6 @@
+
+import { transformButtons } from '../../modules/content';
+
 class iamContent extends HTMLElement {
   constructor() {
     super();
@@ -136,6 +139,7 @@ class iamContent extends HTMLElement {
             
           fixContent(component);
           registerComponents(component);
+          transformButtons(component);
         }
       };
 
