@@ -256,3 +256,24 @@ iam-tabs.tabs--guided::part(next-button):not(:hover) {
     width: 100%;
   }
 }
+
+
+/* #region tabs - toggle tags */
+
+.tabs--toggle-tags {
+  .tabs__links {
+
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 1px;
+
+    -webkit-mask-image: unset!important;
+    mask-image: unset!important;
+  }
+}
+
+.tabs--toggle-tags .tabs__links__wrapper:after {
+  display: none!important;
+}
+
+/* #endregion */

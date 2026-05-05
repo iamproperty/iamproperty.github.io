@@ -11,6 +11,8 @@ import Content from '@/components/Content/Content.vue';
 import Search from '@/components/Search/Search.vue';
 
 import Carousel from '@/components/Carousel/Carousel.vue';
+import Tabs from '@/components/Tabs/Tabs.vue';
+import Tab from '@/components/Tabs/Tab.vue';
 
 function addLearningSearch(event): void {
 
@@ -41,8 +43,6 @@ function addLearningSearch(event): void {
   </nav>
   <main class="bg-primary">
 
-    
-    
     <h1 class="pb-3">Welcome, </h1>
       
       
@@ -62,41 +62,55 @@ function addLearningSearch(event): void {
 
 
     </div>
-    <div class="md-col-end-6">
-
-
-      
-    </div>
-
-    <div class="admin-panel bg-white md-col-end-8">
-      <h2>Latest marketing</h2>
-      <h3 class="lead pb-2">Featured articles</h3>
-      
-      <Content data-transform="iam-carousel" data-smcols="2" data-mdcols="2" data-url="http://localhost:8080/wp-json/wp/v2/pages/98"></Content>
-      
-    </div>
-
-    <div class="admin-panel bg-white md-col-start-9">
-      <hr/>
-      illustration
-      <h2>Help desk</h2>
-
-      <Search data-url="https://iampropertyinternal.zendesk.com/hc/api/internal/instant_search.json?query=" data-suffix="search" class="mb-5">
-          <label>
-            Search existing transactions
-            <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="articles" />
-            <span class="hint-text">Enter 3 or more characters</span>
-          </label>
+    <div class="md-col-start-7">
+      <div class="admin-panel bg-white">
+        
+        <h2 class="bg-light">Product support</h2>
+        <label>
+        <Search data-url="https://iampropertyinternal.zendesk.com/hc/api/internal/instant_search.json?query=" data-suffix="search" class="search--stylised">
+          <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="articles" placeholder="Search all support articles"/>
+          <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search" slot="suffix"></button>
           <datalist id="articles">
             <option value="Cirrus - I don’t have the desktop App installed" data-url="https://iampropertyinternal.zendesk.com/hc/en-gb/articles/30187115513873-Cirrus-I-don-t-have-the-desktop-App-installed"></option>
           </datalist>
         </Search>
 
-      <div class="btn__group mb-1">
-        <a href="https://iampropertyinternal.zendesk.com/hc/en-gb" target="_blank" class="btn btn-primary">View FAQ articles</a>
-        <a href="https://iampropertyinternal.zendesk.com/hc/en-gb/requests/new" target="_blank" class="btn btn-secondary">Submit a request</a>
+        </label>
+        <div class="btn__group mb-1">
+          <a href="https://iampropertyinternal.zendesk.com/hc/en-gb" target="_blank" class="btn btn-primary">View FAQ articles</a>
+          <a href="https://iampropertyinternal.zendesk.com/hc/en-gb/requests/new" target="_blank" class="btn btn-secondary">Submit a request</a>
+        </div>
+      </div>
+
+      <div class="admin-panel bg-white">
+        <h2 class="bg-primary gradient-info">Sales insights</h2>
+        <p>Outcode area: Ne1, NE61</p>
+        <Tabs class="tabs--toggle-tags">
+          <Tab title="Listed">
+            <p>{chart1}</p>
+          </Tab>
+          <Tab title="Reductions">
+            <p>{chart2}</p>
+          </Tab>
+          <Tab title="Cancelled">
+            <p>{chart3}</p>
+          </Tab>
+          <Tab title="Withdrawal">
+            <p>{chart4}</p>
+          </Tab>
+          <Tab title="SSTC">
+            <p>{chart5}</p>
+          </Tab>
+          
+        </Tabs>
       </div>
     </div>
+
+    
+
+    
+
+
 
   </main>
 </template>
