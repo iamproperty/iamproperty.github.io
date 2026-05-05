@@ -91,12 +91,12 @@
     }
 
     &:has(input:checked),
-    &.selected {
+    &.selected,
+    &[aria-pressed='true'] {
       background: #e9f9fd!important;
       outline: 1px solid #1ebee6!important;
     }
   }
-
   /* Quick fix for badges in buttons */
   .btn :is(.badge, .tag) {
     position: relative;
