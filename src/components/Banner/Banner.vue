@@ -1,35 +1,20 @@
 <script setup>
-  const props = defineProps({
-    title: {
-      type: String,
-      required: true,
-    },
-    image: {
-      type: String,
-      required: false,
-    },
-    background: {
-      type: String,
-      default: 'light',
-      required: false,
-    },
+  import { onMounted } from 'vue';
+
+  onMounted(() => {
+    import(`../../../assets/js/components/banner/banner.component.min.js`)
+      .then((module) => {
+        if (!window.customElements.get(`iam-banner`))
+          window.customElements.define(`iam-banner`, module.default);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   });
 </script>
 
 <template>
-  <div class="container">
-    <div :class="'bg-' + background + ' mb-4'">
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="pt-5 pb-3 px-4">
-            <h2>{{ title }}</h2>
-            <slot></slot>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-5 ms-auto">
-          <img v-if="image" :src="image" alt="" class="h-100 w-100 object-cover" />
-        </div>
-      </div>
-    </div>
-  </div>
+  <iam-banner ref="wrapper">
+    <slot></slot>
+  </iam-banner>
 </template>
