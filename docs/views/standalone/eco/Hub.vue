@@ -46,17 +46,8 @@ function addLearningSearch(event): void {
 
     <h1 class="pb-3">Welcome, </h1>
       
-    <Banner data-image="/market-appraisal-screenshot.png" data-dismiss="true">
-
-      <h2>Market Appraisals that impress</h2>
-      <p>
-        Stand out from the start with everything you need to stand out in the front room and maximise your win rate.
-        Integrated with your CRM for a fully connected solution.
-      </p>
-      <hr />
-      <a href="/market-appraisals" class="btn btn-secondary" slot="buttons">Find Out More</a>
-      
-    </Banner>
+    
+    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122"></Content>
 
     <div class="md-col-end-6">
       <div class="admin-panel bg-white">

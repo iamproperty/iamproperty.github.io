@@ -83,7 +83,7 @@ class iamContent extends HTMLElement {
     const addTitle = this.addTitle;
 
     const registerComponents = (contentComponent): void => {
-      const components = ['skeleton','bone','carousel', 'card', 'marketing', 'notification'];
+      const components = ['skeleton','bone','carousel', 'card', 'banner', 'notification'];
 
       const assetLocation = document.body.hasAttribute('data-assets-location')
         ? document.body.getAttribute('data-assets-location')
