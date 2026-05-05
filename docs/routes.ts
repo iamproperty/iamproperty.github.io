@@ -571,6 +571,14 @@ const routes = [
         component: () => import('./views/components/AppliedFiltersDoc.vue'),
       },
       {
+        path: 'banner',
+        name: 'Banner',
+        meta: {
+          title: 'Banner | Components | iamkey',
+        },
+        component: () => import('./views/components/BannerDoc.vue'),
+      },
+      {
         path: 'bento-grid',
         name: 'Bento grid',
         meta: {
