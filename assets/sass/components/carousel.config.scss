@@ -223,7 +223,7 @@
   /* #endregion */
 
   /* #region count the number of items and set variables to hide the controls/markers */
-  iam-carousel:has(> *:first-child:last-child) {
+  iam-carousel:has(> *:not(.carousel__controls):first-child + .carousel__controls) {
     
     --hide-buttons: 1;
     --hide-markers: 1;
@@ -231,8 +231,8 @@
   
   iam-carousel {
     
-    @container (min-width: 36em) {
-      &[data-smcols='2']:not(:has(> *:nth-child(3))) {
+    @container (min-width: 30em) { /* TODO work out this number - shoule be 6 columns */
+      &[data-smcols='2']:not(:has(> *:not(.carousel__controls):nth-child(3))) {
 
         --hide-buttons: 1;
         --hide-markers: 1;
@@ -241,7 +241,7 @@
         --marker-height: 0rem;
         --marker-mb: 0rem;
       }
-      &[data-smcols='3']:not(:has(> *:nth-child(4))) {
+      &[data-smcols='3']:not(:has(> *:not(.carousel__controls):nth-child(4))) {
 
         --hide-buttons: 1;
         --hide-markers: 1;
@@ -253,7 +253,7 @@
     }
 
     @container (min-width: 62em) {
-      &[data-mdcols='2']:not(:has(> *:nth-child(3))) {
+      &[data-mdcols='2']:not(:has(> *:not(.carousel__controls):nth-child(3))) {
 
         --hide-buttons: 1;
         --hide-markers: 1;
@@ -262,7 +262,7 @@
         --marker-height: 0rem;
         --marker-mb: 0rem;
       }
-      &[data-mdcols='3']:not(:has(> *:nth-child(4))) {
+      &[data-mdcols='3']:not(:has(> *:not(.carousel__controls):nth-child(4))) {
 
         --hide-buttons: 1;
         --hide-markers: 1;
@@ -278,7 +278,16 @@
   /* #region change the item count via queries */
   iam-carousel {
     
-    @container (min-width: 36em) {
+    &[data-xscols='2'] {
+
+      --count: 2;
+    }
+    &[data-xscols='3'] {
+
+      --count: 3;
+    }
+
+    @container (min-width: 30em) {
       &[data-smcols='2'] {
 
         --count: 2;
@@ -319,17 +328,17 @@
 
       @container not scroll-state(snapped: x) {
         
-        --opacity: 0;
+        //--opacity: 0;
       }
       
       @container style(--count: 2) {
 
-        &:nth-child(2n - 1) {
+        &:not(.carousel__controls):nth-child(2n - 1) {
           scroll-snap-align: start;
           scroll-snap-stop: always;
         }
 
-        &:nth-child(2n - 1)::scroll-marker{
+        &:not(.carousel__controls):nth-child(2n - 1)::scroll-marker{
 
           display: block;
         }
@@ -337,12 +346,12 @@
 
       @container style(--count: 3) {
 
-        &:nth-child(3n - 2) {
+        &:not(.carousel__controls):nth-child(3n - 2) {
           scroll-snap-align: start;
           scroll-snap-stop: always;
         }
 
-        &:nth-child(3n - 2)::scroll-marker{
+        &:not(.carousel__controls):nth-child(3n - 2)::scroll-marker{
 
           display: block;
         }
@@ -536,7 +545,7 @@
       display: block;
     }
 
-    @container (min-width: 36em) {
+    @container (min-width: 30em) {
 
       .carousel__progress-xs {
         display: none;
@@ -561,7 +570,7 @@
   @supports selector(::scroll-marker-group) {
     
 
-    @container (max-width: 36em) {
+    @container (max-width: 30em) {
       iam-carousel:has(> *:nth-child(5)){
         
         --button-height: 0rem;
@@ -578,7 +587,7 @@
       }
     }
 
-    @container (min-width: 36em) {
+    @container (min-width: 30em) {
 
       .carousel__progress {
         display: none;

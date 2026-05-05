@@ -161,6 +161,10 @@ class iamCard extends HTMLElement {
       });
     });
 
+
+    if(this.querySelector('[slot="link"]'))
+      this.classList.add('hasLink');
+
     trackComponent(cardComponent, 'iam-card', [
       'select-card',
       'unselect-card',

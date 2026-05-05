@@ -1,14 +1,25 @@
 <script lang="ts" setup>
+import { createApp } from 'vue';
 
-  import Nav from '@/components/Nav/Nav.vue';
-  import STDNav from '@/components/STDNav/STDNav.vue';
-  import Card from '@/components/Card/Card.vue';
-  import Content from '@/components/Content/Content.vue';
-  
-  import Search from '@/components/Search/Search.vue';
-  import Carousel from '@/components/Carousel/Carousel.vue';
-  
-  
+import SearchLearningArticles from './search-learning-articles.vue';
+
+import Nav from '@/components/Nav/Nav.vue';
+import STDNav from '@/components/STDNav/STDNav.vue';
+import Card from '@/components/Card/Card.vue';
+import Content from '@/components/Content/Content.vue';
+
+import Search from '@/components/Search/Search.vue';
+
+import Carousel from '@/components/Carousel/Carousel.vue';
+
+function addLearningSearch(event): void {
+
+  const find = document.querySelector('[data-shortcode="search-learning-articles"]');
+
+  if(find){
+    createApp(SearchLearningArticles).mount(find);
+  }
+}
 </script>
 <template>
   
@@ -39,12 +50,20 @@
 
     <div class="md-col-end-6">
       <div class="admin-panel bg-white">
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=learning" data-title-tag="h2" data-title-class="bg-light">
+        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=learning" data-title-tag="h2" data-title-class="bg-light" @loaded="addLearningSearch">
           <p>Loading..</p>
         </Content>
       </div>
+      <div class="admin-panel bg-white">
+        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=marketing" data-title-tag="h2" data-title-class="bg-light">
+          <p>Loading..</p>
+        </Content>
+      </div>
+
+
     </div>
     <div class="md-col-end-6">
+
 
       
     </div>

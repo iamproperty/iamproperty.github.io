@@ -188,7 +188,7 @@ slot[name='secondary'] {
 /* #endregion */
 
 /* #region link */
-slot[name="link"] {
+:host(.hasLink) slot[name="link"] {
 
   position: absolute;
   display: block;

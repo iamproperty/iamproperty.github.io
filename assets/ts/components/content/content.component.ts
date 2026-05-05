@@ -27,7 +27,7 @@ class iamContent extends HTMLElement {
 
     if(this.hasAttribute('data-title-tag')){
 
-      return `<${this.getAttribute('data-title-tag')} class="${this.getAttribute('data-title-class')}">${title}</${this.getAttribute('data-title-tag')}>`;
+      return `<${this.getAttribute('data-title-tag')} class="${this.getAttribute('data-title-class')} iam-content--title">${title}</${this.getAttribute('data-title-tag')}>`;
     }
 
     return '';
@@ -83,7 +83,7 @@ class iamContent extends HTMLElement {
     const addTitle = this.addTitle;
 
     const registerComponents = (contentComponent): void => {
-      const components = ['carousel', 'card', 'marketing', 'notification'];
+      const components = ['skeleton','bone','carousel', 'card', 'marketing', 'notification'];
 
       const assetLocation = document.body.hasAttribute('data-assets-location')
         ? document.body.getAttribute('data-assets-location')
@@ -123,23 +123,31 @@ class iamContent extends HTMLElement {
           if(Array.isArray(response))
             response = response[0];
 
-          component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
+          const renderedContent = response.content.rendered.replaceAll(/<p>\[(.*)\]<\/p>/g, "<span data-shortcode=\"$1\"><iam-skeleton><iam-bone class=\"search\"></iam-bone></iam-skeleton></span>");
+
+
           
+          component.parentElement?.querySelector('.iam-content--title')?.remove();
+          component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
+
+
 
           if(transform){
           
-            component.innerHTML = `<${transform} ${elementAttributes}>${response.content.rendered}</${transform}>`;  
+            component.innerHTML = `<${transform} ${elementAttributes}>${renderedContent}</${transform}>`;  
             component.removeAttribute('class');
           }
           else {
             
-            component.innerHTML = `${response.content.rendered}`;
-            console.log(response.content);
+            component.innerHTML = `${renderedContent}`;
           }
             
           fixContent(component);
           registerComponents(component);
           transformButtons(component);
+
+          const changeEvent = new CustomEvent('loaded', { detail: {triggered: true} });
+          component?.dispatchEvent(changeEvent);
         }
       };
 
