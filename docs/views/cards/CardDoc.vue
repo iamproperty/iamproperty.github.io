@@ -335,41 +335,40 @@
       </div>
     </div>
 
-    <h3>Feature card with description and label</h3>
-    <p>This is a variation of the feature card which also features a label to show status or categorise the card.</p>
+    
+
+    
+    <h3>Feature article card </h3>
+    <p>This is a card used within products to primarily used to showcase articles within the iamproperty product.</p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
+      
+        <div class="col-start-auto col-span-2">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
-            <Card :data-image="cardImg"
-              ><span slot="badges" class="badge bg-warning"><i class="fa-regular fa-sparkles"></i> New</span>Financial
-              preparation <span>Here would be the top level description of the task</span></Card
+            <Card :data-image="cardImg" class="card--article"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
             >
           </a>
         </div>
 
-        <div class="col">
+        <div class="col-start-auto col-span-2">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
           <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="hover"
-              ><span slot="badges" class="badge bg-warning"><i class="fa-regular fa-sparkles"></i> New</span>Financial
-              preparation <span>Here would be the top level description of the task</span></Card
+            <Card :data-image="cardImg" class="card--article hover"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
             >
           </a>
         </div>
 
-        <div class="col">
+        <div class="col-start-auto col-span-2">
           <span class="pb-3 d-block text-uppercase">Active State</span>
           <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="active"
-              ><span slot="badges" class="badge bg-warning"><i class="fa-regular fa-sparkles"></i> New</span>Financial
-              preparation <span>Here would be the top level description of the task</span></Card
+            <Card :data-image="cardImg" class="card--article active"
+              >Financial preparation <span>Here would be the top level description of the task</span></Card
             >
           </a>
         </div>
-      </div>
     </div>
 
     <h3>Checkbox card</h3>

@@ -51,7 +51,7 @@ class iamCard extends HTMLElement {
     }
 
     // Add class that shows the right arrow icon
-    if (!cardComponent.querySelector('[slot="btns"]') && !cardComponent.querySelector('[slot="secondary"]')) {
+    if (!cardComponent.querySelector('[slot="btns"]') && !cardComponent.querySelector('[slot="secondary"]') && !cardComponent.classList.contains('card--article') && !cardComponent.closest('.carousel--article-cards')) {
       cardComponent.classList.add('show-icon');
     }
 

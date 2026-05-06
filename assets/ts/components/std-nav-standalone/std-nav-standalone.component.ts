@@ -76,6 +76,15 @@ class iamSTDNavStandalone extends HTMLElement {
       (data) => {
 
         setEnabledLinks(component,data);
+
+        Array.from(document.querySelectorAll('[data-user-data]')).forEach((element) => {
+
+          const dataVar = element.getAttribute('data-user-data');
+
+          if(data.attributes[dataVar])
+            element.innerHTML = data.attributes[dataVar];
+        });
+
         return true;
       }
     );

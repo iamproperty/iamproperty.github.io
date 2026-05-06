@@ -3,6 +3,8 @@ import { createApp } from 'vue';
 
 import SearchLearningArticles from './search-learning-articles.vue';
 
+import SearchProductArticles from './search-product-articles.vue';
+
 import Nav from '@/components/Nav/Nav.vue';
 import STDNav from '@/components/STDNav/STDNav.vue';
 import Card from '@/components/Card/Card.vue';
@@ -21,6 +23,14 @@ function addLearningSearch(event): void {
 
   if(find){
     createApp(SearchLearningArticles).mount(find);
+  }
+}
+function addProductSearch(event): void {
+
+  const find = document.querySelector('[data-shortcode="search-product-articles"]');
+
+  if(find){
+    createApp(SearchProductArticles).mount(find);
   }
 }
 </script>
@@ -44,19 +54,9 @@ function addLearningSearch(event): void {
   </nav>
   <main class="bg-primary">
 
-    <h1 class="pb-3">Welcome, </h1>
-      
-    <Banner data-image="/market-appraisal-screenshot.png" data-dismiss="true">
+    <h1 class="pb-3">Welcome, <span data-user-data="shortname"></span></h1>
 
-      <h2>Market Appraisals that impress</h2>
-      <p>
-        Stand out from the start with everything you need to stand out in the front room and maximise your win rate.
-        Integrated with your CRM for a fully connected solution.
-      </p>
-      <hr />
-      <a href="/market-appraisals" class="btn btn-secondary" slot="buttons">Find Out More</a>
-      
-    </Banner>
+    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122"></Content>
 
     <div class="md-col-end-6">
       <div class="admin-panel bg-white">
@@ -74,18 +74,13 @@ function addLearningSearch(event): void {
     </div>
     <div class="md-col-start-7">
       <div class="admin-panel bg-white">
-        
-        <h2 class="bg-light">Product support</h2>
-        <label>
-        <Search data-url="https://iampropertyinternal.zendesk.com/hc/api/internal/instant_search.json?query=" data-suffix="search" class="search--stylised">
-          <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="articles" placeholder="Search all support articles"/>
-          <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search" slot="suffix"></button>
-          <datalist id="articles">
-            <option value="Cirrus - I don’t have the desktop App installed" data-url="https://iampropertyinternal.zendesk.com/hc/en-gb/articles/30187115513873-Cirrus-I-don-t-have-the-desktop-App-installed"></option>
-          </datalist>
-        </Search>
 
-        </label>
+        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/191" data-title-tag="h2" data-title-class="bg-light" @loaded="addProductSearch">
+          <p>Loading..</p>
+        </Content>
+        
+        
+        
         <div class="btn__group mb-1">
           <a href="https://iampropertyinternal.zendesk.com/hc/en-gb" target="_blank" class="btn btn-primary">View FAQ articles</a>
           <a href="https://iampropertyinternal.zendesk.com/hc/en-gb/requests/new" target="_blank" class="btn btn-secondary">Submit a request</a>

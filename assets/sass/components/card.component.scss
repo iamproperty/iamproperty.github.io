@@ -4,12 +4,6 @@
 @use '../elements/popover' as *;
 @use '../elements/buttons' as *;
 
-:host {
-  --card-right-padding: 1rem;
-  /* --card-head-height: 10rem; */
-  --card-icon-right: 1rem;
-  position: relative;
-}
 
 :host(:is(:hover, :focus, .hover):not(.prevent-hover)) {
   --hover-outline-colour-default: var(--colour, var(--colour-primary));
@@ -31,12 +25,15 @@
 }
 
 /* #region Right arrow */
-:host(.show-icon) .card__body {
+:host(.show-icon) {
   --card-right-padding: 3.5rem;
+}
+:host(.show-icon) .card__body {
 
   &:before,
   &:after {
     content: '';
+    display: var(--card-right-arrow-display, block);
     position: absolute;
     right: var(--card-icon-right);
     bottom: var(--card-bottom-padding);
@@ -58,11 +55,6 @@
     -webkit-mask-position: 50% 50%;
     z-index: 2;
   }
-}
-
-:host(.show-icon) .card__footer {
-  
-  --card-right-padding: 3.5rem;
 }
 
 :host(:is(:hover, :focus, .hover):not(.prevent-hover):not([class*='colour-'])) {
@@ -211,4 +203,38 @@ slot[name='secondary'] {
   display: none!important;
 }
 
+/* #endregion */
+
+/* #region article cards */
+
+:host(.card--article) {
+
+  --card-head-height: 5rem;
+  --card-fs: 1rem;
+  --card-gap: 0.5rem;
+  --card-body-top-padding: 1rem;
+  --card-body-bottom-padding: 0.5rem;
+  --card-left-padding: 0.5rem;
+  --card-right-padding: 0.75rem;
+  --card-right-arrow-display: none;
+
+  --card-body-fs: 0.6875rem;
+  --card-body-lh: 1rem;
+
+  --card-footer-bottom-padding: 0.5rem;
+}
+
+::slotted(span:is(.duration):not([class*=pt-])) {
+  
+  font-size: var(--card-fs)!important;
+  line-height: var(--card-lh)!important;
+  padding-top: 0!important;
+
+  &:before {
+    content: '\f017';
+    font-family: var(--fa-family-classic);
+    color: var(--colour-warning);
+    padding-right: 0.25rem;
+  }
+}
 /* #endregion */
