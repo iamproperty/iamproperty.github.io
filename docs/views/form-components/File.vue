@@ -28,7 +28,6 @@
 
     <div class="container visualtest">
       <FileUpload
-        class="fileupload--hide-title"
         data-maxsize="500"
         @elementchange="
           ($event) => {
