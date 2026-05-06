@@ -2,6 +2,7 @@
 @use '../_func' as *;
 @use '../elements/forms' as *;
 @use '../elements/buttons' as *;
+@use '../elements/type' as *;
 
 @use '../utilities/display' as *;
 
@@ -47,7 +48,13 @@ hr {
 
   .helper-text {
     max-width: 16.875rem; /* (270); */
+    padding-bottom: 2rem;
   }
+}
+
+:host(.fileupload--hide-title) .file-upload .file-upload__title{
+
+  display: none!important;
 }
 
 .files {

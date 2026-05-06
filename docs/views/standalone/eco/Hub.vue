@@ -54,8 +54,9 @@ function addProductSearch(event): void {
   </nav>
   <main class="bg-primary">
 
-    <h1 class="pb-3">Welcome, <span data-user-data="shortname"></span></h1>
-
+    <h1 class="pb-3">Welcome, </h1>
+      
+    
     <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122"></Content>
 
     <div class="md-col-end-6">

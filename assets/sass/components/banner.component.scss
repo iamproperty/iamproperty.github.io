@@ -13,6 +13,7 @@
 
     margin-bottom: 1rem;
     position: relative;
+    overflow: hidden;
   }
 
   :host(:not([class*="bg-"])) {
