@@ -126,16 +126,38 @@
 
   /* #region Support card component */
   :is(a, button, label):has(.card, iam-card) {
+
+
     border: none;
     background: none;
     padding: 0;
     display: flex;
     margin-bottom: 1.5rem;
     text-decoration: none;
+    border-radius: var(--card-border-radius) !important;
 
-    &:not(:focus){
+    &:not(:hover, :focus, .hover, :active, .active) {
 
       outline: none !important;
+    }
+
+    &:is(:focus) {
+      
+      --card-icon-bg: var(--colour-primary-theme);
+      --card-icon-colour: #ffffff;
+      outline: 2px solid var(--hover-outline-colour);
+    }
+
+    &:is(:hover, :focus, .hover) {
+      
+      --card-icon-bg: var(--colour-primary-theme);
+      --card-icon-colour: #ffffff;
+    }
+
+
+    &:is(:active, .active){
+      --card-icon-bg: var(--colour-primary-theme);
+      --card-icon-colour: #ffffff;
     }
 
     &:before {
@@ -154,6 +176,14 @@
       width: 100%;
     }
   }
+
+  iam-carousel.carousel--article-cards :is(a, button, label):is(:hover,.hover,:focus) iam-card,
+  :is(a, button, label):is(:hover,.hover,:focus) iam-card.card--article,
+  iam-card.article-card:has([slot="link"]:hover),
+  iam-carousel.carousel--article-cards iam-card:has([slot="link"]:hover){
+    --card-head-overlay: linear-gradient(357.98deg, #1EBEE6 1.36%, rgba(17, 106, 128, 0) 97.97%);
+  }
+
 
   /* #endregion */
 }

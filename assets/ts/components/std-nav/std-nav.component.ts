@@ -102,13 +102,30 @@ class iamSTDNav extends HTMLElement {
       }
     );
 
+    
     const userData = await loadUserData(Cookies).then(
       (data) => {
 
         setEnabledLinks(component,data);
+
+        
+        Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
+
+          if(data.attributes[element.getAttribute('data-variable')])
+            element.innerHTML = data.attributes[element.getAttribute('data-variable')];
+        });
+
+        Array.from(document.querySelectorAll('[data-save-variable]')).forEach((element) => {
+
+          //console.log(element);
+          if(data.attributes[element.getAttribute('data-save-variable')])
+            element.setAttribute('data-variable-value', data.attributes[element.getAttribute('data-save-variable')]);
+        });
+
         return true;
       }
     );
+
 
   }
 

@@ -11,6 +11,7 @@
     "id": "current-user",
     "attributes": {
       "personId": "person_12345",
+      "shortname": "Mr short",
       "products": {
         "mtk": {
           "linked": true,

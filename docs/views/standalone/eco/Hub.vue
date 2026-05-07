@@ -3,6 +3,8 @@ import { createApp } from 'vue';
 
 import SearchLearningArticles from './search-learning-articles.vue';
 
+import SearchProductArticles from './search-product-articles.vue';
+
 import Nav from '@/components/Nav/Nav.vue';
 import STDNav from '@/components/STDNav/STDNav.vue';
 import Card from '@/components/Card/Card.vue';
@@ -21,6 +23,14 @@ function addLearningSearch(event): void {
 
   if(find){
     createApp(SearchLearningArticles).mount(find);
+  }
+}
+function addProductSearch(event): void {
+
+  const find = document.querySelector('[data-shortcode="search-product-articles"]');
+
+  if(find){
+    createApp(SearchProductArticles).mount(find);
   }
 }
 </script>
@@ -43,11 +53,10 @@ function addLearningSearch(event): void {
     </STDNav>
   </nav>
   <main class="bg-primary">
-
-    <h1 class="pb-3">Welcome, </h1>
-      
     
-    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122"></Content>
+    <hr/>
+    
+    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122" data-save-variable="shortname"></Content>
 
     <div class="md-col-end-6">
       <div class="admin-panel bg-white">
@@ -61,22 +70,16 @@ function addLearningSearch(event): void {
         </Content>
       </div>
 
-
     </div>
     <div class="md-col-start-7">
       <div class="admin-panel bg-white">
-        
-        <h2 class="bg-light">Product support</h2>
-        <label>
-        <Search data-url="https://iampropertyinternal.zendesk.com/hc/api/internal/instant_search.json?query=" data-suffix="search" class="search--stylised">
-          <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="articles" placeholder="Search all support articles"/>
-          <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search" slot="suffix"></button>
-          <datalist id="articles">
-            <option value="Cirrus - I don’t have the desktop App installed" data-url="https://iampropertyinternal.zendesk.com/hc/en-gb/articles/30187115513873-Cirrus-I-don-t-have-the-desktop-App-installed"></option>
-          </datalist>
-        </Search>
 
-        </label>
+        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/191" data-title-tag="h2" data-title-class="bg-light" @loaded="addProductSearch">
+          <p>Loading..</p>
+        </Content>
+        
+        
+        
         <div class="btn__group mb-1">
           <a href="https://iampropertyinternal.zendesk.com/hc/en-gb" target="_blank" class="btn btn-primary">View FAQ articles</a>
           <a href="https://iampropertyinternal.zendesk.com/hc/en-gb/requests/new" target="_blank" class="btn btn-secondary">Submit a request</a>
