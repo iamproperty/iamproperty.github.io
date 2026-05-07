@@ -53,11 +53,10 @@ function addProductSearch(event): void {
     </STDNav>
   </nav>
   <main class="bg-primary">
-
-    <h1 class="pb-3">Welcome, </h1>
-      
     
-    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122"></Content>
+    <hr/>
+    
+    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122" data-save-variable="shortname"></Content>
 
     <div class="md-col-end-6">
       <div class="admin-panel bg-white">
@@ -70,7 +69,6 @@ function addProductSearch(event): void {
           <p>Loading..</p>
         </Content>
       </div>
-
 
     </div>
     <div class="md-col-start-7">

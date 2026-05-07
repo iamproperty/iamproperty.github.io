@@ -5,12 +5,6 @@
 @use '../elements/buttons' as *;
 
 
-:host(:is(:hover, :focus, .hover):not(.prevent-hover)) {
-  --hover-outline-colour-default: var(--colour, var(--colour-primary));
-  outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
-  outline-offset: -2px;
-}
-
 :host(:is(:active, .active):not(.prevent-hover)) {
   --card-icon-right: var(--card-icon-right-overide, 0.5rem);
   //outline: none;
@@ -39,12 +33,12 @@
     bottom: var(--card-bottom-padding);
     height: 1.5rem;
     width: 1.5rem;
-    background: var(--colour-warning);
+    background: var(--card-icon-bg);
     border-radius: 50%;
   }
 
   &:after {
-    background: var(--colour-primary-theme);
+    background: var(--card-icon-colour);
     mask-image: var(--icon, var(--icon-arrow));
     mask-size: 50%;
     mask-repeat: no-repeat;
@@ -57,25 +51,6 @@
   }
 }
 
-:host(:is(:hover, :focus, .hover):not(.prevent-hover):not([class*='colour-'])) {
-  .card__body {
-    &:before {
-      background: var(--hover-icon-bg, var(--colour-primary-theme));
-    }
-    &:after {
-      background: var(--hover-icon-colour, #ffffff);
-    }
-  }
-}
-
-:host(:is(:active, .active):not(.prevent-hover):not([class*='colour-'])) {
-  .card__body:before {
-    background: var(--hover-icon-bg, var(--colour-primary-theme));
-  }
-  .card__body:after {
-    background: var(--hover-icon-colour, #ffffff);
-  }
-}
 /* #endregion */
 
 /* #region illustration */
@@ -172,8 +147,8 @@ slot[name='secondary'] {
   border: none;
 }
 :host(:not(.prevent-hover)) ::slotted([slot='primary-action']:is(:hover, :focus, .hover)) {
-  --hover-outline-colour-default: var(--colour, var(--colour-primary));
-  outline: 2px solid var(--hover-outline-colour, var(--hover-outline-colour-default));
+ 
+  outline: 2px solid var(--hover-outline-colour);
   outline-offset: -2px;
   border-radius: var(--card-border-radius) !important;
 }
@@ -222,6 +197,7 @@ slot[name='secondary'] {
   --card-body-lh: 1rem;
 
   --card-footer-bottom-padding: 0.5rem;
+
 }
 
 ::slotted(span:is(.duration):not([class*=pt-])) {

@@ -120,6 +120,9 @@
     --chart-colour-warning: #ffd280 !important;
 
     /* #endregion */
+
+    --hover-outline-colour: var(--colour, var(--colour-primary));
+
     /* #region Type vars */
     --font-body: 'Qanelas', arial, sans-serif;
     --font-heading: 'Qanelas', arial, sans-serif;
@@ -162,7 +165,10 @@
     /* #region card component */
     --card-fs: 1.125rem; /* 18/16 */
     --card-lh: 1.5rem;
+    // right arrow
     --card-icon-right: 1rem;
+    --card-icon-bg: var(--colour-warning);
+    --card-icon-colour: var(--colour-primary-theme);
     --card-head-top-padding: 2rem;
     --card-head-bottom-padding: 2rem;
     --card-body-top-padding: 2rem;
@@ -175,6 +181,8 @@
     --card-left-padding: 1rem;
     --card-border-radius: 0.5rem;
     --card-box-shadow: 2px 0.1875rem 0.375rem rgba(0, 0, 0, 0.2);
+
+
     /* #endregion */
     --nav-height: 6rem; /* 96 */
     --code-color: #d63384;

@@ -9,6 +9,9 @@
   border-radius: var(--card-border-radius);
   margin-bottom: 2rem;
   display: block;
+
+  outline: var(--card-outline);
+  outline-offset: -2px;
 }
 
 .wrapper {
@@ -62,6 +65,16 @@
     width: calc(100% + 4px);
     height: calc(100% + 4px);
     object-fit: cover;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--card-head-overlay);
   }
 }
 

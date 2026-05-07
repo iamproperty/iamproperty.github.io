@@ -146,6 +146,12 @@ class iamContent extends HTMLElement {
           registerComponents(component);
           transformButtons(component);
 
+          Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
+
+            if(document.querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`))
+              element.innerHTML = document.querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`)?.getAttribute('data-variable-value');
+          });
+
           const changeEvent = new CustomEvent('loaded', { detail: {triggered: true} });
           component?.dispatchEvent(changeEvent);
         }
