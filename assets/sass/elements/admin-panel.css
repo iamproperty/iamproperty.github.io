@@ -12,7 +12,6 @@
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
     outline: var(--contrast-outline-width, 0px) solid var(--colour-primary);
-    overflow: hidden;
     
     &:has(
       :is([class*='cols-'], [class*='col-start-'], [class*='col-end-'], [class*='col-span-'])

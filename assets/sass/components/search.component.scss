@@ -2,6 +2,23 @@
 @use 'advanced-select.component';
 
 @layer components {
+
+  @media (prefers-color-scheme: light) {
+    :host {
+      color-scheme: light;
+    }
+
+    ::slotted(*) {
+
+      --colour-heading: var(--colour-primary-theme);
+      --colour-body: var(--colour-primary-theme);
+      color: var(--colour-primary-theme);
+
+      color-scheme: light;
+    }
+  }
+
+
   :host(.search--stylised) ::slotted(input) {
     
     outline: 1px solid var(--colour-border)!important;

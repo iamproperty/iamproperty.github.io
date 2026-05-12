@@ -4,6 +4,7 @@ import { createApp } from 'vue';
 import SearchLearningArticles from './search-learning-articles.vue';
 
 import SearchProductArticles from './search-product-articles.vue';
+import SearchContacts from './search-contacts.vue';
 
 import Nav from '@/components/Nav/Nav.vue';
 import STDNav from '@/components/STDNav/STDNav.vue';
@@ -33,6 +34,14 @@ function addProductSearch(event): void {
     createApp(SearchProductArticles).mount(find);
   }
 }
+function addContactSearch(event): void {
+
+  const find = document.querySelector('[data-shortcode="search-contacts"]');
+
+  if(find){
+    createApp(SearchContacts).mount(find);
+  }
+}
 </script>
 <template>
   
@@ -56,7 +65,8 @@ function addProductSearch(event): void {
     
     <hr/>
     
-    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122" data-save-variable="shortname"></Content>
+
+    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122" data-save-variable="shortname" @loaded="addContactSearch"></Content>
 
     <div class="md-col-end-6">
       <div class="admin-panel bg-white">

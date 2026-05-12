@@ -125,14 +125,14 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
   });
 
   advancedSelect.addEventListener('keydown', function (e) {
-
+    
     if (e.keyCode == 40) {
       currentFocus++;
       addActive(datalist.options);
     } else if (e.keyCode == 38) {
       currentFocus--;
       addActive(datalist.options);
-    } else if (e.keyCode == 13) {
+    } else if (e.keyCode == 13 && !e.target.closest('form')) {
       e.preventDefault();
       if (currentFocus > -1) {
         /*and simulate a click on the "active" item:*/

@@ -20,8 +20,10 @@
 }
 
 @layer components {
-  dialog[open] {
-    /* overflow-y: hidden; */
+  dialog {
+    
+    display: var(--modal-inner-dialog-display,block);
+
     width: 90vw;
     max-width: 20.25rem; /* col-width*4 324px */
 
@@ -105,7 +107,6 @@
         top: calc(var(--dialog-padding) - 0.75rem);
         right: calc(var(--dialog-padding) - 0.75rem);
       }
-      
     }
     
 

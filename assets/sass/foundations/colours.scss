@@ -94,6 +94,13 @@
     }
   }
 
+  .reset-colours {
+    > * {
+      color-scheme: light;
+      --colour-body: #595959;
+      
+    }
+  }
 
   @media (forced-colors: active) {
     :root {

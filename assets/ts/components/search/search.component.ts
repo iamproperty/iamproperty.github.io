@@ -79,6 +79,10 @@ class iamSearch extends HTMLElement {
       displayInputField.setAttribute('list', listID);
     }
 
+    displayInputField.addEventListener('change', function (e) {
+      inputField.value = displayInputField.value;
+    });
+
     advancedSelect(this, displayInputField, datalist, false);
 
 
@@ -88,7 +92,6 @@ class iamSearch extends HTMLElement {
 
       if (match) {
         inputField.value = match.getAttribute('data-actual-value');
-        console.log(inputField)
         displayInputField.value = match.getAttribute('data-actual-value');
 
         displayInputField.classList.remove('is-invalid');
@@ -97,7 +100,9 @@ class iamSearch extends HTMLElement {
       else if (displayInputField.value.length >= minLength && !subMatch) {
         displayInputField.classList.add('is-invalid');
         displayInputField.closest('label').setAttribute('data-error', 'No results returned');
-        datalist.innerHTML = '';
+
+        if(searchWrapper.hasAttribute('data-url'))
+          datalist.innerHTML = '';
       } 
       else {
         displayInputField.classList.remove('is-invalid');
@@ -207,7 +212,9 @@ class iamSearch extends HTMLElement {
 
     this.addEventListener('close-button-pressed', function (event) {
 
-      datalist.innerHTML = '';
+      if(searchWrapper.hasAttribute('data-url')) {
+        datalist.innerHTML = '';
+      }
       inputField?.value = '';
 
       searchWrapper.classList.remove('was-validated');

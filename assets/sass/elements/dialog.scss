@@ -33,6 +33,19 @@
       padding-bottom: 0;
     }
   }
+  dialog[open]:has(iam-modal) {
+    --modal-inner-dialog-display: contents;
+    place-self: center;
+  }
+  @media (prefers-color-scheme: light) {
+    dialog[open]:has(iam-modal) {
+      
+      color-scheme: light;
+      --colour-body: #595959;
+      --colour-heading: var(--colour-primary-theme);
+      
+    }
+  }
 
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.3);
