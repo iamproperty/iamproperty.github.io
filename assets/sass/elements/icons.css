@@ -45,4 +45,8 @@
     border-radius: 50% !important;
     display: inline-block;
   }
+
+  [class*='fa-'][class*='colour-'] {
+    color: var(--colour,inherit);
+  }
 }

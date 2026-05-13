@@ -42,9 +42,9 @@ const openLink = (event: Event):void => {
 <form method="get" action="https://helpcentre.iamproperty.com/hc/en-gb/search" target="_blank">
 
   <label>
-    Search existing transactions
+    <span class="visually-hidden">Search existing transactions</span>
     <Search class="search--stylised">
-      <input type="text" name="query" autocomplete="off" aria-autocomplete="none" list="articles" />
+      <input type="text" name="query" autocomplete="off" aria-autocomplete="none" list="articles" placeholder="Search all support articles" class="input--sm"/>
       <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search" slot="suffix"></button>
       <datalist id="articles" ref="dialogElement" @click="openLink"></datalist>
     </Search>

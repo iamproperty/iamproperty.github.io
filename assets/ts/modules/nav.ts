@@ -50,8 +50,8 @@ export const populateSections = (data):void => {
   data.forEach((section) => {
 
     html += `<span class="section section--${section.layout}">
-      ${section.title ? `<span class="lead text-heading section-title" data-product="${section.id}" data-title>${section.title}</span>` : ''}
-      ${section.description ? `<span class="lead section-desc" data-product="${section.id}">! ${section.description}</span>` : ''}
+      ${section.title ? `<span class="lead section-title" data-product="${section.id}" data-title>${section.title}:</span>` : ''}
+      ${section.description ? `<span class="lead section-desc" data-product="${section.id}"><i class="fa-solid fa-sparkles colour-warning"></i> ${section.description}</span>` : ''}
       ${populateLinks(section.links)}
     </span>`;
   });

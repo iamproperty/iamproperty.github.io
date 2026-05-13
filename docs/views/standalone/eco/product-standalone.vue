@@ -10,7 +10,7 @@
     <STDNavStandalone data-standalone class="nav--sticky">
       <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
     </STDNavStandalone>
-    <Nav class="nav--sticky" style="--nav-height: 8.5rem;">
+    <Nav class="nav--sticky">
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
           <title>iam key</title>

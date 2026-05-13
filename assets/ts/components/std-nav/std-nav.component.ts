@@ -65,6 +65,7 @@ class iamSTDNav extends HTMLElement {
     this.outerHTML = `${defaultContent}`;
   }
 
+  
   async connectedCallback(): void {
     
     const component = this;
@@ -79,6 +80,7 @@ class iamSTDNav extends HTMLElement {
     else {
       //this.defaultToSecondary(); TODO: change this to show default content but still be able to update
     }
+
 
 
     const data = await loadNavData(Cookies).then(

@@ -130,17 +130,17 @@ nav:has(:is(iam-nav,.iam-nav)) {
   }
 }
 
-nav:has(:is(iam-nav,.iam-nav).nav--sticky) {
+nav:has(.nav--sticky) {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 9999;
 
-  :is(iam-nav,.iam-nav) {
+  .nav--sticky {
     position: fixed;
     outline: 2px solid #eeeeee;
-  transition: margin 1s;
+    transition: margin 1s;
   }
 }
 
@@ -244,17 +244,17 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     }
 
     &[data-product][data-feature]:not([data-is-enabled="true"]) {
+      padding-left: 2rem!important;
       &:before {
-        content: "! ";
+        content: "\f890";
+        font-family: var(--fa-family, var(--fa-style-family, "Font Awesome 7 Pro"));
+        padding-right: 0.5em;
+        position: absolute;
+        left: 0;
+        font-weight: 700;
       }
     }
-
-    &[data-product][data-feature]:not([data-is-enabled="true"]) {
-      &:before {
-        content: "! ";
-      }
-    }
-
+    
   }
 
   /* #region standard nav sections */
@@ -340,6 +340,14 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     width: auto;
     position: relative;
 
+    .section [data-title].section-title {
+
+      color: var(--colour-body) !important;
+      font-size: 1rem;
+      font-weight: normal;
+      font-weight: normal;
+    }
+
     summary {
       background-color: var(--colour-canvas-2);
 
@@ -386,7 +394,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       border: none;
       color: var(--colour-link);
       margin: 0;
-      margin-left: 3rem;
+      margin-left: 3rem!important;
       padding: 1.5rem 0 1.5rem 0;
       font-size: 1rem;
       line-height: 1.5rem;
@@ -788,6 +796,16 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     }
   }
 
+  :is(iam-nav,.iam-nav) a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
+
+
+    &[data-product][data-feature]:not([data-is-enabled="true"]) {
+      
+      &:before {
+        left: 0.5rem;
+      }
+    }
+  }
   nav:has(:is(iam-nav,.iam-nav).open) {
     min-height: 100vh !important;
     max-height: 100vh;

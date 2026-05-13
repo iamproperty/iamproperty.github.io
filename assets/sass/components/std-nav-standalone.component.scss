@@ -60,6 +60,7 @@
   .iam-nav {
     background-color: transparent;
     padding: 0;
+    top: 2rem!important;
   }
   
   .iam-nav a {
@@ -150,7 +151,7 @@
         width: 0;
       }
 
-      .section + .section {
+      .section:has(a:not([href=null])) + .section {
         border-top: 1px solid var(--colour-border);
         display: block;
         padding-top: 0.5rem;
@@ -211,7 +212,7 @@
         position: absolute;
         top: 100%;
         left: 0;
-        height: calc(100vh - var(--nav-height));
+        height: calc(100vh - 2rem)!important;
         width: 100%;
         z-index: -1;
         pointer-events: none;

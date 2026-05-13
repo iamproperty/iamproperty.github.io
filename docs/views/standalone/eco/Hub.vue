@@ -84,7 +84,7 @@ function addContactSearch(event): void {
     <div class="md-col-start-7">
       <div class="admin-panel bg-white">
 
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/191" data-title-tag="h2" data-title-class="bg-light" @loaded="addProductSearch">
+        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=product-support" data-title-tag="h2" data-title-class="bg-light" @loaded="addProductSearch">
           <p>Loading..</p>
         </Content>
         

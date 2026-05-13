@@ -85,6 +85,7 @@ class iamNav extends HTMLElement {
           break;
       }
 
+      
       // Create menu button
       if (
         element.classList.contains('nav--menu') &&

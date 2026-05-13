@@ -246,3 +246,15 @@ $columns: 12;
 #app {
   display: contents;
 }
+
+
+/* #region Nav tweaks for standalone pages */
+
+nav:has(iam-std-nav-standalone) {
+  min-height: 8rem!important;
+}
+nav:has(iam-std-nav-standalone) iam-nav{
+  top: 2rem!important;
+}
+
+/* #endregion */
