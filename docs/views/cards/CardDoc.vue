@@ -346,7 +346,7 @@
         <div class="col-start-auto col-span-2">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
+            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span><span class="badge" slot="badges">New</span></Card>
           </a>
         </div>
 

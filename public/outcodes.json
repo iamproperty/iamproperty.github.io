@@ -1,0 +1,43 @@
+{
+  "jsonapi": {
+    "version": "1.1"
+  },
+  "meta": {
+    "schemaVersion": "2026-04-16",
+    "generatedAt": "2026-04-16T10:15:00Z"
+  },
+  "data": [
+    {
+      "type": "outcode",
+      "value": "NE1",
+      "title": "NE1",
+      "attributes": {
+        "description": "Newcastle upon Tyne"
+      }
+    },
+    {
+      "type": "outcode",
+      "value": "NE2",
+      "title": "NE2",
+      "attributes": {
+        "description": "Newcastle upon Tyne"
+      }
+    },
+    {
+      "type": "outcode",
+      "value": "NE3",
+      "title": "NE3", 
+      "attributes": {
+        "description": "Newcastle upon Tyne"
+      }
+    },
+    {
+      "type": "outcode",
+      "value": "TS26",
+      "title": "TS26",
+      "attributes": {
+        "description": "Newcastle upon Tyne"
+      }
+    }
+  ]
+}

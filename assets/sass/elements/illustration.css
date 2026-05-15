@@ -1,0 +1,13 @@
+
+
+@layer elements {
+  
+  .illustration--sm {
+    width: 100%;
+    max-width: 6.25rem;
+  }
+  .illustration--md {
+    width: 100%;
+    max-width: 12.5rem;
+  }
+}

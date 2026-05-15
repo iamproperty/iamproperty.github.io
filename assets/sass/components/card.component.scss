@@ -198,6 +198,10 @@ slot[name='secondary'] {
 
   --card-footer-bottom-padding: 0.5rem;
 
+  --card-badges-top-padding:0.5rem;
+  --card-badges-bottom-padding: 0;
+  --card-right-padding: 0.5rem;
+  --card-left-padding: 0.5rem;
 }
 
 ::slotted(span:is(.duration):not([class*=pt-])) {

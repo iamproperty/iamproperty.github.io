@@ -277,82 +277,7 @@
 
 
         </div>
-      </details>
-      <details>
-        <summary>Transaction</summary>
 
-        <div class="admin-panel">
-          <h3 class="bg-light">Documents and forms</h3>
-          <Tabs class="tabs--md-hidden">
-
-            <details id="documents" name="insights" class="pt-0">
-              <summary>Documents</summary>
-              <Actionbar>
-
-                <!-- we have to duplicate the tab links in each tab and connect them up using the command and commandfo attributes -->
-                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked command="show-tab" commandfor="documents">Documents</label>
-                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2" command="show-tab" commandfor="forms">Forms</label>
-
-                <!-- Add the class of icon-only to the below links/buttons when there is 4 or more items in the tabs -->
-                <a href="/" class="btn btn-action fa-cart-shopping icon-only">Order another title  register</a>
-                <a href="/" class="btn btn-action fa-download icon-only">Download title register</a>
-              </Actionbar>
-              <div class="d-flex gap-3 ">
-                
-              <a href="">
-                <Card>
-                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
-                  Property information questionnaire
-
-                  <label slot="footer" data-percent="50">
-                    24 Lynx road, NE2 6AT
-                    <progress max="100" value="50" class="progress--inline"></progress>
-                  </label>
-                </Card>
-              </a>
-              <a href="">
-                <Card>
-                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
-                  Property information questionnaire
-
-                  <label slot="footer" data-percent="50">
-                    24 Lynx road, NE2 6AT
-                    <progress max="100" value="50" class="progress--inline"></progress>
-                  </label>
-                </Card>
-              </a>
-              <a href="">
-                <Card>
-                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
-                  Property information questionnaire
-
-                  <label slot="footer" data-percent="50">
-                    24 Lynx road, NE2 6AT
-                    <progress max="100" value="50" class="progress--inline"></progress>
-                  </label>
-                </Card>
-              </a>
-
-              </div>
-            </details>
-            <details id="forms" name="insights" class="pt-0">
-              <summary>Forms</summary>
-              
-              <Actionbar>
-
-                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="1" checked command="show-tab" commandfor="documents">Documents</label>
-                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="2" command="show-tab" commandfor="forms">Forms</label>
-
-                <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
-                <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
-              </Actionbar>
-              
-
-            </details>
-          </Tabs>
-        </div>
-      </details>
-    </Tabs>
 
     <small class="mw-100">AI generated insights are provided for general information only and may not always be complete or 100% accurate. Any suggested timeframes or indications of transaction complexity are estimates based on available data and do not constitute legal advice. Information should always be independently checked and reviewed with a qualified legal professional.</small>
 
@@ -462,6 +387,86 @@
       </div>
 
     </div>
+
+
+
+      </details>
+      <details>
+        <summary>Transaction</summary>
+
+        <div class="admin-panel">
+          <h3 class="bg-light">Documents and forms</h3>
+          <Tabs class="tabs--md-hidden">
+
+            <details id="documents" name="insights" class="pt-0">
+              <summary>Documents</summary>
+              <Actionbar>
+
+                <!-- we have to duplicate the tab links in each tab and connect them up using the command and commandfo attributes -->
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="1" checked command="show-tab" commandfor="documents">Documents</label>
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title" value="2" command="show-tab" commandfor="forms">Forms</label>
+
+                <!-- Add the class of icon-only to the below links/buttons when there is 4 or more items in the tabs -->
+                <a href="/" class="btn btn-action fa-cart-shopping icon-only">Order another title  register</a>
+                <a href="/" class="btn btn-action fa-download icon-only">Download title register</a>
+              </Actionbar>
+              <div class="d-flex gap-3 ">
+                
+              <a href="">
+                <Card>
+                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
+                  Property information questionnaire
+
+                  <label slot="footer" data-percent="50">
+                    24 Lynx road, NE2 6AT
+                    <progress max="100" value="50" class="progress--inline"></progress>
+                  </label>
+                </Card>
+              </a>
+              <a href="">
+                <Card>
+                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
+                  Property information questionnaire
+
+                  <label slot="footer" data-percent="50">
+                    24 Lynx road, NE2 6AT
+                    <progress max="100" value="50" class="progress--inline"></progress>
+                  </label>
+                </Card>
+              </a>
+              <a href="">
+                <Card>
+                  <span class="badge bg-danger" slot="badges"><i class="fa-regular fa-flag"></i> Incomplete</span>
+                  Property information questionnaire
+
+                  <label slot="footer" data-percent="50">
+                    24 Lynx road, NE2 6AT
+                    <progress max="100" value="50" class="progress--inline"></progress>
+                  </label>
+                </Card>
+              </a>
+
+              </div>
+            </details>
+            <details id="forms" name="insights" class="pt-0">
+              <summary>Forms</summary>
+              
+              <Actionbar>
+
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="1" checked command="show-tab" commandfor="documents">Documents</label>
+                <label class="tag tag--toggle" slot="filters"><input type="radio" name="title2" value="2" command="show-tab" commandfor="forms">Forms</label>
+
+                <a href="/" class="btn btn-action fa-cart">Order another title  register 2</a>
+                <a href="/" class="btn btn-action fa-cart">Download title register 2</a>
+              </Actionbar>
+              
+
+            </details>
+          </Tabs>
+        </div>
+      </details>
+    </Tabs>
+
 
 
     <div class="admin-panel">

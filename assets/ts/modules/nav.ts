@@ -145,11 +145,6 @@ export const loadUserData = async(Cookies): any => {
 
 export const setEnabledLinks = (component,data):void => {
 
-  console.log(data);
-
-
-
-  
   component.querySelectorAll(`[data-product][data-feature]`).forEach((element) => {
     const isEnabled = data.attributes.products[element.getAttribute('data-product')].features[element.getAttribute('data-feature')];
     element.setAttribute('data-is-enabled',isEnabled);

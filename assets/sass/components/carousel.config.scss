@@ -40,7 +40,7 @@
     margin-inline: -0.5rem;
     padding-bottom: calc(1rem + var(--button-height) + var(--marker-height) + var(--marker-mb));
 
-    margin-bottom: var(--carousel-mb, 1.5rem);
+    margin-bottom: var(--carousel-mb, 2rem);
     scroll-padding: 0.5rem;
     display: grid;
     grid-auto-flow: column;
@@ -731,6 +731,12 @@
 
     
     --card-footer-bottom-padding: 0.5rem;
+
+    
+    --card-badges-top-padding:0.5rem;
+    --card-badges-bottom-padding: 0;
+    --card-right-padding: 0.5rem;
+    --card-left-padding: 0.5rem;
   }
   /* #endregon */
 }

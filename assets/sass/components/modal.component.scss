@@ -20,10 +20,12 @@
 }
 
 @layer components {
+
+  dialog[open] {
+    display: var(--modal-inner-dialog-display,block);
+  }
   dialog {
     
-    display: var(--modal-inner-dialog-display,block);
-
     width: 90vw;
     max-width: 20.25rem; /* col-width*4 324px */
 

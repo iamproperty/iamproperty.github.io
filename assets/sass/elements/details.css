@@ -221,4 +221,18 @@
       padding-inline: var(--dialog-padding);
     }
   }
+
+  /* #region grid fix */
+
+  iam-tabs:has(:is([class*=cols-], [class*=col-start-], [class*=col-end-], [class*=col-span-]):not([class*=row-cols-])) {
+    display: block!important;
+  }
+
+  details[open]:has(:is([class*=cols-], [class*=col-start-], [class*=col-end-], [class*=col-span-]):not([class*=row-cols-]))::details-content {
+    display: grid !important;
+    grid-template-rows: auto !important;
+    grid-template-columns: [content-start col-1-start] 1fr [col-1-end col-2-start] 1fr [col-2-end col-3-start] 1fr [col-3-end col-4-start] 1fr [col-4-end col-5-start] 1fr [col-5-end col-6-start] 1fr [col-6-end col-7-start] 1fr [col-7-end col-8-start] 1fr [col-8-end col-9-start] 1fr [col-9-end col-10-start] 1fr [col-10-end col-11-start] 1fr [col-11-end col-12-start] 1fr [col-12-end content-end] !important;
+    column-gap: var(--gap) !important;
+  }
+  /* #endregion */
 }

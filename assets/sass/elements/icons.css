@@ -49,4 +49,15 @@
   [class*='fa-'][class*='colour-'] {
     color: var(--colour,inherit);
   }
+
+
+  /* #endregion fixes */
+
+  .icon.fa-star:before {
+    font-size: 0.9em;
+    margin-left: -0.05em;
+  }
+
+
+  /* #endregion icons */
 }
