@@ -2,8 +2,8 @@
 @use 'charts.module' as *;
 @use '../elements/buttons' as *;
 
-.d-block {
-  display: block;
+*, *:before, *:after {
+    box-sizing: border-box;
 }
 
 @for $i from 1 through 10 {

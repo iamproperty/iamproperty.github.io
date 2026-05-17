@@ -46,7 +46,7 @@
     display: inline-block;
   }
 
-  [class*='fa-'][class*='colour-'] {
+  .icon[class*='fa-'][class*='colour-'] {
     color: var(--colour,inherit);
   }
 

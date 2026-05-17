@@ -173,7 +173,7 @@
       or press action.
     </p>
 
-    <div class="d-flex gap-4 flex-wrap">
+    <div class="d-flex gap-4 flex-wrap visualtest">
       <button class="tag wider-colour-3">Available<i class="fa-light fa-pen-to-square ml-1"></i></button>
       <button class="tag wider-colour-4">Available<i class="fa-light fa-pen-to-square ml-1"></i></button>
       <button class="tag wider-colour-20">Available<i class="fa-light fa-pen-to-square ml-1"></i></button>

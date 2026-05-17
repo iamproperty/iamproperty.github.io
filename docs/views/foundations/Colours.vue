@@ -594,20 +594,21 @@
         </div>
       </div>
 
-      <div class="row row-cols-3 row-cols-sm-4" v-for="(colour, name) in widerColours" :key="name">
-        <div class="col-12 col-sm pb-2">
+      <div class="sub-grid" v-for="(colour, name) in widerColours" :key="name">
+        <div class="col-span-12 sm-col-span-3 pb-2">
           <span>Wider colour {{ name }}</span>
         </div>
-        <div class="col pb-2">
+        <div class="col-span-4 sm-col-span-3 col-start-auto pb-2">
           <div :class="`tag wider-colour-${name}`">{{ colour }}</div>
         </div>
-        <div class="col pb-2">
+        <div class="col-span-4 sm-col-span-3 col-start-auto pb-2">
           <div :class="`tag wider-colour-${name} hover`">5% darker</div>
         </div>
-        <div class="col pb-2">
+        <div class="col-span-4 sm-col-span-3 col-start-auto pb-2">
           <div :class="`tag wider-colour-${name} active`">10% darker</div>
         </div>
       </div>
+
     </div>
 
     <div class="container">

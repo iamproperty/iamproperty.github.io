@@ -134,11 +134,12 @@
   footer .router-link-active {
     text-decoration: none;
   }
-
+@layer reset {
   #visualtest:target ~ *:not(main),
-  #visualtest:target ~ main > *:not(.visualtest) {
+  #visualtest:target ~ main > *:not(.visualtest,.visualtest--container) {
     display: none !important;
   }
+}
   @layer utilities {
     #visualtest:target ~ main > .d-none.visualtest {
       display: block !important;

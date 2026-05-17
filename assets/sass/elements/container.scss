@@ -5,8 +5,6 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-
-    container-type: inline-size;
     width: 100%;
 
     &:not([class*='col-']){
@@ -30,22 +28,6 @@
         col-11-start] 1fr [col-11-end
         col-12-start] 1fr [col-12-end content-end]!important;
       column-gap: 1rem;
-    }
-
-    [class*='col-span-']:not([class*='-col-span-']):not(:first-child) {
-      --col-start: auto;
-    }
-
-    @media screen and (min-width: 36em) {
-      [class*='sm-col-span-']:not(:first-child) {
-        --col-start: auto;
-      }
-    }
-
-    @media screen and (min-width: 62em) {
-      [class*='md-col-span-']:not(:first-child) {
-        --col-start: auto;
-      }
     }
 
     &:not(.container-fluid) {
@@ -93,6 +75,9 @@
     }
   }
 
+  .container--inline-size {
+    container-type: inline-size;
+  }
   :host .container {
     display: block;
     margin-left: auto;
@@ -115,4 +100,27 @@
     }
   }
   /* #endregion */
+}
+
+
+
+@layer utilities {
+  .container {
+
+    [class*='col-span-']:not([class*='-col-span-']):not(:first-child) {
+      --col-start: auto;
+    }
+
+    @media screen and (min-width: 36em) {
+      [class*='sm-col-span-']:not(:first-child) {
+        --col-start: auto!important;
+      }
+    }
+
+    @media screen and (min-width: 62em) {
+      [class*='md-col-span-']:not(:first-child) {
+        --col-start: auto!important;
+      }
+    }
+  }
 }

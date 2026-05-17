@@ -30,7 +30,7 @@
     <h3>Smaller containers</h3>
     <p>All buttons should have a 100% width; with the primary buttons being displayed first.</p>
     <div class="visualtest mb-5">
-      <div class="sm-col-end-10 md-col-end-6 container">
+      <div class="sm-col-end-10 md-col-end-6 container--inline-size">
         <div class="btn__group">
           <button class="btn btn-secondary">Secondary button</button>
           <button class="btn btn-primary">Primary button</button>
