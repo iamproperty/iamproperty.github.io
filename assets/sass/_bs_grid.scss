@@ -1,14 +1,14 @@
 @use 'sass:map';
 @use '_functions/bs_functions' as *;
-@use '_functions/bs_variables' as *; // Variables file from bootstrap
+@use '_functions/bs_variables' as *; /*  Variables file from bootstrap */
 @use '_functions/bs_mixins' as *;
 @use '_functions/utility-mixins' as *;
 
 
 @layer reset {
-  // Row
-  //
-  // Rows contain your columns.
+  /*  Row */
+  /*  */
+  /*  Rows contain your columns. */
 
   @if $enable-grid-classes {
     .row {
@@ -31,9 +31,9 @@
     }
   }
 
-  // Columns
-  //
-  // Common styles for small and large grid columns
+  /*  Columns */
+  /*  */
+  /*  Common styles for small and large grid columns */
 
   @if $enable-grid-classes {
     @include make-grid-columns();

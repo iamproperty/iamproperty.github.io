@@ -22,6 +22,7 @@ class iamCard extends HTMLElement {
     ${loadCSS}
     </style>
     ${cardHTML}
+    <slot name="link"></slot>
     <slot name="primary-action"></slot>
     `;
 
@@ -50,7 +51,7 @@ class iamCard extends HTMLElement {
     }
 
     // Add class that shows the right arrow icon
-    if (!cardComponent.querySelector('[slot="btns"]') && !cardComponent.querySelector('[slot="secondary"]')) {
+    if (!cardComponent.querySelector('[slot="btns"]') && !cardComponent.querySelector('[slot="secondary"]') && !cardComponent.classList.contains('card--article') && !cardComponent.closest('.carousel--article-cards')) {
       cardComponent.classList.add('show-icon');
     }
 
@@ -159,6 +160,10 @@ class iamCard extends HTMLElement {
         cardComponent.dispatchEvent(customEvent);
       });
     });
+
+
+    if(this.querySelector('[slot="link"]'))
+      this.classList.add('hasLink');
 
     trackComponent(cardComponent, 'iam-card', [
       'select-card',

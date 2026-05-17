@@ -11,6 +11,12 @@
 @use '../utilities/visually-hidden' as *;
 @use '../utilities/display' as *;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 :host {
   background-color: #fcfcfc;
 }
@@ -22,7 +28,7 @@
   container-type: inline-size;
 }
 
-// #region View states (Default, search, selected)
+/* #region View states (Default, search, selected) */
 .views,
 .selectall,
 slot[name='selectall'] {
@@ -120,7 +126,7 @@ slot[name='selectall'] {
   background-color: #e6eaec;
 }
 
-// Show selected bar
+/*  Show selected bar */
 .actionbar {
   opacity: var(--selectall-actionbar-opacity, 1);
   pointer-events: var(--selectall-actionbar-pe, all);
@@ -143,7 +149,7 @@ slot[name='selectall'] {
   pointer-events: all;
 }
 
-// Show search bar
+/*  Show search bar */
 .actionbar--search.show {
   opacity: 1;
   pointer-events: all;
@@ -153,9 +159,9 @@ slot[name='selectall'] {
   opacity: 0;
   pointer-events: none;
 }
-// #endregion
+/* #endregion */
 
-// #region Slotted elements
+/* #region Slotted elements */
 ::slotted(.btn) {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -173,7 +179,7 @@ slot[name='selectall'] {
   margin-block: 0;
 }
 
-// buttons only for single items
+/*  buttons only for single items */
 ::slotted([data-single]) {
   pointer-events: none;
   opacity: 0.5;
@@ -197,9 +203,9 @@ slot[name='selectall'] {
     display: block;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region safe area
+/* #region safe area */
 .safe-area {
   display: flex;
   flex-wrap: nowrap;
@@ -238,9 +244,9 @@ slot[name='selectall'] {
 :host([data-switchviews]) .safe-area {
   width: 9rem; /* (144) */
 }
-// #endregion
+/* #endregion */
 
-// #region overflow dialog
+/* #region overflow dialog */
 ::slotted(.btn-compact[slot='selected-overflow']),
 ::slotted(.btn-compact[slot='overflow']) {
   max-width: none !important;
@@ -261,10 +267,10 @@ slot[name='selectall'] {
   margin-left: 0.5rem;
   margin-right: -0.5rem;
 }
-// #endregion
+/* #endregion */
 
-// #region Search bar
-.actionbar--search .btn {
+/* #region Search bar */
+.actionbar--search > .btn {
   margin: 0;
   margin-left: -0.75rem !important;
   margin-right: auto !important;
@@ -274,17 +280,25 @@ slot[name='selectall'] {
   width: calc(100% - 3.25rem); /* 44 + 8 */
   max-width: 21.875rem!important; /* (350) */
   margin: 0 !important;
+  display: flex;
 
   @media screen and (min-width: 62em) {
     max-width: 28.125rem!important; /* (450) */
   }
 
+  .input__wrapper {
+    flex-grow: 1;
+  }
   input {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
 
     min-height: 2.5rem !important;
     max-height: 2.5rem !important;
+      
+    border-start-end-radius: 0 !important;
+    border-end-end-radius: 0 !important;
+    margin-top: 0!important;
   }
 
   :is(.prefix, .suffix) {
@@ -319,9 +333,9 @@ slot[name='selectall'] {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region filter columns
+/* #region filter columns */
 .filter-columns,
 .checklist-btns {
   display: none;
@@ -418,4 +432,4 @@ slot[name="filters"]{
   }
 }
 
-// #endregion
+/* #endregion */

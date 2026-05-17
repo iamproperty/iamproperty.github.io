@@ -30,7 +30,7 @@
       the badge will widen not be an actual circle anymore.
     </p>
 
-    <div class="d-flex">
+    <div class="d-flex visualtest">
       <span class="badge badge--rounded wider-colour-3">J</span>
       <span class="badge badge--rounded wider-colour-2">JB</span>
       <span class="badge badge--rounded wider-colour-6">JBU</span>

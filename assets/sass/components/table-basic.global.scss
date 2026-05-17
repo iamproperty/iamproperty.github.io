@@ -4,7 +4,7 @@
 
 $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
 
-// #region Basic table stuff
+/* #region Basic table stuff */
 
 @layer components {
 :is(#{$selector}) {
@@ -48,15 +48,15 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
   }
     */
 }
-// #endregion
+/* #endregion */
 
-// #region Pagination
+/* #region Pagination */
 :is(#{$selector}) table:has(tr.show) tbody tr:not(.show) {
   display: none !important;
 }
-// #endregion
+/* #endregion */
 
-// #region Tables are only stacked on mobile
+/* #region Tables are only stacked on mobile */
 :is(#{$selector}):not(.table--fullwidth) {
   td:has([data-expand-button]),
   .expand-button-heading {
@@ -91,7 +91,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
         &:before {
           --fa: '\f055'!important;
-          font-family: 'Font Awesome 7 Pro';
+          font-family: var(--fa-family-classic);
           display: block!important;
 
           font-weight: 300 !important;
@@ -188,7 +188,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       border-color: var(--colour-border) !important;
     }
 
-    tr:not([data-view='full']) td p {
+    tr:not([data-view='full']):has(p.three-lines) td p {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
@@ -200,9 +200,9 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region CTA column
+/* #region CTA column */
 
 :is(#{$selector}):not(.table--fullwidth).table--cta {
   @container (width < 23.4375em) {
@@ -223,7 +223,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
     tr > *:not(:first-child):last-child {
       position: absolute;
-      left: calc(100% - var(--cta-width));
+      left: calc(100% - var(--cta-width) + 1px);
       top: auto;
       background: transparent;
       width: var(--cta-width);
@@ -246,9 +246,9 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Statuses
+/* #region Statuses */
 table {
   .hide-status:after {
     display: none;
@@ -284,7 +284,7 @@ table {
     }
 
     &:after {
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       position: absolute;
       top: var(--status-pt, 1rem);
       left: 0;
@@ -368,9 +368,9 @@ table {
     color: var(--colour-primary);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Tables are only stacked on mobile
+/* #region Tables are only stacked on mobile */
 :is(#{$selector}):not(.table--fullwidth).table--cta {
   @container (width < 23.4375em) {
     tbody tr td:last-child {
@@ -380,9 +380,9 @@ table {
 }
 
 
-// #endregion
+/* #endregion */
 
-// #region As part of the iam-table component
+/* #region As part of the iam-table component */
 
 :is(#{$selector}) iam-actionbar {
   margin: 0 1.5rem 1rem 1.5rem;
@@ -408,7 +408,7 @@ table {
     background-color: #e6eaec;
 }
 
-// Actionbar
+/*  Actionbar */
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
@@ -444,7 +444,7 @@ table {
     display: block;
     border: none;
     background: var(--colour-canvas-2);
-    //box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11); */
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
   }
@@ -458,9 +458,9 @@ table {
     margin-bottom: 2rem;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Table with actionbar
+/* #region Table with actionbar */
 
 :is(#{$selector}) {
   input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
@@ -564,10 +564,10 @@ table {
   }
 }
 }
-// #endregion
+/* #endregion */
 
 
-// #region Highlighted row
+/* #region Highlighted row */
 :is(#{$selector}):not(.table--fullwidth) {
 
 
@@ -617,7 +617,7 @@ table {
     }
     tr[data-highlight]:before {
 
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       content: '\f005';
       font-weight: bold;
       position: absolute;
@@ -652,10 +652,10 @@ table {
     }
   }
 }
-// #endregion
+/* #endregion */
 
 
-// #region Mobile view when in admin panel
+/* #region Mobile view when in admin panel */
 .admin-panel :is(#{$selector}):not(.table--fullwidth) {
   @container (width < 23.4375em) {
 
@@ -673,4 +673,4 @@ table {
 
   }
 }
-// #endregion
+/* #endregion */

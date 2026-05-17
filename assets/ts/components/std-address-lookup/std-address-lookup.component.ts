@@ -1537,7 +1537,6 @@ export const regions = [
   }
 ];
 
-
 let countriesString = '';
 
 countries.forEach((country) => {

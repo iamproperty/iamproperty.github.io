@@ -21,6 +21,7 @@ class iamNotification extends HTMLElement {
     ${this.hasAttribute('data-css') ? `${this.getAttribute('data-css')}` : ``}
     </style>
 
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
     <div class="notification">
       <div class="notification__icon"><slot name="icon"></slot></div>
       <div class="notification__inner"><div class="notification__text"><slot></slot></div><div class="notification__btns"><slot name="btns"></slot></div></div>
@@ -73,7 +74,7 @@ class iamNotification extends HTMLElement {
   }
 
   addDismissBtn = (component):void => {
-    component.shadowRoot.querySelector('.notification__dismiss')?.innerHTML = `<button data-dismiss-button part="dismiss-btn">Dismiss</button>`;
+    component.shadowRoot.querySelector('.notification__dismiss')?.innerHTML = `<button data-dismiss-button part="dismiss-btn" class="btn btn-secondary btn-compact fa-xmark">Dismiss</button>`;
 
     component.shadowRoot.querySelector('.notification__dismiss [data-dismiss-button]').addEventListener(
       'click',

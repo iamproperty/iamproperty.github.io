@@ -1,0 +1,13 @@
+@layer utilities {
+  @media (scripting: enabled) {
+    .js-show {
+      display: none !important;
+    }
+  }
+
+  @media (scripting: none) {
+    .js-hide {
+      display: none !important;
+    }
+  }
+}

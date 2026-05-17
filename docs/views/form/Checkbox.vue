@@ -3,7 +3,6 @@
   import SelectionControl from '../selectionControls.vue';
   import headerImg from '../../img/type-header.png';
   import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Card from '@/components/Card/Card.vue';
 
@@ -226,7 +225,6 @@
             The checkbox input field uses the same Vue component as the input field, the type just needs to be set to
             'checkbox'. The name attribute is required for the checkbox input field.
           </p>
-          <Readme></Readme>
         </details>
       </Tabs>
     </div>

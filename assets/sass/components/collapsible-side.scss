@@ -5,7 +5,7 @@
 
 
 
-// Host
+/*  Host */
 :host {
   --side-link-hover: light-dark(#eeeeee,var(--colour-canvas-2));
   grid-column: full-width;
@@ -44,7 +44,7 @@
   }
 }
 
-// #region Side menu
+/* #region Side menu */
 .side-menu {
   position: absolute;
   z-index: 20;
@@ -101,7 +101,7 @@
     transition: opacity 0.2s;
 
     &[aria-expanded] {
-      // Change icon
+      /*  Change icon */
       &[class*='fa-']:before {
         content: '\f053' !important;
       }
@@ -132,7 +132,7 @@
     }
   }
 
-  // Content
+  /*  Content */
   .side-menu-content {
     position: absolute;
     top: 0;
@@ -182,10 +182,10 @@
   }
 }
 
-// links moved to links
-// #endregion
+/*  links moved to links */
+/* #endregion */
 
-// #region main content
+/* #region main content */
 .main-content {
   position: relative;
   z-index: 10;
@@ -226,9 +226,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Desktop open state
+/* #region Desktop open state */
 @media screen and (min-width: 62em) {
   .container:has(.side-menu.open) {
     padding-left: 2rem !important;
@@ -237,7 +237,7 @@
     max-width: min(var(--container-max-width), 100% - 19rem);
   }
 }
-// #endregion
+/* #endregion */
 
 @media screen and (min-width: 62em) {
   :host([open-always]) {

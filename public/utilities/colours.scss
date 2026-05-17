@@ -39,6 +39,9 @@
   }
 
   .text-body {
-    color: var(--colour-body);
+    color: var(--colour-body) !important;
+  }
+  .text-muted {
+    color: var(--colour-muted) !important;
   }
 }

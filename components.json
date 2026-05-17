@@ -1,6 +1,7 @@
 [
   "accordion",
   "header",
+  "banner",
   "table-basic",
   "table-no-submit",
   "table-submit",
@@ -22,6 +23,7 @@
   "collapsible-side",
   "address-lookup",
   "std-address-lookup",
+  "std-nav",
   "fileupload",
   "search",
   "inline-edit",
@@ -53,5 +55,11 @@
   "video-modal",
   "tag",
   "form",
-  "config"
+  "config",
+  "video",
+  "button",
+  "std-nav",
+  "std-nav-standalone",
+  "skeleton",
+  "bone"
 ]

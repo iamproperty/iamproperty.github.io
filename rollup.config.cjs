@@ -76,10 +76,14 @@ Array.from(components).forEach((component) => {
     componentFileName = "address-lookup";
   }
   
+  if (componentFileName == "std-nav"){
+    componentFileName = "nav";
+  }
+  
   try {
-    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${component}.css`))) {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.css`))) {
       
-      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${component}.css`), 'utf8');
+      css = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.css`), 'utf8');
       css = css.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       css = css.replace("\uFEFF","");
     }

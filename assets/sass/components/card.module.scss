@@ -1,20 +1,29 @@
 @use '../_func' as *;
 
 :host {
-  --card-icon-right: 1rem;
-  --card-head-top-padding: 2rem;
-  --card-head-bottom-padding: 2rem;
-  --card-footer-bottom-padding: 1.5rem;
-  --card-head-height: 6rem;
+  
 
-  box-shadow: var(--card-box-shadow);
+  
+  position: relative;
+
   border-radius: var(--card-border-radius);
+  margin-bottom: 2rem;
+  display: block;
+
+  outline: var(--card-outline);
+  outline-offset: -2px;
+}
+
+.wrapper {
+
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--card-box-shadow);
   position: relative;
   font-weight: bold;
-  font-size: 1.125rem; /* 18/16 */
-  line-height: 1.5rem;
+  font-size: var(--card-fs);
+  line-height: var(--card-lh);
   color: var(--colour-primary);
-  //min-height: calc(100% - 2rem);
+  min-height: 100%;
   width: 100%;
   text-align: left;
   display: flex;
@@ -24,7 +33,6 @@
   background: var(--colour-canvas-2);
   outline: 2px solid var(--outline-colour, --colour-canvas-2);
   outline-offset: -2px;
-  margin-bottom: 2rem;
 
   > * {
     width: 100%;
@@ -58,18 +66,28 @@
     height: calc(100% + 4px);
     object-fit: cover;
   }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--card-head-overlay);
+  }
 }
 
 .card__body {
-  //position: relative;
-  padding: var(--card-head-top-padding) var(--card-right-padding) var(--card-head-bottom-padding)
+  /* position: relative; */
+  padding: var(--card-body-top-padding) var(--card-right-padding) var(--card-body-bottom-padding)
     var(--card-left-padding);
-  //z-index: -1;
+  /* z-index: -1; */
 }
 
 .card__footer {
-  margin-top: 0;
-  padding: 0 var(--card-right-padding) 0 var(--card-left-padding);
+  margin-top: auto;
+  padding: var(--card-footer-top-padding,0) var(--card-right-padding) var(--card-footer-bottom-padding,0) var(--card-left-padding);
 }
 
 ::slotted(i) {
@@ -84,27 +102,28 @@
 ::slotted(.badge) {
   margin-bottom: 0.375rem !important;
 }
-::slotted(span:not(.badge)) {
+::slotted(span:not(.badge,.title)) {
   display: block !important;
   font-weight: normal !important;
-  font-size: 1rem !important;
+  font-size: var(--card-body-fs, 1rem) !important;
+  line-height: var(--card-body-lh, inherit) !important;
 }
 ::slotted(small) {
-  padding-top: 1rem !important;
+  padding-top: var(--card-gap, 1rem) !important;
   display: block !important;
   font-weight: normal !important;
   padding-bottom: 0 !important;
   color: var(--colour-body);
 }
-::slotted(span:not(.badge):not([class*='pt-'])) {
-  padding-top: 1.5rem !important;
+::slotted(span:not(.badge,.title):not([class*='pt-'])) {
+  padding-top: var(--card-gap, 1.5rem) !important;
 }
 
 ::slotted(:is(a, button)[slot='footer']) {
   margin-bottom: var(--card-footer-bottom-padding) !important;
 }
 
-// #region Show total number
+/* #region Show total number */
 .card__body:has(.card__total) {
   --card-head-top-padding: 1rem;
   --card-head-bottom-padding: 1.5rem;
@@ -133,19 +152,22 @@
   line-height: 2.5rem;
 }
 
-// #endregion
+/* #endregion */
 
-// #region badges
+/* #region badges */
 .card__head:has(img) ~ .card__badges {
   position: absolute;
   top: 0;
-  text-align: left;
+  text-align: right;
   left: 0;
   z-index: 9;
 }
 
 .card__badges:not(.empty) {
-  padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) 0 var(--card-left-padding);
+  padding: var(--card-badges-top-padding, 1rem) var(--card-right-padding) var(--card-badges-bottom-padding, 0) var(--card-left-padding);
   margin-bottom: -1.5rem;
 }
-// #endregion
+.card__head:not(:has(img)) ~ .card__badges {
+  text-align: end;
+}
+/* #endregion */

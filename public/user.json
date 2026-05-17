@@ -1,0 +1,64 @@
+{
+  "jsonapi": {
+    "version": "1.1"
+  },
+  "meta": {
+    "schemaVersion": "2026-04-16",
+    "generatedAt": "2026-04-16T10:15:00Z"
+  },
+  "data": {
+    "type": "navigation-access-context",
+    "id": "current-user",
+    "attributes": {
+      "personId": "person_12345",
+      "shortname": "Mr short",
+      "products": {
+        "mtk": {
+          "linked": true,
+          "accountId": "mtk_98765",
+          "features": {
+            "allFeatures": true,
+            "onMarketProspecting": true,
+            "offMarketProspecting": false,
+            "recentSalesSuccess": true,
+            "recentListings": false,
+            "triggerAutomation": false,
+            "marketAppraisalsOverview": true,
+            "addSalesAppraisal": true,
+            "salesPresentationReporting": false,
+            "lettingsPresentations": true,
+            "lettingsPresentationReporting": false
+          }
+        },
+        "crm": {
+          "linked": false,
+          "accountId": null,
+          "features": {
+            "bookSalesAppraisal": false,
+            "bookLettingsAppraisal": false
+          }
+        },
+        "auction": {
+          "linked": true,
+          "accountId": "auction_54321",
+          "features": {}
+        },
+        "conveyancing": {
+          "linked": false,
+          "accountId": null,
+          "features": {}
+        },
+        "insights": {
+          "linked": false,
+          "accountId": null,
+          "features": {}
+        },
+        "onboarding": {
+          "linked": true,
+          "accountId": "onboarding_11223",
+          "features": {}
+        }
+      }
+    }
+  }
+}

@@ -9,81 +9,39 @@
 @layer components {
 
   :host {
-    display: inline;
-    position: relative;
-    overflow-anchor: none; 
-    cursor: pointer;
-    margin-right: 0.25rem;
-  }
-
-  slot {
-    display: inline;
-  }
-
-  :host(:empty) {
+    max-width: max-content;
     display: inline-block;
-    width: 1rem;
-    height: 1lh;
-    min-height: 1rem;
-    vertical-align: text-top;
-    margin-right: 0;
+    position: relative;
+    overflow-anchor: none;
+    cursor: pointer;
+  }
+  
+  :host(:hover) {
+    
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
+    text-decoration-style: dashed;
   }
 
   .tooltip__anchor {
-
     anchor-name: --anchor;
     position: relative;
     display: inline-block;
   }
 
-  .tooltip__anchor {
-
-    height: 1rem;
-    width: 1rem;
-    background-color: var(--icon-colour, var(--colour-info));
-    border-radius: 50%;
-    margin-bottom: calc(calc(1lh - 1rem) / 2);
-    vertical-align: bottom;
+  ::slotted([slot="icon"]){
+    display: inline!important;
+    color: var(--icon-colour, var(--colour-info));
+    font-size: 1em;
+    width: 1em;
+    height: 1lh;
   }
-  
-  .tooltip__anchor:after {
-    font-family: "Font Awesome 7 Pro";
-    font-weight: 900;
-    content: "\?";
-    display: block;
-    margin: 0;
-    line-height: 1;
-    color: var(--colour-white);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    font-size: 0.6em;
-    font-weight: bold;
-  }
-
-  :host([data-type="info"]) .tooltip__anchor:after {
-
-    content: "\f129";
-  }
-
-  ::slotted(i:first-child:last-child){
-    height: 1rem;
-    width: 1rem;
-    background-color: var(--icon-colour, var(--colour-info));
-    color: var(--colour-primary);
-    font-size: 0.6em;
-    line-height: 1rem!important;
-    text-align: center;
-    border-radius: 50%;
-  }
-
 
   .tooltip__content {
     position: fixed;
     position-anchor: --anchor;
     position-area: center end;
-    position-try-fallbacks:  bottom span-all, top span-all, start;
+    position-try-fallbacks: bottom span-all, top span-all, start;
 
     container-type: anchored;
     max-width: 16.875rem; /* 270 */ 
@@ -107,14 +65,14 @@
     }
 
     @media screen and (min-width: 62em) {
-      max-width: 22.5rem; /* 360 */ 
+      max-width: 22.5rem;  /* 360 */
     }
 
     &::after {
       content: '';
       position: absolute;
       bottom: 50%;
-      left: -0.45rem;   
+      left: -0.45rem;
       transform: translate(-50%, 0);
       border-width: 0.5rem;
       border-style: solid;
@@ -122,25 +80,22 @@
       margin-bottom: -0.5rem;
 
       @container anchored(fallback: top span-all) {
-
-        left: 50%;    
+        left: 50%;
         bottom: auto;
         top: 100%;
         border-color: var(--colour-primary) transparent transparent transparent;
         margin-bottom: -1px;
       }
-  
-      @container anchored(fallback: bottom span-all) {
 
+      @container anchored(fallback: bottom span-all) {
         top: auto;
         bottom: 100%;
-        left: 50%;    
+        left: 50%;
         border-color: transparent transparent var(--colour-primary) transparent;
         margin-bottom: -1px;
       }
-  
-      @container anchored(fallback: start) {
 
+      @container anchored(fallback: start) {
         display: none;
       }
     }

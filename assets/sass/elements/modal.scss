@@ -1,23 +1,19 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-
-
-
-
 @layer elements {
-  // #region modal styling
+  /* #region modal styling */
 
-  *:not(.dialog__wrapper) > dialog[open] { // change this selector to be a dialog without a popover attribute
+  *:not(.dialog__wrapper) > dialog[open] { /*  change this selector to be a dialog without a popover attribute */
     
 
     &:has(.mh-lg){
       overflow-y: hidden!important;
     }
     width: 90vw;
-    max-width: 20.25rem; /* 324 */  // col-width*4
+    max-width: 20.25rem; /* 324 */  /*  col-width*4 */
 
-    //height: 90vh;
+    /* height: 90vh; */
     max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
 
@@ -34,7 +30,7 @@
       max-width: 46rem; /* 736 */ 
     }
 
-    // Close button
+    /*  Close button */
     > form:first-child {
       position: static;
     }
@@ -138,9 +134,9 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region Transactional
+  /* #region Transactional */
   *:not(.dialog__wrapper) > dialog[open]:is(.dialog--transactional, .dialog--acknowledgement) {
     text-align: center;
 
@@ -154,7 +150,7 @@
       font-variant: normal;
       line-height: 1;
       text-rendering: auto;
-      font-family: 'Font Awesome 7 Pro';
+      font-family: var(--fa-family-classic);
       font-size: 3rem;
       margin-top: 0;
       margin-bottom: 1.5rem;
@@ -220,9 +216,9 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region youTube video
+  /* #region youTube video */
   *:not(.dialog__wrapper) > dialog[open]:has(.youtube-embed) {
     display: block;
 
@@ -241,9 +237,9 @@
       max-width: 46rem; /* 736 */ 
     }
   }
-  // #endregion
+  /* #endregion */
 
-  // #region admin panel dialog
+  /* #region admin panel dialog */
   dialog:has(> .admin-panel) {
     .dialog__close {
       margin-top: -0.8rem;
@@ -258,9 +254,9 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 
-  // #region Multi step modal
+  /* #region Multi step modal */
 
   *:not(.dialog__wrapper) > dialog:has(iam-multi-step)[open] {
     padding: 0;
@@ -371,9 +367,9 @@
     }
   }
 
-  // #endregion
+  /* #endregion */
 
-  // #region mobile fullwidth view For multi step modal
+  /* #region mobile fullwidth view For multi step modal */
   @media screen and (max-width: 36em) {
     dialog[open]:has(iam-multi-step) {
       min-width: 100%;
@@ -411,5 +407,5 @@
       }
     }
   }
-  // #endregion
+  /* #endregion */
 }

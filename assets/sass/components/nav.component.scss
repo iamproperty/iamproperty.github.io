@@ -27,28 +27,28 @@
 
 
 
-
 :host {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: wrap !important;
   align-items: center !important;
+  color: var(--colour-heading);
 }
 
 
-// #region Fix colours 
+/* #region Fix colours  */
 
 :host(.bg-primary) .container {
 
-  //color-scheme: dark;
+  /* color-scheme: dark; */
 
   .menu {
     
-    //color-scheme: light;
+    /* color-scheme: light; */
   }
 }
 
-// #endregion
+/* #endregion */
 
 .btn-menu {
   padding: 0;
@@ -109,7 +109,7 @@
   }
 
   @media screen and (min-width: 36em) {
-    margin: 0 0 0 3rem;
+    margin: 0 0 0 2rem;
     width: auto;
     padding-right: 1.875rem; /* 24 + 6 */
     text-indent: 0;
@@ -122,7 +122,7 @@
   @media screen and (min-width: 62em) {
     width: fit-content;
     height: auto;
-    margin: 0 0 0 3rem;
+    margin: 0 0 0 2rem;
     padding: 0 !important;
     text-indent: 0;
     padding-right: 0 !important;
@@ -162,7 +162,7 @@
   }
 }
 
-// #region mobile and tablet menu
+/* #region mobile and tablet menu */
 @media screen and (max-width: 62em) {
   :host > .container {
     display: contents;
@@ -200,7 +200,7 @@
 
     
     overscroll-behavior: contain;
-    width: calc(23.4375rem - var(--scrollbar-width));
+    width: 23.4375rem;
     background-color: var(--colour-canvas-2);
     position: absolute;
     height: calc(100vh - 6rem);
@@ -221,7 +221,7 @@
     }
 
 
-    // The menu is always white unless in dark mode
+    /*  The menu is always white unless in dark mode */
     
       background-color: var(--colour-canvas-2);
       
@@ -242,14 +242,14 @@
     }
 
     &.open {
-      left: calc(100% - (23.4375rem - var(--scrollbar-width)));
+      left: calc(100% - 23.4375rem);
       -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
       box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
       pointer-events: all;
     }
 
     &.closed * {
-      display: none !important;
+      //display: none !important;
     }
   }
 
@@ -320,7 +320,7 @@
     margin-top: 0 !important;
   }
 
-  // Search
+  /*  Search */
   .dialog__wrapper {
     width: 100%;
     margin: 0 0 3rem 0 !important;
@@ -337,9 +337,9 @@
     display: contents;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region tablet tweaks
+/* #region tablet tweaks */
 @media screen and (max-width: 62em) and (min-width: 36em) {
   .menu {
     padding-right: 2.5rem !important;
@@ -357,17 +357,17 @@
     width: auto !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region desktop
+/* #region desktop */
 @media screen and (min-width: 62em) {
   :host {
-    //max-width: 100%!important;
+    /* max-width: 100%!important; */
     padding-block: 0 !important;
   }
 
   :host > .container {
-    padding-block: 1.5rem !important;
+    padding-block: 1.5rem;
     padding-inline: 0 !important;
     max-width: 100%;
     display: flex;
@@ -410,10 +410,10 @@
     display: block;
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
-
-
+    left: 50%;
+    width: 100svw;
+    translate: -50svw 0;
+ 
     .container {
       margin-left: auto;
       margin-right: auto;
@@ -460,7 +460,7 @@
     padding-left: 3rem;
   }
 
-  // Search bar
+  /*  Search bar */
   slot[name='actions']::slotted(.btn) {
     margin-left: 0.75rem !important;
   }
@@ -525,7 +525,7 @@
     }
   }
 
-  // backdrop
+  /*  backdrop */
   .backdrop {
     content: '';
     display: block;
@@ -544,14 +544,26 @@
       backdrop-filter: blur(2px);
     }
   }
-}
-// #endregion
 
-// #region Menus
+  :host(.open-secondary) .backdrop{
+
+    z-index: 1;
+    top: 0;
+    height: 100vh;
+  }
+
+  :host(.open-secondary) .has-secondary .menu__secondary {
+
+    z-index: 2;
+  }
+}
+/* #endregion */ 
+
+/* #region Menus */
 ::slotted(.nav--menu) {
   pointer-events: all;
   overscroll-behavior: contain;
-  width: calc(23.4375rem - var(--scrollbar-width));
+  width: 23.4375rem;
   background-color: var(--colour-canvas-2);
   position: absolute;
   height: calc(100vh - 6rem);
@@ -570,7 +582,7 @@
   }
 
 
-  // The menu is always white unless in dark mode
+  /*  The menu is always white unless in dark mode */
 
 
   @media (forced-colors: active) {
@@ -606,7 +618,7 @@
 
   @media screen and (min-width: 62em) {
     height: calc(100vh - var(--nav-height));
-    top: calc(var(--nav-height) + 4px);
+    top: var(--nav-height);
   }
 }
 
@@ -618,7 +630,7 @@ slot[name='menus'] {
   height: 100vh;
   overflow: hidden;
   pointer-events: none;
-  width: calc(23.4375rem - var(--scrollbar-width));
+  width: 23.4375rem;
 }
 
 ::slotted(.nav--menu[data-open-title]) {
@@ -629,7 +641,7 @@ slot[name='menus'] {
 
 ::slotted(.nav--menu.open) {
   width: calc(23.4375rem - var(--modifier, 0px));
-  left: calc(100% - (23.4375rem - var(--scrollbar-width, 0px) - var(--modifier, 0px)));
+  left: calc(100% - (23.4375rem - var(--modifier, 0px)));
   -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
   pointer-events: all;
@@ -641,9 +653,9 @@ slot[name='menus'] {
     backdrop-filter: blur(2px);
   }
 }
-// #endregion
+/* #endregion */
 
-// #region compressed nav
+/* #region compressed nav */
 @media screen and (min-width: 62em) {
   :host(.nav--md-compressed) .buttons-holder button {
     margin-left: 1.5rem !important;
@@ -662,9 +674,9 @@ slot[name='menus'] {
     margin-left: 1.5rem !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Compact button
+/* #region Compact button */
 @media screen and (min-width: 62em) {
   :host(.nav--btn-compact:not(.nav--large)) {
     .btn-menu .btn {
@@ -694,9 +706,9 @@ slot[name='menus'] {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Dual with buttons
+/* #region Dual with buttons */
 @media screen and (max-width: 62em) {
   :host(.nav--dual-buttons) {
     slot[name='dual'] {
@@ -715,4 +727,4 @@ slot[name='menus'] {
     }
   }
 }
-// #endregion
+/* #endregion */

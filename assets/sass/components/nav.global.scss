@@ -3,8 +3,8 @@
 
 
 
-// Default colour 
-iam-nav {
+/*  Default colour  */
+:is(iam-nav,.iam-nav) {
 
   > :not([slot="logo"],[slot="secondary"]) {
     color-scheme: light;
@@ -20,14 +20,14 @@ iam-nav {
   }
 }
 
-iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+:is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
 
   > :not([slot="logo"],[slot="secondary"]) {
     color-scheme: light;
   }
 }
 
-.dark-theme iam-nav {
+.dark-theme :is(iam-nav,.iam-nav) {
 
   > :not([slot="logo"],[slot="secondary"]) {
     color-scheme: dark;
@@ -39,13 +39,13 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
   }
 }
 
-.dark-theme iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+.dark-theme :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
 
   --menu-btn-colour: var(--colour-white);
 }
   
   @media (prefers-color-scheme: dark) {
-    html:not(.light-theme) iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+    html:not(.light-theme) :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
 
       --menu-btn-colour: var(--colour-heading);
     }
@@ -53,7 +53,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
 
 
 @media screen and (min-width: 62em) {
-  iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+  :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
     > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
       color-scheme: dark;
     }
@@ -63,7 +63,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
     }
   }
 
-  .dark-theme iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+  .dark-theme :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
 
     > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
       color-scheme: light;
@@ -77,7 +77,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
   }
 
   @media (prefers-color-scheme: dark) {
-    html:not(.light-theme) iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
+    html:not(.light-theme) :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
       > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
         color-scheme: light;
       }
@@ -91,7 +91,7 @@ iam-nav:is(.bg-primary, .bg-danger, .bg-dark) {
 
 }
 
-body:has(iam-nav.open:not(.nav--sticky,.demo-open):not(.nav--xs-sticky)) {
+body:has(:is(iam-nav,.iam-nav).open:not(.nav--sticky,.demo-open):not(.nav--xs-sticky)) {
   max-height: 100vh;
   overflow: hidden;
 }
@@ -100,58 +100,58 @@ body {
   --nav-height: 6rem; /* 96 */
   --sticky-padding: 0px;
 
-  &:has(iam-nav a[slot='secondary']) {
+  &:has(:is(iam-nav,.iam-nav) a[slot='secondary']) {
     --nav-height: 8.5rem; /* 96 + 40 */
   }
 
-  &:has(iam-nav.nav--sticky) {
+  &:has(:is(iam-nav,.iam-nav).nav--sticky) {
     --sticky-padding: var(--nav-height);
   }
 }
 
-// #region Create the correct padding top of the page
-nav:has(iam-nav) {
+/* #region Create the correct padding top of the page */
+nav:has(:is(iam-nav,.iam-nav)) {
   min-height: 6rem; /* 96 */
   display: block;
   position: relative;
 
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100svw;
     z-index: var(--index-menu);
   }
 }
 
 @media screen and (min-width: 62em) {
-  nav:has(iam-nav a[slot='secondary']) {
+  nav:has(:is(iam-nav,.iam-nav) [slot='secondary']) {
     min-height: 8.5rem; /* 96 + 40 */
   }
 }
 
-nav:has(iam-nav.nav--sticky) {
+nav:has(.nav--sticky) {
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   z-index: 9999;
 
-  iam-nav {
+  .nav--sticky {
     position: fixed;
     outline: 2px solid #eeeeee;
-  transition: margin 1s;
+    transition: margin 1s;
   }
 }
 
 @media screen and (max-width: 36em) {
-  body:has(iam-nav.open:not(.nav--xs-sticky,.demo-open)) {
+  body:has(:is(iam-nav,.iam-nav).open:not(.nav--xs-sticky,.demo-open)) {
     max-height: 100vh;
     overflow: hidden;
     margin-top: 0rem;
   }
 
-  nav:has(iam-nav.nav--xs-sticky) {
+  nav:has(:is(iam-nav,.iam-nav).nav--xs-sticky) {
     position: sticky;
     top: 0;
     left: 0;
@@ -159,7 +159,7 @@ nav:has(iam-nav.nav--sticky) {
     z-index: 9999;
     transition: margin 1s;
 
-    iam-nav {
+    :is(iam-nav,.iam-nav) {
       position: fixed;
     }
   }
@@ -171,25 +171,25 @@ nav:has(iam-nav.nav--sticky) {
 }
 
 @media screen and (min-width: 36em) {
-  body:has(iam-nav.open:not(.nav--sticky)) {
+  body:has(:is(iam-nav,.iam-nav).open:not(.nav--sticky)) {
     max-height: 100vh;
     overflow: hidden;
   }
 }
 
 body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
-  //transform: translate(0, -100%);
+  /* transform: translate(0, -100%); */
 
   margin-top: -8rem;
 }
 
-// #endregion
+/* #endregion */
 
-// #region General styles
-iam-nav {
+/* #region General styles */
+:is(iam-nav,.iam-nav) {
   --nav-height: 6rem; /* 96 */
 
-  &:has(a[slot='secondary']) {
+  &:has([slot='secondary']) {
     --nav-height: 8.5rem; /* 96 + 40 */
   }
 
@@ -242,18 +242,61 @@ iam-nav {
     &[aria-current='page'] {
       text-decoration-color: var(--colour-info) !important;
     }
+
+    &[data-product][data-feature]:not([data-is-enabled="true"]) {
+      padding-left: 2rem!important;
+      &:before {
+        content: "\f890";
+        font-family: var(--fa-family, var(--fa-style-family, "Font Awesome 7 Pro"));
+        padding-right: 0.5em;
+        position: absolute;
+        left: 0;
+        font-weight: 700;
+      }
+    }
+    
   }
 
+  /* #region standard nav sections */
+  .section [data-title].section-title {
 
+    display: block;
+  }
+  .section [data-product].section-desc {
+
+    display: none;
+  }
+
+  .section:not(:has([data-product][data-feature][data-is-enabled="true"])):has([data-product].section-desc) {
+
+    [data-product].section-title {
+
+      display: none;
+    }
+    [data-product].section-desc {
+
+      display: block;
+    }
+  }
+
+  .section:has([href="null"]):not(:has(a:not([href="null"]))){
+
+    display: none!important;
+  }
+
+  .section [href="null"]{
+    display: none!important;
+  }
+  /* #endregion */
 }
 
 @container style(--body-theme: dark) {
-  iam-nav.bg-primary [slot="secondary"] {
+  :is(iam-nav,.iam-nav).bg-primary [slot="secondary"] {
     --colour-link: white;
   }
 }
 
-iam-nav details {
+:is(iam-nav,.iam-nav) details {
   padding-bottom: 0;
 
   > summary {
@@ -285,10 +328,10 @@ iam-nav details {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region mobile and tablet mega menu
-iam-nav details {
+/* #region mobile and tablet mega menu */
+:is(iam-nav,.iam-nav) details {
   @container style(--mobDetails) {
 
     margin-left: -1.5rem;
@@ -296,6 +339,14 @@ iam-nav details {
     padding-inline: 1.5rem;
     width: auto;
     position: relative;
+
+    .section [data-title].section-title {
+
+      color: var(--colour-body) !important;
+      font-size: 1rem;
+      font-weight: normal;
+      font-weight: normal;
+    }
 
     summary {
       background-color: var(--colour-canvas-2);
@@ -327,7 +378,7 @@ iam-nav details {
         position: absolute;
         top: 1.5rem;
         right: 1.5rem;
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         line-height: 1em;
       }
     }
@@ -343,7 +394,7 @@ iam-nav details {
       border: none;
       color: var(--colour-link);
       margin: 0;
-      margin-left: 3rem;
+      margin-left: 3rem!important;
       padding: 1.5rem 0 1.5rem 0;
       font-size: 1rem;
       line-height: 1.5rem;
@@ -358,9 +409,14 @@ iam-nav details {
       }
     }
 
-    // Hide cards
+    /*  Hide cards */
     a:has(iam-card) {
       display: none !important;
+    }
+
+    > div .lead {
+
+      padding: 1rem 0 0 3rem!important;
     }
 
     > div a:last-child {
@@ -382,18 +438,28 @@ iam-nav details {
       height: 2px;
       background-color: var(--colour-border) !important;
     }
+
+    /* secondary nav */
+
+    &[slot="secondary"] {
+      background-color: transparent;
+
+      summary {
+        background-color: transparent;
+      }
+    }
   }
 }
 @media screen and (max-width: 62em) {
 
-  iam-nav details {
+  :is(iam-nav,.iam-nav) details {
 
     background-color: #eeeeee;
   }
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     --mobDetails: 'true';
 
-    // Sub details
+    /*  Sub details */
     details details {
       &:after {
         display: none;
@@ -436,10 +502,10 @@ iam-nav details {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region tablet mega menu tweaks
-iam-nav details {
+/* #region tablet mega menu tweaks */
+:is(iam-nav,.iam-nav) details {
 
   @container style(--tabletDetails) {
     padding-right: 2.5rem;
@@ -461,29 +527,29 @@ iam-nav details {
 }
 
 @media screen and (max-width: 62em) and (min-width: 36em) {
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     --tabletDetails: 'true';
   }
 
-  iam-nav details details[open] + details:before {
+  :is(iam-nav,.iam-nav) details details[open] + details:before {
     padding-right: 2.5rem;
     margin-right: -2.5rem; /* -40 */
   }
 }
 
 @media screen and (min-width: 62em) {
-  iam-nav .nav--menu {
+  :is(iam-nav,.iam-nav) .nav--menu {
     --mobDetails: 'true';
     --tabletDetails: 'true';
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Desktop mega menu
+/* #region Desktop mega menu */
 @media screen and (min-width: 62em) {
-  iam-nav > details,
-  iam-nav *:not(.nav--menu) > details {
+  :is(iam-nav,.iam-nav) > details:not([slot="secondary"]),
+  :is(iam-nav,.iam-nav) *:not(.nav--menu) > details:not([slot="secondary"]) {
     width: auto;
 
     > summary {
@@ -509,7 +575,7 @@ iam-nav details {
         top: 50%;
         transform: translate(0, -50%);
         right: 0;
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         line-height: 1em;
       }
     }
@@ -533,6 +599,15 @@ iam-nav details {
         calc((100% - var(--container-max-width)) / 2 + var(--padding-inline))
       ) !important;
       box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+      max-height: calc(100vh - var(--nav-height));
+      width: 100svw;
+      overflow: auto;
+      flex-wrap: wrap;
+
+      .lead {
+
+        padding: 1rem 0 0 0!important;
+      }
 
     }
 
@@ -589,6 +664,7 @@ iam-nav details {
         }
       }
 
+
       a:has(iam-card) {
         display: inline-block;
       }
@@ -632,6 +708,43 @@ iam-nav details {
         }
         a:not(:has(iam-card)) + a:has(iam-card) {
           break-before: column;
+        }
+      }
+    }
+
+    &[open] > div:has(span.section) {
+
+      display: flex;
+        
+      > span.section {
+        display: block;
+        flex-grow: 1;
+
+        .lead {
+          column-span: all;
+        }
+      } 
+
+      > span.section.section--double {
+
+        display: block;
+        width: calc(66.66% - 6.875rem);
+        columns: 2;
+        column-gap: 6.875rem;
+
+        .lead {
+          column-span: all;
+        }
+      }
+
+      > span.section:first-child:last-child {
+        display: block;
+        width: calc(66.66% - 6.875rem);
+        columns: 3;
+        column-gap: 6.875rem;
+
+        .lead {
+          column-span: all;
         }
       }
     }
@@ -683,23 +796,106 @@ iam-nav details {
     }
   }
 
-  nav:has(iam-nav.open) {
+  :is(iam-nav,.iam-nav) a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
+
+
+    &[data-product][data-feature]:not([data-is-enabled="true"]) {
+      
+      &:before {
+        left: 0.5rem;
+      }
+    }
+  }
+  nav:has(:is(iam-nav,.iam-nav).open) {
     min-height: 100vh !important;
     max-height: 100vh;
-    overflow: auto;
+    overflow: visible;
 
     margin-bottom: calc((100vh - var(--nav-height)) * -1);
   }
 
-  html:has(iam-nav.open:not(.demo-open)) {
+  html:has(:is(iam-nav,.iam-nav).open:not(.demo-open)) {
     overflow: hidden;
   }
+
+  // Updated secondary nav
+  :is(iam-nav,.iam-nav) > details[slot="secondary"]{
+    display: inline-block;
+    position: relative;
+    width: auto;
+
+    summary {
+      display: inline-block;
+      margin-left: 1.5rem;
+      margin-bottom: 0!important;
+      font-size: 1rem;
+
+      &:after {
+        display: none;
+      }
+    }
+
+    div {
+      text-align: left;
+
+      a {
+        white-space: nowrap;
+        text-decoration: none;
+
+        font-size: 1rem !important;
+        line-height: 1.5rem !important;
+        margin: 0;
+        padding: var(--option-padding) !important;
+
+      }
+
+      .lead {
+        --colour-heading: var(--colour-body);
+        color: var(--colour-body);
+        font-size: 0.87rem !important;
+        line-height: 1.5rem !important;
+        margin: 0;
+        padding: var(--option-padding) !important;
+      }
+      a:after {
+        width: 0;
+      }
+
+      .section:has(a:not([href=null])) + .section {
+        border-top: 1px solid var(--colour-border);
+        display: block;
+        padding-top: 0.5rem;
+        margin-top: 0.5rem;
+      }
+    }
+    
+  }
+
+  :is(iam-nav,.iam-nav) > details[slot="secondary"]::details-content {
+    display: none;
+  }
+
+  :is(iam-nav,.iam-nav) > details[slot="secondary"][open]::details-content {
+    display: block;
+    background: var(--dropdown-bg);
+    margin-block: var(--dropdown-margin-block);
+    padding: var(--dropdown-padding);
+    border-radius: var(--dropdown-border-radius);
+    box-shadow: var(--dropdown-box-shadow);
+
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 1.5rem;
+  }
+
+  
+    
 }
 
-// 4 columns on large screens
+/*  4 columns on large screens */
 @media screen and (min-width: 80em) {
-  // 1280
-  iam-nav.nav--large *:not(.nav--menu) > details {
+  /*  1280 */
+  :is(iam-nav,.iam-nav).nav--large *:not(.nav--menu) > details {
     &[open] > div:not(:has(details)) {
       columns: 4;
       column-gap: 6.875rem;
@@ -707,11 +903,11 @@ iam-nav details {
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Search
+/* #region Search */
 @media screen and (min-width: 62em) {
-  iam-nav {
+  :is(iam-nav,.iam-nav) {
     &.search-open {
       > *:not([slot='logo']):not([slot='secondary']):not([slot='search']) {
         display: none !important;
@@ -719,11 +915,11 @@ iam-nav details {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Dual navbar in desktop
+/* #region Dual navbar in desktop */
 @media screen and (min-width: 62em) {
-  iam-nav:has([slot='dual']) {
+  :is(iam-nav,.iam-nav):has([slot='dual']) {
     .brand:has(~ [slot='dual']) {
       margin-right: 1.5rem !important;
     }
@@ -741,10 +937,10 @@ iam-nav details {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region compact menus on mobile
-iam-nav > .dialog__wrapper {
+/* #region compact menus on mobile */
+:is(iam-nav,.iam-nav) > .dialog__wrapper {
   .dialog--list {
     a {
       font-size: 1rem;
@@ -753,7 +949,7 @@ iam-nav > .dialog__wrapper {
 }
 
 @media screen and (max-width: 62em) {
-  iam-nav > .dialog__wrapper:not(.dialog--xs) {
+  :is(iam-nav,.iam-nav) > .dialog__wrapper:not(.dialog--xs) {
     width: 100%;
 
     .btn-compact {
@@ -768,8 +964,8 @@ iam-nav > .dialog__wrapper {
     }
   }
 
-  iam-nav > .dialog__wrapper:not(.dialog--xs) .dialog--list a,
-  iam-nav .btn-compact {
+  :is(iam-nav,.iam-nav) > .dialog__wrapper:not(.dialog--xs) .dialog--list a,
+  :is(iam-nav,.iam-nav) .btn-compact {
     --compact-size: 2rem;
     all: unset;
     display: block !important;
@@ -805,11 +1001,11 @@ iam-nav > .dialog__wrapper {
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region navbar additional menus
+/* #region navbar additional menus */
 
-iam-nav .nav--menu {
+:is(iam-nav,.iam-nav) .nav--menu {
   outline: none !important;
 
   &::-webkit-scrollbar {
@@ -862,9 +1058,9 @@ iam-nav .nav--menu {
   }
 
   &.closed * {
-    display: none !important;
+    //display: none !important;
   }
 }
 
 
-// #endregion
+/* #endregion */

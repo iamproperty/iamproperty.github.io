@@ -18,9 +18,10 @@ class iamTooltip extends HTMLElement {
     <style>
     ${loadCSS}
     </style>
-    <slot></slot>
     <div class="tooltip__anchor">
+      <slot name="icon"></slot>
     </div>
+    <slot></slot>
     <div class="tooltip__content" id="tooltip"></div>
     `;
 
@@ -32,6 +33,15 @@ class iamTooltip extends HTMLElement {
 
     const contentWrapper = this.shadowRoot?.querySelector('.tooltip__content');
     const anchor = this.shadowRoot?.querySelector('.tooltip__anchor');
+
+
+    // #region Set default icon 
+
+    if(!this.querySelector('[slot="icon"]')){
+
+      this.insertAdjacentHTML('afterbegin',`<i class="fa-solid fa-circle-${this.hasAttribute('data-type') && this.getAttribute('data-type') == "info" ? "info" : "question"}" slot="icon"></i>`);
+    }
+    // #endregion
 
     if(this.hasAttribute('data-heading'))
       contentWrapper?.innerHTML += `<strong>${this.getAttribute('data-heading')}</strong>`;

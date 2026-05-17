@@ -4,7 +4,7 @@
 
 
 
-// #region Table container - Add via JS if needed, provides a safe space to scroll
+/* #region Table container - Add via JS if needed, provides a safe space to scroll */
 :host {
   container-type: inline-size;
   display: block;
@@ -55,11 +55,11 @@
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar; // See https://github.com/twbs/bootstrap/pull/10057
+  -ms-overflow-style: -ms-autohiding-scrollbar; /*  See https://github.com/twbs/bootstrap/pull/10057 */
 }
-// #endregion
+/* #endregion */
 
-// #region Tables are only stacked on mobile
+/* #region Tables are only stacked on mobile */
 @container (width < 23.4375em) {
   :host(:not(.table--fullwidth)) .table__container {
     margin-left: -1.5rem;
@@ -98,9 +98,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region CTA column
+/* #region CTA column */
 @container (width > 23.4375em) {
   :host {
     --cta-width: 8rem;
@@ -119,9 +119,9 @@
     margin-bottom: 0;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Max height tables
+/* #region Max height tables */
 .table__wrapper:is(.mh-sm, .mh-md, .mh-lg) {
   position: relative;
   overflow: auto;

@@ -1,7 +1,4 @@
 <script setup>
-  import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
-
   import Integration from '../Integration.vue';
 
   import DSHeader from '../DSHeader.vue';

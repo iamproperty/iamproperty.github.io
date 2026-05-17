@@ -2187,8 +2187,6 @@
 <script>
   import Tabs from '@/components/Tabs/Tabs.vue';
   import Tab from '@/components/Tabs/Tab.vue';
-  import Readme from '@/components/Table/README.md';
-  import WebReadme from '~/ts/components/table/README.md';
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Table from '@/components/Table/Table.vue';
@@ -2209,8 +2207,6 @@
     components: {
       DSHeader,
       Table,
-      Readme,
-      WebReadme,
       Tabs,
       Tab,
       Actionbar,

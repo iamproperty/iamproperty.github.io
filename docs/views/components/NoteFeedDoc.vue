@@ -1,6 +1,5 @@
 <script setup>
   import NoteFeed from '@/components/NoteFeed/NoteFeed.vue';
-  import Readme from '@/components/NoteFeed/README.md';
 
   const submitForm = function (event) {
     console.log('Save to json?');
@@ -131,7 +130,6 @@
 
     <div class="container">
       <h2>Vue Note Feed component reference</h2>
-      <Readme></Readme>
     </div>
   </main>
 </template>

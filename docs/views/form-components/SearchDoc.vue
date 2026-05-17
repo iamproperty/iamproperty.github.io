@@ -4,12 +4,11 @@
   import Tabs from '@/components/Tabs/Tabs.vue';
 
   import Search from '@/components/Search/Search.vue';
-  import VueReadme from '@/components/Multiselect/README.md';
-  import WebReadme from '~/ts/components/multiselect/README.md';
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
   import TrackEvents from '../TrackEvents.vue';
   import searchAnatomy from '../../img/search-anatomy.png';
+  import stylisedSearchAnatomy from '../../img/stylised-search-anatomy.png';
 </script>
 
 <template>
@@ -22,9 +21,10 @@
       <h1>Search</h1>
     </DSHeader>
 
+    <h2>Standard search</h2>
     <p class="lead">The search field is an element typically used in forms, tables to filter data.</p>
 
-    <h2>Anatomy</h2>
+    <h3>Anatomy</h3>
 
     <p>Search uses an the existing input field (with suffix) with two optional features.</p>
 
@@ -36,7 +36,7 @@
       <li>Clear field button - compact quiet action button</li>
     </ul>
 
-    <h2>Behaviour</h2>
+    <h3>Behaviour</h3>
 
     <p>The field should be able to trigger the search in one of three ways:</p>
     <ul class="mb-3">
@@ -58,44 +58,40 @@
     <div class="container visualtest">
       <div class="md-col-end-5 mb-4">
         <span class="d-block pb-2">DEFAULT</span>
-        <Search class="">
+        
           <label
             >Property address
-            <span>
+            <Search class="">
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              <span class="suffix fa-regular fa-search"></span>
-            </span>
+              <datalist id="properties">
+                <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
+                <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
+                <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
+                <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
+                <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
+                <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+              </datalist>
+            </Search>
           </label>
-          <datalist id="properties">
-            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
-          </datalist>
-        </Search>
       </div>
 
       <div class="md-col-end-5 mb-4">
         <span class="d-block pb-2">DEFAULT</span>
-        <Search class="">
+        
           <label
             >Property address
-            <span>
+            <Search class="">
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              <span class="suffix fa-regular fa-search"></span>
-            </span>
+              <datalist id="properties">
+                <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
+                <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
+                <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
+                <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
+                <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
+                <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
+              </datalist>
+            </Search>
           </label>
-          <datalist id="properties">
-            <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-            <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-            <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-            <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-            <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-            <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
-          </datalist>
-        </Search>
       </div>
     </div>
 
@@ -103,17 +99,14 @@
 
     <div class="container visualtest">
       <form novalidate method="GET" id="search-property">
-        <Search data-url="/existing.json?search=" data-prevent-submit>
           <label
             >Search existing transactions
-            <span>
+            <Search data-url="/existing.json?search=" data-prevent-submit>
               <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties3" />
-              <span class="suffix fa-regular fa-search"></span>
-            </span>
+              <datalist id="properties3"></datalist>
+            </Search>
             <span class="hint-text">Enter 3 or more characters</span>
           </label>
-          <datalist id="properties3"></datalist>
-        </Search>
         <button class="d-none btn btn-primary">Submit</button>
       </form>
     </div>
@@ -123,17 +116,18 @@
       If the API JSON values are returned as a key value pair object instead of an array the keys are then used as a
       prefix for the results. This gives the user some more context for the results.
     </p>
-    <div class="container visualtest">
+    <div class="container visualtest mb-5">
       <form novalidate method="GET" id="search-iamsold">
-        <Search
-          data-url="/iamsold.json?search="
-          data-value-schema="url"
-          data-display-schema="title"
-          data-schema="data.results"
-        >
+        
           <label
             >Search existing transactions
-            <span>
+            
+            <Search
+              data-url="/iamsold.json?search="
+              data-value-schema="url"
+              data-display-schema="title"
+              data-schema="data.results"
+            >
               <input
                 type="text"
                 name="url"
@@ -146,14 +140,79 @@
                   ]'
                 list="iamsold-pages"
               />
-              <button class="suffix me-0 mb-0"><i class="fa-regular fa-search"></i></button>
-            </span>
+              <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search"></button>
+                
+              <datalist id="iamsold-pages"></datalist>
+            </Search>
           </label>
 
-          <datalist id="iamsold-pages"></datalist>
-        </Search>
       </form>
     </div>
+
+    <h2 class="pt-5">Stylised search</h2>
+
+    <p>The stylised search field is an element typically used in admin panels, navigation menus and as a standalone field within a page.</p>
+
+    <label><span class="visually-hidden">Search existing transactions</span>
+            
+      <Search class="search--stylised mt-0">
+        <input
+          type="text"
+          name="url"
+          id="style-url"
+          autocomplete="off"
+          aria-autocomplete="none"
+          list="style-pages"
+          placeholder="Search all learning articles"
+          class="input--sm box-shadow"
+        />
+        <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search"></button>
+          
+        <datalist id="style-pages">
+          <option value="1 Lake Avenue, Newcastle upon Tyne, NE2 2TB"></option>
+          <option value="12 Oak Road, Newcastle upon Tyne, NE3 4QT"></option>
+          <option value="3 Peach Avenue, Newcastle upon Tyne, NE1 1PO"></option>
+        </datalist>
+      </Search>
+    </label>
+
+    <h3 class="pt-5">Anatomy</h3>
+
+    <p>Stylised search uses the same behaviours as the standard search but is styled in a more visually appealing way. The stylised search also comes with the option to include a drop shadow into the field.</p>
+    
+    <img :src="stylisedSearchAnatomy" class="mb-5" />
+
+    <ol class="mb-5">
+      <li>Input field (with optional drop shadow )</li>
+      <li>Browser default popover</li>
+      <li>Clear field button - compact quiet action button</li>
+    </ol>
+
+    <h3>Behaviour</h3>
+
+    <p>The field should be able to trigger the search in one of three ways:</p>
+
+    <ul class="mb-5">
+      <li><strong>Automatically:</strong> typing automatically triggers the search and updates the results</li>
+      <li><strong>Manually:</strong> pressing enter/clicking search icon, or tabbing away from search</li>
+      <li><strong>After delay:</strong> after a certain amount of characters have been entered or after a specified amount of time</li>
+    </ul>
+
+    <p>The user should be able to clear the field via the clear field icon.</p>
+
+    <p>There is an optional feature of searches to include a browser default popover that presents any valid or suggested values that the user can click to fill the search field.</p>
+
+    <h3>Sizes</h3>
+
+    <p>The field is available in three different sizes:</p>
+
+    <ul class="mb-5">
+      <li><strong>Default:</strong> this has the field height of 48px (3rem)</li>
+      <li><strong>Small:</strong> this has the field height of 40px (2.5rem)</li>
+      <li><strong>Compact:</strong> this follows the same height and sizing of the compact buttons with the ability to show the full field upon pressed.</li>
+    </ul>
+
+    
 
     <Integration component="search" componentName="search">
       <template #web-component>
@@ -223,6 +282,33 @@
         </table>
       </template>
 
+      
+      <template #classes>
+        <table>
+          <thead>
+            <tr>
+              <th>Class</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>.search--stylised</th>
+              <td>Turns the search component into the stylised varient.</td>
+            </tr>
+            <tr>
+              <th>.input--sm</th>
+              <td>Add class straight to the input element. This will reduce the size of the input field.</td>
+            </tr>
+            <tr>
+              <th>.box-shadow</th>
+              <td>Add class straight to the input element. Adds a box-shadow to the input.</td>
+            </tr>
+          </tbody>
+        </table>
+      </template>
+
+
       <template #criteria>
         <ul>
           <li>
@@ -280,6 +366,11 @@
           </tr>
         </thead>
         <tbody class="text-body">
+          <tr>
+            <td>V2 added</td>
+            <td>16.04.2026</td>
+            <td>Inclusion of stylised search field - giving an option for displaying search in none data entry settings</td>
+          </tr>
           <tr>
             <td>V1 added</td>
             <td>21.05.2025</td>

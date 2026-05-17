@@ -16,9 +16,9 @@
     --chart-colour: var(#{'--chart-colour-' + $i});
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Basic setup - including: container setup, css vars
+/* #region Basic setup - including: container setup, css vars */
 
 ::slotted(table) {
   display: none !important;
@@ -39,7 +39,7 @@
   --chart-height-lg: 12.5rem;
   --chart-height-resp: var(--chart-height);
 
-  // Non-configurable css vars
+  /*  Non-configurable css vars */
   --index-below: -1;
   --index-base: 0;
   --index-focus: 2;
@@ -98,9 +98,9 @@
     opacity: 0;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Chart key
+/* #region Chart key */
 .chart__outer > input[type='checkbox'] {
   opacity: 0;
   position: absolute;
@@ -116,7 +116,7 @@
   overflow: auto;
   scroll-snap-type: x mandatory;
   scroll-padding: 0.75rem;
-  //justify-content: flex-end;
+  /* justify-content: flex-end; */
   column-gap: 0.5rem;
 
   &:has(label:first-child:last-child) {
@@ -154,9 +154,9 @@
   }
 }
 
-// Hide chart keys
+/*  Hide chart keys */
 .chart__outer > input[type='checkbox']:not(:checked) ~ .chart__key .key {
-  //opacity: 0.25;
+  /* opacity: 0.25; */
 }
 
 @for $i from 1 to 11 {
@@ -164,9 +164,9 @@
     opacity: 0.25;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region y-axis
+/* #region y-axis */
 :host([data-yaxis]) {
   --yaxis-display: flex;
 }
@@ -191,7 +191,7 @@
       transform: translate(0, -50%);
       padding-right: 0.25rem;
       text-align: right;
-      //font-size: var(--label-size);
+      /* font-size: var(--label-size); */
       font-weight: var(--chart-yaxis-fw, normal);
       font-size: var(--chart-yaxis-fs, 0.75rem);
       color: var(--colour-body);
@@ -202,9 +202,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region X-axis
+/* #region X-axis */
 .chart__xaxis {
   margin-bottom: 1rem;
   display: flex;
@@ -231,9 +231,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Guidelines
+/* #region Guidelines */
 .chart__guidelines {
   position: absolute;
   top: 0;
@@ -254,7 +254,7 @@
     border-bottom: 1px dashed #eeeeee;
     pointer-events: none;
     z-index: var(--index-below);
-    //overflow: hidden;
+    /* overflow: hidden; */
 
     &:not(.guideline--target) span {
       display: none;
@@ -284,12 +284,12 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region tooltip
+/* #region tooltip */
 
 [part='popover'] {
-  //part="popover"
+  /* part="popover" */
   position: absolute;
   top: var(--cursor-y, 50%);
   left: var(--cursor-x, 50%);
@@ -302,7 +302,7 @@
   border-radius: 0.5rem;
   margin-bottom: 0.25rem;
   display: block;
-  //color: var(--colour-primary-theme);
+  /* color: var(--colour-primary-theme); */
   white-space: pre;
   text-align: left;
   box-shadow: var(--chart-details-shadow, 0 0.125rem 0.75rem rgba(0, 0, 0, 0.25));
@@ -342,9 +342,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Default column chart (Also applies to line chart)
+/* #region Default column chart (Also applies to line chart) */
 .chart__wrapper {
   display: block;
   display: flex;
@@ -359,7 +359,7 @@
   table {
     display: block;
     width: 100% !important;
-    padding-top: var(--chart-height-resp); // 16:9 ratio
+    padding-top: var(--chart-height-resp); /*  16:9 ratio */
     position: relative;
     margin-bottom: 0;
     overflow: visible;
@@ -396,7 +396,7 @@
       }
 
       td:first-child {
-        // part=xaxis
+        /*  part=xaxis */
         position: absolute;
         top: 100%;
         left: 0%;
@@ -474,7 +474,7 @@
       }
     }
 
-    // change the look of chart when crowded
+    /*  change the look of chart when crowded */
     @container (min-width: 62em) {
       tbody:has(tr:nth-child(5) td:nth-child(4)) tr,
       tbody:has(tr:nth-child(10)) tr {
@@ -508,7 +508,7 @@
         }
       }
     }
-    // Hide labels when it gets crowded
+    /*  Hide labels when it gets crowded */
     @container (min-width: 36em) {
       tbody:has(tr:nth-child(25)) {
         tr td:first-child {
@@ -544,9 +544,9 @@
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Chart colour overide classes
+/* #region Chart colour overide classes */
 :host(.chart-colour--success) td,
 :host(:is(.chart-colour--success, .chart-colour--danger, .chart-colour--wraning)) td.chart-colour--success,
 .chart-colour--success td {
@@ -566,11 +566,11 @@
 .chart-colour--warning td {
   --chart-colour: var(--chart-colour-warning) !important;
 }
-// #endregion
+/* #endregion */
 
-// #region Hide data sets
+/* #region Hide data sets */
 .chart__outer > input[type='checkbox']:not(:checked) ~ .chart__wrapper table tbody tr td:not(:first-child) {
-  //display: none;
+  /* display: none; */
 }
 
 @for $i from 1 to 11 {
@@ -585,4 +585,4 @@
     opacity: 0;
   }
 }
-// #endregion
+/* #endregion */

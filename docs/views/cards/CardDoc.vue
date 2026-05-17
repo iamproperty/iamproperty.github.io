@@ -10,6 +10,8 @@
   import cardImg from '../../img/cardImg.png';
   import cardModes from '../../img/cardModes.png';
 
+  import cardArticleImg from '../../img/card-article-anatomy.png';
+
   import { card as events } from '../../events.js';
 </script>
 <template>
@@ -51,15 +53,15 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card class="hover">Client onboarding</Card>
+          <a href="/client-onbaording" class="hover">
+            <Card>Client onboarding</Card>
           </a>
         </div>
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card class="active">Client onboarding</Card>
+          <a href="/client-onbaording" class="active">
+            <Card>Client onboarding</Card>
           </a>
         </div>
       </div>
@@ -81,8 +83,8 @@
         </div>
         <div class="col">
           <span class="pb-3 d-block text-uppercase">With Icon</span>
-          <a href="/client-onbaording">
-            <Card class="hover">
+          <a href="/client-onbaording" class="hover">
+            <Card>
               <i class="fa fa-home"></i>
               Lorem Ipsum
             </Card>
@@ -114,15 +116,15 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card data-illustration="/svg/illustrations/table.svg" class="hover">Client onboarding</Card>
+          <a href="/client-onbaording" class="hover">
+            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
           </a>
         </div>
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card data-illustration="/svg/illustrations/table.svg" class="active">Client onboarding</Card>
+          <a href="/client-onbaording" class="active">
+            <Card data-illustration="/svg/illustrations/table.svg">Client onboarding</Card>
           </a>
         </div>
       </div>
@@ -145,19 +147,17 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card class="hover"
-              >Client onboarding <span>Action Client due diligence checks and view information</span></Card
-            >
+          <a href="/client-onbaording" class="hover">
+            <Card>Client onboarding <span>Action Client due diligence checks and view information</span></Card>
           </a>
         </div>
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card class="active"
-              >Client onboarding <span>Action Client due diligence checks and view information</span></Card
-            >
+          <a href="/client-onbaording" class="active">
+            <Card>
+              Client onboarding <span>Action Client due diligence checks and view information</span>
+            </Card>
           </a>
         </div>
       </div>
@@ -179,8 +179,8 @@
 
         <div class="col pe-none">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <button>
-            <Card class="card--secondary hover" data-total="99"
+          <button class="hover">
+            <Card class="card--secondary" data-total="99"
               >Properties <a href="/test" slot="primary-action">Properties page</a>
               <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card
             >
@@ -189,8 +189,8 @@
 
         <div class="col pe-none">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <button>
-            <Card class="card--secondary active" data-total="99"
+          <button class="active">
+            <Card class="card--secondary" data-total="99"
               >Properties<a href="/test" slot="primary-action">Properties page</a>
               <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card
             >
@@ -226,8 +226,8 @@
         </div>
         <div class="col pe-none">
           <span class="pb-3 d-block text-uppercase">Hover/focus State </span>
-          <button>
-            <Card class="card--secondary hover"
+          <button class="hover">
+            <Card class="card--secondary"
               >Properties <i class="fa fa-key" slot="total-icon"></i
               ><a href="/test" slot="primary-action">Properties page</a>
               <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card
@@ -236,8 +236,8 @@
         </div>
         <div class="col pe-none">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <button>
-            <Card class="card--secondary active"
+          <button class="active">
+            <Card class="card--secondary"
               >Properties <i class="fa fa-key" slot="total-icon"></i
               ><a href="/test" slot="primary-action">Properties page</a>
               <button class="btn btn-compact btn-secondary fa-plus" slot="secondary">Add property</button></Card
@@ -279,8 +279,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card class="colour-danger hover"
+          <a href="/client-onbaording" class="hover">
+            <Card class="colour-danger"
               >Financial preparation <span>Here would be the top level description of the task</span></Card
             >
           </a>
@@ -288,8 +288,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card class="colour-danger active"
+          <a href="/client-onbaording" class="active">
+            <Card class="colour-danger"
               >Financial preparation <span>Here would be the top level description of the task</span></Card
             >
           </a>
@@ -317,8 +317,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="hover"
+          <a href="/client-onbaording" class="hover">
+            <Card :data-image="cardImg"
               >Financial preparation <span>Here would be the top level description of the task</span></Card
             >
           </a>
@@ -326,8 +326,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="active"
+          <a href="/client-onbaording" class="active">
+            <Card :data-image="cardImg"
               >Financial preparation <span>Here would be the top level description of the task</span></Card
             >
           </a>
@@ -335,42 +335,75 @@
       </div>
     </div>
 
-    <h3>Feature card with description and label</h3>
-    <p>This is a variation of the feature card which also features a label to show status or categorise the card.</p>
+    
+
+    
+    <h3>Feature article card </h3>
+    <p>This is a card used within products to primarily used to showcase articles within the iamproperty product.</p>
 
     <div class="container visualtest">
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 mb-4 pe-none">
-        <div class="col">
+      
+        <div class="col-start-auto col-span-2">
           <span class="pb-3 d-block text-uppercase">Default State</span>
           <a href="/client-onbaording">
-            <Card :data-image="cardImg"
-              ><span slot="badges" class="badge bg-warning"><i class="fa-regular fa-sparkles"></i> New</span>Financial
-              preparation <span>Here would be the top level description of the task</span></Card
-            >
+            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span><span class="badge" slot="badges">New</span></Card>
           </a>
         </div>
 
-        <div class="col">
+        <div class="col-start-auto col-span-2">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="hover"
-              ><span slot="badges" class="badge bg-warning"><i class="fa-regular fa-sparkles"></i> New</span>Financial
-              preparation <span>Here would be the top level description of the task</span></Card
-            >
+          <a href="/client-onbaording" class="hover">
+            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
           </a>
         </div>
 
-        <div class="col">
+        <div class="col-start-auto col-span-2">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card :data-image="cardImg" class="active"
-              ><span slot="badges" class="badge bg-warning"><i class="fa-regular fa-sparkles"></i> New</span>Financial
-              preparation <span>Here would be the top level description of the task</span></Card
-            >
+          <a href="/client-onbaording" class="active">
+            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
           </a>
         </div>
-      </div>
     </div>
+
+    <h3>Anatomy</h3>
+
+    <img :src="cardArticleImg" alt="Card anatomy diagram" class="mb-4 mt-2" />
+
+
+    <ul class="mb-4">
+      <li>Image window</li>
+      <li>Article header text</li>
+      <li>Description (optional)</li>
+      <li>Read time and icon (optional)</li>
+    </ul>
+
+    <h3>Variant examples</h3>
+
+
+    <div class="container visualtest">
+      
+        <div class="col-start-auto col-span-2">
+          <span class="pb-3 d-block text-uppercase">Card with header text</span>
+          <a href="/client-onbaording">
+            <Card :data-image="cardImg" class="card--article">Take control of your transactions</Card>
+          </a>
+        </div>
+
+        <div class="col-start-auto col-span-2">
+          <span class="pb-3 d-block text-uppercase">Addition of read time</span>
+          <a href="/client-onbaording">
+            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span class="duration" slot="footer">6 mins</span></Card>
+          </a>
+        </div>
+
+        <div class="col-start-auto col-span-2">
+          <span class="pb-3 d-block text-uppercase">Addition of description</span>
+          <a href="/client-onbaording">
+            <Card :data-image="cardImg" class="card--article">Take control of your transactions <span>Lorem ipsum dolor sit amet, co nsectetur adipiscing elit, sed o eiusmod tempor incididunt.</span><span class="duration" slot="footer">6 mins</span></Card>
+          </a>
+        </div>
+    </div>
+
 
     <h3>Checkbox card</h3>
     <p>The checkbox card is variation of the header card that has two actions.</p>
@@ -399,8 +432,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card class="hover"
+          <a href="/client-onbaording" class="hover">
+            <Card
               >Living room <span>1 check</span>
               <div slot="checkbox">
                 <input type="checkbox" name="card3" id="card3" /><label for="card3" class="m-0">Select card</label>
@@ -411,8 +444,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card class="active"
+          <a href="/client-onbaording" class="active">
+            <Card
               >Living room <span>1 check</span>
               <div slot="checkbox">
                 <input type="checkbox" name="card4" id="card4" /><label for="card4" class="m-0">Select card</label>
@@ -472,8 +505,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card class="hover"
+          <a href="/client-onbaording" class="hover">
+            <Card
               >Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
               <div slot="checkbox">
                 <input type="checkbox" name="card5" id="card5" /><label for="card5" class="m-0">Select card</label>
@@ -484,8 +517,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card class="active"
+          <a href="/client-onbaording" class="active">
+            <Card
               >Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
               <div slot="checkbox">
                 <input type="checkbox" name="card5" id="card5" /><label for="card5" class="m-0">Select card</label>
@@ -550,8 +583,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Hover/focus State</span>
-          <a href="/client-onbaording">
-            <Card class="hover">
+          <a href="/client-onbaording" class="hover">
+            <Card>
               Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
               <div slot="checkbox">
                 <input type="checkbox" name="card11" id="card11" /><label for="card11" class="m-0">Select card</label>
@@ -566,8 +599,8 @@
 
         <div class="col">
           <span class="pb-3 d-block text-uppercase">Active State</span>
-          <a href="/client-onbaording">
-            <Card class="active">
+          <a href="/client-onbaording" class="active">
+            <Card>
               Living room <span>1 check</span><span slot="badges" class="badge">Not started</span>
               <div slot="checkbox">
                 <input type="checkbox" name="card12" id="card12" /><label for="card12" class="m-0">Select card</label>
@@ -765,6 +798,10 @@
           </thead>
           <tbody>
             <tr>
+              <th>.card--article</th>
+              <td>Transforms the card into an article-style layout.</td>
+            </tr>
+            <tr>
               <th>.colour-{var}</th>
               <td>To create the status card look a clour needs to be defined via a colour class.</td>
             </tr>
@@ -870,6 +907,11 @@
           </tr>
         </thead>
         <tbody class="text-body">
+          <tr>
+            <td>V3</td>
+            <td>05.05.2025</td>
+            <td>Inclusion of a articles card</td>
+          </tr>
           <tr>
             <td>V1 added</td>
             <td>28.03.2024</td>

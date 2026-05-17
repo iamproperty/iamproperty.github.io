@@ -20,7 +20,6 @@ class iamNav extends HTMLElement {
     template.innerHTML = `
     <style class="styles">
 
-    
     ${loadCSS}
     </style>
     <style class="doc-styles">
@@ -86,6 +85,7 @@ class iamNav extends HTMLElement {
           break;
       }
 
+      
       // Create menu button
       if (
         element.classList.contains('nav--menu') &&
@@ -177,15 +177,9 @@ class iamNav extends HTMLElement {
     });
 
     // Has secondary link
-    if (this.querySelector('a[slot="secondary"]')) {
+    if (this.querySelector('[slot="secondary"]')) {
       menu.classList.add('has-secondary');
     }
-
-    // Create a scroll width variable to help with the sizing of the menu with in the CSS
-    document.documentElement.style.setProperty(
-      '--scrollbar-width',
-      window.innerWidth - document.documentElement.offsetWidth + 'px'
-    );
 
     // Open and close the menu
     menuButton.addEventListener(
@@ -279,9 +273,13 @@ class iamNav extends HTMLElement {
           if (this.querySelectorAll(':scope > details[open]').length) {
             backdrop.classList.add('show');
             iamNav.classList.add('open');
+
+            if(this.querySelectorAll(':scope > details[open][slot="secondary"]').length)
+              iamNav.classList.add('open-secondary');
           } else {
             backdrop.classList.remove('show');
             iamNav.classList.remove('open');
+            iamNav.classList.remove('open-secondary');
           }
 
           event.preventDefault();

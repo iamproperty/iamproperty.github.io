@@ -1,3 +1,6 @@
+
+import { transformButtons } from '../../modules/content';
+
 class iamContent extends HTMLElement {
   constructor() {
     super();
@@ -15,11 +18,50 @@ class iamContent extends HTMLElement {
 
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
-    <div class="content__container">
-      <slot></slot>
-    </div>
+    <slot></slot>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
+  }
+
+  addTitle = (title):void => {
+
+    if(this.hasAttribute('data-title-tag')){
+
+      return `<${this.getAttribute('data-title-tag')} class="${this.getAttribute('data-title-class')} iam-content--title">${title}</${this.getAttribute('data-title-tag')}>`;
+    }
+
+    return '';
+  }
+
+  fixContent = (component):void => {
+
+    const transform = component.getAttribute('data-transform');
+    let wrapper = component;
+
+    if(transform){
+
+      component.querySelectorAll(`${transform} > *:empty`).forEach((element) => {
+        element.remove();
+      });
+
+      wrapper = component.querySelector(`${transform}`);
+    }
+    else {
+
+      component.querySelectorAll(`:scope > *:empty`).forEach((element) => {
+        element.remove();
+      });
+    }
+    
+    const itemClass = component.getAttribute('data-items-class');
+
+    if(itemClass){
+        
+      wrapper.querySelectorAll(`:scope > *`).forEach((element) => {
+        element.classList.add(itemClass);
+      });
+    }
+
   }
 
   connectedCallback(): void {
@@ -27,8 +69,21 @@ class iamContent extends HTMLElement {
     const component = this;
     const url = this.getAttribute('data-url');
 
+    const transform = this.getAttribute('data-transform');
+
+    const fixContent = this.fixContent;
+
+    let elementAttributes = '';
+
+
+    for (const attr of this.attributes) {
+      elementAttributes += `${attr.name}="${attr.value}" `;
+    }
+
+    const addTitle = this.addTitle;
+
     const registerComponents = (contentComponent): void => {
-      const components = ['card', 'marketing', 'notification'];
+      const components = ['skeleton','bone','carousel', 'card', 'banner', 'notification'];
 
       const assetLocation = document.body.hasAttribute('data-assets-location')
         ? document.body.getAttribute('data-assets-location')
@@ -63,10 +118,42 @@ class iamContent extends HTMLElement {
 
       newXHRRequest.onload = function (): void {
         if (this.status === 200) {
-          const response = JSON.parse(this.responseText);
-          component.innerHTML = `${response.content.rendered}`;
+          let response = JSON.parse(this.responseText);
 
+          if(Array.isArray(response))
+            response = response[0];
+
+          const renderedContent = response.content.rendered.replaceAll(/<p>\[(.*)\]<\/p>/g, "<span data-shortcode=\"$1\"><iam-skeleton><iam-bone class=\"search\"></iam-bone></iam-skeleton></span>");
+
+
+          
+          component.parentElement?.querySelector('.iam-content--title')?.remove();
+          component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
+
+
+
+          if(transform){
+          
+            component.innerHTML = `<${transform} ${elementAttributes}>${renderedContent}</${transform}>`;  
+            component.removeAttribute('class');
+          }
+          else {
+            
+            component.innerHTML = `${renderedContent}`;
+          }
+            
+          fixContent(component);
           registerComponents(component);
+          transformButtons(component);
+
+          Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
+
+            if(document.querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`))
+              element.innerHTML = document.querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`)?.getAttribute('data-variable-value');
+          });
+
+          const changeEvent = new CustomEvent('loaded', { detail: {triggered: true} });
+          component?.dispatchEvent(changeEvent);
         }
       };
 

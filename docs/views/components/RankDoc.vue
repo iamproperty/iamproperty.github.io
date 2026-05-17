@@ -80,7 +80,7 @@
       </li>
     </ul>
 
-    <div class="d-flex mb-5">
+    <div class="d-flex mb-5 visualtest">
       <rank class="me-4 rank--medal">1st</rank>
 
       <rank class="me-4 rank--medal">2nd</rank>
@@ -99,7 +99,7 @@
       dependent using the values below:
     </p>
 
-    <div class="d-flex mb-2 md-col-end-8 position-backgrounds">
+    <div class="d-flex mb-2 md-col-end-8 position-backgrounds visualtest">
       <rank class="me-4" data-title="Company name">1st</rank>
 
       <p class="me-4"><strong>Gradient:</strong> Linear #FFFFFF to #FDCB6E</p>
@@ -107,7 +107,7 @@
       <p class="me-4"><strong>Item title:</strong> Qanelas Bold, 18px Text colour</p>
     </div>
 
-    <div class="d-flex mb-2 md-col-end-8 position-backgrounds">
+    <div class="d-flex mb-2 md-col-end-8 position-backgrounds visualtest">
       <rank class="me-4" data-title="Company name">2nd</rank>
 
       <p class="me-4"><strong>Gradient:</strong> Linear #FFFFFF to #A9A9A9</p>
@@ -115,7 +115,7 @@
       <p class="me-4"><strong>Item title:</strong> 'Body' 'Text colour'</p>
     </div>
 
-    <div class="d-flex mb-5 md-col-end-8 position-backgrounds">
+    <div class="d-flex mb-5 md-col-end-8 position-backgrounds visualtest">
       <rank class="me-4" data-title="Company name">3rd</rank>
 
       <p class="me-4"><strong>Gradient:</strong> Linear #FFFFFF to #FDCB6E</p>
@@ -135,7 +135,7 @@
       positions.
     </p>
 
-    <div class="d-flex mb-5">
+    <div class="d-flex mb-5 visualtest">
       <rank class="me-4" data-title="Company name">1st</rank>
 
       <rank class="me-4" data-title="Company name">2nd</rank>
@@ -178,7 +178,7 @@
 
     <h4 class="md-col-end-3 mt-2">First Place</h4>
 
-    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium">
+    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium visualtest">
       <table>
         <thead>
           <tr>
@@ -197,7 +197,7 @@
 
     <h4 class="md-col-end-3 mt-2">Standard</h4>
 
-    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium hide-gold">
+    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium hide-gold visualtest">
       <table>
         <thead>
           <tr>
@@ -216,7 +216,7 @@
 
     <h4 class="md-col-end-3 mt-2">First Place, highlighted</h4>
 
-    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium">
+    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium visualtest">
       <table>
         <thead>
           <tr>
@@ -235,7 +235,7 @@
 
     <h4 class="md-col-end-3 mt-2">Highlighted</h4>
 
-    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium hide-gold">
+    <Rankings data-max="12" class="md-col-start-4 md-col-end-10 hide-podium hide-gold visualtest">
       <table>
         <thead>
           <tr>
@@ -259,7 +259,7 @@
 
     <div class="md-col-end-5">
       <strong>Position and value</strong>
-      <Rankings data-max="12" class="hide-podium hide-progress hide-gold">
+      <Rankings data-max="12" class="hide-podium hide-progress hide-gold visualtest">
         <table>
           <thead>
             <tr>
@@ -279,7 +279,7 @@
 
     <div class="md-col-start-7 md-col-end-11">
       <strong>Position and progress indicator</strong>
-      <Rankings data-max="12" class="hide-podium hide-value hide-gold">
+      <Rankings data-max="12" class="hide-podium hide-value hide-gold visualtest">
         <table>
           <thead>
             <tr>
@@ -299,7 +299,7 @@
 
     <div class="md-col-end-5 mb-5">
       <strong>Position only</strong>
-      <Rankings data-max="12" class="hide-podium hide-value hide-progress hide-gold">
+      <Rankings data-max="12" class="hide-podium hide-value hide-progress hide-gold visualtest">
         <table>
           <thead>
             <tr>
@@ -319,7 +319,7 @@
 
     <h2>Ranking component</h2>
 
-    <Rankings data-max="12" class="md-col-end-8 mb-5">
+    <Rankings data-max="12" class="md-col-end-8 mb-5 visualtest">
       <table>
         <thead>
           <tr>
@@ -384,9 +384,9 @@
       out of view.
     </p>
 
-    <div class="admin-panel md-col-end-5">
+    <div class="admin-panel md-col-end-5 visualtest">
       <h2 class="bg-light">Ranking component</h2>
-      <Rankings data-max="12" class="leaderboard-scroll md-col-end-8 mb-5">
+      <Rankings data-max="12" class="leaderboard-scroll mb-5">
         <table>
           <thead>
             <tr>
@@ -440,9 +440,9 @@
       </Rankings>
     </div>
 
-    <div class="admin-panel md-col-start-2 md-col-end-8">
+    <div class="admin-panel md-col-start-6 visualtest">
       <h2 class="bg-light">Ranking component</h2>
-      <Rankings data-max="12" class="leaderboard-scroll md-col-end-8 mb-5">
+      <Rankings data-max="12" class="leaderboard-scroll mb-5">
         <table>
           <thead>
             <tr>
@@ -503,9 +503,9 @@
       individual podium or ranking list parts.
     </p>
 
-    <div class="admin-panel md-col-end-6">
+    <div class="admin-panel md-col-end-6 visualtest">
       <h2 class="bg-light">Podium only</h2>
-      <Rankings data-max="12" class="leaderboard-scroll md-col-end-8 mb-5 hide-leaderboard">
+      <Rankings data-max="12" class="leaderboard-scroll mb-5 hide-leaderboard">
         <table>
           <thead>
             <tr>
@@ -559,9 +559,9 @@
       </Rankings>
     </div>
 
-    <div class="admin-panel md-col-start-7">
+    <div class="admin-panel md-col-start-7 visualtest">
       <h2 class="bg-light">Ranking list only</h2>
-      <Rankings data-max="12" class="leaderboard-scroll md-col-end-8 mb-5 hide-podium">
+      <Rankings data-max="12" class="leaderboard-scroll mb-5 hide-podium">
         <table>
           <thead>
             <tr>

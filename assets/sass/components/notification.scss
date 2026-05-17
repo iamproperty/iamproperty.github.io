@@ -1,5 +1,7 @@
 @use '../_func' as *;
 
+@use '../elements/buttons--global';
+@use '../elements/buttons--compact';
 
 
 :host,
@@ -63,7 +65,7 @@
   color: var(--colour-white);
 }
 
-// Alerts
+/*  Alerts */
 :host([data-type='alert']),
 .iam-notification[data-type='alert'] {
   border-radius: 0;
@@ -75,7 +77,7 @@
   margin-bottom: 0;
 }
 
-// Toasts
+/*  Toasts */
 :host([data-type='toast']),
 .iam-notification[data-type='toast'] {
   margin: auto;
@@ -160,34 +162,19 @@
     padding-left: 1rem;
 
     button {
-      text-indent: 300%;
-      overflow: hidden;
-      border: none;
-      height: 1.125rem; /* 18/16 */
-      width: 1.125rem; /* 18/16 */
-      background: transparent;
       display: inline-block;
       position: relative;
-      color: inherit;
+      margin: 0;
+      color: currentColor;
 
-      &:after {
-        content: '';
-        top: 0;
-        left: 0;
-        position: absolute;
-        display: block;
-        height: 1.125rem; /* 18/16 */
-        width: 1.125rem; /* 18/16 */
-        z-index: var(--index-focus);
-        background: currentColor;
-        mask-image: var(--icon-close);
-        mask-size: 100%;
-        mask-repeat: no-repeat;
-        mask-position: 50% 50%;
-        -webkit-mask-image: var(--icon-close);
-        -webkit-mask-size: 100%;
-        -webkit-mask-repeat: no-repeat;
-        -webkit-mask-position: 50% 50%;
+      &:hover {
+        
+        color: var(--colour-primary-theme);
+      }
+
+      &:before {
+        font-weight: lighter;
+        font-size: 1.5rem;
       }
     }
 
@@ -199,20 +186,20 @@
   }
 }
 
-// #region no icon
+/* #region no icon */
 :host(.notification--no-icon) {
   .notification__icon {
     display: none;
   }
 }
-// #endregion
+/* #endregion */
 
 
-// #region no background
+/* #region no background */
 :host(.notification--no-bg){
   box-shadow: none;
   background: none!important;
   padding: 0;
   border: 0 !important;
 }
-// #endregion
+/* #endregion */

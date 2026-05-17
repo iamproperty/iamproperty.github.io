@@ -12,8 +12,6 @@
 
   import Slider from '@/components/Slider/Slider.vue';
 
-  import Readme from '@/components/Slider/README.md';
-  import WebReadme from '~/ts/components/slider/README.md';
   import Tabs from '@/components/Tabs/Tabs.vue';
 </script>
 
@@ -177,11 +175,9 @@
       <Tabs>
         <details>
           <summary><h2>Web component</h2></summary>
-          <WebReadme></WebReadme>
         </details>
         <details>
           <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
         </details>
         <details>
           <summary><h2>Acceptance Criteria</h2></summary>

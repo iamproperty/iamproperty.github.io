@@ -3,8 +3,6 @@ import Vue from '@vitejs/plugin-vue'
 import { fileURLToPath } from 'url';
 import { resolve, dirname } from 'path';
 
-import Markdown from 'unplugin-vue-markdown/vite'
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -40,7 +38,7 @@ export default ({ mode }) => {
     },
     plugins: [
       Vue({
-        include: [/\.vue$/, /\.md$/],
+        include: [/\.vue$/],
         template: {
           compilerOptions: {
             isCustomElement: (tag) => {
@@ -48,9 +46,6 @@ export default ({ mode }) => {
             }
           }
         }
-      }),
-      Markdown({
-        headEnabled: false // <--
       })
     ]
   });

@@ -1,6 +1,7 @@
 @use '../_func' as *;
 
 @use '../elements/forms' as *;
+@use '../elements/dropdown' as *;
 @use '../elements/prefix' as *;
 @use '../elements/buttons' as *;
 @use '../elements/links' as *;
@@ -43,7 +44,7 @@
 }
 
 :host([data-required]) {
- // --error-border: var(--colour-danger);
+ /*  --error-border: var(--colour-danger); */
 }
 
 input[name='postcode'] {
@@ -103,14 +104,118 @@ input[name='postcode'] {
   }
 }
 
-// change the datalist
+/*  change the datalist */
+
+  .dropdown {
+
+
+    top: 100%;
+    position: absolute;
+    //border-radius: 0.5rem;
+    //box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.1);
+    //width: 100% !important;
+    /* max-width: var(--menu-item-width, 50rem) !important; */
+    //z-index: 100;
+    display: none;
+    //max-height: 25rem;
+    //overflow-y: auto;
+    
+    //max-width: var(--input-max-width) !important;
+    padding: 0;
+
+    & > datalist {
+      border: none!important;
+      box-shadow: none!important;
+      position: static!important;
+      display: block!important;
+      border-radius: 0!important;
+      max-height: 100%!important;
+      margin: 0!important;
+    }
+
+    &:focus {
+      outline: none!important;
+    }
+  }
+    
+  .postcode-lookup:is(:focus-within,:has(*:active)) .dropdown:has(datalist:not(:empty)),
+  .postcode-lookup:is(:focus-within,:has(*:active)) .dropdown:has(datalist.loading),
+  .postcode-lookup:is(:focus-within,:has(*:active)) .dropdown:has(datalist.noresults),
+  .postcode-lookup .dropdown:hover {
+
+    display: block;
+  }
+
+  .postcode-lookup .dropdown:has(datalist.noresults){
+    datalist {
+
+      display: block;
+
+      &:before {
+        content: "No addresses found";
+        background-color: white;
+        padding: 0.5rem;
+        color: var(--colour-primary) !important;
+        font-weight: inherit !important;
+        font-family: inherit !important;
+        font-size: 1rem !important;
+        line-height: 1.1875rem !important;
+        padding-block: var(--menu-item-padding, 0.5rem) !important;
+        display: block;
+      }
+    }
+  }
+
+  .postcode-lookup:is(:focus-within,:has(option:active)) .dropdown:has(datalist.loading) {
+
+    datalist {
+
+      height: 5rem;
+
+      &:before {
+        content: "\f021";
+        font-family: "Font Awesome 7 Pro";
+        font-size: 1.75rem;
+        font-weight: 300;
+        display: block;
+        position: absolute;
+        top: calc(50% - 1rem);
+        left: calc(50% - 1rem);
+        /*transform: translate(-50%,-50%);*/
+
+        animation-name: spin;
+        animation-duration: 4000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+    }
+  }
+
+
+
+  /* #region welsh banner */
+  [name="beforeList"] {
+    display: none;
+  }
+
+  [name="beforeList"]:has(+ .show-welsh-banner) {
+    //display: block;
+  }
+  .dropdown.show-welsh-banner [name="beforeList"] {
+    display: block;
+  }
+
+  /* #endregion*/
+
+
+
 
 .postcode-lookup > div {
   position: relative;
 }
 
 .postcode-lookup input:not(.is-invalid) {
-  //background-image: none!important;
+  /* background-image: none!important; */
 }
 
 .postcode-lookup:has(input.is-invalid) .invalid-feedback:not(:empty) {
@@ -119,14 +224,41 @@ input[name='postcode'] {
 }
 
 
-.postcode-lookup .empty {
-  display: var(--error-hide, block);
+.postcode-lookup label:has(.clear-search) {
+ position: relative;
 }
 
+/*
+.postcode-lookup .empty {
+  display: var(--error-hide, block);
+
+  position: absolute;
+  bottom: 0.5rem;
+  right: 3.5rem;
+  margin: 0;
+  aspect-ratio: 1 / 1;
+
+  width: 2rem;
+  height: 2rem;
+
+  text-align: center;
+  line-height: 1;
+
+  &:not(:hover, :focus) {
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  i {
+    font-size: 1.2rem;
+  }
+    
+}
+*/
 
 .postcode-lookup:has(input.is-invalid) .datalist__wrapper,
 .postcode-lookup:has(input.is-invalid) label:after,
-.postcode-lookup:has(input.is-invalid) .empty,
+.postcode-lookup:has(input.is-invalid) .clear-search,
 .postcode-lookup:has(input.is-invalid) [slot="hint"] {
   display: none!important;
 }
@@ -141,7 +273,7 @@ input[name='postcode'] {
 }
 
 
-// #region Matched address
+/* #region Matched address */
 .matched .inner {
   border: 2px solid var(--colour-danger);
   background: #fcebec;
@@ -158,4 +290,4 @@ input[name='postcode'] {
 
   --colour-underline: currentColor;
 }
-// #endregion
+/* #endregion */

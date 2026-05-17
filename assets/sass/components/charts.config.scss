@@ -69,7 +69,7 @@
     text-decoration: none !important;
   }
   iam-barchart::part(tooltip):after {
-    font-family: 'Font Awesome 7 Pro';
+    font-family: var(--fa-family-classic);
     font-weight: 900;
     content: '\f059';
     display: inline-block;
@@ -81,6 +81,6 @@
   }
 
   iam-barchart {
-    //--xaxis-max-width: 3rem;
+    /* --xaxis-max-width: 3rem; */
   }
 }

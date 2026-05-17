@@ -1,0 +1,114 @@
+@layer elements {
+  /* #region btn compact */
+  .btn[popovertarget] {
+  
+    position: relative;
+    anchor-name: --button2;
+
+    & > .fa-chevron-down {
+      display: none;
+    }
+
+    &:not(:has(i)):not(.no-icon):after {
+      content: '';
+
+      display: inline-block;
+      margin-right: 0.25em;
+      margin-left: 1em;
+
+      height: 0.8em;
+      width: 0.8em;
+      z-index: var(--index-focus);
+      background: currentColor;
+      mask-image: var(--icon-arrow);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-arrow);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+
+      transform: rotate(90deg);
+    }
+
+    &[aria-pressed]:after {
+      transform: rotate(270deg);
+    }
+  }
+
+  /* #endregion */
+
+  /* #region Select as button */
+  .btn:has(select) {
+    position: relative;
+    padding: 0;
+    max-width: fit-content;
+    min-width: fit-content;
+    width: fit-content;
+
+    select {
+      
+      all: unset !important;
+      padding: var(--btn-padding-block) var(--btn-padding-inline) !important;
+      padding-right: calc(var(--btn-padding-inline) + 2rem)!important;
+      border-radius: 1.5rem !important;
+      appearance: none !important;
+      background: none !important;
+      border: none !important;
+      color: currentColor !important;
+      display: block;
+      outline: none;
+      font-weight: inherit!important;
+      font-size: var(--btn-font-size)!important;
+      line-height: var(--btn-line-height) !important;
+      field-sizing: content!important;
+
+      appearance: base-select!important;
+    }
+    
+    &:after {
+      position: absolute;
+      top: 0.625rem; /* 10 */
+      right: 1.5rem;
+      content: '';
+      height: 1.5rem;
+      width: 1rem;
+      display: inline-block;
+      background: currentColor;
+      mask-image: var(--icon-arrow);
+      mask-size: 100%;
+      mask-repeat: no-repeat;
+      mask-position: 50% 50%;
+      -webkit-mask-image: var(--icon-arrow);
+      -webkit-mask-size: 100%;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: 50% 50%;
+      vertical-align: bottom;
+      margin-left: 1rem;
+      transform: rotate(90deg);
+      pointer-events: none;
+    }
+  }
+  /* #endregion */
+
+  /* #region btn that is a select */
+  .btn-action:has(select) {
+    padding-block: 0;
+    padding-right: 2rem;
+    font-size: 1em;
+  
+    select {
+      margin: 0rem 0rem !important;
+      padding-right: 2rem!important;
+      margin-right: -2rem !important;
+      font-size: 1rem!important;
+    }
+
+    &:after {
+      top: 0.2rem;
+      right: 0.5rem;
+    }
+  }
+  /* #endregion */
+}

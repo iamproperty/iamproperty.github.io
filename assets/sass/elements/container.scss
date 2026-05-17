@@ -1,19 +1,10 @@
-@use 'sass:math';
-@use '../_func' as *;
-
-
-
-
-
 @layer elements {
-  // #region contain
-  // #region container
+
+  /* #region container */
   .container {
     display: block;
     margin-left: auto;
     margin-right: auto;
-
-    container-type: inline-size;
     width: 100%;
 
     &:not([class*='col-']){
@@ -35,24 +26,8 @@
         col-9-start] 1fr [col-9-end
         col-10-start] 1fr [col-10-end
         col-11-start] 1fr [col-11-end
-        col-12-start] 1fr [col-12-end content-end];
+        col-12-start] 1fr [col-12-end content-end]!important;
       column-gap: 1rem;
-    }
-
-    [class*='col-span-']:not([class*='-col-span-']):not(:first-child) {
-      --col-start: auto;
-    }
-
-    @media screen and (min-width: 36em) {
-      [class*='sm-col-span-']:not(:first-child) {
-        --col-start: auto;
-      }
-    }
-
-    @media screen and (min-width: 62em) {
-      [class*='md-col-span-']:not(:first-child) {
-        --col-start: auto;
-      }
     }
 
     &:not(.container-fluid) {
@@ -75,7 +50,7 @@
       padding-top: 2rem;
     }
 
-    // Fix the clearing for containers
+    /* Fix the clearing for containers */
     &:before {
       display: table;
       clear: both;
@@ -100,6 +75,9 @@
     }
   }
 
+  .container--inline-size {
+    container-type: inline-size;
+  }
   :host .container {
     display: block;
     margin-left: auto;
@@ -108,7 +86,7 @@
     width: 100%;
   }
 
-  // replicate container padding-bottom
+  /* replicate container padding-bottom */
   main > .row {
     padding-bottom: 1rem;
 
@@ -121,35 +99,28 @@
       padding-top: 2rem;
     }
   }
-  // #endregion
+  /* #endregion */
+}
 
-  // #region Circles
+
+
+@layer utilities {
   .container {
-    &:has(.circle) {
-      position: relative;
-      z-index: 1;
+
+    [class*='col-span-']:not([class*='-col-span-']):not(:first-child) {
+      --col-start: auto;
     }
 
-    > .circle {
-      position: absolute;
-      z-index: var(--index-below);
-      border-width: 3px;
+    @media screen and (min-width: 36em) {
+      [class*='sm-col-span-']:not(:first-child) {
+        --col-start: auto!important;
+      }
     }
 
-    // Default pattern
-    &:not([class*='circle-pattern-']) > .circle {
-      font-size: 18.75rem; /* (300) */
-      top: -4.6875rem;
-      left: -12.5rem; /* -200 */
-    }
-
-    &:not([class*='circle-pattern-']) > .circle ~ .circle {
-      font-size: 21.875rem;
-      top: auto;
-      left: auto;
-      right: -6.25rem;
-      bottom: -12.5rem; /* -200 */
+    @media screen and (min-width: 62em) {
+      [class*='md-col-span-']:not(:first-child) {
+        --col-start: auto!important;
+      }
     }
   }
-  // #endregion
 }

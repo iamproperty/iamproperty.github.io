@@ -19,7 +19,7 @@
 }
 
 :host(:not(.mb-0)) {
-  //margin-bottom: 1.5rem;
+  /* margin-bottom: 1.5rem; */
 }
 
 ::slotted(input) {
@@ -37,7 +37,7 @@
   border-end-end-radius: 0!important;
 }
 
-// #region colors
+/* #region colors */
 ::slotted(input[type='color']) {
   width: 3rem !important;
   flex-shrink: 0 !important;
@@ -59,15 +59,15 @@
   border-start-start-radius: 0 !important;
   margin: 0 !important;
 }
-// #endregion
+/* #endregion */
 
-// #region 
+/* #region  */
 @layer elements {
 ::slotted(select:is([slot="prefix"],[slot="suffix"])){
 
   --option-colour: red;
 
-  //--input-padding-block: 0;
+  /* --input-padding-block: 0; */
 
   margin: 0!important;
 
@@ -78,7 +78,7 @@
   
   margin-right: 0rem !important;
   border: none !important;
-  //color: white;
+  /* color: white; */
   height: 100%!important;
   max-height: 100%!important;
   min-height: 100%!important;
@@ -94,7 +94,7 @@
   field-sizing: content!important;
 }
 }
-// #endregion
+/* #endregion */
 
 
 .suffix[role="button"] {

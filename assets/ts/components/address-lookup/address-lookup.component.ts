@@ -46,15 +46,17 @@ class iamAddressLookup extends HTMLElement {
         <div>
         <label class="mb-1"><span class="title text-lowercase"></span>
           <span>
-          <input type="text" name="postcode" class="${this.hasAttribute('data-input-class') ? this.getAttribute('data-input-class') : ''}" list="address-lookup__addressess" autocomplete="one-time-code" aria-autocomplete="none" placeholder="${this?.hasAttribute('data-placeholder') ? this?.getAttribute('data-placeholder') : 'Postcode'}" value="${this.hasAttribute('data-postcode-value') ? this.getAttribute('data-postcode-value') : ''}" part="input" />
+          <span class="input__wrapper">
+            <input type="text" name="postcode" class="${this.hasAttribute('data-input-class') ? this.getAttribute('data-input-class') : ''}" list="address-lookup__addressess" autocomplete="one-time-code" aria-autocomplete="none" placeholder="${this?.hasAttribute('data-placeholder') ? this?.getAttribute('data-placeholder') : 'Postcode'}" value="${this.hasAttribute('data-postcode-value') ? this.getAttribute('data-postcode-value') : ''}" part="input" />
+          </span>
           <button id="postcode__submit" class="suffix fa-regular fa-search" part="suffix"></button>
           </span>
         </label>
           <span class="invalid-feedback mb-2" id="invalid-feedback-address-lookup">${this.hasAttribute('data-error-msg') ? this.getAttribute('data-error-msg') : 'Required address fields'}</span>
 
-          <div class="datalist__wrapper ${this.hasAttribute('data-list-class') ? this.getAttribute('data-list-class') : ''}" tabindex="0" part="list-wrapper">
+          <div class="datalist__wrapper dropdown ${this.hasAttribute('data-list-class') ? this.getAttribute('data-list-class') : ''}" tabindex="0" part="list-wrapper">
             <slot name="beforeList"></slot>
-            <slot name="preloadedList"></slot>
+            
             <datalist id="address-lookup__addressess" class=""></datalist>
             <div id="paginationWrapper"></div>
             <slot name="afterList"></slot>
@@ -89,13 +91,15 @@ class iamAddressLookup extends HTMLElement {
   }
 
   async connectedCallback(): void {
+
+    // Make the datalist a dropdown
+    this.classList.add('dropdown__wrapper');
+
     const lookup = this.shadowRoot.querySelector('[name="postcode"]');
     const lookupWrapper = this.shadowRoot.querySelector('.postcode-lookup');
     const manualWrapper = this.shadowRoot.querySelector('.manual-address');
     const preFilledWrapper = this.shadowRoot.querySelector('.pre-filled');
-    const list = this.querySelector('datalist[slot="preloadedList"]')
-      ? this.querySelector('datalist[slot="preloadedList"]')
-      : this.shadowRoot.querySelector('.datalist__wrapper datalist');
+    const list = this.shadowRoot.querySelector('datalist');
     const listWrapper = this.shadowRoot.querySelector('.datalist__wrapper');
     const switchManualBtn = this.shadowRoot.querySelector('.switch-to-manual-btn');
     const switchLookupBtn = this.shadowRoot.querySelector('.switch-to-lookup-btn');
@@ -120,6 +124,14 @@ class iamAddressLookup extends HTMLElement {
     Array.from(this.shadowRoot.querySelectorAll('.title')).forEach((titleElement) => {
       titleElement.innerHTML = title;
     });
+
+
+    // preload datalis
+
+    if(this.querySelector('datalist')){
+      list.innerHTML = this.querySelector('datalist').innerHTML;
+    }
+
 
     // #region functions
     function checkFilled(component): void {

@@ -1,5 +1,5 @@
 import { trackComponent, trackComponentRegistered } from '../_global';
-import { loadYouTubeScripts, createYoutTubeVideo } from '../../modules/videos';
+import { videoHTML, loadYouTubeScripts, createYoutTubeVideo,openYoutubeVideo,openVimeoVideo } from '../../modules/videos';
 import { openModal,closeModal,closeButtonHtml } from '../../modules/modal';
 
 trackComponentRegistered('iam-video-modal');
@@ -26,74 +26,22 @@ class iamVideoCard extends HTMLElement {
 
     <dialog>
       ${closeButtonHtml}
-      <slot></slot>
+      ${videoHTML}
     </dialog>
     `;
 
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  openYoutubeVideo = async (id, component):void => {
-
-    const embed = component.querySelector('.embed');
-
-    openModal(id, component);
-
-    const youtubeId = component.getAttribute('data-youtube');
-    let loaded;
-    if (!document.body.classList.contains('youtubeLoaded')) {
-      
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      loaded = await loadYouTubeScripts();
-    }
-
-    const customEvent = new CustomEvent('play-video', {
-      detail: { 'Video Type': 'YoutTube', ID: youtubeId },
-    });
-    component.dispatchEvent(customEvent);
-
-    const interval = setInterval(():void => {
-
-      if(typeof YT != "undefined"){
-        clearInterval(interval);
-        createYoutTubeVideo(embed, youtubeId);
-      }
-    }, 200);
-    // Limit the number of calls
-    setTimeout(function() {
-      clearInterval(interval)
-    }, 2000);
-
-  } 
-  
-  openVimeoVideo = async (id, component):void => {
-
-    const embed = component.querySelector('.embed');
-
-    openModal(id, component);
-
-    const vimeoId = component.getAttribute('data-vimeo');
-
-    const customEvent = new CustomEvent('play-video', {
-      detail: { 'Video Type': 'Vimeo', ID: vimeoId },
-    });
-    component.dispatchEvent(customEvent);
-    window.dataLayer.push(customEvent.detail);
-
-    if (!embed.querySelector('iframe'))
-      embed.innerHTML = `<iframe src="https://player.vimeo.com/video/${vimeoId}?autoplay=1" width="100%" height="100%" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
-
-  } 
-
   async connectedCallback(): void {
     
     const id = this.getAttribute('id');
     const closeButton = this.shadowRoot?.querySelector('[data-close]');
     
-    this.innerHTML = `<div class="embed"></div>`
+    this.innerHTML = `<div class="embed" slot="video"></div>`;
     const embed = this.querySelector('.embed');
 
-    document.addEventListener('click', async (e) => {
+    document.addEventListener('click', (e) => {
 
       if(e.target.closest(`[command="show-modal"][commandfor="${id}"]`)){
 
@@ -102,16 +50,19 @@ class iamVideoCard extends HTMLElement {
         if(this.hasAttribute('data-youtube')){
           const youtubeId = this.getAttribute('data-youtube');
           embed?.setAttribute('id',youtubeId);
-          this.openYoutubeVideo(id, this);
+          openYoutubeVideo(this);
+          openModal(this);
         }
         else if(this.hasAttribute('data-vimeo')) {
-          this.openVimeoVideo(id, this);
+          openVimeoVideo(this);
+          openModal(this);
         }
       }
     });
+
     
     closeButton?.addEventListener('click', () => {
-      closeModal(id, this);
+      closeModal(this);
 
       if(this.hasAttribute('data-youtube')){
         const youtubeId = this.getAttribute('data-youtube');

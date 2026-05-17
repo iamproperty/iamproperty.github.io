@@ -26,14 +26,12 @@
       <router-link to="/foundations">Foundations</router-link>
       <router-link to="/elements">Elements</router-link>
       <router-link to="/components">Components</router-link>
-      <router-link to="/templates">Templates</router-link>
-      <router-link to="/launch">Launch list</router-link>
+      <router-link to="/patterns">Patterns & templates</router-link>
 
       <form novalidate method="GET" slot="search" id="searchform" action="/search">
-        <Search>
-          <label class="mb-0"
-            ><span class="visually-hidden">Search pages</span>
-            <span>
+        
+          <label class="mb-0"><span class="visually-hidden">Search pages</span>
+            <Search>
               <input
                 type="text"
                 name="search"
@@ -48,12 +46,11 @@
               />
 
               <button class="suffix mt-0 me-0 mb-0 pe-auto"><i class="fa-regular fa-search"></i></button>
-            </span>
+              <datalist id="searchterms" ref="list">
+                <option v-for="item in refinedResults" :value="item" :data-value="item"></option>
+              </datalist>
+            </Search>
           </label>
-          <datalist id="searchterms" ref="list">
-            <option v-for="item in refinedResults" :value="item" :data-value="item"></option>
-          </datalist>
-        </Search>
       </form>
     </Nav>
   </nav>
@@ -63,8 +60,13 @@
   <footer class="bg-primary mb-0">
     <div class="container pt-4 d-print-none">
       <ul class="list-unstyled list-inline ms-auto d-block mb-0">
+        
+      
         <li class="list-inline-item me-4 ms-0 mb-2">
-          <router-link to="/get-started">Get started</router-link>
+          <router-link to="/launch">Launch list</router-link>
+        </li>
+        <li class="list-inline-item me-4 ms-0 mb-2">
+          <a href="https://github.com/iamproperty/iamproperty.github.io" target="_blank">Get started</a>
         </li>
         <li class="list-inline-item me-4 ms-0 mb-2">
           <a href="/brand-guidelines.pdf" target="_blank" download>Brand guidelines</a>
@@ -132,11 +134,12 @@
   footer .router-link-active {
     text-decoration: none;
   }
-
+@layer reset {
   #visualtest:target ~ *:not(main),
-  #visualtest:target ~ main > *:not(.visualtest) {
+  #visualtest:target ~ main > *:not(.visualtest,.visualtest--container) {
     display: none !important;
   }
+}
   @layer utilities {
     #visualtest:target ~ main > .d-none.visualtest {
       display: block !important;

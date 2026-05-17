@@ -1,0 +1,29 @@
+
+
+.spinner {
+
+  font-size: var(--spinner-size);
+
+  display: block;
+  margin-inline: auto;
+  position: relative;
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+  color: var(--colour-heading);
+
+  &:before {
+    font-family: var(--fa-family-classic);
+    content: '\f3f4';
+    position: absolute;
+    font-weight: 900;
+    color: var(--colour-heading);
+    animation: spin 1.5s infinite steps(10);
+    font-size: 1em;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: 1;
+
+    font-weight: normal;
+  }
+}

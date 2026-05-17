@@ -1,7 +1,7 @@
 export const generateThumbnailList = function (carouselComponent): any {
   const thumbnailImages = [];
 
-  Array.from(carouselComponent.querySelectorAll(':scope > div')).forEach((slide, index) => {
+  Array.from(carouselComponent.querySelectorAll(':scope > :is(div,iam-card)')).forEach((slide, index) => {
     if (slide.hasAttribute('data-thumbnail')) {
       thumbnailImages[index] = slide.getAttribute('data-thumbnail');
     }
@@ -11,7 +11,7 @@ export const generateThumbnailList = function (carouselComponent): any {
 };
 
 export const generatePipsHTML = function (carouselComponent, thumbnailImages): string {
-  const itemCount = carouselComponent.querySelectorAll(':scope > div').length;
+  const itemCount = carouselComponent.querySelectorAll(':scope > :is(div,iam-card)').length;
 
   let pips = '';
   for (let i = 1; i <= itemCount; i++) {
@@ -53,9 +53,9 @@ export const carousel = function (carouselComponent): void {
   const carouselInner = carouselElement.querySelector('.carousel__inner');
   const carouselControls = carouselElement.querySelector('.carousel__controls');
   const carouselProgress = carouselElement.querySelector('.carousel__progress [type="range"]');
-  const itemCount = carouselComponent.querySelectorAll(':scope > div').length;
+  const itemCount = carouselComponent.querySelectorAll(':scope > :is(div,iam-card)').length;
   let scrollArea = carouselInner.clientWidth;
-  let itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
+  let itemWidth = carouselComponent.querySelector(':scope > :is(div,iam-card)').scrollWidth;
   let visibleItems = Math.round(scrollArea / itemWidth);
 
   carouselProgress.setAttribute('min', 1);
@@ -90,8 +90,8 @@ export const carousel = function (carouselComponent): void {
         const scrollLeft = carouselInner.scrollLeft;
         let targetSlide = Math.round((scrollLeft / scrollWidth) * itemCount) + 1;
 
-        const itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
-        const lastItemOffset = carouselComponent.querySelector(':scope > div:last-child').offsetLeft;
+        const itemWidth = carouselComponent.querySelector(':scope > :is(div,iam-card)').scrollWidth;
+        const lastItemOffset = carouselComponent.querySelector(':scope > :is(div,iam-card):last-child').offsetLeft;
         //+60px here is to account for when the next offscreen slide is visible beneath the next arrow
         const lastItemInView =
           carouselInner.scrollLeft + scrollArea + carouselInner.getBoundingClientRect().left >= lastItemOffset + 60;
@@ -176,11 +176,11 @@ export const carousel = function (carouselComponent): void {
     function (e) {
       const scrollArea = carouselInner.clientWidth;
       //const scrollWidth = carouselInner.scrollWidth;
-      const itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
+      const itemWidth = carouselComponent.querySelector(':scope > :is(div,iam-card)').scrollWidth;
 
       const visibleItems = Math.round(scrollArea / itemWidth);
 
-      const lastItemOffset = carouselComponent.querySelector(':scope > div:last-child').offsetLeft;
+      const lastItemOffset = carouselComponent.querySelector(':scope > :is(div,iam-card):last-child').offsetLeft;
       const lastItemInView =
         carouselInner.scrollLeft + scrollArea + carouselInner.getBoundingClientRect().left >= lastItemOffset + 60;
 
@@ -229,7 +229,7 @@ export const carousel = function (carouselComponent): void {
     clearInterval(stepperInterval);
     stepperInterval = setInterval(function () {
       scrollArea = carouselInner.clientWidth;
-      itemWidth = carouselComponent.querySelector(':scope > div').scrollWidth;
+      itemWidth = carouselComponent.querySelector(':scope > :is(div,iam-card)').scrollWidth;
       visibleItems = Math.round(scrollArea / itemWidth);
       carouselProgress.setAttribute('step', visibleItems);
       progressMax = getProgressMax(itemCount, visibleItems);
@@ -269,5 +269,33 @@ export const carousel = function (carouselComponent): void {
     false
   );
 };
+
+export const updateCarousel = function (carouselComponent): void {
+
+  const carouselElement = carouselComponent.shadowRoot.querySelector('.carousel');
+  const carouselInner = carouselElement.querySelector('.carousel__inner');
+  const carouselControls = carouselElement.querySelector('.carousel__controls');
+  const carouselProgress = carouselElement.querySelector('.carousel__progress [type="range"]');
+  const itemCount = carouselComponent.querySelectorAll(':scope > :is(div,iam-card)').length;
+
+  let scrollArea = carouselInner.clientWidth;
+  let itemWidth = carouselComponent.querySelector(':scope > :is(div,iam-card)').scrollWidth;
+  let visibleItems = Math.round(scrollArea / itemWidth);
+
+  carouselProgress.setAttribute('min', 1);
+  carouselProgress.setAttribute('step', visibleItems);
+
+  let progressMax = getProgressMax(itemCount, visibleItems);
+
+  carouselProgress.setAttribute('max', progressMax);
+  carouselProgress.value = 1;
+
+  let percent = getProgressPercent(1, progressMax);
+
+  carouselProgress.style.setProperty('--percent', percent + '%');
+
+  carouselControls.innerHTML = generatePipsHTML(carouselComponent, []);
+
+}
 
 export default carousel;

@@ -21,6 +21,7 @@ class iamModal extends HTMLElement {
     ${loadCSS}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
+
     <dialog>
       ${closeButtonHtml}
       <div class="scroll">
@@ -49,27 +50,28 @@ class iamModal extends HTMLElement {
     const agreedButton = this.querySelector('button[slot="agreed-button"]') ? this.querySelector('button[slot="agreed-button"]') : this.shadowRoot?.querySelector('[data-agreed]');
     const modalType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'passive';
 
-    const agreed = () => {
+    const agreed = (close = true) => {
       const agreedEvent = new CustomEvent('agreed', {
         detail: { modalId: id },
       });
 
       this.dispatchEvent(agreedEvent);
 
-      closeModal(id, this);
+      if(!this.querySelector(':invalid') && close)
+        closeModal(this);
     }
 
     document.addEventListener('click', (e) => {
       
       if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
-        openModal(id, this);
+        openModal(this);
       }
     });
 
     document.addEventListener('click', (e) => {
       
       if(e.target.matches(`[command="close"][commandfor="${id}"]`)){
-        closeModal(id, this);
+        closeModal(this);
       }
     });
     
@@ -94,7 +96,7 @@ class iamModal extends HTMLElement {
 
       e.preventDefault();
 
-      closeModal(id, this);
+      closeModal(this);
     });
 
     // Move the submit button so that the slot functionality works
@@ -105,11 +107,11 @@ class iamModal extends HTMLElement {
     }
 
     closeButton?.addEventListener('click', () => {
-      closeModal(id, this);
+      closeModal(this);
     });
 
     cancelButton?.addEventListener('click', () => {
-      closeModal(id, this);
+      closeModal(this);
     });
 
     agreedButton?.addEventListener('click', () => {
@@ -119,7 +121,7 @@ class iamModal extends HTMLElement {
     
 
     this.addEventListener('close-modal', () => {
-      closeModal(id, this);
+      closeModal(this);
     });
 
     // Hijack the default form submission 
@@ -127,10 +129,10 @@ class iamModal extends HTMLElement {
 
       if(e.submitter && e.submitter.hasAttribute('formmethod') && e.submitter.getAttribute('formmethod') =="dialog"){
         
-        closeModal(id, this);
+        closeModal(this);
       }
       else {
-        agreed();
+        agreed(false);
       }
     });
 
@@ -164,13 +166,13 @@ class iamModal extends HTMLElement {
           event.clientY > dialogDimensions.bottom
         ) {
           if (!event.target.closest('dialog *'))
-            closeModal(id, this); // Weird bug when interacting with radio input fields within dialogs cuases it to close
+            closeModal(this); // Weird bug when interacting with radio input fields within dialogs cuases it to close
         }
       }
     });
 
 
-    if (modalType == 'transactional'){
+    if (modalType == 'transactional' || modalType == 'acknowledgement' ){
       this.shadowRoot?.querySelector('.scroll')?.insertAdjacentHTML('afterbegin',
         `<i class="fa-light fa-circle" aria-hidden="true">
           <i class="fa-regular fa-${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'info'}" aria-hidden="true"></i>

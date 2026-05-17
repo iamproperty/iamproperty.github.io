@@ -3,7 +3,6 @@
   import SelectionControl from '../selectionControls.vue';
   import headerImg from '../../img/type-header.png';
   import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
   import Tabs from '@/components/Tabs/Tabs.vue';
   import FilterCard from '@/components/FilterCard/FilterCard.vue';
 
@@ -310,7 +309,6 @@
             'radio'. The name attribute is required for the radio input field, this attribute should match other radio
             input fields in a radio button group.
           </p>
-          <Readme></Readme>
         </details>
       </Tabs>
     </div>

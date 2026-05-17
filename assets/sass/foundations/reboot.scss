@@ -12,13 +12,16 @@
   /* Reset & Defaults */
   html {
     --root-fs-px: 375;
-    -webkit-font-smoothing: antialiased; // Fix for Safari/iOS
+    -webkit-font-smoothing: antialiased; /*  Fix for Safari/iOS */
     height: 100%;
-    width: 100%;
+    width: 100svw;
     overflow-x: hidden;
     overflow-y: scroll;
     font-size: #{calc(calc(16 / var(--root-fs-px)) * 100vw)};
     scroll-padding-top: 6.25rem; /* 100 */
+
+    scrollbar-gutter: stable;
+    container-type: inline-size;
 
     @media screen and (min-width: 36em) {
       --root-fs-px: 768;
@@ -29,7 +32,7 @@
 
     
       @media (min-width: #{em(1280)}) {
-        //font-size: 100%;
+        /* font-size: 100%; */
         --root-fs-px: 1280;
 
         &:has(.nav--large) {
@@ -46,7 +49,7 @@
       }
 
       @media (min-width: #{em(1680)}) {
-        //font-size: 131.25%;
+        /* font-size: 131.25%; */
       }
 
       @media print {
@@ -54,7 +57,7 @@
       }
 
       @media screen and (min-width: 120em) {
-        // 1920
+        /*  1920 */
 
         &:has(.nav--large) {
           --root-fs-px: 1920;
@@ -65,20 +68,20 @@
   }
 
   body {
-    margin: 0; // 1
+    margin: 0; /*  1 */
     background: var(--colour-canvas);
     font-family: var(--font-body);
 
     width: 100%;
     line-height: 1.2;
     min-height: 100%;
-    -webkit-text-size-adjust: 100%; // 3
-    -webkit-tap-highlight-color: rgba(#000, 0); // 4
+    -webkit-text-size-adjust: 100%; /*  3 */
+    -webkit-tap-highlight-color: rgba(#000, 0); /*  4 */
 
     color: var(--colour-body);
   }
 
-  // #region scrollbars
+  /* #region scrollbars */
   :is(div, form, fieldset, textarea, details, iam-menu)::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -97,7 +100,7 @@
     border-left: 4px solid var(--colour-canvas-2);
   }
 
-  //#endregion
+  /* #endregion */
 
   body > footer,
   body > #app > footer {
@@ -140,7 +143,7 @@
     max-width: 100%;
   }
 
-  // Details reset
+  /*  Details reset */
   summary {
     list-style: none;
   }
@@ -159,9 +162,99 @@
   details {
     width: 100%;
   }
+  
+$columns: 12;
+  /* #region Main grid setup */
+  body {
+    --excess-space: calc((100% - var(--max-width)) / 2);
+    --col-size: calc(
+      (
+          100% - max(0%, var(--excess-space)) - max(0%, var(--excess-space)) - var(--gutter) - var(--gutter) - (var(--gap) * (#{$columns - 1}))
+        ) / #{$columns}
+    );
+    column-gap: var(--gap);
+    display: grid;
+    margin-inline: 0;
+    width: 100svw;
+    grid-template-rows: auto;
+    align-content: start;
+    justify-content: center;
+
+    $templateColumns: '';
+
+    @for $i from 1 to $columns {
+      $templateColumns: $templateColumns + 'var(--col-size) [col-' + $i + '-end col-'+ ($i + 1)+'-start] ';
+    }
+    grid-template-columns:
+      [full-width-start container-start] calc(var(--gutter) - var(--gap))
+      [content-start col-1-start]
+      #{$templateColumns}
+      var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
+      [container-end full-width-end];
+
+    @media screen and (min-width: 90em) {
+      grid-template-columns:
+        [full-width-start] calc(var(--excess-space) - var(--gap))
+        [container-start] calc(var(--gutter) - var(--gap))
+        [content-start col-1-start]
+        #{$templateColumns}
+        var(--col-size) [col-#{$columns}-end content-end] calc(var(--gutter) - var(--gap))
+        [container-end] calc(var(--excess-space) - var(--gap)) [full-width-end];
+    }
+
+    & * {
+      grid-column: content;
+
+      &:where(button):not(:has(.card)) {
+        max-width: fit-content;
+        place-self: start;
+      }
+
+      &:is(div) {
+        align-content: start;
+      }
+    }
+  }
+
+  div:has(main) {
+    display: contents !important;
+  }
+
+  :is(nav, main, footer) {
+    display: grid;
+    grid-column: full-width !important;
+    grid-template-columns: subgrid;
+  }
+
+  *:not(.row) > main:not(:has(.container:last-child)):not(:has(iam-collapsible-side:last-child)) {
+    padding-bottom: 1rem;
+  }
+
+  main > :is(.full-width, [class*='bg-']:has(.container), iam-header, iam-collapsible-side, iam-notification) {
+    grid-column: full-width!important;
+  }
+
+  [class*='bg-']:not([class*='col-']):has(.container) {
+    display: grid;
+    grid-column: full-width;
+    grid-template-columns: subgrid;
+  }
+  /* #endregion */
 }
 
 
 #app {
   display: contents;
 }
+
+
+/* #region Nav tweaks for standalone pages */
+
+nav:has(iam-std-nav-standalone) {
+  min-height: 8rem!important;
+}
+nav:has(iam-std-nav-standalone) iam-nav{
+  top: 2rem!important;
+}
+
+/* #endregion */

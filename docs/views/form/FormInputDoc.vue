@@ -4,7 +4,6 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/type-header.png';
   import Input from '@/components/Input/Input.vue';
-  import Readme from '@/components/Input/README.md';
   import Tabs from '@/components/Tabs/Tabs.vue';
   const message = 'input field value';
   const htmlUsage = `...`;
@@ -531,7 +530,6 @@
         </details>
         <details>
           <summary><h2>Vue component</h2></summary>
-          <Readme></Readme>
         </details>
       </Tabs>
     </div>

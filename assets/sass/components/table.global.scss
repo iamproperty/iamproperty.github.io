@@ -9,7 +9,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
 @use '../utilities/display' as *;
 
-// #region Tables are only stacked on mobile
+/* #region Tables are only stacked on mobile */
 :is(#{$selector}):not(.table--fullwidth).table--cta {
   @container (width < 23.4375em) {
     tbody tr td:last-child {
@@ -42,7 +42,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
   border-radius: 0;
 }
 
-// Actionbar
+/*  Actionbar */
 .actionbar__sticky-wrapper {
   container-type: inline-size;
 
@@ -78,7 +78,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     display: block;
     border: none;
     background: var(--colour-canvas-2);
-    //box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11);
+    /* box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.11); */
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;
   }
@@ -92,9 +92,9 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     margin-bottom: 2rem;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Table with actionbar
+/* #region Table with actionbar */
 
 :is(#{$selector}) {
   input:is([type='radio'], [type='checkbox']) + label:not(.radio--tick) {
@@ -171,9 +171,9 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Expandable tables
+/* #region Expandable tables */
 :is(#{$selector})[data-expandable] {
   td:has([data-expand-button]),
   .expand-button-heading {
@@ -200,7 +200,7 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       }
 
       &:before {
-        font-family: 'Font Awesome 7 Pro';
+        font-family: var(--fa-family-classic);
         content: '\f078';
         font-weight: 500;
       }
@@ -212,11 +212,15 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
       }
     }
 
-    tr:not(:has(p)) [data-expand-button] {
-      display: none;
+    tr:not(:has(p.three-lines)) [data-expand-button] {
+      display: none!important;
     }
 
-    tr:not([data-view='full']) td p {
+    tr td p:last-child {
+      padding-bottom: 0!important;
+    }
+
+    tr:not([data-view='full']):has(p.three-lines) td p {
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
@@ -225,9 +229,9 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region fixed columns
+/* #region fixed columns */
 :is(#{$selector}):not(.table--fullwidth) {
   @container (width < 23.4375em) {
     tr {
@@ -238,88 +242,89 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 }
+@layer components {
+  :is(#{$selector}) {
+    @container (width > 23.4375em) {
+      .th--fixed {
+        /*
+        &:after {
+          top: auto;
+          left: 0;
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: calc(var(--row-height) - 2px);
+          background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
+        }
+          */
+      }
 
-:is(#{$selector}) {
-  @container (width > 23.4375em) {
-    .th--fixed {
-      /*
-      &:after {
-        top: auto;
-        left: 0;
-        content: '';
+      .th--fixed,
+      .td--fixed {
         position: absolute;
-        width: 100%;
+        left: auto;
+        top: auto;
+        z-index: 3;
+        padding: 0 0 0 0;
+        min-width: 3.375rem;
         height: calc(var(--row-height) - 2px);
-        background: linear-gradient(90deg, var(--row-bg) calc(100% - 1.5rem), transparent 100%);
+        text-align: left;
+        background: var(--row-bg);
+
+        &:has([open]) {
+          z-index: 4;
+        }
       }
-        */
-    }
 
-    .th--fixed,
-    .td--fixed {
-      position: absolute;
-      left: auto;
-      top: auto;
-      z-index: 3;
-      padding: 0 0 0 0;
-      min-width: 3.375rem;
-      height: calc(var(--row-height) - 2px);
-      text-align: left;
-      background: var(--row-bg);
-
-      &:has([open]) {
-        z-index: 4;
+      .th--fixed:has(+ th:not(.th--fixed)),
+      .td--fixed:has(+ td:not(.td--fixed)) {
+        background: linear-gradient(90deg, var(--row-bg) calc(100% - 1rem), transparent 100%);
       }
-    }
 
-    .th--fixed:has(+ th:not(.th--fixed)),
-    .td--fixed:has(+ td:not(.td--fixed)) {
-      background: linear-gradient(90deg, var(--row-bg) calc(100% - 1rem), transparent 100%);
-    }
+      .th--fixed + th:not(.th--fixed),
+      .td--fixed + td:not(.td--fixed) {
+        padding-left: 3.375rem !important;
+      }
 
-    .th--fixed + th:not(.th--fixed),
-    .td--fixed + td:not(.td--fixed) {
-      padding-left: 3.375rem !important;
-    }
+      .th--fixed + .th--fixed,
+      .td--fixed + .td--fixed {
+        left: 3rem;
+      }
 
-    .th--fixed + .th--fixed,
-    .td--fixed + .td--fixed {
-      left: 3rem;
-    }
+      .th--fixed + .th--fixed + th:not(.th--fixed),
+      .td--fixed + .td--fixed + td:not(.td--fixed) {
+        padding-left: 6.375rem !important; /* 48 + 48 + 6 */
+      }
 
-    .th--fixed + .th--fixed + th:not(.th--fixed),
-    .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: 6.375rem !important; /* 48 + 48 + 6 */
-    }
+      .th--fixed + .th--fixed + .th--fixed,
+      .td--fixed + .td--fixed + .td--fixed {
+        left: 6rem; /* 48 + 48 */
+      }
 
-    .th--fixed + .th--fixed + .th--fixed,
-    .td--fixed + .td--fixed + .td--fixed {
-      left: 6rem; /* 48 + 48 */
-    }
+      .th--fixed + .th--fixed + .th--fixed + th:not(.th--fixed),
+      .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
+        padding-left: 9.375rem !important; /* 48 + 48 + 48 + 6 */
+      }
 
-    .th--fixed + .th--fixed + .th--fixed + th:not(.th--fixed),
-    .td--fixed + .td--fixed + .td--fixed + td:not(.td--fixed) {
-      padding-left: 9.375rem !important; /* 48 + 48 + 48 + 6 */
-    }
-
-    .dialog__wrapper {
-      z-index: 10;
-    }
-    .dialog__wrapper:has([open]) {
-      z-index: 20;
+      .dialog__wrapper {
+        z-index: 10;
+      }
+      .dialog__wrapper:has([open]) {
+        z-index: 20;
+      }
     }
   }
 }
-// #endregion
+/* #endregion */
 
-// #region
+/*  #region */
 :is(#{$selector})td:has(.dialog__wrapper) {
   padding-top: 0.25rem;
 }
 
-// #endregion
+/* #endregion */
 
-// #region sort by column header
+/* #region sort by column header */
 
 :is(#{$selector}) {
 
@@ -359,27 +364,27 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
 
 }
 
-// #endregion
+/* #endregion */
 
-// #region hide columns
+/* #region hide columns */
 @for $i from 1 through 30 {
   :is(#{$selector}) [data-hide-col#{$i}] + table :is(thead, tbody) :is(th, td):nth-child(#{$i}) {
     display: none;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region filters
+/* #region filters */
 :is(#{$selector}) .table--filtered tbody tr:not(.filtered--show) {
   display: none !important;
 }
 
 :is(#{$selector}) table:not(.table--filtered):not(.table--ajax) tbody tr:nth-child(15) ~ tr {
-  //display: none;
+  /* display: none; */
 }
-// #endregion
+/* #endregion */
 
-// #region max height tables
+/* #region max height tables */
 
 iam-table-basic:is(.mh-lg, .mh-md, .mh-sm) {
   thead {
@@ -395,4 +400,4 @@ iam-table-basic:is(.mh-lg, .mh-md, .mh-sm) {
   }
 }
 
-// #endregion
+/* #endregion */

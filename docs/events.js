@@ -314,3 +314,20 @@ export const videocard = `<table>
     </tr>
   </tbody>
 </table>`;
+
+export const advancedselect = `<table>
+  <thead>
+    <tr>
+      <th>Event</th>
+      <th>Dispatched</th>
+      <th>Details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>update-value</th>
+      <td>When a user selects a value from the advanced select</td>
+      <td>{ detail: { value: newVal } }</td>
+    </tr>
+  </tbody>
+</table>`;

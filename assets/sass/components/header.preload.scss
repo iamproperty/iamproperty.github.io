@@ -1,0 +1,26 @@
+iam-header {
+  --padding-top: 2.75rem;
+  --padding-bottom: 2rem;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+iam-header:not(:defined) {
+  
+  --colour-heading: var(--colour-white);
+  --colour-body: var(--colour-white);
+  --colour-underline: var(--colour-white);
+  color-scheme: dark;
+  color: var(--colour-white);
+  margin-left: auto;
+  margin-right: auto;
+  grid-column: full-width !important;
+  padding: var(--padding-top) var(--container-padding-x) var(--padding-bottom) var(--container-padding-x);
+  width: 100%;
+  max-width: var(--max-width);
+  background-color: var(--colour-primary-theme);
+
+  hr[slot="toolbox"] {
+    display: none!important;
+  }
+}

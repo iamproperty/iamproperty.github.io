@@ -106,8 +106,10 @@ class iamActionbar extends HTMLElement {
         <div class="search-wrapper" part="search">
           <label for="search" class="visually-hidden">Input field label</label>
           <button class="suffix" part="search-btn"><i class="fa-regular fa-search"></i></button>
-          <input type="text" id="search" name="search" required="" part="search-input">
-          <button class="empty btn btn-action"><i class="fa-light fa-times me-0" aria-hidden="true"></i></button>
+          <span class="input__wrapper mt-0">
+            <input type="text" id="search" name="search" required="" part="search-input">
+            <button class="clear-search btn btn-action"><i class="fa-light fa-times me-0" aria-hidden="true"></i></button>
+          </span>
         </div>
 
       </div>
@@ -282,7 +284,7 @@ class iamActionbar extends HTMLElement {
       }
     });
 
-    const clearBtn = searchBar.querySelector('.empty');
+    const clearBtn = searchBar.querySelector('.clear-search');
     const searchInput = searchBar.querySelector('#search');
 
     clearBtn.addEventListener('click', function (e) {

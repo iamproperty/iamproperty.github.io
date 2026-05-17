@@ -2,7 +2,7 @@
 @use 'charts.module' as *;
 @use '../elements/buttons' as *;
 
-// #region Bar chart (Horizontal)
+/* #region Bar chart (Horizontal) */
 :host(.chart--horizontal) .chart__outer {
   tbody {
     --chart-direction: 90deg;
@@ -52,7 +52,7 @@
     min-height: 1.5rem;
 
     td {
-      // part=value
+      /*  part=value */
 
       height: var(--bar-height, 1.5rem);
       bottom: 0;
@@ -64,7 +64,7 @@
     }
 
     td:first-child {
-      // part=xaxis-label
+      /*  part=xaxis-label */
       position: static;
       transform: none;
       display: block !important;
@@ -105,7 +105,7 @@
 
   .chart__wrapper[data-longest-label] table tbody tr td:first-child {
     position: absolute;
-    //transform: translate(-100%, -50%)!important;
+    /* transform: translate(-100%, -50%)!important; */
     display: block !important;
     max-height: 1.5rem;
     z-index: var(--index-above);
@@ -120,9 +120,9 @@
     display: none !important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region stacked
+/* #region stacked */
 :host(.chart--stacked) .chart__wrapper {
   table tbody tr {
     --bar-gap: 0;
@@ -157,9 +157,9 @@
     content: none;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region animation
+/* #region animation */
 
 #{'.chart--animate.animating.inview'} {
   --animation-left: 2s;
@@ -189,9 +189,9 @@
   }
 }
 
-// #endregion
+/* #endregion */
 
-// #region Display data modifier class
+/* #region Display data modifier class */
 :host(.chart--display-data) {
   table tbody tr {
     td:not(:first-child) {
@@ -200,7 +200,7 @@
 
         position: absolute;
         opacity: 1 !important;
-        //z-index: var(--index-above);
+        /* z-index: var(--index-above); */
         bottom: 100%;
         left: 50%;
 
@@ -240,7 +240,7 @@
     padding-top: 1rem;
   }
 }
-// #endregion
+/* #endregion */
 
 :host(.chart--fit-content:not(.chart--horizontal)) {
   width: 100%;
@@ -290,7 +290,7 @@
   }
 }
 
-// #region tooltip
+/* #region tooltip */
 button.tooltip {
   &:after {
     content: '?';
@@ -301,7 +301,7 @@ button.tooltip {
 }
 
 .tooltip__content[popover] {
-  //display: block;
+  /* display: block; */
   z-index: var(--index-floating);
   background: var(--colour-primary);
   color: var(--colour-white);
@@ -311,19 +311,19 @@ button.tooltip {
   box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.11);
 
   white-space: normal;
-  //transform: none;
-  //inset: auto;
+  /* transform: none; */
+  /* inset: auto; */
 
   position: fixed;
-  //inset-area: bottom center;
-  //position-area: bottom center;
+  /* inset-area: bottom center; */
+  /* position-area: bottom center; */
   border: none;
   margin: 0;
   box-sizing: border-box;
 
-  //top: anchor(bottom);
+  /* top: anchor(bottom); */
 
-  //left: anchor(center);
+  /* left: anchor(center); */
 
   inset-area: bottom center;
 
@@ -344,4 +344,4 @@ button.tooltip {
   }
 }
 
-// #endregion
+/* #endregion */

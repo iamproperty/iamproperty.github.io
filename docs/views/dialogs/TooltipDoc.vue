@@ -202,9 +202,9 @@
 
 
     <h4>Inline example</h4>
-    <p><Tooltip title="Lorem ipsum dolor sit amet,">Lorem</Tooltip> ipsum dolor sit amet, consectetur adipiscing elit, <Tooltip title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title">sed do incididunt</Tooltip> ut labore et dolore magna aliqua.</p>
+    <p><Tooltip title="Lorem ipsum dolor sit amet,"><i class="fa-solid fa-circle-info" slot="icon"></i></Tooltip> ipsum dolor sit amet, consectetur adipiscing elit, <Tooltip title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do incididunt ut labore et dolore magna aliqua." data-heading="Popover title">sed do incididunt</Tooltip> ut labore et dolore magna aliqua.</p>
     
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <Tooltip title="Ipsum has been the industry's standard dummy text ever since the 1500s,">Lorum Ipsum has been the industry's standard dummy text ever since the 1500s,</Tooltip> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <Tooltip data-type="info" title="Ipsum has been the industry's standard dummy text ever since the 1500s,">Lorum Ipsum has been the industry's standard dummy text ever since the 1500s,</Tooltip> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     
     
     
@@ -216,7 +216,7 @@
       <template #vue-component>
         <pre><code>{{`<script setup>import Tooltip from '@/components/Tooltip/Tooltip.vue</script>
 
-<p>Tooltip title="tooltip content">...</Tooltip></p>`}}</code></pre>
+<p><Tooltip title="tooltip content">...</Tooltip></p>`}}</code></pre>
       </template>
 
       <template #attr>

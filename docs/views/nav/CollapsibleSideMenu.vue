@@ -2,9 +2,6 @@
   import { ref } from 'vue';
 
   import DSHeader from '../DSHeader.vue';
-  import Readme from '@/components/CollapsibleSideMenu/README.md';
-  import WebReadme from '~/ts/components/collapsible-side/README.md';
-  import Tabs from '@/components/Tabs/Tabs.vue';
 
   import CollapsibleSideMenu from '@/components/CollapsibleSideMenu/CollapsibleSideMenu.vue';
 

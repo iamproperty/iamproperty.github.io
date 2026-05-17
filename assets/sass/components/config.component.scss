@@ -1,6 +1,6 @@
 @use '../_func' as *;
 
-@use '../_grid' as *;
+@use '../utilities/grid' as *;
 
 @use '../elements/forms' as *;
 @use '../elements/admin-panel' as *;
@@ -24,7 +24,7 @@
   display: block!important;
 }
 
-// #region enable icons
+/* #region enable icons */
 .fa-chevron-up {
   --fa: "\f077";
 }
@@ -58,9 +58,9 @@
     font-family: "Font Awesome 7 Pro";
   }
 }
-// #endregion
+/* #endregion */
 
-// #region basic structure
+/* #region basic structure */
 
 #wrapper {
   container-type: inline-size;
@@ -85,9 +85,9 @@
     display: block!important;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region buckets
+/* #region buckets */
 #buckets {
   
   display: block!important;
@@ -125,9 +125,9 @@
     padding: 0;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region item
+/* #region item */
 #items [data-bucket] {
   
   display: block;
@@ -174,9 +174,9 @@
     display: inline-block;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region criteria
+/* #region criteria */
 .criteria {
   display: flex;
   gap: 1rem;
@@ -198,11 +198,11 @@
     flex-grow: 0;
   }
 }
-// #endregion
+/* #endregion */
 
-// #region expand criteria
+/* #region expand criteria */
 .bucket__wrapper:not(.bucket--expanded) {
-  > label > span { // TODO add a selector if the input matches the only criteria item
+  > label > span { /*  TODO add a selector if the input matches the only criteria item */
     display: none;
   }
   .criteria {
@@ -219,9 +219,9 @@
     --fa: "\e0a6";
   }
 }
-// #endregion
+/* #endregion */
 
-// #region Disable top and bottom buttons
+/* #region Disable top and bottom buttons */
 
 #buckets .bucket__wrapper:first-child .btn__group [data-direction="up"],
 #buckets .bucket__wrapper:last-child .btn__group [data-direction="down"],
@@ -232,4 +232,4 @@
   pointer-events: none;
 }
 
-// #endregion
+/* #endregion */

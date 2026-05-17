@@ -281,6 +281,15 @@ const routes = [
         component: () => import('./views/elements/NonModalDoc.vue'),
         searchterms: 'passive, transactional, acknowledgement, popover',
       },
+      {
+        path: 'spinner',
+        name: 'Spinnner',
+        meta: {
+          title: 'Spinner | Elements | iamkey',
+        },
+        component: () => import('./views/elements/SpinnerDoc.vue'),
+        searchterms: 'loading',
+      },
     ],
   },
   {
@@ -562,12 +571,28 @@ const routes = [
         component: () => import('./views/components/AppliedFiltersDoc.vue'),
       },
       {
+        path: 'banner',
+        name: 'Banner',
+        meta: {
+          title: 'Banner | Components | iamkey',
+        },
+        component: () => import('./views/components/BannerDoc.vue'),
+      },
+      {
         path: 'bento-grid',
         name: 'Bento grid',
         meta: {
           title: 'Bento grid | Components | iamkey',
         },
         component: () => import('./views/components/BentoGridDoc.vue'),
+      },
+      {
+        path: 'button',
+        name: 'Button',
+        meta: {
+          title: 'Button | Components | iamkey',
+        },
+        component: () => import('./views/components/ButtonDoc.vue'),
       },
       {
         path: 'carousel',
@@ -747,6 +772,22 @@ const routes = [
           title: 'Config | Components | iamkey',
         },
         component: () => import('./views/components/ConfigDoc.vue'),
+      },
+      {
+        path: 'video',
+        name: 'Video (Beta)',
+        meta: {
+          title: 'Video | Components | iamkey',
+        },
+        component: () => import('./views/components/VideoDoc.vue'),
+      },
+      {
+        path: 'skeleton',
+        name: 'Skeleton (Beta)',
+        meta: {
+          title: 'Skeleton | Components | iamkey',
+        },
+        component: () => import('./views/components/SkeletonDoc.vue'),
       }
     ],
   },
@@ -1135,22 +1176,46 @@ const routes = [
     ],
   },
   {
+    /* Patterns */ path: '/patterns',
+    name: 'Patterns',
+    meta: {
+      title: 'Patterns | iamkey',
+    },
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "patterns" */ './views/Patterns.vue'),
+    children: [
+      {
+        name: 'patterns-index',
+        path: '',
+        component: () => import('./views/patterns/Index.vue'),
+      },
+      {
+        path: 'input-fields',
+        name: 'Input fields (Beta)',
+        meta: {
+          title: 'Input fields | Components | iamkey',
+        },
+        component: () => import('./views/patterns/InputsDoc.vue'),
+      },
+      {
+        path: 'loading-states',
+        name: 'Loading states (Beta)',
+        meta: {
+          title: 'Loading states| Components | iamkey',
+        },
+        component: () => import('./views/patterns/LoadingDoc.vue'),
+      },
+    ],
+  },
+  {
     path: '/launch',
     name: 'Launch list',
     meta: {
       title: 'Launch list | Components | iamkey',
     },
     component: () => import('./views/LaunchDoc.vue'),
-  },
-  {
-    path: '/get-started',
-    component: () => import('./views/GetStarted.vue'),
-    name: 'Get started',
-    meta: {
-      title: 'Get started | iamkey',
-    },
-    searchterms:
-      'npm, install, assets, static, sass, modules, vue, branch, commands, contributing, code, web server, develoment, unit tests, regression tests, workflow',
   },
   {
     path: '/audit-results',
@@ -1251,6 +1316,30 @@ const routes = [
         name: 'standalone-index',
         path: '',
         component: () => import('./views/standalone/Index.vue'),
+      },
+      {
+        path: 'hub',
+        name: 'iamproperty hub',
+        meta: {
+          title: 'iamproperty hub | iamkey',
+        },
+        component: () => import('./views/standalone/eco/Hub.vue'),
+      },
+      {
+        path: 'eco-product',
+        name: 'iamproperty hub product',
+        meta: {
+          title: 'iamproperty hub | iamkey',
+        },
+        component: () => import('./views/standalone/eco/product.vue'),
+      },
+      {
+        path: 'eco-product-standalone',
+        name: 'iamproperty hub product standalone',
+        meta: {
+          title: 'iamproperty hub | iamkey',
+        },
+        component: () => import('./views/standalone/eco/product-standalone.vue'),
       },
       {
         path: 'navbar',
@@ -1652,6 +1741,14 @@ const routes = [
               title: 'Premium conveyancing | iamkey',
             },
             component: () => import('./views/standalone/movebutler/refer-pc/no-alerts.vue'),
+          },
+          {
+            path: 'transaction-overview',
+            name: 'Transaction overview',
+            meta: {
+              title: 'Premium conveyancing | iamkey',
+            },
+            component: () => import('./views/standalone/movebutler/transaction-overview.vue'),
           },
         ],
       }

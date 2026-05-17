@@ -1,9 +1,11 @@
 @use '../_func' as *;
 @use '../elements/buttons';
 
+@use '../elements/dropdown';
+
 @use '../components/menu.global';
 
-// Main button
+/*  Main button */
 ::slotted(button:not([slot])) {
   float: left;
   margin-right: 0 !important;
@@ -13,7 +15,7 @@
   padding-right: 1rem !important;
 }
 
-// Secondary buttons
+/*  Secondary buttons */
 ::slotted(button[slot]) {
   background: none !important;
   display: block !important;
@@ -21,11 +23,11 @@
   border: none !important;
 }
 
-// Drop down button
+/*  Drop down button */
 .split-button {
   position: relative;
 
-  .dropdown {
+  .menu__wrapper {
     position: relative;
     display: inline-block;
 
@@ -57,7 +59,7 @@
   }
 }
 
-// Secondary button
+/*  Secondary button */
 .btn-secondary:not([disabled]) {
   &:hover,
   &:active,

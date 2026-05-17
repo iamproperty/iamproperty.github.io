@@ -1,4 +1,5 @@
 @use './modal.component';
+@use './video.component';
 
 @layer components {
   
@@ -7,6 +8,7 @@
     max-width: 50rem !important;
     padding: 0;
     aspect-ratio: 16 / 9;
+    overflow: hidden;
 
     &[open]::before {
       
@@ -17,9 +19,9 @@
 
       display: none;
     }
-  }
-  ::slotted(.embed) {
-    aspect-ratio: 16 / 9;
-    width: 100%;
+
+    .video-wrapper button {
+      display: none;
+    }
   }
 }

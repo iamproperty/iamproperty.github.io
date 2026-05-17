@@ -1,0 +1,130 @@
+@layer elements {
+  /* #region Sidebar link styling including parent group styling */
+  iam-collapsible-side {
+    > * {
+      padding-left: 1.5rem;
+
+      @media screen and (min-width: 36em) {
+        padding-left: 2.5rem;
+      }
+
+      @media screen and (min-width: 62em) {
+        padding-left: var(--container-padding-x);
+      }
+    }
+
+    hr {
+      border-bottom: 2px solid var(--colour-border) !important;
+      margin-right: -2.5rem !important;
+    }
+  }
+
+  .vertical-tabs [class*='link'],
+  iam-collapsible-side [class*='link'] {
+    display: block !important;
+    line-height: 1.25rem !important;
+    padding: 1rem 1.5rem 1rem 1.5rem !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+    font-size: 1rem !important;
+    font-weight: normal !important;
+    text-decoration: none !important;
+    border-bottom: 2px solid var(--colour-border) !important;
+    border-right: 2px solid var(--colour-border) !important;
+    margin-right: -2.5rem !important;
+    z-index: 2;
+
+    &::after {
+      display: none !important;
+    }
+
+    i {
+      /*  icon */
+      margin-right: 0.5rem !important;
+    }
+
+    @media screen and (min-width: 36em) {
+      padding-left: 1.5rem !important;
+    }
+
+    @media screen and (min-width: 62em) {
+      padding-left: var(--container-padding-x) !important;
+    }
+  }
+
+  .vertical-tabs a,
+  iam-collapsible-side a {
+    &:hover,
+    &:focus,
+    &[aria-expanded] {
+      background-color: var(--colour-activeLink) !important;
+    }
+  }
+
+  .vertical-tabs [class*='active'],
+  iam-collapsible-side [class*='active'] {
+    background-color: var(--colour-activeLink) !important;
+    border-right-color: var(--colour-activeLinkBorder) !important;
+    border-right-width: 3px !important;
+  }
+
+  /*  Parent links */
+  .vertical-tabs,
+  iam-collapsible-side {
+    .parent {
+      margin: 0 !important;
+      padding: 0 !important;
+      list-style: none;
+
+      li:first-of-type {
+        cursor: pointer;
+
+        a {
+          padding-right: 2.5rem !important;
+
+          &::before {
+            position: absolute;
+            display: block;
+            content: '\f055';
+            font-family: var(--fa-family-classic);
+            right: 20px;
+            font-weight: 300;
+          }
+        }
+      }
+
+      li:not(:first-of-type) {
+        display: none;
+
+        a {
+          background-color: var(--colour-light) !important;
+          padding-left: 5.625rem !important;
+        }
+      }
+
+      &.reveal {
+        li:first-of-type {
+          a::before {
+            content: '\f056';
+            font-weight: bold;
+          }
+        }
+
+        li:not(:first-of-type) {
+          display: block;
+        }
+      }
+    }
+
+    @media screen and (min-width: 36em) {
+      .parent {
+        li:not(:first-of-type) {
+          a {
+            padding-left: 5.625rem !important;
+          }
+        }
+      }
+    }
+  }
+  /* #endregion */
+}

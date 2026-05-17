@@ -18,29 +18,32 @@ class iamSearch extends HTMLElement {
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
 
+    const loadCSS = `@import "${assetLocation}/css/components/search.component.css";`;
+
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    input {
-      background: red;
-    }
-    input:not(.is-invalid):not(:invalid) {
-      background: none!important;
-    }
-    .optional-text {
-      display: none;
-    } 
-    .js-hide {
-      display: none !important;
-    }
+    ${loadCSS}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
-    <slot></slot>
+    <span class="wrapper"><span class="input__wrapper"><slot></slot></span><span class="suffix fa-regular fa-search"></span></span>
+    <slot name="datalist"></slot>
     `;
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
   async connectedCallback(): void {
+
+    // Make the datalist a dropdown
+    this.classList.add('dropdown__wrapper');
+
+    if(this.querySelector('input.input--sm'))
+      this.classList.add('hasInputSm');
+
+    
+    if(this.querySelector('label'))
+      this.classList.add('has-label');
+
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const searchWrapper = this;
     const inputField = this.querySelector('input');
@@ -76,16 +79,19 @@ class iamSearch extends HTMLElement {
       displayInputField.setAttribute('list', listID);
     }
 
+    displayInputField.addEventListener('change', function (e) {
+      inputField.value = displayInputField.value;
+    });
+
     advancedSelect(this, displayInputField, datalist, false);
 
 
-    function checkMatch(): void {
+    const checkMatch = (): void => {
       const match = datalist.querySelector(`option[value="${displayInputField.value}" i]`);
       const subMatch = datalist.querySelector(`option[value*="${displayInputField.value}" i]`);
 
       if (match) {
         inputField.value = match.getAttribute('data-actual-value');
-        console.log(inputField)
         displayInputField.value = match.getAttribute('data-actual-value');
 
         displayInputField.classList.remove('is-invalid');
@@ -94,7 +100,9 @@ class iamSearch extends HTMLElement {
       else if (displayInputField.value.length >= minLength && !subMatch) {
         displayInputField.classList.add('is-invalid');
         displayInputField.closest('label').setAttribute('data-error', 'No results returned');
-        datalist.innerHTML = '';
+
+        if(searchWrapper.hasAttribute('data-url'))
+          datalist.innerHTML = '';
       } 
       else {
         displayInputField.classList.remove('is-invalid');
@@ -105,6 +113,9 @@ class iamSearch extends HTMLElement {
     
     const search = async (searchterm): any => {
       
+      if(!this.getAttribute('data-url'))
+        return false;
+
       let ajaxURL = this.getAttribute('data-url');
       ajaxURL += `${encodeURI(searchterm)}`;
 
@@ -123,6 +134,7 @@ class iamSearch extends HTMLElement {
           signal: signal,
           method: 'get',
           credentials: 'same-origin',
+          mode: 'no-cors',
           headers: new Headers({
             'Content-Type': 'application/json',
             Accept: 'application/json',
@@ -200,7 +212,9 @@ class iamSearch extends HTMLElement {
 
     this.addEventListener('close-button-pressed', function (event) {
 
-      datalist.innerHTML = '';
+      if(searchWrapper.hasAttribute('data-url')) {
+        datalist.innerHTML = '';
+      }
       inputField?.value = '';
 
       searchWrapper.classList.remove('was-validated');
