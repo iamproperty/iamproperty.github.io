@@ -1,3 +1,6 @@
+import { verify } from 'node:crypto';
+import { stat } from 'node:fs';
+
 // @ts-nocheck
 const routes = [
   { name: 'Home', path: '/', component: () => import('./views/Home.vue') },
@@ -28,9 +31,10 @@ const routes = [
       },
       {
         path: 'accessibility',
-        name: 'Accessibility (Beta)',
+        name: 'Accessibility',
         meta: {
           title: 'Accessibility | Foundations | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/foundations/Accessibility.vue'),
         searchterms: 'wave, lighthouse',
@@ -39,7 +43,9 @@ const routes = [
         path: 'colours',
         name: 'Colours',
         meta: {
-          title: 'Colours | Foundations | iamkey',
+            title: 'Colours | Foundations | iamkey',
+            status: 'stable',
+            ver: '7.8.0',
         },
         component: () => import('./views/foundations/Colours.vue'),
         searchterms: 'light mode, dark mode, background, palette, slate, gradient, high contrast',
@@ -49,28 +55,10 @@ const routes = [
         name: 'Spacing and Layout',
         meta: {
           title: 'Spacing and Layout | Foundations | iamkey',
+          status: 'stable',
+          ver: '7.8.0',
         },
         component: () => import('./views/foundations/Spacing.vue'),
-        searchterms:
-          'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
-      },
-      {
-        path: 'grid',
-        name: 'Grid',
-        meta: {
-          title: 'Grid | Foundations | iamkey',
-        },
-        component: () => import('./views/foundations/Grid.vue'),
-        searchterms:
-          'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
-      },
-      {
-        path: 'greakpoints',
-        name: 'Breakpoints',
-        meta: {
-          title: 'Breakpoints and scaling | Foundations | iamkey',
-        },
-        component: () => import('./views/foundations/Breakpoints.vue'),
         searchterms:
           'grid, baseline, line heights, vertical rhythm, root, vertical, margin, padding, breakpoints, scaling',
       },
@@ -79,21 +67,13 @@ const routes = [
         name: 'Utility Classes',
         meta: {
           title: 'Utility Classes | Foundations | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/foundations/Utilities.vue'),
       },
       {
-        path: 'z-index',
-        name: 'Z-index (Beta)',
-        meta: {
-          title: 'Z-index | Foundations | iamkey',
-        },
-        component: () => import('./views/foundations/Zindex.vue'),
-        searchterms: 'below, base, focus, above, floating, menu, overlay',
-      },
-      {
         path: 'animation',
-        name: 'Animation (Beta)',
+        name: 'Animation',
         meta: {
           title: 'Animation | Foundations | iamkey',
         },
@@ -101,9 +81,10 @@ const routes = [
       },
       {
         path: 'dynamic-events',
-        name: 'Dynamic Events (Beta)',
+        name: 'Dynamic Events (alpha)',
         meta: {
           title: 'Dynamic Events | Foundations | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/foundations/DynamicEvents.vue'),
       },
@@ -123,9 +104,10 @@ const routes = [
       },
       {
         path: 'logos',
-        name: 'Logos (Beta)',
+        name: 'Logos (alpha)',
         meta: {
           title: 'Logos | Elements | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/elements/Logos.vue'),
         searchterms: 'brand, identity',
@@ -141,7 +123,7 @@ const routes = [
       },
       {
         path: 'media',
-        name: 'Media (Beta)',
+        name: 'Media (alpha)',
         meta: {
           title: 'Media | Elements | iamkey',
         },
@@ -162,13 +144,14 @@ const routes = [
         name: 'Typography',
         meta: {
           title: 'Typography | Elements | iamkey',
+          status: 'qa',
         },
         component: () => import('./views/elements/Type.vue'),
         searchterms: 'headings, body, lead, small, blockquote, stat',
       },
       {
         path: 'lists',
-        name: 'Lists (Beta)',
+        name: 'Lists',
         meta: {
           title: 'Lists | Elements | iamkey',
         },
@@ -185,9 +168,9 @@ const routes = [
       },
       {
         path: 'badges',
-        name: 'Badges (Beta)',
+        name: 'Badges (alpha)',
         meta: {
-          title: 'Badges (Beta) | Elements | iamkey',
+          title: 'Badges (alpha) | Elements | iamkey',
         },
         component: () => import('./views/elements/BadgesDoc.vue'),
       },
@@ -201,7 +184,7 @@ const routes = [
       },
       {
         path: 'progress',
-        name: 'Progress (BETA)',
+        name: 'Progress (alpha)',
         meta: {
           title: 'Progress | Elements | iamkey',
         },
@@ -210,7 +193,7 @@ const routes = [
       },
       {
         path: 'container',
-        name: 'Container (Beta)',
+        name: 'Container (alpha)',
         meta: {
           title: 'Container | Elemenets | iamkey',
         },
@@ -255,7 +238,7 @@ const routes = [
       },
       {
         path: 'details',
-        name: 'Details (BETA)',
+        name: 'Details (alpha)',
         meta: {
           title: 'Details | Elements | iamkey',
         },
@@ -320,7 +303,7 @@ const routes = [
       },
       {
         path: 'button-group',
-        name: 'Button group (beta)',
+        name: 'Button group (alpha)',
         meta: {
           title: 'Button group | Elements | iamkey',
         },
@@ -412,7 +395,7 @@ const routes = [
       },
       {
         path: 'toggle',
-        name: 'Form Toggle buttons (Beta)',
+        name: 'Form Toggle buttons (alpha)',
         meta: {
           title: 'Toggle buttons | Elements | iamkey',
         },
@@ -420,7 +403,7 @@ const routes = [
       },
       {
         path: 'file',
-        name: 'Form file upload fields (BETA)',
+        name: 'Form file upload fields (alpha)',
         meta: {
           title: 'Form file upload field | Elements | iamkey',
         },
@@ -525,6 +508,7 @@ const routes = [
         name: 'iamproperty address lookup',
         meta: {
           title: 'Address Lookup | Components | iamkey',
+          status: 'alpha',
         },
         component: () => import('./views/standardised/AddressLookupDoc.vue'),
         searchterms: 'postcode',
@@ -533,20 +517,19 @@ const routes = [
   },
   {
     /* Components */ path: '/components',
-    name: 'Components',
     meta: {
       title: 'Components | iamkey',
     },
     component: () => import('./views/Components.vue'),
     children: [
       {
-        name: 'components-index',
+        name: 'Components',
         path: '',
         component: () => import('./views/components/Index.vue'),
       },
       {
         path: 'accordion',
-        name: 'Accordion (Beta)',
+        name: 'Accordion (alpha)',
         meta: {
           title: 'Accordion | Components | iamkey',
         },
@@ -564,7 +547,7 @@ const routes = [
       },
       {
         path: 'applied-filters',
-        name: 'Applied Filters (Beta)',
+        name: 'Applied Filters (alpha)',
         meta: {
           title: 'Applied Filters | Components | iamkey',
         },
@@ -605,7 +588,7 @@ const routes = [
       },
       {
         path: 'calendar',
-        name: 'Calendar (Beta)',
+        name: 'Calendar (alpha)',
         meta: {
           title: 'Calendar | Components | iamkey',
         },
@@ -614,15 +597,16 @@ const routes = [
       },
       {
         path: 'charts',
-        name: 'Charts (Depreciated)',
+        name: 'Charts',
         meta: {
           title: 'Charts | Components | iamkey',
+          status: 'deprecated',
         },
         component: () => import('./views/components/ChartsDoc.vue'),
       },
       {
         path: 'content',
-        name: 'Content (Beta)',
+        name: 'Content (alpha)',
         meta: {
           title: 'Content | Components | iamkey',
         },
@@ -630,7 +614,7 @@ const routes = [
       },
       {
         path: 'dark-mode-switch',
-        name: 'Dark Mode Switch (BETA)',
+        name: 'Dark Mode Switch (alpha)',
         meta: {
           title: 'Dark Mode Switch | Components | iamkey',
         },
@@ -639,7 +623,7 @@ const routes = [
       },
       {
         path: 'filterlist',
-        name: 'Filter list (Beta)',
+        name: 'Filter list (alpha)',
         meta: {
           title: 'Filter list | Components | iamkey',
         },
@@ -648,7 +632,7 @@ const routes = [
       },
       {
         path: 'header',
-        name: 'Header (Beta)',
+        name: 'Header (alpha)',
         meta: {
           title: 'Header | Components | iamkey',
         },
@@ -660,7 +644,7 @@ const routes = [
         name: 'Menu',
         meta: {
           title: 'Menu | Components | iamkey',
-          beta: true,
+          alpha: true,
           standalone: true,
         },
         component: () => import('./views/components/MenuDoc.vue'),
@@ -675,7 +659,7 @@ const routes = [
       },
       {
         path: 'notefeed',
-        name: 'Note feed (Beta)',
+        name: 'Note feed (alpha)',
         meta: {
           title: 'Note feed | Components | iamkey',
         },
@@ -743,7 +727,7 @@ const routes = [
       },
       {
         path: 'testimonial',
-        name: 'Testimonial (Beta)',
+        name: 'Testimonial (alpha)',
         meta: {
           title: 'Testimonial | Components | iamkey',
         },
@@ -767,7 +751,7 @@ const routes = [
       },
       {
         path: 'config',
-        name: 'Config (Beta)',
+        name: 'Config (alpha)',
         meta: {
           title: 'Config | Components | iamkey',
         },
@@ -775,7 +759,7 @@ const routes = [
       },
       {
         path: 'video',
-        name: 'Video (Beta)',
+        name: 'Video (alpha)',
         meta: {
           title: 'Video | Components | iamkey',
         },
@@ -783,7 +767,7 @@ const routes = [
       },
       {
         path: 'skeleton',
-        name: 'Skeleton (Beta)',
+        name: 'Skeleton (alpha)',
         meta: {
           title: 'Skeleton | Components | iamkey',
         },
@@ -806,7 +790,7 @@ const routes = [
       },
       {
         path: 'form',
-        name: 'Form component (beta)',
+        name: 'Form component (alpha)',
         meta: {
           title: 'Form component | Components | iamkey',
         },
@@ -1135,7 +1119,7 @@ const routes = [
       },
       {
         path: 'form',
-        name: 'Form page Template (Beta)',
+        name: 'Form page Template (alpha)',
         meta: {
           title: 'Email Template | Components | iamkey',
         },
@@ -1143,7 +1127,7 @@ const routes = [
       },
       {
         path: 'auth',
-        name: 'Auth page Template (Beta)',
+        name: 'Auth page Template (alpha)',
         meta: {
           title: 'Auth Template | Components | iamkey',
         },
@@ -1187,13 +1171,13 @@ const routes = [
     component: () => import(/* webpackChunkName: "patterns" */ './views/Patterns.vue'),
     children: [
       {
-        name: 'patterns-index',
+        name: 'Patterns & templates',
         path: '',
         component: () => import('./views/patterns/Index.vue'),
       },
       {
         path: 'input-fields',
-        name: 'Input fields (Beta)',
+        name: 'Input fields (alpha)',
         meta: {
           title: 'Input fields | Components | iamkey',
         },
@@ -1201,7 +1185,7 @@ const routes = [
       },
       {
         path: 'loading-states',
-        name: 'Loading states (Beta)',
+        name: 'Loading states (alpha)',
         meta: {
           title: 'Loading states| Components | iamkey',
         },
@@ -1762,6 +1746,15 @@ const routes = [
       title: 'Data Layer | iamkey',
     },
     searchterms: 'Analytics, tracking',
+  },
+  {
+    path: '/browser-support',
+    component: () => import('./views/BrowserSupport.vue'),
+    name: 'Browser support',
+    meta: {
+      title: 'Browser Support | iamkey',
+    },
+    searchterms: 'browser support, compatibility, testing',
   },
   {
     path: '/:pathMatch(.*)*',

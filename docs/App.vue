@@ -5,7 +5,11 @@
 
   const version = pkg.version;
 
+import { useRoute } from 'vue-router'
   
+const route = useRoute();
+
+const elementSections = ['/links', '/form'];
   
 </script>
 
@@ -24,7 +28,7 @@
 
       <router-link to="/principles">Principles</router-link>
       <router-link to="/foundations">Foundations</router-link>
-      <router-link to="/elements">Elements</router-link>
+      <router-link to="/elements" :class="`${route.matched[0] && elementSections.includes(route.matched[0].path) ? 'router-link-active' : ''}`">Elements</router-link>
       <router-link to="/components">Components</router-link>
       <router-link to="/patterns">Patterns & templates</router-link>
 
@@ -80,6 +84,9 @@
         <li class="list-inline-item me-4 ms-0 mb-2">
           <router-link to="/data-layer">Data layer</router-link>
         </li>
+        <li class="list-inline-item me-4 ms-0 mb-2">
+          <router-link to="/browser-support">Browser support</router-link>
+        </li>
       </ul>
     </div>
     <DarkMode class="d-block mb-4"
@@ -116,11 +123,13 @@
 
   //@media screen and (max-width: 62em) {
   iam-nav > a.router-link-active:not([slot='logo']) {
-    text-decoration: underline;
-    text-underline-offset: 0.3em;
-    text-decoration-thickness: 2px;
+    text-decoration: underline!important;
+    text-underline-offset: 0.3em!important;
+    text-decoration-thickness: 2px!important;
     text-decoration-color: var(--colour-info) !important;
   }
+
+
   //}
 
   .nav {

@@ -1,7 +1,9 @@
 <script setup>
   import { onMounted } from 'vue';
-  import DSHeader from '../DSHeader.vue';
-  import headerImg from '../../img/type-header.png';
+import DSHeader from '../DSHeader.vue';
+import { useRoute } from 'vue-router'
+
+const route = useRoute();
   import backgroundsImg from '../../img/colour-backgrounds.png';
   import Tabs from '../../../src/components/Tabs/Tabs.vue';
   import Tab from '../../../src/components/Tabs/Tab.vue';
@@ -9,6 +11,8 @@
   import UserColours from '../UserColours.vue';
   import DarkMode from '../../../src/components/DarkMode/DarkMode.vue';
 
+  import Integration from '../Integration.vue';
+  import Versions from '../Versions.vue';
 
   let userTheme = 'light-theme';
   let checked = false;
@@ -62,9 +66,7 @@
 
 <template>
   <main>
-    <DSHeader :image="headerImg">
-      <h1>Colour</h1>
-    </DSHeader>
+    <DSHeader :route="route"></DSHeader>
 
     <DarkMode><label class="toggle"><input type="checkbox" name="dark-mode" />Dark mode</label></DarkMode>
 
@@ -620,9 +622,10 @@
     </div>
 
 
-<div :class="`container visualtest pb-5 ${(target == 'visualtest9' ? 'target' : '')}`">
-    <UserColours></UserColours>
-</div>
+    <div :class="`container visualtest pb-5 ${(target == 'visualtest9' ? 'target' : '')}`">
+        <UserColours></UserColours>
+    </div>
+
     <div class="bg-light version-control">
       <div class="container ct-inline">
         <table>
@@ -653,6 +656,7 @@
         <a href="/pdfs/colour-dark-mode.pdf" download>Download dark mode colours</a>
       </div>
     </div>
+
   </main>
 </template>
 

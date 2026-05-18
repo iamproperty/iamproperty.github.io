@@ -119,6 +119,7 @@
     </details>
     <details v-if="showTest">
       <summary><h3>Test</h3></summary>
+
       <h4 v-if="slots['criteria']">Acceptance criteria</h4>
       <slot name="criteria"></slot>
 
