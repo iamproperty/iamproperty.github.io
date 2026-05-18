@@ -11,39 +11,33 @@
       <tbody>
         <tr>
           <th>Browser</th>
-          <th>OS</th>
+          <th>Version</th>
           <th>Worldwide Usage</th>
           <th>Support</th>
         </tr>
         <tr>
           <td>Chrome</td>
-          <td>Windows and macOS</td>
+          <td>147</td>
           <td>73.89%</td>
           <td>Full support at latest version, partial support at older versions</td>
         </tr>
         <tr>
           <td>Edge</td>
-          <td>Windows</td>
+          <td>147</td>
           <td>10.46%</td>
           <td>Full support at latest version, partial support at older versions</td>
         </tr>
         <tr>
-          <td>Safari</td>
-          <td>macOS</td>
+          <td>Safari (macOS only)</td>
+          <td>26.0</td>
           <td>5.81%</td>
           <td>Full support at latest version, partial support at older versions</td>
         </tr>
         <tr>
           <td>Firefox</td>
-          <td>Windows</td>
+          <td>150</td>
           <td>4.25%</td>
           <td>Partial support at latest version, minimal support at older versions<br/><br/>Firefox has not kept upto date with recent web standards so some features may have been built with progressive enhancement in mind.</td> 
-        </tr>
-        <tr>
-          <td>Opera</td>
-          <td>Windows</td>
-          <td>2.26%</td>
-          <td>Minimal support</td> 
         </tr>
       </tbody>
     </table>
