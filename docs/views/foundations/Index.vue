@@ -1,5 +1,5 @@
 <script setup>
-  import IndexCard from '../indexCard.vue';
+  import IndexCard from '../IndexCard.vue';
   import routes from '../../routes.ts';
   import Key from '../key.vue';
 
@@ -8,7 +8,7 @@ import { useRoute } from 'vue-router'
 
 const route = useRoute();
 
-  import {generateList} from '../../utils/IndexPage.ts';
+  import {generateList} from '../../utils/indexPage.ts';
 
   const foundations = generateList(routes, '/foundations');
 </script>

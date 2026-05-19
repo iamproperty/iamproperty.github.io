@@ -1,5 +1,5 @@
 <script setup>
-  import IndexCard from '../indexCard.vue';
+  import IndexCard from '../IndexCard.vue';
   import routes from '../../routes.ts';
   import Key from '../key.vue';
 
@@ -7,7 +7,7 @@ import DSHeader from '../DSHeader.vue';
 import { useRoute } from 'vue-router'
 
 const route = useRoute();
-  import {generateList} from '../../utils/IndexPage.ts';
+  import {generateList} from '../../utils/indexPage.ts';
 
   const standardisedcomponents = generateList(routes, '/standardised');
   const components = generateList(routes, '/components');
