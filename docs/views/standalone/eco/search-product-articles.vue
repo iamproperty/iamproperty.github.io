@@ -39,7 +39,7 @@ const openLink = (event: Event):void => {
 </script>
 
 <template>
-<form method="get" action="https://helpcentre.iamproperty.com/hc/en-gb/search" target="_blank">
+<form method="get" action="https://helpcentre.iamproperty.com/hc/en-gb/search">
 
   <label>
     <span class="visually-hidden">Search existing transactions</span>

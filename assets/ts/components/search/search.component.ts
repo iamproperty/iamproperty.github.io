@@ -51,9 +51,9 @@ class iamSearch extends HTMLElement {
     const displaySchema = this.hasAttribute('data-display-schema') ? this.getAttribute('data-display-schema') : 'label';
     const loopSchema = this.hasAttribute('data-schema') ? this.getAttribute('data-schema') : '';
     let datalist = this.querySelector('datalist');
-    let minLength = 0;
+    let minLength = this.hasAttribute('data-min-length') ? this.getAttribute('data-min-length') : 0;
 
-    if (searchWrapper.hasAttribute('data-url')) {
+    if (searchWrapper.hasAttribute('data-url') && !this.hasAttribute('data-min-length')) {
 
       minLength = 3;
     }

@@ -1,5 +1,5 @@
 <script setup>
-  import IndexCard from '../IndexCard.vue';
+  import IndexCard from '../indexCard.vue';
   import routes from '../../routes.ts';
   import Key from '../key.vue';
 
