@@ -52,18 +52,16 @@
       --fa: '\f06a';
       --tick-colour: var(--colour-danger);
     }
+    .tick--question {
+      --fa: '\f059';
+      --tick-colour: var(--colour-info);
+    }
 
-    .tick--incomplete:before {
-      font-family: var(--fa-family-classic);
-      background: var(--colour-admin);
-      mask-image: none;
-      -webkit-mask-image: none;
-      border-radius: 50%;
-      transform: scale(0.8);
+    .tick--incomplete {
+      
+      --tick-colour: var(--colour-border);
     }
-    .tick--incomplete:after {
-      display: none;
-    }
+    
     .tick--loading:before {
       font-family: var(--fa-family-classic);
       content: '\f3f4';

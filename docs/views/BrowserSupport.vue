@@ -54,7 +54,7 @@
         </tr>
         <tr>
           <td>Chrome</td>
-          <td>Windows 11</td>
+          <td>Pixel 10</td>
           <td>66.33%</td>
           <td>Full support at latest version, partial support at older versions</td>
         </tr>
