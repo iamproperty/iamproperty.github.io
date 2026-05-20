@@ -33,10 +33,8 @@ const checkAccount = ref({
   outcodes: false,
 })
 
-const data = ref({
-  competitors: null,
-  charts: null
-});
+const competitors = ref();
+const charts = ref();
 
 
 setTimeout(() => {
@@ -72,8 +70,9 @@ function agreeTerms(): void {
   checkAccount.value.agreedTerms = true;
 }
 
-const getCharts = async ():Promise<void> => {
+const getCharts = async (outcodes, returnCharts = true):Promise<void> => {
   
+
   const ajaxURL = '/competitor-analysis.json';
 
   // Setup controller vars if not already set
@@ -86,6 +85,7 @@ const getCharts = async ():Promise<void> => {
   window.controller[ajaxURL] = new AbortController();
   const { signal } = window.controller[ajaxURL];
 
+  // TODO: turn into a post and pass through outcodes
   try {
     const response = await fetch(ajaxURL, {
       signal,
@@ -96,7 +96,10 @@ const getCharts = async ():Promise<void> => {
     });
 
     const json = await response.json();
-    data.value = json.data.attributes;
+    competitors.value = json.data.attributes.competitors;
+
+    if(returnCharts)
+      charts.value = json.data.attributes.charts;
 
   } catch (error) {
     checkAccount.value.connected = false;
@@ -104,11 +107,18 @@ const getCharts = async ():Promise<void> => {
 
 }
 
-function saveCompetitors(): void {
-  console.log('hitting save competitors');
-  // Save the selected competitors to the user account and update the charts based on the new competitors
-  checkAccount.value.outcodes = 'NE1, NE2, NE3';
-  getCharts();
+function saveCompetitors(event): void {
+  
+  // #region save outcodes
+  const multiselectElement = document.querySelector('#competitor-list iam-multiselect');
+  checkAccount.value.outcodes = Array.from(multiselectElement.querySelectorAll('input:checked')).map(x => x.value);
+  // #endregion
+
+  // #region save competitiors choice
+
+  // #endregion
+
+  getCharts(checkAccount.value.outcodes);
 }
 
 function onOutcodeChange(event): void {
@@ -116,8 +126,8 @@ function onOutcodeChange(event): void {
   
   // pass through the outcodes and get new competitor data based on the outcodes
 
-  checkAccount.value.outcodes = 'NE1, NE2, NE3';
-  getCharts();
+  const multiselectElement = event.target.closest('iam-multiselect');
+  getCharts(Array.from(multiselectElement.querySelectorAll('input:checked')).map(x => x.value), false);
 }
 </script>
 <template>
@@ -166,7 +176,6 @@ function onOutcodeChange(event): void {
         </Content>
         
         
-        
         <div class="btn__group mb-1">
           <a href="https://iampropertyinternal.zendesk.com/hc/en-gb" target="_blank" class="btn btn-primary">View FAQ articles</a>
           <a href="https://iampropertyinternal.zendesk.com/hc/en-gb/requests/new" target="_blank" class="btn btn-secondary">Submit a request</a>
@@ -178,7 +187,7 @@ function onOutcodeChange(event): void {
         
         <div class="d-flex">
           <p class="lead me-auto pe-2">Competitor analysis</p>
-          <button id="customise-btn" ref="customiseBtn" class="btn btn-action fa-cog" type="button" command="show-modal" commandfor="competitor-list" :disabled="!checkAccount.connected && !checkAccount.agreedTerms">Customise</button>
+          <button id="customise-btn" ref="customiseBtn" class="btn btn-action fa-cog" type="button" command="show-modal" commandfor="competitor-list" :disabled="!checkAccount.connected || !checkAccount.agreedTerms || !checkAccount.outcodes">Customise</button>
         </div>
 
         <div v-if="!checkAccount.connected || !checkAccount.agreedTerms" class="mb-2">
@@ -219,11 +228,9 @@ function onOutcodeChange(event): void {
           <button class="btn btn-secondary" command="show-modal" commandfor="competitor-list">Enter outcode</button>
         </div>
 
-
-
-        <p v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes">Outcode area: {{ checkAccount.outcodes }}</p>
-        <Tabs v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes && data.charts" class="tabs--toggle-tags">
-          <Tab v-for="chart in data.charts" :key="chart.name" :title="chart.name" >
+        <p v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes">Outcode area: <span v-for="outcode in checkAccount.outcodes" :key="outcode">{{ outcode }}</span></p>
+        <Tabs v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes && charts" class="tabs--toggle-tags">
+          <Tab v-for="chart in charts" :key="chart.name" :title="chart.name" >
             
             <Doughnutchart class="chart--lg chart--horizontal">
               <table>

@@ -13,33 +13,27 @@
       "competitors": [
         {
           "name": "Agent & co",
-          "location": "location",
-          "selected": true
+          "location": "location"
         },
         {
           "name": "Purplebricks",
-          "location": "location",
-          "selected": true
+          "location": "location"
         },
         {
           "name": "Your Move",
-          "location": "location",
-          "selected": true
+          "location": "location"
         },
         {
           "name": "Reeds Rains",
-          "location": "location",
-          "selected": true
+          "location": "location"
         },
         {
           "name": "Rightmove",
-          "location": "location",
-          "selected": false
+          "location": "location"
         },
         {
           "name": "Other",
-          "location": "location",
-          "selected": true
+          "location": "location"
         }
       ],
       "charts": [

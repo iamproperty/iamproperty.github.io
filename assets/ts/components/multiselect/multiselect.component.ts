@@ -97,6 +97,7 @@ class iamMultiselect extends HTMLElement {
 
     // Set the correct attributes
     function setItem(inputToSet): void {
+
       if (inputToSet.checked == false) {
         inputToSet.closest('label').removeAttribute('slot');
         inputToSet.closest('label').removeAttribute('style');
@@ -279,7 +280,25 @@ class iamMultiselect extends HTMLElement {
             else activeElement.checked = false;
           }
 
-          setItem(activeElement);
+          console.log(search);
+
+          if (activeElement.getAttribute('type') != 'checkbox') {
+            if (multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`)) {
+              multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`).checked = true;
+
+              setItem(multiselect.querySelector(`input[type="checkbox"][value="${search.value}" i]`));
+            }
+            search.value = '';
+
+            Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
+              setItem(checkbox);
+            });
+          }
+          else {
+            
+            setItem(activeElement);
+          }
+
           search.focus();
 
           break;
