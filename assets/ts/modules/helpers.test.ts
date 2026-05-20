@@ -1,4 +1,4 @@
-import {describe, it, expect} from './test.ts';
+import {describe, it, expect} from './test.js';
 import {
   getSwipeDirection,
   isNumeric,
@@ -12,8 +12,8 @@ import {
   ucwords,
   unsnake,
   zeroPad,
-} from './helpers.ts';
-import { installTestDom } from './test-dom.ts';
+} from './helpers.js';
+import { installTestDom } from './test-dom.js';
 
 describe("MathUtils Tests", function () {
   it('should pass', function() {
