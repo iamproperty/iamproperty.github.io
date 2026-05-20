@@ -42,12 +42,6 @@ const route = useRoute();
             <IndexCard :item="item" />
           </a>
       </div>
-      <h2>UI Components</h2>
-      <div class="sub-grid mb-5">
-          <a :href="item.link" v-for="item in components" class="md-col-span-4 col-start-auto">
-            <IndexCard :item="item" />
-          </a>
-      </div>
 
       <h2>Form components</h2>
 
