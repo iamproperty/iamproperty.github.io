@@ -107,6 +107,8 @@
   font-weight: normal !important;
   font-size: var(--card-body-fs, 1rem) !important;
   line-height: var(--card-body-lh, inherit) !important;
+  overflow-x: clip;
+  text-overflow: ellipsis;
 }
 ::slotted(small) {
   padding-top: var(--card-gap, 1rem) !important;
