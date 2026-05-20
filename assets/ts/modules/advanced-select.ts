@@ -7,8 +7,12 @@ function advancedSelect(advancedSelect, displayInputField, datalist, isSearch = 
 
   if(advancedSelect.querySelector('.suffix')){
     advancedSelect.querySelector('.suffix')?.setAttribute('slot','suffix');
-    advancedSelect.shadowRoot.querySelector('.suffix')?.innerHTML = '<slot name="suffix"></slot>';
-    advancedSelect.shadowRoot.querySelector('.suffix')?.classList = "";
+
+    const shadowSuffix = advancedSelect.shadowRoot.querySelector('.suffix');
+    if (shadowSuffix) {
+      shadowSuffix.innerHTML = '<slot name="suffix"></slot>';
+      shadowSuffix.className = '';
+    }
   }
 
 

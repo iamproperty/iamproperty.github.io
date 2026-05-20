@@ -1,11 +1,72 @@
 import {describe, it, expect} from './test.ts';
-import { isValidPostcode } from './helpers.ts';
+import {
+  getSwipeDirection,
+  isNumeric,
+  isTraversable,
+  isValidPostcode,
+  numberOfDays,
+  resolvePath,
+  safeID,
+  snake,
+  ucfirst,
+  ucwords,
+  unsnake,
+  zeroPad,
+} from './helpers.ts';
+import { installTestDom } from './test-dom.ts';
 
 describe("MathUtils Tests", function () {
   it('should pass', function() {
     expect(1 === 1);
   });
 
+});
+
+describe('The general helper functions', () => {
+  installTestDom();
+
+  it('should identify numeric strings only', () => {
+    expect(isNumeric('12.5'));
+    expect(!isNumeric(''));
+    expect(!isNumeric('abc'));
+    expect(!isNumeric(12));
+  });
+
+  it('should format simple string values', () => {
+    expect(zeroPad(7, 3) === '007');
+    expect(ucfirst('hello') === 'Hello');
+    expect(ucwords('hello world') === 'Hello World');
+    expect(unsnake('hello_world') === 'hello world');
+    expect(snake('hello world') === 'hello_world');
+    expect(safeID('Hello world!') === 'hello_world');
+  });
+
+  it('should count inclusive date ranges', () => {
+    expect(numberOfDays('01/01/2026', '03/01/2026') === 3);
+  });
+
+  it('should resolve nested object paths', () => {
+    const data = { user: { name: 'Ada', roles: ['admin'] } };
+
+    expect(resolvePath(data, 'user.name', '') === 'Ada');
+    expect(resolvePath(data, 'user.roles[0]', '') === 'admin');
+    expect(resolvePath(data, 'account.name', 'fallback') === 'fallback');
+  });
+
+  it('should identify traversable values', () => {
+    expect(isTraversable([]));
+    expect(isTraversable({}));
+    expect(!isTraversable(null));
+    expect(!isTraversable('value'));
+  });
+
+  it('should detect swipe direction', () => {
+    expect(getSwipeDirection(100, 100, 20, 100) === 'left');
+    expect(getSwipeDirection(100, 100, 180, 100) === 'right');
+    expect(getSwipeDirection(100, 100, 100, 20) === 'top');
+    expect(getSwipeDirection(100, 100, 100, 180) === 'bottom');
+    expect(getSwipeDirection(100, 100, 101, 101) === 'tap');
+  });
 });
 
 

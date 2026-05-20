@@ -34,7 +34,8 @@ export const setupCard = (cardComponent: any): void => {
         `<div class="card__total">${cardComponent.getAttribute('data-total')}</div>`
       );
     else {
-      cardBody?.querySelector('.card__total')?.innerHTML = cardComponent.getAttribute('data-total');
+      const cardTotal = cardBody?.querySelector('.card__total');
+      if (cardTotal) cardTotal.innerHTML = cardComponent.getAttribute('data-total');
     }
   } else if (cardComponent.querySelector('[slot="total-icon"]')) {
     cardBody.insertAdjacentHTML('beforeend', `<div class="card__total"><slot name="total-icon"></slot></div>`);
