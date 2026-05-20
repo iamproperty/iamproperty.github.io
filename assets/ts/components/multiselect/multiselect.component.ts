@@ -55,6 +55,8 @@ class iamMultiselect extends HTMLElement {
     const ajaxURL = this.getAttribute('data-url');
     innerLabel.innerHTML = multiselect.getAttribute('data-label');
 
+    const minLength = this.hasAttribute('data-min') ? this.getAttribute('data-min') : 3;
+
     // Make sure the dropdown options are set
     Array.from(this.querySelectorAll(':scope > label')).forEach((label) => {
       label.classList.add('dropdown__option');
@@ -127,6 +129,7 @@ class iamMultiselect extends HTMLElement {
       }
     }
 
+
     // Set on load
     Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]:checked`)).forEach((checkbox) => {
       setItem(checkbox);
@@ -134,11 +137,9 @@ class iamMultiselect extends HTMLElement {
 
     search.addEventListener('input', () => {
 
-      if (multiselect.hasAttribute('data-url')) {
+      if (multiselect.hasAttribute('data-url') && search.value.length == minLength) {
       
-        if (search.value.length == 3) {
-          searchAjax(multiselect, search, filterList);
-        }
+        searchAjax(multiselect, search, filterList);
       } else {
           
         filterList(multiselect, search);

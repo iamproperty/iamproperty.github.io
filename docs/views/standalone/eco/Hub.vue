@@ -269,7 +269,7 @@ function onOutcodeChange(event): void {
       <p>Update the competitors you see within your the sales insights widget.</p>
 
       
-      <Multiselect data-label="Search outcodes" data-tooltip="Tooltip text" data-name="users" data-url="/outcodes.json?search=" @change="onOutcodeChange"></Multiselect>
+      <Multiselect data-label="Search outcodes" data-tooltip="Tooltip text" data-name="users" data-url="/outcodes.json?search=" data-min="1" @change="onOutcodeChange"></Multiselect>
 
       <p class="pt-4">Select up to 10 competitors you want to compare against.</p>
       <div class="text-center">
