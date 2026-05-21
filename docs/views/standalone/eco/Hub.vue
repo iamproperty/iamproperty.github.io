@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { createApp, ref } from 'vue';
+import { createApp, ref, onMounted } from 'vue';
 
 import SearchLearningArticles from './search-learning-articles.vue';
 
@@ -25,21 +25,30 @@ import Notification from '@/components/Notification/Notification.vue';
 import Multiselect from '@/components/Multiselect/Multiselect.vue';
 import BannerImg from './Banner.png';
 
-
+// todo load from api call
 const checkAccount = ref({
 
   connected: false,
   agreedTerms: false,
   outcodes: false,
+  selectedCompetitors: false
 })
 
 const competitors = ref();
 const charts = ref();
 
 
-setTimeout(() => {
-  checkAccount.value.connected = true; // TODO: load from an api call
-}, 1000);
+
+onMounted(async() => {
+
+  getCompetitors(checkAccount.value.outcodes);
+
+  setTimeout(() => {
+    checkAccount.value.connected = true; // TODO: load from an api call
+  }, 1000);
+});
+
+
 
 
 function addLearningSearch(event): void {
@@ -70,8 +79,13 @@ function agreeTerms(): void {
   checkAccount.value.agreedTerms = true;
 }
 
-const getCharts = async (outcodes, returnCharts = true):Promise<void> => {
+const getCompetitors = async (outcodes):Promise<void> => {
   
+
+  if(!outcodes)
+    return false;
+
+  console.log(outcodes);
 
   const ajaxURL = '/competitor-analysis.json';
 
@@ -96,15 +110,21 @@ const getCharts = async (outcodes, returnCharts = true):Promise<void> => {
     });
 
     const json = await response.json();
-    competitors.value = json.data.attributes.competitors;
 
-    if(returnCharts)
-      charts.value = json.data.attributes.charts;
+    competitors.value = json.data;
+    
+    //if(returnCharts)
+      //createChartData(json.data.attributes.competitors);
 
   } catch (error) {
     checkAccount.value.connected = false;
   }
 
+}
+
+const createChartData = (competitorsData):void => {
+  //competitors.value = competitorsData
+  //console.log(competitors);
 }
 
 function saveCompetitors(event): void {
@@ -115,19 +135,21 @@ function saveCompetitors(event): void {
   // #endregion
 
   // #region save competitiors choice
-
+  const selectedCompetitorsFieldset = document.querySelector('#selected-competitors');
+  checkAccount.selectedCompetitors = Array.from(selectedCompetitorsFieldset.querySelectorAll('input:checked')).map(x => x.value);
   // #endregion
 
-  getCharts(checkAccount.value.outcodes);
+  //getCompetitors(checkAccount.value.outcodes);
+
 }
 
 function onOutcodeChange(event): void {
-  console.log('outcode change', event);
+  //console.log('outcode change', event);
   
   // pass through the outcodes and get new competitor data based on the outcodes
 
   const multiselectElement = event.target.closest('iam-multiselect');
-  getCharts(Array.from(multiselectElement.querySelectorAll('input:checked')).map(x => x.value), false);
+  getCompetitors(Array.from(multiselectElement.querySelectorAll('input:checked')).map(x => x.value));
 }
 </script>
 <template>
@@ -229,6 +251,9 @@ function onOutcodeChange(event): void {
         </div>
 
         <p v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes">Outcode area: <span v-for="outcode in checkAccount.outcodes" :key="outcode">{{ outcode }}</span></p>
+
+        <span v-for="competitor in checkAccount.selectedCompetitors" :key="competitor.name">{{ competitor.name }}</span>
+
         <Tabs v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes && charts" class="tabs--toggle-tags">
           <Tab v-for="chart in charts" :key="chart.name" :title="chart.name" >
             
@@ -270,7 +295,7 @@ function onOutcodeChange(event): void {
 
   </main>
     
-  <Modal >
+  <Modal>
     <dialog id="competitor-list" aria-labelledby="competitor-list-title">
       <h3 id="competitor-list-title">Customise your competitor list</h3>
       <p>Update the competitors you see within your the sales insights widget.</p>
@@ -279,10 +304,15 @@ function onOutcodeChange(event): void {
       <Multiselect data-label="Search outcodes" data-tooltip="Tooltip text" data-name="users" data-url="/outcodes.json?search=" data-min="1" @change="onOutcodeChange"></Multiselect>
 
       <p class="pt-4">Select up to 10 competitors you want to compare against.</p>
-      <div class="text-center">
+      <div v-if="!competitors" class="text-center" >
         <p class="lead">No competitors available</p>
         <p>Please enter an outcode to display competitor list</p>
       </div>
+
+      <fieldset v-if="competitors" id="selected-competitors">
+        <label v-for="competitor in competitors" :key="competitor.name"><input type="checkbox" :name="`select-competitors[${competitor.name}]`" :value="competitor.name"/>{{ competitor.name }}</label>
+      </fieldset>
+
       <div class="btn__group">
         <button class="btn btn-secondary" command="close" commandfor="competitor-list">Cancel</button>
         <button class="btn btn-primary" command="close" commandfor="competitor-list" @click="saveCompetitors()">Update competitors</button>
