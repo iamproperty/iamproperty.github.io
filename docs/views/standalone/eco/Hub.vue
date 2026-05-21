@@ -113,9 +113,6 @@ const getCompetitors = async (outcodes):Promise<void> => {
 
     competitors.value = json.data;
     
-    //if(returnCharts)
-      //createChartData(json.data.attributes.competitors);
-
   } catch (error) {
     checkAccount.value.connected = false;
   }
@@ -140,7 +137,7 @@ function saveCompetitors(event): void {
   // #endregion
 
   //getCompetitors(checkAccount.value.outcodes);
-
+  createChartData();
 }
 
 function onOutcodeChange(event): void {

@@ -29,7 +29,6 @@
     width: 90vw;
     max-width: 20.25rem; /* col-width*4 324px */
 
-    /* height: 90vh; */
     max-height: min(90vh, 47rem);
     overscroll-behavior: contain;
     overflow-y: hidden;
@@ -80,7 +79,7 @@
       padding-inline: var(--dialog-padding);
       padding-block: calc(var(--dialog-padding) - 0.75rem);
       height: 100%;
-      max-height: 100%;
+      max-height: min(90vh, 47rem);
       overflow: auto;
       overscroll-behavior: contain;
       position: relative;
