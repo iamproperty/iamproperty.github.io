@@ -11,66 +11,78 @@
       "name": "Agent & co",
       "attributes": {
         "location": "location",
-        "listed": 100,
-        "Reductions": 100,
-        "Cancelled": 100,
-        "Withdrawal": 100,
-        "SSTC": 25
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
       }
     },
     {
       "name": "Purplebricks",
       "attributes": {
         "location": "location",
-        "listed": 100,
-        "Reductions": 100,
-        "Cancelled": 100,
-        "Withdrawal": 100,
-        "SSTC": 25
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
       }
     },
     {
       "name": "Your Move",
       "attributes": {
         "location": "location",
-        "listed": 100,
-        "Reductions": 100,
-        "Cancelled": 100,
-        "Withdrawal": 100,
-        "SSTC": 25
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
       }
     },
     {
       "name": "Reeds Rains",
       "attributes": {
         "location": "location",
-        "listed": 100,
-        "Reductions": 100,
-        "Cancelled": 100,
-        "Withdrawal": 100,
-        "SSTC": 25
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
       }
     },
     {
       "name": "Rightmove",
       "attributes": {
         "location": "location",
-        "listed": 100,
-        "Reductions": 100,
-        "Cancelled": 100,
-        "Withdrawal": 100,
-        "SSTC": 25
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
       }
     },
     {
       "name": "Other",
       "attributes": {
         "location": "location",
-        "listed": 100,
-        "Reductions": 100,
-        "Cancelled": 100,
-        "Withdrawal": 100,
-        "SSTC": 25
+        "counts": {
+                    "listed": 134,
+                    "reductions": 19,
+                    "cancelled": 7,
+                    "withdrawn": 5,
+                    "sstc": 73
+                }
       }
     }
   ]

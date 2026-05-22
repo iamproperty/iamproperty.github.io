@@ -35,7 +35,7 @@ const checkAccount = ref({
 })
 
 const competitors = ref();
-const charts = ref();
+const charts = ref([]);
 
 
 
@@ -119,12 +119,8 @@ const getCompetitors = async (outcodes):Promise<void> => {
 
 }
 
-const createChartData = (competitorsData):void => {
-  //competitors.value = competitorsData
-  //console.log(competitors);
-}
 
-function saveCompetitors(event): void {
+const saveCompetitors = (event): void => {
   
   // #region save outcodes
   const multiselectElement = document.querySelector('#competitor-list iam-multiselect');
@@ -133,18 +129,25 @@ function saveCompetitors(event): void {
 
   // #region save competitiors choice
   const selectedCompetitorsFieldset = document.querySelector('#selected-competitors');
-  checkAccount.selectedCompetitors = Array.from(selectedCompetitorsFieldset.querySelectorAll('input:checked')).map(x => x.value);
+  checkAccount.value.selectedCompetitors = Array.from(selectedCompetitorsFieldset.querySelectorAll('input:checked')).map(x => x.value);
   // #endregion
+  charts.value = [];
+  ['listed','reductions','cancelled','withdrawn','sstc'].forEach(chartType => {
 
-  //getCompetitors(checkAccount.value.outcodes);
-  createChartData();
+    charts.value.push({
+      "name": chartType == 'sstc' ? 'SSTC': chartType.charAt(0).toUpperCase() + chartType.slice(1),
+      "data": Array.from(selectedCompetitorsFieldset.querySelectorAll('input:checked')).map(x => ({
+         'name': x.value, 
+         'value': x.dataset[chartType]
+        }))
+    });
+  });
+
+  
 }
 
 function onOutcodeChange(event): void {
-  //console.log('outcode change', event);
   
-  // pass through the outcodes and get new competitor data based on the outcodes
-
   const multiselectElement = event.target.closest('iam-multiselect');
   getCompetitors(Array.from(multiselectElement.querySelectorAll('input:checked')).map(x => x.value));
 }
@@ -254,7 +257,7 @@ function onOutcodeChange(event): void {
         <Tabs v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes && charts" class="tabs--toggle-tags">
           <Tab v-for="chart in charts" :key="chart.name" :title="chart.name" >
             
-            <Doughnutchart class="chart--lg chart--horizontal">
+            <Doughnutchart class="chart--lg chart--horizontal" :data-created="Date.now()">
               <table>
                 <thead>
                   <tr>
@@ -307,7 +310,18 @@ function onOutcodeChange(event): void {
       </div>
 
       <fieldset v-if="competitors" id="selected-competitors">
-        <label v-for="competitor in competitors" :key="competitor.name"><input type="checkbox" :name="`select-competitors[${competitor.name}]`" :value="competitor.name"/>{{ competitor.name }}</label>
+        <label v-for="competitor in competitors" :key="competitor.name">
+          <input type="checkbox" 
+          :name="`select-competitors[${competitor.name}]`" 
+          :value="competitor.name" 
+          :data-listed="competitor.attributes.counts.listed" 
+          :data-reductions="competitor.attributes.counts.reductions"
+          :data-cancelled="competitor.attributes.counts.cancelled"
+          :data-withdrawn="competitor.attributes.counts.withdrawn"
+          :data-sstc="competitor.attributes.counts.sstc"
+          />
+          {{ competitor.name }}
+        </label>
       </fieldset>
 
       <div class="btn__group">
