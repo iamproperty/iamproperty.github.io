@@ -190,7 +190,13 @@
       <details>
         <summary>Insights</summary>
         <div class="admin-panel">
-          <h3 class="bg-light">Title insight</h3>
+
+          <div class="admin-panel__heading bg-light">
+            <h3>Title insight</h3>
+            <span class="badge border-gradient m-0">Beta</span>
+            <span class="badge bg-info gradient-primary gradient-direction-left text-white m-0"><i class="fa-sparkles fa-solid"></i> AI insight</span>
+          </div>
+          
           
 
           <Tabs class="tabs--md-hidden">
