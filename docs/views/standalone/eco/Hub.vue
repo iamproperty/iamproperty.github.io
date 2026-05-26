@@ -34,6 +34,7 @@ const checkAccount = ref({
   selectedCompetitors: false
 })
 
+const outcodes = ref([]);
 const competitors = ref();
 const charts = ref([]);
 
@@ -41,11 +42,27 @@ const charts = ref([]);
 
 onMounted(async() => {
 
-  getCompetitors(checkAccount.value.outcodes);
 
-  setTimeout(() => {
-    checkAccount.value.connected = true; // TODO: load from an api call
-  }, 1000);
+  try {
+
+    const response = await fetch('https://materialinformation.datasystem.co.uk/CompetitorAnalysis/GetDistricts', {
+      method: 'POST',
+      headers: {
+        'x-api-key': 'IW88-XK63-HBIL-3AP2',
+        'Content-Type': 'application/vnd.api+json'
+      },
+    });
+
+    const json = await response.json();
+
+
+
+    checkAccount.value.connected = true;
+
+  } catch (error) {
+    //checkAccount.value.connected = false;
+  }
+
 });
 
 
@@ -85,33 +102,30 @@ const getCompetitors = async (outcodes):Promise<void> => {
   if(!outcodes)
     return false;
 
-  console.log(outcodes);
-
-  const ajaxURL = '/competitor-analysis.json';
-
-  // Setup controller vars if not already set
-  if (!window.controller) window.controller = [];
-
-  // Abort if controller already present for this url
-  if (window.controller[ajaxURL]) window.controller[ajaxURL].abort();
-
-  // Create a new controller so it can be aborted if new fetch made
-  window.controller[ajaxURL] = new AbortController();
-  const { signal } = window.controller[ajaxURL];
-
-  // TODO: turn into a post and pass through outcodes
   try {
-    const response = await fetch(ajaxURL, {
-      signal,
-      method: 'GET',
+
+    const obj = {
+      "data": {
+        "type": "competitor-analysis-request",
+        "attributes": {
+          "postcodeOutwardCodes": outcodes
+        }
+      }
+    };
+
+    const response = await fetch('https://materialinformation.datasystem.co.uk/CompetitorAnalysis/GetCompetitors', {
+      method: 'POST',
+      body: JSON.stringify(obj),
       headers: {
-        Accept: 'application/json',
+        'x-api-key': 'IW88-XK63-HBIL-3AP2',
+        'Content-Type': 'application/vnd.api+json'
       },
     });
 
     const json = await response.json();
 
-    competitors.value = json.data;
+    if(json.data)
+      competitors.value = json.data;
     
   } catch (error) {
     checkAccount.value.connected = false;
@@ -137,7 +151,7 @@ const saveCompetitors = (event): void => {
     charts.value.push({
       "name": chartType == 'sstc' ? 'SSTC': chartType.charAt(0).toUpperCase() + chartType.slice(1),
       "data": Array.from(selectedCompetitorsFieldset.querySelectorAll('input:checked')).map(x => ({
-         'name': x.value, 
+         'name': x.dataset['name'], 
          'value': x.dataset[chartType]
         }))
     });
@@ -150,6 +164,39 @@ function onOutcodeChange(event): void {
   
   const multiselectElement = event.target.closest('iam-multiselect');
   getCompetitors(Array.from(multiselectElement.querySelectorAll('input:checked')).map(x => x.value));
+}
+
+const searchOutcodes = async(event):void => {
+
+  console.log(event);
+
+
+  if(!event.srcElement.shadowRoot)
+    return false;
+
+
+  const searchTerm = event.srcElement.shadowRoot.querySelector('#search').value;
+
+  if(!searchTerm)
+    return false;
+
+
+  const response = await fetch('https://materialinformation.datasystem.co.uk/CompetitorAnalysis/GetDistricts', {
+    method: 'POST',
+    headers: {
+      'x-api-key': 'IW88-XK63-HBIL-3AP2',
+      'Content-Type': 'application/vnd.api+json'
+    },
+  });
+
+  const json = await response.json();
+
+
+  const filtereOutcodes = json.data.filter((item) => item.title.toLowerCase().startsWith(searchTerm));
+
+  outcodes.value = new Set([...outcodes.value, ...filtereOutcodes]);
+
+  console.log(filtereOutcodes);
 }
 </script>
 <template>
@@ -250,7 +297,7 @@ function onOutcodeChange(event): void {
           <button class="btn btn-secondary" command="show-modal" commandfor="competitor-list">Enter outcode</button>
         </div>
 
-        <p v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes">Outcode area: <span v-for="outcode in checkAccount.outcodes" :key="outcode">{{ outcode }}</span></p>
+        <p v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes" id="selected-outcodes">Outcode area: <span v-for="outcode in checkAccount.outcodes" :key="outcode">{{ outcode }}</span></p>
 
         <span v-for="competitor in checkAccount.selectedCompetitors" :key="competitor.name">{{ competitor.name }}</span>
 
@@ -301,7 +348,10 @@ function onOutcodeChange(event): void {
       <p>Update the competitors you see within your the sales insights widget.</p>
 
       
-      <Multiselect data-label="Search outcodes" data-tooltip="Tooltip text" data-name="users" data-url="/outcodes.json?search=" data-min="1" @change="onOutcodeChange"></Multiselect>
+      <Multiselect data-label="Search outcodes" data-tooltip="Tooltip text" @change="onOutcodeChange" @input="searchOutcodes">
+
+        <label v-for="outcode in outcodes" class="tag dropdown__option"><input type="checkbox" :name="`outcodes[${outcode.title}]`" :value="outcode.value">{{outcode.title}}</label>
+      </Multiselect>
 
       <p class="pt-4">Select up to 10 competitors you want to compare against.</p>
       <div v-if="!competitors" class="text-center" >
@@ -310,17 +360,18 @@ function onOutcodeChange(event): void {
       </div>
 
       <fieldset v-if="competitors" id="selected-competitors">
-        <label v-for="competitor in competitors" :key="competitor.name">
+        <label v-for="competitor in competitors" :key="competitor.id">
           <input type="checkbox" 
-          :name="`select-competitors[${competitor.name}]`" 
-          :value="competitor.name" 
+          :name="`select-competitors[${competitor.id}]`" 
+          :value="competitor.id" 
+          :data-name="competitor.attributes.agentName"
           :data-listed="competitor.attributes.counts.listed" 
           :data-reductions="competitor.attributes.counts.reductions"
           :data-cancelled="competitor.attributes.counts.cancelled"
           :data-withdrawn="competitor.attributes.counts.withdrawn"
           :data-sstc="competitor.attributes.counts.sstc"
           />
-          {{ competitor.name }}
+          {{ competitor.attributes.agentName }}
         </label>
       </fieldset>
 
@@ -347,6 +398,9 @@ function onOutcodeChange(event): void {
 </template>
 
 <style lang="css" scoped>
+#selected-outcodes span:not(:last-child):after{
+  content: ", ";
+}
 @layer utilities {
   #view-terms {
     background-color: transparent!important;

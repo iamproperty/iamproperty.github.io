@@ -25,8 +25,6 @@ export const searchAjax = async (component, search, callback): any => {
   const ajaxURL = component.getAttribute('data-url');
   const firstInput = component.querySelector('input');
 
-  console.log(firstInput);
-
   const inputType = firstInput && firstInput.hasAttribute('type') ? firstInput.getAttribute('type') : 'checkbox';
   let inputName = firstInput && firstInput.hasAttribute('name') ? firstInput.getAttribute('name') : 'tags';
 
