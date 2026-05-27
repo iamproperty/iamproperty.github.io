@@ -47,8 +47,21 @@ components.forEach((component) => {
 
         import(`./components/${component}/${component}${componentExt}`)
           .then((module) => {
-            if (!window.customElements.get(`${prefix}-${component}`))
+            if (!window.customElements.get(`${prefix}-${component}`)) {
+
+              // define/register component
               window.customElements.define(`${prefix}-${component}`, module.default);
+
+              // Only pass on the rgistration once to the datalayer
+              if(!window.dataLayer.filter(obj => obj.element && obj.element == component)){
+
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                  event: 'customElementRegistered',
+                  element: component
+                });
+              }
+            }
           })
           .catch((err) => {
             console.log(err.message);
