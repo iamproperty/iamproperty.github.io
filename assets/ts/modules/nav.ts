@@ -74,8 +74,9 @@ export const populateLinks = (data):void => {
 
 export const loadNavData = async(Cookies): any => {
 
-  //const ajaxURL = 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
-  const ajaxURL = '/nav.json';
+  const ajaxURL = 'https://dev.hub.iamproperty.group/data/ecosystem-switcher.json';
+
+  //const ajaxURL = '/nav.json';
 
   // Setup controller vars if not already set
   if (!window.controller) window.controller = [];
@@ -145,7 +146,7 @@ export const loadUserData = async(Cookies): any => {
 
 export const setEnabledLinks = (component,data):void => {
 
-  component.querySelectorAll(`[data-product][data-feature]`).forEach((element) => {
+  document.querySelectorAll(`iam-nav [data-product][data-feature]`).forEach((element) => {
     const isEnabled = data.attributes.products[element.getAttribute('data-product')].features[element.getAttribute('data-feature')];
     element.setAttribute('data-is-enabled',isEnabled);
     if(isEnabled && element.getAttribute('data-enabled')){

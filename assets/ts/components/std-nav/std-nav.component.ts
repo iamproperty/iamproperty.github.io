@@ -65,7 +65,6 @@ class iamSTDNav extends HTMLElement {
     this.outerHTML = `${defaultContent}`;
   }
 
-  
   async connectedCallback(): void {
     
     const component = this;
@@ -94,7 +93,10 @@ class iamSTDNav extends HTMLElement {
 
         //console.log(data);
         if(this.hasAttribute('data-hub')){
-          this.transformToNav(data);
+
+          const filteredData = data.filter(section => section.attributes.title != "Learning and support");
+
+          this.transformToNav(filteredData);
         }
         else {
           this.transformToSecondary(data);
@@ -109,7 +111,6 @@ class iamSTDNav extends HTMLElement {
       (data) => {
 
         setEnabledLinks(component,data);
-
         
         Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
 

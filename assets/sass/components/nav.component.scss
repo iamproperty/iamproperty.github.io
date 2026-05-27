@@ -120,9 +120,10 @@
   }
 
   @media screen and (min-width: 62em) {
+    min-width: 3rem;
     width: fit-content;
     height: auto;
-    margin: 0 0 0 2rem;
+    margin: 0 0 0 1.5rem;
     padding: 0 !important;
     text-indent: 0;
     padding-right: 0 !important;
