@@ -6,7 +6,7 @@ This repo is the iamproperty `@iamproperty/components` design system. It has thr
 - Vue package components under `src/`, exported from `src/index.js` and built by Vite library mode.
 - A Vue documentation site under `docs/`, also built by Vite.
 
-Read this file first, then use the deeper guides in `docs/AI_REPO_GUIDE.md`, `docs/AI_COMPONENT_WORKFLOW.md`, and `docs/AI_VALIDATION.md`.
+Read this file first, then use the deeper guides in `docs/AI_REPO_GUIDE.md`, `docs/AI_COMPONENT_WORKFLOW.md`, `docs/AI_VALIDATION.md`, `docs/AI_DESIGN_SOURCE_OF_TRUTH.md`, `docs/AI_DESIGN_TOKENS.md`, and `docs/AI_DESIGN_REVIEW_CHECKLIST.md`.
 
 ## Source Of Truth
 
@@ -68,6 +68,8 @@ For example, navigation-related work may involve:
 - The docs Vite config treats tags starting with `iam-` as custom elements.
 - Many custom elements create a shadow root and load component CSS from `/assets` or from `document.body[data-assets-location]`.
 - Several components push a `customElementRegistered` event to `window.dataLayer` when the component class loads.
+- Figma Styleguide is the design source of truth: https://www.figma.com/design/YB3IzLUIwdVz6cvrthZR8H/Styleguide
+- Keep foundation tokens in code aligned with Figma before making component-level visual changes.
 - Keep public behavior compatible with existing HTML usage in the docs and standalone examples.
 - Preserve existing style and naming patterns before introducing new abstractions.
 - Use ASCII in docs and code unless the surrounding file already uses non-ASCII.
@@ -78,4 +80,3 @@ For example, navigation-related work may involve:
 - The custom test runner supplies lightweight DOM helpers in `assets/ts/modules/test-dom.ts`.
 - For Vue/package or docs-only changes, run the narrowest useful command first, then broader validation if the change has wider impact.
 - If dependencies are missing, use `npm install --force` before validating.
-
