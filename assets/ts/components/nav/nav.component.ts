@@ -1,10 +1,3 @@
-// Data layer Web component created
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  event: 'customElementRegistered',
-  element: 'nav',
-});
-
 class iamNav extends HTMLElement {
   constructor() {
     super();
