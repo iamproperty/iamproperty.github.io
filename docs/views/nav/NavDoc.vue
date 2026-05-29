@@ -174,7 +174,7 @@
           </tbody>
         </table>
       </template>
-<template #classes>
+      <template #classes>
         <table>
           <thead>
             <tr>
@@ -199,6 +199,7 @@
         </table>
       </template>
       
+      
     </Integration>
     <Versions pdf="/pdfs/navbar.pdf">
       <table>
@@ -211,10 +212,20 @@
         </thead>
         <tbody class="text-body">
           <tr>
-              <td>V0.1</td>
-              <td>25.08.2023</td>
-              <td>N/A</td>
-            </tr>
+            <td></td>
+            <td>28.05.2026</td>
+            <td>Testing completed. <a href="https://iamproperty.atlassian.net/browse/FEG-934" target="_blank">#FEG-934</a></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>28.05.2026</td>
+            <td>Acceptance criteria added. <a href="https://iamproperty.atlassian.net/browse/FEG-934" target="_blank">#FEG-934</a></td>
+          </tr>
+          <tr>
+            <td>V0.1</td>
+            <td>25.08.2023</td>
+            <td>N/A</td>
+          </tr>
         </tbody>
       </table>
     </Versions>

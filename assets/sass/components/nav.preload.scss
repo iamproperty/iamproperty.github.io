@@ -2,21 +2,17 @@
 @use '../_func' as *;
 
 
-
-
-
 @layer components {
-  nav:has(iam-nav) {
-    grid-column: container;
-  }
+
   iam-nav {
     display: block;
+    width: 100%;
     padding: var(--container-padding);
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     max-width: 100%;
     margin-inline: auto;
-    column-grid: container;
+    grid-column: container!important;
 
     .brand {
       font-size: 3rem;
@@ -34,21 +30,38 @@
     }
   }
 
-  @media (scripting: enabled) {
+  //@media (scripting: enabled) {
     iam-nav:not(:defined) {
+
+      display: flex;
+      align-items: center;
+      overflow: auto;
+      gap: var(--gap);
+
+      > [slot='logo']{
+        min-width: 20rem;
+        margin-inline-end: auto;
+      }
+
       > *:not([slot='logo']) {
+        white-space: nowrap;
+        margin: 0;
+      }
+
+      > form {
         display: none;
       }
 
       &:not(:target) > *:not(.brand) {
-        display: none;
+        //display: none;
       }
 
-      @media screen and (min-width: 62em) {
-        &:has([slot='secondary']) {
+      //@media screen and (min-width: 62em) {
+      //  &:has([slot='secondary']) {
           padding-top: 4rem; /* 64 */
-        }
-      }
+        //}
+      //}
+      
     }
-  }
+  //}
 }
