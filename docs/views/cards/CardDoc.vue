@@ -897,7 +897,7 @@
         <span v-html="events"></span>
       </template>
     </Integration>
-    <Versions pdf="/pdfs/navigational-card.pdf">
+    <Versions pdf="/pdfs/navigational-card.pdf" jira="FEG-948">
       <table>
         <thead>
           <tr>

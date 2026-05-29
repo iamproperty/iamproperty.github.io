@@ -121,7 +121,7 @@
   padding-top: var(--card-gap, 1.5rem) !important;
 }
 
-::slotted(:is(a, button)[slot='footer']) {
+::slotted(:is(a, button)[slot='footer']:not([class*="mb-"])) {
   margin-bottom: var(--card-footer-bottom-padding) !important;
 }
 

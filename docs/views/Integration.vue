@@ -120,7 +120,15 @@
     <details v-if="showTest">
       <summary><h3>Test</h3></summary>
 
-      <h4 v-if="slots['criteria']">Acceptance criteria</h4>
+      <h4>Acceptance criteria</h4>
+      <ul class="mb-4">
+        <li>The component should work as detailed on this page.</li>
+        <li>The component should meet the relevant NFRs detailed in the <a href="/launch">launch list page</a>.</li>
+        <li>The component should work as described on all browsers and devices which we support at the full level. See the <a href="/browser-support">browser support page</a> for details.</li>
+        <li>The component should still work when JavaScript is disabled, there may be visual defects and slight behavoural changes but the core functionality should be working.</li>
+      </ul>
+
+      <h5 v-if="slots['criteria']" class="lead pb-2">Component Acceptance criteria</h5>
       <slot name="criteria"></slot>
 
       <h4 class="pt-3">Accessibility</h4>

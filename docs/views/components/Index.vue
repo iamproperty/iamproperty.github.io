@@ -32,13 +32,13 @@ const route = useRoute();
       <p>Our set of components with structured pre-defined content and options. While the UI components will be flexible and extendable these components will be a lot more defiend with far less options.</p>
       <div class="sub-grid mb-5">
         
-          <a :href="item.link" v-for="item in standardisedcomponents" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in standardisedcomponents" class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
       <h2>UI Components</h2>
       <div class="sub-grid mb-5">
-          <a :href="item.link" v-for="item in components" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in components" class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
@@ -47,7 +47,7 @@ const route = useRoute();
 
       <div class="sub-grid mb-5">
         
-          <a :href="item.link" v-for="item in formComponents" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in formComponents" class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
@@ -56,7 +56,7 @@ const route = useRoute();
       <h2>Card components</h2>
 
       <div class="sub-grid mb-5">
-          <a :href="item.link" v-for="item in cardComponents" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in cardComponents" class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto">
             <IndexCard :item="item" />
           </a>
           
@@ -66,7 +66,7 @@ const route = useRoute();
 
       <div class="sub-grid mb-5">
         
-          <a :href="item.link" v-for="item in chartComponents" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in chartComponents" class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
@@ -75,7 +75,7 @@ const route = useRoute();
 
       <div class="sub-grid mb-5">
         
-          <a :href="item.link" v-for="item in navComponents" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in navComponents" class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
@@ -84,7 +84,7 @@ const route = useRoute();
 
       <div class="sub-grid mb-5">
         
-          <a :href="item.link" v-for="item in notificationsComponents" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in notificationsComponents" class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>
@@ -93,7 +93,7 @@ const route = useRoute();
 
       <div class="sub-grid mb-5">
         
-          <a :href="item.link" v-for="item in dialogComponents" class="md-col-span-4 col-start-auto">
+          <a :href="item.link" v-for="item in dialogComponents" class="col-span-12 sm-col-span-6 md-col-span-4 col-start-auto">
             <IndexCard :item="item" />
           </a>
       </div>

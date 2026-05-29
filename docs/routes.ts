@@ -988,6 +988,7 @@ const routes = [
         path: 'card',
         name: 'Navigational Card',
         meta: {
+          jira: 'FEG-948',
           title: 'Navigational Card | Components | iamkey',
         },
         component: () => import('./views/cards/CardDoc.vue'),

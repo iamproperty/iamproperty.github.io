@@ -11,6 +11,7 @@ export const generateList = (routes:any, path:string) => {
           route.link = path + '/' + route.path;
           route.title = route.name;
           route.status = route.meta.status || 'alpha';
+          route.jira = route.meta.jira;
           route.ver = route.meta.ver;
           route.content = '';
           acc.push(route);
