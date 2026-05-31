@@ -4,12 +4,6 @@
 @use '../elements/popover' as *;
 @use '../elements/buttons' as *;
 
-
-:host(:is(:active, .active):not(.prevent-hover)) {
-  --card-icon-right: var(--card-icon-right-overide, 0.5rem);
-  //outline: none;
-}
-
 :host(.prevent-hover) {
   pointer-events: none;
 
@@ -196,7 +190,7 @@ slot[name='secondary'] {
   --card-body-fs: 0.6875rem;
   --card-body-lh: 1rem;
 
-  --card-footer-bottom-padding: 0.5rem;
+  --card-footer-bottom-padding: 0.5rem!important;
 
   --card-badges-top-padding:0.5rem;
   --card-badges-bottom-padding: 0;

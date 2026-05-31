@@ -994,6 +994,22 @@ const routes = [
         component: () => import('./views/cards/CardDoc.vue'),
       },
       {
+        path: 'checkbox-card',
+        name: 'Checkbox card',
+        meta: {
+          title: 'Checkbox Card | Components | iamkey',
+        },
+        component: () => import('./views/cards/CheckboxCardDoc.vue'),
+      },
+      {
+        path: 'multiaction-card',
+        name: 'Multi-action card',
+        meta: {
+          title: 'Multi-action Card | Components | iamkey',
+        },
+        component: () => import('./views/cards/MultiActionCardDoc.vue'),
+      },
+      {
         path: 'filter-card',
         name: 'Filter card',
         meta: {

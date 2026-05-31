@@ -136,9 +136,39 @@
     text-decoration: none;
     border-radius: var(--card-border-radius) !important;
 
+
+    $theme-colors: (
+      'primary': var(--colour-primary),
+      'secondary': var(--colour-secondary),
+      'info': var(--colour-info),
+      'warning': var(--colour-warning),
+      'success': var(--colour-success),
+      'complete': var(--colour-complete),
+      'danger': var(--colour-danger),
+      'dark': var(--colour-dark),
+      'light': var(--colour-light),
+    );
+
+    @each $color, $value in $theme-colors {
+      
+      &:has(.colour-#{$color}){
+
+        --hover-outline-colour: var(--colour-#{$color}) !important;
+        --card-icon-bg: var(--colour-warning)!important;
+        --card-icon-colour: var(--colour-primary-theme)!important;
+      }
+    }
+
     &:not(:hover, :focus, .hover, :active, .active) {
 
       outline: none !important;
+    }
+
+    &:is(:focus) {
+      
+      --card-icon-bg: var(--colour-primary-theme);
+      --card-icon-colour: #ffffff;
+      outline: 2px solid var(--hover-outline-colour);
     }
 
     &:is(:focus) {
@@ -152,12 +182,20 @@
       
       --card-icon-bg: var(--colour-primary-theme);
       --card-icon-colour: #ffffff;
+      
+      outline: 2px solid var(--hover-outline-colour);
+    }
+
+    &:has(.card--article):is(:hover, :focus, .hover){
+
+      outline: none !important;
     }
 
 
     &:is(:active, .active){
-      --card-icon-bg: var(--colour-primary-theme);
-      --card-icon-colour: #ffffff;
+      //--card-icon-bg: var(--colour-primary-theme);
+      //--card-icon-colour: #ffffff;
+      --card-icon-right: var(--card-icon-right-overide, 0.5rem);
     }
 
     &:before {

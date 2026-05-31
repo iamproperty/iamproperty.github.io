@@ -33,6 +33,9 @@
   }
 
   /* #region Cards */
+  iam-card:has([slot="footer"]){
+    --card-footer-bottom-padding: 1.5rem;
+  }
   .card:not(:defined) {
     box-shadow: var(--card-box-shadow);
     border-radius: var(--card-border-radius);

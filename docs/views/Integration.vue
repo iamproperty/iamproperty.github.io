@@ -131,13 +131,6 @@
       <h5 v-if="slots['criteria']" class="lead pb-2">Component Acceptance criteria</h5>
       <slot name="criteria"></slot>
 
-      <h4 class="pt-3">Accessibility</h4>
-      <ul>
-        <li>All text should be legible</li>
-        <li>All buttons and links within the component should be tabbable unless stated in the acceptance criteria.</li>
-        <li>All buttons and links should have a title which is visible on hover.</li>
-        <li>The shadow root should not hold any content</li>
-      </ul>
 
       <h4 v-if="slots['keyboard']">Keyboard commands</h4>
       <slot name="keyboard"></slot>
