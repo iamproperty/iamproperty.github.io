@@ -10,8 +10,6 @@
   margin-bottom: 2rem;
   display: block;
 
-  outline: var(--card-outline);
-  outline-offset: -2px;
 }
 
 .wrapper {
@@ -38,6 +36,11 @@
     width: 100%;
     box-sizing: border-box;
   }
+}
+
+:host([class*="colour-"]) .wrapper{
+  border-top-left-radius: 0!important;
+  border-bottom-left-radius: 0!important;
 }
 
 :host-context(:is(a, label, button)) {

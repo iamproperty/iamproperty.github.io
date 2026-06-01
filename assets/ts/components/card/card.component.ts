@@ -1,8 +1,6 @@
-import { trackComponent, trackComponentRegistered } from '../_global';
+import { trackComponent } from '../_global';
 import { cardHTML, setupCard } from '../../modules/card.module';
 import iamMenu from '../menu/menu.component';
-
-trackComponentRegistered('iam-card');
 
 class iamCard extends HTMLElement {
   constructor() {
