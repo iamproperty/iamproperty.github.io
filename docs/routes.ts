@@ -990,6 +990,7 @@ const routes = [
         meta: {
           jira: 'FEG-948',
           title: 'Navigational Card | Components | iamkey',
+          status: 'qa'
         },
         component: () => import('./views/cards/CardDoc.vue'),
       },
