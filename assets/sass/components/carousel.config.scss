@@ -1,34 +1,5 @@
 @use '../_func' as *;
 
-
-@layer components {
-  iam-carousel:defined {
-    > div > *:last-child {
-      margin-bottom: 0 !important;
-      padding-bottom: 0 !important;
-    }
-  }
-
-  /*  Preload */
-  iam-carousel:not(:defined) {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow: auto;
-    margin-block-end: 2rem;
-    overflow: auto;
-
-    & > * {
-      width: 100%;
-      display: block;
-      flex: 0 0 100%;
-      padding-inline-end: 1rem;
-    }
-  }
-
-}
-
-
-
 @layer components {
 
   iam-carousel {
