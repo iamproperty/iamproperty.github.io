@@ -12,13 +12,8 @@
 
   import cardArticleImg from '../../img/card-article-anatomy.png';
 
-  import { card as events } from '../../events.js';
 </script>
 <template>
-  <TrackEvents
-    selector="iam-card"
-    :events="['select-card', 'unselect-card', 'secondary-button-clicked', 'action-button-clicked']"
-  ></TrackEvents>
 
   <main>
     <DSHeader :image="headerImg" section="components">
@@ -569,17 +564,6 @@
         </table>
       </template>
 
-      <template #criteria>
-        <ul>
-          <li>
-            When hovering over a secondary,action or checkbox the main hover state on the card should not be shown
-          </li>
-          <li>All secodnary type buttons or inputs should be tabbable</li>
-        </ul>
-      </template>
-      <template #data-layer>
-        <span v-html="events"></span>
-      </template>
     </Integration>
     <Versions pdf="/pdfs/navigational-card.pdf" jira="FEG-948">
       <table>
@@ -607,14 +591,3 @@
   </main>
 </template>
 
-<style>
-  .video-col {
-    position: relative;
-    margin-top: 3rem;
-  }
-  .video-col > span {
-    position: absolute;
-    bottom: 100%;
-    left: 0.5rem;
-  }
-</style>

@@ -259,7 +259,7 @@
         <span v-html="events"></span>
       </template>
     </Integration>
-    <Versions pdf="/pdfs/cards.pdf">
+    <Versions pdf="/pdfs/filter-card.pdf">
       <table>
         <thead>
           <tr>
