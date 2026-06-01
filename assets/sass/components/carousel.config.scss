@@ -126,7 +126,8 @@
   /* #endregion */
 
   /* #region left and right buttons on desktop */
-  main > iam-carousel {
+  main > iam-carousel,
+  main > .container > iam-carousel {
     
     @container (min-width: 62em) {
       
@@ -326,11 +327,6 @@
         }
       }
 
-      @container not scroll-state(snapped: x) {
-        
-        //--opacity: 0;
-      }
-      
       @container style(--count: 2) {
 
         &:nth-child(2n - 1) {
@@ -346,7 +342,7 @@
 
       @container style(--count: 3) {
 
-        &:nth-child(3n - 2) {
+        &:nth-child(3n - 1) {
           scroll-snap-align: start;
           scroll-snap-stop: always;
         }
@@ -455,7 +451,7 @@
     
 
     @container (max-width: 30em) {
-      iam-carousel:has(> *:nth-child(5)){
+      iam-carousel:has(> *:nth-child(6)){
         
         --button-height: 0rem;
         
@@ -465,7 +461,7 @@
         --carousel-controls-display: block;
         
       }
-      iam-carousel:has(> *:nth-child(5))::part(carousel__progress-xs) {
+      iam-carousel:has(> *:nth-child(6))::part(carousel__progress-xs) {
         display: block;
       }
 

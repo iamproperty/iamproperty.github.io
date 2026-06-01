@@ -36,6 +36,9 @@
       galleries, content or article previews and feature highlights.
     </p>
     
+
+    <h2>Carousel anatomy</h2>
+    <div class="container bg-light mb-3 pb-0">
     <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
       
       <Card :data-image="cardImg"
@@ -65,18 +68,129 @@
       <Card :data-image="cardImg"
         >Financial preparation <span>Here would be the top level description of the task</span></Card
       >
-      <Card :data-image="cardImg"
-        >Financial preparation <span>Here would be the top level description of the task</span></Card
-      >
     </Carousel>
-    
-    
+  </div>
 
-    <h2>Carousel anatomy</h2>
+    <div class="container bg-light mb-3 pb-0">
+      <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
+        
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+      </Carousel>
+    </div>
     
+    <div class="md-col-end-8 container--inline-size">
+      <Carousel class="visualtest" data-smcols="2" data-mdcols="2">
+        
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+        <Card :data-image="cardImg"
+          >Financial preparation <span>Here would be the top level description of the task</span></Card
+        >
+      </Carousel>
+    </div>
 
-    <img :src="carouselAnat" class="mb-1"/>
-    <img :src="carouselAnat2" class="mb-3" />
 
     <ol class="pb-5">
       <li>Carousel content. This can contain cards, text, image and call to actions.</li>
@@ -84,6 +198,9 @@
         Navigation arrow. (Optional) Using secondary compact buttons that progress the carousel forward or backward. If
         carousel is at the beginning then the left arrow will display but as 'disabled', if the carousel is at the end
         then the right arrow will display but as 'disabled'.
+      </li>
+      <li>
+        Pips. (Optional) This is limited to 5 pips of content and gives the user context to how far along in the carousel they are and allows user to click through to navigate the content.
       </li>
       <li>
         Pagination slider indicator. (Optional) This shows only if content goes beyond 5 pips of content and gives the
