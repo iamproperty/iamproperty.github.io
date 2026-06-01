@@ -582,6 +582,7 @@ const routes = [
         name: 'Carousel',
         meta: {
           title: 'Carousel | Components | iamkey',
+          jira: 'FEG-954'
         },
         component: () => import('./views/components/CarouselDoc.vue'),
         searchterms: 'slideshow',
@@ -1242,6 +1243,10 @@ const routes = [
         name: 'examples-index',
         path: '',
         component: () => import('./views/examples/Index.vue'),
+      },
+      {
+        path: 'carousel-admin-panel',
+        component: () => import('./views/examples/CarouselAdminPanel.vue'),
       },
       {
         path: 'basic-table',

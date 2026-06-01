@@ -5,6 +5,35 @@ trackComponentRegistered('iam-carousel');
 class iamCarousel extends HTMLElement {
   constructor() {
     super();
+    this.attachShadow({ mode: 'open' });
+
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+
+    const loadCSS = `@import "${assetLocation}/css/components/carousel.component.css";`;
+
+    const template = document.createElement('template');
+
+    template.innerHTML = /* HTML */ `
+      <style>
+        ${loadCSS}
+      </style>
+      <slot></slot>
+      <div class="carousel__controls" part="carousel__controls">
+        <div class="carousel__pips"></div>
+        <div class="carousel__progress carousel__progress-xs" part="carousel__progress-xs">
+          <input type="range" min="0" max="100" value="0" step="1" />
+        </div>
+        <div class="carousel__progress carousel__progress-sm" part="carousel__progress-sm">
+          <input type="range" min="0" max="100" value="0" step="1" />
+        </div>
+        <div class="carousel__progress carousel__progress-md" part="carousel__progress-md">
+          <input type="range" min="0" max="100" value="0" step="1" />
+        </div>
+      </div>
+    `;
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
   }
 
   generateThumbnailList = (carouselComponent): any => {
@@ -46,7 +75,7 @@ class iamCarousel extends HTMLElement {
   }
 
   connectedCallback(): void {
-    
+    /*
     this.insertAdjacentHTML('beforeend',`
       <div class="carousel__controls">
         <div class="carousel__pips"></div>
@@ -61,14 +90,37 @@ class iamCarousel extends HTMLElement {
         </div>
       </div>
     `)
+    */
  
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const carouselElement = this;
-    const carouselProgress = this.querySelector('.carousel__progress-xs [type="range"]');
-    const carouselProgressSM = this.querySelector('.carousel__progress-sm [type="range"]');
-    const carouselProgressMD = this.querySelector('.carousel__progress-md [type="range"]');
+    const carouselProgress = this.shadowRoot.querySelector('.carousel__progress-xs [type="range"]');
+    const carouselProgressSM = this.shadowRoot.querySelector('.carousel__progress-sm [type="range"]');
+    const carouselProgressMD = this.shadowRoot.querySelector('.carousel__progress-md [type="range"]');
     const itemCount = this.querySelectorAll(':scope > *:not(.carousel__controls)').length;
     const progressPercent = this.progressPercent;
+
+    
+    this.setAttribute('data-current',0);
+    
+    this.addEventListener("scrollsnapchange", (event) => {
+      
+      const snapTargetInlineElement = event.snapTargetInline;
+      const index = Array.from(snapTargetInlineElement.parentElement.children).indexOf(snapTargetInlineElement);
+
+      if(index != this.getAttribute('data-current')){
+        const customEvent = new CustomEvent(`snap-to`, {
+          detail: {
+            item: index+1,
+          },
+        });
+
+        this.dispatchEvent(customEvent);
+        this.setAttribute('data-current',index);
+      }
+
+    });
+    
 
     let stepperInterval,
       stepperEvent = 'mouseup',

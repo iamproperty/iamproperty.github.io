@@ -12,13 +12,17 @@
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/cards-header.png';
 
+  import carouselAnat from '../../img/carousel-anatomy.png';
+  import carouselAnat2 from '../../img/carousel-anatomy-2.png';
+  
+
   import { carousel as events } from '../../events.js';
 </script>
 
 <template>
   <TrackEvents
     selector="iam-carousel"
-    :events="['pip-clicked', 'next-clicked', 'prev-clicked', 'slider-changed']"
+    :events="['snap-to']"
   ></TrackEvents>
 
   <main>
@@ -31,9 +35,8 @@
       Use to display related content within the same space on a page. Typical content use cases include showcases, image
       galleries, content or article previews and feature highlights.
     </p>
-
-    <h2>Carousel anatomy</h2>
-    <Carousel class="visualtest" data-smcols="2" data-mdcols="2">
+    
+    <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
       
       <Card :data-image="cardImg"
         >Financial preparation <span>Here would be the top level description of the task</span></Card
@@ -50,9 +53,32 @@
       <Card :data-image="cardImg"
         >Financial preparation <span>Here would be the top level description of the task</span></Card
       >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
+      <Card :data-image="cardImg"
+        >Financial preparation <span>Here would be the top level description of the task</span></Card
+      >
     </Carousel>
+    
+    
 
-    <ul class="pb-5">
+    <h2>Carousel anatomy</h2>
+    
+
+    <img :src="carouselAnat" class="mb-1"/>
+    <img :src="carouselAnat2" class="mb-3" />
+
+    <ol class="pb-5">
       <li>Carousel content. This can contain cards, text, image and call to actions.</li>
       <li>
         Navigation arrow. (Optional) Using secondary compact buttons that progress the carousel forward or backward. If
@@ -64,8 +90,9 @@
         user context to how far along in the carousel they are and allows user to user slider behaviour to navigate the
         content.
       </li>
-    </ul>
+    </ol>
 
+    <!--
     <div class="admin-panel visualtest mb-5">
       <h2>Carousel in an admin panel</h2>
       <Carousel data-smcols="2" data-mdcols="3">
@@ -163,6 +190,8 @@
       </Carousel>
     </dialog>
     </Modal>
+
+  -->
     <Integration component="carousel" componentName="iam-carousel">
       <template #web-component>
         <pre><code>{{`<iam-carousel>
@@ -306,10 +335,16 @@
         <ul>
           <li>The previous and next button should show the a set amount of items and not just move along by 1.</li>
           <li>The pip buttons should move the carousel along by a set amount of items and not just 1.</li>
-          <li>The slider just be displayed instead of the pips if there wojuld be more than 5 pips shown.</li>
-          <li>The carousel should work inside of the admin-panel element and the dialog/modal element.</li>
+          <li>The slider should be displayed instead of the pips if there would be more than 5 pips shown.</li>
         </ul>
       </template>
+      <template #examples>
+        <ul>
+          <li><a href="/examples/carousel-admin-panel">Carousel in an admin panel</a></li>
+        </ul>
+      </template>
+
+      
       <template #data-layer>
         <span v-html="events"></span>
       </template>
@@ -334,3 +369,4 @@
     </Versions>
   </main>
 </template>
+
