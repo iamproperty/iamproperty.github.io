@@ -64,7 +64,7 @@
     grid-column: auto!important;
     min-height: 100%;
     margin: 0;
-    scroll-snap-align: start!important;
+    scroll-snap-align: start;
   }
   /* #endregion */
 
@@ -226,7 +226,7 @@
   
   iam-carousel:has(> *:first-child:last-child) {
     
-    --hide-buttons: 1;
+    //--hide-buttons: 1;
     --hide-markers: 1;
   }
   
@@ -235,19 +235,19 @@
     @container (min-width: 30em) and (max-width: 63em){ /* TODO work out this number - shoule be 6 columns */
       &[data-smcols='2']:not(:has(> *:nth-child(3))) {
 
-        --hide-buttons: 1;
+        //--hide-buttons: 1;
         --hide-markers: 1;
 
-        --button-height: 0rem;
+        //--button-height: 0rem;
         --marker-height: 0rem;
         --marker-mb: 0rem;
       }
       &[data-smcols='3']:not(:has(> *:nth-child(4))) {
 
-        --hide-buttons: 1;
+        //--hide-buttons: 1;
         --hide-markers: 1;
 
-        --button-height: 0rem;
+        //--button-height: 0rem;
         --marker-height: 0rem;
         --marker-mb: 0rem;
       }
@@ -308,6 +308,10 @@
 
         --count: 3;
       }
+      &[data-mdcols='4'] {
+
+        --count: 4;
+      }
     }
   }
   /* #endregion */
@@ -320,7 +324,8 @@
       @container style(--count) {
 
         scroll-snap-align: unset;
-        
+        scroll-snap-stop: unset;
+
         &::scroll-marker{
 
           display: none;
@@ -329,12 +334,13 @@
 
       @container style(--count: 2) {
 
-        &:nth-child(2n - 1) {
+        
+        &:nth-child(2n + 1) {
           scroll-snap-align: start;
           scroll-snap-stop: always;
         }
 
-        &:nth-child(2n - 1)::scroll-marker{
+        &:nth-child(2n + 1)::scroll-marker{
 
           display: block;
         }
@@ -342,12 +348,25 @@
 
       @container style(--count: 3) {
 
-        &:nth-child(3n - 1) {
+        &:nth-child(3n + 1) {
           scroll-snap-align: start;
           scroll-snap-stop: always;
         }
 
-        &:nth-child(3n - 2)::scroll-marker{
+        &:nth-child(3n + 1)::scroll-marker{
+
+          display: block;
+        }
+      }
+      @container style(--count: 4) {
+
+        
+        &:nth-child(4n + 1) {
+          scroll-snap-align: start;
+          scroll-snap-stop: always;
+        }
+
+        &:nth-child(4n + 1)::scroll-marker{
 
           display: block;
         }
@@ -475,7 +494,7 @@
 
       iam-carousel[data-smcols="2"]:has(> *:nth-child(10)){
         
-        --button-height: 0rem;
+        //--button-height: 0rem;
         
         //--hide-buttons: 1;
         --hide-markers: 1;
@@ -550,6 +569,11 @@
     --hide-buttons: 1;
     --hide-markers: 1;        
     --carousel-controls-display: block;
+
+    &::part(carousel__pips){
+      
+      height: 5rem;
+    }
   }
 
 

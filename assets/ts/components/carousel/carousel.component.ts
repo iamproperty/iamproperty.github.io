@@ -21,15 +21,15 @@ class iamCarousel extends HTMLElement {
       </style>
       <slot></slot>
       <div class="carousel__controls" part="carousel__controls">
-        <div class="carousel__pips"></div>
+        <div class="carousel__pips" part="carousel__pips"></div>
         <div class="carousel__progress carousel__progress-xs" part="carousel__progress-xs">
-          <input type="range" min="0" max="100" value="0" step="1" />
+          <input type="range" min="1" max="100" value="1" step="1" />
         </div>
         <div class="carousel__progress carousel__progress-sm" part="carousel__progress-sm">
-          <input type="range" min="0" max="100" value="0" step="1" />
+          <input type="range" min="1" max="100" value="1" step="1" />
         </div>
         <div class="carousel__progress carousel__progress-md" part="carousel__progress-md">
-          <input type="range" min="0" max="100" value="0" step="1" />
+          <input type="range" min="1" max="100" value="1" step="1" />
         </div>
       </div>
     `;
@@ -100,25 +100,35 @@ class iamCarousel extends HTMLElement {
     const itemCount = this.querySelectorAll(':scope > *:not(.carousel__controls)').length;
     const progressPercent = this.progressPercent;
 
-    
-    this.setAttribute('data-current',0);
+    this.querySelectorAll(':scope > *').forEach((item,index) => {
+      item.setAttribute('data-child',index+1);
+    })
+    this.setAttribute('data-current',1);
     
     this.addEventListener("scrollsnapchange", (event) => {
       
       const snapTargetInlineElement = event.snapTargetInline;
-      const index = Array.from(snapTargetInlineElement.parentElement.children).indexOf(snapTargetInlineElement);
+      const child = Array.from(snapTargetInlineElement.parentElement.children).indexOf(snapTargetInlineElement)+1;
 
-      if(index != this.getAttribute('data-current')){
+      if(child != this.getAttribute('data-current')){
         const customEvent = new CustomEvent(`snap-to`, {
           detail: {
-            item: index+1,
+            item: child,
           },
         });
 
         this.dispatchEvent(customEvent);
-        this.setAttribute('data-current',index);
+        this.setAttribute('data-current',child);
       }
 
+      console.log(child);
+      carouselProgress.value = child;
+      carouselProgress.style.setProperty('--percent', progressPercent(child, itemCount));
+      carouselProgressSM.value = child;
+      carouselProgressSM.style.setProperty('--percent', progressPercent(child, carouselProgressSM?.getAttribute('max')));
+      carouselProgressMD.value = child;
+      carouselProgressMD.style.setProperty('--percent', progressPercent(child, carouselProgressMD?.getAttribute('max')));
+      
     });
     
 
@@ -163,17 +173,18 @@ class iamCarousel extends HTMLElement {
   
     // SM Progress bar
     const smStep = this.getAttribute('data-smcols') ? this.getAttribute('data-smcols') : 1;
-    const smItemCount = Math.floor(itemCount / smStep) * smStep;
+    //const smItemCount = Math.floor(itemCount / smStep) * smStep;
+    const SMMax = ((Math.floor(itemCount / smStep)-1) * smStep)+1;
 
-    carouselProgressSM.setAttribute('max', smItemCount);
+    carouselProgressSM.setAttribute('max', SMMax);
     carouselProgressSM.setAttribute('step', smStep);
 
-    carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, smItemCount));
+    carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max')));
     
     carouselProgressSM.addEventListener(stepperStart, () => {
       clearInterval(stepperInterval);
       stepperInterval = setInterval(function () {
-        carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, smItemCount));
+        carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max')));
       });
     });
 
@@ -185,8 +196,8 @@ class iamCarousel extends HTMLElement {
 
       clearInterval(stepperInterval);
 
-      carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, smItemCount));
-      const scrollTo = Math.floor((carouselElement.scrollWidth / smItemCount) * carouselProgressSM.value);
+      carouselProgressSM.style.setProperty('--percent', progressPercent(carouselProgressSM.value, carouselProgressSM?.getAttribute('max')));
+      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * carouselProgressSM.value);
 
       carouselElement.scrollTo({
         top: 0,
@@ -197,18 +208,18 @@ class iamCarousel extends HTMLElement {
 
     // MD Progress bar
 
-    const mdStep = this.getAttribute('data-smcols') ? this.getAttribute('data-smcols') : 1;
-    const mdItemCount = Math.floor(itemCount / mdStep) * mdStep;
+    const mdStep = this.getAttribute('data-mdcols') ? this.getAttribute('data-mdcols') : 1;
+    const mdMax = ((Math.floor(itemCount / mdStep)-1) * mdStep)+1;
 
-    carouselProgressMD.setAttribute('max', mdItemCount);
+    carouselProgressMD.setAttribute('max', mdMax);
     carouselProgressMD.setAttribute('step', mdStep);
 
-    carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, mdItemCount));
-    
+    carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max')));
+
     carouselProgressMD.addEventListener(stepperStart, () => {
       clearInterval(stepperInterval);
       stepperInterval = setInterval(function () {
-        carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, mdItemCount));
+        carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max')));
       });
     });
 
@@ -220,8 +231,10 @@ class iamCarousel extends HTMLElement {
 
       clearInterval(stepperInterval);
 
-      carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, mdItemCount));
-      const scrollTo = Math.floor((carouselElement.scrollWidth / mdItemCount) * carouselProgressMD.value);
+      carouselProgressMD.style.setProperty('--percent', progressPercent(carouselProgressMD.value, carouselProgressMD?.getAttribute('max')));
+      const scrollTo = Math.floor((carouselElement.scrollWidth / itemCount) * carouselProgressMD.value);
+
+      console.log(carouselProgressMD.value);
 
       carouselElement.scrollTo({
         top: 0,
@@ -232,7 +245,7 @@ class iamCarousel extends HTMLElement {
 
 
     // Thumbnails
-    const carouselPips = this.querySelector('.carousel__pips');
+    const carouselPips = this.shadowRoot.querySelector('.carousel__pips');
 
     if (carouselElement.querySelector('[data-thumbnail]')) {
       const thumbnailImages = this.generateThumbnailList(carouselElement);

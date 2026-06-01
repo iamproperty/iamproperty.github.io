@@ -582,7 +582,8 @@ const routes = [
         name: 'Carousel',
         meta: {
           title: 'Carousel | Components | iamkey',
-          jira: 'FEG-954'
+          jira: 'FEG-954',
+          status: 'qa'
         },
         component: () => import('./views/components/CarouselDoc.vue'),
         searchterms: 'slideshow',
