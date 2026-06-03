@@ -1,8 +1,6 @@
 <script setup lang="ts">
   import DSHeader from '../DSHeader.vue';
   import headerImg from '../../img/cards-header.png';
-  import Tabs from '@/components/Tabs/Tabs.vue';
-
   import Search from '@/components/Search/Search.vue';
   import Integration from '../Integration.vue';
   import Versions from '../Versions.vue';
@@ -13,7 +11,7 @@
 
 <template>
   <TrackEvents
-    selector="iam-carousel"
+    selector="iam-search"
     :events="['pip-clicked', 'next-clicked', 'prev-clicked', 'slider-changed']"
   ></TrackEvents>
   <main>
@@ -21,14 +19,33 @@
       <h1>Search</h1>
     </DSHeader>
 
-    <h2>Standard search</h2>
     <p class="lead">The search field is an element typically used in forms, tables to filter data.</p>
 
-    <h3>Anatomy</h3>
+    <h2>Anatomy</h2>
 
     <p>Search uses an the existing input field (with suffix) with two optional features.</p>
 
-    <img :src="searchAnatomy" class="mb-5" />
+    <div class="container visualtest bg-light mb-5">
+      <div class="md-col-start-4 md-col-end-9">
+        
+        
+          <label
+            >Property address
+            <Search class="">
+              <input type="text" name="client" list="properties" />
+              <datalist id="properties">
+                <option value="45">1 Oak Road, Newcastle upon Tyne, NE2 6TY</option>
+                <option value="4">4 Beach Avenue, Newcastle upon Tyne, NE6 9PO</option>
+                <option value="4">4 Main Street, Newcastle upon Tyne, NE4 9JK</option>
+                <option value="6">6 Oak Ridge, Newcastle upon Tyne, NE1 1DU</option>
+                <option value="13">13 Oak Lane, Newcastle upon Tyne, NE3 6GH</option>
+                <option value="14">14 Main Road, Newcastle upon Tyne, NE1 6TU</option>
+              </datalist>
+            </Search>
+          </label>
+      </div>
+
+    </div>
 
     <ul class="mb-5">
       <li>Input field (with suffix)</li>
@@ -40,167 +57,74 @@
 
     <p>The field should be able to trigger the search in one of three ways:</p>
     <ul class="mb-3">
-      <li><strong>Automatically:</strong> typing automatically triggers the search and updates the results</li>
-      <li><strong>Manually:</strong> pressing enter/clicking search icon, or tabbing away from search</li>
-      <li>
-        <strong>After delay:</strong> after a certain amount of characters have been entered or after a specified amount
-        of time
-      </li>
+      <li><strong>Automatically triggered:</strong> yping automatically triggers the search and updates the results</li>
+      <li><strong>After delay triggered: </strong> fter a certain amount of characters have been entered or after a specified amount of time</li>
+      <li>The user should be able to clear the field via the clear field icon.</li>
+      <li>Selecting an option should add that value to the field and close the dropdown.</li>
+      <li>When the user re-opens the field once a value has been selected it should show all options with the current value shown as placeholder text and with that value highlighted in the dropdown as selected. Once the user starts typing the placeholder text should disappear.</li>
+      <li>If the field is empty and an invalid value is typed and enter is pressed then the field should revert back to empty.</li>
+      <li>If the field already has a value and the user tries to edit the value with a non-valid value then after press enter, the chevron, or clicks away from the field, the value should return to the last valid value.</li>
+      
     </ul>
 
-    <p>The user should be able to clear the field via the clear field icon.</p>
+    <p>There is an optional feature of searches to include a browser default popover that presents any valid or suggested values that the user can click to fill the search field.</p>
 
-    <p>
-      There is an optional feature of searches to include a browser default popover that presents any valid or suggested
-      values that the user can click to fill the search field.
-    </p>
-
-    <div class="container visualtest">
-      <div class="md-col-end-5 mb-4">
-        <span class="d-block pb-2">DEFAULT</span>
-        
-          <label
-            >Property address
-            <Search class="">
-              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              <datalist id="properties">
-                <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-                <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-                <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-                <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-                <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-                <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
-              </datalist>
-            </Search>
-          </label>
-      </div>
-
-      <div class="md-col-end-5 mb-4">
-        <span class="d-block pb-2">DEFAULT</span>
-        
-          <label
-            >Property address
-            <Search class="">
-              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties" />
-              <datalist id="properties">
-                <option value="1 Oak Road, Newcastle upon Tyne, NE2 6TY"></option>
-                <option value="4 Beach Avenue, Newcastle upon Tyne, NE6 9PO"></option>
-                <option value="4 Main Street, Newcastle upon Tyne, NE4 9JK"></option>
-                <option value="6 Oak Ridge, Newcastle upon Tyne, NE1 1DU"></option>
-                <option value="13 Oak Lane, Newcastle upon Tyne, NE3 6GH"></option>
-                <option value="14 Main Road, Newcastle upon Tyne, NE1 6TU"></option>
-              </datalist>
-            </Search>
-          </label>
-      </div>
-    </div>
-
+    <!--
     <h2 class="mt-5">Ajax example</h2>
 
     <div class="container visualtest">
-      <form novalidate method="GET" id="search-property">
-          <label
-            >Search existing transactions
-            <Search data-url="/existing.json?search=" data-prevent-submit>
-              <input type="text" name="client" autocomplete="off" aria-autocomplete="none" list="properties3" />
-              <datalist id="properties3"></datalist>
+      <form id="search-property" novalidate method="GET">
+          <label>Search existing transactions
+            
+            
+            <Search data-url="/existing.json">
+              <input type="text" name="query" autocomplete="off" aria-autocomplete="none" />
+              <input type="hidden" name="language" value="en"/>
             </Search>
+
             <span class="hint-text">Enter 3 or more characters</span>
           </label>
         <button class="d-none btn btn-primary">Submit</button>
       </form>
     </div>
-
-    <h2 class="mt-5">Grouped results</h2>
-    <p>
-      If the API JSON values are returned as a key value pair object instead of an array the keys are then used as a
-      prefix for the results. This gives the user some more context for the results.
-    </p>
-    <div class="container visualtest mb-5">
-      <form novalidate method="GET" id="search-iamsold">
-        
-          <label
-            >Search existing transactions
-            
-            <Search
-              data-url="/iamsold.json?search="
-              data-value-schema="url"
-              data-display-schema="title"
-              data-schema="data.results"
-            >
-              <input
-                type="text"
-                name="url"
-                id="search-url"
-                autocomplete="off"
-                aria-autocomplete="none"
-                required
-                data-change-events='[
-                  {"in-list":"#iamsold-pages", "target": "#search-url", "if": "openLink"}
-                  ]'
-                list="iamsold-pages"
-              />
-              <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search"></button>
-                
-              <datalist id="iamsold-pages"></datalist>
-            </Search>
-          </label>
-
-      </form>
-    </div>
-
-    <h2 class="pt-5">Stylised search</h2>
+ -->
+    
+    <h2 class="pt-2">Stylised search</h2>
 
     <p>The stylised search field is an element typically used in admin panels, navigation menus and as a standalone field within a page.</p>
 
-    <label><span class="visually-hidden">Search existing transactions</span>
-            
-      <Search class="search--stylised mt-0">
-        <input
-          type="text"
-          name="url"
-          id="style-url"
-          autocomplete="off"
-          aria-autocomplete="none"
-          list="style-pages"
-          placeholder="Search all learning articles"
-          class="input--sm box-shadow"
-        />
-        <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search"></button>
-          
-        <datalist id="style-pages">
-          <option value="1 Lake Avenue, Newcastle upon Tyne, NE2 2TB"></option>
-          <option value="12 Oak Road, Newcastle upon Tyne, NE3 4QT"></option>
-          <option value="3 Peach Avenue, Newcastle upon Tyne, NE1 1PO"></option>
-        </datalist>
-      </Search>
-    </label>
-
-    <h3 class="pt-5">Anatomy</h3>
+    <h3>Anatomy</h3>
 
     <p>Stylised search uses the same behaviours as the standard search but is styled in a more visually appealing way. The stylised search also comes with the option to include a drop shadow into the field.</p>
-    
-    <img :src="stylisedSearchAnatomy" class="mb-5" />
 
+    <div class="container visualtest bg-light mb-5">
+      <div class="md-col-start-4 md-col-end-9">
+        <label><span class="visually-hidden">Search existing transactions</span>
+          <Search class="search--stylised mt-0">
+            <input
+              type="text"
+              name="url"
+              id="style-url"
+              autocomplete="off"
+              aria-autocomplete="none"
+              list="style-pages"
+              placeholder="Search all learning articles"
+            />
+            <datalist id="style-pages">
+              <option value="1 Lake Avenue, Newcastle upon Tyne, NE2 2TB"></option>
+              <option value="12 Oak Road, Newcastle upon Tyne, NE3 4QT"></option>
+              <option value="3 Peach Avenue, Newcastle upon Tyne, NE1 1PO"></option>
+            </datalist>
+          </Search>
+        </label>
+      </div>
+    </div>
+    
     <ol class="mb-5">
       <li>Input field (with optional drop shadow )</li>
       <li>Browser default popover</li>
       <li>Clear field button - compact quiet action button</li>
     </ol>
-
-    <h3>Behaviour</h3>
-
-    <p>The field should be able to trigger the search in one of three ways:</p>
-
-    <ul class="mb-5">
-      <li><strong>Automatically:</strong> typing automatically triggers the search and updates the results</li>
-      <li><strong>Manually:</strong> pressing enter/clicking search icon, or tabbing away from search</li>
-      <li><strong>After delay:</strong> after a certain amount of characters have been entered or after a specified amount of time</li>
-    </ul>
-
-    <p>The user should be able to clear the field via the clear field icon.</p>
-
-    <p>There is an optional feature of searches to include a browser default popover that presents any valid or suggested values that the user can click to fill the search field.</p>
 
     <h3>Sizes</h3>
 
@@ -213,6 +137,32 @@
     </ul>
 
     
+    <h3>Variants</h3>
+    
+    <h4>Drop shadow</h4>
+    <div class="container visualtest bg-light mb-5">
+      <div class="md-col-start-4 md-col-end-9">
+        <label><span class="visually-hidden">Search existing transactions</span>
+          <Search class="search--stylised mt-0">
+            <input
+              type="text"
+              name="url"
+              id="style-url"
+              autocomplete="off"
+              aria-autocomplete="none"
+              list="style-pages"
+              placeholder="Search all learning articles"
+              class="input--sm box-shadow"
+            />
+            <datalist id="style-pages">
+              <option value="1 Lake Avenue, Newcastle upon Tyne, NE2 2TB"></option>
+              <option value="12 Oak Road, Newcastle upon Tyne, NE3 4QT"></option>
+              <option value="3 Peach Avenue, Newcastle upon Tyne, NE1 1PO"></option>
+            </datalist>
+          </Search>
+        </label>
+      </div>
+    </div>
 
     <Integration component="search" componentName="search">
       <template #web-component>

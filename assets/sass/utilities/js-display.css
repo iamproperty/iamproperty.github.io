@@ -3,11 +3,10 @@
     .js-show {
       display: none !important;
     }
-  }
-
-  @media (scripting: none) {
+      
     .js-hide {
       display: none !important;
     }
   }
+
 }
