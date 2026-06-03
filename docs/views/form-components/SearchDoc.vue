@@ -138,10 +138,31 @@
 
     
     <h3>Variants</h3>
+    <p>The field is available with a drop shadow - this can be used cases where the search function needs to stand out visually. It is an optional effect which can be used at the discretion of the design team.</p>
     
-    <h4>Drop shadow</h4>
-    <div class="container visualtest bg-light mb-5">
-      <div class="md-col-start-4 md-col-end-9">
+    <div class="container visualtest">
+      <div class="md-col-end-5 pe-4">
+        <label><span class="visually-hidden">Search existing transactions</span>
+          <Search class="search--stylised mt-0">
+            <input
+              type="text"
+              name="url"
+              id="style-url"
+              autocomplete="off"
+              aria-autocomplete="none"
+              list="style-pages"
+              placeholder="Search all learning articles"
+              class="input--sm"
+            />
+            <datalist id="style-pages">
+              <option value="1 Lake Avenue, Newcastle upon Tyne, NE2 2TB"></option>
+              <option value="12 Oak Road, Newcastle upon Tyne, NE3 4QT"></option>
+              <option value="3 Peach Avenue, Newcastle upon Tyne, NE1 1PO"></option>
+            </datalist>
+          </Search>
+        </label>
+      </div>
+      <div class="md-col-start-6 md-col-end-10 pe-4">
         <label><span class="visually-hidden">Search existing transactions</span>
           <Search class="search--stylised mt-0">
             <input
@@ -256,33 +277,6 @@
             </tr>
           </tbody>
         </table>
-      </template>
-
-
-      <template #criteria>
-        <ul>
-          <li>
-            Selecting the field should activate the dropdown and set the field to active so the user can begin typing.
-          </li>
-          <li>Selecting the field on mobile should show both the dropdown and keyboard.</li>
-          <li>All valid options from the pre-defined list should be shown in the dropdown below.</li>
-          <li>Typing in the field should begin filtering options that match the term in the dropdown.</li>
-          <li>Selecting an option should add that value to the field and close the dropdown.</li>
-          <li>[data-url] is used for the endpoint address</li>
-          <li>A datalist can be added to provide search values before calling the endpoint</li>
-          <li>
-            Dynamic events can be added to enhance functionalitity i.e. triggering the parent form to submit when a
-            datalist value is selected
-          </li>
-          <li>
-            [data-schema] & [data-value-schema] & [data-display-schema] can be used to change the values used from the
-            endpoint
-          </li>
-          <li>Typing in 3 characters will trigger an ajax call, the same call can't be made twice</li>
-          <li>The ajax call will populate the datalist with new items and will not remove existing items</li>
-          <li>A second hidden input field is created to hide values like ID's</li>
-          <li>We should be allowed to submit the form unless data-prevent-submit is set.</li>
-        </ul>
       </template>
 
       <template #dispatched-events>

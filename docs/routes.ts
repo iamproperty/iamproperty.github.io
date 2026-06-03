@@ -864,6 +864,8 @@ const routes = [
         name: 'Search component',
         meta: {
           title: 'Search | Components | iamkey',
+          jira: 'FEG-960',
+          status: 'qa'
         },
         component: () => import('./views/form-components/SearchDoc.vue'),
       },
