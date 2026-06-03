@@ -9,8 +9,6 @@ const dialogElement = ref();
 
 onMounted(async() => {
     
-    
-
   try {
     await fetch('https://helpcentre.iamproperty.com/api/v2/help_center/articles/search.json?label_names=crm_articles')
     .then((response) => response.json())
