@@ -296,6 +296,10 @@ class iamSearch extends HTMLElement {
       
       inputElement.setAttribute('placeholder', this.getAttribute('data-original-placeholder') || '');
 
+      if(this.querySelector(`[name="${inputElement.getAttribute('name')}Alt"]`)){
+        this.querySelector(`[name="${inputElement.getAttribute('name')}Alt"]`)?.remove();
+      }
+      
       datalistElement.querySelectorAll('option').forEach((option) => {
 
         option.classList.remove('active');
