@@ -6,3 +6,168 @@
 *::after {
   box-sizing: border-box;
 }
+
+
+
+@layer components {
+
+/* #region progress bar */
+  .carousel__controls {
+    display: var(--carousel-controls-display, none);
+    position: absolute;
+    position-anchor: --carousel;
+
+    top: auto;
+    left: anchor(left);
+    right: anchor(right);
+    bottom: anchor(bottom);
+    min-height: 0;
+    width: auto;
+    z-index: 99;
+  }
+
+  .carousel__progress {
+    margin-inline: auto;
+    text-align: center;
+    display: none;
+    padding-bottom: 0;
+    
+    input[type='range'] {
+      --track-size: 0.5rem;
+      --track-colour: #a5ecfd;
+      --thumb-colour: var(--colour-info);
+      --thumb-size: 1rem;
+      --thumb-size-outline: 0;
+      width: 90%;
+      max-width: 10.75rem; /* 172 */
+
+      background: transparent;
+      cursor: pointer;
+      margin: 0;
+      height: 1rem;
+      border-radius: 50%;
+      accent-color: var(--thumb-colour);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    /*  Track Styles */
+    input[type='range']::-webkit-slider-runnable-track {
+      background: var(--track-colour);
+      height: var(--track-size);
+      border-radius: 0.5625rem; /* 9 */
+    }
+
+    input[type='range']::-moz-range-track {
+      background: var(--track-colour);
+      height: var(--track-size);
+      border-radius: 0.5625rem; /* 9 */
+    }
+
+    /*  Extended track functionality */
+    input[type='range']::-webkit-slider-runnable-track {
+      background: linear-gradient(
+        to right,
+        var(--track-colour),
+        var(--track-colour) var(--start-percent, 0%),
+        var(--thumb-colour) var(--start-percent, 0%),
+        var(--thumb-colour) calc(var(--percent, 0%)),
+        var(--track-colour) calc(var(--percent, 0%))
+      );
+    }
+
+    input[type='range']::-moz-range-track {
+      background: linear-gradient(
+        to right,
+        var(--track-colour),
+        var(--track-colour) var(--start-percent, 0%),
+        var(--thumb-colour) var(--start-percent, 0%),
+        var(--thumb-colour) calc(var(--percent, 0%)),
+        var(--track-colour) calc(var(--percent, 0%))
+      );
+    }
+
+    /*  Thumb Styles */
+    input[type='range']::-webkit-slider-thumb {
+      -webkit-appearance: none; /* Override default look */
+      appearance: none;
+      margin-top: -0.25rem; /* Centers thumb on the track */
+      background-color: var(--thumb-colour);
+      height: var(--thumb-size);
+      width: var(--thumb-size);
+      border-radius: 50%;
+      position: relative;
+      z-index: 99;
+      pointer-events: all;
+    }
+
+    input[type='range']::-moz-range-thumb {
+      border: none; /*Removes extra border that FF applies*/
+      background-color: var(--thumb-colour); /*Removes default border-radius that FF applies*/
+      height: var(--thumb-size);
+      width: var(--thumb-size);
+      border-radius: 50%;
+      position: relative;
+      z-index: 99;
+      pointer-events: all;
+    }
+
+    /*  Focus Styles */
+    input[type='range']:focus {
+      outline: none;
+    }
+
+    input[type='range']:hover::-webkit-slider-thumb,
+    input[type='range']:focus::-webkit-slider-thumb {
+      outline: var(--thumb-size-outline) solid var(--thumb-colour);
+    }
+
+    input[type='range']:active::-webkit-slider-thumb {
+      outline: var(--thumb-size-outline) solid var(--thumb-colour);
+    }
+
+    input[type='range']:hover::-moz-range-thumb,
+    input[type='range']:focus::-moz-range-thumb {
+      outline: var(--thumb-size-outline) solid var(--thumb-colour);
+    }
+    input[type='range']:focus::-moz-range-thumb {
+      outline: var(--thumb-size-outline) solid var(--thumb-colour);
+    }
+  }
+  /* #endregion */
+  
+
+  .carousel__pips {
+    display: flex !important;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+
+    button {
+      padding: 0;
+      margin: 0 0.2rem 0.4rem;
+
+      width: 6rem;
+      height: 4rem;
+      aspect-ratio: 3 / 2;
+
+      border-radius: 0;
+      position: relative;
+      border-radius: 0.25rem;
+
+      img {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        margin: 0;
+      }
+
+      &[aria-current] {
+        outline: 2px solid var(--colour-info);
+      }
+    }
+  }
+}
