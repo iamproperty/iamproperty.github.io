@@ -14,8 +14,6 @@
 
   const checkSearch = (event) => {
 
-    console.log(event.detail);
-
     if(event.detail.url) {
       window.location.href = event.detail.url;
     }
