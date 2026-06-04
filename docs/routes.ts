@@ -297,6 +297,7 @@ const routes = [
         name: 'Buttons',
         meta: {
           title: 'Buttons | Elements | iamkey',
+          jira: 'FEG-982'
         },
         component: () => import('./views/links/Buttons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
@@ -315,6 +316,7 @@ const routes = [
         name: 'Action buttons',
         meta: {
           title: 'Action buttons | Elements | iamkey',
+          jira: 'FEG-982'
         },
         component: () => import('./views/links/ActionButtons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
@@ -324,6 +326,7 @@ const routes = [
         name: 'Compact buttons',
         meta: {
           title: 'Compact buttons | Elements | iamkey',
+          jira: 'FEG-982'
         },
         component: () => import('./views/links/CompactButtons.vue'),
         searchterms: 'anchor, prompt, secondary button, primary button, compact',
@@ -467,6 +470,7 @@ const routes = [
         name: 'Dialog (Popover)',
         meta: {
           title: 'Dialog (Popover) | Dialogs | iamkey',
+          jira: 'FEG-981'
         },
         component: () => import('./views/dialogs/PopoverDoc.vue'),
         searchterms: 'passive, transactional, acknowledgement, popover, no top, pointer, tooltip',
@@ -558,6 +562,7 @@ const routes = [
         name: 'Banner',
         meta: {
           title: 'Banner | Components | iamkey',
+          jira: 'FEG-915'
         },
         component: () => import('./views/components/BannerDoc.vue'),
       },
@@ -723,6 +728,7 @@ const routes = [
         name: 'Tabs',
         meta: {
           title: 'Tabs | Components | iamkey',
+          jira: 'FEG-980'
         },
         component: () => import('./views/components/TabsDoc.vue'),
         searchterms: 'admin panel, ',
@@ -856,6 +862,7 @@ const routes = [
         name: 'Multiselect',
         meta: {
           title: 'Multiselect | Components | iamkey',
+          jira: 'FEG-976'
         },
         component: () => import('./views/form-components/Multiselect.vue'),
       },
@@ -927,6 +934,7 @@ const routes = [
         name: 'Navbar',
         meta: {
           title: 'Navbar | Components | iamkey',
+          jira: 'FEG-934'
         },
         component: () => import('./views/nav/NavDoc.vue'),
       },
@@ -935,6 +943,7 @@ const routes = [
         name: 'Navbar-secondary',
         meta: {
           title: 'Navbar-secondary | Components | iamkey',
+          jira: 'FEG-934'
         },
         component: () => import('./views/nav/NavSecondaryDoc.vue'),
       },
@@ -943,6 +952,7 @@ const routes = [
         name: 'Navbar-mega menu',
         meta: {
           title: 'Navbar-mega menu | Components | iamkey',
+          jira: 'FEG-934'
         },
         component: () => import('./views/nav/NavMegaDoc.vue'),
       },
@@ -951,6 +961,7 @@ const routes = [
         name: 'Navbar-dual',
         meta: {
           title: 'Navbar-dual menu | Components | iamkey',
+          jira: 'FEG-934'
         },
         component: () => import('./views/nav/NavDualDoc.vue'),
       },
@@ -959,6 +970,7 @@ const routes = [
         name: 'Navbar-menu',
         meta: {
           title: 'Navbar-menu menu | Components | iamkey',
+          jira: 'FEG-934'
         },
         component: () => import('./views/nav/NavMenuDoc.vue'),
       },
@@ -1064,6 +1076,7 @@ const routes = [
         name: 'Doughnut chart',
         meta: {
           title: 'Doughnut chart | Components | iamkey',
+          jira: 'FEG-966'
         },
         component: () => import('./views/charts/DoughnutChart.vue'),
       },
