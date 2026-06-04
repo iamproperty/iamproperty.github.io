@@ -1,5 +1,5 @@
 export const generateList = (routes:any, path:string) => {
-  
+
   return routes.reduce(function (arr, route) {
     // Find the correct group
     if (route.path === path) {
@@ -14,6 +14,7 @@ export const generateList = (routes:any, path:string) => {
           route.jira = route.meta.jira;
           route.ver = route.meta.ver;
           route.content = '';
+          route.content = route.meta.desc;
           acc.push(route);
         }
         return acc;

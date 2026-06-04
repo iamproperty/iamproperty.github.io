@@ -52,11 +52,11 @@ class iamContent extends HTMLElement {
         element.remove();
       });
     }
-    
+
     const itemClass = component.getAttribute('data-items-class');
 
     if(itemClass){
-        
+
       wrapper.querySelectorAll(`:scope > *`).forEach((element) => {
         element.classList.add(itemClass);
       });
@@ -101,7 +101,7 @@ class iamContent extends HTMLElement {
 
         if (contentComponent.getElementsByTagName(`iam-${component}`).length === 0) return;
 
-        import(/* @vite-ignore */ `${assetLocation}/js/components/${component}/${component}.component.js`)
+        import(/*! @vite-ignore */ `${assetLocation}/js/components/${component}/${component}.component.js`)
           .then((module) => {
             if (!window.customElements.get(`iam-${component}`))
               window.customElements.define(`iam-${component}`, module.default);
@@ -126,22 +126,22 @@ class iamContent extends HTMLElement {
           const renderedContent = response.content.rendered.replaceAll(/<p>\[(.*)\]<\/p>/g, "<span data-shortcode=\"$1\"><iam-skeleton><iam-bone class=\"search\"></iam-bone></iam-skeleton></span>");
 
 
-          
+
           component.parentElement?.querySelector('.iam-content--title')?.remove();
           component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
 
 
 
           if(transform){
-          
-            component.innerHTML = `<${transform} ${elementAttributes}>${renderedContent}</${transform}>`;  
+
+            component.innerHTML = `<${transform} ${elementAttributes}>${renderedContent}</${transform}>`;
             component.removeAttribute('class');
           }
           else {
-            
+
             component.innerHTML = `${renderedContent}`;
           }
-            
+
           fixContent(component);
           registerComponents(component);
           transformButtons(component);

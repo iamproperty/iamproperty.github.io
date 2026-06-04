@@ -613,11 +613,15 @@ const routes = [
       },
       {
         path: 'content',
-        name: 'Content (alpha)',
+        name: 'Content',
         meta: {
           title: 'Content | Components | iamkey',
+          jira: 'FEG-977',
+          status: 'dev',
+          desc: 'This component is used to load in content from the wordpress rest API.'
         },
         component: () => import('./views/components/ContentDoc.vue'),
+        searchterms: 'wordpress',
       },
       {
         path: 'dark-mode-switch',
