@@ -27,8 +27,8 @@
 
     <div class="container visualtest bg-light mb-5">
       <div class="md-col-start-4 md-col-end-9">
-        
-        
+
+
           <label
             >Property address
             <Search class="">
@@ -64,7 +64,7 @@
       <li>When the user re-opens the field once a value has been selected it should show all options with the current value shown as placeholder text and with that value highlighted in the dropdown as selected. Once the user starts typing the placeholder text should disappear.</li>
       <li>If the field is empty and an invalid value is typed and enter is pressed then the field should revert back to empty.</li>
       <li>If the field already has a value and the user tries to edit the value with a non-valid value then after press enter, the chevron, or clicks away from the field, the value should return to the last valid value.</li>
-      
+
     </ul>
 
     <p>There is an optional feature of searches to include a browser default popover that presents any valid or suggested values that the user can click to fill the search field.</p>
@@ -75,8 +75,8 @@
     <div class="container visualtest">
       <form id="search-property" novalidate method="GET">
           <label>Search existing transactions
-            
-            
+
+
             <Search data-url="/existing.json">
               <input type="text" name="query" autocomplete="off" aria-autocomplete="none" />
               <input type="hidden" name="language" value="en"/>
@@ -88,7 +88,7 @@
       </form>
     </div>
  -->
-    
+
     <h2 class="pt-2">Stylised search</h2>
 
     <p>The stylised search field is an element typically used in admin panels, navigation menus and as a standalone field within a page.</p>
@@ -119,7 +119,7 @@
         </label>
       </div>
     </div>
-    
+
     <ol class="mb-5">
       <li>Input field (with optional drop shadow )</li>
       <li>Browser default popover</li>
@@ -136,10 +136,10 @@
       <li><strong>Compact:</strong> this follows the same height and sizing of the compact buttons with the ability to show the full field upon pressed.</li>
     </ul>
 
-    
+
     <h3>Variants</h3>
     <p>The field is available with a drop shadow - this can be used cases where the search function needs to stand out visually. It is an optional effect which can be used at the discretion of the design team.</p>
-    
+
     <div class="container visualtest">
       <div class="md-col-end-5 pe-4">
         <label><span class="visually-hidden">Search existing transactions</span>
@@ -253,7 +253,7 @@
         </table>
       </template>
 
-      
+
       <template #classes>
         <table>
           <thead>
@@ -290,7 +290,7 @@
           </thead>
           <tbody>
             <tr>
-              <th>value-change</th>
+              <th>option-selected</th>
               <td>When a user selects an option from the filtered dropdown</td>
               <td>{ detail: { value: 'input value' } }</td>
             </tr>

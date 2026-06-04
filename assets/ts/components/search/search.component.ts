@@ -40,8 +40,8 @@ class iamSearch extends HTMLElement {
 
   async connectedCallback(): void {
 
-    let datalistElement = this.querySelector('datalist') as HTMLDataListElement | null; 
-    const inputElement = this.querySelector('input') as HTMLInputElement | null; 
+    let datalistElement = this.querySelector('datalist') as HTMLDataListElement | null;
+    const inputElement = this.querySelector('input') as HTMLInputElement | null;
     const suffixElement = this.shadowRoot.querySelector('.suffix') as HTMLElement | null;
     const clearBtn = this.shadowRoot.querySelector('.clear-search');
 
@@ -61,17 +61,17 @@ class iamSearch extends HTMLElement {
 
 
     // #region transform datalist into dropdown
-    
+
     // Turn off the browser's default datalist functionality to allow for a custom implementation
     inputElement.setAttribute('autocomplete', 'off');
     inputElement.setAttribute('aria-autocomplete', 'none');
 
     if(inputElement && inputElement.hasAttribute('list')){
-      
+
       inputElement.setAttribute('data-list', inputElement.getAttribute('list'));
       inputElement.setAttribute('list', '');
     }
-      
+
     if (!datalistElement) {
       datalistElement = document.createElement('datalist');
       const listID = `${inputElement?.getAttribute('name')}-list`;
@@ -93,7 +93,7 @@ class iamSearch extends HTMLElement {
 
     datalistElement.addEventListener('click', (event) => {
       if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
-      
+
         event.stopPropagation();
         event.preventDefault();
 
@@ -102,9 +102,9 @@ class iamSearch extends HTMLElement {
         datalistSelectOption(this, inputElement, event.target.closest('option'));
       }
     });
-    // #endregion 
+    // #endregion
 
-    // #region control input field 
+    // #region control input field
     inputElement.addEventListener('input', () => {
 
       if(inputElement.value.length >= 1){
@@ -153,7 +153,7 @@ class iamSearch extends HTMLElement {
         //this.classList.remove('js-show-datalist');
       }
       // Set timeout to allow click event to fire on options before hiding the list again
-      
+
       setTimeout(() => {
         this.classList.remove('js-force-show-datalist');
         this.classList.remove('js-show-datalist');
@@ -165,7 +165,7 @@ class iamSearch extends HTMLElement {
 
     // #endregion
 
-    // #region control suffix button 
+    // #region control suffix button
     suffixElement.addEventListener('click', () => {
 
       if(this.closest('form') && !this.hasAttribute('data-prevent-submit')){
@@ -183,7 +183,6 @@ class iamSearch extends HTMLElement {
 
     this.addEventListener('keydown', (event) => {
 
-      console.log(event.target);
 
       switch (event.keyCode) {
 
@@ -198,7 +197,7 @@ class iamSearch extends HTMLElement {
           break;
 
       }
-        
+
       /*
       if (event && event.target instanceof HTMLElement && event.target.closest('a, button, summary')) {
         const activeItem = document.activeElement;
@@ -284,7 +283,7 @@ class iamSearch extends HTMLElement {
     });
 
     // #endregion
-  
+
     // #region empty button
     clearBtn?.addEventListener('click', (event) => {
 
@@ -293,13 +292,13 @@ class iamSearch extends HTMLElement {
       inputElement.removeAttribute('data-value');
       inputElement.focus();
       this.classList.remove('has-value');
-      
+
       inputElement.setAttribute('placeholder', this.getAttribute('data-original-placeholder') || '');
 
       if(this.querySelector(`[name="${inputElement.getAttribute('name')}Alt"]`)){
         this.querySelector(`[name="${inputElement.getAttribute('name')}Alt"]`)?.remove();
       }
-      
+
       datalistElement.querySelectorAll('option').forEach((option) => {
 
         option.classList.remove('active');

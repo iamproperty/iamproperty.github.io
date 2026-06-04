@@ -1,16 +1,27 @@
 <script setup>
+  import { ref } from 'vue';
+  import { useRoute } from 'vue-router'
   import pkg from '../package.json';
   import Nav from '../src/components/Nav/Nav.vue';
   import DarkMode from '../src/components/DarkMode/DarkMode.vue';
 
   const version = pkg.version;
+  const route = useRoute();
 
-import { useRoute } from 'vue-router'
-  
-const route = useRoute();
+  const elementSections = ['/links', '/form'];
 
-const elementSections = ['/links', '/form'];
-  
+  const searchForm = ref(null);
+
+  const checkSearch = (event) => {
+
+    console.log(event.detail);
+
+    if(event.detail.url) {
+      window.location.href = event.detail.url;
+    }
+    else
+      searchForm.value.requestSubmit();
+  }
 </script>
 
 <template>
@@ -32,10 +43,10 @@ const elementSections = ['/links', '/form'];
       <router-link to="/components">Components</router-link>
       <router-link to="/patterns">Patterns & templates</router-link>
 
-      <form novalidate method="GET" slot="search" id="searchform" action="/search">
-        
+      <form novalidate method="GET" slot="search" id="searchform" action="/search" ref="searchForm">
+
           <label class="mb-0"><span class="visually-hidden">Search pages</span>
-            <Search>
+            <Search @option-selected="checkSearch" class="mt-0">
               <input
                 type="text"
                 name="search"
@@ -44,14 +55,10 @@ const elementSections = ['/links', '/form'];
                 list="searchterms"
                 placeholder="Search pages..."
                 class="mt-0"
-                data-change-events='[
-                {"in-list":"#searchterms", "target":"#searchform", "if": "submitForm"}
-                ]'
               />
 
-              <button class="suffix mt-0 me-0 mb-0 pe-auto"><i class="fa-regular fa-search"></i></button>
               <datalist id="searchterms" ref="list">
-                <option v-for="item in refinedResults" :value="item" :data-value="item"></option>
+                <option v-for="item in refinedResults" :data-url="item.route">{{ item.term }}</option>
               </datalist>
             </Search>
           </label>
@@ -64,8 +71,8 @@ const elementSections = ['/links', '/form'];
   <footer class="bg-primary mb-0">
     <div class="container pt-4 d-print-none">
       <ul class="list-unstyled list-inline ms-auto d-block mb-0">
-        
-      
+
+
         <li class="list-inline-item me-4 ms-0 mb-2">
           <router-link to="/launch">Launch list</router-link>
         </li>
@@ -187,7 +194,7 @@ const elementSections = ['/links', '/form'];
     }
   }
 
-  
+
   span:has(.dark-var, .light-var) {
     display: contents!important;
   }
@@ -224,16 +231,16 @@ main > .breadcrumb:first-child + * {
 
     --col-start: col-1;
   }
-          
+
 
   @layer utilities {
-      
+
     main:has(.visualtest.target) > *:is(.d-flex,.d-block):not(.target) {
 
       display: none!important;
     }
 
-    
+
     main:has(.visualtest.target) > *.target .visualtest-hide:is(.d-flex,.d-block) {
 
       display: none!important;
@@ -259,14 +266,14 @@ main > .breadcrumb:first-child + * {
   routes.forEach((route) => {
     let name = route.name ? route.name : '';
 
-    if (name != '' && name != 'Search' && name != 'Home') results.push(name);
+    if (name != '' && name != 'Search' && name != 'Home') results.push({'term': name, 'route': route.path});
 
     if (route.searchterms) {
       const array = Array.from(route.searchterms.split(','));
 
       for (let [key, term] of Object.entries(array)) {
         term = term.trim();
-        results.push(term);
+        results.push({'term': term});
       }
     }
 
@@ -274,14 +281,14 @@ main > .breadcrumb:first-child + * {
       for (const [key, value] of Object.entries(route.children)) {
         let childName = value.name ? value.name : '';
 
-        if (childName != '') results.push(childName);
+        if (childName != '') results.push({'term': childName, 'route': route.path + '/' + value.path});
 
         if (value.searchterms) {
           const array = Array.from(value.searchterms.split(','));
 
           for (let [key, term] of Object.entries(array)) {
             term = term.trim();
-            results.push(term);
+            results.push({'term': term});
           }
         }
       }

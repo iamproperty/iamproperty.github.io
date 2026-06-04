@@ -136,6 +136,8 @@ export const datalistSelectOption = (
 
   // Make sure the value of the option is passed when in a form
   if (optionElement.value && optionElement.value !== optionText) {
+
+
     if (!component.querySelector(`input[name="${inputName}Alt"]`))
       component.insertAdjacentHTML(
         'beforeend',
@@ -143,6 +145,8 @@ export const datalistSelectOption = (
       );
     else component.querySelector(`input[name="${inputName}Alt"]`).value = optionElement.value;
   } else {
+
+
     if (component.querySelector(`input[name="${inputName}Alt"]`))
       component.querySelector(`input[name="${inputName}Alt"]`)!.remove();
   }
@@ -153,6 +157,17 @@ export const datalistSelectOption = (
     if (optionLoopElement === optionElement) optionLoopElement.classList.add('active');
     else optionLoopElement.classList.remove('active');
   }
+
+
+  const customEvent = new CustomEvent('option-selected', {
+    detail: {
+      title: optionText,
+      value: optionElement.value || '',
+      url: optionElement.hasAttribute('data-url') ? optionElement.getAttribute('data-url') : ''
+    },
+  });
+
+  component.dispatchEvent(customEvent);
 };
 
 export default search;
