@@ -25,6 +25,12 @@ import Notification from '@/components/Notification/Notification.vue';
 import Multiselect from '@/components/Multiselect/Multiselect.vue';
 import BannerImg from './Banner.png';
 
+type HubEnv = {
+  MI_API_KEY?: string;
+};
+
+const hubEnv = import.meta.env as HubEnv;
+
 // todo load from api call
 const checkAccount = ref({
 
@@ -48,7 +54,7 @@ onMounted(async() => {
     const response = await fetch('https://materialinformation.datasystem.co.uk/CompetitorAnalysis/GetDistricts', {
       method: 'POST',
       headers: {
-        'x-api-key': 'IW88-XK63-HBIL-3AP2',
+        'x-api-key': hubEnv.MI_API_KEY,
         'Content-Type': 'application/vnd.api+json'
       },
     });
@@ -97,7 +103,7 @@ function agreeTerms(): void {
 }
 
 const getCompetitors = async (outcodes):Promise<void> => {
-  
+
 
   if(!outcodes)
     return false;
@@ -117,7 +123,7 @@ const getCompetitors = async (outcodes):Promise<void> => {
       method: 'POST',
       body: JSON.stringify(obj),
       headers: {
-        'x-api-key': 'IW88-XK63-HBIL-3AP2',
+        'x-api-key': hubEnv.MI_API_KEY,
         'Content-Type': 'application/vnd.api+json'
       },
     });
@@ -126,7 +132,7 @@ const getCompetitors = async (outcodes):Promise<void> => {
 
     if(json.data)
       competitors.value = json.data;
-    
+
   } catch (error) {
     checkAccount.value.connected = false;
   }
@@ -135,7 +141,7 @@ const getCompetitors = async (outcodes):Promise<void> => {
 
 
 const saveCompetitors = (event): void => {
-  
+
   // #region save outcodes
   const multiselectElement = document.querySelector('#competitor-list iam-multiselect');
   checkAccount.value.outcodes = Array.from(multiselectElement.querySelectorAll('input:checked')).map(x => x.value);
@@ -151,17 +157,17 @@ const saveCompetitors = (event): void => {
     charts.value.push({
       "name": chartType == 'sstc' ? 'SSTC': chartType.charAt(0).toUpperCase() + chartType.slice(1),
       "data": Array.from(selectedCompetitorsFieldset.querySelectorAll('input:checked')).map(x => ({
-         'name': x.dataset['name'], 
+         'name': x.dataset['name'],
          'value': x.dataset[chartType]
         }))
     });
   });
 
-  
+
 }
 
 function onOutcodeChange(event): void {
-  
+
   const multiselectElement = event.target.closest('iam-multiselect');
   getCompetitors(Array.from(multiselectElement.querySelectorAll('input:checked')).map(x => x.value));
 }
@@ -184,7 +190,7 @@ const searchOutcodes = async(event):void => {
   const response = await fetch('https://materialinformation.datasystem.co.uk/CompetitorAnalysis/GetDistricts', {
     method: 'POST',
     headers: {
-      'x-api-key': 'IW88-XK63-HBIL-3AP2',
+      'x-api-key': hubEnv.MI_API_KEY,
       'Content-Type': 'application/vnd.api+json'
     },
   });
@@ -200,10 +206,10 @@ const searchOutcodes = async(event):void => {
 }
 </script>
 <template>
-  
+
   <nav>
     <STDNav data-hub class="nav--btn-compact">
-      
+
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
           <title>iam key</title>
@@ -212,15 +218,15 @@ const searchOutcodes = async(event):void => {
       </a>
 
       <a href="/">Onboarding</a>
-      
+
       <div class="nav--menu" data-btn-class="btn-compact" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid" slot="menus"><div><label for="test1">Active branch</label><select class="form-select" name="test1" id="test1"><option selected="" value="1">Newcastle</option><option value="2">Two</option><option value="2">Three</option><option value="2">Four</option></select></div><hr class="mt-3"><a href="/">Agency settings</a><a href="/">Control panel</a><a href="/" class="mb-4">Contact us</a></div>
-      
+
     </STDNav>
   </nav>
   <main class="bg-primary">
-    
+
     <hr/>
-    
+
 
     <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122" data-save-variable="shortname" @loaded="addContactSearch"></Content>
 
@@ -243,8 +249,8 @@ const searchOutcodes = async(event):void => {
         <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=product-support" data-title-tag="h2" data-title-class="bg-light" @loaded="addProductSearch">
           <p>Loading..</p>
         </Content>
-        
-        
+
+
         <div class="btn__group mb-1">
           <a href="https://iampropertyinternal.zendesk.com/hc/en-gb" target="_blank" class="btn btn-primary">View FAQ articles</a>
           <a href="https://iampropertyinternal.zendesk.com/hc/en-gb/requests/new" target="_blank" class="btn btn-secondary">Submit a request</a>
@@ -253,7 +259,7 @@ const searchOutcodes = async(event):void => {
 
       <div class="admin-panel bg-white">
         <h2 class="bg-primary gradient-info">Sales insights</h2>
-        
+
         <div class="d-flex">
           <p class="lead me-auto pe-2">Competitor analysis</p>
           <button id="customise-btn" ref="customiseBtn" class="btn btn-action fa-cog" type="button" command="show-modal" commandfor="competitor-list" :disabled="!checkAccount.connected || !checkAccount.agreedTerms || !checkAccount.outcodes">Customise</button>
@@ -277,7 +283,7 @@ const searchOutcodes = async(event):void => {
         </div>
 
         <div v-if="checkAccount.connected && !checkAccount.agreedTerms" id="view-terms" class="bg-primary">
-          
+
           <img :src="BannerImg" class="w-100"/>
           <div class="text-center pt-3">
             <i class="fa-solid fa-lock h4 pb-1"></i>
@@ -303,7 +309,7 @@ const searchOutcodes = async(event):void => {
 
         <Tabs v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes && charts" class="tabs--toggle-tags">
           <Tab v-for="chart in charts" :key="chart.name" :title="chart.name" >
-            
+
             <Doughnutchart class="chart--lg chart--horizontal" :data-created="Date.now()">
               <table>
                 <thead>
@@ -326,7 +332,7 @@ const searchOutcodes = async(event):void => {
             </Doughnutchart>
 
           </Tab>
-          
+
         </Tabs>
         <a v-if="checkAccount.connected && checkAccount.agreedTerms && checkAccount.outcodes" href="/" target="_blank" class="btn btn-primary">Compare against my branch</a>
 
@@ -341,13 +347,13 @@ const searchOutcodes = async(event):void => {
 
 
   </main>
-    
+
   <Modal>
     <dialog id="competitor-list" aria-labelledby="competitor-list-title">
       <h3 id="competitor-list-title">Customise your competitor list</h3>
       <p>Update the competitors you see within your the sales insights widget.</p>
 
-      
+
       <Multiselect data-label="Search outcodes" data-tooltip="Tooltip text" @change="onOutcodeChange" @input="searchOutcodes">
 
         <label v-for="outcode in outcodes" class="tag dropdown__option"><input type="checkbox" :name="`outcodes[${outcode.title}]`" :value="outcode.value">{{outcode.title}}</label>
@@ -361,11 +367,11 @@ const searchOutcodes = async(event):void => {
 
       <fieldset v-if="competitors" id="selected-competitors">
         <label v-for="competitor in competitors" :key="competitor.id">
-          <input type="checkbox" 
-          :name="`select-competitors[${competitor.id}]`" 
-          :value="competitor.id" 
+          <input type="checkbox"
+          :name="`select-competitors[${competitor.id}]`"
+          :value="competitor.id"
           :data-name="competitor.attributes.agentName"
-          :data-listed="competitor.attributes.counts.listed" 
+          :data-listed="competitor.attributes.counts.listed"
           :data-reductions="competitor.attributes.counts.reductions"
           :data-cancelled="competitor.attributes.counts.cancelled"
           :data-withdrawn="competitor.attributes.counts.withdrawn"
