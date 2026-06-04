@@ -25,12 +25,15 @@ import Notification from '@/components/Notification/Notification.vue';
 import Multiselect from '@/components/Multiselect/Multiselect.vue';
 import BannerImg from './Banner.png';
 
-type HubEnv = {
-  MI_API_KEY?: string;
+const hubEnv = import.meta.env as unknown as {
+  VITE_HUB_CONTENT_BANNER_URL: string,
+  VITE_HUB_LEARNING_URL: string,
+  VITE_HUB_MARKETING_URL: string,
+  VITE_HUB_SUPPORT_URL: string,
+  VITE_MI_API_KEY: string
 };
 
-const hubEnv = import.meta.env as HubEnv;
-
+console.log(hubEnv);
 // todo load from api call
 const checkAccount = ref({
 
@@ -44,24 +47,19 @@ const outcodes = ref([]);
 const competitors = ref();
 const charts = ref([]);
 
-
-
 onMounted(async() => {
-
 
   try {
 
     const response = await fetch('https://materialinformation.datasystem.co.uk/CompetitorAnalysis/GetDistricts', {
       method: 'POST',
       headers: {
-        'x-api-key': hubEnv.MI_API_KEY,
+        'x-api-key': hubEnv.VITE_MI_API_KEY,
         'Content-Type': 'application/vnd.api+json'
       },
     });
 
     const json = await response.json();
-
-
 
     checkAccount.value.connected = true;
 
@@ -70,9 +68,6 @@ onMounted(async() => {
   }
 
 });
-
-
-
 
 function addLearningSearch(event): void {
 
@@ -123,7 +118,7 @@ const getCompetitors = async (outcodes):Promise<void> => {
       method: 'POST',
       body: JSON.stringify(obj),
       headers: {
-        'x-api-key': hubEnv.MI_API_KEY,
+        'x-api-key': hubEnv.VITE_MI_API_KEY,
         'Content-Type': 'application/vnd.api+json'
       },
     });
@@ -190,7 +185,7 @@ const searchOutcodes = async(event):void => {
   const response = await fetch('https://materialinformation.datasystem.co.uk/CompetitorAnalysis/GetDistricts', {
     method: 'POST',
     headers: {
-      'x-api-key': hubEnv.MI_API_KEY,
+      'x-api-key': hubEnv.VITE_MI_API_KEY,
       'Content-Type': 'application/vnd.api+json'
     },
   });
@@ -228,16 +223,16 @@ const searchOutcodes = async(event):void => {
     <hr/>
 
 
-    <Content data-url="http://localhost:8080/wp-json/wp/v2/pages/122" data-save-variable="shortname" @loaded="addContactSearch"></Content>
+    <Content :data-url="hubEnv.VITE_HUB_CONTENT_BANNER_URL" data-save-variable="shortname" @loaded="addContactSearch"></Content>
 
     <div class="md-col-end-6">
       <div class="admin-panel bg-white">
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=learning" data-title-tag="h2" data-title-class="bg-light" @loaded="addLearningSearch">
+        <Content :data-url="hubEnv.VITE_HUB_LEARNING_URL" data-title-tag="h2" data-title-class="bg-light" @loaded="addLearningSearch">
           <p>Loading..</p>
         </Content>
       </div>
       <div class="admin-panel bg-white">
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=marketing" data-title-tag="h2" data-title-class="bg-light">
+        <Content :data-url="hubEnv.VITE_HUB_MARKETING_URL" data-title-tag="h2" data-title-class="bg-light">
           <p>Loading..</p>
         </Content>
       </div>
@@ -246,7 +241,7 @@ const searchOutcodes = async(event):void => {
     <div class="md-col-start-7">
       <div class="admin-panel bg-white">
 
-        <Content data-url="http://localhost:8080/wp-json/wp/v2/pages?slug=product-support" data-title-tag="h2" data-title-class="bg-light" @loaded="addProductSearch">
+        <Content :data-url="hubEnv.VITE_HUB_SUPPORT_URL" data-title-tag="h2" data-title-class="bg-light" @loaded="addProductSearch">
           <p>Loading..</p>
         </Content>
 
