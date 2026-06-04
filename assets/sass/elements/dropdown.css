@@ -95,6 +95,7 @@
     top: 100%;
     left: 0;
 
+    &:has(> .js-hide):not(:has(> *:not(.js-hide))):before,
     &:empty:before {
       content: "No results found"; /* TODO Allow for text to be overwritten */
       background-color: white;
@@ -143,6 +144,7 @@
     white-space: normal;
     text-overflow: ellipsis;
     overflow: clip;
+    outline: none;
 
     &:not(:last-child){
       margin: 0 0 0.25rem 0 !important;

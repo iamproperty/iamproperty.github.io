@@ -9,8 +9,6 @@ const dialogElement = ref();
 
 onMounted(async() => {
     
-    
-
   try {
     await fetch('https://helpcentre.iamproperty.com/api/v2/help_center/articles/search.json?label_names=crm_articles')
     .then((response) => response.json())
@@ -36,18 +34,27 @@ const openLink = (event: Event):void => {
     window.open(target.dataset.url, '_blank');
   }
 }
+const trackSearch = (event: Event):void => {
+
+  console.log(event);
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'search-submitted',
+    form: 'Support article search',
+    search: 'Search',
+  });
+}
 </script>
 
 <template>
-<form method="get" action="https://helpcentre.iamproperty.com/hc/en-gb/search">
 
   <label>
     <span class="visually-hidden">Search existing transactions</span>
     <Search class="search--stylised">
-      <input type="text" name="query" autocomplete="off" aria-autocomplete="none" list="articles" placeholder="Search all support articles" class="input--sm"/>
-      <button class="suffix me-0 mb-0 fa-regular fa-search" title="Search" slot="suffix"></button>
+      <input type="text" name="query" autocomplete="off" aria-autocomplete="none" list="articles" placeholder="Search all support articles" class="input--sm" required />
       <datalist id="articles" ref="dialogElement" @click="openLink"></datalist>
     </Search>
   </label>
-</form>
+  
 </template>

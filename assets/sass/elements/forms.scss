@@ -821,31 +821,4 @@ $icon-tick: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' view
     }
   }
   /* #endregion */
-
-  /* #region Clear seach button */
-
-  .clear-search {
-    display: var(--error-hide, block);
-    position: absolute;
-    top: 50%;
-    transform: translate(0,-50%);
-    right: 0.5rem;
-    margin: 0;
-    aspect-ratio: 1 / 1;
-
-    &:not(:hover, :focus) {
-      border-color: transparent!important;
-      background-color: transparent!important;
-    }
-  }
-      
-  .input__wrapper:has(input[disabled],input.empty) .clear-search {
-
-    display: none;
-  }
-
-  .input__wrapper:has(input:is([name$="Alt"]):not([data-value],[data-placeholder])) .clear-search {
-    display: none;
-  }
-  /* #endregion */
 }
