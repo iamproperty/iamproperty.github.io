@@ -6,7 +6,7 @@ This repo is the iamproperty `@iamproperty/components` design system. It has thr
 - Vue package components under `src/`, exported from `src/index.js` and built by Vite library mode.
 - A Vue documentation site under `docs/`, also built by Vite.
 
-Read this file first, then use the deeper guides in `docs/AI_REPO_GUIDE.md`, `docs/AI_COMPONENT_WORKFLOW.md`, `docs/AI_VALIDATION.md`, `docs/AI_DESIGN_SOURCE_OF_TRUTH.md`, `docs/AI_DESIGN_TOKENS.md`, and `docs/AI_DESIGN_REVIEW_CHECKLIST.md`.
+Read this file first, then use the deeper guides in `readme/AI_REPO_GUIDE.md`, `readme/AI_COMPONENT_WORKFLOW.md`, `readme/AI_VALIDATION.md`, `readme/AI_DESIGN_SOURCE_OF_TRUTH.md`, `readme/AI_DESIGN_TOKENS.md`, and `readme/AI_DESIGN_REVIEW_CHECKLIST.md`.
 
 ## Source Of Truth
 
