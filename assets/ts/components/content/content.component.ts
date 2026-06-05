@@ -87,6 +87,8 @@ class iamContent extends HTMLElement {
           const changeEvent = new CustomEvent('content-loaded', { detail: eventDetails });
 
           component?.dispatchEvent(changeEvent);
+
+          window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({'event': 'content-loaded', ...eventDetails});
         }
       };
