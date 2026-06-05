@@ -14,7 +14,7 @@
 
   import carouselAnat from '../../img/carousel-anatomy.png';
   import carouselAnat2 from '../../img/carousel-anatomy-2.png';
-  
+
 
   import { carousel as events } from '../../events.js';
 </script>
@@ -35,12 +35,12 @@
       Use to display related content within the same space on a page. Typical content use cases include showcases, image
       galleries, content or article previews and feature highlights.
     </p>
-    
+
 
     <h2>Carousel anatomy</h2>
-    <div class="container bg-light mb-3 pb-0">
+    <div class="container bg-light mb-3 pb-0 visualtest">
     <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
-      
+
       <Card :data-image="cardImg"
         >Financial preparation <span>Here would be the top level description of the task</span></Card
       >
@@ -71,9 +71,9 @@
     </Carousel>
   </div>
 
-    <div class="container bg-light mb-3 pb-0">
+    <div class="container bg-light mb-3 pb-0 visualtest">
       <Carousel class="visualtest" data-smcols="2" data-mdcols="3">
-        
+
         <Card :data-image="cardImg"
           >Financial preparation <span>Here would be the top level description of the task</span></Card
         >
@@ -130,10 +130,10 @@
         >
       </Carousel>
     </div>
-    
-    <div class="md-col-end-8 container--inline-size">
+
+    <div class="md-col-end-8 container--inline-size visualtest">
       <Carousel class="visualtest" data-smcols="2" data-mdcols="2">
-        
+
         <Card :data-image="cardImg"
           >Financial preparation <span>Here would be the top level description of the task</span></Card
         >
@@ -319,7 +319,7 @@
       </template>
       <template #vue-component>
         <pre><code>{{`<script setup>import Carousel from '@/components/Carousel/Carousel.vue</script>
-        
+
 <Carousel>
   <div>Slide one content</div>
   <div>Slide two content</div>
@@ -461,7 +461,7 @@
         </ul>
       </template>
 
-      
+
       <template #data-layer>
         <span v-html="events"></span>
       </template>
