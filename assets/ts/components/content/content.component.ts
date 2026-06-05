@@ -1,5 +1,4 @@
-
-import { transformButtons } from '../../modules/content';
+import {createTitle,replaceShortcode,transformElement,transformButtons, loadComponents} from '../../modules/content';
 
 class iamContent extends HTMLElement {
   constructor() {
@@ -23,94 +22,10 @@ class iamContent extends HTMLElement {
     this.shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  addTitle = (title):void => {
-
-    if(this.hasAttribute('data-title-tag')){
-
-      return `<${this.getAttribute('data-title-tag')} class="${this.getAttribute('data-title-class')} iam-content--title">${title}</${this.getAttribute('data-title-tag')}>`;
-    }
-
-    return '';
-  }
-
-  fixContent = (component):void => {
-
-    const transform = component.getAttribute('data-transform');
-    let wrapper = component;
-
-    if(transform){
-
-      component.querySelectorAll(`${transform} > *:empty`).forEach((element) => {
-        element.remove();
-      });
-
-      wrapper = component.querySelector(`${transform}`);
-    }
-    else {
-
-      component.querySelectorAll(`:scope > *:empty`).forEach((element) => {
-        element.remove();
-      });
-    }
-
-    const itemClass = component.getAttribute('data-items-class');
-
-    if(itemClass){
-
-      wrapper.querySelectorAll(`:scope > *`).forEach((element) => {
-        element.classList.add(itemClass);
-      });
-    }
-
-  }
-
   connectedCallback(): void {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const component = this;
     const url = this.getAttribute('data-url');
-
-    const transform = this.getAttribute('data-transform');
-
-    const fixContent = this.fixContent;
-
-    let elementAttributes = '';
-
-
-    for (const attr of this.attributes) {
-      elementAttributes += `${attr.name}="${attr.value}" `;
-    }
-
-    const addTitle = this.addTitle;
-
-    const registerComponents = (contentComponent): void => {
-      const components = ['skeleton','bone','carousel', 'card', 'banner', 'notification'];
-
-      const assetLocation = document.body.hasAttribute('data-assets-location')
-        ? document.body.getAttribute('data-assets-location')
-        : '/assets';
-
-      // Load components - Each component will load once the first of its type has been loaded
-      components.forEach((component) => {
-        if (component == 'notification') {
-          document.querySelectorAll('[data-notification]').forEach((element) => {
-            element.outerHTML = element.outerHTML
-              .replace(/<div/g, '<iam-notification')
-              .replace(/<\/div>/g, '</iam-notification>');
-          });
-        }
-
-        if (contentComponent.getElementsByTagName(`iam-${component}`).length === 0) return;
-
-        import(/*! @vite-ignore */ `${assetLocation}/js/components/${component}/${component}.component.js`)
-          .then((module) => {
-            if (!window.customElements.get(`iam-${component}`))
-              window.customElements.define(`iam-${component}`, module.default);
-          })
-          .catch((err) => {
-            console.log(err.message);
-          });
-      });
-    };
 
     if (url) {
       const newXHRRequest = new XMLHttpRequest();
@@ -123,37 +38,56 @@ class iamContent extends HTMLElement {
           if(Array.isArray(response))
             response = response[0];
 
-          const renderedContent = response.content.rendered.replaceAll(/<p>\[(.*)\]<\/p>/g, "<span data-shortcode=\"$1\"><iam-skeleton><iam-bone class=\"search\"></iam-bone></iam-skeleton></span>");
+          // Create the rendered content block and maintain any shortcodes
+          const renderedContent = replaceShortcode(response.content.rendered);
 
-
-
+          // Update the content title
           component.parentElement?.querySelector('.iam-content--title')?.remove();
-          component.insertAdjacentHTML('beforebegin',addTitle(response.title.rendered));
+          const renderedTitle = createTitle(component, response.title.rendered);
 
+          // Transform the component if required
+          if(component.hasAttribute('data-transform')){
 
-
-          if(transform){
-
-            component.innerHTML = `<${transform} ${elementAttributes}>${renderedContent}</${transform}>`;
+            component.innerHTML = transformElement(component,renderedTitle,renderedContent);
             component.removeAttribute('class');
+
+            component.querySelectorAll(`${component.getAttribute('data-transform')} > *:empty`).forEach((element) => {
+              element.remove();
+            });
           }
           else {
 
+            component.insertAdjacentHTML('beforebegin',renderedTitle);
+
             component.innerHTML = `${renderedContent}`;
+            component.querySelectorAll(`:scope > *:empty`).forEach((element) => {
+              element.remove();
+            });
           }
 
-          fixContent(component);
-          registerComponents(component);
-          transformButtons(component);
+          // Load components - Each component will load once the first of its type has been loaded
+          loadComponents(component);
 
+          // Transform the buttons
+          Array.from(document.querySelectorAll('.wp-block-buttons')).forEach((buttons) => {
+
+            const fragment = transformButtons(buttons);
+            buttons.parentNode.replaceChild(fragment, buttons);
+          });
+
+          // This allows for content added dynamically via the standardised nav to be added after the content is loaded
           Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
 
             if(document.querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`))
               element.innerHTML = document.querySelector(`[data-save-variable="${element.getAttribute('data-variable')}"][data-variable-value]`)?.getAttribute('data-variable-value');
           });
 
-          const changeEvent = new CustomEvent('loaded', { detail: {triggered: true} });
+          // Dispatch the loaded event for external JS and save to the data layer
+          const eventDetails = {url: url};
+          const changeEvent = new CustomEvent('content-loaded', { detail: eventDetails });
+
           component?.dispatchEvent(changeEvent);
+          window.dataLayer.push({'event': 'content-loaded', ...eventDetails});
         }
       };
 

@@ -146,7 +146,15 @@ export const loadUserData = async(Cookies): any => {
 
 export const setEnabledLinks = (component,data):void => {
 
-  document.querySelectorAll(`iam-nav [data-product][data-feature]`).forEach((element) => {
+  const selector = `[data-product][data-feature]`;
+  const elements = component
+    ? [
+      ...component.querySelectorAll(selector),
+      ...(component.shadowRoot ? component.shadowRoot.querySelectorAll(selector) : []),
+    ]
+    : document.querySelectorAll(`iam-nav ${selector}`);
+
+  elements.forEach((element) => {
     const isEnabled = data.attributes.products[element.getAttribute('data-product')].features[element.getAttribute('data-feature')];
     element.setAttribute('data-is-enabled',isEnabled);
     if(isEnabled && element.getAttribute('data-enabled')){
