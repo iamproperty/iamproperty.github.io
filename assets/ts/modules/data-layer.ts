@@ -1,12 +1,8 @@
-type WindowWithDataLayer = Window & {
-  dataLayer: Record<string, any>[];
-};
-
-declare const window: WindowWithDataLayer;
+const dataLayerWindow = window as WindowWithDataLayer;
 
 function createDataLayer(): void {
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({
+  dataLayerWindow.dataLayer = dataLayerWindow.dataLayer || [];
+  dataLayerWindow.dataLayer.push({
     event: 'Pageview',
     pageTitle: document.title,
   });
@@ -15,7 +11,7 @@ function createDataLayer(): void {
     const target = (event.target as HTMLElement).closest<HTMLElement>('[open] summary');
 
     if (target) {
-      window.dataLayer.push({
+      dataLayerWindow.dataLayer.push({
         event: 'closeDetails',
         detailsTitle: target.textContent || '',
       });
@@ -25,14 +21,14 @@ function createDataLayer(): void {
       const button = (event.target as HTMLElement).closest<HTMLButtonElement>('button');
 
       if (summary) {
-        window.dataLayer.push({
+        dataLayerWindow.dataLayer.push({
           event: 'openDetails',
           detailsTitle: summary.textContent || '',
         });
       }
 
       if (link) {
-        window.dataLayer.push({
+        dataLayerWindow.dataLayer.push({
           event: 'linkClicked',
           linkText: link.hasAttribute('title') ? link.getAttribute('title') || '' : link.textContent || '',
           class: link.hasAttribute('class') ? link.getAttribute('class') || '' : '',
@@ -41,7 +37,7 @@ function createDataLayer(): void {
       }
 
       if (button) {
-        window.dataLayer.push({
+        dataLayerWindow.dataLayer.push({
           event: 'buttonClicked',
           buttonText: button.textContent || '',
           class: button.hasAttribute('class') ? button.getAttribute('class') || '' : '',

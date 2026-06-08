@@ -1,10 +1,18 @@
-import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
-import { safeID, resolvePath, isTraversable } from '../../modules/helpers';
 import search, { filterDatalist, datalistSelectOption } from '../../modules/search';
 
+const getIntegerAttribute = (element: HTMLElement, attributeName: string, fallback: number): number => {
+  const value = Number.parseInt(element.getAttribute(attributeName) || '', 10);
+
+  return Number.isNaN(value) ? fallback : value;
+};
+
+const getOptionFromEvent = (event: Event): HTMLOptionElement | null =>
+  event.target instanceof HTMLElement ? event.target.closest<HTMLOptionElement>('option') : null;
+
 // Data layer Web component created
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
+const searchWindow = window as WindowWithDataLayer;
+searchWindow.dataLayer = searchWindow.dataLayer || [];
+searchWindow.dataLayer.push({
   event: 'customElementRegistered',
   element: 'Search',
 });
@@ -12,11 +20,9 @@ window.dataLayer.push({
 class iamSearch extends HTMLElement {
   constructor() {
     super();
-    this.attachShadow({ mode: 'open' });
+    const shadowRoot = this.attachShadow({ mode: 'open' });
 
-    const assetLocation = document.body.hasAttribute('data-assets-location')
-      ? document.body.getAttribute('data-assets-location')
-      : '/assets';
+    const assetLocation = document.body.getAttribute('data-assets-location') || '/assets';
 
     const loadCSS = `@import "${assetLocation}/css/components/search.component.css";`;
 
@@ -35,17 +41,20 @@ class iamSearch extends HTMLElement {
     </span>
     <slot name="datalist"></slot>
     `;
-    this.shadowRoot.appendChild(template.content.cloneNode(true));
+    shadowRoot.appendChild(template.content.cloneNode(true));
   }
 
-  async connectedCallback(): void {
+  connectedCallback(): void {
+    const shadowRoot = this.shadowRoot;
 
-    let datalistElement = this.querySelector('datalist') as HTMLDataListElement | null;
-    const inputElement = this.querySelector('input') as HTMLInputElement | null;
-    const suffixElement = this.shadowRoot.querySelector('.suffix') as HTMLElement | null;
-    const clearBtn = this.shadowRoot.querySelector('.clear-search');
+    if (!shadowRoot) return;
 
-    let minLength = this.hasAttribute('data-min-length') ? parseInt(this.getAttribute('data-min-length')) : 1;
+    let datalistElement = this.querySelector<HTMLDataListElement>('datalist');
+    const inputElement = this.querySelector<HTMLInputElement>('input');
+    const suffixElement = shadowRoot.querySelector<HTMLButtonElement>('.suffix');
+    const clearBtn = shadowRoot.querySelector<HTMLButtonElement>('.clear-search');
+
+    let minLength = this.hasAttribute('data-min-length') ? getIntegerAttribute(this, 'data-min-length', 1) : 1;
 
     if (this.hasAttribute('data-url') && !this.hasAttribute('data-min-length')) {
 
@@ -55,8 +64,10 @@ class iamSearch extends HTMLElement {
     if(!inputElement || !suffixElement) return;
 
     // #region maintain the original placeholder value in a data attribute to allow for it to be reset when the field is emptied
-    if(inputElement.hasAttribute('placeholder'))
-      this.setAttribute('data-original-placeholder', inputElement.getAttribute('placeholder'));
+    const originalPlaceholder = inputElement.getAttribute('placeholder');
+
+    if(originalPlaceholder !== null)
+      this.setAttribute('data-original-placeholder', originalPlaceholder);
     // #endregion
 
 
@@ -68,7 +79,7 @@ class iamSearch extends HTMLElement {
 
     if(inputElement && inputElement.hasAttribute('list')){
 
-      inputElement.setAttribute('data-list', inputElement.getAttribute('list'));
+      inputElement.setAttribute('data-list', inputElement.getAttribute('list') || '');
       inputElement.setAttribute('list', '');
     }
 
@@ -81,7 +92,7 @@ class iamSearch extends HTMLElement {
     }
     datalistElement.setAttribute('slot', 'datalist');
 
-    datalistElement.querySelectorAll('option').forEach((option) => {
+    datalistElement.querySelectorAll<HTMLOptionElement>('option').forEach((option) => {
 
       option.setAttribute('tabindex', '0');
 
@@ -92,14 +103,16 @@ class iamSearch extends HTMLElement {
     });
 
     datalistElement.addEventListener('click', (event) => {
-      if (event && event.target instanceof HTMLElement && event.target.closest('option')) {
+      const optionElement = getOptionFromEvent(event);
+
+      if (optionElement) {
 
         event.stopPropagation();
         event.preventDefault();
 
-        document.activeElement?.blur();
+        if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
         this.classList.remove('js-show-datalist');
-        datalistSelectOption(this, inputElement, event.target.closest('option'));
+        datalistSelectOption(this, inputElement, optionElement);
       }
     });
     // #endregion
@@ -120,7 +133,7 @@ class iamSearch extends HTMLElement {
 
 
         if(this.hasAttribute('data-url')){
-          search(this, datalistElement, inputElement.value)
+          void search(this, datalistElement, inputElement.value)
         }
         else {
           filterDatalist(datalistElement, inputElement.value);
@@ -134,9 +147,10 @@ class iamSearch extends HTMLElement {
     inputElement.addEventListener('focus', () => {
 
       if(inputElement.value == inputElement.getAttribute('data-value')){
+        const selectedValue = inputElement.getAttribute('data-value') || '';
 
         inputElement.value = '';
-        inputElement.setAttribute('placeholder', inputElement.getAttribute('data-value'));
+        inputElement.setAttribute('placeholder', selectedValue);
         this.classList.remove('js-show-datalist');
       }
       else if(inputElement.value.length >= minLength){
@@ -145,10 +159,11 @@ class iamSearch extends HTMLElement {
     });
 
     inputElement.addEventListener('blur', () => {
+      const selectedValue = inputElement.getAttribute('data-value');
 
-      if(!inputElement.value && inputElement.getAttribute('data-value')){
+      if(!inputElement.value && selectedValue){
 
-        inputElement.value = inputElement.getAttribute('data-value');
+        inputElement.value = selectedValue;
         //inputElement.setAttribute('placeholder', inputElement.getAttribute('data-value'));
         //this.classList.remove('js-show-datalist');
       }
@@ -159,18 +174,21 @@ class iamSearch extends HTMLElement {
         this.classList.remove('js-show-datalist');
       }, 200);
 
-      if(inputElement.hasAttribute('data-placeholder'))
-        inputElement.setAttribute('placeholder',inputElement.getAttribute('data-placeholder'));
+      const placeholder = inputElement.getAttribute('data-placeholder');
+
+      if(placeholder)
+        inputElement.setAttribute('placeholder', placeholder);
     });
 
     // #endregion
 
     // #region control suffix button
     suffixElement.addEventListener('click', () => {
+      const form = this.closest<HTMLFormElement>('form');
 
-      if(this.closest('form') && !this.hasAttribute('data-prevent-submit')){
+      if(form && !this.hasAttribute('data-prevent-submit')){
 
-        this.closest('form')?.requestSubmit();
+        form.requestSubmit();
       }
       else {
         inputElement.focus();
@@ -184,14 +202,14 @@ class iamSearch extends HTMLElement {
     this.addEventListener('keydown', (event) => {
 
 
-      switch (event.keyCode) {
+      switch (event.key) {
 
-        case 40: // down
+        case 'ArrowDown':
           //event.stopPropagation();
           //event.preventDefault();
 
           if(event && event.target instanceof HTMLElement && event.target == inputElement){
-            this.querySelector('datalist option:not(.js-hide)')?.focus();
+            this.querySelector<HTMLOptionElement>('datalist option:not(.js-hide)')?.focus();
           }
 
           break;
@@ -285,7 +303,7 @@ class iamSearch extends HTMLElement {
     // #endregion
 
     // #region empty button
-    clearBtn?.addEventListener('click', (event) => {
+    clearBtn?.addEventListener('click', () => {
 
       this.classList.remove('js-show-datalist');
       inputElement.value = '';
@@ -295,11 +313,12 @@ class iamSearch extends HTMLElement {
 
       inputElement.setAttribute('placeholder', this.getAttribute('data-original-placeholder') || '');
 
-      if(this.querySelector(`[name="${inputElement.getAttribute('name')}Alt"]`)){
-        this.querySelector(`[name="${inputElement.getAttribute('name')}Alt"]`)?.remove();
-      }
+      const inputName = inputElement.getAttribute('name');
+      const alternateInput = inputName ? this.querySelector<HTMLInputElement>(`[name="${inputName}Alt"]`) : null;
 
-      datalistElement.querySelectorAll('option').forEach((option) => {
+      alternateInput?.remove();
+
+      datalistElement.querySelectorAll<HTMLOptionElement>('option').forEach((option) => {
 
         option.classList.remove('active');
       });
