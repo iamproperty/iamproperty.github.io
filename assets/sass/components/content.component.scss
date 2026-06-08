@@ -1,5 +1,4 @@
 @use '../_func' as *;
-@use '../elements/buttons' as *;
 
 *,
 *::before,
@@ -9,10 +8,4 @@
 
 :host {
   display: contents;
-}
-
-::slotted(iam-marketing:first-child:last-child) {
-  margin-bottom: 0;
-  min-height: 100%;
-  min-width: 100%;
 }
