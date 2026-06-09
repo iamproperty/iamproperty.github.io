@@ -28,7 +28,7 @@ const openContact = (event: Event):void => {
 <template>
 
 
-  <label for="contact-search" class="mw-100 mb-4"><span class="visually-hidden">Search contacts</span>
+  <label for="contact-search" class="mw-100 mb-4 reset-colours"><span class="visually-hidden">Search contacts</span>
     <Search class="search--stylised search--sm" data-icon="fa-solid fa-address-book">
       <span class="visually-hidden">Search iamproperty contact book</span>
       <input type="text" name="contact-search" autocomplete="off" aria-autocomplete="none" list="contacts" class="input--sm box-shadow w-100 mw-100" placeholder="Search iamproperty contact book"/>

@@ -1,0 +1,80 @@
+
+@layer components {
+  
+  iam-card:not(:defined){
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-box-shadow);
+    background: var(--colour-canvas-2);
+    padding: 0.5rem;
+  }
+
+
+
+  /* #region Cards */
+  iam-card:has([slot="footer"]){
+    --card-footer-bottom-padding: 1.5rem;
+  }
+  .card:not(:defined) {
+    box-shadow: var(--card-box-shadow);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-top-padding) var(--card-right-padding) var(--card-bottom-padding) var(--card-left-padding);
+  }
+
+  .row
+    [class*='col']:has(
+      label:first-child:last-child .card:defined:first-child:last-child,
+      button:first-child:last-child .card:defined:first-child:last-child,
+      a:first-child:last-child .card:defined:first-child:last-child
+    ) {
+    display: flex;
+  }
+
+  iam-card:has([type='checkbox']:checked) {
+    --hover-outline-colour: var(--colour-info);
+    --outline-colour: var(--colour-info);
+  }
+
+  label:has(.card) {
+    padding: 0 !important;
+    margin-right: 0 !important;
+
+    &:before,
+    &:after {
+      display: none !important;
+    }
+
+    .optional-text {
+      display: none;
+    }
+
+    &:has(:checked) {
+      .card:defined {
+        outline: 2px solid var(--colour, var(--colour-primary));
+        outline-offset: -2px;
+
+        ::part(body) {
+          background: none;
+        }
+
+        ::part(footer) {
+          background: none;
+        }
+      }
+    }
+  }
+
+  iam-filter-card:not(:has(i)) {
+    border-left: 0.75rem solid var(--colour, var(--colour-primary));
+  }
+
+  .card .badge:not([class*='bg-']):not([class*='wider-colour-']) {
+    background-color: var(--colour-canvas);
+    outline: 1px solid var(--colour-light);
+  }
+
+  a[target='_blank'] .card {
+    --icon: var(--icon-new-tab);
+  }
+
+  /* #endregion */
+}

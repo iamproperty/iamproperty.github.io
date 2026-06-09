@@ -17,26 +17,25 @@ class iamSTDNav extends HTMLElement {
   defaultToNav = ():void => {
 
     const defaultContent = this.innerHTML;
-    this.innerHTML = `<iam-nav>
+    this.innerHTML = `<iam-nav ${(this.hasAttribute('class') ? `class="${this.getAttribute('class')}"`:'')}>
     ${defaultContent}
     </iam-nav>`;
   }
 
   transformToNav = (data):void => {
-    
+
+    const navElement = this.querySelector('iam-nav') ?? this;
+
     // Remove current links
-    this.querySelector('iam-nav').querySelectorAll(`:scope > *`).forEach((element) => {
+    navElement.querySelectorAll(`:scope > *`).forEach((element) => {
 
       if(!element.hasAttribute('slot'))
         element.remove();
     });
 
-    const defaultContent = this.querySelector('iam-nav').innerHTML;
+    const defaultContent = navElement.innerHTML;
 
-    this.innerHTML = `<iam-nav ${(this.hasAttribute('class') ? `class="${this.getAttribute('class')}"`:'')}>
-    ${defaultContent}
-    ${populateNav(data)}
-    </iam-nav>`;
+    navElement.innerHTML = `${defaultContent}${populateNav(data)}`;
   }
 
   defaultToSecondary = (): void => {
@@ -66,15 +65,17 @@ class iamSTDNav extends HTMLElement {
   }
 
   async connectedCallback(): void {
-    
+
     const component = this;
     this.wrapper = this.shadowRoot?.querySelector('.wrapper');
 
     if (!window.customElements.get(`iam-nav`))
         window.customElements.define(`iam-nav`, iamNav);
-    
+
     if(this.hasAttribute('data-hub')){
       this.defaultToNav();
+
+      this.querySelector('.nav--menu.js-show')?.classList.remove('js-show');
     }
     else {
       //this.defaultToSecondary(); TODO: change this to show default content but still be able to update
@@ -85,9 +86,8 @@ class iamSTDNav extends HTMLElement {
     const data = await loadNavData(Cookies).then(
       (data) => {
 
-
         if(typeof data == 'string'){
-          
+
           return data;
         }
 
@@ -106,12 +106,12 @@ class iamSTDNav extends HTMLElement {
       }
     );
 
-    
+
     const userData = await loadUserData(Cookies).then(
       (data) => {
 
         setEnabledLinks(component,data);
-        
+
         Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
 
           if(data.attributes[element.getAttribute('data-variable')])

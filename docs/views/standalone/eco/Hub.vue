@@ -6,15 +6,13 @@ import SearchLearningArticles from './search-learning-articles.vue';
 import SearchProductArticles from './search-product-articles.vue';
 import SearchContacts from './search-contacts.vue';
 
-import Nav from '@/components/Nav/Nav.vue';
 import STDNav from '@/components/STDNav/STDNav.vue';
-import Card from '@/components/Card/Card.vue';
+
+
 import Content from '@/components/Content/Content.vue';
+import Skeleton from '@/components/Skeleton/Skeleton.vue';
+import Bone from '@/components/Skeleton/Bone.vue';
 
-import Search from '@/components/Search/Search.vue';
-
-import Carousel from '@/components/Carousel/Carousel.vue';
-import Banner from '@/components/Banner/Banner.vue';
 import Tabs from '@/components/Tabs/Tabs.vue';
 import Tab from '@/components/Tabs/Tab.vue';
 import Modal from '@/components/Modal/Modal.vue';
@@ -45,6 +43,8 @@ const checkAccount = ref({
 const outcodes = ref([]);
 const competitors = ref();
 const charts = ref([]);
+
+const showToast = ref(false);
 
 onMounted(async() => {
 
@@ -84,16 +84,10 @@ function addProductSearch(event): void {
     createApp(SearchProductArticles).mount(find);
   }
 }
-function addContactSearch(event): void {
 
-  const find = document.querySelector('[data-shortcode="search-contacts"]');
-
-  if(find){
-    createApp(SearchContacts).mount(find);
-  }
-}
 function agreeTerms(): void {
   checkAccount.value.agreedTerms = true;
+  showToast.value = true;
 }
 
 const getCompetitors = async (outcodes):Promise<void> => {
@@ -213,26 +207,65 @@ const searchOutcodes = async(event):void => {
 
       <a href="/">Onboarding</a>
 
-      <div class="nav--menu" data-btn-class="btn-compact" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid" slot="menus"><div><label for="test1">Active branch</label><select class="form-select" name="test1" id="test1"><option selected="" value="1">Newcastle</option><option value="2">Two</option><option value="2">Three</option><option value="2">Four</option></select></div><hr class="mt-3"><a href="/">Agency settings</a><a href="/">Control panel</a><a href="/" class="mb-4">Contact us</a></div>
+      <div class="nav--menu js-show" data-btn-class="btn-compact" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid" slot="menus"><div><label for="test1">Active branch</label><select class="form-select" name="test1" id="test1"><option selected="" value="1">Newcastle</option><option value="2">Two</option><option value="2">Three</option><option value="2">Four</option></select></div><hr class="mt-3"><a href="/">Agency settings</a><a href="/">Control panel</a><a href="/" class="mb-4">Contact us</a></div>
 
     </STDNav>
   </nav>
-  <main class="bg-primary">
+  <Notification v-if="showToast" data-type="toast" data-status="success" data-timeout="5000">
+    <strong>Sale insishgts terms agreed</strong><br> You can now access and customise competitor analysis insight from teh Sale insights panel below.
+  </Notification>
+
+  <main>
+
+    <div class="bg-primary full-width mb-4">
+      <div class="container">
+
+        <h1 class="pb-2">Welcome, <span data-variable="shortname"></span></h1>
+
+
+        <SearchContacts></SearchContacts>
+      </div>
+    </div>
 
     <hr/>
-
-
-    <Content :data-url="hubEnv.VITE_HUB_CONTENT_BANNER_URL" data-save-variable="shortname" @loaded="addContactSearch"></Content>
+    <Content :data-url="hubEnv.VITE_HUB_CONTENT_BANNER_URL" data-save-variable="shortname">
+      <Skeleton>
+        <Bone class="h2"></Bone><hr/>
+        <Bone></Bone><hr/>
+      </Skeleton>
+    </Content>
 
     <div class="md-col-end-6">
       <div class="admin-panel bg-white">
-        <Content :data-url="hubEnv.VITE_HUB_LEARNING_URL" data-title-tag="h2" data-title-class="bg-light" @loaded="addLearningSearch">
-          <p>Loading..</p>
+        <h2 class="bg-light iam-content--title">Featured learning</h2>
+        <Content :data-url="hubEnv.VITE_HUB_LEARNING_URL" data-title-tag="h2" data-title-class="bg-light" @content-loaded="addLearningSearch">
+          <Skeleton>
+            <Bone class="card"></Bone>
+            <Bone class="card"></Bone>
+            <Bone class="card"></Bone>
+          </Skeleton>
+          <Skeleton>
+            <Bone class="search"></Bone><hr/>
+            <iam-bone class="btn"></iam-bone>
+          </Skeleton>
         </Content>
       </div>
       <div class="admin-panel bg-white">
+        <h2 class="bg-light iam-content--title">Latest marketing</h2>
         <Content :data-url="hubEnv.VITE_HUB_MARKETING_URL" data-title-tag="h2" data-title-class="bg-light">
-          <p>Loading..</p>
+          <Skeleton>
+            <Bone class="card"></Bone>
+            <Bone class="card"></Bone>
+            <Bone class="card"></Bone>
+          </Skeleton>
+          <Skeleton>
+            <Bone class="card"></Bone>
+            <Bone class="card"></Bone>
+            <Bone class="card"></Bone>
+          </Skeleton>
+          <Skeleton>
+            <iam-bone class="btn"></iam-bone>
+          </Skeleton>
         </Content>
       </div>
 
@@ -240,8 +273,12 @@ const searchOutcodes = async(event):void => {
     <div class="md-col-start-7">
       <div class="admin-panel bg-white">
 
-        <Content :data-url="hubEnv.VITE_HUB_SUPPORT_URL" data-title-tag="h2" data-title-class="bg-light" @loaded="addProductSearch">
-          <p>Loading..</p>
+        <h2 class="bg-light iam-content--title">Product support</h2>
+        <Content :data-url="hubEnv.VITE_HUB_SUPPORT_URL" data-title-tag="h2" data-title-class="bg-light" @content-loaded="addProductSearch">
+
+          <Skeleton>
+            <Bone class="search"></Bone><hr/>
+          </Skeleton>
         </Content>
 
 
@@ -342,7 +379,7 @@ const searchOutcodes = async(event):void => {
 
   </main>
 
-  <Modal>
+  <Modal class="modal--sm">
     <dialog id="competitor-list" aria-labelledby="competitor-list-title">
       <h3 id="competitor-list-title">Customise your competitor list</h3>
       <p>Update the competitors you see within your the sales insights widget.</p>
@@ -381,7 +418,7 @@ const searchOutcodes = async(event):void => {
       </div>
     </dialog>
   </Modal>
-  <Modal data-type="transactional" data-agreed-text="Agree terms" @agreed="agreeTerms()">
+  <Modal class="modal--sm" data-type="transactional" data-agreed-text="Agree terms" @agreed="agreeTerms()">
     <dialog id="agree-terms-modal" aria-labelledby="agree-terms-title">
       <h3 id="agree-terms-title">Important information about competitor analysis sales data</h3>
       <p>iamproperty provide the sales data on an "as is" basis and makes no representations or warranties, express or implied, as to the accuracy, completeness, or reliability of the data. The Agent acknowledges that the data is supplied for their internal analysis and may not be used for general marketing purposes or shared with anyone outside of the Agent's employment. iamproperty shall not be liable for any claims, damages, losses, or expenses arising from the use or reliance upon the data, and the Agent agrees to indemnify and hold harmless iamproperty from any such claims.</p>

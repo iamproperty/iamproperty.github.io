@@ -11,7 +11,7 @@ export const loadComponents = (component):void => {
 
     if (component.getElementsByTagName(`iam-${loadComponent}`).length === 0) return;
 
-    import(/*! @vite-ignore */ `${assetLocation}/js/components/${loadComponent}/${loadComponent}.component.js`)
+    import(/*! @vite-ignore */ `${assetLocation}/js/components/${loadComponent}/${loadComponent}.component.min.js`)
       .then((module) => {
         if (!window.customElements.get(`iam-${loadComponent}`))
           window.customElements.define(`iam-${loadComponent}`, module.default);
