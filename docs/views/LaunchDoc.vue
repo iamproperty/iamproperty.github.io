@@ -16,13 +16,13 @@ const launch = ($event) => {
   percent.value = Math.round((100 * checked.value) / total.value);
 
   Array.from(document.querySelectorAll('tr:has(input[type="checkbox"]:checked) td[data-label="Story"]')).forEach((td) => {
-  
+
     if(!isSaved(td.innerHTML))
       arrSaved.value.push(td.innerHTML);
   });
 
   Array.from(document.querySelectorAll('tr:has(input[type="checkbox"]:not(:checked)) td[data-label="Story"]')).forEach((td) => {
-  
+
     if(arrSaved.value.indexOf(td.innerHTML) >= 0)
       arrSaved.value = arrSaved.value.filter(item => item !== td.innerHTML);
   });
@@ -37,7 +37,7 @@ const launch = ($event) => {
 
   if(percent.value > 80)
     document.querySelector('.progress__wrapper progress').setAttribute('class', 'colour-success');
-  
+
   if(percent.value == 100)
     document.querySelector('.progress__wrapper progress').setAttribute('class', 'colour-complete');
 
@@ -53,7 +53,7 @@ const clear = ($event) => {
   document.querySelector('.progress__wrapper progress').removeAttribute('class');
 
   Array.from(document.querySelectorAll('tr:has([data-required=true]) input[type="checkbox"]')).forEach((checkbox) => {
-  
+
     checkbox.checked = false;
   });
 };
@@ -69,7 +69,7 @@ const submit = ($event) => {
   const rows = [];
 
   Array.from(document.querySelectorAll('tr:has(input[type="checkbox"]) td[data-label="Story"]')).forEach((td) => {
-  
+
     const row = td.closest('tr');
     rows.push([`"${td.innerHTML}"`, row.querySelector('input[type="checkbox"]:checked') ? true : false])
   });
@@ -79,7 +79,7 @@ const submit = ($event) => {
   rows.push(["Total stories", total.value ]);
   rows.push(["Percent passed", percent.value ]);
 
-  let csvContent = "data:text/csv;charset=utf-8," 
+  let csvContent = "data:text/csv;charset=utf-8,"
     + rows.map(e => e.join(",")).join("\n");
 
   var encodedUri = encodeURI(csvContent);
@@ -119,7 +119,7 @@ onMounted(() => {
             <th>Story</th>
             <th>Implement</th>
             <th>Test</th>
-            <th>Status</th>
+            <th>Passed</th>
           </tr>
         </thead>
         <tbody>
@@ -127,7 +127,7 @@ onMounted(() => {
             <td :data-required="`${nfr.required}`">{{ nfr.story }}{{ nfr.required == "true" ? `` : ` (Optional)` }}</td>
             <td v-html="nfr.implement"></td>
             <td v-html="nfr.test"></td>
-            <td><label class="me-0">Passed <input type="checkbox" :name="`check-${i++}`" :checked="isSaved(nfr.story)"  @change="($event) => launch($event)" /></label></td>
+            <td class="text-end"><label class="me-0"><span class="visually-hidden">Passed </span><input type="checkbox" :name="`check-${i++}`" :checked="isSaved(nfr.story)"  @change="($event) => launch($event)" /></label></td>
           </tr>
         </tbody>
       </table>
@@ -144,13 +144,13 @@ onMounted(() => {
       <button class=" btn btn-action m-0" @click="($event) => clear($event)">Clear</button>
     </div>
 
-    
+
   </main>
 </template>
 <style>
 
 body:has(.integration-launch-list) {
-  
+
   --max-width: 200rem;
   --container-max-width: 200rem;
 }
@@ -160,12 +160,12 @@ body:has(.integration-launch-list) {
 <style lang="scss" scoped>
 
 @layer components {
- 
+
 html table :is(th,td):last-child{
   width: 1%;
   padding-right: 0 !important;
 }
- 
+
 }
 
 :is(th,td):empty {
@@ -235,7 +235,7 @@ main:has(.progress__wrapper){
   }
 
   button {
-    
+
     position: absolute;
     height: auto;
     margin: 0;
@@ -254,7 +254,7 @@ main:has(.progress__wrapper){
 
 }
 label[data-percent]:not(:has(strong)):has(progress):before {
-  
+
   text-indent: 0;
   top: 50%;
   right: 5rem;
@@ -265,7 +265,23 @@ label[data-percent]:not(:has(strong)):has(progress):before {
   translate: 0 -50%;
 }
 label[data-percent]:not(:has(strong)):has(progress.colour-complete):before {
-  
+
   color: white;
+}
+
+:is(iam-table,iam-table-basic,iam-table-no-submit,iam-table-submit,iam-table-ajax) tr td label {
+  width: 2rem;
+  display: inline-block;
+}
+@container (width > 23.4375em) {
+  :is(iam-table,iam-table-basic,iam-table-no-submit,iam-table-submit,iam-table-ajax) tr:has([type=checkbox]:checked) {
+      height: auto!important;
+  }
+}
+@container (width >= 60em) {
+    thead th:not(:empty) {
+        white-space: nowrap;
+        min-width: unset;
+    }
 }
 </style>
