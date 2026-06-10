@@ -38,7 +38,7 @@ export const setupCard = (cardComponent: HTMLElement): void => {
     const cardTotal = cardBody?.querySelector<HTMLDivElement>('.card__total');
 
     if(!cardTotal)
-      cardBody?.insertAdjacentHTML(
+      cardBody.insertAdjacentHTML(
         'beforeend',
         `<div class="card__total">${cardComponent.getAttribute('data-total') || ''}</div>`
       );

@@ -443,6 +443,11 @@ export class TestElement extends EventTarget {
     return null;
   }
 
+  contains(element) {
+    if (element === this) return true;
+    return this.children.some((child) => child.contains(element));
+  }
+
   matches(selector) {
     return matchesSelector(this, selector);
   }
