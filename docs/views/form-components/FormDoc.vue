@@ -1,110 +1,37 @@
 <script setup lang="ts">
   import Integration from '../Integration.vue';
   import Form from '@/components/Form/Form.vue';
-  import Card from '@/components/Card/Card.vue';
-  import Carousel from '@/components/Carousel/Carousel.vue';
-
-  import { fileupload as events } from '../../events.js';
-
-  function filesupload($event) {
-    console.log($event);
-  }
+  import Versions from '../Versions.vue';
+  import TrackEvents from '../TrackEvents.vue';
 </script>
 <template>
+  <TrackEvents
+    selector="iam-form"
+    :events="['checkbox-limit-reached']"
+  ></TrackEvents>
   <main>
     <DSHeader :image="headerImg" section="components">
-      <h1>Form component (beta)</h1>
+      <h1>Form component</h1>
     </DSHeader>
 
-    <div class="container">
-      <p class="lead">
-        ..
-      </p>
-    </div>
-    <Form>
-
-      <form>
-      <label>
-        Category
-        <select name="category" id="add-document-category">
-            <option value="">Please select an option</option>
-            <option value="App\Client">Client Document</option>
-            <option value="App\Transaction">Transaction Document</option>
-        </select>
-      </label>
-
-      <label>
-        Select document type
-        <select name="document_type_id[]" id="document_type_id-0" data-write-if='[{"if":"add-document-category","equals":"App\\Transaction"}]'>
-          <option value=""></option>
-          <option value="17" data-show-if='[{"if":"add-document-category","equals":"App\\Transaction"}]'>Title plan</option>
-          <option value="18">Title register</option>
-          <option value="19">Monthly Invoice</option>
-          <option value="20">Monthly Transactions</option>
-          <option value="21">AML Quick Search</option>
-          <option value="22">AML Full Search</option>
-          <option value="23">PRS Search</option>
-          <option value="24">Title Plan</option>
-          <option value="25">Title Register</option>
-          <option value="26">International Client Search</option>
-          <option value="27">Client Risk Assessement</option>
-          <option value="28">Company Logo</option>
-          <option value="29">Photo ID</option>
-          <option value="30">Authenticated photo ID</option>
-          <option value="31">Non-photo ID</option>
-          <option value="32">Authenticated non-photo ID</option>
-          <option value="33">Proof of address</option>
-          <option value="34">Authenticated proof of address</option>
-          <option value="35">Other</option>
-          <option value="36">Company document</option>
-          <option value="37">Billing Invoice</option>
-          <option value="38">Billing Transactions</option>
-          <option value="39">Power of Attorney</option>
-          <option value="40">Appointment as personal representative</option>
-          <option value="41">Will</option>
-          <option value="42">Death certificate</option>
-          <option value="43">Solicitor Contract</option>
-          <option value="44">Solicitor Logo</option>
-          <option value="45">Solicitor Client Care Letter</option>
-          <option value="46">Client Billing Invoice</option>
-          <option value="47">Biometric Online ID Verification</option>
-          <option value="48">Biometric Online ID Verification Selfie Image</option>
-          <option value="49">Biometric Online ID Verification Instructions Image</option>
-          <option value="50">Biometric Online ID Verification Performed Image</option>
-          <option value="51">Biometric Online ID Verification ID document Image</option>
-          <option value="52">Company Statement</option>
-          <option value="53">Conveyancing Quote</option>
-          <option value="54">Instruction Document</option>
-          <option value="55">Conveyancing Document</option>
-          <option value="56">Solicitor Invoice</option>
-        </select>
-      </label>
-    
-    </form>
-    </Form>
+    <p class="lead">This component is a place to house interactive features and functionality.</p>
 
     <h2 class="pt-5">Limit the number of checkboxes</h2>
-    <Form>
+    <p>Below we have a series of checkboxes which we want to limit to only having 2 selected; so once the user has checked 2 values the other checkboxes become disabled.</p>
+    <Form id="checkboxes">
       <form>
         <fieldset data-checkbox-limit="2">
-          <label><input type="checkbox" name="test" value="1"/> 1</label>
-          <label><input type="checkbox" name="test" value="2"/> 2</label>
-          <label><input type="checkbox" name="test" value="3"/> 3</label>
-          <label><input type="checkbox" name="test" value="4"/> 4</label>
+          <label><input type="checkbox" name="test" value="1"/> Value 1</label>
+          <label><input type="checkbox" name="test" value="2"/> Value 2</label>
+          <label><input type="checkbox" name="test" value="3"/> Value 3</label>
+          <label><input type="checkbox" name="test" value="4"/> Value 4</label>
         </fieldset>
       </form>
     </Form>
 
-    <Integration component="fileupload" componentName="iam-fileupload">
+    <Integration component="form" componentName="iam-form">
       <template #web-component>
-        <pre><code>{{`<iam-fileupload data-maxsize="500"> <input type="file" name="files[]" accept=".pdf, .csv, .jpg, .png" multiple="multiple" /></iam-fileupload>`}}</code></pre>
-      </template>
-      <template #vue-component>
-        <pre><code>{{`<script setup>import FileUpload from '@/components/Carousel/FileUpload.vue</script>
-        
-<FileUpload data-maxsize="500"><input type="file" name="files[]" multiple="multiple" accept=".pdf, .csv, .jpg, .png" /></FileUpload>
-
-`}}</code></pre>
+        <pre><code>{{`<iam-form></iam-form>`}}</code></pre>
       </template>
 
       <template #attr>
@@ -120,83 +47,59 @@
           </thead>
           <tbody>
             <tr>
-              <th>data-maxsize</th>
+              <th>data-checkbox-limit</th>
               <td>-</td>
               <td>Integer</td>
               <td>No</td>
-              <td>Blocks files from being added that is larger than the max size given in kb's. .</td>
+              <td>Set the number of checkboxes that are allowed to be checked.</td>
             </tr>
           </tbody>
         </table>
       </template>
 
-      <template #parts>
+
+      <template #dispatched-events>
         <table>
           <thead>
             <tr>
-              <th>Part</th>
-              <th>Notes</th>
+              <th>Event</th>
+              <th>Dispatched</th>
+              <th>Details</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th>title</th>
-              <td>The span which contains the label for the component e.g., Upload file</td>
-            </tr>
-            <tr>
-              <th>button</th>
-              <td>The button which prompts the system file explorer to open</td>
-            </tr>
-            <tr>
-              <th>files</th>
-              <td>The div which houses an item per file that has been selected.</td>
+              <th>checkbox-limit-reached</th>
+              <td>When a user has selected the max limited number of checkboxes</td>
+              <td>{ detail: {event: 'checkbox-limit-reached', limit: i, element: '#test'} }</td>
             </tr>
           </tbody>
         </table>
       </template>
 
-      <template #dispatched-events>
-        <span v-html="events"></span>
-      </template>
-
-      <template #criteria>
-        <ul>
-          <li>The user should be able to open their file explorer by clicking the 'upload file' button.</li>
-          <li>The user should be able to select multiple files in the 'multiple' attribute is set.</li>
-          <li>The user should be able to see a list of all the files they have selected.</li>
-          <li>The user should be able to remove a file from the list by clicking the 'x' icon on the file.</li>
-          <li>
-            If the data-maxsize attribute is set and the user tries to upload a file larger than the set size, they will
-            be shown an error and the file will not be added to the list.
-          </li>
-        </ul>
-      </template>
       <template #data-layer>
         <span v-html="events"></span>
       </template>
     </Integration>
 
-    <div class="bg-light version-control">
-      <div class="container">
-        <table>
-          <thead>
-            <tr>
-              <th>Version Control</th>
-              <th>Date</th>
-              <th>Notable updates</th>
-            </tr>
-          </thead>
-          <tbody class="text-body">
-            <tr>
-              <td>V1 added</td>
-              <td>24.07.2023</td>
-              <td>N/A</td>
-            </tr>
-          </tbody>
-        </table>
-        <a href="/pdfs/file-upload.pdf" download>Download latest designs</a>
-      </div>
-    </div>
+    <Versions>
+      <table>
+        <thead>
+          <tr>
+            <th>Version Control</th>
+            <th>Date</th>
+            <th>Notable updates</th>
+          </tr>
+        </thead>
+        <tbody class="text-body">
+          <tr>
+            <td>V1 added</td>
+            <td>08.06.2026</td>
+            <td>N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </Versions>
   </main>
 </template>
 

@@ -802,9 +802,11 @@ const routes = [
       },
       {
         path: 'form',
-        name: 'Form component (alpha)',
+        name: 'Form component',
         meta: {
           title: 'Form component | Components | iamkey',
+          jira: 'FEG-986',
+          status: 'dev'
         },
         component: () => import('./views/form-components/FormDoc.vue'),
         searchterms: '',
