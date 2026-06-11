@@ -41,6 +41,7 @@ const openContact = (event: Event):void => {
 
   <dialog id="modal-contact" ref="contactModal">
     <Modal>
+
       <span class="h3">{{ contactTitle }}</span>
       <p><strong>Phone:</strong> <a :href="`tel:${ contactPhoneSafe }`" target="_blank">{{ contactPhone }}</a></p>
       <p><strong>Email:</strong> <a :href="`mailto:${ contactEmail }`" target="_blank">{{ contactEmail }}</a></p>

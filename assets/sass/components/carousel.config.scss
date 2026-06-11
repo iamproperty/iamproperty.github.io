@@ -573,6 +573,11 @@
     --card-badges-bottom-padding: 0;
     --card-right-padding: 0.5rem;
     --card-left-padding: 0.5rem;
+
+    iam-card {
+      
+      --card-footer-bottom-padding: 0.5rem;
+    }
   }
   /* #endregon */
 }

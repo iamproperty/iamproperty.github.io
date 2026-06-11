@@ -1,0 +1,7 @@
+@layer utilities {
+
+  .has-text-align-center {
+    margin-inline: auto;
+    text-align: center;
+  }
+}

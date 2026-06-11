@@ -37,7 +37,7 @@ class iamSearch extends HTMLElement {
         <slot></slot>
         <button class="clear-search btn btn-action" type="button"><i class="fa-light fa-times me-0"></i></button>
       </span>
-      <button class="suffix ${this.getAttribute('data-icon') || 'fa-regular fa-search'}"></button>
+      <button class="suffix fa-regular fa-search"></button>
     </span>
     <slot name="datalist"></slot>
     `;
@@ -55,6 +55,10 @@ class iamSearch extends HTMLElement {
     const clearBtn = shadowRoot.querySelector<HTMLButtonElement>('.clear-search');
 
     let minLength = this.hasAttribute('data-min-length') ? getIntegerAttribute(this, 'data-min-length', 1) : 1;
+
+
+    suffixElement?.setAttribute('class',`suffix ${this.hasAttribute('data-icon') ? this.getAttribute('data-icon') : 'fa-regular fa-search'}`);
+
 
     if (this.hasAttribute('data-url') && !this.hasAttribute('data-min-length')) {
 

@@ -33,10 +33,12 @@
       padding-bottom: 0;
     }
   }
+
   dialog[open]:has(iam-modal) {
     --modal-inner-dialog-display: contents;
     place-self: center;
   }
+
   @media (prefers-color-scheme: light) {
     dialog[open]:has(iam-modal) {
       
@@ -46,6 +48,47 @@
       
     }
   }
+
+/*  Size variants */
+  /*  small */
+  @media screen and (min-width: 36em) {
+
+    *:not(.dialog__wrapper) > dialog[open]:has(.modal--sm)  {
+      
+        min-width: 20.9375rem;
+        width: 20.9375rem;
+        max-width: 20.9375rem;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+
+    *:not(.dialog__wrapper) > dialog[open]:has(.modal--sm)  {
+        min-width: 28.375rem;
+        width: 28.375rem;
+        max-width: 28.375rem;
+    }
+  }
+
+  /*  large */
+  @media screen and (min-width: 36em) {
+
+    *:not(.dialog__wrapper) > dialog[open]:has(.modal--lg)  {
+        min-width: 42.875rem;
+        width: 42.875rem;
+        max-width: 42.875rem;
+    }
+  }
+
+  @media screen and (min-width: 62em) {
+
+        *:not(.dialog__wrapper) > dialog[open]:has(.modal--lg)  {
+        min-width: 46rem;
+        width: 46rem;
+        max-width: 46rem;
+    }
+  }
+
 
   dialog::backdrop {
     background: rgba(0, 0, 0, 0.3);

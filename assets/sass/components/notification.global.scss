@@ -1,6 +1,12 @@
 @use '../_func' as *;
 
 .container.notification__holder {
+
+
+  position-anchor: --nav;
+
+  top: anchor(bottom);
+
   position: fixed;
   top: var(--nav-height);
   left: 50%;
@@ -18,6 +24,8 @@
   flex-direction: column;
   align-content: flex-end;
   align-items: flex-end;
+
+
 
   :is(.iam-notification, iam-notification) {
     pointer-events: all;

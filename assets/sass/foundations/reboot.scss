@@ -226,6 +226,10 @@ $columns: 12;
     grid-template-columns: subgrid;
   }
 
+  nav {
+    anchor-name: --nav;
+  }
+
   *:not(.row) > main:not(:has(.container:last-child)):not(:has(iam-collapsible-side:last-child)) {
     padding-bottom: 1rem;
   }

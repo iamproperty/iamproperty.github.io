@@ -17,7 +17,7 @@ class iamModal extends HTMLElement {
     template.innerHTML = `
     <style>
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
-    
+
     ${loadCSS}
     </style>
     <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous" />
@@ -41,6 +41,7 @@ class iamModal extends HTMLElement {
 
   connectedCallback(): void {
 
+    const hasDialogParent = this.closest('dialog[id]');
     const originalDialog = this.querySelector('dialog');
 
     const id = this.hasAttribute('id') ? this.getAttribute('id') : originalDialog?.getAttribute('id');
@@ -49,6 +50,10 @@ class iamModal extends HTMLElement {
     const cancelButton = this.shadowRoot?.querySelector('[data-cancel]');
     const agreedButton = this.querySelector('button[slot="agreed-button"]') ? this.querySelector('button[slot="agreed-button"]') : this.shadowRoot?.querySelector('[data-agreed]');
     const modalType = this.hasAttribute('data-type') ? this.getAttribute('data-type') : 'passive';
+
+
+    if(hasDialogParent)
+      this.classList.add('has-parent-dialog');
 
     const agreed = (close = true) => {
       const agreedEvent = new CustomEvent('agreed', {
@@ -62,20 +67,20 @@ class iamModal extends HTMLElement {
     }
 
     document.addEventListener('click', (e) => {
-      
+
       if(e.target.matches(`[command="show-modal"][commandfor="${id}"]`) || e.target.matches(`[data-modal="${id}"]`)){
         openModal(this);
       }
     });
 
     document.addEventListener('click', (e) => {
-      
+
       if(e.target.matches(`[command="close"][commandfor="${id}"]`)){
         closeModal(this);
       }
     });
-    
-    // Disable the original event 
+
+    // Disable the original event
     originalDialog?.addEventListener('command', (e) => {
 
       if (event.command == "show-modal") {
@@ -103,7 +108,7 @@ class iamModal extends HTMLElement {
     if(originalDialog) {
       Array.from(originalDialog?.querySelectorAll('[slot]')).forEach((element) => {
         this.moveBefore(element, originalDialog);
-      });      
+      });
     }
 
     closeButton?.addEventListener('click', () => {
@@ -118,30 +123,33 @@ class iamModal extends HTMLElement {
 
       agreed();
     });
-    
+
 
     this.addEventListener('close-modal', () => {
       closeModal(this);
     });
 
-    // Hijack the default form submission 
-    originalDialog?.addEventListener('submit', (e) => {
+    // Hijack the default form submission
+    if(!hasDialogParent){
+      originalDialog?.addEventListener('submit', (e) => {
 
-      if(e.submitter && e.submitter.hasAttribute('formmethod') && e.submitter.getAttribute('formmethod') =="dialog"){
-        
-        closeModal(this);
-      }
-      else {
-        agreed(false);
-      }
-    });
+        if(e.submitter && e.submitter.hasAttribute('formmethod') && e.submitter.getAttribute('formmethod') =="dialog"){
+
+          closeModal(this);
+        }
+        else {
+          agreed(false);
+        }
+      });
+    }
+
 
     Array.from(this.querySelectorAll('button[type="submit"]')).forEach((button)=> {
 
       button.addEventListener('click', (e) => {
 
         if(!button.closest('form') && !button.hasAttribute('formmethod')){
-          
+
           agreed();
         }
       });
@@ -179,7 +187,7 @@ class iamModal extends HTMLElement {
         </i>`
       );
     }
-            
+
   }
 }
 
