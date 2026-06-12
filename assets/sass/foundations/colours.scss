@@ -61,30 +61,6 @@
       color: var(--colour-body);
     }
   }
-  
-  @media (prefers-color-scheme: dark) {
-    html:not(.light-theme) :is(.bg-primary, .bg-danger, .bg-dark):not(iam-header) {
-
-      --colour-heading: var(--colour-primary-theme);
-      --colour-body: var(--colour-primary-theme);
-      color: var(--colour-primary-theme);
-
-      /*  Apply the light colour scheme not on the background element but just its children so that the background colour isn't overwritten */
-      > * {
-        color-scheme: light;
-      }
-    }
-
-    html:not(.light-theme) .bg-light {
-
-      color-scheme: light;
-      --colour-body: #595959;
-
-      p {
-        color: var(--colour-body);
-      }
-    }
-  }
   /* #endregion */
 
   .invert-colours {

@@ -1,18 +1,8 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-
-
 /*  Default colour  */
 :is(iam-nav,.iam-nav) {
-
-  > :not([slot="logo"],[slot="secondary"]) {
-    color-scheme: light;
-  }
-
-  > [slot="secondary"] {
-    color-scheme: light;
-  }
 
   > .nav--menu {
     --colour-heading: var(--colour-primary-theme);

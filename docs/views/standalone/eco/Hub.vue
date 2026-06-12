@@ -58,7 +58,7 @@ function addProductSearch(event): void {
 
       <a href="/">Onboarding</a>
 
-      <div class="nav--menu js-show" data-btn-class="btn-compact" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid" slot="menus">
+      <div class="nav--menu" data-btn-class="btn-compact" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid" slot="menus">
         <div>
           <label for="test1">Active branch</label><select class="form-select" name="test1" id="test1"><option selected="" value="1">Newcastle</option><option value="2">Two</option><option value="2">Three</option><option value="2">Four</option></select></div><hr class="mt-3"><a href="/">Agency settings</a><a href="/">Control panel</a><a href="/" class="mb-4">Contact us</a></div>
 
@@ -127,13 +127,12 @@ function addProductSearch(event): void {
           <Skeleton>
             <Bone class="search"></Bone><hr/>
           </Skeleton>
+          <Skeleton>
+            <Bone class="btn"></Bone>
+          </Skeleton>
+
         </Content>
 
-
-        <div class="btn__group mb-1">
-          <a href="https://iampropertyinternal.zendesk.com/hc/en-gb" target="_blank" class="btn btn-primary">View FAQ articles</a>
-          <a href="https://iampropertyinternal.zendesk.com/hc/en-gb/requests/new" target="_blank" class="btn btn-secondary">Submit a request</a>
-        </div>
       </div>
 
       <SalesInsights></SalesInsights>

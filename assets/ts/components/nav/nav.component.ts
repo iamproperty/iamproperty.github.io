@@ -32,7 +32,7 @@ class iamNav extends HTMLElement {
 
       <div class="menu__outer">
         <div class="menu closed">
-            
+
           <div class="menu__primary">
             <slot></slot>
             <slot name="dual"></slot>
@@ -46,7 +46,7 @@ class iamNav extends HTMLElement {
           </div>
         </div>
         <slot name="menus"></slot>
-      </div>      
+      </div>
     </div>
     <div class="backdrop" part="backdrop"></div>
     `;
@@ -73,107 +73,119 @@ class iamNav extends HTMLElement {
     const buttonsHolder = this.shadowRoot.querySelector('.buttons-holder');
 
     // Check the content
-    this.querySelectorAll(':scope > *').forEach(function (element) {
-      const tagname = element.tagName;
+    const createNavMenu = (component) => {
 
-      switch (tagname) {
-        case 'BUTTON':
-          if (!element.hasAttribute('slot')) {
-            element.setAttribute('slot', 'actions');
-            menu.classList.add('has-actions');
-          }
-          break;
-      }
+      buttonsHolder?.innerHTML = '';
+      component.querySelectorAll(':scope > *').forEach(function (element) {
+        const tagname = element.tagName;
 
-      
-      // Create menu button
-      if (
-        element.classList.contains('nav--menu') &&
-        element.hasAttribute('data-title') &&
-        element.hasAttribute('data-icon')
-      ) {
-        const title = element.getAttribute('data-title');
-        const iconClass = element.getAttribute('data-icon');
-
-        // Create the menu button that sits seperately to the menu
-        const button = document.createElement('button');
-        button.setAttribute('slot', title);
-        button.classList.add('btn-menu');
-        button.setAttribute('part', 'btn-menu');
-        button.innerHTML = `<span class="btn btn-primary"><span>${title}</span><i class="${iconClass}"></i><i class="fa-regular fa-xmark-large"></i></span>`;
-        buttonsHolder.insertAdjacentElement('beforeend', button);
-
-        const mdButton = button.querySelector('.btn-primary');
-
-        // Make sure the menu is added to the right part of the component
-        element.setAttribute('slot', 'menus');
-
-        // If open we need to make sure the main mobile menu is closed, the new button has the right state and the backdrop is shown
-        if (element.classList.contains('open')) {
-          button.setAttribute('aria-expanded', true);
-          mdButton.classList.toggle('active');
-          iamNav.classList.add('open');
-          backdrop.classList.add('show');
-        } else {
-          element.classList.add('closed'); // closed class is added to prevent the elements being tabbed into, this causes visual issues
+        switch (tagname) {
+          case 'BUTTON':
+            if (!element.hasAttribute('slot')) {
+              element.setAttribute('slot', 'actions');
+              menu.classList.add('has-actions');
+            }
+            break;
         }
 
-        // Click event
-        button.addEventListener(
-          'click',
-          function (e) {
-            e.preventDefault();
-            button.toggleAttribute('aria-expanded');
-            element.classList.toggle('open');
+
+        // Create menu button
+        if (
+          element.classList.contains('nav--menu') &&
+          element.hasAttribute('data-title') &&
+          element.hasAttribute('data-icon')
+        ) {
+          const title = element.getAttribute('data-title');
+          const iconClass = element.getAttribute('data-icon');
+
+          // Create the menu button that sits seperately to the menu
+          const button = document.createElement('button');
+          button.setAttribute('slot', title);
+          button.classList.add('btn-menu');
+          button.setAttribute('part', 'btn-menu');
+          button.innerHTML = `<span class="btn btn-primary"><span>${title}</span><i class="${iconClass}"></i><i class="fa-regular fa-xmark-large"></i></span>`;
+          buttonsHolder.insertAdjacentElement('beforeend', button);
+
+          const mdButton = button.querySelector('.btn-primary');
+
+          // Make sure the menu is added to the right part of the component
+          element.setAttribute('slot', 'menus');
+
+          // If open we need to make sure the main mobile menu is closed, the new button has the right state and the backdrop is shown
+          if (element.classList.contains('open')) {
+            button.setAttribute('aria-expanded', true);
             mdButton.classList.toggle('active');
+            component.classList.add('open');
+            backdrop.classList.add('show');
+          } else {
+            element.classList.add('closed'); // closed class is added to prevent the elements being tabbed into, this causes visual issues
+          }
 
-            // Close desktop menus
-            const openMenu = iamNav.querySelector(':scope > details[open]');
+          // Click event
+          button.addEventListener(
+            'click',
+            function (e) {
+              e.preventDefault();
+              button.toggleAttribute('aria-expanded');
 
-            if (openMenu) openMenu.removeAttribute('open');
+              console.log(element);
+              element.classList.toggle('open');
+              mdButton.classList.toggle('active');
 
-            // Close the main menu and fix states on the button, iamNav component and backdrop
-            if (element.classList.contains('open')) {
-              menu.classList.remove('open');
-              menuButton.removeAttribute('aria-expanded');
-              setTimeout(function () {
-                menu.classList.add('closed');
-              }, 1000); // Delay until its close so the animation is broken
-              iamNav.classList.add('open');
-              backdrop.classList.add('show');
-              element.classList.remove('closed');
-            } else {
-              iamNav.classList.remove('open');
-              backdrop.classList.remove('show');
-              setTimeout(function () {
-                element.classList.add('closed');
-              }, 1000);
-            }
+              // Close desktop menus
+              const openMenu = component.querySelector(':scope > details[open]');
 
-            // Close any open menus
-            iamNav.querySelectorAll('.nav--menu.open').forEach(function (openmenu) {
-              if (openmenu != element) {
-                openmenu.classList.remove('open');
+              if (openMenu) openMenu.removeAttribute('open');
+
+              // Close the main menu and fix states on the button, iamNav component and backdrop
+              if (element.classList.contains('open')) {
+                menu.classList.remove('open');
+                menuButton.removeAttribute('aria-expanded');
+                setTimeout(function () {
+                  menu.classList.add('closed');
+                }, 1000); // Delay until its close so the animation is broken
+                component.classList.add('open');
+                backdrop.classList.add('show');
+                element.classList.remove('closed');
+              } else {
+                component.classList.remove('open');
+                backdrop.classList.remove('show');
+                setTimeout(function () {
+                  element.classList.add('closed');
+                }, 1000);
               }
-            });
 
-            iamNav.shadowRoot
-              .querySelectorAll('.buttons-holder .btn-menu[aria-expanded]')
-              .forEach(function (selectedButton) {
-                if (selectedButton != button) {
-                  selectedButton.removeAttribute('aria-expanded');
-                  const innerBtn = selectedButton.querySelector('.btn-primary');
-                  innerBtn.classList.remove('active');
+              // Close any open menus
+              component.querySelectorAll('.nav--menu.open').forEach(function (openmenu) {
+                if (openmenu != element) {
+                  openmenu.classList.remove('open');
                 }
               });
-          },
-          false
-        );
-      }
-    });
 
-    this.querySelectorAll('details').forEach(function (element) {
-      element.classList.add('details--revert');
+              component.shadowRoot
+                .querySelectorAll('.buttons-holder .btn-menu[aria-expanded]')
+                .forEach(function (selectedButton) {
+                  if (selectedButton != button) {
+                    selectedButton.removeAttribute('aria-expanded');
+                    const innerBtn = selectedButton.querySelector('.btn-primary');
+                    innerBtn.classList.remove('active');
+                  }
+                });
+            },
+            false
+          );
+        }
+      });
+
+      component.querySelectorAll('details').forEach(function (element) {
+        element.classList.add('details--revert');
+      });
+    }
+    createNavMenu(this);
+
+    this.addEventListener('rebuilt', () => {
+      console.log('rebuilt nav');
+      createNavMenu(this);
     });
 
     // Has secondary link
@@ -186,7 +198,7 @@ class iamNav extends HTMLElement {
       'click',
       function (e) {
         e.preventDefault();
-        menuButton.toggleAttribute('aria-expanded');
+        //menuButton.toggleAttribute('aria-expanded');
         menu.classList.toggle('open');
 
         // Close any other menus

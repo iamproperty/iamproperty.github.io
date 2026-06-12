@@ -31,7 +31,7 @@ class iamForm extends HTMLElement {
 
   connectedCallback(): void {
 
-    const form = this.querySelector<HTMLFormElement>('form');
+    const form = this.querySelector<HTMLFormElement>('form') ?? this;
 
     if(!form)
       return;

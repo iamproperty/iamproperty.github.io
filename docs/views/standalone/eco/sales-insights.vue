@@ -254,7 +254,7 @@ const searchOutcodes = async(event):void => {
         </Notification>
 
 
-        <Modal >
+        <Modal class="modal--sm">
     <dialog id="competitor-list" aria-labelledby="competitor-list-title">
       <h3 id="competitor-list-title">Customise your competitor list</h3>
       <p>Update the competitors you see within your the sales insights widget.</p>
@@ -271,23 +271,23 @@ const searchOutcodes = async(event):void => {
         <p>Please enter an outcode to display competitor list</p>
       </div>
 
-      <Form data-checkbox-limit="2">
-      <fieldset v-if="competitors" id="selected-competitors" class="mh-md">
-        <label v-for="competitor in competitors" :key="competitor.id">
-          <input type="checkbox"
-          :name="`select-competitors[${competitor.id}]`"
-          :value="competitor.id"
-          :data-name="competitor.attributes.agentName"
-          :data-listed="competitor.attributes.counts.listed"
-          :data-reductions="competitor.attributes.counts.reductions"
-          :data-cancelled="competitor.attributes.counts.cancelled"
-          :data-withdrawn="competitor.attributes.counts.withdrawn"
-          :data-sstc="competitor.attributes.counts.sstc"
-          />
-          {{ competitor.attributes.agentName }}
-        </label>
-      </fieldset>
-    </Form>
+      <Form>
+        <fieldset v-if="competitors" id="selected-competitors" class="mh-md" data-checkbox-limit="10">
+          <label v-for="competitor in competitors" :key="competitor.id">
+            <input type="checkbox"
+            :name="`select-competitors[${competitor.id}]`"
+            :value="competitor.id"
+            :data-name="competitor.attributes.agentName"
+            :data-listed="competitor.attributes.counts.listed"
+            :data-reductions="competitor.attributes.counts.reductions"
+            :data-cancelled="competitor.attributes.counts.cancelled"
+            :data-withdrawn="competitor.attributes.counts.withdrawn"
+            :data-sstc="competitor.attributes.counts.sstc"
+            />
+            {{ competitor.attributes.agentName }}
+          </label>
+        </fieldset>
+      </Form>
 
       <div class="btn__group">
         <button class="btn btn-secondary" command="close" commandfor="competitor-list">Cancel</button>

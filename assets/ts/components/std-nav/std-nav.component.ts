@@ -36,6 +36,9 @@ class iamSTDNav extends HTMLElement {
     const defaultContent = navElement.innerHTML;
 
     navElement.innerHTML = `${defaultContent}${populateNav(data)}`;
+
+    const customEvent = new CustomEvent('rebuilt');
+    navElement.dispatchEvent(customEvent);
   }
 
   defaultToSecondary = (): void => {
@@ -80,7 +83,6 @@ class iamSTDNav extends HTMLElement {
     else {
       //this.defaultToSecondary(); TODO: change this to show default content but still be able to update
     }
-
 
 
     const data = await loadNavData(Cookies).then(
