@@ -75,7 +75,7 @@ class iamNav extends HTMLElement {
     // Check the content
     const createNavMenu = (component) => {
 
-      buttonsHolder?.innerHTML = '';
+      buttonsHolder.innerHTML = '';
       component.querySelectorAll(':scope > *').forEach(function (element) {
         const tagname = element.tagName;
 
