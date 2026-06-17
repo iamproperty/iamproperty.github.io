@@ -33,21 +33,52 @@
   flex-wrap: wrap !important;
   align-items: center !important;
   color: var(--colour-heading);
+
+  overscroll-behavior: contain !important;
+  background-color: var(--colour-canvas);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--container-padding);
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  width: 100%;
+  
 }
 
-
-/* #region Fix colours  */
-
-:host(.bg-primary) .container {
-
-  /* color-scheme: dark; */
-
-  .menu {
-    
-    /* color-scheme: light; */
+@media screen and (min-width: 62em) {
+  :host(.has-secondary) {
+    --nav-height: 8.5rem; 
   }
 }
 
+/* #region scrollbars */
+.menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu::-webkit-scrollbar-track {
+  border: 0 !important;
+}
+
+.menu::-webkit-scrollbar-thumb {
+  border: 0 !important;
+}
+/* #endregion 
+
+/* #region menu buttons */
+
+/* #region logo */
+
+::slotted(.brand) {
+  font-size: 3rem;
+  height: 3rem;
+  padding: 0;
+  text-decoration: none;
+  min-width: min(var(--svg-width), 14rem);
+  margin-right: auto;
+
+}
 /* #endregion */
 
 .btn-menu {
@@ -163,6 +194,10 @@
   }
 }
 
+/* #endregion */
+
+
+
 /* #region mobile and tablet menu */
 @media screen and (max-width: 62em) {
   :host > .container {
@@ -171,10 +206,10 @@
 
   .menu__outer {
     position: absolute;
-    top: 6rem; /* 96 */
+    top: var(--nav-height);
     left: 0;
     width: 100%;
-    height: calc(100vh - 6rem);
+    height: calc(100vh - var(--nav-height));
     overflow: hidden;
     pointer-events: none;
     transition: background 0.5s;
@@ -185,21 +220,8 @@
     }
   }
 
-  .menu::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .menu::-webkit-scrollbar-track {
-    border: 0 !important;
-  }
-
-  .menu::-webkit-scrollbar-thumb {
-    border: 0 !important;
-  }
-
   .menu {
 
-    
     overscroll-behavior: contain;
     width: 23.4375rem;
     background-color: var(--colour-canvas-2);
@@ -215,17 +237,15 @@
     flex-direction: column;
     flex-wrap: nowrap;
 
+    /*  The menu is always white unless in dark mode */
+    background-color: var(--colour-canvas-2);
+      
     > * {
       flex-shrink: 0;
       
       color-scheme: light;
     }
 
-
-    /*  The menu is always white unless in dark mode */
-    
-      background-color: var(--colour-canvas-2);
-      
 
     @media (forced-colors: active) {
       outline: 1px solid white;
@@ -248,17 +268,13 @@
       box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);
       pointer-events: all;
     }
-
-    &.closed * {
-      //display: none !important;
-    }
   }
 
   .menu__secondary {
     display: none;
   }
 
-  .has-secondary .menu__secondary {
+  :host(.has-secondary) .menu__secondary {
     display: block;
     margin-left: -1.5rem;
     margin-right: -1.5rem;
@@ -293,12 +309,7 @@
     }
   }
 
-  *:is(.has-search, .has-actions) .menu__primary {
-    display: block;
-    padding-bottom: 3rem;
-  }
-
-  .menu:not(.has-secondary) .menu__primary {
+  .menu__primary {
     display: block;
     padding-bottom: 3rem;
   }
@@ -336,7 +347,7 @@
   }
   .dialog__wrapper dialog {
     display: contents;
-  }
+  } 
 }
 /* #endregion */
 
@@ -375,16 +386,17 @@
     flex-wrap: nowrap;
     align-items: center;
 
-    &:has(.has-secondary) {
-      padding-top: 4rem !important; /* 24 + 40 */
-    }
 
     > * {
       margin-bottom: 0 !important;
     }
   }
 
-  .btn-menu {
+  :host(.has-secondary) {
+    padding-top: 2.5rem !important; /* 40 */
+  }
+
+  #btn-menu {
     display: none;
   }
 
@@ -406,7 +418,7 @@
     display: none;
   }
 
-  .has-secondary .menu__secondary {
+  :host(.has-secondary) .menu__secondary {
     background-color: var(--colour-canvas-2);
     display: block;
     position: absolute;
@@ -421,7 +433,8 @@
       padding: var(--container-padding) !important;
       padding-top: 0.5rem !important;
       padding-bottom: 0.5rem !important;
-      text-align: right;
+      display: flex;
+      justify-content: flex-end;
     }
   }
 
@@ -553,15 +566,17 @@
     height: 100vh;
   }
 
-  :host(.open-secondary) .has-secondary .menu__secondary {
+  :host(.has-secondary.open-secondary) .menu__secondary {
 
     z-index: 2;
   }
 }
 /* #endregion */ 
 
-/* #region Menus */
-::slotted(.nav--menu) {
+/* #region account menu */
+
+.nav--menu {
+
   pointer-events: all;
   overscroll-behavior: contain;
   width: 23.4375rem;
@@ -584,13 +599,11 @@
 
 
   /*  The menu is always white unless in dark mode */
-
-
   @media (forced-colors: active) {
     outline: 1px solid white;
   }
 
-  &:before {
+  .title {
     display: block;
     width: calc(100% + 3rem);
     border-top: 2px solid var(--colour-border);
@@ -634,13 +647,7 @@ slot[name='menus'] {
   width: 23.4375rem;
 }
 
-::slotted(.nav--menu[data-open-title]) {
-  &:before {
-    content: attr(data-open-title);
-  }
-}
-
-::slotted(.nav--menu.open) {
+.nav--menu.open {
   width: calc(23.4375rem - var(--modifier, 0px));
   left: calc(100% - (23.4375rem - var(--modifier, 0px)));
   -webkit-box-shadow: 0 6px 12px 0px rgba(0, 0, 0, 0.2);

@@ -1,103 +1,6 @@
 @use 'sass:math';
 @use '../_func' as *;
 
-/*  Default colour  */
-:is(iam-nav,.iam-nav) {
-
-  > .nav--menu {
-    --colour-heading: var(--colour-primary-theme);
-    color-scheme: light;
-  }
-}
-
-:is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
-
-  > :not([slot="logo"],[slot="secondary"]) {
-    color-scheme: light;
-  }
-}
-
-.dark-theme :is(iam-nav,.iam-nav) {
-
-  > :not([slot="logo"],[slot="secondary"]) {
-    color-scheme: dark;
-  }
-  
-  > .nav--menu {
-    --colour-heading: var(--colour-white);
-    color-scheme: dark;
-  }
-}
-
-.dark-theme :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
-
-  --menu-btn-colour: var(--colour-white);
-}
-  
-  @media (prefers-color-scheme: dark) {
-    html:not(.light-theme) :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
-
-      --menu-btn-colour: var(--colour-heading);
-    }
-  }
-
-
-@media screen and (min-width: 62em) {
-  :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
-    > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
-      color-scheme: dark;
-    }
-
-    > details > div {
-      color-scheme: light;
-    }
-  }
-
-  .dark-theme :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
-
-    > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
-      color-scheme: light;
-    }
-
-    
-    > details > div {
-      color-scheme: dark;
-    }
-
-  }
-
-  @media (prefers-color-scheme: dark) {
-    html:not(.light-theme) :is(iam-nav,.iam-nav):is(.bg-primary, .bg-danger, .bg-dark) {
-      > :not([slot="logo"],[slot="secondary"],[slot="menus"]) {
-        color-scheme: light;
-      }
-
-        
-      > details > div {
-        color-scheme: dark;
-      }
-    }
-  }
-
-}
-
-body:has(:is(iam-nav,.iam-nav).open:not(.nav--sticky,.demo-open):not(.nav--xs-sticky)) {
-  max-height: 100vh;
-  overflow: hidden;
-}
-
-body {
-  --nav-height: 6rem; /* 96 */
-  --sticky-padding: 0px;
-
-  &:has(:is(iam-nav,.iam-nav) a[slot='secondary']) {
-    --nav-height: 8.5rem; /* 96 + 40 */
-  }
-
-  &:has(:is(iam-nav,.iam-nav).nav--sticky) {
-    --sticky-padding: var(--nav-height);
-  }
-}
 
 /* #region Create the correct padding top of the page */
 nav:has(:is(iam-nav,.iam-nav)) {
@@ -177,36 +80,10 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
 /* #region General styles */
 :is(iam-nav,.iam-nav) {
-  --nav-height: 6rem; /* 96 */
 
-  &:has([slot='secondary']) {
-    --nav-height: 8.5rem; /* 96 + 40 */
-  }
+  
 
-  overscroll-behavior: contain !important;
-  background-color: var(--colour-canvas);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: var(--container-padding);
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
-  width: 100%;
-
-  .brand {
-    font-size: 3rem;
-    height: 3rem;
-    padding: 0;
-    text-decoration: none;
-    min-width: min(var(--svg-width), 14rem);
-    margin-right: auto;
-
-    img {
-      height: 100%;
-      width: auto;
-    }
-  }
-
+  
   a:not([slot='logo']):not(.btn):not(:has(iam-card)) {
     text-decoration: none;
 
@@ -278,12 +155,6 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     display: none!important;
   }
   /* #endregion */
-}
-
-@container style(--body-theme: dark) {
-  :is(iam-nav,.iam-nav).bg-primary [slot="secondary"] {
-    --colour-link: white;
-  }
 }
 
 :is(iam-nav,.iam-nav) details {
@@ -997,18 +868,6 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
 
 :is(iam-nav,.iam-nav) .nav--menu {
   outline: none !important;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  &::-webkit-scrollbar-track {
-    border: 0 !important;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    border: 0 !important;
-  }
 
   hr {
     width: 100% !important;

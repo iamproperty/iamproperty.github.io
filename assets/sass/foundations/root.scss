@@ -295,6 +295,10 @@
           var(--container-padding-bottom) var(--container-padding-x);
         --gutter: 3.5rem;
       }
+        
+      &:has(iam-nav [slot='secondary']) {
+        --nav-height: 8.5rem; /* 96 + 40 */
+      }
     }
 
     @media (prefers-reduced-motion: no-preference) {
