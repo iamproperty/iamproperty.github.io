@@ -2,6 +2,7 @@ import Cookies from '../../../../node_modules/js-cookie/dist/js.cookie.mjs';
 import {populateNav,loadNavData,loadUserData,setEnabledLinks} from '../../modules/nav';
 import iamNav from '../nav/nav.component';
 
+
 // Data layer Web component created
 declare global {
   interface Window {
@@ -112,6 +113,9 @@ class iamSTDNav extends HTMLElement {
     const userData = await loadUserData(Cookies).then(
       (data) => {
 
+        if(!data.attributes)
+          return false;
+
         setEnabledLinks(component,data);
 
         Array.from(document.querySelectorAll('[data-variable]')).forEach((element) => {
@@ -131,9 +135,9 @@ class iamSTDNav extends HTMLElement {
       }
     );
 
-
   }
-
 }
+
+
 
 export default iamSTDNav;

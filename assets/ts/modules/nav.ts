@@ -36,7 +36,7 @@ export const populateNav = (data):void => {
       html += `<details name="megamenu"><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateSections(feature.attributes.sections)}</div></details>`;
     else if(feature.attributes.links)
       html += `<details name="megamenu"><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateLinks(feature.attributes.links)}</div></details>`;
-    else 
+    else
       html += `<a href="/">${feature.attributes.title}</a>`;
   });
 
@@ -111,7 +111,7 @@ export const loadNavData = async(Cookies): any => {
 
 export const loadUserData = async(Cookies): any => {
 
-  const ajaxURL = '/user.json';
+  const ajaxURL = 'https://dev.hub.iamproperty.group/navigation/access-context';
 
   // Setup controller vars if not already set
   if (!window.controller) window.controller = [];
@@ -124,9 +124,12 @@ export const loadUserData = async(Cookies): any => {
   const { signal } = window.controller[ajaxURL];
 
   try {
+
+    console.log('hey')
     const response = await fetch(ajaxURL, {
       signal,
       method: 'GET',
+      credentials: 'include',
       headers: {
         Accept: 'application/json',
       },
