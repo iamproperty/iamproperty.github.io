@@ -3,6 +3,7 @@
   "header",
   "table-basic",
   "table-no-submit",
+  "table-draggable",
   "table-submit",
   "table-ajax",
   "table",

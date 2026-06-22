@@ -1186,6 +1186,10 @@ const routes = [
         component: () => import('./views/examples/NoSubmitTableDoc.vue'),
       },
       {
+        path: 'draggable-table',
+        component: () => import('./views/examples/DraggableTableDoc.vue'),
+      },
+      {
         path: 'submit-table',
         component: () => import('./views/examples/SubmitTableDoc.vue'),
       },

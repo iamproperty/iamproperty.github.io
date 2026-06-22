@@ -13,6 +13,7 @@ const components = [
   'table',
   'table-basic',
   'table-no-submit',
+  'table-draggable',
   'tabs',
   'card',
   'calendar',

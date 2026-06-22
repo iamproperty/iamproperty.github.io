@@ -12,7 +12,7 @@
 
 <template>
   <TrackEvents
-    selector="iam-table,iam-table-basic,iam-table-no-submit,iam-table-submit,iam-ajax"
+    selector="iam-table,iam-table-basic,iam-table-no-submit,iam-table-draggable,iam-table-submit,iam-ajax"
     :events="[
       'update-show',
       'update-page',
@@ -128,6 +128,15 @@
               <td>
                 This component doesn't feature any functionality that requires the data of the table to reload. Features
                 like the pagination, sorting and filtering are done on the page on existing table rows.
+              </td>
+            </tr>
+            <tr>
+              <td>Draggable columns</td>
+              <td class="text-nowrap">iam-table-draggable</td>
+              <td class="text-nowrap">data-no-submit</td>
+              <td>
+                This component keeps the same on-page table behaviour but lets users reorder columns by dragging the
+                column header or using Shift plus the left and right arrow keys.
               </td>
             </tr>
             <tr>

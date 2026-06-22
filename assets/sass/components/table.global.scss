@@ -5,7 +5,7 @@
 
 @use './table-basic.global';
 
-$selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax';
+$selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, iam-table-ajax, iam-table-draggable';
 
 @use '../utilities/display' as *;
 
@@ -357,6 +357,100 @@ $selector: 'iam-table, iam-table-basic, iam-table-no-submit, iam-table-submit, i
     }
   }
 
+}
+
+// #endregion
+
+// #region draggable columns
+:is(#{$selector}).table--draggable {
+  --drag-column-padding-left: 1.25rem;
+
+  thead th[data-draggable-column] {
+    cursor: grab;
+    position: relative;
+    color: var(--colour-heading) !important;
+    user-select: none;
+    touch-action: none;
+    padding-left: var(--drag-column-padding-left) !important;
+    padding-right: 2.5rem !important;
+    transition: box-shadow 0.15s ease, opacity 0.15s ease, color 0.15s ease, transform 0.15s ease;
+
+    .th__drag-handle {
+      position: absolute;
+      right: 0.75rem;
+      top: 50%;
+      translate: 0 -50%;
+      width: 1rem;
+      height: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+      color: var(--colour-body-default) !important;
+      pointer-events: none;
+      opacity: 0;
+      padding: 0;
+      z-index: 1;
+      transition: opacity 0.15s ease, color 0.15s ease, transform 0.15s ease;
+
+      i {
+        display: block;
+        font-size: 0.875rem;
+        line-height: 1;
+        color: inherit;
+      }
+    }
+
+    &:hover .th__drag-handle,
+    &:focus-visible .th__drag-handle,
+    &.th--dragging .th__drag-handle {
+      opacity: 1;
+    }
+
+    &.th--dragging {
+      cursor: grabbing;
+      opacity: 1;
+      background-color: #ededed;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      border-radius: 0.25rem;
+      transform: translateY(-1px);
+      z-index: 2;
+
+      .th__drag-handle {
+        color: var(--colour-body-default) !important;
+      }
+    }
+
+    &:is(:hover, :focus-visible, .th--dragging) .th__drag-handle {
+      opacity: 1;
+    }
+
+    &.th--drop-before,
+    &.th--drop-after {
+      box-shadow: inset 3px 0 0 var(--colour-info);
+    }
+
+    &.th--drop-after-end {
+      box-shadow: inset -3px 0 0 var(--colour-info);
+    }
+  }
+
+  thead th[data-draggable-column]:focus-visible {
+    outline: 2px solid var(--colour-primary);
+    outline-offset: -2px;
+  }
+
+  tbody td {
+    padding-left: var(--drag-column-padding-left) !important;
+  }
+
+  thead th[data-draggable-column]:hover .th__drag-handle,
+  thead th[data-draggable-column]:focus-visible .th__drag-handle {
+    color: var(--colour-body-default) !important;
+  }
 }
 
 // #endregion

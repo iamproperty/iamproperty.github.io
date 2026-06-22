@@ -43,6 +43,7 @@ console.log(productpages);
       <ul class="mb-5">
         <li><a href="/examples/basic-table">Tables</a></li>
         <li><a href="/examples/no-submit-table">No Submit Tables</a></li>
+        <li><a href="/examples/draggable-table">Draggable Tables</a></li>
         <li><a href="/examples/submit-table">Submit Tables</a></li>
         <li><a href="/examples/ajax-table">Ajax Tables</a></li>
         <li><a href="/examples/full-table">full Tables</a></li>

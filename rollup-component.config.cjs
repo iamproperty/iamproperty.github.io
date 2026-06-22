@@ -42,9 +42,8 @@ components.forEach((component) => {
   let menucss = '';
   let extraCSS = '';
   let rankcss = '';
-
-  
   let componentFileName = component;
+  let extraCSSFileName = componentFileName;
 
   
   if (componentFileName == "table-no-submit" || componentFileName == "table-submit" || componentFileName == "table-ajax"){
@@ -53,6 +52,10 @@ components.forEach((component) => {
   
   if (componentFileName == "std-address-lookup"){
     componentFileName = "address-lookup";
+  }
+
+  if (componentFileName == "table-draggable") {
+    extraCSSFileName = "table";
   }
   
 
@@ -110,9 +113,9 @@ components.forEach((component) => {
 
   try {
 
-    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.global.css`))) {
+    if (fs.existsSync(path.resolve(__dirname, `assets/css/components/${extraCSSFileName}.global.css`))) {
       
-      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${componentFileName}.global.css`), 'utf8');
+      extraCSS = fs.readFileSync(path.resolve(__dirname, `assets/css/components/${extraCSSFileName}.global.css`), 'utf8');
       extraCSS = extraCSS.replace("sourceMappingURL=","sourceMappingURL=assets/css/components/");
       extraCSS = extraCSS.replace("\uFEFF","");
     }

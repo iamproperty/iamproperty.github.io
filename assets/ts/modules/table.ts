@@ -543,6 +543,10 @@ export const setupNoSubmitTable = (component, table, form, pagination, savedTabl
 // #region No submit table functions
 export const sortViaHeaders = (component, table): void => {
   table.addEventListener('click', (event) => {
+    if (component.hasAttribute('data-column-dragging') || component.hasAttribute('data-column-dragged')) {
+      return;
+    }
+
     if (event && event.target instanceof HTMLElement && event.target.closest('[data-sort]')) {
       const heading = event.target.closest('[data-sort]');
       heading.setAttribute('data-sort', 'true');
@@ -694,6 +698,296 @@ export const sortTableByValues = (table, sortBy, order, format = ''): void => {
     strTbody += tableRow.row.outerHTML;
   });
   tbody.innerHTML = strTbody;
+};
+
+const DRAG_HANDLE_CLASS = 'th__drag-handle';
+
+const getCellIndex = (cell): number => {
+  return Array.prototype.indexOf.call(cell.parentElement.children, cell);
+};
+
+const getDraggableHeading = (event): HTMLElement | null => {
+  if (!(event.target instanceof HTMLElement)) {
+    return null;
+  }
+
+  const heading = event.target.closest('th[data-draggable-column]');
+
+  return heading instanceof HTMLElement ? heading : null;
+};
+
+const isDraggableHeading = (heading): boolean => {
+  if (!(heading instanceof HTMLElement)) {
+    return false;
+  }
+
+  if (heading.classList.contains('th--fixed') || heading.classList.contains('expand-button-heading')) {
+    return false;
+  }
+
+  return heading.textContent.trim().length > 0;
+};
+
+const setupDraggableColumnHeaders = (table): void => {
+  Array.from(table.querySelectorAll('thead th')).forEach((heading) => {
+    const draggable = isDraggableHeading(heading);
+    const handle = heading.querySelector(`.${DRAG_HANDLE_CLASS}`);
+
+    if (draggable) {
+      heading.setAttribute('data-draggable-column', 'true');
+      heading.setAttribute('draggable', 'true');
+      heading.setAttribute('aria-grabbed', 'false');
+      heading.setAttribute('title', 'Drag to reorder column');
+
+      if (!handle) {
+        const dragHandle = document.createElement('span');
+        dragHandle.className = DRAG_HANDLE_CLASS;
+        dragHandle.setAttribute('aria-hidden', 'true');
+        dragHandle.innerHTML = '<i class="fa-solid fa-grip-lines"></i>';
+        heading.appendChild(dragHandle);
+      } else if (!handle.querySelector('i')) {
+        handle.innerHTML = '<i class="fa-solid fa-grip-lines"></i>';
+      }
+    } else {
+      heading.removeAttribute('data-draggable-column');
+      heading.removeAttribute('draggable');
+      heading.removeAttribute('aria-grabbed');
+
+      if (handle) {
+        handle.remove();
+      }
+    }
+  });
+};
+
+const getDraggableColumnOrder = (table): string[] => {
+  return Array.from(table.querySelectorAll('thead th[data-draggable-column]')).map((heading) =>
+    heading.textContent.trim()
+  );
+};
+
+const getLastDraggableHeading = (table): HTMLElement | null => {
+  const headings = Array.from(table.querySelectorAll('thead th[data-draggable-column]')).filter(
+    (heading) => heading instanceof HTMLElement
+  );
+
+  return headings.length > 0 ? (headings[headings.length - 1] as HTMLElement) : null;
+};
+
+const moveTableColumn = (table, fromIndex, toIndex): void => {
+  if (fromIndex === toIndex) {
+    return;
+  }
+
+  Array.from(table.querySelectorAll('thead tr, tbody tr, tfoot tr')).forEach((row) => {
+    const cells = Array.from(row.children).filter((cell) => cell instanceof HTMLTableCellElement);
+    const sourceCell = cells[fromIndex];
+    const targetCell = cells[toIndex] || null;
+
+    if (!sourceCell || sourceCell === targetCell) {
+      return;
+    }
+
+    row.insertBefore(sourceCell, targetCell);
+  });
+};
+
+export const setupDraggableTable = (component, table, savedTableBody): void => {
+  if (!table) {
+    return;
+  }
+
+  setupDraggableColumnHeaders(table);
+  table.classList.add('table--draggable');
+  component.classList.add('table--draggable');
+
+  if (table.dataset.draggableColumnsReady === 'true') {
+    return;
+  }
+
+  table.dataset.draggableColumnsReady = 'true';
+
+  let draggedHeading = null;
+  let sourceIndex = -1;
+  let dropIndex = -1;
+  let dropHintHeading = null;
+  const clearDropHint = (): void => {
+    if (dropHintHeading) {
+      dropHintHeading.classList.remove('th--drop-before', 'th--drop-after', 'th--drop-after-end');
+      dropHintHeading = null;
+    }
+  };
+
+  const clearDragState = (): void => {
+    clearDropHint();
+
+    if (draggedHeading) {
+      draggedHeading.classList.remove('th--dragging');
+      draggedHeading.setAttribute('aria-grabbed', 'false');
+    }
+
+    table.classList.remove('table--dragging-columns');
+    component.classList.remove('table--dragging-columns');
+    component.removeAttribute('data-column-dragging');
+
+    draggedHeading = null;
+    sourceIndex = -1;
+    dropIndex = -1;
+  };
+
+  const commitDrag = (): void => {
+    if (!draggedHeading || sourceIndex < 0 || dropIndex < 0 || sourceIndex === dropIndex) {
+      return;
+    }
+
+    moveTableColumn(table, sourceIndex, dropIndex);
+    setupDraggableColumnHeaders(table);
+
+    const columns = getDraggableColumnOrder(table);
+
+    const reorderedEvent = new CustomEvent('column-reordered', {
+      detail: {
+        fromColumn: draggedHeading.textContent.trim(),
+        toColumn: columns[Math.min(dropIndex, columns.length - 1)],
+        fromIndex: sourceIndex,
+        toIndex: dropIndex,
+        columns,
+      },
+    });
+
+    component.dispatchEvent(reorderedEvent);
+  };
+
+  const setDropHint = (heading, position): void => {
+    clearDropHint();
+    dropHintHeading = heading;
+    dropHintHeading.classList.add(position === 'before' ? 'th--drop-before' : position === 'after-end' ? 'th--drop-after-end' : 'th--drop-after');
+  };
+
+  table.addEventListener('dragstart', (event) => {
+    const heading = getDraggableHeading(event);
+
+    if (!heading) {
+      return;
+    }
+
+    draggedHeading = heading;
+    sourceIndex = getCellIndex(heading);
+    dropIndex = sourceIndex;
+
+    table.classList.add('table--dragging-columns');
+    component.classList.add('table--dragging-columns');
+    component.setAttribute('data-column-dragging', 'true');
+
+    heading.classList.add('th--dragging');
+    heading.setAttribute('aria-grabbed', 'true');
+
+    if (event.dataTransfer) {
+      event.dataTransfer.effectAllowed = 'move';
+      event.dataTransfer.setData('text/plain', heading.textContent.trim());
+    }
+  });
+
+  table.addEventListener('dragover', (event) => {
+    const heading = getDraggableHeading(event);
+
+    if (!draggedHeading) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (!heading || heading === draggedHeading) {
+      clearDropHint();
+      dropIndex = sourceIndex;
+      return;
+    }
+
+    const rect = heading.getBoundingClientRect();
+    const position = event.clientX > rect.left + rect.width / 2 ? 'after' : 'before';
+    const targetIndex = getCellIndex(heading) + (position === 'after' ? 1 : 0);
+    const lastDraggableHeading = getLastDraggableHeading(table);
+    const dropPosition = position === 'after' && heading === lastDraggableHeading ? 'after-end' : position;
+
+    if (targetIndex === dropIndex && dropHintHeading === heading) {
+      return;
+    }
+
+    dropIndex = targetIndex;
+    setDropHint(heading, dropPosition);
+  });
+
+  table.addEventListener('dragleave', (event) => {
+    if (!draggedHeading || !(event.target instanceof HTMLElement)) {
+      return;
+    }
+
+    const heading = event.target.closest('th[data-draggable-column]');
+
+    if (heading instanceof HTMLElement && heading === dropHintHeading) {
+      clearDropHint();
+    }
+  });
+
+  table.addEventListener('drop', (event) => {
+    if (!draggedHeading) {
+      return;
+    }
+
+    event.preventDefault();
+    commitDrag();
+    clearDragState();
+
+    component.setAttribute('data-column-dragged', 'true');
+    window.setTimeout(() => {
+      component.removeAttribute('data-column-dragged');
+    }, 250);
+  });
+
+  table.addEventListener('dragend', () => {
+    clearDragState();
+  });
+
+  table.addEventListener('keydown', (event) => {
+    const heading = getDraggableHeading(event);
+
+    if (!heading || !event.shiftKey || !['ArrowLeft', 'ArrowRight'].includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const currentIndex = getCellIndex(heading);
+    const targetIndex = event.key === 'ArrowLeft' ? currentIndex - 1 : currentIndex + 2;
+    const cells = Array.from(heading.parentElement.children).filter((cell) => cell instanceof HTMLTableCellElement);
+
+    if (targetIndex < 0 || targetIndex > cells.length) {
+      return;
+    }
+
+    draggedHeading = heading;
+    sourceIndex = currentIndex;
+    dropIndex = targetIndex;
+
+    moveTableColumn(table, sourceIndex, dropIndex);
+    setupDraggableColumnHeaders(table);
+
+    const columns = getDraggableColumnOrder(table);
+
+    component.dispatchEvent(
+      new CustomEvent('column-reordered', {
+        detail: {
+          fromColumn: heading.textContent.trim(),
+          toColumn: columns[Math.min(dropIndex, columns.length - 1)],
+          fromIndex: sourceIndex,
+          toIndex: dropIndex,
+          columns,
+        },
+      })
+    );
+
+    clearDragState();
+  });
 };
 
 export const addFilterEventListeners = (component, table, form, pagination, savedTableBody): void => {
