@@ -155,11 +155,20 @@
       color: var(--option-color-hover) !important;
     }
 
+    &:has(:is(:hover, :focus)) {
+      background: var(--option-bg-hover)!important;
+      color: var(--option-color-hover) !important;
+    }
+
     &:is(:active,.active,:checked) {
       border-left: var(--option-border-left-active) !important;
       background: var(--option-bg-active) !important;
     }
 
+    &:has(:is(:active,.active,:checked)) {
+      border-left: var(--option-border-left-active) !important;
+      background: var(--option-bg-active) !important;
+    }
     &:after {
       content: attr(data-after);
     }
