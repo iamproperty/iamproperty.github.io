@@ -332,6 +332,10 @@
     margin-top: 0 !important;
   }
 
+  ::slotted(iam-branch-selector[slot='account']) {
+    margin-block-end: 1rem!important;
+  }
+
   /*  Search */
   .dialog__wrapper {
     width: 100%;
@@ -431,19 +435,26 @@
       margin-left: auto;
       margin-right: auto;
       padding: var(--container-padding) !important;
-      padding-top: 0.5rem !important;
-      padding-bottom: 0.5rem !important;
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
       display: flex;
       justify-content: flex-end;
+      align-items: center;
     }
   }
 
   ::slotted(a[slot='secondary']) {
-    font-size: 0.875rem !important;
+    font-size: 0.75rem !important;
+    line-height: 2rem!important;
+    margin: 0!important;
 
     &:after {
-      top: calc(100% - 0.25em) !important;
+      display: none;
     }
+  }
+
+  ::slotted(iam-branch-selector[slot='secondary']) {
+    margin-inline-end: auto!important;
   }
 
   ::slotted(a:not([slot='logo'])),
@@ -452,7 +463,7 @@
     margin-right: 0 !important;
   }
 
-  ::slotted(a:not([slot='logo']):not(.btn-compact):not(.btn-primary)) {
+  ::slotted(a:not([slot='logo']):not(.btn-compact):not(.btn-primary):not([slot='secondary'])) {
     font-size: 1rem !important;
     font-weight: normal !important;
 

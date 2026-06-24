@@ -144,7 +144,7 @@ class iamNav extends HTMLElement {
             backdrop.classList.add('show');
             iamNav.classList.add('open');
 
-            if(this.querySelectorAll(':scope > details[open][slot="secondary"]').length)
+            if(details?.hasAttribute('slot') && details?.getAttribute('slot') == "secondary")
               iamNav.classList.add('open-secondary');
           }
 
@@ -265,7 +265,7 @@ class iamNav extends HTMLElement {
     // #endregion
 
     // #region Branch selecto update of slot
-    const branchSelector = document.querySelector(".branch");
+    const branchSelector = this.querySelector("iam-branch-selector");
     const mql = window.matchMedia("(width > 62em)");
 
     if (mql.matches)
@@ -273,7 +273,7 @@ class iamNav extends HTMLElement {
 
     mql.addEventListener("change", (e) => {
 
-      if (e.matches)
+      if (e.matches && this.classList.contains('has-secondary'))
         branchSelector?.setAttribute('slot','secondary');
       else
         branchSelector?.setAttribute('slot','account');
@@ -281,5 +281,6 @@ class iamNav extends HTMLElement {
     // #endregion
   }
 }
+
 
 export default iamNav;

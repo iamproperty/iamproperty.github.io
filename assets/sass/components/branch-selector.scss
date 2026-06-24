@@ -1,0 +1,116 @@
+@use '../elements/buttons--global';
+@use '../elements/buttons--action';
+
+@use '../elements/dropdown';
+
+
+
+
+
+
+@layer components {
+
+  .btn-action {
+    font-size: 0.75rem;
+    line-height: 2rem;
+    padding-block: 0!important;
+    border: none;
+    position: relative;
+    display: flex;
+    font-weight: bold!important;
+    margin: 0!important;
+
+    > * {
+      
+      line-height: 2rem!important;
+      display: inline-block;
+    }
+
+    i {
+      margin-right: 0.5em;
+      font-size: 1.33em;
+    }
+
+    &:not(:hover,:focus) {
+      background-color: transparent;
+    }
+
+    &[data-checked-count]:not([data-checked-count="0"],[data-checked-count="1"]):after {
+      display: inline!important;
+      content: ' +'attr(data-checked-count);
+      color: var(--colour-body);
+      padding-left: 0.25em;
+    }
+
+    span.selected {
+      position: relative;
+      max-width: 32ch;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: bold;
+    }
+
+    span[data-indicator] {
+      position: relative;
+    }
+    span[data-indicator]:before{
+      content: attr(data-indicator);
+
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -1.5em;
+      background-color: var(--colour-warning);
+
+      border-radius: 50%;
+
+      font-size: 0.5rem;
+      line-height: 1.75em;      
+      height: 1.75em;
+      width: 1.75em;
+      text-align: center;
+
+    }
+  }
+
+
+  ::slotted(label) {
+    margin-right: 0!important;
+  }
+  ::slotted(label)::before,
+  ::slotted(label)::after{
+    display: none!important;
+  }
+
+
+  .dropdown {
+    width: fit-content;
+    margin-inline: 0!important;
+  }
+
+  :host([slot="account"]) {
+    margin-left: -0.5rem;
+  }
+  
+  :host([slot="account"]) .btn-action {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  :host([slot="secondary"].branch-selector-inline) .dropdown {
+  
+    background: transparent !important;
+    
+    display: block !important;
+    position: static !important;
+    inset: 0 !important;
+
+    box-shadow: none;
+    padding-block: 0.25rem;
+    margin: 0;
+    width: auto;
+  }
+  
+
+}

@@ -157,6 +157,12 @@
 
     &:is(:active,.active,:checked) {
       border-left: var(--option-border-left-active) !important;
+      padding-left: calc(var(--option-padding) - 4px) !important;
+      background: var(--option-bg-active) !important;
+    }
+    &:has(:is(:active,.active,:checked)) {
+      border-left: var(--option-border-left-active) !important;
+      padding-left: calc(var(--option-padding) - 4px) !important;
       background: var(--option-bg-active) !important;
     }
 

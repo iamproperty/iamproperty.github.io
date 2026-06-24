@@ -991,6 +991,17 @@ const routes = [
         component: () => import('./views/nav/CollapsibleSideMenu.vue'),
         searchterms: 'nav,hidden,expand,menu,admin,settings,sub',
       },
+      {
+        path: 'branch-selector',
+        name: 'Branch selector',
+        meta: {
+          title: 'Branch selector | Components | iamkey',
+          jira:'FEG-987',
+          status: 'beta'
+        },
+        component: () => import('./views/nav/BranchSelectorDoc.vue'),
+        searchterms: 'switch,branch',
+      },
     ],
   },
   {

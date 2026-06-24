@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+  import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
   import Nav from '@/components/Nav/Nav.vue';
   import STDNav from '@/components/STDNav/STDNav.vue';
   import Card from '@/components/Card/Card.vue';
@@ -7,6 +8,7 @@
 <template>
   <nav>
     <Nav data-account-btn-title="My account" data-account-btn-class="btn-compact" class="nav--sticky">
+
 
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
@@ -20,33 +22,35 @@
       <router-link to="/standalone/premium-conveyancing/settings">Settings</router-link>
 
 
+      <span class="mt-4 title h3" slot="account">John Jones</span>
+      <BranchSelector data-indicator="4" slot="account">
 
-      <!--
+        <label>
+          <input type="checkbox" name="branch" value="gosforth" />
+          Gosforth Agent & Co
+        </label>
+        <label>
+          <input type="checkbox" name="branch" value="heaton" />
+          Heaton Agent & Co
+        </label>
+        <label>
+          <input type="checkbox" name="branch" value="newcastle" />
+          Newcastle Agent & Co
+        </label>
+      </BranchSelector>
+
       <STDNav slot="secondary">
 
         <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
 
-
       </STDNav>
-      -->
+
+      <a href="/" slot="account">Agency settings</a>
+      <a href="/" slot="account">Control panel</a>
+      <a href="/" slot="account">Contact us</a>
 
 
-        <span class="branch me-auto" slot="account">Gosforth Agent & Co</span>
-        <BranchSelector slot="account">
 
-          <label><input type="checkbox" name="branch" value="123" />Gosforth Agent & co</label>
-          <label><input type="checkbox" name="branch" value="122" />Heaton Agent & co</label>
-          <label><input type="checkbox" name="branch" value="124" />Newcastle Agent & co</label>
-          <label><input type="checkbox" name="branch" value="125" />Jesmond Agent & co</label>
-
-        </BranchSelector>
-
-        <span class="title" slot="account">John Jones</span>
-        <a href="/" slot="account">Agency settings</a>
-        <a href="/" slot="account">Control panel</a>
-        <a href="/" slot="account">Contact us</a>
-
-      <router-link to="/standalone/premium-conveyancing" slot="secondary">Eco Hub</router-link>
     </Nav>
   </nav>
 

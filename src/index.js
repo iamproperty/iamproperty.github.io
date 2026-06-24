@@ -23,6 +23,7 @@ export { default as Multiselect } from './components/Multiselect/Multiselect.vue
 export { default as Multistep } from './components/MultiStep/MultiStep.vue';
 export { default as Menu } from './components/Menu/Menu.vue';
 export { default as Nav } from './components/Nav/Nav.vue';
+export { default as BranchSelector } from './components/BranchSelector/BranchSelector.vue';
 export { default as NoteFeed } from './components/NoteFeed/NoteFeed.vue';
 export { default as Notification } from './components/Notification/Notification.vue';
 export { default as Pagination } from './components/Pagination/Pagination.vue';

@@ -418,7 +418,7 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       border: none;
       color: var(--colour-link);
       margin: 0;
-      font-size: 1rem;
+      font-size: 0.75rem;
       line-height: 6rem; /* 96 */
       min-height: 6rem; /* 96 */
       margin-block: -1.5rem;
@@ -689,7 +689,9 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
       display: inline-block;
       margin-left: 1.5rem;
       margin-bottom: 0!important;
-      font-size: 1rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+
 
       &:after {
         display: none;
@@ -749,7 +751,11 @@ body[data-direction='down'].past100 nav:has(.nav--sticky) .nav--sticky{
     left: 1.5rem;
   }
 
-  
+  :is(iam-nav,.iam-nav) > details[slot="secondary"][open]:has([data-title="Learning and support"])::details-content {
+    
+    left: auto;
+    right: 0;
+  }
     
 }
 

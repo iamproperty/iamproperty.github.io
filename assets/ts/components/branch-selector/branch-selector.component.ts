@@ -1,0 +1,93 @@
+
+class iamBranchSelector extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+
+    const assetLocation = document.body.hasAttribute('data-assets-location')
+      ? document.body.getAttribute('data-assets-location')
+      : '/assets';
+    const loadCSS = `@import "${assetLocation}/css/components/branch-selector.component.css";`;
+
+    const template = document.createElement('template');
+    template.innerHTML = /* HTML */ `
+    <style>
+    ${loadCSS}
+    </style>
+    <link rel="stylesheet" href="https://kit.fontawesome.com/8bd0fca975.css" crossorigin="anonymous">
+    <div class="wrapper">
+
+      <button id="menuButton" class="btn btn-action" popovertarget="branches" aria-haspopup="true" aria-controls="branches" style="anchor-name: --branches;">
+        <i class="fa-regular fa-building-circle-check"></i>
+        <span class="indicator"></span>
+        <span class="selected">Branch</span>
+      </button>
+      <div class="dropdown" part="dropdown" id="branches" style="position-anchor: --branches;" role="menu" popover="auto">
+        <slot></slot>
+      </div>
+    </div>
+    `;
+    this.shadowRoot?.appendChild(template.content.cloneNode(true));
+  }
+
+
+  connectedCallback(): void {
+
+
+    const menuButton = this.shadowRoot?.querySelector('#menuButton');
+
+    let selected = this.querySelector('input:checked') ? this.querySelector('input:checked') : this.querySelector('input'); // By default the first input is checked if an input hasn't been checked on load
+    selected.checked = true;
+
+
+    menuButton?.querySelector('span.selected').textContent = selected?.closest('label').textContent;
+    menuButton?.setAttribute('data-checked-count',this.querySelectorAll('input:checked').length);
+
+    if(this.hasAttribute('data-indicator'))
+      menuButton?.querySelector('span.indicator').setAttribute('data-indicator',this.getAttribute('data-indicator'));
+
+
+
+    // Make sure the correct classes and attributes are set on each item
+    Array.from(this.querySelectorAll(':scope > label:has(input)')).forEach(item => {
+      item.classList.add('dropdown__option');
+      item.setAttribute('title',item.textContent);// Set a title on all labels
+    });
+
+
+
+    // If all of the inputs are disabled then disable the button
+    if(this.querySelectorAll('input:disabled').length && !this.querySelectorAll('input:not(:disabled)').length)
+      menuButton?.setAttribute('disabled', 'disabled');
+
+    this.addEventListener('change', ():void => {
+
+      selected = this.querySelector('input:checked') ? this.querySelector('input:checked') : this.querySelector('input');
+      selected.checked = true;
+
+      menuButton?.querySelector('span.selected').innerHTML = textContent?.closest('label').textContent;
+      menuButton?.setAttribute('data-checked-count',this.querySelectorAll('input:checked').length);
+
+
+      if(this.querySelectorAll('input[type="checkbox"]:checked').length == 1){
+        selected?.closest('label').classList.add('pe-none');
+      }
+      else if(this.querySelectorAll('input[type="checkbox"]:checked').length > 1){
+        this.querySelector('label.pe-none')?.classList.remove('pe-none');
+      }
+
+    });
+
+    // Desktop menu button
+    menuButton?.addEventListener('click', (e) => {
+
+
+      if(this.hasAttribute('slot') && this.getAttribute('slot') == "account"){
+        e.preventDefault();
+        this.classList.toggle('branch-selector-inline');
+      }
+    });
+  }
+}
+
+export default iamBranchSelector;
