@@ -226,7 +226,7 @@
   select[multiple]::-webkit-scrollbar {
     width: 0.7rem; /*  manage scrollbar width here */
   }
-  select[multiple]::-webkit-scrollbar * {
+  select[multiple]::-webkit-scrollbar {
     background-color: transparent; /*  manage scrollbar background color here */
   }
   select[multiple]::-webkit-scrollbar-thumb {
