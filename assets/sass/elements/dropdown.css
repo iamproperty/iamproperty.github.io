@@ -69,8 +69,7 @@
     box-shadow: var(--dropdown-box-shadow);
   }
   
-  :is(.dropdown, datalist):empty,
-  select::picker(select):empty {
+  :is(.dropdown, datalist):empty {
     
     display: none !important;
   }
