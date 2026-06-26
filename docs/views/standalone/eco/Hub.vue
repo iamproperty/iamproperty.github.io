@@ -9,6 +9,7 @@ import SearchContacts from './search-contacts.vue';
 import SalesInsights from './sales-insights.vue';
 
 import STDNav from '@/components/STDNav/STDNav.vue';
+import Nav from '@/components/Nav/Nav.vue';
 
 
 import Content from '@/components/Content/Content.vue';
@@ -47,7 +48,7 @@ function addProductSearch(event): void {
 <template>
 
   <nav>
-    <STDNav data-hub class="nav--btn-compact">
+    <Nav class="nav--btn-compact">
 
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
@@ -56,13 +57,25 @@ function addProductSearch(event): void {
         </svg>
       </a>
 
+      <!-- These links will be removed -->
+      <a href="/">Lead generation</a>
+      <a href="/">Market Appraisals</a>
+      <a href="/">Insights</a>
       <a href="/">Onboarding</a>
+      <a href="/">CRM</a>
+      <a href="/">Action</a>
+      <a href="/">Conveyancing</a>
 
-      <div class="nav--menu" data-btn-class="btn-compact" data-title="My account" data-open-title="John Jones" data-icon="fa-user fa-solid" slot="menus">
-        <div>
-          <label for="test1">Active branch</label><select class="form-select" name="test1" id="test1"><option selected="" value="1">Newcastle</option><option value="2">Two</option><option value="2">Three</option><option value="2">Four</option></select></div><hr class="mt-3"><a href="/">Agency settings</a><a href="/">Control panel</a><a href="/" class="mb-4">Contact us</a></div>
+      <span class="mt-4 title h3" slot="account">John Jones</span>
+      <hr class="mt-3" slot="account">
+      <a href="/" slot="account">Agency settings</a>
+      <a href="/" slot="account">Control panel</a>
+      <a href="/" class="mb-4" slot="account">Contact us</a>
 
-    </STDNav>
+
+      <STDNav></STDNav>
+
+    </Nav>
   </nav>
 
   <main>

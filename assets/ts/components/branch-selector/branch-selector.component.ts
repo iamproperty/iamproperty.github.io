@@ -41,7 +41,7 @@ class iamBranchSelector extends HTMLElement {
 
 
     menuButton?.querySelector('span.selected').textContent = selected?.closest('label').textContent;
-    menuButton?.setAttribute('data-checked-count',this.querySelectorAll('input:checked').length);
+    menuButton?.setAttribute('data-checked-count',this.querySelectorAll('input:checked').length - 1);
 
     if(this.hasAttribute('data-indicator'))
       menuButton?.querySelector('span.indicator').setAttribute('data-indicator',this.getAttribute('data-indicator'));
@@ -65,8 +65,8 @@ class iamBranchSelector extends HTMLElement {
       selected = this.querySelector('input:checked') ? this.querySelector('input:checked') : this.querySelector('input');
       selected.checked = true;
 
-      menuButton?.querySelector('span.selected').innerHTML = textContent?.closest('label').textContent;
-      menuButton?.setAttribute('data-checked-count',this.querySelectorAll('input:checked').length);
+      menuButton?.querySelector('span.selected').innerHTML = selected?.closest('label').textContent;
+      menuButton?.setAttribute('data-checked-count',this.querySelectorAll('input:checked').length - 1);
 
 
       if(this.querySelectorAll('input[type="checkbox"]:checked').length == 1){

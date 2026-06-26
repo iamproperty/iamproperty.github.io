@@ -4,10 +4,6 @@
 @use '../elements/dropdown';
 
 
-
-
-
-
 @layer components {
 
   .btn-action {
@@ -35,7 +31,7 @@
       background-color: transparent;
     }
 
-    &[data-checked-count]:not([data-checked-count="0"],[data-checked-count="1"]):after {
+    &[data-checked-count]:not([data-checked-count="0"]):after {
       display: inline!important;
       content: ' +'attr(data-checked-count);
       color: var(--colour-body);
@@ -98,7 +94,7 @@
     width: 100%;
   }
 
-  :host([slot="secondary"].branch-selector-inline) .dropdown {
+  :host([slot="account"].branch-selector-inline) .dropdown {
   
     background: transparent !important;
     
@@ -112,5 +108,4 @@
     width: auto;
   }
   
-
 }

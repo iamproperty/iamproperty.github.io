@@ -39,16 +39,14 @@
         </label>
       </BranchSelector>
 
-      <STDNav slot="secondary">
-
-        <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
-
-      </STDNav>
-
       <a href="/" slot="account">Agency settings</a>
       <a href="/" slot="account">Control panel</a>
       <a href="/" slot="account">Contact us</a>
 
+
+      <STDNav slot="secondary">
+        <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
+      </STDNav>
 
 
     </Nav>

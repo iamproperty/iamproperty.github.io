@@ -2,6 +2,7 @@
 
 @use '../_func' as *;
 
+// TODO: do i need to load these files 
 @use '../bs_grid' as *;
 
 @use '../elements/forms' as *;
@@ -13,6 +14,7 @@
 @use '../elements/modal' as *;
 @use '../elements/container' as *;
 
+@use '../elements/links' as *;
 
 @use '../utilities/colours' as *;
 @use '../utilities/margins' as *;
@@ -23,8 +25,6 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
-
-
 
 
 :host {
@@ -154,7 +154,7 @@
     min-width: 3rem;
     width: fit-content;
     height: auto;
-    margin: 0 0 0 1.5rem;
+    margin: 0 0 0 3rem;
     padding: 0 !important;
     text-indent: 0;
     padding-right: 0 !important;
@@ -167,6 +167,9 @@
       
       margin: 0 !important;
       display: flex;
+
+      --btn-padding-inline: 1.5rem;
+      
 
       span {
         order: 2;
@@ -608,7 +611,6 @@
     flex-shrink: 0;
   }
 
-
   /*  The menu is always white unless in dark mode */
   @media (forced-colors: active) {
     outline: 1px solid white;
@@ -646,6 +648,25 @@
     top: var(--nav-height);
   }
 }
+
+::slotted(a[slot='account']:not(.btn-compact):not(.btn-primary)) {
+    display: block !important;
+    line-height: 1.25rem !important;
+    padding: 1.5rem 0 !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+    font-size: 1rem !important;
+    font-weight: normal !important;
+
+    &:after {
+      content: '';
+      display: block!important;
+      height: 2px;
+      width: 100% !important;
+      background-color: var(--colour-border) !important;
+      top: calc(100% - 2px) !important;
+    }
+  }
 
 slot[name='menus'] {
   position: absolute;

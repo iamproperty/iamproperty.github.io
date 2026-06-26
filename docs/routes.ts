@@ -517,6 +517,17 @@ const routes = [
         component: () => import('./views/standardised/AddressLookupDoc.vue'),
         searchterms: 'postcode',
       },
+      {
+        path: 'nav',
+        name: 'iamproperty eco nav',
+        meta: {
+          title: 'iamproperty eco nav | Components | iamkey',
+          status: 'alpha',
+          jira: 'FEG-939'
+        },
+        component: () => import('./views/standardised/NavDoc.vue'),
+        searchterms: 'branch, switcher',
+      },
     ]
   },
   {

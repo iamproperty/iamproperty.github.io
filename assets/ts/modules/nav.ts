@@ -1,43 +1,60 @@
-const navbar = (element): void => {
-  Array.from(element.querySelectorAll('details')).forEach((detail) => {
-    detail.addEventListener(
-      'mouseenter',
-      function () {
-        if (window.matchMedia('(min-width: 62em)').matches) detail.setAttribute('open', 'true');
-      },
-      false
-    );
+export const navTemplate = /* HTML */`<div class="container">
+  <slot name="logo"></slot>
 
-    detail.addEventListener(
-      'mouseleave',
-      function () {
-        if (window.matchMedia('(min-width: 62em)').matches) detail.removeAttribute('open');
-      },
-      false
-    );
-  });
+  <div class="buttons-holder">
+    <button class="btn-menu" part="btn-menu-account" id="btn-menu-account">
+      <span class="btn btn-primary">
+        <span id="account-btn-title"></span>
+        <i class="fa-user fa-solid"></i>
+        <i class="fa-regular fa-xmark-large"></i>
+      </span>
+    </button>
+    <button class="btn-menu" part="btn-menu" id="btn-menu">
+      Menu
+      <i class="fa-regular fa-bars"></i>
+      <i class="fa-regular fa-xmark-large"></i>
+    </button>
+  </div>
 
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(([e]) => e.target.classList.toggle('is-stuck', e.intersectionRatio < 1), {
-      threshold: [1],
-    });
+  <div class="menu__outer">
+    <div class="menu closed">
 
-    observer.observe(element);
-  }
-};
+      <div class="menu__primary">
+        <slot></slot>
+        <slot name="dual"></slot>
+      </div>
+      <div class="dialog__wrapper d-none" id="search-wrapper"></div>
 
-export const populateNav = (data):void => {
+      <slot name="actions"></slot>
+
+      <div class="menu__secondary bg-light">
+        <div class="container">
+
+          <slot name="secondary"></slot>
+        </div>
+      </div>
+    </div>
+    <div class="nav--menu" data-btn-class="btn-compact" data-title="My account" data-icon="fa-user fa-solid" slot="menus">
+      <slot name="account"></slot>
+    </div>
+  </div>
+</div>
+<div class="backdrop" part="backdrop"></div>`;
+
+
+// #region Standadised Nav
+export const populateNav = (data, slot = ''):void => {
 
   let html = ``;
 
   data.forEach((feature) => {
 
     if(feature.attributes.sections.length)
-      html += `<details name="megamenu"><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateSections(feature.attributes.sections)}</div></details>`;
+      html += `<details name="megamenu" ${slot != '' ? `slot="${slot}"` : ''}><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateSections(feature.attributes.sections)}</div></details>`;
     else if(feature.attributes.links)
-      html += `<details name="megamenu"><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateLinks(feature.attributes.links)}</div></details>`;
-    else 
-      html += `<a href="/">${feature.attributes.title}</a>`;
+      html += `<details name="megamenu" ${slot != '' ? `slot="${slot}"` : ''}><summary>${feature.attributes.title}</summary><div data-title="${feature.attributes.title}">${populateLinks(feature.attributes.links)}</div></details>`;
+    else
+      html += `<a href="/" ${slot != '' ? `slot="${slot}"` : ''}>${feature.attributes.title}</a>`;
   });
 
   return html;
@@ -164,5 +181,123 @@ export const setEnabledLinks = (component,data):void => {
   });
 
 }
+// #endregion
 
-export default navbar;
+export const branchSelector = (component):void => {
+  const branchSelector = component.querySelector("iam-branch-selector");
+  const mql = window.matchMedia("(width > 62em)");
+
+  if (mql.matches)
+    branchSelector?.setAttribute('slot','secondary');
+
+  mql.addEventListener("change", (e) => {
+
+    if (e.matches && component.classList.contains('has-secondary'))
+      branchSelector?.setAttribute('slot','secondary');
+    else
+      branchSelector?.setAttribute('slot','account');
+  });
+}
+
+export const menuEvents = (component,menu,menuButton,accountMenu,accountMenuButton):void => {
+
+  menuButton.addEventListener ('click', (e) => {
+    e.preventDefault();
+
+    menu.classList.toggle('open');
+    accountMenu.classList.remove('open');
+
+
+    if (menu.classList.contains('open')) {
+      iamNav.classList.add('open');
+    } else {
+      iamNav.classList.remove('open');
+    }
+
+    accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+
+    component.querySelector(':scope > details[open]')?.removeAttribute('open');
+
+  }, false);
+}
+
+export const megaMenuTitles = (component):void => {
+
+  // Mega menu title
+  component.querySelectorAll(':Scope > details:not([slot="account"])').forEach((detailsElement) => {
+    const summary = detailsElement.querySelector('summary');
+    const containerDiv = detailsElement.querySelector(':Scope > div');
+
+    containerDiv.setAttribute('data-title', summary.textContent);
+  });
+}
+
+export const megaMenusEvents = (component,menu,menuButton,accountMenu,accountMenuButton,backdrop):void => {
+
+  component.addEventListener('click', (event) => {
+    if (event && event.target instanceof HTMLElement && event.target.closest('summary')) {
+
+      const summary = event.target.closest('summary');
+      const details = summary.closest('details');
+
+
+      if (window.innerWidth > 992 && !event.target.closest('.nav--menu')) {
+
+
+        if (details?.hasAttribute('open')) { // Is open before the user clicks on the details summary
+
+          backdrop.classList.remove('show');
+          component.classList.remove('open');
+          component.classList.remove('open-secondary');
+        } else {
+          backdrop.classList.add('show');
+          component.classList.add('open');
+
+          if(details?.hasAttribute('slot') && details?.getAttribute('slot') == "secondary")
+            component.classList.add('open-secondary');
+        }
+
+        menu.classList.remove('open');
+        accountMenu.classList.remove('open');
+        accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+      }
+    }
+  });
+}
+
+export const accountMenuEvents = (component,menu,menuButton,accountMenu,accountMenuButton,backdrop):void => {
+
+  accountMenuButton.addEventListener ('click', () => {
+
+    // Close the main menu
+    menu.classList.remove('open');
+    accountMenu.classList.toggle('open');
+
+    if (accountMenu.classList.contains('open')) {
+      component.classList.add('open');
+      accountMenuButton?.querySelector('.btn-primary').classList.add('active');
+    } else {
+      component.classList.remove('open');
+      accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+    }
+
+    component.querySelector(':scope > details[open]')?.removeAttribute('open');
+  });
+}
+
+export const backdropEvents = (component,menu,menuButton,accountMenu,accountMenuButton,backdrop):void => {
+
+  // Close the menu on the click of the backdrop on desktop
+  backdrop.addEventListener('click', () => {
+    const openMenu = component.querySelector(':scope > details[open]');
+
+    if (openMenu) openMenu.removeAttribute('open');
+
+    iamNav.classList.remove('open');
+    menu.classList.remove('open');
+    accountMenu.classList.remove('open');
+    accountMenuButton?.querySelector('.btn-primary').classList.remove('active');
+
+    backdrop.classList.remove('show');
+  });
+}
