@@ -20,10 +20,11 @@
   "notification",
   "actionbar",
   "nav",
+  "nav-standalone",
+  "branch-selector",
   "collapsible-side",
   "address-lookup",
   "std-address-lookup",
-  "std-nav",
   "fileupload",
   "search",
   "inline-edit",
@@ -59,7 +60,6 @@
   "video",
   "button",
   "std-nav",
-  "std-nav-standalone",
   "skeleton",
   "bone"
 ]

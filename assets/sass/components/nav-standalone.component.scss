@@ -1,0 +1,50 @@
+@use 'sass:map';
+
+@use '../_func' as *;
+
+@use '../bs_grid' as *;
+
+@use '../elements/forms' as *;
+@use '../elements/buttons' as *;
+
+@use '../elements/brand.css';
+
+@use '../elements/dialog' as *;
+@use '../elements/modal' as *;
+@use '../elements/container' as *;
+
+@use '../elements/links' as *;
+
+@use '../utilities/colours' as *;
+@use '../utilities/margins' as *;
+@use '../utilities/paddings' as *;
+@use '../utilities/sizes' as *;
+@use '../utilities/display' as *;
+
+
+
+@use '../components/nav.preload.scss' as *;
+@use '../components/nav.global.scss' as *;
+
+@layer legacy, reset, elements, components, templates, overrides, utilities, debug;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+
+:host {
+  display: grid;
+  grid-column: full-width !important;
+  grid-template-columns: subgrid;
+}
+
+iam-nav {
+  display: grid;
+  grid-column: full-width !important;
+  grid-template-columns: subgrid;
+}
+
+.wrapper {
+  display: contents;
+}

@@ -1,7 +1,7 @@
 <script setup>
   import { onMounted } from 'vue';
 
-  const component = 'std-nav-standalone';
+  const component = 'nav-standalone';
 
   onMounted(() => {
     import(`../../../assets/js/components/${component}/${component}.component.min.js`)
@@ -16,7 +16,7 @@
 </script>
 
 <template>
-  <iam-std-nav-standalone>
+  <iam-nav-standalone ref="wrapper">
     <slot></slot>
-  </iam-std-nav-standalone>
+  </iam-nav-standalone>
 </template>

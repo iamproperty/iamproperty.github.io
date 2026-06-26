@@ -1,16 +1,22 @@
 <script lang="ts" setup>
-  import Nav from '@/components/Nav/Nav.vue';
-  import STDNavStandalone from '@/components/STDNavStandalone/STDNavStandalone.vue';
+  import BranchSelector from '@/components/BranchSelector/BranchSelector.vue';
+  import NavStandalone from '@/components/NavStandalone/NavStandalone.vue';
+  import STDNav from '@/components/STDNav/STDNav.vue';
   import Card from '@/components/Card/Card.vue';
-  
+
+function changeEvent(e) {
+
+  console.log(e);
+}
+function clickEvent(e) {
+
+  console.log(e);
+}
 </script>
 <template>
   <nav>
-      
-    <STDNavStandalone data-standalone class="nav--sticky">
-      <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
-    </STDNavStandalone>
-    <Nav class="nav--sticky">
+
+    <NavStandalone class="iam-nav nav--sticky" @change="changeEvent" @click="changeEvent">
       <a href="/" class="brand brand--property" slot="logo">
         <svg>
           <title>iam key</title>
@@ -18,18 +24,40 @@
         </svg>
       </a>
 
-      
       <router-link to="/standalone/premium-conveyancing">Dashboard</router-link>
       <router-link to="/standalone/premium-conveyancing/cases">Cases</router-link>
       <router-link to="/standalone/premium-conveyancing/settings">Settings</router-link>
-      
 
-      <button class="btn btn-primary" data-modal="modal-transactional" slot="actions">My account</button>
 
-      
-    </Nav>
+      <span class="mt-4 title h3" slot="account">John Jones</span>
+      <BranchSelector data-indicator="4" slot="account">
+
+        <label>
+          <input type="checkbox" name="branch" value="gosforth" />
+          Gosforth Agent & Co
+        </label>
+        <label>
+          <input type="checkbox" name="branch" value="heaton" />
+          Heaton Agent & Co
+        </label>
+        <label>
+          <input type="checkbox" name="branch" value="newcastle" />
+          Newcastle Agent & Co
+        </label>
+      </BranchSelector>
+
+      <a href="/" slot="account">Agency settings</a>
+      <a href="/" slot="account">Control panel</a>
+      <a href="/" slot="account">Contact us</a>
+
+
+      <STDNav slot="secondary">
+        <router-link to="/standalone/premium-conveyancing">Eco Hub</router-link>
+      </STDNav>
+
+    </NavStandalone>
   </nav>
-  
+
   <main class="">
 
 

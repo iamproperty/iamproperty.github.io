@@ -517,6 +517,17 @@ const routes = [
         component: () => import('./views/standardised/AddressLookupDoc.vue'),
         searchterms: 'postcode',
       },
+      {
+        path: 'nav',
+        name: 'iamproperty eco nav',
+        meta: {
+          title: 'iamproperty eco nav | Components | iamkey',
+          status: 'alpha',
+          jira: 'FEG-939'
+        },
+        component: () => import('./views/standardised/NavDoc.vue'),
+        searchterms: 'branch, switcher',
+      },
     ]
   },
   {
@@ -990,6 +1001,17 @@ const routes = [
         },
         component: () => import('./views/nav/CollapsibleSideMenu.vue'),
         searchterms: 'nav,hidden,expand,menu,admin,settings,sub',
+      },
+      {
+        path: 'branch-selector',
+        name: 'Branch selector',
+        meta: {
+          title: 'Branch selector | Components | iamkey',
+          jira:'FEG-987',
+          status: 'beta'
+        },
+        component: () => import('./views/nav/BranchSelectorDoc.vue'),
+        searchterms: 'switch,branch',
       },
     ],
   },
