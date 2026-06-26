@@ -45,8 +45,8 @@ class iamNav extends HTMLElement {
     }
     // #endregion
 
-    if(this.hasAttribute('data-account-btn-title'))
-      accountBtnTitle?.innerHTML = this.getAttribute('data-account-btn-title');
+    if(this.hasAttribute('data-account-btn-title') ?? accountBtnTitle)
+      accountBtnTitle.innerHTML = this.getAttribute('data-account-btn-title');
 
     if(!this.querySelector('[slot="account"]')){
       accountMenuButton?.remove();
