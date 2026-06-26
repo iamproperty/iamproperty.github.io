@@ -29,7 +29,7 @@ const checkAccount = ref({
 })
 
 const outcodes = ref([]);
-const competitors = ref();
+const competitors = ref([]);
 const charts = ref([]);
 
 const showToast = ref(false);
@@ -62,9 +62,17 @@ function agreeTerms(): void {
 
 const getCompetitors = async (outcodes):Promise<void> => {
 
+  console.log(outcodes.length);
 
-  if(!outcodes)
+  if(!outcodes || !outcodes.length){
+
+    console.log('hi');
+
+    competitors.value = [];
+
     return false;
+  }
+
 
   try {
 
@@ -122,6 +130,11 @@ const saveCompetitors = (event): void => {
   });
 
 
+}
+
+function clearEvent(event):void {
+
+  competitors.value = [];
 }
 
 function onOutcodeChange(event): void {
@@ -254,61 +267,63 @@ const searchOutcodes = async(event):void => {
         </Notification>
 
 
-        <Modal class="modal--sm">
-    <dialog id="competitor-list" aria-labelledby="competitor-list-title">
-      <h3 id="competitor-list-title">Customise your competitor list</h3>
-      <p>Update the competitors you see within your the sales insights widget.</p>
+        <Modal class="modal--lg">
+
+          <dialog id="competitor-list" aria-labelledby="competitor-list-title" open>
+            <h3 id="competitor-list-title">Customise your competitor list</h3>
+            <p>Update the competitors you see within your the sales insights widget.</p>
 
 
-      <Multiselect data-label="Search outcodes" data-tooltip="Tooltip text" @change="onOutcodeChange" @input="searchOutcodes">
+            <Multiselect data-label="Search outcodes" data-tooltip="Tooltip text" @change="onOutcodeChange" @input="searchOutcodes" @clear="clearEvent">
 
-        <label v-for="outcode in outcodes" class="tag dropdown__option"><input type="checkbox" :name="`outcodes[${outcode.title}]`" :value="outcode.value">{{outcode.title}}</label>
-      </Multiselect>
+              <label v-for="outcode in outcodes" :key="outcode.value" class="tag dropdown__option">
+                <input type="checkbox" :name="`outcodes[${outcode.title}]`" :value="outcode.value">{{outcode.title}}
+              </label>
+            </Multiselect>
 
-      <p class="pt-4">Select up to 10 competitors you want to compare against.</p>
-      <div v-if="!competitors" class="text-center" >
-        <p class="lead">No competitors available</p>
-        <p>Please enter an outcode to display competitor list</p>
-      </div>
+            <p class="pt-4 text-body">Select up to 10 competitors you want to compare against.</p>
+            <div v-if="!competitors.length" class="text-center pb-5" >
+              <p class="lead">No competitors available</p>
+              <p>Please enter an outcode to display competitor list</p>
+            </div>
 
-      <Form>
-        <fieldset v-if="competitors" id="selected-competitors" class="mh-md" data-checkbox-limit="10">
-          <label v-for="competitor in competitors" :key="competitor.id">
-            <input type="checkbox"
-            :name="`select-competitors[${competitor.id}]`"
-            :value="competitor.id"
-            :data-name="competitor.attributes.agentName"
-            :data-listed="competitor.attributes.counts.listed"
-            :data-reductions="competitor.attributes.counts.reductions"
-            :data-cancelled="competitor.attributes.counts.cancelled"
-            :data-withdrawn="competitor.attributes.counts.withdrawn"
-            :data-sstc="competitor.attributes.counts.sstc"
-            />
-            {{ competitor.attributes.agentName }}
-          </label>
-        </fieldset>
-      </Form>
+            <Form v-if="competitors.length">
+              <fieldset id="selected-competitors" class="mh-md" data-checkbox-limit="10">
+                <label v-for="competitor in competitors" :key="competitor.id">
+                  <input type="checkbox"
+                  :name="`select-competitors[${competitor.id}]`"
+                  :value="competitor.id"
+                  :data-name="competitor.attributes.agentName"
+                  :data-listed="competitor.attributes.counts.listed"
+                  :data-reductions="competitor.attributes.counts.reductions"
+                  :data-cancelled="competitor.attributes.counts.cancelled"
+                  :data-withdrawn="competitor.attributes.counts.withdrawn"
+                  :data-sstc="competitor.attributes.counts.sstc"
+                  />
+                  {{ competitor.attributes.agentName }}
+                </label>
+              </fieldset>
+            </Form>
 
-      <div class="btn__group">
-        <button class="btn btn-secondary" command="close" commandfor="competitor-list">Cancel</button>
-        <button class="btn btn-primary" command="close" commandfor="competitor-list" @click="saveCompetitors()">Update competitors</button>
-      </div>
-    </dialog>
-  </Modal>
-  <Modal data-type="transactional" data-agreed-text="Agree terms" @agreed="agreeTerms()">
-    <dialog id="agree-terms-modal" aria-labelledby="agree-terms-title">
-      <h3 id="agree-terms-title">Important information about competitor analysis sales data</h3>
-      <p>iamproperty provide the sales data on an "as is" basis and makes no representations or warranties, express or implied, as to the accuracy, completeness, or reliability of the data. The Agent acknowledges that the data is supplied for their internal analysis and may not be used for general marketing purposes or shared with anyone outside of the Agent's employment. iamproperty shall not be liable for any claims, damages, losses, or expenses arising from the use or reliance upon the data, and the Agent agrees to indemnify and hold harmless iamproperty from any such claims.</p>
-    </dialog>
-  </Modal>
+            <div class="btn__group text-end">
+              <button class="btn btn-secondary" command="close" commandfor="competitor-list">Cancel</button>
+              <button class="btn btn-primary" command="close" commandfor="competitor-list" @click="saveCompetitors()">Update competitors</button>
+            </div>
+          </dialog>
+        </Modal>
+        <Modal data-type="transactional" data-agreed-text="Agree terms" @agreed="agreeTerms()">
+          <dialog id="agree-terms-modal" aria-labelledby="agree-terms-title">
+            <h3 id="agree-terms-title">Important information about competitor analysis sales data</h3>
+            <p>iamproperty provide the sales data on an "as is" basis and makes no representations or warranties, express or implied, as to the accuracy, completeness, or reliability of the data. The Agent acknowledges that the data is supplied for their internal analysis and may not be used for general marketing purposes or shared with anyone outside of the Agent's employment. iamproperty shall not be liable for any claims, damages, losses, or expenses arising from the use or reliance upon the data, and the Agent agrees to indemnify and hold harmless iamproperty from any such claims.</p>
+          </dialog>
+        </Modal>
 
-  <Modal data-type="acknowledgement" data-agreed-text="Close">
-    <dialog id="view-terms-modal" aria-labelledby="view-terms-title">
-      <h3 id="view-terms-title">Important information about competitor analysis sales data</h3>
-      <p>iamproperty provide the sales data on an "as is" basis and makes no representations or warranties, express or implied, as to the accuracy, completeness, or reliability of the data. The Agent acknowledges that the data is supplied for their internal analysis and may not be used for general marketing purposes or shared with anyone outside of the Agent's employment. iamproperty shall not be liable for any claims, damages, losses, or expenses arising from the use or reliance upon the data, and the Agent agrees to indemnify and hold harmless iamproperty from any such claims.</p>
-    </dialog>
-  </Modal>
-
+        <Modal data-type="acknowledgement" data-agreed-text="Close">
+          <dialog id="view-terms-modal" aria-labelledby="view-terms-title">
+            <h3 id="view-terms-title">Important information about competitor analysis sales data</h3>
+            <p>iamproperty provide the sales data on an "as is" basis and makes no representations or warranties, express or implied, as to the accuracy, completeness, or reliability of the data. The Agent acknowledges that the data is supplied for their internal analysis and may not be used for general marketing purposes or shared with anyone outside of the Agent's employment. iamproperty shall not be liable for any claims, damages, losses, or expenses arising from the use or reliance upon the data, and the Agent agrees to indemnify and hold harmless iamproperty from any such claims.</p>
+          </dialog>
+        </Modal>
 
       </div>
 
@@ -333,5 +348,10 @@ const searchOutcodes = async(event):void => {
     transform: translate(-50%, -50%);
     width: 100%;
   }
+}
+
+#selected-competitors {
+  min-height: calc(var(--max-height-md) - var(--mh-modifier, 0rem));
+  width: auto;
 }
 </style>

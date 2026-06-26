@@ -1,12 +1,5 @@
 import { searchAjax, filterList, addKeyboardEvents } from '../../modules/dropdown';
 
-// Data layer Web component created
-window.dataLayer = window.dataLayer || [];
-window.dataLayer.push({
-  event: 'customElementRegistered',
-  element: 'mutliselect',
-});
-
 class iamMultiselect extends HTMLElement {
   constructor() {
     super();
@@ -15,28 +8,28 @@ class iamMultiselect extends HTMLElement {
     const assetLocation = document.body.hasAttribute('data-assets-location')
       ? document.body.getAttribute('data-assets-location')
       : '/assets';
-      
+
     const loadCSS = `@import "${assetLocation}/css/components/multiselect.css";`;
 
     const template = document.createElement('template');
     template.innerHTML = `
     <style>
-    
+
     ${loadCSS}
     ${this.hasAttribute('css') ? `@import "${this.getAttribute('css')}";` : ``}
     </style>
     <label for="search" class="mb-0"><span class="inner-label label"></span> <slot name="feedback"></slot>
     <div class="outer">
-    <div class="wrapper">
-      
-      <slot name="checked"></slot>
-      <input name="search" id="search" autocomplete="off" required part="search-input"/>
-      <span class="admin-panel feedback">This field is required</span>
-      <div class="admin-panel dropdown" part="dropdown">
-        <slot></slot>
+      <div class="wrapper">
+
+        <slot name="checked"></slot>
+        <input name="search" id="search" autocomplete="off" required part="search-input"/>
+        <span class="admin-panel feedback">This field is required</span>
+        <div class="admin-panel dropdown" part="dropdown">
+          <slot></slot>
+        </div>
+        <button id="clear" class="btn btn-action "><span class="visually-hidden">Clear</span></button>
       </div>
-      <button id="clear" class="btn btn-action "><span class="visually-hidden">Clear</span></button>
-    </div>
     </div>
     </label>
     `;
@@ -49,7 +42,7 @@ class iamMultiselect extends HTMLElement {
     const form = this.closest('form');
     const wrapper = this.shadowRoot.querySelector('.wrapper');
     const search = multiselect.shadowRoot.querySelector('#search');
-    const button = multiselect.shadowRoot.querySelector('#clear');
+    const clearButton = multiselect.shadowRoot.querySelector('#clear');
     let order = 0;
     const innerLabel = multiselect.shadowRoot.querySelector('label .inner-label');
     const ajaxURL = this.getAttribute('data-url');
@@ -139,10 +132,10 @@ class iamMultiselect extends HTMLElement {
     search.addEventListener('input', () => {
 
       if (multiselect.hasAttribute('data-url') && search.value.length == minLength) {
-      
+
         searchAjax(multiselect, search, filterList);
       } else {
-          
+
         filterList(multiselect, search);
       }
     });
@@ -218,7 +211,7 @@ class iamMultiselect extends HTMLElement {
     });
 
     // Clear all
-    button.addEventListener('click', function () {
+    clearButton.addEventListener('click', () => {
       Array.from(multiselect.querySelectorAll(`label input[type="checkbox"]`)).forEach((checkbox) => {
         checkbox.checked = false;
 
@@ -226,6 +219,10 @@ class iamMultiselect extends HTMLElement {
       });
 
       search.focus();
+
+      const clearEvent = new CustomEvent('clear');
+
+      this.dispatchEvent(clearEvent);
     });
 
     // Add some keyboard features to keep it accessible
@@ -295,7 +292,7 @@ class iamMultiselect extends HTMLElement {
             });
           }
           else {
-            
+
             setItem(activeElement);
           }
 

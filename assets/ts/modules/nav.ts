@@ -128,7 +128,7 @@ export const loadNavData = async(Cookies): any => {
 
 export const loadUserData = async(Cookies): any => {
 
-  const ajaxURL = '/user.json';
+  const ajaxURL = 'https://dev.hub.iamproperty.group/navigation/access-context';
 
   // Setup controller vars if not already set
   if (!window.controller) window.controller = [];
@@ -141,9 +141,12 @@ export const loadUserData = async(Cookies): any => {
   const { signal } = window.controller[ajaxURL];
 
   try {
+
+    console.log('hey')
     const response = await fetch(ajaxURL, {
       signal,
       method: 'GET',
+      credentials: 'include',
       headers: {
         Accept: 'application/json',
       },

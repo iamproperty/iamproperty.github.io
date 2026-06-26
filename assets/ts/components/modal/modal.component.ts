@@ -106,6 +106,9 @@ class iamModal extends HTMLElement {
 
     // Move the submit button so that the slot functionality works
     if(originalDialog) {
+      if(originalDialog.hasAttribute('open'))
+        dialog?.showModal();
+
       Array.from(originalDialog?.querySelectorAll('[slot]')).forEach((element) => {
         this.moveBefore(element, originalDialog);
       });
